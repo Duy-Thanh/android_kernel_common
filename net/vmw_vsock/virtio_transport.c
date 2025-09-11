@@ -571,9 +571,14 @@ static void virtio_transport_rx_work(struct work_struct *work)
 				continue;
 			}
 
+<<<<<<< HEAD   (2cc8af566295bc8162dad9519acc764c9e53b55d Merge 868f23286c1a ("exfat: add cluster chain loop check for)
 			if (payload_len)
 				virtio_vsock_skb_put(skb, payload_len);
 
+||||||| BASE   (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
+=======
+			virtio_vsock_skb_rx_put(skb);
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 			virtio_transport_deliver_tap_pkt(skb);
 			virtio_transport_recv_pkt(&virtio_transport, skb);
 		}

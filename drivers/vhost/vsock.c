@@ -344,8 +344,13 @@ vhost_vsock_alloc_skb(struct vhost_virtqueue *vq,
 
 	len = iov_length(vq->iov, out);
 
+<<<<<<< HEAD   (2cc8af566295bc8162dad9519acc764c9e53b55d Merge 868f23286c1a ("exfat: add cluster chain loop check for)
 	if (len < VIRTIO_VSOCK_SKB_HEADROOM ||
 	    len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+||||||| BASE   (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
+=======
+	if (len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 		return NULL;
 
 	/* len contains both payload and hdr */
