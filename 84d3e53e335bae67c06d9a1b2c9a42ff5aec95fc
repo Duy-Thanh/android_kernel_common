@@ -142,6 +142,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888e0d0f_3d7f655a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3698927
+      },
+      "writtenOn": "2025-09-11T22:56:36Z",
+      "side": 1,
+      "message": "I will push it to android-mainline then as it will be needed in future kernels.",
+      "parentUuid": "14ab989f_cc9a33db",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
