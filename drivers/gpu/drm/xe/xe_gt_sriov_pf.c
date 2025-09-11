@@ -14,7 +14,11 @@
 #include "xe_gt_sriov_pf_control.h"
 #include "xe_gt_sriov_pf_helpers.h"
 #include "xe_gt_sriov_pf_service.h"
+#include "xe_gt_sriov_printk.h"
 #include "xe_mmio.h"
+#include "xe_pm.h"
+
+static void pf_worker_restart_func(struct work_struct *w);
 
 /*
  * VF's metadata is maintained in the flexible array where:
@@ -40,6 +44,11 @@ static int pf_alloc_metadata(struct xe_gt *gt)
 	return 0;
 }
 
+static void pf_init_workers(struct xe_gt *gt)
+{
+	INIT_WORK(&gt->sriov.pf.workers.restart, pf_worker_restart_func);
+}
+
 /**
  * xe_gt_sriov_pf_init_early - Prepare SR-IOV PF data structures on PF.
  * @gt: the &xe_gt to initialize
@@ -63,6 +72,8 @@ int xe_gt_sriov_pf_init_early(struct xe_gt *gt)
 	err = xe_gt_sriov_pf_control_init(gt);
 	if (err)
 		return err;
+
+	pf_init_workers(gt);
 
 	return 0;
 }
@@ -116,6 +127,7 @@ static void pf_clear_vf_scratch_regs(struct xe_gt *gt, unsigned int vfid)
 		count = MED_VF_SW_FLAG_COUNT;
 		for (n = 0; n < count; n++) {
 			scratch = xe_reg_vf_to_pf(MED_VF_SW_FLAG(n), vfid, stride);
+<<<<<<< HEAD   (9ddeb7663df3e9b001fd17e2e0993ff8e749b10d ANDROID: GKI: Update symbol list for Amlogic am: 6879524e1c)
 			xe_mmio_write32(&gt->mmio, scratch, 0);
 		}
 	} else {
@@ -139,6 +151,80 @@ void xe_gt_sriov_pf_sanitize_hw(struct xe_gt *gt, unsigned int vfid)
 	xe_gt_assert(gt, IS_SRIOV_PF(gt_to_xe(gt)));
 
 	pf_clear_vf_scratch_regs(gt, vfid);
+||||||| BASE   (6879524e1c5adf156b4cf196ed96b6aa21e16b2f ANDROID: GKI: Update symbol list for Amlogic)
+=======
+			xe_mmio_write32(gt, scratch, 0);
+		}
+	} else {
+		count = VF_SW_FLAG_COUNT;
+		for (n = 0; n < count; n++) {
+			scratch = xe_reg_vf_to_pf(VF_SW_FLAG(n), vfid, stride);
+			xe_mmio_write32(gt, scratch, 0);
+		}
+	}
+}
+
+/**
+ * xe_gt_sriov_pf_sanitize_hw() - Reset hardware state related to a VF.
+ * @gt: the &xe_gt
+ * @vfid: the VF identifier
+ *
+ * This function can only be called on PF.
+ */
+void xe_gt_sriov_pf_sanitize_hw(struct xe_gt *gt, unsigned int vfid)
+{
+	xe_gt_assert(gt, IS_SRIOV_PF(gt_to_xe(gt)));
+
+	pf_clear_vf_scratch_regs(gt, vfid);
+}
+
+static void pf_cancel_restart(struct xe_gt *gt)
+{
+	xe_gt_assert(gt, IS_SRIOV_PF(gt_to_xe(gt)));
+
+	if (cancel_work_sync(&gt->sriov.pf.workers.restart))
+		xe_gt_sriov_dbg_verbose(gt, "pending restart canceled!\n");
+}
+
+/**
+ * xe_gt_sriov_pf_stop_prepare() - Prepare to stop SR-IOV support.
+ * @gt: the &xe_gt
+ *
+ * This function can only be called on the PF.
+ */
+void xe_gt_sriov_pf_stop_prepare(struct xe_gt *gt)
+{
+	pf_cancel_restart(gt);
+}
+
+static void pf_restart(struct xe_gt *gt)
+{
+	struct xe_device *xe = gt_to_xe(gt);
+
+	xe_pm_runtime_get(xe);
+	xe_gt_sriov_pf_config_restart(gt);
+	xe_gt_sriov_pf_control_restart(gt);
+	xe_pm_runtime_put(xe);
+
+	xe_gt_sriov_dbg(gt, "restart completed\n");
+}
+
+static void pf_worker_restart_func(struct work_struct *w)
+{
+	struct xe_gt *gt = container_of(w, typeof(*gt), sriov.pf.workers.restart);
+
+	pf_restart(gt);
+}
+
+static void pf_queue_restart(struct xe_gt *gt)
+{
+	struct xe_device *xe = gt_to_xe(gt);
+
+	xe_gt_assert(gt, IS_SRIOV_PF(xe));
+
+	if (!queue_work(xe->sriov.wq, &gt->sriov.pf.workers.restart))
+		xe_gt_sriov_dbg(gt, "restart already in queue!\n");
+>>>>>>> BRANCH (2e5a4bace74a835f6a733c1a628cbd76501f2d62 Merge tag 'android16-6.12.40_r00' into android16-6.12)
 }
 
 /**
@@ -149,6 +235,5 @@ void xe_gt_sriov_pf_sanitize_hw(struct xe_gt *gt, unsigned int vfid)
  */
 void xe_gt_sriov_pf_restart(struct xe_gt *gt)
 {
-	xe_gt_sriov_pf_config_restart(gt);
-	xe_gt_sriov_pf_control_restart(gt);
+	pf_queue_restart(gt);
 }
