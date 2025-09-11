@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30b546d4_636b25e1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-11T10:55:47Z",
+      "side": 1,
+      "message": "Yeah, makes sense. I might need to revisit usage of WARN_ON throughout this series.",
+      "parentUuid": "800ed4c7_c6f5ed00",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a60fb7ca_caa75236",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 14
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Asked his because seems we just free pVM memory by memset to 0 without calling clflush in the emulated code, so would like to understand if that caused any issue or not. Now sounds like this is for paranoid security but not for a real issue?",
       "parentUuid": "0880e49d_ece44103",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3c72c5_46ea7aa9",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-11T10:55:47Z",
+      "side": 1,
+      "message": "Right, I didn\u0027t encounter any functional issue caused by the lack of cache flush here (and I can\u0027t imagine how it could cause any functional issue :)). So yes, it is just for \"paranoid\" security. Although I\u0027m not sure it is accurate to call it \"paranoid\". As long as pVM data remains in the cache, it means we don\u0027t quite ensure full isolation (i.e. the emulated code is a bit buggy in this regard)?",
+      "parentUuid": "2181e2b0_dd1d0ab2",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
