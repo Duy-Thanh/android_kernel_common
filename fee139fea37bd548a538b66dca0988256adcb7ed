@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac11c2db_c8197369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-11T12:24:00Z",
+      "side": 1,
+      "message": "It \"would be nice\" if we get to a point where we have a series:\n\n1. Xiaomi and Honor symbol removals, possibly as clean reverts (but I think some other additions happened in one of the changes) - with reversal of ABI impact\n2. Hook removal (exports, new vendor hook functions etc.), possibly as clean reverts\n3. New hooks - this gets the full review\n4. Xiaomi and Honor symbol additions - this is where we see the new ABI impact.",
+      "revId": "fee139fea37bd548a538b66dca0988256adcb7ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e2e9e5_a1ea6dfb",
+        "filename": "fs/f2fs/super.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-11T12:24:00Z",
+      "side": 1,
+      "message": "Do you not also want to pass the ID `sbi-\u003esb-\u003es_id` as a hook parameter?",
+      "range": {
+        "startLine": 301,
+        "startChar": 26,
+        "endLine": 301,
+        "endChar": 40
+      },
+      "revId": "fee139fea37bd548a538b66dca0988256adcb7ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
