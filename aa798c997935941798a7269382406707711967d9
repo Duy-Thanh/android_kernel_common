@@ -33,6 +33,24 @@
       "message": "Thanks for your adjustments. We also need a follow on patch on top of this that adds the new symbols to the symbol list and ABI.stg files.",
       "revId": "aa798c997935941798a7269382406707711967d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f779f33a_25c001dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-12T18:00:25Z",
+      "side": 1,
+      "message": "Still need symbol and kabi update patch after this one.",
+      "parentUuid": "a228a799_2f17c3c5",
+      "revId": "aa798c997935941798a7269382406707711967d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
