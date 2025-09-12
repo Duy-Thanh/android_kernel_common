@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e43279_a9f9e2d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-12T17:37:03Z",
+      "side": 1,
+      "message": "Its good to add above your Signed-off-by line an annotation note about what was changed to make it a BACKPORT.  Usually in the format of:\n[panchuang: Had to tweak \u003cfoo\u003e due to missing \u003cbar\u003e in 5.15]",
+      "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "90afe14f_08ea5fe1",
