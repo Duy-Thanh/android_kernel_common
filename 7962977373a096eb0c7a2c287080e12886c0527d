@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb8c3b5_6afeaeed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-12T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed2d909a_f486effc",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a65ec2ec_e1dfdfe2",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Right, I agree that this code path need improvement",
       "parentUuid": "a65ec2ec_e1dfdfe2",
+      "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1fa306_9f4c0d29",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-12T14:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3b9eac_fd7c3ea4",
       "revId": "7962977373a096eb0c7a2c287080e12886c0527d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
