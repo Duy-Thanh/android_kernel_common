@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514dd9ba_1ee94412",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-12T17:52:15Z",
+      "side": 1,
+      "message": "nit: move early_pkvm_relax_cpu_bugs_parse_cmdline() after early_pkvm_parse_cmdline() (i.e. after line 45), to keep the same order for the function definitions as for the variable declarations?",
+      "fixSuggestions": [
+        {
+          "fixId": "649f5f12_42a6aec4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "static int __init early_pkvm_relax_cpu_bugs_parse_cmdline(char *buf)\n{\n\treturn kstrtobool(buf, \u0026relax_cpu_bugs);\n}\nearly_param(\"kvm-intel.pkvm_relax_cpu_bugs\", early_pkvm_relax_cpu_bugs_parse_cmdline);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "af2c8c858431f005026974c7ed37d6364b9d87f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
