@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d87afb5_be86e212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4300331
+      },
+      "writtenOn": "2025-09-12T03:07:04Z",
+      "side": 1,
+      "message": "Thank you for the reminder, We have changed it to the format: (cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e).",
+      "revId": "d4e7627ff0549d83bce679a0b575316c0bc59305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
