@@ -213,6 +213,24 @@
       "parentUuid": "69350ab2_9e9b1625",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4b88f2_25728643",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-12T16:53:33Z",
+      "side": 1,
+      "message": "Brought this clfush back, because I\u0027ve recalled why it is actually needed: it is not to ensure that pVM data doesn\u0027t remain in cache, but to ensure that it doesn\u0027t remain in RAM (as the cache is write-back, not write-through). Otherwise, although the host may not be able to read pVM data via CPU, it may still be able to read it via non-coherent DMA, right?",
+      "parentUuid": "23c55ca9_80e8ffb8",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
