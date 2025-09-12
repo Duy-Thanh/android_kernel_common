@@ -16,6 +16,23 @@
       "message": "Thank you for the reminder, We have changed it to the format: (cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e).",
       "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7870c061_27f70802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-12T17:33:40Z",
+      "side": 1,
+      "message": "Is there no 6.12 version of this change?",
+      "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
