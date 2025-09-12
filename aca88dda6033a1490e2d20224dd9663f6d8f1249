@@ -16,6 +16,24 @@
       "message": "Do we need the fix for the headers?\n\n```\naf74e5fe7453 tools headers: Update the VFS headers with the kernel sources\n```",
       "revId": "aca88dda6033a1490e2d20224dd9663f6d8f1249",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4869306f_f724630d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2025-09-12T05:00:45Z",
+      "side": 1,
+      "message": "I didn\u0027t pick that patch as that\u0027s primarily for perf tool support which we don\u0027t use in Android. Also, the patch has way too many other UAPI updates which we really cannot apply.\n\nBionic libc uapi header already has RWF_DONTCACHE flag:\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:bionic/libc/kernel/uapi/linux/fs.h;l\u003d202",
+      "parentUuid": "66b5bf5a_7474f129",
+      "revId": "aca88dda6033a1490e2d20224dd9663f6d8f1249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
