@@ -16,6 +16,24 @@
       "message": "Hook is not actually placed anywhere, which is required.",
       "revId": "858fddd35ab9bafef7f58639124f79a9ab3c2410",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00265eab_d7ac7f31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2025-09-12T07:37:28Z",
+      "side": 1,
+      "message": "This patch was cherry-picked from Android 16-6.12. It has no insertion point, as the insertion point is implemented through OGKI.",
+      "parentUuid": "2d6c6d46_255749c0",
+      "revId": "858fddd35ab9bafef7f58639124f79a9ab3c2410",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
