@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996203a4_5b0641cb",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-12T16:02:27Z",
+      "side": 1,
+      "message": "build-breaks. You didn\u0027t even try to build before uploading? 😞\n```\n...rivers/virt/geniezone/gzvm_vm.c:363:2: error: call to undeclared function \u0027gzvm_vm_ioeventfd_release\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  363 |         gzvm_vm_ioeventfd_release(gzvm);\n      |         ^\n..._root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/147/execroot/_main/common/arch/arm64/geniezone/../../../drivers/virt/geniezone/gzvm_vm.c:363:2: note: did you mean \u0027gzvm_vm_irqfd_release\u0027?\n....12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/147/execroot/_main/common/include/linux/soc/mediatek/gzvm_drv.h:289:6: note: \u0027gzvm_vm_irqfd_release\u0027 declared here\n  289 | void gzvm_vm_irqfd_release(struct gzvm *gzvm);\n      |      ^\n1 error generated.\n\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "117d507a_139df2b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/geniezone/gzvm_vm.c",
+              "range": {
+                "startLine": 363,
+                "startChar": 0,
+                "endLine": 364,
+                "endChar": 0
+              },
+              "replacement": "\tgzvm_ioeventfd_release(gzvm);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f082f47ba3bc18e18f5f75e122d2d3a1d92c3cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
