@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "45674dff_08e0c202",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-12T02:49:23Z",
+      "side": 1,
+      "message": "Again, please review the contribution guidelines:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\nNote, for FROMGIT the repo and branch names need to be included in the \"cherry picked from\" annotation.",
+      "revId": "681ee1c4554c01733cde22e3c1ab46286c862936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fe37c5a1_5c2990e7",
