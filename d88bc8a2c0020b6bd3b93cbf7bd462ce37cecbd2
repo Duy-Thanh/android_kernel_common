@@ -144,6 +144,24 @@
       "parentUuid": "798856ae_a03c525f",
       "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76985b9f_03e93909",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-12T10:42:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8313a95_c2bcd0cb",
+      "revId": "d88bc8a2c0020b6bd3b93cbf7bd462ce37cecbd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
