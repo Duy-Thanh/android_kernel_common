@@ -3,7 +3,7 @@
 # MediaTek SoC drivers
 #
 menu "MediaTek SoC drivers"
-	depends on ARCH_MEDIATEK || COMPILE_TEST
+	depends on ARCH_MEDIATEK || COMPILE_TEST || GKI_HIDDEN_MTK_CONFIGS
 
 config MTK_CMDQ
 	tristate "MediaTek CMDQ Support"
