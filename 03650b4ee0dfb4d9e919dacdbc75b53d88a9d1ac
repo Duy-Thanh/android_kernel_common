@@ -16,6 +16,24 @@
       "message": "nit: would it make sense to do this after the below `if` (i.e. before pkvm_vcpu_update_state_from_host())? i.e. after we already checked that the vCPU is allowed to run (`READ_ONCE(vcpu-\u003earch.mp_state) !\u003d KVM_MP_STATE_RUNNABLE`) and are about to actually run it?",
       "revId": "03650b4ee0dfb4d9e919dacdbc75b53d88a9d1ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19c2882_1c26e141",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-13T11:20:21Z",
+      "side": 1,
+      "message": "Yeah, we can do that.\n\nAnd after discussed with Kevin, we think IBPB is needed as well when switch from guest VM to host VM, at the end of this function. The current IBPB is in the path of switching from host VM to pVM, for the purpose of protecting the pVM. But considering the npVM belongs to the host VM, letting npVM being able to attack the host VM sounds incorrect. So to protect the host VM from npVM, IBPB is needed. For the pVM, as it is isolated from the host VM, we are not sure if protecting host VM from pVM is a valid security point. If it is, then we just need to add IBPB simply at the end of this function regardless npVM/npVM. How do you think?",
+      "parentUuid": "a7f481bb_90fc9806",
+      "revId": "03650b4ee0dfb4d9e919dacdbc75b53d88a9d1ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
