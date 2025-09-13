@@ -55,8 +55,13 @@ struct mod_arch_specific {
 
 	/* for CONFIG_DYNAMIC_FTRACE */
 	struct plt_entry	*ftrace_trampolines;
+<<<<<<< HEAD   (4f606e6488e73b353d8756c94cfad43f1abc9baf Merge 7acfa07c585e ("bpf: Fix oob access in cgroup local sto)
 
 	ARM64_MODULE_KVM_ARCHDATA
+||||||| BASE   (7acfa07c585e3d7a64654d38f0a5c762877d0b9b bpf: Fix oob access in cgroup local storage)
+=======
+	struct plt_entry	*init_ftrace_trampolines;
+>>>>>>> BRANCH (fe9731e100041bb2cc186717bde3e05ca175623b Linux 6.6.105)
 };
 
 u64 module_emit_plt_entry(struct module *mod, Elf64_Shdr *sechdrs,
