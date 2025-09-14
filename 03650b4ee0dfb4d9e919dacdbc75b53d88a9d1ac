@@ -34,6 +34,24 @@
       "parentUuid": "a7f481bb_90fc9806",
       "revId": "03650b4ee0dfb4d9e919dacdbc75b53d88a9d1ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd170522_3fc718bd",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-14T23:02:41Z",
+      "side": 1,
+      "message": "i.e. similar to what KVM does with nested VMs?\n\n```\n\t/*\n\t * If IBRS is advertised to the vCPU, KVM must flush the indirect\n\t * branch predictors when transitioning from L2 to L1, as L1 expects\n\t * hardware (KVM in this case) to provide separate predictor modes.\n\t * Bare metal isolates VMX root (host) from VMX non-root (guest), but\n\t * doesn\u0027t isolate different VMCSs, i.e. in this case, doesn\u0027t provide\n\t * separate modes for L2 vs L1.\n\t */\n\tif (guest_cpu_cap_has(vcpu, X86_FEATURE_SPEC_CTRL))\n\t\tindirect_branch_prediction_barrier();\n```\n\nYeah, makes sense.\n\nAnd yeah, I think we should do that for npVM and pVM alike. pVM is still a guest, the fact that it is protected from the host doesn\u0027t mean that it is more privileged than the host as a whole. We still don\u0027t want it to be able to attack the host.",
+      "parentUuid": "c19c2882_1c26e141",
+      "revId": "03650b4ee0dfb4d9e919dacdbc75b53d88a9d1ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
