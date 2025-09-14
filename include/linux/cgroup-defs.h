@@ -413,23 +413,40 @@ struct cgroup_freezer_state {
 	 */
 	int nr_frozen_tasks;
 
-	/* Freeze time data consistency protection */
-	seqcount_t freeze_seq;
-
-	/*
-	 * Most recent time the cgroup was requested to freeze.
-	 * Accesses guarded by freeze_seq counter. Writes serialized
-	 * by css_set_lock.
-	 */
-	u64 freeze_start_nsec;
-
-	/*
-	 * Total duration the cgroup has spent freezing.
-	 * Accesses guarded by freeze_seq counter. Writes serialized
-	 * by css_set_lock.
-	 */
-	u64 frozen_nsec;
 };
+
+/**
+ * Hide the definition of struct cgroup_stat_info from MODVERSIONS so that it
+ * can be modified to accommodate additional backports in the future.
+ */
+#ifdef __GENKSYMS__
+struct cgroup_stat_info;
+#else
+struct cgroup_stat_info {
+	/*
+	 * Metadata for cgroup v2 freeze time. Writes protected
+	 * by css_set_lock.
+	 */
+	struct {
+		/* Freeze time data consistency protection */
+		seqcount_t freeze_seq;
+
+		/*
+		 * Most recent time the cgroup was requested to freeze.
+		 * Accesses guarded by freeze_seq counter. Writes serialized
+		 * by css_set_lock.
+		 */
+		u64 freeze_start_nsec;
+
+		/*
+		 * Total duration the cgroup has spent freezing.
+		 * Accesses guarded by freeze_seq counter. Writes serialized
+		 * by css_set_lock.
+		 */
+		u64 frozen_nsec;
+	} freezer;
+};
+#endif /* __GENKSYMS__ */
 
 struct cgroup {
 	/* self css with NULL ->ss, points back to this cgroup */
@@ -587,7 +604,7 @@ struct cgroup {
 	struct bpf_local_storage __rcu  *bpf_cgrp_storage;
 #endif
 
-	ANDROID_BACKPORT_RESERVE(1);
+	ANDROID_BACKPORT_USE(1, struct cgroup_stat_info *stat_info);
 
 	/* All ancestors including self */
 	struct cgroup *ancestors[];

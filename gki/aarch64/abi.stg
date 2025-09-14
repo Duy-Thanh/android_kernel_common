@@ -7234,6 +7234,11 @@ pointer_reference {
   pointee_type_id: 0x12abe021
 }
 pointer_reference {
+  id: 0x0e3b6c21
+  kind: POINTER
+  pointee_type_id: 0x12ad5619
+}
+pointer_reference {
   id: 0x0e3cbe6a
   kind: POINTER
   pointee_type_id: 0x12b21f36
@@ -14507,6 +14512,11 @@ pointer_reference {
   id: 0x1e3d3b89
   kind: POINTER
   pointee_type_id: 0x52b408ba
+}
+pointer_reference {
+  id: 0x1e3e5372
+  kind: POINTER
+  pointee_type_id: 0x52b9ab55
 }
 pointer_reference {
   id: 0x1e424154
@@ -48523,6 +48533,10 @@ member {
   type_id: 0x1d4594fc
 }
 member {
+  id: 0x24c2370a
+  type_id: 0x1c26ac38
+}
+member {
   id: 0x24c431ea
   type_id: 0x1c3eb7b9
 }
@@ -50141,6 +50155,11 @@ member {
   offset: 2048
 }
 member {
+  id: 0x3bca3754
+  type_id: 0x6006ae46
+  offset: 15424
+}
+member {
   id: 0x3bd41dcd
   type_id: 0x607e3c81
   offset: 11904
@@ -51092,6 +51111,16 @@ member {
   id: 0x97287bd1
   name: "__0"
   type_id: 0x91085cd4
+}
+member {
+  id: 0x975220f6
+  name: "__0"
+  type_id: 0xeb537b7a
+}
+member {
+  id: 0x9765fc81
+  name: "__0"
+  type_id: 0xdc8f0c03
 }
 member {
   id: 0x976b3f49
@@ -52704,6 +52733,11 @@ member {
   type_id: 0x020ebe95
 }
 member {
+  id: 0x97bbd7e3
+  name: "__0"
+  type_id: 0x02a46e11
+}
+member {
   id: 0x97bd942c
   name: "__0"
   type_id: 0x04e7a180
@@ -52722,6 +52756,11 @@ member {
   id: 0x97c1584e
   name: "__0"
   type_id: 0x782bc379
+}
+member {
+  id: 0x97cb61d7
+  name: "__0"
+  type_id: 0x72125a26
 }
 member {
   id: 0x97ccb641
@@ -52890,6 +52929,11 @@ member {
   type_id: 0xcf83017a
 }
 member {
+  id: 0xaa08f09d
+  name: "__bindgen_anon_1"
+  type_id: 0xc259b47a
+}
+member {
   id: 0xaa095917
   name: "__bindgen_anon_1"
   type_id: 0xc3f9fc39
@@ -53046,6 +53090,11 @@ member {
   id: 0xaa64b2c4
   name: "__bindgen_anon_1"
   type_id: 0xae1bed46
+}
+member {
+  id: 0xaa6df86b
+  name: "__bindgen_anon_1"
+  type_id: 0xa7514216
 }
 member {
   id: 0xaa6f0130
@@ -53294,6 +53343,12 @@ member {
   type_id: 0x1cd81e4c
 }
 member {
+  id: 0xaad98be1
+  name: "__bindgen_anon_1"
+  type_id: 0x132209ff
+  offset: 15424
+}
+member {
   id: 0xaad9c17f
   name: "__bindgen_anon_1"
   type_id: 0x136856e5
@@ -53372,6 +53427,11 @@ member {
   offset: 256
 }
 member {
+  id: 0xc51f77ed
+  name: "__bindgen_anon_2"
+  type_id: 0x14693404
+}
+member {
   id: 0xc52bca8f
   name: "__bindgen_anon_2"
   type_id: 0x20ded543
@@ -53446,6 +53506,11 @@ member {
   type_id: 0x94c1d238
 }
 member {
+  id: 0xc5a0a643
+  name: "__bindgen_anon_2"
+  type_id: 0xabb89aa5
+}
+member {
   id: 0xc5a7d7f9
   name: "__bindgen_anon_2"
   type_id: 0xacc0a3f8
@@ -53515,6 +53580,11 @@ member {
   offset: 3008
 }
 member {
+  id: 0x0485ae3e
+  name: "__bindgen_anon_3"
+  type_id: 0xce142343
+}
+member {
   id: 0x049b50f4
   name: "__bindgen_anon_3"
   type_id: 0xd0eae9d1
@@ -53535,6 +53605,11 @@ member {
   name: "__bindgen_anon_3"
   type_id: 0xb93e052b
   offset: 1280
+}
+member {
+  id: 0x6e1fb70f
+  name: "__bindgen_anon_4"
+  type_id: 0x9a1289bb
 }
 member {
   id: 0x6e7ca7d1
@@ -57157,10 +57232,9 @@ member {
   offset: 11840
 }
 member {
-  id: 0x112ba34f
+  id: 0x112ba38e
   name: "__kabi_reserved_backport1"
   type_id: 0x92233392
-  offset: 15424
 }
 member {
   id: 0x112ba40c
@@ -57217,10 +57291,9 @@ member {
   offset: 1664
 }
 member {
-  id: 0x113052af
+  id: 0x1130526e
   name: "__kabi_reserved_backport1"
   type_id: 0x89d2d38c
-  offset: 15424
 }
 member {
   id: 0x1130539c
@@ -70473,6 +70546,11 @@ member {
   id: 0xeb8300e0
   name: "bindgen_union_field"
   type_id: 0xf1173c2d
+}
+member {
+  id: 0xebbd65b6
+  name: "bindgen_union_field"
+  type_id: 0xcf726a08
 }
 member {
   id: 0xe2a47020
@@ -119463,6 +119541,28 @@ member {
   offset: 1024
 }
 member {
+  id: 0x334ea4fc
+  name: "freeze_seq"
+  type_id: 0xcd22a710
+}
+member {
+  id: 0x33536f6a
+  name: "freeze_seq"
+  type_id: 0xd0e93144
+}
+member {
+  id: 0x4cca2858
+  name: "freeze_start_nsec"
+  type_id: 0x89d2d38c
+  offset: 64
+}
+member {
+  id: 0x4cd1d9b8
+  name: "freeze_start_nsec"
+  type_id: 0x92233392
+  offset: 64
+}
+member {
   id: 0xeb99df02
   name: "freeze_super"
   type_id: 0x7455e040
@@ -119503,6 +119603,16 @@ member {
   name: "freezer"
   type_id: 0x8eaee9d1
   offset: 15232
+}
+member {
+  id: 0x14d41b24
+  name: "freezer"
+  type_id: 0x14ab8135
+}
+member {
+  id: 0x14de8ddf
+  name: "freezer"
+  type_id: 0x1e3d7ab9
 }
 member {
   id: 0xd5e4618a
@@ -119838,6 +119948,18 @@ member {
   name: "frozen"
   type_id: 0x62aebfd4
   offset: 1928
+}
+member {
+  id: 0xa90a46d9
+  name: "frozen_nsec"
+  type_id: 0x92233392
+  offset: 128
+}
+member {
+  id: 0xa911b739
+  name: "frozen_nsec"
+  type_id: 0x89d2d38c
+  offset: 128
 }
 member {
   id: 0x696cf202
@@ -229156,6 +229278,16 @@ member {
   offset: 64
 }
 member {
+  id: 0xdbc53f63
+  name: "stat_info"
+  type_id: 0x1e3e5372
+}
+member {
+  id: 0xdbd53a5c
+  name: "stat_info"
+  type_id: 0x0e3b6c21
+}
+member {
   id: 0xdbdff2b9
   name: "stat_info"
   type_id: 0x04ff716c
@@ -266435,6 +266567,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x14ab8135
+  kind: STRUCT
+  definition {
+    bytesize: 24
+    member_id: 0x33536f6a
+    member_id: 0x4cd1d9b8
+    member_id: 0xa90a46d9
+  }
+}
+struct_union {
   id: 0x14b5803c
   kind: STRUCT
   definition {
@@ -266987,6 +267129,14 @@ struct_union {
     member_id: 0x1f5f2358
     member_id: 0xb7565f87
     member_id: 0xf5e277a0
+  }
+}
+struct_union {
+  id: 0x1c26ac38
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x112ba38e
   }
 }
 struct_union {
@@ -271505,6 +271655,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x6006ae46
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xdbd53a5c
+    member_id: 0x24c2370a
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x603e99d0
   kind: UNION
   definition {
@@ -275389,6 +275549,38 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xc259b47a
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+    member_id: 0x975220f6
+  }
+}
+struct_union {
+  id: 0x14693404
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+    member_id: 0x97cb61d7
+  }
+}
+struct_union {
+  id: 0xce142343
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+    member_id: 0x97bbd7e3
+  }
+}
+struct_union {
+  id: 0x9a1289bb
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
+  definition {
+    member_id: 0x9765fc81
+  }
+}
+struct_union {
   id: 0xfbfd34ad
   kind: STRUCT
   name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::dev_pagemap__bindgen_ty_1__bindgen_ty_1>"
@@ -278064,8 +278256,40 @@ struct_union {
     member_id: 0x6838726f
     member_id: 0x141afb28
     member_id: 0x10abba17
-    member_id: 0x113052af
+    member_id: 0xaad98be1
     member_id: 0xd291da1e
+  }
+}
+struct_union {
+  id: 0x132209ff
+  kind: UNION
+  name: "bindings::bindings_raw::cgroup__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0xdbc53f63
+    member_id: 0xaa6df86b
+    member_id: 0xc5a0a643
+  }
+}
+struct_union {
+  id: 0xa7514216
+  kind: STRUCT
+  name: "bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0x1130526e
+  }
+}
+struct_union {
+  id: 0xabb89aa5
+  kind: STRUCT
+  name: "bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2"
+  definition {
+    member_id: 0xaa08f09d
+    member_id: 0xc51f77ed
+    member_id: 0x0485ae3e
+    member_id: 0x6e1fb70f
+    member_id: 0xebbd65b6
   }
 }
 struct_union {
@@ -278162,6 +278386,26 @@ struct_union {
     member_id: 0x3b64e7a5
     member_id: 0x74e92550
     member_id: 0x28999324
+  }
+}
+struct_union {
+  id: 0x52b9ab55
+  kind: STRUCT
+  name: "bindings::bindings_raw::cgroup_stat_info"
+  definition {
+    bytesize: 24
+    member_id: 0x14de8ddf
+  }
+}
+struct_union {
+  id: 0x1e3d7ab9
+  kind: STRUCT
+  name: "bindings::bindings_raw::cgroup_stat_info__bindgen_ty_1"
+  definition {
+    bytesize: 24
+    member_id: 0x334ea4fc
+    member_id: 0x4cca2858
+    member_id: 0xa911b739
   }
 }
 struct_union {
@@ -289163,7 +289407,7 @@ struct_union {
     member_id: 0x68223d1d
     member_id: 0x144e1dcd
     member_id: 0x1084e9a9
-    member_id: 0x112ba34f
+    member_id: 0x3bca3754
     member_id: 0xd2908251
   }
 }
@@ -289260,6 +289504,15 @@ struct_union {
     member_id: 0x3bba0854
     member_id: 0x74c867d5
     member_id: 0x28b8d1a1
+  }
+}
+struct_union {
+  id: 0x12ad5619
+  kind: STRUCT
+  name: "cgroup_stat_info"
+  definition {
+    bytesize: 24
+    member_id: 0x14d41b24
   }
 }
 struct_union {
@@ -290233,6 +290486,34 @@ struct_union {
   id: 0xc42d8b0b
   kind: STRUCT
   name: "core::marker::PhantomData<bindings::bindings_raw::btf_field>"
+  definition {
+  }
+}
+struct_union {
+  id: 0xeb537b7a
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x72125a26
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x02a46e11
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+  }
+}
+struct_union {
+  id: 0xdc8f0c03
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::cgroup__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
   definition {
   }
 }
