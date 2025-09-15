@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b0fc79_d4faf006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2006584
+      },
+      "writtenOn": "2025-09-15T11:17:12Z",
+      "side": 1,
+      "message": "hi, Mercier\n\nmay I ask why this series don\u0027t apply to android16-6.12?",
+      "revId": "857c6e0616d4678ab5cb9415cee5957ec043de7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
