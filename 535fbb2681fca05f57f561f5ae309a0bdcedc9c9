@@ -16,6 +16,24 @@
       "message": "Presumably, this will be needed in android-mainline and future ACK kernels, so it would be cleaner to submit this as a proper patch instead of a revert-of-a-revert (with changes). Please cite the original patch that was reverted in the commit message.",
       "revId": "535fbb2681fca05f57f561f5ae309a0bdcedc9c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e3572b_3418e85a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-09-15T08:39:13Z",
+      "side": 1,
+      "message": "OK, aosp/3766524 uploaded.",
+      "parentUuid": "3a493a0f_7ea33ba9",
+      "revId": "535fbb2681fca05f57f561f5ae309a0bdcedc9c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
