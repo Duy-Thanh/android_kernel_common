@@ -62,6 +62,41 @@
       "parentUuid": "514dd9ba_1ee94412",
       "revId": "af2c8c858431f005026974c7ed37d6364b9d87f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2749b35_55b5b326",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-15T11:26:55Z",
+      "side": 1,
+      "message": "s/pkvm_cpu_bug_relax/pkvm_relax_cpu_bugs/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "7e4599a8_972ae6ee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 1712,
+                "startChar": 0,
+                "endLine": 1713,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpr_cont(\"reboot with kvm-intel.pkvm_relax_cpu_bugs\u003dfalse\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "af2c8c858431f005026974c7ed37d6364b9d87f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
