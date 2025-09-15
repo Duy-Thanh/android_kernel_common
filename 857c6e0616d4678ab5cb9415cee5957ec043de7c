@@ -16,6 +16,24 @@
       "message": "hi, Mercier\n\nmay I ask why this series don\u0027t apply to android16-6.12?",
       "revId": "857c6e0616d4678ab5cb9415cee5957ec043de7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4cc508_a9b25932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-15T16:47:34Z",
+      "side": 1,
+      "message": "Hi, Pixel 10 wanted this which currently uses 6.6. We\u0027ll apply it to 6.12 and future kernels going forward, but we\u0027re not in a rush to do that atm. If you want it on 6.12 sooner than next year, please file a bug and we\u0027ll prioritize that.",
+      "parentUuid": "09b0fc79_d4faf006",
+      "revId": "857c6e0616d4678ab5cb9415cee5957ec043de7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
