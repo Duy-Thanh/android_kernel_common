@@ -16,6 +16,24 @@
       "message": "Could we assert that the attached devices are in the blocked state?",
       "revId": "d5f497795c6d2635c03af830c82d687a667aef67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c87fada_78d9f3b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-09-15T08:08:56Z",
+      "side": 1,
+      "message": "I can\u0027t see a way for that, domains only know which IOMMU is attached but not which end point. However,\n- For the host, `free_domain` only runs when all references are dropped from `attach_dev`, so at  this point the device is blocked.\n- For guests, in `__pkvm_finalize_teardown_vm`, `pkvm_devices_teardown` is called before `pkvm_pviommu_teardown`; where the first call puts devices in blocked state and the latter frees the domain.",
+      "parentUuid": "46488d6f_1b548608",
+      "revId": "d5f497795c6d2635c03af830c82d687a667aef67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
