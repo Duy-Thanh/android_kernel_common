@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e33e298_816880ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4300331
+      },
+      "writtenOn": "2025-09-15T12:53:43Z",
+      "side": 1,
+      "message": "[panchuang: Had to adapt to older API: used parse_options instead of fs_context for mount option processing in 6.6] For further details, here is the commit history：\n2025-07-10 12:14 +0000 HLi           94b3ce7f1509     │ f2fs: switch to the new mount api\n2025-07-10 12:14 +0000 HLi           bb463a75ab2f     │ f2fs: introduce fs_context_operation structure\n2025-07-10 12:14 +0000 HLi           d18535132523   45│ f2fs: separate the options parsing and options checking\n2025-07-10 12:14 +0000 HLi           1a9094b10cf7     │ f2fs: Add f2fs_fs_context to record the mount options\n2025-07-10 12:14 +0000 HLi           19c4b380f23e     │ f2fs: Allow sbi to be NULL in f2fs_printk\n2025-07-10 12:14 +0000 HLi           02eb5fe42a8c     │ f2fs: move the option parser into handle_mount_opt\n2025-07-10 12:14 +0000 HLi           f2091cc188c6     │ f2fs: Add fs parameter specifications for mount options\nRecently, F2FS switch to the new mount API (fs_context), but this change required reverting to the legacy parse_options interface in kernel v6.6 due to compatibility constraints.",
+      "parentUuid": "56e43279_a9f9e2d7",
+      "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "90afe14f_08ea5fe1",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-09-12T17:33:40Z",
       "side": 1,
       "message": "Is there no 6.12 version of this change?",
+      "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d270aa_33e6ca70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4300331
+      },
+      "writtenOn": "2025-09-15T12:53:43Z",
+      "side": 1,
+      "message": "Because this change in 16-6.12 has exported a tracepoint which makes struct f2fs_sb_info part of KMI, and the change to add a field to struct f2fs_mount_info breaks the KMI freeze.Please refer to the discussion in bug 440276987 for details.",
+      "parentUuid": "7870c061_27f70802",
       "revId": "447ceca3144477ad742e5d23605ae06a02b12d9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
