@@ -22,6 +22,30 @@
       },
       "revId": "5d54c2b0ac772e5738224ecd598056694cf00dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25eedff_9ec7dd78",
+        "filename": "include/linux/cgroup-defs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-09-15T22:58:37Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure if I should be trying to use ANDROID_KABI_DECLONLY somehow... I\u0027ll ask gprocida@",
+      "parentUuid": "aa7121df_9c001c13",
+      "range": {
+        "startLine": 426,
+        "startChar": 7,
+        "endLine": 426,
+        "endChar": 19
+      },
+      "revId": "5d54c2b0ac772e5738224ecd598056694cf00dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
