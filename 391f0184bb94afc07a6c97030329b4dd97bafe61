@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc523d61_9ab8e8a0",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-15T17:36:19Z",
+      "side": 1,
+      "message": "Could you invert this please so that the original assignment is left completely unmodified, and an `if (bypass)` branch just overwrites it with `jiffies`.",
+      "range": {
+        "startLine": 716,
+        "startChar": 1,
+        "endLine": 718,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9beced67_0861a7f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 716,
+                "startChar": 0,
+                "endLine": 719,
+                "endChar": 0
+              },
+              "replacement": "\ttsk-\u003eoom_reaper_timer.expires \u003d jiffies + OOM_REAPER_DELAY;\n\tif (bypass)\n\t\ttsk-\u003eoom_reaper_timer.expires \u003d jiffies;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "391f0184bb94afc07a6c97030329b4dd97bafe61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
