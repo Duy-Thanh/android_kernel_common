@@ -16,6 +16,23 @@
       "message": "Respin bug:b/445091086",
       "revId": "2f765ad786c9d8e67115b2b1c5c07434b828b6a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0b02a2_ca1a97f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-15T15:45:42Z",
+      "side": 1,
+      "message": "KernelCommit and CommitAbiAnalyzer run manually.\n\n```\n2 function symbol(s) added\n  \u0027int __traceiter_android_vh_chk_task(void*, struct task_struct**, struct rq*)\u0027\n  \u0027int __traceiter_android_vh_put_task(void*, struct task_struct*)\u0027\n\n2 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_chk_task\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_put_task\u0027\n\n```",
+      "revId": "2f765ad786c9d8e67115b2b1c5c07434b828b6a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
