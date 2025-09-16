@@ -33,6 +33,23 @@
       "message": "Please fix this ERROR reported by KernelCommit: Original change [3720832](https://android-review.googlesource.com/c/3720832) for...\n\nOriginal change [3720832](https://android-review.googlesource.com/c/3720832) for this cherry pick, on base branch \u0027android16-6.12\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "29c3fce786a9359be64e6dca586359b58420e2c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccddf43_2fcc8548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-16T20:46:56Z",
+      "side": 1,
+      "message": "Per the discussion in b/439502098 this will be merged in android16-6.12 to be included in the 6.12-2025-12 release branch. Taking it before then has some risks.",
+      "revId": "29c3fce786a9359be64e6dca586359b58420e2c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
