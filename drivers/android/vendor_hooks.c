@@ -77,7 +77,6 @@
 #include <trace/hooks/user.h>
 #include <trace/hooks/gzvm.h>
 #include <trace/hooks/usb.h>
-#include <trace/hooks/kasan.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -448,7 +447,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_slab);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_process_madvise_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_prepare_init);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_flag_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_post_alloc_hook);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_new_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_pageout_return_error);
@@ -572,7 +570,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_replace_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_read_folio_bdev_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
@@ -621,12 +618,3 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_split_huge_page_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_try_split_folio_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_scmi_limit_notify_cb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_fiq_dump);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_looper_state_registered);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_thread_release);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_read_done);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_poison_kmalloc_large_redzone);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ksize);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_node_bypass);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_bypass);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_heap_object_bypass);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_save_irq);

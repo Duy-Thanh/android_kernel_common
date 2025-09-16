@@ -327,21 +327,27 @@ err_free_reqs:
 }
 
 /*
- * Handle split huge pages which have not been reported to the kvm_pinned_page tree.
+ * Handle broken down huge pages which have not been reported to the
+ * kvm_pinned_page.
  */
-static int pkvm_call_hyp_nvhe_ppage(struct kvm_pinned_page *ppage,
-				    int (*call_hyp_nvhe)(u64 pfn, u64 gfn, u8 order, void *args),
-				    void *args)
+int pkvm_call_hyp_nvhe_ppage(struct kvm_pinned_page *ppage,
+			     int (*call_hyp_nvhe)(u64 pfn, u64 gfn, u8 order, void* args),
+			     void *args, bool unmap)
 {
 	size_t page_size, size = PAGE_SIZE << ppage->order;
 	u64 pfn = page_to_pfn(ppage->page);
 	u8 order = ppage->order;
 	u64 gfn = ppage->ipa >> PAGE_SHIFT;
 
+	/* We already know this huge-page has been broken down in the stage-2 */
+	if (ppage->pins < (1 << order))
+		order = 0;
+
 	while (size) {
 		int err = call_hyp_nvhe(pfn, gfn, order, args);
 
 		switch (err) {
+		/* The stage-2 huge page has been broken down */
 		case -E2BIG:
 			if (order)
 				order = 0;
@@ -349,6 +355,16 @@ static int pkvm_call_hyp_nvhe_ppage(struct kvm_pinned_page *ppage,
 				/* Something is really wrong ... */
 				return -EINVAL;
 			break;
+		/* This has been unmapped already */
+		case -ENOENT:
+			/*
+			 * We are not supposed to lose track of PAGE_SIZE pinned
+			 * page.
+			 */
+			if (!ppage->order)
+				return -EINVAL;
+
+			fallthrough;
 		case 0:
 			page_size = PAGE_SIZE << order;
 			gfn += 1 << order;
@@ -356,6 +372,13 @@ static int pkvm_call_hyp_nvhe_ppage(struct kvm_pinned_page *ppage,
 
 			if (page_size > size)
 				return -EINVAL;
+
+			/* If -ENOENT, the pin was already dropped. */
+			if (unmap && !err)
+				ppage->pins -= 1 << order;
+
+			if (!ppage->pins)
+				return 0;
 
 			size -= page_size;
 			break;
@@ -443,9 +466,11 @@ retry:
 	ppage = kvm_pinned_pages_iter_first(&host_kvm->arch.pkvm.pinned_pages, 0, ~(0UL));
 	while (ppage) {
 		struct kvm_pinned_page *next;
+		u16 pins = ppage->pins;
 
-		ret = pkvm_call_hyp_nvhe_ppage(ppage, __reclaim_dying_guest_page_call,
-					       host_kvm);
+		ret = pkvm_call_hyp_nvhe_ppage(ppage,
+						 __reclaim_dying_guest_page_call,
+						 host_kvm, true);
 		cond_resched();
 		if (ret == -EBUSY) {
 			nr_busy++;
@@ -458,7 +483,7 @@ retry:
 		unpin_user_pages_dirty_lock(&ppage->page, 1, true);
 		next = kvm_pinned_pages_iter_next(ppage, 0, ~(0UL));
 		kvm_pinned_pages_remove(ppage, &host_kvm->arch.pkvm.pinned_pages);
-		pages += 1 << ppage->order;
+		pages += pins;
 		kfree(ppage);
 		ppage = next;
 	}
@@ -791,19 +816,25 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 {
 	struct mm_struct *mm = current->mm;
 	struct kvm_pinned_page *ppage;
-	u8 order;
+	u16 pins;
 
 	write_lock(&host_kvm->mmu_lock);
 	ppage = kvm_pinned_pages_iter_first(&host_kvm->arch.pkvm.pinned_pages,
 					   ipa, ipa + PAGE_SIZE - 1);
 	if (ppage) {
-		order = ppage->order;
-		if (!order)
-			kvm_pinned_pages_remove(ppage, &host_kvm->arch.pkvm.pinned_pages);
+		WARN_ON_ONCE(ppage->pins != 1);
+
+		if (ppage->pins)
+			ppage->pins--;
+
+		pins = ppage->pins;
+		if (!pins)
+			kvm_pinned_pages_remove(ppage,
+						&host_kvm->arch.pkvm.pinned_pages);
 	}
 	write_unlock(&host_kvm->mmu_lock);
 
-	if (WARN_ON(!ppage || order))
+	if (WARN_ON(!ppage) || pins)
 		return;
 
 	account_locked_vm(mm, 1 << ppage->order, false);
@@ -1559,17 +1590,6 @@ void pkvm_el2_mod_frob_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs, char *secstri
 }
 #endif /* CONFIG_MODULES */
 
-static int __pkvm_topup_hyp_alloc_mgt_mc(unsigned long id, struct kvm_hyp_memcache *mc)
-{
-	struct arm_smccc_res res;
-
-	res = kvm_call_hyp_nvhe_smccc(__pkvm_hyp_alloc_mgt_refill,
-				      id, mc->head, mc->nr_pages);
-	mc->head = res.a2;
-	mc->nr_pages = res.a3;
-	return res.a1;
-}
-
 int __pkvm_topup_hyp_alloc(unsigned long nr_pages)
 {
 	struct kvm_hyp_memcache mc;
@@ -1581,7 +1601,8 @@ int __pkvm_topup_hyp_alloc(unsigned long nr_pages)
 	if (ret)
 		return ret;
 
-	ret = __pkvm_topup_hyp_alloc_mgt_mc(HYP_ALLOC_MGT_HEAP_ID, &mc);
+	ret = kvm_call_hyp_nvhe(__pkvm_hyp_alloc_mgt_refill, HYP_ALLOC_MGT_HEAP_ID,
+				mc.head, mc.nr_pages);
 	if (ret)
 		free_hyp_memcache(&mc);
 
@@ -1629,12 +1650,10 @@ int __pkvm_topup_hyp_alloc_mgt_gfp(unsigned long id, unsigned long nr_pages,
 	if (ret)
 		return ret;
 
-	ret = __pkvm_topup_hyp_alloc_mgt_mc(id, &mc);
-	if (ret) {
-		kvm_err("Failed topup %ld pages = %ld, size = %ld err = %d, freeing %ld pages\n",
-			id, nr_pages, sz_alloc, ret, mc.nr_pages);
+	ret = kvm_call_hyp_nvhe(__pkvm_hyp_alloc_mgt_refill, id,
+				mc.head, mc.nr_pages);
+	if (ret)
 		free_hyp_memcache(&mc);
-	}
 
 	return ret;
 }

@@ -51,7 +51,6 @@ enum iio_chan_type {
 	IIO_DELTA_VELOCITY,
 	IIO_COLORTEMP,
 	IIO_CHROMATICITY,
-	IIO_ATTENTION,
 };
 
 enum iio_modifier {
