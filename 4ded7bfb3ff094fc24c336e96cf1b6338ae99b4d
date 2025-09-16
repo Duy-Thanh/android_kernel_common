@@ -16,6 +16,24 @@
       "message": "commit message should refer to gendwarfksyms",
       "revId": "4ded7bfb3ff094fc24c336e96cf1b6338ae99b4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f192973e_2bced554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-09-16T17:13:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24ad40d0_fa4535c5",
+      "revId": "4ded7bfb3ff094fc24c336e96cf1b6338ae99b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
