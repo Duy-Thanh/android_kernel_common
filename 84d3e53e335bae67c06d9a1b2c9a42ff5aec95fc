@@ -166,6 +166,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0da0abf_8c71c396",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-09-16T17:27:02Z",
+      "side": 1,
+      "message": "FYI this needs to be in both (the 6.12-desktop and mainline). This is also a fix for b/434032928 which is needed in the next few weeks.\n\nCan we +2 this while https://android-review.git.corp.google.com/c/kernel/common/+/3765284 is ongoing?",
+      "parentUuid": "888e0d0f_3d7f655a",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
