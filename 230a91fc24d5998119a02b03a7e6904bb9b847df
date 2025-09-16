@@ -16,6 +16,24 @@
       "message": "Needs a rebase, as this has a merge conflict.",
       "revId": "230a91fc24d5998119a02b03a7e6904bb9b847df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9151be2_92387f7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4300331
+      },
+      "writtenOn": "2025-09-16T08:12:08Z",
+      "side": 1,
+      "message": "Thanks for the reminder, the patch has been updated.",
+      "parentUuid": "d49f7e7a_6672812f",
+      "revId": "230a91fc24d5998119a02b03a7e6904bb9b847df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
