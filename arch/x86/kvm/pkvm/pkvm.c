@@ -40,7 +40,11 @@ struct pkvm_x86_ops pkvm_x86_ops __read_mostly;
 
 static DEFINE_PER_CPU(union pkvm_pv_param *, pv_param);
 
-#define this_pv_param(f)	(&this_cpu_read(pv_param)->f)
+#define this_pv_param(f)						\
+	({								\
+		union pkvm_pv_param *p = this_cpu_read(pv_param);	\
+		p ? &p->f : NULL;					\
+	})
 
 static int pkvm_enable_virtualization_cpu(unsigned long pv_param_gpa)
 {
@@ -1078,7 +1082,7 @@ static void pkvm_get_segment(struct pkvm_vcpu *pkvm_vcpu, struct kvm_segment *va
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return;
 
-	if (WARN_ON_ONCE(var != this_pv_param(seg)))
+	if (WARN_ON_ONCE(var != this_pv_param(seg) || !var))
 		return;
 
 	kvm_x86_call(get_segment)(to_kvm_vcpu(pkvm_vcpu), var, seg);
@@ -1089,7 +1093,7 @@ static void pkvm_set_segment(struct pkvm_vcpu *pkvm_vcpu, struct kvm_segment *va
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return;
 
-	if (WARN_ON_ONCE(var != this_pv_param(seg)))
+	if (WARN_ON_ONCE(var != this_pv_param(seg) || !var))
 		return;
 
 	kvm_x86_call(set_segment)(to_kvm_vcpu(pkvm_vcpu), var, seg);
@@ -1116,7 +1120,7 @@ static int pkvm_set_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *msr)
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return -EINVAL;
 
-	if (WARN_ON_ONCE(msr != this_pv_param(msr)))
+	if (WARN_ON_ONCE(msr != this_pv_param(msr) || !msr))
 		return -EINVAL;
 
 	return kvm_x86_call(set_msr)(to_kvm_vcpu(pkvm_vcpu), msr);
@@ -1127,7 +1131,7 @@ static int pkvm_get_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *msr)
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return -EINVAL;
 
-	if (WARN_ON_ONCE(msr != this_pv_param(msr)))
+	if (WARN_ON_ONCE(msr != this_pv_param(msr) || !msr))
 		return -EINVAL;
 
 	return kvm_x86_call(get_msr)(to_kvm_vcpu(pkvm_vcpu), msr);
@@ -1147,7 +1151,7 @@ static void pkvm_access_idt_gdt(struct pkvm_vcpu *pkvm_vcpu, struct desc_ptr *de
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return;
 
-	if (WARN_ON_ONCE(desc != this_pv_param(desc)))
+	if (WARN_ON_ONCE(desc != this_pv_param(desc) || !desc))
 		return;
 
 	if (idt) {
@@ -1448,7 +1452,7 @@ static void pkvm_load_eoi_exitmap(struct pkvm_vcpu *pkvm_vcpu, u64 *eoi_exit_bit
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return;
 
-	if (WARN_ON_ONCE(eoi_exit_bitmap != this_pv_param(eoi_exit_bitmap[0])))
+	if (WARN_ON_ONCE(eoi_exit_bitmap != this_pv_param(eoi_exit_bitmap[0]) || !eoi_exit_bitmap))
 		return;
 
 	kvm_x86_call(load_eoi_exitmap)(to_kvm_vcpu(pkvm_vcpu), eoi_exit_bitmap);
