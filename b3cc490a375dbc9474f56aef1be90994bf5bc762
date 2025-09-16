@@ -52,6 +52,24 @@
       "parentUuid": "143f35ef_f718ac67",
       "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e21d21_f5db5210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-16T21:25:22Z",
+      "side": 1,
+      "message": "Please work with upstream on this before next year. Taking it again for this year.",
+      "parentUuid": "c3137cd8_667a6f00",
+      "revId": "b3cc490a375dbc9474f56aef1be90994bf5bc762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
