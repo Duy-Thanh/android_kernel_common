@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2374fde2_38e00272",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-16T08:28:31Z",
+      "side": 1,
+      "message": "typo (same in the 15-6.6 cherry-pick)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "6b5b2eb4a587d5240a6c9815a35969190093e13e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
