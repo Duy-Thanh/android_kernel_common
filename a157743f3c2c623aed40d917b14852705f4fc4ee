@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e6b401_0ec91885",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-09-16T08:39:04Z",
+      "side": 1,
+      "message": "I know that WARN_ON is effectively a bug, but should this actually return NULL rather than continue, in case in the future the behavior of WARN_ON changes?",
+      "revId": "a157743f3c2c623aed40d917b14852705f4fc4ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
