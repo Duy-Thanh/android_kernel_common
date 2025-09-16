@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae70972_3ff9782e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-09-16T18:41:56Z",
+      "side": 1,
+      "message": "should this documentation go to android-mainline to not be copied around all the time? IOW, how do we make sure that it is on android17-6.18(or similar) once that is available?",
+      "revId": "19b1150636cba76729514a82fdce4310e590a9de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
