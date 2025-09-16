@@ -16,6 +16,24 @@
       "message": "I know that WARN_ON is effectively a bug, but should this actually return NULL rather than continue, in case in the future the behavior of WARN_ON changes?",
       "revId": "a157743f3c2c623aed40d917b14852705f4fc4ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375c6cb2_58b137a1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-09-16T08:48:05Z",
+      "side": 1,
+      "message": "I think this actually affects upstream, so I\u0027ll post a patch on the list and we can have that discussion there. I just wanted to have things up in gerrit early in case we need to merge before that lands upstream 😊",
+      "parentUuid": "b8e6b401_0ec91885",
+      "revId": "a157743f3c2c623aed40d917b14852705f4fc4ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
