@@ -33,6 +33,41 @@
       "message": "please fix up the cherry-pick errors.",
       "revId": "768eafbf7e145dec9f3a7f79c3ee39e191d12206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce4f800_0be49486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3657368
+      },
+      "writtenOn": "2025-09-16T06:15:41Z",
+      "side": 1,
+      "message": "Can you please let us know the error that you are seeing while cherry-picking? We do not see any errors while cherry-picking to android13-5.10 branch.",
+      "revId": "768eafbf7e145dec9f3a7f79c3ee39e191d12206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89dfa0b1_9dea048f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3657368
+      },
+      "writtenOn": "2025-09-16T06:15:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "efd44b5a_346488b1",
+      "revId": "768eafbf7e145dec9f3a7f79c3ee39e191d12206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
