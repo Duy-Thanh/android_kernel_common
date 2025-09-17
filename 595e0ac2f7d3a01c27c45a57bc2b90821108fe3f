@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a1bd389_39652679",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-17T15:07:12Z",
+      "side": 1,
+      "message": "nit: add a space after the comma?",
+      "fixSuggestions": [
+        {
+          "fixId": "b17d90da_a624a256",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 1750,
+                "startChar": 0,
+                "endLine": 1751,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpr_warn(\"pkvm: To prevent pkvm running on such CPU, \");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "595e0ac2f7d3a01c27c45a57bc2b90821108fe3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
