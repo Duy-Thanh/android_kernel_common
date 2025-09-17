@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c0188f_c5dc4660",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-17T15:50:54Z",
+      "side": 1,
+      "message": "Note: the patch was merged into android12-5.10 as part of a bigger merge: https://android-review.googlesource.com/c/kernel/common/+/3726587, therefore SHA does not show up in the android12-5.10 branch.",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 52
+      },
+      "revId": "f82f7360927ec011a4510c0e503d1aafd6d10df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35ae7d83_1447fd82",
