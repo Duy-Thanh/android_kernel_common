@@ -190,6 +190,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af972730_a94df8f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-17T07:50:31Z",
+      "side": 1,
+      "message": "That\u0027s fine with me, but let\u0027s add a bug to track the upstreaming to `android-mainline` and mark it with `Upstream-Task: b/123456` tag in the commit message",
+      "parentUuid": "f0da0abf_8c71c396",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
