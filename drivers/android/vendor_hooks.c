@@ -106,9 +106,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_skb_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
+<<<<<<< HEAD   (477721d42f56b03d51edd687f1e1b0a7e6bd596e ANDROID: GKI: Update transsion symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_reaper_delay_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);
+||||||| BASE   (8a0f08a5606260a0680a6074ee5392a57cd3133d ANDROID: KVM: arm64: Fix GCC warning in pkvm_get_guest_pa_re)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thaw_killed_process);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
+>>>>>>> CHANGE (d99139931287a759139a12ca6d0a77ce745d3940 ANDROID: mm: Add vendor hook to thaw the killed process)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_init);
