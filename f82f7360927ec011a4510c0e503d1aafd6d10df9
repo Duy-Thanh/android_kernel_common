@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c152311d_91408ba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-17T17:42:15Z",
+      "side": 1,
+      "message": "This is in android12-5.10 via LTS merge: `87ed20fb3422 (\"fs/proc: do_task_stat: use __for_each_thread()\")`",
+      "parentUuid": "35ae7d83_1447fd82",
+      "range": {
+        "startLine": 18,
+        "startChar": 27,
+        "endLine": 18,
+        "endChar": 67
+      },
+      "revId": "f82f7360927ec011a4510c0e503d1aafd6d10df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "460f794f_676c003a",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-09-17T15:50:08Z",
       "side": 1,
       "message": "What does that mean? A trivial merge conflict?",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "f82f7360927ec011a4510c0e503d1aafd6d10df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e280d0_730838bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-17T17:42:15Z",
+      "side": 1,
+      "message": "cherry-pick is clean. `[ mheyne: adjusted context ]` is in the upstream patch in linux-5.10.y",
+      "parentUuid": "460f794f_676c003a",
       "range": {
         "startLine": 24,
         "startChar": 10,
