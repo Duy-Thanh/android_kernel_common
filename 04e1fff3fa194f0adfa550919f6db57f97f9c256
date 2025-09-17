@@ -51,6 +51,24 @@
       "parentUuid": "e3713f3a_7cfc3600",
       "revId": "04e1fff3fa194f0adfa550919f6db57f97f9c256",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf43ab6d_009cf06c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2025-09-17T09:14:19Z",
+      "side": 1,
+      "message": "Added \"Bug: 445621665\"",
+      "parentUuid": "08223b51_c9e96547",
+      "revId": "04e1fff3fa194f0adfa550919f6db57f97f9c256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
