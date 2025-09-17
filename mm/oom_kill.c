@@ -955,6 +955,45 @@ static bool task_will_free_mem(struct task_struct *task)
 	return ret;
 }
 
+<<<<<<< HEAD   (477721d42f56b03d51edd687f1e1b0a7e6bd596e ANDROID: GKI: Update transsion symbol list)
+||||||| BASE   (8a0f08a5606260a0680a6074ee5392a57cd3133d ANDROID: KVM: arm64: Fix GCC warning in pkvm_get_guest_pa_re)
+/* Adds a killed process to the reaper. @p->mm has to be non NULL. */
+void add_to_oom_reaper(struct task_struct *p)
+{
+	p = find_lock_task_mm(p);
+	if (!p)
+		return;
+
+	if (task_will_free_mem(p)) {
+		if (!cmpxchg(&p->signal->oom_mm, NULL, p->mm))
+			mmgrab(p->signal->oom_mm);
+		queue_oom_reaper(p);
+	}
+	task_unlock(p);
+}
+
+=======
+/* Adds a killed process to the reaper. @p->mm has to be non NULL. */
+void add_to_oom_reaper(struct task_struct *p)
+{
+	bool thaw = false;
+
+	p = find_lock_task_mm(p);
+	if (!p)
+		return;
+
+	if (task_will_free_mem(p)) {
+		if (!cmpxchg(&p->signal->oom_mm, NULL, p->mm))
+			mmgrab(p->signal->oom_mm);
+		trace_android_vh_thaw_killed_process(&thaw);
+		if (thaw)
+			thaw_process(p);
+		queue_oom_reaper(p);
+	}
+	task_unlock(p);
+}
+
+>>>>>>> CHANGE (d99139931287a759139a12ca6d0a77ce745d3940 ANDROID: mm: Add vendor hook to thaw the killed process)
 static void __oom_kill_process(struct task_struct *victim, const char *message)
 {
 	struct task_struct *p;

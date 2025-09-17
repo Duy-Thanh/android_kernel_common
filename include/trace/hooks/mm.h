@@ -443,6 +443,7 @@ DECLARE_HOOK(android_vh_do_async_mmap_readahead,
 DECLARE_HOOK(android_vh_mm_free_page,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+<<<<<<< HEAD   (477721d42f56b03d51edd687f1e1b0a7e6bd596e ANDROID: GKI: Update transsion symbol list)
 DECLARE_HOOK(android_vh_page_cache_ra_unbounded,
 	TP_PROTO(struct address_space *mapping, struct folio *folio, u64 *data),
 	TP_ARGS(mapping, folio, data));
@@ -507,6 +508,68 @@ DECLARE_HOOK(android_vh_filemap_map_pages,
 	TP_PROTO(struct file *file, pgoff_t first_pgoff,
 		pgoff_t last_pgoff, vm_fault_t ret),
 	TP_ARGS(file, first_pgoff, last_pgoff, ret));
+||||||| BASE   (8a0f08a5606260a0680a6074ee5392a57cd3133d ANDROID: KVM: arm64: Fix GCC warning in pkvm_get_guest_pa_re)
+DECLARE_HOOK(android_vh_look_around_migrate_folio,
+	TP_PROTO(struct folio *old_folio, struct folio *new_folio),
+	TP_ARGS(old_folio, new_folio));
+DECLARE_HOOK(android_vh_look_around,
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct folio *folio,
+		struct vm_area_struct *vma, int *referenced),
+	TP_ARGS(pvmw, folio, vma, referenced));
+DECLARE_HOOK(android_vh_free_unref_page_bypass,
+	TP_PROTO(struct page *page, int order, int migratetype, bool *bypass),
+	TP_ARGS(page, order, migratetype, bypass));
+DECLARE_HOOK(android_vh_kvmalloc_node_use_vmalloc,
+	TP_PROTO(size_t size, gfp_t *kmalloc_flags, bool *use_vmalloc),
+	TP_ARGS(size, kmalloc_flags, use_vmalloc));
+DECLARE_HOOK(android_vh_should_alloc_pages_retry,
+	TP_PROTO(gfp_t gfp_mask, int order, int *alloc_flags,
+	int migratetype, struct zone *preferred_zone, struct page **page, bool *should_alloc_retry),
+	TP_ARGS(gfp_mask, order, alloc_flags,
+		migratetype, preferred_zone, page, should_alloc_retry));
+DECLARE_HOOK(android_vh_unreserve_highatomic_bypass,
+	TP_PROTO(bool force, struct zone *zone, bool *skip_unreserve_highatomic),
+	TP_ARGS(force, zone, skip_unreserve_highatomic));
+DECLARE_HOOK(android_vh_rmqueue_bulk_bypass,
+	TP_PROTO(unsigned int order, struct per_cpu_pages *pcp, int migratetype,
+		struct list_head *list),
+	TP_ARGS(order, pcp, migratetype, list));
+DECLARE_HOOK(android_vh_cma_alloc_retry,
+	TP_PROTO(char *name, int *retry),
+	TP_ARGS(name, retry));
+=======
+DECLARE_HOOK(android_vh_look_around_migrate_folio,
+	TP_PROTO(struct folio *old_folio, struct folio *new_folio),
+	TP_ARGS(old_folio, new_folio));
+DECLARE_HOOK(android_vh_look_around,
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct folio *folio,
+		struct vm_area_struct *vma, int *referenced),
+	TP_ARGS(pvmw, folio, vma, referenced));
+DECLARE_HOOK(android_vh_free_unref_page_bypass,
+	TP_PROTO(struct page *page, int order, int migratetype, bool *bypass),
+	TP_ARGS(page, order, migratetype, bypass));
+DECLARE_HOOK(android_vh_kvmalloc_node_use_vmalloc,
+	TP_PROTO(size_t size, gfp_t *kmalloc_flags, bool *use_vmalloc),
+	TP_ARGS(size, kmalloc_flags, use_vmalloc));
+DECLARE_HOOK(android_vh_should_alloc_pages_retry,
+	TP_PROTO(gfp_t gfp_mask, int order, int *alloc_flags,
+	int migratetype, struct zone *preferred_zone, struct page **page, bool *should_alloc_retry),
+	TP_ARGS(gfp_mask, order, alloc_flags,
+		migratetype, preferred_zone, page, should_alloc_retry));
+DECLARE_HOOK(android_vh_unreserve_highatomic_bypass,
+	TP_PROTO(bool force, struct zone *zone, bool *skip_unreserve_highatomic),
+	TP_ARGS(force, zone, skip_unreserve_highatomic));
+DECLARE_HOOK(android_vh_rmqueue_bulk_bypass,
+	TP_PROTO(unsigned int order, struct per_cpu_pages *pcp, int migratetype,
+		struct list_head *list),
+	TP_ARGS(order, pcp, migratetype, list));
+DECLARE_HOOK(android_vh_thaw_killed_process,
+	TP_PROTO(bool *thaw),
+	TP_ARGS(thaw));
+DECLARE_HOOK(android_vh_cma_alloc_retry,
+	TP_PROTO(char *name, int *retry),
+	TP_ARGS(name, retry));
+>>>>>>> CHANGE (d99139931287a759139a12ca6d0a77ce745d3940 ANDROID: mm: Add vendor hook to thaw the killed process)
 DECLARE_HOOK(android_vh_page_cache_readahead_start,
 	TP_PROTO(struct file *file, pgoff_t pgoff,
 		unsigned int size, bool sync),
