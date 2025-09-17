@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297e0f0a_efebc55f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-17T09:07:23Z",
+      "side": 1,
+      "message": "This release branch change is not a cherry-pick of a submitted change on the development branch (`android15-6.6`). Lookup is done by change ID. This change needs to be abandoned and new cherry-pick created.\n\nCherry-pick creation can be done with `git` or directly in the Gerrit UI. Don\u0027t forget to link the new change to a respin bug.",
+      "revId": "ee7af045f1a8e1a451a0b38832f08d2567f8d08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
