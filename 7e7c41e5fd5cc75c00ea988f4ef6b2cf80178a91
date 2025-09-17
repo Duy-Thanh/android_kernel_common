@@ -45,6 +45,30 @@
       },
       "revId": "7e7c41e5fd5cc75c00ea988f4ef6b2cf80178a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ce7425_33614e3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-17T15:55:21Z",
+      "side": 1,
+      "message": "Ok, I see you filed b/445592514. Please update this to `445592514`",
+      "parentUuid": "7d7fce32_4ffb0bf9",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "7e7c41e5fd5cc75c00ea988f4ef6b2cf80178a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
