@@ -927,6 +927,7 @@
   drm_prime_pages_to_sg
   drm_prime_sg_to_page_array
   drm_printf
+  __drm_printfn_coredump
   __drm_printfn_debug
   __drm_printfn_info
   __drm_printfn_seq_file
@@ -942,6 +943,7 @@
   drm_property_create_signed_range
   drm_property_lookup_blob
   drm_property_replace_blob
+  __drm_puts_coredump
   __drm_puts_seq_file
   drm_read
   drm_rect_clip_scaled
@@ -1181,6 +1183,7 @@
   i2c_find_adapter_by_fwnode
   i2c_find_device_by_fwnode
   i2c_for_each_dev
+  i2c_freq_mode_string
   i2c_generic_scl_recovery
   i2c_get_adapter
   i2c_match_id
@@ -2090,6 +2093,8 @@
   refcount_dec_not_one
   refcount_warn_saturate
   __refrigerator
+  ref_tracker_alloc
+  ref_tracker_free
   regcache_cache_only
   regcache_drop_region
   regcache_mark_dirty
