@@ -126,5 +126,3 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_restore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_before_pick_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_balance_fair);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_chk_task);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_put_task);
