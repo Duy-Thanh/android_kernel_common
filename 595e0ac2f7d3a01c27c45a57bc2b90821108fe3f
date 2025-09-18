@@ -34,6 +34,24 @@
       ],
       "revId": "595e0ac2f7d3a01c27c45a57bc2b90821108fe3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c3d1bb_13213eb4",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1750,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-18T00:52:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3a1bd389_39652679",
+      "revId": "595e0ac2f7d3a01c27c45a57bc2b90821108fe3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
