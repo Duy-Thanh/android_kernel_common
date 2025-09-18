@@ -275,6 +275,8 @@
   __traceiter_android_vh_f2fs_improve_priority
   __tracepoint_android_vh_f2fs_restore_priority
   __traceiter_android_vh_f2fs_restore_priority
+  __traceiter_android_vh_f2fs_set_bio_flag
+  __tracepoint_android_vh_f2fs_set_bio_flag
   __tracepoint_android_vh_io_statistics
   __traceiter_android_vh_io_statistics
   __traceiter_android_vh_ufs_eh_timed_out
@@ -299,8 +301,12 @@
   __traceiter_scsi_dispatch_cmd_done
   __tracepoint_f2fs_write_begin
   __traceiter_f2fs_write_begin
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
   __tracepoint_f2fs_submit_folio_write
   __traceiter_f2fs_submit_folio_write
+||||||| BASE   (76b8e6bb9cad56f4c0dd786efb0c5f8291090df8 ANDROID: vendor_hooks: Refactor f2fs_submit_folio_write and )
+=======
+>>>>>>> CHANGE (cf7ff3af9a9d6cfeff06fbbba033f3e7dbb50f04 ANDROID: relist android_vh_f2fs_printk and android_vh_f2fs_s)
   __tracepoint_android_vh_f2fs_printk
   __traceiter_android_vh_f2fs_printk
   __tracepoint_android_vh_f2fs_create
