@@ -61,6 +61,12 @@ static char *selinux_ima_collect_state(void)
 		WARN_ON(rc >= buf_len);
 	}
 
+	rc = strlcat(buf, "memfd_class", buf_len);
+	WARN_ON(rc >= buf_len);
+
+	rc = strlcat(buf, selinux_memfd_class_policycap ? on : off, buf_len);
+	WARN_ON(rc >= buf_len);
+
 	return buf;
 }
 
