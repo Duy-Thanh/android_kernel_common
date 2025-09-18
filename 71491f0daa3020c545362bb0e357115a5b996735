@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b72d5c3_4bbf3ee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-18T17:20:58Z",
+      "side": 1,
+      "message": "Why not just open code file_ref_get() and use `!atomic_long_add_negative(1, \u0026ref-\u003erefcnt);`? get_file_rcu() has much more there and you are not doing this in the RCU read section.",
+      "range": {
+        "startLine": 22,
+        "startChar": 21,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "71491f0daa3020c545362bb0e357115a5b996735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
