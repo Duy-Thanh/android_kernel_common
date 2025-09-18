@@ -33,6 +33,23 @@
       "message": "Add a description that explains why this is needed",
       "revId": "4d7c7da9803612d7f92572cac0f8bdb0974d12f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82dadcf_6866ad2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-18T16:19:44Z",
+      "side": 1,
+      "message": "Abandon all of the patches in this series and do a proper cherry-pick of the android16-6.12 versions of these patches.",
+      "revId": "4d7c7da9803612d7f92572cac0f8bdb0974d12f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
