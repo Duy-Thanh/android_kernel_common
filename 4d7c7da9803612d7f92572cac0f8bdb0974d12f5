@@ -50,6 +50,23 @@
       "message": "Abandon all of the patches in this series and do a proper cherry-pick of the android16-6.12 versions of these patches.",
       "revId": "4d7c7da9803612d7f92572cac0f8bdb0974d12f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258a2ec7_afebf73d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-18T16:22:26Z",
+      "side": 1,
+      "message": "Can you please use (export) `dma_buf_iter_begin` / `dma_buf_iter_next` instead which are about to be merged in https://r.android.com/3762925",
+      "revId": "4d7c7da9803612d7f92572cac0f8bdb0974d12f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
