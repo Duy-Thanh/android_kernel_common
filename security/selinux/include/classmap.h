@@ -257,6 +257,8 @@ const struct security_class_mapping secclass_map[] = {
 	  { "override_creds", "sqpoll", "cmd", NULL } },
 	{ "user_namespace",
 	  { "create", NULL } },
+	{ "memfd_file",
+	  { COMMON_FILE_PERMS, "execute_no_trans", "entrypoint", NULL } },
 	{ NULL }
   };
 

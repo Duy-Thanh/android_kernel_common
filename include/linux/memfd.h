@@ -4,6 +4,8 @@
 
 #include <linux/file.h>
 
+#define MEMFD_ANON_NAME "[memfd]"
+
 #ifdef CONFIG_MEMFD_CREATE
 extern long memfd_fcntl(struct file *file, unsigned int cmd, unsigned long arg);
 unsigned int *memfd_file_seals_ptr(struct file *file);

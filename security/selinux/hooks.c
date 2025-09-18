@@ -92,6 +92,7 @@
 #include <linux/fsnotify.h>
 #include <linux/fanotify.h>
 #include <linux/io_uring.h>
+#include <linux/memfd.h>
 
 #include "avc.h"
 #include "objsec.h"
@@ -105,6 +106,12 @@
 #include "avc_ss.h"
 
 struct selinux_state selinux_state;
+
+/*
+ * ANDROID: selinux_state is part of the KMI, and adding memfd_class as part of the policycap
+ * array in the structure would break the KMI, so declare it outside.
+ */
+bool selinux_memfd_class_policycap;
 
 /* SECMARK reference count */
 static atomic_t selinux_secmark_refcount = ATOMIC_INIT(0);
@@ -2298,6 +2305,10 @@ static int selinux_bprm_creds_for_exec(struct linux_binprm *bprm)
 	new_tsec = selinux_cred(bprm->cred);
 	isec = inode_security(inode);
 
+	if (WARN_ON(isec->sclass != SECCLASS_FILE &&
+		    isec->sclass != SECCLASS_MEMFD_FILE))
+		return -EACCES;
+
 	/* Default to the current task SID. */
 	new_tsec->sid = old_tsec->sid;
 	new_tsec->osid = old_tsec->sid;
@@ -2339,7 +2350,7 @@ static int selinux_bprm_creds_for_exec(struct linux_binprm *bprm)
 	if (new_tsec->sid == old_tsec->sid) {
 		rc = avc_has_perm(&selinux_state,
 				  old_tsec->sid, isec->sid,
-				  SECCLASS_FILE, FILE__EXECUTE_NO_TRANS, &ad);
+				  isec->sclass, FILE__EXECUTE_NO_TRANS, &ad);
 		if (rc)
 			return rc;
 	} else {
@@ -2352,7 +2363,7 @@ static int selinux_bprm_creds_for_exec(struct linux_binprm *bprm)
 
 		rc = avc_has_perm(&selinux_state,
 				  new_tsec->sid, isec->sid,
-				  SECCLASS_FILE, FILE__ENTRYPOINT, &ad);
+				  isec->sclass, FILE__ENTRYPOINT, &ad);
 		if (rc)
 			return rc;
 
@@ -2955,9 +2966,17 @@ static int selinux_inode_init_security_anon(struct inode *inode,
 	struct common_audit_data ad;
 	struct inode_security_struct *isec;
 	int rc;
+	bool is_memfd = false;
 
 	if (unlikely(!selinux_initialized(&selinux_state)))
 		return 0;
+
+	if (name != NULL && name->name != NULL &&
+	    !strcmp(name->name, MEMFD_ANON_NAME)) {
+		if (!selinux_policycap_memfd_class())
+			return 0;
+		is_memfd = true;
+	}
 
 	isec = selinux_inode(inode);
 
@@ -2978,7 +2997,10 @@ static int selinux_inode_init_security_anon(struct inode *inode,
 		isec->sclass = context_isec->sclass;
 		isec->sid = context_isec->sid;
 	} else {
-		isec->sclass = SECCLASS_ANON_INODE;
+		if (is_memfd)
+			isec->sclass = SECCLASS_MEMFD_FILE;
+		else
+			isec->sclass = SECCLASS_ANON_INODE;
 		rc = security_transition_sid(
 			&selinux_state, tsec->sid, tsec->sid,
 			isec->sclass, name, &isec->sid);
