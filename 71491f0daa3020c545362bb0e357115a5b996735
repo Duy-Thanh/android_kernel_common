@@ -46,6 +46,30 @@
       },
       "revId": "71491f0daa3020c545362bb0e357115a5b996735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9933846_b7161587",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-18T17:30:46Z",
+      "side": 1,
+      "message": "Ah, ok. In that case I think current use is also fine. Up to you.",
+      "parentUuid": "2a96c834_e2e15922",
+      "range": {
+        "startLine": 22,
+        "startChar": 21,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "71491f0daa3020c545362bb0e357115a5b996735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
