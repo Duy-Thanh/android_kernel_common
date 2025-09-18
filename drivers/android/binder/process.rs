@@ -1207,10 +1207,10 @@ impl Process {
             let owner = info.node_ref2().node.owner.clone();
             let mut owner_inner = owner.inner.lock();
             if owner_inner.is_dead {
-                let death = Arc::from(death);
-                *info.death() = Some(death.clone());
+                let death = ListArc::from(death);
+                *info.death() = Some(death.clone_arc());
                 drop(owner_inner);
-                death.set_dead();
+                let _ = self.push_work(death);
             } else {
                 let death = ListArc::from(death);
                 *info.death() = Some(death.clone_arc());

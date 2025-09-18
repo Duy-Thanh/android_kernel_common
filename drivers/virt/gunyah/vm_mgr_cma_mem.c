@@ -19,8 +19,7 @@ struct gunyah_cma {
 	struct page *page;
 	struct miscdevice miscdev;
 	struct list_head list;
-	unsigned long max_size;
-	unsigned long mapped_size;
+	unsigned long size;
 };
 
 struct gunyah_cma_parent {
@@ -56,19 +55,14 @@ static int gunyah_cma_alloc(struct gunyah_cma *cma, loff_t len)
 	if (!cma->page)
 		return -ENOMEM;
 
-	if (len < max_size)
-		dev_dbg(&cma->dev, "client mapped %lld bytes, less than max %lld bytes\n",
-			len, max_size);
-
-	cma->mapped_size = len;
-
 	return 0;
 }
 
 static int gunyah_cma_release(struct inode *inode, struct file *file)
 {
 	struct gunyah_cma *cma = file->private_data;
-	unsigned int count = PAGE_ALIGN(cma->mapped_size) >> PAGE_SHIFT;
+	loff_t max_size = i_size_read(file_inode(cma->file));
+	unsigned int count = PAGE_ALIGN(max_size) >> PAGE_SHIFT;
 
 	if (!cma->page)
 		return 0;
@@ -284,7 +278,7 @@ static long gunyah_cma_create_mem_fd(struct gunyah_cma *cma)
 	inode = file->f_inode;
 	inode->i_mode |= S_IFREG;
 	/* Platform specific size of CMA per VM */
-	i_size_write(inode, cma->max_size);
+	i_size_write(inode, cma->size);
 
 	file->f_flags |= O_LARGEFILE;
 	file->f_mapping = inode->i_mapping;
@@ -399,7 +393,7 @@ static int gunyah_cma_probe(struct platform_device *pdev)
 			dev_err(dev, "Failed to find reserved memory for %s\n", mem_name[i]);
 			goto err_device;
 		}
-		cma->max_size = rmem->size;
+		cma->size = rmem->size;
 		cma->page = NULL;
 		list_add(&cma->list, &pcma->gunyah_cma_children);
 		dev_dbg(dev, "Created a reserved cma pool for %s\n", mem_name[i]);

@@ -911,8 +911,7 @@ static void blk_complete_request(struct request *req)
 		/* Completion has already been traced */
 		bio_clear_flag(bio, BIO_TRACE_COMPLETION);
 
-		if (blk_req_bio_is_zone_append(req, bio))
-			blk_zone_append_update_request_bio(req, bio);
+		blk_zone_update_request_bio(req, bio);
 
 		if (!is_flush)
 			bio_endio(bio);
@@ -1011,8 +1010,7 @@ bool blk_update_request(struct request *req, blk_status_t error,
 
 		/* Don't actually finish bio if it's part of flush sequence */
 		if (!bio->bi_iter.bi_size) {
-			if (blk_req_bio_is_zone_append(req, bio))
-				blk_zone_append_update_request_bio(req, bio);
+			blk_zone_update_request_bio(req, bio);
 			if (!is_flush)
 				bio_endio(bio);
 		}
@@ -1546,17 +1544,19 @@ static void blk_mq_requeue_work(struct work_struct *work)
 
 	while (!list_empty(&rq_list)) {
 		rq = list_entry(rq_list.next, struct request, queuelist);
-		list_del_init(&rq->queuelist);
 		/*
-		 * If RQF_DONTPREP is set, the request has been started by the
+		 * If RQF_DONTPREP ist set, the request has been started by the
 		 * driver already and might have driver-specific data allocated
 		 * already.  Insert it into the hctx dispatch list to avoid
 		 * block layer merges for the request.
 		 */
-		if (rq->rq_flags & RQF_DONTPREP)
+		if (rq->rq_flags & RQF_DONTPREP) {
+			list_del_init(&rq->queuelist);
 			blk_mq_request_bypass_insert(rq, 0);
-		else
+		} else {
+			list_del_init(&rq->queuelist);
 			blk_mq_insert_request(rq, BLK_MQ_INSERT_AT_HEAD);
+		}
 	}
 
 	while (!list_empty(&flush_list)) {

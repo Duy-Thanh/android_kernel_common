@@ -3570,9 +3570,11 @@ static void addrconf_gre_config(struct net_device *dev)
 
 	ASSERT_RTNL();
 
-	idev = addrconf_add_dev(dev);
-	if (IS_ERR(idev))
+	idev = ipv6_find_idev(dev);
+	if (IS_ERR(idev)) {
+		pr_debug("%s: add_dev failed\n", __func__);
 		return;
+	}
 
 	/* Generate the IPv6 link-local address using addrconf_addr_gen(),
 	 * unless we have an IPv4 GRE device not bound to an IP address and
@@ -3586,6 +3588,9 @@ static void addrconf_gre_config(struct net_device *dev)
 	}
 
 	add_v4_addrs(idev);
+
+	if (dev->flags & IFF_POINTOPOINT)
+		addrconf_add_mroute(dev);
 }
 #endif
 
