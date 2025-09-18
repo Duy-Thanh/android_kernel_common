@@ -16,6 +16,23 @@
       "message": "This  patch is not in Linux mainline, so it is not UPSTREAM. Please comply to the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3807da6d_d3f2fe90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-18T17:12:03Z",
+      "side": 1,
+      "message": "You must not change any UAPI values. Period. These must match the upstream values (and they must have landed upstream before we can take them)",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
