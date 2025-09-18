@@ -405,7 +405,7 @@ retry:
 		}
 		WARN_ON(ret);
 
-		unpin_user_pages_dirty_lock(&ppage->_page, 1, true);
+		pkvm_release_ppage(ppage, true);
 		next = kvm_pinned_pages_iter_next(ppage, 0, ~(0UL));
 		kvm_pinned_pages_remove(ppage, &host_kvm->arch.pkvm.pinned_pages);
 		pages += 1 << ppage->order;
@@ -757,7 +757,7 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 		return;
 
 	account_locked_vm(mm, 1 << ppage->order, false);
-	unpin_user_pages_dirty_lock(&ppage->_page, 1, true);
+	pkvm_release_ppage(ppage, true);
 	kfree(ppage);
 }
 
