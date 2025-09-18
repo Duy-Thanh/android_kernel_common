@@ -33,6 +33,23 @@
       "message": "You must not change any UAPI values. Period. These must match the upstream values (and they must have landed upstream before we can take them)",
       "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0272b665_c0e40b09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-09-18T21:09:01Z",
+      "side": 1,
+      "message": "This code is CFG80211 which we don\u0027t build nor test, so we can\u0027t take this patch. This is not code that would run via GKI.",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
