@@ -64,3 +64,13 @@ type 'struct usb_device' changed
   'struct tracepoint __tracepoint_android_vh_f2fs_printk'
   'struct tracepoint __tracepoint_f2fs_submit_folio_write'
 
+3 function symbol(s) changed
+  'int __traceiter_ufshcd_profile_clk_gating(void*, struct ufs_hba*, const char*, s64, int)'
+  'int __traceiter_ufshcd_profile_clk_scaling(void*, struct ufs_hba*, const char*, s64, int)'
+  'int __traceiter_ufshcd_profile_hibern8(void*, struct ufs_hba*, const char*, s64, int)'
+
+type 'struct ufs_hba' changed
+  member 'struct mutex pm_qos_mutex' was added
+  2 members ('int critical_health_count' .. 'atomic_t dev_lvl_exception_count') changed
+  2 members ('u64 dev_lvl_exception_id' .. 'u64 android_oem_data1') changed
+
