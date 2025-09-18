@@ -16,6 +16,24 @@
       "message": "should we be able to drop some lines from allowed_breaks now?",
       "revId": "bdeefc1b1c995fac6c8e16a08e7980dbe99c8ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c46ed7_d80bf235",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-18T09:11:24Z",
+      "side": 1,
+      "message": "The `allowed_breaks` entries are part of the \"delist\" commit. When we cherry pick it to a release branch, they will suppress ABI compatibility findings. So they are still needed.\n\nThey also serve as an audit trail of sorts.\n\nIf we need to delist the same symbol twice, then we are really not doing things well.",
+      "parentUuid": "e16a128e_01778a4b",
+      "revId": "bdeefc1b1c995fac6c8e16a08e7980dbe99c8ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
