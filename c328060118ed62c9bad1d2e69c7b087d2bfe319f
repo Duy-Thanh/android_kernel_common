@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd22a9b_83fed412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2025-09-19T09:24:15Z",
+      "side": 1,
+      "message": "Hi sirs,\n\nYuanchao refactored the patch based on Bart\u0027s suggestion, so that there is no break KMI. Is this modification acceptable? Please review it.\n\nThank you for your review",
+      "revId": "c328060118ed62c9bad1d2e69c7b087d2bfe319f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
