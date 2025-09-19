@@ -16,6 +16,24 @@
       "message": "Please addrees the KernelCOmmit error by filing a respin request",
       "revId": "6d4a8424d2eeb4b80888086c1c9b27a58e756d14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad86ee1f_b78dbbf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4300331
+      },
+      "writtenOn": "2025-09-19T10:03:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23dae35f_855802b3",
+      "revId": "6d4a8424d2eeb4b80888086c1c9b27a58e756d14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
