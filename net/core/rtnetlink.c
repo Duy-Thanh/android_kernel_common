@@ -1934,7 +1934,10 @@ static int rtnl_fill_ifinfo(struct sk_buff *skb,
 
 	if (rtnl_fill_prop_list(skb, dev))
 		goto nla_put_failure;
-
+	if (dev->dev.parent->kobj.name != NULL)
+		printk("Parent name = %s\n", dev_name(dev->dev.parent));
+	else
+		printk("Parent name = NULL\n");
 	if (dev->dev.parent &&
 	    nla_put_string(skb, IFLA_PARENT_DEV_NAME,
 			   dev_name(dev->dev.parent)))
