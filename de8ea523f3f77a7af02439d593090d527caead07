@@ -16,6 +16,24 @@
       "message": "The upstream change has merged: https://android-review.git.corp.google.com/c/kernel/common/+/3765284\n\nCan we land this in 6.12 as well?",
       "revId": "de8ea523f3f77a7af02439d593090d527caead07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d7fbd2_51b99631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-19T05:28:33Z",
+      "side": 1,
+      "message": "Yes, we can. See the unresolved comment, once my",
+      "parentUuid": "4f08f02c_9cff970f",
+      "revId": "de8ea523f3f77a7af02439d593090d527caead07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
