@@ -214,6 +214,30 @@
       },
       "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9062285d_bec1073b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-19T05:29:57Z",
+      "side": 1,
+      "message": "You can now add `Bypass-Upstream-Divergence-Tracking` tag to the commit message to make linter happy",
+      "parentUuid": "af972730_a94df8f3",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "84d3e53e335bae67c06d9a1b2c9a42ff5aec95fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
