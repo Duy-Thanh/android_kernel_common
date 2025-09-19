@@ -16,6 +16,23 @@
       "message": "Please fix this ERROR reported by KernelCommit: Commit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry pi...\n\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "962357751f430c6475ea24f555024154730fc9a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893e6fb7_79c29c46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-19T19:33:41Z",
+      "side": 1,
+      "message": "For BACKPORT: patches its good to add an annotation before your Signed-off-by line clarifying how you modified the patch. Usually in form of:\n\n[xiayuanchao: Refactored the patch based on Bart\u0027s suggestion to preserve KMI by...\u003cmore details here\u003e]",
+      "revId": "962357751f430c6475ea24f555024154730fc9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
