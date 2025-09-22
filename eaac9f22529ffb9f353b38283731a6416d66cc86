@@ -16,6 +16,24 @@
       "message": "do not merge yet.",
       "revId": "eaac9f22529ffb9f353b38283731a6416d66cc86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d2879a_518c843e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-09-22T22:28:11Z",
+      "side": 1,
+      "message": "I spoke with @joneslee@google.com about merging the LTS updates and he was okay with it, so resolving this comment.",
+      "parentUuid": "9cfc66cb_27657392",
+      "revId": "eaac9f22529ffb9f353b38283731a6416d66cc86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
