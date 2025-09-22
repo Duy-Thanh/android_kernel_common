@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c82a4fa_0e3fa1ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-09-22T15:59:58Z",
+      "side": 1,
+      "message": "I think the `Fixes:` line should be the same as in the upstream commit.",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
