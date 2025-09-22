@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84630bb9_81fac60f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-22T17:20:16Z",
+      "side": 1,
+      "message": "Why was this changed to ANDROID? \nIt looks like this should be \"BACKPORT: FROMLIST: \" instead?",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d59848_29045ee4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-22T17:20:16Z",
+      "side": 1,
+      "message": "Would be good to update the link to the latest version of the patch (which matches the submission):\nhttps://lore.kernel.org/all/20250917094143.88055-1-zhongqiu.han@oss.qualcomm.com/",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0952a251_acfbc794",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-09-22T17:20:16Z",
+      "side": 1,
+      "message": "Style nit, usually this is done in brackets. \"[Yuanchao Xia: Refactored the... ]\".\n\nNot something that will block merging, but just for future reference.",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c82a4fa_0e3fa1ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
