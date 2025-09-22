@@ -34,6 +34,24 @@
       "parentUuid": "cc183ea1_00b1de29",
       "revId": "06bfe1f4385255691a328c90bceb02f5be7ce956",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4c8264_81e0cefe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-09-22T12:03:50Z",
+      "side": 1,
+      "message": "We\u0027ve synced offline with Andrei and Abishek and decided to merge it as this is the critical feature we want to test.\n\nThe upstream is currently a high priority for Andrei. To not block the feature testing anymore, let\u0027s tag and merge it.",
+      "parentUuid": "a2b69095_02de6010",
+      "revId": "06bfe1f4385255691a328c90bceb02f5be7ce956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
