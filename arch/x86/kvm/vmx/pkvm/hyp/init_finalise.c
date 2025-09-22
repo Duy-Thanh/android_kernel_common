@@ -320,9 +320,15 @@ static bool pkvm_setup_done __ro_after_init;
  */
 static bool pkvm_initialized __ro_after_init;
 
+static bool is_pkvm_initialized(void)
+{
+	/* Pairs with smp_store_release() in pkvm_commit_finalise(). */
+	return smp_load_acquire(&pkvm_initialized);
+}
+
 int pkvm_reprivilege_vcpu(struct kvm_vcpu *vcpu)
 {
-	if (pkvm_initialized) {
+	if (is_pkvm_initialized()) {
 		pkvm_err("reprivilege request after pkvm initialization is not allowed!\n");
 		return -EPERM;
 	}
@@ -364,13 +370,15 @@ static void pkvm_undo_finalise(void)
 
 int pkvm_commit_finalise(bool success)
 {
-	if (pkvm_initialized) {
+	if (is_pkvm_initialized()) {
 		pkvm_err("init commit request after pkvm initialization is not allowed!\n");
 		return -EPERM;
 	}
 
 	if (success) {
-		pkvm_initialized = true;
+		/* Pairs with smp_load_acquire() in is_pkvm_initialized(). */
+		smp_store_release(&pkvm_initialized, true);
+
 		/*
 		 * TODO: Move reprivilege logic and undo_finalize
 		 * to a separate section and zero it out here.
@@ -392,7 +400,7 @@ int __pkvm_init_finalise(struct kvm_vcpu *vcpu, struct pkvm_section sections[],
 	struct pkvm_section tmp_sections[TMP_SECTION_SZ];
 	u64 eptp;
 
-	if (pkvm_initialized) {
+	if (is_pkvm_initialized()) {
 		pkvm_err("INIT_FINALISE hypercall after pkvm initialization is not allowed!\n");
 		return -EPERM;
 	}
