@@ -16,6 +16,23 @@
       "message": "Hi, could you please review this submission for me as soon as possible?",
       "revId": "874765b492db153bbf49c2600c18b0f50b13169d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b0b4a83_e58856ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4323649
+      },
+      "writtenOn": "2025-09-22T02:58:54Z",
+      "side": 1,
+      "message": "repo init --partial-clone --no-use-superproject -b android-latest-release -u https://android.googlesource.com/platform/manifest",
+      "revId": "874765b492db153bbf49c2600c18b0f50b13169d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
