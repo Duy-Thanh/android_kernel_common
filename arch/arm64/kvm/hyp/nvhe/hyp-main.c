@@ -37,8 +37,8 @@
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
 /*
- * Holds one request only, in theory we can compress more, but
- * typically HVC returns on first failure.
+ * Holds one request only, in theory we can compress more, but typically HVC
+ * returns on first failure.
  */
 DEFINE_PER_CPU(struct kvm_hyp_req, host_hyp_reqs);
 
