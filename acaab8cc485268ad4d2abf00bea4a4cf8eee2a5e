@@ -70,6 +70,24 @@
       "parentUuid": "849adc3e_726aa37c",
       "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3120ce11_31eedeff",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-09-23T08:26:39Z",
+      "side": 1,
+      "message": "I propose to:\n\n1. Use the allowed_breaks file for x86-64 if it comes from android16-6.12 - it\u0027s easy to fix the linter error this way directly from the UI\n2. Do not use it if it\u0027s desktop specific ABI breakage - we have a different process for that documented in go/al-kernel-abi-fix\n\nTim, please resolve the comment if you\u0027re fine with the proposed approach - I\u0027ll update the relevant docs accordingly.",
+      "parentUuid": "d14a0d3b_5c823d05",
+      "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
