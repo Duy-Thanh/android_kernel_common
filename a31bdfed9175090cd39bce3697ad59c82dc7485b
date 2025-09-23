@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e056756_572b8312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-23T13:53:55Z",
+      "side": 1,
+      "message": "Just curious if you had considered using a struct to consolidate the params to the hypercall and use existing versions of hypercall. That could probably avoid the biolerplate code in this and next cl and also avoid size mismatch of the parameters",
+      "revId": "a31bdfed9175090cd39bce3697ad59c82dc7485b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
