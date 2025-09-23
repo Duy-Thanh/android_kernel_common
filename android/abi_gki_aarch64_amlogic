@@ -2411,6 +2411,7 @@
   thermal_cooling_device_unregister
   thermal_of_cooling_device_register
   thermal_zone_bind_cooling_device
+  thermal_zone_device_critical
   thermal_zone_device_disable
   thermal_zone_device_enable
   thermal_zone_device_register
