@@ -52,6 +52,24 @@
       "parentUuid": "1e30ab90_8b6fabea",
       "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14a0d3b_5c823d05",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-23T08:19:06Z",
+      "side": 1,
+      "message": "We aligned offline - the very same change is added to aarch64 so this is not something new but rather a clean merge conflict resolution. I\u0027m not sure if we want to use it for new symbols but given that here we just align to android I\u0027m fine with that",
+      "parentUuid": "849adc3e_726aa37c",
+      "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
