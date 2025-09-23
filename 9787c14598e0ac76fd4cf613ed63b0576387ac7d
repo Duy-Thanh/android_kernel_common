@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06260054_54134356",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-23T19:47:43Z",
+      "side": 1,
+      "message": "We should add a check on index to address Jann\u0027s comment in https://buganizer.corp.google.com/issues/446573436#comment10",
+      "fixSuggestions": [
+        {
+          "fixId": "5d48c4e7_c1fff598",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (unlikely(index \u003e\u003d zram-\u003elimit))\n\t\t\tcontinue;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80b48e9e_3b03faf3",
         "filename": "drivers/block/zram/zram_ioctl.c",
         "patchSetId": 2
