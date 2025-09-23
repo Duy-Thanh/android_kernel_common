@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50c9a74b_b0605b6e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-09-23T20:23:00Z",
+      "side": 1,
+      "message": "Let\u0027s have this fix as separate patch.",
+      "parentUuid": "737aa0da_09394bbe",
+      "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80b48e9e_3b03faf3",
         "filename": "drivers/block/zram/zram_ioctl.c",
         "patchSetId": 2
@@ -91,6 +109,30 @@
           ]
         }
       ],
+      "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bdb3f6_803b905c",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-09-23T20:23:00Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "80b48e9e_3b03faf3",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 0
+      },
       "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
