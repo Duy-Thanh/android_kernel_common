@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "8f01393473d15307a5db492c7ee1b8df8650a6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbca2a1a_1634ea0f",
+        "filename": "drivers/power/supply/power_supply_core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2025-09-23T17:43:42Z",
+      "side": 1,
+      "message": "Why this change? Seems unrelated to the of_node -\u003e fwnode change. Am I mistaken?",
+      "range": {
+        "startLine": 563,
+        "startChar": 15,
+        "endLine": 563,
+        "endChar": 25
+      },
+      "revId": "8f01393473d15307a5db492c7ee1b8df8650a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
