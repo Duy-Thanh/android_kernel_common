@@ -109,8 +109,7 @@ static int zram_ioctl_process_writeback_scan(struct zram *zram,
 	if (IS_ERR(task))
 		return PTR_ERR(task);
 
-	/* Require PTRACE_MODE_READ to avoid leaking ASLR metadata. */
-	mm = mm_access(task, PTRACE_MODE_READ_FSCREDS);
+	mm = get_task_mm(task);
 	if (IS_ERR_OR_NULL(mm)) {
 		ret = IS_ERR(mm) ? PTR_ERR(mm) : -ESRCH;
 		goto release_task;
