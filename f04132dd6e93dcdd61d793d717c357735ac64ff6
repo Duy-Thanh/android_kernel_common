@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af2f972_f369f080",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2025-09-23T02:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84630bb9_81fac60f",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90d59848_29045ee4",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-22T17:20:16Z",
       "side": 1,
       "message": "Would be good to update the link to the latest version of the patch (which matches the submission):\nhttps://lore.kernel.org/all/20250917094143.88055-1-zhongqiu.han@oss.qualcomm.com/",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "822a8072_1d17db3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2025-09-23T02:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90d59848_29045ee4",
       "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa69477f_39a495d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2025-09-23T02:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0952a251_acfbc794",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c82a4fa_0e3fa1ea",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-09-22T15:59:58Z",
       "side": 1,
       "message": "I think the `Fixes:` line should be the same as in the upstream commit.",
+      "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "def07f5c_ada13f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2025-09-23T02:57:00Z",
+      "side": 1,
+      "message": "I used BACKPORT: FROMLIST: instead, please review again",
+      "parentUuid": "8c82a4fa_0e3fa1ea",
       "revId": "f04132dd6e93dcdd61d793d717c357735ac64ff6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
