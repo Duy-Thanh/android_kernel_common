@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8780b02c_1f95c132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-09-23T16:43:54Z",
+      "side": 1,
+      "message": "Note: This is an upstream bug in the handling of fine grain traps for these registers. I have a fix upstream, but this one, which reverts the old behavior, is the safer fix.",
+      "revId": "ad914b55d074198c7587bc8294c826a34e23b73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
