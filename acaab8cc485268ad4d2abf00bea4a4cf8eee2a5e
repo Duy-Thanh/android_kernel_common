@@ -88,6 +88,24 @@
       "parentUuid": "d14a0d3b_5c823d05",
       "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7516d7c_bf08f018",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-09-23T16:15:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3120ce11_31eedeff",
+      "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
