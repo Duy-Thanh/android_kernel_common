@@ -34,6 +34,24 @@
       "parentUuid": "4ae1b73a_6915d2b1",
       "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849adc3e_726aa37c",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-09-23T07:50:32Z",
+      "side": 1,
+      "message": "Without this change, the linter is failing - there was a \"fix\" button in the gerrit - I\u0027ve clicked it and it automatically updated this file with such change (the same was originally done for arm64).",
+      "parentUuid": "1e30ab90_8b6fabea",
+      "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
