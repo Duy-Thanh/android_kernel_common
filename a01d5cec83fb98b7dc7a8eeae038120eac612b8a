@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2225d5eb_4e4bd1c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-09-23T12:52:31Z",
+      "side": 1,
+      "message": "The order of the tags in the footer is wrong. Please make sure that all tags from the upstream patch (e.g. my Reviewed-by) occur before any tags that have been added later (e.g. Bug:).",
+      "revId": "a01d5cec83fb98b7dc7a8eeae038120eac612b8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
