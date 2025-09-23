@@ -16,6 +16,24 @@
       "message": "THe latest I heard was to skip updating this file and just update the `.stg` instead (which is why this file is currently empty).\n\n@urbanczyk@google.com may know more though.",
       "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e30ab90_8b6fabea",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-09-23T05:40:48Z",
+      "side": 1,
+      "message": "That\u0027s right, any reason we need to generate this file? AFAIK we can get around without changing it",
+      "parentUuid": "4ae1b73a_6915d2b1",
+      "revId": "acaab8cc485268ad4d2abf00bea4a4cf8eee2a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
