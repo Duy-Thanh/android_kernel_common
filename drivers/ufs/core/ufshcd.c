@@ -495,6 +495,8 @@ static void ufshcd_add_command_trace(struct ufs_hba *hba, unsigned int tag,
 
 	if (is_mcq_enabled(hba)) {
 		struct ufs_hw_queue *hwq = ufshcd_mcq_req_to_hwq(hba, rq);
+		if (!hwq)
+			return;
 
 		hwq_id = hwq->id;
 	} else {
