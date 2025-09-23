@@ -39,6 +39,30 @@
       },
       "revId": "8f01393473d15307a5db492c7ee1b8df8650a6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b79d4c_c5b8e4cc",
+        "filename": "drivers/power/supply/power_supply_core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-09-23T17:51:19Z",
+      "side": 1,
+      "message": "Correct! I just noticed that it was one of the only changes in the 1-psy function ([power_supply_get_by_phandle](https://elixir.bootlin.com/linux/v6.16/source/drivers/power/supply/power_supply_core.c#L535)) since `power_supply_get_by_phandle_array` had been written (by looking at the old definition in the original change), so I figured it was probably an optimization of some sort. I should have checked the history to make sure though!",
+      "parentUuid": "cbca2a1a_1634ea0f",
+      "range": {
+        "startLine": 563,
+        "startChar": 15,
+        "endLine": 563,
+        "endChar": 25
+      },
+      "revId": "8f01393473d15307a5db492c7ee1b8df8650a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
