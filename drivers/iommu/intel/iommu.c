@@ -914,6 +914,126 @@ next:
 				   (void *)++last_pte - (void *)first_pte);
 }
 
+#ifdef CONFIG_PKVM_INTEL_PVIOMMU
+static void pv_domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
+			 unsigned long last_pfn, struct list_head *freelist)
+{
+	union pkvm_iommu_page_donation *donation;
+	unsigned long flags;
+	int nr_pages;
+	int i = 0;
+
+	if (WARN_ON(!pkvm_pviommu_enabled()))
+		return;
+
+	local_irq_save(flags);
+	donation = (union pkvm_iommu_page_donation *)this_cpu_ptr(&iommu_page_donation);
+	nr_pages = donation->nr_pages;
+
+	pkvm_hc_iommu_unmap_pages(virt_to_phys(domain->pgd), start_pfn, last_pfn);
+	pr_debug("IOMMU: %s donated_pages: %d, returning %d pages to gatherlist\n",
+			__func__, (int)donation->nr_pages, (int)donation->nr_pages - nr_pages);
+
+	/*
+	 * Add all the pages relased by unmap hypercall to freelist.
+	 * But if we are exiting the domain, free all the pages.
+	 */
+	if (start_pfn == 0 && last_pfn == DOMAIN_MAX_PFN(domain->gaw)) {
+		nr_pages = 0;
+	}
+	for (i = donation->nr_pages - 1; i >= nr_pages; donation->nr_pages--, i--) {
+		struct page *pg = pfn_to_page(donation->pages[i] >> PAGE_SHIFT);
+		list_add_tail(&pg->lru, freelist);
+	}
+	local_irq_restore(flags);
+}
+
+static int hardware_largepage_caps(struct dmar_domain *domain, unsigned long iov_pfn,
+				   unsigned long phy_pfn, unsigned long pages);
+static int pv_domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
+		 unsigned long phys_pfn, unsigned long nr_pages, int prot, int gfp)
+{
+	int lvl = hardware_largepage_caps(domain, iov_pfn, phys_pfn, nr_pages);
+	int max_lvl = agaw_to_level(domain->agaw);
+	struct pkvm_iommu_map_param param = { 0 };
+	union pkvm_iommu_page_donation *donation;
+	unsigned long flags;
+	int nr_alloc_pages;
+	int ret = 0, i;
+
+	if (WARN_ON(!pkvm_pviommu_enabled()))
+		return -EINVAL;
+
+	/*
+	 * max number of pages needed to create pagetable entries for nr_pages is
+	 * nr_pages / ((512 * (nr_pages pointed by an entry at lvl)) + max_lvl)
+	 * where:
+	 * lvl is the leaf level for this mapping(considering super page support)
+	 * max_lvl is the maximum supported page table levels for this domain.
+	 * 512(2^LEVEL_STRIDE) is the number of pages pointed by last level pagetable.
+	 *
+	 * This is a bit of overcounting to be on the safe side.
+	 */
+	nr_alloc_pages = (nr_pages >> (fls(lvl_to_nr_pages(lvl) << LEVEL_STRIDE) - 1)) + max_lvl;
+	if (nr_alloc_pages > PKVM_MAX_NR_DONATED_PAGES) {
+		pr_debug("iommu: %s: trimming nr_alloc_pages(%d) to %d\n",
+				__func__, nr_alloc_pages, PKVM_MAX_NR_DONATED_PAGES);
+		nr_alloc_pages = PKVM_MAX_NR_DONATED_PAGES;
+	}
+
+	param.pgd_gpa = virt_to_phys(domain->pgd);
+	param.iov_pfn = iov_pfn;
+	param.phys_pfn = phys_pfn;
+	param.nr_pages = nr_pages;
+	param.prot = prot;
+
+	local_irq_save(flags);
+	donation = (union pkvm_iommu_page_donation *)this_cpu_ptr(&iommu_page_donation);
+
+	for (i = donation->nr_pages; i < nr_alloc_pages; i++) {
+		/*
+		 * Since preemption is disabled, We should not sleep.
+		 */
+		void *tmp_page = iommu_alloc_page_node(domain->nid, GFP_ATOMIC);
+		if (!tmp_page) {
+			pr_warn("iommu: %s: failed to allocate iommu pagetablei, needs %d more pages\n",
+					__func__, nr_alloc_pages - i);
+			/*
+			 * Lets continue with the map hypercall. There is a chance
+			 * that the map will succeed because of pagetables already
+			 * in place.
+			 */
+			break;
+		}
+		donation->pages[i] = virt_to_phys(tmp_page);
+	}
+
+	donation->nr_pages = i;
+	ret = pkvm_hc_iommu_map_pages(&param);
+	if (donation->nr_pages < 0) {
+		donation->nr_pages = 0;
+		pr_warn("iommu: %s: pkvm needs more pages to map[iov_pfn: %lx, phys_pfn: %lx, nr_pages: %lu]!\n",
+				__func__, iov_pfn, phys_pfn, nr_pages);
+		/*
+		 * TODO: Retry if pkvm needs more pages.
+		 */
+		ret = -ENOMEM;
+	}
+	local_irq_restore(flags);
+
+	return ret;
+}
+#else
+static inline void pv_domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
+			 unsigned long last_pfn, struct list_head *freelist) {}
+
+static int pv_domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
+		 unsigned long phys_pfn, unsigned long nr_pages, int prot, int gfp)
+{
+	return 0;
+}
+#endif
+
 /* We can't just free the pages because the IOMMU may still be walking
    the page tables, and may have cached the intermediate levels. The
    pages can only be freed after the IOTLB flush has been done. */
@@ -923,6 +1043,11 @@ static void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 	if (WARN_ON(!domain_pfn_supported(domain, last_pfn)) ||
 	    WARN_ON(start_pfn > last_pfn))
 		return;
+
+	if (pkvm_pviommu_enabled()) {
+		pv_domain_unmap(domain, start_pfn, last_pfn, freelist);
+		return;
+	}
 
 	/* we don't need lock here; nobody else touches the iova range */
 	dma_pte_clear_level(domain, agaw_to_level(domain->agaw),
@@ -1666,6 +1791,10 @@ __domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
 	}
 
 	domain->has_mappings = true;
+
+	if (pkvm_pviommu_enabled()) {
+		return pv_domain_mapping(domain, iov_pfn, phys_pfn, nr_pages, prot, gfp);
+	}
 
 	pteval = ((phys_addr_t)phys_pfn << VTD_PAGE_SHIFT) | attr;
 

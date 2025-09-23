@@ -462,7 +462,16 @@ static int domain_translation_struct_show(struct seq_file *m,
 
 		seq_printf(m, "%-17s\t%-18s\t%-18s\t%-18s\t%-18s\t%-s\n",
 			   "IOVA_PFN", "PML5E", "PML4E", "PDPE", "PDE", "PTE");
-		pgtable_walk_level(m, phys_to_virt(pgd), agaw + 2, 0, path);
+
+		/*
+		 * TODO: fix !pgd case.
+		 */
+		if (!pkvm_pviommu_enabled())
+			pgtable_walk_level(m, phys_to_virt(pgd), agaw + 2, 0, path);
+		/*
+		 * If the seq_file buffer  overflowed, we will be called once again.
+		 * Lets not do pkvm print here.
+		 */
 
 		found = true;
 iommu_unlock:
