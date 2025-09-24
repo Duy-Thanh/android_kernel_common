@@ -51,6 +51,24 @@
       "message": "This is a tristate config, why can\u0027t it be either \"\u003dm\" or a vendor module? You say _`typec_thunderbolt` driver should be built-in, but give no rationale for why. Why should it be built-in when the GKI kernel is being used on a device that doesn\u0027t require this config?",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76788da7_24f4dba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-24T16:07:51Z",
+      "side": 1,
+      "message": "...does \"mode selection\" occur before 1st stage init when drivers can be loaded? Doesn\u0027t seem likely...",
+      "parentUuid": "02a5ad8d_3ca633d0",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
