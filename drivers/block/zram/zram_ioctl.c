@@ -55,10 +55,12 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 	struct zram *zram = private->zram;
 	struct zram_pp_ctl *pp_ctl = private->pp_ctl;
 	struct vm_area_struct *vma = walk->vma;
+	struct swap_info_struct *sis;
 	pte_t *ptep, pte;
 	swp_entry_t entry;
 	spinlock_t *ptl;
 	unsigned long addr;
+	u64 nr_pages = zram->disksize >> PAGE_SHIFT;
 	u32 index;
 
 	for (addr = start; addr < end; addr += PAGE_SIZE) {
@@ -75,7 +77,15 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 		if (unlikely(non_swap_entry(entry)))
 			continue;
 
+		sis = swp_swap_info(entry);
+		if (unlikely(!sis))
+			continue;
+		if (unlikely(sis->bdev != zram->disk->part0))
+			continue;
+
 		index = swp_offset(entry);
+		if (unlikely(index >= nr_pages))
+			continue;
 
 		/* Use PAGE_WRITEBACK for single index */
 		scan_slots_for_writeback(zram, 0, index, index+1, pp_ctl);
