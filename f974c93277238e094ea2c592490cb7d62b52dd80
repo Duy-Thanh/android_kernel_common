@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c9bfb3_7c361f3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-24T09:48:00Z",
+      "side": 1,
+      "message": "Just a question related to the HOST_INIT_MMU/HOST_RESET_MMU request for the host to init/reset the mmu when the guest changes some bits in cr0/cr4/efer. Now with PV MMU, do you see if we still need these two requests?",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
