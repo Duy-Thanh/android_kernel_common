@@ -16,6 +16,24 @@
       "message": "why isn\u0027t this also needed for arm64?",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e8d198_0cc4f805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2025-09-24T14:02:42Z",
+      "side": 1,
+      "message": "We don\u0027t plan to use TBT on arm64 platforms, at least not yet. Only x86.",
+      "parentUuid": "e8800a6c_11e6cb1d",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
