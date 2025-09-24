@@ -34,6 +34,23 @@
       "parentUuid": "e8800a6c_11e6cb1d",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a5ad8d_3ca633d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-24T16:06:18Z",
+      "side": 1,
+      "message": "This is a tristate config, why can\u0027t it be either \"\u003dm\" or a vendor module? You say _`typec_thunderbolt` driver should be built-in, but give no rationale for why. Why should it be built-in when the GKI kernel is being used on a device that doesn\u0027t require this config?",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
