@@ -16,6 +16,24 @@
       "message": "LGTM, but will let Bart do the +2",
       "revId": "54a1c2f7df705ccfb3984a619039f94d5f3c6b9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad9a8cd_76fda1b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-09-24T12:55:06Z",
+      "side": 1,
+      "message": "I gave this CL a +1 since I don\u0027t have the ability to give any AOSP CL a +2 review.",
+      "parentUuid": "cec3ef65_a811ea7f",
+      "revId": "54a1c2f7df705ccfb3984a619039f94d5f3c6b9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
