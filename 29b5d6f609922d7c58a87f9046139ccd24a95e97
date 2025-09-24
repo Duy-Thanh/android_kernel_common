@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87781b82_2009be3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T17:35:53Z",
+      "side": 1,
+      "message": "We might want to leverage the `relax_cpu_bugs` flag from aosp/3762336 for this patch as well.\n\nOTOH, this iTLB multihit bug, IIUC, may only result on in a DoS of the physical machine by a guest (a reboot due to a machine check error), so it is a host\u0027s concern but not a pKVM hypervisor\u0027s concern.",
+      "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2f8f138_835c2776",
@@ -14,6 +31,24 @@
       "writtenOn": "2025-09-24T09:35:10Z",
       "side": 1,
       "message": "kvm_mmu_x86_module_init is called by kvm_x86_init(), which is earlier than vmx_init(). As vmx_init() can set the enable_pkvm to false if deprivilege is failed and now we have re-privilege logic, shall we revert below changes for this case?",
+      "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f779a7c_b9b47759",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 7479,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T17:35:53Z",
+      "side": 1,
+      "message": "Good point. I can probably move this to kvm_mmu_vendor_module_init() for this purpose.",
+      "parentUuid": "d2f8f138_835c2776",
       "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
