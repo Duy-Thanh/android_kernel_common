@@ -1819,19 +1819,24 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
 	vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 
-	if (is_standard_secure_service_call(func_id))
-		return false;
+	if (is_standard_secure_service_call(func_id)) {
+		handled = false;
+		goto guest_handled;
+	}
 
-	if (!vm->kvm.arch.pkvm.smc_forwarded)
-		return false;
+	if (!vm->kvm.arch.pkvm.smc_forwarded) {
+		handled = false;
+		goto guest_handled;
+	}
 
 	memcpy(&regs, &ctxt->regs, sizeof(regs));
 	handled = module_handle_guest_smc(&regs, &res, vm->kvm.arch.pkvm.handle);
 	if (handled)
 		memcpy(&ctxt->regs.regs[0], &res, sizeof(res));
-	else
-		ctxt->regs.regs[0] = -1;
 
+guest_handled:
+	if (!handled)
+		ctxt->regs.regs[0] = -1;
 	__kvm_skip_instr(vcpu);
 
 	return handled;
