@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad47e82_c3cb84e5",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-24T11:12:03Z",
+      "side": 1,
+      "message": "In aosp/3776508.",
+      "parentUuid": "50c9a74b_b0605b6e",
+      "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80b48e9e_3b03faf3",
@@ -127,6 +145,30 @@
       "side": 1,
       "message": "Agree",
       "parentUuid": "80b48e9e_3b03faf3",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "9787c14598e0ac76fd4cf613ed63b0576387ac7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43dbce6a_4915e35c",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-09-24T11:12:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8bdb3f6_803b905c",
       "range": {
         "startLine": 113,
         "startChar": 0,
