@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9175f39_1ec87ab0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T18:55:08Z",
+      "side": 1,
+      "message": "I think we still need them, at least for npVM. I didn\u0027t analyze all that kvm_cpu_role stuff very deeply, but as I understand, it is related mostly not to stage-2 page tables managed by PV MMU but to stage-1 page tables managed by the guest, so we still need it for the same reasons we needed it without PV MMU.\n\nFor instance, this setup in init_kvm_tdp_mmu():\n```\n\tif (!is_cr0_pg(context))\n\t\tcontext-\u003egva_to_gpa \u003d nonpaging_gva_to_gpa;\n\telse if (is_cr4_pae(context))\n\t\tcontext-\u003egva_to_gpa \u003d paging64_gva_to_gpa;\n\telse\n\t\tcontext-\u003egva_to_gpa \u003d paging32_gva_to_gpa;\n```\n\nThis gva_to_gpa() callback is used for things like MMIO emulation for npVM (since decoded instructions contain GVA, not GPA), and it depends on CR0.PG whether it needs to walk guest page tables to translate GVA to GPA, and so on.\n\nAnd these HOST_INIT_MMU/HOST_RESET_MMU requests seem quite simple, and seem to work correctly, so probably no problem to keep them?",
+      "parentUuid": "a6c9bfb3_7c361f3a",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c5f9fd5_3f3b221c",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 17
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "621ccc7e_56d17dca",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T18:55:08Z",
+      "side": 1,
+      "message": "`__PKVM_HYP__` is only enabled when compiling the hypervisor code, not the rest of the kernel code. If pKVM is disabled via command line, it means that this code is compiled but is never executed, so this `#define enable_pkvm` here shouldn\u0027t matter.",
+      "parentUuid": "7c5f9fd5_3f3b221c",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ec4413d_0de42514",
         "filename": "arch/x86/kvm/vmx/vmx.c",
         "patchSetId": 17
@@ -54,6 +96,24 @@
       "writtenOn": "2025-09-24T10:16:30Z",
       "side": 1,
       "message": "Update the printed log by removing \"or flush_remote_tlbs ops\"?",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593c0d50_83ba917a",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 8533,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T18:55:08Z",
+      "side": 1,
+      "message": "Yeah, forgot about this.",
+      "parentUuid": "1ec4413d_0de42514",
       "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
