@@ -16,6 +16,29 @@
       "message": "is it possible gpa \u003c kvm-\u003earch.pkvm.pvmfw_load_addr? Seems range_has_pvmfw() allows this case.",
       "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d2dbb73_cb307c68",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-09-24T08:37:39Z",
+      "side": 1,
+      "message": "Checking if size is page aligned is probably redundant: in pkvm_firmware_rmem_init we\u0027ve already made sure that pvmfw size is page aligned and taking into account that size passed to this function comes from guest_mmu_map_leaf and pgt_level_to_size ensures it is page aligned as well. But I think it is better to keep it as is even if redundant - just a side comment.\n\nBTW looking at it I just realized that when userspace sets pvmfw load addr via KVM_CAP_X86_PROTECTED_VM_FLAGS_SET_FW_GPA, we do not check if it is page aligned in pkvm_vm_ioctl_set_fw_gpa but perhaps we should? Seems like it is not a security issue to allow user-space setting arbitrary non-aligned address but in such case entire page will be donated to guest anyway and potentially waste some memory. WDYT?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
