@@ -280,6 +280,9 @@ void madvise_vma_pad_pages(struct vm_area_struct *vma,
 	if (!vma->vm_file)
 		return;
 
+	if (!is_elf_file(vma->vm_file))
+		return;
+
 	/* Limit this to only shared libraries (*.so) */
 	if (!str_has_suffix(vma->vm_file->f_path.dentry->d_name.name, ".so"))
 		return;
