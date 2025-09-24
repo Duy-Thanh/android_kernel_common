@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f8f138_835c2776",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 7479,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-24T09:35:10Z",
+      "side": 1,
+      "message": "kvm_mmu_x86_module_init is called by kvm_x86_init(), which is earlier than vmx_init(). As vmx_init() can set the enable_pkvm to false if deprivilege is failed and now we have re-privilege logic, shall we revert below changes for this case?",
+      "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
