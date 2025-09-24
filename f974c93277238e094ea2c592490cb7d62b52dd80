@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c5f9fd5_3f3b221c",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-09-24T10:55:25Z",
+      "side": 1,
+      "message": "`__PKVM_HYP__` is enabled when we the pKVM is enabled via CONFIG through:\n`arch/x86/kvm/vmx/pkvm/hyp/Makefile`\n`ccflags-y +\u003d -D__PKVM_HYP__ `\n\nbut what if it is enabled as above but disabled (not enabled) via `kvm-intel.pkvm\u003d1` command line?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ec4413d_0de42514",
         "filename": "arch/x86/kvm/vmx/vmx.c",
         "patchSetId": 17
