@@ -16,6 +16,23 @@
       "message": "Just a question related to the HOST_INIT_MMU/HOST_RESET_MMU request for the host to init/reset the mmu when the guest changes some bits in cr0/cr4/efer. Now with PV MMU, do you see if we still need these two requests?",
       "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec4413d_0de42514",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 8533,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-24T10:16:30Z",
+      "side": 1,
+      "message": "Update the printed log by removing \"or flush_remote_tlbs ops\"?",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
