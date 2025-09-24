@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35ffbe99_d1a28806",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T17:14:53Z",
+      "side": 1,
+      "message": "Indeed, seems so. More precisely, range_has_pvmfw() doesn\u0027t check if `pkvm-\u003epvmfw_load_addr + pvmfw_size` doesn\u0027t overflow. So it may return true even with gpa_end \u003c gpa_start.\n\nThis logic is basically just copied from ARM\u0027s pkvm_ipa_range_has_pvmfw() and pkvm_load_pvmfw_pages().\n\nWhat\u0027s interesting is that this pvmfw_load_addr value comes from the host (even from userspace), and we don\u0027t validate it. :) \n\nIn pKVM-ARM it is not validated either: \nhost: https://android.googlesource.com/kernel/common/+/0c79caf88acb1b7af67e8e4cc42f9f8aa35a291f/arch/arm64/kvm/pkvm.c#906\nhypervisor: https://android.googlesource.com/kernel/common/+/0c79caf88acb1b7af67e8e4cc42f9f8aa35a291f/arch/arm64/kvm/hyp/nvhe/pkvm.c#612\n\nSo it may well be U64_MAX - PAGE_SIZE + 1 or whatever.\n\nI suppose this will not cause anything bad in practice, for various reasons, but it would be probably cleaner to prevent this explicitly.\n\ncc @willdeacon@google.com",
+      "parentUuid": "300b82d9_3b06631c",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d2dbb73_cb307c68",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 16
@@ -31,6 +49,30 @@
       "writtenOn": "2025-09-24T08:37:39Z",
       "side": 1,
       "message": "Checking if size is page aligned is probably redundant: in pkvm_firmware_rmem_init we\u0027ve already made sure that pvmfw size is page aligned and taking into account that size passed to this function comes from guest_mmu_map_leaf and pgt_level_to_size ensures it is page aligned as well. But I think it is better to keep it as is even if redundant - just a side comment.\n\nBTW looking at it I just realized that when userspace sets pvmfw load addr via KVM_CAP_X86_PROTECTED_VM_FLAGS_SET_FW_GPA, we do not check if it is page aligned in pkvm_vm_ioctl_set_fw_gpa but perhaps we should? Seems like it is not a security issue to allow user-space setting arbitrary non-aligned address but in such case entire page will be donated to guest anyway and potentially waste some memory. WDYT?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f7eceb_fa091bfd",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T17:14:53Z",
+      "side": 1,
+      "message": "\u003e taking into account that size passed to this function comes from guest_mmu_map_leaf and pgt_level_to_size ensures it is page aligned as well.\n\nI hope we will get rid of guest_mmu_map_leaf() and will call this directly instead, then it will not be ensured so automatically anymore.\n\n\u003e BTW looking at it I just realized that when userspace sets pvmfw load addr via KVM_CAP_X86_PROTECTED_VM_FLAGS_SET_FW_GPA, we do not check if it is page aligned in pkvm_vm_ioctl_set_fw_gpa but perhaps we should? Seems like it is not a security issue to allow user-space setting arbitrary non-aligned address but in such case entire page will be donated to guest anyway and potentially waste some memory. WDYT?\n\nI agree, but I\u0027ll also let @willdeacon@google.com speak, since this logic, as well as the ioctl implementation, is basically just copied from pKVM-ARM. :)",
+      "parentUuid": "6d2dbb73_cb307c68",
       "range": {
         "startLine": 104,
         "startChar": 0,
