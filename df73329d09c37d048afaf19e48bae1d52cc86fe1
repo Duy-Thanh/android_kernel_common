@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300b82d9_3b06631c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-24T07:52:25Z",
+      "side": 1,
+      "message": "is it possible gpa \u003c kvm-\u003earch.pkvm.pvmfw_load_addr? Seems range_has_pvmfw() allows this case.",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
