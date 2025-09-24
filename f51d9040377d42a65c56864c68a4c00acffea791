@@ -34,6 +34,24 @@
       "parentUuid": "744fe117_0b74c496",
       "revId": "f51d9040377d42a65c56864c68a4c00acffea791",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef9bee7_bf0db8de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-24T12:02:12Z",
+      "side": 1,
+      "message": "Please can you reference both the upstream commit and add a Fixes: tag for the relevant Android commit to the commit messages?",
+      "parentUuid": "c8004128_962fc66a",
+      "revId": "f51d9040377d42a65c56864c68a4c00acffea791",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
