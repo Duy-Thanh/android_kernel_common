@@ -16,6 +16,24 @@
       "message": "Check the KernelCommit warning on this one, probably needs a BACKPORT tag.",
       "revId": "9fbe7bc435eab249d9a82bb14290bc7f5a467e00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a28abf4_07fdfe1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3470500
+      },
+      "writtenOn": "2025-09-24T20:08:44Z",
+      "side": 1,
+      "message": "Also if there\u0027s a conflict, give a brief context summary below the `Test:` line",
+      "parentUuid": "dbbcb5de_38f83f23",
+      "revId": "9fbe7bc435eab249d9a82bb14290bc7f5a467e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
