@@ -46665,11 +46665,20 @@ array {
   element_type_id: 0xdce3c92e
 }
 array {
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   id: 0x974b46a4
   number_of_elements: 12
   element_type_id: 0x6d7f5ff6
 }
 array {
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  id: 0x97629ea8
+  number_of_elements: 512
+  element_type_id: 0x9bd401b6
+}
+array {
+=======
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
   id: 0x97d79f3d
   number_of_elements: 4
   element_type_id: 0x6e6a309c
@@ -71221,12 +71230,34 @@ member {
   bitsize: 1
 }
 member {
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   id: 0x5a4009fa
   name: "block_descriptor_length"
   type_id: 0xe8034002
   offset: 32
 }
 member {
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  id: 0xbfebdfb7
+  name: "block_count"
+  type_id: 0x78f4e574
+  offset: 288
+}
+member {
+  id: 0xbfeee4b2
+  name: "block_count"
+  type_id: 0x7dc8196c
+  offset: 6048
+}
+member {
+  id: 0xbfeee8b1
+  name: "block_count"
+  type_id: 0x7dc8196c
+  offset: 21952
+}
+member {
+=======
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
   id: 0xecca2748
   name: "block_h"
   type_id: 0x861a0f9a
@@ -89373,6 +89404,7 @@ member {
   offset: 1344
 }
 member {
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   id: 0x459f4367
   name: "curve_1d_type"
   type_id: 0xb8b907a8
@@ -89385,6 +89417,15 @@ member {
   offset: 13440
 }
 member {
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  id: 0xcf9c89a3
+  name: "curzone"
+  type_id: 0xfdf6bcd9
+  offset: 4832
+}
+member {
+=======
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
   id: 0x73668a85
   name: "customAlloc"
   type_id: 0x07e68113
@@ -104096,7 +104137,25 @@ member {
   offset: 3104
 }
 member {
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   id: 0x98bed47e
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  id: 0xbb78ba8d
+  name: "elapsed_time"
+  type_id: 0xd5df6730
+  offset: 1152
+}
+member {
+  id: 0xbbd59550
+  name: "elapsed_time"
+  type_id: 0x78f4e574
+  offset: 1344
+}
+member {
+  id: 0x98bed61d
+=======
+  id: 0x98bed61d
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
   name: "eld"
   type_id: 0x3e14faf9
   offset: 18304
@@ -168956,7 +169015,19 @@ member {
   id: 0x82f613a9
   name: "no_filter_buffering_ref"
   type_id: 0x6720d32f
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   offset: 2752
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  offset: 2688
+}
+member {
+  id: 0xd9f792f3
+  name: "no_gc_sleep_time"
+  type_id: 0x4585663f
+  offset: 352
+=======
+  offset: 2688
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
 }
 member {
   id: 0x06e94b4a
@@ -171971,7 +172042,19 @@ member {
   id: 0x9ecdc196
   name: "nr_topts"
   type_id: 0x6720d32f
+<<<<<<< HEAD   (97e79cdbb4c934477b44bf733efba02c5897e07d ANDROID: GKI: x86: Update abi.stg)
   offset: 1152
+||||||| BASE   (e5c38acccb7d79549c6a665f8ea2e1af2db21aea BACKPORT: FROMGIT: userfaultfd: opportunistic TLB-flush batc)
+  offset: 1088
+}
+member {
+  id: 0x7a5cd056
+  name: "nr_total_ckpt"
+  type_id: 0x6720d32f
+  offset: 2592
+=======
+  offset: 1088
+>>>>>>> BRANCH (e194fc8e63820054f64a4860aae5837fb41cbdb9 ANDROID: delist f2fs_submit_folio_write and android_vh_f2fs_)
 }
 member {
   id: 0xc4061dd1
