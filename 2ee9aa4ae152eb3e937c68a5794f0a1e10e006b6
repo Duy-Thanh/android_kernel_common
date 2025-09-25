@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02fd60e_02de9400",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-09-25T23:48:36Z",
+      "side": 1,
+      "message": "no behavioral/real refactoring needed to cherry pick, marking as UPSTREAM",
+      "parentUuid": "fd624406_5199edf2",
+      "revId": "2ee9aa4ae152eb3e937c68a5794f0a1e10e006b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ae63c9a_949c32ec",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "not in particular, will wait until 6.17 rc",
       "parentUuid": "7ae63c9a_949c32ec",
+      "revId": "2ee9aa4ae152eb3e937c68a5794f0a1e10e006b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e831aa8_96aa24f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-09-25T23:48:36Z",
+      "side": 1,
+      "message": "in 6.17rc, removed FROMGIT",
+      "parentUuid": "7d3a0a63_55412111",
       "revId": "2ee9aa4ae152eb3e937c68a5794f0a1e10e006b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
