@@ -68,6 +68,23 @@
       "parentUuid": "efd44b5a_346488b1",
       "revId": "768eafbf7e145dec9f3a7f79c3ee39e191d12206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9274e1_1ad3e1c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3657368
+      },
+      "writtenOn": "2025-09-25T07:27:19Z",
+      "side": 1,
+      "message": "These patches have been merged as part of merging changes from 5.10.241 stable tree. Can I abandon these here?",
+      "revId": "768eafbf7e145dec9f3a7f79c3ee39e191d12206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
