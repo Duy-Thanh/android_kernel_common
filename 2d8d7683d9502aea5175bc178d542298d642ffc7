@@ -105,6 +105,24 @@
       "parentUuid": "41f2d4e1_78a6ec19",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c3b8d9_9a457a98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-25T16:51:43Z",
+      "side": 1,
+      "message": "Sorry, no else has requested it so while it is important to you, it clearly isn\u0027t very important to others, so why should it always be loaded even for partner products who don\u0027t need it? It should be a loadable module (either a GKI module or a vendor module). Please provide a technical justification for building it in, or change it to a module.",
+      "parentUuid": "4cb05b63_698d7301",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
