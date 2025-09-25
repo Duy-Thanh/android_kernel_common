@@ -69,6 +69,24 @@
       "parentUuid": "02a5ad8d_3ca633d0",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41f2d4e1_78a6ec19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2025-09-25T10:10:59Z",
+      "side": 1,
+      "message": "Yes, the mode select trigger occurs approximately 3 seconds before the typec_thunderbolt probe function, if it\u0027s a module. This is the only reason it should be built-in.",
+      "parentUuid": "76788da7_24f4dba5",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
