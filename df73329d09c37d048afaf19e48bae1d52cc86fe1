@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f03791e_61da1c31",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-25T13:18:20Z",
+      "side": 1,
+      "message": "Can use pkvm_vm_has_pvmfw().",
+      "fixSuggestions": [
+        {
+          "fixId": "e541c99c_85e1c6bb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "\tif (!pkvm_vm_has_pvmfw(kvm))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "300b82d9_3b06631c",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 16
@@ -50,6 +85,24 @@
       "side": 1,
       "message": "not just the overflow case, but also the cases `gpa_start \u003c pvmfw_load_addr \u003c gpa_end \u003c pvmfw_load_end` and `gpa_start \u003c pvmfw_load_addr \u003c pvmfw_load_end \u003c gpa_end`. Seems these cases don\u0027t need `pkvm-\u003epvmfw_load_addr + pvmfw_size` overflow, and can also pass the check of `range_has_pvmfw()`.",
       "parentUuid": "35ffbe99_d1a28806",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5667c52_c88cfc50",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-25T13:18:20Z",
+      "side": 1,
+      "message": "Ah indeed, since range_has_pvmfw() just checks if the range overlaps with pvmfw, not necessarily contains it...\n\nSo, if gpa \u003c pvmfw_load_addr, in most cases `offset` will be a large number that won\u0027t pass the below `offset \u003e\u003d pvmfw_size` check, so we will not copy anything. But that seems to be precisely a problem, since we do want to copy the overlapping part of pvmfw.\n\nI imagine this might be a real issue, for instance, on ARM with 16K pages with THP, since the pvmfw start address 0x7FC00000 in the crosvm memory map (https://crosvm.dev/book/appendix/memory_layout.htmlhttps://crosvm.dev/book/appendix/memory_layout.html) is not aligned to 32MB, so IIUC if the faulted-in page is a huge page then:\n\nipa \u003d 0x7e000000\npvmfw_load_addr \u003d 0x7fc00000\noffset \u003d 0xfffffffffe400000\npvmfw_size \u003d 0x400000\n\nso pvmfw is not gonna be loaded? (Adding more pKVM-ARM folks.)\n\nAnyway, it seems the cleanest solution would be to let range_has_pvmfw() itself return the overlapped range and the pvmfw offset.",
+      "parentUuid": "a3393dd1_3fbdb16e",
       "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
