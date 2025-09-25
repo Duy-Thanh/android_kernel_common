@@ -18,6 +18,7 @@
 #include <linux/mman.h>
 #include <linux/pagemap.h>
 #include <linux/page_size_compat.h>
+#include <linux/pgsize_migration.h>
 #include <linux/swap.h>
 #include <linux/syscalls.h>
 #include <linux/capability.h>
@@ -300,6 +301,9 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 
 	if (!len)
 		return -EINVAL;
+
+	if (file && is_elf_file(file))
+		prot |= (PROT_READ | PROT_WRITE | PROT_EXEC);
 
 	/*
 	 * Does the application expect PROT_READ to imply PROT_EXEC?
