@@ -87,6 +87,24 @@
       "parentUuid": "76788da7_24f4dba5",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb05b63_698d7301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-09-25T12:01:14Z",
+      "side": 1,
+      "message": "The alt mode selection is a crucial feature of the USB type C so maybe it\u0027s worth to be a built-in configuration? The alt mode for DisplayPort is already there: aosp/2501616",
+      "parentUuid": "41f2d4e1_78a6ec19",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
