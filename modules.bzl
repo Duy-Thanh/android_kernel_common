@@ -98,7 +98,7 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
-    "drivers/android/rust_binder.ko",
+    "drivers/android/binder/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
@@ -111,9 +111,15 @@ _X86_GKI_MODULES_LIST = [
 
 _X86_64_GKI_MODULES_LIST = [
     # keep sorted
+<<<<<<< HEAD   (1fee95321bda143167197ea0a511c4370f6d4f3a ANDROID: cgroup: Use backport reservation for freeze time am)
     "drivers/acpi/fan.ko",
     "drivers/android/rust_binder.ko",
     "drivers/powercap/intel_rapl_common.ko",
+||||||| BASE   (caeb52b32bd70bc82167f136ab287e2b7a916375 ANDROID: cgroup: Use backport reservation for freeze time)
+    "drivers/android/rust_binder.ko",
+=======
+    "drivers/android/binder/rust_binder.ko",
+>>>>>>> BRANCH (079b8b87bb24d73fdfb04d22b8badda368101464 ANDROID: rust_binder: use dedicated build files)
     "drivers/ptp/ptp_kvm.ko",
     "drivers/thermal/intel/int340x_thermal/acpi_thermal_rel.ko",
     "drivers/thermal/intel/int340x_thermal/int3400_thermal.ko",
