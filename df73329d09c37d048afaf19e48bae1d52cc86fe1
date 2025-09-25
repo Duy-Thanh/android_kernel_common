@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3393dd1_3fbdb16e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-25T00:43:26Z",
+      "side": 1,
+      "message": "not just the overflow case, but also the cases `gpa_start \u003c pvmfw_load_addr \u003c gpa_end \u003c pvmfw_load_end` and `gpa_start \u003c pvmfw_load_addr \u003c pvmfw_load_end \u003c gpa_end`. Seems these cases don\u0027t need `pkvm-\u003epvmfw_load_addr + pvmfw_size` overflow, and can also pass the check of `range_has_pvmfw()`.",
+      "parentUuid": "35ffbe99_d1a28806",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d2dbb73_cb307c68",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 16
