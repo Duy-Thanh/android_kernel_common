@@ -797,6 +797,9 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
 		if (rier && (vma->vm_flags & VM_MAYEXEC))
 			prot |= PROT_EXEC;
 
+		if (vma->vm_file && is_elf_file(vma->vm_file))
+			prot |= (PROT_READ | PROT_WRITE | PROT_EXEC);
+
 		/*
 		 * Each mprotect() call explicitly passes r/w/x permissions.
 		 * If a permission is not passed to mprotect(), it must be
