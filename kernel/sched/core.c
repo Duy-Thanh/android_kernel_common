@@ -213,6 +213,24 @@ static int __init setup_proxy_exec(char *str)
 #endif
 __setup("sched_proxy_exec=", setup_proxy_exec);
 
+
+static inline struct task_struct *__blocked_on_owner(struct blocked_on_lock *bo)
+{
+	switch (bo->type) {
+	case BO_T_NONE:
+		return NULL;
+	case BO_T_MUTEX:
+		return __mutex_owner(bo->lock);
+	default:
+		BUG();
+	}
+}
+
+static inline struct task_struct *task_blocked_on_owner(struct task_struct *p)
+{
+	return __blocked_on_owner(&p->blocked_on);
+}
+
 #ifdef CONFIG_SCHED_DEBUG
 /*
  * Debugging: various feature bits
@@ -4132,7 +4150,7 @@ struct task_struct *find_exec_ctx(struct rq *rq, struct task_struct *p)
 	for (exec_ctx = p; task_is_blocked(exec_ctx) && !task_on_cpu(rq, exec_ctx);
 							exec_ctx = owner) {
 		guard(raw_spinlock)(&exec_ctx->blocked_lock);
-		owner = __mutex_owner(__get_task_blocked_on(exec_ctx));
+		owner = task_blocked_on_owner(exec_ctx);
 		if (!owner || owner == exec_ctx)
 			break;
 
@@ -4165,7 +4183,7 @@ void move_queued_task_locked(struct rq *src_rq, struct rq *dst_rq, struct task_s
 			break;
 
 		if (task_is_blocked(task))
-			owner = __mutex_owner(get_task_blocked_on(task));
+			owner = task_blocked_on_owner(task);
 
 		__move_queued_task_locked(src_rq, dst_rq, task);
 		if (task == owner)
@@ -7424,6 +7442,28 @@ static void proxy_enqueue_on_owner(struct rq *rq, struct task_struct *owner,
 	block_task(rq, p, READ_ONCE(p->__state));
 }
 
+static void
+lock_blocked_on_lock(struct blocked_on_lock *bo)
+{
+	if (bo->type == BO_T_MUTEX)
+		raw_spin_lock(&((struct mutex *)bo->lock)->wait_lock);
+	else
+		BUG();
+}
+
+static void
+unlock_blocked_on_lock(struct blocked_on_lock *bo)
+{
+	if (bo->type == BO_T_MUTEX)
+		raw_spin_unlock(&((struct mutex *)bo->lock)->wait_lock);
+	else
+		BUG();
+}
+
+DEFINE_LOCK_GUARD_1(blocked_on_lock, struct blocked_on_lock,
+		    lock_blocked_on_lock(_T->lock),
+		    unlock_blocked_on_lock(_T->lock))
+
 /*
  * Find runnable lock owner to proxy for mutex blocked donor
  *
@@ -7453,22 +7493,27 @@ static void proxy_enqueue_on_owner(struct rq *rq, struct task_struct *owner,
 static struct task_struct *
 find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 {
+	struct blocked_on_lock bo, *blocked_on;
 	struct task_struct *owner = NULL;
 	bool curr_in_chain = false;
 	int this_cpu = cpu_of(rq);
 	struct task_struct *p;
-	struct mutex *mutex;
 	int owner_cpu;
 
 	/* Follow blocked_on chain. */
 	for (p = donor; task_is_blocked(p); p = owner) {
-		mutex = p->blocked_on;
+		/* copy the entire blocked_on structure */
+		raw_spin_lock(&p->blocked_lock);
+		bo = p->blocked_on;
+		raw_spin_unlock(&p->blocked_lock);
+		blocked_on = &bo;
+
 		/* Something changed in the chain, so pick again */
-		if (!mutex)
+		if (!blocked_on->lock)
 			return NULL;
 
 		/* if its PROXY_WAKING, do return migration or run if current */
-		if (mutex == PROXY_WAKING) {
+		if (blocked_on->lock == PROXY_WAKING) {
 			if (task_current(rq, p)) {
 				clear_task_blocked_on(p, PROXY_WAKING);
 				return p;
@@ -7480,11 +7525,11 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 		 * By taking mutex->wait_lock we hold off concurrent mutex_unlock()
 		 * and ensure @owner sticks around.
 		 */
-		guard(raw_spinlock)(&mutex->wait_lock);
+		guard(blocked_on_lock)(blocked_on);
 		guard(raw_spinlock)(&p->blocked_lock);
 
 		/* Check again that p is blocked with blocked_lock held */
-		if (mutex != __get_task_blocked_on(p)) {
+		if (blocked_on->lock != __get_task_blocked_on(p)) {
 			/*
 			 * Something changed in the blocked_on chain and
 			 * we don't know if only at this level. So, let's
@@ -7497,7 +7542,7 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 		if (task_current(rq, p))
 			curr_in_chain = true;
 
-		owner = __mutex_owner(mutex);
+		owner = __blocked_on_owner(blocked_on);
 		if (!owner) {
 			/*
 			 * If there is no owner, either clear blocked_on
@@ -7758,7 +7803,7 @@ static void __sched notrace __schedule(int sched_mode)
 		block = try_to_block_task(rq, prev, &prev_state,
 					  !task_is_blocked(prev));
 		switch_count = &prev->nvcsw;
-	} else if (preempt && prev->blocked_on) {
+	} else if (preempt && prev->blocked_on.lock) {
 		/*
 		 * If we are SM_PREEMPT, we may have interrupted
 		 * after blocked_on was set, before schedule()
@@ -7779,12 +7824,12 @@ pick_again:
 	if (sched_proxy_exec()) {
 		struct task_struct *prev_donor = rq->donor;
 
-		if (!prev_state && prev->blocked_on)
+		if (!prev_state && prev->blocked_on.lock)
 			clear_task_blocked_on(prev, NULL);
 
 		rq_set_donor(rq, next);
 		next->blocked_donor = NULL;
-		if (unlikely(next->blocked_on)) {
+		if (unlikely(next->blocked_on.lock)) {
 			next = find_proxy_task(rq, next, &rf);
 			if (!next) {
 				/* zap the balance_callbacks before picking again */
