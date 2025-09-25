@@ -98,7 +98,7 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
-    "drivers/android/rust_binder.ko",
+    "drivers/android/binder/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
@@ -111,9 +111,15 @@ _X86_GKI_MODULES_LIST = [
 
 _X86_64_GKI_MODULES_LIST = [
     # keep sorted
+<<<<<<< HEAD   (99a38ec6eb22c581ea6cc00a1b17ea914db8ea3c UPSTREAM: vsock: Do not allow binding to VMADDR_PORT_ANY am:)
     "drivers/acpi/fan.ko",
     "drivers/android/rust_binder.ko",
     "drivers/powercap/intel_rapl_common.ko",
+||||||| BASE   (31fc378e731204bbc3a556beb8e10d2a46e4c774 UPSTREAM: vsock: Do not allow binding to VMADDR_PORT_ANY)
+    "drivers/android/rust_binder.ko",
+=======
+    "drivers/android/binder/rust_binder.ko",
+>>>>>>> BRANCH (079b8b87bb24d73fdfb04d22b8badda368101464 ANDROID: rust_binder: use dedicated build files)
     "drivers/ptp/ptp_kvm.ko",
     "drivers/thermal/intel/int340x_thermal/acpi_thermal_rel.ko",
     "drivers/thermal/intel/int340x_thermal/int3400_thermal.ko",
