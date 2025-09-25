@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd650d95_715a1c35",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-09-25T17:18:13Z",
+      "side": 1,
+      "message": "Yes, that looks like a bug introduced when we added support for huge-pages. @vdonnefort@google.com can you file a bug so we can get this fixed, please?",
+      "parentUuid": "c5667c52_c88cfc50",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d2dbb73_cb307c68",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 16
