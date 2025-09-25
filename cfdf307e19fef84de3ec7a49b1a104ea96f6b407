@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d727f3ba_7095ddbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-25T18:13:20Z",
+      "side": 1,
+      "message": "Wondering what is the plan for v6.15 regarding reusing all that code from arch/x86/kernel/fpu/ : shall we still have copies of that code, like in this patchset, or shall we add these `#ifdef __PKVM_HYP__` directly to that code and compile it into hypervisor code (like we are planning for KVM code)?",
+      "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
