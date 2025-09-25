@@ -611,6 +611,16 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 		 * after setting the reader waiter to nil.
 		 */
 		wake_q_add_safe(wake_q, tsk);
+		raw_spin_lock(&tsk->blocked_lock);
+		/*
+		 * We also get here if sem was reader owned and thus
+		 * waiter isn't blocked_on, but this function only sets
+		 * PROXY_WAKING if we are.
+		 */
+		__set_task_blocked_on_waking(tsk, sem);
+		if (tsk == current->blocked_donor)
+			current->blocked_donor = NULL;
+		raw_spin_unlock(&tsk->blocked_lock);
 	}
 }
 
@@ -1061,6 +1071,7 @@ rwsem_down_read_slowpath(struct rw_semaphore *sem, long count, unsigned int stat
 	bool already_on_list = false;
 	bool steal = true;
 	bool rspin = false;
+	bool blocked_on_set;
 
 	/*
 	 * To prevent a constant stream of readers from starving a sleeping
@@ -1144,6 +1155,7 @@ queue:
 
 	trace_contention_begin(sem, LCB_F_READ);
 
+	blocked_on_set = false;
 	/* wait to be given the lock */
 	trace_android_vh_rwsem_read_wait_start(sem);
 	for (;;) {
@@ -1160,8 +1172,18 @@ queue:
 			/* Ordered by sem->wait_lock against rwsem_mark_wake(). */
 			break;
 		}
+		if (atomic_long_read(&sem->count) & RWSEM_WRITER_MASK) {
+			raw_spin_lock_irq(&current->blocked_lock);
+			__set_task_blocked_on(current, sem, BO_T_RWSEM);
+			raw_spin_unlock_irq(&current->blocked_lock);
+			blocked_on_set = true;
+		}
 		schedule_preempt_disabled();
 		lockevent_inc(rwsem_sleep_reader);
+		if (blocked_on_set) {
+			clear_task_blocked_on(current, sem);
+			blocked_on_set = false;
+		}
 	}
 
 	__set_current_state(TASK_RUNNING);
@@ -1175,6 +1197,8 @@ out_nolock:
 	rwsem_del_wake_waiter(sem, &waiter, &wake_q);
 	__set_current_state(TASK_RUNNING);
 	trace_android_vh_rwsem_read_wait_finish(sem);
+	if (blocked_on_set)
+		clear_task_blocked_on(current, sem);
 	lockevent_inc(rwsem_rlock_fail);
 	trace_contention_end(sem, -EINTR);
 	return ERR_PTR(-EINTR);
