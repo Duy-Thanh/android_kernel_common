@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423ce6a3_71c326a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-25T14:21:48Z",
+      "side": 1,
+      "message": "Do not merge. Resolving via direct cherry-pick.\n\naosp/3779509",
+      "revId": "b4899c72da6b5ce82222a94e87daceab8ff386c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
