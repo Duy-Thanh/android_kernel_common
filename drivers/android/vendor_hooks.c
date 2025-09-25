@@ -36,6 +36,7 @@
 #include <trace/hooks/health_report.h>
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
+#include <trace/hooks/module.h>
 #include <trace/hooks/selinux.h>
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/gic.h>
@@ -86,6 +87,7 @@
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_reaper_delay_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bitmap_find_best_next_area);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
@@ -223,6 +225,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rtmutex_lock_starttime);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_lock_starttime);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_pcpu_rwsem_starttime);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_mod_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_after_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_before_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_commit_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_exit_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_override_creds);
