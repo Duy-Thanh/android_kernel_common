@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96883945_243289bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-09-25T23:24:02Z",
+      "side": 1,
+      "message": "not a backport due to no conflicts/behavioral changes for merge, changed to UPSTREAM",
+      "parentUuid": "f08ccd00_fe7622ec",
+      "revId": "6609b53faddbd30e76ff187763b553e65f2044f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f0642c4_29e85f5e",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "same as 6.6 version, will wait until patch lands in 6.17 rc",
       "parentUuid": "6f0642c4_29e85f5e",
+      "revId": "6609b53faddbd30e76ff187763b553e65f2044f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4354a00_2bc3a8e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1960732
+      },
+      "writtenOn": "2025-09-25T23:24:02Z",
+      "side": 1,
+      "message": "Patch present in 6.17rc, removed FROMGIT",
+      "parentUuid": "238a3abd_6e696424",
       "revId": "6609b53faddbd30e76ff187763b553e65f2044f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
