@@ -2377,7 +2377,7 @@ __latent_entropy struct task_struct *copy_process(
 #endif
 
 	p->blocked_on_state = BO_RUNNABLE;
-	p->blocked_on = NULL; /* not blocked yet */
+	p->blocked_on.lock = NULL; /* not blocked yet */
 	p->blocked_donor = NULL; /* nobody is boosting p yet */
 	INIT_LIST_HEAD(&p->migration_node);
 #ifdef CONFIG_SCHED_PROXY_EXEC
