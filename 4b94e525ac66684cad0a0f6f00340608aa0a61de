@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817815ce_34020194",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-09-26T22:29:22Z",
+      "side": 1,
+      "message": "I think we should move if after line 289, otherwise, the kernel will have to send a block request of PAGE_SIZE for every file, and this could be expensive to do it for every file.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab6a72a7_427fa1d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 283,
+                "startChar": 0,
+                "endLine": 286,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 290,
+                "startChar": 0,
+                "endLine": 290,
+                "endChar": 0
+              },
+              "replacement": "\tif (!is_elf_file(vma-\u003evm_file))\n\t\treturn;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4b94e525ac66684cad0a0f6f00340608aa0a61de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
