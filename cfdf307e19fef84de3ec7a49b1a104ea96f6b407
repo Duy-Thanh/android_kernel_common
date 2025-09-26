@@ -52,6 +52,24 @@
       "parentUuid": "a0d3f89d_67d4c07a",
       "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe9a50b_1df76bd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-26T10:34:02Z",
+      "side": 1,
+      "message": "\u003e So, what exactly are the advantages of copying that code instead of changing it directly?\n\nAlthough there is not too much fpu changes, there is still some. Copying can make zero effort of resolving conflicts. But as you pointed out, I also agree that \"there shouldn\u0027t be a lot of trouble for us if we change that code directly\"\n\nDuring pvvmcs v6.15 rebasing work, I intend to leave some kvm functions being implemented by pkvm itself as seems the kvm implementation for such functions is totally not re-usable, e.g., kvm_arch_vcpu_create() which we just use #ifdef to different the entire function. For fpu, if we also want to share the same file, probably similar functions can also be left in the pkvm hypervisor.\n\n\u003e I\u0027m not sure what you mean by \"follow kvm\"?\n\nI mean following the code sharing way for kvm.",
+      "parentUuid": "4cdb0889_f9f390e6",
+      "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
