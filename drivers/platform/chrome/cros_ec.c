@@ -348,9 +348,13 @@ EXPORT_SYMBOL(cros_ec_register);
  */
 void cros_ec_unregister(struct cros_ec_device *ec_dev)
 {
+<<<<<<< HEAD   (8a36773b43467d5f3984e6a4e291d17a5e3e6b36 ANDROID: rust_binder: Add newline to ref logging am: 3907c0e)
 	scoped_guard(mutex, &ec_dev->lock)
 		ec_dev->registered = false;
 
+||||||| BASE   (3907c0eb526dc266b3e4740a2fb5f8da519797b8 ANDROID: rust_binder: Add newline to ref logging)
+=======
+>>>>>>> BRANCH (9ebce096bcb211ebadbbb4743b5d6eafaaf6b0d2 Merge tag 'android16-6.12.45_r00' into android16-6.12)
 	if (ec_dev->mkbp_event_supported)
 		blocking_notifier_chain_unregister(&ec_dev->event_notifier,
 						   &ec_dev->notifier_ready);
