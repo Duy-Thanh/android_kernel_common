@@ -231,6 +231,24 @@
       "parentUuid": "23c55ca9_80e8ffb8",
       "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52fbc5a2_4003804c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-26T00:47:52Z",
+      "side": 1,
+      "message": "Yeah, this makes sense. Thanks!",
+      "parentUuid": "3b4b88f2_25728643",
+      "revId": "ec6406c9e9108641ec57193a6555a514384e3bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
