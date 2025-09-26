@@ -16,6 +16,24 @@
       "message": "Wondering what is the plan for v6.15 regarding reusing all that code from arch/x86/kernel/fpu/ : shall we still have copies of that code, like in this patchset, or shall we add these `#ifdef __PKVM_HYP__` directly to that code and compile it into hypervisor code (like we are planning for KVM code)?",
       "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d3f89d_67d4c07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-26T01:49:53Z",
+      "side": 1,
+      "message": "For v6.15, the current plan is to keep the fpu as pkvm dedicated files. The reasons are: 1)although we plan to use the same kvm source code file for pkvm, fpu source code is x86 source code, not the kvm, so it is not necessary to follow kvm. 2) the sharable fpu code is not that much comparing with cpuid.c/vmx.c, 3) the kvm source code is changing more frequently, meanwhile we would like to follow up the kvm and leverage the updated kvm, so we prefer to use the same kvm source code. But seems the fpu source code is not updated as frequently as kvm. Most likely we don\u0027t need to update the fpu unless hardware has some new features.\n\nPlease let me know if you have any comment on this plan.",
+      "parentUuid": "d727f3ba_7095ddbf",
+      "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
