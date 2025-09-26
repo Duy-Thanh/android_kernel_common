@@ -34,6 +34,24 @@
       "parentUuid": "d727f3ba_7095ddbf",
       "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cdb0889_f9f390e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-26T09:58:33Z",
+      "side": 1,
+      "message": "I see. Good to hear that the upstream fpu code doesn\u0027t change frequently. But that precisely means that there shouldn\u0027t be a lot of trouble for us if we change that code directly? i.e. we wouldn\u0027t need to frequently resolve conflicts in that code when backporting upstream changes etc?\n\nIMO the advantage of directly changing that code is that we would still avoid a lot of duplication, and these patches would be much smaller and would show what exactly we are changing in the original code (thus easier to review).\n\nSo, what exactly are the advantages of copying that code instead of changing it directly?\n\n\u003e fpu source code is x86 source code, not the kvm, so it is not necessary to follow kvm.\n\nI\u0027m not sure what you mean by \"follow kvm\"?",
+      "parentUuid": "a0d3f89d_67d4c07a",
+      "revId": "cfdf307e19fef84de3ec7a49b1a104ea96f6b407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
