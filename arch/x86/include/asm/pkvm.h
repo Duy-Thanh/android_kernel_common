@@ -30,6 +30,7 @@
 #define PKVM_HC_IOMMU_UNMAP_PAGES	23
 #define PKVM_HC_IOMMU_CACHE_ASSIGN	24
 #define PKVM_HC_IOMMU_CACHE_UNASSIGN	25
+#define PKVM_HC_SUBMIT_QI		26
 
 /*
  * Internal hypercall to commit the pkvm initialization
@@ -411,6 +412,15 @@ static inline long pkvm_hc_cache_tag_unassign(unsigned long pgd_gpa)
 	}
 
 	return ret;
+}
+
+static inline int pkvm_hc_qi_submit_sync(unsigned long reg_phys, unsigned long desc,
+		unsigned int count)
+{
+	if (pkvm_pviommu_enabled())
+		kvm_hypercall3(PKVM_HC_SUBMIT_QI, reg_phys, desc, count);
+
+	return 0;
 }
 #else /* __PKVM_HYP__ */
 
