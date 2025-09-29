@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd75014_07dc02f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-29T11:54:37Z",
+      "side": 1,
+      "message": "This is not a cherry-pick of a submitted change on `android13-5.15`.",
+      "revId": "2de7c447df3bd69af841865d24c8d528ca0c6cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
