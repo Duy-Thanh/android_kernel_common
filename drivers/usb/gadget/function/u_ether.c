@@ -888,11 +888,23 @@ EXPORT_SYMBOL_GPL(gether_register_netdev);
 
 void gether_set_gadget(struct net_device *net, struct usb_gadget *g)
 {
-	struct eth_dev *dev;
+	struct eth_dev *dev = netdev_priv(net);
+	struct device *new_parent = NULL;
 
-	dev = netdev_priv(net);
+	if (g)
+		new_parent = &g->dev;
+
+	if (net->dev.parent == new_parent)
+		return;
+
+	if (device_is_registered(&net->dev)) {
+		device_lock(&net->dev);
+		device_move(&net->dev, new_parent, DPM_ORDER_NONE);
+		device_unlock(&net->dev);
+	} else {
+		SET_NETDEV_DEV(net, new_parent);
+	}
 	dev->gadget = g;
-	SET_NETDEV_DEV(net, &g->dev);
 }
 EXPORT_SYMBOL_GPL(gether_set_gadget);
 

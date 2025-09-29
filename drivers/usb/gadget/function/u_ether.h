@@ -142,11 +142,13 @@ static inline struct net_device *gether_setup_default(void)
 }
 
 /**
- * gether_set_gadget - initialize one ethernet-over-usb link with a gadget
+ * gether_set_gadget - Binds or updates the usb_gadget for this net_device
  * @net: device representing this link
- * @g: the gadget to initialize with
+ * @g: the gadget to associate with, or NULL to unbind.
  *
- * This associates one ethernet-over-usb link with a gadget.
+ * This function correctly handles setting the parent device for the first time
+ * (before registration) and moving the device (after registration). It is
+ * safe to call this function multiple times with the same gadget.
  */
 void gether_set_gadget(struct net_device *net, struct usb_gadget *g);
 
