@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f1218a_036c5daa",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T13:29:59Z",
+      "side": 1,
+      "message": "nit: s/VMM/VM/, or s/host VMM/host/ (switching is initiated and done by KVM, not by userspace VMM?)\n\nWhile we\u0027re at it, another nit: s/to do/doing/ sounds a bit more correct.",
+      "fixSuggestions": [
+        {
+          "fixId": "46023294_c6e9400e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 1463,
+                "startChar": 0,
+                "endLine": 1464,
+                "endChar": 0
+              },
+              "replacement": "\t\t * Mark the guest_fpu as confidential to avoid the host doing the\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ca8810fb02d6b1f7e1495d455f75ff4d931cce71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
