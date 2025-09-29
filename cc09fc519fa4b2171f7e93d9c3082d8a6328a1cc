@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a715ca92_b63ff797",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2908,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T16:02:02Z",
+      "side": 1,
+      "message": "And while we\u0027re at nitpicking, s/the pVM/pVM/ and s/the npVM/npVM/ (since this is about pVMs and npVMs in general, not some particular pVM and npVM)?\n\n(Well, kvm_vcpu_reset() deals with a particular vCPU and thus with a particular VM, but this VM cannot be both a pVM and a npVM at the same time. :))",
+      "fixSuggestions": [
+        {
+          "fixId": "4aab86a7_8bb5cca9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 2908,
+                "startChar": 0,
+                "endLine": 2912,
+                "endChar": 0
+              },
+              "replacement": "\t * The pkvm hypervisor does the FPU switching for pVM and the host\n\t * does the FPU switching for npVM, which means that the pkvm\n\t * hypervisor only needs to take care the fpstate of pVM. So only\n\t * needs to clearing the BNDREGS/BNDCSR for pVM.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9640853f_b7658952",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2910,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T16:02:02Z",
+      "side": 1,
+      "message": "nit: s/take care/take care of/",
+      "fixSuggestions": [
+        {
+          "fixId": "68e40f9d_730a2ccd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 2910,
+                "startChar": 0,
+                "endLine": 2911,
+                "endChar": 0
+              },
+              "replacement": "\t * hypervisor only needs to take care of the fpstate of the pVM. So only\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "761e749e_428c321e",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2911,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T16:02:02Z",
+      "side": 1,
+      "message": "nit: s/clearing/clear/\n\nAlso probably s/needs/need/ (to follow the conventional imperative style)",
+      "fixSuggestions": [
+        {
+          "fixId": "7fb944fd_f7bce1d1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 2911,
+                "startChar": 0,
+                "endLine": 2912,
+                "endChar": 0
+              },
+              "replacement": "\t * need to clear the BNDREGS/BNDCSR for the pVM.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
