@@ -13,6 +13,8 @@
 
 #define TPS(x)  tracepoint_string(x)
 
+extern int (*aosp_sbbm_signal_update)(int signal_id, bool signal_value);
+
 DECLARE_EVENT_CLASS(cpu,
 
 	TP_PROTO(unsigned int state, unsigned int cpu_id),
