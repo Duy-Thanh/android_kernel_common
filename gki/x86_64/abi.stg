@@ -82399,6 +82399,12 @@ member {
   offset: 9536
 }
 member {
+  id: 0x3fe2f10f
+  name: "filtering_supported"
+  type_id: 0x295c7202
+  offset: 1864
+}
+member {
   id: 0x73b846be
   name: "filterkey"
   type_id: 0x0483e6f8
@@ -204796,6 +204802,7 @@ struct_union {
     member_id: 0xbd73b5f9
     member_id: 0x90a736c9
     member_id: 0xbc20b5c4
+    member_id: 0x3fe2f10f
     member_id: 0x3a3b9fdd
     member_id: 0xf9c0c4b1
     member_id: 0xc168da73
@@ -303563,7 +303570,7 @@ elf_symbol {
   name: "cdc_ncm_rx_verify_nth16"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x479d2eca
+  crc: 0x24f4f605
   type_id: 0x9d4713e6
   full_name: "cdc_ncm_rx_verify_nth16"
 }
