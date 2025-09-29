@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53899517_ba3e31fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-09-29T09:37:14Z",
+      "side": 1,
+      "message": "CR+1 (LGTM after addressing other unresolved comment)",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c5f9fd5_3f3b221c",
@@ -73,6 +90,30 @@
       "side": 1,
       "message": "`__PKVM_HYP__` is only enabled when compiling the hypervisor code, not the rest of the kernel code. If pKVM is disabled via command line, it means that this code is compiled but is never executed, so this `#define enable_pkvm` here shouldn\u0027t matter.",
       "parentUuid": "7c5f9fd5_3f3b221c",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb972bbf_2549dd85",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-09-29T09:37:14Z",
+      "side": 1,
+      "message": "indeed, you are right",
+      "parentUuid": "621ccc7e_56d17dca",
       "range": {
         "startLine": 105,
         "startChar": 0,
