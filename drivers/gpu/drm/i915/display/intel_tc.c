@@ -396,6 +396,7 @@ static void read_pin_configuration(struct intel_tc_port *tc)
 
 int intel_tc_port_max_lane_count(struct intel_digital_port *dig_port)
 {
+<<<<<<< HEAD   (8a36773b43467d5f3984e6a4e291d17a5e3e6b36 ANDROID: rust_binder: Add newline to ref logging am: 3907c0e)
 	struct intel_display *display = to_intel_display(dig_port);
 	struct intel_tc_port *tc = to_tc_port(dig_port);
 
@@ -406,6 +407,15 @@ int intel_tc_port_max_lane_count(struct intel_digital_port *dig_port)
 		return get_max_lane_count(tc);
 
 	return tc->max_lane_count;
+||||||| BASE   (3907c0eb526dc266b3e4740a2fb5f8da519797b8 ANDROID: rust_binder: Add newline to ref logging)
+=======
+	struct intel_tc_port *tc = to_tc_port(dig_port);
+
+	if (!intel_encoder_is_tc(&dig_port->base))
+		return 4;
+
+	return get_max_lane_count(tc);
+>>>>>>> BRANCH (9ebce096bcb211ebadbbb4743b5d6eafaaf6b0d2 Merge tag 'android16-6.12.45_r00' into android16-6.12)
 }
 
 void intel_tc_port_set_fia_lane_count(struct intel_digital_port *dig_port,
@@ -1167,12 +1177,16 @@ static void xelpdp_tc_phy_get_hw_state(struct intel_tc_port *tc)
 		tc->lock_wakeref = tc_cold_block(tc);
 
 		read_pin_configuration(tc);
+<<<<<<< HEAD   (8a36773b43467d5f3984e6a4e291d17a5e3e6b36 ANDROID: rust_binder: Add newline to ref logging am: 3907c0e)
 		/*
 		 * Set a valid lane count value for a DP-alt sink which got
 		 * disconnected. The driver can only disable the output on this PHY.
 		 */
 		if (tc->max_lane_count == 0)
 			tc->max_lane_count = 4;
+||||||| BASE   (3907c0eb526dc266b3e4740a2fb5f8da519797b8 ANDROID: rust_binder: Add newline to ref logging)
+=======
+>>>>>>> BRANCH (9ebce096bcb211ebadbbb4743b5d6eafaaf6b0d2 Merge tag 'android16-6.12.45_r00' into android16-6.12)
 	}
 
 	drm_WARN_ON(&i915->drm,
@@ -1502,9 +1516,18 @@ static void intel_tc_port_reset_mode(struct intel_tc_port *tc,
 		enum intel_display_power_domain aux_domain;
 
 		aux_domain = intel_aux_power_domain(dig_port);
+<<<<<<< HEAD   (8a36773b43467d5f3984e6a4e291d17a5e3e6b36 ANDROID: rust_binder: Add newline to ref logging am: 3907c0e)
 		if (intel_display_power_is_enabled(i915, aux_domain))
 			drm_dbg_kms(&i915->drm, "Port %s: AUX unexpectedly powered\n",
 				    tc->port_name);
+||||||| BASE   (3907c0eb526dc266b3e4740a2fb5f8da519797b8 ANDROID: rust_binder: Add newline to ref logging)
+		aux_powered = intel_display_power_is_enabled(i915, aux_domain);
+		drm_WARN_ON(&i915->drm, aux_powered);
+=======
+		aux_powered = intel_display_power_is_enabled(i915, aux_domain);
+		drm_dbg_kms(&i915->drm, "Port %s: AUX powered %d\n",
+			    tc->port_name, aux_powered);
+>>>>>>> BRANCH (9ebce096bcb211ebadbbb4743b5d6eafaaf6b0d2 Merge tag 'android16-6.12.45_r00' into android16-6.12)
 	}
 
 	tc_phy_disconnect(tc);
