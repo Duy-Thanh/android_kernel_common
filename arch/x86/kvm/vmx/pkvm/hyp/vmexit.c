@@ -172,6 +172,9 @@ static unsigned long handle_vmcall(struct kvm_vcpu *vcpu)
 	case PKVM_HC_IOMMU_CACHE_ASSIGN:
 		pkvm_iommu_cache_assign(a0);
 		break;
+	case PKVM_HC_SUBMIT_QI:
+		pkvm_iommu_submit_qi(a0, a1, a2);
+		break;
 #endif
 
 	/*
