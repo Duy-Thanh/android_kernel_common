@@ -1366,7 +1366,13 @@ static int hpage_collapse_scan_pmd(struct mm_struct *mm,
 		 * has excessive GUP pins (i.e. 512).  Anyway the same check
 		 * will be done again later the risk seems low.
 		 */
+<<<<<<< HEAD   (4c28c90205e3864d70baa44706dd38f628214fda Merge 6.6.106 into android16-6.6-lts)
 		if (!is_refcount_suitable(folio)) {
+||||||| BASE   (60a9e718726fa7019ae00916e4b1c52498da5b60 Linux 6.6.106)
+		if (!is_refcount_suitable(page)) {
+=======
+		if (!is_refcount_suitable(&folio->page)) {
+>>>>>>> BRANCH (af1544b5d072514b219695b0a9fba0b1e0d5e289 Linux 6.6.107)
 			result = SCAN_PAGE_COUNT;
 			goto out_unmap;
 		}
@@ -1377,8 +1383,16 @@ static int hpage_collapse_scan_pmd(struct mm_struct *mm,
 		 */
 		if (cc->is_khugepaged &&
 		    (pte_young(pteval) || folio_test_young(folio) ||
+<<<<<<< HEAD   (4c28c90205e3864d70baa44706dd38f628214fda Merge 6.6.106 into android16-6.6-lts)
 		     folio_test_referenced(folio) || mmu_notifier_test_young(vma->vm_mm,
 								     address)))
+||||||| BASE   (60a9e718726fa7019ae00916e4b1c52498da5b60 Linux 6.6.106)
+		     PageReferenced(page) || mmu_notifier_test_young(vma->vm_mm,
+								     address)))
+=======
+		     folio_test_referenced(folio) ||
+		     mmu_notifier_test_young(vma->vm_mm, _address)))
+>>>>>>> BRANCH (af1544b5d072514b219695b0a9fba0b1e0d5e289 Linux 6.6.107)
 			referenced++;
 	}
 	if (!writable) {
