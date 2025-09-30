@@ -109,12 +109,14 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff, bool sync)
 		struct fuse_args *args = (ra ? &ra->args : NULL);
 
 #ifdef CONFIG_FUSE_BPF
-		struct fuse_err_ret fer;
+		struct fuse_err_ret fer = {0};
 
-		fer = fuse_bpf_backing(inode, struct fuse_release_in,
-				fuse_release_initialize, fuse_release_backing,
-				fuse_release_finalize,
-				inode, ff);
+		if (inode)
+			fer = fuse_bpf_backing(inode, struct fuse_release_in,
+					fuse_release_initialize,
+					fuse_release_backing,
+					fuse_release_finalize,
+					inode, ff);
 		if (fer.ret) {
 			fuse_release_end(ff->fm, args, 0);
 		} else
@@ -404,7 +406,7 @@ void fuse_file_release(struct inode *inode, struct fuse_file *ff,
 	 * own ref to the file, the IO completion has to drop the ref, which is
 	 * how the fuse server can end up closing its clients' files.
 	 */
-	fuse_file_put(ra->inode, ff, ff->fm->fc->destroy);
+	fuse_file_put(ra ? ra->inode : NULL, ff, ff->fm->fc->destroy);
 }
 
 void fuse_release_common(struct file *file, bool isdir)
