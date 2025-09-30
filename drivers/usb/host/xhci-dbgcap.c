@@ -461,6 +461,7 @@ static void xhci_dbc_ring_init(struct xhci_ring *ring)
 	xhci_initialize_ring_info(ring);
 }
 
+<<<<<<< HEAD   (9c2892e2fcd5ded729c8e53bb5897d537a51c41c ANDROID: GKI: Update abi.stg for x86-64 and aarch64)
 static int xhci_dbc_reinit_ep_rings(struct xhci_dbc *dbc)
 {
 	struct xhci_ring *in_ring = dbc->eps[BULK_IN].ring;
@@ -480,6 +481,9 @@ static int xhci_dbc_reinit_ep_rings(struct xhci_dbc *dbc)
 	return 0;
 }
 
+||||||| BASE   (9ebce096bcb211ebadbbb4743b5d6eafaaf6b0d2 Merge tag 'android16-6.12.45_r00' into android16-6.12)
+=======
+>>>>>>> BRANCH (2bdfefb0c96cde2a5801f21d758a38bbd9482b7e FROMGIT: xhci: dbc: decouple endpoint allocation from initia)
 static struct xhci_ring *
 xhci_dbc_ring_alloc(struct device *dev, enum xhci_ring_type type, gfp_t flags)
 {
