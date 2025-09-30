@@ -41,7 +41,13 @@ extern unsigned int pageblock_order;
  * Huge pages are a constant size, but don't exceed the maximum allocation
  * granularity.
  */
+<<<<<<< HEAD   (9fe6c20c5444219e5bc1b1113d74ed8a893c8707 Merge 6.6.107 into android15-6.6-lts)
 #define pageblock_order		min_t(unsigned int, HUGETLB_PAGE_ORDER, PAGE_BLOCK_ORDER)
+||||||| BASE   (af1544b5d072514b219695b0a9fba0b1e0d5e289 Linux 6.6.107)
+#define pageblock_order		min_t(unsigned int, HUGETLB_PAGE_ORDER, MAX_ORDER)
+=======
+#define pageblock_order		MIN_T(unsigned int, HUGETLB_PAGE_ORDER, MAX_ORDER)
+>>>>>>> BRANCH (147338df34870c0248133d7a986b1fab025ec56a Linux 6.6.108)
 
 #endif /* CONFIG_HUGETLB_PAGE_SIZE_VARIABLE */
 
