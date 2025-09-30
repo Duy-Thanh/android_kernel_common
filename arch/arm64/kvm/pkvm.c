@@ -204,6 +204,21 @@ out_fail:
 	return ret;
 }
 
+static int __init unmap_gic_its(void)
+{
+	struct device_node *np;
+	int ret = 0;
+
+	for_each_compatible_node(np, NULL, "arm,gic-v3-its") {
+		ret = register_moveable_fdt_resource(np,
+						     PKVM_MREG_PROTECTED_RANGE);
+		if (ret)
+			return ret;
+	}
+
+	return ret;
+}
+
 static int __init early_hyp_lm_size_mb_cfg(char *arg)
 {
 	return kstrtoull(arg, 10, &kvm_nvhe_sym(hyp_lm_size_mb));
@@ -234,6 +249,13 @@ void __init kvm_hyp_reserve(void)
 	if (ret) {
 		*hyp_memblock_nr_ptr = 0;
 		kvm_err("Failed to register pkvm moveable regions: %d\n", ret);
+		return;
+	}
+
+	ret = unmap_gic_its();
+	if (ret) {
+		*hyp_memblock_nr_ptr = 0;
+		kvm_err("Failed to unmap GIC ITS: %d\n", ret);
 		return;
 	}
 
