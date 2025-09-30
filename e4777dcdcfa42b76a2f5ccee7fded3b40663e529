@@ -16,6 +16,24 @@
       "message": "Probably need this against android16-6.12 as well?",
       "revId": "e4777dcdcfa42b76a2f5ccee7fded3b40663e529",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67aef161_b0971114",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-09-30T23:48:04Z",
+      "side": 1,
+      "message": "As the affected device is running 6.6, I\u0027d like to wait on reverting it in other branches unless someone requests it. The change is backported to all LTS kernels. I\u0027d rather drive for an upstream change.",
+      "parentUuid": "eb23c79a_34e37283",
+      "revId": "e4777dcdcfa42b76a2f5ccee7fded3b40663e529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
