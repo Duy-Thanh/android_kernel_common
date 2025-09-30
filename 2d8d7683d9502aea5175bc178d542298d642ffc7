@@ -123,6 +123,23 @@
       "parentUuid": "4cb05b63_698d7301",
       "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec0bedd9_3542dfbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-09-30T08:18:20Z",
+      "side": 1,
+      "message": "Per offline chat with Andrei, we can handle this dependency by simply putting the mod in the initramfs, so this CL should not be needed, and we can drop it.\n\nThanks Todd and Slawek for review.",
+      "revId": "2d8d7683d9502aea5175bc178d542298d642ffc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
