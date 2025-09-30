@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2efebb59_02541119",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2908,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T07:04:05Z",
+      "side": 1,
+      "message": "Got it. Thanks 😊",
+      "parentUuid": "a715ca92_b63ff797",
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9640853f_b7658952",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 2
@@ -67,6 +85,24 @@
           ]
         }
       ],
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b921b067_b92875c9",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2910,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T07:04:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9640853f_b7658952",
       "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -102,6 +138,24 @@
           ]
         }
       ],
+      "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca06142_9de7e487",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2911,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T07:04:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "761e749e_428c321e",
       "revId": "cc09fc519fa4b2171f7e93d9c3082d8a6328a1cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
