@@ -34,6 +34,24 @@
       "parentUuid": "441fe2ba_b483d052",
       "revId": "7b5f04200139b3c0ea08a91b230839b383d38762",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d722b6_d6383c38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-09-30T18:06:38Z",
+      "side": 1,
+      "message": "Moving forward with the local revert on 15-6.6 until an upstream resolution can be identified.",
+      "parentUuid": "00b1ea9b_10cebd89",
+      "revId": "7b5f04200139b3c0ea08a91b230839b383d38762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
