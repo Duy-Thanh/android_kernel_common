@@ -16,6 +16,23 @@
       "message": "Confirmed.",
       "revId": "7ea7a9c457fa23821193b80e2e71a10ea09bb3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a8e128_46d1b6fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-10-01T08:18:04Z",
+      "side": 1,
+      "message": "Verticals should not need a different tag, they can use the tag that is used for all existing releases. The distinction for the vertical is not the code, it is the build configuration. We are not tagging specially for \"x86\" or \"arm64\" or \"autofdo\", or other verticals.",
+      "revId": "7ea7a9c457fa23821193b80e2e71a10ea09bb3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
