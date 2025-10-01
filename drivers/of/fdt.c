@@ -841,7 +841,7 @@ static unsigned long chosen_node_offset = -FDT_ERR_NOTFOUND;
  * To make compatibility with existing user-space and older kdump, the low
  * region is always the last range of linux,usable-memory-range if exist.
  */
-#define MAX_USABLE_RANGES		2
+#define MAX_USABLE_RANGES		3
 
 /**
  * early_init_dt_check_for_usable_mem_range - Decode usable memory range

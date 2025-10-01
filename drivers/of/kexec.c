@@ -403,6 +403,28 @@ void *of_kexec_alloc_and_setup_fdt(const struct kimage *image,
 		if (ret)
 			goto out;
 
+		// Find the node with compatible "restricted-dma-pool"
+		struct device_node *node;
+		node = of_find_compatible_node(NULL, NULL, "restricted-dma-pool");
+		if (node) {
+			const void *reg_prop;
+			int len;
+
+			// Check if the node has a reg property
+			reg_prop = of_get_property(node, "reg", &len);
+			if (reg_prop && len >= sizeof(u64) * 2) {
+				// Add the reg value to "linux,usable-memory-range"
+				u64 reg[2];
+				of_property_read_u64_array(node, "reg", reg, 2);
+				ret = fdt_appendprop_addrrange(fdt, 0, chosen_node,
+						"linux,usable-memory-range", reg[0], reg[1]);
+				if (ret) {
+					of_node_put(node);
+					goto out;
+				}
+			}
+			of_node_put(node);
+		}
 		if (crashk_low_res.end) {
 			ret = fdt_appendprop_addrrange(fdt, 0, chosen_node,
 					"linux,usable-memory-range",
