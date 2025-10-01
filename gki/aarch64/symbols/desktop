@@ -1,4 +1,5 @@
 [abi_symbol_list]
+<<<<<<< TARGET BRANCH (63dd66fc97516d8d0a9c522a3d120ece35b31163 BACKPORT: drm/file: Add fdinfo helper for printing regions w)
   add_device_randomness
   add_uevent_var
   alloc_etherdev_mqs
@@ -1297,3 +1298,8 @@
   xhci_get_ep_ctx
   xhci_init_driver
   xhci_reset_bandwidth
+||||||| BASE          (220001a50cfa2394912c44241bb948acc8444372 BACKPORT: drm/file: Add fdinfo helper for printing regions w)
+=======
+# required by panthor.ko
+  drm_fdinfo_print_size
+>>>>>>> SOURCE BRANCH (e34340c0d86068ec8bcfad1af3015dd2a4346060 ANDROID: ABI: update symbol list for desktop)

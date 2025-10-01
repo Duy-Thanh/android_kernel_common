@@ -379105,6 +379105,15 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x1ab136e2
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2b79f509
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+  parameter_id: 0x92233392
+}
+function {
   id: 0x1ab3405a
   return_type_id: 0x48b5725f
   parameter_id: 0x2b79f509
@@ -459488,6 +459497,15 @@ elf_symbol {
   full_name: "drm_event_reserve_init_locked"
 }
 elf_symbol {
+  id: 0x85ede6b5
+  name: "drm_fdinfo_print_size"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x602bf8d8
+  type_id: 0x1ab136e2
+  full_name: "drm_fdinfo_print_size"
+}
+elf_symbol {
   id: 0x9d83d0f8
   name: "drm_flip_work_cleanup"
   is_defined: true
@@ -514612,6 +514630,7 @@ interface {
   symbol_id: 0x99beb7c8
   symbol_id: 0x0ba86fe5
   symbol_id: 0x90dbe313
+  symbol_id: 0x85ede6b5
   symbol_id: 0x9d83d0f8
   symbol_id: 0x11744540
   symbol_id: 0x4b6be7d2
