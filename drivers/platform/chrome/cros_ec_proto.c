@@ -1168,6 +1168,7 @@ int cros_ec_get_cmd_versions(struct cros_ec_device *ec_dev, u16 cmd)
 }
 EXPORT_SYMBOL_GPL(cros_ec_get_cmd_versions);
 
+<<<<<<< HEAD   (16b0ebe76e59867b57a9b239138aa72523738b44 ANDROID: ABI: update symbol list for galaxy am: 62ba42cd5a)
 /**
  * cros_ec_device_registered - Return if the ec_dev is registered.
  *
@@ -1182,5 +1183,8 @@ bool cros_ec_device_registered(struct cros_ec_device *ec_dev)
 }
 EXPORT_SYMBOL_GPL(cros_ec_device_registered);
 
+||||||| BASE   (62ba42cd5a749a2359cd2329f0363cb7ad182e15 ANDROID: ABI: update symbol list for galaxy)
+=======
+>>>>>>> BRANCH (54497cbaadaae5433eaeca76106fecbba90841c8 UPSTREAM: platform/chrome: cros_ec_proto: Allow to build as )
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("ChromeOS EC communication protocol helpers");
