@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8871c5f_522c3fa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-03T22:28:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure if having this as a separate patch is helpful. Maybe better to fold it together with the patch before it, so there is one coherent change that doesn\u0027t introduce build issues in-between?",
+      "revId": "7da2480e89184d1dd19fb88e63726821cb08606c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
