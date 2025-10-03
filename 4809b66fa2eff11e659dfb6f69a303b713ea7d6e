@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "347a0023_2e50cd14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-03T00:24:37Z",
+      "side": 1,
+      "message": "This is the \"useful context\" needed in the commit message (along with the patch link). Please explain all of this in the commit message.",
+      "parentUuid": "c759b096_dfba63e1",
+      "revId": "4809b66fa2eff11e659dfb6f69a303b713ea7d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1aea7789_2e13fe9e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
