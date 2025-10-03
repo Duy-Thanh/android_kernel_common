@@ -3532,8 +3532,12 @@ int migrate_swap(struct task_struct *cur, struct task_struct *p,
 	if (!cpumask_test_cpu(arg.src_cpu, arg.dst_task->cpus_ptr))
 		goto out;
 
+#ifdef CONFIG_NUMA_BALANCING
 	trace_sched_swap_numa(cur, arg.src_cpu, p, arg.dst_cpu);
+#endif
+#ifdef CONFIG_SMP
 	ret = stop_two_cpus(arg.dst_cpu, arg.src_cpu, migrate_swap_stop, &arg);
+#endif
 
 out:
 	return ret;
