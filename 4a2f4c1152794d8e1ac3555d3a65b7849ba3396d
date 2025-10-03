@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbf6d05_9d5f19e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2025-10-03T21:11:37Z",
+      "side": 1,
+      "message": "elsk@google.com, I\u0027m a bit confused by the ABI changes check.\n\nFirst, it\u0027s not clear to me why only the x86_64 ABI has changed. This is an architecture agnostic change in the zram driver, so I don\u0027t understand why pidfd_get_task() would be added to the x86_64 ABI but not the aarch64 ABI.\n\nSecond, there doesn\u0027t seem to be an x86_64 abi.stg file in the source tree, so I\u0027m not sure how to follow the information at go/kernel-abi-monitoring.",
+      "revId": "4a2f4c1152794d8e1ac3555d3a65b7849ba3396d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
