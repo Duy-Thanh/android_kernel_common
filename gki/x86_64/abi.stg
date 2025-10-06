@@ -276499,6 +276499,11 @@ function {
   parameter_id: 0xb948194f
 }
 function {
+  id: 0x4bcbea3e
+  return_type_id: 0x21069feb
+  parameter_id: 0x21069feb
+}
+function {
   id: 0x4c603ab7
   return_type_id: 0x7be80061
   parameter_id: 0x1e820193
@@ -330531,6 +330536,15 @@ elf_symbol {
   full_name: "usb_get_function_instance"
 }
 elf_symbol {
+  id: 0x90d03bc9
+  name: "usb_get_intf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x32e140a2
+  type_id: 0x4bcbea3e
+  full_name: "usb_get_intf"
+}
+elf_symbol {
   id: 0x86ed11eb
   name: "usb_hcd_check_unlink_urb"
   is_defined: true
@@ -330727,6 +330741,15 @@ elf_symbol {
   crc: 0xc0e4d228
   type_id: 0x19c6594b
   full_name: "usb_put_hcd"
+}
+elf_symbol {
+  id: 0xa834737e
+  name: "usb_put_intf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc57c3673
+  type_id: 0x18d9f669
+  full_name: "usb_put_intf"
 }
 elf_symbol {
   id: 0x869e15d7
@@ -337454,6 +337477,7 @@ interface {
   symbol_id: 0xcdfba9d9
   symbol_id: 0xc6afe73b
   symbol_id: 0x320c23b0
+  symbol_id: 0x90d03bc9
   symbol_id: 0x86ed11eb
   symbol_id: 0x351f9c86
   symbol_id: 0x975ff621
@@ -337476,6 +337500,7 @@ interface {
   symbol_id: 0x1294ca70
   symbol_id: 0x38a32d34
   symbol_id: 0x214d76fa
+  symbol_id: 0xa834737e
   symbol_id: 0x869e15d7
   symbol_id: 0xa60cf3b7
   symbol_id: 0x944deaea
