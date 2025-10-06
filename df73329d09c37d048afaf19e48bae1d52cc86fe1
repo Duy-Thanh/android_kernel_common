@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79a8bfe_68af9deb",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:17:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f03791e_61da1c31",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "300b82d9_3b06631c",
@@ -125,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b13921_34f9b70c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:17:58Z",
+      "side": 1,
+      "message": "\u003e Anyway, it seems the cleanest solution would be to let range_has_pvmfw() itself return the overlapped range and the pvmfw offset.\n\nDone.",
+      "parentUuid": "fd650d95_715a1c35",
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d2dbb73_cb307c68",
@@ -162,6 +198,30 @@
       "side": 1,
       "message": "\u003e taking into account that size passed to this function comes from guest_mmu_map_leaf and pgt_level_to_size ensures it is page aligned as well.\n\nI hope we will get rid of guest_mmu_map_leaf() and will call this directly instead, then it will not be ensured so automatically anymore.\n\n\u003e BTW looking at it I just realized that when userspace sets pvmfw load addr via KVM_CAP_X86_PROTECTED_VM_FLAGS_SET_FW_GPA, we do not check if it is page aligned in pkvm_vm_ioctl_set_fw_gpa but perhaps we should? Seems like it is not a security issue to allow user-space setting arbitrary non-aligned address but in such case entire page will be donated to guest anyway and potentially waste some memory. WDYT?\n\nI agree, but I\u0027ll also let @willdeacon@google.com speak, since this logic, as well as the ioctl implementation, is basically just copied from pKVM-ARM. :)",
       "parentUuid": "6d2dbb73_cb307c68",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "df73329d09c37d048afaf19e48bae1d52cc86fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e095ec72_ae81d67e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:17:58Z",
+      "side": 1,
+      "message": "Reworked the code. Now page alignment is not even strictly required here, so removed this check.",
+      "parentUuid": "b8f7eceb_fa091bfd",
       "range": {
         "startLine": 104,
         "startChar": 0,
