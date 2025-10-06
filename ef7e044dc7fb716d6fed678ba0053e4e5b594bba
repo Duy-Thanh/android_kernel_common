@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf86b8f_24c63799",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-06T10:37:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t build. Please can you try to keep the series bisectable?",
+      "revId": "ef7e044dc7fb716d6fed678ba0053e4e5b594bba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
