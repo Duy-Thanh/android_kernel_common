@@ -16,6 +16,24 @@
       "message": "I like the fact that we revert this change, but why? Was it upstreamed already?",
       "revId": "01bf21e35e06aa4622d4214ece60635e57145e35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b90a07_d3e14e5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1881538
+      },
+      "writtenOn": "2025-10-06T07:49:11Z",
+      "side": 1,
+      "message": "We don\u0027t need it. It can be dropped.",
+      "parentUuid": "11c46778_1d035d66",
+      "revId": "01bf21e35e06aa4622d4214ece60635e57145e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
