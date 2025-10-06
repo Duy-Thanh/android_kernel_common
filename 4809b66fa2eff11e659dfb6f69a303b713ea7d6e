@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "585ec90a_64f03377",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-06T17:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d7c1964_f543fa95",
+      "revId": "4809b66fa2eff11e659dfb6f69a303b713ea7d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40ae708b_f426dfd5",
@@ -89,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1697d69_076f007a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-06T17:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "347a0023_2e50cd14",
+      "revId": "4809b66fa2eff11e659dfb6f69a303b713ea7d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aea7789_2e13fe9e",
@@ -102,6 +138,24 @@
       "writtenOn": "2025-10-01T17:22:18Z",
       "side": 1,
       "message": "Why is this a vendor hook when it is fixing a serious bug? Why not submit the actual fix? (either here upstream as appropriate)",
+      "revId": "4809b66fa2eff11e659dfb6f69a303b713ea7d6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9740c9_7b9af3b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-06T17:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aea7789_2e13fe9e",
       "revId": "4809b66fa2eff11e659dfb6f69a303b713ea7d6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
