@@ -105,6 +105,30 @@
       },
       "revId": "fec8f4f490e5784f9ad6784fbdeb4fcc8545aa86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73122ca0_1fa1c623",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 7285,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:32:30Z",
+      "side": 1,
+      "message": "\u003e So it\u0027s better to explicitly disable kvm_mmu_invalidate_mmio_sptes() if enable_pkvm is true. In fact it seems we can disable it whenever enable_mmio_caching is false, not just with pKVM.\n\nDone in aosp/3790431 (https://lore.kernel.org/kvm/20250926135139.1597781-1-dmaluka@chromium.org/)\n\n\u003e This also makes me think that it\u0027s probably better (at least cleaner) to explicitly prevent kvm_arch_flush_shadow_all() from calling kvm_mmu_zap_all() if enable_pkvm is true.\n\nDone in aosp/3790430",
+      "parentUuid": "2a644475_0f565135",
+      "range": {
+        "startLine": 7285,
+        "startChar": 2,
+        "endLine": 7285,
+        "endChar": 22
+      },
+      "revId": "fec8f4f490e5784f9ad6784fbdeb4fcc8545aa86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
