@@ -728,8 +728,11 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
 	if (grows == (PROT_GROWSDOWN|PROT_GROWSUP)) /* can't be both */
 		return -EINVAL;
 
-	if (!__PAGE_ALIGNED(start))
-		return -EINVAL;
+	if (len)
+		len += start - __PAGE_ALIGN_DOWN(start);
+
+	start = __PAGE_ALIGN_DOWN(start);
+
 	if (!len)
 		return 0;
 	len = __PAGE_ALIGN(len);
