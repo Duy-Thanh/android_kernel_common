@@ -70,3 +70,9 @@ type 'struct readahead_control' changed
 type 'struct bindings::bindings_raw::readahead_control' changed
   member 'union bindings::bindings_raw::readahead_control__bindgen_ty_1 __bindgen_anon_1' was added
 
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved2' was removed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { int(* map_module_pages)(u64, void*, u64, enum kvm_pgtable_prot, bool); struct { u64 __kabi_reserved2; }; union { }; }' was added
+  member 'union { int(* unmap_module_pages)(u64, void*, u64); struct { u64 __kabi_reserved3; }; union { }; }' was added
+

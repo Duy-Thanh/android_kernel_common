@@ -1635,7 +1635,7 @@ static void handle___pkvm_map_module_page(struct kvm_cpu_context *host_ctxt)
 	DECLARE_REG(void *, va, host_ctxt, 2);
 	DECLARE_REG(enum kvm_pgtable_prot, prot, host_ctxt, 3);
 
-	cpu_reg(host_ctxt, 1) = (u64)__pkvm_map_module_page(pfn, va, prot, false);
+	cpu_reg(host_ctxt, 1) = (u64)__pkvm_map_module_pages(pfn, va, 1, prot, false);
 }
 
 static void handle___pkvm_unmap_module_page(struct kvm_cpu_context *host_ctxt)
@@ -1643,7 +1643,7 @@ static void handle___pkvm_unmap_module_page(struct kvm_cpu_context *host_ctxt)
 	DECLARE_REG(u64, pfn, host_ctxt, 1);
 	DECLARE_REG(void *, va, host_ctxt, 2);
 
-	__pkvm_unmap_module_page(pfn, va);
+	__pkvm_unmap_module_pages(pfn, va, 1);
 }
 
 static void handle___pkvm_init_module(struct kvm_cpu_context *host_ctxt)
