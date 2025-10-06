@@ -16,6 +16,24 @@
       "message": "FYI, I sent the similar aosp/3773485 two weeks ago for review.",
       "revId": "ac9becb5bfde90b03ac9aad8ae2321fda55ec6a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "048777ca_6c7b717d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-10-06T22:56:39Z",
+      "side": 1,
+      "message": "Oh, thanks for the heads up. Let\u0027s pick up your commits instead then.",
+      "parentUuid": "21263d59_bc8a4ede",
+      "revId": "ac9becb5bfde90b03ac9aad8ae2321fda55ec6a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
