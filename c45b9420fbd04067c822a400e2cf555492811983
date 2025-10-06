@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db53040f_e9d0b52d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-06T22:00:54Z",
+      "side": 1,
+      "message": "Overriding lint as reverting a change that wasn\u0027t merged to android15-6.6",
+      "revId": "c45b9420fbd04067c822a400e2cf555492811983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
