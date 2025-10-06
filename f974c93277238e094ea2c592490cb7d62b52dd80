@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c96cb1a2_718a4ec1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:38:25Z",
+      "side": 1,
+      "message": "Resolving comment. @chuanxiao.dong@intel.corp-partner.google.com please let me know if you have more thoughts on HOST_INIT_MMU/HOST_RESET_MMU.",
+      "parentUuid": "a9175f39_1ec87ab0",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "53899517_ba3e31fb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 17
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Yeah, forgot about this.",
       "parentUuid": "1ec4413d_0de42514",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dacccb50_fec625e2",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 8533,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:38:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "593c0d50_83ba917a",
       "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
