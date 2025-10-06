@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/448216447",
       "revId": "1821b343fbb529e0802b5dded0fef04cc02dd270",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "160b096d_5fd6dff0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-06T15:04:53Z",
+      "side": 1,
+      "message": "in android15-6.6 via LTS mege",
+      "revId": "1821b343fbb529e0802b5dded0fef04cc02dd270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
