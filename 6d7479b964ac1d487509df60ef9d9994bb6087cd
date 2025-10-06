@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/449767256",
       "revId": "6d7479b964ac1d487509df60ef9d9994bb6087cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b740944_5409cbf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-06T20:16:30Z",
+      "side": 1,
+      "message": "Bypassing lint, as upstream change AOSP/3790530 for this cherry pick, on base branch \u0027android15-6.6\u0027 is now merged",
+      "revId": "6d7479b964ac1d487509df60ef9d9994bb6087cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
