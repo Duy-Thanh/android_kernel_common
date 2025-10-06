@@ -51,6 +51,24 @@
       "parentUuid": "d2f8f138_835c2776",
       "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7e7391b_1444c904",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 7479,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-06T13:36:33Z",
+      "side": 1,
+      "message": "Done: moved to kvm_mmu_vendor_module_init() (more precisely, to a separate function pkvm_mmu_vendor_module_init(), in preparation for aosp/3666645).",
+      "parentUuid": "9f779a7c_b9b47759",
+      "revId": "29b5d6f609922d7c58a87f9046139ccd24a95e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
