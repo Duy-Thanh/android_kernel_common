@@ -325,10 +325,6 @@ static int gunyah_vcpu_run(struct gunyah_vcpu *vcpu)
 					goto out;
 				break;
 			default:
-				pr_warn_ratelimited(
-					"Unknown vCPU state: %llx\n",
-					vcpu_run_resp.sized_state);
-				ret = -EINVAL;
 				goto out;
 			}
 		} else if (gunyah_error == GUNYAH_ERROR_RETRY) {
