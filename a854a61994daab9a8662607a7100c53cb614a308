@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5af9571_9ffd5218",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T12:11:26Z",
+      "side": 1,
+      "message": "I believe it\u0027s worth explaining _why_ INTEL_IOMMU_FLOPPY_WA is a problem with pKVM (i.e. that pKVM forbids donating pages that are mapped in IOMMU page tables, while INTEL_IOMMU_FLOPPY_WA maps those first 16MB in IOMMU page tables but does not prevent them from being used by the host kernel\u0027s buddy allocator and thus potentially allocated for donating to a pVM or to hypervisor).",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b381567e_d82625da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T12:11:26Z",
+      "side": 1,
+      "message": "Question: I assume you also verified that the problem does not occur in stress testing anymore?",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
