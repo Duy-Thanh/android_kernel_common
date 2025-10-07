@@ -21,7 +21,9 @@
 #include <linux/can/length.h>
 #include <linux/can/netlink.h>
 #include <linux/can/skb.h>
+#ifndef __GENKSYMS__
 #include <linux/ethtool.h>
+#endif
 #include <linux/netdevice.h>
 
 /*
