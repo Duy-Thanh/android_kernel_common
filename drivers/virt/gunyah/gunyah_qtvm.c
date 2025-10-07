@@ -51,8 +51,6 @@ static u16 gunyah_qtvm_pre_alloc_vmid(struct gunyah_vm *ghvm)
 static int gunyah_qtvm_pre_vm_configure(struct gunyah_vm *ghvm)
 {
 	struct gunyah_qtvm *vm = ghvm->auth_vm_mgr_data;
-	u64 start_gfn;
-	int ret;
 
 	/*
 	 * For QTVMs, the metadata is always placed at the beginning of the
@@ -95,20 +93,6 @@ static int gunyah_qtvm_pre_vm_configure(struct gunyah_vm *ghvm)
 		}
 	}
 
-	/*
-	 * RM would expect to have all the memory mentioned
-	 * in the VM DT to be shared/lent before the VM starts.
-	 * We will lend the primary memory parcel as
-	 * part of the vm_configure operation. So, share the rest
-	 * of the VM memory here.
-	 */
-	start_gfn = gunyah_gpa_to_gfn(vm->vm_image_addr + vm->vm_image_size);
-	ret = gunyah_share_range_as_parcels(ghvm, start_gfn, ULONG_MAX, &vm->parcel_list);
-	if (ret) {
-		dev_err(ghvm->parent, "Failed to share non primary parcel(s) before VM start\n");
-		return ret;
-	}
-
 	return 0;
 }
 
@@ -128,6 +112,27 @@ static int gunyah_qtvm_authenticate(struct gunyah_vm *ghvm)
 	}
 
 	return 0;
+}
+
+static int gunyah_qtvm_pre_vm_init(struct gunyah_vm *ghvm) {
+	int ret = 0;
+
+	ret = gunyah_setup_demand_paging(ghvm, 0, ULONG_MAX);
+	if (ret) {
+		dev_warn(ghvm->parent,
+			"Failed to set up demand paging for qtvm: %d\n", ret);
+		return ret;
+	}
+
+	ret = gunyah_rm_vm_set_address_layout(
+		ghvm->rm, ghvm->vmid, GUNYAH_RM_RANGE_ID_IMAGE,
+		ghvm->config_image.parcel.start << PAGE_SHIFT,
+		ghvm->config_image.parcel.pages << PAGE_SHIFT);
+	if (ret)
+		dev_warn(ghvm->parent,
+			"Failed to set location of the config image mem parcel: %d\n", ret);
+
+	return ret;
 }
 
 static int gunyah_qtvm_pre_vm_start(struct gunyah_vm *ghvm)
@@ -162,6 +167,7 @@ static int gunyah_qtvm_post_vm_reset(struct gunyah_vm *ghvm)
 }
 
 static struct gunyah_auth_vm_mgr_ops vm_ops = {
+	.pre_vm_init = gunyah_qtvm_pre_vm_init,
 	.pre_alloc_vmid = gunyah_qtvm_pre_alloc_vmid,
 	.pre_vm_configure = gunyah_qtvm_pre_vm_configure,
 	.vm_authenticate = gunyah_qtvm_authenticate,

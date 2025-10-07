@@ -458,7 +458,6 @@ static void gunyah_vm_clean_resources(struct gunyah_vm *ghvm)
 	}
 
 	list_for_each_entry_safe(ghrsc, riter, &ghvm->resources, list) {
-		list_del(&ghrsc->list);
 		gunyah_rm_free_resource(ghrsc);
 	}
 	mutex_unlock(&ghvm->resources_lock);
@@ -584,19 +583,11 @@ static int gunyah_vm_rm_notification_status(struct gunyah_vm *ghvm, void *data)
 		return NOTIFY_OK;
 
 	/* All other state transitions are synchronous to a corresponding RM call */
-	switch (payload->vm_status) {
-	case GUNYAH_RM_VM_STATUS_RESET_FAILED:
-		dev_warn(ghvm->parent, "VM: %u RESET failed with status %u\n",
-			 ghvm->vmid, payload->vm_status);
-		fallthrough;
-	case GUNYAH_RM_VM_STATUS_RESET:
+	if (payload->vm_status == GUNYAH_RM_VM_STATUS_RESET) {
 		down_write(&ghvm->status_lock);
 		ghvm->vm_status = payload->vm_status;
 		up_write(&ghvm->status_lock);
 		wake_up(&ghvm->vm_status_wait);
-		break;
-	default:
-		break;
 	}
 
 	return NOTIFY_DONE;
@@ -1055,22 +1046,6 @@ static long gunyah_vm_ioctl(struct file *filp, unsigned int cmd,
 		r = gunyah_vm_binding_alloc(ghvm, &region, lend);
 		break;
 	}
-	case GH_VM_RECLAIM_REGION: {
-		struct gunyah_address_range range;
-
-		/* only allow owner task to remove memory */
-		if (ghvm->mm_s != current->mm)
-			return -EPERM;
-		if (copy_from_user(&range, argp, sizeof(range)))
-			return -EFAULT;
-		if (!PAGE_ALIGNED(range.size) || !PAGE_ALIGNED(range.guest_phys_addr))
-			return -EINVAL;
-
-		r = gunyah_vm_reclaim_range(ghvm,
-					    gunyah_gpa_to_gfn(range.guest_phys_addr),
-					    gunyah_gpa_to_gfn(range.size) - 1);
-		break;
-	}
 	case GH_VM_ANDROID_MAP_CMA_MEM: {
 		struct gunyah_map_cma_mem_args cma_mem;
 
@@ -1082,6 +1057,21 @@ static long gunyah_vm_ioctl(struct file *filp, unsigned int cmd,
 			return -EFAULT;
 
 		r = gunyah_vm_binding_cma_alloc(ghvm, &cma_mem);
+		break;
+	}
+	case GH_VM_RECLAIM_REGION: {
+		struct gunyah_address_range range;
+
+		/* only allow owner task to add memory */
+		if (ghvm->mm_s != current->mm)
+			return -EPERM;
+		if (copy_from_user(&range, argp, sizeof(range)))
+			return -EFAULT;
+		if (!PAGE_ALIGNED(range.size) || !PAGE_ALIGNED(range.guest_phys_addr))
+			return -EINVAL;
+
+		pr_err_ratelimited("%s:%d %016llx %016llx\n", __func__, __LINE__, range.guest_phys_addr, range.guest_phys_addr >> PAGE_SHIFT);
+		r = gunyah_vm_reclaim_range(ghvm, range.guest_phys_addr >> PAGE_SHIFT, (range.size >> PAGE_SHIFT) - 1);
 		break;
 	}
 	case GUNYAH_VM_SET_BOOT_CONTEXT: {
@@ -1162,8 +1152,7 @@ static void _gunyah_vm_put(struct kref *kref)
 		/* clang-format off */
 		if (!ret)
 			wait_event(ghvm->vm_status_wait,
-				   (ghvm->vm_status == GUNYAH_RM_VM_STATUS_RESET) ||
-				   (ghvm->vm_status == GUNYAH_RM_VM_STATUS_RESET_FAILED));
+				   ghvm->vm_status == GUNYAH_RM_VM_STATUS_RESET);
 		else
 			dev_err(ghvm->parent, "Failed to reset the vm: %d\n", ret);
 

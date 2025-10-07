@@ -673,6 +673,7 @@ int gunyah_rm_vm_set_address_layout(struct gunyah_rm *rm, u16 vmid,
 			      sizeof(req), NULL, NULL);
 }
 ALLOW_ERROR_INJECTION(gunyah_rm_vm_set_address_layout, ERRNO);
+EXPORT_SYMBOL_GPL(gunyah_rm_vm_set_address_layout);
 
 /**
  * gunyah_rm_vm_set_firmware_mem() - Set the location of firmware for GH_RM_VM_AUTH_QCOM_ANDROID_PVM VMs
