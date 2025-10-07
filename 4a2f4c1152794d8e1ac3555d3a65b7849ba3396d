@@ -34,6 +34,24 @@
       "parentUuid": "9dbf6d05_9d5f19e0",
       "revId": "4a2f4c1152794d8e1ac3555d3a65b7849ba3396d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740625a4_4ca6a1a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-10-07T11:50:52Z",
+      "side": 1,
+      "message": "This is not \"ABI Changes\". It is \"Build ABI Changes\". It represents the difference between the reference build\u0027s ABI and the given build\u0027s ABI.\n\nYour stack is currently 21 commits behind branch tip.\n\nThe report quotes:\n\nold\u003dab/14185045/kernel_x86_64; new\u003dab/P106022631/kernel_x86_64; change\u003dandroid-review.googlesource.com/c/3776526/4; file\u003dabi.stg; tool\u003dstgdiff_stg; rc\u003d4\n\nThe reference build ab/14185045 has kernel/common at 470ce9a9bd694d6e9b71c154ce3747e7c3652468.\n\nThe pending build was also built at 470ce9a9bd694d6e9b71c154ce3747e7c3652468 plus the stack of changes.\n\nSo nothing is unusual there. Build ABI monitoring correctly reflected the stack of changes relative to 470ce9a9bd694d6e9b71c154ce3747e7c3652468.\n\n---\n\n* `aarch64` in `android16-6.12` ABIs are restricted by symbol lists. The new symbol must be listed to appear in ksymtab.\n* `x864_64` in `android16-6.12` ABIs are not restricted by symbol lists. The new symbol is immediately available in ksymtab.\n\n---\n\nBuild ABI Changes findings are purely informational. For more (concise) documentation, see go/abi:gerrit.",
+      "parentUuid": "ad421cf9_0e169c08",
+      "revId": "4a2f4c1152794d8e1ac3555d3a65b7849ba3396d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
