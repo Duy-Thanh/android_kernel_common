@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9df35e8_ef7aea3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T12:21:29Z",
+      "side": 1,
+      "message": "BTW also, I\u0027m trying to recall why we decided to make it depend on !BLK_DEV_FD, not just directly on !INTEL_IOMMU_FLOPPY_WA... Probably because the floppy driver currently _requires_ INTEL_IOMMU_FLOPPY_WA for successful operation if IOMMU is enabled, thus it has no chance to work with pKVM, so it might be better to make that explicit (so that people know that by enabling pKVM they sacrifice the ability to use a floppy drive :)). If so, worth explaining that here as well?",
+      "parentUuid": "b5af9571_9ffd5218",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b381567e_d82625da",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
