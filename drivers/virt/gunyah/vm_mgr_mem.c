@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
+
 /*
  * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -8,6 +9,7 @@
 #include <asm/gunyah.h>
 #include <linux/mm.h>
 #include <linux/pagemap.h>
+#include <linux/delay.h>
 
 #include "rsc_mgr.h"
 #include "vm_mgr.h"
@@ -78,7 +80,7 @@ int gunyah_vm_parcel_to_paged(struct gunyah_vm *ghvm,
 			folio = folio_next(folio);
 		}
 	}
-	BUG_ON(off != nr);
+	pr_err("off %lu nr %llx\n", off, nr);
 	vm_parcel->start = 0;
 	b->vm_parcel = NULL;
 
@@ -157,6 +159,7 @@ int gunyah_vm_provide_folio(struct gunyah_vm *ghvm, struct folio *folio,
 	if (share) {
 		guest_extent = __first_resource(&ghvm->guest_shared_extent_ticket);
 		host_extent = __first_resource(&ghvm->host_shared_extent_ticket);
+
 	} else {
 		guest_extent = __first_resource(&ghvm->guest_private_extent_ticket);
 		host_extent = __first_resource(&ghvm->host_private_extent_ticket);
@@ -204,9 +207,10 @@ int gunyah_vm_provide_folio(struct gunyah_vm *ghvm, struct folio *folio,
 							 guest_extent->capid,
 							 pa, size);
 	if (gunyah_error != GUNYAH_ERROR_OK) {
-		pr_err("Failed to donate memory for guest address 0x%016llx: %d\n",
-		       gpa, gunyah_error);
+		pr_err("Failed to donate memory for guest address 0x%016llx: %d pa:0x%016llx h:%16llx g:%16llx\n",
+		       gpa, gunyah_error, pa, host_extent->capid, guest_extent->capid);
 		ret = gunyah_error_remap(gunyah_error);
+		msleep(30 * 1000);
 		goto platform_release;
 	}
 
@@ -356,6 +360,7 @@ int gunyah_vm_reclaim_range(struct gunyah_vm *ghvm, u64 gfn, u64 nr)
 	unsigned long next = gfn, g;
 	struct folio *folio;
 	int ret, ret2 = 0;
+	int count = 0;
 	void *entry;
 	bool sync;
 
@@ -367,15 +372,20 @@ int gunyah_vm_reclaim_range(struct gunyah_vm *ghvm, u64 gfn, u64 nr)
 		g = next - folio_nr_pages(folio);
 		folio_get(folio);
 		folio_lock(folio);
-		if (mtree_load(&ghvm->mm, g) == entry)
+		if (mtree_load(&ghvm->mm, g) == entry) {
 			ret = __gunyah_vm_reclaim_folio_locked(ghvm, entry, g, sync);
-		else
+			count++;
+		} else {
 			ret = -EAGAIN;
+		}
 		folio_unlock(folio);
 		folio_put(folio);
 		if (ret && ret2 != -EAGAIN)
 			ret2 = ret;
 	}
+
+	if (count)
+		pr_err("%s:%d reclaim %016llx %d\n", __func__, __LINE__, gfn, count);
 
 	return ret2;
 }
@@ -464,6 +474,7 @@ static int gunyah_gup_demand_page(struct gunyah_vm *ghvm, struct gunyah_vm_bindi
 	}
 
 	folio_lock(folio);
+
 	ret = gunyah_vm_provide_folio(ghvm, folio, gfn - folio_page_idx(folio, page),
 				      !(b->share_type == VM_MEM_LEND),
 				      !!(b->flags & GUNYAH_MEM_ALLOW_WRITE));
@@ -873,11 +884,15 @@ int gunyah_setup_demand_paging(struct gunyah_vm *ghvm, u64 start_gfn,
 			continue;
 		entries[i].phys_addr = cpu_to_le64(b->guest_phys_addr);
 		entries[i].size = cpu_to_le64(b->size);
+		pr_err("Entry no %u\n", i);
+
 		if (++i == count)
 			break;
 	}
-
+	pr_err("Demand paged entries %u and ret %d count %d\n", i, ret, count);
 	ret = gunyah_rm_vm_set_demand_paging(ghvm->rm, ghvm->vmid, i, entries);
+	pr_err("Demand paged entries %u and ret %d count %d\n", i, ret, count);
+
 	kfree(entries);
 out:
 	up_read(&ghvm->bindings_lock);
