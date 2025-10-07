@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a6942d_a00c067e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-07T14:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0951f7b0_cf73090e",
+      "revId": "aaaa08f83dbda6dea7a3adcb5fb918e67fd43ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47ea946e_d1e4bf0a",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "167ca9a2_88757fe5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-07T14:36:39Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "47ea946e_d1e4bf0a",
+      "revId": "aaaa08f83dbda6dea7a3adcb5fb918e67fd43ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d8c40ae_097ce90f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 8
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-07T14:27:40Z",
       "side": 1,
       "message": "ditto, s/the driver/the floppy driver/ ?",
+      "revId": "aaaa08f83dbda6dea7a3adcb5fb918e67fd43ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1613e871_98c7397c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-07T14:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d8c40ae_097ce90f",
       "revId": "aaaa08f83dbda6dea7a3adcb5fb918e67fd43ca0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
