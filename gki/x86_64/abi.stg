@@ -298575,6 +298575,15 @@ elf_symbol {
   full_name: "__drm_puts_seq_file"
 }
 elf_symbol {
+  id: 0x92125165
+  name: "__drmm_add_action"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdc0fd1e3
+  type_id: 0x92a00fb3
+  full_name: "__drmm_add_action"
+}
+elf_symbol {
   id: 0x01d746af
   name: "__drmm_add_action_or_reset"
   is_defined: true
@@ -333442,6 +333451,7 @@ interface {
   symbol_id: 0x23f7ba3f
   symbol_id: 0x75c34533
   symbol_id: 0x817e893f
+  symbol_id: 0x92125165
   symbol_id: 0x01d746af
   symbol_id: 0xca790885
   symbol_id: 0x95b9a239
