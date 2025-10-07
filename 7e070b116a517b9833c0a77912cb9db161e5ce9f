@@ -16,6 +16,24 @@
       "message": "1. Were the tests run and did they pass?\n2. Which SOCs were the tests run on?",
       "revId": "7e070b116a517b9833c0a77912cb9db161e5ce9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9d5094_35584e94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3845040
+      },
+      "writtenOn": "2025-10-07T02:30:32Z",
+      "side": 1,
+      "message": "Hi Tim,\nYes this is tested by driver team in upstream CI .\nI tested this for PTL",
+      "parentUuid": "5490fa5e_7588ed81",
+      "revId": "7e070b116a517b9833c0a77912cb9db161e5ce9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
