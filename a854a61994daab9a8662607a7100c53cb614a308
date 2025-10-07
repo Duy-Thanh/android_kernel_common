@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a6d06e1_8ae63c61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-07T13:12:23Z",
+      "side": 1,
+      "message": "make sense, I have added more to the the commit log to capture the above :-)",
+      "parentUuid": "a9df35e8_ef7aea3d",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b381567e_d82625da",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -49,6 +67,24 @@
       "writtenOn": "2025-10-07T12:11:26Z",
       "side": 1,
       "message": "Question: I assume you also verified that the problem does not occur in stress testing anymore?",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10997f57_d46819be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-07T13:12:23Z",
+      "side": 1,
+      "message": "Yes Aashish tested this last week and verified that the issue doesn\u0027t occur any more.",
+      "parentUuid": "b381567e_d82625da",
       "revId": "a854a61994daab9a8662607a7100c53cb614a308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
