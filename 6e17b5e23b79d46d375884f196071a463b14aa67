@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca975bb_cae376f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T13:57:17Z",
+      "side": 1,
+      "message": "nit: maybe to explain it more clearly, e.g.: \"With INTEL_IOMMU_FLOPPY_WA, those first 16MB are mapped in the iommu domain page tables all the time, whereas they may still be used by the host kernel for allocating pages for a pVM as long as they are not being used by the floppy driver\"?",
+      "revId": "6e17b5e23b79d46d375884f196071a463b14aa67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

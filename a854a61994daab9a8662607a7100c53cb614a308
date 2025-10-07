@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4abea65f_3fa54a9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T13:57:17Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "9a6d06e1_8ae63c61",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b381567e_d82625da",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Yes Aashish tested this last week and verified that the issue doesn\u0027t occur any more.",
       "parentUuid": "b381567e_d82625da",
+      "revId": "a854a61994daab9a8662607a7100c53cb614a308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03fc8a7a_cf7f4535",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-07T13:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10997f57_d46819be",
       "revId": "a854a61994daab9a8662607a7100c53cb614a308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
