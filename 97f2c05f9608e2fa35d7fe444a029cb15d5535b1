@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f93444_0b213e76",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-10-08T02:32:12Z",
+      "side": 1,
+      "message": "This is quite different from the upstream patch. We should probably track these in case of future merge conflicts (ie Add some extra `// Android` comments?).\n\nBefore we take that tech debt, are you confident the other changes required to make the whole feature work are limited?",
+      "revId": "97f2c05f9608e2fa35d7fe444a029cb15d5535b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
