@@ -16,6 +16,23 @@
       "message": "One more lint override: android15-6.6 change AOSP/3790530 has landed. Unfortunately the premature merging and then reverts of the cherry-picks to the release branch cause the Change-Id here to be different, so I have to override that check. Apologies for all the troubles I caused here.",
       "revId": "5624ff5519ff3d46ab64efb1241b6c11ca324468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314ab4f9_fe8f4ff0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2025-10-08T01:18:18Z",
+      "side": 1,
+      "message": "Respin Bug: b/449767633",
+      "revId": "5624ff5519ff3d46ab64efb1241b6c11ca324468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
