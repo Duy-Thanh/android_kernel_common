@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8f5e09_74009658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-08T20:22:49Z",
+      "side": 1,
+      "message": "This change should not be necessary in Android 16: https://docs.partner.android.com/partners/releases/cf/sep-2025#428500223 (`CPUs not used after hotplugging`)",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
