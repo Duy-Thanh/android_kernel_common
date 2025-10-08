@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b724a8c9_faea4028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 66
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-08T11:45:46Z",
+      "side": 1,
+      "message": "The order is not correct if this CL comes after the one that enforces the guests to use 1.2",
+      "revId": "29fd8234be462cfff574d8ed5b36966cde8e7be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1409b0ac_ae5a1c9a",
