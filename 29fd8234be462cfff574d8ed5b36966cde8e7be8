@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1409b0ac_ae5a1c9a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-08T08:33:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these be added in a separate patch?",
+      "range": {
+        "startLine": 1904,
+        "startChar": 1,
+        "endLine": 1904,
+        "endChar": 11
+      },
+      "revId": "29fd8234be462cfff574d8ed5b36966cde8e7be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
