@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5bc9565d_3ca3f8d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-08T14:13:48Z",
+      "side": 1,
+      "message": "Removed the FIXMEs about HOST_INIT_MMU/HOST_RESET_MMU: aosp/3793807\n\nAlso I realized that actually we only need HOST_INIT_MMU/HOST_RESET_MMU for npVM, not necessarily for pVM, so we can avoid exposing pVM\u0027s CR0/CR4/EFER values to host: aosp/3793808",
+      "parentUuid": "c96cb1a2_718a4ec1",
+      "revId": "f974c93277238e094ea2c592490cb7d62b52dd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "53899517_ba3e31fb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 17
