@@ -404,6 +404,29 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_folio_list);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inode_lru_isolate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_invalidate_mapping_pagevec);
+<<<<<<< HEAD   (1257aa4519ee5d49e465b0dcc85cc7e4a24619d5 UPSTREAM: tls: make sure to abort the stream if headers are )
+||||||| BASE   (389ccf71d9258e08ef54ca5267fc29c74feb2bba FROMGIT: KVM: arm64: Mark optional FF-A 1.2 interfaces as un)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio_gfp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_folio_accessed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio_gfp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
+>>>>>>> CHANGE (92dd59824dce750082f1b0000bba86364660a540 ANDROID: vendor_hooks: Recognize access to important file pa)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_kcompactd_cpu_online);
