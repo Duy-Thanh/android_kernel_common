@@ -22,6 +22,30 @@
       },
       "revId": "5f9e8fbe800f5e57beb7ac18b80714034d34c0ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f550b5_630e6d9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2025-10-09T13:22:52Z",
+      "side": 1,
+      "message": "tried to remove and push it from my project, but it keeps getting added by git tool.\nnow removed it from gerrit directly.",
+      "parentUuid": "84445463_cb363f24",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 52
+      },
+      "revId": "5f9e8fbe800f5e57beb7ac18b80714034d34c0ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
