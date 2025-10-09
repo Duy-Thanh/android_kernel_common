@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "486b075c_41bc7403",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-10-09T20:00:51Z",
+      "side": 1,
+      "message": "Please add another line explaining that the command line argument `\"fred\u003don\"` is required also to enable FRED on a device.",
+      "revId": "4f293b8af29d86bc2999515b2d4e56a7959d4971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
