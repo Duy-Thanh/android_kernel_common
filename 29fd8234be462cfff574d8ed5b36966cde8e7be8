@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ba8e69_2f8c1177",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 66
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-09T00:55:18Z",
+      "side": 1,
+      "message": "Reordered this CL with respect to aosp/3606370.",
+      "parentUuid": "b724a8c9_faea4028",
+      "revId": "29fd8234be462cfff574d8ed5b36966cde8e7be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1409b0ac_ae5a1c9a",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-10-08T08:33:18Z",
       "side": 1,
       "message": "Shouldn\u0027t these be added in a separate patch?",
+      "range": {
+        "startLine": 1904,
+        "startChar": 1,
+        "endLine": 1904,
+        "endChar": 11
+      },
+      "revId": "29fd8234be462cfff574d8ed5b36966cde8e7be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae10422_3246fdbe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-09T00:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1409b0ac_ae5a1c9a",
       "range": {
         "startLine": 1904,
         "startChar": 1,
