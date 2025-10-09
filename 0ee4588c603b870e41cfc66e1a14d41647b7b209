@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527bf37b_ee07b7a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-10-09T12:38:48Z",
+      "side": 1,
+      "message": "Please flag the respin bug for my attention. We will need to announce this release branch ABI break in the GKI newsletter.",
+      "revId": "0ee4588c603b870e41cfc66e1a14d41647b7b209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
