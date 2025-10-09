@@ -28,6 +28,8 @@
 #include <linux/rcupdate.h>
 #include <linux/time_namespace.h>
 
+#include <trace/hooks/fs.h>
+
 struct timerfd_ctx {
 	union {
 		struct hrtimer tmr;
@@ -462,12 +464,15 @@ SYSCALL_DEFINE2(timerfd_create, int, clockid, int, flags)
 		return PTR_ERR(file);
 	}
 
+	trace_android_vh_timerfd_create(file->f_path.dentry->name.name,
+																	file->f_path.dentry->name.name_len);
+
 	file->f_mode |= FMODE_NOWAIT;
 	fd_install(ufd, file);
 	return ufd;
 }
 
-static int do_timerfd_settime(int ufd, int flags, 
+static int do_timerfd_settime(int ufd, int flags,
 		const struct itimerspec64 *new,
 		struct itimerspec64 *old)
 {
