@@ -428850,6 +428850,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_map_util_freq"
 }
 elf_symbol {
+  id: 0xe0099970
+  name: "__traceiter_android_vh_mark_folio_accessed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xba178168
+  type_id: 0x9b2a7922
+  full_name: "__traceiter_android_vh_mark_folio_accessed"
+}
+elf_symbol {
   id: 0xdea07d28
   name: "__traceiter_android_vh_mark_inode_dirty"
   is_defined: true
@@ -435148,6 +435157,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_map_util_freq"
+}
+elf_symbol {
+  id: 0x2bd3fbd2
+  name: "__tracepoint_android_vh_mark_folio_accessed"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mark_folio_accessed"
 }
 elf_symbol {
   id: 0x03845c7a
@@ -504071,6 +504089,7 @@ interface {
   symbol_id: 0x5832511c
   symbol_id: 0x0e1f9e23
   symbol_id: 0x61ea12b8
+  symbol_id: 0xe0099970
   symbol_id: 0xdea07d28
   symbol_id: 0x1bfed9f9
   symbol_id: 0x44892f77
@@ -504771,6 +504790,7 @@ interface {
   symbol_id: 0x7d21b9ee
   symbol_id: 0xc34a5545
   symbol_id: 0x00a5fe5e
+  symbol_id: 0x2bd3fbd2
   symbol_id: 0x03845c7a
   symbol_id: 0x6377ba8b
   symbol_id: 0x013b5969
