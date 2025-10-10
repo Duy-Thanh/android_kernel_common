@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit:\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Fri Sep 12 22:06:08 2025 +0200\nCherry pick author date: Fri Aug 29 16:56:14 2025 +0530\n\nPlease cherry-pick using: `git cherry-pick -s -x 54ba9071a04b0d05086826c442c2de5830fce5bf`.",
       "revId": "d5ad96a09a63f6353777b2c1694aaf9286dd2b02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbfc1b78_c52f334d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4256395
+      },
+      "writtenOn": "2025-10-10T22:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deabbb00_e25125a3",
+      "revId": "d5ad96a09a63f6353777b2c1694aaf9286dd2b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
