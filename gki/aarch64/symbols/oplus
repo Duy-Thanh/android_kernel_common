@@ -10,6 +10,8 @@
   blk_rq_map_user
   blk_rq_map_user_iov
   blk_start_plug
+  bpf_map_get
+  bpf_map_put
   __break_lease
   cgroup_add_legacy_cftypes
   clk_hw_init_rate_request
