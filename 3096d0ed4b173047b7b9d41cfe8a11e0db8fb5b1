@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "830e4864_7d5e4828",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2039242
+      },
+      "writtenOn": "2025-10-10T11:08:56Z",
+      "side": 1,
+      "message": "hi Todd\nthanks for checking, I will modify it to FROMLIST",
+      "parentUuid": "e3cb8de8_9e6f831f",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3807da6d_d3f2fe90",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6c25b93_a9bf06e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2039242
+      },
+      "writtenOn": "2025-10-10T11:08:56Z",
+      "side": 1,
+      "message": "hi Todd,\n\n   I have removed our modify about the pure one, please check it again, thanks",
+      "parentUuid": "3807da6d_d3f2fe90",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0272b665_c0e40b09",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-09-18T21:09:01Z",
       "side": 1,
       "message": "This code is CFG80211 which we don\u0027t build nor test, so we can\u0027t take this patch. This is not code that would run via GKI.",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d73ba0_d22a2a4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039242
+      },
+      "writtenOn": "2025-10-10T11:08:56Z",
+      "side": 1,
+      "message": "hi Carlos\n   We have built pass on our workspace about the change. Is that acceptable?",
+      "parentUuid": "0272b665_c0e40b09",
       "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
