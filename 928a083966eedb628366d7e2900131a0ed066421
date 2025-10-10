@@ -33,6 +33,23 @@
       "message": "Hi, @ynaffit@google.com\n\nCould you help me check what is causing the current failure?\n\nThanks\n\nLongPing",
       "revId": "928a083966eedb628366d7e2900131a0ed066421",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef57dcae_06f5a9c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2025-10-10T08:16:53Z",
+      "side": 1,
+      "message": "Hi, Google\n\nIt seems that the failure also happened on recent merged changes.\nCould you help give a bypass vote here?\n\nThanks",
+      "revId": "928a083966eedb628366d7e2900131a0ed066421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
