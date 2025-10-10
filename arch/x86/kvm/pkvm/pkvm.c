@@ -372,15 +372,10 @@ static int pkvm_vm_finalize(int handle)
 	for (i = 0; i < kvm->created_vcpus; i++) {
 		struct kvm_vcpu *vcpu = to_kvm_vcpu(pkvm_vm->vcpus[i]);
 
-		if (vcpu->vcpu_id == kvm->arch.bsp_vcpu_id)
+		if (vcpu->vcpu_id == kvm->arch.bsp_vcpu_id) {
 			WRITE_ONCE(vcpu->arch.mp_state, KVM_MP_STATE_RUNNABLE);
-
-		/*
-		 * FIXME: temporarily allow secondary vCPUs to run as well
-		 * until we implement a guest PV mechanism to let the pVM itself
-		 * allow a vCPU to run.
-		 */
-		WRITE_ONCE(vcpu->arch.mp_state, KVM_MP_STATE_RUNNABLE);
+			break;
+		}
 	}
 
 	kvm->arch.pkvm.finalized = true;
@@ -786,14 +781,6 @@ static void pkvm_vcpu_update_state_from_host(struct pkvm_vcpu *pkvm_vcpu)
 		    kvm_register_is_dirty(shared_vcpu, VCPU_REGS_RIP))
 			kvm_rip_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RIP]);
 
-		return;
-	} else if (unlikely(!kvm_vcpu_has_run(vcpu) && !kvm_vcpu_is_reset_bsp(vcpu))) {
-		/*
-		 * FIXME: temporarily let the host set the initial RIP for
-		 * secondary vCPUs for INIT/SIPI emulation, until we implement
-		 * a guest PV mechanism for secondary vCPUs startup.
-		 */
-		kvm_rip_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RIP]);
 		return;
 	}
 
