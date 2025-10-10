@@ -46,6 +46,30 @@
       },
       "revId": "10f09c7af22a3d514b24eff896b4ca8d9b161e3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddae0472_de354ea4",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-10T14:24:51Z",
+      "side": 1,
+      "message": "sigh. I\u0027m not sure why I haven\u0027t used init_hyp_memcache() here.",
+      "parentUuid": "611ce487_5a929a52",
+      "range": {
+        "startLine": 1258,
+        "startChar": 1,
+        "endLine": 1258,
+        "endChar": 43
+      },
+      "revId": "10f09c7af22a3d514b24eff896b4ca8d9b161e3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
