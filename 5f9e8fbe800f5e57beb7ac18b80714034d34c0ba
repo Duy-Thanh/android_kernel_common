@@ -46,6 +46,30 @@
       },
       "revId": "5f9e8fbe800f5e57beb7ac18b80714034d34c0ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddab287f_4f33614f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-10T10:35:39Z",
+      "side": 1,
+      "message": "Ha, I bet the \"------------\" is confusing some script which thinks it\u0027s the diff marker.",
+      "parentUuid": "b8f550b5_630e6d9c",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 52
+      },
+      "revId": "5f9e8fbe800f5e57beb7ac18b80714034d34c0ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
