@@ -104,6 +104,24 @@
       "parentUuid": "0272b665_c0e40b09",
       "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f265f2_36da5b66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-10T22:15:53Z",
+      "side": 1,
+      "message": "We generally don\u0027t take any patches for vendor modules. Those should be hosted in your tree along with all of your other vendor modules. This is especially true of FROMLIST patches which have not been accepted by upstream maintainers. We cannot support this patch which we don\u0027t build, can\u0027t test, and is not supported upstream.",
+      "parentUuid": "84d73ba0_d22a2a4b",
+      "revId": "3096d0ed4b173047b7b9d41cfe8a11e0db8fb5b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
