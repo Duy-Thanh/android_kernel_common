@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3354d7d_c47c7fa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-10T22:06:29Z",
+      "side": 1,
+      "message": "This and next 2 patches for guest kernel (aosp/3797611 + aosp/3797612 + aosp/3797613) have been already in 6.12-desktop for a while. Backporting them to 6.6-desktop.",
+      "revId": "abbfd1d32cef3bc688b2cbcfc712443ce89e3ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
