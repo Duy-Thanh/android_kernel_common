@@ -46,6 +46,30 @@
       },
       "revId": "a8f88ad96df3b3e640d5b0aa313739188d5b4acb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ebf6e3e_6d401723",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-10-10T14:58:47Z",
+      "side": 1,
+      "message": "I think I disagree with this as a blanket statement. It is not in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md.\n\nWe definitely want the same change ID between development branch and release branch, with one exception.\n\nBetween different Android versions, we may have UPSTREAM in one and BACKPORT in another and using the same change ID can cause more review noise than help in some cases.\n\nHowever, this is also the exceptional case. The commit came into `android16-6.12` as part of a merge. There is no development branch change ID to cherry-pick to release branches. @joneslee@google.com has recommended just keeping the release branch change IDs consistent.\n\nHowever, however, in this case the cherry-picks are identical between the older and newer branches. But, we have different change IDs by version. `14-6.1`, `15-6.6` and `16-6.12` all have different change IDs.\n\nFrom a review and tooling perspective, the most important checks are:\n\n* does a development branch UPSTREAM change match upstream (keyed by link and commit)\n* does a release branch change match the development branch (keyed by change ID)\n\nSecondarily\n\n* does a development branch BACKPORT look the same as a later (version) UPSTREAM or BACKPORT (this relies on consistent change IDs between versions)\n* do dirty release branch cherry-picks look equivalent (keyed by change ID)\n\nWe don\u0027t really have any mechanism to say \"you should have used the same change ID on these two development branches\" either.\n\nIf the same developer is doing the UPSTREAM and BACKPORTS, working backwards through the versions, then change ID continuity makes more sense. Reviewers are still going to want to check vs upstream anyway though.",
+      "parentUuid": "e19bf8c5_4fb875a2",
+      "range": {
+        "startLine": 75,
+        "startChar": 11,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "a8f88ad96df3b3e640d5b0aa313739188d5b4acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
