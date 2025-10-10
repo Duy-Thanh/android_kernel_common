@@ -16,6 +16,24 @@
       "message": "YongQin: Are we missing android15-6.6 as well in this series?",
       "revId": "082e805826a772903cba4670a648e964f8f26b1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf121c1_d866066d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2025-10-10T00:25:14Z",
+      "side": 1,
+      "message": "No, the bad commit is not in the android15-6.6 branch yet, so no need to submit the fix at the moment.\n\nFor your convenience, here is the link you could check:\nhttps://android.googlesource.com/kernel/common/+log/refs/heads/android15-6.6/drivers/soc/qcom/mdt_loader.c",
+      "parentUuid": "ff6cfacd_63f94cbf",
+      "revId": "082e805826a772903cba4670a648e964f8f26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
