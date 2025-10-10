@@ -1589,6 +1589,7 @@ static int insert_ppage(struct kvm *kvm, struct kvm_pinned_page *ppage)
 		return -EEXIST;
 
 	kvm_pinned_pages_insert(ppage, &kvm->arch.pkvm.pinned_pages);
+	ppage->slot->arch.pkvm_pf_count++;
 
 	return 0;
 }
@@ -1720,6 +1721,7 @@ static int __pkvm_mem_abort_dmabuf(struct kvm_vcpu *vcpu, struct kvm_memory_slot
 		ppage->pfn = pfn;
 		ppage->ipa = gfn << PAGE_SHIFT;
 		ppage->order = 0;
+		ppage->slot = memslot;
 		list_add_tail(&ppage->list_node, ppages);
 
 		gfn++;
@@ -1828,6 +1830,7 @@ __pkvm_pages_to_ppages(struct kvm *kvm, struct kvm_memory_slot *memslot, gfn_t g
 		ppage->pfn = pfn;
 		ppage->ipa = ipa;
 		ppage->order = get_order(page_size);
+		ppage->slot = memslot;
 		list_add_tail(&ppage->list_node, ppages);
 		nr_ppages += 1 << ppage->order;
 
@@ -2189,6 +2192,7 @@ int __pkvm_pgtable_stage2_split(struct kvm_vcpu *vcpu, phys_addr_t ipa, size_t s
 		ppage->pfn = pfn;
 		ppage->ipa = ipa;
 		ppage->order = 0;
+		ppage->slot = memslot;
 		insert_ppage(kvm, ppage);
 
 		pfn += 1;
@@ -2890,10 +2894,8 @@ int kvm_arch_prepare_memory_region(struct kvm *kvm,
 	int ret = 0;
 
 	if (is_protected_kvm_enabled()) {
-		if ((change == KVM_MR_DELETE || change == KVM_MR_MOVE) &&
-		    pkvm_is_hyp_created(kvm) && kvm->arch.pkvm.enabled) {
-			return -EPERM;
-		}
+		if (old && kvm_vm_is_protected(kvm) && old->arch.pkvm_pf_count)
+			return -EBUSY;
 
 		if (new && kvm->arch.pkvm.enabled &&
 		    new->flags & (KVM_MEM_LOG_DIRTY_PAGES | KVM_MEM_READONLY)) {
