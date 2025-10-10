@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d702bb17_93bdf3d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-10-10T16:15:20Z",
+      "side": 1,
+      "message": "Missing `(cherry picked from commit 850470a8413a8a78e772c4f6bd9fe81ec6bd5b0f)` and the changelog is not exactly what upstream has. Please cherry-pick from upstream and then add the `Bug`, `Change-Id` and your Signed-off-by` at the end.\n\nAlternatively you can wait until the next LTS update because stable 6.12.46 already contains this change.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "4a2f84ac016ee008fb6eb91c0ba877c6d4f9e559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
