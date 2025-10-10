@@ -34,6 +34,24 @@
       "parentUuid": "0d8f5e09_74009658",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d7085c_e60c4fae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901352
+      },
+      "writtenOn": "2025-10-10T13:47:37Z",
+      "side": 1,
+      "message": "During the verification process described above, the following dmesg output was observed：\n[  349.141361] new mount options do not match the existing superblock, will be ignored",
+      "parentUuid": "1c4afa74_8d0f3013",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
