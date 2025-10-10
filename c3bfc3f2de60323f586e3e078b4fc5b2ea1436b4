@@ -52,6 +52,24 @@
       "parentUuid": "1c4afa74_8d0f3013",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6194038_cc5bbc0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-10T17:15:29Z",
+      "side": 1,
+      "message": "\u003e `mount -t cpuset -ocpuset_v2_mode cgroup /dev/cpuset_tmp02`\n\nSo this is not what the patch will do.\n\n`mount -t cgroup -ocpuset,noprefix,cpuset_v2_mode cgroup /dev/cpuset_tmp02`\nis what it will do.\n\nThe problem is the `cpuset` filesystem type does not support `cpuset_v2_mode` until https://lore.kernel.org/all/20250416211752.945849-1-tjmercier@google.com/. So you cannot do `mount -t cpuset -ocpuset_v2_mode cgroup /dev/cpuset_tmp02` unless you have that kernel patch, which we can\u0027t guarantee all Android devices will have for a while.\n\n(Using `cpuset` with) the `cgroup` filesystem type and `cpuset_v2_mode` has been supported since 2017: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003de1cba4b85daa71b710384d451ff6238d5e4d1ff6",
+      "parentUuid": "34d7085c_e60c4fae",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
