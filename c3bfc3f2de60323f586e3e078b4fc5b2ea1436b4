@@ -16,6 +16,24 @@
       "message": "This change should not be necessary in Android 16: https://docs.partner.android.com/partners/releases/cf/sep-2025#428500223 (`CPUs not used after hotplugging`)",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c4afa74_8d0f3013",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4381257
+      },
+      "writtenOn": "2025-10-10T13:30:56Z",
+      "side": 1,
+      "message": "Thank you for pointing this out. However when we tried to verify this, we don\u0027t see this having any affect:\n\n```\nmount -t cpuset -ocpuset_v2_mode cgroup /dev/cpuset_tmp02\nmount | grep tmp02\ncgroup on /dev/cpuset_tmp02 type cgroup (rw,relatime,cpuset,noprefix,release_agent\u003d/sbin/cpuset_release_agent)\n\n```\n\nWe had used both these changes in our build:\nhttps://lore.kernel.org/all/20250416211752.945849-1-tjmercier@google.com/\nhttps://partner-android.googlesource.com/platform/system/core/+/e1c3f65b88ff77e79f943d66dad7f070e6033414%5E%21/#F0\n\nIs there any other dependency for this change?",
+      "parentUuid": "0d8f5e09_74009658",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
