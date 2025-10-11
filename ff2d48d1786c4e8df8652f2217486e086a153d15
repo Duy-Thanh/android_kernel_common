@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea346f44_c35fcce0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4395979
+      },
+      "writtenOn": "2025-10-11T14:43:44Z",
+      "side": 1,
+      "message": "\n  \"name\": \"trusty/app/nvram\",\n  \"clone_url\": \"https://android.googlesource.com/trusty/app/nvram\",\n  \"description\": \"Owner: mnissler\\nBug: http://b/25969957, http://b/27101983\"\n}",
+      "revId": "ff2d48d1786c4e8df8652f2217486e086a153d15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
