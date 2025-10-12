@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fa20fb_4887a3d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4400200
+      },
+      "writtenOn": "2025-10-12T03:52:49Z",
+      "side": 1,
+      "message": "I\u0027ll really appreciate",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f930203e_8d156c06",
@@ -60,6 +77,24 @@
       "side": 1,
       "message": "We already get the unique vcpu_handle so it should be fine to access this specific pkvm_vm-\u003evcpus[vcpu_handle]?",
       "parentUuid": "f930203e_8d156c06",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2d4ace_850b3e78",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 4400200
+      },
+      "writtenOn": "2025-10-12T03:52:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcb91949_f520b300",
       "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
