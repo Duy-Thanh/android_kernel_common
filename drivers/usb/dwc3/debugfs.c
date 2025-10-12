@@ -397,7 +397,6 @@ static int dwc3_mode_show(struct seq_file *s, void *unused)
 	struct dwc3		*dwc = s->private;
 	unsigned long		flags;
 	u32			reg;
-	u32			mode;
 	int			ret;
 
 	ret = pm_runtime_resume_and_get(dwc->dev);
@@ -408,15 +407,18 @@ static int dwc3_mode_show(struct seq_file *s, void *unused)
 	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
 	spin_unlock_irqrestore(&dwc->lock, flags);
 
-	mode = DWC3_GCTL_PRTCAP(reg);
-	switch (mode) {
+	switch (DWC3_GCTL_PRTCAP(reg)) {
 	case DWC3_GCTL_PRTCAP_HOST:
+		seq_puts(s, "host\n");
+		break;
 	case DWC3_GCTL_PRTCAP_DEVICE:
+		seq_puts(s, "device\n");
+		break;
 	case DWC3_GCTL_PRTCAP_OTG:
-		seq_printf(s, "%s\n", dwc3_mode_string(mode));
+		seq_puts(s, "otg\n");
 		break;
 	default:
-		seq_printf(s, "UNKNOWN %08x\n", mode);
+		seq_printf(s, "UNKNOWN %08x\n", DWC3_GCTL_PRTCAP(reg));
 	}
 
 	pm_runtime_put_sync(dwc->dev);
