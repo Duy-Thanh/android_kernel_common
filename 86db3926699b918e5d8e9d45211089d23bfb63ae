@@ -131,6 +131,24 @@
       "parentUuid": "bcb91949_f520b300",
       "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c6a37c1_7267b578",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-12T13:10:20Z",
+      "side": 1,
+      "message": "\u003e We already get the unique vcpu_handle so it should be fine to access this specific pkvm_vm-\u003evcpus[vcpu_handle]?\n\nThat still seems racy. In various cases (in pkvm_vm_finalize, in TLB shootdown, in vmexit tracing) we lock pkvm_vm-\u003elock and traverse pkvm_vm-\u003evcpus. So, what happens if we do that after kvm-\u003ecreated_vcpus is already increased but before pkvm_vm-\u003evcpus[vcpu_handle] is updated from NULL to non-NULL?\n\nWe could mitigate that by checking if vcpu is non-NULL in those cases (or, after your aosp/3796432 we probably should use get_pkvm_vcpu()/put_pkvm_vcpu() in those cases). And BTW it seems we need to do that anyway, since with the new vcpu_free PV interface, a vCPU may get detached at any moment.\n\nBut that seems not quite enough. It still would not avoid this race with vcpu attach, it would only mitigate its consequences. We would still not be sure if we see the new or the outdated value of a vcpu pointer when traversing pkvm_vm-\u003evcpus.\n\nSo it seems much cleaner and safer to update it before unlocking the spinlock (and it wouldn\u0027t really cost us anything)?",
+      "parentUuid": "7f2d4ace_850b3e78",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
