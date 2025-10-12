@@ -149,6 +149,24 @@
       "parentUuid": "7f2d4ace_850b3e78",
       "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9838ace0_1a8e9ef9",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-12T21:43:09Z",
+      "side": 1,
+      "message": "\u003e [...] or, after your aosp/3796432 we probably should use get_pkvm_vcpu()/put_pkvm_vcpu() in those cases\n\nRegarding this, probably no, we shouldn\u0027t get/put vcpu in those cases (that seems superfluous, and moreover, that could prevent successful detach), we should just check if vcpu is not NULL (that should be fine as long as pkvm_vm-\u003elock is locked).",
+      "parentUuid": "4c6a37c1_7267b578",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
