@@ -70,6 +70,24 @@
       "parentUuid": "34d7085c_e60c4fae",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f00f7715_0617bcc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901352
+      },
+      "writtenOn": "2025-10-12T05:39:37Z",
+      "side": 1,
+      "message": "1. The following patches mentioned by you have been contained in test image:\n     https://lore.kernel.org/all/20250416211752.945849-1-tjmercier@google.com/\n     https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003de1cba4b85daa71b710384d451ff6238d5e4d1ff6\n\n2. I did new verification using \"mount -t cgroup -ocpuset,noprefix,cpuset_v2_mode cgroup /dev/cpuset_tmp02\", the following warning log still can be got:\n    [  349.141361] new mount options do not match the existing superblock, will be ignored\n    \n\n3. In my debug, when cpuset_parse_param() is called, it always returns from the following code:\n    opt \u003d fs_parse(fc, cpuset_fs_parameters, param, \u0026result);\n    if (opt \u003c 0)\n        return opt;\n\n\nthe following \"CGRP_ROOT_CPUSET_V2_MODE\" setting cannot be completed:\n    switch (opt) {\n    case Opt_cpuset_v2_mode:\n             ctx-\u003eflags |\u003d CGRP_ROOT_CPUSET_V2_MODE;\n             return 0;\n    }\n\nI don\u0027t know whether there is any other bug about the support of \"cpuset_v2_mode\".\nPlease consider continuing the review and merging this change. There have been quite a few reports and complaints about this issue in the market.",
+      "parentUuid": "d6194038_cc5bbc0e",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
