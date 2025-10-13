@@ -88,6 +88,24 @@
       "parentUuid": "d6194038_cc5bbc0e",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "865e28ee_31e36dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-13T19:56:51Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/all/20250416211752.945849-1-tjmercier@google.com/ is related, but ultimately not relevant right now. That kernel code is not used before or after `libprocessgroup: Mount cpuset v1 with cpuset_v2_mode`. It will allow us to use the [old userspace code](https://cs.android.com/android/platform/superproject/+/android-16.0.0_r2:system/core/libprocessgroup/setup/cgroup_map_write.cpp;drc\u003d2dac5d89a0f024a2d0cc46a80ba4ee13472f1681;l\u003d200) at some point in the future, but not now because not all devices receive that kernel update instantly, or even before the next Android platform release.\n\nThe fix for the hotplugging problem in Android 16 and later is `libprocessgroup: Mount cpuset v1 with cpuset_v2_mode` `commit cb48d31d1289010cc997ab4a9db1f7b034593b4e`.\n\nIt does not require any kernel changes for any currently supported Android kernel. Two other vendors have confirmed it resolves the problem of onlining not restoring cpusets. So please make sure `libprocessgroup: Mount cpuset v1 with cpuset_v2_mode` is applied in your build before performing any cpu offlining/onlining tests.\n\nI can only reproduce the `new mount options do not match the existing superblock, will be ignored` error if `/dev/cpuset_tmp02` is already mounted and I change options. `mkdir /dev/cpuset_tmp02 \u0026\u0026 mount -t cgroup -ocpuset,noprefix,cpuset_v2_mode cgroup /dev/cpuset_tmp02` works the first time after a fresh reboot.",
+      "parentUuid": "f00f7715_0617bcc3",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
