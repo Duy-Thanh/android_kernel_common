@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd28407_8a75f084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4410143
+      },
+      "writtenOn": "2025-10-13T17:23:16Z",
+      "side": 1,
+      "message": "From 5fd82d311556fdacbb080dcfe61920ec1a28dc7e Mon Sep 17 00:00:00 2001\nFrom: Maulik Shah \u003cmkshah@codeaurora.org\u003e\nDate: Tue, 08 Jun 2021 14:35:10 +0530\nSubject: [PATCH] ANDROID: gic-v3: Export gic_resume() for vendor GIC enhancements\n\nsyscore ops in gic-v3 takes care of invoking gic_resume() when\nexiting from \"deep\" suspend. However for \"s2idle\" suspend syscore\nops will not get invoked.\n\nVendor modules can register for s2idle notifications and\ninvoke gic_resume() when the first cpu is waking up from s2idle.\n\nBug: 190353898\nChange-Id: I3d565ed3fd0fcada2231b10415dcf487fefc7c5f\nSigned-off-by: Maulik Shah \u003cmkshah@codeaurora.org\u003e\n---\n\ndiff --git a/drivers/irqchip/irq-gic-v3.c b/drivers/irqchip/irq-gic-v3.c\nindex cc5c36d..078935a 100644\n--- a/drivers/irqchip/irq-gic-v3.c\n+++ b/drivers/irqchip/irq-gic-v3.c\n@@ -1267,10 +1267,11 @@ static inline void gic_cpu_pm_init(void) { }\n #endif /* CONFIG_CPU_PM */\n \n #ifdef CONFIG_PM\n-static void gic_resume(void)\n+void gic_resume(void)\n {\n \ttrace_android_vh_gic_resume(gic_data.domain, gic_data.dist_base);\n }\n+EXPORT_SYMBOL_GPL(gic_resume);\n \n static struct syscore_ops gic_syscore_ops \u003d {\n \t.resume \u003d gic_resume,\n@@ -1283,6 +1284,7 @@ static void gic_syscore_init(void)\n \n #else\n static inline void gic_syscore_init(void) { }\n+void gic_resume(void) { }\n #endif\n \n \ndiff --git a/include/linux/irqchip/arm-gic-v3.h b/include/linux/irqchip/arm-gic-v3.h\nindex f6d092f..ffb0a87 100644\n--- a/include/linux/irqchip/arm-gic-v3.h\n+++ b/include/linux/irqchip/arm-gic-v3.h\n@@ -708,6 +708,8 @@ static inline bool gic_enable_sre(void)\n \treturn !!(val \u0026 ICC_SRE_EL1_SRE);\n }\n \n+void gic_resume(void);\n+\n #endif\n \n #endif",
+      "revId": "132d8ef6173f20f4ad2320b6545a2bcd0bbfb31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
