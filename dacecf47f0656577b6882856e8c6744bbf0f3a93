@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa1a58c_2fd4c790",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3655450
+      },
+      "writtenOn": "2025-10-13T17:56:03Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/_/android/platform/frameworks/base/+/a3d22cec32a0578c07fdddac0f746865fef30c1f:api/module-lib-current.txt",
+      "revId": "dacecf47f0656577b6882856e8c6744bbf0f3a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
