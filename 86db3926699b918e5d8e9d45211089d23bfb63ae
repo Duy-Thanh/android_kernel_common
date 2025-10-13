@@ -185,6 +185,24 @@
       "parentUuid": "9838ace0_1a8e9ef9",
       "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c5b753_7d364269",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T09:40:24Z",
+      "side": 1,
+      "message": "\u003e And probably also need to make updating pkvm_vcpu-\u003evcpus[vcpu_handle] as the last thing of vcpu creating so that the pkvm_vcpu got by traversing pkvm_vcpu-\u003evcpus is an initialized one.\n\nYeah, good point.\n\n\u003e But just want to understand the reason of \"shouldn\u0027t get/put vcpu\". It can remove the lock usage for these cases\n\nCan it? If we traverse without locking, kvm-\u003ecreated_vcpus may get incremented in the meantime, and incrementing it is not an atomic operation (and even if it was atomic, that still would be racy).\n\n\u003e detach should not happen during handling these cases.\n\nAre we sure? The host may issue the vcpu_free PV call at any time. Although we require it to unload the vCPU before doing that, but we don\u0027t require it to unload _all_ vCPUs before freeing any of them. So, for example, on some of those still-loaded vCPUs we might be unmapping some pages and thus doing TLB shootdown, in parallel with detaching another vCPU.\n\nOr for example, regardless of that, we can do \"cat /sys/kernel/debug/pkvm/vmexit_trace\" at any moment, so it may also traverse vcpus in parallel with a vcpu detach.\n\n(And after more thinking, returning to the previous example of unmapping pages and TLB flushing, it may be done not in a context of a particular loaded vCPU, for example it may be triggered by a MMU notifier even after all the vCPUs have been unloaded...)",
+      "parentUuid": "b9a32a29_262c0e17",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
