@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daff8360_17fcff13",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T13:10:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we free the vcpu created by pkvm_arch_vcpu_create() here?\n\n(I know this issue has already existed before. Now we have an occasion to fix it.)",
+      "fixSuggestions": [
+        {
+          "fixId": "e0ad5968_5def7d69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 328,
+                "startChar": 0,
+                "endLine": 329,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto vcpu_destroy;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "vcpu_destroy:\n\tkvm_x86_call(vcpu_free)(to_kvm_vcpu(pkvm_vcpu));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ed328428ab95da238d4eee82207834fc15d119c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
