@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facc6325_b18543e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-10-13T23:55:24Z",
+      "side": 1,
+      "message": "wrong function name",
+      "range": {
+        "startLine": 11,
+        "startChar": 9,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "6bf265b4533db3b445d01ea036d53b3578a1c6f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
