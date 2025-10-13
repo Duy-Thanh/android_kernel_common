@@ -34,6 +34,23 @@
       ],
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8caadb46_c58bb1eb",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T15:09:46Z",
+      "side": 1,
+      "message": "Hmm... we free the memcache used for all vCPUs, not just this one? This assumes, at least, that kvm_x86_call(vcpu_free)() will never be called for multiple vCPUs in parallel?\n\nIt seems better to avoid such tricky assumptions.\n\n...It feels we should eventually (or maybe now?) get rid of using memcache for this stuff (i.e. for freeing pages that were allocated _not_ via memcache). As we discussed earlier, using it for pages allocated via alloc_pages_exact() is potentially incorrect, or at least is unclean and hacky.\n\nAnd, in case of pkvm_vcpu pages, the host knows exactly how many pages to free anyway (pkvm_vcpu_sz \u003d PAGE_ALIGN(PKVM_SHADOW_VCPU_STATE_SIZE)), so using memcache seems like a complete overkill? we can easily just use free_pages_exact()?\n\nAnd in case of cpuid_entries pages it also seems easy: the host knows the current value of vcpu-\u003earch.cpuid_nent, right?",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
