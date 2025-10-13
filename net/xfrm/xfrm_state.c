@@ -2221,11 +2221,41 @@ int xfrm_alloc_spi(struct xfrm_state *x, u32 low, u32 high,
 
 	err = -ENOENT;
 
+<<<<<<< HEAD   (700de8349bcf600c7d8055b60afe2b8bbcb0ce69 Revert "i2c: designware: Add quirk for Intel Xe")
 	if (minspi == maxspi) {
 		x0 = xfrm_state_lookup(net, mark, &x->id.daddr, minspi, x->id.proto, x->props.family);
 		if (x0) {
 			NL_SET_ERR_MSG(extack, "Requested SPI is already in use");
 			xfrm_state_put(x0);
+||||||| BASE   (f64abeebf763c3e1df52ff6e815238af384ac642 bpf: Reject bpf_timer for PREEMPT_RT)
+	for (h = 0; h < range; h++) {
+		u32 spi = (low == high) ? low : get_random_u32_inclusive(low, high);
+		newspi = htonl(spi);
+
+		spin_lock_bh(&net->xfrm.xfrm_state_lock);
+		x0 = xfrm_state_lookup_spi_proto(net, newspi, x->id.proto);
+		if (!x0) {
+			x->id.spi = newspi;
+			h = xfrm_spi_hash(net, &x->id.daddr, newspi, x->id.proto, x->props.family);
+			XFRM_STATE_INSERT(byspi, &x->byspi, net->xfrm.state_byspi + h, x->xso.type);
+			spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+			err = 0;
+=======
+	for (h = 0; h < range; h++) {
+		u32 spi = (low == high) ? low : get_random_u32_inclusive(low, high);
+		if (spi == 0)
+			goto next;
+		newspi = htonl(spi);
+
+		spin_lock_bh(&net->xfrm.xfrm_state_lock);
+		x0 = xfrm_state_lookup_spi_proto(net, newspi, x->id.proto);
+		if (!x0) {
+			x->id.spi = newspi;
+			h = xfrm_spi_hash(net, &x->id.daddr, newspi, x->id.proto, x->props.family);
+			XFRM_STATE_INSERT(byspi, &x->byspi, net->xfrm.state_byspi + h, x->xso.type);
+			spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+			err = 0;
+>>>>>>> BRANCH (0baf92d0b1590b903c1f4ead75e61715e50e8146 xfrm: xfrm_alloc_spi shouldn't use 0 as SPI)
 			goto unlock;
 		}
 		newspi = minspi;
@@ -2249,8 +2279,33 @@ int xfrm_alloc_spi(struct xfrm_state *x, u32 low, u32 high,
 				  x->xso.type);
 		spin_unlock_bh(&net->xfrm.xfrm_state_lock);
 
+<<<<<<< HEAD   (700de8349bcf600c7d8055b60afe2b8bbcb0ce69 Revert "i2c: designware: Add quirk for Intel Xe")
 		err = 0;
 	} else {
+||||||| BASE   (f64abeebf763c3e1df52ff6e815238af384ac642 bpf: Reject bpf_timer for PREEMPT_RT)
+		if (signal_pending(current)) {
+			err = -ERESTARTSYS;
+			goto unlock;
+		}
+
+		if (low == high)
+			break;
+	}
+
+	if (err)
+=======
+next:
+		if (signal_pending(current)) {
+			err = -ERESTARTSYS;
+			goto unlock;
+		}
+
+		if (low == high)
+			break;
+	}
+
+	if (err)
+>>>>>>> BRANCH (0baf92d0b1590b903c1f4ead75e61715e50e8146 xfrm: xfrm_alloc_spi shouldn't use 0 as SPI)
 		NL_SET_ERR_MSG(extack, "No SPI available in the requested range");
 	}
 
