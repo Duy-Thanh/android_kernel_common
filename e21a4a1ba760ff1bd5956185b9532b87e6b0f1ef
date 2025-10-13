@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d057bf13_a99b83a4",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T14:40:39Z",
+      "side": 1,
+      "message": "Missing newline?\n\nAnd nit: maybe e.g. just `pr_err(\"pkvm: failed to free vcpu, err %d\", ret)`? (kvm_err is rarely used, any particular reason why use it here?)",
+      "fixSuggestions": [
+        {
+          "fixId": "97be2a43_691db7d1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 916,
+                "startChar": 0,
+                "endLine": 917,
+                "endChar": 0
+              },
+              "replacement": "\t\tpr_err(\"pkvm: failed to free vcpu, err %d\\n\", ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
