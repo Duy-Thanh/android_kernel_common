@@ -481984,6 +481984,15 @@ elf_symbol {
   full_name: "perf_trace_run_bpf_submit"
 }
 elf_symbol {
+  id: 0x732c63d8
+  name: "pernet_ops_rwsem"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x794a1719
+  type_id: 0x28b9ec9a
+  full_name: "pernet_ops_rwsem"
+}
+elf_symbol {
   id: 0x018498a2
   name: "pfifo_fast_ops"
   is_defined: true
@@ -515717,6 +515726,7 @@ interface {
   symbol_id: 0xd76c8799
   symbol_id: 0x1dad348b
   symbol_id: 0xd50beffc
+  symbol_id: 0x732c63d8
   symbol_id: 0x018498a2
   symbol_id: 0x1e700c22
   symbol_id: 0xba681a1a

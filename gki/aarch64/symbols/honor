@@ -491,6 +491,7 @@
   out_of_line_wait_on_bit_lock
   override_creds
   pagecache_get_page
+  pernet_ops_rwsem
   pm_wakeup_irq
   posix_lock_file
   posix_test_lock
