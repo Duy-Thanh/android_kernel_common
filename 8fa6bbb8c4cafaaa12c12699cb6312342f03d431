@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb05c43_d7d62b06",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T14:15:50Z",
+      "side": 1,
+      "message": "nit: we don\u0027t exactly assume that all vcpus have been freed (i.e. we do handle the case when some are not freed). So maybe: \"Normally all the created pkvm_vcpus should have been freed already by the vcpu_free PV interface. In case any pkvm_vcpu is still not freed, try to free it here.\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "29821cf4_b8c86e96",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 486,
+                "startChar": 0,
+                "endLine": 489,
+                "endChar": 0
+              },
+              "replacement": "\t * Normally all the created pkvm_vcpus should have been freed already by\n\t * the vcpu_free PV interface. In case any pkvm_vcpu is still not freed,\n\t * try to free it here.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8fa6bbb8c4cafaaa12c12699cb6312342f03d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
