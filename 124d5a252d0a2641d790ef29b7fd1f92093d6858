@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff8a71f7_a60172ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-10-13T18:19:45Z",
+      "side": 1,
+      "message": "Would it be easier to add the missing patch and apply this one cleanly?",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "124d5a252d0a2641d790ef29b7fd1f92093d6858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0e84606e_c77490b0",
