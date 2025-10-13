@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3421f97d_e62ade9e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/ept.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T16:21:49Z",
+      "side": 1,
+      "message": "`EPT_PROT_DEF` and `pkvm_init_ept_page()` (and `pkvm_pgtable_ops-\u003edefault_prot`) are also not needed anymore?",
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44054dd6_418a0eac",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T16:21:49Z",
+      "side": 1,
+      "message": "Not used anymore?",
+      "fixSuggestions": [
+        {
+          "fixId": "03e82ae9_c8018109",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8076b67a_72d54f22",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T16:21:49Z",
+      "side": 1,
+      "message": "Not used anymore?",
+      "fixSuggestions": [
+        {
+          "fixId": "af346ce9_de254a70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a75255_d73b6d2b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T16:21:49Z",
+      "side": 1,
+      "message": "Not used anymore?",
+      "fixSuggestions": [
+        {
+          "fixId": "04d8b52c_866954dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
