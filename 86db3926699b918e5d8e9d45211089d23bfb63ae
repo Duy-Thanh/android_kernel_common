@@ -167,6 +167,24 @@
       "parentUuid": "4c6a37c1_7267b578",
       "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a32a29_262c0e17",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-13T04:30:39Z",
+      "side": 1,
+      "message": "I see. Considering traversing pkvm_vcpu-\u003evcpus with holding the lock, we should update pkvm_vcpu-\u003evcpus[vcpu_handle] before releasing the lock. And probably also need to make updating pkvm_vcpu-\u003evcpus[vcpu_handle] as the last thing of vcpu creating so that the pkvm_vcpu got by traversing pkvm_vcpu-\u003evcpus is an initialized one.\n\n\u003e Regarding this, probably no, we shouldn\u0027t get/put vcpu in those cases (that seems superfluous, and moreover, that could prevent successful detach)\n\nI am not against of using the way of checking if vcpu is NULL for these cases. But just want to understand the reason of \"shouldn\u0027t get/put vcpu\". It can remove the lock usage for these cases, and should prevent successful detach as the detach should not happen during handling these cases. So wondering if there is any issue of using get/put for these cases?",
+      "parentUuid": "9838ace0_1a8e9ef9",
+      "revId": "86db3926699b918e5d8e9d45211089d23bfb63ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
