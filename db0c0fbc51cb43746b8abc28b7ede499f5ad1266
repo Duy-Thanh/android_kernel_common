@@ -16,6 +16,24 @@
       "message": "I think you could leave this default y if ARCH_SUPPORTS_RT and follow this patch up with a change to gki_defconfig to turn it explicitly off (which you already do)? I think that will leave it default to y but unable to be disabled for PREEMPT_RT",
       "revId": "db0c0fbc51cb43746b8abc28b7ede499f5ad1266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942f14c1_ba1dcb7c",
+        "filename": "lib/Kconfig.debug",
+        "patchSetId": 1
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-14T02:07:18Z",
+      "side": 1,
+      "message": "my bad, you\u0027ll still need a gki_defconfig tweak after this if you take my suggestion.",
+      "parentUuid": "c76dd1e9_2f24f835",
+      "revId": "db0c0fbc51cb43746b8abc28b7ede499f5ad1266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
