@@ -34,6 +34,24 @@
       "parentUuid": "c76dd1e9_2f24f835",
       "revId": "db0c0fbc51cb43746b8abc28b7ede499f5ad1266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3d0729_2558101a",
+        "filename": "lib/Kconfig.debug",
+        "patchSetId": 1
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-10-14T02:56:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "942f14c1_ba1dcb7c",
+      "revId": "db0c0fbc51cb43746b8abc28b7ede499f5ad1266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
