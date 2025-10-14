@@ -141,6 +141,24 @@
       "parentUuid": "d61a0253_4f477ea5",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3db7314_e9823a98",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T13:07:17Z",
+      "side": 1,
+      "message": "\u003e If so, I imagine we\u0027d want to have teardown_mc per vCPU, not just per VM. So that we can freely use it, in particular, for multiple vCPUs in parallel independently of each other, not just in pkvm_vcpu_free() but also in pkvm_vcpu_after_set_cpuid() and pkvm_vcpu_realloc_fpstate() (why not? it would make things easier for KVM-high, which would need to do literally just free_pkvm_memcache(\u0026vcpu-\u003earch.pkvm.teardown_mc) in all those cases).\n\nin v6.15 rebasing work, the kvm_call_pkvm() can return a memcache structure, thus doesn\u0027t have to bother vCPU to define a static teardown_mc. For example, \n```\ninout.vm_handle \u003d vcpu-\u003ekvm-\u003earch.pkvm_vm_handle;\ninout.vcpu_handle \u003d vcpu-\u003earch.pkvm_vcpu_handle;\n\nret \u003d kvm_call_pkvm_inout(vcpu_free, \u0026inout);\nfree_pkvm_memcache(\u0026inout.memcache);\n\n```\n\nAnd if we use this approach in v6.15, then we also don\u0027t need to bother vcpu to define `struct kvm_pkvm_vcpu` and most likely `pkvm_vcpu_handle` is the only elements related to the pKVM.\n\nThen do we still want to define `struct kvm_pkvm_vcpu` to record the physical address for v6.12? I don\u0027t fully understand the impact of the potential problem, but sounds like it will be not easy to change the define \u0027struct kvm_pkvm_vcpu\u0027 in GKI kernel at some period.",
+      "parentUuid": "b2c0abb7_d0d9c641",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
