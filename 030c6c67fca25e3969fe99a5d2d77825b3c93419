@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05502caa_309ae24c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T18:22:46Z",
+      "side": 1,
+      "message": "Question: is it ok to revert this patch before the next patch aosp/3728586, not after it?\n\nMaybe add an explanation here why it is ok to revert this patch now?",
+      "revId": "030c6c67fca25e3969fe99a5d2d77825b3c93419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
