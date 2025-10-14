@@ -159,6 +159,24 @@
       "parentUuid": "b2c0abb7_d0d9c641",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09db861c_4ea6eabd",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T14:40:14Z",
+      "side": 1,
+      "message": "\u003e in v6.15 rebasing work, the kvm_call_pkvm() can return a memcache structure [...]\n\nOk, that\u0027s another possible approach.\n\n\u003e Then do we still want to define struct kvm_pkvm_vcpu to record the physical address for v6.12?\n\nIf we decided to keep using the memcache, we don\u0027t need to record the physical address that at all. :) \n\nAnyway, for v6.12 the current implementation is probably ok as is. All this discussion is for newer kernels (6.15+). I\u0027m resolving this comment, to not block merging this patch. :) \n\n\u003e I don\u0027t fully understand the impact of the potential problem, but sounds like it will be not easy to change the define \u0027struct kvm_pkvm_vcpu\u0027 in GKI kernel at some period.\n\nRight now, in 6.12, we can change the ABI at any time, since it is our own branch (6.12-desktop), not a GKI branch. When we switch to GKI 6.18 then yes, after KMI freeze (which AFAIK will be sometime in 2026Q2) it will not be easy or possible to change the layout or size of struct kvm_vcpu_arch (or other such structures that are widely used and thus are likely to occur in signatures of some functions exported to vendor modules, whose ABI/API must be stable after the KMI freeze). So in GKI 6.18 we\u0027d better merge all our needed changes to such structures before that time.",
+      "parentUuid": "b3db7314_e9823a98",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
