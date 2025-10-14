@@ -80,6 +80,24 @@
       "parentUuid": "4dcc11c0_8b68260b",
       "revId": "2ed328428ab95da238d4eee82207834fc15d119c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50af2b0_682cc37a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T09:37:58Z",
+      "side": 1,
+      "message": "Sorry, I miss understood that. Will fix it.",
+      "parentUuid": "592a5670_6e78a130",
+      "revId": "2ed328428ab95da238d4eee82207834fc15d119c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
