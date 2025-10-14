@@ -16,6 +16,24 @@
       "message": "As we\u0027ve just merged the pvMMU patches, in particular aosp/3672457, we should also update guest_mmu_flush_tlb() to not WARN_ON_ONCE if pkvm_vcpu is NULL?",
       "revId": "3c5e8ccef953ea8f73b42f19d839cc5e309a7ebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c386cda_7e126b67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T01:18:44Z",
+      "side": 1,
+      "message": "OK. I guess you don\u0027t want guest_mmu_flush_tlb() to WARN_ON_ONCE because this is a normal usage, thus not necessary to warn on, as this is the example you mentioned in aosp/3796431, right?\n\nFor the vm_finalize, a WARN_ON_ONCE is added as seems finalizing a vm when some vcpu is freed is not a normal usage, right?",
+      "parentUuid": "518d7516_f42a5aae",
+      "revId": "3c5e8ccef953ea8f73b42f19d839cc5e309a7ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
