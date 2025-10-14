@@ -105,6 +105,24 @@
       "parentUuid": "46951c62_5bcaff17",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d61a0253_4f477ea5",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T10:28:54Z",
+      "side": 1,
+      "message": "\u003e Yes, but why deliberately make ourselves dependent on the assumption that it will always be the case? That might be fine as a temporary solution for 6.12 only, but for 6.15+ we probably want a cleaner and more robust solution.\n\nYes, agree.\n\n\u003e But it could remember them, right? So why not just do that?\n\nYeah, it would be remembered if we extend the kvm_vcpu with two more elements to remember these two address. That will be independent with the return value. And when adds fpu, we probably need one more to record the fpu memory address passed to the pkvm. These seems makes things a bit complex than using `free_pkvm_memcache` as we don\u0027t need to change anything when adds fpu.\n\n\u003eAgain, do we really need to use memcache for freeing pages that were not allocated via memcache? Does that really have any advantages?\n\nSo you are expecting only the memory pages passed to the pkvm via memcache can be returned via memcache. If some memory pages are passed via the hypercall, it should not be returned via the memcache?\n\nThe benifit of memcache is to return multiple physical addresses. For example, for vcpu, we will have 3 independent physical addresses, pkvm_vcpu, cpuid_entries and fpu. Of cause we can return 3 of them by the kvm_call_pkvm() in v6.15 as kvm_call_pkvm() can support 4 outputs. But if there will be more, for example, a vcpu is not freed by vcpu_free interface, and the vm_destroy PV interfaces will free all the un-freed vcpu, then there will be more than 3 physical addressed to be returned, then extending kvm_call_pkvm() to support more output is not working. The way you suggested, to let the host to remember these addresses still works (but need to introduce additional elements for this purpose). With using memcache, the kvm_call_pkvm() just needs to return fixed number of outputs, which is the memcache structure, and the memcache can store as many physical addresses as we want. We can put the pkvm_vcpu\u0027s PA + size in memcache, then put cpuid_entries\u0027s PA + size inside pkvm_vcpu\u0027s memory, and put fpu\u0027s PA + size in cpuid_entries\u0027s memory, and so on to extend if there will be more.",
+      "parentUuid": "1469dbf6_7aae037f",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
