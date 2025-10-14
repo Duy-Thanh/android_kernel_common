@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a41ed13e_a90b9c54",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T13:30:14Z",
+      "side": 1,
+      "message": "The page is cleared by line 138. line 141 `push_pkvm_memcache` will write the physical addresses to the pages, thus should use false here to prevent `__pkvm_hyp_donate_host` to clear the contents.",
+      "parentUuid": "6ea6b32a_424b05be",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d3db386_0ea247ae",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -73,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "825867a3_62663839",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T13:30:14Z",
+      "side": 1,
+      "message": "From security point of view, it may not be necessary. So not clearing should be OK. Clearing should also be OK, considering that this rarely happens, and no performance impact.",
+      "parentUuid": "6d3db386_0ea247ae",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "024c7c78_b347a2dc",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -84,6 +120,24 @@
       "writtenOn": "2025-10-14T12:47:27Z",
       "side": 1,
       "message": "Ditto.",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63560416_331d5ef5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T13:30:14Z",
+      "side": 1,
+      "message": "Ditto.",
+      "parentUuid": "024c7c78_b347a2dc",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -101,6 +155,24 @@
       "writtenOn": "2025-10-14T12:47:27Z",
       "side": 1,
       "message": "Just a note: free_loaded_vmcs() and other functions are also called in failures cases e.g. in vmx_vcpu_create(), when we probably don\u0027t need to clear the pages.\n\nThat\u0027s probably ok, but that also makes me think: perhaps it\u0027s ok to just _always_ unconditionally clear the pages in __pkvm_hyp_donate_host(), instead of bothering with a flag for that?",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33a8ceb_cdd42b57",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2487,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T13:30:14Z",
+      "side": 1,
+      "message": "Like the comment https://android-review.googlesource.com/c/kernel/common/+/3787907/comment/6ea6b32a_424b05be/ mentioned, we still probably need `__pkvm_hyp_donate_host()` not to clear the memory pages when want to use teardown_mc, as `push_pkvm_memcache` will write physical address to the memory pages. And we also discussed that before at https://android-review.googlesource.com/c/kernel/common/+/3728233/comment/76156533_fa381b12/, we cannot write to these memory pages after donate them. So it is better to let `__pkvm_hyp_donate_host()` to use a flag to determine if to clear or not.",
+      "parentUuid": "9230b657_d562efd2",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
