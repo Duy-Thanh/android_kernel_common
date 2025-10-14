@@ -408402,6 +408402,13 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x9ba47dcc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0483e6f8
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9ba4917f
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -431078,6 +431085,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_encrypt_page"
 }
 elf_symbol {
+  id: 0x7f1591a1
+  name: "__traceiter_android_vh_ep_create_wakeup_source"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x602176a4
+  type_id: 0x9ba47dcc
+  full_name: "__traceiter_android_vh_ep_create_wakeup_source"
+}
+elf_symbol {
   id: 0x9073c9ee
   name: "__traceiter_android_vh_evict"
   is_defined: true
@@ -433893,6 +433909,15 @@ elf_symbol {
   crc: 0x459d0118
   type_id: 0x9ab83ca3
   full_name: "__traceiter_android_vh_timer_calc_index"
+}
+elf_symbol {
+  id: 0x641d703d
+  name: "__traceiter_android_vh_timerfd_create"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x602176a4
+  type_id: 0x9ba47dcc
+  full_name: "__traceiter_android_vh_timerfd_create"
 }
 elf_symbol {
   id: 0xeac5f4dd
@@ -438017,6 +438042,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_encrypt_page"
 }
 elf_symbol {
+  id: 0xdef7c547
+  name: "__tracepoint_android_vh_ep_create_wakeup_source"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ep_create_wakeup_source"
+}
+elf_symbol {
   id: 0x50b74da0
   name: "__tracepoint_android_vh_evict"
   is_defined: true
@@ -440832,6 +440866,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_timer_calc_index"
+}
+elf_symbol {
+  id: 0x2df766e3
+  name: "__tracepoint_android_vh_timerfd_create"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_timerfd_create"
 }
 elf_symbol {
   id: 0x0896a337
@@ -510083,6 +510126,7 @@ interface {
   symbol_id: 0x02c8f91b
   symbol_id: 0xdcaa59a3
   symbol_id: 0xf586d5b6
+  symbol_id: 0x7f1591a1
   symbol_id: 0x9073c9ee
   symbol_id: 0x10157f79
   symbol_id: 0x1921d10d
@@ -510396,6 +510440,7 @@ interface {
   symbol_id: 0xa00355c9
   symbol_id: 0xe334c57d
   symbol_id: 0xfeff2e7f
+  symbol_id: 0x641d703d
   symbol_id: 0xeac5f4dd
   symbol_id: 0x2bc25325
   symbol_id: 0x0119fc41
@@ -510854,6 +510899,7 @@ interface {
   symbol_id: 0xe5deb919
   symbol_id: 0x54b2cd01
   symbol_id: 0xe7584e1c
+  symbol_id: 0xdef7c547
   symbol_id: 0x50b74da0
   symbol_id: 0x4276556f
   symbol_id: 0x684e5f4f
@@ -511167,6 +511213,7 @@ interface {
   symbol_id: 0xd292bd77
   symbol_id: 0xfcee39f3
   symbol_id: 0x69721329
+  symbol_id: 0x2df766e3
   symbol_id: 0x0896a337
   symbol_id: 0xd9d2bcff
   symbol_id: 0x09ba106b
