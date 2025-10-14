@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e36edd82_26ac60ed",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T14:50:37Z",
+      "side": 1,
+      "message": "Ah indeed.\n\nI haven\u0027t noticed the memset at line 138.\n\nWe need clflush as well? (So, we want a helper for memset + clflush?)",
+      "parentUuid": "a41ed13e_a90b9c54",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d3db386_0ea247ae",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "From security point of view, it may not be necessary. So not clearing should be OK. Clearing should also be OK, considering that this rarely happens, and no performance impact.",
       "parentUuid": "6d3db386_0ea247ae",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552e77fb_17576580",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T14:50:37Z",
+      "side": 1,
+      "message": "Yeah, it shouldn\u0027t have a noticeable performance impact. But if we have this flag anyway so it allows us to easily prevent clearing in cases when it is not needed, why not use it. (At least just for \"documentation\" purpose, i.e. just to make it explicit that clearing is not needed in this case.)",
+      "parentUuid": "825867a3_62663839",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "Like the comment https://android-review.googlesource.com/c/kernel/common/+/3787907/comment/6ea6b32a_424b05be/ mentioned, we still probably need `__pkvm_hyp_donate_host()` not to clear the memory pages when want to use teardown_mc, as `push_pkvm_memcache` will write physical address to the memory pages. And we also discussed that before at https://android-review.googlesource.com/c/kernel/common/+/3728233/comment/76156533_fa381b12/, we cannot write to these memory pages after donate them. So it is better to let `__pkvm_hyp_donate_host()` to use a flag to determine if to clear or not.",
       "parentUuid": "9230b657_d562efd2",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52065e5_10d0d23d",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2487,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T14:50:37Z",
+      "side": 1,
+      "message": "Yeah indeed, I forgot about that.",
+      "parentUuid": "a33a8ceb_cdd42b57",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
