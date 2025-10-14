@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17f532be_44de9189",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T01:51:35Z",
+      "side": 1,
+      "message": "Using kvm_err as another error print in this file is also kvm_err, to keep them align.\n\nProbably the default prefix of \"kvm\" in kvm_err confuse people? If so, use pr_err with pkvm prefix is a better choice.",
+      "parentUuid": "d057bf13_a99b83a4",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8caadb46_c58bb1eb",
         "filename": "arch/x86/kvm/vmx/pkvm_high.c",
         "patchSetId": 5
@@ -49,6 +67,24 @@
       "writtenOn": "2025-10-13T15:09:46Z",
       "side": 1,
       "message": "Hmm... we free the memcache used for all vCPUs, not just this one? This assumes, at least, that kvm_x86_call(vcpu_free)() will never be called for multiple vCPUs in parallel?\n\nIt seems better to avoid such tricky assumptions.\n\n...It feels we should eventually (or maybe now?) get rid of using memcache for this stuff (i.e. for freeing pages that were allocated _not_ via memcache). As we discussed earlier, using it for pages allocated via alloc_pages_exact() is potentially incorrect, or at least is unclean and hacky.\n\nAnd, in case of pkvm_vcpu pages, the host knows exactly how many pages to free anyway (pkvm_vcpu_sz \u003d PAGE_ALIGN(PKVM_SHADOW_VCPU_STATE_SIZE)), so using memcache seems like a complete overkill? we can easily just use free_pages_exact()?\n\nAnd in case of cpuid_entries pages it also seems easy: the host knows the current value of vcpu-\u003earch.cpuid_nent, right?",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46951c62_5bcaff17",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-14T01:51:35Z",
+      "side": 1,
+      "message": "\u003e Hmm... we free the memcache used for all vCPUs, not just this one? This assumes, at least, that kvm_x86_call(vcpu_free)() will never be called for multiple vCPUs in parallel?\n\nThe current vcpu_free ops usage in the KVM is not in parallel. The KVM code calls the vcpu_free ops one by one in function `kvm_destroy_vcpus`. So it frees the memcache for vcpus one by one.\n\n\u003e And, in case of pkvm_vcpu pages, the host knows exactly how many pages to free anyway (pkvm_vcpu_sz \u003d PAGE_ALIGN(PKVM_SHADOW_VCPU_STATE_SIZE)), so using memcache seems like a complete overkill? we can easily just use free_pages_exact()?\nAnd in case of cpuid_entries pages it also seems easy: the host knows the current value of vcpu-\u003earch.cpuid_nent, right?\n\nThen we need a mechanism to return two physical addresses with the current kvm_call_pkvm implementation, one is for pkvm_vcpu and the other is for cpuid_entries. Not sure if you have any easy idea for this?\n\nIn v6.15, I have extended the memcache with a memory size element. For the physical address with 4K size, it is freed via free_page(). Otherwise, it is freed via free_pages_exact(). And the kvm_call_pkvm is also extended to return multiple outputs, so the vcpu_free PV interface can return a structure pkvm_memcache and doesn\u0027t need to have a pkvm_memcache in kvm structure, which can also support vcpu_free PV interface being use in parallel.\nBut for v6.12, I am not sure if it is really necessary to do these refactors as seems without these refactors, v6.12 can also work without any issue (vcpu_free PV interface is used in serial, and free_pages_exact() is implemented via calling free_page() one by one).",
+      "parentUuid": "8caadb46_c58bb1eb",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
