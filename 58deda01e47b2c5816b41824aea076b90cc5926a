@@ -16,6 +16,23 @@
       "message": "Respin bug:b/451550513",
       "revId": "58deda01e47b2c5816b41824aea076b90cc5926a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea8d3f5_aa10c981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-10-14T07:44:18Z",
+      "side": 1,
+      "message": "Hello, @gprocida@google.com, this change neeed 1 more Code-Review +2 to merge, could you please help to review it?",
+      "revId": "58deda01e47b2c5816b41824aea076b90cc5926a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
