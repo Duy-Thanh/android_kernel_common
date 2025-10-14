@@ -87,6 +87,24 @@
       "parentUuid": "8caadb46_c58bb1eb",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1469dbf6_7aae037f",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T10:03:13Z",
+      "side": 1,
+      "message": "\u003e The current vcpu_free ops usage in the KVM is not in parallel. The KVM code calls the vcpu_free ops one by one in function kvm_destroy_vcpus. So it frees the memcache for vcpus one by one.\n\nYes, but why deliberately make ourselves dependent on the assumption that it will always be the case? That might be fine as a temporary solution for 6.12 only, but for 6.15+ we probably want a cleaner and more robust solution.\n\n\u003e Then we need a mechanism to return two physical addresses with the current kvm_call_pkvm implementation, one is for pkvm_vcpu and the other is for cpuid_entries.\n\nOk, I forgot that KVM doesn\u0027t remember the addresses of pkvm_vcpu and cpuid_entries that it allocates and passes to pKVM.\n\nBut it could remember them, right? So why not just do that?\n\n\u003e In v6.15, I have extended the memcache with a memory size element. [...]\n\nAgain, do we really _need_ to use memcache for freeing pages that were not allocated via memcache? Does that really have any advantages?",
+      "parentUuid": "46951c62_5bcaff17",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
