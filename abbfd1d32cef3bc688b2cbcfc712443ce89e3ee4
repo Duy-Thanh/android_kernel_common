@@ -33,6 +33,24 @@
       "message": "minor nit: the commit message for most of pkvm patches are \"pkvm: x86\", this patch and above has it reversed.",
       "revId": "abbfd1d32cef3bc688b2cbcfc712443ce89e3ee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ce496ee_6d640c4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T13:34:12Z",
+      "side": 1,
+      "message": "This is not a new patch, this is a cherry-pick of Chuanxiao\u0027s aosp/3695210 from 6.12.\n\nBesides, this is a patch for guest (arch/x86/coco/pkvm), not for (p)KVM.",
+      "parentUuid": "081c2438_b16a17eb",
+      "revId": "abbfd1d32cef3bc688b2cbcfc712443ce89e3ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
