@@ -123,6 +123,24 @@
       "parentUuid": "1469dbf6_7aae037f",
       "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c0abb7_d0d9c641",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T11:54:24Z",
+      "side": 1,
+      "message": "\u003e Yeah, it would be remembered if we extend the kvm_vcpu with two more elements to remember these two address. That will be independent with the return value. And when adds fpu, we probably need one more to record the fpu memory address passed to the pkvm. These seems makes things a bit complex than using free_pkvm_memcache as we don\u0027t need to change anything when adds fpu.\n\nIt doesn\u0027t seem very complex to me. Currently `struct kvm_vcpu_arch` has `pkvm_vcpu_handle` as the only pkvm-specific field, we could instead define a `struct kvm_protected_vcpu pkvm` field (similarly to `struct kvm_protected_vm pkvm` in `struct kvm_arch`), which would contain the pkvm_vcpu_handle as well as those remembered addresses of pkvm_vcpu, cpuid_entries and fpstate. When we add something other feature that requires allocating and donating memory to hypervisor, we just add another field to that structure. That\u0027s the most straightforward and obvious approach I can think of.\n\n(BTW actually `struct kvm_protected_vm` is a misnomer, since it is not just for protected VMs. So we\u0027d better name it e.g. `struct kvm_pkvm_vm`. And then, correspondingly, `struct kvm_pkvm_vcpu`.)\n\nAlthough a potential problem with this approach is Android\u0027s \"KMI freeze\" policy. Extending `struct kvm_vcpu_arch` probably changes the ABI for vendor modules, so we may not always be able to do that in the given Android kernel version.\n\n\u003e The benifit of memcache is to return multiple physical addresses. [...]\n\nIf we remember the allocated addresses in struct kvm_vcpu_arch, we don\u0027t need to return them at all.\n\nAnyway, I agree that using memcache is more flexible, so we might prefer that.\n\nIf so, I imagine we\u0027d want to have `teardown_mc` per vCPU, not just per VM. So that we can freely use it, in particular, for multiple vCPUs in parallel independently of each other, not just in pkvm_vcpu_free() but also in pkvm_vcpu_after_set_cpuid() and pkvm_vcpu_realloc_fpstate() (why not? it would make things easier for KVM-high, which would need to do literally just `free_pkvm_memcache(\u0026vcpu-\u003earch.pkvm.teardown_mc)` in all those cases).",
+      "parentUuid": "d61a0253_4f477ea5",
+      "revId": "e21a4a1ba760ff1bd5956185b9532b87e6b0f1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
