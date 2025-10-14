@@ -144,3 +144,7 @@
   wait_for_completion
   xa_load
   xa_store
+  __const_udelay
+  __cpu_possible_mask
+  cpu_number
+  remove_cpu

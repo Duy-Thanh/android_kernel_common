@@ -39,6 +39,8 @@
 
 #include <crypto/hash.h>
 #include <crypto/sha3.h>
+#include <linux/cpu.h>
+#include <linux/delay.h>
 #include <linux/fips.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -318,6 +320,38 @@ static struct rng_alg jent_alg = {
 	}
 };
 
+static void pull_down_other_cpus(void)
+{
+    int cpu, ret, curr_cpu;
+
+    curr_cpu = smp_processor_id();
+
+    for_each_possible_cpu(cpu) {
+        if (cpu == curr_cpu)
+            continue;
+        ret = remove_cpu(cpu);
+        if (ret)
+            pr_crit("CORE%d ret: %x\n", cpu, ret);
+    }
+}
+
+/* timeout for dog bark/bite */
+#define DELAY_TIME 60000
+
+static void simulate_watchdog(void)
+{
+    pr_crit("[PIXEL][simulate_watchdog] called!\n");
+
+    pull_down_other_cpus();
+    pr_crit("[PIXEL][simulate_watchdog] start to hang\n");
+    local_irq_disable();
+    mdelay(DELAY_TIME);
+    local_irq_enable();
+
+    /* Should not reach here */
+    pr_crit("[PIXEL][simulate_watchdog] failed!");
+}
+
 static int __init jent_mod_init(void)
 {
 	SHASH_DESC_ON_STACK(desc, tfm);
@@ -339,8 +373,12 @@ static int __init jent_mod_init(void)
 	crypto_free_shash(tfm);
 	if (ret) {
 		/* Handle permanent health test error */
-		if (fips_enabled)
+		if (fips_enabled) {
+			pr_crit("jitterentropy: Initialization failed with host not compliant with requirements: %d\n", ret);
+			pr_crit("[PIXEL] trigger APC Watchdog");
+			simulate_watchdog();
 			panic("jitterentropy: Initialization failed with host not compliant with requirements: %d\n", ret);
+        }
 
 		jent_testing_exit();
 		pr_info("jitterentropy: Initialization failed with host not compliant with requirements: %d\n", ret);
