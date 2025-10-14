@@ -38,6 +38,7 @@
 
 #include "hub.h"
 #include "otg_productlist.h"
+#include "trace.h"
 
 #define USB_VENDOR_GENESYS_LOGIC		0x05e3
 #define USB_VENDOR_SMSC				0x0424
@@ -2115,6 +2116,21 @@ static void update_port_device_state(struct usb_device *udev)
 			sysfs_notify_dirent(port_dev->state_kn);
 		}
 	}
+}
+
+static void update_usb_device_state(struct usb_device *udev,
+				    enum usb_device_state new_state)
+{
+	if (udev->state == USB_STATE_SUSPENDED &&
+	    new_state != USB_STATE_SUSPENDED)
+		udev->active_duration -= jiffies;
+	else if (new_state == USB_STATE_SUSPENDED &&
+		 udev->state != USB_STATE_SUSPENDED)
+		udev->active_duration += jiffies;
+
+	udev->state = new_state;
+	update_port_device_state(udev);
+	trace_usb_set_device_state(udev);
 }
 
 static void recursively_mark_NOTATTACHED(struct usb_device *udev)

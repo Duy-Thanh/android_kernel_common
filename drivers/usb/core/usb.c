@@ -45,6 +45,7 @@
 #include <linux/dma-mapping.h>
 
 #include "hub.h"
+#include "trace.h"
 
 const char *usbcore_name = "usbcore";
 
@@ -756,7 +757,7 @@ struct usb_device *usb_alloc_dev(struct usb_device *parent,
 	dev->authorized = usb_dev_authorized(dev, usb_hcd);
 	if (!root_hub)
 		dev->wusb = usb_bus_is_wusb(bus) ? 1 : 0;
-
+	trace_usb_alloc_dev(dev);
 	return dev;
 }
 EXPORT_SYMBOL_GPL(usb_alloc_dev);
