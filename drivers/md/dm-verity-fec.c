@@ -7,6 +7,7 @@
 
 #include "dm-verity-fec.h"
 #include <linux/math64.h>
+#include <linux/sysfs.h>
 
 #define DM_MSG_PREFIX	"verity-fec"
 
@@ -188,9 +189,11 @@ error:
 	if (r < 0 && neras)
 		DMERR_LIMIT("%s: FEC %llu: failed to correct: %d",
 			    v->data_dev->name, (unsigned long long)rsb, r);
-	else if (r > 0)
+	else if (r > 0){
 		DMWARN_LIMIT("%s: FEC %llu: corrected %d errors",
 			     v->data_dev->name, (unsigned long long)rsb, r);
+		atomic_add_unless(&v->fec->corrected, 1, INT_MAX);
+	}
 
 	return r;
 }
@@ -539,6 +542,7 @@ unsigned int verity_fec_status_table(struct dm_verity *v, unsigned int sz,
 void verity_fec_dtr(struct dm_verity *v)
 {
 	struct dm_verity_fec *f = v->fec;
+	struct kobject *kobj = &f->kobj_holder.kobj;
 
 	if (!verity_fec_is_enabled(v))
 		goto out;
@@ -556,6 +560,10 @@ void verity_fec_dtr(struct dm_verity *v)
 
 	if (f->dev)
 		dm_put_device(v->ti, f->dev);
+	if (kobj->state_initialized) {
+		kobject_put(kobj);
+		wait_for_completion(dm_get_completion_from_kobject(kobj));
+	}
 out:
 	kfree(f);
 	v->fec = NULL;
@@ -648,6 +656,38 @@ int verity_fec_parse_opt_args(struct dm_arg_set *as, struct dm_verity *v,
 	return 0;
 }
 
+static ssize_t corrected_show(struct kobject *kobj, struct kobj_attribute *attr,
+			      char *buf)
+{
+	struct dm_verity_fec *f = container_of(kobj, struct dm_verity_fec,
+					       kobj_holder.kobj);
+
+	return sprintf(buf, "%d\n", atomic_read(&f->corrected));
+}
+
+static struct kobj_attribute attr_corrected = __ATTR_RO(corrected);
+
+static struct attribute *fec_attrs[] = {
+	&attr_corrected.attr,
+	NULL
+};
+
+ATTRIBUTE_GROUPS(fec);
+
+static void fec_ktype_release(struct kobject *kobj)
+{
+    struct dm_kobject_holder *holder = container_of(kobj, struct dm_kobject_holder, kobj);
+    struct dm_verity_fec *f = container_of(holder, struct dm_verity_fec, kobj_holder);
+
+    complete(&f->kobj_holder.completion);
+}
+
+static struct kobj_type fec_ktype = {
+	.sysfs_ops = &kobj_sysfs_ops,
+	.release        = fec_ktype_release,
+	.default_groups	= fec_groups,
+};
+
 /*
  * Allocate dm_verity_fec for v->fec. Must be called before verity_fec_ctr.
  */
@@ -666,6 +706,32 @@ int verity_fec_ctr_alloc(struct dm_verity *v)
 }
 
 /*
+ * Creates the FEC sysfs attributes for a verity device.
+ */
+void verity_fec_create_sysfs(struct dm_verity *v)
+{
+	struct dm_verity_fec *f = v->fec;
+	struct dm_target *ti = v->ti;
+	struct mapped_device *md;
+	int r;
+
+	if (f->sysfs_created) {
+		return;
+	}
+
+	md = dm_table_get_md(ti->table);
+
+	r = kobject_init_and_add(&f->kobj_holder.kobj, &fec_ktype,
+				 &disk_to_dev(dm_disk(md))->kobj, "%s", "fec");
+	if (r) {
+		DMERR_LIMIT("Failed to create FEC kobject for %s", ti->error);
+		return;
+	}
+	f->sysfs_created = true;
+}
+EXPORT_SYMBOL_GPL(verity_fec_create_sysfs);
+
+/*
  * Validate arguments and preallocate memory. Must be called after arguments
  * have been parsed using verity_fec_parse_opt_args.
  */
@@ -680,6 +746,9 @@ int verity_fec_ctr(struct dm_verity *v)
 		verity_fec_dtr(v);
 		return 0;
 	}
+
+	init_completion(&f->kobj_holder.completion);
+	f->sysfs_created = false;
 
 	/*
 	 * FEC is computed over data blocks, possible metadata, and
