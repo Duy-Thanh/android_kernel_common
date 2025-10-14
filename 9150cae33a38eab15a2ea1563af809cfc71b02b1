@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea6b32a_424b05be",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T12:47:27Z",
+      "side": 1,
+      "message": "We should clear the pages in this case, right?",
+      "fixSuggestions": [
+        {
+          "fixId": "16fc6f7c_758dfdee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "\t__pkvm_hyp_donate_host(pkvm_virt_to_phys(addr), size, true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3db386_0ea247ae",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T12:47:27Z",
+      "side": 1,
+      "message": "Do we really need to clear pages in this case?",
+      "fixSuggestions": [
+        {
+          "fixId": "7c8d09b9_36e2861f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "\t__pkvm_hyp_donate_host(pkvm_vm_pa, pa_size, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024c7c78_b347a2dc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T12:47:27Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9230b657_d562efd2",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2487,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T12:47:27Z",
+      "side": 1,
+      "message": "Just a note: free_loaded_vmcs() and other functions are also called in failures cases e.g. in vmx_vcpu_create(), when we probably don\u0027t need to clear the pages.\n\nThat\u0027s probably ok, but that also makes me think: perhaps it\u0027s ok to just _always_ unconditionally clear the pages in __pkvm_hyp_donate_host(), instead of bothering with a flag for that?",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
