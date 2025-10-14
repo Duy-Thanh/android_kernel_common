@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9255f2cb_cb82b724",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-14T05:51:21Z",
+      "side": 1,
+      "message": "Can we make it more assertive please: Prevent the guest from talking FF-A by disabling the KVM_CAP_ARM_PROTECTED_VM_FLAGS_SET_FFA capability if the hypervisor negotiated 1.0.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20b5dc8_45356a66",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-14T05:51:21Z",
+      "side": 1,
+      "message": "You can inline it with line 1509 and drop the comment as it seems pretty obvious what we are doing. Maybe, it is worth checking `has_version_negotiated` first before looking at the request arguments as I did in aosp/3793848.",
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc85056c_cd101b80",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-14T05:51:21Z",
+      "side": 1,
+      "message": "Note to self, others who might be looking at this. The behaviour of this is as follows:\n\n- if `hyp_ffa_version` is 1.0, than the guest will not be able to talk FF-A. I think this is acceptable and it shouldn\u0027t be a problem as we decided NOT to support 1.0.\n\n- if the \u0027hyp_ffa_version` is 1.2 but the `guest requests 1.1`, the guest driver will downgrade to 1.1 thinking that it is supported which is problematic. This CL is correct as long as we don\u0027t simply bump the hypervisor version to 1.2",
+      "range": {
+        "startLine": 1524,
+        "startChar": 31,
+        "endLine": 1524,
+        "endChar": 70
+      },
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
