@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345901f6_f9b8e4b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-14T16:21:09Z",
+      "side": 1,
+      "message": "These were used by android_f_midi_info in android15-6.6, but that function driver was deprecated for 6.12. Thanks for cleaning this up.",
+      "revId": "aa845b2f5129312ecf9e7cf57deea91958e3f7cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
