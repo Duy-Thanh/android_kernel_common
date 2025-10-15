@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30bf0a01_e9e28e0c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T01:07:35Z",
+      "side": 1,
+      "message": "Good point. Will add clflush.",
+      "parentUuid": "e36edd82_26ac60ed",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d3db386_0ea247ae",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "Yeah, it shouldn\u0027t have a noticeable performance impact. But if we have this flag anyway so it allows us to easily prevent clearing in cases when it is not needed, why not use it. (At least just for \"documentation\" purpose, i.e. just to make it explicit that clearing is not needed in this case.)",
       "parentUuid": "825867a3_62663839",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c96b94c_2c7b1cbe",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T01:07:35Z",
+      "side": 1,
+      "message": "OK. Let\u0027s change to false and add a comment to say \"No need to clear as there is no sensitive data stored in this memory range yet.\".",
+      "parentUuid": "552e77fb_17576580",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
