@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a61d21c_9f7c2fb8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T11:21:01Z",
+      "side": 1,
+      "message": "Why make it specific to hyp donated memory? We do the same in pvMMU for guest donated memory when tearing down the guest page table, so we could reuse this helper there as well.",
+      "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb3f79f_e94aa30b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T11:21:01Z",
+      "side": 1,
+      "message": "Page alignment is not really related to clearing memory and flushing cache, right? i.e. we could use this helper for non-aligned memory regions as well, without any problems. So why artificially limit its functionality?",
+      "fixSuggestions": [
+        {
+          "fixId": "22f070c9_385333b5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
