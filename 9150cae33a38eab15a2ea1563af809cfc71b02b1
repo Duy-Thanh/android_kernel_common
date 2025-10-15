@@ -215,6 +215,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7e56d2a_6efea81f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T11:33:43Z",
+      "side": 1,
+      "message": "\u003e Let\u0027s change to false and add a comment to say \"No need to clear as there is no sensitive data stored in this memory range yet.\".\n\nIMHO it is not even necessary to add a comment about that. It is not hard to guess why clear is not needed this case.\n\nGenerally, if we have too many comments, then those comments that are actually important (i.e. those that explain non-obvious things) are gonna be lost among obvious ones.",
+      "parentUuid": "b9e10440_09adc1b3",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "024c7c78_b347a2dc",
