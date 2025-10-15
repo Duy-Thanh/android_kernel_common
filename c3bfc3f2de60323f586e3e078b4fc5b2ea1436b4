@@ -124,6 +124,24 @@
       "parentUuid": "865e28ee_31e36dfe",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a126a5_a383e7ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-15T21:03:46Z",
+      "side": 1,
+      "message": "Weird. But is the actual Android cpuset mount (`/dev/cpuset`) working with hotplugging?",
+      "parentUuid": "9f19a76b_6dabe3b1",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
