@@ -22,6 +22,30 @@
       },
       "revId": "308633cdf3f89acef90a02ef5aa8115001f1956f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ec76d6_cf62c6eb",
+        "filename": "drivers/gpu/drm/xe/xe_device_types.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-15T19:21:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f6578e4_c2e8a9bc",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 20
+      },
+      "revId": "308633cdf3f89acef90a02ef5aa8115001f1956f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
