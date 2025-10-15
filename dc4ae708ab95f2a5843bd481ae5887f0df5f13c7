@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd6c48d1_fd158274",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From:...\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: Yuvraj sakshith \u003cysakshit@qti.qualcomm.com\u003e\u0027 !\u003d \u0027Signed-off-by: Yuvraj Sakshith \u003cysakshit@qti.qualcomm.com\u003e\u0027",
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab3b718_eb1fa4d1",
+        "filename": "drivers/virt/gunyah/gunyah_qtvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:OPEN_BRACE: open brace \u0027{\u0027 following function definitions go on the next l...\n\nERROR:OPEN_BRACE: open brace \u0027{\u0027 following function definitions go on the next line",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59afb076_e7d5c292",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LONG_LINE: line length of 142 exceeds 100 columns\n\nWARNING:LONG_LINE: line length of 142 exceeds 100 columns",
+      "range": {
+        "startLine": 1067,
+        "startChar": 0,
+        "endLine": 1067,
+        "endChar": 0
+      },
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4e9678_d66c8b81",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LONG_LINE: line length of 119 exceeds 100 columns\n\nWARNING:LONG_LINE: line length of 119 exceeds 100 columns",
+      "range": {
+        "startLine": 1068,
+        "startChar": 0,
+        "endLine": 1068,
+        "endChar": 0
+      },
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d85015b_8efc3b47",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:SPACING: space required after that \u0027,\u0027 (ctx:VxV)\n\nERROR:SPACING: space required after that \u0027,\u0027 (ctx:VxV)",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 0
+      },
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d51c6355_95f9ec11",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-15T06:37:08Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:SPACING: space prohibited before that \u0027++\u0027 (ctx:WxO)\n\nERROR:SPACING: space prohibited before that \u0027++\u0027 (ctx:WxO)",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 0
+      },
+      "revId": "dc4ae708ab95f2a5843bd481ae5887f0df5f13c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
