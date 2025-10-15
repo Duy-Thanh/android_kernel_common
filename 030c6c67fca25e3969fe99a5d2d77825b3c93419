@@ -34,6 +34,24 @@
       "parentUuid": "05502caa_309ae24c",
       "revId": "030c6c67fca25e3969fe99a5d2d77825b3c93419",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c28cf8d_926079ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T10:40:28Z",
+      "side": 1,
+      "message": "\u003e How about remove the above code in the next patch aosp/3728586 then manually revert this one?\n\nSGTM",
+      "parentUuid": "1fff8596_b1d13dbc",
+      "revId": "030c6c67fca25e3969fe99a5d2d77825b3c93419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
