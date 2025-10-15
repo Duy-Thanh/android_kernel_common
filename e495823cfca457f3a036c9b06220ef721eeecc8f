@@ -104,6 +104,30 @@
       },
       "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898a7d06_cc187921",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-15T14:29:00Z",
+      "side": 1,
+      "message": "I suggest to use the change that I have in aosp/3793848 and abandon this change as we don\u0027t want to be in the second point that I mentioned earlier when you land aosp/3606370",
+      "parentUuid": "dc85056c_cd101b80",
+      "range": {
+        "startLine": 1524,
+        "startChar": 31,
+        "endLine": 1524,
+        "endChar": 70
+      },
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
