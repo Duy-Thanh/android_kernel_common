@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7d092c_c517b301",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-10-15T16:40:54Z",
+      "side": 1,
+      "message": "The conflict is that this version calls `__read_timestamps()` while upstream calls `hwe_read_timestamp()`.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 23
+      },
+      "revId": "d40f9b37c8d02c4f627938fa0000ada0e3db0032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
