@@ -1796,7 +1796,7 @@ sync_out:
 				map->m_len - ofs);
 		}
 		if (map->m_next_extent)
-			*map->m_next_extent = is_hole ? pgofs + 1 : pgofs;
+			*map->m_next_extent = pgofs + 1;
 	}
 	f2fs_put_dnode(&dn);
 unlock_out:
