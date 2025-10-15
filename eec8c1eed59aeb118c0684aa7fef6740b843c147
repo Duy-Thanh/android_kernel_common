@@ -34,6 +34,24 @@
       ],
       "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c0ec8d1_e22c301e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T14:47:47Z",
+      "side": 1,
+      "message": "Also s/for the hyp donated memory range// ?",
+      "parentUuid": "5482a57e_a4cdd339",
+      "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
