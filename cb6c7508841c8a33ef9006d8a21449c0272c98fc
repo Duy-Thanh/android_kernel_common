@@ -51,6 +51,24 @@
       "parentUuid": "9d602502_bef2585c",
       "revId": "cb6c7508841c8a33ef9006d8a21449c0272c98fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f33c065_c17f7f9c",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2919,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T10:37:10Z",
+      "side": 1,
+      "message": "I see. Yeah, I\u0027m ok with keeping this checking here even if it currently not used (even if just to echo the init_event checks below).\n\n\u003e not sure if this will benefit to the secondary vcpu securely bringing up?.\n\nProbably not, it will only call kvm_vcpu_reset() before a secondary vCPU runs first time, i.e. before we even enter kvm_vcpu_enter_guest() first time for the given vCPU.\n\n...Maybe let\u0027s add a comment before this check, like \"With the existing pKVM code paths, the fpstate should not be in use at this point. Still check it, in case this changes in the future.\" ?",
+      "parentUuid": "0bacd708_818d20c1",
+      "revId": "cb6c7508841c8a33ef9006d8a21449c0272c98fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
