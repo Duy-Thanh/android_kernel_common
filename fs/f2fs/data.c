@@ -1791,10 +1791,9 @@ sync_out:
 		if (map->m_flags & F2FS_MAP_MAPPED) {
 			unsigned int ofs = start_pgofs - map->m_lblk;
 
-			if (map->m_len > ofs)
-				f2fs_update_read_extent_cache_range(&dn,
-					start_pgofs, map->m_pblk + ofs,
-					map->m_len - ofs);
+			f2fs_update_read_extent_cache_range(&dn,
+				start_pgofs, map->m_pblk + ofs,
+				map->m_len - ofs);
 		}
 		if (map->m_next_extent)
 			*map->m_next_extent = is_hole ? pgofs + 1 : pgofs;
