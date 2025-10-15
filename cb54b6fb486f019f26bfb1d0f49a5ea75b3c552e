@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5628a3d5_17deaab7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/ept.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "\u003e EPT_PROT_DEF and pkvm_init_ept_page() (and pkvm_pgtable_ops-\u003edefault_prot) are also not needed anymore?\n\nYeah - I\u0027ve reverted \"ANDROID: pkvm: x86: Initialize every SEPT entry with \"suppress #VE\" bit set\" in following commit\n\n\u003e And neither is EPT_PROT_MASK?\n\nI\u0027ve removed it in `ANDROID: pkvm: x86: remove not used pkvm_handle_guest_ept_violation and its dependencies` where we stopped using it.",
+      "parentUuid": "5546abda_5567239a",
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63d90879_b09ff192",
@@ -81,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4308a2ac_4c8fb95d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/ept.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "Yeah, removed in \"ANDROID: pkvm: x86: remove not used pkvm_handle_guest_ept_violation and its dependencies\"",
+      "parentUuid": "63d90879_b09ff192",
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76cf6588_f103fdcb",
@@ -112,6 +148,24 @@
           ]
         }
       ],
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fce0c0fd_793f8ae1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/ept.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve removed it in \"ANDROID: pkvm: x86: remove dead code related to shadow ept invalidation\" where it was last time referenced.",
+      "parentUuid": "76cf6588_f103fdcb",
       "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -161,6 +215,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae17233e_2a3a896e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "Yes, thanks for noticing, I\u0027ve reverted \"ANDROID: pkvm: x86: Enable Virtualization Exception Information\" in following commits.",
+      "parentUuid": "44054dd6_418a0eac",
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8076b67a_72d54f22",
@@ -196,6 +268,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ba26d1_717d99be",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "yes, I removed it in \"ANDROID: pkvm: x86: remove virtual ept setup\" in latest version where it was referenced last time.",
+      "parentUuid": "8076b67a_72d54f22",
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a75255_d73b6d2b",
@@ -227,6 +317,24 @@
           ]
         }
       ],
+      "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c974934e_80c84c7c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:07:58Z",
+      "side": 1,
+      "message": "Yes, I\u0027ve reverted \"ANDROID: pkvm: x86: Enable Virtualization Exception Information\" on top",
+      "parentUuid": "99a75255_d73b6d2b",
       "revId": "cb54b6fb486f019f26bfb1d0f49a5ea75b3c552e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
