@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4deee724_db092a2d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T07:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30bf0a01_e9e28e0c",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d3db386_0ea247ae",
@@ -179,6 +197,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9e10440_09adc1b3",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T07:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c96b94c_2c7b1cbe",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "024c7c78_b347a2dc",
@@ -210,6 +246,24 @@
       "side": 1,
       "message": "Ditto.",
       "parentUuid": "024c7c78_b347a2dc",
+      "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c4cf33_81cbb06d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T07:20:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63560416_331d5ef5",
       "revId": "9150cae33a38eab15a2ea1563af809cfc71b02b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
