@@ -87,6 +87,24 @@
       "parentUuid": "bcb3f79f_e94aa30b",
       "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22619496_6d00644e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T12:36:56Z",
+      "side": 1,
+      "message": "Maybe e.g. just pkvm_clear_memory(), to keep it short? (Cache flush, in a sense, is a part of clear, since it clears it from RAM.)",
+      "parentUuid": "01368685_5017a204",
+      "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
