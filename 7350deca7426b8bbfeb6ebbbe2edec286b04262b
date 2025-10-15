@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cfaea0c_0a601d4a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T12:26:35Z",
+      "side": 1,
+      "message": "OK. How about rename it to clear_and_flush_memory to make it more common?",
+      "parentUuid": "4a61d21c_9f7c2fb8",
+      "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcb3f79f_e94aa30b",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
         "patchSetId": 4
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01368685_5017a204",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T12:26:35Z",
+      "side": 1,
+      "message": "This was for hyp donated memory, which is for aligned memory pages, as the function name does. If we want to use it for other purpose, a generic name is better, e.g., clear_and_flush_memory",
+      "parentUuid": "bcb3f79f_e94aa30b",
       "revId": "7350deca7426b8bbfeb6ebbbe2edec286b04262b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
