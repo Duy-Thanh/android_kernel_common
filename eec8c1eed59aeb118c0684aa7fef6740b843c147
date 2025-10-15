@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5482a57e_a4cdd339",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T14:46:23Z",
+      "side": 1,
+      "message": "\"the host\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "641f3161_e31ee2ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "\t * Flush CPU cache for the hyp donated memory range to make sure the host\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
