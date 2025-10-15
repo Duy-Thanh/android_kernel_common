@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b2dd57_2798d597",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-10-15T10:32:52Z",
+      "side": 1,
+      "message": "Revert commit message should contain the line: This reverts commit \u003ccommit_id\u003e.\n\n:-)  # not going to adjust the linter to include \"half of\" ;-)",
+      "revId": "98d9ce5e0442592b4bbe3e485bda5f4833bd7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
