@@ -16,6 +16,24 @@
       "message": "We can also revert these 2 changes in `virt/kvm/`?\n\n```\n38fc05027742 2025-03-12 Zide Chen             ANDROID: KVM: stats: Add VM stat for remote tlb flush with range\n44dca1f58242 2025-03-12 Zide Chen             ANDROID: pkvm: x86: flush remote TLBs with range in mmu_notifier callbacks\n```",
       "revId": "d234761b0f09c868627ca38c604f49ff42265e51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7670a45d_de60bba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-15T13:00:21Z",
+      "side": 1,
+      "message": "yeah and:\n```\nfa8c805c8cc1 ANDROID: pkvm: x86: Fix compiling issue when CONFIG_HYPERV\u003dn\n```\n\nI\u0027ve introduced those reverts on top of this one",
+      "parentUuid": "364ac53e_4a0c9212",
+      "revId": "d234761b0f09c868627ca38c604f49ff42265e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
