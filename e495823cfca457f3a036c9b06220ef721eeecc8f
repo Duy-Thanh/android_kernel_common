@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d430c66_e52371c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-15T02:53:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9255f2cb_cb82b724",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c20b5dc8_45356a66",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-10-14T05:51:21Z",
       "side": 1,
       "message": "You can inline it with line 1509 and drop the comment as it seems pretty obvious what we are doing. Maybe, it is worth checking `has_version_negotiated` first before looking at the request arguments as I did in aosp/3793848.",
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c297383_f742dd05",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-15T02:53:49Z",
+      "side": 1,
+      "message": "Check inlined \u0026 comment dropped. aosp/3606370 updated accordingly.\n\n\u003e  Maybe, it is worth checking has_version_negotiated first \n\nI don\u0027t think the advantage would be obvious to the reader since both the major and minor version checks do not depend on the negotiated version.\n\nIf you are suggesting we return `FFA_RET_DENIED`, we are no longer purely changing the minimum guest version. Would it make sense to `WARN` in that case and still return `FFA_RET_NOT_SUPPORTED`?",
+      "parentUuid": "c20b5dc8_45356a66",
       "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
