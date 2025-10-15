@@ -16,6 +16,24 @@
       "message": "No need to paste the diff",
       "revId": "629da1d044da040c56705891a075465431509f62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e85e974_4cc05cf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-15T20:08:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d100e59f_a7fd89c8",
+      "revId": "629da1d044da040c56705891a075465431509f62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -22,6 +22,30 @@
       },
       "revId": "d40f9b37c8d02c4f627938fa0000ada0e3db0032",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3efca5_82351830",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-15T20:08:44Z",
+      "side": 1,
+      "message": "This new function is introduced in this upstream patch. i need to pull this patch\n5c84985b07acc0fefd2d619c0bb03eed18f769b5 drm/xe/query: Move timestamp reg to hwe_read_timestamp()",
+      "parentUuid": "7c7d092c_c517b301",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 23
+      },
+      "revId": "d40f9b37c8d02c4f627938fa0000ada0e3db0032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
