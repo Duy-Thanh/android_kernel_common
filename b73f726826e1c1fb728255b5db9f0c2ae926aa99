@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/452155358",
       "revId": "b73f726826e1c1fb728255b5db9f0c2ae926aa99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baee4af3_eb264aa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-10-15T01:22:54Z",
+      "side": 1,
+      "message": "The change landed in `android12-5.10` as part of `29bf3aa759af Merge tag \u0027android12-5.10.239_r00\u0027 into android12-5.10`, so cherry-pick is clean.",
+      "revId": "b73f726826e1c1fb728255b5db9f0c2ae926aa99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
