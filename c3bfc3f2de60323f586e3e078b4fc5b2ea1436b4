@@ -106,6 +106,24 @@
       "parentUuid": "f00f7715_0617bcc3",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f19a76b_6dabe3b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4381257
+      },
+      "writtenOn": "2025-10-15T04:38:58Z",
+      "side": 1,
+      "message": "We tried with this change in our build but still see the issue\n```\nlibprocessgroup: Mount cpuset v1 with cpuset_v2_mode commit cb48d31d1289010cc997ab4a9db1f7b034593b4e.\n```\n\nEven after fresh reboot, if we try to use this command for the first time, still the issue is seen.\n```\nmkdir /dev/cpuset_tmp02 \u0026\u0026 mount -t cgroup -ocpuset,noprefix,cpuset_v2_mode cgroup /dev/cpuset_tmp02\n```\n\nIs it possible to continue reviewing this change and we will parallelly debug as to why this is not working on our build?",
+      "parentUuid": "865e28ee_31e36dfe",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
