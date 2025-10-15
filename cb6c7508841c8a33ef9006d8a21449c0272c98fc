@@ -33,6 +33,24 @@
       "message": "Question: why exactly need to put the FPU if it is in use?\n\nAlso in what cases fpstate-\u003ein_use may be already true when kvm_vcpu_reset() is called?",
       "revId": "cb6c7508841c8a33ef9006d8a21449c0272c98fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bacd708_818d20c1",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2919,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T01:53:17Z",
+      "side": 1,
+      "message": "\u003e Question: why exactly need to put the FPU if it is in use?\n\nIf it is in use, we need to put the fpu so that the fpu hardware state can be saved into fpstate memory, then we clear it and re-load to make sure the fpu hardware runs with the reset value.\n\n\u003e Also in what cases fpstate-\u003ein_use may be already true when kvm_vcpu_reset() is called?\n\nCurrently seems it doesn\u0027t have this case as kvm_vcpu_reset() is used via the PV interface by the host, thus fpstate in this case is not in use. But checking in_use flag is more flexible in case we will need to the pkvm hypervisor to actively do a kvm_vcpu_reset(), not sure if this will benefit to the secondary vcpu securely bringing up?.",
+      "parentUuid": "9d602502_bef2585c",
+      "revId": "cb6c7508841c8a33ef9006d8a21449c0272c98fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
