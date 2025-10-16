@@ -70,6 +70,24 @@
       "parentUuid": "0c0ec8d1_e22c301e",
       "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c220db48_4fc58112",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-16T00:18:18Z",
+      "side": 1,
+      "message": "After removing \"for the hyp donated memory range\", seems it will be more clear to say \"after this memory range is donated to the host\" in the end. Otherwise, the host has no chance to get the previous contents in RAM via non-coherent DMA if this memory range is not mapped in the host ept.",
+      "parentUuid": "464a567c_ae913e39",
+      "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
