@@ -142,6 +142,24 @@
       "parentUuid": "9f19a76b_6dabe3b1",
       "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6017933_175672e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4381257
+      },
+      "writtenOn": "2025-10-16T05:04:24Z",
+      "side": 1,
+      "message": "No. For the groups that we create inside /dev/cpuset, it is not working.",
+      "parentUuid": "21a126a5_a383e7ac",
+      "revId": "c3bfc3f2de60323f586e3e078b4fc5b2ea1436b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
