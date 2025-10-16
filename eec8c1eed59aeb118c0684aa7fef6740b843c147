@@ -52,6 +52,24 @@
       "parentUuid": "5482a57e_a4cdd339",
       "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "464a567c_ae913e39",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-16T00:12:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c0ec8d1_e22c301e",
+      "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
