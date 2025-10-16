@@ -16,6 +16,24 @@
       "message": "Drive-by comment: I see a mix pkvm_\u003csomething\u003e_\u003csomething\u003e() and \u003csomething\u003e_pkvm_\u003csomething\u003e calls. Can we maybe standardize on pkvm_\u003csomething\u003e...()?",
       "revId": "937b0369cbd9ff784654c7d6e19462de23ed9e1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "565deaba_87353c9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-16T14:23:10Z",
+      "side": 1,
+      "message": "Unfortunately if we want to change it, it would be quite invasive: without this set plenty of this mixed pattern is already merged, including memcache related functions which were used for teardown (and reused now) already use this mixed pattern e.g. merged in May https://android-review.git.corp.google.com/c/kernel/common/+/3608627/5/arch/x86/kvm/vmx/pkvm_high.c#15:\n```\nstatic void pkvm_mc_free_fn(void *addr, void *unused)\nstatic void *kvm_host_va(phys_addr_t phys)\nstatic void free_pkvm_memcache(struct pkvm_memcache *mc)\n```\n\nFWIW similar mixed style is in pKVM-arm which BTW is already merged upstream and keeping it similar to pKVM-arm may have some value.",
+      "parentUuid": "3f57cdd2_6947d295",
+      "revId": "937b0369cbd9ff784654c7d6e19462de23ed9e1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
