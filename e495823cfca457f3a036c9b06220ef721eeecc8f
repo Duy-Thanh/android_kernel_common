@@ -128,6 +128,30 @@
       },
       "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689be400_6c3d7ece",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-16T08:41:18Z",
+      "side": 1,
+      "message": "I agree that the second case (hyp on 1.2) guest decides to use 1.1 (which the spec deems compatible) is problematic. I will abandon this CL in favor of aosp/3793848 since we no longer need it for testing.",
+      "parentUuid": "898a7d06_cc187921",
+      "range": {
+        "startLine": 1524,
+        "startChar": 31,
+        "endLine": 1524,
+        "endChar": 70
+      },
+      "revId": "e495823cfca457f3a036c9b06220ef721eeecc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
