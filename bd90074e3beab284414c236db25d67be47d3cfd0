@@ -46,6 +46,30 @@
       },
       "revId": "bd90074e3beab284414c236db25d67be47d3cfd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b23189c_1266b31f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-10-16T21:07:16Z",
+      "side": 1,
+      "message": "Please update the commit message to remove this section.",
+      "parentUuid": "e91ce37c_340caa5c",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 54
+      },
+      "revId": "bd90074e3beab284414c236db25d67be47d3cfd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
