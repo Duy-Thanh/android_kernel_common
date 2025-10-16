@@ -106,6 +106,24 @@
       "parentUuid": "c220db48_4fc58112",
       "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "298420fc_e482501e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-16T08:57:45Z",
+      "side": 1,
+      "message": "OK. If we want this function to be used in other cases, then no need to have that comment. I will update accordingly.",
+      "parentUuid": "d7a9a903_30a514da",
+      "revId": "eec8c1eed59aeb118c0684aa7fef6740b843c147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
