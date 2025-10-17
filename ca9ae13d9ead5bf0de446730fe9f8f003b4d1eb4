@@ -16,6 +16,24 @@
       "message": "This is in the wrong function. This should be in `intel_bo_is_protected` below.\n\nFor reference:\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/diff/drivers/gpu/drm/xe/display/intel_bo.c?id\u003d41a97c4a12947c2786a1680d6839bb72d1c57cec\n\n```\n\ndiff --git a/drivers/gpu/drm/xe/display/intel_bo.c b/drivers/gpu/drm/xe/display/intel_bo.c\nindex b463f5bd4eed11..27437c22bd703a 100644\n--- a/drivers/gpu/drm/xe/display/intel_bo.c\n+++ b/drivers/gpu/drm/xe/display/intel_bo.c\n@@ -25,7 +25,7 @@ bool intel_bo_is_shmem(struct drm_gem_object *obj)\n \n bool intel_bo_is_protected(struct drm_gem_object *obj)  \u003c---- this function\n {\n-\treturn false;\n+\treturn xe_bo_is_protected(gem_to_xe_bo(obj));\n }\n \n void intel_bo_flush_if_display(struct drm_gem_object *obj)\n```",
       "revId": "ca9ae13d9ead5bf0de446730fe9f8f003b4d1eb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9bd262a_386882a1",
+        "filename": "drivers/gpu/drm/xe/display/intel_bo.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-17T00:36:17Z",
+      "side": 1,
+      "message": "wow... good catch! sorry, accidently messed this one up.",
+      "parentUuid": "9809b42c_858c76bf",
+      "revId": "ca9ae13d9ead5bf0de446730fe9f8f003b4d1eb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
