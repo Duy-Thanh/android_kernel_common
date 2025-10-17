@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32de7e40_98f3a4c0",
+        "filename": "drivers/virt/gunyah/gunyah_qtvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-17T09:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f37eda6_acaaffb2",
+      "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88891b60_98ddbe7d",
@@ -65,6 +83,24 @@
       "writtenOn": "2025-10-17T04:14:00Z",
       "side": 1,
       "message": "needs cleanup",
+      "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fb1954_e2716746",
+        "filename": "drivers/virt/gunyah/vm_mgr.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-17T09:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88891b60_98ddbe7d",
       "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
