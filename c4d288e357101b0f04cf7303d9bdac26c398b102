@@ -16,6 +16,24 @@
       "message": "I\u0027m okay to land this but please prioritize resolving this in a GKI compliant way.",
       "revId": "c4d288e357101b0f04cf7303d9bdac26c398b102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1fdabbc_a1e485ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3266585
+      },
+      "writtenOn": "2025-10-17T07:59:41Z",
+      "side": 1,
+      "message": "We should actually resolving this by proper dynamic module loading, instead of using softdep workarounds.",
+      "parentUuid": "9a86148f_af83f775",
+      "revId": "c4d288e357101b0f04cf7303d9bdac26c398b102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
