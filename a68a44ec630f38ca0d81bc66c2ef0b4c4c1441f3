@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26690d60_58e98089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935541
+      },
+      "writtenOn": "2025-10-17T04:01:27Z",
+      "side": 1,
+      "message": "This patch needs to be verified on the other targets as well before we merge. Until now -1",
+      "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
