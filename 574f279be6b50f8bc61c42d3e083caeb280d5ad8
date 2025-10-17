@@ -144,6 +144,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a4a0b62_8385f24c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-10-17T12:31:16Z",
+      "side": 1,
+      "message": "Yes, please submit the patches against android16-6.12 instead -- we normally don\u0027t apply the downstream hypervisor drivers to android-mainline. If there is ever a need to have them in a future android release branch then we can always forward port them then.\n\nAnd about the upstreaming question, given that Halla will be discontinued after android16 I don\u0027t think this would be all that valuable, so I would suggest that we keep them in ACK whilst they\u0027re needed and drop them when support is no longer needed.",
+      "parentUuid": "8c460eaa_1de47d81",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19a73b5_e0a9285e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-10-17T12:31:16Z",
+      "side": 1,
+      "message": "That is because crosvm is in system.img, so it can\u0027t access vendor specific UAPI w/o abstractions as per Treble. So the policy we\u0027ve applied so far is to require those hypervisor drivers to be part of GKI (see the other drivers in drivers/virt/{gunyah,geniezone} in android16-6.12).\n\nWith that being said, I agree this doesn\u0027t belong to android-mainline, let\u0027s submit the patches to android16-6.12 instead. FWIW, I\u0027m not sure there is really a point in upstreaming them however, given that we\u0027ve agreed that Halla will be discontinued post android16.",
+      "parentUuid": "a108f010_93e48cd6",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d81be28d_00963315",
         "filename": "drivers/virt/halla/Makefile",
         "patchSetId": 1
