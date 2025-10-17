@@ -16,6 +16,23 @@
       "message": "This patch needs to be verified on the other targets as well before we merge. Until now -1",
       "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb35378_b02ff2ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2025-10-17T04:01:46Z",
+      "side": 1,
+      "message": "Todd / Venkat, please don\u0027t merge this yet! this needs testing on few other targets that use v6.12.",
+      "revId": "a68a44ec630f38ca0d81bc66c2ef0b4c4c1441f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
