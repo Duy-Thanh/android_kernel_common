@@ -33,6 +33,23 @@
       "message": "git fetch https://android.googlesource.com/kernel/common refs/changes/04/3809104/1 \u0026\u0026 git checkout -b change-3809104 FETCH_HEAD",
       "revId": "6df4284544659903bca71eb3cf66b8359658a6ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf87bec_26c6cb6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4405137
+      },
+      "writtenOn": "2025-10-19T17:17:00Z",
+      "side": 1,
+      "message": "git fetch https://android.googlesource.com/kernel/common refs/changes/04/3809104/1 \u0026\u0026 git checkout -b change-3809104 FETCH_HEAD",
+      "revId": "6df4284544659903bca71eb3cf66b8359658a6ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
