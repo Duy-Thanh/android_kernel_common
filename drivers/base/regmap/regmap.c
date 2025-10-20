@@ -885,7 +885,31 @@ struct regmap *__regmap_init(struct device *dev,
 		map->read_flag_mask = bus->read_flag_mask;
 	}
 
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 	if (!bus) {
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+	if (config && config->read && config->write) {
+		map->reg_read  = _regmap_bus_read;
+
+		/* Bulk read/write */
+		map->read = config->read;
+		map->write = config->write;
+
+		reg_endian = REGMAP_ENDIAN_NATIVE;
+		val_endian = REGMAP_ENDIAN_NATIVE;
+	} else if (!bus) {
+=======
+	if (config->read && config->write) {
+		map->reg_read  = _regmap_bus_read;
+
+		/* Bulk read/write */
+		map->read = config->read;
+		map->write = config->write;
+
+		reg_endian = REGMAP_ENDIAN_NATIVE;
+		val_endian = REGMAP_ENDIAN_NATIVE;
+	} else if (!bus) {
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 		map->reg_read  = config->reg_read;
 		map->reg_write = config->reg_write;
 		map->reg_update_bits = config->reg_update_bits;

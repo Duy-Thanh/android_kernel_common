@@ -30,7 +30,12 @@
 #include <linux/device/bus.h>
 #include <linux/device/class.h>
 #include <linux/device/driver.h>
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 #include <linux/android_kabi.h>
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+=======
+#include <linux/cleanup.h>
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 #include <asm/device.h>
 
 struct device;
@@ -747,6 +752,9 @@ static inline bool device_pm_not_required(struct device *dev)
 static inline void device_set_pm_not_required(struct device *dev)
 {
 	dev->power.no_pm = true;
+#ifdef CONFIG_PM
+	dev->power.no_callbacks = true;
+#endif
 }
 
 static inline void dev_pm_syscore_device(struct device *dev, bool val)
@@ -833,6 +841,9 @@ void device_unregister(struct device *dev);
 void device_initialize(struct device *dev);
 int __must_check device_add(struct device *dev);
 void device_del(struct device *dev);
+
+DEFINE_FREE(device_del, struct device *, if (_T) device_del(_T))
+
 int device_for_each_child(struct device *dev, void *data,
 			  int (*fn)(struct device *dev, void *data));
 int device_for_each_child_reverse(struct device *dev, void *data,
@@ -963,6 +974,9 @@ extern int (*platform_notify_remove)(struct device *dev);
  */
 struct device *get_device(struct device *dev);
 void put_device(struct device *dev);
+
+DEFINE_FREE(put_device, struct device *, if (_T) put_device(_T))
+
 bool kill_device(struct device *dev);
 
 #ifdef CONFIG_DEVTMPFS

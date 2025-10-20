@@ -5045,8 +5045,26 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 		 * Not worth trying to allocate harder for __GFP_NOMEMALLOC even
 		 * if it can't schedule.
 		 */
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 		if (!(gfp_mask & __GFP_NOMEMALLOC))
 			alloc_flags |= ALLOC_HARDER;
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+		if (!(gfp_mask & __GFP_NOMEMALLOC)) {
+			alloc_flags |= ALLOC_NON_BLOCK;
+
+			if (order > 0)
+				alloc_flags |= ALLOC_HIGHATOMIC;
+		}
+
+=======
+		if (!(gfp_mask & __GFP_NOMEMALLOC)) {
+			alloc_flags |= ALLOC_NON_BLOCK;
+
+			if (order > 0 && (alloc_flags & ALLOC_MIN_RESERVE))
+				alloc_flags |= ALLOC_HIGHATOMIC;
+		}
+
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 		/*
 		 * Ignore cpuset mems for GFP_ATOMIC rather than fail, see the
 		 * comment for __cpuset_node_allowed().

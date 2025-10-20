@@ -19,7 +19,12 @@
 #include <asm/processor.h>
 #include <linux/osq_lock.h>
 #include <linux/debug_locks.h>
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 #include <linux/android_vendor.h>
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+=======
+#include <linux/cleanup.h>
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 
 struct device;
 
@@ -247,5 +252,8 @@ extern int mutex_trylock(struct mutex *lock);
 extern void mutex_unlock(struct mutex *lock);
 
 extern int atomic_dec_and_mutex_lock(atomic_t *cnt, struct mutex *lock);
+
+DEFINE_GUARD(mutex, struct mutex *, mutex_lock(_T), mutex_unlock(_T))
+DEFINE_FREE(mutex, struct mutex *, if (_T) mutex_unlock(_T))
 
 #endif /* __LINUX_MUTEX_H */

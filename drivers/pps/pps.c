@@ -361,11 +361,13 @@ int pps_register_cdev(struct pps_device *pps)
 			       pps->info.name);
 			err = -EBUSY;
 		}
+		kfree(pps);
 		goto out_unlock;
 	}
 	pps->id = err;
 	mutex_unlock(&pps_idr_lock);
 
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 	devt = MKDEV(MAJOR(pps_devt), pps->id);
 
 	cdev_init(&pps->cdev, &pps_cdev_fops);
@@ -375,6 +377,24 @@ int pps_register_cdev(struct pps_device *pps)
 	if (err) {
 		pr_err("%s: failed to add char device %d:%d\n",
 				pps->info.name, MAJOR(pps_devt), pps->id);
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+	pps->dev.class = pps_class;
+	pps->dev.parent = pps->info.dev;
+	pps->dev.devt = MKDEV(pps_major, pps->id);
+	dev_set_drvdata(&pps->dev, pps);
+	dev_set_name(&pps->dev, "pps%d", pps->id);
+	err = device_register(&pps->dev);
+	if (err)
+=======
+	pps->dev.class = pps_class;
+	pps->dev.parent = pps->info.dev;
+	pps->dev.devt = MKDEV(pps_major, pps->id);
+	dev_set_drvdata(&pps->dev, pps);
+	dev_set_name(&pps->dev, "pps%d", pps->id);
+	pps->dev.release = pps_device_destruct;
+	err = device_register(&pps->dev);
+	if (err)
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 		goto free_idr;
 	}
 	pps->dev = device_create(pps_class, pps->info.dev, devt, pps,
@@ -384,11 +404,22 @@ int pps_register_cdev(struct pps_device *pps)
 		goto del_cdev;
 	}
 
+<<<<<<< HEAD   (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 	/* Override the release function with our own */
 	pps->dev->release = pps_device_destruct;
 
 	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name,
 			MAJOR(pps_devt), pps->id);
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+	/* Override the release function with our own */
+	pps->dev.release = pps_device_destruct;
+
+	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name, pps_major,
+		 pps->id);
+=======
+	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name, pps_major,
+		 pps->id);
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 
 	return 0;
 
