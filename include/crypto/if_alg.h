@@ -152,7 +152,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (3522ea727e6ecd3b88462771ccb692ae7577b332 UPSTREAM: crypto: af_alg - Disallow concurrent writes in af_)
 	u32		more:1,
+||||||| BASE   (5804ade57a27fe52c145af666199bfb9b5bff6dc ANDROID: GKI: Update symbol list for Amlogic)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (4e13bdf7516dfd6aca8b2bf1ee4e490ff0789198 ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 			merge:1,
 			enc:1,
 			write:1,
