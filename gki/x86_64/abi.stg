@@ -303069,6 +303069,15 @@ elf_symbol {
   full_name: "capable"
 }
 elf_symbol {
+  id: 0x84d7e600
+  name: "cc_mkdec"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcdd8f898
+  type_id: 0x73531faf
+  full_name: "cc_mkdec"
+}
+elf_symbol {
   id: 0x0d8df2d6
   name: "cdc_ncm_bind_common"
   is_defined: true
@@ -320497,6 +320506,15 @@ elf_symbol {
   crc: 0xe82c42ee
 }
 elf_symbol {
+  id: 0x89128eb3
+  name: "physical_mask"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xbea22c7b
+  type_id: 0xbdd18903
+  full_name: "physical_mask"
+}
+elf_symbol {
   id: 0x0c0b5c37
   name: "pid_task"
   is_defined: true
@@ -333935,6 +333953,7 @@ interface {
   symbol_id: 0x6367e57d
   symbol_id: 0x9e7fc289
   symbol_id: 0x0e419b40
+  symbol_id: 0x84d7e600
   symbol_id: 0x0d8df2d6
   symbol_id: 0xbe895b99
   symbol_id: 0x438a802b
@@ -335870,6 +335889,7 @@ interface {
   symbol_id: 0x32988703
   symbol_id: 0x39bc463d
   symbol_id: 0xf45442b1
+  symbol_id: 0x89128eb3
   symbol_id: 0x0c0b5c37
   symbol_id: 0x6fa67e06
   symbol_id: 0xbebe3d2e
