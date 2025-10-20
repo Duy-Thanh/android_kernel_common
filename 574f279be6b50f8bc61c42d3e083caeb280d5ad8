@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bb74fa1_ed28abce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-20T19:25:35Z",
+      "side": 1,
+      "message": "This is similar to gunyah (QCOM) and geniezone (MTK) hypervisor drivers which both were submitted upstream, but neither have landed, and neither are in android-mainline.\n\nAs Quentin said, it would have to be a GKI module or built-in for treble compliance (GKI module preferred).",
+      "parentUuid": "d19a73b5_e0a9285e",
+      "revId": "574f279be6b50f8bc61c42d3e083caeb280d5ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d81be28d_00963315",
         "filename": "drivers/virt/halla/Makefile",
         "patchSetId": 1
