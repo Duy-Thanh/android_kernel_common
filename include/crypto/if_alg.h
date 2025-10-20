@@ -150,7 +150,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (ae58cf0fe837876cb63035a2368481fd0cc13f33 UPSTREAM: f2fs: fix wrong block mapping for multi-devices)
 	u32		more:1,
+||||||| BASE   (74715c47d57ccbff2f2f00bb9d87288e10642325 UPSTREAM: tls: fix handling of zero-length records on the rx)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (eb31ef0a789d8102e24d92b2bf65a495a3646f78 Merge 6.6.111 into android15-6.6-lts)
 			merge:1,
 			enc:1,
 			write:1,
