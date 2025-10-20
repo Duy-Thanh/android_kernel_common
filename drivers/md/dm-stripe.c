@@ -457,15 +457,11 @@ static void stripe_io_hints(struct dm_target *ti,
 			    struct queue_limits *limits)
 {
 	struct stripe_c *sc = ti->private;
-	unsigned int io_min, io_opt;
+	unsigned int chunk_size = sc->chunk_size << SECTOR_SHIFT;
 
 	limits->chunk_sectors = sc->chunk_size;
-
-	if (!check_shl_overflow(sc->chunk_size, SECTOR_SHIFT, &io_min) &&
-	    !check_mul_overflow(io_min, sc->stripes, &io_opt)) {
-		limits->io_min = io_min;
-		limits->io_opt = io_opt;
-	}
+	limits->io_min = chunk_size;
+	limits->io_opt = chunk_size * sc->stripes;
 }
 
 static struct target_type stripe_target = {
