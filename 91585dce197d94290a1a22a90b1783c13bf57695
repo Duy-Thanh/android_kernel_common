@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c381d537_2059db33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-20T19:11:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45328d92_dd4f0a47",
+      "revId": "91585dce197d94290a1a22a90b1783c13bf57695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8418e4f_0bb92f51",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-10-17T09:52:29Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Trailing Whitespace: Please remove the trailing whitespace.\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 2
+      },
+      "revId": "91585dce197d94290a1a22a90b1783c13bf57695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e34e10_4651e2db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-20T19:11:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8418e4f_0bb92f51",
       "range": {
         "startLine": 11,
         "startChar": 0,
