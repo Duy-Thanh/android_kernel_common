@@ -94,10 +94,10 @@ static const struct dmi_system_id rfkill_gpio_deny_table[] = {
 static int rfkill_gpio_probe(struct platform_device *pdev)
 {
 	struct rfkill_gpio_data *rfkill;
-	const char *type_name = NULL;
+	struct gpio_desc *gpio;
 	const char *name_property;
 	const char *type_property;
-	struct gpio_desc *gpio;
+	const char *type_name;
 	int ret;
 
 	if (dmi_check_system(rfkill_gpio_deny_table))

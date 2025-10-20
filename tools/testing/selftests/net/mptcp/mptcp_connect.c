@@ -1079,7 +1079,6 @@ int main_loop_s(int listensock)
 	struct pollfd polls;
 	socklen_t salen;
 	int remotesock;
-	int err = 0;
 	int fd = 0;
 
 again:
@@ -1112,7 +1111,7 @@ again:
 		SOCK_TEST_TCPULP(remotesock, 0);
 
 		memset(&winfo, 0, sizeof(winfo));
-		err = copyfd_io(fd, remotesock, 1, true, &winfo);
+		copyfd_io(fd, remotesock, 1, true, &winfo);
 	} else {
 		perror("accept");
 		return 1;
@@ -1121,10 +1120,10 @@ again:
 	if (cfg_input)
 		close(fd);
 
-	if (!err && --cfg_repeat > 0)
+	if (--cfg_repeat > 0)
 		goto again;
 
-	return err;
+	return 0;
 }
 
 static void init_rng(void)
@@ -1234,7 +1233,7 @@ void xdisconnect(int fd)
 	else
 		xerror("bad family");
 
-	strcpy(cmd, "ss -Mnt | grep -q ");
+	strcpy(cmd, "ss -M | grep -q ");
 	cmdlen = strlen(cmd);
 	if (!inet_ntop(addr.ss_family, raw_addr, &cmd[cmdlen],
 		       sizeof(cmd) - cmdlen))
@@ -1244,7 +1243,7 @@ void xdisconnect(int fd)
 
 	/*
 	 * wait until the pending data is completely flushed and all
-	 * the sockets reached the closed status.
+	 * the MPTCP sockets reached the closed status.
 	 * disconnect will bypass/ignore/drop any pending data.
 	 */
 	for (i = 0; ; i += msec_sleep) {

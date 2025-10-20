@@ -1178,9 +1178,7 @@ void tcp_ao_finish_connect(struct sock *sk, struct sk_buff *skb)
 	if (!ao)
 		return;
 
-	/* sk with TCP_REPAIR_ON does not have skb in tcp_finish_connect */
-	if (skb)
-		WRITE_ONCE(ao->risn, tcp_hdr(skb)->seq);
+	WRITE_ONCE(ao->risn, tcp_hdr(skb)->seq);
 	ao->rcv_sne = 0;
 
 	hlist_for_each_entry_rcu(key, &ao->head, node, lockdep_sock_is_held(sk))

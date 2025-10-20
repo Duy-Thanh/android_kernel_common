@@ -7169,14 +7169,8 @@ static int igc_probe(struct pci_dev *pdev,
 
 	if (IS_ENABLED(CONFIG_IGC_LEDS)) {
 		err = igc_led_setup(adapter);
-		if (err) {
-			netdev_warn_once(netdev,
-					 "LED init failed (%d); continuing without LED support\n",
-					 err);
-			adapter->leds_available = false;
-		} else {
-			adapter->leds_available = true;
-		}
+		if (err)
+			goto err_register;
 	}
 
 	return 0;
@@ -7232,7 +7226,7 @@ static void igc_remove(struct pci_dev *pdev)
 	cancel_work_sync(&adapter->watchdog_task);
 	hrtimer_cancel(&adapter->hrtimer);
 
-	if (IS_ENABLED(CONFIG_IGC_LEDS) && adapter->leds_available)
+	if (IS_ENABLED(CONFIG_IGC_LEDS))
 		igc_led_free(adapter);
 
 	/* Release control of h/w to f/w.  If f/w is AMT enabled, this

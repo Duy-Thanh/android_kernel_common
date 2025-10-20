@@ -2440,7 +2440,8 @@ int tls_rx_msg_size(struct tls_strparser *strp, struct sk_buff *skb)
 	return data_len + TLS_HEADER_SIZE;
 
 read_failure:
-	tls_strp_abort_strp(strp, ret);
+	tls_err_abort(strp->sk, ret);
+
 	return ret;
 }
 
