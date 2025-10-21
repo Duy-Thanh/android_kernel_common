@@ -66,7 +66,7 @@ CONFIG_X86_USER_SHADOW_STACK=y
 CONFIG_EFI=y
 CONFIG_EFI_STUB=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="console=ttynull stack_depot_disable=on cgroup_disable=pressure bootconfig"
+CONFIG_CMDLINE="console=ttynull stack_depot_disable=on cgroup_disable=pressure ia32_emulation=false bootconfig"
 CONFIG_HIBERNATION=y
 CONFIG_PM_USERSPACE_AUTOSLEEP=y
 CONFIG_PM_WAKELOCKS=y
