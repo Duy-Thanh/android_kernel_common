@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1b093b8_6180fadc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T12:19:01Z",
+      "side": 1,
+      "message": "I believe compilers might complain here that there\u0027s no `fallthrough;`, I need to check.\n\nBut I find it slightly error prone for later extension of the code.",
+      "parentUuid": "321f18fd_b4a0eff6",
+      "range": {
+        "startLine": 614,
+        "startChar": 2,
+        "endLine": 614,
+        "endChar": 7
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2207b152_3a8634c4",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-10-21T12:05:23Z",
       "side": 1,
       "message": "NIT: If one of them returns `-ENOSPC` don\u0027t call the second time anymore",
+      "range": {
+        "startLine": 660,
+        "startChar": 7,
+        "endLine": 660,
+        "endChar": 31
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8183be_1ecf08b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T12:19:01Z",
+      "side": 1,
+      "message": "it is already handled in __handle_mem_protect_err(). It\u0027ll just pass over ENOSPC to the second call that will simply ignore it",
+      "parentUuid": "2207b152_3a8634c4",
       "range": {
         "startLine": 660,
         "startChar": 7,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8147aabb_3ba06947",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T12:19:01Z",
+      "side": 1,
+      "message": "So I haven\u0027t added it here because the call to __pkvm_guest_share_host() already validates it.",
+      "parentUuid": "ea691cf2_79e751a8",
+      "range": {
+        "startLine": 1507,
+        "startChar": 11,
+        "endLine": 1507,
+        "endChar": 38
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d791569b_5d2498f6",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "298ca1fc_3c939896",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T12:19:01Z",
+      "side": 1,
+      "message": "Hum, sorry not sure to follow here. \n\nipa has to be page-aligned (all HVCs are gfn/pfn so we\u0027re pretty safe on that front) \n\nSo ipa could only be PMD_SIZE - PAGE_SIZE, and the ALIGN here would then point to the next block.",
+      "parentUuid": "d791569b_5d2498f6",
+      "range": {
+        "startLine": 1516,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 12
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfc30422_e1122214",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
@@ -106,6 +202,30 @@
       "writtenOn": "2025-10-21T12:05:23Z",
       "side": 1,
       "message": "Why do you have to split the block at the end ?",
+      "range": {
+        "startLine": 1521,
+        "startChar": 8,
+        "endLine": 1521,
+        "endChar": 28
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0b6b42_4a6a2864",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T12:19:01Z",
+      "side": 1,
+      "message": "This is to handle the case where the range is bigger than a block. So not only the start might not be aligned, but the end as well.\n\nIn that case, two blocks needs to be split.",
+      "parentUuid": "dfc30422_e1122214",
       "range": {
         "startLine": 1521,
         "startChar": 8,
