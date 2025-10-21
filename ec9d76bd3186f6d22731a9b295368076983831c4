@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "321f18fd_b4a0eff6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-21T12:05:23Z",
+      "side": 1,
+      "message": "I think this can be removed",
+      "range": {
+        "startLine": 614,
+        "startChar": 2,
+        "endLine": 614,
+        "endChar": 7
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2207b152_3a8634c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-21T12:05:23Z",
+      "side": 1,
+      "message": "NIT: If one of them returns `-ENOSPC` don\u0027t call the second time anymore",
+      "range": {
+        "startLine": 660,
+        "startChar": 7,
+        "endLine": 660,
+        "endChar": 31
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea691cf2_79e751a8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-21T12:05:23Z",
+      "side": 1,
+      "message": "Make sure that we don\u0027t overflow this calculation of the `end`",
+      "range": {
+        "startLine": 1507,
+        "startChar": 11,
+        "endLine": 1507,
+        "endChar": 38
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d791569b_5d2498f6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-21T12:05:23Z",
+      "side": 1,
+      "message": "If I place ipa at `PMD_SIZE - 1`, this check will pass and end won\u0027t be covered because we align down inside `__pkvm_request_split`. (Note; this might only be possible from `pkvm_memrelinquish_call`)",
+      "range": {
+        "startLine": 1516,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 12
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc30422_e1122214",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-21T12:05:23Z",
+      "side": 1,
+      "message": "Why do you have to split the block at the end ?",
+      "range": {
+        "startLine": 1521,
+        "startChar": 8,
+        "endLine": 1521,
+        "endChar": 28
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
