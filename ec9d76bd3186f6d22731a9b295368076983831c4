@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd5542b5_cf49efda",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T13:46:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f1b093b8_6180fadc",
+      "range": {
+        "startLine": 614,
+        "startChar": 2,
+        "endLine": 614,
+        "endChar": 7
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2207b152_3a8634c4",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "it is already handled in __handle_mem_protect_err(). It\u0027ll just pass over ENOSPC to the second call that will simply ignore it",
       "parentUuid": "2207b152_3a8634c4",
+      "range": {
+        "startLine": 660,
+        "startChar": 7,
+        "endLine": 660,
+        "endChar": 31
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b20443_b1566fcb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T13:46:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d8183be_1ecf08b1",
       "range": {
         "startLine": 660,
         "startChar": 7,
@@ -142,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b39883e_889368f4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T13:46:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8147aabb_3ba06947",
+      "range": {
+        "startLine": 1507,
+        "startChar": 11,
+        "endLine": 1507,
+        "endChar": 38
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d791569b_5d2498f6",
@@ -189,6 +261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82f21f1_7e303aeb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T13:46:03Z",
+      "side": 1,
+      "message": "I understand now what you mean. The problem happening only with relinquish and as I believe it untrusted values should be sanitized as early as possible, I\u0027ve added a PAGE_ALIGN_DOWN() there.",
+      "parentUuid": "298ca1fc_3c939896",
+      "range": {
+        "startLine": 1516,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 12
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfc30422_e1122214",
@@ -226,6 +322,30 @@
       "side": 1,
       "message": "This is to handle the case where the range is bigger than a block. So not only the start might not be aligned, but the end as well.\n\nIn that case, two blocks needs to be split.",
       "parentUuid": "dfc30422_e1122214",
+      "range": {
+        "startLine": 1521,
+        "startChar": 8,
+        "endLine": 1521,
+        "endChar": 28
+      },
+      "revId": "ec9d76bd3186f6d22731a9b295368076983831c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "773da49d_ab3bb438",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-10-21T13:46:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a0b6b42_4a6a2864",
       "range": {
         "startLine": 1521,
         "startChar": 8,
