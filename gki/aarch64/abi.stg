@@ -48485,10 +48485,6 @@ member {
   type_id: 0x1b91be43
 }
 member {
-  id: 0x2536e4bd
-  type_id: 0x1bf5e2e5
-}
-member {
   id: 0x259699b2
   type_id: 0x197416d9
 }
@@ -48499,10 +48495,6 @@ member {
 member {
   id: 0x2612b435
   type_id: 0x1764a0c5
-}
-member {
-  id: 0x26249496
-  type_id: 0x17bc2249
 }
 member {
   id: 0x26293fc7
@@ -49285,11 +49277,6 @@ member {
   offset: 512
 }
 member {
-  id: 0x34153fd4
-  type_id: 0x5f7ab8c0
-  offset: 160
-}
-member {
   id: 0x3418b8d7
   type_id: 0x5f4cb447
   offset: 128
@@ -49670,10 +49657,6 @@ member {
   id: 0x364b4150
   type_id: 0x56037e9c
   offset: 1408
-}
-member {
-  id: 0x36752b74
-  type_id: 0x56faddc1
 }
 member {
   id: 0x3697c485
@@ -50423,10 +50406,6 @@ member {
   id: 0x3f37220a
   type_id: 0x73f2da81
   offset: 768
-}
-member {
-  id: 0x3f419a48
-  type_id: 0x72281932
 }
 member {
   id: 0x3f4dfae4
@@ -54118,11 +54097,6 @@ member {
   id: 0x289a9b79
   name: "__iov"
   type_id: 0x3ea6bd8c
-}
-member {
-  id: 0x0e6698fa
-  name: "__kabi_renamedh_nr_queued"
-  type_id: 0x4585663f
 }
 member {
   id: 0x4140f02a
@@ -125503,20 +125477,16 @@ member {
   offset: 288
 }
 member {
-  id: 0x939a1600
+  id: 0x939a1be0
   name: "h_nr_queued"
   type_id: 0x4585663f
+  offset: 160
 }
 member {
   id: 0x78596efd
   name: "h_nr_runnable"
   type_id: 0x4585663f
   offset: 192
-}
-member {
-  id: 0xd105ccea
-  name: "h_nr_running"
-  type_id: 0x4585663f
 }
 member {
   id: 0xe385c50b
@@ -266765,14 +266735,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x17bc2249
-  kind: STRUCT
-  definition {
-    bytesize: 4
-    member_id: 0x3f419a48
-  }
-}
-struct_union {
   id: 0x186c44db
   kind: STRUCT
   definition {
@@ -267039,14 +267001,6 @@ struct_union {
     member_id: 0x1f5f2358
     member_id: 0xb7565f87
     member_id: 0xf5e277a0
-  }
-}
-struct_union {
-  id: 0x1bf5e2e5
-  kind: STRUCT
-  definition {
-    bytesize: 4
-    member_id: 0x0e6698fa
   }
 }
 struct_union {
@@ -270683,12 +270637,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x56faddc1
-  kind: UNION
-  definition {
-  }
-}
-struct_union {
   id: 0x571cd963
   kind: UNION
   definition {
@@ -271463,16 +271411,6 @@ struct_union {
     bytesize: 20
     member_id: 0x266c1567
     member_id: 0xb5b37ce8
-  }
-}
-struct_union {
-  id: 0x5f7ab8c0
-  kind: UNION
-  definition {
-    bytesize: 4
-    member_id: 0x26249496
-    member_id: 0x2536e4bd
-    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -272376,15 +272314,6 @@ struct_union {
     bytesize: 16
     member_id: 0x93f3e8b8
     member_id: 0x7e220177
-  }
-}
-struct_union {
-  id: 0x72281932
-  kind: UNION
-  definition {
-    bytesize: 4
-    member_id: 0x939a1600
-    member_id: 0xd105ccea
   }
 }
 struct_union {
@@ -289105,7 +289034,7 @@ struct_union {
     bytesize: 512
     member_id: 0x0e290c33
     member_id: 0xd63677cb
-    member_id: 0x34153fd4
+    member_id: 0x939a1be0
     member_id: 0x78596efd
     member_id: 0x0df876ad
     member_id: 0xafe87365
