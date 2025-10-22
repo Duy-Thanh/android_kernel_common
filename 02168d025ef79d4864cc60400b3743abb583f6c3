@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/454220193",
       "revId": "02168d025ef79d4864cc60400b3743abb583f6c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c8367d_328443ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-10-22T15:41:18Z",
+      "side": 1,
+      "message": "The Change-Id is wrong. It should be as follows:\n\nChange-Id: Ibff3dce3661ff83b46b6efe6bfbcd43eaa97b804\n\nSee also https://android-review.git.corp.google.com/c/kernel/common/+/3772551.",
+      "revId": "02168d025ef79d4864cc60400b3743abb583f6c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
