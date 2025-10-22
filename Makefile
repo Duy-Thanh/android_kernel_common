@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: GPL-2.0
+# SPDX-License-Identifier: GPL-2.0    # Canary
 VERSION = 6
 PATCHLEVEL = 6
 SUBLEVEL = 87
