@@ -2908,3 +2908,12 @@
   zs_map_object
   zs_pool_stats
   zs_unmap_object
+  divider_determine_rate
+  divider_ro_determine_rate
+  of_clk_get_from_provider
+  of_clk_hw_simple_get
+  vmalloc_array
+  kstrtos16
+  snd_card_free_when_closed
+  snd_pcm_stream_lock
+  snd_pcm_stream_unlock
