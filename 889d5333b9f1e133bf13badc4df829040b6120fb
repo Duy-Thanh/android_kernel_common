@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e363e5a_dee4a5da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-10-22T15:59:58Z",
+      "side": 1,
+      "message": "I only realised we hadn\u0027t done this at the beginning of `-kminext` earlier today.\n\nI\u0027m pretty sure this will break anyone currently testing on `-kminext` with pre-compiled modules, since the number ends up in `vermagic`. It doesn\u0027t cause CRC changes though.\n\n@tkjos@google.com, what do you think?\n\n* do this now\n* do this as we merge back to the main branch\n* do not do this at all",
+      "revId": "889d5333b9f1e133bf13badc4df829040b6120fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
