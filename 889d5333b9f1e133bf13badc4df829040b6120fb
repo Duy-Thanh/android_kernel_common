@@ -16,6 +16,24 @@
       "message": "I only realised we hadn\u0027t done this at the beginning of `-kminext` earlier today.\n\nI\u0027m pretty sure this will break anyone currently testing on `-kminext` with pre-compiled modules, since the number ends up in `vermagic`. It doesn\u0027t cause CRC changes though.\n\n@tkjos@google.com, what do you think?\n\n* do this now\n* do this as we merge back to the main branch\n* do not do this at all",
       "revId": "889d5333b9f1e133bf13badc4df829040b6120fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31a2c7b_0edded04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-22T18:47:48Z",
+      "side": 1,
+      "message": "do it now. Better now than a late surprise on merge. I agree that it should have been done when we first created kminext",
+      "parentUuid": "2e363e5a_dee4a5da",
+      "revId": "889d5333b9f1e133bf13badc4df829040b6120fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
