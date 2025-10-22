@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a411b55f_0a61aa5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270375
+      },
+      "writtenOn": "2025-10-22T02:33:19Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Failed to fetch commits for cherry pick check. Is the \"cherry picked from\" commi...\n\nFailed to fetch commits for cherry pick check. Is the \"cherry picked from\" commit ID valid?\n\"cherry picked from\" commit ID: d79c72077192168cf7c531a2f3998f03d87e83c0\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "6dd1cfecdcd603c09a292c39632abbe47ffc5374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
