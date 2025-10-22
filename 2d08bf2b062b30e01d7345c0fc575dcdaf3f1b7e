@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891c383f_f5f3b365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-22T15:44:51Z",
+      "side": 1,
+      "message": "Please abandon this version and cherry-pick the patch from android15-6.6 so the Change-Id is preserved",
+      "revId": "2d08bf2b062b30e01d7345c0fc575dcdaf3f1b7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
