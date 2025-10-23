@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ed24d3_c8bc3f78",
+        "filename": "arch/x86/coco/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-23T21:15:34Z",
+      "side": 1,
+      "message": "nit: alphabetic order withing \u003casm/..\u003e?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f006841a_4770dd7a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/coco/pkvm/pkvm.c",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "#include \u003casm/apic.h\u003e\n"
+            },
+            {
+              "path": "arch/x86/coco/pkvm/pkvm.c",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e18b0971d75baf1decc1ba377bed98a792679aaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
