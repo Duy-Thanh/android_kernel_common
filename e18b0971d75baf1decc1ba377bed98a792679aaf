@@ -50,6 +50,30 @@
       ],
       "revId": "e18b0971d75baf1decc1ba377bed98a792679aaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b0e8f2_865bfdc2",
+        "filename": "arch/x86/coco/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-23T22:58:09Z",
+      "side": 1,
+      "message": "We don\u0027t really follow this rule here (pgtable.h goes after pkvm_guest.h), and IIRC the conclusion of your talk with Chuanxiao on github about this was that this rule doesn\u0027t really exist?\n\nI opted for putting \"#include \u003casm/apic.h\u003e\" at the end because in the code it is also used at the end, after the stuff that uses asm/pgtable.h etc.",
+      "parentUuid": "f0ed24d3_c8bc3f78",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "e18b0971d75baf1decc1ba377bed98a792679aaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
