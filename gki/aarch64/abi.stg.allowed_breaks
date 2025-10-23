@@ -74,3 +74,6 @@ type 'struct kvm_iommu_ops' changed
   member 'u64 __kabi_reserved1' was removed
   member 'union { int(* iotlb_sync_map)(struct kvm_hyp_iommu_domain*, unsigned long, size_t); struct { u64 __kabi_reserved1; }; union { }; }' was added
 
+function symbol 'int drm_property_replace_global_blob(struct drm_device*, struct drm_property_blob**, size_t, const void*, struct drm_mode_object*, struct drm_property*)' changed
+  CRC changed from 0x4835a36a to 0xd0824647
+
