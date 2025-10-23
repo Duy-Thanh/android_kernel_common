@@ -1114,8 +1114,21 @@ static void usb_gadget_state_work(struct work_struct *work)
 void usb_gadget_set_state(struct usb_gadget *gadget,
 		enum usb_device_state state)
 {
+	unsigned long flags;
+
+	spin_lock_irqsave(&gadget->state_lock, flags);
 	gadget->state = state;
+<<<<<<< HEAD   (76efa001ea197723c0423fdb9136e83b483f7aa1 UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 	schedule_work(&gadget->work);
+||||||| BASE   (85581c945c56a8cc4a2d00d23410b84ad8acb302 BACKPORT: FROMGIT: rust_binder: add transaction_log and fail)
+	schedule_work(&gadget->work);
+	trace_usb_gadget_set_state(gadget, 0);
+=======
+	if (!gadget->teardown)
+		schedule_work(&gadget->work);
+	spin_unlock_irqrestore(&gadget->state_lock, flags);
+	trace_usb_gadget_set_state(gadget, 0);
+>>>>>>> CHANGE (0aea479006df07c0db76ca0f5da756334ba264d8 UPSTREAM: usb: gadget: udc: fix use-after-free in usb_gadget)
 }
 EXPORT_SYMBOL_GPL(usb_gadget_set_state);
 
@@ -1354,7 +1367,13 @@ static int check_pending_gadget_drivers(struct usb_udc *udc)
 void usb_initialize_gadget(struct device *parent, struct usb_gadget *gadget,
 		void (*release)(struct device *dev))
 {
+<<<<<<< HEAD   (76efa001ea197723c0423fdb9136e83b483f7aa1 UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 	dev_set_name(&gadget->dev, "gadget");
+||||||| BASE   (85581c945c56a8cc4a2d00d23410b84ad8acb302 BACKPORT: FROMGIT: rust_binder: add transaction_log and fail)
+=======
+	spin_lock_init(&gadget->state_lock);
+	gadget->teardown = false;
+>>>>>>> CHANGE (0aea479006df07c0db76ca0f5da756334ba264d8 UPSTREAM: usb: gadget: udc: fix use-after-free in usb_gadget)
 	INIT_WORK(&gadget->work, usb_gadget_state_work);
 	gadget->dev.parent = parent;
 
@@ -1546,6 +1565,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
 void usb_del_gadget(struct usb_gadget *gadget)
 {
 	struct usb_udc *udc = gadget->udc;
+	unsigned long flags;
 
 	if (!udc)
 		return;
@@ -1565,6 +1585,19 @@ void usb_del_gadget(struct usb_gadget *gadget)
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
 	sysfs_remove_link(&udc->dev.kobj, "gadget");
+<<<<<<< HEAD   (76efa001ea197723c0423fdb9136e83b483f7aa1 UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
+||||||| BASE   (85581c945c56a8cc4a2d00d23410b84ad8acb302 BACKPORT: FROMGIT: rust_binder: add transaction_log and fail)
+	device_del(&gadget->dev);
+=======
+	device_del(&gadget->dev);
+	/*
+	 * Set the teardown flag before flushing the work to prevent new work
+	 * from being scheduled while we are cleaning up.
+	 */
+	spin_lock_irqsave(&gadget->state_lock, flags);
+	gadget->teardown = true;
+	spin_unlock_irqrestore(&gadget->state_lock, flags);
+>>>>>>> CHANGE (0aea479006df07c0db76ca0f5da756334ba264d8 UPSTREAM: usb: gadget: udc: fix use-after-free in usb_gadget)
 	flush_work(&gadget->work);
 	device_unregister(&udc->dev);
 	device_del(&gadget->dev);
