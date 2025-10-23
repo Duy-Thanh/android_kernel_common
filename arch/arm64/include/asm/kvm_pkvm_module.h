@@ -319,6 +319,10 @@ struct pkvm_module_ops {
 	void * (*iommu_donate_pages_atomic)(u8 order);
 	void (*iommu_reclaim_pages_atomic)(void *p, u8 order);
 	int (*hyp_smp_processor_id)(void);
+	int (*guest_accept_module_prot_page)(u64 ipa, u64 nr_pages);
+	int (*register_guest_accept_module_owned_handler)(int (*cb)(
+					u64 phys, u64 ipa, u64 size,
+					pkvm_handle_t handle));
 	int (*device_register_reset)(u64 phys, void *cookie,
 				     int (*cb)(void *cookie, bool host_to_guest));
 	ANDROID_KABI_USE(1, int (*register_guest_trng_ops)(
