@@ -16,6 +16,24 @@
       "message": "Add `Bypass-Upstream-Divergence-Tracking` to the final block of the commit message to satisfy the \"Kernel Upstream Divergence Tracker\" check.",
       "revId": "603b64dcf3a5ab38ec127f57c1289480b4706d65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f752df53_32321f50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T21:43:13Z",
+      "side": 1,
+      "message": "I\u0027ll leave this unresolved until complete.",
+      "parentUuid": "a981d631_a638fdbe",
+      "revId": "603b64dcf3a5ab38ec127f57c1289480b4706d65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
