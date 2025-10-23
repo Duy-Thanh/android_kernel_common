@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddde14fc_3b42cfe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T21:38:10Z",
+      "side": 1,
+      "message": "Add `Bypass-Upstream-Divergence-Tracking` in the Commit message, somewhere in the final block that contains the `Change-Id`",
+      "revId": "44babe4f118db73f416894af64eb9dda5b592adc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
