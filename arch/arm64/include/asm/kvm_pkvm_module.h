@@ -41,6 +41,12 @@ struct pkvm_module_trng_ops {
 	ANDROID_KABI_RESERVE(2);
 };
 
+enum pkvm_smc_handler_ret {
+	GUEST_SMC_HANDLED,
+	GUEST_SMC_NOT_HANDLED,
+	GUEST_SMC_NEED_TOPUP,
+};
+
 /**
  * struct pkvm_module_ops - pKVM modules callbacks
  * @create_private_mapping:	Map a memory region into the hypervisor private
@@ -267,7 +273,7 @@ struct pkvm_module_ops {
 	int (*host_stage2_enable_lazy_pte)(u64 addr, u64 nr_pages);
 	int (*host_stage2_disable_lazy_pte)(u64 addr, u64 nr_pages);
 	int (*register_host_smc_handler)(bool (*cb)(struct user_pt_regs *));
-	int (*register_guest_smc_handler)(bool (*cb)(struct arm_smccc_1_2_regs *regs,
+	int (*register_guest_smc_handler)(enum pkvm_smc_handler_ret (*cb)(struct arm_smccc_1_2_regs *regs,
 						     struct arm_smccc_1_2_regs *res,
 						     pkvm_handle_t handle));
 	int (*register_default_trap_handler)(bool (*cb)(struct user_pt_regs *));
