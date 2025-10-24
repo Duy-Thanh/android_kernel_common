@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b44d7df3_dca901ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2016312
+      },
+      "writtenOn": "2025-10-24T20:30:48Z",
+      "side": 1,
+      "message": "repo download -b change-3687134 kernel/common 3687134",
+      "revId": "b62fe47ba2bee1a87d8174e9f49f5bf683a65924",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
