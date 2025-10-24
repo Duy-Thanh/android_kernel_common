@@ -16,6 +16,24 @@
       "message": "This can\u0027t be reviewed as long as the symbol list patch is WIP. Please finish the symbol list patch and then resolve this comment.",
       "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886b30a2_bd38ba9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3907671
+      },
+      "writtenOn": "2025-10-24T01:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56f3c80e_35ea5d3a",
+      "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
