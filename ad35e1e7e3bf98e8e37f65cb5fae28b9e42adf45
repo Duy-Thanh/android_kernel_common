@@ -34,6 +34,24 @@
       "parentUuid": "56f3c80e_35ea5d3a",
       "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aa0ac32_8ddd7456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-24T16:09:38Z",
+      "side": 1,
+      "message": "Now there is no symbol list update as a child of this patch. This export is useless to you without the symbol list update. Please add a patch to update your symbol list.",
+      "parentUuid": "886b30a2_bd38ba9c",
+      "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
