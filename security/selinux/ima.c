@@ -59,7 +59,7 @@ static char *selinux_ima_collect_state(void)
 		rc = strlcat(buf, selinux_policycap_names[i], buf_len);
 		WARN_ON(rc >= buf_len);
 
-		rc = strlcat(buf, selinux_state.policycap[i] ? on : off,
+		rc = strlcat(buf, selinux_state._policycap[i] ? on : off,
 			buf_len);
 		WARN_ON(rc >= buf_len);
 	}

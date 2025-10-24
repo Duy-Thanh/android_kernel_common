@@ -2133,8 +2133,8 @@ static void security_load_policycaps(struct selinux_policy *policy)
 
 	p = &policy->policydb;
 
-	for (i = 0; i < ARRAY_SIZE(selinux_state.policycap); i++)
-		WRITE_ONCE(selinux_state.policycap[i],
+	for (i = 0; i < ARRAY_SIZE(selinux_state._policycap); i++)
+		WRITE_ONCE(selinux_state._policycap[i],
 			ebitmap_get_bit(&p->policycaps, i));
 
 	bit_offset = i;
