@@ -74,6 +74,30 @@
       },
       "revId": "e18b0971d75baf1decc1ba377bed98a792679aaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e399433b_1c4d6920",
+        "filename": "arch/x86/coco/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-24T11:02:31Z",
+      "side": 1,
+      "message": "It is fine by me - I think it is rather maintainer preference than rule (despite the hwmon subsystem where it seems required). I just remember seeing such requests often and involuntarily paying attention to it.\n\nResolving.",
+      "parentUuid": "76b0e8f2_865bfdc2",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "e18b0971d75baf1decc1ba377bed98a792679aaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
