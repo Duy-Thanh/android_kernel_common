@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf1c85b_e8e758d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-24T14:02:30Z",
+      "side": 1,
+      "message": "nit (and feel free to ignore, I\u0027ve intentionally marked is as resolved): maybe only mention that it is not 100% revert and `mmio_write`/`mmio_read` which was introduced by the original patch are not removed now sine they are still used for pkvm_mmio_* (not introduced by original patch)",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "f614b6e9ae43471bd60788935d3e8146063ab2c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
