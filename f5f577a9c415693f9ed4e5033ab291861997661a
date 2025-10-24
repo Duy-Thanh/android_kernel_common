@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd7c32e_22600f0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "This seems a bit misleading. If allocating the root page was the only reason for this VM pool, we could avoid all this dance just by pre-allocating the root page instead of allocating it in pkvm_pgtable_init() (especially since, as it happens, pkvm_pgtable_init() already has a `bool alloc_root` argument for that). The actual major reason, as I see it, is that the pool provides us with the refcounting mechanisms (hyp_get_page/hyp_put_page), not just for the root page but for any pages, even those that are allocated from the memcache, not from the pool itself.\n\n...Ok, just noticed that you mentioned that below: \"This pool is also used as a placeholder for freed pages\". That also might be a bit misleading: as I understand, those freed pages don\u0027t just sit there until the teardown, they are actively allocated (since guest_mmu_zalloc_page() first tries to allocate from the pool and only after that from the memcache).",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 60
+      },
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d6a888_408e46a6",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "What\u0027s the point of this variable?",
+      "fixSuggestions": [
+        {
+          "fixId": "137c0038_197ba33d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\tif (__pkvm_host_donate_hyp(pgd_pa, PAGE_SIZE))\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d hyp_pool_init(\u0026pkvm_vm-\u003epool, hyp_phys_to_pfn(pgd_pa), 1, 0);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 125,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "\t__pkvm_hyp_donate_host(pgd_pa, PAGE_SIZE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7dc909_8d8e69ed",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "It would be better to return the error returned by __pkvm_host_donate_hyp()?",
+      "fixSuggestions": [
+        {
+          "fixId": "8de5cfec_79a88438",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __pkvm_host_donate_hyp(pgd_pa, nr_pages * PAGE_SIZE);\n\tif (ret)\n\t\treturn ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60653e38_6733929c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "I guess this is just to set `current_vm`? Would it be clearer to just explicitly set it here?\n\nDitto for pkvm_vm_mmu_destroy().",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29baa7e0_af6a5a6d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "We shouldn\u0027t just throw away the value returned by pkvm_pgtable_init()?",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a491f55_284ba221",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "I understand that pkvm_pgtable_test_clear_young() doesn\u0027t need to allocate pages, so it\u0027s probably not necessary to update `current_vm` here, but still, it seems cleaner to use guest_mmu_lock() here as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "8bb9912d_c78f2d2e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 362,
+                "startChar": 0,
+                "endLine": 363,
+                "endChar": 0
+              },
+              "replacement": "\tguest_mmu_lock(pkvm_vm);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 364,
+                "startChar": 0,
+                "endLine": 365,
+                "endChar": 0
+              },
+              "replacement": "\tguest_mmu_unlock(pkvm_vm);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4804838_c1468c18",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "It seems more suitable to implement it in mmu.c, not in pkvm.c? (And then it could be called by pkvm_vm_mmu_destroy().)",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1360d6dd_e288a0e1",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:15:02Z",
+      "side": 1,
+      "message": "Is this declaration needed? AFAICS we do include gfp.h.",
+      "fixSuggestions": [
+        {
+          "fixId": "2475128c_7caacbf0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.h",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
