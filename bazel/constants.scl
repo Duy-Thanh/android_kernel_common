@@ -1,6 +1,14 @@
 BRANCH="android-mainline"
+<<<<<<< PATCH SET (665d1b1d132ca81780b8ea0a96f13453bca035a7 ANDROID: Update to clang r574158.)
+CLANG_VERSION="r574158"
+RUSTC_VERSION="1.88.0"
+||||||| BASE      (fde6c5b6595f72c2fbd3bc1bc9ed86a79b7fb466 Merge f8912147dba3 ("Merge tag 'soc-defconfig-6.18' of git:/)
+CLANG_VERSION="r547379"
+RUSTC_VERSION="1.88.0"
+=======
 CLANG_VERSION="r547379"
 RUSTC_VERSION="1.90.0"
+>>>>>>> BASE      (eb5e5c1f626e74ce56890b491edb90a1d11a7ea7 ANDROID: gki_defconfig: Enable Tegra SoCs)
 AARCH64_NDK_TRIPLE="aarch64-linux-android31"
 X86_64_NDK_TRIPLE="x86_64-linux-android31"
 ARM_NDK_TRIPLE="arm-linux-androideabi31"
