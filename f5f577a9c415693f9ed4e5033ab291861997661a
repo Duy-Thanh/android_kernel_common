@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eee292f9_4102e26b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Sure, I will improve the description (please see last paragraph of this msg) but just for the record:\n\n\u003e This seems a bit misleading. If allocating the root page was the only reason for this VM pool, we could avoid all this dance just by pre-allocating the root page instead of allocating it in pkvm_pgtable_init() (especially since, as it happens, pkvm_pgtable_init() already has a bool alloc_root argument for that)\n\nBut please note that this allocation is still needed and we actually call `pkvm_pgtable_init` (which BTW is used not only for guest mmu pgtable init) with `alloc_root` set to true and then it results with calling `pgtable_alloc_page`-\u003e..-\u003e`guest_mmu_zalloc_page` which requires some free pages either from memcache or per-VM pool. As I\u0027ve described using per-cpu memcache can\u0027t be used because we are at the point where vCPU is not yet initialized.\n\n\u003e Ok, just noticed that you mentioned that below: \"This pool is also used as a placeholder for freed pages\". That also might be a bit misleading: as I understand, those freed pages don\u0027t just sit there until the teardown, they are actively allocated (since guest_mmu_zalloc_page() first tries to allocate from the pool and only after that from the memcache).\n\nI got your point but again just for the record: depends on the case e.g. for\n- pVMs or non-pVMs without ballooning all allocation for page tables, despite root page table, happens from the memcache directly and the pool is used only during teardown\n- non-pVMs with MMU notifiers (e.g. ballooning enabled) it happens but quite rarely - when all PTE for a given page-table page (all 512 PTE) are not used (unmapped) and therefore page table page is freed and put to the pool).\n\nHow about rephrasing commit log to:\n\n\"\nWith memcache, backed with pages supplied by host, there is no need to use an upfront preallocated shadow pgt pool capable of handling page table creation for all possible mapping for all predefined VM numbers. However there is still need to have per VM pool which is used for:\n\n1. Root Page Table Initialization: During VM creation, the root page table for the guest\u0027s EPT must be initialized. This occurs before any vCPUs are initialized, making the per-vCPU memcache unavailable. A per-VM pool provides the initial page for the root.\n\n2. Freed Page Placeholder: The per-VM pool serves as a temporary holding place for page table pages that are no longer in use. This can happen, for example, when all 512 PTEs within a page table page are unmapped (due to MMU notifiers e.g. with active ballooning) or when page-tables are being destroyed during VM teardown. The refcounting mechanism (hyp_get_page/hyp_put_page + guest_mmu_zalloc_page\u0027s hyp_set_page_refcounted) ensures these pages are tracked, and they can be added to the per-VM pool to be potentially reused by guest_mmu_zalloc_page or drained during VM teardown.\n\nTherefore allocate and donate a single page from pKVM-high to pKVM-low during VM initialization and use it for per-VM page table root initialization.\n\"\n\nWDYT?",
+      "parentUuid": "afd7c32e_22600f0b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 60
+      },
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4d6a888_408e46a6",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 10
@@ -101,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd6facac_3dab1072",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Yeah I should remove it and used PAGE_SIZE directly.",
+      "parentUuid": "e4d6a888_408e46a6",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a7dc909_8d8e69ed",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 10
@@ -136,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d046e2b_3ff16010",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Yes, will change that",
+      "parentUuid": "6a7dc909_8d8e69ed",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60653e38_6733929c",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 10
@@ -153,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af1211aa_754937e6",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "60653e38_6733929c",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29baa7e0_af6a5a6d",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 10
@@ -164,6 +242,24 @@
       "writtenOn": "2025-10-24T18:15:02Z",
       "side": 1,
       "message": "We shouldn\u0027t just throw away the value returned by pkvm_pgtable_init()?",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ed8270_c9d038c1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Sure - my bad.",
+      "parentUuid": "29baa7e0_af6a5a6d",
       "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -215,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27745307_c9162139",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Yep - I forgot to update it when rebasing to latest pvMMU patchset where it was introduced - will update.",
+      "parentUuid": "5a491f55_284ba221",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4804838_c1468c18",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 10
@@ -226,6 +340,24 @@
       "writtenOn": "2025-10-24T18:15:02Z",
       "side": 1,
       "message": "It seems more suitable to implement it in mmu.c, not in pkvm.c? (And then it could be called by pkvm_vm_mmu_destroy().)",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d18595d3_e06744a3",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Ok, I think it make sense",
+      "parentUuid": "d4804838_c1468c18",
       "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -261,6 +393,24 @@
           ]
         }
       ],
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a6179d_120e0d06",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-25T21:46:16Z",
+      "side": 1,
+      "message": "Yes – I’m not sure how I ended up with this here.",
+      "parentUuid": "1360d6dd_e288a0e1",
       "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
