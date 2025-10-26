@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "710650f2_681a1a61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-26T14:04:51Z",
+      "side": 1,
+      "message": "\u003e But please note that this allocation is still needed and we actually call pkvm_pgtable_init (which BTW is used not only for guest mmu pgtable init) with alloc_root set to true and then it results with calling pgtable_alloc_page-\u003e..-\u003eguest_mmu_zalloc_page which requires some free pages either from memcache or per-VM pool.\n\nWhat I meant is that we could simply set `pkvm_vm-\u003emmu.root_pa` to `pgd_pa` before calling `pkvm_pgtable_init()` (and then of course call it, but with `alloc_root` set to false).\n\nAnyway, I\u0027m not suggesting to do that, since root_pa is not the only reason for this per-VM pool anyway.\n\n\u003e How about rephrasing commit log to: [...]\n\nSGTM.",
+      "parentUuid": "eee292f9_4102e26b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 60
+      },
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4d6a888_408e46a6",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 10
@@ -358,6 +382,24 @@
       "side": 1,
       "message": "Ok, I think it make sense",
       "parentUuid": "d4804838_c1468c18",
+      "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67c350f_765d7bb0",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-26T14:04:51Z",
+      "side": 1,
+      "message": "While we\u0027re at it, the name could be probably shorter, e.g. just `drain_vm_pool()`?",
+      "parentUuid": "d18595d3_e06744a3",
       "revId": "f5f577a9c415693f9ed4e5033ab291861997661a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
