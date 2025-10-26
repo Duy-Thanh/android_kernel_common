@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e304a5c_b80e4ca9",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "In general pkvm_memcache\u0027s are not only used for guest ept pgtables but also for different purposes (before this series). Setting extra HYP_MEMCACHE_ACCOUNT_STAGE2 indicates using generic kvm mechanism for accounting page tables pages kvm_account_pgtable_pages which should happen only for stage2 memcaches (e.g re-use `pkvm_mc_free_fn` which correctly decrease counters only for stage2 memcache, not for other memcaches.)\n\nBTW kvm_account_pgtable_pages is actually very useful and allowed me to find and fix some bugs with leaking page on early implementation of this patchset.\n\nBut I think dropping HYP_MEMCACHE_ACCOUNT_KMEMCG is an good idea.",
+      "parentUuid": "75cd0329_cf0ad8ef",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "016f8504_0e3dd674",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 10
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-24T18:10:13Z",
       "side": 1,
       "message": "Likewise, we are not really using non-zero order allocations, so we can drop the `order` argument (i.e. keep it like it was in pKVM-ARM before aosp/3344127, and BTW like it currently is in the upstream pKVM-ARM code)?",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2258cd3b_ffe8908f",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Ok, make sense.",
+      "parentUuid": "016f8504_0e3dd674",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea6fa4d2_ea41f8fa",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "We need separate one, since it is initialized with HYP_MEMCACHE_ACCOUNT_STAGE2, which results with properly tracking and accounting kvm_account_pgtable_pages (the counter is decreased during free_pkvm_memcache if this flag is set) which shouldn\u0027t happen for `teardown_mc`. Again, I\u0027ve found it very useful for validating and fixing bugs related to leak of page-table pages during teardown by checking the page-table page counter (monitoring `/proc/meminfo`\u0027s`SecPageTables` before vm started, and after vm teardown -\u003e BTW I will also add it to the `TEST:` tag in commit log).\n\n`guest_mmu_teardown_mc` sounds ok, but maybe emphasizing that this is stage-2 and call it `guest_ept_teardown_mc` or `guest_tdp_teardown_mc` (tdp to cover both Intel ept and potential AMD npt), WDYT?",
+      "parentUuid": "bbae1fc3_7e929419",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4900bc6_e8e4041a",
         "filename": "arch/x86/kvm/mmu/mmu.c",
         "patchSetId": 10
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-24T18:10:13Z",
       "side": 1,
       "message": "1. We should only do this if enable_pkvm is true?\n2. While we\u0027re at it, the above kvm_mmu_free_memory_cache() calls are unneeded with PV MMU, since we don\u0027t allocate those caches to begin with.\n\nSo, we could do the following at the beginning of this function?\n```\n\tif (enable_pkvm) {\n\t\tfree_pkvm_memcache(\u0026vcpu-\u003earch.stage2_mc);\n\t\treturn;\n\t}\n```\n\n(BTW it would be nice to avoid the need for `#ifdef CONFIG_PKVM_INTEL`, if possible.)\n\nOr perhaps it\u0027s better to do this in kvm_mmu_destroy() before calling `free_mmu_pages(\u0026vcpu-\u003earch.root_mmu)` (since we don\u0027t allocate those pages either)...",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495087a1_8a34891b",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Ok, I will try that.",
+      "parentUuid": "b4900bc6_e8e4041a",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -106,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fbb230e_49cd3880",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4814,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "ok, it will probably work as well",
+      "parentUuid": "e71c5df9_2a8eed4c",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb4c0256_269be34c",
         "filename": "arch/x86/kvm/mmu/mmu.c",
         "patchSetId": 10
@@ -135,6 +225,24 @@
           ]
         }
       ],
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26cc2449_60275cbb",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4862,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "cb4c0256_269be34c",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -196,6 +304,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7b20dca_9c8ce3d1",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4864,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "91b9dd26_acb6b88e",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7a5fe3f_6ffd2f8d",
         "filename": "arch/x86/kvm/mmu/mmu.c",
         "patchSetId": 10
@@ -207,6 +333,24 @@
       "writtenOn": "2025-10-24T18:10:13Z",
       "side": 1,
       "message": "This could be done before locking mmu_lock?",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ea8e9f_cdb96008",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4892,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Yes, I think so - will improve.",
+      "parentUuid": "a7a5fe3f_6ffd2f8d",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -248,6 +392,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82c8ac48_fb0e1eb8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e3e7a7d_f814d67c",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "781815c8_56273066",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 10
@@ -259,6 +421,24 @@
       "writtenOn": "2025-10-24T18:10:13Z",
       "side": 1,
       "message": "It seems more suitable to implement it in mmu.c, not in pkvm.c?\n\nAnd regarding the name: s/percpu/vcpu/ ? (percpu usually means per physical CPU)",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b30876_5624a3d5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-26T22:28:02Z",
+      "side": 1,
+      "message": "This is the only place where we use it and therefore can declare it as static function, which I think is a bit cleaner.\n\nRegarding the name: s/percpu/vcpu/, yes it make sense - I will improve it.",
+      "parentUuid": "781815c8_56273066",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
