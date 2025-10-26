@@ -16,6 +16,24 @@
       "message": "The way how we handle such cases is to copy the `intel_iommu_sm` value to a pKVM hypervisor\u0027s instance of the `intel_iommu_sm` variable during pKVM initialization in the host:\n```\npkvm_sym(intel_iommu_sm) \u003d intel_iommu_sm;\n```\n\nSee examples in setup_pkvm_syms() and pkvm_init_mmu().\n\nAnd then we can just use the `sm_supported()` helper as is in the pKVM hypervisor code, without the needed to define pKVM\u0027s version of it (and BTW without the need to modify the original code of those iommu_calculate_*agaw() functions).",
       "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5467d037_104db54f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-26T15:15:31Z",
+      "side": 1,
+      "message": "Also a note about this entire series, not just this patch: I see there is still a bunch of places with raw ecap_smts() checks (including even new code in pv_iommu.c, e.g. in pkvm_iommu_enable()). I assume we should convert them to use (pkvm_)sm_supported() instead?\n\nFWIW in the past I\u0027ve already done some work to identify all those places in the existing code that would need to be converted: aosp/3662236 (although IIRC I never got to properly test that patch).",
+      "parentUuid": "a14c563b_a92c615d",
+      "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
