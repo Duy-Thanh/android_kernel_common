@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1182b5_63319570",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm_hyp.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T13:55:29Z",
+      "side": 1,
+      "message": "It is not for any kind of memcache, it is strictly for vCPU\u0027s MMU memcache (stage2_mc), so:\n1. Declare it in arch/x86/kvm/pkvm/mmu.h, not here?\n2. Rename it e.g. to pkvm_refill_mmu_memcache()?",
+      "revId": "cf7ef3de297c5e2e6ff8c6239716edaa8dba9eff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
