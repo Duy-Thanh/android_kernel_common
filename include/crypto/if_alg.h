@@ -152,7 +152,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (3b5220a08523770c2abf35a20664d42f001cb1d1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
 	u32		more:1,
+||||||| BASE   (e6f3cb87365428583a0d0c845630b8a1221e2127 BACKPORT: FROMLIST: scsi: ufs: core: Fix data race in CPU la)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (36e5f6313583daf75ec31104ee8a186798a3b95f Merge 6.12.52 into android16-6.12-lts)
 			merge:1,
 			enc:1,
 			write:1,
