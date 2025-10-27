@@ -1160,8 +1160,8 @@ static void icl_mbus_init(struct intel_display *display)
 	if (DISPLAY_VER(display) == 12)
 		abox_regs |= BIT(0);
 
-	for_each_set_bit(i, &abox_regs, sizeof(abox_regs))
-		intel_de_rmw(display, MBUS_ABOX_CTL(i), mask, val);
+	for_each_set_bit(i, &abox_regs, BITS_PER_TYPE(abox_regs))
+		intel_de_rmw(dev_priv, MBUS_ABOX_CTL(i), mask, val);
 }
 
 static void hsw_assert_cdclk(struct intel_display *display)
@@ -1624,12 +1624,12 @@ static void tgl_bw_buddy_init(struct intel_display *display)
 	if (table[config].page_mask == 0) {
 		drm_dbg_kms(display->drm,
 			    "Unknown memory configuration; disabling address buddy logic.\n");
-		for_each_set_bit(i, &abox_mask, sizeof(abox_mask))
-			intel_de_write(display, BW_BUDDY_CTL(i),
+		for_each_set_bit(i, &abox_mask, BITS_PER_TYPE(abox_mask))
+			intel_de_write(dev_priv, BW_BUDDY_CTL(i),
 				       BW_BUDDY_DISABLE);
 	} else {
-		for_each_set_bit(i, &abox_mask, sizeof(abox_mask)) {
-			intel_de_write(display, BW_BUDDY_PAGE_MASK(i),
+		for_each_set_bit(i, &abox_mask, BITS_PER_TYPE(abox_mask)) {
+			intel_de_write(dev_priv, BW_BUDDY_PAGE_MASK(i),
 				       table[config].page_mask);
 
 			/* Wa_22010178259:tgl,dg1,rkl,adl-s */
