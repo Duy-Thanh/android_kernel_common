@@ -1160,8 +1160,16 @@ static void icl_mbus_init(struct intel_display *display)
 	if (DISPLAY_VER(display) == 12)
 		abox_regs |= BIT(0);
 
+<<<<<<< HEAD   (e1ff7f9220ed4a7b2ea1b5ced600e0bc1eeaaec1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
 	for_each_set_bit(i, &abox_regs, sizeof(abox_regs))
 		intel_de_rmw(display, MBUS_ABOX_CTL(i), mask, val);
+||||||| BASE   (3b5220a08523770c2abf35a20664d42f001cb1d1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
+	for_each_set_bit(i, &abox_regs, sizeof(abox_regs))
+		intel_de_rmw(dev_priv, MBUS_ABOX_CTL(i), mask, val);
+=======
+	for_each_set_bit(i, &abox_regs, BITS_PER_TYPE(abox_regs))
+		intel_de_rmw(dev_priv, MBUS_ABOX_CTL(i), mask, val);
+>>>>>>> BRANCH (a34fd73937bb6e8b14551acc04bec53239d354f7 Merge tag 'android16-6.12.52_r00' into android16-6.12)
 }
 
 static void hsw_assert_cdclk(struct intel_display *display)
@@ -1622,14 +1630,34 @@ static void tgl_bw_buddy_init(struct intel_display *display)
 			break;
 
 	if (table[config].page_mask == 0) {
+<<<<<<< HEAD   (e1ff7f9220ed4a7b2ea1b5ced600e0bc1eeaaec1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
 		drm_dbg_kms(display->drm,
 			    "Unknown memory configuration; disabling address buddy logic.\n");
 		for_each_set_bit(i, &abox_mask, sizeof(abox_mask))
 			intel_de_write(display, BW_BUDDY_CTL(i),
+||||||| BASE   (3b5220a08523770c2abf35a20664d42f001cb1d1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
+		drm_dbg(&dev_priv->drm,
+			"Unknown memory configuration; disabling address buddy logic.\n");
+		for_each_set_bit(i, &abox_mask, sizeof(abox_mask))
+			intel_de_write(dev_priv, BW_BUDDY_CTL(i),
+=======
+		drm_dbg(&dev_priv->drm,
+			"Unknown memory configuration; disabling address buddy logic.\n");
+		for_each_set_bit(i, &abox_mask, BITS_PER_TYPE(abox_mask))
+			intel_de_write(dev_priv, BW_BUDDY_CTL(i),
+>>>>>>> BRANCH (a34fd73937bb6e8b14551acc04bec53239d354f7 Merge tag 'android16-6.12.52_r00' into android16-6.12)
 				       BW_BUDDY_DISABLE);
 	} else {
+<<<<<<< HEAD   (e1ff7f9220ed4a7b2ea1b5ced600e0bc1eeaaec1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
 		for_each_set_bit(i, &abox_mask, sizeof(abox_mask)) {
 			intel_de_write(display, BW_BUDDY_PAGE_MASK(i),
+||||||| BASE   (3b5220a08523770c2abf35a20664d42f001cb1d1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
+		for_each_set_bit(i, &abox_mask, sizeof(abox_mask)) {
+			intel_de_write(dev_priv, BW_BUDDY_PAGE_MASK(i),
+=======
+		for_each_set_bit(i, &abox_mask, BITS_PER_TYPE(abox_mask)) {
+			intel_de_write(dev_priv, BW_BUDDY_PAGE_MASK(i),
+>>>>>>> BRANCH (a34fd73937bb6e8b14551acc04bec53239d354f7 Merge tag 'android16-6.12.52_r00' into android16-6.12)
 				       table[config].page_mask);
 
 			/* Wa_22010178259:tgl,dg1,rkl,adl-s */
