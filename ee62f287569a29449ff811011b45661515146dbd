@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85119df3_fa9309ec",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T13:51:07Z",
+      "side": 1,
+      "message": "Hmm, ok... My point was that we\u0027re not gonna reuse pkvm_mc_alloc_fn() for other (non-MMU) stuff, so it seems better to keep it simple and adjusted to the MMU use case.\n\nNow I see, we don\u0027t reuse pkvm_mc_alloc_fn() but we do reuse pkvm_mc_free_fn() for non-MMU stuff.\n\nSo, ok, let\u0027s keep doing it pKVM-ARM way (even though it seems a bit too fancy: so many ways to customize such a simple thing as pkvm_memcache: custom `alloc_fn` callback, custom `to_pa` callback, custom `flags`...)\n\nSpeaking of details:\n\n1. So, these pkvm_mc_alloc_fn()/pkvm_mc_free_fn(), as well as topup_pkvm_memcache() and free_pkvm_memcache(), are not really MMU-specific, so they don\u0027t really belong in mmu.c? It seems cleaner to put them in a pKVM-specific file (which, at the same time, is a part of host code, not hypervisor code). In 6.12 that would be, for example, arch/x86/kvm/vmx/pkvm/pkvm.c (and in 6.15+, for example, arch/x86/kvm/pkvm/pkvm.c)?\n\nIt might be a minor issue, but I\u0027d prefer to minimize the amount of pKVM-specific code in this common KVM\u0027s mmu.c (especially such code that is not strictly MMU-related and thus doesn\u0027t really belong there).\n\n2. Regarding HYP_MEMCACHE_ACCOUNT_STAGE2: rename it e.g. to PKVM_MEMCACHE_ACCOUNT_SECONDARY?\n\n3. Regarding dropping HYP_MEMCACHE_ACCOUNT_KMEMCG: yeah, it seems a good idea, given that, it appears, we also always use GFP_KERNEL_ACCOUNT when allocating any pages that we free via `teardown_mc` later.",
+      "parentUuid": "9e304a5c_b80e4ca9",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "016f8504_0e3dd674",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 10
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "We need separate one, since it is initialized with HYP_MEMCACHE_ACCOUNT_STAGE2, which results with properly tracking and accounting kvm_account_pgtable_pages (the counter is decreased during free_pkvm_memcache if this flag is set) which shouldn\u0027t happen for `teardown_mc`. Again, I\u0027ve found it very useful for validating and fixing bugs related to leak of page-table pages during teardown by checking the page-table page counter (monitoring `/proc/meminfo`\u0027s`SecPageTables` before vm started, and after vm teardown -\u003e BTW I will also add it to the `TEST:` tag in commit log).\n\n`guest_mmu_teardown_mc` sounds ok, but maybe emphasizing that this is stage-2 and call it `guest_ept_teardown_mc` or `guest_tdp_teardown_mc` (tdp to cover both Intel ept and potential AMD npt), WDYT?",
       "parentUuid": "bbae1fc3_7e929419",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be864f59_287dcf30",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T13:51:07Z",
+      "side": 1,
+      "message": "I see, thanks. (And this also makes me realize why this HYP_MEMCACHE_ACCOUNT_STAGE2 flag is useful, per my other comment.)\n\nRegarding the name, per my last comment in https://android-review.googlesource.com/c/kernel/common/+/3702535/8/arch/x86/include/asm/kvm_host.h#1112, how about just `mmu_teardown_mc`?",
+      "parentUuid": "ea6fa4d2_ea41f8fa",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -439,6 +475,24 @@
       "side": 1,
       "message": "This is the only place where we use it and therefore can declare it as static function, which I think is a bit cleaner.\n\nRegarding the name: s/percpu/vcpu/, yes it make sense - I will improve it.",
       "parentUuid": "781815c8_56273066",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a11f63b_6793b882",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T13:51:07Z",
+      "side": 1,
+      "message": "But it is strictly specific to the guest MMU stuff, so I think it is much cleaner to keep it together with other such stuff, i.e. in mmu.c. (In particular, it is very much related to drain_hyp_per_vm_pool() which you agreed to move to mmu.c in another comment.)\n\nUsing a non-static function in just one place is not a problem at all, I think.",
+      "parentUuid": "12b30876_5624a3d5",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
