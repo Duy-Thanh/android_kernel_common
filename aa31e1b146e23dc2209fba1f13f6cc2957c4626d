@@ -16,6 +16,24 @@
       "message": "Is there an upstream fix for this, or is this broken upstream? If broken upstream, this fix should be sent upstream.",
       "revId": "aa31e1b146e23dc2209fba1f13f6cc2957c4626d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81364a41_bcd1cd2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-10-27T18:34:54Z",
+      "side": 1,
+      "message": "This line is no longer present in upstream as of commit dc97391e6610 (\"sock: Remove -\u003esendpage*() in favour of sendmsg(MSG_SPLICE_PAGES)\"), which was introduced after 6.1. I don\u0027t think the fix went into stable for some reason, but maybe joneslee@google.com can provide more context on that",
+      "parentUuid": "7aee1f21_705d7593",
+      "revId": "aa31e1b146e23dc2209fba1f13f6cc2957c4626d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
