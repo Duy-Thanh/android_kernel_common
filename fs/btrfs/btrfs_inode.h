@@ -179,7 +179,7 @@ struct btrfs_inode {
 		u64 new_delalloc_bytes;
 		/*
 		 * The offset of the last dir index key that was logged.
-		 * This is used only for directories. Protected by 'log_mutex'.
+		 * This is used only for directories.
 		 */
 		u64 last_dir_index_offset;
 	};
