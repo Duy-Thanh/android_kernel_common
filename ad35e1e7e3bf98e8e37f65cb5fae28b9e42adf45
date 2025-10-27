@@ -52,6 +52,24 @@
       "parentUuid": "886b30a2_bd38ba9c",
       "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dffe4fb7_84b1e26f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3907671
+      },
+      "writtenOn": "2025-10-27T01:41:25Z",
+      "side": 1,
+      "message": "symbol list patch has been updated",
+      "parentUuid": "1aa0ac32_8ddd7456",
+      "revId": "ad35e1e7e3bf98e8e37f65cb5fae28b9e42adf45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
