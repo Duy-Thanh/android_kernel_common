@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "024eb52b_852919f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027mat...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027matthew.d.roper@intel.com\nCherry pick author: \u0027fnu.vishwanatha@intel.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f1ebf1_8ada7626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027mat...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027matthew.d.roper@intel.com\nCherry pick author: \u0027fnu.vishwanatha@intel.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eafa636_ccbd004b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027mat...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027matthew.d.roper@intel.com\nCherry pick author: \u0027fnu.vishwanatha@intel.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e22e3d1b_d64c8d1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dc96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7).\n\n```\n      ## drivers/gpu/drm/xe/xe_pci.c ##\n    -@@ drivers/gpu/drm/xe/xe_pci.c: static const struct xe_ip media_ips[] \u003d {\n    - \t{ 1301, \"Xe2_HPM\", \u0026media_xelpmp },\n    - \t{ 2000, \"Xe2_LPM\", \u0026media_xelpmp },\n    - \t{ 3000, \"Xe3_LPM\", \u0026media_xelpmp },\n    -+\t{ 3002, \"Xe3_LPM\", \u0026media_xelpmp },\n    +@@ drivers/gpu/drm/xe/xe_pci.c: static const struct gmdid_map media_ip_map[] \u003d {\n    + \t{ 1301, \u0026media_xe2 },\n    + \t{ 2000, \u0026media_xe2 },\n    + \t{ 3000, \u0026media_xe2 },\n    ++\t{ 3002, \u0026media_xe2 },\n      };\n      \n    - static const struct xe_device_desc tgl_desc \u003d {\n    + /*\n     \n      ## drivers/gpu/drm/xe/xe_wa.c ##\n     @@ drivers/gpu/drm/xe/xe_wa.c: static const struct xe_rtp_entry_sr gt_was[] \u003d {\n    @@ drivers/gpu/drm/xe/xe_wa.c: static const struct xe_rtp_entry_sr gt_was[] \u003d {\n      \t{ XE_RTP_NAME(\"14021486841\"),\n      \t  XE_RTP_RULES(MEDIA_VERSION(3000), MEDIA_STEP(A0, B0),\n      \t\t       ENGINE_CLASS(VIDEO_DECODE)),\n    -\n    - ## drivers/gpu/drm/xe/xe_wa_oob.rules ##\n    -@@ drivers/gpu/drm/xe/xe_wa_oob.rules: no_media_l3\tMEDIA_VERSION(3000)\n    - \t\tGRAPHICS_VERSION(1260), GRAPHICS_STEP(A0, B0)\n    - 16023105232\tGRAPHICS_VERSION_RANGE(2001, 3001)\n    - \t\tMEDIA_VERSION_RANGE(1301, 3000)\n    -+\t\tMEDIA_VERSION(3002)\n    - \t\tGRAPHICS_VERSION(3003)\n    - 16026508708\tGRAPHICS_VERSION_RANGE(1200, 3001)\n    - \t\tMEDIA_VERSION_RANGE(1300, 3000)\n    -+\t\tMEDIA_VERSION(3002)\n    - \t\tGRAPHICS_VERSION(3003)\n    - \n    - # SoC workaround - currently applies to all platforms with the following\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1172fcbb_fa9aaaac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027mat...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027matthew.d.roper@intel.com\nCherry pick author: \u0027fnu.vishwanatha@intel.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5263faf0_7c03c54e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975581
+      },
+      "writtenOn": "2025-10-27T22:22:35Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nOriginal author ...\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Sat Jun 14 01:01:40 2025 +0530\nCherry pick author date: Mon Oct 27 12:23:44 2025 -0700\n\nPlease cherry-pick using: `git cherry-pick -s -x c96e0df4e9f5f0d6690994bb01bcfbd01af0e1f7`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5398f383c1c3771c26949ca79af8c3fbf866902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
