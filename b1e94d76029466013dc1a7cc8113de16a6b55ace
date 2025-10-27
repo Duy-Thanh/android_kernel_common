@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline\n\nFile is missing final newline",
       "revId": "b1e94d76029466013dc1a7cc8113de16a6b55ace",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73731d70_9552287a",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2025-10-27T12:52:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7805c0a0_ff78e163",
+      "revId": "b1e94d76029466013dc1a7cc8113de16a6b55ace",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
