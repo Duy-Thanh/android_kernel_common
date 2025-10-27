@@ -3,8 +3,9 @@
  * Copyright (C) 2022 Google LLC
  */
 #include <asm/kvm_host.h>
-#include <asm/kvm_pkvm_module.h>
+#include <asm/kvm_hyp.h>
 #include <asm/kvm_hypevents.h>
+#include <asm/kvm_pkvm_module.h>
 #include <asm/module.h>
 
 #include <nvhe/alloc.h>
@@ -358,6 +359,8 @@ const struct pkvm_module_ops module_ops = {
 	.device_register_reset = pkvm_device_register_reset,
 	.register_guest_trng_ops = __register_guest_trng_ops,
 	.printf = hyp_printf,
+	.hyp_exit = __hyp_exit,
+	.hyp_enter = __hyp_enter,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)
