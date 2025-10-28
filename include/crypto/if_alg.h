@@ -152,7 +152,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (d6a7e8c67a2f581aef32168be875feac1c47fa77 ANDROID: ABI: update symbol list for unisoc whitelist 12 fun)
 	u32		more:1,
+||||||| BASE   (18b8fe9b462438ea48a03f7b1f24f2d6c75caff8 ANDROID: GKI: Update symbol list for sunxi)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (bce84c40a40be5a627fa563399c00689829c705a ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 			merge:1,
 			enc:1,
 			write:1,
