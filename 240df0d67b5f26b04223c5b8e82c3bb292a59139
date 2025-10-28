@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a94124f_2144bf26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-28T17:28:18Z",
+      "side": 1,
+      "message": "This is not a clean cherry-pick. Please upload as a BACKPORT: and describe the changes you had to make.",
+      "revId": "240df0d67b5f26b04223c5b8e82c3bb292a59139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
