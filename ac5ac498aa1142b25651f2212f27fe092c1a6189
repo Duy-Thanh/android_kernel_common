@@ -1,0 +1,111 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb35664_ba970b86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-28T16:02:46Z",
+      "side": 1,
+      "message": "This breaks the ABI, please see the below comments to address.\n\nIs there a pressing reason we can\u0027t wait until this is merged upstream?",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb492099_dc0da8ea",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-28T16:02:46Z",
+      "side": 1,
+      "message": "For android15-6.6, this is likely causing the ABI CRC breakage. Please surround this with `#ifndef __GENKSYMS__` and #endif and see if the ABI breakage is resolved.",
+      "fixSuggestions": [
+        {
+          "fixId": "f0cd2a8b_fb70fd69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/core/hub.c",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "#ifndef __GENKSYMS__\n"
+            },
+            {
+              "path": "drivers/usb/core/hub.c",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbb329f_52bd776c",
+        "filename": "drivers/usb/core/usb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-28T16:02:46Z",
+      "side": 1,
+      "message": "For android15-6.6, this is likely causing the ABI CRC breakage. Please surround this with `#ifndef __GENKSYMS__` and #endif and see if the ABI breakage is resolved.",
+      "fixSuggestions": [
+        {
+          "fixId": "6dc88523_e6db6b83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/core/usb.c",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "#ifndef __GENKSYMS__\n"
+            },
+            {
+              "path": "drivers/usb/core/usb.c",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
