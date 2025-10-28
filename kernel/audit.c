@@ -2139,10 +2139,11 @@ void audit_log_untrustedstring(struct audit_buffer *ab, const char *string)
 void audit_log_d_path(struct audit_buffer *ab, const char *prefix,
 		      const struct path *path)
 {
-	char *p, *pathname;
+	char *p, *pathname, *suffix;
 
 	if (prefix)
 		audit_log_format(ab, "%s", prefix);
+
 
 	/* We will allow 11 spaces for ' (deleted)' to be appended */
 	pathname = kmalloc(PATH_MAX+11, ab->gfp_mask);
@@ -2154,8 +2155,18 @@ void audit_log_d_path(struct audit_buffer *ab, const char *prefix,
 	if (IS_ERR(p)) { /* Should never happen since we send PATH_MAX */
 		/* FIXME: can we save some information here? */
 		audit_log_format(ab, "\"<too_long>\"");
-	} else
+	} else {
+		/*
+		 * Terminate the buffer where the " (deleted)" suffix starts so
+		 * that audit_log_untrustedstring() emits the pathname,
+		 * assuming it doesn't have other control characters or spaces.
+		 */
+		suffix = strstr(p, " (deleted)");
+		if (suffix)
+			*suffix = '\0';
+
 		audit_log_untrustedstring(ab, p);
+	}
 	kfree(pathname);
 }
 
