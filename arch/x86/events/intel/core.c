@@ -2806,12 +2806,20 @@ static void intel_pmu_read_event(struct perf_event *event)
 		if (pmu_enabled)
 			intel_pmu_disable_all();
 
+<<<<<<< HEAD   (56a04e6e9ed8c67f8fc4778b714b893b73df9d43 ANDROID: gki/x86_64: Update symbols)
 		/*
 		 * If the PEBS counters snapshotting is enabled,
 		 * the topdown event is available in PEBS records.
 		 */
 		if (is_topdown_event(event) && !is_pebs_counter_event_group(event))
 			static_call(intel_pmu_update_topdown_event)(event, NULL);
+||||||| BASE   (3b5220a08523770c2abf35a20664d42f001cb1d1 ANDROID: iommu/arm-smmu-v3: Handle NULL gather in arm_smmu_t)
+		if (is_topdown_event(event))
+			static_call(intel_pmu_update_topdown_event)(event);
+=======
+		if (is_topdown_count(event))
+			static_call(intel_pmu_update_topdown_event)(event);
+>>>>>>> BRANCH (a34fd73937bb6e8b14551acc04bec53239d354f7 Merge tag 'android16-6.12.52_r00' into android16-6.12)
 		else
 			intel_pmu_drain_pebs_buffer();
 
