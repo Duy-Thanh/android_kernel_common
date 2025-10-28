@@ -23434,6 +23434,11 @@ pointer_reference {
   pointee_type_id: 0xcbe2e878
 }
 pointer_reference {
+  id: 0x3868bf5d
+  kind: POINTER
+  pointee_type_id: 0xcbe21be8
+}
+pointer_reference {
   id: 0x386effc9
   kind: POINTER
   pointee_type_id: 0xcbfb19ba
@@ -29202,6 +29207,11 @@ qualified {
   id: 0xcbc5e66b
   qualifier: CONST
   qualified_type_id: 0x5f502f26
+}
+qualified {
+  id: 0xcbe21be8
+  qualifier: CONST
+  qualified_type_id: 0x5fcfd92a
 }
 qualified {
   id: 0xcbe2e878
@@ -277501,6 +277511,11 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x6eef99a2
+  return_type_id: 0x052fac00
+  parameter_id: 0x3868bf5d
+}
+function {
   id: 0x6f37ee87
   return_type_id: 0x054f691a
   parameter_id: 0x1d44326e
@@ -312427,6 +312442,15 @@ elf_symbol {
   full_name: "gpiod_set_consumer_name"
 }
 elf_symbol {
+  id: 0x55e18a15
+  name: "gpiod_set_raw_value_cansleep"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x45c0f39e
+  type_id: 0x185cfa53
+  full_name: "gpiod_set_raw_value_cansleep"
+}
+elf_symbol {
   id: 0x4c4ea97e
   name: "gpiod_set_value"
   is_defined: true
@@ -325817,6 +325841,15 @@ elf_symbol {
   full_name: "snd_soc_dummy_dlc"
 }
 elf_symbol {
+  id: 0x97843792
+  name: "snd_soc_find_dai"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe666e133
+  type_id: 0x6eef99a2
+  full_name: "snd_soc_find_dai"
+}
+elf_symbol {
   id: 0x33a917a0
   name: "snd_soc_get_enum_double"
   is_defined: true
@@ -334973,6 +335006,7 @@ interface {
   symbol_id: 0x53a19efa
   symbol_id: 0x6e8182bb
   symbol_id: 0x9e518224
+  symbol_id: 0x55e18a15
   symbol_id: 0x4c4ea97e
   symbol_id: 0x2bcde32a
   symbol_id: 0xc5a4a821
@@ -336461,6 +336495,7 @@ interface {
   symbol_id: 0x72ac0f6a
   symbol_id: 0x687a68d3
   symbol_id: 0x7918ef41
+  symbol_id: 0x97843792
   symbol_id: 0x33a917a0
   symbol_id: 0x05ad614a
   symbol_id: 0xe6fd4826
