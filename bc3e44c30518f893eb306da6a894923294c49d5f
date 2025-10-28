@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "febe6fcd_1423f566",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-28T21:13:14Z",
+      "side": 1,
+      "message": "Please explain why pid namespaces are needed. Normally this is for implementation of containers...why do you need containers?",
+      "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
