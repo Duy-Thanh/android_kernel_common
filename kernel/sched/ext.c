@@ -5423,7 +5423,7 @@ repeat_iter:
 		struct sched_enq_and_set_ctx ctx;
 		bool skip = false;
 
-		if (!tryget_task_struct(p))
+		if (scx_get_task_state(p) != SCX_TASK_READY)
 			continue;
 
 		trace_android_vh_scx_switch_repeat_skip(p, &skip, &repeat);
@@ -5442,7 +5442,6 @@ repeat_iter:
 		sched_enq_and_set_task(&ctx);
 
 		check_class_changed(task_rq(p), p, old_class, p->prio);
-		put_task_struct(p);
 	}
 	scx_task_iter_stop(&sti);
 	if (repeat > 0) {
