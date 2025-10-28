@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b289e96e_4b6b3bba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-10-28T04:52:55Z",
+      "side": 1,
+      "message": "LGTM. There are quite a few changes to avoid breaking KMI in there (which weren\u0027t part of the original change).",
+      "revId": "5b2d151551d0e77616018904414f5ba3118b30d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
