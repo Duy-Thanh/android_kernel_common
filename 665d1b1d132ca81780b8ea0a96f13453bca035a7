@@ -16,6 +16,24 @@
       "message": "Need CL:3818744",
       "revId": "665d1b1d132ca81780b8ea0a96f13453bca035a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47b6ab94_c07e352c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-10-28T18:52:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6800b471_c507d8ed",
+      "revId": "665d1b1d132ca81780b8ea0a96f13453bca035a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
