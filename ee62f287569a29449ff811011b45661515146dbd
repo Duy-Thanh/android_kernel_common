@@ -549,6 +549,24 @@
       "parentUuid": "5a11f63b_6793b882",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81344590_b75b8b96",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-28T16:47:56Z",
+      "side": 1,
+      "message": "\u003e especially that this is about cleanup, not something super specific to MMU.\n\nIt is about MMU-specific cleanup (like drain_hyp_per_vm_pool(), and like pkvm_vm_mmu_destroy(), by the way). `stage2_mc` and `s2_teardown_mc` are used specifically for guest page table pages, not for anything else, as their names suggest, right?",
+      "parentUuid": "ecf857b8_55785df9",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
