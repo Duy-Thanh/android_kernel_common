@@ -16,6 +16,24 @@
       "message": "Please don\u0027t add empty lines after `Bug: ` lines.",
       "revId": "d327f6c63969bc97cceaed6b484ce4718ca98bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af56645e_abc83aba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2025-10-28T15:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "250145c0_6bcaf837",
+      "revId": "d327f6c63969bc97cceaed6b484ce4718ca98bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
