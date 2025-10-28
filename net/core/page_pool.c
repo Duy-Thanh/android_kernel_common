@@ -458,9 +458,72 @@ page_pool_dma_sync_for_device(const struct page_pool *pool,
 		__page_pool_dma_sync_for_device(pool, netmem, dma_sync_size);
 }
 
+<<<<<<< HEAD   (6b6ffe2c091924ce45dff6afb5304312a64ed6f0 Merge android16-6.12 into android16-6.12-lts)
 static bool page_pool_dma_map(struct page_pool *pool, netmem_ref netmem)
+||||||| BASE   (fcd03f7736b1fa2b2181a7306d14008aa36b66ed Linux 6.12.53)
+static bool page_pool_dma_map(struct page_pool *pool, netmem_ref netmem, gfp_t gfp)
+=======
+static int page_pool_register_dma_index(struct page_pool *pool,
+					netmem_ref netmem, gfp_t gfp)
+{
+	int err = 0;
+	u32 id;
+
+	if (unlikely(!PP_DMA_INDEX_BITS))
+		goto out;
+
+	if (in_softirq())
+		err = xa_alloc(&pool->dma_mapped, &id, netmem_to_page(netmem),
+			       PP_DMA_INDEX_LIMIT, gfp);
+	else
+		err = xa_alloc_bh(&pool->dma_mapped, &id, netmem_to_page(netmem),
+				  PP_DMA_INDEX_LIMIT, gfp);
+	if (err) {
+		WARN_ONCE(err != -ENOMEM, "couldn't track DMA mapping, please report to netdev@");
+		goto out;
+	}
+
+	netmem_set_dma_index(netmem, id);
+out:
+	return err;
+}
+
+static int page_pool_release_dma_index(struct page_pool *pool,
+				       netmem_ref netmem)
+{
+	struct page *old, *page = netmem_to_page(netmem);
+	unsigned long id;
+
+	if (unlikely(!PP_DMA_INDEX_BITS))
+		return 0;
+
+	id = netmem_get_dma_index(netmem);
+	if (!id)
+		return -1;
+
+	if (in_softirq())
+		old = xa_cmpxchg(&pool->dma_mapped, id, page, NULL, 0);
+	else
+		old = xa_cmpxchg_bh(&pool->dma_mapped, id, page, NULL, 0);
+	if (old != page)
+		return -1;
+
+	netmem_set_dma_index(netmem, 0);
+
+	return 0;
+}
+
+static bool page_pool_dma_map(struct page_pool *pool, netmem_ref netmem, gfp_t gfp)
+>>>>>>> BRANCH (4be14daf8919f2620d81ee5c1cc2d2dace15bbdc perf util: Fix compression checks returning -1 as bool)
 {
 	dma_addr_t dma;
+<<<<<<< HEAD   (6b6ffe2c091924ce45dff6afb5304312a64ed6f0 Merge android16-6.12 into android16-6.12-lts)
+||||||| BASE   (fcd03f7736b1fa2b2181a7306d14008aa36b66ed Linux 6.12.53)
+	int err;
+	u32 id;
+=======
+	int err;
+>>>>>>> BRANCH (4be14daf8919f2620d81ee5c1cc2d2dace15bbdc perf util: Fix compression checks returning -1 as bool)
 
 	/* Setup DMA mapping: use 'struct page' area for storing DMA-addr
 	 * since dma_addr_t can be either 32 or 64 bits and does not always fit
@@ -477,6 +540,26 @@ static bool page_pool_dma_map(struct page_pool *pool, netmem_ref netmem)
 	if (page_pool_set_dma_addr_netmem(netmem, dma))
 		goto unmap_failed;
 
+<<<<<<< HEAD   (6b6ffe2c091924ce45dff6afb5304312a64ed6f0 Merge android16-6.12 into android16-6.12-lts)
+||||||| BASE   (fcd03f7736b1fa2b2181a7306d14008aa36b66ed Linux 6.12.53)
+	if (in_softirq())
+		err = xa_alloc(&pool->dma_mapped, &id, netmem_to_page(netmem),
+			       PP_DMA_INDEX_LIMIT, gfp);
+	else
+		err = xa_alloc_bh(&pool->dma_mapped, &id, netmem_to_page(netmem),
+				  PP_DMA_INDEX_LIMIT, gfp);
+	if (err) {
+		WARN_ONCE(err != -ENOMEM, "couldn't track DMA mapping, please report to netdev@");
+		goto unset_failed;
+	}
+
+	netmem_set_dma_index(netmem, id);
+=======
+	err = page_pool_register_dma_index(pool, netmem, gfp);
+	if (err)
+		goto unset_failed;
+
+>>>>>>> BRANCH (4be14daf8919f2620d81ee5c1cc2d2dace15bbdc perf util: Fix compression checks returning -1 as bool)
 	page_pool_dma_sync_for_device(pool, netmem, pool->p.max_len);
 
 	return true;
@@ -656,6 +739,24 @@ static __always_inline void __page_pool_release_page_dma(struct page_pool *pool,
 		 */
 		return;
 
+<<<<<<< HEAD   (6b6ffe2c091924ce45dff6afb5304312a64ed6f0 Merge android16-6.12 into android16-6.12-lts)
+||||||| BASE   (fcd03f7736b1fa2b2181a7306d14008aa36b66ed Linux 6.12.53)
+	id = netmem_get_dma_index(netmem);
+	if (!id)
+		return;
+
+	if (in_softirq())
+		old = xa_cmpxchg(&pool->dma_mapped, id, page, NULL, 0);
+	else
+		old = xa_cmpxchg_bh(&pool->dma_mapped, id, page, NULL, 0);
+	if (old != page)
+		return;
+
+=======
+	if (page_pool_release_dma_index(pool, netmem))
+		return;
+
+>>>>>>> BRANCH (4be14daf8919f2620d81ee5c1cc2d2dace15bbdc perf util: Fix compression checks returning -1 as bool)
 	dma = page_pool_get_dma_addr_netmem(netmem);
 
 	/* When page is unmapped, it cannot be returned to our pool */
