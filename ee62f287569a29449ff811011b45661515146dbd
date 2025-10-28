@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "155d178c_2faaa0c3",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-28T15:15:21Z",
+      "side": 1,
+      "message": "\u003e It might be a minor issue, but I\u0027d prefer to minimize the amount of pKVM-specific code in this common KVM\u0027s mmu.c\n\nyes it is a valid point - I will move it there\n\n\u003e Regarding HYP_MEMCACHE_ACCOUNT_STAGE2: rename it e.g. to PKVM_MEMCACHE_ACCOUNT_SECONDARY?\n\nAs we agreed offline I will use PKVM_MC_ACCOUNT_PGTABLE_PAGES",
+      "parentUuid": "85119df3_fa9309ec",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "016f8504_0e3dd674",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 10
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "I see, thanks. (And this also makes me realize why this HYP_MEMCACHE_ACCOUNT_STAGE2 flag is useful, per my other comment.)\n\nRegarding the name, per my last comment in https://android-review.googlesource.com/c/kernel/common/+/3702535/8/arch/x86/include/asm/kvm_host.h#1112, how about just `mmu_teardown_mc`?",
       "parentUuid": "ea6fa4d2_ea41f8fa",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889401f1_b9270956",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-28T15:15:21Z",
+      "side": 1,
+      "message": "I will use `guest_mmu_teardown_mc` (to be similar as other names that we agreed on)",
+      "parentUuid": "be864f59_287dcf30",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -493,6 +529,24 @@
       "side": 1,
       "message": "But it is strictly specific to the guest MMU stuff, so I think it is much cleaner to keep it together with other such stuff, i.e. in mmu.c. (In particular, it is very much related to drain_hyp_per_vm_pool() which you agreed to move to mmu.c in another comment.)\n\nUsing a non-static function in just one place is not a problem at all, I think.",
       "parentUuid": "12b30876_5624a3d5",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf857b8_55785df9",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-28T15:15:21Z",
+      "side": 1,
+      "message": "Of course it is not a problem but for me it seems cleaner to keep such simple function static - and define directly where it is used (for someone who try to understand what is happening he can just look for it in the same file), especially that this is about cleanup, not something super specific to MMU. WDYT?\n\nFor drain_hyp_per_vm_pool it is a bit different since it was moved and used in pkvm_vm_mmu_destroy all within arch/x86/kvm/pkvm/mmu.c - which IMO made sense :)",
+      "parentUuid": "5a11f63b_6793b882",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
