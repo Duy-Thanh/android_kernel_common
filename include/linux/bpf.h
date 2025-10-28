@@ -203,6 +203,37 @@ struct bpf_map_off_arr {
 	u8 field_sz[BPF_MAP_OFF_ARR_MAX];
 };
 
+<<<<<<< HEAD   (c048efaf8f4ad627b35331b6b52b3a25cb617651 ANDROID: GKI: fix up build break where timer_delete_sync() w)
+||||||| BASE   (77ce71aaa02cab677671e434485834cbc8eb5e75 i2c: designware: Add disabling clocks when probe fails)
+/* 'Ownership' of program-containing map is claimed by the first program
+ * that is going to use this map or by the first program which FD is
+ * stored in the map to make sure that all callers and callees have the
+ * same prog type, JITed flag and xdp_has_frags flag.
+ */
+struct bpf_map_owner {
+	enum bpf_prog_type type;
+	bool jited;
+	bool xdp_has_frags;
+	u64 storage_cookie[MAX_BPF_CGROUP_STORAGE_TYPE];
+	const struct btf_type *attach_func_proto;
+};
+
+=======
+/* 'Ownership' of program-containing map is claimed by the first program
+ * that is going to use this map or by the first program which FD is
+ * stored in the map to make sure that all callers and callees have the
+ * same prog type, JITed flag and xdp_has_frags flag.
+ */
+struct bpf_map_owner {
+	enum bpf_prog_type type;
+	bool jited;
+	bool xdp_has_frags;
+	u64 storage_cookie[MAX_BPF_CGROUP_STORAGE_TYPE];
+	const struct btf_type *attach_func_proto;
+	enum bpf_attach_type expected_attach_type;
+};
+
+>>>>>>> BRANCH (a99de19128aec0913f3d529f529fbbff5edfaff8 bpf: Enforce expected_attach_type for tailcall compatibility)
 struct bpf_map {
 	/* The first two cachelines with read-mostly members of which some
 	 * are also accessed in fast-path (e.g. ops, max_entries).
