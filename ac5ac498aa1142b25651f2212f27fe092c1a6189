@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a81aa4c5_b83fbbeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-10-28T16:07:12Z",
+      "side": 1,
+      "message": "Should not be needed for android kernels.",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb492099_dc0da8ea",
         "filename": "drivers/usb/core/hub.c",
         "patchSetId": 2
