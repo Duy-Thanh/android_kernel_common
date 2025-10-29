@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcbe712_be706c4e",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-29T20:30:34Z",
+      "side": 1,
+      "message": "This is very specific to the current Google\u0027s use cases, so I\u0027m not sure such details need to be mentioned in kernel source code. :) (Also, \"pKVM feature list discussion\" will sound mysterious to anyone except the participants of that discussion. :))\n\nSo maybe make it more general, e.g. \"pKVM does not provide secure TSC for pVM yet. Current pVM use cases treat the TSC as untrusted and rely on different sources of secure time. So still allow the host to access ...\" ?",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae0515b_9b89ad08",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-29T20:30:34Z",
+      "side": 1,
+      "message": "nit: maybe add a comment like \"All other emulated MSRs are emulated directly by the pkvm hypervisor\"?",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
