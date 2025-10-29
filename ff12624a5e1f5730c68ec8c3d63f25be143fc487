@@ -33,6 +33,24 @@
       "message": "Looks like this needs a rebase \u0026 likely re-run of the kabi_update",
       "revId": "ff12624a5e1f5730c68ec8c3d63f25be143fc487",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baec17d5_ff541261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3907671
+      },
+      "writtenOn": "2025-10-29T03:05:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98fa8d7e_be9aa1a3",
+      "revId": "ff12624a5e1f5730c68ec8c3d63f25be143fc487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
