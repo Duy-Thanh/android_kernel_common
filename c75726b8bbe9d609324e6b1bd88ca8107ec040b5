@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a0571f_0d3167c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-10-29T14:03:13Z",
+      "side": 1,
+      "message": "nit: you forgot to sign-off",
+      "revId": "c75726b8bbe9d609324e6b1bd88ca8107ec040b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
