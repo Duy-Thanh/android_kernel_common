@@ -20,10 +20,12 @@
 #include <linux/errno.h>
 #include "avtab.h"
 #include "policydb.h"
+#include "hash.h"
 
 static struct kmem_cache *avtab_node_cachep __ro_after_init;
 static struct kmem_cache *avtab_xperms_cachep __ro_after_init;
 
+<<<<<<< HEAD   (a15958de6871ffdaddb3c5736a489a5e3d6a3059 ANDROID: GKI: Update symbol list for Amlogic)
 /* Based on MurmurHash3, written by Austin Appleby and placed in the
  * public domain.
  */
@@ -68,6 +70,56 @@ static struct avtab_node *avtab_insert_node(struct avtab *h,
 					    struct avtab_node **dst,
 					    const struct avtab_key *key,
 					    const struct avtab_datum *datum)
+||||||| BASE   (8ffbfe640eb64b2c7a23a63f6a39730c349d8012 FROMGIT: selinux: Introduce a new config to make avc cache s)
+/* Based on MurmurHash3, written by Austin Appleby and placed in the
+ * public domain.
+ */
+static inline u32 avtab_hash(const struct avtab_key *keyp, u32 mask)
+{
+	static const u32 c1 = 0xcc9e2d51;
+	static const u32 c2 = 0x1b873593;
+	static const u32 r1 = 15;
+	static const u32 r2 = 13;
+	static const u32 m  = 5;
+	static const u32 n  = 0xe6546b64;
+
+	u32 hash = 0;
+
+#define mix(input) do { \
+		u32 v = input; \
+		v *= c1; \
+		v = (v << r1) | (v >> (32 - r1)); \
+		v *= c2; \
+		hash ^= v; \
+		hash = (hash << r2) | (hash >> (32 - r2)); \
+		hash = hash * m + n; \
+	} while (0)
+
+	mix(keyp->target_class);
+	mix(keyp->target_type);
+	mix(keyp->source_type);
+
+#undef mix
+
+	hash ^= hash >> 16;
+	hash *= 0x85ebca6b;
+	hash ^= hash >> 13;
+	hash *= 0xc2b2ae35;
+	hash ^= hash >> 16;
+
+	return hash & mask;
+}
+
+static struct avtab_node*
+avtab_insert_node(struct avtab *h, u32 hvalue,
+		  struct avtab_node *prev,
+		  const struct avtab_key *key, const struct avtab_datum *datum)
+=======
+static struct avtab_node*
+avtab_insert_node(struct avtab *h, u32 hvalue,
+		  struct avtab_node *prev,
+		  const struct avtab_key *key, const struct avtab_datum *datum)
+>>>>>>> CHANGE (fd4ebe47de069b2a88e9628e10c770b2f693f3b1 FROMGIT: selinux: Move avtab_hash() to a shared location for)
 {
 	struct avtab_node *newnode;
 	struct avtab_extended_perms *xperms;
