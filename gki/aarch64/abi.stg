@@ -428695,6 +428695,15 @@ elf_symbol {
   full_name: "__sbitmap_queue_get"
 }
 elf_symbol {
+  id: 0xbbdc4ff0
+  name: "__sched_proxy_exec"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "__sched_proxy_exec"
+}
+elf_symbol {
   id: 0x9c3568ef
   name: "__scm_destroy"
   is_defined: true
@@ -511741,6 +511750,7 @@ interface {
   symbol_id: 0xe8433122
   symbol_id: 0x31b4eed9
   symbol_id: 0x99aa632e
+  symbol_id: 0xbbdc4ff0
   symbol_id: 0x9c3568ef
   symbol_id: 0xe68925b8
   symbol_id: 0x6e3bb1cf
