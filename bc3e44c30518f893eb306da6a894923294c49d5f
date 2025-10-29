@@ -16,6 +16,24 @@
       "message": "Please explain why pid namespaces are needed. Normally this is for implementation of containers...why do you need containers?",
       "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fa6ea8_9449f00c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4431829
+      },
+      "writtenOn": "2025-10-29T02:41:25Z",
+      "side": 1,
+      "message": "We have integrated LG\u0027s existing native services to AAOS-based IVI system. These services run in an container type\u0027s isolated environment. To ensure no impact on the Android system, pid namespace isolation is required.",
+      "parentUuid": "febe6fcd_1423f566",
+      "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
