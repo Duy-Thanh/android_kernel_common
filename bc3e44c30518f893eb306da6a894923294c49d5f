@@ -34,6 +34,23 @@
       "parentUuid": "febe6fcd_1423f566",
       "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6217e90_6da268f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-29T16:52:13Z",
+      "side": 1,
+      "message": "The binder driver does not use PID_NS so this is likely to cause problems with the freezer implementation which relies on global PIDs. Have you thoroughly tested these cases?",
+      "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
