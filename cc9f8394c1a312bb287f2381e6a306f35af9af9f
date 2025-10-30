@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a0a454_80781af5",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4755,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-30T13:47:58Z",
+      "side": 1,
+      "message": "nit: would it be nice to have a pkvm_err() here as we are removing the warnon? I agree that its the VM\u0027s problem to execute unsupported instruction, but an error message would help us identify the issue faster and fix the VM code if needed.",
+      "fixSuggestions": [
+        {
+          "fixId": "bf53dba9_f993d015",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 4764,
+                "startChar": 0,
+                "endLine": 4764,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpkvm_err(\"pVM caused unexpected string IO vmexit (qual: 0x%lx)\\n\",\n\t\t\t\t exit_qualification);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
