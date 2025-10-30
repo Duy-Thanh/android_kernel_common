@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb7c9d41_0c43358f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-30T18:46:19Z",
+      "side": 1,
+      "message": "nit: maybe also worth explaining the rationale for limiting the host emulated MSRs, i.e. that:\n\n1) Emulating most MSRs directly in pKVM hypervisor is easy (it just requires reusing KVM code, which we do anyway), and is faster than switching to the host and back.\n2) Emulating MSRs doesn\u0027t take a lot of CPU cycles, so no concerns about spending too much time in pKVM for that.\n3) Last but not least, it is good for security: if all those MSRs are emulated by pKVM anyway, we don\u0027t need to analyze case by case which of them we can trust the host to emulate.\n\nThis is my understanding of it, please feel free to correct or improve.",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28ef853b_b184a959",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 1
