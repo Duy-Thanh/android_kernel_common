@@ -1527,11 +1527,6 @@ static void do_ffa_guest_version(struct arm_smccc_1_2_regs *res,
 
 	hyp_spin_lock(&version_lock);
 
-	if (!has_version_negotiated) {
-		res->a0 = FFA_RET_NOT_SUPPORTED;
-		goto unlock;
-	}
-
 	/* No backwards compatibility for you, please update your guest drivers*/
 	if (FFA_MINOR_VERSION(ffa_req_version) < FFA_MINOR_VERSION(hyp_ffa_version)) {
 		res->a0 = FFA_RET_NOT_SUPPORTED;
@@ -1728,6 +1723,12 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 
 	if (!is_ffa_call(func_id) || !VM_FFA_SUPPORTED(vcpu)) {
 		smccc_set_retval(vcpu, SMCCC_RET_NOT_SUPPORTED, 0, 0, 0);
+		return true;
+	}
+
+	if (!smp_load_acquire(&has_version_negotiated)) {
+		ffa_to_smccc_error(&res, FFA_RET_NOT_SUPPORTED);
+		ffa_set_retval(ctxt, &res);
 		return true;
 	}
 
