@@ -16,6 +16,23 @@
       "message": "This looks ok to me, but we are often hesitant to include FROMLIST patches (preferring FROMGIT or UPSTREAM). But this looks like a reasonable fix, so pulling in @adelva@google.com and @dhavale@google.com to make sure I\u0027m not missing anything.",
       "revId": "95d1ce69ce9ac1871a722b39563b37d66498eeb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42aadccc_0a68cc3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-30T19:46:34Z",
+      "side": 1,
+      "message": "Let\u0027s wait for the conversation upstream. Then we can take this as FROMGIT. If it is needed more urgently than that, then please explain the urgency.",
+      "revId": "95d1ce69ce9ac1871a722b39563b37d66498eeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
