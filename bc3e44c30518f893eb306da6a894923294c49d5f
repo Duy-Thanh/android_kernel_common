@@ -51,6 +51,24 @@
       "message": "The binder driver does not use PID_NS so this is likely to cause problems with the freezer implementation which relies on global PIDs. Have you thoroughly tested these cases?",
       "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33f0f1c_875787bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4431829
+      },
+      "writtenOn": "2025-10-30T01:44:00Z",
+      "side": 1,
+      "message": "Our isolated services do not use binder communication and are therefore not registered in the binder table. Therefore we expect this to have no impact on the operation of binder freezer. Furthermore, we have continuously tested xTS and have not found any related issues to date.",
+      "parentUuid": "c6217e90_6da268f6",
+      "revId": "bc3e44c30518f893eb306da6a894923294c49d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
