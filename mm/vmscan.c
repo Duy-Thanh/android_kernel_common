@@ -1702,6 +1702,7 @@ retry:
 		unsigned int nr_pages;
 		bool activate = false;
 		bool keep = false;
+		bool bypass = false;
 
 		cond_resched();
 
@@ -2008,8 +2009,10 @@ retry:
 			case PAGE_SUCCESS:
 				stat->nr_pageout += nr_pages;
 
-				if (folio_test_writeback(folio))
+				if (folio_test_writeback(folio)) {
+					trace_android_vh_handle_folio_writeback(folio, &bypass);
 					goto keep;
+				}
 				if (folio_test_dirty(folio))
 					goto keep;
 
@@ -2135,7 +2138,16 @@ activate_locked:
 keep_locked:
 		folio_unlock(folio);
 keep:
+<<<<<<< HEAD   (5e6db704570401cf7c881129fa38842ddce8f945 ANDROID: oplus add symbols to symbol list)
 		list_add(&folio->lru, &ret_folios);
+||||||| BASE   (087f4434a20872505b3a7c50990b5cb5c9ac2154 BACKPORT: dma-fence: Add safe access helpers and document th)
+		trace_android_vh_adjust_nr_reclaimed(folio, &nr_reclaimed);
+		list_add(&folio->lru, &ret_folios);
+=======
+		trace_android_vh_adjust_nr_reclaimed(folio, &nr_reclaimed);
+		if (!bypass)
+			list_add(&folio->lru, &ret_folios);
+>>>>>>> CHANGE (c6c58a1140a9b512156beb0355ac9414a6253c70 ANDROID: vendor_hook: Add hooks to maintain folios that are )
 		VM_BUG_ON_FOLIO(folio_test_lru(folio) ||
 				folio_test_unevictable(folio), folio);
 	}
@@ -6389,6 +6401,11 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 				sc->priority == DEF_PRIORITY);
 
 	blk_start_plug(&plug);
+
+	trace_android_vh_reclaim_before_kswapd(&nr_reclaimed);
+	if (nr_reclaimed >= nr_to_reclaim)
+		goto out;
+
 	while (nr[LRU_INACTIVE_ANON] || nr[LRU_ACTIVE_FILE] ||
 					nr[LRU_INACTIVE_FILE]) {
 		unsigned long nr_anon, nr_file, percentage;
@@ -6458,6 +6475,8 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 		nr[lru] = targets[lru] * (100 - percentage) / 100;
 		nr[lru] -= min(nr[lru], nr_scanned);
 	}
+
+out:
 	blk_finish_plug(&plug);
 	sc->nr_reclaimed += nr_reclaimed;
 
