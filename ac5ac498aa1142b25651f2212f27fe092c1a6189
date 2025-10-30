@@ -37,6 +37,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef396042_aacf8c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954065
+      },
+      "writtenOn": "2025-10-30T16:41:33Z",
+      "side": 1,
+      "message": "@gregkh@google.com\n\nWe plan to use this tracing for our automation/stress testing on USB host mode, which will help us catch regressions during development or GKI upgrades",
+      "parentUuid": "a81aa4c5_b83fbbeb",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3703628e_35f4a3bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954065
+      },
+      "writtenOn": "2025-10-30T16:41:33Z",
+      "side": 1,
+      "message": "@nkapron@google.com\n\nMany thanks for explaining how to fix ABI breakage. I am not familiar with that topic and am currently looking for resources to learn more about it.\n\nSince these changes don\u0027t have the CC tag, they won\u0027t be automatically merged into out 6.1, 6.6 and 6.12 codebases during GKI upgrade. My understanding is that we still need to cherry-pick them after they are merged upstream. This is where I\u0027m confused: Could you help me understand what the difference is, or what the benefit is, versus just waiting until they are merged upstream?",
+      "parentUuid": "4eb35664_ba970b86",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb492099_dc0da8ea",
         "filename": "drivers/usb/core/hub.c",
         "patchSetId": 2
