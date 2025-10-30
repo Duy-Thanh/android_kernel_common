@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d03b87c_bd0ab8ce",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-30T01:19:16Z",
+      "side": 1,
+      "message": "Sounds good. I will update with that.",
+      "parentUuid": "ebcbe712_be706c4e",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dae0515b_9b89ad08",
         "filename": "arch/x86/kvm/vmx/pkvm_high.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-29T20:30:34Z",
       "side": 1,
       "message": "nit: maybe add a comment like \"All other emulated MSRs are emulated directly by the pkvm hypervisor\"?",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72fb53a3_a50b3d0a",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-30T01:19:16Z",
+      "side": 1,
+      "message": "Sure, I will add a comment for that.",
+      "parentUuid": "dae0515b_9b89ad08",
       "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
