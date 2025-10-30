@@ -73,6 +73,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a5d8610_bce1c309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-30T18:21:44Z",
+      "side": 1,
+      "message": "You are correct that we\u0027d still need to cherry pick them. We prefer changes that have landed upstream because, in theory, at that point they have received more thorough review and testing. We have a history of FROMLIST and FROMGIT patches having to be reverted or causing issues because sometimes the final version is different from what was merged into android. This causes additional pain when supporting LTS merges and the like.\n\nIf there is a pressing reason to accept the FROMGIT, we can consider.",
+      "parentUuid": "3703628e_35f4a3bd",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5f9dec_872f1824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-30T18:21:44Z",
+      "side": 1,
+      "message": "I think the main concern here is that adding this tracepoint opens up the possibility for abuse because someone may want this exported for a hook. We want to limit the opportunity for such cases as it provides potential to escape from the upstream first workflow and can introduce inconsistencies between devices.",
+      "parentUuid": "ef396042_aacf8c50",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb492099_dc0da8ea",
         "filename": "drivers/usb/core/hub.c",
         "patchSetId": 2
