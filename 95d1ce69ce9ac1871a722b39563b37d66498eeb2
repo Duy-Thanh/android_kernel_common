@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b648199a_27a785f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-30T19:16:27Z",
+      "side": 1,
+      "message": "This looks ok to me, but we are often hesitant to include FROMLIST patches (preferring FROMGIT or UPSTREAM). But this looks like a reasonable fix, so pulling in @adelva@google.com and @dhavale@google.com to make sure I\u0027m not missing anything.",
+      "revId": "95d1ce69ce9ac1871a722b39563b37d66498eeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
