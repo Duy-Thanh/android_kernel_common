@@ -468,7 +468,7 @@
       "submitRequirement": {
         "name": "Review-Enforcement",
         "description": {
-          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval. Using a trusted device is required, see go/gerrit-onboarding#review-enforcement."
+          "value": "Two trusted contributors must approve the change. Uploading the change or voting positively on Code-Review count as approval. For Google employees, using a trusted device is required (http://go/gerrit-onboarding#review-enforcement). For non-Google employees,  ReAuth is required (https://chromium.googlesource.com/chromium/src/+/HEAD/docs/gerrit_reauth.md)."
         },
         "applicabilityExpression": {
           "value": {
