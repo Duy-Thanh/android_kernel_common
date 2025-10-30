@@ -34,6 +34,24 @@
       ],
       "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57bf3700_101c4aa5",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4755,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-30T13:56:21Z",
+      "side": 1,
+      "message": "just thought about the same, although it will only work with CONFIG_PKVM_INTEL_DEBUG - but still better than nothing",
+      "parentUuid": "a2a0a454_80781af5",
+      "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
