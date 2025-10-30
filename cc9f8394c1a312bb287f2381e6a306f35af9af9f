@@ -88,6 +88,24 @@
       "parentUuid": "85160783_52d11b81",
       "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66b415c_db270a41",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4755,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-30T14:11:30Z",
+      "side": 1,
+      "message": "The reason I thought it would be useful is because we own the VM code as well and it would be on us to fix the VMs if this happens. So, having an error in dmesg would be easier to identify the cause of VM crash and then fix it. As you mentioned error limiting would be good and it might not be worth when upstreaming as well.\n\nI\u0027m fine with leaving it as it is, if you feel its not worth it. Resolving",
+      "parentUuid": "85160783_52d11b81",
+      "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
