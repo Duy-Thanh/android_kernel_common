@@ -821,7 +821,31 @@ struct regmap *__regmap_init(struct device *dev,
 		map->read_flag_mask = bus->read_flag_mask;
 	}
 
+<<<<<<< HEAD   (cdb7045549fcd82f90eccd0453ed21d7f15a9372 Merge android11-5.4 into android11-5.4-lts)
 	if (!bus) {
+||||||| BASE   (86b57fd7c54e976bdcee78ead678932821a68e2d Linux 5.4.300)
+	if (config && config->read && config->write) {
+		map->reg_read  = _regmap_bus_read;
+
+		/* Bulk read/write */
+		map->read = config->read;
+		map->write = config->write;
+
+		reg_endian = REGMAP_ENDIAN_NATIVE;
+		val_endian = REGMAP_ENDIAN_NATIVE;
+	} else if (!bus) {
+=======
+	if (config->read && config->write) {
+		map->reg_read  = _regmap_bus_read;
+
+		/* Bulk read/write */
+		map->read = config->read;
+		map->write = config->write;
+
+		reg_endian = REGMAP_ENDIAN_NATIVE;
+		val_endian = REGMAP_ENDIAN_NATIVE;
+	} else if (!bus) {
+>>>>>>> BRANCH (2e58fc1413e9339d56fb7df491f45ecc698b161f Linux 5.4.301)
 		map->reg_read  = config->reg_read;
 		map->reg_write = config->reg_write;
 
