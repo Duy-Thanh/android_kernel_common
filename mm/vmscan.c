@@ -1134,6 +1134,7 @@ retry:
 		unsigned int nr_pages;
 		bool activate = false;
 		bool keep = false;
+		bool bypass = false;
 
 		cond_resched();
 
@@ -1479,8 +1480,10 @@ retry:
 				}
 				stat->nr_pageout += nr_pages;
 
-				if (folio_test_writeback(folio))
+				if (folio_test_writeback(folio)) {
+					trace_android_vh_handle_folio_writeback(folio, &bypass);
 					goto keep;
+				}
 				if (folio_test_dirty(folio))
 					goto keep;
 
@@ -1603,7 +1606,8 @@ keep_locked:
 		folio_unlock(folio);
 keep:
 		trace_android_vh_adjust_nr_reclaimed(folio, &nr_reclaimed);
-		list_add(&folio->lru, &ret_folios);
+		if (!bypass)
+			list_add(&folio->lru, &ret_folios);
 		VM_BUG_ON_FOLIO(folio_test_lru(folio) ||
 				folio_test_unevictable(folio), folio);
 	}
