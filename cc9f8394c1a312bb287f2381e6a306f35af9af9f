@@ -70,6 +70,24 @@
       "parentUuid": "a2a0a454_80781af5",
       "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e4f767_85f22be1",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4755,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-30T14:09:50Z",
+      "side": 1,
+      "message": "maybe adding `#define pkvm_warn_ratelimited pr_warn_ratelimited` to arch/x86/kvm/vmx/pkvm/hyp/debug.h and then using it?",
+      "parentUuid": "85160783_52d11b81",
+      "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
