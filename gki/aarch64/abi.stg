@@ -436092,6 +436092,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_handle_data_error"
 }
 elf_symbol {
+  id: 0xda69352c
+  name: "__traceiter_android_vh_handle_folio_writeback"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x729850bb
+  type_id: 0x9b2e0ad9
+  full_name: "__traceiter_android_vh_handle_folio_writeback"
+}
+elf_symbol {
   id: 0xa55779f1
   name: "__traceiter_android_vh_handle_get_b_info"
   is_defined: true
@@ -437332,6 +437341,15 @@ elf_symbol {
   crc: 0xe05e71fc
   type_id: 0x9bdaaaaa
   full_name: "__traceiter_android_vh_receive_sock"
+}
+elf_symbol {
+  id: 0x95816c0d
+  name: "__traceiter_android_vh_reclaim_before_kswapd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x56d2b29d
+  type_id: 0x9bb68fe1
+  full_name: "__traceiter_android_vh_reclaim_before_kswapd"
 }
 elf_symbol {
   id: 0x7d069e91
@@ -443238,6 +443256,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_handle_data_error"
 }
 elf_symbol {
+  id: 0x57e0f806
+  name: "__tracepoint_android_vh_handle_folio_writeback"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_handle_folio_writeback"
+}
+elf_symbol {
   id: 0x31a0c78b
   name: "__tracepoint_android_vh_handle_get_b_info"
   is_defined: true
@@ -444478,6 +444505,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_receive_sock"
+}
+elf_symbol {
+  id: 0xfeaae6bb
+  name: "__tracepoint_android_vh_reclaim_before_kswapd"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_reclaim_before_kswapd"
 }
 elf_symbol {
   id: 0x761f292f
@@ -516813,6 +516849,7 @@ interface {
   symbol_id: 0x67f3e1c2
   symbol_id: 0xc173a605
   symbol_id: 0x0419e95d
+  symbol_id: 0xda69352c
   symbol_id: 0xa55779f1
   symbol_id: 0x876a2a36
   symbol_id: 0x175cdae9
@@ -516951,6 +516988,7 @@ interface {
   symbol_id: 0x3a545b61
   symbol_id: 0xb6218fbe
   symbol_id: 0x7334b2d0
+  symbol_id: 0x95816c0d
   symbol_id: 0x7d069e91
   symbol_id: 0x0fa39b81
   symbol_id: 0x92518ec5
@@ -517607,6 +517645,7 @@ interface {
   symbol_id: 0xf8aea968
   symbol_id: 0xdaaa213f
   symbol_id: 0x3859d1c7
+  symbol_id: 0x57e0f806
   symbol_id: 0x31a0c78b
   symbol_id: 0x3661c37c
   symbol_id: 0x101d0b0b
@@ -517745,6 +517784,7 @@ interface {
   symbol_id: 0x811d5fab
   symbol_id: 0x53ff9924
   symbol_id: 0x1a12ee26
+  symbol_id: 0xfeaae6bb
   symbol_id: 0x761f292f
   symbol_id: 0xef7ad117
   symbol_id: 0x4568ff8f
