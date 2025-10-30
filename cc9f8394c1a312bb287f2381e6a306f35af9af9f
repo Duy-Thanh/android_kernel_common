@@ -106,6 +106,24 @@
       "parentUuid": "85160783_52d11b81",
       "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c8a9350_f6091665",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4755,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-30T16:19:55Z",
+      "side": 1,
+      "message": "What I meant by \"I doubt it would be very useful anyway\" is that a mere notice that a pVM has executed a string IO instruction wouldn\u0027t tell us _why_ it executed it. It wouldn\u0027t even tell the address where it executed it (unless we also dump `kvm_rip_read(vcpu)` or something; but then, why just in this case?). And I suppose that in practice in virtually all cases it\u0027s gonna execute it accidentally, not intentionally. [*]\n\nMeanwhile, we inject #GP into the pVM here anyway, so generally the pVM has a chance to handle it, i.e. dump its stack etc...\n\n[*] At least with our Linux pVMs deliberate execution of string IO shouldn\u0027t happen, since we set CC_ATTR_GUEST_UNROLL_STRING_IO. As for the infamous non-Linux one - well, dunno. :)",
+      "parentUuid": "f66b415c_db270a41",
+      "revId": "cc9f8394c1a312bb287f2381e6a306f35af9af9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
