@@ -16,6 +16,88 @@
       "message": "Wouldn\u0027t it be better to prevent the host from creating guests with the FFA capability enabled rather than defer the error to guest runtime?",
       "revId": "8d8af0a713b38546abe452e762a859f81146908b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc2ce228_30de2625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-31T12:48:04Z",
+      "side": 1,
+      "message": "I suppose the host is already enforcing that, so it\u0027s a bit of a weak argument. Lemme review the rest of the patch...",
+      "parentUuid": "3ce697ec_d5cfda4f",
+      "revId": "8d8af0a713b38546abe452e762a859f81146908b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2082bdb3_cc90ab2e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-31T12:48:04Z",
+      "side": 1,
+      "message": "This is now redundant",
+      "range": {
+        "startLine": 1516,
+        "startChar": 0,
+        "endLine": 1521,
+        "endChar": 0
+      },
+      "revId": "8d8af0a713b38546abe452e762a859f81146908b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf06d433_ba79a954",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-31T12:48:04Z",
+      "side": 1,
+      "message": "`FFA_RET_NOT_SUPPORTED` is better?",
+      "range": {
+        "startLine": 1727,
+        "startChar": 27,
+        "endLine": 1727,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "65558911_a9a8c37f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1727,
+                "startChar": 0,
+                "endLine": 1728,
+                "endChar": 0
+              },
+              "replacement": "\t\tffa_to_smccc_error(\u0026res, FFA_RET_NOT_SUPPORTED);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8d8af0a713b38546abe452e762a859f81146908b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
