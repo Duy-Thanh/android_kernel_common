@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d21197f_2e2f3b2f",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-31T06:46:39Z",
+      "side": 1,
+      "message": "I see. Maybe let\u0027s make it less ambiguous, e.g. replace \"which is guaranteed by the deprivilege code\" by \"which is guaranteed by pkvm_has_unmitigated_cpu_bugs() which doesn\u0027t currently mitigate L1TF and thus would fail pKVM initialization if L1TF was present\"? (and similarly for GDS below)",
+      "parentUuid": "d05c1cdb_0f330075",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f75e1b9_9c3f21b5",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 1
