@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d935a7_ac0b0afe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-10-31T18:01:07Z",
+      "side": 1,
+      "message": "This bug is completely unrelated to this CL. Can you please use the correct bug for this?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "5586c3a91827837980d98b6e3ebfc2541259ba70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de506db_9befa5f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-10-31T18:01:07Z",
+      "side": 1,
+      "message": "Please remove extraneous newline.",
+      "revId": "5586c3a91827837980d98b6e3ebfc2541259ba70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
