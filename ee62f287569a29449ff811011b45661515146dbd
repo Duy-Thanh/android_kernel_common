@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bcb004f_fa839d1d",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155d178c_2faaa0c3",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "016f8504_0e3dd674",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Ok, make sense.",
       "parentUuid": "016f8504_0e3dd674",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d53654_8b1ccb79",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2258cd3b_ffe8908f",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -178,6 +214,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8fa065_83c24c7d",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "889401f1_b9270956",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4900bc6_e8e4041a",
@@ -209,6 +263,24 @@
       "side": 1,
       "message": "Ok, I will try that.",
       "parentUuid": "b4900bc6_e8e4041a",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d804b7b_7eab3213",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done - although I still keep: #ifdef CONFIG_PKVM_INTEL. It could be avoided but on the other hand it will require keeping `struct kvm_protected_vcpu pkvm_vcpu;` unconditionally in kvm_vcpu_arch, which will result with having pkvm_memcache defined unconditionally +\n```\n+#else /* CONFIG_PKVM_INTEL */\n+static inline int topup_pkvm_memcache(struct pkvm_memcache *mc,                                                                                                                                                                               \n+                                     unsigned long min_pages) {return 0;};                                                                                                                                                                    \n+static inline void free_pkvm_memcache(struct pkvm_memcache *mc) {}; \n```\nin arch/x86/include/asm/kvm_host.h. IMO a bit cleaner is to keep as is (but not super strong opinion on that). Also `struct kvm_protected_vm pkvm;` is already gated by CONFIG_PKVM_INTEL in `struct kvm_arch` which is quite similar to this case.",
+      "parentUuid": "495087a1_8a34891b",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -266,6 +338,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72eb1dcd_8d355b03",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4814,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fbb230e_49cd3880",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb4c0256_269be34c",
@@ -315,6 +405,24 @@
       "side": 1,
       "message": "Ok",
       "parentUuid": "cb4c0256_269be34c",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e681c8_f9143480",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4862,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26cc2449_60275cbb",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -392,6 +500,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "447b504f_3b99c224",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4864,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7b20dca_9c8ce3d1",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7a5fe3f_6ffd2f8d",
@@ -423,6 +549,24 @@
       "side": 1,
       "message": "Yes, I think so - will improve.",
       "parentUuid": "a7a5fe3f_6ffd2f8d",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982988a7_0572bb32",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 4892,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ea8e9f_cdb96008",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -476,6 +620,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "0e3e7a7d_f814d67c",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4625f615_839a85e9",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82c8ac48_fb0e1eb8",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -565,6 +727,24 @@
       "side": 1,
       "message": "\u003e especially that this is about cleanup, not something super specific to MMU.\n\nIt is about MMU-specific cleanup (like drain_hyp_per_vm_pool(), and like pkvm_vm_mmu_destroy(), by the way). `stage2_mc` and `s2_teardown_mc` are used specifically for guest page table pages, not for anything else, as their names suggest, right?",
       "parentUuid": "ecf857b8_55785df9",
+      "revId": "ee62f287569a29449ff811011b45661515146dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f53cb00_410806d2",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T23:06:16Z",
+      "side": 1,
+      "message": "Done and renamed to pkvm_free_percpu_memcache",
+      "parentUuid": "81344590_b75b8b96",
       "revId": "ee62f287569a29449ff811011b45661515146dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
