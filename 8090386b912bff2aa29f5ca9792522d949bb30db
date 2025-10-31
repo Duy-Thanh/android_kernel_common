@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50b7e2e2_814f6e3b",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-31T19:50:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand the question here? If there is some required dependency needed for this patch to function, yes, it might make sense to cherry pick that as well. \n\nIf additional changes help this change cherry-pick cleanly (so it can be UPSTREAM instead of BACKPORT) that may be preferred, but it depends the number of changes and their complexity.",
+      "parentUuid": "df719c76_930efeaa",
+      "range": {
+        "startLine": 1823,
+        "startChar": 1,
+        "endLine": 1823,
+        "endChar": 6
+      },
+      "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df282fb0_e87b082d",
         "filename": "kernel/bpf/core.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-10-31T11:14:15Z",
       "side": 1,
       "message": "First， after executing \"git cherry-pick -x df0cb5cb50bd54d3cd4d0d83417ceec6a66404aa\",a CONFLICT was encountered here, which was the resolved.",
+      "range": {
+        "startLine": 1890,
+        "startChar": 0,
+        "endLine": 1890,
+        "endChar": 1
+      },
+      "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba256b4e_78f5bad1",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-31T19:50:53Z",
+      "side": 1,
+      "message": "Usually these notes go into the commit message above your signed-off-by line. Something like:\n\n```\n(cherry picked from commit df0cb5cb50bd54d3cd4d0d83417ceec6a66404aa)\nChange-Id: Ib0285ac8f866dbc58985f370182afd12cdb54dd6\n[xingyun.wang: Resolved minor cherry-pick collisions]\nSigned-off-by: xingyun.wang \u003cxingyun.wang@unisoc.com\u003e\"\n```\n\nObviously if it was a complicated collision, please provide more detail as to the change made. It doesn\u0027t need to be too verbose, but just something to give context to a reviewer in the future that it isn\u0027t quite the same as upstream.",
+      "parentUuid": "df282fb0_e87b082d",
       "range": {
         "startLine": 1890,
         "startChar": 0,
