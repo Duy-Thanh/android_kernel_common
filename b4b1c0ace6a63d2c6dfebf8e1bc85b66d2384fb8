@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2cca403_2929d564",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-31T01:22:26Z",
+      "side": 1,
+      "message": "Yeah, it is correct. 3) is the motivation. I will add this to commit message.",
+      "parentUuid": "bb7c9d41_0c43358f",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28ef853b_b184a959",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d05c1cdb_0f330075",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-31T01:22:26Z",
+      "side": 1,
+      "message": "Sure. In the last cpu vulnerability serial, we introduced `pkvm_has_unmitigated_cpu_bugs()` to make sure the CPU which can run the pKVM hypervisor only have the bugs which can be mitigated by the pKVM hypervisor, otherwise the deprivileging will be failed and the pKVM hypervisor will not run (`relax_cpu_bugs\u003d\u003dtrue` can still allow deprivileging and running the pKVM hypervisor, but enabling this also means we allow the pKVM hypervisor not mitigating certain CPU bugs, and this is for development not for production). The `possible_cpu_bugs[]` contains the bugs which may be mitigated by the pKVM hypervisor. And L1TF is not in the list, thus if the CPU has this bug, the deprivileging will be failed and the pKVM hypervisor will not run. That is what I intend to mean by \"guaranteed by the deprivilege code\".\n\nWith this mechanism, meanwhile considering L1TF is an old CPU bug which doesn\u0027t exist on the ADL/PTL CPU, the L1TF related code in the pKVM hypervisor can be removed (I plan to remove them in v6.18, if necessary, I can also remove them in v6.12) to simplify the pKVM hypervisor.",
+      "parentUuid": "28ef853b_b184a959",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f75e1b9_9c3f21b5",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-30T17:06:16Z",
       "side": 1,
       "message": "Same question: what this means exactly, and how exactly it guarantees that?",
+      "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212fe435_644d72c3",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-31T01:22:26Z",
+      "side": 1,
+      "message": "The same to the L1TF. This is guaranteed by `pkvm_has_unmitigated_cpu_bugs()`. If the CPU has bug GDS, the deprivileging will be failed and the pKVM hypervisor will not run. So if we are here, it means the CPU doesn\u0027t have GDS bug.",
+      "parentUuid": "1f75e1b9_9c3f21b5",
       "revId": "b4b1c0ace6a63d2c6dfebf8e1bc85b66d2384fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
