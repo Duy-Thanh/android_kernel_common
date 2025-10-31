@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03f7d7d_5c2e3827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4311178
+      },
+      "writtenOn": "2025-10-31T16:58:43Z",
+      "side": 1,
+      "message": "the difference is from this merged patch: https://android.googlesource.com/kernel/common/+/eea28470ffa390597884dfa75d8d9a3b15e14133, hence this is not an issue.",
+      "revId": "3c9f0141d4e5594fa3704fc85dce37a2014820e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
