@@ -16,6 +16,23 @@
       "message": "This one will be sent to uptream for review later, sending here just for temporary record.",
       "revId": "b904d71afb86e3b6e062d141f8b998c3b0ec780c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2169601f_915bd174",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2025-10-31T14:45:47Z",
+      "side": 1,
+      "message": "Just found the fix was submitted to upstream for review already here:\nhttps://www.spinics.net/lists/kernel/msg5903778.html",
+      "revId": "b904d71afb86e3b6e062d141f8b998c3b0ec780c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
