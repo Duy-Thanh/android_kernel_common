@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df719c76_930efeaa",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1823,
+      "author": {
+        "id": 3397250
+      },
+      "writtenOn": "2025-10-31T11:14:15Z",
+      "side": 1,
+      "message": "Secondly, based on the \"cherry-pick\" step, the macro control of the __bpf_prog_ret0_warn method has been removed, otherwise it would result in compilation errors.\n\nSo I would like to inquire if there are any other patches that need to be incorporated.",
+      "range": {
+        "startLine": 1823,
+        "startChar": 1,
+        "endLine": 1823,
+        "endChar": 6
+      },
+      "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df282fb0_e87b082d",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 3397250
+      },
+      "writtenOn": "2025-10-31T11:14:15Z",
+      "side": 1,
+      "message": "First， after executing \"git cherry-pick -x df0cb5cb50bd54d3cd4d0d83417ceec6a66404aa\",a CONFLICT was encountered here, which was the resolved.",
+      "range": {
+        "startLine": 1890,
+        "startChar": 0,
+        "endLine": 1890,
+        "endChar": 1
+      },
+      "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
