@@ -1915,18 +1915,31 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
 #ifdef CONFIG_ARM64_MTE
 static void cpu_enable_mte(struct arm64_cpu_capabilities const *cap)
 {
+<<<<<<< HEAD   (298dc7902435c8ca8ff46f30d8fcb0074a894cb6 Merge android12-5.10 into android12-5.10-lts)
 	sysreg_clear_set(sctlr_el1, 0, SCTLR_ELx_ATA | SCTLR_EL1_ATA0);
 
 	mte_cpu_setup();
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+=======
+	static bool cleared_zero_page = false;
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 
 	/*
 	 * Clear the tags in the zero page. This needs to be done via the
-	 * linear map which has the Tagged attribute.
+	 * linear map which has the Tagged attribute. Since this page is
+	 * always mapped as pte_special(), set_pte_at() will not attempt to
+	 * clear the tags or set PG_mte_tagged.
 	 */
-	if (!test_and_set_bit(PG_mte_tagged, &ZERO_PAGE(0)->flags))
+	if (!cleared_zero_page) {
+		cleared_zero_page = true;
 		mte_clear_page_tags(lm_alias(empty_zero_page));
+<<<<<<< HEAD   (298dc7902435c8ca8ff46f30d8fcb0074a894cb6 Merge android12-5.10 into android12-5.10-lts)
 
 	kasan_init_hw_tags_cpu();
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+=======
+	}
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 }
 #endif /* CONFIG_ARM64_MTE */
 

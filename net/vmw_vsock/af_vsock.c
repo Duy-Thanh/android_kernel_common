@@ -452,10 +452,38 @@ int vsock_assign_transport(struct vsock_sock *vsk, struct vsock_sock *psk)
 		return -ESOCKTNOSUPPORT;
 	}
 
+<<<<<<< HEAD   (298dc7902435c8ca8ff46f30d8fcb0074a894cb6 Merge android12-5.10 into android12-5.10-lts)
 	if (vsk->transport) {
 		if (vsk->transport == new_transport)
 			return 0;
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+	if (vsk->transport) {
+		if (vsk->transport == new_transport) {
+			ret = 0;
+			goto err;
+		}
+=======
+	if (vsk->transport && vsk->transport == new_transport) {
+		ret = 0;
+		goto err;
+	}
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 
+	/* We increase the module refcnt to prevent the transport unloading
+	 * while there are open sockets assigned to it.
+	 */
+	if (!new_transport || !try_module_get(new_transport->module)) {
+		ret = -ENODEV;
+		goto err;
+	}
+
+	/* It's safe to release the mutex after a successful try_module_get().
+	 * Whichever transport `new_transport` points at, it won't go away until
+	 * the last module_put() below or in vsock_deassign_transport().
+	 */
+	mutex_unlock(&vsock_register_mutex);
+
+	if (vsk->transport) {
 		/* transport->release() must be called with sock lock acquired.
 		 * This path can only be taken during vsock_stream_connect(),
 		 * where we have already held the sock lock.
@@ -475,12 +503,30 @@ int vsock_assign_transport(struct vsock_sock *vsk, struct vsock_sock *psk)
 		vsk->peer_shutdown = 0;
 	}
 
+<<<<<<< HEAD   (298dc7902435c8ca8ff46f30d8fcb0074a894cb6 Merge android12-5.10 into android12-5.10-lts)
 	/* We increase the module refcnt to prevent the transport unloading
 	 * while there are open sockets assigned to it.
 	 */
 	if (!new_transport || !try_module_get(new_transport->module))
 		return -ENODEV;
 
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+	/* We increase the module refcnt to prevent the transport unloading
+	 * while there are open sockets assigned to it.
+	 */
+	if (!new_transport || !try_module_get(new_transport->module)) {
+		ret = -ENODEV;
+		goto err;
+	}
+
+	/* It's safe to release the mutex after a successful try_module_get().
+	 * Whichever transport `new_transport` points at, it won't go away until
+	 * the last module_put() below or in vsock_deassign_transport().
+	 */
+	mutex_unlock(&vsock_register_mutex);
+
+=======
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 	ret = new_transport->init(vsk, psk);
 	if (ret) {
 		module_put(new_transport->module);

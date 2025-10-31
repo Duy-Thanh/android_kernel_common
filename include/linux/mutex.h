@@ -19,7 +19,12 @@
 #include <asm/processor.h>
 #include <linux/osq_lock.h>
 #include <linux/debug_locks.h>
+<<<<<<< HEAD   (298dc7902435c8ca8ff46f30d8fcb0074a894cb6 Merge android12-5.10 into android12-5.10-lts)
 #include <linux/android_vendor.h>
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+=======
+#include <linux/cleanup.h>
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 
 struct ww_acquire_ctx;
 
@@ -225,5 +230,8 @@ enum mutex_trylock_recursive_enum {
  */
 extern /* __deprecated */ __must_check enum mutex_trylock_recursive_enum
 mutex_trylock_recursive(struct mutex *lock);
+
+DEFINE_GUARD(mutex, struct mutex *, mutex_lock(_T), mutex_unlock(_T))
+DEFINE_FREE(mutex, struct mutex *, if (_T) mutex_unlock(_T))
 
 #endif /* __LINUX_MUTEX_H */
