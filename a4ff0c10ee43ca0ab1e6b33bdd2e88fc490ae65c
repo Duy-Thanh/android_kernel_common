@@ -16,6 +16,23 @@
       "message": "Please wait for -rc2 to merge in, which will include this patch",
       "revId": "a4ff0c10ee43ca0ab1e6b33bdd2e88fc490ae65c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748d8434_ac66c924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-31T16:26:27Z",
+      "side": 1,
+      "message": "We don\u0027t accept UPSTREAM patches into android-mainline. You must wait for it to merge from upstream.",
+      "revId": "a4ff0c10ee43ca0ab1e6b33bdd2e88fc490ae65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
