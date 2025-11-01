@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0f1273_bea61737",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-01T07:31:52Z",
+      "side": 1,
+      "message": "Comment for myself: we should rather return the error of pkvm_pgtable_init and let pkvm_vm_mmu_destroy destroy the pool correctly (now, in case of error, the page is donated back to the host but still in the pool).\n\nWill change it to:\nreturn ret;",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 10
+      },
+      "revId": "6175beba8a1cc99b89795a4f4498681835b9a6ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
