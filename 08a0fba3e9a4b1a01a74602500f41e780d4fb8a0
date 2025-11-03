@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a18d70_b6dc3208",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T18:14:06Z",
+      "side": 1,
+      "message": "Seems better to name it pkvm_free_mmu_memcache() (in particular, similarly to pkvm_refill_mmu_memcache())?",
+      "fixSuggestions": [
+        {
+          "fixId": "542ee3bd_8f8bc2c2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 357,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": "void pkvm_free_mmu_memcache(struct kvm_vcpu *vcpu, struct pkvm_memcache *teardown_mc)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "08a0fba3e9a4b1a01a74602500f41e780d4fb8a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
