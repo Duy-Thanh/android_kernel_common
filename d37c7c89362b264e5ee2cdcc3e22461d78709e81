@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20a69c8_e6d5dbf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-03T22:06:39Z",
+      "side": 1,
+      "message": "Just for clarification, this is fixing https://r.android.com/3720190 which dropped the line being added here.",
+      "revId": "d37c7c89362b264e5ee2cdcc3e22461d78709e81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cdef80d_78a31d2e",
