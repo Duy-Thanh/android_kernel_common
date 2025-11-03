@@ -107,6 +107,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ca070aa_5b84428d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954065
+      },
+      "writtenOn": "2025-11-03T10:31:52Z",
+      "side": 1,
+      "message": "@nkapron@google.com\n\nThanks for the explanation.\n\nThere is no pressing reason for these, and I understand the history of FROMGIT patches causing issues and extra work down the line. \n\nI will wait for these to land upstream first. I\u0027ll abandon these CLs for now.",
+      "parentUuid": "7a5d8610_bce1c309",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4aa8fb8_9ce64943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954065
+      },
+      "writtenOn": "2025-11-03T10:31:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a5f9dec_872f1824",
+      "revId": "ac5ac498aa1142b25651f2212f27fe092c1a6189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb492099_dc0da8ea",
