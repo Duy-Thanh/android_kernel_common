@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cdef80d_78a31d2e",
+        "filename": "drivers/cpufreq/scmi-cpufreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-03T22:05:03Z",
+      "side": 1,
+      "message": "Ah, I missed this was removed in the earlier patch. Definitely should have caught that. Thanks for finding this issue!",
+      "revId": "d37c7c89362b264e5ee2cdcc3e22461d78709e81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
