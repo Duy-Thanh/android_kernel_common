@@ -70,6 +70,30 @@
       },
       "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ea8ba7_7e27db30",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5136,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T12:02:49Z",
+      "side": 1,
+      "message": "\u003e even with mentioned patch it says that rsi will be input operand so compiler expects it will be read only [...]\n\nOk, yeah, makes sense. (BTW I recall a similar issue observed in the past in real life: aosp/3485324)\n\nRegarding this (independently of the memcache patches):\n\n\u003e other pVMs basing on other kernel may not have this hypercall implemented similar way as aosp/3692553\n\nThis means those pVMs need to be updated to do it similarly to aosp/3692553. The security issue addressed by aosp/3692553 is not specific to Linux guests.\n\nUnless we implement a fine-grained logic in pKVM to decide which registers for which hypercalls to share with the host, which would be more complicated, not scalable, and error-prone.",
+      "parentUuid": "978e11fc_4a98ecfa",
+      "range": {
+        "startLine": 5134,
+        "startChar": 0,
+        "endLine": 5136,
+        "endChar": 40
+      },
+      "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
