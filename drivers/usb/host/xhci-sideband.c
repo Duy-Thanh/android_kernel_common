@@ -184,7 +184,7 @@ xhci_sideband_remove_endpoint(struct xhci_sideband *sb,
 	ep_index = xhci_get_endpoint_index(&host_ep->desc);
 	ep = sb->eps[ep_index];
 
-	if (!ep || !ep->sideband || ep->sideband != sb) {
+	if (!ep || !ep->sideband || !ep->ring || ep->sideband != sb) {
 		mutex_unlock(&sb->mutex);
 		return -ENODEV;
 	}
