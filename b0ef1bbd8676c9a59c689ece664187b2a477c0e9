@@ -34,6 +34,24 @@
       "parentUuid": "a14c563b_a92c615d",
       "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce023c2_60e1e6cd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-03T15:00:45Z",
+      "side": 1,
+      "message": "\u003e And then we can just use the sm_supported() helper as is in the pKVM hypervisor code, without the needed to define pKVM\u0027s version of it (and BTW without the need to modify the original code of those iommu_calculate_*agaw() functions).\n\nAhh ok. I was following the iommu_coherent flag in pkvm_hyp and used the same logic to add these flags. I have changed the implementation as per your suggestion.\n\n\u003e Also a note about this entire series, not just this patch: I see there is still a bunch of places with raw ecap_smts() checks (including even new code in pv_iommu.c, e.g. in pkvm_iommu_enable()). I assume we should convert them to use (pkvm_)sm_supported() instead?\n\nThanks for noting this. I have replaced all occurrences of ecap_smts with sm_supported",
+      "parentUuid": "5467d037_104db54f",
+      "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
