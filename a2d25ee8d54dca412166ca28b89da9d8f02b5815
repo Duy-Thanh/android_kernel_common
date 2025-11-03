@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a592d5_e8c76e49",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T14:11:58Z",
+      "side": 1,
+      "message": "nit: Might be better to name it pkvm_vcpu_handle for consistency with kvm_protected_vm-\u003epkvm_vm_handle? OTOH it might be indeed redundant, i.e. might be better to name both just `handle`. But OTOH, it makes the names self-descriptive, in particular no need for the above comment then?",
+      "fixSuggestions": [
+        {
+          "fixId": "a74baf07_69208858",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 800,
+                "startChar": 0,
+                "endLine": 805,
+                "endChar": 0
+              },
+              "replacement": "\tint pkvm_vcpu_handle;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a2d25ee8d54dca412166ca28b89da9d8f02b5815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eedbf4a3_1948b3bf",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T14:11:58Z",
+      "side": 1,
+      "message": "nit: `/* CONFIG_PKVM_INTEL */` seems like an overkill in this case.",
+      "fixSuggestions": [
+        {
+          "fixId": "52dfa50f_c26ceb41",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 1114,
+                "startChar": 0,
+                "endLine": 1115,
+                "endChar": 0
+              },
+              "replacement": "#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a2d25ee8d54dca412166ca28b89da9d8f02b5815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
