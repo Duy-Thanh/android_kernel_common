@@ -22,6 +22,30 @@
       },
       "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf21a38_06713101",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5136,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T10:43:55Z",
+      "side": 1,
+      "message": "Good catch. But actually, luckily for pVMs kvm_hypercall2() is implemented via kvm_hypercall4(), since Chuanxiao\u0027s security fix aosp/3692553, which means that RSI is actually clobbered anyway, right? And PKVM_GHC_SHARE_MEM is for pVM only, not for npVM.\n\nSo looks like no issue here, perhaps just worth adding a comment explaining why it is ok to overwrite guest\u0027s RSI here?",
+      "parentUuid": "d3a45070_3987afb4",
+      "range": {
+        "startLine": 5134,
+        "startChar": 0,
+        "endLine": 5136,
+        "endChar": 40
+      },
+      "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
