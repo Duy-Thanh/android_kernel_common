@@ -16,6 +16,24 @@
       "message": "Upstream first?",
       "revId": "b696261dbf8a4b298226981a96af8587dc5f5558",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f51aa9_206e5312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-11-03T20:21:56Z",
+      "side": 1,
+      "message": "As per our offline conversation, this is for internal use.\n\nThe module to allocate memory from any node, zone and migrate type will be upstreamed instead b/456788322.",
+      "parentUuid": "a33fc50e_81bab08e",
+      "revId": "b696261dbf8a4b298226981a96af8587dc5f5558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
