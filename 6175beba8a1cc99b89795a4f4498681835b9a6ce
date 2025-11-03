@@ -46,6 +46,30 @@
       },
       "revId": "6175beba8a1cc99b89795a4f4498681835b9a6ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cff48a_dcebd3d1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T14:28:33Z",
+      "side": 1,
+      "message": "But pkvm_vm_mmu_destroy() is not called if pkvm_vm_mmu_init() returns an error?",
+      "parentUuid": "18a187c6_00e8320f",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 10
+      },
+      "revId": "6175beba8a1cc99b89795a4f4498681835b9a6ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
