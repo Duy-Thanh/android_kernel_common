@@ -413437,6 +413437,15 @@ function {
   parameter_id: 0x2170d06d
 }
 function {
+  id: 0x9b90fbd2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0d164218
+  parameter_id: 0x2e64265f
+  parameter_id: 0x2170d06d
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9b91093a
   return_type_id: 0x6720d32f
   parameter_id: 0x1847a854
@@ -438101,6 +438110,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mark_inode_dirty"
 }
 elf_symbol {
+  id: 0xbd6577df
+  name: "__traceiter_android_vh_may_unmap_folio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4991d9bb
+  type_id: 0x9b90fbd2
+  full_name: "__traceiter_android_vh_may_unmap_folio"
+}
+elf_symbol {
   id: 0x1bfed9f9
   name: "__traceiter_android_vh_mem_cgroup_alloc"
   is_defined: true
@@ -445245,6 +445263,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_mark_inode_dirty"
+}
+elf_symbol {
+  id: 0xe6244e21
+  name: "__tracepoint_android_vh_may_unmap_folio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_may_unmap_folio"
 }
 elf_symbol {
   id: 0x6377ba8b
@@ -518935,6 +518962,7 @@ interface {
   symbol_id: 0x61ea12b8
   symbol_id: 0xe0099970
   symbol_id: 0xdea07d28
+  symbol_id: 0xbd6577df
   symbol_id: 0x1bfed9f9
   symbol_id: 0x44892f77
   symbol_id: 0x27757c9a
@@ -519729,6 +519757,7 @@ interface {
   symbol_id: 0x00a5fe5e
   symbol_id: 0x2bd3fbd2
   symbol_id: 0x03845c7a
+  symbol_id: 0xe6244e21
   symbol_id: 0x6377ba8b
   symbol_id: 0x013b5969
   symbol_id: 0xe160b6f0
