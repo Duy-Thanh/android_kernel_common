@@ -405,6 +405,8 @@ int fscrypt_init_hkdf(struct fscrypt_hkdf *hkdf, const u8 *master_key,
 #define HKDF_CONTEXT_DIRHASH_KEY	5 /* info=file_nonce		*/
 #define HKDF_CONTEXT_IV_INO_LBLK_32_KEY	6 /* info=mode_num||fs_uuid	*/
 #define HKDF_CONTEXT_INODE_HASH_KEY	7 /* info=<empty>		*/
+#define HKDF_CONTEXT_KEY_IDENTIFIER_FOR_HW_WRAPPED_KEY \
+					8 /* info=<empty>		*/
 
 int fscrypt_hkdf_expand(const struct fscrypt_hkdf *hkdf, u8 context,
 			const u8 *info, unsigned int infolen,
@@ -527,6 +529,9 @@ struct fscrypt_master_key_secret {
 	 * doesn't support newer functionality such as hardware-wrapped keys.
 	 */
 	bool			is_hw_wrapped;
+
+	/* True if this key was added using __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED */
+	bool			android_compat;
 
 	/*
 	 * Size of the raw key in bytes.  This remains set even if ->raw was

@@ -575,6 +575,15 @@ static int add_master_key(struct super_block *sb,
 				return err;
 			kdf_key = sw_secret;
 			kdf_key_size = sizeof(sw_secret);
+			/*
+			 * To avoid weird behavior if someone manages to
+			 * determine sw_secret and add it as a raw key, ensure
+			 * that hardware-wrapped keys and raw keys will have
+			 * different key identifiers by deriving their key
+			 * identifiers using different KDF contexts.
+			 */
+			if (!secret->android_compat)
+				keyid_kdf_ctx = HKDF_CONTEXT_KEY_IDENTIFIER_FOR_HW_WRAPPED_KEY;
 		}
 		err = fscrypt_init_hkdf(&secret->hkdf, kdf_key, kdf_key_size);
 		/*
@@ -595,19 +604,36 @@ static int add_master_key(struct super_block *sb,
 	return do_add_master_key(sb, secret, key_spec);
 }
 
+/*
+ * Validate the size of an fscrypt master key being added.  Note that this is
+ * just an initial check, as we don't know which ciphers will be used yet.
+ * There is a stricter size check later when the key is actually used by a file.
+ */
+static inline bool fscrypt_valid_key_size(size_t size, u32 add_key_flags)
+{
+	u32 max_size = (add_key_flags & FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED) ?
+		       FSCRYPT_MAX_HW_WRAPPED_KEY_SIZE :
+		       FSCRYPT_MAX_STANDARD_KEY_SIZE;
+
+	return size >= FSCRYPT_MIN_KEY_SIZE && size <= max_size;
+}
+
 static int fscrypt_provisioning_key_preparse(struct key_preparsed_payload *prep)
 {
 	const struct fscrypt_provisioning_key_payload *payload = prep->data;
 
-	if (prep->datalen < sizeof(*payload) + FSCRYPT_MIN_KEY_SIZE ||
-	    prep->datalen > sizeof(*payload) + FSCRYPT_MAX_ANY_KEY_SIZE)
+	if (prep->datalen < sizeof(*payload))
+		return -EINVAL;
+
+	if (!fscrypt_valid_key_size(prep->datalen - sizeof(*payload),
+				    payload->flags))
 		return -EINVAL;
 
 	if (payload->type != FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR &&
 	    payload->type != FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER)
 		return -EINVAL;
 
-	if (payload->__reserved)
+	if (payload->flags & ~FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED)
 		return -EINVAL;
 
 	prep->payload.data[0] = kmemdup(payload, prep->datalen, GFP_KERNEL);
@@ -654,18 +680,18 @@ static struct key_type key_type_fscrypt_provisioning = {
  * Retrieve the raw key from the Linux keyring key specified by 'key_id', and
  * store it into 'secret'.
  *
- * The key must be of type "fscrypt-provisioning" and must have the field
- * fscrypt_provisioning_key_payload::type set to 'type', indicating that it's
- * only usable with fscrypt with the particular KDF version identified by
- * 'type'.  We don't use the "logon" key type because there's no way to
- * completely restrict the use of such keys; they can be used by any kernel API
- * that accepts "logon" keys and doesn't require a specific service prefix.
+ * The key must be of type "fscrypt-provisioning" and must have the 'type' and
+ * 'flags' field of the payload set to the given values, indicating that the key
+ * is intended for use for the specified purpose.  We don't use the "logon" key
+ * type because there's no way to completely restrict the use of such keys; they
+ * can be used by any kernel API that accepts "logon" keys and doesn't require a
+ * specific service prefix.
  *
  * The ability to specify the key via Linux keyring key is intended for cases
  * where userspace needs to re-add keys after the filesystem is unmounted and
  * re-mounted.  Most users should just provide the raw key directly instead.
  */
-static int get_keyring_key(u32 key_id, u32 type,
+static int get_keyring_key(u32 key_id, u32 type, u32 flags,
 			   struct fscrypt_master_key_secret *secret)
 {
 	key_ref_t ref;
@@ -682,8 +708,12 @@ static int get_keyring_key(u32 key_id, u32 type,
 		goto bad_key;
 	payload = key->payload.data[0];
 
-	/* Don't allow fscrypt v1 keys to be used as v2 keys and vice versa. */
-	if (payload->type != type)
+	/*
+	 * Don't allow fscrypt v1 keys to be used as v2 keys and vice versa.
+	 * Similarly, don't allow hardware-wrapped keys to be used as
+	 * non-hardware-wrapped keys and vice versa.
+	 */
+	if (payload->type != type || payload->flags != flags)
 		goto bad_key;
 
 	secret->size = key->datalen - sizeof(*payload);
@@ -751,7 +781,17 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 	memset(&secret, 0, sizeof(secret));
 
 	if (arg.__flags) {
+		/* Support for the original Android flag */
 		if (arg.__flags & ~__FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED)
+			return -EINVAL; /* unknown flags */
+		if (arg.flags & FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED)
+			return -EINVAL; /* conflicting flags */
+		arg.flags |= FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED;
+		secret.android_compat = true;
+	}
+
+	if (arg.flags) {
+		if (arg.flags & ~FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED)
 			return -EINVAL;
 		if (arg.key_spec.type != FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER)
 			return -EINVAL;
@@ -761,18 +801,12 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 	if (arg.key_id) {
 		if (arg.raw_size != 0)
 			return -EINVAL;
-		err = get_keyring_key(arg.key_id, arg.key_spec.type, &secret);
+		err = get_keyring_key(arg.key_id, arg.key_spec.type, arg.flags,
+				      &secret);
 		if (err)
 			goto out_wipe_secret;
-		err = -EINVAL;
-		if (secret.size > FSCRYPT_MAX_STANDARD_KEY_SIZE &&
-		    !secret.is_hw_wrapped)
-			goto out_wipe_secret;
 	} else {
-		if (arg.raw_size < FSCRYPT_MIN_KEY_SIZE ||
-		    arg.raw_size > (secret.is_hw_wrapped ?
-				    FSCRYPT_MAX_HW_WRAPPED_KEY_SIZE :
-				    FSCRYPT_MAX_STANDARD_KEY_SIZE))
+		if (!fscrypt_valid_key_size(arg.raw_size, arg.flags))
 			return -EINVAL;
 		secret.size = arg.raw_size;
 		err = -EFAULT;
