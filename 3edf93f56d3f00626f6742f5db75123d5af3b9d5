@@ -94,6 +94,30 @@
       },
       "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d874a35d_d7dace73",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 5136,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-04T17:43:41Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve fixed the issue with rsi usage and introduced aosp/3836854 - marking as resolved.\n\nRegarding \n\u003e This means those pVMs need to be updated to do it similarly to aosp/3692553. The security issue addressed by aosp/3692553 is not specific to Linux guests.\n\nyeah I agree - I will take a look on addressing it but as you mentioned it is not related to this patchset and is not related to Linux guest.",
+      "parentUuid": "58ea8ba7_7e27db30",
+      "range": {
+        "startLine": 5134,
+        "startChar": 0,
+        "endLine": 5136,
+        "endChar": 40
+      },
+      "revId": "3edf93f56d3f00626f6742f5db75123d5af3b9d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
