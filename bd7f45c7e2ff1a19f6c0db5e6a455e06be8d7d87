@@ -16,6 +16,24 @@
       "message": "nit: I deliberately suggested \"All other _emulated_ MSRs\", not just \"All other MSRs\" :) Some MSRs are still passed-through to the guest, not emulated by either host or pKVM, right?",
       "revId": "bd7f45c7e2ff1a19f6c0db5e6a455e06be8d7d87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dcfa366_cec90309",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-04T00:26:51Z",
+      "side": 1,
+      "message": "Yeah, makes sense. Will fix this.",
+      "parentUuid": "b0cd1c23_ecbbe681",
+      "revId": "bd7f45c7e2ff1a19f6c0db5e6a455e06be8d7d87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
