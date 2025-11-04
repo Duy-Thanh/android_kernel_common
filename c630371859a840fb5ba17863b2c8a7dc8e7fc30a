@@ -46,6 +46,30 @@
       },
       "revId": "c630371859a840fb5ba17863b2c8a7dc8e7fc30a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9edde13b_b35967af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-04T19:56:29Z",
+      "side": 1,
+      "message": "here: https://android.git.corp.google.com/kernel/common/+/refs/heads/android-mainline/arch/arm64/configs/gki_defconfig#309",
+      "parentUuid": "0bf5a534_8bdcb40b",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "c630371859a840fb5ba17863b2c8a7dc8e7fc30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
