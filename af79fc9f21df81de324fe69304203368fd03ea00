@@ -16,6 +16,24 @@
       "message": "Do we really want to drop this line here?",
       "revId": "af79fc9f21df81de324fe69304203368fd03ea00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b107190_938957b2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3304,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-11-04T22:10:15Z",
+      "side": 0,
+      "message": "i believe so! we set transaction priority later down (it\u0027s different than upstream)",
+      "parentUuid": "1b7ec983_685d6df7",
+      "revId": "af79fc9f21df81de324fe69304203368fd03ea00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
