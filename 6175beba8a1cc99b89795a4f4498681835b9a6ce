@@ -70,6 +70,30 @@
       },
       "revId": "6175beba8a1cc99b89795a4f4498681835b9a6ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6fa186_3b88c208",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-04T17:46:40Z",
+      "side": 1,
+      "message": "\u003e But pkvm_vm_mmu_destroy() is not called if pkvm_vm_mmu_init() returns an error?\n\nright - I\u0027ve looked on wrong goto label and it will not make sense to call pkvm_vm_mmu_destroy in case of error.. sorry for that.\n\nIn general I think I\u0027ve gotten lost in the weeds and actually\n\n```\n\tif (ret)\n\t\tgoto undonate;\n\n\treturn 0;\n```\n\nis correct, since the VM and therefore the pool will not be used in case of pkvm_pgtable_init error and then host will free this page anyway thanks to pkvm_vm_init\u0027s (which needs to be fixed BTW):\n```\n+++ b/arch/x86/kvm/vmx/pkvm_high.c\n@@ -802,6 +802,7 @@ static int pkvm_vm_init(struct kvm *kvm)\n \n free_pgtable_pages:\n        kvm_account_pgtable_pages(vm_init_pool, -1);\n+       free_pages((unsigned long)vm_init_pool, 0);\n```\nwhich I\u0027ve fix now so here only undonate is needed. Did I miss something?",
+      "parentUuid": "86cff48a_dcebd3d1",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 10
+      },
+      "revId": "6175beba8a1cc99b89795a4f4498681835b9a6ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
