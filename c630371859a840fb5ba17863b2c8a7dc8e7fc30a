@@ -22,6 +22,30 @@
       },
       "revId": "c630371859a840fb5ba17863b2c8a7dc8e7fc30a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf5a534_8bdcb40b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-04T19:55:23Z",
+      "side": 1,
+      "message": "Yes, is in the gki_defconfig IIRC.",
+      "parentUuid": "e75d4451_9198ae89",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "c630371859a840fb5ba17863b2c8a7dc8e7fc30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
