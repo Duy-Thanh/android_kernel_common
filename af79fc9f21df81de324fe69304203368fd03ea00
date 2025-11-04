@@ -34,6 +34,24 @@
       "parentUuid": "1b7ec983_685d6df7",
       "revId": "af79fc9f21df81de324fe69304203368fd03ea00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb6ab72a_847b46f0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3304,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-04T22:15:10Z",
+      "side": 0,
+      "message": "Correct, this can\u0027t be set early as we might need the `target-\u003edefault_priority`. Something that doesn\u0027t exist upstream. 😞",
+      "parentUuid": "6b107190_938957b2",
+      "revId": "af79fc9f21df81de324fe69304203368fd03ea00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
