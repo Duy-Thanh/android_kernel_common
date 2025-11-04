@@ -34,6 +34,23 @@
       "parentUuid": "a33fc50e_81bab08e",
       "revId": "b696261dbf8a4b298226981a96af8587dc5f5558",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f1ee74_a0c87d03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-11-04T00:07:31Z",
+      "side": 1,
+      "message": "LGTM since only on experimental branch",
+      "revId": "b696261dbf8a4b298226981a96af8587dc5f5558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
