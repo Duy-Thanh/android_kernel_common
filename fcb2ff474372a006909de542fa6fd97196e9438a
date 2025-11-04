@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946a8efd_6846852d",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2672,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-04T17:50:37Z",
+      "side": 1,
+      "message": "can err be \u003e 1 at this point? It looks like this changed the behavior of the function even if no handler is attached to the hook. Make this `if (err \u003c 0)`",
+      "fixSuggestions": [
+        {
+          "fixId": "bfb8739e_37b83a45",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/core/hub.c",
+              "range": {
+                "startLine": 2672,
+                "startChar": 0,
+                "endLine": 2673,
+                "endChar": 0
+              },
+              "replacement": "\tif (err \u003c 0)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fcb2ff474372a006909de542fa6fd97196e9438a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
