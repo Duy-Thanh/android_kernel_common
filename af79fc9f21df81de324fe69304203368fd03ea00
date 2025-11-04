@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7ec983_685d6df7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3304,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-04T22:08:15Z",
+      "side": 0,
+      "message": "Do we really want to drop this line here?",
+      "revId": "af79fc9f21df81de324fe69304203368fd03ea00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
