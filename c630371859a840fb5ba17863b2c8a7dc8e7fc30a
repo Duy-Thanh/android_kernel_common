@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75d4451_9198ae89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-11-04T19:52:42Z",
+      "side": 1,
+      "message": "Does that mean PCIE_QCOM is built-in to GKI?",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "c630371859a840fb5ba17863b2c8a7dc8e7fc30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
