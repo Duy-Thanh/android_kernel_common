@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3925decf_58a8a1e9",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-04T17:47:39Z",
+      "side": 1,
+      "message": "Yeah, see how nice it looks when we use it:\n```\n-       vcpu-\u003earch.pkvm_vcpu_handle \u003d ret;                                                                                                                                                                                                                                                                                     \n+       vcpu-\u003earch.pkvm_vcpu.handle \u003d ret;  \n```\n😊 \nIMO it is better keep as is now.\n\nand regarding the comment I think it is worth keeping it; also it is not new one just moved after code rearrangement.",
+      "parentUuid": "d8a592d5_e8c76e49",
+      "revId": "a2d25ee8d54dca412166ca28b89da9d8f02b5815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eedbf4a3_1948b3bf",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 1
@@ -67,6 +85,24 @@
           ]
         }
       ],
+      "revId": "a2d25ee8d54dca412166ca28b89da9d8f02b5815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1763a720_ba894063",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-04T17:47:39Z",
+      "side": 1,
+      "message": ":D",
+      "parentUuid": "eedbf4a3_1948b3bf",
       "revId": "a2d25ee8d54dca412166ca28b89da9d8f02b5815",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
