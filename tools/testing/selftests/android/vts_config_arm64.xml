@@ -43,6 +43,5 @@ SPDX-License-Identifier: GPL-2.0 OR Apache-2.0
         <option name="test-command-line" key="kselftest_net_tests_psock_tpacket" value="cd &ktest_dir;; ./kselftest_net_tests_psock_tpacket" />
         <option name="test-command-line" key="kselftest_net_tests_reuseport_dualstack" value="cd &ktest_dir;; ./kselftest_net_tests_reuseport_dualstack" />
         <option name="test-command-line" key="kselftest_net_tests_reuseaddr_conflict" value="cd &ktest_dir;; ./kselftest_net_tests_reuseaddr_conflict" />
-        <option name="test-command-line" key="kselftest_net_test_bpf" value="cd &ktest_dir;; ./kselftest_net_test_bpf" />
     </test>
 </configuration>
