@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df045c0_1daccd95",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T14:38:30Z",
+      "side": 1,
+      "message": "nit: s/s// (it is just one page)?",
+      "fixSuggestions": [
+        {
+          "fixId": "fd9fa3cb_6b364386",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 785,
+                "startChar": 0,
+                "endLine": 786,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto free_pkvm_vm;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 794,
+                "startChar": 0,
+                "endLine": 795,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto free_vm_init_pool;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 803,
+                "startChar": 0,
+                "endLine": 804,
+                "endChar": 0
+              },
+              "replacement": "free_vm_init_pool:\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 806,
+                "startChar": 0,
+                "endLine": 807,
+                "endChar": 0
+              },
+              "replacement": "free_pkvm_vm:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "414696216643f1dd56bf65580c0d72591333ced9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
