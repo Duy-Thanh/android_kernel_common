@@ -40,6 +40,30 @@
       ],
       "revId": "a06d6abb4983754f1a66c331790b4a04a8e56c2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ce375f_eb664c9f",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T12:45:39Z",
+      "side": 1,
+      "message": "Yeah, right.",
+      "parentUuid": "d8077fcf_4b9df575",
+      "range": {
+        "startLine": 191,
+        "startChar": 19,
+        "endLine": 191,
+        "endChar": 23
+      },
+      "revId": "a06d6abb4983754f1a66c331790b4a04a8e56c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
