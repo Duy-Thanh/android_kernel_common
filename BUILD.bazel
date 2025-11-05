@@ -31,7 +31,7 @@ load(
     "merged_kernel_uapi_headers",
     "modinfo_summary_report",
 )
-load(":bazel/abi.bzl", "cc_binary_with_abi")
+load(":bazel/abi.bzl", "cc_binary_with_abi", "sh_binary_with_abi")
 load(
     ":bazel/modules_private.bzl",
     "get_gki_kunit_modules",
@@ -1687,6 +1687,63 @@ cc_binary_with_abi(
     target_compatible_with = ["@platforms//os:android"],
     visibility = ["//visibility:private"],
     deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_net_tests_socket",
+    srcs = ["tools/testing/selftests/net/socket.c"],
+    copts = _KSELFTEST_COPTS,
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_net_tests_psock_fanout",
+    srcs = ["tools/testing/selftests/net/psock_fanout.c"],
+    copts = _KSELFTEST_COPTS,
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_net_tests_psock_tpacket",
+    srcs = ["tools/testing/selftests/net/psock_tpacket.c"],
+    copts = _KSELFTEST_COPTS,
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_net_tests_reuseport_dualstack",
+    srcs = ["tools/testing/selftests/net/reuseport_dualstack.c"],
+    copts = _KSELFTEST_COPTS,
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
+    name = "kselftest_net_tests_reuseaddr_conflict",
+    srcs = ["tools/testing/selftests/net/reuseaddr_conflict.c"],
+    copts = _KSELFTEST_COPTS,
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+sh_binary_with_abi(
+    name = "kselftest_net_test_bpf",
+    src = "tools/testing/selftests/net/test_bpf.sh",
+    path_prefix = _KSELFTEST_DIR,
+    visibility = ["//visibility:private"],
 )
 
 cc_binary_with_abi(
