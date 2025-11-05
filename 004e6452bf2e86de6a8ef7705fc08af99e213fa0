@@ -34,6 +34,24 @@
       "parentUuid": "0ce33fa9_428fa060",
       "revId": "004e6452bf2e86de6a8ef7705fc08af99e213fa0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c2492a_b8d2a631",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T12:41:05Z",
+      "side": 1,
+      "message": "Indeed. s/poll/pool/ is for my brain then.",
+      "parentUuid": "59982f31_53dcc608",
+      "revId": "004e6452bf2e86de6a8ef7705fc08af99e213fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
