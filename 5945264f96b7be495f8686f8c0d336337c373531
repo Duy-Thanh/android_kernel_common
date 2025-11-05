@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4fac308_1da1ed1e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-05T13:42:31Z",
+      "side": 1,
+      "message": "Bah, looking again at the spec, this still probably isn\u0027t quite right. For example, if the guest issues an `FFA_VERSION` call, I don\u0027t think the spec defines an `FFA_ERROR` return code and so this will lead to confusion.\n\nSo perhaps this should actually be rolled up in the `SMCCC_RET_NOT_SUPPORTED` case above? That means we\u0027ll behave the same way as `!VM_FFA_SUPPORTED(vcpu)` in the case that the host hasn\u0027t negotiated the version. WDYT?",
+      "range": {
+        "startLine": 1730,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 50
+      },
+      "revId": "5945264f96b7be495f8686f8c0d336337c373531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
