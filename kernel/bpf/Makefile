@@ -55,6 +55,9 @@ obj-$(CONFIG_BPF_SYSCALL) += btf_relocate.o
 ifeq ($(CONFIG_DMA_SHARED_BUFFER),y)
 obj-$(CONFIG_BPF_SYSCALL) += dmabuf_iter.o
 endif
+ifeq ($(CONFIG_PM_SLEEP),y)
+obj-$(CONFIG_BPF_SYSCALL) += wakeup_source_iter.o
+endif
 
 ifeq ($(CONFIG_FUSE_BPF),y)
 obj-$(CONFIG_BPF_SYSCALL) += bpf_fuse.o
