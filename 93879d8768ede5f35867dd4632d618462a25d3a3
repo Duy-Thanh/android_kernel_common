@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ffc351c_caaca1c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:03:39Z",
+      "side": 1,
+      "message": "nit: \"...and topups its memcache. pKVM-low next refills its own memcache with pages from the host\u0027s memcache\" (to make it clear that we are talking about two different memcaches)?",
+      "revId": "93879d8768ede5f35867dd4632d618462a25d3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ad556c_dde5e6ec",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:03:39Z",
+      "side": 1,
+      "message": "Do we still need to PAGE_MASK it? In pKVM-ARM this was added for storing page order info in the lower bits of mc-\u003ehead, which we don\u0027t do.",
+      "fixSuggestions": [
+        {
+          "fixId": "b439a724_678c0678",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 201,
+                "endChar": 0
+              },
+              "replacement": "\tp \u003d host_mc-\u003ehead;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93879d8768ede5f35867dd4632d618462a25d3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fed02f_7672d381",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:03:39Z",
+      "side": 1,
+      "message": "Just a note: I know this comment was copied from ARM, but IMHO it is not too useful. The mere fact of using __pkvm_host_donate_hyp() makes it clear what we are doing here.",
+      "fixSuggestions": [
+        {
+          "fixId": "32dac370_90164021",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "93879d8768ede5f35867dd4632d618462a25d3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7726c91_2283d97e",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:03:39Z",
+      "side": 1,
+      "message": "Just __get_free_page(GFP_KERNEL_ACCOUNT)?",
+      "fixSuggestions": [
+        {
+          "fixId": "6973d4e6_753451e0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm.c",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": "\taddr \u003d (void *)__get_free_page(GFP_KERNEL_ACCOUNT);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93879d8768ede5f35867dd4632d618462a25d3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
