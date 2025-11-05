@@ -16,6 +16,24 @@
       "message": "I\u0027m wondering if we should have some sort of printk_deferred() warning here so device developers at least know they are tripping over this and something deeper is going wrong?",
       "revId": "c9ec6a29a7b9d6bd9c7f876d98def593686c4b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0709560a_032a9327",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 3869116
+      },
+      "writtenOn": "2025-11-05T07:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b22704cd_2d0ef583",
+      "revId": "c9ec6a29a7b9d6bd9c7f876d98def593686c4b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
