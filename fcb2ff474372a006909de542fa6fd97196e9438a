@@ -34,6 +34,24 @@
       ],
       "revId": "fcb2ff474372a006909de542fa6fd97196e9438a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f1d476c_cae4e960",
+        "filename": "drivers/usb/core/hub.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2672,
+      "author": {
+        "id": 3821610
+      },
+      "writtenOn": "2025-11-05T02:56:44Z",
+      "side": 1,
+      "message": "I have made the changes as suggested.",
+      "parentUuid": "946a8efd_6846852d",
+      "revId": "fcb2ff474372a006909de542fa6fd97196e9438a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
