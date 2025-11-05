@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4740fb_606061c0",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 10109,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T13:39:31Z",
+      "side": 1,
+      "message": "This comment should be below `case PKVM_GHC_SHARE_MEM:`?",
+      "fixSuggestions": [
+        {
+          "fixId": "2cadcfaf_baccf471",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10106,
+                "startChar": 0,
+                "endLine": 10111,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10112,
+                "startChar": 0,
+                "endLine": 10112,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * The only case when pKVM forwards this hypercall to the host is when\n\t\t * it asks the host to refill the memcache with the needed amount of\n\t\t * pages.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "41a031989f8e595732c9b362158445a03a64c9f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
