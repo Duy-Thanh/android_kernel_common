@@ -106,6 +106,24 @@
       ],
       "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b11e8c_08ca6994",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 10107,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T02:11:24Z",
+      "side": 1,
+      "message": "Because at first I was thinking about introducing a new request HOST_REFILL_MEMCACHE (similar to HOST_RESET_MMU etc) to return it to the host in reqs_to_host, but now I see we actually manage without it (since PKVM_GHC_SHARE_MEM itself serves as the needed request signal), and it makes sense, but still seems worth adding a comment why.",
+      "parentUuid": "fe835d0b_74cae66e",
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
