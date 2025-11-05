@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a142c9_7732375b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T13:25:15Z",
+      "side": 1,
+      "message": "nit: s/zeroed/zero/ ?\n\nBTW this is actually not the only reason why we don\u0027t zero them? We can\u0027t zero them since we store the teardown memcache entries for the host in them?",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1abb4350_c0288527",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T13:25:15Z",
+      "side": 1,
+      "message": "Any reason why VM\u0027s guest_mmu_teardown_mc is initialized by pKVM-low, not by pKVM-high like vCPU\u0027s guest_mmu_memcache?",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
