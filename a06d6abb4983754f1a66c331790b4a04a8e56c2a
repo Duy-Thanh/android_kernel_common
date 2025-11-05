@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8077fcf_4b9df575",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-05T11:37:14Z",
+      "side": 1,
+      "message": "I think we need only sizeof(struct perf_data) right? The called functions seems to use only the first perf_data in the allocated memory(previous implementation used the same stack structure).",
+      "range": {
+        "startLine": 191,
+        "startChar": 19,
+        "endLine": 191,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "24093d2e_c910a89c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_debugfs.c",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "\tsummary \u003d kmalloc(sizeof(struct perf_data), GFP_KERNEL_ACCOUNT);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a06d6abb4983754f1a66c331790b4a04a8e56c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
