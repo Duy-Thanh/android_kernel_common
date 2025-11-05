@@ -737,6 +737,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+<<<<<<< HEAD   (4dd097d4271efd3d8164d7f40023880a93966f0c ANDROID: rust_binder: update prio_state on nested reply)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
@@ -775,3 +776,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+||||||| BASE   (e936109d577b337e7c52ca363826e1f91aa76bbc ANDROID: GKI: Update lenovo symbol list)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (06d3da5486eddf17b91f04bbc6fadbce90e9823c ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
