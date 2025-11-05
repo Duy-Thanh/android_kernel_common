@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dda825e_9176a45c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-05T15:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6b7bba_1345264e",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1abb4350_c0288527",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "My point is that guest_mmu_teardown_mc is a part of the host\u0027s kvm structure (pkvm_vm-\u003eshared_kvm), not pKVM\u0027s one. And philosophically, it is still the host that needs this memcache, just like it needs the guest_mmu_memcache. It is the host\u0027s job to allocate those pages, and it is the host\u0027s job to free them. :)\n\nAlso looks like pKVM-ARM initializes both memcaches in the host.\n\nAlthough functionally there should be no difference (as long as pKVM does this initialization after sharing + pinning the shared_kvm memory, per Chuanxiao\u0027s patches https://android-review.googlesource.com/q/topic:%22share-unshare%22), so if you insist, we can keep it as is.",
       "parentUuid": "80d9e50f_2c1a7c3b",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28530999_d5e9d9f6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-05T15:36:12Z",
+      "side": 1,
+      "message": "I will keep it as is:)",
+      "parentUuid": "28d49849_9e759b13",
       "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
