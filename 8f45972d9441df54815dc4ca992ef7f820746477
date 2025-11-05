@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2fd810_50af9c60",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T02:38:55Z",
+      "side": 1,
+      "message": "Just __get_free_page(GFP_KERNEL_ACCOUNT)?",
+      "fixSuggestions": [
+        {
+          "fixId": "2528c097_68600181",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 782,
+                "startChar": 0,
+                "endLine": 783,
+                "endChar": 0
+              },
+              "replacement": "\tvm_init_pool \u003d (void *)__get_free_page(GFP_KERNEL_ACCOUNT);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8f45972d9441df54815dc4ca992ef7f820746477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393c2711_bcad9fb5",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T02:38:55Z",
+      "side": 1,
+      "message": "Just free_page((unsigned long)vm_init_pool)?",
+      "fixSuggestions": [
+        {
+          "fixId": "a5bf3da2_f6e9d3d1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 805,
+                "startChar": 0,
+                "endLine": 806,
+                "endChar": 0
+              },
+              "replacement": "\tfree_page((unsigned long)vm_init_pool);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8f45972d9441df54815dc4ca992ef7f820746477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
