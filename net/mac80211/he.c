@@ -328,7 +328,7 @@ bool ieee80211_prepare_rx_omi_bw(struct ieee80211_link_sta *pub_link_sta,
 		ieee80211_link_sta_rc_update_omi(link, link_sta);
 	} else {
 		link_sta->rx_omi_bw_rx = bw;
-		ieee80211_recalc_chanctx_min_def(local, chanctx, NULL, false);
+		ieee80211_recalc_chanctx_min_def(local, chanctx);
 	}
 
 	link_sta->rx_omi_bw_staging = bw;
@@ -374,7 +374,7 @@ void ieee80211_finalize_rx_omi_bw(struct ieee80211_link_sta *pub_link_sta)
 		/* channel context in finalize only when narrowing bandwidth */
 		WARN_ON(link_sta->rx_omi_bw_rx < link_sta->rx_omi_bw_staging);
 		link_sta->rx_omi_bw_rx = link_sta->rx_omi_bw_staging;
-		ieee80211_recalc_chanctx_min_def(local, chanctx, NULL, false);
+		ieee80211_recalc_chanctx_min_def(local, chanctx);
 	}
 
 	trace_api_return_void(local);
