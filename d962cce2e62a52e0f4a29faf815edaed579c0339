@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a673171_c4b39fa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-05T12:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "512f5024_7e5af8a4",
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee52c012_bd45eb4f",
@@ -73,6 +91,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f2aa2e_9a761a6e",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 5136,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-05T12:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee52c012_bd45eb4f",
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe835d0b_74cae66e",
@@ -122,6 +158,24 @@
       "side": 1,
       "message": "Because at first I was thinking about introducing a new request HOST_REFILL_MEMCACHE (similar to HOST_RESET_MMU etc) to return it to the host in reqs_to_host, but now I see we actually manage without it (since PKVM_GHC_SHARE_MEM itself serves as the needed request signal), and it makes sense, but still seems worth adding a comment why.",
       "parentUuid": "fe835d0b_74cae66e",
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "161779d8_92f030b9",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 10107,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-05T12:17:03Z",
+      "side": 1,
+      "message": "Acknowledged - I\u0027ve added comment.",
+      "parentUuid": "c8b11e8c_08ca6994",
       "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
