@@ -22,6 +22,30 @@
       },
       "revId": "5945264f96b7be495f8686f8c0d336337c373531",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38861132_01db8ed2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-11-05T16:07:44Z",
+      "side": 1,
+      "message": "I was looking at 1.2 (the version that we currently have) and it seems acceptable to return `NOT_SUPPORTED` in w0 register so I suggest setting just the w0 to this value and returning and dropping the call to `ffa_to_smccc_error`. Wdyth ?",
+      "parentUuid": "b4fac308_1da1ed1e",
+      "range": {
+        "startLine": 1730,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 50
+      },
+      "revId": "5945264f96b7be495f8686f8c0d336337c373531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
