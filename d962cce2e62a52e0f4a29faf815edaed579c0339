@@ -1,0 +1,111 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512f5024_7e5af8a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:57:51Z",
+      "side": 1,
+      "message": "nit: may be worth explaining why it may be required, e.g. \"due to splitting a huge page mapping into smaller ones\"?",
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee52c012_bd45eb4f",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 5136,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:57:51Z",
+      "side": 1,
+      "message": "nit: we could rename memcache_refill to memcache_refill_size, and then this comment would not be needed?",
+      "fixSuggestions": [
+        {
+          "fixId": "5d77ea13_cde37032",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 5108,
+                "startChar": 0,
+                "endLine": 5109,
+                "endChar": 0
+              },
+              "replacement": "\tint memcache_refill_size;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 5132,
+                "startChar": 0,
+                "endLine": 5133,
+                "endChar": 0
+              },
+              "replacement": "\t\tmemcache_refill_size \u003d __pkvm_pgtable_max_pages(a1 \u003e\u003e PAGE_SHIFT);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 5134,
+                "startChar": 0,
+                "endLine": 5138,
+                "endChar": 0
+              },
+              "replacement": "\t\t    memcache_refill_size) {\n\t\t\tshared_vcpu-\u003earch.pkvm_vcpu.req_param \u003d memcache_refill_size;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe835d0b_74cae66e",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 10107,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T01:57:51Z",
+      "side": 1,
+      "message": "nit: Here, on the other hand, a comment might be useful. Like \"The only case when pKVM forwards this hypercall to the host is when it asks the host to refill the memcache with the needed amount of pages.\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "68381c5e_1f54331e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10106,
+                "startChar": 0,
+                "endLine": 10106,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The only case when pKVM forwards this hypercall to the host is when\n\t * it asks the host to refill the memcache with the needed amount of\n\t * pages.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d962cce2e62a52e0f4a29faf815edaed579c0339",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
