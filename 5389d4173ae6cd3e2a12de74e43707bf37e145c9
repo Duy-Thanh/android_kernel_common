@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e6b7bba_1345264e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T14:52:24Z",
+      "side": 1,
+      "message": "LGTM.",
+      "parentUuid": "0a1ad175_f6d8ca06",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1abb4350_c0288527",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 14
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "The `guest_mmu_memcache` is initialized with pages allocated by the host. The host initiates the memcache passing chain, which is then consumed by pKVM.\n\nIn contrast, the `guest_mmu_teardown_mc` is filled by pKVM. Here, pKVM initiates the memcache passing chain, which is then consumed by the host.\n\nGiven that pKVM is the initiator of the chain for `guest_mmu_teardown_mc`, I have decided to initialize this teardown memcache from `pKVM-low`, where the passing chain begins.\n\nDoes it make sense?",
       "parentUuid": "1abb4350_c0288527",
+      "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d49849_9e759b13",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T14:52:24Z",
+      "side": 1,
+      "message": "My point is that guest_mmu_teardown_mc is a part of the host\u0027s kvm structure (pkvm_vm-\u003eshared_kvm), not pKVM\u0027s one. And philosophically, it is still the host that needs this memcache, just like it needs the guest_mmu_memcache. It is the host\u0027s job to allocate those pages, and it is the host\u0027s job to free them. :)\n\nAlso looks like pKVM-ARM initializes both memcaches in the host.\n\nAlthough functionally there should be no difference (as long as pKVM does this initialization after sharing + pinning the shared_kvm memory, per Chuanxiao\u0027s patches https://android-review.googlesource.com/q/topic:%22share-unshare%22), so if you insist, we can keep it as is.",
+      "parentUuid": "80d9e50f_2c1a7c3b",
       "revId": "5389d4173ae6cd3e2a12de74e43707bf37e145c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
