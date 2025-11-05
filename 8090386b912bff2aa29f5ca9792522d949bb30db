@@ -93,6 +93,30 @@
       },
       "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eefee283_7362534e",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 3397250
+      },
+      "writtenOn": "2025-11-05T02:10:27Z",
+      "side": 1,
+      "message": "thanks for your advice, the collision is not complicated, so I have modified the commit message.",
+      "parentUuid": "ba256b4e_78f5bad1",
+      "range": {
+        "startLine": 1890,
+        "startChar": 0,
+        "endLine": 1890,
+        "endChar": 1
+      },
+      "revId": "8090386b912bff2aa29f5ca9792522d949bb30db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
