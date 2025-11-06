@@ -30,6 +30,7 @@
 #define PKVM_HC_IOMMU_UNMAP_PAGES	23
 #define PKVM_HC_IOMMU_CACHE_ASSIGN	24
 #define PKVM_HC_IOMMU_CACHE_UNASSIGN	25
+#define PKVM_HC_SUBMIT_QI		26
 
 /*
  * Internal hypercall to commit the pkvm initialization
