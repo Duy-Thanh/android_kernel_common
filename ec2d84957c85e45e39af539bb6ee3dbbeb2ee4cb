@@ -16,6 +16,24 @@
       "message": "Need to resolve merge conflicts here since we\u0027ve merged pvMMU-memcache patches.",
       "revId": "ec2d84957c85e45e39af539bb6ee3dbbeb2ee4cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a26358d_4f533525",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-06T15:08:08Z",
+      "side": 1,
+      "message": "Resolved it myself.",
+      "parentUuid": "f0566052_9e77226f",
+      "revId": "ec2d84957c85e45e39af539bb6ee3dbbeb2ee4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
