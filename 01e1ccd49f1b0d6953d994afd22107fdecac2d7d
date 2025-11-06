@@ -16,6 +16,24 @@
       "message": "I still worry this is more of a bandaid that might avoid the crash but not address problematic accounting issues that may result in very unexpected scheduling behavior. The printk_deferred helps there be at least some hint that things went wrong, so maybe that\u0027s sufficient if we can\u0027t get some sense of actual root cause. I\u0027m going to get some second opinions internally.",
       "revId": "01e1ccd49f1b0d6953d994afd22107fdecac2d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb45cd8_6c5bafd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869116
+      },
+      "writtenOn": "2025-11-06T12:23:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6dea188_1c32d5a0",
+      "revId": "01e1ccd49f1b0d6953d994afd22107fdecac2d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
