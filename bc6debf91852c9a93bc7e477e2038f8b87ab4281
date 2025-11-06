@@ -16,6 +16,24 @@
       "message": "This is a cherry-pick series for enabling the soc power slider.  Most patches are same as upstream.  However, for simplicity, in those with BACKPORT: tags, I removed changes to other vendors\u0027 drivers.  All are already in android-mainline.  Please take a look and comment.  Thank you!",
       "revId": "bc6debf91852c9a93bc7e477e2038f8b87ab4281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c92868_b13252ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-11-06T05:04:21Z",
+      "side": 1,
+      "message": "OK, wait, if we have upstream patches, we should pull in those as is, otherwise we will have to track the upstream divergence (and do a revert + apply when we\u0027ll need to sync with the kernel). @hmazur@google.com what do you think?",
+      "parentUuid": "b4b8fff5_2c47e681",
+      "revId": "bc6debf91852c9a93bc7e477e2038f8b87ab4281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
