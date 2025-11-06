@@ -94,6 +94,30 @@
       },
       "revId": "5945264f96b7be495f8686f8c0d336337c373531",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ca9653_9f0318c8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-06T09:06:21Z",
+      "side": 1,
+      "message": "I don\u0027t think the spec actually _requires_ the guest to issue an `FFA_VERSION` call. For example, maybe it has the version hardcoded or it receives it via firmware (e.g. devicetree). In any case, we should return a spec-compliant error code in this case and so I think the easiest thing is to return `SMCCC_RET_NOT_SUPPORTED` by extending the check above to:\n\n```\nif (!is_ffa_call(func_id) || !VM_FFA_SUPPORTED(vcpu) || !smp_load_acquire(\u0026has_version_negotiated)) {\n\tsmccc_set_retval(vcpu, SMCCC_RET_NOT_SUPPORTED, 0, 0, 0);\n\treturn true;\n}\n```",
+      "parentUuid": "cc0507c7_ba9feef4",
+      "range": {
+        "startLine": 1730,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 50
+      },
+      "revId": "5945264f96b7be495f8686f8c0d336337c373531",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
