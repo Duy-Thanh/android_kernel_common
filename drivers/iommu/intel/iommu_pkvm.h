@@ -178,5 +178,14 @@ static inline long pkvm_hc_cache_tag_unassign(unsigned long pgd_gpa)
 
 	return ret;
 }
+
+static inline int pkvm_hc_qi_submit_sync(unsigned long reg_phys, unsigned long desc,
+		unsigned int count)
+{
+	if (pkvm_pviommu_enabled())
+		kvm_hypercall3(PKVM_HC_SUBMIT_QI, reg_phys, desc, count);
+
+	return 0;
+}
 #endif
 
