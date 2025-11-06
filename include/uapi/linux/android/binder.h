@@ -38,6 +38,7 @@ enum {
 	BINDER_TYPE_PTR		= B_PACK_CHARS('p', 't', '*', B_TYPE_LARGE),
 };
 
+<<<<<<< HEAD   (385ca95f7d41831165b12797ccdfe9d1a8961ccf Merge 59697e061f6a ("Merge tag 'staging-6.18-rc1' of git://g)
 /**
  * enum flat_binder_object_shifts: shift values for flat_binder_object_flags
  * @FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT: shift for getting scheduler policy.
@@ -62,6 +63,11 @@ enum flat_binder_object_flags {
 	 * For SCHED_NORMAL/SCHED_BATCH, the valid range is between [-20..19]
 	 * For SCHED_FIFO/SCHED_RR, the value can run between [1..99]
 	 */
+||||||| BASE   (59697e061f6aec86d5738cd4752e16520f1d60dc Merge tag 'staging-6.18-rc1' of git://git.kernel.org/pub/scm)
+enum {
+=======
+enum flat_binder_object_flags {
+>>>>>>> BRANCH (6093a688a07da07808f0122f9aa2a3eed250d853 Merge tag 'char-misc-6.18-rc1' of git://git.kernel.org/pub/s)
 	FLAT_BINDER_FLAG_PRIORITY_MASK = 0xff,
 	/**
 	 * @FLAT_BINDER_FLAG_ACCEPTS_FDS: whether the node accepts fds.
