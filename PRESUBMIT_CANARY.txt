@@ -1,0 +1,11 @@
+The purpose of this CL is to serve as a canary to warn if presubmit is
+broken. It consists of a patch that does nothing useful, in a new file
+that will not cause any merge conflicts with anything else, and
+therefore should always pass presubmit.
+
+Please do not commit nor abandon this patch without talking to Fuad
+Tabba (tabba@google.com) first.
+
+Bug: 457998493
+Change-Id: I953e154cde569ec48d1b07d3438391d6b9b172fe
+Signed-off-by: Fuad Tabba <tabba@google.com>
