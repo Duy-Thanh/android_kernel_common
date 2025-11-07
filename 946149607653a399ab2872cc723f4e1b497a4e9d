@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc65a00c_d629c0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-11-07T09:02:42Z",
+      "side": 1,
+      "message": "Can you please put on top of this patch the ABI compatibility change 3838275.\n\nAlso [ Upstream XXXX ] is for the linux stable branches. \n\nCan you change it to a (cherry-picked from ....)\n\n(see https://android.googlesource.com/kernel/common/+/android-mainline/README.md#requirements-for-backports-from-mainline-linux)",
+      "revId": "946149607653a399ab2872cc723f4e1b497a4e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
