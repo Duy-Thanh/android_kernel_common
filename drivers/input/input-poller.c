@@ -4,7 +4,6 @@
  */
 
 #include <linux/device.h>
-#include <linux/export.h>
 #include <linux/input.h>
 #include <linux/jiffies.h>
 #include <linux/mutex.h>

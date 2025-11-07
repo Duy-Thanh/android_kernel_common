@@ -9,7 +9,6 @@
 
 #include "compress.h"
 #include "dso.h"
-#include "libbfd.h"
 #include "map.h"
 #include "maps.h"
 #include "symbol.h"
@@ -24,6 +23,18 @@
 #include <linux/string.h>
 #include <symbol/kallsyms.h>
 #include <internal/lib.h>
+
+#ifdef HAVE_LIBBFD_SUPPORT
+#define PACKAGE 'perf'
+#include <bfd.h>
+#endif
+
+#if defined(HAVE_LIBBFD_SUPPORT) || defined(HAVE_CPLUS_DEMANGLE_SUPPORT)
+#ifndef DMGL_PARAMS
+#define DMGL_PARAMS     (1 << 0)  /* Include function args */
+#define DMGL_ANSI       (1 << 1)  /* Include const, volatile, etc */
+#endif
+#endif
 
 #ifndef EM_AARCH64
 #define EM_AARCH64	183  /* ARM 64 bit */
@@ -860,15 +871,46 @@ out:
 	return err;
 }
 
+#ifdef HAVE_LIBBFD_BUILDID_SUPPORT
+
 static int read_build_id(const char *filename, struct build_id *bid, bool block)
 {
 	size_t size = sizeof(bid->data);
-	int fd, err;
-	Elf *elf;
+	int err = -1, fd;
+	bfd *abfd;
 
-	err = libbfd__read_build_id(filename, bid, block);
-	if (err >= 0)
-		goto out;
+	fd = open(filename, block ? O_RDONLY : (O_RDONLY | O_NONBLOCK));
+	if (fd < 0)
+		return -1;
+
+	abfd = bfd_fdopenr(filename, /*target=*/NULL, fd);
+	if (!abfd)
+		return -1;
+
+	if (!bfd_check_format(abfd, bfd_object)) {
+		pr_debug2("%s: cannot read %s bfd file.\n", __func__, filename);
+		goto out_close;
+	}
+
+	if (!abfd->build_id || abfd->build_id->size > size)
+		goto out_close;
+
+	memcpy(bid->data, abfd->build_id->data, abfd->build_id->size);
+	memset(bid->data + abfd->build_id->size, 0, size - abfd->build_id->size);
+	err = bid->size = abfd->build_id->size;
+
+out_close:
+	bfd_close(abfd);
+	return err;
+}
+
+#else // HAVE_LIBBFD_BUILDID_SUPPORT
+
+static int read_build_id(const char *filename, struct build_id *bid, bool block)
+{
+	size_t size = sizeof(bid->data);
+	int fd, err = -1;
+	Elf *elf;
 
 	if (size < BUILD_ID_SIZE)
 		goto out;
@@ -893,6 +935,8 @@ out_close:
 out:
 	return err;
 }
+
+#endif // HAVE_LIBBFD_BUILDID_SUPPORT
 
 int filename__read_build_id(const char *filename, struct build_id *bid, bool block)
 {
@@ -978,6 +1022,44 @@ out:
 	return err;
 }
 
+#ifdef HAVE_LIBBFD_SUPPORT
+
+int filename__read_debuglink(const char *filename, char *debuglink,
+			     size_t size)
+{
+	int err = -1;
+	asection *section;
+	bfd *abfd;
+
+	abfd = bfd_openr(filename, NULL);
+	if (!abfd)
+		return -1;
+
+	if (!bfd_check_format(abfd, bfd_object)) {
+		pr_debug2("%s: cannot read %s bfd file.\n", __func__, filename);
+		goto out_close;
+	}
+
+	section = bfd_get_section_by_name(abfd, ".gnu_debuglink");
+	if (!section)
+		goto out_close;
+
+	if (section->size > size)
+		goto out_close;
+
+	if (!bfd_get_section_contents(abfd, section, debuglink, 0,
+				      section->size))
+		goto out_close;
+
+	err = 0;
+
+out_close:
+	bfd_close(abfd);
+	return err;
+}
+
+#else
+
 int filename__read_debuglink(const char *filename, char *debuglink,
 			     size_t size)
 {
@@ -988,10 +1070,6 @@ int filename__read_debuglink(const char *filename, char *debuglink,
 	Elf_Data *data;
 	Elf_Scn *sec;
 	Elf_Kind ek;
-
-	err = libbfd_filename__read_debuglink(filename, debuglink, size);
-	if (err >= 0)
-		goto out;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -1033,6 +1111,8 @@ out_close:
 out:
 	return err;
 }
+
+#endif
 
 bool symsrc__possibly_runtime(struct symsrc *ss)
 {

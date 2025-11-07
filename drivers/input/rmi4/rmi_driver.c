@@ -21,7 +21,6 @@
 #include <linux/irqdomain.h>
 #include <uapi/linux/input.h>
 #include <linux/rmi.h>
-#include <linux/export.h>
 #include "rmi_bus.h"
 #include "rmi_driver.h"
 

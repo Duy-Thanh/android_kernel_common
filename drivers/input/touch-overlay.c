@@ -5,7 +5,6 @@
  *  Copyright (c) 2023 Javier Carrasco <javier.carrasco@wolfvision.net>
  */
 
-#include <linux/export.h>
 #include <linux/input.h>
 #include <linux/input/mt.h>
 #include <linux/input/touch-overlay.h>

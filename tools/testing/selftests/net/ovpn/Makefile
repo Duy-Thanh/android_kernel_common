@@ -19,15 +19,13 @@ LDLIBS += $(VAR_LDLIBS)
 
 TEST_FILES = common.sh
 
-TEST_PROGS := \
-	test-chachapoly.sh \
-	test-close-socket-tcp.sh \
-	test-close-socket.sh \
-	test-float.sh \
+TEST_PROGS = test.sh \
 	test-large-mtu.sh \
+	test-chachapoly.sh \
 	test-tcp.sh \
-	test.sh \
-# end of TEST_PROGS
+	test-float.sh \
+	test-close-socket.sh \
+	test-close-socket-tcp.sh
 
 TEST_GEN_FILES := ovpn-cli
 

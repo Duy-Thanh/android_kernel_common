@@ -12,11 +12,10 @@
 #		This test tests basic functionality of perf probe command.
 #
 
-DIR_PATH="$(dirname $0)"
-TEST_RESULT=0
-
 # include working environment
-. "$DIR_PATH/../common/init.sh"
+. ../common/init.sh
+
+TEST_RESULT=0
 
 if ! check_kprobes_available; then
 	print_overall_skipped
@@ -31,25 +30,15 @@ if [ "$PARAM_GENERAL_HELP_TEXT_CHECK" = "y" ]; then
 	$CMD_PERF probe --help > $LOGS_DIR/basic_helpmsg.log 2> $LOGS_DIR/basic_helpmsg.err
 	PERF_EXIT_CODE=$?
 
-	"$DIR_PATH/../common/check_all_patterns_found.pl" \
-		"PERF-PROBE" "NAME" "SYNOPSIS" "DESCRIPTION" "OPTIONS" \
-		"PROBE\s+SYNTAX" "PROBE\s+ARGUMENT" "LINE\s+SYNTAX" \
-		< $LOGS_DIR/basic_helpmsg.log
+	../common/check_all_patterns_found.pl "PERF-PROBE" "NAME" "SYNOPSIS" "DESCRIPTION" "OPTIONS" "PROBE\s+SYNTAX" "PROBE\s+ARGUMENT" "LINE\s+SYNTAX" < $LOGS_DIR/basic_helpmsg.log
 	CHECK_EXIT_CODE=$?
-	"$DIR_PATH/../common/check_all_patterns_found.pl" \
-		"LAZY\s+MATCHING" "FILTER\s+PATTERN" "EXAMPLES" "SEE\s+ALSO" \
-		< $LOGS_DIR/basic_helpmsg.log
+	../common/check_all_patterns_found.pl "LAZY\s+MATCHING" "FILTER\s+PATTERN" "EXAMPLES" "SEE\s+ALSO" < $LOGS_DIR/basic_helpmsg.log
 	(( CHECK_EXIT_CODE += $? ))
-	"$DIR_PATH/../common/check_all_patterns_found.pl" \
-		"vmlinux" "module=" "source=" "verbose" "quiet" "add=" "del=" \
-		"list.*EVENT" "line=" "vars=" "externs" < $LOGS_DIR/basic_helpmsg.log
+	../common/check_all_patterns_found.pl "vmlinux" "module=" "source=" "verbose" "quiet" "add=" "del=" "list.*EVENT" "line=" "vars=" "externs" < $LOGS_DIR/basic_helpmsg.log
 	(( CHECK_EXIT_CODE += $? ))
-	"$DIR_PATH/../common/check_all_patterns_found.pl" \
-		"no-inlines" "funcs.*FILTER" "filter=FILTER" "force" "dry-run" \
-		"max-probes" "exec=" "demangle-kernel" < $LOGS_DIR/basic_helpmsg.log
+	../common/check_all_patterns_found.pl "no-inlines" "funcs.*FILTER" "filter=FILTER" "force" "dry-run" "max-probes" "exec=" "demangle-kernel" < $LOGS_DIR/basic_helpmsg.log
 	(( CHECK_EXIT_CODE += $? ))
-	"$DIR_PATH/../common/check_no_patterns_found.pl" \
-		"No manual entry for" < $LOGS_DIR/basic_helpmsg.err
+	../common/check_no_patterns_found.pl "No manual entry for" < $LOGS_DIR/basic_helpmsg.err
 	(( CHECK_EXIT_CODE += $? ))
 
 	print_results $PERF_EXIT_CODE $CHECK_EXIT_CODE "help message"
@@ -64,9 +53,7 @@ fi
 # without any args perf-probe should print usage
 $CMD_PERF probe 2> $LOGS_DIR/basic_usage.log > /dev/null
 
-"$DIR_PATH/../common/check_all_patterns_found.pl" \
-	"[Uu]sage" "perf probe" "verbose" "quiet" "add" "del" "force" \
-	"line" "vars" "externs" "range" < $LOGS_DIR/basic_usage.log
+../common/check_all_patterns_found.pl "[Uu]sage" "perf probe" "verbose" "quiet" "add" "del" "force" "line" "vars" "externs" "range" < $LOGS_DIR/basic_usage.log
 CHECK_EXIT_CODE=$?
 
 print_results 0 $CHECK_EXIT_CODE "usage message"

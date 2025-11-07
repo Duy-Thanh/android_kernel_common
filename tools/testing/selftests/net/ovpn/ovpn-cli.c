@@ -1587,7 +1587,6 @@ static int ovpn_listen_mcast(void)
 	sock = nl_socket_alloc();
 	if (!sock) {
 		fprintf(stderr, "cannot allocate netlink socket\n");
-		ret = -ENOMEM;
 		goto err_free;
 	}
 
@@ -2107,7 +2106,6 @@ static int ovpn_run_cmd(struct ovpn_ctx *ovpn)
 		ret = ovpn_listen_mcast();
 		break;
 	case CMD_INVALID:
-		ret = -EINVAL;
 		break;
 	}
 

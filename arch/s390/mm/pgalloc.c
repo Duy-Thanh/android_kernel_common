@@ -245,7 +245,7 @@ static inline unsigned long base_lra(unsigned long address)
 	unsigned long real;
 
 	asm volatile(
-		"	lra	%0,0(%1)"
+		"	lra	%0,0(%1)\n"
 		: "=d" (real) : "a" (address) : "cc");
 	return real;
 }

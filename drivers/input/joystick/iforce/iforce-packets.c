@@ -6,7 +6,6 @@
  *  USB/RS232 I-Force joysticks and wheels.
  */
 
-#include <linux/export.h>
 #include <linux/unaligned.h>
 #include "iforce.h"
 

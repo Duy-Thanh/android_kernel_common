@@ -14,7 +14,6 @@
  */
 
 #include <linux/delay.h>
-#include <linux/export.h>
 #include <linux/input.h>
 #include <linux/input/mt.h>
 #include <linux/input/touchscreen.h>

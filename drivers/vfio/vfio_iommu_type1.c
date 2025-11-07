@@ -37,7 +37,6 @@
 #include <linux/vfio.h>
 #include <linux/workqueue.h>
 #include <linux/notifier.h>
-#include <linux/mm_inline.h>
 #include "vfio.h"
 
 #define DRIVER_VERSION  "0.2"
@@ -93,7 +92,6 @@ struct vfio_dma {
 	bool			iommu_mapped;
 	bool			lock_cap;	/* capable(CAP_IPC_LOCK) */
 	bool			vaddr_invalid;
-	bool			has_rsvd;	/* has 1 or more rsvd pfns */
 	struct task_struct	*task;
 	struct rb_root		pfn_list;	/* Ex-user pinned pfn list */
 	unsigned long		*bitmap;
@@ -320,13 +318,7 @@ static void vfio_dma_bitmap_free_all(struct vfio_iommu *iommu)
 /*
  * Helper Functions for host iova-pfn list
  */
-
-/*
- * Find the highest vfio_pfn that overlapping the range
- * [iova_start, iova_end) in rb tree.
- */
-static struct vfio_pfn *vfio_find_vpfn_range(struct vfio_dma *dma,
-		dma_addr_t iova_start, dma_addr_t iova_end)
+static struct vfio_pfn *vfio_find_vpfn(struct vfio_dma *dma, dma_addr_t iova)
 {
 	struct vfio_pfn *vpfn;
 	struct rb_node *node = dma->pfn_list.rb_node;
@@ -334,19 +326,14 @@ static struct vfio_pfn *vfio_find_vpfn_range(struct vfio_dma *dma,
 	while (node) {
 		vpfn = rb_entry(node, struct vfio_pfn, node);
 
-		if (iova_end <= vpfn->iova)
+		if (iova < vpfn->iova)
 			node = node->rb_left;
-		else if (iova_start > vpfn->iova)
+		else if (iova > vpfn->iova)
 			node = node->rb_right;
 		else
 			return vpfn;
 	}
 	return NULL;
-}
-
-static inline struct vfio_pfn *vfio_find_vpfn(struct vfio_dma *dma, dma_addr_t iova)
-{
-	return vfio_find_vpfn_range(dma, iova, iova + 1);
 }
 
 static void vfio_link_pfn(struct vfio_dma *dma,
@@ -627,39 +614,6 @@ done:
 	return ret;
 }
 
-
-static long vpfn_pages(struct vfio_dma *dma,
-		dma_addr_t iova_start, long nr_pages)
-{
-	dma_addr_t iova_end = iova_start + (nr_pages << PAGE_SHIFT);
-	struct vfio_pfn *top = vfio_find_vpfn_range(dma, iova_start, iova_end);
-	long ret = 1;
-	struct vfio_pfn *vpfn;
-	struct rb_node *prev;
-	struct rb_node *next;
-
-	if (likely(!top))
-		return 0;
-
-	prev = next = &top->node;
-
-	while ((prev = rb_prev(prev))) {
-		vpfn = rb_entry(prev, struct vfio_pfn, node);
-		if (vpfn->iova < iova_start)
-			break;
-		ret++;
-	}
-
-	while ((next = rb_next(next))) {
-		vpfn = rb_entry(next, struct vfio_pfn, node);
-		if (vpfn->iova >= iova_end)
-			break;
-		ret++;
-	}
-
-	return ret;
-}
-
 /*
  * Attempt to pin pages.  We really don't want to track all the pfns and
  * the iommu can only map chunks of consecutive pfns anyway, so get the
@@ -733,47 +687,32 @@ static long vfio_pin_pages_remote(struct vfio_dma *dma, unsigned long vaddr,
 		 * and rsvd here, and therefore continues to use the batch.
 		 */
 		while (true) {
-			long nr_pages, acct_pages = 0;
-
 			if (pfn != *pfn_base + pinned ||
 			    rsvd != is_invalid_reserved_pfn(pfn))
 				goto out;
-
-			/*
-			 * Using GUP with the FOLL_LONGTERM in
-			 * vaddr_get_pfns() will not return invalid
-			 * or reserved pages.
-			 */
-			nr_pages = num_pages_contiguous(
-					&batch->pages[batch->offset],
-					batch->size);
-			if (!rsvd) {
-				acct_pages = nr_pages;
-				acct_pages -= vpfn_pages(dma, iova, nr_pages);
-			}
 
 			/*
 			 * Reserved pages aren't counted against the user,
 			 * externally pinned pages are already counted against
 			 * the user.
 			 */
-			if (acct_pages) {
+			if (!rsvd && !vfio_find_vpfn(dma, iova)) {
 				if (!dma->lock_cap &&
-				    mm->locked_vm + lock_acct + acct_pages > limit) {
+				    mm->locked_vm + lock_acct + 1 > limit) {
 					pr_warn("%s: RLIMIT_MEMLOCK (%ld) exceeded\n",
 						__func__, limit << PAGE_SHIFT);
 					ret = -ENOMEM;
 					goto unpin_out;
 				}
-				lock_acct += acct_pages;
+				lock_acct++;
 			}
 
-			pinned += nr_pages;
-			npage -= nr_pages;
-			vaddr += PAGE_SIZE * nr_pages;
-			iova += PAGE_SIZE * nr_pages;
-			batch->offset += nr_pages;
-			batch->size -= nr_pages;
+			pinned++;
+			npage--;
+			vaddr += PAGE_SIZE;
+			iova += PAGE_SIZE;
+			batch->offset++;
+			batch->size--;
 
 			if (!batch->size)
 				break;
@@ -783,7 +722,6 @@ static long vfio_pin_pages_remote(struct vfio_dma *dma, unsigned long vaddr,
 	}
 
 out:
-	dma->has_rsvd |= rsvd;
 	ret = vfio_lock_acct(dma, lock_acct, false);
 
 unpin_out:
@@ -800,29 +738,21 @@ unpin_out:
 	return pinned;
 }
 
-static inline void put_valid_unreserved_pfns(unsigned long start_pfn,
-		unsigned long npage, int prot)
-{
-	unpin_user_page_range_dirty_lock(pfn_to_page(start_pfn), npage,
-					 prot & IOMMU_WRITE);
-}
-
 static long vfio_unpin_pages_remote(struct vfio_dma *dma, dma_addr_t iova,
 				    unsigned long pfn, unsigned long npage,
 				    bool do_accounting)
 {
-	long unlocked = 0, locked = vpfn_pages(dma, iova, npage);
+	long unlocked = 0, locked = 0;
+	long i;
 
-	if (dma->has_rsvd) {
-		unsigned long i;
-
-		for (i = 0; i < npage; i++)
-			if (put_pfn(pfn++, dma->prot))
-				unlocked++;
-	} else {
-		put_valid_unreserved_pfns(pfn, npage, dma->prot);
-		unlocked = npage;
+	for (i = 0; i < npage; i++, iova += PAGE_SIZE) {
+		if (put_pfn(pfn++, dma->prot)) {
+			unlocked++;
+			if (vfio_find_vpfn(dma, iova))
+				locked++;
+		}
 	}
+
 	if (do_accounting)
 		vfio_lock_acct(dma, locked - unlocked, true);
 

@@ -5,14 +5,8 @@ all:
 
 TEST_PROGS := run.sh
 
-TEST_FILES := \
-	include.sh \
-	test.py \
-# end of TEST_FILES
+TEST_FILES := include.sh test.py
 
-EXTRA_CLEAN := \
-	include.sh \
-	/tmp/rds_logs \
-# end of EXTRA_CLEAN
+EXTRA_CLEAN := /tmp/rds_logs include.sh
 
 include ../../lib.mk

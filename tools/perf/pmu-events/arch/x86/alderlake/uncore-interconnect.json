@@ -65,6 +65,7 @@
         "Counter": "0,1",
         "EventCode": "0x81",
         "EventName": "UNC_ARB_REQ_TRK_REQUEST.DRD",
+        "Experimental": "1",
         "PerPkg": "1",
         "UMask": "0x2",
         "Unit": "ARB"
@@ -102,6 +103,7 @@
         "Counter": "0,1",
         "EventCode": "0x81",
         "EventName": "UNC_ARB_TRK_REQUESTS.RD",
+        "Experimental": "1",
         "PerPkg": "1",
         "UMask": "0x2",
         "Unit": "ARB"

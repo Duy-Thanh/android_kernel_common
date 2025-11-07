@@ -239,6 +239,9 @@ int evsel__tool_pmu_open(struct evsel *evsel,
 	nthreads = perf_thread_map__nr(threads);
 	for (idx = start_cpu_map_idx; idx < end_cpu_map_idx; idx++) {
 		for (thread = 0; thread < nthreads; thread++) {
+			if (thread >= nthreads)
+				break;
+
 			if (!evsel->cgrp && !evsel->core.system_wide)
 				pid = perf_thread_map__pid(threads, thread);
 

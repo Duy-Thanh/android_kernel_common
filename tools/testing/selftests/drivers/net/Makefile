@@ -10,7 +10,6 @@ TEST_GEN_FILES := \
 # end of TEST_GEN_FILES
 
 TEST_PROGS := \
-	hds.py \
 	napi_id.py \
 	napi_threaded.py \
 	netcons_basic.sh \
@@ -22,8 +21,9 @@ TEST_PROGS := \
 	ping.py \
 	psp.py \
 	queues.py \
-	shaper.py \
 	stats.py \
+	shaper.py \
+	hds.py \
 	xdp.py \
 # end of TEST_PROGS
 

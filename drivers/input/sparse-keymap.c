@@ -10,7 +10,6 @@
  * Copyright (C) 2005 Dmitry Torokhov <dtor@mail.ru>
  */
 
-#include <linux/export.h>
 #include <linux/input.h>
 #include <linux/input/sparse-keymap.h>
 #include <linux/module.h>

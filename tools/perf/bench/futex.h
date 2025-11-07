@@ -8,7 +8,6 @@
 #ifndef _FUTEX_H
 #define _FUTEX_H
 
-#include <stdbool.h>
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <sys/types.h>

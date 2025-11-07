@@ -24,7 +24,6 @@
  */
 
 #include <linux/bitfield.h>
-#include <linux/export.h>
 #include <linux/gpio/consumer.h>
 #include <linux/input.h>
 #include <linux/input/mt.h>

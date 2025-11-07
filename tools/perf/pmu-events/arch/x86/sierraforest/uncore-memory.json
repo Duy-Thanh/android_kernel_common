@@ -60,33 +60,6 @@
         "BriefDescription": "CAS count for SubChannel 0 regular reads",
         "Counter": "0,1,2,3",
         "EventCode": "0x05",
-        "EventName": "UNC_M_CAS_COUNT_SCH0.RD_NON_UNDERFILL",
-        "PerPkg": "1",
-        "UMask": "0xc3",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 0 auto-precharge reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x05",
-        "EventName": "UNC_M_CAS_COUNT_SCH0.RD_PRE_REG",
-        "PerPkg": "1",
-        "UMask": "0xc2",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 0 auto-precharge underfill reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x05",
-        "EventName": "UNC_M_CAS_COUNT_SCH0.RD_PRE_UNDERFILL",
-        "PerPkg": "1",
-        "UMask": "0xc8",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 0 regular reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x05",
         "EventName": "UNC_M_CAS_COUNT_SCH0.RD_REG",
         "PerPkg": "1",
         "UMask": "0xc1",
@@ -99,15 +72,6 @@
         "EventName": "UNC_M_CAS_COUNT_SCH0.RD_UNDERFILL",
         "PerPkg": "1",
         "UMask": "0xc4",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 0 underfill reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x05",
-        "EventName": "UNC_M_CAS_COUNT_SCH0.RD_UNDERFILL_ALL",
-        "PerPkg": "1",
-        "UMask": "0xcc",
         "Unit": "IMC"
     },
     {
@@ -161,33 +125,6 @@
         "BriefDescription": "CAS count for SubChannel 1 regular reads",
         "Counter": "0,1,2,3",
         "EventCode": "0x06",
-        "EventName": "UNC_M_CAS_COUNT_SCH1.RD_NON_UNDERFILL",
-        "PerPkg": "1",
-        "UMask": "0xc3",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 1 auto-precharge reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x06",
-        "EventName": "UNC_M_CAS_COUNT_SCH1.RD_PRE_REG",
-        "PerPkg": "1",
-        "UMask": "0xc2",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 1 auto-precharge underfill reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x06",
-        "EventName": "UNC_M_CAS_COUNT_SCH1.RD_PRE_UNDERFILL",
-        "PerPkg": "1",
-        "UMask": "0xc8",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 1 regular reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x06",
         "EventName": "UNC_M_CAS_COUNT_SCH1.RD_REG",
         "PerPkg": "1",
         "UMask": "0xc1",
@@ -200,15 +137,6 @@
         "EventName": "UNC_M_CAS_COUNT_SCH1.RD_UNDERFILL",
         "PerPkg": "1",
         "UMask": "0xc4",
-        "Unit": "IMC"
-    },
-    {
-        "BriefDescription": "CAS count for SubChannel 1 underfill reads",
-        "Counter": "0,1,2,3",
-        "EventCode": "0x06",
-        "EventName": "UNC_M_CAS_COUNT_SCH1.RD_UNDERFILL_ALL",
-        "PerPkg": "1",
-        "UMask": "0xcc",
         "Unit": "IMC"
     },
     {
@@ -267,6 +195,7 @@
         "EventName": "UNC_M_MR4_2XREF_CYCLES.SCH0_DIMM0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -277,6 +206,7 @@
         "EventName": "UNC_M_MR4_2XREF_CYCLES.SCH0_DIMM1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -287,6 +217,7 @@
         "EventName": "UNC_M_MR4_2XREF_CYCLES.SCH1_DIMM0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x4",
         "Unit": "IMC"
     },
@@ -297,6 +228,7 @@
         "EventName": "UNC_M_MR4_2XREF_CYCLES.SCH1_DIMM1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x8",
         "Unit": "IMC"
     },
@@ -307,6 +239,7 @@
         "EventName": "UNC_M_PDC_MR4ACTIVE_CYCLES.SCH0_DIMM0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -317,6 +250,7 @@
         "EventName": "UNC_M_PDC_MR4ACTIVE_CYCLES.SCH0_DIMM1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -327,6 +261,7 @@
         "EventName": "UNC_M_PDC_MR4ACTIVE_CYCLES.SCH1_DIMM0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x4",
         "Unit": "IMC"
     },
@@ -337,6 +272,7 @@
         "EventName": "UNC_M_PDC_MR4ACTIVE_CYCLES.SCH1_DIMM1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x8",
         "Unit": "IMC"
     },
@@ -347,6 +283,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH0_RANK0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -357,6 +294,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH0_RANK1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -367,6 +305,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH0_RANK2",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x4",
         "Unit": "IMC"
     },
@@ -377,6 +316,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH0_RANK3",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x8",
         "Unit": "IMC"
     },
@@ -387,6 +327,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH1_RANK0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x10",
         "Unit": "IMC"
     },
@@ -397,6 +338,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH1_RANK1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x20",
         "Unit": "IMC"
     },
@@ -407,6 +349,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH1_RANK2",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x40",
         "Unit": "IMC"
     },
@@ -417,6 +360,7 @@
         "EventName": "UNC_M_POWERDOWN_CYCLES.SCH1_RANK3",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x80",
         "Unit": "IMC"
     },
@@ -427,6 +371,7 @@
         "EventName": "UNC_M_POWER_CHANNEL_PPD_CYCLES",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "Unit": "IMC"
     },
     {
@@ -436,6 +381,7 @@
         "EventName": "UNC_M_POWER_CRITICAL_THROTTLE_CYCLES.SLOT0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -446,6 +392,7 @@
         "EventName": "UNC_M_POWER_CRITICAL_THROTTLE_CYCLES.SLOT1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -476,6 +423,7 @@
         "EventName": "UNC_M_POWER_THROTTLE_CYCLES.MR4BLKEN",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x8",
         "Unit": "IMC"
     },
@@ -486,6 +434,7 @@
         "EventName": "UNC_M_POWER_THROTTLE_CYCLES.RAPLBLK",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x4",
         "Unit": "IMC"
     },
@@ -668,6 +617,7 @@
         "EventName": "UNC_M_SELF_REFRESH.ENTER_SUCCESS",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "UNC_M_SELF_REFRESH.ENTER_SUCCESS",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -678,6 +628,7 @@
         "EventName": "UNC_M_SELF_REFRESH.ENTER_SUCCESS_CYCLES",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -688,6 +639,7 @@
         "EventName": "UNC_M_THROTTLE_CRIT_CYCLES.SLOT0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -698,6 +650,7 @@
         "EventName": "UNC_M_THROTTLE_CRIT_CYCLES.SLOT1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -708,6 +661,7 @@
         "EventName": "UNC_M_THROTTLE_HIGH_CYCLES.SLOT0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -718,6 +672,7 @@
         "EventName": "UNC_M_THROTTLE_HIGH_CYCLES.SLOT1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -728,6 +683,7 @@
         "EventName": "UNC_M_THROTTLE_LOW_CYCLES.SLOT0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -738,6 +694,7 @@
         "EventName": "UNC_M_THROTTLE_LOW_CYCLES.SLOT1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },
@@ -748,6 +705,7 @@
         "EventName": "UNC_M_THROTTLE_MID_CYCLES.SLOT0",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x1",
         "Unit": "IMC"
     },
@@ -758,6 +716,7 @@
         "EventName": "UNC_M_THROTTLE_MID_CYCLES.SLOT1",
         "Experimental": "1",
         "PerPkg": "1",
+        "PublicDescription": "-",
         "UMask": "0x2",
         "Unit": "IMC"
     },

@@ -73,13 +73,13 @@
 	if (__builtin_constant_p(val__) &&				\
 	    ((szcast)val__ > -129) && ((szcast)val__ < 128)) {		\
 		asm volatile(						\
-			op2 "   %[ptr__],%[val__]"			\
+			op2 "   %[ptr__],%[val__]\n"			\
 			: [ptr__] "+Q" (*ptr__) 			\
 			: [val__] "i" ((szcast)val__)			\
 			: "cc");					\
 	} else {							\
 		asm volatile(						\
-			op1 "   %[old__],%[val__],%[ptr__]"		\
+			op1 "   %[old__],%[val__],%[ptr__]\n"		\
 			: [old__] "=d" (old__), [ptr__] "+Q" (*ptr__)	\
 			: [val__] "d" (val__)				\
 			: "cc");					\
@@ -98,7 +98,7 @@
 	preempt_disable_notrace();					\
 	ptr__ = raw_cpu_ptr(&(pcp));	 				\
 	asm volatile(							\
-		op "    %[old__],%[val__],%[ptr__]"			\
+		op "    %[old__],%[val__],%[ptr__]\n"			\
 		: [old__] "=d" (old__), [ptr__] "+Q" (*ptr__)		\
 		: [val__] "d" (val__)					\
 		: "cc");						\
@@ -117,7 +117,7 @@
 	preempt_disable_notrace();					\
 	ptr__ = raw_cpu_ptr(&(pcp));	 				\
 	asm volatile(							\
-		op "    %[old__],%[val__],%[ptr__]"			\
+		op "    %[old__],%[val__],%[ptr__]\n"			\
 		: [old__] "=d" (old__), [ptr__] "+Q" (*ptr__)		\
 		: [val__] "d" (val__)					\
 		: "cc");						\

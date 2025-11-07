@@ -713,9 +713,8 @@ struct block_hist {
 #include "../ui/keysyms.h"
 void attr_to_script(char *buf, struct perf_event_attr *attr);
 
-int __hist_entry__tui_annotate(struct hist_entry *he, struct map_symbol *ms,
-			       struct evsel *evsel,
-			       struct hist_browser_timer *hbt);
+int map_symbol__tui_annotate(struct map_symbol *ms, struct evsel *evsel,
+			     struct hist_browser_timer *hbt);
 
 int hist_entry__tui_annotate(struct hist_entry *he, struct evsel *evsel,
 			     struct hist_browser_timer *hbt);
@@ -743,10 +742,9 @@ int evlist__tui_browse_hists(struct evlist *evlist __maybe_unused,
 {
 	return 0;
 }
-static inline int __hist_entry__tui_annotate(struct hist_entry *he __maybe_unused,
-					     struct map_symbol *ms __maybe_unused,
-					     struct evsel *evsel __maybe_unused,
-					     struct hist_browser_timer *hbt __maybe_unused)
+static inline int map_symbol__tui_annotate(struct map_symbol *ms __maybe_unused,
+					   struct evsel *evsel __maybe_unused,
+					   struct hist_browser_timer *hbt __maybe_unused)
 {
 	return 0;
 }

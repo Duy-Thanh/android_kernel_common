@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0+ OR MIT
 
-TEST_PROGS := \
-	bridge_locked_port.sh \
+TEST_PROGS = bridge_locked_port.sh \
 	bridge_mdb.sh \
 	bridge_mld.sh \
 	bridge_vlan_aware.sh \
@@ -10,13 +9,11 @@ TEST_PROGS := \
 	local_termination.sh \
 	no_forwarding.sh \
 	tc_actions.sh \
-	test_bridge_fdb_stress.sh \
-# end of TEST_PROGS
+	test_bridge_fdb_stress.sh
 
 TEST_FILES := \
-	forwarding.config \
 	run_net_forwarding_test.sh \
-# end of TEST_FILES
+	forwarding.config
 
 TEST_INCLUDES := \
 	../../../net/forwarding/bridge_locked_port.sh \
@@ -30,7 +27,6 @@ TEST_INCLUDES := \
 	../../../net/forwarding/no_forwarding.sh \
 	../../../net/forwarding/tc_actions.sh \
 	../../../net/forwarding/tc_common.sh \
-	../../../net/lib.sh \
-# end of TEST_INCLUDES
+	../../../net/lib.sh
 
 include ../../../lib.mk

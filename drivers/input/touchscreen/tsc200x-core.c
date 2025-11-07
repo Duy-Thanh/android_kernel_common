@@ -10,7 +10,6 @@
  * based on TSC2301 driver by Klaus K. Pedersen <klaus.k.pedersen@nokia.com>
  */
 
-#include <linux/export.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/input.h>

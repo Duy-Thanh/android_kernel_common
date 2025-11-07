@@ -344,11 +344,7 @@ static int psxpad_spi_probe(struct spi_device *spi)
 	/* (PlayStation 1/2 joypad might be possible works 250kHz/500kHz) */
 	spi->controller->min_speed_hz = 125000;
 	spi->controller->max_speed_hz = 125000;
-	err = spi_setup(spi);
-	if (err) {
-		dev_err(&spi->dev, "failed to set up SPI: %d\n", err);
-		return err;
-	}
+	spi_setup(spi);
 
 	/* pad settings */
 	psxpad_set_motor_level(pad, 0, 0);

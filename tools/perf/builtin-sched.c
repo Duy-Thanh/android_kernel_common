@@ -1532,24 +1532,35 @@ static int process_sched_wakeup_ignore(const struct perf_tool *tool __maybe_unus
 	return 0;
 }
 
+union map_priv {
+	void	*ptr;
+	bool	 color;
+};
+
 static bool thread__has_color(struct thread *thread)
 {
-	return thread__priv(thread) != NULL;
+	union map_priv priv = {
+		.ptr = thread__priv(thread),
+	};
+
+	return priv.color;
 }
 
 static struct thread*
 map__findnew_thread(struct perf_sched *sched, struct machine *machine, pid_t pid, pid_t tid)
 {
 	struct thread *thread = machine__findnew_thread(machine, pid, tid);
-	bool color = false;
+	union map_priv priv = {
+		.color = false,
+	};
 
 	if (!sched->map.color_pids || !thread || thread__priv(thread))
 		return thread;
 
 	if (thread_map__has(sched->map.color_pids, tid))
-		color = true;
+		priv.color = true;
 
-	thread__set_priv(thread, color ? ((void*)1) : NULL);
+	thread__set_priv(thread, priv.ptr);
 	return thread;
 }
 
