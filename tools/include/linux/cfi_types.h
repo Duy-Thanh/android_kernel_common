@@ -43,7 +43,7 @@
 
 #else /* __ASSEMBLY__ */
 
-#ifdef CONFIG_CFI
+#ifdef CONFIG_CFI_CLANG
 #define DEFINE_CFI_TYPE(name, func)						\
 	/*									\
 	 * Force a reference to the function so the compiler generates		\

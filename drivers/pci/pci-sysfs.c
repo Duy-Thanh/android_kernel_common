@@ -1517,9 +1517,8 @@ static ssize_t reset_method_store(struct device *dev,
 		return count;
 	}
 
-	ACQUIRE(pm_runtime_active_try, pm)(dev);
-	if (ACQUIRE_ERR(pm_runtime_active_try, &pm))
-		return -ENXIO;
+	pm_runtime_get_sync(dev);
+	struct device *pmdev __free(pm_runtime_put) = dev;
 
 	if (sysfs_streq(buf, "default")) {
 		pci_init_reset_methods(pdev);

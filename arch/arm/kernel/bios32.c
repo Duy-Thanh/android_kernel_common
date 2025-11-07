@@ -10,7 +10,6 @@
 #include <linux/kernel.h>
 #include <linux/pci.h>
 #include <linux/slab.h>
-#include <linux/string_choices.h>
 #include <linux/init.h>
 #include <linux/io.h>
 
@@ -338,8 +337,8 @@ void pcibios_fixup_bus(struct pci_bus *bus)
 	/*
 	 * Report what we did for this bus
 	 */
-	pr_info("PCI: bus%d: Fast back to back transfers %s\n",
-		bus->number, str_enabled_disabled(features & PCI_COMMAND_FAST_BACK));
+	pr_info("PCI: bus%d: Fast back to back transfers %sabled\n",
+		bus->number, (features & PCI_COMMAND_FAST_BACK) ? "en" : "dis");
 }
 EXPORT_SYMBOL(pcibios_fixup_bus);
 
