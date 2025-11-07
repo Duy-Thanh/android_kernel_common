@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "970cdd45_ceaf333b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4462268
+      },
+      "writtenOn": "2025-11-07T14:04:26Z",
+      "side": 1,
+      "message": "‎lib/\n‎├─ models/\n‎│ ├─ user_model.dart\n‎│ ├─ video_model.dart\n‎│ ├─ gift_model.dart\n‎│ ├─ coin_model.dart\n‎│ └─ level_model.dart\n‎├─ screens/\n‎│ ├─ splash_screen.dart\n‎│ ├─ register_screen.dart\n‎│ ├─ home_screen.dart\n‎│ ├─ live_screen.dart\n‎│ ├─ profile_screen.dart\n‎├─ widgets/\n‎│ ├─ custom_button.dart\n‎│ ├─ video_card.dart\n‎│ ├─ gift_animation.dart\n‎├─ services/\n‎│ ├─ api_service.dart\n‎│ ├─ auth_service.dart\n‎│ ├─ coin_service.dart\n‎│ └─ live_service.dart\n‎main.dart",
+      "revId": "d8a836ee4231d571cf3192a30719ed9a1aeb03f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e047c379_5352d36c",
