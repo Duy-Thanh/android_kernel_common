@@ -16,6 +16,23 @@
       "message": "‎lib/\n‎├─ models/\n‎│ ├─ user_model.dart\n‎│ ├─ video_model.dart\n‎│ ├─ gift_model.dart\n‎│ ├─ coin_model.dart\n‎│ └─ level_model.dart\n‎├─ screens/\n‎│ ├─ splash_screen.dart\n‎│ ├─ register_screen.dart\n‎│ ├─ home_screen.dart\n‎│ ├─ live_screen.dart\n‎│ ├─ profile_screen.dart\n‎├─ widgets/\n‎│ ├─ custom_button.dart\n‎│ ├─ video_card.dart\n‎│ ├─ gift_animation.dart\n‎├─ services/\n‎│ ├─ api_service.dart\n‎│ ├─ auth_service.dart\n‎│ ├─ coin_service.dart\n‎│ └─ live_service.dart\n‎main.dart",
       "revId": "1edec20206a425d1a1f79324940e7e190fa8435a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bab17e9_6f36b19e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-07T14:12:43Z",
+      "side": 1,
+      "message": "Prevent accidental submission.",
+      "revId": "1edec20206a425d1a1f79324940e7e190fa8435a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
