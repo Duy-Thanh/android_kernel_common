@@ -76,9 +76,11 @@
   bio_chain
   bio_endio
   bio_end_io_acct_remapped
+  bio_free_pages
   bio_reset
   bio_split
   bio_start_io_acct
+  bio_kmalloc
   bitmap_allocate_region
   __bio_add_page
   __bitmap_and
@@ -1206,6 +1208,7 @@
   generic_file_llseek
   generic_handle_domain_irq
   generic_handle_irq
+  generic_ro_fops
   geni_icc_disable
   geni_icc_enable
   geni_icc_get
@@ -2749,6 +2752,7 @@
   rcu_unexpedite_gp
   rcuwait_wake_up
   rdev_get_drvdata
+  readahead_expand
   reboot_mode
   rebuild_sched_domains
   reclaim_shmem_address_space
@@ -4264,6 +4268,7 @@
   zlib_deflateReset
   zlib_deflate_workspacesize
   zlib_inflate
+  zlib_inflateEnd
   zlib_inflateIncomp
   zlib_inflateInit2
   zlib_inflateReset
