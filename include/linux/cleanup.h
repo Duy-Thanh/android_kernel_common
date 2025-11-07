@@ -201,8 +201,8 @@
 
 #define __get_and_null(p, nullvalue)   \
 	({                                  \
-		__auto_type __ptr = &(p);   \
-		__auto_type __val = *__ptr; \
+		__typeof__(&(p)) __ptr = &(p);	\
+		__typeof__(p) __val = *__ptr;	\
 		*__ptr = nullvalue;         \
 		__val;                      \
 	})

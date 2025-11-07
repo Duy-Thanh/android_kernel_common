@@ -89,7 +89,7 @@
 	__cmp_once_unique(op, type, x, y, __UNIQUE_ID(x_), __UNIQUE_ID(y_))
 
 #define __careful_cmp_once(op, x, y, ux, uy) ({		\
-	__auto_type ux = (x); __auto_type uy = (y);	\
+	__typeof__(x) ux = (x); __typeof__(y) uy = (y);	\
 	BUILD_BUG_ON_MSG(!__types_ok(ux, uy),		\
 		#op"("#x", "#y") signedness error");	\
 	__cmp(op, ux, uy); })
@@ -129,7 +129,7 @@
 	__careful_cmp(max, (x) + 0u + 0ul + 0ull, (y) + 0u + 0ul + 0ull)
 
 #define __careful_op3(op, x, y, z, ux, uy, uz) ({			\
-	__auto_type ux = (x); __auto_type uy = (y);__auto_type uz = (z);\
+	__typeof__(x) ux = (x); __typeof__(y) uy = (y); __typeof__(z) uz = (z);\
 	BUILD_BUG_ON_MSG(!__types_ok3(ux, uy, uz),			\
 		#op"3("#x", "#y", "#z") signedness error");		\
 	__cmp(op, ux, __cmp(op, uy, uz)); })
@@ -203,7 +203,15 @@
  * This macro checks @val/@lo/@hi to make sure they have compatible
  * signedness.
  */
-#define clamp(val, lo, hi) __careful_clamp(__auto_type, val, lo, hi)
+#define clamp(val, lo, hi) ({							\
+	__typeof__(val) uval = (val);						\
+	__typeof__(lo) ulo = (lo);						\
+	__typeof__(hi) uhi = (hi);						\
+	BUILD_BUG_ON_MSG(statically_true(ulo > uhi),				\
+		"clamp() low limit " #lo " greater than high limit " #hi);	\
+	BUILD_BUG_ON_MSG(!__types_ok3(uval, ulo, uhi),				\
+		"clamp("#val", "#lo", "#hi") signedness error");		\
+	__clamp(uval, ulo, uhi); })
 
 /**
  * clamp_t - return a value clamped to a given range using a given type
