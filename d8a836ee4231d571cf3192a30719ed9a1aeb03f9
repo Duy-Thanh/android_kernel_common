@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e047c379_5352d36c",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2286,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-07T13:57:39Z",
+      "side": 1,
+      "message": "This line now has extra parentheses vs the FROMLIST version (to appease the compiler and match the same code elsewhere). I guess this means you should push a new series to the list and update the commit Link. It can wait until we\u0027ve got everything working presubmit though.",
+      "range": {
+        "startLine": 2286,
+        "startChar": 1,
+        "endLine": 2286,
+        "endChar": 36
+      },
+      "revId": "d8a836ee4231d571cf3192a30719ed9a1aeb03f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
