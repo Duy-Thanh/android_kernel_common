@@ -93,16 +93,14 @@ static unsigned long ls1x_divider_recalc_rate(struct clk_hw *hw,
 				   d->flags, d->width);
 }
 
-static int ls1x_divider_determine_rate(struct clk_hw *hw,
-				       struct clk_rate_request *req)
+static long ls1x_divider_round_rate(struct clk_hw *hw, unsigned long rate,
+				    unsigned long *prate)
 {
 	struct ls1x_clk *ls1x_clk = to_ls1x_clk(hw);
 	const struct ls1x_clk_div_data *d = ls1x_clk->data;
 
-	req->rate = divider_round_rate(hw, req->rate, &req->best_parent_rate,
-				       d->table, d->width, d->flags);
-
-	return 0;
+	return divider_round_rate(hw, rate, prate, d->table,
+				  d->width, d->flags);
 }
 
 static int ls1x_divider_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -148,7 +146,7 @@ static int ls1x_divider_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops ls1x_clk_divider_ops = {
 	.recalc_rate = ls1x_divider_recalc_rate,
-	.determine_rate = ls1x_divider_determine_rate,
+	.round_rate = ls1x_divider_round_rate,
 	.set_rate = ls1x_divider_set_rate,
 };
 

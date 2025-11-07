@@ -130,17 +130,15 @@ static void clk_pll_calc(unsigned long rate, unsigned long ref_freq,
 	*pdivf = divf;
 }
 
-static int clk_pll_determine_rate(struct clk_hw *hw,
-				  struct clk_rate_request *req)
+static long clk_pll_round_rate(struct clk_hw *hwclk, unsigned long rate,
+			       unsigned long *parent_rate)
 {
 	u32 divq, divf;
-	unsigned long ref_freq = req->best_parent_rate;
+	unsigned long ref_freq = *parent_rate;
 
-	clk_pll_calc(req->rate, ref_freq, &divq, &divf);
+	clk_pll_calc(rate, ref_freq, &divq, &divf);
 
-	req->rate = (ref_freq * (divf + 1)) / (1 << divq);
-
-	return 0;
+	return (ref_freq * (divf + 1)) / (1 << divq);
 }
 
 static int clk_pll_set_rate(struct clk_hw *hwclk, unsigned long rate,
@@ -187,7 +185,7 @@ static const struct clk_ops clk_pll_ops = {
 	.enable = clk_pll_enable,
 	.disable = clk_pll_disable,
 	.recalc_rate = clk_pll_recalc_rate,
-	.determine_rate = clk_pll_determine_rate,
+	.round_rate = clk_pll_round_rate,
 	.set_rate = clk_pll_set_rate,
 };
 
@@ -229,18 +227,16 @@ static unsigned long clk_periclk_recalc_rate(struct clk_hw *hwclk,
 	return parent_rate / div;
 }
 
-static int clk_periclk_determine_rate(struct clk_hw *hw,
-				      struct clk_rate_request *req)
+static long clk_periclk_round_rate(struct clk_hw *hwclk, unsigned long rate,
+				   unsigned long *parent_rate)
 {
 	u32 div;
 
-	div = req->best_parent_rate / req->rate;
+	div = *parent_rate / rate;
 	div++;
 	div &= ~0x1;
 
-	req->rate = req->best_parent_rate / div;
-
-	return 0;
+	return *parent_rate / div;
 }
 
 static int clk_periclk_set_rate(struct clk_hw *hwclk, unsigned long rate,
@@ -259,7 +255,7 @@ static int clk_periclk_set_rate(struct clk_hw *hwclk, unsigned long rate,
 
 static const struct clk_ops periclk_ops = {
 	.recalc_rate = clk_periclk_recalc_rate,
-	.determine_rate = clk_periclk_determine_rate,
+	.round_rate = clk_periclk_round_rate,
 	.set_rate = clk_periclk_set_rate,
 };
 

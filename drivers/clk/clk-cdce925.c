@@ -128,15 +128,13 @@ static void cdce925_pll_find_rate(unsigned long rate,
 	}
 }
 
-static int cdce925_pll_determine_rate(struct clk_hw *hw,
-				      struct clk_rate_request *req)
+static long cdce925_pll_round_rate(struct clk_hw *hw, unsigned long rate,
+		unsigned long *parent_rate)
 {
 	u16 n, m;
 
-	cdce925_pll_find_rate(req->rate, req->best_parent_rate, &n, &m);
-	req->rate = (long)cdce925_pll_calculate_rate(req->best_parent_rate, n, m);
-
-	return 0;
+	cdce925_pll_find_rate(rate, *parent_rate, &n, &m);
+	return (long)cdce925_pll_calculate_rate(*parent_rate, n, m);
 }
 
 static int cdce925_pll_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -268,7 +266,7 @@ static const struct clk_ops cdce925_pll_ops = {
 	.prepare = cdce925_pll_prepare,
 	.unprepare = cdce925_pll_unprepare,
 	.recalc_rate = cdce925_pll_recalc_rate,
-	.determine_rate = cdce925_pll_determine_rate,
+	.round_rate = cdce925_pll_round_rate,
 	.set_rate = cdce925_pll_set_rate,
 };
 
@@ -422,23 +420,20 @@ static unsigned long cdce925_clk_best_parent_rate(
 	return rate * pdiv_best;
 }
 
-static int cdce925_clk_determine_rate(struct clk_hw *hw,
-				      struct clk_rate_request *req)
+static long cdce925_clk_round_rate(struct clk_hw *hw, unsigned long rate,
+		unsigned long *parent_rate)
 {
-	unsigned long l_parent_rate = req->best_parent_rate;
-	u16 divider = cdce925_calc_divider(req->rate, l_parent_rate);
+	unsigned long l_parent_rate = *parent_rate;
+	u16 divider = cdce925_calc_divider(rate, l_parent_rate);
 
-	if (l_parent_rate / divider != req->rate) {
-		l_parent_rate = cdce925_clk_best_parent_rate(hw, req->rate);
-		divider = cdce925_calc_divider(req->rate, l_parent_rate);
-		req->best_parent_rate = l_parent_rate;
+	if (l_parent_rate / divider != rate) {
+		l_parent_rate = cdce925_clk_best_parent_rate(hw, rate);
+		divider = cdce925_calc_divider(rate, l_parent_rate);
+		*parent_rate = l_parent_rate;
 	}
 
 	if (divider)
-		req->rate = (long)(l_parent_rate / divider);
-	else
-		req->rate = 0;
-
+		return (long)(l_parent_rate / divider);
 	return 0;
 }
 
@@ -456,7 +451,7 @@ static const struct clk_ops cdce925_clk_ops = {
 	.prepare = cdce925_clk_prepare,
 	.unprepare = cdce925_clk_unprepare,
 	.recalc_rate = cdce925_clk_recalc_rate,
-	.determine_rate = cdce925_clk_determine_rate,
+	.round_rate = cdce925_clk_round_rate,
 	.set_rate = cdce925_clk_set_rate,
 };
 
@@ -478,17 +473,14 @@ static u16 cdce925_y1_calc_divider(unsigned long rate,
 	return (u16)divider;
 }
 
-static int cdce925_clk_y1_determine_rate(struct clk_hw *hw,
-					 struct clk_rate_request *req)
+static long cdce925_clk_y1_round_rate(struct clk_hw *hw, unsigned long rate,
+		unsigned long *parent_rate)
 {
-	unsigned long l_parent_rate = req->best_parent_rate;
-	u16 divider = cdce925_y1_calc_divider(req->rate, l_parent_rate);
+	unsigned long l_parent_rate = *parent_rate;
+	u16 divider = cdce925_y1_calc_divider(rate, l_parent_rate);
 
 	if (divider)
-		req->rate = (long)(l_parent_rate / divider);
-	else
-		req->rate = 0;
-
+		return (long)(l_parent_rate / divider);
 	return 0;
 }
 
@@ -506,7 +498,7 @@ static const struct clk_ops cdce925_clk_y1_ops = {
 	.prepare = cdce925_clk_prepare,
 	.unprepare = cdce925_clk_unprepare,
 	.recalc_rate = cdce925_clk_recalc_rate,
-	.determine_rate = cdce925_clk_y1_determine_rate,
+	.round_rate = cdce925_clk_y1_round_rate,
 	.set_rate = cdce925_clk_y1_set_rate,
 };
 

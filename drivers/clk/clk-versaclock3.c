@@ -289,25 +289,22 @@ static unsigned long vc3_pfd_recalc_rate(struct clk_hw *hw,
 	return rate;
 }
 
-static int vc3_pfd_determine_rate(struct clk_hw *hw,
-				  struct clk_rate_request *req)
+static long vc3_pfd_round_rate(struct clk_hw *hw, unsigned long rate,
+			       unsigned long *parent_rate)
 {
 	struct vc3_hw_data *vc3 = container_of(hw, struct vc3_hw_data, hw);
 	const struct vc3_pfd_data *pfd = vc3->data;
 	unsigned long idiv;
 
 	/* PLL cannot operate with input clock above 50 MHz. */
-	if (req->rate > 50000000)
+	if (rate > 50000000)
 		return -EINVAL;
 
 	/* CLKIN within range of PLL input, feed directly to PLL. */
-	if (req->best_parent_rate <= 50000000) {
-		req->rate = req->best_parent_rate;
+	if (*parent_rate <= 50000000)
+		return *parent_rate;
 
-		return 0;
-	}
-
-	idiv = DIV_ROUND_UP(req->best_parent_rate, req->rate);
+	idiv = DIV_ROUND_UP(*parent_rate, rate);
 	if (pfd->num == VC3_PFD1 || pfd->num == VC3_PFD3) {
 		if (idiv > 63)
 			return -EINVAL;
@@ -316,9 +313,7 @@ static int vc3_pfd_determine_rate(struct clk_hw *hw,
 			return -EINVAL;
 	}
 
-	req->rate = req->best_parent_rate / idiv;
-
-	return 0;
+	return *parent_rate / idiv;
 }
 
 static int vc3_pfd_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -359,7 +354,7 @@ static int vc3_pfd_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops vc3_pfd_ops = {
 	.recalc_rate = vc3_pfd_recalc_rate,
-	.determine_rate = vc3_pfd_determine_rate,
+	.round_rate = vc3_pfd_round_rate,
 	.set_rate = vc3_pfd_set_rate,
 };
 
@@ -390,38 +385,36 @@ static unsigned long vc3_pll_recalc_rate(struct clk_hw *hw,
 	return rate;
 }
 
-static int vc3_pll_determine_rate(struct clk_hw *hw,
-				  struct clk_rate_request *req)
+static long vc3_pll_round_rate(struct clk_hw *hw, unsigned long rate,
+			       unsigned long *parent_rate)
 {
 	struct vc3_hw_data *vc3 = container_of(hw, struct vc3_hw_data, hw);
 	const struct vc3_pll_data *pll = vc3->data;
 	u64 div_frc;
 
-	if (req->rate < pll->vco.min)
-		req->rate = pll->vco.min;
-	if (req->rate > pll->vco.max)
-		req->rate = pll->vco.max;
+	if (rate < pll->vco.min)
+		rate = pll->vco.min;
+	if (rate > pll->vco.max)
+		rate = pll->vco.max;
 
-	vc3->div_int = req->rate / req->best_parent_rate;
+	vc3->div_int = rate / *parent_rate;
 
 	if (pll->num == VC3_PLL2) {
 		if (vc3->div_int > 0x7ff)
-			req->rate = req->best_parent_rate * 0x7ff;
+			rate = *parent_rate * 0x7ff;
 
 		/* Determine best fractional part, which is 16 bit wide */
-		div_frc = req->rate % req->best_parent_rate;
+		div_frc = rate % *parent_rate;
 		div_frc *= BIT(16) - 1;
 
-		vc3->div_frc = min_t(u64,
-				     div64_ul(div_frc, req->best_parent_rate),
-				     U16_MAX);
-		req->rate = (req->best_parent_rate *
-			     (vc3->div_int * VC3_2_POW_16 + vc3->div_frc) / VC3_2_POW_16);
+		vc3->div_frc = min_t(u64, div64_ul(div_frc, *parent_rate), U16_MAX);
+		rate = (*parent_rate *
+			(vc3->div_int * VC3_2_POW_16 + vc3->div_frc) / VC3_2_POW_16);
 	} else {
-		req->rate = req->best_parent_rate * vc3->div_int;
+		rate = *parent_rate * vc3->div_int;
 	}
 
-	return 0;
+	return rate;
 }
 
 static int vc3_pll_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -448,7 +441,7 @@ static int vc3_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops vc3_pll_ops = {
 	.recalc_rate = vc3_pll_recalc_rate,
-	.determine_rate = vc3_pll_determine_rate,
+	.round_rate = vc3_pll_round_rate,
 	.set_rate = vc3_pll_set_rate,
 };
 
@@ -505,8 +498,8 @@ static unsigned long vc3_div_recalc_rate(struct clk_hw *hw,
 				   div_data->flags, div_data->width);
 }
 
-static int vc3_div_determine_rate(struct clk_hw *hw,
-				  struct clk_rate_request *req)
+static long vc3_div_round_rate(struct clk_hw *hw, unsigned long rate,
+			       unsigned long *parent_rate)
 {
 	struct vc3_hw_data *vc3 = container_of(hw, struct vc3_hw_data, hw);
 	const struct vc3_div_data *div_data = vc3->data;
@@ -518,16 +511,11 @@ static int vc3_div_determine_rate(struct clk_hw *hw,
 		bestdiv >>= div_data->shift;
 		bestdiv &= VC3_DIV_MASK(div_data->width);
 		bestdiv = vc3_get_div(div_data->table, bestdiv, div_data->flags);
-		req->rate = DIV_ROUND_UP(req->best_parent_rate, bestdiv);
-
-		return 0;
+		return DIV_ROUND_UP(*parent_rate, bestdiv);
 	}
 
-	req->rate = divider_round_rate(hw, req->rate, &req->best_parent_rate,
-				       div_data->table,
-				       div_data->width, div_data->flags);
-
-	return 0;
+	return divider_round_rate(hw, rate, parent_rate, div_data->table,
+				  div_data->width, div_data->flags);
 }
 
 static int vc3_div_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -546,7 +534,7 @@ static int vc3_div_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops vc3_div_ops = {
 	.recalc_rate = vc3_div_recalc_rate,
-	.determine_rate = vc3_div_determine_rate,
+	.round_rate = vc3_div_round_rate,
 	.set_rate = vc3_div_set_rate,
 };
 

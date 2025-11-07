@@ -183,8 +183,8 @@ static unsigned long cdce706_pll_recalc_rate(struct clk_hw *hw,
 	return 0;
 }
 
-static int cdce706_pll_determine_rate(struct clk_hw *hw,
-				      struct clk_rate_request *req)
+static long cdce706_pll_round_rate(struct clk_hw *hw, unsigned long rate,
+				   unsigned long *parent_rate)
 {
 	struct cdce706_hw_data *hwd = to_hw_data(hw);
 	unsigned long mul, div;
@@ -192,9 +192,9 @@ static int cdce706_pll_determine_rate(struct clk_hw *hw,
 
 	dev_dbg(&hwd->dev_data->client->dev,
 		"%s, rate: %lu, parent_rate: %lu\n",
-		__func__, req->rate, req->best_parent_rate);
+		__func__, rate, *parent_rate);
 
-	rational_best_approximation(req->rate, req->best_parent_rate,
+	rational_best_approximation(rate, *parent_rate,
 				    CDCE706_PLL_N_MAX, CDCE706_PLL_M_MAX,
 				    &mul, &div);
 	hwd->mul = mul;
@@ -204,11 +204,9 @@ static int cdce706_pll_determine_rate(struct clk_hw *hw,
 		"%s, pll: %d, mul: %lu, div: %lu\n",
 		__func__, hwd->idx, mul, div);
 
-	res = (u64)req->best_parent_rate * hwd->mul;
+	res = (u64)*parent_rate * hwd->mul;
 	do_div(res, hwd->div);
-	req->rate = res;
-
-	return 0;
+	return res;
 }
 
 static int cdce706_pll_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -253,7 +251,7 @@ static int cdce706_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops cdce706_pll_ops = {
 	.recalc_rate = cdce706_pll_recalc_rate,
-	.determine_rate = cdce706_pll_determine_rate,
+	.round_rate = cdce706_pll_round_rate,
 	.set_rate = cdce706_pll_set_rate,
 };
 

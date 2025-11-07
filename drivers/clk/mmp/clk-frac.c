@@ -21,8 +21,8 @@
 
 #define to_clk_factor(hw) container_of(hw, struct mmp_clk_factor, hw)
 
-static int clk_factor_determine_rate(struct clk_hw *hw,
-				     struct clk_rate_request *req)
+static long clk_factor_round_rate(struct clk_hw *hw, unsigned long drate,
+		unsigned long *prate)
 {
 	struct mmp_clk_factor *factor = to_clk_factor(hw);
 	u64 rate = 0, prev_rate;
@@ -33,20 +33,19 @@ static int clk_factor_determine_rate(struct clk_hw *hw,
 		d = &factor->ftbl[i];
 
 		prev_rate = rate;
-		rate = (u64)(req->best_parent_rate) * d->denominator;
+		rate = (u64)(*prate) * d->denominator;
 		do_div(rate, d->numerator * factor->masks->factor);
-		if (rate > req->rate)
+		if (rate > drate)
 			break;
 	}
-
-	if ((i == 0) || (i == factor->ftbl_cnt))
-		req->rate = rate;
-	else if ((req->rate - prev_rate) > (rate - req->rate))
-		req->rate = rate;
-	else
-		req->rate = prev_rate;
-
-	return 0;
+	if ((i == 0) || (i == factor->ftbl_cnt)) {
+		return rate;
+	} else {
+		if ((drate - prev_rate) > (rate - drate))
+			return rate;
+		else
+			return prev_rate;
+	}
 }
 
 static unsigned long clk_factor_recalc_rate(struct clk_hw *hw,
@@ -161,7 +160,7 @@ static int clk_factor_init(struct clk_hw *hw)
 
 static const struct clk_ops clk_factor_ops = {
 	.recalc_rate = clk_factor_recalc_rate,
-	.determine_rate = clk_factor_determine_rate,
+	.round_rate = clk_factor_round_rate,
 	.set_rate = clk_factor_set_rate,
 	.init = clk_factor_init,
 };

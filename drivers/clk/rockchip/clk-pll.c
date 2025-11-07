@@ -61,8 +61,8 @@ static const struct rockchip_pll_rate_table *rockchip_get_pll_settings(
 	return NULL;
 }
 
-static int rockchip_pll_determine_rate(struct clk_hw *hw,
-				       struct clk_rate_request *req)
+static long rockchip_pll_round_rate(struct clk_hw *hw,
+			    unsigned long drate, unsigned long *prate)
 {
 	struct rockchip_clk_pll *pll = to_rockchip_clk_pll(hw);
 	const struct rockchip_pll_rate_table *rate_table = pll->rate_table;
@@ -70,17 +70,12 @@ static int rockchip_pll_determine_rate(struct clk_hw *hw,
 
 	/* Assuming rate_table is in descending order */
 	for (i = 0; i < pll->rate_count; i++) {
-		if (req->rate >= rate_table[i].rate) {
-			req->rate = rate_table[i].rate;
-
-			return 0;
-		}
+		if (drate >= rate_table[i].rate)
+			return rate_table[i].rate;
 	}
 
 	/* return minimum supported value */
-	req->rate = rate_table[i - 1].rate;
-
-	return 0;
+	return rate_table[i - 1].rate;
 }
 
 /*
@@ -357,7 +352,7 @@ static const struct clk_ops rockchip_rk3036_pll_clk_norate_ops = {
 
 static const struct clk_ops rockchip_rk3036_pll_clk_ops = {
 	.recalc_rate = rockchip_rk3036_pll_recalc_rate,
-	.determine_rate = rockchip_pll_determine_rate,
+	.round_rate = rockchip_pll_round_rate,
 	.set_rate = rockchip_rk3036_pll_set_rate,
 	.enable = rockchip_rk3036_pll_enable,
 	.disable = rockchip_rk3036_pll_disable,
@@ -576,7 +571,7 @@ static const struct clk_ops rockchip_rk3066_pll_clk_norate_ops = {
 
 static const struct clk_ops rockchip_rk3066_pll_clk_ops = {
 	.recalc_rate = rockchip_rk3066_pll_recalc_rate,
-	.determine_rate = rockchip_pll_determine_rate,
+	.round_rate = rockchip_pll_round_rate,
 	.set_rate = rockchip_rk3066_pll_set_rate,
 	.enable = rockchip_rk3066_pll_enable,
 	.disable = rockchip_rk3066_pll_disable,
@@ -841,7 +836,7 @@ static const struct clk_ops rockchip_rk3399_pll_clk_norate_ops = {
 
 static const struct clk_ops rockchip_rk3399_pll_clk_ops = {
 	.recalc_rate = rockchip_rk3399_pll_recalc_rate,
-	.determine_rate = rockchip_pll_determine_rate,
+	.round_rate = rockchip_pll_round_rate,
 	.set_rate = rockchip_rk3399_pll_set_rate,
 	.enable = rockchip_rk3399_pll_enable,
 	.disable = rockchip_rk3399_pll_disable,
@@ -1041,7 +1036,7 @@ static const struct clk_ops rockchip_rk3588_pll_clk_norate_ops = {
 
 static const struct clk_ops rockchip_rk3588_pll_clk_ops = {
 	.recalc_rate = rockchip_rk3588_pll_recalc_rate,
-	.determine_rate = rockchip_pll_determine_rate,
+	.round_rate = rockchip_pll_round_rate,
 	.set_rate = rockchip_rk3588_pll_set_rate,
 	.enable = rockchip_rk3588_pll_enable,
 	.disable = rockchip_rk3588_pll_disable,

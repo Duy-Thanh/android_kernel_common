@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 */
-#ifndef __LINUX_ENTRYVIRT_H
-#define __LINUX_ENTRYVIRT_H
+#ifndef __LINUX_ENTRYKVM_H
+#define __LINUX_ENTRYKVM_H
 
 #include <linux/static_call_types.h>
 #include <linux/resume_user_mode.h>
@@ -10,7 +10,7 @@
 #include <linux/tick.h>
 
 /* Transfer to guest mode work */
-#ifdef CONFIG_VIRT_XFER_TO_GUEST_WORK
+#ifdef CONFIG_KVM_XFER_TO_GUEST_WORK
 
 #ifndef ARCH_XFER_TO_GUEST_MODE_WORK
 # define ARCH_XFER_TO_GUEST_MODE_WORK	(0)
@@ -21,6 +21,8 @@
 	 _TIF_NOTIFY_SIGNAL | _TIF_NOTIFY_RESUME |			\
 	 ARCH_XFER_TO_GUEST_MODE_WORK)
 
+struct kvm_vcpu;
+
 /**
  * arch_xfer_to_guest_mode_handle_work - Architecture specific xfer to guest
  *					 mode work handling function.
@@ -30,10 +32,12 @@
  * Invoked from xfer_to_guest_mode_handle_work(). Defaults to NOOP. Can be
  * replaced by architecture specific code.
  */
-static inline int arch_xfer_to_guest_mode_handle_work(unsigned long ti_work);
+static inline int arch_xfer_to_guest_mode_handle_work(struct kvm_vcpu *vcpu,
+						      unsigned long ti_work);
 
 #ifndef arch_xfer_to_guest_mode_work
-static inline int arch_xfer_to_guest_mode_handle_work(unsigned long ti_work)
+static inline int arch_xfer_to_guest_mode_handle_work(struct kvm_vcpu *vcpu,
+						      unsigned long ti_work)
 {
 	return 0;
 }
@@ -42,10 +46,11 @@ static inline int arch_xfer_to_guest_mode_handle_work(unsigned long ti_work)
 /**
  * xfer_to_guest_mode_handle_work - Check and handle pending work which needs
  *				    to be handled before going to guest mode
+ * @vcpu:	Pointer to current's VCPU data
  *
  * Returns: 0 or an error code
  */
-int xfer_to_guest_mode_handle_work(void);
+int xfer_to_guest_mode_handle_work(struct kvm_vcpu *vcpu);
 
 /**
  * xfer_to_guest_mode_prepare - Perform last minute preparation work that
@@ -90,6 +95,6 @@ static inline bool xfer_to_guest_mode_work_pending(void)
 	lockdep_assert_irqs_disabled();
 	return __xfer_to_guest_mode_work_pending();
 }
-#endif /* CONFIG_VIRT_XFER_TO_GUEST_WORK */
+#endif /* CONFIG_KVM_XFER_TO_GUEST_WORK */
 
 #endif

@@ -149,8 +149,8 @@ static unsigned long axs10x_pll_recalc_rate(struct clk_hw *hw,
 	return rate;
 }
 
-static int axs10x_pll_determine_rate(struct clk_hw *hw,
-				     struct clk_rate_request *req)
+static long axs10x_pll_round_rate(struct clk_hw *hw, unsigned long rate,
+				  unsigned long *prate)
 {
 	int i;
 	long best_rate;
@@ -163,13 +163,11 @@ static int axs10x_pll_determine_rate(struct clk_hw *hw,
 	best_rate = pll_cfg[0].rate;
 
 	for (i = 1; pll_cfg[i].rate != 0; i++) {
-		if (abs(req->rate - pll_cfg[i].rate) < abs(req->rate - best_rate))
+		if (abs(rate - pll_cfg[i].rate) < abs(rate - best_rate))
 			best_rate = pll_cfg[i].rate;
 	}
 
-	req->rate = best_rate;
-
-	return 0;
+	return best_rate;
 }
 
 static int axs10x_pll_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -210,7 +208,7 @@ static int axs10x_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops axs10x_pll_ops = {
 	.recalc_rate = axs10x_pll_recalc_rate,
-	.determine_rate = axs10x_pll_determine_rate,
+	.round_rate = axs10x_pll_round_rate,
 	.set_rate = axs10x_pll_set_rate,
 };
 

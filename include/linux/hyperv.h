@@ -707,6 +707,11 @@ struct vmbus_channel_msginfo {
 	unsigned char msg[];
 };
 
+struct vmbus_close_msg {
+	struct vmbus_channel_msginfo info;
+	struct vmbus_channel_close_channel msg;
+};
+
 enum vmbus_device_type {
 	HV_IDE = 0,
 	HV_SCSI,
@@ -795,7 +800,7 @@ struct vmbus_channel {
 	struct hv_ring_buffer_info outbound;	/* send to parent */
 	struct hv_ring_buffer_info inbound;	/* receive from parent */
 
-	struct vmbus_channel_close_channel close_msg;
+	struct vmbus_close_msg close_msg;
 
 	/* Statistics */
 	u64	interrupts;	/* Host to Guest interrupts */

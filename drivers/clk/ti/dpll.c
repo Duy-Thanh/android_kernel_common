@@ -25,6 +25,7 @@ static const struct clk_ops dpll_m4xen_ck_ops = {
 	.enable		= &omap3_noncore_dpll_enable,
 	.disable	= &omap3_noncore_dpll_disable,
 	.recalc_rate	= &omap4_dpll_regm4xen_recalc,
+	.round_rate	= &omap4_dpll_regm4xen_round_rate,
 	.set_rate	= &omap3_noncore_dpll_set_rate,
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_noncore_dpll_set_rate_and_parent,
@@ -47,6 +48,7 @@ static const struct clk_ops dpll_ck_ops = {
 	.enable		= &omap3_noncore_dpll_enable,
 	.disable	= &omap3_noncore_dpll_disable,
 	.recalc_rate	= &omap3_dpll_recalc,
+	.round_rate	= &omap2_dpll_round_rate,
 	.set_rate	= &omap3_noncore_dpll_set_rate,
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_noncore_dpll_set_rate_and_parent,
@@ -59,6 +61,7 @@ static const struct clk_ops dpll_ck_ops = {
 static const struct clk_ops dpll_no_gate_ck_ops = {
 	.recalc_rate	= &omap3_dpll_recalc,
 	.get_parent	= &omap2_init_dpll_parent,
+	.round_rate	= &omap2_dpll_round_rate,
 	.set_rate	= &omap3_noncore_dpll_set_rate,
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_noncore_dpll_set_rate_and_parent,
@@ -77,7 +80,7 @@ const struct clk_hw_omap_ops clkhwops_omap3_dpll = {};
 static const struct clk_ops omap2_dpll_core_ck_ops = {
 	.get_parent	= &omap2_init_dpll_parent,
 	.recalc_rate	= &omap2_dpllcore_recalc,
-	.determine_rate	= &omap2_dpll_determine_rate,
+	.round_rate	= &omap2_dpll_round_rate,
 	.set_rate	= &omap2_reprogram_dpllcore,
 };
 #else
@@ -88,7 +91,7 @@ static const struct clk_ops omap2_dpll_core_ck_ops = {};
 static const struct clk_ops omap3_dpll_core_ck_ops = {
 	.get_parent	= &omap2_init_dpll_parent,
 	.recalc_rate	= &omap3_dpll_recalc,
-	.determine_rate	= &omap2_dpll_determine_rate,
+	.round_rate	= &omap2_dpll_round_rate,
 };
 
 static const struct clk_ops omap3_dpll_ck_ops = {
@@ -100,6 +103,7 @@ static const struct clk_ops omap3_dpll_ck_ops = {
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_noncore_dpll_set_rate_and_parent,
 	.determine_rate	= &omap3_noncore_dpll_determine_rate,
+	.round_rate	= &omap2_dpll_round_rate,
 };
 
 static const struct clk_ops omap3_dpll5_ck_ops = {
@@ -111,6 +115,7 @@ static const struct clk_ops omap3_dpll5_ck_ops = {
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_noncore_dpll_set_rate_and_parent,
 	.determine_rate	= &omap3_noncore_dpll_determine_rate,
+	.round_rate	= &omap2_dpll_round_rate,
 };
 
 static const struct clk_ops omap3_dpll_per_ck_ops = {
@@ -122,6 +127,7 @@ static const struct clk_ops omap3_dpll_per_ck_ops = {
 	.set_parent	= &omap3_noncore_dpll_set_parent,
 	.set_rate_and_parent	= &omap3_dpll4_set_rate_and_parent,
 	.determine_rate	= &omap3_noncore_dpll_determine_rate,
+	.round_rate	= &omap2_dpll_round_rate,
 };
 #endif
 

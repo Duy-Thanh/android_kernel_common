@@ -663,8 +663,8 @@ static unsigned long si5341_synth_clk_recalc_rate(struct clk_hw *hw,
 	return f;
 }
 
-static int si5341_synth_clk_determine_rate(struct clk_hw *hw,
-					   struct clk_rate_request *req)
+static long si5341_synth_clk_round_rate(struct clk_hw *hw, unsigned long rate,
+		unsigned long *parent_rate)
 {
 	struct clk_si5341_synth *synth = to_clk_si5341_synth(hw);
 	u64 f;
@@ -672,21 +672,15 @@ static int si5341_synth_clk_determine_rate(struct clk_hw *hw,
 	/* The synthesizer accuracy is such that anything in range will work */
 	f = synth->data->freq_vco;
 	do_div(f, SI5341_SYNTH_N_MAX);
-	if (req->rate < f) {
-		req->rate = f;
-
-		return 0;
-	}
+	if (rate < f)
+		return f;
 
 	f = synth->data->freq_vco;
 	do_div(f, SI5341_SYNTH_N_MIN);
-	if (req->rate > f) {
-		req->rate = f;
+	if (rate > f)
+		return f;
 
-		return 0;
-	}
-
-	return 0;
+	return rate;
 }
 
 static int si5341_synth_program(struct clk_si5341_synth *synth,
@@ -747,7 +741,7 @@ static const struct clk_ops si5341_synth_clk_ops = {
 	.prepare = si5341_synth_clk_prepare,
 	.unprepare = si5341_synth_clk_unprepare,
 	.recalc_rate = si5341_synth_clk_recalc_rate,
-	.determine_rate = si5341_synth_clk_determine_rate,
+	.round_rate = si5341_synth_clk_round_rate,
 	.set_rate = si5341_synth_clk_set_rate,
 };
 

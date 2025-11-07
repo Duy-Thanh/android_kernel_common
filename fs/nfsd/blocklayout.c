@@ -18,8 +18,8 @@
 
 
 static __be32
-nfsd4_block_proc_layoutget(struct svc_rqst *rqstp, struct inode *inode,
-		const struct svc_fh *fhp, struct nfsd4_layoutget *args)
+nfsd4_block_proc_layoutget(struct inode *inode, const struct svc_fh *fhp,
+		struct nfsd4_layoutget *args)
 {
 	struct nfsd4_layout_seg *seg = &args->lg_seg;
 	struct super_block *sb = inode->i_sb;
@@ -28,9 +28,6 @@ nfsd4_block_proc_layoutget(struct svc_rqst *rqstp, struct inode *inode,
 	struct iomap iomap;
 	u32 device_generation = 0;
 	int error;
-
-	if (locks_in_grace(SVC_NET(rqstp)))
-		return nfserr_grace;
 
 	if (seg->offset & (block_size - 1)) {
 		dprintk("pnfsd: I/O misaligned\n");
@@ -121,6 +118,7 @@ nfsd4_block_commit_blocks(struct inode *inode, struct nfsd4_layoutcommit *lcp,
 		struct iomap *iomaps, int nr_iomaps)
 {
 	struct timespec64 mtime = inode_get_mtime(inode);
+	loff_t new_size = lcp->lc_last_wr + 1;
 	struct iattr iattr = { .ia_valid = 0 };
 	int error;
 
@@ -130,9 +128,9 @@ nfsd4_block_commit_blocks(struct inode *inode, struct nfsd4_layoutcommit *lcp,
 	iattr.ia_valid |= ATTR_ATIME | ATTR_CTIME | ATTR_MTIME;
 	iattr.ia_atime = iattr.ia_ctime = iattr.ia_mtime = lcp->lc_mtime;
 
-	if (lcp->lc_size_chg) {
+	if (new_size > i_size_read(inode)) {
 		iattr.ia_valid |= ATTR_SIZE;
-		iattr.ia_size = lcp->lc_newsize;
+		iattr.ia_size = new_size;
 	}
 
 	error = inode->i_sb->s_export_op->commit_blocks(inode, iomaps,
@@ -175,18 +173,16 @@ nfsd4_block_proc_getdeviceinfo(struct super_block *sb,
 }
 
 static __be32
-nfsd4_block_proc_layoutcommit(struct inode *inode, struct svc_rqst *rqstp,
+nfsd4_block_proc_layoutcommit(struct inode *inode,
 		struct nfsd4_layoutcommit *lcp)
 {
 	struct iomap *iomaps;
 	int nr_iomaps;
 	__be32 nfserr;
 
-	rqstp->rq_arg = lcp->lc_up_layout;
-	svcxdr_init_decode(rqstp);
-
-	nfserr = nfsd4_block_decode_layoutupdate(&rqstp->rq_arg_stream,
-			&iomaps, &nr_iomaps, i_blocksize(inode));
+	nfserr = nfsd4_block_decode_layoutupdate(lcp->lc_up_layout,
+			lcp->lc_up_len, &iomaps, &nr_iomaps,
+			i_blocksize(inode));
 	if (nfserr != nfs_ok)
 		return nfserr;
 
@@ -317,18 +313,16 @@ nfsd4_scsi_proc_getdeviceinfo(struct super_block *sb,
 	return nfserrno(nfsd4_block_get_device_info_scsi(sb, clp, gdp));
 }
 static __be32
-nfsd4_scsi_proc_layoutcommit(struct inode *inode, struct svc_rqst *rqstp,
+nfsd4_scsi_proc_layoutcommit(struct inode *inode,
 		struct nfsd4_layoutcommit *lcp)
 {
 	struct iomap *iomaps;
 	int nr_iomaps;
 	__be32 nfserr;
 
-	rqstp->rq_arg = lcp->lc_up_layout;
-	svcxdr_init_decode(rqstp);
-
-	nfserr = nfsd4_scsi_decode_layoutupdate(&rqstp->rq_arg_stream,
-			&iomaps, &nr_iomaps, i_blocksize(inode));
+	nfserr = nfsd4_scsi_decode_layoutupdate(lcp->lc_up_layout,
+			lcp->lc_up_len, &iomaps, &nr_iomaps,
+			i_blocksize(inode));
 	if (nfserr != nfs_ok)
 		return nfserr;
 

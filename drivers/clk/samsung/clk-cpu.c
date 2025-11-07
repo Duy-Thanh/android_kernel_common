@@ -567,14 +567,12 @@ static int exynos850_cpuclk_post_rate_change(struct clk_notifier_data *ndata,
 /* -------------------------------------------------------------------------- */
 
 /* Common round rate callback usable for all types of CPU clocks */
-static int exynos_cpuclk_determine_rate(struct clk_hw *hw,
-					struct clk_rate_request *req)
+static long exynos_cpuclk_round_rate(struct clk_hw *hw, unsigned long drate,
+				     unsigned long *prate)
 {
 	struct clk_hw *parent = clk_hw_get_parent(hw);
-	req->best_parent_rate = clk_hw_round_rate(parent, req->rate);
-	req->rate = req->best_parent_rate;
-
-	return 0;
+	*prate = clk_hw_round_rate(parent, drate);
+	return *prate;
 }
 
 /* Common recalc rate callback usable for all types of CPU clocks */
@@ -593,7 +591,7 @@ static unsigned long exynos_cpuclk_recalc_rate(struct clk_hw *hw,
 
 static const struct clk_ops exynos_cpuclk_clk_ops = {
 	.recalc_rate = exynos_cpuclk_recalc_rate,
-	.determine_rate = exynos_cpuclk_determine_rate,
+	.round_rate = exynos_cpuclk_round_rate,
 };
 
 /*

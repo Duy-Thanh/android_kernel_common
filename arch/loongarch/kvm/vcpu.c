@@ -4,6 +4,7 @@
  */
 
 #include <linux/kvm_host.h>
+#include <linux/entry-kvm.h>
 #include <asm/fpu.h>
 #include <asm/lbt.h>
 #include <asm/loongarch.h>
@@ -250,7 +251,7 @@ static int kvm_enter_guest_check(struct kvm_vcpu *vcpu)
 	/*
 	 * Check conditions before entering the guest
 	 */
-	ret = kvm_xfer_to_guest_mode_handle_work(vcpu);
+	ret = xfer_to_guest_mode_handle_work(vcpu);
 	if (ret < 0)
 		return ret;
 

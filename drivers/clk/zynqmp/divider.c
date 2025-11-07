@@ -118,8 +118,9 @@ static unsigned long zynqmp_clk_divider_recalc_rate(struct clk_hw *hw,
  *
  * Return: 0 on success else error+reason
  */
-static int zynqmp_clk_divider_determine_rate(struct clk_hw *hw,
-					     struct clk_rate_request *req)
+static long zynqmp_clk_divider_round_rate(struct clk_hw *hw,
+					  unsigned long rate,
+					  unsigned long *prate)
 {
 	struct zynqmp_clk_divider *divider = to_zynqmp_clk_divider(hw);
 	const char *clk_name = clk_hw_get_name(hw);
@@ -144,21 +145,17 @@ static int zynqmp_clk_divider_determine_rate(struct clk_hw *hw,
 		if (divider->flags & CLK_DIVIDER_POWER_OF_TWO)
 			bestdiv = 1 << bestdiv;
 
-		req->rate = DIV_ROUND_UP_ULL((u64)req->best_parent_rate, bestdiv);
-
-		return 0;
+		return DIV_ROUND_UP_ULL((u64)*prate, bestdiv);
 	}
 
 	width = fls(divider->max_div);
 
-	req->rate = divider_round_rate(hw, req->rate, &req->best_parent_rate,
-				       NULL, width, divider->flags);
+	rate = divider_round_rate(hw, rate, prate, NULL, width, divider->flags);
 
-	if (divider->is_frac && (clk_hw_get_flags(hw) & CLK_SET_RATE_PARENT) &&
-	    (req->rate % req->best_parent_rate))
-		req->best_parent_rate = req->rate;
+	if (divider->is_frac && (clk_hw_get_flags(hw) & CLK_SET_RATE_PARENT) && (rate % *prate))
+		*prate = rate;
 
-	return 0;
+	return rate;
 }
 
 /**
@@ -202,13 +199,13 @@ static int zynqmp_clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops zynqmp_clk_divider_ops = {
 	.recalc_rate = zynqmp_clk_divider_recalc_rate,
-	.determine_rate = zynqmp_clk_divider_determine_rate,
+	.round_rate = zynqmp_clk_divider_round_rate,
 	.set_rate = zynqmp_clk_divider_set_rate,
 };
 
 static const struct clk_ops zynqmp_clk_divider_ro_ops = {
 	.recalc_rate = zynqmp_clk_divider_recalc_rate,
-	.determine_rate = zynqmp_clk_divider_determine_rate,
+	.round_rate = zynqmp_clk_divider_round_rate,
 };
 
 /**
