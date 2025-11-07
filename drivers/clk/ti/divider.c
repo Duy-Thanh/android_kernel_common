@@ -223,15 +223,13 @@ static int ti_clk_divider_bestdiv(struct clk_hw *hw, unsigned long rate,
 	return bestdiv;
 }
 
-static int ti_clk_divider_determine_rate(struct clk_hw *hw,
-					 struct clk_rate_request *req)
+static long ti_clk_divider_round_rate(struct clk_hw *hw, unsigned long rate,
+				      unsigned long *prate)
 {
 	int div;
-	div = ti_clk_divider_bestdiv(hw, req->rate, &req->best_parent_rate);
+	div = ti_clk_divider_bestdiv(hw, rate, prate);
 
-	req->rate = DIV_ROUND_UP(req->best_parent_rate, div);
-
-	return 0;
+	return DIV_ROUND_UP(*prate, div);
 }
 
 static int ti_clk_divider_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -301,7 +299,7 @@ static void clk_divider_restore_context(struct clk_hw *hw)
 
 const struct clk_ops ti_clk_divider_ops = {
 	.recalc_rate = ti_clk_divider_recalc_rate,
-	.determine_rate = ti_clk_divider_determine_rate,
+	.round_rate = ti_clk_divider_round_rate,
 	.set_rate = ti_clk_divider_set_rate,
 	.save_context = clk_divider_save_context,
 	.restore_context = clk_divider_restore_context,

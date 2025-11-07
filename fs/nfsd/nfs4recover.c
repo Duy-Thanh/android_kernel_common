@@ -92,10 +92,24 @@ nfs4_reset_creds(const struct cred *original)
 	put_cred(revert_creds(original));
 }
 
-static int
-nfs4_make_rec_clidname(char dname[HEXDIR_LEN], const struct xdr_netobj *clname)
+static void
+md5_to_hex(char *out, char *md5)
 {
-	u8 digest[MD5_DIGEST_SIZE];
+	int i;
+
+	for (i=0; i<16; i++) {
+		unsigned char c = md5[i];
+
+		*out++ = '0' + ((c&0xf0)>>4) + (c>=0xa0)*('a'-'9'-1);
+		*out++ = '0' + (c&0x0f) + ((c&0x0f)>=0x0a)*('a'-'9'-1);
+	}
+	*out = '\0';
+}
+
+static int
+nfs4_make_rec_clidname(char *dname, const struct xdr_netobj *clname)
+{
+	struct xdr_netobj cksum;
 	struct crypto_shash *tfm;
 	int status;
 
@@ -107,16 +121,23 @@ nfs4_make_rec_clidname(char dname[HEXDIR_LEN], const struct xdr_netobj *clname)
 		goto out_no_tfm;
 	}
 
+	cksum.len = crypto_shash_digestsize(tfm);
+	cksum.data = kmalloc(cksum.len, GFP_KERNEL);
+	if (cksum.data == NULL) {
+		status = -ENOMEM;
+ 		goto out;
+	}
+
 	status = crypto_shash_tfm_digest(tfm, clname->data, clname->len,
-					 digest);
+					 cksum.data);
 	if (status)
 		goto out;
 
-	static_assert(HEXDIR_LEN == 2 * MD5_DIGEST_SIZE + 1);
-	sprintf(dname, "%*phN", MD5_DIGEST_SIZE, digest);
+	md5_to_hex(dname, cksum.data);
 
 	status = 0;
 out:
+	kfree(cksum.data);
 	crypto_free_shash(tfm);
 out_no_tfm:
 	return status;

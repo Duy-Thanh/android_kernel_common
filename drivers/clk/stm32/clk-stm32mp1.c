@@ -970,15 +970,12 @@ static unsigned long __bestmult(struct clk_hw *hw, unsigned long rate,
 	return mult;
 }
 
-static int timer_ker_determine_rate(struct clk_hw *hw,
-				    struct clk_rate_request *req)
+static long timer_ker_round_rate(struct clk_hw *hw, unsigned long rate,
+				 unsigned long *parent_rate)
 {
-	unsigned long factor = __bestmult(hw, req->rate,
-					  req->best_parent_rate);
+	unsigned long factor = __bestmult(hw, rate, *parent_rate);
 
-	req->rate = req->best_parent_rate * factor;
-
-	return 0;
+	return *parent_rate * factor;
 }
 
 static int timer_ker_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -1029,7 +1026,7 @@ static unsigned long timer_ker_recalc_rate(struct clk_hw *hw,
 
 static const struct clk_ops timer_ker_ops = {
 	.recalc_rate	= timer_ker_recalc_rate,
-	.determine_rate = timer_ker_determine_rate,
+	.round_rate	= timer_ker_round_rate,
 	.set_rate	= timer_ker_set_rate,
 
 };

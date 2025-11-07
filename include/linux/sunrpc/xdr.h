@@ -721,7 +721,7 @@ xdr_stream_decode_u64(struct xdr_stream *xdr, __u64 *ptr)
  * @len: size of buffer pointed to by @ptr
  *
  * Return values:
- *   %0 on success
+ *   On success, returns size of object stored in @ptr
  *   %-EBADMSG on XDR buffer overflow
  */
 static inline ssize_t
@@ -732,7 +732,7 @@ xdr_stream_decode_opaque_fixed(struct xdr_stream *xdr, void *ptr, size_t len)
 	if (unlikely(!p))
 		return -EBADMSG;
 	xdr_decode_opaque_fixed(p, ptr, len);
-	return 0;
+	return len;
 }
 
 /**

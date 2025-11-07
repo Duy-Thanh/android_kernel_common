@@ -151,32 +151,25 @@ void clk_fractional_divider_general_approximation(struct clk_hw *hw,
 }
 EXPORT_SYMBOL_GPL(clk_fractional_divider_general_approximation);
 
-static int clk_fd_determine_rate(struct clk_hw *hw,
-				 struct clk_rate_request *req)
+static long clk_fd_round_rate(struct clk_hw *hw, unsigned long rate,
+			      unsigned long *parent_rate)
 {
 	struct clk_fractional_divider *fd = to_clk_fd(hw);
 	unsigned long m, n;
 	u64 ret;
 
-	if (!req->rate || (!clk_hw_can_set_rate_parent(hw) && req->rate >= req->best_parent_rate)) {
-		req->rate = req->best_parent_rate;
-
-		return 0;
-	}
+	if (!rate || (!clk_hw_can_set_rate_parent(hw) && rate >= *parent_rate))
+		return *parent_rate;
 
 	if (fd->approximation)
-		fd->approximation(hw, req->rate, &req->best_parent_rate, &m, &n);
+		fd->approximation(hw, rate, parent_rate, &m, &n);
 	else
-		clk_fractional_divider_general_approximation(hw, req->rate,
-							     &req->best_parent_rate,
-							     &m, &n);
+		clk_fractional_divider_general_approximation(hw, rate, parent_rate, &m, &n);
 
-	ret = (u64)req->best_parent_rate * m;
+	ret = (u64)*parent_rate * m;
 	do_div(ret, n);
 
-	req->rate = ret;
-
-	return 0;
+	return ret;
 }
 
 static int clk_fd_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -257,7 +250,7 @@ static void clk_fd_debug_init(struct clk_hw *hw, struct dentry *dentry)
 
 const struct clk_ops clk_fractional_divider_ops = {
 	.recalc_rate = clk_fd_recalc_rate,
-	.determine_rate = clk_fd_determine_rate,
+	.round_rate = clk_fd_round_rate,
 	.set_rate = clk_fd_set_rate,
 #ifdef CONFIG_DEBUG_FS
 	.debug_init = clk_fd_debug_init,

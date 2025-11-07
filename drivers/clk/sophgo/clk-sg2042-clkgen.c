@@ -176,8 +176,9 @@ static unsigned long sg2042_clk_divider_recalc_rate(struct clk_hw *hw,
 	return ret_rate;
 }
 
-static int sg2042_clk_divider_determine_rate(struct clk_hw *hw,
-					     struct clk_rate_request *req)
+static long sg2042_clk_divider_round_rate(struct clk_hw *hw,
+					  unsigned long rate,
+					  unsigned long *prate)
 {
 	struct sg2042_divider_clock *divider = to_sg2042_clk_divider(hw);
 	unsigned long ret_rate;
@@ -191,17 +192,15 @@ static int sg2042_clk_divider_determine_rate(struct clk_hw *hw,
 			bestdiv = readl(divider->reg) >> divider->shift;
 			bestdiv &= clk_div_mask(divider->width);
 		}
-		ret_rate = DIV_ROUND_UP_ULL((u64)req->best_parent_rate, bestdiv);
+		ret_rate = DIV_ROUND_UP_ULL((u64)*prate, bestdiv);
 	} else {
-		ret_rate = divider_round_rate(hw, req->rate, &req->best_parent_rate, NULL,
+		ret_rate = divider_round_rate(hw, rate, prate, NULL,
 					      divider->width, divider->div_flags);
 	}
 
 	pr_debug("--> %s: divider_round_rate: val = %ld\n",
 		 clk_hw_get_name(hw), ret_rate);
-	req->rate = ret_rate;
-
-	return 0;
+	return ret_rate;
 }
 
 static int sg2042_clk_divider_set_rate(struct clk_hw *hw,
@@ -259,13 +258,13 @@ static int sg2042_clk_divider_set_rate(struct clk_hw *hw,
 
 static const struct clk_ops sg2042_clk_divider_ops = {
 	.recalc_rate = sg2042_clk_divider_recalc_rate,
-	.determine_rate = sg2042_clk_divider_determine_rate,
+	.round_rate = sg2042_clk_divider_round_rate,
 	.set_rate = sg2042_clk_divider_set_rate,
 };
 
 static const struct clk_ops sg2042_clk_divider_ro_ops = {
 	.recalc_rate = sg2042_clk_divider_recalc_rate,
-	.determine_rate = sg2042_clk_divider_determine_rate,
+	.round_rate = sg2042_clk_divider_round_rate,
 };
 
 /*

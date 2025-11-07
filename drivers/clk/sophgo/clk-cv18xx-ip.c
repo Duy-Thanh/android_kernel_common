@@ -45,12 +45,10 @@ static unsigned long gate_recalc_rate(struct clk_hw *hw,
 	return parent_rate;
 }
 
-static int gate_determine_rate(struct clk_hw *hw,
-			       struct clk_rate_request *req)
+static long gate_round_rate(struct clk_hw *hw, unsigned long rate,
+			    unsigned long *parent_rate)
 {
-	req->rate = req->best_parent_rate;
-
-	return 0;
+	return *parent_rate;
 }
 
 static int gate_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -65,7 +63,7 @@ const struct clk_ops cv1800_clk_gate_ops = {
 	.is_enabled = gate_is_enabled,
 
 	.recalc_rate = gate_recalc_rate,
-	.determine_rate = gate_determine_rate,
+	.round_rate = gate_round_rate,
 	.set_rate = gate_set_rate,
 };
 

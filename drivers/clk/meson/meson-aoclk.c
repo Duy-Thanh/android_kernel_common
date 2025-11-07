@@ -37,23 +37,15 @@ static const struct reset_control_ops meson_aoclk_reset_ops = {
 int meson_aoclkc_probe(struct platform_device *pdev)
 {
 	struct meson_aoclk_reset_controller *rstc;
-	const struct meson_clkc_data *clkc_data;
-	const struct meson_aoclk_data *data;
+	struct meson_aoclk_data *data;
 	struct device *dev = &pdev->dev;
 	struct device_node *np;
 	struct regmap *regmap;
-	int ret;
+	int ret, clkid;
 
-	clkc_data = of_device_get_match_data(dev);
-	if (!clkc_data)
-		return -EINVAL;
-
-	ret = meson_clkc_syscon_probe(pdev);
-	if (ret)
-		return ret;
-
-	data = container_of(clkc_data, struct meson_aoclk_data,
-			    clkc_data);
+	data = (struct meson_aoclk_data *) of_device_get_match_data(dev);
+	if (!data)
+		return -ENODEV;
 
 	rstc = devm_kzalloc(dev, sizeof(*rstc), GFP_KERNEL);
 	if (!rstc)
@@ -79,7 +71,19 @@ int meson_aoclkc_probe(struct platform_device *pdev)
 		return ret;
 	}
 
-	return 0;
+	/* Register all clks */
+	for (clkid = 0; clkid < data->hw_clks.num; clkid++) {
+		if (!data->hw_clks.hws[clkid])
+			continue;
+
+		ret = devm_clk_hw_register(dev, data->hw_clks.hws[clkid]);
+		if (ret) {
+			dev_err(dev, "Clock registration failed\n");
+			return ret;
+		}
+	}
+
+	return devm_of_clk_add_hw_provider(dev, meson_clk_hw_get, (void *)&data->hw_clks);
 }
 EXPORT_SYMBOL_NS_GPL(meson_aoclkc_probe, "CLK_MESON");
 

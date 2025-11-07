@@ -389,25 +389,23 @@ static unsigned long ep93xx_div_recalc_rate(struct clk_hw *hw,
 	return DIV_ROUND_CLOSEST(parent_rate, clk->div[index]);
 }
 
-static int ep93xx_div_determine_rate(struct clk_hw *hw,
-				     struct clk_rate_request *req)
+static long ep93xx_div_round_rate(struct clk_hw *hw, unsigned long rate,
+				   unsigned long *parent_rate)
 {
 	struct ep93xx_clk *clk = ep93xx_clk_from(hw);
 	unsigned long best = 0, now;
 	unsigned int i;
 
 	for (i = 0; i < clk->num_div; i++) {
-		if (req->rate * clk->div[i] == req->best_parent_rate)
-			return 0;
+		if ((rate * clk->div[i]) == *parent_rate)
+			return rate;
 
-		now = DIV_ROUND_CLOSEST(req->best_parent_rate, clk->div[i]);
-		if (!best || is_best(req->rate, now, best))
+		now = DIV_ROUND_CLOSEST(*parent_rate, clk->div[i]);
+		if (!best || is_best(rate, now, best))
 			best = now;
 	}
 
-	req->rate = best;
-
-	return 0;
+	return best;
 }
 
 static int ep93xx_div_set_rate(struct clk_hw *hw, unsigned long rate,
@@ -439,7 +437,7 @@ static const struct clk_ops ep93xx_div_ops = {
 	.disable = ep93xx_clk_disable,
 	.is_enabled = ep93xx_clk_is_enabled,
 	.recalc_rate = ep93xx_div_recalc_rate,
-	.determine_rate = ep93xx_div_determine_rate,
+	.round_rate = ep93xx_div_round_rate,
 	.set_rate = ep93xx_div_set_rate,
 };
 
@@ -488,10 +486,9 @@ static const struct ep93xx_gate ep93xx_uarts[] = {
 static int ep93xx_uart_clock_init(struct ep93xx_clk_priv *priv)
 {
 	struct clk_parent_data parent_data = { };
-	unsigned int i, idx, clk_uart_div;
+	unsigned int i, idx, ret, clk_uart_div;
 	struct ep93xx_clk *clk;
 	u32 val;
-	int ret;
 
 	regmap_read(priv->map, EP93XX_SYSCON_PWRCNT, &val);
 	if (val & EP93XX_SYSCON_PWRCNT_UARTBAUD)

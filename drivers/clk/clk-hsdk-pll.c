@@ -197,8 +197,8 @@ static unsigned long hsdk_pll_recalc_rate(struct clk_hw *hw,
 	return rate;
 }
 
-static int hsdk_pll_determine_rate(struct clk_hw *hw,
-				   struct clk_rate_request *req)
+static long hsdk_pll_round_rate(struct clk_hw *hw, unsigned long rate,
+				unsigned long *prate)
 {
 	int i;
 	unsigned long best_rate;
@@ -211,15 +211,13 @@ static int hsdk_pll_determine_rate(struct clk_hw *hw,
 	best_rate = pll_cfg[0].rate;
 
 	for (i = 1; pll_cfg[i].rate != 0; i++) {
-		if (abs(req->rate - pll_cfg[i].rate) < abs(req->rate - best_rate))
+		if (abs(rate - pll_cfg[i].rate) < abs(rate - best_rate))
 			best_rate = pll_cfg[i].rate;
 	}
 
 	dev_dbg(clk->dev, "chosen best rate: %lu\n", best_rate);
 
-	req->rate = best_rate;
-
-	return 0;
+	return best_rate;
 }
 
 static int hsdk_pll_comm_update_rate(struct hsdk_pll_clk *clk,
@@ -298,7 +296,7 @@ static int hsdk_pll_set_rate(struct clk_hw *hw, unsigned long rate,
 
 static const struct clk_ops hsdk_pll_ops = {
 	.recalc_rate = hsdk_pll_recalc_rate,
-	.determine_rate = hsdk_pll_determine_rate,
+	.round_rate = hsdk_pll_round_rate,
 	.set_rate = hsdk_pll_set_rate,
 };
 

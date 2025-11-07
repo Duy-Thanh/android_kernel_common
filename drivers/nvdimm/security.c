@@ -219,9 +219,12 @@ static int __nvdimm_security_unlock(struct nvdimm *nvdimm)
 int nvdimm_security_unlock(struct device *dev)
 {
 	struct nvdimm *nvdimm = to_nvdimm(dev);
+	int rc;
 
-	guard(nvdimm_bus)(dev);
-	return __nvdimm_security_unlock(nvdimm);
+	nvdimm_bus_lock(dev);
+	rc = __nvdimm_security_unlock(nvdimm);
+	nvdimm_bus_unlock(dev);
+	return rc;
 }
 
 static int check_security_state(struct nvdimm *nvdimm)
@@ -487,8 +490,9 @@ void nvdimm_security_overwrite_query(struct work_struct *work)
 	struct nvdimm *nvdimm =
 		container_of(work, typeof(*nvdimm), dwork.work);
 
-	guard(nvdimm_bus)(&nvdimm->dev);
+	nvdimm_bus_lock(&nvdimm->dev);
 	__nvdimm_security_overwrite_query(nvdimm);
+	nvdimm_bus_unlock(&nvdimm->dev);
 }
 
 #define OPS							\

@@ -174,16 +174,14 @@ ingenic_pll_calc(const struct ingenic_cgu_clk_info *clk_info,
 		n * od);
 }
 
-static int ingenic_pll_determine_rate(struct clk_hw *hw,
-				      struct clk_rate_request *req)
+static long
+ingenic_pll_round_rate(struct clk_hw *hw, unsigned long req_rate,
+		       unsigned long *prate)
 {
 	struct ingenic_clk *ingenic_clk = to_ingenic_clk(hw);
 	const struct ingenic_cgu_clk_info *clk_info = to_clk_info(ingenic_clk);
 
-	req->rate = ingenic_pll_calc(clk_info, req->rate, req->best_parent_rate,
-				     NULL, NULL, NULL);
-
-	return 0;
+	return ingenic_pll_calc(clk_info, req_rate, *prate, NULL, NULL, NULL);
 }
 
 static inline int ingenic_pll_check_stable(struct ingenic_cgu *cgu,
@@ -319,7 +317,7 @@ static int ingenic_pll_is_enabled(struct clk_hw *hw)
 
 static const struct clk_ops ingenic_pll_ops = {
 	.recalc_rate = ingenic_pll_recalc_rate,
-	.determine_rate = ingenic_pll_determine_rate,
+	.round_rate = ingenic_pll_round_rate,
 	.set_rate = ingenic_pll_set_rate,
 
 	.enable = ingenic_pll_enable,

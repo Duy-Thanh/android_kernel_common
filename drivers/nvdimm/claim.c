@@ -34,10 +34,11 @@ void nd_detach_ndns(struct device *dev,
 
 	if (!ndns)
 		return;
-
-	struct device *ndev __free(put_device) = get_device(&ndns->dev);
-	guard(nvdimm_bus)(ndev);
+	get_device(&ndns->dev);
+	nvdimm_bus_lock(&ndns->dev);
 	__nd_detach_ndns(dev, _ndns);
+	nvdimm_bus_unlock(&ndns->dev);
+	put_device(&ndns->dev);
 }
 
 bool __nd_attach_ndns(struct device *dev, struct nd_namespace_common *attach,
