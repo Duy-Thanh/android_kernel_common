@@ -68,9 +68,12 @@ xhci_ring_to_sgtable(struct xhci_sideband *sb, struct xhci_ring *ring)
 	return sgt;
 }
 
+/* Caller must hold sb->mutex */
 static void
 __xhci_sideband_remove_endpoint(struct xhci_sideband *sb, struct xhci_virt_ep *ep)
 {
+	lockdep_assert_held(&sb->mutex);
+
 	/*
 	 * Issue a stop endpoint command when an endpoint is removed.
 	 * The stop ep cmd handler will handle the ring cleanup.
@@ -79,6 +82,25 @@ __xhci_sideband_remove_endpoint(struct xhci_sideband *sb, struct xhci_virt_ep *e
 
 	ep->sideband = NULL;
 	sb->eps[ep->ep_index] = NULL;
+}
+
+/* Caller must hold sb->mutex */
+static void
+__xhci_sideband_remove_interrupter(struct xhci_sideband *sb)
+{
+	struct usb_device *udev;
+
+	lockdep_assert_held(&sb->mutex);
+
+	if (!sb->ir)
+		return;
+
+	xhci_remove_secondary_interrupter(xhci_to_hcd(sb->xhci), sb->ir);
+	sb->ir = NULL;
+	udev = sb->vdev->udev;
+
+	if (udev->state != USB_STATE_NOTATTACHED)
+		usb_offload_put(udev);
 }
 
 /* sideband api functions */
@@ -102,14 +124,16 @@ xhci_sideband_add_endpoint(struct xhci_sideband *sb,
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
 
-	mutex_lock(&sb->mutex);
+	guard(mutex)(&sb->mutex);
+
+	if (!sb->vdev)
+		return -ENODEV;
+
 	ep_index = xhci_get_endpoint_index(&host_ep->desc);
 	ep = &sb->vdev->eps[ep_index];
 
-	if (ep->ep_state & EP_HAS_STREAMS) {
-		mutex_unlock(&sb->mutex);
+	if (ep->ep_state & EP_HAS_STREAMS)
 		return -EINVAL;
-	}
 
 	/*
 	 * Note, we don't know the DMA mask of the audio DSP device, if its
@@ -119,14 +143,11 @@ xhci_sideband_add_endpoint(struct xhci_sideband *sb,
 	 * and let this function add the endpoint and allocate the ring buffer
 	 * with the smallest common DMA mask
 	 */
-	if (sb->eps[ep_index] || ep->sideband) {
-		mutex_unlock(&sb->mutex);
+	if (sb->eps[ep_index] || ep->sideband)
 		return -EBUSY;
-	}
 
 	ep->sideband = sb;
 	sb->eps[ep_index] = ep;
-	mutex_unlock(&sb->mutex);
 
 	return 0;
 }
@@ -151,18 +172,32 @@ xhci_sideband_remove_endpoint(struct xhci_sideband *sb,
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
 
-	mutex_lock(&sb->mutex);
+	guard(mutex)(&sb->mutex);
+
 	ep_index = xhci_get_endpoint_index(&host_ep->desc);
 	ep = sb->eps[ep_index];
 
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	if (!ep || !ep->sideband) {
 		mutex_unlock(&sb->mutex);
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	if (!ep || !ep->sideband || ep->sideband != sb) {
+		mutex_unlock(&sb->mutex);
+=======
+	if (!ep || !ep->sideband || ep->sideband != sb)
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 		return -ENODEV;
-	}
 
 	__xhci_sideband_remove_endpoint(sb, ep);
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	xhci_initialize_ring_info(ep->ring, 1);
 	mutex_unlock(&sb->mutex);
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	xhci_initialize_ring_info(ep->ring);
+	mutex_unlock(&sb->mutex);
+=======
+	xhci_initialize_ring_info(ep->ring);
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 
 	return 0;
 }
@@ -285,25 +320,38 @@ xhci_sideband_create_interrupter(struct xhci_sideband *sb, int num_seg,
 	if (!sb)
 		return -ENODEV;
 
-	mutex_lock(&sb->mutex);
-	if (sb->ir) {
-		ret = -EBUSY;
-		goto out;
-	}
+	guard(mutex)(&sb->mutex);
+
+	if (!sb->vdev)
+		return -ENODEV;
+
+	if (sb->ir)
+		return -EBUSY;
 
 	sb->ir = xhci_create_secondary_interrupter(xhci_to_hcd(sb->xhci),
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 			num_seg, intr_num);
 	if (!sb->ir) {
 		ret = -ENOMEM;
 		goto out;
 	}
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+						   num_seg, imod_interval,
+						   intr_num);
+	if (!sb->ir) {
+		ret = -ENOMEM;
+		goto out;
+	}
+=======
+						   num_seg, imod_interval,
+						   intr_num);
+	if (!sb->ir)
+		return -ENOMEM;
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 
 	sb->ir->ip_autoclear = ip_autoclear;
 	/* skip events for secondary interrupters by default */
 	sb->ir->skip_events = true;
-
-out:
-	mutex_unlock(&sb->mutex);
 
 	return ret;
 }
@@ -319,16 +367,43 @@ EXPORT_SYMBOL_GPL(xhci_sideband_create_interrupter);
 void
 xhci_sideband_remove_interrupter(struct xhci_sideband *sb)
 {
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	if (!sb || !sb->ir)
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	struct usb_device *udev;
+
+	if (!sb || !sb->ir)
+=======
+	if (!sb)
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 		return;
 
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	mutex_lock(&sb->mutex);
 	if (!sb->ir->skip_events)
 		xhci_disable_interrupter(sb->ir);
 	xhci_remove_secondary_interrupter(xhci_to_hcd(sb->xhci), sb->ir);
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	mutex_lock(&sb->mutex);
+	xhci_remove_secondary_interrupter(xhci_to_hcd(sb->xhci), sb->ir);
+=======
+	guard(mutex)(&sb->mutex);
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	sb->ir = NULL;
 	mutex_unlock(&sb->mutex);
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	sb->ir = NULL;
+	udev = sb->vdev->udev;
+
+	if (udev->state != USB_STATE_NOTATTACHED)
+		usb_offload_put(udev);
+
+	mutex_unlock(&sb->mutex);
+=======
+	__xhci_sideband_remove_interrupter(sb);
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 }
 EXPORT_SYMBOL_GPL(xhci_sideband_remove_interrupter);
 
@@ -417,20 +492,57 @@ EXPORT_SYMBOL_GPL(xhci_sideband_register);
 void
 xhci_sideband_unregister(struct xhci_sideband *sb)
 {
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
 	struct xhci_hcd *xhci = sb->xhci;
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	struct xhci_hcd *xhci;
+=======
+	struct xhci_virt_device *vdev;
+	struct xhci_hcd *xhci;
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
 	int i;
+
+<<<<<<< HEAD   (87a0842917d53de14e1c84dbe1055f700cda9f98 BACKPORT: leds: spi-byte: Use devm_led_classdev_register_ext)
+	mutex_lock(&sb->mutex);
+	for (i = 0; i < EP_CTX_PER_DEV; i++)
+		if (sb->eps[i])
+			__xhci_sideband_remove_endpoint(sb, sb->eps[i]);
+	mutex_unlock(&sb->mutex);
+||||||| BASE   (3b57306790648f0dfbb5e66bbd06dcd08b4ab00e Revert "ANDROID: sched: Add vendor hooks for skipping sugov )
+	if (!sb)
+		return;
+
+	xhci = sb->xhci;
 
 	mutex_lock(&sb->mutex);
 	for (i = 0; i < EP_CTX_PER_DEV; i++)
 		if (sb->eps[i])
 			__xhci_sideband_remove_endpoint(sb, sb->eps[i]);
 	mutex_unlock(&sb->mutex);
+=======
+	if (!sb)
+		return;
 
-	xhci_sideband_remove_interrupter(sb);
+	xhci = sb->xhci;
+
+	scoped_guard(mutex, &sb->mutex) {
+		vdev = sb->vdev;
+		if (!vdev)
+			return;
+>>>>>>> CHANGE (1fc1975ac7720b618dd6f1402f1db9f801762101 FROMGIT: xhci: sideband: Fix race condition in sideband unre)
+
+		for (i = 0; i < EP_CTX_PER_DEV; i++)
+			if (sb->eps[i])
+				__xhci_sideband_remove_endpoint(sb, sb->eps[i]);
+
+		__xhci_sideband_remove_interrupter(sb);
+
+		sb->vdev = NULL;
+	}
 
 	spin_lock_irq(&xhci->lock);
 	sb->xhci = NULL;
-	sb->vdev->sideband = NULL;
+	vdev->sideband = NULL;
 	spin_unlock_irq(&xhci->lock);
 
 	kfree(sb);
