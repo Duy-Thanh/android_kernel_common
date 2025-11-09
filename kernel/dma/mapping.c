@@ -21,6 +21,52 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/dma.h>
 
+/* jordanchangtest: Add of.h and of_address.h for device tree parsing */
+#include <linux/of.h>
+#include <linux/of_fdt.h>
+#include <linux/of_address.h>
+
+/*
+ * jordanchangtest: Helper function to find the name of the carveout region
+ * containing a given DMA address. It iterates through all child nodes of
+ * /reserved-memory, checks if they are a DMA pool, and validates if the
+ * given address falls within their range.
+ */
+static const char *find_carveout_region_for_addr(dma_addr_t addr, size_t size)
+{
+	struct device_node *np, *child;
+	const char *node_name = NULL;
+
+	/* Find the "/reserved-memory" parent node */
+	np = of_find_node_by_path("/reserved-memory");
+	if (!np)
+		return NULL;
+
+	/* Iterate through all child nodes (i.e., all carveouts) */
+	for_each_child_of_node(np, child) {
+		struct resource res;
+
+		/* We only care about carveouts designated as DMA pools */
+		if (!of_property_read_bool(child, "reusable") &&
+		    !of_device_is_compatible(child, "shared-dma-pool"))
+			continue;
+
+		/* Parse the 'reg' property into a physical address range */
+		if (of_address_to_resource(child, 0, &res))
+			continue;
+
+		/* Perform the range check */
+		if ((addr >= res.start) && ((addr + size - 1) <= res.end)) {
+			node_name = child->name;
+			of_node_put(child); /* Found, break loop and put node */
+			break;
+		}
+	}
+
+	of_node_put(np); /* Put the parent node reference */
+	return node_name;
+}
+
 #if defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_DEVICE) || \
 	defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_CPU) || \
 	defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_CPU_ALL)
@@ -623,6 +669,36 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 	if (WARN_ON_ONCE(flag & __GFP_COMP))
 		return NULL;
 
+	/* jordanchangtest: Main debug block for 32-bit mask devices */
+	if (dev->coherent_dma_mask <= DMA_BIT_MASK(32) ||
+	    dma_get_mask(dev) <= DMA_BIT_MASK(32)) {
+
+		if (use_dma_iommu(dev)) {
+			printk(KERN_INFO "jordanchangtest [32-BIT MASK | IOMMU]: dev='%s', size=%zu\n",
+			       dev_driver_string(dev), size);
+			/* This is Case 1: Safe due to IOMMU. Continue to normal allocation. */
+		} else {
+			/* Case 2 or 3: No IOMMU, must rely on carveout or low memory. */
+			if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr)) {
+				const char *carveout_name = find_carveout_region_for_addr(*dma_handle, size);
+				trace_dma_alloc(dev, cpu_addr, *dma_handle, size,
+						DMA_BIDIRECTIONAL, flag, attrs);
+
+				if (carveout_name) {
+					printk(KERN_INFO "jordanchangtest [32-BIT MASK | CARVEOUT]: dev='%s', carveout='%s', addr=%pa, size=%zu\n",
+					       dev_driver_string(dev), carveout_name, dma_handle, size);
+				} else {
+					printk(KERN_ERR "jordanchangtest [32-BIT MASK | CARVEOUT?]: dev='%s', coherent alloc NOT in a known carveout! addr=%pa, size=%zu\n",
+					       dev_driver_string(dev), dma_handle, size);
+					dump_stack();
+				}
+				return cpu_addr;
+			}
+			/* Fall through to the generic allocator, where we will log Case 3 */
+		}
+	}
+
+
 	if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr)) {
 		trace_dma_alloc(dev, cpu_addr, *dma_handle, size,
 				DMA_BIDIRECTIONAL, flag, attrs);
@@ -643,6 +719,16 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 				attrs);
 		return NULL;
 	}
+
+	/* jordanchangtest: Catch-all for Case 3 */
+	if ((dev->coherent_dma_mask <= DMA_BIT_MASK(32) ||
+	     dma_get_mask(dev) <= DMA_BIT_MASK(32)) && !use_dma_iommu(dev)) {
+		printk(KERN_WARNING "jordanchangtest [32-BIT MASK | UNKNOWN]: dev='%s', allocated via generic path. addr=%pa, size=%zu\n",
+		       dev_driver_string(dev), dma_handle, size);
+		/* Potentially unsafe if addr > 4GB, but could be from global CMA. Worthy of investigation. */
+		dump_stack();
+	}
+
 
 	trace_dma_alloc(dev, cpu_addr, *dma_handle, size, DMA_BIDIRECTIONAL,
 			flag, attrs);
