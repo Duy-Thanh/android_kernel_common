@@ -16,6 +16,23 @@
       "message": "repo download -c kernel/common 3664136",
       "revId": "5207b26126ef04c7b1284021248ffca7ec4fab1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b9bdd7_d488c987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4366877
+      },
+      "writtenOn": "2025-11-09T20:28:45Z",
+      "side": 1,
+      "message": "3664136",
+      "revId": "5207b26126ef04c7b1284021248ffca7ec4fab1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
