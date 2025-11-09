@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d5c1a2_4fc19c25",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 7573,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-09T12:57:51Z",
+      "side": 1,
+      "message": "Just realized: if we free the memcache here in kvm_mmu_destroy(), it would be more consistent to initialize it (`init_pkvm_mmu_memcache(\u0026vcpu-\u003earch.pkvm_vcpu.guest_mmu_memcache)`) in kvm_mmu_create(), not in pkvm_vcpu_create()?",
+      "revId": "daaa5d160faf4078ac4085c9fe9fa7fefe4130c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
