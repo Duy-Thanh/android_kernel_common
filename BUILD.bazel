@@ -211,6 +211,11 @@ common_kernel(
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
     defconfig = "arch/arm64/configs/gki_defconfig",
+    extra_config = [
+        "CONFIG_CHECKPOINT_RESTORE=y",
+        "CONFIG_PID_NS=y",
+        "CONFIG_USER_NS=y",
+    ],
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_arm64",
@@ -288,6 +293,11 @@ common_kernel(
     build_gki_artifacts = True,
     ddk_module_headers = [":all_headers_x86_64"],
     defconfig = "arch/x86/configs/gki_defconfig",
+    extra_config = [
+        "CONFIG_CHECKPOINT_RESTORE=y",
+        "CONFIG_PID_NS=y",
+        "CONFIG_USER_NS=y",
+    ],
     extra_dist = [
         ":test_mappings_zip",
         ":tests_zip_x86_64",
