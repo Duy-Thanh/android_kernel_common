@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71cb50c_793144ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4366877
+      },
+      "writtenOn": "2025-11-09T20:26:39Z",
+      "side": 1,
+      "message": "From 1e5ec7fa67a49da2e7623c93fcecb159ae4ffed1 Mon Sep 17 00:00:00 2001\nFrom: Jorge Lucangeli Obes \u003cjorgelo@google.com\u003e\nDate: Fri, 13 Jun 2025 14:07:01 -0700\nSubject: [PATCH] ANDROID: Remove allenwebb from OWNERS.\n\nAllen was added early on during bootstrap.\n\nBug: None\nSigned-off-by: Jorge Lucangeli Obes \u003cjorgelo@google.com\u003e\nChange-Id: Iba9eaf8fef0f40bc30541222ed7322ed70dfa2dc\n---\n\ndiff --git a/OWNERS b/OWNERS\nindex be293e78..6cbcad6 100644\n--- a/OWNERS\n+++ b/OWNERS\n@@ -12,7 +12,6 @@\n include kernel/common:android-mainline:/OWNERS_DrNo\n \n # Owners for the -desktop branch\n-allenwebb@google.com\n damiendejean@google.com\n dianders@google.com\n hmazur@google.com",
+      "revId": "1e5ec7fa67a49da2e7623c93fcecb159ae4ffed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
