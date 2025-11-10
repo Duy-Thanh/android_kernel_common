@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036973b1_2a1cf7f9",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1565,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-10T14:13:43Z",
+      "side": 1,
+      "message": "This looks like an unrelated change. Perhaps split into its own commit and send upstream.",
+      "range": {
+        "startLine": 1565,
+        "startChar": 3,
+        "endLine": 1565,
+        "endChar": 49
+      },
+      "revId": "38bba206f69803ba0e18414839dde30f183053e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
