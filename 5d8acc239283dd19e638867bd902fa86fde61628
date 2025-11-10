@@ -16,6 +16,23 @@
       "message": "I think I\u0027ve satisfied the mandatory tagging for ABI breaking changes in this branch (see other examples in https://android-review.git.corp.google.com/q/hashtag:%22desktop-6.12-x86-64-kmi-breakage%22+(status:open%20OR%20status:merged))\n\nI\u0027m giving this my Lint+2 to signal adherence to those policies and bypass the expected `Lint-1`.",
       "revId": "5d8acc239283dd19e638867bd902fa86fde61628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c6c065a_128c9fe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-11-10T21:57:23Z",
+      "side": 1,
+      "message": "Please resolve my last comment in https://android-review.git.corp.google.com/c/kernel/common/+/3790969/comments/2941efb0_2680a905 and rebase this series on the tip of `aosp/android16-6.12-desktop`, then we can submit.",
+      "revId": "5d8acc239283dd19e638867bd902fa86fde61628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
