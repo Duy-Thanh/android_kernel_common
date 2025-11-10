@@ -1091,6 +1091,7 @@
   drm_release
   drm_release_noglobal
   drm_show_fdinfo
+  drm_show_memory_stats
   drm_syncobj_add_point
   drm_syncobj_create
   drm_syncobj_find
