@@ -51,9 +51,17 @@ DECLARE_HOOK(android_vh_check_set_ioprio,
 	TP_PROTO(struct bio *bio),
 	TP_ARGS(bio));
 
+<<<<<<< HEAD   (dc68d925548abe1e4be061d2f6b7c0af5f532664 ANDROID: driver/arm-smmu-v3-kvm: Check domain attrs on detac)
 DECLARE_HOOK(android_vh_bio_add_page_merge_bypass,
 	TP_PROTO(struct bio *bio, bool *skip),
 	TP_ARGS(bio, skip));
+||||||| BASE   (aa8a9034d8a0e18d37fff6c6053f470be77637ae ANDROID: loop: export loop_process_cmd_list)
+=======
+struct request;
+DECLARE_HOOK(android_vh_loop_skip_queue_work,
+        TP_PROTO(struct request *req, bool *skip),
+        TP_ARGS(req, skip));
+>>>>>>> CHANGE (8c6fbee830490fab45da6ef6c408a851d9cff88e ANDROID: vendor_hooks: add hook in loop_queue_work)
 
 #endif /* _TRACE_HOOK_BLK_H */
 /* This part must be outside protection */
