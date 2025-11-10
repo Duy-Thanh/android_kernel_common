@@ -1985,6 +1985,12 @@ static void loop_process_work(struct loop_worker *worker,
 	spin_unlock_irq(&lo->lo_work_lock);
 	current->flags = orig_flags;
 }
+void loop_process_cmd_list(struct loop_worker *worker,
+                        struct list_head *cmd_list, struct loop_device *lo)
+{
+    loop_process_work(worker, cmd_list, lo);
+}
+EXPORT_SYMBOL_GPL(loop_process_cmd_list);
 
 static void loop_workfn(struct work_struct *work)
 {
