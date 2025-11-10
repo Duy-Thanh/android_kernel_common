@@ -682,3 +682,32 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pageset_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_full_reset_on_remove);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mempool_alloc_skip_wait);
+<<<<<<< HEAD   (a15e7c8ee819447ad89ea2b8773898b6859c9941 ANDROID: GKI: Update symbols list file for honor White list )
+||||||| BASE   (aa8a9034d8a0e18d37fff6c6053f470be77637ae ANDROID: loop: export loop_process_cmd_list)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_ac);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_suitable_zone);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_zone_max_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_zone_pageset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_lru_add_dst);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_isolate_priv_lru);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_pgdat_balanced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_file_is_tiny);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_ac);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_suitable_zone);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_zone_max_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_zone_pageset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_lru_add_dst);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_isolate_priv_lru);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_pgdat_balanced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_file_is_tiny);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
+>>>>>>> CHANGE (8c6fbee830490fab45da6ef6c408a851d9cff88e ANDROID: vendor_hooks: add hook in loop_queue_work)
