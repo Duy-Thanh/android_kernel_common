@@ -42,6 +42,11 @@ DECLARE_HOOK(android_vh_f2fs_ra_op_flags,
 	TP_PROTO(blk_opf_t *op_flag, struct readahead_control *rac),
 	TP_ARGS(op_flag, rac));
 
+struct request;
+DECLARE_HOOK(android_vh_loop_skip_queue_work,
+        TP_PROTO(struct request *req, bool *skip),
+        TP_ARGS(req, skip));
+
 #endif /* _TRACE_HOOK_BLK_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
