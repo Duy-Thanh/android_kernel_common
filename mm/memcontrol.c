@@ -788,6 +788,12 @@ void __mod_lruvec_state(struct lruvec *lruvec, enum node_stat_item idx,
 }
 EXPORT_SYMBOL_GPL(__mod_lruvec_state);
 
+void mod_lruvec_state(struct lruvec *lruvec, enum node_stat_item idx,
+			int val)
+{
+	__mod_lruvec_state(lruvec, idx, val);
+}
+
 void __lruvec_stat_mod_folio(struct folio *folio, enum node_stat_item idx,
 			     int val)
 {
@@ -805,7 +811,7 @@ void __lruvec_stat_mod_folio(struct folio *folio, enum node_stat_item idx,
 	}
 
 	lruvec = mem_cgroup_lruvec(memcg, pgdat);
-	__mod_lruvec_state(lruvec, idx, val);
+	mod_lruvec_state(lruvec, idx, val);
 	rcu_read_unlock();
 }
 EXPORT_SYMBOL(__lruvec_stat_mod_folio);
@@ -829,7 +835,7 @@ void mod_lruvec_kmem_state(void *p, enum node_stat_item idx, int val)
 		mod_node_page_state(pgdat, idx, val);
 	} else {
 		lruvec = mem_cgroup_lruvec(memcg, pgdat);
-		__mod_lruvec_state(lruvec, idx, val);
+		mod_lruvec_state(lruvec, idx, val);
 	}
 	rcu_read_unlock();
 }
