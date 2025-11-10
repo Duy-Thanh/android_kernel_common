@@ -7,6 +7,17 @@
           "include-filter": "kselftest_ptrace_peeksiginfo"
         }
       ]
+    },
+    {
+      "name": "selftests",
+      "options": [
+        {
+          "exclude-filter": "kselftest_ptrace_peeksiginfo"
+        }
+      ],
+      "test_options": [
+        "page_size=16k"
+      ]
     }
   ]
 }
