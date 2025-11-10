@@ -208,8 +208,8 @@ void dw_pcie_version_detect(struct dw_pcie *pci)
  * are for configuring host controllers, which are bridges *to* PCI devices but
  * are not PCI devices themselves.
  */
-static u8 __dw_pcie_find_next_cap(struct dw_pcie *pci, u8 cap_ptr,
-				  u8 cap)
+static u8 __dw_pcie_find_next_cap(struct dw_pcie *pci, u8 cap_ptr, u8 cap,
+				  u8 *prev_ptr)
 {
 	u8 cap_id, next_cap_ptr;
 	u16 reg;
@@ -227,18 +227,29 @@ static u8 __dw_pcie_find_next_cap(struct dw_pcie *pci, u8 cap_ptr,
 		return cap_ptr;
 
 	next_cap_ptr = (reg & 0xff00) >> 8;
-	return __dw_pcie_find_next_cap(pci, next_cap_ptr, cap);
+	if (prev_ptr)
+		*prev_ptr = cap_ptr;
+
+	return __dw_pcie_find_next_cap(pci, next_cap_ptr, cap, prev_ptr);
 }
 
-u8 dw_pcie_find_capability(struct dw_pcie *pci, u8 cap)
+static u8 dw_pcie_find_capability_with_prev(struct dw_pcie *pci, u8 cap,
+					    u8 *prev_ptr)
 {
 	u8 next_cap_ptr;
 	u16 reg;
 
 	reg = dw_pcie_readw_dbi(pci, PCI_CAPABILITY_LIST);
 	next_cap_ptr = (reg & 0x00ff);
+	if (prev_ptr)
+		*prev_ptr = PCI_CAPABILITY_LIST;
 
-	return __dw_pcie_find_next_cap(pci, next_cap_ptr, cap);
+	return __dw_pcie_find_next_cap(pci, next_cap_ptr, cap, prev_ptr);
+}
+
+u8 dw_pcie_find_capability(struct dw_pcie *pci, u8 cap)
+{
+	return dw_pcie_find_capability_with_prev(pci, cap, NULL);
 }
 EXPORT_SYMBOL_GPL(dw_pcie_find_capability);
 
@@ -282,6 +293,27 @@ u16 dw_pcie_find_ext_capability(struct dw_pcie *pci, u8 cap)
 	return dw_pcie_find_next_ext_capability(pci, 0, cap);
 }
 EXPORT_SYMBOL_GPL(dw_pcie_find_ext_capability);
+
+void dw_pcie_remove_capability(struct dw_pcie *pci, u8 cap)
+{
+	u8 cap_pos, prev_pos, next_pos;
+	u16 reg;
+
+	cap_pos = dw_pcie_find_capability_with_prev(pci, cap, &prev_pos);
+	if (!cap_pos)
+		return;
+
+	reg = dw_pcie_readw_dbi(pci, cap_pos);
+	next_pos = (reg & 0xff00) >> 8;
+
+	dw_pcie_dbi_ro_wr_en(pci);
+	if (prev_pos == PCI_CAPABILITY_LIST)
+		dw_pcie_writeb_dbi(pci, PCI_CAPABILITY_LIST, next_pos);
+	else
+		dw_pcie_writeb_dbi(pci, prev_pos + PCI_CAP_LIST_NEXT, next_pos);
+	dw_pcie_dbi_ro_wr_dis(pci);
+}
+EXPORT_SYMBOL_GPL(dw_pcie_remove_capability);
 
 int dw_pcie_read(void __iomem *addr, int size, u32 *val)
 {
