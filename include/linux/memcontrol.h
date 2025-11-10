@@ -1816,6 +1816,11 @@ static inline void count_objcg_events(struct obj_cgroup *objcg,
 
 void mem_cgroup_node_filter_allowed(struct mem_cgroup *memcg, nodemask_t *mask);
 
+static inline bool memcg_is_dying(struct mem_cgroup *memcg)
+{
+	return memcg ? css_is_dying(&memcg->css) : false;
+}
+
 #else
 static inline bool mem_cgroup_kmem_disabled(void)
 {
@@ -1881,6 +1886,11 @@ static inline ino_t page_cgroup_ino(struct page *page)
 static inline void mem_cgroup_node_filter_allowed(struct mem_cgroup *memcg,
 						  nodemask_t *mask)
 {
+}
+
+static inline bool memcg_is_dying(struct mem_cgroup *memcg)
+{
+	return false;
 }
 #endif /* CONFIG_MEMCG */
 
