@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301202a1_d32307a9",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-11T21:28:06Z",
+      "side": 1,
+      "message": "Would it makes sense to split this into two:\n```\n#ifdef CONFIG_PKVM_INTEL\n#ifndef __PKVM_HYP__\n// dmar_read/write definitions\n#endif\n#else\n// dmar_read/write macros\n#endif\n```\n\nThat way we don\u0027t need to pull it into pkvm source. \n\nWe could probably remove `#ifdef CONFIG_PKVM_INTEL` as well. !CONFIG_PKVM_INTEL hardcodes pkvm_enabled() as false and compiler would optimize the functions to call read/write functions directly.",
+      "fixSuggestions": [
+        {
+          "fixId": "83f0e8b4_f8095b21",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.h",
+              "range": {
+                "startLine": 800,
+                "startChar": 0,
+                "endLine": 802,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.h",
+              "range": {
+                "startLine": 839,
+                "startChar": 0,
+                "endLine": 848,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "07aff70da4641df4968b583ccc99c5fb5de214f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
