@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492f1262_4832ad0e",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-11T05:39:03Z",
+      "side": 1,
+      "message": "If we rename kvm_call_pkvm() to pkvm_hypercall() for the IOMMU driver, probably this file kvm_pkvm_hypercalls.h should also be renamed to pkvm_hypercalls.h as the hypercalls in this file are not just for KVM, but also for IOMMU?",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
