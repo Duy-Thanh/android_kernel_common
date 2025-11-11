@@ -139,6 +139,24 @@
       "parentUuid": "8ca5796e_f860c555",
       "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20226196_c2fb9bf2",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T22:32:41Z",
+      "side": 1,
+      "message": "I don\u0027t think we will use pkvm_read/write it for anything else. But... if aosp/3847097 doesn\u0027t solve any real problem, it might be better to drop it. Although defining those dmar_read/write() directly as static inline functions indeed seems cleaner than the current implementation, but we can make it cleaner in v6.18, while leave v6.12 alone.",
+      "parentUuid": "b254d380_ed03d7f9",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
