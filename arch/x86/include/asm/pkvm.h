@@ -192,6 +192,14 @@ struct pkvm_domain_param {
 	u64 pgd_gpa;
 };
 
+struct pkvm_iommu_map_param {
+	u64 pgd_gpa;
+	u64 iov_pfn;
+	u64 phys_pfn;
+	u64 nr_pages;
+	u64 prot;
+};
+
 #ifndef __PKVM_HYP__
 
 extern bool __read_mostly enable_pkvm;	/* kernel command-line flag */
