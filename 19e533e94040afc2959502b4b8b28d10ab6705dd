@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "224aee34_b17b9f73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-11T13:31:42Z",
+      "side": 1,
+      "message": "Considering this patch will change the `enum pkvm_fn` a lot, and pvVMCS patches in v6.18 are also changing it a lot by adding new PV interfaces, probably we can open another PR in v6.18 to add tracing support for host only (guest support can be added after pvVMCS), with porting this patch to v6.18, so that the pvVMCS patches can add new PV interfaces based on this new style. This PR should not have too much dependency with pvVMCS PR.\n\nAnd before that, it is better if we can get an agreement on the name of the kvm_pkvm.h for v6.18. With renaming `kvm_call_pkvm` to `pkvm_hypercall` to make it more generic for pvIOMMU driver usage, shall we also rename kvm_pkvm.h to pkvm.h so that make it not specific to KVM?",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7362be8_9ef5a65f",
