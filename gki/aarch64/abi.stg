@@ -534,6 +534,11 @@ pointer_reference {
   pointee_type_id: 0x2feb6dd4
 }
 pointer_reference {
+  id: 0x016db0be
+  kind: POINTER
+  pointee_type_id: 0x2ff62467
+}
+pointer_reference {
   id: 0x016f7392
   kind: POINTER
   pointee_type_id: 0x2ffd28d7
@@ -15997,6 +16002,11 @@ pointer_reference {
   id: 0x2274f708
   kind: POINTER
   pointee_type_id: 0xa3933abf
+}
+pointer_reference {
+  id: 0x2275ac62
+  kind: POINTER
+  pointee_type_id: 0xa3965714
 }
 pointer_reference {
   id: 0x227b260f
@@ -68918,6 +68928,12 @@ member {
   offset: 1152
 }
 member {
+  id: 0xaf93cfbb
+  name: "backup"
+  type_id: 0x2275ac62
+  offset: 320
+}
+member {
   id: 0x3a9ba983
   name: "backward_ref_ts"
   type_id: 0xedf277ba
@@ -76522,10 +76538,10 @@ member {
   offset: 128
 }
 member {
-  id: 0xadefe395
+  id: 0xadefe5c0
   name: "caching"
   type_id: 0x3d00a13c
-  offset: 320
+  offset: 384
 }
 member {
   id: 0xadefe9b2
@@ -188207,12 +188223,6 @@ member {
   offset: 16
 }
 member {
-  id: 0xc9b754a2
-  name: "pinned"
-  type_id: 0xd3c80119
-  offset: 16704
-}
-member {
   id: 0xc9c3b2cf
   name: "pinned"
   type_id: 0xa722c13e
@@ -208517,6 +208527,12 @@ member {
   name: "restarts"
   type_id: 0xe62ebf07
   offset: 160
+}
+member {
+  id: 0xfa0c3548
+  name: "restore"
+  type_id: 0x016db0be
+  offset: 448
 }
 member {
   id: 0xfa207214
@@ -248013,6 +248029,12 @@ member {
   name: "undo_retrans"
   type_id: 0x6720d32f
   offset: 18144
+}
+member {
+  id: 0x5795db1d
+  name: "unevictable"
+  type_id: 0xd3c80119
+  offset: 16704
 }
 member {
   id: 0x0645ccd5
@@ -339544,6 +339566,11 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xa3965714
+  kind: STRUCT
+  name: "ttm_backup"
+}
+struct_union {
   id: 0x512f8279
   kind: STRUCT
   name: "ttm_bo_kmap_obj"
@@ -339602,7 +339629,7 @@ struct_union {
     member_id: 0x86d21e8e
     member_id: 0xde9703bd
     member_id: 0x50d1f6aa
-    member_id: 0xc9b754a2
+    member_id: 0x5795db1d
     member_id: 0x31c53fff
     member_id: 0x22f1c330
   }
@@ -339721,6 +339748,11 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x2ff62467
+  kind: STRUCT
+  name: "ttm_pool_tt_restore"
+}
+struct_union {
   id: 0xe68515bf
   kind: STRUCT
   name: "ttm_pool_type"
@@ -339784,14 +339816,16 @@ struct_union {
   kind: STRUCT
   name: "ttm_tt"
   definition {
-    bytesize: 48
+    bytesize: 64
     member_id: 0x7841b9fe
     member_id: 0x7a026535
     member_id: 0x96b8bf1d
     member_id: 0x9d9730ea
     member_id: 0x930f176b
     member_id: 0x7a46747c
-    member_id: 0xadefe395
+    member_id: 0xaf93cfbb
+    member_id: 0xadefe5c0
+    member_id: 0xfa0c3548
   }
 }
 struct_union {
@@ -507559,7 +507593,7 @@ elf_symbol {
   name: "ttm_bo_init_reserved"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x057ace6c
+  crc: 0x91f28dc0
   type_id: 0x990a861c
   full_name: "ttm_bo_init_reserved"
 }
@@ -507568,7 +507602,7 @@ elf_symbol {
   name: "ttm_bo_kmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9eb36f91
+  crc: 0x8fbd8857
   type_id: 0x945ae17e
   full_name: "ttm_bo_kmap"
 }
@@ -507577,7 +507611,7 @@ elf_symbol {
   name: "ttm_bo_kunmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3916068c
+  crc: 0x19cadd20
   type_id: 0x172ea7dd
   full_name: "ttm_bo_kunmap"
 }
@@ -507586,7 +507620,7 @@ elf_symbol {
   name: "ttm_bo_mem_space"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5897e4be
+  crc: 0x9136d472
   type_id: 0x941fec91
   full_name: "ttm_bo_mem_space"
 }
@@ -507595,7 +507629,7 @@ elf_symbol {
   name: "ttm_bo_mmap_obj"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x42051f02
+  crc: 0xcf34d781
   type_id: 0x9f958461
   full_name: "ttm_bo_mmap_obj"
 }
@@ -507604,7 +507638,7 @@ elf_symbol {
   name: "ttm_bo_move_accel_cleanup"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa56dd040
+  crc: 0xdc54cc37
   type_id: 0x948d5e96
   full_name: "ttm_bo_move_accel_cleanup"
 }
@@ -507613,7 +507647,7 @@ elf_symbol {
   name: "ttm_bo_move_memcpy"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xac529c79
+  crc: 0x1a6e4175
   type_id: 0x94b2aa4e
   full_name: "ttm_bo_move_memcpy"
 }
@@ -507622,7 +507656,7 @@ elf_symbol {
   name: "ttm_bo_move_to_lru_tail"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x93282b4a
+  crc: 0x5c4e0ff1
   type_id: 0x19832066
   full_name: "ttm_bo_move_to_lru_tail"
 }
@@ -507631,7 +507665,7 @@ elf_symbol {
   name: "ttm_bo_pin"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x93282b4a
+  crc: 0x5c4e0ff1
   type_id: 0x19832066
   full_name: "ttm_bo_pin"
 }
@@ -507640,7 +507674,7 @@ elf_symbol {
   name: "ttm_bo_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x93282b4a
+  crc: 0x5c4e0ff1
   type_id: 0x19832066
   full_name: "ttm_bo_put"
 }
@@ -507649,7 +507683,7 @@ elf_symbol {
   name: "ttm_bo_set_bulk_move"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xadaf2250
+  crc: 0x271c0348
   type_id: 0x19e4b813
   full_name: "ttm_bo_set_bulk_move"
 }
@@ -507658,7 +507692,7 @@ elf_symbol {
   name: "ttm_bo_unmap_virtual"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x93282b4a
+  crc: 0x5c4e0ff1
   type_id: 0x19832066
   full_name: "ttm_bo_unmap_virtual"
 }
@@ -507667,7 +507701,7 @@ elf_symbol {
   name: "ttm_bo_unpin"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x93282b4a
+  crc: 0x5c4e0ff1
   type_id: 0x19832066
   full_name: "ttm_bo_unpin"
 }
@@ -507676,7 +507710,7 @@ elf_symbol {
   name: "ttm_bo_validate"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6e6c5ef4
+  crc: 0x0f088793
   type_id: 0x941d79a6
   full_name: "ttm_bo_validate"
 }
@@ -507730,7 +507764,7 @@ elf_symbol {
   name: "ttm_bo_vm_reserve"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xac359402
+  crc: 0xcb5855dd
   type_id: 0xcbea3bfa
   full_name: "ttm_bo_vm_reserve"
 }
@@ -507739,7 +507773,7 @@ elf_symbol {
   name: "ttm_bo_vmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcfb29604
+  crc: 0xc31676c4
   type_id: 0x9467fbb8
   full_name: "ttm_bo_vmap"
 }
@@ -507748,7 +507782,7 @@ elf_symbol {
   name: "ttm_bo_vunmap"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x32076bbe
+  crc: 0xa3e49be5
   type_id: 0x197f4904
   full_name: "ttm_bo_vunmap"
 }
@@ -507757,7 +507791,7 @@ elf_symbol {
   name: "ttm_bo_wait_ctx"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa95872fb
+  crc: 0x9e4189f4
   type_id: 0x94baa708
   full_name: "ttm_bo_wait_ctx"
 }
@@ -507766,7 +507800,7 @@ elf_symbol {
   name: "ttm_device_fini"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x272836af
+  crc: 0x9432e12c
   type_id: 0x149c821f
   full_name: "ttm_device_fini"
 }
@@ -507775,7 +507809,7 @@ elf_symbol {
   name: "ttm_device_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6ac6f6df
+  crc: 0x27a634e8
   type_id: 0x995418a1
   full_name: "ttm_device_init"
 }
@@ -507811,7 +507845,7 @@ elf_symbol {
   name: "ttm_lru_bulk_move_fini"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe3e2a23b
+  crc: 0x52d4c97a
   type_id: 0x14fb1a6a
   full_name: "ttm_lru_bulk_move_fini"
 }
@@ -507820,7 +507854,7 @@ elf_symbol {
   name: "ttm_lru_bulk_move_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5c005843
+  crc: 0xa71ca286
   type_id: 0x16e1d6ca
   full_name: "ttm_lru_bulk_move_init"
 }
@@ -507829,7 +507863,7 @@ elf_symbol {
   name: "ttm_lru_bulk_move_tail"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5c005843
+  crc: 0xa71ca286
   type_id: 0x16e1d6ca
   full_name: "ttm_lru_bulk_move_tail"
 }
@@ -507838,7 +507872,7 @@ elf_symbol {
   name: "ttm_pool_debugfs"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf7387c55
+  crc: 0xc96d2569
   type_id: 0x9e41ea47
   full_name: "ttm_pool_debugfs"
 }
@@ -507847,7 +507881,7 @@ elf_symbol {
   name: "ttm_range_man_fini_nocheck"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6abafefc
+  crc: 0x9c0cdf77
   type_id: 0x9892253b
   full_name: "ttm_range_man_fini_nocheck"
 }
@@ -507856,7 +507890,7 @@ elf_symbol {
   name: "ttm_range_man_init_nocheck"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3df7a516
+  crc: 0x577478a2
   type_id: 0x9889b739
   full_name: "ttm_range_man_init_nocheck"
 }
@@ -507865,7 +507899,7 @@ elf_symbol {
   name: "ttm_resource_fini"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xee5349fb
+  crc: 0x8168ae7a
   type_id: 0x185a605b
   full_name: "ttm_resource_fini"
 }
@@ -507874,7 +507908,7 @@ elf_symbol {
   name: "ttm_resource_free"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8345935e
+  crc: 0xa811de9a
   type_id: 0x1989559a
   full_name: "ttm_resource_free"
 }
@@ -507883,7 +507917,7 @@ elf_symbol {
   name: "ttm_resource_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb5d76c7c
+  crc: 0xe6d51927
   type_id: 0x194776d1
   full_name: "ttm_resource_init"
 }
@@ -507892,7 +507926,7 @@ elf_symbol {
   name: "ttm_resource_manager_create_debugfs"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x257275c4
+  crc: 0xb6ead20d
   type_id: 0x189d251d
   full_name: "ttm_resource_manager_create_debugfs"
 }
@@ -507901,7 +507935,7 @@ elf_symbol {
   name: "ttm_resource_manager_evict_all"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x27fc099f
+  crc: 0xb42eb99d
   type_id: 0x99001ef9
   full_name: "ttm_resource_manager_evict_all"
 }
@@ -507910,7 +507944,7 @@ elf_symbol {
   name: "ttm_resource_manager_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x72430a85
+  crc: 0xbbe51445
   type_id: 0x189ddb68
   full_name: "ttm_resource_manager_init"
 }
@@ -507919,7 +507953,7 @@ elf_symbol {
   name: "ttm_resource_manager_usage"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1e1cf96d
+  crc: 0xde5c9570
   type_id: 0x56e237b7
   full_name: "ttm_resource_manager_usage"
 }
@@ -507928,7 +507962,7 @@ elf_symbol {
   name: "ttm_sg_tt_init"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x689b00b3
+  crc: 0x55f47e0d
   type_id: 0x9f9e0655
   full_name: "ttm_sg_tt_init"
 }
@@ -507937,7 +507971,7 @@ elf_symbol {
   name: "ttm_tt_fini"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa9d9e6fb
+  crc: 0x50faa626
   type_id: 0x1210f89b
   full_name: "ttm_tt_fini"
 }
