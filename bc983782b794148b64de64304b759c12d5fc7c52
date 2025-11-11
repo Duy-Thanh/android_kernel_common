@@ -34,6 +34,24 @@
       "parentUuid": "52b6e0f0_3d508ff5",
       "revId": "bc983782b794148b64de64304b759c12d5fc7c52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "005cd6f5_4052ef95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-11-11T18:22:14Z",
+      "side": 1,
+      "message": "Yeah, following on for this: \n\n`tools/bazel run --config\u003dlocal //common:kernel_x86_64_abi_update` has no effect on the already-checked-in `abi.stg` here, so it is as up-to-date as it is going to get.\n\nBut the corresponding additions to `gki/x86_64/abi.stg.allowed_breaks` according to go/approve-abi-break are missing.\n\nIn other recent CLs on https://android-review.git.corp.google.com/q/hashtag:%22desktop-6.12-x86-64-kmi-breakage%22+(status:open%20OR%20status:merged), this file update was skipped too, and Lint+2 was used to bypass. \n\nI believe Lint+2 was what we aligned-on earlier for KMI breaks from UPSTREAM/BACKPORT CLs to `android16-6.12-desktop`.",
+      "parentUuid": "52b6e0f0_3d508ff5",
+      "revId": "bc983782b794148b64de64304b759c12d5fc7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
