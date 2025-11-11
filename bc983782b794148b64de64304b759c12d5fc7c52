@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b6e0f0_3d508ff5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-11T17:01:52Z",
+      "side": 1,
+      "message": "I believe the `abi.stg` file needs to be regenerated to fix the `ABI Compatibility` failure.",
+      "revId": "bc983782b794148b64de64304b759c12d5fc7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
