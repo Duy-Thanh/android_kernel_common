@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52df4e4a_8c090bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T15:15:48Z",
+      "side": 1,
+      "message": "\u003e With renaming kvm_call_pkvm to pkvm_hypercall to make it more generic for pvIOMMU driver usage, shall we also rename kvm_pkvm.h to pkvm.h so that make it not specific to KVM?\n\nJust replied in https://github.com/intel-staging/pKVM-IA/pull/43#issuecomment-3517318826\n\nTL;DR it seems in fact it\u0027s gonna be KVM-specific anyway.",
+      "parentUuid": "224aee34_b17b9f73",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0e0329_9c5404b4",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T15:15:48Z",
+      "side": 1,
+      "message": "This #undef could be inside kvm_pkvm_hypercalls.h itself (like in kvm-x86-ops.h).",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7362be8_9ef5a65f",
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dac654af_f23bcd1c",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T15:15:48Z",
+      "side": 1,
+      "message": "I imagine we could address this a different way: instead of having this PKVM_FIRST_INOUT_PV_INTERFACE as a \"delimiter\", use a separate macro `PKVM_HC_INOUT()` for those interfaces that should use inout, and add something like this to (kvm_)pkvm.h:\n\n```\nstatic inline bool pkvm_fn_use_inout(enum pkvm_fn fn)\n{\n\tswitch (fn) {\n\t#define PKVM_HC(fn)\n\t#define PKVM_HC_INOUT(fn)\tcase fn:\n\t#include \u003casm/kvm_pkvm_hypercalls.h\u003e\n\t\treturn true;\n\tdefault:\n\t\treturn false;\n\t}\n}\n```\n\n...BTW maybe also worth renaming `pkvm_fn` to `pkvm_hc`?",
+      "parentUuid": "b7362be8_9ef5a65f",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "492f1262_4832ad0e",
         "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
         "patchSetId": 1
@@ -48,6 +101,24 @@
       "writtenOn": "2025-11-11T05:39:03Z",
       "side": 1,
       "message": "If we rename kvm_call_pkvm() to pkvm_hypercall() for the IOMMU driver, probably this file kvm_pkvm_hypercalls.h should also be renamed to pkvm_hypercalls.h as the hypercalls in this file are not just for KVM, but also for IOMMU?",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca5796e_f860c555",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T15:15:48Z",
+      "side": 1,
+      "message": "Makes sense to me, and also I can probably move the enum pkvm_fn definition from kvm_pkvm.h to pkvm.h (and then I can probably drop the patch aosp/3847097)",
+      "parentUuid": "492f1262_4832ad0e",
       "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
