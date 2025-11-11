@@ -16,6 +16,24 @@
       "message": "I believe the `abi.stg` file needs to be regenerated to fix the `ABI Compatibility` failure.",
       "revId": "bc983782b794148b64de64304b759c12d5fc7c52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0220ac9c_f8989aae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-11T18:21:01Z",
+      "side": 1,
+      "message": "After chatting with Ryan, it seems I got myself confused with this check vs. the build failure with the `abi.stg` hasn\u0027t been updated at all. I think this version should good. Resolving.",
+      "parentUuid": "52b6e0f0_3d508ff5",
+      "revId": "bc983782b794148b64de64304b759c12d5fc7c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
