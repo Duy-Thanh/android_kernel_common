@@ -34,6 +34,24 @@
       "parentUuid": "b4b8fff5_2c47e681",
       "revId": "bc6debf91852c9a93bc7e477e2038f8b87ab4281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b977aa01_68e889a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-11-11T04:02:01Z",
+      "side": 1,
+      "message": "I have cherry picked the patch from Linux mainline and tagged it UPSTREAM.\nhttps://android-review.googlesource.com/c/kernel/common/+/3847335",
+      "parentUuid": "15c92868_b13252ee",
+      "revId": "bc6debf91852c9a93bc7e477e2038f8b87ab4281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
