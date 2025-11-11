@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3896d393_5141df7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-11T21:29:52Z",
+      "side": 1,
+      "message": "Just curious - does the later cls depend on this change? This is a nice cleanup and makes sense, but I was wondering if it is really needed for the hypercall unification effort?",
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba02741_b330d273",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-11T21:29:52Z",
+      "side": 1,
+      "message": "I was wondering if we could still keep the vcpu arg instead of reading from percpu? vcpu is passed from handle_vmcall and handle_vmcall receives it from its caller. It might be slightly efficient that percpu operation I guess.",
+      "fixSuggestions": [
+        {
+          "fixId": "4115885a_f75b1787",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 387,
+                "startChar": 0,
+                "endLine": 388,
+                "endChar": 0
+              },
+              "replacement": "int __pkvm_init_finalise(struct kvm_vcpu *vcpu, struct pkvm_section sections[], int section_sz)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
