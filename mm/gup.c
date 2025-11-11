@@ -2141,6 +2141,9 @@ static long __gup_longterm_locked(struct mm_struct *mm,
 		rc = check_and_migrate_movable_pages(nr_pinned_pages, pages);
 	} while (rc == -EAGAIN);
 	memalloc_pin_restore(flags);
+	/* Debugging for pin user pages in memory fail with FOLL_LONGTERM flag */
+	if (rc)
+		trace_android_rvh_gup_longterm_locked(rc, nr_pinned_pages, start, nr_pages, pages);
 	return rc ? rc : nr_pinned_pages;
 }
 
