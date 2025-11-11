@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832c1284_36e4e7de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T22:47:54Z",
+      "side": 1,
+      "message": "Heh, no, it is not really needed. I originally made this \"cleanup\" as I was going to implement the later patches similarly to Chuanxiao\u0027s v6.15 patchset, where (currently) handle_vmcall() calls pkvm_handle_kvm_call() which is responsible for handling all hypercalls, and doesn\u0027t pass the host vcpu to it. Then I realized that here in v6.12 we can still keep calling __pkvm_init_finalise() and pkvm_reprivilege_vcpu() directly from handle_vmcall() to avoid larger refactoring, so I did that, but didn\u0027t realize that it means that we can also keep passing the vcpu arg to them.\n\nSo I\u0027m happy to abandon these first 2 patches.",
+      "parentUuid": "3896d393_5141df7c",
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cba02741_b330d273",
@@ -59,6 +77,24 @@
           ]
         }
       ],
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "046b842b_9553737d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T22:47:54Z",
+      "side": 1,
+      "message": "I wouldn\u0027t worry about efficiency, given how often this hypercall it called. :) But anyway, yeah, we can keep passing the vcpu arg, which means this patch isn\u0027t really needed.",
+      "parentUuid": "cba02741_b330d273",
       "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
