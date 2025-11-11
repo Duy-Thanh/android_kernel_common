@@ -121,6 +121,24 @@
       "parentUuid": "492f1262_4832ad0e",
       "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b254d380_ed03d7f9",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-11T20:43:16Z",
+      "side": 1,
+      "message": "yes makes sense, I was going to suggest that :-). We could still have aosp/3847097 as those pkvm_read/write is not used outside of iommu. Not sure if we have plans to  use it for other MMIO use cases as well?",
+      "parentUuid": "8ca5796e_f860c555",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
