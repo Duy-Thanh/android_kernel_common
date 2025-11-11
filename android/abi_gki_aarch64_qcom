@@ -3534,6 +3534,7 @@
   __traceiter_android_vh_mpam_set
   __traceiter_android_vh_post_image_save
   __traceiter_android_vh_printk_hotplug
+  __traceiter_android_vh_qcom_place_marker
   __traceiter_android_vh_rproc_recovery
   __traceiter_android_vh_rproc_recovery_set
   __traceiter_android_vh_save_cpu_resume
@@ -3688,6 +3689,7 @@
   __tracepoint_android_vh_mpam_set
   __tracepoint_android_vh_post_image_save
   __tracepoint_android_vh_printk_hotplug
+  __tracepoint_android_vh_qcom_place_marker
   __tracepoint_android_vh_rproc_recovery
   __tracepoint_android_vh_rproc_recovery_set
   __tracepoint_android_vh_save_cpu_resume
