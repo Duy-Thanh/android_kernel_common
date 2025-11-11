@@ -44,6 +44,24 @@
       ],
       "revId": "07aff70da4641df4968b583ccc99c5fb5de214f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3d90cce_e9c450fe",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-11T22:33:21Z",
+      "side": 1,
+      "message": "\u003e !CONFIG_PKVM_INTEL hardcodes pkvm_enabled() as false\n\nBut doesn\u0027t do the same for pkvm_hypercall() (added in the next patch).\n\nWe could add it, but I tend to think we should just drop this patch anyway.",
+      "parentUuid": "301202a1_d32307a9",
+      "revId": "07aff70da4641df4968b583ccc99c5fb5de214f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
