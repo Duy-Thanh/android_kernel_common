@@ -94,7 +94,7 @@ static unsigned long handle_vmcall(struct kvm_vcpu *vcpu)
 
 	switch (nr) {
 	case __pkvm__init_finalize:
-		ret = __pkvm_init_finalise(vcpu, (struct pkvm_section *)a0, a1, a2);
+		ret = __pkvm_init_finalise(vcpu, (struct pkvm_section *)a0, a1, a2, a3);
 		break;
 	case __pkvm__commit_finalize:
 		ret = pkvm_commit_finalise(a0);

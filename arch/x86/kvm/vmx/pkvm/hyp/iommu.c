@@ -29,6 +29,8 @@ int intel_iommu_sm;
  */
 int intel_iommu_superpage;
 
+DEFINE_PER_CPU(union pkvm_iommu_page_donation, *iommu_page_donation);
+
 #define for_each_valid_iommu(p)						\
 	for ((p) = iommus; (p) < iommus + PKVM_MAX_IOMMU_NUM; (p)++)	\
 		if (!(p) || !(p)->iommu.reg_phys) {			\

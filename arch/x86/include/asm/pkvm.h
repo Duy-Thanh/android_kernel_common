@@ -102,6 +102,39 @@ static inline unsigned long __pkvm_hypercall(unsigned long nr, unsigned long p1,
  */
 
 /*
+ * For managing IOMMU page tables, pkvm would need free pages and host
+ * donates the pages as needed. This avoids static allocation of pages
+ * in pkvm during boot. map and unmap hypercalls use this structure as
+ * a two-way communication mechanism to manage page donation. Host
+ * allocates pages and updates nr_pages for the map hypercall. pkvm
+ * updates nr_pages with the pages not used or freed during map/unmap
+ * hypercalls.
+ */
+union pkvm_iommu_page_donation {
+	struct {
+		/*
+		 * Number of pages available.
+		 * Updated by host after filling pages and updated by pkvm when
+		 * pages are consumed or filled back. pkvm fills pages back when
+		 * pagetable is freed or pages combined to build super pages.
+		 */
+		s64 nr_pages;
+		DECLARE_FLEX_ARRAY(phys_addr_t, pages);
+	};
+	u8 __padding[PAGE_SIZE];
+} __aligned(PAGE_SIZE);
+
+#define PKVM_MAX_IOMMU_PAGE_DONATION	\
+	((sizeof(union pkvm_iommu_page_donation) - offsetof(union pkvm_iommu_page_donation, pages)) / sizeof(phys_addr_t))
+
+/*
+ * Maximum pages that could be donated by host.
+ * pkvm_iommu_page_donation can hold more, but reserving rest of the
+ * spots for pkvm to fill when it releases pages.
+ */
+#define PKVM_MAX_NR_DONATED_PAGES	256
+
+/*
  * Generic hypercall parameter for clearing legacy
  * and scalable mode context entries and pasid table
  * entries.
@@ -224,10 +257,14 @@ static inline void pkvm_writel(void __iomem *reg, unsigned long reg_phys,
 		writel(val, reg + offset);
 }
 
+DECLARE_PER_CPU(union pkvm_iommu_page_donation, iommu_page_donation);
+
 #else /* __PKVM_HYP__ */
 
 /* we are in pkvm hypervisor, pkvm is enabled by definition */
 #define enable_pkvm true
+
+DECLARE_PER_CPU(union pkvm_iommu_page_donation, *iommu_page_donation);
 
 #endif /* __PKVM_HYP__ */
 

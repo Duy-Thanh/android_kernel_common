@@ -305,6 +305,39 @@ static int create_iommu(void)
 	return pkvm_init_iommu(pkvm_virt_to_phys(iommu_mem_base), nr_pages);
 }
 
+static void __pkvm_unset_donation(void)
+{
+	void *dontaion_va = this_cpu_read(iommu_page_donation);
+	size_t size = sizeof(union pkvm_iommu_page_donation);
+
+	if (!dontaion_va)
+		return;
+
+	this_cpu_write(iommu_page_donation, NULL);
+	__pkvm_unpin_shared_mem(__pkvm_pa(dontaion_va), size);
+	__pkvm_host_unshare_hyp(__pkvm_pa(dontaion_va), size);
+}
+
+static int __pkvm_set_donation(unsigned long donation_gpa)
+{
+	unsigned long donation_pa = host_gpa2hpa(donation_gpa);
+	size_t size = sizeof(union pkvm_iommu_page_donation);
+	int ret;
+
+	ret = __pkvm_host_share_hyp(donation_pa, size);
+	if (ret)
+		return ret;
+
+	ret = __pkvm_pin_shared_mem(donation_pa, size);
+	if (ret) {
+		__pkvm_host_unshare_hyp(donation_pa, size);
+		return ret;
+	}
+
+	this_cpu_write(iommu_page_donation, __pkvm_va(donation_pa));
+	return ret;
+}
+
 static void __pkvm_unset_pv_param(void)
 {
 	void *pv_param_va = this_cpu_read(pv_param);
@@ -370,6 +403,7 @@ int pkvm_reprivilege_vcpu(struct kvm_vcpu *vcpu)
 
 static void pkvm_undo_finalise(void)
 {
+	__pkvm_unset_donation();
 	__pkvm_unset_pv_param();
 
 	/*
@@ -420,7 +454,7 @@ int pkvm_commit_finalise(bool success)
 
 #define TMP_SECTION_SZ	16UL
 int __pkvm_init_finalise(struct kvm_vcpu *vcpu, struct pkvm_section sections[],
-			 int section_sz, unsigned long pv_param_gpa)
+			 int section_sz, unsigned long pv_param_gpa, unsigned long donation_gpa)
 {
 	int i, ret = 0;
 	struct pkvm_host_vcpu *hvcpu = to_pkvm_hvcpu(vcpu);
@@ -536,7 +570,13 @@ switch_pgt:
 	if (ret)
 		goto out;
 
+	ret = __pkvm_set_donation(donation_gpa);
+	if (ret)
+		goto out;
+
 	ret = __pkvm_set_pv_param(pv_param_gpa);
+	if (ret)
+		__pkvm_unset_donation();
 
 out:
 	return ret;
