@@ -2444,7 +2444,9 @@
 # required by rockchip_opp_select.ko
   dev_pm_opp_disable
   dev_pm_opp_of_add_table
+  dev_pm_opp_put_supported_hw
   dev_pm_opp_set_prop_name
+  of_clk_get_from_provider
   regulator_get_linear_step
 
 # required by rockchip_pwm_remotectl.ko
@@ -2479,6 +2481,7 @@
   component_master_del
   component_match_add_release
   component_unbind_all
+  devm_devfreq_unregister_opp_notifier
   devm_of_phy_get_by_index
   driver_find_device
   drm_atomic_commit
@@ -2517,6 +2520,7 @@
   drm_bridge_chain_mode_set
   drm_bridge_get_edid
   drm_connector_attach_content_protection_property
+  drm_connector_helper_hpd_irq_event
   drm_connector_list_iter_begin
   drm_connector_list_iter_end
   drm_connector_list_iter_next

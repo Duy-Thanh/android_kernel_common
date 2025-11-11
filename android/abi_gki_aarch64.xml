@@ -1240,6 +1240,7 @@
       <elf-symbol name='dev_pm_opp_put_opp_table' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9ae81cc2'/>
       <elf-symbol name='dev_pm_opp_put_prop_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf794e8bf'/>
       <elf-symbol name='dev_pm_opp_put_regulators' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61810445'/>
+      <elf-symbol name='dev_pm_opp_put_supported_hw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x30767d62'/>
       <elf-symbol name='dev_pm_opp_register_set_opp_helper' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4c337706'/>
       <elf-symbol name='dev_pm_opp_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca5d79ba'/>
       <elf-symbol name='dev_pm_opp_remove_all_dynamic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26067b5f'/>
@@ -1356,6 +1357,7 @@
       <elf-symbol name='devm_devfreq_event_add_edev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda49c7cb'/>
       <elf-symbol name='devm_devfreq_register_opp_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe312315f'/>
       <elf-symbol name='devm_devfreq_remove_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdb30fa7a'/>
+      <elf-symbol name='devm_devfreq_unregister_opp_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x676a04df'/>
       <elf-symbol name='devm_device_add_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x409f253b'/>
       <elf-symbol name='devm_device_add_groups' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x545bfbb5'/>
       <elf-symbol name='devm_device_remove_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd305cf93'/>
@@ -1665,6 +1667,7 @@
       <elf-symbol name='drm_connector_attach_max_bpc_property' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb0e3ba1b'/>
       <elf-symbol name='drm_connector_cleanup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x10b6dec1'/>
       <elf-symbol name='drm_connector_has_possible_encoder' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x86dd7040'/>
+      <elf-symbol name='drm_connector_helper_hpd_irq_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x769ddcee'/>
       <elf-symbol name='drm_connector_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18507db9'/>
       <elf-symbol name='drm_connector_init_with_ddc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1d5c68c4'/>
       <elf-symbol name='drm_connector_list_iter_begin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4a7b7b1f'/>
@@ -3077,6 +3080,7 @@
       <elf-symbol name='of_clk_del_provider' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd35bb493'/>
       <elf-symbol name='of_clk_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23ea0559'/>
       <elf-symbol name='of_clk_get_by_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaaf3b41e'/>
+      <elf-symbol name='of_clk_get_from_provider' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xccc67b78'/>
       <elf-symbol name='of_clk_get_parent_count' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x885a7612'/>
       <elf-symbol name='of_clk_get_parent_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf3def793'/>
       <elf-symbol name='of_clk_hw_onecell_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe088ec13'/>
@@ -126104,6 +126108,10 @@
         <parameter type-id='e62a60bd' name='opp_table' filepath='drivers/opp/core.c' line='1824' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='dev_pm_opp_put_supported_hw' mangled-name='dev_pm_opp_put_supported_hw' filepath='drivers/opp/core.c' line='1642' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_pm_opp_put_supported_hw'>
+        <parameter type-id='e62a60bd' name='opp_table' filepath='drivers/opp/core.c' line='1642' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='dev_pm_opp_register_set_opp_helper' mangled-name='dev_pm_opp_register_set_opp_helper' filepath='drivers/opp/core.c' line='1930' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_pm_opp_register_set_opp_helper'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/opp/core.c' line='1930' column='1'/>
         <parameter type-id='c1433076' name='set_opp' filepath='drivers/opp/core.c' line='1931' column='1'/>
@@ -126707,6 +126715,11 @@
       <function-decl name='devm_devfreq_remove_device' mangled-name='devm_devfreq_remove_device' filepath='drivers/devfreq/devfreq.c' line='1085' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_devfreq_remove_device'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/devfreq/devfreq.c' line='1085' column='1'/>
         <parameter type-id='f66fa7f4' name='devfreq' filepath='drivers/devfreq/devfreq.c' line='1085' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='devm_devfreq_unregister_opp_notifier' mangled-name='devm_devfreq_unregister_opp_notifier' filepath='drivers/devfreq/devfreq.c' line='2036' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_devfreq_unregister_opp_notifier'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/devfreq/devfreq.c' line='2036' column='1'/>
+        <parameter type-id='f66fa7f4' name='devfreq' filepath='drivers/devfreq/devfreq.c' line='2037' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='devm_device_add_group' mangled-name='devm_device_add_group' filepath='drivers/base/core.c' line='2413' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_device_add_group'>
@@ -128412,6 +128425,10 @@
       <function-decl name='drm_connector_has_possible_encoder' mangled-name='drm_connector_has_possible_encoder' filepath='drivers/gpu/drm/drm_connector.c' line='421' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_connector_has_possible_encoder'>
         <parameter type-id='4db02c58' name='connector' filepath='drivers/gpu/drm/drm_connector.c' line='421' column='1'/>
         <parameter type-id='74d89ebd' name='encoder' filepath='drivers/gpu/drm/drm_connector.c' line='422' column='1'/>
+        <return type-id='b50a4934'/>
+      </function-decl>
+      <function-decl name='drm_connector_helper_hpd_irq_event' mangled-name='drm_connector_helper_hpd_irq_event' filepath='drivers/gpu/drm/drm_probe_helper.c' line='858' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_connector_helper_hpd_irq_event'>
+        <parameter type-id='4db02c58' name='connector' filepath='drivers/gpu/drm/drm_probe_helper.c' line='858' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='drm_connector_init' mangled-name='drm_connector_init' filepath='drivers/gpu/drm/drm_connector.c' line='217' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_connector_init'>
@@ -135681,6 +135698,10 @@
       <function-decl name='of_clk_get_by_name' mangled-name='of_clk_get_by_name' filepath='drivers/clk/clk.c' line='5111' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_clk_get_by_name'>
         <parameter type-id='9a537bbe' name='np' filepath='drivers/clk/clk.c' line='5111' column='1'/>
         <parameter type-id='80f4b756' name='name' filepath='drivers/clk/clk.c' line='5111' column='1'/>
+        <return type-id='7d0bc0eb'/>
+      </function-decl>
+      <function-decl name='of_clk_get_from_provider' mangled-name='of_clk_get_from_provider' filepath='drivers/clk/clk.c' line='5062' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_clk_get_from_provider'>
+        <parameter type-id='51a94113' name='clkspec' filepath='drivers/clk/clk.c' line='5062' column='1'/>
         <return type-id='7d0bc0eb'/>
       </function-decl>
       <function-decl name='of_clk_get_parent_count' mangled-name='of_clk_get_parent_count' filepath='drivers/clk/clk.c' line='5126' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_clk_get_parent_count'>
