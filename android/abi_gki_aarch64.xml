@@ -3070,6 +3070,7 @@
       <elf-symbol name='nvmem_device_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3866e217'/>
       <elf-symbol name='of_add_property' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2c78b38d'/>
       <elf-symbol name='of_address_to_resource' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba447ae6'/>
+      <elf-symbol name='of_alias_get_highest_id' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x321cdbf'/>
       <elf-symbol name='of_alias_get_id' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xad53113a'/>
       <elf-symbol name='of_can_transceiver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe03e49f6'/>
       <elf-symbol name='of_clk_add_hw_provider' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe3a2dd9'/>
@@ -135646,6 +135647,10 @@
         <parameter type-id='9a537bbe' name='dev' filepath='drivers/of/address.c' line='866' column='1'/>
         <parameter type-id='95e97e5e' name='index' filepath='drivers/of/address.c' line='866' column='1'/>
         <parameter type-id='c9d64c0d' name='r' filepath='drivers/of/address.c' line='867' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='of_alias_get_highest_id' mangled-name='of_alias_get_highest_id' filepath='drivers/of/base.c' line='2126' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_alias_get_highest_id'>
+        <parameter type-id='80f4b756' name='stem' filepath='drivers/of/base.c' line='2126' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='of_alias_get_id' mangled-name='of_alias_get_id' filepath='drivers/of/base.c' line='2045' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_alias_get_id'>
