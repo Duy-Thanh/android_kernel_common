@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7362be8_9ef5a65f",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-11T05:48:25Z",
+      "side": 1,
+      "message": "Just realized that, for v6.18, below code is introduced to indicate the PV interfaces which should use inout mechanism.\n\n```\n\tPKVM_FIRST_INOUT_PV_INTERFACE,\n\t__pkvm__vm_destroy \u003d PKVM_FIRST_INOUT_PV_INTERFACE,\n```\n\nThe `PKVM_FIRST_INOUT_PV_INTERFACE` is a valid PV interface number as `__pkvm_vm_destroy` is set to `PKVM_FIRST_INOUT_PV_INTERFACE`.\n\nWith including `kvm_pkvm_hypercalls.h`, probably also can add one more line, e.g., as PKVM_HC(inout), and put all the PV interfaces which use inout mechanism below this line. Then PKVM_HC(inout) is a placeholder and won\u0027t be used as a PV interface by the host, meanwhile there is also no handler in the pKVM for it. So it will not be a valid PV interface number any more.",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "492f1262_4832ad0e",
         "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
         "patchSetId": 1
