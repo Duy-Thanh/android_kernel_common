@@ -141,6 +141,24 @@
       "parentUuid": "e6ef5098_fe6aeb75",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56574414_5a44e864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T19:20:37Z",
+      "side": 1,
+      "message": "...unless we ask for a Bug to provide more information or to discuss. Fixes is not sufficient in this case since you are modifying a symbol list but there is no evidence that you represent that company. There must be a Bug.\n\nYou cannot modify a symbol list belonging to someone else.\n\nAs I said in another comment, your company can create your own symbol list which seems appropriate here since it appears this is not important to rockchip, but is important to you and your customers.\n\nFor you to create a list, you will have to reveal your company and file a bug with your @company email to create the corresponding symbol list. We cannot accept anonymous symbol list additions. If you must keep your company anonymous, we can discuss on the bug and create an appropriate name for the symbol list. You can file a bug at https://issuetracker.google.com/",
+      "parentUuid": "2bd4bf37_47f666a7",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
