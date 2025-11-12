@@ -159,6 +159,24 @@
       "parentUuid": "2bd4bf37_47f666a7",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbd0345_38cbd24a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272971
+      },
+      "writtenOn": "2025-11-12T20:10:52Z",
+      "side": 1,
+      "message": "@tkjos@google.com \n\nThanks for your feedback. I don’t think it makes sense to create a 1:1 copy of the Rockchip code just for one line, only to remove it later when Rockchip eventually brings the same patch.\n\nI’ve worked at a large global company before, and even they had no success negotiating with Google to add a custom ABI for companies in the top 20 of the automotive industry. I’ve done my best here as an independent contributor to highlight this issue.\n\nSorry for bothering you, and all the best!",
+      "parentUuid": "56574414_5a44e864",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
