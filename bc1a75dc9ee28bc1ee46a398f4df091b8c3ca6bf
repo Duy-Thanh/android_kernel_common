@@ -16,6 +16,24 @@
       "message": "i2c-tegra.o is not built into GKI kernels for android15-6.6. Why is this needed here? This should be in your downstream tree where vendor modules are built.",
       "revId": "bc1a75dc9ee28bc1ee46a398f4df091b8c3ca6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a77b280_0d1dd602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T19:36:57Z",
+      "side": 1,
+      "message": "(CONFIG_I2C_TEGRA is not enabled for GKI builds)",
+      "parentUuid": "0b1ab4ab_06d5c12e",
+      "revId": "bc1a75dc9ee28bc1ee46a398f4df091b8c3ca6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
