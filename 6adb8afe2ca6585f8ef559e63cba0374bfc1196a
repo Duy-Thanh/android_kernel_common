@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f722600_08ef3605",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T19:39:44Z",
+      "side": 1,
+      "message": "why is this needed for GKI builds? Can\u0027t this be in your downstream tree where your vendor modules are built?",
+      "revId": "6adb8afe2ca6585f8ef559e63cba0374bfc1196a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
