@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51cecc10_3006f4cf",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-12T00:57:29Z",
+      "side": 1,
+      "message": "That sounds attractive. With introducing additional macro PKVM_HC_INOUT, it should be defined at the other places where use it, i.e., `enum pkvm_fn` and `char *pkvm_hypercalls`. But seems these two places doesn\u0027t need to treat PKVM_HC_INOUT special, so probably we can add below in `kvm_pkvm_hypercalls.h`, to define PKVM_HC_INOUT as PKVM_HC if it is not defined.\n```\n#ifndef PKVM_HC_INOUT\n#define PKVM_HC_INOUT PKVM_HC\n#endif\n```\n\nAnd probably also undefine PKVM_HC_INOUT in the end.\n\n\u003e...BTW maybe also worth renaming pkvm_fn to pkvm_hc?\n\nTo me, `pkvm_fn` represents a function in the pKVM, and the name of `kvm_call_pkvm` explicitly means kvm call a function in the pKVM. This implicitly means kvm executes pKVM\u0027s hypercalls. With renaming `kvm_call_pkvm` to `pkvm_hypercall`, that implicit meaning becomes explicitly. In this case, probably renaming `pkvm_fn` to `pkvm_hc` is better.\n\nAnd the hander in the pKVM side is called pkvm_handle_kvm_call(), which is to reflect the macro `kvm_call_pkvm`. With the new name `pkvm_hypercall`, maybe also rename this handler to `pkvm_handle_host_hypercalls()`?",
+      "parentUuid": "dac654af_f23bcd1c",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "492f1262_4832ad0e",
         "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
         "patchSetId": 1
