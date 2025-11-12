@@ -70,6 +70,23 @@
       "parentUuid": "427375d9_c518e2d0",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ef5098_fe6aeb75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T18:05:49Z",
+      "side": 1,
+      "message": "You should not be updating the symbol list for other companies.\n\nIf you represent an IHV and these new symbols are required for your company\u0027s driver and used by rockchip and telechips, then please create your own symbol file (again, a Bug: tag is needed) or have rockchip and telechip update their own symbol lists.",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
