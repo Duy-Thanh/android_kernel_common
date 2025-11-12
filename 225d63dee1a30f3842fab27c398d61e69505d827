@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f69c79c_191e18cd",
+        "filename": "gki/aarch64/symbols/db845c",
+        "patchSetId": 7
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-11-12T23:36:33Z",
+      "side": 1,
+      "message": "Should we disable lockdep on 6.18? @jstultz@google.com",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3ceddc73_040372ad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/symbols/db845c",
+              "range": {
+                "startLine": 504,
+                "startChar": 0,
+                "endLine": 511,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "gki/aarch64/symbols/db845c",
+              "range": {
+                "startLine": 2054,
+                "startChar": 0,
+                "endLine": 2055,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "225d63dee1a30f3842fab27c398d61e69505d827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd751a28_1b7b01bb",
+        "filename": "gki/aarch64/symbols/db845c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-11-12T23:36:33Z",
+      "side": 1,
+      "message": "Weird we have several symbols relate to tegra in this symbol list file",
+      "range": {
+        "startLine": 1016,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bd918810_b9ebf0a1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/symbols/db845c",
+              "range": {
+                "startLine": 1016,
+                "startChar": 0,
+                "endLine": 1017,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "gki/aarch64/symbols/db845c",
+              "range": {
+                "startLine": 1031,
+                "startChar": 0,
+                "endLine": 1032,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "225d63dee1a30f3842fab27c398d61e69505d827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
