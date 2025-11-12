@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea872fb_f25df53d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T21:03:49Z",
+      "side": 1,
+      "message": "replace with upstream fix at https://lore.kernel.org/lkml/20250617-fix-use-after-free-v2-1-1fbfafec5917@oss.qualcomm.com/",
+      "revId": "4bd8fb7b2ee012077157ef92dcb6a8824e431416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
