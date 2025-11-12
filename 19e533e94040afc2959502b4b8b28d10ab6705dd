@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a859f51b_daaae354",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-12T09:42:52Z",
+      "side": 1,
+      "message": "The host vmexit tracing PR is opened on top of v6.18-rc3 at https://github.com/intel-staging/pKVM-IA/pull/44, with the refactor for `enum pkvm_fn` and `kvm_call_pkvm` by a SQUISHME patch. It also integrates the hypercalls vmexit stats done by this path and the aosp/3836863. Looking forward your review comments on this.",
+      "parentUuid": "52df4e4a_8c090bdc",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be0e0329_9c5404b4",
