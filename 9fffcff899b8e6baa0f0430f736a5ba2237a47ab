@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87685e2d_25c7347b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272971
+      },
+      "writtenOn": "2025-11-12T13:11:11Z",
+      "side": 1,
+      "message": "@gprocida@google.com should this commit also be cherry-picked into `android13-5.10-2025-10` branch? Because it contains the same bug.",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
