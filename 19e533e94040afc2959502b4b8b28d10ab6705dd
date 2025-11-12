@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8741951b_7817d07f",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-12T17:27:28Z",
+      "side": 1,
+      "message": "\u003e so probably we can add below in kvm_pkvm_hypercalls.h, to define PKVM_HC_INOUT as PKVM_HC if it is not defined.\n\nYeah, seems like a good idea.\n\n\u003e With the new name pkvm_hypercall, maybe also rename this handler to pkvm_handle_host_hypercalls()?\n\nYeah, makes sense. Probably just pkvm_handle_host_hypercall() (singular, not plural)?\n\nBTW also just a note: IOMMU hypercalls are actually Intel (VT-d) specific, so in v6.18, their definitions should be probably under #ifdef CONFIG_PKVM_INTEL, and their handling should be probably not directly in generic pkvm_handle_host_hypercall() but somewhere e.g. in arch/x86/kvm/pkvm/vmx/iommu.c?",
+      "parentUuid": "51cecc10_3006f4cf",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "492f1262_4832ad0e",
         "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
         "patchSetId": 1
