@@ -34,6 +34,24 @@
       "parentUuid": "87685e2d_25c7347b",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427375d9_c518e2d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272971
+      },
+      "writtenOn": "2025-11-12T16:28:45Z",
+      "side": 1,
+      "message": "@gprocida@google.com\n\n\u003e You are making changes to 2 partner symbol lists using a Gmail address. This is unusual.\n\nIt\u0027s my personal email that I\u0027m using to contribute into open-source community.\nAlready used it in several open-source projects (repo-tool, gstreamer, u-boot, Freescale/NXP kernel, u-boot, yocto and etc.), nothing special.\n\n\n\n\n\n\n\n\n\n\u003e Can you explain your relation to stmmac-platform.ko is?\n\nAlmost all Rockchip boards contains ethernet that depends on `stmmac-platform.ko`.\n\nI\u0027m not sure why `gki_rockchip.fragment` doesn\u0027t contain it as usual, but abi already contains `required by stmmac-platform.ko`.\n\n\n\n\n\n\n\n\nBack to the story — I’m currently investigating the possibility for our customers to migrate to **Android 13** with **kernel 5.10.243 + Rockchip patches**.\n\nI’ve ported all Rockchip patches onto the vanilla Android 13 kernel (5.10.243) and compiled it. Everything works perfectly **except** the `stmmac-platform.ko` module. Android reports the following error in `dmesg`:\n\n```\nstmmac_platform: Unknown symbol of_alias_get_highest_id (err -2)\n```\n\nOn the older Android 13 vendor kernel (5.10.157), everything worked fine. However, starting from `5.10.239+`, Android no longer boots.\nDuring my investigation, I found the root cause:\n\n**Link to commit:**\n[https://android.googlesource.com/kernel/common/+/68efdab16d6b76cdebcd2989d888a5f17c772149](https://android.googlesource.com/kernel/common/+/68efdab16d6b76cdebcd2989d888a5f17c772149)\n\nThe Google Android team merged the **stmmac-platform driver** without verifying potential side effects:\n[https://android-review.googlesource.com/c/kernel/common/+/3696367](https://android-review.googlesource.com/c/kernel/common/+/3696367)\n\nThis commit introduced the use of the restricted function `of_alias_get_highest_id`, which causes issues on all future boards because the symbol `of_alias_get_highest_id` is **not exported** in the GKI symbol list.\n\nI’m highlighting this issue here because it affects **anyone migrating to the 5.10.239+ Android 13 kernel**.\n\nFor reference, the **Android 12 kernel (5.10)** already includes `of_alias_get_highest_id` in its symbol list, so it is not affected.",
+      "parentUuid": "89ba9f8c_3052576a",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
