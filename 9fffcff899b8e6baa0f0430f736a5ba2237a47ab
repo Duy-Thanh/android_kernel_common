@@ -105,6 +105,42 @@
       "parentUuid": "55b9ba34_9853f7d8",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "865159fe_0121daea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272971
+      },
+      "writtenOn": "2025-11-12T19:04:19Z",
+      "side": 1,
+      "message": "@tkjos@google.com I tried to reach persons responsible for Rockchip\u0027s part, like here:\nhttps://android-review.googlesource.com/c/kernel/common/+/3624872\n\nBut has no luck.",
+      "parentUuid": "790b4e68_56b8e890",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bd4bf37_47f666a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3272971
+      },
+      "writtenOn": "2025-11-12T19:04:19Z",
+      "side": 1,
+      "message": "It\u0027s not my company\u0027s driver, `stmmac-platform` is Linux kernel driver from mainline and it has no relation to Rockchip or Telechips company specific implementation or patches. There is `CONFIG_DWMAC_ROCKCHIP\u003dm` kernel config which is part of Rockchip to integrate via `stmmac-platform`.\n\n---\n\u003e (again, a Bug: tag is needed) \n\nI read Google instruction here - https://android.googlesource.com/kernel/common/\n\n\u003e Requirements for Android-specific patches: `ANDROID:`\n\u003e If the patch is fixing a bug to Android-specific code\n\u003e * tag the patch subject with `ANDROID:`\n\u003e * add a `Fixes:` tag that cites the patch with the bug\n\n\n\u003e If the patch is a new feature\n\u003e * tag the patch subject with `ANDROID:`\n\u003e * add a `Bug:` tag with the Android bug (required for android-specific features)\n\nSo it must be `Fixes:`, not `Bug:`.",
+      "parentUuid": "e6ef5098_fe6aeb75",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
