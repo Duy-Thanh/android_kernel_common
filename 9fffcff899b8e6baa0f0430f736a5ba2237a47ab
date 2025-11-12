@@ -16,6 +16,24 @@
       "message": "@gprocida@google.com should this commit also be cherry-picked into `android13-5.10-2025-10` branch? Because it contains the same bug.",
       "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ba9f8c_3052576a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-12T14:30:18Z",
+      "side": 1,
+      "message": "You are making changes to 2 partner symbol lists using a Gmail address. This is unusual.\n\nCan you explain your relation to stmmac-platform.ko is?\n\nI think telechips / rockchip should be updating their symbol lists.\n\n---\n\nThe `-lts` branch is a staging area for merges from upstream Linux LTS branches. You shouldn\u0027t need to touch it.\n\n---\n\nIf the release bracnh `android13-5.10-2025-10` needs a fix, then it should be requested via the respin process documented here:\n\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#emergency-respin",
+      "parentUuid": "87685e2d_25c7347b",
+      "revId": "9fffcff899b8e6baa0f0430f736a5ba2237a47ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
