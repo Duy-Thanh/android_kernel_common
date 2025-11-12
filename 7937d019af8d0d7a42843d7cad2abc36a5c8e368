@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a889bc0_5330b588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-12T00:48:29Z",
+      "side": 1,
+      "message": "Makes sense",
+      "parentUuid": "832c1284_36e4e7de",
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cba02741_b330d273",
@@ -95,6 +113,24 @@
       "side": 1,
       "message": "I wouldn\u0027t worry about efficiency, given how often this hypercall it called. :) But anyway, yeah, we can keep passing the vcpu arg, which means this patch isn\u0027t really needed.",
       "parentUuid": "cba02741_b330d273",
+      "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef873665_a7e13ca0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-12T00:48:29Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "046b842b_9553737d",
       "revId": "7937d019af8d0d7a42843d7cad2abc36a5c8e368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
