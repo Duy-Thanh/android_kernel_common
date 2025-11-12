@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e890fd3_b214921e",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-11-12T16:37:17Z",
+      "side": 1,
+      "message": "It is unfortunate that it is O(n^2), but I guess it is not worth using hash tables here, because we don\u0027t have many modules.",
+      "revId": "a1915cc81da98bb67e40caf3b3a063f4abb41e2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
