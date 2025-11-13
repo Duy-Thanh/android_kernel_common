@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dafff73_02fc5f6a",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-13T18:29:05Z",
+      "side": 1,
+      "message": "Why can\u0027t you use this tracepoint instead? All you have to do is export it.",
+      "range": {
+        "startLine": 805,
+        "startChar": 1,
+        "endLine": 805,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ba0fc001_21a05b97",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 805,
+                "startChar": 0,
+                "endLine": 806,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ccab493964876dea20788ac57223e7854b857a31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
