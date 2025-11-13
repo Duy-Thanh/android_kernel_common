@@ -125,6 +125,7 @@ static inline int hyp_pre_reserve_check(void)
 	return 0;
 }
 
+#ifndef CONFIG_PKVM_INTEL_PVIOMMU
 /* Calculate the total pages for Scalable IOMMU */
 static inline unsigned long pkvm_iommu_pages(int max_pasid, int nr_pasid_pdev,
 					     int nr_pdev, int nr_iommu, int qidesc_sz,
@@ -184,7 +185,18 @@ static inline unsigned long pkvm_host_shadow_iommu_pgtable_pages(int nr_pdev)
 
 	return res;
 }
-
+#else
+static inline unsigned long pkvm_iommu_pages(int max_pasid, int nr_pasid_pdev,
+					     int nr_pdev, int nr_iommu, int qidesc_sz,
+					     int qidesc_status_sz, int num_cpus)
+{
+	return 0;
+}
+static inline unsigned long pkvm_host_shadow_iommu_pgtable_pages(int nr_pdev)
+{
+	return 0;
+}
+#endif
 
 u64 hyp_total_reserve_pages(void);
 
