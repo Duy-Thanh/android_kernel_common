@@ -71,3 +71,44 @@ Description:	Read and write number of grant entries to attempt to free per itera
 		interface for controlling the rate of deferred grant reclaim
 		or may not need it at all.
 Users:		Qubes OS (https://www.qubes-os.org)
+<<<<<<< HEAD   (6476e5d64296850846537c7c8b775c75258e2df7 ANDROID: abi_gki_aarch64_qcom: Add ABI definitions for dwc P)
+||||||| BASE   (f090d4b083a9ef4831f99e692c239542dd385cb4 ANDROID: KVM: arm64: Disable Memory Tagging for all guests i)
+
+What:		/sys/module/libcomposite/parameters/kernel_aoa_enabled
+Date:		November 2025
+Contact:	Neill Kapron <nkapron@google.com>
+Description:	This toggle controls whether the in-kernel Android Open Accessory (AOA)
+		driver support is enabled within the gadget configfs driver. This is
+		primarily used to allow a userspace AOA implementation to handle the
+		AOA handshake without interference from the in-kernel driver.
+
+		- 1 (Default): The in-kernel AOA driver is enabled. The configfs
+		  gadget driver will attempt to pass AOA-specific vendor requests
+		  to the in-kernel AOA function as a fallback. This is the
+		  legacy behavior.
+
+		- 0: The in-kernel AOA driver is disabled. The configfs gadget
+		  driver will not forward AOA requests to the in-kernel AOA
+		  function. This should be set at boot time if a userspace AOA
+		  implementation (e.g., using functionfs) is active.
+=======
+
+What:		/sys/module/libcomposite/parameters/android_kernel_aoa_enabled
+Date:		November 2025
+Contact:	Neill Kapron <nkapron@google.com>
+Description:	ANDROID: This toggle controls whether the in-kernel Android
+		Open Accessory (AOA) driver support is enabled within the
+		gadget configfs driver. This is	primarily used to allow a
+		userspace AOA implementation to handle the AOA handshake
+		without interference from the in-kernel driver.
+
+		- 1 (Default): The in-kernel AOA driver is enabled. The configfs
+		  gadget driver will attempt to pass AOA-specific vendor requests
+		  to the in-kernel AOA function as a fallback. This is the
+		  legacy behavior.
+
+		- 0: The in-kernel AOA driver is disabled. The configfs gadget
+		  driver will not forward AOA requests to the in-kernel AOA
+		  function. This should be set at boot time if a userspace AOA
+		  implementation (e.g., using functionfs) is active.
+>>>>>>> CHANGE (e1af44f262914aa6fdb87ef5d45237fe2c7ad539 ANDROID: update kernel_aoa_enabled to android_kernel_aoa_ena)

@@ -19,6 +19,19 @@
 extern int acc_ctrlrequest_composite(struct usb_composite_dev *cdev,
 				const struct usb_ctrlrequest *ctrl);
 void acc_disconnect(void);
+<<<<<<< HEAD   (6476e5d64296850846537c7c8b775c75258e2df7 ANDROID: abi_gki_aarch64_qcom: Add ABI definitions for dwc P)
+||||||| BASE   (f090d4b083a9ef4831f99e692c239542dd385cb4 ANDROID: KVM: arm64: Disable Memory Tagging for all guests i)
+
+static bool kernel_aoa_enabled = true;
+module_param(kernel_aoa_enabled, bool, 0644);
+MODULE_PARM_DESC(kernel_aoa_enabled, "Enable in-kernel AOA driver support (1=enabled, 0=disabled)");
+=======
+
+static bool android_kernel_aoa_enabled = true;
+module_param(android_kernel_aoa_enabled, bool, 0644);
+MODULE_PARM_DESC(android_kernel_aoa_enabled,
+		"Enable in-kernel AOA driver support (1=enabled, 0=disabled)");
+>>>>>>> CHANGE (e1af44f262914aa6fdb87ef5d45237fe2c7ad539 ANDROID: update kernel_aoa_enabled to android_kernel_aoa_ena)
 #endif
 static struct class *android_class;
 static struct device *android_device;
@@ -1562,7 +1575,13 @@ static int android_setup(struct usb_gadget *gadget,
 	}
 
 #ifdef CONFIG_USB_CONFIGFS_F_ACC
+<<<<<<< HEAD   (6476e5d64296850846537c7c8b775c75258e2df7 ANDROID: abi_gki_aarch64_qcom: Add ABI definitions for dwc P)
 	if (value < 0)
+||||||| BASE   (f090d4b083a9ef4831f99e692c239542dd385cb4 ANDROID: KVM: arm64: Disable Memory Tagging for all guests i)
+	if (value < 0 && kernel_aoa_enabled)
+=======
+	if (value < 0 && android_kernel_aoa_enabled)
+>>>>>>> CHANGE (e1af44f262914aa6fdb87ef5d45237fe2c7ad539 ANDROID: update kernel_aoa_enabled to android_kernel_aoa_ena)
 		value = acc_ctrlrequest_composite(cdev, c);
 #endif
 
