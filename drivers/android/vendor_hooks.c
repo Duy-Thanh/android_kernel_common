@@ -695,4 +695,3 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_pgdat_balanced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_file_is_tiny);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
