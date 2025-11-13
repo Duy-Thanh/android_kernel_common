@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd4f1f7_13624d6a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-13T13:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ff5f051_8270a81c",
+      "revId": "a48f5a000e74c54baf26137160aea9cdd855aed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c55972c_fdfd82d0",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-02T21:19:40Z",
       "side": 1,
       "message": "domain-\u003epgd is the primary key in the domain hash table. PGD shouldn\u0027t be set to NULL here or the domain can be freed here.",
+      "revId": "a48f5a000e74c54baf26137160aea9cdd855aed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "396d0a85_b1cfd214",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-13T13:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c55972c_fdfd82d0",
       "revId": "a48f5a000e74c54baf26137160aea9cdd855aed4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
