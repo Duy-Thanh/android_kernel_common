@@ -52,6 +52,7 @@ _GKI_AARCH64_MAKE_GOALS = [
     "Image",
     "Image.lz4",
     "Image.gz",
+    "Image.zst",
     "modules",
 ]
 
@@ -64,6 +65,7 @@ _GKI_AARCH64_BOOT_IMAGE_SIZES = {
     "": "67108864",
     "lz4": "53477376",
     "gz": "47185920",
+    "zst": "33554432",
 }
 
 _GKI_X86_64_BOOT_IMAGE_SIZES = {
