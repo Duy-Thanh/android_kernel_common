@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53fbdb8_f1c65975",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-11-13T23:12:06Z",
+      "side": 1,
+      "message": "This series is now passing presubmit and all symbol/ABI bookkeeping is done (with my Lint+2 as agreed in comments).\n\nLast step is to get CR+2, since I cannot provide my own now as the uploader.",
+      "revId": "075f0404aff3be98f3cd58b5b1ccf13c78373f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
