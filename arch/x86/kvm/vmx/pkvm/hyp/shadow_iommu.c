@@ -19,6 +19,38 @@
 #include "bug.h"
 #include "iommu.h"
 
+static struct hyp_pool iommu_pool;
+
+int pkvm_init_hyp_pool(unsigned long mem_base, unsigned long nr_pages)
+{
+	return hyp_pool_init(&iommu_pool, mem_base >> PAGE_SHIFT, nr_pages, 0);
+}
+
+void *iommu_zalloc_pages(size_t size)
+{
+	return hyp_alloc_pages(&iommu_pool, get_order(size));
+}
+
+void *iommu_zalloc_page(struct pkvm_memcache *mc)
+{
+	return hyp_alloc_pages(&iommu_pool, 0);
+}
+
+void iommu_get_page(void *vaddr)
+{
+	hyp_get_page(&iommu_pool, vaddr);
+}
+
+void iommu_put_page(void *vaddr)
+{
+	hyp_put_page(&iommu_pool, vaddr);
+}
+
+void iommu_flush_cache(void *ptep, unsigned int size)
+{
+	pkvm_clflush_cache_range(ptep, size);
+}
+
 /* Used in legacy mode only. */
 struct shadow_pgt_sync_data {
 	unsigned long vaddr;

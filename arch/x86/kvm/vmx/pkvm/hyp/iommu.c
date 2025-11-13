@@ -29,33 +29,6 @@ DEFINE_PER_CPU(union pkvm_iommu_page_donation, *iommu_page_donation);
 
 struct pkvm_iommu iommus[PKVM_MAX_IOMMU_NUM];
 
-static struct hyp_pool iommu_pool;
-
-void *iommu_zalloc_pages(size_t size)
-{
-	return hyp_alloc_pages(&iommu_pool, get_order(size));
-}
-
-void *iommu_zalloc_page(struct pkvm_memcache *mc)
-{
-	return hyp_alloc_pages(&iommu_pool, 0);
-}
-
-void iommu_get_page(void *vaddr)
-{
-	hyp_get_page(&iommu_pool, vaddr);
-}
-
-void iommu_put_page(void *vaddr)
-{
-	hyp_put_page(&iommu_pool, vaddr);
-}
-
-void iommu_flush_cache(void *ptep, unsigned int size)
-{
-	pkvm_clflush_cache_range(ptep, size);
-}
-
 struct pkvm_ptdev *iommu_find_ptdev(struct pkvm_iommu *iommu, u16 bdf, u32 pasid)
 {
 	struct pkvm_ptdev *p;
@@ -205,14 +178,11 @@ int iommu_calculate_agaw(struct intel_iommu *iommu)
 
 static int initialize_qi(struct pkvm_iommu *iommu);
 
-int pkvm_init_iommu(unsigned long mem_base, unsigned long nr_pages)
+int pkvm_init_iommu(void)
 {
 	struct pkvm_iommu_info *info = &pkvm_hyp->iommu_infos[0];
 	struct pkvm_iommu *piommu = &iommus[0];
-	int i, ret = hyp_pool_init(&iommu_pool, mem_base >> PAGE_SHIFT, nr_pages, 0);
-
-	if (ret)
-		return ret;
+	int i, ret;
 
 	for (i = 0; i < PKVM_MAX_IOMMU_NUM; piommu++, info++, i++) {
 		struct viommu_reg *vreg = &piommu->viommu.vreg;
