@@ -178,6 +178,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68c1e4c5_eaa05b9d",
+        "filename": "arch/x86/include/asm/kvm_pkvm_hypercalls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-13T05:30:10Z",
+      "side": 1,
+      "message": "\u003e BTW also just a note: IOMMU hypercalls are actually Intel (VT-d) specific, so in v6.18, their definitions should be probably under #ifdef CONFIG_PKVM_INTEL, and their handling should be probably not directly in generic pkvm_handle_host_hypercall() but somewhere e.g. in arch/x86/kvm/pkvm/vmx/iommu.c?\n\nYeah, if the IOMMU hypercalls is not able to be abstracted as a generic IOMMU hypercalls, then it makes sense to go to vmx/iommu.c from handle_vmcall() directly.",
+      "parentUuid": "48e54653_f89c4b06",
+      "revId": "19e533e94040afc2959502b4b8b28d10ab6705dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "492f1262_4832ad0e",
