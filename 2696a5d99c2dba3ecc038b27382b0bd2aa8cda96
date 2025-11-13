@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4ff984_c33d0b17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-13T19:47:20Z",
+      "side": 1,
+      "message": "Should not be needed, the existing callbacks for power management should be sufficient.  If not, please send the needed changes upstream.",
+      "revId": "2696a5d99c2dba3ecc038b27382b0bd2aa8cda96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
