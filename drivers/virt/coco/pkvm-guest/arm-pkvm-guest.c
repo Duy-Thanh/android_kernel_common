@@ -221,6 +221,10 @@ static int pkvm_device_pm_attach(struct generic_pm_domain *genpd, struct device 
 
 	pd->mmio = res->start;
 
+	/* REMOVE ME: pvmfw is not here, need to MMIO guard the region by ourselves */
+	arm_smccc_do_range(ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, res->start,
+			   (res->end - res->start + 1) >> PAGE_SHIFT, false);
+
 	return 0;
 }
 
