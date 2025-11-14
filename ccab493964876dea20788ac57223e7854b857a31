@@ -40,6 +40,30 @@
       ],
       "revId": "ccab493964876dea20788ac57223e7854b857a31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec21b3a_5732a3c6",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1886500
+      },
+      "writtenOn": "2025-11-14T03:24:00Z",
+      "side": 1,
+      "message": "I think you meant like this.\n\n--- a/mm/oom_kill.c\n+++ b/mm/oom_kill.c\n@@ -59,6 +59,8 @@\n #undef CREATE_TRACE_POINTS\n #include \u003ctrace/hooks/mm.h\u003e\n \n+EXPORT_TRACEPOINT_SYMBOL_GPL(mark_victim);\n+\n\n\nBTW I could not abi update with this change.\n\n--- a/gki/aarch64/symbols/galaxy\n+++ b/gki/aarch64/symbols/galaxy\n@@ -40,6 +40,7 @@\n   stack_trace_save_tsk\n   blk_queue_rq_timeout\n   swp_swapcount\n+  trace_mark_victim",
+      "parentUuid": "6dafff73_02fc5f6a",
+      "range": {
+        "startLine": 805,
+        "startChar": 1,
+        "endLine": 805,
+        "endChar": 18
+      },
+      "revId": "ccab493964876dea20788ac57223e7854b857a31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
