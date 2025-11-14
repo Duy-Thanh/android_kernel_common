@@ -52,6 +52,24 @@
       "parentUuid": "4a77b280_0d1dd602",
       "revId": "bc1a75dc9ee28bc1ee46a398f4df091b8c3ca6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487a91e3_15ab14a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-14T00:04:01Z",
+      "side": 1,
+      "message": "Correct. We prefer not to take patches into ACK that we don\u0027t build and can\u0027t test.",
+      "parentUuid": "f5d0205f_93476619",
+      "revId": "bc1a75dc9ee28bc1ee46a398f4df091b8c3ca6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
