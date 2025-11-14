@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "926a293c_0ba838ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-14T20:45:49Z",
+      "side": 1,
+      "message": "Hmm... right after uploading these patches I\u0027ve tested this on PTL and it causes VMs failing to start. It appears that PTL has no PEBS support (according to /proc/cpuinfo)...",
+      "revId": "ae8bf43dc05e6886e0521b9ee756173b6ba324cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
