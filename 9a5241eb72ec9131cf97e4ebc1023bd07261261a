@@ -16,6 +16,24 @@
       "message": "create a patch on top of this one to add your symbols to the symbol list.",
       "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79df6632_7489b426",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-11-15T08:29:21Z",
+      "side": 1,
+      "message": "There is no symbol list for android17-6.18 yet, right?",
+      "parentUuid": "7b3b996f_7f8962a8",
+      "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
