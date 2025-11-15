@@ -16,6 +16,24 @@
       "message": "Hmm... right after uploading these patches I\u0027ve tested this on PTL and it causes VMs failing to start. It appears that PTL has no PEBS support (according to /proc/cpuinfo)...",
       "revId": "ae8bf43dc05e6886e0521b9ee756173b6ba324cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c44f20_761eda35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-15T15:40:44Z",
+      "side": 1,
+      "message": "Perhaps it\u0027s just because my PTL is an early silicon, and targets ones will have PEBS...\n\nAnyway, this is still a real-life case encountered, so I\u0027ve reworked aosp/3854372 to support it. I\u0027ll abandon this patch.",
+      "parentUuid": "926a293c_0ba838ef",
+      "revId": "ae8bf43dc05e6886e0521b9ee756173b6ba324cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
