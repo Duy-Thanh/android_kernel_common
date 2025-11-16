@@ -262,8 +262,9 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 			return -EINVAL;
 		}
 
+#ifndef CONFIG_PKVM_INTEL_PVIOMMU
 		/*
-		 * If pkvm IOMMU works in scalable mode, it requires to use nested translation,
+		 * If pkvm shadow IOMMU works in scalable mode, it requires to use nested translation,
 		 * unless the host will use this IOMMU in passthrough mode only.
 		 */
 		if (sm_supported(drhd->iommu) && !ecap_nest(ecap)) {
@@ -272,6 +273,7 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 			pr_warn("pkvm: drhd reg_base 0x%llx: do not use this iommu in non-passthrough mode!\n",
 				drhd->reg_base_addr);
 		}
+#endif
 
 		/*
 		 * Check for the coherency of the paging structure access.
