@@ -136,6 +136,7 @@ config PKVM_INTEL
 config PKVM_INTEL_PVIOMMU
 	bool "Paravirt IOMMU"
 	depends on PKVM_INTEL
+	depends on !INTEL_IOMMU_SVM
 	help
 	  paravirt IOMMU support for pkvm
 
@@ -143,6 +144,7 @@ config PKVM_INTEL_PVIOMMU
 	  and manages iommu registers and translation structures. Host accesses
 	  iommu through specialized hypercalls.
 
+	  Shared Virtual Memory is not yet supported.
 	  Shadow iommu translation structures are disabled.
 
 config PKVM_INTEL_DEBUG
