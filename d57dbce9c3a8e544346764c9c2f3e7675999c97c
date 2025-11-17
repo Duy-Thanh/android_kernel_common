@@ -52,6 +52,24 @@
       "parentUuid": "ed0209f4_efba916b",
       "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19301419_9ca7b18f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T17:15:45Z",
+      "side": 0,
+      "message": "We should only proceed if the state is RUNNABLE. And we don\u0027t use any other states than RUNNABLE, STOPPED or UNINITIALIZED in the hypervisor.",
+      "parentUuid": "e7bb48fd_7d2ff1c1",
+      "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
