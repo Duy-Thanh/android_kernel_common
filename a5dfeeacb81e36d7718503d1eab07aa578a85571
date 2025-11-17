@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd332f0a_f0a26113",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-17T17:54:37Z",
+      "side": 1,
+      "message": "This looks like a cherry-pick from https://android-review.googlesource.com/c/kernel/common/+/3826803\nIf so, the Change-Id should be the same. Please re-post this patch with Change-Id `I9f836f9a5efba575d7c45272b4fbb917b65aa467`",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 52
+      },
+      "revId": "a5dfeeacb81e36d7718503d1eab07aa578a85571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
