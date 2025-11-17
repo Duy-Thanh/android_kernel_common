@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c53d33_e4682043",
+        "filename": "rust/kernel/sync.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-11-17T21:07:07Z",
+      "side": 1,
+      "message": "Huh, don\u0027t we have [this series](https://lore.kernel.org/rust-for-linux/20250811-lock-class-key-cleanup-v3-0-b12967ee1ca2@google.com/)?",
+      "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
