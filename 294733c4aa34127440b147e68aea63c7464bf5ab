@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3978df9_1b38aec1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T15:13:29Z",
+      "side": 1,
+      "message": "Can\u0027t we just use `sm_supported(\u0026iommu-\u003eiommu)` (and in iommu_id_sync_entry() as well, as we can use pgt_to_pkvm_iommu() there as well), instead of adding this field to `struct id_sync_data`?",
+      "revId": "294733c4aa34127440b147e68aea63c7464bf5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "562b83e3_6705fd16",
+        "filename": "arch/x86/kvm/vmx/pkvm/include/pkvm.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T15:13:29Z",
+      "side": 1,
+      "message": "nit: move it before line 149 (just to keep extern pkvm_sym variable declarations together)?",
+      "revId": "294733c4aa34127440b147e68aea63c7464bf5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
