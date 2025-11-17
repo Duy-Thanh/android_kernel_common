@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb9432b7_91123972",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-17T15:45:57Z",
+      "side": 0,
+      "message": "Just curious, why was this check inside this if block before? I guess regardless of vpcu has run or not, we should not be entering guest if the state is not runnable. If this was for some specific reason, would we be violating that reasoning by this reshuffle?",
+      "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
