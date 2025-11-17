@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3015fe2a_def3a7bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4257021
+      },
+      "writtenOn": "2025-11-17T11:15:11Z",
+      "side": 1,
+      "message": "Upload patch2. The current change has been rebased and fixed trivial conflict in drivers/android/vendor_hooks.c",
+      "revId": "a3c48567392c127c688bd898f7df7efa089d792b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
