@@ -34,6 +34,24 @@
       "parentUuid": "a550b798_e17fc071",
       "revId": "1bdd652c7dbe859d06234bc5abc786acf6684060",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8279b8bf_d74bb577",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T14:58:53Z",
+      "side": 1,
+      "message": "This also makes me think that it would be good to unmap host memory from the hypervisor page tables (i.e. map only those host pages that pKVM actually needs to access), like in pKVM-ARM, to prevent such bugs from going unnoticed.",
+      "parentUuid": "95806827_3f04f3c5",
+      "revId": "1bdd652c7dbe859d06234bc5abc786acf6684060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
