@@ -16,6 +16,24 @@
       "message": "We want it to be a hypervisor\u0027s symbol, not a host\u0027s symbol, so it needs to be defined in the hypervisor code (e.g. simply in arch/x86/kvm/vmx/pkvm/hyp/iommu.c), not in the host code? Otherwise we just assign the value of the host\u0027s variable `intel_iommu_sm` to another host\u0027s variable `intel_iommu_sm__pkvm` without doing anything with the hypervisor\u0027s variables?\n\nSo I\u0027m wondering if this actually works... I see it actually compiles and links, but this means that pKVM hypervisor code links with the host\u0027s symbol and thus uses the host\u0027s variable, whose value the host may modify at any time?",
       "revId": "1bdd652c7dbe859d06234bc5abc786acf6684060",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95806827_3f04f3c5",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-17T14:49:32Z",
+      "side": 1,
+      "message": "Great catch, I didn\u0027t think about the fact that this is accessible by host after deprivilege. I have fixed this by moving it to iommu.c.",
+      "parentUuid": "a550b798_e17fc071",
+      "revId": "1bdd652c7dbe859d06234bc5abc786acf6684060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
