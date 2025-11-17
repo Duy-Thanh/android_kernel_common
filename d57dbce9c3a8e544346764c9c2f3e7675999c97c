@@ -34,6 +34,24 @@
       "parentUuid": "cb9432b7_91123972",
       "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7bb48fd_7d2ff1c1",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-17T17:12:11Z",
+      "side": 0,
+      "message": "Thanks for the details, is clear now. Do we still need to proceed and `kvm_vcpu_enter_guest` if the state is not RUNNABLE and not STOPPED - I mean HALTED and such? Checked the code briefly and looks like its not needed, but thought of double checking.",
+      "parentUuid": "ed0209f4_efba916b",
+      "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
