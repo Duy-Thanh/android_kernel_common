@@ -16,6 +16,24 @@
       "message": "Basically we already found a long term solution for that? AFAICS the code of these 4 copied functions is now identical to the original, so we can just move them from drivers/iommu/intel/iommu.c to drivers/iommu/intel/iommu.h?",
       "revId": "96c25d404a1886c3c588c1066805937ae6e0d798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "854b0f37_3e4f69c1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-17T19:29:41Z",
+      "side": 1,
+      "message": "makes sense, done",
+      "parentUuid": "f9c52225_ffaf7d4e",
+      "revId": "96c25d404a1886c3c588c1066805937ae6e0d798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
