@@ -34,6 +34,24 @@
       "parentUuid": "b7c53d33_e4682043",
       "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a317fce6_e32ba316",
+        "filename": "rust/kernel/sync.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-11-17T23:18:49Z",
+      "side": 1,
+      "message": "Should we add a TODO here so that we remove this later once that comes into `android-mainline`?",
+      "parentUuid": "8bf25652_d6716d16",
+      "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
