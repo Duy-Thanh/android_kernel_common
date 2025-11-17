@@ -70,6 +70,24 @@
       "parentUuid": "e7bb48fd_7d2ff1c1",
       "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc37d1f_807df46d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-17T17:26:48Z",
+      "side": 0,
+      "message": "I see. The reason I was confused was because - we proceed regardless of the state for npvms and in the previous code, we proceeded for pvms if kvm_vcpu_has_run was true. Thanks for clarifying the states that we use in hypervisor, I think it is clear for me now.",
+      "parentUuid": "19301419_9ca7b18f",
+      "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
