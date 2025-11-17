@@ -35,6 +35,8 @@ enum pkvm_component_id {
 };
 
 extern unsigned long hyp_nr_cpus;
+int __pkvm_host_donate_hyp_mmio(u64 pfn);
+int __pkvm_hyp_donate_host_mmio(u64 pfn);
 
 extern struct kvm_hyp_pinned_page *hyp_ppages;
 
