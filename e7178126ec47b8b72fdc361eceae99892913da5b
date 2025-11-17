@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8065a83_7a707763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2025-11-17T22:11:20Z",
+      "side": 1,
+      "message": "I guess the presubmit failure in bluetooth is due to https://b.corp.google.com/issues/460685491.",
+      "revId": "e7178126ec47b8b72fdc361eceae99892913da5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
