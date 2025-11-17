@@ -16,6 +16,24 @@
       "message": "Just curious, why was this check inside this if block before? I guess regardless of vpcu has run or not, we should not be entering guest if the state is not runnable. If this was for some specific reason, would we be violating that reasoning by this reshuffle?",
       "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed0209f4_efba916b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T16:55:29Z",
+      "side": 0,
+      "message": "It the initial version of aosp/3632018 mp_state was checked regardless, then I changed it to the current state in https://android-review.googlesource.com/c/kernel/common/+/3632018/3..4/arch/x86/kvm/pkvm/pkvm.c#b762. But the only reason for that was just a stupid speculative micro-optimization: kvm_vcpu_is_reset_bsp() (called by pkvm_vcpu_is_pvmfw_bsp()) is not an inline function, so this avoided calling it every time a vCPU is run. Logically it was still correct, since we never changed mp_state of an already running vCPU.\n\nNow, we do change mp_state in case of a triple fault, so we need to check mp_state regardless. And we still check kvm_vcpu_has_run() before calling kvm_vcpu_is_reset_bsp() anyway.",
+      "parentUuid": "cb9432b7_91123972",
+      "revId": "d57dbce9c3a8e544346764c9c2f3e7675999c97c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
