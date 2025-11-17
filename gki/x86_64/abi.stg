@@ -281117,6 +281117,14 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x91c563a4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+  parameter_id: 0xf435685e
+  parameter_id: 0x4585663f
+  parameter_id: 0x064d6086
+}
+function {
   id: 0x91c5850e
   return_type_id: 0x6720d32f
   parameter_id: 0x3e10b518
@@ -316377,6 +316385,15 @@ elf_symbol {
   full_name: "kstrtouint_from_user"
 }
 elf_symbol {
+  id: 0x35384efd
+  name: "kstrtoul_from_user"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd600cd6d
+  type_id: 0x91c563a4
+  full_name: "kstrtoul_from_user"
+}
+elf_symbol {
   id: 0x95eb59ef
   name: "kstrtoull"
   is_defined: true
@@ -325999,6 +326016,15 @@ elf_symbol {
   crc: 0x19a36b62
   type_id: 0x99214080
   full_name: "snd_soc_component_disable_pin"
+}
+elf_symbol {
+  id: 0x46cb4d6f
+  name: "snd_soc_component_enable_pin"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x19a36b62
+  type_id: 0x99214080
+  full_name: "snd_soc_component_enable_pin"
 }
 elf_symbol {
   id: 0xf7d58a02
@@ -336058,6 +336084,7 @@ interface {
   symbol_id: 0xa4c342f5
   symbol_id: 0xec1bb297
   symbol_id: 0x0da18d92
+  symbol_id: 0x35384efd
   symbol_id: 0x95eb59ef
   symbol_id: 0xa074b313
   symbol_id: 0x54d851dc
@@ -337128,6 +337155,7 @@ interface {
   symbol_id: 0x80680525
   symbol_id: 0xf84e3b0d
   symbol_id: 0xb63a9550
+  symbol_id: 0x46cb4d6f
   symbol_id: 0xf7d58a02
   symbol_id: 0xf31b7753
   symbol_id: 0x3662091d
