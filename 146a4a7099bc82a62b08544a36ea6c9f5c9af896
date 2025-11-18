@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99271977_8737b67e",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 4178,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-18T07:32:17Z",
+      "side": 1,
+      "message": "nit: fix trailing whitespace",
+      "fixSuggestions": [
+        {
+          "fixId": "5a61212a_522def47",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mm.h",
+              "range": {
+                "startLine": 4178,
+                "startChar": 0,
+                "endLine": 4179,
+                "endChar": 0
+              },
+              "replacement": "static inline\n"
+            }
+          ]
+        }
+      ],
+      "revId": "146a4a7099bc82a62b08544a36ea6c9f5c9af896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
