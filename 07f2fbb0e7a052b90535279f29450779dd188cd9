@@ -16,6 +16,24 @@
       "message": "This results in missing (or not updated) rather than empty symtypes files. It would have been better to just skip the DWARF processing.\n\nI\u0027m not sure we care that much, but it is a change in behaviour that should have been flagged in the commit message.\n\nAlso, this should go to `android-mainline` first / as well.",
       "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b42e7926_f63775fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-11-18T14:13:49Z",
+      "side": 1,
+      "message": "If this change is incorrect, then would you be able to say so on the list so that we can look into it?\n\nThe change will land in android-mainline through v6.18-rc6. It\u0027s not required until we upgrade to rustc v1.91.0, but we are still using 1.90 on mainline. As for 6.12, I guess we don\u0027t plan to update rustc on this branch, so in principle the change is not required here.",
+      "parentUuid": "595393e3_723db5f3",
+      "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
