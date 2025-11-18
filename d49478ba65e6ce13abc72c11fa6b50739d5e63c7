@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b66d30c_5058c68e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T00:44:24Z",
+      "side": 1,
+      "message": "IIRC it was me who suggested to combine that into a single hypercall. But now, looking at the changes in this and previous patch, it seems it wouldn\u0027t be really a big problem to have two hypercalls: one for SRTP and one for TE? (Obviously pKVM would deny TE without prior SRTP, and so on.) And that would avoid such surgical changes to the existing IOMMU driver code flows. Any actual disadvantages of that?\n\n(Maybe we already discussed this before but I completely forgot...)",
+      "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
