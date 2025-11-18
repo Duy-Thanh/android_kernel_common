@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f96f23d_5da9c2b1",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T21:20:16Z",
+      "side": 1,
+      "message": "Why exactly this is needed? Why can\u0027t we just check pkvm_pviommu_enabled() everywhere?",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
