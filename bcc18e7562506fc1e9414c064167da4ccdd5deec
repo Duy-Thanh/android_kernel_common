@@ -16,6 +16,24 @@
       "message": "Why exactly this is needed? Why can\u0027t we just check pkvm_pviommu_enabled() everywhere?",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7db6a40_84633953",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-18T22:26:34Z",
+      "side": 1,
+      "message": "We use the hypercall based access to translation structures only after Translation is enabled. During initialization phase(before enabling translation) the host can directly access the translation structures through root table pointer and it sets up the translation structures and calls iommu_enable hypercall. It write protects the table and then hosts sets this flag. From then on, host cannot directly access the translation structures and then goes through hypercall. This flag is to denote that iommu is paravirt enabled and only hypercall access is allowed.\n\nI shall add comments to make it clear.",
+      "parentUuid": "8f96f23d_5da9c2b1",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
