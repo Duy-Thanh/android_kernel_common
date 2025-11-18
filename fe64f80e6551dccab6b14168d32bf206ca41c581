@@ -34,6 +34,24 @@
       "parentUuid": "f7737cbc_f2b04a2b",
       "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b57414_2694becd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-18T07:13:32Z",
+      "side": 1,
+      "message": "I\u0027m not suggesting it as an immediate solution in android17-6.18, but I\u0027m hoping to see some effort in working with upstream to properly solve these issues so we can avoid adding the same vendorhook in future kernels.",
+      "parentUuid": "201226ea_0f06b9c9",
+      "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
