@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369ce12d_ff912eb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-11-18T07:31:55Z",
+      "side": 1,
+      "message": "looks unrelated to this patch",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "047bb8efd8dcd84c300b2cb9f824a9e789e0d519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7b3a62_2dd2ae7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-11-18T07:31:55Z",
+      "side": 1,
+      "message": "please address KernelCommit",
+      "revId": "047bb8efd8dcd84c300b2cb9f824a9e789e0d519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
