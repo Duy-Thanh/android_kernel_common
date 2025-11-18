@@ -16,6 +16,24 @@
       "message": "Have there been any efforts to solve this via some mechanism that can go upstream? This seems maybe related to: https://lwn.net/Articles/948870/",
       "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "201226ea_0f06b9c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-11-18T05:30:07Z",
+      "side": 1,
+      "message": "Thank you for the suggestion. Rseq might be able to solve some of the problems, but it may over-rely on the user layer. On the other hand, the CONFIG_RSEQ is not set in GKI_CONFIG.\n\nThanks!",
+      "parentUuid": "f7737cbc_f2b04a2b",
+      "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
