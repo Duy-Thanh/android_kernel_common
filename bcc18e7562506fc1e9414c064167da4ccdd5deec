@@ -34,6 +34,24 @@
       "parentUuid": "8f96f23d_5da9c2b1",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a543979c_ea6b1678",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T22:45:10Z",
+      "side": 1,
+      "message": "But what\u0027s the problem to access them through hypercalls from the beginning?\n\nAlso just wondering: so still not all such accesses are prevented by aosp/3786912 ?",
+      "parentUuid": "a7db6a40_84633953",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
