@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/461820595",
       "revId": "fc1d54ae71d90167ab350c3ebad1afae882599eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca0ead2_67b99cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-18T20:31:00Z",
+      "side": 1,
+      "message": "Lint override as the change is present in android14-6.1, having been merged as part of the 6.1.149 stable release",
+      "revId": "fc1d54ae71d90167ab350c3ebad1afae882599eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
