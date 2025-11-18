@@ -52,6 +52,24 @@
       "parentUuid": "201226ea_0f06b9c9",
       "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaba6979_a2e0b949",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-11-18T08:35:33Z",
+      "side": 1,
+      "message": "Okay, we would try these on our mainline.\n\nThanks!",
+      "parentUuid": "e1b57414_2694becd",
+      "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
