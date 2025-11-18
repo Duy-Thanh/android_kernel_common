@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd77b54_48a24397",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2025-11-18T07:36:30Z",
+      "side": 1,
+      "message": "Created a new one.",
+      "parentUuid": "369ce12d_ff912eb7",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "047bb8efd8dcd84c300b2cb9f824a9e789e0d519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c7b3a62_2dd2ae7d",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-11-18T07:31:55Z",
       "side": 1,
       "message": "please address KernelCommit",
+      "revId": "047bb8efd8dcd84c300b2cb9f824a9e789e0d519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486dc77a_ffbc56fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2025-11-18T07:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c7b3a62_2dd2ae7d",
       "revId": "047bb8efd8dcd84c300b2cb9f824a9e789e0d519",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
