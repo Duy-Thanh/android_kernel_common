@@ -52,6 +52,24 @@
       "parentUuid": "a7db6a40_84633953",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc0c9872_d03cc1ff",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-18T22:59:35Z",
+      "side": 1,
+      "message": "The in-memory translation structures could be directly accessed by host during initialization(not yet write protected) and hence we access it directly. It could be accessed via hypercalls as well, but thought of saving some round trip as the pages could be directly accessed. aosp/3786912 only prevents the QI MMIO accesses. Each translation table update would be usually followed by one or two QI submits so we save about ~3 hypercalls for each translation structure update.\n\nAs you mentioned in the other cl, the hypercall reduction will be in the order of tens and probably less than 100 mostly, so not sure if its worth it. I shall try to implement the blanket hypercall approach and take some numbers this week and see how much we are saving.",
+      "parentUuid": "a543979c_ea6b1678",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
