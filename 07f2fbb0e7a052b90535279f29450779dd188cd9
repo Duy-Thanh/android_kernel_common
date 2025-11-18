@@ -34,6 +34,24 @@
       "parentUuid": "595393e3_723db5f3",
       "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf26754_a8670f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-18T14:49:07Z",
+      "side": 1,
+      "message": "That is not straightforward for me to do with a plain Gmail setup. I will try, but I will probably incur the wrath of some email linter, human or otherwise.\n\nThe documentation says gendwarfkyms -T foo will write to foo.\n\nYou could make the documentation longer and more correct by adding some conditional explanation, but it would it be better to make the code remain in sync with the current unconditional documentation.",
+      "parentUuid": "b42e7926_f63775fe",
+      "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
