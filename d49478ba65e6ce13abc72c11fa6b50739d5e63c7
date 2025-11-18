@@ -70,6 +70,24 @@
       "parentUuid": "36076355_30974e5a",
       "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d40f8b_a0e01dc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T13:00:56Z",
+      "side": 1,
+      "message": "Just in case, please don\u0027t treat this as a final verdict that we should rework the implementation once again. Possibly it would be actually better to keep your current implementation (and again, for us it will probably work correctly anyway).\n\nI\u0027ll think more about it once I get more familiar with the rest of the series.",
+      "parentUuid": "e63a5981_fc7fb6c9",
+      "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
