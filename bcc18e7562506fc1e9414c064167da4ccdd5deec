@@ -70,6 +70,24 @@
       "parentUuid": "a543979c_ea6b1678",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec888bb_063cadd4",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T23:15:30Z",
+      "side": 1,
+      "message": "Ah got it, so it is specifically about accessing structures in memory.\n\nSo, yeah, if performance is the only reason while in fact there no real measured performance win (so there is no reason at all), IMHO it\u0027s better to keep the code simpler.",
+      "parentUuid": "fc0c9872_d03cc1ff",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
