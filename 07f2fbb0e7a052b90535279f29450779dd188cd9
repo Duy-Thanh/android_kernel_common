@@ -52,6 +52,24 @@
       "parentUuid": "b42e7926_f63775fe",
       "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b281e910_277e7522",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-11-18T14:54:03Z",
+      "side": 1,
+      "message": "The \"plain text mode\" option in gmail should be sufficient for sending to the list.",
+      "parentUuid": "1bf26754_a8670f6a",
+      "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
