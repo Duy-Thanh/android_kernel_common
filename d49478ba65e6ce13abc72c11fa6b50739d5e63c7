@@ -34,6 +34,24 @@
       "parentUuid": "0b66d30c_5058c68e",
       "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36076355_30974e5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T12:01:20Z",
+      "side": 1,
+      "message": "\u003e With this implementation, the host sets up the translation structures without any hypercall\n\nNot really, any IOMMU MMIO access is a hypercall too (since pKVM is already enabled), right? Or am I missing the point?",
+      "parentUuid": "d2ea7b00_0d63fb73",
+      "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
