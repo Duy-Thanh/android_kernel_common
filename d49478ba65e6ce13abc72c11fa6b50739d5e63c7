@@ -52,6 +52,24 @@
       "parentUuid": "d2ea7b00_0d63fb73",
       "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e63a5981_fc7fb6c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-18T12:55:18Z",
+      "side": 1,
+      "message": "Ok, I think I got it: those hypercalls are actually avoided by the previous patch aosp/3786912?\n\nStill, it is, like, a few dozen hypercalls, not a few thousand? So their actual impact on the boot time may be negligible?\n\n...Looking at the changes in this patch, I\u0027m just not entirely sure it is 100% correct to move iommu_flush_write_buffer() after enabling the IRQ in dmar_set_interrupt(), or to not care what exactly the comment about \"some Intel X58 chipsets\" means, and so on. \n\nThat said, most probably these changes are 100% safe for our use cases anyway, since iommu_flush_write_buffer() does nothing on the hardware we care about, and so on. So it should be fine if we merge it. I\u0027m just not so sure e.g. about future upstreaming of them. (Actually a scenario I\u0027m more worried about is: these changes are actually accepted upstream, and then they break some setups for someone, and that is our fault.)\n\nSo, from this perspective, it might be attractive to _just_ add calling corresponding hypercalls to iommu_set_root_entry() and iommu_enable_translation(), without reshuffling the usage of iommu_set_root_entry() and iommu_enable_translation() throughout the code (and thus without the need to make assumptions if this reshuffling is fully correct).\n\nOTOH, iommu_set_root_entry() and iommu_enable_translation() as is don\u0027t return any errors, while pKVM might return errors in those hypercalls (so from this POV it might be good to consolidate IOMMU enablement in a single point in the IOMMU driver initialization code, to let it easy fail initialization if needed)... OTOH, should those errors really happen if the host is using those hypercalls correctly (considering that during the IOMMU driver initialization the host is still trusted)?",
+      "parentUuid": "36076355_30974e5a",
+      "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
