@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7737cbc_f2b04a2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-18T03:04:47Z",
+      "side": 1,
+      "message": "Have there been any efforts to solve this via some mechanism that can go upstream? This seems maybe related to: https://lwn.net/Articles/948870/",
+      "revId": "fe64f80e6551dccab6b14168d32bf206ca41c581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
