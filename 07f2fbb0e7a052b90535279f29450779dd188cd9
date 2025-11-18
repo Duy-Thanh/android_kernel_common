@@ -70,6 +70,24 @@
       "parentUuid": "1bf26754_a8670f6a",
       "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab92678_7e694f08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2025-11-18T14:57:46Z",
+      "side": 1,
+      "message": "There\u0027s no actual change in behavior for kernel builds. gen(dwarf)ksyms has always been skipped for C object files with no exports, so we have never produced empty symtypes files for them. We have also never produced empty symtypes files for Rust object files, because until rustc 1.91, gendwarfksyms has never been used to process files with no exports.",
+      "parentUuid": "b42e7926_f63775fe",
+      "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
