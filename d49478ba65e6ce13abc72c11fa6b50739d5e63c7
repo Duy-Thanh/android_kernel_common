@@ -16,6 +16,24 @@
       "message": "IIRC it was me who suggested to combine that into a single hypercall. But now, looking at the changes in this and previous patch, it seems it wouldn\u0027t be really a big problem to have two hypercalls: one for SRTP and one for TE? (Obviously pKVM would deny TE without prior SRTP, and so on.) And that would avoid such surgical changes to the existing IOMMU driver code flows. Any actual disadvantages of that?\n\n(Maybe we already discussed this before but I completely forgot...)",
       "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ea7b00_0d63fb73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-18T03:06:36Z",
+      "side": 1,
+      "message": "Yes, you suggested it and I felt it was very nice idea. If I remember correctly, it was for efficiency and security to not give host ability to set root table more than once(host only does it once now) and to perform a single activate operation.\n\nWhile implementing this I felt it as a great idea as it reduced number of hypercalls quite considerable. Between SRTP and TE, there are hypercalls to clear context entry, allocate domain and set context entry and then pasid update hypercalls and QI related hypercalls for each device enumerated. With this implementation, the host sets up the translation structures without any hypercall and then issues a single enable hypercall. pkvm parses the translation structures, validates it and sets up the memory protection for those pages in one go. And then it does a SRTP, TE and related flushing(but once only) in same hypercall. This implementation is similar to our shadow implementation, but does not create a shadow translation structure(just reuses the existing structure and write protects it). We still have hypercalls for context/pasid updates but it is used only for hot plugging scenarios or dynamic change from identity to DMA or vice versa. I think this implementation could help in boot time improvement as number of hypercalls is considerably reduced. I have not profiled it though.\n\nThis is what I recall. Will need to go through old CLs and get more context to see if there were other advantages :-)",
+      "parentUuid": "0b66d30c_5058c68e",
+      "revId": "d49478ba65e6ce13abc72c11fa6b50739d5e63c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
