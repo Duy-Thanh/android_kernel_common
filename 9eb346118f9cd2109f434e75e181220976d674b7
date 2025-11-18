@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "accbbec2_e3b60d0b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-18T20:30:06Z",
+      "side": 1,
+      "message": "Yeah true. I shall implement as per your other comment and this will go away.",
+      "parentUuid": "4054f568_47942f71",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfa12753_1bea06e5",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
         "patchSetId": 34
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-18T18:50:38Z",
       "side": 1,
       "message": "This isn\u0027t quite enough. The host page state remains PAGE_OWNED, so the host may still maliciously donate these pages to a pVM or to the hypervisor.\n\nIt seems the easiest clean solution would be to use __pkvm_host_share_hyp() + __pkvm_pin_shared_mem() like we do in other cases (so that the pages become PAGE_SHARED_OWNED, which prevents them from being donated, and pinned, which prevents them from being unshared prematurely by the host), and then just call pkvm_host_ept_map() to update the permission bits in the PTEs and do nothing more. It wouldn\u0027t need the ad-hoc logic in update_host_ept_prot() above, since the needed checks are already done by __pkvm_host_share_hyp() + __pkvm_pin_shared_mem().\n\n(And in v6.18 __pkvm_pin_shared_mem() will not be needed, pkvm_host_share_hyp() will be enough, since in v6.18 share/unshare is only initiated by pKVM, not by the host.)\n\nAlthough \"conceptually\" that still might be a bit unclean: the host is still called the \"owner\" of these pages whereas it doesn\u0027t even have full access to them. It is rather the hypervisor who is truly their owner. So we could instead do __pkvm_host_donate_hyp() followed by __pkvm_hyp_share_host_ro() (we\u0027d need to implement the latter), so the host page state is PAGE_SHARED_BORROWED. (Perhaps we could also define separate new states PAGE_SHARED_OWNED_RO and PAGE_SHARED_BORROWED_RO). But functionally it should be the same as with host_share_hyp + pinning, so maybe not worth the trouble.\n\nBTW cc @bgrzesik@google.com who is working on GIC ITS stuff for pKVM-ARM where also some structures are read-only shared with the host (and for similar reasons as in our case).",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc0aa0f_fe912e3d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-18T20:30:06Z",
+      "side": 1,
+      "message": "\u003e It seems the easiest clean solution would be to use __pkvm_host_share_hyp() + __pkvm_pin_shared_mem() like we do in other cases (so that the pages become PAGE_SHARED_OWNED, which prevents them from being donated, and pinned, which prevents them from being unshared prematurely by the host), and then just call pkvm_host_ept_map() to update the permission bits in the PTEs and do nothing more. It wouldn\u0027t need the ad-hoc logic in update_host_ept_prot() above, since the needed checks are already done by __pkvm_host_share_hyp() + __pkvm_pin_shared_mem().\n\nYeah this is much better and straightforward. I shall implement this as you suggested.\n\n\u003e Although \"conceptually\" that still might be a bit unclean: the host is still called the \"owner\" of these pages whereas it doesn\u0027t even have full access to them. It is rather the hypervisor who is truly their owner. So we could instead do __pkvm_host_donate_hyp() followed by __pkvm_hyp_share_host_ro() (we\u0027d need to implement the latter), so the host page state is PAGE_SHARED_BORROWED. (Perhaps we could also define separate new states PAGE_SHARED_OWNED_RO and PAGE_SHARED_BORROWED_RO). But functionally it should be the same as with host_share_hyp + pinning, so maybe not worth the trouble.\n\nI agree. Unless we don\u0027t have more use cases to warrant a separate clean api, lets do as you suggested above.",
+      "parentUuid": "bfa12753_1bea06e5",
       "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
