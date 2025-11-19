@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a40b14fd_eddb8e0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2025-11-19T01:16:38Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [sourc...\n\nCherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/b442d5b3ad2aea6f55d651ba793976ade5cc9d35).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_write_timeout_estab_retrans);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_reader_owned);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);\n     \n      ## include/trace/hooks/net.h ##\n    -@@ include/trace/hooks/net.h: DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,\n    - \tTP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));\n    - DECLARE_HOOK(android_vh_build_skb_around,\n    - \tTP_PROTO(struct sk_buff *skb), TP_ARGS(skb));\n    --\n    +@@ include/trace/hooks/net.h: DECLARE_HOOK(android_vh_ptype_head,\n    + \tTP_PROTO(const struct packet_type *pt, struct list_head *vendor_pt),\n    + \tTP_ARGS(pt, vendor_pt));\n    + \n    ++struct sock;\n     +DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,\n    -+        TP_PROTO(struct sock *sk), TP_ARGS(sk));\n    ++\tTP_PROTO(struct sock *sk), TP_ARGS(sk));\n      /* macro versions of hooks are no longer required */\n      \n      #endif /* _TRACE_HOOK_NET_VH_H */\n     \n      ## net/ipv4/tcp_timer.c ##\n     @@\n    - #include \u003clinux/module.h\u003e\n      #include \u003clinux/gfp.h\u003e\n      #include \u003cnet/tcp.h\u003e\n    + #include \u003cnet/rstreason.h\u003e\n     +#include \u003ctrace/hooks/net.h\u003e\n      \n      static u32 tcp_clamp_rto_to_user_timeout(const struct sock *sk)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b3b996f_7f8962a8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
