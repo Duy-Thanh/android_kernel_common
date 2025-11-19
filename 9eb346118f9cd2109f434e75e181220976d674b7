@@ -69,6 +69,24 @@
       "parentUuid": "bfa12753_1bea06e5",
       "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0249803_47f1d0e0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-19T23:09:53Z",
+      "side": 1,
+      "message": "After more thinking: in v6.18 it might be actually a good idea to extend the memory protection API with a generic function like pkvm_host_donate_hyp_share_ro() [*] so that the memory protection API takes care of updating permissions in PTEs, instead of leaving this responsibility to pvIOMMU or other potential users. In v6.18 (unlike v6.12) it should be quite easy to implement.\n\n[*] It would do PAGE_OWNED-\u003ePAGE_SHARED_BORROWED transition in one step, to not waste CPU cycles on intermediate transition to PAGE_NONE.",
+      "parentUuid": "0fc0aa0f_fe912e3d",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
