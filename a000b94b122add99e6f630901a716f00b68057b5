@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e7b72e_e3555aad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3569575
+      },
+      "writtenOn": "2025-11-19T23:11:18Z",
+      "side": 1,
+      "message": "This needs a kernel upstrem divergence task with a bug report explaining why this change can\u0027t be sent upstream first",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
