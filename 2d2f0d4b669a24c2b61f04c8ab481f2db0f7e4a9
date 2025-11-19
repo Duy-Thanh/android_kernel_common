@@ -22,6 +22,30 @@
       },
       "revId": "2d2f0d4b669a24c2b61f04c8ab481f2db0f7e4a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5995775f_4e1aa33e",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-11-19T18:30:10Z",
+      "side": 1,
+      "message": "That\u0027s fair; I\u0027ll go ahead and drop this",
+      "parentUuid": "292f9fd0_f8bab887",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "2d2f0d4b669a24c2b61f04c8ab481f2db0f7e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
