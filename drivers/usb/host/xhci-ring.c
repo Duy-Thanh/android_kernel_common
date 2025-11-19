@@ -1165,10 +1165,51 @@ static void xhci_handle_cmd_stop_ep(struct xhci_hcd *xhci, int slot_id,
 			 */
 			if (!(xhci->quirks & XHCI_NEC_HOST))
 				break;
+<<<<<<< HEAD   (60c21e6d76f89d22d113ca5d62be093e6e09aa37 Merge 0a6b2ed51a1c ("f2fs: fix zero-sized extent for precach)
+||||||| BASE   (0a6b2ed51a1cf13e11473680f16ac9654a8ba04b f2fs: fix zero-sized extent for precache extents)
+			/*
+			 * On some HCs EP state remains Stopped for some tens of
+			 * us to a few ms or more after a doorbell ring, and any
+			 * new Stop Endpoint fails without aborting the restart.
+			 * This handler may run quickly enough to still see this
+			 * Stopped state, but it will soon change to Running.
+			 *
+			 * Assume this bug on unexpected Stop Endpoint failures.
+			 * Keep retrying until the EP starts and stops again.
+			 */
+=======
+			/*
+			 * On some HCs EP state remains Stopped for some tens of
+			 * us to a few ms or more after a doorbell ring, and any
+			 * new Stop Endpoint fails without aborting the restart.
+			 * This handler may run quickly enough to still see this
+			 * Stopped state, but it will soon change to Running.
+			 *
+			 * Assume this bug on unexpected Stop Endpoint failures.
+			 * Keep retrying until the EP starts and stops again, on
+			 * chips where this is known to help. Wait for 100ms.
+			 */
+			if (time_is_before_jiffies(ep->stop_time + msecs_to_jiffies(100)))
+				break;
+>>>>>>> BRANCH (05639cb84e3c37a8d674a25927d687b5e8185c6a Revert "usb: xhci: Avoid Stop Endpoint retry loop if the end)
 			fallthrough;
 		case EP_STATE_RUNNING:
 			/* Race, HW handled stop ep cmd before ep was running */
+<<<<<<< HEAD   (60c21e6d76f89d22d113ca5d62be093e6e09aa37 Merge 0a6b2ed51a1c ("f2fs: fix zero-sized extent for precach)
 			xhci_dbg(xhci, "Stop ep completion ctx error, ep is running\n");
+||||||| BASE   (0a6b2ed51a1cf13e11473680f16ac9654a8ba04b f2fs: fix zero-sized extent for precache extents)
+			xhci_dbg(xhci, "Stop ep completion ctx error, ctx_state %d\n",
+					GET_EP_CTX_STATE(ep_ctx));
+			/*
+			 * Don't retry forever if we guessed wrong or a defective HC never starts
+			 * the EP or says 'Running' but fails the command. We must give back TDs.
+			 */
+			if (time_is_before_jiffies(ep->stop_time + msecs_to_jiffies(100)))
+				break;
+=======
+			xhci_dbg(xhci, "Stop ep completion ctx error, ctx_state %d\n",
+					GET_EP_CTX_STATE(ep_ctx));
+>>>>>>> BRANCH (05639cb84e3c37a8d674a25927d687b5e8185c6a Revert "usb: xhci: Avoid Stop Endpoint retry loop if the end)
 
 			command = xhci_alloc_command(xhci, false, GFP_ATOMIC);
 			if (!command) {
