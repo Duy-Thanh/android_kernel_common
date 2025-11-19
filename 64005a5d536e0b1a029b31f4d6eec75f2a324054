@@ -70,6 +70,24 @@
       "parentUuid": "a317fce6_e32ba316",
       "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21879566_6f72d2b4",
+        "filename": "rust/kernel/sync.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-11-19T18:13:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de171ed3_6fab56ae",
+      "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
