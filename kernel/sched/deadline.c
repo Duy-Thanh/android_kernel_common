@@ -2624,6 +2624,7 @@ static int find_later_rq(struct task_struct *sched_ctx, struct task_struct *exec
 
 static struct task_struct *pick_next_pushable_dl_task(struct rq *rq)
 {
+<<<<<<< HEAD   (914e412c4c927cc2d5301d7b80c4b84657811d5a Merge b9cc7155e65f ("Revert "ipmi: fix msg stack when IPMI i)
 	struct task_struct *p = NULL;
 	struct rb_node *next_node;
 
@@ -2693,6 +2694,24 @@ static inline bool dl_revalidate_rq_state(struct task_struct *task, struct rq *r
 			return false;
 	}
 	return true;
+||||||| BASE   (b9cc7155e65f6feca51bfedd543b9bd300e2be2b Revert "ipmi: fix msg stack when IPMI is disconnected")
+=======
+	struct task_struct *p;
+
+	if (!has_pushable_dl_tasks(rq))
+		return NULL;
+
+	p = __node_2_pdl(rb_first_cached(&rq->dl.pushable_dl_tasks_root));
+
+	WARN_ON_ONCE(rq->cpu != task_cpu(p));
+	WARN_ON_ONCE(task_current(rq, p));
+	WARN_ON_ONCE(p->nr_cpus_allowed <= 1);
+
+	WARN_ON_ONCE(!task_on_rq_queued(p));
+	WARN_ON_ONCE(!dl_task(p));
+
+	return p;
+>>>>>>> BRANCH (305b1a39f3bb27a8c13bab43931af6b23612c3ed sched/deadline: Fix race in push_dl_task())
 }
 
 /* Locks the rq it finds */
@@ -2728,7 +2747,48 @@ static struct rq *find_lock_later_rq(struct task_struct *task, struct rq *rq)
 
 		/* Retry if something changed. */
 		if (double_lock_balance(rq, later_rq)) {
+<<<<<<< HEAD   (914e412c4c927cc2d5301d7b80c4b84657811d5a Merge b9cc7155e65f ("Revert "ipmi: fix msg stack when IPMI i)
 			if (unlikely(!dl_revalidate_rq_state(task, rq, later_rq, &retry))) {
+||||||| BASE   (b9cc7155e65f6feca51bfedd543b9bd300e2be2b Revert "ipmi: fix msg stack when IPMI is disconnected")
+			if (unlikely(task_rq(task) != rq ||
+				     !cpumask_test_cpu(later_rq->cpu, &task->cpus_mask) ||
+				     task_on_cpu(rq, task) ||
+				     !dl_task(task) ||
+				     is_migration_disabled(task) ||
+				     !task_on_rq_queued(task))) {
+=======
+			/*
+			 * double_lock_balance had to release rq->lock, in the
+			 * meantime, task may no longer be fit to be migrated.
+			 * Check the following to ensure that the task is
+			 * still suitable for migration:
+			 * 1. It is possible the task was scheduled,
+			 *    migrate_disabled was set and then got preempted,
+			 *    so we must check the task migration disable
+			 *    flag.
+			 * 2. The CPU picked is in the task's affinity.
+			 * 3. For throttled task (dl_task_offline_migration),
+			 *    check the following:
+			 *    - the task is not on the rq anymore (it was
+			 *      migrated)
+			 *    - the task is not on CPU anymore
+			 *    - the task is still a dl task
+			 *    - the task is not queued on the rq anymore
+			 * 4. For the non-throttled task (push_dl_task), the
+			 *    check to ensure that this task is still at the
+			 *    head of the pushable tasks list is enough.
+			 */
+			if (unlikely(is_migration_disabled(task) ||
+				     !cpumask_test_cpu(later_rq->cpu, &task->cpus_mask) ||
+				     (task->dl.dl_throttled &&
+				      (task_rq(task) != rq ||
+				       task_on_cpu(rq, task) ||
+				       !dl_task(task) ||
+				       !task_on_rq_queued(task))) ||
+				     (!task->dl.dl_throttled &&
+				      task != pick_next_pushable_dl_task(rq)))) {
+
+>>>>>>> BRANCH (305b1a39f3bb27a8c13bab43931af6b23612c3ed sched/deadline: Fix race in push_dl_task())
 				double_unlock_balance(rq, later_rq);
 				later_rq = NULL;
 				break;
