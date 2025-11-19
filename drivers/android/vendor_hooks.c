@@ -603,3 +603,36 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_metadata_error);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_add_skipped_blks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_add_blks_map);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_get_b_info);
+<<<<<<< HEAD   (fd0602e5e766852d31cc962bccc0d87cc7175e4b FROMGIT: xhci: sideband: Fix race condition in sideband unre)
+||||||| BASE   (9007a992df6c7fbc50cbcc21613b3a5c3c019ab6 ANDROID: drivers: virt: Initialization halla module)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kernel_nofault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_gen_add_folio_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_gen_del_folio_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perform_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_kswapd_shrink_node);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_keep_reclaimed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reclaimed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict_folios_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_may_unmap_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kernel_nofault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_gen_add_folio_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_gen_del_folio_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perform_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_kswapd_shrink_node);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_keep_reclaimed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reclaimed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict_folios_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_may_unmap_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
+>>>>>>> CHANGE (c2333b86b0d7f7bfd75fab8d9ad511d31ae81465 ANDROID: mm: Add a vendor hook to modify the page flags befo)
