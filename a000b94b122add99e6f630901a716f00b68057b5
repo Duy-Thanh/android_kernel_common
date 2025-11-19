@@ -16,6 +16,24 @@
       "message": "This needs a kernel upstrem divergence task with a bug report explaining why this change can\u0027t be sent upstream first",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b34fe4c_f0a189f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2025-11-19T23:39:52Z",
+      "side": 1,
+      "message": "CONFIG_UNWINDER_ORC is the default if you check arch/x86/Kconfig.debug unless in kernel config if UNWINDER_FRAME_POINTER is explicitly set which is the case for gki_defconfig. If you look at arch/x86/configs/x86_64_defconfig \"UNWINDER_FRAME_POINTER\" is not set\n\nsnippet:\narch/x86/Kconfig.debug\n....\nchoice\n        prompt \"Choose kernel unwinder\"\n        default UNWINDER_ORC if X86_64",
+      "parentUuid": "39e7b72e_e3555aad",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
