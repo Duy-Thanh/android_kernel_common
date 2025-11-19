@@ -483,11 +483,20 @@ void lru_cache_add(struct page *page)
 {
 	struct pagevec *pvec;
 
+<<<<<<< HEAD   (b3f67f41e42261ca5553d1eac0175746b72ab027 ANDROID: GKI: Update GKI symbol list with fwnode and v2l ent)
 	VM_BUG_ON_PAGE(PageActive(page) && PageUnevictable(page), page);
 	VM_BUG_ON_PAGE(PageLRU(page), page);
 
 	/* see the comment in lru_gen_add_page() */
 	if (lru_gen_enabled() && !PageUnevictable(page) &&
+||||||| BASE   (9007a992df6c7fbc50cbcc21613b3a5c3c019ab6 ANDROID: drivers: virt: Initialization halla module)
+	/* see the comment in lru_gen_folio_seq() */
+	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
+=======
+	trace_android_vh_folio_add_lru(folio);
+	/* see the comment in lru_gen_folio_seq() */
+	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
+>>>>>>> CHANGE (c2333b86b0d7f7bfd75fab8d9ad511d31ae81465 ANDROID: mm: Add a vendor hook to modify the page flags befo)
 	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC)) {
 		bool bypass = false;
 
