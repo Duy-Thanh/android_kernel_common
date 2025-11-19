@@ -88,6 +88,24 @@
       "parentUuid": "fc0c9872_d03cc1ff",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc9f744_849fdd40",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-19T14:11:16Z",
+      "side": 1,
+      "message": "I did a quick prototype with hypercalls for in-memory structures and qi enabled for initialization(before translation enable: revert aosp/3786912). I timed the `intel_iommu_init()` from function start to finish and here are the results on felino(average of 5 runs):\n(1) Existing implementation(no hypercall during initialization): 13.134 us\n(2) Hypercall for in-memory structures: 13.490 us\n(3) (2) with qi enabled: 13.688 us\n\nSo there is only about ~200-300 us improvement in the boot time and is not really significant. I shall modify the implementation to have a separate hypercall for SRTP and then remove extra logic needed for handling translation structures before and after translation. As you mentioned, this would make it much simpler.",
+      "parentUuid": "7ec888bb_063cadd4",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
