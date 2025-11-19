@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fbdcdf9_9fb7580c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-11-19T11:58:17Z",
+      "side": 1,
+      "message": "Verified together with aosp/3855600 relation chain. CF failures are unrelated to this change.",
+      "revId": "9b8c32cb15cf2b1420fd7c1979add88a6324da1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
