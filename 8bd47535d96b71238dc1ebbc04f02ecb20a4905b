@@ -34,6 +34,24 @@
       "parentUuid": "960569c9_6ebf7627",
       "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6b09d8_841cabc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-19T18:59:49Z",
+      "side": 1,
+      "message": "Maintainers can be quite busy(and sometimes do go on vacation), so if there is no response it is expected folks will resend submissions to lkml (a reasonable cadence is every two weeks). It might be good try to resend this a few times so that you can get a clear response yes or no from the maintainer.\n\nI know Peter is wary of tracepoints (as they effectively create uABI, which exposes internal implementation details that may need to change).  So if this really isn\u0027t likely to go upstream, it might be more clear for the ACK branch to include the vendorhook as it makes it clear when reading the code that the hook is not upstream.",
+      "parentUuid": "970d75ad_2eedcc98",
+      "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
