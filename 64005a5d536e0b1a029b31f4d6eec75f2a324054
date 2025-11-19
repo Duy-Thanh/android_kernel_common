@@ -52,6 +52,24 @@
       "parentUuid": "8bf25652_d6716d16",
       "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de171ed3_6fab56ae",
+        "filename": "rust/kernel/sync.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-11-19T13:19:25Z",
+      "side": 1,
+      "message": "I think if you use the same wording as in the patch, then we will avoid conflicts when it eventually lands in android-mainline through upstreamn.\n```suggestion\n    /// Returns a raw pointer to the inner C struct.\n    ///\n    /// It is up to the caller to use the raw pointer correctly.\n    pub fn as_ptr(\u0026self) -\u003e *mut bindings::lock_class_key {\n```",
+      "parentUuid": "a317fce6_e32ba316",
+      "revId": "64005a5d536e0b1a029b31f4d6eec75f2a324054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
