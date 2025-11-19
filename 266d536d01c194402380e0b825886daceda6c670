@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59568ae_9ac6998e",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-11-19T10:40:17Z",
+      "side": 1,
+      "message": "I think this is a bit confusing, and might be slightly complicated to deal with pinning and reading this memory, and also guaranteeing that the device is not detached or domain is free during the operation.\n\nMaybe something as:\n```\nint kvm_iommu_sync_nested_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id, u32 pasid);\n```\n\nwhat do you think?",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 30
+      },
+      "revId": "266d536d01c194402380e0b825886daceda6c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
