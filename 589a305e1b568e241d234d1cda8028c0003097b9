@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52774fb_0375019e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2054259
+      },
+      "writtenOn": "2025-11-19T12:01:47Z",
+      "side": 1,
+      "message": "When debugging RCU stalling issues, we need to export RCU stalling warning trace to get more details. please review it. thanks!",
+      "revId": "589a305e1b568e241d234d1cda8028c0003097b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
