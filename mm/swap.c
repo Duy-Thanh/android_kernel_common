@@ -511,7 +511,14 @@ void folio_add_lru(struct folio *folio)
 			folio_test_unevictable(folio), folio);
 	VM_BUG_ON_FOLIO(folio_test_lru(folio), folio);
 
+<<<<<<< HEAD   (f6b66dd17a9274efbcd440db45539d0398cadcd2 ANDROID: ABI: Update pixel symbol list)
 	/* see the comment in lru_gen_add_folio() */
+||||||| BASE   (9007a992df6c7fbc50cbcc21613b3a5c3c019ab6 ANDROID: drivers: virt: Initialization halla module)
+	/* see the comment in lru_gen_folio_seq() */
+=======
+	trace_android_vh_folio_add_lru(folio);
+	/* see the comment in lru_gen_folio_seq() */
+>>>>>>> CHANGE (c2333b86b0d7f7bfd75fab8d9ad511d31ae81465 ANDROID: mm: Add a vendor hook to modify the page flags befo)
 	if (lru_gen_enabled() && !folio_test_unevictable(folio) &&
 	    lru_gen_in_fault() && !(current->flags & PF_MEMALLOC)) {
 		bool bypass = false;

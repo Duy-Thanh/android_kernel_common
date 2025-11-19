@@ -649,6 +649,7 @@ DECLARE_HOOK(android_vh_mm_customize_lru_add_dst,
 DECLARE_HOOK(android_vh_oom_reaper_delay_bypass,
 	TP_PROTO(struct task_struct *tsk, bool *bypass),
 	TP_ARGS(tsk, bypass));
+<<<<<<< HEAD   (f6b66dd17a9274efbcd440db45539d0398cadcd2 ANDROID: ABI: Update pixel symbol list)
 DECLARE_HOOK(android_vh_nr_pcp_alloc,
 	TP_PROTO(struct per_cpu_pages *pcp, struct zone *zone,
 		unsigned long __percpu **pad, unsigned int order, int *batch),
@@ -663,6 +664,42 @@ DECLARE_RESTRICTED_HOOK(android_rvh_gup_longterm_locked,
 		unsigned long start, unsigned long nr_pages,
 		struct page **pages),
 	TP_ARGS(rc, nr_pinned_pages, start, nr_pages, pages), 5);
+||||||| BASE   (9007a992df6c7fbc50cbcc21613b3a5c3c019ab6 ANDROID: drivers: virt: Initialization halla module)
+DECLARE_HOOK(android_vh_thaw_killed_process,
+	TP_PROTO(bool *thaw),
+	TP_ARGS(thaw));
+DECLARE_HOOK(android_vh_folio_add_lru_folio_activate,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_folio_locked,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_filemap_folio_mapped,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_remove_rmap_ptes,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+=======
+DECLARE_HOOK(android_vh_thaw_killed_process,
+	TP_PROTO(bool *thaw),
+	TP_ARGS(thaw));
+DECLARE_HOOK(android_vh_folio_add_lru,
+        TP_PROTO(struct folio *folio),
+        TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_add_lru_folio_activate,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_folio_locked,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_filemap_folio_mapped,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_remove_rmap_ptes,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+>>>>>>> CHANGE (c2333b86b0d7f7bfd75fab8d9ad511d31ae81465 ANDROID: mm: Add a vendor hook to modify the page flags befo)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

@@ -678,6 +678,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_kswapd_shrink_node);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_keep_reclaimed_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reclaimed_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict_folios_bypass);
+<<<<<<< HEAD   (f6b66dd17a9274efbcd440db45539d0398cadcd2 ANDROID: ABI: Update pixel symbol list)
+||||||| BASE   (9007a992df6c7fbc50cbcc21613b3a5c3c019ab6 ANDROID: drivers: virt: Initialization halla module)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_may_unmap_folio);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_may_unmap_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru);
+>>>>>>> CHANGE (c2333b86b0d7f7bfd75fab8d9ad511d31ae81465 ANDROID: mm: Add a vendor hook to modify the page flags befo)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
