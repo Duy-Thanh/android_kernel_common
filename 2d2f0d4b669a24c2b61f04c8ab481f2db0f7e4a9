@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "292f9fd0_f8bab887",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-11-19T10:05:22Z",
+      "side": 1,
+      "message": "I think that implicitly breaks KMI, as old drivers might be using the old start.\n\nThe reason we had this macro, is that the IOMMU core is enlightened about the IDMAP domain, unlike the nested domains.\nIf the driver adds this feature it can define the domain start with another macro and the kernel part will have to be updated together with it.\n\nSo, I think we can drop this patch.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "2d2f0d4b669a24c2b61f04c8ab481f2db0f7e4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
