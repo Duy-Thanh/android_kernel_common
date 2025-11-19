@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960569c9_6ebf7627",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-19T04:51:00Z",
+      "side": 1,
+      "message": "Is there a urgent reason this needs to be included as FROMLIST instead of waiting for it to be queued in a maintainer\u0027s tree so it can be FROMGIT?  We are very hesitant to add FROMLIST patches as we don\u0027t want to diverge from upstream.",
+      "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
