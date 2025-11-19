@@ -294453,6 +294453,13 @@ function {
   parameter_id: 0x3df9bbb6
 }
 function {
+  id: 0x9b587c9a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x9b5888dd
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -313592,6 +313599,15 @@ elf_symbol {
   full_name: "__traceiter_pelt_se_tp"
 }
 elf_symbol {
+  id: 0x46a383e5
+  name: "__traceiter_rcu_stall_warning"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfe9171ac
+  type_id: 0x9b587c9a
+  full_name: "__traceiter_rcu_stall_warning"
+}
+elf_symbol {
   id: 0x2c11fea4
   name: "__traceiter_rwmmio_post_read"
   is_defined: true
@@ -317010,6 +317026,15 @@ elf_symbol {
   crc: 0x06055a23
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_pelt_se_tp"
+}
+elf_symbol {
+  id: 0xd12d0b3f
+  name: "__tracepoint_rcu_stall_warning"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaa085d2b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_rcu_stall_warning"
 }
 elf_symbol {
   id: 0x009c40ce
@@ -370898,6 +370923,7 @@ interface {
   symbol_id: 0xbdceccc2
   symbol_id: 0x3e69b303
   symbol_id: 0x7f1a363f
+  symbol_id: 0x46a383e5
   symbol_id: 0x2c11fea4
   symbol_id: 0xe71ca6fa
   symbol_id: 0x45e62871
@@ -371278,6 +371304,7 @@ interface {
   symbol_id: 0x67e2af24
   symbol_id: 0xf3cb5921
   symbol_id: 0xcb194ec9
+  symbol_id: 0xd12d0b3f
   symbol_id: 0x009c40ce
   symbol_id: 0xb46bae90
   symbol_id: 0x02473ce7
