@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d98b378_40253ca9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-11-19T22:50:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "363620ec_394a1405",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "9bd5c811bb2cbcda2cf04b123039f0b9fc70bde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed80b1c0_332479b6",
@@ -60,6 +84,24 @@
       "writtenOn": "2025-11-18T22:42:22Z",
       "side": 1,
       "message": "Please add an `Upstream-Task` bug to track getting this patch upstreamed.",
+      "revId": "9bd5c811bb2cbcda2cf04b123039f0b9fc70bde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "011c6871_c760fbbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-11-19T22:50:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed80b1c0_332479b6",
       "revId": "9bd5c811bb2cbcda2cf04b123039f0b9fc70bde7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
