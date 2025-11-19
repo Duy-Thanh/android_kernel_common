@@ -16,6 +16,24 @@
       "message": "Is there a urgent reason this needs to be included as FROMLIST instead of waiting for it to be queued in a maintainer\u0027s tree so it can be FROMGIT?  We are very hesitant to add FROMLIST patches as we don\u0027t want to diverge from upstream.",
       "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970d75ad_2eedcc98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-11-19T05:38:10Z",
+      "side": 1,
+      "message": "Hi John,\n\nWe want to replace the trace_android_vh_psi_event with this trace-ponit. As the following:\nhttps://android-review.googlesource.com/c/kernel/common/+/3621689\n\nHowever, this patch was sent a long time ago, but Peter hasn\u0027t been merged yet. For our Android17-6.18 to bring up properly, we\u0027ll port this over first. Otherwise, we would still need the original psi_event vh.\n\nThanks!",
+      "parentUuid": "960569c9_6ebf7627",
+      "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
