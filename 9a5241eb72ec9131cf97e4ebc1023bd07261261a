@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4fedca0_dff9222e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2025-11-19T10:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b14fd_eddb8e0b",
+      "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b3b996f_7f8962a8",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "There is no symbol list for android17-6.18 yet, right?",
       "parentUuid": "7b3b996f_7f8962a8",
+      "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aee7bed_75376536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2025-11-19T10:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79df6632_7489b426",
       "revId": "9a5241eb72ec9131cf97e4ebc1023bd07261261a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
