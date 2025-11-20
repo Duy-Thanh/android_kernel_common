@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124cd558_90cceba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-20T17:14:35Z",
+      "side": 1,
+      "message": "Issues are being reported on the upstream patch. This needs to wait until it lands in an upstream maintainer tree. https://lore.kernel.org/all/292653ba-3836-00f1-acd4-a28b1c54388c@allwinnertech.com/#t",
+      "revId": "90da40f6cf9ab06598d5514bc965efabe19d07eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
