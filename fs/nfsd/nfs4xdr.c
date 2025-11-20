@@ -566,18 +566,6 @@ nfsd4_decode_state_owner4(struct nfsd4_compoundargs *argp,
 }
 
 #ifdef CONFIG_NFSD_PNFS
-static __be32
-nfsd4_decode_deviceid4(struct nfsd4_compoundargs *argp,
-		       struct nfsd4_deviceid *devid)
-{
-	__be32 *p;
-
-	p = xdr_inline_decode(argp->xdr, NFS4_DEVICEID4_SIZE);
-	if (!p)
-		return nfserr_bad_xdr;
-	memcpy(devid, p, sizeof(*devid));
-	return nfs_ok;
-}
 
 static __be32
 nfsd4_decode_layoutupdate4(struct nfsd4_compoundargs *argp,
@@ -1680,7 +1668,15 @@ nfsd4_decode_getdeviceinfo(struct nfsd4_compoundargs *argp,
 {
 	__be32 status;
 
+<<<<<<< HEAD   (93983e09bdaaf1911d8758b6333edd4c761a81a9 Revert "net: rtnetlink: add helper to extract msg type's kin)
 	status = nfsd4_decode_deviceid4(argp, &gdev->gd_devid);
+||||||| BASE   (2dc2bc27578c36a4e38626e25bd8e1830f0ddb59 xfs: fix log CRC mismatches between i386 and other architect)
+	memset(gdev, 0, sizeof(*gdev));
+	status = nfsd4_decode_deviceid4(argp, &gdev->gd_devid);
+=======
+	memset(gdev, 0, sizeof(*gdev));
+	status = nfsd4_decode_deviceid4(argp->xdr, &gdev->gd_devid);
+>>>>>>> BRANCH (8e69c8f3ae1c59f19768289196084eef7e20df30 NFSD: Fix last write offset handling in layoutcommit)
 	if (status)
 		return status;
 	if (xdr_stream_decode_u32(argp->xdr, &gdev->gd_layout_type) < 0)
