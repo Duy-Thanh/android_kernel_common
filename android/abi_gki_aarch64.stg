@@ -349954,9 +349954,154 @@ elf_symbol {
   name: "__traceiter_android_vh_folio_referenced_check_bypass"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< HEAD   (5ddae867b428061355ce5638827575efcd3de87b ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
   crc: 0xe1043e73
   type_id: 0x9b20c0a6
   full_name: "__traceiter_android_vh_folio_referenced_check_bypass"
+||||||| BASE   (bb9838709d0d2e81004d4b7fd40c805db7e49fef ANDROID: mm: Add a vendor hook to modify the page flags befo)
+  crc: 0x2291fcc5
+  type_id: 0x9bc00937
+  full_name: "__traceiter_android_vh_filemap_read_end"
+}
+elf_symbol {
+  id: 0x0e217a5e
+  name: "__traceiter_android_vh_filemap_update_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x06f01401
+  type_id: 0x9bf18f52
+  full_name: "__traceiter_android_vh_filemap_update_page"
+}
+elf_symbol {
+  id: 0x1b65e021
+  name: "__traceiter_android_vh_flush_work_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf424a833
+  type_id: 0x9b9ac603
+  full_name: "__traceiter_android_vh_flush_work_wait_finish"
+}
+elf_symbol {
+  id: 0xd44631ef
+  name: "__traceiter_android_vh_flush_work_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa3200b4e
+  type_id: 0x9b9ac603
+  full_name: "__traceiter_android_vh_flush_work_wait_start"
+}
+elf_symbol {
+  id: 0xf110e9f6
+  name: "__traceiter_android_vh_flush_wq_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x18e3e4e3
+  type_id: 0x9bccd612
+  full_name: "__traceiter_android_vh_flush_wq_wait_finish"
+}
+elf_symbol {
+  id: 0x5f626e29
+  name: "__traceiter_android_vh_flush_wq_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcc0e4dfb
+  type_id: 0x9bccd612
+  full_name: "__traceiter_android_vh_flush_wq_wait_start"
+}
+elf_symbol {
+  id: 0x5dd57eff
+  name: "__traceiter_android_vh_folio_add_lru_folio_activate"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa4608c4d
+  type_id: 0x9b2e0ad9
+  full_name: "__traceiter_android_vh_folio_add_lru_folio_activate"
+}
+elf_symbol {
+  id: 0xef70c295
+  name: "__traceiter_android_vh_folio_remove_rmap_ptes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcab0a328
+  type_id: 0x9b2a7922
+  full_name: "__traceiter_android_vh_folio_remove_rmap_ptes"
+=======
+  crc: 0x2291fcc5
+  type_id: 0x9bc00937
+  full_name: "__traceiter_android_vh_filemap_read_end"
+}
+elf_symbol {
+  id: 0x0e217a5e
+  name: "__traceiter_android_vh_filemap_update_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x06f01401
+  type_id: 0x9bf18f52
+  full_name: "__traceiter_android_vh_filemap_update_page"
+}
+elf_symbol {
+  id: 0x1b65e021
+  name: "__traceiter_android_vh_flush_work_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf424a833
+  type_id: 0x9b9ac603
+  full_name: "__traceiter_android_vh_flush_work_wait_finish"
+}
+elf_symbol {
+  id: 0xd44631ef
+  name: "__traceiter_android_vh_flush_work_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa3200b4e
+  type_id: 0x9b9ac603
+  full_name: "__traceiter_android_vh_flush_work_wait_start"
+}
+elf_symbol {
+  id: 0xf110e9f6
+  name: "__traceiter_android_vh_flush_wq_wait_finish"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x18e3e4e3
+  type_id: 0x9bccd612
+  full_name: "__traceiter_android_vh_flush_wq_wait_finish"
+}
+elf_symbol {
+  id: 0x5f626e29
+  name: "__traceiter_android_vh_flush_wq_wait_start"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcc0e4dfb
+  type_id: 0x9bccd612
+  full_name: "__traceiter_android_vh_flush_wq_wait_start"
+}
+elf_symbol {
+  id: 0xfaa99ddb
+  name: "__traceiter_android_vh_folio_add_lru"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2de2460e
+  type_id: 0x9b2a7922
+  full_name: "__traceiter_android_vh_folio_add_lru"
+}
+elf_symbol {
+  id: 0x5dd57eff
+  name: "__traceiter_android_vh_folio_add_lru_folio_activate"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa4608c4d
+  type_id: 0x9b2e0ad9
+  full_name: "__traceiter_android_vh_folio_add_lru_folio_activate"
+}
+elf_symbol {
+  id: 0xef70c295
+  name: "__traceiter_android_vh_folio_remove_rmap_ptes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcab0a328
+  type_id: 0x9b2a7922
+  full_name: "__traceiter_android_vh_folio_remove_rmap_ptes"
+>>>>>>> CHANGE (948e0afa64ac16405e2629ec8b886e6668e8546a ANDROID: GKI: Honor add symbols to symbol list)
 }
 elf_symbol {
   id: 0x1fca37bf
@@ -355365,7 +355510,148 @@ elf_symbol {
   symbol_type: OBJECT
   crc: 0x261bebc9
   type_id: 0x18ccbd2c
+<<<<<<< HEAD   (5ddae867b428061355ce5638827575efcd3de87b ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
   full_name: "__tracepoint_android_vh_folio_referenced_check_bypass"
+||||||| BASE   (bb9838709d0d2e81004d4b7fd40c805db7e49fef ANDROID: mm: Add a vendor hook to modify the page flags befo)
+  full_name: "__tracepoint_android_vh_filemap_read_end"
+}
+elf_symbol {
+  id: 0xa8c30e54
+  name: "__tracepoint_android_vh_filemap_update_page"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd0ca0c9c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_filemap_update_page"
+}
+elf_symbol {
+  id: 0x843cb07b
+  name: "__tracepoint_android_vh_flush_work_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x024d452f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_work_wait_finish"
+}
+elf_symbol {
+  id: 0xb548aa95
+  name: "__tracepoint_android_vh_flush_work_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7a828e14
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_work_wait_start"
+}
+elf_symbol {
+  id: 0xbb05ffe8
+  name: "__tracepoint_android_vh_flush_wq_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaeae14af
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_wq_wait_finish"
+}
+elf_symbol {
+  id: 0x0a50cb7b
+  name: "__tracepoint_android_vh_flush_wq_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x252a4e3f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_wq_wait_start"
+}
+elf_symbol {
+  id: 0x5027d955
+  name: "__tracepoint_android_vh_folio_add_lru_folio_activate"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x829c52db
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_folio_add_lru_folio_activate"
+}
+elf_symbol {
+  id: 0xb2684007
+  name: "__tracepoint_android_vh_folio_remove_rmap_ptes"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x44c3eae6
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_folio_remove_rmap_ptes"
+=======
+  full_name: "__tracepoint_android_vh_filemap_read_end"
+}
+elf_symbol {
+  id: 0xa8c30e54
+  name: "__tracepoint_android_vh_filemap_update_page"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xd0ca0c9c
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_filemap_update_page"
+}
+elf_symbol {
+  id: 0x843cb07b
+  name: "__tracepoint_android_vh_flush_work_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x024d452f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_work_wait_finish"
+}
+elf_symbol {
+  id: 0xb548aa95
+  name: "__tracepoint_android_vh_flush_work_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7a828e14
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_work_wait_start"
+}
+elf_symbol {
+  id: 0xbb05ffe8
+  name: "__tracepoint_android_vh_flush_wq_wait_finish"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xaeae14af
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_wq_wait_finish"
+}
+elf_symbol {
+  id: 0x0a50cb7b
+  name: "__tracepoint_android_vh_flush_wq_wait_start"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x252a4e3f
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_flush_wq_wait_start"
+}
+elf_symbol {
+  id: 0xc09285c1
+  name: "__tracepoint_android_vh_folio_add_lru"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x2a23f777
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_folio_add_lru"
+}
+elf_symbol {
+  id: 0x5027d955
+  name: "__tracepoint_android_vh_folio_add_lru_folio_activate"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x829c52db
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_folio_add_lru_folio_activate"
+}
+elf_symbol {
+  id: 0xb2684007
+  name: "__tracepoint_android_vh_folio_remove_rmap_ptes"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x44c3eae6
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_folio_remove_rmap_ptes"
+>>>>>>> CHANGE (948e0afa64ac16405e2629ec8b886e6668e8546a ANDROID: GKI: Honor add symbols to symbol list)
 }
 elf_symbol {
   id: 0xa3ede5d5
@@ -422113,7 +422399,28 @@ interface {
   symbol_id: 0xb7d91f76
   symbol_id: 0x4eda1196
   symbol_id: 0x158bf9d3
+<<<<<<< HEAD   (5ddae867b428061355ce5638827575efcd3de87b ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
   symbol_id: 0x51030b11
+||||||| BASE   (bb9838709d0d2e81004d4b7fd40c805db7e49fef ANDROID: mm: Add a vendor hook to modify the page flags befo)
+  symbol_id: 0x48ad4ccb
+  symbol_id: 0x0e217a5e
+  symbol_id: 0x1b65e021
+  symbol_id: 0xd44631ef
+  symbol_id: 0xf110e9f6
+  symbol_id: 0x5f626e29
+  symbol_id: 0x5dd57eff
+  symbol_id: 0xef70c295
+=======
+  symbol_id: 0x48ad4ccb
+  symbol_id: 0x0e217a5e
+  symbol_id: 0x1b65e021
+  symbol_id: 0xd44631ef
+  symbol_id: 0xf110e9f6
+  symbol_id: 0x5f626e29
+  symbol_id: 0xfaa99ddb
+  symbol_id: 0x5dd57eff
+  symbol_id: 0xef70c295
+>>>>>>> CHANGE (948e0afa64ac16405e2629ec8b886e6668e8546a ANDROID: GKI: Honor add symbols to symbol list)
   symbol_id: 0x1fca37bf
   symbol_id: 0xe6702595
   symbol_id: 0x9e91661b
@@ -422714,7 +423021,28 @@ interface {
   symbol_id: 0xb34d9200
   symbol_id: 0x223c9b64
   symbol_id: 0xf61927fd
+<<<<<<< HEAD   (5ddae867b428061355ce5638827575efcd3de87b ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
   symbol_id: 0x242ad327
+||||||| BASE   (bb9838709d0d2e81004d4b7fd40c805db7e49fef ANDROID: mm: Add a vendor hook to modify the page flags befo)
+  symbol_id: 0x25deef51
+  symbol_id: 0xa8c30e54
+  symbol_id: 0x843cb07b
+  symbol_id: 0xb548aa95
+  symbol_id: 0xbb05ffe8
+  symbol_id: 0x0a50cb7b
+  symbol_id: 0x5027d955
+  symbol_id: 0xb2684007
+=======
+  symbol_id: 0x25deef51
+  symbol_id: 0xa8c30e54
+  symbol_id: 0x843cb07b
+  symbol_id: 0xb548aa95
+  symbol_id: 0xbb05ffe8
+  symbol_id: 0x0a50cb7b
+  symbol_id: 0xc09285c1
+  symbol_id: 0x5027d955
+  symbol_id: 0xb2684007
+>>>>>>> CHANGE (948e0afa64ac16405e2629ec8b886e6668e8546a ANDROID: GKI: Honor add symbols to symbol list)
   symbol_id: 0xa3ede5d5
   symbol_id: 0x539bf337
   symbol_id: 0x901d0e89
