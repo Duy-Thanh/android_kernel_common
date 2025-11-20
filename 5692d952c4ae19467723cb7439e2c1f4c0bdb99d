@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/462235475",
       "revId": "5692d952c4ae19467723cb7439e2c1f4c0bdb99d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f3c3fc_ecffb66c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-20T17:13:31Z",
+      "side": 1,
+      "message": "Issues have been reported on the upsteam patch: https://lore.kernel.org/all/292653ba-3836-00f1-acd4-a28b1c54388c@allwinnertech.com/#t\n\nNeeds to wait until it lands in maintainer tree",
+      "revId": "5692d952c4ae19467723cb7439e2c1f4c0bdb99d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
