@@ -106,6 +106,24 @@
       "parentUuid": "dab92678_7e694f08",
       "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f505ac21_c0deb7c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-11-20T16:01:30Z",
+      "side": 1,
+      "message": "Do you want this backport or not?",
+      "parentUuid": "64f23001_be7f09a5",
+      "revId": "07f2fbb0e7a052b90535279f29450779dd188cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
