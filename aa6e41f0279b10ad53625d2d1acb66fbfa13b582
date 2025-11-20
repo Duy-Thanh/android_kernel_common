@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8145f78c_1758c5ad",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T18:01:24Z",
+      "side": 1,
+      "message": "Maybe return -EPERM instead?",
+      "revId": "aa6e41f0279b10ad53625d2d1acb66fbfa13b582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
