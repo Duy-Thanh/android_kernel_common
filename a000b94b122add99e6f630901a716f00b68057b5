@@ -88,6 +88,24 @@
       "parentUuid": "6f28f7bf_7b42c42f",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b7ee67_add23ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2025-11-20T18:42:26Z",
+      "side": 1,
+      "message": "ok I\u0027ll push same patch to android-mainline",
+      "parentUuid": "c07a0bd6_60f0e870",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
