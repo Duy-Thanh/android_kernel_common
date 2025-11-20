@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf13181_a709816f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T10:43:21Z",
+      "side": 1,
+      "message": "don;t you mean 6.12?\n\nAnd are you _SURE_ you need all of these?  if so, why are all of these hooks still required?  We can not keep forward porting all hooks for each kernel release, most of these were about to be deleted and must be resubmitted with justification of why the changes are not submitted upstream by now.",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d6fcff2c88683bbb2a28007598397b91f7035c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
