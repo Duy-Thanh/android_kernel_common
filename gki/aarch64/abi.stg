@@ -415785,6 +415785,14 @@ function {
   parameter_id: 0x33f8a50c
 }
 function {
+  id: 0x9bd481b1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x3c692b7e
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bd49403
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -438595,6 +438603,55 @@ elf_symbol {
   full_name: "__traceiter_android_vh_oom_check_panic"
 }
 elf_symbol {
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  id: 0xb3f4a3bd
+  name: "__traceiter_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x11f7ab20
+  type_id: 0x9a33392f
+  full_name: "__traceiter_android_vh_oom_killer_disable"
+}
+elf_symbol {
+  id: 0x2884ad94
+  name: "__traceiter_android_vh_oom_reaper_delay_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaaefbfa8
+  type_id: 0x9bdfaf3f
+  full_name: "__traceiter_android_vh_oom_reaper_delay_bypass"
+}
+elf_symbol {
+=======
+  id: 0x1ff6ff8b
+  name: "__traceiter_android_vh_oom_evaluate_task_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x39e206ae
+  type_id: 0x9bd481b1
+  full_name: "__traceiter_android_vh_oom_evaluate_task_bypass"
+}
+elf_symbol {
+  id: 0xb3f4a3bd
+  name: "__traceiter_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x11f7ab20
+  type_id: 0x9a33392f
+  full_name: "__traceiter_android_vh_oom_killer_disable"
+}
+elf_symbol {
+  id: 0x2884ad94
+  name: "__traceiter_android_vh_oom_reaper_delay_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaaefbfa8
+  type_id: 0x9bdfaf3f
+  full_name: "__traceiter_android_vh_oom_reaper_delay_bypass"
+}
+elf_symbol {
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   id: 0x724577f8
   name: "__traceiter_android_vh_oom_swapmem_gather_finish"
   is_defined: true
@@ -445417,6 +445474,55 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_oom_check_panic"
 }
 elf_symbol {
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  id: 0xeb498f27
+  name: "__tracepoint_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_killer_disable"
+}
+elf_symbol {
+  id: 0x05b8726a
+  name: "__tracepoint_android_vh_oom_reaper_delay_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_reaper_delay_bypass"
+}
+elf_symbol {
+=======
+  id: 0x3a3a83c9
+  name: "__tracepoint_android_vh_oom_evaluate_task_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_evaluate_task_bypass"
+}
+elf_symbol {
+  id: 0xeb498f27
+  name: "__tracepoint_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_killer_disable"
+}
+elf_symbol {
+  id: 0x05b8726a
+  name: "__tracepoint_android_vh_oom_reaper_delay_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_reaper_delay_bypass"
+}
+elf_symbol {
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   id: 0xdfe6a3ee
   name: "__tracepoint_android_vh_oom_swapmem_gather_finish"
   is_defined: true
@@ -517668,6 +517774,15 @@ interface {
   symbol_id: 0x721b87b7
   symbol_id: 0xd3e1b817
   symbol_id: 0x594fa05d
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  symbol_id: 0xb3f4a3bd
+  symbol_id: 0x2884ad94
+=======
+  symbol_id: 0x1ff6ff8b
+  symbol_id: 0xb3f4a3bd
+  symbol_id: 0x2884ad94
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   symbol_id: 0x724577f8
   symbol_id: 0xac55c769
   symbol_id: 0xacaadcc9
@@ -518426,6 +518541,15 @@ interface {
   symbol_id: 0xae5bbde9
   symbol_id: 0x508ff939
   symbol_id: 0x0c86f8fb
+<<<<<<< HEAD   (48e14edb7739412123f814f9bb148ea2100a844f ANDROID: GKI: Update oplus symbol list)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  symbol_id: 0xeb498f27
+  symbol_id: 0x05b8726a
+=======
+  symbol_id: 0x3a3a83c9
+  symbol_id: 0xeb498f27
+  symbol_id: 0x05b8726a
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   symbol_id: 0xdfe6a3ee
   symbol_id: 0x6bc613d3
   symbol_id: 0x20d2ceb3
