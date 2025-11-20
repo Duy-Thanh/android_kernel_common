@@ -70,6 +70,24 @@
       "parentUuid": "9dc4c0ee_6af2dee6",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07a0bd6_60f0e870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-11-20T06:55:06Z",
+      "side": 1,
+      "message": "\u003eunless in kernel config if UNWINDER_FRAME_POINTER is explicitly set which is the case for gki_defconfig\n\nand that\u0027s exactly the case for Android kernel: \n\n- 6.12: https://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/arch/x86/configs/gki_defconfig#716\n- mainline: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/arch/x86/configs/gki_defconfig#718\n\nmeaning it\u0027s a divergence that we need to track. We are aiming for GKI compliance, that is, we may have no core kernel changes (`gki_defconfig` included) and the `-desktop` branch will eventually be removed. While this is not a requirement yet on 6.12, it will be on 6.18 kernel.\n\nWhat is the expected plan of dealing with this change? In this form, it would need to land on `android-mainline`.",
+      "parentUuid": "6f28f7bf_7b42c42f",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
