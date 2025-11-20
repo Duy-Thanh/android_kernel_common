@@ -1,0 +1,138 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75807097_543cdc84",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T14:40:17Z",
+      "side": 1,
+      "message": "Why are we freeing this page here? Is this correct?\n\nMaybe `if (param.context_gpa)` should be `if (ret)`?",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ef1717a_6cf15bc9",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T14:40:17Z",
+      "side": 1,
+      "message": "nit: add empty line before this line (to keep the existing style)?",
+      "fixSuggestions": [
+        {
+          "fixId": "355588f5_9f813664",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1498,
+                "startChar": 0,
+                "endLine": 1498,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e64997_3a8d7e19",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 4388,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T14:40:17Z",
+      "side": 1,
+      "message": "iommu-\u003elock will be unlocked twice?\n\nWe might just keep following the existing style here (i.e. spin_unlock + return) instead of introducing `out_unlock:`?",
+      "fixSuggestions": [
+        {
+          "fixId": "259e17a0_cc78dd7f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 4381,
+                "startChar": 0,
+                "endLine": 4382,
+                "endChar": 0
+              },
+              "replacement": "\t\tspin_unlock(\u0026iommu-\u003elock);\n\t\treturn ret;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 4387,
+                "startChar": 0,
+                "endLine": 4389,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -ENOMEM;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 4392,
+                "startChar": 0,
+                "endLine": 4393,
+                "endChar": 0
+              },
+              "replacement": "\t\tspin_unlock(\u0026iommu-\u003elock);\n\t\treturn 0;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 4411,
+                "startChar": 0,
+                "endLine": 4412,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efea2de2_7afa85d7",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T14:40:17Z",
+      "side": 1,
+      "message": "Whatever this is, this is still not done is this series?",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
