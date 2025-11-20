@@ -16,6 +16,24 @@
       "message": "We target to submit a revised patch in the beginning of next year.  However, Linux mailing list review may sometimes take longer.",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9bb4c4_2229599e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-20T21:45:26Z",
+      "side": 1,
+      "message": "To add more context on why getting this patch upstreamed is important, these changes are in the ACK, so they will need to be accepted upstream before they can land in the v6.18 GKI kernel. This\n\nhttps://source.android.com/docs/core/architecture/kernel/kernel-code#upstream-patches\n\u003e `FROMLIST:` - Patches that have been submitted to LKML but haven\u0027t been accepted into a maintainer branch yet are unlikely to be accepted, unless the justification is compelling enough that the patch would be accepted whether or not it lands in upstream Linux (we assume that it won\u0027t). There must be an issue associated with FROMLIST patches to facilitate discussion with the Android kernel team.",
+      "parentUuid": "b85c75c4_6b40f98b",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

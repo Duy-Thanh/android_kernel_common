@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3350db5d_f004f1cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-20T21:45:26Z",
+      "side": 1,
+      "message": "See: https://android-review.git.corp.google.com/c/kernel/common/+/3856531/comments/b85c75c4_6b40f98b",
+      "parentUuid": "d4ae31d4_d23b4a50",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "9bd5c811bb2cbcda2cf04b123039f0b9fc70bde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed80b1c0_332479b6",
