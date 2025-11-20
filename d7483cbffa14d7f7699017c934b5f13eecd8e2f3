@@ -56,6 +56,24 @@
       "message": "Based on the descriptions, it seems like we should be using ORC anyway (regardless of whether FRED is enabled or not) because of the performance benefits.\n\nhttps://github.com/torvalds/linux/blob/master/arch/x86/Kconfig.debug\n```\nconfig UNWINDER_ORC\n\tbool \"ORC unwinder\"\n\tdepends on X86_64\n\tselect OBJTOOL\n\thelp\n\t  This option enables the ORC (Oops Rewind Capability) unwinder for\n\t  unwinding kernel stack traces.  It uses a custom data format which is\n\t  a simplified version of the DWARF Call Frame Information standard.\n\n\t  This unwinder is more accurate across interrupt entry frames than the\n\t  frame pointer unwinder.  It also enables a 5-10% performance\n\t  improvement across the entire kernel compared to frame pointers.\n\n\t  Enabling this option will increase the kernel\u0027s runtime memory usage\n\t  by roughly 2-4MB, depending on your kernel config.\n\nconfig UNWINDER_FRAME_POINTER\n\tbool \"Frame pointer unwinder\"\n\tselect ARCH_WANT_FRAME_POINTERS\n\tselect FRAME_POINTER\n\thelp\n\t  This option enables the frame pointer unwinder for unwinding kernel\n\t  stack traces.\n\n\t  The unwinder itself is fast and it uses less RAM than the ORC\n\t  unwinder, but the kernel text size will grow by ~3% and the kernel\u0027s\n\t  overall performance will degrade by roughly 5-10%.\n```",
       "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1da32e2_c2874f4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2025-11-20T23:59:54Z",
+      "side": 1,
+      "message": "you are correct for accurate data it should be ORC unwinder but if FRED enabled then kernel warning is because of FRED doesn’t preserve %rbp, So this patch was to address kernel warning that was seen on Pantherlake which supports FRED feature. By default ORC unwinder gets picked if Frame pointer unwinder is disabled.",
+      "parentUuid": "fba8fec4_f600e900",
+      "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
