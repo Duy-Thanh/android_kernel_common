@@ -34,6 +34,24 @@
       "parentUuid": "39e7b72e_e3555aad",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc4c0ee_6af2dee6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3569575
+      },
+      "writtenOn": "2025-11-20T00:03:36Z",
+      "side": 1,
+      "message": "Ah, sorry. Didn\u0027t notice that this was just in gki_defconfig. In that case, you\u0027ll need a Bypass-Upstream-Divergence-Tracking tag to make the linter happy.",
+      "parentUuid": "4b34fe4c_f0a189f9",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
