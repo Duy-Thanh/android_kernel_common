@@ -203,6 +203,11 @@ write_file(
     visibility = ["//visibility:private"],
 )
 
+_KUNIT_BINDER_ALLOC_MODULE = select({
+    "//build/kernel/kleaf:binder_is_rust": [],
+    "//conditions:default": ["drivers/android/tests/binder_alloc_kunit.ko"],
+})
+
 common_kernel(
     name = "kernel_aarch64",
     outs = DEFAULT_GKI_OUTS,
@@ -221,7 +226,7 @@ common_kernel(
     kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
     makefile = ":Makefile",
-    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+    module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _KUNIT_BINDER_ALLOC_MODULE,
     modules_superset = get_gki_modules_superset("arm64") + get_kunit_modules_superset("arm64"),
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     visibility = ["//visibility:public"],
