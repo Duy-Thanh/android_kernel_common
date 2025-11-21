@@ -22,6 +22,30 @@
       },
       "revId": "e413e3b76aadf0cc7947257c4343f78e10567da1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a64afb_1e9eca93",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-11-21T15:20:47Z",
+      "side": 0,
+      "message": "Hum, no you\u0027re right, technically, this patch should keep the ENOMEM -\u003e VCPU_MEMCACHE ... but then to remove it in the following patch as guest_share_ffa will not trigger any page-table allocation anymore.",
+      "parentUuid": "a97ff4ba_7b21083f",
+      "range": {
+        "startLine": 1819,
+        "startChar": 2,
+        "endLine": 1819,
+        "endChar": 45
+      },
+      "revId": "e413e3b76aadf0cc7947257c4343f78e10567da1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
