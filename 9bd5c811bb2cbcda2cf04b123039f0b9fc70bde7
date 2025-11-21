@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3105fe9a_0e46d27d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-11-21T21:38:02Z",
+      "side": 1,
+      "message": "The upstream task is updated.\nhttps://partnerissuetracker.corp.google.com/issues/462072101",
+      "parentUuid": "3350db5d_f004f1cc",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "9bd5c811bb2cbcda2cf04b123039f0b9fc70bde7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed80b1c0_332479b6",
