@@ -5634,6 +5634,23 @@ static int rtnetlink_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	}
 
 	flags = link->flags;
+<<<<<<< HEAD   (db7360f9acaf9490e1def7963f97c5b47bbc84f2 ANDROID: KABI: fix up abi change in struct usb_request)
+||||||| BASE   (97fc7aa654e305a9a1826b2f94cc281fbc462cf7 usb: gadget: Store endpoint pointer in usb_request)
+	if (kind == RTNL_KIND_DEL && (nlh->nlmsg_flags & NLM_F_BULK) &&
+	    !(flags & RTNL_FLAG_BULK_DEL_SUPPORTED)) {
+		NL_SET_ERR_MSG(extack, "Bulk delete is not supported");
+		goto err_unlock;
+	}
+
+=======
+	if (kind == RTNL_KIND_DEL && (nlh->nlmsg_flags & NLM_F_BULK) &&
+	    !(flags & RTNL_FLAG_BULK_DEL_SUPPORTED)) {
+		NL_SET_ERR_MSG(extack, "Bulk delete is not supported");
+		module_put(owner);
+		goto err_unlock;
+	}
+
+>>>>>>> BRANCH (cc5ec87693063acebb60f587e8a019ba9b94ae0e Linux 5.15.196)
 	if (flags & RTNL_FLAG_DOIT_UNLOCKED) {
 		doit = link->doit;
 		rcu_read_unlock();
