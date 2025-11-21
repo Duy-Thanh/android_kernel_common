@@ -74,6 +74,59 @@
       "parentUuid": "fba8fec4_f600e900",
       "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "088c9f20_72d57c49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-21T00:33:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f1da32e2_c2874f4e",
+      "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be09b987_ed66ed5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-21T00:33:11Z",
+      "side": 1,
+      "message": "Answering myself, since as prabu.renganathan@intel pointed out `UNWINDER_ORC` is the default if `UNWINDER_FRAME_POINTER` is not selected.\n\n```\nchoice\n\tprompt \"Choose kernel unwinder\"\n\tdefault UNWINDER_ORC if X86_64\n\tdefault UNWINDER_FRAME_POINTER if X86_32\n\thelp\n\t  This determines which method will be used for unwinding kernel stack\n\t  traces for panics, oopses, bugs, warnings, perf, /proc/\u003cpid\u003e/stack,\n\t  livepatch, lockdep, and more.\n```",
+      "parentUuid": "ef2f657d_d69f69e1",
+      "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200967cc_8e96ded3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-11-21T00:33:11Z",
+      "side": 1,
+      "message": "Please add a `Test:` line indicating what testing was performed with this change.",
+      "revId": "d7483cbffa14d7f7699017c934b5f13eecd8e2f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
