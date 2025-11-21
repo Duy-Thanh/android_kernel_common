@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a97ff4ba_7b21083f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-11-21T15:10:57Z",
+      "side": 0,
+      "message": "Brain is probably gone on Friday afternoon, but we retain this request somewhere? Or was it superflous?",
+      "range": {
+        "startLine": 1819,
+        "startChar": 2,
+        "endLine": 1819,
+        "endChar": 45
+      },
+      "revId": "e413e3b76aadf0cc7947257c4343f78e10567da1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
