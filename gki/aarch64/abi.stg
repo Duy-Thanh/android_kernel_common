@@ -499218,15 +499218,6 @@ elf_symbol {
   full_name: "show_regs"
 }
 elf_symbol {
-  id: 0x362e416d
-  name: "show_state_filter"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0xc87bb4c2
-  type_id: 0x01f9081c
-  full_name: "show_state_filter"
-}
-elf_symbol {
   id: 0x2912067f
   name: "shrink_dcache_sb"
   is_defined: true
@@ -524669,7 +524660,6 @@ interface {
   symbol_id: 0x96bd64f2
   symbol_id: 0x064eb0d1
   symbol_id: 0xbf6056e5
-  symbol_id: 0x362e416d
   symbol_id: 0x2912067f
   symbol_id: 0x59a21b13
   symbol_id: 0xe40fa478
