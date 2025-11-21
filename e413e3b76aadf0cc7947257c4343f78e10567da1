@@ -46,6 +46,30 @@
       },
       "revId": "e413e3b76aadf0cc7947257c4343f78e10567da1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6cf5fd_3f8950ff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-11-21T15:26:56Z",
+      "side": 0,
+      "message": "Yeah I figured that out after reading the other patches on top. It\u0027s probably OK to submit as is, FWIW, I\u0027ll let you decide if you want to bother 😊",
+      "parentUuid": "57a64afb_1e9eca93",
+      "range": {
+        "startLine": 1819,
+        "startChar": 2,
+        "endLine": 1819,
+        "endChar": 45
+      },
+      "revId": "e413e3b76aadf0cc7947257c4343f78e10567da1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
