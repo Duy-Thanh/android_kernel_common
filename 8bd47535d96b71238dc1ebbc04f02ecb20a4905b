@@ -70,6 +70,24 @@
       "parentUuid": "2c6b09d8_841cabc0",
       "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d354395_bf353cd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-11-21T07:59:21Z",
+      "side": 1,
+      "message": "patch link:\nhttps://lore.kernel.org/all/20251121073244.9091-1-xuewen.yan@unisoc.com/",
+      "parentUuid": "02410e49_9a30f642",
+      "revId": "8bd47535d96b71238dc1ebbc04f02ecb20a4905b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
