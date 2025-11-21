@@ -124,6 +124,24 @@
       "parentUuid": "dcc9f744_849fdd40",
       "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf5f802_36b496a9",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-21T19:04:23Z",
+      "side": 1,
+      "message": "Removed this in the latest iteration and reverted to SRTP and TE being done separately. with this there is no need for `pv_translation` flag.",
+      "parentUuid": "fe7bf277_0b1ae450",
+      "revId": "bcc18e7562506fc1e9414c064167da4ccdd5deec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

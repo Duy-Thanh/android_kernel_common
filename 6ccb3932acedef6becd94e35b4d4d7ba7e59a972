@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcbeb18e_abf3b32a",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-21T19:04:23Z",
+      "side": 1,
+      "message": "Sorry, even though that was the intention, it was not implemented fully but only for pasid table updates(aosp/3786923) and not for the context updates. With the last iteration I pushed,  I have fixed context updates, and added comments as well",
+      "parentUuid": "7fa9e945_ec0aa46b",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
@@ -150,6 +168,24 @@
           ]
         }
       ],
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8b091c_7dbdfbb1",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 4388,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-21T19:04:23Z",
+      "side": 1,
+      "message": "Ahh I missed removing it. There are multiple places which return before releasing the spinlock, so shall I keep the out_unlock and fix just this double unlock?",
+      "parentUuid": "d9e64997_3a8d7e19",
       "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
