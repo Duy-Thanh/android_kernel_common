@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0b89b9_fc946f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-21T07:58:01Z",
+      "side": 1,
+      "message": "I\u0027ve moved Jeffrey and Sławomir from the reviewers to the CC list not to ask reviews from too many folks. Thanks Isaac for adding Thiébaud and Jeffrey for SElinux review anyway!",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
