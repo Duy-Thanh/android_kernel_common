@@ -201,10 +201,14 @@ _KUNIT_FRAMEWORK_MODULES = [
     "lib/kunit/kunit.ko",
 ]
 
+_KUNIT_BINDER_ALLOC_MODULE = select({
+    "//build/kernel/kleaf:binder_is_rust": [],
+    "//conditions:default": ["drivers/android/tests/binder_alloc_kunit.ko"],
+})
+
 # Modules defined by tools/testing/kunit/configs/android/kunit_defconfig
 _KUNIT_COMMON_MODULES_LIST = [
     # keep sorted
-    "drivers/android/tests/binder_alloc_kunit.ko",
     "drivers/base/regmap/regmap-kunit.ko",
     "drivers/base/regmap/regmap-ram.ko",
     "drivers/base/regmap/regmap-raw-ram.ko",
@@ -223,7 +227,7 @@ _KUNIT_COMMON_MODULES_LIST = [
     "net/core/dev_addr_lists_test.ko",
     "sound/soc/soc-topology-test.ko",
     "sound/soc/soc-utils-test.ko",
-]
+] + _KUNIT_BINDER_ALLOC_MODULE
 
 # Modules defined by tools/testing/kunit/configs/android/kunit_clk_defconfig
 _KUNIT_CLK_MODULES_LIST = [
