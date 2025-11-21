@@ -754,3 +754,7 @@
   xa_find
   xa_find_after
   xa_load
+
+# required by exynos-irq-gic-v3-its.ko
+  its_restore_enable
+  its_save_disable
