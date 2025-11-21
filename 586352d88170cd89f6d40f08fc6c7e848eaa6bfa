@@ -34,6 +34,23 @@
       "parentUuid": "b85c75c4_6b40f98b",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b248ae_f855d6fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-11-21T09:22:38Z",
+      "side": 1,
+      "message": "This patch is also important for non-isolation case (which we\u0027re pursuing now due to cgroups v2 switch for cpuset having its own issues).\n\nThat said I believe we still need the upstream task description updated to mention what is it tracking.",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
