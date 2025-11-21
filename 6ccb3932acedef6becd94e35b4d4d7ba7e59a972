@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d654e51_69973fa6",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-21T17:40:45Z",
+      "side": 1,
+      "message": "context_gpa is a mechanism of donating a page to pkvm in case it needs a new page in the context table. If pkvm uses the page, it updates context_gpa to NULL. If the hypercall fails before using the pages, then we free it here. If it fails after using the page, then ret will be non-zero but it context_gpa will be NULL.\n\nI shall modify the check to `if (ret \u0026\u0026 param.context_gpa)` to avoid confusion.",
+      "parentUuid": "75807097_543cdc84",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
