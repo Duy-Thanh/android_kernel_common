@@ -22,6 +22,30 @@
       },
       "revId": "d6fcff2c88683bbb2a28007598397b91f7035c2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b2e7c0_dd8f7edb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1718992
+      },
+      "writtenOn": "2025-11-21T02:13:29Z",
+      "side": 1,
+      "message": "Acknowledged  and remove all hook. Related hook owners of unisoc should double check and submit on their own.pls review again.",
+      "parentUuid": "acf13181_a709816f",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "d6fcff2c88683bbb2a28007598397b91f7035c2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
