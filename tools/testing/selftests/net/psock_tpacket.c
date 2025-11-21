@@ -22,6 +22,7 @@
  *   - TPACKET_V3: RX_RING
  */
 
+#undef NDEBUG
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -33,9 +34,14 @@
 #include <ctype.h>
 #include <fcntl.h>
 #include <unistd.h>
+<<<<<<< HEAD   (3fe0c4d18349efc4b58407a8e60153da89d55cf5 Merge 6.12.57 into android16-6.12-lts)
 #ifndef __ANDROID__
 #include <bits/wordsize.h>
 #endif
+||||||| BASE   (8a243ecde1f6447b8e237f2c1c67c0bb67d16d67 Linux 6.12.57)
+#include <bits/wordsize.h>
+=======
+>>>>>>> BRANCH (7475d784169c7df48b0c55525fb862e06674d63c Linux 6.12.58)
 #include <net/ethernet.h>
 #include <netinet/ip.h>
 #include <arpa/inet.h>
@@ -787,7 +793,7 @@ static int test_kernel_bit_width(void)
 
 static int test_user_bit_width(void)
 {
-	return __WORDSIZE;
+	return sizeof(long) * 8;
 }
 
 static const char *tpacket_str[] = {

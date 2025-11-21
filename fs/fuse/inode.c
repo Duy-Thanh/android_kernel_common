@@ -94,8 +94,12 @@ static struct inode *fuse_alloc_inode(struct super_block *sb)
 	if (!fi)
 		return NULL;
 
-	fi->i_time = 0;
+	/* Initialize private data (i.e. everything except fi->inode) */
+	BUILD_BUG_ON(offsetof(struct fuse_inode, inode) != 0);
+	memset((void *) fi + sizeof(fi->inode), 0, sizeof(*fi) - sizeof(fi->inode));
+
 	fi->inval_mask = ~0;
+<<<<<<< HEAD   (3fe0c4d18349efc4b58407a8e60153da89d55cf5 Merge 6.12.57 into android16-6.12-lts)
 #ifdef CONFIG_FUSE_BPF
 	fi->backing_inode = NULL;
 	fi->bpf = NULL;
@@ -107,6 +111,15 @@ static struct inode *fuse_alloc_inode(struct super_block *sb)
 	fi->orig_ino = 0;
 	fi->state = 0;
 	fi->submount_lookup = NULL;
+||||||| BASE   (8a243ecde1f6447b8e237f2c1c67c0bb67d16d67 Linux 6.12.57)
+	fi->nodeid = 0;
+	fi->nlookup = 0;
+	fi->attr_version = 0;
+	fi->orig_ino = 0;
+	fi->state = 0;
+	fi->submount_lookup = NULL;
+=======
+>>>>>>> BRANCH (7475d784169c7df48b0c55525fb862e06674d63c Linux 6.12.58)
 	mutex_init(&fi->mutex);
 	spin_lock_init(&fi->lock);
 	fi->forget = fuse_alloc_forget();
