@@ -106,6 +106,24 @@
       "parentUuid": "c07a0bd6_60f0e870",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8929cd89_6fe4a99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-11-21T07:24:40Z",
+      "side": 1,
+      "message": "Great, let\u0027s wait with this change and hopefully we can just cherry-pick it from android-mainline (unless this patch is very time sensitive - let me know then)",
+      "parentUuid": "69b7ee67_add23ee3",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
