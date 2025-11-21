@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e79e5ca_228d8ef2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718992
+      },
+      "writtenOn": "2025-11-21T02:16:01Z",
+      "side": 1,
+      "message": "remove all hook. Related hook owners of unisoc should double check and submit on their own.pls review again.",
+      "revId": "3daf0b7fb698a11185dd11d0f4b37176c4a5b420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
