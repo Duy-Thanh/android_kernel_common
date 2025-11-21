@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee70f0ab_fbf9cedf",
+        "filename": "security/selinux/include/policycap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-21T18:27:46Z",
+      "side": 1,
+      "message": "Yeah. I find the ordering here a little confusing. If CAP_MEMFD_CLASS was already implemented, why is it the last entry here and the unimplemented placeholders added in front?",
+      "parentUuid": "7a576032_0ecb8c13",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6401ae6_7789e60c",
         "filename": "security/selinux/include/policycap.h",
         "patchSetId": 3
@@ -60,6 +84,57 @@
         "endLine": 40,
         "endChar": 31
       },
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af608a93_d6274f7c",
+        "filename": "security/selinux/include/policycap_names.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-21T18:27:46Z",
+      "side": 1,
+      "message": "Do we expect the __POLICYDB_CAP_MAX_ANDROID to get exported to KMI? Is this a one shot addition to kabi to get these 4 policies added and then afterwards kabi would be affected? Trying to understand why this isn\u0027t extended iteratively with the patches that adds the policy functionality",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc65b224_7388838c",
+        "filename": "security/selinux/selinuxfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1900,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-21T18:27:46Z",
+      "side": 1,
+      "message": "Would we see fewer collisions with upstream changes to this function if sel_make_memfd_policycap() above was extended to handle the extra policies, and we just preserved the one line change to the return to call to handle the extensions?",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64cc485a_a482b91d",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-21T18:27:46Z",
+      "side": 1,
+      "message": "Similarly I wonder if handling the android extensions in a separate function would minimize diverging this function from upstream.",
       "revId": "5af409d804660a509102873690e3819887312282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
