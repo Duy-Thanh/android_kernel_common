@@ -124,6 +124,24 @@
       "parentUuid": "69b7ee67_add23ee3",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e914da2_f8f7033d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2025-11-21T17:44:15Z",
+      "side": 1,
+      "message": "once it is merged in mainline can you cherry-pick? There are no critical blockers for now.",
+      "parentUuid": "8929cd89_6fe4a99b",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
