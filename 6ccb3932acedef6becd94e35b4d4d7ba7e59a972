@@ -192,6 +192,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b116d81_299042d4",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 4388,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-21T19:20:20Z",
+      "side": 1,
+      "message": "Both ways work, but in our case it makes sense to minimize our changes to the existing (upstream) code? And I saw in later Aashish\u0027s patches we are actually preferring  spin_unlock + return to minimize changes to the existing code. So it makes sense to do the same here?",
+      "parentUuid": "5b8b091c_7dbdfbb1",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efea2de2_7afa85d7",
         "filename": "drivers/iommu/intel/pasid.c",
         "patchSetId": 35
