@@ -113,4 +113,11 @@ config ANDROID_VENDOR_OEM_DATA
 
 	  If even slightly unsure, say Y.
 
+config ANDROID_WRAPFD
+	bool "Enable support for memory buffer wrapping"
+	depends on MMU
+	help
+	  Wrapfd allows wrapping memory buffer into a new file supporting ioctl
+	  API for file ownership that protects the file from being mapped.
+
 endmenu
