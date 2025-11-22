@@ -728,10 +728,14 @@ static void domain_unmap(struct pkvm_iommu_domain *domain, unsigned long start_p
 int pkvm_iommu_domain_unmap(unsigned long pgd_gpa, unsigned long start_pfn,
 			    unsigned long last_pfn)
 {
+	unsigned long start = start_pfn << VTD_PAGE_SHIFT;
+	unsigned long end = last_pfn << VTD_PAGE_SHIFT;
 	union pkvm_iommu_page_donation *donation;
 	struct pkvm_iommu_domain *domain;
+	int nr_pages;
 
 	donation = this_cpu_read(iommu_page_donation);
+	nr_pages = donation->nr_pages;
 
 	domain = pkvm_get_iommu_domain(host_gpa2hpa(pgd_gpa));
 	if (!domain) {
@@ -742,6 +746,20 @@ int pkvm_iommu_domain_unmap(unsigned long pgd_gpa, unsigned long start_pfn,
 
 	pkvm_spin_lock(&domain->lock);
 	domain_unmap(domain, start_pfn, last_pfn, donation);
+
+	/*
+	 * Regardless of the DMA mode used by host, we perform iotlb flush on
+	 * unmap. Unmapped pages may be donated to a pvm and pvm could use
+	 * it to store sensitve data. Until a flush happens, stale entries in
+	 * cache could enable a device to read those pages which might contain
+	 * sensitive data. So perform flush unconditionally.
+	 */
+	/*
+	 * No new pages released during unmap implies only the leaf
+	 * PTEs were updated. Set IH=1(Invalidation Hint) in that case.
+	 */
+	pkvm_cache_tag_flush_range(domain, start, end,
+				nr_pages == donation->nr_pages);
 	pkvm_spin_unlock(&domain->lock);
 	pkvm_put_iommu_domain(domain);
 
