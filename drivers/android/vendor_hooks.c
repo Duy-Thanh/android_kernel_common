@@ -94,6 +94,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_is_initialized);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_set_affinity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gic_v3_set_affinity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
