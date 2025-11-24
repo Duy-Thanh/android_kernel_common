@@ -147,11 +147,14 @@ void ksmbd_session_rpc_close(struct ksmbd_session *sess, int id)
 int ksmbd_session_rpc_method(struct ksmbd_session *sess, int id)
 {
 	struct ksmbd_session_rpc *entry;
+	int method;
 
-	lockdep_assert_held(&sess->rpc_lock);
+	down_read(&sess->rpc_lock);
 	entry = xa_load(&sess->rpc_handle_list, id);
+	method = entry ? entry->method : 0;
+	up_read(&sess->rpc_lock);
 
-	return entry ? entry->method : 0;
+	return method;
 }
 
 void ksmbd_session_destroy(struct ksmbd_session *sess)

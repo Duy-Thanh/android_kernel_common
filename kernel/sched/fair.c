@@ -9081,21 +9081,21 @@ simple:
 	return p;
 
 idle:
-	if (rf) {
-		new_tasks = sched_balance_newidle(rq, rf);
+	if (!rf)
+		return NULL;
 
-		/*
-		 * Because sched_balance_newidle() releases (and re-acquires)
-		 * rq->lock, it is possible for any higher priority task to
-		 * appear. In that case we must re-start the pick_next_entity()
-		 * loop.
-		 */
-		if (new_tasks < 0)
-			return RETRY_TASK;
+	new_tasks = sched_balance_newidle(rq, rf);
 
-		if (new_tasks > 0)
-			goto again;
-	}
+	/*
+	 * Because sched_balance_newidle() releases (and re-acquires) rq->lock, it is
+	 * possible for any higher priority task to appear. In that case we
+	 * must re-start the pick_next_entity() loop.
+	 */
+	if (new_tasks < 0)
+		return RETRY_TASK;
+
+	if (new_tasks > 0)
+		goto again;
 
 	/*
 	 * rq is about to be idle, check if we need to update the
