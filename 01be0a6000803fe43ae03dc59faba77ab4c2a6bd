@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "071dbf5e_cbc05857",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T14:53:00Z",
+      "side": 1,
+      "message": "\u003e BTW I was just going to ask for this change, so thx for making it :)\n\u003e Dmytro suggested this and I also feel this is a nice optimization :-)\n\n\u003e but my reasoning was a bit different: we should do it directly during unmap by pKVM-low, since compromise host could skip flush hypercall by purpose.\n\nWe partly trust host driver and I think it would not be a security issue to skip flushing. It would affect the functionality and may cause DoS, but should not be a security threat I guess. \n\n\u003e I am also wondering if because of the security issue that I\u0027ve described above there is sense to keep all code related to pkvm_hc_qi_submit_sync since compromised host could always skip it, right? or I am missing some point here?\n\nWe might need to move a considerable chunk of logic to pkvm to remove the hypercall as a whole. The flush queue logic for dma lazy mode, interrupt remaping flush logic etc. It was a tradeoff that we made to make pkvm not so bloated. What do you think?",
+      "parentUuid": "b2aba644_262eb78c",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 58
+      },
+      "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f72e0faa_834cf6f3",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-11-24T12:15:39Z",
       "side": 1,
       "message": "shouldn\u0027t this be `(last_pfn +1) \u003c\u003c VTD_PAGE_SHIFT - 1` instead?",
+      "range": {
+        "startLine": 710,
+        "startChar": 22,
+        "endLine": 710,
+        "endChar": 55
+      },
+      "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba926d8_34aa6b2e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T14:53:00Z",
+      "side": 1,
+      "message": "My understanding was `end` is exclusive and just went one address above the first address of last_pfn to count the last_pfn for flushing.  But, just double checked the code again and `end` is inclusive. Hence `last_pfn \u003c\u003c VTD_PAGE_SHIFT` should suffice I guess. Will modify this.",
+      "parentUuid": "f72e0faa_834cf6f3",
       "range": {
         "startLine": 710,
         "startChar": 22,
