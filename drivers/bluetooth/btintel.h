@@ -58,7 +58,11 @@ struct intel_tlv {
 #define BTINTEL_CNVI_BLAZARIW		0x901
 #define BTINTEL_CNVI_GAP		0x910
 #define BTINTEL_CNVI_BLAZARU		0x930
+<<<<<<< TARGET BRANCH (40435e5332925bf7429f8e4c796040981fcc4968 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage am: c19)
 #define BTINTEL_CNVI_SCP		0xA00
+||||||| BASE          (c1902e025e9f61d6df517052ea698b429b1f6589 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage)
+=======
+>>>>>>> SOURCE BRANCH (fe486d3412a36e74e999e3c84ffd43edcfc1db0c Merge tag 'android16-6.12.58_r00' into android16-6.12)
 
 #define BTINTEL_IMG_BOOTLOADER		0x01	/* Bootloader image */
 #define BTINTEL_IMG_IML			0x02	/* Intermediate image */

@@ -2751,7 +2751,11 @@ static int btintel_set_dsbr(struct hci_dev *hdev, struct intel_version_tlv *ver)
 	/* DSBR command needs to be sent for,
 	 * 1. BlazarI or BlazarIW + B0 step product in IML image.
 	 * 2. Gale Peak2 or BlazarU in OP image.
+<<<<<<< TARGET BRANCH (40435e5332925bf7429f8e4c796040981fcc4968 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage am: c19)
 	 * 3. Scorpious Peak in IML image.
+||||||| BASE          (c1902e025e9f61d6df517052ea698b429b1f6589 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage)
+=======
+>>>>>>> SOURCE BRANCH (fe486d3412a36e74e999e3c84ffd43edcfc1db0c Merge tag 'android16-6.12.58_r00' into android16-6.12)
 	 */
 
 	switch (cnvi) {
@@ -2767,10 +2771,14 @@ static int btintel_set_dsbr(struct hci_dev *hdev, struct intel_version_tlv *ver)
 		    hdev->bus == HCI_USB)
 			break;
 		return 0;
+<<<<<<< TARGET BRANCH (40435e5332925bf7429f8e4c796040981fcc4968 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage am: c19)
 	case BTINTEL_CNVI_SCP:
 		if (ver->img_type == BTINTEL_IMG_IML)
 			break;
 		return 0;
+||||||| BASE          (c1902e025e9f61d6df517052ea698b429b1f6589 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage)
+=======
+>>>>>>> SOURCE BRANCH (fe486d3412a36e74e999e3c84ffd43edcfc1db0c Merge tag 'android16-6.12.58_r00' into android16-6.12)
 	default:
 		return 0;
 	}
