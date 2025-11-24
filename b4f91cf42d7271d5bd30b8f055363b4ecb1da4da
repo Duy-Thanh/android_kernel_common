@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c4735a9_7cf4d23f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 70
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T10:52:20Z",
+      "side": 1,
+      "message": "I think it makes sense. I shall refactor as you suggested",
+      "parentUuid": "4170b73f_243baa61",
+      "revId": "b4f91cf42d7271d5bd30b8f055363b4ecb1da4da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03d3caa0_a500892f",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 70
@@ -65,6 +83,30 @@
           ]
         }
       ],
+      "revId": "b4f91cf42d7271d5bd30b8f055363b4ecb1da4da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3a2c0d_2869cee0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 70
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T10:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d3caa0_a500892f",
+      "range": {
+        "startLine": 598,
+        "startChar": 2,
+        "endLine": 598,
+        "endChar": 11
+      },
       "revId": "b4f91cf42d7271d5bd30b8f055363b4ecb1da4da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
