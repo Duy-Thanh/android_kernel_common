@@ -48,6 +48,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf167a4d_eb53fabf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4479390
+      },
+      "writtenOn": "2025-11-24T14:53:35Z",
+      "side": 1,
+      "message": "git clone https://android.googlesource.com/platform/packages/apps/AccountsAndSyncSettings",
+      "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f72e0faa_834cf6f3",
