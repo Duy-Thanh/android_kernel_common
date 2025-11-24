@@ -21654,6 +21654,11 @@ pointer_reference {
   pointee_type_id: 0xfe436e74
 }
 pointer_reference {
+  id: 0x35024fb4
+  kind: POINTER
+  pointee_type_id: 0xfe49d84f
+}
+pointer_reference {
   id: 0x35059843
   kind: POINTER
   pointee_type_id: 0xfe568790
@@ -155324,6 +155329,35 @@ member {
   offset: 128
 }
 member {
+  id: 0x9487b2cc
+  name: "sin6_addr"
+  type_id: 0x6d25e07f
+  offset: 64
+}
+member {
+  id: 0xeccadb5e
+  name: "sin6_family"
+  type_id: 0xc93e017b
+}
+member {
+  id: 0x9a680c63
+  name: "sin6_flowinfo"
+  type_id: 0xe276adef
+  offset: 32
+}
+member {
+  id: 0x2f681001
+  name: "sin6_port"
+  type_id: 0x7584e7da
+  offset: 16
+}
+member {
+  id: 0x98cf3099
+  name: "sin6_scope_id"
+  type_id: 0xe62ebf07
+  offset: 192
+}
+member {
   id: 0x70b792ea
   name: "single_lun"
   type_id: 0x4585663f
@@ -227308,6 +227342,19 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xfe49d84f
+  kind: STRUCT
+  name: "sockaddr_in6"
+  definition {
+    bytesize: 28
+    member_id: 0xeccadb5e
+    member_id: 0x2f681001
+    member_id: 0x9a680c63
+    member_id: 0x9487b2cc
+    member_id: 0x98cf3099
+  }
+}
+struct_union {
   id: 0x6bc04187
   kind: STRUCT
   name: "socket"
@@ -277214,6 +277261,13 @@ function {
   parameter_id: 0x386883b9
 }
 function {
+  id: 0x9bd79e7b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d44326e
+  parameter_id: 0x34d3469d
+}
+function {
   id: 0x9bd7c2a5
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -277232,6 +277286,13 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x18bd6530
   parameter_id: 0x3d4134dc
+}
+function {
+  id: 0x9bd7ea39
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d44326e
+  parameter_id: 0x35024fb4
 }
 function {
   id: 0x9bd829a3
@@ -277457,6 +277518,15 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x1b8590a8
   parameter_id: 0x20007040
+}
+function {
+  id: 0x9be3cdfa
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d44326e
+  parameter_id: 0xe276adef
+  parameter_id: 0x7584e7da
+  parameter_id: 0xb3a3e4db
 }
 function {
   id: 0x9be40c05
@@ -287487,6 +287557,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_sysrq_crash"
 }
 elf_symbol {
+  id: 0xb6eb60e3
+  name: "__traceiter_android_vh_tcp_v4_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x93138b35
+  type_id: 0x9bd79e7b
+  full_name: "__traceiter_android_vh_tcp_v4_connect"
+}
+elf_symbol {
+  id: 0xfcc3558a
+  name: "__traceiter_android_vh_tcp_v6_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x93138b35
+  type_id: 0x9bd79e7b
+  full_name: "__traceiter_android_vh_tcp_v6_connect"
+}
+elf_symbol {
   id: 0x9c4fb9ab
   name: "__traceiter_android_vh_tcp_write_timeout_estab_retrans"
   is_defined: true
@@ -287494,6 +287582,24 @@ elf_symbol {
   crc: 0xe05e71fc
   type_id: 0x9bdaaaaa
   full_name: "__traceiter_android_vh_tcp_write_timeout_estab_retrans"
+}
+elf_symbol {
+  id: 0x090c808f
+  name: "__traceiter_android_vh_udp_v4_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4f408f66
+  type_id: 0x9be3cdfa
+  full_name: "__traceiter_android_vh_udp_v4_connect"
+}
+elf_symbol {
+  id: 0xd3c07c3e
+  name: "__traceiter_android_vh_udp_v6_connect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7003c8e4
+  type_id: 0x9bd7ea39
+  full_name: "__traceiter_android_vh_udp_v6_connect"
 }
 elf_symbol {
   id: 0xe31bb308
@@ -287748,6 +287854,24 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_sysrq_crash"
 }
 elf_symbol {
+  id: 0xe7586915
+  name: "__tracepoint_android_vh_tcp_v4_connect"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tcp_v4_connect"
+}
+elf_symbol {
+  id: 0xbf50cdb8
+  name: "__tracepoint_android_vh_tcp_v6_connect"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_tcp_v6_connect"
+}
+elf_symbol {
   id: 0x1a59144d
   name: "__tracepoint_android_vh_tcp_write_timeout_estab_retrans"
   is_defined: true
@@ -287755,6 +287879,24 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_tcp_write_timeout_estab_retrans"
+}
+elf_symbol {
+  id: 0x9d8ca961
+  name: "__tracepoint_android_vh_udp_v4_connect"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_udp_v4_connect"
+}
+elf_symbol {
+  id: 0xea8e457c
+  name: "__tracepoint_android_vh_udp_v6_connect"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_udp_v6_connect"
 }
 elf_symbol {
   id: 0x609a86da
@@ -317191,7 +317333,11 @@ interface {
   symbol_id: 0x7ee652cd
   symbol_id: 0xb841c45e
   symbol_id: 0x34a01a22
+  symbol_id: 0xb6eb60e3
+  symbol_id: 0xfcc3558a
   symbol_id: 0x9c4fb9ab
+  symbol_id: 0x090c808f
+  symbol_id: 0xd3c07c3e
   symbol_id: 0xe31bb308
   symbol_id: 0xa56348c9
   symbol_id: 0x15f6cf54
@@ -317220,7 +317366,11 @@ interface {
   symbol_id: 0x1d442b97
   symbol_id: 0xff2bccb8
   symbol_id: 0x3fe0157c
+  symbol_id: 0xe7586915
+  symbol_id: 0xbf50cdb8
   symbol_id: 0x1a59144d
+  symbol_id: 0x9d8ca961
+  symbol_id: 0xea8e457c
   symbol_id: 0x609a86da
   symbol_id: 0xa03a7d43
   symbol_id: 0xc9f46bb2
