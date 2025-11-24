@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4551d7_cc8013b4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 70
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-24T10:38:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this PAGE_SHIFT be done the other way around? Shifting pfn right will not make it 0?\n\nperhaps:\n```\n-               pkvm_cache_tag_flush_range_np(domain, param-\u003eiov_pfn \u003e\u003e VTD_PAGE_SHIFT,\n-                               (param-\u003eiov_pfn + param-\u003enr_pages - 1) \u003e\u003e VTD_PAGE_SHIFT);\n+               pkvm_cache_tag_flush_range_np(domain, param-\u003eiov_pfn \u003c\u003c VTD_PAGE_SHIFT,\n+                               ((param-\u003eiov_pfn + param-\u003enr_pages) \u003c\u003c VTD_PAGE_SHIFT) - 1);\n```\n?\n\nSimilary in `switch_to_super_page` where `pkvm_cache_tag_flush_range` is used.",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 515,
+        "endChar": 62
+      },
+      "revId": "a5e1c2102d6ea2f7f2160d3e2ae10971c0ea04f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
