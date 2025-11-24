@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc13d8d_d19104f3",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T11:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ef1717a_6cf15bc9",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9e64997_3a8d7e19",
@@ -204,6 +222,24 @@
       "side": 1,
       "message": "Both ways work, but in our case it makes sense to minimize our changes to the existing (upstream) code? And I saw in later Aashish\u0027s patches we are actually preferring  spin_unlock + return to minimize changes to the existing code. So it makes sense to do the same here?",
       "parentUuid": "5b8b091c_7dbdfbb1",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dc08e4_bb7cf6f0",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 4388,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T11:06:11Z",
+      "side": 1,
+      "message": "makes sense. I have refactored it to be much cleaner. Took the pviommu logic out of the spinlock and used locking insided pviommu wrappers if needed",
+      "parentUuid": "5b116d81_299042d4",
       "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
