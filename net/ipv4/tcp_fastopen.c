@@ -575,11 +575,19 @@ void tcp_fastopen_active_disable_ofo_check(struct sock *sk)
 		}
 	} else if (tp->syn_fastopen_ch &&
 		   atomic_read(&sock_net(sk)->ipv4.tfo_active_disable_times)) {
+<<<<<<< HEAD   (c1902e025e9f61d6df517052ea698b429b1f6589 ANDROID: GKI: explain ANDROID_KABI_TYPE_STRING usage)
 		dst = sk_dst_get(sk);
 		dev = dst ? dst_dev(dst) : NULL;
+||||||| BASE   (e7ac44a8cab8e358200a42057a59a52391bdba49 Merge android16-6.12-kminext into android16-6.12)
+		dst = sk_dst_get(sk);
+=======
+		rcu_read_lock();
+		dst = __sk_dst_get(sk);
+		dev = dst ? dst_dev_rcu(dst) : NULL;
+>>>>>>> BRANCH (bb362a4b5ee3881ccfd3a565d7560dee2c7155e6 Revert "block: make REQ_OP_ZONE_OPEN a write operation")
 		if (!(dev && (dev->flags & IFF_LOOPBACK)))
 			atomic_set(&sock_net(sk)->ipv4.tfo_active_disable_times, 0);
-		dst_release(dst);
+		rcu_read_unlock();
 	}
 }
 
