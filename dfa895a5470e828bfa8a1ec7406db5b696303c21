@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637bc26e_3a2d3c5d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-24T11:00:42Z",
+      "side": 1,
+      "message": "How this function differs from `pkvm_cache_tag_flush_range`? Can\u0027t we use it instead or make some small adjustment to be able to use existing one?\n\n(Sorry it may be ignorant question - I may miss some valid points)",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
