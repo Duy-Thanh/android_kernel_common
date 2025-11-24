@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f52a00e2_caa3bdbd",
+        "filename": "include/linux/skbuff.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-11-24T17:41:46Z",
+      "side": 1,
+      "message": "Usually we add these to allow making changes after KMI freeze. Since this branch is not KMI frozen, you should add any KMI breaking changes now instead of adding padding.",
+      "range": {
+        "startLine": 628,
+        "startChar": 0,
+        "endLine": 628,
+        "endChar": 30
+      },
+      "revId": "ddacfcfb516bd95ba17c4aab837f78ab779b2b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
