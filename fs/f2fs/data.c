@@ -1527,6 +1527,7 @@ int f2fs_get_block_locked(struct dnode_of_data *dn, pgoff_t index)
 	return err;
 }
 
+<<<<<<< HEAD   (6b172b2c55b679b9bb2ade54ca44a06808d681b6 Merge 9cadfcda1ea0 ("f2fs: remove the create argument to f2f)
 static int f2fs_map_no_dnode(struct inode *inode,
 		struct f2fs_map_blocks *map, struct dnode_of_data *dn,
 		pgoff_t pgoff)
@@ -1549,6 +1550,9 @@ static int f2fs_map_no_dnode(struct inode *inode,
 	return 0;
 }
 
+||||||| BASE   (9cadfcda1ea0377b2c0223c914e35ba1cdcf851e f2fs: remove the create argument to f2fs_map_blocks)
+=======
+>>>>>>> BRANCH (04038e4477ea058153fbbe28510075d21a408031 f2fs: factor a f2fs_map_blocks_cached helper)
 static bool f2fs_map_blocks_cached(struct inode *inode,
 		struct f2fs_map_blocks *map, int flag)
 {
