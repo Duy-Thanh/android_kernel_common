@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "969c11bb_3b07bf6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1868885
+      },
+      "writtenOn": "2025-11-24T03:59:55Z",
+      "side": 1,
+      "message": "Hi, please take a look at this chain. It seemed best to pull in all teo patches since 6.12, since teo is very independent from the rest of the kernel, and as you can see in the commit message most of these will be backported to 6.12 upstream anyway.\n\n(It\u0027s my first time submitting to the android kernel so let me know if anything doesn\u0027t look right.)",
+      "revId": "4ac104904b156e0dd60f2106b59659e788f04e11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
