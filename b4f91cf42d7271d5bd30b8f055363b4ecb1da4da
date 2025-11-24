@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4170b73f_243baa61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 70
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-24T08:53:45Z",
+      "side": 1,
+      "message": "Maybe spiting this patch into two would be a good idea and make it a bit more readable?\n1) as preparation introduce arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c and move all shadow related function there - I assume there is no functional changes in this step\n2) introduce CONFIG_PKVM_INTEL_PVIOMMU and use `#ifndef CONFIG_PKVM_INTEL_PVIOMMU` whenever needed (as in this patch) and other CONFIG_PKVM_INTEL_PVIOMMU related changes",
+      "revId": "b4f91cf42d7271d5bd30b8f055363b4ecb1da4da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d3caa0_a500892f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 70
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-24T08:53:45Z",
+      "side": 1,
+      "message": "nit: maybe return ret directly - there is no other usage of out label.",
+      "range": {
+        "startLine": 598,
+        "startChar": 2,
+        "endLine": 598,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "71727b85_22448ff5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 598,
+                "startChar": 0,
+                "endLine": 599,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 607,
+                "startChar": 0,
+                "endLine": 610,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b4f91cf42d7271d5bd30b8f055363b4ecb1da4da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
