@@ -16,6 +16,23 @@
       "message": "Please create a new bug.",
       "revId": "05d2efb605688df6740f498c413b70280e3faf0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a4d952_916e4584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-24T08:36:34Z",
+      "side": 1,
+      "message": "Where is the in-kernel user of these symbols?  Why do they need to be exported now?",
+      "revId": "05d2efb605688df6740f498c413b70280e3faf0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
