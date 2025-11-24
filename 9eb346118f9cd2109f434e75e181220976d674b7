@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0987f1c_06d5bc4e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T10:54:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "accbbec2_e3b60d0b",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfa12753_1bea06e5",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "After more thinking: in v6.18 it might be actually a good idea to extend the memory protection API with a generic function like pkvm_host_donate_hyp_share_ro() [*] so that the memory protection API takes care of updating permissions in PTEs, instead of leaving this responsibility to pvIOMMU or other potential users. In v6.18 (unlike v6.12) it should be quite easy to implement.\n\n[*] It would do PAGE_OWNED-\u003ePAGE_SHARED_BORROWED transition in one step, to not waste CPU cycles on intermediate transition to PAGE_NONE.",
       "parentUuid": "0fc0aa0f_fe912e3d",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0d82ce_1d59ea57",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-24T10:54:26Z",
+      "side": 1,
+      "message": "I ended up making it a generic API as you suggested above. I have not yet looked into creating a new state, but just using PAGE_SHARED_BORROWED for now.",
+      "parentUuid": "a0249803_47f1d0e0",
       "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
