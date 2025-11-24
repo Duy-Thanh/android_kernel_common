@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9626ba8_e988f117",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3450567
+      },
+      "writtenOn": "2025-11-24T08:13:48Z",
+      "side": 1,
+      "message": "This patch landed in `android16-6.12` as part of `2e5a4bace74a8 Merge tag \u0027android16-6.12.40_r00\u0027 into android16-6.12` So, it\u0027s a clean cherry-pick.",
+      "revId": "acc890541e9169419d58ea43df962bff3c457b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
