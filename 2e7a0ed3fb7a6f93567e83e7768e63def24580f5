@@ -16,6 +16,24 @@
       "message": "This will land with the next merge anyway.",
       "revId": "2e7a0ed3fb7a6f93567e83e7768e63def24580f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998d3651_13c0f489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-11-24T19:16:08Z",
+      "side": 1,
+      "message": "Yeah. We need this slightly earlier so the clang update is not blocked.",
+      "parentUuid": "b1d5ab45_31b21c0c",
+      "revId": "2e7a0ed3fb7a6f93567e83e7768e63def24580f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
