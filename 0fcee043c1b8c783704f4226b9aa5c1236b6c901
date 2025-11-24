@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2073b7f_58c5b58b",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-11-24T17:39:25Z",
+      "side": 1,
+      "message": "Do we need these for 6.18 since the ABI is not frozen yet?\n\ncc @gprocida@google.com",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 0
+      },
+      "revId": "0fcee043c1b8c783704f4226b9aa5c1236b6c901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
