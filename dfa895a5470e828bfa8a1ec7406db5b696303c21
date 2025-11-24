@@ -22,6 +22,30 @@
       },
       "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c44bec_e033ff4b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-11-24T22:29:36Z",
+      "side": 1,
+      "message": "These functions `pkvm_cache_tag_flush_range` and `pkvm_cache_tag_flush_range_np` closely follow the corresponding functions in intel/cache.c (`cache_tag_flush_range` and `cache_tag_flush_range_np`). \n\n`pkvm_cache_tag_flush_range_np` (np stands for not present) is called after a mapping is done. During mapping, we don\u0027t need to invalidate DEV-TLB (as it doesn\u0027t hold negative caches) and the flush only happens (to invalidate negative caches) when CM\u003d1 and it\u0027s a second level page table. And invalidation hint is always set to 0 here.\n\n`pkvm_cache_tag_flush_range` is called after an unmap and it flushes everything (devtlb and iotlb) indiscriminately with an arg for invalidation hint. \n\nThough similar, these functions are conceptually bit different. Having them separate is more readable, I believe.",
+      "parentUuid": "637bc26e_3a2d3c5d",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
