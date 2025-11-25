@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30e9a07_4d6d8570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-25T07:51:34Z",
+      "side": 1,
+      "message": "ltp needs to be fixed, this has now hit all of the stable branches as well.",
+      "revId": "403834e3a6dc42307d0de4a813cf11c2518cebee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
