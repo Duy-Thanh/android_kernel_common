@@ -70,6 +70,30 @@
       },
       "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ee0602_72d59028",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T21:20:39Z",
+      "side": 1,
+      "message": "\u003e Maybe it would be helpful to mention somewhere (commit log or comment) that pkvm_cache_tag_flush_range_np is based on existing cache_tag_flush_range_np (it is almost the same). Same for pkvm_cache_tag_flush_range.\n\nJust a general note: I see in this whole patchset there are quite a few such cases where we almost copy some logic from the host\u0027s driver. And for now that might be the cleanest way to reuse that logic (although in the long run, e.g. for upstreaming, we\u0027ll need to find a way to reuse it without all this duplication). [*]\n\nSo maybe yeah, it would be useful mark all such cases with short comments in the code like \"Based on xxx() from drivers/iommu/intel/xxx.c\" or \"Almost copied from xxx() in drivers/iommu/intel/xxx.c\" etc (not just here in this patch but in other such cases in this whole series).\n\n[*] BTW in pvVMCS, where we are reusing _way_ more logic from the host KVM code, we (in v6.18) are avoiding duplication by directly compiling KVM source files (vmx.c, x86.c and cpuid.c, plus also some files from arch/x86/kernel/fpu) into pKVM hypervisor code, and adding lots of `#ifndef __PKVM_HYP__` to those files to compile only the needed parts (which isn\u0027t exactly an upstreamable way either, but in case of pvVMCS it is still much better than copying). So _maybe_ in v6.18 we might consider doing similar for pvIOMMU as well. Although I\u0027m not sure if for pvIOMMU that would be actually better than copying.",
+      "parentUuid": "02135026_960eee1a",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
