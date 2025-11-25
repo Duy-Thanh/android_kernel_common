@@ -134,6 +134,30 @@
       },
       "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e2cefb5_796e2520",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-25T19:23:41Z",
+      "side": 1,
+      "message": "Seems it should be as suggested originally in the comment, now it calculates the start of the last page, not the end of the range. It should be ((last_pfn + 1) \u003c\u003c VTD_PAGE_SHIFT) - 1.",
+      "parentUuid": "e25cdba6_ea09a412",
+      "range": {
+        "startLine": 710,
+        "startChar": 22,
+        "endLine": 710,
+        "endChar": 55
+      },
+      "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
