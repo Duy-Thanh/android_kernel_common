@@ -64,6 +64,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793701ea_1cd16d50",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-25T22:15:18Z",
+      "side": 1,
+      "message": "Please correct me if I am wrong (I may miss or forgot about some bits so sorry if that is the case) but I think that map/unmap in this implementation does iova to hpa translation (there is no both 1-stage and 2-stage IOMMU page-tables, right?) so there is no room for lazy mode if we want to protect memory. Otherwise after unmap with no flush, IOTLB would have stale translation but because host unmaps the page and consider it as free one, host could donate it to pVM and use DMA with stale entries to e.g. read some secrets from pVM (if the flush is omitted)?",
+      "parentUuid": "c306c3a4_722a2ab6",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
