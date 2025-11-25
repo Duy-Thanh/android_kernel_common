@@ -33,6 +33,24 @@
       "message": "nit: move it before line 149 (just to keep extern pkvm_sym variable declarations together)?",
       "revId": "294733c4aa34127440b147e68aea63c7464bf5ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce65ba5_2277ce01",
+        "filename": "arch/x86/kvm/vmx/pkvm/include/pkvm.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T18:32:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "562b83e3_6705fd16",
+      "revId": "294733c4aa34127440b147e68aea63c7464bf5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
