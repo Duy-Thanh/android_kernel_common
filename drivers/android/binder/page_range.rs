@@ -101,6 +101,20 @@ impl Shrinker {
 
         Ok(())
     }
+
+    /// Unregister this shrinker.
+    ///
+    /// # Safety
+    ///
+    /// The shrinker must have been registered. No operations other than `register` may be used
+    /// before or after this call.
+    #[cfg(all(not(MODULE), CONFIG_ANDROID_BINDER_IPC_PICK))]
+    pub(crate) unsafe fn unregister(&self) {
+        // SAFETY: Called after `register`, so safe to read this field.
+        let shrinker = unsafe { *self.inner.get() };
+        // SAFETY: `register` was called, so this is a valid shrinker we can unregister.
+        unsafe { bindings::shrinker_register(shrinker) };
+    }
 }
 
 /// A container that manages a page range in a vma.

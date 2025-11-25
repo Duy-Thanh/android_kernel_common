@@ -75,6 +75,7 @@
 
 #include <linux/cacheflush.h>
 
+#include "binder_pick.h"
 #include "binder_netlink.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
@@ -7312,6 +7313,18 @@ static int __init binder_init(void)
 	char *device_names = NULL;
 	const struct binder_debugfs_entry *db_entry;
 
+#ifdef MODULE
+#ifdef CONFIG_ANDROID_BINDER_IPC_PICK
+	ret = binder_try_unload_builtin(false);
+	if (ret) {
+		if (ret != -EPERM)
+			pr_err("Failed to load C Binder.\n");
+		binder_remove_trace_events(THIS_MODULE);
+		return 0;
+	}
+#endif
+#endif
+
 	ret = binder_alloc_shrinker_init();
 	if (ret)
 		return ret;
@@ -7380,7 +7393,23 @@ err_alloc_device_names_failed:
 	return ret;
 }
 
+#ifndef MODULE
+#ifdef CONFIG_ANDROID_BINDER_IPC_PICK
+void binder_unload_builtin(void)
+{
+	genl_unregister_family(&binder_nl_family);
+	unload_binderfs();
+	debugfs_remove_recursive(binder_debugfs_dir_entry_root);
+	binder_alloc_shrinker_exit();
+	binder_remove_trace_events(THIS_MODULE);
+}
+#endif
+#endif
+
 device_initcall(binder_init);
+
+MODULE_DESCRIPTION("Binder");
+MODULE_LICENSE("GPL");
 
 #define CREATE_TRACE_POINTS
 #include "binder_trace.h"

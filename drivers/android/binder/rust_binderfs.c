@@ -33,6 +33,7 @@
 #include <uapi/linux/android/binder.h>
 #include <uapi/linux/android/binderfs.h>
 
+#include "../binder_pick.h"
 #include "rust_binder.h"
 #include "rust_binder_internal.h"
 
@@ -781,6 +782,13 @@ static int binderfs_init_fs_context(struct fs_context *fc)
 {
 	struct binderfs_mount_opts *ctx;
 
+#ifndef MODULE
+#ifdef CONFIG_ANDROID_BINDER_IPC_PICK
+	if (on_binderfs_mount(true))
+		return -EINVAL;
+#endif
+#endif
+
 	ctx = kzalloc(sizeof(struct binderfs_mount_opts), GFP_KERNEL);
 	if (!ctx)
 		return -ENOMEM;
@@ -847,4 +855,10 @@ int init_rust_binderfs(void)
 	}
 
 	return ret;
+}
+
+void unload_rust_binderfs(void)
+{
+	unregister_filesystem(&binder_fs_type);
+	unregister_chrdev_region(binderfs_dev, BINDERFS_MAX_MINOR);
 }

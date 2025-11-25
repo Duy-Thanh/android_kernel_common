@@ -298,18 +298,50 @@ struct BinderModule {}
 
 impl kernel::Module for BinderModule {
     fn init(_module: &'static kernel::ThisModule) -> Result<Self> {
+        use kernel::error::to_result;
+
         // SAFETY: The module initializer never runs twice, so we only call this once.
         unsafe { crate::context::CONTEXTS.init() };
 
-        pr_warn!("Loaded Rust Binder.");
+        // SAFETY: This just accesses global booleans.
+        #[cfg(all(MODULE, CONFIG_ANDROID_BINDER_IPC_PICK))]
+        unsafe {
+            let unload = to_result(bindings::binder_try_unload_builtin(true));
+            if let Err(unload) = unload {
+                if unload != EPERM {
+                    pr_err!("Failed to load Rust Binder.\n");
+                }
+                bindings::binder_remove_trace_events(_module.as_ptr());
+                return Ok(Self {});
+            }
+        }
 
         BINDER_SHRINKER.register(kernel::c_str!("android-binder"))?;
 
         // SAFETY: The module is being loaded, so we can initialize binderfs.
-        unsafe { kernel::error::to_result(binderfs::init_rust_binderfs())? };
+        unsafe { to_result(binderfs::init_rust_binderfs())? };
 
         Ok(Self {})
     }
+}
+
+/// Called to use C binder when Rust binder is built-in.
+///
+/// # Safety
+///
+/// Must be called after `init`, must not be called more than once, and rust_binderfs must never be
+/// mounted.
+#[cfg(all(not(MODULE), CONFIG_ANDROID_BINDER_IPC_PICK))]
+#[no_mangle]
+unsafe extern "C" fn binder_unload_builtin() {
+    // SAFETY: Called after `init_rust_binderfs` and not called twice.
+    unsafe { bindings::unload_rust_binderfs() };
+
+    // SAFETY: binderfs was never mounted, so the shrinker was not and will not be used.
+    unsafe { BINDER_SHRINKER.unregister() };
+
+    // SAFETY: Passing with correct module ptr.
+    unsafe { bindings::binder_remove_trace_events(THIS_MODULE.as_ptr()) };
 }
 
 /// Makes the inner type Sync.

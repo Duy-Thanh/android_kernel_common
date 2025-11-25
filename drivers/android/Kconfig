@@ -2,7 +2,7 @@
 menu "Android"
 
 config ANDROID_BINDER_IPC
-	bool "Android Binder IPC Driver"
+	tristate "Android Binder IPC Driver"
 	depends on MMU
 	depends on NET
 	default n
@@ -14,18 +14,33 @@ config ANDROID_BINDER_IPC
 	  Android process, using Binder to identify, invoke and pass arguments
 	  between said processes.
 
-config ANDROID_BINDER_IPC_RUST
-	bool "Rust version of Android Binder IPC Driver"
-	depends on RUST && MMU && !ANDROID_BINDER_IPC
-	help
-	  This enables the Rust implementation of the Binder driver.
+	  To build this as a GKI module, choose m. Both Binder drivers may be
+	  enabled, but at most one can be built-in.
 
+config ANDROID_BINDER_IPC_RUST
+	tristate "Rust version of Android Binder IPC Driver"
+	depends on RUST
+	depends on MMU
+	help
 	  Binder is used in Android for both communication between processes,
 	  and remote method invocation.
 
 	  This means one Android process can call a method/routine in another
 	  Android process, using Binder to identify, invoke and pass arguments
 	  between said processes.
+
+	  To build this as a GKI module, choose m. Both Binder drivers may be
+	  enabled, but at most one can be built-in.
+
+config ANDROID_BINDER_IPC_PICK
+	bool "Boot parameter to choose a Binder implementation"
+	depends on ANDROID_BINDER_IPC || ANDROID_BINDER_IPC_RUST
+	depends on ANDROID_BINDERFS
+	help
+	  Exposes a kernel parameter binder.impl used to choose which Binder
+	  implementation to use.
+
+	  Requires that exactly one of the drivers is built-in.
 
 config ANDROID_BINDERFS
 	bool "Android Binderfs filesystem"

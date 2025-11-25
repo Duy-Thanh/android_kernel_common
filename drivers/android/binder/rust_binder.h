@@ -14,6 +14,7 @@
  * Binder can call them.
  */
 int init_rust_binderfs(void);
+void unload_rust_binderfs(void);
 
 struct dentry;
 struct inode;
