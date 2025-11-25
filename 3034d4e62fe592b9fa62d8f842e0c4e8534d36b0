@@ -138,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57d2f9f8_eea09ccd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-25T23:20:26Z",
+      "side": 1,
+      "message": "I feel its better to take the lock for the whole period as it avoids an extra unlock/lock. Is there an advantage that you see in unlocking and locking again?",
+      "parentUuid": "6f429e11_c221213a",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5619c679_5db527df",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
         "patchSetId": 40
@@ -166,6 +184,24 @@
       "writtenOn": "2025-11-25T23:00:59Z",
       "side": 1,
       "message": "nit: this function doesn\u0027t \"request\" read access, it gives read access to the host who requested it. :) \n\nSo maybe e.g. __pkvm_host_donate_hyp_share_ro() like I suggested before?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd48fb4c_5cb9c9c9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-25T23:20:26Z",
+      "side": 1,
+      "message": "Ok, will rename.",
+      "parentUuid": "c7200fb5_3874e908",
       "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
