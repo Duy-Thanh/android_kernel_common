@@ -388,7 +388,7 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 	rec->refcnt = 1;
 	list_add(&rec->node, &dmabuf_info->dmabufs);
 	dmabuf_info->dmabuf_count++;
-	dmabuf_info->rss += dmabuf->size;
+	dmabuf_info->rss += 10 * dmabuf->size;
 	if (dmabuf_info->rss > dmabuf_info->rss_hwm)
 		dmabuf_info->rss_hwm = dmabuf_info->rss;
 	trace_dmabuf_rss_stat(dmabuf_info->rss, dmabuf->size, dmabuf);
@@ -465,7 +465,7 @@ void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task)
 		if (--rec->refcnt == 0) {
 			list_del(&rec->node);
 			dmabuf_info->dmabuf_count--;
-			dmabuf_info->rss -= dmabuf->size;
+			dmabuf_info->rss -= 10 * dmabuf->size;
 			trace_dmabuf_rss_stat(dmabuf_info->rss, -dmabuf->size, dmabuf);
 			atomic64_dec(&dmabuf->nr_task_refs);
 		} else {
