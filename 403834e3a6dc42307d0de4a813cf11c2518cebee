@@ -16,6 +16,24 @@
       "message": "ltp needs to be fixed, this has now hit all of the stable branches as well.",
       "revId": "403834e3a6dc42307d0de4a813cf11c2518cebee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b8096f_42be62a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-25T14:56:33Z",
+      "side": 1,
+      "message": "ouch, let me attempt to disable it everywhere then.",
+      "parentUuid": "e30e9a07_4d6d8570",
+      "revId": "403834e3a6dc42307d0de4a813cf11c2518cebee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
