@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851a5103_988123df",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-25T06:37:35Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:SUSPECT_CODE_INDENT: suspect code indent for conditional statements (16,...\n\nWARNING:SUSPECT_CODE_INDENT: suspect code indent for conditional statements (16, 32)",
+      "range": {
+        "startLine": 1370,
+        "startChar": 0,
+        "endLine": 1370,
+        "endChar": 0
+      },
+      "revId": "057d82a98e9a69f751c8bfbbd788a972d9fc3a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
