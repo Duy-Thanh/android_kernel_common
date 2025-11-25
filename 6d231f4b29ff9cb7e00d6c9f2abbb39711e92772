@@ -22,6 +22,30 @@
       },
       "revId": "6d231f4b29ff9cb7e00d6c9f2abbb39711e92772",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2ee70d_88f26770",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 3647860
+      },
+      "writtenOn": "2025-11-25T04:13:36Z",
+      "side": 1,
+      "message": "Marked as resolved.\nPls review again.\nThanks",
+      "parentUuid": "b5d557aa_07227dbb",
+      "range": {
+        "startLine": 1954,
+        "startChar": 0,
+        "endLine": 1954,
+        "endChar": 0
+      },
+      "revId": "6d231f4b29ff9cb7e00d6c9f2abbb39711e92772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
