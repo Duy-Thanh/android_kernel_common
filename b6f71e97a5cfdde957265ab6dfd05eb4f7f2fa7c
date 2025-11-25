@@ -16,6 +16,24 @@
       "message": "This should be a reapply of:\n\n85cf3c4ff69c (\"Revert \"asm-generic/io.h: Skip trace helpers if rwmmio events are disabled\"\")",
       "revId": "b6f71e97a5cfdde957265ab6dfd05eb4f7f2fa7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8baa52ee_0a0cc9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026025
+      },
+      "writtenOn": "2025-11-25T10:44:28Z",
+      "side": 1,
+      "message": "This patch, and its revert (85cf3c4ff69c), never reached the `android16-6.12` branch, so a \u0027reapply\u0027 doesn\u0027t work here.\n\nThe revert landed on `android16-6.12-lts`.",
+      "parentUuid": "f62c8a61_d681159e",
+      "revId": "b6f71e97a5cfdde957265ab6dfd05eb4f7f2fa7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
