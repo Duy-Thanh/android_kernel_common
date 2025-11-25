@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d557aa_07227dbb",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-25T03:24:09Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_SPACING: Missing a blank line after declarations\n\nWARNING:LINE_SPACING: Missing a blank line after declarations",
+      "range": {
+        "startLine": 1954,
+        "startChar": 0,
+        "endLine": 1954,
+        "endChar": 0
+      },
+      "revId": "6d231f4b29ff9cb7e00d6c9f2abbb39711e92772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
