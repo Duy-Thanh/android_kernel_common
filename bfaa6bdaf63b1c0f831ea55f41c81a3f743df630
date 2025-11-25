@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7ed6a1_2790056c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T19:09:55Z",
+      "side": 1,
+      "message": "Hmm... it doesn\u0027t look like we donate the root table to pKVM in this series? The host still has write access to it?",
+      "revId": "bfaa6bdaf63b1c0f831ea55f41c81a3f743df630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
