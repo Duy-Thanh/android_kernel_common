@@ -40,6 +40,30 @@
       ],
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c306c3a4_722a2ab6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-25T19:39:45Z",
+      "side": 1,
+      "message": "If we make this mandatory, then dma lazy mode will not have an effect. I think a malicious host would not be able to compromise security but only cause DoS.",
+      "parentUuid": "796c0792_ecab2591",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

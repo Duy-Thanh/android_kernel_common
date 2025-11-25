@@ -158,6 +158,30 @@
       },
       "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d75155a_07d373a7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-25T19:39:45Z",
+      "side": 1,
+      "message": "Sorry if I confused you.\n\nWe just need the start address of the page pointed by last_pfn actually. Our goal is to flush `start_pfn` to `last_pfn` inclusive. So now we pass the first address of start_pfn and last_pfn to `pkvm_cache_tag_flush_range`.\n\nIf we look at the implementation of `pkvm_cache_tag_flush_range`, any address with in a page passed as `end` will cause that page to be considered for flushing. `pkvm_cache_tag_flush_range` calls `calculate_psi_aligned_address` and it calculates the nr_pages for flushing as:\n```\nunsigned long pages \u003d aligned_nrpages(start, end - start + 1);\n```\nSo `aligned_nrpages` calculates the number of pages need to cover the address range\n```\n/* Returns a number of VTD pages, but aligned to MM page size */\nstatic inline unsigned long aligned_nrpages(unsigned long host_addr, size_t size)\n{\n»       host_addr \u0026\u003d ~PAGE_MASK;\n»       return PAGE_ALIGN(host_addr + size) \u003e\u003e VTD_PAGE_SHIFT;\n}\n```\n\nSo even if we pass the first address of last_pfn, that page will be counted in nr_pages. \n\nWith your change we pass the last address of `last_pfn`. But since any address in last_pfn can achieve the goal, do we need to do that? What do you think?",
+      "parentUuid": "5e2cefb5_796e2520",
+      "range": {
+        "startLine": 710,
+        "startChar": 22,
+        "endLine": 710,
+        "endChar": 55
+      },
+      "revId": "01be0a6000803fe43ae03dc59faba77ab4c2a6bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
