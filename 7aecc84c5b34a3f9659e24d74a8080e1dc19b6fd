@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d957a14_b3676a44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-25T03:32:35Z",
+      "side": 1,
+      "message": "Bypassing lint as change is 33e20747b47d in -stable and came in through that branch.",
+      "revId": "7aecc84c5b34a3f9659e24d74a8080e1dc19b6fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
