@@ -156,6 +156,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11b4a56b_82477e17",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:54:10Z",
+      "side": 1,
+      "message": "The main advantage is simply less code. Why add more code and complexity than needed? (Not much more complexity, but still more)\n\nAnother advantage is \"consistency\": in other cases, e.g. in __pkvm_set_pv_param(), we do host_share_hyp + pin_shared_mem without taking the lock for the whole period, so why do it here?\n\nFinally, it\u0027s generally better to keep critical sections shorter, not longer?\n\n...Fortunately in v6.18 all this discussion will be irrelevant. In the meantime, in v6.12, we can merge this as is, if you think saving some cycles by avoiding the extra lock/unlock is a good reason for slightly more complicated code here (I doubt so, but, well).",
+      "parentUuid": "57d2f9f8_eea09ccd",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5619c679_5db527df",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
         "patchSetId": 40
