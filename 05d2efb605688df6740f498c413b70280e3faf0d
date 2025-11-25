@@ -33,6 +33,24 @@
       "message": "Where is the in-kernel user of these symbols?  Why do they need to be exported now?",
       "revId": "05d2efb605688df6740f498c413b70280e3faf0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3fb0ee_0c9477fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1893826
+      },
+      "writtenOn": "2025-11-25T08:12:53Z",
+      "side": 1,
+      "message": "These APIs are required in vendor modules to register and enable SDEI events, and they are also exported in android16-6.12.",
+      "parentUuid": "05a4d952_916e4584",
+      "revId": "05d2efb605688df6740f498c413b70280e3faf0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
