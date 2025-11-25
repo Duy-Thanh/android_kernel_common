@@ -16,6 +16,24 @@
       "message": "Hmm... it doesn\u0027t look like we donate the root table to pKVM in this series? The host still has write access to it?",
       "revId": "bfaa6bdaf63b1c0f831ea55f41c81a3f743df630",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d74d8e82_0a333612",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-25T22:28:07Z",
+      "side": 1,
+      "message": "Nice catch! It was present in the previous implementation (single hypercall) with enable_iommu hypercall, but lost it when I abandoned that hypercall. I shall move aosp/3866292(readonly sharing api) before this refactor cl and write protect root table page in this cl with SRTP",
+      "parentUuid": "5e7ed6a1_2790056c",
+      "revId": "bfaa6bdaf63b1c0f831ea55f41c81a3f743df630",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
