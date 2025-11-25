@@ -163,7 +163,7 @@ const struct security_class_mapping secclass_map[] = {
 	{ "caif_socket", { COMMON_SOCK_PERMS, NULL } },
 	{ "alg_socket", { COMMON_SOCK_PERMS, NULL } },
 	{ "nfc_socket", { COMMON_SOCK_PERMS, NULL } },
-	{ "vsock_socket", { COMMON_SOCK_PERMS, NULL } },
+	{ "vsock_socket", { COMMON_SOCK_PERMS, "node_bind", "name_connect", NULL } },
 	{ "kcm_socket", { COMMON_SOCK_PERMS, NULL } },
 	{ "qipcrtr_socket", { COMMON_SOCK_PERMS, NULL } },
 	{ "smc_socket", { COMMON_SOCK_PERMS, NULL } },
