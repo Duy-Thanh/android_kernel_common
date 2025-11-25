@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a0a6fe_fe165001",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 41
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-25T21:41:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we also donate pasid_dir to hyp and mark it ro (I do not see this step anywhere, or maybe I am missing something)?\n\nSeems like host could still overwrite directory entry and point to fake, host controlled pasid table?",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "893d6769_cc46dda1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "\tif (!param-\u003epasid_dir_gpa)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 272,
+                "startChar": 0,
+                "endLine": 273,
+                "endChar": 0
+              },
+              "replacement": "\n\t/*\n\t * Donate the PASID directory page to the hypervisor and mark it read-only.\n\t * This prevents the host from modifying the directory entries after they\n\t * have been set up.\n\t */\n\tif (__pkvm_host_donate_hyp_request_ro(param-\u003epasid_dir_gpa, PAGE_SIZE)) {\n\t\tpkvm_err(\"pkvm: %s: failed to write protect pasid_dir page: %llx!\\n\",\n\t\t\t\t__func__, param-\u003epasid_dir_gpa);\n\t\tret \u003d -EFAULT;\n\t\tgoto out_unlock;\n\t}\n\n\tcontext-\u003elo \u003d host_gpa2hpa(param-\u003epasid_dir_gpa) | context_pdts(pds);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e45363395b8ad5364d84cae47184ffe19d9a75ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
