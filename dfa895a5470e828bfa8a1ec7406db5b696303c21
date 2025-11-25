@@ -46,6 +46,30 @@
       },
       "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02135026_960eee1a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-25T09:43:13Z",
+      "side": 1,
+      "message": "Ok - thanks for clarifying. Maybe it would be helpful to mention somewhere (commit log or comment) that pkvm_cache_tag_flush_range_np is based on existing cache_tag_flush_range_np (it is almost the same). Same for pkvm_cache_tag_flush_range.",
+      "parentUuid": "16c44bec_e033ff4b",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
