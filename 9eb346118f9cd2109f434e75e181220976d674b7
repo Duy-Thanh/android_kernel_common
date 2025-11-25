@@ -123,6 +123,24 @@
       "parentUuid": "a0249803_47f1d0e0",
       "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6662a4_6a5a3591",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "You meant, using PAGE_SHARED_OWNED for now? :)",
+      "parentUuid": "bc0d82ce_1d59ea57",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

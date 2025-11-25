@@ -1,0 +1,235 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f429e11_c221213a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "It seems actually not necessary to keep the host EPT lock locked all the time here. If we just call __pkvm_host_share_hyp_prot() (which locks and unlocks it) and then __pkvm_pin_shared_mem() (which also locks and unlocks it) then, the host may indeed maliciously or mistakenly unshare the page during the time window between __pkvm_host_share_hyp_prot() and __pkvm_pin_shared_mem(). But then, __pkvm_pin_shared_mem() will detect that the page state is OWNED instead of SHARED_OWNED, so it will fail, and thus __pkvm_host_donate_hyp_request_ro() will also fail?",
+      "fixSuggestions": [
+        {
+          "fixId": "7debc5f4_5d00abd3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1209,
+                "startChar": 0,
+                "endLine": 1210,
+                "endChar": 0
+              },
+              "replacement": "static int __pkvm_host_share_hyp_prot(u64 phys, u64 size, u64 prot)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1214,
+                "startChar": 0,
+                "endLine": 1215,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __pkvm_host_share_hyp_prot_locked(phys, size, prot);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1220,
+                "startChar": 0,
+                "endLine": 1221,
+                "endChar": 0
+              },
+              "replacement": "static int __pkvm_host_unshare_hyp_prot(u64 phys, u64 size, u64 prot)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1225,
+                "startChar": 0,
+                "endLine": 1226,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __pkvm_host_unshare_hyp_prot_locked(phys, size, prot);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1230,
+                "startChar": 0,
+                "endLine": 1230,
+                "endChar": 0
+              },
+              "replacement": "\nint __pkvm_host_share_hyp(u64 phys, u64 size)\n{\n\treturn __pkvm_host_share_hyp_prot(phys, size, HOST_EPT_DEF_MEM_PROT);\n}\n\nint __pkvm_host_unshare_hyp(u64 phys, u64 size)\n{\n\treturn __pkvm_host_unshare_hyp_prot(phys, size, HOST_EPT_DEF_MEM_PROT);\n}\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1253,
+                "startChar": 0,
+                "endLine": 1255,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __pkvm_host_share_hyp_prot(phys, size, HOST_EPT_RO_MEM_PROT);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1256,
+                "startChar": 0,
+                "endLine": 1257,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1258,
+                "startChar": 0,
+                "endLine": 1259,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __pkvm_pin_shared_mem(phys, size);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1260,
+                "startChar": 0,
+                "endLine": 1264,
+                "endChar": 0
+              },
+              "replacement": "\t\tWARN_ON(__pkvm_host_unshare_hyp_prot(phys, size, HOST_EPT_DEF_MEM_PROT));\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1272,
+                "startChar": 0,
+                "endLine": 1274,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d WARN_ON(__pkvm_unpin_shared_mem(phys, size));\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 1275,
+                "startChar": 0,
+                "endLine": 1278,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d __pkvm_host_unshare_hyp_prot(phys, size, HOST_EPT_DEF_MEM_PROT);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5619c679_5db527df",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "Similarly here: we can just __pkvm_host_unshare_hyp_prot() + __pkvm_unpin_shared_mem(), and if the host does something bad between the two, we will detect that and just fail?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7200fb5_3874e908",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "nit: this function doesn\u0027t \"request\" read access, it gives read access to the host who requested it. :) \n\nSo maybe e.g. __pkvm_host_donate_hyp_share_ro() like I suggested before?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a798c9_0ea146da",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "It is probably gonna be quite confusing that the function is \"host_donate_hyp\" while the host page state becomes SHARED_OWNED. So maybe explain why we are doing it this way, i.e. that for \"simplicity\" (or more precisely, to minimize changes to the already overcomplicated implementation of memory protection API in v6.12), donation is actually implemented via sharing + pinning, so the host formally remains the \"owner\" of the pages, but in fact the host has only read access to them, while the hypervisor has full access (so essentially the end result is the same as if the pages were actually donated to the hypervisor and then shared read-only with the host)?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2f71b1_1bf37f91",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T23:00:59Z",
+      "side": 1,
+      "message": "This name sounds quite unclear. If the other function is named __pkvm_host_donate_hyp_request_ro(), let\u0027s call this one __pkvm_hyp_donate_host_release_ro()?\n\nBTW in v6.18, I suppose, in pkvm_host_donate_hyp_share_ro() we\u0027ll be able to do actual donation + share (i.e. hypervisor will become the owner, and the host\u0027s state will become SHARED_BORROWED), and then we will not need a separate function for undonating such donations, we will just reuse pkvm_hyp_donate_host() which we will extend to allow both NONE and SHARED_BORROWED as the host\u0027s input state (similarly to undonating from pVM to host).",
+      "fixSuggestions": [
+        {
+          "fixId": "fe798308_ede3d6b8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+              "range": {
+                "startLine": 293,
+                "startChar": 0,
+                "endLine": 294,
+                "endChar": 0
+              },
+              "replacement": " * __pkvm_hyp_donate_host_release_ro() - Release the pages donated by\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "int __pkvm_hyp_donate_host_release_ro(u64 phys, u64 size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
