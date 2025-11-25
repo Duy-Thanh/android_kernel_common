@@ -52,6 +52,24 @@
       "parentUuid": "8baa52ee_0a0cc9a3",
       "revId": "b6f71e97a5cfdde957265ab6dfd05eb4f7f2fa7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73153fb1_234abbc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026025
+      },
+      "writtenOn": "2025-11-25T11:03:42Z",
+      "side": 1,
+      "message": "d\u0027oh, thank you! uploaded v4 after `git-reapply`.",
+      "parentUuid": "7349cfb0_d656cef3",
+      "revId": "b6f71e97a5cfdde957265ab6dfd05eb4f7f2fa7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
