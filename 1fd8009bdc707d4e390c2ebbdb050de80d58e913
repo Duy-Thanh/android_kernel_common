@@ -232,6 +232,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52a4d75_888fba4a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T13:15:21Z",
+      "side": 1,
+      "message": "\u003e There has been a bug about throughput degradation with pkvm, i am slightly concerned if it will resurface - need to do some benchmarks to see the effect.\n\nEven with that \"degradation\" they still had several Gbps of wifi throughput. :)",
+      "parentUuid": "b9c9cd52_1a0ad6a9",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
