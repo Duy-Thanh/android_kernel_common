@@ -280,6 +280,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11f6c672_3bae552d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-26T16:42:40Z",
+      "side": 1,
+      "message": "Changed the logic to flush unconditionally and added some comments",
+      "parentUuid": "e29b2704_627c3599",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
