@@ -88,6 +88,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c9e672_325d5979",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T01:19:44Z",
+      "side": 1,
+      "message": "Good point... Somehow I was too lazy (pun intended) to think about this when I suggested offline to pass this flag in this hypercall.\n\nWe do force flushing IOTLB when donating pages, but only for those devices/domains that use the host EPT as the IOMMU page table (i.e. which use passthrough mode, not strict or lazy). And as Aashish found out in aosp/3818903, it means that in fact we only flush FLPT_DEFAULT_DID in that case. \n\nNow, if we want to allow this postponing of IOTLB flushing after unmap to support lazy mode, it means we\u0027d need to extend that flush-on-donate to flush other DIDs as well, and we\u0027d need to remember which ones? i.e. extra complexity...\n\nSo indeed, it might be better to not try to be smart, and just force flushing IOTLB after unmap, i.e. give up on efficiently supporting lazy mode?\n\nBTW if in the future we extend pvIOMMU to support using nested translation in scalable mode, then IIUC we\u0027re gonna automatically efficiently support lazy mode in such case (the host will control the 1st stage of translation and will not use map/unmap hypercalls anyway, it will only use submit_qi hypercalls to flush the 1st-stage IOTLB when it wishes to, and pKVM will ensure protection regardless of that, since pKVM will control the 2nd stage of translation).",
+      "parentUuid": "793701ea_1cd16d50",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
