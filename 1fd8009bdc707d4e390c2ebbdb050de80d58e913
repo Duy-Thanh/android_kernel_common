@@ -256,6 +256,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29b2704_627c3599",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-26T13:21:43Z",
+      "side": 1,
+      "message": "\u003e\u003e Since we are all deciding on this, does it make sense to select CONFIG_IOMMU_DEFAULT_DMA_STRICT for CONFIG_PKVM_INTEL?\n\n\u003e Why? So far we\u0027ve been even using CONFIG_IOMMU_DEFAULT_PASSTHROUGH in our builds all the time. It is not pKVM\u0027s business to dictate the host\u0027s default DMA policy?\n\n\u003e We might consider e.g. advertising \"caching mode\" again, to let the host driver disable lazy mode: https://android.googlesource.com/kernel/common/+/6ae086d5c9745dfb29a98703de9ddd5e1be08cf3/drivers/iommu/intel/iommu.c#3125 just to avoid unneeded submit_qi hypercalls during batched flushes. But even that feels unnecessary to me. (And BTW as a matter of fact, the host driver disables it in legacy mode only - see !first_level_by_default() check there.)\n\nYeah - sorry I\u0027ve answered too quickly and assumed that we want forbid using lazy mode that way. But looking on it again I agree with Dima - sorry for confusion.",
+      "parentUuid": "b9c9cd52_1a0ad6a9",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
