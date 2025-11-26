@@ -1650,9 +1650,6 @@ unlock:
 	return ret;
 }
 
-/*
- * Rejects MMIO regions and does not update the IOMMU. Use with care!
- */
 int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 {
 	u64 size, phys = hyp_pfn_to_phys(pfn), end;
@@ -1668,16 +1665,12 @@ int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 	if (ret)
 		goto unlock;
 
-	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_FFA, true, 0, false));
-
+	WARN_ON(host_stage2_set_owner_locked(phys, size, PKVM_ID_FFA));
 unlock:
 	host_unlock_component();
 	return ret;
 }
 
-/*
- * Just like __pkvm_donate_ffa, rejects MMIO regions and does not update the IOMMU.
- */
 int __pkvm_host_reclaim_ffa(u64 pfn, u64 nr_pages)
 {
 	u64 size, phys = hyp_pfn_to_phys(pfn), end;
@@ -1693,8 +1686,7 @@ int __pkvm_host_reclaim_ffa(u64 pfn, u64 nr_pages)
 	if (ret)
 		goto unlock;
 
-	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST, true, 0, false));
-
+	WARN_ON(host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST));
 unlock:
 	host_unlock_component();
 	return ret;
