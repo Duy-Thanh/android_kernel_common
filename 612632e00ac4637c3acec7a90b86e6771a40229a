@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48fb8b1_5aba3027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-26T16:35:42Z",
+      "side": 1,
+      "message": "Split into 2 patches to separate the binder change from the config change. The binder change needs to be sent upstream for review.",
+      "revId": "612632e00ac4637c3acec7a90b86e6771a40229a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
