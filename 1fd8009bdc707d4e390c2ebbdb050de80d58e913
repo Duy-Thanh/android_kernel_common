@@ -160,6 +160,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7817189_0c50de9e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-26T12:37:08Z",
+      "side": 1,
+      "message": "\u003e But anyway, we don\u0027t need to implement that right now? We might implement that later if we want to, maybe initially just as a PoC, for comparing performance in lazy mode vs other modes?\nSo for now, let\u0027s just always flush IOTLB on unmap?\n\n\nYeah - let\u0027s just flash IOTLB on unmap unconditionally and move forward - we can revisit and work on optimization for 6.18 😊\n\n\u003e Since we are all deciding on this, does it make sense to select CONFIG_IOMMU_DEFAULT_DMA_STRICT for CONFIG_PKVM_INTEL?\n\nI think yes.",
+      "parentUuid": "151b31fd_3b499336",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
