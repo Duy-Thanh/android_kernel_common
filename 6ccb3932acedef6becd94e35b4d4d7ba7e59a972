@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04f8c877_335d0f01",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T23:25:18Z",
+      "side": 1,
+      "message": "Now looking at the latest version of aosp/3786919, pkvm_iommu_context_addr() may succeed (and thus the hypercall may succeed) but still not update context_gpa to NULL (in case there was already a present context entry for this bus). In such case `ret` is 0, but we should still free this page?\n\nFurthermore, the hypercall may also fail even before calling pkvm_iommu_context_addr(). In such case, context_gpa is not NULL, but we should still free this page?\n\nSo the condition should be `ret || param.context_gpa`?",
+      "parentUuid": "dcbeb18e_abf3b32a",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
