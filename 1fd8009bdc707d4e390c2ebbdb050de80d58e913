@@ -136,6 +136,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "151b31fd_3b499336",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T12:30:34Z",
+      "side": 1,
+      "message": "\u003e Now, if we want to allow this postponing of IOTLB flushing after unmap to support lazy mode, it means we\u0027d need to extend that flush-on-donate to flush other DIDs as well, and we\u0027d need to remember which ones? i.e. extra complexity...\n\nAfter more thinking, _maybe_ it would be actually interesting to implement that (maybe slightly similarly to the host\u0027s \"IOTLB gathering\", but not quite the same), and maybe it would even be not too complicated. I\u0027m wondering how exactly we would allocate memory for that. Using memcache, I suppose? :)\n\nBut anyway, we don\u0027t need to implement that right now? We might implement that later if we want to, maybe initially just as a PoC, for comparing performance in lazy mode vs other modes?\n\nSo for now, let\u0027s just always flush IOTLB on unmap?",
+      "parentUuid": "47c9e672_325d5979",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
