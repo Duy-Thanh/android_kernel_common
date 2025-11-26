@@ -16,6 +16,24 @@
       "message": "Could you please help to retrigger the presubmit?",
       "revId": "8f6d26b6f361d81be1850694731920bd16b5bd27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a3e20a_89bb7a07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-26T10:52:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5760054c_f2a4a986",
+      "revId": "8f6d26b6f361d81be1850694731920bd16b5bd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
