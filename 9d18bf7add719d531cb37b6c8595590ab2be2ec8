@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099075bb_c8912589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-11-26T19:06:31Z",
+      "side": 1,
+      "message": "Other than that, looks good to me.",
+      "revId": "9d18bf7add719d531cb37b6c8595590ab2be2ec8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82730852_e31a6573",
+        "filename": "mm/gup.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-11-26T19:06:31Z",
+      "side": 1,
+      "message": "Please remove the comment.",
+      "range": {
+        "startLine": 2144,
+        "startChar": 0,
+        "endLine": 2144,
+        "endChar": 74
+      },
+      "revId": "9d18bf7add719d531cb37b6c8595590ab2be2ec8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
