@@ -112,6 +112,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a6be8f_f8e658e8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-26T12:29:24Z",
+      "side": 1,
+      "message": "\u003e because host unmaps the page and consider it as free one, host could donate it to pVM and use DMA with stale entries to e.g. read some secrets from pVM (if the flush is omitted)?\n\nAhh indeed, I didn\u0027t think it that through to see this window of race when page donation is involved. Thanks for pointing it out. :-)\n\n\u003e So indeed, it might be better to not try to be smart, and just force flushing IOTLB after unmap, i.e. give up on efficiently supporting lazy mode?\n\nmakes sense. If performance becomes a bottleneck because of this, we can revisit later. I have some ideas about using hyp_page(we use it in this code path for refcounting) to cache the DID/iommu information so that we can selectively flush when the page is donated. Need to see how it can be done space efficiently.\n\nSince we are all deciding on this, does it make sense to select `CONFIG_IOMMU_DEFAULT_DMA_STRICT` for `CONFIG_PKVM_INTEL`?",
+      "parentUuid": "47c9e672_325d5979",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
