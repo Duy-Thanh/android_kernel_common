@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf8797a_5607714d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T20:17:36Z",
+      "side": 1,
+      "message": "nit: s/sensitve/sensitive/\n\n...But actually, this comment is IMO a bit too specific. pKVM must protect any pVM pages even if they don\u0027t happen to contain sensitive data, that is pKVM\u0027s job.\n\nAlso, if a device can write to those pages, it is just as bad as if it can read them.\n\nAlso, exactly the same applies to donating pages to the hypervisor, not just to a pVM.\n\nSo maybe just something like: \"Regardless of the DMA mode used by host (i.e. strict or lazy), always perform iotlb flush on unmap. Unmapped pages may be donated to a pVM or to the hypervisor. Until a flush happens, stale entries in the IOTLB could enable a device to access those pages, violating isolation guarantees.\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "b6b92a52_1851758e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 711,
+                "startChar": 0,
+                "endLine": 716,
+                "endChar": 0
+              },
+              "replacement": "\t * Regardless of the DMA mode used by host (i.e. strict or lazy), always\n\t * perform iotlb flush on unmap. Un-mapped pages may be donated to a pVM\n\t * or to the hypervisor. Until a flush happens, stale entries in the\n\t * IOTLB could enable a device to access those pages, violating isolation\n\t * guarantees.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17c5fc5d89e65cf9b369589cd9040d879f83f761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
