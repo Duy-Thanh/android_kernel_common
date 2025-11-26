@@ -208,6 +208,30 @@
       },
       "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c9cd52_1a0ad6a9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-26T13:02:10Z",
+      "side": 1,
+      "message": "\u003e Please bear in mind that increasing hyp_page size would proportionally increase the total vmemmap size and thus the total pKVM\u0027s reserved memory size.\n\nYeah, thats what I wanted to investigate on. Instead of adding fields, reuse the fields to encode the data we need. The idea was to hold on to the page until a cache flush when the refcount becomes zero(hence refcount could be reused). But I have not looked into how refcount is used by pkvm so this idea may or maynot be possible ;-).\n\n\u003e It seems an overkill to increase it just to address this corner case?\n\nWas planning only if the performance is unacceptable. There has been a bug about throughput degradation with pkvm, i am slightly concerned if it will resurface - need to do some benchmarks to see the effect.\n\n\u003e We might consider e.g. advertising \"caching mode\" again, to let the host driver disable lazy mode: https://android.googlesource.com/kernel/common/+/6ae086d5c9745dfb29a98703de9ddd5e1be08cf3/drivers/iommu/intel/iommu.c#3125 just to avoid unneeded submit_qi hypercalls during batched flushes. But even that feels unnecessary to me. (And BTW as a matter of fact, the host driver disables it in legacy mode only - see !first_level_by_default() check there.)\n\nOk understood. There has been couple of discussion in mails and stuff regadring enabling DMA isolation for all devices, so I thought it would be worth making STRICT default if we plan to go the DMA route.\n\nFor now, I think we can still have this CL and flush it always as Greg suggested(instead of passing it as a hypercall param). On the host side, we will avoid flushing if DMA and pkvm_enabled",
+      "parentUuid": "6dcf998f_86aa6cfe",
+      "range": {
+        "startLine": 689,
+        "startChar": 31,
+        "endLine": 689,
+        "endChar": 46
+      },
+      "revId": "1fd8009bdc707d4e390c2ebbdb050de80d58e913",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
