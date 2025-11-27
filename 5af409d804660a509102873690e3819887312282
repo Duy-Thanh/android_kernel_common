@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d48c50b9_175b097a",
+        "filename": "security/selinux/include/policycap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-27T07:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22d590e4_ada73f45",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 26
+      },
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6401ae6_7789e60c",
@@ -136,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "992c75cf_a0409be3",
+        "filename": "security/selinux/include/policycap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-27T07:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f9d2140_58a99beb",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af608a93_d6274f7c",
@@ -167,6 +215,24 @@
       "side": 1,
       "message": "\u003e  Is this a one shot addition to kabi to get these 4 policies added and then afterwards kabi would be affected?\n\nI\u0027m new to the KMI stability concept and thought these new identities were not in the KMI ABI since abi.sig wasn\u0027t updated. If we cannot add  new members even to this new array, right it is not what we intended, which I have to fix.",
       "parentUuid": "af608a93_d6274f7c",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a3e62c_8723ef73",
+        "filename": "security/selinux/include/policycap_names.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-27T07:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1372166_291f87fa",
       "revId": "5af409d804660a509102873690e3819887312282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -208,6 +274,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44245077_41336343",
+        "filename": "security/selinux/selinuxfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1900,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-27T07:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74652a78_9249a168",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64cc485a_a482b91d",
         "filename": "security/selinux/ss/services.c",
         "patchSetId": 3
@@ -219,6 +303,24 @@
       "writtenOn": "2025-11-21T18:27:46Z",
       "side": 1,
       "message": "Similarly I wonder if handling the android extensions in a separate function would minimize diverging this function from upstream.",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fc36cd_70160d10",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2025-11-27T07:47:40Z",
+      "side": 1,
+      "message": "I couldn\u0027t factor out the Android part (including the existing code) well, since the function has multiple places to consider Android policy capabilities. Let me know if you have any better ideas.",
+      "parentUuid": "64cc485a_a482b91d",
       "revId": "5af409d804660a509102873690e3819887312282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
