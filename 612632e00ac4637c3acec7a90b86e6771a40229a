@@ -16,6 +16,24 @@
       "message": "Split into 2 patches to separate the binder change from the config change. The binder change needs to be sent upstream for review.",
       "revId": "612632e00ac4637c3acec7a90b86e6771a40229a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2067af2_3d649937",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4431829
+      },
+      "writtenOn": "2025-11-27T01:09:53Z",
+      "side": 1,
+      "message": "I uploaded binder change as below commit.\nhttps://android-review.googlesource.com/c/kernel/common/+/3869414",
+      "parentUuid": "c48fb8b1_5aba3027",
+      "revId": "612632e00ac4637c3acec7a90b86e6771a40229a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
