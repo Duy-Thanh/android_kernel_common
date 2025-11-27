@@ -141,6 +141,24 @@
       "parentUuid": "bc0d82ce_1d59ea57",
       "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eccd0a03_7076fab0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T14:36:33Z",
+      "side": 1,
+      "message": "Sorry my bad, it was atypo, I meant PAGE_SHARED_OWNED :-)",
+      "parentUuid": "7c6662a4_6a5a3591",
+      "revId": "9eb346118f9cd2109f434e75e181220976d674b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

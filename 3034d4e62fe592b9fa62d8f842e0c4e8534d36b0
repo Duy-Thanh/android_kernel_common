@@ -174,6 +174,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa6a8bc5_71594a81",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T14:36:33Z",
+      "side": 1,
+      "message": "\u003e Another advantage is \"consistency\": in other cases, e.g. in __pkvm_set_pv_param(), we do host_share_hyp + pin_shared_mem without taking the lock for the whole period, so why do it here?\n\nI was considering examples like __pkvm_set_pv_param() as an external consumer, but since we are coming up with a new api, we could take the liberty of refactoring the private code a bit to let the api be atomic conceptually. I had to refactor out the share/unshare function to accept the prot parameter anyways and hence I thought it would be worth moving out the locking logic.\n\n\u003e Finally, it\u0027s generally better to keep critical sections shorter, not longer?\n\nI thought about it while writing this code. Since we are inside pkvm and interrupts disabled, I considered it as an implied critical section. We could definitely have other cpus waiting for the lock, but it would be either this cpu releasing the lock and waiting or the other cpu waiting - kind of a tradeoff. So I thought it would be okay :-).\n\n\u003e Fortunately in v6.18 all this discussion will be irrelevant. In the meantime, in v6.12, we can merge this as is, if you think saving some cycles by avoiding the extra lock/unlock is a good reason for slightly more complicated code here (I doubt so, but, well).\n\nthanks for explaining 6.18 scenario, yeah feels like this discussion would be irrelavant. I would like to keep this as it is, if its okay with you :-)",
+      "parentUuid": "11b4a56b_82477e17",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5619c679_5db527df",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
         "patchSetId": 40
@@ -224,6 +242,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6735e428_56b6f10f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T14:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd48fb4c_5cb9c9c9",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9a798c9_0ea146da",
@@ -237,6 +273,24 @@
       "writtenOn": "2025-11-25T23:00:59Z",
       "side": 1,
       "message": "It is probably gonna be quite confusing that the function is \"host_donate_hyp\" while the host page state becomes SHARED_OWNED. So maybe explain why we are doing it this way, i.e. that for \"simplicity\" (or more precisely, to minimize changes to the already overcomplicated implementation of memory protection API in v6.12), donation is actually implemented via sharing + pinning, so the host formally remains the \"owner\" of the pages, but in fact the host has only read access to them, while the hypervisor has full access (so essentially the end result is the same as if the pages were actually donated to the hypervisor and then shared read-only with the host)?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9362b5_0e4a7923",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T14:36:33Z",
+      "side": 1,
+      "message": "Updated the comment as you suggested",
+      "parentUuid": "b9a798c9_0ea146da",
       "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -282,6 +336,24 @@
           ]
         }
       ],
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5f36e1_1d72d7a0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T14:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed2f71b1_1bf37f91",
       "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
