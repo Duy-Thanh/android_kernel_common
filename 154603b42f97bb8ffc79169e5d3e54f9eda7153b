@@ -34,6 +34,24 @@
       "parentUuid": "7b219ece_59a0fa21",
       "revId": "154603b42f97bb8ffc79169e5d3e54f9eda7153b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ecf4f8_dc4e89f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-27T02:15:01Z",
+      "side": 1,
+      "message": "Can we add some more detail about where this was missed and why it is needed in the commit message then? From a quick glance it looked like it was fixing the patch before it.",
+      "parentUuid": "4764849a_eb12d4fb",
+      "revId": "154603b42f97bb8ffc79169e5d3e54f9eda7153b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
