@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d6399e_2b31fc84",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-27T14:45:21Z",
+      "side": 1,
+      "message": "nit: s/shared/share/ (or \"share them\")?",
+      "fixSuggestions": [
+        {
+          "fixId": "b4617a0b_600d7a89",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+              "range": {
+                "startLine": 277,
+                "startChar": 0,
+                "endLine": 278,
+                "endChar": 0
+              },
+              "replacement": " * and share them back with host as readonly.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f0bb0ed00f763b352d0cb485e6116d3a5d0eac97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
