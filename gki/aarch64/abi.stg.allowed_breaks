@@ -96,3 +96,10 @@ type 'struct selinux_state' changed
   2 members ('bool android_netlink_route' .. 'bool android_netlink_getneigh') changed
     offset changed by 24
 
+type 'struct selinux_state' changed
+  member changed from 'bool policycap[12]' to 'bool policycap[9]'
+    type changed from 'bool[12]' to 'bool[9]'
+      number of elements changed from 12 to 9
+  2 members ('bool android_netlink_route' .. 'bool android_netlink_getneigh') changed
+    offset changed by -24
+
