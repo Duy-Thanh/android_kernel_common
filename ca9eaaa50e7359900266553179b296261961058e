@@ -16,6 +16,24 @@
       "message": "```\nERROR: /mnt/disks/build-disk/src/android/common-android-mainline/common/BUILD.bazel:284:14: Creating kernel config (debug;notrim) //common:kernel_x86_64_config failed: (Exit 1): bash failed: error executing KernelConfig command (from target //common:kernel_x86_64_config) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n--- common/arch/x86/configs/gki_defconfig\t2025-11-24 11:35:39.763219136 +0000\n+++ /mnt/disks/build-disk/src/android/common-android-mainline/out/bazel/output_user_root/5eb738bf612d494239553bcc21fe7c03/sandbox/linux-sandbox/491/execroot/_main/out/android-mainline/common/defconfig\t2025-11-24 11:36:34.720201944 +0000\n@@ -56,7 +56,6 @@\n CONFIG_PROFILING\u003dy\n CONFIG_RUST\u003dy\n CONFIG_SMP\u003dy\n-CONFIG_X86_FRED\u003dy\n CONFIG_X86_INTEL_LPSS\u003dy\n CONFIG_HYPERVISOR_GUEST\u003dy\n CONFIG_PARAVIRT\u003dy\nERROR: savedefconfig does not match common/arch/x86/configs/gki_defconfig\n```\n\n---\n\nMaybe `CONFIG_X86_64` also needs to be added explicitly?\n\n---\n\nTry running just this command when you make changes.\n\n```\nbazel build //common:kernel_x86_64_config\n```",
       "revId": "ca9eaaa50e7359900266553179b296261961058e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981e5018_b2873c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3758251
+      },
+      "writtenOn": "2025-11-27T05:26:09Z",
+      "side": 1,
+      "message": "We no longer needed this commit to be added in android-mainline kernel. FRED is selected if KVM_INTEL config is enabled.\n\nThis is been added recently in mainline kernel, here is the commit reference\n\nKernel commit: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d28d11e4548b75d0960429344f12d5f6cc9cee25b \n\nAOSP commit: https://android.googlesource.com/kernel/common/+/28d11e4548b75d0960429344f12d5f6cc9cee25b \n\nAnd in android-mainline we already have KVM_INTEL\u003dY. With above commit no further config needed to enable FRED in android-mainline.",
+      "parentUuid": "c4417c30_080e2214",
+      "revId": "ca9eaaa50e7359900266553179b296261961058e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
