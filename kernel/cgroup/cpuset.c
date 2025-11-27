@@ -436,9 +436,15 @@ static inline int alloc_cpumasks(struct cpuset *cs, struct tmpmasks *tmp)
 	if (pmask4 && !zalloc_cpumask_var(pmask4, GFP_KERNEL))
 		goto free_three;
 
+	if (cs && !zalloc_cpumask_var(&cs->cpus_requested, GFP_KERNEL))
+		goto free_four;
+
 
 	return 0;
 
+free_four:
+	if (pmask4)
+		free_cpumask_var(*pmask4);
 free_three:
 	free_cpumask_var(*pmask3);
 free_two:
@@ -457,6 +463,7 @@ static inline void free_cpumasks(struct cpuset *cs, struct tmpmasks *tmp)
 {
 	if (cs) {
 		free_cpumask_var(cs->cpus_allowed);
+		free_cpumask_var(cs->cpus_requested);
 		free_cpumask_var(cs->effective_cpus);
 		free_cpumask_var(cs->effective_xcpus);
 		free_cpumask_var(cs->exclusive_cpus);
@@ -486,6 +493,7 @@ static struct cpuset *alloc_trial_cpuset(struct cpuset *cs)
 	}
 
 	cpumask_copy(trial->cpus_allowed, cs->cpus_allowed);
+	cpumask_copy(trial->cpus_requested, cs->cpus_requested);
 	cpumask_copy(trial->effective_cpus, cs->effective_cpus);
 	cpumask_copy(trial->effective_xcpus, cs->effective_xcpus);
 	cpumask_copy(trial->exclusive_cpus, cs->exclusive_cpus);
@@ -505,13 +513,13 @@ static inline void free_cpuset(struct cpuset *cs)
 /* Return user specified exclusive CPUs */
 static inline struct cpumask *user_xcpus(struct cpuset *cs)
 {
-	return cpumask_empty(cs->exclusive_cpus) ? cs->cpus_allowed
+	return cpumask_empty(cs->exclusive_cpus) ? cs->cpus_requested
 						 : cs->exclusive_cpus;
 }
 
 static inline bool xcpus_empty(struct cpuset *cs)
 {
-	return cpumask_empty(cs->cpus_allowed) &&
+	return cpumask_empty(cs->cpus_requested) &&
 	       cpumask_empty(cs->exclusive_cpus);
 }
 
@@ -1142,7 +1150,7 @@ void cpuset_update_tasks_cpumask(struct cpuset *cs, struct cpumask *new_cpus)
 static void compute_effective_cpumask(struct cpumask *new_cpus,
 				      struct cpuset *cs, struct cpuset *parent)
 {
-	cpumask_and(new_cpus, cs->cpus_allowed, parent->effective_cpus);
+	cpumask_and(new_cpus, cs->cpus_requested, parent->effective_cpus);
 }
 
 /*
@@ -2226,23 +2234,19 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 		return -EACCES;
 
 	/*
-	 * An empty cpus_allowed is ok only if the cpuset has no tasks.
+	 * An empty cpus_requested is ok only if the cpuset has no tasks.
 	 * Since cpulist_parse() fails on an empty mask, we special case
 	 * that parsing.  The validate_change() call ensures that cpusets
 	 * with tasks have cpus.
 	 */
 	if (!*buf) {
-		cpumask_clear(trialcs->cpus_allowed);
+		cpumask_clear(trialcs->cpus_requested);
 		if (cpumask_empty(trialcs->exclusive_cpus))
 			cpumask_clear(trialcs->effective_xcpus);
 	} else {
-		retval = cpulist_parse(buf, trialcs->cpus_allowed);
+		retval = cpulist_parse(buf, trialcs->cpus_requested);
 		if (retval < 0)
 			return retval;
-
-		if (!cpumask_subset(trialcs->cpus_allowed,
-				    top_cpuset.cpus_allowed))
-			return -EINVAL;
 
 		/*
 		 * When exclusive_cpus isn't explicitly set, it is constrainted
@@ -2254,8 +2258,13 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 			compute_effective_exclusive_cpumask(trialcs, NULL);
 	}
 
+	if (!cpumask_subset(trialcs->cpus_requested, cpu_present_mask))
+		return -EINVAL;
+
+	cpumask_and(trialcs->cpus_allowed, trialcs->cpus_requested, cpu_active_mask);
+
 	/* Nothing to do if the cpus didn't change */
-	if (cpumask_equal(cs->cpus_allowed, trialcs->cpus_allowed))
+	if (cpumask_equal(cs->cpus_requested, trialcs->cpus_requested))
 		return 0;
 
 	if (alloc_cpumasks(NULL, &tmp))
@@ -2341,6 +2350,7 @@ static int update_cpumask(struct cpuset *cs, struct cpuset *trialcs,
 
 	spin_lock_irq(&callback_lock);
 	cpumask_copy(cs->cpus_allowed, trialcs->cpus_allowed);
+	cpumask_copy(cs->cpus_requested, trialcs->cpus_requested);
 	cpumask_copy(cs->effective_xcpus, trialcs->effective_xcpus);
 	if ((old_prs > 0) && !is_partition_valid(cs))
 		reset_partition_data(cs);
@@ -3209,7 +3219,7 @@ int cpuset_common_seq_show(struct seq_file *sf, void *v)
 
 	switch (type) {
 	case FILE_CPULIST:
-		seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs->cpus_allowed));
+		seq_printf(sf, "%*pbl\n", cpumask_pr_args(cs->cpus_requested));
 		break;
 	case FILE_MEMLIST:
 		seq_printf(sf, "%*pbl\n", nodemask_pr_args(&cs->mems_allowed));
@@ -3481,6 +3491,7 @@ static int cpuset_css_online(struct cgroup_subsys_state *css)
 	cs->mems_allowed = parent->mems_allowed;
 	cs->effective_mems = parent->mems_allowed;
 	cpumask_copy(cs->cpus_allowed, parent->cpus_allowed);
+	cpumask_copy(cs->cpus_requested, parent->cpus_requested);
 	cpumask_copy(cs->effective_cpus, parent->cpus_allowed);
 	spin_unlock_irq(&callback_lock);
 out_unlock:
@@ -3681,6 +3692,7 @@ struct cgroup_subsys cpuset_cgrp_subsys = {
 int __init cpuset_init(void)
 {
 	BUG_ON(!alloc_cpumask_var(&top_cpuset.cpus_allowed, GFP_KERNEL));
+	BUG_ON(!alloc_cpumask_var(&top_cpuset.cpus_requested, GFP_KERNEL));
 	BUG_ON(!alloc_cpumask_var(&top_cpuset.effective_cpus, GFP_KERNEL));
 	BUG_ON(!alloc_cpumask_var(&top_cpuset.effective_xcpus, GFP_KERNEL));
 	BUG_ON(!alloc_cpumask_var(&top_cpuset.exclusive_cpus, GFP_KERNEL));
@@ -3688,6 +3700,7 @@ int __init cpuset_init(void)
 	BUG_ON(!zalloc_cpumask_var(&isolated_cpus, GFP_KERNEL));
 
 	cpumask_setall(top_cpuset.cpus_allowed);
+	cpumask_setall(top_cpuset.cpus_requested);
 	nodes_setall(top_cpuset.mems_allowed);
 	cpumask_setall(top_cpuset.effective_cpus);
 	cpumask_setall(top_cpuset.effective_xcpus);
