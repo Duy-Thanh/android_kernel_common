@@ -50827,6 +50827,11 @@ member {
   offset: 128
 }
 member {
+  id: 0x3d2dbebd
+  type_id: 0x7b98a85e
+  offset: 768
+}
+member {
   id: 0x3d316dce
   type_id: 0x7bebd4ad
   offset: 64
@@ -107596,6 +107601,11 @@ member {
   name: "ep"
   type_id: 0x0399ec3e
   offset: 64
+}
+member {
+  id: 0xb5a82535
+  name: "ep"
+  type_id: 0x0e2680c2
 }
 member {
   id: 0x3b08524b
@@ -273483,6 +273493,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x7b98a85e
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xb5a82535
+    member_id: 0x21c53df9
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x7ba2ddfd
   kind: UNION
   definition {
@@ -343344,7 +343364,7 @@ struct_union {
     member_id: 0x2c35055f
     member_id: 0x20000016
     member_id: 0x92f98fb9
-    member_id: 0x415b0412
+    member_id: 0x3d2dbebd
   }
 }
 struct_union {
