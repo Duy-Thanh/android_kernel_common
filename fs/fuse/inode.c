@@ -95,8 +95,12 @@ static struct inode *fuse_alloc_inode(struct super_block *sb)
 	if (!fi)
 		return NULL;
 
-	fi->i_time = 0;
+	/* Initialize private data (i.e. everything except fi->inode) */
+	BUILD_BUG_ON(offsetof(struct fuse_inode, inode) != 0);
+	memset((void *) fi + sizeof(fi->inode), 0, sizeof(*fi) - sizeof(fi->inode));
+
 	fi->inval_mask = ~0;
+<<<<<<< HEAD   (94c5c55c827ef85ac87ff9a81cdd71e4028988ed Merge 9001552e105f ("usb: gadget: f_ncm: Fix MAC assignment )
 #ifdef CONFIG_FUSE_BPF
 	fi->backing_inode = NULL;
 	fi->bpf = NULL;
@@ -108,6 +112,15 @@ static struct inode *fuse_alloc_inode(struct super_block *sb)
 	fi->orig_ino = 0;
 	fi->state = 0;
 	fi->submount_lookup = NULL;
+||||||| BASE   (9001552e105ffa8d0e62667d455cc967528dd70b usb: gadget: f_ncm: Fix MAC assignment NCM ethernet)
+	fi->nodeid = 0;
+	fi->nlookup = 0;
+	fi->attr_version = 0;
+	fi->orig_ino = 0;
+	fi->state = 0;
+	fi->submount_lookup = NULL;
+=======
+>>>>>>> BRANCH (a7953bf985221b927ffdcbcf335e93523a9841a6 fuse: zero initialize inode private data)
 	mutex_init(&fi->mutex);
 	spin_lock_init(&fi->lock);
 	fi->forget = fuse_alloc_forget();
