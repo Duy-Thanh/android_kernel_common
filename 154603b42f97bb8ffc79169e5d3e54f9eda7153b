@@ -16,6 +16,24 @@
       "message": "Please fold this change down into the one before it.",
       "revId": "154603b42f97bb8ffc79169e5d3e54f9eda7153b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4764849a_eb12d4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4257021
+      },
+      "writtenOn": "2025-11-27T02:11:09Z",
+      "side": 1,
+      "message": "Missed exporting android_rvh_gic_v3_set_affinity in this change.\nhttps://android-review.googlesource.com/c/kernel/common/+/2420020",
+      "parentUuid": "7b219ece_59a0fa21",
+      "revId": "154603b42f97bb8ffc79169e5d3e54f9eda7153b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
