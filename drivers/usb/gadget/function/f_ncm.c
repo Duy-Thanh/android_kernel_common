@@ -1447,11 +1447,31 @@ static int ncm_bind(struct usb_configuration *c, struct usb_function *f)
 		mutex_lock(&ncm_opts->lock);
 		gether_set_gadget(ncm_opts->net, cdev->gadget);
 		status = gether_register_netdev(ncm_opts->net);
+<<<<<<< HEAD   (a39b693ba4474c6adb343c75e69d26e607bfdfd1 Revert "thunderbolt: Use is_pciehp instead of is_hotplug_bri)
 		mutex_unlock(&ncm_opts->lock);
 		if (status)
 			goto fail;
 		ncm_opts->bound = true;
 	}
+||||||| BASE   (9e2c2d3e720977372b81691bd0f657c284ef96a6 iio: adc: imx93_adc: load calibrated values even calibration)
+	mutex_unlock(&ncm_opts->lock);
+
+	if (status)
+		return status;
+
+	ncm_opts->bound = true;
+
+=======
+	mutex_unlock(&ncm_opts->lock);
+
+	if (status)
+		return status;
+
+	ncm_opts->bound = true;
+
+	ncm_string_defs[1].s = ncm->ethaddr;
+
+>>>>>>> BRANCH (9001552e105ffa8d0e62667d455cc967528dd70b usb: gadget: f_ncm: Fix MAC assignment NCM ethernet)
 	us = usb_gstrings_attach(cdev, ncm_strings,
 				 ARRAY_SIZE(ncm_string_defs));
 	if (IS_ERR(us)) {
@@ -1713,7 +1733,6 @@ static struct usb_function *ncm_alloc(struct usb_function_instance *fi)
 		mutex_unlock(&opts->lock);
 		return ERR_PTR(-EINVAL);
 	}
-	ncm_string_defs[STRING_MAC_IDX].s = ncm->ethaddr;
 
 	spin_lock_init(&ncm->lock);
 	ncm_reset_values(ncm);
