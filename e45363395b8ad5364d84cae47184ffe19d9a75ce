@@ -60,6 +60,30 @@
       ],
       "revId": "e45363395b8ad5364d84cae47184ffe19d9a75ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f75b1005_85adfbb8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 41
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-27T12:54:31Z",
+      "side": 1,
+      "message": "Thanks for catching this. This was present in the previous iteration where we write protected all structures in a separate validation logic. And it was lost while removing the validation logic. Added it back now.",
+      "parentUuid": "86a0a6fe_fe165001",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 2
+      },
+      "revId": "e45363395b8ad5364d84cae47184ffe19d9a75ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
