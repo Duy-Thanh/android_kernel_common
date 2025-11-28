@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d169d39_8e8a1892",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-28T17:30:38Z",
+      "side": 1,
+      "message": "In case of legacy mode context entries we return -EBUSY in this case, while here we return 0?\n\nIs this just an omission, or maybe the host driver actually updates an already present SM context entry in some cases? If the latter, then this is buggy (we should update it as the host asks us to, rather than do nothing)?",
+      "fixSuggestions": [
+        {
+          "fixId": "b1fcb1ac_79946104",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 331,
+                "startChar": 0,
+                "endLine": 332,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EBUSY;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "541488a0_54e69091",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-28T17:30:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we clear the PASID directory after donating it? Otherwise, it may have present entries pointing to arbitrary page tables?\n\nBTW in v6.18 we pass a `clear` flag to pkvm_\\*_donate_\\*() for that. (But here in v6.12 we can just manually memset() it here.)",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
