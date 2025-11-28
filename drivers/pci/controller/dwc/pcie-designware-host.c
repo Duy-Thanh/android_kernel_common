@@ -26,9 +26,27 @@ static struct pci_ops dw_pcie_ops;
 static struct pci_ops dw_pcie_ecam_ops;
 static struct pci_ops dw_child_pcie_ops;
 
+#ifdef CONFIG_SMP
+static void dw_irq_noop(struct irq_data *d) { }
+#endif
+
+static bool dw_pcie_init_dev_msi_info(struct device *dev, struct irq_domain *domain,
+				      struct irq_domain *real_parent, struct msi_domain_info *info)
+{
+	if (!msi_lib_init_dev_msi_info(dev, domain, real_parent, info))
+		return false;
+
+#ifdef CONFIG_SMP
+	info->chip->irq_ack = dw_irq_noop;
+	info->chip->irq_pre_redirect = irq_chip_pre_redirect_parent;
+#else
+	info->chip->irq_ack = irq_chip_ack_parent;
+#endif
+	return true;
+}
+
 #define DW_PCIE_MSI_FLAGS_REQUIRED (MSI_FLAG_USE_DEF_DOM_OPS		| \
 				    MSI_FLAG_USE_DEF_CHIP_OPS		| \
-				    MSI_FLAG_NO_AFFINITY		| \
 				    MSI_FLAG_PCI_MSI_MASK_PARENT)
 #define DW_PCIE_MSI_FLAGS_SUPPORTED (MSI_FLAG_MULTI_PCI_MSI		| \
 				     MSI_FLAG_PCI_MSIX			| \
@@ -40,9 +58,8 @@ static const struct msi_parent_ops dw_pcie_msi_parent_ops = {
 	.required_flags		= DW_PCIE_MSI_FLAGS_REQUIRED,
 	.supported_flags	= DW_PCIE_MSI_FLAGS_SUPPORTED,
 	.bus_select_token	= DOMAIN_BUS_PCI_MSI,
-	.chip_flags		= MSI_CHIP_FLAG_SET_ACK,
 	.prefix			= "DW-",
-	.init_dev_msi_info	= msi_lib_init_dev_msi_info,
+	.init_dev_msi_info	= dw_pcie_init_dev_msi_info,
 };
 
 /* MSI int handler */
@@ -62,6 +79,7 @@ irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp *pp)
 		if (!status)
 			continue;
 
+<<<<<<< HEAD   (9a6f48bb2f89b94bc6857fece1131c450c0d5bee Merge branch 'android17-6.18' into android17-6.18-kminext)
 		ret = IRQ_HANDLED;
 		val = status;
 		pos = 0;
@@ -72,6 +90,13 @@ irqreturn_t dw_handle_msi_irq(struct dw_pcie_rp *pp)
 						  pos);
 			pos++;
 		}
+||||||| BASE   (04d4af1c510263b1bc6c17b877ec1a0ff701c97f BACKPORT: PCI: dwc: Code cleanup)
+		for_each_set_bit(pos, &status, MAX_MSI_IRQS_PER_CTRL)
+			generic_handle_domain_irq(pp->irq_domain, irq_off + pos);
+=======
+		for_each_set_bit(pos, &status, MAX_MSI_IRQS_PER_CTRL)
+			generic_handle_demux_domain_irq(pp->irq_domain, irq_off + pos);
+>>>>>>> CHANGE (730fd932b09a3638f4a049e6921b67e1a5d4c8df BACKPORT: PCI: dwc: Enable MSI affinity support)
 	}
 
 	return ret;
@@ -161,11 +186,31 @@ static void dw_pci_bottom_ack(struct irq_data *d)
 }
 
 static struct irq_chip dw_pci_msi_bottom_irq_chip = {
+<<<<<<< HEAD   (9a6f48bb2f89b94bc6857fece1131c450c0d5bee Merge branch 'android17-6.18' into android17-6.18-kminext)
 	.name = "DWPCI-MSI",
 	.irq_ack = dw_pci_bottom_ack,
 	.irq_compose_msi_msg = dw_pci_setup_msi_msg,
 	.irq_mask = dw_pci_bottom_mask,
 	.irq_unmask = dw_pci_bottom_unmask,
+||||||| BASE   (04d4af1c510263b1bc6c17b877ec1a0ff701c97f BACKPORT: PCI: dwc: Code cleanup)
+	.name			= "DWPCI-MSI",
+	.irq_ack		= dw_pci_bottom_ack,
+	.irq_compose_msi_msg	= dw_pci_setup_msi_msg,
+	.irq_mask		= dw_pci_bottom_mask,
+	.irq_unmask		= dw_pci_bottom_unmask,
+=======
+	.name			= "DWPCI-MSI",
+	.irq_compose_msi_msg	= dw_pci_setup_msi_msg,
+	.irq_mask		= dw_pci_bottom_mask,
+	.irq_unmask		= dw_pci_bottom_unmask,
+#ifdef CONFIG_SMP
+	.irq_ack		= dw_irq_noop,
+	.irq_pre_redirect	= dw_pci_bottom_ack,
+	.irq_set_affinity	= irq_chip_redirect_set_affinity,
+#else
+	.irq_ack		= dw_pci_bottom_ack,
+#endif
+>>>>>>> CHANGE (730fd932b09a3638f4a049e6921b67e1a5d4c8df BACKPORT: PCI: dwc: Enable MSI affinity support)
 };
 
 static int dw_pcie_irq_domain_alloc(struct irq_domain *domain,
