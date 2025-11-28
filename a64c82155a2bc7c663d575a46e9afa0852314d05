@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ec15a85_a294f0e2",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-28T16:50:08Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this refcount increase be called before the while loop (and accordingly decrease the refcount if this function returns prematurely with error)? Otherwise it seems that there is small window when mappings are already installed in the iommu\u0027s page tables but the host could still donate them to the pVM (as the refcount is not yet increased)? This way security hole could be probably installed which later could be used to leak information from those pages through device which host controls?",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0b2f1642_bfc1a19b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 443,
+                "startChar": 0,
+                "endLine": 443,
+                "endChar": 0
+              },
+              "replacement": "\tfor (phys_pfn \u003d param-\u003ephys_pfn; phys_pfn \u003c param-\u003ephys_pfn + param-\u003enr_pages; phys_pfn++) {\n\t\tstruct hyp_page *page \u003d hyp_phys_to_page_safe(phys_pfn \u003c\u003c VTD_PAGE_SHIFT);\n\t\tif (page)\n\t\t\thyp_page_ref_inc(page);\n\t}\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 444,
+                "startChar": 0,
+                "endLine": 445,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_put_pages;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 447,
+                "startChar": 0,
+                "endLine": 448,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_put_pages;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 470,
+                "startChar": 0,
+                "endLine": 471,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\tgoto err_put_pages_partial;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 472,
+                "startChar": 0,
+                "endLine": 473,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\tgoto err_put_pages_partial;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 496,
+                "startChar": 0,
+                "endLine": 497,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tgoto err_put_pages_partial;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 532,
+                "startChar": 0,
+                "endLine": 533,
+                "endChar": 0
+              },
+              "replacement": "\treturn 0;\n\nerr_put_pages_partial:\n\t/* Decrease refcount for pages that were processed before the error */\n\tfor (phys_pfn \u003d param-\u003ephys_pfn; phys_pfn \u003c param-\u003ephys_pfn + param-\u003enr_pages - nr_pages; phys_pfn++) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 535,
+                "startChar": 0,
+                "endLine": 536,
+                "endChar": 0
+              },
+              "replacement": "\t\t\thyp_page_ref_dec(page);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 537,
+                "startChar": 0,
+                "endLine": 537,
+                "endChar": 0
+              },
+              "replacement": "\treturn -EFAULT;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 538,
+                "startChar": 0,
+                "endLine": 539,
+                "endChar": 0
+              },
+              "replacement": "err_put_pages:\n\t/* Decrease refcount for all pages */\n\tfor (phys_pfn \u003d param-\u003ephys_pfn; phys_pfn \u003c param-\u003ephys_pfn + param-\u003enr_pages; phys_pfn++) {\n\t\tstruct hyp_page *page \u003d hyp_phys_to_page_safe(phys_pfn \u003c\u003c VTD_PAGE_SHIFT);\n\t\tif (page)\n\t\t\thyp_page_ref_dec(page);\n\t}\n\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a64c82155a2bc7c663d575a46e9afa0852314d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
