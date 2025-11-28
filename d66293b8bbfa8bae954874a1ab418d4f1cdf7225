@@ -16,6 +16,24 @@
       "message": "Images fail to build",
       "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c23afc6_59b7ec0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4389547
+      },
+      "writtenOn": "2025-11-28T11:02:59Z",
+      "side": 1,
+      "message": "The symbol and abi files in my local build are same with Norman. What is the error message? Is it \"The following kernel modules are built but not copied\"?",
+      "parentUuid": "328a27ee_910c0006",
+      "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
