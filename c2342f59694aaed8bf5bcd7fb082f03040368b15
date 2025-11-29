@@ -1,0 +1,190 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582ae0be_273ae979",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 80
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-29T21:13:06Z",
+      "side": 1,
+      "message": "Those functions seems identicall as one defined in drivers/iommu/intel/iommu.c so I think mentioning it commit log would be helpful.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1838e348_109470cd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "// Identical to intel_iommu_domain_flush_cache in drivers/iommu/intel/iommu.c\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "// Identical to intel_iommu_domain_pfn_supported in drivers/iommu/intel/iommu.c\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": "/*\n * Return largest possible superpage level for a given mapping.\n * Identical to intel_iommu_hardware_largepage_caps in drivers/iommu/intel/iommu.c\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c69fdcf_13f48517",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 80
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-29T21:13:06Z",
+      "side": 1,
+      "message": "This also is based on pfn_to_dma_pte from drivers/iommu/intel/iommu.c so maybe mention about it and point the difference?",
+      "range": {
+        "startLine": 157,
+        "startChar": 23,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4fb6bd71_b8a0cf47",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "/*\n * Based on the pfn_to_dma_pte function in drivers/iommu/intel/iommu.c.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2ab2c5a_c7512615",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 80
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-29T21:13:06Z",
+      "side": 1,
+      "message": "Same here and probably in other function in this patch.",
+      "range": {
+        "startLine": 231,
+        "startChar": 23,
+        "endLine": 231,
+        "endChar": 40
+      },
+      "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be7c5969_77c84ad4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 80
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-29T21:13:06Z",
+      "side": 1,
+      "message": "If this fails half-way through we should rather add some error label which will be responsible to unmap already mapped pages?",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "670bb4cf_24a4c2da",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 405,
+                "endChar": 0
+              },
+              "replacement": "\tint ret \u003d 0;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 432,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tret \u003d (donation-\u003enr_pages \u003c 0) ? -ENOMEM : -EFAULT;\n\t\t\t\tgoto err_unmap;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 491,
+                "startChar": 0,
+                "endLine": 492,
+                "endChar": 0
+              },
+              "replacement": "\treturn ret;\n\nerr_unmap:\n\tpkvm_err(\"pkvm: %s: failed to map, unmapping already mapped pages\\n\", __func__);\n\t/* Unmap the range that was successfully processed before the failure. */\n\tif (iov_pfn \u003e param-\u003eiov_pfn)\n\t\tdomain_unmap(domain, param-\u003eiov_pfn, iov_pfn - 1, donation);\n\treturn ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
