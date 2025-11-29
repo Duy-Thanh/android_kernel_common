@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324596ff_0a654a1f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-29T23:25:58Z",
+      "side": 1,
+      "message": "Use get_pasid_dir_size()?",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11085e64_aa087419",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-29T23:25:58Z",
+      "side": 1,
+      "message": "Am I correct that if pkvm_pasid_free_table() fails, it means a bug in pKVM? If so, maybe worth adding a WARN_ON?",
+      "fixSuggestions": [
+        {
+          "fixId": "2da33c02_e573e797",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 155,
+                "startChar": 0,
+                "endLine": 156,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (WARN_ON(ret))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad43da76_bc85960d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-29T23:25:58Z",
+      "side": 1,
+      "message": "Is it ok to return without trying to free the rest of PASID tables? (Maybe it is ok, if it means a bug in pKVM anyway...)",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
