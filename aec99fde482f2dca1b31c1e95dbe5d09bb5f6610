@@ -51,6 +51,23 @@
       "message": "Shouldn\u0027t we clear the PASID directory after donating it? Otherwise, it may have present entries pointing to arbitrary page tables?\n\nBTW in v6.18 we pass a `clear` flag to pkvm_\\*_donate_\\*() for that. (But here in v6.12 we can just manually memset() it here.)",
       "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1fb65b4_95a10ae6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-29T19:25:56Z",
+      "side": 1,
+      "message": "If we\u0027ve donated the context table page in pkvm_iommu_context_addr() above, we\u0027d better undonate it before returning error here?",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
