@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b084295f_213190ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-30T00:02:56Z",
+      "side": 1,
+      "message": "ABI update patch should come after the patch that creates the hook. Please rebase.",
+      "revId": "fde8c424cefdcaf2cc05e6033ad85725ff9588e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
