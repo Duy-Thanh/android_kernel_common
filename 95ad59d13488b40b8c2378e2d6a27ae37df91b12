@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0edca8_85c7f13a",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-30T00:38:34Z",
+      "side": 1,
+      "message": "nit: add empty line after?",
+      "fixSuggestions": [
+        {
+          "fixId": "89b8c18e_898a29cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95ad59d13488b40b8c2378e2d6a27ae37df91b12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
