@@ -16,6 +16,24 @@
       "message": "Could you please help to merge this chain?",
       "revId": "c79f0826589182999d1ff17973c0e5c1fbd5cb2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e9d9e7_878a6f3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-01T16:08:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "834846c2_a7cfddc5",
+      "revId": "c79f0826589182999d1ff17973c0e5c1fbd5cb2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
