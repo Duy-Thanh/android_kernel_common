@@ -290,6 +290,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5808e8_f92440cb",
+        "filename": "security/selinux/selinuxfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1900,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-01T23:39:30Z",
+      "side": 1,
+      "message": "\u003e For my own understanding of GKI, there seems to be a trade-off between receiving more merge conflicts and the copy-and-pasted function being left outdated when the upstream code gets fixed. In general, do we want to prioritize avoiding the former?\n\nIts a fair point. I guess the concern would be a change landing in `sel_make_policycap()` that doesn\u0027t cause a collision and thus doesn\u0027t get similarly changed in `sel_make_android_policycap()`. I\u0027ve been more often dealing with plain collisions and wanting to optimize the merge-from-upstream path, thus my suggestion but maybe I\u0027ll have to consider your point more as well. I guess we haven\u0027t been bitten as much by missing updates.\n\nAppreciate you already made the change here, but thanks for making your point. I\u0027ll keep it in mind in the future.",
+      "parentUuid": "44245077_41336343",
+      "revId": "5af409d804660a509102873690e3819887312282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64cc485a_a482b91d",
