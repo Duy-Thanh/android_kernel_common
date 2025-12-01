@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08386e72_e29c8d04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-01T21:45:48Z",
+      "side": 1,
+      "message": "`CONFIG_DMABUF_SYSFS_STATS` is not enabled in 17-6.18, and there is no plan to enable it. So this code won\u0027t run at all. Android 17 attempts to use the BPF dmabuf iterator: https://lore.kernel.org/all/20250522230429.941193-1-tjmercier@google.com/\n\nI plan to remove the dmabuf sysfs stats upstream as soon as the next LTS stable kernel is released.",
+      "revId": "d1bed18c761be6eb4f350ce157cf33aefb23c821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
