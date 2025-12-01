@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe3b0ab8_e5e3d40a",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-01T23:46:20Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCheckPatch: WARNING:TYPO_SPELLING: \u0027capabilites\u0027 may be misspelled - perhaps \u0027capabilities\u0027?\n\nWARNING:TYPO_SPELLING: \u0027capabilites\u0027 may be misspelled - perhaps \u0027capabilities\u0027?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 0
+      },
+      "revId": "e3c28ffe95e813602807ac3144a6fc2b1208c697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
