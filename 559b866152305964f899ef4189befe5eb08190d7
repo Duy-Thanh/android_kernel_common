@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23678f9a_e3fb9f04",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T15:38:08Z",
+      "side": 1,
+      "message": "Sure, done. activate_iommu changes in aosp/3861691 and this change here :-)",
+      "parentUuid": "379bf864_8c587d96",
+      "revId": "559b866152305964f899ef4189befe5eb08190d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24713fbe_3ed29df1",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-27T15:06:21Z",
       "side": 1,
       "message": "Any reason why not do this already in aosp/3861691?",
+      "revId": "559b866152305964f899ef4189befe5eb08190d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3604d26_70ad543f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T15:38:08Z",
+      "side": 1,
+      "message": "Sorry about this, it was a git refactor glitch. Moved it back to  aosp/3861691",
+      "parentUuid": "24713fbe_3ed29df1",
       "revId": "559b866152305964f899ef4189befe5eb08190d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
