@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "298d66ba_12f9c9dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 43
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-01T11:08:42Z",
+      "side": 1,
+      "message": "LGTM, there are some open comments and I am actually ok with both discussed approaches (also taking into account this will be not relevant for 6.18): current one and without locking whole __pkcm_host_donate_hyp_share_ro section as Dima suggested. Although it seems that the second is bit more straightforward: no extra code and complexity so this patch would become even simpler and as Dima mentioned __pkvm_pin_shared_mem will fail in mentioned race scenario so it we should be quite safe.",
+      "revId": "f0bb0ed00f763b352d0cb485e6116d3a5d0eac97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8d6399e_2b31fc84",
