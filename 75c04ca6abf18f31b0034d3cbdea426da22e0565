@@ -16,6 +16,24 @@
       "message": "Hmm... but we are not really _enforcing_ IOTLB flush here? If the host has never issued the `iommu_cache_assign` hypercall, pkvm_cache_tag_flush_range() does nothing?",
       "revId": "75c04ca6abf18f31b0034d3cbdea426da22e0565",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c404a4_337917f3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T18:46:02Z",
+      "side": 1,
+      "message": "Host driver was basically trusted when the domains were being setup and it was guaranteed to assign cache tags, so I thought of directly using the cache tag api to do that. But I see your point - user could change from identity to dma after boot which would create domain and that would be happening in an untrusted context. It makes sense to call flush api directly then. Will fix",
+      "parentUuid": "53b512de_2cc9d0d3",
+      "revId": "75c04ca6abf18f31b0034d3cbdea426da22e0565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
