@@ -164,6 +164,30 @@
       },
       "revId": "2f9fb6e1f5f08339146624f02970945123306d3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b0e7cd_96cc6dc8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-01T16:32:55Z",
+      "side": 1,
+      "message": "I see, so maybe only mention about it commit log so it is clear? Other than that LGTM.",
+      "parentUuid": "bbc76bf0_e24ff2ad",
+      "range": {
+        "startLine": 1078,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 1
+      },
+      "revId": "2f9fb6e1f5f08339146624f02970945123306d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
