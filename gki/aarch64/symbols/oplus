@@ -299,6 +299,7 @@
   __traceiter_android_vh_scx_fix_prev_slice
   __traceiter_android_vh_scx_ops_enable_state
   __traceiter_android_vh_scx_enabled
+  __traceiter_android_vh_task_switch_scx
   __traceiter_android_vh_scx_set_cpus_allowed
   __traceiter_android_vh_scx_task_switch_finish
   __traceiter_android_vh_cgroup_set_task
@@ -441,6 +442,7 @@
   __tracepoint_android_vh_scx_fix_prev_slice
   __tracepoint_android_vh_scx_ops_enable_state
   __tracepoint_android_vh_scx_enabled
+  __tracepoint_android_vh_task_switch_scx
   __tracepoint_android_vh_scx_set_cpus_allowed
   __tracepoint_android_vh_scx_task_switch_finish
   __tracepoint_android_vh_cgroup_set_task
