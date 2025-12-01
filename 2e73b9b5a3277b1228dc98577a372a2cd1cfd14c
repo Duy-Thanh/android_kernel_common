@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4409fc9_1d405c1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:17:57Z",
+      "side": 1,
+      "message": "Per my last comment in aosp/3863270: seems we can\u0027t really trust the host to assign the needed cache tags? So pKVM should rather assign the needed cache tags on its own, every time when associating a BDF with an IOMMU domain (when setting a context or PASID entry)? And if so, we don\u0027t need these assign/unassign hypercalls from the host?",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1e01f42_c939f2bd",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
         "patchSetId": 50
