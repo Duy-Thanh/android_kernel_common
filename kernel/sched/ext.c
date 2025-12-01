@@ -4694,6 +4694,7 @@ repeat_iter:
 		if (skip)
 			continue;
 
+		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
 		if (old_class != new_class && p->se.sched_delayed)
 			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
 
@@ -5423,6 +5424,7 @@ repeat_iter:
 		struct sched_enq_and_set_ctx ctx;
 		bool skip = false;
 
+		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
 		if (scx_get_task_state(p) != SCX_TASK_READY)
 			continue;
 
