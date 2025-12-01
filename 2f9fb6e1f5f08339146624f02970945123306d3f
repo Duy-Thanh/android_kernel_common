@@ -1,0 +1,145 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a56c48d_80ac4cfd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-01T11:34:35Z",
+      "side": 1,
+      "message": "nit: I would suggest to just move sync_shadow_id as is from arch/x86/kvm/vmx/pkvm/hyp/iommu.c here (without any modification) and if needed introduce sync_shadow_id api change and add __sync_shadow_id in next patch where you modify usage of it in some places anyway. This way this patch will contain only code movement and next patch will adjust it accordingly.\n\nBut it is \"nit\" so feel free to ignore it. I assume that this patch has no functional changes, only code movement and would suggest mentioning it in commit log.",
+      "range": {
+        "startLine": 1078,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b6461a1b_030f402c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1078,
+                "startChar": 0,
+                "endLine": 1079,
+                "endChar": 0
+              },
+              "replacement": "int sync_shadow_id(struct pkvm_iommu *iommu, unsigned long vaddr,\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1109,
+                "startChar": 0,
+                "endLine": 1115,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1129,
+                "startChar": 0,
+                "endLine": 1130,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, start, end, 0, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1141,
+                "startChar": 0,
+                "endLine": 1142,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, start, end, did, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1153,
+                "startChar": 0,
+                "endLine": 1154,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, start, end, did, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1186,
+                "startChar": 0,
+                "endLine": 1187,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, start, end, did, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1199,
+                "startChar": 0,
+                "endLine": 1200,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d sync_shadow_id(iommu, start, end, did, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1209,
+                "startChar": 0,
+                "endLine": 1210,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, start, end, 0, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1238,
+                "startChar": 0,
+                "endLine": 1239,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d sync_shadow_id(iommu, 0, IOMMU_LM_MAX_VADDR, 0, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1247,
+                "startChar": 0,
+                "endLine": 1248,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tret \u003d sync_shadow_id(iommu, p-\u003ebdf, p-\u003ebdf + 1, did, NULL);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+              "range": {
+                "startLine": 1261,
+                "startChar": 0,
+                "endLine": 1262,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tret \u003d sync_shadow_id(iommu, p-\u003ebdf, p-\u003ebdf + 1, did, \u0026data);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2f9fb6e1f5f08339146624f02970945123306d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
