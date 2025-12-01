@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12a5f90_e24b4b39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-01T21:54:51Z",
+      "side": 1,
+      "message": "No commit message.\n\nNeeds an explanation for why this change is necessary or useful\n\n1) What is the problem you are seeing and trying to address with this change\n\n2) What benefit do you get from adding these vendorhooks.\n\nAlso since this seems to overlap with existing vendorhooks, please be explicit as to why the existing vendorhooks are not sufficient.",
+      "revId": "b8d398b617a26d4045990b344ab75c4356db01ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
