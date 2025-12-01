@@ -140,6 +140,30 @@
       ],
       "revId": "2f9fb6e1f5f08339146624f02970945123306d3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc76bf0_e24ff2ad",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/shadow_iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:40:45Z",
+      "side": 1,
+      "message": "I am moving a private struct `struct shadow_pgt_sync_data` to shadow_iommu.c and it is not available in iommu.c now. I could put it in iommu_internal.h, but since the structure is only for shadow implementation I thought I will keep it private in shadow_iommu.c. Since all ths invocations of `sync_shadow_id` in iommu.c do not use this structure, I refactored the code like this. If I keep it as it is, then I may not to export the struct in a header file and wanted to avoid it.\n\nWhat do you think?",
+      "parentUuid": "9a56c48d_80ac4cfd",
+      "range": {
+        "startLine": 1078,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 1
+      },
+      "revId": "2f9fb6e1f5f08339146624f02970945123306d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
