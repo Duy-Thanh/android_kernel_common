@@ -52,6 +52,24 @@
       "parentUuid": "5c23afc6_59b7ec0b",
       "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c239eb47_dab863b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4389547
+      },
+      "writtenOn": "2025-12-01T18:03:00Z",
+      "side": 1,
+      "message": "I upload a CL https://partner-android-review.googlesource.com/c/kernel-desktop/private/devices/google/x86-64/intel/fatcat/+/3656983: fatcat: Add support for tas2563 smart amplifier",
+      "parentUuid": "17fe9b92_e1bbd615",
+      "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
