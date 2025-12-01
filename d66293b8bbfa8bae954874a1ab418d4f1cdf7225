@@ -34,6 +34,24 @@
       "parentUuid": "328a27ee_910c0006",
       "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17fe9b92_e1bbd615",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2025-12-01T14:01:08Z",
+      "side": 1,
+      "message": "Yes, the error is expected. It\u0027s because the change in this chain introduced new .so modules to be built, and we need to configure brya, fatcat, and ocelot to copy those modules. I\u0027ve prepared the change in my local workstation, will upload them tomorrow.",
+      "parentUuid": "5c23afc6_59b7ec0b",
+      "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
