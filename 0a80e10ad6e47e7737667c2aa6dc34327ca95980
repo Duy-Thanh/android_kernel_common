@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4de9cb84_a769fda3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2042,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:37:38Z",
+      "side": 1,
+      "message": "yeah true. Done",
+      "parentUuid": "6ed5bdb0_5039dd8d",
+      "revId": "0a80e10ad6e47e7737667c2aa6dc34327ca95980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fe6904f_0287db48",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 4
@@ -73,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "611c726b_4516f744",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:37:38Z",
+      "side": 1,
+      "message": "Right, we are already checking for this. Done",
+      "parentUuid": "0fe6904f_0287db48",
+      "revId": "0a80e10ad6e47e7737667c2aa6dc34327ca95980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93366bf4_4b31a52b",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 4
@@ -84,6 +120,24 @@
       "writtenOn": "2025-11-25T19:07:28Z",
       "side": 1,
       "message": "We shouldn\u0027t set DMA_GSTS_RTPS if activate_iommu() failed?\n\n(Even if the host is still trusted at still point, we still need to let the host IOMMU driver know if the IOMMU failed to initialize, and the only way we can \"return an error\" here is by not setting DMA_GSTS_RTPS?)",
+      "revId": "0a80e10ad6e47e7737667c2aa6dc34327ca95980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41190d3_2fddd92e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2063,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:37:38Z",
+      "side": 1,
+      "message": "Agree, done",
+      "parentUuid": "93366bf4_4b31a52b",
       "revId": "0a80e10ad6e47e7737667c2aa6dc34327ca95980",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
