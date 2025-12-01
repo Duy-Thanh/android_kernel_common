@@ -94,6 +94,30 @@
       },
       "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a7c0c7_f08c8bdb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:02:50Z",
+      "side": 1,
+      "message": "...And returning specifically to pkvm_cache_tag_flush_range_np(): any reason why it is added in this patch, not in aosp/3788754 ?",
+      "parentUuid": "b1ee0602_72d59028",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

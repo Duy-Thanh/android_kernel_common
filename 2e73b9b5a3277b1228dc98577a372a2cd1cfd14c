@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e01f42_c939f2bd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:02:50Z",
+      "side": 1,
+      "message": "find_first_zero_bit()?",
+      "fixSuggestions": [
+        {
+          "fixId": "1284be4a_9af27ad1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "\tindex \u003d find_first_zero_bit(cache_tag_bitmap, MAX_CACHETAG_NUM);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5506aa_47a21d1c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:02:50Z",
+      "side": 1,
+      "message": "Can we just include \u003clinux/pci.h\u003e instead?",
+      "fixSuggestions": [
+        {
+          "fixId": "0bd7a4f7_c2864a05",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/pci.h\u003e\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f044fb3a_241bfaca",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:02:50Z",
+      "side": 1,
+      "message": "We should check if domain actually found?",
+      "fixSuggestions": [
+        {
+          "fixId": "22d75a02_7cd159c6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 302,
+                "startChar": 0,
+                "endLine": 302,
+                "endChar": 0
+              },
+              "replacement": "\tif (!domain)\n\t\treturn -EINVAL;\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 303,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "\tif (!cache_tag) {\n\t\tpkvm_put_iommu_domain(domain);\n\t\treturn -EINVAL;\n\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 363,
+                "startChar": 0,
+                "endLine": 363,
+                "endChar": 0
+              },
+              "replacement": "\tif (!domain)\n\t\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efa59365_b5d13706",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T19:02:50Z",
+      "side": 1,
+      "message": "We should check if allocation succeeded?",
+      "fixSuggestions": [
+        {
+          "fixId": "f7702234_e7a57498",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 303,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "\tif (!cache_tag) {\n\t\tpkvm_put_iommu_domain(domain);\n\t\treturn -ENOMEM;\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
