@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af748827_98314292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-01T23:41:54Z",
+      "side": 1,
+      "message": "This should not be needed beginning in Android 16. Please see: https://android-review.git.corp.google.com/c/kernel/common/+/3794106?tab\u003dcomments",
+      "revId": "25290920a1db2b4b985420ebdc4126feb981341f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
