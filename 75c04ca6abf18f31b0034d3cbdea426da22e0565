@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b512de_2cc9d0d3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T18:19:11Z",
+      "side": 1,
+      "message": "Hmm... but we are not really _enforcing_ IOTLB flush here? If the host has never issued the `iommu_cache_assign` hypercall, pkvm_cache_tag_flush_range() does nothing?",
+      "revId": "75c04ca6abf18f31b0034d3cbdea426da22e0565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
