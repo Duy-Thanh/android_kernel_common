@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab9c65ac_c4dbc166",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-01T22:08:41Z",
+      "side": 1,
+      "message": "So this commit message doesn\u0027t really explain why this is still necessary?",
+      "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c79d8ac_a2afb80b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
