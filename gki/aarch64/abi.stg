@@ -2394,6 +2394,11 @@ pointer_reference {
   pointee_type_id: 0x301eb4fa
 }
 pointer_reference {
+  id: 0x069a431a
+  kind: POINTER
+  pointee_type_id: 0x3029eaf7
+}
+pointer_reference {
   id: 0x06afdad0
   kind: POINTER
   pointee_type_id: 0x30ff8ddd
@@ -413786,6 +413791,16 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9bb1695e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x069a431a
+  parameter_id: 0x13580d6c
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9bb1a574
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -439265,6 +439280,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_set_wake_flags"
 }
 elf_symbol {
+  id: 0x07a56ec2
+  name: "__traceiter_android_vh_setscheduler_class"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc3994e7e
+  type_id: 0x9bb1695e
+  full_name: "__traceiter_android_vh_setscheduler_class"
+}
+elf_symbol {
   id: 0xa2fe718f
   name: "__traceiter_android_vh_setscheduler_uclamp"
   is_defined: true
@@ -446625,6 +446649,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_set_wake_flags"
+}
+elf_symbol {
+  id: 0x50639908
+  name: "__tracepoint_android_vh_setscheduler_class"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_setscheduler_class"
 }
 elf_symbol {
   id: 0x923147c1
@@ -519257,6 +519290,7 @@ interface {
   symbol_id: 0xdb84678c
   symbol_id: 0x874fcdb2
   symbol_id: 0xaa3f6a65
+  symbol_id: 0x07a56ec2
   symbol_id: 0xa2fe718f
   symbol_id: 0x98a943de
   symbol_id: 0xb6a93669
@@ -520075,6 +520109,7 @@ interface {
   symbol_id: 0x6ccc064e
   symbol_id: 0xb6de2d88
   symbol_id: 0xd7ceb15f
+  symbol_id: 0x50639908
   symbol_id: 0x923147c1
   symbol_id: 0x5cfdecb8
   symbol_id: 0x0d23f467
