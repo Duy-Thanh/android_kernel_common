@@ -52,6 +52,24 @@
       "parentUuid": "5467d037_104db54f",
       "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4c5789_252213c7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_internal.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ce023c2_60e1e6cd",
+      "revId": "b0ef1bbd8676c9a59c689ece664187b2a477c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
