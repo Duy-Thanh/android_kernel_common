@@ -67,6 +67,24 @@
       "message": "This was just part of our big pKVM stack from Android 16, which is why it\u0027s here. I\u0027ll drop it.",
       "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98683705_b53e5227",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-02T18:45:14Z",
+      "side": 1,
+      "message": "Although bootconfig overcomes many of the limitations suffered by the traditional cmdline, it doesn\u0027t support early parameters (anything listed as \"EARLY\" in Documentation/admin-guide/kernel-parameters.txt), it doesn\u0027t support overrides (i.e. any of the stuff in arch/arm64/kernel/pi/idreg-override.c) and tools such as crosvm pass parameters via the bootargs entry in the device-tree.\n\nSo bootconfig is great in many cases but it\u0027s not really a viable alternative here.",
+      "parentUuid": "a390e592_2a7bb647",
+      "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
