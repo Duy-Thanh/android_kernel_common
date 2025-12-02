@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14227615_5f6ee19e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T20:37:09Z",
+      "side": 1,
+      "message": "Thanks for catching this, missed zeroing it out for this occurence. Fixed.",
+      "parentUuid": "541488a0_54e69091",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1fb65b4_95a10ae6",
