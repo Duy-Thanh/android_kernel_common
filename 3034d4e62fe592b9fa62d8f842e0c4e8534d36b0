@@ -190,6 +190,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b241ee6_d934f96c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa6a8bc5_71594a81",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5619c679_5db527df",
@@ -203,6 +221,24 @@
       "writtenOn": "2025-11-25T23:00:59Z",
       "side": 1,
       "message": "Similarly here: we can just __pkvm_host_unshare_hyp_prot() + __pkvm_unpin_shared_mem(), and if the host does something bad between the two, we will detect that and just fail?",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84a7d5c_e4ea7e25",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5619c679_5db527df",
       "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -291,6 +327,24 @@
       "side": 1,
       "message": "Updated the comment as you suggested",
       "parentUuid": "b9a798c9_0ea146da",
+      "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc46382_6821b2ad",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T23:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba9362b5_0e4a7923",
       "revId": "3034d4e62fe592b9fa62d8f842e0c4e8534d36b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
