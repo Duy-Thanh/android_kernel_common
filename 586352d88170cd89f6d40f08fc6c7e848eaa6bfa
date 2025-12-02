@@ -122,6 +122,24 @@
       "parentUuid": "e1bacb76_48a98189",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474d1cc9_91bd31f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2025-12-02T12:40:39Z",
+      "side": 1,
+      "message": "I see, makes sense, thanks.\n\nMy main concern with this CL is that it\u0027s a 2 year old change that hasn\u0027t been sent upstream again since, as far as I could find. I hope another attempt is made.\n\n(I think the same behavior could also be achieved in a different way, by updating nohz.idle_cpus_mask, but I don\u0027t feel too strongly about that.)",
+      "parentUuid": "3575b3e9_78991430",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
