@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04573de4_fc7dd9ea",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-02T19:08:14Z",
+      "side": 1,
+      "message": "\u003e There can be cases where the hypercall fails but pkvm_iommu_context_addr() already used this page and set present bit in the root table(in pasid hypercall cl). I thought it would be simpler to leave it as it is as it may be used again and I have seen chances of having more devices in the same context table is really high.\n\nOk, it seems it makes sense to keep it so, for simplicity (and maybe also for consistency with what the host driver normally does).\n\nBut still what about cases when the hypercall fails even before calling pkvm_iommu_context_addr()? Are we fine with a memory leak in the host in such case?\n\nOk, maybe in all such cases it would have already failed in the first pkvm_hc_iommu_set_lm_ce() call, above at line 1470 (with an error different from -ENOMEM), so maybe let\u0027s keep it as is, for simplicity...\n\nIt seems a bit unfortunate that we need to make all these tricky assumptions, instead of making the logic straightforward and easy to reason about (like, for example, in pvVMCS, where we are easily doing graceful undonate/unshare/unpin etc in various cases, in a simple straightforward way), but, well...",
+      "parentUuid": "aed71fdd_232de482",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
