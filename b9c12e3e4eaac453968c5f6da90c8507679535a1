@@ -85,6 +85,24 @@
       "parentUuid": "a390e592_2a7bb647",
       "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bd9d96_86db0faf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-02T18:46:13Z",
+      "side": 1,
+      "message": "Wait, don\u0027t we need this for a bunch of stuff? For example, support for `kvm-arm.mode\u003d`?",
+      "parentUuid": "e81ff272_8224ddde",
+      "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
