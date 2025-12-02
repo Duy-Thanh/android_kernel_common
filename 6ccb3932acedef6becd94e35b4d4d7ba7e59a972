@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aed71fdd_232de482",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T15:00:53Z",
+      "side": 1,
+      "message": "\u003e Now looking at the latest version of aosp/3786919, pkvm_iommu_context_addr() may succeed (and thus the hypercall may succeed) but still not update context_gpa to NULL (in case there was already a present context entry for this bus). In such case ret is 0, but we should still free this page?\n\nAhh yes, right.\n\n\u003e So the condition should be ret || param.context_gpa?\n\nThere can be cases where the hypercall fails but pkvm_iommu_context_addr() already used this page and set present bit in the root table(in pasid hypercall cl). I thought it would be simpler to leave it as it is as it may be used again and I have seen chances of having more devices in the same context table is really high.\n\nWDYT? If fine with the above, I think we need to only check `param.context_gpa` to free the page. If you feel its worth donating the page back, I shall implement the undonate logic",
+      "parentUuid": "04f8c877_335d0f01",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
@@ -275,6 +293,24 @@
       "writtenOn": "2025-11-20T14:40:17Z",
       "side": 1,
       "message": "Whatever this is, this is still not done is this series?",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5b12b0_410b42f3",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T15:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efea2de2_7afa85d7",
       "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
