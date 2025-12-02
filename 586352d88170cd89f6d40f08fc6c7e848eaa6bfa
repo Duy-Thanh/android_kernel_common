@@ -68,6 +68,24 @@
       "message": "When are we isolating CPUs?",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030757be_0db25b93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-12-02T12:25:17Z",
+      "side": 1,
+      "message": "Once we migrate the cpuset cgroup controller to Cgroup v2, which might take a while. Then we will have a dynamic control over isolated cores.",
+      "parentUuid": "968610fb_8b60131a",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
