@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6aca1830_edd38aaf",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-02T20:31:39Z",
+      "side": 1,
+      "message": "\u003e Ok, it seems it makes sense to keep it so, for simplicity (and maybe also for consistency with what the host driver normally does).\n\nyeah host driver also does something similar where the page is not freed once it is used in iommu_context_addr(). Free happens only on iommu deinit.\n\n\u003e But still what about cases when the hypercall fails even before calling pkvm_iommu_context_addr()? Are we fine with a memory leak in the host in such case?\n\nIn this case context_gpa will not be touched and after returning from the hypercall, host driver will free it as it sees context_gpa is non NULL. So effectively I shall move to the first logic where irrespective of `ret`, if `context_gpa` is set, driver will free it. And pkvm will unset it only if it uses the page and sets present bit in root table.\n\n\u003e It seems a bit unfortunate that we need to make all these tricky assumptions, instead of making the logic straightforward and easy to reason about (like, for example, in pvVMCS, where we are easily doing graceful undonate/unshare/unpin etc in various cases, in a simple straightforward way), but, well...\n\nI agree. In 6.18, we plan to move all donations(root, context, pasid and pagetables) via memcache and then host driver need not explicitly donate via context_gpa. If unused, the page will gracefully go back to memcache without host driver needing to do anything explicit.",
+      "parentUuid": "04573de4_fc7dd9ea",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
