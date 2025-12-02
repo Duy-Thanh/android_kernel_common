@@ -51,6 +51,23 @@
       "message": "This patch is also important for non-isolation case (which we\u0027re pursuing now due to cgroups v2 switch for cpuset having its own issues).\n\nThat said I believe we still need the upstream task description updated to mention what is it tracking.",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968610fb_8b60131a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2025-12-02T03:35:32Z",
+      "side": 1,
+      "message": "When are we isolating CPUs?",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
