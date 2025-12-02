@@ -86,6 +86,24 @@
       "parentUuid": "968610fb_8b60131a",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1bacb76_48a98189",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2025-12-02T12:27:44Z",
+      "side": 1,
+      "message": "Yeah but in what situation would we want to isolate a CPU?\nIt seems like this is for some kind of low power mode, but it wasn\u0027t clear to me when this mode would actually trigger.",
+      "parentUuid": "030757be_0db25b93",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
