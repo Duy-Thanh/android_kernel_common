@@ -280661,6 +280661,11 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x8ce7cd63
+  return_type_id: 0x120540d1
+  parameter_id: 0x0258f96e
+}
+function {
   id: 0x8d172d0a
   return_type_id: 0xd41e888f
   parameter_id: 0x33a9d455
@@ -335575,6 +335580,15 @@ elf_symbol {
   full_name: "wwan_create_port"
 }
 elf_symbol {
+  id: 0x5d0122f7
+  name: "wwan_get_debugfs_dir"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x69005bbe
+  type_id: 0x8ce7cd63
+  full_name: "wwan_get_debugfs_dir"
+}
+elf_symbol {
   id: 0x4c0df935
   name: "wwan_port_get_drvdata"
   is_defined: true
@@ -335591,6 +335605,15 @@ elf_symbol {
   crc: 0xcb6ace6f
   type_id: 0x17a3953a
   full_name: "wwan_port_rx"
+}
+elf_symbol {
+  id: 0x046f966a
+  name: "wwan_put_debugfs_dir"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6f4ef3f7
+  type_id: 0x141901a7
+  full_name: "wwan_put_debugfs_dir"
 }
 elf_symbol {
   id: 0x2a89bc21
@@ -340166,8 +340189,10 @@ interface {
   symbol_id: 0x99941051
   symbol_id: 0x4ff86851
   symbol_id: 0x547c4277
+  symbol_id: 0x5d0122f7
   symbol_id: 0x4c0df935
   symbol_id: 0xab69ce9d
+  symbol_id: 0x046f966a
   symbol_id: 0x2a89bc21
   symbol_id: 0x4c8de33f
   symbol_id: 0xb39bbb16
