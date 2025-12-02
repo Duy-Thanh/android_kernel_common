@@ -70,7 +70,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);
+<<<<<<< HEAD   (7b5dafca1ed87520210d7a4ef09073c148bc4c51 Revert "FROMGIT: memfd,selinux: call security_inode_init_sec)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);
+||||||| BASE   (9e84d228ed5a82d7f57c692bbf1de1ccebe834cc Merge tag 'v6.18-rc6' into android-mainline)
+=======
+>>>>>>> BRANCH (c7e117640d8dc8b68d068c14d101402073625eb9 Merge tag 'v6.18' into android-mainline)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);

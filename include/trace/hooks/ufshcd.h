@@ -22,10 +22,14 @@ DECLARE_HOOK(android_vh_ufs_fill_prdt,
 		 unsigned int segments, int *err),
 	TP_ARGS(hba, lrbp, segments, err));
 
+<<<<<<< HEAD   (7b5dafca1ed87520210d7a4ef09073c148bc4c51 Revert "FROMGIT: memfd,selinux: call security_inode_init_sec)
 DECLARE_RESTRICTED_HOOK(android_rvh_ufs_complete_init,
 			TP_PROTO(struct ufs_hba *hba),
 			TP_ARGS(hba), 1);
 
+||||||| BASE   (9e84d228ed5a82d7f57c692bbf1de1ccebe834cc Merge tag 'v6.18-rc6' into android-mainline)
+=======
+>>>>>>> BRANCH (c7e117640d8dc8b68d068c14d101402073625eb9 Merge tag 'v6.18' into android-mainline)
 DECLARE_RESTRICTED_HOOK(android_rvh_ufs_reprogram_all_keys,
 			TP_PROTO(struct ufs_hba *hba, int *err),
 			TP_ARGS(hba, err), 1);
