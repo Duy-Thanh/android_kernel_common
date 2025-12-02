@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1b4a35_b029f018",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-02T23:51:49Z",
+      "side": 1,
+      "message": "So after discussing this, I think solution 2 is preferred. \n\nPlease cleanup the commit message (focusing on the rationale for this change).\n\nAlso abandon solution 1.",
+      "revId": "a98b601cf85c3972b8699d62c8b4461941207d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
