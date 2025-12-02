@@ -113139,6 +113139,18 @@ member {
   offset: 41152
 }
 member {
+  id: 0xd1fdbf5e
+  name: "mono_mult"
+  type_id: 0xc9082b19
+  offset: 384
+}
+member {
+  id: 0x21b41a9e
+  name: "mono_shift"
+  type_id: 0xc9082b19
+  offset: 352
+}
+member {
   id: 0x7a15ae87
   name: "monotonic"
   type_id: 0x399c459b
@@ -229459,7 +229471,7 @@ struct_union {
   kind: STRUCT
   name: "system_time_snapshot"
   definition {
-    bytesize: 48
+    bytesize: 56
     member_id: 0x32f0095e
     member_id: 0x464df897
     member_id: 0xf0e154ce
@@ -229467,6 +229479,8 @@ struct_union {
     member_id: 0xed1538d9
     member_id: 0xad4aa733
     member_id: 0x1cac780d
+    member_id: 0x21b41a9e
+    member_id: 0xd1fdbf5e
   }
 }
 struct_union {
@@ -305360,7 +305374,7 @@ elf_symbol {
   name: "ktime_get_snapshot"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5ec75227
+  crc: 0xb057fec1
   type_id: 0x10689f5d
   full_name: "ktime_get_snapshot"
 }
