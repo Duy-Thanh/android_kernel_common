@@ -449,6 +449,22 @@ DECLARE_HOOK(android_vh_scx_task_switch_finish,
 	TP_PROTO(struct task_struct *p, int enable),
 	TP_ARGS(p, enable));
 
+DECLARE_HOOK(android_vh_scx_enq_to_priq,
+	TP_PROTO(struct scx_dispatch_q *dsq, struct task_struct *p, bool *enq_priq),
+	TP_ARGS(dsq, p, enq_priq));
+
+DECLARE_HOOK(android_vh_task_tick_scx,
+	TP_PROTO(struct rq *rq, struct task_struct *p, int queued),
+	TP_ARGS(rq, p, queued));
+
+DECLARE_HOOK(android_vh_scx_before_switch,
+	TP_PROTO(bool enable),
+	TP_ARGS(enable));
+
+DECLARE_HOOK(android_vh_scx_skip_switch,
+	TP_PROTO(bool enable, struct task_struct *p, bool *skip),
+	TP_ARGS(enable, p, skip));
+
 DECLARE_HOOK(android_vh_switching_to_scx,
 	TP_PROTO(struct rq *rq, struct task_struct *p),
 	TP_ARGS(rq, p));

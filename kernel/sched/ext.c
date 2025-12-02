@@ -1674,6 +1674,7 @@ static void dispatch_enqueue(struct scx_dispatch_q *dsq, struct task_struct *p,
 			     u64 enq_flags)
 {
 	bool is_local = dsq->id == SCX_DSQ_LOCAL;
+	bool enq_priq = false;
 
 	WARN_ON_ONCE(p->scx.dsq || !list_empty(&p->scx.dsq_list.node));
 	WARN_ON_ONCE((p->scx.dsq_flags & SCX_TASK_DSQ_ON_PRIQ) ||
@@ -1703,7 +1704,8 @@ static void dispatch_enqueue(struct scx_dispatch_q *dsq, struct task_struct *p,
 		enq_flags &= ~SCX_ENQ_DSQ_PRIQ;
 	}
 
-	if (enq_flags & SCX_ENQ_DSQ_PRIQ) {
+	trace_android_vh_scx_enq_to_priq(dsq, p, &enq_priq);
+	if (enq_flags & SCX_ENQ_DSQ_PRIQ || enq_priq) {
 		struct rb_node *rbp;
 
 		/*
@@ -3561,6 +3563,7 @@ static void task_tick_scx(struct rq *rq, struct task_struct *curr, int queued)
 		SCX_CALL_OP_TASK(SCX_KF_REST, tick, curr);
 	}
 
+	trace_android_vh_task_tick_scx(rq, curr, queued);
 	if (!curr->scx.slice)
 		resched_curr(rq);
 }
@@ -4673,12 +4676,18 @@ static void scx_ops_disable_workfn(struct kthread_work *work)
 
 	scx_ops_init_task_enabled = false;
 
+	trace_android_vh_scx_before_switch(0);
 	scx_task_iter_start(&sti);
 	while ((p = scx_task_iter_next_locked(&sti))) {
 		const struct sched_class *old_class = p->sched_class;
 		const struct sched_class *new_class =
 			__setscheduler_class(p->policy, p->prio);
 		struct sched_enq_and_set_ctx ctx;
+		bool skip = false;
+
+		trace_android_vh_scx_skip_switch(0, p, &skip);
+		if (skip)
+			continue;
 
 		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
 		if (old_class != new_class && p->se.sched_delayed)
@@ -5394,17 +5403,20 @@ static int scx_ops_enable(struct sched_ext_ops *ops, struct bpf_link *link)
 	 * scx_tasks_lock.
 	 */
 	percpu_down_write(&scx_fork_rwsem);
+	trace_android_vh_scx_before_switch(1);
 	scx_task_iter_start(&sti);
 	while ((p = scx_task_iter_next_locked(&sti))) {
 		const struct sched_class *old_class = p->sched_class;
 		const struct sched_class *new_class =
 			__setscheduler_class(p->policy, p->prio);
 		struct sched_enq_and_set_ctx ctx;
-
-		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
-		if (!tryget_task_struct(p))
+		bool skip = false;
+		
+		trace_android_vh_scx_skip_switch(1, p, &skip);
+		if (skip || !tryget_task_struct(p))
 			continue;
 
+		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
 		if (old_class != new_class && p->se.sched_delayed)
 			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
 
