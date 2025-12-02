@@ -104,6 +104,24 @@
       "parentUuid": "030757be_0db25b93",
       "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3575b3e9_78991430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-12-02T12:33:19Z",
+      "side": 1,
+      "message": "That\u0027s correct. Since on Intel we can\u0027t offline the core 0, we can\u0027t offline P-cores. So the next best thing is to let them go into the deepest possible power-saving state and stay there without interruptions.\n\nAs for when it might happen: in use-cases where we know we won\u0027t need power cores. E.g. full-screen video playback. As for what could trigger it - combination of IPower HAL and vendor services.",
+      "parentUuid": "e1bacb76_48a98189",
+      "revId": "586352d88170cd89f6d40f08fc6c7e848eaa6bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
