@@ -50,6 +50,23 @@
       "message": "Please use bootconfig instead.",
       "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81ff272_8224ddde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-12-02T08:00:36Z",
+      "side": 1,
+      "message": "This was just part of our big pKVM stack from Android 16, which is why it\u0027s here. I\u0027ll drop it.",
+      "revId": "b9c12e3e4eaac453968c5f6da90c8507679535a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
