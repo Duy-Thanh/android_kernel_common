@@ -87,6 +87,24 @@
       "message": "To fix the build failure, it needs to be merged together with 3 CLs in https://partner-android-review.git.corp.google.com/q/topic:%22ti-smart-amp%22",
       "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d9f6e2_86d292a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-12-02T09:55:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f9c32c4_680661dd",
+      "revId": "d66293b8bbfa8bae954874a1ab418d4f1cdf7225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
