@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83341384_c61d42ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-02T17:58:47Z",
+      "side": 1,
+      "message": "Is there a respin bug for this patch on android14-6.1-2025-06? Please add a Bug: tag citing it.",
+      "revId": "6477c75e2a4aa03f0bf7207c0d866098a8c6f6d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
