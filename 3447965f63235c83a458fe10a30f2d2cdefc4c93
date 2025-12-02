@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe4b329_83c35ce5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-02T06:36:27Z",
+      "side": 1,
+      "message": "Need a follow-on patch that adds symbols \u0026 ABI update for the ones added in this patch.",
+      "revId": "3447965f63235c83a458fe10a30f2d2cdefc4c93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
