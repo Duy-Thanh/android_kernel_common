@@ -1,3 +1,5 @@
+  netdev_get_name
+  tcp_send_active_reset
   __tracepoint_android_vh_security_audit_log_setid
   __traceiter_android_vh_security_audit_log_setid
   __traceiter_android_vh_tcp_write_timeout_estab_retrans
