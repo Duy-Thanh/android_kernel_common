@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07e0d698_02a96641",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-02T21:26:42Z",
+      "side": 1,
+      "message": "\u003e In this case context_gpa will not be touched and after returning from the hypercall, host driver will free it as it sees context_gpa is non NULL.\n\nAh, indeed. Seems all good then.\n\n\u003e In 6.18, we plan to move all donations(root, context, pasid and pagetables) via memcache and then host driver need not explicitly donate via context_gpa. If unused, the page will gracefully go back to memcache without host driver needing to do anything explicit.\n\nWhile we\u0027re at it, just thinking how exactly a memcache for pvIOMMU would work; specifically, how and _when_ the host driver would free pages from the memcache. In pvMMU, we are freeing a VM\u0027s memcaches when destroying the VM. In pvIOMMU, it seems the host driver will just _never_ free any pages it allocated for pKVM? IOW once the host driver donated a page to pKVM, no way for the host to reclaim it back? (And that seems ok, since the number of context/pasid/page tables is limited?)\n\n\u003e If unused, the page will gracefully go back to memcache\n\nFYI it may be not that simple. In pvMMU, memcaches are per vCPU, and an unused page doesn\u0027t go back to a memcache, it goes to the per-VM page pool. (And when allocating, pKVM first tries to allocate from the per-VM pool, and only after that from the current vCPU\u0027s memcache.) In pvIOMMU, maybe you can do simpler, but maybe the best way is to do similarly to pvMMU (just s/vCPU/pCPU/ s/per-VM pool/global pool/).",
+      "parentUuid": "6aca1830_edd38aaf",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
