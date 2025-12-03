@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68fd2d9f_095e25c8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-03T21:50:03Z",
+      "side": 1,
+      "message": "makes sense, I have changed legacy logic also to return 0.",
+      "parentUuid": "0d9f84b7_131dd9f5",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "541488a0_54e69091",
