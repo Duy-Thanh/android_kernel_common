@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9f84b7_131dd9f5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T20:33:54Z",
+      "side": 1,
+      "message": "\u003e The behavior of the host without pKVM is to do nothing (returning 0) as in the function device_pasid_table_setup which is the inspiration for this change.\n\nI see, indeed. And I see the host has the same behavior for legacy mode entries as well (e.g. in domain_context_mapping_one()). And I see this behavior dates back to the very first revision of Intel IOMMU driver in 2007...\n\nSo, I don\u0027t know... I\u0027d suggest at least to keep it consistent with legacy mode, i.e. either return -EBUSY in both, or return 0 in both.\n\nAs for which is better, -EBUSY or 0... Now it seems to me that actually 0 is better, to be compatible with the host driver\u0027s expectations?",
+      "parentUuid": "50f9362d_e95b91f8",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "541488a0_54e69091",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "These paths are independent. There are two cases:\n\nContext page (which contains dev/fns for a particular bus) exists: The page for this bus is already present (shared by other devices on this bus), so un-donating doesn\u0027t make sense.\n\nContext page missing: We install the page provided in param-\u003econtext_gpa before. This donated page is now active and can serve other dev/fns on the same bus later, or a future call for the same dev/fn may too succeed. Most likely, it fails due to a bug in pKVM or a host being malicious.",
       "parentUuid": "a1fb65b4_95a10ae6",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197931b7_c0f66b76",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T20:33:54Z",
+      "side": 1,
+      "message": "\u003e Context page missing: We install the page provided in param-\u003econtext_gpa before. This donated page is now active and can serve other dev/fns on the same bus later, or a future call for the same dev/fn may too succeed.\n\nYeah, we already discussed this with Vineeth in another thread, and now it seems clear to me that in the specific case of (pkvm_)iommu_context_addr() we basically have \"global lazy\" allocation of context entries, so even if we failed after we successfully allocated and donated a context entry, it makes sense to keep it allocated and donated, instead of trying to gracefully undonate it in the error path.",
+      "parentUuid": "e6cd8453_bebac400",
       "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
