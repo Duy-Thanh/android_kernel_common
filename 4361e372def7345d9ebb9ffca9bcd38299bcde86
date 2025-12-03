@@ -1,0 +1,213 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55392af3_37101edb",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "pass this as the parameter instead of casting it within the function, makes it easier to audit and \"prove\" this is working properly.",
+      "range": {
+        "startLine": 952,
+        "startChar": 22,
+        "endLine": 952,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3b67034_f8f8419c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 943,
+                "startChar": 0,
+                "endLine": 944,
+                "endChar": 0
+              },
+              "replacement": "static int wrap_file_rewrap(struct wrap_ctx *ctx,\n\t\t\t    struct wrapfd_rewrap __user *user_wrapfd_rewrap)\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 945,
+                "startChar": 0,
+                "endLine": 946,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 952,
+                "startChar": 0,
+                "endLine": 953,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1060,
+                "startChar": 0,
+                "endLine": 1061,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d wrap_file_rewrap(ctx, (struct wrapfd_rewrap __user *)arg);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db05827_720cd1d3",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "no validation that wrapfd_rewrap contains valid data?",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44889aad_7f921a1d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "pass into the function directly.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 0,
+        "endLine": 1205,
+        "endChar": 53
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb1f4e4_57adebc7",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "no validation data from userspace was correct :(",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4e2cf0_03d57090",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "again, pass this into the function  directly.",
+      "range": {
+        "startLine": 1272,
+        "startChar": 0,
+        "endLine": 1272,
+        "endChar": 63
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de8544ed_e5ad69b6",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "no validation that the userspace data was correct :(",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e982ff6_c67c1b8f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-03T08:57:32Z",
+      "side": 1,
+      "message": "when drivers work properly, they are quiet 😊",
+      "range": {
+        "startLine": 1357,
+        "startChar": 0,
+        "endLine": 1357,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cf8bbf62_6e39a143",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1356,
+                "startChar": 0,
+                "endLine": 1358,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
