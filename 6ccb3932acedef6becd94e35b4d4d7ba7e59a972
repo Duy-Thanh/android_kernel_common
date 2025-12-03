@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdce8b6c_668ce2a6",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T20:54:30Z",
+      "side": 1,
+      "message": "\u003e I was thinking of donating back to the host, once a high watermark for number of free pages\n\nOr maybe no need to donate them back to the host at all? We\u0027d better keep it simple.\n\n\u003e Just curious, is the pvmmu memcache designed such a way because there is no synchronous mechanism by which memory could be returned to host?\n\nYou can ask Quentin why it was designed such a way, but I guess there was simply no real need to introduce extra complexity to support returning those pages back to host earlier than VM teardown (since the amount of pages used for page tables is relatively small and limited). And I suppose it is exactly the same with pvIOMMU?",
+      "parentUuid": "0ec99d00_5bb1204f",
+      "revId": "6ccb3932acedef6becd94e35b4d4d7ba7e59a972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ef1717a_6cf15bc9",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 35
