@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a442b0df_6b283578",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-03T22:02:21Z",
+      "side": 1,
+      "message": "Thanks for cros linking - there has been a split brain momentarily ;-). Now me and Aashish synced and decided that Aashish will take it over :-)",
+      "parentUuid": "e122ce36_0179f2f6",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1e01f42_c939f2bd",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
         "patchSetId": 50
