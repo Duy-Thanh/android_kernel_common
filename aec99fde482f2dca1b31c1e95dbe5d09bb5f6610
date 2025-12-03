@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50f9362d_e95b91f8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-03T04:57:31Z",
+      "side": 1,
+      "message": "The behavior of the host without pKVM is to do nothing (returning 0) as in the function [device_pasid_table_setup](https://elixir.bootlin.com/linux/v6.12.42/source/drivers/iommu/intel/pasid.c#L776) which is the inspiration for this change. \nThe correct behavior of the host should be to clear the context entry first and then put the right entry, so the host shouldn\u0027t be allowed to change the context entry without clearing it first.\n\nReturning -EBUSY seems equally valid or maybe better. What do you suggest?",
+      "parentUuid": "5d169d39_8e8a1892",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "541488a0_54e69091",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 46
@@ -84,6 +102,24 @@
       "writtenOn": "2025-11-29T19:25:56Z",
       "side": 1,
       "message": "If we\u0027ve donated the context table page in pkvm_iommu_context_addr() above, we\u0027d better undonate it before returning error here?",
+      "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cd8453_bebac400",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-03T04:57:31Z",
+      "side": 1,
+      "message": "These paths are independent. There are two cases:\n\nContext page (which contains dev/fns for a particular bus) exists: The page for this bus is already present (shared by other devices on this bus), so un-donating doesn\u0027t make sense.\n\nContext page missing: We install the page provided in param-\u003econtext_gpa before. This donated page is now active and can serve other dev/fns on the same bus later, or a future call for the same dev/fn may too succeed. Most likely, it fails due to a bug in pKVM or a host being malicious.",
+      "parentUuid": "a1fb65b4_95a10ae6",
       "revId": "aec99fde482f2dca1b31c1e95dbe5d09bb5f6610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
