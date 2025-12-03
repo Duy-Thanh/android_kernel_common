@@ -98,8 +98,12 @@ static int ufshcd_crypto_keyslot_program(struct blk_crypto_profile *profile,
 	return err;
 }
 
-static int ufshcd_clear_keyslot(struct ufs_hba *hba, int slot)
+static int ufshcd_crypto_keyslot_evict(struct blk_crypto_profile *profile,
+				       const struct blk_crypto_key *key,
+				       unsigned int slot)
 {
+	struct ufs_hba *hba =
+		container_of(profile, struct ufs_hba, crypto_profile);
 	/*
 	 * Clear the crypto cfg on the device. Clearing CFGE
 	 * might not be sufficient, so just clear the entire cfg.
@@ -109,22 +113,17 @@ static int ufshcd_clear_keyslot(struct ufs_hba *hba, int slot)
 	return ufshcd_program_key(hba, &cfg, slot);
 }
 
-static int ufshcd_crypto_keyslot_evict(struct blk_crypto_profile *profile,
-				       const struct blk_crypto_key *key,
-				       unsigned int slot)
-{
-	struct ufs_hba *hba =
-		container_of(profile, struct ufs_hba, crypto_profile);
-
-	return ufshcd_clear_keyslot(hba, slot);
-}
-
+/*
+ * Reprogram the keyslots if needed, and return true if CRYPTO_GENERAL_ENABLE
+ * should be used in the host controller initialization sequence.
+ */
 bool ufshcd_crypto_enable(struct ufs_hba *hba)
 {
 	if (!(hba->caps & UFSHCD_CAP_CRYPTO))
 		return false;
 
 	/* Reset might clear all keys, so reprogram all the keys. */
+<<<<<<< HEAD   (e4b6dae7dd24f2dcd28d0ecb5af01899a16ee70e Merge 960dab23f6d4 ("net: stmmac: Fix accessing freed irq af)
 	if (hba->crypto_profile.num_slots) {
 		int err = -EOPNOTSUPP;
 
@@ -134,6 +133,12 @@ bool ufshcd_crypto_enable(struct ufs_hba *hba)
 	}
 
 	if (hba->android_quirks & UFSHCD_ANDROID_QUIRK_BROKEN_CRYPTO_ENABLE)
+||||||| BASE   (960dab23f6d405740c537d095f90a4ee9ddd9285 net: stmmac: Fix accessing freed irq affinity_hint)
+=======
+	blk_crypto_reprogram_all_keys(&hba->crypto_profile);
+
+	if (hba->quirks & UFSHCD_QUIRK_BROKEN_CRYPTO_ENABLE)
+>>>>>>> BRANCH (57692c303132857fda531adf273086826b409296 scsi: ufs: ufs-pci: Set UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ON)
 		return false;
 
 	return true;
@@ -172,7 +177,12 @@ int ufshcd_hba_init_crypto_capabilities(struct ufs_hba *hba)
 	int err = 0;
 	enum blk_crypto_mode_num blk_mode_num;
 
+<<<<<<< HEAD   (e4b6dae7dd24f2dcd28d0ecb5af01899a16ee70e Merge 960dab23f6d4 ("net: stmmac: Fix accessing freed irq af)
 	if (hba->android_quirks & UFSHCD_ANDROID_QUIRK_CUSTOM_CRYPTO_PROFILE)
+||||||| BASE   (960dab23f6d405740c537d095f90a4ee9ddd9285 net: stmmac: Fix accessing freed irq affinity_hint)
+=======
+	if (hba->quirks & UFSHCD_QUIRK_CUSTOM_CRYPTO_PROFILE)
+>>>>>>> BRANCH (57692c303132857fda531adf273086826b409296 scsi: ufs: ufs-pci: Set UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ON)
 		return 0;
 
 	/*
@@ -245,7 +255,12 @@ void ufshcd_init_crypto(struct ufs_hba *hba)
 	if (!(hba->caps & UFSHCD_CAP_CRYPTO))
 		return;
 
+<<<<<<< HEAD   (e4b6dae7dd24f2dcd28d0ecb5af01899a16ee70e Merge 960dab23f6d4 ("net: stmmac: Fix accessing freed irq af)
 	/* Clear all keyslots */
+||||||| BASE   (960dab23f6d405740c537d095f90a4ee9ddd9285 net: stmmac: Fix accessing freed irq affinity_hint)
+=======
+	/* Clear all keyslots. */
+>>>>>>> BRANCH (57692c303132857fda531adf273086826b409296 scsi: ufs: ufs-pci: Set UFSHCD_QUIRK_PERFORM_LINK_STARTUP_ON)
 	for (slot = 0; slot < hba->crypto_profile.num_slots; slot++)
 		hba->crypto_profile.ll_ops.keyslot_evict(&hba->crypto_profile,
 							 NULL, slot);
