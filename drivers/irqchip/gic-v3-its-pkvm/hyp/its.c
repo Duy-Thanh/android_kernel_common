@@ -110,6 +110,10 @@ static int parse_its_cmdq(struct hyp_gic_v3_its *its, int cmd_offset, size_t len
 	while (len > 0) {
 		cmd_req = cmd->raw_cmd[0] & GENMASK(7, 0);
 
+		/* Reject GICv4 ITS commands for now */
+		if (cmd_req & GITS_CMD_GICv4(0))
+			return -EPERM;
+
 		switch (cmd_req) {
 		case GITS_CMD_MAPD:
 			ret = parse_its_mapd(its, cmd);
