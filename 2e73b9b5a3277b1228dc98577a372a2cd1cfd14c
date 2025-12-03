@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3d8e03e_7d286a83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-03T06:16:55Z",
+      "side": 1,
+      "message": "oh no! \nyou\u0027re right. It didn\u0027t occur to me. I thought we could trust host with flushing as long as we are taking care of flushing the (passthrough) devices using host-ept, until the recent discussions to do away with lazy flushing. The same logic which made us use lazy flushing made me think we could rely on host for using the right cache tags.\n\nLet me replace getting cache tags from HCs to getting it from pKVM directly.",
+      "parentUuid": "a4409fc9_1d405c1a",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1e01f42_c939f2bd",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
         "patchSetId": 50
