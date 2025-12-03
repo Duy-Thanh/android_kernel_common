@@ -16,6 +16,24 @@
       "message": "need another patch to add the new symbols in this series to the symbol list",
       "revId": "afe0703f36ca1751cde10c23b5ff07f831d0d149",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84c4d17_020754d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2025-12-03T03:04:07Z",
+      "side": 1,
+      "message": "Done as symbol list patch(3874299) for review.",
+      "parentUuid": "36a8afd3_8a1a8153",
+      "revId": "afe0703f36ca1751cde10c23b5ff07f831d0d149",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
