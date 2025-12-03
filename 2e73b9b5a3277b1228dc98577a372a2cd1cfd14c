@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e122ce36_0179f2f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T12:38:02Z",
+      "side": 1,
+      "message": "\u003e Let me replace getting cache tags from HCs to getting it from pKVM directly.\n\nJust in case, IIUC Vineeth told in https://android-review.googlesource.com/c/kernel/common/+/3786919/46..55/arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c#b109 that he\u0027s gonna do the same. :)",
+      "parentUuid": "b3d8e03e_7d286a83",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1e01f42_c939f2bd",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
         "patchSetId": 50
