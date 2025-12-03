@@ -1,0 +1,121 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74e50826_4d648a61",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T21:42:28Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we rather _first_ check if the current value is zero, instead of letting it become negative?\n\nHmm... moreover, it will never become negative, it is u64? :)",
+      "fixSuggestions": [
+        {
+          "fixId": "7275f515_480536bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 184,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (donation-\u003enr_pages \u003d\u003d 0) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tdonation-\u003enr_pages--;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83943ad_c2edf4ba",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T21:42:28Z",
+      "side": 1,
+      "message": "We\u0027d better memset it before writing its address to the PTE, not after?\n\nWhy not memset it right after donating?",
+      "fixSuggestions": [
+        {
+          "fixId": "a2cea9a3_08152827",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 198,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tmemset(tmp_page, 0, VTD_PAGE_SIZE);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4361bb_9cdbbeba",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T21:42:28Z",
+      "side": 1,
+      "message": "Question: why exactly is this memset needed?",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
