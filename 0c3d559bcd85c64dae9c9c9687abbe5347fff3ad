@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/465333951",
       "revId": "0c3d559bcd85c64dae9c9c9687abbe5347fff3ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c65fd7ec_7e62f8a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-12-03T10:09:13Z",
+      "side": 1,
+      "message": "Note\n\nThis cherry-pick out a merge has been applied to different branches with more than one Change ID.\n\nThis change has the preferred Change ID.",
+      "revId": "0c3d559bcd85c64dae9c9c9687abbe5347fff3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
