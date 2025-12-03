@@ -16,6 +16,24 @@
       "message": "Please create a patch on top of this one to update the ABI since you are changing a KMI struct",
       "revId": "26522ea78bb7f5998df8d0d731eae9fb3a3d626f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6c7caf6_c3a2036e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3975704
+      },
+      "writtenOn": "2025-12-03T03:03:35Z",
+      "side": 1,
+      "message": "The new patch has been uploaded, https://android-review.googlesource.com/c/kernel/common/+/3874319, please review it, thanks😊",
+      "parentUuid": "afe451e0_f4a1cf43",
+      "revId": "26522ea78bb7f5998df8d0d731eae9fb3a3d626f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
