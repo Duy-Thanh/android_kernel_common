@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca975e4d_cb778eff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-03T18:31:47Z",
+      "side": 1,
+      "message": "This is hitting a check patch error that needs to be resolved:\n\n```\nWARNING:STRNCPY: Prefer strscpy, strscpy_pad, or __nonstring over strncpy - see: https://github.com/KSPP/linux/issues/90\n#139: FILE: drivers/of/fdt.c:1122:\n+            strncpy(cmdline + cmdline_len, p, copy_len);\n```",
+      "revId": "e5878761627315b541ba339d799916bb0b1f5f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
