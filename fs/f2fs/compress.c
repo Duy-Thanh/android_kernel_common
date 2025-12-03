@@ -1239,8 +1239,14 @@ int f2fs_truncate_partial_cluster(struct inode *inode, u64 from, bool lock)
 		int i;
 
 		for (i = cluster_size - 1; i >= 0; i--) {
+<<<<<<< HEAD   (cbcf393b9698ef3dad15960cc71485572d761e2b Revert "Bluetooth: hci_sync: fix double free in 'hci_discove)
 			struct folio *folio = page_folio(rpages[i]);
 			loff_t start = folio->index << PAGE_SHIFT;
+||||||| BASE   (7ce9bb0b95fc280e9212b8922590c492ca1d9c39 Bluetooth: hci_sync: fix double free in 'hci_discovery_filte)
+			loff_t start = rpages[i]->index << PAGE_SHIFT;
+=======
+			loff_t start = (loff_t)rpages[i]->index << PAGE_SHIFT;
+>>>>>>> BRANCH (ef49378864bb1ed14cd48c8e687729e12714d849 f2fs: fix to avoid overflow while left shift operation)
 
 			if (from <= start) {
 				folio_zero_segment(folio, 0, folio_size(folio));
