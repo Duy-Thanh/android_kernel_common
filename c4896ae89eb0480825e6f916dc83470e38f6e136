@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20dd2c3a_de75ff86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-12-03T13:21:23Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nI have a couple of patches that are waiting for an upstream merge to Linus\u0027s tree. I\u0027d like to pre-emptively integrate them as we currently need them to monitor SoC power-saving states via perf from perfetto logging.\nI can see that pixel tests are failing though the patches in question are x86 specific (Intel specific to be exact), so I\u0027m not sure if those failures are really related (although I may be missing some relationship here).",
+      "revId": "c4896ae89eb0480825e6f916dc83470e38f6e136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
