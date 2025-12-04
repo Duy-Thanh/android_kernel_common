@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6105edd2_eeb7a8c8",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T11:33:38Z",
+      "side": 1,
+      "message": "Second thought: shouldn\u0027t all this be done not only for pvIOMMU case but rather set unconditionally for both PVIOMMU and Shadow IOMMU?",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "697e8477_b216ebb5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/pkvm.h",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/include/asm/pkvm.h",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8649ed69_9feba8e2",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 30
@@ -57,6 +108,47 @@
                 "endChar": 0
               },
               "replacement": "\t\t * TODO: Will revisit this later with device assignment feature.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98d96f1e_3e1eb5a4",
+        "filename": "arch/x86/kvm/Kconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T11:33:38Z",
+      "side": 1,
+      "message": "hmm: perhaps it would be better to let this config be enabled with PKVM since when comparing results on platform where we have the CONFIG_\\*PKVM\\* enabled but disabled pKVM via command line, the comparison will not be fair and misleading, WDYT?\n\nIf you agree it would be better to disable SVM in the code via `if (pkvm_enabled()` - probably it will be needed in multiple places.",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c3505b00_96d42f36",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/Kconfig",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": ""
             }
           ]
         }
