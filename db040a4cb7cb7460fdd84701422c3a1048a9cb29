@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8649ed69_9feba8e2",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T11:07:24Z",
+      "side": 1,
+      "message": "nit: maybe combine with line 194 which already mentions the same?",
+      "range": {
+        "startLine": 192,
+        "startChar": 5,
+        "endLine": 192,
+        "endChar": 54
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70973d4b_42d5e6ca",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T11:07:24Z",
+      "side": 1,
+      "message": "Nit: Maybe add \"TODO: Will..\"",
+      "range": {
+        "startLine": 196,
+        "startChar": 5,
+        "endLine": 196,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1342300c_17fe91a3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/pkvm.h",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "\t\t * TODO: Will revisit this later with device assignment feature.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
