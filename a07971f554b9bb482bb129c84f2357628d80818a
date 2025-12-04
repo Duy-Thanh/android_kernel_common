@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52262905_f328bbfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T11:56:34Z",
+      "side": 1,
+      "message": "Sorry for confusion: I wrote the first comment when looking on previous version of https://android-review.git.corp.google.com/c/kernel/common/+/3786919 where `flush_write_buffer` was still used. After I\u0027ve noticed the change I\u0027ve add my second comment and add CR+2: and I am ok with requiring RWBF\u003d0 to avoid complexity.\n\nI am marking this one as resolved to not confuse anyone.",
+      "parentUuid": "dbdb41fa_2a6b5388",
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d27ff7_ae369060",
