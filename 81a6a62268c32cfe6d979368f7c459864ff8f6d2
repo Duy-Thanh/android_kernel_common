@@ -16,6 +16,24 @@
       "message": "The order between this and previous patch seems to be wrong but I guess that\u0027s not a problem.",
       "revId": "81a6a62268c32cfe6d979368f7c459864ff8f6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba95927_59411201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-04T23:13:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d68d1cee_ea3799b8",
+      "revId": "81a6a62268c32cfe6d979368f7c459864ff8f6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
