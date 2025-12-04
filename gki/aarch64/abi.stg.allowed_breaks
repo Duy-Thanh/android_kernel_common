@@ -89,3 +89,17 @@ type 'struct kvm_iommu_ops' changed
   member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
   member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
 
+type 'struct selinux_state' changed
+  member changed from 'bool policycap[9]' to 'bool policycap[12]'
+    type changed from 'bool[9]' to 'bool[12]'
+      number of elements changed from 9 to 12
+  2 members ('bool android_netlink_route' .. 'bool android_netlink_getneigh') changed
+    offset changed by 24
+
+type 'struct selinux_state' changed
+  member changed from 'bool policycap[12]' to 'bool policycap[9]'
+    type changed from 'bool[12]' to 'bool[9]'
+      number of elements changed from 12 to 9
+  2 members ('bool android_netlink_route' .. 'bool android_netlink_getneigh') changed
+    offset changed by -24
+
