@@ -3,6 +3,67 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0f69fa3_ed53870c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-04T21:51:22Z",
+      "side": 1,
+      "message": "So, if I want to load pages by boosting the filesystem/storage stack, should I modify this logic?",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7eb85512_c162b4f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/fadvise.h\u003e\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 522,
+                "startChar": 0,
+                "endLine": 522,
+                "endChar": 0
+              },
+              "replacement": "\tsize \u003d i_size_read(file-\u003ef_inode);\n\n\t/* Hint to the kernel to prefetch sequentially. */\n\tret \u003d vfs_fadvise(file, 0, size, POSIX_FADV_SEQUENTIAL);\n\tif (ret \u003c 0)\n\t\tpr_warn(\"wrapfd: vfs_fadvise failed: %d\\n\", ret);\n\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 523,
+                "startChar": 0,
+                "endLine": 524,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55392af3_37101edb",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
