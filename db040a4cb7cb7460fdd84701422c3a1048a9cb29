@@ -423,6 +423,30 @@
       },
       "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec109f0_35f2d08e",
+        "filename": "arch/x86/kvm/Kconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T20:33:17Z",
+      "side": 1,
+      "message": "After a closer look at the host driver code, I see intel_svm_check() exists in 6.12 as well, and enabling PRQ (if ecap_prs() is set) is quite independent of enabling SVM (if VTD_FLAG_SVM_CAPABLE is set).\n\nSo, if in 6.18 we plan to just disable SVM at runtime in intel_svm_check() if pKVM is enabled, and actually we can easily do the same in 6.12 as well, why not just do that in this patch, instead of forcing disabling INTEL_IOMMU_SVM at compile time? (That is independent of disabling ecap_prs.)",
+      "parentUuid": "7a17007e_45696256",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
