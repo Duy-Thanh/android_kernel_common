@@ -34,6 +34,24 @@
       "parentUuid": "4cc0a386_4d986d17",
       "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbdb41fa_2a6b5388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T11:43:23Z",
+      "side": 1,
+      "message": "Basically the only reason is that to make it actually correct, it looks like we\u0027d need a separate lock, for the same reasons as why we need qi_lock.\n\nAlthough, perhaps we could just lock iommu-\u003elock inside flush_write_buffer()? But in pkvm_iommu_set_lm_ce() we call flush_write_buffer() with iommu-\u003elock already locked (I\u0027m not sure why, but the host driver does the same). So it makes it complicated.\n\nSo even if that would be not much extra complexity, by requiring RWBF\u003d0 we are avoiding even that complexity.",
+      "parentUuid": "95684a0c_58e42882",
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
