@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7759b818_68abb4d9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T19:40:55Z",
+      "side": 1,
+      "message": "Why are we doing this only if level \u003d\u003d 1? Don\u0027t we want to free pages on all the walked levels, like the host\u0027s dma_pte_list_pagetables() does?\n\nEDIT: ok, just realized that we are doing this not only if level \u003d\u003d 1... But why not do this before `if (level \u003d\u003d 1)`, to avoid such confusion?",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a239de79_63bd6e42",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T19:40:55Z",
+      "side": 1,
+      "message": "I\u0027m intrigued what this is about.",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
