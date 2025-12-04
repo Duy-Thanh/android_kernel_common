@@ -64,6 +64,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33c301c2_f091751b",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-04T22:30:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean by \"load pages by boosting the filesystem/storage stack\". Can you clarify please?",
+      "parentUuid": "a0f69fa3_ed53870c",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 34
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55392af3_37101edb",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -293,6 +317,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ceb6a6a_29ca9cb4",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-04T22:30:09Z",
+      "side": 1,
+      "message": "That would require the caller to know what kind of memory does the FD represent and that\u0027s not always possible I think. The caller might just receive an FD and don\u0027t know how it was allocated and unfortunately is_dma_buf_file() is a private function which I can\u0027t use here.",
+      "parentUuid": "d5d222ff_770d9f61",
+      "range": {
+        "startLine": 1210,
+        "startChar": 1,
+        "endLine": 1210,
+        "endChar": 38
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fec0a96_232708cd",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -338,6 +386,30 @@
           ]
         }
       ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c1f476e_aa03c140",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-04T22:30:09Z",
+      "side": 1,
+      "message": "I think that would have to be done inside alloc_rd_file_content(). I assume you want to use large folios while loading an f2fs file. You load it as read-only, then you can rewrap it into a writable buffer (wrap_content_folios) without copying.\n\nIf you provide the list of function calls you need to load the file content using large folios I can try that.",
+      "parentUuid": "1fec0a96_232708cd",
+      "range": {
+        "startLine": 1226,
+        "startChar": 2,
+        "endLine": 1229,
+        "endChar": 3
+      },
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
