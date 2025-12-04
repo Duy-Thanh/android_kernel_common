@@ -22,6 +22,30 @@
       },
       "revId": "b4b436ca33c0900359df8643d5c0b27c35954f30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a84db53_b82c3af3",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 975,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-12-04T21:50:59Z",
+      "side": 1,
+      "message": "see the fix in change 3877339",
+      "parentUuid": "89840133_c6187766",
+      "range": {
+        "startLine": 975,
+        "startChar": 5,
+        "endLine": 975,
+        "endChar": 11
+      },
+      "revId": "b4b436ca33c0900359df8643d5c0b27c35954f30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
