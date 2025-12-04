@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f632f20_0d9df8fc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T19:58:41Z",
+      "side": 1,
+      "message": "We still haven\u0027t cleared the PTE pointing to this page, so isn\u0027t it a bit too early to undonate it as this point?",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7759b818_68abb4d9",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 92
@@ -14,6 +31,24 @@
       "writtenOn": "2025-12-04T19:40:55Z",
       "side": 1,
       "message": "Why are we doing this only if level \u003d\u003d 1? Don\u0027t we want to free pages on all the walked levels, like the host\u0027s dma_pte_list_pagetables() does?\n\nEDIT: ok, just realized that we are doing this not only if level \u003d\u003d 1... But why not do this before `if (level \u003d\u003d 1)`, to avoid such confusion?",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99a505f_0d4b8d65",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T19:58:41Z",
+      "side": 1,
+      "message": "Ok, we cannot memset the page table before walking it in the loop above.\n\nBut I\u0027m not sure why need to memset it at all?",
+      "parentUuid": "7759b818_68abb4d9",
       "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
