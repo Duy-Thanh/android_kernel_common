@@ -471,6 +471,30 @@
       },
       "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3207943_ad85bd4f",
+        "filename": "arch/x86/kvm/Kconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T21:03:51Z",
+      "side": 1,
+      "message": "\u003e We do similar depends for PKVM_INTEL to include or exclude features(eg: INTEL_IOMMU_SCALABLE_MODE_DEFAULT_ON and !KSM).\n\nAnd I think we should revisit at some point if that\u0027s really the best way to do that.\n\nWhatever we disable in gki_defconfig, may affect everyone using this gki_defconfig, e.g. Cuttlefish...",
+      "parentUuid": "aeddb295_cd15eea3",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
