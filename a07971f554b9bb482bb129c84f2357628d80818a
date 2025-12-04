@@ -52,6 +52,76 @@
       "parentUuid": "95684a0c_58e42882",
       "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d27ff7_ae369060",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T11:45:24Z",
+      "side": 1,
+      "message": "nit: s/rwbuf/rwbf/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "f1c09025_7acf6e62",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 246,
+                "startChar": 0,
+                "endLine": 247,
+                "endChar": 0
+              },
+              "replacement": "\t\t * requires write buffer flushing, require cap_rwbf\u003d0 for simplicity.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6297cee9_777cbe33",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T11:45:24Z",
+      "side": 1,
+      "message": "nit: s/RWBUF/RWBF/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "3ca7f216_6be96efe",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+              "range": {
+                "startLine": 249,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpr_warn(\"pkvm: drhd reg_base 0x%llx: CAP.RWBF\u003d1 is not supported\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
