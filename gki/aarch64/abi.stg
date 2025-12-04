@@ -41750,6 +41750,12 @@ member {
   offset: 13696
 }
 member {
+  id: 0xed700d4c
+  name: "android_vendor_data1"
+  type_id: 0x92233392
+  offset: 14528
+}
+member {
   id: 0xb43680cf
   name: "aneg_done"
   type_id: 0x2ee76b64
@@ -223332,7 +223338,7 @@ struct_union {
   kind: STRUCT
   name: "root_domain"
   definition {
-    bytesize: 1816
+    bytesize: 1824
     member_id: 0x05f7cb61
     member_id: 0x74a1e6d8
     member_id: 0x95dacd96
@@ -223354,6 +223360,7 @@ struct_union {
     member_id: 0xdd4e185d
     member_id: 0x954a0e7b
     member_id: 0x672698de
+    member_id: 0xed700d4c
   }
 }
 struct_union {
