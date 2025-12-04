@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825658d3_cb4a988c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T13:01:17Z",
+      "side": 1,
+      "message": "BTW regarding \"to look closer to it in 6.18 and maybe clean-up the code and removing the illusion that we support it and also getting rid of dead pKVM code\": so, I see that yes, in the latest version of this series that it already cleaned up just by removing any usage of flush_write_buffer() in pKVM code. But as for how we\u0027re gonna do this in 6.18: I assume our overall current plan is to try to reuse the host driver\u0027s code via #ifdefs instead of copying it, so I guess we\u0027re gonna keep flush_write_buffer(), just make it explicitly no-op in pKVM? (so that we add a corresponding #ifdef just to flush_write_buffer() itself, not to all places where it is called)",
+      "parentUuid": "52262905_f328bbfc",
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d27ff7_ae369060",
