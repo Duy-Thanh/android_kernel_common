@@ -192,6 +192,158 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5d222ff_770d9f61",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-04T22:04:05Z",
+      "side": 1,
+      "message": "Can we select this explicitly, instead of trying dmabuf first and then falling back to file-backed one?",
+      "range": {
+        "startLine": 1210,
+        "startChar": 1,
+        "endLine": 1210,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "54c90d7e_d8728c0c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1199,
+                "startChar": 0,
+                "endLine": 1202,
+                "endChar": 0
+              },
+              "replacement": "\tstruct wrap_content *content \u003d NULL;\n\tstruct dma_buf *dmabuf \u003d NULL;\n\tstruct file *file \u003d NULL;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1210,
+                "startChar": 0,
+                "endLine": 1214,
+                "endChar": 0
+              },
+              "replacement": "\tswitch (wrapfd_wrap.type) {\n\tcase WRAPFD_TYPE_DMABUF:\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1215,
+                "startChar": 0,
+                "endLine": 1218,
+                "endChar": 0
+              },
+              "replacement": "\t\tdmabuf \u003d dma_buf_get(wrapfd_wrap.fd);\n\t\tif (IS_ERR(dmabuf))\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1220,
+                "startChar": 0,
+                "endLine": 1220,
+                "endChar": 0
+              },
+              "replacement": "\t\tcontent \u003d alloc_dmabuf_content(dmabuf,\n\t\t\t\t!!(wrapfd_wrap.prot \u0026 PROT_WRITE));\n\t\tbreak;\n\tcase WRAPFD_TYPE_FILE:\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1235,
+                "startChar": 0,
+                "endLine": 1235,
+                "endChar": 0
+              },
+              "replacement": "\t\tbreak;\n\tdefault:\n\t\treturn -EINVAL;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1257,
+                "startChar": 0,
+                "endLine": 1258,
+                "endChar": 0
+              },
+              "replacement": "\tif (is_dmabuf \u0026\u0026 dmabuf)\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1259,
+                "startChar": 0,
+                "endLine": 1260,
+                "endChar": 0
+              },
+              "replacement": "\telse if (!is_dmabuf \u0026\u0026 file)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fec0a96_232708cd",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-04T22:04:05Z",
+      "side": 1,
+      "message": "Can we set the immutable bit to the file so that we can activate large folio in f2fs? More specifically, we need to 1) set the flag, 2) evict inode object, 3) reload it again to enable large folio, 4) clear the flag, 5) evict inode object, 6) unlink or rewrite the file. Can we do that?",
+      "range": {
+        "startLine": 1226,
+        "startChar": 2,
+        "endLine": 1229,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "45dd45b0_6a0d259c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1232,
+                "startChar": 0,
+                "endLine": 1232,
+                "endChar": 0
+              },
+              "replacement": "\t\t{\n\t\t\tstruct inode *inode \u003d file-\u003ef_inode;\n\n\t\t\t// If the underlying filesystem is f2fs, set the immutable bit\n\t\t\t// to potentially enable large folio allocation.\n\t\t\tif (inode \u0026\u0026 inode-\u003ei_sb \u0026\u0026 inode-\u003ei_sb-\u003es_type \u0026\u0026\n\t\t\t    strcmp(inode-\u003ei_sb-\u003es_type-\u003ename, \"f2fs\") \u003d\u003d 0) {\n\t\t\t\tstruct iattr newattrs \u003d { .ia_valid \u003d ATTR_FLAGS };\n\t\t\t\tint ret;\n\n\t\t\t\tinode_lock(inode);\n\t\t\t\tnewattrs.ia_flags \u003d inode-\u003ei_flags | S_IMMUTABLE;\n\t\t\t\tinode_unlock(inode);\n\n\t\t\t\tret \u003d vfs_setattr(file, \u0026newattrs);\n\t\t\t\tif (ret)\n\t\t\t\t\tpr_warn(\"wrapfd: Failed to set immutable flag on f2fs inode %lu: %d\\n\",\n\t\t\t\t\t\tinode-\u003ei_ino, ret);\n\t\t\t}\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1233,
+                "startChar": 0,
+                "endLine": 1233,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb4e2cf0_03d57090",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
