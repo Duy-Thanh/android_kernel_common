@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e135210f_7a7b2a2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d491c82_9d190264",
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6105edd2_eeb7a8c8",
@@ -111,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30812f51_fa188dd0",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1f67398_0e072cef",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 32
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8649ed69_9feba8e2",
@@ -124,6 +166,30 @@
       "writtenOn": "2025-12-04T11:07:24Z",
       "side": 1,
       "message": "nit: maybe combine with line 194 which already mentions the same?",
+      "range": {
+        "startLine": 192,
+        "startChar": 5,
+        "endLine": 192,
+        "endChar": 54
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead93494_567bbe5b",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8649ed69_9feba8e2",
       "range": {
         "startLine": 192,
         "startChar": 5,
@@ -171,6 +237,30 @@
           ]
         }
       ],
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ebdf636_af47914b",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70973d4b_42d5e6ca",
+      "range": {
+        "startLine": 196,
+        "startChar": 5,
+        "endLine": 196,
+        "endChar": 9
+      },
       "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -224,6 +314,24 @@
       "side": 1,
       "message": "Ok, for 6.12 we can keep it, 6.12 is a mess anyway.\n\nFor 6.18, I assume the plan is not to carry over pkvm_update_iommu_virtual_caps() to it? It would be nice not to carry it over to 6.18.\n\nLooks like in 6.18 we\u0027d just need to patch intel_svm_check() to disable SVM, and nested_supported() to disable nesting?\n\nAlthough, looks like 6.18 also made PRS independent of SVM, so we\u0027d also need to patch a couple of places if we want to force disabling PRS?.. (Assuming that we really need to force disabling it in the first place.)\n\n\u003e And I have removed the PASID restriction in another cl.\n\nYou mean changing PKVM_MAX_PASID_BITS from 15 to 20 in aosp/3786921? But the below \"limit PASID to reduce the memory consumptions\" is still not removed?",
       "parentUuid": "813b46d6_5bfe97f9",
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21ba97a_6c9bf894",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:49:45Z",
+      "side": 1,
+      "message": "\u003e For 6.18, I assume the plan is not to carry over pkvm_update_iommu_virtual_caps() to it? It would be nice not to carry it over to 6.18.\n\u003e Looks like in 6.18 we\u0027d just need to patch intel_svm_check() to disable SVM, and nested_supported() to disable nesting?\n\nYeah you\u0027re right, we can do all from the host driver. I think there are couple other places which needs minor modifications, but should be doable as we would be anyways working on host code mostly.\n\n\u003e You mean changing PKVM_MAX_PASID_BITS from 15 to 20 in aosp/3786921? But the below \"limit PASID to reduce the memory consumptions\" is still not removed?\n\nAhh yes, sorry I misunderstood. I will make this conditional. I also need to not disable SLTS for pviommu, currently we disable Nested | slts. Since pviommu support second level, I need to make that conditional as well. I think I will modify this patch to include all those changes, since all those changes are in one place.",
+      "parentUuid": "b7130d18_9d6805f7",
       "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
