@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a17e7d1_0ee65756",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 33
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T23:40:58Z",
+      "side": 1,
+      "message": "Same note as in aosp/3877459: we are disabling PRS simply because it is not supported by pKVM, not because we are not using it?\n\nBTW I\u0027m wondering what exactly makes it unsupported by pKVM?",
+      "revId": "c51ca3b4c680cd22586004879e5fb44db44d1044",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e60ef1_b4bdcdc6",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T23:40:58Z",
+      "side": 1,
+      "message": "nit: worth adding a short comment that NEST is not supported even with pvIOMMU?",
+      "fixSuggestions": [
+        {
+          "fixId": "9c3d7a02_d63c00c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/pkvm.h",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* NEST is not supported even with pvIOMMU. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c51ca3b4c680cd22586004879e5fb44db44d1044",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
