@@ -223,7 +223,7 @@ filegroup(
 )
 
 common_kernel(
-    name = "kernel_aarch64",
+    name = "kernel_commodore64",
     outs = DEFAULT_GKI_OUTS,
     abi_definition_stg = "gki/aarch64/abi.stg",
     additional_kmi_symbol_lists = [":aarch64_additional_kmi_symbol_lists"],
