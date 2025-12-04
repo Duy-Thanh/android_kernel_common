@@ -336,6 +336,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e8b5c4_ec4d3583",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T23:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e21ba97a_6c9bf894",
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98d96f1e_3e1eb5a4",
@@ -487,6 +505,30 @@
       "side": 1,
       "message": "\u003e We do similar depends for PKVM_INTEL to include or exclude features(eg: INTEL_IOMMU_SCALABLE_MODE_DEFAULT_ON and !KSM).\n\nAnd I think we should revisit at some point if that\u0027s really the best way to do that.\n\nWhatever we disable in gki_defconfig, may affect everyone using this gki_defconfig, e.g. Cuttlefish...",
       "parentUuid": "aeddb295_cd15eea3",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6447eef_4358bea5",
+        "filename": "arch/x86/kvm/Kconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T23:04:08Z",
+      "side": 1,
+      "message": "Done, moved SVM logic to driver in the next cl: aosp/3877459",
+      "parentUuid": "c3207943_ad85bd4f",
       "range": {
         "startLine": 139,
         "startChar": 13,
