@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6467256c_4fc0d77f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T13:27:08Z",
+      "side": 1,
+      "message": "Yeah I was also thinking that in 6.18 the POR is to reuse the host driver\u0027s code via #ifdefs so perhaps adding TODO here may be useful to not forget about it?\n\n\u003e ... so I guess we\u0027re gonna keep flush_write_buffer(), just make it explicitly no-op in pKVM? (so that we add a corresponding #ifdef just to flush_write_buffer() itself, not to all places where it is called)\n\nYes, I think so.",
+      "parentUuid": "825658d3_cb4a988c",
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d27ff7_ae369060",
