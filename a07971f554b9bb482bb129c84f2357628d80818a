@@ -16,6 +16,24 @@
       "message": "In general this change LGTM (we do not need to care about such legacy hardware) although I do not understand why we can\u0027t support hw requiring write buffer flash as `flush_write_buffer` that we have in arch/x86/kvm/vmx/pkvm/hyp/iommu.c seems to handle that case correctly (at least at first glance): it write buffer flash command by setting DMA_GCMD_WBF.\n\nIf above is not enough (I see that `flush_write_buffer` is used in pKVM code in various places e.g. `pkvm_cache_tag_flush_range_np`, `pkvm_pasid_flush_caches` and `context_present_cache_flush`) and we really need to drop support for hw requiring WBF, maybe we should add TODO here to look closer to it in 6.18 and maybe clean-up the code and removing the illusion that we support it and also getting rid of dead pKVM code. WDYT?",
       "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95684a0c_58e42882",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-04T09:23:29Z",
+      "side": 1,
+      "message": "I didn\u0027t noticed that we get rid of `flush_write_buffer` as per Dima suggestion from latest https://android-review.git.corp.google.com/c/kernel/common/+/3786919 (it was there in previous versions)",
+      "parentUuid": "4cc0a386_4d986d17",
+      "revId": "a07971f554b9bb482bb129c84f2357628d80818a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
