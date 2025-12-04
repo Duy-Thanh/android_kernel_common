@@ -40,6 +40,30 @@
       ],
       "revId": "59abd679b1c23b5b51361194378f071711237844",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5028473a_11329595",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-04T09:10:01Z",
+      "side": 1,
+      "message": "Duh, of course I haven\u0027t built before uploading!",
+      "parentUuid": "4f5e02a3_f2f6b169",
+      "range": {
+        "startLine": 270,
+        "startChar": 1,
+        "endLine": 270,
+        "endChar": 5
+      },
+      "revId": "59abd679b1c23b5b51361194378f071711237844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
