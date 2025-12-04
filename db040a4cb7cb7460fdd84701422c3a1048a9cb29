@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e8c1f29_109709c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T13:49:14Z",
+      "side": 1,
+      "message": "Will they? Even for a simple case of assigning an entire PCI device (not a PASID) to a VM via vfio, and even for devices not supporting/using Device TLB?\n\n(Quoting ECAP.PRS description in VT-spec: \"Hardware implementation reporting Device-TLB support (DT) field as Clear or Scalable Mode Translation Support (SMTS) field as Clear also report this field as Clear.\" - while it is surely possible to assign devices that are behind an IOMMU without Device-TLB support, and thus without PRS support either?)",
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6105edd2_eeb7a8c8",
         "filename": "arch/x86/include/asm/pkvm.h",
         "patchSetId": 30
@@ -118,6 +135,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32824c40_a651ef8e",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T13:49:14Z",
+      "side": 1,
+      "message": "Why not just let the host driver consciously disable SVM if pKVM is enabled, instead of emulating lack of PRS support?\n\nRather than adding more stuff to pkvm_update_iommu_virtual_caps(), it looks like we can eliminate the whole pkvm_update_iommu_virtual_caps() if pvIOMMU is enabled? For example, the below \"limit PASID to reduce the memory consumptions\" is not needed either?",
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98d96f1e_3e1eb5a4",
         "filename": "arch/x86/kvm/Kconfig",
         "patchSetId": 30
@@ -153,6 +187,30 @@
           ]
         }
       ],
+      "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c8b97b_a4a4bbd6",
+        "filename": "arch/x86/kvm/Kconfig",
+        "patchSetId": 30
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T13:49:14Z",
+      "side": 1,
+      "message": "+1. I see no reason why need to enforce disabling SVM at compile time, if the host can just detect that it is not supported at runtime.",
+      "parentUuid": "98d96f1e_3e1eb5a4",
+      "range": {
+        "startLine": 139,
+        "startChar": 13,
+        "endLine": 139,
+        "endChar": 28
+      },
       "revId": "db040a4cb7cb7460fdd84701422c3a1048a9cb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
