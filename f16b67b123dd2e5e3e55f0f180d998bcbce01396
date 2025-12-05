@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d2cdb3_2ef81c5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-05T00:18:45Z",
+      "side": 1,
+      "message": "For android17-6.18, before the ABI freeze, could you ensure that the two vendorhooks present after this patch are consolidated, so we don\u0027t have this extra complexity going forward?",
+      "revId": "f16b67b123dd2e5e3e55f0f180d998bcbce01396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
