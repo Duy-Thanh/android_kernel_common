@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a35f6b_5bd424d1",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T15:16:14Z",
+      "side": 1,
+      "message": "nit:\n\nperhaps to be on the safe side?\n\n```\nif (WARN_ON(!ppage-\u003eslot-\u003earch.pkvm_pf_count))\n    return;\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "9c417aaf_c3817a8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/mmu.c",
+              "range": {
+                "startLine": 1557,
+                "startChar": 0,
+                "endLine": 1557,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON(!ppage-\u003eslot-\u003earch.pkvm_pf_count))\n\t\treturn;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "980c2532abb7f70247e5223b99350e5566f7fc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
