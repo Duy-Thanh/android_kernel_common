@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebefbab6_7c58bae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2049209
+      },
+      "writtenOn": "2025-12-05T16:30:50Z",
+      "side": 1,
+      "message": "Thanks for the review.\nDo we mean wait for the upstream merge (or comments) before merging into GKI?",
+      "parentUuid": "cef4f467_8aeaf589",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06f6691b_0219c7ef",
         "filename": "arch/arm64/kernel/cpu_errata.c",
         "patchSetId": 1
