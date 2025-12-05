@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60a5016_483cb2c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 33
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-05T01:30:27Z",
+      "side": 1,
+      "message": "You\u0027re right. To support PRS, there are some initialization steps like setting up head and tail register etc. We don\u0027t have hypercalls for it yet. Will reword.",
+      "parentUuid": "0a17e7d1_0ee65756",
+      "revId": "c51ca3b4c680cd22586004879e5fb44db44d1044",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6e60ef1_b4bdcdc6",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "c51ca3b4c680cd22586004879e5fb44db44d1044",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d307ac3_4d0e0c48",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-05T01:30:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6e60ef1_b4bdcdc6",
       "revId": "c51ca3b4c680cd22586004879e5fb44db44d1044",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
