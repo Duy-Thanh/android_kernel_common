@@ -24,6 +24,7 @@
 #include <linux/poll.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
+#include <trace/hooks/vb2.h>
 
 #include <media/v4l2-common.h>
 #include <media/v4l2-dev.h>
@@ -219,6 +220,9 @@ static int vb2_fill_vb2_v4l2_buffer(struct vb2_buffer *vb, struct v4l2_buffer *b
 					b->m.planes[plane].m.fd;
 				planes[plane].length =
 					b->m.planes[plane].length;
+
+				trace_android_vh_vb2_plane_fill_v4l2_plane(
+					&planes[plane], &b->m.planes[plane]);
 			}
 			break;
 		default:
