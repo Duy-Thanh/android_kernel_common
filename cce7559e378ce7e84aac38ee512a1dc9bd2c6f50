@@ -1,0 +1,83 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e171ca3b_d112a15b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T11:38:47Z",
+      "side": 1,
+      "message": "Why not EPERM?",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0de6098_0d4575f6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T11:38:47Z",
+      "side": 1,
+      "message": "+ pfn_range_is_valid(phys, size \u003e\u003e PAGE_SHIFT); \n\n(I need to make a patch to add it to host_donate_guest and host_donate_sglist_guest(), now android17-6.18 is more recent than -rc5)",
+      "fixSuggestions": [
+        {
+          "fixId": "427da8c1_adbb6871",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2058,
+                "startChar": 0,
+                "endLine": 2058,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!pfn_range_is_valid(ppage-\u003epfn, size \u003e\u003e PAGE_SHIFT))\n\t\t\treturn -EINVAL;\n\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2098,
+                "startChar": 0,
+                "endLine": 2098,
+                "endChar": 0
+              },
+              "replacement": "\n\t\tif (!pfn_range_is_valid(ppage-\u003epfn, size \u003e\u003e PAGE_SHIFT)) {\n\t\t\tret \u003d -EINVAL;\n\t\t\tgoto unlock;\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb04546_901601a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2544,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T11:38:47Z",
+      "side": 1,
+      "message": "This can return -ENOMEM, but I don\u0027t believe vendor modules have a way of topping up the stage2_mc by themselves?",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
