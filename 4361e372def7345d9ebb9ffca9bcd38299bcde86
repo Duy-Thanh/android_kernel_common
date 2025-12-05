@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a31bac6_b7095163",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-05T21:47:28Z",
+      "side": 1,
+      "message": "are we sure all these operations are safe enough? what if other app is trying to touch the mapping or read/write during this?",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d68632b0_7c20757d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 315,
+                "startChar": 0,
+                "endLine": 316,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * We have taken references to all the folios. To allow writable access\n\t * to this content, we detach these pages from the original file\u0027s\n\t * address space. Any existing mappings of the original file will\n\t * become stale and will fault if accessed.\n\t */\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 317,
+                "startChar": 0,
+                "endLine": 317,
+                "endChar": 0
+              },
+              "replacement": "\t/* We can now unmap our temporary mapping. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f69fa3_ed53870c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -329,6 +380,30 @@
       "side": 1,
       "message": "That would require the caller to know what kind of memory does the FD represent and that\u0027s not always possible I think. The caller might just receive an FD and don\u0027t know how it was allocated and unfortunately is_dma_buf_file() is a private function which I can\u0027t use here.",
       "parentUuid": "d5d222ff_770d9f61",
+      "range": {
+        "startLine": 1210,
+        "startChar": 1,
+        "endLine": 1210,
+        "endChar": 38
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef17867_fd15ed36",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-05T21:47:28Z",
+      "side": 1,
+      "message": "I think we can manage this by KCONFIG or module param?",
+      "parentUuid": "6ceb6a6a_29ca9cb4",
       "range": {
         "startLine": 1210,
         "startChar": 1,
