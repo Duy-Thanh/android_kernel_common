@@ -52,6 +52,24 @@
       "parentUuid": "fb750499_586d3b94",
       "revId": "f16b67b123dd2e5e3e55f0f180d998bcbce01396",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee985ede_96d3f4cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039846
+      },
+      "writtenOn": "2025-12-05T01:51:22Z",
+      "side": 1,
+      "message": "Of course, in Android 17-6.18, we will use \u0027android_vh_setscheduler_class\u0027 to replace \u0027android_vh_task_should_scx\u0027.",
+      "parentUuid": "fcdaabd2_4f87c2cd",
+      "revId": "f16b67b123dd2e5e3e55f0f180d998bcbce01396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
