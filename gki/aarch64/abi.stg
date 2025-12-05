@@ -456362,6 +456362,15 @@ elf_symbol {
   full_name: "d_alloc_parallel"
 }
 elf_symbol {
+  id: 0x2023f91e
+  name: "d_delete"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdc69387f
+  type_id: 0x141901a7
+  full_name: "d_delete"
+}
+elf_symbol {
   id: 0xfeea461b
   name: "d_drop"
   is_defined: true
@@ -468521,6 +468530,15 @@ elf_symbol {
   crc: 0xaa7dca80
   type_id: 0x98773f07
   full_name: "filemap_fdatawrite_range"
+}
+elf_symbol {
+  id: 0xa62cfc91
+  name: "filemap_fdatawrite_range_kick"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa7dca80
+  type_id: 0x98773f07
+  full_name: "filemap_fdatawrite_range_kick"
 }
 elf_symbol {
   id: 0x7c937fc2
@@ -499906,6 +499924,15 @@ elf_symbol {
   full_name: "sk_msg_zerocopy_from_iter"
 }
 elf_symbol {
+  id: 0x216a640a
+  name: "sk_net_refcnt_upgrade"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x49300540
+  type_id: 0x17c95d08
+  full_name: "sk_net_refcnt_upgrade"
+}
+elf_symbol {
   id: 0xb00a73bc
   name: "sk_psock_drop"
   is_defined: true
@@ -520147,6 +520174,7 @@ interface {
   symbol_id: 0x171eca8a
   symbol_id: 0x82537a82
   symbol_id: 0x4b8dc0ec
+  symbol_id: 0x2023f91e
   symbol_id: 0xfeea461b
   symbol_id: 0x9534fec7
   symbol_id: 0x22c4092b
@@ -521495,6 +521523,7 @@ interface {
   symbol_id: 0xef606c3f
   symbol_id: 0x3289d59f
   symbol_id: 0x82b19820
+  symbol_id: 0xa62cfc91
   symbol_id: 0x7c937fc2
   symbol_id: 0x667b7dc2
   symbol_id: 0xb11f578f
@@ -524979,6 +525008,7 @@ interface {
   symbol_id: 0x154f6c3d
   symbol_id: 0x8da4646f
   symbol_id: 0x1befb3d5
+  symbol_id: 0x216a640a
   symbol_id: 0xb00a73bc
   symbol_id: 0x31b3c589
   symbol_id: 0xe6c00408
