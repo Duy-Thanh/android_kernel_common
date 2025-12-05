@@ -22,6 +22,30 @@
       },
       "revId": "32473597c363558661a560553b8738d26d8cac82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "123e6bb9_6312801b",
+        "filename": "drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-12-05T22:06:14Z",
+      "side": 1,
+      "message": "I will do that.  Thanks!",
+      "parentUuid": "a885c773_14044308",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 44
+      },
+      "revId": "32473597c363558661a560553b8738d26d8cac82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
