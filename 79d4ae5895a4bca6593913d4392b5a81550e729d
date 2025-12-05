@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaf2e845_63bc48f0",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T15:27:46Z",
+      "side": 1,
+      "message": "I wonder if we shouldn\u0027t do this for all callbacks... that return true/false is terrible :-\\",
+      "revId": "79d4ae5895a4bca6593913d4392b5a81550e729d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
