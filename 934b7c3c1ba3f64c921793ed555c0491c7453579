@@ -16,6 +16,70 @@
       "message": "Will should review and give the CR+2.",
       "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef4f467_8aeaf589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-05T14:03:41Z",
+      "side": 1,
+      "message": "The patch looks pretty good (I left some naming nits) but I think we should send this upstream first",
+      "parentUuid": "1d66dd84_0c2e4540",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f6691b_0219c7ef",
+        "filename": "arch/arm64/kernel/cpu_errata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-05T14:03:41Z",
+      "side": 1,
+      "message": "Now that we have an erratum number for this, I don\u0027t think there\u0027s anything \"android\" specific about the change. I would suggest renaming things along the lines of `arm_si_l1_workaround_4311569`.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 50
+      },
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4637cd_75925e6f",
+        "filename": "arch/arm64/kernel/cpu_errata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-05T14:03:41Z",
+      "side": 1,
+      "message": "I would drop the `.desc` string entirely as the erratum isn\u0027t detected at all. Instead, I would add a print to the code that flips the static key to say something like \"Enabling cache maintenance workaround for ARM SI-L1 erratum 4311569",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 69
+      },
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
