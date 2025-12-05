@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc0140f5_0c489ab3",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-05T02:08:08Z",
+      "side": 1,
+      "message": "just a note: in Linux kernel it is conventional not to consume three lines for one-line comments? (We can leave it as is for this patch, but just wanted to mention it since it applies to your other patches as well, from what I recall.)",
+      "fixSuggestions": [
+        {
+          "fixId": "9571c6f0_fd9a5dff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/pkvm.h",
+              "range": {
+                "startLine": 196,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* pviommu doesn\u0027t support Nested mode, disable NEST. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "870b649f54441afedce71b01a294cdfb9d161057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
