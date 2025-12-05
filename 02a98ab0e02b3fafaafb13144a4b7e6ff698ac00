@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8926434c_a742646f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-05T13:46:36Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_CONTINUATIONS: Avoid unnecessary line continuations\n\nWARNING:LINE_CONTINUATIONS: Avoid unnecessary line continuations",
+      "range": {
+        "startLine": 1141,
+        "startChar": 0,
+        "endLine": 1141,
+        "endChar": 0
+      },
+      "revId": "02a98ab0e02b3fafaafb13144a4b7e6ff698ac00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
