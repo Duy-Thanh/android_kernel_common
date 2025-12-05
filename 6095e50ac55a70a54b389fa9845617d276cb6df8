@@ -16,6 +16,24 @@
       "message": "Due to land upstream next week",
       "revId": "6095e50ac55a70a54b389fa9845617d276cb6df8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875dd298_af6011ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-05T16:40:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37cd1e1d_c254f7de",
+      "revId": "6095e50ac55a70a54b389fa9845617d276cb6df8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
