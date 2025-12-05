@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cbcfa6c_81719041",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T14:00:22Z",
+      "side": 1,
+      "message": "nit: This could go out of this function? before we check for state? To avoid duplicating this code (and also that addr_is_memory() in the \"normal\" case?) and remove the need for the phys ptr.",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83615378_4a8bec0d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-05T14:00:22Z",
+      "side": 1,
+      "message": "I had to scratch my head to understand why we couldn\u0027t fail with ENOMEM here: We would return -E2BIG if we were to hit a block. So if we reach this place we have for sure a level-3 mapping. \n\nnit: Perhaps that needs a comment for later us?",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e171ca3b_d112a15b",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 1
