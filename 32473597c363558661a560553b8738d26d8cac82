@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a885c773_14044308",
+        "filename": "drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2025-12-05T22:01:08Z",
+      "side": 1,
+      "message": "Does this change exist in upstream? Why not start with sending the patch to the mainline kernel for review? It\u0027s really easier this way than explaining why we need an ANDROID specific patch that will be reverted in the future and replaced by upstream patch.",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 44
+      },
+      "revId": "32473597c363558661a560553b8738d26d8cac82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
