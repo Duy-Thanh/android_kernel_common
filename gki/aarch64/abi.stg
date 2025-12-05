@@ -46555,6 +46555,11 @@ array {
   element_type_id: 0x3f691753
 }
 array {
+  id: 0x8399007a
+  number_of_elements: 23
+  element_type_id: 0xc5d9d969
+}
+array {
   id: 0x839f12d6
   number_of_elements: 17
   element_type_id: 0x1d841d76
@@ -467804,6 +467809,15 @@ elf_symbol {
   full_name: "efi"
 }
 elf_symbol {
+  id: 0xd719521c
+  name: "efi_tpm_final_log_size"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7ec472ba
+  type_id: 0x6720d32f
+  full_name: "efi_tpm_final_log_size"
+}
+elf_symbol {
   id: 0x03c26bf9
   name: "ehci_handshake"
   is_defined: true
@@ -472766,6 +472780,15 @@ elf_symbol {
   crc: 0x8272805e
   type_id: 0x1acf4d13
   full_name: "handle_sysrq"
+}
+elf_symbol {
+  id: 0xb7058c51
+  name: "hash_digest_size"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xfd6bf63e
+  type_id: 0x8399007a
+  full_name: "hash_digest_size"
 }
 elf_symbol {
   id: 0x4ae6d6c4
@@ -498322,6 +498345,33 @@ elf_symbol {
   full_name: "security_sock_graft"
 }
 elf_symbol {
+  id: 0x60e70069
+  name: "securityfs_create_dir"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x007c1a29
+  type_id: 0x83bdcb7d
+  full_name: "securityfs_create_dir"
+}
+elf_symbol {
+  id: 0x3f085d83
+  name: "securityfs_create_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x14272f75
+  type_id: 0x83b87db5
+  full_name: "securityfs_create_file"
+}
+elf_symbol {
+  id: 0x8e148419
+  name: "securityfs_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb6c5f2b9
+  type_id: 0x141901a7
+  full_name: "securityfs_remove"
+}
+elf_symbol {
   id: 0xb543d6ba
   name: "select_fallback_rq"
   is_defined: true
@@ -521111,6 +521161,7 @@ interface {
   symbol_id: 0x1b003d7c
   symbol_id: 0xd9e73815
   symbol_id: 0x7a956b27
+  symbol_id: 0xd719521c
   symbol_id: 0x03c26bf9
   symbol_id: 0x5d5a2134
   symbol_id: 0x53a8b40e
@@ -521662,6 +521713,7 @@ interface {
   symbol_id: 0x9f446d29
   symbol_id: 0xab6386a0
   symbol_id: 0x55e1ead1
+  symbol_id: 0xb7058c51
   symbol_id: 0x4ae6d6c4
   symbol_id: 0x23498da9
   symbol_id: 0xdbab134a
@@ -524499,6 +524551,9 @@ interface {
   symbol_id: 0x24b9d7ed
   symbol_id: 0x25471057
   symbol_id: 0xb77dc501
+  symbol_id: 0x60e70069
+  symbol_id: 0x3f085d83
+  symbol_id: 0x8e148419
   symbol_id: 0xb543d6ba
   symbol_id: 0x569844be
   symbol_id: 0x17b3f8eb
