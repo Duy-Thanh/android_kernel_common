@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/466205203",
       "revId": "43c8f0b4158adda37b8d5efc86991f64a64e54ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "629c56a5_c03e527b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-05T22:01:38Z",
+      "side": 1,
+      "message": "Bypassing Lint as change is upstream and came in through -stable",
+      "revId": "43c8f0b4158adda37b8d5efc86991f64a64e54ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
