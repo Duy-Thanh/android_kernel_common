@@ -130,6 +130,30 @@
       ],
       "revId": "a64c82155a2bc7c663d575a46e9afa0852314d05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a535b4_75696d73",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-05T01:23:02Z",
+      "side": 1,
+      "message": "Moreover, I think that\u0027s only a part of the problem. The page could get donated even _before_ we mapped it in the IOMMU page tables, since we map it _after_ unlocking host_ept_lock in verify_page_ownership().\n\nIIUC, pKVM-ARM prevents this race the following way: __pkvm_use_dma() increases the page\u0027s refcount before unlocking the host_mmu.lock, which prevents it from donating after.\n\nSo, the refcount increase should be done as a part of page ownership verification (i.e. with host_ept_lock still locked), not after it? i.e. similarly to pKVM-ARM.",
+      "parentUuid": "5ec15a85_a294f0e2",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 0
+      },
+      "revId": "a64c82155a2bc7c663d575a46e9afa0852314d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
