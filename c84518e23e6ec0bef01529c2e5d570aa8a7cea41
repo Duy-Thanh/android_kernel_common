@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be032e2_33242737",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-06T10:31:16Z",
+      "side": 1,
+      "message": "This should not work on 6.18, where `CONFIG_MEMCG_V1` is not enabled.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 136
+      },
+      "revId": "c84518e23e6ec0bef01529c2e5d570aa8a7cea41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
