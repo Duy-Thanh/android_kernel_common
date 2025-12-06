@@ -1,3 +1,7 @@
 [abi_symbol_list]
 # required by panthor.ko
   drm_fdinfo_print_size
+
+# required by mtk-vcodec-dec.ko
+  __tracepoint_android_vh_vb2_plane_fill_v4l2_plane
+  __traceiter_android_vh_vb2_plane_fill_v4l2_plane
