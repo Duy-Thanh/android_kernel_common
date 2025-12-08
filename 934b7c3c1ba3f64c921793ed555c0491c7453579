@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0760210_8d5ebc1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2025-12-08T03:11:34Z",
+      "side": 1,
+      "message": "ARM SI-LI has been introduced in their product page as https://developer.arm.com/Processors/SI%20L1%20System%20Interconnect.\nDo we need to find official source/link to the SDEN including erratum number abd description before we publishing to upstream Linux kernel? Thanks.",
+      "parentUuid": "ebefbab6_7c58bae7",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06f6691b_0219c7ef",
         "filename": "arch/arm64/kernel/cpu_errata.c",
         "patchSetId": 1
@@ -67,6 +85,30 @@
       "writtenOn": "2025-12-05T14:03:41Z",
       "side": 1,
       "message": "Now that we have an erratum number for this, I don\u0027t think there\u0027s anything \"android\" specific about the change. I would suggest renaming things along the lines of `arm_si_l1_workaround_4311569`.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 50
+      },
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c375027_f1b01f4b",
+        "filename": "arch/arm64/kernel/cpu_errata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2025-12-08T03:11:34Z",
+      "side": 1,
+      "message": "Thanks. Replaced names of variables with keyword of `arm_si_l1_workaround_4311569`.",
+      "parentUuid": "06f6691b_0219c7ef",
       "range": {
         "startLine": 91,
         "startChar": 0,
@@ -90,6 +132,30 @@
       "writtenOn": "2025-12-05T14:03:41Z",
       "side": 1,
       "message": "I would drop the `.desc` string entirely as the erratum isn\u0027t detected at all. Instead, I would add a print to the code that flips the static key to say something like \"Enabling cache maintenance workaround for ARM SI-L1 erratum 4311569",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 69
+      },
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3dd08b9_27c6425e",
+        "filename": "arch/arm64/kernel/cpu_errata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2025-12-08T03:11:34Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "ac4637cd_75925e6f",
       "range": {
         "startLine": 815,
         "startChar": 0,
