@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23ef830_0dfcf192",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-08T16:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e09a66_0cca4474",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18a1d25a_6e0c687e",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f03756ef_9d7e1b83",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-08T16:31:38Z",
+      "side": 1,
+      "message": "Do you mean to add new function just for MMIO?",
+      "parentUuid": "18a1d25a_6e0c687e",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94d3b689_3f622d35",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-12-08T13:44:04Z",
       "side": 1,
       "message": "I believe this one rejects MMIO.",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf95d13_ad9991c6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-08T16:31:38Z",
+      "side": 1,
+      "message": "True, I missed that as it is only exercised in the error path.",
+      "parentUuid": "94d3b689_3f622d35",
       "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
