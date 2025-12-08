@@ -409776,6 +409776,13 @@ function {
   parameter_id: 0x309e18ad
 }
 function {
+  id: 0x9acd4ef5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x0483e6f8
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9ad0bd67
   return_type_id: 0x6720d32f
   parameter_id: 0x1b337410
@@ -471220,6 +471227,15 @@ elf_symbol {
   full_name: "get_cached_msi_msg"
 }
 elf_symbol {
+  id: 0xef77a3de
+  name: "get_cmdline"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf318f793
+  type_id: 0x9acd4ef5
+  full_name: "get_cmdline"
+}
+elf_symbol {
   id: 0xe8d92d04
   name: "get_completed_synchronize_rcu"
   is_defined: true
@@ -522136,6 +522152,7 @@ interface {
   symbol_id: 0x78414415
   symbol_id: 0x993f37c8
   symbol_id: 0x10f04788
+  symbol_id: 0xef77a3de
   symbol_id: 0xe8d92d04
   symbol_id: 0xafbdd1c4
   symbol_id: 0x0431ade4
