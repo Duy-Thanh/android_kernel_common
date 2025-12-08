@@ -22,6 +22,30 @@
       },
       "revId": "02a98ab0e02b3fafaafb13144a4b7e6ff698ac00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c2bcc4_2e3d641a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T11:02:09Z",
+      "side": 1,
+      "message": "I am pretty sure this one is spurious. I am in the middle of a macro I don\u0027t see how I can not have \"\\\\\"",
+      "parentUuid": "8926434c_a742646f",
+      "range": {
+        "startLine": 1141,
+        "startChar": 0,
+        "endLine": 1141,
+        "endChar": 0
+      },
+      "revId": "02a98ab0e02b3fafaafb13144a4b7e6ff698ac00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
