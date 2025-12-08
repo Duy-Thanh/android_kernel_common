@@ -48,6 +48,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b1f0dc5_6224453d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-08T20:46:05Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t we rather first check if the current value is zero, instead of letting it become negative?\n\nOk, after looking at how this works (in this patch and aosp/3599512), I get the idea. The mechanism may be correct (even though unorthodox), but the implementation is completely buggy until we make `nr_pages` signed?",
+      "parentUuid": "74e50826_4d648a61",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e83943ad_c2edf4ba",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 91
