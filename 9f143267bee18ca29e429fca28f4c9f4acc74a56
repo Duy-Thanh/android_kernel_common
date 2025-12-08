@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d293f7e7_fa1866c5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:50:29Z",
+      "side": 1,
+      "message": "I believe I already commented previously I would really validate pfn here, with perhaps both pfn_range_is_valid() and !range_is_memory? \n\nThe gfn is already checked with the remove_ioguard func.",
+      "fixSuggestions": [
+        {
+          "fixId": "b5842e19_f3d8052d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 1502,
+                "startChar": 0,
+                "endLine": 1502,
+                "endChar": 0
+              },
+              "replacement": "\tif (!pfn_range_is_valid(pfn, 1) || !addr_is_memory(phys))\n\t\treturn -EINVAL;\n\tif (!pfn_range_is_valid(gfn, 1) || !addr_is_memory(ipa))\n\t\treturn -EINVAL;\n\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 1505,
+                "startChar": 0,
+                "endLine": 1506,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __hyp_check_page_state_range(phys, size, PKVM_PAGE_OWNED, false);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 1508,
+                "startChar": 0,
+                "endLine": 1508,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f143267bee18ca29e429fca28f4c9f4acc74a56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
