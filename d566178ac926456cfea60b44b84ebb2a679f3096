@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e09a66_0cca4474",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T13:44:04Z",
+      "side": 1,
+      "message": "This comment can be removed.",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a1d25a_6e0c687e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T13:44:04Z",
+      "side": 1,
+      "message": "Looking at the callers of __hyp_check_page_state_range(), all of them rejects MMIO regions, either via __host_check_page_state_range() or __guest_request_page_transition(). \n\nPerhaps it is safe to \"always\" allow MMIO for that one and to not use a specific parameter?",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d3b689_3f622d35",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T13:44:04Z",
+      "side": 1,
+      "message": "I believe this one rejects MMIO.",
+      "revId": "d566178ac926456cfea60b44b84ebb2a679f3096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
