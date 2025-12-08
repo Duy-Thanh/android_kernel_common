@@ -54,6 +54,24 @@
       ],
       "revId": "9f143267bee18ca29e429fca28f4c9f4acc74a56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f1e062_4ea3f7ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-08T15:59:59Z",
+      "side": 1,
+      "message": "Input to this function is fully trusted, as it comes from the device description parsed before de-privilege from the device tree.\n\nAlso, this pages get\u0027s donated from the host to hyp before, so this must have been checked.",
+      "parentUuid": "d293f7e7_fa1866c5",
+      "revId": "9f143267bee18ca29e429fca28f4c9f4acc74a56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
