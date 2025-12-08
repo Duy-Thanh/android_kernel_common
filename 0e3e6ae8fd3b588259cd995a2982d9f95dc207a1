@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52fa914_f640bfcf",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324596ff_0a654a1f",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11085e64_aa087419",
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80c704bf_fdb84a56",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:50:41Z",
+      "side": 1,
+      "message": "pkvm_pasid_free_table fails only if either `pin_unpin_shared_mem_range` or `__pkvm_host_unshare_hyp_prot_locked` and both have WARN_ON. There is a failure path for `check_unshare` as well and that fails if pasid table has a page with wrong attributes(not PKVM_PAGE_SHARED_OWNED or MMIO pages etc).\n\nSo I think it should be okay to avoid the WARN_ON here? WDYT?",
+      "parentUuid": "11085e64_aa087419",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad43da76_bc85960d",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
         "patchSetId": 31
@@ -66,6 +102,24 @@
       "writtenOn": "2025-11-29T23:25:58Z",
       "side": 1,
       "message": "Is it ok to return without trying to free the rest of PASID tables? (Maybe it is ok, if it means a bug in pKVM anyway...)",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107f8435_72d06a7c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:50:41Z",
+      "side": 1,
+      "message": "Yeah, since its most likely a pkvm bug, it should be okay. But I think its better to continue freeing for the sake of correctness. Fixed.",
+      "parentUuid": "ad43da76_bc85960d",
       "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
