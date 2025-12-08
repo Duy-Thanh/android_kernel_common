@@ -46,6 +46,65 @@
       },
       "revId": "32473597c363558661a560553b8738d26d8cac82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d9297d_0f314a94",
+        "filename": "drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-12-08T08:58:43Z",
+      "side": 1,
+      "message": "Was it done? if so, can we at least have a FROMLIST patch?",
+      "parentUuid": "123e6bb9_6312801b",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 44
+      },
+      "revId": "32473597c363558661a560553b8738d26d8cac82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c069fb5b_5edab57d",
+        "filename": "drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-12-08T08:58:43Z",
+      "side": 1,
+      "message": "Please add a bug to track the upstreaming process on 6284861 hotlist and paste it under `Upstream-Task: b/123456` tag in the commit message.",
+      "fixSuggestions": [
+        {
+          "fixId": "d0b13634_8d008a80",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c",
+              "range": {
+                "startLine": 510,
+                "startChar": 0,
+                "endLine": 510,
+                "endChar": 0
+              },
+              "replacement": "// Upstream-Task: b/343219786\n"
+            }
+          ]
+        }
+      ],
+      "revId": "32473597c363558661a560553b8738d26d8cac82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
