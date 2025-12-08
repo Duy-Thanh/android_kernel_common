@@ -33,6 +33,23 @@
       "message": "3861998: FROMGIT: accel/ivpu: Fix warning due to undefined CONFIG_PROC_FS | https://android-review.googlesource.com/c/kernel/common/+/3861998",
       "revId": "ca3a4b8f00dc7c671a305cd7ff3388f9b1992294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1134a2fb_4f26c2a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4517587
+      },
+      "writtenOn": "2025-12-08T05:09:45Z",
+      "side": 1,
+      "message": "3861998: FROMGIT: accel/ivpu: Fix warning due to undefined CONFIG_PROC_FS | https://android-review.googlesource.com/c/kernel/common/+/3861998",
+      "revId": "ca3a4b8f00dc7c671a305cd7ff3388f9b1992294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
