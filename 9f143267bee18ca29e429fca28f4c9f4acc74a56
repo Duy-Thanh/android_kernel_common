@@ -72,6 +72,24 @@
       "parentUuid": "d293f7e7_fa1866c5",
       "revId": "9f143267bee18ca29e429fca28f4c9f4acc74a56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e680a6_f233fc7b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T16:05:34Z",
+      "side": 1,
+      "message": "If that\u0027s trusted this is fine then.",
+      "parentUuid": "e1f1e062_4ea3f7ed",
+      "revId": "9f143267bee18ca29e429fca28f4c9f4acc74a56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
