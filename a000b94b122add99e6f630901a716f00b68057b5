@@ -142,6 +142,24 @@
       "parentUuid": "8929cd89_6fe4a99b",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5485783e_9b13f70f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2025-12-09T22:11:33Z",
+      "side": 1,
+      "message": "@urbanczyk@google.com https://android-review.googlesource.com/c/kernel/common/+/3861409 merged in android-mainline I\u0027m not sure how cherry-pick from mainline will happen?",
+      "parentUuid": "9e914da2_f8f7033d",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
