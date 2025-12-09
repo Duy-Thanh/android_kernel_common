@@ -130,6 +130,7 @@
   __traceiter_android_vh_alter_futex_plist_add
   __traceiter_android_vh_alter_mutex_list_add
   __traceiter_android_vh_alter_rwsem_list_add
+  __traceiter_android_vh_check_set_ioprio
   __traceiter_android_vh_check_uninterruptible_tasks
   __traceiter_android_vh_check_uninterruptible_tasks_dn
   __traceiter_android_vh_cpufreq_fast_switch
@@ -222,6 +223,7 @@
   __tracepoint_android_vh_alter_futex_plist_add
   __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_alter_rwsem_list_add
+  __tracepoint_android_vh_check_set_ioprio
   __tracepoint_android_vh_check_uninterruptible_tasks
   __tracepoint_android_vh_check_uninterruptible_tasks_dn
   __tracepoint_android_vh_cpufreq_fast_switch
