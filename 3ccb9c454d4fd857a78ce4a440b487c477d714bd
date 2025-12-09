@@ -66,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae36395f_891150b9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-09T20:00:01Z",
+      "side": 1,
+      "message": "Ohh Bummer, I had an `int nr_pages` for initial implementation: aosp/3599511/39/arch/x86/include/asm/pkvm.h#81\n\nBut when I changed to pv_param style donation structure, I made it u64 for some reason I can\u0027t remember and this code was broken since then. Thanks for catching this. Changed to s64 now",
+      "parentUuid": "7b1f0dc5_6224453d",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e83943ad_c2edf4ba",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 91
