@@ -16,6 +16,24 @@
       "message": "Why is this `BACKPORT` and not `UPSTREAM`?",
       "revId": "a5460ff6c0b3eb55d28e2f518d87b5cad4d14a0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0e2c61_9b595c7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-09T23:52:31Z",
+      "side": 1,
+      "message": "I had to modify the upstream version which replaces ra-\u003eorder with ra_mmap_miss-\u003eorder, in order to avoid KMI breakage. https://android-review.git.corp.google.com/c/kernel/common/+/3875281/3/include/linux/fs.h",
+      "parentUuid": "1e4cb475_efc3892b",
+      "revId": "a5460ff6c0b3eb55d28e2f518d87b5cad4d14a0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
