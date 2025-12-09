@@ -118,6 +118,30 @@
       },
       "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c217872_40ddfc8f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "Added the comments and moved pkvm_cache_tag_flush_range_np to the previous commit.\nDone",
+      "parentUuid": "04a7c0c7_f08c8bdb",
+      "range": {
+        "startLine": 252,
+        "startChar": 5,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "dfa895a5470e828bfa8a1ec7406db5b696303c21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

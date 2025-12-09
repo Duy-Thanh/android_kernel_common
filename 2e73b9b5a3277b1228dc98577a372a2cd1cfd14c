@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dab57e8c_acc0ddcd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 50
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a442b0df_6b283578",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1e01f42_c939f2bd",
@@ -103,6 +121,24 @@
           ]
         }
       ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "419fda49_a4dc5501",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1e01f42_c939f2bd",
       "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -148,6 +184,24 @@
           ]
         }
       ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5025db0_25f50a44",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d5506aa_47a21d1c",
       "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -207,6 +261,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe87d0ee_ed6f3dc1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "In this reworked patch,`*domain` is passed as an argument, so we don\u0027t need to check it anymore.",
+      "parentUuid": "f044fb3a_241bfaca",
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efa59365_b5d13706",
@@ -238,6 +310,24 @@
           ]
         }
       ],
+      "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d1f4cd_88116645",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 50
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-09T04:59:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efa59365_b5d13706",
       "revId": "2e73b9b5a3277b1228dc98577a372a2cd1cfd14c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
