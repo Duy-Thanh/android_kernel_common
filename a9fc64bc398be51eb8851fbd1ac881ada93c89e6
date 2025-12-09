@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52408ff6_07221ecf",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "nit: s/cache_tag_match/cache_tage_match/ ? (whether we like it or not 😊)",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad105bb_193cb5dc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Maybe return an error instead of silently changing ats_qdep to 0?",
+      "fixSuggestions": [
+        {
+          "fixId": "69e0f80c_477dad62",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 333,
+                "endChar": 0
+              },
+              "replacement": "\tif (type \u003d\u003d CACHE_TAG_DEVTLB \u0026\u0026 ats_qdep \u003e PCI_ATS_MAX_QDEP)\n\t\treturn -EINVAL;\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "\t\tcache_tag-\u003eats_qdep \u003d ats_qdep;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebad25d_e39a31fd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Echoing my last comments in aosp/3818903: it seems better (or at least makes sense) to unassign tags after flushing caches, not before?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679fb2c8_523366a8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we also unassign CACHE_TAG_IOTLB if assigning it succeeded but assigning CACHE_TAG_DEVTLB failed (similarly to the host\u0027s __cache_tag_assign_domain())?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "252d1688_596f8219",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Looks like it can be static?",
+      "fixSuggestions": [
+        {
+          "fixId": "b15f7ea8_26ffae06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "static bool __context_devtlb_enabled(struct intel_iommu *iommu, u16 bdf)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31de0cc9_bd415b56",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Same here: it seems better (or at least makes sense) to unassign tags after flushing caches, not before?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d05a01_93738ede",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Same here: shouldn\u0027t we also unassign CACHE_TAG_IOTLB if assigning it succeeded but assigning CACHE_TAG_DEVTLB failed (similarly to the host\u0027s __cache_tag_assign_domain())?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64158a57_a5af0ba9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:11:51Z",
+      "side": 1,
+      "message": "Same here: shouldn\u0027t we also unassign CACHE_TAG_IOTLB if assigning it succeeded but assigning CACHE_TAG_DEVTLB failed (similarly to the host\u0027s __cache_tag_assign_domain())?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
