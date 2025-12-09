@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a48c8b53_cfcd753a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-09T17:37:02Z",
+      "side": 1,
+      "message": "There is something wrong with this STG file since it removes many symbols from the KMI. Also, there needs to be a new STG on top of the child patch that adds OEM data. So, suggest re-ordering the patches so this one is the top patch and regenerate the STG.",
+      "revId": "38b9ea996a7a4ff98c1c66f91cc42e778cfc878d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
