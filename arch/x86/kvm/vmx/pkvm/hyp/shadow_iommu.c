@@ -19,6 +19,9 @@
 #include "bug.h"
 #include "iommu.h"
 
+#undef pkvm_dbg
+#define pkvm_dbg(...)
+
 /* Used in legacy mode only. */
 struct shadow_pgt_sync_data {
 	unsigned long vaddr;
