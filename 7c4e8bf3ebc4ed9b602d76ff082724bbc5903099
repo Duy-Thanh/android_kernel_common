@@ -16,6 +16,23 @@
       "message": "porting from v6.1 to v6.12",
       "revId": "7c4e8bf3ebc4ed9b602d76ff082724bbc5903099",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89b37f6_b1a7d3fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-09T01:14:57Z",
+      "side": 1,
+      "message": "Please fix the checkpatch error:\n```\nERROR:SWITCH_CASE_INDENT_LEVEL: switch and case should be at the same indent\n#147: FILE: drivers/virt/gunyah/rsc_mgr.c:821:\n+    switch (action) {\n```",
+      "revId": "7c4e8bf3ebc4ed9b602d76ff082724bbc5903099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
