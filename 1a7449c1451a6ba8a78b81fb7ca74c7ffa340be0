@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ae5f01_a492b67e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T00:16:43Z",
+      "side": 1,
+      "message": "Quick question: any reason why add ats_qdep specifically in this patch, not in some of the previous patches?\n\n(Maybe I wouldn\u0027t need to ask if the commit message explained it.)",
+      "revId": "1a7449c1451a6ba8a78b81fb7ca74c7ffa340be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51fac0e0_8e7b53da",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T00:16:43Z",
+      "side": 1,
+      "message": "Looks like we can just do this check inside cache_tag_assign_domain() and cache_tag_unassign_domain() themselves?",
+      "revId": "1a7449c1451a6ba8a78b81fb7ca74c7ffa340be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
