@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e82f8ab_fd33197c",
+        "filename": "drivers/iommu/intel/cache.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:18:06Z",
+      "side": 1,
+      "message": "If we do this check in these low-level functions cache_tag_assign()/cache_tag_unassign(), not in cache_tag_assign_domain()/cache_tag_unassign_domain(), it means, for instance, that we needlessly allocate domain-\u003eqi_batch in domain_qi_batch_alloc()?",
+      "revId": "b61866dafb78536682e53f09ea6cc67c382a59ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
