@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b470b294_a23f9788",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-09T04:04:09Z",
+      "side": 1,
+      "message": "I was hoping to have driver changes related to \"cache flush logic move to pkvm\" in one CL :-). I have modified the commit message to reflect this.",
+      "parentUuid": "c8ae5f01_a492b67e",
+      "revId": "1a7449c1451a6ba8a78b81fb7ca74c7ffa340be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51fac0e0_8e7b53da",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-09T00:16:43Z",
       "side": 1,
       "message": "Looks like we can just do this check inside cache_tag_assign_domain() and cache_tag_unassign_domain() themselves?",
+      "revId": "1a7449c1451a6ba8a78b81fb7ca74c7ffa340be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255c511b_51e236a8",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-09T04:04:09Z",
+      "side": 1,
+      "message": "makes sense, done!",
+      "parentUuid": "51fac0e0_8e7b53da",
       "revId": "1a7449c1451a6ba8a78b81fb7ca74c7ffa340be0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
