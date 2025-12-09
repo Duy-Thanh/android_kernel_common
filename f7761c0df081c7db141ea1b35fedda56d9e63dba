@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82e462f_a9c64ea5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-09T16:45:51Z",
+      "side": 1,
+      "message": "Sorry I missed this in the previous round of review.\n\nI\u0027m not sure to understand this comment here. The code makes sense though: the function can now work with MMIO regions and set_page_state would only work on memory regions.\n\nDo you mean it is alright to not store the hyp ownership because MMIO region donations can only go host/hyp and not guest/hyp?",
+      "revId": "f7761c0df081c7db141ea1b35fedda56d9e63dba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
