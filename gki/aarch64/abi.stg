@@ -281539,6 +281539,12 @@ function {
   parameter_id: 0x23e856d0
 }
 function {
+  id: 0x9bf93663
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x15a30023
+}
+function {
   id: 0x9bf97de0
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -292357,6 +292363,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_cache_show"
 }
 elf_symbol {
+  id: 0xeebf3d23
+  name: "__traceiter_android_vh_check_set_ioprio"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc37463d3
+  type_id: 0x9bf93663
+  full_name: "__traceiter_android_vh_check_set_ioprio"
+}
+elf_symbol {
   id: 0xa2224fa6
   name: "__traceiter_android_vh_check_uninterruptible_tasks"
   is_defined: true
@@ -293732,6 +293747,15 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_cache_show"
+}
+elf_symbol {
+  id: 0x22653fb1
+  name: "__tracepoint_android_vh_check_set_ioprio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_check_set_ioprio"
 }
 elf_symbol {
   id: 0x2cf5984c
@@ -324415,6 +324439,7 @@ interface {
   symbol_id: 0xb288a9fe
   symbol_id: 0x1de455d6
   symbol_id: 0xb083b981
+  symbol_id: 0xeebf3d23
   symbol_id: 0xa2224fa6
   symbol_id: 0xd37cc550
   symbol_id: 0xceeb829a
@@ -324568,6 +324593,7 @@ interface {
   symbol_id: 0x8184b548
   symbol_id: 0x2f9e1e90
   symbol_id: 0xacf4923f
+  symbol_id: 0x22653fb1
   symbol_id: 0x2cf5984c
   symbol_id: 0x62b6878e
   symbol_id: 0xb8dc863c
