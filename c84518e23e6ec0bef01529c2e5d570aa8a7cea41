@@ -46,6 +46,30 @@
       },
       "revId": "c84518e23e6ec0bef01529c2e5d570aa8a7cea41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969823b3_ef09f9a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-09T17:29:21Z",
+      "side": 1,
+      "message": "What does \"done\" mean here given no change was made? Is this symbol really needed now that v2 is required?",
+      "parentUuid": "4a8e49a1_eda2a3f5",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 136
+      },
+      "revId": "c84518e23e6ec0bef01529c2e5d570aa8a7cea41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
