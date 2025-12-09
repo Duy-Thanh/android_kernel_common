@@ -122,6 +122,24 @@
       "parentUuid": "ad43da76_bc85960d",
       "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c26daa_88f4a40b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 31
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-09T14:55:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "107f8435_72d06a7c",
+      "revId": "0e3e6ae8fd3b588259cd995a2982d9f95dc207a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
