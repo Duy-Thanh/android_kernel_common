@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "781f6488_5d60fe3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2025-12-10T19:42:10Z",
+      "side": 1,
+      "message": "We should get this via stable, but since bug is marked as important maybe should take FROMLIST?",
+      "revId": "3d76ac3cea0e7b7cc1f6b1433fdc3919fff3baa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
