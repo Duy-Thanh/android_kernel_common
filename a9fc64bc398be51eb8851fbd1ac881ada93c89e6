@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "568d91f7_aabef071",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52408ff6_07221ecf",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aad105bb_193cb5dc",
@@ -63,6 +81,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "337ed2bb_cea0da06",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aad105bb_193cb5dc",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ebad25d_e39a31fd",
@@ -80,6 +116,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6ac54d_6c4114ee",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ebad25d_e39a31fd",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "679fb2c8_523366a8",
@@ -93,6 +147,24 @@
       "writtenOn": "2025-12-09T18:11:51Z",
       "side": 1,
       "message": "Shouldn\u0027t we also unassign CACHE_TAG_IOTLB if assigning it succeeded but assigning CACHE_TAG_DEVTLB failed (similarly to the host\u0027s __cache_tag_assign_domain())?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77cc19b5_961fa31c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "679fb2c8_523366a8",
       "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -132,6 +204,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5f4a0ec_2f25e342",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "252d1688_596f8219",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31de0cc9_bd415b56",
@@ -145,6 +235,24 @@
       "writtenOn": "2025-12-09T18:11:51Z",
       "side": 1,
       "message": "Same here: it seems better (or at least makes sense) to unassign tags after flushing caches, not before?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4373310e_d1c79da5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31de0cc9_bd415b56",
       "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -166,6 +274,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0c8f14_e6a68f92",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7d05a01_93738ede",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64158a57_a5af0ba9",
@@ -179,6 +305,24 @@
       "writtenOn": "2025-12-09T18:11:51Z",
       "side": 1,
       "message": "Same here: shouldn\u0027t we also unassign CACHE_TAG_IOTLB if assigning it succeeded but assigning CACHE_TAG_DEVTLB failed (similarly to the host\u0027s __cache_tag_assign_domain())?",
+      "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947e91e9_318e17d7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 75
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-10T07:48:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64158a57_a5af0ba9",
       "revId": "a9fc64bc398be51eb8851fbd1ac881ada93c89e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
