@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fc511f_f66279cb",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-10T11:39:47Z",
+      "side": 1,
+      "message": "Looking at this, does this have the potential to race if a writer ends up owning the lock? It seems like this could corrupt the sem-\u003eowner? Apologies if I\u0027m missing something.  I also wonder if the rwsem_set_reader_owned() is more appropriate to have in the vendorhook logic? Though I\u0027m not sure.",
+      "revId": "45eb1231c1bbff6e98dd118b7a88ecac16145e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
