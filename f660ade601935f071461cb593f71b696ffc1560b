@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69fdfac1_a160b225",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd3155be_5771f5be",
+      "revId": "f660ade601935f071461cb593f71b696ffc1560b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8429639d_c9842a72",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00997c5_852cc8b7",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8429639d_c9842a72",
+      "revId": "f660ade601935f071461cb593f71b696ffc1560b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10108330_9a7f4ef9",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-12-08T13:48:45Z",
       "side": 1,
       "message": "`\u003d 0`\n\nOtherwise we can print and return an error if no driver is present or if there\u0027s no init_driver callback.",
+      "revId": "f660ade601935f071461cb593f71b696ffc1560b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbfa808f_68d58616",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:13:49Z",
+      "side": 1,
+      "message": "I will keep 0 for now, but that needs t be -ENODEV later",
+      "parentUuid": "10108330_9a7f4ef9",
       "revId": "f660ade601935f071461cb593f71b696ffc1560b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
