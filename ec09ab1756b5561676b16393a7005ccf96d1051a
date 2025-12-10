@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bad9c5d_7b7d5205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-12-10T15:12:20Z",
+      "side": 1,
+      "message": "Should I revert aosp/3774164 and upload an improved version or is it ok like this with a new patch?",
+      "revId": "ec09ab1756b5561676b16393a7005ccf96d1051a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
