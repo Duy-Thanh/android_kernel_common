@@ -54,6 +54,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3563111d_7046376f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "You mean if another process opened the same file and touches the pages? AFAIK truncate_inode_pages_range() does not truncate the file itself, only the page cache. If another app touches a page after we truncated it from the page cache, it will simply refault the page.",
+      "parentUuid": "2a31bac6_b7095163",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f69fa3_ed53870c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -210,6 +234,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47226076_70573dc5",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "55392af3_37101edb",
+      "range": {
+        "startLine": 952,
+        "startChar": 22,
+        "endLine": 952,
+        "endChar": 56
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2db05827_720cd1d3",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -221,6 +269,24 @@
       "writtenOn": "2025-12-03T08:57:32Z",
       "side": 1,
       "message": "no validation that wrapfd_rewrap contains valid data?",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a21b7a_1970a448",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2db05827_720cd1d3",
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -250,6 +316,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "034e875c_5a8ccc3d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44889aad_7f921a1d",
+      "range": {
+        "startLine": 1205,
+        "startChar": 0,
+        "endLine": 1205,
+        "endChar": 53
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbb1f4e4_57adebc7",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -261,6 +351,24 @@
       "writtenOn": "2025-12-03T08:57:32Z",
       "side": 1,
       "message": "no validation data from userspace was correct :(",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3905613a_d6dfa655",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cbb1f4e4_57adebc7",
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -416,6 +524,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56c2810b_f32e3f57",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "No, this driver supports wrapping both dmabufs and file-backed FDs. We don\u0027t want to limit that ability with a KCONFIG or other means.",
+      "parentUuid": "5ef17867_fd15ed36",
+      "range": {
+        "startLine": 1210,
+        "startChar": 1,
+        "endLine": 1210,
+        "endChar": 38
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1fec0a96_232708cd",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -514,6 +646,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "361f34bd_2a22e93a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb4e2cf0_03d57090",
+      "range": {
+        "startLine": 1272,
+        "startChar": 0,
+        "endLine": 1272,
+        "endChar": 63
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de8544ed_e5ad69b6",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -525,6 +681,24 @@
       "writtenOn": "2025-12-03T08:57:32Z",
       "side": 1,
       "message": "no validation that the userspace data was correct :(",
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e977e0a4_fd8c3349",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de8544ed_e5ad69b6",
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -572,6 +746,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a53c6c3_2c74fd83",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e982ff6_c67c1b8f",
+      "range": {
+        "startLine": 1357,
+        "startChar": 0,
+        "endLine": 1357,
+        "endChar": 33
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7414813e_f1bd335a",
         "filename": "include/uapi/linux/wrapfd.h",
         "patchSetId": 2
@@ -607,6 +805,30 @@
           ]
         }
       ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23cd8dc0_9d6d10db",
+        "filename": "include/uapi/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-10T23:13:40Z",
+      "side": 1,
+      "message": "Yes, will fix.",
+      "parentUuid": "7414813e_f1bd335a",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 37
+      },
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
