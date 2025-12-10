@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d2a335_d07a4f20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 59
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T22:42:33Z",
+      "side": 1,
+      "message": "Does the host actually free them? Which patch implements that?\n\nEDIT: looks like it is freed by intel_pasid_free_table() called from intel_iommu_release_device()? If so, maybe worth mentioning that here, for easier review?",
+      "revId": "d3a741c901e8795ce34c5cf8e9643cd5c5d8bec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
