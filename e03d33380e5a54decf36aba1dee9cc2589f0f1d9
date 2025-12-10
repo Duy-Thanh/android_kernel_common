@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940e1fd6_5bde7488",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T21:52:51Z",
+      "side": 1,
+      "message": "In other cases, e.g. in pv_pasid_table_teardown(), we print a warning if the hypercall failed. Worth doing that here as well?",
+      "revId": "e03d33380e5a54decf36aba1dee9cc2589f0f1d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
