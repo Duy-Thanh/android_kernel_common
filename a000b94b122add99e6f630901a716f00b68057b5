@@ -160,6 +160,24 @@
       "parentUuid": "9e914da2_f8f7033d",
       "revId": "a000b94b122add99e6f630901a716f00b68057b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1ef6eb_7c6c5ea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-12-10T08:11:56Z",
+      "side": 1,
+      "message": "please cherry-pick on your own and you can add the same reviewers - I\u0027m happy to accept it now. it will not be auto-backported from mainline to 6.12",
+      "parentUuid": "5485783e_9b13f70f",
+      "revId": "a000b94b122add99e6f630901a716f00b68057b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
