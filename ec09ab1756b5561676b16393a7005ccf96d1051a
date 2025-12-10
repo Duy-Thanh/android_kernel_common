@@ -16,6 +16,23 @@
       "message": "Should I revert aosp/3774164 and upload an improved version or is it ok like this with a new patch?",
       "revId": "ec09ab1756b5561676b16393a7005ccf96d1051a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1605a818_b880f9e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-10T18:02:36Z",
+      "side": 1,
+      "message": "Can this be sent upstream?",
+      "revId": "ec09ab1756b5561676b16393a7005ccf96d1051a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
