@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41315e4_baef7089",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 79
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T23:05:46Z",
+      "side": 1,
+      "message": "nit: `__func__` and `cache_assign:` make each other redundant?",
+      "fixSuggestions": [
+        {
+          "fixId": "b699836b_39c73114",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 367,
+                "startChar": 0,
+                "endLine": 368,
+                "endChar": 0
+              },
+              "replacement": "\tpkvm_dbg(\"pkvm: %s: dev[%x] did:%u, pasid: %u,\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d628dc563fe605c5387f30b69b1209a84280077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf843db_9cc3ac53",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+        "patchSetId": 79
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T23:05:46Z",
+      "side": 1,
+      "message": "nit: `__func__` and `cache_unassign:` make each other redundant?",
+      "fixSuggestions": [
+        {
+          "fixId": "1e3e75d3_557cc6d3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_cache.c",
+              "range": {
+                "startLine": 389,
+                "startChar": 0,
+                "endLine": 390,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tpkvm_dbg(\"pkvm: %s: dev[%x] did:%u, pasid: %u, \"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d628dc563fe605c5387f30b69b1209a84280077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
