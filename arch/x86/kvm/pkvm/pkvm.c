@@ -1252,15 +1252,22 @@ static void pkvm_set_cr4(struct pkvm_vcpu *pkvm_vcpu, unsigned long cr4)
 	kvm_x86_call(set_cr4)(to_kvm_vcpu(pkvm_vcpu), cr4);
 }
 
-static int pkvm_set_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *msr)
+static int pkvm_set_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *__msr)
 {
 	struct kvm_vcpu *vcpu;
+	struct msr_data msr;
 
 	if (WARN_ON_ONCE(!pkvm_vcpu))
 		return -EINVAL;
 
-	if (WARN_ON_ONCE(msr != this_pv_param(msr) || !msr))
+	if (WARN_ON_ONCE(__msr != this_pv_param(msr) || !__msr))
 		return -EINVAL;
+
+	/*
+	 * Copy msr_data to our own variable, to prevent changing it by the host
+	 * on another CPU while we are doing the below checks.
+	 */
+	msr = *__msr;
 
 	vcpu = to_kvm_vcpu(pkvm_vcpu);
 
@@ -1277,39 +1284,39 @@ static int pkvm_set_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *msr)
 		 * that are currently tweaked by crosvm, and only those.
 		 * The allowed set can be extended as needed.
 		 */
-		switch (msr->index) {
+		switch (msr.index) {
 		case MTRRphysBase_MSR(0) ... MSR_MTRRfix4K_F8000:
 		case MSR_MTRRdefType:
 			break;
 		case MSR_IA32_MISC_ENABLE:
-			if (msr->data & ~(MSR_IA32_MISC_ENABLE_FAST_STRING |
-					  MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL |
-					  MSR_IA32_MISC_ENABLE_BTS_UNAVAIL))
+			if (msr.data & ~(MSR_IA32_MISC_ENABLE_FAST_STRING |
+					 MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL |
+					 MSR_IA32_MISC_ENABLE_BTS_UNAVAIL))
 				return -EPERM;
 
 			/*
 			 * vPMU is not supported by pKVM yet. Don't trick the pVM
 			 * that it is.
 			 */
-			msr->data |= MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL |
-				     MSR_IA32_MISC_ENABLE_BTS_UNAVAIL;
+			msr.data |= MSR_IA32_MISC_ENABLE_PEBS_UNAVAIL |
+				    MSR_IA32_MISC_ENABLE_BTS_UNAVAIL;
 			break;
 		default:
 			/*
 			 * Allow the host to set an MSR to a value to which it is
 			 * already set by pKVM anyway, i.e. if setting is a no-op.
 			 */
-			ret = __kvm_get_msr(vcpu, msr->index, &cur_data, true);
+			ret = __kvm_get_msr(vcpu, msr.index, &cur_data, true);
 			if (ret)
 				return ret;
-			if (msr->data == cur_data)
+			if (msr.data == cur_data)
 				return 0;
 
 			return -EPERM;
 		}
 	}
 
-	return kvm_x86_call(set_msr)(vcpu, msr);
+	return kvm_x86_call(set_msr)(vcpu, &msr);
 }
 
 static int pkvm_get_msr(struct pkvm_vcpu *pkvm_vcpu, struct msr_data *msr)
