@@ -34,6 +34,41 @@
       ],
       "revId": "665ee1b7fc988fbf3d112edb9d92903923862cd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55779cfa_d2b0428f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T15:55:03Z",
+      "side": 1,
+      "message": "nit: `__func__` and `set_sm_ce:` make each other redundant?",
+      "fixSuggestions": [
+        {
+          "fixId": "c5bcb71e_9be7092e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 337,
+                "startChar": 0,
+                "endLine": 338,
+                "endChar": 0
+              },
+              "replacement": "\tpkvm_dbg(\"pkvm: %s: dev[%x] max_pasid: %u, pasid_dir: %llx\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "665ee1b7fc988fbf3d112edb9d92903923862cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
