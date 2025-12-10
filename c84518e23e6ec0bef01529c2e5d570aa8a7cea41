@@ -70,6 +70,30 @@
       },
       "revId": "c84518e23e6ec0bef01529c2e5d570aa8a7cea41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda4ca33_992cbf7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-10T00:09:43Z",
+      "side": 1,
+      "message": "The export was removed, and the commit message was updated... I guess the style of noting modifications in a `[]` block fine, but I think just updating the commit message would be too.",
+      "parentUuid": "969823b3_ef09f9a7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 136
+      },
+      "revId": "c84518e23e6ec0bef01529c2e5d570aa8a7cea41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
