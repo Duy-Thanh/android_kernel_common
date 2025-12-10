@@ -16,6 +16,24 @@
       "message": "Sorry I missed this in the previous round of review.\n\nI\u0027m not sure to understand this comment here. The code makes sense though: the function can now work with MMIO regions and set_page_state would only work on memory regions.\n\nDo you mean it is alright to not store the hyp ownership because MMIO region donations can only go host/hyp and not guest/hyp?",
       "revId": "f7761c0df081c7db141ea1b35fedda56d9e63dba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1120cfa2_66ae7f23",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T10:01:17Z",
+      "side": 1,
+      "message": "That was a while ago, but I think I wrote this comment as `__pkvm_host_donate_hyp_locked` and `__pkvm_hyp_donate_host` are the only functions that can skip `__hyp_set_page_state_range`. So this was specific to host \u003c-\u003e hyp donations instead of adding a new wrapper.",
+      "parentUuid": "c82e462f_a9c64ea5",
+      "revId": "f7761c0df081c7db141ea1b35fedda56d9e63dba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
