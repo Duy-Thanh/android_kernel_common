@@ -568,6 +568,47 @@
       ],
       "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7414813e_f1bd335a",
+        "filename": "include/uapi/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-12-10T19:48:34Z",
+      "side": 1,
+      "message": "_IOWR? Since get_state has both input and output parameters",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fd3dc4bc_07b57fc7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/uapi/linux/wrapfd.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "#define WRAPFD_DEV_IOC_GET_STATE\t_IOWR(WRAPFD_DEV_IOC, 1, \\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
