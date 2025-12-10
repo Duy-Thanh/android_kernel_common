@@ -1443,11 +1443,18 @@ int uvc_ctrl_is_accessible(struct uvc_video_chain *chain, u32 v4l2_id,
 	int ret;
 	int i;
 
-	if (__uvc_query_v4l2_class(chain, v4l2_id, 0) >= 0)
+	bool is_min_max_which = ctrls->which == V4L2_CTRL_WHICH_MIN_VAL || ctrls->which == V4L2_CTRL_WHICH_MAX_VAL;
+	if (__uvc_query_v4l2_class(chain, v4l2_id, 0) >= 0) {
+		if (is_min_max_which) return -EINVAL;
 		return -EACCES;
+	}
 
 	ctrl = uvc_find_control(chain, v4l2_id, &mapping);
 	if (!ctrl)
+		return -EINVAL;
+
+	if ((!(ctrl->info.flags & UVC_CTRL_FLAG_GET_MIN) ||
+		!(ctrl->info.flags & UVC_CTRL_FLAG_GET_MAX)) && is_min_max_which)
 		return -EINVAL;
 
 	if (ioctl == VIDIOC_G_EXT_CTRLS)
