@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de5ad4d5_654b3ec7",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 73
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T14:17:44Z",
+      "side": 1,
+      "message": "If the hypercall returns an error anyway, and we print this anyway, why not make use of that and print which error is that?",
+      "fixSuggestions": [
+        {
+          "fixId": "f19b038c_f0826f9f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1749,
+                "startChar": 0,
+                "endLine": 1749,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1750,
+                "startChar": 0,
+                "endLine": 1753,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d pkvm_hc_iommu_clear_ce(\u0026param);\n\tif (ret) {\n\t\tpr_warn(\"%s: pkvm failed to clear context entry for device[%x]: %d\\n\",\n\t\t\t__func__, param.bdf, ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b797ca2b94f09382b5719ae83932b7f576309ae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
