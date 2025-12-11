@@ -84,6 +84,30 @@
       },
       "revId": "0bfa3276f86217e90fcbd532f99ebc99d47708ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8259f3f0_b6adbb97",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-11T23:00:28Z",
+      "side": 1,
+      "message": "thanks, that\u0027s a nice catch! I guess I should move it below `context_flush_present_no_pasid` after the context invalidation happens.",
+      "parentUuid": "375ddf3b_79028cd1",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "revId": "0bfa3276f86217e90fcbd532f99ebc99d47708ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
