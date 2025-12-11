@@ -34,6 +34,24 @@
       "parentUuid": "f2fc511f_f66279cb",
       "revId": "45eb1231c1bbff6e98dd118b7a88ecac16145e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5f097a_2348e4cc",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-11T06:15:41Z",
+      "side": 1,
+      "message": "Thank you for the explanation! Apologies for my misunderstanding.",
+      "parentUuid": "ea8ab0c2_6a686d06",
+      "revId": "45eb1231c1bbff6e98dd118b7a88ecac16145e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
