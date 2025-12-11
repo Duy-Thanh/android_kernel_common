@@ -4845,8 +4845,12 @@ static int pkvm_page_fault(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault)
 	if (!r) {
 		if (pkvm_is_protected_vcpu(vcpu))
 			r = pkvm_pin_page(vcpu->kvm, fault);
-		if (!r)
+		if (!r) {
 			r = RET_PF_FIXED;
+			pr_info("%s: mapped gpa=0x%llx hpa=0x%llx size=0x%llx\n", __func__,
+				base_gfn << PAGE_SHIFT, fault->pfn << PAGE_SHIFT,
+				nr_pages << PAGE_SHIFT);
+		}
 	} else if (r == -EEXIST) {
 		r = RET_PF_SPURIOUS;
 	}
