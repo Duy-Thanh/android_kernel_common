@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9796b831_b243296d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3902313
+      },
+      "writtenOn": "2025-12-11T06:35:49Z",
+      "side": 1,
+      "message": "These functions are very useful in driver ko.\nCould they be added to the whitelist?",
+      "revId": "587b6a33fad69094a7dfd38adffd8f53d8dfd487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
