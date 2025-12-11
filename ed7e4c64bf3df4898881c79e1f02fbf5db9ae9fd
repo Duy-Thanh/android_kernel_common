@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1279e60b_87a6f233",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-11T03:56:28Z",
+      "side": 1,
+      "message": "Seeing a check patch error here:\n\n```\nSummary:\n\n.../Signed-off-by: email name mismatch: \u0027From: \"liulu.liu@honor.corp-partner.google.com\" \u003cliulu.liu@honor.corp-partner.google.com\u003e\u0027 !\u003d \u0027Signed-off-by: liulu liu \u003cliulu.liu@honor.corp-partner.google.com\u003e\u0027\n\ntotal: 0 errors, 1 warnings, 2291 lines checked\n```",
+      "revId": "ed7e4c64bf3df4898881c79e1f02fbf5db9ae9fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
