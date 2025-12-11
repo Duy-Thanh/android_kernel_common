@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b0e4d45_bf62924b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-11T06:43:18Z",
+      "side": 1,
+      "message": "please split these into topic specific additions instead of adding hooks to multiple subsystems in one patch.\n\nAlso please explain why the vendorhook is needed for each subsystem.",
+      "revId": "e57288b7826d3fb1a17b18ca3b44eda894acbd1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
