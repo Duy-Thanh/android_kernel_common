@@ -468279,6 +468279,15 @@ elf_symbol {
   full_name: "filemap_fdatawrite_range"
 }
 elf_symbol {
+  id: 0xa62cfc91
+  name: "filemap_fdatawrite_range_kick"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa7dca80
+  type_id: 0x98773f07
+  full_name: "filemap_fdatawrite_range_kick"
+}
+elf_symbol {
   id: 0x7c937fc2
   name: "filemap_flush"
   is_defined: true
@@ -521243,6 +521252,7 @@ interface {
   symbol_id: 0xef606c3f
   symbol_id: 0x3289d59f
   symbol_id: 0x82b19820
+  symbol_id: 0xa62cfc91
   symbol_id: 0x7c937fc2
   symbol_id: 0x667b7dc2
   symbol_id: 0xb11f578f
