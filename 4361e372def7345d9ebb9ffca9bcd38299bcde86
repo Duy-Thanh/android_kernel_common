@@ -78,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a531074f_18b51ad5",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-11T01:32:53Z",
+      "side": 1,
+      "message": "What about dirty pages? What about trying to update some pages or changing i_size when you truncate pages here? Doesn\u0027t it need to consider filemap_invalidate_lock or inode_lock? Why not invalidate_inode_pages2_range?",
+      "parentUuid": "3563111d_7046376f",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f69fa3_ed53870c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
@@ -536,6 +560,30 @@
       "side": 1,
       "message": "No, this driver supports wrapping both dmabufs and file-backed FDs. We don\u0027t want to limit that ability with a KCONFIG or other means.",
       "parentUuid": "5ef17867_fd15ed36",
+      "range": {
+        "startLine": 1210,
+        "startChar": 1,
+        "endLine": 1210,
+        "endChar": 38
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c4f119_9ca1e2ef",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1210,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2025-12-11T01:32:53Z",
+      "side": 1,
+      "message": "We don\u0027t want to use dmabuf. In this case, how can we do?",
+      "parentUuid": "56c2810b_f32e3f57",
       "range": {
         "startLine": 1210,
         "startChar": 1,
