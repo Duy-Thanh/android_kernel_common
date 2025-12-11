@@ -60,6 +60,30 @@
       ],
       "revId": "0bfa3276f86217e90fcbd532f99ebc99d47708ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375ddf3b_79028cd1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T22:31:13Z",
+      "side": 1,
+      "message": "Good catch. Yes, I think we shouldn\u0027t free it earlier than clearing context entry and flushing caches.\n\nNow, wondering if it would be safe to call pkvm_pasid_free_table() later than unlocking hyp_iommu-\u003elock... Seems like it should be safe, since the context entry is not pointing to this PASID directory anymore, so no one else should be using those pages after we unlock hyp_iommu-\u003elock (not until we undonate them anyway).",
+      "parentUuid": "31bc07da_6a2c1ee4",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "revId": "0bfa3276f86217e90fcbd532f99ebc99d47708ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
