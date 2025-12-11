@@ -16,6 +16,24 @@
       "message": "Looking at this, does this have the potential to race if a writer ends up owning the lock? It seems like this could corrupt the sem-\u003eowner? Apologies if I\u0027m missing something.  I also wonder if the rwsem_set_reader_owned() is more appropriate to have in the vendorhook logic? Though I\u0027m not sure.",
       "revId": "45eb1231c1bbff6e98dd118b7a88ecac16145e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8ab0c2_6a686d06",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 2006581
+      },
+      "writtenOn": "2025-12-11T05:45:52Z",
+      "side": 1,
+      "message": "Upon closer inspection, no race condition was found. Below is the code analysis: \n\nIn the fast path (rwsem_read_trylock), as soon as a reader enters, it increments the reader count by executing atomic_long_add_return_acquire(RWSEM_READER_BIAS, \u0026sem-\u003ecount). This reader count is decremented when the fast path fails and the reader enters the wait queue in the slow path, which executes atomic_long_add_return(adjustment, \u0026sem-\u003ecount).\n\nDuring this period, if the current lock owner (a reader) releases the lock (__up_read), before executing rwsem_wake(), it checks the reader count using the code: if (unlikely((tmp \u0026 (RWSEM_LOCK_MASK | RWSEM_FLAG_WAITERS)) \u003d\u003d RWSEM_FLAG_WAITERS)). If the count is not zero, the wake operation is not performed. Consequently, writers cannot acquire the lock, and no race condition occurs.",
+      "parentUuid": "f2fc511f_f66279cb",
+      "revId": "45eb1231c1bbff6e98dd118b7a88ecac16145e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
