@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a72935_11e8c2a2",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 78
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T16:15:58Z",
+      "side": 1,
+      "message": "We should flush CPU cache if needed (i.e. use __pkvm_iommu_flush_cache()) after clearing the PASID directory, before writing its address to the context entry?",
+      "fixSuggestions": [
+        {
+          "fixId": "31730a72_67e1b004",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 368,
+                "endChar": 0
+              },
+              "replacement": "\t__pkvm_iommu_flush_cache(iommu, host_gpa2hva(param.pasid_dir_gpa),\n\t\t\t\t pasid_dir_size(param.max_pasid));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2d3fcba71cd0cc17476e5d55dd1ed098206b6204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
