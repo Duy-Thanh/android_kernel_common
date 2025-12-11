@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c33f644_a24cc2fb",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T14:36:51Z",
+      "side": 1,
+      "message": "Wondering if we actually need to lock iommu-\u003elock here?",
+      "revId": "35b87de48b1faa28b1936d15948aa47ae90798fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30121087_4f54e186",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 4343,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T14:36:51Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "35b87de48b1faa28b1936d15948aa47ae90798fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
