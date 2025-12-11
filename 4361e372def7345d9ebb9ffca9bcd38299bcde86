@@ -102,6 +102,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f39ac35b_02f4edad",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-11T23:52:14Z",
+      "side": 1,
+      "message": "You are right. I need to do the dance:\n```\ninode_lock()\nfilemap_invalidate_lock()\nfilemap_write_and_wait()\ntruncate_inode_pages_range()\nfilemap_invalidate_unlock()\ninode_unlock()\n```\nWill fix.",
+      "parentUuid": "a531074f_18b51ad5",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 51
+      },
+      "revId": "4361e372def7345d9ebb9ffca9bcd38299bcde86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f69fa3_ed53870c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
