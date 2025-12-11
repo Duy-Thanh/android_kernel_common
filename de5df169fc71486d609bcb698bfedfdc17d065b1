@@ -16,6 +16,24 @@
       "message": "Please also submit a patch on top of this which adds the new symbols to the abi.",
       "revId": "de5df169fc71486d609bcb698bfedfdc17d065b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e78d6c9b_251f97b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-12-11T07:50:57Z",
+      "side": 1,
+      "message": "done 3885881",
+      "parentUuid": "52d23d0e_fbea1e68",
+      "revId": "de5df169fc71486d609bcb698bfedfdc17d065b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
