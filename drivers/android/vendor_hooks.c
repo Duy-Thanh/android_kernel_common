@@ -80,6 +80,7 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/kasan.h>
 #include <trace/hooks/dmv_debug.h>
+#include <trace/hooks/rcu.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -414,6 +415,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_send);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_send_ext);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end_ext);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_fetch);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_del_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
