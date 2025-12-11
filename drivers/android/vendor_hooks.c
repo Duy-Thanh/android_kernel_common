@@ -76,6 +76,13 @@
 #include <trace/hooks/sound.h>
 #include <trace/hooks/fuse.h>
 #include <trace/events/android_vendor_lmk.h>
+<<<<<<< HEAD   (6e46d7960662798bd4b02ae25c4e6257aee9b263 ANDROID: GKI: update symbol list file for xiaomi)
+||||||| BASE   (06e4e6b55e9429d780c29efc060d28660f2b9432 ANDROID: Kleaf: Add build test for unsafe DDK headers)
+#include <trace/hooks/swapfile.h>
+=======
+#include <trace/hooks/swapfile.h>
+#include <trace/hooks/rcu.h>
+>>>>>>> CHANGE (fbcfe3567c2a1238c94f3a1162144b61e41291d5 ANDROID: vendor_hooks: Add vendor hooks for rcu)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -478,6 +485,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_send_ext);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end_ext);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_fetch);
+<<<<<<< HEAD   (6e46d7960662798bd4b02ae25c4e6257aee9b263 ANDROID: GKI: update symbol list file for xiaomi)
+||||||| BASE   (06e4e6b55e9429d780c29efc060d28660f2b9432 ANDROID: Kleaf: Add build test for unsafe DDK headers)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_add_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_del_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_lazyfree_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_add_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_del_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_lazyfree_bypass);
+>>>>>>> CHANGE (fbcfe3567c2a1238c94f3a1162144b61e41291d5 ANDROID: vendor_hooks: Add vendor hooks for rcu)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_sync_mmap_readahead);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
