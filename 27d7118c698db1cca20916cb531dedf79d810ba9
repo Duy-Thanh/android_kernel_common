@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fdbf956_9dd04ec6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-11T17:04:24Z",
+      "side": 1,
+      "message": "\"may need\"? Let\u0027s not add this until you are actually sure this is needed. If it is actually needed, please provide a more detailed rationale.",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "27d7118c698db1cca20916cb531dedf79d810ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
