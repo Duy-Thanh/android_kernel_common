@@ -16,6 +16,24 @@
       "message": "please split these into topic specific additions instead of adding hooks to multiple subsystems in one patch.\n\nAlso please explain why the vendorhook is needed for each subsystem.",
       "revId": "e57288b7826d3fb1a17b18ca3b44eda894acbd1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0925c6f_149272db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2025-12-11T08:43:43Z",
+      "side": 1,
+      "message": "OK, the patch has been updated. Instead, this patch is only used to add the rcu vendor hook. And the reason has been explained in bug, please check.",
+      "parentUuid": "3b0e4d45_bf62924b",
+      "revId": "e57288b7826d3fb1a17b18ca3b44eda894acbd1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
