@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67bd26a2_1e582341",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 74
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-11T11:19:48Z",
+      "side": 1,
+      "message": "Sorry, a remnant of old code. removed",
+      "parentUuid": "786fdc59_49162552",
+      "revId": "665ee1b7fc988fbf3d112edb9d92903923862cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55779cfa_d2b0428f",
@@ -67,6 +85,24 @@
           ]
         }
       ],
+      "revId": "665ee1b7fc988fbf3d112edb9d92903923862cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e996f603_6ccf16da",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-11T11:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55779cfa_d2b0428f",
       "revId": "665ee1b7fc988fbf3d112edb9d92903923862cd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
