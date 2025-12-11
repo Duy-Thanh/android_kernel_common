@@ -33,6 +33,24 @@
       "message": "Can this be sent upstream?",
       "revId": "ec09ab1756b5561676b16393a7005ccf96d1051a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83789361_1011d066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-12-11T14:53:45Z",
+      "side": 1,
+      "message": "It\u0027s Android specific, we only need this because gki_defconfig doesn\u0027t admit ARCH_MEDIATEK. It was already merged here for that reason but needs small adjustment.",
+      "parentUuid": "1605a818_b880f9e8",
+      "revId": "ec09ab1756b5561676b16393a7005ccf96d1051a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
