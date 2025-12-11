@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "352a950c_8a4a76dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-11T17:24:47Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "587b6a33fad69094a7dfd38adffd8f53d8dfd487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9796b831_b243296d",
