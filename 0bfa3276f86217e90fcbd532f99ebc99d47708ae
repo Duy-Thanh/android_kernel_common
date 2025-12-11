@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bc07da_6a2c1ee4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-11T21:51:32Z",
+      "side": 1,
+      "message": "Not sure but shouldn\u0027t we perform this after clearing context and flushing caches? Wouldn\u0027t that be safer? I mean after:\n```\n\tcontext_clear_entry(context);\n\t__pkvm_iommu_flush_cache(iommu, context, sizeof(*context));\n```\n\t\nHW could still use stale entries before clear context + flush and those entries are passed back to host before clear context + flush\n\nAs I\u0027ve mention I am not sure if this could be used to compromise the system but theoretical small window exists I think. WDYT?",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5ec9bbce_8afbfb9e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "\tu64 pasid_dir_pa \u003d 0;\n\tunsigned long pasid_dir_sz \u003d 0;\n\n\tif (sm) {\n\t\tpasid_dir_pa \u003d context-\u003elo \u0026 VTD_PAGE_MASK;\n\t\tpasid_dir_sz \u003d get_pasid_dir_size(context);\n\t} else {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 177,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (sm)\n\t\tret \u003d pkvm_pasid_free_table(pkvm_phys_to_virt(pasid_dir_pa), pasid_dir_sz);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bfa3276f86217e90fcbd532f99ebc99d47708ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
