@@ -33,6 +33,24 @@
       "message": "Let\u0027s wait for some upstream feedback on the patch. Can we wait and submit as FROMGIT?",
       "revId": "3d76ac3cea0e7b7cc1f6b1433fdc3919fff3baa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d66518_6dc74850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2025-12-11T22:08:41Z",
+      "side": 1,
+      "message": "\u003e Let\u0027s wait for some upstream feedback on the patch. Can we wait and submit as FROMGIT?\n\nYeah, I hadn\u0027t realized that the affected product is still building from a staging branch, so we can land it there while we wait.",
+      "parentUuid": "29c1cc61_c1bb2dd4",
+      "revId": "3d76ac3cea0e7b7cc1f6b1433fdc3919fff3baa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
