@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd43601a_1cf7f0c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-12-11T00:00:20Z",
+      "side": 1,
+      "message": "Bypassing Lint, since the error reported does not seem to be valid.",
+      "revId": "8fd935b2901ceef5b294c8e1a6e20ec2227cd029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
