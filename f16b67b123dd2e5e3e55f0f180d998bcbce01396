@@ -70,6 +70,24 @@
       "parentUuid": "fcdaabd2_4f87c2cd",
       "revId": "f16b67b123dd2e5e3e55f0f180d998bcbce01396",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d05613f_a312e23b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2039846
+      },
+      "writtenOn": "2025-12-11T13:07:17Z",
+      "side": 1,
+      "message": "Hi John, please also help merge this patch, thanks:)",
+      "parentUuid": "ee985ede_96d3f4cd",
+      "revId": "f16b67b123dd2e5e3e55f0f180d998bcbce01396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
