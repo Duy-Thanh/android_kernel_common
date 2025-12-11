@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ac26d8_11043bd9",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-11T12:56:03Z",
+      "side": 1,
+      "message": "I think lint is being fussy because of this:\n\nPlease fix this WARNING reported by KernelCheckPatch: WARNING:BRACES: braces {} are not necessary for single statement blocks\n\nWARNING:BRACES: braces {} are not necessary for single statement blocks",
+      "range": {
+        "startLine": 1339,
+        "startChar": 0,
+        "endLine": 1339,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ecce5d3f_9cc6890c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/locking/rwsem.c",
+              "range": {
+                "startLine": 1339,
+                "startChar": 0,
+                "endLine": 1340,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (ret)\n"
+            },
+            {
+              "path": "kernel/locking/rwsem.c",
+              "range": {
+                "startLine": 1341,
+                "startChar": 0,
+                "endLine": 1342,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c94e4059336b7ce681d6c79193aa171744ee4f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
