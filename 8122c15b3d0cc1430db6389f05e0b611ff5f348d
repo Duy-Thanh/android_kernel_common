@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0821ed7_68a5d0a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-12T16:40:55Z",
+      "side": 1,
+      "message": "Please separate this into 2 patches:\n1) the hook addition\n2) the symbol update",
+      "revId": "8122c15b3d0cc1430db6389f05e0b611ff5f348d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
