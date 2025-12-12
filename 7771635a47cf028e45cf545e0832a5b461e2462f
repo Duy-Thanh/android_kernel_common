@@ -16,6 +16,24 @@
       "message": "please rebase the patch on top of android17-6.18 to resolve the merge conflict",
       "revId": "7771635a47cf028e45cf545e0832a5b461e2462f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b61491_299b8e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-12T18:43:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ed570c4_89c90a9f",
+      "revId": "7771635a47cf028e45cf545e0832a5b461e2462f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
