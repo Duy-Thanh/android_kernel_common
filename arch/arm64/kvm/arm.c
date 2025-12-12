@@ -50,6 +50,8 @@
 
 #include "sys_regs.h"
 
+/* REMOVE ME */
+
 static enum kvm_mode kvm_mode = KVM_MODE_DEFAULT;
 
 enum kvm_wfx_trap_policy {
