@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7efecb_e88cbd33",
+        "filename": "drivers/usb/typec/ucsi/thunderbolt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-12-12T23:37:53Z",
+      "side": 1,
+      "message": "Clear `tbt-\u003eheader` afterwards to avoid double sending.",
+      "fixSuggestions": [
+        {
+          "fixId": "da09d3b0_53eecdc3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/typec/ucsi/thunderbolt.c",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": "\n\ttbt-\u003eheader \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b9a87f7ad53fefbc0f3fffa88dd54909b8bd947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c13324_56651dba",
+        "filename": "drivers/usb/typec/ucsi/thunderbolt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1836438
+      },
+      "writtenOn": "2025-12-12T23:37:53Z",
+      "side": 1,
+      "message": "Do the INIT_WORK before the `typec_altmode_set*` operations.",
+      "fixSuggestions": [
+        {
+          "fixId": "06e232d8_0dc64d9b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/typec/ucsi/thunderbolt.c",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 180,
+                "endChar": 0
+              },
+              "replacement": "\tINIT_WORK(\u0026tbt-\u003ework, ucsi_thunderbolt_work);\n"
+            },
+            {
+              "path": "drivers/usb/typec/ucsi/thunderbolt.c",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 183,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7b9a87f7ad53fefbc0f3fffa88dd54909b8bd947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
