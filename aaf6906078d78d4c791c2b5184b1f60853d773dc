@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe98d1d_140e2da6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-12T10:51:35Z",
+      "side": 1,
+      "message": "Is that really a fix or just an optimization? Otherwise the code LGTM",
+      "revId": "aaf6906078d78d4c791c2b5184b1f60853d773dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
