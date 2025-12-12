@@ -213,9 +213,9 @@ int kvm_iommu_register_ops(struct kvm_iommu_ops *ops, pkvm_handle_t *drv_id)
 		goto out_ret;
 
 	kvm_iommu_drivers[*drv_id] = ops;
-	hyp_write_unlock(&kvm_iommu_reg_lock);
 
 out_ret:
+	hyp_write_unlock(&kvm_iommu_reg_lock);
 	return ret;
 }
 
