@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51166c73_c1008e89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-12-12T20:25:01Z",
+      "side": 1,
+      "message": "These changes seem to break a lot of Kleaf tests:\n\nb/467826078 b/467867649 b/467877139\n\nI wonder why they have passed presubmit. @umendez@google.com to investigate",
+      "revId": "23c56ddf405eeddc8626462eab9869d07ae12855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
