@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0349f5_09c542bb",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-12-12T16:30:50Z",
+      "side": 1,
+      "message": "Instead of defining this FID in the pKVM range, I wonder if the \"SiP Service\" range would make more sense?\n\nThe spec describes it as\n\n\u003e Provides interfaces to SoC implementation-specific services on this platform, for example [...] some power control services\n\nand it seems more appropriate as\n\n- pKVM doesn\u0027t handle the HVC (it only monitors it)\n- the HVC could be conceptually tied to the CrosVM virtual platform:\n  - compatible with non-protected VMs\n  - compatible with current upstream Linux --\u003e driver could be upstreamed today\n  - (compatible with other hypervisors)\n  - guest potentially probes it as a `soc_device`\n- it doesn\u0027t introduce an exception to the potential rule that userspace should never attempt to handle FIDs in the pKVM range (see https://lore.kernel.org/all/20251201-smccc-filter-v2-1-03dab737a14d@google.com)\n\nWDYT?",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "d6ba5106ad6213f81afd3ee2146f080276029861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
