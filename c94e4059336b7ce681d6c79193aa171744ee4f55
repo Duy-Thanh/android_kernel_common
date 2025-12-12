@@ -50,6 +50,30 @@
       ],
       "revId": "c94e4059336b7ce681d6c79193aa171744ee4f55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0810ee_f9c7b5b9",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1339,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2025-12-12T04:38:33Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "92ac26d8_11043bd9",
+      "range": {
+        "startLine": 1339,
+        "startChar": 0,
+        "endLine": 1339,
+        "endChar": 0
+      },
+      "revId": "c94e4059336b7ce681d6c79193aa171744ee4f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
