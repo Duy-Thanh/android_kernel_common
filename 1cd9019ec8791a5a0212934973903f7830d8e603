@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb267246_dd096a6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-12-12T03:10:46Z",
+      "side": 1,
+      "message": "This patch also makes the C version a module. Can we split out the functionality necessary to swap the C version into an optional module?",
+      "revId": "1cd9019ec8791a5a0212934973903f7830d8e603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
