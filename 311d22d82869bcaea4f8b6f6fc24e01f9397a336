@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6b8042e_654dac92",
+        "filename": "tools/testing/selftests/kvm/arm64/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-12T11:30:31Z",
+      "side": 1,
+      "message": "can\u0027t we get this from getpagesize()?",
+      "revId": "311d22d82869bcaea4f8b6f6fc24e01f9397a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ced9386_0244f23f",
+        "filename": "tools/testing/selftests/kvm/arm64/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-12T11:30:31Z",
+      "side": 1,
+      "message": "That PAGE_SIZE here. That is the guest page size right? Could we get it using vm-\u003epage_size?\n\nAnd ideally we should support all combinations, but perhaps at the moment we can just skip the test if \"host PAGE_SIZE !\u003d guest PAGE_SIZE\" ?",
+      "revId": "311d22d82869bcaea4f8b6f6fc24e01f9397a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5bb52b0_8670e9fe",
+        "filename": "tools/testing/selftests/kvm/arm64/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-12T11:30:31Z",
+      "side": 1,
+      "message": "I am not sure I understand here. Both guarded and unguarded regions should fault and exit to the host. But an unguarded region should report an invalid syndrome and no data should be visible from host.",
+      "revId": "311d22d82869bcaea4f8b6f6fc24e01f9397a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
