@@ -261938,6 +261938,10 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x01a85b76
+  return_type_id: 0xbdd18903
+}
+function {
   id: 0x01ec3d09
   return_type_id: 0x34544a3f
   parameter_id: 0x3e10b518
@@ -315614,6 +315618,15 @@ elf_symbol {
   full_name: "mem_section"
 }
 elf_symbol {
+  id: 0x746374fa
+  name: "memblock_end_of_DRAM"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x59bfc3ff
+  type_id: 0x01a85b76
+  full_name: "memblock_end_of_DRAM"
+}
+elf_symbol {
   id: 0xaa97e158
   name: "memchr"
   is_defined: true
@@ -332380,6 +332393,7 @@ interface {
   symbol_id: 0xa93d3855
   symbol_id: 0x28a1af7f
   symbol_id: 0x01e78001
+  symbol_id: 0x746374fa
   symbol_id: 0xaa97e158
   symbol_id: 0xad94cee2
   symbol_id: 0xec5de79b
