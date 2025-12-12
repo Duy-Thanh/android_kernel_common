@@ -1488,6 +1488,8 @@ static int cpufreq_policy_online(struct cpufreq_policy *policy,
 			add_cpu_dev_symlink(policy, j, get_cpu_device(j));
 		}
 
+		trace_android_rvh_cpufreq_create_policy(policy);
+
 		blocking_notifier_call_chain(&cpufreq_policy_notifier_list,
 				CPUFREQ_CREATE_POLICY, policy);
 	}
