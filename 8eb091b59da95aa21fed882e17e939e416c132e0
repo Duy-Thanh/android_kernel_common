@@ -16,6 +16,24 @@
       "message": "I am seeing compilation error with this since mm-\u003eowner does not exist when CONFIG_MEMCFG is not defined: b/468143742",
       "revId": "8eb091b59da95aa21fed882e17e939e416c132e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607ed9e5_3140f03a",
+        "filename": "mm/madvise.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2025-12-12T03:01:01Z",
+      "side": 1,
+      "message": "I have a potential fix: r.android.com/3887522",
+      "parentUuid": "3bcf5d28_00b9fcc9",
+      "revId": "8eb091b59da95aa21fed882e17e939e416c132e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
