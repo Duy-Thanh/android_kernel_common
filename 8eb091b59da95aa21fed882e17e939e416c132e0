@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcf5d28_00b9fcc9",
+        "filename": "mm/madvise.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2016,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2025-12-12T02:54:29Z",
+      "side": 1,
+      "message": "I am seeing compilation error with this since mm-\u003eowner does not exist when CONFIG_MEMCFG is not defined: b/468143742",
+      "revId": "8eb091b59da95aa21fed882e17e939e416c132e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
