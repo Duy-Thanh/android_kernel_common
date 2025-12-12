@@ -1992,8 +1992,8 @@ SYSCALL_DEFINE3(madvise, unsigned long, start, size_t, len_in, int, behavior)
 }
 
 /* Perform an madvise operation over a vector of addresses and lengths. */
-static ssize_t vector_madvise(struct mm_struct *mm, struct iov_iter *iter,
-			      int behavior)
+static ssize_t vector_madvise(struct mm_struct *mm, struct task_struct *task,
+			      struct iov_iter *iter, int behavior)
 {
 	ssize_t ret = 0;
 	size_t total_len;
@@ -2016,7 +2016,7 @@ static ssize_t vector_madvise(struct mm_struct *mm, struct iov_iter *iter,
 		size_t len_in = iter_iov_len(iter);
 		int error;
 
-		trace_android_vh_process_madvise_iter(mm->owner, behavior, &ret);
+		trace_android_vh_process_madvise_iter(task, behavior, &ret);
 		if (ret < 0)
 			break;
 
@@ -2116,7 +2116,7 @@ SYSCALL_DEFINE5(process_madvise, int, pidfd, const struct iovec __user *, vec,
 
 	trace_android_vh_process_madvise_begin(task, behavior);
 
-	ret = vector_madvise(mm, &iter, behavior);
+	ret = vector_madvise(mm, task, &iter, behavior);
 
 release_mm:
 	mmput(mm);
