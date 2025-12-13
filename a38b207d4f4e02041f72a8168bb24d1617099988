@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "74fd22dc_71a9367f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4527742
+      },
+      "writtenOn": "2025-12-13T06:53:10Z",
+      "side": 1,
+      "message": "3101474: ANDROID: GKI: set vfs-only exports into their own namespace | https://android-review.googlesource.com/c/kernel/common/+/3101474",
+      "revId": "a38b207d4f4e02041f72a8168bb24d1617099988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ff012926_32874de8",
         "filename": "drivers/usb/gadget/function/storage_common.c",
         "patchSetId": 4
