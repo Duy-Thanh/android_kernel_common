@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "220f23b1_fb43e6d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-12-13T00:19:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb267246_dd096a6a",
+      "revId": "1cd9019ec8791a5a0212934973903f7830d8e603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb94ed64_8dd758b6",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-12-12T03:18:33Z",
       "side": 1,
       "message": "Can we try dropping all this logic for this branch? Maybe try out a `request_module(\"rust_binder\")` from within the C version if we see this kcmdline option? I think we need to figure out a much simpler approach before we need to unwind all this setup.",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "1cd9019ec8791a5a0212934973903f7830d8e603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a60ca2_c42778aa",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-12-13T00:19:44Z",
+      "side": 1,
+      "message": "not doable",
+      "parentUuid": "bb94ed64_8dd758b6",
       "range": {
         "startLine": 2,
         "startChar": 3,
