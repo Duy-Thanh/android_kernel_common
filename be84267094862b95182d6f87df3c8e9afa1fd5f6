@@ -52,6 +52,24 @@
       "parentUuid": "ac211ec3_8dc14af3",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e155673_7ca50291",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-13T21:09:00Z",
+      "side": 1,
+      "message": "I fully agree. Actually I thought in your last comment you already decided to drop this patch. :) If we implement validation of PASID tables in pkvm_iommu_clear_ce() with returning -EBUSY as discussed, this patch will become redundant anyway?\n\nAnd yes, we inherently don\u0027t need to prevent DoS attacks.",
+      "parentUuid": "60ceecf2_60fb4ded",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
