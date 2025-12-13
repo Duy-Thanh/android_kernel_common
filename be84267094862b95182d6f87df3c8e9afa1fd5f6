@@ -34,6 +34,24 @@
       "parentUuid": "104de07e_b0aa76c7",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ceecf2_60fb4ded",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-13T15:45:16Z",
+      "side": 1,
+      "message": "I’m reconsidering whether we should merge this patch at all.\n\nThe primary concern here is a potential DoS attack (resource exhaustion) where a zombie PASID entry leads to a memory leak. However, Availability is explicitly out of scope for the pKVM threat model. As stated in the [Android Virtualization Framework Security Model](https://source.android.com/docs/core/virtualization/security#availability):\n\n```\npKVM is designed to maintain the confidentiality and integrity of VMs... Although\npKVM doesn\u0027t provide availability to guests, the design protect[s] the host\u0027s\navailability from malicious guests...\n```\n\nSince the host is untrusted, it can already trivially DoS the guest (e.g., by refusing to schedule it). If we start mitigating specific DoS vectors in the hypervisor, it sets a precedent that might force us to handle similar complex scenarios. For example, if a Context (legacy) or PASID (scalable) entry is cleared without fully unmapping the domain\u0027s pages, the domain structure might be put()/freed while stale mappings exist. To fix that, we’d have to traverse the entire pgd on every clear to ensure no leaks, which is expensive and adds significant complexity.\n\nI believe we should adhere to the principle of minimizing the TCB (Trusted Computing Base) and avoid handling resource management cases that don\u0027t impact Confidentiality or Integrity. WDYT?",
+      "parentUuid": "ac211ec3_8dc14af3",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
