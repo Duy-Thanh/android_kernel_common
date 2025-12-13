@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69201b28_552a055b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4526476
+      },
+      "writtenOn": "2025-12-13T14:36:40Z",
+      "side": 1,
+      "message": "Can I become the owner of this build and have some help changing kernel to a faster speed",
+      "revId": "3f12f2edf8b2ef3b9e4ef1f7e34882afdc24dafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
