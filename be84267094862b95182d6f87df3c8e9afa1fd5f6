@@ -16,6 +16,24 @@
       "message": "Hmm........ now I\u0027m not sure this is quite enough. I can\u0027t see a statement in the VT-d spec that would guarantee that once a context entry is cleared and flushed, its downstream PASID entries are completely ignored by hardware. So it seems we should make sure to actually clear and flush those PASID entries (rather than just release these software resources associated with them)? i.e. basically do the same that we normally do in pkvm_iommu_clear_pasid_entry() (or what the host normally does without pKVM, when it clears PASID entries)?\n\n(This means that this actually seems to be a pKVM security issue, while I\u0027ve been thinking this is just a host functionality issue,)\n\nAlso, for instance, when clearing a context entry in pkvm_iommu_clear_ce(), we are using context_flush_present_no_pasid(), and its doc says: \"This helper can only be used when IOMMU is working in the legacy mode or IOMMU is in scalable mode but all PASID table entries of the device are non-present.\"\n\nSo it also seems better to ensure keeping the same order of clearing as the host normally does: i.e. first clear/flush the PASID entries, and only after that clear/flush the context entry.\n\nSo it seems what we should do is: in pkvm_iommu_clear_ce(), before clearing the context entry, scan its PASID directory and PASID tables to check if it doesn\u0027t have any present PASID entries, and if so, clear and flush them? Or, don\u0027t bother clearing/flushing them but just return -EBUSY to the host? (The latter seems much better: it is simpler and at the same time helps to detect the host\u0027s misbehavior.)",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac211ec3_8dc14af3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-13T08:03:05Z",
+      "side": 1,
+      "message": "In light of recent discussions, a good host will not clear context without clearing pasid entries first. So this patch is obsolete from the functionality perspective.\n\nFrom the security perspective, doing a validation that no pasid entris are present during context clear and returning -EBUSY if yes, seems a good and an easy solution, will implement that.",
+      "parentUuid": "104de07e_b0aa76c7",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
