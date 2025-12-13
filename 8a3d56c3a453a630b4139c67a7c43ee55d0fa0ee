@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968d852a_ac3142ca",
+        "filename": "android/abi_gki_aarch64_honor",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-13T01:45:09Z",
+      "side": 1,
+      "message": "should be \"android_vh_lru_cache_add\"",
+      "fixSuggestions": [
+        {
+          "fixId": "92014c98_05f59e03",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/abi_gki_aarch64_honor",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "  __traceiter_android_vh_lru_cache_add\n  __tracepoint_android_vh_lru_cache_add\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a3d56c3a453a630b4139c67a7c43ee55d0fa0ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
