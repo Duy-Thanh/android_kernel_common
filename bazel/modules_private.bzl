@@ -11,12 +11,12 @@ visibility("private")
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/block/virtio_blk.ko",
-    "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
     "drivers/bluetooth/btqca.ko",
     "drivers/bluetooth/btsdio.ko",
     "drivers/bluetooth/hci_uart.ko",
     "drivers/char/virtio_console.ko",
+    "drivers/block/zram/zram.ko",
     "drivers/gnss/gnss.ko",
     "drivers/misc/vcpu_stall_detector.ko",
     "drivers/net/can/dev/can-dev.ko",
@@ -298,7 +298,10 @@ def get_kunit_modules_superset(arch = None, map_each = None):
     """
     return _get_kunit_modules_list_minus_select(arch, map_each)
 
-_COMMON_UNPROTECTED_MODULES_LIST = []
+_COMMON_UNPROTECTED_MODULES_LIST = [
+    "drivers/block/zram/zram.ko",
+    "mm/zsmalloc.ko",
+]
 
 # buildifier: disable=unused-variable
 def get_gki_unprotected_modules_list(arch = None):
