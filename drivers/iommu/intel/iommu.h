@@ -690,6 +690,10 @@ struct dmar_domain {
 		};
 	};
 
+	unsigned long nr_donations;
+	unsigned long nr_maps;
+	unsigned long nr_map_retries;
+	unsigned long nr_unmaps;
 	struct iommu_domain domain;	/* generic domain data structure for
 					   iommu core */
 };

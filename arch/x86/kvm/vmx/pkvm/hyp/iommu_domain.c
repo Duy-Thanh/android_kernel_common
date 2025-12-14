@@ -579,6 +579,7 @@ int pkvm_iommu_domain_map(unsigned long param_va)
 {
 	struct pkvm_iommu_map_param param, *param_ptr;
 	struct pkvm_iommu_domain *domain;
+	unsigned long nr_pgtbl_pages;
 	int ret;
 
 	if (!param_va)
@@ -605,7 +606,11 @@ int pkvm_iommu_domain_map(unsigned long param_va)
 			goto out_unlock;
 		}
 	}
-	if (domain->mc.nr_pages < __pkvm_pgtable_max_pages(param.nr_pages)) {
+
+	nr_pgtbl_pages = __pkvm_pgtable_max_pages(param.nr_pages);
+	if (domain->mc.nr_pages < nr_pgtbl_pages) {
+		pkvm_dbg("pkvm: %s: mc_nr_pages=%lu, required_pages=%lu\n",
+			 __func__, domain->mc.nr_pages, nr_pgtbl_pages);
 		ret = -ENOMEM;
 		goto out_unlock;
 	}
