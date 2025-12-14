@@ -351,11 +351,13 @@ static int domain_translation_struct_show(struct seq_file *m,
 	bool scalable, found = false;
 	struct dmar_drhd_unit *drhd;
 	struct intel_iommu *iommu;
+	struct dmar_domain *domain;
 	u16 devfn, bus, seg;
 
 	bus = info->bus;
 	devfn = info->devfn;
 	seg = info->segment;
+	domain = info->domain;
 
 	rcu_read_lock();
 	for_each_active_iommu(iommu, drhd) {
@@ -483,6 +485,11 @@ static int domain_translation_struct_show(struct seq_file *m,
 		seq_printf(m, "%-17s\t%-18s\t%-18s\t%-18s\t%-18s\t%-s\n",
 			   "IOVA_PFN", "PML5E", "PML4E", "PDPE", "PDE", "PTE");
 		pgtable_walk_level(m, phys_to_virt(pgd), agaw + 2, 0, path);
+
+		if (pkvm_pviommu_enabled() && domain)
+			seq_printf(m, "Dev[%04x:%02x:%02x.%x] maps: %lu, map_retries: %lu, unmaps: %lu, donations: %lu\n",
+			   iommu->segment, bus, PCI_SLOT(devfn), PCI_FUNC(devfn),
+			   domain->nr_maps, domain->nr_map_retries, domain->nr_unmaps, domain->nr_donations);
 
 		found = true;
 iommu_unlock:
