@@ -106,6 +106,24 @@
       "parentUuid": "3432c2e2_a91acf1e",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80df0262_1bd6e3d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-14T18:02:22Z",
+      "side": 1,
+      "message": "\u003e Still, I\u0027m not sure it wouldn\u0027t be safer to validate in pkvm_iommu_clear_ce() if there are no present PASID entries, to prevent this tricky scenario entirely (i.e. to ensure that we actually adhere to VT-d Spec 6.5.3.3 (Guidance to Software for Invalidations) and the comment above context_flush_present_no_pasid())...\n\nI.e. to avoid making assumptions that the IOMMU hardware behaves like we expect it to behave even if we violate that recommendation from VT-d Spec 6.5.3.3.\n\nFor example, regarding:\n\n\u003e Ok, maybe immediately after that there will be no issue, as long as the context entry stays non-present, so any DMA from the device with this BDF will be blocked.\n\nAre we sure the hardware will not implement any optimizations that would treat the presence of the PASID entry in the cache as an indication that the context entry is present as well (so that it won\u0027t even look up the context cache in this case)? Does the VT-d spec guarantee that nothing like that will happen?",
+      "parentUuid": "ddb106d8_06ba0b1d",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
