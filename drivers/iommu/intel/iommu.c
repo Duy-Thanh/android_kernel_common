@@ -970,6 +970,7 @@ static void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 		if (ret)
 			pr_err("%s: domain unmap IOVA[start: %lx, end: %lx] failed (err=%d)\n",
 			       __func__, start_pfn, last_pfn, ret);
+		domain->nr_unmaps++;
 		return;
 	}
 
@@ -1712,6 +1713,7 @@ static int pv_domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
 	int ret;
 
 	ret = pkvm_hc_iommu_map_pages(&param);
+	domain->nr_maps++;
 	if (ret == -ENOMEM) {
 		ret = fill_domain_memcache(&param.mc, __pkvm_pgtable_max_pages(nr_pages),
 					   domain->nid, gfp);
@@ -1720,7 +1722,9 @@ static int pv_domain_mapping(struct dmar_domain *domain, unsigned long iov_pfn,
 			       __func__, ret);
 			return ret;
 		}
+		domain->nr_donations += param.mc.nr_pages;
 		ret = pkvm_hc_iommu_map_pages(&param);
+		domain->nr_map_retries++;
 	}
 	if (ret) {
 		pr_err("%s: domain map[iov_pfn: %lx, pfn: %lx, nr_pages: %lu] failed (err=%d)\n",
