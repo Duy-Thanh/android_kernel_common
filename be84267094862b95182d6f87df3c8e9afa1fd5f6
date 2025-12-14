@@ -88,6 +88,24 @@
       "parentUuid": "3e155673_7ca50291",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb106d8_06ba0b1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-14T17:51:47Z",
+      "side": 1,
+      "message": "But are we sure that if a malicious host clears a context entry without clearing its PASID entries first, it may only result in a DoS, not in allowing the host do do DMA on a wrong address, or e.g. putting the IOMMU into an undefined state?\n\nWhat exactly happens once we have cleared the context entry (both from memory and from the context cache) while there are still those stale PASID entries in memory and in the PASID cache? Ok, _maybe_ immediately after that there will be no issue, as long as the context entry stays non-present, so any DMA from the device with this BDF will be blocked.\n\nBut what happens when after that the host sets up this context entry again? We set up this context entry with a new (donated and cleared) PASID directory, but the PASID entry cache still contains those old PASID entries. So when the device with this BDF issues a DMA, the IOMMU will not walk the new (cleared) PASID directory to find the PASID entry, it will use the old PASID entry from the cache. I.e. we unexpectedly unblock the DMA for this device?\n\nWell, thinking more about what exactly happens next... Since we haven\u0027t cleared that old PASID entry via pkvm_iommu_clear_pasid_entry(), the domain\u0027s refcount is still \u003e1, so the host will not be able to free this domain (pKVM will not allow it), and thus the page tables pointed by this stale cached PASID entry will remain donated to the hypervisor (so the host cannot modify them) and the pages mapped in those page tables will remain refcounted (so the host cannot donate them to a pVM and so on). So, although the device may unexpectedly successfully do DMA, it _seems_ it shouldn\u0027t cause security issues.\n\nStill, I\u0027m not sure it wouldn\u0027t be safer to validate in pkvm_iommu_clear_ce() if there are no present PASID entries, to prevent this tricky scenario entirely (i.e. to ensure that we actually adhere to VT-d Spec 6.5.3.3 (Guidance to Software for Invalidations) and the comment above context_flush_present_no_pasid())...",
+      "parentUuid": "3432c2e2_a91acf1e",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
