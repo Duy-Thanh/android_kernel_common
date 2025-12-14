@@ -144,8 +144,8 @@ int pkvm_free_iommu_domain(struct pkvm_iommu_domain *domain, struct pkvm_memcach
 	push_pkvm_memcache(teardown_mc, pkvm_phys_to_virt(pgd), hyp_virt_to_phys);
 	WARN_ON(__pkvm_hyp_donate_host_unshare_ro(pgd, VTD_PAGE_SIZE));
 
-	pkvm_dbg("pkvm: %s: freeing domain[pgd: %llx], freed pages: %lu\n",
-		 __func__, pgd, teardown_mc->nr_pages);
+	pkvm_dbg("pkvm: %s: freeing domain[pgd: %llx], donated_pages: %lu freed pages: %lu\n",
+		 __func__, pgd, domain->nr_donations, teardown_mc->nr_pages);
 
 	pkvm_spin_lock(&iommu_domain_lock);
 	hash_del(&domain->hnode);
@@ -462,6 +462,24 @@ static void switch_to_super_page(struct pkvm_iommu_domain *domain,
 	}
 }
 
+static int pkvm_use_dma(struct pkvm_iommu_domain *domain,
+			u64 phys, u64 size)
+{
+	int ret = __pkvm_use_dma(phys, size);
+	if (ret > 0) {
+		domain->nr_pins += ret;
+		ret = 0;
+	}
+
+	return ret;
+}
+
+static void pkvm_unuse_dma(struct pkvm_iommu_domain *domain,
+			  u64 phys, u64 size)
+{
+	domain->nr_pins -= __pkvm_unuse_dma(phys, size);
+}
+
 /* Copied from drivers/iommu/intel/iommu.c:__domain_mapping() */
 static int domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_param *param)
 {
@@ -482,7 +500,7 @@ static int domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_pa
 	if ((prot & (DMA_PTE_READ|DMA_PTE_WRITE)) == 0)
 		return -EINVAL;
 
-	ret = __pkvm_use_dma(phys_pfn << VTD_PAGE_SHIFT, nr_pages * VTD_PAGE_SIZE);
+	ret = pkvm_use_dma(domain, phys_pfn << VTD_PAGE_SHIFT, nr_pages * VTD_PAGE_SIZE);
 	if (ret)
 		return ret;
 
@@ -534,7 +552,7 @@ static int domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_pa
 		tmp = 0ULL;
 		if (!try_cmpxchg64_local(&pte->val, &tmp, pteval)) {
 			if (tmp == pteval) {
-				__pkvm_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
+				pkvm_unuse_dma(domain, dma_pte_addr(pte), VTD_PAGE_SIZE);
 			} else {
 				pkvm_err("ERROR: DMA PTE for vPFN 0x%lx already set (to %llx not %llx)\n",
 					 iov_pfn, tmp, (unsigned long long)pteval);
@@ -570,7 +588,7 @@ static int domain_map(struct pkvm_iommu_domain *domain, struct pkvm_iommu_map_pa
 
 out:
 	if (unlikely(nr_pages))
-		__pkvm_unuse_dma(phys_pfn << VTD_PAGE_SHIFT, nr_pages * VTD_PAGE_SIZE);
+		pkvm_unuse_dma(domain, phys_pfn << VTD_PAGE_SHIFT, nr_pages * VTD_PAGE_SIZE);
 
 	return ret;
 }
@@ -579,6 +597,7 @@ int pkvm_iommu_domain_map(unsigned long param_va)
 {
 	struct pkvm_iommu_map_param param, *param_ptr;
 	struct pkvm_iommu_domain *domain;
+	unsigned long nr_pgtbl_pages;
 	u64 size;
 	int ret;
 
@@ -612,19 +631,32 @@ int pkvm_iommu_domain_map(unsigned long param_va)
 
 	pkvm_spin_lock(&domain->lock);
 	if (param.mc.nr_pages) {
+		domain->nr_donations += param.mc.nr_pages;
 		ret = refill_domain_memcache(domain, &param.mc);
 		if (ret) {
 			pkvm_err("pkvm: %s: failed to refill memcache for domain[pgd: %llx] (err=%d)\n",
 				 __func__, domain->pgd, ret);
+			domain->nr_donations -= param.mc.nr_pages;
 			goto out_unlock;
 		}
 	}
-	if (domain->mc.nr_pages < __pkvm_pgtable_max_pages(param.nr_pages)) {
+
+	nr_pgtbl_pages = __pkvm_pgtable_max_pages(param.nr_pages);
+	if (domain->mc.nr_pages < nr_pgtbl_pages) {
+		pkvm_dbg("pkvm: %s: mc_nr_pages=%lu, required_pages=%lu\n",
+			 __func__, domain->mc.nr_pages, nr_pgtbl_pages);
 		ret = -ENOMEM;
 		goto out_unlock;
 	}
 
+	domain->nr_pins = 0;
 	ret = domain_map(domain, &param);
+	if (!ret) {
+		if (domain->nr_pins != param.nr_pages) {
+			pkvm_err("pkvm: %s, all pages not pinned: nr_pages: %llu, nr_pins: %lu\n",
+					__func__, param.nr_pages, domain->nr_pins);
+		}
+	}
 	if (!ret && domain->need_iotlb_sync_map)
 		pkvm_cache_tag_flush_range_np(domain, param.iov_pfn << VTD_PAGE_SHIFT,
 				(param.iov_pfn + param.nr_pages - 1) << VTD_PAGE_SHIFT);
@@ -706,7 +738,7 @@ static void dma_unuse_pte(struct pkvm_iommu_domain *domain,
 	if (level == 1) {
 		do {
 			if (dma_pte_mapped(pte)) {
-				__pkvm_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
+				pkvm_unuse_dma(domain, dma_pte_addr(pte), VTD_PAGE_SIZE);
 				dma_clear_pte(pte);
 			}
 			pte++;
@@ -717,7 +749,7 @@ static void dma_unuse_pte(struct pkvm_iommu_domain *domain,
 				if (!dma_pte_superpage(pte))
 					dma_unuse_pte(domain, level - 1, pte);
 				else
-					__pkvm_unuse_dma(dma_pte_addr(pte),
+					pkvm_unuse_dma(domain, dma_pte_addr(pte),
 							 level_size(level) * VTD_PAGE_SIZE);
 				dma_clear_pte(pte);
 			}
@@ -753,8 +785,8 @@ static void dma_unuse_range(struct pkvm_iommu_domain *domain, int level,
 			if (level > 1 && !dma_pte_superpage(pte))
 				dma_unuse_pte(domain, level - 1, pte);
 			else
-				__pkvm_unuse_dma(dma_pte_addr(pte),
-						 level_size(level) * VTD_PAGE_SIZE);
+				pkvm_unuse_dma(domain, dma_pte_addr(pte),
+					       level_size(level) * VTD_PAGE_SIZE);
 
 			dma_clear_pte(pte);
 			if (!first_pte)
@@ -821,7 +853,12 @@ int pkvm_iommu_domain_unmap(unsigned long pgd_gpa, unsigned long start_pfn, unsi
 	}
 
 	pkvm_spin_lock(&domain->lock);
+	domain->nr_pins = last_pfn - start_pfn + 1;
 	domain_unmap(domain, start_pfn, last_pfn);
+	if (domain->nr_pins) {
+		pkvm_err("pkvm: %s, all pages not unpinned: nr_pages: %lu, nr_pins_left: %lu\n",
+				__func__, last_pfn - start_pfn + 1, domain->nr_pins);
+	}
 	pkvm_spin_unlock(&domain->lock);
 
 	pkvm_put_iommu_domain(domain);

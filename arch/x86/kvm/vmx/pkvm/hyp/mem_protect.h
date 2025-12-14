@@ -89,7 +89,7 @@ int __pkvm_use_dma(u64 phys, u64 size);
  * @phys:	Starting physical address of the memory range to be unmapped.
  * @size:	Size of the memory range.
  */
-void __pkvm_unuse_dma(u64 phys, u64 size);
+int __pkvm_unuse_dma(u64 phys, u64 size);
 
 /*
  * __pkvm_host_donate_hyp() - Donate pages from host to hyp, then host cannot

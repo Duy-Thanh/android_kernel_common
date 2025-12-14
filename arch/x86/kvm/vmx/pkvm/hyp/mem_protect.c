@@ -1291,6 +1291,7 @@ int __pkvm_use_dma(u64 phys, u64 size)
 {
 	u64 end = phys + size;
 	u64 cur;
+	int ret = 0;
 
 	host_ept_lock();
 	if (__host_check_page_state_range(NULL, phys, size, PKVM_PAGE_OWNED)) {
@@ -1300,25 +1301,31 @@ int __pkvm_use_dma(u64 phys, u64 size)
 	for (cur = phys; cur < end; cur += PAGE_SIZE) {
 		struct hyp_page *page = hyp_phys_to_page_safe(cur);
 
-		if (page)
+		if (page) {
 			hyp_page_ref_inc(page);
+			ret++;
+		}
 	}
 	host_ept_unlock();
 
-	return 0;
+	return ret;
 }
 
-void __pkvm_unuse_dma(u64 phys, u64 size)
+int __pkvm_unuse_dma(u64 phys, u64 size)
 {
 	u64 end = phys + size;
 	u64 cur;
+	int ret = 0;
 
 	host_ept_lock();
 	for (cur = phys; cur < end; cur += PAGE_SIZE) {
 		struct hyp_page *page = hyp_phys_to_page_safe(cur);
 
-		if (page)
+		if (page) {
 			hyp_page_ref_dec(page);
+			ret++;
+		}
 	}
 	host_ept_unlock();
+	return ret;
 }
