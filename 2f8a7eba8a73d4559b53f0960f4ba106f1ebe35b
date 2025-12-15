@@ -16,6 +16,24 @@
       "message": "Giving much more thoughts about that, it should actually be max(vm-\u003epage_size, getpagesize()). \n\nBut as you already rejects when vm-\u003epage_ssize is different, it\u0027s fine for now.",
       "revId": "2f8a7eba8a73d4559b53f0960f4ba106f1ebe35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c861cac4_62462b83",
+        "filename": "tools/testing/selftests/kvm/lib/ucall_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-12-15T16:40:30Z",
+      "side": 1,
+      "message": "I fixed it anyway. Otherwise, we might forget this in the future.",
+      "parentUuid": "6d8c0d14_3e52b2c7",
+      "revId": "2f8a7eba8a73d4559b53f0960f4ba106f1ebe35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
