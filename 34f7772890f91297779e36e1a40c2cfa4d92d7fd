@@ -33,6 +33,24 @@
       "message": "Please send this proposal upstream.",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f6228ac_09eda88b",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2025-12-15T09:44:45Z",
+      "side": 1,
+      "message": "OK，i wiil end this proposal upstream first",
+      "parentUuid": "aac2a5fa_5d68b233",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
