@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee0c5e65_9dae5513",
+        "filename": "drivers/usb/typec/ucsi/thunderbolt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2025-12-15T12:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a7efecb_e88cbd33",
+      "revId": "7b9a87f7ad53fefbc0f3fffa88dd54909b8bd947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c13324_56651dba",
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "7b9a87f7ad53fefbc0f3fffa88dd54909b8bd947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b30b748_040f543b",
+        "filename": "drivers/usb/typec/ucsi/thunderbolt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2025-12-15T12:59:02Z",
+      "side": 1,
+      "message": "It is a good point. Thanks",
+      "parentUuid": "56c13324_56651dba",
       "revId": "7b9a87f7ad53fefbc0f3fffa88dd54909b8bd947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
