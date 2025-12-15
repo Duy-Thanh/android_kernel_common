@@ -424,7 +424,7 @@ static unsigned long migrate_device_unmap(unsigned long *src_pfns,
 			continue;
 
 		folio = page_folio(page);
-		remove_migration_ptes(folio, folio, 0);
+		remove_migration_ptes(folio, folio, false);
 
 		src_pfns[i] = 0;
 		folio_unlock(folio);
@@ -842,7 +842,7 @@ void migrate_device_finalize(unsigned long *src_pfns,
 
 		if (!folio_is_zone_device(dst))
 			folio_add_lru(dst);
-		remove_migration_ptes(src, dst, 0);
+		remove_migration_ptes(src, dst, false);
 		folio_unlock(src);
 		folio_put(src);
 
