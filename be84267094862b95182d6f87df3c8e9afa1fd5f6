@@ -124,6 +124,24 @@
       "parentUuid": "ddb106d8_06ba0b1d",
       "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e17e98_19471d25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-15T21:11:34Z",
+      "side": 1,
+      "message": "I didn\u0027t find it with clarity in the vtd doc, that clearing and flushing context would flush PASID entries too from the cache. I gave the doc to gemini and asked it too:\n```\nBased on the Intel Virtualization Technology for Directed I/O (VT-d)\nspecification, here is what happens when a context entry is cleared without\nclearing the associated PASID entries:\n\nPASID Entries are NOT automatically invalidated: The specification does not\nguarantee that clearing a context entry will automatically invalidate the\nassociated cached PASID entries (cached in the PASID-cache or IOTLB). \n\nStale Cache Risk: If you clear a context entry (or scalable-mode context entry)\nbut do not explicitly invalidate the relevant PASID-cache and IOTLB entries, the\nhardware may continue to use the stale, cached information. \n\nDevice Access: This means a device could potentially continue to access memory\nusing the stale PASID translation cached in the hardware, even though the context\nentry in memory has been cleared. \n```\n\nSo I think, its a good idea to put this -EBUSY patch.",
+      "parentUuid": "80df0262_1bd6e3d5",
+      "revId": "be84267094862b95182d6f87df3c8e9afa1fd5f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
