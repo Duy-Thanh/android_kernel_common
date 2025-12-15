@@ -22,6 +22,30 @@
       },
       "revId": "d6ba5106ad6213f81afd3ee2146f080276029861",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2b0bd7_4460d5bf",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-15T14:58:39Z",
+      "side": 1,
+      "message": "I wonder if we could collide with what vendors are actually using the SiP range?\n\nAlso, we do have something to \"probe\" what are the HVC available in the pKVM range. Of course I couldn\u0027t use that anymore. \n\nSo overall, if I do agree with your arguments, I am not completely convinced that SiP is the right place. Perhaps we could use `ARM_SMCCC_KVM_FUNC_PKVM_RESV_63 + 1` which is still in the KVM range?",
+      "parentUuid": "da0349f5_09c542bb",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "d6ba5106ad6213f81afd3ee2146f080276029861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
