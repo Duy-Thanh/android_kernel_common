@@ -804,3 +804,12 @@
 # required by exynos-irq-gic-v3-its.ko
   its_restore_enable
   its_save_disable
+
+# required by zsmalloc.ko
+  copy_page
+  dec_zone_page_state
+  flush_dcache_page
+  folio_unlock
+  folio_wait_bit
+  inc_zone_page_state
+  set_movable_ops
