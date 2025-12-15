@@ -415,6 +415,10 @@ static int domain_translation_struct_show(struct seq_file *m,
 			if (!pasid_pte_is_present(pasid_tbl_entry))
 				goto iommu_unlock;
 
+			if (pkvm_pviommu_enabled() &&
+					pasid_get_domain_id(pasid_tbl_entry) == FLPT_DEFAULT_DID)
+				goto iommu_unlock;
+
 			/*
 			 * According to PASID Granular Translation Type(PGTT),
 			 * get the page table pointer.
@@ -436,6 +440,10 @@ static int domain_translation_struct_show(struct seq_file *m,
 			pgd &= VTD_PAGE_MASK;
 		} else { /* legacy mode */
 			u8 tt = (u8)(context->lo & GENMASK_ULL(3, 2)) >> 2;
+
+			if (pkvm_pviommu_enabled() &&
+					context_domain_id(context) == FLPT_DEFAULT_DID)
+				goto iommu_unlock;
 
 			/*
 			 * According to Translation Type(TT),
