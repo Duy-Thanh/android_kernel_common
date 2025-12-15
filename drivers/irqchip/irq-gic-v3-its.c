@@ -5235,7 +5235,7 @@ static void *its_get_shadow_cmd_base(struct its_node *its)
 {
 	void *page;
 
-	if (kvm_get_mode() != KVM_MODE_PROTECTED)
+	if (kvm_get_mode() != KVM_MODE_PROTECTED || kvm_skip_its_unmap())
 		return its->cmd_base;
 
 	page = alloc_pages_node(its->numa_node, GFP_KERNEL | __GFP_ZERO,

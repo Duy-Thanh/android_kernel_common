@@ -204,10 +204,15 @@ out_fail:
 	return ret;
 }
 
+static bool skip_its_mmio_unmap;
+
 static int __init unmap_gic_its(void)
 {
 	struct device_node *np;
 	int ret = 0;
+
+	if (skip_its_mmio_unmap)
+		return ret;
 
 	for_each_compatible_node(np, NULL, "arm,gic-v3-its") {
 		ret = register_moveable_fdt_resource(np,
@@ -218,6 +223,19 @@ static int __init unmap_gic_its(void)
 
 	return ret;
 }
+
+static int __init early_skip_unmap_its(char *arg)
+{
+	skip_its_mmio_unmap = true;
+	return 0;
+}
+early_param("skip_unmap_its", early_skip_unmap_its);
+
+bool kvm_skip_its_unmap(void)
+{
+	return skip_its_mmio_unmap;
+}
+EXPORT_SYMBOL_GPL(kvm_skip_its_unmap);
 
 static int __init early_hyp_lm_size_mb_cfg(char *arg)
 {

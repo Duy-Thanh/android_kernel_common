@@ -11,4 +11,5 @@ enum kvm_mode {
 };
 
 static inline enum kvm_mode kvm_get_mode(void) { return KVM_MODE_NONE; };
+static inline bool kvm_skip_its_unmap(void) { return false; };
 #endif /* __ARM_KVM_HOST_H__ */

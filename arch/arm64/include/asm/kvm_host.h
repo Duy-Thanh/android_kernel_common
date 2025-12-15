@@ -72,8 +72,10 @@ enum kvm_mode {
 };
 #ifdef CONFIG_KVM
 enum kvm_mode kvm_get_mode(void);
+bool kvm_skip_its_unmap(void);
 #else
 static inline enum kvm_mode kvm_get_mode(void) { return KVM_MODE_NONE; };
+static inline bool kvm_skip_its_unmap(void) { return false; };
 #endif
 
 extern unsigned int __ro_after_init kvm_sve_max_vl;
