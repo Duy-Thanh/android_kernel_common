@@ -122,6 +122,24 @@
       "message": "I\u0027m intrigued what this is about.",
       "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc360dd5_d435df55",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T21:27:28Z",
+      "side": 1,
+      "message": "Previously we were using `copy_gva` which needed `struct kvm_vcpu` and we wanted to remove that dependency. Its long gone and the comment is irrelevant. Removed it",
+      "parentUuid": "a239de79_63bd6e42",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
