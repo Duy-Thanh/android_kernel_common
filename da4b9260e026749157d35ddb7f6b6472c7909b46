@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58094df7_b9560ddc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-15T23:47:35Z",
+      "side": 1,
+      "message": "Just a note: as I noted earlier, it actually seems not that obviously ominous (it seems that at least in the basic case, the aforementioned resource leak should actually prevent the host from maliciously using those stale PASID entries: the domain refcounts should prevent the host from freeing the domains and donating the pages mapped by them, and so on).\n\nNevertheless, it\u0027s hard to be sure there are no other, more subtle security issues, so I agree it\u0027s better to avoid this tricky scenario altogether.",
+      "revId": "da4b9260e026749157d35ddb7f6b6472c7909b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f196c6fc_e711fa31",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-15T23:47:35Z",
+      "side": 1,
+      "message": "nit: maybe s/active/present/ (just to stick to a more standard terminology)?",
+      "fixSuggestions": [
+        {
+          "fixId": "629fae53_4cb6361d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "static int context_has_present_pasid(struct pasid_dir_entry *dir, int max_pde)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tpkvm_err(\"%s: failed to clear context: found present PASID %x\",\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 202,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (context_has_present_pasid(pasid_dir, pasid_dir_sz)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "da4b9260e026749157d35ddb7f6b6472c7909b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5998d46_cead7ecc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-15T23:47:35Z",
+      "side": 1,
+      "message": "nit: Documentation/process/coding-style.rst recommends to use braces in this case:\n\n```\nAlso, use braces when a loop contains more than a single simple statement:\n\n.. code-block:: c\n\n\twhile (condition) {\n\t\tif (test)\n\t\t\tdo_something();\n\t}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "bd5533d8_eb066255",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "\t\tfor (j \u003d 0; j \u003c PASIDTAB_ENTRIES; j++) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "da4b9260e026749157d35ddb7f6b6472c7909b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32252acd_bc1c429c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-15T23:47:35Z",
+      "side": 1,
+      "message": "Are we still using this `dte` variable?",
+      "fixSuggestions": [
+        {
+          "fixId": "4c7a7f94_0bac14d4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": "\tbool sm;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 205,
+                "startChar": 0,
+                "endLine": 206,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "da4b9260e026749157d35ddb7f6b6472c7909b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f2addb_cbe8a9de",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-15T23:47:35Z",
+      "side": 1,
+      "message": "Braces still (or once again) removed? :)",
+      "fixSuggestions": [
+        {
+          "fixId": "58ca5d11_a62f32ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 235,
+                "startChar": 0,
+                "endLine": 236,
+                "endChar": 0
+              },
+              "replacement": "\tif (sm) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 237,
+                "startChar": 0,
+                "endLine": 238,
+                "endChar": 0
+              },
+              "replacement": "\t} else {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "da4b9260e026749157d35ddb7f6b6472c7909b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
