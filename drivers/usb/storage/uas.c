@@ -702,8 +702,20 @@ static int uas_queuecommand_lck(struct scsi_cmnd *cmnd,
 	 * of queueing, no matter how fatal the error
 	 */
 	if (err == -ENODEV) {
+<<<<<<< HEAD   (057fdbf6d3c79123ad58eb55aa2428b2d951b04d Merge 5.15.196 into android13-5.15-lts)
 		set_host_byte(cmnd, DID_ERROR);
 		cmnd->scsi_done(cmnd);
+||||||| BASE   (cc5ec87693063acebb60f587e8a019ba9b94ae0e Linux 5.15.196)
+		set_host_byte(cmnd, DID_NO_CONNECT);
+		scsi_done(cmnd);
+=======
+		if (cmdinfo->state & (COMMAND_INFLIGHT | DATA_IN_URB_INFLIGHT |
+				DATA_OUT_URB_INFLIGHT))
+			goto out;
+
+		set_host_byte(cmnd, DID_NO_CONNECT);
+		scsi_done(cmnd);
+>>>>>>> BRANCH (68efe5a6c16a05391e3d96025b41e9bf573f968c Linux 5.15.197)
 		goto zombie;
 	}
 	if (err) {
@@ -715,6 +727,7 @@ static int uas_queuecommand_lck(struct scsi_cmnd *cmnd,
 		uas_add_work(cmnd);
 	}
 
+out:
 	devinfo->cmnd[idx] = cmnd;
 zombie:
 	spin_unlock_irqrestore(&devinfo->lock, flags);
