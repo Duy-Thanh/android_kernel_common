@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69b9e14_b747a04b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:13:41Z",
+      "side": 1,
+      "message": "Yeah right. With memcache this logic is no longer present as we undonate only on domain free now.",
+      "parentUuid": "cbdfe465_abaa8bba",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7759b818_68abb4d9",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ok, we cannot memset the page table before walking it in the loop above.\n\nBut I\u0027m not sure why need to memset it at all?",
       "parentUuid": "7759b818_68abb4d9",
+      "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05732f84_c30cd3d1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 92
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:13:41Z",
+      "side": 1,
+      "message": "Removed the memset and moved to memcache implementation",
+      "parentUuid": "c99a505f_0d4b8d65",
       "revId": "76c02a439489b89b18d1d50df8bbe686e2083c1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

@@ -82,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f01663_03971510",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:13:41Z",
+      "side": 1,
+      "message": "Implemented memcache and removed this logic",
+      "parentUuid": "ae36395f_891150b9",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e83943ad_c2edf4ba",
@@ -137,6 +155,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf08912_72fc4047",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:13:41Z",
+      "side": 1,
+      "message": "Yeah makes sense, moved it before.",
+      "parentUuid": "e83943ad_c2edf4ba",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4361bb_9cdbbeba",
@@ -150,6 +186,24 @@
       "writtenOn": "2025-12-03T21:42:28Z",
       "side": 1,
       "message": "Question: why exactly is this memset needed?",
+      "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551e4947_ee52e228",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 91
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:13:41Z",
+      "side": 1,
+      "message": "Not needed as there is no security concern, removef",
+      "parentUuid": "ab4361bb_9cdbbeba",
       "revId": "3ccb9c454d4fd857a78ce4a440b487c477d714bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
