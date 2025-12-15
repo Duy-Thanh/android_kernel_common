@@ -16,6 +16,24 @@
       "message": "Do we want to squash https://android-kvm.googlesource.com/linux/+/3ebd6bced157ce7bdf809c210f67889aa809c2fe here?",
       "revId": "3bbc34c83e1d33938948ecce3a2bdab70cd2e171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7593e2aa_9a773777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-12-15T16:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "683ae89f_bacb272d",
+      "revId": "3bbc34c83e1d33938948ecce3a2bdab70cd2e171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
