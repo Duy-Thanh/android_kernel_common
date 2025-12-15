@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d192443_4693abbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 60
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-15T16:03:07Z",
+      "side": 1,
+      "message": "Moving this to aosp/3599511 because it already handles flushing during map/unmap operations in other places and freeing pages to memcache will not be complete until a flush is done(memcache can be used to get pages on next map and hence releasing pages to memcache will be complete only after a flush).",
+      "revId": "dfe3064897a79a4dee7b793260e50ff28a596885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
