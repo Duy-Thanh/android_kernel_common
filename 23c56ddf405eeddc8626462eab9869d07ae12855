@@ -16,6 +16,24 @@
       "message": "These changes seem to break a lot of Kleaf tests:\n\nb/467826078 b/467867649 b/467877139\n\nI wonder why they have passed presubmit. @umendez@google.com to investigate",
       "revId": "23c56ddf405eeddc8626462eab9869d07ae12855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd9824e_9d5646d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-12-15T16:16:19Z",
+      "side": 1,
+      "message": "I left notes in http://b/436294505#comment38 \u0026 http://b/467819069#comment4, I don\u0027t think this is the root cause.",
+      "parentUuid": "51166c73_c1008e89",
+      "revId": "23c56ddf405eeddc8626462eab9869d07ae12855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
