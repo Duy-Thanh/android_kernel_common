@@ -16,6 +16,24 @@
       "message": "Please separate this into 2 patches:\n1) the hook addition\n2) the symbol update",
       "revId": "8122c15b3d0cc1430db6389f05e0b611ff5f348d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66de7170_332c98f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2025-12-15T03:01:08Z",
+      "side": 1,
+      "message": "It has been separated into 2 patches.\nThe other patch: \nhttps://android-review.googlesource.com/c/kernel/common/+/3889123",
+      "parentUuid": "e0821ed7_68a5d0a9",
+      "revId": "8122c15b3d0cc1430db6389f05e0b611ff5f348d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
