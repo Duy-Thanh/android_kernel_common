@@ -16,6 +16,24 @@
       "message": "This change is fine with me, but just wondering: can we just let the IOMMU driver include kvm_host.h instead?\n\nAsking because we concluded with Chuanxiao some time ago that in v6.18 we probably won\u0027t have pkvm.h, we will have everything in kvm_pkvm.h (and thus, in particular, the IOMMU driver will include kvm_pkvm.h). That should make things simpler and easier: if we have a single header instead of two, we have no troubles as to which of the two headers should include the other one.\n\nBut these memcache definitions will still need to stay in kvm_host.h, not in kvm_pkvm.h, because they are needed by kvm_host.h itself, while kvm_pkvm.h includes kvm_host.h, not the other way around. And this means that the IOMMU driver will also need to include kvm_host.h as well?",
       "revId": "7f05d36fbb3ed9c38bdb5af5a2bc07750510d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89ef844_c162b5cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-16T14:51:20Z",
+      "side": 1,
+      "message": "Ahh ok, thanks for the background. In addition to host drivers requirement to use `pkvm_memcache`, the other reason was - hypercall params `pkvm_domain_param` and `pkvm_iommu_map_param` also includes `pkvm_memcache`. Since kvm_host.h includes pkvm.h, I thought it would be better to move to pkvm.h so that kvm_host.h gets these from pkvm.h and the hypercall params can include `pkvm_memcache` seamlessly. \n\nIn 6.18, since kvm_pkvm.h includes kvm_host.h, it should be straightforward and we will not have any issues - kvm_host.h will have `pkvm_memcache` and kvm_pkvm.h can have the hypercall params.\n\nIs it okay to keep this patch as it is and add more context in the commit message as to why we are doing this?",
+      "parentUuid": "e05c87d3_1722ccb1",
+      "revId": "7f05d36fbb3ed9c38bdb5af5a2bc07750510d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
