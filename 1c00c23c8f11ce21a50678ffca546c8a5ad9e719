@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb9cd524_693cddd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-12-16T21:25:14Z",
+      "side": 1,
+      "message": "Upstream also does not have a line at the end of file. Overriding lint. \nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/f2fs/xattr.c#n844",
+      "revId": "1c00c23c8f11ce21a50678ffca546c8a5ad9e719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
