@@ -70,6 +70,24 @@
       "parentUuid": "1d6e2a83_9861abe7",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04dd0bf3_b403936d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-16T17:08:35Z",
+      "side": 1,
+      "message": "\u003e This actually seems to be a sort a memory leak (although mitigated by freeing all these pages when freeing the domain): every time the host maps some pages, it needs to allocate more pages to top up the memcache, since the memcache is empty, since pKVM consumed it all last time. \n\nSince the unmap returns the pages to pKVM memcache, it will not be always empty and the requests will be mostly handled in pKVM from existing memcache. As seen from the above log, the retries are very minimal. The worst case is where pKVM memcaches will house couple of extra pages(about 4-8) from what is left of the pages sent in last map hypercall. I think is comparable to pvMMU where the host keeps a set of pages in host memcache.",
+      "parentUuid": "e9570089_2fc80d71",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
