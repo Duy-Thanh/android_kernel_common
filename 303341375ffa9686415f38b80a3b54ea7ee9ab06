@@ -34,6 +34,24 @@
       "parentUuid": "4a516d5b_a1d38824",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d6e2a83_9861abe7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T16:53:39Z",
+      "side": 1,
+      "message": "This actually seems to be a sort a memory leak (although mitigated by freeing all these pages when freeing the domain): every time the host maps some pages, it *needs* to allocate more pages to top up the memcache, since the memcache is empty, since pKVM consumed it all last time. So the amount of pages allocated for pKVM is constantly growing, while pKVM is not really using most of them.",
+      "parentUuid": "4a516d5b_a1d38824",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
