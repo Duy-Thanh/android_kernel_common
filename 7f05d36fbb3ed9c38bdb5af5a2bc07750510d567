@@ -34,6 +34,24 @@
       "parentUuid": "e05c87d3_1722ccb1",
       "revId": "7f05d36fbb3ed9c38bdb5af5a2bc07750510d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "041c762f_c77ef52e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T14:54:35Z",
+      "side": 1,
+      "message": "Got it. Yeah, then in 6.12 it makes sense to keep this patch as is.",
+      "parentUuid": "e89ef844_c162b5cc",
+      "revId": "7f05d36fbb3ed9c38bdb5af5a2bc07750510d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
