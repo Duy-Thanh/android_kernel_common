@@ -10,15 +10,30 @@
 #include <xen/xen.h>
 #include <trace/hooks/iommu.h>
 
+#include <linux/sched.h>
+#include <linux/timekeeping.h>
+#include <linux/time.h>
+#include <linux/time64.h>
+
 #include <asm/cacheflush.h>
 #include <asm/xen/xen-ops.h>
+
+#define CREATE_TRACE_POINTS
+#include <fonger_trace/fonger_dma_op_trace.h>
+
+
 
 void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
 			      enum dma_data_direction dir)
 {
 	unsigned long start = (unsigned long)phys_to_virt(paddr);
-
+  struct timespec64 cur_time, finish_time;
+	//pid_t pid = task_tgid_vnr(current);
+	long* pid = (long*)current;
+	ktime_get_real_ts64(&cur_time);
 	dcache_clean_poc(start, start + size);
+	ktime_get_real_ts64(&finish_time);
+	trace_fonger_dma_op_for_device((phys_addr_t)phys_to_virt(paddr), size, (int)dir, (long)pid, cur_time.tv_sec, cur_time.tv_nsec, finish_time.tv_sec, finish_time.tv_nsec);
 }
 
 void arch_sync_dma_for_cpu(phys_addr_t paddr, size_t size,
@@ -28,14 +43,22 @@ void arch_sync_dma_for_cpu(phys_addr_t paddr, size_t size,
 
 	if (dir == DMA_TO_DEVICE)
 		return;
+  struct timespec64 cur_time, finish_time;
+	//pid_t pid = task_tgid_vnr(current);
+	long* pid = (long*)current;
+	ktime_get_real_ts64(&cur_time);
 
 	dcache_inval_poc(start, start + size);
+
+	ktime_get_real_ts64(&finish_time);
+	trace_fonger_dma_op_for_cpu((phys_addr_t)phys_to_virt(paddr), size, (int)dir, (long)pid, cur_time.tv_sec, cur_time.tv_nsec, finish_time.tv_sec, finish_time.tv_nsec);
 }
 
 void arch_dma_prep_coherent(struct page *page, size_t size)
 {
 	unsigned long start = (unsigned long)page_address(page);
 
+  trace_fonger_dma_op_prep_coh((phys_addr_t)page_address(page), size, 999);
 	dcache_clean_poc(start, start + size);
 }
 
