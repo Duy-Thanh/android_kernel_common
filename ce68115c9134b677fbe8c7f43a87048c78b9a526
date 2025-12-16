@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ce4355_c9073daa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-12-16T19:19:23Z",
+      "side": 1,
+      "message": "By passing presubmit as pixel6 tests are not running due to b/469121276",
+      "revId": "ce68115c9134b677fbe8c7f43a87048c78b9a526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
