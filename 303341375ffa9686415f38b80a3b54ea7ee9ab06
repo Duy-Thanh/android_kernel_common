@@ -88,6 +88,24 @@
       "parentUuid": "e9570089_2fc80d71",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9823acc9_976761b4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T17:10:08Z",
+      "side": 1,
+      "message": "\u003e The host/pKVM contract is slightly different compared to pvMMU. The host iommu does not have a persistent memcache for simplicity. It does map/unmap first without any donation and if pKVM returns ENOMEM, it creates a just in-time and transient memcache and retries the hypercall.\n\nOk, I see.\n\nJust wondering: any actual advantages of doing it this way, apart from avoiding adding a memcache field to the host\u0027s struct dmar_domain?",
+      "parentUuid": "e9570089_2fc80d71",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
