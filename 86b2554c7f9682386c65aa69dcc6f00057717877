@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b67d561_d49412f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-12-16T19:27:49Z",
+      "side": 1,
+      "message": "I mean _ideally_ any new tags e.g. Change_Id, Bug, SoB, cherry-picked from, etc. should be appended at the end of the commit log. I guess it makes it easier to figure out the \"history\" of the patch. This is totally OK though.",
+      "parentUuid": "772d76b5_9afa7a5c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 3
+      },
+      "revId": "86b2554c7f9682386c65aa69dcc6f00057717877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36e97acd_2d21787a",
