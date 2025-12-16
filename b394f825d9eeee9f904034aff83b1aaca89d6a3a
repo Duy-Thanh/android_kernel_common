@@ -34,6 +34,24 @@
       "parentUuid": "1775fce5_aa91f628",
       "revId": "b394f825d9eeee9f904034aff83b1aaca89d6a3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03b208a_f08cca96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-16T06:52:31Z",
+      "side": 1,
+      "message": "This adds non-upstream UAPI without an in-tree user. That violates our [UAPI policies](https://source.android.com/docs/core/architecture/kernel/kernel-code#core-kernel-features). You can make this header vendor-specific and keep your implementation in a vendor module, or you can add an in-tree implementation here, but we don\u0027t host standalone UAPI that cannot be built / tested / validated / refactored.",
+      "parentUuid": "c6ded1f8_537f931b",
+      "revId": "b394f825d9eeee9f904034aff83b1aaca89d6a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
