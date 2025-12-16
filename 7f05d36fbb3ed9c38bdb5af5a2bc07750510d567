@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05c87d3_1722ccb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T14:33:51Z",
+      "side": 1,
+      "message": "This change is fine with me, but just wondering: can we just let the IOMMU driver include kvm_host.h instead?\n\nAsking because we concluded with Chuanxiao some time ago that in v6.18 we probably won\u0027t have pkvm.h, we will have everything in kvm_pkvm.h (and thus, in particular, the IOMMU driver will include kvm_pkvm.h). That should make things simpler and easier: if we have a single header instead of two, we have no troubles as to which of the two headers should include the other one.\n\nBut these memcache definitions will still need to stay in kvm_host.h, not in kvm_pkvm.h, because they are needed by kvm_host.h itself, while kvm_pkvm.h includes kvm_host.h, not the other way around. And this means that the IOMMU driver will also need to include kvm_host.h as well?",
+      "revId": "7f05d36fbb3ed9c38bdb5af5a2bc07750510d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
