@@ -8,6 +8,7 @@
  *  Copyright  ©  2009 Paul Mackerras, IBM Corp. <paulus@au1.ibm.com>
  */
 
+#include <linux/page_size_compat.h>
 #include <linux/perf_event.h>
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
@@ -814,25 +815,35 @@ __perf_mmap_to_page(struct perf_buffer *rb, unsigned long pgoff)
 	return virt_to_page(rb->data_pages[pgoff - 1]);
 }
 
-static void *perf_mmap_alloc_page(int cpu)
+static void *__perf_mmap_alloc_page(int cpu, int order)
 {
 	struct page *page;
 	int node;
 
 	node = (cpu == -1) ? cpu : cpu_to_node(cpu);
-	page = alloc_pages_node(node, GFP_KERNEL | __GFP_ZERO, 0);
+	page = alloc_pages_node(node, GFP_KERNEL | __GFP_ZERO, order);
 	if (!page)
 		return NULL;
 
 	return page_address(page);
 }
 
-static void perf_mmap_free_page(void *addr)
+static void *perf_mmap_alloc_page(int cpu)
+{
+	return __perf_mmap_alloc_page(cpu, 0);
+}
+
+static void __perf_mmap_free_page(void *addr, int order)
 {
 	struct page *page = virt_to_page(addr);
 
 	page->mapping = NULL;
-	__free_page(page);
+	__free_pages(page, order);
+}
+
+static void perf_mmap_free_page(void *addr)
+{
+	__perf_mmap_free_page(addr, 0);
 }
 
 struct perf_buffer *rb_alloc(int nr_pages, long watermark, int cpu, int flags)
@@ -852,7 +863,7 @@ struct perf_buffer *rb_alloc(int nr_pages, long watermark, int cpu, int flags)
 	if (!rb)
 		goto fail;
 
-	rb->user_page = perf_mmap_alloc_page(cpu);
+	rb->user_page = __perf_mmap_alloc_page(cpu, get_order(__PAGE_SIZE));
 	if (!rb->user_page)
 		goto fail_user_page;
 
@@ -885,7 +896,7 @@ void rb_free(struct perf_buffer *rb)
 {
 	int i;
 
-	perf_mmap_free_page(rb->user_page);
+	__perf_mmap_free_page(rb->user_page, get_order(__PAGE_SIZE));
 	for (i = 0; i < rb->nr_pages; i++)
 		perf_mmap_free_page(rb->data_pages[i]);
 	kfree(rb);
@@ -895,11 +906,13 @@ void rb_free(struct perf_buffer *rb)
 static struct page *
 __perf_mmap_to_page(struct perf_buffer *rb, unsigned long pgoff)
 {
+	int nr_meta_pages = __PAGE_SIZE / PAGE_SIZE;
+
 	/* The '>' counts in the user page. */
 	if (pgoff > data_page_nr(rb))
 		return NULL;
 
-	return vmalloc_to_page((void *)rb->user_page + pgoff * PAGE_SIZE);
+	return vmalloc_to_page((void *)rb->user_page + ((nr_meta_pages - 1 + pgoff) * PAGE_SIZE));
 }
 
 static void perf_mmap_unmark_page(void *addr)
@@ -949,12 +962,12 @@ struct perf_buffer *rb_alloc(int nr_pages, long watermark, int cpu, int flags)
 
 	INIT_WORK(&rb->work, rb_free_work);
 
-	all_buf = vmalloc_user((nr_pages + 1) * PAGE_SIZE);
+	all_buf = vmalloc_user(nr_pages * PAGE_SIZE + __PAGE_SIZE);
 	if (!all_buf)
 		goto fail_all_buf;
 
 	rb->user_page = all_buf;
-	rb->data_pages[0] = all_buf + PAGE_SIZE;
+	rb->data_pages[0] = all_buf + __PAGE_SIZE;
 	if (nr_pages) {
 		rb->nr_pages = 1;
 		rb->page_order = ilog2(nr_pages);
