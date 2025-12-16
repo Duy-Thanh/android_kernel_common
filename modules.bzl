@@ -118,15 +118,34 @@ _X86_64_GKI_MODULES_LIST = [
     "drivers/ptp/ptp_kvm.ko",
 ]
 
+def _apply(map_each, lst):
+    if not map_each:
+        return lst
+    ret = []
+    for elem in lst:
+        mapped = map_each(elem)
+        if mapped:
+            ret.append(mapped)
+    return ret
+
 # buildifier: disable=unnamed-macro
-def get_gki_modules_list(arch = None):
+def get_gki_modules_list(arch = None, map_each = None):
     """ Provides the list of GKI modules.
 
     Args:
+<<<<<<< HEAD   (3339681848979e4cd1e886ef603c064989c7ff4f [conflict] ANDROID: refactor get_gki_modules_list. am: 1748a)
       arch: One of [arm, arm64, i386, x86_64, riscv64].
+||||||| BASE   (1748ad54f2af989db49108a4fd6c88bba31bd1aa ANDROID: refactor get_gki_modules_list.)
+      arch: One of [arm, arm64, i386, x86_64].
+=======
+        arch: One of [arm, arm64, i386, x86_64].
+        map_each: A function that takes the module name as parameter, and returns
+            the mapped value. If the module should be filtered out, the function
+            should return None.
+>>>>>>> BRANCH (b2281581aea2736cf0790d8ff9e53621c4a31088 ANDROID: get_gki_modules_list / get_kunit_modules_list accep)
 
     Returns:
-      The list of GKI modules for the given |arch|.
+        The list of GKI modules for the given |arch|.
     """
     if not arch in ("arm64", "x86_64", "arm", "i386", "riscv64"):
         fail("{}: arch {} not supported. Use one of [arm, arm64, i386, x86_64, riscv64]".format(
@@ -135,18 +154,24 @@ def get_gki_modules_list(arch = None):
         ))
 
     if arch == "arm":
-        return _COMMON_GKI_MODULES_LIST + _ARM_GKI_MODULES_LIST
+        return _apply(map_each, _COMMON_GKI_MODULES_LIST + _ARM_GKI_MODULES_LIST)
 
     if arch == "i386":
-        return _COMMON_GKI_MODULES_LIST + _X86_GKI_MODULES_LIST
+        return _apply(map_each, _COMMON_GKI_MODULES_LIST + _X86_GKI_MODULES_LIST)
 
-    gki_modules_list = [] + _COMMON_GKI_MODULES_LIST
+    gki_modules_list = _apply(map_each, [] + _COMMON_GKI_MODULES_LIST)
     if arch == "arm64":
-        gki_modules_list += _ARM64_GKI_MODULES_LIST
+        gki_modules_list += _apply(map_each, _ARM64_GKI_MODULES_LIST)
     elif arch == "x86_64":
+<<<<<<< HEAD   (3339681848979e4cd1e886ef603c064989c7ff4f [conflict] ANDROID: refactor get_gki_modules_list. am: 1748a)
         gki_modules_list += _X86_64_GKI_MODULES_LIST
     elif arch == "riscv64":
         gki_modules_list += _RISCV64_GKI_MODULES_LIST
+||||||| BASE   (1748ad54f2af989db49108a4fd6c88bba31bd1aa ANDROID: refactor get_gki_modules_list.)
+        gki_modules_list += _X86_64_GKI_MODULES_LIST
+=======
+        gki_modules_list += _apply(map_each, _X86_64_GKI_MODULES_LIST)
+>>>>>>> BRANCH (b2281581aea2736cf0790d8ff9e53621c4a31088 ANDROID: get_gki_modules_list / get_kunit_modules_list accep)
 
     return gki_modules_list
 
@@ -185,14 +210,17 @@ _KUNIT_CLK_MODULES_LIST = [
 ]
 
 # buildifier: disable=unnamed-macro
-def get_kunit_modules_list(arch = None):
+def get_kunit_modules_list(arch = None, map_each = None):
     """ Provides the list of GKI modules.
 
     Args:
-      arch: One of [arm, arm64, i386, x86_64].
+        arch: One of [arm, arm64, i386, x86_64].
+        map_each: A function that takes the module name as parameter, and returns
+            the mapped value. If the module should be filtered out, the function
+            should return None.
 
     Returns:
-      The list of KUnit modules for the given |arch|.
+        The list of KUnit modules for the given |arch|.
     """
     kunit_modules_list = _KUNIT_FRAMEWORK_MODULES + _KUNIT_COMMON_MODULES_LIST
     if arch == "arm":
@@ -211,7 +239,7 @@ def get_kunit_modules_list(arch = None):
             arch,
         ))
 
-    return kunit_modules_list
+    return _apply(map_each, kunit_modules_list)
 
 _COMMON_UNPROTECTED_MODULES_LIST = []
 
