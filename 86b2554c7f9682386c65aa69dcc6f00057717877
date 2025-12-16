@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "772d76b5_9afa7a5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1886585
+      },
+      "writtenOn": "2025-12-16T19:23:41Z",
+      "side": 1,
+      "message": "Do you mean adding the Bug: just before Fixes: ?",
+      "parentUuid": "022aa66a_3f054233",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 3
+      },
+      "revId": "86b2554c7f9682386c65aa69dcc6f00057717877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36e97acd_2d21787a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2025-12-16T16:46:20Z",
       "side": 1,
       "message": "nit: extra space typo",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 7
+      },
+      "revId": "86b2554c7f9682386c65aa69dcc6f00057717877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606810b8_b683230f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1886585
+      },
+      "writtenOn": "2025-12-16T19:23:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e97acd_2d21787a",
       "range": {
         "startLine": 20,
         "startChar": 6,
