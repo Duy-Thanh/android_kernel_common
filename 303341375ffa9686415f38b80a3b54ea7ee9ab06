@@ -52,6 +52,24 @@
       "parentUuid": "4a516d5b_a1d38824",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9570089_2fc80d71",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-16T16:57:43Z",
+      "side": 1,
+      "message": "Sorry the percentage is wrong. Its less than .1% for most devices and for graphics its around 1%. From my profiling:\n```\n127|felino:/ # grep maps /sys/kernel/debug/iommu/intel/*/domain_translation_struct | grep -v \"maps: 0\"\nDev[0000:00:02.0] maps: 28670, map_retries: 50, unmaps: 27030, donations: 387\nDev[0000:00:05.0] maps: 75, map_retries: 2, unmaps: 9, donations: 10\nDev[0000:00:0d.0] maps: 26522, map_retries: 2, unmaps: 886, donations: 10\nDev[0000:00:0d.3] maps: 26522, map_retries: 2, unmaps: 886, donations: 10\nDev[0000:00:14.0] maps: 153667, map_retries: 2, unmaps: 153586, donations: 10\nDev[0000:00:14.2] maps: 153667, map_retries: 2, unmaps: 153586, donations: 10\nDev[0000:00:14.3] maps: 35989, map_retries: 8, unmaps: 27111, donations: 40\nDev[0000:01:00.0] maps: 822717, map_retries: 12, unmaps: 189496, donations: 60\n\n```",
+      "parentUuid": "1d6e2a83_9861abe7",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
