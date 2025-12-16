@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8abb6ab_8805bd4e",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-12-16T23:45:56Z",
+      "side": 0,
+      "message": "This isn\u0027t re-landed as part of the `BACKPORT` CL.\n\nIs this still necessary?",
+      "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
