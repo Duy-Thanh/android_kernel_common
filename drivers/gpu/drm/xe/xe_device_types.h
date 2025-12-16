@@ -594,10 +594,6 @@ struct xe_device {
 		unsigned int fsb_freq, mem_freq, is_ddr3;
 	};
 #endif
-	/**
-	 * @global_mem: global GPU memory usage tracked by gpu_mem tracepoints
-	 */
-	atomic64_t global_mem;
 };
 
 /**
@@ -665,12 +661,6 @@ struct xe_file {
 
 	/** @refcount: ref count of this xe file */
 	struct kref refcount;
-
-	/**
-	 * @process_mem: per-process GPU memory usage tracked by gpu_mem
-	 * tracepoints
-	 */
-	atomic64_t process_mem;
 };
 
 #endif
