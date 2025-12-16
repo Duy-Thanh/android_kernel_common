@@ -142,6 +142,76 @@
       "parentUuid": "46e48775_fb60e864",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153701e4_f1dcd4d6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T20:34:06Z",
+      "side": 1,
+      "message": "Ok, since this seems a bit non-obvious, maybe let\u0027s add a comment before this line, something like: \"Grab as many pages as the host provides. The host\u0027s memcache is not persistent, the host expects us to fully consume it in a single hypercall.\" ?",
+      "parentUuid": "616cebe8_2de14339",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a590f05_fa83346e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T20:34:06Z",
+      "side": 1,
+      "message": "nit: donation_pages seems to be an outdated name? Maybe \"freed pages\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "40913bc5_d51f4644",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "\tpkvm_dbg(\"pkvm: %s: freeing domain[pgd: %llx], freed pages: %lu\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20d7441_fc631ecf",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T20:34:06Z",
+      "side": 1,
+      "message": "Quick question: are there cases when the host driver unmaps a range that is a part of a range mapped via a superpage (so that in order to unmap it, we need to split the superpage mapping into smaller page mappings, and thus may need to _allocate_ more pages for that)?\n\nIf not, what exactly do we do if the host still does that?",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
