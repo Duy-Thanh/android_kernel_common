@@ -106,6 +106,24 @@
       "parentUuid": "e9570089_2fc80d71",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e48775_fb60e864",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T17:17:45Z",
+      "side": 1,
+      "message": "\u003e Dev[0000:01:00.0] maps: 822717, map_retries: 12, unmaps: 189496, donations: 60\n\nIs this NVMe controller? (And this is with strict DMA mode, I assume?) If so, looks good. :)",
+      "parentUuid": "9823acc9_976761b4",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
