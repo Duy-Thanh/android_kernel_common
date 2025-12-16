@@ -124,6 +124,24 @@
       "parentUuid": "9823acc9_976761b4",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "616cebe8_2de14339",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-16T17:39:37Z",
+      "side": 1,
+      "message": "\u003e Just wondering: any actual advantages of doing it this way, apart from avoiding adding a memcache field to the host\u0027s struct dmar_domain?\n\nWe had to anyways pass the memcache in the hypercall param as we did not have a iommu/domain specific data structure easily accessible to pKVM. So I thought I\u0027d implement it this way. If I understand correctly, for pvMMU, we have the memcache in vcpu structure which is shared and easily accessible to pKVM(via pkvm_hyp I think).\n\n\u003e\u003e Dev[0000:01:00.0] maps: 822717, map_retries: 12, unmaps: 189496, donations: 60\n\n\u003e Is this NVMe controller? (And this is with strict DMA mode, I assume?) If so, looks good. :)\n\nYes, the nvme controller with strict DMA mode :-). The behavior is same with non-strict DMA mode(iommu.passthrough\u003d0 iommu.strict\u003d0) as well",
+      "parentUuid": "46e48775_fb60e864",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
