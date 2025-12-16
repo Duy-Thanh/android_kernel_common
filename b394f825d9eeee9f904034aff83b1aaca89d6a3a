@@ -52,6 +52,24 @@
       "parentUuid": "c6ded1f8_537f931b",
       "revId": "b394f825d9eeee9f904034aff83b1aaca89d6a3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b228675_c9806673",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-12-16T07:56:19Z",
+      "side": 1,
+      "message": "Okay, I will move to the vendor module. Thanks for the review.",
+      "parentUuid": "d03b208a_f08cca96",
+      "revId": "b394f825d9eeee9f904034aff83b1aaca89d6a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
