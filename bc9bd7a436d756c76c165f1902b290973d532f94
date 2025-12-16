@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be07e32_994592ea",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T16:12:03Z",
+      "side": 1,
+      "message": "pKVM still has its own __DOMAIN_MAX_ADDR definition in its iommu_internal.h (added by aosp/3788752)?\n\nInteresting how does it compile...",
+      "revId": "bc9bd7a436d756c76c165f1902b290973d532f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
