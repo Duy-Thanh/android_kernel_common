@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a516d5b_a1d38824",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-16T16:23:50Z",
+      "side": 1,
+      "message": "Looks like we have a greedy strategy: grab as many pages as we can, even if we need less?\n\nWhy not take just as many as we need, i.e. set min_pages to host_mc-\u003enr_pages, like in pvMMU?",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
