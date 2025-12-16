@@ -154,6 +154,30 @@
       },
       "revId": "a64c82155a2bc7c663d575a46e9afa0852314d05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5fd52db_8bc9f978",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 66
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-16T02:03:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95a535b4_75696d73",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 0
+      },
+      "revId": "a64c82155a2bc7c663d575a46e9afa0852314d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
