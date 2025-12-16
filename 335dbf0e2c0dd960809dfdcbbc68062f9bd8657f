@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/468137818",
       "revId": "335dbf0e2c0dd960809dfdcbbc68062f9bd8657f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaa5f2d_0eaed771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-16T16:43:28Z",
+      "side": 1,
+      "message": "see comment on aosp/3888924",
+      "revId": "335dbf0e2c0dd960809dfdcbbc68062f9bd8657f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
