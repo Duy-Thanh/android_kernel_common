@@ -16,6 +16,24 @@
       "message": "Looks like we have a greedy strategy: grab as many pages as we can, even if we need less?\n\nWhy not take just as many as we need, i.e. set min_pages to host_mc-\u003enr_pages, like in pvMMU?",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b2e5a01_d12ed25f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-16T16:53:00Z",
+      "side": 1,
+      "message": "The host/pKVM contract is slightly different compared to pvMMU. The host iommu does not have a persistent memcache for simplicity. It does map/unmap first without any donation and if pKVM returns ENOMEM, it creates a just in-time and transient memcache and retries the hypercall. So pKVM always stores what the host sends and keeps it for reusing later. And on profiling the retries for most devices are very infrequent with this approach (\u003c ~1%). For graphics, the retries is about 10% initially, but subsides as pKVM starts to use the memcache which grows with unmaps. This seemed to be an efficient and simpler approach to implement without much penalties.",
+      "parentUuid": "4a516d5b_a1d38824",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
