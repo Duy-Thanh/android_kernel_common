@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53723d0c_8c111b9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-12-17T14:12:03Z",
+      "side": 1,
+      "message": "Please address the merge conflict finding:\n\n```\nThis change has merge conflicts. Rebase on the upstream branch (e.g. \n\"git pull --rebase\"). Upload a new patchset after resolving all merge\nconflicts.\n```",
+      "revId": "7596e26d8c8b266bcc56d02b626812b90e5c94c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
