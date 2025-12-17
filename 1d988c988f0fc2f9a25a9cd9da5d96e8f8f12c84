@@ -34,6 +34,24 @@
       "parentUuid": "a8abb6ab_8805bd4e",
       "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1741838f_cfb0c3e8",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3470500
+      },
+      "writtenOn": "2025-12-17T19:58:59Z",
+      "side": 0,
+      "message": "Iirc I had that set for pre-GKI but since we migrated we no longer need it because it gets set here in GKI hacks: https://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12-desktop/init/Kconfig.gki#224\n\nYeah, I also made `TRACE_GPU_MEM` configurable upstream https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/gpu/trace/Kconfig?h\u003dv6.19-rc1\u0026id\u003d5d95cbf21a4a550f2a2050c947083de2587cf46d so we *could* remove the GKI hacks and move it to fragments but didn\u0027t wanna mess with other configs and imo out of scope for 6.12.",
+      "parentUuid": "6c0e19d1_17bf8090",
+      "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
