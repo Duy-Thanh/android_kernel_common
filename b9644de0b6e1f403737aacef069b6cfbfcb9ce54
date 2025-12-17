@@ -51,6 +51,24 @@
       "parentUuid": "4964f2ba_b7f3846a",
       "revId": "b9644de0b6e1f403737aacef069b6cfbfcb9ce54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dedcb6a_b8cead0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-17T16:41:09Z",
+      "side": 1,
+      "message": "This hook was introduced by Oppo and is used by at least 4 partners. There is likely several different implementations that need to be reconciled.",
+      "parentUuid": "08da315a_441352b2",
+      "revId": "b9644de0b6e1f403737aacef069b6cfbfcb9ce54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
