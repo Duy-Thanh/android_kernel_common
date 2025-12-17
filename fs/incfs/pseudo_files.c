@@ -191,7 +191,7 @@ out:
 static int chmod(struct dentry *dentry, umode_t mode)
 {
 	struct inode *inode = dentry->d_inode;
-	struct inode *delegated_inode = NULL;
+	struct delegated_inode delegated_inode = { };
 	struct iattr newattrs;
 	int error;
 
@@ -201,7 +201,7 @@ retry_deleg:
 	newattrs.ia_valid = ATTR_MODE | ATTR_CTIME;
 	error = notify_change(&nop_mnt_idmap, dentry, &newattrs, &delegated_inode);
 	inode_unlock(inode);
-	if (delegated_inode) {
+	if (is_delegated(&delegated_inode)) {
 		error = break_deleg_wait(&delegated_inode);
 		if (!error)
 			goto retry_deleg;
