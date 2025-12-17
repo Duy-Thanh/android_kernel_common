@@ -44,6 +44,51 @@
       ],
       "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c62e30b6_3235480d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 127
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-17T15:22:53Z",
+      "side": 1,
+      "message": "We should safely check every page in the range, not just the first page?",
+      "fixSuggestions": [
+        {
+          "fixId": "b6577ded_b7663d77",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 628,
+                "startChar": 0,
+                "endLine": 629,
+                "endChar": 0
+              },
+              "replacement": "\tstruct hyp_page *page;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 630,
+                "startChar": 0,
+                "endLine": 635,
+                "endChar": 0
+              },
+              "replacement": "\tfor (phys \u003d addr; phys \u003c addr + (level_size(level) * VTD_PAGE_SIZE); phys +\u003d VTD_PAGE_SIZE) {\n\t\tpage \u003d hyp_phys_to_page_safe(phys);\n\t\tif (page)\n\t\t\thyp_page_ref_dec(page);\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
