@@ -70,6 +70,24 @@
       "parentUuid": "1741838f_cfb0c3e8",
       "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38414ee0_440e0805",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-12-17T21:10:19Z",
+      "side": 0,
+      "message": "Acknowledged\n\nThanks for double-checking.",
+      "parentUuid": "66163f41_2b98eec3",
+      "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
