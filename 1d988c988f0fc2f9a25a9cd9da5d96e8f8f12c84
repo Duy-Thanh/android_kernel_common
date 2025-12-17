@@ -16,6 +16,24 @@
       "message": "This isn\u0027t re-landed as part of the `BACKPORT` CL.\n\nIs this still necessary?",
       "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0e19d1_17bf8090",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-12-17T18:58:57Z",
+      "side": 0,
+      "message": "This was dropped upstream because there exists a driver-agnostic `drivers/gpu/trace/Kconfig` with `TRACE_GPU_MEM` that can be configured when building.\n\nFor simplicity, I\u0027m fine with re-introducing this as an implicit `select` to avoid needing CLs that add the same to per-device `*.fragment` files.",
+      "parentUuid": "a8abb6ab_8805bd4e",
+      "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
