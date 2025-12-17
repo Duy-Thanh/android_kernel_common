@@ -52,6 +52,24 @@
       "parentUuid": "6c0e19d1_17bf8090",
       "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66163f41_2b98eec3",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3470500
+      },
+      "writtenOn": "2025-12-17T19:59:46Z",
+      "side": 0,
+      "message": "tldr its working locally for me in the current state\n```\nadb shell dumpsys gpu --gpumem\nMemory snapshot for GPU 0:\nGlobal total: 468688896\n```",
+      "parentUuid": "1741838f_cfb0c3e8",
+      "revId": "1d988c988f0fc2f9a25a9cd9da5d96e8f8f12c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
