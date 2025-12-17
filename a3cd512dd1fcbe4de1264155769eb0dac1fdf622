@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0845f542_a1398252",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 127
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-17T13:55:37Z",
+      "side": 1,
+      "message": "I think this actually should be done with host_ept_lock locked too, at least because hyp_page_ref_dec() is not an atomic decrement.\n\nSee also kvm_iommu_map_pages() -\u003e __pkvm_unuse_dma() in pKVM-ARM.",
+      "fixSuggestions": [
+        {
+          "fixId": "e2fb12aa_fd028ab0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 568,
+                "startChar": 0,
+                "endLine": 568,
+                "endChar": 0
+              },
+              "replacement": "\thost_ept_lock();\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 575,
+                "startChar": 0,
+                "endLine": 575,
+                "endChar": 0
+              },
+              "replacement": "\thost_ept_unlock();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
