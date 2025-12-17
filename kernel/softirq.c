@@ -874,13 +874,31 @@ static void tasklet_action_common(struct softirq_action *a,
 			if (!atomic_read(&t->count)) {
 				if (tasklet_clear_sched(t)) {
 					if (t->use_callback) {
+<<<<<<< HEAD   (ea710ff98c68044530f28a9b3730cdef826679c5 Merge 5e149d8a8e73 ("bpf: Add bpf_prog_run_data_pointers()"))
 						trace_tasklet_entry(t->callback);
+||||||| BASE   (5e149d8a8e732126fb6014efd60075cf63a73f91 bpf: Add bpf_prog_run_data_pointers())
+=======
+						trace_tasklet_entry(t, t->callback);
+>>>>>>> BRANCH (4443fc58fcc283a9a7aa73f2f30e427296612ec7 softirq: Add trace points for tasklet entry/exit)
 						t->callback(t);
+<<<<<<< HEAD   (ea710ff98c68044530f28a9b3730cdef826679c5 Merge 5e149d8a8e73 ("bpf: Add bpf_prog_run_data_pointers()"))
 						trace_tasklet_exit(t->callback);
 					} else {
 						trace_tasklet_entry(t->func);
+||||||| BASE   (5e149d8a8e732126fb6014efd60075cf63a73f91 bpf: Add bpf_prog_run_data_pointers())
+					else
+=======
+						trace_tasklet_exit(t, t->callback);
+					} else {
+						trace_tasklet_entry(t, t->func);
+>>>>>>> BRANCH (4443fc58fcc283a9a7aa73f2f30e427296612ec7 softirq: Add trace points for tasklet entry/exit)
 						t->func(t->data);
+<<<<<<< HEAD   (ea710ff98c68044530f28a9b3730cdef826679c5 Merge 5e149d8a8e73 ("bpf: Add bpf_prog_run_data_pointers()"))
 						trace_tasklet_exit(t->func);
+||||||| BASE   (5e149d8a8e732126fb6014efd60075cf63a73f91 bpf: Add bpf_prog_run_data_pointers())
+=======
+						trace_tasklet_exit(t, t->func);
+>>>>>>> BRANCH (4443fc58fcc283a9a7aa73f2f30e427296612ec7 softirq: Add trace points for tasklet entry/exit)
 					}
 				}
 				tasklet_unlock(t);
