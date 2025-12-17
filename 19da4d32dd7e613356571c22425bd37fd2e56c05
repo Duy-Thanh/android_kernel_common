@@ -16,6 +16,24 @@
       "message": "Why are we rushing this in?\n\nI cannot see the bug report: \"Access is denied to this issue\"",
       "revId": "19da4d32dd7e613356571c22425bd37fd2e56c05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3946af34_4a908f58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616459
+      },
+      "writtenOn": "2025-12-17T06:39:24Z",
+      "side": 1,
+      "message": "I changed the bug number and invited you to that. We\u0027d better discuss there to limit the visibility. Thanks.",
+      "parentUuid": "606c9bb6_e0d61e7d",
+      "revId": "19da4d32dd7e613356571c22425bd37fd2e56c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
