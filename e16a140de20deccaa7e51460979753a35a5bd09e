@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bb22e1_42180039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1276894
+      },
+      "writtenOn": "2025-12-17T21:55:24Z",
+      "side": 1,
+      "message": "I think the bluetooth test failure is flaky failure. Let\u0027s re-run.",
+      "revId": "e16a140de20deccaa7e51460979753a35a5bd09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
