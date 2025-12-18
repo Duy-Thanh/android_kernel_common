@@ -483,9 +483,14 @@ void page_cache_ra_order(struct readahead_control *ractl,
 	unsigned int nofs;
 	int err = 0;
 	gfp_t gfp = readahead_gfp_mask(mapping);
+	unsigned int min_ra_size = max(4, mapping_min_folio_nrpages(mapping));
 	bool bypass = false;
 
-	if (!mapping_large_folio_support(mapping))
+	/*
+	 * Fallback when size < min_nrpages as each folio should be
+	 * at least min_nrpages anyway.
+	 */
+	if (!mapping_large_folio_support(mapping) || ra->size < min_ra_size)
 		goto fallback;
 
 	trace_android_vh_page_cache_ra_order_bypass(ractl, ra, new_order, &gfp,
@@ -494,6 +499,9 @@ void page_cache_ra_order(struct readahead_control *ractl,
 		goto fallback;
 
 	limit = min(limit, index + ra->size - 1);
+
+	if (new_order < mapping_max_folio_order(mapping))
+		new_order += 2;
 
 	new_order = min(mapping_max_folio_order(mapping), new_order);
 	new_order = min_t(unsigned int, new_order, ilog2(ra->size));
@@ -693,7 +701,6 @@ void page_cache_async_ra(struct readahead_control *ractl,
 	ra->size = get_next_ra_size(ra, max_pages);
 	ra->async_size = ra->size;
 readit:
-	order += 2;
 	ractl->_index = ra->start;
 	page_cache_ra_order(ractl, ra, order);
 }
