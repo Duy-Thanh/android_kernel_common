@@ -16,6 +16,24 @@
       "message": "As usual, we should decrease the refcount after clearing the PTE and flushing caches, not before?\n\nSeems like we should just decrease the refcounts for the entire unmapped range at the end of pkvm_iommu_domain_unmap()? (And that would also make the code simpler.)\n\nAnd if it\u0027s possible that some pages in the range were not mapped (so we shouldn\u0027t decrease their refcount), we can just check if their refcount is not zero already. (And we can do all that under host_ept_lock, so that it is safe anyway.)",
       "revId": "95390eecf21225004721d20f204fae781adb8819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c0d1fd_b6b4c116",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 130
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-18T20:42:35Z",
+      "side": 1,
+      "message": "\u003e Seems like we should just decrease the refcounts for the entire unmapped range at the end of pkvm_iommu_domain_unmap()? (And that would also make the code simpler.)\n\nOk, this would be not that easy, since start_pfn..last_pfn is an IOVA range, not a physical range.",
+      "parentUuid": "e11ab63f_44ebe0cb",
+      "revId": "95390eecf21225004721d20f204fae781adb8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
