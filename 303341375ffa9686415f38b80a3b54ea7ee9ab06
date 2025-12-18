@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7721d47_7e3aaeb9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-18T11:16:06Z",
+      "side": 1,
+      "message": "Makes sense, added the comment",
+      "parentUuid": "153701e4_f1dcd4d6",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a590f05_fa83346e",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 140
@@ -197,6 +215,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53312b68_994dc4b5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-18T11:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a590f05_fa83346e",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b20d7441_fc631ecf",
@@ -210,6 +246,24 @@
       "writtenOn": "2025-12-16T20:34:06Z",
       "side": 1,
       "message": "Quick question: are there cases when the host driver unmaps a range that is a part of a range mapped via a superpage (so that in order to unmap it, we need to split the superpage mapping into smaller page mappings, and thus may need to _allocate_ more pages for that)?\n\nIf not, what exactly do we do if the host still does that?",
+      "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a78836_535625fb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 140
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-18T11:16:06Z",
+      "side": 1,
+      "message": "I haven\u0027t seen requests that come in to map partial regions of a superpage.  I investigated this further yesterday and put a WARN_ON on to see if such a thing happens. Looks like host does not make an unmap call to a sub region of a super page in all the tests that I have done(display, net and io stress with iommu.passthrough\u003d0).\n\nHost does not have code to support this.\n\nThanks for bringing this up. It would be a good idea to ask this upstream and see if this was an accidental omission and if we were just lucky to not have hit any issues till now. I shall initiate this upstream and see what their take on this is..",
+      "parentUuid": "b20d7441_fc631ecf",
       "revId": "303341375ffa9686415f38b80a3b54ea7ee9ab06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
