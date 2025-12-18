@@ -147,4 +147,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_tick_scx);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tick_nohz_idle_stop_tick);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_task_fits_cpu);
 /* keep-sorted end */
