@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432c669a_3f51ba29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-12-18T16:37:10Z",
+      "side": 1,
+      "message": "Should be \"Reapply\", rather than \"Revert \\\"Revert\".",
+      "revId": "6653ea8a07da0145574263158aabacbb9b4b546a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
