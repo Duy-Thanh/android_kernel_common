@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79f323de_6f808a82",
+        "filename": "tools/testing/selftests/kvm/arm64/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-18T14:17:49Z",
+      "side": 1,
+      "message": "I meant some of that code is running on the host, so it\u0027d be trivial to get the actual system page-size.\n\nBut then I\u0027ve realized this is actually built with the kernel anyway so using that PAGE_SIZE is just fine.",
+      "parentUuid": "09e6b77b_4748fd9b",
+      "revId": "311d22d82869bcaea4f8b6f6fc24e01f9397a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ced9386_0244f23f",
