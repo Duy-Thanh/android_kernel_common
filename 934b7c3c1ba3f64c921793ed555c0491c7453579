@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3bac97af_c56e1d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-18T12:35:40Z",
+      "side": 1,
+      "message": "\u003e Do we mean wait for the upstream merge (or comments) before merging into GKI?\n\nIf you need the change urgently, we can take it into GKI before it lands upstream but I think we should at least _post_ it first. Do you need any help with that?\n\n\u003e Do we need to find official source/link to the SDEN including erratum number abd description before we publishing to upstream Linux kernel?\n\nI think the erratum number is enough.",
+      "parentUuid": "c0760210_8d5ebc1f",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06f6691b_0219c7ef",
         "filename": "arch/arm64/kernel/cpu_errata.c",
         "patchSetId": 1
