@@ -16,6 +16,23 @@
       "message": "I think the bluetooth test failure is flaky failure. Let\u0027s re-run.",
       "revId": "e16a140de20deccaa7e51460979753a35a5bd09e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d616b47e_bf421064",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1276894
+      },
+      "writtenOn": "2025-12-18T09:11:54Z",
+      "side": 1,
+      "message": "The failing tests seems to be infra issue... :\\\nI will retry tomorrow.",
+      "revId": "e16a140de20deccaa7e51460979753a35a5bd09e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
