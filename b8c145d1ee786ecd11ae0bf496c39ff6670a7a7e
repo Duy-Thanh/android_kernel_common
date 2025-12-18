@@ -22,6 +22,30 @@
       },
       "revId": "b8c145d1ee786ecd11ae0bf496c39ff6670a7a7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f4406e9_191e23f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-18T12:51:16Z",
+      "side": 1,
+      "message": "Sorry, removed it.",
+      "parentUuid": "97eb4f20_06cd8ff3",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "b8c145d1ee786ecd11ae0bf496c39ff6670a7a7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
