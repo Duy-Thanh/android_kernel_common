@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6fc8533_9403aa4b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 142
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-18T23:57:52Z",
+      "side": 1,
+      "message": "Hmm, where do we flush TLB after unmapping them here? (Same question applies to the host driver.)",
+      "revId": "0053e709f36bf66e4b7ee9e05e45c4e227fe200b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
