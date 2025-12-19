@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b1f6a5c_07668d00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 133
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T23:14:39Z",
+      "side": 1,
+      "message": "The commit message needs an update? It still says that locking host EPT on decrementing refcounts is not required, and doesn\u0027t say anything about this new non-trivial mechanism of decrementing refcounts after unmapping \u0026 flushing.",
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1dcecc74_097886b1",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
         "patchSetId": 133
