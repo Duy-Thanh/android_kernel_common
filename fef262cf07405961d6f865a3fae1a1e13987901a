@@ -22,6 +22,30 @@
       },
       "revId": "fef262cf07405961d6f865a3fae1a1e13987901a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751c23a5_549c7bec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-19T17:30:04Z",
+      "side": 1,
+      "message": "I found it here in Greg\u0027s usb.git project -- https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git/commit/?h\u003dusb-linus\u0026id\u003de1003aa7ec9eccdde4c926bd64ef42816ad55f25\n\nPlease update the commit message to follow the FROMGIT process.",
+      "parentUuid": "2cc675f8_62a1d4fe",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "fef262cf07405961d6f865a3fae1a1e13987901a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
