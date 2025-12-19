@@ -17,6 +17,7 @@
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>
 #include <sound/timer.h>
+#include <trace/hooks/sound.h>
 
 #include "pcm_local.h"
 
@@ -2195,9 +2196,14 @@ static int fill_silence_frames(struct snd_pcm_substream *substream,
 static int pcm_sanity_check(struct snd_pcm_substream *substream)
 {
 	struct snd_pcm_runtime *runtime;
+	bool no_buffer = false;
 	if (PCM_RUNTIME_CHECK(substream))
 		return -ENXIO;
-	runtime = substream->runtime;
+
+	trace_android_vh_snd_pcm_check_no_buffer(substream, &no_buffer);
+	if (no_buffer)
+              pr_debug("%s: warning this PCM is host less\n", __func__);
+        runtime = substream->runtime;
 	if (snd_BUG_ON(!substream->ops->copy && !runtime->dma_area))
 		return -EINVAL;
 	if (runtime->state == SNDRV_PCM_STATE_OPEN)
