@@ -281,6 +281,30 @@
       },
       "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176d5065_56fd04a8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 80
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-12-19T22:54:44Z",
+      "side": 1,
+      "message": "Marked as resolved - it was for previous, different version. Now it is handled differently with memcache and refill and making sure that at least __pkvm_pgtable_max_pages are available before calling it.",
+      "parentUuid": "25b9f9b4_e4c6efbe",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 20
+      },
+      "revId": "c2342f59694aaed8bf5bcd7fb082f03040368b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
