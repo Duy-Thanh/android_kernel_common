@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fd64b5_41d20513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4357769
+      },
+      "writtenOn": "2025-12-19T03:27:49Z",
+      "side": 1,
+      "message": "This is a CP required for base branch. The respin CL is aosp/3891903. PTAL.",
+      "revId": "bcde9d2273f3b1f7b610e1a6705da841ec4024d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
