@@ -937,7 +937,12 @@ jump_up:
 	}
 	path_put(&walker_path);
 
-	if (!allowed_parent1) {
+	/*
+	 * Check CONFIG_AUDIT to enable elision of log_request_parent* and
+	 * associated caller's stack variables thanks to dead code elimination.
+	 */
+#ifdef CONFIG_AUDIT
+	if (!allowed_parent1 && log_request_parent1) {
 		log_request_parent1->type = LANDLOCK_REQUEST_FS_ACCESS;
 		log_request_parent1->audit.type = LSM_AUDIT_DATA_PATH;
 		log_request_parent1->audit.u.path = *path;
@@ -947,7 +952,7 @@ jump_up:
 			ARRAY_SIZE(*layer_masks_parent1);
 	}
 
-	if (!allowed_parent2) {
+	if (!allowed_parent2 && log_request_parent2) {
 		log_request_parent2->type = LANDLOCK_REQUEST_FS_ACCESS;
 		log_request_parent2->audit.type = LSM_AUDIT_DATA_PATH;
 		log_request_parent2->audit.u.path = *path;
@@ -956,6 +961,8 @@ jump_up:
 		log_request_parent2->layer_masks_size =
 			ARRAY_SIZE(*layer_masks_parent2);
 	}
+#endif /* CONFIG_AUDIT */
+
 	return allowed_parent1 && allowed_parent2;
 }
 
