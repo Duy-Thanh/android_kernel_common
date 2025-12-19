@@ -44,6 +44,24 @@
       ],
       "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2151650f_59d728dd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 133
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:19:39Z",
+      "side": 1,
+      "message": "Unless we\u0027ll want to make yet another pass, and use this clearing to indicate that the PTE has been already processed during the first pass? :)",
+      "parentUuid": "7ccd60ea_1a75ae2a",
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
