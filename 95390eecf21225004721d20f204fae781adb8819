@@ -34,6 +34,24 @@
       "parentUuid": "e11ab63f_44ebe0cb",
       "revId": "95390eecf21225004721d20f204fae781adb8819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85fa2bb1_c75858c8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 130
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-19T18:55:11Z",
+      "side": 1,
+      "message": "Implemented as we discussed - 2 pass approach",
+      "parentUuid": "64c0d1fd_b6b4c116",
+      "revId": "95390eecf21225004721d20f204fae781adb8819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

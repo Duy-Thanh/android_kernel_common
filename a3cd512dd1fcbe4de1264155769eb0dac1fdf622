@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4676a2_77315172",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 127
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-19T18:55:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0845f542_a1398252",
+      "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62e30b6_3235480d",
@@ -105,6 +123,24 @@
       "side": 1,
       "message": "BTW we could avoid such bugs if we introduced generic mem_protect API functions like ARM\u0027s __pkvm_use_dma() and __pkvm_unuse_dma(), and used the latter both in domain_map() and here.",
       "parentUuid": "c62e30b6_3235480d",
+      "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23a58640_961c5d1e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 127
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-19T18:55:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a2f2b7_59f7d6f9",
       "revId": "a3cd512dd1fcbe4de1264155769eb0dac1fdf622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
