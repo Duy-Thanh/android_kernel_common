@@ -33,6 +33,23 @@
       "message": "PTAL.",
       "revId": "36aaffd37c0570cc1cbe303ba2d8272045a320d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ee16fc_51a70902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-12-19T13:32:39Z",
+      "side": 1,
+      "message": "Start testing but wait for https://android-review.googlesource.com/c/kernel/common/+/3895556 to merge first",
+      "revId": "36aaffd37c0570cc1cbe303ba2d8272045a320d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
