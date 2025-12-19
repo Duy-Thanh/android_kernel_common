@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ab7f042_3737ce85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-19T13:48:31Z",
+      "side": 1,
+      "message": "useless space.",
+      "fixSuggestions": [
+        {
+          "fixId": "d226bf7e_08067fca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "07acffc68fa9109494d4c812f51608f36b4aadf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1c08bd7_c1e17941",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
         "patchSetId": 3
@@ -38,6 +73,30 @@
       "side": 1,
       "message": "That\u0027s a bit unlikely as errno is per cpu. Which means that the driver failed to alloc memory before and ignored it.\n\nBut in that case it won\u0027t be really a problem, the vCPU will exit anyway service this request and any other request in the page.\nAnd repeat the hypercall.\n\nOtherwise, we can clear `errno` before the pvIOMMU HVCs.",
       "parentUuid": "c1c08bd7_c1e17941",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "07acffc68fa9109494d4c812f51608f36b4aadf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec44709_c869337d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-19T13:48:31Z",
+      "side": 1,
+      "message": "\u003e Which means that the driver failed to alloc memory before and ignored it.\n\nTechnically, a CPU can run a HVC, hyp_alloc() fails and then alloc_errno() is set. Goes back to host but then it gets resched on a different CPU.\n\nThe best long term solution would probably to have a hyp_alloc() dedicated errno. I plan to introduce something like this for the host stage-2 ENOMEM , so that ENOMEM doesn\u0027t mean too many different things :-) \n\nBut at worst here this would over-allocate for hyp_alloc()?",
+      "parentUuid": "46f74302_a7fa6915",
       "range": {
         "startLine": 109,
         "startChar": 6,
