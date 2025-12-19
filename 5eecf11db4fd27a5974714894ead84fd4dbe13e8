@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d433521_355e1413",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:12:46Z",
+      "side": 1,
+      "message": "Why not name it consistently with dma_use_range(), i.e. dma_unuse_range()?\nOr e.g. the other way around: pfn_range_ref_inc() and pfn_range_ref_dec()?",
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7dca7c_24adc538",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:12:46Z",
+      "side": 1,
+      "message": "nota bene: ok, dma_unuse_range() is responsible for more than just unpinning...",
+      "fixSuggestions": [
+        {
+          "fixId": "4282a715_9a8b986c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 736,
+                "startChar": 0,
+                "endLine": 738,
+                "endChar": 0
+              },
+              "replacement": " * Release(unpin) physical pages reachable by pte that were previously mapped\n * for DMA and free the page table pages.\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 771,
+                "startChar": 0,
+                "endLine": 773,
+                "endChar": 0
+              },
+              "replacement": " * Release(unpin) physical pages mapped for the iova range(start_pfn..last_pfn)\n * and free the page table pages used for the mapping.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1b8773_584a9312",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:12:46Z",
+      "side": 1,
+      "message": "Using this name is inconsistent with dma_use_range() which handles a physical range, not an IOVA range, right?\n\nSo to make it consistent, maybe dma_unuse_range_iova() or something? Or rename dma_use_range() to something else, or whatever?",
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67be911d_5881f31c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:12:46Z",
+      "side": 1,
+      "message": "Ok, we are assuming we shall never map anything to address 0?\n\nWorth at least adding a comment explaining that the PTE is not present anymore, so we can\u0027t just check if it is present? (since this is not exactly obvious)\n\nBTW I guess we could set some unused bit in the PTE instead...",
+      "fixSuggestions": [
+        {
+          "fixId": "959fdf17_f387c4a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 786,
+                "startChar": 0,
+                "endLine": 786,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * dma_pte_clear_level() has already cleared the present bit.\n\t\t * Check if the PTE ever held a valid address to determine if\n\t\t * we need to unpin pages. We assume address 0 is never mapped.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
