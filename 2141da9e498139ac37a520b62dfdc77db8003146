@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf1644c_6ac409fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-12-19T17:39:49Z",
+      "side": 1,
+      "message": "Adding my Lint+2 to overcome \"ABI Compatibility\" lint errors, since this is the accepted way on `android16-6.12-desktop` branch for `UPSTREAM/BACKPORT` changes.",
+      "revId": "2141da9e498139ac37a520b62dfdc77db8003146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
