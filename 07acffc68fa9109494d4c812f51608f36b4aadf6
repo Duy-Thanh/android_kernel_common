@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c08bd7_c1e17941",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-12-19T13:23:42Z",
+      "side": 1,
+      "message": "How can you guarantee that the driver returned -ENOMEM because of a failed allocation and that `hyp_alloc_errno()` isn\u0027t just some stale old value?",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "07acffc68fa9109494d4c812f51608f36b4aadf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
