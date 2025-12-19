@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccd60ea_1a75ae2a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 133
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T22:15:30Z",
+      "side": 1,
+      "message": "So, this clearing is not necessary?",
+      "fixSuggestions": [
+        {
+          "fixId": "acb09005_d1681f47",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 751,
+                "startChar": 0,
+                "endLine": 752,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 763,
+                "startChar": 0,
+                "endLine": 764,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
