@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e11cab2_9f3f6521",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-12-19T15:23:01Z",
+      "side": 1,
+      "message": "And ever more so since we\u0027ve already moved this code earlier for the DA stuff, so let me do that now ...",
+      "parentUuid": "5cbcfa6c_81719041",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83615378_4a8bec0d",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2025-12-05T14:00:22Z",
       "side": 1,
       "message": "I had to scratch my head to understand why we couldn\u0027t fail with ENOMEM here: We would return -E2BIG if we were to hit a block. So if we reach this place we have for sure a level-3 mapping. \n\nnit: Perhaps that needs a comment for later us?",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c54793a9_aa7fec8d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-12-19T15:23:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "83615378_4a8bec0d",
       "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -82,6 +118,24 @@
       "writtenOn": "2025-12-05T11:38:47Z",
       "side": 1,
       "message": "Why not EPERM?",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c93e92_941bc1b6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-12-19T15:23:01Z",
+      "side": 1,
+      "message": "Because that would propagate back to the host mem abort path which interprets -EFAULT as \u0027oh I raced with another vCPU donating the same page, let me try to run the vCPU again\u0027 😊",
+      "parentUuid": "e171ca3b_d112a15b",
       "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
