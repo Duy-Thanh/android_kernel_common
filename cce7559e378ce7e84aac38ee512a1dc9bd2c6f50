@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "459dd59d_652036bc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-12-19T15:26:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7e11cab2_9f3f6521",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83615378_4a8bec0d",
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Because that would propagate back to the host mem abort path which interprets -EFAULT as \u0027oh I raced with another vCPU donating the same page, let me try to run the vCPU again\u0027 😊",
       "parentUuid": "e171ca3b_d112a15b",
+      "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "459640ac_c8c1543a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-12-19T15:26:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f6c93e92_941bc1b6",
       "revId": "cce7559e378ce7e84aac38ee512a1dc9bd2c6f50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
