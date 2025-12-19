@@ -566,13 +566,11 @@ static int verity_handle_data_hash_mismatch(struct dm_verity *v,
 		want_digest, block->real_digest, v->digest_size,
 		v->salt, v->salt_size,
 		DMV_ERROR_EVENT_PRE_FEC);
-#if defined(CONFIG_DM_VERITY_FEC)
 	if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_DATA, want_digest,
 			      blkno, data) == 0) {
 		trace_android_vh_handle_add_fec_mismatch_blks(blkno, v->data_dev->name);
 		return 0;
 	}
-#endif
 	if (bio->bi_status)
 		return -EIO; /* Error correction failed; Just return error */
 	trace_android_vh_handle_data_error(
