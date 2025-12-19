@@ -85,7 +85,7 @@
 #include <trace/hooks/dwc3.h>
 #include <trace/hooks/typec.h>
 #include <trace/hooks/cdc_ether.h>
-
+#include <trace/hooks/sound.h>
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -747,3 +747,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
