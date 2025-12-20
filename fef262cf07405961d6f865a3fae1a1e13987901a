@@ -46,6 +46,30 @@
       },
       "revId": "fef262cf07405961d6f865a3fae1a1e13987901a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765cb9df_bc369261",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2025-12-20T11:42:17Z",
+      "side": 1,
+      "message": "It has been changed to FROMGIT.\n\nThanks",
+      "parentUuid": "751c23a5_549c7bec",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "fef262cf07405961d6f865a3fae1a1e13987901a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
