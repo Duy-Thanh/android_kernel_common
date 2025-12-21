@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aaa6708_af71fc94",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-21T23:25:50Z",
+      "side": 1,
+      "message": "nit: we do validate that the range is owned by the host, but we don\u0027t actually validate if this range is memory, since we allow the host to DMA-map reserved memory (since aosp/3664112), and \"reserved memory\" here actually means any pages that are not in normal memblock (and as a result are not tracked in pKVM\u0027s vmemmap, are never donated etc), i.e. it could even be MMIO.\n\nHmm... I\u0027ve just realized this means we have an issue (not strictly related to pvIOMMU): we still require any DMA-mapped pages to be mapped in the host EPT, with PKVM_PAGE_OWNED state, but those pages that are outside memblock (i.e. reserved memory, MMIO) are mapped in the host EPT lazily, when the host accesses them first time. So if the host has never touched a reserved memory page (via CPU) and then tries to map it for DMA, it will fail.\n\nI suppose the GPU driver reads or writes those reserved memory pages at least once before doing DMA on them, so we haven\u0027t encountered this issue?\n\nSo in 6.18 we might address this issue to prevent it from happening, i.e.: skip the PKVM_PAGE_OWNED check for those pages that are not in the vmemmap. Actually I think in 6.18 pkvm_use_dma() will need to be implemented differently anyway, since in 6.18 the host\u0027s page state info itself is stored in the vmemmap (in struct pkvm_page), not in the host EPT PTEs.",
+      "revId": "e48d83d7e3151d58f50ae38a44cfa9337076bd80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
