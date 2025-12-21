@@ -52,6 +52,24 @@
       "parentUuid": "7a01f18a_9dcabf5e",
       "revId": "0053e709f36bf66e4b7ee9e05e45c4e227fe200b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f5c645_5f3a2ba6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 142
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:33:22Z",
+      "side": 1,
+      "message": "Yeah true. I was more concerned from the device side. If a compromised host attaches a device, does some mappings and then free domain without unmapping, we might end up with stale cache and I think device might be still access memory through the stale cache until the cache is flushed next time.",
+      "parentUuid": "e348dd44_f193db00",
+      "revId": "0053e709f36bf66e4b7ee9e05e45c4e227fe200b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
