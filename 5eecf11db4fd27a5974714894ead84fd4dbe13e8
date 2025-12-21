@@ -185,6 +185,24 @@
       "parentUuid": "67be911d_5881f31c",
       "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95124762_435c21d6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-21T23:45:29Z",
+      "side": 1,
+      "message": "Thanks, looks good. Although it seems there is no reason why not do that in this patch right away. But for now we can merge both patches as is.",
+      "parentUuid": "72615893_fd31bb31",
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
