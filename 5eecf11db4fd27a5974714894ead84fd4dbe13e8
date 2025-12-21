@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6aca36_a57b477f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d433521_355e1413",
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7dca7c_24adc538",
@@ -59,6 +77,24 @@
           ]
         }
       ],
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79423631_9451f899",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "Updated comment",
+      "parentUuid": "2c7dca7c_24adc538",
       "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -111,6 +147,24 @@
           ]
         }
       ],
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72615893_fd31bb31",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "Added comment. Also added a new cl (aosp/3897016) to use an unused bit.",
+      "parentUuid": "67be911d_5881f31c",
       "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

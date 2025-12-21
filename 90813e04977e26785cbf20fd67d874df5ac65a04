@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3daa1ec4_43306dc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 133
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "4b1f6a5c_07668d00",
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dcecc74_097886b1",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d375d3_50a7b973",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 133
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "Moved the unpin logic to separate function, so this is more or less unchanged now.",
+      "parentUuid": "1dcecc74_097886b1",
+      "range": {
+        "startLine": 688,
+        "startChar": 3,
+        "endLine": 688,
+        "endChar": 9
+      },
       "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -118,6 +160,24 @@
       "side": 1,
       "message": "Unless we\u0027ll want to make yet another pass, and use this clearing to indicate that the PTE has been already processed during the first pass? :)",
       "parentUuid": "7ccd60ea_1a75ae2a",
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0034a1_39e53679",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 133
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:38:24Z",
+      "side": 1,
+      "message": "I think this is needed because `try_cmpxchg64_local` expects the entry to be 0 when setting PTE entry(in domain_map and pfn_to_dma_pte).",
+      "parentUuid": "2151650f_59d728dd",
       "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
