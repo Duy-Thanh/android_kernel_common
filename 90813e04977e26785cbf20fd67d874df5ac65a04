@@ -101,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9caf45f8_526795fa",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 133
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-21T14:55:59Z",
+      "side": 1,
+      "message": "Sorry, you\u0027re right this function indeed changed. So updated the comment.",
+      "parentUuid": "d7d375d3_50a7b973",
+      "range": {
+        "startLine": 688,
+        "startChar": 3,
+        "endLine": 688,
+        "endChar": 9
+      },
+      "revId": "90813e04977e26785cbf20fd67d874df5ac65a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ccd60ea_1a75ae2a",
