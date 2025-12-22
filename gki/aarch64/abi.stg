@@ -346613,6 +346613,16 @@ elf_symbol {
   full_name: "is_console_locked"
 }
 elf_symbol {
+  id: 0x73ffe9a9
+  name: "is_dma_buf_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x52dd4e9e
+  namespace: "DMA_BUF"
+  type_id: 0x9bba7997
+  full_name: "is_dma_buf_file"
+}
+elf_symbol {
   id: 0x4822711b
   name: "is_midr_in_range_list"
   is_defined: true
@@ -369891,6 +369901,7 @@ interface {
   symbol_id: 0x3d2a104d
   symbol_id: 0x65d49acf
   symbol_id: 0x064a6e13
+  symbol_id: 0x73ffe9a9
   symbol_id: 0x4822711b
   symbol_id: 0x03de6dc5
   symbol_id: 0xe4e974b3
