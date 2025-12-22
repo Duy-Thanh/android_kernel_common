@@ -7,3 +7,4 @@ obj-$(CONFIG_ANDROID_BINDER_IPC_SELFTEST) += binder_alloc_selftest.o
 obj-$(CONFIG_ANDROID_VENDOR_HOOKS) += vendor_hooks.o
 obj-$(CONFIG_ANDROID_DEBUG_KINFO)	+= debug_kinfo.o
 obj-y += binder/
+obj-y += wonder/

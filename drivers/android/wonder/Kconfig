@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Google Wonder WiFi Virtual Device Driver
+#
+
+config ANDROID_WONDER
+	tristate "Wonder WiFi virtual device driver"
+	depends on MAC80211
+	depends on AUXILIARY_BUS
+	help
+	  This enables the Wonder WiFi virtual device driver.
+
+	  To build this as a module, choose m
+
+config ANDROID_WONDER_SYNA_SUPPORT
+	bool "Wonder Synaptics Support"
+	help
+	  This enables Synaptics support for the Wonder virtual device driver.
+
+config ANDROID_WONDER_TX_DEBUG
+	bool "Wonder TX Debug Message Support"
+	help
+	  Wonder TX Debug Message Support
+
+config ANDROID_WONDER_RX_DEBUG
+	bool "Wonder RX Debug Message Support"
+	help
+	  Wonder RX Debug Message SupporT
+
+config ANDROID_WONDER_RX_FILTER_SUPPORT
+	bool "Wonder RX Filter Support"
+	help
+	  Wonder RX Filter SupporT
+
