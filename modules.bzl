@@ -99,6 +99,7 @@ _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
     "drivers/android/binder/rust_binder.ko",
+    "drivers/android/wonder/wonder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
