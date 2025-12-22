@@ -30,6 +30,7 @@ load(
 load(":abi.bzl", "cc_binary_with_abi")
 load(
     ":modules.bzl",
+    "EXTRA_UNPROTECTED_MODULES_LIST",
     "get_gki_modules_list",
     "get_gki_protected_modules_list",
     "get_kunit_modules_list",
@@ -83,7 +84,7 @@ write_file(
     name = "gki_system_dlkm_modules_arm64",
     out = "android/gki_system_dlkm_modules_arm64",
     # Do not built kunit modules into system_dlkm
-    content = get_gki_modules_list("arm64") + [
+    content = get_gki_modules_list("arm64") + EXTRA_UNPROTECTED_MODULES_LIST + [
         # Ensure new line at the end.
         "",
     ],
@@ -93,7 +94,7 @@ write_file(
     name = "gki_system_dlkm_modules_x86_64",
     out = "android/gki_system_dlkm_modules_x86_64",
     # Do not built kunit modules into system_dlkm
-    content = get_gki_modules_list("x86_64") + [
+    content = get_gki_modules_list("x86_64") + EXTRA_UNPROTECTED_MODULES_LIST + [
         # Ensure new line at the end.
         "",
     ],
@@ -155,7 +156,7 @@ define_common_kernels(target_configs = {
         "trim_nonlisted_kmi": True,
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
-        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + EXTRA_UNPROTECTED_MODULES_LIST,
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
         "extra_dist": [
@@ -170,7 +171,7 @@ define_common_kernels(target_configs = {
         "trim_nonlisted_kmi": True,
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
-        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + EXTRA_UNPROTECTED_MODULES_LIST,
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "ddk_headers_archive": ":kernel_aarch64_ddk_headers_archive",
         "extra_dist": [
@@ -185,7 +186,7 @@ define_common_kernels(target_configs = {
         "trim_nonlisted_kmi": True,
         "protected_exports_list": "android/abi_gki_protected_exports_aarch64",
         "protected_modules_list": ":gki_aarch64_protected_modules",
-        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
+        "module_implicit_outs": get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + EXTRA_UNPROTECTED_MODULES_LIST,
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
         "clang_autofdo_profile": ":android/gki/aarch64/afdo/kernel.afdo",
         "defconfig_fragments": ["arch/arm64/configs/autofdo_gki.fragment"],
@@ -197,7 +198,7 @@ define_common_kernels(target_configs = {
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
+        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64") + EXTRA_UNPROTECTED_MODULES_LIST,
         "make_goals": _GKI_X86_64_MAKE_GOALS,
         "extra_dist": [
             ":test_mappings_zip",
@@ -717,7 +718,11 @@ kernel_build(
         "modules",
         "rk3399-rock-pi-4b.dtb",
     ],
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS + _ROCKPI4_WATCHDOG_MODULE_OUTS,
+    module_outs = get_gki_modules_list("arm64") +
+                  get_kunit_modules_list("arm64") +
+                  EXTRA_UNPROTECTED_MODULES_LIST +
+                  _ROCKPI4_MODULE_OUTS +
+                  _ROCKPI4_WATCHDOG_MODULE_OUTS,
     visibility = ["//visibility:private"],
 )
 
@@ -741,7 +746,10 @@ kernel_build(
         "modules",
         "rk3399-rock-pi-4b.dtb",
     ],
-    module_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64") + _ROCKPI4_MODULE_OUTS,
+    module_outs = get_gki_modules_list("arm64") +
+                  get_kunit_modules_list("arm64") +
+                  EXTRA_UNPROTECTED_MODULES_LIST +
+                  _ROCKPI4_MODULE_OUTS,
     visibility = ["//visibility:private"],
 )
 

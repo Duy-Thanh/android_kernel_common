@@ -76,7 +76,6 @@ _COMMON_GKI_MODULES_LIST = [
     "net/ieee802154/ieee802154_socket.ko",
     "net/l2tp/l2tp_core.ko",
     "net/l2tp/l2tp_ppp.ko",
-    "net/mac80211/mac80211.ko",
     "net/mac802154/mac802154.ko",
     "net/nfc/nfc.ko",
     "net/rfkill/rfkill.ko",
@@ -84,7 +83,6 @@ _COMMON_GKI_MODULES_LIST = [
     "net/tipc/tipc.ko",
     "net/tls/tls.ko",
     "net/vmw_vsock/vmw_vsock_virtio_transport.ko",
-    "net/wireless/cfg80211.ko",
 ]
 
 # Deprecated - Use `get_gki_modules_list` function instead.
@@ -204,6 +202,15 @@ _COMMON_UNPROTECTED_MODULES_LIST = [
     "drivers/block/zram/zram.ko",
     "kernel/kheaders.ko",
     "mm/zsmalloc.ko",
+    "net/mac80211/mac80211.ko",
+    "net/wireless/cfg80211.ko",
+]
+
+# Don't add these to the _COMMON_GKI_MODULES_LIST in order to avoid breaking
+# partners who are already building these as vendor modules.
+EXTRA_UNPROTECTED_MODULES_LIST = [
+    "net/mac80211/mac80211.ko",
+    "net/wireless/cfg80211.ko",
 ]
 # LINT.ThenChange(android/abi_gki_protected_exports_aarch64)
 
