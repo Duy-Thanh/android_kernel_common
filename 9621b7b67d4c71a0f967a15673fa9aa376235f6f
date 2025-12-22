@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b51a1421_32a1aabb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1974,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-22T11:27:07Z",
+      "side": 1,
+      "message": "My understanding from reading the FFA spec (1.2) that `FFA_RX_RELEASE` is mandatory and not discoverable from `FFA_FEATURES`, so this call is not compliant with FFA spec or am I missing something?",
+      "range": {
+        "startLine": 1974,
+        "startChar": 8,
+        "endLine": 1974,
+        "endChar": 22
+      },
+      "revId": "9621b7b67d4c71a0f967a15673fa9aa376235f6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
