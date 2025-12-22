@@ -203,6 +203,24 @@
       "parentUuid": "72615893_fd31bb31",
       "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7beac6_e81b0e3c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 131
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-22T00:17:21Z",
+      "side": 1,
+      "message": "I thought of keeping it separate for easy review and also for an easy revert if during review, we feel it was not worth it. For 6.18, it would be in a single patch",
+      "parentUuid": "95124762_435c21d6",
+      "revId": "5eecf11db4fd27a5974714894ead84fd4dbe13e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
