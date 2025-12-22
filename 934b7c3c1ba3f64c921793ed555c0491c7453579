@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9878127_6fba783f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2025-12-22T02:12:02Z",
+      "side": 1,
+      "message": "Thanks for the plan. I will work to post this patch to upstream in near days.\nLet me reach out to you if I need any assistance!",
+      "parentUuid": "212ee81a_e2fe7f95",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06f6691b_0219c7ef",
         "filename": "arch/arm64/kernel/cpu_errata.c",
         "patchSetId": 1
