@@ -846,6 +846,7 @@ Description:	For several zoned storage devices, vendors will provide extra space
 		reserved_blocks. However, it is not enough, since this extra space should
 		not be shown to users. So, with this new sysfs node, we can hide the space
 		by substracting reserved_blocks from total bytes.
+<<<<<<< HEAD   (9697f5a9380c2233246c9a3933891d31795e58c4 Merge 65e42a7084d1 ("f2fs: fix to avoid running out of free )
 
 What:		/sys/fs/f2fs/<disk>/encoding_flags
 Date:		April 2025
@@ -883,3 +884,6 @@ Description:
 		- "compat": Hash-based lookup with a linear search fallback enabled
 		- "auto:perf": lookup_mode is auto and fallback is disabled on-disk
 		- "auto:compat": lookup_mode is auto and fallback is enabled on-disk
+||||||| BASE   (65e42a7084d1a19d94ca4e1a620dabde2e0a76ae f2fs: fix to avoid running out of free segments)
+=======
+>>>>>>> BRANCH (7cc6b80df66f69bff1acf5cbcba5aaf639fc97c8 f2fs: add carve_out sysfs node)
