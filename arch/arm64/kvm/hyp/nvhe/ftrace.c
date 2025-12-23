@@ -126,6 +126,15 @@ void hyp_ftrace_ret_flush(void)
 	}
 }
 
+unsigned long hyp_ftrace_ret_pop(void)
+{
+	struct hyp_ftrace_stack_frame *frame = hyp_ftrace_func_pop();
+
+	BUG_ON(!frame);
+
+	return frame->ret;
+}
+
 static int __get_offset_idx_ins(unsigned long *func, unsigned long ip, u32 *insn,
 				void *args)
 {
