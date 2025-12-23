@@ -1907,8 +1907,15 @@ next_alloc:
 			}
 		}
 
+<<<<<<< HEAD   (5e54f31305ac9575c068c299b880f9ee8dd04f51 Merge 9933e05f508e ("f2fs: add a sysfs entry to reclaim POSI)
 		if (has_not_enough_free_secs(sbi, 0,
 				sbi->reserved_pin_section)) {
+||||||| BASE   (9933e05f508e08ff9054d859c6736234f8d3700f f2fs: add a sysfs entry to reclaim POSIX_FADV_NOREUSE pages)
+=======
+		if (has_not_enough_free_secs(sbi, 0, f2fs_sb_has_blkzoned(sbi) ?
+			ZONED_PIN_SEC_REQUIRED_COUNT :
+			GET_SEC_FROM_SEG(sbi, overprovision_segments(sbi)))) {
+>>>>>>> BRANCH (65e42a7084d1a19d94ca4e1a620dabde2e0a76ae f2fs: fix to avoid running out of free segments)
 			f2fs_down_write(&sbi->gc_lock);
 			stat_inc_gc_call_count(sbi, FOREGROUND);
 			err = f2fs_gc(sbi, &gc_control);
