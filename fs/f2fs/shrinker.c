@@ -184,6 +184,7 @@ static unsigned int do_reclaim_caches(struct f2fs_sb_info *sbi,
 		if (!inode)
 			continue;
 
+<<<<<<< HEAD   (1de56deee382f8c7957249717c30625dbd6e8a1b Merge 58ecedab080c ("f2fs: keep POSIX_FADV_NOREUSE ranges") )
 		inode_lock(inode);
 		if (!is_inode_flag_set(inode, FI_DONATE_FINISHED)) {
 			len = fi->donate_end - fi->donate_start + 1;
@@ -195,6 +196,13 @@ static unsigned int do_reclaim_caches(struct f2fs_sb_info *sbi,
 		}
 		inode_unlock(inode);
 
+||||||| BASE   (58ecedab080c41b7ecbb9f38d81d35a169738b82 f2fs: keep POSIX_FADV_NOREUSE ranges)
+=======
+		len = fi->donate_end - fi->donate_start + 1;
+		npages = npages < len ? 0 : npages - len;
+		invalidate_inode_pages2_range(inode->i_mapping,
+					fi->donate_start, fi->donate_end);
+>>>>>>> BRANCH (9933e05f508e08ff9054d859c6736234f8d3700f f2fs: add a sysfs entry to reclaim POSIX_FADV_NOREUSE pages)
 		iput(inode);
 		cond_resched();
 	}
