@@ -162,6 +162,7 @@ DEFINE_EVENT(softirq, softirq_raise,
 
 DECLARE_EVENT_CLASS(tasklet,
 
+<<<<<<< HEAD   (023783e43de2f0ca71f525f7a3e417dac2c64662 ANDROID: GKI: add devm_clk_hw_get_clk to db845c symbol list)
 	TP_PROTO(void *func),
 
 	TP_ARGS(func),
@@ -201,6 +202,52 @@ DEFINE_EVENT(tasklet, tasklet_exit,
 	TP_PROTO(void *func),
 
 	TP_ARGS(func)
+||||||| BASE   (5e149d8a8e732126fb6014efd60075cf63a73f91 bpf: Add bpf_prog_run_data_pointers())
+=======
+	TP_PROTO(struct tasklet_struct *t, void *func),
+
+	TP_ARGS(t, func),
+
+	TP_STRUCT__entry(
+		__field(	void *,	tasklet)
+		__field(	void *,	func)
+	),
+
+	TP_fast_assign(
+		__entry->tasklet = t;
+		__entry->func = func;
+	),
+
+	TP_printk("tasklet=%ps function=%ps", __entry->tasklet, __entry->func)
+);
+
+/**
+ * tasklet_entry - called immediately before the tasklet is run
+ * @t: tasklet pointer
+ * @func: tasklet callback or function being run
+ *
+ * Used to find individual tasklet execution time
+ */
+DEFINE_EVENT(tasklet, tasklet_entry,
+
+	TP_PROTO(struct tasklet_struct *t, void *func),
+
+	TP_ARGS(t, func)
+);
+
+/**
+ * tasklet_exit - called immediately after the tasklet is run
+ * @t: tasklet pointer
+ * @func: tasklet callback or function being run
+ *
+ * Used to find individual tasklet execution time
+ */
+DEFINE_EVENT(tasklet, tasklet_exit,
+
+	TP_PROTO(struct tasklet_struct *t, void *func),
+
+	TP_ARGS(t, func)
+>>>>>>> BRANCH (4443fc58fcc283a9a7aa73f2f30e427296612ec7 softirq: Add trace points for tasklet entry/exit)
 );
 
 #endif /*  _TRACE_IRQ_H */
