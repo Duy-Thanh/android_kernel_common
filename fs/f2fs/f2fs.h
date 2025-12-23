@@ -867,7 +867,11 @@ struct f2fs_inode_info {
 	/* linked in global inode list for cache donation */
 	struct list_head gdonate_list;
 	pgoff_t donate_start, donate_end; /* inclusive */
+<<<<<<< HEAD   (a7d747c4f2378633071cf2206f12c7e6e383ddf0 ANDROID: GKI: add devm_hwspin_lock_request_specific to the d)
 	atomic_t open_count;		/* # of open files */
+||||||| BASE   (3e50b6e2b118deeb45f1305fd823afbc03ef87d5 platform/x86:intel/pmc: Update Arrow Lake telemetry GUID)
+=======
+>>>>>>> BRANCH (58ecedab080c41b7ecbb9f38d81d35a169738b82 f2fs: keep POSIX_FADV_NOREUSE ranges)
 
 	struct task_struct *atomic_write_task;	/* store atomic write task */
 	struct extent_tree *extent_tree[NR_EXTENT_CACHES];

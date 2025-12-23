@@ -825,7 +825,12 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
 	return 0;
 }
 
+<<<<<<< HEAD   (a7d747c4f2378633071cf2206f12c7e6e383ddf0 ANDROID: GKI: add devm_hwspin_lock_request_specific to the d)
 void f2fs_remove_donate_inode(struct inode *inode)
+||||||| BASE   (3e50b6e2b118deeb45f1305fd823afbc03ef87d5 platform/x86:intel/pmc: Update Arrow Lake telemetry GUID)
+=======
+static void f2fs_remove_donate_inode(struct inode *inode)
+>>>>>>> BRANCH (58ecedab080c41b7ecbb9f38d81d35a169738b82 f2fs: keep POSIX_FADV_NOREUSE ranges)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 
