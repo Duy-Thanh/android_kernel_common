@@ -827,7 +827,7 @@ static struct kvm_hyp_iommu *smmu_id_to_iommu(pkvm_handle_t smmu_id)
 	return &kvm_hyp_arm_smmu_v3_smmus[smmu_id].iommu;
 }
 
-static int smmu_domain_config_s2(struct kvm_hyp_iommu_domain *domain, u64 *ent)
+int smmu_domain_config_s2(struct kvm_hyp_iommu_domain *domain, u64 *ent)
 {
 	struct io_pgtable_cfg *cfg;
 	u64 ts, sl, ic, oc, sh, tg, ps;
@@ -860,9 +860,10 @@ static int smmu_domain_config_s2(struct kvm_hyp_iommu_domain *domain, u64 *ent)
 	return 0;
 }
 
-static int smmu_domain_config_s1(struct hyp_arm_smmu_v3_device *smmu,
-				 struct kvm_hyp_iommu_domain *domain, u32 sid, u32 pasid,
-				 u32 pasid_bits, u64 *ent, bool *update_ste)
+int smmu_domain_config_s1(struct hyp_arm_smmu_v3_device *smmu,
+			  struct kvm_hyp_iommu_domain *domain,
+			  u32 sid, u32 pasid, u32 pasid_bits,
+			  u64 *ent, bool *update_ste)
 {
 	u64 *cd_table;
 	u64 *ste;
@@ -966,8 +967,8 @@ static int smmu_domain_config_s1(struct hyp_arm_smmu_v3_device *smmu,
 	return 0;
 }
 
-static int smmu_domain_finalise(struct hyp_arm_smmu_v3_device *smmu,
-				struct kvm_hyp_iommu_domain *domain)
+int smmu_domain_finalise(struct hyp_arm_smmu_v3_device *smmu,
+			 struct kvm_hyp_iommu_domain *domain)
 {
 	int ret;
 	struct io_pgtable_cfg *cfg;
@@ -1307,7 +1308,7 @@ out_unlock:
 	return ret;
 }
 
-static int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, u32 type)
+int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, u32 type)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain;
 
@@ -1326,7 +1327,7 @@ static int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, u32 type)
 	return 0;
 }
 
-static void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
+void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
 	/*
@@ -1342,7 +1343,7 @@ static void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
 	hyp_free(smmu_domain);
 }
 
-static bool smmu_dabt_device(struct hyp_arm_smmu_v3_device *smmu,
+bool smmu_dabt_device(struct hyp_arm_smmu_v3_device *smmu,
 		      struct kvm_cpu_context *host_ctxt, u64 esr, u32 off)
 {
 	bool is_write = esr & ESR_ELx_WNR;
@@ -1385,7 +1386,7 @@ static bool smmu_dabt_device(struct hyp_arm_smmu_v3_device *smmu,
 	return true;
 }
 
-static bool smmu_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)
+bool smmu_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)
 {
 	struct hyp_arm_smmu_v3_device *smmu;
 
@@ -1397,7 +1398,7 @@ static bool smmu_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 ad
 	return false;
 }
 
-static int smmu_suspend(struct kvm_hyp_iommu *iommu)
+int smmu_suspend(struct kvm_hyp_iommu *iommu)
 {
 	struct hyp_arm_smmu_v3_device *smmu = to_smmu(iommu);
 
@@ -1410,7 +1411,7 @@ static int smmu_suspend(struct kvm_hyp_iommu *iommu)
 	return 0;
 }
 
-static int smmu_resume(struct kvm_hyp_iommu *iommu)
+int smmu_resume(struct kvm_hyp_iommu *iommu)
 {
 	struct hyp_arm_smmu_v3_device *smmu = to_smmu(iommu);
 
@@ -1422,7 +1423,7 @@ static int smmu_resume(struct kvm_hyp_iommu *iommu)
 	return 0;
 }
 
-static int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
+int smmu_map_pages(struct kvm_hyp_iommu_domain *domain, unsigned long iova,
 		   phys_addr_t paddr, size_t pgsize,
 		   size_t pgcount, int prot, size_t *total_mapped)
 {
