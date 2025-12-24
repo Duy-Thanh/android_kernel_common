@@ -511,6 +511,7 @@
   devm_thermal_of_zone_unregister
   devm_usb_get_phy_by_phandle
   _dev_notice
+  dev_open
   dev_pm_domain_attach_by_name
   dev_pm_domain_detach
   dev_pm_opp_add
@@ -1454,6 +1455,8 @@
   netdev_err
   netdev_info
   netdev_refcnt_read
+  netdev_rx_handler_register
+  netdev_rx_handler_unregister
   netdev_set_default_ethtool_ops
   netdev_state_change
   netdev_update_features
@@ -1851,6 +1854,8 @@
   refcount_dec_not_one
   refcount_warn_saturate
   __refrigerator
+  ref_tracker_alloc
+  ref_tracker_free
   regcache_cache_only
   regcache_drop_region
   regcache_mark_dirty
@@ -2359,6 +2364,7 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+  __traceiter_android_rvh_after_enqueue_task
   __traceiter_android_rvh_attach_entity_load_avg
   __traceiter_android_rvh_audio_usb_offload_disconnect
   __traceiter_android_rvh_can_migrate_task
@@ -2502,6 +2508,7 @@
   __traceiter_workqueue_execute_end
   __traceiter_workqueue_execute_start
   trace_output_call
+  __tracepoint_android_rvh_after_enqueue_task
   __tracepoint_android_rvh_attach_entity_load_avg
   __tracepoint_android_rvh_audio_usb_offload_disconnect
   __tracepoint_android_rvh_can_migrate_task
