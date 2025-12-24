@@ -3613,8 +3613,24 @@ static struct platform_driver arm_smmu_driver = {
 	.remove_new = arm_smmu_device_remove,
 	.shutdown = arm_smmu_device_shutdown,
 };
+
+__maybe_unused static int arm_smmu_driver_register(void)
+{
+	return platform_driver_register(&arm_smmu_driver);
+}
+
+__maybe_unused static void arm_smmu_exit(void)
+{
+	arm_smmu_driver_unregister(&arm_smmu_driver);
+}
+
+#ifdef MODULE
 module_driver(arm_smmu_driver, platform_driver_register,
 	      arm_smmu_driver_unregister);
+#else
+late_initcall(arm_smmu_driver_register);
+module_exit(arm_smmu_exit);
+#endif
 
 MODULE_DESCRIPTION("IOMMU API for ARM architected SMMUv3 implementations");
 MODULE_AUTHOR("Will Deacon <will@kernel.org>");
