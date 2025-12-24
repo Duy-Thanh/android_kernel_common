@@ -34,6 +34,24 @@
       "parentUuid": "c2d4feb1_d6484920",
       "revId": "058fd96984b10952e2b18680df17492a438d4b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e676783_e95c58be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-12-24T16:59:24Z",
+      "side": 1,
+      "message": "Hi Greg,\nAndroid is not yet using stable branch schedules like the mainline Linux.  These patches are for Android 17 (based on v6.18) and for upcoming platform support.  Thanks!",
+      "parentUuid": "9b107162_cc975b4c",
+      "revId": "058fd96984b10952e2b18680df17492a438d4b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
