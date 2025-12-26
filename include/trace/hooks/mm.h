@@ -644,6 +644,35 @@ DECLARE_HOOK(android_vh_filemap_folio_mapped,
 DECLARE_HOOK(android_vh_folio_remove_rmap_ptes,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< HEAD   (0c2f97f9c1dfdcf72e8e5c56eb3a2b79df6863c8 FROMGIT: mm/thp: fix MTE tag mismatch when replacing zero-fi)
+||||||| BASE   (cc0d550bd93c74002276098568ca0090fba87f22 Revert "ANDROID: virtio: disable virtio_dma_buf callback che)
+DECLARE_HOOK(android_vh_exit_oom_victim,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task));
+DECLARE_HOOK(android_vh_oom_killer_disable,
+	TP_PROTO(int oom_victims),
+	TP_ARGS(oom_victims));
+=======
+DECLARE_HOOK(android_vh_exit_oom_victim,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task));
+DECLARE_HOOK(android_vh_oom_killer_disable,
+	TP_PROTO(int oom_victims),
+	TP_ARGS(oom_victims));
+DECLARE_HOOK(android_vh_migration_entry_wait_enter,
+	TP_PROTO(swp_entry_t entry, u64 *time, int *zonenum),
+	TP_ARGS(entry, time, zonenum));
+DECLARE_HOOK(android_vh_migration_entry_wait_exit,
+	TP_PROTO(u64 time, int zonenum),
+	TP_ARGS(time, zonenum));
+DECLARE_HOOK(android_vh_migrate_pages_batch_break,
+	TP_PROTO(struct folio *folio, struct list_head *head,
+	int reason, bool *should_break, int *nr_left),
+	TP_ARGS(folio, head, reason, should_break, nr_left));
+DECLARE_HOOK(android_vh_migrate_batch_nr_pages,
+	TP_PROTO(struct list_head *head, int *nr_pages),
+	TP_ARGS(head, nr_pages));
+>>>>>>> CHANGE (69927b2ff269bc610b270212088f9eec16b5ebb3 ANDROID: Add vendor hooks for migration)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
