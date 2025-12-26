@@ -765,6 +765,19 @@ DECLARE_HOOK(android_vh_exit_oom_victim,
 DECLARE_HOOK(android_vh_oom_killer_disable,
 	TP_PROTO(int oom_victims),
 	TP_ARGS(oom_victims));
+DECLARE_HOOK(android_vh_migration_entry_wait_enter,
+	TP_PROTO(swp_entry_t entry, u64 *time, int *zonenum),
+	TP_ARGS(entry, time, zonenum));
+DECLARE_HOOK(android_vh_migration_entry_wait_exit,
+	TP_PROTO(u64 time, int zonenum),
+	TP_ARGS(time, zonenum));
+DECLARE_HOOK(android_vh_migrate_pages_batch_break,
+	TP_PROTO(struct folio *folio, struct list_head *head,
+	int reason, bool *should_break, int *nr_left),
+	TP_ARGS(folio, head, reason, should_break, nr_left));
+DECLARE_HOOK(android_vh_migrate_batch_nr_pages,
+	TP_PROTO(struct list_head *head, int *nr_pages),
+	TP_ARGS(head, nr_pages));
 DECLARE_HOOK(android_vh_swapmem_gather_init,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
