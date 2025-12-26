@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4016bbf6_d94317d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2025-12-26T07:43:33Z",
+      "side": 1,
+      "message": "I sent the patch to Linux mainline with request to back port to v6.12.x stable branch. Thanks.",
+      "parentUuid": "c9878127_6fba783f",
+      "revId": "934b7c3c1ba3f64c921793ed555c0491c7453579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06f6691b_0219c7ef",
         "filename": "arch/arm64/kernel/cpu_errata.c",
         "patchSetId": 1
