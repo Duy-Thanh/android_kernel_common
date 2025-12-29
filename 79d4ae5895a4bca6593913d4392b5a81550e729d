@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed994cf4_0f206730",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-12-29T10:43:43Z",
+      "side": 1,
+      "message": "It alerts me to patches going in. Without that, I only notice them when I run my script.",
+      "parentUuid": "7c334db4_b7213346",
+      "revId": "79d4ae5895a4bca6593913d4392b5a81550e729d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "eaf2e845_63bc48f0",
