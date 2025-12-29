@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb9a305_0f14d442",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-12-29T20:37:52Z",
+      "side": 1,
+      "message": "Is this something that we are doing now and we weren\u0027t doing before? If not, then how was this not observed earlier?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 28
+      },
+      "revId": "e99e67deba496433cdcb9a03b3254137611ddeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d3ffa4_0558eb0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-12-29T20:37:52Z",
+      "side": 1,
+      "message": "Do you have a bug open for this? If so, could you please add it to the commit message?",
+      "revId": "e99e67deba496433cdcb9a03b3254137611ddeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
