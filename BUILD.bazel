@@ -634,10 +634,9 @@ copy_to_dist_dir(
         ":db845c_merged_kernel_uapi_headers",
         # Mixed build: Additional GKI artifacts.
         ":kernel_aarch64",
-        ":kernel_aarch64_modules",
         ":kernel_aarch64_additional_artifacts",
         ":tests_zip_arm64",
-    ],
+    ] + [":kernel_aarch64/" + m for m in get_gki_modules_list("arm64")],
     dist_dir = "out/db845/dist",
     flat = True,
     log = "info",
