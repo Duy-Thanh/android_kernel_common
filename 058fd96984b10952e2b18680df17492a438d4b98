@@ -52,6 +52,24 @@
       "parentUuid": "9b107162_cc975b4c",
       "revId": "058fd96984b10952e2b18680df17492a438d4b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96bb3fdb_ac2fb8e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-29T14:10:31Z",
+      "side": 1,
+      "message": "This branch gets direct merges from the upstream 6.18.y lts releases, which is where this commit should go first.",
+      "parentUuid": "5e676783_e95c58be",
+      "revId": "058fd96984b10952e2b18680df17492a438d4b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
