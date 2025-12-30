@@ -329,17 +329,7 @@ static struct task_dma_buf_record *alloc_task_dmabuf_record(void)
 
 static void free_task_dmabuf_record(struct task_dma_buf_record *rec)
 {
-	struct task_dma_buf_record_preload *preload;
-
-	local_lock(&dmabuf_rec_reloads.lock);
-	preload = this_cpu_ptr(&dmabuf_rec_reloads);
-	if (preload->size < MAX_PCP_POOL_SIZE) {
-		list_add(&rec->node, &preload->list);
-		preload->size++;
-	} else {
-		kmem_cache_free(task_dmabuf_record_cachep, rec);
-	}
-	local_unlock(&dmabuf_rec_reloads.lock);
+	kmem_cache_free(task_dmabuf_record_cachep, rec);
 }
 
 static void trim_task_dmabuf_records_locked(void)
@@ -396,6 +386,43 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 	atomic64_inc(&dmabuf->nr_task_refs);
 }
 
+static int account_task(struct dma_buf *dmabuf, struct task_dma_buf_info *dmabuf_info,
+			bool skip_preload)
+{
+	struct task_dma_buf_record *rec;
+	int ret = 0;
+
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return 0;
+
+	if (!dmabuf_info)
+		return 0;
+
+	if (!skip_preload && !task_dmabuf_records_preload(1))
+		return -ENOMEM;
+
+	spin_lock(&dmabuf_info->lock);
+	rec = find_task_dmabuf_record(dmabuf_info, dmabuf);
+	if (rec) {
+		++rec->refcnt;
+		if (!skip_preload)
+			trim_task_dmabuf_records_locked();
+	} else {
+		rec = alloc_task_dmabuf_record();
+		if (WARN_ON(!rec)) {
+			ret = -ENOMEM;
+			goto err;
+		}
+		add_task_dmabuf_record(dmabuf_info, dmabuf, rec);
+	}
+err:
+	spin_unlock(&dmabuf_info->lock);
+	if (!skip_preload)
+		task_dmabuf_records_preload_end();
+
+	return ret;
+}
+
 /**
  * dma_buf_account_task - Account a dmabuf to a task
  * @dmabuf:	[in]	pointer to dma_buf
@@ -411,31 +438,7 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
  */
 int dma_buf_account_task(struct dma_buf *dmabuf, struct task_dma_buf_info *dmabuf_info)
 {
-	struct task_dma_buf_record *rec;
-
-	if (!static_key_enabled(&dmabuf_accounting_key))
-		return 0;
-
-	if (!dmabuf_info)
-		return 0;
-
-	if (!task_dmabuf_records_preload(1))
-		return -ENOMEM;
-
-	spin_lock(&dmabuf_info->lock);
-	rec = find_task_dmabuf_record(dmabuf_info, dmabuf);
-	if (rec) {
-		++rec->refcnt;
-		trim_task_dmabuf_records_locked();
-	} else {
-		rec = alloc_task_dmabuf_record();
-		WARN_ON(!rec);
-		add_task_dmabuf_record(dmabuf_info, dmabuf, rec);
-	}
-	spin_unlock(&dmabuf_info->lock);
-	task_dmabuf_records_preload_end();
-
-	return 0;
+	return account_task(dmabuf, dmabuf_info, false);
 }
 
 /**
@@ -663,12 +666,15 @@ void put_dmabuf_info(struct task_dma_buf_info *dmabuf_info)
  * the new files_struct and mm_struct that are about to be used by the current task. The MM will be
  * empty of dmabufs, but any dmabufs already accounted via file descriptors need to be accounted to
  * the new files_struct.
-*/
+ */
 int dma_buf_begin_new_exec(struct files_struct *old_files)
 {
 	struct task_dma_buf_info *new_dmabuf_info;
 	struct task_dma_buf_info *old_dmabuf_info = current->dmabuf_info;
 	struct files_struct *my_files = current->files;
+
+	if (!static_key_enabled(&dmabuf_accounting_key))
+		return 0;
 
 	new_dmabuf_info = alloc_task_dma_buf_info();
 	if (!new_dmabuf_info)
@@ -676,17 +682,55 @@ int dma_buf_begin_new_exec(struct files_struct *old_files)
 
 	/* Any dmabufs need to be accounted to new_dmabuf_info */
 	if (my_files) {
-		unsigned int n = 0;
+		size_t num_dmabufs = 0, num_dmabufs_check;
+		unsigned int retries = 0;
+		struct fdtable *fdt;
+
+		/* Attempt to count dmabuf FDs locklessly before allocating */
+		rcu_read_lock();
+		for (unsigned int n = 0; n < files_fdtable(my_files)->max_fds; n++) {
+			struct file *file = files_lookup_fd_raw(my_files, n);
+
+			/* Maybe a dup, but we'll trim extras at the end */
+			if (file && is_dma_buf_file(file))
+				++num_dmabufs;
+		}
+		rcu_read_unlock();
+retry:
+		if (!task_dmabuf_records_preload(num_dmabufs))
+			goto err_prealloc;
 
 		spin_lock(&my_files->file_lock);
-		for (struct fdtable *fdt = files_fdtable(my_files); n < fdt->max_fds; n++) {
+		fdt = files_fdtable(my_files);
+
+		/* First make sure we have enough preallocated records */
+		num_dmabufs_check = 0;
+		for (unsigned int n = 0; n < fdt->max_fds; n++) {
+			struct file *file = files_lookup_fd_locked(my_files, n);
+
+			if (file && is_dma_buf_file(file))
+				++num_dmabufs_check;
+		}
+
+		if (num_dmabufs_check > num_dmabufs) {
+			spin_unlock(&my_files->file_lock);
+			task_dmabuf_records_preload_end();
+
+			if (retries++ > 5)
+				goto err_prealloc;
+
+			num_dmabufs = num_dmabufs_check;
+			goto retry;
+		}
+
+		for (unsigned int n = 0; n < fdt->max_fds; n++) {
 			struct file *file = files_lookup_fd_locked(my_files, n);
 			int err;
 
 			if (!file || !is_dma_buf_file(file))
 				continue;
 
-			err = dma_buf_account_task(file->private_data, new_dmabuf_info);
+			err = account_task(file->private_data, new_dmabuf_info, true);
 			if (err)
 				pr_err("dmabuf accounting failed during begin_new_exec, err %d\n",
 				       err);
@@ -706,15 +750,24 @@ int dma_buf_begin_new_exec(struct files_struct *old_files)
 		if (my_files == old_files)
 			put_dmabuf_info(my_files->dmabuf_info);
 
+		/* Finally swap over to the new dmabuf info */
 		refcount_inc(&new_dmabuf_info->refcnt);
 		my_files->dmabuf_info = new_dmabuf_info;
 		spin_unlock(&my_files->file_lock);
+
+		trim_task_dmabuf_records_locked();
+		task_dmabuf_records_preload_end();
 	}
 
 	current->dmabuf_info = new_dmabuf_info; // refcount from alloc_task_dma_buf_info
 	put_dmabuf_info(old_dmabuf_info);
 
 	return 0;
+
+err_prealloc:
+	trim_task_dmabuf_records();
+	kfree(new_dmabuf_info);
+	return -ENOMEM;
 }
 
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
