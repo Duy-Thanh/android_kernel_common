@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1051a6_927ee713",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:09:01Z",
+      "side": 1,
+      "message": "It seems to me that exporting folio_free_swap() instead would be safer. Have you considered that alternative?",
+      "revId": "2f4321c60e2e1e40270db4092d49263433da21fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
