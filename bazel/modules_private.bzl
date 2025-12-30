@@ -126,7 +126,7 @@ def _apply(map_each, lst):
             ret.append(mapped)
     return ret
 
-def _get_gki_modules_list_minus_select(arch, map_each):
+def get_gki_modules_list_minus_select(arch, map_each):
     """ Provides the list of GKI modules, minus those in select() branches.
 
     Args:
@@ -175,7 +175,7 @@ def get_gki_modules_list(arch = None, map_each = None):
     """
 
     return select({
-        "//conditions:default": _get_gki_modules_list_minus_select(arch, map_each),
+        "//conditions:default": get_gki_modules_list_minus_select(arch, map_each),
     })
 
 # buildifier: disable=unnamed-macro
@@ -195,7 +195,7 @@ def get_gki_modules_superset(arch = None, map_each = None):
     Returns:
         A list that contains the superset of GKI modules for the given |arch|.
     """
-    return _get_gki_modules_list_minus_select(arch, map_each)
+    return get_gki_modules_list_minus_select(arch, map_each)
 
 _KUNIT_FRAMEWORK_MODULES = [
     "lib/kunit/kunit.ko",
@@ -232,7 +232,7 @@ _KUNIT_CLK_MODULES_LIST = [
     "drivers/clk/clk_kunit_helpers.ko",
 ]
 
-def _get_kunit_modules_list_minus_select(arch, map_each):
+def get_kunit_modules_list_minus_select(arch, map_each):
     """ Provides the list of KUnit modules, minus those in select() branches.
 
     Args:
@@ -278,7 +278,7 @@ def get_kunit_modules_list(arch = None, map_each = None):
     """
 
     return select({
-        "//conditions:default": _get_kunit_modules_list_minus_select(arch, map_each),
+        "//conditions:default": get_kunit_modules_list_minus_select(arch, map_each),
     })
 
 # buildifier: disable=unnamed-macro
@@ -296,7 +296,7 @@ def get_kunit_modules_superset(arch = None, map_each = None):
     Returns:
         A list of superset of KUnit modules for the given |arch|.
     """
-    return _get_kunit_modules_list_minus_select(arch, map_each)
+    return get_kunit_modules_list_minus_select(arch, map_each)
 
 _COMMON_UNPROTECTED_MODULES_LIST = []
 

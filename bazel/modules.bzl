@@ -8,9 +8,13 @@ load(
     ":bazel/modules_private.bzl",
     _get_gki_modules_list = "get_gki_modules_list",
     _get_kunit_modules_list = "get_kunit_modules_list",
+    _get_gki_modules_list_minus_select = "get_gki_modules_list_minus_select",
+    _get_kunit_modules_list_minus_select = "get_kunit_modules_list_minus_select",
 )
 
 visibility("public")
 
 get_gki_modules_list = _get_gki_modules_list
 get_kunit_modules_list = _get_kunit_modules_list
+get_gki_modules_list_minus_select = _get_gki_modules_list_minus_select
+get_kunit_modules_list_minus_select = _get_kunit_modules_list_minus_select
