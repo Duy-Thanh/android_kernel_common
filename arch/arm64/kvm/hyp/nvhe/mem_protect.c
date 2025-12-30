@@ -321,7 +321,7 @@ static void hyp_flush_page(phys_addr_t phys, size_t size)
 	__apply_guest_page(__hyp_va(phys), size, __hyp_flush_page);
 }
 
-int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd)
+int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd, bool has_devices)
 {
 	struct kvm_s2_mmu *mmu = &vm->kvm.arch.mmu;
 	unsigned long nr_pages;
@@ -348,7 +348,8 @@ int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd)
 	};
 
 	guest_lock_component(vm);
-	ret = __kvm_pgtable_stage2_init(mmu->pgt, mmu, &vm->mm_ops, 0,
+	ret = __kvm_pgtable_stage2_init(mmu->pgt, mmu, &vm->mm_ops,
+					has_devices ? KVM_PGTABLE_S2_NOFWB : 0,
 					&guest_s2_pte_ops);
 	guest_unlock_component(vm);
 	if (ret)
@@ -2902,7 +2903,7 @@ static void init_selftest_vm(void *virt)
 	int i;
 
 	selftest_vm.kvm.arch.mmu.vtcr = host_mmu.arch.mmu.vtcr;
-	WARN_ON(kvm_guest_prepare_stage2(&selftest_vm, virt));
+	WARN_ON(kvm_guest_prepare_stage2(&selftest_vm, virt, false));
 
 	for (i = 0; i < pkvm_selftest_pages(); i++) {
 		if (p[i].refcount)

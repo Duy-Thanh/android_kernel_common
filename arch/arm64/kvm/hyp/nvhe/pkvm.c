@@ -933,6 +933,7 @@ int __pkvm_init_vm(struct kvm *host_kvm, unsigned long pgd_hva)
 	void *pgd = NULL;
 	size_t pgd_size;
 	int ret;
+	bool has_devices = false;
 
 	ret = hyp_pin_shared_mem(host_kvm, host_kvm + 1);
 	if (ret)
@@ -975,11 +976,11 @@ int __pkvm_init_vm(struct kvm *host_kvm, unsigned long pgd_hva)
 	if (ret)
 		goto err_remove_mappings;
 
-	ret = kvm_guest_prepare_stage2(hyp_vm, pgd);
+	ret = pkvm_pviommu_finalise(hyp_vm, &has_devices);
 	if (ret)
 		goto err_remove_mappings;
 
-	ret = pkvm_pviommu_finalise(hyp_vm);
+	ret = kvm_guest_prepare_stage2(hyp_vm, pgd, has_devices);
 	if (ret)
 		goto err_remove_mappings;
 
