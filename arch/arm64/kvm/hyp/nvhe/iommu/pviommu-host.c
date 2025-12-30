@@ -96,11 +96,12 @@ int pkvm_pviommu_add_vsid(struct kvm *host_kvm, int pviommu,
  * in a list. No more changes allowed from the host to any of
  * those pvIOMMU
  */
-int pkvm_pviommu_finalise(struct pkvm_hyp_vm *hyp_vm)
+int pkvm_pviommu_finalise(struct pkvm_hyp_vm *hyp_vm, bool *has_devices)
 {
 	int i;
 	int ret;
 
+	*has_devices = false;
 	ret = hyp_pool_init_empty(&hyp_vm->iommu_pool, 64);
 	if (ret)
 		return ret;
@@ -114,6 +115,7 @@ int pkvm_pviommu_finalise(struct pkvm_hyp_vm *hyp_vm)
 		if (ph->kvm == hyp_vm->host_kvm) {
 			ph->finalized = true;
 			list_add_tail(&ph->list, &hyp_vm->pviommus);
+			*has_devices = true;
 		}
 	}
 	hyp_spin_unlock(&host_pviommu_lock);
