@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a3ab800_d04d6229",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-12-30T21:33:25Z",
+      "side": 1,
+      "message": "Yep, KernelCI recently upgraded its toolchain! I reworded the commit message to be a little clearer, but please let me know if there\u0027s something you\u0027d prefer.",
+      "parentUuid": "acb9a305_0f14d442",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 28
+      },
+      "revId": "e99e67deba496433cdcb9a03b3254137611ddeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34d3ffa4_0558eb0b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2025-12-29T20:37:52Z",
       "side": 1,
       "message": "Do you have a bug open for this? If so, could you please add it to the commit message?",
+      "revId": "e99e67deba496433cdcb9a03b3254137611ddeb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3e49c11_4eb0585f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-12-30T21:33:25Z",
+      "side": 1,
+      "message": "I generally don\u0027t create bugs for smaller kernelci build issues (Todd\u0027s preference), but I can make one if you think this failure would benefit from more documentation.",
+      "parentUuid": "34d3ffa4_0558eb0b",
       "revId": "e99e67deba496433cdcb9a03b3254137611ddeb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
