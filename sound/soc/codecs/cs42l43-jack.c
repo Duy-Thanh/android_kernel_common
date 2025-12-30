@@ -639,6 +639,7 @@ static int cs42l43_run_load_detect(struct cs42l43_codec *priv, bool mic)
 		return CS42L43_JACK_HEADPHONE;
 	case 0x2: // lineout
 	case 0x3: // Open circuit
+		dev_dbg("Headphone load detect: CS42L43_JACK_LINEOUT\n";
 		return CS42L43_JACK_LINEOUT;
 	default:
 		return -EINVAL;
