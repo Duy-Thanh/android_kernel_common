@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7897e979_cd0ef0ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-30T00:03:32Z",
+      "side": 1,
+      "message": "We accepted this workaround for 6.6 because we had backported upstream changes that had removed a similar check but folks were still running into the overflow issue (and further fixes made after \"complete EEVDF\" changes were not easily able to be cherry-picked).\n\nHowever, upstream has rejected similar changes in 6.12 and later because it is believed the overflow issues are resolved there, and if not, it is the overflow that is really the problem that needs to be corrected (not just worked around).\n\nSo first, please confirm this is an issue you have seen with 6.12.\n\nAnd second, if so, can any further debugging be done to better clarify how the overflow is occurring, so it can be properly fixed and not use this workaround.",
+      "revId": "5bd20ed34b09756f43ded6d35e7f6d20dfae91ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
