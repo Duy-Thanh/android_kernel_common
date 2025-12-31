@@ -16,6 +16,24 @@
       "message": "Sync code from android15-6.6",
       "revId": "cfc7b242a1688c0570daf27b4ebdab27d7cddfb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceac28b5_f0c7ba24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4400136
+      },
+      "writtenOn": "2025-12-31T22:25:27Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/kernel/common/+/3847774",
+      "parentUuid": "45296cfa_e8292008",
+      "revId": "cfc7b242a1688c0570daf27b4ebdab27d7cddfb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
