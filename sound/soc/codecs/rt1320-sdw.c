@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-only
+// SPDX-License-Identifier: GPL-2.0-only111
 //
 // rt1320-sdw.c -- rt1320 SDCA ALSA SoC amplifier audio driver
 //
