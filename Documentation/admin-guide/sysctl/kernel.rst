@@ -1675,6 +1675,28 @@ entry will default to 2 instead of 0.
 = =============================================================
 
 
+bpf_disable_prog_load
+=====================
+
+Boolean.  Defaults to 0 (false) at boot.
+
+Writing 1 to this entry will cause all invocations of
+``bpf(BPF_PROG_LOAD, ...)`` to fail with -EUNATCH, thus effectively
+disabling the instantiation of new eBPF programs.
+
+Cannot be reset to 0 once ``bpf_disable_prog_load_lock`` is 1.
+
+
+bpf_disable_prog_load_lock
+==========================
+
+Boolean.  Defaults to 0 (false) at boot.
+
+Iff 1 prevents setting ``bpf_disable_prog_load`` to 0.
+
+Once set to 1, this cannot be reset back to 0.
+
+
 warn_limit
 ==========
 
