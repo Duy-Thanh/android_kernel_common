@@ -46,6 +46,29 @@
   stack_trace_save_tsk
   blk_queue_rq_timeout
   swp_swapcount
+  audit_log_end
+  audit_log_format
+  audit_log_n_hex
+  audit_log_start
+  audit_log_task_context
+  audit_log_untrustedstring
+  d_absolute_path
+  dm_disk
+  dm_get_live_table
+  dm_get_md
+  dm_put
+  dm_put_live_table
+  file_open_root
+  get_cmdline
+  get_task_exe_file
+  hash_algo_name
+  key_type_asymmetric
+  key_type_keyring
+  keyring_search
+  kimage_vaddr
+  shmem_kernel_file_setup
+  verify_signature
+  walk_system_ram_res
   __traceiter_android_rvh_arm64_serror_panic
   __traceiter_android_rvh_die_kernel_fault
   __traceiter_android_rvh_do_el1_bti
@@ -133,6 +156,20 @@
   __traceiter_android_vh_handle_add_blks_map
   __traceiter_android_vh_handle_add_fec_mismatch_blks
   __traceiter_android_vh_handle_get_b_info
+  __traceiter_android_rvh_process_vm_rw_core
+  __traceiter_android_rvh_exec_binprm_check
+  __traceiter_android_rvh_security_file_free
+  __traceiter_android_rvh_exec_binprm_fail
+  __traceiter_android_rvh_security_task_alloc
+  __traceiter_android_rvh_security_inode_removexattr
+  __traceiter_android_rvh_security_file_open
+  __traceiter_android_rvh_post_setattr
+  __traceiter_android_rvh_security_inode_free
+  __traceiter_android_rvh_security_inode_setxattr
+  __traceiter_android_rvh_copy_process_integrity
+  __traceiter_android_rvh_ptrace
+  __traceiter_android_rvh_security_task_free
+  __traceiter_android_rvh_security_mmap_file
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_die_kernel_fault
   __tracepoint_android_rvh_do_el1_bti
@@ -145,6 +182,20 @@
   __tracepoint_android_rvh_process_madvise_bypass
   __tracepoint_android_rvh_report_bug
   __tracepoint_android_rvh_try_alloc_pages_gfp
+  __tracepoint_android_rvh_ptrace
+  __tracepoint_android_rvh_copy_process_integrity
+  __tracepoint_android_rvh_process_vm_rw_core
+  __tracepoint_android_rvh_exec_binprm_fail
+  __tracepoint_android_rvh_security_file_free
+  __tracepoint_android_rvh_post_setattr
+  __tracepoint_android_rvh_security_task_alloc
+  __tracepoint_android_rvh_security_task_free
+  __tracepoint_android_rvh_security_file_open
+  __tracepoint_android_rvh_security_mmap_file
+  __tracepoint_android_rvh_security_inode_setxattr
+  __tracepoint_android_rvh_security_inode_removexattr
+  __tracepoint_android_rvh_exec_binprm_check
+  __tracepoint_android_rvh_security_inode_free
   __tracepoint_android_vh_adjust_nr_reclaimed
   __tracepoint_android_vh_exit_oom_victim
   __tracepoint_android_vh_oom_killer_disable
@@ -220,6 +271,9 @@
   __tracepoint_android_vh_handle_add_skipped_blks
   __tracepoint_android_vh_handle_add_blks_map
   __tracepoint_android_vh_handle_get_b_info
+  __vfs_setxattr
+  __vfs_getxattr
+  __vfs_removexattr
   usb_alloc_dev
   usb_set_device_state
   usbnet_change_mtu
