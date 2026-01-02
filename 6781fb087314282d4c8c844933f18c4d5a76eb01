@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d662ae_a65aa1bb",
+        "filename": "kernel/events/ring_buffer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-02T18:04:28Z",
+      "side": 1,
+      "message": "I would call these helper functions __perf_mmap_alloc_page(cpu, order) and __perf_mmap_free_page(addr, order) and then use them from inside perf_mmap_alloc_page() and perf_mmap_alloc_metadata_page(). Same on the free side.",
+      "range": {
+        "startLine": 821,
+        "startChar": 13,
+        "endLine": 821,
+        "endChar": 44
+      },
+      "revId": "6781fb087314282d4c8c844933f18c4d5a76eb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
