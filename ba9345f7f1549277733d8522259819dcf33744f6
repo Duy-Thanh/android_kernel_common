@@ -52,6 +52,24 @@
       "parentUuid": "bf4d4976_5eaccd5e",
       "revId": "ba9345f7f1549277733d8522259819dcf33744f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd594e6_3bf3ae55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-02T20:01:42Z",
+      "side": 1,
+      "message": "Just for further context, I followed up with upstream submission, but it seems it was abandoned by the author as the per-vma lock rework resolved any benefit they saw:\n\nhttps://lore.kernel.org/lkml/aTy4umirJ8pcHy+V@KORCO181097.samsungds.net/\n\nAs you continue to see a benefit from this optimization, could you chime in on the list to characterize it? Potentially resubmitting that patch upstream? \n\nWe really don\u0027t want to keep adding vendorhooks year after year if this can be addressed upstream.",
+      "parentUuid": "cea8cbb2_78077702",
+      "revId": "ba9345f7f1549277733d8522259819dcf33744f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
