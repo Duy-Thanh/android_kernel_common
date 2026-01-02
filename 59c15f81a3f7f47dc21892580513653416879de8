@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f5b480_19a2576d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2026-01-02T01:57:43Z",
+      "side": 1,
+      "message": "Please help to update the symbol list\n\n```\nINFO: From [stg] Comparing Kernel ABI //common:kernel_x86_64_abi_diff:\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\nfunction symbol \u0027void sdca_lookup_functions(struct sdw_slave*)\u0027 changed\n  CRC changed from 0x4495232a to 0x3a35bf8f\n\nfunction symbol \u0027void sdca_lookup_interface_revision(struct sdw_slave*)\u0027 changed\n  CRC changed from 0x4495232a to 0x3a35bf8f\n\nfunction symbol \u0027bool snd_soc_acpi_sdw_link_slaves_found(struct device*, const struct snd_soc_acpi_link_adr*, struct sdw_peripherals*)\u0027 changed\n  CRC changed from 0x9ae7ad2e to 0xd709e624\n\ntype \u0027struct sdw_bus\u0027 changed\n... 278 lines skipped ...\n  member \u0027int num_lanes\u0027 was added\n  member \u0027u32* lane_list\u0027 was added\n\ntype \u0027struct sdw_dpn_prop\u0027 changed\n  5 members (\u0027u32 ch_prep_timeout\u0027 .. \u0027u32 num_channels\u0027) changed\n    offset changed by -32\n  member \u0027u32 num_ch_combinations\u0027 changed\n    offset changed by -96\n  member \u0027u32* ch_combinations\u0027 changed\n    offset changed by -64\n  member \u0027u32* lane_list\u0027 was added\n  member \u0027int num_lanes\u0027 was added\n  2 members (\u0027u32 modes\u0027 .. \u0027u32 max_async_buffer\u0027) changed\n    offset changed by 32\n  2 members (\u0027bool block_pack_mode\u0027 .. \u0027bool read_only_wordlength\u0027) changed\n    offset changed by 64\n  member \u0027bool simple_ch_prep_sm\u0027 changed\n    offset changed by 528\n  member \u0027struct sdw_dpn_audio_mode* audio_modes\u0027 was removed\n```",
+      "revId": "59c15f81a3f7f47dc21892580513653416879de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
