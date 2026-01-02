@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0309f6b5_ea943e82",
+        "filename": "modules.bzl",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-02T18:33:24Z",
+      "side": 1,
+      "message": "please don\u0027t export it as a variable but as a function (`get_extra_unprotected_modules_list`). It is more consistent with the other functions, and can handle different architectures.",
+      "fixSuggestions": [
+        {
+          "fixId": "2835ebae_9a0755ae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 220,
+                "endChar": 0
+              },
+              "replacement": "# buildifier: disable\u003dunnamed-macro\ndef get_extra_unprotected_modules_list():\n    return [\n        \"net/mac80211/mac80211.ko\",\n        \"net/wireless/cfg80211.ko\",\n    ]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "06d44da86eb2f6f41577b0bc9733a87a075ee654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
