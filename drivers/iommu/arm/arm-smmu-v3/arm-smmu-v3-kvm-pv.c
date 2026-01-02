@@ -227,7 +227,7 @@ static int kvm_arm_smmu_domain_finalize(struct kvm_arm_smmu_domain *kvm_smmu_dom
 	struct host_arm_smmu_device *host_smmu = smmu_to_host(smmu);
 	struct io_pgtable_cfg cfg;
 
-	cfg.ias = smmu->ias;
+	cfg.ias = smmu->oas;
 	cfg.oas = smmu->oas;
 	cfg.pgsize_bitmap = smmu->pgsize_bitmap;
 
@@ -719,7 +719,6 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	hyp_smmu->common.strtab_cfg = smmu->strtab_cfg;
 	hyp_smmu->common.pgsize_bitmap = smmu->pgsize_bitmap;
 	hyp_smmu->common.oas = smmu->oas;
-	hyp_smmu->common.ias = smmu->ias;
 	hyp_smmu->common.mmio_addr = host_smmu->ioaddr;
 	hyp_smmu->common.mmio_size = size;
 	hyp_smmu->common.features = smmu->features;
