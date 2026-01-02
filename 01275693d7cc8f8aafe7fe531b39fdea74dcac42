@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19b1afd_8e2f2fe0",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-02T18:12:29Z",
+      "side": 1,
+      "message": "Are there cases when this division have a remainder and you need to round it up?",
+      "range": {
+        "startLine": 182,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "91b88652_ae531404",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/page_size_compat.h",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 183,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long nr_sub_pages \u003d __PAGE_SIZE / PAGE_SIZE;\n\n\treturn (val + nr_sub_pages - 1) / nr_sub_pages;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01275693d7cc8f8aafe7fe531b39fdea74dcac42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
