@@ -1809,6 +1809,7 @@ devicetree_library(
     name = "dtc_includes_aarch64",
     hdrs = glob([
         "scripts/dtc/include-prefixes/arm64/**/*.h",
+        "scripts/dtc/include-prefixes/arm64/**/*.dtsi",
     ]),
     includes = ["scripts/dtc/include-prefixes"],
     visibility = ["//visibility:public"],
