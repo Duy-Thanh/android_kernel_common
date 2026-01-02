@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1820f664_2aa47a4f",
+        "filename": "kernel/events/ring_buffer.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-02T22:59:57Z",
+      "side": 1,
+      "message": "What I suggested was to also introduce:\n```\nstatic inline void *perf_mmap_alloc_metadata_page(cpu)\n{\n    return __perf_mmap_alloc(cpu, get_order(__PAGE_SIZE));\n}\n```\nfunction and use it here and in other places to allocated metadata pages. Similarly:\n```\nstatic inline void perf_mmap_free_metadata_page(void *addr)\n{\n\t__perf_mmap_free(addr, get_order(__PAGE_SIZE));\n}\n```\n\nThese are nits, no real functional difference.",
+      "range": {
+        "startLine": 869,
+        "startChar": 17,
+        "endLine": 869,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f027a685_2db382fe",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/events/ring_buffer.c",
+              "range": {
+                "startLine": 851,
+                "startChar": 0,
+                "endLine": 851,
+                "endChar": 0
+              },
+              "replacement": "\nstatic inline void * perf_mmap_alloc_metadata_page(int cpu)\n{\n    return __perf_mmap_alloc(cpu, get_order(__PAGE_SIZE));\n}\n\nstatic inline void perf_mmap_free_metadata_page(void *addr)\n{\n\t__perf_mmap_free(addr, get_order(__PAGE_SIZE));\n}\n"
+            },
+            {
+              "path": "kernel/events/ring_buffer.c",
+              "range": {
+                "startLine": 869,
+                "startChar": 0,
+                "endLine": 870,
+                "endChar": 0
+              },
+              "replacement": "\trb-\u003euser_page \u003d perf_mmap_alloc_metadata_page(cpu);\n"
+            },
+            {
+              "path": "kernel/events/ring_buffer.c",
+              "range": {
+                "startLine": 889,
+                "startChar": 0,
+                "endLine": 890,
+                "endChar": 0
+              },
+              "replacement": "\tperf_mmap_free_metadata_page(rb-\u003euser_page);\n"
+            },
+            {
+              "path": "kernel/events/ring_buffer.c",
+              "range": {
+                "startLine": 902,
+                "startChar": 0,
+                "endLine": 903,
+                "endChar": 0
+              },
+              "replacement": "\tperf_mmap_free_metadata_page(rb-\u003euser_page);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6546d4d5b49d37508f9bcf73f0e0a1dd3cc8f883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
