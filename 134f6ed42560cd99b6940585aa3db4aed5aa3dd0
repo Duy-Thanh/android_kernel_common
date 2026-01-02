@@ -16,6 +16,23 @@
       "message": "Owners LGTM",
       "revId": "134f6ed42560cd99b6940585aa3db4aed5aa3dd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b6d294_156b5db7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2026-01-02T11:03:45Z",
+      "side": 1,
+      "message": "LGTM but adding device pnp bringup owner",
+      "revId": "134f6ed42560cd99b6940585aa3db4aed5aa3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
