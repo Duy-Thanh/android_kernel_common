@@ -16,6 +16,24 @@
       "message": "Please help to reivew this change, thanks.",
       "revId": "849c4143527bfc4a58216f1dd4e6c094ff11cae1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e7c5f0_8998dc00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-02T22:25:20Z",
+      "side": 1,
+      "message": "Sorry for the delay I was out for a good chunk of Dec. This patch needs a rebase.",
+      "parentUuid": "ebe9e12e_204839e7",
+      "revId": "849c4143527bfc4a58216f1dd4e6c094ff11cae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
