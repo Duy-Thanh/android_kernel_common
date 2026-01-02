@@ -22,6 +22,30 @@
       },
       "revId": "6781fb087314282d4c8c844933f18c4d5a76eb01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8249593d_1246e75b",
+        "filename": "kernel/events/ring_buffer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-01-02T22:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6d662ae_a65aa1bb",
+      "range": {
+        "startLine": 821,
+        "startChar": 13,
+        "endLine": 821,
+        "endChar": 44
+      },
+      "revId": "6781fb087314282d4c8c844933f18c4d5a76eb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
