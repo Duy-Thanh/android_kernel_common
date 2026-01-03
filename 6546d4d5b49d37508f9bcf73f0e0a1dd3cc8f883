@@ -70,6 +70,30 @@
       ],
       "revId": "6546d4d5b49d37508f9bcf73f0e0a1dd3cc8f883",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6b6178_91db0135",
+        "filename": "kernel/events/ring_buffer.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-01-03T00:06:23Z",
+      "side": 1,
+      "message": "Sorry I missed the metadata sugestion. Done, thanks",
+      "parentUuid": "1820f664_2aa47a4f",
+      "range": {
+        "startLine": 869,
+        "startChar": 17,
+        "endLine": 869,
+        "endChar": 63
+      },
+      "revId": "6546d4d5b49d37508f9bcf73f0e0a1dd3cc8f883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
