@@ -5,8 +5,16 @@ config ARM_AMBA
 if ARM_AMBA
 
 config TEGRA_AHB
+<<<<<<< HEAD   (417df8c0bf10ca1f5f77fea01330b92adc65fe91 Merge 5797d10ea4fa ("Merge tag 'cxl-for-6.19' of git://git.k)
 	bool
 	default y if ARCH_TEGRA && !GKI_HACKS_TO_FIX
+||||||| BASE   (5797d10ea4fade7df0f920c368cad07f705afc63 Merge tag 'cxl-for-6.19' of git://git.kernel.org/pub/scm/lin)
+	bool
+	default y if ARCH_TEGRA
+=======
+	bool "Enable AHB driver for NVIDIA Tegra SoCs" if COMPILE_TEST
+	default y if ARCH_TEGRA
+>>>>>>> BRANCH (ce5cfb0fa20dc6454da039612e34325b7b4a8243 Merge tag 'iommu-updates-v6.19' of git://git.kernel.org/pub/)
 	help
 	  Adds AHB configuration functionality for NVIDIA Tegra SoCs,
 	  which controls AHB bus master arbitration and some performance
