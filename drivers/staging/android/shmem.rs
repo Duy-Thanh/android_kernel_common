@@ -239,8 +239,6 @@ unsafe extern "C" fn ashmem_vmfile_get_unmapped_area(
     pgoff: c_ulong,
     flags: c_ulong,
 ) -> c_ulong {
-    // SAFETY: The `mm` of current does not change, so it is safe to access.
-    let mm = unsafe { (*bindings::get_current()).mm };
     // SAFETY: This calls the right get_unmapped_area for a shmem.
-    unsafe { bindings::mm_get_unmapped_area(mm, file, addr, len, pgoff, flags) }
+    unsafe { bindings::mm_get_unmapped_area(file, addr, len, pgoff, flags) }
 }
