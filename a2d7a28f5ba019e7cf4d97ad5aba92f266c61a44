@@ -33,6 +33,24 @@
       "message": "Needs an UPSTREAM tag and a \"cherry picked from commit\" line.\n\nFor the latter you should use `git cherry-pick -x`.",
       "revId": "a2d7a28f5ba019e7cf4d97ad5aba92f266c61a44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d8a198d_c953d619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3652054
+      },
+      "writtenOn": "2026-01-04T03:14:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fc7139b_63c8bc41",
+      "revId": "a2d7a28f5ba019e7cf4d97ad5aba92f266c61a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
