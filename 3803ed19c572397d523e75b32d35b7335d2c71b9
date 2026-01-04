@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f399cacd_89b3905d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1075873
+      },
+      "writtenOn": "2026-01-04T08:35:05Z",
+      "side": 1,
+      "message": "Hello, Carlos\n\n   Could you share me for the abandon this change ? When I want to upstream this change, I find that you have done the cherry-pick work， but abandoned it finally.",
+      "revId": "3803ed19c572397d523e75b32d35b7335d2c71b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
