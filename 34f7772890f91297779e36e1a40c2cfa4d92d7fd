@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7fd17b9_69e7dc03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-04T09:16:03Z",
+      "side": 1,
+      "message": "i have send email to upsteam ,anything else can i need to do？",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac2a5fa_5d68b233",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "OK，i wiil end this proposal upstream first",
       "parentUuid": "aac2a5fa_5d68b233",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c7cc1b_cac5800b",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-04T09:16:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f6228ac_09eda88b",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
