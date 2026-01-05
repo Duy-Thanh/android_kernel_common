@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27be3f40_f878c359",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-05T07:04:01Z",
+      "side": 1,
+      "message": "I believe you can make the same change here as in the C version. Get rid of `ashmem_vmfile_get_unmapped_area` and assign `new_fops.get_unmapped_area` to `bindings::mm_get_unmapped_area`.",
+      "fixSuggestions": [
+        {
+          "fixId": "f1445845_51bd1e6f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/staging/android/shmem.rs",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "        new_fops.get_unmapped_area \u003d Some(bindings::mm_get_unmapped_area);\n"
+            },
+            {
+              "path": "drivers/staging/android/shmem.rs",
+              "range": {
+                "startLine": 234,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f41cefa95558d3a1d71fd6fddf9f55588d5df614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
