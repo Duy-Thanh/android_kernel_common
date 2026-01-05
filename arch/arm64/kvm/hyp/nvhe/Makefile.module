@@ -8,5 +8,6 @@ include $(srctree)/arch/arm64/kvm/hyp/nvhe/Makefile.nvhe
 # LINT.IfChange(includes)
 ccflags-y += -I$(srctree)/arch/arm64/kvm/hyp/include/module
 # LINT.ThenChange(/BUILD.bazel:pkvm_includes)
+ccflags-y += -I$(srctree)/arch/arm64/kvm/hyp/include
 
 ccflags-y += -DMODULE
