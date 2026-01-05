@@ -16,6 +16,24 @@
       "message": "Do you think partners will need to make a similar change in their BUILD.bazel equivalent files?",
       "revId": "6731bc53ba2f74d9d0b594a5873e0f42f5db61bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aeb04ed_ea46da61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-05T21:30:17Z",
+      "side": 1,
+      "message": "`db845c` was the only target I found that used `kernel_aarch64_modules`. It\u0027s possible some may need to do this, but not everyone will. I would hope not very many since we do recommend partners pick a subset of the GKI modules they want and not just blindly take all of them.",
+      "parentUuid": "7e9539ee_b1dc9b0a",
+      "revId": "6731bc53ba2f74d9d0b594a5873e0f42f5db61bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
