@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb46b245_01922e5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-05T16:59:28Z",
+      "side": 1,
+      "message": "Since this bug is introduced in an earlier patch in this series, please fix it in the initial patch instead of a new patch.",
+      "revId": "f2d618d629e90969e358caace17977183ebc03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
