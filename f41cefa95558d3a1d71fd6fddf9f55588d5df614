@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb97a169_6859a121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-05T18:47:06Z",
+      "side": 1,
+      "message": "Yeah allmodconfig made sure of doing that.",
+      "parentUuid": "4077edca_1910b8c1",
+      "revId": "f41cefa95558d3a1d71fd6fddf9f55588d5df614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27be3f40_f878c359",
         "filename": "drivers/staging/android/shmem.rs",
         "patchSetId": 2
@@ -59,6 +77,24 @@
           ]
         }
       ],
+      "revId": "f41cefa95558d3a1d71fd6fddf9f55588d5df614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0932d7_96776fe7",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-05T18:47:06Z",
+      "side": 1,
+      "message": "Good point, my eyes are not Rust trained yet lol. Thanks.",
+      "parentUuid": "27be3f40_f878c359",
       "revId": "f41cefa95558d3a1d71fd6fddf9f55588d5df614",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
