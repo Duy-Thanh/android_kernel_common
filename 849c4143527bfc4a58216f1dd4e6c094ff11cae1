@@ -34,6 +34,24 @@
       "parentUuid": "ebe9e12e_204839e7",
       "revId": "849c4143527bfc4a58216f1dd4e6c094ff11cae1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb980bd8_684306bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4257021
+      },
+      "writtenOn": "2026-01-05T08:53:46Z",
+      "side": 1,
+      "message": "No worries. I have rebased this chain, please help to merge them, thanks.",
+      "parentUuid": "64e7c5f0_8998dc00",
+      "revId": "849c4143527bfc4a58216f1dd4e6c094ff11cae1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
