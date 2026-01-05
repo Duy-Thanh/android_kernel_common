@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79e012a_cb8e62d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4434509
+      },
+      "writtenOn": "2026-01-05T08:00:28Z",
+      "side": 1,
+      "message": "3788714: ANDROID: KVM: arm64: size overflow checks for mem_protect HVCs | https://android-review.googlesource.com/c/kernel/common/+/3788714",
+      "revId": "bc1eee8c7dc779a2d75afe34f9c48322cf6b2abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
