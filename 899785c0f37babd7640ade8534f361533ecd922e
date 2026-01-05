@@ -16,6 +16,24 @@
       "message": "Why isn\u0027t this in the stable kernel releases instead?",
       "revId": "899785c0f37babd7640ade8534f361533ecd922e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5871b203_4f0a7d5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2026-01-05T21:56:10Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/all/f83c0d52-b435-422e-b8ab-b6362bb4e51f@linux.intel.com/",
+      "parentUuid": "8dc27fdd_d08f9c5e",
+      "revId": "899785c0f37babd7640ade8534f361533ecd922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
