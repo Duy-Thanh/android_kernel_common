@@ -86,6 +86,24 @@
       "parentUuid": "9f6228ac_09eda88b",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0681f94f_a76aab19",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-05T17:36:09Z",
+      "side": 1,
+      "message": "Please change this patch to a FROMLIST citing the upstream conversation. Then we need to wait for a bit to see the upstream comments.",
+      "parentUuid": "54c7cc1b_cac5800b",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
