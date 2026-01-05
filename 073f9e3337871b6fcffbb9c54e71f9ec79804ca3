@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d102552a_022b6c27",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-01-05T13:25:57Z",
+      "side": 1,
+      "message": "Should this also be added to arch/arm64/kvm/hyp/nvhe/Makefile.module:includes? See the LINT.IfChange comment",
+      "range": {
+        "startLine": 1498,
+        "startChar": 0,
+        "endLine": 1498,
+        "endChar": 37
+      },
+      "revId": "073f9e3337871b6fcffbb9c54e71f9ec79804ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
