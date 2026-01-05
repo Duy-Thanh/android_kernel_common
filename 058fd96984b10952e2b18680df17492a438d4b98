@@ -70,6 +70,24 @@
       "parentUuid": "5e676783_e95c58be",
       "revId": "058fd96984b10952e2b18680df17492a438d4b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e760d4_9d978cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2026-01-05T21:57:15Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/all/3292f903-6896-4ea3-af7f-286aeff554ac@linux.intel.com/",
+      "parentUuid": "96bb3fdb_ac2fb8e7",
+      "revId": "058fd96984b10952e2b18680df17492a438d4b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
