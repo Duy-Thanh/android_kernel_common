@@ -16,6 +16,24 @@
       "message": "Please address the merge conflict finding:\n\n```\nThis change has merge conflicts. Rebase on the upstream branch (e.g. \n\"git pull --rebase\"). Upload a new patchset after resolving all merge\nconflicts.\n```",
       "revId": "7596e26d8c8b266bcc56d02b626812b90e5c94c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebe4074_01641bd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4490783
+      },
+      "writtenOn": "2026-01-05T11:12:14Z",
+      "side": 1,
+      "message": "I updated patchset after rebase\nThank you",
+      "parentUuid": "53723d0c_8c111b9d",
+      "revId": "7596e26d8c8b266bcc56d02b626812b90e5c94c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
