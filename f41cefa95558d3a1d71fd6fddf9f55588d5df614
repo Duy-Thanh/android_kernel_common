@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4077edca_1910b8c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-05T18:03:05Z",
+      "side": 1,
+      "message": "Given that we\u0027re not compiling the C version, did you enable the C driver and build test it to make sure nothing breaks?",
+      "revId": "f41cefa95558d3a1d71fd6fddf9f55588d5df614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27be3f40_f878c359",
         "filename": "drivers/staging/android/shmem.rs",
         "patchSetId": 2
