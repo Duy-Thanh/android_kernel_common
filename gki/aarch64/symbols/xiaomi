@@ -44,6 +44,264 @@
   __tracepoint_android_vh_do_new_mount_fc
   __tracepoint_android_vh_put_super
 
+  #required by mem_reclaim_ctl.ko
+  __traceiter_android_vh_page_should_be_protected
+  __tracepoint_android_vh_page_should_be_protected
+  __traceiter_android_vh_page_referenced_check_bypass
+  __tracepoint_android_vh_page_referenced_check_bypass
+
+  #required by perf_helper.ko
+  __traceiter_android_rvh_dequeue_entity_delayed
+  __tracepoint_android_rvh_dequeue_entity_delayed
+  __traceiter_android_vh_fuse_request_send
+  __tracepoint_android_vh_fuse_request_send
+  __traceiter_android_vh_fuse_request_end
+  __tracepoint_android_vh_fuse_request_end
+  __traceiter_android_vh_throttle_direct_reclaim_bypass
+  __tracepoint_android_vh_throttle_direct_reclaim_bypass
+
+# commonly used symbols
+  __traceiter_android_vh_logbuf
+  __tracepoint_android_vh_logbuf
+  tracepoint_probe_register
+  tracepoint_probe_unregister
+  down_read_trylock
+  access_process_vm
+  file_path
+
+# required by shrink memory module
+  shrink_slab
+  __tracepoint_android_vh_do_shrink_slab
+  __tracepoint_android_vh_shrink_slab_bypass
+  __traceiter_android_vh_do_shrink_slab
+  __traceiter_android_vh_shrink_slab_bypass
+
+# required by health_report module
+  __tracepoint_android_vh_health_report
+  __traceiter_android_vh_health_report
+
+# required by mi_mem_engine.ko
+  __traceiter_android_vh_tune_swappiness
+  __tracepoint_android_vh_tune_swappiness
+  __traceiter_android_vh_do_shrink_slab_ex
+  __tracepoint_android_vh_do_shrink_slab_ex
+
+# required by SAGT module
+  __traceiter_android_rvh_before_do_sched_yield
+  __tracepoint_android_rvh_before_do_sched_yield
+
+# required by memory
+  ufshcd_alloc_host
+  scsi_dma_unmap
+  scsi_done
+  blk_mq_destroy_queue
+  scsi_remove_host
+  scsi_host_put
+  scsi_host_alloc
+  sbitmap_weight
+  wait_for_completion_io_timeout
+  blk_crypto_keyslot_index
+  dev_pm_opp_remove
+  scsi_dma_map
+  scsi_print_command
+  scsi_change_queue_depth
+  blk_mq_wait_quiesce_done
+  blk_mq_tagset_busy_iter
+  scsi_report_bus_reset
+  scsi_add_host_with_dma
+  async_schedule_node
+  scsi_scan_host
+  __scsi_add_device
+  scsi_remove_device
+  blk_pm_runtime_init
+  scsi_device_quiesce
+  scsi_print_sense_hdr
+  scsi_execute_cmd
+  blk_crypto_reprogram_all_keys
+  blk_crypto_register
+  bsg_remove_queue
+  bsg_setup_queue
+  bsg_job_done
+  scsi_is_host_device
+  param_set_uint_minmax
+  scsi_host_lookup
+  scsi_device_lookup
+  scsi_host_lookup
+  scsi_device_lookup
+  scsi_device_set_state
+  blk_mq_quiesce_tagset
+  blk_mq_unquiesce_tagset
+  dev_pm_opp_find_freq_floor_indexed
+  blk_mq_alloc_queue
+  scsi_host_busy
+  dev_pm_opp_find_freq_ceil_indexed
+  __traceiter_android_vh_customize_thp_gfp_orders
+  __tracepoint_android_vh_customize_thp_gfp_orders
+  __traceiter_android_vh_customize_pmd_gfp_bypass
+  __tracepoint_android_vh_customize_pmd_gfp_bypass
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+  __traceiter_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_busy_retry
+  __traceiter_cma_release
+  __tracepoint_cma_release
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
+
+#required by stability
+  sock_from_file
+  get_dmabuf_debugfs_data
+  __traceiter_android_vh_cma_alloc_fail
+  __tracepoint_android_vh_cma_alloc_fail
+  __traceiter_android_vh_warn_alloc_show_mem_bypass
+  __tracepoint_android_vh_warn_alloc_show_mem_bypass
+  __traceiter_android_vh_meminfo_proc_show
+  __tracepoint_android_vh_meminfo_proc_show
+  __traceiter_android_vh_slab_alloc_node
+  __tracepoint_android_vh_slab_alloc_node
+  __traceiter_android_vh_wq_lockup_pool
+  __tracepoint_android_vh_wq_lockup_pool
+  __traceiter_android_vh_alloc_pages_slowpath_start
+  __tracepoint_android_vh_alloc_pages_slowpath_start
+  __traceiter_android_vh_alloc_pages_slowpath_end
+  __tracepoint_android_vh_alloc_pages_slowpath_end
+  __traceiter_android_vh_alloc_pages_entry
+  __tracepoint_android_vh_alloc_pages_entry
+  __traceiter_android_vh_sysrq_crash
+  __tracepoint_android_vh_sysrq_crash
+  __traceiter_android_rvh_schedule_bug
+  __tracepoint_android_rvh_schedule_bug
+=======
+  #required by mem_reclaim_ctl.ko
+  __traceiter_android_vh_page_should_be_protected
+  __tracepoint_android_vh_page_should_be_protected
+  __traceiter_android_vh_page_referenced_check_bypass
+  __tracepoint_android_vh_page_referenced_check_bypass
+
+  #required by perf_helper.ko
+  __traceiter_android_rvh_dequeue_entity_delayed
+  __tracepoint_android_rvh_dequeue_entity_delayed
+  __traceiter_android_vh_fuse_request_send
+  __tracepoint_android_vh_fuse_request_send
+  __traceiter_android_vh_fuse_request_end
+  __tracepoint_android_vh_fuse_request_end
+  __traceiter_android_vh_throttle_direct_reclaim_bypass
+  __tracepoint_android_vh_throttle_direct_reclaim_bypass
+
+# commonly used symbols
+  __traceiter_android_vh_logbuf
+  __tracepoint_android_vh_logbuf
+  tracepoint_probe_register
+  tracepoint_probe_unregister
+  down_read_trylock
+  access_process_vm
+  file_path
+
+# required by shrink memory module
+  shrink_slab
+  __tracepoint_android_vh_do_shrink_slab
+  __tracepoint_android_vh_shrink_slab_bypass
+  __traceiter_android_vh_do_shrink_slab
+  __traceiter_android_vh_shrink_slab_bypass
+
+# required by health_report module
+  __tracepoint_android_vh_health_report
+  __traceiter_android_vh_health_report
+
+# required by mi_mem_engine.ko
+  __traceiter_android_vh_tune_swappiness
+  __tracepoint_android_vh_tune_swappiness
+  __traceiter_android_vh_do_shrink_slab_ex
+  __tracepoint_android_vh_do_shrink_slab_ex
+
+# required by SAGT module
+  __traceiter_android_rvh_before_do_sched_yield
+  __tracepoint_android_rvh_before_do_sched_yield
+
+# required by memory
+  ufshcd_alloc_host
+  scsi_dma_unmap
+  scsi_done
+  blk_mq_destroy_queue
+  scsi_remove_host
+  scsi_host_put
+  scsi_host_alloc
+  sbitmap_weight
+  wait_for_completion_io_timeout
+  blk_crypto_keyslot_index
+  dev_pm_opp_remove
+  scsi_dma_map
+  scsi_print_command
+  scsi_change_queue_depth
+  blk_mq_wait_quiesce_done
+  blk_mq_tagset_busy_iter
+  scsi_report_bus_reset
+  scsi_add_host_with_dma
+  async_schedule_node
+  scsi_scan_host
+  __scsi_add_device
+  scsi_remove_device
+  blk_pm_runtime_init
+  scsi_device_quiesce
+  scsi_print_sense_hdr
+  scsi_execute_cmd
+  blk_crypto_reprogram_all_keys
+  blk_crypto_register
+  bsg_remove_queue
+  bsg_setup_queue
+  bsg_job_done
+  scsi_is_host_device
+  param_set_uint_minmax
+  scsi_host_lookup
+  scsi_device_lookup
+  scsi_host_lookup
+  scsi_device_lookup
+  scsi_device_set_state
+  blk_mq_quiesce_tagset
+  blk_mq_unquiesce_tagset
+  dev_pm_opp_find_freq_floor_indexed
+  blk_mq_alloc_queue
+  scsi_host_busy
+  dev_pm_opp_find_freq_ceil_indexed
+  __traceiter_android_vh_customize_thp_gfp_orders
+  __tracepoint_android_vh_customize_thp_gfp_orders
+  __traceiter_android_vh_customize_pmd_gfp_bypass
+  __tracepoint_android_vh_customize_pmd_gfp_bypass
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+  __traceiter_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_busy_retry
+  __traceiter_cma_release
+  __tracepoint_cma_release
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
+
+#required by stability
+  sock_from_file
+  get_dmabuf_debugfs_data
+  __traceiter_android_vh_cma_alloc_fail
+  __tracepoint_android_vh_cma_alloc_fail
+  __traceiter_android_vh_warn_alloc_show_mem_bypass
+  __tracepoint_android_vh_warn_alloc_show_mem_bypass
+  __traceiter_android_vh_meminfo_proc_show
+  __tracepoint_android_vh_meminfo_proc_show
+  __traceiter_android_vh_slab_alloc_node
+  __tracepoint_android_vh_slab_alloc_node
+  __traceiter_android_vh_wq_lockup_pool
+  __tracepoint_android_vh_wq_lockup_pool
+  __traceiter_android_vh_alloc_pages_slowpath_start
+  __tracepoint_android_vh_alloc_pages_slowpath_start
+  __traceiter_android_vh_alloc_pages_slowpath_end
+  __tracepoint_android_vh_alloc_pages_slowpath_end
+  __traceiter_android_vh_alloc_pages_entry
+  __tracepoint_android_vh_alloc_pages_entry
+  __traceiter_android_vh_sysrq_crash
+  __tracepoint_android_vh_sysrq_crash
+  __traceiter_android_rvh_schedule_bug
+  __tracepoint_android_rvh_schedule_bug
+  __traceiter_android_vh_save_vmalloc_stack
+  __tracepoint_android_vh_save_vmalloc_stack
+
 #required by metis.ko module
   __traceiter_android_rvh_try_to_wake_up_begin
   __tracepoint_android_rvh_try_to_wake_up_begin
