@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80be3972_85d4e71e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2026-01-06T14:40:14Z",
+      "side": 1,
+      "message": "Update new version of this patch for:\n 1. Fix typos in commit message.\n 2. Remove second loop to CMO instructions in file of `arch/arm64/mm/cache.S` due to b/463379534#comment19.",
+      "revId": "4a1b1177eec024ca5766769e6a9bdbe25cac4926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
