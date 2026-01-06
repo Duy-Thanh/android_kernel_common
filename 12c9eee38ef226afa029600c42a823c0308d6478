@@ -22,6 +22,30 @@
       },
       "revId": "12c9eee38ef226afa029600c42a823c0308d6478",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd36f82_30bf672b",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-06T17:49:34Z",
+      "side": 1,
+      "message": "According to read() syscall documentation, read() does not error out with EBUSY, so if some process is being pedantic about it, it will encounter an unexpected error.\nI\u0027m not overly concerned about this but something to keep in mind and maybe document here.",
+      "parentUuid": "4bc7ab1a_34c86f5a",
+      "range": {
+        "startLine": 1387,
+        "startChar": 4,
+        "endLine": 1387,
+        "endChar": 17
+      },
+      "revId": "12c9eee38ef226afa029600c42a823c0308d6478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
