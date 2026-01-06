@@ -16,6 +16,24 @@
       "message": "If this is still needed please file a bug and reference it here.",
       "revId": "75bb5e8d66d3ca46202e84117bcf348272e53eee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f467b5_ba3b23f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3964957
+      },
+      "writtenOn": "2026-01-06T10:08:14Z",
+      "side": 1,
+      "message": "Already file a bug 473712443, please help merge, Thanks!",
+      "parentUuid": "1c6d3739_082d046b",
+      "revId": "75bb5e8d66d3ca46202e84117bcf348272e53eee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
