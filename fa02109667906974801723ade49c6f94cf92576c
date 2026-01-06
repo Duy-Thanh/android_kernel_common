@@ -51,6 +51,24 @@
       ],
       "revId": "fa02109667906974801723ade49c6f94cf92576c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9592d76e_6b880082",
+        "filename": "arch/arm64/kvm/hyp/nvhe/Makefile.module",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-06T11:09:20Z",
+      "side": 1,
+      "message": "I\u0027m trying to remember but I believe it wasn\u0027t included on purpose.",
+      "parentUuid": "4469dee2_2be3af82",
+      "revId": "fa02109667906974801723ade49c6f94cf92576c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
