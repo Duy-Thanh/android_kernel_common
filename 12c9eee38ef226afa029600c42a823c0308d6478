@@ -46,6 +46,30 @@
       },
       "revId": "12c9eee38ef226afa029600c42a823c0308d6478",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd2c3a0_9d67860a",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-01-06T17:49:43Z",
+      "side": 1,
+      "message": "On UAPI:\n\nI mean userspace will have to add code to actually do something with this `EBUSY`. (Wait for some quiescent period then retry?)\n\nExisting readers that currently don\u0027t mind waiting and aren\u0027t currently getting read errors also have to add code to handle this new class of read error to immediately retry to maintain their current behavior (since this isn\u0027t `EINTR` which they should already be handling).\n\nI think it\u0027s pretty low risk, but Android itself depends on smaps_rollup reads for both system processes and apps and isn\u0027t currently setup to handle this so we might start to see new read errors and want to revert this.",
+      "parentUuid": "4bc7ab1a_34c86f5a",
+      "range": {
+        "startLine": 1387,
+        "startChar": 4,
+        "endLine": 1387,
+        "endChar": 17
+      },
+      "revId": "12c9eee38ef226afa029600c42a823c0308d6478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
