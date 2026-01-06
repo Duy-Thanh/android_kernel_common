@@ -20,6 +20,18 @@
 
 extern struct kvm_iommu_ops kvm_nvhe_sym(smmu_ops);
 
+#ifdef MODULE
+static unsigned long                   pkvm_module_token;
+
+#define ksym_ref_addr_nvhe(x) \
+	((typeof(kvm_nvhe_sym(x)) *)(pkvm_el2_mod_va(&kvm_nvhe_sym(x), pkvm_module_token)))
+
+int kvm_nvhe_sym(smmu_init_hyp_module)(const struct pkvm_module_ops *ops);
+#else
+#define ksym_ref_addr_nvhe(x) \
+	((typeof(kvm_nvhe_sym(x)) *)(kern_hyp_va(lm_alias(&kvm_nvhe_sym(x)))))
+#endif
+
 /*
  * Pre allocated pages that can be used from the EL2 part of the driver from atomic
  * context, ideally used for page table pages for identity domains.
@@ -182,7 +194,11 @@ static int kvm_arm_smmu_v3_init_drv(void)
 	}
 
 #ifdef MODULE
-	/* TBD: pkvm_load_el2_module */
+	ret = pkvm_load_el2_module(kvm_nvhe_sym(smmu_init_hyp_module), &pkvm_module_token);
+	if (ret) {
+		pr_err("Failed to load SMMUv3 IOMMU EL2 module: %d\n", ret);
+		goto err_free;
+	}
 #endif
 
 	/*
@@ -199,7 +215,7 @@ static int kvm_arm_smmu_v3_init_drv(void)
 	if (ret)
 		goto err_free;
 
-	ret = kvm_iommu_init_hyp(kern_hyp_va(lm_alias(&kvm_nvhe_sym(smmu_ops))), &atomic_mc);
+	ret = kvm_iommu_init_hyp(ksym_ref_addr_nvhe(smmu_ops), &atomic_mc);
 	if (ret)
 		return ret;
 
@@ -236,3 +252,4 @@ static struct platform_driver smmuv3_nesting_driver = {
 	},
 };
 subsys_initcall(kvm_arm_smmu_v3_register);
+MODULE_LICENSE("GPL v2");
