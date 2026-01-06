@@ -34,6 +34,24 @@
       "parentUuid": "5f381e83_15f08ef9",
       "revId": "06a30a3a02e8631efd6817622e1cfc66719d83a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "475e5b70_621d3b40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3310449
+      },
+      "writtenOn": "2026-01-06T06:54:19Z",
+      "side": 1,
+      "message": "Okay, maybe I mistake the function name, actually I want to say `__traceiter_android_vh_save_vmalloc_stack` and `__tracepoint_android_vh_save_vmalloc_stack`\n\nFirst, It actually already exists in abi.stg:\n```\nelf_symbol {\n  id: 0x979b6b9c\n  name: \"__traceiter_android_vh_save_vmalloc_stack\"\n  is_defined: true\n  symbol_type: FUNCTION\n  crc: 0x7fa39361\n  type_id: 0x9b69d758\n  full_name: \"__traceiter_android_vh_save_vmalloc_stack\"\n}\n\nelf_symbol {\n  id: 0x64cdb186\n  name: \"__tracepoint_android_vh_save_vmalloc_stack\"\n  is_defined: true\n  symbol_type: OBJECT\n  crc: 0x7c5aa8a7\n  type_id: 0x18ccbd2c\n  full_name: \"__tracepoint_android_vh_save_vmalloc_stack\"\n}\n```\n\nSecond, I add it to Xiaomi’s symbol list in this patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/3900352\n\nThen, I will explain why I say it was lost. In 6.6, I use this hook to get caller stack in `alloc_vmap_area`-\u003e`setup_vmalloc_vm`-\u003e`trace_android_vh_save_vmalloc_stack`-\u003eself driver. But `setup_vmalloc_vm` is replaced since 6.12.\n\n```\nstatic inline void setup_vmalloc_vm(struct vm_struct *vm,\n\tstruct vmap_area *va, unsigned long flags, const void *caller)\n{\n\tvm-\u003eflags \u003d flags;\n\tvm-\u003eaddr \u003d (void *)va-\u003eva_start;\n\tvm-\u003esize \u003d va_size(va);\n\tvm-\u003ecaller \u003d caller;\n\tva-\u003evm \u003d vm;\n\ttrace_android_vh_save_vmalloc_stack(flags, vm);\n}\n```\n\nBut there is a change replacing setup_vmalloc_vm with simple assign member to vm/va, so the vendor hook is lost since that happened\n\ncode in commit aaab830:\n```\nstatic struct vmap_area *alloc_vmap_area(...)\n{\n   ...\n   if (vm)\n\t\tsetup_vmalloc_vm(vm, va, flags, caller);\n   ...\n}\n\n```\ncode in commit 4b68a77:\n```\nstatic struct vmap_area *alloc_vmap_area(...)\n{\n   ...\n  if (vm) {\n\tvm-\u003eaddr \u003d (void *)va-\u003eva_start;\n\tvm-\u003esize \u003d va-\u003eva_end - va-\u003eva_start;\n\tva-\u003evm \u003d vm;\n\t// here, no vendor hook\n  }\n   ...\n}\n```\nSo, `trace_android_vh_save_vmalloc_stack(flags, vm);` is lost",
+      "parentUuid": "f9f7f354_57510287",
+      "revId": "06a30a3a02e8631efd6817622e1cfc66719d83a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
