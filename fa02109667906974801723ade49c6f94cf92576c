@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ae0a0c_c267a477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-06T11:08:14Z",
+      "side": 1,
+      "message": "BTW, I have tried to merge aosp/3864943 before the holidays but the presubmit keep on failing.",
+      "revId": "fa02109667906974801723ade49c6f94cf92576c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4469dee2_2be3af82",
+        "filename": "arch/arm64/kvm/hyp/nvhe/Makefile.module",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-06T11:08:14Z",
+      "side": 1,
+      "message": "Hum, I\u0027m not sure we want to expose everything to modules. That\u0027s actually why we have created module/ in a first place.",
+      "fixSuggestions": [
+        {
+          "fixId": "35e4161a_ee471856",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/Makefile.module",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "fa02109667906974801723ade49c6f94cf92576c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
