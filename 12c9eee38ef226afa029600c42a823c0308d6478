@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc7ab1a_34c86f5a",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-01-06T17:20:37Z",
+      "side": 1,
+      "message": "On second thought, I think it\u0027s ok, since it already may return -ESRCH, and read() will return standard -1 on error.",
+      "range": {
+        "startLine": 1387,
+        "startChar": 4,
+        "endLine": 1387,
+        "endChar": 17
+      },
+      "revId": "12c9eee38ef226afa029600c42a823c0308d6478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
