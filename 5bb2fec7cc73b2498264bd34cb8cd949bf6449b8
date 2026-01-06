@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce831131_58d51cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-06T10:47:07Z",
+      "side": 1,
+      "message": "I believe the following is more correct:\n\n```\n\ndiff --git a/arch/arm64/kvm/iommu.c b/arch/arm64/kvm/iommu.c\nindex 0f5731dd1b31..307d59d7a0ca 100644\n--- a/arch/arm64/kvm/iommu.c\n+++ b/arch/arm64/kvm/iommu.c\n@@ -28,6 +28,7 @@ static phys_addr_t __topup_virt_to_phys(void *virt)\n        return __pa(virt);\n }\n \n+#ifdef CONFIG_CMA\n static struct page *__kvm_iommu_alloc_from_cma(gfp_t gfp)\n {\n        bool from_spare \u003d (gfp \u0026 GFP_ATOMIC) \u003d\u003d GFP_ATOMIC;\n@@ -81,6 +82,12 @@ static int __kvm_iommu_topup_memcache_from_cma(size_t size, gfp_t gfp, size_t *a\n \n        return 0;\n }\n+#else\n+static int __kvm_iommu_topup_memcache_from_cma(size_t size, gfp_t gfp, size_t *allocated)\n+{\n+       return -ENOMEM;\n+}\n+#endif\n```",
+      "revId": "5bb2fec7cc73b2498264bd34cb8cd949bf6449b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
