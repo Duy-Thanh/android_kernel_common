@@ -505,11 +505,17 @@ void __init early_init_fdt_scan_reserved_mem(void)
 	if (!initial_boot_params)
 		return;
 
+<<<<<<< HEAD   (43538614dc82d1ee4334ccb0ece5c98440d293f0 ANDROID: ABI: Adding OEM data to mutex/rwsem)
 	memblock_memsize_detect_hole();
 	memblock_memsize_disable_tracking();
 
 	fdt_scan_reserved_mem();
+||||||| BASE   (78d82960b939df64cf7d26ca5ed34eb87f44c9e5 Linux 6.18.2)
+	fdt_scan_reserved_mem();
+=======
+>>>>>>> BRANCH (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
 	fdt_reserve_elfcorehdr();
+	fdt_scan_reserved_mem();
 
 	/* Process header /memreserve/ fields */
 	for (n = 0; ; n++) {

@@ -2640,7 +2640,12 @@ restore_flag:
 static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 {
 	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
+<<<<<<< HEAD   (43538614dc82d1ee4334ccb0ece5c98440d293f0 ANDROID: ABI: Adding OEM data to mutex/rwsem)
 	long long start, writeback, lock, sync_inode, end;
+||||||| BASE   (78d82960b939df64cf7d26ca5ed34eb87f44c9e5 Linux 6.18.2)
+=======
+	long long start, writeback, end;
+>>>>>>> BRANCH (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
 	int ret;
 
 	f2fs_info(sbi, "%s start, meta: %lld, node: %lld, data: %lld",
@@ -2683,6 +2688,7 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 	set_sbi_flag(sbi, SBI_IS_DIRTY);
 	f2fs_up_write(&sbi->gc_lock);
 
+<<<<<<< HEAD   (43538614dc82d1ee4334ccb0ece5c98440d293f0 ANDROID: ABI: Adding OEM data to mutex/rwsem)
 	f2fs_info(sbi, "%s sync_fs, meta: %lld, imeta: %lld, node: %lld, dents: %lld, qdata: %lld",
 					__func__,
 					get_pages(sbi, F2FS_DIRTY_META),
@@ -2690,6 +2696,9 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 					get_pages(sbi, F2FS_DIRTY_NODES),
 					get_pages(sbi, F2FS_DIRTY_DENTS),
 					get_pages(sbi, F2FS_DIRTY_QDATA));
+||||||| BASE   (78d82960b939df64cf7d26ca5ed34eb87f44c9e5 Linux 6.18.2)
+=======
+>>>>>>> BRANCH (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
 	ret = f2fs_sync_fs(sbi->sb, 1);
 	if (ret)
 		f2fs_err(sbi, "%s sync_fs failed, ret: %d", __func__, ret);
@@ -2701,6 +2710,7 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 
 	end = ktime_get();
 
+<<<<<<< HEAD   (43538614dc82d1ee4334ccb0ece5c98440d293f0 ANDROID: ABI: Adding OEM data to mutex/rwsem)
 	f2fs_info(sbi, "%s end, writeback:%llu, "
 				"lock:%llu, sync_inode:%llu, sync_fs:%llu",
 				__func__,
@@ -2708,6 +2718,14 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 				ktime_ms_delta(lock, writeback),
 				ktime_ms_delta(sync_inode, lock),
 				ktime_ms_delta(end, sync_inode));
+||||||| BASE   (78d82960b939df64cf7d26ca5ed34eb87f44c9e5 Linux 6.18.2)
+	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
+					ktime_ms_delta(writeback, start),
+=======
+	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
+					ktime_ms_delta(writeback, start),
+					ktime_ms_delta(end, writeback));
+>>>>>>> BRANCH (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
 	return ret;
 }
 
