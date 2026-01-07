@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aabb90e7_04bb315f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-07T17:20:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "19101879_9fdce476",
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "023577dc_bf5fcd8e",
@@ -82,6 +100,30 @@
           ]
         }
       ],
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561748fe_2ebf7746",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-07T17:20:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "023577dc_bf5fcd8e",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 20
+      },
       "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -153,6 +195,30 @@
           ]
         }
       ],
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68b5771_bcede44e",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-07T17:20:14Z",
+      "side": 1,
+      "message": "Done, and moved to `build/kernel` project so it can be reused. PTAL at the other change in the topic.",
+      "parentUuid": "b055733b_fc39d5f2",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 79
+      },
       "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
