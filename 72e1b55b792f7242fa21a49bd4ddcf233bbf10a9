@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Please **add an open respin request bug** to the commit message. Do not remove e...\n\nPlease **add an open respin request bug** to the commit message. Do not remove existing bug references.\nRefer to the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "72e1b55b792f7242fa21a49bd4ddcf233bbf10a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fe2dac_f75788a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886360
+      },
+      "writtenOn": "2026-01-07T05:05:47Z",
+      "side": 1,
+      "message": "done, add respin bug ID: 473926326",
+      "parentUuid": "01dc770c_71f0f835",
+      "revId": "72e1b55b792f7242fa21a49bd4ddcf233bbf10a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
