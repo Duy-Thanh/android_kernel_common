@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65e98442_bc3d093b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-07T17:24:07Z",
+      "side": 1,
+      "message": "That indeed sounds like a bug, if you have the steps to reproduce it I can debug it further. @elsk@google.com do you know if there is any dependency on how these should be run?",
+      "parentUuid": "0e30fe72_58ef4134",
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19101879_9fdce476",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
