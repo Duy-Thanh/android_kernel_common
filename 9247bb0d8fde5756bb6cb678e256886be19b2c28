@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c323b42a_9dc624a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-07T01:06:27Z",
+      "side": 1,
+      "message": "Can we get some rationale for why we need to take this as FROMLIST (and why it hasn\u0027t been merged upstream?)",
+      "revId": "9247bb0d8fde5756bb6cb678e256886be19b2c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
