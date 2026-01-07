@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c161cd11_4a868e44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2026-01-07T10:04:20Z",
+      "side": 1,
+      "message": "Please review this commit chain again. Also, is there a problem with the presubmit build, and how can I avoid build failures?",
+      "revId": "ef1634e6cad29aae5d9e52d7608812d69e7c8621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
