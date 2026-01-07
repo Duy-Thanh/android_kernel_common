@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32751423_80fa052d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4002347
+      },
+      "writtenOn": "2026-01-07T09:38:29Z",
+      "side": 1,
+      "message": "Hi, \nWhen I compile locally, it doesn’t generate `x86_64/abi.stg`. Can you help me resolve this conflict issue?\nThank you",
+      "revId": "fbb1dfd8fc55394994e3f37299c251fc80ff9c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
