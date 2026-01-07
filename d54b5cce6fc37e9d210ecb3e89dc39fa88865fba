@@ -16,6 +16,23 @@
       "message": "?",
       "revId": "d54b5cce6fc37e9d210ecb3e89dc39fa88865fba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac0d66a_68be98b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-07T17:33:08Z",
+      "side": 1,
+      "message": "Have you done any perf/power analysis to justify the additional level of page-table walk?",
+      "revId": "d54b5cce6fc37e9d210ecb3e89dc39fa88865fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
