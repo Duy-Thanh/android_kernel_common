@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6d759b0_fc2279ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T17:23:44Z",
+      "side": 1,
+      "message": "Initially I used FROMLIST, however, because it was not accepted in its current form, I changed it to ANDROID, as per Suren\u0027s comment. See https://android-review.git.corp.google.com/c/kernel/common/+/3906042/comment/c323b42a_9dc624a0/",
+      "parentUuid": "6e787df9_763a4738",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "e9fa97a4671175bc31435249f9b857c81cce32f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54519be_1f9e94e8",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-01-07T17:21:39Z",
       "side": 1,
       "message": "I think we\u0027ll need the same CPed to 6.18?",
+      "revId": "e9fa97a4671175bc31435249f9b857c81cce32f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a7ef2cd_9ffd2b99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T17:23:44Z",
+      "side": 1,
+      "message": "Thanks Kalesh, I think you are right. I ll send the patch.",
+      "parentUuid": "a54519be_1f9e94e8",
       "revId": "e9fa97a4671175bc31435249f9b857c81cce32f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
