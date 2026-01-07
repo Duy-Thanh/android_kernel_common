@@ -122,6 +122,24 @@
       "parentUuid": "0681f94f_a76aab19",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b908c761_a16c32de",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-07T19:36:29Z",
+      "side": 1,
+      "message": "see the contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "2f85c184_1c8b355c",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
