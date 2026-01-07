@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7608f1a0_d1f11598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-07T20:57:39Z",
+      "side": 1,
+      "message": "Ok, I may have flubbed things some other way, I just wanted to raise the concern in case there was some dependency in the steps. If I can reproduce the problem I\u0027ll file a bug, but I think its fine to consider this concern resolved.",
+      "parentUuid": "65e98442_bc3d093b",
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19101879_9fdce476",
