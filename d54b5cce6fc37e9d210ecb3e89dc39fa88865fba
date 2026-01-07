@@ -33,6 +33,23 @@
       "message": "Have you done any perf/power analysis to justify the additional level of page-table walk?",
       "revId": "d54b5cce6fc37e9d210ecb3e89dc39fa88865fba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9097a4b_511f3b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-07T18:55:03Z",
+      "side": 1,
+      "message": "Also breaks KMI. Assuming no negative effects to perf/power, this needs to be refactered to avoid breaking the KMI\n```\ntype changed from \u0027pud_t\u0027 \u003d \u0027struct { p4d_t p4d; }\u0027 to \u0027pud_t\u0027 \u003d \u0027struct { pudval_t pud; }\u0027\n  resolved type changed from \u0027struct { p4d_t p4d; }\u0027 to \u0027struct { pudval_t pud; }\u0027\n    member \u0027p4d_t p4d\u0027 was removed\n    member \u0027pudval_t pud\u0027 was added\n\ntype \u0027struct bindings::bindings_raw::pud_t\u0027 changed\n  member \u0027struct bindings::bindings_raw::p4d_t p4d\u0027 was removed\n  member \u0027u64 pud\u0027 was added\n```\nIt is likely that this would just have to go into the `android17-6.18` and later kernels.",
+      "revId": "d54b5cce6fc37e9d210ecb3e89dc39fa88865fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
