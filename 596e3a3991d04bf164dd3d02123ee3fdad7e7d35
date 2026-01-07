@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c35c0ae_4ee660db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T17:27:33Z",
+      "side": 1,
+      "message": "Initially, I used FROMLIST, however, because it was not accepted in its current form upstream, I changed it to ANDROID, as per Suren\u0027s comment. See https://android-review.git.corp.google.com/c/kernel/common/+/3906042/comment/c323b42a_9dc624a0/",
+      "parentUuid": "6eca023f_c5f43296",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "596e3a3991d04bf164dd3d02123ee3fdad7e7d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "908dc926_81e800cf",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-01-07T17:20:43Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:BAD_SIGN_OFF: Duplicate signature\n\nWARNING:BAD_SIGN_OFF: Duplicate signature",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "596e3a3991d04bf164dd3d02123ee3fdad7e7d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4998d78_c40cc11c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T17:27:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "908dc926_81e800cf",
       "range": {
         "startLine": 17,
         "startChar": 0,
