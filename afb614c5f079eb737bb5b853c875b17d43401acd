@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e30fe72_58ef4134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-07T01:31:27Z",
+      "side": 1,
+      "message": "Is there any risk that running _abi_update without running _abi_dist could result in incorrect results?\n\nI had a submission recently where I had to re-base and re-update the symbols and I just did the _abi_update calls and that resulted in a ABI is broken presubmit failure, and after I did a _abi_dist run before it seemed to clear up.\n\nI\u0027m not sure if this was something else, but I was a little suspicious since the instructions usually suggest doing _abi_dist first.",
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19101879_9fdce476",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
