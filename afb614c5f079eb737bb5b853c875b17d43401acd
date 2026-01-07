@@ -16,6 +16,169 @@
       "message": "Naming is hard, so please feel free to provide your suggestions.\n\nAs a follow-up, I\u0027ll update the documentation to advertise this new target if approved.",
       "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023577dc_bf5fcd8e",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-07T01:22:14Z",
+      "side": 1,
+      "message": "For new macros, use the new macro() instead of legacy macros\n\nhttps://bazel.build/extending/macros\n\n(Though see my other comment about using a rule()",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "964b07fc_78c2bb11",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "# TODO(user): Replace with the correct load path for the \u0027macro\u0027 function.\n# load(\"//path/to/google/build:macros.bzl\", \"macro\")\n\n"
+            },
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "# @macro\n"
+            }
+          ]
+        }
+      ],
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b055733b_fc39d5f2",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-07T01:22:14Z",
+      "side": 1,
+      "message": "This seems fragile and highly injectable. I would suggest defining an actual rule() instead.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 79
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1d4a97c9_f54ce419",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": "    output_script \u003d name + \".sh\"\n"
+            },
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 170,
+                "startChar": 0,
+                "endLine": 171,
+                "endChar": 0
+              },
+              "replacement": "    script_lines \u003d [\"#!/bin/bash\"]\n"
+            },
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 173,
+                "endChar": 0
+              },
+              "replacement": "        # $(rootpath ...) is expanded by Bazel before the command is run.\n        # \"$$@\" ensures that the arguments passed to the generated sh_binary are\n        # forwarded to the underlying scripts.\n        script_lines.append(\"$(rootpath {t}) \\\"$$@\\\"\".format(t \u003d t))\n\n    # Construct the printf command. Each line of the script is passed as a separate\n    # argument to printf, ensuring proper escaping and preventing injection.\n    # The format string \u0027%s\\n\u0027 is applied to each argument.\n    printf_args \u003d [\"\u0027%s\\\\n\u0027\"] + [\"\u0027{}\u0027\".format(line) for line in script_lines]\n    cmd \u003d \"printf {} \u003e $@\".format(\" \".join(printf_args))\n"
+            },
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 179,
+                "endChar": 0
+              },
+              "replacement": "        outs \u003d [output_script],\n        cmd \u003d cmd,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdd4c1b_f636a115",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-07T01:22:14Z",
+      "side": 1,
+      "message": "This could just be a `set -e`, or just `#!/bin/bash -e` in the hashbang",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7f022a11_79a6c17a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "bazel/abi.bzl",
+              "range": {
+                "startLine": 170,
+                "startChar": 0,
+                "endLine": 171,
+                "endChar": 0
+              },
+              "replacement": "    commands \u003d [\"echo \u0027#!/bin/bash\u0027 \u003e $@\", \"echo \u0027set -e\u0027 \u003e\u003e $@\"]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
