@@ -31,7 +31,6 @@
 #include <linux/compiler.h>
 #include <linux/moduleparam.h>
 #include <linux/wakeup_reason.h>
-#include <linux/workqueue.h>
 #include <trace/hooks/suspend.h>
 
 #include "power.h"
@@ -76,6 +75,7 @@ bool pm_suspend_default_s2idle(void)
 }
 EXPORT_SYMBOL_GPL(pm_suspend_default_s2idle);
 
+<<<<<<< HEAD   (9249fbae1303fe9e610ee359029e1e0e142cad35 ANDROID: Don't allocate while atomic in dma_buf_begin_new_ex)
 static bool suspend_fs_sync_queued;
 static DEFINE_SPINLOCK(suspend_fs_sync_lock);
 static DECLARE_COMPLETION(suspend_fs_sync_complete);
@@ -93,6 +93,26 @@ void suspend_abort_fs_sync(void)
 	spin_unlock(&suspend_fs_sync_lock);
 }
 
+||||||| BASE   (a1fe004406078527f0b79499fc2ea34af4c3ebb7 Revert "ANDROID: PM: Fix suspend spinlock in IRQ context")
+static bool suspend_fs_sync_queued;
+static DEFINE_SPINLOCK(suspend_fs_sync_lock);
+static DECLARE_COMPLETION(suspend_fs_sync_complete);
+
+/**
+ * suspend_abort_fs_sync - Abort fs_sync to abort suspend early
+ *
+ * This function aborts the fs_sync stage of suspend so that suspend itself can
+ * be aborted early.
+ */
+void suspend_abort_fs_sync(void)
+{
+	spin_lock(&suspend_fs_sync_lock);
+	complete(&suspend_fs_sync_complete);
+	spin_unlock(&suspend_fs_sync_lock);
+}
+
+=======
+>>>>>>> CHANGE (1dcaecaa6c70db3ffba35e003d4f871e5b1515b9 Revert "ANDROID: PM: Support to abort suspend during filesys)
 void s2idle_set_ops(const struct platform_s2idle_ops *ops)
 {
 	unsigned int sleep_flags;
@@ -417,6 +437,7 @@ void __weak arch_suspend_enable_irqs(void)
 	local_irq_enable();
 }
 
+<<<<<<< HEAD   (9249fbae1303fe9e610ee359029e1e0e142cad35 ANDROID: Don't allocate while atomic in dma_buf_begin_new_ex)
 
 static bool pm_fs_abort;
 module_param(pm_fs_abort, bool, 0644);
@@ -479,6 +500,71 @@ Start_fs_sync:
 	return 0;
 }
 
+||||||| BASE   (a1fe004406078527f0b79499fc2ea34af4c3ebb7 Revert "ANDROID: PM: Fix suspend spinlock in IRQ context")
+
+static bool pm_fs_abort;
+module_param(pm_fs_abort, bool, 0644);
+MODULE_PARM_DESC(pm_fs_abort,
+		 "Flag to enable abort during fs_sync phase of suspend");
+
+static void sync_filesystems_fn(struct work_struct *work)
+{
+	ksys_sync_helper();
+
+	spin_lock(&suspend_fs_sync_lock);
+	suspend_fs_sync_queued = false;
+	complete(&suspend_fs_sync_complete);
+	spin_unlock(&suspend_fs_sync_lock);
+}
+static DECLARE_WORK(sync_filesystems, sync_filesystems_fn);
+
+/**
+ * suspend_fs_sync_with_abort - Trigger fs_sync with ability to abort
+ *
+ * Return 0 on successful file system sync, otherwise returns -EBUSY if file
+ * system sync was aborted.
+ */
+static int suspend_fs_sync_with_abort(void)
+{
+	if (!pm_fs_abort) {
+		ksys_sync_helper();
+		return 0;
+	}
+	bool need_suspend_fs_sync_requeue;
+
+Start_fs_sync:
+	spin_lock(&suspend_fs_sync_lock);
+	reinit_completion(&suspend_fs_sync_complete);
+	/*
+	 * Handle the case where a suspend immediately follows a previous
+	 * suspend that was aborted during fs_sync. In this case, wait for the
+	 * previous filesystem sync to finish. Then do another filesystem sync
+	 * so any subsequent filesystem changes are synced before suspending.
+	 */
+	if (suspend_fs_sync_queued) {
+		need_suspend_fs_sync_requeue = true;
+	} else {
+		need_suspend_fs_sync_requeue = false;
+		suspend_fs_sync_queued = true;
+		schedule_work(&sync_filesystems);
+	}
+	spin_unlock(&suspend_fs_sync_lock);
+
+	/*
+	 * Completion is triggered by fs_sync finishing or a suspend abort
+	 * signal, whichever comes first
+	 */
+	wait_for_completion(&suspend_fs_sync_complete);
+	if (pm_wakeup_pending())
+		return -EBUSY;
+	if (need_suspend_fs_sync_requeue)
+		goto Start_fs_sync;
+
+	return 0;
+}
+
+=======
+>>>>>>> CHANGE (1dcaecaa6c70db3ffba35e003d4f871e5b1515b9 Revert "ANDROID: PM: Support to abort suspend during filesys)
 /**
  * suspend_enter - Make the system enter the given sleep state.
  * @state: System sleep state to enter.
@@ -678,13 +764,10 @@ static int enter_state(suspend_state_t state)
 	if (state == PM_SUSPEND_TO_IDLE)
 		s2idle_begin();
 
-	pm_wakeup_clear(0);
 	if (sync_on_suspend_enabled) {
 		trace_suspend_resume(TPS("sync_filesystems"), 0, true);
-		error = suspend_fs_sync_with_abort();
+		ksys_sync_helper();
 		trace_suspend_resume(TPS("sync_filesystems"), 0, false);
-		if (error)
-			goto Unlock;
 	}
 
 	pm_pr_dbg("Preparing system for sleep (%s)\n", mem_sleep_labels[state]);
