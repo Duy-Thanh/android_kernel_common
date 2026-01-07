@@ -2358,10 +2358,11 @@ static void ufshcd_update_monitor(struct ufs_hba *hba, struct scsi_cmnd *cmd)
 }
 
 /* Returns %true for SCSI commands and %false for device management commands. */
-static bool ufshcd_is_scsi_cmd(struct scsi_cmnd *cmd)
+bool ufshcd_is_scsi_cmd(struct scsi_cmnd *cmd)
 {
 	return !blk_mq_is_reserved_rq(scsi_cmd_to_rq(cmd));
 }
+EXPORT_SYMBOL_GPL(ufshcd_is_scsi_cmd);
 
 /**
  * ufshcd_send_command - Send SCSI or device management commands
@@ -2382,6 +2383,7 @@ static inline void ufshcd_send_command(struct ufs_hba *hba,
 		lrbp->issue_time_stamp_local_clock = local_clock();
 		lrbp->compl_time_stamp = ktime_set(0, 0);
 		lrbp->compl_time_stamp_local_clock = 0;
+		trace_android_vh_ufs_send_command(hba, cmd);
 	}
 	if (ufshcd_is_scsi_cmd(cmd)) {
 		ufshcd_add_command_trace(hba, cmd, UFS_CMD_SEND);
@@ -2737,6 +2739,15 @@ static int ufshcd_map_sg(struct ufs_hba *hba, struct scsi_cmnd *cmd)
 
 	ufshcd_sgl_to_prdt(hba, lrbp, sg_segments, scsi_sglist(cmd));
 
+	/*
+	 * TODO(b/160883801): remove this vendor hook in favor of the upstream
+	 * variant op.  This isn't possible yet because the upstream variant op
+	 * doesn't yet make it possible for the host driver to get the keyslot.
+	 */
+	err = 0;
+	trace_android_vh_ufs_fill_prdt(hba, cmd, sg_segments, &err);
+	if (err)
+		return err;
 	return ufshcd_crypto_fill_prdt(hba, cmd);
 }
 
@@ -3096,6 +3107,12 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 
 	ufshcd_setup_scsi_cmd(hba, cmd,
 			      ufshcd_scsi_to_upiu_lun(cmd->device->lun), tag);
+
+	trace_android_vh_ufs_prepare_command(hba, cmd, &err);
+	if (err) {
+		ufshcd_release(hba);
+		goto out;
+	}
 
 	err = ufshcd_map_sg(hba, cmd);
 	if (err) {
@@ -5636,6 +5653,7 @@ void ufshcd_compl_one_cqe(struct ufs_hba *hba, int task_tag,
 		lrbp->compl_time_stamp = ktime_get();
 		lrbp->compl_time_stamp_local_clock = local_clock();
 	}
+	trace_android_vh_ufs_compl_command(hba, cmd);
 	if (ufshcd_is_scsi_cmd(cmd)) {
 		if (unlikely(ufshcd_should_inform_monitor(hba, cmd)))
 			ufshcd_update_monitor(hba, cmd);

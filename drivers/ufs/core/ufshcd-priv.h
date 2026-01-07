@@ -78,6 +78,7 @@ int ufshcd_mcq_sq_cleanup(struct ufs_hba *hba, int task_tag);
 int ufshcd_mcq_abort(struct scsi_cmnd *cmd);
 int ufshcd_try_to_abort_task(struct ufs_hba *hba, int tag);
 void ufshcd_release_scsi_cmd(struct ufs_hba *hba, struct scsi_cmnd *cmd);
+bool ufshcd_is_scsi_cmd(struct scsi_cmnd *cmd);
 
 /**
  * enum ufs_descr_fmt - UFS string descriptor format
