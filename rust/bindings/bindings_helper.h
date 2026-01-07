@@ -58,6 +58,7 @@
 #include <linux/firmware.h>
 #include <linux/interrupt.h>
 #include <linux/fs.h>
+#include <linux/i2c.h>
 #include <linux/ioport.h>
 #include <linux/jiffies.h>
 #include <linux/jump_label.h>
@@ -90,6 +91,12 @@
 #include <trace/events/rust_sample.h>
 #include <uapi/linux/falloc.h>
 #include <uapi/linux/sched/types.h>
+
+/*
+ * The driver-core Rust code needs to know about some C driver-core private
+ * structures.
+ */
+#include <../../drivers/base/base.h>
 
 #if defined(CONFIG_DRM_PANIC_SCREEN_QR_CODE)
 // Used by `#[export]` in `drivers/gpu/drm/drm_panic_qr.rs`.
