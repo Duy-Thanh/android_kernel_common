@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b3b281_05e915d9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-07T23:48:31Z",
+      "side": 1,
+      "message": "How do we ensure this list is updated? Can we have some test that `bazel query`/`bazel cquery` etc on the list of `abi_update()` targets, checks if they have `abi_definition_stg` attribute set, and ensure that all `abi_update()` targets with `abi_definition_stg` attribute set MUST BE specified in this rule?\n\n(You might need an integration test or some other test that allows you to recursively call `bazel` commands.)\n\nI am just throwing this question as a follow-up; feel free to address this later.",
+      "fixSuggestions": [
+        {
+          "fixId": "56fbd8c3_e384e901",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 351,
+                "endChar": 0
+              },
+              "replacement": "# To ensure the \u0027targets\u0027 list of \u0027kernel_abis_update\u0027 is always up-to-date,\n# a test is needed. This test should:\n# 1.  Find all \u0027kernel_abi\u0027 targets defined in this BUILD file.\n# 2.  For each \u0027kernel_abi\u0027 target, check if its corresponding \u0027common_kernel\u0027\n#     target (e.g., \u0027:kernel_aarch64\u0027 for \u0027:kernel_aarch64_abi_update\u0027) has the\n#     \u0027abi_definition_stg\u0027 attribute set.\n# 3.  Collect the labels of all \u0027_abi_update\u0027 targets (e.g., \u0027:kernel_aarch64_abi_update\u0027)\n#     that correspond to \u0027kernel_abi\u0027 targets with \u0027abi_definition_stg\u0027.\n# 4.  Compare this collected list with the \u0027targets\u0027 attribute of the\n#     \u0027kernel_abis_update\u0027 rule.\n# 5.  Fail the test if there is any mismatch.\n#\n# This requires an integration test that can execute \u0027bazel query\u0027 commands\n# to inspect the build graph. A custom Starlark rule or a shell test\n# executing bazel commands would be necessary.\n#\n# Placeholder for the test rule:\n# sh_test(\n#     name \u003d \"validate_kernel_abis_update\",\n#     srcs \u003d [\"//build/kernel/kleaf:validate_kernel_abis_update.sh\"],\n#     data \u003d [\n#         \":kernel_abis_update\",\n#         # Add all common_kernel targets here\n#         \":kernel_aarch64\",\n#         \":kernel_x86_64\",\n#     ],\n#     args \u003d [\n#         \"--abis_update_target\u003d//common:kernel_abis_update\",\n#         \"--kernel_targets\u003d//common:kernel_aarch64 //common:kernel_x86_64\",\n#     ],\n#     visibility \u003d [\"//visibility:private\"],\n# )\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8489cb7738b63221ff19db1544c1630250390777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
