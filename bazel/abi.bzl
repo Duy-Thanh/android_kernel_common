@@ -13,6 +13,8 @@ load(
     "pkg_files",
     "strip_prefix",
 )
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_genrule")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "android_filegroup",
@@ -153,4 +155,30 @@ def sh_binary_with_abi(
         abis = abis,
         visibility = visibility,
         out = out,
+    )
+
+def multi_kmi_update(name, targets):
+    """Creates a single target to update multiple ABI definitions.
+
+    Args:
+        name: The name of the resulting sh_binary target.
+        targets: A list of abi_update targets (e.g. [":kernel_aarch64_abi_update"])
+    """
+
+    script_name = name + "_script"
+
+    commands = ["echo '#!/bin/bash' > $@"]
+    for t in targets:
+        commands.append("echo '$(rootpath {t}) \"$$@\" ;' >> $@".format(t = t))
+
+    hermetic_genrule(
+        name = script_name,
+        srcs = targets,
+        outs = [name + ".sh"],
+        cmd = " && ".join(commands),
+    )
+    sh_binary(
+        name = name,
+        srcs = [":" + script_name],
+        data = targets,
     )

@@ -32,7 +32,7 @@ load(
     "merged_kernel_uapi_headers",
     "modinfo_summary_report",
 )
-load(":bazel/abi.bzl", "cc_binary_with_abi")
+load(":bazel/abi.bzl", "cc_binary_with_abi", "multi_kmi_update")
 load(
     ":bazel/modules_private.bzl",
     "get_gki_kunit_modules",
@@ -345,6 +345,14 @@ common_kernel(
     system_dlkm_extra_archive_files = [":generate_gki_module_info_x86_64"],
     trim_nonlisted_kmi = True,
     visibility = ["//visibility:public"],
+)
+
+multi_kmi_update(
+    name = "kernel_abis_update",
+    targets = [
+        ":kernel_aarch64_abi_update",
+        ":kernel_x86_64_abi_update",
+    ],
 )
 
 alias(
