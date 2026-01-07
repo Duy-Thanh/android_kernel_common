@@ -16,6 +16,24 @@
       "message": "Is the failure also cause by CRC changes? How to fix this problem?",
       "revId": "ba48cc232077130a6284091a16a8524c2b123f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2be55a_ff14976b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-07T15:49:03Z",
+      "side": 1,
+      "message": "This is an odd presubmit failure. I will just retry. ABI looks good to me.",
+      "parentUuid": "292f0c23_ca414fd9",
+      "revId": "ba48cc232077130a6284091a16a8524c2b123f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
