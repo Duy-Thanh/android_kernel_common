@@ -22,6 +22,30 @@
       },
       "revId": "f64987ba34b53abad777bb0d11cf9e14d547d6d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d207370e_e392e612",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T16:21:22Z",
+      "side": 1,
+      "message": "Thanks Suren, I ll do that.\n\nI created the bug b/474067441 to work on the refactoring and upstream it.",
+      "parentUuid": "dd43e2fb_70de7adc",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "f64987ba34b53abad777bb0d11cf9e14d547d6d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
