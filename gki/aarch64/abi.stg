@@ -468111,6 +468111,15 @@ elf_symbol {
   full_name: "dw_pcie_write_dbi2"
 }
 elf_symbol {
+  id: 0x048dcb50
+  name: "early_lookup_bdev"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x985cc447
+  type_id: 0x92c581e2
+  full_name: "early_lookup_bdev"
+}
+elf_symbol {
   id: 0x63e89795
   name: "edac_device_add_device"
   is_defined: true
@@ -522336,6 +522345,7 @@ interface {
   symbol_id: 0xf52b6f8a
   symbol_id: 0x2475753e
   symbol_id: 0xda24f3dd
+  symbol_id: 0x048dcb50
   symbol_id: 0x63e89795
   symbol_id: 0xce8db673
   symbol_id: 0x9a7525de
