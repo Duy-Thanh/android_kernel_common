@@ -34,6 +34,24 @@
       "parentUuid": "c323b42a_9dc624a0",
       "revId": "9247bb0d8fde5756bb6cb678e256886be19b2c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd59989e_57b61a36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-01-07T16:22:38Z",
+      "side": 1,
+      "message": "I ll create the bug b/474067441 to make the refactoring and upstream it later.\n\nLet me know if that works.\n\nThanks",
+      "parentUuid": "53e93d22_dcfdbb15",
+      "revId": "9247bb0d8fde5756bb6cb678e256886be19b2c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
