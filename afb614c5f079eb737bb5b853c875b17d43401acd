@@ -179,6 +179,30 @@
       ],
       "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8ebd37_f2cb7d04",
+        "filename": "bazel/abi.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-07T01:24:31Z",
+      "side": 1,
+      "message": "One differences are found the update script returns something different than zero, which would stop running all the targets.",
+      "parentUuid": "cfdd4c1b_f636a115",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "afb614c5f079eb737bb5b853c875b17d43401acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
