@@ -106,6 +106,24 @@
       "parentUuid": "43e760d4_9d978cc3",
       "revId": "058fd96984b10952e2b18680df17492a438d4b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28cf2589_5e998f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101627
+      },
+      "writtenOn": "2026-01-07T17:00:46Z",
+      "side": 1,
+      "message": "1) Er, may be I\u0027m missing something, but the link \nhttps://lore.kernel.org/all/3292f903-6896-4ea3-af7f-286aeff554ac@linux.intel.com/\nseems to point to a Wldcatlake support merge request (not novalake?)\n\n2) Also, I\u0027m tring to understand if new platform support requests (like this one) will be entertained in 6.18.y upstream? I was of the understanding that only bug fixes / stability fixes will acceptable?",
+      "parentUuid": "c261e564_00335446",
+      "revId": "058fd96984b10952e2b18680df17492a438d4b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
