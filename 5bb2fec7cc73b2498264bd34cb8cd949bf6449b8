@@ -51,6 +51,24 @@
       "parentUuid": "a17832e2_b039a193",
       "revId": "5bb2fec7cc73b2498264bd34cb8cd949bf6449b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b33dfe8_3b58669f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-07T07:41:39Z",
+      "side": 1,
+      "message": "LGTM. Just few checkpatch issues to fix",
+      "parentUuid": "8d550504_313e4fa7",
+      "revId": "5bb2fec7cc73b2498264bd34cb8cd949bf6449b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
