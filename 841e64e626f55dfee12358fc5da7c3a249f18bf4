@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffaabdda_0375e023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2026-01-07T10:13:32Z",
+      "side": 1,
+      "message": "Is this an upstream backport or fromlist backport?\n\nif it\u0027s a fromlist backport, change the tag with \u0027BACKPORT: FROMLIST: `, and also add a upstream divergence bug tracker",
+      "revId": "841e64e626f55dfee12358fc5da7c3a249f18bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
