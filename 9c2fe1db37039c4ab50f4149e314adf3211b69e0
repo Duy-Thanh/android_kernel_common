@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc2d28a_595ef271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-01-08T23:20:52Z",
+      "side": 1,
+      "message": "Looks like common/drivers/net/ethernet/intel/idpf/xsk.c failed to build",
+      "revId": "9c2fe1db37039c4ab50f4149e314adf3211b69e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
