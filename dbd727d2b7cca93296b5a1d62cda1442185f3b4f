@@ -46,6 +46,30 @@
       },
       "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37fc06f_a81a3399",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-08T19:05:56Z",
+      "side": 1,
+      "message": "Yes, less lines modified usually results in less merge conflicts or more straight forward merge conflict resolutions.\n\nNot relying on the rest of the function to override the return value is a reasonable concern since that could change with an LTS update. What about updating the hook to indicate that it was used and you just want to return right away? Something like this:\n\n```\nstatic inline bool platform_pci_power_manageable(struct pci_dev *dev)\n{\n  bool ret \u003d false;\n  bool state;\n\n  trace_android_vh_platform_pci_power_manageable(dev, \u0026ret, \u0026state);\n  if (ret)\n    return state;\n...\n```\nwhere `ret` indicates that you want to return the state provided. If a vendor doesn\u0027t implement the hook, then `ret` will remain `false` and the hook will just be a nop.",
+      "parentUuid": "ddacd77c_be77b41f",
+      "range": {
+        "startLine": 1073,
+        "startChar": 0,
+        "endLine": 1073,
+        "endChar": 10
+      },
+      "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
