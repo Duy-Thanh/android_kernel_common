@@ -22,6 +22,29 @@
       },
       "revId": "3bd70d1b199d335a6e6dc6da184579109f836c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cefbfc6a_682640f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-08T08:54:10Z",
+      "side": 1,
+      "message": "wrong bug ids.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "3bd70d1b199d335a6e6dc6da184579109f836c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
