@@ -93,6 +93,30 @@
       },
       "revId": "826b1726abf3b7253d665476ef8ad872cb9f0822",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed0bcd9_88f5909f",
+        "filename": "block/early-lookup.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-08T08:53:17Z",
+      "side": 1,
+      "message": "What hibernate code exactly?\n\nYou need to document this and open a new bug for it.",
+      "parentUuid": "c75be67a_8a6bd5ba",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "826b1726abf3b7253d665476ef8ad872cb9f0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
