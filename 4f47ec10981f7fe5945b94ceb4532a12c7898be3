@@ -16,6 +16,23 @@
       "message": "Again, the commit message should have more detail as to why this change is needed. \"amu fie\" isn\u0027t a very common term so it might be worth expanding the acronym. Also would be good to provide some sense of why a vendor might want to disable or enable this option.",
       "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d458e78c_c843200d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-01-08T07:19:00Z",
+      "side": 1,
+      "message": "The func topology_clear_scale_freq_source could be used to disable the amu, this vh maybe unnessary?",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
