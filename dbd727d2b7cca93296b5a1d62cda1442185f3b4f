@@ -22,6 +22,30 @@
       },
       "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddacd77c_be77b41f",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2026-01-08T18:54:02Z",
+      "side": 1,
+      "message": "Maintainable, as in, touch fewer of the original lines of code? I could try that, but I wouldn\u0027t necessarily want to do that at the expense of the clarity and consistency of the code.\n\nI chose a pattern that works for all of these hooks. And for most of these, we want the trace hook to have the last chance to make decisions. Do you want me to change all the hooks somehow? (It\u0027s not easy to do, since we don\u0027t really have a way to determine whether the tracepoint was *really* used.)",
+      "parentUuid": "3fe05bdc_601bb4bb",
+      "range": {
+        "startLine": 1073,
+        "startChar": 0,
+        "endLine": 1073,
+        "endChar": 10
+      },
+      "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
