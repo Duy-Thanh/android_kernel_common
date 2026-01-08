@@ -28,6 +28,7 @@
   drm_vblank_work_cancel_sync
   drm_vblank_work_flush
   devm_pci_remap_cfgspace
+  early_lookup_bdev
   hid_hw_request
   iio_map_array_register
   iio_map_array_unregister
