@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe05bdc_601bb4bb",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-08T18:34:43Z",
+      "side": 1,
+      "message": "To make this code more maintainable with regards to handling conflicts with LTS updates, can we do this at the top of the function instead:\n\n```\nstatic inline bool platform_pci_power_manageable(struct pci_dev *dev)\n{\n  bool ret \u003d false;\n  \n  trace_android_vh_platform_pci_power_manageable(dev, \u0026ret);\n  if (ret)\n    return ret;\n  ...\n```\n\nIt doesn\u0027t look like `pci_use_mid_pm()` or the ACPI call will affect the result if the tracepoint returns false.",
+      "range": {
+        "startLine": 1073,
+        "startChar": 0,
+        "endLine": 1073,
+        "endChar": 10
+      },
+      "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
