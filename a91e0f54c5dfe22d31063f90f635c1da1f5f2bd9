@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9aeba94_8ab8d195",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-08T18:17:02Z",
+      "side": 1,
+      "message": "Add the original `Bug: 405889864`",
+      "revId": "a91e0f54c5dfe22d31063f90f635c1da1f5f2bd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f51ee3ea_36f42136",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
