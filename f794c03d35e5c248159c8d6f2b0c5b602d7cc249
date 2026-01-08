@@ -16,6 +16,24 @@
       "message": "fix build-break in aosp/3877621 (see comments)",
       "revId": "f794c03d35e5c248159c8d6f2b0c5b602d7cc249",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32706a9b_e9623a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2026-01-08T03:18:14Z",
+      "side": 1,
+      "message": "Thanks a lot. The fix has been cherry-picked in this chain and please review again.",
+      "parentUuid": "50911bed_58107861",
+      "revId": "f794c03d35e5c248159c8d6f2b0c5b602d7cc249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
