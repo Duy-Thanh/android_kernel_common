@@ -94,6 +94,30 @@
       },
       "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf8f93cf_17fbcd32",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-08T19:26:26Z",
+      "side": 1,
+      "message": "Well we don\u0027t have to maintain the same ABI across kernel versions, but I guess it doesn\u0027t help when you have auto-merger set up on your driver tree since now you would have to have different driver implementations for 6.12 and 6.18. I\u0027m fine with sticking to this vendor hook implementation but that just means if this breaks horribly with an LTS update then you may be pinged to help resolve the merge conflict issue.",
+      "parentUuid": "5065cd40_84370aa1",
+      "range": {
+        "startLine": 1073,
+        "startChar": 0,
+        "endLine": 1073,
+        "endChar": 10
+      },
+      "revId": "dbd727d2b7cca93296b5a1d62cda1442185f3b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
