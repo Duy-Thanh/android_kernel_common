@@ -167,6 +167,28 @@ int dw_pcie_get_resources(struct dw_pcie *pci)
 		}
 	}
 
+<<<<<<< HEAD   (e9dc4c11eadb95d1e567e067c8c82fe93ae969be ANDROID: GKI: add disable_delayed_work_sync to virtual_devic)
+||||||| BASE   (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
+	/* ELBI is an optional resource */
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "elbi");
+	if (res) {
+		pci->elbi_base = devm_ioremap_resource(pci->dev, res);
+		if (IS_ERR(pci->elbi_base))
+			return PTR_ERR(pci->elbi_base);
+	}
+
+=======
+	/* ELBI is an optional resource */
+	if (!pci->elbi_base) {
+		res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "elbi");
+		if (res) {
+			pci->elbi_base = devm_ioremap_resource(pci->dev, res);
+			if (IS_ERR(pci->elbi_base))
+				return PTR_ERR(pci->elbi_base);
+		}
+	}
+
+>>>>>>> BRANCH (3aa9aac0e8b767a7c6fac33ae626a332c2ba1389 Linux 6.18.4)
 	/* LLDD is supposed to manually switch the clocks and resets state */
 	if (dw_pcie_cap_is(pci, REQ_RES)) {
 		ret = dw_pcie_get_clocks(pci);
