@@ -1,6 +1,14 @@
+<<<<<<< HEAD   (47ae0e38934821ff29d777daf026bc3527ac431b ANDROID: Update to clang r574158.)
 BRANCH="android17-6.18"
 KMI_GENERATION=0
 CLANG_VERSION="r574158"
+||||||| BASE   (96725acae759d94b39fcb16d68f0e0c4d4b5e837 Revert "ANDROID: BUILD.bazel: Add Image.zst build artifact")
+BRANCH="android-mainline"
+CLANG_VERSION="r574158"
+=======
+BRANCH="android-mainline"
+CLANG_VERSION="r584948b"
+>>>>>>> CHANGE (ff021b25723a5a4367f73c5e7a573085fd5829e8 ANDROID: Update to clang r584948b)
 RUSTC_VERSION="1.91.1"
 AARCH64_NDK_TRIPLE="aarch64-linux-android31"
 X86_64_NDK_TRIPLE="x86_64-linux-android31"
