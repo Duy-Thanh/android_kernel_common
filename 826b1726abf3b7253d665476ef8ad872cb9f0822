@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b45169_fb3e4a1d",
+        "filename": "block/early-lookup.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-08T05:30:41Z",
+      "side": 1,
+      "message": "this needs to go in a separate change, with full justification as to why it is needed (hint, I do not think it does.)",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 37
+      },
+      "revId": "826b1726abf3b7253d665476ef8ad872cb9f0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
