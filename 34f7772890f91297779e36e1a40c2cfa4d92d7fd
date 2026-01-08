@@ -158,6 +158,24 @@
       "parentUuid": "2f85c184_1c8b355c",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33999bd_10ef4296",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-08T21:31:43Z",
+      "side": 1,
+      "message": "Yes, plus add the other information required by the contribution guidelines (\"Link:\" tag citing the upstream posting on lore)",
+      "parentUuid": "0379fcce_2feed9ed",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
