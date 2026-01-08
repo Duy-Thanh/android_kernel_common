@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a524e5_fbfa0be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-08T03:05:21Z",
+      "side": 1,
+      "message": "So something in this is breaking the KABI. I\u0027ll need to dig more to understand what\u0027s going wrong.",
+      "revId": "8b6291522a3d8e2651e4c377c902490aac1938ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
