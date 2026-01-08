@@ -22,6 +22,30 @@
       },
       "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c2871e_548ad09c",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 4
+      },
+      "lineNbr": 352775,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-08T21:51:00Z",
+      "side": 1,
+      "message": "looks like this is related to including `tracepoint.h`. Previously this was handled by wrapping it in GENKSYMS in `vendor_hooks.h`:\n```\n 10 #ifndef __GENKSYMS__\n 11 #include \u003clinux/tracepoint.h\u003e\n 12 #endif\n```\n\nI\u0027ll see what we should be doing on 6.18 for this.",
+      "parentUuid": "033b018e_70cd436c",
+      "range": {
+        "startLine": 352775,
+        "startChar": 0,
+        "endLine": 352775,
+        "endChar": 17
+      },
+      "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
