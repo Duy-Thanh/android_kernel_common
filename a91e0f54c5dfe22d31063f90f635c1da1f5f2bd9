@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f51ee3ea_36f42136",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-08T18:14:29Z",
+      "side": 1,
+      "message": "Please do not change this when cherry-picking from another branch. Should be `I71d709c8c782aa614d2c9e1d3150ce14a0106acb`",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 52
+      },
+      "revId": "a91e0f54c5dfe22d31063f90f635c1da1f5f2bd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
