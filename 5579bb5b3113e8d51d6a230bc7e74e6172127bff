@@ -16,6 +16,24 @@
       "message": "The conflicts have been fixed. Please help to review.",
       "revId": "5579bb5b3113e8d51d6a230bc7e74e6172127bff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e858c0ea_0f606bc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-01-08T12:33:00Z",
+      "side": 1,
+      "message": "By not `Resolved`ing your comments, you block your own submission.",
+      "parentUuid": "7e718cdf_5f3e19db",
+      "revId": "5579bb5b3113e8d51d6a230bc7e74e6172127bff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

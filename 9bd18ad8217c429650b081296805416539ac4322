@@ -16,6 +16,24 @@
       "message": "Why did the \"Presubmit\" fail? How can I fix this problem?",
       "revId": "9bd18ad8217c429650b081296805416539ac4322",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561f6ab2_0c1604da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-01-08T12:33:00Z",
+      "side": 1,
+      "message": "By not `Resolved`ing your comments, you block your own submission.",
+      "parentUuid": "52af214f_6c0a224a",
+      "revId": "9bd18ad8217c429650b081296805416539ac4322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
