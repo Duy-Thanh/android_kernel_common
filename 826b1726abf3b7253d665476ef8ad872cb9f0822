@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e74916cf_573ce62d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-08T05:31:12Z",
+      "side": 1,
+      "message": "please fix.",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "826b1726abf3b7253d665476ef8ad872cb9f0822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1b45169_fb3e4a1d",
         "filename": "block/early-lookup.c",
         "patchSetId": 4
