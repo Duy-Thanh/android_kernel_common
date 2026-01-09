@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab63a0d_3ca3e27d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-09T00:26:46Z",
+      "side": 1,
+      "message": "Same issue as 6.1 and 6.6 WRT `filesystem_freeze_enabled`.",
+      "revId": "7f10dc3e8bb2fd08c7956eb7637063933a269bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
