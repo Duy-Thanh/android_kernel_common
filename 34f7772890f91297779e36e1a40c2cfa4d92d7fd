@@ -176,6 +176,24 @@
       "parentUuid": "0379fcce_2feed9ed",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ba344d_4dd979c2",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-09T02:35:26Z",
+      "side": 1,
+      "message": "Dear sir: thank you for your support. I have packaged the modification into a patch and sent it via email to sean@mess.org, but he has not replied to my email yet. Will this link be generated only after he replies to me? So far, I haven\u0027t received any reply information",
+      "parentUuid": "a33999bd_10ef4296",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
