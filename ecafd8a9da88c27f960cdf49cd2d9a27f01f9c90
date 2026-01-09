@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2affe2e3_7d8abd0c",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-01-09T12:24:06Z",
+      "side": 1,
+      "message": "`static`? FYI:\n```\ndrivers/virt/coco/pkvm-guest/arm-pkvm-guest.c:289:12: error: no previous prototype for ‘pkvm_device_pm_init’ [-Werror\u003dmissing-prototypes]\n  289 | int __init pkvm_device_pm_init(void)\n      |            ^~~~~~~~~~~~~~~~~~~\n```",
+      "revId": "ecafd8a9da88c27f960cdf49cd2d9a27f01f9c90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
