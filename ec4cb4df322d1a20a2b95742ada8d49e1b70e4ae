@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cbb9a0b_d7f91219",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1431741
+      },
+      "writtenOn": "2026-01-09T06:20:27Z",
+      "side": 1,
+      "message": "It looks like KernelCommit check failed because it uses the first `cherry picked from`, but the real upstream commit is the second one: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d449bcd5d45eb4ce26740f11f8601082fe734bed2",
+      "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
