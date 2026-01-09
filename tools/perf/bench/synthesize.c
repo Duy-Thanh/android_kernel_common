@@ -6,7 +6,6 @@
  *
  * Copyright 2019 Google LLC.
  */
-#include <errno.h>
 #include <stdio.h>
 #include "bench.h"
 #include "../util/debug.h"

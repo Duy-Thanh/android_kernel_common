@@ -7,7 +7,6 @@
  */
 
 #include <sys/mman.h>
-#include <errno.h>
 #include <inttypes.h>
 #include <asm/bug.h>
 #include <linux/zalloc.h>
