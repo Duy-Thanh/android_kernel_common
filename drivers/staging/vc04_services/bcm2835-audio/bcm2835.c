@@ -6,8 +6,7 @@
 #include <linux/slab.h>
 #include <linux/module.h>
 
-#include <linux/raspberrypi/vchiq_bus.h>
-
+#include "../interface/vchiq_arm/vchiq_bus.h"
 #include "bcm2835.h"
 
 static bool enable_hdmi;
