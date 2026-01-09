@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14906db8_061af815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-09T00:24:03Z",
+      "side": 1,
+      "message": "Same issue as 6.1 with regards to `filesystem_freeze_enabled`; please fix that, update the tag to BACKPORT instead of UPSTREAM, and document the lack of that variable on this branch.",
+      "revId": "90d92980efc698132ee9ac166c86a5832239ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe04e74_896c427e",
+        "filename": "kernel/power/power.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-09T00:24:03Z",
+      "side": 1,
+      "message": "Same issue as 6.1; this doesn\u0027t exist.",
+      "revId": "90d92980efc698132ee9ac166c86a5832239ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
