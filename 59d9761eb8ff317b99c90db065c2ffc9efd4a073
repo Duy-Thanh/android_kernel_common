@@ -46,6 +46,30 @@
       },
       "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30710424_775d607c",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 4
+      },
+      "lineNbr": 352775,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-09T12:57:46Z",
+      "side": 1,
+      "message": "Nothing at all, because the KMI is not supposed to be stable yet.\n\nThere was some discussion about pre-emptively hiding a certain type definition. Let me know how that goes.",
+      "parentUuid": "15c2871e_548ad09c",
+      "range": {
+        "startLine": 352775,
+        "startChar": 0,
+        "endLine": 352775,
+        "endChar": 17
+      },
+      "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
