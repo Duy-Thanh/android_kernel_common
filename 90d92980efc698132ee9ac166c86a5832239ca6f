@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7454a20_8fa1e0f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978967
+      },
+      "writtenOn": "2026-01-09T01:42:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07ed2b38_7908d12e",
+      "revId": "90d92980efc698132ee9ac166c86a5832239ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbe04e74_896c427e",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-01-09T00:24:03Z",
       "side": 1,
       "message": "Same issue as 6.1; this doesn\u0027t exist.",
+      "revId": "90d92980efc698132ee9ac166c86a5832239ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35fe81c5_d2d10c4b",
+        "filename": "kernel/power/power.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1978967
+      },
+      "writtenOn": "2026-01-09T01:42:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbe04e74_896c427e",
       "revId": "90d92980efc698132ee9ac166c86a5832239ca6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
