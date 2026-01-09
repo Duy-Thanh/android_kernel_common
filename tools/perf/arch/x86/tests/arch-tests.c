@@ -3,6 +3,7 @@
 #include "tests/tests.h"
 #include "arch-tests.h"
 
+#ifdef HAVE_AUXTRACE_SUPPORT
 #ifdef HAVE_EXTRA_TESTS
 DEFINE_SUITE("x86 instruction decoder - new instructions", insn_x86);
 #endif
@@ -18,6 +19,7 @@ struct test_suite suite__intel_pt = {
 	.test_cases = intel_pt_tests,
 };
 
+#endif
 #if defined(__x86_64__)
 DEFINE_SUITE("x86 bp modify", bp_modify);
 #endif
@@ -37,10 +39,12 @@ struct test_suite *arch_tests[] = {
 #ifdef HAVE_DWARF_UNWIND_SUPPORT
 	&suite__dwarf_unwind,
 #endif
+#ifdef HAVE_AUXTRACE_SUPPORT
 #ifdef HAVE_EXTRA_TESTS
 	&suite__insn_x86,
 #endif
 	&suite__intel_pt,
+#endif
 #if defined(__x86_64__)
 	&suite__bp_modify,
 #endif

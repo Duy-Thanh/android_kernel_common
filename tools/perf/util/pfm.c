@@ -15,7 +15,6 @@
 #include "util/strbuf.h"
 #include "util/thread_map.h"
 
-#include <errno.h>
 #include <string.h>
 #include <linux/kernel.h>
 #include <perfmon/pfmlib_perf_event.h>
