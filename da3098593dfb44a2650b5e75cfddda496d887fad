@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173d6234_0125ad82",
+        "filename": "arch/arm64/include/asm/hyp_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-09T13:57:36Z",
+      "side": 1,
+      "message": "nit: It\u0027s common practice in the kernel to align the \"\\\\\"\u0027s",
+      "revId": "da3098593dfb44a2650b5e75cfddda496d887fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
