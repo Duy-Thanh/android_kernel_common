@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09474878_11f9826e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-09T09:17:56Z",
+      "side": 1,
+      "message": "KVM related changes prefix should be:\n\n`KVM: arm64:` we do not use any `pkvm:`. You can look at other patches from the our stack to get an idea.",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8827279_198322a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-09T09:17:56Z",
+      "side": 1,
+      "message": "no need for that space",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8648152a_0859ad40",
+        "filename": "arch/arm64/kernel/alternative.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-09T09:17:56Z",
+      "side": 1,
+      "message": "no space.",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58eb0d89_58fb2552",
+        "filename": "arch/arm64/kernel/alternative.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-09T09:17:56Z",
+      "side": 1,
+      "message": "nit: I wonder if `kvm_nvhe_sym(alt_cb_patch_nops)` would be more clear.",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
