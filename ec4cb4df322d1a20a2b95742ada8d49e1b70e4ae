@@ -34,6 +34,24 @@
       "parentUuid": "6cbb9a0b_d7f91219",
       "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "089310c8_56ec4e06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3983189
+      },
+      "writtenOn": "2026-01-09T06:33:14Z",
+      "side": 1,
+      "message": "Do i remove the 2nd one then?\n\n(cherry picked from commit 449bcd5d45eb4ce26740f11f8601082fe734bed2\n https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git master)",
+      "parentUuid": "296d22d5_3b7255e1",
+      "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
