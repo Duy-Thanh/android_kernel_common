@@ -4910,9 +4910,7 @@ S:	Maintained
 T:	git https://github.com/broadcom/stblinux.git
 F:	Documentation/devicetree/bindings/pci/brcm,stb-pcie.yaml
 F:	drivers/pci/controller/pcie-brcmstb.c
-F:	drivers/platform/raspberrypi/vchiq-*
 F:	drivers/staging/vc04_services
-F:	include/linux/raspberrypi/vchiq*
 N:	bcm2711
 N:	bcm2712
 N:	bcm283*
@@ -10729,9 +10727,7 @@ F:	drivers/platform/x86/gpd-pocket-fan.c
 GPIB DRIVERS
 M:	Dave Penkler <dpenkler@gmail.com>
 S:	Maintained
-F:	drivers/gpib/
-F:	include/uapi/linux/gpib.h
-F:	include/uapi/linux/gpib_ioctl.h
+F:	drivers/staging/gpib/
 
 GPIO ACPI SUPPORT
 M:	Mika Westerberg <westeri@kernel.org>
