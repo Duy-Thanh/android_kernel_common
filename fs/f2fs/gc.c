@@ -1877,9 +1877,9 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 		}
 
 		sum = page_address(sum_page);
-		if (type != GET_SUM_TYPE((&sum->footer))) {
+		if (type != GET_SUM_TYPE(sum_footer(sbi, sum))) {
 			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SIT and SSA",
-				 segno, type, GET_SUM_TYPE((&sum->footer)));
+				 segno, type, GET_SUM_TYPE(sum_footer(sbi, sum)));
 			f2fs_stop_checkpoint(sbi, false,
 				STOP_CP_REASON_CORRUPTED_SUMMARY);
 			goto skip;
@@ -1893,10 +1893,10 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 		 *                                  - lock_page(sum_page)
 		 */
 		if (type == SUM_TYPE_NODE)
-			submitted += gc_node_segment(sbi, sum->entries, segno,
+			submitted += gc_node_segment(sbi, sum_entries(sum), segno,
 								gc_type, &plug);
 		else
-			submitted += gc_data_segment(sbi, sum->entries, gc_list,
+			submitted += gc_data_segment(sbi, sum_entries(sum), gc_list,
 							segno, gc_type,
 							force_migrate, &plug);
 
