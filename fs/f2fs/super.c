@@ -4061,6 +4061,16 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
 			sbi->dentries_per_block - sbi->dentry_bitmap_size;
 	sbi->orphans_per_block = (sbi->blocksize - 4 * sizeof(__le32)) /
 			sizeof(__le32);
+	sbi->sum_blocksize = sbi->blocksize;
+	sbi->sums_per_block = 1;
+	sbi->entries_in_sum = sbi->sum_blocksize / 8;
+	sbi->sum_entry_size = SUMMARY_SIZE * sbi->entries_in_sum;
+	sbi->sum_journal_size = sbi->sum_blocksize - SUM_FOOTER_SIZE -
+			sbi->sum_entry_size;
+	sbi->nat_journal_entries = (sbi->sum_journal_size - sizeof(__le16)) /
+			sizeof(struct nat_journal_entry);
+	sbi->sit_journal_entries = (sbi->sum_journal_size - sizeof(__le16)) /
+			sizeof(struct sit_journal_entry);
 	sbi->log_blocks_per_seg = le32_to_cpu(raw_super->log_blocks_per_seg);
 	sbi->blocks_per_seg = BIT(sbi->log_blocks_per_seg);
 	sbi->segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
