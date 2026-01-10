@@ -142,6 +142,24 @@
       "parentUuid": "28cf2589_5e998f14",
       "revId": "058fd96984b10952e2b18680df17492a438d4b98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958b136b_b18eaca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-10T13:07:22Z",
+      "side": 1,
+      "message": "note, if you have a question for me, mark the commit as \"need attention\" from me, otherwise I do not see it...\n\nAnyway, this commit will be in the next round of upstream LTS releases, so I don\u0027t think it is needed here anymore, right?\n\nFor the stable kernel rules, please read the upstream kernel documentation.  Simple device ids additions are always accepted into stable kernels, has been that way for decades 😊",
+      "parentUuid": "0e37d120_ff32e711",
+      "revId": "058fd96984b10952e2b18680df17492a438d4b98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
