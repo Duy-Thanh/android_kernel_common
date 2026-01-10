@@ -512,7 +512,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
 		struct curseg_info *curseg = CURSEG_I(sbi, i);
 
 		if (curseg->segno == segno) {
-			sum = curseg->sum_blk->entries[blkoff];
+			sum = sum_entries(curseg->sum_blk)[blkoff];
 			goto got_it;
 		}
 	}
@@ -521,7 +521,7 @@ static int check_index_in_prev_nodes(struct f2fs_sb_info *sbi,
 	if (IS_ERR(sum_page))
 		return PTR_ERR(sum_page);
 	sum_node = (struct f2fs_summary_block *)page_address(sum_page);
-	sum = sum_node->entries[blkoff];
+	sum = sum_entries(sum_node)[blkoff];
 	f2fs_put_page(sum_page, 1);
 got_it:
 	/* Use the locked dnode page and inode */
