@@ -22,7 +22,11 @@ DECLARE_HOOK(android_vh_fuse_request_send_ext,
 DECLARE_HOOK(android_vh_fuse_request_end,
 	TP_PROTO(struct task_struct *self),
 	TP_ARGS(self));
+<<<<<<< HEAD
 DECLARE_HOOK(android_vh_fuse_request_end_ext,
+=======
+DECLARE_HOOK(android_vh_fuse_request_fetch,
+>>>>>>> e24ccf897444 (ANDROID: vendor_hooks: Add vendor hooks for fuse)
 	TP_PROTO(struct fuse_req *req, struct task_struct *self),
 	TP_ARGS(req, self));
 
