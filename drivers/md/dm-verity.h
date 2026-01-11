@@ -108,7 +108,6 @@ struct dm_verity_io {
 #endif
 
 	struct work_struct work;
-	struct work_struct bh_work;
 
 	u8 tmp_digest[HASH_MAX_DIGESTSIZE];
 
