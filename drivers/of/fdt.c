@@ -505,11 +505,17 @@ void __init early_init_fdt_scan_reserved_mem(void)
 	if (!initial_boot_params)
 		return;
 
+<<<<<<< HEAD   (75490eabe4e5c3476cccc05befe11ad2fc9fe579 ANDROID: GKI: update abi definition due to upstream changes)
 	memblock_memsize_detect_hole();
 	memblock_memsize_disable_tracking();
 
 	fdt_scan_reserved_mem();
+||||||| BASE   (f55201fb3becff6a903fd29f4d1147cc7e91eb0c block: fix race between wbt_enable_default and IO submission)
+	fdt_scan_reserved_mem();
+=======
+>>>>>>> BRANCH (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
 	fdt_reserve_elfcorehdr();
+	fdt_scan_reserved_mem();
 
 	/* Process header /memreserve/ fields */
 	for (n = 0; ; n++) {
