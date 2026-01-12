@@ -49,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee78e9e0_3044d620",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T22:34:09Z",
+      "side": 1,
+      "message": "iiuc, this check should be done first as you are trying to avoid the pr_err() right?",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ec066ba_3722dadb",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T22:34:09Z",
+      "side": 1,
+      "message": "I believe this is meant to be 644, otherwise we don\u0027t need the `binder_loaded` logic in param set right? I\u0027ll update the value.",
+      "range": {
+        "startLine": 117,
+        "startChar": 47,
+        "endLine": 117,
+        "endChar": 51
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16f8424b_ae5e3352",
         "filename": "drivers/android/binder_pick.c",
         "patchSetId": 6
