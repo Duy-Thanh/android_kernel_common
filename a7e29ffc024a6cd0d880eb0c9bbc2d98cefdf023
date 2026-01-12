@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2dee808c_83164c30",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T23:19:01Z",
+      "side": 1,
+      "message": "I\u0027ll add default\u003dn as the removal of `!ANDROID_BINDER_IPC` would enable build-in by default",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4b0216d_e729900f",
         "filename": "drivers/android/binder/rust_binder_main.rs",
         "patchSetId": 6
