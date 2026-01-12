@@ -2918,7 +2918,13 @@ void xfrm_state_fini(struct net *net)
 	unsigned int sz;
 
 	flush_work(&net->xfrm.state_hash_work);
+<<<<<<< HEAD   (4873dc9da1ffb352c34a6460b66d07ef8f30565c Merge 763e5c351206 ("xfrm: also call xfrm_state_delete_tunne)
 	xfrm_state_flush(net, 0, false, true);
+||||||| BASE   (763e5c351206c1e4d910db4a1159053f6263689c xfrm: also call xfrm_state_delete_tunnel at destroy time for)
+	xfrm_state_flush(net, IPSEC_PROTO_ANY, false);
+=======
+	xfrm_state_flush(net, 0, false);
+>>>>>>> BRANCH (25f34fd5214458829d491b97ff26a8d2570774fc xfrm: flush all states in xfrm_state_fini)
 	flush_work(&xfrm_state_gc_work);
 
 	WARN_ON(!list_empty(&net->xfrm.state_all));

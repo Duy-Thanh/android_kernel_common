@@ -334,7 +334,13 @@ static void __net_exit xfrm6_tunnel_net_exit(struct net *net)
 	struct xfrm6_tunnel_net *xfrm6_tn = xfrm6_tunnel_pernet(net);
 	unsigned int i;
 
+<<<<<<< HEAD   (4873dc9da1ffb352c34a6460b66d07ef8f30565c Merge 763e5c351206 ("xfrm: also call xfrm_state_delete_tunne)
 	xfrm_state_flush(net, 0, false, true);
+||||||| BASE   (763e5c351206c1e4d910db4a1159053f6263689c xfrm: also call xfrm_state_delete_tunnel at destroy time for)
+	xfrm_state_flush(net, IPSEC_PROTO_ANY, false);
+=======
+	xfrm_state_flush(net, 0, false);
+>>>>>>> BRANCH (25f34fd5214458829d491b97ff26a8d2570774fc xfrm: flush all states in xfrm_state_fini)
 	xfrm_flush_gc();
 
 	for (i = 0; i < XFRM6_TUNNEL_SPI_BYADDR_HSIZE; i++)
