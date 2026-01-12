@@ -46,6 +46,30 @@
       },
       "revId": "d6ba5106ad6213f81afd3ee2146f080276029861",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "447e6a31_c28ce662",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-01-12T12:08:42Z",
+      "side": 1,
+      "message": "Discussed internally with the pKVM  team: we\u0027ll keep this as-is, using a pKVM FID.",
+      "parentUuid": "ef2b0bd7_4460d5bf",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "d6ba5106ad6213f81afd3ee2146f080276029861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
