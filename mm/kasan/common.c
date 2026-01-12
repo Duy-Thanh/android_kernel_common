@@ -28,7 +28,12 @@
 #include <linux/string.h>
 #include <linux/types.h>
 #include <linux/bug.h>
+<<<<<<< HEAD   (9f039e3e7afa77be1331e06af8b537e0c6bd1508 Merge 365cd49669a6 ("mm/damon/tests/core-kunit: handle alloc)
 #include <trace/hooks/kasan.h>
+||||||| BASE   (365cd49669a681049dcf143d5dc1e2c26a610060 mm/damon/tests/core-kunit: handle alloc failure on damon_tes)
+=======
+#include <linux/vmalloc.h>
+>>>>>>> BRANCH (c8d4f4c2528bf623fb504c6c0217490e58160853 btrfs: don't rewrite ret from inode_permission)
 
 #include "kasan.h"
 #include "../slab.h"
@@ -563,3 +568,34 @@ bool __kasan_check_byte(const void *address, unsigned long ip)
 	}
 	return true;
 }
+
+#ifdef CONFIG_KASAN_VMALLOC
+void __kasan_unpoison_vmap_areas(struct vm_struct **vms, int nr_vms,
+				 kasan_vmalloc_flags_t flags)
+{
+	unsigned long size;
+	void *addr;
+	int area;
+	u8 tag;
+
+	/*
+	 * If KASAN_VMALLOC_KEEP_TAG was set at this point, all vms[] pointers
+	 * would be unpoisoned with the KASAN_TAG_KERNEL which would disable
+	 * KASAN checks down the line.
+	 */
+	if (WARN_ON_ONCE(flags & KASAN_VMALLOC_KEEP_TAG))
+		return;
+
+	size = vms[0]->size;
+	addr = vms[0]->addr;
+	vms[0]->addr = __kasan_unpoison_vmalloc(addr, size, flags);
+	tag = get_tag(vms[0]->addr);
+
+	for (area = 1 ; area < nr_vms ; area++) {
+		size = vms[area]->size;
+		addr = set_tag(vms[area]->addr, tag);
+		vms[area]->addr =
+			__kasan_unpoison_vmalloc(addr, size, flags | KASAN_VMALLOC_KEEP_TAG);
+	}
+}
+#endif
