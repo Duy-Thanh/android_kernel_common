@@ -295,25 +295,14 @@ SYM_INNER_LABEL(init_el2, SYM_L_LOCAL)
 	msr	sctlr_el2, x0
 	isb
 0:
+<<<<<<< HEAD   (10765307ff75fb7ab3bf8820c11324c792289188 Merge debfbc047196 ("sched/rt: Fix race in push_rt_task") in)
 	mov_q	x0, HCR_HOST_NVHE_FLAGS | HCR_ATA
+||||||| BASE   (debfbc047196df1f6bfd52f2d028c21dce67f0de sched/rt: Fix race in push_rt_task)
+	mov_q	x0, HCR_HOST_NVHE_FLAGS
+=======
+>>>>>>> BRANCH (cdd6fb56e93f90cd072a61603cb07e5280ab1659 KVM: arm64: Initialize HCR_EL2.E2H early)
 
-	/*
-	 * Compliant CPUs advertise their VHE-onlyness with
-	 * ID_AA64MMFR4_EL1.E2H0 < 0. HCR_EL2.E2H can be
-	 * RES1 in that case. Publish the E2H bit early so that
-	 * it can be picked up by the init_el2_state macro.
-	 *
-	 * Fruity CPUs seem to have HCR_EL2.E2H set to RAO/WI, but
-	 * don't advertise it (they predate this relaxation).
-	 */
-	mrs_s	x1, SYS_ID_AA64MMFR4_EL1
-	tbz	x1, #(ID_AA64MMFR4_EL1_E2H0_SHIFT + ID_AA64MMFR4_EL1_E2H0_WIDTH - 1), 1f
-
-	orr	x0, x0, #HCR_E2H
-1:
-	msr	hcr_el2, x0
-	isb
-
+	init_el2_hcr	HCR_HOST_NVHE_FLAGS
 	init_el2_state
 
 	/* Hypervisor stub */
