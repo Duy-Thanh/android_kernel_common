@@ -118,6 +118,30 @@
       },
       "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1da98e0_719eb8b2",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-12T15:43:17Z",
+      "side": 1,
+      "message": "I see vm_ioctl_caps[] only allows KVM_SET_DEVICE_ATTR, KVM_GET_DEVICE_ATTR and KVM_HAS_DEVICE_ATTR. \n\nAlso, the only supported attr is KVM_ARM_VM_SMCCC_FILTER... so it seems Pierre\u0027s original change is correct and doesn\u0027t create any regressions or did I miss something?\n\nAlthough I can understand we want to future-proof it and only give access ultimately to KVM_ARM_VM_SMCCC_FILTER?",
+      "parentUuid": "a2f8a7a9_87996e5d",
+      "range": {
+        "startLine": 1959,
+        "startChar": 0,
+        "endLine": 1960,
+        "endChar": 17
+      },
+      "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
