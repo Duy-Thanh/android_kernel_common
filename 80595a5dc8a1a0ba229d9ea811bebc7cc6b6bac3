@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d232033d_54b43593",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-01-12T11:26:43Z",
+      "side": 1,
+      "message": "(Posting on the most related CL, probably worth its own patch)\n\nNote that this currently prevents the VMM from registering for handling the HVC i.e.\n```\nioctl(KVM_SET_DEVICE_ATTR, kvm_device_attr {\n    KVM_ARM_VM_SMCCC_CTRL,\n    KVM_ARM_VM_SMCCC_FILTER,\n    kvm_smccc_filter {\n        base,\n        nr_functions,\n        KVM_SMCCC_FILTER_FWD_TO_USER,\n    }\n})\n```\nMy current one-line hack to work around it:\n```\ndiff --git a/arch/arm64/include/asm/kvm_pkvm.h b/arch/arm64/include/asm/kvm_pkvm.h\nindex 488000c486c6..8f62e6be400b 100644\n--- a/arch/arm64/include/asm/kvm_pkvm.h\n+++ b/arch/arm64/include/asm/kvm_pkvm.h\n@@ -51,6 +51,7 @@ static inline bool kvm_pkvm_ext_allowed(struct kvm *kvm, long ext)\n        case KVM_CAP_ARM_PTRAUTH_ADDRESS:\n        case KVM_CAP_ARM_PTRAUTH_GENERIC:\n        case KVM_CAP_ARM_PROTECTED_VM:\n+       case KVM_CAP_DEVICE_CTRL:\n                return true;\n        case KVM_CAP_ARM_MTE:\n                return false;\n```",
+      "range": {
+        "startLine": 1959,
+        "startChar": 0,
+        "endLine": 1960,
+        "endChar": 17
+      },
+      "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
