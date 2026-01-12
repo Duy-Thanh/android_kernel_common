@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b0216d_e729900f",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T19:17:17Z",
+      "side": 1,
+      "message": "now, this is always true right? I\u0027ll try to drop the arg.",
+      "range": {
+        "startLine": 306,
+        "startChar": 86,
+        "endLine": 306,
+        "endChar": 90
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "568992da_e5b7c062",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T19:17:17Z",
+      "side": 1,
+      "message": "probably this can be consumed into the API above now too.",
+      "range": {
+        "startLine": 311,
+        "startChar": 26,
+        "endLine": 311,
+        "endChar": 52
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f8424b_ae5e3352",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-12T19:17:17Z",
+      "side": 1,
+      "message": "Maybe I\u0027ll add the corresponding headers here to workaround the checkpatch issues.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
