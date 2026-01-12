@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba89505_6cceac93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-01-12T15:06:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09474878_11f9826e",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8827279_198322a7",
@@ -64,6 +82,24 @@
         "id": 1951687
       },
       "writtenOn": "2026-01-09T13:57:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8827279_198322a7",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740ec1a8_a9a987ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-01-12T15:06:58Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "d8827279_198322a7",
@@ -106,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abd8cb1_7e7b4ed8",
+        "filename": "arch/arm64/kernel/alternative.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-01-12T15:06:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8648152a_0859ad40",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58eb0d89_58fb2552",
@@ -136,6 +190,24 @@
       "writtenOn": "2026-01-09T13:57:51Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "58eb0d89_58fb2552",
+      "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11abd1ee_61a2b97f",
+        "filename": "arch/arm64/kernel/alternative.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-01-12T15:06:58Z",
+      "side": 1,
+      "message": "Acknowledged",
       "parentUuid": "58eb0d89_58fb2552",
       "revId": "96b1ab5a5ca9eb917ab403b0e3f705db4708b89f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"

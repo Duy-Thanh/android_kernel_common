@@ -16,6 +16,24 @@
       "message": "nit: It\u0027s common practice in the kernel to align the \"\\\\\"\u0027s",
       "revId": "da3098593dfb44a2650b5e75cfddda496d887fad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be13dfd6_82e2aec8",
+        "filename": "arch/arm64/include/asm/hyp_image.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-01-12T15:06:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "173d6234_0125ad82",
+      "revId": "da3098593dfb44a2650b5e75cfddda496d887fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
