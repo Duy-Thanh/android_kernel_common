@@ -4991,7 +4991,16 @@ reset_checkpoint:
 	if (err)
 		goto sync_free_meta;
 
+<<<<<<< HEAD   (03abb979e72e45a6415bb081ce6b55a23b5ed31b Merge fdca9bfd6206 ("serial: xilinx_uartps: fix rs485 delay_)
 	if (test_opt(sbi, DISABLE_CHECKPOINT))
+||||||| BASE   (fdca9bfd6206ccc6067d68c1fa38aa09a1ee1305 serial: xilinx_uartps: fix rs485 delay_rts_after_send)
+	/* f2fs_recover_fsync_data() cleared this already */
+	clear_sbi_flag(sbi, SBI_POR_DOING);
+
+	if (test_opt(sbi, DISABLE_CHECKPOINT)) {
+=======
+	if (test_opt(sbi, DISABLE_CHECKPOINT)) {
+>>>>>>> BRANCH (cccd92ec7e34487593afee7f7b0dfa98108b0827 f2fs: clear SBI_POR_DOING before initing inmem curseg)
 		err = f2fs_disable_checkpoint(sbi);
 	else if (is_set_ckpt_flags(sbi, CP_DISABLED_FLAG))
 		err = f2fs_enable_checkpoint(sbi);
