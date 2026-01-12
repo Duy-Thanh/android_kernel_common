@@ -94,6 +94,30 @@
       },
       "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f8a7a9_87996e5d",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-01-12T13:11:01Z",
+      "side": 1,
+      "message": "In that case, we should add checks for the IOCTLs we do not support to make sure they\u0027re not called for protected VMs.",
+      "parentUuid": "ad0483d0_7c02025b",
+      "range": {
+        "startLine": 1959,
+        "startChar": 0,
+        "endLine": 1960,
+        "endChar": 17
+      },
+      "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
