@@ -16,6 +16,24 @@
       "message": "create a patch on top of this one to update the x86_64 ABI. Not sure why aarch64 ABI check failed...probably also needs a rebase.",
       "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fef38152_074fd550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2026-01-12T19:57:28Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/refs/heads/android17-6.18/gki/x86_64/ GKI symbols are not supported for x86 yet. Will that be a reason for ABI check failing?",
+      "parentUuid": "165060f4_1d960e0c",
+      "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
