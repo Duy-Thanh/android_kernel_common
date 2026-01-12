@@ -70,6 +70,30 @@
       },
       "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad0483d0_7c02025b",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-01-12T12:25:17Z",
+      "side": 1,
+      "message": "Userspace doesn\u0027t need to manually create SMCCC filter \"device\"; all we require is `KVM_SET_DEVICE_ATTR` on `KVM_ARM_VM_SMCCC_CTRL`+`KVM_ARM_VM_SMCCC_FILTER` (although the corresponding discovery `ioctl` would also make sense) so `KVM_CAP_DEVICE_CTRL` seems way too permissive to me but the permission check as currently implemented doesn\u0027t seem to support expressing that?",
+      "parentUuid": "5ce999d0_4f406b4a",
+      "range": {
+        "startLine": 1959,
+        "startChar": 0,
+        "endLine": 1960,
+        "endChar": 17
+      },
+      "revId": "80595a5dc8a1a0ba229d9ea811bebc7cc6b6bac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
