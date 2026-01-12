@@ -334,7 +334,13 @@ static void __net_exit xfrm6_tunnel_net_exit(struct net *net)
 	struct xfrm6_tunnel_net *xfrm6_tn = xfrm6_tunnel_pernet(net);
 	unsigned int i;
 
+<<<<<<< HEAD   (7a008890555b8c751c3286d2512801b48812243b Revert "Revert "xfrm: destroy xfrm_state synchronously on ne)
 	xfrm_state_flush(net, 0, false, true);
+||||||| BASE   (47626e65d1220bac2b06720ecbc5eddfcd574f01 Revert "xfrm: destroy xfrm_state synchronously on net exit p)
+	xfrm_state_flush(net, IPSEC_PROTO_ANY, false);
+=======
+	xfrm_state_flush(net, 0, false);
+>>>>>>> BRANCH (4b727b9bc2911a524caf3b7e553ef96595ece157 xfrm: flush all states in xfrm_state_fini)
 	xfrm_flush_gc();
 
 	for (i = 0; i < XFRM6_TUNNEL_SPI_BYADDR_HSIZE; i++)

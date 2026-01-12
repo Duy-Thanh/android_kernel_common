@@ -498,7 +498,14 @@ void xfrm_state_free(struct xfrm_state *x)
 }
 EXPORT_SYMBOL(xfrm_state_free);
 
+<<<<<<< HEAD   (7a008890555b8c751c3286d2512801b48812243b Revert "Revert "xfrm: destroy xfrm_state synchronously on ne)
 static void ___xfrm_state_destroy(struct xfrm_state *x)
+||||||| BASE   (47626e65d1220bac2b06720ecbc5eddfcd574f01 Revert "xfrm: destroy xfrm_state synchronously on net exit p)
+static void xfrm_state_gc_destroy(struct xfrm_state *x)
+=======
+static void xfrm_state_delete_tunnel(struct xfrm_state *x);
+static void xfrm_state_gc_destroy(struct xfrm_state *x)
+>>>>>>> BRANCH (4b727b9bc2911a524caf3b7e553ef96595ece157 xfrm: flush all states in xfrm_state_fini)
 {
 	hrtimer_cancel(&x->mtimer);
 	del_timer_sync(&x->rtimer);
@@ -512,6 +519,7 @@ static void ___xfrm_state_destroy(struct xfrm_state *x)
 	kfree(x->preplay_esn);
 	if (x->type_offload)
 		xfrm_put_type_offload(x->type_offload);
+	xfrm_state_delete_tunnel(x);
 	if (x->type) {
 		x->type->destructor(x);
 		xfrm_put_type(x->type);
@@ -676,7 +684,6 @@ void __xfrm_state_destroy(struct xfrm_state *x, bool sync)
 }
 EXPORT_SYMBOL(__xfrm_state_destroy);
 
-static void xfrm_state_delete_tunnel(struct xfrm_state *x);
 int __xfrm_state_delete(struct xfrm_state *x)
 {
 	struct net *net = xs_net(x);
@@ -2757,7 +2764,13 @@ void xfrm_state_fini(struct net *net)
 	unsigned int sz;
 
 	flush_work(&net->xfrm.state_hash_work);
+<<<<<<< HEAD   (7a008890555b8c751c3286d2512801b48812243b Revert "Revert "xfrm: destroy xfrm_state synchronously on ne)
 	xfrm_state_flush(net, 0, false, true);
+||||||| BASE   (47626e65d1220bac2b06720ecbc5eddfcd574f01 Revert "xfrm: destroy xfrm_state synchronously on net exit p)
+	xfrm_state_flush(net, IPSEC_PROTO_ANY, false);
+=======
+	xfrm_state_flush(net, 0, false);
+>>>>>>> BRANCH (4b727b9bc2911a524caf3b7e553ef96595ece157 xfrm: flush all states in xfrm_state_fini)
 	flush_work(&xfrm_state_gc_work);
 
 	WARN_ON(!list_empty(&net->xfrm.state_all));
