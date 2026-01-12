@@ -212,6 +212,24 @@
       "parentUuid": "26ba344d_4dd979c2",
       "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c76aafd0_6d3ab773",
+        "filename": "include/media/rc-core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-12T06:30:54Z",
+      "side": 1,
+      "message": "I\u0027m very sorry, but this is my first time submitting a patch to the linux community. I have already packaged the modifications into a diff file according to the instructions and sent it to the maintainer of this file. The scripts/checkpatch.pl check shows no errors or warnings. The content is as follows：\nreceiver：sean@mess.org,mchehab@kernel.org\ncarbon cop：linux-media@vger.kernel.org,linux-kernel@vger.kernel.org\nWhen certain infrared remote controls send codes, the kernel side\ndoes not receive them, which is due to a timeout in transmission.\nModifying the maximum timeout time in this area can solve this issue.\n\nSigned-off-by: huanglipeng \u003chuanglipeng@vivo.com\u003e\n---\n include/media/rc-core.h | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n\ndiff --git a/include/media/rc-core.h b/include/media/rc-core.h\nindex 35c7a0546f02..9214f3fc174d 100644\n--- a/include/media/rc-core.h\n+++ b/include/media/rc-core.h\n@@ -303,7 +303,7 @@ struct ir_raw_event {\n \n #define US_TO_NS(usec)          ((usec) * 1000)\n #define MS_TO_US(msec)          ((msec) * 1000)\n-#define IR_MAX_DURATION                MS_TO_US(500)\n+#define IR_MAX_DURATION                MS_TO_US(1000)\n #define IR_DEFAULT_TIMEOUT      MS_TO_US(125)\n #define IR_MAX_TIMEOUT          LIRC_VALUE_MASK\n \n--\n2.34.1",
+      "parentUuid": "1ad68610_54d0517c",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
