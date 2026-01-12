@@ -296,6 +296,8 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	struct mm_struct *mm = current->mm;
 	int pkey = 0;
 
+	pgcompat_en_err(file, "addr = %08lx", addr);
+
 	*populate = 0;
 
 	if (!len)
@@ -381,7 +383,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 		if (!file_mmap_ok(file, inode, pgoff, len))
 			return -EOVERFLOW;
 
-		file_backed_len = __filemap_len(inode, pgoff, len, flags);
+		file_backed_len = __filemap_len(inode, pgoff, len, flags, file);
 
 		flags_mask = LEGACY_MAP_MASK;
 		if (file->f_op->fop_flags & FOP_MMAP_SYNC)
@@ -511,7 +513,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	     (flags & (MAP_POPULATE | MAP_NONBLOCK)) == MAP_POPULATE))
 		*populate = len;
 
-	__filemap_fixup(addr, prot, file_backed_len, len);
+	__filemap_fixup(addr, prot, file_backed_len, len, file);
 
 	return addr;
 }

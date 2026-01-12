@@ -10,6 +10,7 @@
 #include <linux/init.h>
 #include <linux/kstrtox.h>
 #include <linux/mm.h>
+#include <linux/mm_inline.h>
 #include <linux/pagemap.h>
 #include <linux/page_size_compat.h>
 #include <linux/swap.h>
@@ -67,12 +68,14 @@ core_initcall(init_mmap_rnd_bits);
  * underlying file.
  */
 unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff, unsigned long len,
-			     unsigned long flags)
+			     unsigned long flags, struct file *file)
 {
 	unsigned long file_size;
 	unsigned long filemap_len;
 	pgoff_t max_pgcount;
 	pgoff_t last_pgoff;
+
+	pgcompat_en_err(file, "Start: pgoff = %08lx, len = %08lx", pgoff, len);
 
 	if (flags & __MAP_NO_COMPAT)
 		return len;
@@ -89,9 +92,16 @@ unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff, unsigned 
 	if (unlikely(last_pgoff >= max_pgcount)) {
 		filemap_len = (max_pgcount - pgoff)  << PAGE_SHIFT;
 		/* Careful of underflows in special files */
-		if (filemap_len > 0 && filemap_len < len)
+		if (filemap_len > 0 && filemap_len < len) {
+			pgcompat_en_err(file,
+					"Start: return filemap_len: pgoff = %08lx, len = %08lx, filemap_len = %08lx",
+					pgoff, len, filemap_len);
 			return filemap_len;
+		}
 	}
+
+	pgcompat_en_err(file, "Start: return len: pgoff = %08lx, len = %08lx, filemap_len = %08lx",
+			pgoff, len, filemap_len);
 
 	return len;
 }
@@ -183,7 +193,7 @@ static inline bool is_filemap_fault(const struct vm_operations_struct *vm_ops)
  *    0     4     8     12   16    20    24    28    32    36    40    44    48
  */
 void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file_backed_len,
-		      unsigned long len)
+		      unsigned long len, struct file *file)
 {
 	unsigned long anon_addr = addr + file_backed_len;
 	unsigned long __offset = __offset_in_page(anon_addr);
@@ -192,6 +202,11 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file
 	unsigned long populate = 0;
 	struct vm_area_struct *vma;
 	const struct vm_operations_struct *vm_ops;
+
+	pgcompat_en_err(file, "Start: addr = %08lx, len = %08lx, file_backed_len = %08lx",
+			addr, len, file_backed_len);
+
+	pgcompat_en_err(file, "Start: addr = %08lx, anon_len = %08lx", addr, anon_len);
 
 	if (!anon_len)
 		return;
@@ -210,9 +225,18 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file
 	 */
 	BUG_ON(!vma);
 
+	pgcompat_en_err(file, "Start: addr = %08lx, vma_ops = %pK", addr, vm_ops);
+
 	vm_ops = vma->vm_ops;
 	if (!vm_ops)
 		return;
+
+	pgcompat_en_err(file,
+			"Start: addr = %08lx, is_filemap_fault = %s, is_f2fs_filemap_fault = %s, is_shmem_fault = %s",
+			addr,
+			is_filemap_fault(vm_ops) ? "true" : "false",
+			is_f2fs_filemap_fault(vm_ops) ? "true" : "false",
+			is_shmem_fault(vm_ops) ? "true" : "false");
 
 	/*
 	 * Insert fixup vmas for file backed and shmem backed VMAs.
@@ -235,6 +259,18 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file
 	anon_addr = do_mmap(NULL, anon_addr, anon_len, prot,
 					MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED|__MAP_NO_COMPAT,
 					0, 0, &populate, NULL);
+
+	if (!IS_ERR_VALUE(anon_addr)) {
+		struct anon_vma_name *anon_name = anon_vma_name_alloc("filemap_fixup");
+
+		if (!anon_name)
+			return;
+
+		/* Label the fixup VMA */
+		madvise_set_anon_name(mm, anon_addr, anon_len, anon_name);
+
+		pgcompat_en_err(file, "Start: addr = %08lx: Labelled anon fixup VMA", addr);
+	}
 }
 
 /*

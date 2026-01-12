@@ -30,6 +30,19 @@
 #define pgcompat_err(fmt, ...) \
 	pr_err("pgcompat [%i (%s)]: " fmt, task_pid_nr(current), current->comm, ## __VA_ARGS__)
 
+#define pgcompat_en_err(file, fmt, ...)							\
+do {											\
+	char __buf[256] = {0};								\
+	if (task_tgid_nr(current) != 1 && file && file->f_path.dentry) {		\
+		char *__filename = d_path(&(file)->f_path, __buf, sizeof(__buf));	\
+		if (!IS_ERR(__filename) &&						\
+		    strstr(__filename, "libtest_extract_native_libs.so")) {		\
+			pgcompat_err("%s: %s:%d: " fmt,					\
+				     __func__, __FILE__, __LINE__, ##__VA_ARGS__);	\
+		}									\
+	}										\
+} while (0)
+
 #ifdef CONFIG_SHMEM
 extern vm_fault_t shmem_fault(struct vm_fault *vmf);
 #endif	/* CONFIG_SHMEM */
@@ -109,26 +122,28 @@ static __always_inline unsigned long calc_vm_flag_bits(struct file *file, unsign
 }
 
 extern unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff,
-				    unsigned long len, unsigned long flags);
+				    unsigned long len, unsigned long flags, struct file *file);
 
 extern void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file_backed_len,
-			     unsigned long len);
+			     unsigned long len, struct file *file);
 
 static __always_inline unsigned long __filemap_len(struct inode *inode, unsigned long pgoff,
-						   unsigned long len, unsigned long flags)
+						   unsigned long len, unsigned long flags,
+						   struct file *file)
 {
 	if (static_branch_unlikely(&page_shift_compat_enabled))
-		return ___filemap_len(inode, pgoff, len, flags);
+		return ___filemap_len(inode, pgoff, len, flags, file);
 	else
 		return len;
 }
 
 static __always_inline void __filemap_fixup(unsigned long addr, unsigned long prot,
-					    unsigned long file_backed_len, unsigned long len)
+					    unsigned long file_backed_len, unsigned long len,
+					    struct file *file)
 {
 
 	if (static_branch_unlikely(&page_shift_compat_enabled))
-		___filemap_fixup(addr, prot, file_backed_len, len);
+		___filemap_fixup(addr, prot, file_backed_len, len, file);
 }
 
 extern void __fold_filemap_fixup_entry(struct vma_iterator *iter, unsigned long *end);
