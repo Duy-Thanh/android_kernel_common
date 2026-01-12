@@ -2359,6 +2359,7 @@
   pci_ecam_map_bus
   pci_enable_device
   pci_enable_pcie_error_reporting
+  pci_enable_ptm
   pci_find_ext_capability
   pci_find_vsec_capability
   pci_flags
