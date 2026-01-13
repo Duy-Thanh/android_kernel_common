@@ -16,6 +16,24 @@
       "message": "Please expand the commit message to better clarify _why_ this hook is needed.\n\n1) What is the issue observed in the current kernel that motivates this hook?\n\n2) Quantify the benefit you are able to gain by having the hook\n\n3) What might be needed upstream to make this hook unnecessary.\n\nSensitive details can be shared via the bug, but the commit should give a reasonable sense of why the change is necessary.",
       "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0a25ac4_f25644c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2026-01-13T01:20:53Z",
+      "side": 1,
+      "message": "I have supplemented the description in the commit message to explan why the hook is needed.",
+      "parentUuid": "526277d6_7b5852f9",
+      "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
