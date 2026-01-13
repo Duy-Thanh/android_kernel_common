@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44779ca0_ef8b018a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-13T16:26:27Z",
+      "side": 1,
+      "message": "Yeah I was trying Pixel, ok.",
+      "parentUuid": "758b0d04_03c41bf0",
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dee808c_83164c30",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "If you don\u0027t specify a default, then the default default is `n`.",
       "parentUuid": "2dee808c_83164c30",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb4938b_ca9906e0",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-13T16:26:27Z",
+      "side": 1,
+      "message": "I thought so too, but I\u0027m getting `\u003d`y with just this patch and I\u0027m not sure why. I\u0027ll have a look.",
+      "parentUuid": "06ac0bac_f123eb0a",
       "range": {
         "startLine": 18,
         "startChar": 1,
@@ -178,6 +220,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aeb6227_e45a1237",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-13T16:26:27Z",
+      "side": 1,
+      "message": "Isn\u0027t the modprobe done regardless of the binder.impl\u003d\u003c\u003e value? I thought the idea was to be silent if the rust module isn\u0027t even selected.",
+      "parentUuid": "3ddcfd63_83f1b5d2",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ec066ba_3722dadb",
         "filename": "drivers/android/binder_pick.c",
         "patchSetId": 6
@@ -260,6 +326,30 @@
       "side": 1,
       "message": "You would need an include with `../` to reach the header file. It\u0027s not under `include/`.",
       "parentUuid": "16f8424b_ae5e3352",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b983f7d_33d2f2f1",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-13T16:26:27Z",
+      "side": 1,
+      "message": "Right, that\u0027s what I have locally.",
+      "parentUuid": "6c3bcfdf_d54daaaa",
       "range": {
         "startLine": 120,
         "startChar": 0,
