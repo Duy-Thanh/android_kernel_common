@@ -5,6 +5,33 @@
 
 static struct callback_head work_exited; /* all we need is ->next == NULL */
 
+<<<<<<< HEAD   (81b6c84dc3451237371dc7c142b91d97640750b9 Merge cf5cd55287a1 ("iio: imu: st_lsm6dsx: Fix measurement u)
+||||||| BASE   (cf5cd55287a121503cfa09d62756db3607de988a iio: imu: st_lsm6dsx: Fix measurement unit for odr struct me)
+#ifdef CONFIG_IRQ_WORK
+static void task_work_set_notify_irq(struct irq_work *entry)
+{
+	test_and_set_tsk_thread_flag(current, TIF_NOTIFY_RESUME);
+}
+static DEFINE_PER_CPU(struct irq_work, irq_work_NMI_resume) =
+	IRQ_WORK_INIT_HARD(task_work_set_notify_irq);
+#endif
+
+=======
+#ifdef CONFIG_IRQ_WORK
+static void task_work_set_notify_irq(struct irq_work *entry)
+{
+	/*
+	 * no-op IPI
+	 *
+	 * TWA_NMI_CURRENT will already have set the TIF flag, all
+	 * this interrupt does it tickle the return-to-user path.
+	 */
+}
+static DEFINE_PER_CPU(struct irq_work, irq_work_NMI_resume) =
+	IRQ_WORK_INIT_HARD(task_work_set_notify_irq);
+#endif
+
+>>>>>>> BRANCH (289d9a2a98ba60db9ff877403a6dfa1287cd4077 coresight: etm4x: Extract the trace unit controlling)
 /**
  * task_work_add - ask the @task to execute @work->func()
  * @task: the task which should run the callback
@@ -66,6 +93,21 @@ int task_work_add(struct task_struct *task, struct callback_head *work,
 	case TWA_SIGNAL_NO_IPI:
 		__set_notify_signal(task);
 		break;
+<<<<<<< HEAD   (81b6c84dc3451237371dc7c142b91d97640750b9 Merge cf5cd55287a1 ("iio: imu: st_lsm6dsx: Fix measurement u)
+||||||| BASE   (cf5cd55287a121503cfa09d62756db3607de988a iio: imu: st_lsm6dsx: Fix measurement unit for odr struct me)
+#ifdef CONFIG_IRQ_WORK
+	case TWA_NMI_CURRENT:
+		irq_work_queue(this_cpu_ptr(&irq_work_NMI_resume));
+		break;
+#endif
+=======
+#ifdef CONFIG_IRQ_WORK
+	case TWA_NMI_CURRENT:
+		set_tsk_thread_flag(current, TIF_NOTIFY_RESUME);
+		irq_work_queue(this_cpu_ptr(&irq_work_NMI_resume));
+		break;
+#endif
+>>>>>>> BRANCH (289d9a2a98ba60db9ff877403a6dfa1287cd4077 coresight: etm4x: Extract the trace unit controlling)
 	default:
 		WARN_ON_ONCE(1);
 		break;
