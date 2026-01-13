@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "758b0d04_03c41bf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-13T08:06:18Z",
+      "side": 1,
+      "message": "Which device is that? You need to make sure that `rust_binder.ko` is modprobed, which doesn\u0027t happen in Pixel right now. Try it on cuttlefish.",
+      "parentUuid": "49d8f032_507c7d9b",
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dee808c_83164c30",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2026-01-12T23:19:01Z",
       "side": 1,
       "message": "I\u0027ll add default\u003dn as the removal of `!ANDROID_BINDER_IPC` would enable build-in by default",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ac0bac_f123eb0a",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-13T08:06:18Z",
+      "side": 1,
+      "message": "If you don\u0027t specify a default, then the default default is `n`.",
+      "parentUuid": "2dee808c_83164c30",
       "range": {
         "startLine": 18,
         "startChar": 1,
@@ -112,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ddcfd63_83f1b5d2",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-13T08:06:18Z",
+      "side": 1,
+      "message": "Do you mean check `binder_use_rust !\u003d is_rust` before checking `binder_loaded`? I\u0027m not sure that makes sense. `-EBUSY` means that `modprobe rust_binder.ko` is called too late, and that\u0027s a good reason to `pr_err()`.",
+      "parentUuid": "ee78e9e0_3044d620",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ec066ba_3722dadb",
         "filename": "drivers/android/binder_pick.c",
         "patchSetId": 6
@@ -123,6 +189,30 @@
       "writtenOn": "2026-01-12T22:34:09Z",
       "side": 1,
       "message": "I believe this is meant to be 644, otherwise we don\u0027t need the `binder_loaded` logic in param set right? I\u0027ll update the value.",
+      "range": {
+        "startLine": 117,
+        "startChar": 47,
+        "endLine": 117,
+        "endChar": 51
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc12b68_4b1e1ab6",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-13T08:06:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ec066ba_3722dadb",
       "range": {
         "startLine": 117,
         "startChar": 47,
@@ -146,6 +236,30 @@
       "writtenOn": "2026-01-12T19:17:17Z",
       "side": 1,
       "message": "Maybe I\u0027ll add the corresponding headers here to workaround the checkpatch issues.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3bcfdf_d54daaaa",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-13T08:06:18Z",
+      "side": 1,
+      "message": "You would need an include with `../` to reach the header file. It\u0027s not under `include/`.",
+      "parentUuid": "16f8424b_ae5e3352",
       "range": {
         "startLine": 120,
         "startChar": 0,
