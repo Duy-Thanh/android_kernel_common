@@ -16,6 +16,24 @@
       "message": "@ebiggers@google.com, are the crypto symbols ok to export?",
       "revId": "173a9007c659baf1daa80fe81157a3c17a57d4d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15fda248_016b7a0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-01-13T20:57:56Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like there\u0027s anything new here.  All the crypto-related symbols being added to this symbol list are already in other symbol lists.",
+      "parentUuid": "5879156d_c0b78822",
+      "revId": "173a9007c659baf1daa80fe81157a3c17a57d4d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
