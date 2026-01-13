@@ -70,6 +70,24 @@
       "parentUuid": "709a75c3_acb5c04a",
       "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689e513a_7be4066d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-13T18:57:07Z",
+      "side": 1,
+      "message": "Thank you again for updating the commit message, but the details here in the above unfortunately don\u0027t get preserved with the commit in the git tree. If you could include these details in the commit message itself, it would be great. Apologies if I wasn\u0027t clear before.",
+      "parentUuid": "b672e54d_d5c04355",
+      "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
