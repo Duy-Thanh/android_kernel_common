@@ -88,6 +88,24 @@
       "parentUuid": "ff5b8cd6_1de4e530",
       "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "490b887e_edf95927",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2026-01-13T17:13:05Z",
+      "side": 1,
+      "message": "Thanks. KernelCommit looks happy now:\n\n\u003e Cherry pick is clean. Checked against UPSTREAM.\n\nJust for completeness, this is an known-issue and being tracked by b/438416861.",
+      "parentUuid": "ff5b8cd6_1de4e530",
+      "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
