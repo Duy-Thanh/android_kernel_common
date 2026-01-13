@@ -52,6 +52,24 @@
       "parentUuid": "c0a25ac4_f25644c8",
       "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b672e54d_d5c04355",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2026-01-13T07:04:21Z",
+      "side": 1,
+      "message": "1）Under heavy load, when multi-level folders are opened in the file manager, the scheduling latency of fuse_daemon led to slow loading of folder contents. After this optimization, such scheduling latency will no longer occur;\n2）Without the change, the regular binder service of android.content.IContentProvider:1 will spare 30ms, and with the hook, the latency will reduce to 12ms;\n3) We didn\u0027t find such mechanism to solve the issue. Even though passthrough mode in fuse can boost the duration, but the priority inversion still exists",
+      "parentUuid": "709a75c3_acb5c04a",
+      "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
