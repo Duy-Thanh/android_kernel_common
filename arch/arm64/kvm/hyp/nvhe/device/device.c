@@ -13,6 +13,8 @@
 #include <kvm/arm_hypercalls.h>
 #include <kvm/device.h>
 
+/* REMOVE ME! */
+
 struct pkvm_device *registered_devices;
 unsigned long registered_devices_nr;
 
