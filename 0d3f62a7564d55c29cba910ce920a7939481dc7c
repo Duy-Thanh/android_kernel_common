@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0218ff_9c477a40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-13T03:52:06Z",
+      "side": 1,
+      "message": "I\u0027ll run this through presubmit soon, but android17-6.18 currently has a kabi issue that needs to land first.",
+      "revId": "0d3f62a7564d55c29cba910ce920a7939481dc7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
