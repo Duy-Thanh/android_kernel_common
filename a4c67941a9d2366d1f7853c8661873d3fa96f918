@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de816a91_47dab89e",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 4167025
+      },
+      "writtenOn": "2026-01-13T03:38:13Z",
+      "side": 1,
+      "message": "would update",
+      "parentUuid": "b69cb447_8678a5e9",
+      "range": {
+        "startLine": 1001,
+        "startChar": 1,
+        "endLine": 1001,
+        "endChar": 26
+      },
+      "revId": "a4c67941a9d2366d1f7853c8661873d3fa96f918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d521ae39_e208a395",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-01-12T20:01:45Z",
       "side": 1,
       "message": "I don\u0027t understand the logic here. You are trying to free a page even though it\u0027s still referenced by someone else? Or are you somehow forcing the reference to be decremented? Please clarify either here or in the bug.",
+      "range": {
+        "startLine": 1022,
+        "startChar": 0,
+        "endLine": 1026,
+        "endChar": 0
+      },
+      "revId": "a4c67941a9d2366d1f7853c8661873d3fa96f918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "398a9b12_e8b3f272",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 4167025
+      },
+      "writtenOn": "2026-01-13T03:38:13Z",
+      "side": 1,
+      "message": "The logic here is to attempt to release the process\u0027s file pages upon its exit. First, it determines whether the page is mapped by other processes, with the approximate judgment logic as follows:\n- papcount check: If the mapcount is non-zero, the page will not be released.\n- reference count check: Check whether the current page\u0027s reference count equals folio_nr_pages + nr_refs. If so, it indicates that no other path has increased the reference count. At this point, it may attempt to remove the page from the pagecache and then try to release the page—instead ofrelying on kswapd or other reclamation paths to scan the LRU for release.",
+      "parentUuid": "d521ae39_e208a395",
       "range": {
         "startLine": 1022,
         "startChar": 0,
