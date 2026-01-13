@@ -34,6 +34,24 @@
       "parentUuid": "526277d6_7b5852f9",
       "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709a75c3_acb5c04a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-13T01:37:37Z",
+      "side": 1,
+      "message": "Thanks you for expanding this, but its still missing key details. What I\u0027m looking for is something like the following (obviously I\u0027m just guessing, please add the actual context from your experience):\n\n1) What is the issue observed in the current kernel that motivates this hook? I assume you are seeing some latency possibly caused by fuse deamon\u0027s priority being lower than the priority of the task making a request? If so, add context to that effect\n\n2) Quantify the benefit. Something to the effect of \"Without this change we regularly see latencies of Xms, and with the hook we reduce those latencies by Y%\"\n\n3) What would be needed upstream for the hook to be unnecessary? Maybe something like \"We see this issue because there is no mechanism for priority inheritance across fuse requests. If upstream had some way to allow the fuse operation to execute at the priority of the requester, then we wouldn\u0027t need this hook\".",
+      "parentUuid": "c0a25ac4_f25644c8",
+      "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
