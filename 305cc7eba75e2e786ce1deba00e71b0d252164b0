@@ -34,6 +34,24 @@
       "parentUuid": "165060f4_1d960e0c",
       "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b375ed_c8c5a2df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2026-01-13T16:42:28Z",
+      "side": 1,
+      "message": "As can be seen in your link, the `abi.stg` file exists which is how the ABI check is performed and the differences are being discovered.\n\nPlease follow the directions here for `x86_64` to update the `abi.stg`:\n\nhttps://source.android.com/docs/core/architecture/kernel/howto-abi-monitor#build-abi",
+      "parentUuid": "fef38152_074fd550",
+      "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
