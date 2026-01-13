@@ -178787,12 +178787,6 @@ member {
   offset: 896
 }
 member {
-  id: 0x337b49fc
-  name: "oob_skb"
-  type_id: 0x054f691a
-  offset: 9152
-}
-member {
   id: 0x97510353
   name: "oom_flag_origin"
   type_id: 0x6d7f5ff6
@@ -342292,7 +342286,6 @@ struct_union {
     member_id: 0x337f3641
     member_id: 0x6a6789c8
     member_id: 0xac812894
-    member_id: 0x337b49fc
   }
 }
 struct_union {
@@ -434591,7 +434584,7 @@ elf_symbol {
   name: "__scm_destroy"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0722c5ca
+  crc: 0xe88ff612
   type_id: 0x1239d356
   full_name: "__scm_destroy"
 }
@@ -500183,7 +500176,7 @@ elf_symbol {
   name: "scm_detach_fds"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb8cf030f
+  crc: 0x81f67fdc
   type_id: 0x1b84a461
   full_name: "scm_detach_fds"
 }

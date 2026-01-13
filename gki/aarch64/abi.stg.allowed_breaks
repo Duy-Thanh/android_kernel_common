@@ -89,3 +89,12 @@ type 'struct kvm_iommu_ops' changed
   member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
   member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
 
+function symbol 'void __scm_destroy(struct scm_cookie*)' changed
+  CRC changed from 0x722c5ca to 0xe88ff612
+
+function symbol 'void scm_detach_fds(struct msghdr*, struct scm_cookie*)' changed
+  CRC changed from 0xb8cf030f to 0x81f67fdc
+
+type 'struct unix_sock' changed
+  member 'struct sk_buff* oob_skb' was removed
+
