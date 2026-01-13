@@ -753,7 +753,15 @@ struct eventfs_inode *eventfs_create_events_dir(const char *name, struct dentry 
 						const struct eventfs_entry *entries,
 						int size, void *data)
 {
+<<<<<<< HEAD   (3e19d40f402b34e00cf6323256bc10d8195184e1 ANDROID: GKI: add devm_hwspin_lock_request_specific to db845)
 	struct dentry *dentry = tracefs_start_creating(name, parent);
+||||||| BASE   (289d9a2a98ba60db9ff877403a6dfa1287cd4077 coresight: etm4x: Extract the trace unit controlling)
+	struct dentry *dentry = tracefs_start_creating(name, parent);
+	struct eventfs_root_inode *rei;
+=======
+	struct dentry *dentry;
+	struct eventfs_root_inode *rei;
+>>>>>>> BRANCH (07a0310292011a1dde9ad93250203783b6b58b70 tracefs: fix a leak in eventfs_create_events_dir())
 	struct eventfs_inode *ei;
 	struct tracefs_inode *ti;
 	struct inode *inode;
@@ -763,6 +771,7 @@ struct eventfs_inode *eventfs_create_events_dir(const char *name, struct dentry 
 	if (security_locked_down(LOCKDOWN_TRACEFS))
 		return NULL;
 
+	dentry = tracefs_start_creating(name, parent);
 	if (IS_ERR(dentry))
 		return ERR_CAST(dentry);
 
