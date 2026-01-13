@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2b871c_62b2580b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-13T19:00:43Z",
+      "side": 1,
+      "message": "Please use \"Android: vendor_hooks: Reapply hooks for oem sched_ext optimization\" for clarity.",
+      "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d89ab8_f46419bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-13T19:00:43Z",
+      "side": 1,
+      "message": "I\u0027d rather see: \"This re-applies commit \u003csha\u003e that was reverted in 4ea71...\"",
+      "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
