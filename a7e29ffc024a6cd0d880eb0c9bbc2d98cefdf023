@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49d8f032_507c7d9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-13T00:41:21Z",
+      "side": 1,
+      "message": "I get the following when setting `binder.impl\u003drust` with this version:\n```\n[   34.306064] Using C Binder even though binder.impl\u003drust is set.\n[...]\n[   36.420547] rust_binder: Failed to load Rust Binder.\n```",
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dee808c_83164c30",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 6
