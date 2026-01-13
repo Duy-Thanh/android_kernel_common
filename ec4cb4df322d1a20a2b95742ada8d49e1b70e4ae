@@ -70,6 +70,24 @@
       "parentUuid": "089310c8_56ec4e06",
       "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0a331f_c9f6bd3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3983189
+      },
+      "writtenOn": "2026-01-13T12:47:41Z",
+      "side": 1,
+      "message": "Removed and updated the CL",
+      "parentUuid": "ff5b8cd6_1de4e530",
+      "revId": "ec4cb4df322d1a20a2b95742ada8d49e1b70e4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
