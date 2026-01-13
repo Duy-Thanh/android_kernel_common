@@ -52,6 +52,24 @@
       "parentUuid": "fef38152_074fd550",
       "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff43d596_7eaa88fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030611
+      },
+      "writtenOn": "2026-01-13T18:08:19Z",
+      "side": 1,
+      "message": "all those files are blank without any entries",
+      "parentUuid": "95b375ed_c8c5a2df",
+      "revId": "305cc7eba75e2e786ce1deba00e71b0d252164b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
