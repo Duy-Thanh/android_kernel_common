@@ -93,6 +93,30 @@
       },
       "revId": "a4c67941a9d2366d1f7853c8661873d3fa96f918",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc44748_d9737f2b",
+        "filename": "mm/swap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-13T17:35:18Z",
+      "side": 1,
+      "message": "I see. I hope the reference count check does an atomic cmpxch to set it to 0 only if the refcount is 1. Otherwise that would be racy.",
+      "parentUuid": "398a9b12_e8b3f272",
+      "range": {
+        "startLine": 1022,
+        "startChar": 0,
+        "endLine": 1026,
+        "endChar": 0
+      },
+      "revId": "a4c67941a9d2366d1f7853c8661873d3fa96f918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
