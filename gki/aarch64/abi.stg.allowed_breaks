@@ -89,3 +89,8 @@ type 'struct kvm_iommu_ops' changed
   member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
   member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
 
+variable symbol changed from 'u64 vendor_data_pad[64]' to 'u64 vendor_data_pad[128]'
+  CRC changed from 0xf54e5881 to 0xa4519653
+  type changed from 'u64[64]' to 'u64[128]'
+    number of elements changed from 64 to 128
+
