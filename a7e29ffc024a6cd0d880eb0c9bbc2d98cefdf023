@@ -125,6 +125,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "520b0217_67debb02",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-14T13:11:00Z",
+      "side": 1,
+      "message": "I just tried it and did not have an issue. I took these steps:\n\n* Check out this commit (so aosp/3878147 was not included)\n* Add a compilation error to Rust Binder source code.\n* Start the build.\n\nThe build succeeded, which implies that Rust Binder did not get built.\n\nResolving.",
+      "parentUuid": "cdb4938b_ca9906e0",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4b0216d_e729900f",
@@ -148,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e9dea2_add7fcaa",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-14T13:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4b0216d_e729900f",
+      "range": {
+        "startLine": 306,
+        "startChar": 86,
+        "endLine": 306,
+        "endChar": 90
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "568992da_e5b7c062",
@@ -161,6 +209,30 @@
       "writtenOn": "2026-01-12T19:17:17Z",
       "side": 1,
       "message": "probably this can be consumed into the API above now too.",
+      "range": {
+        "startLine": 311,
+        "startChar": 26,
+        "endLine": 311,
+        "endChar": 52
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b07bd5_c152d670",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-14T13:11:00Z",
+      "side": 1,
+      "message": "I think it\u0027s cleaner to call explicitly.",
+      "parentUuid": "568992da_e5b7c062",
       "range": {
         "startLine": 311,
         "startChar": 26,
@@ -232,6 +304,30 @@
       "side": 1,
       "message": "Isn\u0027t the modprobe done regardless of the binder.impl\u003d\u003c\u003e value? I thought the idea was to be silent if the rust module isn\u0027t even selected.",
       "parentUuid": "3ddcfd63_83f1b5d2",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c45d62_84e2d079",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-14T13:11:00Z",
+      "side": 1,
+      "message": "Rust Binder should be silent if `binder.impl\u003dc` is selected *and* Rust Binder is loaded at the right time. Loading Rust Binder at the wrong time should lead to a warning on the kernel log no matter what.",
+      "parentUuid": "3aeb6227_e45a1237",
       "range": {
         "startLine": 37,
         "startChar": 1,
@@ -350,6 +446,30 @@
       "side": 1,
       "message": "Right, that\u0027s what I have locally.",
       "parentUuid": "6c3bcfdf_d54daaaa",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c955194b_b9d7d874",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-14T13:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b983f7d_33d2f2f1",
       "range": {
         "startLine": 120,
         "startChar": 0,
