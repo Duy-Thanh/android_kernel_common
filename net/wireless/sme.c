@@ -1285,8 +1285,15 @@ out:
 }
 EXPORT_SYMBOL(cfg80211_roamed);
 
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 void __cfg80211_port_authorized(struct wireless_dev *wdev, const u8 *peer_addr,
 				const u8 *td_bitmap, u8 td_bitmap_len)
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+void __cfg80211_port_authorized(struct wireless_dev *wdev, const u8 *bssid)
+=======
+void __cfg80211_port_authorized(struct wireless_dev *wdev, const u8 *bssid,
+					const u8 *td_bitmap, u8 td_bitmap_len)
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 {
 	ASSERT_WDEV_LOCK(wdev);
 
@@ -1304,10 +1311,22 @@ void __cfg80211_port_authorized(struct wireless_dev *wdev, const u8 *peer_addr,
 	}
 
 	nl80211_send_port_authorized(wiphy_to_rdev(wdev->wiphy), wdev->netdev,
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 				     peer_addr, td_bitmap, td_bitmap_len);
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+				     bssid);
+=======
+				     bssid, td_bitmap, td_bitmap_len);
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 }
 
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 void cfg80211_port_authorized(struct net_device *dev, const u8 *peer_addr,
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+void cfg80211_port_authorized(struct net_device *dev, const u8 *bssid,
+=======
+void cfg80211_port_authorized(struct net_device *dev, const u8 *bssid,
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 			      const u8 *td_bitmap, u8 td_bitmap_len, gfp_t gfp)
 {
 	struct wireless_dev *wdev = dev->ieee80211_ptr;
@@ -1323,7 +1342,12 @@ void cfg80211_port_authorized(struct net_device *dev, const u8 *peer_addr,
 		return;
 
 	ev->type = EVENT_PORT_AUTHORIZED;
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 	memcpy(ev->pa.peer_addr, peer_addr, ETH_ALEN);
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+=======
+	memcpy(ev->pa.bssid, bssid, ETH_ALEN);
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 	ev->pa.td_bitmap = ((u8 *)ev) + sizeof(*ev);
 	ev->pa.td_bitmap_len = td_bitmap_len;
 	memcpy((void *)ev->pa.td_bitmap, td_bitmap, td_bitmap_len);

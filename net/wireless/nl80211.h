@@ -86,7 +86,12 @@ void nl80211_send_roamed(struct cfg80211_registered_device *rdev,
  * For GO/AP, use peer GC/STA mac_addr.
  */
 void nl80211_send_port_authorized(struct cfg80211_registered_device *rdev,
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 				  struct net_device *netdev, const u8 *peer_addr,
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+=======
+				  struct net_device *netdev, const u8 *bssid,
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 				  const u8 *td_bitmap, u8 td_bitmap_len);
 void nl80211_send_disconnected(struct cfg80211_registered_device *rdev,
 			       struct net_device *netdev, u16 reason,

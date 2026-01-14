@@ -2788,12 +2788,16 @@ enum nl80211_commands {
  *	the incoming frame RX timestamp.
  * @NL80211_ATTR_TD_BITMAP: Transition Disable bitmap, for subsequent
  *	(re)associations.
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
  *
  * @NL80211_ATTR_PUNCT_BITMAP: (u32) Preamble puncturing bitmap, lowest
  *	bit corresponds to the lowest 20 MHz channel. Each bit set to 1
  *	indicates that the sub-channel is punctured. Higher 16 bits are
  *	reserved.
  *
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+=======
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
  * @NUM_NL80211_ATTR: total number of nl80211_attrs available
  * @NL80211_ATTR_MAX: highest attribute number currently defined
  * @__NL80211_ATTR_AFTER_LAST: internal use
@@ -3325,6 +3329,7 @@ enum nl80211_attrs {
 	NL80211_ATTR_TX_HW_TIMESTAMP,
 	NL80211_ATTR_RX_HW_TIMESTAMP,
 	NL80211_ATTR_TD_BITMAP,
+<<<<<<< HEAD   (7818cf8a83160190e792aa57c728f14439150889 Merge f4aec9cc37f0 ("wifi: cfg80211: sme: store capped lengt)
 
 	NL80211_ATTR_PUNCT_BITMAP,
 
@@ -3353,6 +3358,9 @@ enum nl80211_attrs {
 	NL80211_ATTR_ANDROID_KABI_RESERVED_23,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_24,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_25,
+||||||| BASE   (f4aec9cc37f0d24bff81a17c3142077c94a78b74 wifi: cfg80211: sme: store capped length in __cfg80211_conne)
+=======
+>>>>>>> BRANCH (b9e2e550b9a2d5e98023a3e519995c9e315917a2 cfg80211: Update Transition Disable policy during port autho)
 
 	/* add attributes here, update the policy in nl80211.c */
 
