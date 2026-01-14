@@ -40,6 +40,30 @@
       ],
       "revId": "8da5d92feaea193fb1bdd02786c9e4a5b8e05de7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfeb6b3f_f94a9386",
+        "filename": "drivers/block/zram/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-01-14T10:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d26b59c_28e4cbc1",
+      "range": {
+        "startLine": 155,
+        "startChar": 2,
+        "endLine": 155,
+        "endChar": 9
+      },
+      "revId": "8da5d92feaea193fb1bdd02786c9e4a5b8e05de7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
