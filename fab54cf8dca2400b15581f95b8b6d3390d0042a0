@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec22323b_83a2bd39",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-14T17:38:35Z",
+      "side": 1,
+      "message": "Do you need to keep this around? It\u0027s only used once below on line 205, so you could just make the check `if (!vma-\u003evm_ops)`?",
+      "range": {
+        "startLine": 171,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5450a7de_0cbe0fe6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_size_compat.c",
+              "range": {
+                "startLine": 171,
+                "startChar": 0,
+                "endLine": 172,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_size_compat.c",
+              "range": {
+                "startLine": 204,
+                "startChar": 0,
+                "endLine": 206,
+                "endChar": 0
+              },
+              "replacement": "\tif (!vma-\u003evm_ops)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fab54cf8dca2400b15581f95b8b6d3390d0042a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c75033_b2c8f24e",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-14T17:38:35Z",
+      "side": 1,
+      "message": "Please remove additional newline.",
+      "fixSuggestions": [
+        {
+          "fixId": "a41d4f16_340c0e5b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_size_compat.c",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "fab54cf8dca2400b15581f95b8b6d3390d0042a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
