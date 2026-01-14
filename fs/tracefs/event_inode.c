@@ -753,7 +753,15 @@ struct eventfs_inode *eventfs_create_events_dir(const char *name, struct dentry 
 						const struct eventfs_entry *entries,
 						int size, void *data)
 {
+<<<<<<< HEAD   (5b4417bba4562c44af71ac7976b23d434037dbfb Merge 97b876fa8832 ("bpf: Check skb->transport_header is set)
 	struct dentry *dentry = tracefs_start_creating(name, parent);
+||||||| BASE   (97b876fa88322625228792cf7a5fd77531815a80 bpf: Check skb->transport_header is set in bpf_skb_check_mtu)
+	struct dentry *dentry = tracefs_start_creating(name, parent);
+	struct eventfs_root_inode *rei;
+=======
+	struct dentry *dentry;
+	struct eventfs_root_inode *rei;
+>>>>>>> BRANCH (07a0310292011a1dde9ad93250203783b6b58b70 tracefs: fix a leak in eventfs_create_events_dir())
 	struct eventfs_inode *ei;
 	struct tracefs_inode *ti;
 	struct inode *inode;
@@ -763,6 +771,7 @@ struct eventfs_inode *eventfs_create_events_dir(const char *name, struct dentry 
 	if (security_locked_down(LOCKDOWN_TRACEFS))
 		return NULL;
 
+	dentry = tracefs_start_creating(name, parent);
 	if (IS_ERR(dentry))
 		return ERR_CAST(dentry);
 
