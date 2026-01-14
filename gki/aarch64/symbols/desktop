@@ -2422,6 +2422,7 @@
   vmap
   __vma_start_write
   vmf_insert_pfn
+  vmf_insert_pfn_pmd
   vmf_insert_pfn_prot
   vm_get_page_prot
   vm_unmapped_area
