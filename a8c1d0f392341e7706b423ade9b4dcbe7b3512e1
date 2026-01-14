@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56fe04d1_629ed21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4563657
+      },
+      "writtenOn": "2026-01-14T10:50:12Z",
+      "side": 1,
+      "message": "pm grant com.draco.resolutionchanger android.permission.WRITE_SECURE_SETTINGS",
+      "revId": "a8c1d0f392341e7706b423ade9b4dcbe7b3512e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
