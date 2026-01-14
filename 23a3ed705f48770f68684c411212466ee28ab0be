@@ -88,6 +88,24 @@
       "parentUuid": "b672e54d_d5c04355",
       "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a219488_019fac94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2026-01-14T09:05:35Z",
+      "side": 1,
+      "message": "Have updated the commit message.",
+      "parentUuid": "689e513a_7be4066d",
+      "revId": "23a3ed705f48770f68684c411212466ee28ab0be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
