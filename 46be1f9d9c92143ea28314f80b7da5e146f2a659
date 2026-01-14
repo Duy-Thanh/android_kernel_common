@@ -16,6 +16,24 @@
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From:...\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: Shunkang hu \u003chushunkang@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: hushunkang \u003chushunkang@oppo.com\u003e\u0027",
       "revId": "46be1f9d9c92143ea28314f80b7da5e146f2a659",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b5f6c3_34ed3b39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-14T06:09:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1b72b3_c6c77ff8",
+      "revId": "46be1f9d9c92143ea28314f80b7da5e146f2a659",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
