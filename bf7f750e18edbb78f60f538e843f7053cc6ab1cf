@@ -33,6 +33,24 @@
       "message": "I\u0027d rather see: \"This re-applies commit \u003csha\u003e that was reverted in 4ea71...\"",
       "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636c7b84_f417db25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4548375
+      },
+      "writtenOn": "2026-01-14T02:40:51Z",
+      "side": 1,
+      "message": "Got it. The commit message has been updated as requested, with the specified title and the re-apply commit SHA info included.",
+      "parentUuid": "d8d89ab8_f46419bc",
+      "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
