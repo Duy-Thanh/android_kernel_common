@@ -1308,6 +1308,16 @@
  * @NL80211_CMD_MODIFY_LINK_STA: Modify a link of an MLD station
  * @NL80211_CMD_REMOVE_LINK_STA: Remove a link of an MLD station
  *
+ * @NL80211_CMD_SET_HW_TIMESTAMP: Enable/disable HW timestamping of Timing
+ *	measurement and Fine timing measurement frames. If %NL80211_ATTR_MAC
+ *	is included, enable/disable HW timestamping only for frames to/from the
+ *	specified MAC address. Otherwise enable/disable HW timestamping for
+ *	all TM/FTM frames (including ones that were enabled with specific MAC
+ *	address). If %NL80211_ATTR_HW_TIMESTAMP_ENABLED is not included, disable
+ *	HW timestamping.
+ *	The number of peers that HW timestamping can be enabled for concurrently
+ *	is indicated by %NL80211_ATTR_MAX_HW_TIMESTAMP_PEERS.
+ *
  * @NL80211_CMD_MAX: highest used command number
  * @__NL80211_CMD_AFTER_LAST: internal use
  */
@@ -1568,6 +1578,8 @@ enum nl80211_commands {
 	NL80211_CMD_ANDROID_KABI_RESERVED_8,
 	NL80211_CMD_ANDROID_KABI_RESERVED_9,
 	NL80211_CMD_ANDROID_KABI_RESERVED_10,
+
+	NL80211_CMD_SET_HW_TIMESTAMP,
 
 	/* add new commands above here */
 
@@ -2794,6 +2806,13 @@ enum nl80211_commands {
  *	indicates that the sub-channel is punctured. Higher 16 bits are
  *	reserved.
  *
+ * @NL80211_ATTR_MAX_HW_TIMESTAMP_PEERS: Maximum number of peers that HW
+ *	timestamping can be enabled for concurrently (u16), a wiphy attribute.
+ *	A value of 0xffff indicates setting for all peers (i.e. not specifying
+ *	an address with %NL80211_CMD_SET_HW_TIMESTAMP) is supported.
+ * @NL80211_ATTR_HW_TIMESTAMP_ENABLED: Indicates whether HW timestamping should
+ *	be enabled or not (flag attribute).
+ *
  * @NUM_NL80211_ATTR: total number of nl80211_attrs available
  * @NL80211_ATTR_MAX: highest attribute number currently defined
  * @__NL80211_ATTR_AFTER_LAST: internal use
@@ -3328,6 +3347,7 @@ enum nl80211_attrs {
 
 	NL80211_ATTR_PUNCT_BITMAP,
 
+<<<<<<< HEAD   (a2c61318298c6f61690d9cd1e265e1016b27da45 Merge 3250cf602c21 ("wifi: nl80211: validate and configure p)
 	NL80211_ATTR_ANDROID_KABI_RESERVED_1,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_2,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_3,
@@ -3353,6 +3373,11 @@ enum nl80211_attrs {
 	NL80211_ATTR_ANDROID_KABI_RESERVED_23,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_24,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_25,
+||||||| BASE   (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
+=======
+	NL80211_ATTR_MAX_HW_TIMESTAMP_PEERS,
+	NL80211_ATTR_HW_TIMESTAMP_ENABLED,
+>>>>>>> BRANCH (1108d1134342f7913a7af5e247a63c51d93db713 wifi: nl80211: add a command to enable/disable HW timestampi)
 
 	/* add attributes here, update the policy in nl80211.c */
 
