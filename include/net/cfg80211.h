@@ -1368,8 +1368,12 @@ struct cfg80211_ap_settings {
 	struct cfg80211_unsol_bcast_probe_resp unsol_bcast_probe_resp;
 	struct cfg80211_mbssid_config mbssid_config;
 	u16 punct_bitmap;
+<<<<<<< HEAD   (cdcf47b22f298b4e3ac388345b5c76992826b949 Merge 3d6dcb6b9408 ("wifi: cfg80211: move puncturing bitmap )
 
 	ANDROID_KABI_RESERVE(1);
+||||||| BASE   (3d6dcb6b9408b73c5cd0e44258ec4ea5a1bd85e7 wifi: cfg80211: move puncturing bitmap validation from mac80)
+=======
+>>>>>>> BRANCH (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
 };
 
 /**
@@ -1403,8 +1407,12 @@ struct cfg80211_csa_settings {
 	bool block_tx;
 	u8 count;
 	u16 punct_bitmap;
+<<<<<<< HEAD   (cdcf47b22f298b4e3ac388345b5c76992826b949 Merge 3d6dcb6b9408 ("wifi: cfg80211: move puncturing bitmap )
 
 	ANDROID_KABI_RESERVE(1);
+||||||| BASE   (3d6dcb6b9408b73c5cd0e44258ec4ea5a1bd85e7 wifi: cfg80211: move puncturing bitmap validation from mac80)
+=======
+>>>>>>> BRANCH (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
 };
 
 /**

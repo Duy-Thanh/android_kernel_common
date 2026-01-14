@@ -3328,6 +3328,7 @@ enum nl80211_attrs {
 
 	NL80211_ATTR_PUNCT_BITMAP,
 
+<<<<<<< HEAD   (cdcf47b22f298b4e3ac388345b5c76992826b949 Merge 3d6dcb6b9408 ("wifi: cfg80211: move puncturing bitmap )
 	NL80211_ATTR_ANDROID_KABI_RESERVED_1,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_2,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_3,
@@ -3354,6 +3355,9 @@ enum nl80211_attrs {
 	NL80211_ATTR_ANDROID_KABI_RESERVED_24,
 	NL80211_ATTR_ANDROID_KABI_RESERVED_25,
 
+||||||| BASE   (3d6dcb6b9408b73c5cd0e44258ec4ea5a1bd85e7 wifi: cfg80211: move puncturing bitmap validation from mac80)
+=======
+>>>>>>> BRANCH (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
 	/* add attributes here, update the policy in nl80211.c */
 
 	__NL80211_ATTR_MAX_IMPLEMENTED = NL80211_ATTR_PUNCT_BITMAP,
@@ -6437,6 +6441,7 @@ enum nl80211_feature_flags {
  *
  * @NL80211_EXT_FEATURE_PUNCT: Driver supports preamble puncturing in AP mode.
  *
+<<<<<<< HEAD   (cdcf47b22f298b4e3ac388345b5c76992826b949 Merge 3d6dcb6b9408 ("wifi: cfg80211: move puncturing bitmap )
  * @NL80211_EXT_FEATURE_SECURE_NAN: Device supports NAN Pairing which enables
  *	authentication, data encryption and message integrity.
  *
@@ -6450,6 +6455,9 @@ enum nl80211_feature_flags {
  * @NL80211_EXT_FEATURE_OWE_OFFLOAD_AP: Driver/Device wants to do OWE DH IE
  *	handling in AP mode.
  *
+||||||| BASE   (3d6dcb6b9408b73c5cd0e44258ec4ea5a1bd85e7 wifi: cfg80211: move puncturing bitmap validation from mac80)
+=======
+>>>>>>> BRANCH (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
  * @NUM_NL80211_EXT_FEATURES: number of extended features.
  * @MAX_NL80211_EXT_FEATURES: highest extended feature index.
  */
@@ -6519,6 +6527,7 @@ enum nl80211_ext_feature_index {
 	NL80211_EXT_FEATURE_RADAR_BACKGROUND,
 	NL80211_EXT_FEATURE_POWERED_ADDR_CHANGE,
 	NL80211_EXT_FEATURE_PUNCT,
+<<<<<<< HEAD   (cdcf47b22f298b4e3ac388345b5c76992826b949 Merge 3d6dcb6b9408 ("wifi: cfg80211: move puncturing bitmap )
 	NL80211_EXT_FEATURE_SECURE_NAN,
 	NL80211_EXT_FEATURE_AUTH_AND_DEAUTH_RANDOM_TA,
 	NL80211_EXT_FEATURE_OWE_OFFLOAD,
@@ -6536,6 +6545,9 @@ enum nl80211_ext_feature_index {
 	NL80211_EXT_FEATURE_ANDROID_KABI_RESERVED_13,
 	NL80211_EXT_FEATURE_ANDROID_KABI_RESERVED_14,
 	NL80211_EXT_FEATURE_ANDROID_KABI_RESERVED_15,
+||||||| BASE   (3d6dcb6b9408b73c5cd0e44258ec4ea5a1bd85e7 wifi: cfg80211: move puncturing bitmap validation from mac80)
+=======
+>>>>>>> BRANCH (3250cf602c2112a8155010b40060cd397eab7f77 wifi: nl80211: validate and configure puncturing bitmap)
 
 	/* add new features before the definition below */
 	NUM_NL80211_EXT_FEATURES,
