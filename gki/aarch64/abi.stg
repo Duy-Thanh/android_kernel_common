@@ -421272,6 +421272,13 @@ function {
   parameter_id: 0x3c88bbfa
 }
 function {
+  id: 0x9de5199d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3e10b518
+  parameter_id: 0x2e18f543
+}
+function {
   id: 0x9de52f75
   return_type_id: 0x6720d32f
   parameter_id: 0x0258f96e
@@ -429731,6 +429738,13 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x2d9d2fbb
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0xf4de7ca4
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x2aa0b9bb
+  parameter_id: 0x33756485
+  parameter_id: 0x7f7172c7
 }
 function {
   id: 0xf4f34784
@@ -488185,6 +488199,15 @@ elf_symbol {
   full_name: "nvmem_cell_read_variable_le_u32"
 }
 elf_symbol {
+  id: 0xb82b6447
+  name: "nvmem_cell_read_variable_le_u64"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xea5426b8
+  type_id: 0x9de5199d
+  full_name: "nvmem_cell_read_variable_le_u64"
+}
+elf_symbol {
   id: 0xf1401602
   name: "nvmem_cell_write"
   is_defined: true
@@ -519357,6 +519380,15 @@ elf_symbol {
   full_name: "xa_find_after"
 }
 elf_symbol {
+  id: 0x5bd79069
+  name: "xa_get_mark"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d186380
+  type_id: 0xf4de7ca4
+  full_name: "xa_get_mark"
+}
+elf_symbol {
   id: 0xb91fc02e
   name: "xa_load"
   is_defined: true
@@ -526815,6 +526847,7 @@ interface {
   symbol_id: 0x005c3998
   symbol_id: 0x571ba415
   symbol_id: 0x1e629967
+  symbol_id: 0xb82b6447
   symbol_id: 0xf1401602
   symbol_id: 0x911b1286
   symbol_id: 0xd00eb623
@@ -530277,6 +530310,7 @@ interface {
   symbol_id: 0x8af50057
   symbol_id: 0x73e59f31
   symbol_id: 0xe0d6968c
+  symbol_id: 0x5bd79069
   symbol_id: 0xb91fc02e
   symbol_id: 0xaa425530
   symbol_id: 0x9b05d33a
