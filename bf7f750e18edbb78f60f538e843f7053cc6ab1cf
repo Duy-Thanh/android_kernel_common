@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5b7ec3_deceb2cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-14T04:15:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b2b871c_62b2580b",
+      "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8d89ab8_f46419bc",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Got it. The commit message has been updated as requested, with the specified title and the re-apply commit SHA info included.",
       "parentUuid": "d8d89ab8_f46419bc",
+      "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c834e32e_0b308d5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-14T04:15:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "636c7b84_f417db25",
       "revId": "bf7f750e18edbb78f60f538e843f7053cc6ab1cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
