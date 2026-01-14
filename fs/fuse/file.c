@@ -112,6 +112,7 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 	struct fuse_err_ret fer;
 #endif
 
+<<<<<<< HEAD   (b8b5217587fb8ffb812bfdb2f12c31a3974e41ce Merge 0649ffd298b0 ("ASoC: stm32: sai: fix clk prepare imbal)
 	if (!refcount_dec_and_test(&ff->count))
 		return;
 
@@ -135,6 +136,35 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 		if (fuse_simple_background(ff->fm, args,
 				GFP_KERNEL | __GFP_NOFAIL))
 			fuse_release_end(ff->fm, args, -ENOTCONN);
+||||||| BASE   (0649ffd298b02142110e1ab8b0b33a7c40520d88 ASoC: stm32: sai: fix clk prepare imbalance on probe failure)
+		if (!args) {
+			/* Do nothing when server does not implement 'open' */
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+=======
+		if (!args) {
+			/* Do nothing when server does not implement 'opendir' */
+		} else if (args->opcode == FUSE_RELEASE && ff->fm->fc->no_open) {
+			fuse_release_end(ff->fm, args, 0);
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+>>>>>>> BRANCH (4703bc0e8cd3409acb1476a70cb5b7ff943cf39a fuse: fix readahead reclaim deadlock)
 	}
 	kfree(ff);
 }
@@ -145,8 +175,29 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 	struct fuse_conn *fc = fm->fc;
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
+<<<<<<< HEAD   (b8b5217587fb8ffb812bfdb2f12c31a3974e41ce Merge 0649ffd298b0 ("ASoC: stm32: sai: fix clk prepare imbal)
+||||||| BASE   (0649ffd298b02142110e1ab8b0b33a7c40520d88 ASoC: stm32: sai: fix clk prepare imbalance on probe failure)
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+=======
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+	bool release = !isdir || open;
+>>>>>>> BRANCH (4703bc0e8cd3409acb1476a70cb5b7ff943cf39a fuse: fix readahead reclaim deadlock)
 
+<<<<<<< HEAD   (b8b5217587fb8ffb812bfdb2f12c31a3974e41ce Merge 0649ffd298b0 ("ASoC: stm32: sai: fix clk prepare imbal)
 	ff = fuse_file_alloc(fm);
+||||||| BASE   (0649ffd298b02142110e1ab8b0b33a7c40520d88 ASoC: stm32: sai: fix clk prepare imbalance on probe failure)
+	ff = fuse_file_alloc(fm, open);
+=======
+	/*
+	 * ff->args->release_args still needs to be allocated (so we can hold an
+	 * inode reference while there are pending inflight file operations when
+	 * ->release() is called, see fuse_prepare_release()) even if
+	 * fc->no_open is set else it becomes possible for reclaim to deadlock
+	 * if while servicing the readahead request the server triggers reclaim
+	 * and reclaim evicts the inode of the file being read ahead.
+	 */
+	ff = fuse_file_alloc(fm, release);
+>>>>>>> BRANCH (4703bc0e8cd3409acb1476a70cb5b7ff943cf39a fuse: fix readahead reclaim deadlock)
 	if (!ff)
 		return ERR_PTR(-ENOMEM);
 
@@ -166,10 +217,23 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 			fuse_file_free(ff);
 			return ERR_PTR(err);
 		} else {
+<<<<<<< HEAD   (b8b5217587fb8ffb812bfdb2f12c31a3974e41ce Merge 0649ffd298b0 ("ASoC: stm32: sai: fix clk prepare imbal)
 			if (isdir)
+||||||| BASE   (0649ffd298b02142110e1ab8b0b33a7c40520d88 ASoC: stm32: sai: fix clk prepare imbalance on probe failure)
+			/* No release needed */
+			kfree(ff->release_args);
+			ff->release_args = NULL;
+			if (isdir)
+=======
+			if (isdir) {
+				/* No release needed */
+				kfree(ff->release_args);
+				ff->release_args = NULL;
+>>>>>>> BRANCH (4703bc0e8cd3409acb1476a70cb5b7ff943cf39a fuse: fix readahead reclaim deadlock)
 				fc->no_opendir = 1;
-			else
+			} else {
 				fc->no_open = 1;
+			}
 		}
 	}
 
