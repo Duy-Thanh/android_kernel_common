@@ -105,6 +105,30 @@
       },
       "revId": "07acffc68fa9109494d4c812f51608f36b4aadf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2997750_f002b9c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-14T14:00:35Z",
+      "side": 1,
+      "message": "Can we move the request into the hyp allocator module op so that memory is automatically requested on allocation failure? (similar to the page alloctor?)",
+      "parentUuid": "0ec44709_c869337d",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "07acffc68fa9109494d4c812f51608f36b4aadf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
