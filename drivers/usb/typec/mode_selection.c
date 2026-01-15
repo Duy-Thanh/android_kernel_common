@@ -168,6 +168,8 @@ void typec_altmode_entry_complete(struct typec_altmode *altmode,
 	if (!pdev)
 		return;
 	sel = to_typec_partner(pdev->dev.parent)->sel;
+	if (!sel)
+		return;
 
 	mutex_lock(&sel->mode_list_lock);
 
@@ -297,23 +299,21 @@ int typec_mode_selection_start(struct typec_partner *partner,
 	ret = device_for_each_child(
 		&partner->dev, &sel->mode_list, mode_add_to_list);
 
-	if (ret) {
+	if (ret || list_empty(&sel->mode_list)) {
 		mode_list_clean(sel);
+		kfree(sel);
 		return ret;
 	}
 
-	if (!list_empty(&sel->mode_list)) {
-		partner->sel = sel;
-		sel->partner = partner;
-		sel->delay = delay;
-		sel->timeout = timeout;
+	sel->partner = partner;
+	sel->delay = delay;
+	sel->timeout = timeout;
 
-		list_sort(NULL, &sel->mode_list, compare_priorities);
-		mutex_init(&sel->mode_list_lock);
-		INIT_DELAYED_WORK(&sel->mode_selection_work, mode_selection_work_fn);
-		schedule_delayed_work(&sel->mode_selection_work,
-			msecs_to_jiffies(delay));
-	}
+	list_sort(NULL, &sel->mode_list, compare_priorities);
+	mutex_init(&sel->mode_list_lock);
+	INIT_DELAYED_WORK(&sel->mode_selection_work, mode_selection_work_fn);
+	schedule_delayed_work(&sel->mode_selection_work, msecs_to_jiffies(delay));
+	partner->sel = sel;
 
 	return 0;
 }
