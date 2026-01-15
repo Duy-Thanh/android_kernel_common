@@ -1581,8 +1581,16 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
 		f2fs_set_data_blkaddr(dn, NEW_ADDR);
 	}
 
+<<<<<<< HEAD   (ebd5692df9e21ca13cd572ea95e73a7f464a37c6 Merge a305ac0b4854 ("scsi: ufs: core: Add ufshcd_update_evt_)
 	f2fs_update_read_extent_cache_range(dn, start, 0, index - start);
 	f2fs_update_age_extent_cache_range(dn, start, index - start);
+||||||| BASE   (a305ac0b48547bab770546f7dfe2ce0d5921c835 scsi: ufs: core: Add ufshcd_update_evt_hist() for UFS suspen)
+	f2fs_update_read_extent_cache_range(dn, start, 0, index - start);
+=======
+	if (index > start)
+		f2fs_update_read_extent_cache_range(dn, start, 0,
+							index - start);
+>>>>>>> BRANCH (e50b81c50fcbe63f50405bb40f262162ff32af88 f2fs: fix to avoid updating zero-sized extent in extent cach)
 
 	return ret;
 }
