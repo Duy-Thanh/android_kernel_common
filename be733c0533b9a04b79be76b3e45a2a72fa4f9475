@@ -16,6 +16,24 @@
       "message": "This needs a follow on addition to the symbols list",
       "revId": "be733c0533b9a04b79be76b3e45a2a72fa4f9475",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3d06eb_ffdd211f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4548375
+      },
+      "writtenOn": "2026-01-15T02:27:50Z",
+      "side": 1,
+      "message": "Got it, added the relevant symbols to the symbols list as requested.",
+      "parentUuid": "728b3b7a_e311b261",
+      "revId": "be733c0533b9a04b79be76b3e45a2a72fa4f9475",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
