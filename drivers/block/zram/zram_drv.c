@@ -778,7 +778,7 @@ static void release_wb_req(struct zram_wb_req *req)
 	kfree(req);
 }
 
-static void release_wb_ctl(struct zram_wb_ctl *wb_ctl)
+void release_wb_ctl(struct zram_wb_ctl *wb_ctl)
 {
 	if (!wb_ctl)
 		return;
@@ -799,7 +799,7 @@ static void release_wb_ctl(struct zram_wb_ctl *wb_ctl)
 	kfree(wb_ctl);
 }
 
-static struct zram_wb_ctl *init_wb_ctl(struct zram *zram)
+struct zram_wb_ctl *init_wb_ctl(struct zram *zram)
 {
 	struct zram_wb_ctl *wb_ctl;
 	int i;
