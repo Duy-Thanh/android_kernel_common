@@ -44660,6 +44660,11 @@ array {
   element_type_id: 0xe62ebf07
 }
 array {
+  id: 0x0a66722e
+  number_of_elements: 128
+  element_type_id: 0x92233392
+}
+array {
   id: 0x0aba0b5b
   number_of_elements: 48
   element_type_id: 0x6720d32f
@@ -44865,6 +44870,7 @@ array {
   element_type_id: 0x11c404ba
 }
 array {
+<<<<<<< HEAD   (d60ccb82b419ae625a635f08d37b28a238178e1d BACKPORT: UPSTREAM: dm: optimize REQ_PREFLUSH with data when)
   id: 0x16c3ef93
   number_of_elements: 38
   element_type_id: 0xf992fdc1
@@ -44875,6 +44881,14 @@ array {
   element_type_id: 0x92233392
 }
 array {
+||||||| BASE   (fa4bede3fbbbf6178f04dc995c8ecb29fb5f3a9e ANDROID: usb: gadget: android_f_accessory: Add limits for de)
+  id: 0x1723cb73
+  number_of_elements: 64
+  element_type_id: 0x92233392
+}
+array {
+=======
+>>>>>>> CHANGE (02f272e3e66d51acfe0182058e5f79435fd45427 ANDROID: gki_defconfig: Change CONFIG_GKI_TASK_STRUCT_VENDOR)
   id: 0x174bc012
   number_of_elements: 35
   element_type_id: 0x384f7d7c
@@ -517574,8 +517588,8 @@ elf_symbol {
   name: "vendor_data_pad"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0xf54e5881
-  type_id: 0x1723cb73
+  crc: 0xa4519653
+  type_id: 0x0a66722e
   full_name: "vendor_data_pad"
 }
 elf_symbol {
