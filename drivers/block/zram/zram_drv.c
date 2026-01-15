@@ -112,7 +112,7 @@ static void zram_slot_unlock(struct zram *zram, u32 index)
 	clear_and_wake_up_bit(ZRAM_ENTRY_LOCK, lock);
 }
 
-static inline bool init_done(struct zram *zram)
+bool init_done(struct zram *zram)
 {
 	return zram->disksize;
 }
@@ -238,18 +238,7 @@ struct zram_pp_slot {
 	struct list_head	entry;
 };
 
-/*
- * A post-processing bucket is, essentially, a size class, this defines
- * the range (in bytes) of pp-slots sizes in particular bucket.
- */
-#define PP_BUCKET_SIZE_RANGE	64
-#define NUM_PP_BUCKETS		((PAGE_SIZE / PP_BUCKET_SIZE_RANGE) + 1)
-
-struct zram_pp_ctl {
-	struct list_head	pp_buckets[NUM_PP_BUCKETS];
-};
-
-static struct zram_pp_ctl *init_pp_ctl(void)
+struct zram_pp_ctl *init_pp_ctl(void)
 {
 	struct zram_pp_ctl *ctl;
 	u32 idx;
@@ -274,7 +263,7 @@ static void release_pp_slot(struct zram *zram, struct zram_pp_slot *pps)
 	kfree(pps);
 }
 
-static void release_pp_ctl(struct zram *zram, struct zram_pp_ctl *ctl)
+void release_pp_ctl(struct zram *zram, struct zram_pp_ctl *ctl)
 {
 	u32 idx;
 
@@ -501,16 +490,6 @@ out:
 
 #ifdef CONFIG_ZRAM_WRITEBACK
 #define INVALID_BDEV_BLOCK		(~0UL)
-
-struct zram_wb_ctl {
-	/* idle list is accessed only by the writeback task, no concurency */
-	struct list_head idle_reqs;
-	/* done list is accessed concurrently, protect by done_lock */
-	struct list_head done_reqs;
-	wait_queue_head_t done_wait;
-	spinlock_t done_lock;
-	atomic_t num_inflight;
-};
 
 struct zram_wb_req {
 	unsigned long blk_idx;
@@ -995,9 +974,9 @@ static struct zram_wb_req *zram_select_idle_req(struct zram_wb_ctl *wb_ctl)
 	return req;
 }
 
-static int zram_writeback_slots(struct zram *zram,
-				struct zram_pp_ctl *ctl,
-				struct zram_wb_ctl *wb_ctl)
+int zram_writeback_slots(struct zram *zram,
+			 struct zram_pp_ctl *ctl,
+			 struct zram_wb_ctl *wb_ctl)
 {
 	unsigned long blk_idx = INVALID_BDEV_BLOCK;
 	struct zram_wb_req *req = NULL;
@@ -1158,9 +1137,9 @@ static int parse_mode(char *val, u32 *mode)
 	return 0;
 }
 
-static int scan_slots_for_writeback(struct zram *zram, u32 mode,
-				    unsigned long lo, unsigned long hi,
-				    struct zram_pp_ctl *ctl)
+int scan_slots_for_writeback(struct zram *zram, u32 mode,
+			     unsigned long lo, unsigned long hi,
+			     struct zram_pp_ctl *ctl)
 {
 	u32 index = lo;
 
