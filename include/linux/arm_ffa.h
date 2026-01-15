@@ -121,6 +121,11 @@
  */
 #define FFA_PAGE_SIZE		SZ_4K
 
+/* FFA FEATURE IDs */
+#define FFA_FEAT_NOTIFICATION_PENDING_INT	1
+#define FFA_FEAT_SCHEDULE_RECEIVER_INT		2
+#define FFA_FEAT_MANAGED_EXIT_INT					3
+
 /*
  * Minimum buffer size/alignment encodings returned by an FFA_FEATURES
  * query for FFA_RXTX_MAP.
