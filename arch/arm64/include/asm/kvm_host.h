@@ -159,6 +159,9 @@ void free_hyp_memcache(struct kvm_hyp_memcache *mc);
 int topup_hyp_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages, unsigned long order);
 int topup_hyp_memcache_gfp(struct kvm_hyp_memcache *mc, unsigned long min_pages,
 			   unsigned long order, gfp_t gfp);
+void hyp_mc_free_fn(void *addr, void *mc, unsigned long order);
+void *hyp_mc_iommu_alloc_gfp_fn(void *flags, unsigned long order);
+void hyp_mc_iommu_free_fn(void *addr, void *mc, unsigned long order);
 
 static inline void init_hyp_memcache(struct kvm_hyp_memcache *mc)
 {
@@ -1888,8 +1891,7 @@ enum hyp_alloc_mgt_id {
 };
 
 unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages);
-int __pkvm_topup_hyp_alloc_mgt_gfp(enum hyp_alloc_mgt_id id, unsigned long nr_pages,
-				   unsigned long sz_alloc, gfp_t gfp);
+int __pkvm_topup_hyp_iommu_alloc_mgt_gfp(unsigned long nr_pages, unsigned long sz_alloc, gfp_t gfp);
 
 #ifndef __KVM_NVHE_HYPERVISOR__
 struct kvm_iommu_driver {

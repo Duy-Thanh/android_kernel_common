@@ -1120,7 +1120,7 @@ void kvm_free_stage2_pgd(struct kvm_s2_mmu *mmu)
 	}
 }
 
-static void hyp_mc_free_fn(void *addr, void *mc, unsigned long order)
+void hyp_mc_free_fn(void *addr, void *mc, unsigned long order)
 {
 	struct kvm_hyp_memcache *memcache = mc;
 
@@ -1148,6 +1148,50 @@ static void *hyp_mc_alloc_fn(void *mc, unsigned long order)
 static void *hyp_mc_alloc_gfp_fn(void *flags, unsigned long order)
 {
 	return (void *)__get_free_pages(*(gfp_t *)flags, order);
+}
+
+/*
+ * Ideally, we would invoke iommu_alloc_pages_sz(), which adjusts the right vmstat counters as
+ * needed. However, iommu_alloc_pages_sz() allocates pages via __folio_alloc_node(), which
+ * results in a compound page being allocated when a higher order allocation is performed.
+ * The refcount for this folio is 1.
+ *
+ * This is not ideal, as the hypervisor can split up higher order allocations. This can
+ * result in part of the higher order compound page being reclaimed by the kernel. If
+ * the kernel invokes iommu_free_pages(), that function will invoke folio_put(), which
+ * will free the entire higher order compound page--since the refcount falls to 0--which is
+ * not correct since part of is still in use in the hypervisor.
+ *
+ * An alternative could be to increment the folio's refcount to match the number of pages
+ * that are part of the compound page, and then decrement the refcount as parts of the
+ * compound page are reclaimed. However, this would defeat the purpose of reclaim, as the
+ * kernel will only get memory back once all of the constituent pages within the compound
+ * page have been freed.
+ *
+ * So, fallback to handling the appropriate vmstat counters here.
+ */
+void *hyp_mc_iommu_alloc_gfp_fn(void *flags, unsigned long order)
+{
+	struct page *p = alloc_pages(*(gfp_t *)flags, order);
+	unsigned long nr_pages;
+
+	if (!p)
+		return NULL;
+
+	nr_pages = 1UL << order;
+	mod_node_page_state(page_pgdat(p), NR_IOMMU_PAGES, nr_pages);
+	lruvec_stat_mod_folio(page_folio(p), NR_SECONDARY_PAGETABLE, nr_pages);
+	return page_to_virt(p);
+}
+
+void hyp_mc_iommu_free_fn(void *addr, void *mc, unsigned long order)
+{
+	struct page *p = virt_to_page(addr);
+	unsigned long nr_pages = 1UL << order;
+
+	mod_node_page_state(page_pgdat(p), NR_IOMMU_PAGES, -nr_pages);
+	lruvec_stat_mod_folio(page_folio(p), NR_SECONDARY_PAGETABLE, -nr_pages);
+	free_pages((unsigned long)addr, order);
 }
 
 void free_hyp_memcache(struct kvm_hyp_memcache *mc)
