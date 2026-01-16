@@ -125,7 +125,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+<<<<<<< HEAD   (30973577aa799f1fb35084da5aaed4b5e3a09661 Merge 994182f5aaec ("x86/mm/pat: clear VM_PAT if copy_p4d_ra)
 EXPORT_SYMBOL_GPL(runqueues);
+||||||| BASE   (994182f5aaecd2f24a877489af0c9d26380d4a59 x86/mm/pat: clear VM_PAT if copy_p4d_range failed)
+=======
+DEFINE_PER_CPU(struct rnd_state, sched_rnd_state);
+>>>>>>> BRANCH (bec0e10ee67efbd0ad36281745a3edea4fcd8dc2 Linux 6.1.160)
 
 #ifdef CONFIG_SCHED_DEBUG
 /*
@@ -9883,6 +9888,8 @@ int sched_cpu_dying(unsigned int cpu)
 void __init sched_init_smp(void)
 {
 	sched_init_numa(NUMA_NO_NODE);
+
+	prandom_init_once(&sched_rnd_state);
 
 	/*
 	 * There's no userspace yet to cause hotplug operations; hence all the
