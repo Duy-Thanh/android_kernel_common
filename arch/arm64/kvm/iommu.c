@@ -121,10 +121,8 @@ static int kvm_iommu_topup_memcache(struct arm_smccc_res *res, gfp_t gfp)
 	}
 
 	if (req.mem.dest == REQ_MEM_DEST_HYP_IOMMU) {
-		return __pkvm_topup_hyp_alloc_mgt_gfp(HYP_ALLOC_MGT_IOMMU_ID,
-						      req.mem.nr_pages,
-						      req.mem.sz_alloc,
-						      gfp);
+		return __pkvm_topup_hyp_iommu_alloc_mgt_gfp(req.mem.nr_pages, req.mem.sz_alloc,
+							    gfp);
 	} else if (req.mem.dest == REQ_MEM_DEST_HYP_ALLOC) {
 		/* Fill hyp alloc*/
 		return __pkvm_topup_hyp_alloc(req.mem.nr_pages);

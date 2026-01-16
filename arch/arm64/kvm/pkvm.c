@@ -35,6 +35,8 @@
 
 #include <kvm/device.h>
 
+#include <iommu-pages.h>
+
 #include "hyp_constants.h"
 #include "hyp_trace.h"
 
@@ -1754,6 +1756,21 @@ int __pkvm_topup_hyp_alloc(unsigned long nr_pages)
 }
 EXPORT_SYMBOL(__pkvm_topup_hyp_alloc);
 
+/*
+ * Note: iommu_alloc_pages_sz() returns a compound page when an order above 0 is used. Therefore,
+ * it is important that the address passed to hyp_mc_iommu_free_fn() is the same as what was
+ * returned by hyp_mc_iommu_alloc_gfp_fn().
+ */
+static void *hyp_mc_iommu_alloc_gfp_fn(void *flags, unsigned long order)
+{
+	return iommu_alloc_pages_sz(*(gfp_t *)flags, PAGE_SIZE << order);
+}
+
+static void hyp_mc_iommu_free_fn(void *addr, void *mc, unsigned long order)
+{
+	iommu_free_pages(addr);
+}
+
 unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages)
 {
 	unsigned long ratelimit, last_reclaim = 0, reclaimed = 0;
@@ -1775,7 +1792,12 @@ unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages)
 		mc.head = res.a1;
 		mc.nr_pages = res.a2;
 		reclaimed += hyp_memcache_nr_base_pages(&mc, kvm_host_va);
-		free_hyp_memcache(&mc);
+
+		if (id == HYP_ALLOC_MGT_IOMMU_ID)
+			__free_hyp_memcache(&mc, hyp_mc_iommu_free_fn, kvm_host_va, &mc);
+		else
+			free_hyp_memcache(&mc);
+
 		if (++id == NR_ALLOC_MGT_IDS) {
 			if (reclaimed == last_reclaim)
 				break;
@@ -1794,23 +1816,30 @@ static int early_ffa_unmap_on_lend_cfg(char *arg)
 }
 early_param("kvm-arm.ffa-unmap-on-lend", early_ffa_unmap_on_lend_cfg);
 
-int __pkvm_topup_hyp_alloc_mgt_gfp(enum hyp_alloc_mgt_id id, unsigned long nr_pages,
-				   unsigned long sz_alloc, gfp_t gfp)
+int __pkvm_topup_hyp_iommu_alloc_mgt_gfp(unsigned long nr_pages, unsigned long sz_alloc, gfp_t gfp)
 {
 	struct kvm_hyp_memcache mc;
 	int ret;
+	unsigned long order = get_order(sz_alloc);
+
+	if (!is_protected_kvm_enabled())
+		return 0;
+
+	if (order > PAGE_SHIFT)
+		return -E2BIG;
 
 	init_hyp_memcache(&mc);
 
-	ret = topup_hyp_memcache_gfp(&mc, nr_pages, get_order(sz_alloc), gfp);
+	ret = __topup_hyp_memcache(&mc, nr_pages, hyp_mc_iommu_alloc_gfp_fn, kvm_host_pa, &gfp,
+				   order);
 	if (ret)
 		return ret;
 
-	ret = __pkvm_topup_hyp_alloc_mgt_mc(id, &mc);
+	ret = __pkvm_topup_hyp_alloc_mgt_mc(HYP_ALLOC_MGT_IOMMU_ID, &mc);
 	if (ret) {
-		kvm_err("Failed topup %u pages = %ld, size = %ld err = %d, freeing %ld pages\n",
-			id, nr_pages, sz_alloc, ret, mc.nr_pages);
-		free_hyp_memcache(&mc);
+		kvm_err("Failed topup iommu heap pages = %ld, size = %ld err = %d, freeing %ld pages\n",
+			nr_pages, sz_alloc, ret, mc.nr_pages);
+		__free_hyp_memcache(&mc, hyp_mc_iommu_free_fn, kvm_host_va, &mc);
 	}
 
 	return ret;
