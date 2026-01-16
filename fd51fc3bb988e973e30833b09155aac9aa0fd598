@@ -34,6 +34,24 @@
       "parentUuid": "db02ad51_9477a402",
       "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b3be3f_a4d4927c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-01-16T10:30:18Z",
+      "side": 1,
+      "message": "I changed the commit message to \u0027CONFIG_PHY_PACKAGE is disabled in GKI by default\u0027, which may be clearer.",
+      "parentUuid": "77519137_2da97c2a",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
