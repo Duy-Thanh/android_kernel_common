@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eed3a25_55fc1f1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:22:05Z",
+      "side": 1,
+      "message": "adding the `rust_binder.ko` to Pixel\u0027s vendor_boot_modules installs (and auto modprobes) rust_binder in the initramfs. That worked for me:\n```\n--- a/vendor_boot_modules.gs101\n+++ b/vendor_boot_modules.gs101\n@@ -182,6 +182,7 @@ sysrq-hook.ko\n systrace.ko\n tcpci_fusb307.ko\n tcpci_max77759.ko\n+rust_binder.ko\n google_tcpci_shim.ko\n touch_bus_negotiator.ko\n touch_offload.ko\n```\n```\n[    1.633622] rust_binder: Loaded Rust Binder.\n```",
+      "parentUuid": "44779ca0_ef8b018a",
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dee808c_83164c30",
@@ -139,6 +157,30 @@
       "side": 1,
       "message": "I just tried it and did not have an issue. I took these steps:\n\n* Check out this commit (so aosp/3878147 was not included)\n* Add a compilation error to Rust Binder source code.\n* Start the build.\n\nThe build succeeded, which implies that Rust Binder did not get built.\n\nResolving.",
       "parentUuid": "cdb4938b_ca9906e0",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 9
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d8d1e6_86645cf6",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:22:05Z",
+      "side": 1,
+      "message": "ok, I don\u0027t know what was wrong with my build.",
+      "parentUuid": "520b0217_67debb02",
       "range": {
         "startLine": 18,
         "startChar": 1,
@@ -243,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8a4ca9_db35ee2f",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:22:05Z",
+      "side": 1,
+      "message": "ok. I would have preferred to abstract as much \"binder hot swap\" details as possible under binder_pick.c, including the traces but this is fine too.",
+      "parentUuid": "f0b07bd5_c152d670",
+      "range": {
+        "startLine": 311,
+        "startChar": 26,
+        "endLine": 311,
+        "endChar": 52
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee78e9e0_3044d620",
@@ -328,6 +394,30 @@
       "side": 1,
       "message": "Rust Binder should be silent if `binder.impl\u003dc` is selected *and* Rust Binder is loaded at the right time. Loading Rust Binder at the wrong time should lead to a warning on the kernel log no matter what.",
       "parentUuid": "3aeb6227_e45a1237",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "a7e29ffc024a6cd0d880eb0c9bbc2d98cefdf023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d192924_4de5ecc2",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:22:05Z",
+      "side": 1,
+      "message": "ha ok. So ideally nothing should be modprobing rust_binder late. Got it!",
+      "parentUuid": "54c45d62_84e2d079",
       "range": {
         "startLine": 37,
         "startChar": 1,

@@ -81,6 +81,30 @@
       },
       "revId": "1cd9019ec8791a5a0212934973903f7830d8e603",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eae5594_80c005bc",
+        "filename": "drivers/android/binder_pick.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:22:05Z",
+      "side": 1,
+      "message": "fwiw, I was able to do this. However, the logic is also complicated as Android installs the modules at a non-standard path during /init and so a android_request_module() implementation is required.",
+      "parentUuid": "b4a60ca2_c42778aa",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "1cd9019ec8791a5a0212934973903f7830d8e603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
