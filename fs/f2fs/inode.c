@@ -701,10 +701,23 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
 	if (S_ISDIR(inode->i_mode))
 		ri->i_current_depth = cpu_to_le32(fi->i_current_depth);
 	else if (S_ISREG(inode->i_mode))
+<<<<<<< HEAD   (76515959ea600654e610266ec38a6ed1f19f80c2 ANDROID: GKI: re-export tty_port_tty_hangup())
 		ri->i_gc_failures = cpu_to_le16(fi->i_gc_failures);
 	ri->i_xattr_nid = cpu_to_le32(fi->i_xattr_nid);
 	ri->i_flags = cpu_to_le32(fi->i_flags);
 	ri->i_pino = cpu_to_le32(fi->i_pino);
+||||||| BASE   (ec3656a8cb428d763def32bc2fa695f94be23629 genirq/irq_sim: Initialize work context pointers properly)
+		ri->i_gc_failures =
+			cpu_to_le16(F2FS_I(inode)->i_gc_failures[GC_FAILURE_PIN]);
+	ri->i_xattr_nid = cpu_to_le32(F2FS_I(inode)->i_xattr_nid);
+	ri->i_flags = cpu_to_le32(F2FS_I(inode)->i_flags);
+	ri->i_pino = cpu_to_le32(F2FS_I(inode)->i_pino);
+=======
+		ri->i_gc_failures = cpu_to_le16(F2FS_I(inode)->i_gc_failures);
+	ri->i_xattr_nid = cpu_to_le32(F2FS_I(inode)->i_xattr_nid);
+	ri->i_flags = cpu_to_le32(F2FS_I(inode)->i_flags);
+	ri->i_pino = cpu_to_le32(F2FS_I(inode)->i_pino);
+>>>>>>> BRANCH (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
 	ri->i_generation = cpu_to_le32(inode->i_generation);
 	ri->i_dir_level = fi->i_dir_level;
 

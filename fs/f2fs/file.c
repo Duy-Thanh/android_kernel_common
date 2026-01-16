@@ -3432,10 +3432,27 @@ int f2fs_pin_file_control(struct inode *inode, bool inc)
 	struct f2fs_inode_info *fi = F2FS_I(inode);
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 
+<<<<<<< HEAD   (76515959ea600654e610266ec38a6ed1f19f80c2 ANDROID: GKI: re-export tty_port_tty_hangup())
 	if (IS_DEVICE_ALIASING(inode))
 		return -EINVAL;
+||||||| BASE   (ec3656a8cb428d763def32bc2fa695f94be23629 genirq/irq_sim: Initialize work context pointers properly)
+	/* Use i_gc_failures for normal file as a risk signal. */
+	if (inc)
+		f2fs_i_gc_failures_write(inode,
+				fi->i_gc_failures[GC_FAILURE_PIN] + 1);
+=======
+	/* Use i_gc_failures for normal file as a risk signal. */
+	if (inc)
+		f2fs_i_gc_failures_write(inode, fi->i_gc_failures + 1);
+>>>>>>> BRANCH (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
 
+<<<<<<< HEAD   (76515959ea600654e610266ec38a6ed1f19f80c2 ANDROID: GKI: re-export tty_port_tty_hangup())
 	if (fi->i_gc_failures >= sbi->gc_pin_file_threshold) {
+||||||| BASE   (ec3656a8cb428d763def32bc2fa695f94be23629 genirq/irq_sim: Initialize work context pointers properly)
+	if (fi->i_gc_failures[GC_FAILURE_PIN] > sbi->gc_pin_file_threshold) {
+=======
+	if (fi->i_gc_failures > sbi->gc_pin_file_threshold) {
+>>>>>>> BRANCH (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
 		f2fs_warn(sbi, "%s: Enable GC = ino %lx after %x GC trials",
 			  __func__, inode->i_ino, fi->i_gc_failures);
 		clear_inode_flag(inode, FI_PIN_FILE);

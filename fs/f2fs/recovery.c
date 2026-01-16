@@ -331,7 +331,14 @@ static int recover_inode(struct inode *inode, struct page *page)
 	fi->i_advise = raw->i_advise;
 	fi->i_flags = le32_to_cpu(raw->i_flags);
 	f2fs_set_inode_flags(inode);
+<<<<<<< HEAD   (76515959ea600654e610266ec38a6ed1f19f80c2 ANDROID: GKI: re-export tty_port_tty_hangup())
 	fi->i_gc_failures = le16_to_cpu(raw->i_gc_failures);
+||||||| BASE   (ec3656a8cb428d763def32bc2fa695f94be23629 genirq/irq_sim: Initialize work context pointers properly)
+	F2FS_I(inode)->i_gc_failures[GC_FAILURE_PIN] =
+				le16_to_cpu(raw->i_gc_failures);
+=======
+	F2FS_I(inode)->i_gc_failures = le16_to_cpu(raw->i_gc_failures);
+>>>>>>> BRANCH (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
 
 	recover_inline_flags(inode, raw);
 

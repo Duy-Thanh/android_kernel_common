@@ -834,7 +834,12 @@ struct f2fs_inode_info {
 	unsigned char i_dir_level;	/* use for dentry level for large dir */
 	union {
 		unsigned int i_current_depth;	/* only for directory depth */
+<<<<<<< HEAD   (76515959ea600654e610266ec38a6ed1f19f80c2 ANDROID: GKI: re-export tty_port_tty_hangup())
 		unsigned short i_gc_failures;	/* for gc failure statistic */
+||||||| BASE   (ec3656a8cb428d763def32bc2fa695f94be23629 genirq/irq_sim: Initialize work context pointers properly)
+=======
+		unsigned int i_gc_failures;	/* for gc failure statistic */
+>>>>>>> BRANCH (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
 	};
 	unsigned int i_pino;		/* parent inode number */
 	umode_t i_acl_mode;		/* keep file acl mode temporarily */
