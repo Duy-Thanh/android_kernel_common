@@ -1754,6 +1754,51 @@ int __pkvm_topup_hyp_alloc(unsigned long nr_pages)
 }
 EXPORT_SYMBOL(__pkvm_topup_hyp_alloc);
 
+
+/*
+ * Ideally, we would invoke iommu_alloc_pages_sz(), which adjusts the right vmstat counters as
+ * needed. However, iommu_alloc_pages_sz() allocates pages via __folio_alloc_node(), which
+ * results in a compound page being allocated when a higher order allocation is performed.
+ * The refcount for this folio is 1.
+ *
+ * This is not ideal, as the hypervisor can split up higher order allocations. This can
+ * result in part of the higher order compound page being reclaimed by the kernel. If
+ * the kernel invokes iommu_free_pages(), that function will invoke folio_put(), which
+ * will free the entire higher order compound page--since the refcount falls to 0--which is
+ * not correct since part of is still in use in the hypervisor.
+ *
+ * An alternative could be to increment the folio's refcount to match the number of pages
+ * that are part of the compound page, and then decrement the refcount as parts of the
+ * compound page are reclaimed. However, this would defeat the purpose of reclaim, as the
+ * kernel will only get memory back once all of the constituent pages within the compound
+ * page have been freed.
+ *
+ * So, fallback to handling the appropriate vmstat counters here.
+ */
+static void *hyp_mc_iommu_alloc_gfp_fn(void *flags, unsigned long order)
+{
+	struct page *p = alloc_pages(*(gfp_t *)flags, order);
+	unsigned long nr_pages;
+
+	if (!p)
+		return NULL;
+
+	nr_pages = 1UL << order;
+	mod_node_page_state(page_pgdat(p), NR_IOMMU_PAGES, nr_pages);
+	lruvec_stat_mod_folio(page_folio(p), NR_SECONDARY_PAGETABLE, nr_pages);
+	return page_to_virt(p);
+}
+
+static void hyp_mc_iommu_free_fn(void *addr, void *mc, unsigned long order)
+{
+	struct page *p = virt_to_page(addr);
+	unsigned long nr_pages = 1UL << order;
+
+	mod_node_page_state(page_pgdat(p), NR_IOMMU_PAGES, -nr_pages);
+	lruvec_stat_mod_folio(page_folio(p), NR_SECONDARY_PAGETABLE, -nr_pages);
+	free_pages((unsigned long)addr, order);
+}
+
 unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages)
 {
 	unsigned long ratelimit, last_reclaim, reclaimed = 0;
@@ -1775,7 +1820,11 @@ unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages)
 		mc.head = res.a1;
 		last_reclaim = mc.nr_pages = res.a2;
 
-		free_hyp_memcache(&mc);
+		if (id == HYP_ALLOC_MGT_IOMMU_ID)
+			__free_hyp_memcache(&mc, hyp_mc_iommu_free_fn, kvm_host_va, &mc);
+		else
+			free_hyp_memcache(&mc);
+
 		reclaimed += last_reclaim;
 		id = (id + 1) % NR_ALLOC_MGT_IDS;
 
@@ -1791,23 +1840,30 @@ static int early_ffa_unmap_on_lend_cfg(char *arg)
 }
 early_param("kvm-arm.ffa-unmap-on-lend", early_ffa_unmap_on_lend_cfg);
 
-int __pkvm_topup_hyp_alloc_mgt_gfp(enum hyp_alloc_mgt_id id, unsigned long nr_pages,
-				   unsigned long sz_alloc, gfp_t gfp)
+int __pkvm_topup_hyp_iommu_alloc_mgt_gfp(unsigned long nr_pages, unsigned long sz_alloc, gfp_t gfp)
 {
 	struct kvm_hyp_memcache mc;
 	int ret;
+	unsigned long order = get_order(sz_alloc);
+
+	if (!is_protected_kvm_enabled())
+		return 0;
+
+	if (order > PAGE_SHIFT)
+		return -E2BIG;
 
 	init_hyp_memcache(&mc);
 
-	ret = topup_hyp_memcache_gfp(&mc, nr_pages, get_order(sz_alloc), gfp);
+	ret = __topup_hyp_memcache(&mc, nr_pages, hyp_mc_iommu_alloc_gfp_fn, kvm_host_pa, &gfp,
+				   order);
 	if (ret)
 		return ret;
 
-	ret = __pkvm_topup_hyp_alloc_mgt_mc(id, &mc);
+	ret = __pkvm_topup_hyp_alloc_mgt_mc(HYP_ALLOC_MGT_IOMMU_ID, &mc);
 	if (ret) {
-		kvm_err("Failed topup %u pages = %ld, size = %ld err = %d, freeing %ld pages\n",
-			id, nr_pages, sz_alloc, ret, mc.nr_pages);
-		free_hyp_memcache(&mc);
+		kvm_err("Failed topup iommu heap pages = %ld, size = %ld err = %d, freeing %ld pages\n",
+			nr_pages, sz_alloc, ret, mc.nr_pages);
+		__free_hyp_memcache(&mc, hyp_mc_iommu_free_fn, kvm_host_va, &mc);
 	}
 
 	return ret;
