@@ -109,6 +109,19 @@ static inline struct hyp_page *node_to_page(struct list_head *node)
 	return hyp_virt_to_page(node);
 }
 
+static void __hyp_pool_update_free_blocks(struct hyp_pool *pool, struct hyp_page *p, bool free)
+{
+	u32 old = pool->free_blocks;
+
+	if (p->order == HYP_NO_ORDER || p->order < PMD_ORDER)
+		return;
+
+	WRITE_ONCE(pool->free_blocks, free ? pool->free_blocks++ : pool->free_blocks--);
+
+	/* Did we under/overflow ? */
+	WARN_ON((free && pool->free_blocks < old) || (!free && pool->free_blocks > old));
+}
+
 static void __hyp_attach_page(struct hyp_pool *pool,
 			      struct hyp_page *p)
 {
@@ -135,6 +148,7 @@ static void __hyp_attach_page(struct hyp_pool *pool,
 
 		/* Take the buddy out of its list, and coalesce with @p */
 		page_remove_from_list(buddy);
+		__hyp_pool_update_free_blocks(pool, p, false);
 		buddy->order = HYP_NO_ORDER;
 		p = min(p, buddy);
 	}
@@ -143,6 +157,7 @@ insert:
 	/* Mark the new head, and insert it */
 	p->order = order;
 	page_add_to_list(p, &pool->free_area[order]);
+	__hyp_pool_update_free_blocks(pool, p, true);
 }
 
 static struct hyp_page *__hyp_extract_page(struct hyp_pool *pool,
@@ -152,6 +167,7 @@ static struct hyp_page *__hyp_extract_page(struct hyp_pool *pool,
 	struct hyp_page *buddy;
 
 	page_remove_from_list(p);
+	__hyp_pool_update_free_blocks(pool, p, false);
 	while (p->order > order) {
 		/*
 		 * The buddy of order n - 1 currently has HYP_NO_ORDER as it
@@ -165,6 +181,7 @@ static struct hyp_page *__hyp_extract_page(struct hyp_pool *pool,
 		p->order--;
 		buddy->order = p->order;
 		page_add_to_list(buddy, &pool->free_area[buddy->order]);
+		__hyp_pool_update_free_blocks(pool, p, true);
 	}
 
 	return p;
@@ -390,6 +407,8 @@ unsigned long hyp_pool_reclaimable(struct hyp_pool *pool, u8 order)
 	switch (order) {
 	case 0:
 		return hyp_pool_free_pages(pool);
+	case PMD_ORDER:
+		return READ_ONCE(pool->free_blocks);
 	}
 
 	return 0;

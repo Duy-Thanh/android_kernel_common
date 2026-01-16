@@ -17,6 +17,7 @@ struct hyp_pool {
 	phys_addr_t range_end;
 	u32 range_reclaimable;
 	u64 free_pages;
+	u32 free_blocks;
 	u8 max_order;
 };
 
