@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db02ad51_9477a402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-16T09:59:04Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t understand this:\n\n1. android17-6.18 hasn\u0027t frozen the KMI yet\n2. gki_defconfig either enables CONFIG_PHY_PACKAGE or it doesn\u0027t. There\u0027s no \"may not enable\" about it.",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
