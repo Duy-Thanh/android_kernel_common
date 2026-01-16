@@ -1892,8 +1892,9 @@ enum hyp_alloc_mgt_id {
 
 unsigned long __pkvm_reclaim_hyp_alloc_mgt_id(enum hyp_alloc_mgt_id id, unsigned long nr_pages);
 unsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages);
-int __pkvm_topup_hyp_alloc_mgt_gfp(enum hyp_alloc_mgt_id id, unsigned long nr_pages,
-				   unsigned long sz_alloc, gfp_t gfp);
+int __pkvm_topup_hyp_iommu(unsigned long nr_pages, unsigned long sz_alloc, gfp_t gfp);
+void *kvm_iommu_alloc_pages(void *gfp_flags_p, unsigned long order);
+void kvm_iommu_free_pages(void *virt, void *arg, unsigned long order);
 
 #ifndef __KVM_NVHE_HYPERVISOR__
 struct kvm_iommu_driver {
