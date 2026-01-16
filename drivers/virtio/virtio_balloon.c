@@ -1119,7 +1119,7 @@ static int virtballoon_probe(struct virtio_device *vdev)
 #if defined(CONFIG_ARM64) && defined(CONFIG_ARM64_64K_PAGES)
 		vb->pr_dev_info.order = 5;
 #endif
-
+		vb->pr_dev_info.order = 0;
 		err = page_reporting_register(&vb->pr_dev_info);
 		if (err)
 			goto out_unregister_oom;
