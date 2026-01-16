@@ -52,6 +52,24 @@
       "parentUuid": "77519137_2da97c2a",
       "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c63a755_d306ef07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-16T10:46:43Z",
+      "side": 1,
+      "message": "If you need this option enabled, why not just enable it for all GKI kernel configs?  Isn\u0027t that simpler?",
+      "parentUuid": "99b3be3f_a4d4927c",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
