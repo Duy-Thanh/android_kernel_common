@@ -1260,15 +1260,18 @@ static int dm_derive_sw_secret_callback(struct dm_target *ti,
 {
 	struct dm_derive_sw_secret_args *args = data;
 
-	if (!args->err)
-		return 0;
-
 	args->err = blk_crypto_derive_sw_secret(dev->bdev,
 						args->eph_key,
 						args->eph_key_size,
 						args->sw_secret);
-	/* Try another device in case this fails. */
-	return 0;
+	if (args->err == -EOPNOTSUPP)
+		return 0; /* Continue to the next device, if any. */
+	/*
+	 * A device with support was found.  Stop the iteration.  Note that err
+	 * isn't necessarily 0 here: the key may have been invalid, resulting in
+	 * an error other than -EOPNOTSUPP.
+	 */
+	return 1;
 }
 
 /*
@@ -1302,7 +1305,7 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 			continue;
 		ti->type->iterate_devices(ti, dm_derive_sw_secret_callback,
 					  &args);
-		if (!args.err)
+		if (args.err != -EOPNOTSUPP)
 			break;
 	}
 	dm_put_live_table(md, srcu_idx);
