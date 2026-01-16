@@ -865,7 +865,11 @@ struct f2fs_inode_info {
 	/* linked in global inode list for cache donation */
 	struct list_head gdonate_list;
 	pgoff_t donate_start, donate_end; /* inclusive */
+<<<<<<< HEAD   (8d638fe85b1df0932af4e971fe7f539aec6605e0 Merge 64ed96a21f0f ("f2fs: remove unused GC_FAILURE_PIN") in)
 	atomic_t open_count;		/* # of open files */
+||||||| BASE   (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
+=======
+>>>>>>> BRANCH (1a00afcdaefcf5bb86547c66062d33ab7f4c727e f2fs: keep POSIX_FADV_NOREUSE ranges)
 
 	struct task_struct *atomic_write_task;	/* store atomic write task */
 	struct extent_tree *extent_tree[NR_EXTENT_CACHES];

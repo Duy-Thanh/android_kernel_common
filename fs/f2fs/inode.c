@@ -814,7 +814,12 @@ int f2fs_write_inode(struct inode *inode, struct writeback_control *wbc)
 	return 0;
 }
 
+<<<<<<< HEAD   (8d638fe85b1df0932af4e971fe7f539aec6605e0 Merge 64ed96a21f0f ("f2fs: remove unused GC_FAILURE_PIN") in)
 void f2fs_remove_donate_inode(struct inode *inode)
+||||||| BASE   (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
+=======
+static void f2fs_remove_donate_inode(struct inode *inode)
+>>>>>>> BRANCH (1a00afcdaefcf5bb86547c66062d33ab7f4c727e f2fs: keep POSIX_FADV_NOREUSE ranges)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 

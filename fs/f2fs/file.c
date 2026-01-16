@@ -2481,6 +2481,7 @@ static int f2fs_ioc_shutdown(struct file *filp, unsigned long arg)
 	return ret;
 }
 
+<<<<<<< HEAD   (8d638fe85b1df0932af4e971fe7f539aec6605e0 Merge 64ed96a21f0f ("f2fs: remove unused GC_FAILURE_PIN") in)
 static int f2fs_keep_noreuse_range(struct inode *inode,
 				loff_t offset, loff_t len)
 {
@@ -2534,6 +2535,53 @@ static int f2fs_keep_noreuse_range(struct inode *inode,
 	inode_unlock(inode);
 
 	return ret;
+||||||| BASE   (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
+=======
+static void f2fs_keep_noreuse_range(struct inode *inode,
+				loff_t offset, loff_t len)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	u64 max_bytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
+	u64 start, end;
+
+	if (!S_ISREG(inode->i_mode))
+		return;
+
+	if (offset >= max_bytes || len > max_bytes ||
+	    (offset + len) > max_bytes)
+		return;
+
+	start = offset >> PAGE_SHIFT;
+	end = DIV_ROUND_UP(offset + len, PAGE_SIZE);
+
+	inode_lock(inode);
+	if (f2fs_is_atomic_file(inode)) {
+		inode_unlock(inode);
+		return;
+	}
+
+	spin_lock(&sbi->inode_lock[DONATE_INODE]);
+	/* let's remove the range, if len = 0 */
+	if (!len) {
+		if (!list_empty(&F2FS_I(inode)->gdonate_list)) {
+			list_del_init(&F2FS_I(inode)->gdonate_list);
+			sbi->donate_files--;
+		}
+	} else {
+		if (list_empty(&F2FS_I(inode)->gdonate_list)) {
+			list_add_tail(&F2FS_I(inode)->gdonate_list,
+					&sbi->inode_list[DONATE_INODE]);
+			sbi->donate_files++;
+		} else {
+			list_move_tail(&F2FS_I(inode)->gdonate_list,
+					&sbi->inode_list[DONATE_INODE]);
+		}
+		F2FS_I(inode)->donate_start = start;
+		F2FS_I(inode)->donate_end = end - 1;
+	}
+	spin_unlock(&sbi->inode_lock[DONATE_INODE]);
+	inode_unlock(inode);
+>>>>>>> BRANCH (1a00afcdaefcf5bb86547c66062d33ab7f4c727e f2fs: keep POSIX_FADV_NOREUSE ranges)
 }
 
 static int f2fs_ioc_fitrim(struct file *filp, unsigned long arg)
@@ -5271,8 +5319,14 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
 	     f2fs_compressed_file(inode)))
 		f2fs_invalidate_compress_pages(F2FS_I_SB(inode), inode->i_ino);
 	else if (advice == POSIX_FADV_NOREUSE)
+<<<<<<< HEAD   (8d638fe85b1df0932af4e971fe7f539aec6605e0 Merge 64ed96a21f0f ("f2fs: remove unused GC_FAILURE_PIN") in)
 		err = f2fs_keep_noreuse_range(inode, offset, len);
 	return err;
+||||||| BASE   (64ed96a21f0fb6140e47d0055547ebb415d1f73d f2fs: remove unused GC_FAILURE_PIN)
+=======
+		f2fs_keep_noreuse_range(inode, offset, len);
+	return 0;
+>>>>>>> BRANCH (1a00afcdaefcf5bb86547c66062d33ab7f4c727e f2fs: keep POSIX_FADV_NOREUSE ranges)
 }
 
 #ifdef CONFIG_COMPAT
