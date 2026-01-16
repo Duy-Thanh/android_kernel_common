@@ -79,14 +79,38 @@ static int gunyah_cma_alloc(struct gunyah_cma *cma, loff_t len)
 static int gunyah_cma_release(struct inode *inode, struct file *file)
 {
 	struct gunyah_cma *cma = file->private_data;
-	unsigned int count = PAGE_ALIGN(cma->mapped_size) >> PAGE_SHIFT;
 
 	if (!cma->page)
 		return 0;
 
-	cma_release(cma->dev.cma_area, cma->page, count);
-	cma->page = NULL;
+	struct gunyah_vm_binding *binding = cma->binding;
 
+	if (!binding)
+		return 0;
+
+	u64 start_gfn = (binding->guest_phys_addr >> PAGE_SHIFT);
+	u64 count = (binding->size >> PAGE_SHIFT);
+
+	for (u64 gfn = start_gfn; gfn < start_gfn + count; gfn++) {
+		struct page *page = gunyah_gfn_to_page_get_mapping(binding, gfn);
+
+		if (!page)
+			continue;
+
+		if (page >= cma->page &&
+			page < (cma->page + (cma->mapped_size >> PAGE_SHIFT))) {
+			cma_release(cma->dev.cma_area, page, 1);
+			continue;
+		} else {
+			set_direct_map_default_noflush(page);
+			__free_page(page);
+		}
+	}
+
+	gunyah_gfn_to_page_mapping_unmap_range(binding, start_gfn, count);
+	gunyah_gfn_to_page_mapping_destroy(binding);
+
+	cma->page = NULL;
 	return 0;
 }
 
@@ -120,6 +144,7 @@ static int gunyah_cma_mmap(struct file *file, struct vm_area_struct *vma)
 	kvfree(pages);
 	return ret;
 }
+
 int gunyah_cma_demand_page(struct gunyah_vm *ghvm, struct gunyah_vm_binding *b,
 								u64 gpa, bool write)
 {
@@ -157,6 +182,7 @@ int gunyah_cma_demand_page(struct gunyah_vm *ghvm, struct gunyah_vm_binding *b,
 out:
 	return ret;
 }
+
 static long gunyah_cma_fallocate(struct file *file, int mode, loff_t offset, loff_t len)
 {
 	struct gunyah_cma *cma = file->private_data;
