@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1571c154_c39ab608",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-16T19:14:38Z",
+      "side": 1,
+      "message": "Change the title tag from ANDROID to FROMLIST and add a \"Link:\" tag pointing to the upstream submission on lore. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "c7fd17b9_69e7dc03",
+      "revId": "34f7772890f91297779e36e1a40c2cfa4d92d7fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aac2a5fa_5d68b233",
         "filename": "include/media/rc-core.h",
         "patchSetId": 4
