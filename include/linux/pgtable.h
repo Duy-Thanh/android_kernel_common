@@ -1215,9 +1215,10 @@ static inline void untrack_pfn(struct vm_area_struct *vma,
 }
 
 /*
- * untrack_pfn_moved is called while mremapping a pfnmap for a new region.
+ * untrack_pfn_clear is called while mremapping a pfnmap for a new region
+ * or fails to copy pgtable during duplicate vm area.
  */
-static inline void untrack_pfn_moved(struct vm_area_struct *vma)
+static inline void untrack_pfn_clear(struct vm_area_struct *vma)
 {
 }
 #else
@@ -1228,8 +1229,16 @@ extern void track_pfn_insert(struct vm_area_struct *vma, pgprot_t *prot,
 			     pfn_t pfn);
 extern int track_pfn_copy(struct vm_area_struct *vma);
 extern void untrack_pfn(struct vm_area_struct *vma, unsigned long pfn,
+<<<<<<< HEAD   (f65ae587e227b440f654142bd7e04afe019dc96b Revert "serial: Make uart_remove_one_port() return void")
 			unsigned long size, bool mm_wr_locked);
 extern void untrack_pfn_moved(struct vm_area_struct *vma);
+||||||| BASE   (24414bbcb37e1af95190af36c21ae51d497e1a9e dmaengine: idxd: Remove improper idxd_free)
+			unsigned long size);
+extern void untrack_pfn_moved(struct vm_area_struct *vma);
+=======
+			unsigned long size);
+extern void untrack_pfn_clear(struct vm_area_struct *vma);
+>>>>>>> BRANCH (994182f5aaecd2f24a877489af0c9d26380d4a59 x86/mm/pat: clear VM_PAT if copy_p4d_range failed)
 #endif
 
 #ifdef CONFIG_MMU
