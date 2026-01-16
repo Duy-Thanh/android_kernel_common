@@ -114,6 +114,7 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 	struct fuse_err_ret fer;
 #endif
 
+<<<<<<< HEAD   (c7b616d59b046bb5b9a2045ed9c9ce5d7401fec4 Merge 7ba826aae1d4 ("svcrdma: bound check rq_pages index in )
 	if (!refcount_dec_and_test(&ff->count))
 		return;
 
@@ -137,6 +138,35 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 		if (fuse_simple_background(ff->fm, args,
 				GFP_KERNEL | __GFP_NOFAIL))
 			fuse_release_end(ff->fm, args, -ENOTCONN);
+||||||| BASE   (7ba826aae1d43212f3baa53a2175ad949e21926e svcrdma: bound check rq_pages index in inline path)
+		if (!args) {
+			/* Do nothing when server does not implement 'open' */
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+=======
+		if (!args) {
+			/* Do nothing when server does not implement 'opendir' */
+		} else if (args->opcode == FUSE_RELEASE && ff->fm->fc->no_open) {
+			fuse_release_end(ff->fm, args, 0);
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+>>>>>>> BRANCH (cf74785c00b8b1c0c4a9dd74bfa9c22d62e2d99f fuse: fix readahead reclaim deadlock)
 	}
 	kfree(ff);
 }
@@ -147,8 +177,29 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 	struct fuse_conn *fc = fm->fc;
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
+<<<<<<< HEAD   (c7b616d59b046bb5b9a2045ed9c9ce5d7401fec4 Merge 7ba826aae1d4 ("svcrdma: bound check rq_pages index in )
+||||||| BASE   (7ba826aae1d43212f3baa53a2175ad949e21926e svcrdma: bound check rq_pages index in inline path)
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+=======
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+	bool release = !isdir || open;
+>>>>>>> BRANCH (cf74785c00b8b1c0c4a9dd74bfa9c22d62e2d99f fuse: fix readahead reclaim deadlock)
 
+<<<<<<< HEAD   (c7b616d59b046bb5b9a2045ed9c9ce5d7401fec4 Merge 7ba826aae1d4 ("svcrdma: bound check rq_pages index in )
 	ff = fuse_file_alloc(fm);
+||||||| BASE   (7ba826aae1d43212f3baa53a2175ad949e21926e svcrdma: bound check rq_pages index in inline path)
+	ff = fuse_file_alloc(fm, open);
+=======
+	/*
+	 * ff->args->release_args still needs to be allocated (so we can hold an
+	 * inode reference while there are pending inflight file operations when
+	 * ->release() is called, see fuse_prepare_release()) even if
+	 * fc->no_open is set else it becomes possible for reclaim to deadlock
+	 * if while servicing the readahead request the server triggers reclaim
+	 * and reclaim evicts the inode of the file being read ahead.
+	 */
+	ff = fuse_file_alloc(fm, release);
+>>>>>>> BRANCH (cf74785c00b8b1c0c4a9dd74bfa9c22d62e2d99f fuse: fix readahead reclaim deadlock)
 	if (!ff)
 		return ERR_PTR(-ENOMEM);
 
@@ -168,10 +219,23 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 			fuse_file_free(ff);
 			return ERR_PTR(err);
 		} else {
+<<<<<<< HEAD   (c7b616d59b046bb5b9a2045ed9c9ce5d7401fec4 Merge 7ba826aae1d4 ("svcrdma: bound check rq_pages index in )
 			if (isdir)
+||||||| BASE   (7ba826aae1d43212f3baa53a2175ad949e21926e svcrdma: bound check rq_pages index in inline path)
+			/* No release needed */
+			kfree(ff->release_args);
+			ff->release_args = NULL;
+			if (isdir)
+=======
+			if (isdir) {
+				/* No release needed */
+				kfree(ff->release_args);
+				ff->release_args = NULL;
+>>>>>>> BRANCH (cf74785c00b8b1c0c4a9dd74bfa9c22d62e2d99f fuse: fix readahead reclaim deadlock)
 				fc->no_opendir = 1;
-			else
+			} else {
 				fc->no_open = 1;
+			}
 		}
 	}
 
