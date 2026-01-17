@@ -70,6 +70,24 @@
       "parentUuid": "99b3be3f_a4d4927c",
       "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed855dce_055d172d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-01-17T14:59:28Z",
+      "side": 1,
+      "message": "CONFIG_PHY_PACKAGE is a hidden config option (no prompt) that cannot be directly enabled in defconfig. It\u0027s only selected by specific PHY drivers.\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android17-6.18/drivers/net/phy/Kconfig#33\n\nI think this patch is a reasonable approach with minimal impact. Are there any better alternatives you would suggest?",
+      "parentUuid": "3c63a755_d306ef07",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
