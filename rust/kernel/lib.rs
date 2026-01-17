@@ -96,6 +96,8 @@ pub mod firmware;
 pub mod fmt;
 pub mod fs;
 pub mod id_pool;
+#[doc(hidden)]
+pub mod impl_flags;
 pub mod init;
 pub mod io;
 pub mod ioctl;
