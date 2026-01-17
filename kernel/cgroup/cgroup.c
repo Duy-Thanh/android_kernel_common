@@ -4674,6 +4674,8 @@ int cgroup_add_dfl_cftypes(struct cgroup_subsys *ss, struct cftype *cfts)
 	return cgroup_add_cftypes(ss, cfts);
 }
 
+EXPORT_SYMBOL_GPL(cgroup_add_dfl_cftypes);
+
 /**
  * cgroup_add_legacy_cftypes - add an array of cftypes for legacy hierarchies
  * @ss: target cgroup subsystem
