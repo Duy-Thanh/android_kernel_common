@@ -88,6 +88,24 @@
       "parentUuid": "3c63a755_d306ef07",
       "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8b122a_573df12e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-18T14:18:10Z",
+      "side": 1,
+      "message": "If you have a \"hidden\" config option, then add it to the list of gki config options that we support like this already.  No need to make this kernel change at all.",
+      "parentUuid": "ed855dce_055d172d",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
