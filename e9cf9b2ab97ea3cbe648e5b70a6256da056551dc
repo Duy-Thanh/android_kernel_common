@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "250881c2_38104dd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008683
+      },
+      "writtenOn": "2026-01-18T05:09:43Z",
+      "side": 1,
+      "message": "Android kernel android13-5.10 omitted the second patch when backporting the series `file: fix and simplify close_range()`. I am not sure why such a strange decision was made but omitting that patch results in a buggy kernel.\n\nYesterday when running tmux inside an adb shell, the forked pane process hangs indefinitely after a close_range syscall while keep burning the CPU. That task cannot even be killed without restarting the phone. `/proc/TID/stack` shows that the task is stuck in `__switch_to`. My bisection shows that I72be5b078d7edc061318b0eda36a351e1dc01e56 is the culprit. And applying this patch fixes the issue.\n\nHi @willmcvicker@google.com, I am not sure whether you could review this. But could you add the people involved in I72be5b078d7edc061318b0eda36a351e1dc01e56 to CC or reviewers?\nI cannot see who uploaded that change in public AOSP gerrit.",
+      "revId": "e9cf9b2ab97ea3cbe648e5b70a6256da056551dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
