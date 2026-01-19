@@ -132,6 +132,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+<<<<<<< HEAD   (f9f88854ff16a30cf9e8a2d7c6c89a118375e773 Merge c6ae271bc5fd ("sched/fair: Small cleanup to update_new)
 EXPORT_SYMBOL_GPL(runqueues);
 
 #ifdef CONFIG_SCHED_PROXY_EXEC
@@ -211,6 +212,10 @@ static int __init setup_proxy_exec(char *str)
 }
 #endif
 __setup("sched_proxy_exec=", setup_proxy_exec);
+||||||| BASE   (c6ae271bc5fd44b48ebe43f63c4d2ae972d296da sched/fair: Small cleanup to update_newidle_cost())
+=======
+DEFINE_PER_CPU(struct rnd_state, sched_rnd_state);
+>>>>>>> BRANCH (1b9c118fe318a43aed0b8a516b23817cd3623cf8 sched/fair: Proportional newidle balance)
 
 #ifdef CONFIG_SCHED_DEBUG
 /*
@@ -9488,6 +9493,8 @@ int sched_cpu_dying(unsigned int cpu)
 void __init sched_init_smp(void)
 {
 	sched_init_numa(NUMA_NO_NODE);
+
+	prandom_init_once(&sched_rnd_state);
 
 	/*
 	 * There's no userspace yet to cause hotplug operations; hence all the
