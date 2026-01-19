@@ -2362,11 +2362,18 @@ restore_flag:
 static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 {
 	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
+<<<<<<< HEAD   (136cccf4abedbcfc413ad63acab074ff343d9126 Merge 621dc9eb90a5 ("f2fs: add timeout in f2fs_enable_checkp)
 	long long start, writeback, lock, sync_inode, end;
 	int ret;
 
 	f2fs_info(sbi, "%s start, meta: %lld, node: %lld, data: %lld",
 					__func__,
+||||||| BASE   (621dc9eb90a59fe62d8589ce2489e83efad4bf21 f2fs: add timeout in f2fs_enable_checkpoint())
+=======
+	long long start, writeback, end;
+
+	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
+>>>>>>> BRANCH (341f6a26bfa92c1ba45a05f7c21927300c3f8db0 f2fs: dump more information for f2fs_{enable,disable}_checkp)
 					get_pages(sbi, F2FS_DIRTY_META),
 					get_pages(sbi, F2FS_DIRTY_NODES),
 					get_pages(sbi, F2FS_DIRTY_DATA));
@@ -2419,6 +2426,7 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 	/* Let's ensure there's no pending checkpoint anymore */
 	f2fs_flush_ckpt_thread(sbi);
 
+<<<<<<< HEAD   (136cccf4abedbcfc413ad63acab074ff343d9126 Merge 621dc9eb90a5 ("f2fs: add timeout in f2fs_enable_checkp)
 	f2fs_up_write(&sbi->cp_enable_rwsem);
 
 	end = ktime_get();
@@ -2431,6 +2439,14 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 				ktime_ms_delta(sync_inode, lock),
 				ktime_ms_delta(end, sync_inode));
 	return ret;
+||||||| BASE   (621dc9eb90a59fe62d8589ce2489e83efad4bf21 f2fs: add timeout in f2fs_enable_checkpoint())
+=======
+	end = ktime_get();
+
+	f2fs_info(sbi, "f2fs_enable_checkpoint() finishes, writeback:%llu, sync:%llu",
+					ktime_ms_delta(writeback, start),
+					ktime_ms_delta(end, writeback));
+>>>>>>> BRANCH (341f6a26bfa92c1ba45a05f7c21927300c3f8db0 f2fs: dump more information for f2fs_{enable,disable}_checkp)
 }
 
 static int f2fs_remount(struct super_block *sb, int *flags, char *data)
