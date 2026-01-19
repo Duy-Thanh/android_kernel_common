@@ -106,6 +106,24 @@
       "parentUuid": "ed855dce_055d172d",
       "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79e8add2_67ddce4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-01-19T02:24:32Z",
+      "side": 1,
+      "message": "You\u0027re right. Adding it to init/Kconfig.gki is the better approach.\nI\u0027ve submitted a new patch. Thanks!\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3919505",
+      "parentUuid": "7a8b122a_573df12e",
+      "revId": "fd51fc3bb988e973e30833b09155aac9aa0fd598",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
