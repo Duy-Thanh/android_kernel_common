@@ -49,6 +49,7 @@
   exportfs_decode_fh
   exportfs_encode_inode_fh
   filp_close
+  find_user_dsq
   folio_add_lru
   folio_mapping
   folio_referenced
