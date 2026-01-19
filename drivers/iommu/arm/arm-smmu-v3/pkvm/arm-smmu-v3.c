@@ -689,6 +689,23 @@ static struct kvm_hyp_iommu *smmu_id_to_iommu(pkvm_handle_t smmu_id)
 	return &kvm_hyp_arm_smmu_v3_smmus[smmu_id].iommu;
 }
 
+static void *smmu_alloc(size_t size)
+{
+	void *p;
+	struct kvm_hyp_req req = {};
+
+	p = hyp_alloc(size);
+	if (p)
+		return p;
+
+	req.type = KVM_HYP_REQ_TYPE_MEM;
+	req.mem.dest = REQ_MEM_DEST_HYP_ALLOC;
+	req.mem.nr_pages = 1;
+	req.mem.sz_alloc = PAGE_SIZE;
+	kvm_iommu_request(&req);
+	return NULL;
+}
+
 static int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, int type)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain;
@@ -696,7 +713,7 @@ static int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, int type)
 	if (type >= KVM_ARM_SMMU_DOMAIN_MAX)
 		return -EINVAL;
 
-	smmu_domain = hyp_alloc(sizeof(*smmu_domain));
+	smmu_domain = smmu_alloc(sizeof(*smmu_domain));
 	if (!smmu_domain)
 		return -ENOMEM;
 
@@ -1294,7 +1311,7 @@ static int smmu_attach_dev(struct kvm_hyp_iommu *iommu, struct kvm_hyp_iommu_dom
 			ret = -EBUSY;
 			goto out_unlock;
 		}
-		iommu_node = hyp_alloc(sizeof(struct domain_iommu_node));
+		iommu_node = smmu_alloc(sizeof(struct domain_iommu_node));
 		if (!iommu_node) {
 			ret = -ENOMEM;
 			goto out_unlock;
