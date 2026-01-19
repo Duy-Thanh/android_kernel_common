@@ -427410,6 +427410,11 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0xccdb2642
+  return_type_id: 0x22a6a1ce
+  parameter_id: 0x92233392
+}
+function {
   id: 0xccdb9419
   return_type_id: 0x16fde55f
   parameter_id: 0x1efad3bd
@@ -471405,6 +471410,15 @@ elf_symbol {
   crc: 0x2ff6c64a
   type_id: 0x043864e3
   full_name: "find_user"
+}
+elf_symbol {
+  id: 0x38946680
+  name: "find_user_dsq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x14c1fc55
+  type_id: 0xccdb2642
+  full_name: "find_user_dsq"
 }
 elf_symbol {
   id: 0x69beea41
@@ -525102,6 +525116,7 @@ interface {
   symbol_id: 0x90d375c5
   symbol_id: 0xdc16d76a
   symbol_id: 0x5b7736f5
+  symbol_id: 0x38946680
   symbol_id: 0x69beea41
   symbol_id: 0xd2a94cce
   symbol_id: 0x40cf5b57
