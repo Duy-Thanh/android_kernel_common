@@ -1565,6 +1565,32 @@ int xhci_hub_status_data(struct usb_hcd *hcd, char *buf)
 
 	status = bus_state->resuming_ports;
 
+<<<<<<< HEAD   (beae5be65ee6e5532f350f452015ab1baa47a443 Merge 5.10.247 into android12-5.10-lts)
+||||||| BASE   (f964b940099f9982d723d4c77988d4b0dda9c165 Linux 5.10.247)
+	/*
+	 * SS devices are only visible to roothub after link training completes.
+	 * Keep polling roothubs for a grace period after xHC start
+	 */
+	if (xhci->run_graceperiod) {
+		if (time_before(jiffies, xhci->run_graceperiod))
+			status = 1;
+		else
+			xhci->run_graceperiod = 0;
+	}
+
+=======
+	/*
+	 * SS devices are only visible to roothub after link training completes.
+	 * Keep polling roothubs for a grace period after xHC start
+	 */
+	if (hcd->speed >= HCD_USB3 && xhci->run_graceperiod) {
+		if (time_before(jiffies, xhci->run_graceperiod))
+			status = 1;
+		else
+			xhci->run_graceperiod = 0;
+	}
+
+>>>>>>> BRANCH (6cac97b12bdab04832e0416d049efcd0d48d303b scsi: target: Reset t_task_cdb pointer in error case)
 	mask = PORT_CSC | PORT_PEC | PORT_OCC | PORT_PLC | PORT_WRC | PORT_CEC;
 
 	/* For each port, did anything change?  If so, set that bit in buf. */
