@@ -63,9 +63,32 @@
 #include <trace/hooks/suspend.h>
 #include <trace/hooks/fsnotify.h>
 #include <trace/hooks/fuse.h>
+<<<<<<< HEAD   (aa4d4a165d55ba17d038e1145ad7b055ba67c8ee ANDROID: ABI: Update xiaomi symbol list)
 #include <trace/hooks/madvise.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/softlockup.h>
+||||||| BASE   (2d17b01da1a910e6a2f6cf1b1d5172649d5b7738 UPSTREAM: f2fs: support FAULT_TIMEOUT)
+#include <trace/hooks/ogki_honor.h>
+#include <trace/hooks/suspend.h>
+#include <trace/hooks/user.h>
+#include <trace/hooks/gzvm.h>
+#include <trace/hooks/usb.h>
+#include <trace/hooks/kasan.h>
+#include <trace/hooks/dmv_debug.h>
+#include <trace/hooks/vb2.h>
+#include <trace/hooks/rcu.h>
+=======
+#include <trace/hooks/ogki_honor.h>
+#include <trace/hooks/suspend.h>
+#include <trace/hooks/user.h>
+#include <trace/hooks/gzvm.h>
+#include <trace/hooks/usb.h>
+#include <trace/hooks/kasan.h>
+#include <trace/hooks/dmv_debug.h>
+#include <trace/hooks/vb2.h>
+#include <trace/hooks/rcu.h>
+#include <trace/hooks/dwc3.h>
+>>>>>>> CHANGE (8fcff2e6640b9fefc563a726f4617f4343a43997 ANDROID: vendor_hooks: dwc3: Work around for STAR-6887553)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -480,5 +503,27 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_charge);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap);
+<<<<<<< HEAD   (aa4d4a165d55ba17d038e1145ad7b055ba67c8ee ANDROID: ABI: Update xiaomi symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folios_put_refs_direct_free_extent);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_and_swap_cache);
+||||||| BASE   (2d17b01da1a910e6a2f6cf1b1d5172649d5b7738 UPSTREAM: f2fs: support FAULT_TIMEOUT)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_core_soft_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_xhci_soft_reset);
+>>>>>>> CHANGE (8fcff2e6640b9fefc563a726f4617f4343a43997 ANDROID: vendor_hooks: dwc3: Work around for STAR-6887553)
