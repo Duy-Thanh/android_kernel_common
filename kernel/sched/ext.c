@@ -908,6 +908,22 @@ static void refill_task_slice_dfl(struct scx_sched *sch, struct task_struct *p)
 	__scx_add_event(sch, SCX_EV_REFILL_SLICE_DFL, 1);
 }
 
+static void local_dsq_post_enq(struct scx_dispatch_q *dsq, struct task_struct *p,
+			       u64 enq_flags)
+{
+	struct rq *rq = container_of(dsq, struct rq, scx.local_dsq);
+	bool preempt = false;
+
+	if ((enq_flags & SCX_ENQ_PREEMPT) && p != rq->curr &&
+	    rq->curr->sched_class == &ext_sched_class) {
+		rq->curr->scx.slice = 0;
+		preempt = true;
+	}
+
+	if (preempt || sched_class_above(&ext_sched_class, rq->curr->sched_class))
+		resched_curr(rq);
+}
+
 static void dispatch_enqueue(struct scx_sched *sch, struct scx_dispatch_q *dsq,
 			     struct task_struct *p, u64 enq_flags)
 {
@@ -1005,6 +1021,7 @@ static void dispatch_enqueue(struct scx_sched *sch, struct scx_dispatch_q *dsq,
 	if (enq_flags & SCX_ENQ_CLEAR_OPSS)
 		atomic_long_set_release(&p->scx.ops_state, SCX_OPSS_NONE);
 
+<<<<<<< HEAD   (17580c72831d235ddc7ee536977da44ee4f82e63 Revert "functionfs: fix the open/removal races")
 	if (is_local) {
 		struct rq *rq = container_of(dsq, struct rq, scx.local_dsq);
 		bool preempt = false;
@@ -1019,8 +1036,27 @@ static void dispatch_enqueue(struct scx_sched *sch, struct scx_dispatch_q *dsq,
 						 rq->donor->sched_class))
 			resched_curr(rq);
 	} else {
+||||||| BASE   (3192204aa77fb6b3b95bb88795b9978fe467f811 printk: Avoid scheduling irq_work on suspend)
+	if (is_local) {
+		struct rq *rq = container_of(dsq, struct rq, scx.local_dsq);
+		bool preempt = false;
+
+		if ((enq_flags & SCX_ENQ_PREEMPT) && p != rq->curr &&
+		    rq->curr->sched_class == &ext_sched_class) {
+			rq->curr->scx.slice = 0;
+			preempt = true;
+		}
+
+		if (preempt || sched_class_above(&ext_sched_class,
+						 rq->curr->sched_class))
+			resched_curr(rq);
+	} else {
+=======
+	if (is_local)
+		local_dsq_post_enq(dsq, p, enq_flags);
+	else
+>>>>>>> BRANCH (514d605ab6ce88f45f551ebaade2f5e52c1bb6ed sched_ext: Factor out local_dsq_post_enq() from dispatch_enq)
 		raw_spin_unlock(&dsq->lock);
-	}
 }
 
 static void task_unlink_from_dsq(struct task_struct *p,
