@@ -118,6 +118,30 @@
       },
       "revId": "a62c5cebc4611cfd875b06ef539b5666e22172fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5fc4e6_952dd511",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-01-20T02:25:44Z",
+      "side": 1,
+      "message": "Ah, sorry for the noise, you abandoned it.",
+      "parentUuid": "ecf1c7b5_3fee0301",
+      "range": {
+        "startLine": 49,
+        "startChar": 61,
+        "endLine": 49,
+        "endChar": 72
+      },
+      "revId": "a62c5cebc4611cfd875b06ef539b5666e22172fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
