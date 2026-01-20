@@ -1476,6 +1476,7 @@ ddk_headers(
 ddk_headers(
     name = "all_headers_allowlist_aarch64",
     hdrs = [
+        "drivers/devfreq/governor.h",
         "drivers/dma/dmaengine.h",
         "drivers/extcon/extcon.h",
         "drivers/opp/opp.h",
@@ -1502,6 +1503,7 @@ ddk_headers(
     linux_includes = [
         "arch/arm64/include",
         "arch/arm64/include/uapi",
+        "drivers/devfreq",
         "drivers/dma",
         "drivers/extcon",
         "drivers/opp",
