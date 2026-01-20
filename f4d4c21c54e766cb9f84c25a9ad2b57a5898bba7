@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4905b9f_4101723c",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:39:30Z",
+      "side": 1,
+      "message": "dev_err()",
+      "range": {
+        "startLine": 112,
+        "startChar": 3,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "f4d4c21c54e766cb9f84c25a9ad2b57a5898bba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
