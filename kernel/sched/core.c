@@ -6168,8 +6168,6 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 		if (unlikely(p == RETRY_TASK))
 			goto restart;
 
-		trace_android_vh_chk_task(&p, rq);
-
 		/* Assume the next prioritized class is idle_sched_class */
 		if (!p) {
 			put_prev_task(rq, prev);
@@ -6182,9 +6180,67 @@ __pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 restart:
 	put_prev_task_balance(rq, prev, rf);
 
+<<<<<<< HEAD   (f8b6ec485b5575446295852f64a204a7843f4178 UPSTREAM: xfrm: delete x->tunnel as we delete x)
 	for_each_class(class) {
 		p = class->pick_next_task(rq);
 		trace_android_vh_chk_task(&p, rq);
+||||||| BASE   (c196242542702a254897f81f6c0d01826650c5c5 UPSTREAM: xfrm: delete x->tunnel as we delete x)
+	for_each_active_class(class) {
+		if (class->pick_next_task) {
+			p = class->pick_next_task(rq, prev);
+			trace_android_vh_chk_task(&p, rq);
+			if (p)
+				return p;
+		} else {
+			p = class->pick_task(rq);
+			trace_android_vh_chk_task(&p, rq);
+			if (p) {
+				put_prev_set_next_task(rq, prev, p);
+				return p;
+			}
+		}
+	}
+
+	BUG(); /* The idle class should always have a runnable task. */
+}
+
+struct task_struct *pick_task(struct rq *rq)
+{
+	const struct sched_class *class;
+	struct task_struct *p;
+
+	rq->dl_server = NULL;
+
+	for_each_active_class(class) {
+		p = class->pick_task(rq);
+=======
+	for_each_active_class(class) {
+		if (class->pick_next_task) {
+			p = class->pick_next_task(rq, prev);
+			if (p)
+				return p;
+		} else {
+			p = class->pick_task(rq);
+			if (p) {
+				put_prev_set_next_task(rq, prev, p);
+				return p;
+			}
+		}
+	}
+
+	BUG(); /* The idle class should always have a runnable task. */
+}
+
+struct task_struct *pick_task(struct rq *rq)
+{
+	const struct sched_class *class;
+	struct task_struct *p;
+
+	rq->dl_server = NULL;
+
+	for_each_active_class(class) {
+		p = class->pick_task(rq);
+>>>>>>> CHANGE (a145bbaa0b819796ff00a557c5643f4d537a40e7 Revert "ANDROID: SPED: Add vendor hooks in Scheduler")
 		if (p)
 			return p;
 	}

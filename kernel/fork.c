@@ -1001,8 +1001,15 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+<<<<<<< HEAD   (f8b6ec485b5575446295852f64a204a7843f4178 UPSTREAM: xfrm: delete x->tunnel as we delete x)
 	trace_android_vh_put_task(tsk);
 	put_dmabuf_info(tsk->dmabuf_info);
+||||||| BASE   (c196242542702a254897f81f6c0d01826650c5c5 UPSTREAM: xfrm: delete x->tunnel as we delete x)
+	trace_android_vh_put_task(tsk);
+	sched_ext_free(tsk);
+=======
+	sched_ext_free(tsk);
+>>>>>>> CHANGE (a145bbaa0b819796ff00a557c5643f4d537a40e7 Revert "ANDROID: SPED: Add vendor hooks in Scheduler")
 	io_uring_free(tsk);
 	cgroup_free(tsk);
 	task_numa_free(tsk, true);
