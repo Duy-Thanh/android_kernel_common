@@ -1193,6 +1193,112 @@ static ssize_t dbc_bcdDevice_store(struct device *dev,
 	return size;
 }
 
+<<<<<<< HEAD   (84595e7cd483e40c6b65961e7ffdc2b89af11413 ANDROID: GKI: x86: Disable IOMMU passthrough mode)
+||||||| BASE   (4faeeaec4ccd651bc9100205ce7d4582a928af98 FROMGIT: xhci: dbc: allow setting device serial number throu)
+static ssize_t dbc_serial_show(struct device *dev,
+			    struct device_attribute *attr,
+			    char *buf)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+
+	return sysfs_emit(buf, "%s\n", dbc->str.serial);
+}
+
+static ssize_t dbc_serial_store(struct device *dev,
+			     struct device_attribute *attr,
+			     const char *buf, size_t size)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+	size_t len;
+
+	if (dbc->state != DS_DISABLED)
+		return -EBUSY;
+
+	len = strcspn(buf, "\n");
+	if (!len)
+		return -EINVAL;
+
+	if (len > USB_MAX_STRING_LEN)
+		return -E2BIG;
+
+	memcpy(dbc->str.serial, buf, len);
+	dbc->str.serial[len] = '\0';
+
+	return size;
+}
+
+=======
+static ssize_t dbc_product_show(struct device *dev,
+				 struct device_attribute *attr,
+				 char *buf)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+
+	return sysfs_emit(buf, "%s\n", dbc->str.product);
+}
+
+static ssize_t dbc_product_store(struct device *dev,
+				  struct device_attribute *attr,
+				  const char *buf, size_t size)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+	size_t len;
+
+	if (dbc->state != DS_DISABLED)
+		return -EBUSY;
+
+	len = strcspn(buf, "\n");
+	if (!len)
+		return -EINVAL;
+
+	if (len > USB_MAX_STRING_LEN)
+		return -E2BIG;
+
+	memcpy(dbc->str.product, buf, len);
+	dbc->str.product[len] = '\0';
+
+	return size;
+}
+
+static ssize_t dbc_serial_show(struct device *dev,
+			    struct device_attribute *attr,
+			    char *buf)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+
+	return sysfs_emit(buf, "%s\n", dbc->str.serial);
+}
+
+static ssize_t dbc_serial_store(struct device *dev,
+			     struct device_attribute *attr,
+			     const char *buf, size_t size)
+{
+	struct xhci_hcd	*xhci = hcd_to_xhci(dev_get_drvdata(dev));
+	struct xhci_dbc	*dbc = xhci->dbc;
+	size_t len;
+
+	if (dbc->state != DS_DISABLED)
+		return -EBUSY;
+
+	len = strcspn(buf, "\n");
+	if (!len)
+		return -EINVAL;
+
+	if (len > USB_MAX_STRING_LEN)
+		return -E2BIG;
+
+	memcpy(dbc->str.serial, buf, len);
+	dbc->str.serial[len] = '\0';
+
+	return size;
+}
+
+>>>>>>> CHANGE (465e7828158dc98add6f66b25a5baf47072202d1 FROMGIT: xhci: dbc: allow setting product string through sys)
 static ssize_t dbc_bInterfaceProtocol_show(struct device *dev,
 				 struct device_attribute *attr,
 				 char *buf)
@@ -1280,6 +1386,13 @@ static DEVICE_ATTR_RW(dbc);
 static DEVICE_ATTR_RW(dbc_idVendor);
 static DEVICE_ATTR_RW(dbc_idProduct);
 static DEVICE_ATTR_RW(dbc_bcdDevice);
+<<<<<<< HEAD   (84595e7cd483e40c6b65961e7ffdc2b89af11413 ANDROID: GKI: x86: Disable IOMMU passthrough mode)
+||||||| BASE   (4faeeaec4ccd651bc9100205ce7d4582a928af98 FROMGIT: xhci: dbc: allow setting device serial number throu)
+static DEVICE_ATTR_RW(dbc_serial);
+=======
+static DEVICE_ATTR_RW(dbc_serial);
+static DEVICE_ATTR_RW(dbc_product);
+>>>>>>> CHANGE (465e7828158dc98add6f66b25a5baf47072202d1 FROMGIT: xhci: dbc: allow setting product string through sys)
 static DEVICE_ATTR_RW(dbc_bInterfaceProtocol);
 static DEVICE_ATTR_RW(dbc_poll_interval_ms);
 
@@ -1288,6 +1401,13 @@ static struct attribute *dbc_dev_attrs[] = {
 	&dev_attr_dbc_idVendor.attr,
 	&dev_attr_dbc_idProduct.attr,
 	&dev_attr_dbc_bcdDevice.attr,
+<<<<<<< HEAD   (84595e7cd483e40c6b65961e7ffdc2b89af11413 ANDROID: GKI: x86: Disable IOMMU passthrough mode)
+||||||| BASE   (4faeeaec4ccd651bc9100205ce7d4582a928af98 FROMGIT: xhci: dbc: allow setting device serial number throu)
+	&dev_attr_dbc_serial.attr,
+=======
+	&dev_attr_dbc_serial.attr,
+	&dev_attr_dbc_product.attr,
+>>>>>>> CHANGE (465e7828158dc98add6f66b25a5baf47072202d1 FROMGIT: xhci: dbc: allow setting product string through sys)
 	&dev_attr_dbc_bInterfaceProtocol.attr,
 	&dev_attr_dbc_poll_interval_ms.attr,
 	NULL
