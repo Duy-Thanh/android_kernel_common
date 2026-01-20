@@ -28,7 +28,15 @@
 #include <asm/system_misc.h>
 
 #include <trace/hooks/traps.h>
+<<<<<<< HEAD   (e70cf19d88cf382a92514fc1b4df976ab34f0d06 Revert "ANDROID: usb: gadget: udc: fix UAF in usb_gadget_sta)
 
+||||||| BASE   (ed88593b89e8bcf162b9fdd14a24e9c4e9966664 FROMGIT: KVM: arm64: vgic-v3: Fix GICv3 trapping in protecte)
+#include <trace/hooks/gic.h>
+
+=======
+#include <trace/hooks/gic.h>
+#include <trace/hooks/dtask.h>
+>>>>>>> CHANGE (41cd08be1469b61c34acab96ca3350cd25e6291e ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
 /*
  * Handle IRQ/context state management when entering from kernel mode.
  * Before this function is called it is not safe to call regular kernel code,
@@ -131,11 +139,13 @@ static __always_inline void __exit_to_user_mode(void)
 static __always_inline void prepare_exit_to_user_mode(struct pt_regs *regs)
 {
 	unsigned long flags;
+	int thread_lazy_resched_flag = 0;
 
 	local_daif_mask();
 
 	flags = read_thread_flags();
-	if (unlikely(flags & _TIF_WORK_MASK))
+	trace_android_vh_restore_curr_resched(&flags, &thread_lazy_resched_flag);
+	if (unlikely(flags & _TIF_WORK_MASK) || thread_lazy_resched_flag)
 		do_notify_resume(regs, flags);
 }
 

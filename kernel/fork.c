@@ -114,7 +114,12 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/sched.h>
+<<<<<<< HEAD   (e70cf19d88cf382a92514fc1b4df976ab34f0d06 Revert "ANDROID: usb: gadget: udc: fix UAF in usb_gadget_sta)
 #include <trace/hooks/mm.h>
+||||||| BASE   (ed88593b89e8bcf162b9fdd14a24e9c4e9966664 FROMGIT: KVM: arm64: vgic-v3: Fix GICv3 trapping in protecte)
+=======
+#include <trace/hooks/dtask.h>
+>>>>>>> CHANGE (41cd08be1469b61c34acab96ca3350cd25e6291e ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
 /*
  * Minimum number of threads to boot the kernel
  */
@@ -1108,6 +1113,7 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 	setup_thread_stack(tsk, orig);
 	clear_user_return_notifier(tsk);
 	clear_tsk_need_resched(tsk);
+	trace_android_vh_clear_curr_lazy(tsk);
 	set_task_stack_end_magic(tsk);
 	clear_syscall_work_syscall_user_dispatch(tsk);
 

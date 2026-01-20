@@ -57,6 +57,7 @@
 #include "autogroup.h"
 
 #include <trace/hooks/sched.h>
+#include <trace/hooks/dtask.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_runtime);
 
@@ -740,6 +741,7 @@ static u64 sched_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	unsigned int min_gran;
 	u64 slice;
 
+<<<<<<< HEAD   (e70cf19d88cf382a92514fc1b4df976ab34f0d06 Revert "ANDROID: usb: gadget: udc: fix UAF in usb_gadget_sta)
 	if (sched_feat(ALT_PERIOD))
 		nr_running = rq_of(cfs_rq)->cfs.h_nr_running;
 
@@ -760,6 +762,26 @@ static u64 sched_slice(struct cfs_rq *cfs_rq, struct sched_entity *se)
 			load = &lw;
 		}
 		slice = __calc_delta(slice, se->load.weight, load);
+||||||| BASE   (ed88593b89e8bcf162b9fdd14a24e9c4e9966664 FROMGIT: KVM: arm64: vgic-v3: Fix GICv3 trapping in protecte)
+	/*
+	 * The task has consumed its request, reschedule.
+	 */
+	if (cfs_rq->nr_running > 1) {
+		resched_curr(rq_of(cfs_rq));
+		clear_buddies(cfs_rq, se);
+=======
+	/*
+	 * The task has consumed its request, reschedule.
+	 */
+	if (cfs_rq->nr_running > 1) {
+		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
+
+		if (skip_preempt)
+			return;
+
+		resched_curr(rq_of(cfs_rq));
+		clear_buddies(cfs_rq, se);
+>>>>>>> CHANGE (41cd08be1469b61c34acab96ca3350cd25e6291e ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
 	}
 
 	if (sched_feat(BASE_SLICE)) {
@@ -5123,6 +5145,7 @@ static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
 static void
 entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 {
+	bool skip_preempt = false;
 	/*
 	 * Update run-time statistics of the 'current'.
 	 */
@@ -5140,6 +5163,11 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 	 * validating it and just reschedule.
 	 */
 	if (queued) {
+		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
+
+		if (skip_preempt)
+			return;
+
 		resched_curr(rq_of(cfs_rq));
 		return;
 	}
@@ -7841,6 +7869,11 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
 	return;
 
 preempt:
+	trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &ignore);
+
+	if (ignore)
+		return;
+
 	resched_curr(rq);
 	/*
 	 * Only set the backward buddy when the current task is still

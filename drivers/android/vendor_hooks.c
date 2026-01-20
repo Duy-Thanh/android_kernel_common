@@ -547,6 +547,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+<<<<<<< HEAD   (e70cf19d88cf382a92514fc1b4df976ab34f0d06 Revert "ANDROID: usb: gadget: udc: fix UAF in usb_gadget_sta)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
@@ -577,3 +578,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_signal_coredump_check);
+||||||| BASE   (ed88593b89e8bcf162b9fdd14a24e9c4e9966664 FROMGIT: KVM: arm64: vgic-v3: Fix GICv3 trapping in protecte)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_add_page_merge_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_add_page_merge_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+>>>>>>> CHANGE (41cd08be1469b61c34acab96ca3350cd25e6291e ANDROID: implement lazy preemption via hooks for pre-6.13 ke)

@@ -16,6 +16,7 @@ struct rt_mutex_base;
 struct rw_semaphore;
 struct task_struct;
 struct percpu_rw_semaphore;
+struct rq;
 
 DECLARE_HOOK(android_vh_mutex_wait_start,
 	TP_PROTO(struct mutex *lock),
@@ -140,10 +141,26 @@ DECLARE_HOOK(android_vh_read_lazy_flag,
 DECLARE_HOOK(android_vh_set_tsk_need_resched_lazy,
 	TP_PROTO(struct task_struct *p, struct rq *rq, int *need_lazy),
 	TP_ARGS(p, rq, need_lazy));
+<<<<<<< HEAD   (e70cf19d88cf382a92514fc1b4df976ab34f0d06 Revert "ANDROID: usb: gadget: udc: fix UAF in usb_gadget_sta)
 DECLARE_HOOK(android_vh_signal_coredump_check,
 	TP_PROTO(struct task_struct *p, struct ksignal *ksig, bool *skip_coredump),
 	TP_ARGS(p, ksig, skip_coredump));
 
+||||||| BASE   (ed88593b89e8bcf162b9fdd14a24e9c4e9966664 FROMGIT: KVM: arm64: vgic-v3: Fix GICv3 trapping in protecte)
+=======
+
+DECLARE_HOOK(android_vh_resched_curr_lazy,
+	TP_PROTO(struct rq *rq, bool *skip_preempt),
+	TP_ARGS(rq, skip_preempt));
+
+DECLARE_HOOK(android_vh_restore_curr_resched,
+	TP_PROTO(unsigned long *flags, int *lazy_flage),
+	TP_ARGS(flags, lazy_flage));
+
+DECLARE_HOOK(android_vh_clear_curr_lazy,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+>>>>>>> CHANGE (41cd08be1469b61c34acab96ca3350cd25e6291e ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
 #endif /* _TRACE_HOOK_DTASK_H */
 
 /* This part must be outside protection */
