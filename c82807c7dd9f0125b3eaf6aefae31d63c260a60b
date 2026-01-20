@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccd9bab_6353beb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964970
+      },
+      "writtenOn": "2026-01-20T13:13:09Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](...\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9fea4b395260175de4016b42982f45a3e6e03d0b) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9fea4b395260175de4016b42982f45a3e6e03d0b).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "c82807c7dd9f0125b3eaf6aefae31d63c260a60b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f56459_b5572817",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964970
+      },
+      "writtenOn": "2026-01-20T13:13:09Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Cherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](...\n\nCherry pick is clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/9fea4b395260175de4016b42982f45a3e6e03d0b) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d9fea4b395260175de4016b42982f45a3e6e03d0b).\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "c82807c7dd9f0125b3eaf6aefae31d63c260a60b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
