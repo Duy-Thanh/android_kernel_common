@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451ebbd2_93d41f4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-20T23:32:00Z",
+      "side": 1,
+      "message": "From the discussion upstream it seems like reworking userland is likely to be a longer term solution. Could the plans there be included here so we have context should this get submitted to the next LTS.",
+      "revId": "33f466da29bb2e9095bd44b831be986d662fec55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
