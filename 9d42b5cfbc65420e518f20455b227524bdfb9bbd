@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c381252_37dc4ede",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:41:12Z",
+      "side": 1,
+      "message": "please fix up crc issues, we can\u0027t break them without a lot of advance notice",
+      "revId": "9d42b5cfbc65420e518f20455b227524bdfb9bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
