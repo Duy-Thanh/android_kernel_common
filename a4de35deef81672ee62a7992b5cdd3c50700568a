@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf9e9d0_50685a4d",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:42:07Z",
+      "side": 1,
+      "message": "dev_dbg() everywhere please.",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 9
+      },
+      "revId": "a4de35deef81672ee62a7992b5cdd3c50700568a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
