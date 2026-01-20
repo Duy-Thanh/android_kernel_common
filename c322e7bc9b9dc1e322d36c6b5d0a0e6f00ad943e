@@ -16,6 +16,24 @@
       "message": "This approach selects the PHY_PACKAGE as built-in no? It also bypasses all the \"depends on\" that selecting configs might have. Have you double checked this?",
       "revId": "c322e7bc9b9dc1e322d36c6b5d0a0e6f00ad943e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91fc121_90520566",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-20T18:38:07Z",
+      "side": 1,
+      "message": "built-in code is small, so it should be ok.",
+      "parentUuid": "e37814a2_358d52de",
+      "revId": "c322e7bc9b9dc1e322d36c6b5d0a0e6f00ad943e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
