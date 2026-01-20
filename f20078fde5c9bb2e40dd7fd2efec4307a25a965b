@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb231f11_76715910",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:52:57Z",
+      "side": 1,
+      "message": "you forgot to unwind the above registrations, this will cause a big failure.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 13
+      },
+      "revId": "f20078fde5c9bb2e40dd7fd2efec4307a25a965b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
