@@ -94,6 +94,30 @@
       },
       "revId": "a62c5cebc4611cfd875b06ef539b5666e22172fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf1c7b5_3fee0301",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-01-20T02:24:58Z",
+      "side": 1,
+      "message": "Maybe it still will make sense to wait for the series to hit mm-stable (at least)? It\u0027s like a week of wait time (assuming no further feedback and no code changes in the patches)",
+      "parentUuid": "872f0b80_9dbb627d",
+      "range": {
+        "startLine": 49,
+        "startChar": 61,
+        "endLine": 49,
+        "endChar": 72
+      },
+      "revId": "a62c5cebc4611cfd875b06ef539b5666e22172fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
