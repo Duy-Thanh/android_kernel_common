@@ -16,7 +16,14 @@
 struct font_desc {
     int idx;
     const char *name;
+<<<<<<< HEAD   (4a18e4a82f8969fbdfe68e0d183d0d5150e694c5 ANDROID: GKI: fix crc build error in blk-mq.c)
     int width, height;
+||||||| BASE   (6cac97b12bdab04832e0416d049efcd0d48d303b scsi: target: Reset t_task_cdb pointer in error case)
+    unsigned int width, height;
+=======
+    unsigned int width, height;
+    unsigned int charcount;
+>>>>>>> BRANCH (6d90a061c0910ece3f9dc3e8b4f03c4d2e0cc4db xfs: fix a memory leak in xfs_buf_item_init())
     const void *data;
     int pref;
 };
