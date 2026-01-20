@@ -1556,8 +1556,6 @@ static void sctp_close(struct sock *sk, long timeout)
 	spin_unlock_bh(&net->sctp.addr_wq_lock);
 
 	sock_put(sk);
-
-	SCTP_DBG_OBJCNT_DEC(sock);
 }
 
 /* Handle EPIPE error. */
@@ -5109,11 +5107,22 @@ static void sctp_destroy_sock(struct sock *sk)
 		sp->do_auto_asconf = 0;
 		list_del(&sp->auto_asconf_list);
 	}
+
 	sctp_endpoint_free(sp->ep);
+<<<<<<< HEAD   (44a8cfc672528194bfb4f6319a2df436f9b405bc Revert "net/sched: act_connmark: handle errno on tcf_idr_che)
 	local_bh_disable();
+||||||| BASE   (68efe5a6c16a05391e3d96025b41e9bf573f968c Linux 5.15.197)
+=======
+
+>>>>>>> BRANCH (cd93db1b1b4460e6ee77564024ea461e5940f69c nbd: defer config unlock in nbd_genl_connect)
 	sk_sockets_allocated_dec(sk);
 	sock_prot_inuse_add(sock_net(sk), sk->sk_prot, -1);
+<<<<<<< HEAD   (44a8cfc672528194bfb4f6319a2df436f9b405bc Revert "net/sched: act_connmark: handle errno on tcf_idr_che)
 	local_bh_enable();
+||||||| BASE   (68efe5a6c16a05391e3d96025b41e9bf573f968c Linux 5.15.197)
+=======
+	SCTP_DBG_OBJCNT_DEC(sock);
+>>>>>>> BRANCH (cd93db1b1b4460e6ee77564024ea461e5940f69c nbd: defer config unlock in nbd_genl_connect)
 }
 
 /* Triggered when there are no references on the socket anymore */
