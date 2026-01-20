@@ -92,7 +92,7 @@ void __pkvm_close_module_registration(void)
 	 */
 }
 
-static void tracing_mod_hyp_printk(u8 fmt_id, u64 a, u64 b, u64 c, u64 d)
+static void tracing_mod_hyp_printk(u16 fmt_id, u64 a, u64 b, u64 c, u64 d)
 {
 #ifdef CONFIG_TRACING
 	struct trace_hyp_format___hyp_printk *entry;
@@ -112,6 +112,11 @@ static void tracing_mod_hyp_printk(u8 fmt_id, u64 a, u64 b, u64 c, u64 d)
 	entry->d = d;
 	tracing_commit_entry();
 #endif
+}
+
+static void tracing_mod_hyp_printk_u8(u8 fmt_id, u64 a, u64 b, u64 c, u64 d)
+{
+	tracing_mod_hyp_printk(fmt_id, a, b, c, d);
 }
 
 static int host_stage2_enable_lazy_pte(u64 pfn, u64 nr_pages)
@@ -336,7 +341,8 @@ const struct pkvm_module_ops module_ops = {
 	.kern_hyp_va = __kern_hyp_va,
 	.tracing_reserve_entry = tracing_reserve_entry,
 	.tracing_commit_entry = tracing_commit_entry,
-	.tracing_mod_hyp_printk = tracing_mod_hyp_printk,
+	.tracing_mod_hyp_printk = tracing_mod_hyp_printk_u8,
+	.tracing_mod_hyp_printk_u16 = tracing_mod_hyp_printk,
 	.hyp_alloc = hyp_alloc,
 	.hyp_alloc_errno = hyp_alloc_errno,
 	.hyp_free = hyp_free,
