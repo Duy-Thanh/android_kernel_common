@@ -16,6 +16,29 @@
       "message": "please fix up crc issues, we can\u0027t break them without a lot of advance notice",
       "revId": "9d42b5cfbc65420e518f20455b227524bdfb9bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb1cfb5_bc19d90d",
+        "filename": "gki/aarch64/abi.stg.allowed_breaks",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:41:37Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: CRC changes should never be allowed. Please remove CRC changes from allowed_brea...\n\nCRC changes should never be allowed. Please remove CRC changes from allowed_breaks file and fix the CRC mismatch. See https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch for more details.",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 13
+      },
+      "revId": "9d42b5cfbc65420e518f20455b227524bdfb9bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
