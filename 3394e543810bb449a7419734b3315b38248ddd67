@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de254e3_b3ce8655",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:29:53Z",
+      "side": 1,
+      "message": "this is racy and broken and will never work, please do not do this.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "3394e543810bb449a7419734b3315b38248ddd67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "941ccc09_7862e323",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:29:53Z",
+      "side": 1,
+      "message": "again, racy, broken, and will not work.  do it properly please.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0c2f8935_0350ef09",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/geniezone/gzvm_main.c",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/virt/geniezone/gzvm_main.c",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3394e543810bb449a7419734b3315b38248ddd67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d90ce2_ea1c3d96",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:29:53Z",
+      "side": 1,
+      "message": "dev_dbg() please, this is a driver, you have a device pointer, always use it.",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "3394e543810bb449a7419734b3315b38248ddd67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
