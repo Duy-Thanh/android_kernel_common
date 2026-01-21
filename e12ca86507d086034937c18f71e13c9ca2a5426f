@@ -16,6 +16,24 @@
       "message": "Ha, you are using it here.\n\nHowever the whole thing sounds a bit complicated now. And I wonder if we wouldn\u0027t be better with a __pkvm_reclaim_hyp_alloc_mgt_id() that handles the ratelimit?\n\n```\nunsigned long __pkvm_reclaim_hyp_alloc_mgt_id(enum hyp_alloc_mgt_id id, unsigned long nr_pages) {\n\n    unsigned long reclaimed \u003d 0;\n\n    do {\n    ratelimit \u003d min(nr_pages, 16UL);\n    hvc();\n    \n    reclaimed +\u003d ....\n    \n    } while();\n   \n    return reclaimed;\n}\n\nunsigned long __pkvm_reclaim_hyp_alloc_mgt(unsigned long nr_pages)\n{\n    unsigned long total;\n    \n    for (id \u003d 0 ; id \u003c NRALLOC_MGT_IDS; id++) {\n         unsigned long reclaimed \u003d __pkvm_reclaim_hyp_alloc_mgt_id(id, nr_pages);\n         \n         nr_pages -\u003d reclaimed;\n         total +\u003d reclaimed;\n    }\n\n    return total;\n}\n```",
       "revId": "e12ca86507d086034937c18f71e13c9ca2a5426f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6961fd2_b2b18a94",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1782,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-21T09:27:25Z",
+      "side": 1,
+      "message": "Also the mgt_id means I can use it here https://android-review.git.corp.google.com/c/kernel/common/+/3920667/2/arch/arm64/kvm/pkvm.c lin3 130 :-)",
+      "parentUuid": "8278feca_80854d3c",
+      "revId": "e12ca86507d086034937c18f71e13c9ca2a5426f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
