@@ -2360,7 +2360,13 @@ restore_flag:
 
 static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 {
+<<<<<<< HEAD   (25c2206392b0c6bf06256f2081e779ccb442a501 ANDROID: abi_gki_aarch64_qcom: whitelist some xhci & traceit)
 	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
+||||||| BASE   (634672e21e0088aa4bbe23f405bff1afdcd16f33 FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
+	int retry = DEFAULT_RETRY_IO_COUNT;
+=======
+	int retry = MAX_FLUSH_RETRY_COUNT;
+>>>>>>> CHANGE (c0bf8d89143a9ebd7d1ac5b8db3eec9f468a632b FROMGIT: f2fs: decrease maximum flush retry count in f2fs_en)
 	long long start, writeback, end;
 	int ret;
 
