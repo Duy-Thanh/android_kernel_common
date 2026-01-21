@@ -167,6 +167,28 @@ int dw_pcie_get_resources(struct dw_pcie *pci)
 		}
 	}
 
+<<<<<<< HEAD   (2aeb340753d0e3533439d7647f568cba7214e573 FROMGIT: drm/i915/dp: Restrict max source rate for WCL to HB)
+||||||| BASE   (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
+	/* ELBI is an optional resource */
+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "elbi");
+	if (res) {
+		pci->elbi_base = devm_ioremap_resource(pci->dev, res);
+		if (IS_ERR(pci->elbi_base))
+			return PTR_ERR(pci->elbi_base);
+	}
+
+=======
+	/* ELBI is an optional resource */
+	if (!pci->elbi_base) {
+		res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "elbi");
+		if (res) {
+			pci->elbi_base = devm_ioremap_resource(pci->dev, res);
+			if (IS_ERR(pci->elbi_base))
+				return PTR_ERR(pci->elbi_base);
+		}
+	}
+
+>>>>>>> BRANCH (3aa9aac0e8b767a7c6fac33ae626a332c2ba1389 Linux 6.18.4)
 	/* LLDD is supposed to manually switch the clocks and resets state */
 	if (dw_pcie_cap_is(pci, REQ_RES)) {
 		ret = dw_pcie_get_clocks(pci);

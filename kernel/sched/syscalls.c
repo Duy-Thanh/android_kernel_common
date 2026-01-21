@@ -1384,10 +1384,16 @@ static void do_sched_yield(void)
 	rq = this_rq_lock_irq(&rf);
 
 	schedstat_inc(rq->yld_count);
+<<<<<<< HEAD   (2aeb340753d0e3533439d7647f568cba7214e573 FROMGIT: drm/i915/dp: Restrict max source rate for WCL to HB)
 	if (rq->donor->sched_class->yield_task)
 		rq->donor->sched_class->yield_task(rq);
 
 	trace_android_rvh_do_sched_yield(rq);
+||||||| BASE   (a607c8f744340ad2c2486d46e96b66df47caffba Linux 6.18.3)
+	current->sched_class->yield_task(rq);
+=======
+	rq->donor->sched_class->yield_task(rq);
+>>>>>>> BRANCH (3aa9aac0e8b767a7c6fac33ae626a332c2ba1389 Linux 6.18.4)
 
 	preempt_disable();
 	rq_unlock_irq(rq, &rf);
