@@ -2251,6 +2251,7 @@ walk_done:
 		break;
 	}
 
+	trace_android_vh_try_to_unmap_one(folio, vma, address, arg, ret);
 	mmu_notifier_invalidate_range_end(&range);
 
 	return ret;
