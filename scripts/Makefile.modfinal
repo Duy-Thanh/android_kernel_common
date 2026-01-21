@@ -51,7 +51,7 @@ quiet_cmd_btf_ko = BTF [M] $@
 	if [ ! -f $(mixed-build-prefix)vmlinux ]; then					\
 		printf "Skipping BTF generation for %s due to unavailability of $(mixed-build-prefix)vmlinux\n" $@ 1>&2; \
 	else	\
-		$(srctree)/scripts/gen-btf.sh --btf_base $(mixed-build-prefix)vmlinux $@; \
+		$(CONFIG_SHELL) $(srctree)/scripts/gen-btf.sh --btf_base $(mixed-build-prefix)vmlinux $@; \
 	fi;
 
 # Same as newer-prereqs, but allows to exclude specified extra dependencies
