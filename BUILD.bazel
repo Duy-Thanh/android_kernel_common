@@ -215,6 +215,7 @@ filegroup(
         "gki/aarch64/symbols/unisoc",
         "gki/aarch64/symbols/virtual_device",
         "gki/aarch64/symbols/vivo",
+        "gki/aarch64/symbols/wonder",
         "gki/aarch64/symbols/xiaomi",
         "gki/aarch64/symbols/zte",
     ],
@@ -659,6 +660,52 @@ pkg_install(
     destdir = "out/kernel_x86_64_crashdump/dist",
 )
 
+kernel_build(
+    name = "wonder",
+    outs = [],
+    base_kernel = ":kernel_aarch64",
+    collect_unstripped_modules = True,
+    defconfig = "arch/arm64/configs/gki_defconfig",
+    kmi_symbol_list = "gki/aarch64/symbols/wonder",
+    make_goals = ["modules"],
+    makefile = ":Makefile",
+    module_outs = ["drivers/android/wonder/wonder.ko"],
+    pre_defconfig_fragments = ["arch/arm64/configs/wonder.fragment"],
+    strip_modules = True,
+)
+
+kernel_abi(
+    name = "wonder_abi",
+    kernel_build = ":wonder",
+)
+
+kernel_modules_install(
+    name = "wonder_modules_install",
+    kernel_build = ":wonder",
+)
+
+pkg_files(
+    name = "wonder_dist_files",
+    srcs = [
+        ":kernel_aarch64",
+        ":kernel_aarch64_additional_artifacts",
+        ":wonder",
+        ":wonder_modules_install",
+    ] + [
+        ":kernel_aarch64/net/mac80211/mac80211.ko",
+        ":kernel_aarch64/net/rfkill/rfkill.ko",
+        ":kernel_aarch64/net/wireless/cfg80211.ko",
+    ],
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "wonder_dist",
+    srcs = [":wonder_dist_files"],
+    destdir = "out/wonder/dist",
+)
+
 _DB845C_MODULE_OUTS = [
     # keep sorted
     "crypto/michael_mic.ko",
@@ -846,12 +893,10 @@ _DB845C_MODULE_OUTS = [
     "drivers/usb/typec/mux/wcd939x-usbss.ko",
     "drivers/usb/typec/tcpm/qcom/qcom_pmic_tcpm.ko",
     "drivers/usb/typec/ucsi/ucsi_glink.ko",
-    "net/mac80211/mac80211.ko",
     "net/qrtr/qrtr.ko",
     "net/qrtr/qrtr-mhi.ko",
     "net/qrtr/qrtr-smd.ko",
     "net/qrtr/qrtr-tun.ko",
-    "net/wireless/cfg80211.ko",
     "sound/soc/codecs/snd-soc-dmic.ko",
     "sound/soc/codecs/snd-soc-hdmi-codec.ko",
     "sound/soc/codecs/snd-soc-lpass-macro-common.ko",
@@ -1008,10 +1053,9 @@ pkg_files(
         ":db845c_merged_kernel_uapi_headers",
         # Mixed build: Additional GKI artifacts.
         ":kernel_aarch64",
-        ":kernel_aarch64_modules",
         ":kernel_aarch64_additional_artifacts",
         ":tests_zip_arm64",
-    ],
+    ] + get_gki_modules_list("arm64"),
     strip_prefix = strip_prefix.files_only(),
     visibility = ["//visibility:private"],
 )
