@@ -134,6 +134,7 @@ int pkvm_host_stage2_topup(void)
 
 	return WARN_ON_ONCE(ret);
 }
+EXPORT_SYMBOL(pkvm_host_stage2_topup);
 #endif
 
 static int __init register_memblock_regions(void)
