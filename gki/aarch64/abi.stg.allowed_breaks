@@ -27,3 +27,19 @@ type 'struct pkvm_module_ops' changed
   member 'u64 __kabi_reserved1' was removed
   member 'union { int(* host_stage2_set_owned)(u64, u64, bool); struct { u64 __kabi_reserved1; }; union { }; }' was added
 
+type 'struct dentry' changed
+  member changed from 'union { struct hlist_node d_alias; struct hlist_bl_node d_in_lookup_hash; struct callback_head d_rcu; } d_u' to 'union { struct hlist_node d_alias; struct hlist_bl_node d_in_lookup_hash; struct callback_head d_rcu; struct completion_list* waiters; } d_u'
+    type changed from 'union { struct hlist_node d_alias; struct hlist_bl_node d_in_lookup_hash; struct callback_head d_rcu; }' to 'union { struct hlist_node d_alias; struct hlist_bl_node d_in_lookup_hash; struct callback_head d_rcu; struct completion_list* waiters; }'
+      member 'struct completion_list* waiters' was added
+
+variable symbol 'const struct dwc3* const ANDROID_GKI_struct_dwc3' changed
+  CRC changed from 0x6004f740 to 0x1b24fa75
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x4948f00a to 0x683548f4
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0x9cb54e5 to 0x26177dcf
+
+... 6194 omitted; 6197 symbols have only CRC changes
+
