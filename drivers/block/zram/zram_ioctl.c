@@ -27,6 +27,7 @@
 struct zram_process_walk_private {
 	struct zram *zram;
 	struct zram_pp_ctl *pp_ctl;
+	unsigned int cmd;
 	u64 nr_remaining_pages;
 	unsigned long next_addr;
 };
@@ -58,6 +59,7 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 	struct zram_process_walk_private *private = walk->private;
 	struct zram *zram = private->zram;
 	struct zram_pp_ctl *pp_ctl = private->pp_ctl;
+	unsigned int cmd = private->cmd;
 	struct vm_area_struct *vma = walk->vma;
 	struct swap_info_struct *sis;
 	pte_t *ptep, pte;
@@ -122,10 +124,15 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 		if (unlikely(index >= nr_pages))
 			goto unlock_swap_device;
 
-		/* Use PAGE_WRITEBACK for single index */
-		scan_slots_for_writeback(zram, 0, index, index+1, pp_ctl);
-		if (private->nr_remaining_pages != NR_PAGES_UNLIMITED)
-			private->nr_remaining_pages--;
+		if (cmd == ZRAM_ANDROID_IOC_PROCESS_WRITEBACK) {
+			/* Use PAGE_WRITEBACK for single index */
+			scan_slots_for_writeback(zram, 0, index, index+1,
+						 pp_ctl);
+			if (private->nr_remaining_pages != NR_PAGES_UNLIMITED)
+				private->nr_remaining_pages--;
+		} else if (cmd == ZRAM_ANDROID_IOC_PROCESS_PREFETCH) {
+			scan_slot_for_prefetch(zram, index, pp_ctl);
+		}
 
 unlock_swap_device:
 		put_swap_device(sis);
@@ -140,28 +147,43 @@ static const struct mm_walk_ops zram_walk_ops = {
 	.walk_lock = PGWALK_RDLOCK,
 };
 
-static int zram_ioctl_process_writeback_scan(struct zram *zram,
-	struct zram_android_ioc_data_process_writeback *ioc_data_pwb,
-	struct zram_pp_ctl *ctl)
+static int zram_ioctl_process_scan(struct zram *zram, unsigned int cmd,
+				   struct zram_android_ioc_data *ioc_data,
+				   struct zram_pp_ctl *ctl)
 {
 	struct mm_struct *mm;
 	struct vm_area_struct *vma;
 	struct task_struct *task;
-	unsigned long start_addr = (unsigned long)ioc_data_pwb->start_addr;
+	unsigned long start_addr = 0;
+	u64 nr_remaining_pages = 0;
+	__aligned_u64 pidfd;
 	unsigned int f_flags;
 	int ret = 0;
+
+	if (cmd == ZRAM_ANDROID_IOC_PROCESS_WRITEBACK) {
+		struct zram_android_ioc_data_process_writeback *ioc_data_pwb;
+
+		ioc_data_pwb = &ioc_data->data.process_writeback;
+		start_addr = (unsigned long)ioc_data_pwb->start_addr;
+		nr_remaining_pages = DIV_ROUND_UP_ULL(ioc_data_pwb->size,
+						       PAGE_SIZE),
+		pidfd = ioc_data_pwb->pidfd;
+	} else {
+		pidfd = ioc_data->data.process_prefetch.pidfd;
+	}
 
 	struct zram_process_walk_private private = {
 		.zram = zram,
 		.pp_ctl = ctl,
-		.nr_remaining_pages = DIV_ROUND_UP_ULL(ioc_data_pwb->size,
-						       PAGE_SIZE),
+		.cmd = cmd,
 	};
 
-	if (!private.nr_remaining_pages)
+	if (!nr_remaining_pages)
 		private.nr_remaining_pages = NR_PAGES_UNLIMITED;
+	else
+		private.nr_remaining_pages = nr_remaining_pages;
 
-	task = pidfd_get_task(ioc_data_pwb->pidfd, &f_flags);
+	task = pidfd_get_task(pidfd, &f_flags);
 	if (IS_ERR(task))
 		return PTR_ERR(task);
 
@@ -194,11 +216,16 @@ static int zram_ioctl_process_writeback_scan(struct zram *zram,
 			break;
 	}
 
-	if (ret > 0) {
-		ioc_data_pwb->next_addr = private.next_addr;
-		ret = 0;
-	} else {
-		ioc_data_pwb->next_addr = 0;
+	if (cmd == ZRAM_ANDROID_IOC_PROCESS_WRITEBACK) {
+		struct zram_android_ioc_data_process_writeback *ioc_data_pwb;
+
+		ioc_data_pwb = &ioc_data->data.process_writeback;
+		if (ret > 0) {
+			ioc_data_pwb->next_addr = private.next_addr;
+			ret = 0;
+		} else {
+			ioc_data_pwb->next_addr = 0;
+		}
 	}
 
 	mmap_read_unlock(mm);
@@ -211,8 +238,10 @@ release_task:
 }
 
 static int zram_ioctl_process_writeback(struct zram *zram,
-	struct zram_android_ioc_data_process_writeback *ioc_data_pwb)
+	struct zram_android_ioc_data *ioc_data)
 {
+	struct zram_android_ioc_data_process_writeback *ioc_data_pwb =
+		&ioc_data->data.process_writeback;
 	struct zram_pp_ctl *pp_ctl = NULL;
 	struct zram_wb_ctl *wb_ctl = NULL;
 	int ret;
@@ -244,7 +273,8 @@ static int zram_ioctl_process_writeback(struct zram *zram,
 		goto clear_pp_ctl;
 	}
 
-	ret = zram_ioctl_process_writeback_scan(zram, ioc_data_pwb, pp_ctl);
+	ret = zram_ioctl_process_scan(zram, ZRAM_ANDROID_IOC_PROCESS_WRITEBACK,
+				      ioc_data, pp_ctl);
 	if (!ret)
 		ret = zram_writeback_slots(zram, pp_ctl, wb_ctl);
 
@@ -259,24 +289,73 @@ clear_pp_in_progress:
 	return ret;
 }
 
+static int zram_ioctl_process_prefetch(struct zram *zram,
+	struct zram_android_ioc_data *ioc_data)
+{
+	struct zram_pp_ctl *pp_ctl = NULL;
+	int ret;
+
+	/* Require CAP_SYS_NICE for influencing process performance. */
+	if (!capable(CAP_SYS_NICE))
+		return -EPERM;
+
+	guard(rwsem_read)(&zram->init_lock);
+	if (!init_done(zram))
+		return -EINVAL;
+
+	if (!zram->backing_dev)
+		return -ENODEV;
+
+	/*
+	 * Prefetch should preempt writeback for the same process to avoid
+	 * blocking the launch. However, Prefetch and Writeback work in
+	 * parallel could have a race of block index, even operate in different
+	 * processes. Currently, we do not permit concurrent post-processing
+	 * actions via pp_in_progress flag.
+	 */
+	if (atomic_xchg(&zram->pp_in_progress, 1))
+		return -EAGAIN;
+
+	pp_ctl = init_pp_ctl();
+	if (!pp_ctl) {
+		ret = -ENOMEM;
+		goto clear_pp_in_progress;
+	}
+
+	ret = zram_ioctl_process_scan(zram, ZRAM_ANDROID_IOC_PROCESS_PREFETCH,
+				      ioc_data, pp_ctl);
+	if (!ret)
+		ret = zram_prefetch_slots(zram, pp_ctl);
+
+	release_pp_ctl(zram, pp_ctl);
+clear_pp_in_progress:
+	atomic_set(&zram->pp_in_progress, 0);
+	return ret;
+}
+
 int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
 	       unsigned int cmd, unsigned long arg)
 {
 	struct zram *zram = bdev->bd_disk->private_data;
 	void __user *argp = (void __user *)arg;
 	struct zram_android_ioc_data ioc_data;
-	int ret;
+	int ret = 0;
 
-	if (cmd != ZRAM_ANDROID_IOC_PROCESS_WRITEBACK)
+	if (cmd != ZRAM_ANDROID_IOC_PROCESS_WRITEBACK &&
+	    cmd != ZRAM_ANDROID_IOC_PROCESS_PREFETCH)
 		return -EINVAL;
 
 	if (copy_from_user(&ioc_data, argp, sizeof(ioc_data)))
 		return -EFAULT;
 
-	ret = zram_ioctl_process_writeback(zram,
-					   &ioc_data.data.process_writeback);
+	if (cmd == ZRAM_ANDROID_IOC_PROCESS_WRITEBACK) {
+		ret = zram_ioctl_process_writeback(zram, &ioc_data);
 
-	if (copy_to_user(argp, &ioc_data, sizeof(ioc_data)))
-		ret = -EFAULT;
+		if (copy_to_user(argp, &ioc_data, sizeof(ioc_data)))
+			ret = -EFAULT;
+	} else if (cmd == ZRAM_ANDROID_IOC_PROCESS_PREFETCH) {
+		ret = zram_ioctl_process_prefetch(zram, &ioc_data);
+	}
+
 	return ret;
 }
