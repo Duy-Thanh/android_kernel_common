@@ -127,6 +127,7 @@ int pkvm_host_stage2_topup(void)
 
 	return ret;
 }
+EXPORT_SYMBOL(pkvm_host_stage2_topup);
 
 bool pkvm_host_stage2_free(void *addr, unsigned long order)
 {
