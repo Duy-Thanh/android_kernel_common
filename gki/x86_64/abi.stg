@@ -296441,6 +296441,34 @@ elf_symbol {
   full_name: "__SCK__tp_func_xdp_exception"
 }
 elf_symbol {
+  id: 0x6eb8e0de
+  name: "__SCT__cond_resched"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7851be11
+}
+elf_symbol {
+  id: 0x2774f26d
+  name: "__SCT__might_resched"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7851be11
+}
+elf_symbol {
+  id: 0xbf08277f
+  name: "__SCT__preempt_schedule"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+}
+elf_symbol {
+  id: 0xa603b607
+  name: "__SCT__preempt_schedule_notrace"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+}
+elf_symbol {
   id: 0xc13daeb5
   name: "__SCT__tp_func_dma_fence_emit"
   is_defined: true
@@ -298795,7 +298823,7 @@ elf_symbol {
   name: "__traceiter_sched_set_state_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0ca0bec4
+  crc: 0xe15d2295
   type_id: 0x9bc214f0
   full_name: "__traceiter_sched_set_state_tp"
 }
@@ -298876,7 +298904,7 @@ elf_symbol {
   name: "__tracepoint_sched_set_state_tp"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x754df49c
+  crc: 0x23269be1
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_sched_set_state_tp"
 }
@@ -330433,7 +330461,7 @@ elf_symbol {
   name: "wake_up_process"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb3393369
+  crc: 0xdc193aa1
   type_id: 0x9ac6895a
   full_name: "wake_up_process"
 }
@@ -331191,6 +331219,10 @@ interface {
   symbol_id: 0xa6a81753
   symbol_id: 0x93cf7894
   symbol_id: 0xaf416b9c
+  symbol_id: 0x6eb8e0de
+  symbol_id: 0x2774f26d
+  symbol_id: 0xbf08277f
+  symbol_id: 0xa603b607
   symbol_id: 0xc13daeb5
   symbol_id: 0x8f04faca
   symbol_id: 0x8b2fd235

@@ -833,6 +833,10 @@
   __crypto_xor
   drop_reasons_register_subsys
   drop_reasons_unregister_subsys
+  dynamic_cond_resched
+  dynamic_might_resched
+  dynamic_preempt_schedule
+  dynamic_preempt_schedule_notrace
   free_percpu
   get_random_u16
   __hw_addr_init

@@ -1367,6 +1367,9 @@
   __dev_queue_xmit
   drop_reasons_register_subsys
   drop_reasons_unregister_subsys
+  dynamic_might_resched
+  dynamic_preempt_schedule
+  dynamic_preempt_schedule_notrace
   ether_setup
   eth_mac_addr
   ethtool_op_get_link
@@ -2307,6 +2310,7 @@
 
 # required by ufs-qcom.ko
   dev_pm_opp_find_freq_exact_indexed
+  dynamic_cond_resched
   msi_domain_get_virq
   platform_device_msi_free_irqs_all
   platform_device_msi_init_and_alloc_irqs

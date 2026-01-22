@@ -559,6 +559,8 @@
   rfkill_resume_polling
   rfkill_set_hw_state_reason
   rfkill_unregister
+  __SCT__preempt_schedule
+  __SCT__preempt_schedule_notrace
   __sock_create
   sock_release
   sysfs_create_link
@@ -1129,6 +1131,8 @@
   sched_clock
   __SCK__tp_func_xdp_exception
   __SCT__tp_func_xdp_exception
+  __SCT__cond_resched
+  __SCT__might_resched
   skb_coalesce_rx_frag
   __skb_flow_dissect
   skb_page_frag_refill
