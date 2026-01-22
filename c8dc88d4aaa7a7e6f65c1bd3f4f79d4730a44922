@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6986751f_5231ded4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-22T21:11:01Z",
+      "side": 1,
+      "message": "Build break for `virtual_device_aarch64_dist` build\n```\nWARNING: CONFIG_TEST_MEMINIT: actual \u0027\u0027, expected \u0027m\u0027 from common-modules/virtual-device/virtual_device.fragment\n    (ignore reason: RUNTIME_TESTING_MENU not enabled in aarch64)\n\nERROR: /mnt/disks/build-disk/src/android/common-android17-6.18/common-modules/virtual-device/BUILD.bazel:345:13: Building kernel (aarch64.fragment;virtual_device.fragment;virtual_device_core.fragment) //common-modules/virtual-device:virtual_device_aarch64 failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common-modules/virtual-device:virtual_device_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/mnt/disks/build-disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/487/execroot/_main/common/drivers/gpu/drm/vkms/vkms_drv.c:225:8: error: call to undeclared function \u0027vkms_configfs_register\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  225 |         ret \u003d vkms_configfs_register();\n      |               ^\n/mnt/disks/build-disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/487/execroot/_main/common/drivers/gpu/drm/vkms/vkms_drv.c:225:8: note: did you mean \u0027vkms_config_create\u0027?\n/mnt/disks/build-disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/487/execroot/_main/common/drivers/gpu/drm/vkms/vkms_config.h:189:21: note: \u0027vkms_config_create\u0027 declared here\n  189 | struct vkms_config *vkms_config_create(const char *dev_name);\n      |                     ^\n1 error generated.\n```",
+      "revId": "c8dc88d4aaa7a7e6f65c1bd3f4f79d4730a44922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
