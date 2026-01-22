@@ -70,6 +70,24 @@
       "parentUuid": "a8e7481f_3602e8a1",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172ee8e8_fd8208a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2026-01-22T17:07:55Z",
+      "side": 1,
+      "message": "Okay, thank you for the explanation. In that case I restored the mainline patch as well.",
+      "parentUuid": "77494684_c1321cf2",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
