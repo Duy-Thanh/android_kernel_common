@@ -129,7 +129,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+<<<<<<< HEAD   (5b9b1cac289d7d81f4c6b755c1d5e35a297bab7b Merge f7b8851c541e ("f2fs: fix to detect recoverable inode d)
 EXPORT_SYMBOL_GPL(runqueues);
+||||||| BASE   (f7b8851c541ed30154819e0f7012901732b782ec f2fs: fix to detect recoverable inode during dryrun of find_)
+=======
+DEFINE_PER_CPU(struct rnd_state, sched_rnd_state);
+>>>>>>> BRANCH (21e82354cdd7c954dbcf3e06d8536b40d2813c16 tty: fix tty_port_tty_*hangup() kernel-doc)
 
 #ifdef CONFIG_SCHED_DEBUG
 /*
@@ -10112,6 +10117,8 @@ int sched_cpu_dying(unsigned int cpu)
 void __init sched_init_smp(void)
 {
 	sched_init_numa(NUMA_NO_NODE);
+
+	prandom_init_once(&sched_rnd_state);
 
 	/*
 	 * There's no userspace yet to cause hotplug operations; hence all the
