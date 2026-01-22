@@ -34,6 +34,24 @@
       "parentUuid": "436e3858_4976394e",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e7481f_3602e8a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-22T16:57:39Z",
+      "side": 1,
+      "message": "My vote was supposed to be a +1.\n\nNo, `kernel/common` is never automatically merged.\n\nGorier details: This branch was forked off from `android-mainline` before `6.18` was tagged upstream. There may have been some manual merges. Future (manual) merges will be from `android-17-6.18-lts` which itself takes merges and other fixes from the Linux stable branch. `android-mainline` receives merges from upstream branches plus a small amount of non-upstream development.",
+      "parentUuid": "0c05ce2b_b3aa2de3",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
