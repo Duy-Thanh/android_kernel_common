@@ -16,6 +16,24 @@
       "message": "create a patch on the top of the series to update the ABI (aarch64 and x86_64)",
       "revId": "1bdc618bb799bf0cacd3ae02a0aeab2f3121cb0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2a2212_eb5cab65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2026-01-22T16:03:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9430817b_a94f764a",
+      "revId": "1bdc618bb799bf0cacd3ae02a0aeab2f3121cb0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
