@@ -34,6 +34,24 @@
       "parentUuid": "6986751f_5231ded4",
       "revId": "c8dc88d4aaa7a7e6f65c1bd3f4f79d4730a44922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357a2fb1_9c48ef2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-22T21:29:39Z",
+      "side": 1,
+      "message": "Your call. I\u0027d probably remove the vkms patches here and add them in a separate series if needed.",
+      "parentUuid": "583ad43b_fbb0d7ce",
+      "revId": "c8dc88d4aaa7a7e6f65c1bd3f4f79d4730a44922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
