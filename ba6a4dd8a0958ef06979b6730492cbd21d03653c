@@ -16,6 +16,24 @@
       "message": "I was about to say \"shouldn\u0027t this also be in android-mainline?\" I see you have abandoned the change there. Why?",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c05ce2b_b3aa2de3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2026-01-22T16:52:36Z",
+      "side": 1,
+      "message": "I assume 6.18 automerges into mainline like the partner kernel does[1], but I was unable to find any docs on the topic - is that not the case?\n\n[1] go/kernel-pixel-automergergraph",
+      "parentUuid": "436e3858_4976394e",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
