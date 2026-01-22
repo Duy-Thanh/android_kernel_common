@@ -52,6 +52,24 @@
       "parentUuid": "0c05ce2b_b3aa2de3",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77494684_c1321cf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-22T16:58:42Z",
+      "side": 1,
+      "message": "My comments apply to AOSP.\n\nWhat Pixel do elsewhere is of course up to them.",
+      "parentUuid": "a8e7481f_3602e8a1",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
