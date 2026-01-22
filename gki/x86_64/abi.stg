@@ -298759,7 +298759,7 @@ elf_symbol {
   name: "__traceiter_sched_set_state_tp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe1a3dfcf
+  crc: 0x98e9b129
   type_id: 0x9bc214f0
   full_name: "__traceiter_sched_set_state_tp"
 }
@@ -298840,7 +298840,7 @@ elf_symbol {
   name: "__tracepoint_sched_set_state_tp"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x8bc85d99
+  crc: 0x3279673a
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_sched_set_state_tp"
 }
@@ -330361,7 +330361,7 @@ elf_symbol {
   name: "wake_up_process"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfb495a42
+  crc: 0x9dab3c39
   type_id: 0x9ac6895a
   full_name: "wake_up_process"
 }
