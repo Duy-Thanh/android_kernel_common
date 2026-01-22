@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8efc7d18_e8fb8bee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-22T22:22:41Z",
+      "side": 1,
+      "message": "I would also use Reapply which is what git uses by default. However, it is our gerrit interface that uses the Revert^N notation. I suspect Suren used that for this change.",
+      "parentUuid": "39c20c5a_c31913f9",
+      "revId": "0706332e2c27a79f1399db9621cf6d70995e5b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3c04f54a_e735b1ca",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
