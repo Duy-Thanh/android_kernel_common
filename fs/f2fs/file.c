@@ -2080,9 +2080,20 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
 
 			f2fs_down_write(&fi->i_sem);
 			if (!f2fs_may_compress(inode) ||
+<<<<<<< HEAD   (96254efe4b99871eeddc7c5c8f3ebef0e7c72060 Merge b54cdce20f86 ("f2fs: drop inode from the donation list)
 					(S_ISREG(inode->i_mode) &&
 					F2FS_HAS_BLOCKS(inode))) {
 				f2fs_up_write(&fi->i_sem);
+||||||| BASE   (b54cdce20f867b525f122d276e7eff522cab2314 f2fs: drop inode from the donation list when the last file i)
+					(S_ISREG(inode->i_mode) &&
+					F2FS_HAS_BLOCKS(inode))) {
+				f2fs_up_write(&F2FS_I(inode)->i_sem);
+=======
+				atomic_read(&fi->writeback) ||
+				(S_ISREG(inode->i_mode) &&
+				F2FS_HAS_BLOCKS(inode))) {
+				f2fs_up_write(&F2FS_I(inode)->i_sem);
+>>>>>>> BRANCH (bcd0086ee5a2e88c1224ff2ec1e4a43c83efe5a0 f2fs: fix to avoid updating compression context during write)
 				return -EINVAL;
 			}
 			err = set_compress_context(inode);
