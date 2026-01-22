@@ -134,7 +134,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+<<<<<<< HEAD   (130a10d015cf96b967d9ee81a5cec7205fca8bf3 Merge 6.18.4 into android17-6.18)
 EXPORT_SYMBOL_GPL(runqueues);
+||||||| BASE   (3aa9aac0e8b767a7c6fac33ae626a332c2ba1389 Linux 6.18.4)
+=======
+DEFINE_PER_CPU(struct rnd_state, sched_rnd_state);
+>>>>>>> BRANCH (dc554c8fb361f13580da3f5a98ad8b494a788666 Linux 6.18.5)
 
 #ifdef CONFIG_SCHED_PROXY_EXEC
 DEFINE_STATIC_KEY_FALSE(__sched_proxy_exec);
@@ -9523,6 +9528,8 @@ int sched_cpu_dying(unsigned int cpu)
 void __init sched_init_smp(void)
 {
 	sched_init_numa(NUMA_NO_NODE);
+
+	prandom_init_once(&sched_rnd_state);
 
 	/*
 	 * There's no userspace yet to cause hotplug operations; hence all the
