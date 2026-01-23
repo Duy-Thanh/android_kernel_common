@@ -16,6 +16,24 @@
       "message": "your upstream submission can not be accepted due to the footer that is in the patch contents.  Please fix that up, and use your real name, and resubmit it upstream.",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7c1686_6c5a1d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-23T12:49:25Z",
+      "side": 1,
+      "message": "#define US_TO_NS(usec)          ((usec) * 1000)\n #define MS_TO_US(msec)          ((msec) * 1000)\n-#define IR_MAX_DURATION                MS_TO_US(500)\n+#define IR_MAX_DURATION                MS_TO_US(1000)\n #define IR_DEFAULT_TIMEOUT      MS_TO_US(125)\n #define IR_MAX_TIMEOUT          LIRC_VALUE_MASK\n \n--\n2.34.1     the footer that is in the patch contents.  Does this refer to this line？ my name is CHUANSHOU SHI， i will fix it in right position",
+      "parentUuid": "106ddd1b_da67f1dd",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
