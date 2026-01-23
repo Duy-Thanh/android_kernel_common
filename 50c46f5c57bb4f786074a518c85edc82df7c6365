@@ -16,6 +16,24 @@
       "message": "needs a bug id",
       "revId": "50c46f5c57bb4f786074a518c85edc82df7c6365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ce8973_af6db55f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-23T10:07:41Z",
+      "side": 1,
+      "message": "this bugi id form commit :https://partner-android-review.googlesource.com/c/kernel-oem/vivo/common/+/3356448",
+      "parentUuid": "ec335d04_61af3bde",
+      "revId": "50c46f5c57bb4f786074a518c85edc82df7c6365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
