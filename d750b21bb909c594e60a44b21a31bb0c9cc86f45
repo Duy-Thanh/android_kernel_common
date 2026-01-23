@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "006e7874_6e66ca5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-01-23T01:02:16Z",
+      "side": 1,
+      "message": "This CL has no functional bearing; it simply adds to the ABI and therefore cannot cause test failures. Bypassing presubmit.",
+      "revId": "d750b21bb909c594e60a44b21a31bb0c9cc86f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
