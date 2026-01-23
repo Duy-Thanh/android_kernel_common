@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9663972_3d79838e",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-23T02:26:10Z",
+      "side": 1,
+      "message": "Why do you need two separate hooks to skip free_one_page()? Are you really saving much by skipping get_pfnblock_migratetype() call? Please try to minimize both number of hooks and amount of changes you introduce. This small function is growing too much custom hooks and changes.",
+      "range": {
+        "startLine": 1605,
+        "startChar": 0,
+        "endLine": 1618,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "20be742f_2c533015",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 1594,
+                "startChar": 0,
+                "endLine": 1595,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 1600,
+                "startChar": 0,
+                "endLine": 1603,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 1604,
+                "startChar": 0,
+                "endLine": 1609,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 1618,
+                "startChar": 0,
+                "endLine": 1618,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (!free_pages_prepare(page, order))\n\t\treturn;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "48b789455e689335f29780319a4e445026d9466c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
