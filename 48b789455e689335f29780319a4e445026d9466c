@@ -70,6 +70,30 @@
       ],
       "revId": "48b789455e689335f29780319a4e445026d9466c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05207ace_5484b380",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2026-01-23T02:56:04Z",
+      "side": 1,
+      "message": "The purpose of this vendor hook is to pass fpi_flags to vendor module, not to skip get_pfnblock_migratetype().\nCan I add fpi_flags into existing vendor hook, trace_android_vh_free_unref_page_bypass()?",
+      "parentUuid": "c9663972_3d79838e",
+      "range": {
+        "startLine": 1605,
+        "startChar": 0,
+        "endLine": 1618,
+        "endChar": 26
+      },
+      "revId": "48b789455e689335f29780319a4e445026d9466c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
