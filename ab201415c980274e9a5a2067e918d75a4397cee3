@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2073eeeb_89de921b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2026-01-23T17:04:47Z",
+      "side": 1,
+      "message": "Admittedly, I\u0027m not entirely familiar with the linux stable branch process.\n\nIdeally, we would wait for this patch to land in the 6.18.y LTS branch and then it would be auto-merged here into AOSP (assuming it will land in the 6.18.y stable branch, of course).\n\nIs that feasible?",
+      "revId": "ab201415c980274e9a5a2067e918d75a4397cee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
