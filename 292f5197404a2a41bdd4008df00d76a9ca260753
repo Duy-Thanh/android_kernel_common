@@ -16,6 +16,24 @@
       "message": "Looks good. Please add `Bypass-Upstream-Divergence-Tracking` tag in the commit message to make linter happy",
       "revId": "292f5197404a2a41bdd4008df00d76a9ca260753",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "149dcbf0_d7432817",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-01-24T00:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99028fab_b1622ccc",
+      "revId": "292f5197404a2a41bdd4008df00d76a9ca260753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
