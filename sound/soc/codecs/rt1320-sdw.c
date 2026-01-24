@@ -844,6 +844,432 @@ static void rt1320_vab_preset(struct rt1320_sdw_priv *rt1320)
 	}
 }
 
+static void rt1320_t0_load(struct rt1320_sdw_priv *rt1320, unsigned int l_t0, unsigned int r_t0)
+{
+	struct device *dev = &rt1320->sdw_slave->dev;
+	unsigned int factor = (1 << 22), fw_ready;
+	int l_t0_data[38], r_t0_data[38];
+	unsigned int fw_status_addr;
+
+	switch (rt1320->dev_id) {
+	case RT1320_DEV_ID:
+		fw_status_addr = RT1320_DSPFW_STATUS_ADDR;
+		break;
+	case RT1321_DEV_ID:
+		fw_status_addr = RT1321_DSPFW_STATUS_ADDR;
+		break;
+	default:
+		dev_err(dev, "%s: Unknown device ID %d\n", __func__, rt1320->dev_id);
+		return;
+	}
+
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x00);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x00);
+
+	regmap_read(rt1320->regmap, fw_status_addr, &fw_ready);
+	fw_ready &= 0x1;
+	if (!fw_ready) {
+		dev_warn(dev, "%s, DSP FW is NOT ready\n", __func__);
+		goto _exit_;
+	}
+
+	rt1320_fw_param_protocol(rt1320, RT1320_GET_PARAM, 3, &l_t0_data[0], sizeof(l_t0_data));
+	rt1320_fw_param_protocol(rt1320, RT1320_GET_PARAM, 4, &r_t0_data[0], sizeof(r_t0_data));
+
+	l_t0_data[37] = l_t0 * factor;
+	r_t0_data[37] = r_t0 * factor;
+
+	dev_dbg(dev, "%s, write LR t0=0x%x, 0x%x\n", __func__, l_t0_data[37], r_t0_data[37]);
+
+	rt1320_fw_param_protocol(rt1320, RT1320_SET_PARAM, 3, &l_t0_data[0], sizeof(l_t0_data));
+	rt1320_fw_param_protocol(rt1320, RT1320_SET_PARAM, 4, &r_t0_data[0], sizeof(r_t0_data));
+	if (rt1320_check_fw_ready(rt1320) < 0)
+		dev_err(dev, "%s: Failed to set FW param 3,4!\n", __func__);
+
+	rt1320->temp_l_calib = l_t0;
+	rt1320->temp_r_calib = r_t0;
+
+	memset(&l_t0_data[0], 0x00, sizeof(l_t0_data));
+	memset(&r_t0_data[0], 0x00, sizeof(r_t0_data));
+	rt1320_fw_param_protocol(rt1320, RT1320_GET_PARAM, 3, &l_t0_data[0], sizeof(l_t0_data));
+	rt1320_fw_param_protocol(rt1320, RT1320_GET_PARAM, 4, &r_t0_data[0], sizeof(r_t0_data));
+	dev_dbg(dev, "%s, read after writing LR t0=0x%x, 0x%x\n", __func__, l_t0_data[37], r_t0_data[37]);
+
+_exit_:
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x03);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x03);
+}
+
+static int rt1320_rae_load(struct rt1320_sdw_priv *rt1320)
+{
+	struct device *dev = &rt1320->sdw_slave->dev;
+	static const char func_tag[] = "FUNC";
+	static const char xu_tag[] = "XU";
+	const struct firmware *rae_fw = NULL;
+	unsigned int fw_offset;
+	unsigned char *fw_data;
+	unsigned char *param_data;
+	unsigned int addr, size;
+	unsigned int func, value;
+	const char *dmi_vendor, *dmi_product, *dmi_sku;
+	int len_vendor, len_product, len_sku;
+	char rae_filename[512];
+	char tag[5];
+	int ret = 0;
+	int retry = 200;
+
+	dmi_vendor = dmi_get_system_info(DMI_SYS_VENDOR);
+	dmi_product = dmi_get_system_info(DMI_PRODUCT_NAME);
+	dmi_sku = dmi_get_system_info(DMI_PRODUCT_SKU);
+
+	if (dmi_vendor && dmi_product && dmi_sku) {
+		len_vendor = strchrnul(dmi_vendor, ' ') - dmi_vendor;
+		len_product = strchrnul(dmi_product, ' ') - dmi_product;
+		len_sku = strchrnul(dmi_sku, ' ') - dmi_sku;
+
+		snprintf(rae_filename, sizeof(rae_filename),
+			 "realtek/rt1320/rt1320_RAE_%.*s_%.*s_%.*s.dat",
+			 len_vendor, dmi_vendor, len_product, dmi_product, len_sku, dmi_sku);
+		dev_dbg(dev, "%s: try to load RAE file %s\n", __func__, rae_filename);
+	} else {
+		dev_warn(dev, "%s: Can't find proper RAE file name\n", __func__);
+		return -EINVAL;
+	}
+
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x00);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x00);
+
+	request_firmware(&rae_fw, rae_filename, dev);
+	if (rae_fw) {
+
+		/* RAE CRC clear */
+		regmap_write(rt1320->regmap, 0xe80b, 0x0f);
+
+		/* RAE stop & CRC disable */
+		regmap_update_bits(rt1320->regmap, 0xe803, 0xbc, 0x00);
+
+		while (--retry) {
+			regmap_read(rt1320->regmap, 0xe83f, &value);
+			if (value & 0x40)
+				break;
+			usleep_range(1000, 1100);
+		}
+		if (!retry && !(value & 0x40)) {
+			dev_err(dev, "%s: RAE is not ready to load\n", __func__);
+			return -ETIMEDOUT;
+		}
+
+		dev_dbg(dev, "%s, rae_fw size=0x%zx\n", __func__, rae_fw->size);
+		regcache_cache_bypass(rt1320->regmap, true);
+		for (fw_offset = 0; fw_offset < rae_fw->size;) {
+
+			dev_dbg(dev, "%s, fw_offset=0x%x\n", __func__, fw_offset);
+
+			fw_data = (unsigned char *)&rae_fw->data[fw_offset];
+
+			memcpy(tag, fw_data, 4);
+			tag[4] = '\0';
+			dev_dbg(dev, "%s, tag=%s\n", __func__, tag);
+			if (strcmp(tag, xu_tag) == 0) {
+				dev_dbg(dev, "%s: This is a XU tag", __func__);
+				memcpy(&addr, (fw_data + 4), 4);
+				memcpy(&size, (fw_data + 8), 4);
+				param_data = (unsigned char *)(fw_data + 12);
+
+				dev_dbg(dev, "%s: addr=0x%x, size=0x%x\n", __func__, addr, size);
+
+				/*
+				 * UI register ranges from 0x1000d000 to 0x1000d7ff
+				 * UI registers should be accessed by tuning tool.
+				 * So, there registers should be cached.
+				 */
+				if (addr <= 0x1000d7ff && addr >= 0x1000d000)
+					regcache_cache_bypass(rt1320->regmap, false);
+
+				rt1320_data_rw(rt1320, addr, param_data, size, RT1320_PARAM_WRITE);
+
+				regcache_cache_bypass(rt1320->regmap, true);
+
+				fw_offset += (size + 12);
+			} else if (strcmp(tag, func_tag) == 0) {
+				dev_err(dev, "%s: This is a FUNC tag", __func__);
+
+				memcpy(&func, (fw_data + 4), 4);
+				memcpy(&value, (fw_data + 8), 4);
+
+				dev_dbg(dev, "%s: func=0x%x, value=0x%x\n", __func__, func, value);
+				if (func == 1)  //DelayMs
+					msleep(value);
+
+				fw_offset += 12;
+			} else {
+				dev_err(dev, "%s: This is NOT a XU file (wrong tag)", __func__);
+				break;
+			}
+		}
+
+		regcache_cache_bypass(rt1320->regmap, false);
+		release_firmware(rae_fw);
+
+	} else {
+		dev_err(dev, "%s: Failed to load %s firmware\n", __func__, rae_filename);
+		ret = -EINVAL;
+		goto _exit_;
+	}
+
+	/* RAE CRC enable */
+	regmap_update_bits(rt1320->regmap, 0xe803, 0x0c, 0x0c);
+
+	/* RAE update */
+	regmap_update_bits(rt1320->regmap, 0xe80b, 0x80, 0x00);
+	regmap_update_bits(rt1320->regmap, 0xe80b, 0x80, 0x80);
+
+	/* RAE run */
+	regmap_update_bits(rt1320->regmap, 0xe803, 0x80, 0x80);
+
+	regmap_read(rt1320->regmap, 0xe80b, &value);
+	dev_dbg(dev, "%s: CAE run => 0xe80b reg = 0x%x\n", __func__, value);
+
+	rt1320->rae_update_done = true;
+
+_exit_:
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x03);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x03);
+
+	return ret;
+}
+
+static void rt1320_dspfw_load_code(struct rt1320_sdw_priv *rt1320)
+{
+struct rt1320_imageinfo {
+	unsigned int addr;
+	unsigned int size;
+};
+
+struct rt1320_dspfwheader {
+	unsigned int sync;
+	short num;
+	short crc;
+};
+
+	struct snd_soc_dapm_context *dapm =
+		snd_soc_component_get_dapm(rt1320->component);
+	struct device *dev = &rt1320->sdw_slave->dev;
+	unsigned int val, i, fw_offset, fw_ready;
+	unsigned int fw_status_addr;
+	struct rt1320_dspfwheader *fwheader;
+	struct rt1320_imageinfo *ptr_img;
+	struct sdw_bpt_section sec[10];
+	const struct firmware *fw = NULL;
+	unsigned char *fw_data;
+	bool dev_fw_match = false;
+	static const char hdr_sig[] = "AFX";
+	unsigned int hdr_size = 0;
+	const char *dmi_vendor, *dmi_product, *dmi_sku;
+	int len_vendor, len_product, len_sku;
+	char filename[512];
+
+	switch (rt1320->dev_id) {
+	case RT1320_DEV_ID:
+		fw_status_addr = RT1320_DSPFW_STATUS_ADDR;
+		break;
+	case RT1321_DEV_ID:
+		fw_status_addr = RT1321_DSPFW_STATUS_ADDR;
+		break;
+	default:
+		dev_err(dev, "%s: Unknown device ID %d\n", __func__, rt1320->dev_id);
+		return;
+	}
+
+	dmi_vendor = dmi_get_system_info(DMI_SYS_VENDOR);
+	dmi_product = dmi_get_system_info(DMI_PRODUCT_NAME);
+	dmi_sku = dmi_get_system_info(DMI_PRODUCT_SKU);
+
+	if (dmi_vendor && dmi_product && dmi_sku) {
+		len_vendor = strchrnul(dmi_vendor, ' ') - dmi_vendor;
+		len_product = strchrnul(dmi_product, ' ') - dmi_product;
+		len_sku = strchrnul(dmi_sku, ' ') - dmi_sku;
+
+		snprintf(filename, sizeof(filename),
+			 "realtek/rt1320/rt1320_%.*s_%.*s_%.*s.dat",
+			 len_vendor, dmi_vendor, len_product, dmi_product, len_sku, dmi_sku);
+
+		dev_dbg(dev, "%s: try to load FW file %s\n", __func__, filename);
+	} else if (rt1320->dspfw_name) {
+		snprintf(filename, sizeof(filename), "rt1320_%s.dat",
+			 rt1320->dspfw_name);
+		dev_dbg(dev, "%s: try to load FW file %s\n", __func__, filename);
+	} else {
+		dev_warn(dev, "%s: Can't find proper FW file name\n", __func__);
+		return;
+	}
+
+	snd_soc_dapm_mutex_lock(dapm);
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x00);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x00);
+
+	regmap_read(rt1320->regmap, fw_status_addr, &fw_ready);
+	fw_ready &= 0x1;
+	if (fw_ready) {
+		dev_dbg(dev, "%s, DSP FW was already\n", __func__);
+		rt1320->fw_load_done = true;
+		goto _exit_;
+	}
+
+	/* change to IRAM */
+	regmap_update_bits(rt1320->regmap, 0xf01e, 0x80, 0x00);
+
+	request_firmware(&fw, filename, dev);
+	if (fw) {
+		fwheader = (struct rt1320_dspfwheader *)fw->data;
+		dev_dbg(dev, "%s, fw sync = 0x%x, num=%d, crc=0x%x\n", __func__,
+			fwheader->sync, fwheader->num, fwheader->crc);
+
+		if (fwheader->sync != 0x0a1c5679) {
+			dev_err(dev, "%s: FW sync error\n", __func__);
+			release_firmware(fw);
+			goto _exit_;
+		}
+
+		fw_offset = sizeof(struct rt1320_dspfwheader) + (sizeof(struct rt1320_imageinfo) * fwheader->num);
+		dev_dbg(dev, "%s, fw_offset = 0x%x\n", __func__, fw_offset);
+
+		regcache_cache_bypass(rt1320->regmap, true);
+
+		for (i = 0; i < fwheader->num; i++) {
+			ptr_img = (struct rt1320_imageinfo *)&fw->data[sizeof(struct rt1320_dspfwheader) + (sizeof(struct rt1320_imageinfo) * i)];
+
+			dev_dbg(dev, "%s, fw_offset=0x%x, load fw addr=0x%x, size=%d\n", __func__,
+				fw_offset, ptr_img->addr, ptr_img->size);
+
+			fw_data = (unsigned char *)&fw->data[fw_offset];
+
+			/* The binary file has a header of 64 bytes */
+			if (memcmp(fw_data, hdr_sig, sizeof(hdr_sig)) == 0)
+				hdr_size = 64;
+			else
+				hdr_size = 0;
+
+			sec[i].addr = ptr_img->addr;
+			sec[i].len = ptr_img->size - hdr_size;
+			sec[i].buf = fw_data + hdr_size;
+
+			dev_dbg(dev, "%s, hdr_size=%d, sec[%d].buf[0]=0x%x\n",
+				__func__, hdr_size, i, sec[i].buf[0]);
+
+			switch (rt1320->dev_id) {
+			case RT1320_DEV_ID:
+				if (ptr_img->addr == 0x3fc29d80)
+					if (fw_data[9] == '0')
+						dev_fw_match = true;
+				break;
+			case RT1321_DEV_ID:
+				if (ptr_img->addr == 0x3fc00000)
+					if (fw_data[9] == '1')
+						dev_fw_match = true;
+				break;
+			default:
+				dev_err(dev, "%s: Unknown device ID %d\n", __func__, rt1320->dev_id);
+				goto _exit_;
+			}
+
+			fw_offset += ptr_img->size;
+		}
+
+		if (dev_fw_match) {
+			dev_dbg(dev, "%s, starting BRA downloading FW..\n", __func__);
+			rt1320->bra_msg.dev_num = rt1320->sdw_slave->dev_num;
+			rt1320->bra_msg.flags = SDW_MSG_FLAG_WRITE;
+			rt1320->bra_msg.sections = fwheader->num;
+			rt1320->bra_msg.sec = &sec[0];
+			rt1320_data_rw(rt1320, 0, NULL, 0, RT1320_BRA_WRITE);
+			dev_dbg(dev, "%s, BRA downloading FW done..\n", __func__);
+		}
+
+		regcache_cache_bypass(rt1320->regmap, false);
+		release_firmware(fw);
+
+		if (!dev_fw_match) {
+			dev_err(dev, "%s: FW file doesn't match to device\n", __func__);
+			goto _exit_;
+		}
+	} else {
+		dev_err(dev, "%s: Failed to load %s firmware\n", __func__, filename);
+		goto _exit_;
+	}
+
+	/* run RAM code */
+	regmap_read(rt1320->regmap, 0x3fc2bfc0, &val);
+	val |= 0x8;
+	regmap_write(rt1320->regmap, 0x3fc2bfc0, val);
+
+	/* clear frame counter */
+	switch (rt1320->dev_id) {
+	case RT1320_DEV_ID:
+		regmap_write(rt1320->regmap, 0x3fc2bfcb, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2bfca, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2bfc9, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2bfc8, 0x00);
+		break;
+	case RT1321_DEV_ID:
+		regmap_write(rt1320->regmap, 0x3fc2dfcb, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2dfca, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2dfc9, 0x00);
+		regmap_write(rt1320->regmap, 0x3fc2dfc8, 0x00);
+		break;
+	}
+
+	/* enable DSP FW */
+	regmap_write(rt1320->regmap, 0xc081, 0xfc);
+	regmap_update_bits(rt1320->regmap, 0xf01e, 0x1, 0x0);
+
+	/* RsRatio should restore into DSP FW when FW was ready */
+	rt1320_invrs_load(rt1320);
+
+	/* DSP clock switches to PLL */
+	regmap_write(rt1320->regmap, 0xc081, 0xfc);
+	/* pass DSP settings */
+	regmap_write(rt1320->regmap, 0xc5c3, 0xf3);
+	regmap_write(rt1320->regmap, 0xc5c8, 0x05);
+
+	rt1320->fw_load_done = true;
+
+	pm_runtime_set_autosuspend_delay(dev, 3000);
+	pm_runtime_mark_last_busy(dev);
+
+_exit_:
+	regmap_write(rt1320->regmap,
+			SDW_SDCA_CTL(FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23,
+				RT1320_SDCA_CTL_REQ_POWER_STATE, 0), 0x03);
+	rt1320_pde_transition_delay(rt1320, FUNC_NUM_AMP, RT1320_SDCA_ENT_PDE23, 0x03);
+
+	snd_soc_dapm_mutex_unlock(dapm);
+}
+
+static void rt1320_load_dspfw_work(struct work_struct *work)
+{
+	struct rt1320_sdw_priv *rt1320 =
+		container_of(work, struct rt1320_sdw_priv, load_dspfw_work);
+	int ret;
+
+	ret = pm_runtime_resume(rt1320->component->dev);
+	if (ret < 0 && ret != -EACCES)
+		return;
+
+	dev_dbg(&rt1320->sdw_slave->dev, "%s, Starting to reload DSP FW", __func__);
+	rt1320_dspfw_load_code(rt1320);
+}
+
 static void rt1320_vc_preset(struct rt1320_sdw_priv *rt1320)
 {
 	struct sdw_slave *slave = rt1320->sdw_slave;
