@@ -679,4 +679,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+<<<<<<< HEAD   (7db1e563d6f73706150a812a21f13e5fbc14efde ANDROID: GKI: update symbol list for allwinner)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+||||||| BASE   (bda0e626a3e81619f70f766748405b54be0a6ad9 ANDROID: drop unnecessary LTO_CLANG condition causing regres)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_file_rmap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_file_rmap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+>>>>>>> CHANGE (7cb58c1b86b407f35837eb52eaecaff2962a8563 ANDROID: implement lazy preemption via vendor hooks for 6.12)
