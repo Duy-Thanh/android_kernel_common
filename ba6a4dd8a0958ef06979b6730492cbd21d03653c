@@ -88,6 +88,23 @@
       "parentUuid": "77494684_c1321cf2",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeedfa7b_4cf6fdd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-26T13:53:20Z",
+      "side": 1,
+      "message": "This is an architecture-specific change. Please do one of the following.\n\n* Expand it to include x86_64.\n* Add aarch64 to the commit message.",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
