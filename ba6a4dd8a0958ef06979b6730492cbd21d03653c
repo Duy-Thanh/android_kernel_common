@@ -105,6 +105,24 @@
       "message": "This is an architecture-specific change. Please do one of the following.\n\n* Expand it to include x86_64.\n* Add aarch64 to the commit message.",
       "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e403c0_628da9a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1812161
+      },
+      "writtenOn": "2026-01-26T17:57:03Z",
+      "side": 1,
+      "message": "I have decided to keep this to aarch64 as I see the x86_64 headers are relatively empty (I assume these are rarely used for Android).",
+      "parentUuid": "eeedfa7b_4cf6fdd9",
+      "revId": "ba6a4dd8a0958ef06979b6730492cbd21d03653c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
