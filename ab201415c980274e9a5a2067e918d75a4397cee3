@@ -16,6 +16,24 @@
       "message": "Admittedly, I\u0027m not entirely familiar with the linux stable branch process.\n\nIdeally, we would wait for this patch to land in the 6.18.y LTS branch and then it would be auto-merged here into AOSP (assuming it will land in the 6.18.y stable branch, of course).\n\nIs that feasible?",
       "revId": "ab201415c980274e9a5a2067e918d75a4397cee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1679f34f_43fa92e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1101342
+      },
+      "writtenOn": "2026-01-26T03:10:27Z",
+      "side": 1,
+      "message": "Hi Tim, thanks for your advice!\n\nYes, you are right! That patch may be automatically picked up by the stable branch starting from v6.15.\nHowever, I am not sure when it will become available in stable and AOSP kernel, so I backported it here manually.",
+      "parentUuid": "2073eeeb_89de921b",
+      "revId": "ab201415c980274e9a5a2067e918d75a4397cee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
