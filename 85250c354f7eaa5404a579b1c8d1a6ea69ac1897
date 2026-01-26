@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8fe4c26_50912f50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-26T13:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "670eca9f_07b2d816",
+      "revId": "85250c354f7eaa5404a579b1c8d1a6ea69ac1897",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b694c23c_8a677afb",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-22T17:07:46Z",
       "side": 1,
       "message": "Instead of returning `bool`, make it return an errno. It gives us more flexibility to specify why the access wasn\u0027t permitted.\n\nWith that, -EPERM would be the default not allowed. However, since we sometimes do allow accesses to reg0 to reg3, it would be better to return -EBUSY or -EACCESS if the access is to those registers but it\u0027s _not_ a hypercall exit.",
+      "revId": "85250c354f7eaa5404a579b1c8d1a6ea69ac1897",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a171973e_de2bd2df",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1743,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-26T13:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b694c23c_8a677afb",
       "revId": "85250c354f7eaa5404a579b1c8d1a6ea69ac1897",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
