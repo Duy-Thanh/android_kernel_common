@@ -3511,6 +3511,7 @@ static inline bool __should_serialize_io(struct inode *inode,
 	return false;
 }
 
+<<<<<<< HEAD   (b8b96bfd4cec3e8239a4267bddc9c2c16b699547 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 static inline void account_writeback(struct inode *inode, bool inc)
 {
 	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
@@ -3522,6 +3523,17 @@ static inline void account_writeback(struct inode *inode, bool inc)
 	else
 		atomic_dec(&F2FS_I(inode)->writeback);
 	f2fs_up_read(&F2FS_I(inode)->i_sem);
+||||||| BASE   (308d5e51bf85276f8739aec14310f70cbd010b9b FROMGIT: Revert "f2fs: add timeout in f2fs_enable_checkpoint)
+=======
+static inline void update_skipped_write(struct f2fs_sb_info *sbi,
+						struct writeback_control *wbc)
+{
+	long skipped = wbc->pages_skipped;
+
+	if (is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT) && skipped &&
+		wbc->sync_mode == WB_SYNC_ALL)
+		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
+>>>>>>> CHANGE (03b9be044acf707bc510462229b1130e56ecb22d FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
 }
 
 static int __f2fs_write_data_pages(struct address_space *mapping,
@@ -3588,10 +3600,19 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
 	 */
 
 	f2fs_remove_dirty_inode(inode);
+
+	/*
+	 * f2fs_write_cache_pages() has retry logic for EAGAIN case which is
+	 * common when racing w/ checkpoint, so only update skipped write
+	 * when ret is non-zero.
+	 */
+	if (ret)
+		update_skipped_write(sbi, wbc);
 	return ret;
 
 skip_write:
 	wbc->pages_skipped += get_dirty_pages(inode);
+	update_skipped_write(sbi, wbc);
 	trace_f2fs_writepages(mapping->host, wbc, DATA);
 	return 0;
 }

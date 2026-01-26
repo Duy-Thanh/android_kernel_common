@@ -2366,7 +2366,12 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 	unsigned int nr_pages = get_pages(sbi, F2FS_DIRTY_DATA) / 16;
 	long long start, writeback, end;
 	int ret;
+<<<<<<< HEAD   (b8b96bfd4cec3e8239a4267bddc9c2c16b699547 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 	struct f2fs_lock_context lc;
+||||||| BASE   (308d5e51bf85276f8739aec14310f70cbd010b9b FROMGIT: Revert "f2fs: add timeout in f2fs_enable_checkpoint)
+=======
+	long long skipped_write, dirty_data;
+>>>>>>> CHANGE (03b9be044acf707bc510462229b1130e56ecb22d FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
 
 	f2fs_info(sbi, "f2fs_enable_checkpoint() starts, meta: %lld, node: %lld, data: %lld",
 					get_pages(sbi, F2FS_DIRTY_META),
@@ -2377,21 +2382,73 @@ static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)
 
 	start = ktime_get();
 
+	set_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
+
 	/* we should flush all the data to keep data consistency */
+<<<<<<< HEAD   (b8b96bfd4cec3e8239a4267bddc9c2c16b699547 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 	while (get_pages(sbi, F2FS_DIRTY_DATA)) {
 		writeback_inodes_sb_nr(sbi->sb, nr_pages, WB_REASON_SYNC);
+||||||| BASE   (308d5e51bf85276f8739aec14310f70cbd010b9b FROMGIT: Revert "f2fs: add timeout in f2fs_enable_checkpoint)
+	do {
+		sync_inodes_sb(sbi->sb);
+=======
+	do {
+		skipped_write = get_pages(sbi, F2FS_SKIPPED_WRITE);
+		dirty_data = get_pages(sbi, F2FS_DIRTY_DATA);
+
+		sync_inodes_sb(sbi->sb);
+>>>>>>> CHANGE (03b9be044acf707bc510462229b1130e56ecb22d FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
 		f2fs_io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+<<<<<<< HEAD   (b8b96bfd4cec3e8239a4267bddc9c2c16b699547 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
+||||||| BASE   (308d5e51bf85276f8739aec14310f70cbd010b9b FROMGIT: Revert "f2fs: add timeout in f2fs_enable_checkpoint)
+	} while (get_pages(sbi, F2FS_DIRTY_DATA) && retry--);
+=======
+
+		f2fs_info(sbi, "sync_inode_sb done, dirty_data: %lld, %lld, "
+				"skipped write: %lld, %lld, retry: %d",
+				get_pages(sbi, F2FS_DIRTY_DATA),
+				dirty_data,
+				get_pages(sbi, F2FS_SKIPPED_WRITE),
+				skipped_write, retry);
+
+		/*
+		 * sync_inodes_sb() has retry logic, so let's check dirty_data
+		 * in prior to skipped_write in case there is no dirty data.
+		 */
+		if (!get_pages(sbi, F2FS_DIRTY_DATA))
+			break;
+		if (get_pages(sbi, F2FS_SKIPPED_WRITE) == skipped_write)
+			break;
+	} while (retry--);
+
+	clear_sbi_flag(sbi, SBI_ENABLE_CHECKPOINT);
+>>>>>>> CHANGE (03b9be044acf707bc510462229b1130e56ecb22d FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
 
 		if (f2fs_time_over(sbi, ENABLE_TIME))
 			break;
 	}
 	writeback = ktime_get();
 
+<<<<<<< HEAD   (b8b96bfd4cec3e8239a4267bddc9c2c16b699547 BACKPORT: FROMGIT: f2fs: fix to freeze GC and discard thread)
 	sync_inodes_sb(sbi->sb);
 
 	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
 		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
 					get_pages(sbi, F2FS_DIRTY_DATA));
+||||||| BASE   (308d5e51bf85276f8739aec14310f70cbd010b9b FROMGIT: Revert "f2fs: add timeout in f2fs_enable_checkpoint)
+	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA)))
+		f2fs_warn(sbi, "checkpoint=enable has some unwritten data: %lld",
+					get_pages(sbi, F2FS_DIRTY_DATA));
+=======
+	if (unlikely(get_pages(sbi, F2FS_DIRTY_DATA) ||
+			get_pages(sbi, F2FS_SKIPPED_WRITE)))
+		f2fs_warn(sbi, "checkpoint=enable unwritten data: %lld, skipped data: %lld, retry: %d",
+				get_pages(sbi, F2FS_DIRTY_DATA),
+				get_pages(sbi, F2FS_SKIPPED_WRITE), retry);
+
+	if (get_pages(sbi, F2FS_SKIPPED_WRITE))
+		atomic_set(&sbi->nr_pages[F2FS_SKIPPED_WRITE], 0);
+>>>>>>> CHANGE (03b9be044acf707bc510462229b1130e56ecb22d FROMGIT: f2fs: check skipped write in f2fs_enable_checkpoint)
 
 	f2fs_down_write_trace(&sbi->gc_lock, &lc);
 	f2fs_dirty_to_prefree(sbi);
