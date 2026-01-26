@@ -624,8 +624,22 @@ static void	recv_ipc(struct ishtp_device *dev, uint32_t doorbell_val)
 		break;
 
 	case MNG_RESET_NOTIFY:
+<<<<<<< HEAD   (63aea4913f4441d6698d01f11cd816ba0ccbfa8f FROMGIT: xhci: dbc: allow setting manufacturer string throug)
 		ish_send_reset_notify_ack(ishtp_dev);
 		fallthrough;
+||||||| BASE   (b3039c526f3e1744db0cbb7ae1f0213f5e27d3f4 mm: introduce deferred freeing for kernel page tables)
+		if (!ishtp_dev) {
+			ishtp_dev = dev;
+		}
+		schedule_work(&fw_reset_work);
+		break;
+=======
+		if (!ishtp_dev) {
+			ishtp_dev = dev;
+		}
+		queue_work(dev->unbound_wq, &fw_reset_work);
+		break;
+>>>>>>> BRANCH (5dfbc5357c34bdf81c84aa78bc8e3d6d9ba10aad Linux 6.18.7)
 
 	case MNG_RESET_NOTIFY_ACK:
 		dev->recvd_hw_ready = 1;
