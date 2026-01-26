@@ -408,6 +408,9 @@
   __traceiter_android_vh_binder_alloc_new_buf_locked
   __traceiter_android_vh_copy_process
   __traceiter_android_vh_wp_page_reuse
+  __traceiter_android_vh_resched_curr_lazy
+  __traceiter_android_vh_restore_curr_resched
+  __traceiter_android_vh_clear_curr_lazy
   __tracepoint_android_vh_account_task_time
   __tracepoint_android_rvh_alloc_workqueue
   __tracepoint_android_rvh_check_preempt_wakeup_fair
@@ -654,5 +657,12 @@
   __tracepoint_android_vh_filemap_fault_pre_folio_locked
   __tracepoint_android_vh_filemap_folio_mapped
   __tracepoint_android_vh_folio_remove_rmap_ptes
+<<<<<<< HEAD   (7db1e563d6f73706150a812a21f13e5fbc14efde ANDROID: GKI: update symbol list for allwinner)
   __tracepoint_android_vh_skip_cma
+||||||| BASE   (7cb58c1b86b407f35837eb52eaecaff2962a8563 ANDROID: implement lazy preemption via vendor hooks for 6.12)
+=======
+  __tracepoint_android_vh_resched_curr_lazy
+  __tracepoint_android_vh_restore_curr_resched
+  __tracepoint_android_vh_clear_curr_lazy
+>>>>>>> CHANGE (6acc5550e55cc26a52a7ec0772e63849a881e636 ANDROID: GKI: Update symbol list)
   isolate_folio
