@@ -1376,6 +1376,9 @@ config NUMA_EMU
 	  into virtual nodes when booted with "numa=fake=N", where N is the
 	  number of nodes. This is only useful for debugging.
 
+config HAVE_ARCH_TLB_REMOVE_TABLE
+	def_bool n
+
 config ARCH_SUPPORTS_PT_RECLAIM
 	def_bool n
 
