@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b338714d_afed0827",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-27T09:00:42Z",
+      "side": 1,
+      "message": "please use your name, not your email alias.",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "04dd7ed1e09833f9e6c7d2f1f9b44d849eedf8b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
