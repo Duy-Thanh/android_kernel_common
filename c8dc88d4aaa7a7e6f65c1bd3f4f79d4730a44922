@@ -52,6 +52,24 @@
       "parentUuid": "583ad43b_fbb0d7ce",
       "revId": "c8dc88d4aaa7a7e6f65c1bd3f4f79d4730a44922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b48baa_21e9d0b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3593604
+      },
+      "writtenOn": "2026-01-27T01:00:02Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "357a2fb1_9c48ef2e",
+      "revId": "c8dc88d4aaa7a7e6f65c1bd3f4f79d4730a44922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
