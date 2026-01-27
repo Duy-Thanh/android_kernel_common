@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86d6716_aa276658",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-27T20:24:24Z",
+      "side": 1,
+      "message": "So this patch has a WARNING, reported by KernelCommit: \n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/df17e6bc55e7a0c6448c43245a3994b577a99e25) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003ddf17e6bc55e7a0c6448c43245a3994b577a99e25).\n\n```\n      ## drivers/gpu/drm/i915/display/intel_cx0_phy.c ##\n    -@@ drivers/gpu/drm/i915/display/intel_cx0_phy.c: void intel_cx0_powerdown_change_sequence(struct intel_encoder *encoder,\n    +@@ drivers/gpu/drm/i915/display/intel_cx0_phy.c: static void intel_cx0_powerdown_change_sequence(struct intel_encoder *encoder,\n      \t\t\t\t intel_cx0_get_powerdown_update(lane_mask), 0,\n    - \t\t\t\t XELPDP_PORT_POWERDOWN_UPDATE_TIMEOUT_US, 2, NULL))\n    + \t\t\t\t XELPDP_PORT_POWERDOWN_UPDATE_TIMEOUT_US, 0, NULL))\n      \t\tdrm_warn(display-\u003edrm,\n     -\t\t\t \"PHY %c failed to bring out of Lane reset after %dus.\\n\",\n     -\t\t\t phy_name(phy), XELPDP_PORT_RESET_START_TIMEOUT_US);\n```\n\nIt seems like maybe this series is missing upstream change `fc9be0a10ca4 (\"drm/i915/ltphy: Add a wrapper for LT Phy powerdown change sequence\")`. \n\nIs that intentional?",
+      "revId": "195c7208934a1d1eeaf6e2c20a814d8c761bc34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
