@@ -34,6 +34,24 @@
       "parentUuid": "2073eeeb_89de921b",
       "revId": "ab201415c980274e9a5a2067e918d75a4397cee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "398f2061_f1d7eea1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4349400
+      },
+      "writtenOn": "2026-01-27T03:44:39Z",
+      "side": 1,
+      "message": "Hi All,\n\nSince if we do not import this patch the new panel LITEK ILIT2901 Touchscreen will can not be enabled with PSR on, we really need to verify this soon to meet project schedule, could you please help to review, thanks.",
+      "parentUuid": "1679f34f_43fa92e2",
+      "revId": "ab201415c980274e9a5a2067e918d75a4397cee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
