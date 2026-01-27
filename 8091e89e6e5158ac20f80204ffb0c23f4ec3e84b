@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f49f03db_96254287",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-27T06:08:05Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From:...\n\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: hushunkang \u003chushunkang@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: Shunkang Hu \u003chushunkang@oppo.com\u003e\u0027",
+      "revId": "8091e89e6e5158ac20f80204ffb0c23f4ec3e84b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adba45b3_dc91c4f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-27T06:08:05Z",
+      "side": 1,
+      "message": "Still seeing mismatched signed-off-by lines. You may need to correct this using `git commit --amend --author\u003d\"Shunkang Hu \u003chushunkang@oppo.com\u003e\"`",
+      "revId": "8091e89e6e5158ac20f80204ffb0c23f4ec3e84b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
