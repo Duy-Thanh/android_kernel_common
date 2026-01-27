@@ -976,7 +976,9 @@ unsigned long get_wchan(struct task_struct *p)
 	if (p == current || task_is_running(p))
 		return 0;
 
+#ifdef CONFIG_STACKTRACE
 	stack_trace_save_tsk(p, &entry, 1, 0);
+#endif
 	return entry;
 }
 

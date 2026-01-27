@@ -93,10 +93,12 @@
   bpf_dispatcher_xdp_func
   bpf_master_redirect_enabled_key
   bpf_prog_put
+  bpf_redirect_info
   bpf_stats_enabled_key
   bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
+  bpf_trace_run12
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -153,6 +155,7 @@
   clk_enable
   clk_fixed_factor_ops
   clk_gate_ops
+  clk_gate_restore_context
   clk_get
   __clk_get_hw
   __clk_get_name
@@ -727,6 +730,8 @@
   drm_encoder_cleanup
   drm_encoder_init
   __drm_err
+  drm_event_cancel_free
+  drm_event_reserve_init
   drm_format_info
   drm_format_info_block_height
   drm_format_info_block_width
@@ -1166,12 +1171,18 @@
   inode_nohighmem
   inode_set_bytes
   input_allocate_device
+  input_close_device
   input_event
   input_free_device
+  input_open_device
   input_register_device
+  input_register_handle
+  input_register_handler
   input_set_abs_params
   input_set_capability
   input_unregister_device
+  input_unregister_handle
+  input_unregister_handler
   insert_inode_locked
   invalidate_bdev
   invalidate_inode_buffers
@@ -1848,6 +1859,8 @@
   __pm_runtime_use_autosuspend
   __pm_stay_awake
   pm_stay_awake
+  pm_suspend
+  pm_suspend_target_state
   pm_wakeup_dev_event
   pm_wakeup_ws_event
   pm_wq
@@ -2452,6 +2465,7 @@
   __traceiter_android_rvh_do_sea
   __traceiter_android_rvh_do_undefinstr
   __traceiter_android_rvh_enqueue_task
+  __traceiter_android_rvh_flush_task
   __traceiter_android_rvh_gic_v3_set_affinity
   __traceiter_android_rvh_iommu_setup_dma_ops
   __traceiter_android_rvh_place_entity
@@ -2511,6 +2525,7 @@
   __tracepoint_android_rvh_do_sea
   __tracepoint_android_rvh_do_undefinstr
   __tracepoint_android_rvh_enqueue_task
+  __tracepoint_android_rvh_flush_task
   __tracepoint_android_rvh_gic_v3_set_affinity
   __tracepoint_android_rvh_iommu_setup_dma_ops
   __tracepoint_android_rvh_place_entity
@@ -2593,6 +2608,7 @@
   tty_port_open
   tty_port_register_device
   tty_port_tty_get
+  tty_port_tty_hangup
   tty_port_tty_wakeup
   tty_put_char
   tty_register_driver
@@ -2666,7 +2682,10 @@
   usb_anchor_empty
   usb_anchor_urb
   usb_autopm_get_interface
+  usb_autopm_get_interface_async
+  usb_autopm_get_interface_no_resume
   usb_autopm_put_interface
+  usb_autopm_put_interface_async
   usb_bulk_msg
   usb_clear_halt
   usb_control_msg
@@ -2753,6 +2772,7 @@
   usb_serial_generic_tiocmiwait
   usb_serial_generic_unthrottle
   usb_serial_handle_dcd_change
+  usb_serial_port_softint
   usb_serial_register_drivers
   usb_set_interface
   usb_sg_init
