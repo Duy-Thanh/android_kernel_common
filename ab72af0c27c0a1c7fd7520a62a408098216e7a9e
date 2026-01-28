@@ -16,6 +16,24 @@
       "message": "This is a large FROMGIT topic. Is there a pressing reason we can\u0027t delay until it lands?",
       "revId": "ab72af0c27c0a1c7fd7520a62a408098216e7a9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b9eaa9_e5833040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2026-01-28T18:47:51Z",
+      "side": 1,
+      "message": "Hey Neill, thanks for taking a look.\n\nYes, we are approaching validation milestones for upcoming platforms and this series is required to unblock TBT3 validation.",
+      "parentUuid": "a97d95a8_b7c45234",
+      "revId": "ab72af0c27c0a1c7fd7520a62a408098216e7a9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
