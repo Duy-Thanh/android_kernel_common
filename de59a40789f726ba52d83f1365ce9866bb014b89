@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23cffc8e_d46a1c70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-28T02:56:27Z",
+      "side": 1,
+      "message": "It looks like these hooks were all defined in android15-6.6. Is there a reason you can\u0027t cherry-pick the patch from android15-6.6? (preserving the Change-Id). Keeping the change ID helps us track patches across kernel branches.\n\nIf there is no reason, then please abandon this change and cherry-pick the one from android15-6.6.",
+      "revId": "de59a40789f726ba52d83f1365ce9866bb014b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
