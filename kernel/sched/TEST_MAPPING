@@ -37,14 +37,6 @@
       ]
     },
     {
-      "name": "CtsJobSchedulerTestCases",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    },
-    {
       "name": "CtsWifiBroadcastsHostTestCases",
       "options": [
         {
