@@ -16,6 +16,24 @@
       "message": "It looks like these hooks were all defined in android15-6.6. Is there a reason you can\u0027t cherry-pick the patch from android15-6.6? (preserving the Change-Id). Keeping the change ID helps us track patches across kernel branches.\n\nIf there is no reason, then please abandon this change and cherry-pick the one from android15-6.6.",
       "revId": "de59a40789f726ba52d83f1365ce9866bb014b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4d8a79f_1df98c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-01-28T06:51:42Z",
+      "side": 1,
+      "message": "Thank you for the guidance. I have abandoned the previous standalone patch and re-uploaded the change for the 6.12 kernel by preserving the original Change-Id from the android15-6.6 branch.\n\nThis should now allow for proper tracking across the kernel branches as you requested. Please let me know if there are any further adjustments needed.\n\nThank you for your time! This is the updated submission：https://android-review.googlesource.com/c/kernel/common/+/3931972 ; https://android-review.googlesource.com/c/kernel/common/+/3931973",
+      "parentUuid": "23cffc8e_d46a1c70",
+      "revId": "de59a40789f726ba52d83f1365ce9866bb014b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
