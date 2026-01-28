@@ -1,13 +1,7 @@
 {
   "imports": [
     {
-      "path": "packages/modules/Connectivity"
-    },
-    {
       "path": "packages/services/Telecomm"
-    },
-    {
-      "path": "system/netd"
     }
  ],
  "presubmit": [
@@ -27,6 +21,9 @@
       "options": [
         {
           "exclude-annotation": "com.android.testutils.SkipPresubmit"
+        },
+        {
+          "include-filter": "android.net.netstats"
         }
       ]
     },
