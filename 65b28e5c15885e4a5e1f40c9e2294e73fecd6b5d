@@ -142,6 +142,24 @@
       "parentUuid": "ccb88406_eccd593b",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4743d33a_3c44b7e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-28T10:22:07Z",
+      "side": 1,
+      "message": "Please submit this again, with the proper changelog information that matches the upstream submission and we can review it that way.  Also, if this goes into this branch, it should also go into newer branches at the same time so you do not have a regression when updating your kernel to a newer one (i.e. the `android17-6.18` branch).",
+      "parentUuid": "13d8687b_ee564c22",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
