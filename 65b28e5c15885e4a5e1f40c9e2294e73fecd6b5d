@@ -106,6 +106,24 @@
       "parentUuid": "003e8697_cc0de405",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb88406_eccd593b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-28T08:06:19Z",
+      "side": 1,
+      "message": "Looks good!  Now please make this changelog match what was submitted publicly.",
+      "parentUuid": "aec70a72_a2ba7b8f",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
