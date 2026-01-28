@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95679a4b_41c07d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3616649
+      },
+      "writtenOn": "2026-01-28T03:58:43Z",
+      "side": 1,
+      "message": "The conflicts have been fixed. The abi changes have been separated into another patch. Please help to review. Thanks.",
+      "revId": "e40e1c63f1e55adfff5b47ed0d63c9b68444d10d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
