@@ -394690,6 +394690,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x85cda6bc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0e8833d6
+}
+function {
   id: 0x85d454a8
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
@@ -503959,6 +503967,15 @@ elf_symbol {
   full_name: "sock_copy_user_timeval"
 }
 elf_symbol {
+  id: 0x13ae25c6
+  name: "sock_create"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6c2643f8
+  type_id: 0x85cda6bc
+  full_name: "sock_create"
+}
+elf_symbol {
   id: 0x7be16ce2
   name: "sock_create_kern"
   is_defined: true
@@ -526424,6 +526441,7 @@ interface {
   symbol_id: 0xe0ea15f1
   symbol_id: 0xa829435f
   symbol_id: 0x021ff112
+  symbol_id: 0x13ae25c6
   symbol_id: 0x7be16ce2
   symbol_id: 0x0967d0a1
   symbol_id: 0x33edf503
