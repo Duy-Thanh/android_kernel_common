@@ -382652,7 +382652,7 @@ elf_symbol {
   name: "drm_bridge_helper_reset_crtc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3bc1b10e
+  crc: 0x9abe3efd
   type_id: 0x9414ed26
   full_name: "drm_bridge_helper_reset_crtc"
 }
