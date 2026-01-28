@@ -16,6 +16,24 @@
       "message": "We normally take defconfig changes like this as applying to both architectures.\n\nI\u0027ll see if I can find an x86_64 reviewer,",
       "revId": "a8498d021a456949aec26b75e9bda1436a65e0c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "628304fc_49fd3157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-28T09:01:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "030d2781_5aca7ead",
+      "revId": "a8498d021a456949aec26b75e9bda1436a65e0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
