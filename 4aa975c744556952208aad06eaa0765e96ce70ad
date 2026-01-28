@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f3a6d2_75daedf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-28T18:05:57Z",
+      "side": 1,
+      "message": "CONFIG_SOUNDWIRE is not built as part of GKI, so these changes should be in the downstream tree used for vendor modules. Why are they needed in the ACK branch?",
+      "revId": "4aa975c744556952208aad06eaa0765e96ce70ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
