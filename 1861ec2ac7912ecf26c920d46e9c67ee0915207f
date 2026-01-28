@@ -16,6 +16,24 @@
       "message": "I see this same change was added in https://r.android.com/3930152\n\nPlease preserve the same Change-Id when submitting the same logic across different branches.\n\nYou\u0027ll need to resubmit the change and abandon this one.",
       "revId": "1861ec2ac7912ecf26c920d46e9c67ee0915207f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1055292b_0634b689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2026-01-28T07:20:01Z",
+      "side": 1,
+      "message": "The resubmited change link: https://android-review.googlesource.com/c/kernel/common/+/3932032",
+      "parentUuid": "559e1737_1bf36bac",
+      "revId": "1861ec2ac7912ecf26c920d46e9c67ee0915207f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
