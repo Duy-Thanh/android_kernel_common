@@ -33,6 +33,23 @@
       "message": "Hi qiwu, please update the change id\u0027s per John\u0027s feedback",
       "revId": "0cb8684b745acbf7b30080994e28bb86863e61f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc58fc69_348ea582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2026-01-28T07:20:53Z",
+      "side": 1,
+      "message": "The resubmited change link: https://android-review.googlesource.com/c/kernel/common/+/3932052",
+      "revId": "0cb8684b745acbf7b30080994e28bb86863e61f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
