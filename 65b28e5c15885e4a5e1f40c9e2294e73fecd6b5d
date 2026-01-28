@@ -88,6 +88,24 @@
       "parentUuid": "ab226bb4_be1afce0",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec70a72_a2ba7b8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-28T02:56:28Z",
+      "side": 1,
+      "message": "Thank you sir, i have resubmit this properly:https://lore.kernel.org/all/20260128025345.68258-1-huanglipeng@vivo.com/",
+      "parentUuid": "003e8697_cc0de405",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
