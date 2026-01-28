@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77ab5b2_1be472ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-28T20:54:44Z",
+      "side": 1,
+      "message": "Another one... likely a race between additions from `0e3dea1d5dc9 (\"ANDROID: Add 6.18 IMX symbols for Memory, debug, and auxiliary symbols\")` and updates from `712a38a3f104 (\"ANDROID: GKI: Update abi.stg definitions\")`",
+      "revId": "3210c6a0d94cc44fa91afe0cde3ce0380a35580d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
