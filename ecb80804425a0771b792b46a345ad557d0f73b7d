@@ -16,6 +16,24 @@
       "message": "Waiting for the fix for the presubmit error to land.",
       "revId": "ecb80804425a0771b792b46a345ad557d0f73b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0afb2c0_9fb166c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-01-28T11:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91c152d_18c88211",
+      "revId": "ecb80804425a0771b792b46a345ad557d0f73b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
