@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc66e441_2682bf76",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-29T17:15:18Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline\n\nFile is missing final newline",
+      "revId": "7af1e84dcfc4013f9468a6d933608c4173291a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
