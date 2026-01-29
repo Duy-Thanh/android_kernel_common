@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2080cf6b_9134995b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4614602
+      },
+      "writtenOn": "2026-01-29T08:18:40Z",
+      "side": 1,
+      "message": "repo download -b change-3933776 kernel/common 3933776",
+      "revId": "0d045b01f0fb64460f6852f2ce5469801f47c549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
