@@ -160,6 +160,24 @@
       "parentUuid": "13d8687b_ee564c22",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c302be1_776c7c95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-01-29T01:53:55Z",
+      "side": 1,
+      "message": "Hi,sir: Please submit this again, with the proper changelog information that matches the upstream submission \n   ---Does that mean --amend resubmit this commit message? Or does it mean re-sending the patch to sean@mess.org, mchehab@kernel.org? If it is the former, is my amend submission compliant？",
+      "parentUuid": "13d8687b_ee564c22",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
