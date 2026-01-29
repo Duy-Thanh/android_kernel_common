@@ -463457,7 +463457,7 @@ elf_symbol {
   name: "devm_thermal_of_zone_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x86d639a8
+  crc: 0x39632ff5
   type_id: 0xfc59f36a
   full_name: "devm_thermal_of_zone_register"
 }
@@ -463466,7 +463466,7 @@ elf_symbol {
   name: "devm_thermal_of_zone_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8c4e0f51
+  crc: 0x57ff57dd
   type_id: 0x1095fa8e
   full_name: "devm_thermal_of_zone_unregister"
 }
