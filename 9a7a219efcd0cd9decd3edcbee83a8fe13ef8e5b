@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9cd2384_cbacea68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2049209
+      },
+      "writtenOn": "2026-01-29T14:55:55Z",
+      "side": 1,
+      "message": "Add the appropriate prefix:\n\n```\nUPSTREAM: for a clean cherry-pick.\nBACKPORT: if you had to make changes to resolve conflicts.\nExample: UPSTREAM: subsystem: summary of the original commit\n```\n\nReference: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "9a7a219efcd0cd9decd3edcbee83a8fe13ef8e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
