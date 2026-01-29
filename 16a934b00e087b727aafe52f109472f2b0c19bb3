@@ -16,6 +16,24 @@
       "message": "Need to also use `tools/bazel run //common:kernel_aarch64_abi_update` and commit the abi.stg updates.",
       "revId": "16a934b00e087b727aafe52f109472f2b0c19bb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8446b2f_c77d7597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928805
+      },
+      "writtenOn": "2026-01-29T00:49:13Z",
+      "side": 1,
+      "message": "there is no bazel on android15-6.6 branch",
+      "parentUuid": "86cd2390_40ccd4f1",
+      "revId": "16a934b00e087b727aafe52f109472f2b0c19bb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
