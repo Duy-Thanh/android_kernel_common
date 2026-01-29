@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d9e988_f129145b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-29T20:11:09Z",
+      "side": 1,
+      "message": "We really only want to take changes into our tree that affect the core GKI or GKI modules. \n\nThese changes don\u0027t seem to affect the core GKI build, so the advice is to maintain them in your own vendor modules build tree.\n\nIf I\u0027ve assessed this incorrectly, please let me know.\n\nIf the changes do land in -stable, they will likely get included eventually via a -stable tree merge. But there may be some propagation lag there, so it is best to have a way to maintain patches in your vendor modules build tree.",
+      "revId": "c4d53d2f5791ec9c5277dfd9aacfa90b313f181b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
