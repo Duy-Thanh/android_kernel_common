@@ -22,6 +22,30 @@
       },
       "revId": "9a7a219efcd0cd9decd3edcbee83a8fe13ef8e5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c874810b_426299cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-29T18:55:47Z",
+      "side": 1,
+      "message": "You\u0027re going to want `FROMGIT:` in this case along with a \"cherry picked from\" line. See aosp/3720799 as a random example.",
+      "parentUuid": "f9cd2384_cbacea68",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "9a7a219efcd0cd9decd3edcbee83a8fe13ef8e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
