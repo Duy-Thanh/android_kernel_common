@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2435ba1_1cd19c53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-29T02:40:00Z",
+      "side": 1,
+      "message": "I\u0027m wondering if instead of passing jiffies on the lock and zero on the unlock (which is sort of subtle/unintuitive semantics for the interface - ie: calling start-time at the end) it would be more clear to have an _acquire() function and a _release() function? Then the vh implementation itself can decide if it wants to sample jiffies or not.\n\nThoughts?\n\nAdditionally some of the locking primitives are getting really busy with tracepoints (see rwsems for a good example). Are there any existing tracepoints that could be re-used instead of adding new ones?",
+      "revId": "6d9b15f10f85fd63c2a519f7b991e30e6f3720f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
