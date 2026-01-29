@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c6f9c0_0660635a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-01-29T16:42:54Z",
+      "side": 1,
+      "message": "As per Robin\u0027s request in b/476311839#comment9, picking the FROMGIT version to android16-6.12",
+      "revId": "eb1c5eb30bb09975d04577170a48a97c244bc910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
