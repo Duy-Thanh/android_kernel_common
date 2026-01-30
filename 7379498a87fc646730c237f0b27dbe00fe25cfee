@@ -16,6 +16,24 @@
       "message": "Upstream first or rationale for why not",
       "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b848fd_1da2bf08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2026-01-30T10:27:07Z",
+      "side": 1,
+      "message": "Hello Todd,\n\nThe Github PR is merged.\nCan you help to review this CL?\n\nTo put this on record:\nThe community reviewed the code on GitHub, and you can read their comments in the pull request (PR). Once the PR is merged, it will be submitted to the kernel mailing list along with other PRs. Usually, the patches in the mailing list are accepted without changes, but occasionally they might receive minor comments. However, they\u0027re never rejected.",
+      "parentUuid": "e6429d8a_396c4cde",
+      "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
