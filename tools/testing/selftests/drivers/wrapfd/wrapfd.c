@@ -110,6 +110,25 @@ static inline int wrapfd_prohibit_guests(int wrapfd)
 	return ioctl(wrapfd, WRAPFD_DEV_IOC_PROHIBIT_GUESTS, NULL);
 }
 
+struct wrapfd_test_get {
+	__s64 wrapfd;	/* [in] wrap file to get */
+	__u64 prot;	/* [in] protection bits */
+};
+
+/* ioctls for /dev/wrapfd_test */
+#define WRAPFD_TEST_DEV_IOC	0xBE
+#define WRAPFD_TEST_DEV_GET	_IOW(WRAPFD_TEST_DEV_IOC, 0, struct wrapfd_test_get)
+
+static inline int wrapfd_test_get(int test_dev_fd, int wrapfd, unsigned int prot)
+{
+	struct wrapfd_test_get get = {
+		.wrapfd = wrapfd,
+		.prot = prot,
+	};
+
+	return ioctl(test_dev_fd, WRAPFD_TEST_DEV_GET, &get);
+}
+
 /* test utility functions */
 static int dmabuf_heap_alloc(int heap_fd, size_t len)
 {
@@ -139,6 +158,7 @@ FIXTURE(wrapfd_tests)
 	size_t size;
 	int dev_fd;
 	int fd;
+	int test_dev_fd;
 };
 
 #define FILE_SZ_PAGES	100
@@ -156,6 +176,9 @@ FIXTURE_SETUP(wrapfd_tests)
 
 	self->dev_fd = open("/dev/wrapfd", O_RDONLY);
 	ASSERT_TRUE(self->dev_fd >= 0);
+
+	self->test_dev_fd = open("/dev/wrapfd_test", O_RDONLY);
+	ASSERT_TRUE(self->test_dev_fd >= 0);
 
 	/* Prepare random content buffer */
 	self->content = malloc(self->size);
@@ -179,6 +202,7 @@ FIXTURE_SETUP(wrapfd_tests)
 FIXTURE_TEARDOWN(wrapfd_tests)
 {
 	close(self->fd);
+	close(self->test_dev_fd);
 	close(self->dev_fd);
 }
 
@@ -529,6 +553,40 @@ static void test_ioctl(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static void test_kernel_api(struct __test_metadata *_metadata,
+			    FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd;
+	int testfd;
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+
+	/* Clear buffer content */
+	ASSERT_EQ(wrapfd_get(wrapfd), 0);
+	clear_content(_metadata, self, wrapfd);
+	ASSERT_EQ(wrapfd_put(wrapfd), 0);
+
+	/* Map via the test driver and check the content */
+	testfd = wrapfd_test_get(self->test_dev_fd, wrapfd, O_RDWR);
+	ASSERT_TRUE(testfd >= 0);
+	ASSERT_NE(cmp_content(_metadata, self, testfd), 0);
+	close(testfd);
+
+	/* Load buffer content from the file */
+	ASSERT_EQ(wrapfd_get(wrapfd), 0);
+	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, 0, 0, self->size), 0);
+	ASSERT_EQ(wrapfd_put(wrapfd), 0);
+
+	/* Map via the test driver and check the content */
+	testfd = wrapfd_test_get(self->test_dev_fd, wrapfd, O_RDWR);
+	ASSERT_TRUE(testfd >= 0);
+	ASSERT_EQ(cmp_content(_metadata, self, testfd), 0);
+	close(testfd);
+
+	close(wrapfd);
+}
+
 static void run_tests(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -542,6 +600,7 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_empty(_metadata, self, fd);
 	test_guests(_metadata, self, fd);
 	test_ioctl(_metadata, self, fd);
+	test_kernel_api(_metadata, self, fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)
