@@ -16,6 +16,24 @@
       "message": "Breaks allmodconfig build for arm64:\n```\nERROR: modpost: \"gunyah_cma_unmap_from_userspace\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\nERROR: modpost: \"gunyah_setup_demand_paging\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\nERROR: modpost: \"gunyah_rm_vm_set_address_layout\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\nERROR: modpost: \"gunyah_vm_parcel_to_paged\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\n```",
       "revId": "59d1abdc9f6616d018a14d56f7f263f649b693a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd10700_f4b9f7d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270143
+      },
+      "writtenOn": "2026-01-30T04:26:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd39b5a_e2f793e1",
+      "revId": "59d1abdc9f6616d018a14d56f7f263f649b693a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
