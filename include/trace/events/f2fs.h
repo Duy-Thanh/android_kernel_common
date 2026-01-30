@@ -2288,6 +2288,195 @@ DEFINE_EVENT(f2fs__rw_end, f2fs_datawrite_end,
 	TP_ARGS(inode, offset, bytes)
 );
 
+<<<<<<< HEAD   (65896c4edca1614fb2844dc27399c9347d28f86d UPSTREAM: f2fs: fix to use per-inode maxbytes and cleanup)
+||||||| BASE   (cea96a0c7d224e603c4de8c45cd5ff691c6dab8c BACKPORT: UPSTREAM: f2fs: fix lock priority inversion issue)
+TRACE_EVENT(f2fs_lock_elapsed_time,
+
+	TP_PROTO(struct f2fs_sb_info *sbi, enum f2fs_lock_name lock_name,
+		bool is_write, struct task_struct *p, int ioprio,
+		unsigned long long total_time,
+		unsigned long long running_time,
+		unsigned long long runnable_time,
+		unsigned long long io_sleep_time,
+		unsigned long long other_time),
+
+	TP_ARGS(sbi, lock_name, is_write, p, ioprio, total_time, running_time,
+		runnable_time, io_sleep_time, other_time),
+
+	TP_STRUCT__entry(
+		__field(dev_t, dev)
+		__array(char, comm, TASK_COMM_LEN)
+		__field(pid_t, pid)
+		__field(int, prio)
+		__field(int, ioprio_class)
+		__field(int, ioprio_data)
+		__field(unsigned int, lock_name)
+		__field(bool, is_write)
+		__field(unsigned long long, total_time)
+		__field(unsigned long long, running_time)
+		__field(unsigned long long, runnable_time)
+		__field(unsigned long long, io_sleep_time)
+		__field(unsigned long long, other_time)
+	),
+
+	TP_fast_assign(
+		__entry->dev		= sbi->sb->s_dev;
+		memcpy(__entry->comm, p->comm, TASK_COMM_LEN);
+		__entry->pid		= p->pid;
+		__entry->prio		= p->prio;
+		__entry->ioprio_class	= IOPRIO_PRIO_CLASS(ioprio);
+		__entry->ioprio_data	= IOPRIO_PRIO_DATA(ioprio);
+		__entry->lock_name	= lock_name;
+		__entry->is_write	= is_write;
+		__entry->total_time	= total_time;
+		__entry->running_time	= running_time;
+		__entry->runnable_time	= runnable_time;
+		__entry->io_sleep_time	= io_sleep_time;
+		__entry->other_time	= other_time;
+	),
+
+	TP_printk("dev = (%d,%d), comm: %s, pid: %d, prio: %d, "
+		"ioprio_class: %d, ioprio_data: %d, lock_name: %s, "
+		"lock_type: %s, total: %llu, running: %llu, "
+		"runnable: %llu, io_sleep: %llu, other: %llu",
+		show_dev(__entry->dev),
+		__entry->comm,
+		__entry->pid,
+		__entry->prio,
+		__entry->ioprio_class,
+		__entry->ioprio_data,
+		show_lock_name(__entry->lock_name),
+		__entry->is_write ? "wlock" : "rlock",
+		__entry->total_time,
+		__entry->running_time,
+		__entry->runnable_time,
+		__entry->io_sleep_time,
+		__entry->other_time)
+);
+
+=======
+TRACE_EVENT(f2fs_lock_elapsed_time,
+
+	TP_PROTO(struct f2fs_sb_info *sbi, enum f2fs_lock_name lock_name,
+		bool is_write, struct task_struct *p, int ioprio,
+		unsigned long long total_time,
+		unsigned long long running_time,
+		unsigned long long runnable_time,
+		unsigned long long io_sleep_time,
+		unsigned long long other_time),
+
+	TP_ARGS(sbi, lock_name, is_write, p, ioprio, total_time, running_time,
+		runnable_time, io_sleep_time, other_time),
+
+	TP_STRUCT__entry(
+		__field(dev_t, dev)
+		__array(char, comm, TASK_COMM_LEN)
+		__field(pid_t, pid)
+		__field(int, prio)
+		__field(int, ioprio_class)
+		__field(int, ioprio_data)
+		__field(unsigned int, lock_name)
+		__field(bool, is_write)
+		__field(unsigned long long, total_time)
+		__field(unsigned long long, running_time)
+		__field(unsigned long long, runnable_time)
+		__field(unsigned long long, io_sleep_time)
+		__field(unsigned long long, other_time)
+	),
+
+	TP_fast_assign(
+		__entry->dev		= sbi->sb->s_dev;
+		memcpy(__entry->comm, p->comm, TASK_COMM_LEN);
+		__entry->pid		= p->pid;
+		__entry->prio		= p->prio;
+		__entry->ioprio_class	= IOPRIO_PRIO_CLASS(ioprio);
+		__entry->ioprio_data	= IOPRIO_PRIO_DATA(ioprio);
+		__entry->lock_name	= lock_name;
+		__entry->is_write	= is_write;
+		__entry->total_time	= total_time;
+		__entry->running_time	= running_time;
+		__entry->runnable_time	= runnable_time;
+		__entry->io_sleep_time	= io_sleep_time;
+		__entry->other_time	= other_time;
+	),
+
+	TP_printk("dev = (%d,%d), comm: %s, pid: %d, prio: %d, "
+		"ioprio_class: %d, ioprio_data: %d, lock_name: %s, "
+		"lock_type: %s, total: %llu, running: %llu, "
+		"runnable: %llu, io_sleep: %llu, other: %llu",
+		show_dev(__entry->dev),
+		__entry->comm,
+		__entry->pid,
+		__entry->prio,
+		__entry->ioprio_class,
+		__entry->ioprio_data,
+		show_lock_name(__entry->lock_name),
+		__entry->is_write ? "wlock" : "rlock",
+		__entry->total_time,
+		__entry->running_time,
+		__entry->runnable_time,
+		__entry->io_sleep_time,
+		__entry->other_time)
+);
+
+DECLARE_EVENT_CLASS(f2fs_priority_update,
+
+	TP_PROTO(struct f2fs_sb_info *sbi, enum f2fs_lock_name lock_name,
+		bool is_write, struct task_struct *p, int orig_prio,
+		int new_prio),
+
+	TP_ARGS(sbi, lock_name, is_write, p, orig_prio, new_prio),
+
+	TP_STRUCT__entry(
+		__field(dev_t, dev)
+		__array(char, comm, TASK_COMM_LEN)
+		__field(pid_t, pid)
+		__field(unsigned int, lock_name)
+		__field(bool, is_write)
+		__field(int, orig_prio)
+		__field(int, new_prio)
+	),
+
+	TP_fast_assign(
+		__entry->dev		= sbi->sb->s_dev;
+		memcpy(__entry->comm, p->comm, TASK_COMM_LEN);
+		__entry->pid		= p->pid;
+		__entry->lock_name	= lock_name;
+		__entry->is_write	= is_write;
+		__entry->orig_prio	= orig_prio;
+		__entry->new_prio	= new_prio;
+	),
+
+	TP_printk("dev = (%d,%d), comm: %s, pid: %d, lock_name: %s, "
+		"lock_type: %s, orig_prio: %d, new_prio: %d",
+		show_dev(__entry->dev),
+		__entry->comm,
+		__entry->pid,
+		show_lock_name(__entry->lock_name),
+		__entry->is_write ? "wlock" : "rlock",
+		__entry->orig_prio,
+		__entry->new_prio)
+);
+
+DEFINE_EVENT(f2fs_priority_update, f2fs_priority_uplift,
+
+	TP_PROTO(struct f2fs_sb_info *sbi, enum f2fs_lock_name lock_name,
+		bool is_write, struct task_struct *p, int orig_prio,
+		int new_prio),
+
+	TP_ARGS(sbi, lock_name, is_write, p, orig_prio, new_prio)
+);
+
+DEFINE_EVENT(f2fs_priority_update, f2fs_priority_restore,
+
+	TP_PROTO(struct f2fs_sb_info *sbi, enum f2fs_lock_name lock_name,
+		bool is_write, struct task_struct *p, int orig_prio,
+		int new_prio),
+
+	TP_ARGS(sbi, lock_name, is_write, p, orig_prio, new_prio)
+);
+
+>>>>>>> CHANGE (0cd8ad717f86f38ee5b2ad834ddd8316be512ad9 UPSTREAM: f2fs: introduce trace_f2fs_priority_update)
 #endif /* _TRACE_F2FS_H */
 
  /* This part must be outside protection */
