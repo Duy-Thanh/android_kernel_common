@@ -52,6 +52,24 @@
       "parentUuid": "74b848fd_1da2bf08",
       "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00694558_0985d194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2026-01-30T17:07:38Z",
+      "side": 1,
+      "message": "The Github PR link is in the commit message. I\u0027ll leave it to Intel to answer the rest.",
+      "parentUuid": "463e2f46_ae28a7da",
+      "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
