@@ -882,7 +882,27 @@ out:
 		return count;
 	}
 
+<<<<<<< HEAD   (006ff1b2947d01cd01e681a54df293a46308ec24 BACKPORT: erofs: fix inline data read failure for ztailpacki)
 	*ui = (unsigned int)t;
+||||||| BASE   (aa134d3a49c4dc0e951026377c44b567a488d223 BACKPORT: scsi: ufs: core: Fix PM QoS mutex initialization)
+	__sbi_store_value(a, sbi, ptr + a->offset, t);
+=======
+	if (!strcmp(a->attr.name, "adjust_lock_priority")) {
+		if (t >= BIT(LOCK_NAME_MAX - 1))
+			return -EINVAL;
+		sbi->adjust_lock_priority = t;
+		return count;
+	}
+
+	if (!strcmp(a->attr.name, "lock_duration_priority")) {
+		if (t < NICE_TO_PRIO(MIN_NICE) || t > NICE_TO_PRIO(MAX_NICE))
+			return -EINVAL;
+		sbi->lock_duration_priority = t;
+		return count;
+	}
+
+	__sbi_store_value(a, sbi, ptr + a->offset, t);
+>>>>>>> CHANGE (67c51f025c117b594077fb2ca7e32783c825c87f BACKPORT: UPSTREAM: f2fs: fix lock priority inversion issue)
 
 	return count;
 }
@@ -1192,6 +1212,8 @@ F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
 F2FS_SBI_GENERAL_RW_ATTR(carve_out);
 F2FS_SBI_GENERAL_RW_ATTR(reserved_pin_section);
 F2FS_SBI_GENERAL_RW_ATTR(max_lock_elapsed_time);
+F2FS_SBI_GENERAL_RW_ATTR(lock_duration_priority);
+F2FS_SBI_GENERAL_RW_ATTR(adjust_lock_priority);
 
 /* STAT_INFO ATTR */
 #ifdef CONFIG_F2FS_STAT_FS
@@ -1391,6 +1413,8 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(carve_out),
 	ATTR_LIST(reserved_pin_section),
 	ATTR_LIST(max_lock_elapsed_time),
+	ATTR_LIST(lock_duration_priority),
+	ATTR_LIST(adjust_lock_priority),
 	NULL,
 };
 ATTRIBUTE_GROUPS(f2fs);
