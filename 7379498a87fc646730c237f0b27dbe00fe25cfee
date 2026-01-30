@@ -34,6 +34,24 @@
       "parentUuid": "e6429d8a_396c4cde",
       "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463e2f46_ae28a7da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-30T16:37:11Z",
+      "side": 1,
+      "message": "What does it mean that the PR is merged? Does that mean an upstream maintainer is reviewing it? Can we wait for the maintainer to merge it into their tree? (FROMGIT). Please add all of this information to this kind of ANDROID patch including links to the github reviews a/o the pull request.\n\nIf the patch is going through the normal upstream process for this subsystem, it should be called out since it de-risks it for reviewers.",
+      "parentUuid": "74b848fd_1da2bf08",
+      "revId": "7379498a87fc646730c237f0b27dbe00fe25cfee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
