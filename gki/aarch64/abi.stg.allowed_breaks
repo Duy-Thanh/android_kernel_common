@@ -79,6 +79,7 @@ type 'struct inet_connection_sock' changed
         offset changed from 60 to 61
         bit-field size changed from 4 to 3
 
+<<<<<<< HEAD   (b0a9599c6c01ec540e2252ca3a0e87b5b8c47c97 UPSTREAM: sched/fair: Fix pelt clock sync when entering idle)
 type 'struct kvm_iommu_ops' changed
   member 'u64 __kabi_reserved2' was removed
   member 'u64 __kabi_reserved3' was removed
@@ -88,4 +89,10 @@ type 'struct kvm_iommu_ops' changed
   member 'union { int(* detach_dev_nested)(struct kvm_hyp_iommu*, struct kvm_hyp_iommu_domain*, struct kvm_hyp_iommu_domain*, u32, u32); struct { u64 __kabi_reserved3; }; union { }; }' was added
   member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
   member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
+||||||| BASE   (f6b8720b7606d25892e9ccf9bab0060fad7f70ac ANDROID: gki_defconfig: Change CONFIG_GKI_TASK_STRUCT_VENDOR)
+=======
+variable symbol changed from 'u64 vendor_data_pad[64]' to 'u64 vendor_data_pad[128]'
+  type changed from 'u64[64]' to 'u64[128]'
+    number of elements changed from 64 to 128
+>>>>>>> CHANGE (b0565d9dbab76979a6246d7b6c3ac8a91ba61638 ANDROID: vendor_data_pad: fix up CRC, refresh ABI, allow ABI)
 
