@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead245b6_88f4db0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-30T21:52:23Z",
+      "side": 1,
+      "message": "This driver is not part GKI builds so changes to it should be submitted to the downstream kernel tree where vendor modules are built.",
+      "revId": "2d83e3037de9ac7d41b2cbc8c2a0bc3d1093831b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
