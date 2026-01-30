@@ -37,3 +37,7 @@ type 'struct inet_connection_sock' changed
         offset changed from 60 to 61
         bit-field size changed from 4 to 3
 
+variable symbol changed from 'u64 vendor_data_pad[64]' to 'u64 vendor_data_pad[128]'
+  type changed from 'u64[64]' to 'u64[128]'
+    number of elements changed from 64 to 128
+
