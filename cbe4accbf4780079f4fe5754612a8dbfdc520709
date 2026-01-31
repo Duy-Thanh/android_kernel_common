@@ -16,6 +16,24 @@
       "message": "This is a bad idea. You are attempting to circumvent protection put in place to prohibit this exact behavior. The mangling exists to prevent drivers from obtaining access to the underlying struct pages (if they even exist at all), which is deliberately not supported by the dmabuf interface. This rule is explained in this recent patch, which would also break what you\u0027re doing here in future kernels.\n\nhttps://lore.kernel.org/all/20251205130604.1582-1-christian.koenig@amd.com/",
       "revId": "cbe4accbf4780079f4fe5754612a8dbfdc520709",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134962ea_ed12729b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-01-31T00:56:10Z",
+      "side": 1,
+      "message": "Yeah, for upstreaming we will likely need to wire this up through heaps, something like https://lore.kernel.org/all/20250513092803.2096-1-tao.wangtao@honor.com/ for loading the file. For now this is the least invasive way to get this into GKI for testing.\n\nKernel API is designed also to return sgtable of pages and I heard that NPU driver needs access to these pages. IIUC dmabufs are not designed to provide that even inside the kernel, so we will need to meed with NPU driver team to understand what exactly they are doing that requires struct pages.",
+      "parentUuid": "1b22b060_497a5086",
+      "revId": "cbe4accbf4780079f4fe5754612a8dbfdc520709",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
