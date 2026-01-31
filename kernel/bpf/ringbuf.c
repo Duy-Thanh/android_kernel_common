@@ -18,10 +18,17 @@
 #define RINGBUF_PGOFF \
 	(offsetof(struct bpf_ringbuf, consumer_pos) >> PAGE_SHIFT)
 /* consumer page and producer page */
+
+#ifdef CONFIG_X86_64
+#define RINGBUF_POS_PAGES (2 * (__MAX_PAGE_SIZE / PAGE_SIZE))
+#else
 #define RINGBUF_POS_PAGES 2
+#endif
 #define RINGBUF_NR_META_PAGES (RINGBUF_PGOFF + RINGBUF_POS_PAGES)
 
 #define RINGBUF_MAX_RECORD_SZ (UINT_MAX/4)
+
+#define __RING_BUF_PAGE_ALIGN (IS_ENABLED(CONFIG_X86_64) ? __MAX_PAGE_SIZE : PAGE_SIZE)
 
 struct bpf_ringbuf {
 	wait_queue_head_t waitq;
@@ -69,10 +76,10 @@ struct bpf_ringbuf {
 	 * validate each sample to ensure that they're correctly formatted, and
 	 * fully contained within the ring buffer.
 	 */
-	unsigned long consumer_pos __aligned(PAGE_SIZE);
-	unsigned long producer_pos __aligned(PAGE_SIZE);
+	unsigned long consumer_pos __aligned(__RING_BUF_PAGE_ALIGN);
+	unsigned long producer_pos __aligned(__RING_BUF_PAGE_ALIGN);
 	unsigned long pending_pos;
-	char data[] __aligned(PAGE_SIZE);
+	char data[] __aligned(__RING_BUF_PAGE_ALIGN);
 };
 
 struct bpf_ringbuf_map {
@@ -198,6 +205,8 @@ static struct bpf_map *ringbuf_map_alloc(union bpf_attr *attr)
 	    !PAGE_ALIGNED(attr->max_entries))
 		return ERR_PTR(-EINVAL);
 
+	attr->max_entries = __PAGE_ALIGN(attr->max_entries);
+
 	rb_map = bpf_map_area_alloc(sizeof(*rb_map), NUMA_NO_NODE);
 	if (!rb_map)
 		return ERR_PTR(-ENOMEM);
@@ -268,7 +277,7 @@ static int ringbuf_map_mmap_kern(struct bpf_map *map, struct vm_area_struct *vma
 
 	if (vma->vm_flags & VM_WRITE) {
 		/* allow writable mapping for the consumer_pos only */
-		if (vma->vm_pgoff != 0 || vma->vm_end - vma->vm_start != PAGE_SIZE)
+		if (vma->vm_pgoff != 0 || vma->vm_end - vma->vm_start != __RING_BUF_PAGE_ALIGN)
 			return -EPERM;
 	}
 	/* remap_vmalloc_range() checks size and offset constraints */
