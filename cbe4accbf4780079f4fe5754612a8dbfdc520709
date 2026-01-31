@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b22b060_497a5086",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-01-31T00:46:09Z",
+      "side": 1,
+      "message": "This is a bad idea. You are attempting to circumvent protection put in place to prohibit this exact behavior. The mangling exists to prevent drivers from obtaining access to the underlying struct pages (if they even exist at all), which is deliberately not supported by the dmabuf interface. This rule is explained in this recent patch, which would also break what you\u0027re doing here in future kernels.\n\nhttps://lore.kernel.org/all/20251205130604.1582-1-christian.koenig@amd.com/",
+      "revId": "cbe4accbf4780079f4fe5754612a8dbfdc520709",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
