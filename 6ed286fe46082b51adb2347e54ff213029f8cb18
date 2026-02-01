@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234c6098_163a07a4",
+        "filename": "kernel/bpf/ringbuf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-01T07:01:20Z",
+      "side": 1,
+      "message": "this results in producer_pos being mmap\u0027ed and writable on 8KiB+ configurations",
+      "range": {
+        "startLine": 272,
+        "startChar": 59,
+        "endLine": 272,
+        "endChar": 70
+      },
+      "revId": "6ed286fe46082b51adb2347e54ff213029f8cb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
