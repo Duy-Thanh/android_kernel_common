@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0debd59_18086ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-01T07:35:53Z",
+      "side": 1,
+      "message": "We have to land it after: http://ag/q/topic:bpf_ring_buf_x86_16k_v1 is merged",
+      "revId": "6ed286fe46082b51adb2347e54ff213029f8cb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "234c6098_163a07a4",
         "filename": "kernel/bpf/ringbuf.c",
         "patchSetId": 1
