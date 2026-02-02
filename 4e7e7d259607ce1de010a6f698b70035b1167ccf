@@ -16,6 +16,24 @@
       "message": "I think these patches should not change ABI. Is there something wrong?",
       "revId": "4e7e7d259607ce1de010a6f698b70035b1167ccf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a8c2a1_37aeb572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2026-02-02T13:37:27Z",
+      "side": 1,
+      "message": "https://r.android.com/3936634 should fix the ABI error.",
+      "parentUuid": "e194df62_c35b96b5",
+      "revId": "4e7e7d259607ce1de010a6f698b70035b1167ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
