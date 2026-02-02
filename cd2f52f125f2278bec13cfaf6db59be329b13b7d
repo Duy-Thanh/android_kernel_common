@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9789e0f_3c614148",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/errno.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-02T14:34:07Z",
+      "side": 1,
+      "message": "I think this complicates things, can\u0027t we rely on `ERR_PTR` to encode the error?",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
