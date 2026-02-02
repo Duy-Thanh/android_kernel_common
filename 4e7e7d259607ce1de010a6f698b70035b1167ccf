@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e194df62_c35b96b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2026-02-02T10:05:12Z",
+      "side": 1,
+      "message": "I think these patches should not change ABI. Is there something wrong?",
+      "revId": "4e7e7d259607ce1de010a6f698b70035b1167ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
