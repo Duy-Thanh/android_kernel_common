@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18101dbd_f5f8013b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-02T19:17:06Z",
+      "side": 1,
+      "message": "s/supervisor/hypervisor",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "d9404177255e84067b6f4a4285d62a2bb8f6f0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "631d8e0c_631ae6fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-02T19:17:06Z",
+      "side": 1,
+      "message": "Do you mean `mapped`? If `nent` is 0, you\u0027ll break out of the loop with the original logic.",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 31
+      },
+      "revId": "d9404177255e84067b6f4a4285d62a2bb8f6f0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
