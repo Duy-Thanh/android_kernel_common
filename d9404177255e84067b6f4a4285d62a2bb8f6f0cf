@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfdeeb3_634da3b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4229501
+      },
+      "writtenOn": "2026-02-02T19:22:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18101dbd_f5f8013b",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "d9404177255e84067b6f4a4285d62a2bb8f6f0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "631d8e0c_631ae6fc",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-02-02T19:17:06Z",
       "side": 1,
       "message": "Do you mean `mapped`? If `nent` is 0, you\u0027ll break out of the loop with the original logic.",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 31
+      },
+      "revId": "d9404177255e84067b6f4a4285d62a2bb8f6f0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5740f6_935f47af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4229501
+      },
+      "writtenOn": "2026-02-02T19:22:54Z",
+      "side": 1,
+      "message": "I meant mapped \u003d 0 and nent \u003e 0. Corrected.",
+      "parentUuid": "631d8e0c_631ae6fc",
       "range": {
         "startLine": 27,
         "startChar": 22,
