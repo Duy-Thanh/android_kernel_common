@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bdd9268_2ccfe7fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2049209
+      },
+      "writtenOn": "2026-02-02T14:29:34Z",
+      "side": 1,
+      "message": "do we need to ensure that this is also present on `android17-6.18`. For other future GKI versions (post `android17-6.18`), i guess we would anyways have a fix in `android-mainline`?",
+      "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
