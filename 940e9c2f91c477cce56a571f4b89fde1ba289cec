@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86a3132e_592a0090",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-02T10:11:03Z",
+      "side": 1,
+      "message": "This should probably be broken up into 2 patches, first adds the ability to have any fsnotify event passed in, the second adding it to the deletion path.  That would make it easier to review.",
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ed7eb6_80d59173",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-02T10:11:03Z",
+      "side": 1,
+      "message": "use a guard?",
+      "range": {
+        "startLine": 1476,
+        "startChar": 1,
+        "endLine": 1476,
+        "endChar": 18
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1836aa3_79a0462a",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-02T10:11:03Z",
+      "side": 1,
+      "message": "shouldn\u0027t one of these be `FS_DELETE` and not all of them be `FS_DELETE_SELF`?",
+      "range": {
+        "startLine": 1480,
+        "startChar": 26,
+        "endLine": 1480,
+        "endChar": 40
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "106f1d53_1c9e6517",
         "filename": "fs/kernfs/file.c",
         "patchSetId": 4
