@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9328bd18_7139db1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-02-02T06:20:49Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, I\u0027ve updated it.",
+      "parentUuid": "edb98a5d_0de22ed6",
+      "revId": "2e24e74598d87d75ce573f5f6b6d2fc0ff0fe93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4312129_5728bf06",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-01-30T16:56:49Z",
       "side": 1,
       "message": "Please remove extra space.",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 7
+      },
+      "revId": "2e24e74598d87d75ce573f5f6b6d2fc0ff0fe93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af398afe_4d087b2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-02-02T06:20:49Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, I\u0027ve updated it.",
+      "parentUuid": "f4312129_5728bf06",
       "range": {
         "startLine": 23,
         "startChar": 6,
