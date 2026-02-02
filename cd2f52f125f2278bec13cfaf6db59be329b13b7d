@@ -22,6 +22,30 @@
       },
       "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f71565_a0f36ea4",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/errno.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-02T15:31:24Z",
+      "side": 1,
+      "message": "What does it complicates? I\u0027m just using a very specific number to distinguish all the ENOMEM\u0027s as we have heavily overloaded it. I am not sure to follow how ERR_PTR would help here?",
+      "parentUuid": "a9789e0f_3c614148",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
