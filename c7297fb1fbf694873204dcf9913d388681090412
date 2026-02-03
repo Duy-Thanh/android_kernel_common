@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "177a2442_a3b4f0c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-03T15:45:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "410d203c_dec9ad45",
+      "range": {
+        "startLine": 1163,
+        "startChar": 14,
+        "endLine": 1163,
+        "endChar": 43
+      },
+      "revId": "c7297fb1fbf694873204dcf9913d388681090412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7f0887_c3f347d4",
@@ -61,6 +85,30 @@
       "writtenOn": "2026-02-03T15:35:34Z",
       "side": 1,
       "message": "In the case where `req` came from `this_cpu_ptr(\u0026host_hyp_reqs)`, doesn\u0027t this `memcpy` rely on `in_req` having `KVM_HYP_LAST_REQ` set?",
+      "range": {
+        "startLine": 1166,
+        "startChar": 0,
+        "endLine": 1166,
+        "endChar": 49
+      },
+      "revId": "c7297fb1fbf694873204dcf9913d388681090412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dffc089_311e9537",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-03T15:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7f0887_c3f347d4",
       "range": {
         "startLine": 1166,
         "startChar": 0,
