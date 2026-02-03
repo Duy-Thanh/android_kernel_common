@@ -46,6 +46,23 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd4381e_626c86e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-03T20:50:59Z",
+      "side": 1,
+      "message": "While I think this was a bit unfairly rejected, if we feel this is important enough to carry ourselves, can we get some bug opened to document plans to continue to advocate and push for a generic solution upstream? I\u0027d rather we not just walk away from the discussion and grow the tech debt we carry.",
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
