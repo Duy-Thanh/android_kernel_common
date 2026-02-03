@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e47a4e96_e56c585d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2018687
+      },
+      "writtenOn": "2026-02-03T17:26:28Z",
+      "side": 1,
+      "message": "Since this is going in to Android, I would expect little more explanation. Write a paragraph about the current problem. then another explaining how you are solving this.",
+      "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
