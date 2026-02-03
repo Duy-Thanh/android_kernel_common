@@ -1769,7 +1769,7 @@ struct memcg_test {
 	T(test_memcg_oom_group_leaf_events),
 	T(test_memcg_oom_group_parent_events),
 	T(test_memcg_oom_group_score_events),
-	T(test_memcg_inotify_delete),
+	T(test_memcg_inotify_delete_file),
 	T(test_memcg_inotify_delete_rmdir),
 };
 #undef T
