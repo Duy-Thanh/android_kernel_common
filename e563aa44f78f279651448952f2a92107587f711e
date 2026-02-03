@@ -62,6 +62,24 @@
       "message": "@jstultz@google.com FYI does this affect sched_ext plan?",
       "revId": "e563aa44f78f279651448952f2a92107587f711e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d7dd4c_974e90ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-03T19:43:51Z",
+      "side": 1,
+      "message": "If it does, that\u0027s something they need to work through with security team.\n\nBpf program loading only being loaded at boot time has *always* been an Android requirement.",
+      "parentUuid": "5eb815f3_66473360",
+      "revId": "e563aa44f78f279651448952f2a92107587f711e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
