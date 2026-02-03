@@ -146,6 +146,24 @@
       "parentUuid": "50d7dd4c_974e90ed",
       "revId": "e563aa44f78f279651448952f2a92107587f711e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50968ba_eb715656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-03T20:46:34Z",
+      "side": 1,
+      "message": "Utilizing sched_ext on Android will still require working with the boot-time loader. So I don\u0027t believe this would impact it.",
+      "parentUuid": "cedd8e64_ee2fcd0c",
+      "revId": "e563aa44f78f279651448952f2a92107587f711e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
