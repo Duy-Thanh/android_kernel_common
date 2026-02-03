@@ -22,6 +22,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a268e65_6c3326f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-03T20:07:39Z",
+      "side": 1,
+      "message": "Inner map creation at run time allows for not allocating all bpf maps at boot time and thus permanently locking down memory.  So it allows bpf map memory usage to scale with usage.",
+      "parentUuid": "2073e141_9570c430",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 64
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
