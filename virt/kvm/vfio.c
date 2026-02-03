@@ -43,19 +43,6 @@ struct kvm_pviommu {
 };
 #endif
 
-static void kvm_vfio_file_set_kvm(struct file *file, struct kvm *kvm)
-{
-	void (*fn)(struct file *file, struct kvm *kvm);
-
-	fn = symbol_get(vfio_file_set_kvm);
-	if (!fn)
-		return;
-
-	fn(file, kvm);
-
-	symbol_put(vfio_file_set_kvm);
-}
-
 static bool kvm_vfio_file_enforced_coherent(struct file *file)
 {
 	bool (*fn)(struct file *file);
@@ -68,54 +55,6 @@ static bool kvm_vfio_file_enforced_coherent(struct file *file)
 	ret = fn(file);
 
 	symbol_put(vfio_file_enforced_coherent);
-
-	return ret;
-}
-
-static bool kvm_vfio_file_is_valid(struct file *file)
-{
-	bool (*fn)(struct file *file);
-	bool ret;
-
-	fn = symbol_get(vfio_file_is_valid);
-	if (!fn)
-		return false;
-
-	ret = fn(file);
-
-	symbol_put(vfio_file_is_valid);
-
-	return ret;
-}
-
-static struct device *kvm_vfio_file_get_device(struct file *file)
-{
-	struct device *(*fn)(struct file *file);
-	struct device *dev;
-
-	fn = symbol_get(vfio_file_get_device);
-	if (!fn)
-		return NULL;
-
-	dev = fn(file);
-
-	symbol_put(vfio_file_get_device);
-
-	return dev;
-}
-
-static struct iommu_group *kvm_vfio_file_iommu_group(struct file *file)
-{
-	struct iommu_group *(*fn)(struct file *file);
-	struct iommu_group *ret;
-
-	fn = symbol_get(vfio_file_iommu_group);
-	if (!fn)
-		return NULL;
-
-	ret = fn(file);
-
-	symbol_put(vfio_file_iommu_group);
 
 	return ret;
 }
@@ -169,10 +108,10 @@ static int kvm_vfio_assign_file(struct file *file)
 	struct device *dev;
 	struct iommu_group *group;
 
-	dev = kvm_vfio_file_get_device(file);
+	dev = vfio_file_get_device(file);
 	if (dev)
 		return kvm_arch_assign_device(dev);
-	group = kvm_vfio_file_iommu_group(file);
+	group = vfio_file_iommu_group(file);
 	if (group)
 		return kvm_arch_assign_group(group);
 
@@ -184,12 +123,12 @@ static void kvm_vfio_reclaim_file(struct file *file)
 	struct device *dev;
 	struct iommu_group *group;
 
-	dev = kvm_vfio_file_get_device(file);
+	dev = vfio_file_get_device(file);
 	if (dev) {
 		kvm_arch_reclaim_device(dev);
 		return;
 	}
-	group = kvm_vfio_file_iommu_group(file);
+	group = vfio_file_iommu_group(file);
 	if (group)
 		kvm_arch_reclaim_group(group);
 }
@@ -206,7 +145,7 @@ static int kvm_vfio_file_add(struct kvm_device *dev, unsigned int fd)
 		return -EBADF;
 
 	/* Ensure the FD is a vfio FD. */
-	if (!kvm_vfio_file_is_valid(filp)) {
+	if (!vfio_file_is_valid(filp)) {
 		ret = -EINVAL;
 		goto out_fput;
 	}
@@ -234,7 +173,7 @@ static int kvm_vfio_file_add(struct kvm_device *dev, unsigned int fd)
 	list_add_tail(&kvf->node, &kv->file_list);
 
 	kvm_arch_start_assignment(dev->kvm);
-	kvm_vfio_file_set_kvm(kvf->file, dev->kvm);
+	vfio_file_set_kvm(kvf->file, dev->kvm);
 	kvm_vfio_update_coherency(dev);
 
 out_unlock:
@@ -269,7 +208,7 @@ static int kvm_vfio_file_del(struct kvm_device *dev, unsigned int fd)
 #ifdef CONFIG_SPAPR_TCE_IOMMU
 		kvm_spapr_tce_release_vfio_group(dev->kvm, kvf);
 #endif
-		kvm_vfio_file_set_kvm(kvf->file, NULL);
+		vfio_file_set_kvm(kvf->file, NULL);
 		fput(kvf->file);
 		kfree(kvf);
 		ret = 0;
@@ -311,7 +250,7 @@ static int kvm_vfio_file_set_spapr_tce(struct kvm_device *dev,
 			continue;
 
 		if (!kvf->iommu_group) {
-			kvf->iommu_group = kvm_vfio_file_iommu_group(kvf->file);
+			kvf->iommu_group = vfio_file_iommu_group(kvf->file);
 			if (WARN_ON_ONCE(!kvf->iommu_group)) {
 				ret = -EIO;
 				goto err_fdput;
@@ -371,7 +310,7 @@ static int kvm_vfio_pviommu_set_config(struct file *fiommu, struct kvm_vfio_iomm
 	if (!filp)
 		return -EBADF;
 
-	dev = kvm_vfio_file_get_device(filp);
+	dev = vfio_file_get_device(filp);
 	if (!dev) {
 		ret = -ENODEV;
 		goto err_fput;
@@ -478,7 +417,7 @@ static int kvm_vfio_pviommu_get_info(struct kvm_device *dev,
 	if (!filp)
 		return -EBADF;
 
-	device = kvm_vfio_file_get_device(filp);
+	device = vfio_file_get_device(filp);
 	if (!device) {
 		ret = -ENODEV;
 		goto err_fput;
@@ -574,7 +513,7 @@ static void kvm_vfio_release(struct kvm_device *dev)
 		kvm_spapr_tce_release_vfio_group(dev->kvm, kvf);
 #endif
 		kvm_vfio_reclaim_file(kvf->file);
-		kvm_vfio_file_set_kvm(kvf->file, NULL);
+		vfio_file_set_kvm(kvf->file, NULL);
 		fput(kvf->file);
 		list_del(&kvf->node);
 		kfree(kvf);
