@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32ecd35_b0725f2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a3132e_592a0090",
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2f4d43_f5360542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t get notifications for your comments since this was still WIP.",
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41ed7eb6_80d59173",
@@ -31,6 +66,30 @@
       "writtenOn": "2026-02-02T10:11:03Z",
       "side": 1,
       "message": "use a guard?",
+      "range": {
+        "startLine": 1476,
+        "startChar": 1,
+        "endLine": 1476,
+        "endChar": 18
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2817f25_a63f093a",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41ed7eb6_80d59173",
       "range": {
         "startLine": 1476,
         "startChar": 1,
@@ -64,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85a8d98_5d2d252a",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "I only intended to send `FS_DELETE_SELF` to the file being removed. I\u0027ve updated it to send both `FS_DELETE_SELF` to the file and `FS_DELETE` to the parent directory.",
+      "parentUuid": "b1836aa3_79a0462a",
+      "range": {
+        "startLine": 1480,
+        "startChar": 26,
+        "endLine": 1480,
+        "endChar": 40
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "106f1d53_1c9e6517",
@@ -87,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a5b763_4b884854",
+        "filename": "fs/kernfs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "106f1d53_1c9e6517",
+      "range": {
+        "startLine": 915,
+        "startChar": 1,
+        "endLine": 915,
+        "endChar": 4
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a90235d0_22b85af8",
@@ -100,6 +207,30 @@
       "writtenOn": "2026-02-02T10:08:03Z",
       "side": 1,
       "message": "should be `__u32`",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 4
+      },
+      "revId": "940e9c2f91c477cce56a571f4b89fde1ba289cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4b14eb_33970c53",
+        "filename": "include/linux/kernfs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-03T20:43:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a90235d0_22b85af8",
       "range": {
         "startLine": 184,
         "startChar": 1,
