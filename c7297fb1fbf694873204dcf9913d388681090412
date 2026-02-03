@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd548051_e052406c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-03T15:32:52Z",
+      "side": 1,
+      "message": "How can this happen?",
+      "range": {
+        "startLine": 1163,
+        "startChar": 14,
+        "endLine": 1163,
+        "endChar": 43
+      },
+      "revId": "c7297fb1fbf694873204dcf9913d388681090412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
