@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b09a64_3382a068",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3-lib-hyp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-03T16:26:34Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline\n\nFile is missing final newline",
+      "revId": "d07af486535f6f419ef12337223c1b9e704d80ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
