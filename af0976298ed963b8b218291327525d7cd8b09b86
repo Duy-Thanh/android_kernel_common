@@ -16,6 +16,24 @@
       "message": "why is this not upstream first?\n\nAnd why is the other typec changes also not upstream?",
       "revId": "af0976298ed963b8b218291327525d7cd8b09b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd31661_4d0e5bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2026-02-04T15:15:00Z",
+      "side": 1,
+      "message": "The version of the mode selection that was submitted upstream is free of this bug and is compatible with both UCSI and cros_ec_typec drivers and functions without any issues:\nhttps://lore.kernel.org/all/20260119131824.2529334-1-akuchynski@chromium.org/",
+      "parentUuid": "7d95c510_d7b144d7",
+      "revId": "af0976298ed963b8b218291327525d7cd8b09b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
