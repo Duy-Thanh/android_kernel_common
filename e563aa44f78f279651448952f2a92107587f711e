@@ -164,6 +164,24 @@
       "parentUuid": "cedd8e64_ee2fcd0c",
       "revId": "e563aa44f78f279651448952f2a92107587f711e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5245f976_328d5d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-04T17:59:19Z",
+      "side": 1,
+      "message": "I think the issue stems from the fact that partners are extending the boot time loader and forking it into its own service that persists during normal runtime. This prevents that, so may break some vendor\u0027s current implementations and the infrastructure they have built. Some conversations we had yesterday indicated this may be a preferred way to control the gray area and limit the vendor use short term until we have a better solution.",
+      "parentUuid": "a50968ba_eb715656",
+      "revId": "e563aa44f78f279651448952f2a92107587f711e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

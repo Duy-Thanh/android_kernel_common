@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e85cbef_dc774c94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-04T17:59:19Z",
+      "side": 1,
+      "message": "Don\u0027t we already have BPF_LSM enabled? This would be my preferred mechanism to implement this functionality and it appears upstream is pointing to the same. @maze@google.com, I know you were looking into a BPF_LSM program at some point, did you have any success with that? I know there are other current security use cases which want to use it as well.",
+      "range": {
+        "startLine": 38,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfd4381e_626c86e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
