@@ -484,6 +484,10 @@ struct pci_dev {
 	unsigned int	no_command_memory:1;	/* No PCI_COMMAND_MEMORY */
 	unsigned int	rom_bar_overlap:1;	/* ROM BAR disable broken */
 	unsigned int	rom_attr_enabled:1;	/* Display of ROM attribute enabled? */
+#ifdef CONFIG_PCIE_PTM
+	unsigned int	ptm_root:1;
+	unsigned int	ptm_enabled:1;
+#endif
 	pci_dev_flags_t dev_flags;
 	atomic_t	enable_cnt;	/* pci_enable_device has been called */
 
@@ -495,12 +499,6 @@ struct pci_dev {
 
 #ifdef CONFIG_HOTPLUG_PCI_PCIE
 	unsigned int	broken_cmd_compl:1;	/* No compl for some cmds */
-#endif
-#ifdef CONFIG_PCIE_PTM
-	u16		ptm_cap;		/* PTM Capability */
-	unsigned int	ptm_root:1;
-	unsigned int	ptm_enabled:1;
-	u8		ptm_granularity;
 #endif
 #ifdef CONFIG_PCI_MSI
 	void __iomem	*msix_base;
@@ -553,7 +551,11 @@ struct pci_dev {
 	/* These methods index pci_reset_fn_methods[] */
 	u8 reset_methods[PCI_NUM_RESET_METHODS]; /* In priority order */
 
+#ifdef CONFIG_PCIE_PTM
+	ANDROID_KABI_USE2(1, u16 ptm_cap, u8 ptm_granularity);
+#else
 	ANDROID_KABI_RESERVE(1);
+#endif
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
