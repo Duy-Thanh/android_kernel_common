@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t be remove that?",
       "revId": "22cb719c9b00ff071213a04d3bd4cf802039ca86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed8ad01_7cb61d62",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-04T16:12:57Z",
+      "side": 1,
+      "message": "Agh, there was already another one from Android15, I removed it.",
+      "parentUuid": "8cf51485_44f18047",
+      "revId": "22cb719c9b00ff071213a04d3bd4cf802039ca86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
