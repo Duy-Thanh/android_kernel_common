@@ -2207,6 +2207,7 @@
   pcie_capability_read_word
   pcie_link_speed
   pci_enable_device
+  pci_enable_ptm
   pci_find_ext_capability
   pci_free_irq_vectors
   pci_generic_config_read
