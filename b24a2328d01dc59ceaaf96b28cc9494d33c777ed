@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ea5f22_d426d3ef",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-04T18:51:06Z",
+      "side": 1,
+      "message": "I think this can be re-written as:\n\n```\ndma_coerce_mask_and_coherent(\u0026wrapfd_misc.this_device, DMA_BIT_MASK(64));\nwrapfd_misc.this_device-\u003ebus_dma_limit \u003d DMA_BIT_MASK(64);\n```",
+      "range": {
+        "startLine": 700,
+        "startChar": 0,
+        "endLine": 703,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "67426645_8459d94f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 700,
+                "startChar": 0,
+                "endLine": 704,
+                "endChar": 0
+              },
+              "replacement": "\tdma_coerce_mask_and_coherent(wrapfd_misc.this_device, DMA_BIT_MASK(64));\n\twrapfd_misc.this_device-\u003ebus_dma_limit \u003d DMA_BIT_MASK(64);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b24a2328d01dc59ceaaf96b28cc9494d33c777ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
