@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9210a83_15cfad91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4608357
+      },
+      "writtenOn": "2026-02-04T16:50:58Z",
+      "side": 1,
+      "message": "From 6d2656ef10d56c3866c33323f5ce850da6aeeaa6 Mon Sep 17 00:00:00 2001\nFrom: Spandan Das \u003cspandandas@google.com\u003e\nDate: Tue, 23 Apr 2024 23:47:16 +0000\nSubject: [PATCH] Add .swp files to .gitignore\n\nTest: N/A\nChange-Id: I410c5b732b0284562fa0e6312befcecf73c838d3\n---\n\ndiff --git a/.gitignore b/.gitignore\nindex 781dd32..89de74e 100644\n--- a/.gitignore\n+++ b/.gitignore\n@@ -2,4 +2,5 @@\n *.iml\n *.ipr\n *.iws\n+*.swp\n /.vscode",
+      "revId": "e75ee960a0366e0a72596842b70731c92675011b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
