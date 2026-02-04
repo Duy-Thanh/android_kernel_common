@@ -34,6 +34,24 @@
       "parentUuid": "6bdd9268_2ccfe7fe",
       "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a77aa9d_6a7b67d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2026-02-04T09:57:11Z",
+      "side": 1,
+      "message": "Hi @tkjos@google.com,\n\nThis patch was accepted in `for-next/errata` from Linux. I think this patch would be merged into android-mainline in the future?\nAnd, the Linux LTS version of 2025 is `android17-6.18` do you have typo with the wrong version? I assume I only need to cherry-pick this patch to `android17-6.18`. \n\nThanks for your confirmation.",
+      "parentUuid": "df548261_fbc287c2",
+      "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
