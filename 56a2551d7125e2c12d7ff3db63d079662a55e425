@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced40dd9_1b03f3f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-04T07:08:17Z",
+      "side": 1,
+      "message": "needs a good changelog 😊",
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f7d516_cc20de1d",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-04T07:08:17Z",
+      "side": 1,
+      "message": "is this ok?  kernfs works for many filesystems at once (configfs, sysfs, cgroups, etc.), so would this overwrite an event for a different filesystem?",
+      "range": {
+        "startLine": 1476,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a151f655_18e5e061",
+        "filename": "fs/kernfs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-04T07:08:17Z",
+      "side": 1,
+      "message": "I\u0027m missing what this check is doing here, sorry, any hints?",
+      "range": {
+        "startLine": 978,
+        "startChar": 19,
+        "endLine": 978,
+        "endChar": 44
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54701e6c_7e3d83f0",
+        "filename": "fs/kernfs/kernfs-internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-04T07:08:17Z",
+      "side": 1,
+      "message": "why does this need to be moved here?",
+      "range": {
+        "startLine": 203,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
