@@ -178,6 +178,24 @@
       "parentUuid": "13d8687b_ee564c22",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac41d80_85cfd49a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-04T07:09:18Z",
+      "side": 1,
+      "message": "The changelog text, and signed-off-by chain here in this commit must match what was submitted to the list upstream, which it does not.  Please fix that up here.",
+      "parentUuid": "4c302be1_776c7c95",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
