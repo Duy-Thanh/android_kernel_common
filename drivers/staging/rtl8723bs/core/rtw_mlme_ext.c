@@ -18,7 +18,9 @@ static struct mlme_handler mlme_sta_tbl[] = {
 	{WIFI_PROBEREQ,		"OnProbeReq",	&OnProbeReq},
 	{WIFI_PROBERSP,		"OnProbeRsp",		&OnProbeRsp},
 
-	/* below 2 are reserved */
+	/*----------------------------------------------------------
+					below 2 are reserved
+	-----------------------------------------------------------*/
 	{0,					"DoReserved",		&DoReserved},
 	{0,					"DoReserved",		&DoReserved},
 	{WIFI_BEACON,		"OnBeacon",		&OnBeacon},
@@ -48,7 +50,9 @@ static struct action_handler OnAction_tbl[] = {
 
 static u8 null_addr[ETH_ALEN] = {0, 0, 0, 0, 0, 0};
 
-/* OUI definitions for the vendor specific IE */
+/**************************************************
+OUI definitions for the vendor specific IE
+***************************************************/
 unsigned char RTW_WPA_OUI[] = {0x00, 0x50, 0xf2, 0x01};
 unsigned char WMM_OUI[] = {0x00, 0x50, 0xf2, 0x02};
 unsigned char WPS_OUI[] = {0x00, 0x50, 0xf2, 0x04};
@@ -60,7 +64,9 @@ unsigned char WMM_PARA_OUI[] = {0x00, 0x50, 0xf2, 0x02, 0x01, 0x01};
 
 static unsigned char REALTEK_96B_IE[] = {0x00, 0xe0, 0x4c, 0x02, 0x01, 0x20};
 
-/* ChannelPlan definitions */
+/********************************************************
+ChannelPlan definitions
+*********************************************************/
 static struct rt_channel_plan_2g	RTW_ChannelPlan2G[RT_CHANNEL_DOMAIN_2G_MAX] = {
 	{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, 13},		/*  0x00, RT_CHANNEL_DOMAIN_2G_WORLD , Passive scan CH 12, 13 */
 	{{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}, 13},		/*  0x01, RT_CHANNEL_DOMAIN_2G_ETSI1 */
@@ -181,7 +187,11 @@ int rtw_ch_set_search_ch(struct rt_channel_info *ch_set, const u32 ch)
 	return i;
 }
 
-/* Following are the initialization functions for WiFi MLME */
+/****************************************************************************
+
+Following are the initialization functions for WiFi MLME
+
+*****************************************************************************/
 
 int init_hw_mlme_ext(struct adapter *padapter)
 {
@@ -497,7 +507,11 @@ void mgt_dispatcher(struct adapter *padapter, union recv_frame *precv_frame)
 	}
 }
 
-/* Following are the callback functions for each subtype of the management frames */
+/****************************************************************************
+
+Following are the callback functions for each subtype of the management frames
+
+*****************************************************************************/
 
 unsigned int OnProbeReq(struct adapter *padapter, union recv_frame *precv_frame)
 {
@@ -574,11 +588,9 @@ unsigned int OnBeacon(struct adapter *padapter, union recv_frame *precv_frame)
 
 	p = rtw_get_ie(pframe + sizeof(struct ieee80211_hdr_3addr) + _BEACON_IE_OFFSET_, WLAN_EID_EXT_SUPP_RATES, &ielen, precv_frame->u.hdr.len - sizeof(struct ieee80211_hdr_3addr) - _BEACON_IE_OFFSET_);
 	if (p && ielen > 0) {
-		if (p + 2 + ielen < pframe + len) {
-			if ((*(p + 1 + ielen) == 0x2D) && (*(p + 2 + ielen) != 0x2D))
-				/* Invalid value 0x2D is detected in Extended Supported Rates (ESR) IE. Try to fix the IE length to avoid failed Beacon parsing. */
-				*(p + 1) = ielen - 1;
-		}
+		if ((*(p + 1 + ielen) == 0x2D) && (*(p + 2 + ielen) != 0x2D))
+			/* Invalid value 0x2D is detected in Extended Supported Rates (ESR) IE. Try to fix the IE length to avoid failed Beacon parsing. */
+			*(p + 1) = ielen - 1;
 	}
 
 	if (pmlmeext->sitesurvey_res.state == SCAN_PROCESS) {
@@ -1030,9 +1042,6 @@ unsigned int OnAssocReq(struct adapter *padapter, union recv_frame *precv_frame)
 		status = WLAN_STATUS_CHALLENGE_FAIL;
 		goto OnAssocReqFail;
 	} else {
-		if (ie_len > sizeof(supportRate))
-			ie_len = sizeof(supportRate);
-
 		memcpy(supportRate, p+2, ie_len);
 		supportRateNum = ie_len;
 
@@ -1040,7 +1049,7 @@ unsigned int OnAssocReq(struct adapter *padapter, union recv_frame *precv_frame)
 				pkt_len - WLAN_HDR_A3_LEN - ie_offset);
 		if (p) {
 
-			if (supportRateNum + ie_len <= sizeof(supportRate)) {
+			if (supportRateNum <= sizeof(supportRate)) {
 				memcpy(supportRate+supportRateNum, p+2, ie_len);
 				supportRateNum += ie_len;
 			}
@@ -1053,7 +1062,7 @@ unsigned int OnAssocReq(struct adapter *padapter, union recv_frame *precv_frame)
 	/* update station supportRate */
 	pstat->bssratelen = supportRateNum;
 	memcpy(pstat->bssrateset, supportRate, supportRateNum);
-	update_basic_rate_table_soft_ap(pstat->bssrateset, pstat->bssratelen);
+	UpdateBrateTblForSoftAP(pstat->bssrateset, pstat->bssratelen);
 
 	/* check RSN/WPA/WPS */
 	pstat->dot8021xalg = 0;
@@ -1441,7 +1450,7 @@ unsigned int OnAssocRsp(struct adapter *padapter, union recv_frame *precv_frame)
 	pmlmeinfo->state |= WIFI_FW_ASSOC_SUCCESS;
 
 	/* Update Basic Rate Table for spec, 2010-12-28 , by thomas */
-	update_basic_rate_table(padapter, pmlmeinfo->network.supported_rates);
+	UpdateBrateTbl(padapter, pmlmeinfo->network.supported_rates);
 
 report_assoc_result:
 	if (res > 0)
@@ -1941,7 +1950,11 @@ inline struct xmit_frame *alloc_mgtxmitframe(struct xmit_priv *pxmitpriv)
 	return _alloc_mgtxmitframe(pxmitpriv, false);
 }
 
-/* Following are some TX functions for WiFi MLME */
+/****************************************************************************
+
+Following are some TX functions for WiFi MLME
+
+*****************************************************************************/
 
 void update_mgnt_tx_rate(struct adapter *padapter, u8 rate)
 {
@@ -3784,7 +3797,11 @@ unsigned int send_beacon(struct adapter *padapter)
 		return _SUCCESS;
 }
 
-/* Following are some utility functions for WiFi MLME */
+/****************************************************************************
+
+Following are some utility functions for WiFi MLME
+
+*****************************************************************************/
 
 void site_survey(struct adapter *padapter)
 {
@@ -4375,7 +4392,11 @@ static void process_80211d(struct adapter *padapter, struct wlan_bssid_ex *bssid
 	}
 }
 
-/* Following are the functions to report events */
+/****************************************************************************
+
+Following are the functions to report events
+
+*****************************************************************************/
 
 void report_survey_event(struct adapter *padapter, union recv_frame *precv_frame)
 {
@@ -4671,7 +4692,11 @@ void report_add_sta_event(struct adapter *padapter, unsigned char *MacAddr, int 
 	rtw_enqueue_cmd(pcmdpriv, pcmd_obj);
 }
 
-/* Following are the event callback functions */
+/****************************************************************************
+
+Following are the event callback functions
+
+*****************************************************************************/
 
 /* for sta/adhoc mode */
 void update_sta_info(struct adapter *padapter, struct sta_info *psta)
@@ -4838,10 +4863,8 @@ void mlmeext_joinbss_event_callback(struct adapter *padapter, int join_res)
 
 		rtw_sta_media_status_rpt(padapter, psta, 1);
 
-		/*
-		 * wakeup macid after join bss successfully to ensure
-		 * the subsequent data frames can be sent out normally
-		 */
+		/* wakeup macid after join bss successfully to ensure
+			the subsequent data frames can be sent out normally */
 		rtw_hal_macid_wakeup(padapter, psta->mac_id);
 	}
 
@@ -4917,8 +4940,11 @@ void mlmeext_sta_del_event_callback(struct adapter *padapter)
 		rtw_mlmeext_disconnect(padapter);
 }
 
-/* Following are the functions for the timer handlers */
+/****************************************************************************
 
+Following are the functions for the timer handlers
+
+*****************************************************************************/
 void _linked_info_dump(struct adapter *padapter)
 {
 	int i;
@@ -5249,7 +5275,7 @@ u8 createbss_hdl(struct adapter *padapter, u8 *pbuf)
 		/* clear CAM */
 		flush_all_cam_entry(padapter);
 
-		memcpy(pnetwork, pbuf, offsetof(struct wlan_bssid_ex, ie_length));
+		memcpy(pnetwork, pbuf, FIELD_OFFSET(struct wlan_bssid_ex, ie_length));
 		pnetwork->ie_length = ((struct wlan_bssid_ex *)pbuf)->ie_length;
 
 		if (pnetwork->ie_length > MAX_IE_SZ)/* Check pbuf->ie_length */
@@ -5313,7 +5339,7 @@ u8 join_cmd_hdl(struct adapter *padapter, u8 *pbuf)
 	/* pmlmeinfo->assoc_AP_vendor = HT_IOT_PEER_MAX; */
 	pmlmeinfo->VHT_enable = 0;
 
-	memcpy(pnetwork, pbuf, offsetof(struct wlan_bssid_ex, ie_length));
+	memcpy(pnetwork, pbuf, FIELD_OFFSET(struct wlan_bssid_ex, ie_length));
 	pnetwork->ie_length = ((struct wlan_bssid_ex *)pbuf)->ie_length;
 
 	if (pnetwork->ie_length > MAX_IE_SZ)/* Check pbuf->ie_length */

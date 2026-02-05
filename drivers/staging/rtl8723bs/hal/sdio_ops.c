@@ -997,7 +997,10 @@ u8 HalQueryTxBufferStatus8723BSdio(struct adapter *adapter)
 	return true;
 }
 
-/* Read the TX OQT free page count from the SDIO local register. */
+/*  */
+/*	Description: */
+/*		Query SDIO Local register to get the current number of TX OQT Free Space. */
+/*  */
 void HalQueryTxOQTBufferStatus8723BSdio(struct adapter *adapter)
 {
 	struct hal_com_data *haldata = GET_HAL_DATA(adapter);
