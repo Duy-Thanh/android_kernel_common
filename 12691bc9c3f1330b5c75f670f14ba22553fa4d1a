@@ -52,6 +52,24 @@
       "parentUuid": "df548261_fbc287c2",
       "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6da080_f5624923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-05T17:25:24Z",
+      "side": 1,
+      "message": "Yes, that was a typo. I meant android17-6.18. So, correct, that\u0027s the only branch where this needs to be CP\u0027d to.",
+      "parentUuid": "0a77aa9d_6a7b67d7",
+      "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
