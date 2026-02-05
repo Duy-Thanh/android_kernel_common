@@ -1203,10 +1203,64 @@ nfsd_create_setattr(struct svc_rqst *rqstp, struct svc_fh *resfhp,
 	 */
 	if (!uid_eq(current_fsuid(), GLOBAL_ROOT_UID))
 		iap->ia_valid &= ~(ATTR_UID|ATTR_GID);
+<<<<<<< HEAD   (d0168a53bee9d88a68ae1e25e6ab2cb37714aeb4 Merge cbbf3f1bb9f8 ("fuse: fix readahead reclaim deadlock") )
 	if (iap->ia_valid)
 		return nfsd_setattr(rqstp, resfhp, iap, 0, (time64_t)0);
 	/* Callers expect file metadata to be committed here */
 	return nfserrno(commit_metadata(resfhp));
+||||||| BASE   (cbbf3f1bb9f834bb2acbb61ddca74363456e19cd fuse: fix readahead reclaim deadlock)
+
+	/*
+	 * Callers expect new file metadata to be committed even
+	 * if the attributes have not changed.
+	 */
+	if (iap->ia_valid)
+		status = nfsd_setattr(rqstp, resfhp, attrs, 0, (time64_t)0);
+	else
+		status = nfserrno(commit_metadata(resfhp));
+
+	/*
+	 * Transactional filesystems had a chance to commit changes
+	 * for both parent and child simultaneously making the
+	 * following commit_metadata a noop in many cases.
+	 */
+	if (!status)
+		status = nfserrno(commit_metadata(fhp));
+
+	/*
+	 * Update the new filehandle to pick up the new attributes.
+	 */
+	if (!status)
+		status = fh_update(resfhp);
+
+	return status;
+=======
+
+	/*
+	 * Callers expect new file metadata to be committed even
+	 * if the attributes have not changed.
+	 */
+	if (iap->ia_valid || attrs->na_pacl || attrs->na_dpacl)
+		status = nfsd_setattr(rqstp, resfhp, attrs, 0, (time64_t)0);
+	else
+		status = nfserrno(commit_metadata(resfhp));
+
+	/*
+	 * Transactional filesystems had a chance to commit changes
+	 * for both parent and child simultaneously making the
+	 * following commit_metadata a noop in many cases.
+	 */
+	if (!status)
+		status = nfserrno(commit_metadata(fhp));
+
+	/*
+	 * Update the new filehandle to pick up the new attributes.
+	 */
+	if (!status)
+		status = fh_update(resfhp);
+
+	return status;
+>>>>>>> BRANCH (75f91534f9acdfef77f8fa094313b7806f801725 NFSD: NFSv4 file creation neglects setting ACL)
 }
 
 /* HPUX client sometimes creates a file in mode 000, and sets size to 0.
