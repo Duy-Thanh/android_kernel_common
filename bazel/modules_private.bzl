@@ -51,6 +51,7 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/usb/mon/usbmon.ko",
     "drivers/usb/serial/ftdi_sio.ko",
     "drivers/usb/serial/usbserial.ko",
+    "drivers/usb/typec/ucsi/typec_ucsi.ko",
     "drivers/virtio/virtio_balloon.ko",
     "drivers/virtio/virtio_pci.ko",
     "drivers/virtio/virtio_pci_legacy_dev.ko",
