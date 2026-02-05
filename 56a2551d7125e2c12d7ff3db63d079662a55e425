@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d537e267_c047bbfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-05T17:20:03Z",
+      "side": 1,
+      "message": "Yes, maybe the hardest part. :P I will definitely write something before sending to the list.",
+      "parentUuid": "ced40dd9_1b03f3f3",
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f7d516_cc20de1d",
         "filename": "fs/kernfs/dir.c",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2026-02-04T07:08:17Z",
       "side": 1,
       "message": "is this ok?  kernfs works for many filesystems at once (configfs, sysfs, cgroups, etc.), so would this overwrite an event for a different filesystem?",
+      "range": {
+        "startLine": 1476,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f542d17_f67aa6ca",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-05T17:20:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure how that would happen. Shouldn\u0027t each of those filesystems have a different set of `kernfs_node`s for their distinct hierarchies of dirs/files?\n\nThis does mean a modify event doesn\u0027t get sent if the file gets deleted before the workqueue processes the `kernfs_node` in question... but I think that\u0027s reasonable because the file can\u0027t be read after its deleted, so I\u0027m not sure what use there would be for receiving a `MODIFY` event in that case.\n\nTo send out both a `MODIFY` and a `DELETE` event right after would require changing the `kernfs_notify_list` design so that multiple events can be queued for the same `kernfs_node`, which is not currently possible because `kernfs_elem_attr`\u0027s `notify_next` can only have one spot on the `kernfs_notify_list`. Or maybe we could multiplex multiple events in the same `notify_event` field and deal with sending the multiple events in `kernfs_notify_workfn`, but that might end up as a complicated mess.",
+      "parentUuid": "81f7d516_cc20de1d",
       "range": {
         "startLine": 1476,
         "startChar": 0,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98ca6b9c_02ba6a71",
+        "filename": "fs/kernfs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-05T17:20:03Z",
+      "side": 1,
+      "message": "Originally either `fsnotify` or `fsnotify_inode` was called, depending on if the parent inode could be found. `fsnotify` handles sending `MODIFY` events to both a watched file and its parent. So a single call to `fsnotify` works for `MOIDFY`, and the `fsnotify_inode` call can be skipped.\n\n`fsnotify` does **not** handle sending both a `DELETE` event to the parent and a `DELETE_SELF` event to the watched file. Given `FS_DELETE` `fsnotify` only sends a `DELETE` event to the parent. So the `fsnotify_inode` call cannot be skipped in the case where the watched node is deleted, and we have to convert the event into a `_SELF` version for that call. The `self_event !\u003d notify_event` check detects this case.\n\nCome to think of it, I should probably also try adding `FS_IN_IGNORED` in this case so the watch gets automatically removed by inotify without having to call `inotify_rm_watch` in userspace.",
+      "parentUuid": "a151f655_18e5e061",
+      "range": {
+        "startLine": 978,
+        "startChar": 19,
+        "endLine": 978,
+        "endChar": 44
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54701e6c_7e3d83f0",
         "filename": "fs/kernfs/kernfs-internal.h",
         "patchSetId": 5
@@ -77,6 +143,30 @@
       "writtenOn": "2026-02-04T07:08:17Z",
       "side": 1,
       "message": "why does this need to be moved here?",
+      "range": {
+        "startLine": 203,
+        "startChar": 8,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2dfa9f_a635b536",
+        "filename": "fs/kernfs/kernfs-internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-05T17:20:03Z",
+      "side": 1,
+      "message": "Ah, it does not. I originally had another notify list and workfn for deletes in dir.c, and needed to search the `kernfs_notify_list` there, but I avoided that by adding the new `notify_event` field and using the same list and workfn in patchset 2.",
+      "parentUuid": "54701e6c_7e3d83f0",
       "range": {
         "startLine": 203,
         "startChar": 8,
