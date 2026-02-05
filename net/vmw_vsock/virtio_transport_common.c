@@ -107,11 +107,27 @@ static int virtio_transport_fill_skb(struct sk_buff *skb,
 				     bool zcopy)
 {
 	struct msghdr *msg = info->msg;
+<<<<<<< HEAD   (15121911f706b13614020f2c8f59f78ce3ec3972 Merge 0af233d66eff ("arm64/fpsimd: signal: Allocate SSVE sto)
+||||||| BASE   (0af233d66eff90fb8f3e0fc09f2316bba0b72bb9 arm64/fpsimd: signal: Allocate SSVE storage when restoring Z)
+		return __zerocopy_sg_from_iter(info->msg, NULL, skb,
+					       &info->msg->msg_iter,
+					       len);
+=======
 
+	if (zcopy)
+		return __zerocopy_sg_from_iter(msg, NULL, skb,
+					       &msg->msg_iter,
+					       len);
+>>>>>>> BRANCH (90ecf7d9daa2d0167e20b2e9f6f52e01f47b8147 Linux 6.12.68)
+
+<<<<<<< HEAD   (15121911f706b13614020f2c8f59f78ce3ec3972 Merge 0af233d66eff ("arm64/fpsimd: signal: Allocate SSVE sto)
 	if (zcopy)
 		return __zerocopy_sg_from_iter(msg, NULL, skb,
 					       &msg->msg_iter, len);
 
+||||||| BASE   (0af233d66eff90fb8f3e0fc09f2316bba0b72bb9 arm64/fpsimd: signal: Allocate SSVE storage when restoring Z)
+=======
+>>>>>>> BRANCH (90ecf7d9daa2d0167e20b2e9f6f52e01f47b8147 Linux 6.12.68)
 	virtio_vsock_skb_put(skb, len);
 	return skb_copy_datagram_from_iter_full(skb, 0, &msg->msg_iter, len);
 }
