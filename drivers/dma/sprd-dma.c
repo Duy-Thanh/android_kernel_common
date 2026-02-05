@@ -1311,3 +1311,4 @@ MODULE_LICENSE("GPL v2");
 MODULE_DESCRIPTION("DMA driver for Spreadtrum");
 MODULE_AUTHOR("Baolin Wang <baolin.wang@spreadtrum.com>");
 MODULE_AUTHOR("Eric Long <eric.long@spreadtrum.com>");
+MODULE_ALIAS("platform:sprd-dma");

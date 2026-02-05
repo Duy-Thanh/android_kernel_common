@@ -1651,7 +1651,7 @@ out_delete:
 	return ret;
 }
 
-static int timechart__io_record(int argc, const char **argv, const char *output_data)
+static int timechart__io_record(int argc, const char **argv)
 {
 	unsigned int rec_argc, i;
 	const char **rec_argv;
@@ -1659,7 +1659,7 @@ static int timechart__io_record(int argc, const char **argv, const char *output_
 	char *filter = NULL;
 
 	const char * const common_args[] = {
-		"record", "-a", "-R", "-c", "1", "-o", output_data,
+		"record", "-a", "-R", "-c", "1",
 	};
 	unsigned int common_args_nr = ARRAY_SIZE(common_args);
 
@@ -1786,8 +1786,7 @@ static int timechart__io_record(int argc, const char **argv, const char *output_
 }
 
 
-static int timechart__record(struct timechart *tchart, int argc, const char **argv,
-			     const char *output_data)
+static int timechart__record(struct timechart *tchart, int argc, const char **argv)
 {
 	unsigned int rec_argc, i, j;
 	const char **rec_argv;
@@ -1795,7 +1794,7 @@ static int timechart__record(struct timechart *tchart, int argc, const char **ar
 	unsigned int record_elems;
 
 	const char * const common_args[] = {
-		"record", "-a", "-R", "-c", "1", "-o", output_data,
+		"record", "-a", "-R", "-c", "1",
 	};
 	unsigned int common_args_nr = ARRAY_SIZE(common_args);
 
@@ -1935,7 +1934,6 @@ int cmd_timechart(int argc, const char **argv)
 		.merge_dist = 1000,
 	};
 	const char *output_name = "output.svg";
-	const char *output_record_data = "perf.data";
 	const struct option timechart_common_options[] = {
 	OPT_BOOLEAN('P', "power-only", &tchart.power_only, "output power data only"),
 	OPT_BOOLEAN('T', "tasks-only", &tchart.tasks_only, "output processes data only"),
@@ -1978,7 +1976,6 @@ int cmd_timechart(int argc, const char **argv)
 	OPT_BOOLEAN('I', "io-only", &tchart.io_only,
 		    "record only IO data"),
 	OPT_BOOLEAN('g', "callchain", &tchart.with_backtrace, "record callchain"),
-	OPT_STRING('o', "output", &output_record_data, "file", "output data file name"),
 	OPT_PARENT(timechart_common_options),
 	};
 	const char * const timechart_record_usage[] = {
@@ -2027,9 +2024,9 @@ int cmd_timechart(int argc, const char **argv)
 		}
 
 		if (tchart.io_only)
-			ret = timechart__io_record(argc, argv, output_record_data);
+			ret = timechart__io_record(argc, argv);
 		else
-			ret = timechart__record(&tchart, argc, argv, output_record_data);
+			ret = timechart__record(&tchart, argc, argv);
 		goto out;
 	} else if (argc)
 		usage_with_options(timechart_usage, timechart_options);

@@ -5,7 +5,6 @@
 #include <bpf/libbpf.h>
 #include <linux/err.h>
 #include <linux/kernel.h>
-#include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>

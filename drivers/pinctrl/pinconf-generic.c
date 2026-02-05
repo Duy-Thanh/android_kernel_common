@@ -54,8 +54,6 @@ static const struct pin_config_item conf_items[] = {
 	PCONFDUMP(PIN_CONFIG_SLEEP_HARDWARE_STATE, "sleep hardware state", NULL, false),
 	PCONFDUMP(PIN_CONFIG_SLEW_RATE, "slew rate", NULL, true),
 	PCONFDUMP(PIN_CONFIG_SKEW_DELAY, "skew delay", NULL, true),
-	PCONFDUMP(PIN_CONFIG_SKEW_DELAY_INPUT_PS, "input skew delay", "ps", true),
-	PCONFDUMP(PIN_CONFIG_SKEW_DELAY_OUTPUT_PS, "output skew delay", "ps", true),
 };
 
 static void pinconf_generic_dump_one(struct pinctrl_dev *pctldev,
@@ -67,12 +65,11 @@ static void pinconf_generic_dump_one(struct pinctrl_dev *pctldev,
 	int i;
 
 	for (i = 0; i < nitems; i++) {
-		const struct pin_config_item *item = &items[i];
 		unsigned long config;
 		int ret;
 
 		/* We want to check out this parameter */
-		config = pinconf_to_config_packed(item->param, 0);
+		config = pinconf_to_config_packed(items[i].param, 0);
 		if (gname)
 			ret = pin_config_group_get(dev_name(pctldev->dev),
 						   gname, &config);
@@ -89,22 +86,15 @@ static void pinconf_generic_dump_one(struct pinctrl_dev *pctldev,
 		if (*print_sep)
 			seq_puts(s, ", ");
 		*print_sep = 1;
-		seq_puts(s, item->display);
+		seq_puts(s, items[i].display);
 		/* Print unit if available */
-		if (item->has_arg) {
+		if (items[i].has_arg) {
 			u32 val = pinconf_to_config_argument(config);
 
-			if (item->format)
-				seq_printf(s, " (%u %s)", val, item->format);
+			if (items[i].format)
+				seq_printf(s, " (%u %s)", val, items[i].format);
 			else
 				seq_printf(s, " (0x%x)", val);
-
-			if (item->values && item->num_values) {
-				if (val < item->num_values)
-					seq_printf(s, " \"%s\"", item->values[val]);
-				else
-					seq_puts(s, " \"(unknown)\"");
-			}
 		}
 	}
 }
@@ -114,7 +104,7 @@ static void pinconf_generic_dump_one(struct pinctrl_dev *pctldev,
  * @pctldev:	Pincontrol device
  * @s:		File to print to
  * @gname:	Group name specifying pins
- * @pin:	Pin number specifying pin
+ * @pin:	Pin number specyfying pin
  *
  * Print the pinconf configuration for the requested pin(s) to @s. Pins can be
  * specified either by pin using @pin or by group using @gname. Only one needs
@@ -200,8 +190,6 @@ static const struct pinconf_generic_params dt_params[] = {
 	{ "sleep-hardware-state", PIN_CONFIG_SLEEP_HARDWARE_STATE, 0 },
 	{ "slew-rate", PIN_CONFIG_SLEW_RATE, 0 },
 	{ "skew-delay", PIN_CONFIG_SKEW_DELAY, 0 },
-	{ "skew-delay-input-ps", PIN_CONFIG_SKEW_DELAY_INPUT_PS, 0 },
-	{ "skew-delay-output-ps", PIN_CONFIG_SKEW_DELAY_OUTPUT_PS, 0 },
 };
 
 /**
@@ -217,10 +205,10 @@ static const struct pinconf_generic_params dt_params[] = {
  * @ncfg. @ncfg is updated to reflect the number of entries after parsing. @cfg
  * needs to have enough memory allocated to hold all possible entries.
  */
-static int parse_dt_cfg(struct device_node *np,
-			const struct pinconf_generic_params *params,
-			unsigned int count, unsigned long *cfg,
-			unsigned int *ncfg)
+static void parse_dt_cfg(struct device_node *np,
+			 const struct pinconf_generic_params *params,
+			 unsigned int count, unsigned long *cfg,
+			 unsigned int *ncfg)
 {
 	int i;
 
@@ -229,19 +217,7 @@ static int parse_dt_cfg(struct device_node *np,
 		int ret;
 		const struct pinconf_generic_params *par = &params[i];
 
-		if (par->values && par->num_values) {
-			ret = fwnode_property_match_property_string(of_fwnode_handle(np),
-								    par->property,
-								    par->values, par->num_values);
-			if (ret == -ENOENT)
-				return ret;
-			if (ret >= 0) {
-				val = ret;
-				ret = 0;
-			}
-		} else {
-			ret = of_property_read_u32(np, par->property, &val);
-		}
+		ret = of_property_read_u32(np, par->property, &val);
 
 		/* property not found */
 		if (ret == -EINVAL)
@@ -255,8 +231,6 @@ static int parse_dt_cfg(struct device_node *np,
 		cfg[*ncfg] = pinconf_to_config_packed(par->param, val);
 		(*ncfg)++;
 	}
-
-	return 0;
 }
 
 /**
@@ -268,7 +242,7 @@ static int parse_dt_cfg(struct device_node *np,
  * @pmux: array with pin mux value entries
  * @npins: number of pins
  *
- * pinmux property: mux value [0,7]bits and pin identity [8,31]bits.
+ * pinmux propertity: mux value [0,7]bits and pin identity [8,31]bits.
  */
 int pinconf_generic_parse_dt_pinmux(struct device_node *np, struct device *dev,
 				    unsigned int **pid, unsigned int **pmux,
@@ -349,16 +323,13 @@ int pinconf_generic_parse_dt_config(struct device_node *np,
 	if (!cfg)
 		return -ENOMEM;
 
-	ret = parse_dt_cfg(np, dt_params, ARRAY_SIZE(dt_params), cfg, &ncfg);
-	if (ret)
-		return ret;
+	parse_dt_cfg(np, dt_params, ARRAY_SIZE(dt_params), cfg, &ncfg);
 	if (pctldev && pctldev->desc->num_custom_params &&
-		pctldev->desc->custom_params) {
-		ret = parse_dt_cfg(np, pctldev->desc->custom_params,
-				   pctldev->desc->num_custom_params, cfg, &ncfg);
-		if (ret)
-			return ret;
-	}
+		pctldev->desc->custom_params)
+		parse_dt_cfg(np, pctldev->desc->custom_params,
+			     pctldev->desc->num_custom_params, cfg, &ncfg);
+
+	ret = 0;
 
 	/* no configs found at all */
 	if (ncfg == 0) {

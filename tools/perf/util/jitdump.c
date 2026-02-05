@@ -233,8 +233,7 @@ jit_open(struct jit_buf_desc *jd, const char *name)
 	/*
 	 * keep dirname for generating files and mmap records
 	 */
-	strncpy(jd->dir, name, PATH_MAX);
-	jd->dir[PATH_MAX - 1] = '\0';
+	strcpy(jd->dir, name);
 	dirname(jd->dir);
 	free(buf);
 
@@ -547,8 +546,6 @@ static int jit_repipe_code_load(struct jit_buf_desc *jd, union jr_entry *jr)
 
 		if (dso)
 			dso__set_hit(dso);
-
-		dso__put(dso);
 	}
 out:
 	perf_sample__exit(&sample);

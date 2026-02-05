@@ -3,15 +3,13 @@
     "Unit": "software",
     "EventName": "cpu-clock",
     "BriefDescription": "Per-CPU high-resolution timer based event",
-    "ConfigCode": "0",
-    "ScaleUnit": "1e-6msec"
+    "ConfigCode": "0"
   },
   {
     "Unit": "software",
     "EventName": "task-clock",
     "BriefDescription": "Per-task high-resolution timer based event",
-    "ConfigCode": "1",
-    "ScaleUnit": "1e-6msec"
+    "ConfigCode": "1"
   },
   {
     "Unit": "software",

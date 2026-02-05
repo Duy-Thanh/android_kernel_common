@@ -4,7 +4,6 @@
  *
  * Copyright 2020 Google LLC.
  */
-#include <errno.h>
 #include "tests.h"
 #include "util/debug.h"
 #include "util/evlist.h"

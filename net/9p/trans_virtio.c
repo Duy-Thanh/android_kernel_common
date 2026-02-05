@@ -26,7 +26,7 @@
 #include <linux/highmem.h>
 #include <linux/slab.h>
 #include <net/9p/9p.h>
-#include <linux/fs_context.h>
+#include <linux/parser.h>
 #include <net/9p/client.h>
 #include <net/9p/transport.h>
 #include <linux/scatterlist.h>
@@ -679,7 +679,8 @@ fail:
 /**
  * p9_virtio_create - allocate a new virtio channel
  * @client: client instance invoking this transport
- * @fc: the filesystem context
+ * @devname: string identifying the channel to connect to (unused)
+ * @args: args passed from sys_mount() for per-transport options (unused)
  *
  * This sets up a transport channel for 9p communication.  Right now
  * we only match the first available channel, but eventually we could look up
@@ -690,9 +691,8 @@ fail:
  */
 
 static int
-p9_virtio_create(struct p9_client *client, struct fs_context *fc)
+p9_virtio_create(struct p9_client *client, const char *devname, char *args)
 {
-	const char *devname = fc->source;
 	struct virtio_chan *chan;
 	int ret = -ENOENT;
 	int found = 0;
@@ -802,8 +802,7 @@ static struct p9_trans_module p9_virtio_trans = {
 	 */
 	.maxsize = PAGE_SIZE * (VIRTQUEUE_NUM - 3),
 	.pooled_rbuffers = false,
-	.def = true,
-	.supports_vmalloc = false,
+	.def = 1,
 	.owner = THIS_MODULE,
 };
 
