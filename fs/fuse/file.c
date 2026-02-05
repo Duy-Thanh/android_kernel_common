@@ -114,6 +114,7 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 	struct fuse_err_ret fer;
 #endif
 
+<<<<<<< HEAD   (e671fb491a839d5a6a572d9fc40eb9dbb0ba0c63 Merge a6c208695220 ("usb: ohci-nxp: fix device leak on probe)
 	if (!refcount_dec_and_test(&ff->count))
 		return;
 
@@ -137,6 +138,35 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 		if (fuse_simple_background(ff->fm, args,
 				GFP_KERNEL | __GFP_NOFAIL))
 			fuse_release_end(ff->fm, args, -ENOTCONN);
+||||||| BASE   (a6c2086952207bb9e3f1f8d1751503abdb556664 usb: ohci-nxp: fix device leak on probe failure)
+		if (!args) {
+			/* Do nothing when server does not implement 'open' */
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+=======
+		if (!args) {
+			/* Do nothing when server does not implement 'opendir' */
+		} else if (args->opcode == FUSE_RELEASE && ff->fm->fc->no_open) {
+			fuse_release_end(ff->fm, args, 0);
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+>>>>>>> BRANCH (cbbf3f1bb9f834bb2acbb61ddca74363456e19cd fuse: fix readahead reclaim deadlock)
 	}
 	kfree(ff);
 }
@@ -147,8 +177,29 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 	struct fuse_conn *fc = fm->fc;
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
+<<<<<<< HEAD   (e671fb491a839d5a6a572d9fc40eb9dbb0ba0c63 Merge a6c208695220 ("usb: ohci-nxp: fix device leak on probe)
+||||||| BASE   (a6c2086952207bb9e3f1f8d1751503abdb556664 usb: ohci-nxp: fix device leak on probe failure)
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+=======
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+	bool release = !isdir || open;
+>>>>>>> BRANCH (cbbf3f1bb9f834bb2acbb61ddca74363456e19cd fuse: fix readahead reclaim deadlock)
 
+<<<<<<< HEAD   (e671fb491a839d5a6a572d9fc40eb9dbb0ba0c63 Merge a6c208695220 ("usb: ohci-nxp: fix device leak on probe)
 	ff = fuse_file_alloc(fm);
+||||||| BASE   (a6c2086952207bb9e3f1f8d1751503abdb556664 usb: ohci-nxp: fix device leak on probe failure)
+	ff = fuse_file_alloc(fm, open);
+=======
+	/*
+	 * ff->args->release_args still needs to be allocated (so we can hold an
+	 * inode reference while there are pending inflight file operations when
+	 * ->release() is called, see fuse_prepare_release()) even if
+	 * fc->no_open is set else it becomes possible for reclaim to deadlock
+	 * if while servicing the readahead request the server triggers reclaim
+	 * and reclaim evicts the inode of the file being read ahead.
+	 */
+	ff = fuse_file_alloc(fm, release);
+>>>>>>> BRANCH (cbbf3f1bb9f834bb2acbb61ddca74363456e19cd fuse: fix readahead reclaim deadlock)
 	if (!ff)
 		return ERR_PTR(-ENOMEM);
 
@@ -168,10 +219,23 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 			fuse_file_free(ff);
 			return ERR_PTR(err);
 		} else {
+<<<<<<< HEAD   (e671fb491a839d5a6a572d9fc40eb9dbb0ba0c63 Merge a6c208695220 ("usb: ohci-nxp: fix device leak on probe)
 			if (isdir)
+||||||| BASE   (a6c2086952207bb9e3f1f8d1751503abdb556664 usb: ohci-nxp: fix device leak on probe failure)
+			/* No release needed */
+			kfree(ff->release_args);
+			ff->release_args = NULL;
+			if (isdir)
+=======
+			if (isdir) {
+				/* No release needed */
+				kfree(ff->release_args);
+				ff->release_args = NULL;
+>>>>>>> BRANCH (cbbf3f1bb9f834bb2acbb61ddca74363456e19cd fuse: fix readahead reclaim deadlock)
 				fc->no_opendir = 1;
-			else
+			} else {
 				fc->no_open = 1;
+			}
 		}
 	}
 
