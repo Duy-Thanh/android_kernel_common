@@ -34,6 +34,24 @@
       "parentUuid": "a2435ba1_1cd19c53",
       "revId": "6d9b15f10f85fd63c2a519f7b991e30e6f3720f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "521cd4da_511ae689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3838915
+      },
+      "writtenOn": "2026-02-05T01:39:30Z",
+      "side": 1,
+      "message": "I use a _release and _accquire function, and then the vh sample the jiffies in _accquire function. So that it will be more intuitive and it will not influence other vendors.\n\nAdditionally, concerning the second question, we notice that the existing tracepoints cannot realize the lock protect ability, which need a tracepoint when lock is acquired and released.",
+      "parentUuid": "d077b0b1_abf383e9",
+      "revId": "6d9b15f10f85fd63c2a519f7b991e30e6f3720f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
