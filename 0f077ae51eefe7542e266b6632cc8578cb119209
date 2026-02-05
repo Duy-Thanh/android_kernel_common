@@ -16,6 +16,47 @@
       "message": "Since this is going in to Android, I would expect little more explanation. Write a paragraph about the current problem. then another explaining how you are solving this.",
       "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437bb4be_b4202623",
+        "filename": "drivers/thermal/thermal_of.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2026-02-05T02:12:49Z",
+      "side": 1,
+      "message": "Add `ANDROID_KABI_DECLONLY(trace_eval_map);` to avoid breaking ABI.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e6eb63e2_831870d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/thermal/thermal_of.c",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "ANDROID_KABI_DECLONLY(trace_eval_map);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
