@@ -16,6 +16,24 @@
       "message": "please drop QCLINUX tag here.",
       "revId": "329a704e7952175310984e0cd8394f0e311ae7ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b52d07_379165db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1951391
+      },
+      "writtenOn": "2026-02-05T04:43:05Z",
+      "side": 1,
+      "message": "If we drop , Lint tool will throw error as it expects valid tag. Could you suggest appropriate tag for this",
+      "parentUuid": "d38f36ef_3ef1b275",
+      "revId": "329a704e7952175310984e0cd8394f0e311ae7ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
