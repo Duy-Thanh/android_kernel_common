@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20887ba_cae0ada7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3838915
+      },
+      "writtenOn": "2026-02-05T07:52:01Z",
+      "side": 1,
+      "message": "I misunderstood. I added this interface in order to keep the same vh tracepoints as in kernel-6.12. I will rename the vendor hooks.",
+      "parentUuid": "58012bc4_2b269b63",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "376757b9_0d7161f3",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15c77d69_a7ac319c",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3838915
+      },
+      "writtenOn": "2026-02-05T07:52:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "376757b9_0d7161f3",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e43a07e_959a2656",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-02-05T06:32:53Z",
       "side": 1,
       "message": "Same question. Why preserve the _starttime() vh instead of defining the separate aquired/released vendor hooks?",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3cdec4c_d87e73c8",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3838915
+      },
+      "writtenOn": "2026-02-05T07:52:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e43a07e_959a2656",
       "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
