@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f55de7f_5a2377a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-05T19:30:43Z",
+      "side": 1,
+      "message": "do we know when this was introduced? Add a \"Fixes:\" tag?",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf7d02ac_d17ecf05",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
