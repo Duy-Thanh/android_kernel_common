@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58012bc4_2b269b63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-05T06:32:53Z",
+      "side": 1,
+      "message": "Feel like it would still be better to have the actual vendorhooks be aquired/release rather then the _starttime() style interface.",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376757b9_0d7161f3",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-05T06:32:53Z",
+      "side": 1,
+      "message": "Why the indirection here instead of having the actual hooks be aquired/released?",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e43a07e_959a2656",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-05T06:32:53Z",
+      "side": 1,
+      "message": "Same question. Why preserve the _starttime() vh instead of defining the separate aquired/released vendor hooks?",
+      "revId": "5c205789eea0f4dcdbe6ca5dc19f24e79359e7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
