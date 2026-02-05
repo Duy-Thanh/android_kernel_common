@@ -196,6 +196,24 @@
       "parentUuid": "4c302be1_776c7c95",
       "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b438c7c_c5f007c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-02-05T01:55:55Z",
+      "side": 1,
+      "message": "Feeling your help, I have already modified the upstream  changelog text and signed-off-by chain and it has been resubmitted upstream. Please check it",
+      "parentUuid": "6ac41d80_85cfd49a",
+      "revId": "65b28e5c15885e4a5e1f40c9e2294e73fecd6b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
