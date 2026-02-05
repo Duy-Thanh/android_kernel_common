@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9467abf1_d0131011",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-05T22:00:55Z",
+      "side": 1,
+      "message": "No random empty lines in-between tags please.",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f55de7f_5a2377a1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -20,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa69cbbf_c193c36a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-05T22:00:55Z",
+      "side": 1,
+      "message": "+1, this should be: `Fixes: 43c26111cafa (\"ANDROID: binder: unload C Binder trace events\")`",
+      "parentUuid": "6f55de7f_5a2377a1",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf7d02ac_d17ecf05",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -31,6 +66,24 @@
       "writtenOn": "2026-02-05T19:29:53Z",
       "side": 1,
       "message": "Is there a reason not to send this upstream first?",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fe4728_f54c8ca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-05T22:00:55Z",
+      "side": 1,
+      "message": "this is downstream logic",
+      "parentUuid": "cf7d02ac_d17ecf05",
       "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
