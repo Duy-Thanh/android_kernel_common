@@ -182,6 +182,24 @@
       "parentUuid": "a50968ba_eb715656",
       "revId": "e563aa44f78f279651448952f2a92107587f711e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c651fa5_d008dcfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2026-02-05T03:32:00Z",
+      "side": 1,
+      "message": "This shouldn\u0027t affect our proposed sched_ext plan, though I\u0027m not sure if the existing sched_ext users rely on the loader service model that Neill mentioned in his comment",
+      "parentUuid": "5245f976_328d5d92",
+      "revId": "e563aa44f78f279651448952f2a92107587f711e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
