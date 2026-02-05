@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1026c560_e3bf723e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-05T23:07:29Z",
+      "side": 1,
+      "message": "Unrelated to this patch, but it sounds like binder_remove_trace_events() needs to be defined in a header file (conditionally on EVENT_TRACING) and used as a binding in the Rust code.",
+      "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
