@@ -70,6 +70,30 @@
       },
       "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d96674f8_11446e35",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/errno.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-05T08:25:14Z",
+      "side": 1,
+      "message": "`For ERR_PTR I was thinking of removing hyp_alloc_errno() and encode the error in hyp_alloc()` - that would be quite a massive change because you need to patch all the places where hyp_alloc() is called. \n\n@vdonnefort@google.com - I am still not convinced what does it buy us to diferentiate between ENOMEM and ENOMEMHYPALLOC ?",
+      "parentUuid": "60e8be7b_e3c8ae65",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
