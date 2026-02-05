@@ -139,6 +139,7 @@ char *sync_file_get_name(struct sync_file *sync_file, char *buf, int len)
 	} else {
 		struct dma_fence *fence = sync_file->fence;
 
+<<<<<<< HEAD   (aef1d593fd1003e897d53660fc450aa404bfb498 UPSTREAM: dma-fence: Add helpers for accessing driver and ti)
 		if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags))
 			snprintf(buf, len, "%s-%s%llu-%lld",
 				 sync_fence_signaled_driver_name,
@@ -151,6 +152,19 @@ char *sync_file_get_name(struct sync_file *sync_file, char *buf, int len)
 				 fence->ops->get_timeline_name(fence),
 				 fence->context,
 				 fence->seqno);
+||||||| BASE   (637c1ef4f9831bd1dd1414b5ed564157c4a6e53f UPSTREAM: dma-fence: Add helpers for accessing driver and ti)
+		snprintf(buf, len, "%s-%s%llu-%lld",
+			 fence->ops->get_driver_name(fence),
+			 fence->ops->get_timeline_name(fence),
+			 fence->context,
+			 fence->seqno);
+=======
+		snprintf(buf, len, "%s-%s%llu-%lld",
+			 dma_fence_driver_name(fence),
+			 dma_fence_timeline_name(fence),
+			 fence->context,
+			 fence->seqno);
+>>>>>>> BRANCH (6e0e285b22f1b092388649a82d63b9d092a317f0 UPSTREAM: sync_file: Use dma-fence driver and timeline name )
 	}
 
 	return buf;
@@ -272,6 +286,7 @@ err_put_fd:
 static int sync_fill_fence_info(struct dma_fence *fence,
 				 struct sync_fence_info *info)
 {
+<<<<<<< HEAD   (aef1d593fd1003e897d53660fc450aa404bfb498 UPSTREAM: dma-fence: Add helpers for accessing driver and ti)
 	if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags)) {
 		info->status = fence->error ?: 1;
 		info->timestamp_ns = ktime_to_ns(dma_fence_timestamp(fence));
@@ -282,8 +297,13 @@ static int sync_fill_fence_info(struct dma_fence *fence,
 	}
 
 	strscpy(info->obj_name, fence->ops->get_timeline_name(fence),
+||||||| BASE   (637c1ef4f9831bd1dd1414b5ed564157c4a6e53f UPSTREAM: dma-fence: Add helpers for accessing driver and ti)
+	strscpy(info->obj_name, fence->ops->get_timeline_name(fence),
+=======
+	strscpy(info->obj_name, dma_fence_timeline_name(fence),
+>>>>>>> BRANCH (6e0e285b22f1b092388649a82d63b9d092a317f0 UPSTREAM: sync_file: Use dma-fence driver and timeline name )
 		sizeof(info->obj_name));
-	strscpy(info->driver_name, fence->ops->get_driver_name(fence),
+	strscpy(info->driver_name, dma_fence_driver_name(fence),
 		sizeof(info->driver_name));
 
 	info->status = dma_fence_get_status(fence);
