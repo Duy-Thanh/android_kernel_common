@@ -12,7 +12,8 @@
 #define FAIL	(-1)
 
 #include <linux/types.h>
-#include <linux/stddef.h>
+
+#define FIELD_OFFSET(s, field)	((__kernel_ssize_t)&((s *)(0))->field)
 
 #define SIZE_PTR __kernel_size_t
 #define SSIZE_PTR __kernel_ssize_t
