@@ -14,9 +14,14 @@ enum {
 	POLICYDB_CAP_GENFS_SECLABEL_SYMLINKS,
 	POLICYDB_CAP_IOCTL_SKIP_CLOEXEC,
 	POLICYDB_CAP_USERSPACE_INITIAL_CONTEXT,
+<<<<<<< HEAD   (7fa33ba90b34f99e816cb1719d346f70b5be0627 UPSTREAM: selinux: support wildcard match in genfscon am: 48)
 	POLICYDB_CAP_NETLINK_XPERM,
 	POLICYDB_CAP_NETIF_WILDCARD,
 	POLICYDB_CAP_GENFS_SECLABEL_WILDCARD,
+||||||| BASE   (4806465da60368a169da905e89f148f5783d7400 UPSTREAM: selinux: support wildcard match in genfscon)
+	POLICYDB_CAP_GENFS_SECLABEL_WILDCARD,
+=======
+>>>>>>> BRANCH (476c615f551c957317be7c3e3c1dce31efd377be ANDROID: selinux: fix ABI break by genfscon wildcard)
 	__POLICYDB_CAP_MAX
 };
 #define POLICYDB_CAP_MAX (__POLICYDB_CAP_MAX - 1)
@@ -26,6 +31,8 @@ enum {
  *
  * This value must match what userspace expects the capability number to be.
  */
+#define POLICYDB_CAP_GENFS_SECLABEL_WILDCARD 11
+#define POLICYDB_CAP_GENFS_SECLABEL_WILDCARD_NAME "genfs_seclabel_wildcard"
 #define POLICYDB_CAP_MEMFD_CLASS 13
 #define POLICYDB_CAP_MEMFD_CLASS_NAME "memfd_class"
 
