@@ -16,7 +16,6 @@ enum {
 	POLICYDB_CAP_USERSPACE_INITIAL_CONTEXT,
 	POLICYDB_CAP_NETLINK_XPERM,
 	POLICYDB_CAP_NETIF_WILDCARD,
-	POLICYDB_CAP_GENFS_SECLABEL_WILDCARD,
 	__POLICYDB_CAP_MAX
 };
 #define POLICYDB_CAP_MAX (__POLICYDB_CAP_MAX - 1)
@@ -26,6 +25,8 @@ enum {
  *
  * This value must match what userspace expects the capability number to be.
  */
+#define POLICYDB_CAP_GENFS_SECLABEL_WILDCARD 11
+#define POLICYDB_CAP_GENFS_SECLABEL_WILDCARD_NAME "genfs_seclabel_wildcard"
 #define POLICYDB_CAP_MEMFD_CLASS 13
 #define POLICYDB_CAP_MEMFD_CLASS_NAME "memfd_class"
 
