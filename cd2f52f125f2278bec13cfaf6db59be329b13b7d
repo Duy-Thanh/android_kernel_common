@@ -94,6 +94,30 @@
       },
       "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "befbeb01_4e81a7f5",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/errno.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-05T13:53:14Z",
+      "side": 1,
+      "message": "Yes and ERR_PTR doesn\u0027t fix the problem here. Originally I brought hyp_alloc_errno() to keep it simple for the allocation\n\n```\nif (!ptr) return err;\n```\n\nJust like with kmalloc().\n\n\u003e  I am still not convinced what does it buy us to differentiate between ENOMEM and ENOMEMHYPALLOC ?\n\nSo currently ENOMEM means a lot of things and things that can ENOMEM are hyp stage-1, vcpu memcache, hyp_alloc() ... it has caused problems in the past already and in a later patch, I do bring a new one: host stage-2 (ENOMEMHOSTS2) \n\nSo the idea is to simply be able to propagate a meaningful error so the caller can know what to do.",
+      "parentUuid": "d96674f8_11446e35",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
