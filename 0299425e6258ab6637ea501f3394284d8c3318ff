@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "290a92d2_34b85379",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-05T22:14:20Z",
+      "side": 1,
+      "message": "Done\nRemoved the empty lines.",
+      "parentUuid": "9467abf1_d0131011",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f55de7f_5a2377a1",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "+1, this should be: `Fixes: 43c26111cafa (\"ANDROID: binder: unload C Binder trace events\")`",
       "parentUuid": "6f55de7f_5a2377a1",
+      "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc8a3dc_6e97e106",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-05T22:14:20Z",
+      "side": 1,
+      "message": "Done\nAdd the \"Fixes\" tag\nFixes: 43c26111cafa (\"ANDROID: binder: unload C Binder trace events\")",
+      "parentUuid": "aa69cbbf_c193c36a",
       "revId": "0299425e6258ab6637ea501f3394284d8c3318ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
