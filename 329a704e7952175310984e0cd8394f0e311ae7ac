@@ -34,6 +34,24 @@
       "parentUuid": "d38f36ef_3ef1b275",
       "revId": "329a704e7952175310984e0cd8394f0e311ae7ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4784b2d2_de725b77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2026-02-05T04:46:26Z",
+      "side": 1,
+      "message": "see git log of gunyah driver patches. also see README here https://android.googlesource.com/kernel/common",
+      "parentUuid": "05b52d07_379165db",
+      "revId": "329a704e7952175310984e0cd8394f0e311ae7ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
