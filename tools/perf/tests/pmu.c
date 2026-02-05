@@ -169,7 +169,8 @@ static int test__pmu_format(struct test_suite *test __maybe_unused, int subtest 
 	parse_events_terms__init(&terms);
 	if (parse_events_terms(&terms,
 				"krava01=15,krava02=170,krava03=1,krava11=27,krava12=1,"
-				"krava13=2,krava21=119,krava22=11,krava23=2")) {
+				"krava13=2,krava21=119,krava22=11,krava23=2",
+				NULL)) {
 		pr_err("Term parsing failed\n");
 		goto err_out;
 	}

@@ -4,7 +4,6 @@
 #include "hwmon_pmu.h"
 #include "parse-events.h"
 #include "tests.h"
-#include <errno.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <linux/compiler.h>

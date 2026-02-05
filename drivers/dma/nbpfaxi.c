@@ -1500,6 +1500,7 @@ static const struct platform_device_id nbpf_ids[] = {
 };
 MODULE_DEVICE_TABLE(platform, nbpf_ids);
 
+#ifdef CONFIG_PM
 static int nbpf_runtime_suspend(struct device *dev)
 {
 	struct nbpf_device *nbpf = dev_get_drvdata(dev);
@@ -1512,16 +1513,17 @@ static int nbpf_runtime_resume(struct device *dev)
 	struct nbpf_device *nbpf = dev_get_drvdata(dev);
 	return clk_prepare_enable(nbpf->clk);
 }
+#endif
 
 static const struct dev_pm_ops nbpf_pm_ops = {
-	RUNTIME_PM_OPS(nbpf_runtime_suspend, nbpf_runtime_resume, NULL)
+	SET_RUNTIME_PM_OPS(nbpf_runtime_suspend, nbpf_runtime_resume, NULL)
 };
 
 static struct platform_driver nbpf_driver = {
 	.driver = {
 		.name = "dma-nbpf",
 		.of_match_table = nbpf_match,
-		.pm = pm_ptr(&nbpf_pm_ops),
+		.pm = &nbpf_pm_ops,
 	},
 	.id_table = nbpf_ids,
 	.probe = nbpf_probe,

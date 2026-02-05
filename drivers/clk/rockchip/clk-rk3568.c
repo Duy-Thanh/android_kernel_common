@@ -1652,7 +1652,6 @@ CLK_OF_DECLARE(rk3568_cru_pmu, "rockchip,rk3568-pmucru", rk3568_pmu_clk_init);
 static void __init rk3568_clk_init(struct device_node *np)
 {
 	struct rockchip_clk_provider *ctx;
-	unsigned long clk_nr_clks;
 	void __iomem *reg_base;
 
 	reg_base = of_iomap(np, 0);
@@ -1661,9 +1660,7 @@ static void __init rk3568_clk_init(struct device_node *np)
 		return;
 	}
 
-	clk_nr_clks = rockchip_clk_find_max_clk_id(rk3568_clk_branches,
-						   ARRAY_SIZE(rk3568_clk_branches)) + 1;
-	ctx = rockchip_clk_init(np, reg_base, clk_nr_clks);
+	ctx = rockchip_clk_init(np, reg_base, CLK_NR_CLKS);
 	if (IS_ERR(ctx)) {
 		pr_err("%s: rockchip clk init failed\n", __func__);
 		iounmap(reg_base);
