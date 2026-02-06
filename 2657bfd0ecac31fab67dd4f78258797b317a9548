@@ -50,6 +50,24 @@
       "message": "Thanks so much for submitting this! \n\nThe patch looks good, but could you please open an issuetracker clarifying some details around the motivation for including this backport? Given this is an older kernel we need to have some additional justification for taking changes.\n\nThen just add\nBug: \u003cnumber\u003e\n\nto the bottom of the commit message.",
       "revId": "2657bfd0ecac31fab67dd4f78258797b317a9548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c2a872_1d3acc52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008683
+      },
+      "writtenOn": "2026-02-06T00:39:17Z",
+      "side": 1,
+      "message": "Thanks! I have filed an issue and attached it here.",
+      "parentUuid": "4c0e4af8_b8dffe0e",
+      "revId": "2657bfd0ecac31fab67dd4f78258797b317a9548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
