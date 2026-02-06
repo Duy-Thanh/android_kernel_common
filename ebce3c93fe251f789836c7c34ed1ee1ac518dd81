@@ -34,6 +34,24 @@
       "parentUuid": "1026c560_e3bf723e",
       "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208bf6b8_d9c3433f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-06T00:11:38Z",
+      "side": 1,
+      "message": "I tried reproducing this issue in android17-6.18 and I realized that we have `depends on EVENT_TRACING` for binder. So that\u0027s another way to solve this problem I suppose. Do you need !EVENT_TRACING for some reason?",
+      "parentUuid": "5739b2f2_0ba589ab",
+      "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
