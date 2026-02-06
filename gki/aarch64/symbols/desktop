@@ -1,4 +1,5 @@
 [abi_symbol_list]
+<<<<<<< HEAD   (2ef302243eaca24cff94fb00b8940d11efa0c435 ANDROID: soc: mediatek: make MTK_INFRACFG tristate am: 3aa7b)
   add_device_randomness
   add_uevent_var
   alloc_etherdev_mqs
@@ -1298,3 +1299,45 @@
   xhci_get_ep_ctx
   xhci_init_driver
   xhci_reset_bandwidth
+||||||| BASE   (3aa7b692360f836deab9fd2a56ecbd3ebe738159 ANDROID: soc: mediatek: make MTK_INFRACFG tristate)
+# required by panthor.ko
+  drm_fdinfo_print_size
+=======
+  clk_disable
+  clk_enable
+  clk_prepare
+  clk_unprepare
+  __const_udelay
+  _dev_err
+  devm_clk_get
+  devm_kmalloc
+  devm_platform_ioremap_resource
+  devm_regulator_get_optional
+  _dev_notice
+  drm_fdinfo_print_size
+  jiffies_to_usecs
+  ktime_get
+  log_post_read_mmio
+  log_post_write_mmio
+  log_read_mmio
+  log_write_mmio
+  module_layout
+  of_device_get_match_data
+  of_genpd_add_provider_onecell
+  __platform_driver_register
+  platform_driver_unregister
+  pm_genpd_add_subdomain
+  pm_genpd_init
+  _printk
+  __put_task_struct
+  regmap_read
+  regmap_update_bits_base
+  regmap_write
+  regulator_disable
+  regulator_enable
+  __stack_chk_fail
+  syscon_regmap_lookup_by_compatible
+  syscon_regmap_lookup_by_phandle
+  usleep_range_state
+  utf8_data_table
+>>>>>>> BRANCH (27c7b628c8a4a37313f37bdadd1b0a4e7d33bbb2 ANDROID: Update desktop symbol list)
