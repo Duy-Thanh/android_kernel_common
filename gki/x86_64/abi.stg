@@ -302692,7 +302692,7 @@ elf_symbol {
   name: "__vma_start_write"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x23e843f3
+  crc: 0xb466a1d7
   type_id: 0x130a945a
   full_name: "__vma_start_write"
 }
@@ -304348,7 +304348,7 @@ elf_symbol {
   name: "apply_to_page_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x629b2fd2
+  crc: 0x45146ed9
   type_id: 0x9b8e6f5b
   full_name: "apply_to_page_range"
 }
@@ -324787,7 +324787,7 @@ elf_symbol {
   name: "remap_pfn_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe1399511
+  crc: 0xd7ccf227
   type_id: 0x9fc5d15c
   full_name: "remap_pfn_range"
 }
@@ -332083,7 +332083,7 @@ elf_symbol {
   name: "unmap_mapping_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdbe5b395
+  crc: 0x2f6076c4
   type_id: 0x156e1138
   full_name: "unmap_mapping_range"
 }
@@ -335062,7 +335062,7 @@ elf_symbol {
   name: "vm_insert_page"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xff57793f
+  crc: 0x4cd088f0
   type_id: 0x9fc8463b
   full_name: "vm_insert_page"
 }
@@ -336016,7 +336016,7 @@ elf_symbol {
   name: "zap_vma_ptes"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc3fd711a
+  crc: 0x7f7f7a17
   type_id: 0x12dd8909
   full_name: "zap_vma_ptes"
 }
