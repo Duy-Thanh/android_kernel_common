@@ -16,6 +16,24 @@
       "message": "This driver is not part GKI builds so changes to it should be submitted to the downstream kernel tree where vendor modules are built.",
       "revId": "2d83e3037de9ac7d41b2cbc8c2a0bc3d1093831b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56051271_d97e3651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2026-02-06T17:12:08Z",
+      "side": 1,
+      "message": "Since this only adds CPU IDs, and after discussion, move the patch back to kernel/common.  Thanks!",
+      "parentUuid": "ead245b6_88f4db0f",
+      "revId": "2d83e3037de9ac7d41b2cbc8c2a0bc3d1093831b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
