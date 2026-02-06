@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "358fff8a_4758f09f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1463002
+      },
+      "writtenOn": "2026-02-06T05:51:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e47a4e96_e56c585d",
+      "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "437bb4be_b4202623",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501ee2e0_340f62ae",
+        "filename": "drivers/thermal/thermal_of.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1463002
+      },
+      "writtenOn": "2026-02-06T05:51:01Z",
+      "side": 1,
+      "message": "It works to resolve lint issue. Thanks",
+      "parentUuid": "437bb4be_b4202623",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 32
+      },
       "revId": "0f077ae51eefe7542e266b6632cc8578cb119209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
