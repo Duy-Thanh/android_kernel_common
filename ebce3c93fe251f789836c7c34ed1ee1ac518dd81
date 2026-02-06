@@ -70,6 +70,24 @@
       "parentUuid": "208bf6b8_d9c3433f",
       "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50b2b34_92c898e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-06T02:02:39Z",
+      "side": 1,
+      "message": "For small IOT devices(e.g those devices with only 512MB or even 256MB memory), EVENT_TRACING is usually disabled but it may still need binder IPC.",
+      "parentUuid": "84bbe2f9_6491a9a3",
+      "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
