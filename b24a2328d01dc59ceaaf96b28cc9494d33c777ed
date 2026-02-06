@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3173ebf0_fb76c317",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-06T00:45:16Z",
+      "side": 1,
+      "message": "Nit: would it be cleaner to write this as:\n\n```\nctx \u003d kzalloc(sizeof(*ctx), GFP_KERNEL);\nspin_lock_init(\u0026ctx-\u003elock);\nreturn ctx;\n```\n?",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 12
+      },
+      "revId": "b24a2328d01dc59ceaaf96b28cc9494d33c777ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88ea5f22_d426d3ef",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 3
