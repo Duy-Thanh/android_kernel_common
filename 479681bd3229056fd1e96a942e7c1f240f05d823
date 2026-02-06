@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72483b30_16f2bc23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-06T19:27:02Z",
+      "side": 1,
+      "message": "Looks good, but needs a follow on patch that adds the new symbols to the symbol list and updates the kabi (both aarch64 and x86_64)",
+      "revId": "479681bd3229056fd1e96a942e7c1f240f05d823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
