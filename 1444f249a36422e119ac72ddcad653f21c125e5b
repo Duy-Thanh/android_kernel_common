@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02342f61_3d56d67d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-02-06T15:44:56Z",
+      "side": 1,
+      "message": "Bypassing Lint since the branch is going through automerges including commits that were not reverted here causing conflicts. The ABI may vary until automerger reaches the ToT.",
+      "revId": "1444f249a36422e119ac72ddcad653f21c125e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
