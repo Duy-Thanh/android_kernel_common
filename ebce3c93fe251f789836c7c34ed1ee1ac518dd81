@@ -52,6 +52,24 @@
       "parentUuid": "5739b2f2_0ba589ab",
       "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bbe2f9_6491a9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-06T01:06:35Z",
+      "side": 1,
+      "message": "If add `depends on EVENT_TRACING` in binder Kconfig \"ANDROID_BINDER_IPC\" section, does it mean that the option \"Android_BINDER_IPC\" is only available when we configures CONFIG_EVENT_TRACING with \"y\". It doesn\u0027t look like what we want.",
+      "parentUuid": "208bf6b8_d9c3433f",
+      "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
