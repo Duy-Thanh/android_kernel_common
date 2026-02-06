@@ -70,6 +70,24 @@
       "parentUuid": "0a77aa9d_6a7b67d7",
       "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8073d0ba_3f3f3634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2026-02-06T01:13:21Z",
+      "side": 1,
+      "message": "Thanks and aligned. I cherry-picked to aosp/3940036 for android17-6.18.",
+      "parentUuid": "9d6da080_f5624923",
+      "revId": "12691bc9c3f1330b5c75f670f14ba22553fa4d1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
