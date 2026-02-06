@@ -413615,6 +413615,14 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b83cc4c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x02c05837
+  parameter_id: 0x914dbfdc
+  parameter_id: 0xc9082b19
+}
+function {
   id: 0x9b8532be
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -421201,6 +421209,12 @@ function {
   parameter_id: 0x270c2906
   parameter_id: 0x36c97631
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9e14d58e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x02c05837
+  parameter_id: 0xc9082b19
 }
 function {
   id: 0x9e15f25c
@@ -435129,6 +435143,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_gh_before_vcpu_run"
 }
 elf_symbol {
+  id: 0x572bc7c5
+  name: "__traceiter_android_rvh_gh_note_fw_parcel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2e85745f
+  type_id: 0x9b83cc4c
+  full_name: "__traceiter_android_rvh_gh_note_fw_parcel"
+}
+elf_symbol {
   id: 0x3fefb715
   name: "__traceiter_android_rvh_gh_vcpu_release"
   is_defined: true
@@ -442399,6 +442422,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_gh_before_vcpu_run"
+}
+elf_symbol {
+  id: 0xf9cb9587
+  name: "__tracepoint_android_rvh_gh_note_fw_parcel"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_gh_note_fw_parcel"
 }
 elf_symbol {
   id: 0x135ebd63
@@ -473743,6 +473775,15 @@ elf_symbol {
   crc: 0x0a227d4d
   type_id: 0x9b6d4a33
   full_name: "gunyah_qtvm_unregister_notifier"
+}
+elf_symbol {
+  id: 0x5fec5ea0
+  name: "gunyah_reclaim_fw_parcel"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8fe38c0c
+  type_id: 0x9e14d58e
+  full_name: "gunyah_reclaim_fw_parcel"
 }
 elf_symbol {
   id: 0x4d0b0bed
@@ -519536,6 +519577,7 @@ interface {
   symbol_id: 0xa23fdad4
   symbol_id: 0x1964ffd9
   symbol_id: 0xafad472d
+  symbol_id: 0x572bc7c5
   symbol_id: 0x3fefb715
   symbol_id: 0x41da4598
   symbol_id: 0x41d29e07
@@ -520344,6 +520386,7 @@ interface {
   symbol_id: 0x555d2f3e
   symbol_id: 0x4cd3e0a7
   symbol_id: 0xcd880b87
+  symbol_id: 0xf9cb9587
   symbol_id: 0x135ebd63
   symbol_id: 0xb0872eda
   symbol_id: 0x47c27595
@@ -523824,6 +523867,7 @@ interface {
   symbol_id: 0x7e5cec60
   symbol_id: 0x417a2fd7
   symbol_id: 0x2b2e3e72
+  symbol_id: 0x5fec5ea0
   symbol_id: 0x4d0b0bed
   symbol_id: 0xe099f453
   symbol_id: 0x49a546ba
