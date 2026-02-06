@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c520c07_d769d689",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-06T12:14:19Z",
+      "side": 1,
+      "message": "Ah, yes, you are right, they will have a different set of nodes.  I got tripped up by the \"global\" lock being used here in thinking that this was just one list.\n\nAnd yes, I think that the lack of a modify if a delete happens before it gets sent out should be ok, but I do not know what userspace is expecting to have happen.  What happens on a \"normal\" filesystem in this case?",
+      "parentUuid": "4f542d17_f67aa6ca",
+      "range": {
+        "startLine": 1476,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a151f655_18e5e061",
         "filename": "fs/kernfs/file.c",
         "patchSetId": 5
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Originally either `fsnotify` or `fsnotify_inode` was called, depending on if the parent inode could be found. `fsnotify` handles sending `MODIFY` events to both a watched file and its parent. So a single call to `fsnotify` works for `MOIDFY`, and the `fsnotify_inode` call can be skipped.\n\n`fsnotify` does **not** handle sending both a `DELETE` event to the parent and a `DELETE_SELF` event to the watched file. Given `FS_DELETE` `fsnotify` only sends a `DELETE` event to the parent. So the `fsnotify_inode` call cannot be skipped in the case where the watched node is deleted, and we have to convert the event into a `_SELF` version for that call. The `self_event !\u003d notify_event` check detects this case.\n\nCome to think of it, I should probably also try adding `FS_IN_IGNORED` in this case so the watch gets automatically removed by inotify without having to call `inotify_rm_watch` in userspace.",
       "parentUuid": "a151f655_18e5e061",
+      "range": {
+        "startLine": 978,
+        "startChar": 19,
+        "endLine": 978,
+        "endChar": 44
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e6658f7_dd3123f9",
+        "filename": "fs/kernfs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-06T12:14:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98ca6b9c_02ba6a71",
       "range": {
         "startLine": 978,
         "startChar": 19,
