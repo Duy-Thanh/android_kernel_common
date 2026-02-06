@@ -88,6 +88,24 @@
       "parentUuid": "84bbe2f9_6491a9a3",
       "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f712e8_c0a8b14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-06T14:14:13Z",
+      "side": 1,
+      "message": "I see, in that case you may want to drop the `depends on` in `android17-6.18` and follow a similar approach as here (if needed).",
+      "parentUuid": "b50b2b34_92c898e1",
+      "revId": "ebce3c93fe251f789836c7c34ed1ee1ac518dd81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
