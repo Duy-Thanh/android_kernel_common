@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dabda8_2d61ab23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-08T11:32:51Z",
+      "side": 1,
+      "message": "I believe it would be better to wrap this in a new driver with it\u0027s config similar to PKVM_PVIOMMU.",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ebf607_7ab1754a",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-08T11:32:51Z",
+      "side": 1,
+      "message": "I think that\u0027s fine, I wonder in the future if we would want to share virtual power domains. I guess in that case we have to keep those on list and loop over in `pkvm_device_pm_toggle`",
+      "range": {
+        "startLine": 216,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
