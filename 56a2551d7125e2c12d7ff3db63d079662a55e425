@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f94c80_4e40d701",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-08T01:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d537e267_c047bbfd",
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81f7d516_cc20de1d",
@@ -97,6 +115,30 @@
       "side": 1,
       "message": "Ah, yes, you are right, they will have a different set of nodes.  I got tripped up by the \"global\" lock being used here in thinking that this was just one list.\n\nAnd yes, I think that the lack of a modify if a delete happens before it gets sent out should be ok, but I do not know what userspace is expecting to have happen.  What happens on a \"normal\" filesystem in this case?",
       "parentUuid": "4f542d17_f67aa6ca",
+      "range": {
+        "startLine": 1476,
+        "startChar": 0,
+        "endLine": 1476,
+        "endChar": 52
+      },
+      "revId": "56a2551d7125e2c12d7ff3db63d079662a55e425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90bb4ba7_f75aca81",
+        "filename": "fs/kernfs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-02-08T01:19:00Z",
+      "side": 1,
+      "message": "`fsnotify` queues all events independently so this doesn\u0027t look like an issue for normal filesystems that perform the fsnotify calls synchronously. (grep for `fsnotify_modify`)\n\nHowever normal files are still readable after they are removed/unlinked as long as there\u0027s still an open file descriptor, but kernfs files are not.",
+      "parentUuid": "2c520c07_d769d689",
       "range": {
         "startLine": 1476,
         "startChar": 0,
