@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7183ce60_e89be1f6",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1771,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-08T11:05:41Z",
+      "side": 1,
+      "message": "Should we try to maintain the value -EPERM as used before?",
+      "range": {
+        "startLine": 1771,
+        "startChar": 8,
+        "endLine": 1771,
+        "endChar": 14
+      },
+      "revId": "06a8d5585b85bac76f1da6954b299192364b82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
