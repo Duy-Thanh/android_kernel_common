@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1863ae04_0e9e8555",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-09T17:27:57Z",
+      "side": 1,
+      "message": "Yes, you are right. This information should be stored inside vma-\u003evm_private_data, not in the dmabuf_content. Will fix.",
+      "parentUuid": "d0bbb34d_34035629",
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "890cf8a0_c36630e4",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 3
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8802dcab_11a1692e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-09T17:27:57Z",
+      "side": 1,
+      "message": "Acknowledged. I think I\u0027ll change alloc_dmabuf_content() to return -ENOMEM instead of NULL.",
+      "parentUuid": "890cf8a0_c36630e4",
       "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
