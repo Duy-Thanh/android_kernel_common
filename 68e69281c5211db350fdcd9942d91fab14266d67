@@ -287,6 +287,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529fa940_4671d335",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-09T19:22:15Z",
+      "side": 1,
+      "message": "Another possibility would be to do:\n\n        {\n\t\t.procname\t\u003d \"bpf_disable_prog_load\",\n\t\t.data\t\t\u003d \u0026sysctl_bpf_disable_prog_load,\n\t\t.maxlen\t\t\u003d sizeof(sysctl_bpf_disable_prog_load),\n\t\t.mode\t\t\u003d 0644,\n\t\t.proc_handler\t\u003d proc_dointvec_minmax,\n\t\t.extra1\t\t\u003d \u0026sysctl_bpf_disable_prog_load_lock,\n\t\t.extra2\t\t\u003d SYSCTL_ONE,\n\t},\n        {\n\t\t.procname\t\u003d \"bpf_disable_prog_load_lock\",\n\t\t.data\t\t\u003d \u0026sysctl_bpf_disable_prog_load_lock,\n\t\t.maxlen\t\t\u003d sizeof(sysctl_bpf_disable_prog_load_lock),\n\t\t.mode\t\t\u003d 0644,\n\t\t.proc_handler\t\u003d proc_dointvec_minmax,\n\t\t.extra1\t\t\u003d SYSCTL_ONE,\n\t\t.extra2\t\t\u003d SYSCTL_ONE,\n\t},\n\n(both start at boot time 0)\n\nNow the first one is the enable/disable, while the second one is the lock/fuse.\n\nWe always flip the first one once platform bpf loading is done, but we only flip the fuse on \u0027user\u0027 builds.",
+      "parentUuid": "90314b3a_f6c5947b",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
