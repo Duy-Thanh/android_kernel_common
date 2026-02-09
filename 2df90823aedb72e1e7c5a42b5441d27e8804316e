@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e80e3240_e5b39250",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T14:07:39Z",
+      "side": 1,
+      "message": "I wanted to re-use this driver for few reasons:\n\n* No new config option: I can\u0027t think of any reason why you wouldn\u0027t want this feature, that is also already guarded by PM_GENERIC_DOMAINS, is completely transparent and can be ignored by the VMM by just not setting the node.\n\n* I re-use the discovery mechanism for the reasons explained in the patch below. Discovery mechanism that is supported in this driver already.\n\n* The ARM_PKVM_GUEST config gating looks appropriate, as the feature is pKVM specific.\n\n* It is very small.",
+      "parentUuid": "b4dabda8_2d61ab23",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2ebf607_7ab1754a",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2026-02-08T11:32:51Z",
       "side": 1,
       "message": "I think that\u0027s fine, I wonder in the future if we would want to share virtual power domains. I guess in that case we have to keep those on list and loop over in `pkvm_device_pm_toggle`",
+      "range": {
+        "startLine": 216,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d5a3a6_f2bb9b48",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T14:07:39Z",
+      "side": 1,
+      "message": "I believe the only reason to share the virtual power domain would be to save N HVCs per off/on where the power domain is shared by N + 1 devices. \n\nWe can look into it if there are some performance issues, but compared to the added complexity for crosvm and pvmfw (and this driver) I\u0027m not convinced this is worth supporting now.",
+      "parentUuid": "c2ebf607_7ab1754a",
       "range": {
         "startLine": 216,
         "startChar": 1,
