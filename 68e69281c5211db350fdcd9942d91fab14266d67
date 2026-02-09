@@ -177,6 +177,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1161d428_b47f2e8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-09T20:30:04Z",
+      "side": 1,
+      "message": "I\u0027ve moved the linked bug to the appropriate component, and added much more details to it.",
+      "parentUuid": "7936b9b3_151abf6c",
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c41b659d_63274634",
