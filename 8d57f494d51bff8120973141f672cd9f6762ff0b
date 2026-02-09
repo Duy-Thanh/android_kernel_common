@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "de0628da_e790adbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-02-09T07:34:37Z",
+      "side": 1,
+      "message": "Marked as resolved.\nhere is new submit:\nhttps://android-review.googlesource.com/c/kernel/common/+/3944321",
+      "parentUuid": "be3eb9d4_824cd2f2",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 51
+      },
+      "revId": "8d57f494d51bff8120973141f672cd9f6762ff0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b7420013_863b42ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
