@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab70fed7_f58002b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-09T19:46:20Z",
+      "side": 1,
+      "message": "This commit is not yet in Linus\u0027 master branch, so it shouldn\u0027t be tagged as `UPSTREAM`.\n\nIt needs to be a `FROMGIT:` with the repo/branch as https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next.git for-next.\n\n... or alternatively wait until it lands on mainline.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "cc650c74380e14507c4a2ae367efb0ec56d09613",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
