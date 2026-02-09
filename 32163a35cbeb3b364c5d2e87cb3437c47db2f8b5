@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e98daf33_778f2813",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T11:04:20Z",
+      "side": 1,
+      "message": "@ptosi@google.com as it concerns you as well. What do you say? \n\nFor clock there\u0027s no reason to use a different HVC. Clock must be handled by the power domain on the host. If the power domain goes off, then the clock must be gated.\n\nHowever happy to future proff this thing. We could make arg2 a set of flags instead of bool? and then PWR_ON/PWR_OFF so it can be extended later?",
+      "parentUuid": "9a948da5_048f0d07",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
@@ -95,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afecb3b4_0f7ed9ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T11:04:20Z",
+      "side": 1,
+      "message": "Yes, that\u0027s why we should mark it as an error if it isn\u0027t zero. Or did you mean something else?",
+      "parentUuid": "c1e8f880_e9d208b6",
+      "range": {
+        "startLine": 570,
+        "startChar": 5,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "835d099a_33f758db",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
@@ -106,6 +154,30 @@
       "writtenOn": "2026-02-08T10:58:53Z",
       "side": 1,
       "message": "Do we need this, the guest must only attempt to change the power of the device after the verification calls (REQ_DMA/MMIO) so it must already be faulted at this point, otherwise it\u0027s a bug. (same for call to pkvm_get_guest_pa_request)",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 22
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017ae443_8205913b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T11:04:20Z",
+      "side": 1,
+      "message": "This is called by a guest so it\u0027s probably better to handle all cases? Alternatively I could just return an error to the guest.",
+      "parentUuid": "835d099a_33f758db",
       "range": {
         "startLine": 575,
         "startChar": 1,
