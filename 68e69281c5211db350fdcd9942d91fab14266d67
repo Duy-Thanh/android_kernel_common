@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e88df0_05abdb8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-09T19:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd97a220_a42146aa",
+      "range": {
+        "startLine": 45,
+        "startChar": 10,
+        "endLine": 45,
+        "endChar": 11
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd4381e_626c86e2",
@@ -148,6 +172,30 @@
       "writtenOn": "2026-02-09T16:46:25Z",
       "side": 1,
       "message": "Does inserting this here cause any issues with re-numbering the existing syscalls?",
+      "range": {
+        "startLine": 6523,
+        "startChar": 1,
+        "endLine": 6524,
+        "endChar": 38
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77703f22_bf9cd33a",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6524,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-09T19:01:41Z",
+      "side": 1,
+      "message": "this doesn\u0027t renumber system calls, at best it \u0027renumbers\u0027 sysctls.\n(yeah looks like the name of the struct is wrong)\n\nbut I\u0027m not actually aware of modern sysctls having numbers (they did use to have numbers for binary sysctl syscall, but that\u0027s long dead/deprecated)\n\nhttps://man7.org/linux/man-pages/man2/sysctl.2.html says the sysctl syscall was removed in Linux 5.5",
+      "parentUuid": "c41b659d_63274634",
       "range": {
         "startLine": 6523,
         "startChar": 1,
