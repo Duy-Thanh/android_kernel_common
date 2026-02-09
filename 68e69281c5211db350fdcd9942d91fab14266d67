@@ -263,6 +263,30 @@
       ],
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90314b3a_f6c5947b",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-02-09T19:12:00Z",
+      "side": 1,
+      "message": "All testing happens on userdebug builds...\nso that has to mirror user build behaviour.\n\nWe certainly could leave it (ie. not flip the fuse) alone on eng builds....\n\n---\n\nWe could introduce some property that would prevent flipping the fuse on userdebug builds.\n\n---\n\nAlternatively we could try to make this a tristate of some sort:\n0 - bpf_prog_load enabled (boot time default)\n1 - bpf_prog_load disabled \u0026 can be re-enabled (set on userdebug/eng)\n2 - bpf_prog_load disabled \u0026 cannot be re-enabled (set on user)\n\nHowever, that requires a custom kernel sysctl write handler...\n[there\u0027s no way to implement the above with just min/max limits]\n\n---\n\nAlternatively a much cheaper to implement solution would be to have *two* sysctls, both with the same blocks-load behaviour, but one has min/max\u003d0/1 and can thus be re-enabled, while the other has min/max\u003d1/1 and is thus a fuse.\n\nWe\u0027d flip one on userdebug/eng, and the fuse on user builds.\n\nThis would roughly double the size of this patch, but is conceptually trivial...\n\nie.\nif (sysctl_bpf_disable_prog_load || sysctl_bpf_disable_prog_load_fuse)\n\t\treturn -EUNATCH;\n\n---\n\nThoughts?",
+      "parentUuid": "3e260945_2a3ad19e",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
