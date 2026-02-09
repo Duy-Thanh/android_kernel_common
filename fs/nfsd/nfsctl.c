@@ -1535,26 +1535,79 @@ static int __init init_nfsd(void)
 	if (retval)
 		goto out_free_stat;
 	nfsd_lockd_init();	/* lockd->nfsd callbacks */
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
 	retval = create_proc_exports_entry();
 	if (retval)
 		goto out_free_lockd;
 	retval = register_filesystem(&nfsd_fs_type);
 	if (retval)
 		goto out_free_exports;
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+	retval = create_proc_exports_entry();
+	if (retval)
+		goto out_free_lockd;
+=======
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 	retval = register_pernet_subsys(&nfsd_net_ops);
 	if (retval < 0)
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
 		goto out_free_filesystem;
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+		goto out_free_exports;
+=======
+		goto out_free_lockd;
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 	retval = register_cld_notifier();
 	if (retval)
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+		goto out_free_subsys;
+	retval = nfsd4_create_laundry_wq();
+	if (retval)
+		goto out_free_cld;
+	retval = register_filesystem(&nfsd_fs_type);
+	if (retval)
+=======
+		goto out_free_subsys;
+	retval = nfsd4_create_laundry_wq();
+	if (retval)
+		goto out_free_cld;
+	retval = register_filesystem(&nfsd_fs_type);
+	if (retval)
+		goto out_free_nfsd4;
+	retval = create_proc_exports_entry();
+	if (retval)
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 		goto out_free_all;
 	return 0;
 out_free_all:
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+	nfsd4_destroy_laundry_wq();
+out_free_cld:
+	unregister_cld_notifier();
+out_free_subsys:
+=======
+	unregister_filesystem(&nfsd_fs_type);
+out_free_nfsd4:
+	nfsd4_destroy_laundry_wq();
+out_free_cld:
+	unregister_cld_notifier();
+out_free_subsys:
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 	unregister_pernet_subsys(&nfsd_net_ops);
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
 out_free_filesystem:
 	unregister_filesystem(&nfsd_fs_type);
 out_free_exports:
 	remove_proc_entry("fs/nfs/exports", NULL);
 	remove_proc_entry("fs/nfs", NULL);
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+out_free_exports:
+	remove_proc_entry("fs/nfs/exports", NULL);
+	remove_proc_entry("fs/nfs", NULL);
+=======
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 out_free_lockd:
 	nfsd_lockd_shutdown();
 	nfsd_drc_slab_free();
@@ -1569,12 +1622,28 @@ out_free_slabs:
 
 static void __exit exit_nfsd(void)
 {
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+	unregister_filesystem(&nfsd_fs_type);
+	nfsd4_destroy_laundry_wq();
+=======
+	remove_proc_entry("fs/nfs/exports", NULL);
+	remove_proc_entry("fs/nfs", NULL);
+	unregister_filesystem(&nfsd_fs_type);
+	nfsd4_destroy_laundry_wq();
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 	unregister_cld_notifier();
 	unregister_pernet_subsys(&nfsd_net_ops);
 	nfsd_drc_slab_free();
+<<<<<<< HEAD   (c09a5ea51b40de9743cf55907ae84efea7101139 Merge 5.15.198 into android14-5.15-lts)
 	remove_proc_entry("fs/nfs/exports", NULL);
 	remove_proc_entry("fs/nfs", NULL);
 	nfsd_stat_shutdown();
+||||||| BASE   (9eec9a14ee10820a0c00dd3e02ac1e0ab27ad142 Linux 5.15.198)
+	remove_proc_entry("fs/nfs/exports", NULL);
+	remove_proc_entry("fs/nfs", NULL);
+=======
+>>>>>>> BRANCH (7b232985052fcf6a78bf0f965aa4241c0678c2ba Linux 5.15.199)
 	nfsd_lockd_shutdown();
 	nfsd4_free_slabs();
 	nfsd4_exit_pnfs();
