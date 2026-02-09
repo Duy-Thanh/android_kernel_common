@@ -353,6 +353,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5675a65_43c7a421",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-09T20:42:08Z",
+      "side": 1,
+      "message": "No objections. If there is good prior art in the kernel for similar things, I\u0027d follow that.",
+      "parentUuid": "7a8b6f91_2faccfaa",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
