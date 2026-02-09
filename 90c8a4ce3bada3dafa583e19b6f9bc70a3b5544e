@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0bbb34d_34035629",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-02-09T05:49:59Z",
+      "side": 1,
+      "message": "I am not sure if this is a valid scenario. Please confirm if i am wrong. \n\nHow do we guarantee if multiple process doesn\u0027t mmap the samp wrapfd ? For instance, is this a valid case:\n\n\n1: Process A mmaps the wrapfd. dmabuf_content-\u003evm_private_data stores Process A\u0027s private data.\n\n2: Process B mmaps the same wrapfd. dmabuf_content-\u003evm_private_data is overwritten with Process B\u0027s private data.",
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890cf8a0_c36630e4",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-02-09T05:49:59Z",
+      "side": 1,
+      "message": "I think this should be IS_ERR_OR_NULL as alloc_dmabuf_content() could return NULL.",
+      "fixSuggestions": [
+        {
+          "fixId": "39a848eb_5140dd57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 918,
+                "startChar": 0,
+                "endLine": 919,
+                "endChar": 0
+              },
+              "replacement": "\tif (IS_ERR_OR_NULL(content))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
