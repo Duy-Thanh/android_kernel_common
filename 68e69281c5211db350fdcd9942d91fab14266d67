@@ -71,6 +71,53 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fd5ffe_a0595988",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T16:46:25Z",
+      "side": 1,
+      "message": "Maciej pointed out that the use of BPF_LSM is blocked on the lack of NOPs due to the reliance on CONFIG_DYNAMIC_FTRACE which we can not enable in GKI. https://lore.kernel.org/all/CANP3RGdfdAuWDexxT8_mt9WP2w4B39i-qo4GLBkQyn2+B7ED2A@mail.gmail.com/",
+      "parentUuid": "1e85cbef_dc774c94",
+      "range": {
+        "startLine": 38,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd97a220_a42146aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T16:46:25Z",
+      "side": 1,
+      "message": "nit: chosen",
+      "range": {
+        "startLine": 45,
+        "startChar": 10,
+        "endLine": 45,
+        "endChar": 11
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd4381e_626c86e2",
@@ -84,6 +131,70 @@
       "writtenOn": "2026-02-03T20:50:59Z",
       "side": 1,
       "message": "While I think this was a bit unfairly rejected, if we feel this is important enough to carry ourselves, can we get some bug opened to document plans to continue to advocate and push for a generic solution upstream? I\u0027d rather we not just walk away from the discussion and grow the tech debt we carry.",
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41b659d_63274634",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6524,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T16:46:25Z",
+      "side": 1,
+      "message": "Does inserting this here cause any issues with re-numbering the existing syscalls?",
+      "range": {
+        "startLine": 6523,
+        "startChar": 1,
+        "endLine": 6524,
+        "endChar": 38
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e260945_2a3ad19e",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T16:46:25Z",
+      "side": 1,
+      "message": "@gprocida@google.com @tkjos@google.com @jstultz@google.com\n\nI believe this is how the fuse is implemented. The default value is 0, and the extra1 field is the \u0027minimum\u0027 value that can be passed, and the extra2 field is the max. Therefore it can only be set to 1. \n\nPerhaps a comment could be added to these lines explaining this.\n\nThat being said, there was some discussion of how this is used, and weather or not we want it to be a one-time fuse. If we leave it as a fuse, we will need logic in the networking module to not set this in -eng or -userdebug builds to allow for bpftrace and debugging bpf programs.",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "732101fd_2d8cfd3a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/bpf/syscall.c",
+              "range": {
+                "startLine": 6529,
+                "startChar": 0,
+                "endLine": 6529,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* This sysctl acts as a one-time fuse. Both extra1 (min) and\n\t\t * extra2 (max) are set to 1, meaning the only value that can\n\t\t * be written is 1. The default value is 0.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

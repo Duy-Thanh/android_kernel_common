@@ -200,6 +200,24 @@
       "parentUuid": "5245f976_328d5d92",
       "revId": "e563aa44f78f279651448952f2a92107587f711e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "205dd5ae_9d15b17d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T16:46:25Z",
+      "side": 1,
+      "message": "In-person conversations revealed that Maciej has already spoken with a partner who is bypassing the security requirements and has worked through several alternative approaches with them. This will help reinforce the requirements as we enable sched_ext, and can always be deprecated (if we have an alternative approach down the road) as this switch will be toggled by the mainline connectivity module that can be updated.",
+      "parentUuid": "0c651fa5_d008dcfd",
+      "revId": "e563aa44f78f279651448952f2a92107587f711e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
