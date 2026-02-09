@@ -311,6 +311,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8b6f91_2faccfaa",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-09T19:37:24Z",
+      "side": 1,
+      "message": "The separate load/lock approach you\u0027ve defined in the last comment seems reasonable to me. @jstultz@google.com @tkjos@google.com @kaleshsingh@google.com @gprocida@google.com, any concerns?",
+      "parentUuid": "529fa940_4671d335",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
