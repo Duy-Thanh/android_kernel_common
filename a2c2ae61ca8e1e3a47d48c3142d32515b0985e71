@@ -16,6 +16,29 @@
       "message": "Respin Bug: b/482946966",
       "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72861e18_aa474454",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4697,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-09T15:07:18Z",
+      "side": 1,
+      "message": "Should we cherry-pick `e61f636cc310 (\"sched_ext: Fix incorrect sched_class settings for per-cpu migration tasks\")` first, so that the `new_class` is correct after scheduler unloading?",
+      "range": {
+        "startLine": 4697,
+        "startChar": 39,
+        "endLine": 4697,
+        "endChar": 48
+      },
+      "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

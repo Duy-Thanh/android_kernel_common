@@ -50,6 +50,24 @@
       "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [sourc...\n\nCherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/d7fe9777b75c161cc0a858927db97138c29d6ebc).\n\n```\n      ## include/trace/hooks/sched.h ##\n     @@ include/trace/hooks/sched.h: DECLARE_HOOK(android_vh_scheduler_tick,\n    @@ kernel/sched/core.c: void rt_mutex_setprio(struct task_struct *p, struct task_st\n      \t\tdequeue_task(rq, p, DEQUEUE_SLEEP | DEQUEUE_DELAYED | DEQUEUE_NOCLOCK);\n     \n      ## kernel/sched/ext.c ##\n    -@@ kernel/sched/ext.c: static void scx_ops_disable_workfn(struct kthread_work *work)\n    - \t\t\t__setscheduler_class(p-\u003epolicy, p-\u003eprio);\n    - \t\tstruct sched_enq_and_set_ctx ctx;\n    +@@ kernel/sched/ext.c: repeat_iter:\n    + \t\tif (skip)\n    + \t\t\tcontinue;\n      \n     +\t\ttrace_android_vh_setscheduler_class(\u0026new_class, NULL, p, p-\u003epolicy, p-\u003eprio);\n      \t\tif (old_class !\u003d new_class \u0026\u0026 p-\u003ese.sched_delayed)\n      \t\t\tdequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);\n      \n    -@@ kernel/sched/ext.c: static int scx_ops_enable(struct sched_ext_ops *ops, struct bpf_link *link)\n    - \t\t\t__setscheduler_class(p-\u003epolicy, p-\u003eprio);\n    +@@ kernel/sched/ext.c: repeat_iter:\n      \t\tstruct sched_enq_and_set_ctx ctx;\n    + \t\tbool skip \u003d false;\n      \n     +\t\ttrace_android_vh_setscheduler_class(\u0026new_class, NULL, p, p-\u003epolicy, p-\u003eprio);\n    - \t\tif (!tryget_task_struct(p))\n    + \t\tif (scx_get_task_state(p) !\u003d SCX_TASK_READY)\n      \t\t\tcontinue;\n      \n     \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "6bf8540da349044af2f1c282d628bd04c2582504",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d425432_6b936b15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-09T15:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a53a74e_bc7533ba",
+      "revId": "6bf8540da349044af2f1c282d628bd04c2582504",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
