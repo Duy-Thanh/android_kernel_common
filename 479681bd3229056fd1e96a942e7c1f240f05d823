@@ -16,6 +16,24 @@
       "message": "Looks good, but needs a follow on patch that adds the new symbols to the symbol list and updates the kabi (both aarch64 and x86_64)",
       "revId": "479681bd3229056fd1e96a942e7c1f240f05d823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11cb5d8a_838d38e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3838915
+      },
+      "writtenOn": "2026-02-09T08:14:22Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/3944360\nI have uploaded the following patch, please help to update the kabi\nBRs.",
+      "parentUuid": "72483b30_16f2bc23",
+      "revId": "479681bd3229056fd1e96a942e7c1f240f05d823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
