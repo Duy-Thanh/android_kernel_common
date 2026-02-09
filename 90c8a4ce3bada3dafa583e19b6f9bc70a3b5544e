@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae096d40_5e06e734",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-09T23:01:51Z",
+      "side": 1,
+      "message": "I added wrap_ctx_mapping object that will hold the vma-related info",
+      "parentUuid": "1863ae04_0e9e8555",
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "890cf8a0_c36630e4",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Acknowledged. I think I\u0027ll change alloc_dmabuf_content() to return -ENOMEM instead of NULL.",
       "parentUuid": "890cf8a0_c36630e4",
+      "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dadf2d68_46be086c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-09T23:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8802dcab_11a1692e",
       "revId": "90c8a4ce3bada3dafa583e19b6f9bc70a3b5544e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
