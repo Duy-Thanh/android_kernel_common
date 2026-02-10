@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1287457d_9717cf25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T01:43:53Z",
+      "side": 1,
+      "message": "Updates to gki/aarch64/abi.stg should be done in a separate patch posted as the last one in the series.",
+      "revId": "464e0fc5bc2ab7a025c8d14a71caac469e56d1c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e694cce3_bdfc59c4",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T01:43:53Z",
+      "side": 1,
+      "message": "No, you can\u0027t modify existing vendor hooks after ABI freeze. If this is critical then you can add a new vendor hook.",
+      "range": {
+        "startLine": 217,
+        "startChar": 27,
+        "endLine": 217,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bb6a2c70_c8b7c6c9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": "// This hook is ABI frozen. Do not change the signature.\n// If a change is critical, a new hook must be created.\n// See go/kernel-abi-dev for more details.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "464e0fc5bc2ab7a025c8d14a71caac469e56d1c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
