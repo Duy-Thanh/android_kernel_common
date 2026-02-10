@@ -16,6 +16,24 @@
       "message": "These are vendor modules that are not part of the GKI build. Please submit them to your downstream tree where vendor modules are built (-desktop branch?)",
       "revId": "0b4142e9af5eb8e62d36ea3db15f1171f17f10e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54afb045_62e606d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-02-10T19:46:20Z",
+      "side": 1,
+      "message": "These are not drivers but Documentation needed for device tree files checks. However I couldn\u0027t find any info how they are used in GKI and confirmation that it can be used from vendor locations (how to set the path and if modifications are allowed).",
+      "parentUuid": "da9f561e_e53559d7",
+      "revId": "0b4142e9af5eb8e62d36ea3db15f1171f17f10e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
