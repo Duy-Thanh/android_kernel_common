@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e33c17f6_5e17b51a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T11:17:03Z",
+      "side": 1,
+      "message": "\u003e I think separate config is also appropriate, as some guests might not want that even if the code is small. \n\nThe feature can be both disabled at runtime by the VMM and at build time with PM_GENERIC_DOMAINS (there is no other usage of PM in a guest kernel anyway). I do not see any benefit of declaring a new one. But then if we really want a config separate from PM_GENERIC_DOMAINS, then it is a transversal problem to where this code lives.\n\n\u003e  I think having power there will pollute it, especially that this is likely to grow.\n\nThis is just a relay really so I don\u0027t expect a huge growth here so I suppose we can just cross that bridge when it comes to it. And finally a separate file.c would have to depend on `ARM_PKVM_GUEST` anyway.\n\nAnd perhaps if that is not the case, `PKVM_PVIOMMU` should be selected by `ARM_PKVM_GUEST`, as per the description of the latter:\n\n```\nProtected guests running under the pKVM hypervisor on arm64\nare isolated from the host and must issue hypercalls to enable\ninteraction with virtual devices.\n```",
+      "parentUuid": "89dede23_21b0e38a",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2ebf607_7ab1754a",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 9
