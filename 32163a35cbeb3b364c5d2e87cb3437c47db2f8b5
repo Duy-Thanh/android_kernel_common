@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75bd3d56_db6aaa8c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-10T09:45:56Z",
+      "side": 1,
+      "message": "It\u0027s not only about clock gating, the guest might need to set clocks in different operation modes, or handle some other platform specific things that are not covered by the RPM (regulators for example)",
+      "parentUuid": "e98daf33_778f2813",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
@@ -143,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0130d37d_84b86a59",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-10T09:45:56Z",
+      "side": 1,
+      "message": "Yes, I mean we can reserve more registers (4,5..)",
+      "parentUuid": "afecb3b4_0f7ed9ae",
+      "range": {
+        "startLine": 570,
+        "startChar": 5,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "835d099a_33f758db",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
@@ -178,6 +226,30 @@
       "side": 1,
       "message": "This is called by a guest so it\u0027s probably better to handle all cases? Alternatively I could just return an error to the guest.",
       "parentUuid": "835d099a_33f758db",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 22
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70470bfe_f4eaa55b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-10T09:45:56Z",
+      "side": 1,
+      "message": "I think we should just return an error, the guest shouldn\u0027t try to change the state of a device that it hasn\u0027t validated yet.",
+      "parentUuid": "017ae443_8205913b",
       "range": {
         "startLine": 575,
         "startChar": 1,
