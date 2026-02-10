@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c988b1a7_96ceb531",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-10T20:53:17Z",
+      "side": 1,
+      "message": "The `buf_offs` parameter is an arbitrary integer provided by userspace, so this `EINVAL` check is by passed if userspace provides a `buf_offs` larger than the dma buf size.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7829b8_d8028a5c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-10T20:53:17Z",
+      "side": 1,
+      "message": "Is a `dma_buf_begin_cpu_access()` missing here?",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
