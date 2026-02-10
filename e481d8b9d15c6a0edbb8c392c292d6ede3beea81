@@ -163,6 +163,64 @@
       },
       "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe80ad8_f51eb213",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-10T19:13:09Z",
+      "side": 1,
+      "message": "Should we add __read_mostly like sysctl_unprivileged_bpf_disable and also mark them static?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1cd1ad7e_65bfc1a6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/bpf/syscall.c",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "static int sysctl_bpf_disable_prog_load __read_mostly;\nstatic int sysctl_bpf_disable_prog_load_lock __read_mostly;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d91248_72c895d2",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6536,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-10T19:13:09Z",
+      "side": 1,
+      "message": "To highlight what the commit message says, with this implementation if lock is set to 1 here, while load is set to 0, load can still be written to 1. I don\u0027t know if this is the best approach as there\u0027s still some ambiguity. Can we add a custom handler that if lock is written, we update load to 1?",
+      "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
