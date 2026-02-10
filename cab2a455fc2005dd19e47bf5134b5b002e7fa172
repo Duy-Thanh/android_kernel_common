@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9247dd2_1e3002bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-10T05:46:41Z",
+      "side": 1,
+      "message": "Hi Lokesh,\n\nDid this apply cleanly? If so it should be UPSTREAM:\n\nOtherwise could you make a not of what changed in the backport.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "cab2a455fc2005dd19e47bf5134b5b002e7fa172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
