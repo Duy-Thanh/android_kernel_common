@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90808a95_f8cc6730",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T13:15:49Z",
+      "side": 1,
+      "message": "We can say IPA is an arg for the function (now PWR_ON/PWR_OFF)\n\nbut I am convinced the right way for DVFS is just to transmit a value of utilisation to the host. Just like it says power on/off for a specific device, it would send an utilisation for that very same device and then the host does what it has to do with it.\n\nThis is similar to the scheduling hint with uclamp we send. This is just an utilisation between 0 and 1024. No need to know the CPU OPP or even the topology. I don\u0027t see any reason why devfreq should be different",
+      "parentUuid": "2f10ec99_436d98e5",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
