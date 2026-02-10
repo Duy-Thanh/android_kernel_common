@@ -16,6 +16,24 @@
       "message": "This can be built as a vendor module. Why does it need to be enabled as a GKI module? (there is a possibility that this will break another partner who already uses this as a vendor module)",
       "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cd80c95_4494ede6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270831
+      },
+      "writtenOn": "2026-02-10T06:15:10Z",
+      "side": 1,
+      "message": "Hi since the module is already part of common code, we can\u0027t replicate it , is it really going to break other vendor",
+      "parentUuid": "9e53b423_a3d82d33",
+      "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
