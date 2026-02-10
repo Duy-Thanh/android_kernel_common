@@ -39,6 +39,24 @@
       "message": "gki/aarch64/symbols/xiaomi and abi.stg file changes should be done in a separate patch posted as the last one in the series.",
       "revId": "26fb46b86f659b6e30f5246f37ace2b6158d1000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7757d1ff_8fddd123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T01:46:56Z",
+      "side": 1,
+      "message": "Please move these two files into a separate patch.",
+      "parentUuid": "edadf94f_316f205f",
+      "revId": "26fb46b86f659b6e30f5246f37ace2b6158d1000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
