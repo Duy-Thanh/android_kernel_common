@@ -50912,6 +50912,11 @@ member {
   offset: 16
 }
 member {
+  id: 0x3c18de6a
+  type_id: 0x7f4d0ff1
+  offset: 384
+}
+member {
   id: 0x3c3b7173
   type_id: 0x7fc392d6
   offset: 128
@@ -55025,6 +55030,11 @@ member {
   id: 0x52dd8aff
   name: "__kabi_ignored1"
   type_id: 0x2d2f93e0
+}
+member {
+  id: 0x996ffe29
+  name: "__kabi_ignored8"
+  type_id: 0x5d8155a5
 }
 member {
   id: 0x0e6698fa
@@ -209687,6 +209697,11 @@ member {
   bitsize: 1
 }
 member {
+  id: 0xa646273c
+  name: "retry_llist"
+  type_id: 0x0bf3e543
+}
+member {
   id: 0x0e577c51
   name: "retry_long"
   type_id: 0x295c7202
@@ -269347,6 +269362,7 @@ struct_union {
     member_id: 0x89cec87f
     member_id: 0x3a0676ee
     member_id: 0x4987e167
+    member_id: 0x3c18de6a
   }
 }
 struct_union {
@@ -274407,6 +274423,15 @@ struct_union {
     bytesize: 16
     member_id: 0xa72a8895
     member_id: 0x2425b2ac
+  }
+}
+struct_union {
+  id: 0x7f4d0ff1
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xa646273c
+    member_id: 0x996ffe29
   }
 }
 struct_union {
