@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cee358d_b587ca5f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T21:24:04Z",
+      "side": 1,
+      "message": "Right. I\u0027ll post fixups as a followup patchset since the patches are already merged. Thanks!",
+      "parentUuid": "c988b1a7_96ceb531",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b7829b8_d8028a5c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2026-02-10T20:53:17Z",
       "side": 1,
       "message": "Is a `dma_buf_begin_cpu_access()` missing here?",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e596de9b_8c01e537",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T21:24:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0b7829b8_d8028a5c",
       "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
