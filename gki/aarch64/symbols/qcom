@@ -49,8 +49,8 @@
   arm_smccc_1_1_get_conduit
   arm_smccc_1_2_hvc
   arm_smccc_1_2_smc
-  __arm_smccc_smc
   arm_smccc_get_version
+  __arm_smccc_smc
   async_schedule_node
   async_synchronize_cookie
   atomic_notifier_call_chain
@@ -1057,7 +1057,6 @@
   eventfd_ctx_remove_wait_queue
   eventfd_signal_mask
   event_triggers_call
-  ext_sched_class
   extcon_get_edev_by_phandle
   extcon_get_edev_name
   extcon_get_extcon_dev
@@ -1069,6 +1068,7 @@
   extcon_set_state
   extcon_set_state_sync
   extcon_unregister_notifier
+  ext_sched_class
   fasync_helper
   fd_install
   fget
@@ -1868,8 +1868,8 @@
   mmc_regulator_set_vqmmc
   mmc_send_tuning
   __mmdrop
-  mmput
   mm_get_unmapped_area
+  mmput
   mod_delayed_work_on
   mod_node_page_state
   mod_timer
@@ -2686,6 +2686,7 @@
   round_jiffies
   round_jiffies_relative
   round_jiffies_up
+  rpmsg_get_mtu
   rpmsg_poll
   rpmsg_register_device
   rpmsg_register_device_override
@@ -3220,7 +3221,6 @@
   trace_event_reg
   trace_get_event_file
   trace_handle_return
-  __traceiter_android_rvh___set_task_cpu
   __traceiter_android_rvh_account_irq
   __traceiter_android_rvh_before_do_sched_yield
   __traceiter_android_rvh_build_perf_domains
@@ -3257,6 +3257,7 @@
   __traceiter_android_rvh_select_task_rq_fair
   __traceiter_android_rvh_select_task_rq_rt
   __traceiter_android_rvh_set_cpus_allowed_by_task
+  __traceiter_android_rvh___set_task_cpu
   __traceiter_android_rvh_set_task_cpu
   __traceiter_android_rvh_set_user_nice
   __traceiter_android_rvh_shmem_allowable_huge_orders
@@ -3283,8 +3284,6 @@
   __traceiter_android_vh_freq_qos_add_request
   __traceiter_android_vh_freq_qos_remove_request
   __traceiter_android_vh_freq_qos_update_request
-  __traceiter_android_vh_try_fixup_sea
-  __tracepoint_android_rvh___set_task_cpu
   __traceiter_android_vh_ftrace_dump_buffer
   __traceiter_android_vh_ftrace_format_check
   __traceiter_android_vh_ftrace_oops_enter
@@ -3300,6 +3299,7 @@
   __traceiter_android_vh_show_resume_epoch_val
   __traceiter_android_vh_show_suspend_epoch_val
   __traceiter_android_vh_timer_calc_index
+  __traceiter_android_vh_try_fixup_sea
   __traceiter_android_vh_ufs_check_int_errors
   __traceiter_android_vh_ufs_compl_command
   __traceiter_android_vh_ufs_send_command
@@ -3351,6 +3351,7 @@
   __tracepoint_android_rvh_select_task_rq_fair
   __tracepoint_android_rvh_select_task_rq_rt
   __tracepoint_android_rvh_set_cpus_allowed_by_task
+  __tracepoint_android_rvh___set_task_cpu
   __tracepoint_android_rvh_set_task_cpu
   __tracepoint_android_rvh_set_user_nice
   __tracepoint_android_rvh_shmem_allowable_huge_orders
@@ -3377,7 +3378,6 @@
   __tracepoint_android_vh_freq_qos_add_request
   __tracepoint_android_vh_freq_qos_remove_request
   __tracepoint_android_vh_freq_qos_update_request
-  __tracepoint_android_vh_try_fixup_sea
   __tracepoint_android_vh_ftrace_dump_buffer
   __tracepoint_android_vh_ftrace_format_check
   __tracepoint_android_vh_ftrace_oops_enter
@@ -3393,6 +3393,7 @@
   __tracepoint_android_vh_show_resume_epoch_val
   __tracepoint_android_vh_show_suspend_epoch_val
   __tracepoint_android_vh_timer_calc_index
+  __tracepoint_android_vh_try_fixup_sea
   __tracepoint_android_vh_ufs_check_int_errors
   __tracepoint_android_vh_ufs_compl_command
   __tracepoint_android_vh_ufs_send_command
@@ -3795,8 +3796,8 @@
   vmalloc_to_page
   vmalloc_to_pfn
   vmap
-  vmap_pages_range_noflush
   __vmap_pages_range_noflush
+  vmap_pages_range_noflush
   vmemdup_user
   vmf_insert_mixed
   vmf_insert_pfn
