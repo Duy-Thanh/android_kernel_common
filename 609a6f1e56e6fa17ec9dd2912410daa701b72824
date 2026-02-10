@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4379386c_3c965810",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/emulate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T10:33:21Z",
+      "side": 1,
+      "message": "MAYBE: squash this patch in the first one which adds the base support",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 46
+      },
+      "revId": "609a6f1e56e6fa17ec9dd2912410daa701b72824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c712ca_4055900b",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/its.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T10:33:21Z",
+      "side": 1,
+      "message": "Check the size to be u64, if we do a short or a byte access we don\u0027t want to R/W 8byte word",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "609a6f1e56e6fa17ec9dd2912410daa701b72824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
