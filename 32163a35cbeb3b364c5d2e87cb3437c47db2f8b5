@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4a09343_ece7145f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-02-10T13:19:10Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t see any reason why devfreq should be different\n\nOne aspect worth mentioning (although I believe I agree with you overall) is the fact that it will most likely be the same driver running on both the host and guest so such abstraction would mean that vendors need to maintain 2 sets of OPP (physical \u0026 abstract/virtual) but I\u0027m not sure how much of an issue that is.\n\nIt might actually be better in case host \u0026 guests need the different tables because the respective underlying mechanisms for OPP transitions have different latencies...?",
+      "parentUuid": "90808a95_f8cc6730",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
