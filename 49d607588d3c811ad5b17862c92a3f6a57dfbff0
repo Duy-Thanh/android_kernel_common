@@ -34,6 +34,24 @@
       "parentUuid": "9e53b423_a3d82d33",
       "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8aa1c2e_becd131f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-10T19:20:34Z",
+      "side": 1,
+      "message": "Sorry, we will not enable this in GKI. You must enable it as a vendor modules. Even if it doesn\u0027t break other partners, it adds to the size of everyone\u0027s vmlinux if it is built-in. If there is no valid reason, then it won\u0027t be enabled.",
+      "parentUuid": "9cd80c95_4494ede6",
+      "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
