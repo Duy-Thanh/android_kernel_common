@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32286642_8d14c184",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T13:25:27Z",
+      "side": 1,
+      "message": "That would mean we would need to plug the virtual device at the clk and regul and the devfreq driver from the host must be unbind and can\u0027t be shared with another non-assigned device.",
+      "parentUuid": "a31b6ca1_c770bc8f",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
