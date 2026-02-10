@@ -1,0 +1,341 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1600bc27_8048846a",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/emulate.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "Can we get `reg_size !\u003d sizeof(u64)` ? In this case we don\u0027t want to read/write an 8 byte word",
+      "range": {
+        "startLine": 96,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 9
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26774a65_6ea9ce7f",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/emulate.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "MAYBE: Include this as part of the first patch `\"Add infra for trap \u0026 emulate\"`",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea620804_2ceb1512",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "Ugh, this is costly. If we only verify memory (not MMIO), does it make sense to check that the memory is pinned ?",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6482f27f_9624b604",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "At the time of check the memory can be owned by the host but a sub-sequent call can donate it to something else. (eg. a pVM for example).",
+      "range": {
+        "startLine": 152,
+        "startChar": 7,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f404b0_cd960569",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "This updates the cached value of it but where do we propagate the write to the hardware ? (same question for pendbaser)",
+      "range": {
+        "startLine": 158,
+        "startChar": 1,
+        "endLine": 158,
+        "endChar": 29
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be764ede_c4564ab3",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "Prevent the memory from `pendbaser` from being given to someone else",
+      "range": {
+        "startLine": 183,
+        "startChar": 7,
+        "endLine": 183,
+        "endChar": 22
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fde1205d_d9438f2a",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "They do share the same property table, so this should be %s/propbaser ?",
+      "range": {
+        "startLine": 221,
+        "startChar": 19,
+        "endLine": 221,
+        "endChar": 28
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae789d41_dda601e7",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "Q: I think we only need to share the pending table. Why do we share this ?",
+      "range": {
+        "startLine": 257,
+        "startChar": 2,
+        "endLine": 257,
+        "endChar": 28
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93779141_ba8a5b87",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "We also need to pin the memory with `hyp_pin_shared_mem`",
+      "range": {
+        "startLine": 266,
+        "startChar": 7,
+        "endLine": 266,
+        "endChar": 27
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82587d2_c9877e37",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "MAYBE: Move these checks in the caller of this function and append `_locked` to the name of this function",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 489,
+        "endChar": 17
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a477b94b_7c0107b7",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "MAYBE: Move the lock/unlock outside of the function in the caller",
+      "range": {
+        "startLine": 491,
+        "startChar": 1,
+        "endLine": 491,
+        "endChar": 29
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd00883_9e7d4b77",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "BUG: Check for OOB when using `redist_dev_count` as an index",
+      "range": {
+        "startLine": 501,
+        "startChar": 22,
+        "endLine": 501,
+        "endChar": 38
+      },
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2664dedb_a6ec091e",
+        "filename": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-02-10T12:35:22Z",
+      "side": 1,
+      "message": "Increment it only on success from `redist_protect_locked` and drop this",
+      "range": {
+        "startLine": 509,
+        "startChar": 3,
+        "endLine": 509,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4b2052ec_07d66413",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+              "range": {
+                "startLine": 502,
+                "startChar": 0,
+                "endLine": 503,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+              "range": {
+                "startLine": 509,
+                "startChar": 0,
+                "endLine": 510,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/irqchip/gic-v3-its-pkvm/hyp/gicr.c",
+              "range": {
+                "startLine": 512,
+                "startChar": 0,
+                "endLine": 512,
+                "endChar": 0
+              },
+              "replacement": "\t\tredist_dev_count++;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0aaacddbc414f699077385f258f9c10bf907bf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
