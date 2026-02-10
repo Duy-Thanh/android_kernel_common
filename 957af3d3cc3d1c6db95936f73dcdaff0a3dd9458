@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0d06dc6_3f7a5fa1",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-10T22:23:33Z",
+      "side": 1,
+      "message": "This is an arbitrary user-provided dmabuf, so the pages may not be backed by a `struct page`. It\u0027s not legal to call `sg_page()` in this circumstance.",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c988b1a7_96ceb531",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 5
@@ -79,6 +96,29 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "0b7829b8_d8028a5c",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b85551e1_f0b2121a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-10T22:23:33Z",
+      "side": 1,
+      "message": "If `vfs_iocb_iter_read` returns EOF before reaching `file_offs + len`, then the remainder of the dmabuf is never filled out and uninit bytes may be exposed to the end-user. An early EOF should probably lead to an error or zeroing the memory.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 9
+      },
       "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
