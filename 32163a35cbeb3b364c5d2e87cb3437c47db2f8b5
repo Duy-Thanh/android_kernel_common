@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89200bd8_2856bec8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T13:27:29Z",
+      "side": 1,
+      "message": "Also... I wonder how devfreq_cooling would work and that would mean the host couldn\u0027t set a devfreq policy.",
+      "parentUuid": "32286642_8d14c184",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
