@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "accb0af5_eec2c502",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-10T22:15:09Z",
+      "side": 1,
+      "message": "In android-mainline, we wait for the patch to land and merge naturally",
+      "revId": "835395e7e030b26fa387a6285c84bcec6ed084d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
