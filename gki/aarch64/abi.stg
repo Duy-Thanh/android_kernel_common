@@ -410957,6 +410957,15 @@ elf_symbol {
   full_name: "rpmsg_find_device"
 }
 elf_symbol {
+  id: 0x006a385d
+  name: "rpmsg_get_mtu"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb8dddbb5
+  type_id: 0x1ba136c5
+  full_name: "rpmsg_get_mtu"
+}
+elf_symbol {
   id: 0x1bdc5aa0
   name: "rpmsg_poll"
   is_defined: true
@@ -432531,6 +432540,7 @@ interface {
   symbol_id: 0xa3ee1393
   symbol_id: 0x492407e0
   symbol_id: 0x988f4d92
+  symbol_id: 0x006a385d
   symbol_id: 0x1bdc5aa0
   symbol_id: 0x8b5859cf
   symbol_id: 0x7c2a2a37
