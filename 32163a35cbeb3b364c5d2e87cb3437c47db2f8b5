@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a31b6ca1_c770bc8f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T13:21:08Z",
+      "side": 1,
+      "message": "Hum, indeed, reading a devfreq driver quickly it seems we have to reason with OPPs which is a shame.",
+      "parentUuid": "b4a09343_ece7145f",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
