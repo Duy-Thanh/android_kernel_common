@@ -39,6 +39,30 @@
       },
       "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c4490a_46ff06fe",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4697,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2026-02-10T06:09:35Z",
+      "side": 1,
+      "message": "Thank you for your suggestion. We originally planned to exclude the stop scheduling class from trace_android_vh_setscheduler_class, which would have the same effect as e61f636cc310 you mentioned. In addition, we will have other scheduling class control strategies in trace_android_vh_setscheduler_class.",
+      "parentUuid": "72861e18_aa474454",
+      "range": {
+        "startLine": 4697,
+        "startChar": 39,
+        "endLine": 4697,
+        "endChar": 48
+      },
+      "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
