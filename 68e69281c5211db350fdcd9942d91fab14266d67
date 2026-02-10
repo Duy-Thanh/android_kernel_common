@@ -449,6 +449,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2394e7c5_9f9f058c",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2026-02-10T22:29:16Z",
+      "side": 1,
+      "message": "+1 to Kalesh\u0027s suggestion!",
+      "parentUuid": "b6826924_60f5d1a9",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
