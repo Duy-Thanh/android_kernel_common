@@ -401,6 +401,30 @@
       },
       "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d74f92_c0b65c2a",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-10T06:07:34Z",
+      "side": 1,
+      "message": "Hi @maze@google.com,\n\nI know a lot of folks use `bpftrace` and other tools like `funclatency` for debugging issues in userdebug builds.\n\nI\u0027d prefer if we can have the single fuse for the user build, but still be able to load debug tools on userbuilds without knowledge of the toggle.\n\nFor testing on debug builds, we could have a VTS test that runs as root to set the fuse and check that bpf loading fails, then reboot the device. On user builds it simply checks that loading fails (also with root)\n\nDoes that work?",
+      "parentUuid": "c9fbfecf_d759bc44",
+      "range": {
+        "startLine": 6529,
+        "startChar": 0,
+        "endLine": 6530,
+        "endChar": 24
+      },
+      "revId": "68e69281c5211db350fdcd9942d91fab14266d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
