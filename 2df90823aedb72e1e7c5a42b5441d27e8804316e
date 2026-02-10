@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89dede23_21b0e38a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-10T10:01:06Z",
+      "side": 1,
+      "message": "`ARM_PKVM_GUEST` seems to have core functionality for pKVM guests, I think having power there will pollute it, especially that this is likely to grow.\nI think separate config is also appropriate, as some guests might not want that even if the code is small. No really strong opinion, we can discuss this further maybe in one of our weekly meetings.",
+      "parentUuid": "e80e3240_e5b39250",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 20
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2ebf607_7ab1754a",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 9
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I believe the only reason to share the virtual power domain would be to save N HVCs per off/on where the power domain is shared by N + 1 devices. \n\nWe can look into it if there are some performance issues, but compared to the added complexity for crosvm and pvmfw (and this driver) I\u0027m not convinced this is worth supporting now.",
       "parentUuid": "c2ebf607_7ab1754a",
+      "range": {
+        "startLine": 216,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e423dd47_1ccce9b1",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-10T10:01:06Z",
+      "side": 1,
+      "message": "@ptosi@google.com made a point about matching virtual and physical topologies, I don\u0027t thin we should support it now, but we should have a plan for it as it might be needed.",
+      "parentUuid": "b3d5a3a6_f2bb9b48",
       "range": {
         "startLine": 216,
         "startChar": 1,
