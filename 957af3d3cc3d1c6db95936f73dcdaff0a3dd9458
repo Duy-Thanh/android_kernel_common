@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b96c719f_860bd285",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T22:43:16Z",
+      "side": 1,
+      "message": "Correct. Once we have the upstream solution for loading file into dmabuf directly (see links in the first patch of this patchset) we will replace this code that assumes the memory is backed by pages.",
+      "parentUuid": "f0d06dc6_3f7a5fa1",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c988b1a7_96ceb531",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 5
@@ -125,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6e5be86_923051ec",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T22:43:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b85551e1_f0b2121a",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88516783_8c0ba73a",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 5
@@ -136,6 +178,24 @@
       "writtenOn": "2026-02-10T21:55:12Z",
       "side": 1,
       "message": "Since `VM_DONTCOPY` is missing, this leads to UAF via fork.\n\nWhen you fork with a vma that does not define a `vm_ops-\u003eopen`, the private data is just duplicated without notifying the driver. Since `vm_ops-\u003eclose` cleans up the vma private data, this means that the other half of the fork will retain a broken vma, and any use of it leads to UAF.",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b45fa5_a440114d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-10T22:43:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88516783_8c0ba73a",
       "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
