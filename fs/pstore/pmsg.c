@@ -6,10 +6,15 @@
 #include <linux/cdev.h>
 #include <linux/device.h>
 #include <linux/fs.h>
+#include <linux/rtmutex.h>
 #include <linux/uaccess.h>
 #include "internal.h"
 
+#ifdef CONFIG_RT_MUTEXES
+static DEFINE_RT_MUTEX(pmsg_lock);
+#else
 static DEFINE_MUTEX(pmsg_lock);
+#endif
 
 static ssize_t write_pmsg(struct file *file, const char __user *buf,
 			  size_t count, loff_t *ppos)
@@ -27,10 +32,17 @@ static ssize_t write_pmsg(struct file *file, const char __user *buf,
 	/* check outside lock, page in any data. write_user also checks */
 	if (!access_ok(buf, count))
 		return -EFAULT;
-
+#ifdef CONFIG_RT_MUTEXES
+	rt_mutex_lock(&pmsg_lock);
+#else
 	mutex_lock(&pmsg_lock);
+#endif
 	ret = psinfo->write_user(&record, buf);
+#ifdef CONFIG_RT_MUTEXES
+	rt_mutex_unlock(&pmsg_lock);
+#else
 	mutex_unlock(&pmsg_lock);
+#endif
 	return ret ? ret : count;
 }
 
