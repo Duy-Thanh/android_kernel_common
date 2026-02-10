@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f10ec99_436d98e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2026-02-10T12:58:09Z",
+      "side": 1,
+      "message": "Makes sense to me, I\u0027ll update the corresponding HVC handler in CrosVM once we\u0027ve decided on an ABI. Note that this will need to be manually cherry-picked into Android, as they\u0027ve stopped the regular merges until the release, AFAIU. So the earlier we make the change, the better!",
+      "parentUuid": "75bd3d56_db6aaa8c",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e8f880_e9d208b6",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
