@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66b493a8_058d1726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-10T17:06:39Z",
+      "side": 1,
+      "message": "Re: root issue,\n\nMicrosoft\u0027s first attempt at my proposal: \nhttps://lore.kernel.org/bpf/87ldvi47gp.fsf@microsoft.com/\n\nAlexei\u0027s rejection (again)\nhttps://lore.kernel.org/bpf/CAADnVQLxgD_7GYWZZ49aY2LqVYOy4uGvK2ikm7MJ1Cj60VPNaw@mail.gmail.com/\n\n\nhttps://lore.kernel.org/linux-security-module/CAHC9VhTQ_DR\u003dANzoDBjcCtrimV7XcCZVUsANPt\u003dTjcvM4d-vjg@mail.gmail.com/\n\nAnd Microsoft\u0027s latest iteration which has once again been rejected.\n\nhttps://lore.kernel.org/bpf/20251211021257.1208712-1-bboscaccy@linux.microsoft.com/\n\nBoth this approach and the BPF maintainer\u0027s mechanism all rely on the use of Lskel, which afaik, is not a viable solution for us.\n\nAnd with regards to using BPF_LSM programs for this specific lockdown use case, see https://android-review.git.corp.google.com/c/kernel/common/+/3937954/comment/1e85cbef_dc774c94/",
+      "parentUuid": "66416b8f_f6a6a4d2",
+      "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f1cc376_c6bb1dd3",
         "filename": "Documentation/admin-guide/sysctl/kernel.rst",
         "patchSetId": 5
