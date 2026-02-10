@@ -28,6 +28,7 @@
 
 static void virtio_transport_cancel_close_work(struct vsock_sock *vsk,
 					       bool cancel_timeout);
+static s64 virtio_transport_has_space(struct virtio_vsock_sock *vvs);
 
 uint virtio_transport_max_vsock_pkt_buf_size = 64 * 1024;
 module_param(virtio_transport_max_vsock_pkt_buf_size, uint, 0444);
@@ -276,9 +277,7 @@ u32 virtio_transport_get_credit(struct virtio_vsock_sock *vvs, u32 credit)
 	u32 ret;
 
 	spin_lock_bh(&vvs->tx_lock);
-	ret = vvs->peer_buf_alloc - (vvs->tx_cnt - vvs->peer_fwd_cnt);
-	if (ret > credit)
-		ret = credit;
+	ret = min_t(u32, credit, virtio_transport_has_space(vvs));
 	vvs->tx_cnt += ret;
 	spin_unlock_bh(&vvs->tx_lock);
 
@@ -574,11 +573,14 @@ u32 virtio_transport_seqpacket_has_data(struct vsock_sock *vsk)
 }
 EXPORT_SYMBOL_GPL(virtio_transport_seqpacket_has_data);
 
-static s64 virtio_transport_has_space(struct vsock_sock *vsk)
+static s64 virtio_transport_has_space(struct virtio_vsock_sock *vvs)
 {
-	struct virtio_vsock_sock *vvs = vsk->trans;
 	s64 bytes;
 
+	/* Use s64 arithmetic so if the peer shrinks peer_buf_alloc while
+	 * we have bytes in flight (tx_cnt - peer_fwd_cnt), the subtraction
+	 * does not underflow.
+	 */
 	bytes = (s64)vvs->peer_buf_alloc - (vvs->tx_cnt - vvs->peer_fwd_cnt);
 	if (bytes < 0)
 		bytes = 0;
@@ -592,7 +594,7 @@ s64 virtio_transport_stream_has_space(struct vsock_sock *vsk)
 	s64 bytes;
 
 	spin_lock_bh(&vvs->tx_lock);
-	bytes = virtio_transport_has_space(vsk);
+	bytes = virtio_transport_has_space(vvs);
 	spin_unlock_bh(&vvs->tx_lock);
 
 	return bytes;
@@ -1183,9 +1185,19 @@ static bool virtio_transport_space_update(struct sock *sk,
 
 	/* buf_alloc and fwd_cnt is always included in the hdr */
 	spin_lock_bh(&vvs->tx_lock);
+<<<<<<< HEAD   (691e6b59d26854f342dab2df1c2a3cf71a40426b Revert "posix-clock: introduce posix_clock_context concept")
 	vvs->peer_buf_alloc = le32_to_cpu(pkt->hdr.buf_alloc);
 	vvs->peer_fwd_cnt = le32_to_cpu(pkt->hdr.fwd_cnt);
 	space_available = virtio_transport_has_space(vsk);
+||||||| BASE   (4c811259d84d5fd86ac79407dcba665d15ade4d3 octeontx2-af: Fix error handling)
+	vvs->peer_buf_alloc = le32_to_cpu(hdr->buf_alloc);
+	vvs->peer_fwd_cnt = le32_to_cpu(hdr->fwd_cnt);
+	space_available = virtio_transport_has_space(vsk);
+=======
+	vvs->peer_buf_alloc = le32_to_cpu(hdr->buf_alloc);
+	vvs->peer_fwd_cnt = le32_to_cpu(hdr->fwd_cnt);
+	space_available = virtio_transport_has_space(vvs);
+>>>>>>> BRANCH (d96de882d6b99955604669d962ae14e94b66a551 vsock/virtio: fix potential underflow in virtio_transport_ge)
 	spin_unlock_bh(&vvs->tx_lock);
 	return space_available;
 }
