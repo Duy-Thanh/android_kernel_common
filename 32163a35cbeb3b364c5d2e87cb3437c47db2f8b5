@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac3e55b3_35bfa554",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T17:36:43Z",
+      "side": 1,
+      "message": "That isn\u0027t a big patch :) \n\nSure I can do only with pkvm_get_device_by_addr(). However it will be slightly less optimal as we will have to iterate over all resources before we pass to the next device!",
+      "parentUuid": "81bae2b2_e748e5dc",
+      "range": {
+        "startLine": 287,
+        "startChar": 27,
+        "endLine": 287,
+        "endChar": 53
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30de093e_a2be9733",
         "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2026-02-08T10:58:53Z",
       "side": 1,
       "message": "May be just `ret \u003d -EINVAL` instead and remove the check at return",
+      "range": {
+        "startLine": 557,
+        "startChar": 2,
+        "endLine": 557,
+        "endChar": 13
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7434edb4_8a019535",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T17:36:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30de093e_a2be9733",
       "range": {
         "startLine": 557,
         "startChar": 2,
@@ -333,6 +381,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a4325e_a8dd85be",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T17:36:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0130d37d_84b86a59",
+      "range": {
+        "startLine": 570,
+        "startChar": 5,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "835d099a_33f758db",
@@ -394,6 +466,30 @@
       "side": 1,
       "message": "I think we should just return an error, the guest shouldn\u0027t try to change the state of a device that it hasn\u0027t validated yet.",
       "parentUuid": "017ae443_8205913b",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 575,
+        "endChar": 22
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d08d6f_300422fb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-10T17:36:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70470bfe_f4eaa55b",
       "range": {
         "startLine": 575,
         "startChar": 1,
