@@ -54,6 +54,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d910f090_de540cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-10T16:19:46Z",
+      "side": 1,
+      "message": "This is not preventing the use of sched_ext, we just want partners to abide by Android\u0027s security policy and load the bpf programs prior to network coming up.",
+      "parentUuid": "74e0f815_e2f52f24",
+      "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8379a94d_9cdabf26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-10T16:19:46Z",
+      "side": 1,
+      "message": "Per the commit message, was rejected upstream: \n\nLink: https://patchwork.kernel.org/project/netdevbpf/patch/20251231232048.2860014-1-maze@google.com/",
+      "parentUuid": "0b5882cd_8bb02650",
+      "revId": "e481d8b9d15c6a0edbb8c392c292d6ede3beea81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f1cc376_c6bb1dd3",
         "filename": "Documentation/admin-guide/sysctl/kernel.rst",
         "patchSetId": 5
