@@ -738,7 +738,7 @@ static int __init finalize_pkvm(void)
 
 	return 0;
 }
-device_initcall_sync(finalize_pkvm);
+rootfs_initcall(finalize_pkvm);
 
 void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 {
