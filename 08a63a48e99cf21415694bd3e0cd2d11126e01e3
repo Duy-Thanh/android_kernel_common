@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c6eac6_21dd6bc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-11T05:12:14Z",
+      "side": 1,
+      "message": "This needs to have the UPSTREAM: tag. See details here on how to format the submission: https://android.googlesource.com/kernel/common/#requirements-for-backports-from-mainline-linux",
+      "revId": "08a63a48e99cf21415694bd3e0cd2d11126e01e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
