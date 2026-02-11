@@ -11,6 +11,7 @@
 #include <linux/interval_tree_generic.h>
 #include <linux/io.h>
 #include <linux/iommu.h>
+#include <linux/irqchip/arm-gic-v3.h>
 #include <linux/kmemleak.h>
 #include <linux/kvm_host.h>
 #include <asm/kvm_mmu.h>
@@ -179,6 +180,44 @@ static int __init register_moveable_fdt_resource(struct device_node *np,
 	return 0;
 }
 
+static int __init register_its_emulated_region(void)
+{
+	int ret = 0, i = kvm_nvhe_sym(pkvm_moveable_regs_nr);
+	struct device_node *np;
+	struct resource res;
+
+	for_each_compatible_node(np, NULL, "arm,gic-v3-its") {
+		ret = of_address_to_resource(np, 0, &res);
+		if (ret)
+			return ret;
+
+		if (i >= PKVM_NR_MOVEABLE_REGS) {
+			ret = -ENOMEM;
+			goto out_fail;
+		}
+
+		if (!PAGE_ALIGNED(res.start) || !PAGE_ALIGNED(resource_size(&res))) {
+			ret = -EINVAL;
+			goto out_fail;
+		}
+
+		moveable_regs[i].start = res.start;
+		moveable_regs[i].type = PKVM_MREG_EMULATE_MMIO;
+		moveable_regs[i].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+		moveable_regs[i].size = min_t(u64, resource_size(&res),
+					      PAGE_ALIGN_DOWN(GITS_TRANSLATER));
+		i++;
+	}
+	kvm_nvhe_sym(pkvm_moveable_regs_nr) = i;
+	return i;
+out_fail:
+	of_node_put(np);
+	kvm_nvhe_sym(pkvm_moveable_regs_nr) = 0;
+	return ret;
+}
+
+DEFINE_STATIC_KEY_FALSE(kvm_its_hardening);
+
 static int __init register_moveable_regions(void)
 {
 	struct memblock_region *reg;
@@ -194,6 +233,12 @@ static int __init register_moveable_regions(void)
 		i++;
 	}
 	kvm_nvhe_sym(pkvm_moveable_regs_nr) = i;
+
+	if (static_branch_unlikely(&kvm_its_hardening)) {
+		ret = register_its_emulated_region();
+		if (ret < 0)
+			return ret;
+	}
 
 	for_each_compatible_node(np, NULL, "pkvm,protected-region") {
 		ret = register_moveable_fdt_resource(np, PKVM_MREG_PROTECTED_RANGE);
@@ -1923,3 +1968,11 @@ static int early_ffa_unmap_on_lend_cfg(char *arg)
 }
 
 early_param("kvm-arm.ffa-unmap-on-lend", early_ffa_unmap_on_lend_cfg);
+
+static int early_its_hardening_cfg(char *arg)
+{
+	static_branch_enable(&kvm_its_hardening);
+	return 0;
+}
+
+early_param("kvm-arm.its_hardening", early_its_hardening_cfg);

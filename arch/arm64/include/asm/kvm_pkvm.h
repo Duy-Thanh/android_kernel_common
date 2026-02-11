@@ -316,6 +316,8 @@ struct pkvm_moveable_reg {
 #define PKVM_NR_MOVEABLE_REGS 512
 extern struct pkvm_moveable_reg kvm_nvhe_sym(pkvm_moveable_regs)[];
 extern unsigned int kvm_nvhe_sym(pkvm_moveable_regs_nr);
+extern void kvm_nvhe_sym(pkvm_handle_forward_req)(struct pkvm_moveable_reg *region, u64 offset,
+						  bool write, u64 *reg, u8 reg_size);
 
 extern struct memblock_region kvm_nvhe_sym(hyp_memory)[];
 extern unsigned int kvm_nvhe_sym(hyp_memblock_nr);
