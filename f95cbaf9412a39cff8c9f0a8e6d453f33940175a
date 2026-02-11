@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da958afe_ec1360c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-02-11T14:38:46Z",
+      "side": 1,
+      "message": "Needs a `cherry picked from commit ...` line.\n\nDid you use `git cherry-pick -x`?",
+      "revId": "f95cbaf9412a39cff8c9f0a8e6d453f33940175a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
