@@ -63,6 +63,30 @@
       },
       "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c1f7e9_aef89b10",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4697,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2026-02-11T02:48:24Z",
+      "side": 1,
+      "message": "Done, I have cherry-picked the patch you provided to the current branch and rebaseed the current patch to this patch.\nhttps://android-review.googlesource.com/c/kernel/common/+/3947540",
+      "parentUuid": "40c4490a_46ff06fe",
+      "range": {
+        "startLine": 4697,
+        "startChar": 39,
+        "endLine": 4697,
+        "endChar": 48
+      },
+      "revId": "a2c2ae61ca8e1e3a47d48c3142d32515b0985e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
