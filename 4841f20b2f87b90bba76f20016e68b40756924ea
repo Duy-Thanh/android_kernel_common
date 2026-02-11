@@ -16,6 +16,23 @@
       "message": "Gentle ping to owners, Will and Giuliano.",
       "revId": "4841f20b2f87b90bba76f20016e68b40756924ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db33164_1a9c76ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-02-11T13:41:51Z",
+      "side": 1,
+      "message": "+1\u0027d as this fixes an issue, but I\u0027m doubtful that this will scale in the longer term as SVE is just one example. We should probably aim towards a world where the guest binaries can be built with different flags from the host...",
+      "revId": "4841f20b2f87b90bba76f20016e68b40756924ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
