@@ -325,6 +325,25 @@ static int fix_hyp_pgtable_refcnt(void)
 				&walker);
 }
 
+static int unmap_emulated_mmio(struct pkvm_moveable_reg *reg)
+{
+	unsigned long start_pfn = reg->start >> PAGE_SHIFT;
+	unsigned long nr_pages = reg->size >> PAGE_SHIFT;
+	unsigned long i;
+	int ret;
+
+	for (i = 0; i < nr_pages; i++) {
+		ret = __pkvm_host_donate_hyp_mmio(start_pfn + i);
+		if (ret)
+			goto err_setup;
+	}
+	return 0;
+err_setup:
+	for (i = i - 1; i >= 0; i--)
+		__pkvm_hyp_donate_host_mmio(start_pfn + i);
+	return ret;
+}
+
 static int unmap_protected_regions(void)
 {
 	struct pkvm_moveable_reg *reg;
@@ -332,11 +351,19 @@ static int unmap_protected_regions(void)
 
 	for (i = 0; i < pkvm_moveable_regs_nr; i++) {
 		reg = &pkvm_moveable_regs[i];
-		if (reg->type != PKVM_MREG_PROTECTED_RANGE)
-			continue;
 
-		ret = host_stage2_set_owner_locked(reg->start, reg->size,
-						   PKVM_ID_PROTECTED);
+		switch (reg->type) {
+		case PKVM_MREG_PROTECTED_RANGE:
+			ret = host_stage2_set_owner_locked(
+				reg->start, reg->size, PKVM_ID_PROTECTED);
+			break;
+		case PKVM_MREG_EMULATE_MMIO:
+			ret = unmap_emulated_mmio(reg);
+			break;
+		default:
+			continue;
+		}
+
 		if (ret)
 			return ret;
 	}
