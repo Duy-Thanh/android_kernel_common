@@ -115,6 +115,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 {
 	struct wrap_content_dmabuf *dmabuf_content;
 	struct dma_buf_attachment *attachment;
+	unsigned long bytes_read = 0;
 	unsigned int bvec_size;
 	struct sg_table *sgtbl;
 	struct bio_vec *bvec;
@@ -125,7 +126,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
 				      content);
 
-	if (file_offs + len > dmabuf_content->dmabuf->size - buf_offs)
+	if (buf_offs + len > dmabuf_content->dmabuf->size)
 		return -EINVAL;
 
 	attachment = dma_buf_attach(dmabuf_content->dmabuf,
@@ -162,6 +163,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 		ret = vfs_iocb_iter_read(file, &kiocb, &iter);
 		if (ret <= 0)
 			break;
+		bytes_read += ret;
 	}
 	dma_buf_end_cpu_access(dmabuf_content->dmabuf, DMA_FROM_DEVICE);
 err_free:
@@ -171,7 +173,13 @@ err_unmap:
 err_detach:
 	dma_buf_detach(dmabuf_content->dmabuf, attachment);
 
-	return ret < 0 ? ret : 0;
+	if (ret < 0)
+		return ret;
+
+	if  (bytes_read < len)
+		return -EINVAL;
+
+	return 0;
 }
 
 static int dmabuf_content_mmap_prepare(struct wrap_content *content,
