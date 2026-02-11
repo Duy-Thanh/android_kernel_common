@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5fc07b_12e464dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-11T23:16:18Z",
+      "side": 1,
+      "message": "s/Tread/Treat",
+      "range": {
+        "startLine": 12,
+        "startChar": 36,
+        "endLine": 12,
+        "endChar": 41
+      },
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030eb6dd_0b670073",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-11T23:16:18Z",
+      "side": 1,
+      "message": "nit: should just be one space",
+      "range": {
+        "startLine": 179,
+        "startChar": 3,
+        "endLine": 179,
+        "endChar": 5
+      },
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
