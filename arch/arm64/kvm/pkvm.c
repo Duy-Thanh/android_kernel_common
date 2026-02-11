@@ -11,6 +11,7 @@
 #include <linux/interval_tree_generic.h>
 #include <linux/io.h>
 #include <linux/iommu.h>
+#include <linux/irqchip/arm-gic-v3.h>
 #include <linux/kmemleak.h>
 #include <linux/kvm_host.h>
 #include <asm/kvm_mmu.h>
@@ -183,6 +184,7 @@ static int __init register_moveable_regions(void)
 {
 	struct memblock_region *reg;
 	struct device_node *np;
+	struct resource res;
 	int i = 0, ret = 0, idx = 0;
 
 	for_each_mem_region(reg) {
@@ -191,6 +193,30 @@ static int __init register_moveable_regions(void)
 		moveable_regs[i].start = reg->base;
 		moveable_regs[i].size = reg->size;
 		moveable_regs[i].type = PKVM_MREG_MEMORY;
+		i++;
+	}
+	kvm_nvhe_sym(pkvm_moveable_regs_nr) = i;
+
+	for_each_compatible_node(np, NULL, "arm,gic-v3-its") {
+		ret = of_address_to_resource(np, 0, &res);
+		if (ret)
+			return ret;
+
+		if (i >= PKVM_NR_MOVEABLE_REGS) {
+			ret = -ENOMEM;
+			goto out_fail;
+		}
+
+		if (!PAGE_ALIGNED(res.start) || !PAGE_ALIGNED(resource_size(&res))) {
+			ret = -EINVAL;
+			goto out_fail;
+		}
+
+		moveable_regs[i].start = res.start;
+		moveable_regs[i].type = PKVM_MREG_EMULATE_MMIO;
+		moveable_regs[i].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+		moveable_regs[i].size = min_t(u64, resource_size(&res),
+					      PAGE_ALIGN_DOWN(GITS_TRANSLATER));
 		i++;
 	}
 	kvm_nvhe_sym(pkvm_moveable_regs_nr) = i;
