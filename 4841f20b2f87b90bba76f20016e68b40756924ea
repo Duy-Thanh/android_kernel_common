@@ -33,6 +33,24 @@
       "message": "+1\u0027d as this fixes an issue, but I\u0027m doubtful that this will scale in the longer term as SVE is just one example. We should probably aim towards a world where the guest binaries can be built with different flags from the host...",
       "revId": "4841f20b2f87b90bba76f20016e68b40756924ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4eacd6_864fd7b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2026-02-11T14:03:03Z",
+      "side": 1,
+      "message": "that\u0027s true, but guests wouldn\u0027t ask more than what host can provide. so, if we are very proactive, we can build the guest kernel with all flags that host kernel has.",
+      "parentUuid": "2db33164_1a9c76ac",
+      "revId": "4841f20b2f87b90bba76f20016e68b40756924ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
