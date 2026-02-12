@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb469a74_354c8c0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-12T08:25:41Z",
+      "side": 1,
+      "message": "Remove the \"commit xxx upstream\" line from the message, let me know it\u0027s ok or not.",
+      "parentUuid": "3aab0569_9a1fd26d",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 68
+      },
+      "revId": "4aaa6314a6af5975a86c74d27f268abe9d9dfd69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef9ec659_674a2608",
