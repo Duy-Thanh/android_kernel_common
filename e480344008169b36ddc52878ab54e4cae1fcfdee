@@ -34,6 +34,24 @@
       "parentUuid": "0bbdc0d2_6c027fb3",
       "revId": "e480344008169b36ddc52878ab54e4cae1fcfdee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d142279_2347dfbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2026-02-12T07:10:58Z",
+      "side": 1,
+      "message": "Done, I rebased the symbols patch(https://android-review.googlesource.com/c/kernel/common/+/3939674) on the top of the current patch.",
+      "parentUuid": "ea0d4af1_bc17e6e8",
+      "revId": "e480344008169b36ddc52878ab54e4cae1fcfdee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
