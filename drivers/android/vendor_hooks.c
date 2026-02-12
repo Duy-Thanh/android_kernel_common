@@ -514,9 +514,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+<<<<<<< PATCH SET (3f983609e83ff596be6255eef434cb6cb09c5fac ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+||||||| BASE      (299d5eca2e4a24cd1681c1df2d963b69121adf7d Revert^2 "ANDROID: GKI: update symbol list file for xiaomi")
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+>>>>>>> BASE      (ddd5813c91fcc9cd0c7723d7869163944514329a Merge tag 'android14-6.1.166_r00' into android14-6.1)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);

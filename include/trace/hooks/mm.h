@@ -353,6 +353,22 @@ DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
 		struct per_cpu_pages *pcp, struct page *page, int migratetype,
 		unsigned int order),
 	TP_ARGS(zone, pad, pcp, page, migratetype, order));
+<<<<<<< PATCH SET (3f983609e83ff596be6255eef434cb6cb09c5fac ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start, int result),
+	TP_ARGS(folio, swapin_start, result));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, struct writeback_control *wbc,
+		unsigned long swap_writepage_start, int result),
+	TP_ARGS(page, wbc, swap_writepage_start, result));
+||||||| BASE      (299d5eca2e4a24cd1681c1df2d963b69121adf7d Revert^2 "ANDROID: GKI: update symbol list file for xiaomi")
+=======
 DECLARE_HOOK(android_vh_task_mem,
 	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
 	TP_ARGS(m, mm));
@@ -362,6 +378,7 @@ DECLARE_HOOK(android_vh_mm_free,
 DECLARE_HOOK(android_vh_mm_init,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+>>>>>>> BASE      (ddd5813c91fcc9cd0c7723d7869163944514329a Merge tag 'android14-6.1.166_r00' into android14-6.1)
 DECLARE_HOOK(android_vh_alloc_pages_start,
 	TP_PROTO(u64 *stime),
 	TP_ARGS(stime));
