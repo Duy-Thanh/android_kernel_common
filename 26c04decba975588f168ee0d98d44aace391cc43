@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80565f19_f1af58be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-12T07:14:38Z",
+      "side": 1,
+      "message": "I do not see that commit in this branch, so why is it relevant here?  This is a 6.18-only patch.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 67
+      },
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db686baf_cf507878",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
