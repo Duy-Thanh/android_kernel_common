@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c42630_1b62a6a9",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cee358d_b587ca5f",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 17
+      },
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b7829b8_d8028a5c",
@@ -114,6 +138,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "0b7829b8_d8028a5c",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32d810f_4c2bc962",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:22:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e596de9b_8c01e537",
       "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -195,6 +237,24 @@
       "writtenOn": "2026-02-10T22:43:16Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "88516783_8c0ba73a",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7053241c_34538b22",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:22:34Z",
+      "side": 1,
+      "message": "After removal of vma attribute overrides I think we should be ok without `VM_DONTCOPY` but PTAL at the fixups and let me know if we still need it.",
       "parentUuid": "88516783_8c0ba73a",
       "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
