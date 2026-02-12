@@ -26,6 +26,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a70a85f_d42e517e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-12T13:49:07Z",
+      "side": 1,
+      "message": "Should some of these sizes by `loff_t` instead? A long is pointer sized, but files may be 64-bit long even on 32-bit machines.",
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ba241b_8004614f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-12T13:49:07Z",
+      "side": 1,
+      "message": "For good measure, I would include an explicit overflow check here.",
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030eb6dd_0b670073",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
