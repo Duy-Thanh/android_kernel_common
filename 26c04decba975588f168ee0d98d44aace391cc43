@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "db686baf_cf507878",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-12T02:21:43Z",
+      "side": 1,
+      "message": "This is missing your Signed-off-by\n\nAlso, are you using `git cherry-pick -x` when cherry-picking these changes?",
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2b57eb24_07b1ec8b",
@@ -14,6 +31,23 @@
       "writtenOn": "2026-02-12T02:16:41Z",
       "side": 1,
       "message": "@joneslee@google.com, in case this is already in your queue?",
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f121bc4f_6f250af2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-12T02:21:43Z",
+      "side": 1,
+      "message": "+GregKH as this should probably be tagged for -stable as well (I see it\u0027s queued for 6.18-stable and 6.17-stable)",
       "revId": "26c04decba975588f168ee0d98d44aace391cc43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
