@@ -16,6 +16,24 @@
       "message": "This patch probably needs a follow on patch that adds the symbols introduced here to the symbol file and updates the abi.stg?",
       "revId": "e480344008169b36ddc52878ab54e4cae1fcfdee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea0d4af1_bc17e6e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-12T05:10:32Z",
+      "side": 1,
+      "message": "Similar to https://r.android.com/3871720",
+      "parentUuid": "0bbdc0d2_6c027fb3",
+      "revId": "e480344008169b36ddc52878ab54e4cae1fcfdee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
