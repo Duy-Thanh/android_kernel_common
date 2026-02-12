@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31c2e5c_43b1bdd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-12T08:04:08Z",
+      "side": 1,
+      "message": "Updated the commit id for \"Fixes\" field.",
+      "parentUuid": "c531da47_6caf23bc",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 67
+      },
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db686baf_cf507878",
