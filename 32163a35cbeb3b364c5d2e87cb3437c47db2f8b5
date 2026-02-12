@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba36d491_54281439",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-12T09:29:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3e55b3_35bfa554",
+      "range": {
+        "startLine": 287,
+        "startChar": 27,
+        "endLine": 287,
+        "endChar": 53
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30de093e_a2be9733",
@@ -310,6 +334,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd31caf1_fc21a138",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-12T09:29:23Z",
+      "side": 1,
+      "message": "I refactor to \u003cfunc\u003e + \u003carg\u003e",
+      "parentUuid": "89200bd8_2856bec8",
+      "range": {
+        "startLine": 566,
+        "startChar": 10,
+        "endLine": 566,
+        "endChar": 32
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1e8f880_e9d208b6",
@@ -395,6 +443,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "0130d37d_84b86a59",
+      "range": {
+        "startLine": 570,
+        "startChar": 5,
+        "endLine": 570,
+        "endChar": 24
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55fe239b_43fb508c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-12T09:29:23Z",
+      "side": 1,
+      "message": "Ha I see, you are using smccc 1.2 for pviommu while other pKVM hypercalls are 1.1",
+      "parentUuid": "a9a4325e_a8dd85be",
       "range": {
         "startLine": 570,
         "startChar": 5,
@@ -513,6 +585,30 @@
       "writtenOn": "2026-02-08T10:58:53Z",
       "side": 1,
       "message": "Can\u0027t that be `vcpu_get_reg(hyp_vcpu-\u003ehost_vcpu, 0)`",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 61
+      },
+      "revId": "32163a35cbeb3b364c5d2e87cb3437c47db2f8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ff94bc_baef7fc4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-12T09:29:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "259ba07c_19a7ef39",
       "range": {
         "startLine": 208,
         "startChar": 18,
