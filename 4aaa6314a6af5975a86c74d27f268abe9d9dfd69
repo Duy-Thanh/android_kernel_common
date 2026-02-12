@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aab0569_9a1fd26d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-12T07:28:50Z",
+      "side": 1,
+      "message": "wrong id, or right one, but does not match the changelog text (hint, this commit does not have the \"commit ...\" text at the top of the changelog, that came from a stable backport commit.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 68
+      },
+      "revId": "4aaa6314a6af5975a86c74d27f268abe9d9dfd69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
