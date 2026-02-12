@@ -722,4 +722,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folios_put_refs_direct_free_extent);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_and_swap_cache);
+<<<<<<< PATCH SET (8b35b217e44599cee8453347bb18f99045b41388 ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+||||||| BASE      (210e682ca5b12401a872ba342e22372c9f094532 ANDROID: Update AutoFDO profile to 6.6.123)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+>>>>>>> BASE      (4604201b8d0a2f3093f9d232c2afaf93607190d7 ANDROID: GKI: update symbol list for xiaomi)
