@@ -3299,6 +3299,7 @@ static inline bool __should_serialize_io(struct inode *inode,
 	return false;
 }
 
+<<<<<<< HEAD   (0f44bb37185fd2e65853e8495634ee17329a92bc FROMGIT: f2fs: decrease maximum flush retry count in f2fs_en)
 static inline void update_skipped_write(struct f2fs_sb_info *sbi,
 						struct writeback_control *wbc)
 {
@@ -3307,6 +3308,20 @@ static inline void update_skipped_write(struct f2fs_sb_info *sbi,
 	if (is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT) && skipped &&
 		wbc->sync_mode == WB_SYNC_ALL)
 		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
+||||||| BASE   (88d7492a43f9571fee85cc28809e3d47f2591175 UPSTREAM: f2fs: fix to zero data after EOF for compressed fi)
+=======
+static inline void account_writeback(struct inode *inode, bool inc)
+{
+	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
+		return;
+
+	f2fs_down_read(&F2FS_I(inode)->i_sem);
+	if (inc)
+		atomic_inc(&F2FS_I(inode)->writeback);
+	else
+		atomic_dec(&F2FS_I(inode)->writeback);
+	f2fs_up_read(&F2FS_I(inode)->i_sem);
+>>>>>>> BRANCH (f8cc24a5eb44c15ea7d14c77129a69a2b5f7b874 Revert "xsk: Fix race condition in AF_XDP generic RX path")
 }
 
 static int __f2fs_write_data_pages(struct address_space *mapping,
@@ -3358,9 +3373,13 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
 		locked = true;
 	}
 
+	account_writeback(inode, true);
+
 	blk_start_plug(&plug);
 	ret = f2fs_write_cache_pages(mapping, wbc, io_type);
 	blk_finish_plug(&plug);
+
+	account_writeback(inode, false);
 
 	if (locked)
 		mutex_unlock(&sbi->writepages);
