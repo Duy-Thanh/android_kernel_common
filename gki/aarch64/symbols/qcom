@@ -2732,6 +2732,8 @@
   sampling_rate_store
   scatterwalk_ffwd
   sched_clock
+  sched_clock_read_begin
+  sched_clock_read_retry
   sched_feat_keys
   sched_feat_names
   sched_setattr
