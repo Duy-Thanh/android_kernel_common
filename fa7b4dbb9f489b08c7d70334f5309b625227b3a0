@@ -16,6 +16,23 @@
       "message": "not an area expert so I\u0027ll defer to Ryan or Matt",
       "revId": "fa7b4dbb9f489b08c7d70334f5309b625227b3a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8301c5b9_dc7ad309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-02-12T20:17:41Z",
+      "side": 1,
+      "message": "IIRC sw_sync is unsupported by GKI because it can lead to userspace-triggered deadlocks and has not been used by the Android platform for the last several years.\n\nThis is likely to be rejected by GKI owners.\n\nSince it cannot be built as a module in modern kernels, we cannot straightforwardly treat it as a vendor-maintained feature.\n\nWe should discuss our options/alternatives in b/481903400.",
+      "revId": "fa7b4dbb9f489b08c7d70334f5309b625227b3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
