@@ -353,6 +353,22 @@ DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
 		struct per_cpu_pages *pcp, struct page *page, int migratetype,
 		unsigned int order),
 	TP_ARGS(zone, pad, pcp, page, migratetype, order));
+<<<<<<< PATCH SET (b6255eb3687977cb55153ca56560860ab4ec4fb0 ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start, int result),
+	TP_ARGS(folio, swapin_start, result));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, struct writeback_control *wbc,
+		unsigned long swap_writepage_start, int result),
+	TP_ARGS(page, wbc, swap_writepage_start, result));
+||||||| BASE      (6bfa519732146afa9e20af2217316b23388a8491 ANDROID: serial: qcom-geni: Add support for Suspend-to-RAM ()
+=======
 DECLARE_HOOK(android_vh_alloc_pages_start,
 	TP_PROTO(u64 *stime),
 	TP_ARGS(stime));
@@ -368,6 +384,7 @@ DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
 		unsigned long pages_reclaimed, int retry_loop_count),
 	TP_ARGS(gfp_mask, order, alloc_start, stime, did_some_progress,
 		pages_reclaimed, retry_loop_count));
+>>>>>>> BASE      (299d5eca2e4a24cd1681c1df2d963b69121adf7d Revert^2 "ANDROID: GKI: update symbol list file for xiaomi")
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
