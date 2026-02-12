@@ -452,6 +452,21 @@ DECLARE_HOOK(android_vh_folios_put_refs_direct_free_extent,
 DECLARE_HOOK(android_vh_free_pages_and_swap_cache,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< PATCH SET (f29cbc39ab09da676070ae4579676040cce07ba2 ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start),
+	TP_ARGS(folio, swapin_start));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, unsigned long swap_writepage_start),
+	TP_ARGS(page, swap_writepage_start));
+||||||| BASE      (420974cf8d3b7ef91dede06e1d6b4c4bff83b986 ANDROID: vendor_hooks: add hooks to modify pageflags)
+=======
 DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
 	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order),
 	TP_ARGS(gfp_mask, orders, order));
@@ -461,6 +476,7 @@ DECLARE_HOOK(android_vh_customize_pmd_gfp_bypass,
 DECLARE_HOOK(android_vh_thp_vma_allowable_orders,
 	TP_PROTO(struct vm_area_struct *vma, unsigned long *orders),
 	TP_ARGS(vma, orders));
+>>>>>>> BASE      (9f7bf2771d01084d90826addcb6869171b786e1c ANDROID: GKI: Add symbols to xiaomi symbol list)
 DECLARE_HOOK(android_vh_do_anonymous_page,
 	TP_PROTO(struct vm_area_struct *vma, struct folio *folio),
 	TP_ARGS(vma, folio));

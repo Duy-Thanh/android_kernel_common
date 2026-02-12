@@ -508,9 +508,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folios_put_refs_direct_free_extent);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_and_swap_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_core_soft_reset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_xhci_soft_reset);
+<<<<<<< PATCH SET (f29cbc39ab09da676070ae4579676040cce07ba2 ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapin_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage_end);
+||||||| BASE      (420974cf8d3b7ef91dede06e1d6b4c4bff83b986 ANDROID: vendor_hooks: add hooks to modify pageflags)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_thp_gfp_orders);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_pmd_gfp_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thp_vma_allowable_orders);
+>>>>>>> BASE      (9f7bf2771d01084d90826addcb6869171b786e1c ANDROID: GKI: Add symbols to xiaomi symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shmem_swapin_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wp_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
