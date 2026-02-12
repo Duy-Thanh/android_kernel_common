@@ -16,6 +16,24 @@
       "message": "May be cleaner as `goto put_file`?",
       "revId": "24c57fe856bc0967e8cc1079f835293139a60105",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf7c185_c0d6bc6c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T16:48:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d250b93e_7238cb60",
+      "revId": "24c57fe856bc0967e8cc1079f835293139a60105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
