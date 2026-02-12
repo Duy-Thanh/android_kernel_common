@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d250b93e_7238cb60",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-12T13:42:32Z",
+      "side": 1,
+      "message": "May be cleaner as `goto put_file`?",
+      "revId": "24c57fe856bc0967e8cc1079f835293139a60105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
