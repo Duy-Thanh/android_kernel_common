@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/482946966",
       "revId": "b43a624675e325ff4cd8db600ff7cb4e80de0c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93406ca9_78ded719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-12T05:08:38Z",
+      "side": 1,
+      "message": "Lint bypass as the change came in to android16-6.12 via -stable",
+      "revId": "b43a624675e325ff4cd8db600ff7cb4e80de0c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
