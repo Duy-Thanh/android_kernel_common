@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ed5458_b473648a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:23:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b96c719f_860bd285",
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c988b1a7_96ceb531",
@@ -197,6 +215,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "b85551e1_f0b2121a",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "957af3d3cc3d1c6db95936f73dcdaff0a3dd9458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fe526e_bbda0383",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:23:46Z",
+      "side": 1,
+      "message": "Done. Returning an error for partial loads.",
+      "parentUuid": "d6e5be86_923051ec",
       "range": {
         "startLine": 159,
         "startChar": 0,
