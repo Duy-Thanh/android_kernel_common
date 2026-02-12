@@ -16,6 +16,24 @@
       "message": "But let\u0027s wait for Todd additional approval.",
       "revId": "2aebf3d4e698280c2ec9012d3e8ed2cec47061f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a972037_8832cc3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-12T10:54:49Z",
+      "side": 1,
+      "message": "Seems like Todd removed himself from attention chain, adding Sławek.",
+      "parentUuid": "6141c420_22644c0e",
+      "revId": "2aebf3d4e698280c2ec9012d3e8ed2cec47061f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
