@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4a444aa_c9432083",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-12T07:36:44Z",
+      "side": 1,
+      "message": "ACK-6.12 cherry-picked the commit 4ae8d9aa9f9d (\"sched/deadline: Fix dl_server getting stuck\") as below, so obviously it requires to backport this commit accordingly.\n \n--------\ncommit 741f2ff02d61aba92faef015448daf45b846209e\nAuthor: Peter Zijlstra \u003cpeterz@infradead.org\u003e\nDate: Tue Sep 16 23:02:41 2025",
+      "parentUuid": "80565f19_f1af58be",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 67
+      },
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db686baf_cf507878",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2026-02-12T02:21:43Z",
       "side": 1,
       "message": "This is missing your Signed-off-by\n\nAlso, are you using `git cherry-pick -x` when cherry-picking these changes?",
+      "revId": "26c04decba975588f168ee0d98d44aace391cc43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1c99f8_2828d254",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1561740
+      },
+      "writtenOn": "2026-02-12T07:36:44Z",
+      "side": 1,
+      "message": "Done\nAdded the Signed-of-by line, and update the related info by \"git cherry-pick -x\"",
+      "parentUuid": "db686baf_cf507878",
       "revId": "26c04decba975588f168ee0d98d44aace391cc43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
