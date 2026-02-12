@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c5e62d_75998330",
+        "filename": "mm/swap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-12T00:13:37Z",
+      "side": 1,
+      "message": "This hook should be deprecated in the future branches by trace_android_vh_folios_put_refs_direct_free_extent(), see https://android-review.googlesource.com/c/kernel/common/+/3944200",
+      "range": {
+        "startLine": 1022,
+        "startChar": 2,
+        "endLine": 1022,
+        "endChar": 46
+      },
+      "revId": "4c300b65d02a1b4be72b2c781458c0df2b8a903a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
