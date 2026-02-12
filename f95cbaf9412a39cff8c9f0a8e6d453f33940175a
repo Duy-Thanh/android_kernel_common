@@ -16,6 +16,24 @@
       "message": "Needs a `cherry picked from commit ...` line.\n\nDid you use `git cherry-pick -x`?",
       "revId": "f95cbaf9412a39cff8c9f0a8e6d453f33940175a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae3543a8_e00c0e92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3869176
+      },
+      "writtenOn": "2026-02-12T02:44:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da958afe_ec1360c8",
+      "revId": "f95cbaf9412a39cff8c9f0a8e6d453f33940175a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
