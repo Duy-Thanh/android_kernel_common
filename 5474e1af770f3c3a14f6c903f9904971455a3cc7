@@ -34,6 +34,24 @@
       "parentUuid": "2d2452f7_752a64bb",
       "revId": "5474e1af770f3c3a14f6c903f9904971455a3cc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de383102_12713833",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-13T16:09:57Z",
+      "side": 1,
+      "message": "Even if we forget that we touch `arch/x86/kvm/pkvm/pkvm.c` as well, not just `arch/x86/kvm/x86.c`, this is still purely pKVM hypervisor-specific change: it doesn\u0027t affect behavior or compilation of host KVM code, it only affects pKVM hypervisor code (as x86.c is reused by the hypervisor code)?\n\nI think we have a lot of precedents of patches that have `pKVM: x86:` or `pKVM: VMX:` even though they touch original KVM files only, since changes they make are for the pKVM hypervisor, not for the host.",
+      "parentUuid": "eb14ce5f_9dd04998",
+      "revId": "5474e1af770f3c3a14f6c903f9904971455a3cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
