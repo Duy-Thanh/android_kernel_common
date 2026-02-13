@@ -3,6 +3,7 @@
  * Copyright 2021 Google LLC
  */
 #include <linux/fs.h>
+#include <linux/fs_parser.h>
 #include <linux/kobject.h>
 
 #include <uapi/linux/incrementalfs.h>
