@@ -16,6 +16,24 @@
       "message": "Any way to enforce this?",
       "revId": "add8db541dd3b47a2abce9193db8f14eb93225e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce86826_025f1d0b",
+        "filename": "include/linux/jump_label.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-02-13T19:48:00Z",
+      "side": 1,
+      "message": "The only thing I can think of is that we could patch include/linux/export.h to provide a custom definition of __EXPORT_SYMBOL() when BUILD_FIPS140_KO that type-checks its argument and ensures it is not a static key.\n\nI think it\u0027s not worth it though.  We should minimize patches to existing  files.  Also, even if fips140.ko did export a static key, it would never be used unless we wrote code that used it (like the FIPS140_CALL() changes).",
+      "parentUuid": "5b3b3420_462cd049",
+      "revId": "add8db541dd3b47a2abce9193db8f14eb93225e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
