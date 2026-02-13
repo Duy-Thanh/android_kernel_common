@@ -16,6 +16,24 @@
       "message": "I guess technically we could also trigger PKVM_MODULE_SHARED_OWNED_PAGE.\n\nSo perhaps we should just -EPERM if addr_is_memory()?\n\n@qperret@google.com WDYS?",
       "revId": "4d2eeceebc87bef09a61cc68bdc6a2e657a53a9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a21b86_02c7abab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-02-13T14:09:47Z",
+      "side": 1,
+      "message": "Argh yes I think you\u0027re right. I think we want -EPERM also for !memory, so that would basically mean just removing the WARN. That would be fine with me.",
+      "parentUuid": "aa709a5b_d3f3a99a",
+      "revId": "4d2eeceebc87bef09a61cc68bdc6a2e657a53a9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
