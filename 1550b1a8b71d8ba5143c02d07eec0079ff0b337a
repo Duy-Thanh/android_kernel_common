@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "617305a8_81939949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-13T14:17:38Z",
+      "side": 1,
+      "message": "Please ensure this series is rebased onto the tip of android17-6.18 and builds before repushing it.\n\nBuild command:\n\n`bazel build //common:kernel_aarch64_abi_dist  //common:kernel_x86_64_abi_dist`\n\nIdeally building at each point in the series should succeed. If this is not the case, then document the issue in commit messages.",
+      "revId": "1550b1a8b71d8ba5143c02d07eec0079ff0b337a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
