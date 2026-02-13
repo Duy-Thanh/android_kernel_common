@@ -22,6 +22,30 @@
       },
       "revId": "873b94d11d98dae15136b294be7338d4c5a2973c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "164f147a_4d619926",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T15:48:38Z",
+      "side": 1,
+      "message": "I guess we could but the only op that I see dmabuf heaps are defining is `fault` and NPU Manager (the only component that will be allocating and wrapping buffers in Android) won\u0027t be wrapping any other kinds of dmabufs.\n\nDo you want all ops or some specific ones to be verified?",
+      "parentUuid": "9bd26cef_998cf3d2",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 32
+      },
+      "revId": "873b94d11d98dae15136b294be7338d4c5a2973c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
