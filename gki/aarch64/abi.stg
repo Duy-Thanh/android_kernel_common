@@ -379913,7 +379913,7 @@ elf_symbol {
   name: "default_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbd60c4d4
+  crc: 0xbe3823f6
   type_id: 0x2d64ae3e
   full_name: "default_llseek"
 }
@@ -384187,7 +384187,7 @@ elf_symbol {
   name: "dma_heap_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfe4fd79f
+  crc: 0x8ab60276
   namespace: "DMA_BUF_HEAP"
   type_id: 0x0a745291
   full_name: "dma_heap_add"
@@ -384197,7 +384197,7 @@ elf_symbol {
   name: "dma_heap_buffer_alloc"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x91a0a2db
+  crc: 0x6d2a6fa0
   type_id: 0x43c50d0f
   full_name: "dma_heap_buffer_alloc"
 }
@@ -384206,7 +384206,7 @@ elf_symbol {
   name: "dma_heap_buffer_free"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6facfc55
+  crc: 0x9d9af957
   type_id: 0x10aa5f7a
   full_name: "dma_heap_buffer_free"
 }
@@ -384224,7 +384224,7 @@ elf_symbol {
   name: "dma_heap_get_dev"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xef99ef3f
+  crc: 0x1c9de8ab
   type_id: 0xa726fe6e
   full_name: "dma_heap_get_dev"
 }
@@ -390305,7 +390305,7 @@ elf_symbol {
   name: "fixed_size_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9cc45f59
+  crc: 0x56b7aa73
   type_id: 0x2d6430a1
   full_name: "fixed_size_llseek"
 }
@@ -391385,7 +391385,7 @@ elf_symbol {
   name: "generic_file_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbd60c4d4
+  crc: 0xbe3823f6
   type_id: 0x2d64ae3e
   full_name: "generic_file_llseek"
 }
@@ -391511,7 +391511,7 @@ elf_symbol {
   name: "generic_write_checks"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x25e40f21
+  crc: 0x8f24c07c
   type_id: 0x16637235
   full_name: "generic_write_checks"
 }
@@ -403641,7 +403641,7 @@ elf_symbol {
   name: "noop_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbd60c4d4
+  crc: 0xbe3823f6
   type_id: 0x2d64ae3e
   full_name: "noop_llseek"
 }
@@ -405536,6 +405536,24 @@ elf_symbol {
   crc: 0x475b82f9
   type_id: 0x159a5692
   full_name: "page_pool_put_unrefed_netmem"
+}
+elf_symbol {
+  id: 0x89850bb1
+  name: "page_shift_compat"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7ec472ba
+  type_id: 0x6720d32f
+  full_name: "page_shift_compat"
+}
+elf_symbol {
+  id: 0xecb8da90
+  name: "page_shift_compat_enabled"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "page_shift_compat_enabled"
 }
 elf_symbol {
   id: 0x0fe80546
@@ -413285,7 +413303,7 @@ elf_symbol {
   name: "rw_verify_area"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbfc81376
+  crc: 0x28059404
   type_id: 0x84275515
   full_name: "rw_verify_area"
 }
@@ -426051,7 +426069,7 @@ elf_symbol {
   name: "vfs_copy_file_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb7252cf3
+  crc: 0x7a34f4eb
   type_id: 0x12537c3f
   full_name: "vfs_copy_file_range"
 }
@@ -426177,7 +426195,7 @@ elf_symbol {
   name: "vfs_iocb_iter_read"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc2506987
+  crc: 0x5b8c5b24
   type_id: 0x12e25202
   full_name: "vfs_iocb_iter_read"
 }
@@ -426186,7 +426204,7 @@ elf_symbol {
   name: "vfs_iocb_iter_write"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc2506987
+  crc: 0x5b8c5b24
   type_id: 0x12e25202
   full_name: "vfs_iocb_iter_write"
 }
@@ -426195,7 +426213,7 @@ elf_symbol {
   name: "vfs_iter_read"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc61f8dc2
+  crc: 0xa29ae3de
   type_id: 0x1274496e
   full_name: "vfs_iter_read"
 }
@@ -426204,7 +426222,7 @@ elf_symbol {
   name: "vfs_iter_write"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc61f8dc2
+  crc: 0xa29ae3de
   type_id: 0x1274496e
   full_name: "vfs_iter_write"
 }
@@ -426231,7 +426249,7 @@ elf_symbol {
   name: "vfs_llseek"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xbd60c4d4
+  crc: 0xbe3823f6
   type_id: 0x2d64ae3e
   full_name: "vfs_llseek"
 }
@@ -426321,7 +426339,7 @@ elf_symbol {
   name: "vfs_setpos"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x303ae308
+  crc: 0xf0a65d54
   type_id: 0x2d748ffb
   full_name: "vfs_setpos"
 }
@@ -433640,6 +433658,8 @@ interface {
   symbol_id: 0xdc14ff55
   symbol_id: 0x2616989d
   symbol_id: 0x6b23b266
+  symbol_id: 0x89850bb1
+  symbol_id: 0xecb8da90
   symbol_id: 0x0fe80546
   symbol_id: 0x37d86bb7
   symbol_id: 0xd7a3f820
