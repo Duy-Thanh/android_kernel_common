@@ -16,6 +16,24 @@
       "message": "rebase the series to resolve the merge conflicts",
       "revId": "93826a36cfa28e6578585e6832bcde8cab14ffee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094924b0_34440ae0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-02-13T05:54:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfa96d66_2b4ed013",
+      "revId": "93826a36cfa28e6578585e6832bcde8cab14ffee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
