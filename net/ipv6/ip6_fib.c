@@ -1127,6 +1127,23 @@ static int fib6_add_rt2node(struct fib6_node *fn, struct fib6_info *rt,
 					fib6_clean_expires(iter);
 				else
 					fib6_set_expires(iter, rt->expires);
+<<<<<<< HEAD   (0e7b291077fcd133748e6b92b70fde0873dede68 Merge branch android15-6.6 into android5-6.6-lts)
+||||||| BASE   (c56aaf1a85ae918dd521fb2869028cf533d2755a Linux 6.6.123)
+					fib6_add_gc_list(iter);
+				}
+				if (!(rt->fib6_flags & (RTF_ADDRCONF | RTF_PREFIX_RT))) {
+					iter->fib6_flags &= ~RTF_ADDRCONF;
+					iter->fib6_flags &= ~RTF_PREFIX_RT;
+				}
+=======
+					fib6_add_gc_list(iter);
+				}
+				if (!(rt->fib6_flags & (RTF_ADDRCONF | RTF_PREFIX_RT)) &&
+				    !iter->fib6_nh->fib_nh_gw_family) {
+					iter->fib6_flags &= ~RTF_ADDRCONF;
+					iter->fib6_flags &= ~RTF_PREFIX_RT;
+				}
+>>>>>>> BRANCH (1b4ef5214f17e671cc13f2da4a678574ce91d151 Linux 6.6.124)
 
 				if (rt->fib6_pmtu)
 					fib6_metric_set(iter, RTAX_MTU,
