@@ -16,6 +16,24 @@
       "message": "nit: `pKVM: x86:` ?",
       "revId": "5474e1af770f3c3a14f6c903f9904971455a3cc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb14ce5f_9dd04998",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-13T16:02:57Z",
+      "side": 1,
+      "message": "I thought about it but since we touch both:\n```\narch/x86/kvm/pkvm/pkvm.c \narch/x86/kvm/x86.c \n```\n\nI\u0027ve decided to go with more generic `KVM: x86:`\nDoes that make sense for you?",
+      "parentUuid": "2d2452f7_752a64bb",
+      "revId": "5474e1af770f3c3a14f6c903f9904971455a3cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
