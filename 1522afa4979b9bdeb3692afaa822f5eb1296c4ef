@@ -59,6 +59,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee61fded_1c4de128",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37e1ab80_8f062508",
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90ba241b_8004614f",
@@ -72,6 +90,24 @@
       "writtenOn": "2026-02-12T13:49:07Z",
       "side": 1,
       "message": "For good measure, I would include an explicit overflow check here.",
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "658da3f9_3b55de3b",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:35:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "90ba241b_8004614f",
       "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -113,6 +149,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "030eb6dd_0b670073",
+      "range": {
+        "startLine": 179,
+        "startChar": 3,
+        "endLine": 179,
+        "endChar": 5
+      },
+      "revId": "1522afa4979b9bdeb3692afaa822f5eb1296c4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d695e2_85b1f8bd",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00188371_618fc184",
       "range": {
         "startLine": 179,
         "startChar": 3,
