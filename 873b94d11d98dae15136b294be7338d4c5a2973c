@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd26cef_998cf3d2",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-13T07:28:47Z",
+      "side": 1,
+      "message": "Should we perform additional checks on the vm ops? For example, you only override open/close/fault, but there are lots of other methods. If the vm_ops set other functions (such as the ones related to splitting?), then removing those functions from the vm_ops may cause problems.",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 32
+      },
+      "revId": "873b94d11d98dae15136b294be7338d4c5a2973c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
