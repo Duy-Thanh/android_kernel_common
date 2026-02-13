@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23f4380_52d60917",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ecab651_05f73446",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 397,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af52e435_e8015fb1",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683027f2_d535fbaa",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03a120a_f830104d",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59001b94_7a60f937",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "59001b94_7a60f937",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 28
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5ed7b2_a2e04f4a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-13T05:33:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b637f1cb_42e01060",
       "range": {
         "startLine": 457,
         "startChar": 0,
