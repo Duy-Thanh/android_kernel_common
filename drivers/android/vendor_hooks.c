@@ -592,4 +592,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_create_worker);
