@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0127fba5_99b24bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4611693
+      },
+      "writtenOn": "2026-02-13T15:20:54Z",
+      "side": 1,
+      "message": "From 4d2eeceebc87bef09a61cc68bdc6a2e657a53a9b Mon Sep 17 00:00:00 2001\nFrom: kyle-jk.liao \u003ckyle-jk.liao@mediatek.corp-partner.google.com\u003e\nDate: Fri, 06 Feb 2026 16:14:02 +0800\nSubject: [PATCH] ANDROID: KVM: arm64: Allow module-owned pages in host stage-2 range adjustment\n\nThe host_stage2_adjust_range() function triggers a WARN_ON when\nencountering pages marked as both PKVM_NOPAGE and PKVM_MODULE_OWNED_PAGE.\nThis occurs when load_unaligned_zeropad() accesses memory that crosses\npage boundaries, where one of the pages is module-owned.\n\nExtend the check to accept pages with the PKVM_MODULE_OWNED_PAGE flag\nin addition to PKVM_NOPAGE, preventing spurious warnings during normal\nmodule memory access patterns.\n\nBug: 464997078\nChange-Id: Ibd1a9ddc232289e62abeca2e7e00246a54d2c5d7\nSigned-off-by: kyle-jk.liao \u003ckyle-jk.liao@mediatek.corp-partner.google.com\u003e\n---\n\ndiff --git a/arch/arm64/kvm/hyp/nvhe/mem_protect.c b/arch/arm64/kvm/hyp/nvhe/mem_protect.c\nindex 897b5fb..d3db296 100644\n--- a/arch/arm64/kvm/hyp/nvhe/mem_protect.c\n+++ b/arch/arm64/kvm/hyp/nvhe/mem_protect.c\n@@ -661,32 +661,34 @@ static inline bool range_included(struct kvm_mem_range *child,\n \treturn parent-\u003estart \u003c\u003d child-\u003estart \u0026\u0026 child-\u003eend \u003c\u003d parent-\u003eend;\n }\n \n static int host_stage2_adjust_range(u64 addr, struct kvm_mem_range *range)\n {\n \tstruct kvm_mem_range cur;\n \tkvm_pte_t pte;\n \tu64 granule;\n \ts8 level;\n \tint ret;\n+\tenum pkvm_page_state state;\n \n \thyp_assert_lock_held(\u0026host_mmu.lock);\n \tret \u003d kvm_pgtable_get_leaf(\u0026host_mmu.pgt, addr, \u0026pte, \u0026level);\n \tif (ret)\n \t\treturn ret;\n \n \tif (kvm_pte_valid(pte))\n \t\treturn -EAGAIN;\n \n \tif (pte) {\n+\t\tstate \u003d get_host_state(hyp_phys_to_page(addr));\n \t\tWARN_ON(addr_is_memory(addr) \u0026\u0026\n-\t\t\tget_host_state(hyp_phys_to_page(addr)) !\u003d PKVM_NOPAGE);\n+\t\t\t(state !\u003d PKVM_NOPAGE \u0026\u0026 state !\u003d (PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE)));\n \t\treturn -EPERM;\n \t}\n \n \tfor (; level \u003c\u003d KVM_PGTABLE_LAST_LEVEL; level++) {\n \t\tif (!kvm_level_supports_block_mapping(level))\n \t\t\tcontinue;\n \t\tgranule \u003d kvm_granule_size(level);\n \t\tcur.start \u003d ALIGN_DOWN(addr, granule);\n \t\tcur.end \u003d cur.start + granule;\n \t\tif (!range_included(\u0026cur, range))",
+      "revId": "4d2eeceebc87bef09a61cc68bdc6a2e657a53a9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa709a5b_d3f3a99a",
