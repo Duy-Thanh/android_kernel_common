@@ -40,6 +40,7 @@
 
 #include <crypto/hash.h>
 #include <crypto/sha2.h>
+#include <linux/fs_parser.h>
 #include <linux/fsverity.h>
 #include <linux/mount.h>
 
