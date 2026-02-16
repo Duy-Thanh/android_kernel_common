@@ -16,6 +16,24 @@
       "message": "we should probably use the upstream version here.",
       "revId": "a48ee768bf6815018699876f5ebd68e958659fdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "968f7e04_3703bc05",
+        "filename": "drivers/usb/host/xhci-dbgtty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-02-16T11:36:24Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1a503c27_d377f5f9",
+      "revId": "a48ee768bf6815018699876f5ebd68e958659fdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
