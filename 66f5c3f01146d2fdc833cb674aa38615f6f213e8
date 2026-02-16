@@ -22,6 +22,30 @@
       },
       "revId": "66f5c3f01146d2fdc833cb674aa38615f6f213e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb184194_8430fc47",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-16T17:04:00Z",
+      "side": 1,
+      "message": "Ah, you are right, it can still race with wrap_file_load() which operates on ctx-\u003econtent without isolating it. If ctx-\u003econtent-\u003eops-\u003eload() is already in progress then even the isolated context here might will be already in use. I\u0027ll add the missing check.",
+      "parentUuid": "497f8cf8_1c4121e3",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 756,
+        "endChar": 30
+      },
+      "revId": "66f5c3f01146d2fdc833cb674aa38615f6f213e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
