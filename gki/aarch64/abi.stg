@@ -420602,6 +420602,11 @@ function {
   parameter_id: 0x07dcdbe1
 }
 function {
+  id: 0x9da45323
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0092c032
+}
+function {
   id: 0x9da46876
   return_type_id: 0x6720d32f
   parameter_id: 0x01e0b0cf
@@ -481499,6 +481504,15 @@ elf_symbol {
   full_name: "klist_next"
 }
 elf_symbol {
+  id: 0x9240ba00
+  name: "klist_node_attached"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x50591cf9
+  type_id: 0x9da45323
+  full_name: "klist_node_attached"
+}
+elf_symbol {
   id: 0x55b3b820
   name: "klist_remove"
   is_defined: true
@@ -526413,6 +526427,7 @@ interface {
   symbol_id: 0x6128fc8c
   symbol_id: 0x9e89161e
   symbol_id: 0x023e1288
+  symbol_id: 0x9240ba00
   symbol_id: 0x55b3b820
   symbol_id: 0xbc2dc163
   symbol_id: 0xd9080e18
