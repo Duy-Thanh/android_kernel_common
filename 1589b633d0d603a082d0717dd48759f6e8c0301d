@@ -361,6 +361,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eda2e56e_e9b8d13b",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-16T20:42:50Z",
+      "side": 1,
+      "message": "I suggest the xarray because it\u0027s really simple to use. I\u0027m not too worried about the perf - xarray is pretty fast. If you want, I guess you can divide the address by `alignof(struct vm_area_struct)`.\n\nYou can\u0027t use the inode because someone could wrap the same dmabuf in multiple different wrapfds.",
+      "parentUuid": "cb8f45f3_9b11e882",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59001b94_7a60f937",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
