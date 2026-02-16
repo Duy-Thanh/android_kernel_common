@@ -265,6 +265,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41ff2a13_f10b2a99",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-16T20:08:00Z",
+      "side": 1,
+      "message": "For hash yes I can. For xarray that still would not work though. xa_alloc() returns an ID that you still need to store somewhere.",
+      "parentUuid": "2d2f383a_1a10ab06",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59001b94_7a60f937",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
