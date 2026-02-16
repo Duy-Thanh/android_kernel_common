@@ -76,5 +76,5 @@ static inline void dma_prefault_sgt(struct sg_table *sgt)
 	}
 }
 
-
 #endif /* _LINUX_DMA_PREFAULT_H */
+

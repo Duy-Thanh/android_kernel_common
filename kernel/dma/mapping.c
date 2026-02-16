@@ -17,6 +17,7 @@
 #include <linux/vmalloc.h>
 #include "debug.h"
 #include "direct.h"
+#include "dma-prefault.h"
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/dma.h>
@@ -171,6 +172,7 @@ dma_addr_t dma_map_page_attrs(struct device *dev, struct page *page,
 		addr = iommu_dma_map_page(dev, page, offset, size, dir, attrs);
 	else
 		addr = ops->map_page(dev, page, offset, size, dir, attrs);
+	dma_prefault_page_range(page, offset, size);
 	kmsan_handle_dma(page, offset, size, dir);
 	trace_dma_map_page(dev, page_to_phys(page) + offset, addr, size, dir,
 			   attrs);
@@ -226,6 +228,13 @@ static int __dma_map_sg_attrs(struct device *dev, struct scatterlist *sg,
 		trace_dma_map_sg_err(dev, sg, nents, ents, dir, attrs);
 		return -EIO;
 	}
+
+	struct sg_table prefault_sgt = {
+		.sgl		= sg,
+		.nents		= nents,
+		.orig_nents = nents,
+	};
+	dma_prefault_sgt(&prefault_sgt);
 
 	return ents;
 }
@@ -623,11 +632,8 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 	if (WARN_ON_ONCE(flag & __GFP_COMP))
 		return NULL;
 
-	if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr)) {
-		trace_dma_alloc(dev, cpu_addr, *dma_handle, size,
-				DMA_BIDIRECTIONAL, flag, attrs);
-		return cpu_addr;
-	}
+	if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr))
+		goto out_prefault;
 
 	/* let the implementation decide on the zone to allocate from: */
 	flag &= ~(__GFP_DMA | __GFP_DMA32 | __GFP_HIGHMEM);
@@ -647,6 +653,9 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
 	trace_dma_alloc(dev, cpu_addr, *dma_handle, size, DMA_BIDIRECTIONAL,
 			flag, attrs);
 	debug_dma_alloc_coherent(dev, size, *dma_handle, cpu_addr, attrs);
+
+out_prefault:
+	dma_prefault_range(cpu_addr, size);
 	return cpu_addr;
 }
 EXPORT_SYMBOL(dma_alloc_attrs);
@@ -797,7 +806,8 @@ struct sg_table *dma_alloc_noncontiguous(struct device *dev, size_t size,
 
 	if (sgt) {
 		sgt->nents = 1;
-		trace_dma_alloc_sgt(dev, sgt, size, dir, gfp, attrs);
+		dma_prefault_sgt(sgt);
+		trace_dma_map_sg(dev, sgt->sgl, sgt->orig_nents, 1, dir, attrs);
 		debug_dma_map_sg(dev, sgt->sgl, sgt->orig_nents, 1, dir, attrs);
 	} else {
 		trace_dma_alloc_sgt_err(dev, NULL, 0, size, dir, gfp, attrs);
