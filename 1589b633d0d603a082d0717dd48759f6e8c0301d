@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5948602f_e6df205e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-16T16:55:48Z",
+      "side": 1,
+      "message": "Oh, you meant all users of dmabuf. Hmm, we intend to wrap only dmabufs allocated from dmabuf heaps and used by NPUs, so this should not pose a problem but for generic wrapping of dmabufs (and upstreaming) you are right, I would either have to add a field to store the wrap_ctx or to hash vma to wrap_ctx. I\u0027ll add a check for vm_file being unchanged and fail if it is for now. If vm_file gets changed by mmap() we can fall back to hashing and use a different wrap_vm_ops which uses the hash instead of vm_file.",
+      "parentUuid": "c234d777_130e0ab2",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59001b94_7a60f937",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1

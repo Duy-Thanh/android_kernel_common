@@ -46,6 +46,30 @@
       },
       "revId": "873b94d11d98dae15136b294be7338d4c5a2973c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8108e696_29983140",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-16T16:55:48Z",
+      "side": 1,
+      "message": "I\u0027ll add a check for all other ops to be NULL and fail otherwise.",
+      "parentUuid": "164f147a_4d619926",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 32
+      },
+      "revId": "873b94d11d98dae15136b294be7338d4c5a2973c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
