@@ -1361,6 +1361,11 @@
  * @NL80211_CMD_NAN_CLUSTER_JOINED: This command is used to notify
  *	user space that the NAN new cluster has been joined. The cluster ID is
  *	indicated by %NL80211_ATTR_MAC.
+ * @NL80211_CMD_INCUMBENT_SIGNAL_DETECT: Once any incumbent signal is detected
+ *	on the operating channel in 6 GHz band, userspace is notified with the
+ *	signal interference bitmap using
+ *	%NL80211_ATTR_INCUMBENT_SIGNAL_INTERFERENCE_BITMAP. The current channel
+ *	definition is also sent.
  * @NL80211_CMD_NAN_SET_LOCAL_SCHED: Set the local NAN schedule. NAN must be
  *	operational (%NL80211_CMD_START_NAN was executed). Must contain
  *	%NL80211_ATTR_NAN_TIME_SLOTS and %NL80211_ATTR_NAN_AVAIL_BLOB, but
@@ -3033,6 +3038,14 @@ enum nl80211_commands {
  *	primary channel is 2 MHz wide, and the control channel designates
  *	the 1 MHz primary subchannel within that 2 MHz primary.
  *
+ * @NL80211_ATTR_INCUMBENT_SIGNAL_INTERFERENCE_BITMAP: u32 attribute specifying
+ *	the signal interference bitmap detected on the operating bandwidth for
+ *	%NL80211_CMD_INCUMBENT_SIGNAL_DETECT. Each bit represents a 20 MHz
+ *	segment, lowest bit corresponds to the lowest 20 MHz segment, in the
+ *	operating bandwidth where the interference is detected. Punctured
+ *	sub-channels are included in the bitmap structure; however, since
+ *	interference detection is not performed on these sub-channels, their
+ *	corresponding bits are consistently set to zero.
  * @NL80211_ATTR_NAN_CHANNEL: This is a nested attribute. There can be multiple
  *	attributes of this type, each one represents a channel definition and
  *	consists of top-level attributes like %NL80211_ATTR_WIPHY_FREQ.
