@@ -1,6 +1,7 @@
 [abi_symbol_list]
   add_device_randomness
   add_uevent_var
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   alloc_etherdev_mqs
   alloc_io_pgtable_ops
   __alloc_pages_noprof
@@ -53,9 +54,21 @@
   bpf_trace_run5
   buffer_migrate_folio
   bus_find_device
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  __arch_copy_from_user
+  __arch_copy_to_user
+  autoremove_wake_function
+  blocking_notifier_call_chain
+  blocking_notifier_chain_register
+  blocking_notifier_chain_unregister
+  bpf_trace_run1
+  bpf_trace_run2
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   bus_for_each_dev
   bus_register
   bus_unregister
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   call_rcu
   cancel_delayed_work
   cancel_delayed_work_sync
@@ -80,6 +93,13 @@
   clk_bulk_prepare
   clk_bulk_put
   clk_bulk_unprepare
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  cancel_work_sync
+  __check_object_size
+  class_register
+  class_unregister
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   clk_disable
   clk_enable
   clk_get
@@ -112,6 +132,7 @@
   config_item_put
   config_item_set_name
   __const_udelay
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   consume_skb
   cont_write_begin
   __copy_overflow
@@ -137,6 +158,10 @@
   crc32_le
   crc_ccitt_table
   csum_partial
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  __cpu_online_mask
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   _ctype
   current_umask
   deactivate_locked_super
@@ -155,6 +180,7 @@
   dev_addr_mod
   dev_driver_string
   _dev_err
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   dev_err_probe
   devfreq_recommended_opp
   __dev_fwnode
@@ -176,14 +202,27 @@
   device_match_of_node
   device_property_present
   device_property_read_string
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  device_add
+  device_get_match_data
+  device_initialize
+  device_property_present
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   device_property_read_u32_array
   device_register
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   device_remove_file
   __device_reset
   device_set_node
   device_set_wakeup_capable
   device_set_wakeup_enable
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  device_set_wakeup_capable
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   device_unregister
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   device_wakeup_disable
   device_wakeup_enable
   _dev_info
@@ -195,7 +234,14 @@
   devm_clk_bulk_get_all
   devm_clk_bulk_get_all_enable
   devm_clk_bulk_get_optional
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  device_wakeup_enable
+  _dev_info
+  __devm_add_action
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   devm_clk_get
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   devm_clk_get_enabled
   devm_clk_get_optional
   devm_clk_get_optional_enabled
@@ -215,16 +261,27 @@
   devm_ioremap
   devm_ioremap_resource
   devm_iounmap
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  devm_input_allocate_device
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   devm_kasprintf
   devm_kfree
   devm_kmalloc
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   devm_kmemdup
   devm_krealloc
   devm_kstrdup
   devm_led_classdev_multicolor_register_ext
   devm_led_trigger_register
   devm_mbox_controller_register
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  devm_led_classdev_multicolor_register_ext
+  devm_led_trigger_register
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   devm_memremap
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   devm_mfd_add_devices
   devm_mmc_alloc_host
   devm_nvmem_register
@@ -236,6 +293,10 @@
   devm_phy_optional_get
   devm_pinctrl_get
   devm_platform_get_and_ioremap_resource
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  devm_of_platform_populate
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   devm_platform_ioremap_resource
   devm_platform_ioremap_resource_byname
   devm_pm_opp_of_add_table
@@ -251,6 +312,7 @@
   devm_regulator_bulk_get_enable
   devm_regulator_get
   devm_regulator_get_optional
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   devm_regulator_register
   devm_request_threaded_irq
   __devm_reset_control_bulk_get
@@ -264,6 +326,10 @@
   devm_spi_register_controller
   devm_spmi_controller_alloc
   devm_thermal_of_zone_register
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  devm_request_threaded_irq
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   _dev_notice
   dev_pm_clear_wake_irq
   dev_pm_opp_adjust_voltage
@@ -292,6 +358,7 @@
   devres_free
   dev_set_name
   _dev_warn
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   d_instantiate
   dirty_writeback_interval
   disable_irq
@@ -320,9 +387,15 @@
   down_write
   d_parent_ino
   dput
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  disable_irq
+  do_wait_intr
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   driver_register
   driver_unregister
   drm_fdinfo_print_size
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   drop_nlink
   d_splice_alias
   dummy_irq_chip
@@ -347,6 +420,10 @@
   _find_first_zero_bit
   _find_next_bit
   _find_next_zero_bit
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  enable_irq
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   finish_wait
   firmware_kobj
   fixed_size_llseek
@@ -355,6 +432,7 @@
   flush_work
   __folio_put
   __fortify_panic
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   free_netdev
   __free_pages
   free_percpu
@@ -515,6 +593,17 @@
   irq_work_sync
   is_vmalloc_addr
   iter_file_splice_write
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  handle_sysrq
+  __init_rwsem
+  init_wait_entry
+  __init_waitqueue_head
+  input_event
+  input_register_device
+  input_set_capability
+  irq_set_irq_wake
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   jiffies
   jiffies_to_usecs
   kasan_flag_enabled
@@ -546,6 +635,7 @@
   krealloc_noprof
   kstrdup
   kstrndup
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   kstrtobool
   kstrtoint
   kstrtol_from_user
@@ -554,25 +644,38 @@
   kstrtouint_from_user
   kstrtoull
   kthread_create_on_node
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  kstrtou16
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   kthread_create_worker
   kthread_destroy_worker
   kthread_flush_work
   kthread_queue_work
   ktime_get
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   ktime_get_mono_fast_ns
   ktime_get_real_seconds
   ktime_get_ts64
   ktime_get_with_offset
   kvfree
   __kvmalloc_node_noprof
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  ktime_get_with_offset
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   led_get_color_name
   led_mc_calc_color_components
   __list_add_valid_or_report
   __list_del_entry_valid_or_report
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   load_nls
   load_nls_default
   lockref_get
   logfc
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   log_post_read_mmio
   log_post_write_mmio
   log_read_mmio
@@ -596,19 +699,28 @@
   mdiobus_write
   mem_alloc_profiling_key
   memcpy
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   __memcpy_fromio
   memdup_user
   memdup_user_nul
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   memmove
   memory_read_from_buffer
   memparse
   memremap
   memset
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   __memset_io
   memstart_addr
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   memunmap
   mfd_add_devices
   mfd_remove_devices
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   mii_check_media
   mii_ethtool_get_link_ksettings
   mii_ethtool_gset
@@ -652,7 +764,13 @@
   mod_delayed_work_on
   mod_timer
   __module_get
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  misc_deregister
+  misc_register
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   module_layout
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   module_put
   mount_bdev
   mpage_writepages
@@ -700,7 +818,17 @@
   of_clk_get
   of_count_phandle_with_args
   of_cpu_node_to_id
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  msleep
+  __mutex_init
+  mutex_lock
+  mutex_unlock
+  __ndelay
+  nonseekable_open
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   of_device_get_match_data
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   of_device_is_available
   of_device_is_compatible
   of_find_compatible_node
@@ -817,6 +945,14 @@
   platform_device_alloc
   platform_device_del
   platform_device_put
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  of_find_property
+  of_genpd_add_provider_onecell
+  of_property_read_variable_u32_array
+  perf_trace_buf_alloc
+  perf_trace_run_bpf_submit
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   platform_device_register_full
   platform_device_unregister
   __platform_driver_register
@@ -833,6 +969,7 @@
   platform_unregister_drivers
   pm_genpd_add_subdomain
   pm_genpd_init
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   __pm_runtime_disable
   pm_runtime_enable
   pm_runtime_forbid
@@ -856,6 +993,10 @@
   ppp_unit_number
   ppp_unregister_channel
   preempt_schedule
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  pm_wakeup_dev_event
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   preempt_schedule_notrace
   prepare_to_wait_event
   _printk
@@ -866,6 +1007,7 @@
   put_device
   put_disk
   __put_task_struct
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   queue_delayed_work_on
   queue_limits_commit_update
   queue_limits_commit_update_frozen
@@ -900,6 +1042,12 @@
   register_sysctl_sz
   regmap_bulk_read
   regmap_bulk_write
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  queue_work_on
+  _raw_spin_lock
+  _raw_spin_unlock
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   regmap_read
   regmap_update_bits_base
   regmap_write
@@ -908,6 +1056,7 @@
   regulator_disable
   regulator_disable_regmap
   regulator_enable
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   regulator_enable_regmap
   regulator_get_optional
   regulator_get_voltage
@@ -1048,7 +1197,19 @@
   __spmi_driver_register
   sprintf
   sscanf
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  sched_set_fifo
+  schedule_timeout
+  snprintf
+  spi_bus_lock
+  spi_bus_unlock
+  __spi_register_driver
+  spi_setup
+  spi_sync_locked
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   __stack_chk_fail
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   start_tty
   stop_tty
   strchr
@@ -1057,9 +1218,13 @@
   stream_open
   string_get_size
   strlen
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   strncasecmp
   strncmp
   strnlen
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   strrchr
   strsep
   strstr
@@ -1069,17 +1234,27 @@
   synchronize_irq
   sync_inode_metadata
   syscon_node_to_regmap
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  __sw_hweight8
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   syscon_regmap_lookup_by_compatible
   syscon_regmap_lookup_by_phandle
   sysfs_add_file_to_group
   sysfs_add_link_to_group
   sysfs_create_bin_file
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   sysfs_create_files
   sysfs_create_group
   sysfs_create_link
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  sysfs_create_group
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   sysfs_emit
   sysfs_emit_at
   sysfs_remove_bin_file
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   sysfs_remove_file_from_group
   sysfs_remove_files
   sysfs_remove_group
@@ -1276,9 +1451,37 @@
   usb_unlink_urb
   usb_unpoison_urb
   __usecs_to_jiffies
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  sysfs_remove_group
+  system_wq
+  trace_event_buffer_commit
+  trace_event_buffer_reserve
+  trace_event_printf
+  trace_event_raw_init
+  trace_event_reg
+  trace_handle_return
+  trace_print_symbols_seq
+  trace_raw_output_prep
+  __trace_trigger_soft_disabled
+  usb_alloc_urb
+  usb_bulk_msg
+  usb_deregister
+  usb_find_common_endpoints
+  usb_free_urb
+  usb_get_dev
+  usb_get_intf
+  usb_kill_urb
+  usb_put_dev
+  usb_put_intf
+  usb_register_driver
+  usb_reset_device
+  usb_submit_urb
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
   usleep_range_state
   utf8_data_table
   vivaldi_function_row_physmap_show
+<<<<<<< HEAD   (1be4d5ebd14623cc7f7889355c8776d7191669d8 [resolved] ANDROID: ABI: update symbols list for desktop am:)
   __vlan_find_dev_deep_rcu
   vmap
   vsnprintf
@@ -1301,3 +1504,9 @@
   xhci_get_ep_ctx
   xhci_init_driver
   xhci_reset_bandwidth
+||||||| BASE   (c72f93bc54ad189effb8bf7418efbf0b9ca76b53 ANDROID: ABI: update symbols list for desktop)
+=======
+  __wake_up
+  __wake_up_locked
+  __warn_printk
+>>>>>>> BRANCH (51c1aa9d5d2bf4e62c343098bd07440ceff9856a ANDROID: ABI: update symbols list for desktop)
