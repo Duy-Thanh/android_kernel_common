@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0cbad1c_2e008a71",
+        "filename": "mm/vma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2930,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-16T08:31:20Z",
+      "side": 1,
+      "message": "Hi @abarnas@google.com, seems there was a typo here. \n\n`__PAGE_ALIGNED(gap)` is returning `true` i.e. `addr \u003d\u003d 1`.\n\nThis should be `__PAGE_ALIGN(gap)` instead.\n\nIt should fix the boot issue on 6.18.",
+      "range": {
+        "startLine": 2930,
+        "startChar": 8,
+        "endLine": 2930,
+        "endChar": 22
+      },
+      "revId": "96382958b23b840a0f7cced260968216c51dc5a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
