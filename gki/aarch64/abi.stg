@@ -407156,6 +407156,17 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x986b1161
+  return_type_id: 0x6720d32f
+  parameter_id: 0x16864222
+  parameter_id: 0x16864222
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+  parameter_id: 0x33756485
+  parameter_id: 0x18bd6530
+  parameter_id: 0xf435685e
+}
+function {
   id: 0x986b1de3
   return_type_id: 0x6720d32f
   parameter_id: 0x16864222
@@ -407377,6 +407388,13 @@ function {
   id: 0x987e6939
   return_type_id: 0x6720d32f
   parameter_id: 0x17fa285b
+}
+function {
+  id: 0x987e8b69
+  return_type_id: 0x6720d32f
+  parameter_id: 0x16864222
+  parameter_id: 0x18bd6530
+  parameter_id: 0xf435685e
 }
 function {
   id: 0x987f6fc2
@@ -407899,6 +407917,15 @@ function {
   parameter_id: 0x295c7202
   parameter_id: 0x295c7202
   parameter_id: 0x295c7202
+}
+function {
+  id: 0x98d260e5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x16864222
+  parameter_id: 0x33756485
+  parameter_id: 0xf435685e
+  parameter_id: 0xf435685e
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x98d422e6
@@ -482741,6 +482768,15 @@ elf_symbol {
   full_name: "kvm_iommu_attach_dev"
 }
 elf_symbol {
+  id: 0xa278ae56
+  name: "kvm_iommu_attach_dev_nested"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x82f70d51
+  type_id: 0x986b1161
+  full_name: "kvm_iommu_attach_dev_nested"
+}
+elf_symbol {
   id: 0x7f2d7a20
   name: "kvm_iommu_detach_dev"
   is_defined: true
@@ -482748,6 +482784,15 @@ elf_symbol {
   crc: 0xb3db8d48
   type_id: 0x986b1de3
   full_name: "kvm_iommu_detach_dev"
+}
+elf_symbol {
+  id: 0xb746c26d
+  name: "kvm_iommu_detach_dev_nested"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3db8d48
+  type_id: 0x986b1de3
+  full_name: "kvm_iommu_detach_dev_nested"
 }
 elf_symbol {
   id: 0x36bd914d
@@ -482766,6 +482811,15 @@ elf_symbol {
   crc: 0x7710f897
   type_id: 0x907de947
   full_name: "kvm_iommu_init_hyp"
+}
+elf_symbol {
+  id: 0xe0fbfda1
+  name: "kvm_iommu_iotlb_inv_nested_domain"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xba76f9a5
+  type_id: 0x98d260e5
+  full_name: "kvm_iommu_iotlb_inv_nested_domain"
 }
 elf_symbol {
   id: 0xbe5a651d
@@ -482793,6 +482847,15 @@ elf_symbol {
   crc: 0x2b43e76d
   type_id: 0x9275cc99
   full_name: "kvm_iommu_map_sg"
+}
+elf_symbol {
+  id: 0x89fe7ba9
+  name: "kvm_iommu_nested_cfg_sync"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbbe7ce06
+  type_id: 0x987e8b69
+  full_name: "kvm_iommu_nested_cfg_sync"
 }
 elf_symbol {
   id: 0x3e5c3d46
@@ -526360,12 +526423,16 @@ interface {
   symbol_id: 0x63b579b3
   symbol_id: 0xca6c2d8c
   symbol_id: 0xdfad7ed3
+  symbol_id: 0xa278ae56
   symbol_id: 0x7f2d7a20
+  symbol_id: 0xb746c26d
   symbol_id: 0x36bd914d
   symbol_id: 0x90beb771
+  symbol_id: 0xe0fbfda1
   symbol_id: 0xbe5a651d
   symbol_id: 0x66d22e49
   symbol_id: 0xea885e01
+  symbol_id: 0x89fe7ba9
   symbol_id: 0x3e5c3d46
   symbol_id: 0xf840f4e4
   symbol_id: 0x32eb2834
