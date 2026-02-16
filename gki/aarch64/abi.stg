@@ -438330,6 +438330,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mm_try_split_folio_bypass"
 }
 elf_symbol {
+  id: 0x01554a41
+  name: "__traceiter_android_vh_mmap_lock_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff2b6413
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_mmap_lock_free"
+}
+elf_symbol {
+  id: 0x9b40ad23
+  name: "__traceiter_android_vh_mmap_lock_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff2b6413
+  type_id: 0x9bad4369
+  full_name: "__traceiter_android_vh_mmap_lock_init"
+}
+elf_symbol {
   id: 0xe44dacb1
   name: "__traceiter_android_vh_mmap_region"
   is_defined: true
@@ -445780,6 +445798,24 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_mm_try_split_folio_bypass"
+}
+elf_symbol {
+  id: 0x32e11a2b
+  name: "__tracepoint_android_vh_mmap_lock_free"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mmap_lock_free"
+}
+elf_symbol {
+  id: 0xab985ad9
+  name: "__tracepoint_android_vh_mmap_lock_init"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mmap_lock_init"
 }
 elf_symbol {
   id: 0xb6da564f
@@ -519437,6 +519473,8 @@ interface {
   symbol_id: 0xe8aea3fa
   symbol_id: 0x1239ea28
   symbol_id: 0x5ab6c4f4
+  symbol_id: 0x01554a41
+  symbol_id: 0x9b40ad23
   symbol_id: 0xe44dacb1
   symbol_id: 0x5612c9d1
   symbol_id: 0xa77effd1
@@ -520265,6 +520303,8 @@ interface {
   symbol_id: 0x806568cc
   symbol_id: 0x17727af2
   symbol_id: 0x3a8ae6f6
+  symbol_id: 0x32e11a2b
+  symbol_id: 0xab985ad9
   symbol_id: 0xb6da564f
   symbol_id: 0x41c8d09b
   symbol_id: 0xe2ad11db
