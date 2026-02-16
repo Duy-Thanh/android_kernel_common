@@ -52,6 +52,24 @@
       "parentUuid": "9cd80c95_4494ede6",
       "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a367ab_fb77b45e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270831
+      },
+      "writtenOn": "2026-02-16T16:27:50Z",
+      "side": 1,
+      "message": "ok i have moved to vendor module , now we need theese abi symbols please merge this.",
+      "parentUuid": "c8aa1c2e_becd131f",
+      "revId": "49d607588d3c811ad5b17862c92a3f6a57dfbff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
