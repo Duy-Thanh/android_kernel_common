@@ -241,6 +241,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d2f383a_1a10ab06",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-16T20:05:07Z",
+      "side": 1,
+      "message": "Can\u0027t you use the address of the `struct vm_area_struct` itself?",
+      "parentUuid": "d6de450f_4259fc60",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59001b94_7a60f937",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
