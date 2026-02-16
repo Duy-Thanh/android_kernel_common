@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712f8c19_39ef8bfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "Merge tag \u0027android16-6.12.63_r00\u0027 into android16-6.12",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbdfb98e_2973df05",
+        "filename": "/MERGE_LIST",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "006a3cf7_de1bdca6",
+        "filename": "/MERGE_LIST",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "```suggestion\n* b1337d7d Merge 0bf1a02494c7 (\"f2fs: fix to avoid updating compression context during writeback\") into android16-6.12-lts\n```",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "542bb97a_2df6d9af",
+        "filename": "arch/arm/boot/dts/microchip/sama5d2.dtsi",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "3917487: Merge tag \u0027android16-6.12.63_r00\u0027 into android16-6.12 | https://android-review.googlesource.com/c/kernel/common/+/3917487",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430122e4_4771db25",
+        "filename": "drivers/usb/core/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "```suggestion\n# define_trace.h needs to know how to find our header\n```",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

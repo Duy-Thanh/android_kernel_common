@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2575fe85_b8bb30fa",
+        "filename": "/MERGE_LIST",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:28:15Z",
+      "side": 1,
+      "message": "drivers/usb/core/Makefile",
+      "revId": "e6db256e814aa7676c88a84b2c15f009ea7d18b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4e6895_a271f096",
