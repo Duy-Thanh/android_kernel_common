@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c234d777_130e0ab2",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-16T09:48:43Z",
+      "side": 1,
+      "message": "Are you really sure? I looked at one, and e.g. `i915_gem_dmabuf_mmap` calls `vfs_mmap`, which I believe sets the fault handler to `shmem_fault`, which does in fact access `vm_file`.\n\nOr any of the GPU drivers that use TTM use `ttm_bo_vm_open` as the open callback, which uses `vma-\u003evm_file-\u003ef_mapping`.",
+      "parentUuid": "683027f2_d535fbaa",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 25
+      },
+      "revId": "1589b633d0d603a082d0717dd48759f6e8c0301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59001b94_7a60f937",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
