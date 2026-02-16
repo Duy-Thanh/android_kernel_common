@@ -54,6 +54,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "083934b2_0b71d760",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:29:21Z",
+      "side": 1,
+      "message": "H",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "542bb97a_2df6d9af",
         "filename": "arch/arm/boot/dts/microchip/sama5d2.dtsi",
         "patchSetId": 2
@@ -65,6 +82,24 @@
       "writtenOn": "2026-02-16T11:28:15Z",
       "side": 1,
       "message": "3917487: Merge tag \u0027android16-6.12.63_r00\u0027 into android16-6.12 | https://android-review.googlesource.com/c/kernel/common/+/3917487",
+      "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafa29c6_f45eb552",
+        "filename": "arch/arm/boot/dts/microchip/sama5d2.dtsi",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 4222633
+      },
+      "writtenOn": "2026-02-16T11:29:21Z",
+      "side": 1,
+      "message": "3917487: Merge tag \u0027android16-6.12.63_r00\u0027 into android16-6.12 | https://android-review.googlesource.com/c/kernel/common/+/3917487",
+      "parentUuid": "542bb97a_2df6d9af",
       "revId": "83c6be0e1efeae09e04fb24fcfc221c5af65b1f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
