@@ -337,6 +337,10 @@ static int unmap_emulated_mmio(struct pkvm_moveable_reg *reg)
 		if (ret)
 			goto err_setup;
 	}
+
+	if (reg->cb)
+		reg->cb = kern_hyp_va(reg->cb);
+
 	return 0;
 err_setup:
 	for (i = i - 1; i >= 0; i--)
