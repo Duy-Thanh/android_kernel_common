@@ -22,6 +22,30 @@
       },
       "revId": "96382958b23b840a0f7cced260968216c51dc5a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a750848b_8c378bac",
+        "filename": "mm/vma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2930,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-17T19:35:39Z",
+      "side": 1,
+      "message": "I applied this fix for the boot issue.",
+      "parentUuid": "d0cbad1c_2e008a71",
+      "range": {
+        "startLine": 2930,
+        "startChar": 8,
+        "endLine": 2930,
+        "endChar": 22
+      },
+      "revId": "96382958b23b840a0f7cced260968216c51dc5a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
