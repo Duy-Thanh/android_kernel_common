@@ -335,6 +335,9 @@ static int unmap_emulated_mmio(struct pkvm_moveable_reg *reg)
 	if (ret)
 		return ret;
 
+	if (reg->cb)
+		reg->cb = kern_hyp_va(reg->cb);
+
 	return 0;
 }
 
