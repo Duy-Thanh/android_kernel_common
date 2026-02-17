@@ -189,6 +189,30 @@
       },
       "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af1e9d4e_c8abed35",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-17T20:45:50Z",
+      "side": 1,
+      "message": "\u003e one device would have to hang until it\u0027s called on all the others \n\nHum, I do not see why. With a shared pPD, the firmware would \"just\" have to do refcounting just like the kernel does, or did I miss something?\n\nThe vPD doesn\u0027t guarantee that the power is off, it solely guarantees that power is on after pm_runtime_get().\n\nAlso we should support device assignment to separate VMs even when those devices are sharing the same pPD.",
+      "parentUuid": "46e7663b_87fc5cef",
+      "range": {
+        "startLine": 216,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "2df90823aedb72e1e7c5a42b5441d27e8804316e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
