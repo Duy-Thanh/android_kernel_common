@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6065dfd6_5d4f25f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:07:42Z",
+      "side": 1,
+      "message": "It does?",
+      "range": {
+        "startLine": 16,
+        "startChar": 29,
+        "endLine": 16,
+        "endChar": 32
+      },
+      "revId": "e021cc549a50eab17782cd39b415bb7efd26c742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94809a99_48599ad9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:07:42Z",
+      "side": 1,
+      "message": "What is the point of adding a function to the DMA API that bypasses it, can\u0027t we either call the underlying function directly.",
+      "range": {
+        "startLine": 24,
+        "startChar": 25,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "e021cc549a50eab17782cd39b415bb7efd26c742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
