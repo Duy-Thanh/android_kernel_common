@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5375ca4_c94d3367",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:19Z",
+      "side": 1,
+      "message": "Recent discussions upstream indicated that pfn_valid() in not enough in such cases, you\u0027d need something stronger, although I am inclined to delegate the check to the caller as it have the full context.",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 12
+      },
+      "revId": "b0edf41b446d27c801d492bc0f8ce12cf4862f1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f445abc3_ea2cfb53",
+        "filename": "drivers/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3908,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:19Z",
+      "side": 1,
+      "message": "I\u0027d argue to batch everything unchecked as mentioned in the commit message in that case.",
+      "range": {
+        "startLine": 3908,
+        "startChar": 3,
+        "endLine": 3908,
+        "endChar": 43
+      },
+      "revId": "b0edf41b446d27c801d492bc0f8ce12cf4862f1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
