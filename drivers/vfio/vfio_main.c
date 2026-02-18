@@ -341,9 +341,12 @@ static int __vfio_register_dev(struct vfio_device *device,
 	 * VFIO always sets IOMMU_CACHE because we offer no way for userspace to
 	 * restore cache coherency. It has to be checked here because it is only
 	 * valid for cases where we are using iommu groups.
+	 * Protected device are managed by the hypervisor and don't rely on type1
+	 * IOMMU, they can handle non-coherent devices.
 	 */
 	if (type == VFIO_IOMMU && !vfio_device_is_noiommu(device) &&
-	    !device_iommu_capable(device->dev, IOMMU_CAP_CACHE_COHERENCY)) {
+	    !device_iommu_capable(device->dev, IOMMU_CAP_CACHE_COHERENCY) &&
+	    !is_protected_kvm_enabled()) {
 		ret = -EINVAL;
 		goto err_out;
 	}
