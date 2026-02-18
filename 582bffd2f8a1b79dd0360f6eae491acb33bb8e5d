@@ -104,6 +104,24 @@
       "parentUuid": "138be50d_b9c6c663",
       "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8c0acc_92519750",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-18T18:05:06Z",
+      "side": 1,
+      "message": "Note that remapping the vma in-process also triggers the open/close callbacks, so that may be an easier way to test the same issue.",
+      "parentUuid": "52dbba40_2dfe9081",
+      "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
