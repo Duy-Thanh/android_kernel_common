@@ -56,6 +56,30 @@
       },
       "revId": "3af053c0bdb1634eb9a02e3dbbf5a35fd9358fae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee704f44_23bc7645",
+        "filename": "arch/x86/kernel/cpu/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T17:34:08Z",
+      "side": 1,
+      "message": "Done (in Kconfig as well).",
+      "parentUuid": "a9976ae7_37cffa28",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "3af053c0bdb1634eb9a02e3dbbf5a35fd9358fae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
