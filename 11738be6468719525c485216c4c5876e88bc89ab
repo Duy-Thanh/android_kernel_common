@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc468db0_40d4f169",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T23:02:19Z",
+      "side": 1,
+      "message": "nit: maybe add an empty line above this line?",
+      "revId": "11738be6468719525c485216c4c5876e88bc89ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96acb464_17007114",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1081,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T23:02:19Z",
+      "side": 1,
+      "message": "nit: unneeded empty line?",
+      "revId": "11738be6468719525c485216c4c5876e88bc89ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
