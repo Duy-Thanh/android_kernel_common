@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e86ccd_1f467270",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-18T13:59:56Z",
+      "side": 1,
+      "message": "Greg I assume the C binder version of this will hit 6.12 automatically?",
+      "revId": "cbb9061c4613052e645c7049cc459fe782b36df8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
