@@ -135,7 +135,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 	if (IS_ERR(attachment))
 		return PTR_ERR(attachment);
 
-	sgtbl = dma_buf_map_attachment(attachment, DMA_FROM_DEVICE);
+	sgtbl = dma_buf_map_attachment_unlocked(attachment, DMA_FROM_DEVICE);
 	if (IS_ERR(sgtbl)) {
 		ret = PTR_ERR(sgtbl);
 		goto err_detach;
@@ -172,7 +172,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 err_free:
 	kvfree(bvec);
 err_unmap:
-	dma_buf_unmap_attachment(attachment, sgtbl, DMA_FROM_DEVICE);
+	dma_buf_unmap_attachment_unlocked(attachment, sgtbl, DMA_FROM_DEVICE);
 err_detach:
 	dma_buf_detach(dmabuf_content->dmabuf, attachment);
 
@@ -197,8 +197,6 @@ static int dmabuf_content_mmap_prepare(struct wrap_content *content,
 			return -EINVAL;
 	}
 
-	vm_flags_set(vma, VM_SHARED | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
-
 	return 0;
 }
 
@@ -211,6 +209,7 @@ static int dmabuf_content_mmap(struct wrap_content *content,
 	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
 				      content);
 
+	vm_flags_set(vma, VM_SHARED | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
 	ret = dma_buf_mmap(dmabuf_content->dmabuf, vma, 0);
 	if (ret)
 		return ret;
