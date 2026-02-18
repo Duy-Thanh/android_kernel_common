@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36532b91_436adf15",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-18T20:54:27Z",
+      "side": 1,
+      "message": "Doesn\u0027t dma_buf_mmap set VM_PFNMAP for us?",
+      "revId": "6c96641e5885c5125a81bcfdfc938ec36c0b5a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
