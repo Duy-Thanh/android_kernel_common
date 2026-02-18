@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1549d233_3cd994aa",
+        "filename": "drivers/vfio/vfio_iommu_type1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:52Z",
+      "side": 1,
+      "message": "I don\u0027t understand this, now every time a vfio_dma is mapped in an non-coherent DMA it set this flag and do the flush.\nThe on the unpin path we set it back to false.\n\n1) What happens if multiple non-coherent devices were attached and one them unpins the DMA, my guess is that the flag is set to false? which skips CMOs on the unpins for the second device.\n\n2) Why is this tracked per vfio_dma rather than on domain/iommu/contianer level, all vfio_dma should be mapped to all device in the same container.",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 28
+      },
+      "revId": "0e288e51d9075c45f4eeb7c01ff36a2e93cdb522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174e5a1b_d6130429",
+        "filename": "drivers/vfio/vfio_iommu_type1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:52Z",
+      "side": 1,
+      "message": "What if we have more than one non-coherent device in the IOMMU?\n\nI feel like the API should avoid having the device struct, the caller should already know that this memory interacts with non-coherent DMA and it should be flushed.\nThis will simplify all of that.",
+      "range": {
+        "startLine": 331,
+        "startChar": 22,
+        "endLine": 331,
+        "endChar": 52
+      },
+      "revId": "0e288e51d9075c45f4eeb7c01ff36a2e93cdb522",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
