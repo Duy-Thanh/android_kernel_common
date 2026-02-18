@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0338630_9de42dd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T22:16:03Z",
+      "side": 1,
+      "message": "Outdated info?",
+      "revId": "5f37ffbdb72438b158d48acc66c300215c9a2fd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b533a01c_f1675505",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T22:16:03Z",
+      "side": 1,
+      "message": "Looks like `iqe_err` and `ite_sid` are not really used (in the hypervisor), so we can #ifdef them out as well (thus BTW optimize out unused register read)?\n\nIOW, we can essentially revert (i.e. #ifdef out) commit 80a9b50c0b9e (\"iommu/vt-d: Improve ITE fault handling if target device isn\u0027t present\")?\n\nBTW referring to the commit message of that commit, I assume it\u0027s ok for us to remove this ite_sid handling because we don\u0027t allow ATS for hotpluggable devices, only for (some) SoC-integrated ones.",
+      "revId": "5f37ffbdb72438b158d48acc66c300215c9a2fd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
