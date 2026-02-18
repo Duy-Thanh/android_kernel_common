@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e15496b_4144a2ec",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T15:14:26Z",
+      "side": 1,
+      "message": "nit: looks like we have a tab character instead of space character here? :)",
+      "revId": "9270c821c1136ab82cc5fbf27c1c9aa756052cb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
