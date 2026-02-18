@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73265c5b_d4777948",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-18T18:03:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37d5ad8b_6b52b7d6",
+      "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab8c671b_9909517e",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21909a75_3e2e7591",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-18T18:03:01Z",
+      "side": 1,
+      "message": "xa_load() calls rcu_read_lock() itself to protect its internals. We would need an RCU read section if we were stabilizing the object after we load it (refcounting for example), however as I mentioned in the comments, if we find the object in the xarray it will be stable, so no need to stabilize it or for an extra RCU read section in the caller.\n\nHowever you are right, I forgot to enable lockdep. I enabled it now and as expected this one does not trigger but it caught couple other issues. Will include the fixes in the next revision.",
+      "parentUuid": "ab8c671b_9909517e",
+      "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "138be50d_b9c6c663",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 4
@@ -48,6 +84,24 @@
       "writtenOn": "2026-02-18T14:06:45Z",
       "side": 1,
       "message": "This needs to be `hash_ctx`, right?",
+      "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52dbba40_2dfe9081",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-18T18:03:01Z",
+      "side": 1,
+      "message": "Yes, I need to add a test case for forking...\n\nHmm, this gets complicated. Ok I think there is a simpler way to do this vm_ops override instead of hashing. I think we can stash the context next to vm_ops and then find it using vma-\u003evm_ops. Let me try that instead and will post if it works.",
+      "parentUuid": "138be50d_b9c6c663",
       "revId": "582bffd2f8a1b79dd0360f6eae491acb33bb8e5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
