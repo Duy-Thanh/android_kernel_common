@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d00995_ae5befd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-19T20:14:32Z",
+      "side": 1,
+      "message": "cc: @srosek@google.com, just FYI: this is in sync to what is enabled in ARM\u0027s gki_defconfig already:\n```\narch/arm64/configs/microdroid_defconfig\n85:CONFIG_OPEN_DICE\u003dy\n\narch/arm64/configs/gki_defconfig\n355:CONFIG_OPEN_DICE\u003dm\n\narch/x86/configs/gki_defconfig\n342:CONFIG_OPEN_DICE\u003dm\n\narch/x86/configs/microdroid_defconfig\n99:CONFIG_OPEN_DICE\u003dy\n```\nand\n\n```\narch/arm64/configs/gki_defconfig\n616:CONFIG_ARM_PKVM_GUEST\u003dy\n\narch/arm64/configs/microdroid_defconfig\n125:CONFIG_ARM_PKVM_GUEST\u003dy\n```",
+      "revId": "585d2542e7191eec060ca7ac73cb359ccd2f3e9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
