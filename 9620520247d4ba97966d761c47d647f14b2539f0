@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8486833d_b6032d97",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T16:45:57Z",
+      "side": 1,
+      "message": "Use pkvm_host_gpa_to_phys()? Or e.g. __pkvm_pa(pgd)?",
+      "revId": "9620520247d4ba97966d761c47d647f14b2539f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f06a64d1_dfb88419",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T16:45:57Z",
+      "side": 1,
+      "message": "Use pkvm_host_gpa_to_phys()? Or e.g. __pkvm_pa(pgd)?",
+      "revId": "9620520247d4ba97966d761c47d647f14b2539f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
