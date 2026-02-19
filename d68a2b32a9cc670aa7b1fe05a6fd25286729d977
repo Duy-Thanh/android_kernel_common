@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95130e29_272a7373",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-19T07:00:48Z",
+      "side": 1,
+      "message": "This needs a comment",
+      "revId": "d68a2b32a9cc670aa7b1fe05a6fd25286729d977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
