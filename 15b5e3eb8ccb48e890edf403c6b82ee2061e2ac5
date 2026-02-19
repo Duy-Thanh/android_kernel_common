@@ -118,6 +118,30 @@
       },
       "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "524a9cb7_084ce5be",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T13:13:45Z",
+      "side": 1,
+      "message": "\u003e Despite of above maybe s/the typical TSC crystal clock frequency/the typical crystal clock frequency/ to not mislead someone who look on the dmesg which says \"tsc: Detected 3187.200 MHz TSC\", WDYT?\n\nMakes sense, SDM refers to it as \"core crystal clock\", not \"TSC crystal clock\", I can change the comments accordingly.",
+      "parentUuid": "99a3fe19_230c6f12",
+      "range": {
+        "startLine": 2159,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 43
+      },
+      "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
