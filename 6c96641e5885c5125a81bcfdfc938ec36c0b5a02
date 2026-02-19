@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t dma_buf_mmap set VM_PFNMAP for us?",
       "revId": "6c96641e5885c5125a81bcfdfc938ec36c0b5a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde1c3e6_a82a8e46",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-19T00:03:30Z",
+      "side": 1,
+      "message": "For dmabufs allocated from a dmabuf heaps this would depend on specific heap implementation. For example, I don\u0027t see system heap setting it. But I wonder if we should just let the same vm_flags be used for wrapfd mappings without modification. I think that makes sense since all accesses go to the underlying object anyway.",
+      "parentUuid": "36532b91_436adf15",
+      "revId": "6c96641e5885c5125a81bcfdfc938ec36c0b5a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
