@@ -370,6 +370,7 @@ struct rwsem_waiter {
 	enum rwsem_waiter_type type;
 	unsigned long timeout;
 	bool handoff_set;
+	bool donor_wakeup;
 };
 #define rwsem_first_waiter(sem) \
 	list_first_entry(&sem->wait_list, struct rwsem_waiter, list)
@@ -462,6 +463,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 					if (w->task == _donor) {
 						donor = _donor;
 						waiter = w;
+						waiter->donor_wakeup = true;
 						break;
 					}
 				}
@@ -687,6 +689,15 @@ static inline bool rwsem_try_write_lock(struct rw_semaphore *sem,
 	count = atomic_long_read(&sem->count);
 	do {
 		bool has_handoff = !!(count & RWSEM_FLAG_HANDOFF);
+
+		/*
+		 * If we were proxy boosted, and chose to wakeup
+		 * the donor instead of the first waiter, ignore
+		 * the handoff flag in that case, so we don't end
+		 * up with no one waking the first waiter.
+		 */
+		if (waiter->donor_wakeup)
+			has_handoff = false;
 
 		if (has_handoff) {
 			/*
