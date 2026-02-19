@@ -34,6 +34,24 @@
       "parentUuid": "36532b91_436adf15",
       "revId": "6c96641e5885c5125a81bcfdfc938ec36c0b5a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512b5797_f6b5a744",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-19T10:37:03Z",
+      "side": 1,
+      "message": "I think it makes sense to let the dma buf decide whether VM_PFNMAP should be set or not. Setting VM_PFNMAP on a system heap seems wrong anyway, right?",
+      "parentUuid": "dde1c3e6_a82a8e46",
+      "revId": "6c96641e5885c5125a81bcfdfc938ec36c0b5a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
