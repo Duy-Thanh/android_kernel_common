@@ -16,6 +16,24 @@
       "message": "nit: so maybe worth adding a comment like \"This hypercall is temporary anyway (it will be removed in later patches) so don\u0027t bother to host_share_hyp the desc_gpa memory.\"?",
       "revId": "3ad4702c545a49abbd66a11eda2a79067337d524",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "017c59d2_09093129",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-19T09:55:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31d6749a_caf79dee",
+      "revId": "3ad4702c545a49abbd66a11eda2a79067337d524",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
