@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd199327_c7c483c9",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-19T20:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bdb2b6d_ea0e2b32",
+      "revId": "b8a7d2ab852fd03eef219c983d982a422e7b404c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8187408_460ef7e2",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-19T16:43:16Z",
       "side": 1,
       "message": "Use pkvm_host_gpa_to_phys()?",
+      "revId": "b8a7d2ab852fd03eef219c983d982a422e7b404c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00da741a_48bac86f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-19T20:25:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8187408_460ef7e2",
       "revId": "b8a7d2ab852fd03eef219c983d982a422e7b404c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
