@@ -142,6 +142,30 @@
       },
       "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "776976c7_5da7a515",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T13:32:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "524a9cb7_084ce5be",
+      "range": {
+        "startLine": 2159,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 43
+      },
+      "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
