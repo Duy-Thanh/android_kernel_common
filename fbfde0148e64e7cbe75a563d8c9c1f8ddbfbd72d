@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf3a8b6_f626bb48",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-19T14:35:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be request_hyp_alloc?",
+      "revId": "fbfde0148e64e7cbe75a563d8c9c1f8ddbfbd72d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
