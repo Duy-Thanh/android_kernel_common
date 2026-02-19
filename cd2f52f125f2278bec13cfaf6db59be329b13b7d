@@ -118,6 +118,30 @@
       },
       "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3871de34_0c9c5a57",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/errno.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-19T10:26:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "befbeb01_4e81a7f5",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "cd2f52f125f2278bec13cfaf6db59be329b13b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
