@@ -16,6 +16,23 @@
       "message": "Hello,\nI make a patch for adding GKI symbol for Eyxnosauto SOC.\nPlease check it.\nThank you.",
       "revId": "8733bafc09e70bef86d38dbd65c9e88c134b5e00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a781f9_a2c357bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3257068
+      },
+      "writtenOn": "2026-02-19T23:48:16Z",
+      "side": 1,
+      "message": "Hello, @tkjos@google.com\nI think this patch is not merge yet.\nIs there a problem with this patch?",
+      "revId": "8733bafc09e70bef86d38dbd65c9e88c134b5e00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
