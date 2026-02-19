@@ -70,6 +70,30 @@
       },
       "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b99ed7_2b787dbe",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-19T13:02:58Z",
+      "side": 1,
+      "message": "Yeah I saw this comment and I am not worry about the  0.1-0.2% calculation error which I\u0027ve noticed, just wasn\u0027t sure if all those different detected TSC frequencies on different Intel CPUs (e.g. in example that I posted, or some other that I am not aware of) will work fine with this code and will not cause some more significant errors. There is statement in the comment that:\n\n```\n                                 * .. use 38.4 MHz\n\t\t\t\t * which is the typical TSC crystal clock frequency\n\t\t\t\t * on today\u0027s Intel\u0027s desktop CPUs.\n```\nand just trying to make sure that it is correct for CPUs that we care about and if not if we need yet another TODO?\nBut seems from examples that I used, the `Detected x MHz TSC` are clean multiple of 38.4 MHz which should be fine.\n\nDespite of above maybe s/the typical TSC crystal clock frequency/the typical crystal clock frequency/ to not mislead someone who look on the dmesg which says \"tsc: Detected 3187.200 MHz TSC\", WDYT?",
+      "parentUuid": "91df7d4d_598575c4",
+      "range": {
+        "startLine": 2159,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 43
+      },
+      "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
