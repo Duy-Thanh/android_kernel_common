@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc3a0bf_0de35dc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-19T10:44:17Z",
+      "side": 1,
+      "message": "Reported on android17-6.18 by bot:\nhttps://lore.kernel.org/all/202601221701.if9B7kJE-lkp@intel.com/\n\nNot being automatically backported as d4b83ba11cf22 not present in 6.18 upstream.",
+      "revId": "80ea0934fdd13e16a11ce55c248437043e52846f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
