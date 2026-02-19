@@ -311,6 +311,7 @@ struct pkvm_moveable_reg {
 	u64 size;
 	enum pkvm_moveable_reg_type type;
 	pkvm_emulate_handler *cb;
+	void *priv;
 };
 
 #define PKVM_NR_MOVEABLE_REGS 512
