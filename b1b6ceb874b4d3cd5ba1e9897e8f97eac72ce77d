@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97db66c0_3b301013",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-02-19T09:23:26Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:SWITCH_CASE_INDENT_LEVEL: switch and case should be at the same indent\n\nERROR:SWITCH_CASE_INDENT_LEVEL: switch and case should be at the same indent",
+      "range": {
+        "startLine": 1801,
+        "startChar": 0,
+        "endLine": 1801,
+        "endChar": 0
+      },
+      "revId": "b1b6ceb874b4d3cd5ba1e9897e8f97eac72ce77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
