@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2884a8_fc318821",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2168,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-19T11:26:48Z",
+      "side": 1,
+      "message": "sorry for ignorant question but will it be ok on recent Intel CPUs? I see e.g.\nalderlake:\n```\n[    0.000000] tsc: Detected 2500.000 MHz processor\n[    0.000000] tsc: Detected 2496.000 MHz TSC\n```\npanterlake:\n```\n[    0.000000] tsc: Detected 3200.000 MHz processor\n[    0.000000] tsc: Detected 3187.200 MHz TSC\n```\nalderlake-n:\n```\n[    0.000000] tsc: Detected 1000.000 MHz processor\n[    0.000000] tsc: Detected 998.400 MHz TSC\n```\nor we need to add at least some other TODOs here?",
+      "range": {
+        "startLine": 2159,
+        "startChar": 0,
+        "endLine": 2168,
+        "endChar": 43
+      },
+      "revId": "15b5e3eb8ccb48e890edf403c6b82ee2061e2ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
