@@ -664,6 +664,31 @@ void gic_v3_dist_wait_for_rwp(void);
 int its_save_disable(void);
 void its_restore_enable(void);
 
+/*
+ * The ITS_BASER structure - contains memory information, cached
+ * value of BASER register configuration and ITS page size.
+ */
+struct its_baser {
+	void		*base;
+	void		*shadow;
+	u64		val;
+	u32		order;
+	u32		psz;
+};
+
+struct its_shadow_tables {
+	struct its_baser	tables[GITS_BASER_NR_REGS];
+	void			*cmd_shadow;
+	void			*cmd_original;
+	void			*cmd_write;
+	size_t			cmdq_len;
+};
+
+typedef int (*its_init_emulate)(phys_addr_t its_phys_base, struct its_shadow_tables *shadow);
+
+void its_start_deprivilege(unsigned long *flags);
+int its_end_deprivilege(int ret, unsigned long *flags, its_init_emulate cb);
+
 #endif
 
 #endif
