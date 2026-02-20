@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80593255_75664702",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T03:11:35Z",
+      "side": 1,
+      "message": "We should flush CPU cache for pasid_table_gpa after donating it if !ecap_coherent(iommu) (since device_pasid_table_setup() doesn\u0027t do that, since normally that is done by intel_pasid_alloc_table() in the host after allocating the PASID table, but we don\u0027t trust the host)?",
+      "revId": "0f3c379eccd87512d19d460d3f90a11d69eda599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
