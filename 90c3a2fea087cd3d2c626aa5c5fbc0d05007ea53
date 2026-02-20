@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afe8596_5ae96d9a",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "nit: just a thought: maybe instead of this `#else` it would be more clear to have `#endif` followed by `#ifdef __PKVM_HYP__` (with an empty line between them :)), since this cache tag assign doesn\u0027t relate to this copied_context_tear_down() in any way?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b6116f_330309fb",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "goto out_unlock?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a960c6a2_ad06135a",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "I see context_get_address_root() is used in exactly one place, and the code around it looks like this:\n```\n#ifdef __PKVM_HYP__\n        if (sm) {\n                pasid_dir \u003d __pkvm_va(context-\u003elo \u0026 VTD_PAGE_MASK);\n                pasid_dir_sz \u003d get_pasid_dir_size(context);\n                if (pasid_table_has_present_entries(pasid_dir, pasid_dir_sz)) {\n                        spin_unlock(\u0026iommu-\u003elock);\n                        return;\n                }\n        } else {\n                pgd \u003d __pkvm_va(context_get_address_root(context));\n        }\n#endif\n```\n\nSo maybe it\u0027s a bit an overkill to add this helper just for this, instead of just open-coding `context-\u003elo \u0026 VTD_PAGE_MASK` like for scalable mode above?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff8f1afb_978001cd",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "READ_ONCE doesn\u0027t seem really needed (context entries are only updated by SW, not by HW, and only with iommu-\u003elock held)? \n\nI know it is used a lot in pasid.h, but as noted for example by Jason in https://lore.kernel.org/linux-iommu/20260105191410.GJ125261@ziepe.ca/, there is no real reason for using it there either, it is just historical.\n\nSo for pasid_get_{flptr,slptr}() we might follow this \"pattern\" of using READ_ONCE just because it exists in pasid.h, but here for context entries we don\u0027t need to introduce it?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "befbfc2f_269fcf27",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "Similarly, maybe `#endif` + `#ifdef __PKVM_HYP__` instead?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6541bea3_114268a4",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3c1ebf_ae7a37bd",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8faa62_471f7125",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a93162f_08a88538",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ed9af0_ff166cea",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c526d0_38b2591d",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4371d26e_dd3a770c",
+        "filename": "drivers/iommu/intel/pkvm/iommu_domain.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "Why not pkvm_get_domain_cache_tag_assign() and pkvm_put_domain_cache_tag_unassign(), in line with pkvm_{get,put}_iommu_domain()? Since we already use get/put terminology for domains, it seems confusing to introduce acquire/release terminology for the same thing.",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310401e6_8145c5fe",
+        "filename": "drivers/iommu/intel/pkvm_iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:18:44Z",
+      "side": 1,
+      "message": "Since we have a separate header iommu_domain.h, these should be declared there, together with other declarations for domains?\n\nI\u0027m not sure we really need that separate header, but since we do have it...",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
