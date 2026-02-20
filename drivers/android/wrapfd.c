@@ -170,16 +170,6 @@ static bool dmabuf_content_is_writable(struct wrap_content *content)
 	return dmabuf_content->writable;
 }
 
-static int dmabuf_content_mmap_prepare(struct wrap_content *content,
-				       struct vm_area_struct *vma)
-{
-	if ((vma->vm_flags & VM_MAYWRITE) &&
-	    !dmabuf_content_is_writable(content))
-		return -EINVAL;
-
-	return 0;
-}
-
 static int dmabuf_content_mmap(struct wrap_content *content,
 			       struct vm_area_struct *vma)
 {
@@ -257,7 +247,6 @@ static int dmabuf_content_ioctl(struct wrap_content *content,
 static struct wrap_content_operations dmabuf_content_ops = {
 	.create_wrap		= dmabuf_content_create_wrap,
 	.load			= dmabuf_content_load,
-	.mmap_prepare		= dmabuf_content_mmap_prepare,
 	.mmap			= dmabuf_content_mmap,
 	.make_writable		= dmabuf_content_make_writable,
 	.is_writable		= dmabuf_content_is_writable,
@@ -449,6 +438,7 @@ static int wrap_mmap(struct file *file, struct vm_area_struct *vma)
 	struct wrap_ctx *ctx = file->private_data;
 	struct wrap_ctx_mapping *mapping;
 	struct wrap_content *content;
+	bool make_rdonly = false;
 	int ret = 0;
 
 	spin_lock(&ctx->lock);
@@ -473,15 +463,29 @@ static int wrap_mmap(struct file *file, struct vm_area_struct *vma)
 		goto unlock;
 	}
 
-	ret = content->ops->mmap_prepare(content, vma);
-	if (!ret) {
-		/*
-		 * Increased map_count prevents changes in the ownership,
-		 * rewrapping or emptying the content. Therefore content
-		 * is stable.
-		 */
-		ctx->map_count++;
+	/* Handle read-only content */
+	if (content->ops->is_writable &&
+	    !content->ops->is_writable(content)) {
+		if (vma->vm_flags & VM_WRITE) {
+			ret = -EACCES;
+			goto unlock;
+		}
+		make_rdonly = !!(vma->vm_flags & VM_MAYWRITE);
 	}
+
+	if (content->ops->mmap_prepare) {
+		ret = content->ops->mmap_prepare(content, vma);
+		if (ret) {
+			ret = -EINVAL;
+			goto unlock;
+		}
+	}
+	/*
+	 * Increased map_count prevents changes in the
+	 * ownership, rewrapping or emptying the content.
+	 * Therefore content is stable.
+	 */
+	ctx->map_count++;
 unlock:
 	spin_unlock(&ctx->lock);
 
@@ -496,9 +500,21 @@ unlock:
 	}
 
 	ret = content->ops->mmap(content, vma);
-	if (ret) {
-		kfree(mapping);
-		goto err_dec;
+	if (ret)
+		goto err_free_mapping;
+
+	if (make_rdonly) {
+		/*
+		 * content->ops->mmap should not be mapping read-only content
+		 * as writable. Either content->ops->is_writable reports
+		 * incorrect value or content->ops->mmap is misbehaving.
+		 */
+		if (unlikely(vma->vm_flags & VM_WRITE)) {
+			pr_warn("wrapfd read-only content was mapped as writable\n");
+			ret = -EACCES;
+			goto err_free_mapping;
+		}
+		vma->vm_flags &= ~VM_MAYWRITE;
 	}
 
 	spin_lock(&ctx->lock);
@@ -513,6 +529,8 @@ unlock:
 	spin_unlock(&ctx->lock);
 
 	return 0;
+err_free_mapping:
+	kfree(mapping);
 err_dec:
 	spin_lock(&ctx->lock);
 	ctx->map_count--;
