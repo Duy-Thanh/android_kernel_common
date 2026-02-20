@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3bddbe_96779424",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7afe8596_5ae96d9a",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40b6116f_330309fb",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "goto out_unlock?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "180a3b00_935e58db",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40b6116f_330309fb",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9110350b_71c19d3d",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a960c6a2_ad06135a",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8f1afb_978001cd",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "READ_ONCE doesn\u0027t seem really needed (context entries are only updated by SW, not by HW, and only with iommu-\u003elock held)? \n\nI know it is used a lot in pasid.h, but as noted for example by Jason in https://lore.kernel.org/linux-iommu/20260105191410.GJ125261@ziepe.ca/, there is no real reason for using it there either, it is just historical.\n\nSo for pasid_get_{flptr,slptr}() we might follow this \"pattern\" of using READ_ONCE just because it exists in pasid.h, but here for context entries we don\u0027t need to introduce it?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981a9f5b_c7d0d48b",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff8f1afb_978001cd",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685c69da_eaebfca3",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "befbfc2f_269fcf27",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6541bea3_114268a4",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45301960_34aae04c",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6541bea3_114268a4",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f179ad61_dbd6d12e",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb3c1ebf_ae7a37bd",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb8faa62_471f7125",
@@ -133,6 +259,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c79f106_7c5aa157",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb8faa62_471f7125",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -154,6 +298,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f101554_6b3f5dc8",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a93162f_08a88538",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76ed9af0_ff166cea",
@@ -167,6 +329,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "spin_unlock first?",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c8919c5_0069d2b1",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76ed9af0_ff166cea",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -188,6 +368,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "610d9679_18c50a81",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25c526d0_38b2591d",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4371d26e_dd3a770c",
@@ -205,6 +403,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad20cc7_c06895bf",
+        "filename": "drivers/iommu/intel/pkvm/iommu_domain.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4371d26e_dd3a770c",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "310401e6_8145c5fe",
@@ -218,6 +434,24 @@
       "writtenOn": "2026-02-20T01:18:44Z",
       "side": 1,
       "message": "Since we have a separate header iommu_domain.h, these should be declared there, together with other declarations for domains?\n\nI\u0027m not sure we really need that separate header, but since we do have it...",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88b9710_940adbdf",
+        "filename": "drivers/iommu/intel/pkvm_iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-02-20T12:03:11Z",
+      "side": 1,
+      "message": "I think we should remove iommu_domain.h.",
+      "parentUuid": "310401e6_8145c5fe",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
