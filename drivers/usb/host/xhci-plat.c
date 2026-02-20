@@ -273,6 +273,17 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
 					 &xhci->max_interrupters);
 	}
 
+	for (tmpdev = &pdev->dev; tmpdev; tmpdev = tmpdev->parent) {
+		const char *comp = of_get_property(tmpdev->of_node, "compatible", NULL);
+		if (comp && !strcmp(comp, "qcom,dwc-usb3-msm")) {
+			struct resource *qsram_res = platform_get_resource_byname(
+						to_platform_device(tmpdev), IORESOURCE_MEM,
+						"dwc3_qsram_base");
+			if (qsram_res)
+				xhci->qsram = devm_ioremap(tmpdev, qsram_res->start,
+							resource_size(qsram_res));
+		}
+	}
 	/*
 	 * Drivers such as dwc3 manages PHYs themself (and rely on driver name
 	 * matching for the xhci platform device).

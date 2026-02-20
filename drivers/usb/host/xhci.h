@@ -38,6 +38,10 @@
 /* Section 5.3.3 - MaxPorts */
 #define MAX_HC_PORTS		127
 
+struct qsram_xhci {
+	__le32	data[64];
+};
+
 /*
  * xHCI register interface.
  * This corresponds to the eXtensible Host Controller Interface (xHCI)
@@ -1473,6 +1477,29 @@ struct xhci_port_cap {
 	u32			protocol_caps;
 };
 
+/**
+ * struct xhci_vendor_ops - Vendor-specific callback operations
+ * @handle_offload_events: Callback for handling offload events in interrupt context
+ *                         Parameters:
+ *                         - xhci: pointer to xhci_hcd
+ *                         - ir: pointer to xhci_interrupter
+ *                         - process_trb: function pointer to process individual TRBs
+ *                         Returns:
+ *                         - 0 if vendor handled the events (skip normal processing)
+ *                         - negative value to fall through to normal event handling
+ *
+ * This structure allows vendor code to hook into the xHCI event handling path
+ * without modifying kernel structures or exporting internal functions.
+ * The process_trb function pointer is passed to avoid needing to export
+ * xhci_handle_event_trb().
+ */
+struct xhci_vendor_ops {
+	int (*handle_offload_events)(struct xhci_hcd *xhci,
+				     struct xhci_interrupter *ir,
+				     int (*process_trb)(struct xhci_hcd *, struct xhci_interrupter *, union xhci_trb *));
+};
+
+
 struct xhci_port {
 	__le32 __iomem		*addr;
 	int			hw_portnum;
@@ -1670,10 +1697,12 @@ struct xhci_hcd {
 	struct dentry		*debugfs_slots;
 	struct list_head	regset_list;
 
+	/* Use ANDROID_KABI_REPLACE to add new fields without breaking KMI */
+	ANDROID_KABI_REPLACE(u64, __kabi_reserved1, struct qsram_xhci __iomem *qsram);
+	ANDROID_KABI_REPLACE(u64, __kabi_reserved2, struct xhci_vendor_ops *vendor_ops);
+
 	void			*dbc;
 
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 

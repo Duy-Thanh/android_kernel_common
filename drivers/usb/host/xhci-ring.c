@@ -3127,11 +3127,25 @@ static int xhci_handle_events(struct xhci_hcd *xhci, struct xhci_interrupter *ir
 	int event_loop = 0;
 	int err = 0;
 	u64 temp;
+	struct xhci_vendor_ops *ops;
 
 	xhci_clear_interrupt_pending(ir);
 
+	/* Check if vendor has registered offload ops */
+	ops = xhci->vendor_ops;
+	if (ops && ops->handle_offload_events) {
+		/* Pass xhci_handle_event_trb as function pointer to avoid export */
+		err = ops->handle_offload_events(xhci, ir, xhci_handle_event_trb);
+		if (err == 0) {
+			/* Vendor handled the events */
+			return 0;
+		}
+		/* err < 0 means fall through to normal handling */
+	}
+
 	/* Event ring hasn't been allocated yet. */
 	if (!ir->event_ring || !ir->event_ring->dequeue) {
+		xhci_dbg(xhci, "Event ring not ready\n");
 		xhci_err(xhci, "ERROR interrupter event ring not ready\n");
 		return -ENOMEM;
 	}
@@ -3166,6 +3180,8 @@ static int xhci_handle_events(struct xhci_hcd *xhci, struct xhci_interrupter *ir
 
 		/* Update SW event ring dequeue pointer */
 		inc_deq(xhci, ir->event_ring);
+		if (xhci->qsram)
+			writel(ir->event_ring->cycle_state, &xhci->qsram->data[4]);
 
 		if (err)
 			break;
