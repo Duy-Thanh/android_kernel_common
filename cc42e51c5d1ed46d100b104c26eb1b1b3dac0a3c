@@ -16,6 +16,24 @@
       "message": "Same as https://android-review.googlesource.com/c/kernel/common/+/3956424/comment/6b8e5050_bbea3e24/",
       "revId": "cc42e51c5d1ed46d100b104c26eb1b1b3dac0a3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ecb340_b5c25d1c",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T16:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f5e24f1_75d7946d",
+      "revId": "cc42e51c5d1ed46d100b104c26eb1b1b3dac0a3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
