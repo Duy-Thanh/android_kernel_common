@@ -16,6 +16,24 @@
       "message": "Hmm, this actually means that the same problem exists at runtime as well. Imagine: pKVM sets a host EPT PTE, checks that `host_ept_flush_needed_devs` is zero and doesn\u0027t flush the cache. Soon after that, the host enables passthrough mode for some device, pKVM increments `host_ept_flush_needed_devs`, but the cache is still not flushed, so the IOMMU sees a stale value of the PTE.\n\nI guess we could address this by flushing the cache immediately (here in pKVM IOMMU code, together with incrementing `host_ept_flush_needed_devs`), instead of just hoping that pKVM code will notice that `host_ept_flush_needed_devs` became non-zero and will flush it.\n\nBut the problem is that we don\u0027t know which cachelines we need to flush. Well, we could just flush the entire cache (via WBINVD) but I\u0027m not sure that wouldn\u0027t be too big a hammer (even if it happens rarely). Or we could implement walking the entire host EPT and flushing cache for each PTE (either present or non-present), with host_mmu_lock held...\n\nSo it feels like a bit too much trouble for now, plus it feels like something that we shouldn\u0027t implement in a hurry... So maybe let\u0027s drop the attempts to optimize it for now, and just leave that TODO for now and be done? :)\n\nEspecially since we didn\u0027t even measure how much actual impact this clflush has on pVM boot time or whatever.",
       "revId": "58bd89a15ef28e103481155582192d364e935565",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cfe8212_42e8cf99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T20:38:50Z",
+      "side": 1,
+      "message": "I agree, lets drop this patch and just have TODO in the code which we can address later.",
+      "parentUuid": "b18bdfd5_25a3a798",
+      "revId": "58bd89a15ef28e103481155582192d364e935565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
