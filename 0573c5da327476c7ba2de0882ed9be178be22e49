@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbecc9da_d19a73b8",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-20T10:11:55Z",
+      "side": 1,
+      "message": "This relies on `map_count` to prevent races with `mmap`, but that\u0027s a 32-bit integer which is normally easy to overflow. If it overflows, then this can lead to UAF in mmap.",
+      "revId": "0573c5da327476c7ba2de0882ed9be178be22e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
