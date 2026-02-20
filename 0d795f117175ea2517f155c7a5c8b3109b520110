@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9829b3a_45f18a6b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/Makefile.nvhe",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-20T09:51:31Z",
+      "side": 1,
+      "message": "If the .c is a problem, this line should as well?",
+      "revId": "0d795f117175ea2517f155c7a5c8b3109b520110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
