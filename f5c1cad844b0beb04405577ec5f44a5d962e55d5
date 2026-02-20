@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5628725f_0014123a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-20T02:09:51Z",
+      "side": 1,
+      "message": "With this approach we don\u0027t need to override `vm_ops.fault` and `wrap_vm_fault` is just a pass-through. I\u0027ll remove it.",
+      "range": {
+        "startLine": 489,
+        "startChar": 1,
+        "endLine": 489,
+        "endChar": 39
+      },
+      "revId": "f5c1cad844b0beb04405577ec5f44a5d962e55d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
