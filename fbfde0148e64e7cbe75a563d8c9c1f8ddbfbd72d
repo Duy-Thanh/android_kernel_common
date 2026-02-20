@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t it be request_hyp_alloc?",
       "revId": "fbfde0148e64e7cbe75a563d8c9c1f8ddbfbd72d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6959515d_e58ddc09",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-20T11:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccf3a8b6_f626bb48",
+      "revId": "fbfde0148e64e7cbe75a563d8c9c1f8ddbfbd72d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
