@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbf3230_4f4e081e",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-20T01:22:02Z",
+      "side": 1,
+      "message": "Hi @abarnas@google.com, I think this may be got squashed here inadvertnetly?\n\nWe should keep this as separate patch similar to: https://r.android.com/c/3611657",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 1
+      },
+      "revId": "e8b95164977b436d068f8b1ee10a1044fe3c09a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
