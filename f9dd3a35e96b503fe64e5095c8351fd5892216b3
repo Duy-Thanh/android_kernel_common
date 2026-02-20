@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45487a6d_579b4cb2",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-20T10:06:14Z",
+      "side": 1,
+      "message": "Mapping is allocated with `kmalloc` rather than `kzalloc`, so if `vma-\u003evm_ops` is null, then this leaves non-null garbage data in all the other function pointers. Please use `kzalloc`.",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 39
+      },
+      "revId": "f9dd3a35e96b503fe64e5095c8351fd5892216b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
