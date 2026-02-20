@@ -454,6 +454,24 @@
       "parentUuid": "310401e6_8145c5fe",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bfafd69_fee159ef",
+        "filename": "drivers/iommu/intel/pkvm_iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T13:24:53Z",
+      "side": 1,
+      "message": "I\u0027d be ok with that. And while we\u0027re at it, we could rename iommu_domain.c to domain.c (for brevity and for consistency with cache.c)?",
+      "parentUuid": "c88b9710_940adbdf",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

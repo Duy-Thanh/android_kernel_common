@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98bd753_16638710",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T13:24:53Z",
+      "side": 1,
+      "message": "nit: adjust indentation? (throughout this patch)",
+      "revId": "05859183b01e0264cb9284c3dd4629cb41168c04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe04452_235fef2a",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T13:24:53Z",
+      "side": 1,
+      "message": "nit: maybe BUG() if pgtt is neither of the two?",
+      "revId": "05859183b01e0264cb9284c3dd4629cb41168c04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4778fb3_4f2c3051",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T13:24:53Z",
+      "side": 1,
+      "message": "nit: maybe BUG() if pgtt is neither of the two?",
+      "revId": "05859183b01e0264cb9284c3dd4629cb41168c04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7259772_67e713ba",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T13:24:53Z",
+      "side": 1,
+      "message": "nit: maybe BUG() if pgtt is neither of the two?",
+      "revId": "05859183b01e0264cb9284c3dd4629cb41168c04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
