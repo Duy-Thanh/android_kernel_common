@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f170617_f41edd09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T02:40:04Z",
+      "side": 1,
+      "message": "s/with pvIOMMU// ?",
+      "revId": "3baa609459cd46928baef76e7652065173dcfe3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26287b1a_9b10a4ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T02:40:04Z",
+      "side": 1,
+      "message": "Random line?",
+      "revId": "3baa609459cd46928baef76e7652065173dcfe3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af9a7cd9_ad6356f6",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3534,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T02:40:04Z",
+      "side": 1,
+      "message": "nit: just `return ERR_PTR(ret);` should be fine?",
+      "revId": "3baa609459cd46928baef76e7652065173dcfe3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee23314_16a5443e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T02:40:04Z",
+      "side": 1,
+      "message": "We should check if `iommu` exists (i.e. is not NULL) first, like in other hypercalls?",
+      "revId": "3baa609459cd46928baef76e7652065173dcfe3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5e542a3_1bfdc830",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T02:40:04Z",
+      "side": 1,
+      "message": "__iommu_flush_cache() shouldn\u0027t be used for page tables, since it always uses ecap_coherent(), not ecap_smpwc()?\n\nI guess we can use domain_flush_cache() (after allocating the domain below), like the host driver does.",
+      "revId": "3baa609459cd46928baef76e7652065173dcfe3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
