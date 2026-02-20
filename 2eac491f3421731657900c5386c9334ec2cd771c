@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "398718ef_bac9cfae",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T01:16:29Z",
+      "side": 1,
+      "message": "pt_domain is enabled before translation is enabled, so we fail to do all ept flushes between pt_domain enabled and translation enable. This is racy and may causes DMAR faults. Change this to check if translation is enabled for all IOMMUs",
+      "revId": "2eac491f3421731657900c5386c9334ec2cd771c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
