@@ -359040,50 +359040,6 @@ enumeration {
   }
 }
 enumeration {
-  id: 0x6a318929
-  name: "gpio_lookup_flags"
-  definition {
-    underlying_type_id: 0x4585663f
-    enumerator {
-      name: "GPIO_ACTIVE_HIGH"
-    }
-    enumerator {
-      name: "GPIO_ACTIVE_LOW"
-      value: 1
-    }
-    enumerator {
-      name: "GPIO_OPEN_DRAIN"
-      value: 2
-    }
-    enumerator {
-      name: "GPIO_OPEN_SOURCE"
-      value: 4
-    }
-    enumerator {
-      name: "GPIO_PERSISTENT"
-    }
-    enumerator {
-      name: "GPIO_TRANSITORY"
-      value: 8
-    }
-    enumerator {
-      name: "GPIO_PULL_UP"
-      value: 16
-    }
-    enumerator {
-      name: "GPIO_PULL_DOWN"
-      value: 32
-    }
-    enumerator {
-      name: "GPIO_PULL_DISABLE"
-      value: 64
-    }
-    enumerator {
-      name: "GPIO_LOOKUP_FLAGS_DEFAULT"
-    }
-  }
-}
-enumeration {
   id: 0x285cedbe
   name: "gpiod_flags"
   definition {
@@ -392250,15 +392206,6 @@ function {
   id: 0x585cd95e
   return_type_id: 0x92233392
   parameter_id: 0x3e1c2855
-}
-function {
-  id: 0x5862e60a
-  return_type_id: 0x2560a232
-  parameter_id: 0x18e64f74
-  parameter_id: 0x4585663f
-  parameter_id: 0x3e10b518
-  parameter_id: 0x6a318929
-  parameter_id: 0x285cedbe
 }
 function {
   id: 0x58c67df5
@@ -475279,15 +475226,6 @@ elf_symbol {
   full_name: "gpiochip_enable_irq"
 }
 elf_symbol {
-  id: 0xbd781989
-  name: "gpiochip_free_own_desc"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0xc62d3be1
-  type_id: 0x19c0791f
-  full_name: "gpiochip_free_own_desc"
-}
-elf_symbol {
   id: 0x221b14f2
   name: "gpiochip_generic_config"
   is_defined: true
@@ -475412,15 +475350,6 @@ elf_symbol {
   crc: 0xc5658a81
   type_id: 0x9aaf656a
   full_name: "gpiochip_reqres_irq"
-}
-elf_symbol {
-  id: 0xa7604fd3
-  name: "gpiochip_request_own_desc"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0xa7d40d34
-  type_id: 0x5862e60a
-  full_name: "gpiochip_request_own_desc"
 }
 elf_symbol {
   id: 0x77a0ab63
@@ -526510,7 +526439,6 @@ interface {
   symbol_id: 0x2221f1e8
   symbol_id: 0x5be9fa34
   symbol_id: 0x05b09788
-  symbol_id: 0xbd781989
   symbol_id: 0x221b14f2
   symbol_id: 0x4b6fcf32
   symbol_id: 0x803663ec
@@ -526525,7 +526453,6 @@ interface {
   symbol_id: 0x14b7a009
   symbol_id: 0x7dd9e61e
   symbol_id: 0x30903940
-  symbol_id: 0xa7604fd3
   symbol_id: 0x77a0ab63
   symbol_id: 0x15040155
   symbol_id: 0x4825b485
