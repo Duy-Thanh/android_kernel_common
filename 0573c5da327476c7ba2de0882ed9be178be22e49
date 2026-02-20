@@ -52,6 +52,24 @@
       "parentUuid": "9a1ac473_d9037264",
       "revId": "0573c5da327476c7ba2de0882ed9be178be22e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b6f97fb_05829b67",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-20T18:11:51Z",
+      "side": 1,
+      "message": "No, we are not counting references here and operations don\u0027t need it to be atomic.",
+      "parentUuid": "38ee4b19_02d0ad10",
+      "revId": "0573c5da327476c7ba2de0882ed9be178be22e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
