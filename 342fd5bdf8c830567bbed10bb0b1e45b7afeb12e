@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14338a88_86943cf8",
+        "filename": "drivers/iommu/intel/pkvm/iommu_domain.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T01:42:30Z",
+      "side": 1,
+      "message": "Please use `pop_pkvm_memcache_page()` and `push_pkvm_memcache_page()`.",
+      "revId": "342fd5bdf8c830567bbed10bb0b1e45b7afeb12e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
