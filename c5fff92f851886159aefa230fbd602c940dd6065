@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f7f119_ba036116",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T16:36:41Z",
+      "side": 1,
+      "message": "_After_ the donation, not before it? We zero this memory inside pkvm_host_donate_hyp_share_ro(), after we\u0027ve donated it, and we need to flush it to RAM _after_ that?",
+      "revId": "c5fff92f851886159aefa230fbd602c940dd6065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
