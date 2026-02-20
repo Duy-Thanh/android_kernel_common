@@ -472,6 +472,24 @@
       "parentUuid": "c88b9710_940adbdf",
       "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c28ae9_81e210d2",
+        "filename": "drivers/iommu/intel/pkvm_iommu.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T19:33:26Z",
+      "side": 1,
+      "message": "renamed iommu_domain.c to domain.c",
+      "parentUuid": "3bfafd69_fee159ef",
+      "revId": "90c3a2fea087cd3d2c626aa5c5fbc0d05007ea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
