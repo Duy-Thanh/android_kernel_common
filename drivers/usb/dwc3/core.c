@@ -2194,7 +2194,8 @@ static int dwc3_probe(struct platform_device *pdev)
 		of_node_put(parent);
 	}
 
-	regs = devm_ioremap_resource(dev, &dwc_res);
+//	regs = devm_ioremap_resource(dev, &dwc_res);
+	regs = devm_ioremap(dev, dwc_res.start, resource_size(&dwc_res));
 	if (IS_ERR(regs))
 		return PTR_ERR(regs);
 

@@ -2261,7 +2261,7 @@ xhci_alloc_interrupter(struct xhci_hcd *xhci, unsigned int segs, gfp_t flags)
 		segs = ERST_DEFAULT_SEGS;
 
 	max_segs = BIT(HCS_ERST_MAX(xhci->hcs_params2));
-	segs = min(segs, max_segs);
+	segs = 1;
 
 	ir = kzalloc_node(sizeof(*ir), flags, dev_to_node(dev));
 	if (!ir)

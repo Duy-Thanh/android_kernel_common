@@ -241,7 +241,7 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
 	xhci->main_hcd = hcd;
 
 	/* imod_interval is the interrupt moderation value in nanoseconds. */
-	xhci->imod_interval = 40000;
+	xhci->imod_interval = 0;
 
 	/* Iterate over all parent nodes for finding quirks */
 	for (tmpdev = &pdev->dev; tmpdev; tmpdev = tmpdev->parent) {

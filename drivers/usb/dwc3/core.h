@@ -84,7 +84,8 @@
 
 /* DWC3 registers memory space boundries */
 #define DWC3_XHCI_REGS_START		0x0
-#define DWC3_XHCI_REGS_END		0x7fff
+//#define DWC3_XHCI_REGS_END		0x7fff
+#define DWC3_XHCI_REGS_END		0xfc100
 #define DWC3_GLOBALS_REGS_START		0xc100
 #define DWC3_GLOBALS_REGS_END		0xc6ff
 #define DWC3_DEVICE_REGS_START		0xc700

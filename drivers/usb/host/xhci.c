@@ -5326,6 +5326,12 @@ int xhci_gen_setup(struct usb_hcd *hcd, xhci_get_quirks_t get_quirks)
 
 	xhci->quirks |= quirks;
 
+	/* Initialize QSRAM pointer */
+	xhci->qsram = (struct qsram_xhci __iomem *)(hcd->regs + QSRAM_REGS);
+
+	/* Initialize vendor_ops to NULL */
+	xhci->vendor_ops = NULL;
+
 	if (get_quirks)
 		get_quirks(dev, xhci);
 

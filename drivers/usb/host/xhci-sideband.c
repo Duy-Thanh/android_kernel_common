@@ -342,9 +342,15 @@ xhci_sideband_create_interrupter(struct xhci_sideband *sb, int num_seg,
 	if (sb->ir)
 		return -EBUSY;
 
+	//TODO: make it quirk dependent
+	if(0) {
 	sb->ir = xhci_create_secondary_interrupter(xhci_to_hcd(sb->xhci),
 						   num_seg, imod_interval,
 						   intr_num);
+	} else {
+	sb->ir = sb->xhci->interrupters[0];
+	}
+
 	if (!sb->ir)
 		return -ENOMEM;
 
