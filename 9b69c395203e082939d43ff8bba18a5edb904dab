@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d224b457_11d4e998",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-02-20T18:22:47Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LONG_LINE: line length of 103 exceeds 100 columns\n\nWARNING:LONG_LINE: line length of 103 exceeds 100 columns",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 0
+      },
+      "revId": "9b69c395203e082939d43ff8bba18a5edb904dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
