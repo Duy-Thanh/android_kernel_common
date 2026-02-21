@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125983fb_010e2fd8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1749,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T17:45:39Z",
+      "side": 1,
+      "message": "nit: I know I\u0027m the author, but I\u0027ve recalled that this applies also to pages shared by host with the hypervisor, not only with npVMs. So we can remove \"(i.e. npVM pages)\"?",
+      "revId": "c1b06f56e3e9c073b55064c27fa13e988448009b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
