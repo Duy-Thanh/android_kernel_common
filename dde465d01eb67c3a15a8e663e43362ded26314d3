@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "391d6ceb_1532b36a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T17:10:29Z",
+      "side": 1,
+      "message": "Just a note: actually there are no hardware implementations with CM\u003d1, it is just for software (emulated) IOMMU implementations.",
+      "revId": "dde465d01eb67c3a15a8e663e43362ded26314d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33eb148_f01f3e47",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T17:10:29Z",
+      "side": 1,
+      "message": "At this point `nr_pages` is the number of pages that _haven\u0027t_ been mapped, and `iov_pfn` is the start address of the pages that _haven\u0027t_ been mapped, right?",
+      "revId": "dde465d01eb67c3a15a8e663e43362ded26314d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
