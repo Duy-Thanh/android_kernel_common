@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371591b3_3facf6f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "s/pvIOMMU/pKVM/ ?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "388d5538_6567b42d",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "IMHO this comment is not very clear. Without knowing the background it is not clear how the 2nd sentence relates to the 1st one and what it is trying to explain.\n\nHow about e.g.: \"The host expects pKVM to drain the memcache fully and use it until the domain is freed, as the host itself doesn\u0027t store the memcache in any persistent data structure. This will not result in the hypervisor\u0027s memcache growing endlessly, since the host only provides a memcache if the hypervisor\u0027s memcache doesn\u0027t already have enough pages.\" ?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f4917cf_d26f0aeb",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "We can use topup_pkvm_memcache() (like we did in v6.12, with admit_host_page())?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f165be_6af77c3d",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "It seems these may not catch all possible overflows. Should we rather do something like:\n```\n\t/* Check for possible overflows that may have security implications */\n\tif (check_shl_overflow(data-\u003eiov_pfn, VTD_PAGE_SHIFT, \u0026iova))\n\t\treturn -EINVAL;\n\tif (check_shl_overflow(data-\u003ephys_pfn, VTD_PAGE_SHIFT, \u0026phys))\n\t\treturn -EINVAL;\n\tif (check_mul_overflow(data-\u003enr_pages, VTD_PAGE_SIZE, \u0026size))\n\t\treturn -EINVAL;\n\tif (check_add_overflow(iova, size, \u0026unused))\n\t\treturn -EINVAL;\n\tif (check_add_overflow(phys, size, \u0026unused))\n\t\treturn -EINVAL;\n```\n\n?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb7a1fd_16f9b39d",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "We can use topup_pkvm_memcache()?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f53c7e_7d667e6b",
+        "filename": "drivers/iommu/intel/pkvm_iommu.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T01:15:00Z",
+      "side": 1,
+      "message": "Any reason why we want to follow stupidity of the upstream code (more precisely: _consistently_ follow _inconsistent_ stupidity of the upstream code :)) and name them pkvm_domain_mapping() and pkvm_domain_unmapping() instead of pkvm_domain_map() and pkvm_domain_unmap()?",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
