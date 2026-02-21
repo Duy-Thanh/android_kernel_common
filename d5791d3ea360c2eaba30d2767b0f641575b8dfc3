@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3f89cdf_e7e96f19",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-21T17:40:16Z",
+      "side": 1,
+      "message": "Basically nit: argument type mismatch: in qi_flush_iec() and qi_global_iec() the type of `index` and `mask` is int, and the host also passes them in this hypercall as int, not u64?",
+      "revId": "d5791d3ea360c2eaba30d2767b0f641575b8dfc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
