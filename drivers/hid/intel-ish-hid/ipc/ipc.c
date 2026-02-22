@@ -624,8 +624,22 @@ static void	recv_ipc(struct ishtp_device *dev, uint32_t doorbell_val)
 		break;
 
 	case MNG_RESET_NOTIFY:
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 		ish_send_reset_notify_ack(ishtp_dev);
 		fallthrough;
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+		if (!ishtp_dev) {
+			ishtp_dev = dev;
+		}
+		schedule_work(&fw_reset_work);
+		break;
+=======
+		if (!ishtp_dev) {
+			ishtp_dev = dev;
+		}
+		queue_work(dev->unbound_wq, &fw_reset_work);
+		break;
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 
 	case MNG_RESET_NOTIFY_ACK:
 		dev->recvd_hw_ready = 1;

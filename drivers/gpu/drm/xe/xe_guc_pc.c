@@ -1014,6 +1014,7 @@ int xe_guc_pc_gucrc_disable(struct xe_guc_pc *pc)
 	if (ret)
 		return ret;
 
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
 	if (!xe_force_wake_ref_has_domain(fw_ref, XE_FORCEWAKE_ALL)) {
 		xe_force_wake_put(gt_to_fw(gt), fw_ref);
@@ -1025,6 +1026,19 @@ int xe_guc_pc_gucrc_disable(struct xe_guc_pc *pc)
 	xe_force_wake_put(gt_to_fw(gt), fw_ref);
 
 	return 0;
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+	ret = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	if (ret)
+		return ret;
+
+	xe_gt_idle_disable_c6(gt);
+
+	XE_WARN_ON(xe_force_wake_put(gt_to_fw(gt), XE_FORCEWAKE_ALL));
+
+	return 0;
+=======
+	return xe_gt_idle_disable_c6(gt);
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 }
 
 /**

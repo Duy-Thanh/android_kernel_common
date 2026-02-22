@@ -323,8 +323,12 @@ static void ivpu_gem_bo_free(struct drm_gem_object *obj)
 
 	ivpu_bo_lock(bo);
 	ivpu_bo_unbind_locked(bo);
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 	ivpu_bo_unlock(bo);
 
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+=======
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 	mutex_unlock(&vdev->bo_list_lock);
 
 	drm_WARN_ON(&vdev->drm, bo->mmu_mapped);

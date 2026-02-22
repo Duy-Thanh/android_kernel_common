@@ -388,10 +388,14 @@ static int __maybe_unused ish_resume(struct device *device)
 	ish_resume_device = device;
 	dev->resume_flag = 1;
 
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 	/* If ISH resume from D3, reset ishtp clients before return */
 	if (!ish_should_leave_d0i3(pdev))
 		ishtp_reset_handler(dev);
 
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+=======
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 	queue_work(dev->unbound_wq, &resume_work);
 
 	return 0;

@@ -313,11 +313,24 @@ static void gt_idle_fini(void *arg)
 
 	xe_gt_idle_disable_pg(gt);
 
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 	if (gt_to_xe(gt)->info.skip_guc_pc) {
 		fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FW_GT);
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+	if (gt_to_xe(gt)->info.skip_guc_pc) {
+		XE_WARN_ON(xe_force_wake_get(gt_to_fw(gt), XE_FW_GT));
+=======
+	if (gt_to_xe(gt)->info.skip_guc_pc)
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 		xe_gt_idle_disable_c6(gt);
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 		xe_force_wake_put(gt_to_fw(gt), fw_ref);
 	}
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+		xe_force_wake_put(gt_to_fw(gt), XE_FW_GT);
+	}
+=======
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 
 	sysfs_remove_files(kobj, gt_idle_attrs);
 	kobject_put(kobj);
@@ -375,14 +388,31 @@ void xe_gt_idle_enable_c6(struct xe_gt *gt)
 			RC_CTL_HW_ENABLE | RC_CTL_TO_MODE | RC_CTL_RC6_ENABLE);
 }
 
-void xe_gt_idle_disable_c6(struct xe_gt *gt)
+int xe_gt_idle_disable_c6(struct xe_gt *gt)
 {
+	unsigned int fw_ref;
+
 	xe_device_assert_mem_access(gt_to_xe(gt));
-	xe_force_wake_assert_held(gt_to_fw(gt), XE_FW_GT);
 
 	if (IS_SRIOV_VF(gt_to_xe(gt)))
-		return;
+		return 0;
 
+	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FW_GT);
+	if (!fw_ref)
+		return -ETIMEDOUT;
+
+<<<<<<< TARGET BRANCH (18dfa5ba1294310dc49ffc6b6ee9807ae661e5ab FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
 	xe_mmio_write32(&gt->mmio, RC_CONTROL, 0);
 	xe_mmio_write32(&gt->mmio, RC_STATE, 0);
+||||||| BASE          (7712ca595283528e51f88edeee6914c04e9feac6 FROMGIT: mm/tracing: rss_stat: ensure curr is false from kth)
+	xe_mmio_write32(gt, RC_CONTROL, 0);
+	xe_mmio_write32(gt, RC_STATE, 0);
+=======
+	xe_mmio_write32(gt, RC_CONTROL, 0);
+	xe_mmio_write32(gt, RC_STATE, 0);
+
+	xe_force_wake_put(gt_to_fw(gt), fw_ref);
+
+	return 0;
+>>>>>>> SOURCE BRANCH (c190014704c7a433b2d1df9efbffca3f36b294c0 Merge tag 'android16-6.12.69_r00' into android16-6.12)
 }
