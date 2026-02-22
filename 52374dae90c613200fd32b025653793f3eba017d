@@ -51,6 +51,23 @@
       "message": "repo download -b change-237920 platform/system/bvb 237920",
       "revId": "52374dae90c613200fd32b025653793f3eba017d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b0ad9d_c1c59486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4645302
+      },
+      "writtenOn": "2026-02-22T05:18:41Z",
+      "side": 1,
+      "message": "gd",
+      "revId": "52374dae90c613200fd32b025653793f3eba017d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
