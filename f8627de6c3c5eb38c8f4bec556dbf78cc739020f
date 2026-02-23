@@ -16,6 +16,24 @@
       "message": "nit: IIUC with pKVM enabled we shouldn\u0027t get here, so maybe worth doing this:\n```\n\tif (WARN_ON_ONCE(pkvm_enabled()))\n\t\treturn -EOPNOTSUPP;\n```\n\n?",
       "revId": "f8627de6c3c5eb38c8f4bec556dbf78cc739020f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1d77ae_96881ef3",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-23T10:26:23Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "df825412_55dfca33",
+      "revId": "f8627de6c3c5eb38c8f4bec556dbf78cc739020f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
