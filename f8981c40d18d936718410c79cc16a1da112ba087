@@ -16,6 +16,24 @@
       "message": "This seems not fully consistent with the host driver\u0027s behavior: the host driver may set `has_mappings` to true even if __domain_mapping() failed, since indeed, it may have failed with -ENOMEM after it has already created some mappings?\n\nThis is probably not so important anyway, since for now we have no actual use cases where this would matter, and in newer upstream kernel AFAICS this `has_mappings` is removed anyway. But still it seems a bit more correct to set `has_mappings` regardless of `ret` here (even though that would mean, in turn, some false positives compared to the host driver\u0027s behavior, but that\u0027s better than having false negatives compared to the host driver\u0027s behavior)?",
       "revId": "f8981c40d18d936718410c79cc16a1da112ba087",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbe6fde_b009ad5b",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-23T13:56:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8ac6943_9db4aa09",
+      "revId": "f8981c40d18d936718410c79cc16a1da112ba087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
