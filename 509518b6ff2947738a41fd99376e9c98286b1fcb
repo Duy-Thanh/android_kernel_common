@@ -16,6 +16,24 @@
       "message": "Hi @abarnas@google.com,\n\nIt looks like we are missing the fix for VMA tearing.\n\nhttps://r.android.com/c/kernel/common/+/3916265/3/fs/proc/task_mmu.c\n\nWe can apply on top of the current series before the ABI update.",
       "revId": "509518b6ff2947738a41fd99376e9c98286b1fcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "967938b6_cd9d408d",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-02-23T16:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc56693b_080218cb",
+      "revId": "509518b6ff2947738a41fd99376e9c98286b1fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
