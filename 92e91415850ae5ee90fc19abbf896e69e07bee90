@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "918fa3cf_00aaf520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941466
+      },
+      "writtenOn": "2026-02-23T15:31:26Z",
+      "side": 1,
+      "message": "Hello, during the merge in ``0407f5e40 (\"Merge 1429a92 (\"Revert \"dm: requeue IO if mapping table not yet available\"\") into android12-5.10-lts\")``, you lost changes to linux/fs/f2fs/xattr.c, which rendered the upstream patch ``f2fs: reduce expensive checkpoint trigger frequency`` completely ineffective.",
+      "revId": "92e91415850ae5ee90fc19abbf896e69e07bee90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
