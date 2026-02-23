@@ -16,6 +16,24 @@
       "message": "Is the lost of the EPERM distinction inconsequential?",
       "revId": "c866629922a0151294712749ff2269938f3fc18b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5670d33_74842644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-23T11:27:49Z",
+      "side": 1,
+      "message": "It is not necessary anymore as earlier checks in the function will catch this case.",
+      "parentUuid": "05eef9c3_866ca010",
+      "revId": "c866629922a0151294712749ff2269938f3fc18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
