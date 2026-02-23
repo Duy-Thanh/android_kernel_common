@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e37e87_928335c4",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-02-23T12:04:35Z",
+      "side": 1,
+      "message": "This means that `vma-\u003evm_ops \u003d\u003d \u0026my_driver_vma_ops` comparisons will stop working. Is that a problem?",
+      "revId": "457d39ccfdfca7a1967c576bacff3431328f5b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
