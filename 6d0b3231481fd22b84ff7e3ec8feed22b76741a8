@@ -16,6 +16,24 @@
       "message": "Good catch. I think in practice we already have it mitigated by CONFIG_INIT_STACK_ALL_ZERO\u003dy but it\u0027s surely not a bad idea to make it explicit and not dependent on that.",
       "revId": "6d0b3231481fd22b84ff7e3ec8feed22b76741a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae68c322_346e324c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-02-23T12:23:05Z",
+      "side": 1,
+      "message": "Yeah good point.",
+      "parentUuid": "53ec4e05_d2dd801b",
+      "revId": "6d0b3231481fd22b84ff7e3ec8feed22b76741a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
