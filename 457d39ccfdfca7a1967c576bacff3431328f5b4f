@@ -16,6 +16,24 @@
       "message": "This means that `vma-\u003evm_ops \u003d\u003d \u0026my_driver_vma_ops` comparisons will stop working. Is that a problem?",
       "revId": "457d39ccfdfca7a1967c576bacff3431328f5b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb9634fa_5313c4cb",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-23T17:00:26Z",
+      "side": 1,
+      "message": "True. I see such comparison used in shmem, secretmem, sgi-gru driver and special_mapping_vmops. We don\u0027t wrap such memory today and in the future maybe the only viable candidate would be shmem but it\u0027s usually represented by some other kind of fd, like memfd. We shoud document this limitation when upstreaming.",
+      "parentUuid": "86e37e87_928335c4",
+      "revId": "457d39ccfdfca7a1967c576bacff3431328f5b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
