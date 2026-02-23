@@ -33,6 +33,24 @@
       "message": "At this point `nr_pages` is the number of pages that _haven\u0027t_ been mapped, and `iov_pfn` is the start address of the pages that _haven\u0027t_ been mapped, right?",
       "revId": "dde465d01eb67c3a15a8e663e43362ded26314d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f4b1de_bf78636f",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1827,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-23T10:29:16Z",
+      "side": 1,
+      "message": "Ahh nice catch, Fixed.",
+      "parentUuid": "e33eb148_f01f3e47",
+      "revId": "dde465d01eb67c3a15a8e663e43362ded26314d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
