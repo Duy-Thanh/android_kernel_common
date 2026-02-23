@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62ad3afb_598434d7",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-23T12:09:51Z",
+      "side": 1,
+      "message": "We do the same in pvMMU (with the only difference that we use regular pkvm_host_donate_hyp()), and pKVM-ARM does the same, in both MMU and IOMMU code. So it seems better to do the same, for consistency and to avoid error-prone duplication of logic? Failing pkvm_host_donate_hyp_share_ro() shouldn\u0027t normally happen anyway, and we at least have a WARN_ON for it.\n\nBTW if we keep it as is, it is not much better in term of the returned error either, since for some reason you are returning -EBUSY regardless of the actual error returned? :)",
+      "parentUuid": "1f1f0257_1f1b90bd",
+      "revId": "d6787ef07c3fc52b17aa0035ffd50f16e1566e1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77f165be_6af77c3d",
         "filename": "drivers/iommu/intel/pkvm/domain.c",
         "patchSetId": 23
