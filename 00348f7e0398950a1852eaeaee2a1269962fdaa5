@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd16763_2a1433d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-24T21:35:06Z",
+      "side": 1,
+      "message": "Please abandon this and resubmit a cherry-pick of aosp/3962943 so the changeids match.",
+      "revId": "00348f7e0398950a1852eaeaee2a1269962fdaa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
