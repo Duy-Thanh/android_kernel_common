@@ -16,6 +16,24 @@
       "message": "Can we wait for this to land in a maintainer tree? (FROMGIT)",
       "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39277053_7ad9066d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2026-02-24T18:55:10Z",
+      "side": 1,
+      "message": "This patch no longer moves forward in upstream. Because Will Deacon thinks we should remove architecture limit instead (although he was fine to backport it to android16-6.12). So the latest patch for upstream review is https://lore.kernel.org/all/20241211222945.1325793-1-xur@google.com/. But even that patch seems to be ignored by kbuild maintainers. It would be great if you could help let us know how to move things forward in upstream.\n\nSince we don\u0027t know how long it takes for maintainers to accept the second patch in upstream, I prefer to use the same backport in android17-6.18.",
+      "parentUuid": "4c7d6a76_4f14647b",
+      "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
