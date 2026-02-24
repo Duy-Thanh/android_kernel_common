@@ -16,6 +16,29 @@
       "message": "+Neill as I\u0027m not sure I have enough context to review this one.",
       "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19500564_d8eabb6d",
+        "filename": "drivers/usb/typec/mode_selection.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-24T23:47:24Z",
+      "side": 1,
+      "message": "I think we need to set `partner-sel` prior to scheduling the delayed work otherwise there is potential for a race condition.",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
