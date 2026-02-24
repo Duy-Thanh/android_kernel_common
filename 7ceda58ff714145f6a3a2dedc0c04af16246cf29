@@ -16,6 +16,24 @@
       "message": "Please add it to the topic.",
       "revId": "7ceda58ff714145f6a3a2dedc0c04af16246cf29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70685f41_8089fda5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-24T17:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d7186a9_130e4b64",
+      "revId": "7ceda58ff714145f6a3a2dedc0c04af16246cf29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
