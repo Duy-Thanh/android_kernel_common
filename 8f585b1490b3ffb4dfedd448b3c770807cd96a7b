@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b8ff7c_ac31e944",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-24T19:57:22Z",
+      "side": 1,
+      "message": "Was this really a reapply? If so, why wasn\u0027t git\u0027s default subject used? I would have expected something like: `Reapply \"ANDROID: locking/rwsem: Wake up donor first.\"`",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "8f585b1490b3ffb4dfedd448b3c770807cd96a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
