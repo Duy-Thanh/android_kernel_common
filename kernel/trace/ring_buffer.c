@@ -368,6 +368,12 @@ static __always_inline unsigned int rb_page_commit(struct buffer_page *bpage)
 	return local_read(&bpage->page->commit);
 }
 
+/* Size is determined by what has been committed */
+static __always_inline unsigned rb_page_size(struct buffer_page *bpage)
+{
+	return rb_page_commit(bpage) & ~RB_MISSED_MASK;
+}
+
 static void free_buffer_page(struct buffer_page *bpage)
 {
 	/* Range pages are not to be freed */
@@ -547,6 +553,12 @@ struct ring_buffer_iter {
 	size_t				event_size;
 	int				missed_events;
 };
+
+static __always_inline unsigned
+rb_commit_index(struct ring_buffer_per_cpu *cpu_buffer)
+{
+	return rb_page_commit(cpu_buffer->commit_page);
+}
 
 int ring_buffer_print_page_header(struct trace_buffer *buffer, struct trace_seq *s)
 {
@@ -1841,7 +1853,7 @@ static int rb_validate_buffer(struct buffer_data_page *dpage, int cpu)
 	u64 delta;
 	int tail;
 
-	tail = local_read(&dpage->commit);
+	tail = local_read(&dpage->commit) & ~RB_MISSED_MASK;
 	return rb_read_data_buffer(dpage, tail, cpu, &ts, &delta);
 }
 
@@ -1866,7 +1878,7 @@ static void rb_meta_validate_events(struct ring_buffer_per_cpu *cpu_buffer)
 		goto invalid;
 	}
 	entries += ret;
-	entry_bytes += local_read(&cpu_buffer->reader_page->page->commit);
+	entry_bytes += rb_page_size(cpu_buffer->reader_page);
 	local_set(&cpu_buffer->reader_page->entries, ret);
 
 	orig_head = head_page = cpu_buffer->head_page;
@@ -1987,7 +1999,7 @@ static void rb_meta_validate_events(struct ring_buffer_per_cpu *cpu_buffer)
 			local_inc(&cpu_buffer->pages_touched);
 
 		entries += ret;
-		entry_bytes += local_read(&head_page->page->commit);
+		entry_bytes += rb_page_size(head_page);
 		local_set(&cpu_buffer->head_page->entries, ret);
 
 		if (head_page == cpu_buffer->commit_page)
@@ -3271,18 +3283,6 @@ rb_iter_head_event(struct ring_buffer_iter *iter)
 	return NULL;
 }
 
-/* Size is determined by what has been committed */
-static __always_inline unsigned rb_page_size(struct buffer_page *bpage)
-{
-	return rb_page_commit(bpage) & ~RB_MISSED_MASK;
-}
-
-static __always_inline unsigned
-rb_commit_index(struct ring_buffer_per_cpu *cpu_buffer)
-{
-	return rb_page_commit(cpu_buffer->commit_page);
-}
-
 static __always_inline unsigned
 rb_event_index(struct ring_buffer_per_cpu *cpu_buffer, struct ring_buffer_event *event)
 {
@@ -4430,7 +4430,7 @@ static void check_buffer(struct ring_buffer_per_cpu *cpu_buffer,
 
 	if (tail == CHECK_FULL_PAGE) {
 		full = true;
-		tail = local_read(&bpage->commit);
+		tail = local_read(&bpage->commit) & ~RB_MISSED_MASK;
 	} else if (info->add_timestamp &
 		   (RB_ADD_STAMP_FORCE | RB_ADD_STAMP_ABSOLUTE)) {
 		/* Ignore events with absolute time stamps */
