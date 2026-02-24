@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5e2a20_1481f116",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-24T21:33:16Z",
+      "side": 1,
+      "message": "Same as with the parent change, please provide some extra context as to why this needs to land as FROMLIST instead of waiting for it to be FROMGIT",
+      "revId": "aa68b93577c1bf6a2785b03e80a44e709b707437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
