@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55e8339_a520daaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-24T09:33:21Z",
+      "side": 1,
+      "message": "Why is this arm64 only? Will the driver not be suitable / not wanted for Cuttlefish and real x86 devices?\n\nI\u0027d also suggest splitting out the symbol list update (file starting from empty) into its own change.",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
