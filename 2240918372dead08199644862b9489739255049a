@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb72bc3_22eefeb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-02-24T22:16:11Z",
+      "side": 1,
+      "message": "Should use the UPSTREAM tag, since it\u0027s a clean cherry-pick",
+      "revId": "2240918372dead08199644862b9489739255049a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
