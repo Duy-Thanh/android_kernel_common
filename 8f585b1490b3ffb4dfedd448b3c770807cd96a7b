@@ -22,6 +22,30 @@
       },
       "revId": "8f585b1490b3ffb4dfedd448b3c770807cd96a7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f26a9d36_df53adba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-02-24T20:24:55Z",
+      "side": 1,
+      "message": "So, it is a reapply with fixes folded in. I felt the the Reapply header first should probably be explicitly limited to pure clean re-applies. But since this was returning functionality back, having reapply be part of the commit subject seemed to make sense to me. Sorry if it causes confusion here.\n\nAny tips for other approaches I should try in the future?",
+      "parentUuid": "73b8ff7c_ac31e944",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "8f585b1490b3ffb4dfedd448b3c770807cd96a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
