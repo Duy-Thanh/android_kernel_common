@@ -52,6 +52,24 @@
       "parentUuid": "39277053_7ad9066d",
       "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca764e3_33e5d079",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2026-02-24T19:38:25Z",
+      "side": 1,
+      "message": "| Are you pursuing this?\nYes, I am happy with removing architecture limit. Should I switch to backport that patch instead?\n\nWill is OOO until next week. Do we need to wait for him?",
+      "parentUuid": "145630f1_85d99ebb",
+      "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
