@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a7865f_6a026f24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2038435
+      },
+      "writtenOn": "2026-02-24T03:41:38Z",
+      "side": 1,
+      "message": "Hi, this patch is very helpful. Are there any plans to backport this to the android17-6.18 branch? We need this fix for our project. Thanks!",
+      "revId": "ccf872ebe474a33123adc0f822915b4cea59e684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
