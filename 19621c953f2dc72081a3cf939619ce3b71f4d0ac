@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7435ea01_ee9b5396",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-24T16:25:32Z",
+      "side": 1,
+      "message": "Please add `Bug: \u003cbug number\u003e` here and in the follow-up patches.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "19621c953f2dc72081a3cf939619ce3b71f4d0ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
