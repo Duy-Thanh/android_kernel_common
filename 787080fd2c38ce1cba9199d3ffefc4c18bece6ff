@@ -34,6 +34,24 @@
       "parentUuid": "4c7d6a76_4f14647b",
       "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "145630f1_85d99ebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-24T19:01:33Z",
+      "side": 1,
+      "message": "\u003e Because Will Deacon thinks we should remove architecture limit instead\n\nAre you pursuing this?\n\n@willdeacon@google.com, ok with this in 6.18?",
+      "parentUuid": "39277053_7ad9066d",
+      "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
