@@ -70,6 +70,24 @@
       "parentUuid": "145630f1_85d99ebb",
       "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4cfb53c_8f91426e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-24T22:14:57Z",
+      "side": 1,
+      "message": "\u003e Should I switch to backport that patch instead?\n\nYes, it sounds like that is the preferred implementation.\n\n\u003e Do we need to wait for him?\n\nI\u0027d prefer to wait since Will has expressed an opinion, but if it is too urgent to wait, we can go ahead",
+      "parentUuid": "dca764e3_33e5d079",
+      "revId": "787080fd2c38ce1cba9199d3ffefc4c18bece6ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
