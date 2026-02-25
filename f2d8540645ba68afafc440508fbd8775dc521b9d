@@ -69,6 +69,42 @@
       "parentUuid": "a55e8339_a520daaf",
       "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c31940_9fe4b0d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-25T18:57:25Z",
+      "side": 1,
+      "message": "The rule names you have added are implicitly aarch64 specific. This would mean different and confusing naming if we have to do x86_64 as well, or renaming the existing names later. I don\u0027t think it\u0027s OK.",
+      "parentUuid": "de3fed0c_d2ecc2c3",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e31bff_ddcfee9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-25T18:57:25Z",
+      "side": 1,
+      "message": "I had discussed this briefly with Sid before he left his comments.\n\nI think we should also look at the sustainability of this approach and what we are trying to achieve.\n\nSustainability: What happens when \"we\" want to support another vendor module like this one?\n\nMy original thoughts about this were that: 1. We would provide the source (as part of ACK) and that Pixel would of course build it, just like they probably build some other in-tree drivers as vendor modules, and they would suggest  2. We would pick up build failures via the allmodconfig target. 3. We might supply a DDK or some recipe for other partners to use.\n\nThe next step up is to ensure that a communal symbol list is present and maintained. However, this is not really meaningful if partners are supplying cfg and mac as vendor modules!\n\nSo I think we need more clarity around the aims, plan and costs / benefits here.",
+      "parentUuid": "218989b8_104b5935",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
