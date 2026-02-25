@@ -22,6 +22,30 @@
       },
       "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432280e2_7e44e48f",
+        "filename": "Documentation/ABI/testing/sysfs-block-zram",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T18:59:14Z",
+      "side": 1,
+      "message": "No strong objection if it was already released to upstream but it seems it\u0027s still under rc1 so chance to make a change in the upstream, too?\n\nHowever, native folks think writeback_compressed is also okay. I don\u0027t mind it.",
+      "parentUuid": "717e716c_5356aa3e",
+      "range": {
+        "startLine": 154,
+        "startChar": 27,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
