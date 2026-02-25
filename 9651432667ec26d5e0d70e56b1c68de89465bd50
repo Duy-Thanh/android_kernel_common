@@ -46,6 +46,30 @@
       },
       "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ed331b_ef4b22c8",
+        "filename": "Documentation/ABI/testing/sysfs-block-zram",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2026-02-25T19:07:22Z",
+      "side": 1,
+      "message": "I agree with Minchan here. Since this is a property of how we will do write having it be named \"compressed_writeback\" is more clear. writeback_compressed is confusing and since there is already writeback it makes it sounds like this is a variation of writeback where we would writeback NOW compressed. But since this is a property of how we will writeback later, compressed_writeback does sound cleaner IMO.\n\nBut I also don\u0027t feel strongly.",
+      "parentUuid": "432280e2_7e44e48f",
+      "range": {
+        "startLine": 154,
+        "startChar": 27,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
