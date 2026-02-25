@@ -16,6 +16,23 @@
       "message": "This was generated using ./update_symbol_list.sh --target muzel, I\u0027m not sure why the ABI change is 1700+ lines, but we\u0027re only interested in these symbols for the bug:\n```\n__traceiter_android_vh_dwc3_core_soft_reset\n__traceiter_android_vh_dwc3_xhci_soft_reset\n__tracepoint_android_vh_dwc3_core_soft_reset\n__tracepoint_android_vh_dwc3_xhci_soft_reset\n```",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c03fc25_1c777fb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-25T18:33:27Z",
+      "side": 1,
+      "message": "This adds many dwc3 structs to the KMI. @nkapron@google.com is it ok to lock all of these down?\n```\n  enum dwc3_ep0_next\n  enum dwc3_ep0_state\n  enum dwc3_link_state\n  enum soft_reset_phase\n  struct dwc3\n  struct dwc3_ep\n  struct dwc3_event_buffer\n  struct dwc3_hwparams\n  struct dwc3_request\n  struct dwc3_trb\n```",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
