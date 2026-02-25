@@ -70,6 +70,30 @@
       },
       "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241e27b1_13286fd0",
+        "filename": "Documentation/ABI/testing/sysfs-block-zram",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-25T19:54:32Z",
+      "side": 1,
+      "message": "Will the naming change be proposed upstream? This is UAPI, so I don\u0027t want to merge something that might change later upstream.",
+      "parentUuid": "30ed331b_ef4b22c8",
+      "range": {
+        "startLine": 154,
+        "startChar": 27,
+        "endLine": 154,
+        "endChar": 47
+      },
+      "revId": "9651432667ec26d5e0d70e56b1c68de89465bd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
