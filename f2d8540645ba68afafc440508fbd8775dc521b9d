@@ -105,6 +105,42 @@
       "parentUuid": "218989b8_104b5935",
       "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4bec3d_bb845586",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-02-25T19:56:25Z",
+      "side": 1,
+      "message": "Ah, I see what you\u0027re saying. Are you suggesting I change the kernel_build target to be `wonder_aarch64`?",
+      "parentUuid": "29c31940_9fe4b0d0",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2efd3ae_c7372a9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-02-25T19:56:25Z",
+      "side": 1,
+      "message": "I would hope we don\u0027t have another case where we need to support another vendor module in AOSP. This case is very special and we are working to remove this option for future kernels as soon as `android17-6.18`.\n\nWe shouldn\u0027t make decisions based on assumptions on what Pixel has done in the past. Since the wonder driver is a vendor module, partners can fork it. So we should assume they will. That is the basis for the decision to provide the wonder driver as a separate DDK module. This approach will (1) make it easier for partners to directly use the AOSP version of the wonder driver with forked versions of it\u0027s dependencies (cfg/mac80211) and (2) make it easier to maintain a forked version of the wonder driver if necessary via direct merges (as much as we don\u0027t like that idea).\n\nIf you are suggesting I pull the wonder driver back into ACK, then we can discuss that in the design doc.",
+      "parentUuid": "49e31bff_ddcfee9d",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
