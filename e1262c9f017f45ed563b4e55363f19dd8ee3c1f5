@@ -39,6 +39,30 @@
       },
       "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d8a148_2cb02cff",
+        "filename": "drivers/usb/typec/mode_selection.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2026-02-25T09:15:22Z",
+      "side": 1,
+      "message": "Hi Neill,\n`mode_selection_work_fn` doesn’t use `partner-\u003esel`.\nA partner-\u003esel \u003d\u003d NULL state indicates that initialization is not fully complete. Verification of this pointer is the initial operation for others API - `typec_mode_selection_delete` and `typec_altmode_entry_complete`.",
+      "parentUuid": "19500564_d8eabb6d",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
