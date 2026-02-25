@@ -87,6 +87,24 @@
       "parentUuid": "7b9aa2a8_0caa1c0c",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b798e6ad_ee4613a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-25T19:02:14Z",
+      "side": 1,
+      "message": "That just bypasses the abi checks, right? Your vendor code would break if the dwc3 struct changes.",
+      "parentUuid": "1e6d4141_b9011820",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
