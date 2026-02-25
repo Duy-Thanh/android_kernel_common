@@ -618,6 +618,9 @@ static int wrap_file_load(struct wrap_ctx *ctx,
 	if (!PAGE_ALIGNED(wrapfd_load.buf_offs))
 		return -EINVAL;
 
+	if (wrapfd_load.reserved)
+		return -EINVAL;
+
 	file = fget(wrapfd_load.fd);
 	if (!file)
 		return -EBADF;
@@ -685,6 +688,9 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 		return -EFAULT;
 
 	if (wrapfd_rewrap.prot & ~(PROT_WRITE | PROT_READ))
+		return -EINVAL;
+
+	if (wrapfd_rewrap.reserved)
 		return -EINVAL;
 
 	spin_lock(&ctx->lock);
@@ -990,6 +996,9 @@ static int wrap_file(struct wrap_ctx *ctx,
 	if (wrapfd_wrap.prot & ~(PROT_WRITE | PROT_READ))
 		return -EINVAL;
 
+	if (wrapfd_wrap.reserved)
+		return -EINVAL;
+
 	content = create_content_for(wrapfd_wrap.fd, wrapfd_wrap.prot);
 	if (IS_ERR(content))
 		return PTR_ERR(content);
@@ -1012,6 +1021,9 @@ static int get_wrap_state(struct wrapfd_get_state __user *user_wrapfd_get_state)
 	if (copy_from_user(&wrapfd_get_state, user_wrapfd_get_state,
 			   sizeof(wrapfd_get_state)))
 		return -EFAULT;
+
+	if (wrapfd_get_state.reserved)
+		return -EINVAL;
 
 	file = fget(wrapfd_get_state.fd);
 	if (!file)
