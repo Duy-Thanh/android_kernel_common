@@ -51,6 +51,24 @@
       "parentUuid": "6c03fc25_1c777fb4",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b9aa2a8_0caa1c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-25T18:44:51Z",
+      "side": 1,
+      "message": "The ABI change is huge since it locks down most dwc3 internal structs in the KMI. I don\u0027t think we can take this. @nkapron@google.com should weigh in.\n\nBTW, the hooks should not have been accepted without this symbol update since we couldn\u0027t tell until now what the KMI impact is.",
+      "parentUuid": "06c7682e_5efd0174",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
