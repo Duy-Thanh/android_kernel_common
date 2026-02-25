@@ -105,6 +105,24 @@
       "parentUuid": "1e6d4141_b9011820",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dea26f4_f37f3f46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2026-02-25T20:52:15Z",
+      "side": 1,
+      "message": "Right, so mitigated that by having the Synopsys dwc3 upstream maintainer on-board by signing off ACK vendor hook the patch. So atleast if anything fundamentally changes in linux upstream, Pixel will have a heads up ahead of time so that the vendor hook implementation is adjusted.\n\n```\nCo-developed-by: Thinh Nguyen \u003cThinh.Nguyen@synopsys.com\u003e\nSigned-off-by: Thinh Nguyen \u003cThinh.Nguyen@synopsys.com\u003e\n```",
+      "parentUuid": "b798e6ad_ee4613a7",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
