@@ -69,6 +69,24 @@
       "parentUuid": "06c7682e_5efd0174",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e6d4141_b9011820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2026-02-25T18:59:21Z",
+      "side": 1,
+      "message": "One of the alternate ways that I am thinking of is instead of taking `struct dwc3` as the argument for for \n```\nDECLARE_HOOK(android_vh_dwc3_core_soft_reset,\n\t     TP_PROTO(struct dwc3 *dwc, enum soft_reset_phase phase),\n\t     TP_ARGS(dwc, phase));\n```\n\nI can just send send void* dwc3 and cast it back in the vendor module. Would that be acceptable ? Or is there a better way to do this ?",
+      "parentUuid": "7b9aa2a8_0caa1c0c",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
