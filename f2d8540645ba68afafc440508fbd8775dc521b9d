@@ -33,6 +33,42 @@
       "message": "I think that wonder.fragment and Bazel target definitions for wonder driver should live in common-modules/wonder project. Only the symbol list for wonder should be added to GKI, since wonder driver is essentially a vendor module in this case.",
       "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "218989b8_104b5935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-02-25T17:09:55Z",
+      "side": 1,
+      "message": "The reason these are in `kernel/common` vs `kernel/common-modules/wonder` is so that partners can directly swap in the wonder DDK git project into their kernel tree and use it as-is without the reference wonder kernel_build causing any conflicts. Also, if I move the target definitions to the DDK project, then I would have to add another label flag to define the base_kernel for the wonder kernel build since not all partners use `//common` for the kernel. I believe keeping the reference wonder kernel_build definition outside of the DDK git project is the cleanest approach since it should not be used by anyone except Google.",
+      "parentUuid": "c1e2c46b_3e605003",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3fed0c_d2ecc2c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-02-25T17:09:55Z",
+      "side": 1,
+      "message": "Not sure if this is compatible with x86. If someone wants to try and add it, I\u0027m fine with it. That can be done in a follow-up series. \n\nSure, I can split the symbol list change up.",
+      "parentUuid": "a55e8339_a520daaf",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
