@@ -2234,6 +2234,12 @@ static inline void __set_blocked_on_waking(struct task_struct *p)
 		p->blocked_on_state = BO_WAKING;
 }
 
+static inline void set_blocked_on_waking(struct task_struct *p)
+{
+	guard(raw_spinlock_irqsave)(&p->blocked_lock);
+	__set_blocked_on_waking(p);
+}
+
 static inline struct mutex *__get_task_blocked_on(struct task_struct *p)
 {
 	lockdep_assert_held_once(&p->blocked_lock);
@@ -2282,6 +2288,12 @@ static inline void __clear_task_blocked_on(struct task_struct *p, struct mutex *
 	WARN_ON_ONCE(p->blocked_on != m);
 	p->blocked_on = NULL;
 	p->blocked_on_state = BO_RUNNABLE;
+}
+
+static inline void clear_task_blocked_on(struct task_struct *p, struct mutex *m)
+{
+	guard(raw_spinlock_irqsave)(&p->blocked_lock);
+	__clear_task_blocked_on(p, m);
 }
 
 static __always_inline bool need_resched(void)
