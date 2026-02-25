@@ -63,6 +63,30 @@
       },
       "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed7c57e_5e47de4c",
+        "filename": "drivers/usb/typec/mode_selection.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-25T18:18:04Z",
+      "side": 1,
+      "message": "Ack, thanks for clarifying",
+      "parentUuid": "c5d8a148_2cb02cff",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "e1262c9f017f45ed563b4e55363f19dd8ee3c1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
