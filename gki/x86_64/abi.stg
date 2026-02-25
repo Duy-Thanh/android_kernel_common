@@ -43261,6 +43261,12 @@ member {
   offset: 8384
 }
 member {
+  id: 0xd671cda5
+  name: "android_oem_data1"
+  type_id: 0x92233392
+  offset: 4160
+}
+member {
   id: 0xd671cf9f
   name: "android_oem_data1"
   type_id: 0x92233392
@@ -205510,7 +205516,7 @@ struct_union {
   kind: STRUCT
   name: "cma"
   definition {
-    bytesize: 520
+    bytesize: 528
     member_id: 0x65162aa0
     member_id: 0x1d92eda1
     member_id: 0x434796b7
@@ -205528,6 +205534,7 @@ struct_union {
     member_id: 0x2d5bf432
     member_id: 0x45d78171
     member_id: 0xed700987
+    member_id: 0xd671cda5
   }
 }
 struct_union {
