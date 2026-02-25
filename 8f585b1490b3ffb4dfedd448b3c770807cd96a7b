@@ -46,6 +46,30 @@
       },
       "revId": "8f585b1490b3ffb4dfedd448b3c770807cd96a7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5488cb4a_e087609d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T16:48:04Z",
+      "side": 1,
+      "message": "ha! I understand now. The original patch was significantly reworked. In that case I have no suggestions I wouldn\u0027t know what would be best, so this is good. Thanks for the explanation.",
+      "parentUuid": "f26a9d36_df53adba",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "8f585b1490b3ffb4dfedd448b3c770807cd96a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
