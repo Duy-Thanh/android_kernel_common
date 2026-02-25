@@ -9158,6 +9158,11 @@ pick_next_task_fair(struct rq *rq, struct task_struct *prev, struct rq_flags *rf
 	int new_tasks;
 
 again:
+	/*
+	 * Re-read rq->donor at the top as it may have
+	 * changed across a rq lock drop
+	 */
+	prev = rq->donor;
 	trace_android_rvh_before_pick_task_fair(rq, &p, prev, rf);
 	if (!p) {
 		p = pick_task_fair(rq);
