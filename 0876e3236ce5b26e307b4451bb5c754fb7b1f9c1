@@ -22,6 +22,30 @@
       },
       "revId": "0876e3236ce5b26e307b4451bb5c754fb7b1f9c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b98c9c_4275aac9",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-25T17:50:55Z",
+      "side": 1,
+      "message": "Ok, makes sense. We want to support the usecase when device keeps its mappings after the inference ends so that it can use them again if the buffers hasn\u0027t been freed and reused. For that usecase your concern is relevant. I\u0027ll make the change to DMA_BIDIRECTIONAL.",
+      "parentUuid": "6b6d176c_de533909",
+      "range": {
+        "startLine": 155,
+        "startChar": 1,
+        "endLine": 156,
+        "endChar": 28
+      },
+      "revId": "0876e3236ce5b26e307b4451bb5c754fb7b1f9c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
