@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6d176c_de533909",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-02-25T02:07:41Z",
+      "side": 1,
+      "message": "Suppose you have a buffer that is IOMMU mapped into a dma engine\u0027s DMA space. Assume the DMA engine is non-coherent. The DMA engine writes into the buffer. The part of the buffer that it writes to is on a particular cacheline.\n\nOn the CPU side, we use the load ioctl command, and then write data, and part of it is to be written to the same cacheline. When we start the load function, we currently call dma_buf_map_attachment() first after attaching the misc device to the dma-buf.\n\nOn arm64, this results in a cache clean of the area that we\u0027re writing to. However, it\u0027s possible that the cacheline that the device wrote to, and the CPU will write to later, has been pulled in through speculative access. Since the DMA engine is non-coherent, the DMA engine\u0027s data that it wrote to the cacheline may not be in the CPU cache, meaning that the cache clean will overwrite it.\n\nI wonder if the right thing to do is to actually have this sequence:\n```\n1. dma_buf_begin_cpu_access(..., DMA_BIDIRECTIONAL)\n2. vaddr \u003d dma_buf_vmap()\n3. write to buffer using vaddr\n4. dma_buf_vunmap()\n5. dma_buf_end_cpu_access(..., DMA_BIDIRECTIONAL)\n```\nWe use DMA_BIDIRECTIONAL since we don\u0027t know if the DMA engine wrote into the buffer at an earlier point in time, and we know we will. dma_buf_begin_cpu_access() with DMA_BIDIRECTIONAL will trigger a cache invalidation, which will invalidate the cache lines but not write them to DRAM, which will preserve the data that the DMA engine wrote.\n\nSteps 3-5 are just for writing the data into the buffer. When we write into the buffer, we\u0027ll pull in the cache line with the contents of the device\u0027s write from RAM as intended.\n\ndma_buf_end_cpu_access(..., DMA_BIDIRECTIONAL) will cause the cache lines to be cleaned so that the device can read the contents that were written, along with its own contents.\n\nIn the case where there are no IOMMU mappings, then dma_buf_[begin|end]_cpu_access() are nops and won\u0027t do CMOs, but I think that\u0027s fine, because the dmabuf will be mapped later by the DMA engine\u0027s driver, when it invokes dma_buf_map_attachment(). At that point, a cache clean will happen for the device.\n\nIf there is some restriction that writes are not possible, then the suggestion I made still works, except that you can change the direction to simply be DMA_TO_DEVICE.",
+      "range": {
+        "startLine": 155,
+        "startChar": 1,
+        "endLine": 156,
+        "endChar": 28
+      },
+      "revId": "0876e3236ce5b26e307b4451bb5c754fb7b1f9c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
