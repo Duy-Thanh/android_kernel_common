@@ -123,6 +123,24 @@
       "parentUuid": "b798e6ad_ee4613a7",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b824f82e_d3d9fc5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-02-25T21:03:24Z",
+      "side": 1,
+      "message": "Unfortunately, I don\u0027t think we would accept this from any other vendor, so we can\u0027t give pixel priority here.",
+      "parentUuid": "6dea26f4_f37f3f46",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
