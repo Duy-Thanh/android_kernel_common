@@ -774,14 +774,13 @@ static int ffa_memory_reclaim(u64 g_handle, u32 flags)
 	return 0;
 }
 
-static int ffa_notification_bitmap_create(void)
+int ffa_notification_bitmap_create(unsigned long vmid, unsigned long vcpu_count)
 {
 	ffa_value_t ret;
-	u16 vcpu_count = nr_cpu_ids;
 
 	invoke_ffa_fn((ffa_value_t){
 		      .a0 = FFA_NOTIFICATION_BITMAP_CREATE,
-		      .a1 = drv_info->vm_id, .a2 = vcpu_count,
+		      .a1 = vmid, .a2 = vcpu_count,
 		      }, &ret);
 
 	if (ret.a0 == FFA_ERROR)
@@ -789,6 +788,7 @@ static int ffa_notification_bitmap_create(void)
 
 	return 0;
 }
+EXPORT_SYMBOL(ffa_notification_bitmap_create);
 
 static int ffa_notification_bitmap_destroy(void)
 {
@@ -1971,7 +1971,7 @@ static void ffa_notifications_setup(void)
 
 	ret = ffa_features(FFA_NOTIFICATION_BITMAP_CREATE, 0, NULL, NULL);
 	if (!ret) {
-		ret = ffa_notification_bitmap_create();
+		ret = ffa_notification_bitmap_create(drv_info->vm_id, nr_cpu_ids);
 		if (ret) {
 			pr_err("Notification bitmap create error %d\n", ret);
 			return;
