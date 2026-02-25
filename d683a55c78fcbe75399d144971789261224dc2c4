@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66edf5a_b2b8403c",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2256,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-25T18:25:00Z",
+      "side": 1,
+      "message": "Please add it on a separate line.",
+      "range": {
+        "startLine": 2256,
+        "startChar": 27,
+        "endLine": 2256,
+        "endChar": 43
+      },
+      "revId": "d683a55c78fcbe75399d144971789261224dc2c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
