@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d651af_093eb5d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-25T09:09:51Z",
+      "side": 1,
+      "message": "I usually see ABI change is separate CL, but if the linter is not complaining I guess it\u0027s fine.",
+      "revId": "dae3fa44d28e5e86f56a3f9d95fad28ae7920da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
