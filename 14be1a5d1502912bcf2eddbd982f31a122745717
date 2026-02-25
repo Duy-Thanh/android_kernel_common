@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824789d0_b99125be",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T19:11:14Z",
+      "side": 1,
+      "message": "No need blank line",
+      "revId": "14be1a5d1502912bcf2eddbd982f31a122745717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "273f7e25_b406f2fa",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T19:11:14Z",
+      "side": 1,
+      "message": "zram_populate_table?",
+      "range": {
+        "startLine": 1044,
+        "startChar": 11,
+        "endLine": 1044,
+        "endChar": 28
+      },
+      "revId": "14be1a5d1502912bcf2eddbd982f31a122745717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9290fb6c_97fe25cb",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T19:11:14Z",
+      "side": 1,
+      "message": "zram_deferred_prefetch?",
+      "range": {
+        "startLine": 1113,
+        "startChar": 12,
+        "endLine": 1113,
+        "endChar": 33
+      },
+      "revId": "14be1a5d1502912bcf2eddbd982f31a122745717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75df6c18_f33e6e03",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T19:11:14Z",
+      "side": 1,
+      "message": "zram_prefetch_read_endio?",
+      "range": {
+        "startLine": 1127,
+        "startChar": 12,
+        "endLine": 1127,
+        "endChar": 35
+      },
+      "revId": "14be1a5d1502912bcf2eddbd982f31a122745717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c3dbf58_694a6195",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-25T19:11:14Z",
+      "side": 1,
+      "message": "How about zram_prefetch_from_bdev?",
+      "range": {
+        "startLine": 1147,
+        "startChar": 11,
+        "endLine": 1147,
+        "endChar": 33
+      },
+      "revId": "14be1a5d1502912bcf2eddbd982f31a122745717",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
