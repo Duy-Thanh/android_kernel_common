@@ -22,6 +22,30 @@
       },
       "revId": "3407ec75927505fb37c66d4823374276fb588881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44350225_974a2e99",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1659,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-26T13:23:27Z",
+      "side": 1,
+      "message": "Ideally the hyp_req for HOSTS2... but somehow it disappeared here! :-\\",
+      "parentUuid": "ea6fc332_8045218d",
+      "range": {
+        "startLine": 1655,
+        "startChar": 1,
+        "endLine": 1659,
+        "endChar": 60
+      },
+      "revId": "3407ec75927505fb37c66d4823374276fb588881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
