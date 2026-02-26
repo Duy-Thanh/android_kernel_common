@@ -141,6 +141,24 @@
       "parentUuid": "49e31bff_ddcfee9d",
       "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eef1332_c13b4a1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-02-26T07:50:22Z",
+      "side": 1,
+      "message": "I wrote:\n\n\u003e The next step up is to ensure that a communal symbol list is present and maintained. However, this is not really meaningful if partners are supplying cfg and mac as vendor modules!\n\nI think that was unclear thinking. The list should be for cfg, mac and wonder combined.",
+      "parentUuid": "a2efd3ae_c7372a9c",
+      "revId": "f2d8540645ba68afafc440508fbd8775dc521b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
