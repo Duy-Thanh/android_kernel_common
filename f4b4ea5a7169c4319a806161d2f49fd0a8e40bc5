@@ -16,6 +16,24 @@
       "message": "As previously discussed with @senozhatsky@google.com, we don\u0027t believe the current approach is an upstreamable solution.\n\nWe encountered a similar issue with app compaction, where the compaction process would hold the mmap_sem of the target process, causing VMA operations (such as mmap or mprotect) to stall until completion. We resolved this by having the CAO periodically check if the app is about to launch; if so, it simply bails out of the MADV_PAGEOUT loop. This works because CAO operates at a VMA granularity. However, since the current writeback ioctl is per-process, there is no way to bail out mid-processing.\n\nWhat if we modify the ZRAM_ANDROID_IOC_PROCESS_WRITEBACK interface to: \n\nioctl(zram_fd, pidfd, start_addr, size, \u0026end_addr);?\n\nThis would write back a specific amount of data starting from the given address and return end_addr as the next start_addr. This allows userspace to terminate the request if it sees a different app is about to launch and requires a prefetch. This would eliminate the need to introduce special preemption logic in the kernel.",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a020f9e_604d6dec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-02-26T04:48:35Z",
+      "side": 1,
+      "message": "That will defer the preemption control from kernel to userspace. The `size` per ioctl call will be critical for userspace. If it\u0027s too large, the preemption will not work, if it\u0027s too small, the syscall overhead are increased.\n\nFor the ioctl interface, how about keep current ZRAM_ANDROID_IOC_PROCESS_WRITEBACK for the whole process and add a new cmd like ZRAM_ANDROID_IOC_PROCESS_WRITEBACK_PARTIAL to support the start_addr, size, end_addr?",
+      "parentUuid": "1ccd11c3_8a0281c1",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
