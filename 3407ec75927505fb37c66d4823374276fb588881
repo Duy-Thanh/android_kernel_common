@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6fc332_8045218d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1659,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-02-26T13:21:49Z",
+      "side": 1,
+      "message": "What goes in x2 now?",
+      "range": {
+        "startLine": 1655,
+        "startChar": 1,
+        "endLine": 1659,
+        "endChar": 60
+      },
+      "revId": "3407ec75927505fb37c66d4823374276fb588881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
