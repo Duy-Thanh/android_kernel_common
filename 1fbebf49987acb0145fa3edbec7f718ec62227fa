@@ -16,6 +16,24 @@
       "message": "I guess this is okay for now.  I wonder if we should instead do something like:\n\n```\nconfig CONFIG_CRYPTO_FIPS140_LIB_OVERRIDE_SUPPORT\n    bool \"Allow some crypto library functions to be overridden by fips140.ko\"\n    depends on MODULES\n    depends on CRYPTO_LIB_AES\u003dy\n    depends on CRYPTO_LIB_SHA256\u003dy\n    depends on CRYPTO_LIB_SHA512\u003dy\n ```\n \n Then we wouldn\u0027t have to worry about other cases that aren\u0027t useful or really even meaningful.",
       "revId": "1fbebf49987acb0145fa3edbec7f718ec62227fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d130b4_f3d32987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2026-02-26T21:56:25Z",
+      "side": 1,
+      "message": "Yeah I was thinking that having it be built into its own little binary would be ideal, but I wasn\u0027t really sure what the dependencies should be",
+      "parentUuid": "a9c62281_1a6ce844",
+      "revId": "1fbebf49987acb0145fa3edbec7f718ec62227fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
