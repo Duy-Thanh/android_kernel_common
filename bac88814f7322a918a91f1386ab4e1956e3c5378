@@ -141,6 +141,24 @@
       "parentUuid": "6dea26f4_f37f3f46",
       "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ceb99a_1a7d16f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2026-02-26T22:19:51Z",
+      "side": 1,
+      "message": "We solved it in a different way: https://android-review.git.corp.google.com/c/kernel/common/+/3967647/comments/4ec67a60_ae791cea to address the concerns in this comment. PTAL. Will update the bug as well.",
+      "parentUuid": "b824f82e_d3d9fc5e",
+      "revId": "bac88814f7322a918a91f1386ab4e1956e3c5378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
