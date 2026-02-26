@@ -70,6 +70,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24978d1_461f003f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-02-26T01:51:00Z",
+      "side": 1,
+      "message": "OK. Do we want to exhaust h/w tags each time we prefetch or do we want to have a more fine-grained control over them? zram has requests pool code that limit the number of in-flight request.",
+      "parentUuid": "1f381f97_2f471448",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
