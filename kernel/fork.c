@@ -1005,6 +1005,11 @@ void __put_task_struct(struct task_struct *tsk)
 	WARN_ON(refcount_read(&tsk->usage));
 	WARN_ON(tsk == current);
 
+	/* If mm was stored then it is kept alive until the task is freed. */
+	if (unlikely(!(tsk->flags & (PF_KTHREAD | PF_IO_WORKER)) &&
+		     tsk->worker_private))
+		mmdrop(tsk->worker_private);
+
 	put_dmabuf_info(tsk->dmabuf_info);
 	io_uring_free(tsk);
 	cgroup_free(tsk);
@@ -1396,6 +1401,7 @@ static inline void __mmput(struct mm_struct *mm)
 	ksm_exit(mm);
 	khugepaged_exit(mm); /* must run before exit_mmap */
 	exit_mmap(mm);
+	erase_exiting_mm(mm);
 	mm_put_huge_zero_page(mm);
 	set_mm_exe_file(mm, NULL);
 	put_dmabuf_info(mm->dmabuf_info);
@@ -1702,6 +1708,7 @@ static void mm_release(struct task_struct *tsk, struct mm_struct *mm)
 
 void exit_mm_release(struct task_struct *tsk, struct mm_struct *mm)
 {
+	store_exiting_mm(tsk);
 	futex_exit_release(tsk);
 	mm_release(tsk, mm);
 }

@@ -64,6 +64,7 @@ static inline int get_dumpable(struct mm_struct *mm)
  * on NFS restore
  */
 //#define MMF_EXE_FILE_CHANGED	18	/* see prctl_set_mm_exe_file() */
+#define MMF_MM_STORED		18	/* mm got stored for reapers to find */
 
 #define MMF_HAS_UPROBES		19	/* has uprobes */
 #define MMF_RECALC_UPROBES	20	/* MMF_HAS_UPROBES can be wrong */

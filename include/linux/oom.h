@@ -113,6 +113,9 @@ extern bool __oom_reap_task_mm(struct mm_struct *mm);
 
 extern struct task_struct *find_lock_task_mm(struct task_struct *p);
 
+void store_exiting_mm(struct task_struct *task);
+void erase_exiting_mm(struct mm_struct *mm);
+
 /* call for adding killed process to reaper. */
 extern void add_to_oom_reaper(struct task_struct *p);
 #endif /* _INCLUDE_LINUX_OOM_H */

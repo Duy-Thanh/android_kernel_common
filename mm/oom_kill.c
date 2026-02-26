@@ -1236,6 +1236,67 @@ void pagefault_out_of_memory(void)
 		pr_warn("Huh VM_FAULT_OOM leaked out to the #PF handler. Retrying PF\n");
 }
 
+void store_exiting_mm(struct task_struct *task)
+{
+	struct mm_struct *mm = task->mm;
+
+	/*
+	 * Store association for the group leader. If the leader is not through
+	 * this stage yet then its mm is still set and any thread in that group
+	 * will still find its mm via find_lock_task_mm().
+	 */
+	if (task != task->group_leader)
+		return;
+
+	task = task->group_leader;
+
+	/* Store only if the process got killed */
+	if (!(task->flags & PF_SIGNALED))
+		return;
+
+	/* Ignore kernel threads and workers */
+	if (task->flags & (PF_KTHREAD | PF_IO_WORKER))
+		return;
+
+	if (!task_will_free_mem(task))
+		return;
+
+	/* task->worker_private should be unused. */
+	if (WARN_ON_ONCE(task->worker_private))
+		return;
+
+	if (test_and_set_bit(MMF_MM_STORED, &mm->flags))
+		return;
+
+	task->worker_private = mm;
+
+	/* Refcount while mm is stored, to be dropped by erase_exiting_mm() */
+	mmgrab(mm);
+	/*
+	 * Refcount while task is alive and discoverable,
+	 * to be dropped by __put_task_struct()
+	 */
+	mmgrab(mm);
+}
+
+void erase_exiting_mm(struct mm_struct *mm)
+{
+	if (!test_and_clear_bit(MMF_MM_STORED, &mm->flags))
+		return;
+
+	mmdrop(mm);
+}
+
+static struct mm_struct *grab_stored_mm(struct task_struct *task)
+{
+	struct mm_struct *mm = task->group_leader->worker_private;
+
+	if (mm)
+		mmgrab(mm);
+
+	return mm;
+}
+
 SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 {
 #ifdef CONFIG_MMU
@@ -1259,6 +1320,10 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 	 */
 	p = find_lock_task_mm(task);
 	if (!p) {
+		mm = grab_stored_mm(task);
+		if (mm)
+			goto reap;
+
 		ret = -ESRCH;
 		goto put_task;
 	}
@@ -1277,7 +1342,7 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 
 	if (!reap)
 		goto drop_mm;
-
+reap:
 	if (mmap_read_lock_killable(mm)) {
 		ret = -EINTR;
 		goto drop_mm;
