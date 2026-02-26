@@ -52,6 +52,24 @@
       "parentUuid": "1a020f9e_604d6dec",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c24fa81b_42d376c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-02-26T08:30:20Z",
+      "side": 1,
+      "message": "The data structure changes, so I wonder if it breaks the current UAPI interface.",
+      "parentUuid": "8d894da7_a866513f",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
