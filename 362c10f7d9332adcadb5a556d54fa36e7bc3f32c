@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dddec3c_3512a073",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-02-26T12:40:43Z",
+      "side": 1,
+      "message": "Is this really sufficient? E.g. another CPU may have topped up the s2 pool in the window between the EL2-\u003eEL1 return and you taking that lock no?\n\nPerhaps instead we need a HVC from here to ask EL2 \u0027do you still need a topup\u0027 ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 25
+      },
+      "revId": "362c10f7d9332adcadb5a556d54fa36e7bc3f32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
