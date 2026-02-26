@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5e26f5_87a3a6c0",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2461,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-26T09:29:26Z",
+      "side": 0,
+      "message": "Hum, I believe the patch Marc has pushed (08f...) is using ALIGN_DOWN()",
+      "revId": "c255f8ed55ab4ad860d3dc612b5b5946d6f93fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
