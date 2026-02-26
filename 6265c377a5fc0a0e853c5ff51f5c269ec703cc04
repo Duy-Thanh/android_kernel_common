@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92ae6c4_6d524e11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-26T17:22:48Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant...\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "6265c377a5fc0a0e853c5ff51f5c269ec703cc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a9aed4_e6d56216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-26T17:22:48Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Pratham Pra...\n\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Pratham Pratap \u003cppratap@qti.qualcomm.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "6265c377a5fc0a0e853c5ff51f5c269ec703cc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db4a065a_1e2f0878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-26T17:22:48Z",
+      "side": 1,
+      "message": "Must be sent upstream first.",
+      "revId": "6265c377a5fc0a0e853c5ff51f5c269ec703cc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
