@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a9236a_46cac23f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-02-26T19:04:57Z",
+      "side": 1,
+      "message": "Note, this can be used for both arm64 and x86_64. If you think it\u0027s confusing and would like separate definitions for each, that\u0027s fine.",
+      "range": {
+        "startLine": 685,
+        "startChar": 12,
+        "endLine": 685,
+        "endChar": 30
+      },
+      "revId": "594282f91e33d04134041d825ee87e71f9ed82a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
