@@ -4,7 +4,7 @@
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
-load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@rules_devicetree//devicetree:devicetree_library.bzl", "devicetree_library")
 load("@rules_pkg//pkg:install.bzl", "pkg_install")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_filegroup", "pkg_files", "strip_prefix")
@@ -19,6 +19,7 @@ load("//build/kernel/kleaf:constants.bzl", "COMMON_KCFLAGS", "DEFAULT_GKI_OUTS",
 load("//build/kernel/kleaf:fail.bzl", "fail_rule")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "android_filegroup",
     "checkpatch",
     "ddk_headers",
     "ddk_headers_archive",
@@ -3353,3 +3354,66 @@ pkg_zip(
 exports_files([
     "Makefile",
 ])
+
+# Development tools
+cc_library(
+    name = "tools_libapi",
+    srcs = glob(["tools/lib/api/**/*.c"]) + [
+        "tools/lib/str_error_r.c",
+    ],
+    hdrs = glob([
+        "tools/lib/api/**/*.h",
+        "tools/include/**/*.h",
+    ]) + [
+    ],
+    copts = [
+        "-ggdb3",
+        "-Wall",
+        "-Wextra",
+        "-std=gnu99",
+        "-U_FORTIFY_SOURCE",
+        "-fPIC",
+        # Debugging options
+        "-O3",
+        "-D_FORTIFY_SOURCE",
+        "-Werror",
+    ],
+    defines = [
+        "LARGEFILE64_SOURCE",
+        "FILE_OFFSET_BITS=64",
+    ],
+    includes = [
+        "tools/include",
+        "tools/lib/api",
+    ],
+)
+
+cc_binary(
+    name = "tools_mm_page_types",
+    srcs = [
+        "include/uapi/linux/kernel-page-flags.h",
+        "include/uapi/linux/magic.h",
+        "tools/lib/api/fs/fs.h",
+        "tools/mm/page-types.c",
+    ],
+    copts = [
+        "-Wall",
+        "-Wextra",
+        "-pthread",
+    ],
+    includes = ["tools/lib"],
+    linkopts = [
+        "-pthread",
+    ],
+    deps = [
+        ":tools_libapi",
+    ],
+)
+
+android_filegroup(
+    name = "tools_mm_page_types_android_arm64",
+    srcs = [
+        ":tools_mm_page_types",
+    ],
+    cpu = "arm64",
+)

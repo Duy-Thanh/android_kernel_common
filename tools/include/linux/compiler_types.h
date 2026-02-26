@@ -33,7 +33,7 @@
 
 /* Compiler specific macros. */
 #ifdef __GNUC__
-#include <linux/compiler-gcc.h>
+#include <linux/compiler.h>
 #endif
 
 #ifndef asm_goto_output
