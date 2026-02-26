@@ -455947,6 +455947,37 @@ elf_symbol {
   full_name: "__vmalloc_noprof"
 }
 elf_symbol {
+<<<<<<< HEAD   (e3e6ecfdba44849197ef119c1ff8635c6a01ce92 ANDROID: mm: vmalloc: export vunmap_ apis)
+||||||| BASE   (f535f587ab54cef04f99e732cb278cf5f8e4d516 ANDROID: mm: vmalloc: export vunmap_ apis)
+  id: 0x08a0e250
+  name: "__vmap_pages_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x94a7b4d9
+  type_id: 0x91b76eb8
+  full_name: "__vmap_pages_range_noflush"
+}
+elf_symbol {
+=======
+  id: 0x08a0e250
+  name: "__vmap_pages_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x94a7b4d9
+  type_id: 0x91b76eb8
+  full_name: "__vmap_pages_range_noflush"
+}
+elf_symbol {
+  id: 0x2d708a2f
+  name: "__vunmap_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc7fe1546
+  type_id: 0x1c88dd20
+  full_name: "__vunmap_range_noflush"
+}
+elf_symbol {
+>>>>>>> CHANGE (fddfced64c45d7feae5303038512bece13a71fa7 ANDROID: abi_gki_aarch64_qcom: whitelist some mm symbols)
   id: 0xf84b240e
   name: "__wait_on_buffer"
   is_defined: true
@@ -525148,6 +525179,15 @@ elf_symbol {
   full_name: "vunmap"
 }
 elf_symbol {
+  id: 0x44630914
+  name: "vunmap_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc7fe1546
+  type_id: 0x1c88dd20
+  full_name: "vunmap_range_noflush"
+}
+elf_symbol {
   id: 0x5254508e
   name: "vzalloc_node_noprof"
   is_defined: true
@@ -529202,6 +529242,13 @@ interface {
   symbol_id: 0x4b75c281
   symbol_id: 0xa7c8d5e4
   symbol_id: 0x17ef5190
+<<<<<<< HEAD   (e3e6ecfdba44849197ef119c1ff8635c6a01ce92 ANDROID: mm: vmalloc: export vunmap_ apis)
+||||||| BASE   (f535f587ab54cef04f99e732cb278cf5f8e4d516 ANDROID: mm: vmalloc: export vunmap_ apis)
+  symbol_id: 0x08a0e250
+=======
+  symbol_id: 0x08a0e250
+  symbol_id: 0x2d708a2f
+>>>>>>> CHANGE (fddfced64c45d7feae5303038512bece13a71fa7 ANDROID: abi_gki_aarch64_qcom: whitelist some mm symbols)
   symbol_id: 0xf84b240e
   symbol_id: 0xb63e140d
   symbol_id: 0xd171b921
@@ -536886,6 +536933,7 @@ interface {
   symbol_id: 0x0db9531c
   symbol_id: 0xf29d7680
   symbol_id: 0xbd4af188
+  symbol_id: 0x44630914
   symbol_id: 0x5254508e
   symbol_id: 0x288f10cb
   symbol_id: 0x5b9410e0
