@@ -1389,6 +1389,7 @@ static inline void __mmput(struct mm_struct *mm)
 	ksm_exit(mm);
 	khugepaged_exit(mm); /* must run before exit_mmap */
 	exit_mmap(mm);
+	erase_exiting_mm(mm);
 	mm_put_huge_zero_page(mm);
 	set_mm_exe_file(mm, NULL);
 	put_dmabuf_info(mm->dmabuf_info);
@@ -1695,6 +1696,7 @@ static void mm_release(struct task_struct *tsk, struct mm_struct *mm)
 
 void exit_mm_release(struct task_struct *tsk, struct mm_struct *mm)
 {
+	store_exiting_mm(tsk, mm);
 	futex_exit_release(tsk);
 	mm_release(tsk, mm);
 }

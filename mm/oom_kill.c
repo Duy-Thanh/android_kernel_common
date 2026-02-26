@@ -1236,6 +1236,51 @@ void pagefault_out_of_memory(void)
 		pr_warn("Huh VM_FAULT_OOM leaked out to the #PF handler. Retrying PF\n");
 }
 
+static DEFINE_XARRAY_ALLOC(mm_stash);
+static DEFINE_SPINLOCK(mm_stash_lock);
+
+int store_exiting_mm(struct task_struct *task, struct mm_struct *mm)
+{
+	int ret;
+
+	if (!task || !task->group_leader || !mm || mm != task->mm)
+		return -EINVAL;
+
+	if (!task_will_free_mem(task))
+		return 0;
+
+	mmgrab(mm);
+	spin_lock(&mm_stash_lock);
+	ret = xa_insert(&mm_stash, (unsigned long)task->group_leader, mm,
+			GFP_ATOMIC);
+	spin_unlock(&mm_stash_lock);
+
+	return ret;
+}
+
+int erase_exiting_mm(struct mm_struct *mm)
+{
+	struct mm_struct *stashed_mm;
+	unsigned long index;
+	int ret = -ESRCH;
+
+	if (!mm)
+		return -EINVAL;
+
+	spin_lock(&mm_stash_lock);
+	xa_for_each(&mm_stash, index, stashed_mm) {
+		if (stashed_mm == mm) {
+			xa_erase(&mm_stash, index);
+			mmdrop(mm);
+			ret = 0;
+			break;
+		}
+	}
+	spin_unlock(&mm_stash_lock);
+
+	return ret;
+}
+
 SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 {
 #ifdef CONFIG_MMU
@@ -1259,6 +1304,13 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 	 */
 	p = find_lock_task_mm(task);
 	if (!p) {
+		spin_lock(&mm_stash_lock);
+		mm = xa_load(&mm_stash, (unsigned long)task->group_leader);
+		if (mm)
+			mmgrab(mm);
+		spin_unlock(&mm_stash_lock);
+		if (mm)
+			goto reap;
 		ret = -ESRCH;
 		goto put_task;
 	}
@@ -1277,7 +1329,7 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 
 	if (!reap)
 		goto drop_mm;
-
+reap:
 	if (mmap_read_lock_killable(mm)) {
 		ret = -EINTR;
 		goto drop_mm;
