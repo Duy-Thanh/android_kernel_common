@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "586140c3_e679c7a6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-02-27T17:17:54Z",
+      "side": 1,
+      "message": "Seconding @sidnayyar@google.com\u0027s comment about keeping wonder specific bits in the other repo I think it would be better is this is a flag label, then as you mentioned partners could switch between different wonder implementations if needed. wdyt?",
+      "range": {
+        "startLine": 684,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 19
+      },
+      "revId": "594282f91e33d04134041d825ee87e71f9ed82a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "85a9236a_46cac23f",

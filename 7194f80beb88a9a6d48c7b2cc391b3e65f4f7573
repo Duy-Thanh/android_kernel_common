@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7588e476_aa75fc4d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-02-27T17:17:54Z",
+      "side": 1,
+      "message": "Is this needed? I\u0027ve not seen device build set this before.",
+      "range": {
+        "startLine": 670,
+        "startChar": 4,
+        "endLine": 670,
+        "endChar": 75
+      },
+      "revId": "7194f80beb88a9a6d48c7b2cc391b3e65f4f7573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
