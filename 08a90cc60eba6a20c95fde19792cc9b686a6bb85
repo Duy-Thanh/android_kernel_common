@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e899495a_ca843643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941466
+      },
+      "writtenOn": "2026-02-27T16:02:59Z",
+      "side": 1,
+      "message": "Change 4 fixes the Google Lint error message \"File is missing final newline\" (this appears to be a Linux mainline issue: https://github.com/torvalds/linux/blob/v7.0-rc1/fs/f2fs/xattr.c#L845).",
+      "revId": "08a90cc60eba6a20c95fde19792cc9b686a6bb85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
