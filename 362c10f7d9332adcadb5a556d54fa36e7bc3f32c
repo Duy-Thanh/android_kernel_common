@@ -22,6 +22,30 @@
       },
       "revId": "362c10f7d9332adcadb5a556d54fa36e7bc3f32c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb91ed89_e78f69d7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-27T13:59:58Z",
+      "side": 1,
+      "message": "As discussed offline, let\u0027s just get rid of that. It makes only sense if the allocation is massive which isn\u0027t the case at the moment.",
+      "parentUuid": "8dddec3c_3512a073",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 25
+      },
+      "revId": "362c10f7d9332adcadb5a556d54fa36e7bc3f32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
