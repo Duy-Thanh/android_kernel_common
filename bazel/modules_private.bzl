@@ -10,7 +10,6 @@ visibility("private")
 
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
-    "drivers/android/binder/rust_binder.ko",
     "drivers/block/virtio_blk.ko",
     "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
@@ -167,8 +166,11 @@ def get_gki_modules_list(arch = None, map_each = None):
         list comprehension); instead, use the |map_each| argument.
     """
 
-    return select({
-        "//conditions:default": _get_gki_modules_list_minus_select(arch, map_each),
+    return _get_gki_modules_list_minus_select(arch, map_each) + select({
+        "//build/kernel/kleaf:kasan_is_true": [],
+        "//conditions:default": [
+            "drivers/android/binder/rust_binder.ko",
+        ],
     })
 
 # buildifier: disable=unnamed-macro
@@ -188,7 +190,9 @@ def get_gki_modules_superset(arch = None, map_each = None):
     Returns:
         A list that contains the superset of GKI modules for the given |arch|.
     """
-    return _get_gki_modules_list_minus_select(arch, map_each)
+    return _get_gki_modules_list_minus_select(arch, map_each) + [
+        "drivers/android/binder/rust_binder.ko",
+    ]
 
 _KUNIT_FRAMEWORK_MODULES = [
     "lib/kunit/kunit.ko",
