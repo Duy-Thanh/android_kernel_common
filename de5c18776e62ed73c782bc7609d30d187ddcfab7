@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c0ce0dc_5e61a36f",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-27T21:52:00Z",
+      "side": 1,
+      "message": "Do you really need to expose the complete struct to the KMI?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "de5c18776e62ed73c782bc7609d30d187ddcfab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
