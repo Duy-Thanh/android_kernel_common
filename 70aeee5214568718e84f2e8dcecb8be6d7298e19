@@ -16,6 +16,24 @@
       "message": "Version notes:\n\nThis is the V2 version of the patch(https://android-review.git.corp.google.com/c/kernel/common/+/3963082) to address https://android-review.git.corp.google.com/c/kernel/common/+/3964426/comments/06c7682e_5efd0174:\"The ABI change is huge since it locks down most dwc3 internal structs in the KMI. I don\u0027t think we can take this.\"  This patch addresses this concern by avoiding to pass the entire struct dwc3 by directly passing the needed members of `struct dwc3`. The ABI change stacked about this now looks minimal.",
       "revId": "70aeee5214568718e84f2e8dcecb8be6d7298e19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a451eea_15169970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-27T17:16:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4ec67a60_ae791cea",
+      "revId": "70aeee5214568718e84f2e8dcecb8be6d7298e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
