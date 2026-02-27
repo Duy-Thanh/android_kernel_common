@@ -70,6 +70,30 @@
       },
       "revId": "3407ec75927505fb37c66d4823374276fb588881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f07bd6b_0ad2758e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1659,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-27T14:24:32Z",
+      "side": 1,
+      "message": "Hum, actually no, __pkvm_topup_hyp_alloc_mgt_mc() in pkvm.c (the handler for this HVC) is modified here to look for a hyp_req in x2. So clearly I need to move things out of the way now.\n\nI guess we could argue the two patches could be merged in one... but I didn\u0027t want to have something too big.",
+      "parentUuid": "65d504ac_fbf4ae64",
+      "range": {
+        "startLine": 1655,
+        "startChar": 1,
+        "endLine": 1659,
+        "endChar": 60
+      },
+      "revId": "3407ec75927505fb37c66d4823374276fb588881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
