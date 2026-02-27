@@ -70,6 +70,24 @@
       "parentUuid": "8d894da7_a866513f",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e06a710_7b4ae684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-02-27T07:23:12Z",
+      "side": 1,
+      "message": "@surenb@google.com\n\nQ1: \nCan we change the UAPI interface since the feature is not released yet?\n\nQ2: \nIs the problem to expand the data structure for ABI like below?\n\nstruct zram_android_ioc_data_process_writeback {\n        __aligned_u64   pidfd;\n        __u64           written_bytes;\n        __u64           start_addr;\n        size_t          request_bytes;\n        __u64           *end_addr;\n\n};",
+      "parentUuid": "c24fa81b_42d376c2",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
