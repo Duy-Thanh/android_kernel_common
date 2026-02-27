@@ -725,4 +725,19 @@ static inline unsigned long dev_pm_opp_get_freq(struct dev_pm_opp *opp)
 	return dev_pm_opp_get_freq_indexed(opp, 0);
 }
 
+static inline int dev_pm_opp_set_level(struct device *dev, unsigned int level)
+{
+	struct dev_pm_opp *opp;
+	int ret;
+
+	opp = dev_pm_opp_find_level_exact(dev, level);
+	if (IS_ERR(opp))
+		return PTR_ERR(opp);
+
+	ret = dev_pm_opp_set_opp(dev, opp);
+	dev_pm_opp_put(opp);
+
+	return ret;
+}
+
 #endif		/* __LINUX_OPP_H__ */
