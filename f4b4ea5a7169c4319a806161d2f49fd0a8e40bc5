@@ -88,6 +88,24 @@
       "parentUuid": "c24fa81b_42d376c2",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d4cc51_f9671594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-27T18:07:08Z",
+      "side": 1,
+      "message": "If we have selinux rules limiting these IOCTL use to MMD only then we should be able to change them because partners can\u0027t use them anyway. If we don\u0027t have such selinux policy in place, limiting the use of these IOCTLs then we should add them immediately. That would save use headache in the future.",
+      "parentUuid": "0e06a710_7b4ae684",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
