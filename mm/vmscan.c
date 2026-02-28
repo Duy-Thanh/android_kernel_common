@@ -3649,6 +3649,12 @@ void lru_gen_del_mm(struct mm_struct *mm)
 
 	spin_lock(&mm_list->lock);
 
+	/* Confirm under lock */
+	if (list_empty(&mm->lru_gen.list)) {
+		spin_unlock(&mm_list->lock);
+		return;
+	}
+
 	for_each_node(nid) {
 		struct lruvec *lruvec = get_lruvec(memcg, nid);
 
