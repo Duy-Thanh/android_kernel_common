@@ -3607,6 +3607,17 @@ static struct lru_gen_mm_list *get_mm_list(struct mem_cgroup *memcg)
 	return &mm_list;
 }
 
+/*
+ * mm is removed from the lru_gen list at the beginning of exit_mm(), hence
+ * this check can be used to detect mm of an exiting process.
+ * Note: the check is racy as we are not holding mm_list->lock but occasional
+ * false negatives are not critical, just suboptimal.
+ */
+static inline bool lru_gen_has_mm(struct mm_struct *mm)
+{
+	return !list_empty(&mm->lru_gen.list);
+}
+
 void lru_gen_add_mm(struct mm_struct *mm)
 {
 	int nid;
@@ -3751,6 +3762,10 @@ static bool should_skip_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 	}
 
 	if (size < MIN_LRU_BATCH)
+		return true;
+
+	/* skip mm if its process is exiting */
+	if (unlikely(!lru_gen_has_mm(mm)))
 		return true;
 
 	return !mmget_not_zero(mm);
@@ -4470,6 +4485,10 @@ static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm, struct lru_gen_
 
 	do {
 		DEFINE_MAX_SEQ(lruvec);
+
+		/* skip mm if its process is exiting */
+		if (unlikely(!lru_gen_has_mm(mm)))
+			break;
 
 		err = -EBUSY;
 
