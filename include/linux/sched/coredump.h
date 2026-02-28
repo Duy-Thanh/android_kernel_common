@@ -93,6 +93,10 @@ static inline int get_dumpable(struct mm_struct *mm)
 #define MMF_VM_MERGE_ANY	29
 #define MMF_HAS_MDWE_NO_INHERIT	30
 
+#ifdef CONFIG_LRU_GEN
+#define MMF_LRU_GEN_SKIP	31	/* skip reclaiming this mm */
+#endif
+
 static inline unsigned long mmf_init_flags(unsigned long flags)
 {
 	if (flags & (1UL << MMF_HAS_MDWE_NO_INHERIT))
