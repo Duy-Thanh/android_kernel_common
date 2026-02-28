@@ -2991,12 +2991,58 @@ static struct lru_gen_mm_state *get_mm_state(struct lruvec *lruvec)
 	return &lruvec->mm_state;
 }
 
-static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
+struct find_task_control {
+	struct mm_struct *mm;
+	struct task_struct *task;
+};
+
+static int find_task_by_mm(struct task_struct *task, void *arg)
+{
+	struct find_task_control *fc = (struct find_task_control *)arg;
+
+	if (task->mm != fc->mm)
+		return 0;
+
+	fc->task = get_task_struct(task);
+	return 1;
+}
+
+static struct task_struct *get_mm_task(struct mem_cgroup *memcg,
+				       struct mm_struct *mm)
+{
+	struct task_struct *task = NULL;
+
+	if (memcg && !mem_cgroup_is_root(memcg)) {
+		struct find_task_control fc = {
+			.mm = mm,
+		};
+		mem_cgroup_scan_tasks(memcg, find_task_by_mm, &fc);
+		task = fc.task;
+	} else {
+		struct task_struct *t;
+
+		rcu_read_lock();
+		for_each_process(t) {
+			if (t->mm == mm) {
+				task = get_task_struct(t);
+				break;
+			}
+		}
+		rcu_read_unlock();
+	}
+
+	return task;
+}
+
+static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk,
+				     struct task_struct **task)
 {
 	int key;
 	struct mm_struct *mm;
+	struct mem_cgroup *memcg = lruvec_memcg(walk->lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(walk->lruvec);
 	struct lru_gen_mm_state *mm_state = get_mm_state(walk->lruvec);
+	struct task_struct *t;
 
 	mm = list_entry(mm_state->head, struct mm_struct, lru_gen.list);
 	key = pgdat->node_id % BITS_PER_TYPE(mm->lru_gen.bitmap);
@@ -3006,7 +3052,21 @@ static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
 
 	clear_bit(key, &mm->lru_gen.bitmap);
 
-	return mmget_not_zero(mm) ? mm : NULL;
+	t = get_mm_task(memcg, mm);
+	if (t && fatal_signal_pending(t)) {
+		put_task_struct(t);
+		return NULL;
+	}
+
+	if (!mmget_not_zero(mm)) {
+		if (t)
+			put_task_struct(t);
+		return NULL;
+	}
+
+	*task = t;
+
+	return mm;
 }
 
 void lru_gen_add_mm(struct mm_struct *mm)
@@ -3117,7 +3177,8 @@ static struct lru_gen_mm_state *get_mm_state(struct lruvec *lruvec)
 	return NULL;
 }
 
-static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
+static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk,
+				     struct task_struct **task)
 {
 	return NULL;
 }
@@ -3149,7 +3210,8 @@ static void reset_mm_stats(struct lru_gen_mm_walk *walk, bool last)
 	}
 }
 
-static bool iterate_mm_list(struct lru_gen_mm_walk *walk, struct mm_struct **iter)
+static bool iterate_mm_list(struct lru_gen_mm_walk *walk, struct mm_struct **iter,
+			    struct task_struct **task)
 {
 	bool first = false;
 	bool last = false;
@@ -3195,7 +3257,7 @@ static bool iterate_mm_list(struct lru_gen_mm_walk *walk, struct mm_struct **ite
 			mm_state->tail = mm_state->head->next;
 			walk->force_scan = true;
 		}
-	} while (!(mm = get_next_mm(walk)));
+	} while (!(mm = get_next_mm(walk, task)));
 done:
 	if (*iter || last)
 		reset_mm_stats(walk, last);
@@ -3886,7 +3948,8 @@ done:
 	return -EAGAIN;
 }
 
-static void walk_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
+static void walk_mm(struct mm_struct *mm, struct task_struct *task,
+		    struct lru_gen_mm_walk *walk)
 {
 	static const struct mm_walk_ops mm_walk_ops = {
 		.test_walk = should_skip_vma,
@@ -3902,6 +3965,9 @@ static void walk_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 
 	do {
 		DEFINE_MAX_SEQ(lruvec);
+
+		if (task && fatal_signal_pending(task))
+			break;
 
 		err = -EBUSY;
 
@@ -4132,6 +4198,7 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long seq,
 	struct mm_struct *mm = NULL;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
 	struct lru_gen_mm_state *mm_state = get_mm_state(lruvec);
+	struct task_struct *task = NULL;
 
 	VM_WARN_ON_ONCE(seq > READ_ONCE(lrugen->max_seq));
 
@@ -4165,9 +4232,13 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long seq,
 	walk->force_scan = force_scan;
 
 	do {
-		success = iterate_mm_list(walk, &mm);
+		success = iterate_mm_list(walk, &mm, &task);
 		if (mm)
-			walk_mm(mm, walk);
+			walk_mm(mm, task, walk);
+		if (task) {
+			put_task_struct(task);
+			task = NULL;
+		}
 	} while (mm);
 done:
 	if (success) {
