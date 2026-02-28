@@ -3747,6 +3747,9 @@ static bool should_skip_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 	if (size < MIN_LRU_BATCH)
 		return true;
 
+	if (unlikely(test_bit(MMF_LRU_GEN_SKIP, &mm->flags)))
+		return true;
+
 	return !mmget_not_zero(mm);
 }
 
@@ -4464,6 +4467,9 @@ static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm, struct lru_gen_
 
 	do {
 		DEFINE_MAX_SEQ(lruvec);
+
+		if (unlikely(test_bit(MMF_LRU_GEN_SKIP, &mm->flags)))
+			break;
 
 		err = -EBUSY;
 
