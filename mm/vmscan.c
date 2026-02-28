@@ -3728,12 +3728,58 @@ static void reset_mm_stats(struct lruvec *lruvec, struct lru_gen_mm_walk *walk, 
 	}
 }
 
-static bool should_skip_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
+struct find_task_control {
+	struct mm_struct *mm;
+	struct task_struct *task;
+};
+
+static int find_task_by_mm(struct task_struct *task, void *arg)
+{
+	struct find_task_control *fc = (struct find_task_control *)arg;
+
+	if (task->mm != fc->mm)
+		return 0;
+
+	fc->task = get_task_struct(task);
+	return 1;
+}
+
+static struct task_struct *get_mm_task(struct mem_cgroup *memcg,
+				       struct mm_struct *mm)
+{
+	struct task_struct *task = NULL;
+
+	if (memcg && !mem_cgroup_is_root(memcg)) {
+		struct find_task_control fc = {
+			.mm = mm,
+		};
+		mem_cgroup_scan_tasks(memcg, find_task_by_mm, &fc);
+		task = fc.task;
+	} else {
+		struct task_struct *t;
+
+		rcu_read_lock();
+		for_each_process(t) {
+			if (t->mm == mm) {
+				task = get_task_struct(t);
+				break;
+			}
+		}
+		rcu_read_unlock();
+	}
+
+	return task;
+}
+
+static bool should_skip_mm(struct mm_struct *mm, struct task_struct **task,
+			   struct lru_gen_mm_walk *walk)
 {
 	int type;
 	unsigned long size = 0;
+	struct mem_cgroup *memcg = lruvec_memcg(walk->lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(walk->lruvec);
 	int key = pgdat->node_id % BITS_PER_TYPE(mm->lru_gen.bitmap);
+	struct task_struct *t;
 
 	if (!walk->force_scan && !test_bit(key, &mm->lru_gen.bitmap))
 		return true;
@@ -3749,11 +3795,25 @@ static bool should_skip_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 	if (size < MIN_LRU_BATCH)
 		return true;
 
-	return !mmget_not_zero(mm);
+	t = get_mm_task(memcg, mm);
+	if (t && fatal_signal_pending(t)) {
+		put_task_struct(t);
+		return true;
+	}
+
+	if (!mmget_not_zero(mm)) {
+		if (t)
+			put_task_struct(t);
+		return true;
+	}
+
+	*task = t;
+
+	return false;
 }
 
 static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
-			    struct mm_struct **iter)
+			    struct mm_struct **iter, struct task_struct **task)
 {
 	bool first = false;
 	bool last = false;
@@ -3800,7 +3860,8 @@ static bool iterate_mm_list(struct lruvec *lruvec, struct lru_gen_mm_walk *walk,
 		}
 
 		mm = list_entry(mm_state->head, struct mm_struct, lru_gen.list);
-		if (should_skip_mm(mm, walk))
+
+		if (should_skip_mm(mm, task, walk))
 			mm = NULL;
 	} while (!mm);
 done:
@@ -4451,7 +4512,8 @@ done:
 	return -EAGAIN;
 }
 
-static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm, struct lru_gen_mm_walk *walk)
+static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm,
+		    struct task_struct *task, struct lru_gen_mm_walk *walk)
 {
 	static const struct mm_walk_ops mm_walk_ops = {
 		.test_walk = should_skip_vma,
@@ -4466,6 +4528,9 @@ static void walk_mm(struct lruvec *lruvec, struct mm_struct *mm, struct lru_gen_
 
 	do {
 		DEFINE_MAX_SEQ(lruvec);
+
+		if (task && fatal_signal_pending(task))
+			break;
 
 		err = -EBUSY;
 
@@ -4671,6 +4736,7 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	struct lru_gen_mm_walk *walk;
 	struct mm_struct *mm = NULL;
 	struct lru_gen_folio *lrugen = &lruvec->lrugen;
+	struct task_struct *task = NULL;
 
 	VM_WARN_ON_ONCE(max_seq > READ_ONCE(lrugen->max_seq));
 
@@ -4703,9 +4769,13 @@ static bool try_to_inc_max_seq(struct lruvec *lruvec, unsigned long max_seq,
 	walk->force_scan = force_scan;
 
 	do {
-		success = iterate_mm_list(lruvec, walk, &mm);
+		success = iterate_mm_list(lruvec, walk, &mm, &task);
 		if (mm)
-			walk_mm(lruvec, mm, walk);
+			walk_mm(lruvec, mm, task, walk);
+		if (task) {
+			put_task_struct(task);
+			task = NULL;
+		}
 	} while (mm);
 done:
 	if (success)
