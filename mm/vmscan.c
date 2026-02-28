@@ -3004,6 +3004,9 @@ static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
 	if (!walk->force_scan && !test_bit(key, &mm->lru_gen.bitmap))
 		return NULL;
 
+	if (unlikely(test_bit(MMF_LRU_GEN_SKIP, &mm->flags)))
+		return NULL;
+
 	clear_bit(key, &mm->lru_gen.bitmap);
 
 	return mmget_not_zero(mm) ? mm : NULL;
@@ -3902,6 +3905,9 @@ static void walk_mm(struct mm_struct *mm, struct lru_gen_mm_walk *walk)
 
 	do {
 		DEFINE_MAX_SEQ(lruvec);
+
+		if (unlikely(test_bit(MMF_LRU_GEN_SKIP, &mm->flags)))
+			break;
 
 		err = -EBUSY;
 

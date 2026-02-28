@@ -543,6 +543,10 @@ static void exit_mm(void)
 {
 	struct mm_struct *mm = current->mm;
 
+#ifdef CONFIG_LRU_GEN
+	if (mm)
+		set_bit(MMF_LRU_GEN_SKIP, &mm->flags);
+#endif
 	exit_mm_release(current, mm);
 	if (!mm)
 		return;
