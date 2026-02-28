@@ -106,6 +106,24 @@
       "parentUuid": "0e06a710_7b4ae684",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5a4383_4a9cd7bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-02-28T11:06:41Z",
+      "side": 1,
+      "message": "I think we have the MMD sepolicy in ag/35837365. Is that safe to change the UAPI?",
+      "parentUuid": "73d4cc51_f9671594",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
