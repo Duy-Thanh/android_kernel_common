@@ -486,7 +486,7 @@ DECLARE_EVENT_CLASS_SCHEDSTAT(sched_stat_template,
 		__entry->delay	= delay;
 	),
 
-	TP_printk("comm=%s pid=%d delay=%Lu [ns]",
+	TP_printk("@@@@comm=%s pid=%d delay=%Lu [ns]",
 			__entry->comm, __entry->pid,
 			(unsigned long long)__entry->delay)
 );
@@ -942,7 +942,7 @@ TRACE_EVENT(sched_pe_owner_is_migrating,
 		__entry->waiter_prio	= waiter->prio; /* XXX SCHED_DEADLINE */
 	),
 
-	TP_printk("owner comm=%s pid=%d prio=%d  waiter comm=%s pid=%d prio=%d",
+	TP_printk("!!!owner comm=%s pid=%d prio=%d  waiter comm=%s pid=%d prio=%d",
 		  __entry->owner_comm, __entry->owner_pid, __entry->owner_prio,
 		  __entry->waiter_comm, __entry->waiter_pid, __entry->waiter_prio)
 );

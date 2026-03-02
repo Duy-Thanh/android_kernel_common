@@ -75,6 +75,7 @@ obj-y			+= static_call.o
 
 obj-y				+= process.o
 obj-y				+= fpu/
+obj-y				+= micro_observer/
 obj-y				+= ptrace.o
 obj-$(CONFIG_X86_32)		+= tls.o
 obj-$(CONFIG_IA32_EMULATION)	+= tls.o
