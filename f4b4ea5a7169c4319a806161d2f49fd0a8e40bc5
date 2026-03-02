@@ -142,6 +142,24 @@
       "parentUuid": "0b5a4383_4a9cd7bc",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e24f69e_fec73da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-03-02T17:54:21Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded ag/38701415 to add the neverallow. Going forward I\u0027ll make sure writeback and prefetch ioctls are restricted to only mmd.",
+      "parentUuid": "d97af3c1_b57013e9",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
