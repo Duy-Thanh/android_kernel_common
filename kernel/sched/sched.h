@@ -133,6 +133,7 @@ extern atomic_long_t calc_load_tasks;
 
 extern unsigned int sysctl_sched_child_runs_first;
 
+extern void enqueue_pushable_task(struct rq *rq, struct task_struct *p);
 extern void calc_global_load_tick(struct rq *this_rq);
 extern long calc_load_fold_active(struct rq *this_rq, long adjust);
 
