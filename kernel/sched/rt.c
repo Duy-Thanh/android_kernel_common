@@ -386,7 +386,7 @@ static inline void rt_queue_pull_task(struct rq *rq)
 	queue_balance_callback(rq, &per_cpu(rt_pull_head, rq->cpu), pull_rt_task);
 }
 
-static void enqueue_pushable_task(struct rq *rq, struct task_struct *p)
+void enqueue_pushable_task(struct rq *rq, struct task_struct *p)
 {
 	plist_del(&p->pushable_tasks, &rq->rt.pushable_tasks);
 	plist_node_init(&p->pushable_tasks, p->prio);
@@ -401,6 +401,7 @@ static void enqueue_pushable_task(struct rq *rq, struct task_struct *p)
 		rq->rt.overloaded = 1;
 	}
 }
+EXPORT_SYMBOL(enqueue_pushable_task);
 
 static void dequeue_pushable_task(struct rq *rq, struct task_struct *p)
 {
