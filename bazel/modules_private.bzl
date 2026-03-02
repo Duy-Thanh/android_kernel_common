@@ -90,9 +90,6 @@ _COMMON_GKI_MODULES_LIST = [
     "net/vmw_vsock/vmw_vsock_virtio_transport.ko",
 ]
 
-# Deprecated - Use `get_gki_modules_list` function instead.
-COMMON_GKI_MODULES_LIST = _COMMON_GKI_MODULES_LIST
-
 _ARM_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/ptp/ptp_kvm.ko",
