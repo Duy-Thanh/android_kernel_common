@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e42042_a274f17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-03-02T21:33:37Z",
+      "side": 1,
+      "message": "There seems to be at least one more reference to this file: https://android.git.corp.google.com/kernel/devices/google/raviole/+/refs/heads/android-gs-raviole-mainline/BUILD.bazel#27",
+      "revId": "4f0ea79a3dfb1a44729bcc5446992456ea2248bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
