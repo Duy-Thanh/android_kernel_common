@@ -344,7 +344,7 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 	did = pasid_get_domain_id(pte);
 	pgtt = pasid_pte_get_pgtt(pte);
 #ifdef __PKVM_HYP__
-	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY)
+	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY || pgtt == PASID_ENTRY_PGTT_NESTED)
 		pgd = __pkvm_va(pasid_get_flptr(pte));
 	else if (pgtt == PASID_ENTRY_PGTT_SL_ONLY)
 		pgd = __pkvm_va(pasid_get_slptr(pte));
@@ -605,7 +605,7 @@ int intel_pasid_replace_first_level(struct intel_iommu *iommu,
 	}
 
 	pgtt = pasid_pte_get_pgtt(pte);
-	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY)
+	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY || pgtt == PASID_ENTRY_PGTT_NESTED)
 		old_pgd = __pkvm_va(pasid_get_flptr(pte));
 	else if (pgtt == PASID_ENTRY_PGTT_SL_ONLY)
 		old_pgd = __pkvm_va(pasid_get_slptr(pte));
@@ -816,7 +816,7 @@ int intel_pasid_replace_second_level(struct intel_iommu *iommu,
 	}
 
 	pgtt = pasid_pte_get_pgtt(pte);
-	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY)
+	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY || pgtt == PASID_ENTRY_PGTT_NESTED)
 		old_pgd = __pkvm_va(pasid_get_flptr(pte));
 	else if (pgtt == PASID_ENTRY_PGTT_SL_ONLY)
 		old_pgd = __pkvm_va(pasid_get_slptr(pte));
@@ -1046,6 +1046,7 @@ void intel_pasid_setup_page_snoop_control(struct intel_iommu *iommu,
 
 	intel_pasid_flush_present(iommu, dev, pasid, did, pte);
 }
+#endif /* !__PKVM_HYP__ */
 
 static void pasid_pte_config_nestd(struct intel_iommu *iommu,
 				   struct pasid_entry *pte,
@@ -1055,7 +1056,9 @@ static void pasid_pte_config_nestd(struct intel_iommu *iommu,
 {
 	struct dma_pte *pgd = s2_domain->pgd;
 
+#ifndef __PKVM_HYP__
 	lockdep_assert_held(&iommu->lock);
+#endif
 
 	pasid_clear_entry(pte);
 
@@ -1098,12 +1101,22 @@ static void pasid_pte_config_nestd(struct intel_iommu *iommu,
  * nested type and nested on a parent with 'is_nested_parent' flag
  * set.
  */
+#ifndef __PKVM_HYP__
 int intel_pasid_setup_nested(struct intel_iommu *iommu, struct device *dev,
 			     u32 pasid, struct dmar_domain *domain)
+#else
+int intel_pasid_setup_nested(struct intel_iommu *iommu, struct pkvm_device *dev,
+			     u32 pasid, u16 did, struct iommu_hwpt_vtd_s1 *s1_cfg)
+#endif
 {
+#ifndef __PKVM_HYP__
 	struct iommu_hwpt_vtd_s1 *s1_cfg = &domain->s1_cfg;
 	struct dmar_domain *s2_domain = domain->s2_domain;
 	u16 did = domain_id_iommu(domain, iommu);
+#else
+	struct dmar_domain *s2_domain = &pt_domain;
+	int ret;
+#endif
 	struct pasid_entry *pte;
 
 	/* Address width should match the address width supported by hardware */
@@ -1112,17 +1125,30 @@ int intel_pasid_setup_nested(struct intel_iommu *iommu, struct device *dev,
 		break;
 	case ADDR_WIDTH_5LEVEL:
 		if (!cap_fl5lp_support(iommu->cap)) {
+#ifndef __PKVM_HYP__
 			dev_err_ratelimited(dev,
 					    "5-level paging not supported\n");
+#endif
 			return -EINVAL;
 		}
 		break;
 	default:
+#ifndef __PKVM_HYP__
 		dev_err_ratelimited(dev, "Invalid stage-1 address width %d\n",
 				    s1_cfg->addr_width);
+#endif
 		return -EINVAL;
 	}
 
+	/*
+	 * pKVM doesn't yet support SRE, WPE and EAFE:
+	 * - SRE and WPE are not required as host creates page tables with U/S
+	 *   bit = 1(User mode) and supervisor bit is only used with SVA(which
+	 *   pKVM doesn't support yet)
+	 * - EAFE is not supported as pKVM doesn't yet have any use case to
+	 *   track accessed/dirty status of a DMA page.
+	 */
+#ifndef __PKVM_HYP__
 	if ((s1_cfg->flags & IOMMU_VTD_S1_SRE) && !ecap_srs(iommu->ecap)) {
 		pr_err_ratelimited("No supervisor request support on %s\n",
 				   iommu->name);
@@ -1134,6 +1160,7 @@ int intel_pasid_setup_nested(struct intel_iommu *iommu, struct device *dev,
 				   iommu->name);
 		return -EINVAL;
 	}
+#endif
 
 	spin_lock(&iommu->lock);
 	pte = intel_pasid_get_entry(dev, pasid);
@@ -1146,6 +1173,14 @@ int intel_pasid_setup_nested(struct intel_iommu *iommu, struct device *dev,
 		return -EBUSY;
 	}
 
+#ifdef __PKVM_HYP__
+	ret = pkvm_get_domain_cache_tag_assign(__pkvm_va(s1_cfg->pgtbl_addr), did, pasid,
+					       true, dev_iommu_priv_get(dev));
+	if (ret) {
+		spin_unlock(&iommu->lock);
+		return ret;
+	}
+#endif
 	pasid_pte_config_nestd(iommu, pte, s1_cfg, s2_domain, did);
 	spin_unlock(&iommu->lock);
 
@@ -1155,12 +1190,24 @@ int intel_pasid_setup_nested(struct intel_iommu *iommu, struct device *dev,
 }
 
 int intel_pasid_replace_nested(struct intel_iommu *iommu,
+#ifndef __PKVM_HYP__
 			       struct device *dev, u32 pasid,
 			       u16 old_did, struct dmar_domain *domain)
+#else
+			       struct pkvm_device *dev, u32 pasid, u16 did,
+			       u16 old_did, struct iommu_hwpt_vtd_s1 *s1_cfg)
+#endif
 {
+#ifndef __PKVM_HYP__
 	struct iommu_hwpt_vtd_s1 *s1_cfg = &domain->s1_cfg;
 	struct dmar_domain *s2_domain = domain->s2_domain;
 	u16 did = domain_id_iommu(domain, iommu);
+#else
+	struct dmar_domain *s2_domain = &pt_domain;
+	void *old_pgd;
+	int pgtt;
+	int ret;
+#endif
 	struct pasid_entry *pte, new_pte;
 
 	/* Address width should match the address width supported by hardware */
@@ -1169,17 +1216,22 @@ int intel_pasid_replace_nested(struct intel_iommu *iommu,
 		break;
 	case ADDR_WIDTH_5LEVEL:
 		if (!cap_fl5lp_support(iommu->cap)) {
+#ifndef __PKVM_HYP__
 			dev_err_ratelimited(dev,
 					    "5-level paging not supported\n");
+#endif
 			return -EINVAL;
 		}
 		break;
 	default:
+#ifndef __PKVM_HYP__
 		dev_err_ratelimited(dev, "Invalid stage-1 address width %d\n",
 				    s1_cfg->addr_width);
+#endif
 		return -EINVAL;
 	}
 
+#ifndef __PKVM_HYP__
 	if ((s1_cfg->flags & IOMMU_VTD_S1_SRE) && !ecap_srs(iommu->ecap)) {
 		pr_err_ratelimited("No supervisor request support on %s\n",
 				   iommu->name);
@@ -1191,6 +1243,7 @@ int intel_pasid_replace_nested(struct intel_iommu *iommu,
 				   iommu->name);
 		return -EINVAL;
 	}
+#endif
 
 	pasid_pte_config_nestd(iommu, &new_pte, s1_cfg, s2_domain, did);
 
@@ -1206,17 +1259,45 @@ int intel_pasid_replace_nested(struct intel_iommu *iommu,
 		return -EINVAL;
 	}
 
+#ifdef __PKVM_HYP__
+	if (WARN_ON(old_did != pasid_get_domain_id(pte))) {
+		spin_unlock(&iommu->lock);
+		return -EINVAL;
+	}
+
+	pgtt = pasid_pte_get_pgtt(pte);
+	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY || pgtt == PASID_ENTRY_PGTT_NESTED)
+		old_pgd = __pkvm_va(pasid_get_flptr(pte));
+	else if (pgtt == PASID_ENTRY_PGTT_SL_ONLY)
+		old_pgd = __pkvm_va(pasid_get_slptr(pte));
+	else
+		BUG();
+
+	ret = pkvm_get_domain_cache_tag_assign(__pkvm_va(s1_cfg->pgtbl_addr), did, pasid,
+					       true, dev_iommu_priv_get(dev));
+	if (ret) {
+		spin_unlock(&iommu->lock);
+		return ret;
+	}
+#else
 	WARN_ON(old_did != pasid_get_domain_id(pte));
+#endif
 
 	*pte = new_pte;
 	spin_unlock(&iommu->lock);
 
 	intel_pasid_flush_present(iommu, dev, pasid, old_did, pte);
+#ifndef __PKVM_HYP__
 	intel_iommu_drain_pasid_prq(dev, pasid);
+#else
+	pkvm_put_domain_cache_tag_unassign(old_pgd, old_did,
+					   pasid, dev_iommu_priv_get(dev));
+#endif
 
 	return 0;
 }
 
+#ifndef __PKVM_HYP__
 /*
  * Interfaces to setup or teardown a pasid table to the scalable-mode
  * context table entry:
