@@ -214,6 +214,16 @@ int dmar_disabled = !IS_ENABLED(CONFIG_INTEL_IOMMU_DEFAULT_ON);
 int intel_iommu_sm = IS_ENABLED(CONFIG_INTEL_IOMMU_SCALABLE_MODE_DEFAULT_ON);
 int intel_iommu_superpage = 1;
 
+#ifdef CONFIG_PKVM_INTEL
+/*
+ * Kernel command line parameter enabling pKVM hypervisor to configure
+ * devices for nested translation(if IOMMU supports nested feature), when
+ * host configures a device for first level translation. Host EPT is used
+ * as the second stage page table for nested translation.
+ */
+bool intel_iommu_pkvm_use_nested;
+#endif
+
 #ifndef __PKVM_HYP__
 int intel_iommu_enabled = 0;
 EXPORT_SYMBOL_GPL(intel_iommu_enabled);
@@ -280,6 +290,11 @@ static int __init intel_iommu_setup(char *str)
 		} else if (!strncmp(str, "tboot_noforce", 13)) {
 			pr_info("Intel-IOMMU: not forcing on after tboot. This could expose security risk for tboot\n");
 			intel_iommu_tboot_noforce = 1;
+#ifdef CONFIG_PKVM_INTEL
+		} else if (!strncmp(str, "pkvm_use_nested", 15)) {
+			pr_info("Enable nested translation in pKVM if hardware supports\n");
+			intel_iommu_pkvm_use_nested = 1;
+#endif
 		} else {
 			pr_notice("Unknown option - '%s'\n", str);
 		}
