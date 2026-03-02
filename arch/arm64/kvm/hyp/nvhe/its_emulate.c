@@ -224,6 +224,148 @@ static struct pkvm_moveable_reg *get_region(phys_addr_t dev_addr)
 	return NULL;
 }
 
+static int pkvm_host_unmap_last_level(void *shadow, size_t num_pages, u32 psz)
+{
+	u64 *table = shadow;
+	int ret, i, end = (num_pages << PAGE_SHIFT) / sizeof(*table);
+	phys_addr_t table_addr;
+
+	for (i = 0; i < end; i++) {
+		if (!(table[i] & GITS_BASER_VALID))
+			continue;
+
+		table_addr = table[i] & PHYS_MASK;
+		ret = __pkvm_host_donate_hyp(hyp_phys_to_pfn(table_addr), psz >> PAGE_SHIFT);
+		if (ret)
+			goto err_donate;
+	}
+
+	return 0;
+err_donate:
+	for (i = i - 1; i >= 0; i--) {
+		if (!(table[i] & GITS_BASER_VALID))
+			continue;
+
+		table_addr = table[i] & PHYS_MASK;
+		__pkvm_hyp_donate_host(hyp_phys_to_pfn(table_addr), psz >> PAGE_SHIFT);
+	}
+	return ret;
+}
+
+static int pkvm_share_shadow_table(void *shadow, u64 nr_pages)
+{
+	u64 i, ret, start_pfn = hyp_virt_to_pfn(shadow);
+
+	for (i = 0; i < nr_pages; i++) {
+		ret = __pkvm_host_share_hyp(start_pfn + i);
+		if (ret)
+			goto unshare;
+	}
+
+	ret = hyp_pin_shared_mem(shadow, shadow + (nr_pages << PAGE_SHIFT));
+	if (ret)
+		goto unshare;
+
+	return ret;
+unshare:
+	while (i--)
+		__pkvm_host_unshare_hyp(start_pfn + i);
+	return ret;
+}
+
+static void pkvm_unshare_shadow_table(void *shadow, u64 nr_pages)
+{
+	u64 i, start_pfn = hyp_virt_to_pfn(shadow);
+
+	hyp_unpin_shared_mem(shadow, shadow + (nr_pages << PAGE_SHIFT));
+
+	for (i = 0; i < nr_pages; i++)
+		WARN_ON(__pkvm_host_unshare_hyp(start_pfn + i));
+}
+
+static void pkvm_host_map_last_level(void *shadow, size_t num_pages, u32 psz)
+{
+	u64 *table = shadow;
+	int i, end = (num_pages << PAGE_SHIFT) / sizeof(*table);
+	phys_addr_t table_addr;
+
+	for (i = 0; i < end; i++) {
+		if (!(table[i] & GITS_BASER_VALID))
+			continue;
+
+		table_addr = table[i] & PHYS_MASK;
+		WARN_ON(__pkvm_hyp_donate_host(hyp_phys_to_pfn(table_addr), psz >> PAGE_SHIFT));
+	}
+}
+
+static int pkvm_setup_its_shadow_baser(struct its_shadow_tables *shadow)
+{
+	int i, ret;
+	u64 baser_val, num_pages, type;
+	void *base, *host_base;
+
+	for (i = 0; i < GITS_BASER_NR_REGS; i++) {
+		baser_val = shadow->tables[i].val;
+		if (!(baser_val & GITS_BASER_VALID))
+			continue;
+
+		base = kern_hyp_va(shadow->tables[i].base);
+		num_pages = (1 << shadow->tables[i].order);
+
+		ret = __pkvm_host_donate_hyp(hyp_virt_to_pfn(base), num_pages);
+		if (ret)
+			goto err_donate;
+
+		if (baser_val & GITS_BASER_INDIRECT) {
+			host_base = kern_hyp_va(shadow->tables[i].shadow);
+			ret = pkvm_share_shadow_table(host_base, num_pages);
+			if (ret)
+				goto err_with_donation;
+
+			type = GITS_BASER_TYPE(baser_val);
+			if (type == GITS_BASER_TYPE_COLLECTION)
+				continue;
+
+			ret = pkvm_host_unmap_last_level(base, num_pages,
+							 shadow->tables[i].psz);
+			if (ret)
+				goto err_with_share;
+		}
+	}
+
+	return 0;
+err_with_share:
+	pkvm_unshare_shadow_table(host_base, num_pages);
+err_with_donation:
+	__pkvm_hyp_donate_host(hyp_virt_to_pfn(base), num_pages);
+err_donate:
+	for (i = i - 1; i >= 0; i--) {
+		baser_val = shadow->tables[i].val;
+		if (!(baser_val & GITS_BASER_VALID))
+			continue;
+
+		base = kern_hyp_va(shadow->tables[i].base);
+		num_pages = (1 << shadow->tables[i].order);
+
+		if (baser_val & GITS_BASER_INDIRECT) {
+			host_base = kern_hyp_va(shadow->tables[i].shadow);
+			pkvm_unshare_shadow_table(host_base, num_pages);
+
+			type = GITS_BASER_TYPE(baser_val);
+			if (type == GITS_BASER_TYPE_COLLECTION) {
+				WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(base), num_pages));
+				continue;
+			}
+
+			pkvm_host_map_last_level(base, num_pages, shadow->tables[i].psz);
+		}
+
+		WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(base), num_pages));
+	}
+
+	return ret;
+}
+
 static int pkvm_setup_its_shadow_cmdq(struct its_shadow_tables *shadow)
 {
 	int ret, i, num_pages;
@@ -258,6 +400,22 @@ unshare_shadow:
 		__pkvm_host_unshare_hyp(shadow_start_pfn + i);
 
 	return ret;
+}
+
+static void pkvm_teardown_its_shadow_cmdq(struct its_shadow_tables *shadow)
+{
+	u64 i, start_pfn, num_pages = shadow->cmdq_len >> PAGE_SHIFT;
+	void *cmd_shadow_va = kern_hyp_va(shadow->cmd_shadow);
+	void *cmd_original = kern_hyp_va(shadow->cmd_original);
+
+	start_pfn = hyp_virt_to_pfn(cmd_shadow_va);
+	hyp_unpin_shared_mem(cmd_shadow_va,
+			     cmd_shadow_va + shadow->cmdq_len);
+
+	for (i = 0; i < num_pages; i++)
+		WARN_ON(__pkvm_host_unshare_hyp(start_pfn + i));
+
+	WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(cmd_original), num_pages));
 }
 
 int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, size_t priv_num_pages,
@@ -295,6 +453,10 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, siz
 	if (ret)
 		goto err_with_shadow;
 
+	ret = pkvm_setup_its_shadow_baser(shadow);
+	if (ret)
+		goto err_with_cmdq;
+
 	hyp_spin_lock_init(&priv_state->its_lock);
 	priv_state->shadow = shadow;
 	priv_state->base = __hyp_va(dev_addr);
@@ -312,6 +474,8 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, siz
 	hyp_spin_unlock(&its_setup_lock);
 
 	return 0;
+err_with_cmdq:
+	pkvm_teardown_its_shadow_cmdq(shadow);
 err_with_shadow:
 	WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(shadow), 1));
 err_with_state:
