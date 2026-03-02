@@ -1,1 +1,24 @@
 # See http://go/approve-abi-break
+
+variable symbol 'struct static_call_key __SCK__tp_func_dma_fence_emit' changed
+  CRC changed from 0xb5da0604 to 0x3dc5fdac
+
+variable symbol 'struct static_call_key __SCK__tp_func_gpu_mem_total' changed
+  CRC changed from 0xb5da0604 to 0x3dc5fdac
+
+variable symbol 'struct static_call_key __SCK__tp_func_xdp_exception' changed
+  CRC changed from 0x4073a1ad to 0xbd204195
+
+... 2806 omitted; 2809 symbols have only CRC changes
+
+type 'struct super_block' changed
+  member 'int cleancache_poolid' was added
+  13 members ('struct shrinker* s_shrink' .. 'int s_stack_depth') changed
+    offset changed by 64
+
+type 'struct cma' changed
+  byte size changed from 520 to 528
+  member 'bool gcma' was added
+  7 members ('atomic64_t nr_pages_succeeded' .. 'u64 android_vendor_data1') changed
+    offset changed by 64
+
