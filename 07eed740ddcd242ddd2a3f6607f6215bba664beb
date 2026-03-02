@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "591cd270_d34bb4db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-02T19:25:25Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16c8c79_0a2b24f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-02T19:25:25Z",
+      "side": 1,
+      "message": "Could you expand a bit on the situation where this can occur? \n\nIs this only possible due to logic modifications done via vendorhooks, or can this issue be triggered on a kernel without vendorhook modifications?\n\nI just want to make sure we\u0027re not exporting this so a real bug in the scheduler can be papered over in custom vendorhook logic.",
+      "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
