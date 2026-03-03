@@ -97,6 +97,7 @@ struct its_priv_state {
 
 
 DEFINE_HYP_SPINLOCK(its_setup_lock);
+DECLARE_STATIC_KEY_FALSE(kvm_its_hardening);
 
 static int track_pfn_add(struct its_priv_state *its, u32 device_id, u64 pfn)
 {
@@ -766,6 +767,9 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, siz
 	struct its_shadow_tables *shadow = kern_hyp_va(host_shadow);
 	struct pkvm_moveable_reg *its_reg;
 	u64 cbaser;
+
+	if (!static_branch_unlikely(&kvm_its_hardening))
+		return -EOPNOTSUPP;
 
 	if (!PAGE_ALIGNED(shadow))
 		return -EINVAL;
