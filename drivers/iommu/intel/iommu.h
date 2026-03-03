@@ -699,6 +699,13 @@ struct dmar_domain {
 			int		agaw;
 			/* maximum mapped address */
 			u64		max_addr;
+#ifdef CONFIG_PKVM_INTEL
+			/*
+			 * pkVM hypervisor uses nested
+			 * translation for this domain.
+			 */
+			bool		pkvm_nested;
+#endif
 			/* Protect the s1_domains list */
 			spinlock_t	s1_lock;
 			/* Track s1_domains nested on this domain */
@@ -765,6 +772,20 @@ struct dmar_domain {
 	struct hlist_node hnode;
 #endif /* __PKVM_HYP__ */
 };
+
+#ifndef __PKVM_HYP__
+#ifdef CONFIG_PKVM_INTEL
+static inline bool domain_pkvm_nested(struct dmar_domain *domain)
+{
+	return domain->pkvm_nested;
+}
+#else
+static inline bool domain_pkvm_nested(struct dmar_domain *domain)
+{
+	return false;
+}
+#endif
+#endif
 
 /*
  * In theory, the VT-d 4.0 spec can support up to 2 ^ 16 counters.
