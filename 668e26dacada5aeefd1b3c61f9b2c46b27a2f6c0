@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97cc8e44_951cd2f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3988732
+      },
+      "writtenOn": "2026-03-03T11:47:36Z",
+      "side": 1,
+      "message": "Aren\u0027t FROMGIT excluded from this? I added one just in case",
+      "parentUuid": "49e7ff60_3b9f0e86",
+      "revId": "668e26dacada5aeefd1b3c61f9b2c46b27a2f6c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43cf2913_7ac60857",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-02-06T22:24:32Z",
       "side": 1,
       "message": "The Android way is:\n\n```\nBug: 459671460\nTest: manual \n```",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "668e26dacada5aeefd1b3c61f9b2c46b27a2f6c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758945cf_f4025caa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3988732
+      },
+      "writtenOn": "2026-03-03T11:47:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43cf2913_7ac60857",
       "range": {
         "startLine": 57,
         "startChar": 0,
