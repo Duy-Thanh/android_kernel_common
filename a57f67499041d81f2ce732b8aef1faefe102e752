@@ -16,6 +16,24 @@
       "message": "still have duplicate change-Ids",
       "revId": "a57f67499041d81f2ce732b8aef1faefe102e752",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa49060_3a106b36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2026-03-03T06:25:33Z",
+      "side": 1,
+      "message": "whoops, should be fixed now",
+      "parentUuid": "5dca5955_3ed8b17d",
+      "revId": "a57f67499041d81f2ce732b8aef1faefe102e752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
