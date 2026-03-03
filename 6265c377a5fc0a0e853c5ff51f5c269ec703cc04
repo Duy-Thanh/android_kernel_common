@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f07e7bac_487b24df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4668875
+      },
+      "writtenOn": "2026-03-03T18:15:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e92ae6c4_6d524e11",
+      "revId": "6265c377a5fc0a0e853c5ff51f5c269ec703cc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3a9aed4_e6d56216",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-02-26T17:22:48Z",
       "side": 1,
       "message": "Please fix this ERROR reported by KernelCommit: Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Pratham Pra...\n\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Pratham Pratap \u003cppratap@qti.qualcomm.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "6265c377a5fc0a0e853c5ff51f5c269ec703cc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "810f44eb_b8592b0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 4668875
+      },
+      "writtenOn": "2026-03-03T18:15:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f3a9aed4_e6d56216",
       "range": {
         "startLine": 60,
         "startChar": 0,
