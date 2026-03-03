@@ -94,6 +94,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15437343_9f45bd5d",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-03T09:49:20Z",
+      "side": 1,
+      "message": "Not pushing back on the patch series, or anything,\nit just looks to me that using the same request pool and batch-size knob approach for async read makes sense. So that we can control IO pressure of async read and write in the same way. Just a symmetrical approach.",
+      "parentUuid": "d24978d1_461f003f",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
