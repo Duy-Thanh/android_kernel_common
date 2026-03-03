@@ -16,6 +16,24 @@
       "message": "It looks like there was the previous diff:\n```\n--- a/drivers/android/binder/context.rs\n+++ b/drivers/android/binder/context.rs\n@@ -55,15 +55,12 @@ pub(crate) struct Context {\n     links: ListLinks,\n }\n \n-kernel::list::impl_has_list_links! {\n-    impl HasListLinks\u003c0\u003e for Context { self.links }\n-}\n kernel::list::impl_list_arc_safe! {\n     impl ListArcSafe\u003c0\u003e for Context { untracked; }\n }\n kernel::list::impl_list_item! {\n     impl ListItem\u003c0\u003e for Context {\n-        using ListLinks;\n+        using ListLinks { self.links };\n     }\n }\n```\n\nSo technically this is not a clean cherry-pick and needs to be marked as BACKPORT. Or alternatively the diff needs to be fixed in a separate parent change.",
       "revId": "7f44c2089a0719bbd73a368fada2d3750bd2f2da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b566d313_cb8174b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-03T00:59:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c40111f_310303ed",
+      "revId": "7f44c2089a0719bbd73a368fada2d3750bd2f2da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
