@@ -384153,6 +384153,12 @@ function {
   parameter_id: 0x2936263d
 }
 function {
+  id: 0x1ad690e0
+  return_type_id: 0x48b5725f
+  parameter_id: 0x291e8a5b
+  parameter_id: 0x0258f96e
+}
+function {
   id: 0x1ad9d0a2
   return_type_id: 0x48b5725f
   parameter_id: 0x290604c6
@@ -396911,6 +396917,12 @@ function {
   return_type_id: 0x326663cd
   parameter_id: 0x249959de
   parameter_id: 0x914dbfdc
+}
+function {
+  id: 0x87febd90
+  return_type_id: 0x3267a784
+  parameter_id: 0x291e8a5b
+  parameter_id: 0x3e10b518
 }
 function {
   id: 0x880a3e61
@@ -426451,6 +426463,19 @@ function {
   id: 0xa787e412
   return_type_id: 0xd4bacb77
   parameter_id: 0x3ee7bddd
+}
+function {
+  id: 0xa790d07c
+  return_type_id: 0x0258f96e
+  parameter_id: 0x291e8a5b
+  parameter_id: 0x3e10b518
+}
+function {
+  id: 0xa79c3a15
+  return_type_id: 0x0258f96e
+  parameter_id: 0x291e8a5b
+  parameter_id: 0x3e10b518
+  parameter_id: 0x33a9a547
 }
 function {
   id: 0xa7ea77a4
@@ -484231,6 +484256,42 @@ elf_symbol {
   full_name: "kunit_destroy_resource"
 }
 elf_symbol {
+  id: 0x7b9662af
+  name: "kunit_device_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xed315b2b
+  type_id: 0xa790d07c
+  full_name: "kunit_device_register"
+}
+elf_symbol {
+  id: 0x7588dabd
+  name: "kunit_device_register_with_driver"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x16298699
+  type_id: 0xa79c3a15
+  full_name: "kunit_device_register_with_driver"
+}
+elf_symbol {
+  id: 0x750d9b57
+  name: "kunit_device_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0ab739c8
+  type_id: 0x1ad690e0
+  full_name: "kunit_device_unregister"
+}
+elf_symbol {
+  id: 0xe19a6b18
+  name: "kunit_driver_create"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfa50c377
+  type_id: 0x87febd90
+  full_name: "kunit_driver_create"
+}
+elf_symbol {
   id: 0x9ab59e22
   name: "kunit_fail_assert_format"
   is_defined: true
@@ -528461,6 +528522,10 @@ interface {
   symbol_id: 0x47e5f38a
   symbol_id: 0xa41c284f
   symbol_id: 0x310d0e78
+  symbol_id: 0x7b9662af
+  symbol_id: 0x7588dabd
+  symbol_id: 0x750d9b57
+  symbol_id: 0xe19a6b18
   symbol_id: 0x9ab59e22
   symbol_id: 0xc1b901e4
   symbol_id: 0x32b14b11
