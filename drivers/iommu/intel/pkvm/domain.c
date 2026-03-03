@@ -365,3 +365,20 @@ void pkvm_intel_iommu_tlb_flush(unsigned long paddr, unsigned long size)
 	if (pt_domain.qi_batch)
 		cache_tag_flush_range(&pt_domain, paddr, paddr + size - 1, 0);
 }
+
+ /* Flush IOMMU caches for the domain identified by the given pgd_gpa. */
+int pkvm_iommu_domain_flush(u64 pgd_gpa, u64 start, u64 last, int ih)
+{
+	struct dmar_domain *domain;
+
+	domain = __pkvm_get_iommu_domain_noref(pkvm_host_gpa_to_virt(pgd_gpa));
+	if (!domain) {
+		pkvm_err("%s, failed to get the domain [pgd:%llx]\n",
+			 __func__, pgd_gpa);
+		return -EINVAL;
+	}
+
+	cache_tag_flush_range(domain, start, last, ih);
+
+	return 0;
+}
