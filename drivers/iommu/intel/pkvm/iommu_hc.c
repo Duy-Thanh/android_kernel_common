@@ -300,9 +300,18 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 		flags |= PASID_FLAG_PAGE_SNOOP;
 	if (level == 5)
 		flags |= PASID_FLAG_FL5LP;
-	ret = intel_pasid_setup_first_level(iommu, domain, &dev,
-					    __pkvm_pa(pgd),
-					    data->pasid, data->did, flags);
+	if (pkvm_nested_enabled(iommu)) {
+		struct iommu_hwpt_vtd_s1 s1_cfg = {
+			.pgtbl_addr = __pkvm_pa(pgd),
+			.addr_width = agaw_to_width(iommu->agaw),
+		};
+		ret = intel_pasid_setup_nested(iommu, &dev, data->pasid, data->did,
+									domain, &s1_cfg);
+	}
+	else
+		ret = intel_pasid_setup_first_level(iommu, domain, &dev,
+							__pkvm_pa(pgd),
+							data->pasid, data->did, flags);
 
 put_domain:
 	if (ret)
