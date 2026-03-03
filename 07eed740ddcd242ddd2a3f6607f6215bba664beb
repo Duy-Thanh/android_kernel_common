@@ -33,6 +33,24 @@
       "message": "Could you expand a bit on the situation where this can occur? \n\nIs this only possible due to logic modifications done via vendorhooks, or can this issue be triggered on a kernel without vendorhook modifications?\n\nI just want to make sure we\u0027re not exporting this so a real bug in the scheduler can be papered over in custom vendorhook logic.",
       "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8625a0_ca61c0da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4669846
+      },
+      "writtenOn": "2026-03-03T01:58:52Z",
+      "side": 1,
+      "message": "In enqueue_task_rt(), when a RT task (woken_rt) is woken up synchronously, it is not added to the pushable queue. If another RT task (running_rt) keeps occupying the CPU for an extended period, woken_rt remains runnable but is never considered for RT push balancing. This may result in prolonged starvation under sustained RT load.",
+      "parentUuid": "a16c8c79_0a2b24f9",
+      "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
