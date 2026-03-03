@@ -96,6 +96,7 @@ struct its_priv_state {
 };
 
 DEFINE_HYP_SPINLOCK(its_setup_lock);
+DECLARE_STATIC_KEY_FALSE(kvm_its_hardening);
 
 #define GITS_CWRITER_RETRY	BIT_ULL(0)
 #define GITS_CWRITER_OFFSET	GENMASK_ULL(19, 5)
@@ -785,7 +786,10 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, siz
 	struct its_shadow_tables *shadow = kern_hyp_va(host_shadow);
 	struct pkvm_moveable_reg *its_reg;
 
-	if (!PAGE_ALIGNED(shadow))
+	if (!static_branch_unlikely(&kvm_its_hardening))
+		return -EOPNOTSUPP;
+
+	if (!PAGE_ALIGNED(shadow) || !priv_num_pages)
 		return -EINVAL;
 
 	hyp_spin_lock(&its_setup_lock);
