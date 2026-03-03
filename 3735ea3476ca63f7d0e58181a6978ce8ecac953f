@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e998810_2b8dd40d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-03-03T20:00:06Z",
+      "side": 1,
+      "message": "CL:3973088 needs to go in first, then the flag becomes an error to be set otherwise, then this CL will be ready.",
+      "revId": "3735ea3476ca63f7d0e58181a6978ce8ecac953f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
