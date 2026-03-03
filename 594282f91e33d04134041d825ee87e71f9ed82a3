@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3355d3_619b20dd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-03-03T00:31:40Z",
+      "side": 1,
+      "message": "These starlark macros are not intended for anyone else besides Google to use. The `wonder_aarch64` kernel build target is solely used for GKI testing to make sure these vendor drivers continue to build with GKI. Similar to how we have db845c, microdroid, rockpi, etc. builds here in this file as well.\n\nInstead, partners will directly integrate the `ddk_module(name \u003d \"wonder\", ...)`  into their own kernel builds. I\u0027m trying to avoid cluttering the wonder repo with unnecessary build rules that are only used for GKI testing. This will make for a clean integration process for partners where all they have to do is add the wonder git repo to their kernel manifest and set the flag -- `wonder_kernel` -- to point to their vendor kernel.",
+      "parentUuid": "586140c3_e679c7a6",
+      "range": {
+        "startLine": 684,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 19
+      },
+      "revId": "594282f91e33d04134041d825ee87e71f9ed82a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "85a9236a_46cac23f",

@@ -22,6 +22,30 @@
       },
       "revId": "7194f80beb88a9a6d48c7b2cc391b3e65f4f7573",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90d3940c_0c7f9fba",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-03-03T00:31:40Z",
+      "side": 1,
+      "message": "No, really necessary. It just allows this build target to use symbols that are already exported by the other symbol lists and not yet included in the explicit wonder symbol list. I can drop it.",
+      "parentUuid": "7588e476_aa75fc4d",
+      "range": {
+        "startLine": 670,
+        "startChar": 4,
+        "endLine": 670,
+        "endChar": 75
+      },
+      "revId": "7194f80beb88a9a6d48c7b2cc391b3e65f4f7573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
