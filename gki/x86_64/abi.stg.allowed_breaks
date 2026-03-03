@@ -1,1 +1,19 @@
 # See http://go/approve-abi-break
+
+variable symbol 'struct static_call_key __SCK__tp_func_dma_fence_emit' changed
+  CRC changed from 0xb5da0604 to 0xc1b795d1
+
+variable symbol 'struct static_call_key __SCK__tp_func_gpu_mem_total' changed
+  CRC changed from 0xb5da0604 to 0xc1b795d1
+
+variable symbol 'struct static_call_key __SCK__tp_func_xdp_exception' changed
+  CRC changed from 0x4073a1ad to 0xf5786ae8
+
+... 1514 omitted; 1517 symbols have only CRC changes
+
+type 'struct per_cpu_pages' changed
+  byte size changed from 256 to 320
+  member changed from 'struct list_head lists[14]' to 'struct list_head lists[18]'
+    type changed from 'struct list_head[14]' to 'struct list_head[18]'
+      number of elements changed from 14 to 18
+

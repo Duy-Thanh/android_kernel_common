@@ -1,1 +1,37 @@
 # See http://go/approve-abi-break
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x3d10eb78 to 0xfe89e7f
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0xb4caaf31 to 0x4336ae7f
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0xd6b44167 to 0xd39f46e0
+
+... 3164 omitted; 3167 symbols have only CRC changes
+
+type 'struct per_cpu_pages' changed
+  byte size changed from 256 to 320
+  member changed from 'struct list_head lists[14]' to 'struct list_head lists[18]'
+    type changed from 'struct list_head[14]' to 'struct list_head[18]'
+      number of elements changed from 14 to 18
+
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x3d10eb78 to 0xfe89e7f
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0xb4caaf31 to 0x4336ae7f
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0xd6b44167 to 0xd39f46e0
+
+... 3166 omitted; 3169 symbols have only CRC changes
+
+type 'struct per_cpu_pages' changed
+  byte size changed from 256 to 320
+  member changed from 'struct list_head lists[14]' to 'struct list_head lists[18]'
+    type changed from 'struct list_head[14]' to 'struct list_head[18]'
+      number of elements changed from 14 to 18
+
