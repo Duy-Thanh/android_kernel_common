@@ -1497,6 +1497,7 @@
   iommu_dma_get_resv_regions
   iommu_domain_free
   iommu_fwspec_add_ids
+  iommu_free_pages
   iommu_get_domain_for_dev
   iommu_get_msi_cookie
   iommu_group_for_each_dev
