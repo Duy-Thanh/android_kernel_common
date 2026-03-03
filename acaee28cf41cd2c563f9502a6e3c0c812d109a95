@@ -16,6 +16,24 @@
       "message": "Can we fix forward? this just needs the abi update in arsp",
       "revId": "acaee28cf41cd2c563f9502a6e3c0c812d109a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26edfda_f57924f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1959810
+      },
+      "writtenOn": "2026-03-03T19:00:31Z",
+      "side": 1,
+      "message": "Fix is https://android-review.git.corp.google.com/c/kernel/common/+/3972767",
+      "parentUuid": "05f6c82a_ceff6fe0",
+      "revId": "acaee28cf41cd2c563f9502a6e3c0c812d109a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
