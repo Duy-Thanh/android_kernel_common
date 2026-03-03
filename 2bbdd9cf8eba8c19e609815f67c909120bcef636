@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f2900a5_6beece97",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "If this isn\u0027t going upstream, then implement this with a vendor hook.",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e8a3f8f_29c22c82",
+        "filename": "drivers/usb/host/xhci-ring.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "If this is not going upstream, then replace this with a vendor hook implementation",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed7592f_cae0f4c4",
+        "filename": "drivers/usb/host/xhci-ring.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3148,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "why is this needed when you are getting a xhci_err() below?",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e12921b_466bb4a8",
+        "filename": "drivers/usb/host/xhci-sideband.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "If this isn\u0027t going upstream, then replace this with a vendor hook implementation",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca74c2f_f9ba13f6",
+        "filename": "drivers/usb/host/xhci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5329,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "This comment adds nothing. It might help to explain why it needs to be initialized.",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ecae07e_8ce81510",
+        "filename": "drivers/usb/host/xhci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5330,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "Is this fixing a bug? Or is this only needed because of your implementation?",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95cc0830_ae73811a",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "If this is not going upstream, then this whole patch needs to change to a vendor hook based implementation. In that case, these new structs are only needed in your vendor hook implementation - not in GKI",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2bddb7_46c1ef10",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-03T19:11:33Z",
+      "side": 1,
+      "message": "The KABI reserve fields are exclusively for use when merging LTS from upstream stable branches. You cannot use them for features.\n\nIf you wish to request that a KABI field be released for use backporting features, you need to add a patch that changes `ANDROID_KABI_RESERVE(1)` to `ANDROID_BACKPORT_RESERVE(1)`.",
+      "revId": "2bbdd9cf8eba8c19e609815f67c909120bcef636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
