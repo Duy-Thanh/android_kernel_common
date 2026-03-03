@@ -285,6 +285,7 @@
   __task_pid_nr_ns
   __tasklet_hi_schedule
   __tasklet_schedule
+  __tcf_em_tree_match
   __trace_trigger_soft_disabled
   __traceiter_android_vh_gzvm_destroy_vm_post_process
   __traceiter_android_vh_gzvm_handle_demand_page_post
@@ -1348,6 +1349,8 @@
   dummy_irq_chip
   dump_page
   dump_stack
+  dw8250_do_set_termios
+  dw8250_setup_port
   dw_pcie_ep_cleanup
   dw_pcie_ep_init
   dw_pcie_ep_init_registers
@@ -2033,6 +2036,7 @@
   irq_set_chip_and_handler_name
   irq_set_chip_data
   irq_set_irq_wake
+  irq_wake_thread
   is_bad_inode
   is_vmalloc_addr
   iter_file_splice_write
@@ -2270,6 +2274,7 @@
   memset64
   memstart_addr
   memunmap
+  memweight
   metadata_dst_alloc
   metadata_dst_free
   mfd_add_devices
@@ -3191,6 +3196,8 @@
   scsi_done
   scsi_eh_finish_cmd
   scsi_eh_flush_done_q
+  scsi_eh_prep_cmnd
+  scsi_eh_restore_cmnd
   scsi_execute_cmd
   scsi_host_alloc
   scsi_host_busy
@@ -3710,6 +3717,9 @@
   tcf_action_update_hw_stats
   tcf_action_update_stats
   tcf_chain_put_by_act
+  tcf_em_tree_destroy
+  tcf_em_tree_dump
+  tcf_em_tree_validate
   tcf_exts_destroy
   tcf_exts_dump
   tcf_exts_dump_stats
@@ -4002,6 +4012,7 @@
   usb_ep_set_maxpacket_limit
   usb_ep_type_string
   usb_find_common_endpoints
+  usb_find_common_endpoints_reverse
   usb_find_interface
   usb_free_all_descriptors
   usb_free_coherent
@@ -4015,6 +4026,7 @@
   usb_gadget_unmap_request
   usb_gadget_vbus_connect
   usb_gadget_vbus_disconnect
+  usb_get_current_frame_number
   usb_get_descriptor
   usb_get_dev
   usb_get_dr_mode
@@ -4056,6 +4068,7 @@
   usb_otg_descriptor_init
   usb_phy_set_charger_current
   usb_phy_set_event
+  usb_poison_anchored_urbs
   usb_poison_urb
   usb_power_delivery_register
   usb_power_delivery_register_capabilities
@@ -4096,10 +4109,12 @@
   usb_stor_Bulk_reset
   usb_stor_Bulk_transport
   usb_stor_CB_reset
+  usb_stor_CB_transport
   usb_stor_access_xfer_buf
   usb_stor_bulk_srb
   usb_stor_bulk_transfer_buf
   usb_stor_bulk_transfer_sg
+  usb_stor_clear_halt
   usb_stor_control_msg
   usb_stor_ctrl_transfer
   usb_stor_disconnect
@@ -4110,6 +4125,7 @@
   usb_stor_probe2
   usb_stor_reset_resume
   usb_stor_resume
+  usb_stor_sense_invalidCDB
   usb_stor_set_xfer_buf
   usb_stor_suspend
   usb_stor_transparent_scsi_command
@@ -4121,6 +4137,7 @@
   usb_unlink_urb
   usb_unpoison_urb
   usb_unregister_notify
+  usb_wait_anchor_empty_timeout
   user_describe
   user_destroy
   user_read
@@ -4138,6 +4155,7 @@
   uuid_is_valid
   uuid_null
   uuid_parse
+  uvc_format_by_guid
   v4l2_async_unregister_subdev
   v4l2_ctrl_auto_cluster
   v4l2_ctrl_cluster
@@ -4148,9 +4166,11 @@
   v4l2_ctrl_handler_init_class
   v4l2_ctrl_handler_setup
   v4l2_ctrl_log_status
+  v4l2_ctrl_merge
   v4l2_ctrl_new_custom
   v4l2_ctrl_new_std
   v4l2_ctrl_new_std_menu
+  v4l2_ctrl_replace
   v4l2_ctrl_subscribe_event
   v4l2_device_disconnect
   v4l2_device_put
@@ -4166,6 +4186,9 @@
   v4l2_fh_is_singular
   v4l2_fh_open
   v4l2_format_info
+  v4l2_fraction_to_interval
+  v4l2_prio_init
+  v4l2_simplify_fraction
   v4l2_subdev_init
   v4l2_type_names
   vb2_buffer_done
