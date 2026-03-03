@@ -133,9 +133,16 @@ static inline s32 rust_binder_thread_id(rust_binder_thread t)
 	return * (s32 *) (t + RUST_BINDER_LAYOUT.th.id);
 }
 
+/*
+ * Binder process deferred_release may set this field to NULL, so unless you
+ * are called from ioctl context on the process itself, this may be null and
+ * should be used under rcu_read_lock().
+ */
 static inline struct task_struct *rust_binder_process_task(rust_binder_process t)
 {
-	return * (struct task_struct **) (t + RUST_BINDER_LAYOUT.p.task);
+	struct task_struct **task = (struct task_struct **) (t + RUST_BINDER_LAYOUT.p.task);
+
+	return READ_ONCE(*task);
 }
 
 static inline size_t rust_binder_node_debug_id(rust_binder_node t)
