@@ -132,6 +132,11 @@ static inline bool bio_has_crypt_ctx(struct bio *bio)
 	return bio->bi_crypt_context;
 }
 
+static inline struct bio_crypt_ctx *bio_crypt_ctx(struct bio *bio)
+{
+	return bio->bi_crypt_context;
+}
+
 void bio_crypt_set_ctx(struct bio *bio, const struct blk_crypto_key *key,
 		       const u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE],
 		       gfp_t gfp_mask);
@@ -169,10 +174,40 @@ static inline bool bio_has_crypt_ctx(struct bio *bio)
 	return false;
 }
 
+static inline struct bio_crypt_ctx *bio_crypt_ctx(struct bio *bio)
+{
+	return NULL;
+}
+
 #endif /* CONFIG_BLK_INLINE_ENCRYPTION */
 
+<<<<<<< HEAD   (d53cc49d2b24bef6138b49d45e211a1720ec9adc Merge 591beb0e3a03 ("Merge tag 'io_uring-bpf-restrictions.4-)
 static inline void bio_clone_skip_dm_default_key(struct bio *dst,
 						 const struct bio *src);
+||||||| BASE   (591beb0e3a03258ef9c01893a5209845799a7c33 Merge tag 'io_uring-bpf-restrictions.4-20260206' of git://gi)
+=======
+bool __blk_crypto_submit_bio(struct bio *bio);
+
+/**
+ * blk_crypto_submit_bio - Submit a bio that may have a crypto context
+ * @bio: bio to submit
+ *
+ * If @bio has no crypto context, or the crypt context attached to @bio is
+ * supported by the underlying device's inline encryption hardware, just submit
+ * @bio.
+ *
+ * Otherwise, try to perform en/decryption for this bio by falling back to the
+ * kernel crypto API. For encryption this means submitting newly allocated
+ * bios for the encrypted payload while keeping back the source bio until they
+ * complete, while for reads the decryption happens in-place by a hooked in
+ * completion handler.
+ */
+static inline void blk_crypto_submit_bio(struct bio *bio)
+{
+	if (!bio_has_crypt_ctx(bio) || __blk_crypto_submit_bio(bio))
+		submit_bio(bio);
+}
+>>>>>>> BRANCH (0c00ed308d0559fc216be0442a3df124e9e13533 Merge tag 'for-7.0/block-20260206' of git://git.kernel.org/p)
 
 int __bio_crypt_clone(struct bio *dst, struct bio *src, gfp_t gfp_mask);
 /**
