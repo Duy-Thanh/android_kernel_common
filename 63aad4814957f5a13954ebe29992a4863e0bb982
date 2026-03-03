@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51039377_8b0d4ec4",
+        "filename": "mm/compaction.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2349,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-03T16:03:31Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Trailing Whitespace: Please remove the trailing whitespace.\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 2349,
+        "startChar": 0,
+        "endLine": 2349,
+        "endChar": 1
+      },
+      "revId": "63aad4814957f5a13954ebe29992a4863e0bb982",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
