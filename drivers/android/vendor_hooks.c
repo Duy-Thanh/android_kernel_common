@@ -693,3 +693,18 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_isolate_priv_lru);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_pgdat_balanced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_file_is_tiny);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_add_page_merge_bypass);
+<<<<<<< HEAD   (34840b73c0657c943bab8bb2dab89a8f6100622a UPSTREAM: af_unix: Initialise scc_index in unix_add_edge().)
+||||||| BASE   (39d310b0a4c14302f75c539bbae2f64a015ead7b ANDROID: GKI: update symbol list for xiaomi)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folios_put_refs_direct_free_extent);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_and_swap_cache);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folios_put_refs_direct_free_extent);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_and_swap_cache);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+>>>>>>> CHANGE (e21f359e72acec6aa6e661a8f29a25460331f870 ANDROID: mm: add vendor hook to trace swap bio charge)
