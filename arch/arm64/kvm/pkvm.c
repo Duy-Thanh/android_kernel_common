@@ -203,7 +203,7 @@ static int __init register_its_emulated_region(void)
 
 		moveable_regs[i].start = res.start;
 		moveable_regs[i].type = PKVM_MREG_EMULATE_MMIO;
-		moveable_regs[i].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+		moveable_regs[i].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_gic_emulation));
 		moveable_regs[i].size = min_t(u64, resource_size(&res),
 					      PAGE_ALIGN_DOWN(GITS_TRANSLATER));
 		i++;
@@ -715,16 +715,44 @@ static void __init _kvm_host_prot_finalize(void *arg)
 		WRITE_ONCE(*err, -EINVAL);
 }
 
+#define ITS_PRIV_NUM_PAGES	(2UL)
+
+static int pkvm_init_its_emulation(phys_addr_t dev_addr, struct its_shadow_tables *shadow)
+{
+	size_t its_priv_sz = ITS_PRIV_NUM_PAGES << PAGE_SHIFT;
+	void *its_state;
+	int ret;
+
+	its_state = alloc_pages_exact(its_priv_sz, GFP_ATOMIC);
+	if (!its_state)
+		return -ENOMEM;
+
+	ret = kvm_call_hyp_nvhe(__pkvm_init_its_emulation, dev_addr, its_state, ITS_PRIV_NUM_PAGES,
+				shadow);
+	if (ret)
+		free_pages_exact(its_state, its_priv_sz);
+
+	return ret;
+}
+
 static int __init pkvm_drop_host_privileges(void)
 {
 	int ret = 0;
+	unsigned long its_flags;
 
 	/*
 	 * Flip the static key upfront as that may no longer be possible
 	 * once the host stage 2 is installed.
 	 */
 	static_branch_enable(&kvm_protected_mode_initialized);
+
+	if (static_branch_unlikely(&kvm_its_hardening))
+		its_start_deprivilege(&its_flags);
+
 	on_each_cpu(_kvm_host_prot_finalize, &ret, 1);
+
+	if (static_branch_unlikely(&kvm_its_hardening))
+		its_end_deprivilege(ret, &its_flags, &pkvm_init_its_emulation);
 	return ret;
 }
 
