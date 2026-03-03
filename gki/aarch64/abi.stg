@@ -3014,6 +3014,11 @@ pointer_reference {
   pointee_type_id: 0x0bf3e543
 }
 pointer_reference {
+  id: 0x086f1dab
+  kind: POINTER
+  pointee_type_id: 0x0bfc9031
+}
+pointer_reference {
   id: 0x08726ccc
   kind: POINTER
   pointee_type_id: 0x0b8955af
@@ -368700,6 +368705,24 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x2c2497f8
+  name: "soft_reset_phase"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "PRE_SOFT_RESET"
+    }
+    enumerator {
+      name: "SOFT_RESET_INITIATED"
+      value: 1
+    }
+    enumerator {
+      name: "POST_SOFT_RESET"
+      value: 2
+    }
+  }
+}
+enumeration {
   id: 0x01c23ad9
   name: "spi_mem_data_dir"
   definition {
@@ -413218,6 +413241,13 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9b3153cb
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x25782362
+  parameter_id: 0x2c2497f8
+}
+function {
   id: 0x9b321d75
   return_type_id: 0x6720d32f
   parameter_id: 0x1acbf96b
@@ -415729,6 +415759,15 @@ function {
   parameter_id: 0x00be4281
   parameter_id: 0x3593bec8
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9ba0dc6a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0258f96e
+  parameter_id: 0x18bd6530
+  parameter_id: 0x086f1dab
+  parameter_id: 0x2c2497f8
 }
 function {
   id: 0x9ba19e30
@@ -439393,6 +439432,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_dup_task_struct"
 }
 elf_symbol {
+  id: 0xffd74922
+  name: "__traceiter_android_vh_dwc3_core_soft_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd93ddfc6
+  type_id: 0x9ba0dc6a
+  full_name: "__traceiter_android_vh_dwc3_core_soft_reset"
+}
+elf_symbol {
+  id: 0x3ee1b2cf
+  name: "__traceiter_android_vh_dwc3_xhci_soft_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd3ac26af
+  type_id: 0x9b3153cb
+  full_name: "__traceiter_android_vh_dwc3_xhci_soft_reset"
+}
+elf_symbol {
   id: 0x02c8f91b
   name: "__traceiter_android_vh_early_resume_begin"
   is_defined: true
@@ -447122,6 +447179,24 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_dup_task_struct"
+}
+elf_symbol {
+  id: 0x77b87208
+  name: "__tracepoint_android_vh_dwc3_core_soft_reset"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_dwc3_core_soft_reset"
+}
+elf_symbol {
+  id: 0xb5fa1975
+  name: "__tracepoint_android_vh_dwc3_xhci_soft_reset"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_dwc3_xhci_soft_reset"
 }
 elf_symbol {
   id: 0xe5deb919
@@ -523590,6 +523665,8 @@ interface {
   symbol_id: 0xc9036089
   symbol_id: 0x42312ccc
   symbol_id: 0xf432d1c9
+  symbol_id: 0xffd74922
+  symbol_id: 0x3ee1b2cf
   symbol_id: 0x02c8f91b
   symbol_id: 0xdcaa59a3
   symbol_id: 0xf586d5b6
@@ -524449,6 +524526,8 @@ interface {
   symbol_id: 0x40e581af
   symbol_id: 0x988719fa
   symbol_id: 0x732a182b
+  symbol_id: 0x77b87208
+  symbol_id: 0xb5fa1975
   symbol_id: 0xe5deb919
   symbol_id: 0x54b2cd01
   symbol_id: 0xe7584e1c
