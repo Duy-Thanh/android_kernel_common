@@ -60,6 +60,11 @@ static int host_init(void)
 	if (IS_ERR(ex_heap))
 		return PTR_ERR(ex_heap);
 
+	/*TODO from DT */
+	kvm_nvhe_sym(ex_heap_config).num_entries = 1;
+	kvm_nvhe_sym(ex_heap_config).entries[0].token_paddr = 0x7ffff000;
+	kvm_nvhe_sym(ex_heap_config).entries[0].protection_id = 99;
+
 	ret = pkvm_load_el2_module(__kvm_nvhe_hyp_init);
 	if (ret)
 		return ret;
