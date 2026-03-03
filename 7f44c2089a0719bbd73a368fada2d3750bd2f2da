@@ -34,6 +34,24 @@
       "parentUuid": "9c40111f_310303ed",
       "revId": "7f44c2089a0719bbd73a368fada2d3750bd2f2da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "441330e8_c965f239",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-03T09:57:24Z",
+      "side": 1,
+      "message": "Right, thanks. The list macros were changed upstream. I don\u0027t think backporting the changes are worth it, but we can do so to avoid this kind of conflict if you want me to.",
+      "parentUuid": "b566d313_cb8174b9",
+      "revId": "7f44c2089a0719bbd73a368fada2d3750bd2f2da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
