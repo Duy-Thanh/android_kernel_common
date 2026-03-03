@@ -160,6 +160,24 @@
       "parentUuid": "d97af3c1_b57013e9",
       "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f1d7f0_f7000047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-03T16:07:02Z",
+      "side": 1,
+      "message": "Support the new interface on aosp/3971987. Please help take a look. I will abandon this CL.",
+      "parentUuid": "8e24f69e_fec73da9",
+      "revId": "f4b4ea5a7169c4319a806161d2f49fd0a8e40bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
