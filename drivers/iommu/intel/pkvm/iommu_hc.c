@@ -241,6 +241,23 @@ static int __get_pasid_table(struct intel_iommu *iommu, u8 bus, u8 devfn, struct
 	return 0;
 }
 
+static int iommu_pasid_setup_nested(struct pkvm_device *dev, u64 fsptptr,
+				    u32 pasid, u16 did, u16 old_did)
+{
+	struct intel_iommu *iommu = dev->info->iommu;
+	struct iommu_hwpt_vtd_s1 s1_cfg = {
+		.pgtbl_addr = fsptptr,
+		.addr_width = agaw_to_width(iommu->agaw),
+	};
+
+	pkvm_dbg("%s: dev[%x:%x], pasid: %x, fsptptr: %llx, did: %d, old_did: %d\n", __func__,
+		 dev->info->bus, dev->info->devfn, pasid, fsptptr, did, old_did);
+	if (!old_did)
+		return intel_pasid_setup_nested(iommu, dev, pasid, did, &s1_cfg);
+	else
+		return intel_pasid_replace_nested(iommu, dev, pasid, did, old_did, &s1_cfg);
+}
+
 static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 {
 	struct intel_iommu *iommu = iommu_from_phys(data->phys);
@@ -280,6 +297,10 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	ret = accept_page_donation(iommu, &data->donation_page_gpa);
 	if (ret)
 		return ret;
+
+	if (pkvm_nested_enabled(iommu))
+		return iommu_pasid_setup_nested(&dev, fsptptr, data->pasid,
+						data->did, data->old_did);
 
 	pkvm_dbg("%s: dev[%x:%x], pasid: %x, fsptptr_gpa: %llx, did: %d, old_did: %d\n", __func__,
 		 data->bus, data->devfn, data->pasid, data->fsptptr_gpa, data->did, data->old_did);
