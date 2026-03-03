@@ -480310,6 +480310,15 @@ elf_symbol {
   full_name: "input_copy_abs"
 }
 elf_symbol {
+  id: 0xfba9da94
+  name: "input_default_setkeycode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2914a9a7
+  type_id: 0x99428d89
+  full_name: "input_default_setkeycode"
+}
+elf_symbol {
   id: 0x5a86c89e
   name: "input_device_enabled"
   is_defined: true
@@ -528124,6 +528133,7 @@ interface {
   symbol_id: 0xbc652525
   symbol_id: 0x2336c16f
   symbol_id: 0x5b69d05f
+  symbol_id: 0xfba9da94
   symbol_id: 0x5a86c89e
   symbol_id: 0x1cfb5d03
   symbol_id: 0x60efc3a4
