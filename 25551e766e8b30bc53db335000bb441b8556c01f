@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8b29ab_95bd4f63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-03T00:46:13Z",
+      "side": 1,
+      "message": "Looping Suren for the `lock_vma_under_rcu()` export.",
+      "revId": "25551e766e8b30bc53db335000bb441b8556c01f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "545793ef_c66b0d66",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6433,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-03T00:46:13Z",
+      "side": 1,
+      "message": "nit: I would have preferred this went into a separate patch in order to get a clean cherry-pick here, but I suppose this is fine too.",
+      "range": {
+        "startLine": 6433,
+        "startChar": 0,
+        "endLine": 6433,
+        "endChar": 17
+      },
+      "revId": "25551e766e8b30bc53db335000bb441b8556c01f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
