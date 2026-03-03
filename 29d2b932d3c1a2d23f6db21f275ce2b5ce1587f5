@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a41aa2_184a8de2",
+        "filename": "kernel/fork.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-03T15:52:37Z",
+      "side": 1,
+      "message": "Here you are tracking mm freeing rather than mmdrop(), which is a refcounting function, so the name is misleading. I would suggest renaming it to trace_android_vh_mm_free() to better reflect the meaning and make it obvious counterpart of trace_android_vh_mm_init().",
+      "range": {
+        "startLine": 961,
+        "startChar": 1,
+        "endLine": 961,
+        "endChar": 24
+      },
+      "revId": "29d2b932d3c1a2d23f6db21f275ce2b5ce1587f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
