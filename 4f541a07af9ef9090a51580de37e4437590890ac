@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ce2110_6100011d",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-03T19:53:42Z",
+      "side": 1,
+      "message": "Do we increase this here since zram_free_page was decrease it before?\n\nIf so, let\u0027s add the commenet rather thath \"Update stats\" that what we already know from the code.\n\nside note: we need to change zram_free_page not to update the count since we keep doing repeated pattern dec/inc here and there.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 0,
+        "endLine": 1108,
+        "endChar": 2
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7370c91_3d2c864f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-03T19:53:42Z",
+      "side": 1,
+      "message": "Why do we have GFP_NOIO and below logics?",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a03fa06_a1bc79c6",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-03T19:53:42Z",
+      "side": 1,
+      "message": "If we fail to allocate memory, simply bail out above.\n\nWhy don\u0027t we follow the same way here?",
+      "range": {
+        "startLine": 1207,
+        "startChar": 6,
+        "endLine": 1207,
+        "endChar": 9
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
