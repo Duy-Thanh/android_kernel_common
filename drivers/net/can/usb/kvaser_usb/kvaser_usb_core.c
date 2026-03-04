@@ -361,14 +361,7 @@ resubmit_urb:
 			  urb->transfer_buffer, KVASER_USB_RX_BUFFER_SIZE,
 			  kvaser_usb_read_bulk_callback, dev);
 
-	usb_anchor_urb(urb, &dev->rx_submitted);
-
 	err = usb_submit_urb(urb, GFP_ATOMIC);
-	if (!err)
-		return;
-
-	usb_unanchor_urb(urb);
-
 	if (err == -ENODEV) {
 		for (i = 0; i < dev->nchannels; i++) {
 			struct kvaser_usb_net_priv *priv;
@@ -379,7 +372,7 @@ resubmit_urb:
 
 			netif_device_detach(priv->netdev);
 		}
-	} else {
+	} else if (err) {
 		dev_err(&dev->intf->dev,
 			"Failed resubmitting read bulk urb: %d\n", err);
 	}

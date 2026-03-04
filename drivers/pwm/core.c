@@ -2294,9 +2294,8 @@ static long pwm_cdev_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 				.duty_offset_ns = wf.duty_offset_ns,
 			};
 
-			ret = copy_to_user((struct pwmchip_waveform __user *)arg,
-					   &cwf, sizeof(cwf));
-			return ret ? -EFAULT : 0;
+			return copy_to_user((struct pwmchip_waveform __user *)arg,
+					    &cwf, sizeof(cwf));
 		}
 
 	case PWM_IOCTL_GETWF:
@@ -2329,9 +2328,8 @@ static long pwm_cdev_ioctl(struct file *file, unsigned int cmd, unsigned long ar
 				.duty_offset_ns = wf.duty_offset_ns,
 			};
 
-			ret = copy_to_user((struct pwmchip_waveform __user *)arg,
-					   &cwf, sizeof(cwf));
-			return ret ? -EFAULT : 0;
+			return copy_to_user((struct pwmchip_waveform __user *)arg,
+					    &cwf, sizeof(cwf));
 		}
 
 	case PWM_IOCTL_SETROUNDEDWF:

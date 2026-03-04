@@ -489,7 +489,7 @@ out:
 }
 
 /**
- * tpm2_unseal_cmd() - execute a TPM2_Unseal command
+ * tpm2_unseal_cmd() - execute a TPM2_Unload command
  *
  * @chip: TPM chip to use
  * @payload: the key data in clear and encrypted form
@@ -520,7 +520,7 @@ static int tpm2_unseal_cmd(struct tpm_chip *chip,
 		return rc;
 	}
 
-	rc = tpm_buf_append_name(chip, &buf, blob_handle, NULL);
+	rc = tpm_buf_append_name(chip, &buf, options->keyhandle, NULL);
 	if (rc)
 		goto out;
 

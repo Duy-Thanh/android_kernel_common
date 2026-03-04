@@ -584,7 +584,7 @@ static const struct iio_chan_spec scd4x_channels[] = {
 			.sign = 'u',
 			.realbits = 16,
 			.storagebits = 16,
-			.endianness = IIO_CPU,
+			.endianness = IIO_BE,
 		},
 	},
 	{
@@ -599,7 +599,7 @@ static const struct iio_chan_spec scd4x_channels[] = {
 			.sign = 'u',
 			.realbits = 16,
 			.storagebits = 16,
-			.endianness = IIO_CPU,
+			.endianness = IIO_BE,
 		},
 	},
 	{
@@ -612,7 +612,7 @@ static const struct iio_chan_spec scd4x_channels[] = {
 			.sign = 'u',
 			.realbits = 16,
 			.storagebits = 16,
-			.endianness = IIO_CPU,
+			.endianness = IIO_BE,
 		},
 	},
 };

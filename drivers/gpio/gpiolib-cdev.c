@@ -2573,7 +2573,6 @@ static int lineinfo_changed_notify(struct notifier_block *nb,
 	ctx = kzalloc(sizeof(*ctx), GFP_ATOMIC);
 	if (!ctx) {
 		pr_err("Failed to allocate memory for line info notification\n");
-		fput(fp);
 		return NOTIFY_DONE;
 	}
 
@@ -2721,7 +2720,7 @@ static int gpio_chrdev_open(struct inode *inode, struct file *file)
 
 	cdev = kzalloc(sizeof(*cdev), GFP_KERNEL);
 	if (!cdev)
-		return -ENOMEM;
+		return -ENODEV;
 
 	cdev->watched_lines = bitmap_zalloc(gdev->ngpio, GFP_KERNEL);
 	if (!cdev->watched_lines)
@@ -2821,18 +2820,13 @@ int gpiolib_cdev_register(struct gpio_device *gdev, dev_t devt)
 		return -ENOMEM;
 
 	ret = cdev_device_add(&gdev->chrdev, &gdev->dev);
-	if (ret) {
-		destroy_workqueue(gdev->line_state_wq);
+	if (ret)
 		return ret;
-	}
 
 	guard(srcu)(&gdev->srcu);
 	gc = srcu_dereference(gdev->chip, &gdev->srcu);
-	if (!gc) {
-		cdev_device_del(&gdev->chrdev, &gdev->dev);
-		destroy_workqueue(gdev->line_state_wq);
+	if (!gc)
 		return -ENODEV;
-	}
 
 	gpiochip_dbg(gc, "added GPIO chardev (%d:%d)\n", MAJOR(devt), gdev->id);
 

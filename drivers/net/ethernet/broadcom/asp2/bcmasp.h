@@ -348,7 +348,6 @@ struct bcmasp_net_filter {
 	bool				wake_filter;
 
 	int				port;
-	int				ch;
 	unsigned int			hw_index;
 };
 

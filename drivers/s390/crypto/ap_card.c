@@ -44,7 +44,7 @@ static ssize_t depth_show(struct device *dev, struct device_attribute *attr,
 {
 	struct ap_card *ac = to_ap_card(dev);
 
-	return sysfs_emit(buf, "%d\n", ac->hwinfo.qd + 1);
+	return sysfs_emit(buf, "%d\n", ac->hwinfo.qd);
 }
 
 static DEVICE_ATTR_RO(depth);

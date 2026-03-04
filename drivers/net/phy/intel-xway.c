@@ -277,7 +277,7 @@ static int xway_gphy_init_leds(struct phy_device *phydev)
 
 static int xway_gphy_config_init(struct phy_device *phydev)
 {
-	struct device_node *np;
+	struct device_node *np = phydev->mdio.dev.of_node;
 	int err;
 
 	/* Mask all interrupts */
@@ -286,10 +286,7 @@ static int xway_gphy_config_init(struct phy_device *phydev)
 		return err;
 
 	/* Use default LED configuration if 'leds' node isn't defined */
-	np = of_get_child_by_name(phydev->mdio.dev.of_node, "leds");
-	if (np)
-		of_node_put(np);
-	else
+	if (!of_get_child_by_name(np, "leds"))
 		xway_gphy_init_leds(phydev);
 
 	/* Clear all pending interrupts */

@@ -201,7 +201,6 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&hp_det_l>;
 
-		simple-audio-card,bitclock-master = <&masterdai>;
 		simple-audio-card,format = "i2s";
 		simple-audio-card,hp-det-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_LOW>;
 		simple-audio-card,mclk-fs = <256>;
@@ -212,16 +211,15 @@
 			"Headphones", "HPOR",
 			"IN1P", "Microphone Jack";
 		simple-audio-card,widgets =
-			"Headphone", "Headphones",
+			"Headphone", "Headphone Jack",
 			"Microphone", "Microphone Jack";
 
 		simple-audio-card,codec {
 			sound-dai = <&rt5616>;
 		};
 
-		masterdai: simple-audio-card,cpu {
+		simple-audio-card,cpu {
 			sound-dai = <&sai2>;
-			system-clock-frequency = <12288000>;
 		};
 	};
 };
@@ -729,12 +727,10 @@
 	rt5616: audio-codec@1b {
 		compatible = "realtek,rt5616";
 		reg = <0x1b>;
-		assigned-clocks = <&cru CLK_SAI2_MCLKOUT_TO_IO>;
+		assigned-clocks = <&cru CLK_SAI2_MCLKOUT>;
 		assigned-clock-rates = <12288000>;
-		clocks = <&cru CLK_SAI2_MCLKOUT_TO_IO>;
+		clocks = <&cru CLK_SAI2_MCLKOUT>;
 		clock-names = "mclk";
-		pinctrl-0 = <&sai2m0_mclk>;
-		pinctrl-names = "default";
 		#sound-dai-cells = <0>;
 	};
 };
