@@ -13599,11 +13599,6 @@ pointer_reference {
   pointee_type_id: 0xb95bf932
 }
 pointer_reference {
-  id: 0x24c84e5a
-  kind: POINTER
-  pointee_type_id: 0xb961dff5
-}
-pointer_reference {
   id: 0x24cb72c4
   kind: POINTER
   pointee_type_id: 0xb96d2d8e
@@ -13652,6 +13647,11 @@ pointer_reference {
   id: 0x24e24923
   kind: POINTER
   pointee_type_id: 0xb9c9c211
+}
+pointer_reference {
+  id: 0x24e39b15
+  kind: POINTER
+  pointee_type_id: 0xb9ce8ac9
 }
 pointer_reference {
   id: 0x24f58c44
@@ -24732,6 +24732,11 @@ pointer_reference {
   id: 0x30220515
   kind: POINTER
   pointee_type_id: 0xeac8f2c9
+}
+pointer_reference {
+  id: 0x302296c0
+  kind: POINTER
+  pointee_type_id: 0xeacabd9d
 }
 pointer_reference {
   id: 0x3024a913
@@ -46304,6 +46309,12 @@ member {
   offset: 5760
 }
 member {
+  id: 0xf0d65267
+  name: "__kabi_reserved3"
+  type_id: 0x92233392
+  offset: 256
+}
+member {
   id: 0xf0d65ee7
   name: "__kabi_reserved3"
   type_id: 0x92233392
@@ -46334,10 +46345,28 @@ member {
   offset: 4160
 }
 member {
+  id: 0x04993912
+  name: "__kabi_reserved4"
+  type_id: 0x92233392
+  offset: 320
+}
+member {
   id: 0x4454f320
   name: "__kabi_reserved5"
   type_id: 0x92233392
   offset: 4224
+}
+member {
+  id: 0x4454fe31
+  name: "__kabi_reserved5"
+  type_id: 0x92233392
+  offset: 384
+}
+member {
+  id: 0x821bb322
+  name: "__kabi_reserved6"
+  type_id: 0x92233392
+  offset: 448
 }
 member {
   id: 0x821bb48b
@@ -46352,10 +46381,22 @@ member {
   offset: 4352
 }
 member {
+  id: 0xc3d419df
+  name: "__kabi_reserved7"
+  type_id: 0x92233392
+  offset: 512
+}
+member {
   id: 0x359054ce
   name: "__kabi_reserved8"
   type_id: 0x92233392
   offset: 4416
+}
+member {
+  id: 0x35905cf4
+  name: "__kabi_reserved8"
+  type_id: 0x92233392
+  offset: 576
 }
 member {
   id: 0x77502db4
@@ -80468,9 +80509,9 @@ member {
   offset: 2592
 }
 member {
-  id: 0x8535536f
-  name: "device_register_reset"
-  type_id: 0x24c84e5a
+  id: 0xfd31760e
+  name: "device_register_ops"
+  type_id: 0x24e39b15
   offset: 3520
 }
 member {
@@ -160630,6 +160671,12 @@ member {
   offset: 2112
 }
 member {
+  id: 0x64d3155d
+  name: "power_lock"
+  type_id: 0x2c16a860
+  offset: 64
+}
+member {
   id: 0x4c5df948
   name: "power_mode"
   type_id: 0x5d8155a5
@@ -174933,6 +174980,11 @@ member {
   name: "reset"
   type_id: 0x2d4fc86f
   offset: 576
+}
+member {
+  id: 0x6291b8e1
+  name: "reset"
+  type_id: 0x2c16a860
 }
 member {
   id: 0x62920d2b
@@ -263837,6 +263889,24 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xeacabd9d
+  kind: STRUCT
+  name: "pkvm_device_ops"
+  definition {
+    bytesize: 80
+    member_id: 0x6291b8e1
+    member_id: 0x64d3155d
+    member_id: 0x415b057e
+    member_id: 0xb116e281
+    member_id: 0xf0d65267
+    member_id: 0x04993912
+    member_id: 0x4454fe31
+    member_id: 0x821bb322
+    member_id: 0xc3d419df
+    member_id: 0x35905cf4
+  }
+}
+struct_union {
   id: 0x5f02424f
   kind: STRUCT
   name: "pkvm_el2_module"
@@ -263922,7 +263992,7 @@ struct_union {
     member_id: 0x2845eccf
     member_id: 0xc336f821
     member_id: 0x986971aa
-    member_id: 0x8535536f
+    member_id: 0xfd31760e
     member_id: 0xb254a587
     member_id: 0xf7c37584
     member_id: 0xdd04fd7a
@@ -352900,13 +352970,6 @@ function {
   parameter_id: 0xf1a6dfed
 }
 function {
-  id: 0xb961dff5
-  return_type_id: 0x6720d32f
-  parameter_id: 0x92233392
-  parameter_id: 0x18bd6530
-  parameter_id: 0x2c16a860
-}
-function {
   id: 0xb9633154
   return_type_id: 0x6720d32f
   parameter_id: 0x914dbfdc
@@ -352938,6 +353001,13 @@ function {
   parameter_id: 0x116785ed
   parameter_id: 0x14b9453b
   parameter_id: 0x33756485
+}
+function {
+  id: 0xb9ce8ac9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0x302296c0
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0xba5ef4b3
@@ -359553,7 +359623,7 @@ elf_symbol {
   name: "__pkvm_load_el2_module"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xae5a8a52
+  crc: 0x322035d6
   type_id: 0x9f49143f
   full_name: "__pkvm_load_el2_module"
 }
@@ -397779,7 +397849,7 @@ elf_symbol {
   name: "kvm_iommu_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8f0cdd7f
+  crc: 0xa6c4a2ac
   type_id: 0x987bfadf
   full_name: "kvm_iommu_register_driver"
 }
