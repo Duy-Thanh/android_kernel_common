@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03d617f_37e140fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3314159
+      },
+      "writtenOn": "2026-03-04T12:32:58Z",
+      "side": 1,
+      "message": "Hi Giuliano,\n\nThese patches backport support for EC-controlled fans to be exported via cros_ec hwmon driver, which is a vehicle for OS-controlled fans on ARM-based devices with Google EC. They are already in android17-6.18 but I need them for some devices still running kernel 6.12.",
+      "revId": "d1c0d7499cb028db9e7551b0f66feb7a0ba85666",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
