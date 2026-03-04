@@ -328867,6 +328867,15 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x9b64aa6c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x36f98e5c
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x2fb2b385
+}
+function {
   id: 0x9b653ac7
   return_type_id: 0x6720d32f
   parameter_id: 0x188b9e81
@@ -349189,6 +349198,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_alloc_oem_binder_struct"
 }
 elf_symbol {
+  id: 0x91ee96d0
+  name: "__traceiter_android_vh_alloc_pages_entry"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3460ecc
+  type_id: 0x9b64aa6c
+  full_name: "__traceiter_android_vh_alloc_pages_entry"
+}
+elf_symbol {
   id: 0x33f9278c
   name: "__traceiter_android_vh_alloc_pages_failure_bypass"
   is_defined: true
@@ -354650,6 +354668,15 @@ elf_symbol {
   crc: 0xf8d28f05
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_alloc_oem_binder_struct"
+}
+elf_symbol {
+  id: 0x3edc110a
+  name: "__tracepoint_android_vh_alloc_pages_entry"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xf78179e0
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_alloc_pages_entry"
 }
 elf_symbol {
   id: 0x37776872
@@ -422596,6 +422623,7 @@ interface {
   symbol_id: 0xf78be1c5
   symbol_id: 0x666f7184
   symbol_id: 0xd0b4a794
+  symbol_id: 0x91ee96d0
   symbol_id: 0x33f9278c
   symbol_id: 0x2e343246
   symbol_id: 0xa6e329cd
@@ -423203,6 +423231,7 @@ interface {
   symbol_id: 0x7ea1f05b
   symbol_id: 0x74cce3b2
   symbol_id: 0xd7f9868e
+  symbol_id: 0x3edc110a
   symbol_id: 0x37776872
   symbol_id: 0xfc735654
   symbol_id: 0x1ebb872f
