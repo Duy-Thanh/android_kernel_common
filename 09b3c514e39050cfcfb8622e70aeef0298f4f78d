@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a746d729_039f8447",
+        "filename": "Documentation/virt/kvm/arm/hypercalls.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-04T12:49:16Z",
+      "side": 1,
+      "message": "I\u0027d suggest to reserve the rest of the unused registers, I won\u0027t be surprised if some of the power ops that we can support of the future might need many arguments.",
+      "range": {
+        "startLine": 355,
+        "startChar": 40,
+        "endLine": 355,
+        "endChar": 48
+      },
+      "revId": "09b3c514e39050cfcfb8622e70aeef0298f4f78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
