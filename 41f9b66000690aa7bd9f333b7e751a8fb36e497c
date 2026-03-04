@@ -142,6 +142,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6bd083_686c26e4",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-04T01:30:11Z",
+      "side": 1,
+      "message": "Each write request requires additional physical page for payload. So what we have is [a sketch, not a real code] something like:\n\n```\nfor_each_slot() {\n   bio \u003d alloc_bio()\n   bio-\u003epage \u003d alloc_page()\n   zs_malloc_read(bio-\u003epage)  // or decompress to bio-\u003epage\n   submit_bio(bio)\n}\n```\n\nWe have an unbound number of slots to writeback and relying on block layer throttling is too risky - H/W `nr_requests` can be many thousands, which can put significant memory pressure on the system. One thing to note here is that writeback can be used in all sorts of environments (e.g. servers with per-CPU blk-mq), not only as swap writeback on embedded devices.  So we have a fixed size pool of preallocated requests (max batch-sizxe) which we use to control writeback pressure.",
+      "parentUuid": "f3100d71_3cf1f336",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
