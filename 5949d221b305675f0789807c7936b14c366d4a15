@@ -16,6 +16,24 @@
       "message": "vendor hooks should not be needed at all for this driver, as you are submitting the entire thing here.  Just submit your changes as needed over time, no need for any hooks.",
       "revId": "5949d221b305675f0789807c7936b14c366d4a15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad7343e4_d6270bb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008340
+      },
+      "writtenOn": "2026-03-04T06:50:15Z",
+      "side": 1,
+      "message": "Okay, abandoned.\nThank you.",
+      "parentUuid": "c991f04e_d0a0619f",
+      "revId": "5949d221b305675f0789807c7936b14c366d4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
