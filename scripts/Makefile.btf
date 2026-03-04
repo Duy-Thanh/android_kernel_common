@@ -5,6 +5,9 @@ pahole-flags-y :=
 
 JOBS := $(patsubst -j%,%,$(filter -j%,$(MAKEFLAGS)))
 
+# TODO(b/489573811): Drop this hack once pahole multi-jobs are reproducible
+JOBS := 1
+
 ifeq ($(call test-le, $(pahole-ver), 125),y)
 
 pahole-flags-y                                  	+= --btf_gen_floats -j$(JOBS)
