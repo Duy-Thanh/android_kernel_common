@@ -86,3 +86,12 @@
   __tracepoint_android_vh_free_mod_mem
   __tracepoint_android_vh_set_mod_perm_after_init
   __tracepoint_android_vh_set_mod_perm_before_init
+
+# low lat mem
+ __tracepoint_android_vh_compact_bypass
+ __traceiter_android_vh_compact_bypass
+ __tracepoint_android_vh_cma_release_bypass
+ __traceiter_android_vh_cma_release_bypass
+ __tracepoint_android_vh_cma_alloc_end
+ __traceiter_android_vh_cma_alloc_end
+
