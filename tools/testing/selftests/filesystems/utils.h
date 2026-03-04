@@ -28,7 +28,6 @@ extern int cap_down(cap_value_t down);
 
 extern bool switch_ids(uid_t uid, gid_t gid);
 extern int setup_userns(void);
-extern int enter_userns(void);
 
 static inline bool switch_userns(int fd, uid_t uid, gid_t gid, bool drop_caps)
 {

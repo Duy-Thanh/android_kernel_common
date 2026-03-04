@@ -43,24 +43,19 @@
 	#endif
 #endif
 
-static inline int statmount(uint64_t mnt_id, uint64_t mnt_ns_id, uint32_t fd,
-			    uint64_t mask, struct statmount *buf, size_t bufsize,
+static inline int statmount(uint64_t mnt_id, uint64_t mnt_ns_id, uint64_t mask,
+			    struct statmount *buf, size_t bufsize,
 			    unsigned int flags)
 {
 	struct mnt_id_req req = {
 		.size = MNT_ID_REQ_SIZE_VER0,
+		.mnt_id = mnt_id,
 		.param = mask,
 	};
 
-	if (flags & STATMOUNT_BY_FD) {
+	if (mnt_ns_id) {
 		req.size = MNT_ID_REQ_SIZE_VER1;
-		req.mnt_fd = fd;
-	} else {
-		req.mnt_id = mnt_id;
-		if (mnt_ns_id) {
-			req.size = MNT_ID_REQ_SIZE_VER1;
-			req.mnt_ns_id = mnt_ns_id;
-		}
+		req.mnt_ns_id = mnt_ns_id;
 	}
 
 	return syscall(__NR_statmount, &req, buf, bufsize, flags);
