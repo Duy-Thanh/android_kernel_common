@@ -2,6 +2,7 @@
 #ifndef _MM_PAGE_REPORTING_H
 #define _MM_PAGE_REPORTING_H
 
+#include "linux/printk.h"
 #include <linux/mmzone.h>
 #include <linux/pageblock-flags.h>
 #include <linux/page-isolation.h>
