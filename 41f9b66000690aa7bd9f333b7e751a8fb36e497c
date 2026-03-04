@@ -166,6 +166,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b45ee4f3_01f3b31c",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-04T23:51:39Z",
+      "side": 1,
+      "message": "It\u0027s also applicable for other subsystem. For example, mmap(4GB) and keep touching all the pages, which will create a lot memory pressure, too. Other example, dmabuf alloc from the user process with 4GB allocation. I believe we can find a lot places to be vulnerable for that but we don\u0027t put such throttling logic for every subsystem because finally, VM will throttle transparently once memory pressure is severe. Do we have reason why zram is something special here?",
+      "parentUuid": "dc6bd083_686c26e4",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
