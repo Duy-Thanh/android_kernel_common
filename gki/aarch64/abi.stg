@@ -405328,6 +405328,13 @@ function {
   parameter_id: 0x171be96c
 }
 function {
+  id: 0x93b5d84c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x39a4e83f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x93b5eea7
   return_type_id: 0x6720d32f
   parameter_id: 0x391f15ea
@@ -481098,6 +481105,15 @@ elf_symbol {
   full_name: "iio_read_channel_processed"
 }
 elf_symbol {
+  id: 0xfcd2e6df
+  name: "iio_read_channel_processed_scale"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x263c1994
+  type_id: 0x93b5d84c
+  full_name: "iio_read_channel_processed_scale"
+}
+elf_symbol {
   id: 0x350d9a11
   name: "iio_read_channel_raw"
   is_defined: true
@@ -529940,6 +529956,7 @@ interface {
   symbol_id: 0x88fdf87a
   symbol_id: 0xe0c6693f
   symbol_id: 0x4bda4ccf
+  symbol_id: 0xfcd2e6df
   symbol_id: 0x350d9a11
   symbol_id: 0xbf4818d4
   symbol_id: 0xb1548c88
