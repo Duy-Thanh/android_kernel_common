@@ -16,6 +16,24 @@
       "message": "(Not a request for a change for this CL, just a comment about what to do upstream.)\n\nFWIW, upstreaming something may still make sense. Not for BoringSSL compatibility per se (we\u0027re happy to do what we need to emulate OpenSSL here), but because the kernel probably did not want to do this. `CMS_sign` takes `CMS_PARTIAL` to mean \"don\u0027t finish the operation in this call, I\u0027m going to fill in some of the fields in separate calls and then finalize it at the end\".\n\nCarrying that flag over to all the rest of the calls is... strange. It is especially strange for `CMS_final` because that\u0027s the API you use to finish it up.\n\nAs it happens, OpenSSL ignores flags that functions don\u0027t use, and `CMS_PARTIAL` isn\u0027t meaningful to use with `CMS_final`, so it\u0027s all fine, I think. But it\u0027s also weird and probably not correct. I think old approach of passing the right flags to the right functions was better.",
       "revId": "16442c17618be4a3e0282f759e6bbf38514f41c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8ee1af_5d5097ff",
+        "filename": "scripts/sign-file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-04T22:40:38Z",
+      "side": 1,
+      "message": "ok thanks for the feedback. I\u0027ll send a patch upstream splitting back the flags according to the respective CMS call. The convenience of having all the flags centralized in a single variable is not worth any potential side-effects.",
+      "parentUuid": "5928afaf_d52e1478",
+      "revId": "16442c17618be4a3e0282f759e6bbf38514f41c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
