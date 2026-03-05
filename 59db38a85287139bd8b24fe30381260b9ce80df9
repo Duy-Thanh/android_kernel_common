@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0879bbb2_2bb92519",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-05T18:15:36Z",
+      "side": 1,
+      "message": "Ah, good point. We definitely need to support buffers bigger than 2GB. I\u0027ll add logic to the load in max chunks of MAX_RW_COUNT.",
+      "parentUuid": "0f5f9dfd_c3cd07ea",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 117,
+        "endChar": 19
+      },
+      "revId": "59db38a85287139bd8b24fe30381260b9ce80df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "005fd1af_f8d098a0",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 12
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-04T18:21:44Z",
       "side": 1,
       "message": "Since you\u0027re no longer relying on the misc device for CMOs, I don\u0027t think you need this.",
+      "range": {
+        "startLine": 1016,
+        "startChar": 0,
+        "endLine": 1018,
+        "endChar": 59
+      },
+      "revId": "59db38a85287139bd8b24fe30381260b9ce80df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4703ef25_1e784518",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-05T18:15:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "005fd1af_f8d098a0",
       "range": {
         "startLine": 1016,
         "startChar": 0,
