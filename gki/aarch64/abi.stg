@@ -95323,6 +95323,12 @@ member {
   offset: 64
 }
 member {
+  id: 0xbb1403f3
+  name: "deinit"
+  type_id: 0x0ca55dc9
+  offset: 64
+}
+member {
   id: 0xbb14491e
   name: "deinit"
   type_id: 0x0cefb0c8
@@ -176794,7 +176800,12 @@ member {
   offset: 320
 }
 member {
+<<<<<<< HEAD   (7f9e000083563dd4928fb8eafa7cae2a1a3d8a88 ANDROID: GKI: Update Nvidia symbol list am: 81b9cee53a)
   id: 0x0a575f82
+||||||| BASE   (388d099ef4c980b5f28be19c3df2a9b978d5f551 ANDROID: sched: fix elevated nr_uninterruptible counts)
+=======
+  id: 0x0a575c1a
+>>>>>>> BRANCH (81b9cee53ae5b660aea9e0a02882f6db606d18a4 ANDROID: GKI: Update Nvidia symbol list)
   name: "num_h_tile"
   type_id: 0x43e910ce
   offset: 20424
