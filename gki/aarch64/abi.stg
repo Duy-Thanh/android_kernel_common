@@ -44920,6 +44920,11 @@ array {
   element_type_id: 0xe62ebf07
 }
 array {
+  id: 0x0a66722e
+  number_of_elements: 128
+  element_type_id: 0x92233392
+}
+array {
   id: 0x0aba0b5b
   number_of_elements: 48
   element_type_id: 0x6720d32f
@@ -45128,11 +45133,6 @@ array {
   id: 0x16c3ef93
   number_of_elements: 38
   element_type_id: 0xf992fdc1
-}
-array {
-  id: 0x1723cb73
-  number_of_elements: 64
-  element_type_id: 0x92233392
 }
 array {
   id: 0x174bc012
@@ -521781,7 +521781,7 @@ elf_symbol {
   is_defined: true
   symbol_type: OBJECT
   crc: 0xf54e5881
-  type_id: 0x1723cb73
+  type_id: 0x0a66722e
   full_name: "vendor_data_pad"
 }
 elf_symbol {
