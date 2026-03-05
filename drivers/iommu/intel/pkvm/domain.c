@@ -229,6 +229,7 @@ struct dmar_domain *pkvm_alloc_iommu_domain(struct alloc_domain_data *data,
 		atomic_set(&domain->refcount, 1);
 		pkvm_spin_lock_init(&domain->lock);
 		pkvm_spin_lock_init(&domain->cache_lock);
+		pkvm_spin_lock_init(&domain->flush_lock);
 		hash_add(iommu_domain_hasht, &domain->hnode, (u64)pgd);
 		pkvm_dbg("%s: allocated domain pgd: %p\n", __func__, pgd);
 	} else {
@@ -316,13 +317,45 @@ int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 	return 0;
 }
 
-void pkvm_intel_iommu_tlb_flush(unsigned long paddr, unsigned long size)
+static void domain_flush_all(struct dmar_domain *domain)
 {
-	if (pt_domain.qi_batch)
-		cache_tag_flush_range(&pt_domain, paddr, paddr + size - 1, 0);
+	/* (0, ULONG_MAX) selects a domain-selective invalidation. */
+	cache_tag_flush_range(domain, 0, ULONG_MAX, 0);
+	domain->flush_pending = false;
 }
 
- /* Flush IOMMU caches for the domain identified by the given pgd_gpa. */
+/*
+ * Flushes IOMMU iotlb (and devtlb if present) for all configured
+ * domains. This is called during ept flush to make sure that no
+ * stale cache entries exists for donated pages.
+ */
+void pkvm_intel_iommu_tlb_flush(unsigned long paddr, unsigned long size)
+{
+	unsigned long paddr_last = paddr + size - 1;
+	struct dmar_domain *domain;
+	int bkt;
+
+	pkvm_spin_lock(&iommu_domain_lock);
+	hash_for_each(iommu_domain_hasht, bkt, domain, hnode) {
+		pkvm_spin_lock(&domain->flush_lock);
+		if (domain->flush_pending)
+			domain_flush_all(domain);
+		pkvm_spin_unlock(&domain->flush_lock);
+	}
+	pkvm_spin_unlock(&iommu_domain_lock);
+
+	if (pt_domain.qi_batch)
+		cache_tag_flush_range(&pt_domain, paddr, paddr_last, 0);
+}
+
+ /*
+  * Flush IOMMU caches for the domain identified by the given pgd_gpa.
+  * If a deferred flush is pending, its coalesced range is not tracked, so fall
+  * back to a domain-selective invalidation that covers it (and the requested
+  * range). Otherwise the host's request is the only thing to flush, so honor
+  * the supplied range/ih precisely. The latter also covers nested domains,
+  * whose host-managed stage-1 unmaps never set flush_pending.
+  */
 int pkvm_iommu_domain_flush(u64 pgd_gpa, u64 start, u64 last, int ih)
 {
 	struct dmar_domain *domain;
@@ -334,7 +367,13 @@ int pkvm_iommu_domain_flush(u64 pgd_gpa, u64 start, u64 last, int ih)
 		return -EINVAL;
 	}
 
-	cache_tag_flush_range(domain, start, last, ih);
+	pkvm_spin_lock(&domain->flush_lock);
+	if (domain->flush_pending)
+		domain_flush_all(domain);
+	else
+		cache_tag_flush_range(domain, start, last, ih);
+	pkvm_spin_unlock(&domain->flush_lock);
+
 	pkvm_put_iommu_domain(domain);
 
 	return 0;

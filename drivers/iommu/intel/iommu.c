@@ -1142,16 +1142,21 @@ void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 		domain->pgd = NULL;
 	}
 #else
-	/*
-	 * Regardless of the DMA mode used by host, we perform iotlb flush on
-	 * unmap. Unmapped pages may be donated to a pVM or to the hypervisor.
-	 * Until a flush happens, stale entries in cache could enable a device
-	 * to access those pages, breaking pKVM security guarantees. So perform
-	 * flush immediately.
-	 */
-	/* Set IH=1(Invalidation Hint) if only leaf ptes were updated. */
-	cache_tag_flush_range(domain, start_pfn << VTD_PAGE_SHIFT,
-			      last_pfn << VTD_PAGE_SHIFT, leaf_ptes_only);
+	if (domain->dma_fq) {
+		/*
+		 * Lazy mode: defer the flush. It is drained as a single
+		 * domain-selective invalidation before the next page donation
+		 * or when the host explicitly flushes the domain. We don't
+		 * track the unmapped sub-range (same as host driver).
+		 */
+		pkvm_spin_lock(&domain->flush_lock);
+		domain->flush_pending = true;
+		pkvm_spin_unlock(&domain->flush_lock);
+	} else {
+		/* Set IH=1(Invalidation Hint) if only leaf ptes were updated. */
+		cache_tag_flush_range(domain, start_pfn << VTD_PAGE_SHIFT,
+				   last_pfn << VTD_PAGE_SHIFT, leaf_ptes_only);
+	}
 
 	dma_unuse_range(domain, agaw_to_level(domain->agaw),
 			domain->pgd, 0, start_pfn, last_pfn);
