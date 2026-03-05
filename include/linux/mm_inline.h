@@ -355,6 +355,8 @@ void lruvec_add_folio(struct lruvec *lruvec, struct folio *folio)
 	enum lru_list lru = folio_lru_list(folio);
 	bool skip = false;
 
+	VM_WARN_ON_ONCE_FOLIO(!folio_matches_lruvec(folio, lruvec), folio);
+
 	trace_android_vh_lruvec_add_folio(lruvec, folio, lru, false, &skip);
 	if (skip)
 		return;
@@ -374,6 +376,8 @@ void lruvec_add_folio_tail(struct lruvec *lruvec, struct folio *folio)
 	enum lru_list lru = folio_lru_list(folio);
 	bool skip = false;
 
+	VM_WARN_ON_ONCE_FOLIO(!folio_matches_lruvec(folio, lruvec), folio);
+
 	trace_android_vh_lruvec_add_folio(lruvec, folio, lru, true, &skip);
 	if (skip)
 		return;
@@ -392,6 +396,8 @@ void lruvec_del_folio(struct lruvec *lruvec, struct folio *folio)
 {
 	enum lru_list lru = folio_lru_list(folio);
 	bool skip = false;
+
+	VM_WARN_ON_ONCE_FOLIO(!folio_matches_lruvec(folio, lruvec), folio);
 
 	trace_android_vh_lruvec_del_folio(lruvec, folio, lru, &skip);
 	if (skip)
