@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f5f9dfd_c3cd07ea",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-05T06:52:31Z",
+      "side": 1,
+      "message": "So I noticed that there are a few places where the length is capped at `MAX_RW_COUNT` which is defined as `INT_MAX \u0026 PAGE_MASK`.\n\nI believe the `rw_verify_area()` check would catch anything larger, since the check where it casts the count to a `ssize_t` will result in a negative value if `count` is larger than `MAX_RW_COUNT`, but instead of catching it that late, should we catch that here? That would mean limiting this function to a max of ~2 GB.\n\nWould that be a problem? Do we expect buffers to be that big?",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 117,
+        "endChar": 19
+      },
+      "revId": "59db38a85287139bd8b24fe30381260b9ce80df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "005fd1af_f8d098a0",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 12
