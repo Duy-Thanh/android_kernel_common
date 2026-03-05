@@ -765,6 +765,14 @@ struct dmar_domain {
 	atomic_t refcount;
 	unsigned int index;
 	struct pkvm_memcache mc;
+
+	/* Domain uses flush queue(lazy mode) */
+	bool dma_fq;
+
+	/* A pending IOMMU cache flush that should be done before any page donation */
+	bool flush_pending;
+	pkvm_spinlock_t flush_lock;
+
 	/*
 	 * Lock to protect the mapping operations
 	 * on this domain.
