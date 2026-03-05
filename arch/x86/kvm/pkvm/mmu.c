@@ -7,6 +7,7 @@
 #include "mmu.h"
 #include "pgtable.h"
 #include "pkvm.h"
+#include "debug.h"
 
 static struct pkvm_pgtable hyp_mmu;
 static struct pkvm_pool hyp_mmu_pool;
@@ -19,6 +20,24 @@ static struct pkvm_pgtable_cap guest_mmu_pgt_cap;
 
 static DEFINE_PER_CPU(struct pkvm_vm *, __current_vm);
 #define current_vm (*this_cpu_ptr(&__current_vm))
+
+static iommu_tlb_flush_fn_t iommu_tlb_flush_fn;
+
+void register_iommu_tlb_flush(iommu_tlb_flush_fn_t fn)
+{
+	/* Pairs with smp_load_acquire() in iommu_tlb_flush */
+	if (cmpxchg_release(&iommu_tlb_flush_fn, NULL, fn) != NULL)
+		pkvm_err("tlb_flush for IOMMU already registered!\n");
+}
+
+static void iommu_tlb_flush(unsigned long addr, unsigned long size)
+{
+	/* Pairs with cmpxchg_release() in register_iommu_tlb_flush */
+	iommu_tlb_flush_fn_t fn = smp_load_acquire(&iommu_tlb_flush_fn);
+
+	if (fn)
+		fn(addr, size);
+}
 
 static void *hyp_mmu_zalloc_page(struct pkvm_memcache *mc)
 {
@@ -1078,14 +1097,17 @@ int pkvm_host_donate_hyp(unsigned long phys, unsigned long size, bool clear)
 unlock:
 	pkvm_host_mmu_unlock();
 
-	if (!ret && clear) {
+	if (!ret) {
 		/*
 		 * No need to flush CPU cache, like what pkvm_clear_memory()
 		 * does, as the pKVM hypervisor doesn't access memory via
 		 * non-coherent DMA (actually there is no DMA in the pKVM
 		 * hypervisor).
 		 */
-		memset(__pkvm_va(phys), 0, size);
+		if (clear)
+			memset(__pkvm_va(phys), 0, size);
+
+		iommu_tlb_flush(phys, size);
 	}
 
 	return ret;
@@ -1467,6 +1489,8 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 
 	set_host_mem_pgstate(hpa, size, PKVM_PAGE_NONE, PKVM_ID_GUEST);
 	pkvm_host_mmu_unlock();
+
+	iommu_tlb_flush(pkvm_host_gpa_to_phys(hpa), size);
 
 	pkvm_guest_mmu_lock(pkvm_vm);
 	ret = check_page_state(&pkvm_vm->mmu, gpa, size, PKVM_PAGE_NONE);
