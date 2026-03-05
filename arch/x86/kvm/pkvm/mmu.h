@@ -42,4 +42,6 @@ void pkvm_guest_mmu_destroy(struct pkvm_vm *pkvm_vm);
 int pkvm_guest_mmu_refill_memcache(struct pkvm_vcpu *pkvm_vcpu);
 void pkvm_guest_mmu_free_memcache(struct pkvm_vcpu *pkvm_vcpu);
 
+typedef void (*iommu_tlb_flush_fn_t)(unsigned long addr, unsigned long size);
+void register_iommu_tlb_flush(iommu_tlb_flush_fn_t fn);
 #endif /* __PKVM_X86_MMU_H */

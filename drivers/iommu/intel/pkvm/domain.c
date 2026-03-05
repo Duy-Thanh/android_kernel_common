@@ -315,3 +315,9 @@ int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 
 	return 0;
 }
+
+void pkvm_intel_iommu_tlb_flush(unsigned long paddr, unsigned long size)
+{
+	if (pt_domain.qi_batch)
+		cache_tag_flush_range(&pt_domain, paddr, paddr + size - 1, 0);
+}
