@@ -286,6 +286,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5823aea_4371801f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-05T11:06:48Z",
+      "side": 1,
+      "message": "\u003e I think we need to improve our patch review process then.\n\nWell, at least for major features.\n\nLet me expand on this:\n\n\u003e However, my concern is our tendency to make things more\n\u003e complicated than necessary from the outset.\n\nWhile I agree that I have a tendency to complicate things for no apparent reason (no sarcasm), I can assure you the writeback in-flight knob was not such a thing. I simply was not aware of submit_bio() throttling back then. I found out about it only recently (clearly, I started this whole thread because I still didn\u0027t know about it at that point). So when I added that knob I believed that it was solving a real problem, not a \"what if\" one.\n\nNow, in my defense. That knob existed for a while in private patches, it also existed from day 1 in upstream submissions. We even had an upstream discussion on what would be the best default value - 32. Which re-assured me that we were addressing real problems, once again.\n\nI still like that knob. I look at it as a \"soft limit\", while HW queue depth is a \"hard limit\", so to speak.",
+      "parentUuid": "eb410b63_3f3e6850",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
