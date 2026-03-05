@@ -243,6 +243,7 @@ void folio_rotate_reclaimable(struct folio *folio)
 void lru_note_cost_unlock_irq(struct lruvec *lruvec, bool file,
 		unsigned int nr_io, unsigned int nr_rotated)
 		__releases(lruvec->lru_lock)
+		__releases(rcu)
 {
 	unsigned long cost;
 
@@ -256,6 +257,7 @@ void lru_note_cost_unlock_irq(struct lruvec *lruvec, bool file,
 	cost = nr_io * SWAP_CLUSTER_MAX + nr_rotated;
 	if (!cost) {
 		spin_unlock_irq(&lruvec->lru_lock);
+		rcu_read_unlock();
 		return;
 	}
 
@@ -288,8 +290,10 @@ void lru_note_cost_unlock_irq(struct lruvec *lruvec, bool file,
 
 		spin_unlock_irq(&lruvec->lru_lock);
 		lruvec = parent_lruvec(lruvec);
-		if (!lruvec)
+		if (!lruvec) {
+			rcu_read_unlock();
 			break;
+		}
 		spin_lock_irq(&lruvec->lru_lock);
 	}
 }
