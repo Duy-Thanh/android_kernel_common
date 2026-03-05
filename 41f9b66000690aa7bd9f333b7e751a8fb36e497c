@@ -190,6 +190,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5d4460_e55b34de",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-03-05T03:08:43Z",
+      "side": 1,
+      "message": "For writeback, the user has no reason to expect that the operation requires a lot of memory. If the user touches a bunch of memory or allocates a DMA buf, of course that\u0027s going to allocate a lot of memory. But as a user, I would be very surprised if performing zram writeback inexplicably allocated 4GB, or even 128MiB of memory.\n\nPrefetch is a bit different, since we are explicitly pulling data from disk into memory. That said, prefetch occurs during app launch, which is often memory constrained and performance sensitive. So it\u0027s definitely preferable to avoid allocating more memory than we strictly need. With compressed writeback, arbitrarily queuing io could result in a memory footprint 2-3x larger than is actually necessary (depending on how much of the prefetched data the app actually faults out of zram). That could definitely cause app launch to go into direct reclaim and jank.",
+      "parentUuid": "b45ee4f3_01f3b31c",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
