@@ -16,6 +16,7 @@
 #include "bpf_lru_list.h"
 #include "map_in_map.h"
 #include <linux/bpf_mem_alloc.h>
+#include <linux/mutex.h>
 
 #define HTAB_CREATE_FLAG_MASK						\
 	(BPF_F_NO_PREALLOC | BPF_F_NO_COMMON_LRU | BPF_F_NUMA_NODE |	\
@@ -129,8 +130,12 @@ struct htab_elem {
 	char key[] __aligned(8);
 };
 
+static bool htab_is_lru(const struct bpf_htab *htab);
+
 static inline bool htab_is_prealloc(const struct bpf_htab *htab)
 {
+	if (htab_is_lru(htab) && htab->elems)
+		return true;
 	return !(htab->map.map_flags & BPF_F_NO_PREALLOC);
 }
 
@@ -387,6 +392,36 @@ static void prealloc_destroy(struct bpf_htab *htab)
 		pcpu_freelist_destroy(&htab->freelist);
 }
 
+/* Global mutex to protect lazy preallocation for LRU_HASH with NO_PREALLOC */
+static DEFINE_MUTEX(lazy_prealloc_mutex);
+
+/* Lazy preallocation for LRU_HASH with NO_PREALLOC */
+/* Performs full preallocation on first use */
+/* Uses global mutex to protect prealloc_init() */
+static int lazy_prealloc_init(struct bpf_htab *htab)
+{
+	int err;
+
+	/* Acquire global mutex to protect prealloc_init() */
+	mutex_lock(&lazy_prealloc_mutex);
+
+	/* Check under lock - only one caller will initialize */
+	if (htab->elems) {
+		mutex_unlock(&lazy_prealloc_mutex);
+		return 0;
+	}
+
+	/* Perform the full prealloc initialization */
+	err = prealloc_init(htab);
+	if (err) {
+		mutex_unlock(&lazy_prealloc_mutex);
+		return err;
+	}
+
+	mutex_unlock(&lazy_prealloc_mutex);
+	return 0;
+}
+
 static int alloc_extra_elems(struct bpf_htab *htab)
 {
 	struct htab_elem *__percpu *pptr, *l_new;
@@ -423,7 +458,6 @@ static int htab_map_alloc_check(union bpf_attr *attr)
 	 * nothing to do with the map's value.
 	 */
 	bool percpu_lru = (attr->map_flags & BPF_F_NO_COMMON_LRU);
-	bool prealloc = !(attr->map_flags & BPF_F_NO_PREALLOC);
 	bool zero_seed = (attr->map_flags & BPF_F_ZERO_SEED);
 	int numa_node = bpf_map_attr_numa_node(attr);
 
@@ -440,9 +474,6 @@ static int htab_map_alloc_check(union bpf_attr *attr)
 
 	if (!lru && percpu_lru)
 		return -EINVAL;
-
-	if (lru && !prealloc)
-		return -ENOTSUPP;
 
 	if (numa_node != NUMA_NO_NODE && (percpu || percpu_lru))
 		return -EINVAL;
@@ -588,7 +619,12 @@ static struct bpf_map *htab_map_alloc(union bpf_attr *attr)
 			if (err)
 				goto free_prealloc;
 		}
+	} else if (lru) {
+		/* LRU + NO_PREALLOC: Skip initialization, elems remains NULL */
+		/* Actual initialization is done by lazy_prealloc_init() on first use */
+		htab->elems = NULL;
 	} else {
+		/* Regular HASH + NO_PREALLOC: Default behavior */
 		err = bpf_mem_alloc_init(&htab->ma, htab->elem_size, false);
 		if (err)
 			goto free_map_locked;
@@ -1250,6 +1286,14 @@ static long htab_lru_map_update_elem(struct bpf_map *map, void *key, void *value
 	b = __select_bucket(htab, hash);
 	head = &b->head;
 
+	/* Lazy preallocation for LRU + NO_PREALLOC */
+	/* Only call if elems is NULL - lazy_prealloc_init will handle synchronization */
+	if (!htab->elems) {
+		ret = lazy_prealloc_init(htab);
+		if (ret)
+			return ret;
+	}
+
 	/* For LRU, we need to alloc before taking bucket's
 	 * spinlock because getting free nodes from LRU may need
 	 * to remove older elements from htab and this removal
@@ -1373,6 +1417,14 @@ static long __htab_lru_percpu_map_update_elem(struct bpf_map *map, void *key,
 
 	b = __select_bucket(htab, hash);
 	head = &b->head;
+
+	/* Lazy preallocation for LRU + NO_PREALLOC */
+	/* Only call if elems is NULL - lazy_prealloc_init will handle synchronization */
+	if (!htab->elems) {
+		ret = lazy_prealloc_init(htab);
+		if (ret)
+			return ret;
+	}
 
 	/* For LRU, we need to alloc before taking bucket's
 	 * spinlock because LRU's elem alloc may need
