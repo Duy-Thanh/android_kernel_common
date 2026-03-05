@@ -214,6 +214,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a14e316_be411dc1",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-05T06:57:38Z",
+      "side": 1,
+      "message": "I agree with David\u0027s comment.\n\n\u003e Do we have reason why zram is something special here?\n\nIs that a fair comparison? The first one (mem alloc) is a deliberate request to allocate X resources, with clear expectations. The second one (writeback/prefetch) is an OP request with unpredictable and unconstrained resources usage.\n\nI like how in-flight sets clear upper boundary and gives us a lot of control. It is also less failure prone, as we pre-allocate a fixed number of requests (with physical page for payload per request) and then just use them. Doing \"alloc_page/kmalloc/bio_alloc\" in a loop adds more points of failure.\n\nWe already have pool of requests and num-in-flight knob in upstream zram for writeback (we upstreamed it in Nov of last year), so let\u0027s just use it for prefetch too?",
+      "parentUuid": "4d5d4460_e55b34de",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
