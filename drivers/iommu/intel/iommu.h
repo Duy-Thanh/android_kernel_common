@@ -762,6 +762,16 @@ struct dmar_domain {
 	atomic_t refcount;
 	unsigned int index;
 	struct pkvm_memcache mc;
+
+	/* Domain uses flush queue(lazy mode) */
+	bool dma_fq;
+
+	/* A pending IOMMU cache flush that should be done before any page donation */
+	bool flush_pending;
+	unsigned long flush_start;
+	unsigned long flush_last;
+	pkvm_spinlock_t flush_lock;
+
 	/*
 	 * Lock to protect the mapping operations
 	 * on this domain.
@@ -773,6 +783,28 @@ struct dmar_domain {
 	struct hlist_node hnode;
 #endif /* !__PKVM_HYP__ */
 };
+
+#ifdef __PKVM_HYP__
+static inline void domain_flush_set(struct dmar_domain *domain, unsigned long start,
+				    unsigned long last)
+{
+	/*
+	 * NOTE: We should be ideally queueing the flush requests.
+	 * For simplicity, Coalesce them even if there is no overlap.
+	 */
+	if (domain->flush_pending) {
+		domain->flush_start = min(domain->flush_start, start);
+		domain->flush_last = max(domain->flush_last, last);
+	} else {
+		domain->flush_start = start;
+		domain->flush_last = last;
+		domain->flush_pending = true;
+	}
+}
+
+void domain_flush_range(struct dmar_domain *domain, unsigned long start,
+			unsigned long last, int ih);
+#endif
 
 #ifndef __PKVM_HYP__
 /*
