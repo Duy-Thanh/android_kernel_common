@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5ed5bb_ab409f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-05T20:34:50Z",
+      "side": 1,
+      "message": "why does this need to be built-in. How about making it a module since it is not needed for most devices? (\u003dm)",
+      "revId": "45da021901dc0797ae9d5b6aadbacfc491c48507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
