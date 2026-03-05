@@ -238,6 +238,30 @@
       },
       "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276f5e9b_0e925a01",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-05T08:03:10Z",
+      "side": 1,
+      "message": "```\nFor writeback, the user has no reason to expect that the operation requires a lot of memory. If the user touches a bunch of memory or allocates a DMA buf, of course that\u0027s going to allocate a lot of memory. But as a user, I would be very surprised if performing zram writeback inexplicably allocated 4GB, or even 128MiB of memory.\n```\n\nFirst, users shouldn\u0027t be surprised because they can see exactly what they are requesting. For instance, if they specify page_indexes\u003d200-300, the scope is clear. If they target \"incompressible\" or \"huge\" pages, they can check mm_stat to see the counts. If they target \"idle\" pages, they can check the status via block_state. In all these cases, the resource requirements are transparent to the user.\n\nSecond, this is a matter of implementation. If we implement the loop like this:\n```\nfor (;;) {\n    page \u003d alloc_pages\n    submit_bio(page); \n}\n```\nThen submit_bio will throttle automatically once all in-flight requests are consumed. If a user believes the backing device allows too much data in-flight (e.g., 128MB), they should tune their device\u0027s queue depth accordingly. The issue with the current writeback implementation is that it attempts to allocate a large array of pages before submission:\n```\nfor (; ;) {\n   pages_array \u003d alloc_pages()\n}\n\nfor (page from page_array) {\n   submit_bio(page);\n}\n```\nThis bypasses existing throttling logic. Instead of using the block layer\u0027s native mechanisms, zram is essentially reinventing the wheel.\n\n```\nPrefetch is a bit different, since we are explicitly pulling data from disk into memory. That said, prefetch occurs during app launch, which is often memory constrained and performance sensitive. So it\u0027s definitely preferable to avoid allocating more memory than we strictly need. With compressed writeback, \narbitrarily queuing io could result in a memory footprint 2-3x larger than is actually necessary (depending on how much of the prefetched data the app actually faults out of zram). That could definitely cause app launch to go into direct reclaim and jank.\n```\n\nAgain, it\u0027s not \"arbitrarily\" queuing I/O. Unlike writeback, the current prefetch implementation performs alloc_page followed immediately by submit_bio. This ensures that the process is strictly governed by the backing device\u0027s queue depth. If the resulting pressure is too high for a specific system, the user can and should adjust their device\u0027s queue settings.\n\n```\nWe already have pool of requests and num-in-flight knob in upstream zram for writeback (we upstreamed it in Nov of last year), so let\u0027s just use it for prefetch too?\n```\n\nI am not opposed to using the existing logic for the sake of consistency. However, my concern is our tendency to make things more complicated than necessary from the outset.\n\nAccumulating complex logic without evidence of real-world issues often leads to a codebase that is difficult to maintain. While I acknowledge that unforeseen issues can occur and that some level of throttling in zram may be justified, I prefer to address these based on real use cases. This allows us to understand the problem better, discuss the best solution, and maintain a clear record in the git history to avoid repeating past mistakes, rather than adding complexity for hypothetical problems.",
+      "parentUuid": "4d5d4460_e55b34de",
+      "range": {
+        "startLine": 1188,
+        "startChar": 0,
+        "endLine": 1215,
+        "endChar": 0
+      },
+      "revId": "41f9b66000690aa7bd9f333b7e751a8fb36e497c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
