@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0324603_aa33eadc",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-06T02:54:20Z",
+      "side": 1,
+      "message": "That\u0027s what I concerned, prefetch is kind of IO call path so I want to avoid triggering the memory reclaiming.\nBut yes, I can use GFP_KERNEL in this version first.",
+      "parentUuid": "848cd905_fac407e1",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a03fa06_a1bc79c6",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 5
