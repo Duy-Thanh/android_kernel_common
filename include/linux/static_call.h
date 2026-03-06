@@ -289,7 +289,7 @@ extern long __static_call_return0(void);
 
 static inline int static_call_init(void) { return 0; }
 
-static inline long __static_call_return0(void)
+static inline __nocfi long __static_call_return0(void)
 {
 	return 0;
 }
