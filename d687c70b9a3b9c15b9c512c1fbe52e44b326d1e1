@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a14659b_49d22be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-06T17:53:59Z",
+      "side": 1,
+      "message": "a small nit: other than that, looks good to me.",
+      "revId": "d687c70b9a3b9c15b9c512c1fbe52e44b326d1e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53da156_b51016de",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-06T17:53:59Z",
+      "side": 1,
+      "message": "I don\u0027t see point of GFP_NOIO, either here since this function will be called always in workqueue context, not any block IO path.",
+      "range": {
+        "startLine": 1069,
+        "startChar": 6,
+        "endLine": 1069,
+        "endChar": 14
+      },
+      "revId": "d687c70b9a3b9c15b9c512c1fbe52e44b326d1e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
