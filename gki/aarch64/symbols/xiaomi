@@ -72,6 +72,18 @@
   __traceiter_android_rvh_swap_bio_charge
   __tracepoint_android_rvh_swap_bio_charge
 
+<<<<<<< PATCH SET (465c45b793d25b90f6490b763109cb727a7208da ANDROID: GKI: update symbol list for xiaomi)
+# required by mi_kernel_monitor.ko
+  __tracepoint_android_vh_swapin_start
+  __traceiter_android_vh_swapin_start
+  __tracepoint_android_vh_swapin_end
+  __traceiter_android_vh_swapin_end
+  __tracepoint_android_vh_swap_writepage_start
+  __traceiter_android_vh_swap_writepage_start
+  __tracepoint_android_vh_swap_writepage_end
+  __traceiter_android_vh_swap_writepage_end
+||||||| BASE      (f41ee68dcfade8f3e8f4a67e4f7056178c6466fd ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+=======
 # required by mi_ext_lru.ko
   mem_cgroup_iter
   __traceiter_android_vh_readahead_add_folio
@@ -90,6 +102,7 @@
   __tracepoint_android_vh_folio_trylock_clear_bypass
   __traceiter_android_vh_filemap_adjust_folio_flags
   __tracepoint_android_vh_filemap_adjust_folio_flags
+>>>>>>> BASE      (c4de9c99445b178d178ec7348db28a39a7dbca98 ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
 
 # required by custom memory policy
   __tracepoint_android_vh_mm_get_zone_mark
