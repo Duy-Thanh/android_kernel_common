@@ -1165,15 +1165,34 @@ static void pkvm_load_eoi_exitmap(struct kvm_vcpu *vcpu, u64 eoi_exit_bitmap0,
 static int pkvm_hwapic_isr_update(struct kvm_vcpu *vcpu, int max_isr)
 {
 	/*
-	 * Validate the passed in max_isr value from the host to make sure it is
-	 * not an exception vector for the pVM for the same security reason with
-	 * the PV interface __pkvm__inject_irq. See comments in the function
-	 * pkvm_inject_irq.
-	 *
-	 * The value -1 is allowed as it represents no interrupt.
+	 * The value -1 represents no interrupt, thus always allow the host to
+	 * update the ISR in this case. For the other values, should do proper
+	 * checks.
 	 */
-	if (pkvm_is_protected_vcpu(vcpu) && max_isr != -1 && max_isr < 32)
-		return -EPERM;
+	if (max_isr != -1) {
+		/*
+		 * This PV interface is used by the host to set the APIC ISR
+		 * state by the host VMM(or supporting nested, but the nested is
+		 * not supported by the pKVM). For a protected APIC, the ISR
+		 * state is protected so not allow the host to update that.
+		 * But the host will recognize the protected apice after the
+		 * vCPU starts running. Before that the host may still use this
+		 * PV interface for the protected apic when reset with value -1
+		 * to indicate no interrupts. So not allow for any other max_isr
+		 * values for the protected apic.
+		 */
+		if (lapic_in_kernel(vcpu) && vcpu->arch.apic->guest_apic_protected)
+			return -EPERM;
+
+		/*
+		 * Validate the passed in max_isr value from the host to make sure it is
+		 * not an exception vector for the pVM for the same security reason with
+		 * the PV interface __pkvm__inject_irq. See comments in the function
+		 * pkvm_inject_irq.
+		 */
+		if (pkvm_is_protected_vcpu(vcpu) && max_isr < 32)
+			return -EPERM;
+	}
 
 	kvm_x86_call(hwapic_isr_update)(vcpu, max_isr);
 
