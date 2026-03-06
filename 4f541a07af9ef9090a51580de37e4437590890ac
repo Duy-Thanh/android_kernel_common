@@ -287,6 +287,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d60741fc_94289786",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-06T17:46:15Z",
+      "side": 1,
+      "message": "I was wrong, zram_prefetch_from_bdev is always from sysfs trigger.",
+      "parentUuid": "5f3ec509_d7bd1d27",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a03fa06_a1bc79c6",
