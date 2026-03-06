@@ -13,6 +13,8 @@
 #include <linux/virtio_pvclock.h>
 #include <linux/workqueue.h>
 #include <asm/pvclock.h>
+#include <linux/hrtimer.h>
+#include <linux/smp.h>
 
 enum virtio_pvclock_vq {
 	VIRTIO_PVCLOCK_VQ_SET_PVCLOCK_PAGE,
@@ -46,6 +48,65 @@ static struct virtio_device_id id_table[] = {
 	{ 0 },
 };
 
+static enum hrtimer_restart fake_hrtimer_cb(struct hrtimer *timer)
+{
+    return HRTIMER_NORESTART;
+}
+
+/* The snapshotting code in WHPX appears to be losing a LAPIC timer interrupt,
+ * and those interrupts are what power hrtimers. This was okay under the 5.10
+ * kernel because it set new interrupts when we updated timekeeping. But under
+ * 6.1, these updates were optimized out, so the lost interrupts stalled the
+ * CPUs. To get snapshotting working again, this little workaround basically
+ * does what the 5.10 kernel did.
+ *
+ * That was the tl;dr. Here are the details:
+ *
+ * timekeeping_inject_sleeptime64 is called by virtio-pvclock when a snapshot
+ * is restored (the restore operation injects sleep time via the virtqueue).
+ * That function in turn calls clock_was_set. Under the 5.10 kernel, this
+ * dispatches an IPI to *all CPUs* (retrigger_next_event) that resets the LAPIC
+ * timer deadline. Thus, if the LAPIC interrupt was lost as part of a
+ * snapshotting operation, a new one is immediately scheduled on restore.
+ *
+ * So what happenend in the 6.1 kernel? hrtimers got optimized. The critical
+ * change, for us, was to clock_was_set. Instead of sending the
+ * retrigger_next_event IPI to every CPU, clock_was_set only sends it to CPUs
+ * with timers that have been reordered by the time base change. This change is
+ * correct on hardware (vritual or otherwise) that isn't losing LAPIC
+ * interrupts.
+ *
+ * The workaround herein just does what the 5.10 kernel did: send an IPI to all
+ * CPUs that forces the LAPIC timer to get reset.
+ *
+ **/
+static void rescue_lapic_timers(void *info)
+{
+    struct hrtimer fake_timer;
+    hrtimer_init(&fake_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL_HARD);
+    fake_timer.function = fake_hrtimer_cb;
+
+    /*
+     * Set the timer to expire immediately. This will cause the LAPIC timer
+     * deadline to be set to now, and the interrupt will immediately fire.
+     * Local lnterrupts are disabled currently, so that interrupt will remain
+     * pending.
+     *
+     * Once we exit this IPI though, local interrupts will be enabled.
+     * That will have the desired effect of waking up the hrtimer interrupt
+     * handler. It will find this fake timer already gone (see below), and then
+     * most critically, it will program the LAPIC timer for the next (real)
+     * timer.
+     */
+    hrtimer_start(&fake_timer, 0, HRTIMER_MODE_REL_HARD);
+
+    /* We don't actually need our timer to run. And if it did, it would
+     * segfault since the timer is on the stack and we'll have returned at that
+     * point.
+     */
+    hrtimer_cancel(&fake_timer);
+}
+
 void update_suspend_time(struct work_struct *work)
 {
 	u64 suspend_ns, suspend_time_delta = 0;
@@ -75,6 +136,7 @@ void update_suspend_time(struct work_struct *work)
 	inject_time = ns_to_timespec64(suspend_time_delta);
 
 	timekeeping_inject_sleeptime64(&inject_time);
+        on_each_cpu(rescue_lapic_timers, NULL, 1);
 
 	dev_info(&vp->vdev->dev, "injected sleeptime: %llu ns\n",
 		 suspend_time_delta);
