@@ -671,6 +671,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
+<<<<<<< HEAD   (64043e140f2c5ec2b0fe287944ca2583ca010d84 UPSTREAM: erofs: fix UAF issue for file-backed mounts w/ dir)
+||||||| BASE   (e8cd2eceb3213175d295e0c9d57a9072f66f84bb ANDROID: Expose futex header for vendor hooks)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio_end);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_expected_ref_count);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio_end);
+>>>>>>> CHANGE (70a08bbd6e9a7157ddb1c53391f9b9aa9e71ba5b ANDROID: vendor hooks:override folio_expected_ref_count() ca)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_oom_victim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_killer_disable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);

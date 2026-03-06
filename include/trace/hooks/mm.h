@@ -671,6 +671,20 @@ DECLARE_HOOK(android_vh_filemap_folio_mapped,
 DECLARE_HOOK(android_vh_folio_remove_rmap_ptes,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< HEAD   (64043e140f2c5ec2b0fe287944ca2583ca010d84 UPSTREAM: erofs: fix UAF issue for file-backed mounts w/ dir)
+||||||| BASE   (e8cd2eceb3213175d295e0c9d57a9072f66f84bb ANDROID: Expose futex header for vendor hooks)
+DECLARE_HOOK(android_vh_filemap_get_folio_end,
+	TP_PROTO(struct address_space *mapping, struct folio *folio),
+	TP_ARGS(mapping, folio));
+=======
+DECLARE_HOOK(android_vh_folio_expected_ref_count,
+	TP_PROTO(struct address_space *mapping, struct folio *folio,
+		int *expected_count),
+	TP_ARGS(mapping, folio, expected_count));
+DECLARE_HOOK(android_vh_filemap_get_folio_end,
+	TP_PROTO(struct address_space *mapping, struct folio *folio),
+	TP_ARGS(mapping, folio));
+>>>>>>> CHANGE (70a08bbd6e9a7157ddb1c53391f9b9aa9e71ba5b ANDROID: vendor hooks:override folio_expected_ref_count() ca)
 DECLARE_HOOK(android_vh_exit_oom_victim,
 	TP_PROTO(struct task_struct *task),
 	TP_ARGS(task));
