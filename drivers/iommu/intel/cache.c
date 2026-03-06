@@ -210,7 +210,19 @@ int cache_tag_assign_domain(struct dmar_domain *domain, u16 did,
 #endif
 
 	ret = cache_tag_assign(domain, did, dev, pasid, CACHE_TAG_IOTLB);
+
+	/*
+	 * Host driver logic assigns cache tags after context/pasid table
+	 * update and after ATS is enabled and ats_enabled flag is set.
+	 * But hypervisor assigns tag during context/pasid table update and
+	 * hence cannot rely on ats_enabled flag. So use ats_supported flag
+	 * instead.
+	 */
+#ifdef __PKVM_HYP__
+	if (ret || !info->ats_supported)
+#else
 	if (ret || !info->ats_enabled)
+#endif
 		return ret;
 
 	ret = cache_tag_assign(domain, did, dev, pasid, CACHE_TAG_DEVTLB);
