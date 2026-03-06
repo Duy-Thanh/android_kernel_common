@@ -263,6 +263,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3ec509_d7bd1d27",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-06T17:41:27Z",
+      "side": 1,
+      "message": "```\nThat\u0027s what I concerned, prefetch is kind of IO call path so I want to avoid triggering the memory reclaiming.\n```\n\nNo, the zram_prefetch_from_bdev is called always under process context on sysfs trigger so it\u0027s not IO call path. No deadlock then.\n\nPlease let me know if zram_prefetch_from_bdev is called somewhere else.",
+      "parentUuid": "1b6113a6_782ebcc2",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a03fa06_a1bc79c6",
