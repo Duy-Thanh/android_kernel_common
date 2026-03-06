@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2a7e2d5_5f0b7482",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-06T03:07:46Z",
+      "side": 1,
+      "message": "I think IO path for zram is the one that enters zram via -\u003esubmit_bio(), in which case we can recursively -\u003esubmit_bio() and deadlock on zram locks (e.g. stream mutex). sysfs callbacks are not on IO path in this regard, I think.",
+      "parentUuid": "d0324603_aa33eadc",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a03fa06_a1bc79c6",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 5
