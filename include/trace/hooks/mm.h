@@ -373,6 +373,12 @@ DECLARE_HOOK(android_vh_free_folio_bypass,
 DECLARE_HOOK(android_vh_split_large_folio_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_filemap_fault_folio_locked,
+	TP_PROTO(struct inode *inode, struct folio *folio, pgoff_t index),
+	TP_ARGS(inode, folio, index));
+DECLARE_HOOK(android_vh_filemap_read_end,
+	TP_PROTO(struct inode *inode, struct folio **folios, unsigned int nr),
+	TP_ARGS(inode, folios, nr));
 DECLARE_HOOK(android_vh_do_read_fault,
 	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
 	TP_ARGS(vmf, fault_around_bytes));
