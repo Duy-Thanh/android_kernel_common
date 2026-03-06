@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa78957d_37ab081f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-06T15:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d29edda4_d3dd383e",
+      "range": {
+        "startLine": 1102,
+        "startChar": 0,
+        "endLine": 1108,
+        "endChar": 2
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7370c91_3d2c864f",
@@ -205,6 +229,30 @@
       "side": 1,
       "message": "So it\u0027s probably both: either -\u003esubmit_bio() path or under IO path locks.",
       "parentUuid": "bd0e45f5_74671fd7",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6113a6_782ebcc2",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-06T15:34:05Z",
+      "side": 1,
+      "message": "Changed to GFP_KERNEL",
+      "parentUuid": "7bdf17fd_2720abbe",
       "range": {
         "startLine": 1152,
         "startChar": 29,
