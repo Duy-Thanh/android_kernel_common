@@ -16,6 +16,24 @@
       "message": "There is a race here I need to fix.",
       "revId": "71201062f6d8841952cdd34bb2fc79401c8c9c02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3725583_3fa6f720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-06T23:12:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e26c390_e17db8bd",
+      "revId": "71201062f6d8841952cdd34bb2fc79401c8c9c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
