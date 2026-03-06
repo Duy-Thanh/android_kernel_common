@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bdf17fd_2720abbe",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-06T03:20:16Z",
+      "side": 1,
+      "message": "So it\u0027s probably both: either -\u003esubmit_bio() path or under IO path locks.",
+      "parentUuid": "bd0e45f5_74671fd7",
+      "range": {
+        "startLine": 1152,
+        "startChar": 29,
+        "endLine": 1152,
+        "endChar": 37
+      },
+      "revId": "4f541a07af9ef9090a51580de37e4437590890ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a03fa06_a1bc79c6",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 5
