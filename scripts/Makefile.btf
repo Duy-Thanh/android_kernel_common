@@ -7,6 +7,7 @@ JOBS := $(patsubst -j%,%,$(filter -j%,$(MAKEFLAGS)))
 
 ifeq ($(call test-le, $(pahole-ver), 125),y)
 
+<<<<<<< HEAD   (e281e23f2fb7eeb91027ec118237db344584ed98 ANDROID: zram: Stop using kernel_read_file_from_path)
 # pahole 1.18 through 1.21 can't handle zero-sized per-CPU vars
 ifeq ($(call test-le, $(pahole-ver), 121),y)
 pahole-flags-$(call test-ge, $(pahole-ver), 118)	+= --skip_encoding_btf_vars
@@ -15,6 +16,18 @@ endif
 pahole-flags-$(call test-ge, $(pahole-ver), 121)	+= --btf_gen_floats
 
 pahole-flags-$(call test-ge, $(pahole-ver), 122)	+= -j1
+||||||| BASE   (72c395024dac5e215136cbff793455f065603b06 Merge tag 'docs-7.0' of git://git.kernel.org/pub/scm/linux/k)
+# pahole 1.18 through 1.21 can't handle zero-sized per-CPU vars
+ifeq ($(call test-le, $(pahole-ver), 121),y)
+pahole-flags-$(call test-ge, $(pahole-ver), 118)	+= --skip_encoding_btf_vars
+endif
+
+pahole-flags-$(call test-ge, $(pahole-ver), 121)	+= --btf_gen_floats
+
+pahole-flags-$(call test-ge, $(pahole-ver), 122)	+= -j$(JOBS)
+=======
+pahole-flags-y                                  	+= --btf_gen_floats -j$(JOBS)
+>>>>>>> BRANCH (a9aabb3b839aba094ed80861054993785c61462c Merge tag 'rust-6.20-7.0' of git://git.kernel.org/pub/scm/li)
 
 pahole-flags-$(call test-ge, $(pahole-ver), 125)	+= --skip_encoding_btf_inconsistent_proto --btf_gen_optimized
 
@@ -25,13 +38,15 @@ pahole-flags-$(call test-ge, $(pahole-ver), 126)  = -j1 --btf_features=encode_fo
 
 pahole-flags-$(call test-ge, $(pahole-ver), 130) += --btf_features=attributes
 
-ifneq ($(KBUILD_EXTMOD),)
-module-pahole-flags-$(call test-ge, $(pahole-ver), 128) += --btf_features=distilled_base
-endif
-
 endif
 
 pahole-flags-$(CONFIG_PAHOLE_HAS_LANG_EXCLUDE)		+= --lang_exclude=rust
 
 export PAHOLE_FLAGS := $(pahole-flags-y)
-export MODULE_PAHOLE_FLAGS := $(module-pahole-flags-y)
+
+resolve-btfids-flags-y :=
+resolve-btfids-flags-$(CONFIG_WERROR) += --fatal_warnings
+resolve-btfids-flags-$(if $(KBUILD_EXTMOD),y) += --distill_base
+resolve-btfids-flags-$(if $(KBUILD_VERBOSE),y) += --verbose
+
+export RESOLVE_BTFIDS_FLAGS := $(resolve-btfids-flags-y)
