@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad40ffa7_5cbe9366",
+        "filename": "drivers/iommu/intel/cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-07T15:37:40Z",
+      "side": 1,
+      "message": "I see at least devtlb_invalidation_with_pasid() and cache_tag_unassign_domain() still use info-\u003eats_enabled instead of info-\u003eats_supported, whereas AFAICS in some cases they are used in setup path as well, not just in teardown path, e.g.:\n\n* iommu_pasid_setup_fl() -\u003e intel_pasid_replace_first_level() -\u003e intel_pasid_flush_present() -\u003e devtlb_invalidation_with_pasid()\n\n* iommu_pasid_setup_fl() -\u003e intel_pasid_replace_first_level() -\u003e pkvm_put_domain_cache_tag_unassign() -\u003e cache_tag_unassign_domain()\n\n(Although I guess we don\u0027t really use the replace path in our current uses cases, but still we do claim to support it...)\n\nSo to address that easily, maybe we should just do `info.ats_enabled \u003d info.ats_supported` in our hypercalls implementations, instead of adding this #ifdef here?\n\nAnd BTW, if we do that, we can also easily do the same in the teardown hypercalls (clear_ce and pasid_teardown), and thus can remove ats_enabled from those hypercalls\u0027 params as well, for consistency?",
+      "revId": "518a7a493552d33d0f29f293d69b9f57c021f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e18cbc_94cdfa6c",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-07T15:37:40Z",
+      "side": 1,
+      "message": "nit: unneeded extra parentheses?",
+      "revId": "518a7a493552d33d0f29f293d69b9f57c021f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
