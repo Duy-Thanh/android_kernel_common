@@ -172,8 +172,33 @@ bool spi_mem_default_supports_op(struct spi_mem *mem,
 		if (!spi_mem_controller_is_capable(ctlr, dtr))
 			return false;
 
+<<<<<<< HEAD   (0d6f6ae3f76b1f57f82dd5a02cbe5f94ab2838a1 Merge 6.12.74 into android16-6.12-lts)
 		if (op->cmd.nbytes != 2)
 			return false;
+||||||| BASE   (444b39ef6108313e8452010b22aaba588e8fb92b Linux 6.12.74)
+		if (op->data.swap16 && !spi_mem_controller_is_capable(ctlr, swap16))
+			return false;
+
+		if (op->cmd.nbytes != 2)
+			return false;
+=======
+		if (op->data.swap16 && !spi_mem_controller_is_capable(ctlr, swap16))
+			return false;
+
+		/* Extra 8D-8D-8D limitations */
+		if (op->cmd.dtr && op->cmd.buswidth == 8) {
+			if (op->cmd.nbytes != 2)
+				return false;
+
+			if ((op->addr.nbytes % 2) ||
+			    (op->dummy.nbytes % 2) ||
+			    (op->data.nbytes % 2)) {
+				dev_err(&ctlr->dev,
+					"Even byte numbers not allowed in octal DTR operations\n");
+				return false;
+			}
+		}
+>>>>>>> BRANCH (c1924e059c728edf4138c6343fafb2c6d234ac35 Linux 6.12.75)
 	} else {
 		if (op->cmd.nbytes != 1)
 			return false;
@@ -600,8 +625,17 @@ spi_mem_dirmap_create(struct spi_mem *mem,
 
 	desc->mem = mem;
 	desc->info = *info;
-	if (ctlr->mem_ops && ctlr->mem_ops->dirmap_create)
+	if (ctlr->mem_ops && ctlr->mem_ops->dirmap_create) {
+		ret = spi_mem_access_start(mem);
+		if (ret) {
+			kfree(desc);
+			return ERR_PTR(ret);
+		}
+
 		ret = ctlr->mem_ops->dirmap_create(desc);
+
+		spi_mem_access_end(mem);
+	}
 
 	if (ret) {
 		desc->nodirmap = true;
