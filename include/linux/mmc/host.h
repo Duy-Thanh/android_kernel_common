@@ -64,6 +64,8 @@ struct mmc_ios {
 #define MMC_TIMING_MMC_DDR52	8
 #define MMC_TIMING_MMC_HS200	9
 #define MMC_TIMING_MMC_HS400	10
+#define MMC_TIMING_SD_EXP	11
+#define MMC_TIMING_SD_EXP_1_2V	12
 
 	unsigned char	signal_voltage;		/* signalling voltage (1.8V or 3.3V) */
 
@@ -178,8 +180,14 @@ struct mmc_host_ops {
 	int	(*multi_io_quirk)(struct mmc_card *card,
 				  unsigned int direction, int blk_size);
 
+<<<<<<< HEAD   (479410d5db2415ba01e1808bb181750d76d36ba5 Revert "i3c: remove i2c board info from i2c_dev_desc")
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+||||||| BASE   (aed2302be3fdbe13287165481352b4797484b253 platform/chrome: cros_ec_lightbar: Fix response size initial)
+=======
+	/* Initialize an SD express card, mandatory for MMC_CAP2_SD_EXP. */
+	int	(*init_sd_express)(struct mmc_host *host, struct mmc_ios *ios);
+>>>>>>> BRANCH (4286cd7adbf2ad8c0b4bcaa3d2a09eb11a233d53 Revert "mmc: rtsx_pci_sdmmc: increase power-on settling dela)
 };
 
 struct mmc_cqe_ops {
@@ -366,6 +374,8 @@ struct mmc_host {
 #define MMC_CAP2_HS200_1_2V_SDR	(1 << 6)        /* can support */
 #define MMC_CAP2_HS200		(MMC_CAP2_HS200_1_8V_SDR | \
 				 MMC_CAP2_HS200_1_2V_SDR)
+#define MMC_CAP2_SD_EXP		(1 << 7)	/* SD express via PCIe */
+#define MMC_CAP2_SD_EXP_1_2V	(1 << 8)	/* SD express 1.2V */
 #define MMC_CAP2_CD_ACTIVE_HIGH	(1 << 10)	/* Card-detect signal active high */
 #define MMC_CAP2_RO_ACTIVE_HIGH	(1 << 11)	/* Write-protect signal active high */
 #define MMC_CAP2_NO_PRESCAN_POWERUP (1 << 14)	/* Don't power up before scan */
