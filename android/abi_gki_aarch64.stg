@@ -310121,6 +310121,14 @@ function {
   parameter_id: 0x054f691a
 }
 function {
+  id: 0x11dfe0be
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0a63398f
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x6720d32f
+  parameter_id: 0x0b0164a7
+}
+function {
   id: 0x11e015cb
   return_type_id: 0x48b5725f
   parameter_id: 0x0665e6b6
@@ -441828,6 +441836,15 @@ elf_symbol {
   full_name: "wake_up_var"
 }
 elf_symbol {
+  id: 0x3d06c7a3
+  name: "wakeup_kswapd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xec6fd82d
+  type_id: 0x11dfe0be
+  full_name: "wakeup_kswapd"
+}
+elf_symbol {
   id: 0x5d14316b
   name: "wakeup_source_add"
   is_defined: true
@@ -452341,6 +452358,7 @@ interface {
   symbol_id: 0x9a87f32b
   symbol_id: 0x63928faf
   symbol_id: 0xecc7b6fc
+  symbol_id: 0x3d06c7a3
   symbol_id: 0x5d14316b
   symbol_id: 0x0094f87c
   symbol_id: 0x4e0971d6
