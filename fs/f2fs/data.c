@@ -386,14 +386,32 @@ static void f2fs_write_end_io(struct bio *bio)
 				folio->index != nid_of_node(&folio->page));
 
 		dec_page_count(sbi, type);
+<<<<<<< HEAD   (e18314ffb38335e07537ea69e3e0b209911ce9c9 Merge 1ff415eef513 ("f2fs: fix to avoid mapping wrong physic)
 		if (f2fs_in_warm_node_list(sbi, folio))
 			f2fs_del_fsync_node_entry(sbi, &folio->page);
 		clear_page_private_gcing(&folio->page);
 		folio_end_writeback(folio);
-	}
-	if (!get_pages(sbi, F2FS_WB_CP_DATA) &&
+||||||| BASE   (1ff415eef513bf12deb058fc50d57788c46c48e6 f2fs: fix to avoid mapping wrong physical block for swapfile)
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+=======
+
+		/*
+		 * we should access sbi before end_page_writeback() to
+		 * avoid racing w/ kill_f2fs_super()
+		 */
+		if (type == F2FS_WB_CP_DATA && !get_pages(sbi, type) &&
 				wq_has_sleeper(&sbi->cp_wait))
-		wake_up(&sbi->cp_wait);
+			wake_up(&sbi->cp_wait);
+
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+>>>>>>> BRANCH (cf4a9e1bc8129eb63fda5f8bdcd8d87f0bd76f42 f2fs: fix to avoid UAF in f2fs_write_end_io())
+	}
 
 	bio_put(bio);
 }
