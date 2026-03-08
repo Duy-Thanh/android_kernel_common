@@ -1636,8 +1636,12 @@ struct f2fs_sb_info {
 #ifdef CONFIG_BLK_DEV_ZONED
 	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
 	unsigned int max_open_zones;		/* max open zone resources of the zoned device */
+<<<<<<< HEAD   (79ba588d4d5a5c2c9a2660aeb664307446940006 Merge acc2c97fc000 ("f2fs: fix to avoid UAF in f2fs_write_en)
 	/* For adjust the priority writing position of data in zone UFS */
 	unsigned int blkzone_alloc_policy;
+||||||| BASE   (acc2c97fc0005846e5cf11b5ba3189fef130c9b3 f2fs: fix to avoid UAF in f2fs_write_end_io())
+=======
+>>>>>>> BRANCH (20a8bad29d18127890f7292f0638075103a21076 f2fs: fix zoned block device information initialization)
 #endif
 
 	/* for node-related operations */

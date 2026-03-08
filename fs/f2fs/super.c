@@ -4396,7 +4396,11 @@ static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
 	sbi->aligned_blksize = true;
 #ifdef CONFIG_BLK_DEV_ZONED
 	sbi->max_open_zones = UINT_MAX;
+<<<<<<< HEAD   (79ba588d4d5a5c2c9a2660aeb664307446940006 Merge acc2c97fc000 ("f2fs: fix to avoid UAF in f2fs_write_en)
 	sbi->blkzone_alloc_policy = BLKZONE_ALLOC_PRIOR_SEQ;
+||||||| BASE   (acc2c97fc0005846e5cf11b5ba3189fef130c9b3 f2fs: fix to avoid UAF in f2fs_write_end_io())
+=======
+>>>>>>> BRANCH (20a8bad29d18127890f7292f0638075103a21076 f2fs: fix zoned block device information initialization)
 #endif
 
 	for (i = 0; i < max_devices; i++) {
