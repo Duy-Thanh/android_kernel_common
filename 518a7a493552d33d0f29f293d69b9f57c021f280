@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7226cda8_c3e62289",
+        "filename": "drivers/iommu/intel/cache.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-03-08T03:13:04Z",
+      "side": 1,
+      "message": "Nice catch, fixed as you suggested!",
+      "parentUuid": "ad40ffa7_5cbe9366",
+      "revId": "518a7a493552d33d0f29f293d69b9f57c021f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9e18cbc_94cdfa6c",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-07T15:37:40Z",
       "side": 1,
       "message": "nit: unneeded extra parentheses?",
+      "revId": "518a7a493552d33d0f29f293d69b9f57c021f280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e45a558_a0117a12",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-03-08T03:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9e18cbc_94cdfa6c",
       "revId": "518a7a493552d33d0f29f293d69b9f57c021f280",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
