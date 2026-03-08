@@ -1751,8 +1751,13 @@ static int __write_node_page(struct page *page, bool atomic, bool *submitted,
 		goto redirty_out;
 	}
 
-	if (atomic && !test_opt(sbi, NOBARRIER))
-		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
+	if (atomic) {
+		if (!test_opt(sbi, NOBARRIER))
+			fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
+		if (IS_INODE(page))
+			set_dentry_mark(page,
+				f2fs_need_dentry_mark(sbi, ino_of_node(page)));
+	}
 
 	/* should add to global list before clearing PAGECACHE status */
 	if (f2fs_in_warm_node_list(sbi, folio)) {
@@ -1899,9 +1904,20 @@ continue_unlock:
 				if (IS_INODE(&folio->page)) {
 					if (is_inode_flag_set(inode,
 								FI_DIRTY_INODE))
+<<<<<<< HEAD   (718846fc300d62db3a0d3cadab4215d003d938ef Merge cf4a9e1bc812 ("f2fs: fix to avoid UAF in f2fs_write_en)
 						f2fs_update_inode(inode, &folio->page);
 					set_dentry_mark(&folio->page,
 						f2fs_need_dentry_mark(sbi, ino));
+||||||| BASE   (cf4a9e1bc8129eb63fda5f8bdcd8d87f0bd76f42 f2fs: fix to avoid UAF in f2fs_write_end_io())
+						f2fs_update_inode(inode, page);
+					set_dentry_mark(page,
+						f2fs_need_dentry_mark(sbi, ino));
+=======
+						f2fs_update_inode(inode, page);
+					if (!atomic)
+						set_dentry_mark(page,
+							f2fs_need_dentry_mark(sbi, ino));
+>>>>>>> BRANCH (962c167b0f262b9962207fbeaa531721d55ea00e f2fs: fix IS_CHECKPOINTED flag inconsistency issue caused by)
 				}
 				/* may be written by other thread */
 				if (!folio_test_dirty(folio))
