@@ -223,6 +223,7 @@ static inline void icmp_xmit_unlock(struct sock *sk)
 	spin_unlock(&sk->sk_lock.slock);
 }
 
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
 int sysctl_icmp_msgs_per_sec __read_mostly = 1000;
 int sysctl_icmp_msgs_burst __read_mostly = 50;
 
@@ -234,14 +235,26 @@ static struct {
 	.lock		= __SPIN_LOCK_UNLOCKED(icmp_global.lock),
 };
 
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+int sysctl_icmp_msgs_per_sec __read_mostly = 1000;
+int sysctl_icmp_msgs_burst __read_mostly = 50;
+
+static struct {
+	atomic_t	credit;
+	u32		stamp;
+} icmp_global;
+
+=======
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 /**
  * icmp_global_allow - Are we allowed to send one more ICMP message ?
+ * @net: network namespace
  *
  * Uses a token bucket to limit our ICMP messages to ~sysctl_icmp_msgs_per_sec.
  * Returns false if we reached the limit and can not send another packet.
  * Note: called with BH disabled
  */
-bool icmp_global_allow(void)
+bool icmp_global_allow(struct net *net)
 {
 	u32 credit, delta, incr = 0, now = (u32)jiffies;
 	bool rc = false;
@@ -250,10 +263,51 @@ bool icmp_global_allow(void)
 	 * without taking the spinlock. The READ_ONCE() are paired
 	 * with the following WRITE_ONCE() in this same function.
 	 */
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
 	if (!READ_ONCE(icmp_global.credit)) {
 		delta = min_t(u32, now - READ_ONCE(icmp_global.stamp), HZ);
 		if (delta < HZ / 50)
 			return false;
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+	if (atomic_read(&icmp_global.credit) > 0)
+		return true;
+
+	now = jiffies;
+	oldstamp = READ_ONCE(icmp_global.stamp);
+	delta = min_t(u32, now - oldstamp, HZ);
+	if (delta < HZ / 50)
+		return false;
+
+	incr = READ_ONCE(sysctl_icmp_msgs_per_sec) * delta / HZ;
+	if (!incr)
+		return false;
+
+	if (cmpxchg(&icmp_global.stamp, oldstamp, now) == oldstamp) {
+		old = atomic_read(&icmp_global.credit);
+		do {
+			new = min(old + incr, READ_ONCE(sysctl_icmp_msgs_burst));
+		} while (!atomic_try_cmpxchg(&icmp_global.credit, &old, new));
+=======
+	if (atomic_read(&net->ipv4.icmp_global_credit) > 0)
+		return true;
+
+	now = jiffies;
+	oldstamp = READ_ONCE(net->ipv4.icmp_global_stamp);
+	delta = min_t(u32, now - oldstamp, HZ);
+	if (delta < HZ / 50)
+		return false;
+
+	incr = READ_ONCE(net->ipv4.sysctl_icmp_msgs_per_sec);
+	incr = div_u64((u64)incr * delta, HZ);
+	if (!incr)
+		return false;
+
+	if (cmpxchg(&net->ipv4.icmp_global_stamp, oldstamp, now) == oldstamp) {
+		old = atomic_read(&net->ipv4.icmp_global_credit);
+		do {
+			new = min(old + incr, READ_ONCE(net->ipv4.sysctl_icmp_msgs_burst));
+		} while (!atomic_try_cmpxchg(&net->ipv4.icmp_global_credit, &old, new));
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 	}
 
 	spin_lock(&icmp_global.lock);
@@ -278,6 +332,30 @@ bool icmp_global_allow(void)
 }
 EXPORT_SYMBOL(icmp_global_allow);
 
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+void icmp_global_consume(void)
+{
+	int credits = get_random_u32_below(3);
+
+	/* Note: this might make icmp_global.credit negative. */
+	if (credits)
+		atomic_sub(credits, &icmp_global.credit);
+}
+EXPORT_SYMBOL(icmp_global_consume);
+
+=======
+void icmp_global_consume(struct net *net)
+{
+	int credits = get_random_u32_below(3);
+
+	/* Note: this might make icmp_global.credit negative. */
+	if (credits)
+		atomic_sub(credits, &net->ipv4.icmp_global_credit);
+}
+EXPORT_SYMBOL(icmp_global_consume);
+
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 static bool icmpv4_mask_allow(struct net *net, int type, int code)
 {
 	if (type > NR_ICMP_TYPES)
@@ -299,7 +377,15 @@ static bool icmpv4_global_allow(struct net *net, int type, int code)
 	if (icmpv4_mask_allow(net, type, code))
 		return true;
 
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
 	if (icmp_global_allow())
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+	if (icmp_global_allow()) {
+		*apply_ratelimit = true;
+=======
+	if (icmp_global_allow(net)) {
+		*apply_ratelimit = true;
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 		return true;
 
 	return false;
@@ -330,6 +416,18 @@ static bool icmpv4_xrlim_allow(struct net *net, struct rtable *rt,
 				   READ_ONCE(net->ipv4.sysctl_icmp_ratelimit));
 	rcu_read_unlock();
 out:
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+	if (!rc)
+		__ICMP_INC_STATS(net, ICMP_MIB_RATELIMITHOST);
+	else
+		icmp_global_consume();
+=======
+	if (!rc)
+		__ICMP_INC_STATS(net, ICMP_MIB_RATELIMITHOST);
+	else
+		icmp_global_consume(net);
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 	return rc;
 }
 
@@ -1504,6 +1602,8 @@ static int __net_init icmp_sk_init(struct net *net)
 	net->ipv4.sysctl_icmp_ratelimit = 1 * HZ;
 	net->ipv4.sysctl_icmp_ratemask = 0x1818;
 	net->ipv4.sysctl_icmp_errors_use_inbound_ifaddr = 0;
+	net->ipv4.sysctl_icmp_msgs_per_sec = 1000;
+	net->ipv4.sysctl_icmp_msgs_burst = 50;
 
 	return 0;
 }

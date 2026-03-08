@@ -180,7 +180,15 @@ static bool icmpv6_global_allow(struct net *net, int type)
 	if (icmpv6_mask_allow(net, type))
 		return true;
 
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
 	if (icmp_global_allow())
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+	if (icmp_global_allow()) {
+		*apply_ratelimit = true;
+=======
+	if (icmp_global_allow(net)) {
+		*apply_ratelimit = true;
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 		return true;
 
 	return false;
@@ -224,6 +232,20 @@ static bool icmpv6_xrlim_allow(struct sock *sk, u8 type,
 		res = inet_peer_xrlim_allow(peer, tmo);
 		rcu_read_unlock();
 	}
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+	if (!res)
+		__ICMP6_INC_STATS(net, ip6_dst_idev(dst),
+				  ICMP6_MIB_RATELIMITHOST);
+	else
+		icmp_global_consume();
+=======
+	if (!res)
+		__ICMP6_INC_STATS(net, ip6_dst_idev(dst),
+				  ICMP6_MIB_RATELIMITHOST);
+	else
+		icmp_global_consume(net);
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 	dst_release(dst);
 	return res;
 }

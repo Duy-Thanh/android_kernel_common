@@ -776,9 +776,20 @@ static inline void ip_cmsg_recv(struct msghdr *msg, struct sk_buff *skb)
 	ip_cmsg_recv_offset(msg, skb->sk, skb, 0, 0);
 }
 
+<<<<<<< HEAD   (011ba0d11c3d63ccde7ab514a5ccabe2f26b4ed2 Revert "nfc: hci: shdlc: Stop timers and work before freeing)
 bool icmp_global_allow(void);
 extern int sysctl_icmp_msgs_per_sec;
 extern int sysctl_icmp_msgs_burst;
+||||||| BASE   (721eb342d9ba19bad5c4815ea3921465158b7362 macvlan: observe an RCU grace period in macvlan_common_newli)
+bool icmp_global_allow(void);
+void icmp_global_consume(void);
+
+extern int sysctl_icmp_msgs_per_sec;
+extern int sysctl_icmp_msgs_burst;
+=======
+bool icmp_global_allow(struct net *net);
+void icmp_global_consume(struct net *net);
+>>>>>>> BRANCH (89ebdf2d4fb4fc57349fba42365971e0f7d431b1 icmp: prevent possible overflow in icmp_global_allow())
 
 #ifdef CONFIG_PROC_FS
 int ip_misc_proc_init(void);
