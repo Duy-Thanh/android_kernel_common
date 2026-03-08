@@ -63,6 +63,30 @@
       },
       "revId": "d687c70b9a3b9c15b9c512c1fbe52e44b326d1e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360ff24f_4be7b2fc",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-08T10:31:37Z",
+      "side": 1,
+      "message": "The test was on linux-next: GFP_KERNEL allocation under slot-lock on a swap zram device.",
+      "parentUuid": "d569cf7d_bc627a6f",
+      "range": {
+        "startLine": 1069,
+        "startChar": 6,
+        "endLine": 1069,
+        "endChar": 14
+      },
+      "revId": "d687c70b9a3b9c15b9c512c1fbe52e44b326d1e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
