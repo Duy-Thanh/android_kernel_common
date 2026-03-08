@@ -77,6 +77,37 @@
     },
     {
       "submitRequirement": {
+        "name": "BCID-Exit-Gate-Verified",
+        "description": {
+          "value": "BCID Exit Gate verification must be provided by the Exit Gate service."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:bcid-exit-gate-applicable_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "label:BCID-Exit-Gate-Verified\u003dMAX\u0026user\u003ddevtools-gerritcodereview-exitgate"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:bcid-exit-gate-applicable_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:bcid-exit-gate-applicable_gerrit"],"atomExplanations":{"value":{"is:bcid-exit-gate-applicable_gerrit":""}}}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:BCID-Exit-Gate-Verified=MAX&user=devtools-gerritcodereview-exitgate"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[],"atomExplanations":{"value":null}}
+      },
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "9a378e600e7db9f9827dbf66e4fe5b6a0fc651ae",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
         "name": "Build-Team-Review",
         "description": {
           "value": "Build team review is required"
@@ -246,6 +277,43 @@
       },
       "overrideExpressionResult": {
         "value": {"expression":{"expressionString":"is:android_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR label:Build-Cop-Override=+1 OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers","label:Build-Cop-Override=+1","is:pure-revert","ownerin:mdb/android-triage-xwf-extended-access-team-policy"],"atomExplanations":{"value":{"is:android_exemptedusers":"","branch:\"^refs/heads/cherrypick-temp-.*\"":"","is:android-cherry-pick_exemptedusers":"","label:Build-Cop-Override=+1":"","is:pure-revert":"","ownerin:mdb/android-triage-xwf-extended-access-team-policy":""}}}
+      },
+      "patchSetCommitId": "9a378e600e7db9f9827dbf66e4fe5b6a0fc651ae",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    },
+    {
+      "submitRequirement": {
+        "name": "Low-Coverage-Reason-Format",
+        "description": {
+          "value": "Enforces the standard format for the Low-Coverage-Reason tag in commit messages."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "message:\"^.*Low-Coverage-Reason:.*\""
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "message:\"^.*Low-Coverage-Reason:[ \t]*(REFACTOR_ONLY|DEBUG_ONLY|UNSUPPORTED_FLAG_TYPE|TEST_IN_POSTSUBMIT|CODE_NOT_TESTABLE|INFRA_GAP[ \t]*b/[0-9]+).*\""
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override\u003d+1 AND is:pure-revert AND -label:Coverage-Verified\u003dMIN) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"
+          }
+        },
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"message:\"^.*Low-Coverage-Reason:.*\""},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["message:\"^.*Low-Coverage-Reason:.*\""],"atomExplanations":{"value":{"message:\"^.*Low-Coverage-Reason:.*\"":""}}}
+      },
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"message:\"^.*Low-Coverage-Reason:[ \t]*(REFACTOR_ONLY|DEBUG_ONLY|UNSUPPORTED_FLAG_TYPE|TEST_IN_POSTSUBMIT|CODE_NOT_TESTABLE|INFRA_GAP[ \t]*b/[0-9]+).*\""},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[],"atomExplanations":{"value":null}}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"is:android_exemptedusers OR is:android-but-lint_exemptedusers OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers) OR (label:Build-Cop-Override=+1 AND is:pure-revert AND -label:Coverage-Verified=MIN) OR (ownerin:mdb/android-triage-xwf-extended-access-team-policy AND is:pure-revert)"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[],"atomExplanations":{"value":null}}
       },
       "patchSetCommitId": "9a378e600e7db9f9827dbf66e4fe5b6a0fc651ae",
       "legacy": {
