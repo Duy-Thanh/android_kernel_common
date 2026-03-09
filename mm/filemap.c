@@ -1007,6 +1007,7 @@ int filemap_add_folio(struct address_space *mapping, struct folio *folio,
 		WARN_ON_ONCE(folio_test_active(folio));
 		if (!(gfp & __GFP_WRITE) && shadow) {
 			workingset_refault(folio, shadow);
+<<<<<<< HEAD   (7363accb86b4356c009ed0feb260a483a31cfbed ANDROID: kleaf: fix build issue with the CI)
 			trace_android_vh_refault_filemap_add_folio(folio, shadow, gfp, &ret);
 			if (unlikely(ret)) {
 				__filemap_remove_folio(folio, shadow);
@@ -1014,6 +1015,10 @@ int filemap_add_folio(struct address_space *mapping, struct folio *folio,
 				return ret;
 			}
 		}
+||||||| BASE   (4399c146eb380d2cd6e32433aaa9679db016de5d ANDROID: Add vendor hook for tracking folios during readahea)
+=======
+		trace_android_vh_filemap_adjust_folio_flags(mapping, folio, index);
+>>>>>>> CHANGE (022903b4735d089a3f84aa9db325a26ebe2927ae ANDROID: vendor_hook: Added hooks and a function to handle s)
 		folio_add_lru(folio);
 	}
 	return ret;

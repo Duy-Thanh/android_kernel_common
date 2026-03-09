@@ -582,8 +582,39 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_folio_trylock_result);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
+<<<<<<< HEAD   (7363accb86b4356c009ed0feb260a483a31cfbed ANDROID: kleaf: fix build issue with the CI)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_alloc_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmabuf_page_pool_free_bypass);
+||||||| BASE   (4399c146eb380d2cd6e32433aaa9679db016de5d ANDROID: Add vendor hook for tracking folios during readahea)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_readahead_add_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_count_workingset_refault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_evaluate_task_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_readahead_add_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_skip_activate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_adjust_folio_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_count_workingset_refault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_evaluate_task_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
+>>>>>>> CHANGE (022903b4735d089a3f84aa9db325a26ebe2927ae ANDROID: vendor_hook: Added hooks and a function to handle s)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
