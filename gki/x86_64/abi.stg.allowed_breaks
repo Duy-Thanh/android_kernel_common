@@ -1,1 +1,23 @@
 # See http://go/approve-abi-break
+
+variable symbol 'struct static_call_key __SCK__tp_func_dma_fence_emit' changed
+  CRC changed from 0xb5da0604 to 0xe05fd40c
+
+variable symbol 'struct static_call_key __SCK__tp_func_gpu_mem_total' changed
+  CRC changed from 0xb5da0604 to 0xe05fd40c
+
+variable symbol 'struct static_call_key __SCK__tp_func_xdp_exception' changed
+  CRC changed from 0x4073a1ad to 0xfe1c0726
+
+... 2806 omitted; 2809 symbols have only CRC changes
+
+type 'struct dentry_operations' changed
+  member changed from 'void(* d_canonical_path)(const struct path*, struct path*)' to 'int(* d_canonical_path)(const struct path*, struct path*)'
+    type changed from 'void(*)(const struct path*, struct path*)' to 'int(*)(const struct path*, struct path*)'
+      pointed-to type changed from 'void(const struct path*, struct path*)' to 'int(const struct path*, struct path*)'
+        return type changed from 'void' to 'int'
+
+type 'enum bpf_prog_type' changed
+  enumerator 'BPF_PROG_TYPE_FUSE' (33) was added
+  enumerator '__MAX_BPF_PROG_TYPE' value changed from 33 to 34
+
