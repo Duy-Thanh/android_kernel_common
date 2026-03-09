@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a92c8e_e35699b8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-09T19:29:23Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:BLOCK_COMMENT_STYLE: Block comments should align the * on each line\n\nWARNING:BLOCK_COMMENT_STYLE: Block comments should align the * on each line",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 0
+      },
+      "revId": "f4c4c65eceb7268535c168ae4c8e9d63830b2158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
