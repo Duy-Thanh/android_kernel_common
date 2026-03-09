@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f497871d_8ce2e554",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-09T17:31:37Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/31f505dc70331243fbb54af868c14bb5f44a15bc) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d31f505dc70331243fbb54af868c14bb5f44a15bc).\n\n```\n      ## kernel/trace/ftrace.c ##\n     @@ kernel/trace/ftrace.c: static int cache_mod(struct trace_array *tr,\n    - \treturn ftrace_add_mod(tr, func, module, enable);\n    + \treturn ret;\n      }\n      \n     -static int\n    @@ kernel/trace/ftrace.c: static void ftrace_update_trampoline(struct ftrace_ops *o\n      }\n     \n      ## kernel/trace/trace.c ##\n    -@@ kernel/trace/trace.c: out:\n    +@@ kernel/trace/trace.c: out_free_buffer_mask:\n      \treturn ret;\n      }\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8086ab33_4b643856",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-09T17:31:37Z",
+      "side": 1,
+      "message": "Since this doesn\u0027t quite match the upstream change, should this be BACKPORT?",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8134f35c_0193a5b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-09T17:31:37Z",
+      "side": 1,
+      "message": "Need some annotation here why the patch doesn\u0027t match whats upstream.",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
