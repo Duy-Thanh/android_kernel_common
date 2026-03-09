@@ -631,23 +631,16 @@ static bool range_is_memory(u64 start, u64 end)
 	return is_in_mem_range(end - 1, &r);
 }
 
-static inline int __host_stage2_idmap(u64 start, u64 end,
-				      enum kvm_pgtable_prot prot,
-				      bool update_iommu)
+static void __host_stage2_idmap_complete(enum kvm_pgtable_prot prot)
 {
-	int ret;
+	if ((prot & KVM_PGTABLE_PROT_RW) != KVM_PGTABLE_PROT_RW)
+		pkvm_sme_dvmsync_fw_call();
+}
 
-	ret = kvm_pgtable_stage2_map(&host_mmu.pgt, start, end - start, start,
-				     prot, &host_s2_pool, 0);
-	if (ret)
-		return ret;
-
-	if (update_iommu) {
-		kvm_iommu_host_stage2_idmap(start, end, prot);
-		kvm_iommu_host_stage2_idmap_complete(!!prot);
-	}
-
-	return 0;
+static inline int __host_stage2_idmap(u64 start, u64 end, enum kvm_pgtable_prot prot)
+{
+	return kvm_pgtable_stage2_map(&host_mmu.pgt, start, end - start, start,
+				      prot, &host_s2_pool, 0);
 }
 
 /*
@@ -714,7 +707,19 @@ int host_stage2_idmap_locked(phys_addr_t addr, u64 size,
 			     enum kvm_pgtable_prot prot,
 			     bool update_iommu)
 {
-	return host_stage2_try(__host_stage2_idmap, addr, addr + size, prot, update_iommu);
+	int ret = host_stage2_try(__host_stage2_idmap, addr, addr + size, prot);
+
+	if (ret)
+		return ret;
+
+	__host_stage2_idmap_complete(prot);
+
+	if (update_iommu) {
+		kvm_iommu_host_stage2_idmap(addr, addr + size, prot);
+		kvm_iommu_host_stage2_idmap_complete(!!prot);
+	}
+
+	return 0;
 }
 
 #define KVM_MAX_OWNER_ID               FIELD_MAX(KVM_INVALID_PTE_OWNER_MASK)
@@ -740,10 +745,15 @@ enum host_set_page_state_flags {
 
 static void __host_stage2_set_owner_complete(u8 owner_id, enum host_set_page_state_flags flags)
 {
+	bool is_memory = !(flags & HOST_SET_IS_MMIO);
+	bool map = owner_id == PKVM_ID_HOST;
+
 	hyp_assert_lock_held(&host_mmu.lock);
 
 	if (!(flags & HOST_SET_NO_IOMMU_UPDATE))
-		kvm_iommu_host_stage2_idmap_complete(owner_id == PKVM_ID_HOST);
+		kvm_iommu_host_stage2_idmap_complete(map);
+
+	__host_stage2_idmap_complete(map ? default_host_prot(is_memory) : 0);
 }
 
 static int __host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_id,
@@ -1673,7 +1683,7 @@ unlock:
 }
 
 /*
- * Rejects MMIO regions and does not update the IOMMU. Use with care!
+ * Rejects MMIO regions and is unsafe. Use with care!
  */
 int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 {
@@ -1693,8 +1703,9 @@ int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 	if (ret)
 		goto unlock;
 
+	/* HOST_SET_NO_COMPLETE to skip pkvm_sme_dvmsync_fw_call() */
 	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_FFA, 0,
-					       HOST_SET_NO_IOMMU_UPDATE));
+					       HOST_SET_NO_IOMMU_UPDATE | HOST_SET_NO_COMPLETE));
 
 unlock:
 	host_unlock_component();
@@ -1802,8 +1813,12 @@ update:
 						     PKVM_ID_PROTECTED,
 						     PKVM_MODULE_OWNED_PAGE, flags);
 	} else {
-		ret = host_stage2_idmap_locked(
-			addr, nr_pages << PAGE_SHIFT, prot, update_iommu);
+		/* !update_iommu is not fully safe but fast. It also skips dvmsync */
+		if (!update_iommu)
+			ret = host_stage2_try(__host_stage2_idmap, addr,
+					      addr + (nr_pages << PAGE_SHIFT), prot);
+		else
+			ret = host_stage2_idmap_locked(addr, nr_pages << PAGE_SHIFT, prot, true);
 	}
 
 	if (WARN_ON(ret) || !page || !prot)
@@ -2378,6 +2393,7 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	struct kvm_hyp_pinned_page *ppage = hyp_ppages;
+	enum host_set_page_state_flags flags = 0;
 	int ret;
 
 	host_lock_component();
@@ -2431,12 +2447,24 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		enum kvm_pgtable_prot prot;
 
 		/* We already updated the IOMMU */
-		WARN_ON(__host_set_owner_guest(vcpu, phys, ipa, size, HOST_SET_NO_IOMMU_UPDATE));
+		flags = HOST_SET_NO_IOMMU_UPDATE;
+
+		/*
+		 * If __host_set_owner_guest() doesn't write into protected memory,
+		 * we can take a shortcut.
+		 */
+		if (!pkvm_ipa_range_has_pvmfw(vm, ipa, ipa + size))
+			flags |= HOST_SET_NO_COMPLETE;
+
+		WARN_ON(__host_set_owner_guest(vcpu, phys, ipa, size, flags));
 
 		prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
 		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
 				       &vcpu->vcpu.arch.stage2_mc, 0));
 	}
+
+	if (flags & HOST_SET_NO_COMPLETE)
+		__host_stage2_set_owner_complete(PKVM_ID_GUEST, flags);
 
 unlock:
 	guest_unlock_component(vm);
