@@ -1599,6 +1599,10 @@ activate_locked:
 			folio_free_swap(folio);
 		VM_BUG_ON_FOLIO(folio_test_active(folio), folio);
 		if (!folio_test_mlocked(folio)) {
+			bool skip = false;
+			trace_android_vh_folio_skip_activate(folio, &skip);
+			if (skip)
+				goto keep_locked;
 			int type = folio_is_file_lru(folio);
 			folio_set_active(folio);
 			stat->nr_activate[type] += nr_pages;
@@ -2246,9 +2250,19 @@ static void shrink_active_list(unsigned long nr_to_scan,
 			 * so we ignore them here.
 			 */
 			if ((vm_flags & VM_EXEC) && folio_is_file_lru(folio)) {
+<<<<<<< HEAD   (d9e7ad6b2d4f6f2a2d7c50e291394e1ae648af3c ANDROID: GKI: update xiaomi symbol list)
+||||||| BASE   (4399c146eb380d2cd6e32433aaa9679db016de5d ANDROID: Add vendor hook for tracking folios during readahea)
+				trace_android_vh_folio_trylock_clear(folio);
+=======
+				bool bypass = false;
+				trace_android_vh_folio_trylock_clear(folio);
+>>>>>>> CHANGE (022903b4735d089a3f84aa9db325a26ebe2927ae ANDROID: vendor_hook: Added hooks and a function to handle s)
 				nr_rotated += folio_nr_pages(folio);
-				list_add(&folio->lru, &l_active);
-				continue;
+				trace_android_vh_folio_trylock_clear_bypass(folio, &bypass);
+				if (!bypass) {
+					list_add(&folio->lru, &l_active);
+					continue;
+				}
 			}
 		}
 

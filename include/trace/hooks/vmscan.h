@@ -131,6 +131,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_vmscan_kswapd_done,
 	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
 		unsigned int reclaim_order),
 	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order), 1);
+<<<<<<< HEAD   (d9e7ad6b2d4f6f2a2d7c50e291394e1ae648af3c ANDROID: GKI: update xiaomi symbol list)
 DECLARE_HOOK(android_vh_direct_reclaim_begin,
 	TP_PROTO(int *prio),
 	TP_ARGS(prio));
@@ -140,6 +141,59 @@ DECLARE_HOOK(android_vh_direct_reclaim_end,
 DECLARE_HOOK(android_vh_throttle_direct_reclaim_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+||||||| BASE   (4399c146eb380d2cd6e32433aaa9679db016de5d ANDROID: Add vendor hook for tracking folios during readahea)
+DECLARE_HOOK(android_vh_handle_trylock_failed_folio,
+	TP_PROTO(struct list_head *folio_list),
+	TP_ARGS(folio_list));
+DECLARE_HOOK(android_vh_folio_trylock_set,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_trylock_clear,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_get_folio_trylock_result,
+	TP_PROTO(struct folio *folio, bool *trylock_failed),
+	TP_ARGS(folio, trylock_failed));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *skip),
+	TP_ARGS(folio, sem, got_lock, skip));
+DECLARE_HOOK(android_vh_page_referenced_check_bypass,
+	TP_PROTO(struct folio *folio, unsigned long nr_to_scan, int lru, bool *bypass),
+	TP_ARGS(folio, nr_to_scan, lru, bypass));
+DECLARE_HOOK(android_vh_folio_referenced_check_bypass,
+	TP_PROTO(struct folio *folio, s8 priority, unsigned long nr_to_scan, int lru, bool *bypass),
+	TP_ARGS(folio, priority, nr_to_scan, lru, bypass));
+=======
+DECLARE_HOOK(android_vh_handle_trylock_failed_folio,
+	TP_PROTO(struct list_head *folio_list),
+	TP_ARGS(folio_list));
+DECLARE_HOOK(android_vh_folio_skip_activate,
+	TP_PROTO(struct folio *folio, bool *skip),
+	TP_ARGS(folio, skip));
+DECLARE_HOOK(android_vh_folio_trylock_clear_bypass,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_folio_trylock_set,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_trylock_clear,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_get_folio_trylock_result,
+	TP_PROTO(struct folio *folio, bool *trylock_failed),
+	TP_ARGS(folio, trylock_failed));
+DECLARE_HOOK(android_vh_do_folio_trylock,
+	TP_PROTO(struct folio *folio, struct rw_semaphore *sem,
+		bool *got_lock, bool *skip),
+	TP_ARGS(folio, sem, got_lock, skip));
+DECLARE_HOOK(android_vh_page_referenced_check_bypass,
+	TP_PROTO(struct folio *folio, unsigned long nr_to_scan, int lru, bool *bypass),
+	TP_ARGS(folio, nr_to_scan, lru, bypass));
+DECLARE_HOOK(android_vh_folio_referenced_check_bypass,
+	TP_PROTO(struct folio *folio, s8 priority, unsigned long nr_to_scan, int lru, bool *bypass),
+	TP_ARGS(folio, priority, nr_to_scan, lru, bypass));
+>>>>>>> CHANGE (022903b4735d089a3f84aa9db325a26ebe2927ae ANDROID: vendor_hook: Added hooks and a function to handle s)
 DECLARE_HOOK(android_vh_shrink_node,
 	TP_PROTO(pg_data_t *pgdat, struct mem_cgroup *memcg),
 	TP_ARGS(pgdat, memcg));
