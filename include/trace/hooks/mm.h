@@ -749,6 +749,10 @@ DECLARE_HOOK(android_vh_folio_add_file_rmap,
 DECLARE_HOOK(android_vh_readahead_add_folio,
 	TP_PROTO(struct folio *folio, struct address_space *mapping),
 	TP_ARGS(folio, mapping));
+DECLARE_HOOK(android_vh_filemap_adjust_folio_flags,
+	TP_PROTO(struct address_space *mapping, struct folio *folio,
+		pgoff_t index),
+	TP_ARGS(mapping, folio, index));
 DECLARE_HOOK(android_vh_folio_remove_rmap,
 	TP_PROTO(struct folio *folio, struct page *page, int nr_pages,
 		 int level),
