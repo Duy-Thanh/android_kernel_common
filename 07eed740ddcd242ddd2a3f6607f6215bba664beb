@@ -51,6 +51,24 @@
       "parentUuid": "a16c8c79_0a2b24f9",
       "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63784a04_d442bcf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-09T22:03:27Z",
+      "side": 1,
+      "message": "Hrm. So this sounds like a generic scheduling issue that needs a fix, not something that is vendor specific (and would need to be resolved in a vh).\n\nSpecifically in your analysis, is it the should_honor_rt_sync() check in enqueue_task_rt() that is preventing the task from being added to the pushable list?\n\nDo you happen to have a reproducer you can share in the bug?",
+      "parentUuid": "1b8625a0_ca61c0da",
+      "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
