@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/490038597",
       "revId": "87ee4f9dbe0e305ecebca1dec67cdc54d66f9192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ba92e5_986e26d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-09T15:45:18Z",
+      "side": 1,
+      "message": "The patch is in android16-6.12 via LTS merge",
+      "revId": "87ee4f9dbe0e305ecebca1dec67cdc54d66f9192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
