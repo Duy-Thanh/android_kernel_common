@@ -5719,8 +5719,64 @@ static int hist_show(struct seq_file *m, void *v)
 			hist_trigger_show(m, data, n++);
 	}
 
+<<<<<<< HEAD   (13d1b2d943c2921d49b9a3a9f336800c878c0ebb Merge bcc60ad129ae ("ipv6: Fix out-of-bound access in fib6_a)
  out_unlock:
 	mutex_unlock(&event_mutex);
+||||||| BASE   (bcc60ad129ae1837cf809c81bff56ec8bfdb6b11 ipv6: Fix out-of-bound access in fib6_add_rt2node().)
+	return 0;
+}
+
+static __poll_t event_hist_poll(struct file *file, struct poll_table_struct *wait)
+{
+	struct trace_event_file *event_file;
+	struct seq_file *m = file->private_data;
+	struct hist_file_data *hist_file = m->private;
+	__poll_t ret = 0;
+	u64 cnt;
+
+	guard(mutex)(&event_mutex);
+
+	event_file = event_file_data(file);
+	if (!event_file)
+		return EPOLLERR;
+
+	hist_poll_wait(file, wait);
+
+	cnt = get_hist_hit_count(event_file);
+	if (hist_file->last_read != cnt)
+		ret |= EPOLLIN | EPOLLRDNORM;
+	if (hist_file->last_act != cnt) {
+		hist_file->last_act = cnt;
+		ret |= EPOLLPRI;
+	}
+=======
+	return 0;
+}
+
+static __poll_t event_hist_poll(struct file *file, struct poll_table_struct *wait)
+{
+	struct trace_event_file *event_file;
+	struct seq_file *m = file->private_data;
+	struct hist_file_data *hist_file = m->private;
+	__poll_t ret = 0;
+	u64 cnt;
+
+	guard(mutex)(&event_mutex);
+
+	event_file = event_file_file(file);
+	if (!event_file)
+		return EPOLLERR;
+
+	hist_poll_wait(file, wait);
+
+	cnt = get_hist_hit_count(event_file);
+	if (hist_file->last_read != cnt)
+		ret |= EPOLLIN | EPOLLRDNORM;
+	if (hist_file->last_act != cnt) {
+		hist_file->last_act = cnt;
+		ret |= EPOLLPRI;
+	}
+>>>>>>> BRANCH (682d8e2f892b73c2f574684c8dd6b625361b4c03 Linux 6.6.128)
 
 	return ret;
 }
@@ -5733,6 +5789,44 @@ static int event_hist_open(struct inode *inode, struct file *file)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (13d1b2d943c2921d49b9a3a9f336800c878c0ebb Merge bcc60ad129ae ("ipv6: Fix out-of-bound access in fib6_a)
+||||||| BASE   (bcc60ad129ae1837cf809c81bff56ec8bfdb6b11 ipv6: Fix out-of-bound access in fib6_add_rt2node().)
+	guard(mutex)(&event_mutex);
+
+	event_file = event_file_data(file);
+	if (!event_file) {
+		ret = -ENODEV;
+		goto err;
+	}
+
+	hist_file = kzalloc(sizeof(*hist_file), GFP_KERNEL);
+	if (!hist_file) {
+		ret = -ENOMEM;
+		goto err;
+	}
+
+	hist_file->file = file;
+	hist_file->last_act = get_hist_hit_count(event_file);
+
+=======
+	guard(mutex)(&event_mutex);
+
+	event_file = event_file_file(file);
+	if (!event_file) {
+		ret = -ENODEV;
+		goto err;
+	}
+
+	hist_file = kzalloc(sizeof(*hist_file), GFP_KERNEL);
+	if (!hist_file) {
+		ret = -ENOMEM;
+		goto err;
+	}
+
+	hist_file->file = file;
+	hist_file->last_act = get_hist_hit_count(event_file);
+
+>>>>>>> BRANCH (682d8e2f892b73c2f574684c8dd6b625361b4c03 Linux 6.6.128)
 	/* Clear private_data to avoid warning in single_open() */
 	file->private_data = NULL;
 	return single_open(file, hist_show, file);

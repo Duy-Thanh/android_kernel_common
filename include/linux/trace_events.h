@@ -679,6 +679,43 @@ struct trace_event_file {
 	atomic_t		tm_ref;	/* trigger-mode reference counter */
 };
 
+<<<<<<< HEAD   (13d1b2d943c2921d49b9a3a9f336800c878c0ebb Merge bcc60ad129ae ("ipv6: Fix out-of-bound access in fib6_a)
+||||||| BASE   (bcc60ad129ae1837cf809c81bff56ec8bfdb6b11 ipv6: Fix out-of-bound access in fib6_add_rt2node().)
+#ifdef CONFIG_HIST_TRIGGERS
+extern struct irq_work hist_poll_work;
+extern wait_queue_head_t hist_poll_wq;
+
+static inline void hist_poll_wakeup(void)
+{
+	if (wq_has_sleeper(&hist_poll_wq))
+		irq_work_queue(&hist_poll_work);
+}
+
+#define hist_poll_wait(file, wait)	\
+	poll_wait(file, &hist_poll_wq, wait)
+#endif
+
+=======
+#ifdef CONFIG_HIST_TRIGGERS
+extern struct irq_work hist_poll_work;
+extern wait_queue_head_t hist_poll_wq;
+
+static inline void hist_poll_wakeup(void)
+{
+	if (wq_has_sleeper(&hist_poll_wq))
+		irq_work_queue(&hist_poll_work);
+}
+
+#define hist_poll_wait(file, wait)	\
+	poll_wait(file, &hist_poll_wq, wait)
+
+#else
+static inline void hist_poll_wakeup(void)
+{
+}
+#endif
+
+>>>>>>> BRANCH (682d8e2f892b73c2f574684c8dd6b625361b4c03 Linux 6.6.128)
 #define __TRACE_EVENT_FLAGS(name, value)				\
 	static int __init trace_init_flags_##name(void)			\
 	{								\
