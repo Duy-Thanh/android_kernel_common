@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01fbe258_9ebaeb3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-03-10T11:09:56Z",
+      "side": 1,
+      "message": "+R\u003d @gprocida@google.com to asses the type change impact:\n\n```\n1 type(s) changed from ABSENT to FULLY_DEFINED:\n  enum track_item\n```",
+      "revId": "a68dcbf08e9ad2970dee96230d01d0fa07a83eb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
