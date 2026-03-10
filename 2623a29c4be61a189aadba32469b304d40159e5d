@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569a632e_360cce16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-10T14:48:22Z",
+      "side": 1,
+      "message": "nit: s/checking this/check this/ ?",
+      "revId": "2623a29c4be61a189aadba32469b304d40159e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f892d206_6828168f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-10T14:48:22Z",
+      "side": 1,
+      "message": "Maybe it\u0027s better to return an error, e.g. -EOPNOTSUPP? Are there any cases when the host calls hwapic_isr_update while in-kernel lapic is not enabled?",
+      "revId": "2623a29c4be61a189aadba32469b304d40159e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
