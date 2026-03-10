@@ -46,6 +46,30 @@
       },
       "revId": "26ea99afcab1656e83494c5045b400afb3e2e38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dad50cc_88c4e8f7",
+        "filename": "drivers/staging/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-10T15:48:35Z",
+      "side": 1,
+      "message": "If vendor modules need to use it, then nevermind.",
+      "parentUuid": "a2de4480_76f259e7",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 40
+      },
+      "revId": "26ea99afcab1656e83494c5045b400afb3e2e38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
