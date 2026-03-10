@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d057e430_3d74c13f",
+        "filename": "drivers/staging/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-10T15:27:34Z",
+      "side": 1,
+      "message": "Exports is not really needed since ashmem is built-in, and `mm/shmem.c` is also built-in. It\u0027s a left-over from when it was a module.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 40
+      },
+      "revId": "26ea99afcab1656e83494c5045b400afb3e2e38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
