@@ -936,7 +936,17 @@ static void dma_pte_free_pagetable(struct dmar_domain *domain,
 			   domain->pgd, 0, start_pfn, last_pfn);
 }
 
-#ifndef __PKVM_HYP__
+#ifdef __PKVM_HYP__
+static void dma_unuse_firstlevel(struct dma_pte *pte)
+{
+	do {
+		if (dma_pte_present(pte))
+			pkvm_host_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
+		pte++;
+	} while (!first_pte_in_page(pte));
+}
+#endif
+
 /* When a page at a given level is being unlinked from its parent, we don't
    need to *modify* it at all. All we need to do is make a list of all the
    pages which can be freed just as soon as we've flushed the IOTLB and we
@@ -949,35 +959,43 @@ static void dma_pte_list_pagetables(struct dmar_domain *domain,
 {
 	struct dma_pte *pte = phys_to_virt(dma_pte_addr(parent_pte));
 
+#ifndef __PKVM_HYP__
 	iommu_pages_list_add(freelist, pte);
+#endif
 
-	if (level == 1)
+	if (level == 1) {
+#ifndef __PKVM_HYP__
 		return;
+#else
+		dma_unuse_firstlevel(pte);
+		goto push_memcache;
+#endif
+	}
 
 	do {
 		if (dma_pte_present(pte) && !dma_pte_superpage(pte))
 			dma_pte_list_pagetables(domain, level - 1, pte, freelist);
+#ifdef __PKVM_HYP__
+		else if (dma_pte_present(pte))
+			pkvm_host_unuse_dma(dma_pte_addr(pte),
+					    level_size(level) * VTD_PAGE_SIZE);
+#endif
 		pte++;
 	} while (!first_pte_in_page(pte));
-}
-#endif
 
 #ifdef __PKVM_HYP__
-static inline void dma_unpresent_pte(struct dma_pte *pte)
-{
-	u64 unpresent = READ_ONCE(pte->val) & ~(DMA_PTE_READ | DMA_PTE_WRITE);
-
-	WRITE_ONCE(pte->val, unpresent);
-}
+push_memcache:
+	push_pkvm_memcache_page(&domain->mc, pkvm_phys_to_virt(dma_pte_addr(parent_pte)),
+				pkvm_virt_to_phys);
 #endif
+}
 
-static bool dma_pte_clear_level(struct dmar_domain *domain, int level,
+static void dma_pte_clear_level(struct dmar_domain *domain, int level,
 				struct dma_pte *pte, unsigned long pfn,
 				unsigned long start_pfn, unsigned long last_pfn,
 				struct iommu_pages_list *freelist)
 {
 	struct dma_pte *first_pte = NULL, *last_pte = NULL;
-	bool leaf_ptes_only = true;
 
 	pfn = max(start_pfn, pfn);
 	pte = &pte[pfn_level_offset(pfn, level)];
@@ -993,30 +1011,28 @@ static bool dma_pte_clear_level(struct dmar_domain *domain, int level,
 		    last_pfn >= level_pfn + level_size(level) - 1) {
 			/* These suborbinate page tables are going away entirely. Don't
 			   bother to clear them; we're just going to *free* them. */
-			if (level > 1 && !dma_pte_superpage(pte)) {
-#ifndef __PKVM_HYP__
+			if (level > 1 && !dma_pte_superpage(pte))
 				dma_pte_list_pagetables(domain, level - 1, pte, freelist);
+#ifdef __PKVM_HYP__
+			else
+				pkvm_host_unuse_dma(dma_pte_addr(pte),
+						    level_size(level) * VTD_PAGE_SIZE);
 #endif
-				leaf_ptes_only = false;
-			}
 
-#ifndef __PKVM_HYP__
 			dma_clear_pte(pte);
-#else
-			dma_unpresent_pte(pte);
-#endif
 			if (!first_pte)
 				first_pte = pte;
 			last_pte = pte;
-		} else if (level > 1) {
+		} else {
+			BUG_ON(level <= 1);
 			if (WARN_ON_ONCE(dma_pte_superpage(pte)))
 				goto next;
 
 			/* Recurse down into a level that isn't *entirely* obsolete */
-			leaf_ptes_only &= dma_pte_clear_level(domain, level - 1,
-							      phys_to_virt(dma_pte_addr(pte)),
-							      level_pfn, start_pfn, last_pfn,
-							      freelist);
+			dma_pte_clear_level(domain, level - 1,
+					    phys_to_virt(dma_pte_addr(pte)),
+					    level_pfn, start_pfn, last_pfn,
+					    freelist);
 		}
 next:
 		pfn = level_pfn + level_size(level);
@@ -1025,108 +1041,7 @@ next:
 	if (first_pte)
 		domain_flush_cache(domain, first_pte,
 				   (void *)++last_pte - (void *)first_pte);
-
-	return leaf_ptes_only;
 }
-
-#ifdef __PKVM_HYP__
-/*
- * Release(unpin) physical pages reachable by pte that were previously
- * mapped for DMA. Free the page if all PTEs in the page is released.
- *
- * Since this function is called after unpresenting, we can't use
- * dma_pte_present() to check if a PTE has mapping. But it still
- * has a valid address which we can check for - assuming that 0 is
- * not a valid mapped physical address. So use dma_pte_addr() instead
- * of dma_pte_present().
- */
-static void dma_unuse_pte(struct dmar_domain *domain,
-			  int level, struct dma_pte *pte)
-{
-	void *pte_addr = phys_to_virt(dma_pte_addr(pte));
-
-	/* First PTE in the page */
-	pte = (struct dma_pte *)pte_addr;
-	if (level == 1) {
-		do {
-			if (dma_pte_addr(pte)) {
-				pkvm_host_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
-				dma_clear_pte(pte);
-			}
-			pte++;
-		} while (!first_pte_in_page(pte));
-	} else {
-		do {
-			if (dma_pte_addr(pte)) {
-				if (!dma_pte_superpage(pte))
-					dma_unuse_pte(domain, level - 1, pte);
-				else
-					pkvm_host_unuse_dma(dma_pte_addr(pte),
-							    level_size(level) * VTD_PAGE_SIZE);
-				dma_clear_pte(pte);
-			}
-			pte++;
-		} while (!first_pte_in_page(pte));
-	}
-	push_pkvm_memcache_page(&domain->mc, pte_addr, pkvm_virt_to_phys);
-}
-
-/*
- * Walk the IOVA range and release(unpin) physical pages mapped in
- * the range and free the entries in the page table. Free the pages
- * in the page table if all the entries are released as part of this
- * process.
- *
- * Since this function is called after unpresenting, we can't use
- * dma_pte_present() to check if a PTE has mapping. But it still
- * has a valid address which we can check for - assuming that 0 is
- * not a valid mapped physical address. So use dma_pte_addr() instead
- * of dma_pte_present().
- */
-static void dma_unuse_range(struct dmar_domain *domain, int level,
-			    struct dma_pte *pte, unsigned long pfn,
-			    unsigned long start_pfn, unsigned long last_pfn)
-{
-	struct dma_pte *first_pte = NULL, *last_pte = NULL;
-
-	pfn = max(start_pfn, pfn);
-	pte = &pte[pfn_level_offset(pfn, level)];
-
-	do {
-		unsigned long level_pfn = pfn & level_mask(level);
-
-		if (!dma_pte_addr(pte))
-			goto next;
-
-		if (start_pfn <= level_pfn &&
-		    last_pfn >= level_pfn + level_size(level) - 1) {
-			if (level > 1 && !dma_pte_superpage(pte))
-				dma_unuse_pte(domain, level - 1, pte);
-			else
-				pkvm_host_unuse_dma(dma_pte_addr(pte),
-						    level_size(level) * VTD_PAGE_SIZE);
-
-			dma_clear_pte(pte);
-			if (!first_pte)
-				first_pte = pte;
-			last_pte = pte;
-		} else if (level > 1) {
-			if (WARN_ON_ONCE(dma_pte_superpage(pte)))
-				goto next;
-
-			dma_unuse_range(domain, level - 1,
-					phys_to_virt(dma_pte_addr(pte)),
-					level_pfn, start_pfn, last_pfn);
-		}
-next:
-		pfn = level_pfn + level_size(level);
-	} while (!first_pte_in_page(++pte) && pfn <= last_pfn);
-
-	if (first_pte)
-		domain_flush_cache(domain, first_pte,
-				   (void *)(++last_pte) - (void *)first_pte);
-}
-#endif /* __PKVM_HYP__ */
 
 /* We can't just free the pages because the IOMMU may still be walking
    the page tables, and may have cached the intermediate levels. The
@@ -1134,15 +1049,21 @@ next:
 void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 		  unsigned long last_pfn, struct iommu_pages_list *freelist)
 {
-	bool leaf_ptes_only;
+#ifdef __PKVM_HYP__
+	unsigned int nr_pages = domain->mc.count;
+#endif
 
 	if (WARN_ON(!domain_pfn_supported(domain, last_pfn)) ||
 	    WARN_ON(start_pfn > last_pfn))
 		return;
 
+#ifdef __PKVM_HYP__
+	pkvm_spin_lock(&domain->flush_lock);
+#endif
+
 	/* we don't need lock here; nobody else touches the iova range */
-	leaf_ptes_only = dma_pte_clear_level(domain, agaw_to_level(domain->agaw),
-					     domain->pgd, 0, start_pfn, last_pfn, freelist);
+	dma_pte_clear_level(domain, agaw_to_level(domain->agaw),
+			    domain->pgd, 0, start_pfn, last_pfn, freelist);
 
 #ifndef __PKVM_HYP__
 	/* free pgd */
@@ -1158,17 +1079,17 @@ void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 		 * or when the host explicitly flushes the domain. We don't
 		 * track the unmapped sub-range (same as host driver).
 		 */
-		pkvm_spin_lock(&domain->flush_lock);
 		domain->flush_pending = true;
-		pkvm_spin_unlock(&domain->flush_lock);
 	} else {
-		/* Set IH=1(Invalidation Hint) if only leaf ptes were updated. */
+		/*
+		 * No new pages released during unmap implies only the leaf
+		 * PTEs were updated. Set IH=1(Invalidation Hint) in that case.
+		 */
 		cache_tag_flush_range(domain, start_pfn << VTD_PAGE_SHIFT,
-				   last_pfn << VTD_PAGE_SHIFT, leaf_ptes_only);
+				      last_pfn << VTD_PAGE_SHIFT,
+				      nr_pages == domain->mc.count);
 	}
-
-	dma_unuse_range(domain, agaw_to_level(domain->agaw),
-			domain->pgd, 0, start_pfn, last_pfn);
+	pkvm_spin_unlock(&domain->flush_lock);
 #endif
 }
 
