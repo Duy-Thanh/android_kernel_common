@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/490994511",
       "revId": "f5526d1116e5c08b1599cddd5b90192d06bade99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd18bad7_718cf3d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-10T16:39:29Z",
+      "side": 1,
+      "message": "The only test failing is the pixel 6 test because of a configuration issue, and it passed on android13-5.15, so bypass presubmit.",
+      "revId": "f5526d1116e5c08b1599cddd5b90192d06bade99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
