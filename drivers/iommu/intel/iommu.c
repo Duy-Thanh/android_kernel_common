@@ -2037,10 +2037,11 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 #endif
 
 	did = context_domain_id(context);
-	context_clear_entry(context);
+	context_clear_present(context);
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 	spin_unlock(&iommu->lock);
 	intel_context_flush_no_pasid(info, context, did);
+<<<<<<< HEAD   (b76698302d53f01ee2a04647f466396b225658f2 Merge 821807c167b7 ("iommu/vt-d: Clear Present bit before te)
 
 #ifdef __PKVM_HYP__
 	if (sm)
@@ -2049,6 +2050,11 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 		pkvm_put_domain_cache_tag_unassign(pgd, did,
 						   IOMMU_NO_PASID, info);
 #endif
+||||||| BASE   (821807c167b7b48a41b95b6607c6b9f97600f7d9 iommu/vt-d: Clear Present bit before tearing down PASID entr)
+=======
+	context_clear_entry(context);
+	__iommu_flush_cache(iommu, context, sizeof(*context));
+>>>>>>> BRANCH (d2138abc8f0a7fce4101b7229b43b06811ed083d iommu/vt-d: Clear Present bit before tearing down context en)
 }
 
 #ifndef __PKVM_HYP__
