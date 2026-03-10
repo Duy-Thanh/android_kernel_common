@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2d086d_67a07454",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-10T20:14:43Z",
+      "side": 1,
+      "message": "What if the host never issues the __pkvm__vcpu_after_set_cpuid hypercall? Do we still ensure we enable x2APIC in such case?\n\nIf not, it seems we should call kvm_apic_set_base() when creating the protected vCPU instead (e.g. after calling kvm_vcpu_reset() in __vcpu_create(), to override the xAPIC setting done by kvm_lapic_reset())? And then here we can e.g. just check guest_cpu_cap_has(vcpu, X86_FEATURE_X2APIC), instead of calling kvm_apic_set_base() again?\n\nBTW also I\u0027m wondering: is there any easy way to check if x2APIC is enabled in the `new` CPUID _before_ calling `kvm_set_cpuid(vcpu, new, new_nent)` to set this CPUID (so that we don\u0027t need to switch back to the old CPUID after that if the check fails)?",
+      "revId": "863f921b11605d0568635b675b4dea50b7c52825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
