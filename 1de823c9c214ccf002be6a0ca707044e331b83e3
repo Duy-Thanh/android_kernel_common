@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3da84f9_a27a0eb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-10T10:18:18Z",
+      "side": 1,
+      "message": "This is OK. It\u0027s just differences in the diff context. The changed lines are the same.",
+      "parentUuid": "f497871d_8ce2e554",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8086ab33_4b643856",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d9eb93_87eb6022",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-10T10:18:18Z",
+      "side": 1,
+      "message": "I think it qualifies as UPSTREAM.",
+      "parentUuid": "8086ab33_4b643856",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8134f35c_0193a5b9",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-03-09T17:31:37Z",
       "side": 1,
       "message": "Need some annotation here why the patch doesn\u0027t match whats upstream.",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a85e5f_cf0067a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-10T10:18:18Z",
+      "side": 1,
+      "message": "It does match upstream.\n\nThe outer +- are well separated from the inner +- in the diff of diffs.",
+      "parentUuid": "8134f35c_0193a5b9",
       "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
