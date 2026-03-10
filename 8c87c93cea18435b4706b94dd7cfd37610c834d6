@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf869e9d_4506e3e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-10T16:14:51Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "8c87c93cea18435b4706b94dd7cfd37610c834d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc4ae60_6b3f4b94",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-10T16:14:51Z",
+      "side": 1,
+      "message": "missing inclusion of include/trace/hooks/typec.h?",
+      "revId": "8c87c93cea18435b4706b94dd7cfd37610c834d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a4106d_c239051b",
+        "filename": "include/trace/hooks/typec.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-10T16:14:51Z",
+      "side": 1,
+      "message": "why is this needed? `struct tcpm_port` is not part of the hook signature.",
+      "revId": "8c87c93cea18435b4706b94dd7cfd37610c834d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
