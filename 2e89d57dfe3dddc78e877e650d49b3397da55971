@@ -16,6 +16,24 @@
       "message": "Let\u0027s wait for this to land in a maintainer tree upstream and then we can take it as FROMGIT",
       "revId": "2e89d57dfe3dddc78e877e650d49b3397da55971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a752498_28f1771e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-03-10T01:47:39Z",
+      "side": 1,
+      "message": "Thank you for your suggestion! I posted this here because I initially thought this patch would affect the ABI. However, after recompiling, I realized it doesn’t impact the ABI at all. So let’s wait until the maintainer merges it into their tree before making any further changes.\nThanks again!",
+      "parentUuid": "af73bc80_642be6ef",
+      "revId": "2e89d57dfe3dddc78e877e650d49b3397da55971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
