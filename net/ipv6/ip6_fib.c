@@ -1127,6 +1127,24 @@ static int fib6_add_rt2node(struct fib6_node *fn, struct fib6_info *rt,
 					fib6_clean_expires(iter);
 				else
 					fib6_set_expires(iter, rt->expires);
+<<<<<<< HEAD   (92fd02bdc4d9dd6d70aa0f9f8445982ac4fc30ef Merge cc1b179f778f ("net: mscc: ocelot: add missing lock pro)
+||||||| BASE   (cc1b179f778f98270bdbbb48d183b4b6427ae198 net: mscc: ocelot: add missing lock protection in ocelot_por)
+					fib6_add_gc_list(iter);
+				}
+				if (!(rt->fib6_flags & (RTF_ADDRCONF | RTF_PREFIX_RT)) &&
+				    !iter->fib6_nh->fib_nh_gw_family) {
+					iter->fib6_flags &= ~RTF_ADDRCONF;
+					iter->fib6_flags &= ~RTF_PREFIX_RT;
+				}
+=======
+					fib6_add_gc_list(iter);
+				}
+				if (!(rt->fib6_flags & (RTF_ADDRCONF | RTF_PREFIX_RT)) &&
+				    (iter->nh || !iter->fib6_nh->fib_nh_gw_family)) {
+					iter->fib6_flags &= ~RTF_ADDRCONF;
+					iter->fib6_flags &= ~RTF_PREFIX_RT;
+				}
+>>>>>>> BRANCH (bcc60ad129ae1837cf809c81bff56ec8bfdb6b11 ipv6: Fix out-of-bound access in fib6_add_rt2node().)
 
 				if (rt->fib6_pmtu)
 					fib6_metric_set(iter, RTAX_MTU,
