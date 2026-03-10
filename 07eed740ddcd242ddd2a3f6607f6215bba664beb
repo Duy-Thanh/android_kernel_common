@@ -69,6 +69,24 @@
       "parentUuid": "1b8625a0_ca61c0da",
       "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fe3755_bfde5edc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4669846
+      },
+      "writtenOn": "2026-03-10T02:28:43Z",
+      "side": 1,
+      "message": "Yes, based on our analysis the issue is related to the should_honor_rt_sync() check in enqueue_task_rt(). When a task is woken up via synchronous wakeup and should_honor_rt_sync() returns true, the scheduler assumes the task will soon run on the current CPU and therefore skips inserting it into the pushable RT queue.\nWe observed this issue during real-world workloads when running some third-party applications (e.g. apps similar to TikTok). In these cases the SurfaceFlinger RT thread occasionally stays in the runnable state for more than ~1 ms before getting scheduled. When this happens during UI interactions such as scrolling, it can result in visible frame drops or stuttering.",
+      "parentUuid": "63784a04_d442bcf8",
+      "revId": "07eed740ddcd242ddd2a3f6607f6215bba664beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
