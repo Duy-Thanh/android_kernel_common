@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5587375c_be1ff22e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969731
+      },
+      "writtenOn": "2026-03-10T10:17:19Z",
+      "side": 1,
+      "message": "OK, let me fix it. Maybe I updated to fix conflict but forgot to update description.",
+      "parentUuid": "f497871d_8ce2e554",
+      "revId": "1de823c9c214ccf002be6a0ca707044e331b83e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8086ab33_4b643856",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
