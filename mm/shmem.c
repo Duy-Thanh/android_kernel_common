@@ -90,7 +90,15 @@ static struct vfsmount *shm_mnt __ro_after_init;
 
 #include "internal.h"
 
+<<<<<<< HEAD   (752020e22de79a01b627efd8c1ec5c2c8afe3694 ANDROID: 16K: Fix double entry in [s]maps for all-pad VMAs)
 #define BLOCKS_PER_PAGE  (PAGE_SIZE/512)
+||||||| BASE   (02a11ab9e77183c4fc3f50dce2b29f3c23920360 Merge a9aabb3b839a ("Merge tag 'rust-6.20-7.0' of git://git.)
+#ifdef CONFIG_MEMFD_ASHMEM_SHIM
+#include "memfd-ashmem-shim.h"
+#endif
+
+=======
+>>>>>>> CHANGE (36f28f93dabdfb0fc8f0e256ed849ff732390871 ANDROID: mm/memfd-ashmem-shim: Remove the C version memfd-as)
 #define VM_ACCT(size)    (PAGE_ALIGN(size) >> PAGE_SHIFT)
 
 /* Pretend that each entry is of this size in directory's i_size */
@@ -4899,9 +4907,24 @@ static const struct file_operations shmem_file_operations = {
 	.fallocate	= shmem_fallocate,
 #endif
 #ifdef CONFIG_ASHMEM_RUST
+<<<<<<< HEAD   (752020e22de79a01b627efd8c1ec5c2c8afe3694 ANDROID: 16K: Fix double entry in [s]maps for all-pad VMAs)
 	.unlocked_ioctl	= ashmem_memfd_ioctl,
 #ifdef CONFIG_COMPAT
 	.compat_ioctl	= ashmem_memfd_ioctl,
+||||||| BASE   (02a11ab9e77183c4fc3f50dce2b29f3c23920360 Merge a9aabb3b839a ("Merge tag 'rust-6.20-7.0' of git://git.)
+	.unlocked_ioctl	= memfd_ashmem_shim_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl	= memfd_ashmem_shim_compat_ioctl,
+#endif
+#elif defined CONFIG_ASHMEM_RUST
+	.unlocked_ioctl = ashmem_memfd_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = ashmem_memfd_ioctl,
+=======
+	.unlocked_ioctl = ashmem_memfd_ioctl,
+#ifdef CONFIG_COMPAT
+	.compat_ioctl = ashmem_memfd_ioctl,
+>>>>>>> CHANGE (36f28f93dabdfb0fc8f0e256ed849ff732390871 ANDROID: mm/memfd-ashmem-shim: Remove the C version memfd-as)
 #endif
 #endif
 };
