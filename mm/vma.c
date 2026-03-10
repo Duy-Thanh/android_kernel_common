@@ -4,7 +4,6 @@
  * VMA-specific functions.
  */
 
-#include <linux/dma-buf.h>
 #include <linux/pgsize_migration.h>
 
 #include "vma_internal.h"
@@ -332,11 +331,8 @@ void remove_vma(struct vm_area_struct *vma)
 {
 	might_sleep();
 	vma_close(vma);
-	if (vma->vm_file) {
-		if (is_dma_buf_file(vma->vm_file))
-			dma_buf_unaccount_task(vma->vm_file->private_data, current);
+	if (vma->vm_file)
 		fput(vma->vm_file);
-	}
 	mpol_put(vma_policy(vma));
 	vm_area_free(vma);
 }
@@ -409,15 +405,8 @@ static int __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	if (err)
 		goto out_free_mpol;
 
-	if (new->vm_file) {
+	if (new->vm_file)
 		get_file(new->vm_file);
-		if (is_dma_buf_file(new->vm_file)) {
-			int acct_err = dma_buf_account_task(new->vm_file->private_data, current);
-
-			if (acct_err)
-				pr_err("failed to account dmabuf, err %d\n", acct_err);
-		}
-	}
 
 	if (new->vm_ops && new->vm_ops->open)
 		new->vm_ops->open(new);
