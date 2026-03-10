@@ -16,6 +16,29 @@
       "message": "Respin Bug: b/491272798",
       "revId": "1b28bac5acb730adbc812a89e64c53c80c1ec37b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d991e32_a9672550",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-10T10:01:33Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these also be declared in a header file? Or, if you don\u0027t need them, we shouldn\u0027t be exporting them in this patch.",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 700,
+        "endChar": 67
+      },
+      "revId": "1b28bac5acb730adbc812a89e64c53c80c1ec37b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
