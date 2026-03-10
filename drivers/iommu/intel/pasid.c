@@ -346,6 +346,7 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 
 	did = pasid_get_domain_id(pte);
 	pgtt = pasid_pte_get_pgtt(pte);
+<<<<<<< HEAD   (101091fb45e6443d391ad3dccc311d1bd183d2d7 Merge 36244dfd3853 ("iommu/vt-d: Flush cache for PASID table)
 #ifdef __PKVM_HYP__
 	if (pgtt == PASID_ENTRY_PGTT_FL_ONLY)
 		pgd = __pkvm_va(pasid_get_flptr(pte));
@@ -355,6 +356,11 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 		BUG();
 #endif
 	intel_pasid_clear_entry(dev, pasid, fault_ignore);
+||||||| BASE   (36244dfd3853f7bf89d03b8e90d56b23ce7fbc16 iommu/vt-d: Flush cache for PASID table before using it)
+	intel_pasid_clear_entry(dev, pasid, fault_ignore);
+=======
+	pasid_clear_present(pte);
+>>>>>>> BRANCH (821807c167b7b48a41b95b6607c6b9f97600f7d9 iommu/vt-d: Clear Present bit before tearing down PASID entr)
 	spin_unlock(&iommu->lock);
 
 	if (!ecap_coherent(iommu->ecap))
@@ -368,7 +374,15 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 		iommu->flush.flush_iotlb(iommu, did, 0, 0, DMA_TLB_DSI_FLUSH);
 
 	devtlb_invalidation_with_pasid(iommu, dev, pasid);
+<<<<<<< HEAD   (101091fb45e6443d391ad3dccc311d1bd183d2d7 Merge 36244dfd3853 ("iommu/vt-d: Flush cache for PASID table)
 #ifndef __PKVM_HYP__
+||||||| BASE   (36244dfd3853f7bf89d03b8e90d56b23ce7fbc16 iommu/vt-d: Flush cache for PASID table before using it)
+=======
+	intel_pasid_clear_entry(dev, pasid, fault_ignore);
+	if (!ecap_coherent(iommu->ecap))
+		clflush_cache_range(pte, sizeof(*pte));
+
+>>>>>>> BRANCH (821807c167b7b48a41b95b6607c6b9f97600f7d9 iommu/vt-d: Clear Present bit before tearing down PASID entr)
 	if (!fault_ignore)
 		intel_iommu_drain_pasid_prq(dev, pasid);
 #endif
