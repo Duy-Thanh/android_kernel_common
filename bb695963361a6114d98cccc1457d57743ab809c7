@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76a5b616_def1c2b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-10T02:06:35Z",
+      "side": 1,
+      "message": "This is now UPSTREAM",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "bb695963361a6114d98cccc1457d57743ab809c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c404bdf_80706ef2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -14,6 +37,29 @@
       "writtenOn": "2026-03-10T02:04:43Z",
       "side": 1,
       "message": "In AOSP we require a bug number",
+      "revId": "bb695963361a6114d98cccc1457d57743ab809c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d56d43c_eefed346",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-10T02:06:35Z",
+      "side": 1,
+      "message": "not needed as it\u0027s upstream now.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 70
+      },
       "revId": "bb695963361a6114d98cccc1457d57743ab809c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
