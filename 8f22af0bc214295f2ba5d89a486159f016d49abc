@@ -16,6 +16,24 @@
       "message": "Please add an open respin request bug to the commit message. Do not remove existing bug references.\nRefer to the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "8f22af0bc214295f2ba5d89a486159f016d49abc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df447ae_63092203",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-03-10T05:59:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f17d152_f04515cf",
+      "revId": "8f22af0bc214295f2ba5d89a486159f016d49abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
