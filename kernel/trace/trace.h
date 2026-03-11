@@ -432,7 +432,12 @@ struct trace_array {
 enum {
 	TRACE_ARRAY_FL_GLOBAL	= BIT(0),
 	TRACE_ARRAY_FL_BOOT	= BIT(1),
+<<<<<<< HEAD   (6e8e96179140c3b15e8cec8ee8510e05991fc932 FROMGIT: scsi: ufs: core: Flush exception handling work when)
 	TRACE_ARRAY_FL_VMALLOC		= BIT(5),
+||||||| BASE   (c9e403b9d5df88cd939a009b09b677a871ed9879 FROMGIT: scsi: ufs: core: Flush exception handling work when)
+=======
+	TRACE_ARRAY_FL_MOD_INIT	= BIT(2),
+>>>>>>> BRANCH (fa1c9b5b9f851b6600e16d1a0a34a2c63eb58f6f UPSTREAM: ftrace: Implement :mod: cache filtering on kernel )
 };
 
 extern struct list_head ftrace_trace_arrays;
@@ -1107,6 +1112,7 @@ void ftrace_destroy_function_files(struct trace_array *tr);
 int ftrace_allocate_ftrace_ops(struct trace_array *tr);
 void ftrace_free_ftrace_ops(struct trace_array *tr);
 void ftrace_init_global_array_ops(struct trace_array *tr);
+struct trace_array *trace_get_global_array(void);
 void ftrace_init_array_ops(struct trace_array *tr, ftrace_func_t func);
 void ftrace_reset_array_ops(struct trace_array *tr);
 void ftrace_init_tracefs(struct trace_array *tr, struct dentry *d_tracer);
