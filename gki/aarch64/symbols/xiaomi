@@ -86,6 +86,13 @@
   prep_new_page
   folio_isolate_lru
 
+# required by page reclaim
+  __traceiter_android_vh_filemap_fault_folio_locked
+  __traceiter_android_vh_filemap_read_end
+
+  __tracepoint_android_vh_filemap_fault_folio_locked
+  __tracepoint_android_vh_filemap_read_end
+
 # required by kmem_protect.ko
   __traceiter_android_vh_free_mod_mem
   __traceiter_android_vh_set_mod_perm_after_init
