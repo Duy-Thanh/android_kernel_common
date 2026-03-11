@@ -345,6 +345,17 @@
   __tracepoint_android_vh_record_pcpu_rwsem_time_early
   cgroup_threadgroup_rwsem
 
+# required by mi_ext_lru.ko
+  mem_cgroup_iter
+  __traceiter_android_vh_readahead_add_folio
+  __tracepoint_android_vh_readahead_add_folio
+  __traceiter_android_vh_folio_activate_locked_bypass
+  __tracepoint_android_vh_folio_activate_locked_bypass
+  __traceiter_android_vh_folio_trylock_clear_bypass
+  __tracepoint_android_vh_folio_trylock_clear_bypass
+  __traceiter_android_vh_filemap_adjust_folio_flags
+  __tracepoint_android_vh_filemap_adjust_folio_flags
+
 #required by zram.ko
   bioset_init
   bioset_exit
