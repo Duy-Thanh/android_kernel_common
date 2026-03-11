@@ -34,6 +34,24 @@
       "parentUuid": "bf2d086d_67a07454",
       "revId": "863f921b11605d0568635b675b4dea50b7c52825",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc96699a_1be8c605",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-11T04:58:00Z",
+      "side": 1,
+      "message": "\u003e\u003eWhat if the host never issues the __pkvm__vcpu_after_set_cpuid hypercall? Do we still ensure we enable x2APIC in such case?\n\n\u003eHmm, BTW also if the host never issues the __pkvm__vcpu_after_set_cpuid hypercall, we don\u0027t call pkvm_enforce_cpuid(). Is that ok?\n\nIn this case, the vcpu-\u003earch.cpuid_entries is NULL. Then when pVM will read 0 for its CPUID leaves. So there is even no APIC feature. Such CPUID is definitely abnormal. But it is still a bit different with directly using the CPUID entries from the untrusted host without enforcement, as the host may set some feature bit (which is actually 0 in the native CPUID) in the pVM\u0027s CPUID entries to let the pVM bypass some necessary mitigations to a CPU bug. So I am not sure if there is any security issues with all 0 CPUID. It seems the pVM itself can also easily detect such abnormal CPUID and refuse to run. And we can also prevent the vCPU to run if `vcpu-\u003earch.cpuid_entries \u003d\u003d NULL`, but then having CPUID will be a force requirement for all kinds of pVM\u0027s OS, e.g., we cannot run a quite tiny/simple pVM which doesn\u0027t rely on any CPUID.\n\n\u003e If not, it seems we should call kvm_apic_set_base() when creating the protected vCPU instead (e.g. after calling kvm_vcpu_reset() in __vcpu_create(), to override the xAPIC setting done by kvm_lapic_reset())? And then here we can e.g. just check guest_cpu_cap_has(vcpu, X86_FEATURE_X2APIC), instead of calling kvm_apic_set_base() again?\n\nWe can do that. But as `kvm_apic_set_base()` relies on the vcpu-\u003earch.cpu_caps having X2APIC feature and vcpu-\u003earch.maxphyaddr, we will need manually call `guest_cpu_cap_set(vcpu, X86_FEATURE_X2APIC)` and `kvm_vcpu_after_set_cpuid(vcpu)` in __vcpu_create() before calling `kvm_apic_set_base()`. Calling `kvm_vcpu_after_set_cpuid(vcpu)` is fine as it is reasonable to set vcpu with empty CPUID entries, and this is also what the `kvm_arch_vcpu_create()` done. Calling `guest_cpu_cap_set(vcpu, X86_FEATURE_X2APIC)` is a bit tricky, as we set a guest cpu cap without respecting its CPUID. But as we will enforce the CPUID later, it seems fine.\n\nFrom the host side, maybe it is still better to move the apic base to `pkvm_vcpu_after_set_cpuid` to avoid calling `guest_cpu_cap_set(vcpu, X86_FEATURE_X2APIC)`?\n\n\u003e BTW also I\u0027m wondering: is there any easy way to check if x2APIC is enabled in the new CPUID before calling kvm_set_cpuid(vcpu, new, new_nent) to set this CPUID (so that we don\u0027t need to switch back to the old CPUID after that if the check fails)?\n\nMaybe we don\u0027t need to specifically check the CPUID for x2apic feature. The reason is that, during the pKVM initialization, we need the phsical apic in x2apic mode, this indicates the native CPUID has X2APIC feature in its CPUID leaf 0x1 ECX. And the current `pkvm_enforce_cpuid()` function will enforce the pVM\u0027s CPUID leaf 0x1 ECX with the native CPUID, so it should have the x2apic feature bit in the pVM\u0027s CPUID unless there is some code bug. So probably we don\u0027t need to check before calling `kvm_set_cpuid()`? Or just a `BUG_ON(guest_cpu_cap_has(vcpu, X86_FEATURE_X2APIC));` for the pVM after calling `kvm_set_cpuid()`?",
+      "parentUuid": "cc23d882_605fc468",
+      "revId": "863f921b11605d0568635b675b4dea50b7c52825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
