@@ -3498,7 +3498,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 	if (p->bdev && bdev_synchronous(p->bdev))
 		p->flags |= SWP_SYNCHRONOUS_IO;
 
-	trace_android_vh_adjust_swap_info_flags(&si->flags);
+	trace_android_vh_adjust_swap_info_flags(&p->flags);
 
 	if (p->bdev && bdev_nonrot(p->bdev)) {
 		int cpu, i;
