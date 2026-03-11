@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df6b8d4f_cc078e8d",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-11T07:26:18Z",
+      "side": 1,
+      "message": "I personally would partially cherry-pick local_copy from upstream so then this patch becomes simpler. Just my opinion.",
+      "parentUuid": "a354991e_115fa0a5",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3050dbde_1ea103a8",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
