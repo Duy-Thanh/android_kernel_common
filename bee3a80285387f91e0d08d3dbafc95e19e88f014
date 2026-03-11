@@ -16,6 +16,24 @@
       "message": "We don\u0027t need this check here, since this is already checked by is_guest_vcpu_accessible() (since we removed __pkvm__set_virtual_apic_mode from the list of allowed interfaces in is_guest_vcpu_accessible())?",
       "revId": "bee3a80285387f91e0d08d3dbafc95e19e88f014",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85a9c5a_f0f037c4",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-11T00:51:23Z",
+      "side": 1,
+      "message": "Makes sense. Will remove this redundant check.",
+      "parentUuid": "5eeb30fd_cc68abf3",
+      "revId": "bee3a80285387f91e0d08d3dbafc95e19e88f014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
