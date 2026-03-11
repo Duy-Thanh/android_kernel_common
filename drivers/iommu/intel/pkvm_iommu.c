@@ -427,7 +427,7 @@ int pkvm_domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 int pkvm_domain_unmap(struct dmar_domain *domain, unsigned long start_pfn, unsigned long last_pfn)
 {
 	int ret = pkvm_hypercall(iommu_domain_unmap, virt_to_phys(domain->pgd),
-				 start_pfn, last_pfn);
+				 start_pfn, last_pfn, domain->domain.type & __IOMMU_DOMAIN_DMA_FQ);
 
 	if (ret)
 		pr_err("%s: domain unmap[start_pfn: %lx, last_pfn: %lx] failed (err=%d)\n",
