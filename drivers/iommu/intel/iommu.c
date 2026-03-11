@@ -1418,7 +1418,10 @@ static void iommu_disable_pci_pri(struct device_domain_info *info)
 
 static void intel_flush_iotlb_all(struct iommu_domain *domain)
 {
-	cache_tag_flush_all(to_dmar_domain(domain));
+	if (!pkvm_enabled())
+		cache_tag_flush_all(to_dmar_domain(domain));
+	else if (domain->type & __IOMMU_DOMAIN_DMA_FQ)
+		pkvm_domain_flush(to_dmar_domain(domain), 0, ULONG_MAX, 0);
 }
 
 static void iommu_disable_protect_mem_regions(struct intel_iommu *iommu)
@@ -4115,6 +4118,9 @@ static void intel_iommu_tlb_sync(struct iommu_domain *domain,
 		cache_tag_flush_range(to_dmar_domain(domain), gather->start,
 				      gather->end,
 				      iommu_pages_list_empty(&gather->freelist));
+	else if (domain->type & __IOMMU_DOMAIN_DMA_FQ)
+		pkvm_domain_flush(to_dmar_domain(domain), gather->start, gather->end,
+				  iommu_pages_list_empty(&gather->freelist));
 	iommu_put_pages_list(&gather->freelist);
 }
 
@@ -4196,12 +4202,9 @@ static bool intel_iommu_capable(struct device *dev, enum iommu_cap cap)
 
 	switch (cap) {
 	case IOMMU_CAP_CACHE_COHERENCY:
-	case IOMMU_CAP_DEFERRED_FLUSH:
-		/*
-		 * pKVM enforces immediate flush and hence
-		 * does not support deferred flush capability.
-		 */
 		return !pkvm_enabled();
+	case IOMMU_CAP_DEFERRED_FLUSH:
+		return true;
 	case IOMMU_CAP_PRE_BOOT_PROTECTION:
 		return dmar_platform_optin();
 	case IOMMU_CAP_ENFORCE_CACHE_COHERENCY:
