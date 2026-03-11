@@ -7264,6 +7264,11 @@ pointer_reference {
   pointee_type_id: 0x61f68096
 }
 pointer_reference {
+  id: 0x12f234f7
+  kind: POINTER
+  pointee_type_id: 0x61883543
+}
+pointer_reference {
   id: 0x13012dce
   kind: POINTER
   pointee_type_id: 0x664451a4
@@ -36695,9 +36700,24 @@ member {
   type_id: 0x5ba545d0
 }
 member {
+  id: 0x355b4d01
+  type_id: 0x5a4366ad
+  offset: 768
+}
+member {
   id: 0x355c619d
   type_id: 0x5a5fd068
   offset: 96
+}
+member {
+  id: 0x355c737c
+  type_id: 0x5a5fb136
+  offset: 27904
+}
+member {
+  id: 0x355c7b3a
+  type_id: 0x5a5fb136
+  offset: 10496
 }
 member {
   id: 0x357170d2
@@ -36769,6 +36789,11 @@ member {
   id: 0x364b9cea
   type_id: 0x5600213c
   offset: 1552
+}
+member {
+  id: 0x3663ae8f
+  type_id: 0x56a0d424
+  offset: 2048
 }
 member {
   id: 0x36752b74
@@ -38828,12 +38853,6 @@ member {
   offset: 512
 }
 member {
-  id: 0x415b07cf
-  name: "__kabi_reserved1"
-  type_id: 0x92233392
-  offset: 10496
-}
-member {
   id: 0x415b0845
   name: "__kabi_reserved1"
   type_id: 0x92233392
@@ -39185,12 +39204,6 @@ member {
   name: "__kabi_reserved1"
   type_id: 0x92233392
   offset: 2752
-}
-member {
-  id: 0x415b0f89
-  name: "__kabi_reserved1"
-  type_id: 0x92233392
-  offset: 27904
 }
 member {
   id: 0x415b0f90
@@ -72932,10 +72945,27 @@ member {
   offset: 768
 }
 member {
+  id: 0x082d878d
+  name: "dmabuf_count"
+  type_id: 0x4585663f
+  offset: 320
+}
+member {
+  id: 0x32b44094
+  name: "dmabuf_info"
+  type_id: 0x12f234f7
+}
+member {
   id: 0x810e204c
   name: "dmabufs"
   type_id: 0xeb923a9b
   offset: 384
+}
+member {
+  id: 0x8136732c
+  name: "dmabufs"
+  type_id: 0xd3c80119
+  offset: 192
 }
 member {
   id: 0x813678c9
@@ -127635,6 +127665,11 @@ member {
   offset: 1056
 }
 member {
+  id: 0x014cd3d7
+  name: "nr_task_refs"
+  type_id: 0x1f4573ef
+}
+member {
   id: 0xe321d910
   name: "nr_tasks"
   type_id: 0x6720d32f
@@ -155812,6 +155847,11 @@ member {
   offset: 832
 }
 member {
+  id: 0x10789eb1
+  name: "rss"
+  type_id: 0x33756485
+}
+member {
   id: 0x10ad0965
   name: "rss"
   type_id: 0xe6e2b0f1
@@ -155843,6 +155883,12 @@ member {
   name: "rss_delete"
   type_id: 0x295c7202
   offset: 288
+}
+member {
+  id: 0x027688eb
+  name: "rss_hwm"
+  type_id: 0x33756485
+  offset: 64
 }
 member {
   id: 0x34f72ccf
@@ -195246,7 +195292,7 @@ struct_union {
     member_id: 0xa17465b3
     member_id: 0x0900497a
     member_id: 0xca4d1da5
-    member_id: 0x415b07cf
+    member_id: 0x355c7b3a
   }
 }
 struct_union {
@@ -198888,6 +198934,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x56a0d424
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x014cd3d7
+    member_id: 0x24c2370a
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x56faddc1
   kind: UNION
   definition {
@@ -198983,6 +199039,25 @@ struct_union {
     bytesize: 16
     member_id: 0x3cd401f2
     member_id: 0x95dac977
+  }
+}
+struct_union {
+  id: 0x5a4366ad
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x32b44094
+    member_id: 0x52ad2439
+  }
+}
+struct_union {
+  id: 0x5a5fb136
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x32b44094
+    member_id: 0x21c53df9
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -209770,7 +209845,7 @@ struct_union {
     member_id: 0x5f2a8271
     member_id: 0x415b0d62
     member_id: 0xb116e8cc
-    member_id: 0x112ba40c
+    member_id: 0x3663ae8f
   }
 }
 struct_union {
@@ -215202,6 +215277,7 @@ struct_union {
     member_id: 0x3b07b402
     member_id: 0xf0dd114d
     member_id: 0x654043c9
+    member_id: 0x355b4d01
     member_id: 0xfca11463
     member_id: 0xa92fa8fd
     member_id: 0x1aac0c74
@@ -241365,6 +241441,20 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x61883543
+  kind: STRUCT
+  name: "task_dma_buf_info"
+  definition {
+    bytesize: 48
+    member_id: 0x10789eb1
+    member_id: 0x027688eb
+    member_id: 0xb7dcf16e
+    member_id: 0x2d1fe165
+    member_id: 0x8136732c
+    member_id: 0x082d878d
+  }
+}
+struct_union {
   id: 0x84d533ac
   kind: STRUCT
   name: "task_group"
@@ -241646,7 +241736,7 @@ struct_union {
     member_id: 0x9a3ad698
     member_id: 0x5df54e84
     member_id: 0x1d504719
-    member_id: 0x415b0f89
+    member_id: 0x355c737c
     member_id: 0xb116e046
     member_id: 0xf0d654e2
     member_id: 0x04993717
@@ -301049,7 +301139,7 @@ elf_symbol {
   name: "__get_task_comm"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf32a9269
+  crc: 0xd9200d50
   type_id: 0x3cc96bbe
   full_name: "__get_task_comm"
 }
@@ -301379,7 +301469,7 @@ elf_symbol {
   name: "__kmalloc_cache_noprof"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd5d50a0e
+  crc: 0x8807f95c
   type_id: 0x5ed273d9
   full_name: "__kmalloc_cache_noprof"
 }
@@ -318136,7 +318226,7 @@ elf_symbol {
   name: "kmem_cache_alloc_bulk_noprof"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x243fd4fd
+  crc: 0x6968db10
   type_id: 0x95c413fa
   full_name: "kmem_cache_alloc_bulk_noprof"
 }
@@ -318145,7 +318235,7 @@ elf_symbol {
   name: "kmem_cache_alloc_lru_noprof"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa82fb405
+  crc: 0xd5e43b2c
   type_id: 0x5de26741
   full_name: "kmem_cache_alloc_lru_noprof"
 }
@@ -318154,7 +318244,7 @@ elf_symbol {
   name: "kmem_cache_alloc_noprof"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0dcbf1af
+  crc: 0x1a837a32
   type_id: 0x5eef7e83
   full_name: "kmem_cache_alloc_noprof"
 }
@@ -318172,7 +318262,7 @@ elf_symbol {
   name: "kmem_cache_free"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe8fd4844
+  crc: 0xffb5c3d9
   type_id: 0x1b45f00a
   full_name: "kmem_cache_free"
 }
@@ -318181,7 +318271,7 @@ elf_symbol {
   name: "kmem_cache_free_bulk"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xecc20711
+  crc: 0x20d39f9e
   type_id: 0x18f4ffe7
   full_name: "kmem_cache_free_bulk"
 }
