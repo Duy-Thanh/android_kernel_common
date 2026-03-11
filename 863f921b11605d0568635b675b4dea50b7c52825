@@ -52,6 +52,24 @@
       "parentUuid": "cc23d882_605fc468",
       "revId": "863f921b11605d0568635b675b4dea50b7c52825",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8e3f7f_1a033194",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-11T06:42:48Z",
+      "side": 1,
+      "message": "\u003e From the host side, maybe it is still better to move the apic base to pkvm_vcpu_after_set_cpuid to avoid calling guest_cpu_cap_set(vcpu, X86_FEATURE_X2APIC)?\n\nFor the host, maybe can keep the current implementation which is to override apic base after the vcpu is reset by calling `guest_cpu_cap_set(vcpu, X86_FEATURE_X2APIC)`, and then do a `KVM_BUG_ON(guest_cpu_cap_has(vcpu, X86_FEATURE_X2APIC), vcpu-\u003ekvm)` check in the `pkvm_vcpu_after_set_cpuid` to make sure the updated cpu caps still has the X86_FEATURE_X2APIC bit?",
+      "parentUuid": "bc96699a_1be8c605",
+      "revId": "863f921b11605d0568635b675b4dea50b7c52825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
