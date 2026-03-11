@@ -99,3 +99,9 @@
  __tracepoint_android_vh_cma_alloc_end
  __traceiter_android_vh_cma_alloc_end
 
+# required by page reclaim
+__traceiter_android_vh_filemap_fault_folio_locked
+__traceiter_android_vh_filemap_read_end
+
+__tracepoint_android_vh_filemap_fault_folio_locked
+__tracepoint_android_vh_filemap_read_end
