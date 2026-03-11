@@ -2156,7 +2156,8 @@ void pkvm_handle_host_hypercall(struct kvm_vcpu *vcpu)
 	case __pkvm__iommu_domain_unmap:
 		ret = pkvm_iommu_domain_unmap(pkvm_hc_input1(vcpu),
 					      pkvm_hc_input2(vcpu),
-					      pkvm_hc_input3(vcpu));
+					      pkvm_hc_input3(vcpu),
+					      pkvm_hc_input4(vcpu));
 		break;
 	case __pkvm__iommu_domain_flush:
 		ret = pkvm_iommu_domain_flush(pkvm_hc_input1(vcpu),

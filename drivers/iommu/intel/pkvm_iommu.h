@@ -217,7 +217,7 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data);
 int pkvm_iommu_alloc_domain(struct alloc_domain_data *data);
 int pkvm_iommu_free_domain(u64 pgd_gpa, struct pkvm_memcache *mc);
 int pkvm_iommu_domain_map(struct domain_map_data *in, struct domain_map_data *out);
-int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn);
+int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn, bool dma_fq);
 int pkvm_iommu_domain_flush(u64 pgd_gpa, u64 start, u64 last, int ih);
 int pkvm_iommu_modify_irte(struct modify_irte_data *data);
 
