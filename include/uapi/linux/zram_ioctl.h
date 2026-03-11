@@ -6,6 +6,8 @@
 #include <linux/types.h>
 #include <linux/ioctl.h>
 
+#define ZRAM_ANDROID_IOC_VERSION 1
+
 struct zram_android_ioc_data_process_writeback {
 	/* The pidfd of the process to scan for writeback candidates */
 	__aligned_u64	pidfd;
@@ -33,6 +35,7 @@ struct zram_android_ioc_data_process_prefetch {
 };
 
 struct zram_android_ioc_data {
+	__u32 version;
 	union {
 		struct zram_android_ioc_data_process_writeback process_writeback;
 		struct zram_android_ioc_data_process_prefetch process_prefetch;
@@ -40,6 +43,8 @@ struct zram_android_ioc_data {
 };
 
 #define ZRAM_ANDROID_IOC_MAGIC 0xBB
+#define ZRAM_ANDROID_IOC_GET_VERSION \
+	_IOR(ZRAM_ANDROID_IOC_MAGIC, 0, __u32)
 #define ZRAM_ANDROID_IOC_PROCESS_WRITEBACK \
 	_IOWR(ZRAM_ANDROID_IOC_MAGIC, 1, struct zram_android_ioc_data)
 #define ZRAM_ANDROID_IOC_PROCESS_PREFETCH \

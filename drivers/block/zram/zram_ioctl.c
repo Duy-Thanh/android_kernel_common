@@ -341,12 +341,23 @@ int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
 	struct zram_android_ioc_data ioc_data;
 	int ret = 0;
 
+	if (cmd == ZRAM_ANDROID_IOC_GET_VERSION) {
+		u32 version = ZRAM_ANDROID_IOC_VERSION;
+
+		if (copy_to_user(argp, &version, sizeof(version)))
+			return -EFAULT;
+		return 0;
+	}
+
 	if (cmd != ZRAM_ANDROID_IOC_PROCESS_WRITEBACK &&
 	    cmd != ZRAM_ANDROID_IOC_PROCESS_PREFETCH)
 		return -EINVAL;
 
 	if (copy_from_user(&ioc_data, argp, sizeof(ioc_data)))
 		return -EFAULT;
+
+	if (ioc_data.version != ZRAM_ANDROID_IOC_VERSION)
+		return -EOPNOTSUPP;
 
 	if (cmd == ZRAM_ANDROID_IOC_PROCESS_WRITEBACK) {
 		ret = zram_ioctl_process_writeback(zram, &ioc_data);
