@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3370021d_66d55e98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-11T00:48:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "569a632e_360cce16",
+      "revId": "2623a29c4be61a189aadba32469b304d40159e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f892d206_6828168f",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-10T14:48:22Z",
       "side": 1,
       "message": "Maybe it\u0027s better to return an error, e.g. -EOPNOTSUPP? Are there any cases when the host calls hwapic_isr_update while in-kernel lapic is not enabled?",
+      "revId": "2623a29c4be61a189aadba32469b304d40159e5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1ef13e_818ab8b6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-11T00:48:50Z",
+      "side": 1,
+      "message": "There is no such case. I see all the usages in host KVM (in lapic.c) are having in-kernel lapic with apicv active. It makes sense to return error code here.",
+      "parentUuid": "f892d206_6828168f",
       "revId": "2623a29c4be61a189aadba32469b304d40159e5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
