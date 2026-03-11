@@ -16,6 +16,24 @@
       "message": "Why is this not being merged upstream for 7.0-final?  If it is a bugfix, it should go there, and backported to stable kernels automatically.",
       "revId": "067f266166d10ca651a5ec38108180b33209feff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5938cc1_efc71f64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1957790
+      },
+      "writtenOn": "2026-03-11T02:45:27Z",
+      "side": 1,
+      "message": "It\u0027s not a bug fix, but it significantly reduces the probability of the issue on some boards when capturing with the DeviceAsWebcam feature. \n \nsome platforms that support SG buffers but require buffer bounce, yet lack IOMMU, may encounter a \"swiotlb buffer is full\" when capturing frames. and higher resolutions\u003c1080p/720p\u003e are more likely to experience this issue.\n \nwith the patch applied, if buffer allocation fails,  non-SG buffer will be used for retry, thus avoiding the issue.",
+      "parentUuid": "03cb3c15_4ec5e1d8",
+      "revId": "067f266166d10ca651a5ec38108180b33209feff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
