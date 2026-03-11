@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37df4fa8_19175375",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-11T01:26:25Z",
+      "side": 1,
+      "message": "Just the zcomp part (I believe that patch also changes zram for new zsmalloc API, but you don\u0027t need that part, I assume).",
+      "parentUuid": "f4f06332_87eb81d0",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3050dbde_1ea103a8",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
