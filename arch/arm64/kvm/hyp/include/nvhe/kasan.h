@@ -53,10 +53,6 @@ void __asan_report_store_n_noabort(void *, ssize_t size);
 void *__asan_memset(void *addr, int c, ssize_t len);
 void *__asan_memcpy(void *dest, const void *src, ssize_t len);
 
-static inline bool hyp_alloc_check_range(const volatile void *p, size_t size)
-{
-	/* Main function to do checks, To be implemented next */
-	return true;
-}
+bool hyp_alloc_check_range(const volatile void *p, size_t size);
 
 #endif /* __NVHE_KASAN_KASAN_H */
