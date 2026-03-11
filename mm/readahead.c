@@ -834,7 +834,7 @@ void readahead_expand(struct readahead_control *ractl,
 		page = __page_cache_alloc(gfp_mask);
 		if (!page)
 			return;
-		trace_android_vh_readahead_add_folio(folio, mapping);
+		trace_android_vh_readahead_add_folio(page_folio(page), mapping);
 		if (add_to_page_cache_lru(page, mapping, index, gfp_mask) < 0) {
 			put_page(page);
 			return;
@@ -858,7 +858,7 @@ void readahead_expand(struct readahead_control *ractl,
 		page = __page_cache_alloc(gfp_mask);
 		if (!page)
 			return;
-		trace_android_vh_readahead_add_folio(folio, mapping);
+		trace_android_vh_readahead_add_folio(page_folio(page), mapping);
 		if (add_to_page_cache_lru(page, mapping, index, gfp_mask) < 0) {
 			put_page(page);
 			return;
