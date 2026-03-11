@@ -104,11 +104,7 @@ void __asan_unregister_globals(void *ptr, ssize_t size)
 {
 }
 
-static inline bool alloc_check_range(const volatile void *p, u64 size)
-{
-	/* Main function to do checks, To be implemented next */
-	return true;
-}
+bool alloc_check_range(const volatile void *p, u64 size);
 
 void *__asan_memcpy(void *dest, const void *src, ssize_t len)
 {

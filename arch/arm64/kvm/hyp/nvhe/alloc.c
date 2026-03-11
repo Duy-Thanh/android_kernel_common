@@ -29,6 +29,119 @@ static struct hyp_allocator {
 	hyp_spinlock_t		lock;
 } hyp_allocator;
 
+
+#if defined (CONFIG_KASAN_GENERIC) && defined (CONFIG_KASAN_OUTLINE)
+
+/* KASAN specific config */
+#define KASAN_VA_BYTES_PER_BIT			MIN_ALLOC
+#define KASAN_SHADOW_NR_PAGES			1UL
+typedef u8					kasan_hyp_t;
+
+/* Helpers*/
+#define KASAN_SHADOW_ARR_SIZE			((KASAN_SHADOW_NR_PAGES * PAGE_SIZE) / sizeof(kasan_hyp_t))
+#define KASAN_VA_BYTES_PER_BYTE			(KASAN_VA_BYTES_PER_BIT << 3)
+#define KASAN_SHADOW_VA_COVERED			(KASAN_SHADOW_NR_PAGES * PAGE_SIZE * KASAN_VA_BYTES_PER_BYTE)
+#define KASAN_VA_TO_SHADOW_IDX(off)		((off) / KASAN_VA_BYTES_PER_BYTE)
+#define KASAN_VA_TO_SHADOW_BIT(off)		(((off) % KASAN_VA_BYTES_PER_BYTE) / KASAN_VA_BYTES_PER_BIT)
+#define KASAN_SHADOW_ENTRY_LAST_BIT		((sizeof(kasan_hyp_t) * 8) - 1)
+/*
+ * Static for now, ideally per allocator and grow dynamically.
+ */
+static kasan_hyp_t shadow_alloc[KASAN_SHADOW_ARR_SIZE];
+
+static inline void kasan_set_entry(int idx, int bit_start, int bit_end, bool poison)
+{
+	BUG_ON(bit_end < bit_start);
+
+	if (poison)
+		shadow_alloc[idx] &= ~GENMASK(bit_end, bit_start);
+	else
+		shadow_alloc[idx] |= GENMASK(bit_end, bit_start);
+}
+
+static inline bool kasan_check_range(u64 off_start, u64 off_end)
+{
+	int start = KASAN_VA_TO_SHADOW_IDX(off_start);
+	int end = KASAN_VA_TO_SHADOW_IDX(off_end);
+	int bit_start = KASAN_VA_TO_SHADOW_BIT(off_start);
+	int bit_end = KASAN_VA_TO_SHADOW_BIT(off_end);
+
+	if (start == end)
+		return (shadow_alloc[start] & GENMASK(bit_end, bit_start)) == GENMASK(bit_end, bit_start);
+
+	if ((shadow_alloc[start] & GENMASK(KASAN_SHADOW_ENTRY_LAST_BIT, bit_start)) != GENMASK(KASAN_SHADOW_ENTRY_LAST_BIT, bit_start))
+		return false;
+	start++;
+
+	if ((shadow_alloc[end] & GENMASK(bit_end, 0)) != GENMASK(bit_end, 0))
+		return false;
+	end--;
+
+	while (start <= end) {
+		if (shadow_alloc[start] != GENMASK(KASAN_SHADOW_ENTRY_LAST_BIT, 0))
+			return false;
+		start++;
+	}
+	return true;
+}
+
+static inline void kasan_set_range(u64 off_start, u64 off_end, bool poison)
+{
+	int start = KASAN_VA_TO_SHADOW_IDX(off_start);
+	int end = KASAN_VA_TO_SHADOW_IDX(off_end);
+	int bit_start = KASAN_VA_TO_SHADOW_BIT(off_start);
+	int bit_end = KASAN_VA_TO_SHADOW_BIT(off_end);
+	kasan_hyp_t mask = poison ? 0 : -1;
+
+	/* Same idx */
+	if (start == end)
+		kasan_set_entry(start, bit_start, bit_end, poison);
+
+	/* Set first partial part. */
+	kasan_set_entry(start, bit_start, KASAN_SHADOW_ENTRY_LAST_BIT, poison);
+	start++;
+	/* Set last partial part*/
+	kasan_set_entry(end, 0, bit_end, poison);
+	end--;
+
+	/* Set any part in the middle*/
+	if (end > start)
+		memset(&shadow_alloc[start], mask, end - start + 1);
+}
+
+static void poison_shadow(u64 addr, u64 size)
+{
+	u64 end = min(addr + size, hyp_allocator.start + KASAN_SHADOW_VA_COVERED);
+
+	if (end <= addr)
+		return;
+	kasan_set_range(addr - hyp_allocator.start, end - hyp_allocator.start, true);
+}
+
+static void unpoison_shadow(u64 addr, u64 size)
+{
+	u64 end = min(addr + size, hyp_allocator.start + KASAN_SHADOW_VA_COVERED);
+
+	if (end <= addr)
+		return;
+
+	kasan_set_range(addr - hyp_allocator.start, end - hyp_allocator.start, false);
+}
+
+bool alloc_check_range(const volatile void *p, u64 size);
+bool alloc_check_range(const volatile void *p, u64 size)
+{
+	u64 addr = (u64)p;
+	u64 end = addr + size;
+
+	if ((addr < hyp_allocator.start) || (end > (hyp_allocator.start + KASAN_SHADOW_VA_COVERED)))
+		return true;
+
+	return kasan_check_range(addr - hyp_allocator.start, end - hyp_allocator.start);
+}
+
+#endif
+
 struct chunk_hdr {
 	u32			alloc_size;
 	u32			mapped_size;
@@ -602,8 +715,11 @@ end_unlocked:
 	*(this_cpu_ptr(&hyp_allocator_errno)) = ret;
 
 	/* Enforce zeroing allocated memory */
-	if (!ret)
+	if (!ret) {
 		memset(chunk_data(chunk), 0, size);
+		if (IS_ENABLED(CONFIG_KASAN))
+			unpoison_shadow((u64)chunk_data(chunk), size);
+	}
 
 	return ret ? NULL : chunk_data(chunk);
 }
@@ -638,8 +754,11 @@ void hyp_free(void *addr)
 	struct chunk_hdr *chunk, *prev_chunk, *next_chunk;
 	struct hyp_allocator *allocator = &hyp_allocator;
 	char *chunk_data = (char *)addr;
+	size_t size = hyp_alloc_size(addr);
 
 	hyp_spin_lock(&allocator->lock);
+	if (IS_ENABLED(CONFIG_KASAN))
+		poison_shadow((u64)addr, size);
 
 	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
 	prev_chunk = chunk_get_prev(chunk, allocator);
