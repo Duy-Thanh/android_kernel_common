@@ -22,6 +22,30 @@
       },
       "revId": "692f089a63b4d3f017635225dc8240f2cf817674",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27185371_bd52696f",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3781,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2026-03-11T03:27:41Z",
+      "side": 1,
+      "message": "We need to track the folio that is actually required by the page fault,\nexcluding those brought in by the fault-around mechanism. In this context,\nthe folio corresponding to the `VM_FAULT_NOPAGE` return value is the one\nwe need to identify.\n\nHowever, the existing hooks do not provide sufficient information:\n- trace_android_vh_filemap_folio_mapped() does not expose the ret value.\n- trace_android_vh_filemap_map_pages() and\n  trace_android_vh_filemap_map_pages_range() do not expose the folio.\n\nTherefore, it is difficult to determine the required folio using the\nexisting hooks.",
+      "parentUuid": "7b2c0414_ad2d7dd3",
+      "range": {
+        "startLine": 3768,
+        "startChar": 2,
+        "endLine": 3781,
+        "endChar": 83
+      },
+      "revId": "692f089a63b4d3f017635225dc8240f2cf817674",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
