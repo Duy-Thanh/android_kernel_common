@@ -337,6 +337,8 @@ struct bpf_map {
 	char *excl_prog_sha;
 };
 
+bool bpf_is_ringbuf_file(struct file *file);
+
 static inline const char *btf_field_type_name(enum btf_field_type type)
 {
 	switch (type) {

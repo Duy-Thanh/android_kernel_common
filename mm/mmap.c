@@ -561,6 +561,13 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 			vm_flags |= VM_NORESERVE;
 	}
 
+	if (file && bpf_is_ringbuf_file(file)) {
+		unsigned int nr_subpages = __PAGE_SIZE / PAGE_SIZE;
+
+		if (nr_subpages > 1 && pgoff > 0 && (pgoff & (nr_subpages - 1)) == 0)
+			pgoff /= nr_subpages;
+	}
+
 	addr = mmap_region(file, addr, len, vm_flags, pgoff, uf);
 	if (!IS_ERR_VALUE(addr) &&
 	    ((vm_flags & VM_LOCKED) ||

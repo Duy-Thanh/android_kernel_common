@@ -1182,6 +1182,18 @@ const struct file_operations bpf_map_fops = {
 	.get_unmapped_area = bpf_get_unmapped_area,
 };
 
+bool bpf_is_ringbuf_file(struct file *file)
+{
+	if (file->f_op != &bpf_map_fops)
+		return false;
+
+	struct bpf_map *map = file->private_data;
+
+	return map->map_type == BPF_MAP_TYPE_RINGBUF ||
+		map->map_type == BPF_MAP_TYPE_USER_RINGBUF;
+}
+EXPORT_SYMBOL_GPL(bpf_is_ringbuf_file);
+
 int bpf_map_new_fd(struct bpf_map *map, int flags)
 {
 	int ret;
