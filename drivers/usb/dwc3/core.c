@@ -2165,11 +2165,13 @@ static int dwc3_probe(struct platform_device *pdev)
 	void __iomem		*regs;
 	struct dwc3		*dwc;
 	int			ret;
+	struct vendor_dwc3 *vdwc3;
 
-	dwc = devm_kzalloc(dev, sizeof(*dwc), GFP_KERNEL);
-	if (!dwc)
+	vdwc3 = devm_kzalloc(dev, sizeof(*vdwc3), GFP_KERNEL);
+	if (!vdwc3)
 		return -ENOMEM;
 
+	dwc = &vdwc3->dwc;
 	dwc->dev = dev;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);

@@ -1681,6 +1681,27 @@ struct xhci_hcd {
 	unsigned long		priv[] __aligned(sizeof(s64));
 };
 
+/**
+ * struct vendor_xhci_hcd - Vendor wrapper for xhci_hcd.
+ *
+ * hcd_priv points to this struct. vendor_xhci_hcd embeds struct xhci_hcd as
+ * its last member (because xhci_hcd ends with a flexible array priv[]).
+ * Allows vendor drivers to hook into xhci without modifying struct xhci_hcd.
+ */
+struct vendor_xhci_hcd {
+	int (*handle_events)(struct xhci_hcd *xhci, struct xhci_interrupter *ir,
+			     bool skip_events);
+	/* xhci MUST be last: xhci_hcd ends with a flexible array member priv[] */
+	struct xhci_hcd xhci;
+};
+
+/**
+ * xhci_to_vendor_hcd - get vendor_xhci_hcd from xhci_hcd *
+ *
+ * Uses container_of since xhci_hcd is embedded in vendor_xhci_hcd.
+ */
+#define xhci_to_vendor_hcd(x)	container_of(x, struct vendor_xhci_hcd, xhci)
+
 /* Platform specific overrides to generic XHCI hc_driver ops */
 struct xhci_driver_overrides {
 	size_t extra_priv_size;
@@ -1715,7 +1736,7 @@ static inline struct xhci_hcd *hcd_to_xhci(struct usb_hcd *hcd)
 	else
 		primary_hcd = hcd->primary_hcd;
 
-	return (struct xhci_hcd *) (primary_hcd->hcd_priv);
+	return &((struct vendor_xhci_hcd *)(primary_hcd->hcd_priv))->xhci;
 }
 
 static inline struct usb_hcd *xhci_to_hcd(struct xhci_hcd *xhci)
@@ -1961,6 +1982,8 @@ void xhci_process_cancelled_tds(struct xhci_virt_ep *ep);
 void xhci_update_erst_dequeue(struct xhci_hcd *xhci,
 			      struct xhci_interrupter *ir,
 			      bool clear_ehb);
+int xhci_handle_event_trb(struct xhci_hcd *xhci, struct xhci_interrupter *ir,
+			  union xhci_trb *event);
 
 /* xHCI roothub code */
 void xhci_set_link_state(struct xhci_hcd *xhci, struct xhci_port *port,

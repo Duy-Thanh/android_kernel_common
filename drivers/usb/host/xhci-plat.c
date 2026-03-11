@@ -32,7 +32,20 @@ static int xhci_plat_setup(struct usb_hcd *hcd);
 static int xhci_plat_start(struct usb_hcd *hcd);
 
 static const struct xhci_driver_overrides xhci_plat_overrides __initconst = {
-	.extra_priv_size = sizeof(struct xhci_plat_priv),
+	/*
+	 * extra_priv_size specifies the size of xhci->priv[], the flexible
+	 * array at the end of struct xhci_hcd.
+	 *
+	 * The HCD framework allocates sizeof(vendor_xhci_hcd) + extra_priv_size
+	 * bytes for hcd_priv, which provides space for:
+	 *   - vendor_xhci_hcd wrapper (function pointer + embedded xhci_hcd)
+	 *   - xhci->priv[] array data (vendor_xhci_plat_priv)
+	 *
+	 * vendor_xhci_plat_priv embeds xhci_plat_priv as its first member,
+	 * allowing standard xhci_plat_priv access via hcd_to_xhci_priv() while
+	 * also providing space for vendor-specific quirks pointer.
+	 */
+	.extra_priv_size =  sizeof(struct vendor_xhci_plat_priv),
 	.reset = xhci_plat_setup,
 	.start = xhci_plat_start,
 };
@@ -231,9 +244,29 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
 		goto disable_reg_clk;
 
 	if (priv_match) {
+		const struct vendor_xhci_plat_priv *vpriv =
+			(const struct vendor_xhci_plat_priv *)priv_match;
+
 		priv = hcd_to_xhci_priv(hcd);
-		/* Just copy data for now */
+		/* Copy the base xhci_plat_priv fields */
 		*priv = *priv_match;
+
+		/*
+		 * If the caller passed a vendor_xhci_plat_priv, extract the
+		 * vendor handle_events hook and store it in vendor_xhci_hcd.
+		 * vendor_xhci_hcd is the outermost wrapper (hcd_priv points to
+		 * it), so xhci_to_vendor_hcd() uses container_of to reach it.
+		 * For plain xhci_plat_priv callers, vpriv->vendor_quirks is
+		 * NULL and the inner if simply does not fire.
+		 */
+		if (vpriv->vendor_quirks &&
+		    vpriv->vendor_quirks->handle_events) {
+			struct vendor_xhci_hcd *vendor_hcd =
+				xhci_to_vendor_hcd(xhci);
+
+			vendor_hcd->handle_events =
+				vpriv->vendor_quirks->handle_events;
+		}
 	}
 
 	device_set_wakeup_capable(&pdev->dev, true);

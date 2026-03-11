@@ -680,6 +680,9 @@
 
 struct dwc3_trb;
 
+/* Forward declaration - full definition is in <linux/usb/host/xhci-plat.h> */
+struct vendor_xhci_plat_quirks;
+
 /**
  * struct dwc3_event_buffer - Software event buffer representation
  * @buf: _THE_ buffer
@@ -1423,6 +1426,32 @@ struct dwc3 {
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 };
+
+/**
+ * struct vendor_dwc3 - vendor-specific DWC3 wrapper
+ * @dwc:         embedded dwc3 structure (MUST be first)
+ * @xhci_quirks: pointer to xHCI platform quirks for this controller, or NULL
+ *
+ * The DWC3 core driver (core.c) always allocates this structure instead of
+ * plain struct dwc3.  Vendor glue drivers (e.g. dwc3-msm-core) obtain the
+ * dwc pointer via platform_get_drvdata() and set xhci_quirks to point at a
+ * static vendor quirks table before host initialisation:
+ *
+ *   dwc3_to_vendor_dwc3(dwc)->xhci_quirks = &msm_xhci_plat_quirks;
+ *
+ * The pointer is zero-initialised (NULL) by devm_kzalloc, so controllers
+ * that do not register vendor quirks automatically follow the original
+ * xhci_handle_events() code path.
+ */
+struct vendor_dwc3 {
+	struct dwc3 dwc;                              /* MUST be first */
+	const struct vendor_xhci_plat_quirks *xhci_quirks;
+};
+
+static inline struct vendor_dwc3 *dwc3_to_vendor_dwc3(struct dwc3 *dwc)
+{
+	return container_of(dwc, struct vendor_dwc3, dwc);
+}
 
 #define INCRX_BURST_MODE 0
 #define INCRX_UNDEF_LENGTH_BURST_MODE 1

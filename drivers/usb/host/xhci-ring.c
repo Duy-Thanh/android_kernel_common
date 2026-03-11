@@ -3026,7 +3026,7 @@ err_out:
  * This function handles one OS-owned event on the event ring. It may drop
  * xhci->lock between event processing (e.g. to pass up port status changes).
  */
-static int xhci_handle_event_trb(struct xhci_hcd *xhci, struct xhci_interrupter *ir,
+int xhci_handle_event_trb(struct xhci_hcd *xhci, struct xhci_interrupter *ir,
 				 union xhci_trb *event)
 {
 	u32 trb_type;
@@ -3070,7 +3070,7 @@ static int xhci_handle_event_trb(struct xhci_hcd *xhci, struct xhci_interrupter 
 
 	return 0;
 }
-
+EXPORT_SYMBOL_GPL(xhci_handle_event_trb);
 /*
  * Update Event Ring Dequeue Pointer:
  * - When all events have finished
@@ -3124,6 +3124,11 @@ static void xhci_clear_interrupt_pending(struct xhci_interrupter *ir)
 static int xhci_handle_events(struct xhci_hcd *xhci, struct xhci_interrupter *ir,
 			      bool skip_events)
 {
+	struct vendor_xhci_hcd *vendor_hcd = xhci_to_vendor_hcd(xhci);
+
+	if (vendor_hcd->handle_events)
+		return vendor_hcd->handle_events(xhci, ir, skip_events);
+
 	int event_loop = 0;
 	int err = 0;
 	u64 temp;

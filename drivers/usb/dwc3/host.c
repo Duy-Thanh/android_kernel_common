@@ -14,7 +14,6 @@
 #include <linux/usb/hcd.h>
 
 #include "../host/xhci-port.h"
-#include "../host/xhci-ext-caps.h"
 #include "../host/xhci-caps.h"
 #include "../host/xhci-plat.h"
 #include "core.h"
@@ -134,6 +133,9 @@ int dwc3_host_init(struct dwc3 *dwc)
 	int			ret, irq;
 	int			prop_idx = 0;
 
+	struct vendor_xhci_plat_priv vpriv = {
+		.base = dwc3_xhci_plat_quirk,
+	};
 	/*
 	 * Some platforms need to power off all Root hub ports immediately after DWC3 set to host
 	 * mode to avoid VBUS glitch happen when xhci get reset later.
@@ -196,8 +198,11 @@ int dwc3_host_init(struct dwc3 *dwc)
 		}
 	}
 
-	ret = platform_device_add_data(xhci, &dwc3_xhci_plat_quirk,
-				       sizeof(struct xhci_plat_priv));
+	if (dwc3_to_vendor_dwc3(dwc)->xhci_quirks) {
+		vpriv.vendor_quirks = dwc3_to_vendor_dwc3(dwc)->xhci_quirks;
+	}
+
+	ret = platform_device_add_data(xhci, &vpriv, sizeof(vpriv));
 	if (ret)
 		goto err;
 
