@@ -184,6 +184,8 @@ extern int static_call_text_reserved(void *start, void *end);
 
 extern long __static_call_return0(void);
 
+#define STATIC_CALL_RET0_STUB(...)	((void *)&__static_call_return0)
+
 #define DEFINE_STATIC_CALL(name, _func)					\
 	DECLARE_STATIC_CALL(name, _func);				\
 	struct static_call_key STATIC_CALL_KEY(name) = {		\
@@ -270,6 +272,8 @@ static inline int static_call_text_reserved(void *start, void *end)
 
 extern long __static_call_return0(void);
 
+#define STATIC_CALL_RET0_STUB(...)	((void *)&__static_call_return0)
+
 #define EXPORT_STATIC_CALL(name)					\
 	EXPORT_SYMBOL(STATIC_CALL_KEY(name));				\
 	EXPORT_SYMBOL(STATIC_CALL_TRAMP(name))
@@ -285,9 +289,25 @@ extern long __static_call_return0(void);
 
 #else /* Generic implementation */
 
+#include <linux/cfi.h>
+
 #define static_call_initialized 0
 
 static inline int static_call_init(void) { return 0; }
+
+/*
+ * Architectures may provide ARCH_DEFINE_TYPED_STUB_RET0() to generate
+ * signature-matching stubs and avoid kCFI failures. For all other cases,
+ * fall back to the generic __static_call_return0.
+ */
+#ifdef ARCH_DEFINE_TYPED_STUB_RET0
+#define STATIC_CALL_RET0_STUB(name)	__static_call_##name
+#define DEFINE_STATIC_CALL_RET0_STUB(name, _func)			\
+	ARCH_DEFINE_TYPED_STUB_RET0(STATIC_CALL_RET0_STUB(name), _func)
+#else
+#define STATIC_CALL_RET0_STUB(...)	((void *)&__static_call_return0)
+#define DEFINE_STATIC_CALL_RET0_STUB(...)
+#endif
 
 static inline long __static_call_return0(void)
 {
@@ -307,7 +327,8 @@ static inline long __static_call_return0(void)
 	__DEFINE_STATIC_CALL(name, _func, NULL)
 
 #define DEFINE_STATIC_CALL_RET0(name, _func)				\
-	__DEFINE_STATIC_CALL(name, _func, __static_call_return0)
+	DEFINE_STATIC_CALL_RET0_STUB(name, _func)			\
+	__DEFINE_STATIC_CALL(name, _func, STATIC_CALL_RET0_STUB(name))
 
 static inline void __static_call_nop(void) { }
 
