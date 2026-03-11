@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a354991e_115fa0a5",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-11T07:23:10Z",
+      "side": 1,
+      "message": "Yes, I didn\u0027t backport it due to the new zsmalloc API. So is it ok to backport part of the patch from upstream? If so, I can pick the local_copy approach.",
+      "parentUuid": "37df4fa8_19175375",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3050dbde_1ea103a8",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
