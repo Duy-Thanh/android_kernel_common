@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4f06332_87eb81d0",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-11T01:12:49Z",
+      "side": 1,
+      "message": "In upstream that page is per-CPU (part of the per-CPU comp stream). Richard maybe you can cherry-pick upstream patch that adds that -\u003elocal_copy page to per-CPU stream?",
+      "parentUuid": "7420373a_fd971920",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3050dbde_1ea103a8",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
