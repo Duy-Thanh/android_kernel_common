@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae7f835_d76de43e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2026-03-12T15:32:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure we need to check the version as part of the ZRAM_ANDROID_IOC_PROCESS_WRITEBACK ioctl.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 22
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171bd7e9_29507dd5",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2026-03-12T15:32:07Z",
+      "side": 1,
+      "message": "I thought we said that the old version would be removed and mmd would be modified to test the version ioctl first?",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 12
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
