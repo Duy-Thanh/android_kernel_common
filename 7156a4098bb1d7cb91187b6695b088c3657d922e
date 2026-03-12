@@ -26,6 +26,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f986f35_7c63af91",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-12T19:04:31Z",
+      "side": 1,
+      "message": "Yes, we may support versioining from ZRAM_ANDROID_IOC_PROCESS_ADDR_RANGE_WRITEBACK.\n\nMMD query the versioning but fails since kernel doesn\u0027t support. Then, simply feature off.",
+      "parentUuid": "2ae7f835_d76de43e",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 22
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec397ad_92b686f9",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-12T19:04:31Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we need V0?",
+      "range": {
+        "startLine": 227,
+        "startChar": 19,
+        "endLine": 227,
+        "endChar": 56
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "171bd7e9_29507dd5",
         "filename": "drivers/block/zram/zram_ioctl.c",
         "patchSetId": 1
@@ -42,6 +89,76 @@
         "startChar": 0,
         "endLine": 247,
         "endChar": 12
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18e27d4_eb4ed466",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-12T19:04:31Z",
+      "side": 1,
+      "message": "old API will keep maintaining for compatibility for 6.12 but I don\u0027t think we need support versioning for the old API.",
+      "parentUuid": "171bd7e9_29507dd5",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 12
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b6bca4_e1e072e4",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-12T19:04:31Z",
+      "side": 1,
+      "message": "Isn\u0027t the size change of this structure cause ABI breaks?\n\nShouldn\u0027t we add the version inside of union?",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2cb5310_0abc4518",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-12T19:04:31Z",
+      "side": 1,
+      "message": "Why do we need this?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 54
       },
       "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
