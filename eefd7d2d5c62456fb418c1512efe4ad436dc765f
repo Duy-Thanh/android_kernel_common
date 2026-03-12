@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "034f87b0_16ba6922",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T22:14:36Z",
+      "side": 1,
+      "message": "It seems like this function needs to be atomic too wrt other invocations of it; maybe we should add `assert_spin_locked(\u0026ctx-\u003elock);` here too so that it is clear?",
+      "revId": "eefd7d2d5c62456fb418c1512efe4ad436dc765f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13224511_87567053",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T22:14:36Z",
+      "side": 1,
+      "message": "One of the conditions for `block_modifications()` to succeed is that there are no mappings at the time it is invoked, which implies that until modifications are unblocked, that should hold true.\n\nHowever, isn\u0027t there a possibility that after you drop the lock and load the file, another thread within the process that is loading the file invokes `mmap()`? In that case, you\u0027ll have a mapping while the file is being loaded?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 25
+      },
+      "revId": "eefd7d2d5c62456fb418c1512efe4ad436dc765f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
