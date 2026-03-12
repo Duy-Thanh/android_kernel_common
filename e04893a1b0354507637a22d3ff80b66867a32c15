@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15c7e187_2ae87c35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T23:21:54Z",
+      "side": 1,
+      "message": "And perhaps we should add a selftest to verify that the wrapfd we get back from wrap matches the state of `O_CLOEXEC` on the underlying file. On rewrap we can check to ensure it\u0027s preserved",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21c328f1_438aacbe",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
