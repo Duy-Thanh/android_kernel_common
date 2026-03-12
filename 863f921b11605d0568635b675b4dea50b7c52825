@@ -124,6 +124,24 @@
       "parentUuid": "bf39b07c_535adb99",
       "revId": "863f921b11605d0568635b675b4dea50b7c52825",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa81d2e2_3a24833d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T11:49:29Z",
+      "side": 1,
+      "message": "Yeah, makes sense to me. Thanks for catching this.",
+      "parentUuid": "062ae273_7de9fca4",
+      "revId": "863f921b11605d0568635b675b4dea50b7c52825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
