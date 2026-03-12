@@ -16,6 +16,24 @@
       "message": "Using the fd number here doesn\u0027t work. The process could use dup + close to change what the fd number is, or maybe the wrapfd itself has been transferred to another process and you\u0027re trying to use it from the wrong fdtable context.\n\nProbably you should hold a refcount on the underlying file structure instead.",
       "revId": "ea9dccd7162d73e67181259f4e77e9c8905c019e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b503d9_e936ea83",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-12T15:23:31Z",
+      "side": 1,
+      "message": "I see. Ok, to keep it simple I\u0027ll provide an is_wrapfd_file(file) similar to is_dma_buf_file(file) and will use it inside remap_file_pages() to error out instead of replacing the vm_file. This keeps things simple and the version that will be posted upstream will be using this method anyway.",
+      "parentUuid": "2fb71e62_df7c833a",
+      "revId": "ea9dccd7162d73e67181259f4e77e9c8905c019e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
