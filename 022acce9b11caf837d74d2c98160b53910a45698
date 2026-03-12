@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a929bd_dab21751",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-12T09:50:56Z",
+      "side": 1,
+      "message": "Use the local_copy approach. Please help review again. Thanks!",
+      "parentUuid": "46b7571c_bcfdccac",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7420373a_fd971920",
@@ -107,6 +125,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d204c2_de7ef3a3",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-12T09:50:56Z",
+      "side": 1,
+      "message": "Pick the local_copy in another CL. Please help review again. Thanks!",
+      "parentUuid": "df6b8d4f_cc078e8d",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3050dbde_1ea103a8",
@@ -120,6 +156,24 @@
       "writtenOn": "2026-03-10T15:12:30Z",
       "side": 1,
       "message": "Also here, where are you freeing the bounce page in the sync case?",
+      "revId": "022acce9b11caf837d74d2c98160b53910a45698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7956ef71_ff3e57e8",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-12T09:50:56Z",
+      "side": 1,
+      "message": "Use the local_copy approach. Please help review again. Thanks!",
+      "parentUuid": "3050dbde_1ea103a8",
       "revId": "022acce9b11caf837d74d2c98160b53910a45698",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
