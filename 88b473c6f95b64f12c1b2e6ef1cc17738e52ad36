@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3434ba94_9c5531ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-12T13:26:07Z",
+      "side": 1,
+      "message": "Add?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 2
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8720676d_587cb117",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-12T13:26:07Z",
+      "side": 1,
+      "message": "encrypted?",
+      "range": {
+        "startLine": 9,
+        "startChar": 58,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6663500b_0415b3cd",
+        "filename": "kernel/dma/swiotlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-12T13:26:07Z",
+      "side": 1,
+      "message": "Why not define this as a single bit, like you would normally expect for a flag? (i.e. `BIT(0)`). You can still pass a `u64 flags` through the priv pointer.",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b22695ec_c24bfc6c",
+        "filename": "kernel/dma/swiotlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-12T13:26:07Z",
+      "side": 1,
+      "message": "Should we call `set_memory_encrypted()` for the encryption case, rather than rely on the default state of memory being encrypted? I don\u0027t think it matters with pKVM, but you can imagine other hypervisors that explicitly allocate the reserved memory regions (i.e. specify the base address in DT) and may have a pre-shared (decrypted) window.",
+      "range": {
+        "startLine": 1860,
+        "startChar": 5,
+        "endLine": 1860,
+        "endChar": 19
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
