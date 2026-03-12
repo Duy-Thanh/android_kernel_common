@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb71e62_df7c833a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-12T09:39:46Z",
+      "side": 1,
+      "message": "Using the fd number here doesn\u0027t work. The process could use dup + close to change what the fd number is, or maybe the wrapfd itself has been transferred to another process and you\u0027re trying to use it from the wrong fdtable context.\n\nProbably you should hold a refcount on the underlying file structure instead.",
+      "revId": "ea9dccd7162d73e67181259f4e77e9c8905c019e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
