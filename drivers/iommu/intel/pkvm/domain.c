@@ -31,6 +31,8 @@ void init_pt_domain(void)
 {
 	INIT_LIST_HEAD(&pt_domain.cache_tags);
 	pkvm_spin_lock_init(&pt_domain.cache_lock);
+	pt_domain.pgd = __pkvm_va(pkvm_host_ept_root());
+	pt_domain.agaw = level_to_agaw(pkvm_host_ept_level());
 	pt_domain.qi_batch = &pt_domain._qi_batch;
 	pt_domain.pgd = __pkvm_va(pkvm_host_ept_root());
 	pt_domain.agaw = level_to_agaw(pkvm_host_ept_level());
@@ -219,6 +221,9 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 
 	pkvm_spin_unlock(&iommu_domain_lock);
 
+	if (domain->domain.type == IOMMU_DOMAIN_NESTED)
+		goto release_domain;
+
 	/* Unmap any remaining mappings. */
 	domain_unmap(domain, 0, DOMAIN_MAX_PFN(domain->gaw), NULL);
 	free_domain_memcache(domain, teardown_mc);
@@ -230,6 +235,7 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 	push_pkvm_memcache_page(teardown_mc, domain->pgd, pkvm_virt_to_host_gpa);
 	pkvm_hyp_donate_host(__pkvm_pa(domain->pgd), VTD_PAGE_SIZE, false);
 
+release_domain:
 	pkvm_dbg("%s: freeing domain[pgd: %p], freed pages: %lu\n",
 		 __func__, domain->pgd, teardown_mc->count);
 
@@ -270,6 +276,10 @@ struct dmar_domain *pkvm_alloc_iommu_domain(struct alloc_domain_data *data,
 		domain->max_addr = data->max_addr;
 		domain->index = index;
 		domain->qi_batch = &domain->_qi_batch;
+		if (data->pkvm_nested) {
+			domain->domain.type = IOMMU_DOMAIN_NESTED;
+			domain->s2_domain = &pt_domain;
+		}
 		atomic_set(&domain->refcount, 1);
 		pkvm_spin_lock_init(&domain->lock);
 		pkvm_spin_lock_init(&domain->cache_lock);

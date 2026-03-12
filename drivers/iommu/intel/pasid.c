@@ -23,6 +23,7 @@
 #include "../iommu-pages.h"
 
 #ifdef __PKVM_HYP__
+#include "pkvm/debug.h"
 #include "pkvm/memory.h"
 #undef phys_to_virt
 #define phys_to_virt __pkvm_va
@@ -530,6 +531,14 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu,
 	}
 #endif
 
+#ifdef __PKVM_HYP__
+	if (domain->domain.type == IOMMU_DOMAIN_NESTED) {
+		pkvm_err("%s: nested domain(%p) cannot be used in non-nested config!\n",
+			 __func__, domain->pgd);
+		return -EPERM;
+	}
+#endif
+
 	spin_lock(&iommu->lock);
 	pte = intel_pasid_get_entry(dev, pasid);
 	if (IS_ERR(pte)) {
@@ -628,6 +637,14 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 			       __func__, iommu->seq_id, ret);
 
 		return ret;
+	}
+#endif
+
+#ifdef __PKVM_HYP__
+	if (domain->domain.type == IOMMU_DOMAIN_NESTED) {
+		pkvm_err("%s: nested domain(%p) cannot be used in non-nested config!\n",
+			 __func__, domain->pgd);
+		return -EPERM;
 	}
 #endif
 

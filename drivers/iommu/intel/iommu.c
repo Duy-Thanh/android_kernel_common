@@ -32,6 +32,7 @@
 #include "perfmon.h"
 
 #ifdef __PKVM_HYP__
+#include "pkvm/debug.h"
 #include "pkvm/memory.h"
 #undef phys_to_virt
 #define phys_to_virt __pkvm_va
@@ -1657,6 +1658,13 @@ int domain_context_mapping_one(struct dmar_domain *domain,
 #endif
 
 #ifdef __PKVM_HYP__
+	if (domain->domain.type == IOMMU_DOMAIN_NESTED) {
+		pkvm_err("%s: nested domain(%p) cannot be used in non-nested config!\n",
+			 __func__, domain->pgd);
+		ret = -EPERM;
+		goto out_unlock;
+	}
+
 	ret = cache_tag_assign_domain(domain, did, &dev, IOMMU_NO_PASID);
 	if (ret)
 		goto out_unlock;
