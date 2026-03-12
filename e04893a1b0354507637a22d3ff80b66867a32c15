@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c328f1_438aacbe",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T23:19:30Z",
+      "side": 1,
+      "message": "We should check for `O_CLOEXEC` here too?",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
