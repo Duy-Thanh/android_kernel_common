@@ -109,3 +109,7 @@
 # required by mi clean page
  __traceiter_android_vh_folio_end_writeback
  __tracepoint_android_vh_folio_end_writeback
+
+# required by fault_report module
+  __tracepoint_android_vh_f2fs_fault_report
+  __traceiter_android_vh_f2fs_fault_report
