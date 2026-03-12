@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024874be_929be08e",
+        "filename": "arch/x86/kvm/lapic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T18:39:44Z",
+      "side": 1,
+      "message": "nit: maybe this would look a bit better:\n```\n\tif (!apic-\u003eguest_apic_protected)\n\t\treturn 0;\n\t\t\n\treturn APIC_REG_MASK(APIC_TASKPRI) |\n\t       APIC_REG_MASK(APIC_PROCPRI) |\n\t       APIC_REGS_MASK(APIC_ISR, APIC_ISR_NR) |\n\t       APIC_REGS_MASK(APIC_IRR, APIC_ISR_NR);\n```\n\n?",
+      "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af0b6e2_3bab127b",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T18:39:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `APIC_ISR + APIC_ISR_NR - 1` instead of `APIC_ISR + APIC_ISR_NR`? (`...` is inclusive?)\n\nIf so, tdx_has_emulated_msr() in the upstream code has the same bug...",
+      "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
