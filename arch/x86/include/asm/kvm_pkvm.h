@@ -134,6 +134,7 @@ struct alloc_domain_data {
 	u8 iommu_superpage;
 	u8 iommu_coherency;
 	u8 use_first_level;
+	u8 pkvm_nested;
 };
 
 struct domain_map_data {

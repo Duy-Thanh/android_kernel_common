@@ -1645,8 +1645,8 @@ int domain_context_mapping_one(struct dmar_domain *domain,
 #endif
 
 #ifdef __PKVM_HYP__
-	ret = pkvm_get_domain_cache_tag_assign(pgd, did,
-					       IOMMU_NO_PASID, info);
+	ret = pkvm_get_domain_cache_tag_assign(pgd, did, IOMMU_NO_PASID,
+					       false, info);
 	if (ret) {
 		pr_err("iommu%d: failed to get the domain for pgd: %p\n",
 		       iommu->seq_id, pgd);

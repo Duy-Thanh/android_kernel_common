@@ -522,7 +522,7 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct pkvm_device 
 
 #ifdef __PKVM_HYP__
 	ret = pkvm_get_domain_cache_tag_assign(__pkvm_va(fsptptr), did,
-					       pasid, dev_iommu_priv_get(dev));
+					       pasid, false, dev_iommu_priv_get(dev));
 	if (ret) {
 		pr_err("iommu%d: failed to get the domain for did: %d, fsptptr: %llx\n",
 		       iommu->seq_id, did, fsptptr);
@@ -613,7 +613,7 @@ int intel_pasid_replace_first_level(struct intel_iommu *iommu,
 		BUG();
 
 	ret = pkvm_get_domain_cache_tag_assign(__pkvm_va(fsptptr), did,
-					       pasid, dev_iommu_priv_get(dev));
+					       pasid, false, dev_iommu_priv_get(dev));
 	if (ret) {
 		pr_err("iommu%d: failed to get the domain for did: %d, fsptptr: %llx\n",
 		       iommu->seq_id, did, fsptptr);
@@ -725,7 +725,7 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 
 #ifdef __PKVM_HYP__
 	ret = pkvm_get_domain_cache_tag_assign(domain->pgd, did, pasid,
-					       dev_iommu_priv_get(dev));
+					       false, dev_iommu_priv_get(dev));
 	if (ret) {
 		spin_unlock(&iommu->lock);
 		return ret;
@@ -824,7 +824,7 @@ int intel_pasid_replace_second_level(struct intel_iommu *iommu,
 		BUG();
 
 	ret = pkvm_get_domain_cache_tag_assign(domain->pgd, did, pasid,
-					       dev_iommu_priv_get(dev));
+					       false, dev_iommu_priv_get(dev));
 	if (ret) {
 		pr_err("iommu%d: failed to get the domain for did: %d, pgd: %p\n",
 		       iommu->seq_id, did, domain->pgd);

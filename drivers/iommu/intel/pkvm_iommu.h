@@ -201,7 +201,7 @@ struct cache_tag *pkvm_alloc_cache_tag(void);
 void pkvm_free_cache_tag(struct cache_tag *cache_tag);
 void pkvm_intel_iommu_tlb_flush(unsigned long paddr, unsigned long size);
 
-int pkvm_get_domain_cache_tag_assign(void *pgd, int did, u32 pasid,
+int pkvm_get_domain_cache_tag_assign(void *pgd, int did, u32 pasid, bool nested,
 				     struct device_domain_info *info);
 void pkvm_put_domain_cache_tag_unassign(void *pgd, int did, u32 pasid,
 					struct device_domain_info *info);
