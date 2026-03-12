@@ -720,10 +720,11 @@ struct dmar_domain {
 			struct mmu_notifier notifier;
 		};
 	};
+#endif
 
 	struct iommu_domain domain;	/* generic domain data structure for
 					   iommu core */
-#else
+#ifdef __PKVM_HYP__
 	/* virtual address */
 	struct dma_pte	*pgd;
 	/* max guest address width */
@@ -743,6 +744,9 @@ struct dmar_domain {
 	unsigned int index;
 	struct pkvm_memcache mc;
 
+	/* parent page table which the user domain is nested on */
+	struct dmar_domain *s2_domain;
+
 	/* Domain uses flush queue(lazy mode) */
 	bool dma_fq;
 
@@ -759,7 +763,7 @@ struct dmar_domain {
 	struct qi_batch _qi_batch;		/* domain->qi_batch = &domain->_qi_batch */
 
 	struct hlist_node hnode;
-#endif /* !__PKVM_HYP__ */
+#endif /* __PKVM_HYP__ */
 };
 
 /*

@@ -192,12 +192,11 @@ out_unlock:
 }
 #endif
 
-#ifndef __PKVM_HYP__
 static int __cache_tag_assign_domain(struct dmar_domain *domain, u16 did,
+#ifndef __PKVM_HYP__
 				     struct device *dev, ioasid_t pasid)
 #else
-int cache_tag_assign_domain(struct dmar_domain *domain, u16 did,
-			    struct pkvm_device *dev, ioasid_t pasid)
+				     struct pkvm_device *dev, ioasid_t pasid)
 #endif
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
@@ -220,12 +219,11 @@ int cache_tag_assign_domain(struct dmar_domain *domain, u16 did,
 	return ret;
 }
 
-#ifndef __PKVM_HYP__
 static void __cache_tag_unassign_domain(struct dmar_domain *domain, u16 did,
+#ifndef __PKVM_HYP__
 					struct device *dev, ioasid_t pasid)
 #else
-void cache_tag_unassign_domain(struct dmar_domain *domain, u16 did,
-			       struct pkvm_device *dev, ioasid_t pasid)
+					struct pkvm_device *dev, ioasid_t pasid)
 #endif
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
@@ -236,16 +234,21 @@ void cache_tag_unassign_domain(struct dmar_domain *domain, u16 did,
 		cache_tag_unassign(domain, did, dev, pasid, CACHE_TAG_DEVTLB);
 }
 
-#ifndef __PKVM_HYP__
 static int __cache_tag_assign_parent_domain(struct dmar_domain *domain, u16 did,
+#ifndef __PKVM_HYP__
 					    struct device *dev, ioasid_t pasid)
+#else
+					    struct pkvm_device *dev, ioasid_t pasid)
+#endif
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
 	int ret;
 
+#ifndef __PKVM_HYP__
 	ret = domain_qi_batch_alloc(domain);
 	if (ret)
 		return ret;
+#endif
 
 	ret = cache_tag_assign(domain, did, dev, pasid, CACHE_TAG_NESTING_IOTLB);
 	if (ret || !info->ats_enabled)
@@ -259,7 +262,11 @@ static int __cache_tag_assign_parent_domain(struct dmar_domain *domain, u16 did,
 }
 
 static void __cache_tag_unassign_parent_domain(struct dmar_domain *domain, u16 did,
+#ifndef __PKVM_HYP__
 					       struct device *dev, ioasid_t pasid)
+#else
+					       struct pkvm_device *dev, ioasid_t pasid)
+#endif
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
 
@@ -269,6 +276,7 @@ static void __cache_tag_unassign_parent_domain(struct dmar_domain *domain, u16 d
 		cache_tag_unassign(domain, did, dev, pasid, CACHE_TAG_NESTING_DEVTLB);
 }
 
+#ifndef __PKVM_HYP__
 static u16 domain_get_id_for_dev(struct dmar_domain *domain, struct device *dev)
 {
 	struct device_domain_info *info = dev_iommu_priv_get(dev);
@@ -283,6 +291,7 @@ static u16 domain_get_id_for_dev(struct dmar_domain *domain, struct device *dev)
 
 	return domain_id_iommu(domain, iommu);
 }
+#endif
 
 /*
  * Assign cache tags to a domain when it's associated with a device's
@@ -293,13 +302,21 @@ static u16 domain_get_id_for_dev(struct dmar_domain *domain, struct device *dev)
  * code is returned indicating the reason for the failure.
  */
 int cache_tag_assign_domain(struct dmar_domain *domain,
+#ifndef __PKVM_HYP__
 			    struct device *dev, ioasid_t pasid)
+#else
+			    u16 did, struct pkvm_device *dev, ioasid_t pasid)
+#endif
 {
+#ifndef __PKVM_HYP__
 	u16 did = domain_get_id_for_dev(domain, dev);
+#endif
 	int ret;
 
+#ifndef __PKVM_HYP__
 	if (pkvm_enabled())
 		return 0;
+#endif
 
 	ret = __cache_tag_assign_domain(domain, did, dev, pasid);
 	if (ret || domain->domain.type != IOMMU_DOMAIN_NESTED)
@@ -320,18 +337,23 @@ int cache_tag_assign_domain(struct dmar_domain *domain,
  * assign interface.
  */
 void cache_tag_unassign_domain(struct dmar_domain *domain,
+#ifndef __PKVM_HYP__
 			       struct device *dev, ioasid_t pasid)
+#else
+			       u16 did, struct pkvm_device *dev, ioasid_t pasid)
+#endif
 {
+#ifndef __PKVM_HYP__
 	u16 did = domain_get_id_for_dev(domain, dev);
 
 	if (pkvm_enabled())
 		return;
+#endif
 
 	__cache_tag_unassign_domain(domain, did, dev, pasid);
 	if (domain->domain.type == IOMMU_DOMAIN_NESTED)
 		__cache_tag_unassign_parent_domain(domain->s2_domain, did, dev, pasid);
 }
-#endif /* !__PKVM_HYP__ */
 
 static unsigned long calculate_psi_aligned_address(unsigned long start,
 						   unsigned long end,
@@ -449,13 +471,9 @@ static void qi_batch_add_pasid_dev_iotlb(struct intel_iommu *iommu, u16 sid, u16
 
 static bool intel_domain_use_piotlb(struct dmar_domain *domain)
 {
-#ifndef __PKVM_HYP__
 	return domain->domain.type == IOMMU_DOMAIN_SVA ||
 			domain->domain.type == IOMMU_DOMAIN_NESTED ||
 			intel_domain_is_fs_paging(domain);
-#else
-	return intel_domain_is_fs_paging(domain);
-#endif
 }
 
 static void cache_tag_flush_iotlb(struct dmar_domain *domain, struct cache_tag *tag,
