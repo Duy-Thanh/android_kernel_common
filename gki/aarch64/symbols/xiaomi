@@ -86,3 +86,8 @@
   __tracepoint_android_vh_free_mod_mem
   __tracepoint_android_vh_set_mod_perm_after_init
   __tracepoint_android_vh_set_mod_perm_before_init
+
+  # required by fault_report module
+  __tracepoint_android_vh_f2fs_fault_report
+  __traceiter_android_vh_f2fs_fault_report
+  
