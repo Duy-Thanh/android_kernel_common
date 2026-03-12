@@ -56,6 +56,7 @@ struct wrap_content_operations {
 /* Abstract wrap content to be embedded in a concrete content object. */
 struct wrap_content {
 	struct wrap_content_operations *ops;
+	bool close_on_exec;
 };
 
 /* dmabuf content */
@@ -339,8 +340,15 @@ static inline bool is_owner_dev(struct wrap_ctx *ctx,
 static inline int publish_wrap(struct wrap_ctx *ctx,
 			       struct wrap_content *content)
 {
+	int ret;
+
 	ctx->content = content;
-	return content->ops->create_wrap(content, ctx);
+	ret = content->ops->create_wrap(content, ctx);
+	/* Set FD_CLOEXEC flag for wrapfd the same as its content */
+	if (ret >= 0)
+		set_close_on_exec(ret, content->close_on_exec ? 1 : 0);
+
+	return ret;
 }
 
 static int can_access(struct wrap_ctx *ctx, struct task_struct *task,
@@ -745,6 +753,7 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 		ret = -ENOMEM;
 		goto restore_content;
 	}
+	new_content->close_on_exec = content->close_on_exec;
 
 	new_ctx = create_wrap_ctx();
 	if (!new_ctx) {
@@ -1041,6 +1050,7 @@ static int wrap_file(struct wrap_ctx *ctx,
 	if (IS_ERR(content))
 		return PTR_ERR(content);
 
+	content->close_on_exec = get_close_on_exec(wrapfd_wrap.fd);
 	wrapfd = publish_wrap(ctx, content);
 	if (wrapfd < 0) {
 		ctx->content = NULL;
