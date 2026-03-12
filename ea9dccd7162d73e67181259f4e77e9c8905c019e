@@ -34,6 +34,24 @@
       "parentUuid": "2fb71e62_df7c833a",
       "revId": "ea9dccd7162d73e67181259f4e77e9c8905c019e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5413ad56_b855c792",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-12T15:50:51Z",
+      "side": 1,
+      "message": "Actually it will be is_wrapfd_vma(), not is_wrapfd_file().",
+      "parentUuid": "17b503d9_e936ea83",
+      "revId": "ea9dccd7162d73e67181259f4e77e9c8905c019e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
