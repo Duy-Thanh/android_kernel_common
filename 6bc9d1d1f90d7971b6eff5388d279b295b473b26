@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3270a3_dfb5ad2d",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6265,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T20:25:03Z",
+      "side": 1,
+      "message": "Do we need to check lapic_in_kernel() here? It seems it should be always true if guest_apic_protected is true?",
+      "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0833c1c0_f436c988",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6269,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T20:25:03Z",
+      "side": 1,
+      "message": "It seems both `regs` and `shared_regs` should always be non-NULL here? So maybe WARN_ON?",
+      "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
