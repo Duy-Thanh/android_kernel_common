@@ -134,3 +134,6 @@ type 'struct bindings::bindings_raw::files_struct' changed
     type changed from 'u32[8]' to 'u32[6]'
       number of elements changed from 8 to 6
 
+function symbol 'struct tcpm_port* tcpm_register_port(struct device*, struct tcpc_dev*)' changed
+  CRC changed from 0x8de21bec to 0xb0ddb848
+
