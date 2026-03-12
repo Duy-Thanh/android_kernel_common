@@ -16,6 +16,24 @@
       "message": "nit: just found out that GKI maintainers seem to prefer avoiding empty line after `Bug:`...",
       "revId": "bdc0f3494851c73ff13abc1df496f755872a7d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef7b7cd_b6e4a2b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-12T13:40:04Z",
+      "side": 1,
+      "message": "BTW that actually seems useful: if we avoid this empty line in these patches, then when removing Android-specific stuff the from commit messages (for uploading them to Intel github or elsewhere), we can easily do that with a simple command like `sed -e \u0027s/^ANDROID: //\u0027 -e \u0027/^Bug:/d\u0027 -e \u0027/^Change-Id:/d\u0027`, without bothering how to remove these extra empty lines.",
+      "parentUuid": "994b6216_f612a58d",
+      "revId": "bdc0f3494851c73ff13abc1df496f755872a7d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
