@@ -12,6 +12,7 @@
 #include <linux/rwsem.h>
 #include <linux/list.h>
 #include <linux/slab.h>
+#include "compression.h"
 #include "messages.h"
 #include "ulist.h"
 #include "misc.h"

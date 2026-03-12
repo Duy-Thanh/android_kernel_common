@@ -9,8 +9,7 @@
 #include <linux/sizes.h>
 #include <linux/compiler_types.h>
 #include "ctree.h"
-#include "bio.h"
-#include "ordered-data.h"
+#include "fs.h"
 
 struct block_device;
 struct super_block;

@@ -3490,11 +3490,7 @@ SYSCALL_DEFINE6(io_uring_enter, unsigned int, fd, u32, to_submit,
 
 	ctx = file->private_data;
 	ret = -EBADFD;
-	/*
-	 * Keep IORING_SETUP_R_DISABLED check before submitter_task load
-	 * in io_uring_add_tctx_node() -> __io_uring_add_tctx_node_from_submit()
-	 */
-	if (unlikely(smp_load_acquire(&ctx->flags) & IORING_SETUP_R_DISABLED))
+	if (unlikely(ctx->flags & IORING_SETUP_R_DISABLED))
 		goto out;
 
 	/*

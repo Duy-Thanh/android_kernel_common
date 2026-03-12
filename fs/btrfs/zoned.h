@@ -15,6 +15,7 @@
 #include "disk-io.h"
 #include "block-group.h"
 #include "btrfs_inode.h"
+#include "fs.h"
 
 struct block_device;
 struct extent_buffer;
