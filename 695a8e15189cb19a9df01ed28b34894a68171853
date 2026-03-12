@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa6fbc3_b26d545a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T17:46:44Z",
+      "side": 1,
+      "message": "nit: it\u0027d be slightly clearer to write this as `min_t(loff_t, MAX_RW_COUNT, len);`",
+      "range": {
+        "startLine": 122,
+        "startChar": 17,
+        "endLine": 122,
+        "endChar": 58
+      },
+      "revId": "695a8e15189cb19a9df01ed28b34894a68171853",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b97057a_47d22a5d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T17:46:44Z",
+      "side": 1,
+      "message": "Should we be using check_add_overflow() here too?",
+      "revId": "695a8e15189cb19a9df01ed28b34894a68171853",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
