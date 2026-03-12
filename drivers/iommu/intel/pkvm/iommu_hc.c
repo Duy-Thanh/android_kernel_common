@@ -436,6 +436,12 @@ static int __validate_domain_params(struct intel_iommu *iommu, struct alloc_doma
 	} else if (data->max_addr != __DOMAIN_MAX_ADDR(data->gaw)) {
 		pkvm_err("%s: invalid max_addr(%llx) from host!\n",
 			 __func__, data->max_addr);
+	} else if (data->pkvm_nested && !pkvm_nested_enabled(iommu)) {
+		pkvm_err("%s: pkvm_nested set while pKVM nested disabled!\n",
+			 __func__);
+	} else if (data->pkvm_nested && !data->use_first_level) {
+		pkvm_err("%s: pkvm_nested set for non-first level domain!\n",
+			 __func__);
 	} else {
 		ret = 0;
 	}
@@ -460,12 +466,15 @@ int pkvm_iommu_alloc_domain(struct alloc_domain_data *data)
 		return ret;
 
 	pgd = pkvm_host_gpa_to_virt(data->pgd_gpa);
-	pkvm_dbg("%s: write protecting pgd: %p\n", __func__, pgd);
-	ret = pkvm_host_donate_hyp_share_ro(__pkvm_pa(pgd), VTD_PAGE_SIZE, true);
-	if (ret) {
-		pkvm_err("%s: failed to write protect pgd: %p (err=%d)\n",
-			 __func__, pgd, ret);
-		return ret;
+	/* Nested domain's first level page table is managed by host. */
+	if (!data->pkvm_nested) {
+		pkvm_dbg("%s: write protecting pgd: %p\n", __func__, pgd);
+		ret = pkvm_host_donate_hyp_share_ro(__pkvm_pa(pgd), VTD_PAGE_SIZE, true);
+		if (ret) {
+			pkvm_err("%s: failed to write protect pgd: %p (err=%d)\n",
+				 __func__, pgd, ret);
+			return ret;
+		}
 	}
 
 	need_iotlb_sync_map = cap_caching_mode(iommu->cap) && !data->use_first_level;
