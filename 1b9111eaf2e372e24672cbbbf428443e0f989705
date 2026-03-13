@@ -16,6 +16,24 @@
       "message": "Looks like kvm_apic_set_base() shouldn\u0027t fail unless we have a bug? So maybe we can just use BUG_ON() to simplify the code?",
       "revId": "1b9111eaf2e372e24672cbbbf428443e0f989705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe42a648_8476ed3c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-13T01:02:03Z",
+      "side": 1,
+      "message": "Yeah, we can do that.",
+      "parentUuid": "c55e03d0_186308a0",
+      "revId": "1b9111eaf2e372e24672cbbbf428443e0f989705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
