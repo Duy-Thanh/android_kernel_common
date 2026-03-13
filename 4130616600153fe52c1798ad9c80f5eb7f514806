@@ -177,6 +177,24 @@
       "parentUuid": "5904cc20_bfb1d21f",
       "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d7c5ab_f35b5490",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-13T17:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f228371e_c3583ffc",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
