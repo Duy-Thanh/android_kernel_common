@@ -159,6 +159,24 @@
       "parentUuid": "8c3c85c1_247d4459",
       "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f228371e_c3583ffc",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-13T17:47:06Z",
+      "side": 1,
+      "message": "ANDROID_BACKPORT_RESERVE() would be ideal since that would match what we do for C code. Note that a common case is that a field starts out as ANDROID_KABI_RESERVED(), but after some time has passed and it doesn\u0027t look likely that we\u0027ll need the field for LTS, we change it to ANDROID_BACKPORT_RESERVE(). Then it is allowed to be used for backports/features.",
+      "parentUuid": "5904cc20_bfb1d21f",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
