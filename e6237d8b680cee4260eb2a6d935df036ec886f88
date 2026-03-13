@@ -22,6 +22,30 @@
       },
       "revId": "e6237d8b680cee4260eb2a6d935df036ec886f88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5f5345_d4252cfd",
+        "filename": "drivers/android/binder/rust_binder_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-13T16:14:42Z",
+      "side": 1,
+      "message": "These symbols are defined by `#include \u003clinux/tracepoint.h\u003e` statement because `CREATE_TRACE_POINTS` and `CREATE_RUST_TRACE_POINTS` are defined in this file, so it\u0027s not possible to place the `EXPORT_SYMBOL_GPL` calls right after the definition.",
+      "parentUuid": "d03abd0c_f525004e",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "e6237d8b680cee4260eb2a6d935df036ec886f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
