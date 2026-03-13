@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f961915b_0301b41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-13T16:13:37Z",
+      "side": 1,
+      "message": "Is there any documentation on how to create/use vendor hooks in rust code? Does the public documentation at https://source.android.com/docs/core/architecture/kernel/kernel-code#vendor-hooks need to be updated for rust?",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737b4f22_71cc984c",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-13T16:13:37Z",
+      "side": 1,
+      "message": "For C, the macros like ANDROID_KABI_RESERVED() are exclusively for use when merging LTS updates. They are not for new feature use. Is that what you intend here? If not, perhaps just `__reservedX` is a better name.\n\nCan you give an example of how these will look when one of them is used for something?",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
