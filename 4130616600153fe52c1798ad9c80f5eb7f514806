@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef58c816_f851bf64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-13T16:19:28Z",
+      "side": 1,
+      "message": "I wrote this based on docs in `Documentation/kbuild/gendwarfksyms.rst`.",
+      "parentUuid": "f961915b_0301b41d",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "737b4f22_71cc984c",
         "filename": "drivers/android/binder/rust_binder_main.rs",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-13T16:13:37Z",
       "side": 1,
       "message": "For C, the macros like ANDROID_KABI_RESERVED() are exclusively for use when merging LTS updates. They are not for new feature use. Is that what you intend here? If not, perhaps just `__reservedX` is a better name.\n\nCan you give an example of how these will look when one of them is used for something?",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fba8dd6_3db4573a",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-13T16:19:28Z",
+      "side": 1,
+      "message": "These names are special, right? I\u0027m pretty sure gendwarfksyms need them to be called this, and I\u0027m also pretty sure we need to add them now, because adding them later changes layout of struct and hence ABI on KMI. @samitolvanen@google.com can you clarify?",
+      "parentUuid": "737b4f22_71cc984c",
       "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
