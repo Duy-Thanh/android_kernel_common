@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6fde063_ed9e1e91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T01:26:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "15c7e187_2ae87c35",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21c328f1_438aacbe",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-12T23:19:30Z",
       "side": 1,
       "message": "We should check for `O_CLOEXEC` here too?",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7cab762_51705d3f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T01:26:00Z",
+      "side": 1,
+      "message": "publish_wrap() will use new_content-\u003ecopy_on_exec to set that attribute for the new wrapfd. dmabuf_content_make_writable() does not allocate a `new_content` and reuses the original `content`, so for dmabufs wraps this works as is but ops-\u003emake_writable() technically can create a new content, so I\u0027m missing `new_content-\u003ecopy_on_exec \u003d content-\u003ecopy_on_exec` here. I\u0027ll add it",
+      "parentUuid": "21c328f1_438aacbe",
       "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
