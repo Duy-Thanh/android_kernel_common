@@ -264,8 +264,14 @@ devtlb_invalidation_with_pasid(struct intel_iommu *iommu,
 	if (!info || !info->ats_enabled)
 		return;
 
+<<<<<<< HEAD   (2567c30e0a5015a7a3826e01633eb8de131d4cbb Merge 21fde0b4b166 ("arm64: dts: rockchip: Do not enable hdm)
 #ifndef __PKVM_HYP__
 	if (pci_dev_is_disconnected(to_pci_dev(dev)))
+||||||| BASE   (21fde0b4b166d1d14493a3fc6190114448be7748 arm64: dts: rockchip: Do not enable hdmi_sound node on Pineb)
+	if (pci_dev_is_disconnected(to_pci_dev(dev)))
+=======
+	if (!pci_device_is_present(to_pci_dev(dev)))
+>>>>>>> BRANCH (461242507181e4050868a20d1fa6b27f4b00d003 arm64: poe: fix stale POR_EL0 values for ptrace)
 		return;
 #endif
 
