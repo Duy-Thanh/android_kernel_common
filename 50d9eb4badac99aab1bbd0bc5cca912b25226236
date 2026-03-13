@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e76e650_408758da",
+        "filename": "arch/x86/kvm/lapic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-13T03:11:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "024874be_929be08e",
+      "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0af0b6e2_3bab127b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-12T18:39:44Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `APIC_ISR + APIC_ISR_NR - 1` instead of `APIC_ISR + APIC_ISR_NR`? (`...` is inclusive?)\n\nIf so, tdx_has_emulated_msr() in the upstream code has the same bug...",
+      "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14833114_f4de07a2",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-13T03:11:54Z",
+      "side": 1,
+      "message": "Nice cache!\n\nThere is another issue, we should use `X2APIC_MSR(APIC_ISR) + APIC_ISR_NR - 1` rather than `X2APIC_MSR(APIC_ISR + APIC_ISR_NR - 1)` as APIC_ISR_NR is 0x8 but not 0x80, and shifting by `X2APIC_MSR` will result in an incorrect value.\n\nSo it should be:\n```\ncase X2APIC_MSR(APIC_ISR) ... X2APIC_MSR(APIC_ISR) + APIC_ISR_NR - 1:\ncase X2APIC_MSR(APIC_IRR) ... X2APIC_MSR(APIC_IRR) + APIC_ISR_NR - 1:\n```",
+      "parentUuid": "0af0b6e2_3bab127b",
       "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
