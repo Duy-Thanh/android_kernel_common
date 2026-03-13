@@ -69,6 +69,24 @@
       "parentUuid": "737b4f22_71cc984c",
       "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cda4d8a_6de9f8f5",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-03-13T16:27:38Z",
+      "side": 1,
+      "message": "The reason for `__kabi_reserved` fields here is that we may discover that vendors want to access additional offsets we\u0027re currently not aware of when registering an existing binder hook into Rust.\n\nThis would not be normal for a new Rust vendor hook, it\u0027s used here because we need it for compatibility with existing vendor hooks, which accessed structures that have a different layout. If we find out they\u0027re accessing more fields on the C struct, we\u0027d need to add more offsets.\n\nSince the offsets fundamentally must be exposed to vendor code, the struct itself ends up being KABI, and needs to remain stable, thus the the use of reserved slots.\n\nThe primary other option I mentioned is that since we know all offsets will be size_t, we could switch from a struct layout to an array of unknown size, either using a max size_t as a sentinel or also exporting the length elsewhere.",
+      "parentUuid": "5fba8dd6_3db4573a",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
