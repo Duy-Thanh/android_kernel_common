@@ -16,6 +16,23 @@
       "message": "This all looks fine, except for `__kvm_nvhe_kvm_patch_physvirt_offset` which I\u0027ll need to consult for.",
       "revId": "85ddcb2cd2d0989a98557bf227aee07a0237b4be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ade1c63_1b8e3a45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-13T14:45:40Z",
+      "side": 1,
+      "message": "@willdeacon@google.com, the KVM symbol is interesting because the ELF and DWARF have matched up in a rather unusual way.\n\n```\n\u0027void kvm_patch_physvirt_offset(struct alt_instr*, __le32*, __le32*, int)\u0027 {__kvm_nvhe_kvm_patch_physvirt_offset}\n```\n\nThere may be some interesting codegen going on there.\n\nIn any case, can partners use this from their modules?",
+      "revId": "85ddcb2cd2d0989a98557bf227aee07a0237b4be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
