@@ -410,6 +410,17 @@
   rdev_get_drvdata
   rdev_get_id
   refcount_warn_saturate
+<<<<<<< HEAD   (a483878f20290c68a7a79472d0496c587b1f3928 ANDROID: GKI: Add symbol list for xiaomi)
+||||||| BASE   (d6673a9860320f0abc1488eee8cd4334b7c359b0 ANDROID: GKI: Export symbols for lock-boost scheduler hooks )
+  regcache_cache_only
+  regcache_mark_dirty
+  regcache_sync
+=======
+  regcache_cache_only
+  regcache_mark_dirty
+  regcache_sync
+  region_intersects
+>>>>>>> CHANGE (17626f3cc72278b82998ad8d51c6d01ea62d61ef ANDROID: ABI: Add region_intersects to the symbol table)
   __register_chrdev
   register_chrdev_region
   register_pm_notifier
