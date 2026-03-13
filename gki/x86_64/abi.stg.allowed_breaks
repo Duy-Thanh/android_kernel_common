@@ -1,1 +1,23 @@
 # See http://go/approve-abi-break
+
+function symbol 'int __traceiter_sched_set_state_tp(void*, struct task_struct*, int)' changed
+  CRC changed from 0xf45d61e8 to 0x780ef930
+
+variable symbol 'struct tracepoint __tracepoint_sched_set_state_tp' changed
+  CRC changed from 0xba25d6fd to 0x8919b353
+
+function symbol 'void sched_set_fifo(struct task_struct*)' changed
+  CRC changed from 0x2cc38d44 to 0xf70cbe41
+
+... 2 omitted; 5 symbols have only CRC changes
+
+type 'struct rq' changed
+  15 members ('struct scx_rq scx' .. 'u64 clock') changed
+    offset changed by 64
+
+type 'struct dl_rq' changed
+  byte size changed from 104 to 112
+  member 'struct sched_dl_entity* curr' was added
+  6 members ('struct rb_root_cached pushable_dl_tasks_root' .. 'u64 bw_ratio') changed
+    offset changed by 64
+
