@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5090c46c_0cfd75f5",
+        "filename": "include/trace/hooks/pci.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-03-13T18:20:31Z",
+      "side": 1,
+      "message": "Let\u0027s use a pointer for `current_state`. You can also just call it state like the other vendor hooks do.",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "b96840eb7adde03fe085ef9f4cf0b7b355900bf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
