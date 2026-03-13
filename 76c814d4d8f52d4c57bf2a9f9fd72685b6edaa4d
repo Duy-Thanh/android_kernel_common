@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8e5c0d_68062148",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T00:43:56Z",
+      "side": 1,
+      "message": "It\u0027s from upstream backport. If there is any update in upstream, we can backport later. Currently I don\u0027t want to block the merge here. Thanks.",
+      "parentUuid": "39a575a6_a7566b08",
+      "range": {
+        "startLine": 1302,
+        "startChar": 0,
+        "endLine": 1309,
+        "endChar": 0
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7feef191_d61b330a",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebac3a50_9fd62c05",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T00:43:56Z",
+      "side": 1,
+      "message": "We use bio_inc_remaining",
+      "parentUuid": "7feef191_d61b330a",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1344,
+        "endChar": 24
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f196b4_6f4ff0ee",
@@ -84,6 +132,30 @@
       "writtenOn": "2026-03-12T15:28:37Z",
       "side": 1,
       "message": "Did you mean to use `bio_chain()`?",
+      "range": {
+        "startLine": 1407,
+        "startChar": 0,
+        "endLine": 1407,
+        "endChar": 22
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0edbcc4d_5300cc5e",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T00:43:56Z",
+      "side": 1,
+      "message": "We use bio_inc_remaining(parent);",
+      "parentUuid": "85f196b4_6f4ff0ee",
       "range": {
         "startLine": 1407,
         "startChar": 0,
