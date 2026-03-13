@@ -410,6 +410,7 @@
   rdev_get_drvdata
   rdev_get_id
   refcount_warn_saturate
+  region_intersects
   __register_chrdev
   register_chrdev_region
   register_pm_notifier
