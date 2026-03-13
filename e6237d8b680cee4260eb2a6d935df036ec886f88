@@ -46,6 +46,30 @@
       },
       "revId": "e6237d8b680cee4260eb2a6d935df036ec886f88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ffb4ce_c6bc8326",
+        "filename": "drivers/android/binder/rust_binder_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-13T16:26:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5c5f5345_d4252cfd",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "e6237d8b680cee4260eb2a6d935df036ec886f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
