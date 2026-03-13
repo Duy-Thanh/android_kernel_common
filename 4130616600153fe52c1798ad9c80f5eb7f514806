@@ -87,6 +87,24 @@
       "parentUuid": "5fba8dd6_3db4573a",
       "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3c85c1_247d4459",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2026-03-13T16:29:14Z",
+      "side": 1,
+      "message": "\u003eThese names are special, right?\n\nYes, gendwarfksyms ignores fields with names starting with `__kabi_`.",
+      "parentUuid": "5fba8dd6_3db4573a",
+      "revId": "4130616600153fe52c1798ad9c80f5eb7f514806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
