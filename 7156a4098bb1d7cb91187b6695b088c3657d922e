@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b2fc16_9ce96c66",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T10:07:24Z",
+      "side": 1,
+      "message": "Removed the version check.",
+      "parentUuid": "4f986f35_7c63af91",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 22
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dec397ad_92b686f9",
@@ -61,6 +85,30 @@
       "writtenOn": "2026-03-12T19:04:31Z",
       "side": 1,
       "message": "I don\u0027t understand why we need V0?",
+      "range": {
+        "startLine": 227,
+        "startChar": 19,
+        "endLine": 227,
+        "endChar": 56
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e482a9d8_fc26acbb",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T10:07:24Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "dec397ad_92b686f9",
       "range": {
         "startLine": 227,
         "startChar": 19,
@@ -118,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1e850f_b7383f25",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T10:07:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a18e27d4_eb4ed466",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 12
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06b6bca4_e1e072e4",
@@ -141,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "840dbbf8_981d777f",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T10:07:24Z",
+      "side": 1,
+      "message": "Remvoed.",
+      "parentUuid": "06b6bca4_e1e072e4",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2cb5310_0abc4518",
@@ -154,6 +250,30 @@
       "writtenOn": "2026-03-12T19:04:31Z",
       "side": 1,
       "message": "Why do we need this?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 54
+      },
+      "revId": "7156a4098bb1d7cb91187b6695b088c3657d922e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af6b8a4_f57b747c",
+        "filename": "include/uapi/linux/zram_ioctl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-13T10:07:24Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "c2cb5310_0abc4518",
       "range": {
         "startLine": 25,
         "startChar": 0,
