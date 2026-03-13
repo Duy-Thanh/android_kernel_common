@@ -34,6 +34,24 @@
       "parentUuid": "994b6216_f612a58d",
       "revId": "bdc0f3494851c73ff13abc1df496f755872a7d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a08c733_62e3d8c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-13T01:06:54Z",
+      "side": 1,
+      "message": "Sure, let me remove this empty line.",
+      "parentUuid": "cef7b7cd_b6e4a2b9",
+      "revId": "bdc0f3494851c73ff13abc1df496f755872a7d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
