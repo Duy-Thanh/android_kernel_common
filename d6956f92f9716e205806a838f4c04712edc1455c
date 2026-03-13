@@ -16,6 +16,24 @@
       "message": "exists -\u003e exist",
       "revId": "d6956f92f9716e205806a838f4c04712edc1455c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2575b521_821a27ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2008256
+      },
+      "writtenOn": "2026-03-13T20:53:29Z",
+      "side": 1,
+      "message": "thanks for the review.",
+      "parentUuid": "5b189602_cc25d730",
+      "revId": "d6956f92f9716e205806a838f4c04712edc1455c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
