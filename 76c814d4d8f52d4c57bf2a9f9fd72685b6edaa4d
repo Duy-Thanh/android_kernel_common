@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed607ed6_8f45223f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-13T00:41:05Z",
+      "side": 1,
+      "message": "I think this is more for the case when zram is not swap device, IOW when user-space has direct control over pages.\n\nI\u0027m not sure this is possible for swap page case.",
+      "parentUuid": "39a575a6_a7566b08",
+      "range": {
+        "startLine": 1302,
+        "startChar": 0,
+        "endLine": 1309,
+        "endChar": 0
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7feef191_d61b330a",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 2
