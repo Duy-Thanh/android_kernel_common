@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "756d465b_c580206a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-13T14:40:41Z",
+      "side": 1,
+      "message": "This all looks fine, except for `__kvm_nvhe_kvm_patch_physvirt_offset` which I\u0027ll need to consult for.",
+      "revId": "85ddcb2cd2d0989a98557bf227aee07a0237b4be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
