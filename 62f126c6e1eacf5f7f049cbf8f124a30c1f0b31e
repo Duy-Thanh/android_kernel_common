@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7064bc97_8452069e",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T16:45:34Z",
+      "side": 1,
+      "message": "should be -ENOIOCTLCMD",
+      "range": {
+        "startLine": 344,
+        "startChar": 10,
+        "endLine": 344,
+        "endChar": 16
+      },
+      "revId": "62f126c6e1eacf5f7f049cbf8f124a30c1f0b31e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
