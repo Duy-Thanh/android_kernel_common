@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aaa846b_2e1f407e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T21:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f03b4a48_bdf986b7",
+      "revId": "eefd7d2d5c62456fb418c1512efe4ad436dc765f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13224511_87567053",
@@ -97,6 +115,30 @@
       "side": 1,
       "message": "Actually loading and mapping in parallel might be a legit usecase. It\u0027s doable with normal files for example. I think I\u0027ll need two states: mod_blocked and mmap_blocked. Destructive operations (rewrap and empty) should set both of them and load should block only mod_blocked. Them mmap() would check only mmap_blocked and if it\u0027s set then treat it as if that the buffer is gone.",
       "parentUuid": "5e886608_fdf5b38d",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 630,
+        "endChar": 25
+      },
+      "revId": "eefd7d2d5c62456fb418c1512efe4ad436dc765f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d264da72_05433c2e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T21:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b88e74d_50ac0f38",
       "range": {
         "startLine": 618,
         "startChar": 0,
