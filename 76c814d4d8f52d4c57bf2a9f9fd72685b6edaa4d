@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5e7a9dd_e4fb35b0",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-13T17:00:42Z",
+      "side": 1,
+      "message": "It seems to become sleepable from 6.15 so 6.12 would be okay unless something backported",
+      "parentUuid": "68103763_81970325",
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7feef191_d61b330a",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 2
@@ -149,6 +167,30 @@
       "writtenOn": "2026-03-13T15:21:32Z",
       "side": 1,
       "message": "In this situation we\u0027re never responding to the parent bio. I think you need to do something like:\n\n```\n  parent-\u003ebi_status \u003d BLK_STS_RESOURCE;\n  bio_endio(parent);\n```",
+      "range": {
+        "startLine": 1399,
+        "startChar": 0,
+        "endLine": 1401,
+        "endChar": 0
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd2f9cf_aed04480",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-03-13T17:00:42Z",
+      "side": 1,
+      "message": "Make sense. Let\u0027s fix upstream and land it on top of our changes separately.",
+      "parentUuid": "8c651e68_f1cbca7f",
       "range": {
         "startLine": 1399,
         "startChar": 0,
