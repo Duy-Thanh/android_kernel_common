@@ -16,6 +16,24 @@
       "message": "Bug number please here and in all the other patches.",
       "revId": "e52f93fdb88179bdc0fbad4e52e4f89d78566538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ce7c744_09a2b00f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-14T10:58:50Z",
+      "side": 1,
+      "message": "Added. Thanks!",
+      "parentUuid": "d0f26fd9_5ef43ee5",
+      "revId": "e52f93fdb88179bdc0fbad4e52e4f89d78566538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
