@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7487b752_70e61759",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6265,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-14T04:06:58Z",
+      "side": 1,
+      "message": "I think so, as `lapic_in_kernel()` check if `vcpu-\u003earch.apic` is NULL or not. If it is not NULL, then we can check the `guest_apic_protected` flag stored in `vcpu-\u003earch.apic`",
+      "parentUuid": "7f3270a3_dfb5ad2d",
+      "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0833c1c0_f436c988",
         "filename": "arch/x86/kvm/vmx/vmx.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-12T20:25:03Z",
       "side": 1,
       "message": "It seems both `regs` and `shared_regs` should always be non-NULL here? So maybe WARN_ON?",
+      "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f8c295_9ff801c3",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6269,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-14T04:06:58Z",
+      "side": 1,
+      "message": "Yeah, worth to have a WARN_ON to wrap `!shared_regs || !regs`",
+      "parentUuid": "0833c1c0_f436c988",
       "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
