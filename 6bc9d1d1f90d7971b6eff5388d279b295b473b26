@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c4fa3e4_95485f50",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6265,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-14T13:55:51Z",
+      "side": 1,
+      "message": "Ah indeed, I missed the fact that `guest_apic_protected` itself is a field of `apic`...",
+      "parentUuid": "7487b752_70e61759",
+      "revId": "6bc9d1d1f90d7971b6eff5388d279b295b473b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0833c1c0_f436c988",
