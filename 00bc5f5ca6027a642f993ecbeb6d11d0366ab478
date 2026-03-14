@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3973f7c1_0cfe7bda",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-14T04:23:58Z",
+      "side": 1,
+      "message": "Yeah, agree, will use a BUG_ON",
+      "parentUuid": "a2bceaf8_35955cab",
+      "revId": "00bc5f5ca6027a642f993ecbeb6d11d0366ab478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9b8e4ff_de60e21a",
         "filename": "arch/x86/kvm/vmx/pkvm_host.c",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-13T00:17:44Z",
       "side": 1,
       "message": "nit: use {} braces?",
+      "revId": "00bc5f5ca6027a642f993ecbeb6d11d0366ab478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c14a85_ba7ccd09",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-14T04:23:58Z",
+      "side": 1,
+      "message": "Make sense.",
+      "parentUuid": "a9b8e4ff_de60e21a",
       "revId": "00bc5f5ca6027a642f993ecbeb6d11d0366ab478",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
