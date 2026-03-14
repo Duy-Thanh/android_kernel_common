@@ -16,6 +16,24 @@
       "message": "Do we need to check lapic_in_kernel() here? It is always true if guest_apic_protected is true?",
       "revId": "dc84f1748cefb7d0bc3a27617b16e84bcc9ace0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c50a43_4112c29e",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-14T04:27:08Z",
+      "side": 1,
+      "message": "If `lapic_in_kernel` is true, then we can check `vcpu-\u003earch.apic-\u003eguest_apic_protected`",
+      "parentUuid": "84892b55_c1d454e7",
+      "revId": "dc84f1748cefb7d0bc3a27617b16e84bcc9ace0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
