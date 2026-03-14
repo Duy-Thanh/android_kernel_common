@@ -4659,7 +4659,6 @@ void free_workqueue_attrs(struct workqueue_attrs *attrs)
 		kfree(attrs);
 	}
 }
-EXPORT_SYMBOL_GPL(free_workqueue_attrs);
 
 /**
  * alloc_workqueue_attrs - allocate a workqueue_attrs
@@ -4688,7 +4687,6 @@ fail:
 	free_workqueue_attrs(attrs);
 	return NULL;
 }
-EXPORT_SYMBOL_GPL(alloc_workqueue_attrs_noprof);
 
 static void copy_workqueue_attrs(struct workqueue_attrs *to,
 				 const struct workqueue_attrs *from)
@@ -5398,7 +5396,7 @@ static void apply_wqattrs_commit(struct apply_wqattrs_ctx *ctx)
 	mutex_unlock(&ctx->wq->mutex);
 }
 
-int apply_workqueue_attrs_locked(struct workqueue_struct *wq,
+static int apply_workqueue_attrs_locked(struct workqueue_struct *wq,
 					const struct workqueue_attrs *attrs)
 {
 	struct apply_wqattrs_ctx *ctx;
@@ -5417,7 +5415,6 @@ int apply_workqueue_attrs_locked(struct workqueue_struct *wq,
 
 	return 0;
 }
-EXPORT_SYMBOL_GPL(apply_workqueue_attrs_locked);
 
 /**
  * apply_workqueue_attrs - apply new workqueue_attrs to an unbound workqueue
