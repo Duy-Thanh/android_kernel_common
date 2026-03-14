@@ -4,8 +4,27 @@
  *
  * This interface allows to make page allocations per node, zone, migrate type
  * and order using the DebugFS filesystem.
+ *
+ * The directory and files will be created in:
+ *
+ *    /sys/kernel/debug/mm
+ *
+ * For example, if we want to allocate pages from Node 0, Normal Zone, Order 11
+ * and MIGRATE_MOVABLE, we run the command:
+ *
+ *    echo 1 > /sys/kernel/debug/mm/node-0/zone-Normal/order-11/migrate-Movable
+ *
+ * Before using this feature, remember to create the debug directory
+ * and mount the debugfs filesystem:
+ *
+ *     mkdir -p /sys/kernel/debug
+ *     mount -t debugfs none /sys/kernel/debug
+ *
+ * Another option is to modify the /etc/fstab and add this entry:
+ *
+ *    # <file system> <mount pt>      <type>  <options>       <dump>  <pass>
+ *    debugfs    /sys/kernel/debug    debugfs    defaults    0    0
  */
-
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/debugfs.h>
@@ -31,11 +50,67 @@ struct alloc_type {
 
 struct kmem_cache *alloc_types_cache;
 
+static int alloc_type_open(struct inode *inode, struct file *file)
+{
+	struct alloc_type *alloc = (struct alloc_type *)inode->i_private;
+
+	pr_info("Open file with node=%d zone=%d order=%d migrate_type=%d",
+		alloc->nodeid, alloc->zoneid, alloc->order,
+		alloc->migrate_type);
+
+	file->private_data = alloc;
+
+	return 0;
+}
+
+static int alloc_type_release(struct inode *inode, struct file *file)
+{
+	struct alloc_type *alloc = (struct alloc_type *)inode->i_private;
+
+	pr_info("Release file with node=%d zone=%d order=%d migrate_type=%d",
+		alloc->nodeid, alloc->zoneid, alloc->order,
+		alloc->migrate_type);
+
+	return 0;
+}
+
+static ssize_t alloc_type_read(struct file *file, char __user *buf, size_t lbuf,
+			       loff_t *ppos)
+{
+	struct alloc_type *alloc = file->private_data;
+
+	pr_info("Reading: node=%d zone=%d order=%d migrate_type=%d",
+		alloc->nodeid, alloc->zoneid, alloc->order,
+		alloc->migrate_type);
+
+	return 0;
+}
+
+static ssize_t alloc_type_write(struct file *file, const char __user *buf,
+				size_t lbuf, loff_t *ppos)
+{
+	struct alloc_type *alloc = file->private_data;
+
+	pr_info("Writing: node=%d zone=%d order=%d migrate_type=%d",
+		alloc->nodeid, alloc->zoneid, alloc->order,
+		alloc->migrate_type);
+
+	return lbuf;
+}
+
+static const struct file_operations fops = {
+	.owner = THIS_MODULE,
+	.open = alloc_type_open,
+	.release = alloc_type_release,
+	.read = alloc_type_read,
+	.write = alloc_type_write,
+};
 
 static inline int create_page_alloc_files(struct dentry *migratedir, int nodeid,
 					  int zoneid, int order, int mtype)
 {
 	struct alloc_type *alloc;
+	struct dentry *alloc_file;
 
 	alloc = kmem_cache_alloc(alloc_types_cache, GFP_ATOMIC);
 	if (!alloc) {
@@ -48,6 +123,11 @@ static inline int create_page_alloc_files(struct dentry *migratedir, int nodeid,
 	alloc->order = order;
 	alloc->migrate_type = mtype;
 	alloc->migratedir = migratedir;
+
+	alloc_file =
+		debugfs_create_file("alloc", 0644, migratedir, alloc, &fops);
+	if (IS_ERR(alloc_file))
+		return PTR_ERR(alloc_file);
 
 	return 0;
 }
@@ -197,4 +277,5 @@ module_exit(page_alloc_debugfs_exit);
 MODULE_AUTHOR("Juan Yescas");
 MODULE_DESCRIPTION("Module to alloc pages using the debugfs filesystem");
 MODULE_LICENSE("GPL v2");
+
 
