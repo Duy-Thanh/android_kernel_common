@@ -15,7 +15,6 @@
 #include "accessors.h"
 #include "extent-tree.h"
 #include "zoned.h"
-#include "delayed-inode.h"
 
 /*
  * HOW DOES SPACE RESERVATION WORK

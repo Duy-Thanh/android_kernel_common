@@ -8,7 +8,8 @@
 
 #include <linux/list.h>
 #include <linux/fs.h>
-#include <linux/fscrypt.h>
+#include "messages.h"
+#include "ctree.h"
 #include "transaction.h"
 
 struct inode;

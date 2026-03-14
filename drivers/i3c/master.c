@@ -620,8 +620,7 @@ static int i3c_set_hotjoin(struct i3c_master_controller *master, bool enable)
 	else
 		ret = master->ops->disable_hotjoin(master);
 
-	if (!ret)
-		master->hotjoin = enable;
+	master->hotjoin = enable;
 
 	i3c_bus_normaluse_unlock(&master->bus);
 

@@ -40,7 +40,6 @@
 #include "orphan.h"
 #include "tree-checker.h"
 #include "raid-stripe-tree.h"
-#include "delayed-inode.h"
 
 #undef SCRAMBLE_DELAYED_REFS
 

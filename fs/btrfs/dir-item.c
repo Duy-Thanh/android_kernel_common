@@ -9,7 +9,6 @@
 #include "transaction.h"
 #include "accessors.h"
 #include "dir-item.h"
-#include "delayed-inode.h"
 
 /*
  * insert a name into a directory, doing overflow properly if there is a hash
