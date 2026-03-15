@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43072877_7f596349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-15T16:47:57Z",
+      "side": 1,
+      "message": "Dropped the STG changes, it needs a SPR+2.",
+      "revId": "8aae266d51d76e8556a20a9d823ccff81df23a09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
