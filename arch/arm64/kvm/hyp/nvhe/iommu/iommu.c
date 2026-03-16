@@ -123,18 +123,39 @@ static int kvm_iommu_refill(struct kvm_hyp_memcache *host_mc)
 
 static void kvm_iommu_reclaim(struct kvm_hyp_memcache *host_mc, int target)
 {
+	unsigned long prev_nr_pages = host_mc->nr_pages;
+
 	if (!iommu_pools_ready)
 		return;
 
 	reclaim_hyp_pool(&iommu_host_pool, host_mc, target, 0, false);
+
+	if (!cma_size)
+		return;
+
+	if (check_sub_overflow(target,
+			       host_mc->nr_pages - prev_nr_pages,
+			       &target))
+		return;
+
+	reclaim_hyp_pool(&iommu_cma_pool, host_mc,
+			 target, pmd_order, false);
 }
 
 static int kvm_iommu_reclaimable(void)
 {
+	unsigned long reclaimable;
+
 	if (!iommu_pools_ready)
 		return 0;
 
-	return hyp_pool_free_pages(&iommu_host_pool);
+	reclaimable = hyp_pool_free_pages(&iommu_host_pool);
+
+	if (!cma_size)
+		return reclaimable;
+
+	reclaimable += hyp_pool_reclaimable(&iommu_cma_pool, pmd_order) * PMD_SIZE;
+	return reclaimable;
 }
 
 static struct kvm_iommu_ops *get_drv(pkvm_handle_t drv_id)
