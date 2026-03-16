@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd44f79_bae6ee7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-03-16T17:50:18Z",
+      "side": 1,
+      "message": "Please add a reference to https://lore.kernel.org/all/20250821075812.1.I2dbf483156c328bc4a89085816b453e436c06eb5@changeid/ to indicate this was attempted to be upstreamed. For future kernel versions, we expect you to continue working with the upstream maintainers to find a solution.",
+      "revId": "dcfdb596272d20bba592bb0b7e750a37953a5281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a12bf34_13a21068",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-03-16T17:50:18Z",
+      "side": 1,
+      "message": "Add reference to b/433328678",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "dcfdb596272d20bba592bb0b7e750a37953a5281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
