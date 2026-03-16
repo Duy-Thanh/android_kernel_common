@@ -59,9 +59,34 @@ struct ttm_pool_dma {
 };
 
 static unsigned long page_pool_size;
+static bool may_direct_reclaim = true;
+static unsigned int max_page_order = MAX_PAGE_ORDER;
+static unsigned int max_order_direct_reclaim = MAX_PAGE_ORDER;
+
+static int param_set_order(const char *val, const struct kernel_param *kp)
+{
+	return param_set_uint_minmax(val, kp, 0, MAX_PAGE_ORDER);
+}
+
+static const struct kernel_param_ops param_ops_order = {
+	.set = param_set_order,
+	.get = param_get_uint,
+};
 
 MODULE_PARM_DESC(page_pool_size, "Number of pages in the WC/UC/DMA pool");
 module_param(page_pool_size, ulong, 0644);
+
+MODULE_PARM_DESC(may_direct_reclaim,
+		 "Allow direct-reclaim for high-order allocations");
+module_param(may_direct_reclaim, bool, 0644);
+
+MODULE_PARM_DESC(max_page_order, "Set the max page order for allocations");
+module_param_cb(max_page_order, &param_ops_order, &max_page_order, 0644);
+
+MODULE_PARM_DESC(max_order_direct_reclaim,
+		 "Set the max page order for which allocations will use direct-reclaim");
+module_param_cb(max_order_direct_reclaim, &param_ops_order,
+		&max_order_direct_reclaim, 0644);
 
 static atomic_long_t allocated_pages;
 
@@ -92,6 +117,9 @@ static struct page *ttm_pool_alloc_page(struct ttm_pool *pool, gfp_t gfp_flags,
 	if (order)
 		gfp_flags |= __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN |
 			__GFP_THISNODE;
+
+	if (order && (!may_direct_reclaim || order > max_order_direct_reclaim))
+		gfp_flags &= ~__GFP_DIRECT_RECLAIM;
 
 	if (!pool->use_dma_alloc) {
 		p = alloc_pages_node(pool->nid, gfp_flags, order);
@@ -453,7 +481,7 @@ int ttm_pool_alloc(struct ttm_pool *pool, struct ttm_tt *tt,
 	else
 		gfp_flags |= GFP_HIGHUSER;
 
-	for (order = min_t(unsigned int, MAX_PAGE_ORDER, __fls(num_pages));
+	for (order = min_t(unsigned int, max_page_order, __fls(num_pages));
 	     num_pages;
 	     order = min_t(unsigned int, order, __fls(num_pages))) {
 		struct ttm_pool_type *pt;
