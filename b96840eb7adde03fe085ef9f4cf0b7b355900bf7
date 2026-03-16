@@ -22,6 +22,30 @@
       },
       "revId": "b96840eb7adde03fe085ef9f4cf0b7b355900bf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1db14e8_207cc4f5",
+        "filename": "include/trace/hooks/pci.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4566228
+      },
+      "writtenOn": "2026-03-16T02:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5090c46c_0cfd75f5",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "b96840eb7adde03fe085ef9f4cf0b7b355900bf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
