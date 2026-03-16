@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a6937f_d0a3d1cc",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-03-16T23:11:03Z",
+      "side": 1,
+      "message": "nit: the only caller doesn\u0027t use the return value, so just make this a void function.",
+      "range": {
+        "startLine": 1398,
+        "startChar": 0,
+        "endLine": 1398,
+        "endChar": 3
+      },
+      "revId": "e0bae87ae13fe449c8d42623942af332a9142e93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
