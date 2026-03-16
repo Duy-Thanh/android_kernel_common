@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703caf4d_aa296e31",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-16T17:38:03Z",
+      "side": 1,
+      "message": "nit: `BLOCK_MAPPING` is a bit too close to \"block mappings\" in ARM. What do you think about using an `OP_BLOCKED` naming convention instead?",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 31
+      },
+      "revId": "848030e0f6770de058b53b1f028a7f722ee79b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d1a666_c84bcd79",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-16T17:38:03Z",
+      "side": 1,
+      "message": "nit: use `BIT(n)` here.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "848030e0f6770de058b53b1f028a7f722ee79b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
