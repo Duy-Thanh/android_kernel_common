@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86229fc_bc65db4f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "Where are NR_PAGES allocated?",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3be32e_9e889e77",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "Can we move this now into `struct hyp_allocator` ?",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ddc4c50_430a0b2b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "Hum, you should be able to use the bitmap_ functions here. That would handle all that for you",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064de03f_884f3787",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "This should take a hyp_allocator as a parameter. Same for unpoison.\n\nAlso (void *) for addr, that makes it clear it is a VA.",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ccb011_6dddf7c9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "size_t instead of size as this is the type used everywhere in this file.",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acdf9df1_ec87edcf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "Worth to create a `static bool kasan_covered(void *addr, size_t size) helper to avoid repetition.",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e2cfdd_3ac69e81",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "there\u0027s a header file for that, you shouldn\u0027t need this forward declaration.",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6604c2ef_1865a654",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "As this is an exported function, this should be hyp_alloc_check_range().",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061adf87_856e08fa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "This definition should go just before chunk_data.",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157d4386_3c147f49",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-16T11:10:04Z",
+      "side": 1,
+      "message": "Could we call this \"kasan_poison\" to have the kasan_ prefix on all related functions?",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
