@@ -2421,6 +2421,7 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 	tlb_finish_mmu(&tlb);
 
 	vma_prev(&vmi);
+
 	/* Shrink the vma to just the new range */
 	return vma_shrink(&vmi, vma, new_start, new_end, vma->vm_pgoff);
 }
