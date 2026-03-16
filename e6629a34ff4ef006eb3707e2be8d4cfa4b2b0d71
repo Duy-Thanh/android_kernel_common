@@ -16,6 +16,24 @@
       "message": "Hi @tkjos@google.com and @nkapron@google.com\n\nWe are now down to the last AOSP vendor hook as we have worked with upstream to deprecate the other two vendor hooks in https://android-review.git.corp.google.com/q/topic:%22typec_vendor_hooks_6_6%22.\n\nWe tried to deprecate this one as well by taking the approach mentioned in https://android-review.git.corp.google.com/c/kernel/common/+/3143219/comments/03bf73fd_e75cbe2c, however, GrehKH preferred deprecating the tcpm log buffer mechanism and migrating to the trace events(https://lore.kernel.org/lkml/2025110336-hummus-stank-e5ff@gregkh/). We are now working on this and we need this vendor hook to still be in place in the interim as mentioned in the commit msg.",
       "revId": "e6629a34ff4ef006eb3707e2be8d4cfa4b2b0d71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "759c9cb4_d2173e94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2026-03-16T20:20:57Z",
+      "side": 1,
+      "message": "This change and the change oag/3983118 now passes the presubmit. Resolving this commit to prepare for merge.",
+      "parentUuid": "6155d07e_29387656",
+      "revId": "e6629a34ff4ef006eb3707e2be8d4cfa4b2b0d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
