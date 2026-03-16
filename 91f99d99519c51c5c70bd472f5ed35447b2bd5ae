@@ -22,6 +22,30 @@
       },
       "revId": "91f99d99519c51c5c70bd472f5ed35447b2bd5ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5194d2_71701ee2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-03-16T17:26:23Z",
+      "side": 1,
+      "message": "Actually, patch should be `UPSTREAM` and not `FROMGIT`.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/scsi/scsi_scan.c?id\u003d21008cabc5d9bf2864ff244f4f94abebe3380947\n\nSo can you please cherry-pick from upstream using `git cherry-pick -x ...`? This will make sure that commit message and headers are picked up correctly.",
+      "parentUuid": "33265705_6c70b297",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "91f99d99519c51c5c70bd472f5ed35447b2bd5ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
