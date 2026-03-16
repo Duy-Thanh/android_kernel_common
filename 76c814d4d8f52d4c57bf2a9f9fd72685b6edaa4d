@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac2fc5cb_03b84f5a",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-16T01:41:03Z",
+      "side": 1,
+      "message": "We can\u0027t call `bio_endio()` on `parent`, because we haven\u0027t chained a request, that would be a bug to endio.\n\nI think all we need to do is to convert `read_from_bdev_async()` from `void` to `int`. zram handles the error and sets `BLK_STS_IOERR` on `parent` in `zram_bio_read()`.",
+      "parentUuid": "cbd2f9cf_aed04480",
+      "range": {
+        "startLine": 1399,
+        "startChar": 0,
+        "endLine": 1401,
+        "endChar": 0
+      },
+      "revId": "76c814d4d8f52d4c57bf2a9f9fd72685b6edaa4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85f196b4_6f4ff0ee",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 2
