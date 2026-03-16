@@ -71,6 +71,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f3a32c_1843cc43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-03-16T14:56:14Z",
+      "side": 1,
+      "message": "Wait until http://r.android.com/3991874 is merged.",
+      "revId": "8489cb7738b63221ff19db1544c1630250390777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02b3b281_05e915d9",
