@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33265705_6c70b297",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-16T17:14:13Z",
+      "side": 1,
+      "message": "Please follow the guidelines at https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/README.md for `FROMGIT` patches.\n\nSpecifically, you\u0027re missing the repo URL and branch from which this patch was cherry-picked from.",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "91f99d99519c51c5c70bd472f5ed35447b2bd5ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
