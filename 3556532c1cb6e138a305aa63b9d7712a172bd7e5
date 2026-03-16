@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05214a84_24f64e3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-16T17:36:06Z",
+      "side": 1,
+      "message": "Just for future reference, it looks like this should have probably been applied after Sink Cap patch so there isn\u0027t breakage in-between the patches (likely the cause of the presubmit failures).",
+      "revId": "3556532c1cb6e138a305aa63b9d7712a172bd7e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
