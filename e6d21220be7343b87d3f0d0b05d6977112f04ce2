@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38568223_a2769854",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-17T20:23:10Z",
+      "side": 1,
+      "message": "Bypassing presubmit since this change has no runtime effect.",
+      "revId": "e6d21220be7343b87d3f0d0b05d6977112f04ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
