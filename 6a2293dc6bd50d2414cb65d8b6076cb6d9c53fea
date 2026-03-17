@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d990313e_0adccc26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-03-17T16:11:37Z",
+      "side": 1,
+      "message": "Carlos noticed that we will end up with conflict while getting the fix https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs.git/commit/fs/erofs/fileio.c?h\u003dfixes\u0026id\u003dbc804a8d7e865ef47fb7edcaf5e77d18bf444ebc via LTS in 6.12 because of this `BACKPORT`. I agree that this would cause unnecessary conflict and will need a careful work to apply that. \n\nIt\u0027s better that we cherry-pick both to avoid any conflicts.",
+      "revId": "6a2293dc6bd50d2414cb65d8b6076cb6d9c53fea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
