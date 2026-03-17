@@ -73,6 +73,8 @@
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+
+/* keep-sorted */
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inode_io_list_del);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_redirty_tail_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_queue_io);
@@ -514,3 +516,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+/* keep-sorted end */
