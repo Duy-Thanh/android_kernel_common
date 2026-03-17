@@ -571,9 +571,11 @@
   devres_add
   __devres_alloc_node
   devres_free
+  dev_set_mtu
   dev_set_name
   dev_vprintk_emit
   _dev_warn
+  disable_delayed_work_sync
   disable_irq
   disable_irq_nosync
   disable_percpu_irq
@@ -1425,6 +1427,7 @@
   __kfifo_out
   __kfifo_out_linear
   __kfifo_out_peek
+  __kfifo_to_user
   kfree
   kfree_sensitive
   kfree_skb_list_reason
@@ -2807,6 +2810,7 @@
   __traceiter_android_vh_ufs_update_sysfs
   __traceiter_android_vh_update_thermal_trip_flag
   __traceiter_android_vh_use_amu_fie
+  __traceiter_android_vh_vmscan_kswapd_done
   __traceiter_clock_set_rate
   __traceiter_cma_alloc_finish
   __traceiter_cma_alloc_start
@@ -2821,6 +2825,7 @@
   __traceiter_mmap_lock_start_locking
   __traceiter_mm_vmscan_direct_reclaim_begin
   __traceiter_mm_vmscan_direct_reclaim_end
+  __traceiter_mm_vmscan_kswapd_wake
   __traceiter_pelt_cfs_tp
   __traceiter_pelt_dl_tp
   __traceiter_pelt_irq_tp
@@ -2960,6 +2965,7 @@
   __tracepoint_android_vh_ufs_update_sysfs
   __tracepoint_android_vh_update_thermal_trip_flag
   __tracepoint_android_vh_use_amu_fie
+  __tracepoint_android_vh_vmscan_kswapd_done
   __tracepoint_clock_set_rate
   __tracepoint_cma_alloc_finish
   __tracepoint_cma_alloc_start
@@ -2974,6 +2980,7 @@
   __tracepoint_mmap_lock_start_locking
   __tracepoint_mm_vmscan_direct_reclaim_begin
   __tracepoint_mm_vmscan_direct_reclaim_end
+  __tracepoint_mm_vmscan_kswapd_wake
   __tracepoint_pelt_cfs_tp
   __tracepoint_pelt_dl_tp
   __tracepoint_pelt_irq_tp
