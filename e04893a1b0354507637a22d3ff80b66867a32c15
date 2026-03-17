@@ -141,6 +141,24 @@
       "parentUuid": "eba5c23c_be4e7bf5",
       "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e130264_d1c09ec1",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-17T16:52:39Z",
+      "side": 1,
+      "message": "Sounds good.\n\nFor the `O_CLOEXEC` bit, that makes sense, so you can ignore my comment about passing it.",
+      "parentUuid": "87d13e6c_014ecb04",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
