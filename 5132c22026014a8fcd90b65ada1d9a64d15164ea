@@ -16,6 +16,23 @@
       "message": "Is there any reason why this cannot be implemented in upstream f2fs?",
       "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a90b14_937fb701",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3832128
+      },
+      "writtenOn": "2026-03-17T00:31:57Z",
+      "side": 1,
+      "message": "We have recorded stop_reason and inconsistent error into sb.s_stop_reason and sb.s_errors, any reason why we have to report in other places?",
+      "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
