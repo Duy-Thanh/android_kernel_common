@@ -22,6 +22,30 @@
       },
       "revId": "c07d9d8477be07babd910e15a1e671b56fc438f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9406c1_88d57210",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1683,
+      "author": {
+        "id": 4007912
+      },
+      "writtenOn": "2026-03-17T02:19:56Z",
+      "side": 1,
+      "message": "The main purpose of this vendor hook is to accelerate reclaim of clean file folios after writeback.\n\nWe intentionally trigger the hook only when __folio_end_writeback() returns false. In this case, there are no waiters on the folio, which implies it is not currently being waited on by the reclaim path (e.g. no folio_wait_writeback() in progress).\n\nFor folios where __folio_end_writeback() returns true, there may be existing waiters (such as reclaim paths that already decided to wait for writeback and retry). These folios will be naturally handled by the reclaim logic after writeback completes, for example:\n\n    folio_unlock(folio);\n    folio_wait_writeback(folio);\n    list_add_tail(\u0026folio-\u003elru, folio_list);\n    continue;\n\nSo we intentionally skip these cases to avoid interfering with the existing reclaim flow.\n\nInstead, we focus on folios with no waiters (returning false), which represent writeback-completed clean folios that are not yet actively tracked by reclaim. Collecting these folios allows us to accelerate subsequent reclaim decisions and improve reclaim efficiency without adding contention to the critical wakeup path.",
+      "parentUuid": "609903f2_edfc0855",
+      "range": {
+        "startLine": 1683,
+        "startChar": 1,
+        "endLine": 1683,
+        "endChar": 5
+      },
+      "revId": "c07d9d8477be07babd910e15a1e671b56fc438f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
