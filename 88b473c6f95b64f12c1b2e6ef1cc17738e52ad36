@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ff7465_5dce5e5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-17T16:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8720676d_587cb117",
+      "range": {
+        "startLine": 9,
+        "startChar": 58,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "682508c8_4fae7c12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-17T16:17:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3434ba94_9c5531ac",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 2
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6663500b_0415b3cd",
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7951502b_5dd20c53",
+        "filename": "kernel/dma/swiotlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-17T16:17:50Z",
+      "side": 1,
+      "message": "Yes, I was concerned that I\u0027d need to reason about the alignment of the pointer. But that should be ok as we never keep the flag around (the pointer is allocated with kzalloc() which should be aligned)",
+      "parentUuid": "6663500b_0415b3cd",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b22695ec_c24bfc6c",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-03-12T13:26:07Z",
       "side": 1,
       "message": "Should we call `set_memory_encrypted()` for the encryption case, rather than rely on the default state of memory being encrypted? I don\u0027t think it matters with pKVM, but you can imagine other hypervisors that explicitly allocate the reserved memory regions (i.e. specify the base address in DT) and may have a pre-shared (decrypted) window.",
+      "range": {
+        "startLine": 1860,
+        "startChar": 5,
+        "endLine": 1860,
+        "endChar": 19
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697c5322_1e5eef99",
+        "filename": "kernel/dma/swiotlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-17T16:17:50Z",
+      "side": 1,
+      "message": "I am not aware of such cases. But, I\u0027d rather keep the default behavior as is as that would be a big shift from upstream and we know for pKVM memory is encrypted by default.",
+      "parentUuid": "b22695ec_c24bfc6c",
       "range": {
         "startLine": 1860,
         "startChar": 5,
