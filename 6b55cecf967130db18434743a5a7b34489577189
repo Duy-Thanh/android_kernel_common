@@ -16,6 +16,24 @@
       "message": "@richardycc@google.com, this has indirect conflicts with aosp/3983859",
       "revId": "6b55cecf967130db18434743a5a7b34489577189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113731eb_5d311241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-17T07:30:39Z",
+      "side": 1,
+      "message": "Ah, yes, I can reproduce the same issue. Thanks for the finding.",
+      "parentUuid": "02f43d83_a4af7af0",
+      "revId": "6b55cecf967130db18434743a5a7b34489577189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
