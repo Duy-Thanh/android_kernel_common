@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1994f247_16aae6ee",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-17T17:04:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "703caf4d_aa296e31",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 31
+      },
+      "revId": "848030e0f6770de058b53b1f028a7f722ee79b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2d1a666_c84bcd79",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-16T17:38:03Z",
       "side": 1,
       "message": "nit: use `BIT(n)` here.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 0
+      },
+      "revId": "848030e0f6770de058b53b1f028a7f722ee79b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fab5ee_9447da3c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-17T17:04:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f2d1a666_c84bcd79",
       "range": {
         "startLine": 301,
         "startChar": 0,
