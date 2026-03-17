@@ -5864,6 +5864,9 @@ static vm_fault_t do_fault(struct vm_fault *vmf)
 	else
 		ret = do_shared_fault(vmf);
 
+	if (ret & VM_FAULT_NEED_ANONPAGE)
+		ret = do_anonymous_page(vmf);
+
 	/* preallocated pagetable is unused: free it */
 	if (vmf->prealloc_pte) {
 		pte_free(vm_mm, vmf->prealloc_pte);

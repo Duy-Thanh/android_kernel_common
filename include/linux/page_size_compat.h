@@ -100,29 +100,6 @@ static __always_inline unsigned long calc_vm_flag_bits(struct file *file, unsign
 	return flag_bits;
 }
 
-extern unsigned long ___filemap_len(struct inode *inode, unsigned long pgoff,
-				    unsigned long len, unsigned long flags);
-
-extern void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long file_backed_len,
-			     unsigned long len);
-
-static __always_inline unsigned long __filemap_len(struct inode *inode, unsigned long pgoff,
-						   unsigned long len, unsigned long flags)
-{
-	if (static_branch_unlikely(&page_shift_compat_enabled))
-		return ___filemap_len(inode, pgoff, len, flags);
-	else
-		return len;
-}
-
-static __always_inline void __filemap_fixup(unsigned long addr, unsigned long prot,
-					    unsigned long file_backed_len, unsigned long len)
-{
-
-	if (static_branch_unlikely(&page_shift_compat_enabled))
-		___filemap_fixup(addr, prot, file_backed_len, len);
-}
-
 extern int __fixup_swap_header(struct file *swap_file, struct address_space *mapping);
 
 extern void __fold_filemap_fixup_entry(struct vma_iterator *iter, unsigned long *end);
