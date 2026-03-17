@@ -123,6 +123,24 @@
       "parentUuid": "8dfe3194_b6e52bd1",
       "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d13e6c_014ecb04",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-17T16:49:45Z",
+      "side": 1,
+      "message": "You are right, in the general case we need to do `new_content-\u003ecopy_on_exec \u003d content-\u003ecopy_on_exec` here. I\u0027ll add it.\nFor dmabuf case I missed it because `dmabuf_content_make_writable` does not create a new content but reuses the existing one, however that\u0027s content-dependent and can\u0027t be relied on.\n\nYes, the intent of publish_wrap() is to avoid each implementation having to do things which are generic. make_writable() does content-specific operations and can end up allocating a new content altogether, that\u0027s why it\u0027s using content-specific callback. But O_CLOEXEC I think is generic, so don\u0027t have to be handled by the content-specific code.",
+      "parentUuid": "eba5c23c_be4e7bf5",
+      "revId": "e04893a1b0354507637a22d3ff80b66867a32c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
