@@ -121,6 +121,24 @@
       "parentUuid": "14833114_f4de07a2",
       "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34701a1c_39e2efe0",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4919,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-17T18:18:32Z",
+      "side": 1,
+      "message": "Shall we also submit a fix for `tdx_has_emulated_msr()` to upstream?",
+      "parentUuid": "79d1da11_d6b6e4f3",
+      "revId": "50d9eb4badac99aab1bbd0bc5cca912b25226236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
