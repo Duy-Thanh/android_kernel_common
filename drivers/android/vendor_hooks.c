@@ -765,3 +765,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_device_swapoff);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_swap_slot_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_swap_pages_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_has_unmovable_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_skip_lru);
