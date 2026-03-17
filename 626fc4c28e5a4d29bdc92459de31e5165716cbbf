@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6714610d_8259d767",
+        "filename": "arch/x86/kvm/lapic.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-17T18:17:46Z",
+      "side": 1,
+      "message": "nit: unneeded empty line?",
+      "revId": "626fc4c28e5a4d29bdc92459de31e5165716cbbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
