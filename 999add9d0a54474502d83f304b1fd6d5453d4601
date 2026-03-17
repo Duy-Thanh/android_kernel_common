@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af2be64_104e21cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4566228
+      },
+      "writtenOn": "2026-03-17T06:05:00Z",
+      "side": 1,
+      "message": "Verification Report (`virtual_device_x86_64`)\n\nSuccessfully verified change aosp/3989494 on the Android Common Kernel (`android16-6.12`) using a Cuttlefish emulator.\n\n  Build \u0026 Environment:\n   - Target: `virtual_device_x86_64`\n   - Kernel Version: `6.12.69-android16-6-pci-vndhk`\n   - Host: Specialist Cloudtop (Intel N2) with Nested Virtualization (KVM) enabled.\n\n  Verification Steps:\n   1. ACK Build: Successfully built the kernel using Bazel (`tools/bazel run //common-modules/virtual-device:virtual_device_x86_64_dist`).\n   2. Cuttlefish Boot: Successfully booted the emulator using the custom `bzImage` and `initramfs.img` via `launch_cvd`.\n   3. Tracepoint Verification: Confirmed the presence of the new vendor hook symbol in the running kernel\u0027s symbol table:\n```\n       # adb shell \"cat /proc/kallsyms | grep android_vh_pci_pm_verify_state\"\n       ... D __tracepoint_android_vh_pci_pm_verify_state\n       ... T __traceiter_android_vh_pci_pm_verify_state\n```\n   4. Logic Check: Verified that `drivers/pci/pci-driver.c` now includes the tracepoint call and handles the return code as expected.\n\n  The change is functional and symbols are correctly exported.",
+      "revId": "999add9d0a54474502d83f304b1fd6d5453d4601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
