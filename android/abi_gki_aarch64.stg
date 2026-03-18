@@ -359585,7 +359585,7 @@ elf_symbol {
   name: "ANDROID_GKI_memcg_stat_item"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x7a01e9f7
+  crc: 0xdeadbeef
   type_id: 0xc9099682
   full_name: "ANDROID_GKI_memcg_stat_item"
 }
