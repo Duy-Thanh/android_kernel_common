@@ -347,9 +347,13 @@ struct trace_array {
 	unsigned int		mapped;
 	unsigned long		range_addr_start;
 	unsigned long		range_addr_size;
+<<<<<<< TARGET BRANCH (c161bf370c6b64c1ac6f020342a82483b9fa3922 UPSTREAM: ftrace: Implement :mod: cache filtering on kernel )
 	char			*range_name;
+||||||| BASE          (fa1c9b5b9f851b6600e16d1a0a34a2c63eb58f6f UPSTREAM: ftrace: Implement :mod: cache filtering on kernel )
+=======
+	unsigned long		kaslr_addr;
+>>>>>>> SOURCE BRANCH (e3d382756d451affb07301ca0dd386f9989b856d UPSTREAM: ring-buffer: Use kaslr address instead of text del)
 	long			text_delta;
-	long			data_delta;
 
 	struct trace_pid_list	__rcu *filtered_pids;
 	struct trace_pid_list	__rcu *filtered_no_pids;
@@ -430,10 +434,21 @@ struct trace_array {
 };
 
 enum {
+<<<<<<< TARGET BRANCH (c161bf370c6b64c1ac6f020342a82483b9fa3922 UPSTREAM: ftrace: Implement :mod: cache filtering on kernel )
 	TRACE_ARRAY_FL_GLOBAL	= BIT(0),
 	TRACE_ARRAY_FL_BOOT	= BIT(1),
 	TRACE_ARRAY_FL_MOD_INIT	= BIT(2),
 	TRACE_ARRAY_FL_VMALLOC		= BIT(5),
+||||||| BASE          (fa1c9b5b9f851b6600e16d1a0a34a2c63eb58f6f UPSTREAM: ftrace: Implement :mod: cache filtering on kernel )
+	TRACE_ARRAY_FL_GLOBAL	= BIT(0),
+	TRACE_ARRAY_FL_BOOT	= BIT(1),
+	TRACE_ARRAY_FL_MOD_INIT	= BIT(2),
+=======
+	TRACE_ARRAY_FL_GLOBAL		= BIT(0),
+	TRACE_ARRAY_FL_BOOT		= BIT(1),
+	TRACE_ARRAY_FL_LAST_BOOT	= BIT(2),
+	TRACE_ARRAY_FL_MOD_INIT		= BIT(3),
+>>>>>>> SOURCE BRANCH (e3d382756d451affb07301ca0dd386f9989b856d UPSTREAM: ring-buffer: Use kaslr address instead of text del)
 };
 
 extern struct list_head ftrace_trace_arrays;
