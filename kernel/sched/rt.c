@@ -1699,6 +1699,12 @@ static void wakeup_preempt_rt(struct rq *rq, struct task_struct *p, int flags)
 {
 	struct task_struct *donor = rq->donor;
 
+	/*
+	 * XXX If we're preempted by DL, queue a push?
+	 */
+	if (p->sched_class != &rt_sched_class)
+		return;
+
 	if (p->prio < donor->prio) {
 		resched_curr(rq);
 		return;
@@ -2194,6 +2200,7 @@ static void push_rt_tasks(struct rq *rq)
  */
 static int rto_next_cpu(struct root_domain *rd)
 {
+	int this_cpu = smp_processor_id();
 	int next;
 	int cpu;
 
@@ -2219,6 +2226,10 @@ static int rto_next_cpu(struct root_domain *rd)
 		trace_android_rvh_rto_next_cpu(rd->rto_cpu, rd->rto_mask, &cpu);
 
 		rd->rto_cpu = cpu;
+
+		/* Do not send IPI to self */
+		if (cpu == this_cpu)
+			continue;
 
 		if (cpu < nr_cpu_ids)
 			return cpu;
@@ -2665,9 +2676,6 @@ static int task_is_throttled_rt(struct task_struct *p, int cpu)
 #endif /* CONFIG_SCHED_CORE */
 
 DEFINE_SCHED_CLASS(rt) = {
-
-	.queue_mask		= 4,
-
 	.enqueue_task		= enqueue_task_rt,
 	.dequeue_task		= dequeue_task_rt,
 	.yield_task		= yield_task_rt,
