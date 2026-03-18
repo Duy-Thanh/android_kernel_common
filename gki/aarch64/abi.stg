@@ -349501,6 +349501,13 @@ function {
   parameter_id: 0x20007040
 }
 function {
+  id: 0x9be19d09
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x13580d6c
+  parameter_id: 0x0d1d7def
+}
+function {
   id: 0x9be1ca34
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -368767,6 +368774,7 @@ elf_symbol {
   full_name: "__traceiter_android_vh_pagetypeinfo_show"
 }
 elf_symbol {
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
   id: 0xa8af12cd
   name: "__traceiter_android_vh_pcpu_rwsem_lock_acquired"
   is_defined: true
@@ -368783,6 +368791,16 @@ elf_symbol {
   crc: 0x09e96755
   type_id: 0x9be96fa7
   full_name: "__traceiter_android_vh_pcpu_rwsem_lock_released"
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+=======
+  id: 0x5f55b542
+  name: "__traceiter_android_vh_pci_pm_verify_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5ef17f15
+  type_id: 0x9be19d09
+  full_name: "__traceiter_android_vh_pci_pm_verify_state"
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
 }
 elf_symbol {
   id: 0x13b0736e
@@ -374311,6 +374329,7 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_pagetypeinfo_show"
 }
 elf_symbol {
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
   id: 0x94fbe99f
   name: "__tracepoint_android_vh_pcpu_rwsem_lock_acquired"
   is_defined: true
@@ -374327,6 +374346,16 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_pcpu_rwsem_lock_released"
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+=======
+  id: 0x01285174
+  name: "__tracepoint_android_vh_pci_pm_verify_state"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_pci_pm_verify_state"
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
 }
 elf_symbol {
   id: 0xa4c454d8
@@ -436944,8 +436973,13 @@ interface {
   symbol_id: 0xed7b87e3
   symbol_id: 0xb4d5ffdc
   symbol_id: 0x3c5e668a
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
   symbol_id: 0xa8af12cd
   symbol_id: 0xe6eecb59
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+=======
+  symbol_id: 0x5f55b542
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
   symbol_id: 0x13b0736e
   symbol_id: 0xc72f2012
   symbol_id: 0xd14f3adb
@@ -437560,8 +437594,13 @@ interface {
   symbol_id: 0xeeab2985
   symbol_id: 0x352038ba
   symbol_id: 0x2f61d5a4
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
   symbol_id: 0x94fbe99f
   symbol_id: 0x98b47047
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+=======
+  symbol_id: 0x01285174
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
   symbol_id: 0xa4c454d8
   symbol_id: 0x7d42b7c8
   symbol_id: 0x3d63616d

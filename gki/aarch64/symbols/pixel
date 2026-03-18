@@ -2087,6 +2087,41 @@
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
   __traceiter_android_vh_ipi_stop
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+  __traceiter_android_vh_mm_compaction_begin
+  __traceiter_android_vh_mm_compaction_end
+  __traceiter_android_vh_mm_kcompactd_cpu_online
+  __traceiter_android_vh_page_cache_ra_order_bypass
+  __traceiter_android_vh_page_cache_readahead_start
+  __traceiter_android_vh_platform_pci_choose_state
+  __traceiter_android_vh_platform_pci_get_power_state
+  __traceiter_android_vh_platform_pci_power_manageable
+  __traceiter_android_vh_platform_pci_set_power_state
+  __traceiter_android_vh_post_alloc_hook
+  __traceiter_android_vh_prio_inheritance
+  __traceiter_android_vh_prio_restore
+  __traceiter_android_vh_put_task
+  __traceiter_android_vh_resume_end
+  __traceiter_android_vh_rmqueue
+=======
+  __traceiter_android_vh_mm_compaction_begin
+  __traceiter_android_vh_mm_compaction_end
+  __traceiter_android_vh_mm_kcompactd_cpu_online
+  __traceiter_android_vh_page_cache_ra_order_bypass
+  __traceiter_android_vh_page_cache_readahead_start
+  __traceiter_android_vh_pci_pm_verify_state
+  __traceiter_android_vh_platform_pci_choose_state
+  __traceiter_android_vh_platform_pci_get_power_state
+  __traceiter_android_vh_platform_pci_power_manageable
+  __traceiter_android_vh_platform_pci_set_power_state
+  __traceiter_android_vh_post_alloc_hook
+  __traceiter_android_vh_prio_inheritance
+  __traceiter_android_vh_prio_restore
+  __traceiter_android_vh_put_task
+  __traceiter_android_vh_resume_end
+  __traceiter_android_vh_rmqueue
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_sysrq_crash
   __traceiter_android_vh_ufs_check_int_errors
@@ -2116,6 +2151,41 @@
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_ipi_stop
+<<<<<<< HEAD   (f8aa98c56fed7dab94b8480e9a84c5b9c41c6d40 ANDROID: GKI: update symbol list for xiaomi)
+||||||| BASE   (b2bb3b062c7b1e74109b61771f6598b9ef53c098 ANDROID: ABI: Update pixel symbol list)
+  __tracepoint_android_vh_mm_compaction_begin
+  __tracepoint_android_vh_mm_compaction_end
+  __tracepoint_android_vh_mm_kcompactd_cpu_online
+  __tracepoint_android_vh_page_cache_ra_order_bypass
+  __tracepoint_android_vh_page_cache_readahead_start
+  __tracepoint_android_vh_platform_pci_choose_state
+  __tracepoint_android_vh_platform_pci_get_power_state
+  __tracepoint_android_vh_platform_pci_power_manageable
+  __tracepoint_android_vh_platform_pci_set_power_state
+  __tracepoint_android_vh_post_alloc_hook
+  __tracepoint_android_vh_prio_inheritance
+  __tracepoint_android_vh_prio_restore
+  __tracepoint_android_vh_put_task
+  __tracepoint_android_vh_resume_end
+  __tracepoint_android_vh_rmqueue
+=======
+  __tracepoint_android_vh_mm_compaction_begin
+  __tracepoint_android_vh_mm_compaction_end
+  __tracepoint_android_vh_mm_kcompactd_cpu_online
+  __tracepoint_android_vh_page_cache_ra_order_bypass
+  __tracepoint_android_vh_page_cache_readahead_start
+  __tracepoint_android_vh_pci_pm_verify_state
+  __tracepoint_android_vh_platform_pci_choose_state
+  __tracepoint_android_vh_platform_pci_get_power_state
+  __tracepoint_android_vh_platform_pci_power_manageable
+  __tracepoint_android_vh_platform_pci_set_power_state
+  __tracepoint_android_vh_post_alloc_hook
+  __tracepoint_android_vh_prio_inheritance
+  __tracepoint_android_vh_prio_restore
+  __tracepoint_android_vh_put_task
+  __tracepoint_android_vh_resume_end
+  __tracepoint_android_vh_rmqueue
+>>>>>>> CHANGE (214d1615c480a29b9522181d1dc41ac8022a4492 ANDROID: ABI: Update pixel symbol list)
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_sysrq_crash
   __tracepoint_android_vh_ufs_check_int_errors
