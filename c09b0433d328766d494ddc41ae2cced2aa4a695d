@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a393499_09049c62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2026-03-18T13:13:04Z",
+      "side": 1,
+      "message": "This is a merge commit, the original change is a properly formatted UPSTREAM patch. Skipping KernelCommit verification.",
+      "revId": "c09b0433d328766d494ddc41ae2cced2aa4a695d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
