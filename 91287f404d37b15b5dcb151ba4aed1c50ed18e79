@@ -39,6 +39,30 @@
       },
       "revId": "91287f404d37b15b5dcb151ba4aed1c50ed18e79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b244fc_d9ff811b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1886585
+      },
+      "writtenOn": "2026-03-18T15:27:58Z",
+      "side": 1,
+      "message": "It has not reached Linus\u0027 tree yet. It is just in the UVC for-next tree.",
+      "parentUuid": "ce3b76f8_5cc0a14b",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 66
+      },
+      "revId": "91287f404d37b15b5dcb151ba4aed1c50ed18e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
