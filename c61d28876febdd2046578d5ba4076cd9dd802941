@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b182fc_0c844e48",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1545,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-03-18T10:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74b64785_d7812924",
+      "range": {
+        "startLine": 1545,
+        "startChar": 47,
+        "endLine": 1545,
+        "endChar": 55
+      },
+      "revId": "c61d28876febdd2046578d5ba4076cd9dd802941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0e3a19e_09755623",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ce90c32_8cccd739",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-03-18T10:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0e3a19e_09755623",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "c61d28876febdd2046578d5ba4076cd9dd802941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "507f1d8f_24461b17",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-03-17T20:50:23Z",
       "side": 1,
       "message": "I think we might need to do something like:\n\n`VM_FAULT_RETRY|VM_FAULT_NEED_ANONPAGE` to propagate the error up. \n\nAnd the same below.",
+      "range": {
+        "startLine": 3499,
+        "startChar": 9,
+        "endLine": 3499,
+        "endChar": 31
+      },
+      "revId": "c61d28876febdd2046578d5ba4076cd9dd802941",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "550a9d8b_4a6e3816",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3499,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-03-18T10:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "507f1d8f_24461b17",
       "range": {
         "startLine": 3499,
         "startChar": 9,
