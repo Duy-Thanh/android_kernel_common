@@ -329,6 +329,7 @@ struct uvc_buffer {
 #define UVC_QUEUE_DROP_CORRUPTED	(1 << 1)
 
 struct uvc_video_queue {
+	struct uvc_streaming *stream;
 	struct vb2_queue queue;
 	struct mutex mutex;			/* Protects queue */
 
@@ -703,8 +704,8 @@ extern struct uvc_driver uvc_driver;
 struct uvc_entity *uvc_entity_by_id(struct uvc_device *dev, int id);
 
 /* Video buffers queue management. */
-int uvc_queue_init(struct uvc_video_queue *queue, enum v4l2_buf_type type,
-		   int drop_corrupted);
+int uvc_queue_init(struct uvc_streaming *stream, struct uvc_video_queue *queue,
+		   enum v4l2_buf_type type, int drop_corrupted);
 void uvc_queue_release(struct uvc_video_queue *queue);
 int uvc_request_buffers(struct uvc_video_queue *queue,
 			struct v4l2_requestbuffers *rb);
@@ -738,14 +739,6 @@ int uvc_queue_allocated(struct uvc_video_queue *queue);
 static inline int uvc_queue_streaming(struct uvc_video_queue *queue)
 {
 	return vb2_is_streaming(&queue->queue);
-}
-
-static inline struct uvc_streaming *
-uvc_queue_to_stream(struct uvc_video_queue *queue, unsigned int type)
-{
-	if (type == V4L2_BUF_TYPE_META_CAPTURE)
-		return container_of(queue, struct uvc_streaming, meta.queue);
-	return container_of(queue, struct uvc_streaming, queue);
 }
 
 /* V4L2 interface */
