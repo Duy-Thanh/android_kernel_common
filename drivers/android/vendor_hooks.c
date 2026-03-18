@@ -10,32 +10,34 @@
 #include <trace/hooks/vendor_hooks.h>
 #include <linux/tracepoint.h>
 
-#include <trace/hooks/cpuidle.h>
-#include <trace/hooks/mpam.h>
-#include <trace/hooks/wqlockup.h>
-#include <trace/hooks/debug.h>
-#include <trace/hooks/sysrqcrash.h>
-#include <trace/hooks/printk.h>
-#include <trace/hooks/epoch.h>
-#include <trace/hooks/cpufreq.h>
-#include <trace/hooks/ufshcd.h>
-#include <trace/hooks/cgroup.h>
-#include <trace/hooks/sys.h>
-#include <trace/hooks/iommu.h>
-#include <trace/hooks/net.h>
-#include <trace/hooks/pm_domain.h>
-#include <trace/hooks/cpuidle_psci.h>
-#include <trace/hooks/vmscan.h>
+/* keep-sorted start */
 #include <trace/hooks/avc.h>
-#include <trace/hooks/selinux.h>
-#include <trace/hooks/syscall_check.h>
+#include <trace/hooks/cgroup.h>
+#include <trace/hooks/cpufreq.h>
+#include <trace/hooks/cpuidle.h>
+#include <trace/hooks/cpuidle_psci.h>
+#include <trace/hooks/debug.h>
+#include <trace/hooks/epoch.h>
+#include <trace/hooks/fpsimd.h>
 #include <trace/hooks/gic.h>
 #include <trace/hooks/gic_v3.h>
-#include <trace/hooks/remoteproc.h>
+#include <trace/hooks/iommu.h>
+#include <trace/hooks/mpam.h>
+#include <trace/hooks/net.h>
+#include <trace/hooks/pm_domain.h>
+#include <trace/hooks/printk.h>
 #include <trace/hooks/reboot.h>
-#include <trace/hooks/timer.h>
-#include <trace/hooks/fpsimd.h>
+#include <trace/hooks/remoteproc.h>
+#include <trace/hooks/selinux.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/sys.h>
+#include <trace/hooks/syscall_check.h>
+#include <trace/hooks/sysrqcrash.h>
+#include <trace/hooks/timer.h>
+#include <trace/hooks/ufshcd.h>
+#include <trace/hooks/vmscan.h>
+#include <trace/hooks/wqlockup.h>
+/* keep-sorted end */
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
