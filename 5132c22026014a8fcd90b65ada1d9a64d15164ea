@@ -33,6 +33,42 @@
       "message": "We have recorded stop_reason and inconsistent error into sb.s_stop_reason and sb.s_errors, any reason why we have to report in other places?",
       "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da80bcaf_8488149a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2026-03-18T02:23:45Z",
+      "side": 1,
+      "message": "This feature can report the call stack and perform statistical analysis on the data at scale.",
+      "parentUuid": "63a90b14_937fb701",
+      "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1b3906_7ee917a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2026-03-18T02:23:45Z",
+      "side": 1,
+      "message": "The full feature depends on fault reporting functionality within the driver. This component is incomplete, as it cannot be upstreamed to f2fs.",
+      "parentUuid": "dacc947b_09f90c55",
+      "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
