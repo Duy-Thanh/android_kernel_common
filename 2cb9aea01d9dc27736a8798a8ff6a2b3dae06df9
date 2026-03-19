@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd4e36d4_4699e3a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-03-19T19:08:02Z",
+      "side": 1,
+      "message": "Just in case if https://lore.kernel.org/linux-kselftest/20260319153825.2813576-1-dmaluka@chromium.org/ will be rejected for some reason (I doubt but it is not merged yet) AFAIU different approach will have to be taken to fix mentioned bug and e.g. perhaps more complex Chuanxiao series with support for onlining/offlining vCPUs?\n\nJust for the record I am not against merging it - I\u0027ve CR+2 but just thinking loudly.\n\n\u003e On the contrary, it will improve things: even though the kselftest will still fail, it will not cause harmful side effects anymore (e.g. \"permanently\" offlining a CPU, without being able to online it back)?\n\nyeah, good point",
+      "parentUuid": "ad48df34_d290a19c",
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae47d059_a3f2bd6c",
         "filename": "arch/x86/kernel/setup.c",
         "patchSetId": 1
