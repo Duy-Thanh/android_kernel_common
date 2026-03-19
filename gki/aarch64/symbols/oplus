@@ -643,9 +643,14 @@
   __traceiter_android_vh_filemap_fault_pre_folio_locked
   __traceiter_android_vh_filemap_folio_mapped
   __traceiter_android_vh_folio_remove_rmap_ptes
+<<<<<<< HEAD   (a54d055505d0edd545a2c8b7654fa28b65d5a46b ANDROID: mm: add vendorhook bypass skip_cma)
   __traceiter_android_vh_lock_delay_schedule
   __traceiter_android_vh_lock_task_fork
   __traceiter_android_vh_lock_task_exit
+||||||| BASE   (34998bd1fade6d61eeca16482ba16f9385222830 ANDROID: GKI: Update pixel symbol list)
+=======
+  __traceiter_android_vh_skip_cma
+>>>>>>> CHANGE (8f199c19bb8ef21343c6b7bead37a780100931b1 ANDROID: ABI: Update oplus symbol list for skip_cma bypass h)
   __tracepoint_android_vh_lru_gen_add_folio_skip
   __tracepoint_android_vh_lru_gen_del_folio_skip
   __tracepoint_android_vh_evict_folios_bypass
@@ -662,7 +667,13 @@
   __tracepoint_android_vh_resched_curr_lazy
   __tracepoint_android_vh_restore_curr_resched
   __tracepoint_android_vh_clear_curr_lazy
+<<<<<<< HEAD   (a54d055505d0edd545a2c8b7654fa28b65d5a46b ANDROID: mm: add vendorhook bypass skip_cma)
   __tracepoint_android_vh_lock_delay_schedule
   __tracepoint_android_vh_lock_task_fork
   __tracepoint_android_vh_lock_task_exit
   isolate_folio
+||||||| BASE   (34998bd1fade6d61eeca16482ba16f9385222830 ANDROID: GKI: Update pixel symbol list)
+  isolate_folio
+=======
+  __tracepoint_android_vh_skip_cma
+>>>>>>> CHANGE (8f199c19bb8ef21343c6b7bead37a780100931b1 ANDROID: ABI: Update oplus symbol list for skip_cma bypass h)
