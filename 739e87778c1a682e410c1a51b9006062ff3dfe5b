@@ -16,6 +16,24 @@
       "message": "We can\u0027t blindly copy `iflags` as I think that would allow the host to do things like increment the PC. @tabba: please can you have a look at how we can handle SPE and TRBE properly here?",
       "revId": "739e87778c1a682e410c1a51b9006062ff3dfe5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8896c2cb_4c724e20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2026-03-19T17:22:43Z",
+      "side": 1,
+      "message": "If copying all the iflags fields is not ideal, how about only copying DEBUG_STATE_SAVE_SPE and DEBUG_STATE_SAVE_TRBE? Or add SPE/TRBE feature detection code like in kvm_arch_vcpu_load_debug_state_flags() here?",
+      "parentUuid": "9f12a535_fe979e63",
+      "revId": "739e87778c1a682e410c1a51b9006062ff3dfe5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
