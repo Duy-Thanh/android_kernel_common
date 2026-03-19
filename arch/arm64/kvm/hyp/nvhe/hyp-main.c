@@ -690,6 +690,14 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 		hyp_vcpu->vcpu.arch.hcr_el2 = HCR_GUEST_FLAGS & ~(HCR_RW | HCR_TWI | HCR_TWE);
 		hyp_vcpu->vcpu.arch.hcr_el2 |= READ_ONCE(host_vcpu->arch.hcr_el2);
+	} else {
+		/*
+		 * For protected VMs, we must propagate the debug save flags
+		 * so the hypervisor knows to disable active TRBE/SPE hardware
+		 * before entering the guest.
+		 */
+		vcpu_copy_flag(&hyp_vcpu->vcpu, host_vcpu, DEBUG_STATE_SAVE_SPE);
+		vcpu_copy_flag(&hyp_vcpu->vcpu, host_vcpu, DEBUG_STATE_SAVE_TRBE);
 	}
 
 	hyp_vcpu->vcpu.arch.vsesr_el2 = host_vcpu->arch.vsesr_el2;
