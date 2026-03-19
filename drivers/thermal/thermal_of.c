@@ -91,6 +91,7 @@ static int thermal_of_populate_trip(struct device_node *np,
 
 	trip->flags = THERMAL_TRIP_FLAG_RW_TEMP;
 	trace_android_vh_update_thermal_trip_flag(trip);
+	pr_err("yiho: after update trip_flag: %d\n", trip->flags);
 
 	trip->priv = np;
 
@@ -407,6 +408,7 @@ static struct thermal_zone_device *thermal_of_zone_register(struct device_node *
 		return ERR_CAST(np);
 	}
 
+	pr_err("yiho: tz %s\n", np->name);
 	trips = thermal_of_trips_init(np, &ntrips);
 	if (IS_ERR(trips)) {
 		pr_err("Failed to parse trip points for %pOFn id=%d\n", sensor, id);
