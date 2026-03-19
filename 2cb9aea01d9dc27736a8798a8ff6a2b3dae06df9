@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fabf80bf_d02d0136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-03-19T18:41:35Z",
+      "side": 1,
+      "message": "LGTM, just an open question: do we want to wait till https://lore.kernel.org/linux-kselftest/20260319153825.2813576-1-dmaluka@chromium.org/ is merged so we will be sure that b/484821521 can be fixed with both patches?",
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae47d059_a3f2bd6c",
         "filename": "arch/x86/kernel/setup.c",
         "patchSetId": 1
