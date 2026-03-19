@@ -16,6 +16,24 @@
       "message": "I don\u0027t understand the purpose of this line. If this is the last mapping, why change its vm_ops?",
       "revId": "3ee8ca2239bedfa6f3ee829e6868d432d4570a36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab287a1_de6b2a16",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-19T18:33:23Z",
+      "side": 1,
+      "message": "I guess it\u0027s not really needed because vma will be freed after vm_ops-\u003eclose() gets called. I had it to simply restore the vm_ops to its original state once we are done with it. I vaguely recall discussing this before but maybe that was about something similar but not exactly this code... If you strongly feel against this I can remove it.",
+      "parentUuid": "e951427a_32dde7fc",
+      "revId": "3ee8ca2239bedfa6f3ee829e6868d432d4570a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
