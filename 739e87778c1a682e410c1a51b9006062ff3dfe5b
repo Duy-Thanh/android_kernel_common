@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f12a535_fe979e63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-19T09:50:06Z",
+      "side": 1,
+      "message": "We can\u0027t blindly copy `iflags` as I think that would allow the host to do things like increment the PC. @tabba: please can you have a look at how we can handle SPE and TRBE properly here?",
+      "revId": "739e87778c1a682e410c1a51b9006062ff3dfe5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
