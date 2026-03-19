@@ -16,6 +16,24 @@
       "message": "I think `ctx-\u003econtent` can be NULL here.",
       "revId": "85676e5d7cba6c9f66908011bbafb83638aef82b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8955462_3c02c269",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-19T20:06:32Z",
+      "side": 1,
+      "message": "I don\u0027t think that can happen. If wrap_file_ioctl() is called it means wrap_ioctl() got called and file-\u003ef_ops was set to wrap_fops. That is done by this call chain:\npublish_wrap()-\u003e content-\u003eops-\u003ecreate_wrap() -\u003edmabuf_content_create_wrap() but that happens only after publish_wrap() sets ctx-\u003econtent to content being passed to it. That content passed to publish_wrap() is never NULL (we verify it before calling publish_wrap()).\nAm I missing something?",
+      "parentUuid": "0f9a5a98_8d9de26b",
+      "revId": "85676e5d7cba6c9f66908011bbafb83638aef82b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
