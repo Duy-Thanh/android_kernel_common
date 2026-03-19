@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02dcea2_232671a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-19T16:30:19Z",
+      "side": 1,
+      "message": "Apparently to get past automerger error on pa/3846095, I have to first merge it into Pixel\u0027s 6.18 branch, and then add a Merged-In annotation on 6.12 commit afterwards to indicate that automerger to 6.18 is not needed.",
+      "revId": "d5d8b5ee529e18db23e59874fcb42fee0d6e9614",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
