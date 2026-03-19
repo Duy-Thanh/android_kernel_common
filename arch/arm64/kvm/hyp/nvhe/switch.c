@@ -31,6 +31,7 @@
 
 /* Non-VHE specific context */
 DEFINE_PER_CPU(struct kvm_host_data, kvm_host_data);
+DEFINE_PER_CPU_PAGE_ALIGNED(struct kvm_hyp_panic_data, kvm_hyp_panic_data);
 DEFINE_PER_CPU(struct kvm_cpu_context, kvm_hyp_ctxt);
 DEFINE_PER_CPU(unsigned long, kvm_hyp_vector);
 
@@ -374,6 +375,26 @@ static void (*hyp_panic_notifier)(struct user_pt_regs *regs);
 int __pkvm_register_hyp_panic_notifier(void (*cb)(struct user_pt_regs *regs))
 {
 	return cmpxchg(&hyp_panic_notifier, NULL, cb) ? -EBUSY : 0;
+}
+
+#include <linux/stdarg.h>
+
+void __warn_printk(const char *fmt, ...)
+{
+	va_list args;
+	struct kvm_hyp_panic_data *data = this_cpu_ptr(&kvm_hyp_panic_data);
+	int i;
+
+	for (i = 0; i < (int)sizeof(data->fmt) - 1 && fmt[i]; i++)
+		data->fmt[i] = fmt[i];
+	data->fmt[i] = '\0';
+
+	va_start(args, fmt);
+	data->args[0] = va_arg(args, u64);
+	data->args[1] = va_arg(args, u64);
+	data->args[2] = va_arg(args, u64);
+	data->args[3] = va_arg(args, u64);
+	va_end(args);
 }
 
 asmlinkage void __noreturn hyp_panic(void)

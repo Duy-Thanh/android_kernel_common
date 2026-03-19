@@ -650,6 +650,16 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 		   esr_brk_comment(esr) == BUG_BRK_IMM) {
 		const char *file = NULL;
 		unsigned int line = 0;
+		struct kvm_hyp_panic_data *data = this_cpu_read(kvm_hyp_panic_data_host_ptr);
+
+		if (data && data->fmt[0] != '\0') {
+			char warn_buf[256];
+
+			snprintf(warn_buf, sizeof(warn_buf), data->fmt,
+				 data->args[0], data->args[1], data->args[2], data->args[3]);
+
+			kvm_err("nVHE hyp WARN: %s\n", warn_buf);
+		}
 
 		/* All hyp bugs, including warnings, are treated as fatal. */
 		if (!is_protected_kvm_enabled() ||

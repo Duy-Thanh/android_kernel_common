@@ -361,6 +361,15 @@ static int fix_host_ownership(void)
 			return ret;
 	}
 
+	for (i = 0; i < hyp_nr_cpus; i++) {
+		struct kvm_hyp_panic_data *data = per_cpu_ptr(&kvm_hyp_panic_data, i);
+		phys_addr_t phys = __hyp_pa(data);
+
+		ret = host_stage2_idmap_locked(phys, PAGE_SIZE, KVM_PGTABLE_PROT_R, true);
+		if (ret)
+			return ret;
+	}
+
 	return 0;
 }
 

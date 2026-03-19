@@ -167,6 +167,22 @@ enum __kvm_host_smccc_func {
 	DECLARE_KVM_VHE_PER_CPU(type, sym);	\
 	DECLARE_KVM_NVHE_PER_CPU(type, sym)
 
+#define DECLARE_KVM_NVHE_PER_CPU_PAGE_ALIGNED(type, sym) \
+	DECLARE_PER_CPU_PAGE_ALIGNED(type, kvm_nvhe_sym(sym))
+
+#define DECLARE_KVM_HYP_PER_CPU_PAGE_ALIGNED(type, sym) \
+	DECLARE_PER_CPU_PAGE_ALIGNED(type, sym); \
+	DECLARE_KVM_NVHE_PER_CPU_PAGE_ALIGNED(type, sym)
+
+struct kvm_hyp_panic_data {
+	char fmt[64];
+	u64 args[4];
+};
+
+DECLARE_KVM_HYP_PER_CPU_PAGE_ALIGNED(struct kvm_hyp_panic_data, kvm_hyp_panic_data);
+
+DECLARE_PER_CPU(struct kvm_hyp_panic_data *, kvm_hyp_panic_data_host_ptr);
+
 /*
  * Compute pointer to a symbol defined in nVHE percpu region.
  * Returns NULL if percpu memory has not been allocated yet.

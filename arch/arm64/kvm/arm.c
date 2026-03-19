@@ -50,6 +50,8 @@
 
 #include "sys_regs.h"
 
+DEFINE_PER_CPU(struct kvm_hyp_panic_data *, kvm_hyp_panic_data_host_ptr);
+
 static enum kvm_mode kvm_mode = KVM_MODE_DEFAULT;
 
 enum kvm_wfx_trap_policy {
@@ -2695,6 +2697,14 @@ static int __init init_hyp_mode(void)
 		page_addr = page_address(page);
 		memcpy(page_addr, CHOOSE_NVHE_SYM(__per_cpu_start), nvhe_percpu_size());
 		kvm_nvhe_sym(kvm_arm_hyp_percpu_base)[cpu] = (unsigned long)page_addr;
+
+		/* Store the host VA of the shared panic data buffer */
+		{
+			unsigned long off = (unsigned long)&CHOOSE_NVHE_SYM(kvm_hyp_panic_data) -
+					    (unsigned long)&CHOOSE_NVHE_SYM(__per_cpu_start);
+			per_cpu(kvm_hyp_panic_data_host_ptr, cpu) =
+				(struct kvm_hyp_panic_data *)((unsigned long)page_addr + off);
+		}
 	}
 
 	/*
