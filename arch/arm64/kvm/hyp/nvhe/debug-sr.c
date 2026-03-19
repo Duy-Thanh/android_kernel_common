@@ -14,12 +14,13 @@
 #include <asm/kvm_hyp.h>
 #include <asm/kvm_mmu.h>
 
-static void __debug_save_spe(u64 *pmscr_el1)
+static void __debug_save_spe(u64 *pmscr_el1, u64 *pmblimitr_el1)
 {
 	u64 reg;
 
 	/* Clear pmscr in case of early return */
 	*pmscr_el1 = 0;
+	*pmblimitr_el1 = 0;
 
 	/*
 	 * At this point, we know that this CPU implements
@@ -37,14 +38,22 @@ static void __debug_save_spe(u64 *pmscr_el1)
 
 	/* Now drain all buffered data to memory */
 	psb_csync();
+
+	*pmblimitr_el1 = reg;
+	write_sysreg_s(0, SYS_PMBLIMITR_EL1);
+	dsb(nsh);
+	isb();
 }
 
-static void __debug_restore_spe(u64 pmscr_el1)
+static void __debug_restore_spe(u64 pmscr_el1, u64 pmblimitr_el1)
 {
 	if (!pmscr_el1)
 		return;
 
 	/* The host page table is installed, but not yet synchronised */
+	isb();
+
+	write_sysreg_s(pmblimitr_el1, SYS_PMBLIMITR_EL1);
 	isb();
 
 	/* Re-enable data generation */
@@ -67,14 +76,14 @@ static bool __trace_needs_drain(void)
 
 static bool __trace_needs_switch(void)
 {
-	return host_data_test_flag(TRBE_ENABLED) ||
+	return __trace_needs_drain() ||
 	       host_data_test_flag(EL1_TRACING_CONFIGURED);
 }
 
 static void __trace_switch_to_guest(void)
 {
 	/* Unsupported with TRBE so disable */
-	if (host_data_test_flag(TRBE_ENABLED))
+	if (__trace_needs_drain())
 		*host_data_ptr(trfcr_while_in_guest) = 0;
 
 	__trace_do_switch(host_data_ptr(host_debug_state.trfcr_el1),
@@ -83,11 +92,30 @@ static void __trace_switch_to_guest(void)
 	if (__trace_needs_drain()) {
 		isb();
 		tsb_csync();
+
+		*host_data_ptr(host_debug_state.trblimitr_el1) = read_sysreg_s(SYS_TRBLIMITR_EL1);
+		write_sysreg_s(0, SYS_TRBLIMITR_EL1);
+		dsb(nsh);
+
+		if (cpus_have_final_cap(ARM64_WORKAROUND_2064142)) {
+			tsb_csync();
+			dsb(nsh);
+		}
+
+		isb();
 	}
 }
 
 static void __trace_switch_to_host(void)
 {
+	if (__trace_needs_drain()) {
+		write_sysreg_s(*host_data_ptr(host_debug_state.trblimitr_el1), SYS_TRBLIMITR_EL1);
+		isb();
+
+		if (cpus_have_final_cap(ARM64_WORKAROUND_2038923))
+			isb();
+	}
+
 	__trace_do_switch(host_data_ptr(trfcr_while_in_guest),
 			  *host_data_ptr(host_debug_state.trfcr_el1));
 }
@@ -122,7 +150,8 @@ void __debug_save_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
 	/* Disable and flush SPE data generation */
 	if (host_data_test_flag(HAS_SPE))
-		__debug_save_spe(host_data_ptr(host_debug_state.pmscr_el1));
+		__debug_save_spe(host_data_ptr(host_debug_state.pmscr_el1),
+				 host_data_ptr(host_debug_state.pmblimitr_el1));
 
 	/* Disable BRBE branch records */
 	if (host_data_test_flag(HAS_BRBE))
@@ -140,7 +169,8 @@ void __debug_switch_to_guest(struct kvm_vcpu *vcpu)
 void __debug_restore_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
 	if (host_data_test_flag(HAS_SPE))
-		__debug_restore_spe(*host_data_ptr(host_debug_state.pmscr_el1));
+		__debug_restore_spe(*host_data_ptr(host_debug_state.pmscr_el1),
+				    *host_data_ptr(host_debug_state.pmblimitr_el1));
 	if (host_data_test_flag(HAS_BRBE))
 		__debug_restore_brbe(*host_data_ptr(host_debug_state.brbcr_el1));
 	if (__trace_needs_switch())
