@@ -196,14 +196,14 @@ static int vmexit_trace_show(struct seq_file *m, void *unused)
 
 	if (kvm) {
 		/* Dump vmexit trace for a specific VM */
-		size = atomic_read(&kvm->online_vcpus) * sizeof(struct perf_data);
+		size = READ_ONCE(kvm->created_vcpus) * sizeof(struct perf_data);
 		vm_handle = kvm->arch.pkvm.handle;
 	} else {
 		/* Dump vmexit trace for all VMs including the host VM */
 		size = sizeof(struct perf_data) * num_possible_cpus();
 		mutex_lock(&kvm_lock);
 		list_for_each_entry(kvm, &vm_list, vm_list)
-			size += atomic_read(&kvm->online_vcpus) * sizeof(struct perf_data);
+			size += READ_ONCE(kvm->created_vcpus) * sizeof(struct perf_data);
 		mutex_unlock(&kvm_lock);
 		vm_handle = PKVM_HOST_VM_HANDLE;
 	}
