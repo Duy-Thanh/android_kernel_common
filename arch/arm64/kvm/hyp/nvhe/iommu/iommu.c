@@ -163,7 +163,8 @@ int kvm_iommu_init(void *pool_base, size_t nr_pages)
 {
 	int ret;
 
-	if (nr_pages) {
+	if (pool_base && nr_pages) {
+		WARN_ON(host_s2_has_iommu());
 		ret = hyp_pool_init(&iommu_pages_pool_atomic, hyp_virt_to_pfn(pool_base),
 				    nr_pages, 0);
 		if (ret)
@@ -313,11 +314,19 @@ void kvm_iommu_reclaim_pages(void *p, u8 order)
 
 void *kvm_iommu_donate_pages_atomic(u8 order)
 {
+	if (host_s2_has_iommu())
+		return host_s2_pool_alloc_pages(order);
+
 	return hyp_alloc_pages(&iommu_pages_pool_atomic, order);
 }
 
 void kvm_iommu_reclaim_pages_atomic(void *ptr)
 {
+	if (host_s2_has_iommu()) {
+		host_s2_pool_put_page(ptr);
+		return;
+	}
+
 	hyp_put_page(&iommu_pages_pool_atomic, ptr);
 }
 
