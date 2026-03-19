@@ -70,6 +70,30 @@
       },
       "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d182c1_047cdc47",
+        "filename": "arch/x86/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-19T18:25:44Z",
+      "side": 1,
+      "message": "Yup, this is called just once, during early boot, in particular for determining whether to create the `/sys/devices/system/cpu/cpu*/online` knob to let the userspace offline/online the CPU.",
+      "parentUuid": "1a5b80c6_16ddd0db",
+      "range": {
+        "startLine": 1321,
+        "startChar": 20,
+        "endLine": 1321,
+        "endChar": 31
+      },
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
