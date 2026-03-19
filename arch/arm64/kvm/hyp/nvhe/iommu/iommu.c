@@ -116,7 +116,7 @@ static inline int pkvm_to_iommu_prot(enum kvm_pgtable_prot prot)
 		iommu_prot |= IOMMU_MMIO;
 
 	/* We don't understand that, might be dangerous. */
-	WARN_ON(prot & ~PKVM_HOST_MEM_PROT);
+	WARN_ON(prot & ~PKVM_HOST_MEM_PROT_MASK);
 	return iommu_prot;
 }
 
