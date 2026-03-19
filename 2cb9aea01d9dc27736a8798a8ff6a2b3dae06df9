@@ -46,6 +46,30 @@
       },
       "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a5b80c6_16ddd0db",
+        "filename": "arch/x86/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-03-19T18:21:39Z",
+      "side": 1,
+      "message": "Ahh ok, I thought this was just a callback that is called before a cpu is gonna be brought offline. Thanks for the clarification.",
+      "parentUuid": "22c7620b_55085e8d",
+      "range": {
+        "startLine": 1321,
+        "startChar": 20,
+        "endLine": 1321,
+        "endChar": 31
+      },
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
