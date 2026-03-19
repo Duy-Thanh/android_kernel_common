@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d4f7b9_461ccfe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-19T11:12:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t look correct. The cherry-pick should be from the base branch, which is `d8d17ff57924f5cf61fbeeaa661da14cbd28c9a6`",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 67
+      },
+      "revId": "acb2e5ce7fff8b8067bdfc219dd4ba47e47ef8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e5b346c7_f09f2e5b",
