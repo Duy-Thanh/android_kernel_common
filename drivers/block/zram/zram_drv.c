@@ -859,10 +859,46 @@ static int zram_writeback_complete(struct zram *zram, struct zram_wb_req *req)
 		goto out;
 	}
 
+<<<<<<< HEAD   (6d741d27626df65518a490544e2b1be2ee4efbc6 ANDROID: GKI: update ashmem driver abi names)
 	zram_free_page(zram, index);
 	zram_set_flag(zram, index, ZRAM_WB);
+||||||| BASE   (e266923bd499020e9a1f1cc437dbd481a0d89e55 Merge tag 'android16-6.12.74_r00' into android16-6.12)
+	if (zram->compressed_wb) {
+		/*
+		 * ZRAM_WB slots get freed, we need to preserve data required
+		 * for read decompression.
+		 */
+		size = zram_get_obj_size(zram, index);
+		prio = zram_get_priority(zram, index);
+		huge = zram_test_flag(zram, index, ZRAM_HUGE);
+	}
+
+	zram_free_page(zram, index);
+	zram_set_flag(zram, index, ZRAM_WB);
+=======
+	zram_clear_flag(zram, index, ZRAM_IDLE);
+	if (zram_test_flag(zram, index, ZRAM_HUGE))
+		atomic64_dec(&zram->stats.huge_pages);
+	atomic64_sub(zram_get_obj_size(zram, index),
+		     &zram->stats.compr_data_size);
+	zs_free(zram->mem_pool, zram_get_handle(zram, index));
+>>>>>>> CHANGE (37b72d52550213151d56ddf04f65200d27d847fa BACKPORT: FROMGIT: zram: do not slot_free() written-back slo)
 	zram_set_handle(zram, index, req->blk_idx);
+<<<<<<< HEAD   (6d741d27626df65518a490544e2b1be2ee4efbc6 ANDROID: GKI: update ashmem driver abi names)
 	atomic64_inc(&zram->stats.pages_stored);
+||||||| BASE   (e266923bd499020e9a1f1cc437dbd481a0d89e55 Merge tag 'android16-6.12.74_r00' into android16-6.12)
+
+	if (zram->compressed_wb) {
+		if (huge)
+			zram_set_flag(zram, index, ZRAM_HUGE);
+		zram_set_obj_size(zram, index, size);
+		zram_set_priority(zram, index, prio);
+	}
+
+	atomic64_inc(&zram->stats.pages_stored);
+=======
+	zram_set_flag(zram, index, ZRAM_WB);
+>>>>>>> CHANGE (37b72d52550213151d56ddf04f65200d27d847fa BACKPORT: FROMGIT: zram: do not slot_free() written-back slo)
 
 out:
 	zram_slot_unlock(zram, index);
@@ -1858,8 +1894,13 @@ static void zram_free_page(struct zram *zram, size_t index)
 	zram_set_priority(zram, index, 0);
 
 	if (zram_test_flag(zram, index, ZRAM_HUGE)) {
+		/*
+		 * Writeback completion decrements ->huge_pages but keeps
+		 * ZRAM_HUGE flag for deferred decompression path.
+		 */
+		if (!zram_test_flag(zram, index, ZRAM_WB))
+			atomic64_dec(&zram->stats.huge_pages);
 		zram_clear_flag(zram, index, ZRAM_HUGE);
-		atomic64_dec(&zram->stats.huge_pages);
 	}
 
 	if (zram_test_flag(zram, index, ZRAM_WB)) {
