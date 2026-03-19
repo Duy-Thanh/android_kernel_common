@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae47d059_a3f2bd6c",
+        "filename": "arch/x86/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-03-19T18:18:18Z",
+      "side": 1,
+      "message": "Would it better to use pkvm_enabled() check here so that hotplug works if pkvm initialization fails?",
+      "range": {
+        "startLine": 1321,
+        "startChar": 20,
+        "endLine": 1321,
+        "endChar": 31
+      },
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
