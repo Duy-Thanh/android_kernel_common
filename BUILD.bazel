@@ -226,6 +226,10 @@ common_kernel(
     makefile = ":Makefile",
     module_implicit_outs = get_gki_modules_list("arm64") + get_kunit_modules_list("arm64"),
     modules_superset = get_gki_modules_superset("arm64") + get_kunit_modules_superset("arm64"),
+    pahole = select({
+        "//build/kernel/kleaf:pahole_from_sources_is_true": ":pahole",
+        "//conditions:default": None,
+    }),
     system_dlkm_extra_archive_files = [":generate_gki_module_info_arm64"],
     visibility = ["//visibility:public"],
 
