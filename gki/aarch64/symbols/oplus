@@ -646,6 +646,7 @@
   __traceiter_android_vh_lock_delay_schedule
   __traceiter_android_vh_lock_task_fork
   __traceiter_android_vh_lock_task_exit
+  __traceiter_android_vh_skip_cma
   __tracepoint_android_vh_lru_gen_add_folio_skip
   __tracepoint_android_vh_lru_gen_del_folio_skip
   __tracepoint_android_vh_evict_folios_bypass
@@ -666,3 +667,4 @@
   __tracepoint_android_vh_lock_task_fork
   __tracepoint_android_vh_lock_task_exit
   isolate_folio
+  __tracepoint_android_vh_skip_cma
