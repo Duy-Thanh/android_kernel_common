@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97340f98_04e26262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-03-19T00:41:44Z",
+      "side": 1,
+      "message": "I think now you can also drop the `__VM_NO_COMPAT` and  `__MAP_NO_COMPAT` from `page_size_compat.h` and other code related to that.\n\nAnd enforce `munmap()` alignment not only in the system call, but likely in `do_vmi_munmap()`\n\nThere are some presubmit errors we will need to address investigate those to see why this is still failing.",
+      "revId": "72b079b8718c0dd585fee5e645db449571b74309",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
