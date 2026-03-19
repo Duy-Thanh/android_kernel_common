@@ -2630,6 +2630,26 @@ static struct reserve_mem_table *reserve_mem_find_by_name_nolock(const char *nam
 	return NULL;
 }
 
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+=======
+const char *reserve_mem_find_name(phys_addr_t addr)
+{
+	struct reserve_mem_table *map;
+	int i;
+
+	for (i = 0; i < reserved_mem_count; i++) {
+		map = &reserved_mem_table[i];
+		if (!map->size)
+			continue;
+		if (map->start <= (unsigned long)addr &&
+		    (unsigned long)addr < map->start + map->size)
+			return map->name;
+	}
+	return NULL;
+}
+
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 /**
  * reserve_mem_find_by_name - Find reserved memory region with a given name
  * @name: The name that is attached to a reserved memory region

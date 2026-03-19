@@ -4360,6 +4360,11 @@ void vma_pgtable_walk_end(struct vm_area_struct *vma);
 
 int reserve_mem_find_by_name(const char *name, phys_addr_t *start, phys_addr_t *size);
 int reserve_mem_release_by_name(const char *name);
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+=======
+const char *reserve_mem_find_name(phys_addr_t addr);
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 
 void zone_pageset_high_and_batch_update(struct zone *zone, int new_high_min,
 					int new_high_max, int new_batch);

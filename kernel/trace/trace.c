@@ -50,9 +50,11 @@
 #include <linux/fsnotify.h>
 #include <linux/irq_work.h>
 #include <linux/workqueue.h>
+#include <linux/sort.h>
+#include <linux/io.h> /* vmap_page_range() */
 #include <trace/hooks/ftrace_dump.h>
 
-#include <asm/setup.h> /* COMMAND_LINE_SIZE and kaslr_offset() */
+#include <asm/setup.h> /* COMMAND_LINE_SIZE */
 
 #include "trace.h"
 #include "trace_output.h"
@@ -6001,10 +6003,153 @@ ssize_t tracing_resize_ring_buffer(struct trace_array *tr,
 	return __tracing_resize_ring_buffer(tr, size, cpu_id);
 }
 
+struct trace_mod_entry {
+	unsigned long	mod_addr;
+	char		mod_name[MODULE_NAME_LEN];
+};
+
+struct trace_scratch {
+	unsigned int		clock_id;
+	unsigned long		text_addr;
+	unsigned long		nr_entries;
+	struct trace_mod_entry	entries[];
+};
+
+static DEFINE_MUTEX(scratch_mutex);
+
+static int cmp_mod_entry(const void *key, const void *pivot)
+{
+	unsigned long addr = (unsigned long)key;
+	const struct trace_mod_entry *ent = pivot;
+
+	if (addr >= ent[0].mod_addr && addr < ent[1].mod_addr)
+		return 0;
+	else
+		return addr - ent->mod_addr;
+}
+
+/* For KMI fixup, accessors to module_delta which is stored at data_delta. */
+static struct trace_module_delta *
+trace_array_get_module_delta(struct trace_array *tr)
+{
+	return (struct trace_module_delta *)READ_ONCE(tr->data_delta);
+}
+
+static void
+trace_array_set_module_delta(struct trace_array *tr, struct trace_module_delta *delta)
+{
+	WRITE_ONCE(tr->data_delta, *(long *)&delta);
+}
+
+static struct trace_scratch *trace_array_scratch(struct trace_array *tr, unsigned int *size)
+{
+	if (!tr->range_addr_start || !tr->range_addr_size)
+		return NULL;
+	return (struct trace_scratch *)ring_buffer_meta_scratch(tr->array_buffer.buffer, size);
+}
+
+/**
+ * trace_adjust_address() - Adjust prev boot address to current address.
+ * @tr: Persistent ring buffer's trace_array.
+ * @addr: Address in @tr which is adjusted.
+ */
+unsigned long trace_adjust_address(struct trace_array *tr, unsigned long addr)
+{
+	struct trace_module_delta *module_delta;
+	struct trace_scratch *tscratch;
+	struct trace_mod_entry *entry;
+	unsigned long raddr;
+	int idx = 0, nr_entries;
+
+	/* If we don't have last boot delta, return the address */
+	if (!(tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
+		return addr;
+
+	/* module_delta must be protected by rcu. */
+	guard(rcu)();
+	tscratch = trace_array_scratch(tr, NULL);
+	/* if there is no tscrach, module_delta must be NULL. */
+	module_delta = trace_array_get_module_delta(tr);
+	if (!module_delta || !tscratch->nr_entries ||
+	    tscratch->entries[0].mod_addr > addr) {
+		raddr = addr + tr->text_delta;
+		return __is_kernel(raddr) || is_kernel_core_data(raddr) ||
+			is_kernel_rodata(raddr) ? raddr : addr;
+	}
+
+	/* Note that entries must be sorted. */
+	nr_entries = tscratch->nr_entries;
+	if (nr_entries == 1 ||
+	    tscratch->entries[nr_entries - 1].mod_addr < addr)
+		idx = nr_entries - 1;
+	else {
+		entry = __inline_bsearch((void *)addr,
+				tscratch->entries,
+				nr_entries - 1,
+				sizeof(tscratch->entries[0]),
+				cmp_mod_entry);
+		if (entry)
+			idx = entry - tscratch->entries;
+	}
+
+	return addr + module_delta->delta[idx];
+}
+
+#ifdef CONFIG_MODULES
+static int save_mod(struct module *mod, void *data)
+{
+	struct trace_array *tr = data;
+	struct trace_scratch *tscratch;
+	struct trace_mod_entry *entry;
+	unsigned int size;
+
+	tscratch = trace_array_scratch(tr, &size);
+	if (!tscratch)
+		return -1;
+
+	if (struct_size(tscratch, entries, tscratch->nr_entries + 1) > size)
+		return -1;
+
+	entry = &tscratch->entries[tscratch->nr_entries];
+
+	tscratch->nr_entries++;
+
+	entry->mod_addr = (unsigned long)mod->mem[MOD_TEXT].base;
+	strscpy(entry->mod_name, mod->name);
+
+	return 0;
+}
+#else
+static int save_mod(struct module *mod, void *data)
+{
+	return 0;
+}
+#endif
+
 static void update_last_data(struct trace_array *tr)
 {
+	struct trace_module_delta *module_delta;
+	struct trace_scratch *tscratch = trace_array_scratch(tr, NULL);
+
+	if (!(tr->flags & TRACE_ARRAY_FL_BOOT))
+		return;
+
 	if (!(tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
 		return;
+
+	/* Only if the buffer has previous boot data clear and update it. */
+	tr->flags &= ~TRACE_ARRAY_FL_LAST_BOOT;
+
+	/* Reset the module list and reload them */
+	if (tscratch) {
+		tscratch->clock_id = tr->clock_id;
+		memset(tscratch->entries, 0,
+		       flex_array_size(tscratch, entries, tscratch->nr_entries));
+		tscratch->nr_entries = 0;
+
+		guard(mutex)(&scratch_mutex);
+		module_for_each_mod(save_mod, tr);
+	}
 
 	/*
 	 * Need to clear all CPU buffers as there cannot be events
@@ -6017,7 +6162,15 @@ static void update_last_data(struct trace_array *tr)
 	/* Using current data now */
 	tr->text_delta = 0;
 
-	tr->flags &= ~TRACE_ARRAY_FL_LAST_BOOT;
+	if (!tscratch)
+		return;
+
+	module_delta = trace_array_get_module_delta(tr);
+	trace_array_set_module_delta(tr, NULL);
+	kfree_rcu(module_delta, rcu);
+
+	/* Set the persistent ring buffer meta data to this address */
+	tscratch->text_addr = (unsigned long)_text;
 }
 
 /**
@@ -6483,6 +6636,22 @@ static int tracing_wait_pipe(struct file *filp)
 	return 1;
 }
 
+static bool update_last_data_if_empty(struct trace_array *tr)
+{
+	if (!(tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
+		return false;
+
+	if (!ring_buffer_empty(tr->array_buffer.buffer))
+		return false;
+
+	/*
+	 * If the buffer contains the last boot data and all per-cpu
+	 * buffers are empty, reset it from the kernel side.
+	 */
+	update_last_data(tr);
+	return true;
+}
+
 /*
  * Consumer reader.
  */
@@ -6514,6 +6683,9 @@ tracing_read_pipe(struct file *filp, char __user *ubuf,
 	}
 
 waitagain:
+	if (update_last_data_if_empty(iter->tr))
+		return 0;
+
 	sret = tracing_wait_pipe(filp);
 	if (sret <= 0)
 		return sret;
@@ -6827,14 +6999,47 @@ tracing_total_entries_read(struct file *filp, char __user *ubuf,
 	return simple_read_from_buffer(ubuf, cnt, ppos, buf, r);
 }
 
-static ssize_t
-tracing_last_boot_read(struct file *filp, char __user *ubuf, size_t cnt, loff_t *ppos)
-{
-	struct trace_array *tr = filp->private_data;
-	struct seq_buf seq;
-	char buf[64];
+#define LAST_BOOT_HEADER ((void *)1)
 
-	seq_buf_init(&seq, buf, 64);
+static void *l_next(struct seq_file *m, void *v, loff_t *pos)
+{
+	struct trace_array *tr = m->private;
+	struct trace_scratch *tscratch = trace_array_scratch(tr, NULL);
+	unsigned int index = *pos;
+
+	(*pos)++;
+
+	if (*pos == 1)
+		return LAST_BOOT_HEADER;
+
+	/* Only show offsets of the last boot data */
+	if (!tscratch || !(tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
+		return NULL;
+
+	/* *pos 0 is for the header, 1 is for the first module */
+	index--;
+
+	if (index >= tscratch->nr_entries)
+		return NULL;
+
+	return &tscratch->entries[index];
+}
+
+static void *l_start(struct seq_file *m, loff_t *pos)
+{
+	mutex_lock(&scratch_mutex);
+
+	return l_next(m, NULL, pos);
+}
+
+static void l_stop(struct seq_file *m, void *p)
+{
+	mutex_unlock(&scratch_mutex);
+}
+
+static void show_last_boot_header(struct seq_file *m, struct trace_array *tr)
+{
+	struct trace_scratch *tscratch = trace_array_scratch(tr, NULL);
 
 	/*
 	 * Do not leak KASLR address. This only shows the KASLR address of
@@ -6843,12 +7048,53 @@ tracing_last_boot_read(struct file *filp, char __user *ubuf, size_t cnt, loff_t 
 	 * Otherwise it shows the KASLR address from the previous boot which
 	 * should not be the same as the current boot.
 	 */
-	if (tr->flags & TRACE_ARRAY_FL_LAST_BOOT)
-		seq_buf_printf(&seq, "%lx\t[kernel]\n", tr->kaslr_addr);
+	if (tscratch && (tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
+		seq_printf(m, "%lx\t[kernel]\n", tscratch->text_addr);
 	else
-		seq_buf_puts(&seq, "# Current\n");
+		seq_puts(m, "# Current\n");
+}
 
-	return simple_read_from_buffer(ubuf, cnt, ppos, buf, seq_buf_used(&seq));
+static int l_show(struct seq_file *m, void *v)
+{
+	struct trace_array *tr = m->private;
+	struct trace_mod_entry *entry = v;
+
+	if (v == LAST_BOOT_HEADER) {
+		show_last_boot_header(m, tr);
+		return 0;
+	}
+
+	seq_printf(m, "%lx\t%s\n", entry->mod_addr, entry->mod_name);
+	return 0;
+}
+
+static const struct seq_operations last_boot_seq_ops = {
+	.start		= l_start,
+	.next		= l_next,
+	.stop		= l_stop,
+	.show		= l_show,
+};
+
+static int tracing_last_boot_open(struct inode *inode, struct file *file)
+{
+	struct trace_array *tr = inode->i_private;
+	struct seq_file *m;
+	int ret;
+
+	ret = tracing_check_open_get_tr(tr);
+	if (ret)
+		return ret;
+
+	ret = seq_open(file, &last_boot_seq_ops);
+	if (ret) {
+		trace_array_put(tr);
+		return ret;
+	}
+
+	m = file->private_data;
+	m->private = tr;
+
+	return 0;
 }
 
 static int tracing_buffer_meta_open(struct inode *inode, struct file *filp)
@@ -7064,6 +7310,7 @@ static int tracing_clock_show(struct seq_file *m, void *v)
 
 int tracing_set_clock(struct trace_array *tr, const char *clockstr)
 {
+	struct trace_scratch *tscratch = trace_array_scratch(tr, NULL);
 	int i;
 
 	for (i = 0; i < ARRAY_SIZE(trace_clocks); i++) {
@@ -7090,6 +7337,9 @@ int tracing_set_clock(struct trace_array *tr, const char *clockstr)
 		ring_buffer_set_clock(tr->max_buffer.buffer, trace_clocks[i].func);
 	tracing_reset_online_cpus(&tr->max_buffer);
 #endif
+
+	if (tscratch && !(tr->flags & TRACE_ARRAY_FL_LAST_BOOT))
+		tscratch->clock_id = i;
 
 	mutex_unlock(&trace_types_lock);
 
@@ -7477,10 +7727,10 @@ static const struct file_operations trace_time_stamp_mode_fops = {
 };
 
 static const struct file_operations last_boot_fops = {
-	.open		= tracing_open_generic_tr,
-	.read		= tracing_last_boot_read,
-	.llseek		= generic_file_llseek,
-	.release	= tracing_release_generic_tr,
+	.open		= tracing_last_boot_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= tracing_seq_release,
 };
 
 #ifdef CONFIG_TRACER_SNAPSHOT
@@ -7966,6 +8216,9 @@ tracing_buffers_read(struct file *filp, char __user *ubuf,
 
 	if (ret < 0) {
 		if (trace_empty(iter) && !iter->closed) {
+			if (update_last_data_if_empty(iter->tr))
+				return 0;
+
 			if ((filp->f_flags & O_NONBLOCK))
 				return -EAGAIN;
 
@@ -8313,8 +8566,16 @@ static int tracing_buffers_mmap(struct file *filp, struct vm_area_struct *vma)
 	struct trace_iterator *iter = &info->iter;
 	int ret = 0;
 
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
 	/* Currently the boot mapped buffer and its backup are not supported for mmap */
 	if (iter->tr->flags & (TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_VMALLOC))
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+	/* Currently the boot mapped buffer is not supported for mmap */
+	if (iter->tr->flags & TRACE_ARRAY_FL_BOOT)
+=======
+	/* A memmap'ed and backup buffers are not supported for user space mmap */
+	if (iter->tr->flags & (TRACE_ARRAY_FL_MEMMAP | TRACE_ARRAY_FL_VMALLOC))
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 		return -ENODEV;
 
 	ret = get_snapshot_map(iter->tr);
@@ -9225,24 +9486,131 @@ static struct dentry *trace_instance_dir;
 static void
 init_tracer_tracefs(struct trace_array *tr, struct dentry *d_tracer);
 
+#ifdef CONFIG_MODULES
+static int make_mod_delta(struct module *mod, void *data)
+{
+	struct trace_module_delta *module_delta;
+	struct trace_scratch *tscratch;
+	struct trace_mod_entry *entry;
+	struct trace_array *tr = data;
+	int i;
+
+	tscratch = trace_array_scratch(tr, NULL);
+	module_delta = trace_array_get_module_delta(tr);
+	for (i = 0; i < tscratch->nr_entries; i++) {
+		entry = &tscratch->entries[i];
+		if (strcmp(mod->name, entry->mod_name))
+			continue;
+		if (mod->state == MODULE_STATE_GOING)
+			module_delta->delta[i] = 0;
+		else
+			module_delta->delta[i] = (unsigned long)mod->mem[MOD_TEXT].base
+						 - entry->mod_addr;
+		break;
+	}
+	return 0;
+}
+#else
+static int make_mod_delta(struct module *mod, void *data)
+{
+	return 0;
+}
+#endif
+
+static int mod_addr_comp(const void *a, const void *b, const void *data)
+{
+	const struct trace_mod_entry *e1 = a;
+	const struct trace_mod_entry *e2 = b;
+
+	return e1->mod_addr > e2->mod_addr ? 1 : -1;
+}
+
+static void setup_trace_scratch(struct trace_array *tr,
+				struct trace_scratch *tscratch, unsigned int size)
+{
+	struct trace_module_delta *module_delta;
+	struct trace_mod_entry *entry;
+	int i, nr_entries;
+
+	if (!tscratch)
+		return;
+
+	if (tscratch->text_addr)
+		tr->text_delta = (unsigned long)_text - tscratch->text_addr;
+
+	if (struct_size(tscratch, entries, tscratch->nr_entries) > size)
+		goto reset;
+
+	/* Check if each module name is a valid string */
+	for (i = 0; i < tscratch->nr_entries; i++) {
+		int n;
+
+		entry = &tscratch->entries[i];
+
+		for (n = 0; n < MODULE_NAME_LEN; n++) {
+			if (entry->mod_name[n] == '\0')
+				break;
+			if (!isprint(entry->mod_name[n]))
+				goto reset;
+		}
+		if (n == MODULE_NAME_LEN)
+			goto reset;
+	}
+
+	/* Sort the entries so that we can find appropriate module from address. */
+	nr_entries = tscratch->nr_entries;
+	sort_r(tscratch->entries, nr_entries, sizeof(struct trace_mod_entry),
+	       mod_addr_comp, NULL, NULL);
+
+	if (IS_ENABLED(CONFIG_MODULES)) {
+		module_delta = kzalloc(struct_size(module_delta, delta, nr_entries), GFP_KERNEL);
+		if (!module_delta) {
+			pr_info("module_delta allocation failed. Not able to decode module address.");
+			goto reset;
+		}
+		init_rcu_head(&module_delta->rcu);
+	} else
+		module_delta = NULL;
+	trace_array_set_module_delta(tr, module_delta);
+
+	/* Scan modules to make text delta for modules. */
+	module_for_each_mod(make_mod_delta, tr);
+
+	/* Set trace_clock as the same of the previous boot. */
+	if (tscratch->clock_id != tr->clock_id) {
+		if (tscratch->clock_id >= ARRAY_SIZE(trace_clocks) ||
+		    tracing_set_clock(tr, trace_clocks[tscratch->clock_id].name) < 0) {
+			pr_info("the previous trace_clock info is not valid.");
+			goto reset;
+		}
+	}
+	return;
+ reset:
+	/* Invalid trace modules */
+	memset(tscratch, 0, size);
+}
+
 static int
 allocate_trace_buffer(struct trace_array *tr, struct array_buffer *buf, int size)
 {
 	enum ring_buffer_flags rb_flags;
+	struct trace_scratch *tscratch;
+	unsigned int scratch_size = 0;
 
 	rb_flags = tr->trace_flags & TRACE_ITER_OVERWRITE ? RB_FL_OVERWRITE : 0;
 
 	buf->tr = tr;
 
 	if (tr->range_addr_start && tr->range_addr_size) {
+		/* Add scratch buffer to handle 128 modules */
 		buf->buffer = ring_buffer_alloc_range(size, rb_flags, get_order(__PAGE_SIZE),
 						      tr->range_addr_start,
-						      tr->range_addr_size);
+						      tr->range_addr_size,
+						      struct_size(tscratch, entries, 128));
 
-#ifdef CONFIG_RANDOMIZE_BASE
-		if (ring_buffer_last_boot_delta(buf->buffer, &tr->kaslr_addr))
-			tr->text_delta = kaslr_offset() - tr->kaslr_addr;
-#endif
+		tscratch = ring_buffer_meta_scratch(buf->buffer, &scratch_size);
+		setup_trace_scratch(tr, tscratch, scratch_size);
+
 		/*
 		 * This is basically the same as a mapped buffer,
 		 * with the same restrictions.
@@ -9307,10 +9675,15 @@ static int allocate_trace_buffers(struct trace_array *tr, int size)
 
 static void free_trace_buffers(struct trace_array *tr)
 {
+	struct trace_module_delta *module_delta;
+
 	if (!tr)
 		return;
 
+	module_delta = trace_array_get_module_delta(tr);
+
 	free_trace_buffer(&tr->array_buffer);
+	kfree(module_delta);
 
 #ifdef CONFIG_TRACER_MAX_TRACE
 	free_trace_buffer(&tr->max_buffer);
@@ -9506,29 +9879,27 @@ static int instance_mkdir(const char *name)
 	return ret;
 }
 
-static u64 map_pages(u64 start, u64 size)
+static u64 map_pages(unsigned long start, unsigned long size)
 {
-	struct page **pages;
-	phys_addr_t page_start;
-	unsigned int page_count;
-	unsigned int i;
-	void *vaddr;
+	unsigned long vmap_start, vmap_end;
+	struct vm_struct *area;
+	int ret;
 
-	page_count = DIV_ROUND_UP(size, PAGE_SIZE);
-
-	page_start = start;
-	pages = kmalloc_array(page_count, sizeof(struct page *), GFP_KERNEL);
-	if (!pages)
+	area = get_vm_area(size, VM_IOREMAP);
+	if (!area)
 		return 0;
 
-	for (i = 0; i < page_count; i++) {
-		phys_addr_t addr = page_start + i * PAGE_SIZE;
-		pages[i] = pfn_to_page(addr >> PAGE_SHIFT);
-	}
-	vaddr = vmap(pages, page_count, VM_MAP, PAGE_KERNEL);
-	kfree(pages);
+	vmap_start = (unsigned long) area->addr;
+	vmap_end = vmap_start + size;
 
-	return (u64)(unsigned long)vaddr;
+	ret = vmap_page_range(vmap_start, vmap_end,
+			      start, pgprot_nx(PAGE_KERNEL));
+	if (ret < 0) {
+		free_vm_area(area);
+		return 0;
+	}
+
+	return (u64)vmap_start;
 }
 
 /**
@@ -9602,9 +9973,17 @@ static int __remove_instance(struct trace_array *tr)
 	free_trace_buffers(tr);
 	clear_tracing_err_log(tr);
 
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
 	if (tr->range_name) {
 		reserve_mem_release_by_name(tr->range_name);
 		kfree(tr->range_name);
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+=======
+	if (tr->range_addr_start) {
+		const char *range_name = reserve_mem_find_name(tr->range_addr_start);
+
+		reserve_mem_release_by_name(range_name);
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 	}
 	if (tr->flags & TRACE_ARRAY_FL_VMALLOC)
 		vfree((void *)tr->range_addr_start);
@@ -9912,6 +10291,24 @@ static void trace_module_remove_evals(struct module *mod)
 static inline void trace_module_remove_evals(struct module *mod) { }
 #endif /* CONFIG_TRACE_EVAL_MAP_FILE */
 
+static void trace_module_record(struct module *mod, bool add)
+{
+	struct trace_array *tr;
+	unsigned long flags;
+
+	list_for_each_entry(tr, &ftrace_trace_arrays, list) {
+		flags = tr->flags & (TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_LAST_BOOT);
+		/* Update any persistent trace array that has already been started */
+		if (flags == TRACE_ARRAY_FL_BOOT && add) {
+			guard(mutex)(&scratch_mutex);
+			save_mod(mod, tr);
+		} else if (flags & TRACE_ARRAY_FL_LAST_BOOT) {
+			/* Update delta if the module loaded in previous boot */
+			make_mod_delta(mod, tr);
+		}
+	}
+}
+
 static int trace_module_notify(struct notifier_block *self,
 			       unsigned long val, void *data)
 {
@@ -9920,9 +10317,11 @@ static int trace_module_notify(struct notifier_block *self,
 	switch (val) {
 	case MODULE_STATE_COMING:
 		trace_module_add_evals(mod);
+		trace_module_record(mod, true);
 		break;
 	case MODULE_STATE_GOING:
 		trace_module_remove_evals(mod);
+		trace_module_record(mod, false);
 		break;
 	}
 
@@ -10433,6 +10832,7 @@ __init static int backup_instance_area(const char *backup,
 __init static void enable_instances(void)
 {
 	struct trace_array *tr;
+	bool memmap_area = false;
 	char *curr_str;
 	char *name;
 	char *str;
@@ -10508,6 +10908,7 @@ __init static void enable_instances(void)
 					name);
 				continue;
 			}
+			memmap_area = true;
 		} else if (tok) {
 			if (!reserve_mem_find_by_name(tok, &start, &size)) {
 				start = 0;
@@ -10518,7 +10919,20 @@ __init static void enable_instances(void)
 		}
 
 		if (start) {
-			addr = map_pages(start, size);
+			/* Start and size must be page aligned */
+			if (start & ~PAGE_MASK) {
+				pr_warn("Tracing: mapping start addr %pa is not page aligned\n", &start);
+				continue;
+			}
+			if (size & ~PAGE_MASK) {
+				pr_warn("Tracing: mapping size %pa is not page aligned\n", &size);
+				continue;
+			}
+
+			if (memmap_area)
+				addr = map_pages(start, size);
+			else
+				addr = (unsigned long)phys_to_virt(start);
 			if (addr) {
 				pr_info("Tracing: mapped boot instance %s at physical memory %pa of size 0x%lx\n",
 					name, &start, (unsigned long)size);
@@ -10545,6 +10959,7 @@ __init static void enable_instances(void)
 			update_printk_trace(tr);
 
 		/*
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
 		 * Backup buffers can be freed but need vfree().
 		 */
 		if (backup)
@@ -10554,11 +10969,37 @@ __init static void enable_instances(void)
 		 * If start is set, then this is a mapped buffer, and
 		 * cannot be deleted by user space, so keep the reference
 		 * to it.
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+		 * If start is set, then this is a mapped buffer, and
+		 * cannot be deleted by user space, so keep the reference
+		 * to it.
+=======
+		 * memmap'd buffers can not be freed.
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 		 */
+<<<<<<< HEAD   (f74d924c99fa7ada40a538aa225b5e3a696c9df2 UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
 		if (start || backup) {
 			tr->flags |= TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_LAST_BOOT;
 			tr->range_name = no_free_ptr(rname);
+||||||| BASE   (0acceb1cfc3e8b7670c429a12f7887402430caac UPSTREAM: ring-buffer: Add buffer meta data for persistent r)
+		if (start) {
+			tr->flags |= TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_LAST_BOOT;
+			tr->ref++;
+=======
+		if (memmap_area) {
+			tr->flags |= TRACE_ARRAY_FL_MEMMAP;
+			tr->ref++;
+>>>>>>> BRANCH (d6e2584f0a1d0497c4ecaba301c8e0f47c69f687 ANDROID: tracing: Fix KMI difference)
 		}
+
+		/*
+		 * Backup buffers can be freed but need vfree().
+		 */
+		if (backup)
+			tr->flags |= TRACE_ARRAY_FL_VMALLOC;
+
+		if (start || backup)
+			tr->flags |= TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_LAST_BOOT;
 
 		while ((tok = strsep(&curr_str, ","))) {
 			early_enable_events(tr, tok, true);
