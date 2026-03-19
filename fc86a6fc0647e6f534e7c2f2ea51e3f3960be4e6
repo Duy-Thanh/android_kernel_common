@@ -16,6 +16,24 @@
       "message": "Hi reviewers,\n\nRegarding the merged implementation of android_vh_pci_pm_verify_state in this CL.\n\nAs discussed in b/456059538#comment14, this vendor hook was introduced to allow vendor-specific checks after a PCI device is powered up, specifically to prevent fatal errors when restoring MSI-X state in MMIO space if the power-up failed (originally addressed in pa/3385555).\n\nHowever, while implementing the hook on the driver side in pa/3848120, we\u0027ve found that the current naming and structure makes the control flow difficult to follow. Brian Norris noted in a review comment that \u0027this whole structure and naming is pretty weird and hard to read. To read it, you really have to have a full reading/understanding of both sides (kernel and driver), or else it makes almost no sense\u0027.\n\nI’d like to ask for your recommendation: should we consider changing the vendor hook name or implementation to make it more intuitive? For example, would you prefer a pattern where the hook explicitly flags the failure as a \u0027fatal resume blocker,\u0027 rather than relying on a generic state verification that requires understanding the driver-side logic to interpret?\nOr would a more descriptive name like android_vh_pci_pm_should_abort_on_power_up_failure better signal that the hook\u0027s purpose is to determine if a power-up failure is a fatal error that necessitates skipping the rest of the noirq resume flow?\n\nThanks",
       "revId": "fc86a6fc0647e6f534e7c2f2ea51e3f3960be4e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a3524e_cd040e40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-19T04:03:13Z",
+      "side": 1,
+      "message": "Unfortunately, you can\u0027t change a vendor hook on a frozen KMI branch as it would be an ABI break. However, I suppose you can add a new one and simply ignore the current one but that would also be a bit messy. I think the pattern followed by this vendor hooks is fairly common and you could leave it as is and possibly improve it for the next kernel iteration e.g. android17-6.18?",
+      "parentUuid": "ad6171b6_6e1780ac",
+      "revId": "fc86a6fc0647e6f534e7c2f2ea51e3f3960be4e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
