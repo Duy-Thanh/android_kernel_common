@@ -34,6 +34,24 @@
       "parentUuid": "03cb3c15_4ec5e1d8",
       "revId": "067f266166d10ca651a5ec38108180b33209feff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d7d950_c0c8eb4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-03-19T08:12:00Z",
+      "side": 1,
+      "message": "That sounds like a bugfix to me, especially if you need/want this in the android kernel tree.  Please ask upstream to include it in the next set of patches to be merged for 7.0-rc1 with this information please.",
+      "parentUuid": "e5938cc1_efc71f64",
+      "revId": "067f266166d10ca651a5ec38108180b33209feff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
