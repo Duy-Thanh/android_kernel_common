@@ -449,6 +449,8 @@ $(obj)/$(libpin_init_internal_name): private rustc_target_flags = --cfg kernel
 $(obj)/$(libpin_init_internal_name): $(src)/pin-init/internal/src/lib.rs FORCE
 	+$(call if_changed_dep,rustc_procmacro)
 
+# `rustc` requires `-Zunstable-options` to use custom target specifications
+# since Rust 1.95.0 (https://github.com/rust-lang/rust/pull/151534).
 quiet_cmd_rustc_library = $(if $(skip_clippy),RUSTC,$(RUSTC_OR_CLIPPY_QUIET)) L $@
       cmd_rustc_library = \
 	OBJTREE=$(abspath $(objtree)) \
@@ -459,9 +461,14 @@ quiet_cmd_rustc_library = $(if $(skip_clippy),RUSTC,$(RUSTC_OR_CLIPPY_QUIET)) L 
 		--crate-type rlib -L$(objtree)/$(obj) \
 		--crate-name $(patsubst %.o,%,$(notdir $@)) $< \
 		--sysroot=/dev/null \
+<<<<<<< HEAD   (f0e5afbc692c45ac93e03ad3adc39785785fcf52 Merge 2d11f9cff0a7 ("drm/i915/quirks: Fix device id for QUIR)
 	$(if $(link_helper),;$(LLVM_LINK) --internalize --suppress-warnings $(patsubst %.o,%.bc,$@) \
 		$(obj)/helpers/helpers$(if $(part-of-module),_module).bc -o $(patsubst %.o,%.m.bc,$@); \
 		$(CC) $(CLANG_FLAGS) $(KBUILD_CFLAGS) -Wno-override-module -c $(patsubst %.o,%.m.bc,$@) -o $@) \
+||||||| BASE   (2d11f9cff0a7ba17687ef9d4cf15527d8f57492c drm/i915/quirks: Fix device id for QUIRK_EDP_LIMIT_RATE_HBR2)
+=======
+		-Zunstable-options \
+>>>>>>> BRANCH (f843be76420412fd987d9ec945fbd46a72fe095b rust: kbuild: pass `-Zunstable-options` for Rust 1.95.0)
 	$(if $(rustc_objcopy),;$(OBJCOPY) $(rustc_objcopy) $@) \
 	$(cmd_ld_single) \
 	$(cmd_objtool)
