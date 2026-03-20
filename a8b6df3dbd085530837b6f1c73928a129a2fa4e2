@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2e9d84_6d098105",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-20T09:56:11Z",
+      "side": 1,
+      "message": "Why is it safe to trust the host with these? If it uses SPE/TRBE and _doesn\u0027t_ set the flag, could we end up corrupting hypervisor memory?",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 701,
+        "endChar": 2
+      },
+      "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
