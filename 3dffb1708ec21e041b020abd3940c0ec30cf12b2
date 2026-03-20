@@ -33,6 +33,24 @@
       "message": "I\u0027m wondering if we actually understand the problem...\n\nDid you look at how both `created_vcpus` and `online_vcpus` are used in kvm_vm_ioctl_create_vcpu()? There is in fact almost no difference between them. They both are incremented when creating a vCPU, and never decremented after that. The differences between them are described in `struct kvm` definition in include/linux/kvm_host.h:\n\n```\n\t/*\n\t * created_vcpus is protected by kvm-\u003elock, and is incremented\n\t * at the beginning of KVM_CREATE_VCPU.  online_vcpus is only\n\t * incremented after storing the kvm_vcpu pointer in vcpus,\n\t * and is accessed atomically.\n\t */\n```\n\nso in other words, basically the only differences are: 1. `online_vcpus` is safe to use without taking the kvm-\u003elock mutex. 2. `online_vcpus` is incremented slightly later in kvm_vm_ioctl_create_vcpu().\n\nAlso please note that `created_vcpus` used by pKVM in  arch/x86/kvm/pkvm/trace.c is a different `created_vcpus`, it is pKVM\u0027s one, not the host\u0027s one. It is incremented by pKVM when the host makes the vcpu_create hypercall.\n\nSo we have even 3 different counters of vCPUs, not just 2.\n\nSo, IIUC the order of actions during a vCPU creation in kvm_vm_ioctl_create_vcpu() is:\n1. increment the host\u0027s `created_vcpus` (under kvm-\u003elock)\n2. increment pKVM\u0027s `created_vcpus` (in pKVM while handling `vcpu_create` hypercall issued in kvm_arch_vcpu_create() -\u003e kvm_x86_call(vcpu_create)() -\u003e pkvm_vcpu_create())\n3. increment `online_vcpus`\n\nSo it _seems_ plausible that the observed race (causing insufficient size of the vmexit trace buffer) is indeed due to pKVM\u0027s `created_vcpus` already incremented, while host\u0027s `online_vcpus` not incremented yet. And then indeed it can be avoided by using host\u0027s `created_vcpus` instead of `online_vcpus` when allocating the vmexit trace buffer (since host\u0027s `created_vcpus` is incremented before pKVM\u0027s `created_vcpus`, not after).\n\nBut does that really fully prevent the race? What if the host\u0027s and pKVM\u0027s `created_vcpus` are also incremented in the meantime by another thread on another CPU, right after the host allocates the vmexit trace buffer but before pKVM handles the `dump_vmexit_trace` hypercall using this buffer? Then we have the same race?\n\n(And this scenario actually seems no less likely, since the VMM usually creates vCPUs in parallel in different threads - in those exact threads in which those vCPUs will run.)\n\nSo this race seems generally inevitable (unless we introduce another, coarser-graned per-VM lock, just for this purpose)?\n\nAnd this race is actually not a big problem anyway, it only results in failing to dump the whole vmexit trace data?\n\nAnd BTW I suppose the reason why Chuanxiao didn\u0027t originally add propagation of that -ENOSPC error to the host is to let the host \"successfully\" print at least a part of the vmexit data - that part that fits in the buffer?\n\nAnd since this is just a rare and momentary condition, when the VM\u0027s vCPU are still only being created, perhaps this is not an issue at all? Who cares if, for example, for a VM with 8 vCPUs, only 3 out of 5 _already created_ vCPUs are dumped when we dump vmexit trace while the VM is only being started?",
       "revId": "3dffb1708ec21e041b020abd3940c0ec30cf12b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f3a06a_e523b1d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-20T09:23:40Z",
+      "side": 1,
+      "message": "\u003e And BTW I suppose the reason why Chuanxiao didn\u0027t originally add propagation of that -ENOSPC error to the host is to let the host \"successfully\" print at least a part of the vmexit data - that part that fits in the buffer?\n\nYes, without propagating the error code to the host, the already dumped vmexit data can still be printed.\n\nAnd the not dumped vmexit data won\u0027t be lost unless we re-enable the trace, so if we keep dumping the trace without re-enable it, we will eventually get all the vmexit data.",
+      "parentUuid": "d8707b4f_5e1138c9",
+      "revId": "3dffb1708ec21e041b020abd3940c0ec30cf12b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
