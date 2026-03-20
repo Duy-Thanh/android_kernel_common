@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6931dc_a18d7527",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T01:44:07Z",
+      "side": 1,
+      "message": "Bug number please",
+      "revId": "6ed669b837444244d3efc6cbc10831f5f2918435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3647b59a_19c7b997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T01:44:07Z",
+      "side": 1,
+      "message": "This patch seems to be a partial cherry-pick of https://android-review.googlesource.com/c/kernel/common/+/3976946\n\nPlease explain which one is needed.",
+      "revId": "6ed669b837444244d3efc6cbc10831f5f2918435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
