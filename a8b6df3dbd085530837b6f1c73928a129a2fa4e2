@@ -46,6 +46,30 @@
       },
       "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97eb2e1_e09cde6e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-20T10:17:25Z",
+      "side": 1,
+      "message": "I\u0027m not so sure about that :/\n\nThe world switch isn\u0027t atomic and the translation regime used by TRBE depends on the configuration of MDCR_EL2. I find it really hard to reason about how its addresses would be translated during that period.",
+      "parentUuid": "dce73cec_0b83213f",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 701,
+        "endChar": 2
+      },
+      "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
