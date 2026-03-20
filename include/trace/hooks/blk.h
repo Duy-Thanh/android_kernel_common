@@ -27,6 +27,12 @@ DECLARE_HOOK(android_vh_do_new_mount_fc,
 	TP_PROTO(struct path *mountpoint, struct vfsmount *mnt),
 	TP_ARGS(mountpoint, mnt));
 
+struct request;
+
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_mq_has_request,
+	TP_PROTO(struct blk_mq_hw_ctx *hctx, struct request *rq),
+	TP_ARGS(hctx, rq), 1);
+
 struct readahead_control;
 typedef __u32 __bitwise blk_opf_t;
 
