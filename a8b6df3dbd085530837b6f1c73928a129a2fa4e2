@@ -94,6 +94,30 @@
       },
       "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e833620_3cbf890e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-03-20T10:30:06Z",
+      "side": 1,
+      "message": "I\u0027m afraid you\u0027re right...\n\nI think that, we should apply the same (or a similar) solution to the one in Android 17, where we check the actual registers to see whether TRBE (and SPE) are enabled.\n\nLet me think about it some more and get back to you...",
+      "parentUuid": "0c4d0d28_6575c000",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 701,
+        "endChar": 2
+      },
+      "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
