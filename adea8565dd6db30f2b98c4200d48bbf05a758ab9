@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2512c820_afa11e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2026-03-20T17:45:42Z",
+      "side": 1,
+      "message": "this is confusing as it says it reverts the change that is now listed as descendent commit ...",
+      "revId": "adea8565dd6db30f2b98c4200d48bbf05a758ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
