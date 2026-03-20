@@ -70,6 +70,30 @@
       },
       "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4d0d28_6575c000",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-20T10:18:23Z",
+      "side": 1,
+      "message": "And even if it _did_ simply end up using the guest stage-2, then that would corrupt _guest_ memory, no?",
+      "parentUuid": "b97eb2e1_e09cde6e",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 701,
+        "endChar": 2
+      },
+      "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
