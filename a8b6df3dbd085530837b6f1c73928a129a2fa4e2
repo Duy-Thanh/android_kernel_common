@@ -22,6 +22,30 @@
       },
       "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce73cec_0b83213f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-03-20T10:04:34Z",
+      "side": 1,
+      "message": "If my understanding is correct no, the host would we DOSing itself if it were to do that, since the hardware will continue trying to write its trace data to the Host\u0027s buffer addresses. However, these would go through the guest stage-2 page tables.\n\nIn other words, we would see the behavior that the original bug was reporting.",
+      "parentUuid": "aa2e9d84_6d098105",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 701,
+        "endChar": 2
+      },
+      "revId": "a8b6df3dbd085530837b6f1c73928a129a2fa4e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
