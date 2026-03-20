@@ -22,6 +22,30 @@
       },
       "revId": "bbcbc3444599123b1e642d81aee88cb1daa94337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda5fe8d_069ad34c",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T15:33:03Z",
+      "side": 1,
+      "message": "I don\u0027t see the behavior described anywhere in man pages and the I don\u0027t see anything in the implementation that would prevent resetting this flag: https://elixir.bootlin.com/linux/v6.12.77/source/fs/file.c#L1192.",
+      "parentUuid": "837a9c00_178f25b5",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 38
+      },
+      "revId": "bbcbc3444599123b1e642d81aee88cb1daa94337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
