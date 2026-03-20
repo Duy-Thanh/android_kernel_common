@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd34f688_0c6c2da7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-20T14:43:52Z",
+      "side": 1,
+      "message": "Hi Greg, I believe this is caused by pKVM, since we modify the definition of `struct dmar_domain` when compiling it as a part of the pKVM hypervisor code.\n\nThis revert indeed should be ok, since we don\u0027t use and don\u0027t support SVM or nested translation yet. But a more explicit fix would be:\n```\ndiff --git a/drivers/iommu/intel/cache.c b/drivers/iommu/intel/cache.c\nindex 249ab5886c73..813f359abba2 100644\n--- a/drivers/iommu/intel/cache.c\n+++ b/drivers/iommu/intel/cache.c\n@@ -365,9 +365,13 @@ static void qi_batch_add_pasid_dev_iotlb(struct intel_iommu *iommu, u16 sid, u16\n \n static bool intel_domain_use_piotlb(struct dmar_domain *domain)\n {\n+#ifndef __PKVM_HYP__\n \treturn domain-\u003edomain.type \u003d\u003d IOMMU_DOMAIN_SVA ||\n \t\t\tdomain-\u003edomain.type \u003d\u003d IOMMU_DOMAIN_NESTED ||\n \t\t\tintel_domain_is_fs_paging(domain);\n+#else\n+\treturn intel_domain_is_fs_paging(domain);\n+#endif\n }\n \n static void cache_tag_flush_iotlb(struct dmar_domain *domain, struct cache_tag *tag,\n```\n\nGenerally in case of any such non-obvious problems with `drivers/iommu/intel/` or `arch/x86/kvm/` please feel free to reach out for help to the pKVM-IA team ( @jaszczyk@google.com @dmaluka@google.com @vineethrp@google.com @shraash@google.com)",
+      "revId": "b283cd6f9a1a518455ea1d05c20066055ff31d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
