@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e1409a_fc140144",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T20:49:02Z",
+      "side": 1,
+      "message": "Don\u0027t you want to reset the `retry` variable before retrying? Maybe this:\n\n```\nretry:\n\t\terr \u003d ra_alloc_folio(ractl, index, mark, order, gfp);\n\t\tif (err) {\n\t\t\tbool retry \u003d false;\n\n\t\t\ttrace_android_vh_ra_alloc_retry(\u0026order, \u0026retry);\n\t\t\tif (retry)\n\t\t\t\tgoto retry;\n\t\t\tbreak;\n\t\t}\n```",
+      "range": {
+        "startLine": 552,
+        "startChar": 4,
+        "endLine": 552,
+        "endChar": 15
+      },
+      "revId": "85e50bd224c13f9dc084efd5ea09e3e4c294160c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
