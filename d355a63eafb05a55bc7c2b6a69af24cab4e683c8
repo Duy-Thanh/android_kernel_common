@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e864672_c9cf7be4",
+        "filename": "mm/readahead.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T20:31:25Z",
+      "side": 1,
+      "message": "I\u0027m worried if ra_alloc_folio() returns -EAGAIN then we are changing the behavior of this function even when the vendor hook is not defined. It\u0027s safer to do:\n\n```\nbool retry \u003d false;\n...\nretry:\n\ttrace_android_vh_ra_alloc_retry(\u0026order, \u0026gfp, \u0026retry);\n\tif (retry) {\n\t\tretry \u003d false;\n\t\tgoto retry;\n\t}\n```",
+      "range": {
+        "startLine": 547,
+        "startChar": 8,
+        "endLine": 547,
+        "endChar": 22
+      },
+      "revId": "d355a63eafb05a55bc7c2b6a69af24cab4e683c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
