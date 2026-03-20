@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a104eaf_eedbc4fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-20T17:28:31Z",
+      "side": 1,
+      "message": "It seems the lwis module needs the `MODULE_IMPORT_NS()` too:\n```\nERROR: modpost: module lwis uses symbol close_fd from namespace ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\n```\nThis is on partner-android though.",
+      "revId": "7711df28536ed5ceadc606da60727651059ebb28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
