@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6d4fa7_5a6c43b3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T13:56:19Z",
+      "side": 1,
+      "message": "I do not think this check matters. reclaim_hyp_pool will try to allocate a pmd_order anyway. if it fails it will just not put anything into the host_mc.",
+      "revId": "cbffaf16a6973ad3a1b7f62b3f4881aade4e383c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de543a8f_c6237392",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T13:56:19Z",
+      "side": 1,
+      "message": "This isn\u0027t completely correct. You can try aosp/3920665 to be a bit more accurate.",
+      "revId": "cbffaf16a6973ad3a1b7f62b3f4881aade4e383c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
