@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc887cac_dd3e3aa6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T11:25:50Z",
+      "side": 1,
+      "message": "It looks just fine to me. I gave it a crack at here: https://paste.googleplex.com/5748345164398592?raw",
+      "parentUuid": "b330622f_3797b68e",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ddc4c50_430a0b2b",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 2

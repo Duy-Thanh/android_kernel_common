@@ -16,6 +16,40 @@
       "message": "Do we want to select automatically the right KASAN whenever we select PKVM_DEBUG? But that would probably mean creating a PKVM_KASAN, that depends on the right OUTLINE configuration.\n\nWDYS?",
       "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9029a95_86eb85eb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T11:25:50Z",
+      "side": 1,
+      "message": "Don\u0027t think this one is either it is prefixed by KASAN so we know already",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b373bd2_1b80dbc5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T11:25:50Z",
+      "side": 1,
+      "message": "Don\u0027t think this comment is really helpful :)",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
