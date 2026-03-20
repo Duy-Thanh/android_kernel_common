@@ -52,6 +52,24 @@
       "parentUuid": "d8955462_3c02c269",
       "revId": "85676e5d7cba6c9f66908011bbafb83638aef82b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4806463_1cd07581",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T15:08:49Z",
+      "side": 1,
+      "message": "Ah, you are right. I forgot about `wrap_file_empty` which can reset this field. Will fix. Thanks!",
+      "parentUuid": "f0c694a5_a6b59d21",
+      "revId": "85676e5d7cba6c9f66908011bbafb83638aef82b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
