@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01cf1233_1b9bd205",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T10:18:56Z",
+      "side": 1,
+      "message": "In setup.c we have hyp_alloc_init(SZ_128M). Could we use this size by default, to make sure we cover all the range?",
+      "parentUuid": "cd0e668b_2db15f11",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec3be32e_9e889e77",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "bitmap functions doesn\u0027t work in nvhe as it requires memory allocation.",
       "parentUuid": "1ddc4c50_430a0b2b",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708df59c_44f97969",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T10:18:56Z",
+      "side": 1,
+      "message": "DECLARE_BITMAP() is static.\n\nYou can then use set_bit() / clear_bit()",
+      "parentUuid": "7cd97719_94971374",
       "revId": "27f08ea53aa93417017454896520f04718bd7881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

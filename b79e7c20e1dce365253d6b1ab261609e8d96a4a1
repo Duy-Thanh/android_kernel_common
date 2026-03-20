@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9845ac01_f8ae4ccb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-20T10:18:56Z",
+      "side": 1,
+      "message": "Do we want to select automatically the right KASAN whenever we select PKVM_DEBUG? But that would probably mean creating a PKVM_KASAN, that depends on the right OUTLINE configuration.\n\nWDYS?",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
