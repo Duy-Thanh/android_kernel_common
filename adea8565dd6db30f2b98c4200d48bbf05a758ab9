@@ -16,6 +16,24 @@
       "message": "this is confusing as it says it reverts the change that is now listed as descendent commit ...",
       "revId": "adea8565dd6db30f2b98c4200d48bbf05a758ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab5fe17_059bd0c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-03-20T19:14:55Z",
+      "side": 1,
+      "message": "This is a revert of previous version of patchset followed by applying newer version of same patchset.",
+      "parentUuid": "2512c820_afa11e00",
+      "revId": "adea8565dd6db30f2b98c4200d48bbf05a758ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
