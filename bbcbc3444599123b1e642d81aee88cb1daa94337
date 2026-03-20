@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837a9c00_178f25b5",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-20T11:09:37Z",
+      "side": 1,
+      "message": "I just realized: this part of the test may not make sense. You can\u0027t toggle `O_CLOEXEC`; it can only be set once and never cleared, so perhaps this should be removed.",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 38
+      },
+      "revId": "bbcbc3444599123b1e642d81aee88cb1daa94337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
