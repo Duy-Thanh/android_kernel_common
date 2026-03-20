@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8fd6bd_7a8cd341",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-03-20T10:21:22Z",
+      "side": 1,
+      "message": "This must be applied to the development branch `android16-6.12` first.",
+      "revId": "082cb5eac8c41681654760223fc983fbadf11ddb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
