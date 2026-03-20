@@ -51,6 +51,24 @@
       "message": "Adding Isaac who worked with Matt to originally land this.",
       "revId": "adea8565dd6db30f2b98c4200d48bbf05a758ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fa8222_09985a8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-20T22:12:51Z",
+      "side": 1,
+      "message": "I think it might be helpful to tag this as something like \"ANDROID: build: rust: Partially revert changes to inline C helpers in Rust\"\n\nand then in your commit message please document that you\u0027re doing this because you\u0027ll be applying an updated version of the patch and why the changes in helpers/ need to stay.",
+      "parentUuid": "1ab5fe17_059bd0c2",
+      "revId": "adea8565dd6db30f2b98c4200d48bbf05a758ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
