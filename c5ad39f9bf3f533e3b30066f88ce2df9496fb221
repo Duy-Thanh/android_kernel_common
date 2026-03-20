@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6195dc70_48b4cc52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-20T16:19:01Z",
+      "side": 1,
+      "message": "needs a space between : and bug number",
+      "revId": "c5ad39f9bf3f533e3b30066f88ce2df9496fb221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b8fb8a_fa328dc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-20T16:19:01Z",
+      "side": 1,
+      "message": "Remove the STG update from this patch. ABI updates and symbol lists must always be in a different patch than the code changes. In this case, the patch will need to wait for the April 1 KMI update, so the STG update will be done by us during that merge. Once the patch is fixed, we\u0027ll mark it with the hashtag `KMI-changes-for-2026-04-01`",
+      "revId": "c5ad39f9bf3f533e3b30066f88ce2df9496fb221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87e6057_6167c731",
+        "filename": "include/trace/hooks/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-20T16:19:01Z",
+      "side": 1,
+      "message": "This breaks KMI so it will have to wait for the next KMI update on April 1.",
+      "revId": "c5ad39f9bf3f533e3b30066f88ce2df9496fb221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
