@@ -28,6 +28,7 @@ u64 id_aa64mmfr0_el1_sys_val;
 u64 id_aa64mmfr1_el1_sys_val;
 u64 id_aa64mmfr2_el1_sys_val;
 u64 id_aa64smfr0_el1_sys_val;
+u64 id_aa64dfr0_el1_sys_val;
 
 /*
  * Inject an unknown/undefined exception to an AArch64 guest while most of its

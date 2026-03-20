@@ -668,6 +668,21 @@ static void __flush_hyp_reqs(struct pkvm_hyp_vcpu *hyp_vcpu)
 	pkvm_refill_memcache(hyp_vcpu);
 }
 
+static void flush_protected_debug_state(struct pkvm_hyp_vcpu *hyp_vcpu)
+{
+	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
+
+	if (FIELD_GET(ID_AA64DFR0_EL1_PMSVer, id_aa64dfr0_el1_sys_val))
+		vcpu_set_flag(vcpu, DEBUG_STATE_SAVE_SPE);
+	else
+		vcpu_clear_flag(vcpu, DEBUG_STATE_SAVE_SPE);
+
+	if (FIELD_GET(ID_AA64DFR0_EL1_TraceBuffer, id_aa64dfr0_el1_sys_val))
+		vcpu_set_flag(vcpu, DEBUG_STATE_SAVE_TRBE);
+	else
+		vcpu_clear_flag(vcpu, DEBUG_STATE_SAVE_TRBE);
+}
+
 static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
@@ -690,6 +705,8 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 		hyp_vcpu->vcpu.arch.hcr_el2 = HCR_GUEST_FLAGS & ~(HCR_RW | HCR_TWI | HCR_TWE);
 		hyp_vcpu->vcpu.arch.hcr_el2 |= READ_ONCE(host_vcpu->arch.hcr_el2);
+	} else {
+		flush_protected_debug_state(hyp_vcpu);
 	}
 
 	hyp_vcpu->vcpu.arch.vsesr_el2 = host_vcpu->arch.vsesr_el2;
