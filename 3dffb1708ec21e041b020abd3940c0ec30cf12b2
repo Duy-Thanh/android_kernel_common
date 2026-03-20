@@ -51,6 +51,24 @@
       "parentUuid": "d8707b4f_5e1138c9",
       "revId": "3dffb1708ec21e041b020abd3940c0ec30cf12b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0682343_098ab538",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-03-20T10:48:29Z",
+      "side": 1,
+      "message": "\u003e But does that really fully prevent the race? What if the host\u0027s and pKVM\u0027s created_vcpus are also incremented in the meantime by another thread on another CPU, right after the host allocates the vmexit trace buffer but before pKVM handles the dump_vmexit_trace hypercall using this buffer? Then we have the same race?\n\nYou are right, this race can still happen and this patch will not fix the issue. I will drop this patch.\n\n\u003e Yes, without propagating the error code to the host, the already dumped vmexit data can still be printed.\n\nMakes sense. So I shall have the fix very simple by unlocking the spinlock before returning and not worry about propagating the error.",
+      "parentUuid": "a6f3a06a_e523b1d3",
+      "revId": "3dffb1708ec21e041b020abd3940c0ec30cf12b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
