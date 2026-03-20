@@ -301820,7 +301820,7 @@ elf_symbol {
   name: "__pci_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x08752be2
+  crc: 0x909c47e9
   type_id: 0x97374fe9
   full_name: "__pci_register_driver"
 }
@@ -321686,7 +321686,7 @@ elf_symbol {
   name: "pci_add_dynid"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x260eea65
+  crc: 0x9fbe5a61
   type_id: 0x96122607
   full_name: "pci_add_dynid"
 }
@@ -321776,7 +321776,7 @@ elf_symbol {
   name: "pci_bus_type"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0xe2347262
+  crc: 0x73db222e
   type_id: 0xd54fa0c8
   full_name: "pci_bus_type"
 }
@@ -321830,7 +321830,7 @@ elf_symbol {
   name: "pci_dev_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0a660861
+  crc: 0xdb8ef5df
   type_id: 0x832143d7
   full_name: "pci_dev_get"
 }
@@ -321848,7 +321848,7 @@ elf_symbol {
   name: "pci_dev_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5a644dbe
+  crc: 0x30bf241c
   type_id: 0x14e1f000
   full_name: "pci_dev_put"
 }
@@ -322172,7 +322172,7 @@ elf_symbol {
   name: "pci_match_id"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x81cbb05c
+  crc: 0xbe858002
   type_id: 0xaddc5fdc
   full_name: "pci_match_id"
 }
@@ -322541,7 +322541,7 @@ elf_symbol {
   name: "pci_unregister_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdf4f9cf9
+  crc: 0xc370458b
   type_id: 0x1a0ce609
   full_name: "pci_unregister_driver"
 }
