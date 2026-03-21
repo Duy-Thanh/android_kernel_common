@@ -25,10 +25,27 @@ static void erofs_fileio_ki_complete(struct kiocb *iocb, long ret)
 			container_of(iocb, struct erofs_fileio_rq, iocb);
 	struct folio_iter fi;
 
+<<<<<<< HEAD   (01cefec914ce9ca5b26811d77709adc14e4d743b Revert "mailbox: don't protect of_parse_phandle_with_args wi)
 	if (ret >= 0 && ret != rq->bio.bi_iter.bi_size) {
 		bio_advance(&rq->bio, ret);
 		zero_fill_bio(&rq->bio);
 	}
+||||||| BASE   (5bc66fa0f7285dfc19c4155520d93d70ccecff01 Merge 6.12.74 into android16-6.12-lts)
+	if (ret > 0) {
+		if (ret != rq->bio.bi_iter.bi_size) {
+			bio_advance(&rq->bio, ret);
+			zero_fill_bio(&rq->bio);
+		}
+		ret = 0;
+	}
+	if (rq->bio.bi_end_io) {
+		if (ret < 0 && !rq->bio.bi_status)
+			rq->bio.bi_status = errno_to_blk_status(ret);
+		rq->bio.bi_end_io(&rq->bio);
+=======
+	if (ret >= 0 && ret != rq->bio.bi_iter.bi_size)
+		ret = -EIO;
+>>>>>>> BRANCH (e266923bd499020e9a1f1cc437dbd481a0d89e55 Merge tag 'android16-6.12.74_r00' into android16-6.12)
 	if (!rq->bio.bi_end_io) {
 		bio_for_each_folio_all(fi, &rq->bio) {
 			DBG_BUGON(folio_test_uptodate(fi.folio));
