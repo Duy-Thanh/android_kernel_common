@@ -221,13 +221,15 @@ static struct iaa_compression_mode *iaa_compression_modes[IAA_COMP_MODES_MAX];
 
 static int find_empty_iaa_compression_mode(void)
 {
-	int i;
+	int i = -EINVAL;
 
-	for (i = 0; i < IAA_COMP_MODES_MAX; i++)
-		if (!iaa_compression_modes[i])
-			return i;
+	for (i = 0; i < IAA_COMP_MODES_MAX; i++) {
+		if (iaa_compression_modes[i])
+			continue;
+		break;
+	}
 
-	return -EINVAL;
+	return i;
 }
 
 static struct iaa_compression_mode *find_iaa_compression_mode(const char *name, int *idx)
