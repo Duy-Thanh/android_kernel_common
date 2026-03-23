@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c805ef7a_91c968b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3618108
+      },
+      "writtenOn": "2026-03-23T16:12:50Z",
+      "side": 1,
+      "message": "I have fixed it, please review it again, thanks.",
+      "parentUuid": "3c34bf48_05ad1401",
+      "revId": "2ab32e0b653735ad724bb0c2e8fb4ac5450f0de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f947cc1d_04510830",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-23T15:54:46Z",
       "side": 1,
       "message": "If you had to change it, the heading should be \"BACKPORT: FROMGIT:\"",
+      "revId": "2ab32e0b653735ad724bb0c2e8fb4ac5450f0de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c4b3aa_39df001a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3618108
+      },
+      "writtenOn": "2026-03-23T16:12:50Z",
+      "side": 1,
+      "message": "I have put back \"Bug: 493380797\".",
+      "parentUuid": "f947cc1d_04510830",
       "revId": "2ab32e0b653735ad724bb0c2e8fb4ac5450f0de8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
