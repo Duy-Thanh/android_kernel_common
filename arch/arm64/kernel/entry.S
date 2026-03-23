@@ -47,7 +47,6 @@
 	b	.Lskip_tramp_vectors_cleanup\@
 	.if	\regsize == 64
 	mrs	x30, tpidrro_el0
-	msr	tpidrro_el0, xzr
 	.else
 	mov	x30, xzr
 	.endif
@@ -364,9 +363,12 @@ alternative_else_nop_endif
 	.if	\el == 0
 	ldr	x23, [sp, #S_SP]		// load return stack pointer
 	msr	sp_el0, x23
+	msr	tpidrro_el0, xzr
 	tst	x22, #PSR_MODE32_BIT		// native task?
 	b.eq	3f
 
+	ldr	x0, [tsk, #THREAD_TP_VALUE]
+	msr	tpidrro_el0, x0
 #ifdef CONFIG_ARM64_ERRATUM_845719
 alternative_if ARM64_WORKAROUND_845719
 #ifdef CONFIG_PID_IN_CONTEXTIDR
