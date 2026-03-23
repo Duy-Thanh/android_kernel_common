@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e62a9d0_ac4d6c4d",
+        "filename": "drivers/media/usb/uvc/uvc_metadata.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-03-23T16:46:55Z",
+      "side": 1,
+      "message": "Seems like we should introduce an upper bounds of this to prevent abuse.\n\n```\n#define UVC_METADATA_BUF_MAX_SIZE (1024 * 1024) // 1MB example cap\n\nbuffersize \u003d clamp_t(u32, fmt-\u003ebuffersize, UVC_METADATA_BUF_MIN_SIZE, UVC_METADATA_BUF_MAX_SIZE);\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "e36323fb6f59e4227d2a2fbfb1a2a4f84f124876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
