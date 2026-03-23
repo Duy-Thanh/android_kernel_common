@@ -16,6 +16,24 @@
       "message": "The patch has conflict markers! You didn\u0027t build before submitting?",
       "revId": "ee6de541d8790887c5e23fa43783a3cb5ccd7337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c19ed3a_3bba004e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3618108
+      },
+      "writtenOn": "2026-03-23T08:34:56Z",
+      "side": 1,
+      "message": "The conflicts have been resolved and the build passed successfully. Please help review it again, thanks.",
+      "parentUuid": "6471cf01_51107969",
+      "revId": "ee6de541d8790887c5e23fa43783a3cb5ccd7337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
