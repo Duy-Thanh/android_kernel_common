@@ -16,6 +16,24 @@
       "message": "This changes the behavior of the function regardless of vendor hook. I don\u0027t think this is correct. Maybe you can pass a variable to hook and based on the behavior you can change the return code to true so it only affects behavior for your code\nRoughly something like below\n```\n{\n   bool ret \u003d false;\n   trace_android_rvh_blk_mq_has_request(iter_data-\u003ehctx, rq, \u0026ret);\n   return ret;\n}\n```",
       "revId": "1a4e87a4f6996b642e95355e1ff5287977be082e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0833797_f9b84be9",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3568,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-03-23T16:53:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3e4fd31d_b9c1b9fb",
+      "revId": "1a4e87a4f6996b642e95355e1ff5287977be082e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
