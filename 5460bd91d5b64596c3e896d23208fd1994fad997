@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9faec205_9a2c2bba",
+        "filename": "drivers/media/usb/uvc/uvc_queue.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-03-23T16:46:10Z",
+      "side": 1,
+      "message": "Don\u0027t you need to lock the queue before calling uvc_queue_return_buffers?",
+      "revId": "5460bd91d5b64596c3e896d23208fd1994fad997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
