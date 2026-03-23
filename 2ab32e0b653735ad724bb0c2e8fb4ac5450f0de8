@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c34bf48_05ad1401",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-23T15:54:46Z",
+      "side": 1,
+      "message": "put back \"Bug: 493380797\" which is in the android16-6.12 version",
+      "revId": "2ab32e0b653735ad724bb0c2e8fb4ac5450f0de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f947cc1d_04510830",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-23T15:54:46Z",
+      "side": 1,
+      "message": "If you had to change it, the heading should be \"BACKPORT: FROMGIT:\"",
+      "revId": "2ab32e0b653735ad724bb0c2e8fb4ac5450f0de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bd8426bf_7b851b0e",
