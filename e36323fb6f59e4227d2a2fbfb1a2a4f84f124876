@@ -22,6 +22,30 @@
       },
       "revId": "e36323fb6f59e4227d2a2fbfb1a2a4f84f124876",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e81ed2_2aba49d2",
+        "filename": "drivers/media/usb/uvc/uvc_metadata.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1886585
+      },
+      "writtenOn": "2026-03-23T17:48:55Z",
+      "side": 1,
+      "message": "Upstream had a similar comment.\n\nhttps://lore.kernel.org/linux-media/20260318192246.GC718539@killaraus.ideasonboard.com/\n\nThe conclusion is that this can be abused in different ways and we should not handle it in the driver.",
+      "parentUuid": "1e62a9d0_ac4d6c4d",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 61
+      },
+      "revId": "e36323fb6f59e4227d2a2fbfb1a2a4f84f124876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
