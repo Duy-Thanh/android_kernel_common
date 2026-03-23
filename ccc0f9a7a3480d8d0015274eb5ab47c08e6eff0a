@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9def5e_fb5f30ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-23T12:08:24Z",
+      "side": 1,
+      "message": "Please don\u0027t include a duplicate Change-Id, as this breaks our tracking and causes lint errors. Instead, just use the original Change-Id (I7139f31e1665ed6a2cb981895fc7cdf9eb6ac8ff in this case).",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "ccc0f9a7a3480d8d0015274eb5ab47c08e6eff0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
