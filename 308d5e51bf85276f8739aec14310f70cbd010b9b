@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d8c96b20_140a4763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-23T16:00:00Z",
+      "side": 1,
+      "message": "Hmm. Since it landed in android16-6.12 with this label, just keep it. They should match. In the future, please label properly. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "29bed262_e9795c91",
+      "revId": "308d5e51bf85276f8739aec14310f70cbd010b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2b0c4c1e_ae2f03ef",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 9
