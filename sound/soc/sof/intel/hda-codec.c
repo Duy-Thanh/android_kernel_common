@@ -451,9 +451,14 @@ int hda_codec_i915_exit(struct snd_sof_dev *sdev)
 }
 EXPORT_SYMBOL_NS_GPL(hda_codec_i915_exit, "SND_SOC_SOF_HDA_AUDIO_CODEC_I915");
 
+<<<<<<< HEAD   (744939e21f0d74ae86da7e62d9d360764c89fc13 Merge 0d6dd4738dbc ("Merge tag 'firewire-updates-7.0' of git)
 MODULE_SOFTDEP("pre: snd_hda_codec_alc269");
 MODULE_SOFTDEP("pre: snd-hda-codec-intelhdmi");
 MODULE_SOFTDEP("pre: snd-hda-codec-hdmi");
+||||||| BASE   (1339a90ab1e59b8dd38312c5495e558d54823ce1 Merge 0d6dd4738dbc ("Merge tag 'firewire-updates-7.0' of git)
+MODULE_SOFTDEP("pre: snd-hda-codec-hdmi");
+=======
+>>>>>>> BRANCH (a1035d3ba1675e16fa559c49e7f354b3eaa319c0 Merge d06125138790 ("Merge tag 'sound-7.0-rc1' of git://git.)
 #endif
 
 MODULE_LICENSE("Dual BSD/GPL");
