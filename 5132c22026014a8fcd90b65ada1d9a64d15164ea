@@ -159,6 +159,24 @@
       "parentUuid": "46be78b2_16f4a668",
       "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e43eae79_522fcb1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2026-03-23T12:04:37Z",
+      "side": 1,
+      "message": "Sandeep Dhavale said the hooks can be written as generic tracepoints and upstreamed.",
+      "parentUuid": "75286cd3_41bd8a17",
+      "revId": "5132c22026014a8fcd90b65ada1d9a64d15164ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
