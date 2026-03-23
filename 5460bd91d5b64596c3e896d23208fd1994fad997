@@ -16,6 +16,24 @@
       "message": "Don\u0027t you need to lock the queue before calling uvc_queue_return_buffers?",
       "revId": "5460bd91d5b64596c3e896d23208fd1994fad997",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4324ccf_fe910d92",
+        "filename": "drivers/media/usb/uvc/uvc_queue.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1886585
+      },
+      "writtenOn": "2026-03-23T17:43:49Z",
+      "side": 1,
+      "message": "I missed one patch in the set. Let me add it",
+      "parentUuid": "9faec205_9a2c2bba",
+      "revId": "5460bd91d5b64596c3e896d23208fd1994fad997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
