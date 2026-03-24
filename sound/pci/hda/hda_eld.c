@@ -171,6 +171,10 @@ static void hdmi_update_short_audio_desc(struct hda_codec *codec,
 		for (i = 0; i < 3; i++)
 			if (val & (1 << i))
 				a->sample_bits |= cea_sample_sizes[i + 1];
+
+		codec->max_pcm_channels =
+				a->channels > codec->max_pcm_channels ?
+				a->channels : codec->max_pcm_channels;
 		break;
 
 	case AUDIO_CODING_TYPE_AC3:
@@ -216,6 +220,8 @@ static void hdmi_update_short_audio_desc(struct hda_codec *codec,
 				     AUDIO_CODING_XTYPE_HE_AAC;
 		break;
 	}
+	if (a->format > 0)
+		codec->recv_dec_cap |= (1 << a->format);
 }
 
 /*
@@ -262,6 +268,11 @@ int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 	} else
 		strscpy(e->monitor_name, buf + ELD_FIXED_BYTES, mnl + 1);
 
+	/* NB: codec-global — on multi-pin codecs the last parsed ELD wins.
+	 * Acceptable for Tegra which has a single HDMI output pin.
+	 */
+	codec->recv_dec_cap = 0;
+	codec->max_pcm_channels = 0;
 	for (i = 0; i < e->sad_count; i++) {
 		if (ELD_FIXED_BYTES + mnl + 3 * (i + 1) > size) {
 			codec_info(codec, "HDMI: out of range SAD %d\n", i);
@@ -270,6 +281,11 @@ int snd_hdmi_parse_eld(struct hda_codec *codec, struct parsed_hdmi_eld *e,
 		hdmi_update_short_audio_desc(codec, e->sad + i,
 					buf + ELD_FIXED_BYTES + mnl + 3 * i);
 	}
+
+	codec_info(codec,
+		   "HDMI ELD: recv_dec_cap=0x%x max_pcm_channels=%u sad_count=%d monitor=%s\n",
+		   codec->recv_dec_cap, codec->max_pcm_channels,
+		   e->sad_count, e->monitor_name);
 
 	/*
 	 * HDMI sink's ELD info cannot always be retrieved for now, e.g.
