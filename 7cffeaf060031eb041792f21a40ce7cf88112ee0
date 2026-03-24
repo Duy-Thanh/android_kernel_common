@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edae2b6_1c8d410d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-03-24T15:26:33Z",
+      "side": 1,
+      "message": "```suggestion\nMerge d06125138790 (\"Merge tag \u0027sound-7.0-rc1\u0027 of git://git.kernel.org/pub/scm/linux/kernel/git/tiwai/sound\") into android-mainline am: a1035d3ba1\n\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 157
+      },
+      "revId": "7cffeaf060031eb041792f21a40ce7cf88112ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "80f71696_a3028637",
