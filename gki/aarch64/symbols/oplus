@@ -472,9 +472,26 @@
   __traceiter_android_rvh_kswapd_shrink_node
   __traceiter_android_rvh_perform_reclaim
   __traceiter_android_vh_mglru_should_abort_scan_ex
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
   __traceiter_android_vh_alloc_pages_entry
   __traceiter_android_vh_filemap_get_folio
   __traceiter_android_vh_shrink_node_memcgs_bypass
+||||||| BASE   (f2390659d177c46faf913c3805183452a72257ae ANDROID: sched: bounded deferral of CFS preemption for frame)
+  __traceiter_android_vh_folio_add_lru_folio_activate
+  __traceiter_android_vh_filemap_fault_pre_folio_locked
+  __traceiter_android_vh_filemap_folio_mapped
+  __traceiter_android_vh_folio_remove_rmap_ptes
+  __traceiter_android_vh_skip_cma
+=======
+  __traceiter_android_vh_folio_add_lru_folio_activate
+  __traceiter_android_vh_filemap_fault_pre_folio_locked
+  __traceiter_android_vh_filemap_folio_mapped
+  __traceiter_android_vh_folio_remove_rmap_ptes
+  __traceiter_android_vh_skip_cma
+  __traceiter_android_vh_lock_delay_schedule
+  __traceiter_android_vh_lock_task_fork
+  __traceiter_android_vh_lock_task_exit
+>>>>>>> CHANGE (d6673a9860320f0abc1488eee8cd4334b7c359b0 ANDROID: GKI: Export symbols for lock-boost scheduler hooks )
   __tracepoint_android_vh_lru_gen_add_folio_skip
   __tracepoint_android_vh_lru_gen_del_folio_skip
   __tracepoint_android_vh_evict_folios_bypass
@@ -484,6 +501,7 @@
   __tracepoint_android_rvh_kswapd_shrink_node
   __tracepoint_android_rvh_perform_reclaim
   __tracepoint_android_vh_mglru_should_abort_scan_ex
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
   __tracepoint_android_vh_alloc_pages_entry
   __tracepoint_android_vh_filemap_get_folio
   __tracepoint_android_vh_shrink_node_memcgs_bypass
@@ -521,3 +539,27 @@
   fs_param_is_enum
   compat_vma_mmap_prepare
   unregister_sys_off_handler
+||||||| BASE   (f2390659d177c46faf913c3805183452a72257ae ANDROID: sched: bounded deferral of CFS preemption for frame)
+  __tracepoint_android_vh_folio_add_lru_folio_activate
+  __tracepoint_android_vh_filemap_fault_pre_folio_locked
+  __tracepoint_android_vh_filemap_folio_mapped
+  __tracepoint_android_vh_folio_remove_rmap_ptes
+  __tracepoint_android_vh_resched_curr_lazy
+  __tracepoint_android_vh_restore_curr_resched
+  __tracepoint_android_vh_clear_curr_lazy
+  __tracepoint_android_vh_skip_cma
+  isolate_folio
+=======
+  __tracepoint_android_vh_folio_add_lru_folio_activate
+  __tracepoint_android_vh_filemap_fault_pre_folio_locked
+  __tracepoint_android_vh_filemap_folio_mapped
+  __tracepoint_android_vh_folio_remove_rmap_ptes
+  __tracepoint_android_vh_resched_curr_lazy
+  __tracepoint_android_vh_restore_curr_resched
+  __tracepoint_android_vh_clear_curr_lazy
+  __tracepoint_android_vh_skip_cma
+  __tracepoint_android_vh_lock_delay_schedule
+  __tracepoint_android_vh_lock_task_fork
+  __tracepoint_android_vh_lock_task_exit
+  isolate_folio
+>>>>>>> CHANGE (d6673a9860320f0abc1488eee8cd4334b7c359b0 ANDROID: GKI: Export symbols for lock-boost scheduler hooks )
