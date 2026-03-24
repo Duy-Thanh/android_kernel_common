@@ -590,3 +590,6 @@
   contpte_ptep_get
   contpte_ptep_set_access_flags
   __ptep_set_access_flags
+  __tracepoint_android_vh_lock_delay_schedule
+  __tracepoint_android_vh_lock_task_fork
+  __tracepoint_android_vh_lock_task_exit
