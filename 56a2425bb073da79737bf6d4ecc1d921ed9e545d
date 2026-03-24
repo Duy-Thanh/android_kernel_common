@@ -16,6 +16,24 @@
       "message": "nit: s/not enabled/not to be enabled/ ?",
       "revId": "56a2425bb073da79737bf6d4ecc1d921ed9e545d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b100dc_c691d42a",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:02:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5ee41890_0418bfb4",
+      "revId": "56a2425bb073da79737bf6d4ecc1d921ed9e545d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
