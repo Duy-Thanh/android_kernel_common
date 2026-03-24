@@ -675,6 +675,50 @@ static int azx_pcm_open(struct snd_pcm_substream *substream)
 	return err;
 }
 
+/*
+ * Instead of silence buffer, use a non-zero buffer of very low amplitude and
+ * very high frequency, so that it's out of human audible range. This is done
+ * because some receivers enter low power mode with silence data which causes
+ * initial part of next valid audio to get cut off.
+ */
+static int azx_pcm_silence(struct snd_pcm_substream *substream,
+			    int channel, unsigned long pos,
+			    unsigned long bytes)
+{
+	static int idle_sample_value = 1;
+	struct snd_pcm_runtime *runtime = substream->runtime;
+	struct azx_pcm *apcm = snd_pcm_substream_chip(substream);
+	snd_pcm_uframes_t count = bytes_to_frames(runtime, bytes);
+	int16_t *buf16 = (int16_t *)((char *)runtime->dma_area + pos);
+	int32_t *buf32 = (int32_t *)((char *)runtime->dma_area + pos);
+	int i, j;
+
+	if (!apcm->codec->comfort_noise) {
+		memset(buf16, 0, bytes);
+		return 0;
+	}
+
+	dev_dbg_ratelimited(&apcm->codec->core.dev,
+			    "azx_pcm_silence: comfort_noise pos=%lu bytes=%lu fmt=%d ch=%d\n",
+			    pos, bytes, runtime->format, runtime->channels);
+
+	if (runtime->format == SNDRV_PCM_FORMAT_S32_LE) {
+		for (i = 0; i < count; i++) {
+			for (j = 0; j < runtime->channels; j++)
+				*buf32++ = idle_sample_value;
+			idle_sample_value = -idle_sample_value;
+		}
+	} else {
+		for (i = 0; i < count; i++) {
+			for (j = 0; j < runtime->channels; j++)
+				*buf16++ = idle_sample_value;
+			idle_sample_value = -idle_sample_value;
+		}
+	}
+
+	return 0;
+}
+
 static const struct snd_pcm_ops azx_pcm_ops = {
 	.open = azx_pcm_open,
 	.close = azx_pcm_close,
@@ -684,6 +728,7 @@ static const struct snd_pcm_ops azx_pcm_ops = {
 	.trigger = azx_pcm_trigger,
 	.pointer = azx_pcm_pointer,
 	.get_time_info =  azx_get_time_info,
+	.fill_silence = azx_pcm_silence,
 };
 
 static void azx_pcm_free(struct snd_pcm *pcm)
