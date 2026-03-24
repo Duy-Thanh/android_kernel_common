@@ -709,3 +709,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_add_page_merge_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+<<<<<<< HEAD   (7116e258bf03a56518418d7a09dfe3a686fc6504 ANDROID: ABI: Update Pixel symbol list)
+||||||| BASE   (36e33448be90aea3d2e98da271b35aac511b8dc6 ANDROID: ABI: Update pixel symbol list)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
+>>>>>>> CHANGE (6f8119b6bf03a5369573c59c7d9eddd85267044d ANDROID: sched: bounded deferral of CFS preemption for frame)
