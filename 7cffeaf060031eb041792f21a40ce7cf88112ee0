@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f71696_a3028637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-03-24T13:57:29Z",
+      "side": 1,
+      "message": "Just for reference:\ndropped `MODULE_SOFTDEP(\"pre: snd-hda-codec-hdmi\");` as commit being part of this merge does it in: 00ca2dd431fa2acb07b3ecc6ce49fb9a0a4d72cb \"ASoC: SOF: Intel: hda: Remove MODULE_SOFTDEP for snd-hda-codec-hdmi\"",
+      "revId": "7cffeaf060031eb041792f21a40ce7cf88112ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
