@@ -363639,7 +363639,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_blk_mq_has_request"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1f82130c
+  crc: 0xb438f426
   type_id: 0x9b207e3e
   full_name: "__traceiter_android_rvh_blk_mq_has_request"
 }

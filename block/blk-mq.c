@@ -3570,8 +3570,6 @@ static bool blk_mq_has_request(struct request *rq, void *data)
 	return ret;
 }
 
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_mq_has_request);
-
 static bool blk_mq_hctx_has_requests(struct blk_mq_hw_ctx *hctx)
 {
 	struct blk_mq_tags *tags = hctx->sched_tags ?
