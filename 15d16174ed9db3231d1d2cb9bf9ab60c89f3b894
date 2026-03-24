@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92c24b8_02bdcd62",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-24T16:34:53Z",
+      "side": 1,
+      "message": "can you use trace_task_newtask() above instead of adding a new hook? Or do you need the hook to be called after user_events_fork()?",
+      "revId": "15d16174ed9db3231d1d2cb9bf9ab60c89f3b894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdd6058_e1880696",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6759,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-24T16:34:53Z",
+      "side": 1,
+      "message": "what does \"ext_slice\" mean? Maybe change to a more generic name (\"skip\"?)",
+      "range": {
+        "startLine": 6759,
+        "startChar": 5,
+        "endLine": 6759,
+        "endChar": 14
+      },
+      "revId": "15d16174ed9db3231d1d2cb9bf9ab60c89f3b894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
