@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6218ddd7_794a1b80",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "That means we need 512 pages only for KASAN which is too much even for a debug feature IMO.",
+      "parentUuid": "01cf1233_1b9bd205",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec3be32e_9e889e77",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "It looks just fine to me. I gave it a crack at here: https://paste.googleplex.com/5748345164398592?raw",
       "parentUuid": "b330622f_3797b68e",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0049008_4d842d23",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "I see so, `alloc_check_range` still hard codes the allocator instance, I used your diff.",
+      "parentUuid": "fc887cac_dd3e3aa6",
       "revId": "27f08ea53aa93417017454896520f04718bd7881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -156,6 +192,24 @@
       "side": 1,
       "message": "DECLARE_BITMAP() is static.\n\nYou can then use set_bit() / clear_bit()",
       "parentUuid": "7cd97719_94971374",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce4169c_9ad574d3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "Done, that although replacing the memset/64-bit comparisons with per bit operation might not be ideal. But given that this is a debug feature and the code is cleaner now, I will keep it.",
+      "parentUuid": "708df59c_44f97969",
       "revId": "27f08ea53aa93417017454896520f04718bd7881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

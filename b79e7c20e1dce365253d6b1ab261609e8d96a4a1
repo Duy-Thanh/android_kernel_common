@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eac399b0_325409b2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "No strong opinion, my philosophy is to re-use the kernel configs for these kind of stuff when possible, similar to CFI/BTI...",
+      "parentUuid": "9845ac01_f8ae4ccb",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9029a95_86eb85eb",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 5
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-20T11:25:50Z",
       "side": 1,
       "message": "Don\u0027t think this one is either it is prefixed by KASAN so we know already",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7c9b6a_5e640dda",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9029a95_86eb85eb",
       "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2026-03-20T11:25:50Z",
       "side": 1,
       "message": "Don\u0027t think this comment is really helpful :)",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a12539e2_2210824a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T22:15:58Z",
+      "side": 1,
+      "message": "Done, that was separating helpers from config but not very helpful I agree",
+      "parentUuid": "1b373bd2_1b80dbc5",
       "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
