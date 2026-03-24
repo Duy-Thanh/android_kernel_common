@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39704f7f_b85e5035",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T12:59:20Z",
+      "side": 1,
+      "message": "How about target \u003d ALIGN_DOWN(target, block_pages)? \n\nthis way no need for a if, the target passed to reclaim_hyp_pool() will be 0!",
+      "revId": "bcddb9567aa4f635d4383e018767272ed671b403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2075736b_7d97a7fe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T12:59:20Z",
+      "side": 1,
+      "message": "I don\u0027t think you\u0027ve uploaded the change",
+      "revId": "bcddb9567aa4f635d4383e018767272ed671b403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
