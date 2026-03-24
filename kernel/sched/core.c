@@ -7727,6 +7727,7 @@ static void __sched notrace __schedule(int sched_mode)
 	struct rq *rq;
 	bool prev_not_proxied;
 	int cpu;
+	bool skip_schedule = false;
 
 	/* Trace preemptions consistently with task switches */
 	trace_sched_entry_tp(sched_mode == SM_PREEMPT);
@@ -7737,6 +7738,11 @@ static void __sched notrace __schedule(int sched_mode)
 	prev_donor = rq->donor;
 
 	schedule_debug(prev, preempt);
+
+	trace_android_vh_lock_delay_schedule(prev, sched_mode, &skip_schedule);
+
+	if (skip_schedule)
+		return;
 
 	if (sched_feat(HRTICK) || sched_feat(HRTICK_DL))
 		hrtick_clear(rq);
