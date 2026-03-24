@@ -80,6 +80,24 @@
       "message": "The build should pass after merging: https://arsp-review.git.corp.google.com/c/kernel-desktop/private/devices/google/x86-64/intel/common/+/1272164",
       "revId": "7cffeaf060031eb041792f21a40ce7cf88112ee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df837cec_081b2ef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-03-24T17:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baf04f75_809d2aec",
+      "revId": "7cffeaf060031eb041792f21a40ce7cf88112ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
