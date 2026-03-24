@@ -54,6 +54,8 @@
 	.endif
 
 	sub	sp, sp, #PT_REGS_SIZE
+
+	.if	\el == 1
 	/*
 	 * Test whether the SP has overflowed, without corrupting a GPR.
 	 * Task and IRQ stacks are aligned so that SP & (1 << THREAD_SHIFT)
@@ -64,8 +66,11 @@
 	tbnz	x0, #THREAD_SHIFT, 0f
 	sub	x0, sp, x0			// x0'' = sp' - x0' = (sp + x0) - sp = x0
 	sub	sp, sp, x0			// sp'' = sp' - x0 = (sp + x0) - x0 = sp
+	.endif
+
 	b	el\el\ht\()_\regsize\()_\label
 
+	.if	\el == 1
 0:
 	/*
 	 * Either we've just detected an overflow, or we've taken an exception
@@ -96,6 +101,7 @@
 	sub	sp, sp, x0
 	mrs	x0, tpidrro_el0
 	b	el\el\ht\()_\regsize\()_\label
+	.endif
 .org .Lventry_start\@ + 128	// Did we overflow the ventry slot?
 	.endm
 
