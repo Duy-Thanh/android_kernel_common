@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55a04f4_4288cbaf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T14:34:36Z",
+      "side": 1,
+      "message": "This is slightly different from what you had previously. Now we would reclaim one entire block even if the target is 1 page. Not a big deal though we can probably leave it like that.\n\nnit: that could be probably a single line, just like the check_sub_overflow()?",
+      "revId": "a100467c8c75fb4d5ae934d61c6619f8a0542aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
