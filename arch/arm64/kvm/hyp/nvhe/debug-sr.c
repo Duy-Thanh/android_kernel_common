@@ -68,19 +68,22 @@ static void __trace_do_switch(u64 *saved_trfcr, u64 new_trfcr)
 	write_sysreg_el1(new_trfcr, SYS_TRFCR);
 }
 
+static bool __is_trbe_enabled(void)
+{
+	if (!is_protected_kvm_enabled())
+		return host_data_test_flag(TRBE_ENABLED);
+
+	return host_data_test_flag(HAS_TRBE);
+}
+
 static void __trace_drain_and_disable(void)
 {
 	u64 *trblimitr_el1 = host_data_ptr(host_debug_state.trblimitr_el1);
 
 	*trblimitr_el1 = 0;
 
-	if (is_protected_kvm_enabled()) {
-		if (!host_data_test_flag(HAS_TRBE))
-			return;
-	} else {
-		if (!host_data_test_flag(TRBE_ENABLED))
-			return;
-	}
+	if (!__is_trbe_enabled())
+		return;
 
 	*trblimitr_el1 = read_sysreg_s(SYS_TRBLIMITR_EL1);
 	if (*trblimitr_el1 & TRBLIMITR_EL1_E) {
@@ -122,14 +125,14 @@ static void __trace_drain_and_disable(void)
 
 static bool __trace_needs_switch(void)
 {
-	return host_data_test_flag(TRBE_ENABLED) ||
+	return __is_trbe_enabled() ||
 	       host_data_test_flag(EL1_TRACING_CONFIGURED);
 }
 
 static void __trace_switch_to_guest(void)
 {
 	/* Unsupported with TRBE so disable */
-	if (host_data_test_flag(TRBE_ENABLED))
+	if (__is_trbe_enabled())
 		*host_data_ptr(trfcr_while_in_guest) = 0;
 
 	__trace_do_switch(host_data_ptr(host_debug_state.trfcr_el1),
