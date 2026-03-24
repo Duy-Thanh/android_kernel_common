@@ -52,7 +52,22 @@ static dev_t dma_heap_devt;
 static struct class *dma_heap_class;
 static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 
+<<<<<<< HEAD   (d4a901d31cb55ea18b0ba4892105e3b482d8c84a Merge b7ef56a07672 ("Merge tag 'media/v7.0-2' of git://git.k)
 struct dma_heap *dma_heap_find(const char *name)
+||||||| BASE   (b7ef56a07672e0d7ebe71c9d9b45f959f0c2f8e8 Merge tag 'media/v7.0-2' of git://git.kernel.org/pub/scm/lin)
+static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+				 u32 fd_flags,
+				 u64 heap_flags)
+=======
+bool __read_mostly mem_accounting;
+module_param(mem_accounting, bool, 0444);
+MODULE_PARM_DESC(mem_accounting,
+		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
+
+static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+				 u32 fd_flags,
+				 u64 heap_flags)
+>>>>>>> BRANCH (939faf71cf7ca9ab3d1bd2912ac0e203d4d7156a Merge tag 'drm-next-2026-02-11' of https://gitlab.freedeskto)
 {
 	struct dma_heap *h;
 
