@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f063ba5a_da06cd85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T11:15:58Z",
+      "side": 1,
+      "message": "target is already an int. so I don\u0027t think you need to check any overflow?",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409eda8b_bd98e452",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T11:15:58Z",
+      "side": 1,
+      "message": "You can probably skip that. reclaim_hyp_pool() wouldn\u0027t do anything if it fails to allocate an order 9 page.\n\nSame, I don\u0027t think you need the ALIGN_DOWN() reclaim_hyp_pool will handle that gracefully.",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4e1cac4_b3b2bbf6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-24T11:15:58Z",
+      "side": 1,
+      "message": "nit: if (!cma_size) return reclaimable. That\u0027ll make the line below shorter.\n\nr",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
