@@ -149,6 +149,7 @@ DECLARE_HOOK(android_vh_freeze_whether_wake,
 	TP_PROTO(struct task_struct *t, bool *wake),
 	TP_ARGS(t, wake));
 
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
 DECLARE_HOOK(android_vh_mutex_lock_acquired,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
@@ -173,6 +174,51 @@ DECLARE_HOOK(android_vh_pcpu_rwsem_lock_acquired,
 DECLARE_HOOK(android_vh_pcpu_rwsem_lock_released,
 	TP_PROTO(struct percpu_rw_semaphore *sem),
 	TP_ARGS(sem));
+||||||| BASE   (47a1927cad2aef025862b6124c5062a16f60efdb BACKPORT: FROMGIT: media: uvcvideo: Allow userspace to incre)
+DECLARE_HOOK(android_vh_set_tsk_need_resched_lazy,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int *need_lazy),
+	TP_ARGS(p, rq, need_lazy));
+
+DECLARE_HOOK(android_vh_resched_curr_lazy,
+	TP_PROTO(struct rq *rq, bool *skip_preempt),
+	TP_ARGS(rq, skip_preempt));
+
+DECLARE_HOOK(android_vh_restore_curr_resched,
+	TP_PROTO(unsigned long *flags, int *lazy_flage),
+	TP_ARGS(flags, lazy_flage));
+
+DECLARE_HOOK(android_vh_clear_curr_lazy,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+=======
+DECLARE_HOOK(android_vh_set_tsk_need_resched_lazy,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int *need_lazy),
+	TP_ARGS(p, rq, need_lazy));
+
+DECLARE_HOOK(android_vh_resched_curr_lazy,
+	TP_PROTO(struct rq *rq, bool *skip_preempt),
+	TP_ARGS(rq, skip_preempt));
+
+DECLARE_HOOK(android_vh_restore_curr_resched,
+	TP_PROTO(unsigned long *flags, int *lazy_flage),
+	TP_ARGS(flags, lazy_flage));
+
+DECLARE_HOOK(android_vh_clear_curr_lazy,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
+
+DECLARE_HOOK(android_vh_lock_delay_schedule,
+	TP_PROTO(struct task_struct *prev, int sched_mode, bool *ext_slice),
+	TP_ARGS(prev, sched_mode, ext_slice));
+
+DECLARE_HOOK(android_vh_lock_task_fork,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p));
+
+DECLARE_HOOK(android_vh_lock_task_exit,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p));
+>>>>>>> CHANGE (f2390659d177c46faf913c3805183452a72257ae ANDROID: sched: bounded deferral of CFS preemption for frame)
 #endif /* _TRACE_HOOK_DTASK_H */
 
 /* This part must be outside protection */

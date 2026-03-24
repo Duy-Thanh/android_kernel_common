@@ -639,6 +639,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_syscall_prctl_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sysrq_crash);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_get_classid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_clean_rtx_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_fastsyn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rcv_established_fast_path);
@@ -708,3 +709,19 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
 /* keep-sorted end */
+||||||| BASE   (47a1927cad2aef025862b6124c5062a16f60efdb BACKPORT: FROMGIT: media: uvcvideo: Allow userspace to incre)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pci_pm_verify_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pci_pm_verify_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
+>>>>>>> CHANGE (f2390659d177c46faf913c3805183452a72257ae ANDROID: sched: bounded deferral of CFS preemption for frame)
