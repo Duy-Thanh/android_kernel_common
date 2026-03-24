@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dde4bfc_c20193d5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T12:16:49Z",
+      "side": 1,
+      "message": "I think we should, In theory subtracting large unsigned long from an int can result in an overflow, and as this is not a hot path, that\u0027s more robust to future changes.",
+      "parentUuid": "f063ba5a_da06cd85",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "409eda8b_bd98e452",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-24T11:15:58Z",
       "side": 1,
       "message": "You can probably skip that. reclaim_hyp_pool() wouldn\u0027t do anything if it fails to allocate an order 9 page.\n\nSame, I don\u0027t think you need the ALIGN_DOWN() reclaim_hyp_pool will handle that gracefully.",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d252262_f243c2e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T12:16:49Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "409eda8b_bd98e452",
       "revId": "89de58bdc37d25b094c73b058383068546416a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2026-03-24T11:15:58Z",
       "side": 1,
       "message": "nit: if (!cma_size) return reclaimable. That\u0027ll make the line below shorter.\n\nr",
+      "revId": "89de58bdc37d25b094c73b058383068546416a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b45c372_d420a85a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-24T12:16:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4e1cac4_b3b2bbf6",
       "revId": "89de58bdc37d25b094c73b058383068546416a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
