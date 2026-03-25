@@ -72,20 +72,32 @@ static DEFINE_MUTEX(host_s2_cma_lock);
 
 static int __init early_kvm_arm_host_s2_cfg(char *arg)
 {
-	enum pkvm_host_s2_mode mode;
+	enum pkvm_host_s2_mode mode = 0;
+	char *token;
 
 	if (!arg)
 		return -EINVAL;
 
-	if (strcmp(arg, "carveout") == 0) {
-		mode = PKVM_HOST_S2_CARVEOUT;
-	} else if (strcmp(arg, "cma") == 0) {
-		mode = PKVM_HOST_S2_CMA;
-	} else if (strcmp(arg, "gcma") == 0) {
-		mode = PKVM_HOST_S2_GCMA;
-	} else {
-		return -EINVAL;
+	while ((token = strsep(&arg, ",")) != NULL) {
+		if (strcmp(token, "carveout") == 0) {
+			mode &= ~PKVM_HOST_S2_MODE_MASK;
+			mode |= PKVM_HOST_S2_CARVEOUT;
+		} else if (strcmp(token, "cma") == 0) {
+			mode &= ~PKVM_HOST_S2_MODE_MASK;
+			mode |= PKVM_HOST_S2_CMA;
+		} else if (strcmp(token, "gcma") == 0) {
+			mode &= ~PKVM_HOST_S2_MODE_MASK;
+			mode |= PKVM_HOST_S2_GCMA;
+		} else if (strcmp(token, "iommu") == 0) {
+			mode |= PKVM_HOST_S2_IOMMU;
+		} else {
+			return -EINVAL;
+		}
 	}
+
+	/* "iommu" and "carveout" are not compatible */
+	if ((mode & PKVM_HOST_S2_MODE_MASK) == PKVM_HOST_S2_CARVEOUT)
+		mode = PKVM_HOST_S2_CARVEOUT;
 
 	kvm_nvhe_sym(__host_s2_mode) = __host_s2_mode = mode;
 	return 0;
@@ -323,7 +335,7 @@ DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
 
 void __init kvm_hyp_reserve(void)
 {
-	u64 hyp_mem_pages = 0;
+	u64 hyp_mem_pages = 0, cma_pages = 0;
 	phys_addr_t align;
 	int ret;
 
@@ -399,9 +411,11 @@ again:
 		return;
 	}
 
+	cma_pages = host_s2_pgtable_pages() + (host_s2_has_iommu() ? kvm_iommu_pages() : 0);
+
 	/* Place the reclaimable host stage-2 region at the end of the carveout */
 	kvm_nvhe_sym(host_s2_cma_base) = hyp_mem_base +
-					((hyp_mem_pages - host_s2_pgtable_pages()) * PAGE_SIZE);
+					((hyp_mem_pages - cma_pages) * PAGE_SIZE);
 	kvm_nvhe_sym(host_s2_cma_size) = hyp_mem_size - (kvm_nvhe_sym(host_s2_cma_base) -
 					hyp_mem_base);
 

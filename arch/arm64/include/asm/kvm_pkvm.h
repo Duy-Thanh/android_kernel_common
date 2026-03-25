@@ -150,6 +150,8 @@ enum pkvm_host_s2_mode {
 	PKVM_HOST_S2_GCMA,
 #endif
 	PKVM_HOST_S2_CARVEOUT,
+	PKVM_HOST_S2_MODE_MASK = 0x3,
+	PKVM_HOST_S2_IOMMU = BIT(2),
 };
 
 #ifndef __KVM_NVHE_HYPERVISOR__
@@ -159,7 +161,7 @@ extern enum pkvm_host_s2_mode kvm_nvhe_sym(__host_s2_mode);
 
 static inline enum pkvm_host_s2_mode host_s2_mode(void)
 {
-	return __host_s2_mode;
+	return __host_s2_mode & PKVM_HOST_S2_MODE_MASK;
 }
 
 static inline bool host_s2_is_cma(void)
@@ -171,6 +173,11 @@ static inline bool host_s2_is_cma(void)
 #else
 	return false;
 #endif
+}
+
+static inline bool host_s2_has_iommu(void)
+{
+	return !!(__host_s2_mode & PKVM_HOST_S2_IOMMU);
 }
 
 extern phys_addr_t kvm_nvhe_sym(host_s2_cma_base);
