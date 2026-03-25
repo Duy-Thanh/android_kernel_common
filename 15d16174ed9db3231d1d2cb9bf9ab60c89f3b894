@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70f2882c_b419d93e",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 4363940
+      },
+      "writtenOn": "2026-03-25T11:24:35Z",
+      "side": 1,
+      "message": "Following up on my earlier reply: we tried the suggested approach (moving the fork-time reset to `register_trace_task_newtask()` and dropping `android_vh_lock_task_fork`), but during integration/debugging we hit practical issues in our loadable vendor module path (trace-event registration / symbol \u0026 ABI constraints differ from the Android vendor-hook model).\nGiven our upcoming merge window and the need to keep risk low after stability validation, we will keep `android_vh_lock_task_fork` in this revision.\nMain reasons:\n1) Stability / safety: avoid cross-framework changes that add risk at this stage.\n2) Different integration models: `trace_task_newtask` is trace-event based; our implementation uses Android vendor hooks from a loadable vendor module.\n3) Extensibility / callsite timing: this hook sits at the tail of `copy_process()` after `user_events_fork()`, matching the task-lifecycle ordering we need for follow-on work (including coordination with memory-management lifecycle concerns).\nGiven the above, we prefer to retain this hook instead of reusing trace_task_newtask as-is. Sorry for the churn on the earlier comment.",
+      "parentUuid": "b7ebcf72_a3f079e6",
+      "revId": "15d16174ed9db3231d1d2cb9bf9ab60c89f3b894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cdd6058_e1880696",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
