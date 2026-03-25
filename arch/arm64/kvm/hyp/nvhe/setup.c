@@ -99,7 +99,7 @@ static int divide_memory_pool(void *virt, unsigned long size)
 	if (!hyp_ppages)
 		return -ENOMEM;
 
-	if (hyp_kvm_iommu_pages) {
+	if (hyp_kvm_iommu_pages && !host_s2_has_iommu()) {
 		iommu_base = hyp_early_alloc_contig(hyp_kvm_iommu_pages);
 		if (!iommu_base)
 			return -ENOMEM;

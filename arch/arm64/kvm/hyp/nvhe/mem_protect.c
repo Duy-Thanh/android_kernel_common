@@ -54,6 +54,22 @@ struct hyp_mgt_allocator_ops host_s2_pool_ops = {
 	.reclaimable	= host_s2_pool_reclaimable,
 };
 
+void *host_s2_pool_alloc_pages(u8 order)
+{
+	if (WARN_ON(!host_s2_has_iommu()))
+		return NULL;
+
+	return hyp_alloc_pages(&host_s2_pool, order);
+}
+
+void host_s2_pool_put_page(void *addr)
+{
+	if (WARN_ON(!host_s2_has_iommu()))
+		return;
+
+	hyp_put_page(&host_s2_pool, addr);
+}
+
 void make_host_stage2_reclaimable(void)
 {
 	__hyp_pool_set_range_reclaimable(&host_s2_pool);
