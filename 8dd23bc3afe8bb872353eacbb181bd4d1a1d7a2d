@@ -22,6 +22,30 @@
       },
       "revId": "8dd23bc3afe8bb872353eacbb181bd4d1a1d7a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4cd2d4_fade0ef6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2537,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T17:53:03Z",
+      "side": 1,
+      "message": "I could also just remove it here and let the patch that brings PSCI_MEM_PROTECT to host_stage2_set_owner do the job. I didn\u0027t really mean to commit that here.",
+      "parentUuid": "4eb745e5_0712edb1",
+      "range": {
+        "startLine": 2537,
+        "startChar": 3,
+        "endLine": 2537,
+        "endChar": 23
+      },
+      "revId": "8dd23bc3afe8bb872353eacbb181bd4d1a1d7a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
