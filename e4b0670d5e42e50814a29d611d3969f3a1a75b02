@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f0578c6_494e4765",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-25T15:32:24Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that default to 0 anyway? I think there is no need for the #ifdef as the only place checked is in CONFIG_CMA.",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "e4b0670d5e42e50814a29d611d3969f3a1a75b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
