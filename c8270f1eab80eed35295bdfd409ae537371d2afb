@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deca673a_9263619c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-03-25T15:15:28Z",
+      "side": 1,
+      "message": "Per discussion here, https://android-review.git.corp.google.com/c/kernel/common/+/3993754/comment/647a3fee_01b68af8/\n\nLet\u0027s leave this out. If further changes are backported, this is fine to land, but this isn\u0027t gaining us any functionality at the moment.",
+      "revId": "c8270f1eab80eed35295bdfd409ae537371d2afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
