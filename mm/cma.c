@@ -558,6 +558,7 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 	}
 
 	trace_cma_alloc_finish(cma->name, pfn, page, count, align, ret);
+	trace_android_vh_cma_alloc_end(cma, pfn, page, count, align, ret);
 
 	/*
 	 * CMA can allocate multiple page blocks, which results in different
