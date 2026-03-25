@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28902163_b3f4004e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T15:22:46Z",
+      "side": 1,
+      "message": "As discussed offline, let\u0027s keep it as it is, but let\u0027s see if we can enable it in the kasan gki defconfig.",
+      "parentUuid": "6842d2a7_9a958119",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9029a95_86eb85eb",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 5
