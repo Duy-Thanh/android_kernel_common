@@ -187,6 +187,30 @@
       },
       "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34f3a6f_d27b475d",
+        "filename": "kernel/dma/swiotlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-25T16:14:00Z",
+      "side": 1,
+      "message": "Then I think it\u0027s probably just a naming issue: if the property is called \"encrypted\" then I think Linux should ensure that the memory is encrypted either by querying the default state of the memory or by forcefully encrypting it. pKVM allows double encryption (the second call returns -EPERM and doesn\u0027t modify the memory) but I agree that other hypervisor might handle this badly.\n\nOtherwise, the property could be something like \"no-decrypt\" which is kinda nasty but we have to preserve the existing behaviour when the property is not present.",
+      "parentUuid": "697c5322_1e5eef99",
+      "range": {
+        "startLine": 1860,
+        "startChar": 5,
+        "endLine": 1860,
+        "endChar": 19
+      },
+      "revId": "88b473c6f95b64f12c1b2e6ef1cc17738e52ad36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
