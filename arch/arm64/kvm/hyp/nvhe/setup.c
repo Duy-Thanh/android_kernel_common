@@ -77,7 +77,7 @@ static int divide_memory_pool(void *virt, unsigned long size)
 		return -ENOMEM;
 
 	nr_pages = host_s2_pgtable_pages();
-	if (host_s2_cma_size) {
+	if (host_s2_is_cma()) {
 		host_s2_pgt_base = hyp_phys_to_virt(host_s2_cma_base);
 	} else {
 		host_s2_pgt_base = hyp_early_alloc_contig(nr_pages);
@@ -216,7 +216,7 @@ static int recreate_hyp_mappings(phys_addr_t phys, unsigned long size,
 	 * We start with the entire pool mapped. Post de-privilege, the host will be able to reclaim
 	 * unused memory
 	 */
-	if (host_s2_cma_size) {
+	if (host_s2_is_cma()) {
 		ret = pkvm_create_mappings(hyp_phys_to_virt(host_s2_cma_base),
 					   hyp_phys_to_virt(host_s2_cma_base + host_s2_cma_size),
 					   PAGE_HYP);

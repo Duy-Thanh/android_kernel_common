@@ -144,6 +144,35 @@ struct pkvm_moveable_reg {
 extern struct pkvm_moveable_reg kvm_nvhe_sym(pkvm_moveable_regs)[];
 extern unsigned int kvm_nvhe_sym(pkvm_moveable_regs_nr);
 
+enum pkvm_host_s2_mode {
+#ifdef CONFIG_CMA
+	PKVM_HOST_S2_CMA,
+	PKVM_HOST_S2_GCMA,
+#endif
+	PKVM_HOST_S2_CARVEOUT,
+};
+
+#ifndef __KVM_NVHE_HYPERVISOR__
+extern enum pkvm_host_s2_mode __host_s2_mode;
+#endif
+extern enum pkvm_host_s2_mode kvm_nvhe_sym(__host_s2_mode);
+
+static inline enum pkvm_host_s2_mode host_s2_mode(void)
+{
+	return __host_s2_mode;
+}
+
+static inline bool host_s2_is_cma(void)
+{
+#ifdef CONFIG_CMA
+	enum pkvm_host_s2_mode mode = host_s2_mode();
+
+	return mode == PKVM_HOST_S2_CMA || mode == PKVM_HOST_S2_GCMA;
+#else
+	return false;
+#endif
+}
+
 extern phys_addr_t kvm_nvhe_sym(host_s2_cma_base);
 extern phys_addr_t kvm_nvhe_sym(host_s2_cma_size);
 

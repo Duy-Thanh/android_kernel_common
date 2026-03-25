@@ -161,7 +161,7 @@ static int prepare_s2_pool(void *pgt_pool_base, void *mmio_pool_base)
 	int ret;
 
 	pfn = hyp_virt_to_pfn(pgt_pool_base);
-	nr_pages = host_s2_cma_size ? host_s2_cma_size >> PAGE_SHIFT : host_s2_pgtable_pages();
+	nr_pages = host_s2_is_cma() ? host_s2_cma_size >> PAGE_SHIFT : host_s2_pgtable_pages();
 	ret = hyp_pool_init(&host_s2_pool, pfn, nr_pages, 0);
 	if (ret)
 		return ret;
@@ -202,7 +202,7 @@ static bool range_has_reclaimable_host_s2(u64 addr, u64 end)
 {
 	u64 cma_end = host_s2_cma_base + host_s2_cma_size;
 
-	if (!host_s2_cma_size)
+	if (!host_s2_is_cma())
 		return false;
 
 	return addr < cma_end && end > host_s2_cma_base;
