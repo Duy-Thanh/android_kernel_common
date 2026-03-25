@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c2a0ed4_3edd893a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-25T19:00:30Z",
+      "side": 1,
+      "message": "How do you achieve this? Do you set `t-\u003eset_priority_called` in the vendor hook? Is there a reason you can\u0027t make use of the current vendor hooks e.g. `trace_android_vh_binder_proc_transaction` for this?",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "618be4e63200de316efdc71728c28ce24614bd70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
