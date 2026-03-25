@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6831c3d_defc6bc8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Can we keep `struct hyp_allocator * allocator` just like the other functions from the file?\n\nSame for the other functions.",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fb5b60_9067a896",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "We use either void * or unsigned long for VA addresses. So I would stick to unsigned long everywhere and not use u64 here.\n\nAlso, use unsigned long for bit_start, bit_end variables. We don\u0027t have to handle negative and having the same bitwidth is good to have.\n\nSame for kasan_set_range().",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027c9278_9c78459b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "nit: Line too long.",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a740fd_2b7c78ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Looks way cleaner now!",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f286bfc4_9b1f2d0f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "nit: You\u0027ve added an empty line in the unpoison_shadow but not here.",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d7ad43_68c33947",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Everywhere in the hypervisor, end is excluded, I wouldn\u0027t change that. Remove the -1 and just change the comparison in the for loops in kasan_set_range() and kasan_check_range().",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8be8a7_75fb7637",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "poison/unpoison allow half protected chunks. Perhaps we can allow that here too?",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c975b2b_a695ee33",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "nit: the line is too long. You can declare a struct hyp_allocator *allocator \u003d \u0026hyp_allocator; and use it instead. That would make the line short enough hopefully! (and also that would make the function look like hyp_alloc and hyp_free)",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da22dc5e_1c4c10ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "nit: I believe this is too long. You can \n\n```\nstatic inline void\nkasan_unpoison_shadow() { }\n```",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc493a3_cdaeb084",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Should be an unsigned long cast.",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e9c1fe_563391a6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "(unsigned long) cast",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e27533_49c5c7f2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6218ddd7_794a1b80",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec3be32e_9e889e77",
@@ -245,6 +263,24 @@
       "side": 1,
       "message": "(void *) is a bit tricky as the hyp_allocator start unsigned long, I changed it to `unsigned long va` similar to `hyp_allocator_map`",
       "parentUuid": "064de03f_884f3787",
+      "revId": "27f08ea53aa93417017454896520f04718bd7881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456c7fa2_ae08273a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8589c9ff_e52f3d5e",
       "revId": "27f08ea53aa93417017454896520f04718bd7881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

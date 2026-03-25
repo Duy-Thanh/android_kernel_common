@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6842d2a7_9a958119",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-25T08:25:53Z",
+      "side": 1,
+      "message": "I\u0027m not so bothered by not having a PKVM_KASAN than enabling this by default when PKVM_DEBUG is enabled.\n\nBut it is true it enables it for the entire kernel and this is very slow ... so I\u0027m not so sure. All debug options are selected with PKVM_DEBUG, it would be a shame for this one not to be...\n\nWDYS?",
+      "parentUuid": "eac399b0_325409b2",
+      "revId": "b79e7c20e1dce365253d6b1ab261609e8d96a4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9029a95_86eb85eb",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 5
