@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edeef19c_2a88d55b",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-25T15:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f2882c_b419d93e",
+      "revId": "15d16174ed9db3231d1d2cb9bf9ab60c89f3b894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cdd6058_e1880696",
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "Agreed. We will rename `ext_slice` to `skip_schedule` to reflect the behavior of returning early (skipping `pick_next` in this `__schedule` call). We\u0027d be happy to use another name if you feel further adjustments are needed.",
       "parentUuid": "0cdd6058_e1880696",
+      "range": {
+        "startLine": 6759,
+        "startChar": 5,
+        "endLine": 6759,
+        "endChar": 14
+      },
+      "revId": "15d16174ed9db3231d1d2cb9bf9ab60c89f3b894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f37eedc_0cf576a9",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6759,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-25T15:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c49ba8a8_3a038e3e",
       "range": {
         "startLine": 6759,
         "startChar": 5,
