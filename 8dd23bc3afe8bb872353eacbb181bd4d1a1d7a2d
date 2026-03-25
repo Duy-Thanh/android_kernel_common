@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb745e5_0712edb1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2537,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-25T17:41:21Z",
+      "side": 1,
+      "message": "That\u0027s another fix? Maybe mention in the commit message.",
+      "range": {
+        "startLine": 2537,
+        "startChar": 3,
+        "endLine": 2537,
+        "endChar": 23
+      },
+      "revId": "8dd23bc3afe8bb872353eacbb181bd4d1a1d7a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
