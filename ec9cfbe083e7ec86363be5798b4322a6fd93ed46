@@ -22,6 +22,30 @@
       },
       "revId": "ec9cfbe083e7ec86363be5798b4322a6fd93ed46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696db8f6_d7c1108c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-26T11:53:46Z",
+      "side": 0,
+      "message": "We would also not put back the host stage-2 ownership properly which is even worst! :) \n\nAll rollback should WARN_ON()",
+      "parentUuid": "b217980f_64435162",
+      "range": {
+        "startLine": 535,
+        "startChar": 1,
+        "endLine": 535,
+        "endChar": 25
+      },
+      "revId": "ec9cfbe083e7ec86363be5798b4322a6fd93ed46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
