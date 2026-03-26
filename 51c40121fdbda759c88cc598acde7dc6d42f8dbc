@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a767b3_ed2787b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-03-26T16:02:45Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Yang Yang \u003c...\n\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Yang Yang \u003cyang.yang@vivo.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "51c40121fdbda759c88cc598acde7dc6d42f8dbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
