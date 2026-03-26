@@ -46,6 +46,30 @@
       },
       "revId": "618be4e63200de316efdc71728c28ce24614bd70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f27dc3a_bc085bb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-26T16:11:05Z",
+      "side": 1,
+      "message": "But all of the calls go through `trace_android_vh_binder_proc_transaction()` first, so if you set the `t-\u003eset_priority_called` there it would later be applicable for the `binder_thread_read()` case right? You _may_ not have the thread that would pick up the transaction but you do have the associated proc-\u003etask.",
+      "parentUuid": "d8227d82_b186241d",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "618be4e63200de316efdc71728c28ce24614bd70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
