@@ -22,6 +22,30 @@
       },
       "revId": "618be4e63200de316efdc71728c28ce24614bd70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8227d82_b186241d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2026-03-26T11:49:29Z",
+      "side": 1,
+      "message": "binder_transaction_priority is also called in binder_thread_read, so for us, using only trace_android_vh_binder_proc_transaction cannot cover both cases at the same time.",
+      "parentUuid": "8c2a0ed4_3edd893a",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "618be4e63200de316efdc71728c28ce24614bd70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
