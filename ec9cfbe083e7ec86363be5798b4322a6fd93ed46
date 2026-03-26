@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b217980f_64435162",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-26T11:50:28Z",
+      "side": 0,
+      "message": "Now we leak the refcount if the WARN_ON was removed?",
+      "range": {
+        "startLine": 535,
+        "startChar": 1,
+        "endLine": 535,
+        "endChar": 25
+      },
+      "revId": "ec9cfbe083e7ec86363be5798b4322a6fd93ed46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
