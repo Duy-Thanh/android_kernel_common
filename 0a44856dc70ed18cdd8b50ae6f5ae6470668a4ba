@@ -16,6 +16,24 @@
       "message": "Please explain why this feature is needed.",
       "revId": "0a44856dc70ed18cdd8b50ae6f5ae6470668a4ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6982f7ca_cd604e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4464660
+      },
+      "writtenOn": "2026-03-26T08:02:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef3cf4a9_19e4d4d0",
+      "revId": "0a44856dc70ed18cdd8b50ae6f5ae6470668a4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
