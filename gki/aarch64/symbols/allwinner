@@ -89,3 +89,12 @@
   pinctrl_gpio_set_config
   skb_append
   no_seek_end_llseek
+<<<<<<< PATCH SET (4756a66bdf20afde37bdf70ea4d5aca28a43fc1f ANDROID: GKI: update symbol list for allwinner)
+  ir_raw_handler_register
+  ir_raw_handler_unregister
+  ir_raw_gen_pd
+  ir_raw_gen_manchester
+  hdmi_drm_infoframe_check
+||||||| BASE      (55682a6d9bccb8f323386351f763b065bee385e0 UPSTREAM: usb: typec: altmode/displayport: set displayport s)
+=======
+>>>>>>> BASE      (e02a464262919905751c5440bed84821618820ee ANDROID: GKI: update symbol list for allwinner)
