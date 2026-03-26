@@ -514,7 +514,7 @@ static void do_ffa_rxtx_map(struct arm_smccc_1_2_regs *res,
 	void *rx_virt, *tx_virt;
 	struct kvm_ffa_buffers *ffa_buf;
 
-	if (npages != (KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) / FFA_PAGE_SIZE) {
+	if (npages != (KVM_FFA_MBOX_NR_PAGES * FFA_PAGE_SIZE) / FFA_PAGE_SIZE) {
 		ret = FFA_RET_INVALID_PARAMETERS;
 		goto out;
 	}
@@ -620,7 +620,7 @@ static int do_ffa_rxtx_guest_map(struct kvm_cpu_context *ctxt, struct pkvm_hyp_v
 	u64 rx_va, tx_va;
 	struct kvm_ffa_buffers *ffa_buf;
 
-	if (npages != (KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) / FFA_PAGE_SIZE)
+	if (npages != (KVM_FFA_MBOX_NR_PAGES * FFA_PAGE_SIZE) / FFA_PAGE_SIZE)
 		return -EINVAL;
 
 	if (!PAGE_ALIGNED(tx) || !PAGE_ALIGNED(rx))
@@ -1586,7 +1586,7 @@ static int kvm_host_ffa_signal_availability(void)
 	 * Map our hypervisor buffers into the SPMD before mapping and
 	 * pinning the host buffers in our own address space.
 	 */
-	ret = ffa_map_hyp_buffers((KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) / FFA_PAGE_SIZE);
+	ret = ffa_map_hyp_buffers((KVM_FFA_MBOX_NR_PAGES * FFA_PAGE_SIZE) / FFA_PAGE_SIZE);
 	if (ret)
 		return ffa_to_linux_errno(ret);
 
