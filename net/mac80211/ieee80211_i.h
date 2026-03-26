@@ -999,7 +999,6 @@ struct ieee80211_if_nan {
 		spinlock_t func_lock;
 		struct idr function_inst_ids;
 	} de;
-
 	DECLARE_BITMAP(removed_channels, IEEE80211_NAN_MAX_CHANNELS);
 };
 
