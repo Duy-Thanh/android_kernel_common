@@ -16,6 +16,24 @@
       "message": "This is slightly different from what you had previously. Now we would reclaim one entire block even if the target is 1 page. Not a big deal though we can probably leave it like that.\n\nnit: that could be probably a single line, just like the check_sub_overflow()?",
       "revId": "a100467c8c75fb4d5ae934d61c6619f8a0542aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3650a031_b8830f5f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-26T17:48:03Z",
+      "side": 1,
+      "message": "As discussed offline, you need to check for negative target before applying the ALIGN_DOWN().\n\nOther than that, this is good to go I believe!",
+      "parentUuid": "d55a04f4_4288cbaf",
+      "revId": "a100467c8c75fb4d5ae934d61c6619f8a0542aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
