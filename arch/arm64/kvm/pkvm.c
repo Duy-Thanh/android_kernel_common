@@ -724,9 +724,18 @@ static void __init _kvm_host_prot_finalize(void *arg)
 		WRITE_ONCE(*err, -EINVAL);
 }
 
+extern DEFINE_PER_CPU(unsigned char, kvm_hyp_initialized);
+
 static int __init pkvm_drop_host_privileges(void)
 {
-	int ret = 0;
+	int i, ret = 0;
+
+	cpus_read_lock();
+	for_each_possible_cpu(i)
+		per_cpu(kvm_hyp_initialized, i) = 1;
+
+	kvm_call_hyp_nvhe(__pkvm_init_params_finalize);
+	cpus_read_unlock();
 
 	/*
 	 * Flip the static key upfront as that may no longer be possible
@@ -783,7 +792,7 @@ static int __init finalize_pkvm(void)
 	pkvm_host_stage2_drain();
 
 	ret = pkvm_drop_host_privileges();
-	if (ret) {
+	if (ret && ret != -EBUSY) {
 		pr_err("Failed to finalize Hyp protection: %d\n", ret);
 		BUG();
 	}

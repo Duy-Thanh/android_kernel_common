@@ -71,7 +71,7 @@ DECLARE_KVM_NVHE_PER_CPU(struct kvm_cpu_context, kvm_hyp_ctxt);
 
 static bool vgic_present, kvm_arm_initialised;
 
-static DEFINE_PER_CPU(unsigned char, kvm_hyp_initialized);
+DEFINE_PER_CPU(unsigned char, kvm_hyp_initialized);
 
 bool is_kvm_arm_initialised(void)
 {
@@ -2344,7 +2344,7 @@ static void __init init_cpu_logical_map(void)
 	 * against the finalized system capabilities. The hypervisor will not
 	 * allow any other CPUs from the `possible` set to boot.
 	 */
-	for_each_online_cpu(cpu)
+	for_each_possible_cpu(cpu)
 		hyp_cpu_logical_map[cpu] = cpu_logical_map(cpu);
 }
 
