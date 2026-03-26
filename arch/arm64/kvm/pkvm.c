@@ -760,11 +760,23 @@ static int __init pkvm_drop_host_privileges(void)
 	int ret = 0;
 
 	/*
+	 * Prevent races between this function and the CPU hotplug path for
+	 * kvm_hyp_vector and kvm_protected_mode_initialized.
+	 *
+	 * After this point, all new CPUs will get the HYP_VECTOR_INDIRECT
+	 * vector assigned.
+	 */
+	cpus_read_lock();
+	kvm_call_hyp_nvhe(__pkvm_init_params_finalize);
+
+	/*
 	 * Flip the static key upfront as that may no longer be possible
 	 * once the host stage 2 is installed.
 	 */
 	static_branch_enable(&kvm_protected_mode_initialized);
 	on_each_cpu(_kvm_host_prot_finalize, &ret, 1);
+	cpus_read_unlock();
+
 	return ret;
 }
 
