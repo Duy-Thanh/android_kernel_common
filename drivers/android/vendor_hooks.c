@@ -548,6 +548,15 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_proactive_compact_stop);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebalance_anon_lru_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_debug_show_areas);
+<<<<<<< HEAD   (62da97766d8a6deb76d5640cb16c7658ed566ce8 ANDROID: ABI: Update pixel symbol list)
+||||||| BASE   (45fd381b63362e2f867d34c03216e3950d117631 ANDROID: GKI: add vendor hooks for memory compaction and cma)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_release_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_end);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_release_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+>>>>>>> CHANGE (3ca2efd8266dad9ab54fef928926573eddae2b74 ANDROID: vendor_hooks: add vendor hook in cma_alloc())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_not_isolated);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_tune_ratelimit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_show_mem_bypass);
