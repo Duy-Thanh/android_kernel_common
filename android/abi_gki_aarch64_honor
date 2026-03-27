@@ -74,6 +74,10 @@
   __tracepoint_android_rvh_hw_protection_shutdown
   __traceiter_android_vh_set_tsk_need_resched_lazy
   __tracepoint_android_vh_set_tsk_need_resched_lazy
+  __traceiter_android_vh_prio_inheritance
+  __tracepoint_android_vh_prio_inheritance
+  __traceiter_android_vh_prio_restore
+  __tracepoint_android_vh_prio_restore
   __traceiter_rpm_idle
   __tracepoint_rpm_idle
   __traceiter_rpm_suspend
