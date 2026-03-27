@@ -10,7 +10,9 @@ static int loongarch_call__parse(struct arch *arch, struct ins_operands *ops, st
 {
 	char *c, *endptr, *tok, *name;
 	struct map *map = ms->map;
-	struct addr_map_symbol target;
+	struct addr_map_symbol target = {
+		.ms = { .map = map, },
+	};
 
 	c = strchr(ops->raw, '#');
 	if (c++ == NULL)
@@ -36,16 +38,12 @@ static int loongarch_call__parse(struct arch *arch, struct ins_operands *ops, st
 	if (ops->target.name == NULL)
 		return -1;
 
-	target = (struct addr_map_symbol) {
-		.ms = { .map = map__get(map), },
-		.addr = map__objdump_2mem(map, ops->target.addr),
-	};
+	target.addr = map__objdump_2mem(map, ops->target.addr);
 
 	if (maps__find_ams(ms->maps, &target) == 0 &&
 	    map__rip_2objdump(target.ms.map, map__map_ip(target.ms.map, target.addr)) == ops->target.addr)
 		ops->target.sym = target.ms.sym;
 
-	addr_map_symbol__exit(&target);
 	return 0;
 }
 
@@ -60,7 +58,7 @@ static int loongarch_jump__parse(struct arch *arch, struct ins_operands *ops, st
 	struct map *map = ms->map;
 	struct symbol *sym = ms->sym;
 	struct addr_map_symbol target = {
-		.ms = { .map = map__get(map), },
+		.ms = { .map = map, },
 	};
 	const char *c = strchr(ops->raw, '#');
 	u64 start, end;
@@ -92,7 +90,7 @@ static int loongarch_jump__parse(struct arch *arch, struct ins_operands *ops, st
 	} else {
 		ops->target.offset_avail = false;
 	}
-	addr_map_symbol__exit(&target);
+
 	return 0;
 }
 

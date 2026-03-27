@@ -111,7 +111,7 @@ bool dso__is_object_file(const struct dso *dso)
 
 int dso__read_binary_type_filename(const struct dso *dso,
 				   enum dso_binary_type type,
-				   const char *root_dir, char *filename, size_t size)
+				   char *root_dir, char *filename, size_t size)
 {
 	char build_id_hex[SBUILD_ID_SIZE];
 	int ret = 0;
@@ -563,15 +563,20 @@ char *dso__filename_with_chroot(const struct dso *dso, const char *filename)
 	return filename_with_chroot(nsinfo__pid(dso__nsinfo_const(dso)), filename);
 }
 
-static char *dso__get_filename(struct dso *dso, const char *root_dir,
-			       bool *decomp)
+static int __open_dso(struct dso *dso, struct machine *machine)
+	EXCLUSIVE_LOCKS_REQUIRED(_dso__data_open_lock)
 {
+	int fd = -EINVAL;
+	char *root_dir = (char *)"";
 	char *name = malloc(PATH_MAX);
+	bool decomp = false;
 
-	*decomp = false;
+	if (!name)
+		return -ENOMEM;
 
-	if (name == NULL)
-		return NULL;
+	mutex_lock(dso__lock(dso));
+	if (machine)
+		root_dir = machine->root_dir;
 
 	if (dso__read_binary_type_filename(dso, dso__binary_type(dso),
 					    root_dir, name, PATH_MAX))
@@ -596,38 +601,20 @@ static char *dso__get_filename(struct dso *dso, const char *root_dir,
 		size_t len = sizeof(newpath);
 
 		if (dso__decompress_kmodule_path(dso, name, newpath, len) < 0) {
-			errno = *dso__load_errno(dso);
+			fd = -(*dso__load_errno(dso));
 			goto out;
 		}
 
-		*decomp = true;
+		decomp = true;
 		strcpy(name, newpath);
 	}
-	return name;
 
-out:
-	free(name);
-	return NULL;
-}
-
-static int __open_dso(struct dso *dso, struct machine *machine)
-	EXCLUSIVE_LOCKS_REQUIRED(_dso__data_open_lock)
-{
-	int fd = -EINVAL;
-	char *name;
-	bool decomp = false;
-
-	mutex_lock(dso__lock(dso));
-
-	name = dso__get_filename(dso, machine ? machine->root_dir : "", &decomp);
-	if (name)
-		fd = do_open(name);
-	else
-		fd = -errno;
+	fd = do_open(name);
 
 	if (decomp)
 		unlink(name);
 
+out:
 	mutex_unlock(dso__lock(dso));
 	free(name);
 	return fd;
@@ -1922,24 +1909,4 @@ const u8 *dso__read_symbol(struct dso *dso, const char *symfs_filename,
 	}
 	return __dso__read_symbol(dso, symfs_filename, start, len,
 				  out_buf, out_buf_len, is_64bit);
-}
-
-struct debuginfo *dso__debuginfo(struct dso *dso)
-{
-	char *name;
-	bool decomp = false;
-	struct debuginfo *dinfo = NULL;
-
-	mutex_lock(dso__lock(dso));
-
-	name = dso__get_filename(dso, "", &decomp);
-	if (name)
-		dinfo = debuginfo__new(name);
-
-	if (decomp)
-		unlink(name);
-
-	mutex_unlock(dso__lock(dso));
-	free(name);
-	return dinfo;
 }

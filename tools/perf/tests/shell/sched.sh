@@ -53,7 +53,7 @@ start_noploops() {
 }
 
 cleanup_noploops() {
-  kill "$PID1" "$PID2" || true
+  kill "$PID1" "$PID2"
 }
 
 test_sched_record() {
