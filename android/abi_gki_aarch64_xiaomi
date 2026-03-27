@@ -613,3 +613,12 @@ inode_add_lru
 _trace_android_rvh_mapping_shrinkable
 prep_new_page
 folio_isolate_lru
+
+# low lat mem
+__tracepoint_android_vh_compact_bypass
+__traceiter_android_vh_compact_bypass
+__tracepoint_android_vh_cma_release_bypass
+__traceiter_android_vh_cma_release_bypass
+__tracepoint_android_vh_cma_alloc_end
+__traceiter_android_vh_cma_alloc_end
+
