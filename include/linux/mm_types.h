@@ -34,6 +34,9 @@
 struct address_space;
 struct futex_private_hash;
 struct mem_cgroup;
+#ifdef CONFIG_PTSHARE
+struct ptshare_desc;
+#endif
 
 typedef struct {
 	unsigned long f;
@@ -1158,6 +1161,9 @@ struct mm_struct {
 #ifdef CONFIG_MMU_NOTIFIER
 		struct mmu_notifier_subscriptions *notifier_subscriptions;
 #endif
+#ifdef CONFIG_PTSHARE
+		struct ptshare_desc __rcu *ptshare_desc;
+#endif
 #if defined(CONFIG_TRANSPARENT_HUGEPAGE) && !defined(CONFIG_SPLIT_PMD_PTLOCKS)
 		pgtable_t pmd_huge_pte; /* protected by page_table_lock */
 #endif
@@ -1848,6 +1854,11 @@ enum {
 
 #define MMF_TOPDOWN		31	/* mm searches top down by default */
 #define MMF_TOPDOWN_MASK	BIT(MMF_TOPDOWN)
+
+#ifdef CONFIG_PTSHARE
+#define MMF_PTSHARE_CREATOR	32
+#define MMF_PTSHARE_CREATOR_MASK BIT(MMF_PTSHARE_CREATOR)
+#endif
 
 #define MMF_INIT_LEGACY_MASK	(MMF_DUMPABLE_MASK | MMF_DUMP_FILTER_MASK |\
 				 MMF_DISABLE_THP_MASK | MMF_HAS_MDWE_MASK |\
