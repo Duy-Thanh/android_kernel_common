@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "244e3ea4_17250e26",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-28T00:04:17Z",
+      "side": 1,
+      "message": "nit: trace_android_vh_spec_promote_folio() seems more appropriate name. Unless you already have a similar hook in another kernel version...",
+      "range": {
+        "startLine": 488,
+        "startChar": 2,
+        "endLine": 488,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f010c740_746b63fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap.c",
+              "range": {
+                "startLine": 488,
+                "startChar": 0,
+                "endLine": 489,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3bc90f9d4099410a596ee41593e99a3925c751c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998fd3e8_6e37ba05",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5966,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-28T00:04:17Z",
+      "side": 1,
+      "message": "No, please do not reuse a bypass variable used in some other hook as well. It\u0027s confusing and error prone even though you seem to take care of that here by resetting bypass back to false. Please introduce and use a separate variable like `shrink_bypass`.",
+      "range": {
+        "startLine": 5966,
+        "startChar": 11,
+        "endLine": 5966,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "227890df_adbb705f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 5932,
+                "startChar": 0,
+                "endLine": 5933,
+                "endChar": 0
+              },
+              "replacement": "\tbool shrink_bypass \u003d false;\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 5960,
+                "startChar": 0,
+                "endLine": 5961,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_reclaim_before_kswapd(\u0026nr_reclaimed, \u0026shrink_bypass);\n\tif (shrink_bypass)\n\t\tgoto out;\n\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 5966,
+                "startChar": 0,
+                "endLine": 5969,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t nr, \u0026shrink_bypass);\n\tif (shrink_bypass)\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 5970,
+                "startChar": 0,
+                "endLine": 5971,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 6045,
+                "startChar": 0,
+                "endLine": 6047,
+                "endChar": 0
+              },
+              "replacement": "\tshrink_bypass \u003d false;\n\ttrace_android_vh_rebalance_anon_lru_bypass(\u0026shrink_bypass);\n\tif (shrink_bypass)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3bc90f9d4099410a596ee41593e99a3925c751c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
