@@ -70,6 +70,30 @@
       },
       "revId": "618be4e63200de316efdc71728c28ce24614bd70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30708cc_9a76a1e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2026-03-30T11:53:46Z",
+      "side": 1,
+      "message": "Sorry, I am not very familiar with this part of the Binder code, but based on my understanding, using only `trace_android_vh_binder_proc_transaction` does not seem sufficient.\n\nIn particular, `binder_transaction_priority()` can also be reached from `binder_thread_read()`, and that path does not appear to go through `binder_proc_transaction()` first. \n\nPlease correct me if my understanding is wrong.",
+      "parentUuid": "1f27dc3a_bc085bb5",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "618be4e63200de316efdc71728c28ce24614bd70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
