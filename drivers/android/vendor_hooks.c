@@ -741,5 +741,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_lat_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
+<<<<<<< HEAD   (407568a5ba1e781119d4b8e2b5e1c311c19e3c3f UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+||||||| BASE   (c9dd6d939a0d4c818436b4f27e08d48e330fc6c4 BACKPORT: UPSTREAM: f2fs: sysfs: introduce critical_task_pri)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
+>>>>>>> CHANGE (c499b641319a164ba65949500e41cf40739aee8e ANDROID: net: add vendor hook for reassembly timer adjustmen)
