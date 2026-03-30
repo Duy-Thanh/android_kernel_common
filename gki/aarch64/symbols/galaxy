@@ -127,6 +127,7 @@
   __traceiter_rss_stat
   __traceiter_vm_unmapped_area
   __traceiter_workqueue_execute_start
+  __traceiter_android_vh_reasm_timer_adjust
   __tracepoint_android_rvh_arm64_serror_panic
   __tracepoint_android_rvh_die_kernel_fault
   __tracepoint_android_rvh_do_el1_bti
@@ -205,6 +206,7 @@
   __tracepoint_rss_stat
   __tracepoint_vm_unmapped_area
   __tracepoint_workqueue_execute_start
+  __tracepoint_android_vh_reasm_timer_adjust
   unregister_console
   unregister_die_notifier
   unregister_restart_handler
