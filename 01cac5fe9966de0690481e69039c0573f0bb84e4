@@ -16,6 +16,24 @@
       "message": "Is this missing the patch it is supposed to go on top of?",
       "revId": "01cac5fe9966de0690481e69039c0573f0bb84e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2babb0d_4fcd6fe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-03-30T19:20:20Z",
+      "side": 1,
+      "message": "I found it. Please submit symbol updates on top of the change that introduces the symbols, not on their own.",
+      "parentUuid": "7cf9a7d2_b54df8f1",
+      "revId": "01cac5fe9966de0690481e69039c0573f0bb84e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
