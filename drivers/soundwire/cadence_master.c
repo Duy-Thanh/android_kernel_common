@@ -5,7 +5,7 @@
  * Cadence SoundWire Master module
  * Used by Master driver
  */
-
+#define DEBUG
 #include <linux/cleanup.h>
 #include <linux/crc8.h>
 #include <linux/delay.h>

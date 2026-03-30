@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: (GPL-2.0 OR BSD-3-Clause)
 // Copyright(c) 2015-17 Intel Corporation.
-
+#define DEBUG
 #include <linux/acpi.h>
 #include <linux/delay.h>
 #include <linux/mod_devicetable.h>
@@ -2025,6 +2025,8 @@ void sdw_clear_slave_status(struct sdw_bus *bus, u32 request)
 	struct sdw_slave *slave;
 	int i;
 
+	dev_dbg(bus->dev, "%s %d\n", __func__, request);
+
 	/* Check all non-zero devices */
 	for (i = 1; i <= SDW_MAX_DEVICES; i++) {
 		mutex_lock(&bus->bus_lock);
@@ -2046,6 +2048,8 @@ void sdw_clear_slave_status(struct sdw_bus *bus, u32 request)
 
 		/* keep track of request, used in pm_runtime resume */
 		slave->unattach_request = request;
+		dev_dbg(&slave->dev, "%s unattach_request=%d\n",
+			__func__, slave->unattach_request);
 	}
 }
 EXPORT_SYMBOL(sdw_clear_slave_status);

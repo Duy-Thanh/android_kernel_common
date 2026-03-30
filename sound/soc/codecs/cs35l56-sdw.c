@@ -373,9 +373,10 @@ static int cs35l56_sdw_update_status(struct sdw_slave *peripheral,
 
 	switch (status) {
 	case SDW_SLAVE_ATTACHED:
-		dev_dbg(cs35l56->base.dev, "%s: ATTACHED\n", __func__);
 		if (cs35l56->sdw_attached)
 			break;
+
+		dev_info(cs35l56->base.dev, "%s: ATTACHED\n", __func__);
 
 		if (!cs35l56->base.init_done || cs35l56->soft_resetting)
 			cs35l56_sdw_init(peripheral);
@@ -383,7 +384,7 @@ static int cs35l56_sdw_update_status(struct sdw_slave *peripheral,
 		cs35l56->sdw_attached = true;
 		break;
 	case SDW_SLAVE_UNATTACHED:
-		dev_dbg(cs35l56->base.dev, "%s: UNATTACHED\n", __func__);
+		dev_info(cs35l56->base.dev, "%s: UNATTACHED\n", __func__);
 		cs35l56->sdw_attached = false;
 		break;
 	default:
@@ -418,11 +419,53 @@ static int __maybe_unused cs35l56_sdw_handle_unattach(struct cs35l56_private *cs
 	struct sdw_slave *peripheral = cs35l56->sdw_peripheral;
 
 	if (peripheral->unattach_request) {
+		int saved_unattach_request = peripheral->unattach_request;
+
 		/* Cannot access registers until bus is re-initialized. */
 		dev_dbg(cs35l56->base.dev, "Wait for initialization_complete\n");
 		if (!wait_for_completion_timeout(&peripheral->initialization_complete,
 						 msecs_to_jiffies(5000))) {
 			dev_err(cs35l56->base.dev, "initialization_complete timed out\n");
+			dev_err(cs35l56->base.dev, "Host forced re-enumeration (%d) but did not signal re-enumeration complete\n",
+				saved_unattach_request);
+
+			sdw_show_ping_status(peripheral->bus, false);
+
+			dev_err(cs35l56->base.dev, ".status:%d our attached:%u unattach_request:%#x\n",
+				peripheral->status, !!cs35l56->sdw_attached, peripheral->unattach_request);
+
+			if (peripheral->unattach_request != saved_unattach_request) {
+				dev_err(cs35l56->base.dev, "unattach_request has changed unexpectedly: was %d now %d\n",
+					saved_unattach_request, peripheral->unattach_request);
+			}
+
+			if (cs35l56->sdw_attached)
+				dev_err(cs35l56->base.dev, "Host didn't report re-enumeration but last reported state was ATTACHED\n");
+
+			switch (peripheral->status) {
+			case SDW_SLAVE_ATTACHED:
+			case SDW_SLAVE_ALERT:
+				dev_err(cs35l56->base.dev, "Host didn't report re-enumeration but .status shows attached (%d)\n",
+					peripheral->status);
+				if (!cs35l56->sdw_attached) {
+					dev_err(cs35l56->base.dev, ".status shows attached (%d) but last reported status was UNATTACHED\n",
+						peripheral->status);
+				}
+				break;
+			case SDW_SLAVE_UNATTACHED:
+				if (cs35l56->sdw_attached) {
+					dev_err(cs35l56->base.dev, ".status shows UNATTACHED (%d) but last reported status was ATTACHED\n",
+						peripheral->status);
+				}
+				dev_err(cs35l56->base.dev, "Host didn't report re-enumeration and .status is UNATTACHED (%d)\n",
+					peripheral->status);
+				break;
+			default:
+				dev_err(cs35l56->base.dev, "Host didn't report re-enumeration and .status is illegal (%d)\n",
+					peripheral->status);
+				break;
+			}
+
 			return -ETIMEDOUT;
 		}
 
