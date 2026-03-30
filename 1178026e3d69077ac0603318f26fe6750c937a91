@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a7b2a2_3c0b6d4b",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-03-30T09:10:34Z",
+      "side": 1,
+      "message": "Sorry for being late here with review.\n\nI am not sure if it is safe to call it here. Few lines above there is a comment: L63-67:\n```\n\t * IMPORTANT: To avoid RSB underflow attacks and any other nastiness,\n\t * there must not be any returns or indirect branches between this code\n\t * and vmentry.\n ```\n and this patch actually introduces a `ret` instruction because of the `call pkvm_host_vmx_fixup` to a C function, which violates this rule and possibly  breaks the SPEC_CTRL handling.\n \nCould we actually move this `pkvm_host_vmx_fixup()` call to the end of `pkvm_host_vmexit_main()` (which is called just before SPEC_CTRL handling in L59) and leave this asm code intact?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 25
+      },
+      "revId": "1178026e3d69077ac0603318f26fe6750c937a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
