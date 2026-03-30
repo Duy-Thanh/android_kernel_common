@@ -58,6 +58,10 @@ SYM_FUNC_START(pkvm_host_vmexit_entry)
 	/* pKVM never enables interrupts */
 	call pkvm_host_vmexit_main
 
+	cmpb $1, PER_CPU_VAR(host_vcpu_fixup)
+	je .Lfixup
+
+.Lspec_ctrl:
 	ALTERNATIVE "jmp .Lspec_ctrl_done", "", X86_FEATURE_MSR_SPEC_CTRL
 
 	/*
@@ -79,10 +83,6 @@ SYM_FUNC_START(pkvm_host_vmexit_entry)
 	wrmsr
 
 .Lspec_ctrl_done:
-	cmpb $1, PER_CPU_VAR(host_vcpu_fixup)
-	je .Lfixup
-
-.Lresume:
 	/*
 	 * Restore registers to reflect the vm-exit handling/emulation result
 	 * before vmresume.
@@ -120,6 +120,6 @@ failed:
 .Lfixup:
 	mov WORD_SIZE*1(%_ASM_SP), %_ASM_DI
 	call pkvm_host_vmx_fixup
-	jmp .Lresume
+	jmp .Lspec_ctrl
 SYM_FUNC_END(pkvm_host_vmexit_entry)
 STACK_FRAME_NON_STANDARD(pkvm_host_vmexit_entry);
