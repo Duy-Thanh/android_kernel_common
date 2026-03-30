@@ -46,6 +46,30 @@
       },
       "revId": "1178026e3d69077ac0603318f26fe6750c937a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec015c0_66bfe68d",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-30T10:41:19Z",
+      "side": 1,
+      "message": "The fix is submitted at https://android-review.googlesource.com/c/kernel/common/+/4010120",
+      "parentUuid": "4005d6d8_cdde5f5a",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 25
+      },
+      "revId": "1178026e3d69077ac0603318f26fe6750c937a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
