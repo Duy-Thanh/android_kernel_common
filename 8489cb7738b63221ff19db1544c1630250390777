@@ -139,6 +139,24 @@
       "parentUuid": "02b3b281_05e915d9",
       "revId": "8489cb7738b63221ff19db1544c1630250390777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ccdabe_9d90f100",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-03-30T13:28:15Z",
+      "side": 1,
+      "message": "So I tried using a genquery to achieve this, but the scope limitation makes it kind of a circular problem (you need to manually provide the label list for the scope). I added a comment explaining this, with a manual query instead.",
+      "parentUuid": "5352d5f5_cf4e69e5",
+      "revId": "8489cb7738b63221ff19db1544c1630250390777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
