@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc0d347_7a5f08c5",
+        "filename": "arch/arm64/include/asm/assembler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-30T10:07:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be related to this patch?",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 26
+      },
+      "revId": "6c936a4cc0a3f671db66ab13583abe8d736b8b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
