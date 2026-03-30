@@ -416848,6 +416848,13 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9b4aa39e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x391289e8
+  parameter_id: 0x054f691a
+}
+function {
   id: 0x9b4ac008
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -445285,6 +445292,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_readahead_add_folio"
 }
 elf_symbol {
+  id: 0x946b8f48
+  name: "__traceiter_android_vh_reasm_timer_adjust"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x25613bc7
+  type_id: 0x9b4aa39e
+  full_name: "__traceiter_android_vh_reasm_timer_adjust"
+}
+elf_symbol {
   id: 0xb6218fbe
   name: "__traceiter_android_vh_rebalance_anon_lru_bypass"
   is_defined: true
@@ -453311,6 +453327,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_readahead_add_folio"
+}
+elf_symbol {
+  id: 0xfa5ac542
+  name: "__tracepoint_android_vh_reasm_timer_adjust"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_reasm_timer_adjust"
 }
 elf_symbol {
   id: 0x53ff9924
@@ -528454,6 +528479,7 @@ interface {
   symbol_id: 0xaa42bd9c
   symbol_id: 0xcf2bdce0
   symbol_id: 0x6fe03e45
+  symbol_id: 0x946b8f48
   symbol_id: 0xb6218fbe
   symbol_id: 0x7334b2d0
   symbol_id: 0x95816c0d
@@ -529346,6 +529372,7 @@ interface {
   symbol_id: 0xf0a69156
   symbol_id: 0x9cdcdb66
   symbol_id: 0xa0e3c9e3
+  symbol_id: 0xfa5ac542
   symbol_id: 0x53ff9924
   symbol_id: 0x1a12ee26
   symbol_id: 0xfeaae6bb
