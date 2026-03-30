@@ -22,6 +22,30 @@
       },
       "revId": "1178026e3d69077ac0603318f26fe6750c937a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4005d6d8_cdde5f5a",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-30T09:20:23Z",
+      "side": 1,
+      "message": "Thanks for caching this! I will prepare a patch to fix this.",
+      "parentUuid": "d8a7b2a2_3c0b6d4b",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 25
+      },
+      "revId": "1178026e3d69077ac0603318f26fe6750c937a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
