@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e42a8a_b7baa1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2038435
+      },
+      "writtenOn": "2026-03-30T02:19:22Z",
+      "side": 1,
+      "message": "I resolved the presubmit failure and would appreciate a fresh look at the changes.",
+      "revId": "b28f2b4c80880069c5efa1a3c32a16c77009191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
