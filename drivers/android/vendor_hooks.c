@@ -744,3 +744,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
