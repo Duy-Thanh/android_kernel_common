@@ -49,6 +49,7 @@
 #include <asm/processor.h>
 #include <asm/smp_plat.h>
 #include <asm/sections.h>
+#include <asm/stacktrace.h>
 #include <asm/tlbflush.h>
 #include <asm/ptrace.h>
 #include <asm/virt.h>
@@ -452,8 +453,15 @@ void __init smp_cpus_done(unsigned int max_cpus)
 
 static void __init set_boot_cpu_offset(void)
 {
-	asm volatile("msr tpidr_el1, %0"
-			:: "r" (per_cpu_offset(0)) : "memory");
+	u64 ovf_sp = (u64)overflow_stack + OVERFLOW_STACK_SIZE;
+
+	asm volatile(
+	"	msr	tpidr_el1, %1\n"
+	"	add	%0, %0, %1\n"
+	"	msr	sp_el0, %0" /* Update the overflow stack pointer */
+	: "+r" (ovf_sp)
+	: "r" (per_cpu_offset(0))
+	: "memory");
 }
 
 void __init smp_prepare_boot_cpu(void)
