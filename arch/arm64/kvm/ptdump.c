@@ -69,6 +69,11 @@ static const struct ptdump_prot_bits stage2_pte_bits[] = {
 		.val	= KVM_PGTABLE_PROT_SW1 | PTE_VALID,
 		.set	= "SW1",
 		.clear	= "   ",
+	}, {
+		.mask	= KVM_INVALID_PTE_MMIO_NOTE | PTE_VALID,
+		.val	= KVM_INVALID_PTE_MMIO_NOTE,
+		.set	= "MMIO-GUARD",
+		.clear	= "          ",
 	},
 };
 
@@ -349,6 +354,7 @@ static int pkvm_ptdump_show(struct seq_file *m, void *unused)
 	struct pkvm_ptdump_log *log = NULL;
 	struct pkvm_ptdump_log_hdr *it;
 	size_t num_pages;
+	u64 pte;
 
 	parser_state->seq = m;
 	parser_state->level = -1;
@@ -375,8 +381,11 @@ retry_dump:
 	for (;;) {
 		for (i = 0; i < it->w_index; i += sizeof(struct pkvm_ptdump_log)) {
 			log = (void *)it + sizeof(struct pkvm_ptdump_log_hdr) + i;
-			note_page(pt_st, ((unsigned long)log->pfn) << PAGE_SHIFT, log->level,
-				  pkvm_ptdump_unpack_pte(log));
+			pte = pkvm_ptdump_unpack_pte(log);
+			if (kvm)
+				pte |= FIELD_PREP(KVM_INVALID_PTE_MMIO_NOTE, log->mmio_guard);
+
+			note_page(pt_st, ((unsigned long)log->pfn) << PAGE_SHIFT, log->level, pte);
 		}
 
 		if (it->pfn_next == INVALID_PTDUMP_PFN)
