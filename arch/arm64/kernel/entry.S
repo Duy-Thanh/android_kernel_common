@@ -81,9 +81,9 @@
 	/* Stash the original SP (minus PT_REGS_SIZE) in tpidr_el0. */
 	msr	tpidr_el0, x0
 
-	/* Recover the original x0 value and stash it in tpidrro_el0 */
+	/* Recover the original x0 value and stash it in sp_el0 */
 	sub	x0, sp, x0
-	msr	tpidrro_el0, x0
+	msr	sp_el0, x0
 
 	/* Switch to the overflow stack */
 	adr_this_cpu sp, overflow_stack + OVERFLOW_STACK_SIZE, x0
@@ -99,7 +99,7 @@
 
 	/* We were already on the overflow stack. Restore sp/x0 and carry on. */
 	sub	sp, sp, x0
-	mrs	x0, tpidrro_el0
+	mrs	x0, sp_el0
 	b	el\el\ht\()_\regsize\()_\label
 	.endif
 .org .Lventry_start\@ + 128	// Did we overflow the ventry slot?
@@ -226,7 +226,7 @@ alternative_cb_end
 	clear_gp_regs
 	mrs	x21, sp_el0
 	ldr_this_cpu	tsk, __entry_task, x20
-	msr	sp_el0, tsk
+	msr	tpidrro_el0, tsk
 
 	/*
 	 * Ensure MDSCR_EL1.SS is clear, since we can unmask debug exceptions
@@ -554,7 +554,7 @@ SYM_CODE_START_LOCAL(__bad_stack)
 	 */
 
 	/* Restore the original x0 value */
-	mrs	x0, tpidrro_el0
+	mrs	x0, sp_el0
 
 	/*
 	 * Store the original GPRs to the new stack. The orginal SP (minus
@@ -849,7 +849,7 @@ SYM_FUNC_START(cpu_switch_to)
 	ldp	x29, x9, [x8], #16
 	ldr	lr, [x8]
 	mov	sp, x9
-	msr	sp_el0, x1
+	msr	tpidrro_el0, x1
 	ptrauth_keys_install_kernel x1, x8, x9, x10
 	scs_save x0
 	scs_load_current
@@ -1037,11 +1037,11 @@ SYM_CODE_START(__sdei_asm_handler)
 
 	/*
 	 * We may have interrupted userspace, or a guest, or exit-from or
-	 * return-to either of these. We can't trust sp_el0, restore it.
+	 * return-to either of these. We can't trust tpidrro_el0, restore it.
 	 */
-	mrs	x28, sp_el0
+	mrs	x28, tpidrro_el0
 	ldr_this_cpu	dst=x0, sym=__entry_task, tmp=x1
-	msr	sp_el0, x0
+	msr	tpidrro_el0, x0
 
 	/* If we interrupted the kernel point to the previous stack/frame. */
 	and     x0, x3, #0xc
@@ -1057,7 +1057,7 @@ SYM_CODE_START(__sdei_asm_handler)
 	mov	x1, x19
 	bl	__sdei_handler
 
-	msr	sp_el0, x28
+	msr	tpidrro_el0, x28
 	/* restore regs >x17 that we clobbered */
 	mov	x4, x19         // keep x4 for __sdei_asm_exit_trampoline
 	ldp	x28, x29, [x4, #SDEI_EVENT_INTREGS + 16 * 14]
