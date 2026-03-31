@@ -16,6 +16,24 @@
       "message": "Needs to be in alphabetical order (\u0027_\u0027 is before \u0027i\u0027 so this line should be below `android_vh_sk_free`)",
       "revId": "07be917a6fe4c1cebfa84d5d99abc13d92950c9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11da7d98_00ab7d23",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 4169916
+      },
+      "writtenOn": "2026-03-31T09:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e8703d1_40254e29",
+      "revId": "07be917a6fe4c1cebfa84d5d99abc13d92950c9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
