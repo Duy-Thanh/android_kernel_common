@@ -5330,6 +5330,26 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
 	} else if (advice == POSIX_FADV_WILLNEED && offset == 0) {
 		/* Load extent cache at the first readahead. */
 		f2fs_precache_extents(inode);
+	} else if (advice == POSIX_FADV_WILLNEED && offset == -1 && len == -1) {
+		mapping = filp->f_mapping;
+		// Set large folio if the following case is true:
+		if (mapping != NULL) {
+			if (!f2fs_compressed_file(inode) &&
+			    !f2fs_quota_file(inode) &&
+			    S_ISREG(inode->i_mode) &&
+			    !file_large_folio(inode) &&
+			    !(filp->f_mode & FMODE_WRITE)) {
+				file_set_large_folio(inode);
+				f2fs_mark_inode_dirty_sync(inode, true);
+			}
+		}
+		return 0;
+	} else if (advice == POSIX_FADV_NORMAL && offset == -1 && len == -1) {
+		if (S_ISREG(inode->i_mode) && file_large_folio(inode)) {
+			file_clear_large_folio(inode);
+			f2fs_mark_inode_dirty_sync(inode, true);
+		}
+		return 0;
 	}
 
 	err = generic_fadvise(filp, offset, len, advice);

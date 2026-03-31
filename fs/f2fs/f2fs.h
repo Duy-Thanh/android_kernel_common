@@ -813,6 +813,16 @@ enum {
 #define file_need_truncate(inode)	set_file(inode, FADVISE_TRUNC_BIT)
 #define file_dont_truncate(inode)	clear_file(inode, FADVISE_TRUNC_BIT)
 
+#define file_large_folio(inode) \
+	(S_ISREG(inode->i_mode) && \
+	 is_inode_flag_set(inode, FI_LARGE_FOLIO))
+
+#define file_set_large_folio(inode) \
+	set_inode_flag(inode, FI_LARGE_FOLIO)
+
+#define file_clear_large_folio(inode) \
+	clear_inode_flag(inode, FI_LARGE_FOLIO)
+
 #define DEF_DIR_LEVEL		0
 
 /* used for f2fs_inode_info->flags */
@@ -855,6 +865,7 @@ enum {
 	FI_ATOMIC_REPLACE,	/* indicate atomic replace */
 	FI_OPENED_FILE,		/* indicate file has been opened */
 	FI_DONATE_FINISHED,	/* indicate page donation of file has been finished */
+	FI_LARGE_FOLIO,		/* indicate file supports large folio reads */
 	FI_MAX,			/* max flag, never be used */
 };
 
@@ -3361,6 +3372,8 @@ static inline void get_inline_info(struct inode *inode, struct f2fs_inode *ri)
 		set_bit(FI_PIN_FILE, fi->flags);
 	if (ri->i_inline & F2FS_COMPRESS_RELEASED)
 		set_bit(FI_COMPRESS_RELEASED, fi->flags);
+	if (ri->i_inline & F2FS_LARGE_FOLIO)
+		set_bit(FI_LARGE_FOLIO, fi->flags);
 }
 
 static inline void set_raw_inline(struct inode *inode, struct f2fs_inode *ri)
@@ -3381,6 +3394,8 @@ static inline void set_raw_inline(struct inode *inode, struct f2fs_inode *ri)
 		ri->i_inline |= F2FS_PIN_FILE;
 	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED))
 		ri->i_inline |= F2FS_COMPRESS_RELEASED;
+	if (is_inode_flag_set(inode, FI_LARGE_FOLIO))
+		ri->i_inline |= F2FS_LARGE_FOLIO;
 }
 
 static inline int f2fs_has_extra_attr(struct inode *inode)

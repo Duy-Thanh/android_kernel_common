@@ -286,6 +286,8 @@ struct node_footer {
 #define F2FS_PIN_FILE		0x40	/* file should not be gced */
 #define F2FS_COMPRESS_RELEASED	0x80	/* file released compressed blocks */
 
+#define F2FS_LARGE_FOLIO	0x10 /* file supports large folio reads */
+
 struct f2fs_inode {
 	__le16 i_mode;			/* file mode */
 	__u8 i_advise;			/* file hints */
