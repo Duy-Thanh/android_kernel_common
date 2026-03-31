@@ -227,6 +227,8 @@ alternative_cb_end
 	mrs	x21, sp_el0
 	ldr_this_cpu	tsk, __entry_task, x20
 	msr	tpidrro_el0, tsk
+	adr_this_cpu	x19, overflow_stack + OVERFLOW_STACK_SIZE, x20
+	msr	sp_el0, x19
 
 	/*
 	 * Ensure MDSCR_EL1.SS is clear, since we can unmask debug exceptions
