@@ -10980,9 +10980,31 @@ __init static void enable_instances(void)
 		if (start || backup)
 			tr->flags |= TRACE_ARRAY_FL_BOOT | TRACE_ARRAY_FL_LAST_BOOT;
 
+		/*
+		 * Save the events to start and enabled them after all boot instances
+		 * have been created.
+		 */
+		tr->boot_events = curr_str;
+	}
+
+	/* Enable the events after all boot instances have been created */
+	list_for_each_entry(tr, &ftrace_trace_arrays, list) {
+
+		if (!tr->boot_events || !(*tr->boot_events)) {
+			tr->boot_events = NULL;
+			continue;
+		}
+
+		curr_str = tr->boot_events;
+
+		/* Clear the instance if this is a persistent buffer */
+		if (tr->flags & TRACE_ARRAY_FL_LAST_BOOT)
+			update_last_data(tr);
+
 		while ((tok = strsep(&curr_str, ","))) {
 			early_enable_events(tr, tok, true);
 		}
+		tr->boot_events = NULL;
 	}
 }
 
