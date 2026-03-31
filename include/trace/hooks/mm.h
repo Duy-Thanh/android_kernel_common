@@ -545,6 +545,20 @@ DECLARE_HOOK(android_vh_filemap_update_page,
 DECLARE_HOOK(android_vh_folio_end_writeback,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< PATCH SET (3c5b7f98c4b06cda1a615bc0b1add6a2d87763cf ANDROID: vendor_hooks: vmalloc alloc and mmap count)
+DECLARE_HOOK(android_vh_vmalloc_node_range_start,
+	TP_PROTO(unsigned long size),
+	TP_ARGS(size));
+DECLARE_HOOK(android_vh_vmalloc_node_range_end,
+	TP_PROTO(unsigned long size, const void *addr),
+	TP_ARGS(size, addr));
+DECLARE_HOOK(android_vh_do_mmap_map_count,
+	TP_PROTO(struct file *file, unsigned long addr,
+			unsigned long len, unsigned long prot,
+			unsigned long flags),
+	TP_ARGS(file, addr, len, prot, flags));
+||||||| BASE      (702185a02153105e701b2ba6f17ec5384cafb6d6 Revert "io_uring: ensure ctx->rings is stable for task work )
+=======
 DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
 	TP_PROTO(bool *skip),
 	TP_ARGS(skip));
@@ -553,6 +567,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_gup_longterm_locked,
 		unsigned long start, unsigned long nr_pages,
 		struct page **pages),
 	TP_ARGS(rc, nr_pinned_pages, start, nr_pages, pages), 5);
+>>>>>>> BASE      (cbbac88cfdec4a129ee6a8435363b5921bb75c15 ANDROID: qcom: Update the ABI symbol list)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
