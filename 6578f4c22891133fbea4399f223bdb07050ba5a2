@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07cc5680_3b655c04",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-31T16:27:46Z",
+      "side": 1,
+      "message": "Have you tried building the patch? I don\u0027t see forward declaration for the `struct cma`.",
+      "fixSuggestions": [
+        {
+          "fixId": "3f2a07aa_a5eba54f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "struct cma;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6578f4c22891133fbea4399f223bdb07050ba5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbc73fba_bc617e6d",
         "filename": "mm/compaction.c",
         "patchSetId": 6
