@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f4dadd_882c7aab",
+        "filename": "mm/cma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-31T16:30:29Z",
+      "side": 1,
+      "message": "You moved the hook placement compared to https://android-review.googlesource.com/c/kernel/common/+/3315011/4/mm/cma.c#431. Was that intentional?",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 486,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "364bb1ed_d04a229b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 483,
+                "startChar": 0,
+                "endLine": 488,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_cma_alloc_bypass(cma, count, align, gfp_mask,\n\t\t\t\t\u0026page, \u0026bypass);\n\tif (bypass)\n\t\treturn page;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1890a924b68ad9626f940296d11732978c83a943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
