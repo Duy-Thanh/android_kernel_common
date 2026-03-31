@@ -43,6 +43,15 @@ void pkvm_destroy_hyp_vm(struct kvm *kvm);
 void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa);
 
 /*
+ * Mask of iflags that the host is permitted to update for non-protected VMs.
+ * Crucially excludes DEBUG_STATE_SAVE_SPE and DEBUG_STATE_SAVE_TRBE to
+ * ensure EL2 remains in control of debug hardware state saving.
+ */
+#define PKVM_ALLOWED_HOST_IFLAGS                                           \
+	(unpack_vcpu_flag(PC_UPDATE_REQ) | unpack_vcpu_flag(DEBUG_DIRTY) | \
+	 unpack_vcpu_flag(PKVM_HOST_STATE_DIRTY))
+
+/*
  * Definitions for features to be allowed or restricted for guest virtual
  * machines, depending on the mode KVM is running in and on the type of guest
  * that is running.
