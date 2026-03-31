@@ -553,8 +553,9 @@ static void ssbs_thread_switch(struct task_struct *next)
 }
 
 /*
- * We store our current task in sp_el0, which is clobbered by userspace. Keep a
- * shadow copy so that we can restore this upon entry from userspace.
+ * We store our current task in tpidrro_el0, which is clobbered when returning
+ * to userspace. Keep a shadow copy so that we can restore this upon entry from
+ * userspace.
  *
  * This is *only* for exception entry from EL0, and is not valid until we
  * __switch_to() a user task.

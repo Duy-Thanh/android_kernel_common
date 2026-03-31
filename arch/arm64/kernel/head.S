@@ -193,7 +193,7 @@ SYM_CODE_END(preserve_boot_args)
 	 * for consistency with user tasks and kthreads.
 	 */
 	.macro	init_cpu_task tsk, tmp1, tmp2
-	msr	sp_el0, \tsk
+	msr	tpidrro_el0, \tsk
 
 	ldr	\tmp1, [\tsk, #TSK_STACK]
 	add	sp, \tmp1, #THREAD_SIZE
