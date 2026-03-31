@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2c880d_69735326",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2026-03-31T22:02:31Z",
+      "side": 1,
+      "message": "Do we want to create gki/x86/afdo/kernel.afdo instead? We probably can update them separately next time.",
+      "range": {
+        "startLine": 408,
+        "startChar": 34,
+        "endLine": 408,
+        "endChar": 41
+      },
+      "revId": "da433e5bbe5478c7c1aeb4e27ce2eeda60ccc53d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
