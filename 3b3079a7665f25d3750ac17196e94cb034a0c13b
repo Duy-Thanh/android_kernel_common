@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d444dc4b_2f83629a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-01T20:51:23Z",
+      "side": 1,
+      "message": "Looks like this hit the kabi merge window, so need to regenerate the abi.stg. I\u0027ll try to respin it",
+      "revId": "3b3079a7665f25d3750ac17196e94cb034a0c13b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
