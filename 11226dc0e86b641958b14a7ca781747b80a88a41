@@ -74,6 +74,30 @@
       },
       "revId": "11226dc0e86b641958b14a7ca781747b80a88a41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2266d1_593417a1",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2619,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-01T01:32:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20b71306_f81f03e6",
+      "range": {
+        "startLine": 2618,
+        "startChar": 1,
+        "endLine": 2619,
+        "endChar": 55
+      },
+      "revId": "11226dc0e86b641958b14a7ca781747b80a88a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
