@@ -45,6 +45,7 @@
 #include <linux/page_idle.h>
 #include <linux/page_size_compat.h>
 #include <linux/pgsize_migration.h>
+#include <linux/vma_readahead_boundary.h>
 #include <linux/migrate.h>
 #include <linux/pipe_fs_i.h>
 #include <linux/splice.h>
@@ -3332,7 +3333,8 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 	}
 #endif
 
-	ractl.max_index = vmf->vma->vm_pgoff + vma_data_pages(vmf->vma) - 1;
+	if (is_vma_readahead_boundary_enabled())
+		ractl.max_index = vmf->vma->vm_pgoff + vma_data_pages(vmf->vma) - 1;
 
 	/*
 	 * If we don't want any read-ahead, don't bother. VM_EXEC case below is
@@ -3392,7 +3394,9 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 		/*
 		 * mmap read-around
 		 */
-		ra->start = max_t(long, vmf->vma->vm_pgoff, vmf->pgoff - ra->ra_pages / 2);
+		ra->start = max_t(long, 0, vmf->pgoff - ra->ra_pages / 2);
+		if (is_vma_readahead_boundary_enabled())
+			ra->start = max_t(long, vmf->vma->vm_pgoff, ra->start);
 		ra->size = ra->ra_pages;
 		ra->async_size = ra->ra_pages / 4;
 		ra_mmap_miss->order = 0;
@@ -3446,7 +3450,8 @@ static struct file *do_async_mmap_readahead(struct vm_fault *vmf,
 	}
 
 	if (folio_test_readahead(folio)) {
-		ractl.max_index = vmf->vma->vm_pgoff + vma_data_pages(vmf->vma) - 1;
+		if (is_vma_readahead_boundary_enabled())
+			ractl.max_index = vmf->vma->vm_pgoff + vma_data_pages(vmf->vma) - 1;
 		fpin = maybe_unlock_mmap_for_io(vmf, fpin);
 		trace_android_vh_page_cache_readahead_start(file, vmf->pgoff,
 				ra->ra_pages, false);
