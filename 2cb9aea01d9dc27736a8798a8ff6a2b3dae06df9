@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbca4125_7330821e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-01T13:29:57Z",
+      "side": 1,
+      "message": "https://lore.kernel.org/linux-kselftest/20260319153825.2813576-1-dmaluka@chromium.org/ got approved and queued for 7.1-rc1: https://git.kernel.org/pub/scm/linux/kernel/git/shuah/linux-kselftest.git/commit/?h\u003dnext\u0026id\u003d9d2dbd3d59d8fb9cfd98bf857975fcd151fb3946",
+      "parentUuid": "6fd13dea_fa6d2f72",
+      "revId": "2cb9aea01d9dc27736a8798a8ff6a2b3dae06df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae47d059_a3f2bd6c",
