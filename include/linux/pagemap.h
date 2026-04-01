@@ -1350,6 +1350,7 @@ struct readahead_control {
 	bool dropbehind;
 	bool _workingset;
 	unsigned long _pflags;
+	unsigned long max_index; // limit readahead to i<=max_index
 	ANDROID_OEM_DATA(1);
 };
 
@@ -1359,6 +1360,7 @@ struct readahead_control {
 		.mapping = m,						\
 		.ra = r,						\
 		._index = i,						\
+		.max_index = ULONG_MAX,					\
 	}
 
 #define VM_READAHEAD_PAGES	(SZ_128K / PAGE_SIZE)
