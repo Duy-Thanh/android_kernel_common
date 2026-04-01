@@ -50,6 +50,30 @@
       ],
       "revId": "11226dc0e86b641958b14a7ca781747b80a88a41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b71306_f81f03e6",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2619,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-04-01T01:31:51Z",
+      "side": 1,
+      "message": "The `trace_mm_compaction_end` trace is upstream. We would have to upstream the functionality in `trace_android_vh_mm_compaction_begin`, which it is not upstreamable.\n\nhttps://elixir.bootlin.com/linux/v6.19.10/source/mm/compaction.c#L2742",
+      "parentUuid": "e1fd92bc_e79acd52",
+      "range": {
+        "startLine": 2618,
+        "startChar": 1,
+        "endLine": 2619,
+        "endChar": 55
+      },
+      "revId": "11226dc0e86b641958b14a7ca781747b80a88a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
