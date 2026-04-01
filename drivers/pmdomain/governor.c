@@ -361,6 +361,18 @@ static bool cpu_power_down_ok(struct dev_pm_domain *pd)
 	s64 cpu_constraint, global_constraint;
 	s64 idle_duration_ns;
 	int cpu, i;
+	int state;
+	bool done = false;
+
+	trace_android_vh_cpu_domain_power_down_ok(genpd, &state, &done);
+	if (done) {
+		if (state >= 0 && state < genpd->state_count) {
+			genpd->state_idx = state;
+			return true;
+		}
+
+		return false;
+	}
 
 	/* Validate dev PM QoS constraints. */
 	if (!_default_power_down_ok(pd, now))
