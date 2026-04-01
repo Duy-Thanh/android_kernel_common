@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d8ff2d3_decb375b",
+        "filename": "drivers/android/binder/rust_binder_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-01T22:09:14Z",
+      "side": 1,
+      "message": "Originally they were part of `rust_binder.ko`, which required a separate file. But now that we made this file part of vmlinux, we can move them.",
+      "parentUuid": "640799ee_915bb3d2",
+      "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "676dba23_ad3496e9",
         "filename": "drivers/android/binder/rust_binder_hooks.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-01T22:05:24Z",
       "side": 1,
       "message": "why aren\u0027t these defined under include/trace/hooks like all the others hooks? They are intentionally centralized so we can track our debt (all vendor hooks are technical debt)",
+      "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2667054_2181cd61",
+        "filename": "drivers/android/binder/rust_binder_hooks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-01T22:09:14Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t know about that. I can move them.",
+      "parentUuid": "676dba23_ad3496e9",
       "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
