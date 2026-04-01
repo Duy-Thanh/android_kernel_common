@@ -93,3 +93,7 @@ variable symbol changed from 'u64 vendor_data_pad[64]' to 'u64 vendor_data_pad[1
   type changed from 'u64[64]' to 'u64[128]'
     number of elements changed from 64 to 128
 
+type 'struct usb_device' changed
+  member 'union { unsigned int offload_at_suspend:1; struct { u64 __kabi_reserved1; }; union { }; }' was removed
+  member 'union { struct { unsigned int offload_at_suspend:1; unsigned int offload_pm_locked:1; }; struct { u64 __kabi_reserved1; }; union { }; }' was added
+
