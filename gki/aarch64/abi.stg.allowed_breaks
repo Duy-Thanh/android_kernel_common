@@ -146,3 +146,29 @@ variable symbol changed from 'u64 vendor_data_pad[128]' to 'u64 vendor_data_pad[
   type changed from 'u64[128]' to 'u64[160]'
     number of elements changed from 128 to 160
 
+type 'struct usb_device' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { unsigned int offload_pm_locked:1; struct { u64 __kabi_reserved3; }; union { }; }' was added
+
+function symbol 'struct usb_hcd* __usb_create_hcd(const struct hc_driver*, struct device*, struct device*, const char*, struct usb_hcd*)' changed
+
+function symbol 'int __usb_serial_register_drivers(struct usb_serial_driver* const*, struct module*, const char*, const struct usb_device_id*)' changed
+
+function symbol 'int cdc_ncm_bind_common(struct usbnet*, struct usb_interface*, u8, int)' changed
+
+type 'struct usb_device' changed
+  member changed from 'union { unsigned int offload_at_suspend:1; struct { u64 __kabi_reserved1; }; union { }; }' to 'union { unsigned int offload_at_suspend:1; unsigned int offload_pm_locked:1; struct { u64 __kabi_reserved1; }; union { }; }'
+    type changed from 'union { unsigned int offload_at_suspend:1; struct { u64 __kabi_reserved1; }; union { }; }' to 'union { unsigned int offload_at_suspend:1; unsigned int offload_pm_locked:1; struct { u64 __kabi_reserved1; }; union { }; }'
+      member 'unsigned int offload_pm_locked:1' was added
+
+function symbol 'struct usb_hcd* __usb_create_hcd(const struct hc_driver*, struct device*, struct device*, const char*, struct usb_hcd*)' changed
+  CRC changed from 0xdf997e67 to 0xbcd8cb67
+
+function symbol 'int __usb_serial_register_drivers(struct usb_serial_driver* const*, struct module*, const char*, const struct usb_device_id*)' changed
+  CRC changed from 0x3b363298 to 0x590214f5
+
+function symbol 'int cdc_ncm_bind_common(struct usbnet*, struct usb_interface*, u8, int)' changed
+  CRC changed from 0xe45451ca to 0x3cd5a8d9
+
+... 138 omitted; 141 symbols have only CRC changes
+
