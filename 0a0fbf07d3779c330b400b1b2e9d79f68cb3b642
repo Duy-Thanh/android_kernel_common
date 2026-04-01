@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82bc4db6_7ca4237b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-04-01T21:57:49Z",
+      "side": 1,
+      "message": "This is a fix in core kernel\u0027s management of ordered workqueues after we worked with the Xe maintainers to find that they can get permanently plugged during migration of workqueue pool workers across CPU cores.\n\nThe symptom is a full UI hang as the i915 worker responsible for display updates gets blocked on dependent work that is forever stuck in \"inactive\" state in an affected Xe-owned ordered workqueue.\n\nIt would be great to get this into ACK 6.18 in a timely manner to fix this high-impact issue, and any others that have not yet been diagnosed.",
+      "revId": "0a0fbf07d3779c330b400b1b2e9d79f68cb3b642",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
