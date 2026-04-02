@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45c825e_f267592a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-02T20:06:26Z",
+      "side": 1,
+      "message": "With https://r.android.com/4015286 landed, I think this can be abandoned.",
+      "revId": "53a54b7822c0bd35e43923adf31f56647f5d3cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
