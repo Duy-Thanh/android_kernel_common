@@ -2,8 +2,6 @@
 /*
  * Copyright (C) 2020 Collabora Ltd.
  */
-
-#include <linux/entry-common.h>
 #include <linux/sched.h>
 #include <linux/prctl.h>
 #include <linux/ptrace.h>
@@ -16,6 +14,8 @@
 #include <linux/sched/task_stack.h>
 
 #include <asm/syscall.h>
+
+#include "common.h"
 
 static void trigger_sigsys(struct pt_regs *regs)
 {
