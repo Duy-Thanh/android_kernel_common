@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dde1f73_d5dbef6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-02T08:13:56Z",
+      "side": 1,
+      "message": "Nice idea. I concur with the other review comments that suggest adding an explanatory comment.\n\nPlease remove the blank line after \"Bug: \" in the commit description.",
+      "revId": "da433e5bbe5478c7c1aeb4e27ce2eeda60ccc53d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d2c880d_69735326",
         "filename": "BUILD.bazel",
         "patchSetId": 4
