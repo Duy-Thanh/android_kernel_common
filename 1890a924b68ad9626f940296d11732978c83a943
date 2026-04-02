@@ -74,6 +74,30 @@
       },
       "revId": "1890a924b68ad9626f940296d11732978c83a943",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0bcdf89_fc1bf990",
+        "filename": "mm/cma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-02T16:06:00Z",
+      "side": 1,
+      "message": "I\u0027m slightly worried that some other partner might be using this hook to catch invalid inputs and that\u0027s why they might have the vendor hook before the checks. But I think it\u0027s unlikely, so let\u0027s keep it here but we aware that we might have to move it back to the original place later.",
+      "parentUuid": "83f72d73_b8b8441e",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 486,
+        "endChar": 13
+      },
+      "revId": "1890a924b68ad9626f940296d11732978c83a943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
