@@ -1344,8 +1344,15 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	if (fault & DMA_FSTS_ITE) {
 		head = dmar_readl(iommu, DMAR_IQH_REG);
 		head = ((head >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
+<<<<<<< HEAD   (1f87e6c38583e824dff350eaf1af6155a8733149 ANDROID: ABI: add symbols to xiaomi symbol list)
 		head |= 1;
 		tail = dmar_readl(iommu, DMAR_IQT_REG);
+||||||| BASE   (4aea1dc4cad17cd146072e13b1fd404f32b8b3ef Linux 6.18.19)
+		head |= 1;
+		tail = readl(iommu->reg + DMAR_IQT_REG);
+=======
+		tail = readl(iommu->reg + DMAR_IQT_REG);
+>>>>>>> BRANCH (dd26ea937ef593a9c47aa4c85296e6b57a5344a1 Linux 6.18.20)
 		tail = ((tail >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
 
 #ifndef __PKVM_HYP__
@@ -1363,7 +1370,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 		do {
 			if (qi->desc_status[head] == QI_IN_USE)
 				qi->desc_status[head] = QI_ABORT;
-			head = (head - 2 + QI_LENGTH) % QI_LENGTH;
+			head = (head - 1 + QI_LENGTH) % QI_LENGTH;
 		} while (head != tail);
 
 #ifndef __PKVM_HYP__
