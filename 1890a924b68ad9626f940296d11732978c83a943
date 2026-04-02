@@ -50,6 +50,30 @@
       ],
       "revId": "1890a924b68ad9626f940296d11732978c83a943",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f72d73_b8b8441e",
+        "filename": "mm/cma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-04-02T08:57:03Z",
+      "side": 1,
+      "message": "Yes, I intentionally moved the hook to after the `if (!cma || !cma-\u003ecount || !cma-\u003ebitmap)` check.\nIn the previous version, the hook was placed before this validity check, which meant vendor callbacks could receive a NULL cma pointer or a CMA area with no bitmap/count.\nThat was unsafe if the vendor module dereferenced cma (e.g., to check cma-\u003ename to identify the CMA region).\nMoving it after the validity check ensures the vendor hook always receives a valid, usable CMA area.",
+      "parentUuid": "26f4dadd_882c7aab",
+      "range": {
+        "startLine": 483,
+        "startChar": 1,
+        "endLine": 486,
+        "endChar": 13
+      },
+      "revId": "1890a924b68ad9626f940296d11732978c83a943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
