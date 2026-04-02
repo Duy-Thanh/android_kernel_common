@@ -142,14 +142,19 @@ static inline struct page_ext *page_ext_iter_begin(struct page_ext_iter *iter,
  *
  * Return: NULL if no next page_ext exists.
  */
-static inline struct page_ext *page_ext_iter_next(struct page_ext_iter *iter)
+static inline struct page_ext *page_ext_iter_next(struct page_ext_iter *iter,
+						unsigned long nr_pages)
 {
 	unsigned long pfn;
 
 	if (WARN_ON_ONCE(!iter->page_ext))
 		return NULL;
 
-	iter->index++;
+	if (++iter->index >= nr_pages) {
+		iter->page_ext = NULL;
+		return NULL;
+	}
+
 	pfn = iter->start_pfn + iter->index;
 
 	if (page_ext_iter_next_fast_possible(pfn))
@@ -184,7 +189,7 @@ static inline struct page_ext *page_ext_iter_get(const struct page_ext_iter *ite
 #define for_each_page_ext(__page, __pgcount, __page_ext, __iter) \
 	for (__page_ext = page_ext_iter_begin(&__iter, page_to_pfn(__page));\
 		__page_ext && __iter.index < __pgcount;          \
-		__page_ext = page_ext_iter_next(&__iter))
+		__page_ext = page_ext_iter_next(&__iter, __pgcount))
 
 #else /* !CONFIG_PAGE_EXTENSION */
 struct page_ext;
