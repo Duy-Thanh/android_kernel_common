@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7102de23_8179a4af",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-04-02T06:41:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07cc5680_3b655c04",
+      "revId": "6578f4c22891133fbea4399f223bdb07050ba5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbc73fba_bc617e6d",
@@ -49,6 +67,30 @@
       "writtenOn": "2026-03-31T16:23:44Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Trailing Whitespace: Please remove the trailing whitespace.\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 2263,
+        "startChar": 0,
+        "endLine": 2263,
+        "endChar": 2
+      },
+      "revId": "6578f4c22891133fbea4399f223bdb07050ba5a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1629ac15_f1961558",
+        "filename": "mm/compaction.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2263,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-04-02T06:41:35Z",
+      "side": 1,
+      "message": "This issue was already identified in Patch Set 6 and fixed in Patch Set 7.",
+      "parentUuid": "fbc73fba_bc617e6d",
       "range": {
         "startLine": 2263,
         "startChar": 0,
