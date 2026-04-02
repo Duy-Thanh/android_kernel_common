@@ -51634,6 +51634,11 @@ member {
   type_id: 0x724a30dd
 }
 member {
+  id: 0x3f5e16b9
+  type_id: 0x72562438
+  offset: 12544
+}
+member {
   id: 0x3f60dd39
   type_id: 0x72ad065b
   offset: 256
@@ -57461,12 +57466,6 @@ member {
   name: "__kabi_reserved3"
   type_id: 0x92233392
   offset: 5248
-}
-member {
-  id: 0xf0d6517f
-  name: "__kabi_reserved3"
-  type_id: 0x92233392
-  offset: 12544
 }
 member {
   id: 0xf0d6524b
@@ -179306,6 +179305,12 @@ member {
   offset: 128
 }
 member {
+  id: 0x92990c79
+  name: "offload_pm_locked"
+  type_id: 0x4585663f
+  bitsize: 1
+}
+member {
   id: 0xdfe00828
   name: "offload_requested"
   type_id: 0x62aebfd4
@@ -275345,6 +275350,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x72562438
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x92990c79
+    member_id: 0x2adde81e
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x726a0350
   kind: UNION
   definition {
@@ -345877,7 +345892,7 @@ struct_union {
     member_id: 0x0e98d4e4
     member_id: 0x39d59b29
     member_id: 0x32fdcbdd
-    member_id: 0xf0d6517f
+    member_id: 0x3f5e16b9
     member_id: 0x04993e52
   }
 }
