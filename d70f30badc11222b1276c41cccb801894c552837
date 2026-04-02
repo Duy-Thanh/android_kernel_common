@@ -16,6 +16,24 @@
       "message": "Does this error always apply? the case of -ENODEV it doesn\u0027t, in which case it could be confusing.",
       "revId": "d70f30badc11222b1276c41cccb801894c552837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb23c558_c3c45e13",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-04-02T09:15:54Z",
+      "side": 1,
+      "message": "also, i don\u0027t think it\u0027s good practice to use kvm_err for things that userspace can trigger.",
+      "parentUuid": "d09e5474_801d0bab",
+      "revId": "d70f30badc11222b1276c41cccb801894c552837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
