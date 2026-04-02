@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bacbc0_5e7f3c6b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T22:29:08Z",
+      "side": 1,
+      "message": "In almost all current uses of `for_each_pkvm_guest_vcpu`, except the ones in trace.c, we need struct kvm_vcpu (pkvm_vcpu-\u003evcpu) rather than struct pkvm_vcpu itself, so as a result, we need a bit more boilerplate code to use it. So it seems  it would be better if `for_each_pkvm_guest_vcpu` itself provided struct pkvm_vcpu-\u003evcpu instead (and trace.c would use `to_pkvm_vcpu()` with it)?",
+      "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0955de2_1de2a4bb",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T22:29:08Z",
+      "side": 1,
+      "message": "very nit: maybe s/1/true/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "17e1639e_96cbf279",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.h",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": "\t\t      ({ (vcpu) \u003d (vm)-\u003evcpus[(i)]; true; }); (i)++)\t\\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
