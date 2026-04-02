@@ -134,6 +134,13 @@ type 'struct bindings::bindings_raw::files_struct' changed
     type changed from 'u32[8]' to 'u32[6]'
       number of elements changed from 8 to 6
 
+<<<<<<< PATCH SET (ca2fb4812c22513ee835aa2c87cbe8f0864fd0f2 BACKPORT: FROMGIT: usb: core: use dedicated spinlock for off)
+type 'struct usb_device' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { unsigned int offload_pm_locked:1; struct { u64 __kabi_reserved3; }; union { }; }' was added
+
+||||||| BASE      (e34608848261e223c3b3701e713e84f39e45a66a FROMGIT: dt-bindings: connector: Add sink properties to comp)
+=======
 type 'struct rb_thread_layout' changed
   member 'u64 __kabi_reserved_backport0' was removed
   member 'union { size_t task; struct { u64 __kabi_reserved_backport0; }; union { }; }' was added
@@ -141,3 +148,4 @@ type 'struct rb_thread_layout' changed
 type 'struct pkvm_module_ops' changed
   member 'u64 __kabi_reserved5' was removed
   member 'union { int(* device_register_power_lock)(u64, void*, int(*)(void*, bool)); struct { u64 __kabi_reserved5; }; union { }; }' was added
+>>>>>>> BASE      (3028163b91686becbf850f5d60059fd21477e536 UPSTREAM: scsi: ufs: core: Rework ufshcd_mcq_compl_pending_t)
