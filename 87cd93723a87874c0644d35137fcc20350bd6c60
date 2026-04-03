@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb48a0af_9d324575",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-03T00:36:21Z",
+      "side": 1,
+      "message": "Presubmits fail because `struct cma` forward declaration is missing here. Please fix.",
+      "fixSuggestions": [
+        {
+          "fixId": "01fe0a79_0840d229",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "struct cma;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "87cd93723a87874c0644d35137fcc20350bd6c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
