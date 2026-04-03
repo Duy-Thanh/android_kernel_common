@@ -4656,7 +4656,7 @@ static int bpf_prog_detach(const union bpf_attr *attr)
 #define BPF_PROG_QUERY_LAST_FIELD query.revision
 
 static int bpf_prog_query(const union bpf_attr *attr,
-			  union bpf_attr __user *uattr)
+			  union bpf_attr __user *uattr, u32 uattr_size)
 {
 	if (!bpf_net_capable())
 		return -EPERM;
@@ -4695,23 +4695,23 @@ static int bpf_prog_query(const union bpf_attr *attr,
 	case BPF_CGROUP_GETSOCKOPT:
 	case BPF_CGROUP_SETSOCKOPT:
 	case BPF_LSM_CGROUP:
-		return cgroup_bpf_prog_query(attr, uattr);
+		return cgroup_bpf_prog_query(attr, uattr, uattr_size);
 	case BPF_LIRC_MODE2:
-		return lirc_prog_query(attr, uattr);
+		return lirc_prog_query(attr, uattr, uattr_size);
 	case BPF_FLOW_DISSECTOR:
 	case BPF_SK_LOOKUP:
-		return netns_bpf_prog_query(attr, uattr);
+		return netns_bpf_prog_query(attr, uattr, uattr_size);
 	case BPF_SK_SKB_STREAM_PARSER:
 	case BPF_SK_SKB_STREAM_VERDICT:
 	case BPF_SK_MSG_VERDICT:
 	case BPF_SK_SKB_VERDICT:
-		return sock_map_bpf_prog_query(attr, uattr);
+		return sock_map_bpf_prog_query(attr, uattr, uattr_size);
 	case BPF_TCX_INGRESS:
 	case BPF_TCX_EGRESS:
-		return tcx_prog_query(attr, uattr);
+		return tcx_prog_query(attr, uattr, uattr_size);
 	case BPF_NETKIT_PRIMARY:
 	case BPF_NETKIT_PEER:
-		return netkit_prog_query(attr, uattr);
+		return netkit_prog_query(attr, uattr, uattr_size);
 	default:
 		return -EINVAL;
 	}
@@ -6290,9 +6290,15 @@ static int __sys_bpf(enum bpf_cmd cmd, bpfptr_t uattr, unsigned int size)
 		err = bpf_prog_detach(&attr);
 		break;
 	case BPF_PROG_QUERY:
+<<<<<<< PATCH SET (82eca30afecc5f0f3ffe38ef300f213be0b5b615 ANDROID: bpf: fix 6.17+ oob write)
+		err = bpf_prog_query(&attr, uattr.user, size);
+||||||| BASE      (d271c243392d4c8cd868ac5c23a440971e14201f Merge tag 'v7.1' into android-mainline)
+		err = bpf_prog_query(&attr, uattr.user);
+=======
 		if (size < offsetofend(union bpf_attr, query.prog_cnt))
 			return -EINVAL;
 		err = bpf_prog_query(&attr, uattr.user);
+>>>>>>> BASE      (8a66e2bdde7eb26d44b197c4ad34b7bc4d8bec99 Revert "ANDROID: dm-bow: Fix Race Condition in dm_bow_tables)
 		break;
 	case BPF_PROG_TEST_RUN:
 		if (size < offsetofend(union bpf_attr, test.duration))
@@ -6426,7 +6432,7 @@ static bool syscall_prog_is_valid_access(int off, int size,
 	return true;
 }
 
-BPF_CALL_3(bpf_sys_bpf, int, cmd, union bpf_attr *, attr, u32, attr_size)
+BPF_CALL_3(bpf_sys_bpf, int, cmd, union bpf_attr *, attr, u32, uattr_size)
 {
 	switch (cmd) {
 	case BPF_MAP_CREATE:
@@ -6442,7 +6448,7 @@ BPF_CALL_3(bpf_sys_bpf, int, cmd, union bpf_attr *, attr, u32, attr_size)
 	default:
 		return -EINVAL;
 	}
-	return __sys_bpf(cmd, KERNEL_BPFPTR(attr), attr_size);
+	return __sys_bpf(cmd, KERNEL_BPFPTR(attr), uattr_size);
 }
 
 
