@@ -16,6 +16,24 @@
       "message": "This breaks x86 builds since the x86 version of gki_defconfig does not enable this module. If this is not needed for x86, move this to the _ARM64_GKI_MODULES_LIST",
       "revId": "1aa9bf9891ad044772af1c3c1f36a2a42e3176c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3aca74b_aa87dc73",
+        "filename": "bazel/modules_private.bzl",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4464660
+      },
+      "writtenOn": "2026-04-03T06:41:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3ac3c4c3_77ef87ce",
+      "revId": "1aa9bf9891ad044772af1c3c1f36a2a42e3176c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
