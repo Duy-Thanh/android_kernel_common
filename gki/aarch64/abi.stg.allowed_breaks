@@ -1,1 +1,16 @@
 # See http://go/approve-abi-break
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0xd724705f to 0x7e52b7b5
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0x6b3ff9aa to 0xb21f527c
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0x9958f290 to 0x7041d874
+
+... 3322 omitted; 3325 symbols have only CRC changes
+
+type 'struct pglist_data' changed
+  member 'u64 android_oem_data1' was added
+
