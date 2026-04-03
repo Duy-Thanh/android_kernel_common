@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09793d3b_3012b8da",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T03:24:37Z",
+      "side": 1,
+      "message": "We can do that. The input will be `struct kvm_vcpu *` and `struct pkvm_vm *`. The macro will be as below:\n```\n  #define for_each_pkvm_guest_vcpu(i, vcpu, vm)                                                   \\\n          for ((i) \u003d 0; (i) \u003c (vm)-\u003ekvm.created_vcpus \u0026\u0026                                          \\\n                        ({ (vcpu) \u003d (vm)-\u003evcpus[(i)] ?                                            \\\n                                    \u0026(vm)-\u003evcpus[(i)]-\u003evcpu : NULL; true; }); (i)++)              \\\n                  if (!(vcpu))                                                                    \\\n                          continue;                                                               \\\n                  else\n```",
+      "parentUuid": "f3bacbc0_5e7f3c6b",
+      "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0955de2_1de2a4bb",
         "filename": "arch/x86/kvm/pkvm/pkvm.h",
         "patchSetId": 1
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f580e06d_84759cac",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T03:24:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0955de2_1de2a4bb",
       "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
