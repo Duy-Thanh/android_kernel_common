@@ -38,6 +38,10 @@
 #include <linux/wrapfd.h>
 #include "../../kselftest_harness.h"
 
+static inline size_t round_up_unchecked(size_t size, size_t page_size) {
+	return (size + page_size - 1) / page_size * page_size;
+}
+
 /* ioctl wrappers */
 static inline int wrapfd_wrap(int dev_fd, int fd, int prot)
 {
@@ -156,9 +160,11 @@ FIXTURE_SETUP(wrapfd_tests)
 	self->dev_fd = open("/dev/wrapfd", O_RDONLY);
 	ASSERT_TRUE(self->dev_fd >= 0);
 
+	size_t file_size = round_up_unchecked(self->size, self->page_size);
+
 	/* Prepare random content buffer */
-	self->content = malloc(self->size);
-	generate_file_content(self->content, self->size);
+	self->content = malloc(file_size);
+	generate_file_content(self->content, file_size);
 
 	/* Prepare temporary file with the same content */
 	ftmp = tmpfile();
@@ -169,10 +175,10 @@ FIXTURE_SETUP(wrapfd_tests)
 	total_wr = 0;
 	do {
 		ssize_t wr = write(self->fd, self->content + total_wr,
-				   self->size - total_wr);
+				   file_size - total_wr);
 		ASSERT_TRUE(wr >= 0);
 		total_wr += wr;
-	} while (total_wr < self->size);
+	} while (total_wr < file_size);
 }
 
 FIXTURE_TEARDOWN(wrapfd_tests)
