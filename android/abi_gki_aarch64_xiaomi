@@ -583,6 +583,7 @@ __tracepoint_android_vh_pcp_alloc_factor_adjust
 #required by os-cpu
 __tracepoint_android_vh_futex_wait_queue_start
 __traceiter_android_vh_futex_wait_queue_start
+<<<<<<< HEAD   (3a6810f3b0f610725dd1333079043933ea59f664 ANDROID: GKI: Update symbol list for xiaomi)
 __traceiter_android_vh_fuse_request_send_ext
 __tracepoint_android_vh_fuse_request_send_ext
 __traceiter_android_vh_fuse_request_end_ext
@@ -616,3 +617,16 @@ __tracepoint_android_vh_folio_end_writeback
 __traceiter_android_vh_folio_end_writeback
 __tracepoint_android_vh_folio_start_writeback
 __traceiter_android_vh_folio_start_writeback
+||||||| BASE   (4f1f979150373fa68237e802192af0b3cbeab52d ANDROID: GKI: add vendor hooks for memory compaction and cma)
+=======
+
+# low lat mem
+__tracepoint_android_vh_compact_bypass
+__traceiter_android_vh_compact_bypass
+__tracepoint_android_vh_cma_release_bypass
+__traceiter_android_vh_cma_release_bypass
+__tracepoint_android_vh_cma_alloc_end
+__traceiter_android_vh_cma_alloc_end
+
+
+>>>>>>> CHANGE (9ab204675a62a5bf07d617692575a1ea2a60ab1a ANDROID: GKI: update symbol list file for xiaomi)
