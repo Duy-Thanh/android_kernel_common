@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb1b126_4d925c73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-03T13:02:12Z",
+      "side": 1,
+      "message": "What about `android17` first?  You don\u0027t want to upgrade and have a regression.\n\nAlso, the abi issues here need to be resolved a bit better.",
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0852669c_3a540609",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-03T13:02:12Z",
+      "side": 1,
+      "message": "careful, are you sure you can do this?",
+      "range": {
+        "startLine": 757,
+        "startChar": 0,
+        "endLine": 757,
+        "endChar": 51
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0aa869f_b666b735",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-03T13:02:12Z",
+      "side": 1,
+      "message": "I don\u0027t think this fits into this structure.",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 46
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
