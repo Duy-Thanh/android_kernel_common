@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "415146a3_f9b3d37c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-03T11:25:52Z",
+      "side": 1,
+      "message": "Yep, that\u0027s what I had in mind.\n\nAlthought it might feel a bit \"asymmetric\" if the `vcpu` argument is of the generic struct kvm_vcpu type while the `vm` argument is of the pKVM-specific struct pkvm_vm type, but I guess that\u0027s ok.",
+      "parentUuid": "09793d3b_3012b8da",
+      "revId": "0e2ab888d7855660a8d0ae9e5d97a580cf845694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0955de2_1de2a4bb",
         "filename": "arch/x86/kvm/pkvm/pkvm.h",
         "patchSetId": 1

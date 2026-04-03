@@ -16,6 +16,24 @@
       "message": "There is a WARN_ON_ONCE if `pkvm_vcpu \u003d\u003d NULL`, with using this new macro, this WARN_ON_ONCE is gone. Just wondering if we should keep this WARN_ON_ONCE, to warn flushing guest tlb during guest is tearing down? If yes, probably I can leave this as it was.",
       "revId": "39840fc852a6c638680e44e91c12e588a949d6a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e81ce4e_8cd12fd4",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-03T11:25:52Z",
+      "side": 0,
+      "message": "My feeling is that this WARN_ON_ONCE is not so essential, it\u0027s ok to sacrifice it for code simplicity and readability.\n\nBTW if in all cases we wouldn\u0027t expect it to ever be NULL, we could just use this WARN_ON_ONCE inside the implementation of `for_each_pkvm_guest_vcpu`. But looks like at least in trace.c it may be NULL (since trace dump may be requested at any time, including a time when vCPUs are being detached).",
+      "parentUuid": "ab427649_5543f582",
+      "revId": "39840fc852a6c638680e44e91c12e588a949d6a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
