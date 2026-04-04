@@ -528,16 +528,25 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		pkvm_err("iommu%d: Setting IRTA is not supported!\n", iommu->seq_id);
 		ret = -EPERM;
 		break;
+	case DMAR_PERFINTRADDR_REG:
+		/* RsvdZ if PMU is not supported */
+		if (!ecap_pms(iommu->ecap) && val) {
+			ret = -EINVAL;
+			break;
+		}
+		fallthrough;
 	case DMAR_FEADDR_REG:
 		/*
-		 * FEADDR holds the MSI destination address for fault events.
+		 * FEADDR/PERFINTRADDR holds the MSI destination address.
 		 * The IOMMU writes to this address when a fault occurs, bypassing
 		 * DMA remapping. Ensure it targets only the x86 MSI address range
 		 * (0xFEE00000) to prevent writes to protected memory.
 		 */
 		if ((val & X86_MSI_ADDR_MASK) != X86_MSI_ADDR_BASE) {
-			pkvm_err("iommu%d: FEADDR 0x%llx not in MSI address range\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx not in MSI address range\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEADDR_REG ? "FEADDR" : "PERFINTRADDR",
+				 val);
 			ret = -EINVAL;
 		} else if (!!(val & X86_MSI_ADDR_DEST_MODE_LOGICAL) !=
 			   pkvm_msi_dest_mode_logical) {
@@ -545,60 +554,103 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 				 iommu->seq_id, val);
 			ret = -EINVAL;
 		} else {
-			iommu->staged_feaddr = val;
+			u32 *staged_addr = offset == DMAR_FEADDR_REG ?
+					   &iommu->staged_feaddr :
+					   &iommu->staged_perfintraddr;
+
+			*staged_addr = val;
 		}
 		break;
+	case DMAR_PERFINTRUADDR_REG:
+		/* RsvdZ if PMU is not supported */
+		if (!ecap_pms(iommu->ecap) && val) {
+			ret = -EINVAL;
+			break;
+		}
+		fallthrough;
 	case DMAR_FEUADDR_REG:
 		/*
-		 * FEUADDR holds the upper 32 bits of the MSI address.
+		 * PERFINTRUADDR/FEUADDR holds the upper 32 bits of the MSI address.
 		 *
 		 * In x2APIC mode(required by pKVM), the IOMMU places MSI
-		 * destination ID bits [31:8] in FEUADDR bits [31:8]; bits
-		 * [7:0] are reserved and must be zero.
+		 * destination ID bits [31:8] in bits [31:8]; bits [7:0] are
+		 * reserved and must be zero.
 		 */
 		if (val & 0xFF) {
-			pkvm_err("iommu%d: FEUADDR 0x%llx has reserved bits set\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx has reserved bits set\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEUADDR_REG ? "FEUADDR" : "PERFINTRUADDR",
+				 val);
 			ret = -EINVAL;
 		} else {
-			if (!iommu->staged_feaddr) {
-				pkvm_err("iommu%d: FEUADDR write without staged FEADDR\n",
-					 iommu->seq_id);
+			u32 *staged_addr = offset == DMAR_FEUADDR_REG ?
+					   &iommu->staged_feaddr :
+					   &iommu->staged_perfintraddr;
+			u32 addr_reg = offset == DMAR_FEUADDR_REG ?
+				       DMAR_FEADDR_REG : DMAR_PERFINTRADDR_REG;
+			const char *addr_name = offset == DMAR_FEUADDR_REG ?
+						"FEADDR" : "PERFINTRADDR";
+			const char *name = offset == DMAR_FEUADDR_REG ?
+					   "fault event" : "perf monitoring";
+
+			if (!*staged_addr) {
+				pkvm_err("iommu%d: %s write without staged %s\n",
+					 iommu->seq_id,
+					 offset == DMAR_FEUADDR_REG ? "FEUADDR" : "PERFINTRUADDR",
+					 addr_name);
 				ret = -EINVAL;
 			} else {
-				ret = iommu_validate_msi_dest_id(iommu,
-								 iommu->staged_feaddr,
-								 val, "fault event");
+				ret = iommu_validate_msi_dest_id(iommu, *staged_addr,
+								 val, name);
 			}
 
 			if (!ret) {
 				ret = iommu_direct_mmio_write(iommu,
-							      iommu->reg_phys + DMAR_FEADDR_REG,
-							      len, iommu->staged_feaddr);
+							      iommu->reg_phys + addr_reg,
+							      len, *staged_addr);
 				if (!ret)
 					ret = iommu_direct_mmio_write(iommu, phys, len, val);
-				iommu->staged_feaddr = 0;
+				if (!ret)
+					*staged_addr = 0;
 			}
 		}
 		break;
+	case DMAR_PERFINTRDATA_REG:
+		/* RsvdZ if PMU is not supported */
+		if (!ecap_pms(iommu->ecap) && val) {
+			ret = -EINVAL;
+			break;
+		}
+		fallthrough;
 	case DMAR_FEDATA_REG:
 		/* RsvdZ bits 31:9 */
 		if (val >> 9) {
-			pkvm_err("iommu%d: FEDATA 0x%llx has reserved bits set\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx has reserved bits set\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEDATA_REG ? "FEDATA" : "PERFINTRDATA",
+				 val);
 			ret = -EINVAL;
 		} else {
 			ret = iommu_direct_mmio_write(iommu, phys, len, val);
 		}
 		break;
+	case DMAR_PERFINTRCTL_REG:
+		/* RsvdZ if PMU is not supported */
+		if (!ecap_pms(iommu->ecap) && val) {
+			ret = -EINVAL;
+			break;
+		}
+		fallthrough;
 	case DMAR_FECTL_REG: {
 		/* RsvdP bits: 29:0 */
 		u32 rsvdp_mask = (~0U) >> 2;
-		u32 rsvdp = readl(iommu->reg + DMAR_FECTL_REG) & rsvdp_mask;
+		u32 rsvdp = readl(iommu->reg + offset) & rsvdp_mask;
 
 		if ((val & rsvdp_mask) != rsvdp) {
-			pkvm_err("iommu%d: FECTL reserved bits mismatch(0x%x != 0x%x)\n",
-				 iommu->seq_id, rsvdp, (u32)(val & rsvdp_mask));
+			pkvm_err("iommu%d: %s reserved bits mismatch(0x%x != 0x%x)\n",
+				 iommu->seq_id,
+				 offset == DMAR_FECTL_REG ? "FECTL" : "PERFINTRCTL",
+				 rsvdp, (u32)(val & rsvdp_mask));
 			ret = -EINVAL;
 		} else {
 			ret = iommu_direct_mmio_write(iommu, phys, len, val);

@@ -162,6 +162,9 @@
 #define DMAR_PERFCNTROFF_REG	0x31c
 #define DMAR_PERFINTRSTS_REG	0x324
 #define DMAR_PERFINTRCTL_REG	0x328
+#define DMAR_PERFINTRDATA_REG	0x32c
+#define DMAR_PERFINTRADDR_REG	0x330
+#define DMAR_PERFINTRUADDR_REG	0x334
 #define DMAR_PERFEVNTCAP_REG	0x380
 #define DMAR_ECMD_REG		0x400
 #define DMAR_ECEO_REG		0x408
@@ -877,6 +880,7 @@ struct intel_iommu {
 	u64		vrta; /* Virtual RTA register */
 	u64		virta; /* Virtual IRTA register */
 	u32		staged_feaddr; /* Pending FEADDR write */
+	u32		staged_perfintraddr; /* Pending PERFINTRADDR write */
 	struct irte	*ir_table; /* VA of hypervisor-protected interrupt remapping table */
 	int		seq_id;	/* sequence id of the iommu */
 	int		agaw; /* agaw of this iommu */
