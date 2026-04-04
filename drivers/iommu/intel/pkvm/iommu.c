@@ -560,6 +560,17 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			 iommu->seq_id, offset);
 		ret = -EPERM;
 		break;
+	case DMAR_CCMD_REG:
+		/*
+		 * Register-based context-cache invalidation. The VT-d spec
+		 * explicitly prohibits this when QI is enabled (Section 6.5.1).
+		 * pKVM uses QI exclusively; block to prevent undefined behavior
+		 * and uncontrolled invalidations.
+		 */
+		pkvm_err("iommu%d: register-based context invalidation blocked\n",
+			 iommu->seq_id);
+		ret = -EPERM;
+		break;
 	case DMAR_PMEN_REG:
 		/*
 		 * pKVM disables PMRs during iommu init. Allow the host to write
@@ -711,6 +722,19 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = -EPERM;
 			break;
 		}
+		/*
+		 * Register-based IOTLB invalidation (IVA_REG and IOTLB_REG).
+		 * The VT-d spec explicitly prohibits register-based invalidation
+		 * when QI is enabled (Section 6.5.1). pKVM uses QI exclusively;
+		 * block to prevent undefined behavior and uncontrolled flushes.
+		 */
+		if (offset == iommu->iva_offset ||
+		    offset == iommu->iotlb_offset) {
+			pkvm_err("iommu%d: register-based IOTLB invalidation blocked\n",
+				 iommu->seq_id);
+			ret = -EPERM;
+			break;
+		}
 		/* Not emulated MMIO can directly go to hardware */
 		ret = iommu_direct_mmio_write(iommu, phys, len, val);
 	}
@@ -786,6 +810,9 @@ static int iommu_init(struct intel_iommu *iommu)
 	}
 
 	pkvm_spin_lock_init(&iommu->lock);
+
+	iommu->iva_offset   = ecap_iotlb_offset(iommu->ecap);
+	iommu->iotlb_offset = ecap_iotlb_offset(iommu->ecap) + 8;
 
 	/*
 	 * Take a snapshot of GSTS. GCMD updates will be handled by pKVM and

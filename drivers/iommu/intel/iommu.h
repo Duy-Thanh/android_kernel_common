@@ -879,6 +879,8 @@ struct intel_iommu {
 	u64		vrta; /* Virtual RTA register */
 	u64		virta; /* Virtual IRTA register (set by host before SIRTP) */
 	struct irte	*ir_table; /* VA of hypervisor-protected interrupt remapping table */
+	unsigned long	iva_offset;   /* IVA register offset (ecap_iotlb_offset) */
+	unsigned long	iotlb_offset; /* IOTLB register offset (ecap_iotlb_offset + 8) */
 	int		seq_id;	/* sequence id of the iommu */
 	int		agaw; /* agaw of this iommu */
 	int		msagaw; /* max sagaw of this iommu */
