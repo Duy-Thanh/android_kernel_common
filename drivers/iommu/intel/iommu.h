@@ -169,6 +169,9 @@
 #define DMAR_ECEO_REG		0x408
 #define DMAR_ECRSP_REG		0x410
 #define DMAR_ECCAP_REG		0x430
+/* Virtual Command Interface registers (VT-d spec section 11.4.13) */
+#define DMAR_VCMD_REG		0xe00
+#define DMAR_VCEO_REG		0xe08
 
 #define DMAR_IQER_REG_IQEI(reg)		FIELD_GET(GENMASK_ULL(3, 0), reg)
 #define DMAR_IQER_REG_ITESID(reg)	FIELD_GET(GENMASK_ULL(47, 32), reg)
