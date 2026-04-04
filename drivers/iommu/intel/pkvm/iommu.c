@@ -510,6 +510,20 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		pkvm_err("iommu%d: Setting IRTA is not supported!\n", iommu->seq_id);
 		ret = -EPERM;
 		break;
+	case DMAR_FECTL_REG: {
+		/* RsvdP bits: 29:0 */
+		u32 rsvdp_mask = (~0U) >> 2;
+		u32 rsvdp = readl(iommu->reg + DMAR_FECTL_REG) & rsvdp_mask;
+
+		if ((val & rsvdp_mask) != rsvdp) {
+			pkvm_err("iommu%d: FECTL reserved bits mismatch(0x%x != 0x%x)\n",
+				 iommu->seq_id, rsvdp, (u32)(val & rsvdp_mask));
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	}
 	default:
 		/* Not emulated MMIO can directly go to hardware */
 		ret = iommu_direct_mmio_write(iommu, phys, len, val);
