@@ -560,6 +560,37 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			 iommu->seq_id, offset);
 		ret = -EPERM;
 		break;
+	case DMAR_ECMD_REG: {
+		/*
+		 * Extended Command Interface. Only allow performance monitoring
+		 * counter control commands (ENABLE/DISABLE/FREEZE/UNFREEZE).
+		 * These toggle counter state only and have no memory or DMA
+		 * remapping implications. Block all other command codes as they
+		 * are reserved or unknown and cannot be reasoned about safely.
+		 */
+		u8 ecmd = val & 0xff;
+
+		if (ecmd != DMA_ECMD_ENABLE && ecmd != DMA_ECMD_DISABLE &&
+		    ecmd != DMA_ECMD_FREEZE && ecmd != DMA_ECMD_UNFREEZE) {
+			pkvm_err("iommu%d: unsupported ECMD 0x%x blocked\n",
+				 iommu->seq_id, ecmd);
+			ret = -EPERM;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	}
+	case DMAR_VCMD_REG:
+	case DMAR_VCEO_REG:
+		/*
+		 * Virtual Command Interface registers. Host IOMMU driver does
+		 * not use VCMD and pKVM has no support for it. Block all
+		 * writes to prevent potential abuse of this interface.
+		 */
+		pkvm_err("iommu%d: VCMD register write blocked at offset 0x%lx\n",
+			 iommu->seq_id, offset);
+		ret = -EPERM;
+		break;
 	case DMAR_CCMD_REG:
 		/*
 		 * Register-based context-cache invalidation. The VT-d spec
