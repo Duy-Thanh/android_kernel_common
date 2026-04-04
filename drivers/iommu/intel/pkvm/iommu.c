@@ -523,6 +523,44 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	}
+	case DMAR_ECEO_REG:
+		if (!cap_ecmds(iommu->cap) && val) {
+			pkvm_err("iommu%d: non-zero val 0x%llx when ECMD not supported\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_ECMD_REG:
+		if (!cap_ecmds(iommu->cap) && val) {
+			pkvm_err("iommu%d: non-zero val 0x%llx when ECMD not supported\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else if (val & GENMASK_ULL(15, 8)) {
+			pkvm_err("iommu%d: ECMD 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			/*
+			 * Extended Command Interface. Only allow performance monitoring
+			 * counter control commands (ENABLE/DISABLE/FREEZE/UNFREEZE).
+			 * These toggle counter state only and have no memory or DMA
+			 * remapping implications. Block all other command codes as they
+			 * are reserved or unknown and cannot be reasoned about safely.
+			 */
+			u8 ecmd = val & 0xff;
+
+			if (ecmd != DMA_ECMD_ENABLE && ecmd != DMA_ECMD_DISABLE &&
+			    ecmd != DMA_ECMD_FREEZE && ecmd != DMA_ECMD_UNFREEZE) {
+				pkvm_err("iommu%d: unsupported ECMD 0x%x blocked\n",
+					 iommu->seq_id, ecmd);
+				ret = -EPERM;
+			} else {
+				ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			}
+		}
+		break;
 	case DMAR_FEADDR_REG:
 	case DMAR_PERFINTRADDR_REG:
 		/*
