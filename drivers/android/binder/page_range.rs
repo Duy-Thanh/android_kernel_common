@@ -15,7 +15,7 @@
 
 use core::{
     marker::PhantomPinned,
-    mem::{size_of, size_of_val, MaybeUninit},
+    mem::{MaybeUninit, size_of, size_of_val},
     ptr,
 };
 
@@ -23,12 +23,12 @@ use kernel::{
     bindings,
     error::Result,
     ffi::{c_ulong, c_void},
-    mm::{virt, Mm, MmWithUser},
+    mm::{Mm, MmWithUser, virt},
     new_mutex, new_spinlock,
-    page::{Page, PAGE_SHIFT, PAGE_SIZE},
+    page::{PAGE_SHIFT, PAGE_SIZE, Page},
     prelude::*,
     str::CStr,
-    sync::{aref::ARef, Mutex, SpinLock},
+    sync::{Mutex, SpinLock, aref::ARef},
     task::Pid,
     transmute::FromBytes,
     types::Opaque,
@@ -57,10 +57,7 @@ impl Shrinker {
     /// Before using this shrinker with a `ShrinkablePageRange`, the `register` method must have
     /// been called exactly once, and it must not have returned an error.
     pub(crate) const unsafe fn new() -> Self {
-        Self {
-            inner: Opaque::uninit(),
-            list_lru: Opaque::uninit(),
-        }
+        Self { inner: Opaque::uninit(), list_lru: Opaque::uninit() }
     }
 
     /// Register this shrinker with the kernel.
@@ -452,9 +449,7 @@ impl ShrinkablePageRange {
                 check_vma(&vma_read, self)
             } else {
                 mmap_read = mm.mmap_read_lock();
-                mmap_read
-                    .vma_lookup(vma_addr)
-                    .and_then(|vma| check_vma(vma, self))
+                mmap_read.vma_lookup(vma_addr).and_then(|vma| check_vma(vma, self))
             };
 
             match vma {
@@ -621,11 +616,7 @@ impl ShrinkablePageRange {
     /// All pages touched by this operation must be in use for the duration of this call.
     pub(crate) unsafe fn fill_zero(&self, offset: usize, size: usize) -> Result {
         // SAFETY: `self.iterate` has the same safety requirements as `copy_into`.
-        unsafe {
-            self.iterate(offset, size, |page, offset, len| {
-                page.fill_zero_raw(offset, len)
-            })
-        }
+        unsafe { self.iterate(offset, size, |page, offset, len| page.fill_zero_raw(offset, len)) }
     }
 }
 
@@ -693,17 +684,12 @@ unsafe extern "C" fn rust_shrink_scan(
     let nr_to_scan = unsafe { (*sc).nr_to_scan };
     // SAFETY: Accessing the lru list is okay. Just an FFI call.
     unsafe {
-        bindings::list_lru_walk(
-            list_lru,
-            Some(bindings::rust_shrink_free_page_wrap),
-            ptr::null_mut(),
-            nr_to_scan,
-        )
+        bindings::list_lru_walk(list_lru, Some(rust_shrink_free_page), ptr::null_mut(), nr_to_scan)
     }
 }
 
-const LRU_SKIP: bindings::lru_status = bindings::lru_status_LRU_SKIP;
-const LRU_REMOVED_ENTRY: bindings::lru_status = bindings::lru_status_LRU_REMOVED_RETRY;
+const LRU_SKIP: bindings::lru_status = bindings::lru_status::LRU_SKIP;
+const LRU_REMOVED_ENTRY: bindings::lru_status = bindings::lru_status::LRU_REMOVED_RETRY;
 
 /// # Safety
 /// Called by the shrinker.
