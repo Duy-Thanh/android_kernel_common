@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7438058_2f02ed4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-06T20:17:11Z",
+      "side": 1,
+      "message": "This change would break the ABI, therefore can\u0027t be merged.",
+      "revId": "5c74394a82c68401afd01d4e3cbf416ad2ba69ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
