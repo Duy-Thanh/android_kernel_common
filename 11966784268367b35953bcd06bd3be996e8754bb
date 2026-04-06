@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942af002_d9d43e56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "`Fixes: 13beada2dac3 (\"ANDROID: Don\u0027t use current pointer for per-process dmabuf accounting\")`",
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb55563_ed39ad3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "`Tested-by: T.J. Mercier \u003ctjmercier@google.com\u003e`\n\nI ran `dmabuf_procfs_fork_test` in a loop and saw that `kmalloc-64` no longer increased boundlessly.",
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7769e53_2dd91593",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "Remove empty line pls",
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d44840d2_6adbc7d3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "Empty line before the `if` pls.",
+      "range": {
+        "startLine": 650,
+        "startChar": 1,
+        "endLine": 650,
+        "endChar": 39
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d07a94_87fa1fe8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "Was there some case where you saw this?",
+      "range": {
+        "startLine": 662,
+        "startChar": 2,
+        "endLine": 662,
+        "endChar": 59
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "120a4ac0_5b62cd38",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-06T22:31:07Z",
+      "side": 1,
+      "message": "Space here pls",
+      "range": {
+        "startLine": 742,
+        "startChar": 11,
+        "endLine": 742,
+        "endChar": 12
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
