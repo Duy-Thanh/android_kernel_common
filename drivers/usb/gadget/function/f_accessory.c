@@ -1250,6 +1250,8 @@ static int acc_hid_init(struct acc_hid_dev *hdev)
 {
 	struct hid_device *hid;
 	int ret;
+	int i;
+	struct hid_report *report;
 
 	hid = hid_allocate_device();
 	if (IS_ERR(hid))
@@ -1267,6 +1269,17 @@ static int acc_hid_init(struct acc_hid_dev *hdev)
 		pr_err("can't add hid device: %d\n", ret);
 		hid_destroy_device(hid);
 		return ret;
+	}
+
+	for (i = 0; i < HID_REPORT_TYPES; i++) {
+		struct hid_report_enum *report_enum = hid->report_enum + i;
+
+		list_for_each_entry(report, &report_enum->report_list, list) {
+			if (report->size > (USB_COMP_EP0_BUFSIZ - 1) << 3) {
+				hid_destroy_device(hid);
+				return -EINVAL;
+			}
+		}
 	}
 
 	hdev->hid = hid;
