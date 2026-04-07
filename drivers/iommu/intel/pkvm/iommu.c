@@ -536,29 +536,23 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			iommu->virta = val;
 		}
 		break;
-	case DMAR_PQH_REG:
-	case DMAR_PQT_REG:
-	case DMAR_PQA_REG:
-	case DMAR_PRS_REG:
-	case DMAR_PECTL_REG:
-	case DMAR_PEDATA_REG:
-	case DMAR_PEADDR_REG:
-	case DMAR_PEUADDR_REG:
+	case DMAR_FSTS_REG:
+	case DMAR_FECTL_REG:
+	case DMAR_FEDATA_REG:
+	case DMAR_PERFINTRSTS_REG:
+	case DMAR_PERFINTRCTL_REG:
+	case DMAR_PERFINTRDATA_REG:
 		/*
-		 * SVA/PRS (Shared Virtual Addressing / Page Request Service)
-		 * registers. pKVM does not support SVA/PRS; block all writes to
-		 * prevent the host from setting up a page request queue (PQA)
-		 * that could corrupt protected memory via IOMMU descriptor writes,
-		 * or programming PEADDR with a non-MSI address to corrupt protected
-		 * memory via page request event MSI writes.
-		 *
-		 * TODO: Revisit when pKVM adds SVA/PRS support. At that point,
-		 * PQA must point to hypervisor-owned memory and PEADDR/PEUADDR
-		 * must be validated against the MSI address range.
+		 * Interrupt control registers that carry no memory-targeting
+		 * risk; pass through directly:
+		 *   FSTS/PERFINTRSTS   - RW1C status, driver clears fault bits
+		 *   FECTL/PERFINTRCTL  - interrupt mask/unmask
+		 *   FEDATA/PERFINTRDATA - MSI data payload
+		 * The corresponding address registers (FEADDR/FEUADDR and
+		 * PERFINTRADDR/PERFINTRUADDR) are handled separately with MSI
+		 * address range and memory map validation.
 		 */
-		pkvm_err("iommu%d: SVA/PRS register write blocked at offset 0x%lx\n",
-			 iommu->seq_id, offset);
-		ret = -EPERM;
+		ret = iommu_direct_mmio_write(iommu, phys, len, val);
 		break;
 	case DMAR_ECMD_REG: {
 		/*
@@ -580,28 +574,6 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	}
-	case DMAR_VCMD_REG:
-	case DMAR_VCEO_REG:
-		/*
-		 * Virtual Command Interface registers. Host IOMMU driver does
-		 * not use VCMD and pKVM has no support for it. Block all
-		 * writes to prevent potential abuse of this interface.
-		 */
-		pkvm_err("iommu%d: VCMD register write blocked at offset 0x%lx\n",
-			 iommu->seq_id, offset);
-		ret = -EPERM;
-		break;
-	case DMAR_CCMD_REG:
-		/*
-		 * Register-based context-cache invalidation. The VT-d spec
-		 * explicitly prohibits this when QI is enabled (Section 6.5.1).
-		 * pKVM uses QI exclusively; block to prevent undefined behavior
-		 * and uncontrolled invalidations.
-		 */
-		pkvm_err("iommu%d: register-based context invalidation blocked\n",
-			 iommu->seq_id);
-		ret = -EPERM;
-		break;
 	case DMAR_PMEN_REG:
 		/*
 		 * pKVM disables PMRs during iommu init. Allow the host to write
@@ -614,19 +586,6 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 				 iommu->seq_id);
 			ret = -EPERM;
 		}
-		break;
-	case DMAR_PLMBASE_REG:
-	case DMAR_PLMLIMIT_REG:
-	case DMAR_PHMBASE_REG:
-	case DMAR_PHMLIMIT_REG:
-		/*
-		 * Block writes to PMR address range registers. These define the
-		 * physical address ranges that the IOMMU blocks from DMA. The
-		 * host has no legitimate reason to reconfigure these post-boot.
-		 */
-		pkvm_err("iommu%d: PMR range register write blocked at offset 0x%lx\n",
-			 iommu->seq_id, offset);
-		ret = -EPERM;
 		break;
 	case DMAR_FEADDR_REG:
 		/*
@@ -740,34 +699,14 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		break;
 	default:
 		/*
-		 * Block writes to IOMMU MTRR registers which is used to derive
-		 * the effective memory types during DMA. Host driver never writes
-		 * these and should be safe to block these from host.
+		 * Deny-by-default: block all registers not explicitly handled
+		 * above.  Any register the host driver legitimately needs must
+		 * be added as an explicit case; unknown or unreviewed registers
+		 * must not reach hardware.
 		 */
-		if ((offset >= DMAR_MTRRCAP_REG &&
-		     offset <= DMAR_MTRR_FIX4K_F8000_REG) ||
-		    (offset >= DMAR_MTRR_PHYSBASE0_REG &&
-		     offset <= DMAR_MTRR_PHYSMASK9_REG)) {
-			pkvm_err("iommu%d: MTRR register write blocked at offset 0x%lx\n",
-				 iommu->seq_id, offset);
-			ret = -EPERM;
-			break;
-		}
-		/*
-		 * Register-based IOTLB invalidation (IVA_REG and IOTLB_REG).
-		 * The VT-d spec explicitly prohibits register-based invalidation
-		 * when QI is enabled (Section 6.5.1). pKVM uses QI exclusively;
-		 * block to prevent undefined behavior and uncontrolled flushes.
-		 */
-		if (offset == iommu->iva_offset ||
-		    offset == iommu->iotlb_offset) {
-			pkvm_err("iommu%d: register-based IOTLB invalidation blocked\n",
-				 iommu->seq_id);
-			ret = -EPERM;
-			break;
-		}
-		/* Not emulated MMIO can directly go to hardware */
-		ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		pkvm_err("iommu%d: unrecognized register write blocked at offset 0x%lx val 0x%llx\n",
+			 iommu->seq_id, offset, val);
+		ret = -EPERM;
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
@@ -841,9 +780,6 @@ static int iommu_init(struct intel_iommu *iommu)
 	}
 
 	pkvm_spin_lock_init(&iommu->lock);
-
-	iommu->iva_offset   = ecap_iotlb_offset(iommu->ecap);
-	iommu->iotlb_offset = ecap_iotlb_offset(iommu->ecap) + 8;
 
 	/*
 	 * Take a snapshot of GSTS. GCMD updates will be handled by pKVM and

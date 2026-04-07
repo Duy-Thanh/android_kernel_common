@@ -162,6 +162,7 @@
 #define DMAR_PERFCNTROFF_REG	0x31c
 #define DMAR_PERFINTRSTS_REG	0x324
 #define DMAR_PERFINTRCTL_REG	0x328
+#define DMAR_PERFINTRDATA_REG	0x32c
 #define DMAR_PERFINTRADDR_REG	0x330
 #define DMAR_PERFINTRUADDR_REG	0x334
 #define DMAR_PERFEVNTCAP_REG	0x380
@@ -882,8 +883,6 @@ struct intel_iommu {
 	u64		vrta; /* Virtual RTA register */
 	u64		virta; /* Virtual IRTA register (set by host before SIRTP) */
 	struct irte	*ir_table; /* VA of hypervisor-protected interrupt remapping table */
-	unsigned long	iva_offset;   /* IVA register offset (ecap_iotlb_offset) */
-	unsigned long	iotlb_offset; /* IOTLB register offset (ecap_iotlb_offset + 8) */
 	int		seq_id;	/* sequence id of the iommu */
 	int		agaw; /* agaw of this iommu */
 	int		msagaw; /* max sagaw of this iommu */
