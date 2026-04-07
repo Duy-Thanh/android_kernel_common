@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce64a099_a8e84bce",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-07T13:05:48Z",
+      "side": 1,
+      "message": "nit: just noticed: instead of these 3 lines, we could just do `if (vcpu)`? And similarly for host vCPUs in aosp/4022841",
+      "fixSuggestions": [
+        {
+          "fixId": "f7e6b44f_848eff65",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.h",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (vcpu)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12834817fa69f25ca5f4b4431817ced77e45f857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
