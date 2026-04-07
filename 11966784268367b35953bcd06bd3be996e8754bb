@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b75c3f4_eb79fceb",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 4127313
+      },
+      "writtenOn": "2026-04-07T07:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7769e53_2dd91593",
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d44840d2_6adbc7d3",
@@ -65,6 +83,30 @@
       "writtenOn": "2026-04-06T22:31:07Z",
       "side": 1,
       "message": "Empty line before the `if` pls.",
+      "range": {
+        "startLine": 650,
+        "startChar": 1,
+        "endLine": 650,
+        "endChar": 39
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16026458_b2c93a97",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 4127313
+      },
+      "writtenOn": "2026-04-07T07:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d44840d2_6adbc7d3",
       "range": {
         "startLine": 650,
         "startChar": 1,
@@ -135,6 +177,30 @@
       "writtenOn": "2026-04-06T22:31:07Z",
       "side": 1,
       "message": "Space here pls",
+      "range": {
+        "startLine": 742,
+        "startChar": 11,
+        "endLine": 742,
+        "endChar": 12
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455410c9_bfcdbc55",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 4127313
+      },
+      "writtenOn": "2026-04-07T07:27:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "120a4ac0_5b62cd38",
       "range": {
         "startLine": 742,
         "startChar": 11,
