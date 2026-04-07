@@ -498,10 +498,6 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			iommu->vrta = val;
 		}
 		break;
-	case DMAR_IRTA_REG:
-		pkvm_err("iommu%d: Setting IRTA is not supported!\n", iommu->seq_id);
-		ret = -EPERM;
-		break;
 	case DMAR_PMEN_REG: {
 		/* RsvdP bits: 30:1 */
 		u32 rsvdp_mask = GENMASK_U32(30, 1);
@@ -523,6 +519,26 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	}
+	case DMAR_FSTS_REG:
+		if (val & (GENMASK_U32(31, 16) | GENMASK_U32(3, 2))) {
+			pkvm_err("iommu%d: FSTS 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			/* RW1C for clearing fault status bits */
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_PERFINTRSTS_REG:
+		if (val & GENMASK_ULL(31, 1)) {
+			pkvm_err("iommu%d: PERFINTRSTS 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			/* RW1C for clearing fault status bits */
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
 	case DMAR_ECEO_REG:
 		if (!cap_ecmds(iommu->cap) && val) {
 			pkvm_err("iommu%d: non-zero val 0x%llx when ECMD not supported\n",
@@ -663,8 +679,15 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		break;
 	}
 	default:
-		/* Not emulated MMIO can directly go to hardware */
-		ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		/*
+		 * Deny-by-default: block all registers not explicitly handled
+		 * above.  Any register the host driver legitimately needs must
+		 * be added as an explicit case; unknown or unreviewed registers
+		 * must not reach hardware.
+		 */
+		pkvm_err("iommu%d: unsupported register write blocked at offset 0x%lx val 0x%llx\n",
+			 iommu->seq_id, offset, val);
+		ret = -EPERM;
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
