@@ -573,9 +573,14 @@ CONFIG_VIRTIO_BALLOON=m
 CONFIG_VHOST_VSOCK=y
 CONFIG_STAGING=y
 CONFIG_ASHMEM=y
+<<<<<<< HEAD   (791589c4191deb1d5cfd122d43e23e9c3c73960e Reapply "ANDROID: ashmem: Remove C version of the ashmem dri)
 CONFIG_ASHMEM_RUST=y
 CONFIG_INTEL_IOMMU=y
 CONFIG_IRQ_REMAP=y
+||||||| BASE   (56c9934b1292fd90ecae9990041a445cfbd780ec Reapply "ANDROID: ashmem: Remove C version of the ashmem dri)
+CONFIG_ASHMEM_RUST=y
+=======
+>>>>>>> BRANCH (0e236754e7f751ce2d5a5597354ddba41c0d169e Reapply "ANDROID: ashmem: Cleanup ashmem kconfig options")
 CONFIG_REMOTEPROC=y
 CONFIG_REMOTEPROC_CDEV=y
 CONFIG_RPMSG_CHAR=y
