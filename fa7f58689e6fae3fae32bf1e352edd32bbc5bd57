@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23ce5cc6_633a990b",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-04-07T21:05:47Z",
+      "side": 1,
+      "message": "Unless I\u0027m missing something here, we are using \u0027report_list\u0027 as seen below. This is an array of lists, for each report type.",
+      "parentUuid": "38f99480_ba27992a",
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2ca3aac_17cd1feb",
         "filename": "drivers/usb/gadget/function/f_accessory.c",
         "patchSetId": 1
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "611cd8e6_bdc39d11",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-04-07T21:05:47Z",
+      "side": 1,
+      "message": "Updated to use array indexing to get the report list for each report type.",
+      "parentUuid": "e2ca3aac_17cd1feb",
       "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +130,24 @@
           ]
         }
       ],
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb54bfe0_dc843943",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-04-07T21:05:47Z",
+      "side": 1,
+      "message": "Refactored and added comment.",
+      "parentUuid": "c0ea02e4_e1cb8c01",
       "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
