@@ -93,7 +93,6 @@ static inline bool page_ext_iter_next_fast_possible(unsigned long next_pfn)
 #endif
 
 extern struct page_ext *page_ext_get(const struct page *page);
-extern struct page_ext *page_ext_from_phys(phys_addr_t phys);
 extern void page_ext_put(struct page_ext *page_ext);
 extern struct page_ext *page_ext_lookup(unsigned long pfn);
 
@@ -212,11 +211,6 @@ static inline void page_ext_init_flatmem(void)
 }
 
 static inline struct page_ext *page_ext_get(const struct page *page)
-{
-	return NULL;
-}
-
-static inline struct page_ext *page_ext_from_phys(phys_addr_t phys)
 {
 	return NULL;
 }

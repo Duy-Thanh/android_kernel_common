@@ -43,13 +43,11 @@ DEFINE_MUTEX(slab_mutex);
 struct kmem_cache *kmem_cache;
 
 /*
- * Set of flags that will prevent slab merging.
- * Any flag that adds per-object metadata should be included,
- * since slab merging can update s->inuse that affects the metadata layout.
+ * Set of flags that will prevent slab merging
  */
-#define SLAB_NEVER_MERGE (SLAB_DEBUG_FLAGS | SLAB_TYPESAFE_BY_RCU | \
-		SLAB_NOLEAKTRACE | SLAB_FAILSLAB | SLAB_NO_MERGE | \
-		SLAB_OBJ_EXT_IN_OBJ)
+#define SLAB_NEVER_MERGE (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER | \
+		SLAB_TRACE | SLAB_TYPESAFE_BY_RCU | SLAB_NOLEAKTRACE | \
+		SLAB_FAILSLAB | SLAB_NO_MERGE)
 
 #define SLAB_MERGE_SAME (SLAB_RECLAIM_ACCOUNT | SLAB_CACHE_DMA | \
 			 SLAB_CACHE_DMA32 | SLAB_ACCOUNT)
@@ -165,6 +163,9 @@ int slab_unmergeable(struct kmem_cache *s)
 		return 1;
 #endif
 
+	if (s->cpu_sheaves)
+		return 1;
+
 	/*
 	 * We may have set a slab to be unmergeable during bootstrap.
 	 */
@@ -174,35 +175,24 @@ int slab_unmergeable(struct kmem_cache *s)
 	return 0;
 }
 
-bool slab_args_unmergeable(struct kmem_cache_args *args, slab_flags_t flags)
-{
-	if (slab_nomerge)
-		return true;
-
-	if (args->ctor)
-		return true;
-
-	if (IS_ENABLED(CONFIG_HARDENED_USERCOPY) && args->usersize)
-		return true;
-
-	if (flags & SLAB_NEVER_MERGE)
-		return true;
-
-	return false;
-}
-
-static struct kmem_cache *find_mergeable(unsigned int size, slab_flags_t flags,
-		const char *name, struct kmem_cache_args *args)
+struct kmem_cache *find_mergeable(unsigned int size, unsigned int align,
+		slab_flags_t flags, const char *name, void (*ctor)(void *))
 {
 	struct kmem_cache *s;
-	unsigned int align;
+
+	if (slab_nomerge)
+		return NULL;
+
+	if (ctor)
+		return NULL;
 
 	flags = kmem_cache_flags(flags, name);
-	if (slab_args_unmergeable(args, flags))
+
+	if (flags & SLAB_NEVER_MERGE)
 		return NULL;
 
 	size = ALIGN(size, sizeof(void *));
-	align = calculate_alignment(flags, args->align, size);
+	align = calculate_alignment(flags, align, size);
 	size = ALIGN(size, align);
 
 	list_for_each_entry_reverse(s, &slab_caches, list) {
@@ -241,7 +231,7 @@ static struct kmem_cache *create_cache(const char *name,
 	err = -EINVAL;
 	if (args->use_freeptr_offset &&
 	    (args->freeptr_offset >= object_size ||
-	     (!(flags & SLAB_TYPESAFE_BY_RCU) && !args->ctor) ||
+	     !(flags & SLAB_TYPESAFE_BY_RCU) ||
 	     !IS_ALIGNED(args->freeptr_offset, __alignof__(freeptr_t))))
 		goto out;
 
@@ -261,31 +251,6 @@ out_free_cache:
 	kmem_cache_free(kmem_cache, s);
 out:
 	return ERR_PTR(err);
-}
-
-static struct kmem_cache *
-__kmem_cache_alias(const char *name, unsigned int size, slab_flags_t flags,
-		   struct kmem_cache_args *args)
-{
-	struct kmem_cache *s;
-
-	s = find_mergeable(size, flags, name, args);
-	if (s) {
-		if (sysfs_slab_alias(s, name))
-			pr_err("SLUB: Unable to add cache alias %s to sysfs\n",
-			       name);
-
-		s->refcount++;
-
-		/*
-		 * Adjust the object sizes so that we clear
-		 * the complete object on kzalloc.
-		 */
-		s->object_size = max(s->object_size, size);
-		s->inuse = max(s->inuse, ALIGN(size, sizeof(void *)));
-	}
-
-	return s;
 }
 
 /**
@@ -340,13 +305,6 @@ struct kmem_cache *__kmem_cache_create_args(const char *name,
 	flags &= ~SLAB_DEBUG_FLAGS;
 #endif
 
-	/*
-	 * Caches with specific capacity are special enough. It's simpler to
-	 * make them unmergeable.
-	 */
-	if (args->sheaf_capacity)
-		flags |= SLAB_NO_MERGE;
-
 	mutex_lock(&slab_mutex);
 
 	err = kmem_cache_sanity_check(name, object_size);
@@ -366,7 +324,9 @@ struct kmem_cache *__kmem_cache_create_args(const char *name,
 		    object_size - args->usersize < args->useroffset))
 		args->usersize = args->useroffset = 0;
 
-	s = __kmem_cache_alias(name, object_size, flags, args);
+	if (!args->usersize && !args->sheaf_capacity)
+		s = __kmem_cache_alias(name, object_size, args->align, flags,
+				       args->ctor);
 	if (s)
 		goto out_unlock;
 
@@ -1023,6 +983,43 @@ void __init create_kmalloc_caches(void)
 						       0, SLAB_NO_MERGE, NULL);
 }
 
+/**
+ * __ksize -- Report full size of underlying allocation
+ * @object: pointer to the object
+ *
+ * This should only be used internally to query the true size of allocations.
+ * It is not meant to be a way to discover the usable size of an allocation
+ * after the fact. Instead, use kmalloc_size_roundup(). Using memory beyond
+ * the originally requested allocation size may trigger KASAN, UBSAN_BOUNDS,
+ * and/or FORTIFY_SOURCE.
+ *
+ * Return: size of the actual memory used by @object in bytes
+ */
+size_t __ksize(const void *object)
+{
+	const struct page *page;
+	const struct slab *slab;
+
+	if (unlikely(object == ZERO_SIZE_PTR))
+		return 0;
+
+	page = virt_to_page(object);
+
+	if (unlikely(PageLargeKmalloc(page)))
+		return large_kmalloc_size(page);
+
+	slab = page_slab(page);
+	/* Delete this after we're sure there are no users */
+	if (WARN_ON(!slab))
+		return page_size(page);
+
+#ifdef CONFIG_SLUB_DEBUG
+	skip_orig_size_check(slab->slab_cache, object);
+#endif
+
+	return slab_ksize(slab->slab_cache);
+}
+
 gfp_t kmalloc_fix_flags(gfp_t flags)
 {
 	gfp_t invalid_mask = flags & GFP_SLAB_BUG_MASK;
@@ -1237,6 +1234,30 @@ void kfree_sensitive(const void *p)
 	kfree(mem);
 }
 EXPORT_SYMBOL(kfree_sensitive);
+
+size_t ksize(const void *objp)
+{
+	/*
+	 * We need to first check that the pointer to the object is valid.
+	 * The KASAN report printed from ksize() is more useful, then when
+	 * it's printed later when the behaviour could be undefined due to
+	 * a potential use-after-free or double-free.
+	 *
+	 * We use kasan_check_byte(), which is supported for the hardware
+	 * tag-based KASAN mode, unlike kasan_check_read/write().
+	 *
+	 * If the pointed to memory is invalid, we return 0 to avoid users of
+	 * ksize() writing to and potentially corrupting the memory region.
+	 *
+	 * We want to perform the check before __ksize(), to avoid potentially
+	 * crashing in __ksize() due to accessing invalid metadata.
+	 */
+	if (unlikely(ZERO_OR_NULL_PTR(objp)) || !kasan_check_byte(objp))
+		return 0;
+
+	return kfence_ksize(objp) ?: __ksize(objp);
+}
+EXPORT_SYMBOL(ksize);
 
 #ifdef CONFIG_BPF_SYSCALL
 #include <linux/btf.h>
@@ -1604,8 +1625,11 @@ static bool kfree_rcu_sheaf(void *obj)
 		return false;
 
 	s = slab->slab_cache;
-	if (likely(!IS_ENABLED(CONFIG_NUMA) || slab_nid(slab) == numa_mem_id()))
-		return __kfree_rcu_sheaf(s, obj);
+	if (s->cpu_sheaves) {
+		if (likely(!IS_ENABLED(CONFIG_NUMA) ||
+			   slab_nid(slab) == numa_mem_id()))
+			return __kfree_rcu_sheaf(s, obj);
+	}
 
 	return false;
 }
@@ -2109,11 +2133,8 @@ EXPORT_SYMBOL_GPL(kvfree_rcu_barrier);
  */
 void kvfree_rcu_barrier_on_cache(struct kmem_cache *s)
 {
-	if (cache_has_sheaves(s)) {
+	if (s->cpu_sheaves)
 		flush_rcu_sheaves_on_cache(s);
-		rcu_barrier();
-	}
-
 	/*
 	 * TODO: Introduce a version of __kvfree_rcu_barrier() that works
 	 * on a specific slab cache.

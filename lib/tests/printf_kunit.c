@@ -266,17 +266,15 @@ hash_pointer(struct kunit *kunittest)
 	KUNIT_EXPECT_MEMNEQ(kunittest, buf, PTR_STR, PTR_WIDTH);
 }
 
-/*
- * This is a macro so that the compiler can compare its arguments to the
- * __printf() attribute on __test(). This cannot be a function with a __printf()
- * attribute because GCC requires __printf() functions to be variadic.
- */
-#define test_hashed(kunittest, fmt, p)						\
-	do {									\
-		char buf[PLAIN_BUF_SIZE];					\
-		plain_hash_to_buffer(kunittest, p, buf, PLAIN_BUF_SIZE);	\
-		test(buf, fmt, p);						\
-	} while (0)
+static void
+test_hashed(struct kunit *kunittest, const char *fmt, const void *p)
+{
+	char buf[PLAIN_BUF_SIZE];
+
+	plain_hash_to_buffer(kunittest, p, buf, PLAIN_BUF_SIZE);
+
+	test(buf, fmt, p);
+}
 
 /*
  * NULL pointers aren't hashed.
