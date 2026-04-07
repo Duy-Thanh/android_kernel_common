@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71861fcc_3e7fe4d8",
+        "filename": "include/asm-generic/vmlinux.lds.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2026-04-07T22:11:14Z",
+      "side": 1,
+      "message": "(also happy to just merge these blocks if that\u0027s preferred - not sure where android sits on the \"out-of-tree patches should be as minimal as possible\" vs \"out-of-tree patches should be written as though you wrote them for upstream\" spectrum)",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 83
+      },
+      "revId": "e32749c5fdd1bcc9274678251eb584cb338c93b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
