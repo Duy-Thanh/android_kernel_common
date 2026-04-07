@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cfe4713_c4ff38c6",
+        "filename": "drivers/android/binder/rust_binder_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-07T12:45:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d8ff2d3_decb375b",
+      "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "676dba23_ad3496e9",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ah, I didn\u0027t know about that. I can move them.",
       "parentUuid": "676dba23_ad3496e9",
+      "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e7f21b5_c05ea85b",
+        "filename": "drivers/android/binder/rust_binder_hooks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-07T12:45:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2667054_2181cd61",
       "revId": "be0eff1a51b0771c42cd2bf7984faa64dde59a43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
