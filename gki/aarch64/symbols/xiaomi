@@ -63,12 +63,21 @@
   __tracepoint_cma_alloc_busy_retry
   __traceiter_cma_release
   __tracepoint_cma_release
+<<<<<<< PATCH SET (87843f90bb471a430f76dbbf5babfb4dcfb7af01 ANDROID: ABI: add symbols to xiaomi symbol list)
+  __traceiter_android_vh_mm_direct_reclaim_enter
+  __tracepoint_android_vh_mm_direct_reclaim_enter
+  __traceiter_android_vh_mm_direct_reclaim_exit
+  __tracepoint_android_vh_mm_direct_reclaim_exit
+
+||||||| BASE      (6ec239027328b51c1229b13db6e18802cd4f242e ANDROID: mm: Add vendor hooks for __alloc_pages_direct_recla)
+=======
   __traceiter_android_vh_vmalloc_node_range_start
   __tracepoint_android_vh_vmalloc_node_range_start
   __traceiter_android_vh_vmalloc_node_range_end
   __tracepoint_android_vh_vmalloc_node_range_end
   __traceiter_android_vh_do_mmap_map_count
   __tracepoint_android_vh_do_mmap_map_count
+>>>>>>> BASE      (5054eba709841c0e57d2f55f33e55cdb3a1286f8 ANDROID: abi_gki_aarch64_xiaomi: Update symbol list)
 
 #required by metis.ko module
   __traceiter_android_rvh_try_to_wake_up_begin
