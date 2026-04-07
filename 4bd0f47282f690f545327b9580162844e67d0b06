@@ -159,6 +159,24 @@
       "parentUuid": "bb6ccaa2_c04c25ae",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cc9f87_0d6c6606",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-07T18:27:50Z",
+      "side": 1,
+      "message": "Just quickly tried this, seems to work:\n\n```\n--- a/arch/x86/kvm/pkvm/init.h\n+++ b/arch/x86/kvm/pkvm/init.h\n@@ -41,17 +41,17 @@ bool pkvm_cpu_initialized(int cpu);\n \n /**\n  * for_each_pkvm_initialized_cpu - iterate over initialized pKVM host vCPUs\n- * @i: iterator variable for vCPU index\n+ * @cpu: iterator variable for physical CPU index\n  * @vcpu: struct kvm_vcpu pointer to host vCPU, assigned by macro.\n  *\n  * Iterates over all host vCPUs in the pkvm_hyp-\u003ehost_vcpus[] array, skipping\n  * NULL entries and the ones which corresponding CPU is not initialized by\n  * pkvm_init().\n  */\n-#define for_each_pkvm_initialized_cpu(i, vcpu)\t\t\t\t\t\\\n-\tfor ((i) \u003d 0; (i) \u003c pkvm_hyp-\u003enum_cpus \u0026\u0026\t\t\t\t\\\n-\t\t      ({ (vcpu) \u003d pkvm_hyp-\u003ehost_vcpus[(i)]; true; }); (i)++)\t\\\n-\t\tif (!(vcpu) || !pkvm_cpu_initialized((vcpu)-\u003ecpu))\t\t\\\n+#define for_each_pkvm_initialized_cpu(cpu, vcpu)\t\t\t\t\\\n+\tfor_each_possible_cpu(cpu)\t\t\t\t\t\t\\\n+\t\tif (WARN_ON_ONCE(!((vcpu) \u003d per_cpu(host_vcpu, (cpu)))) ||\t\\\n+\t\t    !pkvm_cpu_initialized(cpu))\t\t\t\t\t\\\n \t\t\tcontinue;\t\t\t\t\t\t\\\n \t\telse\n \n```",
+      "parentUuid": "bd6a8e10_d8cc021b",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
