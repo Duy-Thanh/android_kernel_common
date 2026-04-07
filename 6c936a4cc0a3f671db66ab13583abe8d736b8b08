@@ -22,6 +22,30 @@
       },
       "revId": "6c936a4cc0a3f671db66ab13583abe8d736b8b08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7dff6a0_e439820c",
+        "filename": "arch/arm64/include/asm/assembler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-07T10:06:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "afc0d347_7a5f08c5",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 26
+      },
+      "revId": "6c936a4cc0a3f671db66ab13583abe8d736b8b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
