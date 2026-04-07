@@ -52,6 +52,24 @@
       "parentUuid": "412b5e92_6be485ea",
       "revId": "082cb5eac8c41681654760223fc983fbadf11ddb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09ba5f9_49f78b29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-07T12:22:42Z",
+      "side": 1,
+      "message": "Note that I have an added explanatory paragraph to the commit message there. Please preserve it.",
+      "parentUuid": "9456d65d_8cbb961f",
+      "revId": "082cb5eac8c41681654760223fc983fbadf11ddb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
