@@ -87,6 +87,24 @@
       "parentUuid": "b643beae_06cb6d75",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea1d69a_48165fa3",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-07T13:36:45Z",
+      "side": 1,
+      "message": "Hmm, then it means that using pkvm_hyp-\u003enum_cpus is generally incorrect (since it is num_possible_cpus() i.e. the number of set bits in the bitmask, not the number of the highest set bit, so we may miss some CPUs)?",
+      "parentUuid": "415872a8_27088983",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
