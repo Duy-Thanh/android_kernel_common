@@ -86,8 +86,6 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 			case PCI_EXP_TYPE_DOWNSTREAM:
 				continue;
 			case PCI_EXP_TYPE_PCI_BRIDGE:
-				if (tmp->dev_flags & PCI_DEV_FLAGS_PCI_BRIDGE_NO_ALIAS)
-					continue;
 				ret = fn(tmp,
 					 PCI_DEVID(tmp->subordinate->number,
 						   PCI_DEVFN(0, 0)), data);

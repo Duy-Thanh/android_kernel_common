@@ -54,7 +54,6 @@ applications.
    events-power
    events-nmi
    events-msr
-   events-pci
    boottime-trace
    histogram
    histogram-design

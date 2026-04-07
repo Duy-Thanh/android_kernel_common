@@ -16,12 +16,7 @@ description:
 
 properties:
   compatible:
-    oneOf:
-      - const: qcom,pcie-x1e80100
-      - items:
-          - enum:
-              - qcom,glymur-pcie
-          - const: qcom,pcie-x1e80100
+    const: qcom,pcie-x1e80100
 
   reg:
     minItems: 6

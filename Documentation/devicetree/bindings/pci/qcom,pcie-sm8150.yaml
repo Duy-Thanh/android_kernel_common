@@ -17,7 +17,6 @@ description:
 properties:
   compatible:
     oneOf:
-      - const: qcom,pcie-sc8180x
       - const: qcom,pcie-sm8150
       - items:
           - enum:

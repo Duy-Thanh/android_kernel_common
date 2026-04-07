@@ -359,7 +359,7 @@ int pci_assign_resource(struct pci_dev *dev, int resno)
 
 	res->flags &= ~IORESOURCE_UNSET;
 	res->flags &= ~IORESOURCE_STARTALIGN;
-	if (pci_resource_is_bridge_win(resno))
+	if (resno >= PCI_BRIDGE_RESOURCES && resno <= PCI_BRIDGE_RESOURCE_END)
 		res->flags &= ~IORESOURCE_DISABLED;
 
 	pci_info(dev, "%s %pR: assigned\n", res_name, res);
