@@ -16,6 +16,24 @@
       "message": "Looks identical to aosp/4004934",
       "revId": "969ee03a60f03f6b5c7a9cee4831df2fd2fccc36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e86ea33_f31c4c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-07T10:06:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa943bce_38cf94c5",
+      "revId": "969ee03a60f03f6b5c7a9cee4831df2fd2fccc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
