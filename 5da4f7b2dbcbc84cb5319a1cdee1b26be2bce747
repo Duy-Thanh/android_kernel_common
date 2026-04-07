@@ -33,6 +33,24 @@
       "message": "Please refer to the contribution guidelines for details:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nThe main issues are:\n\n1) You need to use a valid tag. Here likely it\u0027s either UPSTREAM or BACKPORT.\n2) The patch needs to be applied to the development branch first -- `android12-5.10`. Then cherry-picked to the release branch for the respin.",
       "revId": "5da4f7b2dbcbc84cb5319a1cdee1b26be2bce747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11f7f3c_2407e315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-04-07T05:53:53Z",
+      "side": 1,
+      "message": "Thanks for the clarification in the bug that this is a cherry-pick from upstream that made it\u0027s way into android12-5.10 via the LTS merges.",
+      "parentUuid": "64accb01_c36da631",
+      "revId": "5da4f7b2dbcbc84cb5319a1cdee1b26be2bce747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
