@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76c8a61e_2d958c80",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-07T12:37:21Z",
+      "side": 1,
+      "message": "nit: IMHO \"in the pkvm_hyp-\u003ehost_vcpus[] array\" is an unnecessary detail.",
+      "fixSuggestions": [
+        {
+          "fixId": "bd84f0ac_62b6373d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/init.h",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": " * Iterates over all host vCPUs, skipping NULL entries and the ones which\n * corresponding CPU is not initialized by pkvm_init().\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b643beae_06cb6d75",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-07T12:37:21Z",
+      "side": 1,
+      "message": "Do we really need to skip NULL entries? If we have one, it means a bug?\n\nAlso s/which/whose/ ?",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
