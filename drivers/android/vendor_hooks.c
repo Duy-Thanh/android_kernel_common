@@ -8,6 +8,7 @@
 #include <linux/iova.h>
 #include <linux/pm_qos.h>
 #include <linux/futex.h>
+#include "binder/rust_binder.h"
 
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
@@ -85,6 +86,12 @@
 #include <trace/hooks/dwc3.h>
 #include <trace/hooks/typec.h>
 #include <trace/hooks/cdc_ether.h>
+
+/*
+ * Hooks that are triggered from a Rust driver.
+ */
+#define CREATE_RUST_TRACE_POINTS
+#include <trace/hooks/rust_binder.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -743,3 +750,18 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_rndis_enabled);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
+
+/*
+ * Used by vendor hooks to access Rust Binder data structures.
+ */
+struct rust_binder_layout RUST_BINDER_LAYOUT = {};
+EXPORT_SYMBOL_GPL(RUST_BINDER_LAYOUT);
+
+/*
+ * Export tracepoints that act as a bare tracehook, but can be *invoked* from a
+ * Rust GKI module.
+ */
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rust_binder_set_priority);
+EXPORT_SYMBOL_GPL(rust_do_trace_android_vh_rust_binder_set_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rust_binder_restore_priority);
+EXPORT_SYMBOL_GPL(rust_do_trace_android_vh_rust_binder_restore_priority);
