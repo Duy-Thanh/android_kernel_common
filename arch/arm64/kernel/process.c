@@ -26,6 +26,7 @@
 #include <linux/reboot.h>
 #include <linux/interrupt.h>
 #include <linux/init.h>
+#include <linux/cpumask.h>
 #include <linux/cpu.h>
 #include <linux/elfcore.h>
 #include <linux/pm.h>
@@ -325,6 +326,7 @@ static void arch_release_tlbbatch_mask(struct task_struct *tsk)
 #endif /* CONFIG_ARM64_ERRATUM_4193714 */
 void arch_release_task_struct(struct task_struct *tsk)
 {
+	arch_release_tlbbatch_mask(tsk);
 	fpsimd_release_task(tsk);
 }
 
@@ -339,6 +341,8 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 	fpsimd_sync_from_effective_state(src);
 
 	*dst = *src;
+
+	arch_dup_tlbbatch_mask(dst);
 
 	/*
 	 * Drop stale reference to src's sve_state and convert dst to
