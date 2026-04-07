@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c80c0c1_d622aeb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2026-04-07T14:11:03Z",
+      "side": 1,
+      "message": "Looks good to me, with the caveat that I don\u0027t know particularly well what the lifecycle of an anon page\u0027s dirty bit normally looks like.",
+      "revId": "cf582ebe07f74e3537f431c70611cb30b0ea9222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2b923b_17eb9776",
+        "filename": "mm/madvise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2026-04-07T14:11:03Z",
+      "side": 1,
+      "message": "I think you can count a single page as PGLAZYMARKED_STACK multiple times if a task is frozen repeatedly without using that stack memory.\nI assume that\u0027s intentional, and you can tell whether it is happening using PGLAZYFREED_STACK and PGLAZYFREEMISSED_STACK.",
+      "range": {
+        "startLine": 817,
+        "startChar": 19,
+        "endLine": 817,
+        "endChar": 37
+      },
+      "revId": "cf582ebe07f74e3537f431c70611cb30b0ea9222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dfe346_bc02bf3e",
+        "filename": "mm/madvise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2026-04-07T14:11:03Z",
+      "side": 1,
+      "message": "(`nr` might be more accurate here than folio_nr_pages() if we\u0027re dealing with single-page mappings of a THP page, but that probably doesn\u0027t matter)",
+      "range": {
+        "startLine": 817,
+        "startChar": 39,
+        "endLine": 817,
+        "endChar": 60
+      },
+      "revId": "cf582ebe07f74e3537f431c70611cb30b0ea9222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
