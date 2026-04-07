@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a980a7d_841e39de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4094366
+      },
+      "writtenOn": "2026-04-07T06:28:29Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Can not find the original change on base branch (android12-5.10) for this change...\n\nCan not find the original change on base branch (android12-5.10) for this change.\nPlease ensure that the Change-Id of this change is same as the original change on the base branch.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5da4f7b2dbcbc84cb5319a1cdee1b26be2bce747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1cec6055_2e37f485",
