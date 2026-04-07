@@ -123,6 +123,24 @@
       "parentUuid": "dea1d69a_48165fa3",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6ccaa2_c04c25ae",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-07T14:30:54Z",
+      "side": 1,
+      "message": "\u003e Hmm, then it means that using pkvm_hyp-\u003enum_cpus is generally incorrect (since it is num_possible_cpus() i.e. the number of set bits in the bitmask, not the number of the highest set bit, so we may miss some CPUs)?\n\nIndeed.\n\n\u003e Looks like we can (and should) use for_each_possible_cpu() here (like we already use it in some cases in the hypervisor code, e.g. in pkvm_init_finalize()), instead of iterating from 0 to pkvm_hyp-\u003enum_cpus?\n\nWith that, seems not able to get the vcpu pointer unless:\n1) we assign vcpu pointer in if which is not preferred by the checkpatch.\n2) we expand the for_each_possible_cpu() and assign the vcpu pointer in the for loop.\n\nProbably 2) is better?\n\n\u003e And then pkvm_hyp-\u003enum_cpus becomes unused, and it seems not very useful anyway (and potentially misleading, like in this case), so we might just remove it?\n\nThis is the only place to use pkvm_hyp-\u003enum_cpus, and if this place doesn\u0027t use it, then it makes sense to remove it.",
+      "parentUuid": "8542db83_18253664",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
