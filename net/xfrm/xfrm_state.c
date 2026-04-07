@@ -1698,7 +1698,9 @@ struct xfrm_state *xfrm_state_lookup_byspi(struct net *net, __be32 spi,
 }
 EXPORT_SYMBOL(xfrm_state_lookup_byspi);
 
-static struct xfrm_state *xfrm_state_lookup_spi_proto(struct net *net, __be32 spi, u8 proto)
+static struct xfrm_state *xfrm_state_lookup_spi_proto(struct net *net,
+						      __be32 spi, u8 proto,
+						      u8 dir)
 {
 	struct xfrm_state *x;
 	unsigned int i;
@@ -1707,6 +1709,8 @@ static struct xfrm_state *xfrm_state_lookup_spi_proto(struct net *net, __be32 sp
 	for (i = 0; i <= net->xfrm.state_hmask; i++) {
 		hlist_for_each_entry_rcu(x, &net->xfrm.state_byspi[i], byspi) {
 			if (x->id.spi == spi && x->id.proto == proto) {
+				if (x->dir != dir)
+					continue;
 				if (!xfrm_state_hold_rcu(x))
 					continue;
 				rcu_read_unlock();
@@ -2577,6 +2581,7 @@ int xfrm_alloc_spi(struct xfrm_state *x, u32 low, u32 high,
 	struct xfrm_state *x0;
 	int err = -ENOENT;
 	u32 range = high - low + 1;
+	u32 mark = x->mark.v & x->mark.m;
 	__be32 newspi = 0;
 
 	spin_lock_bh(&x->lock);
@@ -2598,7 +2603,12 @@ int xfrm_alloc_spi(struct xfrm_state *x, u32 low, u32 high,
 		newspi = htonl(spi);
 
 		spin_lock_bh(&net->xfrm.xfrm_state_lock);
-		x0 = xfrm_state_lookup_spi_proto(net, newspi, x->id.proto);
+		if (x->dir == XFRM_SA_DIR_IN)
+			x0 = xfrm_state_lookup_spi_proto(net, newspi,
+							 x->id.proto, x->dir);
+		else
+			x0 = xfrm_state_lookup(net, mark, &x->id.daddr, newspi,
+					       x->id.proto, x->props.family);
 		if (!x0) {
 			x->id.spi = newspi;
 			h = xfrm_spi_hash(net, &x->id.daddr, newspi, x->id.proto, x->props.family);
