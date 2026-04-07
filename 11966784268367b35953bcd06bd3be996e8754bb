@@ -100,6 +100,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c069293a_14f2dc60",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 4127313
+      },
+      "writtenOn": "2026-04-07T07:26:17Z",
+      "side": 1,
+      "message": "I haven\u0027t seen it trigger, I just added it as a safeguard to catch any future un-accounted FD closures. I can remove it if you prefer.",
+      "parentUuid": "15d07a94_87fa1fe8",
+      "range": {
+        "startLine": 662,
+        "startChar": 2,
+        "endLine": 662,
+        "endChar": 59
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "120a4ac0_5b62cd38",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 1
