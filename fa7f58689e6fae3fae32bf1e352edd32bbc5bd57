@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f99480_ba27992a",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-07T07:37:03Z",
+      "side": 1,
+      "message": "Why aren\u0027t you using `report_list` in `report_enum`?",
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ca3aac_17cd1feb",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-07T07:37:03Z",
+      "side": 1,
+      "message": "This point is moot if you take my first suggestion, however using pointer  arithmetic is less readable and less readable than using array indexing.",
+      "fixSuggestions": [
+        {
+          "fixId": "15cb2ac9_7fe63dec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/function/f_accessory.c",
+              "range": {
+                "startLine": 1275,
+                "startChar": 0,
+                "endLine": 1276,
+                "endChar": 0
+              },
+              "replacement": "\t\tstruct hid_report_enum *report_enum \u003d \u0026hid-\u003ereport_enum[i];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ea02e4_e1cb8c01",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-07T07:37:03Z",
+      "side": 1,
+      "message": "Magic number irk me.  At least the 3 should be defined.",
+      "fixSuggestions": [
+        {
+          "fixId": "b21f07aa_636d240e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/function/f_accessory.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#define BITS_PER_BYTE_SHIFT\t3\n"
+            },
+            {
+              "path": "drivers/usb/gadget/function/f_accessory.c",
+              "range": {
+                "startLine": 1278,
+                "startChar": 0,
+                "endLine": 1279,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (report-\u003esize \u003e\n\t\t\t    (USB_COMP_EP0_BUFSIZ - 1) \u003c\u003c BITS_PER_BYTE_SHIFT) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
