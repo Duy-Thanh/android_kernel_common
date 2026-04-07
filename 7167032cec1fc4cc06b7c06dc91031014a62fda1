@@ -16,6 +16,24 @@
       "message": "Please reuse Change ID `I6eb4c6fc67c114f0a321ba2709bde5746b2cdae4`.",
       "revId": "7167032cec1fc4cc06b7c06dc91031014a62fda1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf5cd93_c28216ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4094366
+      },
+      "writtenOn": "2026-04-07T10:21:21Z",
+      "side": 1,
+      "message": "As requested, the new change is available at:\nhttps://android-review.googlesource.com/c/kernel/common/+/4023658",
+      "parentUuid": "f4e8085a_5dea4b60",
+      "revId": "7167032cec1fc4cc06b7c06dc91031014a62fda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
