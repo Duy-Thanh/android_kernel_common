@@ -34,6 +34,24 @@
       ],
       "revId": "12834817fa69f25ca5f4b4431817ced77e45f857",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6197ca_fe1311e5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-07T13:28:31Z",
+      "side": 1,
+      "message": "The issue is that, if this macro is used like this, which intend to have an else case for `if (cond)`:\n```\nif (cond)\n    for_each_pkvm_guest_vcpu() {\n        ....\n    }\nelse\n```\n\nThen the macro is expanded as:\n```\nif (cond)\n    for()\n        if (vcpu) {\n        ....\n    }\nelse\n```\n\nwhere the else case belongs to `if(vcpu)` unexpected. And seems this wouldn\u0027t be found via compiling, which made it more difficult to be found.",
+      "parentUuid": "ce64a099_a8e84bce",
+      "revId": "12834817fa69f25ca5f4b4431817ced77e45f857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
