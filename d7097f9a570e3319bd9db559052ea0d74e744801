@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ae7fed_f33675a4",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-07T16:46:28Z",
+      "side": 1,
+      "message": "To avoid false-positive ABI break being detected, I probably need to get rid of this and keep the `RUST_BINDER_LAYOUT` back into the previous file.",
+      "revId": "d7097f9a570e3319bd9db559052ea0d74e744801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
