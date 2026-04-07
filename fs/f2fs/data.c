@@ -3615,7 +3615,13 @@ static int __f2fs_write_data_pages(struct address_space *mapping,
 	}
 
 	if (__should_serialize_io(inode, wbc)) {
+		if (!mutex_trylock(&sbi->writepages))
+			blk_flush_plug(((struct task_struct *)current)->plug, true);
+		else
+			goto set_locked;
+
 		mutex_lock(&sbi->writepages);
+set_locked:
 		locked = true;
 	}
 
