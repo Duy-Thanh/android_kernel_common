@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d9400d_61137d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-04-07T17:40:42Z",
+      "side": 1,
+      "message": "Are we going to do this on android17-6.18 and mainline as well? If so, please revert CL:3968448 and CL:3968131, accordingly.",
+      "revId": "f2435d765f35e62e77a78a115ce53a135e9df010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
