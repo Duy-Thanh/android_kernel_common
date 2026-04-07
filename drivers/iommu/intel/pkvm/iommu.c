@@ -493,10 +493,6 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			iommu->vrta = val;
 		}
 		break;
-	case DMAR_IRTA_REG:
-		pkvm_err("iommu%d: Setting IRTA is not supported!\n", iommu->seq_id);
-		ret = -EPERM;
-		break;
 	case DMAR_PMEN_REG: {
 		/* RsvdP bits: 30:1 */
 		u32 rsvdp_mask = GENMASK_U32(30, 1);
@@ -518,6 +514,32 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	}
+	case DMAR_FSTS_REG:
+		/*
+		 * Bit 7(DMA_FSTS_PRO) is deprecated and RsvdZ (since VT-d spec
+		 * Revision 3.1). But host driver still sets this bit. So we
+		 * don't validate it here.
+		 */
+		if (val & (GENMASK_U32(31, 16) | GENMASK_U32(3, 2))) {
+			pkvm_err("iommu%d: FSTS 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			/* RW1C for clearing fault status bits */
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_PERFINTRSTS_REG:
+		if (val & (GENMASK_ULL(31, 1) |
+			   (ecap_pms(iommu->ecap) ? 0 : DMA_PERFINTRSTS_PIS))) {
+			pkvm_err("iommu%d: PERFINTRSTS 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			/* RW1C for clearing fault status bits */
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
 	case DMAR_ECEO_REG:
 		if (!cap_ecmds(iommu->cap) && val) {
 			pkvm_err("iommu%d: non-zero val 0x%llx when ECMD not supported\n",
@@ -650,14 +672,27 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		struct pkvm_iommu_frcd_reg_info frcd_info;
 		struct pkvm_iommu_pmu_reg_info pmu_info;
 
-		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info))
+		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info)) {
 			ret = iommu_frcd_validate_write(iommu, &frcd_info, val);
-		else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info))
+			if (!ret)
+				ret = iommu_direct_mmio_write(iommu, phys,
+							      len, val);
+		} else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info)) {
 			ret = iommu_pmu_validate_write(iommu, &pmu_info, val);
-
-		/* Not emulated MMIO can directly go to hardware */
-		if (!ret)
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			if (!ret)
+				ret = iommu_direct_mmio_write(iommu, phys,
+							      len, val);
+		} else {
+			/*
+			 * Deny-by-default: block all registers not explicitly handled
+			 * above.  Any register the host driver legitimately needs must
+			 * be added as an explicit case; unknown or unreviewed registers
+			 * must not reach hardware.
+			 */
+			pkvm_err("iommu%d: unsupported register write blocked at offset 0x%lx val 0x%llx\n",
+				 iommu->seq_id, offset, val);
+			ret = -EOPNOTSUPP;
+		}
 	}
 	}
 
