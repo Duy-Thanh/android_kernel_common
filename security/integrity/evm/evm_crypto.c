@@ -401,7 +401,6 @@ int evm_init_hmac(struct inode *inode, const struct xattr *xattrs,
 {
 	struct shash_desc *desc;
 	const struct xattr *xattr;
-	struct xattr_list *xattr_entry;
 
 	desc = init_desc(EVM_XATTR_HMAC, HASH_ALGO_SHA1);
 	if (IS_ERR(desc)) {
@@ -409,16 +408,11 @@ int evm_init_hmac(struct inode *inode, const struct xattr *xattrs,
 		return PTR_ERR(desc);
 	}
 
-	list_for_each_entry_lockless(xattr_entry, &evm_config_xattrnames,
-				     list) {
-		for (xattr = xattrs; xattr->name; xattr++) {
-			if (strcmp(xattr_entry->name +
-				   XATTR_SECURITY_PREFIX_LEN, xattr->name) != 0)
-				continue;
+	for (xattr = xattrs; xattr->name; xattr++) {
+		if (!evm_protected_xattr(xattr->name))
+			continue;
 
-			crypto_shash_update(desc, xattr->value,
-					    xattr->value_len);
-		}
+		crypto_shash_update(desc, xattr->value, xattr->value_len);
 	}
 
 	hmac_add_misc(desc, inode, EVM_XATTR_HMAC, hmac_val);
