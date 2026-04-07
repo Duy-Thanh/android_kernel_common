@@ -1281,7 +1281,6 @@ struct task_struct {
 	struct blocked_on_lock		blocked_on;	/* lock we're blocked on */
 	raw_spinlock_t			blocked_lock;
 #ifdef CONFIG_SCHED_PROXY_EXEC
-	struct list_head		migration_node;
 	struct list_head		blocked_head;  /* tasks blocked on this task */
 	struct list_head		blocked_node;  /* our entry on someone elses blocked_head */
 	/* Node for list of tasks to process blocked_head list for blocked entitiy activations */
