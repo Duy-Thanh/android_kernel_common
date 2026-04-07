@@ -202,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46558842_17138a78",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-07T16:06:08Z",
+      "side": 1,
+      "message": "Ok thanks.\n\nI\u0027m a little worried about the `dmabuf-\u003enr_task_refs` dereference possibly being a UAF if we ever hit this case, since we know the accounting is already incorrect. So I\u0027d prefer to leave it like it was.\n\nI found an issue which might be able to cause this case, so I should have a patch to address it in the next couple of days.",
+      "parentUuid": "c069293a_14f2dc60",
+      "range": {
+        "startLine": 662,
+        "startChar": 2,
+        "endLine": 662,
+        "endChar": 59
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "120a4ac0_5b62cd38",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 1
