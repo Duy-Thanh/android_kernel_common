@@ -204,7 +204,7 @@ enum vdso_pages {
 #else /* !__ASSEMBLY__ */
 
 #ifdef CONFIG_VDSO_GETRANDOM
-#define __vdso_u_rng_data	PROVIDE(vdso_u_rng_data = vdso_u_data + 2 * VDSO_PAGE_SIZE);
+#define __vdso_u_rng_data	PROVIDE(vdso_u_rng_data = vdso_u_data + 2 * PAGE_SIZE);
 #else
 #define __vdso_u_rng_data
 #endif
