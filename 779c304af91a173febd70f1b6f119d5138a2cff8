@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e626d5_f3312374",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-08T15:31:33Z",
+      "side": 1,
+      "message": "Removed initializtion",
+      "parentUuid": "63bcc251_ec403033",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 16
+      },
+      "revId": "779c304af91a173febd70f1b6f119d5138a2cff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70ddb4b3_4c4743b0",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "779c304af91a173febd70f1b6f119d5138a2cff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc70308_57010799",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-08T15:31:33Z",
+      "side": 1,
+      "message": "This should never happen it means that we were able to create a VMA with more padding than the vma size.\n\nI think it is valid to fail fast here if `panic_on_warn` is set to catch root issue.",
+      "parentUuid": "70ddb4b3_4c4743b0",
+      "range": {
+        "startLine": 139,
+        "startChar": 5,
+        "endLine": 139,
+        "endChar": 12
+      },
       "revId": "779c304af91a173febd70f1b6f119d5138a2cff8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
