@@ -16,6 +16,23 @@
       "message": "... blocking submit until getting OK from Greg / Neil",
       "revId": "4f41f44e0f61463f42eb2db40aa43bedf6ad282b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0bfebb0_1eb3c09b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-04-08T23:46:50Z",
+      "side": 1,
+      "message": "I would prefer to keep vendor hooks out of android-mainline. Is there a strong reason why we are trying to add this there? What is the progress on the upstream solution?",
+      "revId": "4f41f44e0f61463f42eb2db40aa43bedf6ad282b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
