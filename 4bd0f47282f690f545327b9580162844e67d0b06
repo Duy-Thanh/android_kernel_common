@@ -195,6 +195,24 @@
       "parentUuid": "52cc9f87_0d6c6606",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49549102_e19ceb4f",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-08T01:50:50Z",
+      "side": 1,
+      "message": "\u003e This may be something worth to do? As we already have a per_cpu way to get the corresponding pcpu and host_vcpu, which represents index pcpu/host_vcpu via CPU id, then seems no need to use CPU id to index them again in the array. With changing the array index to the consecutive numbers from 0..num_cpus - 1, we will have both ways in the pKVM. There will be more changes, but it may not be complex, as we only need to handle the cases before deprivilege. I can prepare a separate patch for this and we can review to see if it is necessary or not.\n\nYeah, maybe...",
+      "parentUuid": "cbb230e0_0ce1f278",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
