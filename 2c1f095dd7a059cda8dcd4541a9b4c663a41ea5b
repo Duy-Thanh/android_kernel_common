@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58becfeb_e70ddbb6",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-08T08:39:57Z",
+      "side": 1,
+      "message": "Seems this dma_fq is the domain type assigned by the host. If the domain type will not be changed at the runtime unless this domain is freed, maybe we can pass the dma_fq via `iommu_allocate_domain` hypercall, rather than via `iommu_domain_unmap`?",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
