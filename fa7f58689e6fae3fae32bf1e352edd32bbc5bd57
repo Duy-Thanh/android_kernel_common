@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8eab886_bffba71e",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-08T08:26:00Z",
+      "side": 1,
+      "message": "I see it.  You can ignore this then.",
+      "parentUuid": "23ce5cc6_633a990b",
+      "revId": "fa7f58689e6fae3fae32bf1e352edd32bbc5bd57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2ca3aac_17cd1feb",
