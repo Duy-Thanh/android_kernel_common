@@ -34,6 +34,24 @@
       ],
       "revId": "e9d2fc8f6c627f6e9c4cd104ed3e39b91cfc52f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b406e1_ca5d32a0",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-04-08T17:56:26Z",
+      "side": 1,
+      "message": "Good call, added an error messasge.",
+      "parentUuid": "5d0a5713_0d5cf3f8",
+      "revId": "e9d2fc8f6c627f6e9c4cd104ed3e39b91cfc52f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
