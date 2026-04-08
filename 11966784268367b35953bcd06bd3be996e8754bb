@@ -224,6 +224,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e19faf86_b9734622",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 4127313
+      },
+      "writtenOn": "2026-04-08T05:08:23Z",
+      "side": 1,
+      "message": "That makes perfect sense to avoid the UAF risk. I have dropped the put_dmabuf_info() changes in the latest patchset since your upcoming patch will handle the root cause.\nThanks.",
+      "parentUuid": "46558842_17138a78",
+      "range": {
+        "startLine": 662,
+        "startChar": 2,
+        "endLine": 662,
+        "endChar": 59
+      },
+      "revId": "11966784268367b35953bcd06bd3be996e8754bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "120a4ac0_5b62cd38",
