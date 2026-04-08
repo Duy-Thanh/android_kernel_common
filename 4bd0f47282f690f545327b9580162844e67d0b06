@@ -177,6 +177,24 @@
       "parentUuid": "bd6a8e10_d8cc021b",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb230e0_0ce1f278",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-08T01:42:48Z",
+      "side": 1,
+      "message": "\u003e ...BTW also just a minor note: instead of pkvm_hyp-\u003ehost_vcpus[(i)] we could use per_cpu(host_vcpu, (cpu)) here?\n\nYes, we could use `per_cpu(host_vcpu, (cpu))`. Actually we were using this at https://android-review.googlesource.com/c/kernel/common/+/4018593/1/arch/x86/kvm/pkvm/vmx/ept.c#202, And if we decide to ignore the checkpatch warning, we can use the above code.\n\n\u003e...Or alternatively we could do it the other way around: change pkvm-\u003ehost_vcpus (and pkvm-\u003epcpus as well) to index their elements by consecutive numbers from 0..num_cpus-1 which are not necessarily the same as the CPU numbers. Although that would require a bit more changes (to convert between those indexes and CPU numbers, etc).\n\nThis may be something worth to do? As we already have a per_cpu way to get the corresponding pcpu and host_vcpu, which represents index pcpu/host_vcpu via CPU id, then seems no need to use CPU id to index them again in the array. With changing the array index to the consecutive numbers from 0..num_cpus - 1, we will have both ways in the pKVM. There will be more changes, but it may not be complex, as we only need to handle the cases before deprivilege. I can prepare a separate patch for this and we can review to see if it is necessary or not.",
+      "parentUuid": "52cc9f87_0d6c6606",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
