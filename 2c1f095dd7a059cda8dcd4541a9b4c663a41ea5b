@@ -16,6 +16,24 @@
       "message": "Seems this dma_fq is the domain type assigned by the host. If the domain type will not be changed at the runtime unless this domain is freed, maybe we can pass the dma_fq via `iommu_allocate_domain` hypercall, rather than via `iommu_domain_unmap`?",
       "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60427e3_bff8e8f6",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-04-08T16:22:09Z",
+      "side": 1,
+      "message": "Seems like the domain type can changed at runtime from DMA to DMA-FQ with devices still bound:\n```\n*\n * Changing the default domain through sysfs requires the users to unbind the\n * drivers from the devices in the iommu group, except for a DMA -\u003e DMA-FQ\n * transition. Return failure if this isn\u0027t met.\n *\n * We need to consider the race between this and the device release path.\n * group-\u003emutex is used here to guarantee that the device release path\n * will not be entered at the same time.\n */\nstatic ssize_t iommu_group_store_type(struct iommu_group *group,\n»       »       »       »             const char *buf, size_t count)\n...\n...\n»       /* We can bring up a flush queue without tearing down the domain. */\n»       if (req_type \u003d\u003d IOMMU_DOMAIN_DMA_FQ \u0026\u0026\n»           group-\u003edefault_domain-\u003etype \u003d\u003d IOMMU_DOMAIN_DMA) {\n```\n\nThats the reason I thought I will pass it with every unmap call. Even if the host spoofs this to be a DMA_FQ while its actually in strict mode, donation API is supposed to flush the caches and we should be safe I guess.",
+      "parentUuid": "58becfeb_e70ddbb6",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
