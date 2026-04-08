@@ -213,6 +213,24 @@
       "parentUuid": "cbb230e0_0ce1f278",
       "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9631e50d_a973b20a",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-08T03:04:59Z",
+      "side": 1,
+      "message": "Add aosp/4023919 to use consecutive index number for host_vcpus and pcpus.",
+      "parentUuid": "49549102_e19ceb4f",
+      "revId": "4bd0f47282f690f545327b9580162844e67d0b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
