@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad8d8a3_be95d343",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-04-08T20:30:43Z",
+      "side": 1,
+      "message": "This is a ANDROID patch because the change it is fixing was done in https://r.android.com/364965, also `ANDROID` patch.",
+      "revId": "300c8daeecff7467b11991ea2ece704095dd84f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
