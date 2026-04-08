@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe2e6d3_8e85d7c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-04-08T22:41:25Z",
+      "side": 1,
+      "message": "For both patches (this and one for 6.6), could you please explain why these patches tagged and proposed as `ANDROID`?\n\nCan we please wait until at least these are reviewed upstream and picked up \nhttps://lore.kernel.org/all/20260402171404.3008494-2-bvanassche@acm.org/",
+      "revId": "a66f59c2b825ea952c5d6cd886616f8c33caf5c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
