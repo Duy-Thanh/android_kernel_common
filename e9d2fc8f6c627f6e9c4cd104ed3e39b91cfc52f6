@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0a5713_0d5cf3f8",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-08T08:31:55Z",
+      "side": 1,
+      "message": "Is it okay to fail silently?\n\nThe check above prints out a reason for the failure.",
+      "fixSuggestions": [
+        {
+          "fixId": "3813a5ea_72602ec3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/function/f_accessory.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tpr_err(\"HID report size (%u) exceeds EP0 buffer size (%u)\\n\",\n\t\t\t\t       expected_size, USB_COMP_EP0_BUFSIZ);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e9d2fc8f6c627f6e9c4cd104ed3e39b91cfc52f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
