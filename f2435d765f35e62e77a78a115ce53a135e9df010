@@ -16,6 +16,24 @@
       "message": "Are we going to do this on android17-6.18 and mainline as well? If so, please revert CL:3968448 and CL:3968131, accordingly.",
       "revId": "f2435d765f35e62e77a78a115ce53a135e9df010",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7913b2e7_df40f91b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-08T10:29:28Z",
+      "side": 1,
+      "message": "Yes. Do you think I should wait for this patch to become FROMGIT/UPSTREAM? There\u0027s a good chance it\u0027s going to miss the merge window next week.",
+      "parentUuid": "a0d9400d_61137d74",
+      "revId": "f2435d765f35e62e77a78a115ce53a135e9df010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
