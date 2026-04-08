@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/500572658",
       "revId": "a1e34e66f9bc60e6a4fd113b4a35f070e93386b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4280ce_8e917f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-08T09:48:27Z",
+      "side": 1,
+      "message": "I will replace this with aosp/4025540 which has an existing change ID.",
+      "revId": "a1e34e66f9bc60e6a4fd113b4a35f070e93386b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
