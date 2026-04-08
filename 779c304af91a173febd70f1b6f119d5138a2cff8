@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63bcc251_ec403033",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-08T15:15:09Z",
+      "side": 1,
+      "message": "Any reason these are initialized and then assigned again?",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a5c131ff_bb4f1cc7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "\tint nr_pages;\n\tint nr_pad;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "779c304af91a173febd70f1b6f119d5138a2cff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70ddb4b3_4c4743b0",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-08T15:15:09Z",
+      "side": 1,
+      "message": "This might crash the kernel. Is that your intention?",
+      "range": {
+        "startLine": 139,
+        "startChar": 5,
+        "endLine": 139,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "37253563_fa0e1e9c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "\tif (nr_pad \u003e\u003d nr_pages) {\n\t\tpr_debug(\"%s: nr_pad (%lu) \u003e\u003d nr_pages (%lu) in vma %pK\\n\",\n\t\t\t __func__, nr_pad, nr_pages, vma);\n"
+            },
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "779c304af91a173febd70f1b6f119d5138a2cff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
