@@ -6,7 +6,14 @@
 #include <linux/time_namespace.h>
 #include <linux/types.h>
 #include <linux/vdso_datastore.h>
+#include <linux/page_size_compat_defs.h>
 #include <vdso/datapage.h>
+
+#ifdef CONFIG_X86_64
+#define __PAGE_CNT_PER_MAX_PAGE (__MAX_PAGE_SIZE / PAGE_SIZE)
+#else
+#define __PAGE_CNT_PER_MAX_PAGE 1
+#endif
 
 /*
  * The vDSO data page.
@@ -45,7 +52,7 @@ static vm_fault_t vvar_fault(const struct vm_special_mapping *sm,
 	vm_fault_t err;
 
 	switch (vmf->pgoff) {
-	case VDSO_TIME_PAGE_OFFSET:
+	case VDSO_TIME_PAGE_OFFSET * __PAGE_CNT_PER_MAX_PAGE:
 		if (!IS_ENABLED(CONFIG_GENERIC_GETTIMEOFDAY))
 			return VM_FAULT_SIGBUS;
 		pfn = __phys_to_pfn(__pa_symbol(vdso_k_time_data));
@@ -54,14 +61,14 @@ static vm_fault_t vvar_fault(const struct vm_special_mapping *sm,
 			 * Fault in VVAR page too, since it will be accessed
 			 * to get clock data anyway.
 			 */
-			addr = vmf->address + VDSO_TIMENS_PAGE_OFFSET * PAGE_SIZE;
+			addr = vmf->address + VDSO_TIMENS_PAGE_OFFSET * VDSO_PAGE_SIZE;
 			err = vmf_insert_pfn(vma, addr, pfn);
 			if (unlikely(err & VM_FAULT_ERROR))
 				return err;
 			pfn = page_to_pfn(timens_page);
 		}
 		break;
-	case VDSO_TIMENS_PAGE_OFFSET:
+	case VDSO_TIMENS_PAGE_OFFSET * __PAGE_CNT_PER_MAX_PAGE:
 		/*
 		 * If a task belongs to a time namespace then a namespace
 		 * specific VVAR is mapped with the VVAR_DATA_PAGE_OFFSET and
@@ -73,16 +80,16 @@ static vm_fault_t vvar_fault(const struct vm_special_mapping *sm,
 			return VM_FAULT_SIGBUS;
 		pfn = __phys_to_pfn(__pa_symbol(vdso_k_time_data));
 		break;
-	case VDSO_RNG_PAGE_OFFSET:
+	case VDSO_RNG_PAGE_OFFSET * __PAGE_CNT_PER_MAX_PAGE:
 		if (!IS_ENABLED(CONFIG_VDSO_GETRANDOM))
 			return VM_FAULT_SIGBUS;
 		pfn = __phys_to_pfn(__pa_symbol(vdso_k_rng_data));
 		break;
-	case VDSO_ARCH_PAGES_START ... VDSO_ARCH_PAGES_END:
+	case (VDSO_ARCH_PAGES_START * __PAGE_CNT_PER_MAX_PAGE) ... ((VDSO_ARCH_PAGES_START * __PAGE_CNT_PER_MAX_PAGE) + VDSO_ARCH_DATA_PAGES - 1):
 		if (!IS_ENABLED(CONFIG_ARCH_HAS_VDSO_ARCH_DATA))
 			return VM_FAULT_SIGBUS;
 		pfn = __phys_to_pfn(__pa_symbol(vdso_k_arch_data)) +
-			vmf->pgoff - VDSO_ARCH_PAGES_START;
+			vmf->pgoff - (VDSO_ARCH_PAGES_START * __PAGE_CNT_PER_MAX_PAGE);
 		break;
 	default:
 		return VM_FAULT_SIGBUS;
@@ -98,7 +105,8 @@ const struct vm_special_mapping vdso_vvar_mapping = {
 
 struct vm_area_struct *vdso_install_vvar_mapping(struct mm_struct *mm, unsigned long addr)
 {
-	return _install_special_mapping(mm, addr, VDSO_NR_PAGES * PAGE_SIZE,
+	return _install_special_mapping(mm, addr,
+					VDSO_NR_PAGES * __PAGE_CNT_PER_MAX_PAGE * PAGE_SIZE,
 					VM_READ | VM_MAYREAD | VM_IO | VM_DONTDUMP |
 					VM_PFNMAP | VM_SEALED_SYSMAP,
 					&vdso_vvar_mapping);
