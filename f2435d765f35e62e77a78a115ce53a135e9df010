@@ -34,6 +34,24 @@
       "parentUuid": "a0d9400d_61137d74",
       "revId": "f2435d765f35e62e77a78a115ce53a135e9df010",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e51915_fb5bbf76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-09T16:34:19Z",
+      "side": 1,
+      "message": "We should make sure that this is in before we start making releases with this kernel version so that we can completely remove `ANDROID_BINDER_IPC_RUST_DUMMY` from `main-kernel-2026`.\n\nI believe the release branch will be cut within the next few weeks. Given that, do you think it makes sense to wait until the patch is at least `FROMGIT`?",
+      "parentUuid": "7913b2e7_df40f91b",
+      "revId": "f2435d765f35e62e77a78a115ce53a135e9df010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
