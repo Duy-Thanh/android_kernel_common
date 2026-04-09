@@ -228,8 +228,58 @@ void kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 	 * Additional reset state handling that PSCI may have imposed on us.
 	 * Must be done after all the sys_reg reset.
 	 */
+<<<<<<< HEAD   (ef7dda41ee29c3dd3a61bfe190ff06aeb952e68d ANDROID: x86/pkvm: Add dependency with CONFIG_PARAVIRT)
 	if (reset_state.reset)
 		kvm_reset_vcpu_psci(vcpu, &reset_state);
+||||||| BASE   (dd26ea937ef593a9c47aa4c85296e6b57a5344a1 Linux 6.18.20)
+	if (reset_state.reset) {
+		unsigned long target_pc = reset_state.pc;
+
+		/* Gracefully handle Thumb2 entry point */
+		if (vcpu_mode_is_32bit(vcpu) && (target_pc & 1)) {
+			target_pc &= ~1UL;
+			vcpu_set_thumb(vcpu);
+		}
+
+		/* Propagate caller endianness */
+		if (reset_state.be)
+			kvm_vcpu_set_be(vcpu);
+
+		*vcpu_pc(vcpu) = target_pc;
+		vcpu_set_reg(vcpu, 0, reset_state.r0);
+	}
+=======
+	if (reset_state.reset) {
+		unsigned long target_pc = reset_state.pc;
+
+		/* Gracefully handle Thumb2 entry point */
+		if (vcpu_mode_is_32bit(vcpu) && (target_pc & 1)) {
+			target_pc &= ~1UL;
+			vcpu_set_thumb(vcpu);
+		}
+
+		/* Propagate caller endianness */
+		if (reset_state.be)
+			kvm_vcpu_set_be(vcpu);
+
+		*vcpu_pc(vcpu) = target_pc;
+
+		/*
+		 * We may come from a state where either a PC update was
+		 * pending (SMC call resulting in PC being increpented to
+		 * skip the SMC) or a pending exception. Make sure we get
+		 * rid of all that, as this cannot be valid out of reset.
+		 *
+		 * Note that clearing the exception mask also clears PC
+		 * updates, but that's an implementation detail, and we
+		 * really want to make it explicit.
+		 */
+		vcpu_clear_flag(vcpu, PENDING_EXCEPTION);
+		vcpu_clear_flag(vcpu, EXCEPT_MASK);
+		vcpu_clear_flag(vcpu, INCREMENT_PC);
+		vcpu_set_reg(vcpu, 0, reset_state.r0);
+	}
+>>>>>>> BRANCH (44c944a679974c2d18ee9b87070456d34193f3d4 Linux 6.18.21)
 
 	/* Reset timer */
 	kvm_timer_vcpu_reset(vcpu);
