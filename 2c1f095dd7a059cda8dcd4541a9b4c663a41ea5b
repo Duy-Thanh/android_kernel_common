@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b54b9392_969829f0",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4197,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-09T07:05:37Z",
+      "side": 1,
+      "message": "Probably not related with this patch, but seems the original comment is about \"not supporting deferred flush capability\", so `return !pkvm_enabled();` But seems this also effect to the other cap IOMMU_CAP_CACHE_COHERENCY. Is this intentional?",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58becfeb_e70ddbb6",
         "filename": "drivers/iommu/intel/pkvm/domain.c",
         "patchSetId": 2
