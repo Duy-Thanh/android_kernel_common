@@ -3,6 +3,8 @@
 #include <asm/vdso/vsyscall.h>
 #include <vdso/datapage.h>
 
+#include <linux/page_size_compat.h>
+
 /*
  * Linker script for vDSO.  This is an ELF shared object prelinked to
  * its virtual address, and with only one read-only segment.
