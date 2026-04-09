@@ -16,6 +16,23 @@
       "message": "eh, added `ANDROID:` prefix although idk if it\u0027s really correct here.",
       "revId": "26fded5bc08229a77d506fa0cf5bd7b5f5fef03c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d624845_7a365326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1090594
+      },
+      "writtenOn": "2026-04-09T12:02:11Z",
+      "side": 1,
+      "message": "seems like code-owner needs to vote too, can you add someone who\u0027s active on gerrit?",
+      "revId": "26fded5bc08229a77d506fa0cf5bd7b5f5fef03c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
