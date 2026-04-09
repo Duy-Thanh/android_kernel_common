@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9809454_6743b930",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-04-09T17:35:16Z",
+      "side": 1,
+      "message": "Hi,\n\nYou have two options:\n\n1) Upstream your clock drivers and propose bringing back these traces.\n\n2) For out-of-tree drivers, you can create a new out-of-tree clock trace driver and then update your drivers to use those traces. This will allow you to collect the same traces for your out-of-tree drivers. As a reference, you can refer to similar changes we made to the Pixel 6 drivers on android-mainline here:\n\nhttps://r.android.com/3703475\n\nYou can refer to the whole clocktrace topic to see how the new trace driver was enabled and used in other out-of-tree Pixel drivers:\n\nhttps://android-review.git.corp.google.com/q/topic:%22clocktrace%22\n\n\nFeel free to file a bug if you want to discuss this in more detail.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 148
+      },
+      "revId": "5894b1cc7c1c08a5825640a21989f3e8789fb007",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cd244229_f7ae2fcc",
