@@ -1,9 +1,4 @@
 # SPDX-License-Identifier: GPL-2.0
-# Backward compatibility
-asflags-y  += $(EXTRA_AFLAGS)
-ccflags-y  += $(EXTRA_CFLAGS)
-cppflags-y += $(EXTRA_CPPFLAGS)
-ldflags-y  += $(EXTRA_LDFLAGS)
 
 # Finds the multi-part object the current object will be linked into.
 # If the object belongs to two or more multi-part objects, list them all.
