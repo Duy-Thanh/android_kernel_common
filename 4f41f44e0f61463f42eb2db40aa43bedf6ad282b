@@ -51,6 +51,23 @@
       "parentUuid": "a0bfebb0_1eb3c09b",
       "revId": "4f41f44e0f61463f42eb2db40aa43bedf6ad282b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cdb7b0_fc13de0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-09T08:11:03Z",
+      "side": 1,
+      "message": "Fix this properly upstream first, I do not want to see vendor hooks in the dwc3 codebase for obvious reasons.",
+      "revId": "4f41f44e0f61463f42eb2db40aa43bedf6ad282b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
