@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d8db776_f233e8e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-09T09:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9229012_17552f0a",
+      "revId": "eb21837f7c3809f2e23b7c4037a1f03fd8412b35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c9c5d98_871325f6",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-09T08:59:16Z",
       "side": 1,
       "message": "I don\u0027t think this is worth mentioning. NR_CPUS is set by the kernel config and is a hard limit anyway, using proper percpu variable won\u0027t give more than NR_CPUS.",
+      "revId": "eb21837f7c3809f2e23b7c4037a1f03fd8412b35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20967be4_4b755a80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-09T09:01:28Z",
+      "side": 1,
+      "message": "I meant to make it less to save memory if needed.",
+      "parentUuid": "6c9c5d98_871325f6",
       "revId": "eb21837f7c3809f2e23b7c4037a1f03fd8412b35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
