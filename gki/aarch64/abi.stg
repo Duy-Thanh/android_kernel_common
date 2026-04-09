@@ -432089,7 +432089,7 @@ elf_symbol {
   name: "ttm_pool_debugfs"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0df57780
+  crc: 0x57c63ea5
   type_id: 0x9e41ea47
   full_name: "ttm_pool_debugfs"
 }
