@@ -34,6 +34,24 @@
       "parentUuid": "58becfeb_e70ddbb6",
       "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2321aaed_5e973b75",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-09T03:16:41Z",
+      "side": 1,
+      "message": "I see. Thanks. Maybe worth to mention this in the commit message?\n\nAnd with this, transferring from deferred to strict will need a domain teardown and recreate process. Do we also need a similar check here to prevent this? Maybe no as we will eventually flush the deferred TLB in `pkvm_intel_iommu_tlb_flush` to guarantee we won\u0027t keep any stale TLB?",
+      "parentUuid": "d60427e3_bff8e8f6",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
