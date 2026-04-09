@@ -403878,6 +403878,15 @@ function {
   parameter_id: 0x2e5c720a
 }
 function {
+  id: 0x91b76eb8
+  return_type_id: 0x6720d32f
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+  parameter_id: 0x9cf21ab5
+  parameter_id: 0x0b30ee00
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x91b78ec8
   return_type_id: 0x6720d32f
   parameter_id: 0x30ddb79e
@@ -456806,6 +456815,15 @@ elf_symbol {
   crc: 0xe2cb53b5
   type_id: 0x598d73af
   full_name: "__vmalloc_noprof"
+}
+elf_symbol {
+  id: 0x08a0e250
+  name: "__vmap_pages_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8da8dff4
+  type_id: 0x91b76eb8
+  full_name: "__vmap_pages_range_noflush"
 }
 elf_symbol {
   id: 0xf84b240e
@@ -525874,6 +525892,15 @@ elf_symbol {
   full_name: "vmap"
 }
 elf_symbol {
+  id: 0xf1e4c40a
+  name: "vmap_pages_range_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8da8dff4
+  type_id: 0x91b76eb8
+  full_name: "vmap_pages_range_noflush"
+}
+elf_symbol {
   id: 0xe6c94717
   name: "vmap_pfn"
   is_defined: true
@@ -530184,6 +530211,7 @@ interface {
   symbol_id: 0x4b75c281
   symbol_id: 0xa7c8d5e4
   symbol_id: 0x17ef5190
+  symbol_id: 0x08a0e250
   symbol_id: 0xf84b240e
   symbol_id: 0xb63e140d
   symbol_id: 0xd171b921
@@ -537853,6 +537881,7 @@ interface {
   symbol_id: 0xa1a341df
   symbol_id: 0x7ab04a6e
   symbol_id: 0x8119b492
+  symbol_id: 0xf1e4c40a
   symbol_id: 0xe6c94717
   symbol_id: 0xdd7d73a5
   symbol_id: 0xe4441605
