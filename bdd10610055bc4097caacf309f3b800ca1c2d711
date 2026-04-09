@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5492b2f_ac4916b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-09T03:30:43Z",
+      "side": 1,
+      "message": "This needs a follow on patch adding the symbol to the symbol list and kabi",
+      "revId": "bdd10610055bc4097caacf309f3b800ca1c2d711",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
