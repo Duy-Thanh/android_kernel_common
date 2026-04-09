@@ -19,4 +19,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(cpu_idle);
 EXPORT_TRACEPOINT_SYMBOL_GPL(cpu_frequency);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(clock_set_rate);
 
