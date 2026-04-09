@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf64dbe3_6db735bb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-04-09T15:15:03Z",
+      "side": 1,
+      "message": "This isn\u0027t declared I think.",
+      "range": {
+        "startLine": 2220,
+        "startChar": 27,
+        "endLine": 2220,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fe68f480_1bc4e319",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2220,
+                "startChar": 0,
+                "endLine": 2221,
+                "endChar": 0
+              },
+              "replacement": "\t\t__host_update_page_state(phys, size, PKVM_PAGE_OWNED);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2229,
+                "startChar": 0,
+                "endLine": 2230,
+                "endChar": 0
+              },
+              "replacement": "\t\t__host_update_page_state(phys, size, PKVM_PAGE_OWNED);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "87759340f1903b79f3d3c40a74487d64f500bcaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
