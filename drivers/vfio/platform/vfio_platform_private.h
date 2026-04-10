@@ -20,6 +20,12 @@
 #define VFIO_PLATFORM_INDEX_TO_OFFSET(index)	\
 	((u64)(index) << VFIO_PLATFORM_OFFSET_SHIFT)
 
+struct vfio_platform_irq_ctx {
+	int			hwirq;
+	struct eventfd_ctx	*trigger;
+	char			*name;
+};
+
 struct vfio_platform_irq {
 	u32			flags;
 	u32			count;
@@ -30,6 +36,8 @@ struct vfio_platform_irq {
 	spinlock_t		lock;
 	struct virqfd		*unmask;
 	struct virqfd		*mask;
+	struct vfio_platform_irq_ctx *ctx;
+	u32			nr_ctx;
 };
 
 struct vfio_platform_region {
@@ -48,6 +56,7 @@ struct vfio_platform_device {
 	u32				num_regions;
 	struct vfio_platform_irq	*irqs;
 	u32				num_irqs;
+	bool				msi_enabled;
 	struct mutex			igate;
 	const char			*compat;
 	const char			*acpihid;
