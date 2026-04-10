@@ -68,6 +68,24 @@
       "parentUuid": "cc11fe1d_c9904f86",
       "revId": "001bfe83edfd7d2866948c41763ae20d933958d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd85a515_7f8a8761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2026-04-10T13:36:11Z",
+      "side": 1,
+      "message": "lgtm! like said on that stack though, i lack +2 here. i agree we should land those in preference to this if possible though",
+      "parentUuid": "3d2895e3_76f11660",
+      "revId": "001bfe83edfd7d2866948c41763ae20d933958d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
