@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb12f920_ed1e96d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2026-04-10T13:30:44Z",
+      "side": 1,
+      "message": "backport SGTM too, thank you! i unfortunately lack +2 in this repo.\n\ndunno how the kernel gerrit interacts with rebases and +2 invalidation, so i made a copy of the AFDO CL (https://android-review.git.corp.google.com/c/kernel/common/+/4029064) for testing with this stack",
+      "revId": "9e62388143a1e0567ad344f805dc47868115d285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
