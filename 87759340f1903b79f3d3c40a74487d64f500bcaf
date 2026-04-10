@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61cacbee_fbaa54fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1632590
+      },
+      "writtenOn": "2026-04-10T00:43:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8b7b6b47_f17f4807",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 52
+      },
+      "revId": "87759340f1903b79f3d3c40a74487d64f500bcaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf64dbe3_6db735bb",
@@ -71,6 +95,30 @@
           ]
         }
       ],
+      "revId": "87759340f1903b79f3d3c40a74487d64f500bcaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8789cd_816dcbb1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1632590
+      },
+      "writtenOn": "2026-04-10T00:43:47Z",
+      "side": 1,
+      "message": "I’m sorry. I applied the relevant patch in 6.18 and confirmed that it resolved the issue, but I upstreamed the unmodified version of the patch. I’ll fix it and push the corrected version again.",
+      "parentUuid": "bf64dbe3_6db735bb",
+      "range": {
+        "startLine": 2220,
+        "startChar": 27,
+        "endLine": 2220,
+        "endChar": 31
+      },
       "revId": "87759340f1903b79f3d3c40a74487d64f500bcaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
