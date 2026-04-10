@@ -86,6 +86,24 @@
       "message": "Hmm... For some reason this setting of RAX to 0 is causing Microdroid pVM to hang in pvmfw.\n\nThe symptoms are: when running e.g. `vm run-microdroid -p --enable-earlycon`, pvmfw gets stuck after printing this line:\n```\n[INFO] found a block device of size 28128KB\n```\n\nand then there is 100% CPU consumption on one CPU by the crosvm process, and pKVM vmexit tracing shows that there is no high amount of vmexits, however handling the `vcpu_run` hypercall is taking very long (~12000000 cycles) for some reason. For example, a snapshot of vmexit stats collected during 1s:\n```\n/sys/kernel/debug/pkvm # echo 1 \u003eenable_vmexit_trace ; sleep 1; cat vmexit_trace\nHost-vcpu0: VMCALL 291 cycles 3131758079 each-handler-cycle 10762055\nHost-vcpu0: vcpu_load 28 cycles 5668 each-handler-cycle 202\nHost-vcpu0: vcpu_run 262 cycles 3131749932 each-handler-cycle 11953244\nHost-vcpu0: iommu_domain_map 1 cycles 2479 each-handler-cycle 2479\nHost-vcpu4: CPUID 10 cycles 17372 each-handler-cycle 1737\nHost-vcpu5: VMCALL 82 cycles 1490040 each-handler-cycle 18171\nHost-vcpu5: iommu_domain_map 39 cycles 217504 each-handler-cycle 5577\nHost-vcpu5: iommu_domain_unmap 43 cycles 1272536 each-handler-cycle 29593\nHost-vcpu7: VMCALL 3 cycles 17038 each-handler-cycle 5679\nHost-vcpu7: iommu_domain_map 3 cycles 17038 each-handler-cycle 5679\nHost: CPUID 10 cycles 17372 each-handler-cycle 1737\nHost: VMCALL 376 cycles 3133265157 each-handler-cycle 8333152\nHost: vcpu_load 28 cycles 5668 each-handler-cycle 202\nHost: vcpu_run 262 cycles 3131749932 each-handler-cycle 11953244\nHost: iommu_domain_map 43 cycles 237021 each-handler-cycle 5512\nHost: iommu_domain_unmap 43 cycles 1272536 each-handler-cycle 29593\nVM1-vcpu0: EXTERNAL_INTERRUPT 263 cycles 4745759 each-handler-cycle 18044\nVM1: EXTERNAL_INTERRUPT 263 cycles 4745759 each-handler-cycle 18044\n```\n\nI\u0027ve tried moving this `kvm_rax_write` after the below `kvm_sev_es_mmio_write` just in case, but it doesn\u0027t help. Whereas removing this `kvm_rax_write` (i.e. essentially reverting this patch) fixes the problem.\n\n@jaszczyk@google.com do you have any ideas what may be happening here? Would it be possible that pvmfw, or the libraries used by it, are using the PKVM_GHC_IOWRITE hypercall in some strange way so that they depend on RAX being set to a non-zero value after the hypercall returns?",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4602dc3_36c742f5",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-10T18:18:26Z",
+      "side": 1,
+      "message": "Ok, this fixes the problem for me:\n```\n--- a/arch/x86/kvm/x86.c\n+++ b/arch/x86/kvm/x86.c\n@@ -10736,10 +10736,11 @@ static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)\n                        goto invalid;\n \n                /* Assume that the MMIO write hypercall always succeeds. */\n-               kvm_rax_write(vcpu, 0);\n                vcpu-\u003emmio_is_write \u003d 1;\n                /* Leverage sev_es MMIO write */\n                ret \u003d kvm_sev_es_mmio_write(vcpu, kvm_rbx_read(vcpu), size, \u0026val);\n+               if (ret \u003d\u003d 1)\n+                       kvm_rax_write(vcpu, 0);\n                break;\n        }\n        case PKVM_GHC_SHARE_MEM:\n```\n\n_Maybe_ this is the right thing to do (but I\u0027m not fully sure, since I\u0027m not sure why _exactly_ this helps, and what exactly is happening on both KVM and guest (pvmfw) side).",
+      "parentUuid": "8c1703ec_aeceff5c",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
