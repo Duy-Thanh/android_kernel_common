@@ -16,6 +16,41 @@
       "message": "backport SGTM too, thank you! i unfortunately lack +2 in this repo.\n\ndunno how the kernel gerrit interacts with rebases and +2 invalidation, so i made a copy of the AFDO CL (https://android-review.git.corp.google.com/c/kernel/common/+/4029064) for testing with this stack",
       "revId": "9e62388143a1e0567ad344f805dc47868115d285",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1613bdc5_0d77108f",
+        "filename": "include/asm-generic/vmlinux.lds.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-04-10T15:52:02Z",
+      "side": 1,
+      "message": "`#define DATA_MAIN` is not changed in the original patch. Please remove `.data.rel.*` from the macro to leave it as it was before the change.",
+      "fixSuggestions": [
+        {
+          "fixId": "1abd0744_203444ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/asm-generic/vmlinux.lds.h",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "#define DATA_MAIN .data .data.[0-9a-zA-Z_]* .data..L* .data..compoundliteral* .data.$__unnamed_* .data.$L*\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9e62388143a1e0567ad344f805dc47868115d285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
