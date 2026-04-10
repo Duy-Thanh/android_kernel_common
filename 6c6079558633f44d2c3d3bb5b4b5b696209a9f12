@@ -34,6 +34,24 @@
       "parentUuid": "0fb0a0a1_c981c126",
       "revId": "6c6079558633f44d2c3d3bb5b4b5b696209a9f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d1a045_1b8f6d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-10T18:36:39Z",
+      "side": 1,
+      "message": "To make this clear, it went from this:\n```\n obj-$(CONFIG_ATH12K) +\u003d ath12k.o\n ath12k-y +\u003d core.o \\\n             core_wifi7.o \\        \u003c--- this was relocated ...\n             [...]\n```\n\nTo this:\n```\nobj-$(CONFIG_ATH12K) +\u003d ath12k_wifi7.o\nath12k_wifi7-y +\u003d core.o \\        \u003c----- here!\n                  [...]\n```\n\nstill the same `CONFIG_ATH12K` that build the two modules (core and wifi7).",
+      "parentUuid": "7046221d_b6db3567",
+      "revId": "6c6079558633f44d2c3d3bb5b4b5b696209a9f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
