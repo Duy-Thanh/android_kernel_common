@@ -16,6 +16,24 @@
       "message": "Upstream discussion still ongoing (pending additional logs; no clear consensus that this is the right fix)",
       "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b999e023_cb79244f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2026-04-10T15:57:46Z",
+      "side": 1,
+      "message": "Unfortunately it seems like the upstream discussion is not going to conclude before GKI release. AFAIK this patch, even if not perfect, should be safe and it fixes issues which are also observed on Pixel devices. @dmaluka@google.com could you provide more details?\n\nAdding @willmcvicker@google.com from Pixel team.",
+      "parentUuid": "a0690bee_fe9af5cc",
+      "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
