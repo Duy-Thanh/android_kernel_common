@@ -33,6 +33,24 @@
       "message": "What about v6.6?\n\nWhat\u0027s the reason for BACKPORT?  I don\u0027t see any conflicts.\n\nAlso, we should not drop the ANDROID part.",
       "revId": "447c9622b5f3af215df43647cdaebf0a519ad018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29382b36_90f439f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4728833
+      },
+      "writtenOn": "2026-04-10T10:55:00Z",
+      "side": 1,
+      "message": "It is not a BACKPORT, I have updated it back to ANDROID.",
+      "parentUuid": "7d2a5555_db73bef3",
+      "revId": "447c9622b5f3af215df43647cdaebf0a519ad018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
