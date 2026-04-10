@@ -34,6 +34,24 @@
       "parentUuid": "a0690bee_fe9af5cc",
       "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3358ce_51370268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-04-10T16:27:23Z",
+      "side": 1,
+      "message": "This change doesn\u0027t break the KMI. So you can cherry-pick it to whatever GKI release branch you need to after it\u0027s accepted upstream. Does that work for you?",
+      "parentUuid": "b999e023_cb79244f",
+      "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
