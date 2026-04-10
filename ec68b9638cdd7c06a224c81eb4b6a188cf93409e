@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "430175b0_adfa9f88",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10721,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-10T14:18:11Z",
+      "side": 1,
+      "message": "nit: maybe make it clear _why_ we need to assume that, e.g.: \"Existing guests assume that the MMIO read hypercall always succeeds and the returned value is the read value, so store the read value in RAX.\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "2a72c15b_d86cc15e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10721,
+                "startChar": 0,
+                "endLine": 10723,
+                "endChar": 0
+              },
+              "replacement": "\t\t * Existing guests assume that the MMIO read hypercall always\n\t\t * succeeds and the returned value is the read value, so store\n\t\t * the read value in RAX.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12eacf65_807199c6",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10736,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-10T14:18:11Z",
+      "side": 1,
+      "message": "nit: similarly, e.g. \"Existing guests assume that ...\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "e5280f4f_ede3ca08",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10736,
+                "startChar": 0,
+                "endLine": 10737,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Existing guests assume that the MMIO write hypercall always\n\t\t * succeeds.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
