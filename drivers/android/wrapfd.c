@@ -1113,20 +1113,30 @@ static const struct file_operations wrap_fops = {
 
 static struct wrap_content *create_content_for(int fd, unsigned long prot)
 {
+	bool is_file_writable, writable;
 	struct wrap_content *content;
 	struct dma_buf *dmabuf;
+	struct file *file;
+
+	file = fget(fd);
+	if (!file)
+		return ERR_PTR(-EINVAL);
+
+	is_file_writable = !!(file->f_mode & FMODE_WRITE);
+	fput(file);
+
+	writable = !!(prot & PROT_WRITE);
+	if (writable && !is_file_writable)
+		return ERR_PTR(-EACCES);
 
 	dmabuf = dma_buf_get(fd);
-	if (!IS_ERR(dmabuf)) {
-		bool writable = !!(prot & PROT_WRITE);
+	if (IS_ERR(dmabuf))
+		return ERR_PTR(-EINVAL);
 
-		content = alloc_dmabuf_content(dmabuf, writable);
-		dma_buf_put(dmabuf);
+	content = alloc_dmabuf_content(dmabuf, writable);
+	dma_buf_put(dmabuf);
 
-		return content ? content : ERR_PTR(-ENOMEM);
-	}
-
-	return ERR_PTR(-EINVAL);
+	return content ? content : ERR_PTR(-ENOMEM);
 }
 
 static int wrap_file(struct wrap_ctx *ctx,
