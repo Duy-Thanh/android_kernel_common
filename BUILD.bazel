@@ -405,14 +405,17 @@ kernel_build(
         "modules.builtin",
         "modules.builtin.modinfo",
         "vmlinux",
-        "vmlinux.symvers",
+        "Module.symvers",
     ],
     arch = "arm64",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
     make_goals = [
         "Image",
+            "modules",
     ],
     makefile = ":Makefile",
+    keep_module_symvers = True,
+    visibility = ["//visibility:public"],
 )
 
 pkg_files(
