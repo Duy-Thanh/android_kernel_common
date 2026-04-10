@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb0a0a1_c981c126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-10T18:21:03Z",
+      "side": 1,
+      "message": "I\u0027m skeptical db845c has hardware that supports wifi7 (I guess unless its just a software radio update?)  Is this just a driver dependency thing?",
+      "revId": "6c6079558633f44d2c3d3bb5b4b5b696209a9f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
