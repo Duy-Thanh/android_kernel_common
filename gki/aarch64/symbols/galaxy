@@ -78,6 +78,8 @@
   __traceiter_android_vh_free_page_bypass
   __traceiter_android_vh_free_pages_ok_bypass
   __traceiter_android_vh_free_pages_prepare_bypass
+  __traceiter_android_vh_gcma_cc_allow_nonworkingset
+  __traceiter_android_vh_gcma_cc_store_page_bypass
   __traceiter_android_vh_is_fpsimd_save
   __traceiter_android_vh_madvise_pageout_bypass
   __traceiter_android_vh_madvise_pageout_return_error
@@ -145,6 +147,8 @@
   __tracepoint_android_vh_free_page_bypass
   __tracepoint_android_vh_free_pages_ok_bypass
   __tracepoint_android_vh_free_pages_prepare_bypass
+  __tracepoint_android_vh_gcma_cc_allow_nonworkingset
+  __tracepoint_android_vh_gcma_cc_store_page_bypass
   __tracepoint_android_vh_is_fpsimd_save
   __tracepoint_android_vh_madvise_pageout_bypass
   __tracepoint_android_vh_madvise_pageout_return_error
