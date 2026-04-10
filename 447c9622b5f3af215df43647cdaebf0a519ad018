@@ -16,6 +16,23 @@
       "message": "@tkjos@google.com Could you please help review the latest patch-set 11?",
       "revId": "447c9622b5f3af215df43647cdaebf0a519ad018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2a5555_db73bef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-04-10T07:35:12Z",
+      "side": 1,
+      "message": "What about v6.6?\n\nWhat\u0027s the reason for BACKPORT?  I don\u0027t see any conflicts.\n\nAlso, we should not drop the ANDROID part.",
+      "revId": "447c9622b5f3af215df43647cdaebf0a519ad018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
