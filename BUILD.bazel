@@ -401,18 +401,21 @@ kernel_build(
     srcs = [":kernel_aarch64_sources"],
     outs = [
         "Image",
+        "Module.symvers",
         "System.map",
         "modules.builtin",
         "modules.builtin.modinfo",
         "vmlinux",
-        "vmlinux.symvers",
     ],
     arch = "arm64",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
+    keep_module_symvers = True,
     make_goals = [
         "Image",
+        "modules",
     ],
     makefile = ":Makefile",
+    visibility = ["//visibility:public"],
 )
 
 pkg_files(
