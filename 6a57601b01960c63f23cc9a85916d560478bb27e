@@ -16,6 +16,24 @@
       "message": "Needs a follow on patch to add the new symbol to the symbols list and update the kabi",
       "revId": "6a57601b01960c63f23cc9a85916d560478bb27e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d15c83e_6e3ff94b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4761310
+      },
+      "writtenOn": "2026-04-11T06:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78eeeca9_7443afd2",
+      "revId": "6a57601b01960c63f23cc9a85916d560478bb27e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
