@@ -104,6 +104,24 @@
       "parentUuid": "8c1703ec_aeceff5c",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584d016d_d8836f29",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-12T02:21:12Z",
+      "side": 1,
+      "message": "\u003e Maybe this is the right thing to do (but I\u0027m not fully sure, since I\u0027m not sure why exactly this helps, and what exactly is happening on both KVM and guest (pvmfw) side).\n\n`kvm_sev_es_mmio_write` returns 1 means the MMIO is emulated in the host kernel. But most likely the emulated devices (except for the x2apic) are in the user space, so `kvm_sev_es_mmio_write` will return 0 and goes to the user space to emulate. So most likely `kvm_rax_write` is not executed in the above code.\n\nThe pvm kernel uses kvm_hypercall3 which explicitly tells the compiler that the rax will be changed after executing the hypercall. So my feeling is that, seems the pvmfw code is not expecting the rax can be changed after sending the MMIO write hypercall?",
+      "parentUuid": "f4602dc3_36c742f5",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
