@@ -52,6 +52,24 @@
       "parentUuid": "7046221d_b6db3567",
       "revId": "6c6079558633f44d2c3d3bb5b4b5b696209a9f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c15ba5_b4e5b658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3430125
+      },
+      "writtenOn": "2026-04-12T13:29:06Z",
+      "side": 1,
+      "message": "Hi John, just for the record, db845c device itself does use ath10k driver but we use db845c ACK and AOSP device config to support Snapdragon 8 Gen devices as well and these newer devices use ath12k driver.",
+      "parentUuid": "f9d1a045_1b8f6d07",
+      "revId": "6c6079558633f44d2c3d3bb5b4b5b696209a9f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
