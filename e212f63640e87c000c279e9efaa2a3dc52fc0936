@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9646a76_b0c45155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-13T19:49:18Z",
+      "side": 1,
+      "message": "breaks build for db845 (`tools/bazel run //common:db845c_dist`):\n```\nBuildbot Version: androidbuild_buildbot_20260404.00_RC00\nMachine: r-c199f7f5975563ae-2-638t\n...63559/logs/command.profile.json --experimental_profile_include_target_label //common:db845c_dist -- --destdir\u003d/buildbot/dist_dirs/aosp_kernel-common-android16-6.12-linux-kernel_db845c_kleaf/P121163559\nExtracting Bazel installation...\nStarting local Bazel server and connecting to it...\nERROR: /mnt/disks/build-disk/src/android/common-android16-6.12/common/BUILD.bazel:1062:10: in pkg_files rule //common:db845c_dist_files: \nTraceback (most recent call last):\n...File \"/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/external/rules_pkg+/pkg/mappings.bzl\", line 329, column 17, in _pkg_files_impl\n\t\tfail(\"After renames, multiple sources (at least {0}, {1}) map to the same destination.  Consider adjusting strip_prefix and/or renames\".format(dest_src_map[dest].path, src.path))\n...rivers/usb/host/xhci-pci-renesas.ko, bazel-out/k8-fastbuild/bin/common/kernel_aarch64/drivers/usb/host/xhci-pci-renesas.ko) map to the same destination.  Consider adjusting strip_prefix and/or renames\nERROR: /mnt/disks/build-disk/src/android/common-android16-6.12/common/BUILD.bazel:1062:10: Analysis of target \u0027//common:db845c_dist_files\u0027 failed\nINFO: Analyzed target //common:db845c_dist (64 packages loaded, 105363 targets configured).\nWARNING: errors encountered while analyzing target \u0027//common:db845c_dist\u0027, it will not be built.\n\n```",
+      "revId": "e212f63640e87c000c279e9efaa2a3dc52fc0936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
