@@ -16,6 +16,9 @@
 
 static void __debug_save_spe(u64 *pmscr_el1, u64 *pmblimitr_el1)
 {
+	/* Clear pmscr in case of early return */
+	*pmscr_el1 = 0;
+
 	/*
 	 * At this point, we know that this CPU implements
 	 * SPE and is available to the host.
