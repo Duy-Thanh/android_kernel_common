@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ba005cd_d58c42e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T05:58:37Z",
+      "side": 1,
+      "message": "Please check aosp/4020889 for `android17-6.18`.\n\nSince we\u0027re now in KMI frozen state, I\u0027m planning to temporarily add a function `usb_get_offload_lock`. We expect to remove it during the KMI thaw stage.",
+      "parentUuid": "6fb1b126_4d925c73",
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0852669c_3a540609",
         "filename": "include/linux/usb.h",
         "patchSetId": 4
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ceef5c0_62dff906",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T05:58:37Z",
+      "side": 1,
+      "message": "Please see the latest patch for the update.",
+      "parentUuid": "0852669c_3a540609",
+      "range": {
+        "startLine": 757,
+        "startChar": 0,
+        "endLine": 757,
+        "endChar": 51
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0aa869f_b666b735",
         "filename": "include/linux/usb.h",
         "patchSetId": 4
@@ -54,6 +96,30 @@
       "writtenOn": "2026-04-03T13:02:12Z",
       "side": 1,
       "message": "I don\u0027t think this fits into this structure.",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 46
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a87ac3d_eb0b25d9",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T05:58:37Z",
+      "side": 1,
+      "message": "Please see the latest patch for the update.",
+      "parentUuid": "c0aa869f_b666b735",
       "range": {
         "startLine": 759,
         "startChar": 0,
