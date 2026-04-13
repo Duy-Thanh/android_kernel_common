@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db8ef58c_4377bcae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-13T10:14:57Z",
+      "side": 1,
+      "message": "This will require CRC fixup and an allowed ABI break.",
+      "revId": "316b4abadbdc1911f35ccfc06e592edf483365fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
