@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acf1b24_10733dc3",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-13T09:16:44Z",
+      "side": 1,
+      "message": "no, please put this in the \"1\" slot above, don\u0027t burn a whole 64 bits for just 1 bit please.",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 51
+      },
+      "revId": "14dd3e03adfcbc04e595f764422f8b44bfe65ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
