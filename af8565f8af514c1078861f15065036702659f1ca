@@ -22,6 +22,30 @@
       },
       "revId": "af8565f8af514c1078861f15065036702659f1ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16cb4dc_d199ff21",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T22:14:53Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "c098c729_a8750c0c",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 653,
+        "endChar": 69
+      },
+      "revId": "af8565f8af514c1078861f15065036702659f1ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
