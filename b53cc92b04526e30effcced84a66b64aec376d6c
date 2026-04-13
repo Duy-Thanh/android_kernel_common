@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "178c61e7_91b38c31",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-13T15:51:13Z",
+      "side": 1,
+      "message": "I think these __*NO_COMPAT flags and helpers can be deleted as well no?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "b53cc92b04526e30effcced84a66b64aec376d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a528c3da_484d8c3e",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-13T15:51:13Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ada0b43d_75caed0e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/page_size_compat.h",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b53cc92b04526e30effcced84a66b64aec376d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
