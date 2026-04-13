@@ -143,8 +143,9 @@ static u16 *hfsplus_compose_lookup(u16 *p, u16 cc)
 	return NULL;
 }
 
-static int hfsplus_uni2asc(struct super_block *sb, const struct hfsplus_unistr *ustr,
-		    int max_len, char *astr, int *len_p)
+int hfsplus_uni2asc(struct super_block *sb,
+		const struct hfsplus_unistr *ustr,
+		char *astr, int *len_p)
 {
 	const hfsplus_unichr *ip;
 	struct nls_table *nls = HFSPLUS_SB(sb)->nls;
@@ -157,8 +158,8 @@ static int hfsplus_uni2asc(struct super_block *sb, const struct hfsplus_unistr *
 	ip = ustr->unicode;
 
 	ustrlen = be16_to_cpu(ustr->length);
-	if (ustrlen > max_len) {
-		ustrlen = max_len;
+	if (ustrlen > HFSPLUS_MAX_STRLEN) {
+		ustrlen = HFSPLUS_MAX_STRLEN;
 		pr_err("invalid length %u has been corrected to %d\n",
 			be16_to_cpu(ustr->length), ustrlen);
 	}
@@ -277,21 +278,6 @@ done:
 out:
 	*len_p = (char *)op - astr;
 	return res;
-}
-
-inline int hfsplus_uni2asc_str(struct super_block *sb,
-			       const struct hfsplus_unistr *ustr, char *astr,
-			       int *len_p)
-{
-	return hfsplus_uni2asc(sb, ustr, HFSPLUS_MAX_STRLEN, astr, len_p);
-}
-
-inline int hfsplus_uni2asc_xattr_str(struct super_block *sb,
-				     const struct hfsplus_attr_unistr *ustr,
-				     char *astr, int *len_p)
-{
-	return hfsplus_uni2asc(sb, (const struct hfsplus_unistr *)ustr,
-			       HFSPLUS_ATTR_MAX_STRLEN, astr, len_p);
 }
 
 /*
