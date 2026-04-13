@@ -9841,6 +9841,7 @@ static int __ufshcd_wl_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op)
 	}
 
 	flush_work(&hba->eeh_work);
+	cancel_delayed_work_sync(&hba->ufs_rtc_update_work);
 
 	ret = ufshcd_vops_suspend(hba, pm_op, PRE_CHANGE);
 	if (ret)
@@ -9894,6 +9895,13 @@ vops_suspend:
 	ret = ufshcd_vops_suspend(hba, pm_op, POST_CHANGE);
 	if (ret)
 		goto set_link_active;
+<<<<<<< HEAD   (e00665660b29b0182e634eb5bf42f81fad10fe2a Merge e7b3d154eb08 ("usb: mdc800: handle signal and read rac)
+||||||| BASE   (e7b3d154eb0836893e79aacf980c062df8ce4573 usb: mdc800: handle signal and read racing)
+
+	cancel_delayed_work_sync(&hba->ufs_rtc_update_work);
+=======
+
+>>>>>>> BRANCH (2d53b863b401bc13b08440f67d83220d860274df selftests: mptcp: join: check RM_ADDR not sent over same sub)
 	goto out;
 
 set_link_active:
