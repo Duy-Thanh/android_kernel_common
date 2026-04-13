@@ -461,9 +461,44 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_GSTS_REG:
 		*val = iommu->vgsts;
 		break;
-	default:
-		/* Not emulated MMIO can directly go to hardware */
+	case DMAR_IQH_REG:
+	case DMAR_IQT_REG:
+		if (iommu->qi) {
+			pkvm_err("iommu%d: read to IQT/IQA not allowed after QI init!\n",
+				 iommu->seq_id);
+			return -EPERM;
+		} else {
+			ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_PMEN_REG:
+	case DMAR_PERFCAP_REG:
+	case DMAR_PERFCFGOFF_REG:
+	case DMAR_PERFOVFOFF_REG:
+	case DMAR_PERFCNTROFF_REG:
+	case DMAR_PERFINTRSTS_REG:
+	case DMAR_PERFINTRCTL_REG:
+	case DMAR_PERFINTRDATA_REG:
+	case DMAR_PERFINTRADDR_REG:
+	case DMAR_PERFINTRUADDR_REG:
+	case DMAR_PERFEVNTCAP_REG:
+	case DMAR_FSTS_REG:
+	case DMAR_FECTL_REG:
+	case DMAR_FEADDR_REG:
+	case DMAR_FEUADDR_REG:
+	case DMAR_FEDATA_REG:
 		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		break;
+	default:
+		/*
+		 * Deny-by-default: block all registers not explicitly handled
+		 * above.  Any register the host driver legitimately needs must
+		 * be added as an explicit case; unknown or unreviewed registers
+		 * must not reach hardware.
+		 */
+		pkvm_err("iommu%d: unrecognized register read blocked at offset 0x%lx\n",
+			 iommu->seq_id, offset);
+		ret = -EPERM;
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
