@@ -106,6 +106,24 @@
       "parentUuid": "184719ff_b6b72824",
       "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "741b62da_ea76214a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2026-04-13T13:03:57Z",
+      "side": 1,
+      "message": "Hi @willdeacon@google.com, you are right. I should have checked how it looks on the mailing list before posting my comment, sorry for the rush. I was told that the patch is safe and useful for ACK (including Pixel) so I just wanted to help, without the intention of pushing anything.\n\n@amad@google.com, as @willmcvicker@google.com noticed, it does not break KMI, so it should be possible to merge FROMGIT version (when it\u0027s accepted in the upstream) into the GKI dev and then cherry-pick into any required release branch. WDYT?",
+      "parentUuid": "09d06497_73950a93",
+      "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
