@@ -212,6 +212,24 @@
       "parentUuid": "4c2fa75c_d37904fd",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ba5951_c08ea720",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-13T14:21:10Z",
+      "side": 1,
+      "message": "Ahh sorry, so it seems it affects pvmfw - didn\u0027t read the previous msg in this thread - sorry too much things at once - I will catch-up and response soon.\n\nIn general updating virtio-drivers Android downstream was problematic when we needed to do it last time due to monocrate and dependencies + now for release we will probably have to go trough yet another unpleasant process.",
+      "parentUuid": "f74e6110_9de92b62",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
