@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e763d161_0aa11a39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-13T17:21:50Z",
+      "side": 1,
+      "message": "Oh, I realize this wasn\u0027t cherry-picked properly. Please abandon this and resubmit using the same Change-Id as: https://r.android.com/3714366",
+      "revId": "2e31463ccd1190ac213d3d49c0d3e7ff4bb88867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
