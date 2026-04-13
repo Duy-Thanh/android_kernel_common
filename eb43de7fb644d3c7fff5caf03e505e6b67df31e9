@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "270198d4_59f7f1a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-13T08:46:52Z",
+      "side": 1,
+      "message": "For abi-breaking changes, wait for the next ABI update point, and use the correct hashtag for it as documented in the gki newsletter.",
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
