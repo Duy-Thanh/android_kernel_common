@@ -176,6 +176,24 @@
       "parentUuid": "b48d33c5_e57b2b39",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2fa75c_d37904fd",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-13T14:07:40Z",
+      "side": 1,
+      "message": "but we don\u0027t use virtio in pvmfw for x86, at least we do not use it now, right? so in context of pKVM-IA the only place were we need virtio to be enlightened for pKVM-IA hyp is trusty and microdroid, right?",
+      "parentUuid": "3892ff05_06cf5a4b",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
