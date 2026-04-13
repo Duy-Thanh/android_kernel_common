@@ -399,9 +399,6 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	offset = phys - iommu->reg_phys;
 
 	switch (offset) {
-	case DMAR_GCMD_REG:
-		ret = -EINVAL;
-		break;
 	case DMAR_CAP_REG:
 		*val = iommu->cap;
 		break;
@@ -420,18 +417,87 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_GSTS_REG:
 		*val = iommu->vgsts;
 		break;
+	case DMAR_IQH_REG:
+	case DMAR_IQT_REG:
+	case DMAR_VER_REG:
+	case DMAR_GCMD_REG:
+	case DMAR_PMEN_REG:
+	case DMAR_PLMBASE_REG:
+	case DMAR_PLMLIMIT_REG:
+	case DMAR_ICS_REG:
+	case DMAR_PRS_REG:
+	case DMAR_PECTL_REG:
+	case DMAR_PEDATA_REG:
+	case DMAR_PEADDR_REG:
+	case DMAR_PEUADDR_REG:
+	case DMAR_PERFCFGOFF_REG:
+	case DMAR_PERFFRZOFF_REG:
+	case DMAR_PERFOVFOFF_REG:
+	case DMAR_PERFCNTROFF_REG:
+	case DMAR_PERFINTRSTS_REG:
+	case DMAR_PERFINTRCTL_REG:
+	case DMAR_PERFINTRDATA_REG:
+	case DMAR_PERFINTRADDR_REG:
+	case DMAR_PERFINTRUADDR_REG:
+	case DMAR_FSTS_REG:
+	case DMAR_FECTL_REG:
+	case DMAR_FEADDR_REG:
+	case DMAR_FEUADDR_REG:
+	case DMAR_FEDATA_REG:
+		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		break;
+	case DMAR_ECRSP_REG:
+	case DMAR_IQER_REG:
+	case DMAR_PERFCAP_REG:
+	case DMAR_PERFEVNTCAP_REG:
+	case DMAR_PHMBASE_REG:
+	case DMAR_PHMLIMIT_REG:
+	case DMAR_PQH_REG:
+	case DMAR_PQT_REG:
+	case DMAR_PQA_REG:
+	case DMAR_MTRRCAP_REG:
+	case DMAR_MTRRDEF_REG:
+	case DMAR_MTRR_FIX64K_00000_REG ... DMAR_MTRR_FIX4K_F8000_REG:
+	case DMAR_MTRR_PHYSBASE0_REG ... DMAR_MTRR_PHYSMASK9_REG:
+		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		break;
+	case DMAR_ECCAP_REG:
+	case DMAR_ECCAP_REG + DMA_ECMD_REG_STEP:
+	case DMAR_ECCAP_REG + 2 * DMA_ECMD_REG_STEP:
+	case DMAR_ECCAP_REG + 3 * DMA_ECMD_REG_STEP:
+		if (!cap_ecmds(iommu->cap)) {
+			pkvm_err("iommu%d: ECCAP read when ECMD is not supported\n",
+				 iommu->seq_id);
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		}
+		break;
 	default: {
 		struct pkvm_iommu_frcd_reg_info frcd_info;
 		struct pkvm_iommu_pmu_reg_info pmu_info;
 
-		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info))
+		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info)) {
 			ret = iommu_frcd_validate_read(iommu, &frcd_info);
-		else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info))
+			if (!ret)
+				ret = iommu_direct_mmio_read(iommu, phys,
+							     len, val);
+		} else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info)) {
 			ret = iommu_pmu_validate_read(iommu, &pmu_info);
-
-		/* Not emulated MMIO can directly go to hardware */
-		if (!ret)
-			ret = iommu_direct_mmio_read(iommu, phys, len, val);
+			if (!ret)
+				ret = iommu_direct_mmio_read(iommu, phys,
+							     len, val);
+		} else {
+			/*
+			 * Deny-by-default: block all registers not explicitly handled
+			 * above.  Any register the host driver legitimately needs must
+			 * be added as an explicit case; unknown or unreviewed registers
+			 * must not reach hardware.
+			 */
+			pkvm_err("iommu%d: unsupported register read blocked at offset 0x%lx\n",
+				 iommu->seq_id, offset);
+			ret = -EPERM;
+		}
 	}
 	}
 
