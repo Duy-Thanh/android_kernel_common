@@ -745,7 +745,21 @@ int qca_uart_setup(struct hci_dev *hdev, uint8_t baudrate,
 	/* Firmware files to download are based on ROM version.
 	 * ROM version is derived from last two bytes of soc_ver.
 	 */
+<<<<<<< HEAD   (8d19a931aeda1b24d4020af687ff09ad89873b35 Revert "net: enetc: allocate vf_state during PF probes")
 	rom_ver = ((soc_ver & 0x00000f00) >> 0x04) | (soc_ver & 0x0000000f);
+||||||| BASE   (c5009f5ad9341f63b3cb14774dfe03403b740357 firmware: arm_scpi: Fix device_node reference leak in probe )
+	if (soc_type == QCA_WCN3988)
+		rom_ver = ((soc_ver & 0x00000f00) >> 0x05) | (soc_ver & 0x0000000f);
+	else
+		rom_ver = ((soc_ver & 0x00000f00) >> 0x04) | (soc_ver & 0x0000000f);
+=======
+	if (soc_type == QCA_WCN3988)
+		rom_ver = ((soc_ver & 0x00000f00) >> 0x05) | (soc_ver & 0x0000000f);
+	else if (soc_type == QCA_WCN3998)
+		rom_ver = ((soc_ver & 0x0000f000) >> 0x07) | (soc_ver & 0x0000000f);
+	else
+		rom_ver = ((soc_ver & 0x00000f00) >> 0x04) | (soc_ver & 0x0000000f);
+>>>>>>> BRANCH (df8ed24f9c0edfeaf4ed43e57d5a3cedda6dbbeb Bluetooth: qca: fix ROM version reading on WCN3998 chips)
 
 	if (soc_type == QCA_WCN6750)
 		qca_send_patch_config_cmd(hdev);
