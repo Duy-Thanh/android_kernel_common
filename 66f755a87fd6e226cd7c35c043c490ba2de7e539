@@ -16,6 +16,24 @@
       "message": "Please add a second signed-off by tag as well as a short description of what you modified",
       "revId": "66f755a87fd6e226cd7c35c043c490ba2de7e539",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f58e2f_aaf4d889",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T16:26:25Z",
+      "side": 1,
+      "message": "Please check the latest commit message for the update.",
+      "parentUuid": "c5a4632e_b1ac8bde",
+      "revId": "66f755a87fd6e226cd7c35c043c490ba2de7e539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
