@@ -404249,6 +404249,12 @@ function {
   parameter_id: 0xf1a6dfed
 }
 function {
+  id: 0x91d5ee3c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x31fe2b41
+  parameter_id: 0x0aa1f0ee
+}
+function {
   id: 0x91d63caf
   return_type_id: 0x6720d32f
   parameter_id: 0x315b7e01
@@ -473482,6 +473488,15 @@ elf_symbol {
   full_name: "drm_edid_to_sad"
 }
 elf_symbol {
+  id: 0x443ba489
+  name: "drm_edid_to_speaker_allocation"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdd225f70
+  type_id: 0x91d5ee3c
+  full_name: "drm_edid_to_speaker_allocation"
+}
+elf_symbol {
   id: 0x465ea5f1
   name: "drm_edid_valid"
   is_defined: true
@@ -532074,6 +532089,7 @@ interface {
   symbol_id: 0x20e778ab
   symbol_id: 0xf7be00e0
   symbol_id: 0x9ff39d6a
+  symbol_id: 0x443ba489
   symbol_id: 0x465ea5f1
   symbol_id: 0x2dd89a0f
   symbol_id: 0x6ea79777
