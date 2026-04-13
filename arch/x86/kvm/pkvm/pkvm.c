@@ -1240,7 +1240,15 @@ static int pkvm_hwapic_isr_update(struct kvm_vcpu *vcpu, int max_isr)
 	 * The value -1 represents no interrupt, thus always allow the host to
 	 * update the ISR in this case. For the other values, should do proper
 	 * checks.
-	 *
+	 */
+	if (max_isr == -1)
+		goto update;
+
+	/* A valid max_isr should be in [0-255]. */
+	if (max_isr & ~0xff)
+		return -EINVAL;
+
+	/*
 	 * For a protected APIC, the ISR state is protected so don't allow the
 	 * host to update it. But the host will recognize the protected apic
 	 * after the vCPU starts running. Before that the host may still use
@@ -1253,10 +1261,11 @@ static int pkvm_hwapic_isr_update(struct kvm_vcpu *vcpu, int max_isr)
 	 * for the same security reason with the PV interface __pkvm__inject_irq.
 	 * See comments in the function pkvm_inject_irq.
 	 */
-	if ((max_isr != -1) && (vcpu->arch.apic->guest_apic_protected ||
-				(pkvm_is_protected_vcpu(vcpu) && max_isr < 32)))
+	if (vcpu->arch.apic->guest_apic_protected ||
+	    (pkvm_is_protected_vcpu(vcpu) && max_isr < 32))
 		return -EPERM;
 
+update:
 	kvm_x86_call(hwapic_isr_update)(vcpu, max_isr);
 
 	return 0;
