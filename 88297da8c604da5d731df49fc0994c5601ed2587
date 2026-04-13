@@ -70,6 +70,24 @@
       "parentUuid": "b999e023_cb79244f",
       "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184719ff_b6b72824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-13T08:28:59Z",
+      "side": 1,
+      "message": "The linked bugs may contain mentions of `irqfd_resampler_shutdown()` but it\u0027s not at all clear that the actual problem is related. Many seem to have been triaged to other issues and are being fixed differently.\n\nI understand the perceived urgency with the GKI release, but nobody has replied to the upstream thread for **a week**, so it\u0027s hardly surprising that it doesn\u0027t look like it\u0027s going to conclude. Please prioritise an upstream fix so that we can take it into GKI.",
+      "parentUuid": "b0f34bf7_3ea2c840",
+      "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
