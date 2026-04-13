@@ -230,6 +230,24 @@
       "parentUuid": "f74e6110_9de92b62",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d01d9bc_b8a89cd0",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-13T14:25:40Z",
+      "side": 1,
+      "message": "\u003e but we don\u0027t use virtio in pvmfw for x86, at least we do not use it now, right?\n\nWhen I\u0027m starting microdroid, pvmfw does print this (see my first comment in this thread):\n\n```\n[INFO] found a block device of size 28128KB\n```\n\nso I assume it is using virtio-blk?",
+      "parentUuid": "f74e6110_9de92b62",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
