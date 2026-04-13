@@ -22,6 +22,30 @@
       },
       "revId": "03b1aaeebdd659bd63b3fe62186de787308b94da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba62384_4d3e5cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-13T09:05:24Z",
+      "side": 1,
+      "message": "Thanks for the heads up, the commit message has been modified.",
+      "parentUuid": "f7a046b6_37b74e3e",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "03b1aaeebdd659bd63b3fe62186de787308b94da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
