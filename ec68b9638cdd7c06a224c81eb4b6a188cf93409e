@@ -194,6 +194,24 @@
       "parentUuid": "3892ff05_06cf5a4b",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74e6110_9de92b62",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-13T14:12:23Z",
+      "side": 1,
+      "message": "BTW I also think that nobody really cares much about libvirtio_drivers is fact that nobody updated it since Nov 20 when https://github.com/rcore-os/virtio-drivers/pull/210 was merged upstream (contrary to virtio-drivers-and-device).",
+      "parentUuid": "4c2fa75c_d37904fd",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
