@@ -28,7 +28,13 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (ad5ab6eeeef7b9386a96a61d0155c1dced2c3e24 Merge 54df178324b2 ("drm: Fix use-after-free on framebuffers)
 #include <linux/android_kabi.h>
+||||||| BASE   (54df178324b268c62f847381e2813a1b0f971384 drm: Fix use-after-free on framebuffers and property blobs w)
+=======
+#include <linux/spinlock.h>
+#include <linux/srcu.h>
+>>>>>>> BRANCH (c56b177efce8b62798e4d96bdb9867106cb7c4a0 Bluetooth: hci_core: Fix use-after-free in vhci_flush())
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sync.h>
@@ -347,6 +353,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	char		name[8];
