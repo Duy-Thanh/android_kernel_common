@@ -101,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e3c664_b2f21c70",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-13T09:17:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1ceef5c0_62dff906",
+      "range": {
+        "startLine": 757,
+        "startChar": 0,
+        "endLine": 757,
+        "endChar": 51
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0aa869f_b666b735",
@@ -138,6 +162,30 @@
       "side": 1,
       "message": "Please see the latest patch for the update.",
       "parentUuid": "c0aa869f_b666b735",
+      "range": {
+        "startLine": 759,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 46
+      },
+      "revId": "395f49d29a147d4e3413f2aa10ab0b7cc2718ab5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc86e59_f2c0a19b",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-13T09:17:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6a87ac3d_eb0b25d9",
       "range": {
         "startLine": 759,
         "startChar": 0,
