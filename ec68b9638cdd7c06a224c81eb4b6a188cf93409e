@@ -140,6 +140,24 @@
       "parentUuid": "584d016d_d8836f29",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48d33c5_e57b2b39",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-13T13:50:20Z",
+      "side": 1,
+      "message": "I\u0027ve upstream it to virtio-drivers as well: https://github.com/rcore-os/virtio-drivers/pull/210, then to virtio-drives-and-devices https://github.com/immunant/virtio-drivers-and-devices/pull/24#event-21092162204 which next propagated to Android downstream virtio-drivers-and-device.\n\nBut indeed it didn\u0027t propagated to downstream Android\u0027s virtio-driver but I think we shouldn\u0027t worry about it since Trusty team switched to virtio-drivers-and-device and that\u0027s why I make sure it propagated there but stop looking on Android\u0027s downstream virtio-drivers - I think nobody is using it anymore in Android)",
+      "parentUuid": "b0644565_66b6ea9f",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
