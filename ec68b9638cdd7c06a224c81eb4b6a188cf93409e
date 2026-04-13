@@ -158,6 +158,24 @@
       "parentUuid": "b0644565_66b6ea9f",
       "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3892ff05_06cf5a4b",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10737,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-13T14:03:54Z",
+      "side": 1,
+      "message": "\u003e I think nobody is using it anymore in Android\n\npvmfw does (at least)?\n\nhttps://googleplex-android.googlesource.com/platform/external/rust/android-crates-io/+/refs/heads/main/crates/virtio-drivers/Android.bp#17\n\n```\npackages/modules/Virtualization$ grep -r libvirtio_drivers\ntests/vmbase_test_vm/Android.bp:        \"libvirtio_drivers\",\nlibs/libvmbase/Android.bp:        \"libvirtio_drivers\",\nguest/pvmfw/Android.bp:        \"libvirtio_drivers\",\nguest/vmbase_example/Android.bp:        \"libvirtio_drivers\",\nguest/service_vm/Android.bp:        \"libvirtio_drivers\",\n```\n\nIt looks like it\u0027s actually the other way around: only Trusty is using virtio-drivers-and-devices, everyone else is using virtio-drivers?",
+      "parentUuid": "b48d33c5_e57b2b39",
+      "revId": "ec68b9638cdd7c06a224c81eb4b6a188cf93409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
