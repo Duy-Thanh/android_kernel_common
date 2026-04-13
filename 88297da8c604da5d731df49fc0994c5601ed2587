@@ -88,6 +88,24 @@
       "parentUuid": "b0f34bf7_3ea2c840",
       "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d06497_73950a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-13T11:19:42Z",
+      "side": 1,
+      "message": "Regarding prioritizing an upstream fix - I don\u0027t disagree at all (I\u0027m not the one pushing for merging this CL).\n\nRegarding possibly affecting those Pixel bugs: they all show one instance of `irqfd_resampler_shutdown()` blocked on the `resampler_lock` mutex while another one blocked on synchronizing the `irq_srcu`. So, while that might not 100% prove it\u0027s exactly the same deadlock, it suggests it is quite likely?  And the issue indeed doesn\u0027t seem platform-specific, it should be reproducible with any VM with e.g. multiple virtio devices and thus multiple irqfd resamplers?\n\n\u003e Many seem to have been triaged to other issues and are being fixed differently.\n\nYeah, I did look thought the comments in those bugs about that, none of them seem to address the kernel hang, which suggests they may be fixing _other_ issues but not this kernel issue (at best they may just hide its symptoms)?",
+      "parentUuid": "184719ff_b6b72824",
+      "revId": "88297da8c604da5d731df49fc0994c5601ed2587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
