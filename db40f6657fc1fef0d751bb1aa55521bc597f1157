@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "879d4ae0_439776a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-14T08:40:05Z",
+      "side": 1,
+      "message": "With the cosmetic comments resolved, LGTM!",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6831c3d_defc6bc8",
         "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
         "patchSetId": 6
