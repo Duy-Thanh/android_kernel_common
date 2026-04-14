@@ -49193,6 +49193,10 @@ member {
   type_id: 0x35cf1033
 }
 member {
+  id: 0x2ec1e396
+  type_id: 0x3429fe49
+}
+member {
   id: 0x2ecc00ad
   type_id: 0x341e5a93
   offset: 4608
@@ -49409,6 +49413,11 @@ member {
 member {
   id: 0x3190e1a6
   type_id: 0x496df688
+}
+member {
+  id: 0x31a41cbe
+  type_id: 0x49be2d18
+  offset: 27456
 }
 member {
   id: 0x31aa1057
@@ -50031,6 +50040,10 @@ member {
   id: 0x364b4150
   type_id: 0x56037e9c
   offset: 1408
+}
+member {
+  id: 0x36752b74
+  type_id: 0x56faddc1
 }
 member {
   id: 0x3697c485
@@ -51379,6 +51392,11 @@ member {
   type_id: 0x312fa971
 }
 member {
+  id: 0x97086243
+  name: "__0"
+  type_id: 0xb111ced7
+}
+member {
   id: 0x970c579a
   name: "__0"
   type_id: 0xb5241757
@@ -51517,6 +51535,11 @@ member {
   id: 0x978f0933
   name: "__0"
   type_id: 0x367abe20
+}
+member {
+  id: 0x978ff8fe
+  name: "__0"
+  type_id: 0x368b737f
 }
 member {
   id: 0x97916214
@@ -53034,6 +53057,11 @@ member {
   type_id: 0x607f8710
 }
 member {
+  id: 0x97db6e16
+  name: "__0"
+  type_id: 0x621d9b10
+}
+member {
   id: 0x97de7d14
   name: "__0"
   type_id: 0x670e999f
@@ -53047,6 +53075,11 @@ member {
   id: 0x97e0c7f1
   name: "__0"
   type_id: 0x59b47c15
+}
+member {
+  id: 0x97e5b752
+  name: "__0"
+  type_id: 0x5cc4dffd
 }
 member {
   id: 0x97e97aed
@@ -53387,6 +53420,11 @@ member {
   offset: 576
 }
 member {
+  id: 0xaa79a8e9
+  name: "__bindgen_anon_1"
+  type_id: 0xb301c0c6
+}
+member {
   id: 0xaa7b0c1a
   name: "__bindgen_anon_1"
   type_id: 0xb1a53308
@@ -53461,6 +53499,11 @@ member {
   type_id: 0x6a98a8fc
 }
 member {
+  id: 0xaaa07fcb
+  name: "__bindgen_anon_1"
+  type_id: 0x6ad6e2fc
+}
+member {
   id: 0xaaa0d408
   name: "__bindgen_anon_1"
   type_id: 0x6a74e361
@@ -53480,6 +53523,12 @@ member {
   id: 0xaaaed8ce
   name: "__bindgen_anon_1"
   type_id: 0x6471e7e4
+}
+member {
+  id: 0xaab3076f
+  name: "__bindgen_anon_1"
+  type_id: 0x79a5ba10
+  offset: 27456
 }
 member {
   id: 0xaab79811
@@ -53666,6 +53715,11 @@ member {
   offset: 32
 }
 member {
+  id: 0xc5160f20
+  name: "__bindgen_anon_2"
+  type_id: 0x1d11f9e0
+}
+member {
   id: 0xc51cb930
   name: "__bindgen_anon_2"
   type_id: 0x17a74264
@@ -53757,6 +53811,11 @@ member {
   type_id: 0xa4a169a2
 }
 member {
+  id: 0xc5c4ed1d
+  name: "__bindgen_anon_2"
+  type_id: 0xcff3c4ff
+}
+member {
   id: 0xc5c8aa87
   name: "__bindgen_anon_2"
   type_id: 0xc3b5cc39
@@ -53809,6 +53868,11 @@ member {
   offset: 1024
 }
 member {
+  id: 0x043ccb8d
+  name: "__bindgen_anon_3"
+  type_id: 0x7771908b
+}
+member {
   id: 0x0473e01a
   name: "__bindgen_anon_3"
   type_id: 0x385c0f1d
@@ -53835,6 +53899,11 @@ member {
   name: "__bindgen_anon_3"
   type_id: 0xb93e052b
   offset: 1280
+}
+member {
+  id: 0x6e0f7c7e
+  name: "__bindgen_anon_4"
+  type_id: 0x8ad9f872
 }
 member {
   id: 0x6e7ca7d1
@@ -55526,12 +55595,6 @@ member {
   offset: 5056
 }
 member {
-  id: 0xb10d1054
-  name: "__kabi_reserved2"
-  type_id: 0x89d2d38c
-  offset: 27456
-}
-member {
   id: 0xb10d110e
   name: "__kabi_reserved2"
   type_id: 0x89d2d38c
@@ -55658,6 +55721,11 @@ member {
   offset: 12608
 }
 member {
+  id: 0xb10d1ba8
+  name: "__kabi_reserved2"
+  type_id: 0x89d2d38c
+}
+member {
   id: 0xb10d1c6f
   name: "__kabi_reserved2"
   type_id: 0x89d2d38c
@@ -55734,12 +55802,6 @@ member {
   name: "__kabi_reserved2"
   type_id: 0x92233392
   offset: 1856
-}
-member {
-  id: 0xb116e1b4
-  name: "__kabi_reserved2"
-  type_id: 0x92233392
-  offset: 27456
 }
 member {
   id: 0xb116e235
@@ -70844,6 +70906,11 @@ member {
   id: 0xeb8300e0
   name: "bindgen_union_field"
   type_id: 0xf1173c2d
+}
+member {
+  id: 0xebbd65b6
+  name: "bindgen_union_field"
+  type_id: 0xcf726a08
 }
 member {
   id: 0xe2a47020
@@ -87437,6 +87504,16 @@ member {
   name: "cpumask"
   type_id: 0xc8e4d7d1
   offset: 384
+}
+member {
+  id: 0x7d136a1a
+  name: "cpumask_sme_dvmsync"
+  type_id: 0xb79448be
+}
+member {
+  id: 0x7d3d34f2
+  name: "cpumask_sme_dvmsync"
+  type_id: 0x99caa0ae
 }
 member {
   id: 0x06a558af
@@ -269834,6 +269911,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x3429fe49
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xb116ea48
+  }
+}
+struct_union {
   id: 0x34992343
   kind: STRUCT
   definition {
@@ -271272,6 +271357,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x49be2d18
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x7d3d34f2
+    member_id: 0x2ec1e396
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x49df90a7
   kind: UNION
   definition {
@@ -272010,6 +272105,12 @@ struct_union {
     bytesize: 4
     member_id: 0x032aedf1
     member_id: 0x0f4b9ba4
+  }
+}
+struct_union {
+  id: 0x56faddc1
+  kind: UNION
+  definition {
   }
 }
 struct_union {
@@ -276832,6 +276933,38 @@ struct_union {
   name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::range>"
   definition {
     member_id: 0x97708796
+  }
+}
+struct_union {
+  id: 0xb301c0c6
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+    member_id: 0x97086243
+  }
+}
+struct_union {
+  id: 0xcff3c4ff
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+    member_id: 0x978ff8fe
+  }
+}
+struct_union {
+  id: 0x7771908b
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+    member_id: 0x97db6e16
+  }
+}
+struct_union {
+  id: 0x8ad9f872
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
+  definition {
+    member_id: 0x97e5b752
   }
 }
 struct_union {
@@ -286299,7 +286432,7 @@ struct_union {
     member_id: 0xd6603513
     member_id: 0x9a11b83a
     member_id: 0x4140f129
-    member_id: 0xb10d1054
+    member_id: 0xaab3076f
     member_id: 0xf0cdaefa
     member_id: 0x0482c094
     member_id: 0x444f0833
@@ -286307,6 +286440,38 @@ struct_union {
     member_id: 0xc3cfe7ee
     member_id: 0x358ba235
     member_id: 0xfc94ab20
+  }
+}
+struct_union {
+  id: 0x79a5ba10
+  kind: UNION
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0x7d136a1a
+    member_id: 0xaaa07fcb
+    member_id: 0xc5160f20
+  }
+}
+struct_union {
+  id: 0x6ad6e2fc
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0xb10d1ba8
+  }
+}
+struct_union {
+  id: 0x1d11f9e0
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2"
+  definition {
+    member_id: 0xaa79a8e9
+    member_id: 0xc5c4ed1d
+    member_id: 0x043ccb8d
+    member_id: 0x6e0f7c7e
+    member_id: 0xebbd65b6
   }
 }
 struct_union {
@@ -291798,6 +291963,34 @@ struct_union {
   id: 0xc9f41b8e
   kind: STRUCT
   name: "core::marker::PhantomData<bindings::bindings_raw::range>"
+  definition {
+  }
+}
+struct_union {
+  id: 0xb111ced7
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x368b737f
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x621d9b10
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x5cc4dffd
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
   definition {
   }
 }
@@ -338926,7 +339119,7 @@ struct_union {
     member_id: 0xd666c96b
     member_id: 0x9a3adcaf
     member_id: 0x415b00c9
-    member_id: 0xb116e1b4
+    member_id: 0x31a41cbe
     member_id: 0xf0d65f1a
     member_id: 0x04993174
     member_id: 0x4454f9d3
