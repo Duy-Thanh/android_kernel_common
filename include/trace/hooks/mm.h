@@ -353,9 +353,6 @@ DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
 		struct per_cpu_pages *pcp, struct page *page, int migratetype,
 		unsigned int order),
 	TP_ARGS(zone, pad, pcp, page, migratetype, order));
-DECLARE_HOOK(android_vh_task_mem,
-	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
-	TP_ARGS(m, mm));
 DECLARE_HOOK(android_vh_alloc_pages_start,
 	TP_PROTO(u64 *stime),
 	TP_ARGS(stime));
