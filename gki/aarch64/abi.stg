@@ -5379,6 +5379,11 @@ pointer_reference {
   pointee_type_id: 0x19f59ef9
 }
 pointer_reference {
+  id: 0x0ceda834
+  kind: POINTER
+  pointee_type_id: 0x19f6464c
+}
+pointer_reference {
   id: 0x0cef4974
   kind: POINTER
   pointee_type_id: 0x19fdc34f
@@ -15752,6 +15757,11 @@ pointer_reference {
   id: 0x2272a319
   kind: POINTER
   pointee_type_id: 0xa38a6af8
+}
+pointer_reference {
+  id: 0x22730d54
+  kind: POINTER
+  pointee_type_id: 0xa38cd3cc
 }
 pointer_reference {
   id: 0x2274f708
@@ -47967,6 +47977,10 @@ member {
   type_id: 0x09fe2b42
 }
 member {
+  id: 0x21c53df9
+  type_id: 0x083a87f4
+}
+member {
   id: 0x21ff060a
   type_id: 0x08d2683b
 }
@@ -48435,6 +48449,10 @@ member {
   type_id: 0x35cf1033
 }
 member {
+  id: 0x2ec1e396
+  type_id: 0x3429fe49
+}
+member {
   id: 0x2ecc00ad
   type_id: 0x341e5a93
   offset: 4608
@@ -48647,6 +48665,11 @@ member {
 member {
   id: 0x3190e1a6
   type_id: 0x496df688
+}
+member {
+  id: 0x31a41cbe
+  type_id: 0x49be2d18
+  offset: 27456
 }
 member {
   id: 0x31aa1057
@@ -49195,6 +49218,11 @@ member {
   offset: 96
 }
 member {
+  id: 0x355f742f
+  type_id: 0x5a539178
+  offset: 27392
+}
+member {
   id: 0x3568359b
   type_id: 0x5a8e8177
   offset: 128
@@ -49269,6 +49297,10 @@ member {
   id: 0x364b4150
   type_id: 0x56037e9c
   offset: 1408
+}
+member {
+  id: 0x36752b74
+  type_id: 0x56faddc1
 }
 member {
   id: 0x3697c485
@@ -50593,6 +50625,11 @@ member {
   type_id: 0x312fa971
 }
 member {
+  id: 0x97086243
+  name: "__0"
+  type_id: 0xb111ced7
+}
+member {
   id: 0x970c579a
   name: "__0"
   type_id: 0xb5241757
@@ -50733,9 +50770,19 @@ member {
   type_id: 0x367abe20
 }
 member {
+  id: 0x978ff8fe
+  name: "__0"
+  type_id: 0x368b737f
+}
+member {
   id: 0x97916214
   name: "__0"
   type_id: 0x2811994b
+}
+member {
+  id: 0x9793ae61
+  name: "__0"
+  type_id: 0x2addecdb
 }
 member {
   id: 0x9794a3f6
@@ -51021,6 +51068,11 @@ member {
   id: 0x97a2aea8
   name: "__0"
   type_id: 0x1bdd25e4
+}
+member {
+  id: 0x97a2d175
+  name: "__0"
+  type_id: 0x1ba2f807
 }
 member {
   id: 0x97a3096b
@@ -52248,6 +52300,11 @@ member {
   type_id: 0x607f8710
 }
 member {
+  id: 0x97db6e16
+  name: "__0"
+  type_id: 0x621d9b10
+}
+member {
   id: 0x97de7d14
   name: "__0"
   type_id: 0x670e999f
@@ -52263,14 +52320,29 @@ member {
   type_id: 0x59b47c15
 }
 member {
+  id: 0x97e5b752
+  name: "__0"
+  type_id: 0x5cc4dffd
+}
+member {
   id: 0x97e97aed
   name: "__0"
   type_id: 0x50096011
 }
 member {
+  id: 0x97f01b51
+  name: "__0"
+  type_id: 0x4968dc64
+}
+member {
   id: 0x97fda5b3
   name: "__0"
   type_id: 0x44d63e47
+}
+member {
+  id: 0x97ff074c
+  name: "__0"
+  type_id: 0x4674c1ef
 }
 member {
   id: 0xdb058bd1
@@ -52513,6 +52585,11 @@ member {
   offset: 128
 }
 member {
+  id: 0xaa377e00
+  name: "__bindgen_anon_1"
+  type_id: 0xfdd729e3
+}
+member {
   id: 0xaa381b3b
   name: "__bindgen_anon_1"
   type_id: 0xf2b2b9b1
@@ -52601,6 +52678,11 @@ member {
   offset: 576
 }
 member {
+  id: 0xaa79a8e9
+  name: "__bindgen_anon_1"
+  type_id: 0xb301c0c6
+}
+member {
   id: 0xaa7b0c1a
   name: "__bindgen_anon_1"
   type_id: 0xb1a53308
@@ -52652,6 +52734,11 @@ member {
   offset: 64
 }
 member {
+  id: 0xaa976c81
+  name: "__bindgen_anon_1"
+  type_id: 0x5dc5a847
+}
+member {
   id: 0xaa97f961
   name: "__bindgen_anon_1"
   type_id: 0x5d598a53
@@ -52675,6 +52762,11 @@ member {
   type_id: 0x6a98a8fc
 }
 member {
+  id: 0xaaa07fcb
+  name: "__bindgen_anon_1"
+  type_id: 0x6ad6e2fc
+}
+member {
   id: 0xaaa0d408
   name: "__bindgen_anon_1"
   type_id: 0x6a74e361
@@ -52694,6 +52786,12 @@ member {
   id: 0xaaaed8ce
   name: "__bindgen_anon_1"
   type_id: 0x6471e7e4
+}
+member {
+  id: 0xaab300e6
+  name: "__bindgen_anon_1"
+  type_id: 0x79a5ba10
+  offset: 27392
 }
 member {
   id: 0xaab79811
@@ -52880,6 +52978,11 @@ member {
   offset: 32
 }
 member {
+  id: 0xc5160f20
+  name: "__bindgen_anon_2"
+  type_id: 0x1d11f9e0
+}
+member {
   id: 0xc51cb930
   name: "__bindgen_anon_2"
   type_id: 0x17a74264
@@ -52903,6 +53006,11 @@ member {
   offset: 320
 }
 member {
+  id: 0xc53e066b
+  name: "__bindgen_anon_2"
+  type_id: 0x3518b2be
+}
+member {
   id: 0xc544bea6
   name: "__bindgen_anon_2"
   type_id: 0x4fa07fa2
@@ -52923,6 +53031,12 @@ member {
   name: "__bindgen_anon_2"
   type_id: 0x64a0817e
   offset: 160
+}
+member {
+  id: 0xc5734cc8
+  name: "__bindgen_anon_2"
+  type_id: 0x7859edda
+  offset: 27456
 }
 member {
   id: 0xc58f4ca8
@@ -52971,10 +53085,20 @@ member {
   type_id: 0xa4a169a2
 }
 member {
+  id: 0xc5c4ed1d
+  name: "__bindgen_anon_2"
+  type_id: 0xcff3c4ff
+}
+member {
   id: 0xc5c8aa87
   name: "__bindgen_anon_2"
   type_id: 0xc3b5cc39
   offset: 384
+}
+member {
+  id: 0xc5d102b3
+  name: "__bindgen_anon_2"
+  type_id: 0xda1c6aa9
 }
 member {
   id: 0xc5d76267
@@ -53023,6 +53147,11 @@ member {
   offset: 1024
 }
 member {
+  id: 0x043ccb8d
+  name: "__bindgen_anon_3"
+  type_id: 0x7771908b
+}
+member {
   id: 0x0473e01a
   name: "__bindgen_anon_3"
   type_id: 0x385c0f1d
@@ -53032,6 +53161,11 @@ member {
   id: 0x049b50f4
   name: "__bindgen_anon_3"
   type_id: 0xd0eae9d1
+}
+member {
+  id: 0x049e250a
+  name: "__bindgen_anon_3"
+  type_id: 0xd59f1751
 }
 member {
   id: 0x04a3888f
@@ -53051,6 +53185,11 @@ member {
   offset: 1280
 }
 member {
+  id: 0x6e0f7c7e
+  name: "__bindgen_anon_4"
+  type_id: 0x8ad9f872
+}
+member {
   id: 0x6e7ca7d1
   name: "__bindgen_anon_4"
   type_id: 0xf901ccd6
@@ -53066,6 +53205,11 @@ member {
   name: "__bindgen_anon_4"
   type_id: 0x1f66c5d3
   offset: 1600
+}
+member {
+  id: 0x6e9fa43a
+  name: "__bindgen_anon_4"
+  type_id: 0x1a01bc7e
 }
 member {
   id: 0x6ead6863
@@ -53698,12 +53842,6 @@ member {
   offset: 7808
 }
 member {
-  id: 0x4140f129
-  name: "__kabi_reserved1"
-  type_id: 0x89d2d38c
-  offset: 27392
-}
-member {
   id: 0x4140f18b
   name: "__kabi_reserved1"
   type_id: 0x89d2d38c
@@ -53878,6 +54016,11 @@ member {
   offset: 9216
 }
 member {
+  id: 0x4140fd5c
+  name: "__kabi_reserved1"
+  type_id: 0x89d2d38c
+}
+member {
   id: 0x4140fd65
   name: "__kabi_reserved1"
   type_id: 0x89d2d38c
@@ -53954,12 +54097,6 @@ member {
   name: "__kabi_reserved1"
   type_id: 0x92233392
   offset: 45952
-}
-member {
-  id: 0x415b00c9
-  name: "__kabi_reserved1"
-  type_id: 0x92233392
-  offset: 27392
 }
 member {
   id: 0x415b00ff
@@ -54729,12 +54866,6 @@ member {
   offset: 5056
 }
 member {
-  id: 0xb10d1054
-  name: "__kabi_reserved2"
-  type_id: 0x89d2d38c
-  offset: 27456
-}
-member {
   id: 0xb10d110e
   name: "__kabi_reserved2"
   type_id: 0x89d2d38c
@@ -54861,6 +54992,11 @@ member {
   offset: 12608
 }
 member {
+  id: 0xb10d1ba8
+  name: "__kabi_reserved2"
+  type_id: 0x89d2d38c
+}
+member {
   id: 0xb10d1c6f
   name: "__kabi_reserved2"
   type_id: 0x89d2d38c
@@ -54937,12 +55073,6 @@ member {
   name: "__kabi_reserved2"
   type_id: 0x92233392
   offset: 1856
-}
-member {
-  id: 0xb116e1b4
-  name: "__kabi_reserved2"
-  type_id: 0x92233392
-  offset: 27456
 }
 member {
   id: 0xb116e235
@@ -69822,6 +69952,11 @@ member {
   id: 0xeb8300e0
   name: "bindgen_union_field"
   type_id: 0xf1173c2d
+}
+member {
+  id: 0xebbd65b6
+  name: "bindgen_union_field"
+  type_id: 0xcf726a08
 }
 member {
   id: 0xe2a47020
@@ -85970,6 +86105,16 @@ member {
   offset: 384
 }
 member {
+  id: 0x7d136a1a
+  name: "cpumask_sme_dvmsync"
+  type_id: 0xb79448be
+}
+member {
+  id: 0x7d3d34f2
+  name: "cpumask_sme_dvmsync"
+  type_id: 0x99caa0ae
+}
+member {
   id: 0x06a558af
   name: "cpuperf_target"
   type_id: 0xc9082b19
@@ -99308,6 +99453,16 @@ member {
   name: "dmabuf"
   type_id: 0x00c83ba6
   offset: 768
+}
+member {
+  id: 0x3284c1ad
+  name: "dmabuf_info"
+  type_id: 0x22730d54
+}
+member {
+  id: 0x32aa5f08
+  name: "dmabuf_info"
+  type_id: 0x0ceda834
 }
 member {
   id: 0x810e204c
@@ -260918,6 +261073,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x083a87f4
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x415b0cbc
+  }
+}
+struct_union {
   id: 0x086f0af0
   kind: STRUCT
   definition {
@@ -264332,6 +264495,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x3429fe49
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xb116ea48
+  }
+}
+struct_union {
   id: 0x34992343
   kind: STRUCT
   definition {
@@ -265770,6 +265941,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x49be2d18
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x7d3d34f2
+    member_id: 0x2ec1e396
+    member_id: 0x36752b74
+  }
+}
+struct_union {
   id: 0x49df90a7
   kind: UNION
   definition {
@@ -266501,6 +266682,12 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x56faddc1
+  kind: UNION
+  definition {
+  }
+}
+struct_union {
   id: 0x571cd963
   kind: UNION
   definition {
@@ -266599,6 +266786,16 @@ struct_union {
     bytesize: 16
     member_id: 0x3cd401f2
     member_id: 0x95dac977
+  }
+}
+struct_union {
+  id: 0x5a539178
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x3284c1ad
+    member_id: 0x21c53df9
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -271227,6 +271424,70 @@ struct_union {
   name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::range>"
   definition {
     member_id: 0x97708796
+  }
+}
+struct_union {
+  id: 0xb301c0c6
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+    member_id: 0x97086243
+  }
+}
+struct_union {
+  id: 0xcff3c4ff
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+    member_id: 0x978ff8fe
+  }
+}
+struct_union {
+  id: 0x7771908b
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+    member_id: 0x97db6e16
+  }
+}
+struct_union {
+  id: 0x8ad9f872
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
+  definition {
+    member_id: 0x97e5b752
+  }
+}
+struct_union {
+  id: 0x5dc5a847
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+    member_id: 0x97ff074c
+  }
+}
+struct_union {
+  id: 0x3518b2be
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+    member_id: 0x97a2d175
+  }
+}
+struct_union {
+  id: 0xd59f1751
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+    member_id: 0x97f01b51
+  }
+}
+struct_union {
+  id: 0x1a01bc7e
+  kind: STRUCT
+  name: "bindings::bindings_raw::__BindgenUnionField<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_4>"
+  definition {
+    member_id: 0x9793ae61
   }
 }
 struct_union {
@@ -280452,6 +280713,15 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x19f6464c
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_dma_buf_info"
+  definition {
+    bytesize: 1
+    member_id: 0xcd56156e
+  }
+}
+struct_union {
   id: 0xabf3b417
   kind: STRUCT
   name: "bindings::bindings_raw::task_group"
@@ -280693,8 +280963,8 @@ struct_union {
     member_id: 0xed61f47f
     member_id: 0xd6603513
     member_id: 0x9a11b83a
-    member_id: 0x4140f129
-    member_id: 0xb10d1054
+    member_id: 0xaab300e6
+    member_id: 0xc5734cc8
     member_id: 0xf0cdaefa
     member_id: 0x0482c094
     member_id: 0x444f0833
@@ -280702,6 +280972,70 @@ struct_union {
     member_id: 0xc3cfe7ee
     member_id: 0x358ba235
     member_id: 0xfc94ab20
+  }
+}
+struct_union {
+  id: 0x79a5ba10
+  kind: UNION
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0x32aa5f08
+    member_id: 0xaaa07fcb
+    member_id: 0xc5160f20
+  }
+}
+struct_union {
+  id: 0x6ad6e2fc
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0x4140fd5c
+  }
+}
+struct_union {
+  id: 0x1d11f9e0
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2"
+  definition {
+    member_id: 0xaa79a8e9
+    member_id: 0xc5c4ed1d
+    member_id: 0x043ccb8d
+    member_id: 0x6e0f7c7e
+    member_id: 0xebbd65b6
+  }
+}
+struct_union {
+  id: 0x7859edda
+  kind: UNION
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_2"
+  definition {
+    bytesize: 8
+    member_id: 0x7d136a1a
+    member_id: 0xaa377e00
+    member_id: 0xc5d102b3
+  }
+}
+struct_union {
+  id: 0xfdd729e3
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_1"
+  definition {
+    bytesize: 8
+    member_id: 0xb10d1ba8
+  }
+}
+struct_union {
+  id: 0xda1c6aa9
+  kind: STRUCT
+  name: "bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2"
+  definition {
+    member_id: 0xaa976c81
+    member_id: 0xc53e066b
+    member_id: 0x049e250a
+    member_id: 0x6e9fa43a
+    member_id: 0xebbd65b6
   }
 }
 struct_union {
@@ -286068,6 +286402,62 @@ struct_union {
   id: 0xc9f41b8e
   kind: STRUCT
   name: "core::marker::PhantomData<bindings::bindings_raw::range>"
+  definition {
+  }
+}
+struct_union {
+  id: 0xb111ced7
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x368b737f
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x621d9b10
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x5cc4dffd
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_1__bindgen_ty_2__bindgen_ty_4>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x4674c1ef
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_1>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x1ba2f807
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_2>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x4968dc64
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_3>"
+  definition {
+  }
+}
+struct_union {
+  id: 0x2addecdb
+  kind: STRUCT
+  name: "core::marker::PhantomData<bindings::bindings_raw::task_struct__bindgen_ty_2__bindgen_ty_2__bindgen_ty_4>"
   definition {
   }
 }
@@ -331849,6 +332239,11 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xa38cd3cc
+  kind: STRUCT
+  name: "task_dma_buf_info"
+}
+struct_union {
   id: 0x84d533ac
   kind: STRUCT
   name: "task_group"
@@ -332126,8 +332521,8 @@ struct_union {
     member_id: 0xed670807
     member_id: 0xd666c96b
     member_id: 0x9a3adcaf
-    member_id: 0x415b00c9
-    member_id: 0xb116e1b4
+    member_id: 0x355f742f
+    member_id: 0x31a41cbe
     member_id: 0xf0d65f1a
     member_id: 0x04993174
     member_id: 0x4454f9d3
