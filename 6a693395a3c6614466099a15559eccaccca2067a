@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef98076a_e2e7eb42",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-04-14T15:16:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ae4a77_7b03e1d6",
+      "range": {
+        "startLine": 495,
+        "startChar": 4,
+        "endLine": 495,
+        "endChar": 9
+      },
+      "revId": "6a693395a3c6614466099a15559eccaccca2067a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fe65d70_32a3b691",
@@ -55,6 +79,30 @@
       "writtenOn": "2026-04-14T12:51:28Z",
       "side": 1,
       "message": "This looks unnecessary?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "6a693395a3c6614466099a15559eccaccca2067a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f24ef900_c2fc48e8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/debug-sr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-04-14T15:16:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fe65d70_32a3b691",
       "range": {
         "startLine": 56,
         "startChar": 0,
