@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ae4a77_7b03e1d6",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-14T12:51:28Z",
+      "side": 1,
+      "message": "nit: worth prefixing this comment with \u0027ANDROID:\u0027 to make to obvious that it\u0027s a deliberate downstream hack",
+      "range": {
+        "startLine": 495,
+        "startChar": 4,
+        "endLine": 495,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f9d9e78b_dec70e0f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 495,
+                "startChar": 0,
+                "endLine": 496,
+                "endChar": 0
+              },
+              "replacement": "\t * ANDROID: Added outside the KMI boundary.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a693395a3c6614466099a15559eccaccca2067a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fe65d70_32a3b691",
+        "filename": "arch/arm64/kvm/hyp/nvhe/debug-sr.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-14T12:51:28Z",
+      "side": 1,
+      "message": "This looks unnecessary?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "6a693395a3c6614466099a15559eccaccca2067a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
