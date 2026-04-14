@@ -16,6 +16,23 @@
       "message": "Friendly bump: waiting for OWNER review.",
       "revId": "8176d7c6fe0732d365d5839a9ae3a2c463c59aaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a00b4a_33505255",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-14T21:48:37Z",
+      "side": 1,
+      "message": "This patch breaks the KMI:\n```\nfunction symbol \u0027int ttm_pool_debugfs(struct ttm_pool*, struct seq_file*)\u0027 changed\n  CRC changed from 0xdf57780 to 0x57c63ea5\n```\nThis can be dealt with by either of these options:\n1. Queue this for the next KMI update (4/29). We are currently updating the KMI every 2 weeks until the KMI freeze in mid-May.\n2. Add this code to suppress the CRC change (which is caused by a change in visibility from declonly to fully defined of `struct trace_eval_map` caused by the inclusion of `include/trace/hooks/ttm_pool.h`):\n```\n#include \u003clinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```",
+      "revId": "8176d7c6fe0732d365d5839a9ae3a2c463c59aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
