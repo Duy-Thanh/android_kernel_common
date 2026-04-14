@@ -1495,6 +1495,7 @@ repeat:
 	}
 
 	lock_page(page);
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 	/* only true if page reclaim goes wrong, should never happen */
 	DBG_BUGON(justfound && PagePrivate(page));
 
@@ -1503,6 +1504,23 @@ repeat:
 		/*
 		 * The cached page is still available but without a valid
 		 * `->private` pcluster hint.  Let's reconnect them.
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+
+	/* only true if page reclaim goes wrong, should never happen */
+	DBG_BUGON(justfound && PagePrivate(page));
+
+	/* the page is still in manage cache */
+	if (page->mapping == mc) {
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+=======
+	if (likely(page->mapping == mc)) {
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+		oldpage = page;
+
+		/*
+		 * The cached folio is still in managed cache but without
+		 * a valid `->private` pcluster hint.  Let's reconnect them.
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 		 */
 		if (!PagePrivate(page)) {
 			DBG_BUGON(!justfound);
@@ -1511,13 +1529,43 @@ repeat:
 			put_page(page);
 		}
 
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 		/* no need to submit if it is already up-to-date */
 		if (PageUptodate(page)) {
 			unlock_page(page);
 			bvec->bv_page = NULL;
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+		/* no need to submit io if it is already up-to-date */
+		if (PageUptodate(page)) {
+			unlock_page(page);
+			page = NULL;
+=======
+		if (likely(page->private == (unsigned long)pcl)) {
+			/* don't submit cache I/Os again if already uptodate */
+			if (PageUptodate(page)) {
+				unlock_page(page);
+				page = NULL;
+
+			}
+			goto out;
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 		}
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 		return;
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+		goto out;
+=======
+		/*
+		 * Already linked with another pcluster, which only appears in
+		 * crafted images by fuzzers for now.  But handle this anyway.
+		 */
+		tocache = false;	/* use temporary short-lived pages */
+	} else {
+		DBG_BUGON(1); /* referenced managed folios can't be truncated */
+		tocache = true;
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 	}
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 
 	/*
 	 * It has been truncated, so it's unsafe to reuse this one. Let's
@@ -1527,6 +1575,18 @@ repeat:
 	DBG_BUGON(!justfound);
 
 	tocache = true;
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+
+	/*
+	 * the managed page has been truncated, it's unsafe to
+	 * reuse this one, let's allocate a new cache-managed page.
+	 */
+	DBG_BUGON(page->mapping);
+	DBG_BUGON(!justfound);
+
+	tocache = true;
+=======
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 	unlock_page(page);
 	put_page(page);
 out_allocpage:
@@ -1682,13 +1742,24 @@ static void z_erofs_submit_queue(struct z_erofs_decompress_frontend *f,
 		cur = mdev.m_pa;
 		end = cur + pcl->pclustersize;
 		do {
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 			z_erofs_fill_bio_vec(&bvec, f, pcl, i++, mc);
 			if (!bvec.bv_page)
 				continue;
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+			struct page *page;
+
+			page = pickup_page_for_submission(pcl, i++,
+					&f->pagepool, mc);
+			if (!page)
+				continue;
+=======
+			struct page *page = NULL;
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 
 			if (bio && (cur != last_pa ||
 				    last_bdev != mdev.m_bdev)) {
-submit_bio_retry:
+drain_io:
 				submit_bio(bio);
 				if (memstall) {
 					psi_memstall_leave(&pflags);
@@ -1697,8 +1768,21 @@ submit_bio_retry:
 				bio = NULL;
 			}
 
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 			if (unlikely(PageWorkingset(bvec.bv_page)) &&
 			    !memstall) {
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+			if (unlikely(PageWorkingset(page)) && !memstall) {
+=======
+			if (!page) {
+				page = pickup_page_for_submission(pcl, i++,
+						&f->pagepool, mc);
+				if (!page)
+					continue;
+			}
+
+			if (unlikely(PageWorkingset(page)) && !memstall) {
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 				psi_memstall_enter(&pflags);
 				memstall = 1;
 			}
@@ -1715,12 +1799,20 @@ submit_bio_retry:
 				last_bdev = mdev.m_bdev;
 			}
 
+<<<<<<< HEAD   (983c263f122de9650cab4734bc4dede9ca7748e7 Merge cad80ea23da6 ("mtd: spi-nor: core: avoid odd length/ad)
 			if (cur + bvec.bv_len > end)
 				bvec.bv_len = end - cur;
 			DBG_BUGON(bvec.bv_len < sb->s_blocksize);
 			if (!bio_add_page(bio, bvec.bv_page, bvec.bv_len,
 					  bvec.bv_offset))
 				goto submit_bio_retry;
+||||||| BASE   (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
+			if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
+				goto submit_bio_retry;
+=======
+			if (bio_add_page(bio, page, PAGE_SIZE, 0) < PAGE_SIZE)
+				goto drain_io;
+>>>>>>> BRANCH (8e8fc038cad5988ede9f323677c28eb9a696026c Linux 6.1.168)
 
 			last_pa = cur + bvec.bv_len;
 			bypass = false;
@@ -1732,11 +1824,10 @@ submit_bio_retry:
 			move_to_bypass_jobqueue(pcl, qtail, owned_head);
 	} while (owned_head != Z_EROFS_PCLUSTER_TAIL);
 
-	if (bio) {
+	if (bio)
 		submit_bio(bio);
-		if (memstall)
-			psi_memstall_leave(&pflags);
-	}
+	if (memstall)
+		psi_memstall_leave(&pflags);
 
 	/*
 	 * although background is preferred, no one is pending for submission.
