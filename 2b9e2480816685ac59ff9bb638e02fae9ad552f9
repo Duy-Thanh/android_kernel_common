@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acab15c_1b22e028",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-14T09:18:35Z",
+      "side": 1,
+      "message": "Shall we use rdtsc_ordered() to make the udelay time calculation more accurate? The same for the rdstc() in the while loop.",
+      "revId": "2b9e2480816685ac59ff9bb638e02fae9ad552f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
