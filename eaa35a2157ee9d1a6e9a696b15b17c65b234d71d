@@ -16,6 +16,24 @@
       "message": "Just for future reference, the symbol and kabi update should follow the patch that adds/modifies the symbols, not preceded it. I\u0027ve rebased and reordered the patches here this time, but please keep this in mind for future submissions.",
       "revId": "eaa35a2157ee9d1a6e9a696b15b17c65b234d71d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a76cafef_6035e852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3358448
+      },
+      "writtenOn": "2026-04-14T03:17:34Z",
+      "side": 1,
+      "message": "Got it, thanks.",
+      "parentUuid": "e497468b_27170b23",
+      "revId": "eaa35a2157ee9d1a6e9a696b15b17c65b234d71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
