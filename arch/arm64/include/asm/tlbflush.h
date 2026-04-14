@@ -80,6 +80,76 @@ static inline unsigned long get_trans_granule(void)
 	}
 }
 
+#ifdef CONFIG_ARM64_ERRATUM_4193714
+
+void sme_do_dvmsync(const struct cpumask *mask);
+
+static inline void sme_dvmsync(struct mm_struct *mm)
+{
+	if (!alternative_has_cap_unlikely(ARM64_WORKAROUND_4193714))
+		return;
+
+	sme_do_dvmsync(mm_cpumask(mm));
+}
+
+static inline void sme_dvmsync_add_pending(struct arch_tlbflush_unmap_batch *batch,
+					   struct mm_struct *mm)
+{
+	struct tlbflush_unmap_batch *ubc = container_of(batch, struct tlbflush_unmap_batch, arch);
+	struct task_struct *tsk = container_of(ubc, struct task_struct, tlb_ubc);
+
+	if (!alternative_has_cap_unlikely(ARM64_WORKAROUND_4193714))
+		return;
+
+	/*
+	 * Order the mm_cpumask() read after the hardware DVMSync.
+	 */
+	dsb(ish);
+	if (cpumask_empty(mm_cpumask(mm)))
+		return;
+
+	/*
+	 * Allocate the batch cpumask on first use. Fall back to an immediate
+	 * IPI for this mm in case of failure.
+	 */
+	if (!cpumask_available(tsk->cpumask_sme_dvmsync) &&
+	    !zalloc_cpumask_var(&tsk->cpumask_sme_dvmsync, GFP_ATOMIC)) {
+		sme_do_dvmsync(mm_cpumask(mm));
+		return;
+	}
+
+	cpumask_or(tsk->cpumask_sme_dvmsync, tsk->cpumask_sme_dvmsync, mm_cpumask(mm));
+}
+
+static inline void sme_dvmsync_batch(struct arch_tlbflush_unmap_batch *batch)
+{
+	struct tlbflush_unmap_batch *ubc = container_of(batch, struct tlbflush_unmap_batch, arch);
+	struct task_struct *tsk = container_of(ubc, struct task_struct, tlb_ubc);
+
+	if (!alternative_has_cap_unlikely(ARM64_WORKAROUND_4193714))
+		return;
+
+	if (!cpumask_available(tsk->cpumask_sme_dvmsync))
+		return;
+
+	sme_do_dvmsync(tsk->cpumask_sme_dvmsync);
+	cpumask_clear(tsk->cpumask_sme_dvmsync);
+}
+
+#else
+
+static inline void sme_dvmsync(struct mm_struct *mm)
+{
+}
+static inline void sme_dvmsync_add_pending(struct arch_tlbflush_unmap_batch *batch,
+					   struct mm_struct *mm)
+{
+}
+static inline void sme_dvmsync_batch(struct arch_tlbflush_unmap_batch *batch)
+{
+}
+
+#endif /* CONFIG_ARM64_ERRATUM_4193714 */
 /*
  * Level-based TLBI operations.
  *
