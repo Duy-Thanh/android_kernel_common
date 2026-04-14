@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "452dfe5f_4cd1debf",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-14T18:01:36Z",
+      "side": 1,
+      "message": "nit: Do we need this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb799c3e_156c554b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/page_size_compat.h",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "761768b251a0ecb4735e7a5bee143ab154847635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
