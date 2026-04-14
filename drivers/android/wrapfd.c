@@ -981,6 +981,7 @@ unlock:
 
 	return ret;
 }
+EXPORT_SYMBOL_GPL(wrapfd_get_mappable);
 
 int wrapfd_put_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable)
@@ -1013,6 +1014,7 @@ unlock:
 
 	return ret;
 }
+EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
 static const struct file_operations wrap_fops = {
 	.owner		= THIS_MODULE,
