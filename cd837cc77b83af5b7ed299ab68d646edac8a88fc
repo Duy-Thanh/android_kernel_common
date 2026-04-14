@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94319998_46ab2fbf",
+        "filename": "arch/x86/kvm/pkvm/fpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-14T19:51:43Z",
+      "side": 1,
+      "message": "Just thinking: if we consider this an improper configuration that shouldn\u0027t happen, maybe it\u0027s better to just return an error, instead of silently trying to \"fix\" it?",
+      "revId": "cd837cc77b83af5b7ed299ab68d646edac8a88fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
