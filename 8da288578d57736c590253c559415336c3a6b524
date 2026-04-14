@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce18e975_b299607e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-14T18:38:51Z",
+      "side": 1,
+      "message": "Sandeep, look at the \"ABI Fidelity changes\" report. Is it ok that all of these structs get added to the KMI?",
+      "revId": "8da288578d57736c590253c559415336c3a6b524",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
