@@ -34,6 +34,24 @@
       ],
       "revId": "b47563fcda9217b74e5ab3056443e07827c9b55c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6887b3df_def6c058",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-14T22:11:07Z",
+      "side": 1,
+      "message": "You mean `return owner_task \u0026\u0026 owner_task-\u003emm \u003d\u003d task-\u003emm;` ? Yeah, the result should be pretty much the same but the code would be more consistent and understandable. I\u0027ll make the change.",
+      "parentUuid": "0498c381_01551f17",
+      "revId": "b47563fcda9217b74e5ab3056443e07827c9b55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
