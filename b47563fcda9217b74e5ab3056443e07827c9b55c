@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0498c381_01551f17",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-14T21:01:00Z",
+      "side": 1,
+      "message": "Actually .. should/could this just compare the group leader instead of the mm?",
+      "fixSuggestions": [
+        {
+          "fixId": "8a1acb54_980bc47e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 370,
+                "endChar": 0
+              },
+              "replacement": "\treturn owner_task \u0026\u0026 task-\u003egroup_leader \u003d\u003d owner_task;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b47563fcda9217b74e5ab3056443e07827c9b55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
