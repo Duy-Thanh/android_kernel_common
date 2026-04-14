@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21574055_2573097d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-14T12:59:31Z",
+      "side": 1,
+      "message": "Regarding do_vmi_munmap() I assume it would be a separate task",
+      "parentUuid": "97340f98_04e26262",
+      "revId": "72b079b8718c0dd585fee5e645db449571b74309",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee3a1fae_4b2daef0",
