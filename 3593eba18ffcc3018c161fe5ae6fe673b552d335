@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58194db0_f6b36d5f",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-14T09:15:05Z",
+      "side": 1,
+      "message": "Is this to kick the host vCPU out of VMX non-root mode? If so, we need to use send INIT rather than NMI, as if the host vCPU is running in VMX non-root mode, it can directly receive the NMI and handle it rather than vmexit to the pKVM hypervisor.",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb98c1e2_105b57a8",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-14T09:15:05Z",
+      "side": 1,
+      "message": "If we send INIT to kick vCPU after setting `pkvm_panic_in_progress`, then it seems we can do this check in the INIT vmexit handling code path to relax the other kinds of vmexits, as seems it is not necessary for the other vmexits to check this?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
