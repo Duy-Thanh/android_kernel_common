@@ -22,6 +22,30 @@
       },
       "revId": "87284046884db7d143c4833570c4568c3e976fe9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895ba069_90d8819c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-04-14T08:33:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s a common case, but forcing the deep idle states here can help the CPUs to cool-down faster on our platform. The whole solution would intergrate with the scheduler, which depends on the vendor hooks as well. Can we go as is?",
+      "parentUuid": "3ccc8187_20a008c3",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "87284046884db7d143c4833570c4568c3e976fe9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
