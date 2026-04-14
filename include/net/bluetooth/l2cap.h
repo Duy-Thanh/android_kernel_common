@@ -664,8 +664,15 @@ struct l2cap_conn {
 
 	struct sk_buff		*rx_skb;
 	__u32			rx_len;
+<<<<<<< HEAD   (c94af6da501b6a28f10e875b0670ec0ce44f50a6 Revert "cpufreq: conservative: Reset requested_freq on limit)
 	__u8			tx_ident;
 	struct mutex		ident_lock;
+||||||| BASE   (f0035858dfb2335171b897fe7653fa8e8928cc04 netfs: Fix the handling of stream->front by removing it)
+	struct ida		tx_ida;
+=======
+	struct ida		tx_ida;
+	__u8			tx_ident;
+>>>>>>> BRANCH (44c944a679974c2d18ee9b87070456d34193f3d4 Linux 6.18.21)
 
 	struct sk_buff_head	pending_rx;
 	struct work_struct	pending_rx_work;

@@ -926,13 +926,28 @@ int l2cap_chan_check_security(struct l2cap_chan *chan, bool initiator)
 
 static u8 l2cap_get_ident(struct l2cap_conn *conn)
 {
+<<<<<<< HEAD   (c94af6da501b6a28f10e875b0670ec0ce44f50a6 Revert "cpufreq: conservative: Reset requested_freq on limit)
 	u8 id;
 
+||||||| BASE   (f0035858dfb2335171b897fe7653fa8e8928cc04 netfs: Fix the handling of stream->front by removing it)
+	/* LE link does not support tools like l2ping so use the full range */
+	if (conn->hcon->type == LE_LINK)
+		return ida_alloc_range(&conn->tx_ida, 1, 255, GFP_ATOMIC);
+
+=======
+	u8 max;
+	int ident;
+
+	/* LE link does not support tools like l2ping so use the full range */
+	if (conn->hcon->type == LE_LINK)
+		max = 255;
+>>>>>>> BRANCH (44c944a679974c2d18ee9b87070456d34193f3d4 Linux 6.18.21)
 	/* Get next available identificator.
 	 *    1 - 128 are used by kernel.
 	 *  129 - 199 are reserved.
 	 *  200 - 254 are used by utilities like l2ping, etc.
 	 */
+<<<<<<< HEAD   (c94af6da501b6a28f10e875b0670ec0ce44f50a6 Revert "cpufreq: conservative: Reset requested_freq on limit)
 
 	mutex_lock(&conn->ident_lock);
 
@@ -944,6 +959,32 @@ static u8 l2cap_get_ident(struct l2cap_conn *conn)
 	mutex_unlock(&conn->ident_lock);
 
 	return id;
+||||||| BASE   (f0035858dfb2335171b897fe7653fa8e8928cc04 netfs: Fix the handling of stream->front by removing it)
+	return ida_alloc_range(&conn->tx_ida, 1, 128, GFP_ATOMIC);
+=======
+	else
+		max = 128;
+
+	/* Allocate ident using min as last used + 1 (cyclic) */
+	ident = ida_alloc_range(&conn->tx_ida, READ_ONCE(conn->tx_ident) + 1,
+				max, GFP_ATOMIC);
+	/* Force min 1 to start over */
+	if (ident <= 0) {
+		ident = ida_alloc_range(&conn->tx_ida, 1, max, GFP_ATOMIC);
+		if (ident <= 0) {
+			/* If all idents are in use, log an error, this is
+			 * extremely unlikely to happen and would indicate a bug
+			 * in the code that idents are not being freed properly.
+			 */
+			BT_ERR("Unable to allocate ident: %d", ident);
+			return 0;
+		}
+	}
+
+	WRITE_ONCE(conn->tx_ident, ident);
+
+	return ident;
+>>>>>>> BRANCH (44c944a679974c2d18ee9b87070456d34193f3d4 Linux 6.18.21)
 }
 
 static void l2cap_send_acl(struct l2cap_conn *conn, struct sk_buff *skb,
