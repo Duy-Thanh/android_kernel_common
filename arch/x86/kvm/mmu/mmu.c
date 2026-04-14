@@ -5040,12 +5040,14 @@ static int pkvm_page_fault(struct kvm_vcpu *vcpu, struct kvm_page_fault *fault)
 	r = kvm_topup_pkvm_memcache(&vcpu->arch.pkvm.guest_mmu_memcache,
 				    pkvm_mmu_cache_min_pages());
 	if (r)
-		return r;
+		goto out_release_pfn;
 
 	/* Allocate non-atomically before taking mmu_lock. */
 	mapping = kzalloc(sizeof(struct pkvm_mapping), GFP_KERNEL_ACCOUNT);
-	if (!mapping)
-		return -ENOMEM;
+	if (!mapping) {
+		r = -ENOMEM;
+		goto out_release_pfn;
+	}
 
 	r = RET_PF_RETRY;
 	write_lock(&vcpu->kvm->mmu_lock);
@@ -5107,6 +5109,10 @@ out_unlock:
 
 	if (r != RET_PF_FIXED)
 		kfree(mapping);
+	return r;
+out_release_pfn:
+	kvm_release_faultin_page(vcpu->kvm, fault->refcounted_page,
+				 true, fault->map_writable);
 	return r;
 }
 #endif /* CONFIG_PKVM_X86 */
