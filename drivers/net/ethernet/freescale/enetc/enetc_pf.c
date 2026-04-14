@@ -1396,8 +1396,16 @@ err_alloc_si_res:
 	si->ndev = NULL;
 	free_netdev(ndev);
 err_alloc_netdev:
-err_device_disabled:
 err_setup_mac_addresses:
+<<<<<<< HEAD   (22fcc893fdd3c7a1d9a53b408ce8b58fd8b3997b Merge 6e28bab900e4 ("nvme: fix admin queue leak on controlle)
+||||||| BASE   (6e28bab900e40e4d610b04f9f82e01983d8fb356 nvme: fix admin queue leak on controller reset)
+	kfree(pf->vf_state);
+err_alloc_vf_state:
+=======
+	kfree(pf->vf_state);
+err_alloc_vf_state:
+err_device_disabled:
+>>>>>>> BRANCH (cad80ea23da618d97079259c58a3a42f7903f5c7 mtd: spi-nor: core: avoid odd length/address writes in 8D-8D)
 	enetc_psi_destroy(pdev);
 err_psi_create:
 	return err;
