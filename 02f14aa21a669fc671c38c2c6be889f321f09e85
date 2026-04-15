@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f9a915f_318f2610",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-15T14:50:40Z",
+      "side": 1,
+      "message": "Why do you need `READ_ONCE()` here? If the concern is a race with PSCI, then presumably you will need some actual locking (e.g. `vcpus_lock`) for this to work?\n\nHowever, I\u0027m then unsure as to what exactly we\u0027re protecting against. We\u0027re attempting to allow ON and ON_PENDING but we also allow OFF (because a vCPU remains loaded following `pvm_psci_vcpu_off()` so which states are you referring to when you talk about \"invalid PSCI state\" in the commit message?",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 29
+      },
+      "revId": "02f14aa21a669fc671c38c2c6be889f321f09e85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
