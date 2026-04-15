@@ -22,6 +22,30 @@
       },
       "revId": "85451bf358ce8e9f0e9e0cf8ded76f37f94b4784",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf18e61e_9d94b51e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-15T22:39:45Z",
+      "side": 1,
+      "message": "oh I think I understand, this is a hybrid of the real upstream 101f3498b4bd which you backported (BACKPORT) and sent to linux-6.18.y (FROMLIST) here: https://lore.kernel.org/all/20260415211149.2658910-1-jstultz@google.com/\n\nI don\u0027t really know how the tags should be structured in this case but I suppose it LGTM.",
+      "parentUuid": "98d51144_ad2df9da",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "85451bf358ce8e9f0e9e0cf8ded76f37f94b4784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
