@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1006ab_6712c294",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-15T23:32:37Z",
+      "side": 1,
+      "message": "Do we allow ioctls on tmpfs files? I remember removing that when the memfd_file class was added.",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
