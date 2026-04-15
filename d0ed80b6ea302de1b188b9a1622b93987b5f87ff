@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179299d9_1f87d285",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-15T19:05:01Z",
+      "side": 1,
+      "message": "Either here in the commit message (ideally) or in the bug could you expand a bit to explain the need for this change.\n\nParticularly\n1) What is the issue or problem that is seen with the current kernel that necessitates this change.\n\n2) What quantifiable benefit is gained by adding this vendorhook\n\n3) What efforts are needed upstream so this hook can be deprecated in future android kernels",
+      "revId": "d0ed80b6ea302de1b188b9a1622b93987b5f87ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
