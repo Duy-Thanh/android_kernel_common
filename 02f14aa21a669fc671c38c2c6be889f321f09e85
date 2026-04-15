@@ -22,6 +22,30 @@
       },
       "revId": "02f14aa21a669fc671c38c2c6be889f321f09e85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f75264_0c3bccb1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-04-15T16:33:03Z",
+      "side": 1,
+      "message": "For context, we discussed this when we did aosp/3342938, but since it was additional hardening, rather than fixing a bug, we decided to hold off until A17. \n\nThat said, I realized that I had confounded vcpu residency and runnability (back when I wrote the ticket, and didn\u0027t reconsider whether the ticket itself was valid). The only invalid state for loading a vcpu is the dying state, and that\u0027s already handled here. I\u0027ll abandon this.",
+      "parentUuid": "9f9a915f_318f2610",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 29
+      },
+      "revId": "02f14aa21a669fc671c38c2c6be889f321f09e85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
