@@ -16,6 +16,23 @@
       "message": "For abi-breaking changes, wait for the next ABI update point, and use the correct hashtag for it as documented in the gki newsletter.",
       "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "558243a1_56b214f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-15T17:07:47Z",
+      "side": 1,
+      "message": "Queued for next KMI update on April 29",
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
