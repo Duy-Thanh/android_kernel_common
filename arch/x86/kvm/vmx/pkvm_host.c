@@ -1133,13 +1133,15 @@ static void pkvm_set_cr4(struct kvm_vcpu *vcpu, unsigned long cr4)
 
 static int pkvm_set_efer(struct kvm_vcpu *vcpu, u64 efer)
 {
-	int ret = -EINVAL;
+	if (!vcpu->arch.guest_state_protected) {
+		int ret = pkvm_hypercall(set_efer, efer);
 
-	if (!vcpu->arch.guest_state_protected)
-		ret = pkvm_hypercall(set_efer, efer);
+		if (ret)
+			return ret;
+	}
 
 	vcpu->arch.efer = efer;
-	return ret;
+	return 0;
 }
 
 static void pkvm_get_idt(struct kvm_vcpu *vcpu, struct desc_ptr *dt)
