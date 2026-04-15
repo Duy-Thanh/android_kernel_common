@@ -16,6 +16,23 @@
       "message": "Please review.\nThanks.",
       "revId": "15bde3317eebc051f3c43c3f695d9b0a95f8ed9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "743024eb_5541f64d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2026-04-15T01:54:04Z",
+      "side": 1,
+      "message": "Respin Bug: b/502724777",
+      "revId": "15bde3317eebc051f3c43c3f695d9b0a95f8ed9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
