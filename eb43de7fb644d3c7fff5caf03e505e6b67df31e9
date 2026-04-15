@@ -33,6 +33,24 @@
       "message": "Queued for next KMI update on April 29",
       "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125ec632_c2b4336b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-15T17:08:50Z",
+      "side": 1,
+      "message": "queued for KMI update",
+      "parentUuid": "270198d4_59f7f1a6",
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
