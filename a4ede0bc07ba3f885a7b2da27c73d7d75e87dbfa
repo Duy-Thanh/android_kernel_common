@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60008d56_777110ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-15T03:06:52Z",
+      "side": 1,
+      "message": "Since this doesn\u0027t break KMI, could you rebase it on top of android17-6.18 alone and respin the symbol and KMI update patch for just this change?  That way we can get this merged while the KMI breaking change waits for the KMI merge window.",
+      "revId": "a4ede0bc07ba3f885a7b2da27c73d7d75e87dbfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
