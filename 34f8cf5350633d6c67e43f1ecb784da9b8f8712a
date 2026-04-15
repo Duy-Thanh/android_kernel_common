@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6f6c37_fa2bf8bd",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-15T18:44:22Z",
+      "side": 1,
+      "message": "Just wondering: does QEMU or any other known VMM create such CPUID entries? Asking because QEMU or other VMMs can still be used with pKVM for running npVMs.\n\n...Generally, this feels pretty hacky, but I\u0027m probably fine with merging it, since I guess have no better solution right now, and this is just another indication that this whole approach with silently modifying the CPUID entries set by host is rather hacky, and we should eventually change it to let crosvm and pKVM cooperatively set a desired CPUID for pVMs.",
+      "revId": "34f8cf5350633d6c67e43f1ecb784da9b8f8712a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
