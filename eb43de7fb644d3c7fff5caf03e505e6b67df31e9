@@ -74,6 +74,46 @@
       "parentUuid": "270198d4_59f7f1a6",
       "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f451d600_4e6d7867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-15T20:35:46Z",
+      "side": 1,
+      "message": "Please drop the STG file and allowed_breaks changes.",
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e6882c_94af4a57",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-15T20:35:46Z",
+      "side": 1,
+      "message": "The KMI is not frozen yet, are you sure you want to use the reserved fields?",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 51
+      },
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
