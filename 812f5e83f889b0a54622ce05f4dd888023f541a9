@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f380f758_90f88177",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-15T11:15:46Z",
+      "side": 1,
+      "message": "nit: wrong title for that sha?",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 93
+      },
+      "revId": "812f5e83f889b0a54622ce05f4dd888023f541a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
