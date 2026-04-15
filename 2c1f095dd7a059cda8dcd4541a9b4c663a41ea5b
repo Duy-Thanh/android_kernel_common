@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e20cb14e_c0280858",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4197,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-04-15T10:36:05Z",
+      "side": 1,
+      "message": "IOMMU_CAP_CACHE_COHERENCY is cunrrently used only by vfio, iommufd etc and we wanted to disable that explicitly(host intel driver supports it) as pKVM does not support it yet. Missed a specific comment for that. Will add a comment for that as well",
+      "parentUuid": "b54b9392_969829f0",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58becfeb_e70ddbb6",
         "filename": "drivers/iommu/intel/pkvm/domain.c",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I see. Thanks. Maybe worth to mention this in the commit message?\n\nAnd with this, transferring from deferred to strict will need a domain teardown and recreate process. Do we also need a similar check here to prevent this? Maybe no as we will eventually flush the deferred TLB in `pkvm_intel_iommu_tlb_flush` to guarantee we won\u0027t keep any stale TLB?",
       "parentUuid": "d60427e3_bff8e8f6",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36cb7ddf_929609e2",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-04-15T10:36:05Z",
+      "side": 1,
+      "message": "\u003e I see. Thanks. Maybe worth to mention this in the commit message?\nSure will do.\n\n\u003e And with this, transferring from deferred to strict will need a domain teardown and recreate process. Do we also need a similar check here to prevent this? Maybe no as we will eventually flush the deferred TLB in pkvm_intel_iommu_tlb_flush to guarantee we won\u0027t keep any stale TLB?\n\nYeah true, we won\u0027t have any stale TLB as we flush the caches on any donation.\n\nTransferring from deferred to strict will be taken care of by the host by doing a full teardown and creation of a new domain. So a normal operation by a sane host will not break this.",
+      "parentUuid": "2321aaed_5e973b75",
       "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
