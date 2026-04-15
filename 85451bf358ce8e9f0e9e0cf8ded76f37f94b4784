@@ -46,6 +46,30 @@
       },
       "revId": "85451bf358ce8e9f0e9e0cf8ded76f37f94b4784",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87c6fda_8b9ffa60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-15T22:47:59Z",
+      "side": 1,
+      "message": "Yeah. Could wait for it to land via -stable, but it seems like it has enough impact to warrent pulling it in early. Just easy to confuse if its a backport from upstream or a backport from -stable. Apologies for that.",
+      "parentUuid": "bf18e61e_9d94b51e",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "85451bf358ce8e9f0e9e0cf8ded76f37f94b4784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
