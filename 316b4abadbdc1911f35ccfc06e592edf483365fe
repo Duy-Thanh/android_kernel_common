@@ -16,6 +16,24 @@
       "message": "This will require CRC fixup and an allowed ABI break.",
       "revId": "316b4abadbdc1911f35ccfc06e592edf483365fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f628bbb_7e1e8b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964618
+      },
+      "writtenOn": "2026-04-15T06:06:47Z",
+      "side": 1,
+      "message": "Thanks. No ABI verification changes or CRC mismatches were found during the local compilation.",
+      "parentUuid": "db8ef58c_4377bcae",
+      "revId": "316b4abadbdc1911f35ccfc06e592edf483365fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
