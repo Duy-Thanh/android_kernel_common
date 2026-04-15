@@ -40,6 +40,30 @@
       ],
       "revId": "761768b251a0ecb4735e7a5bee143ab154847635",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f167834_bcd57806",
+        "filename": "include/linux/page_size_compat.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-15T07:52:51Z",
+      "side": 1,
+      "message": "Yes, it is needed for `struct cachestat *cs`. It was removed with last revert in the series. Probably need to be added on upref to the patch with `__adjust_cachestat_counters impl()`.",
+      "parentUuid": "452dfe5f_4cd1debf",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "761768b251a0ecb4735e7a5bee143ab154847635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
