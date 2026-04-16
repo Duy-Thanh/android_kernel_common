@@ -1686,6 +1686,7 @@ EXPORT_SYMBOL_NS_GPL(cs35l56_common_probe, "SND_SOC_CS35L56_CORE");
 
 int cs35l56_init(struct cs35l56_private *cs35l56)
 {
+	unsigned int val;
 	int ret;
 
 	/*
@@ -1748,6 +1749,15 @@ post_soft_reset:
 	ret = cs35l56_mbox_send(&cs35l56->base, CS35L56_MBOX_CMD_PREVENT_AUTO_HIBERNATE);
 	if (ret)
 		return ret;
+
+	ret = regmap_read_bypassed(cs35l56->base.regmap, CS35L56_DSP1_FW_SYSTEM_FLAGS, &val);
+	if (ret) {
+		dev_err(cs35l56->base.dev, "%s: Could not read FW_SYSTEM_FLAGS: %d\n",
+			__func__, ret);
+	}
+
+	dev_info(cs35l56->base.dev, "%s: FW flags after PREVENT_AUTO_HIBERNATE:%#x\n",
+		 __func__, val);
 
 	/* Registers could be dirty after soft reset or SoundWire enumeration */
 	regcache_sync(cs35l56->base.regmap);

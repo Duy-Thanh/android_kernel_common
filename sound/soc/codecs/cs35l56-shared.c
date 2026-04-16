@@ -753,6 +753,9 @@ static int cs35l56_wait_for_ps3(struct cs35l56_base *cs35l56_base)
 
 int cs35l56_runtime_suspend_common(struct cs35l56_base *cs35l56_base)
 {
+	unsigned int fw_ver, fw_flags, halo_state, pm_cur_state;
+	int ret;
+
 	if (!cs35l56_base->init_done)
 		return 0;
 
@@ -761,6 +764,33 @@ int cs35l56_runtime_suspend_common(struct cs35l56_base *cs35l56_base)
 
 	/* Clear BOOT_DONE so it can be used to detect a reboot */
 	regmap_write(cs35l56_base->regmap, CS35L56_IRQ1_EINT_4, CS35L56_OTP_BOOT_DONE_MASK);
+
+	/* DEBUG: check some firmware status */
+	ret = regmap_read_bypassed(cs35l56_base->regmap, CS35L56_DSP1_FW_VER, &fw_ver);
+	if (ret)
+		dev_err(cs35l56_base->dev, "%s: Could not read FW_VER: %d\n", __func__, ret);
+
+	ret = regmap_read_bypassed(cs35l56_base->regmap, CS35L56_DSP1_FW_SYSTEM_FLAGS, &fw_flags);
+	if (ret) {
+		dev_err(cs35l56_base->dev, "%s: Could not read FW_SYSTEM_FLAGS: %d\n",
+			__func__, ret);
+	}
+
+	ret = regmap_read_bypassed(cs35l56_base->regmap, CS35L56_DSP1_HALO_STATE, &halo_state);
+	if (ret)
+		dev_err(cs35l56_base->dev, "%s: Could not read HALO_STATE: %d\n", __func__, ret);
+
+	ret = regmap_read_bypassed(cs35l56_base->regmap, CS35L56_DSP1_PM_CUR_STATE, &pm_cur_state);
+	if (ret)
+		dev_err(cs35l56_base->dev, "%s: Could not read PM_CUR_STATE: %d\n", __func__, ret);
+
+	dev_info(cs35l56_base->dev,
+		 "%s: FW_VER:%#x FW_FLAGS:%#x HALO_STATE:%#x PM_CUR_STATE:%#x\n",
+		 __func__, fw_ver, fw_flags, halo_state, pm_cur_state);
+
+	if (fw_flags & 1)
+		dev_err(cs35l56_base->dev, "%s: AUTO_HIBERNATE is enabled\n", __func__);
+	/* END DEBUG */
 
 	if (!cs35l56_base->can_hibernate) {
 		regcache_cache_only(cs35l56_base->regmap, true);
@@ -812,6 +842,15 @@ out_sync:
 	ret = cs35l56_mbox_send(cs35l56_base, CS35L56_MBOX_CMD_PREVENT_AUTO_HIBERNATE);
 	if (ret)
 		goto err;
+
+	ret = regmap_read_bypassed(cs35l56_base->regmap, CS35L56_DSP1_FW_SYSTEM_FLAGS, &val);
+	if (ret) {
+		dev_err(cs35l56_base->dev, "%s: Could not read FW_SYSTEM_FLAGS: %d\n",
+			__func__, ret);
+	}
+
+	dev_info(cs35l56_base->dev, "%s: FW flags after PREVENT_AUTO_HIBERNATE:%#x\n",
+		 __func__, val);
 
 	/* BOOT_DONE will be 1 if the amp reset */
 	regmap_read(cs35l56_base->regmap, CS35L56_IRQ1_EINT_4, &val);
