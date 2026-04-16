@@ -2561,6 +2561,8 @@ static void __ufshcd_dispatch_uic_cmd(struct ufs_hba *hba,
 static inline void
 ufshcd_dispatch_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
 {
+	unsigned long flags;
+
 	lockdep_assert_held(&hba->uic_cmd_mutex);
 
 	WARN_ON(hba->active_uic_cmd);
@@ -2570,7 +2572,15 @@ ufshcd_dispatch_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
 
 	ufshcd_add_uic_command_trace(hba, uic_cmd, UFS_CMD_SEND);
 
-	__ufshcd_dispatch_uic_cmd(hba, uic_cmd);
+	if (hba->android_quirks & UFSHCD_ANDROID_QUIRK_AH8_BREAKS_DME) {
+		local_irq_save(flags);
+		preempt_disable();
+		__ufshcd_dispatch_uic_cmd(hba, uic_cmd);
+		preempt_enable();
+		local_irq_restore(flags);
+	} else {
+		__ufshcd_dispatch_uic_cmd(hba, uic_cmd);
+	}
 }
 
 /**
