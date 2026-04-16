@@ -34,6 +34,24 @@
       "parentUuid": "ce18e975_b299607e",
       "revId": "8da288578d57736c590253c559415336c3a6b524",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919e1009_fb792aa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-16T17:58:07Z",
+      "side": 1,
+      "message": "The symbols adding these were dropped on patchset #4 so we are good now.",
+      "parentUuid": "89b2af2e_5c887e6d",
+      "revId": "8da288578d57736c590253c559415336c3a6b524",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
