@@ -88,6 +88,24 @@
       "parentUuid": "fa1e3c1d_9a9ea07a",
       "revId": "34f8cf5350633d6c67e43f1ecb784da9b8f8712a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d3c43b_acd48e3b",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-16T12:15:20Z",
+      "side": 1,
+      "message": "\u003eMaybe... I haven\u0027t looked at your diff in detail yet, but it seems we could just add swapping the first empty CPUID00 entry with the first non-empty one (if the empty one is before the non-empty one)?\n\nYeah, swapping should work, may be simpler than this diff, and doesn\u0027t need to return error code.\n\n\u003e I.e. I\u0027m suggesting to check all 4 regs in cpuid_entry_is_empty() in addition to your change, not instead of it.\n\nI see. That makes sense.",
+      "parentUuid": "483873bb_0f05eb08",
+      "revId": "34f8cf5350633d6c67e43f1ecb784da9b8f8712a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
