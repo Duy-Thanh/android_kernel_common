@@ -58398,10 +58398,10 @@ member {
   offset: 96
 }
 member {
-  id: 0x8c682862
+  id: 0x8c6822f1
   name: "bus_name"
   type_id: 0x2c925e2c
-  offset: 704
+  offset: 768
 }
 member {
   id: 0x8c7aa07d
@@ -79328,10 +79328,10 @@ member {
   offset: 1408
 }
 member {
-  id: 0x8965be20
+  id: 0x8965b1cc
   name: "disable_vq_and_reset"
   type_id: 0x2eefa915
-  offset: 960
+  offset: 1024
 }
 member {
   id: 0xca170866
@@ -84659,10 +84659,10 @@ member {
   offset: 448
 }
 member {
-  id: 0x8cbd3660
+  id: 0x8cbd3c09
   name: "enable_vq_after_reset"
   type_id: 0x2eefa915
-  offset: 1024
+  offset: 1088
 }
 member {
   id: 0x3a05c0dc
@@ -91901,10 +91901,10 @@ member {
   offset: 64
 }
 member {
-  id: 0x49bff4c4
+  id: 0x49bff080
   name: "finalize_features"
   type_id: 0x2f63630f
-  offset: 640
+  offset: 704
 }
 member {
   id: 0x2acb20e0
@@ -96153,6 +96153,12 @@ member {
   offset: 1536
 }
 member {
+  id: 0xee88c2d2
+  name: "freeze_noirq"
+  type_id: 0x2f63630f
+  offset: 2176
+}
+member {
   id: 0xee8a76bf
   name: "freeze_noirq"
   type_id: 0x2dd58efa
@@ -98516,10 +98522,10 @@ member {
   offset: 2048
 }
 member {
-  id: 0xad383bfd
+  id: 0xad3834f6
   name: "get_features"
   type_id: 0x1df5af16
-  offset: 576
+  offset: 640
 }
 member {
   id: 0xad3dd73d
@@ -99452,10 +99458,10 @@ member {
   offset: 512
 }
 member {
-  id: 0x9cc6236c
+  id: 0x9cc62139
   name: "get_shm_region"
   type_id: 0x3783c640
-  offset: 896
+  offset: 960
 }
 member {
   id: 0xb75fe6a4
@@ -99782,10 +99788,10 @@ member {
   offset: 320
 }
 member {
-  id: 0xba5ef8e0
+  id: 0xba5ef1fc
   name: "get_vq_affinity"
   type_id: 0x1e0272bf
-  offset: 832
+  offset: 896
 }
 member {
   id: 0xeb0dd87f
@@ -169672,6 +169678,12 @@ member {
   offset: 64
 }
 member {
+  id: 0x67ecefc2
+  name: "reset_vqs"
+  type_id: 0x2f63630f
+  offset: 512
+}
+member {
   id: 0x141797df
   name: "reset_ws"
   type_id: 0x1f3c8679
@@ -170104,6 +170116,12 @@ member {
   name: "restore_early"
   type_id: 0x2dd58efa
   offset: 832
+}
+member {
+  id: 0x033dad30
+  name: "restore_noirq"
+  type_id: 0x2f63630f
+  offset: 2240
 }
 member {
   id: 0x033f10ea
@@ -180103,10 +180121,10 @@ member {
   bitsize: 1
 }
 member {
-  id: 0xabd65e76
+  id: 0xabd65562
   name: "set_vq_affinity"
   type_id: 0x2edea7d5
-  offset: 768
+  offset: 832
 }
 member {
   id: 0xbd51e7df
@@ -191815,10 +191833,10 @@ member {
   bitsize: 1
 }
 member {
-  id: 0x6038fb8d
+  id: 0x6038f9e7
   name: "synchronize_cbs"
   type_id: 0x0c254fa0
-  offset: 512
+  offset: 576
 }
 member {
   id: 0xf820ab53
@@ -274779,7 +274797,7 @@ struct_union {
   kind: STRUCT
   name: "virtio_config_ops"
   definition {
-    bytesize: 136
+    bytesize: 144
     member_id: 0x31555e6e
     member_id: 0x3dd2270e
     member_id: 0x69c7a9e1
@@ -274788,15 +274806,16 @@ struct_union {
     member_id: 0x62b18cc1
     member_id: 0x8317e158
     member_id: 0x537845ca
-    member_id: 0x6038fb8d
-    member_id: 0xad383bfd
-    member_id: 0x49bff4c4
-    member_id: 0x8c682862
-    member_id: 0xabd65e76
-    member_id: 0xba5ef8e0
-    member_id: 0x9cc6236c
-    member_id: 0x8965be20
-    member_id: 0x8cbd3660
+    member_id: 0x67ecefc2
+    member_id: 0x6038f9e7
+    member_id: 0xad3834f6
+    member_id: 0x49bff080
+    member_id: 0x8c6822f1
+    member_id: 0xabd65562
+    member_id: 0xba5ef1fc
+    member_id: 0x9cc62139
+    member_id: 0x8965b1cc
+    member_id: 0x8cbd3c09
   }
 }
 struct_union {
@@ -274835,7 +274854,7 @@ struct_union {
   kind: STRUCT
   name: "virtio_driver"
   definition {
-    bytesize: 272
+    bytesize: 288
     member_id: 0xd4ad4c68
     member_id: 0xc4f2675c
     member_id: 0x09fa7934
@@ -274849,6 +274868,8 @@ struct_union {
     member_id: 0x96bc0a6d
     member_id: 0x2cce6f0b
     member_id: 0xfa2232ae
+    member_id: 0xee88c2d2
+    member_id: 0x033dad30
   }
 }
 struct_union {
@@ -362114,7 +362135,7 @@ elf_symbol {
   name: "blk_mq_virtio_map_queues"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x62c83e5b
+  crc: 0x505cd6e4
   type_id: 0x15ff0e04
   full_name: "blk_mq_virtio_map_queues"
 }
@@ -401873,7 +401894,7 @@ elf_symbol {
   name: "register_virtio_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe70d950b
+  crc: 0xf705cb01
   type_id: 0x97cd6aa0
   full_name: "register_virtio_device"
 }
@@ -401882,7 +401903,7 @@ elf_symbol {
   name: "register_virtio_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8fb3b02a
+  crc: 0x5dd2f86a
   type_id: 0x99bc1448
   full_name: "register_virtio_driver"
 }
@@ -415926,7 +415947,7 @@ elf_symbol {
   name: "unregister_virtio_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb9c34a5e
+  crc: 0xccb9f2e5
   type_id: 0x1ad5d81c
   full_name: "unregister_virtio_device"
 }
@@ -415935,7 +415956,7 @@ elf_symbol {
   name: "unregister_virtio_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0b251408
+  crc: 0xaafad29b
   type_id: 0x14a4a6f4
   full_name: "unregister_virtio_driver"
 }
@@ -420282,7 +420303,7 @@ elf_symbol {
   name: "virtio_break_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x692d0e21
+  crc: 0x3d131beb
   type_id: 0x1ad5d81c
   full_name: "virtio_break_device"
 }
@@ -420291,7 +420312,7 @@ elf_symbol {
   name: "virtio_check_driver_offered_feature"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x42c5bb28
+  crc: 0x30694f64
   type_id: 0x1cd13541
   full_name: "virtio_check_driver_offered_feature"
 }
@@ -420300,7 +420321,7 @@ elf_symbol {
   name: "virtio_config_changed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x43ade6b9
+  crc: 0xdeb954e4
   type_id: 0x1ad5d81c
   full_name: "virtio_config_changed"
 }
@@ -420309,25 +420330,43 @@ elf_symbol {
   name: "virtio_device_freeze"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb0a4521d
+  crc: 0xe6ead4c8
   type_id: 0x97cd6aa0
   full_name: "virtio_device_freeze"
+}
+elf_symbol {
+  id: 0x46616a6a
+  name: "virtio_device_freeze_noirq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xab7eed9c
+  type_id: 0x97cd6aa0
+  full_name: "virtio_device_freeze_noirq"
 }
 elf_symbol {
   id: 0xbd74d21e
   name: "virtio_device_restore"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb32ccb69
+  crc: 0xdb5f85ed
   type_id: 0x97cd6aa0
   full_name: "virtio_device_restore"
+}
+elf_symbol {
+  id: 0xe04b135c
+  name: "virtio_device_restore_noirq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff735709
+  type_id: 0x97cd6aa0
+  full_name: "virtio_device_restore_noirq"
 }
 elf_symbol {
   id: 0x9cbf06d7
   name: "virtio_max_dma_size"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9ce26f13
+  crc: 0x24704c80
   type_id: 0x9d7240dd
   full_name: "virtio_max_dma_size"
 }
@@ -420336,9 +420375,18 @@ elf_symbol {
   name: "virtio_reset_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0db89b19
+  crc: 0x8026ef34
   type_id: 0x1ad5d81c
   full_name: "virtio_reset_device"
+}
+elf_symbol {
+  id: 0xd2ff83ab
+  name: "virtio_reset_device_noirq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6f1e5b45
+  type_id: 0x1ad5d81c
+  full_name: "virtio_reset_device_noirq"
 }
 elf_symbol {
   id: 0x8684931b
@@ -420651,7 +420699,7 @@ elf_symbol {
   name: "virtqueue_add_inbuf"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3f947993
+  crc: 0x6c7a7d36
   type_id: 0x91a842e5
   full_name: "virtqueue_add_inbuf"
 }
@@ -420660,7 +420708,7 @@ elf_symbol {
   name: "virtqueue_add_inbuf_ctx"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0e3d2a1f
+  crc: 0x9e0f9271
   type_id: 0x91a87b65
   full_name: "virtqueue_add_inbuf_ctx"
 }
@@ -420669,7 +420717,7 @@ elf_symbol {
   name: "virtqueue_add_outbuf"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x892cf77c
+  crc: 0xe093a1a6
   type_id: 0x91a842e5
   full_name: "virtqueue_add_outbuf"
 }
@@ -420678,7 +420726,7 @@ elf_symbol {
   name: "virtqueue_add_sgs"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x26c0d64f
+  crc: 0xa04d49e8
   type_id: 0x91d5bf71
   full_name: "virtqueue_add_sgs"
 }
@@ -420687,7 +420735,7 @@ elf_symbol {
   name: "virtqueue_detach_unused_buf"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1b52ac7b
+  crc: 0x369eec9d
   type_id: 0x5ae81016
   full_name: "virtqueue_detach_unused_buf"
 }
@@ -420696,7 +420744,7 @@ elf_symbol {
   name: "virtqueue_disable_cb"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7cf92b5d
+  crc: 0x8327620c
   type_id: 0x1ce6f074
   full_name: "virtqueue_disable_cb"
 }
@@ -420705,7 +420753,7 @@ elf_symbol {
   name: "virtqueue_disable_dma_api_for_buffers"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa09eabfe
+  crc: 0x63251d2d
   type_id: 0x1ce6f074
   full_name: "virtqueue_disable_dma_api_for_buffers"
 }
@@ -420714,7 +420762,7 @@ elf_symbol {
   name: "virtqueue_enable_cb"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x73d61dbd
+  crc: 0xd5e05fb8
   type_id: 0xf2dafae3
   full_name: "virtqueue_enable_cb"
 }
@@ -420723,7 +420771,7 @@ elf_symbol {
   name: "virtqueue_enable_cb_delayed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1c251d64
+  crc: 0xc1f79824
   type_id: 0xf2dafae3
   full_name: "virtqueue_enable_cb_delayed"
 }
@@ -420732,7 +420780,7 @@ elf_symbol {
   name: "virtqueue_enable_cb_prepare"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x727280a2
+  crc: 0x2ee97b78
   type_id: 0xc2a5df1c
   full_name: "virtqueue_enable_cb_prepare"
 }
@@ -420741,7 +420789,7 @@ elf_symbol {
   name: "virtqueue_get_avail_addr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe46b944a
+  crc: 0x41ab4955
   type_id: 0xb0635f1b
   full_name: "virtqueue_get_avail_addr"
 }
@@ -420750,7 +420798,7 @@ elf_symbol {
   name: "virtqueue_get_buf"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf0c121d6
+  crc: 0x57c94763
   type_id: 0x5a87d596
   full_name: "virtqueue_get_buf"
 }
@@ -420759,7 +420807,7 @@ elf_symbol {
   name: "virtqueue_get_buf_ctx"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x81f82b4e
+  crc: 0x6a4a74a6
   type_id: 0x5a84fa4e
   full_name: "virtqueue_get_buf_ctx"
 }
@@ -420768,7 +420816,7 @@ elf_symbol {
   name: "virtqueue_get_desc_addr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf7144bd7
+  crc: 0x29da87d2
   type_id: 0xb0635f1b
   full_name: "virtqueue_get_desc_addr"
 }
@@ -420777,7 +420825,7 @@ elf_symbol {
   name: "virtqueue_get_used_addr"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6d37e6e4
+  crc: 0x60ec35d0
   type_id: 0xb0635f1b
   full_name: "virtqueue_get_used_addr"
 }
@@ -420786,7 +420834,7 @@ elf_symbol {
   name: "virtqueue_get_vring"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x89e54a5c
+  crc: 0x6e087ed2
   type_id: 0xbd098825
   full_name: "virtqueue_get_vring"
 }
@@ -420795,7 +420843,7 @@ elf_symbol {
   name: "virtqueue_get_vring_size"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd312bed7
+  crc: 0x90d58d58
   type_id: 0xc2a5df1c
   full_name: "virtqueue_get_vring_size"
 }
@@ -420804,7 +420852,7 @@ elf_symbol {
   name: "virtqueue_is_broken"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x17c2e25e
+  crc: 0x4b639d71
   type_id: 0xf2dafae3
   full_name: "virtqueue_is_broken"
 }
@@ -420813,7 +420861,7 @@ elf_symbol {
   name: "virtqueue_kick"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7926a903
+  crc: 0x9603487c
   type_id: 0xf2dafae3
   full_name: "virtqueue_kick"
 }
@@ -420822,7 +420870,7 @@ elf_symbol {
   name: "virtqueue_kick_prepare"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x69ca6e1b
+  crc: 0xacab1e0c
   type_id: 0xf2dafae3
   full_name: "virtqueue_kick_prepare"
 }
@@ -420831,7 +420879,7 @@ elf_symbol {
   name: "virtqueue_notify"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaf7d45c1
+  crc: 0x3c95efa2
   type_id: 0xf2dafae3
   full_name: "virtqueue_notify"
 }
@@ -420840,16 +420888,25 @@ elf_symbol {
   name: "virtqueue_poll"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6ba0c942
+  crc: 0x8dd26990
   type_id: 0xf3ccef7b
   full_name: "virtqueue_poll"
+}
+elf_symbol {
+  id: 0xe6d9d597
+  name: "virtqueue_reinit_vring"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x82a6ad73
+  type_id: 0x1ce6f074
+  full_name: "virtqueue_reinit_vring"
 }
 elf_symbol {
   id: 0x0ab935cb
   name: "virtqueue_resize"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3a00b1ac
+  crc: 0x762770f2
   type_id: 0x92d90e2a
   full_name: "virtqueue_resize"
 }
@@ -421209,7 +421266,7 @@ elf_symbol {
   name: "vring_create_virtqueue"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x19f0c780
+  crc: 0x17632ed1
   type_id: 0x825faca7
   full_name: "vring_create_virtqueue"
 }
@@ -421218,7 +421275,7 @@ elf_symbol {
   name: "vring_del_virtqueue"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe5ea83d5
+  crc: 0x654456ea
   type_id: 0x1ce6f074
   full_name: "vring_del_virtqueue"
 }
@@ -421236,7 +421293,7 @@ elf_symbol {
   name: "vring_new_virtqueue"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9c8b8453
+  crc: 0xd4eae75b
   type_id: 0x825facba
   full_name: "vring_new_virtqueue"
 }
@@ -421245,7 +421302,7 @@ elf_symbol {
   name: "vring_transport_features"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf52ea309
+  crc: 0x9e6b62ff
   type_id: 0x1ad5d81c
   full_name: "vring_transport_features"
 }
@@ -431393,9 +431450,12 @@ interface {
   symbol_id: 0xec6b2b3d
   symbol_id: 0x4b519cf9
   symbol_id: 0xca359dbf
+  symbol_id: 0x46616a6a
   symbol_id: 0xbd74d21e
+  symbol_id: 0xe04b135c
   symbol_id: 0x9cbf06d7
   symbol_id: 0x7ee23f4e
+  symbol_id: 0xd2ff83ab
   symbol_id: 0x8684931b
   symbol_id: 0x7fa6e289
   symbol_id: 0xa07ee8d2
@@ -431452,6 +431512,7 @@ interface {
   symbol_id: 0xdb0e240a
   symbol_id: 0xb61f9f98
   symbol_id: 0xd13c80bd
+  symbol_id: 0xe6d9d597
   symbol_id: 0x0ab935cb
   symbol_id: 0x8a60b44b
   symbol_id: 0xf63d0cfd
