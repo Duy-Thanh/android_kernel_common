@@ -52,6 +52,24 @@
       "parentUuid": "e6147e52_b9be5109",
       "revId": "34f8cf5350633d6c67e43f1ecb784da9b8f8712a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1e3c1d_9a9ea07a",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T11:29:09Z",
+      "side": 1,
+      "message": "\u003e Maybe it is not that important for those VMMs?\n\nI agree it is not so critical for us to care about other VMMs for now (and even if it was, this CPUID00 EAX\u003d0 is a corner case which is unlikely to really matter in practice). I\u0027m just wondering if we could _easily_ minimize the impact of this patch even on such corner cases.\n\n\u003e OTOH, even we have a desired CPUID for pVMs, there are still some empty CPUID entries in the CPUID memory pages as the entries may not be able to full fill a memory page. \n\nBy \"cooperatively setting a desired CPUID\" I meant that, roughly speaking, the VMM would set the CPUID (taking into account pKVM\u0027s requirements), and pKVM would just validate it (and return an error if it doesn\u0027t conform to the requirements), not modify it. (IIUC that is how it is done with TDX?) In such case, there would be no empty entries?\n\n\u003e So a better solution maybe ensuring the CPUID00H sitting before any other empty CPUID entries in the pkvm_enforce_cpuid, like this:\n\nMaybe... I haven\u0027t looked at your diff in detail yet, but it seems we could just add swapping the first empty CPUID00 entry with the first non-empty one (if the empty one is before the non-empty one)?\n\n(Although, generally (not in our case) that would \"break\" another corner case: a \"strangely behaving\" VMM prepares a CPUID with both an empty and a non-empty CPUID00 entries, and the VMM\u0027s intention is to let the guest see the empty one, not the non-empty one, while pKVM would swap them and thus \"unexpectedly\" make the guest see the non-empty one. But in our case, CPUID00 is among the entries which pKVM enforces (doesn\u0027t let the host to override it) anyway.)\n\n\u003e If a malicious host places entries with unknown functions at lower buffer positions than the real function 0 entry, those entries become all-zero for 4 regs after enforcement. kvm_find_cpuid_entry2() then returns one of these zeroed entries for function 0 queries instead of the real one, causing the pVM to see max_standard_function\u003d0 and an empty vendor string.\n\nWithout this patch, yes. But with this patch, kvm_find_cpuid_entry2() will ignore those zeroed entries?\n\nI.e. I\u0027m suggesting to check all 4 regs in cpuid_entry_is_empty() in addition to your change, not instead of it.\n\nBTW another reason why I\u0027m thinking about this is: the function name cpuid_entry_is_empty() seems just not very suitable for CPUID00H entries with EAX\u003d0 with non-empty vendor string, i.e. such entries are not exactly \"empty\"?",
+      "parentUuid": "17d2f6de_f3bd8969",
+      "revId": "34f8cf5350633d6c67e43f1ecb784da9b8f8712a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
