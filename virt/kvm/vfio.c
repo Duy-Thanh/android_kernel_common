@@ -439,6 +439,7 @@ static int pviommufd_release(struct inode *i, struct file *filp)
 {
 	struct kvm_pviommu *pviommu = filp->private_data;
 
+	kvm_put_kvm(pviommu->dev->kvm);
 	kfree(pviommu);
 	return 0;
 }
@@ -461,8 +462,10 @@ static int kvm_vfio_pviommu_attach(struct kvm_device *dev)
 
 	pviommu->dev = dev;
 
+	kvm_get_kvm(dev->kvm);
 	filep = anon_inode_getfile("kvm-pviommu", &pviommu_fops, pviommu, O_CLOEXEC);
 	if (IS_ERR(filep)) {
+		kvm_put_kvm(dev->kvm);
 		kfree(pviommu);
 		return PTR_ERR(filep);
 	}
