@@ -288,6 +288,11 @@ struct usb_functionfs_event {
 #define	FUNCTIONFS_ENDPOINT_DESC	_IOR('g', 130, \
 					     struct usb_endpoint_descriptor)
 
+/*
+ * Enable or disable zero-length packet (ZLP) appending for the endpoint.
+ */
+#define	FUNCTIONFS_ENDPOINT_ENABLE_ZLP	_IO('g', 135)
+
 
 
 #endif /* _UAPI__LINUX_FUNCTIONFS_H__ */
