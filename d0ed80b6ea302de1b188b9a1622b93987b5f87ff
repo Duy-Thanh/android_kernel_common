@@ -16,6 +16,24 @@
       "message": "Either here in the commit message (ideally) or in the bug could you expand a bit to explain the need for this change.\n\nParticularly\n1) What is the issue or problem that is seen with the current kernel that necessitates this change.\n\n2) What quantifiable benefit is gained by adding this vendorhook\n\n3) What efforts are needed upstream so this hook can be deprecated in future android kernels",
       "revId": "d0ed80b6ea302de1b188b9a1622b93987b5f87ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f60dc23_58982dd9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-04-16T16:26:58Z",
+      "side": 1,
+      "message": "I\u0027ve updated the commit message to provide more motivating detail, links to upstream discussion on the subject of TTM bandwidth vs latency trade-off, and you can find analysis of some of the possible allocation configurations made possible by these hooks in b/492635867 on Intel iGPU with the Xe driver.\n\nThe benefit is that a vendor may choose to optimize for low-latency on GPU allocation paths invoked by userspace applications (e.g. Chrome browser) by disabling direct-reclaim for high-order alloc attempts at the cost of raw GPU bandwidth upon later use of those allocated buffers if high-order allocation is not immediately possible (i.e. without invoking direct-reclaim).\n\nThe upstreaming plan is to work with DRM/TTM maintainers and Xe maintainers to determine the ideal config or set of configs and exposes these as new TTM APIs that a driver can exert its own control over if it so chooses (some gpu architectures may benefit more from high-order page allocations than others, so these may prefer to be more aggressive with direct-reclaim). \n\nI\u0027ve opted to use vendor hooks for 6.18 because it will take time (a couple more months?) to arrive at an upstream shape that suits the needs of all drivers and OS distributions.\n\nYou can refer to our approach merged already to the `android16-6.12-desktop` downstream branch: http://aosp/3992735 for reference on how we intend to use the hooks in our 6.18 vendor module.\n\nLet me know if you have any questions.",
+      "parentUuid": "179299d9_1f87d285",
+      "revId": "d0ed80b6ea302de1b188b9a1622b93987b5f87ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
