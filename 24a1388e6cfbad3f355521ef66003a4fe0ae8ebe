@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ba46cd_4ac64900",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-16T16:36:50Z",
+      "side": 1,
+      "message": "`__MAX_PAGE_SIZE`",
+      "range": {
+        "startLine": 181,
+        "startChar": 65,
+        "endLine": 181,
+        "endChar": 74
+      },
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f59eac_acd9ade1",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-16T16:36:50Z",
+      "side": 1,
+      "message": "Could we do something like this so the future usage will also be accounted for:\n\n```c\nenum vdso_pages {\n\tVDSO_TIME_PAGE_OFFSET \u003d 0,\n\tVDSO_TIMENS_PAGE_OFFSET \u003d 1 * __PAGE_CNT_PER_MAX_PAGE,\n\tVDSO_RNG_PAGE_OFFSET \u003d 2 * __PAGE_CNT_PER_MAX_PAGE,\n\tVDSO_ARCH_PAGES_START \u003d 3 * __PAGE_CNT_PER_MAX_PAGE,\n\tVDSO_ARCH_PAGES_END \u003d VDSO_ARCH_PAGES_START + VDSO_ARCH_DATA_PAGES - 1 __PAGE_CNT_PER_MAX_PAGE,\n\tVDSO_NR_PAGES\n};",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 191,
+        "endChar": 2
+      },
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
