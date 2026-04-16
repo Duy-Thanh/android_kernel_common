@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a61895_c85dcc01",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "very nit: these variables are a bit similar in purpose to the pvmfw-related ones (pvmfw_present, pvmfw_base, pvmfw_size), in that they both specify a memory region provided by the bootloader. So it might be nice to declare them after the declarations of those pvmfw variables below at lines 654-656?\n\n(I could also suggest to _define_ them in arch/x86/kvm/pkvm/pkvm.c together with those pvmfw variables. But for some reasons we define those pvmfw variables in arch/x86/kvm/pkvm/init.c instead, I\u0027m not sure why (given that they are used at runtime, not just during init)...)",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b25b846_7d992f3e",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "nit: add an empty line above this line for readability, to separate these ramoops-related variables from others?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5d1a7b_f9ce330c",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Will all this work correctly if the chromeos_pstore driver is disabled (so the ramoops info is present in ACPI but the host kernel doesn\u0027t do anything with it?)\n\nIf not, we should probably wrap all this in an `#if IS_ENABLED(CONFIG_CHROMEOS_PSTORE)`?\n\nHmm... BTW what about the fact that we enable it as a module (so it is not loaded yet when pKVM is initialized, it is only loaded later during boot)?\n\n...Also, any reason why put all this code here between `early_pkvm_relax_cpu_bugs_parse_cmdline()` and `early_pvmfw_parse_cmdline()` (which both parse kernel command line options, while this code doesn\u0027t)?\n\nI\u0027d put them, for example, between `pkvm_firmware_rmem_clear()` and `vmx_pkvm_init()`. (It\u0027s not like this ramoops stuff is more important than the pvmfw stuff?)",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1df961_5e4697a7",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "nit: maybe s/pkvm_console_info_update/ramoops_console_info_update/ (to make it more clear which console it is about, to avoid making an impression that pKVM has some support for a serial console or whatever; and since this is just a helper function, it doesn\u0027t necessarily need a `pkvm_` prefix)?\n\nOr maybe better `update_ramoops_console_info()`?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3ba246_87259e03",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "nit: it feels a bit messy that we define this GOOG9999_RAMOOPS_DMESG_SIZE() macro which tries to abstract away the fact that we add these 3 numbers, and yet here we manually add them again.\n\nI\u0027d maybe do something like:\n\n```\n--- a/arch/x86/kvm/vmx/pkvm_init.c\n+++ b/arch/x86/kvm/vmx/pkvm_init.c\n@@ -43,15 +43,14 @@ struct pkvm_ramoops_console_info {\n #define GOOG9999_RAMOOPS_FTRACE_SIZE  0x20000\n #define GOOG9999_RAMOOPS_CONSOLE_SIZE 0x20000\n \n-#define GOOG9999_RAMOOPS_DMESG_SIZE(total_size) \\\n-\t((total_size) - GOOG9999_RAMOOPS_PMSG_SIZE - \\\n-\t GOOG9999_RAMOOPS_FTRACE_SIZE - GOOG9999_RAMOOPS_CONSOLE_SIZE)\n-\n static void pkvm_console_info_update(struct pkvm_ramoops_console_info *info,\n \t\t\t\t     struct resource_entry *rentry)\n {\n \tsize_t console_offset;\n \tsize_t ramoops_size \u003d resource_size(rentry-\u003eres);\n+\tsize_t remainder_size \u003d GOOG9999_RAMOOPS_PMSG_SIZE +\n+\t\t\t\tGOOG9999_RAMOOPS_FTRACE_SIZE +\n+\t\t\t\tGOOG9999_RAMOOPS_CONSOLE_SIZE;\n \n \t/*\n \t * Note: The ChromeOS ramoops layout (for GOOG9999) partitions the\n@@ -66,10 +65,8 @@ static void pkvm_console_info_update(struct pkvm_ramoops_console_info *info,\n \t * The console buffer is located 3 slots (384KB) before the end of the\n \t * total region.\n \t */\n-\tif (ramoops_size \u003e (GOOG9999_RAMOOPS_PMSG_SIZE + \n-\t\t\t    GOOG9999_RAMOOPS_FTRACE_SIZE + \n-\t\t\t    GOOG9999_RAMOOPS_CONSOLE_SIZE)) {\n-\t\tconsole_offset \u003d GOOG9999_RAMOOPS_DMESG_SIZE(ramoops_size);\n+\tif (ramoops_size \u003e remainder_size) {\n+\t\tconsole_offset \u003d ramoops_size - remainder_size;\n \t\tinfo-\u003estart \u003d rentry-\u003eres-\u003estart + console_offset;\n \t\tinfo-\u003esize \u003d GOOG9999_RAMOOPS_CONSOLE_SIZE;\n \t}\n```",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407c3a7d_afe58a6e",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Just a question: would it be a low-hanging fruit to implement this support for ramoops cmdline options in pKVM, to make it possible to test this pKVM functionality in a non-chromebook environment?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ecdc468_f8565285",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Question: AFAICS, NULL means \"don\u0027t check _UID\", while I see there is an _UID:\n\n```\n        Device(RMOP)\n        {\n                Name (_HID, \"GOOG9999\")\n                Name (_CID, \"GOOG9999\")\n                Name (_UID, 1)\n```\n\nLooks like it is hardcoded to 1 from the very beginning (since https://review.coreboot.org/c/coreboot/+/5257).\n\nSo, would it make sense to check if _UID is 1 here?\n\n...Generally, is this documented in any spec? (I guess not.)",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4518393_ef2d165b",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "nit: we could make it a bit shorter:\n\n```\n--- a/arch/x86/kvm/vmx/pkvm_init.c\n+++ b/arch/x86/kvm/vmx/pkvm_init.c\n@@ -78,7 +78,7 @@ static void pkvm_console_info_update(struct pkvm_ramoops_console_info *info,\n static void pkvm_find_ramoops(struct pkvm_ramoops_console_info *info)\n {\n \tstruct acpi_device *adev;\n-\tstruct list_head resource_list;\n+\tLIST_HEAD(resource_list);\n \tstruct resource_entry *rentry;\n \tint ret;\n \n@@ -93,7 +93,6 @@ static void pkvm_find_ramoops(struct pkvm_ramoops_console_info *info)\n \tif (!adev)\n \t\treturn;\n \n-\tINIT_LIST_HEAD(\u0026resource_list);\n \tret \u003d acpi_dev_get_resources(adev, \u0026resource_list, NULL, NULL);\n \tif (ret \u003c 0)\n \t\tgoto out;\n```\n\n?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3d6b8e_c986b9b9",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Maybe worth printing a warning? (BTW otherwise we don\u0027t need this `ret` variable, we can just `if (acpi_dev_get_resources(...) \u003c 0)`?)",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1e405e_4305eb1f",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Just a note: maybe for now let\u0027s do all this (i.e. duplicate the work done by the chromeos_pstore driver to get the ramoops info from ACPI), but in the future we might let the chromeos_pstore driver itself provide an API for that.",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f87f3ad1_393dfad5",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:16:02Z",
+      "side": 1,
+      "message": "Would be nice to move this logic into a separate function (e.g. `pkvm_ramoops_init()`?\n\nAlso, any reason why do this at the very beginning, even before `pkvm_firmware_rmem_init()`? There is a reason why `pkvm_firmware_rmem_init()` is done at the very beginning: we want to know the pvmfw address and size before even checking if pKVM is enabled, in order to clear pvmfw from memory if pKVM is disabled. While in the ramoops case, we don\u0027t need to parse ramoops info from ACPI if pKVM is disabled?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
