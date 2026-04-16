@@ -16,6 +16,24 @@
       "message": "has an upstream comment. Can we wait for this patch to land in a maintainer tree upstream?",
       "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2359ac9f_f9972bfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-04-16T19:50:48Z",
+      "side": 1,
+      "message": "Yes we saw that this had a minor review comment as well. We\u0027re currently waiting for V2 to be pushed but that won\u0027t be for another 2 weeks due to waiting for the window to re-open\nThe reason we wanted to merge this a bit earlier as V1 is because it\u0027s a boot critical change and we wanted to do an internal minor version upgrade soon to see where we stand in terms of booting the gki boot.img. V2 essentially resolves an issue that occurs when tegra 234 soc config is not enabled, hence we thought it might be acceptable to temporarily merge this since 234 soc config is enabled in gki.\n\nI pushed V1 for now in case you\u0027re willing to temporarily accept it and then revert/accept v2 when it\u0027s pushed in 2 weeks. \nBut if you prefer to wait for the V2 to get merged we can follow that guidance",
+      "parentUuid": "b5ce2bf0_b25f113d",
+      "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
