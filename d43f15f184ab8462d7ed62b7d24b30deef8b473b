@@ -173,6 +173,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a506a37_dcebee35",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T20:55:24Z",
+      "side": 1,
+      "message": "I guess this memory is reserved in e820? If so, may be worth sanity-checking that, like we do for pvmfw in pkvm_firmware_rmem_init()? This way we automatically validate if it doesn\u0027t overlap with pKVM memory and so on and so worth, thus preventing various possible unpredictable behavior if the bootloader accidentally misconfigures the ramoops info.\n\nAlso maybe worth checking if it doesn\u0027t overlap with pvmfw (given how sensitive pvmfw is)?\n\nAlso similarly may be worth checking if it is page-aligned?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f87f3ad1_393dfad5",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
