@@ -180,6 +180,30 @@
       },
       "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758a6637_18022046",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-16T12:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a1a9ea_5229760f",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 51
+      },
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
