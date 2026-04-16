@@ -382,7 +382,7 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	size_t tablesz = ARM_LPAE_GRANULE(data);
 	int ptes_per_table = ARM_LPAE_PTES_PER_TABLE(data);
 
-	if (WARN_ON(lvl == ARM_LPAE_MAX_LEVELS))
+	if (WARN_ON(lvl == ARM_LPAE_MAX_LEVELS) || !data->idmapped)
 		return 0;
 
 	tablep = __arm_lpae_alloc_pages(tablesz, GFP_ATOMIC, cfg, data->iop.cookie);
