@@ -12,7 +12,9 @@
 #define PKVM_ALIAS(sym)  pkvm_sym(sym) = sym;
 
 PKVM_ALIAS(_printk);
+#ifdef CONFIG_BUG
 PKVM_ALIAS(__warn_printk);
+#endif
 PKVM_ALIAS(___ratelimit);
 PKVM_ALIAS(__trace_bputs);
 PKVM_ALIAS(__trace_bprintk);
