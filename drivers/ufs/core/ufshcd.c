@@ -2526,16 +2526,44 @@ ufshcd_dispatch_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
 
 	hba->active_uic_cmd = uic_cmd;
 
-	/* Write Args */
-	ufshcd_writel(hba, uic_cmd->argument1, REG_UIC_COMMAND_ARG_1);
-	ufshcd_writel(hba, uic_cmd->argument2, REG_UIC_COMMAND_ARG_2);
-	ufshcd_writel(hba, uic_cmd->argument3, REG_UIC_COMMAND_ARG_3);
+	if (hba->android_quirks & UFSHCD_ANDROID_QUIRK_AH8_BREAKS_DME) {
+		unsigned long flags;
 
-	ufshcd_add_uic_command_trace(hba, uic_cmd, UFS_CMD_SEND);
+		/*
+		 * It is safe to call the ufs_send_uic_command vendor hook
+		 * before any UIC register has been written if
+		 * UFSHCD_ANDROID_QUIRK_AH8_BREAKS_DME has been set.
+		 */
+		ufshcd_add_uic_command_trace(hba, uic_cmd, UFS_CMD_SEND);
 
-	/* Write UIC Cmd */
-	ufshcd_writel(hba, uic_cmd->command & COMMAND_OPCODE_MASK,
-		      REG_UIC_COMMAND);
+		local_irq_save(flags);
+		preempt_disable();
+		ufshcd_writel(hba, uic_cmd->argument1, REG_UIC_COMMAND_ARG_1);
+		ufshcd_writel(hba, uic_cmd->argument2, REG_UIC_COMMAND_ARG_2);
+		ufshcd_writel(hba, uic_cmd->argument3, REG_UIC_COMMAND_ARG_3);
+		/* Write UIC Cmd */
+		ufshcd_writel(hba, uic_cmd->command & COMMAND_OPCODE_MASK,
+			      REG_UIC_COMMAND);
+		preempt_enable();
+		local_irq_restore(flags);
+	} else {
+		/* Write Args */
+		ufshcd_writel(hba, uic_cmd->argument1, REG_UIC_COMMAND_ARG_1);
+		ufshcd_writel(hba, uic_cmd->argument2, REG_UIC_COMMAND_ARG_2);
+		ufshcd_writel(hba, uic_cmd->argument3, REG_UIC_COMMAND_ARG_3);
+
+		/*
+		 * If UFSHCD_ANDROID_QUIRK_AH8_BREAKS_DME has not been set, we
+		 * don't know whether or not it's safe to call the
+		 * ufs_send_uic_command vendor hook before the UIC registers
+		 * have been written.
+		 */
+		ufshcd_add_uic_command_trace(hba, uic_cmd, UFS_CMD_SEND);
+
+		/* Write UIC Cmd */
+		ufshcd_writel(hba, uic_cmd->command & COMMAND_OPCODE_MASK,
+			      REG_UIC_COMMAND);
+	}
 }
 
 /**
