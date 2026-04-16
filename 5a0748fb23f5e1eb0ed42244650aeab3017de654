@@ -34,6 +34,24 @@
       "parentUuid": "f407d442_01ab66eb",
       "revId": "5a0748fb23f5e1eb0ed42244650aeab3017de654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b996ca7f_1e2e5788",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-16T22:41:34Z",
+      "side": 1,
+      "message": "The CRC of these vendor hooks changed after the KMI update. This would have been a KMI break if it was not rebased.",
+      "parentUuid": "86910786_bdd4b1de",
+      "revId": "5a0748fb23f5e1eb0ed42244650aeab3017de654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
