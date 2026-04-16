@@ -34,6 +34,24 @@
       "parentUuid": "179299d9_1f87d285",
       "revId": "d0ed80b6ea302de1b188b9a1622b93987b5f87ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a6db05_b94bdc8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-04-16T16:27:32Z",
+      "side": 1,
+      "message": "Marking this \"resolved\" to indicate ready for re-review.",
+      "parentUuid": "6f60dc23_58982dd9",
+      "revId": "d0ed80b6ea302de1b188b9a1622b93987b5f87ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
