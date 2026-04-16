@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbcf6866_9cf4bbfd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-16T13:57:22Z",
+      "side": 1,
+      "message": "Why not change `__pkvm_reclaim_dying_guest_page()` to call `get_np_pkvm_hyp_vm()` so that this is true by construction?",
+      "range": {
+        "startLine": 2580,
+        "startChar": 0,
+        "endLine": 2581,
+        "endChar": 16
+      },
+      "revId": "5e53354595c3be712d96e8db7f50dd4ff2fe7bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
