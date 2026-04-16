@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7290a9ca_2a23d3a8",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T21:15:22Z",
+      "side": 1,
+      "message": "Maybe worth adding a separate flag `pkvm_ramoops_console_present` (similarly to the `pvmfw_present`), so that we can check it instead of this verbose `if (pkvm_ramoops_console_pa \u0026\u0026 pkvm_ramoops_console_size)` in every place where we need to check if ramoops is available?\n\nOr we could just check if `pkvm_ramoops_console_size` is non-zero, without checking `pkvm_ramoops_console_pa`, like pKVM-ARM just checks `pvmfw_size`. (I don\u0027t really remember why exactly I decided to introduce that `pvmfw_present` back in the day, instead of doing what pKVM-ARM does.)\n\nAre there any reasons why we need to forbid using ramoops at address 0?",
+      "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8becff74_8a0924b7",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T21:15:22Z",
+      "side": 1,
+      "message": "nit: again, ramoops is not exactly more important than pvmfw, so let\u0027s be humble and add this code after mapping pvmfw, not before?",
+      "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
