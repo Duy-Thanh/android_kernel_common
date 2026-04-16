@@ -4123,8 +4123,11 @@
   virtio_config_changed
   virtio_device_freeze
   virtio_device_restore
+  virtio_device_freeze_noirq
+  virtio_device_restore_noirq
   virtio_max_dma_size
   virtio_reset_device
+  virtio_reset_device_noirq
   virtqueue_add_inbuf
   virtqueue_add_inbuf_ctx
   virtqueue_add_outbuf
@@ -4147,6 +4150,7 @@
   virtqueue_notify
   virtqueue_poll
   virtqueue_resize
+  virtqueue_reinit_vring
   vlan_dev_vlan_id
   vlan_filter_drop_vids
   vlan_filter_push_vids
