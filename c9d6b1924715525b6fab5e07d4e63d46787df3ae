@@ -52,6 +52,24 @@
       "parentUuid": "2b07b393_a82af6d6",
       "revId": "c9d6b1924715525b6fab5e07d4e63d46787df3ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8bceab_458d771d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-04-16T19:49:54Z",
+      "side": 1,
+      "message": "Got it, thanks for confirming. Just couldn\u0027t remember if that tag was specifically for upstream linux only or also applied to android-mainline. Will update and re-push",
+      "parentUuid": "8d4744c3_53585cd2",
+      "revId": "c9d6b1924715525b6fab5e07d4e63d46787df3ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
