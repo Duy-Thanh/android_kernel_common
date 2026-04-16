@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52c2cc48_57fdf8c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-16T01:36:38Z",
+      "side": 1,
+      "message": "I\u0027ve updated it with a clean upstream cherry-pick instead, PTAL.",
+      "parentUuid": "01bba328_ae6c71a1",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "270198d4_59f7f1a6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -93,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "debdb006_e16db21a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-16T01:36:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f451d600_4e6d7867",
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83e6882c_94af4a57",
@@ -106,6 +148,30 @@
       "writtenOn": "2026-04-15T20:35:46Z",
       "side": 1,
       "message": "The KMI is not frozen yet, are you sure you want to use the reserved fields?",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 51
+      },
+      "revId": "eb43de7fb644d3c7fff5caf03e505e6b67df31e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a1a9ea_5229760f",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1963652
+      },
+      "writtenOn": "2026-04-16T01:36:38Z",
+      "side": 1,
+      "message": "Thanks for the clarification, I\u0027ve updated it with a clean upstream cherry-pick",
+      "parentUuid": "83e6882c_94af4a57",
       "range": {
         "startLine": 761,
         "startChar": 0,
