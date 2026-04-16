@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866ef7e0_79a5dad8",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T14:32:31Z",
+      "side": 1,
+      "message": "If we are fixing this anyway, it seems more useful to do it on the host side, as that would allow us to print a warning? (On the hypervisor side we can\u0027t print warnings in non-debug mode.)\n\nSomething like this?\n\n```\n--- a/arch/x86/kvm/mmu/mmu.c\n+++ b/arch/x86/kvm/mmu/mmu.c\n@@ -1686,10 +1686,18 @@ static bool pkvm_age_gfn_range(struct kvm *kvm, struct kvm_gfn_range *range,\n \tread_lock(\u0026kvm-\u003emmu_lock);\n \n \tfor_each_pkvm_mapping(kvm, range-\u003estart, range-\u003eend, m) {\n-\t\tyoung |\u003d pkvm_hypercall(vm_mmu_age, kvm-\u003earch.pkvm.handle,\n-\t\t\t\t\tm-\u003egfn \u003c\u003c PAGE_SHIFT,\n-\t\t\t\t\tm-\u003enr_pages \u003c\u003c PAGE_SHIFT,\n-\t\t\t\t\tmkold);\n+\t\tint ret \u003d pkvm_hypercall(vm_mmu_age, kvm-\u003earch.pkvm.handle,\n+\t\t\t\t\t m-\u003egfn \u003c\u003c PAGE_SHIFT,\n+\t\t\t\t\t m-\u003enr_pages \u003c\u003c PAGE_SHIFT,\n+\t\t\t\t\t mkold);\n+\t\tif (ret \u003c 0) {\n+\t\t\tWARN_ONCE(err, \"pkvm %s gfn[%llx..%llx] failed, err \u003d %d\\n\",\n+\t\t\t\t  mkold ? \"age\" : \"test_age\",\n+\t\t\t\t  m-\u003egfn, m-\u003egfn + m-\u003enr_pages, ret);\n+\t\t\tcontinue;\n+\t\t}\n+\n+\t\tyoung |\u003d ret;\n \t\tif (young \u0026\u0026 !mkold)\n \t\t\tbreak;\n \t}\n```\n\n...And while we\u0027re at it, we can also fix up the documentation:\n\n```\n--- a/arch/x86/kvm/pkvm/mmu.c\n+++ b/arch/x86/kvm/pkvm/mmu.c\n@@ -1613,7 +1613,8 @@ int pkvm_host_unshare_guest(struct kvm *kvm, unsigned long gpa,\n  * Does not flush the TLB after clearing the access flag. It is the caller\u0027s\n  * responsibility to flush the TLB when needed.\n  *\n- * Returns: true if any of the pages in the range had the access flag set.\n+ * Returns: 1 if any of the pages in the range had the access flag set, 0 if\n+ *\t    none of the pages had it set, or a negative error code on failure.\n  */\n int pkvm_host_test_clear_young_guest(struct kvm *kvm, unsigned long gpa,\n \t\t\t\t     unsigned long size, bool mkold)\n```\n\n?\n\n...BTW just a note: when I was implementing this, I did realize this small issue, but it was the same in pKVM-ARM, so I decided to keep it as is for code simplicity, since the issue seems minor: the worst thing that happens is an extra unneeded TLB flush. But yeah, why not fix it properly (and as a bonus, print a warning if this abnormal condition happens).",
+      "revId": "ba12d68c567662bab198c4814784ea8d7440666e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
