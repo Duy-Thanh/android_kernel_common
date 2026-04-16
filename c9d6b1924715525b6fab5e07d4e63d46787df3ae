@@ -34,6 +34,24 @@
       "parentUuid": "49599ce3_4a0ef309",
       "revId": "c9d6b1924715525b6fab5e07d4e63d46787df3ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4744c3_53585cd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-16T19:48:39Z",
+      "side": 1,
+      "message": "Oh, it is UPSTREAM then. You can see an example in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nThe only unlabeled patches should be from the original clone and LTS merges (so they all correspond to the upstream stable linux-6.12.y)",
+      "parentUuid": "2b07b393_a82af6d6",
+      "revId": "c9d6b1924715525b6fab5e07d4e63d46787df3ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
