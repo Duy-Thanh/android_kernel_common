@@ -273,6 +273,9 @@ static bool pkvm_guest_iommu_map(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	}
 
 	while (size) {
+		size_t off;
+		size_t pinned_size;
+
 		/*
 		 * We need to get the PA and atomically use the page temporarily to avoid
 		 * racing with relinquish.
@@ -290,10 +293,12 @@ static bool pkvm_guest_iommu_map(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 			break;
 		}
 
+		off = paddr - ALIGN_DOWN(paddr, kvm_granule_size(level));
+		pinned_size = min(size, kvm_granule_size(level) - off);
 		kvm_iommu_map_pages(domain, iova, paddr,
-				    PAGE_SIZE, min(size, kvm_granule_size(level)) / PAGE_SIZE,
+				    PAGE_SIZE, pinned_size / PAGE_SIZE,
 				    __smccc_prot_linux(prot), &mapped);
-		WARN_ON(__pkvm_unuse_dma(paddr, kvm_granule_size(level), hyp_vcpu));
+		WARN_ON(__pkvm_unuse_dma(paddr, pinned_size, hyp_vcpu));
 		if (!mapped) {
 			if (!__need_req(vcpu)) {
 				smccc_ret = SMCCC_RET_INVALID_PARAMETER;
