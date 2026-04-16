@@ -22,6 +22,30 @@
       },
       "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9509c6d8_fe1938a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-16T05:59:15Z",
+      "side": 1,
+      "message": "If you added a selinux rule against that, then that\u0027s good. I still think we should enforce it here too, though, as the kernel should not rely on userspace doing the right thing.",
+      "parentUuid": "6f1006ab_6712c294",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
