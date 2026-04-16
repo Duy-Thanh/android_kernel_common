@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37658bf5_781a94f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-16T19:17:15Z",
+      "side": 1,
+      "message": "Validated that that this does indeed resolve the issue for me. Really nice work chasing down this problem so quickly!",
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72ba46cd_4ac64900",
@@ -43,6 +60,23 @@
         "endLine": 191,
         "endChar": 2
       },
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e2d9f8_b0175c08",
+        "filename": "lib/vdso/datastore.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-16T19:17:15Z",
+      "side": 1,
+      "message": "Oof. I think Kalesh\u0027s suggestion would be good, or alternatively if the un-multiplied offsets are needed, defining another macro. Doing math in the case statement makes this tough to read and think about.",
       "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
