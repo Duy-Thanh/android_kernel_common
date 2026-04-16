@@ -22,6 +22,30 @@
       },
       "revId": "5e53354595c3be712d96e8db7f50dd4ff2fe7bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa118c9_affa8f57",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2581,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-16T13:58:52Z",
+      "side": 1,
+      "message": "ha, because that\u0027s completely the opposite way around :)\n\nI still wonder about moving the check up into the caller though.",
+      "parentUuid": "bbcf6866_9cf4bbfd",
+      "range": {
+        "startLine": 2580,
+        "startChar": 0,
+        "endLine": 2581,
+        "endChar": 16
+      },
+      "revId": "5e53354595c3be712d96e8db7f50dd4ff2fe7bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
