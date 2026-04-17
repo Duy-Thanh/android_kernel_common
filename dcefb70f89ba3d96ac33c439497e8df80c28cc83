@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25061dfa_42db63ab",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T13:03:52Z",
+      "side": 1,
+      "message": "Just noticed that we\u0027ve already checked `ret \u003c 0`, so s/ret/1/ ?\n\n(When I suggested this code, I basically copypasted this from __pkvm_unmap_gfn_range() above, without paying attention to this detail.)",
+      "fixSuggestions": [
+        {
+          "fixId": "2090dae8_b2d2a159",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/mmu/mmu.c",
+              "range": {
+                "startLine": 1694,
+                "startChar": 0,
+                "endLine": 1695,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tWARN_ONCE(1, \"pkvm %s gfn[%llx..%llx] failed, err \u003d %d\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dcefb70f89ba3d96ac33c439497e8df80c28cc83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
