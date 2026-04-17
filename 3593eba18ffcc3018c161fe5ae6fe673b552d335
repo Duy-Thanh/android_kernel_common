@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcfc3df1_99cadf82",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T17:58:50Z",
+      "side": 1,
+      "message": "Maybe just `pkvm_panic()`?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58194db0_f6b36d5f",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
