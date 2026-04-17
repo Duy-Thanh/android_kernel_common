@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88edbe77_6ab18f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-04-17T20:43:28Z",
+      "side": 1,
+      "message": "WOW! TIL. This is way better than copts -I.\n\nWe should probably even note this in https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/docs/kleaf_development.md",
+      "revId": "30e885512035b29688dbf50a574c67b12b397a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
