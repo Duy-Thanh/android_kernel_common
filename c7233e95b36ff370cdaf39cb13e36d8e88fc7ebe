@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cac9af2_e53d33e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-17T16:45:29Z",
+      "side": 1,
+      "message": "Would it be clearer to use \u0027checked_offset\u0027 here? That\u0027s what we check `fraglen` against earlier on...",
+      "range": {
+        "startLine": 1056,
+        "startChar": 3,
+        "endLine": 1056,
+        "endChar": 53
+      },
+      "revId": "c7233e95b36ff370cdaf39cb13e36d8e88fc7ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
