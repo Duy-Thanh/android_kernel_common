@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6d51e6_b57e3410",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-17T15:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "244e3ea4_17250e26",
+      "range": {
+        "startLine": 488,
+        "startChar": 2,
+        "endLine": 488,
+        "endChar": 37
+      },
+      "revId": "3bc90f9d4099410a596ee41593e99a3925c751c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "998fd3e8_6e37ba05",
@@ -119,6 +143,30 @@
           ]
         }
       ],
+      "revId": "3bc90f9d4099410a596ee41593e99a3925c751c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d16be97_9fab754e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5966,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-17T15:24:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998fd3e8_6e37ba05",
+      "range": {
+        "startLine": 5966,
+        "startChar": 11,
+        "endLine": 5966,
+        "endChar": 17
+      },
       "revId": "3bc90f9d4099410a596ee41593e99a3925c751c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
