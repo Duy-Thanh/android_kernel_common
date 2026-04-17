@@ -2684,7 +2684,7 @@ struct irqaction *create_percpu_irqaction(irq_handler_t handler, unsigned long f
  *	the handler gets called with the interrupted CPU's instance of
  *	that variable.
  */
-int __request_percpu_irq(unsigned int irq, irq_handler_t handler,
+int __request_percpu_irq_NEW(unsigned int irq, irq_handler_t handler,
 			 unsigned long flags, const char *devname,
 			 const cpumask_t *affinity, void __percpu *dev_id)
 {
@@ -2721,6 +2721,14 @@ int __request_percpu_irq(unsigned int irq, irq_handler_t handler,
 	}
 
 	return retval;
+}
+EXPORT_SYMBOL_GPL(__request_percpu_irq_NEW);
+
+int __request_percpu_irq(unsigned int irq, irq_handler_t handler,
+			 unsigned long flags, const char *devname,
+			 void __percpu *dev_id)
+{
+	return __request_percpu_irq_NEW(irq, handler, flags, devname, NULL, dev_id);
 }
 EXPORT_SYMBOL_GPL(__request_percpu_irq);
 
