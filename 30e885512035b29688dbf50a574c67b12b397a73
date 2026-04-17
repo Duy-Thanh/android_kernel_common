@@ -16,6 +16,41 @@
       "message": "WOW! TIL. This is way better than copts -I.\n\nWe should probably even note this in https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/docs/kleaf_development.md",
       "revId": "30e885512035b29688dbf50a574c67b12b397a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1eb7bc9_e67b1978",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-04-17T20:45:18Z",
+      "side": 1,
+      "message": "This should contain srcs \u003d glob(tools/include/uapi/**/*.h)",
+      "fixSuggestions": [
+        {
+          "fixId": "b2dcc547_7a45266d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "# This should contain\n"
+            }
+          ]
+        }
+      ],
+      "revId": "30e885512035b29688dbf50a574c67b12b397a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
