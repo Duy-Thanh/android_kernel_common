@@ -46,6 +46,94 @@
       },
       "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38801ce_0454333d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-17T01:35:35Z",
+      "side": 1,
+      "message": "That\u0027s a fair point.",
+      "parentUuid": "9509c6d8_fe1938a0",
+      "range": {
+        "startLine": 12,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 41
+      },
+      "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae12d7ec_682a7940",
+        "filename": "include/linux/shmem_fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-17T01:35:35Z",
+      "side": 1,
+      "message": "nit: Why this number specifically? If it\u0027s arbitrary, could we use the highest bit to give us space in case those fields are ever used? It would also be useful to add a comment with the `ANDROID:` tag to specify why this exists.",
+      "range": {
+        "startLine": 53,
+        "startChar": 25,
+        "endLine": 53,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "032f409a_25a5b497",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/shmem_fs.h",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "#define SHMEM_FL_MEMFD\t\t\t0x01000000 /* Inode backs a memfd.\n\t\t\t\t\t\t   * Note: This value conflicts with FS_ENCODED_FL. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57001875_d1e23b53",
+        "filename": "mm/memfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-17T01:35:35Z",
+      "side": 1,
+      "message": "Files backed by hugetlbfs are technically still memfds too. If you just need to make sure you have a shmem backed file in mm/shmem.c, you could use `shmem_file()`? Though why would you need that? Isn\u0027t that only reachable through the shmem fops?",
+      "range": {
+        "startLine": 428,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 42
+      },
+      "revId": "984fba01cf311f43c1ecb66fbda97a49e5f1f353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
