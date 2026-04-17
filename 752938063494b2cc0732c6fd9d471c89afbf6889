@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9cca729_fe744569",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T17:57:11Z",
+      "side": 1,
+      "message": "It would be useful to print also _which_ exception? Like we do in default_exception_handler() in debug mode?\n\nBTW shall we consolidate that logic for debug mode in default_exception_handler() with this logic for ramoops here? I.e. print the same message both to dmesg via printk() if debug mode is enabled, and to ramoops if ramoops is available, and do both those things here in pkvm_hyp_panic()?",
+      "revId": "752938063494b2cc0732c6fd9d471c89afbf6889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
