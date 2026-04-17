@@ -52,6 +52,24 @@
       "parentUuid": "2359ac9f_f9972bfa",
       "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061ac14a_5a2e1349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-04-17T18:35:51Z",
+      "side": 1,
+      "message": "Alright gotcha, just had pushed in case you\u0027d have been willing to accept it earlier. We can work with waiting for V2. I\u0027ll re-push once we have V2 accepted by a maintainer and will abandon these 2 for now. Thanks!",
+      "parentUuid": "a5408ff1_543f346c",
+      "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
