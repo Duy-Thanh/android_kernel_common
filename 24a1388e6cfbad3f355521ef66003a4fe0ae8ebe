@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea03dda_8966d889",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-17T07:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72ba46cd_4ac64900",
+      "range": {
+        "startLine": 181,
+        "startChar": 65,
+        "endLine": 181,
+        "endChar": 74
+      },
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30f59eac_acd9ade1",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b8aff86_aa5b247d",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-17T07:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30f59eac_acd9ade1",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 191,
+        "endChar": 2
+      },
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47e2d9f8_b0175c08",
@@ -77,6 +125,24 @@
       "writtenOn": "2026-04-16T19:17:15Z",
       "side": 1,
       "message": "Oof. I think Kalesh\u0027s suggestion would be good, or alternatively if the un-multiplied offsets are needed, defining another macro. Doing math in the case statement makes this tough to read and think about.",
+      "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbc9c11_626ad5ce",
+        "filename": "lib/vdso/datastore.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-17T07:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47e2d9f8_b0175c08",
       "revId": "24a1388e6cfbad3f355521ef66003a4fe0ae8ebe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
