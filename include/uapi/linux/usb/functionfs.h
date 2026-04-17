@@ -414,4 +414,23 @@ struct usb_functionfs_event {
 #define FUNCTIONFS_DMABUF_TRANSFER	_IOW('g', 133, \
 					     struct usb_ffs_dmabuf_transfer_req)
 
+/*
+ * Enable or disable zero-length packet (ZLP) appending for the endpoint.
+ * The argument is a pointer to an integer: 0 to disable, non-zero to enable.
+ *
+ * This ioctl is used to instruct the kernel to automatically append a ZLP
+ * at the end of a transfer if the payload length is an exact multiple of
+ * the endpoint's max packet size.
+ *
+ * If a logical USB transfer is chunked into multiple separate requests,
+ * userspace must disable ZLPs for all intermediate chunks and enable
+ * ZLPs *only* prior to submitting the final chunk.
+ *
+ * This ioctl can only be used on IN endpoints and must be called after the
+ * endpoint has been enabled.
+ *
+ * Returns zero on success, and a negative errno value on error.
+ */
+#define	FUNCTIONFS_ENDPOINT_ENABLE_ZLP	_IOW('g', 134, __u32)
+
 #endif /* _UAPI__LINUX_FUNCTIONFS_H__ */
