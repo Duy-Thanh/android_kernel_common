@@ -34,6 +34,24 @@
       ],
       "revId": "dcefb70f89ba3d96ac33c439497e8df80c28cc83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c15a20_dac4dbcf",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1694,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-17T13:29:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "25061dfa_42db63ab",
+      "revId": "dcefb70f89ba3d96ac33c439497e8df80c28cc83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
