@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b307da86_eaaf4cd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T20:26:37Z",
+      "side": 1,
+      "message": "As I understand, it is not a multi-stage reset, it is just a sequence of fallbacks? I mean, each of this steps on its own is expected to successfully reset the system, and if it does, the next steps are not needed and are not performed, they are only performed if it fails to reset the system for some reason?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcfc3df1_99cadf82",
         "filename": "arch/x86/include/asm/kvm_pkvm.h",
         "patchSetId": 1
@@ -14,6 +31,40 @@
       "writtenOn": "2026-04-17T17:58:50Z",
       "side": 1,
       "message": "Maybe just `pkvm_panic()`?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfe7758_7e9a3398",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T20:26:37Z",
+      "side": 1,
+      "message": "I think ACPI based reboot is almost always the same thing as PCI based reboot, since the ACPI reset register specified in the FADT table is almost always 0xCF9 in practice.\n\nExcept that... the reset value (written to this register) specified in FADT is almost always 0x06 i.e. warm reset, while for the PCI reset below you are using 0x0E i.e. cold reset.\n\nSo maybe it would be better to prefer 0xCF9 reset first, i.e. only fall back to the legacy keyboard reset if 0xCF9 fails? For example, stay close to what the host kernel does, i.e.: first try PCI warm reset (with a comment explaining that it is effectively the ACPI reset, i.e. the modern recommended default), then try keyboard reset, then PCI cold reset, then triple fault?\n\nActually I\u0027ve been wondering: on our modern hardware, do we really need to pessimistically implement more than one reset mechanism? If we don\u0027t, and just do 0xCF9 reset or the keyboard reset (i.e. just one `outb`) and then immediately proceed to the HLT loop, we don\u0027t need `pkvm_udelay()` and thus don\u0027t need to rely on the availability of TSC?\n\nAccording to Gemini, on modern hardware it it is very unlikely that ACPI reset (i.e. effectively PCI warm reset) will fail, as it is the universal modern default; while it is _very likely_ that the keyboard reset will fail, since many modern platforms may not even provide this legacy i8042 controller, or may emulate it but poorly. OTOH, in my observations on PTL, the keyboard reset is working reliably so far. I suspect it is thanks to the EC on chromebooks properly emulating i8042, in particular implementing this reset. But that is chromebook-specific.\n\nAs for the PCI cold reset (which you are doing as a fallback below), according to Gemini it should be very reliable just like the ACPI reset. But a cold reset may be an overkill, for a simple reboot we just need a warm reset (which is why ACPI specifies it)?\n\n...So, it seems to me we could just do the PCI warm reset (again, with a comment explaining that it is effectively the ACPI reset, i.e. the modern recommended default) and the HLT loop and be done, without any `pkvm_udelay()`, thus simplify the code?\n\nOr if we still want to have this fail-safe sequence, it seems a good idea to try the PCI warm reset (aka ACPI reset) first?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "075eccab_6f9c62de",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T20:26:37Z",
+      "side": 1,
+      "message": "Do we need `cli`? I thought we never enabled interrupts?",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
