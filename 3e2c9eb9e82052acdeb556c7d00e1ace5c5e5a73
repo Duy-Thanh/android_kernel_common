@@ -34,6 +34,24 @@
       "parentUuid": "b5ce2bf0_b25f113d",
       "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5408ff1_543f346c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-17T17:58:17Z",
+      "side": 1,
+      "message": "Unless it is very urgent, we prefer not to take versions that we know will never land, so we\u0027d prefer to wait for V2 (and to have it accepted by a maintainer). If there are production deadlines that require it, we can discuss your proposal of take V1 now and replace with Vn later.",
+      "parentUuid": "2359ac9f_f9972bfa",
+      "revId": "3e2c9eb9e82052acdeb556c7d00e1ace5c5e5a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
