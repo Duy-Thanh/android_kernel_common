@@ -1,0 +1,121 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb80b6c8_59b51de8",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2461,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T15:15:59Z",
+      "side": 1,
+      "message": "nit: we could rename `empty_entry_index` to `first_empty_index` to make it more clear, and then, in particular, we won\u0027t need this comment?",
+      "fixSuggestions": [
+        {
+          "fixId": "aaa8e144_5c7b7962",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/cpuid.c",
+              "range": {
+                "startLine": 2385,
+                "startChar": 0,
+                "endLine": 2386,
+                "endChar": 0
+              },
+              "replacement": "\tint def_nent, r, i, n, first_empty_index, func0_index;\n"
+            },
+            {
+              "path": "arch/x86/kvm/cpuid.c",
+              "range": {
+                "startLine": 2457,
+                "startChar": 0,
+                "endLine": 2458,
+                "endChar": 0
+              },
+              "replacement": "\tfunc0_index \u003d first_empty_index \u003d *nent;\n"
+            },
+            {
+              "path": "arch/x86/kvm/cpuid.c",
+              "range": {
+                "startLine": 2461,
+                "startChar": 0,
+                "endLine": 2464,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (i \u003c first_empty_index)\n\t\t\t\tfirst_empty_index \u003d i;\n"
+            },
+            {
+              "path": "arch/x86/kvm/cpuid.c",
+              "range": {
+                "startLine": 2481,
+                "startChar": 0,
+                "endLine": 2483,
+                "endChar": 0
+              },
+              "replacement": "\tif (func0_index \u003e first_empty_index) {\n\t\te2[first_empty_index] \u003d e2[func0_index];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f0535b_da301818",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T15:15:59Z",
+      "side": 1,
+      "message": "nit: if we have this comment anyway, maybe let\u0027s add a short explanation why we are doing this, e.g.: \"Thus avoid erroneously exposing this empty entry instead of the native CPUID00H to the guest.\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "9ad45e0a_2ff82a20",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/cpuid.c",
+              "range": {
+                "startLine": 2478,
+                "startChar": 0,
+                "endLine": 2480,
+                "endChar": 0
+              },
+              "replacement": "\t * is always CPUID00H in the e2. If CPUID00H sits after the first\n\t * empty CPUID entry, swap the entries. Thus avoid erroneously exposing\n\t * this empty entry instead of the native CPUID00H to the guest.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1452384a_57532042",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T15:15:59Z",
+      "side": 1,
+      "message": "Maybe still worth sanity-checking e.g. `\u0026\u0026 !WARN_ON(func0_index \u003e\u003d *nent)` ?",
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
