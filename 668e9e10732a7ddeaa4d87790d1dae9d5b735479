@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8e7261_76764d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-04-17T11:00:01Z",
+      "side": 1,
+      "message": "The fix requires following two backport patches (which were never backported): https://lore.kernel.org/all/20260303015047.2014999-2-black.hawk@163.com/\n\nI have pushed aosp/4036678, which picks the second patch, `arm64/fpsimd: signal: Fix restoration of SVE context`\n\nWe already have the first one, `arm64/fpsimd: signal: Mandate SVE payload for streaming-mode state`, in Android 16-6.12 as:\n\n`bed5006f4acb FROMGIT: arm64/fpsimd: signal: Mandate SVE payload for streaming-mode state`\n\nI verified that the code/logic is the same.",
+      "revId": "668e9e10732a7ddeaa4d87790d1dae9d5b735479",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
