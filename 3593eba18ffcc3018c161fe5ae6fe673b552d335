@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95fdd935_62d28d2d",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-18T10:55:47Z",
+      "side": 1,
+      "message": "\u003e According to Gemini, on modern hardware it it is very unlikely that ACPI reset (i.e. effectively PCI warm reset) will fail, as it is the universal modern default; while it is very likely that the keyboard reset will fail [...]\n\nFWIW just played with that on my thinkpad using /dev/port - writing either 0x06 or 0x0E to port 0xCF9 immediately reboots the system, while writing 0xFE to port 0x64 does nothing.",
+      "parentUuid": "cdfe7758_7e9a3398",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "075eccab_6f9c62de",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
