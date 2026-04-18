@@ -794,7 +794,7 @@ DECLARE_HOOK(android_vh_pick_swap_device_bypass,
 	TP_ARGS(entry, si, bypass));
 DECLARE_HOOK(android_vh_update_percpu_swap_cluster_bypass,
 	TP_PROTO(struct swap_info_struct *si, bool *bypass),
-	TP_ARGS(si, offset, order, bypass));
+	TP_ARGS(si, bypass));
 DECLARE_HOOK(android_vh_check_swap_entries_free,
 	TP_PROTO(struct swap_info_struct *si, swp_entry_t *entry,\
 		 unsigned int nr_pages),
