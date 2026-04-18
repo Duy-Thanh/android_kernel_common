@@ -128,7 +128,6 @@ struct zram {
 #ifdef CONFIG_ZRAM_WRITEBACK
 	struct file *backing_dev;
 	bool wb_limit_enable;
-	bool wb_compressed;
 	u32 wb_batch_size;
 	u64 bd_wb_limit;
 	struct block_device *bdev;
