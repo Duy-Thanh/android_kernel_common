@@ -1638,8 +1638,19 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	end = pgofs + maxblocks;
 
 next_dnode:
+<<<<<<< HEAD   (7790109d9d13b64ad2c9f668e8ad2dcfa84bef6b BACKPORT: UPSTREAM: f2fs: sysfs: introduce critical_task_pri)
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, &lc, flag);
+||||||| BASE   (ddd5813c91fcc9cd0c7723d7869163944514329a Merge tag 'android14-6.1.166_r00' into android14-6.1)
+	if (map->m_may_create)
+		f2fs_map_lock(sbi, flag);
+=======
+	if (map->m_may_create) {
+		if (f2fs_lfs_mode(sbi))
+			f2fs_balance_fs(sbi, true);
+		f2fs_map_lock(sbi, flag);
+	}
+>>>>>>> BRANCH (707f6267afd5238da0775ad89b11458f4915962b Merge 6.1.167 into android14-6.1-lts)
 
 	/* When reading holes, we need its node page */
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
