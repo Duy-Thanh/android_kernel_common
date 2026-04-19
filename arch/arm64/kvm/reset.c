@@ -282,8 +282,58 @@ int kvm_reset_vcpu(struct kvm_vcpu *vcpu)
 	 * Additional reset state handling that PSCI may have imposed on us.
 	 * Must be done after all the sys_reg reset.
 	 */
+<<<<<<< HEAD   (da5cb60c2085e85e84fc50883d861575009bb4b4 Revert "rtnetlink: pass netlink message header and portid to)
 	if (reset_state.reset)
 		kvm_reset_vcpu_psci(vcpu, &reset_state);
+||||||| BASE   (7b67167c788da6af91363d049d8035cc5d4a78b3 cpufreq: conservative: Reset requested_freq on limits change)
+	if (reset_state.reset) {
+		unsigned long target_pc = reset_state.pc;
+
+		/* Gracefully handle Thumb2 entry point */
+		if (vcpu_mode_is_32bit(vcpu) && (target_pc & 1)) {
+			target_pc &= ~1UL;
+			vcpu_set_thumb(vcpu);
+		}
+
+		/* Propagate caller endianness */
+		if (reset_state.be)
+			kvm_vcpu_set_be(vcpu);
+
+		*vcpu_pc(vcpu) = target_pc;
+		vcpu_set_reg(vcpu, 0, reset_state.r0);
+	}
+=======
+	if (reset_state.reset) {
+		unsigned long target_pc = reset_state.pc;
+
+		/* Gracefully handle Thumb2 entry point */
+		if (vcpu_mode_is_32bit(vcpu) && (target_pc & 1)) {
+			target_pc &= ~1UL;
+			vcpu_set_thumb(vcpu);
+		}
+
+		/* Propagate caller endianness */
+		if (reset_state.be)
+			kvm_vcpu_set_be(vcpu);
+
+		*vcpu_pc(vcpu) = target_pc;
+
+		/*
+		 * We may come from a state where either a PC update was
+		 * pending (SMC call resulting in PC being increpented to
+		 * skip the SMC) or a pending exception. Make sure we get
+		 * rid of all that, as this cannot be valid out of reset.
+		 *
+		 * Note that clearing the exception mask also clears PC
+		 * updates, but that's an implementation detail, and we
+		 * really want to make it explicit.
+		 */
+		vcpu_clear_flag(vcpu, PENDING_EXCEPTION);
+		vcpu_clear_flag(vcpu, EXCEPT_MASK);
+		vcpu_clear_flag(vcpu, INCREMENT_PC);
+		vcpu_set_reg(vcpu, 0, reset_state.r0);
+	}
+>>>>>>> BRANCH (58af87b75dc62d3360bb05258c51dad646456a19 KVM: arm64: Discard PC update state on vcpu reset)
 
 	/* Reset timer */
 	ret = kvm_timer_vcpu_reset(vcpu);
