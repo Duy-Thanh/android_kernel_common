@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "768fd82d_a2924a35",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "\u003e very nit: these variables are a bit similar in purpose to the pvmfw-related ones (pvmfw_present, pvmfw_base, pvmfw_size), in that they both specify a memory region provided by the bootloader. So it might be nice to declare them after the declarations of those pvmfw variables below at lines 654-656?\n\nDone\n\n\u003e (I could also suggest to define them in arch/x86/kvm/pkvm/pkvm.c together with those pvmfw variables. But for some reasons we define those pvmfw variables in arch/x86/kvm/pkvm/init.c instead, I\u0027m not sure why (given that they are used at runtime, not just during init)...)\n\nThose are defined in arch/x86/kvm/pkvm/pkvm.c but not together with pvmfw variables - moving definition of pvmfw variables from arch/x86/kvm/pkvm/init.c should not be part of this patch or patchset. If we want to do it lets do it as separate CL.",
+      "parentUuid": "f1a61895_c85dcc01",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b25b846_7d992f3e",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "nit: add an empty line above this line for readability, to separate these ramoops-related variables from others?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "825f2de9_bf4ebf6a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b25b846_7d992f3e",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e38beb7f_5a2bbe3d",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "\u003e Will all this work correctly if the chromeos_pstore driver is disabled (so the ramoops info is present in ACPI but the host kernel doesn\u0027t do anything with it?)\n\u003e \n\u003e If not, we should probably wrap all this in an #if IS_ENABLED(CONFIG_CHROMEOS_PSTORE)?\n\u003e \n\u003e Hmm... BTW what about the fact that we enable it as a module (so it is not loaded yet when pKVM is initialized, it is only loaded later during boot)?\n\nI thought about it - it should be fine as is: here we only parse this info, while we log the error to the ramoops console only when proper SIG is detected (see aosp/4032092 which among other things performs a runtime signature verification to ensure it is writing to a correctly initialized pstore buffer.). And this is true only if this driver is enabled (even as a module). Otherwise this info is just parsed and any logging to ramoops is skipped.\n\n\u003e .. I\u0027d put them, for example, between pkvm_firmware_rmem_clear() and vmx_pkvm_init(). (It\u0027s not like this ramoops stuff is more important than the pvmfw stuff?)\n\nOk. No specific reason - I\u0027ve just put the whole new chunk at the begining but after early_param\u0027s - moved it as suggested.",
+      "parentUuid": "4a5d1a7b_f9ce330c",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e1df961_5e4697a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "nit: maybe s/pkvm_console_info_update/ramoops_console_info_update/ (to make it more clear which console it is about, to avoid making an impression that pKVM has some support for a serial console or whatever; and since this is just a helper function, it doesn\u0027t necessarily need a `pkvm_` prefix)?\n\nOr maybe better `update_ramoops_console_info()`?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4237d5_315df751",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8e1df961_5e4697a7",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a348d38_7ff53d3a",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Above is not quite correct and calling it remainder_size is confusing: it is other way around the Dmesg area is the actual \"remainder\" and this calculation are about getting the console offset which is equal t dmesg area size.\n\nBut to make it more compact I introduced and use\n\n  #define GOOG9999_RAMOOPS_NON_DMESG_SIZE \\                                                                                                                                                                                                                                                                                    \n          (GOOG9999_RAMOOPS_PMSG_SIZE + \\                                                                                                                                                                                                                                                                                      \n           GOOG9999_RAMOOPS_FTRACE_SIZE + \\                                                                                                                                                                                                                                                                                    \n           GOOG9999_RAMOOPS_CONSOLE_SIZE)",
+      "parentUuid": "3c3ba246_87259e03",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "407c3a7d_afe58a6e",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "Just a question: would it be a low-hanging fruit to implement this support for ramoops cmdline options in pKVM, to make it possible to test this pKVM functionality in a non-chromebook environment?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "322d502c_ef2e86fa",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "I think it should be realtively easy and was planning to take a look on implementing it after this patchset is merged - didn\u0027t wanted to delay it as I think it is quite important to get it merged quick.",
+      "parentUuid": "407c3a7d_afe58a6e",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -122,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "819e7cb0_a75f6a33",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "I was trying to find one but faild so I assume it is not documented. The original GOOG9999 driver (chromeos_pstore) doesn\u0027t seem to bother about uid so I think it is safe to do the same?",
+      "parentUuid": "0ecdc468_f8565285",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4518393_ef2d165b",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
@@ -133,6 +259,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "nit: we could make it a bit shorter:\n\n```\n--- a/arch/x86/kvm/vmx/pkvm_init.c\n+++ b/arch/x86/kvm/vmx/pkvm_init.c\n@@ -78,7 +78,7 @@ static void pkvm_console_info_update(struct pkvm_ramoops_console_info *info,\n static void pkvm_find_ramoops(struct pkvm_ramoops_console_info *info)\n {\n \tstruct acpi_device *adev;\n-\tstruct list_head resource_list;\n+\tLIST_HEAD(resource_list);\n \tstruct resource_entry *rentry;\n \tint ret;\n \n@@ -93,7 +93,6 @@ static void pkvm_find_ramoops(struct pkvm_ramoops_console_info *info)\n \tif (!adev)\n \t\treturn;\n \n-\tINIT_LIST_HEAD(\u0026resource_list);\n \tret \u003d acpi_dev_get_resources(adev, \u0026resource_list, NULL, NULL);\n \tif (ret \u003c 0)\n \t\tgoto out;\n```\n\n?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4e9bde_0c5eb0f0",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f4518393_ef2d165b",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -156,6 +300,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8f2ce148_cf0ffc71",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "right, I will remove ret",
+      "parentUuid": "9f3d6b8e_c986b9b9",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2c1e405e_4305eb1f",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
@@ -167,6 +329,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "Just a note: maybe for now let\u0027s do all this (i.e. duplicate the work done by the chromeos_pstore driver to get the ramoops info from ACPI), but in the future we might let the chromeos_pstore driver itself provide an API for that.",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9779a838_28eaac8a",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Yeah, as for now and gki kernel (similar as other parts of pKVM) it is less intrusive and easier to maintain.",
+      "parentUuid": "2c1e405e_4305eb1f",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -188,6 +368,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b50714_bfc3d6fc",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve added sanity-checks.",
+      "parentUuid": "0a506a37_dcebee35",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f87f3ad1_393dfad5",
@@ -201,6 +399,24 @@
       "writtenOn": "2026-04-16T20:16:02Z",
       "side": 1,
       "message": "Would be nice to move this logic into a separate function (e.g. `pkvm_ramoops_init()`?\n\nAlso, any reason why do this at the very beginning, even before `pkvm_firmware_rmem_init()`? There is a reason why `pkvm_firmware_rmem_init()` is done at the very beginning: we want to know the pvmfw address and size before even checking if pKVM is enabled, in order to clear pvmfw from memory if pKVM is disabled. While in the ramoops case, we don\u0027t need to parse ramoops info from ACPI if pKVM is disabled?",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe4485e5_ba8e576c",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:12:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f87f3ad1_393dfad5",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
