@@ -5912,6 +5912,7 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	bool proportional_reclaim;
 	struct blk_plug plug;
 	bool bypass = false;
+	bool shrink_bypass = false;
 
 	if (lru_gen_enabled() && !root_reclaim(sc)) {
 		lru_gen_shrink_lruvec(lruvec, sc);
@@ -5938,6 +5939,25 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 				sc->priority == DEF_PRIORITY);
 
 	blk_start_plug(&plug);
+<<<<<<< HEAD   (7dc4fc34c2211e874c17364e816cd49a06ae1539 ANDROID: dmabuf: Fix task_dma_buf_info refcount and memory l)
+||||||| BASE   (cdc81c91f6e561b3ad809d08dfc14d4f352dc2d2 ANDROID: ashmem: Fix length of writes for ASHMEM_GET_NAME fo)
+
+	trace_android_vh_reclaim_before_kswapd(&nr_reclaimed);
+	if (nr_reclaimed >= nr_to_reclaim)
+		goto out;
+
+=======
+	trace_android_rvh_shrink_spec_lru(lruvec, sc, &nr_reclaimed,
+					 nr_to_reclaim, proportional_reclaim,
+					 nr, &shrink_bypass);
+	if (shrink_bypass)
+		goto out;
+
+	trace_android_vh_reclaim_before_kswapd(&nr_reclaimed);
+	if (nr_reclaimed >= nr_to_reclaim)
+		goto out;
+
+>>>>>>> CHANGE (f92fc701d34d76bf5dcc702ff0bcff165551948e ANDROID: vendor hooks: Add hooks to manage special folio rec)
 	while (nr[LRU_INACTIVE_ANON] || nr[LRU_ACTIVE_FILE] ||
 					nr[LRU_INACTIVE_FILE]) {
 		unsigned long nr_anon, nr_file, percentage;
