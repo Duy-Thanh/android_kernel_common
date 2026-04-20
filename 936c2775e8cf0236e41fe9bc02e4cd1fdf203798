@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d10bf127_40b74263",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T15:17:37Z",
+      "side": 1,
+      "message": "Does this lead to deadlock if `iotlb_sync()` is called with the lock already held? (e.g. via `kvm_iommu_iotlb_gather_add_page()`)",
+      "range": {
+        "startLine": 986,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 39
+      },
+      "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
