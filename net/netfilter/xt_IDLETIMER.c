@@ -300,7 +300,7 @@ static int idletimer_tg_create(struct idletimer_tg_info *info)
 {
 	int ret;
 
-	info->timer = kzalloc(sizeof(*info->timer), GFP_KERNEL);
+	info->timer = kzalloc_obj(*info->timer, GFP_KERNEL);
 	if (!info->timer) {
 		ret = -ENOMEM;
 		goto out;
@@ -366,7 +366,13 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 {
 	int ret;
 
+<<<<<<< HEAD   (b1aefe9582213a4610f3ad6987f94552550fa924 Merge c7decec2f2d2 ("Merge tag 'perf-tools-for-v7.0-1-2026-0)
 	info->timer = kzalloc(sizeof(*info->timer), GFP_KERNEL);
+||||||| BASE   (c7decec2f2d2ab0366567f9e30c0e1418cece43f Merge tag 'perf-tools-for-v7.0-1-2026-02-21' of git://git.ke)
+	info->timer = kmalloc(sizeof(*info->timer), GFP_KERNEL);
+=======
+	info->timer = kmalloc_obj(*info->timer, GFP_KERNEL);
+>>>>>>> BRANCH (8934827db5403eae57d4537114a9ff88b0a8460f Merge tag 'kmalloc_obj-treewide-v7.0-rc1' of git://git.kerne)
 	if (!info->timer) {
 		ret = -ENOMEM;
 		goto out;

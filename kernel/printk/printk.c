@@ -939,7 +939,7 @@ static int devkmsg_open(struct inode *inode, struct file *file)
 			return err;
 	}
 
-	user = kvmalloc(sizeof(struct devkmsg_user), GFP_KERNEL);
+	user = kvmalloc_obj(struct devkmsg_user, GFP_KERNEL);
 	if (!user)
 		return -ENOMEM;
 
