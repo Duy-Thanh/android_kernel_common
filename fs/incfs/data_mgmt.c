@@ -6,6 +6,7 @@
 #include <linux/file.h>
 #include <linux/fsverity.h>
 #include <linux/gfp.h>
+#include <linux/hex.h>
 #include <linux/kobject.h>
 #include <linux/ktime.h>
 #include <linux/lz4.h>

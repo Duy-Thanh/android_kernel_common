@@ -5,6 +5,7 @@
 
 #include <linux/blk-crypto.h>
 #include <linux/device-mapper.h>
+#include <linux/hex.h>
 #include <linux/module.h>
 
 #define DM_MSG_PREFIX		"default-key"
