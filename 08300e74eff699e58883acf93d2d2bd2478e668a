@@ -1,6 +1,98 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a4274c_3d6386f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "You are not just monitoring, you implement some bypass logic. Please update description to correctly represent what this patch is doing.",
+      "range": {
+        "startLine": 7,
+        "startChar": 33,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572ca356_928c831a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "allocate",
+      "range": {
+        "startLine": 7,
+        "startChar": 57,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ceff00_90ae8328",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "therefore?",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c3fd84_87eec3d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "This description does not really explain how these hooks help you support multiple swap devices.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "58655003_1df84372",
@@ -14,6 +106,70 @@
       "writtenOn": "2026-04-18T11:41:02Z",
       "side": 1,
       "message": "please help",
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c84fff_1f81f73d",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "missing space. should be: `if (bypass)`",
+      "range": {
+        "startLine": 282,
+        "startChar": 1,
+        "endLine": 282,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "782f30c0_f1989b95",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap_slots.c",
+              "range": {
+                "startLine": 282,
+                "startChar": 0,
+                "endLine": 283,
+                "endChar": 0
+              },
+              "replacement": "\tif (bypass)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f88d1c7_c4d0b5b5",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:28:13Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 319,
+        "startChar": 1,
+        "endLine": 319,
+        "endChar": 12
+      },
       "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
