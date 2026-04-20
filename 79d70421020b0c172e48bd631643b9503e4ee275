@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e64ac59_8ec300b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-20T15:54:56Z",
+      "side": 1,
+      "message": "The cherry-pick is not clean. Please either make it clean or relabel as BACKPORT\n```\n      ## include/linux/ieee80211.h ##\n    -@@ include/linux/ieee80211.h: struct ieee80211_tdls_data {\n    +@@ include/linux/ieee80211.h: ieee80211_bandwidth_indication_size_ok(const u8 *data, u8 len)\n      #define WLAN_AUTH_FILS_SK 4\n      #define WLAN_AUTH_FILS_SK_PFS 5\n      #define WLAN_AUTH_FILS_PK 6\n```",
+      "revId": "79d70421020b0c172e48bd631643b9503e4ee275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
