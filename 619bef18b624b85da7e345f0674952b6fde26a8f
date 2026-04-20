@@ -40,6 +40,30 @@
       ],
       "revId": "619bef18b624b85da7e345f0674952b6fde26a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebee880b_ff1f0bb4",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-20T16:00:31Z",
+      "side": 1,
+      "message": "Given an array, `strscpy()` will stop writing into the buffer before the last byte, since that\u0027s where it places the NUL terminating byte [1]. So I don\u0027t think we need to check what\u0027s copied into file_name, since `strscpy()` ensures it\u0027s a valid string.\n\n[1] https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/include/linux/string.h;l\u003d91-113?q\u003dstrscpy\u0026ss\u003dandroid%2Fkernel%2Fsuperproject",
+      "parentUuid": "07e3ecba_59278f20",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 47
+      },
+      "revId": "619bef18b624b85da7e345f0674952b6fde26a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
