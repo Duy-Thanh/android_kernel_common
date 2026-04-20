@@ -64,6 +64,67 @@
       },
       "revId": "619bef18b624b85da7e345f0674952b6fde26a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "badbb670_d1b7864b",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T17:02:36Z",
+      "side": 1,
+      "message": "You can probably optimize this by using the return value of strscpy().",
+      "range": {
+        "startLine": 35,
+        "startChar": 38,
+        "endLine": 35,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6476622c_42081da9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/memfd-ashmem-shim.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tsize_t len;\n"
+            },
+            {
+              "path": "mm/memfd-ashmem-shim.c",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "\tlen \u003d strscpy(file_name, snapshot.name.name + offset, sizeof(file_name));\n"
+            },
+            {
+              "path": "mm/memfd-ashmem-shim.c",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "\tif (len \u003e\u003d sizeof(file_name))\n\t\treturn -ENAMETOOLONG;\n\treturn copy_to_user(name, file_name, len + 1) ? -EFAULT : 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "619bef18b624b85da7e345f0674952b6fde26a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
