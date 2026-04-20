@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80cbe077_4436f92c",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:13:52Z",
+      "side": 1,
+      "message": "I think introducing yet another global variable is not best practice. However checking only pkvm_ramoops_console_size should be enough here (and next patches).\n\n\u003e Are there any reasons why we need to forbid using ramoops at address 0?\n\nI think we should forbid ramoops at address 0 because there is BIOS-related stuff reserved at the bottom of memory on x86 (see https://github.com/torvalds/linux/blob/master/arch/x86/kernel/setup.c#L808)\nBut since we already setting pkvm_ramoops_console_size only if the pkvm_ramoops_console_pa is not 0 (see previous commit) doing validation based on size not equal to 0 should be sufficient.",
+      "parentUuid": "7290a9ca_2a23d3a8",
+      "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8becff74_8a0924b7",
         "filename": "arch/x86/kvm/pkvm/init.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-16T21:15:22Z",
       "side": 1,
       "message": "nit: again, ramoops is not exactly more important than pvmfw, so let\u0027s be humble and add this code after mapping pvmfw, not before?",
+      "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97911042_53dec4f6",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:13:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8becff74_8a0924b7",
       "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
