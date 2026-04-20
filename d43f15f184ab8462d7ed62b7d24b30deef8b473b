@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d7d80ad_8d9d1210",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "\u003e I thought about it - it should be fine as is: here we only parse this info, while we log the error to the ramoops console only when proper SIG is detected (see aosp/4032092 which among other things performs a runtime signature verification to ensure it is writing to a correctly initialized pstore buffer.). And this is true only if this driver is enabled (even as a module). Otherwise this info is just parsed and any logging to ramoops is skipped.\n\nWhat I meant is: if pKVM crashes _earlier_ than chromeos_pstore is loaded, will it successfully log its crash to ramoops or not?\n\nWho writes this signature, and when? chromeos_pstore driver, coreboot, both?",
+      "parentUuid": "e38beb7f_5a2bbe3d",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e1df961_5e4697a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
@@ -246,6 +264,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61158c01_0022bca5",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "819e7cb0_a75f6a33",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4518393_ef2d165b",
@@ -312,6 +348,24 @@
       "side": 1,
       "message": "right, I will remove ret",
       "parentUuid": "9f3d6b8e_c986b9b9",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6e65ca_d99a87c4",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "So you think it is _not_ worth printing a warning? :) \n\nBTW I was actually thinking: it may be useful to print some pr_info after ramoops is _successfully_ initialized (and info about its address and size)? So that we can always double-check in dmesg whether ramoops was actually successfully found in ACPI by this code and thus whether we\u0027re actually gonna log into it if we crash.",
+      "parentUuid": "8f2ce148_cf0ffc71",
       "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

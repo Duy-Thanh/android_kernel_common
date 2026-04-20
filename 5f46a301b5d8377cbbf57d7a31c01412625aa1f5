@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219e0f08_716e4181",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "very nit: there are no empty lines between any of the above extern declarations, so no need for an empty line here either?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a4f2c0_3f11882a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "very nit: add an empty line below as well? :)",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44124097_09a6351d",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:25:34Z",
+      "side": 1,
+      "message": "nit: this is, again, just a helper, so maybe just `find_ramoops()`?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
