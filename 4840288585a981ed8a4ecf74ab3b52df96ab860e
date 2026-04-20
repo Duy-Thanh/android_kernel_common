@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa94c6d_f3915999",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-20T17:43:03Z",
+      "side": 1,
+      "message": "A bit of a clerical error here. But functionally should be ok.\n\nWill leave this comment open to fix in future porting.",
+      "range": {
+        "startLine": 190,
+        "startChar": 28,
+        "endLine": 190,
+        "endChar": 31
+      },
+      "revId": "4840288585a981ed8a4ecf74ab3b52df96ab860e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
