@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9807d95f_9b93975f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T15:35:32Z",
+      "side": 1,
+      "message": "(unrelated nit: what prevents one VM passing the domain id for another VM\u0027s domain?)",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b3918f50_a7479d85",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The domain ID is provided by the guest. The validity of this ID\n\t * is checked within the kvm_iommu_map_pages call.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d9df38_f62c0892",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T15:35:32Z",
+      "side": 1,
+      "message": "(unrelated nit: this should really reject unknown flags...)",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 26
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b9744e_08fbeb3d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2993,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T15:35:32Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:REPEATED_WORD: Possible repeated word: \u0027the\u0027\n\nWARNING:REPEATED_WORD: Possible repeated word: \u0027the\u0027",
+      "range": {
+        "startLine": 2992,
+        "startChar": 0,
+        "endLine": 2993,
+        "endChar": 0
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
