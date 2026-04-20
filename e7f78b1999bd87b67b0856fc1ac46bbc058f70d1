@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35c7405a_68b9696b",
+        "filename": "arch/x86/entry/vdso/vdso-layout.lds.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-20T07:49:52Z",
+      "side": 1,
+      "message": "It fixes \n```\nld.lld: error: arch/x86/entry/vdso/vdso.lds:628: symbol not found: __MAX_PAGE_SIZE\n```\nfrom x86 cuttlefish build.",
+      "parentUuid": "14eee108_4dcaf832",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "e7f78b1999bd87b67b0856fc1ac46bbc058f70d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4767564e_6cf5335e",
         "filename": "include/vdso/datapage.h",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-17T16:18:40Z",
       "side": 1,
       "message": "Should this be `- __PAGE_CNT_PER_MAX_PAGE` ?",
+      "range": {
+        "startLine": 192,
+        "startChar": 70,
+        "endLine": 192,
+        "endChar": 71
+      },
+      "revId": "e7f78b1999bd87b67b0856fc1ac46bbc058f70d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e98646c_a8128fe0",
+        "filename": "include/vdso/datapage.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-20T07:49:52Z",
+      "side": 1,
+      "message": "Than VDSO_NR_PAGES value would not be valid. \n\nThe only place VDSO_ARCH_PAGES_END is used is vvar_fault and this way switch would handle this correct.\n\nAssume VDSO_ARCH_DATA_PAGES is 4 (one 16kB alligned page). This is what we got from calculation. \n```\n|  0  1  2  3 |  4  5  6  7 | |  8  9 10 11 | 12 13 14 15 | (16)\n                                              ^        ^     ^\n                                              |        |    VDSO_NR_PAGES\n                                              |       VDSO_ARCH_PAGES_END \n                                              VDSO_ARCH_PAGES_START\n```",
+      "parentUuid": "4767564e_6cf5335e",
       "range": {
         "startLine": 192,
         "startChar": 70,
