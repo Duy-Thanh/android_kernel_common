@@ -19,42 +19,23 @@
 #define MEMFD_PREFIX "memfd:"
 #define MEMFD_PREFIX_LEN (sizeof(MEMFD_PREFIX) - 1)
 
-static const char *get_memfd_name(struct file *file)
-{
-	/* This pointer is always valid, so no need to check if it's NULL. */
-	const char *file_name = file->f_path.dentry->d_name.name;
-
-	if (file_name != strstr(file_name, MEMFD_PREFIX))
-		return NULL;
-
-	return file_name;
-}
-
 static long get_name(struct file *file, void __user *name)
 {
-	const char *file_name = get_memfd_name(file);
-	size_t len;
+	struct name_snapshot snapshot;
+	/* ASHMEM_NAME_LEN is larger than the max length for memfd names so this is enough space. */
+	char file_name[ASHMEM_NAME_LEN];
+	ssize_t count;
+	unsigned int offset = 0;
 
-	if (!file_name)
-		return -EINVAL;
-
-	/* Strip MEMFD_PREFIX to retain compatibility with ashmem driver. */
-	file_name = &file_name[MEMFD_PREFIX_LEN];
-
-	/*
-	 * The expectation is that the user provided buffer is ASHMEM_NAME_LEN in size, which is
-	 * larger than the maximum size of a name for a memfd buffer, so the name should always fit
-	 * within the given buffer.
-	 *
-	 * However, we should ensure that the string will indeed fit in the user provided buffer.
-	 *
-	 * Add 1 to the copy size to account for the NUL terminator
-	 */
-	len = strlen(file_name) + 1;
-	if (len > ASHMEM_NAME_LEN)
-		return -EINVAL;
-
-	return copy_to_user(name, file_name, len) ? -EFAULT : 0;
+	take_dentry_name_snapshot(&snapshot, file->f_path.dentry);
+	/* Strip MEMFD_PREFIX to retain compatibility with ashmem driver if this is a memfd. */
+	if (!strncmp(snapshot.name.name, MEMFD_PREFIX, MEMFD_PREFIX_LEN))
+		offset = MEMFD_PREFIX_LEN;
+	count = strscpy(file_name, snapshot.name.name + offset);
+	release_dentry_name_snapshot(&snapshot);
+	/* Return the truncated name and NUL terminating byte if the original name was too big. */
+	count = count == -E2BIG ? ASHMEM_NAME_LEN : count + 1;
+	return copy_to_user(name, file_name, count) ? -EFAULT : 0;
 }
 
 static long get_prot_mask(struct file *file)
