@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "375ed9bd_0d0bfe03",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T17:57:51Z",
+      "side": 1,
+      "message": "BTW regarding \"To not include ACPI based reboot and its complexity\", I imagine that wouldn\u0027t really be a lot of complexity. AFAICS, `acpi_gbl_FADT` is a global variable used in lots of places throughout kernel, so we could also easily use it, before deprivileging, to remember the values of `acpi_gbl_FADT.reset_register`, `acpi_gbl_FADT.reset_value` in pKVM\u0027s variables, and then we could essentially reimplement `acpi_reboot()` in the hypervisor? Perhaps a simplified version of it, for example if we only care about the ACPI_ADR_SPACE_SYSTEM_IO case, it would be basically just `outb(reset_value, reset_register)`?",
+      "parentUuid": "95fdd935_62d28d2d",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "998b2086_e72a849d",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
