@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6e126e3_8f37c9b6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-20T16:19:42Z",
+      "side": 1,
+      "message": "`domain_get()` from the core nvhe/iommu code.",
+      "parentUuid": "9807d95f_9b93975f",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 35
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73d9df38_f62c0892",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
         "patchSetId": 3
@@ -67,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "377da934_19e39c97",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-20T16:19:42Z",
+      "side": 1,
+      "message": "Now they are just ignored, do you mean we should fail the call?",
+      "parentUuid": "73d9df38_f62c0892",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 26
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46b9744e_08fbeb3d",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -78,6 +126,30 @@
       "writtenOn": "2026-04-20T15:35:32Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:REPEATED_WORD: Possible repeated word: \u0027the\u0027\n\nWARNING:REPEATED_WORD: Possible repeated word: \u0027the\u0027",
+      "range": {
+        "startLine": 2992,
+        "startChar": 0,
+        "endLine": 2993,
+        "endChar": 0
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033c3ba5_1ecb981e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2993,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-20T16:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b9744e_08fbeb3d",
       "range": {
         "startLine": 2992,
         "startChar": 0,
