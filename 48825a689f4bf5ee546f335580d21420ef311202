@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7b0ef0f_07d4f04d",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T19:19:48Z",
+      "side": 1,
+      "message": "No, this is wrong. You jump here even when the folio could not be locked. Please redo this patch to track folio unlocks correctly, where they actually are being unlocked.",
+      "range": {
+        "startLine": 1623,
+        "startChar": 0,
+        "endLine": 1629,
+        "endChar": 56
+      },
+      "revId": "48825a689f4bf5ee546f335580d21420ef311202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
