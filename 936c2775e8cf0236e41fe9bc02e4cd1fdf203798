@@ -46,6 +46,30 @@
       },
       "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b934c241_6a84a20f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T16:18:45Z",
+      "side": 1,
+      "message": "Yeah, taking the lock in `kvm_iommu_unmap_pages()` sounds better to me, but I defer to your judgement.",
+      "parentUuid": "8b0b0fbe_d7976990",
+      "range": {
+        "startLine": 986,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 39
+      },
+      "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
