@@ -22,6 +22,30 @@
       },
       "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0b0fbe_d7976990",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-20T16:01:19Z",
+      "side": 1,
+      "message": "Yes. However, `iotlb_sync` is only called if the page size is different which only  happens for the identity domain (from split_blk_unmap) which we don\u0027t use the `iotlb_sync` for.\nSo, I believe it currently works, but very fragile.\n\nOtherwise, I can make `kvm_iommu_unmap_pages()` call `kvm_iommu_iotlb_sync()` at the end of the unmap with lock taken, so when it\u0027s called from the core code after it will be empty and we can drop the lock in `kvm_iommu_iotlb_sync()`",
+      "parentUuid": "d10bf127_40b74263",
+      "range": {
+        "startLine": 986,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 39
+      },
+      "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
