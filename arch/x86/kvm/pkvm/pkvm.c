@@ -1107,6 +1107,8 @@ static int pkvm_nmi_allowed(struct kvm_vcpu *vcpu, bool for_injection)
 static int pkvm_inject_irq(struct kvm_vcpu *vcpu)
 {
 	struct kvm_vcpu *shared_vcpu = to_pkvm_vcpu(vcpu)->shared_vcpu;
+	bool soft = READ_ONCE(shared_vcpu->arch.interrupt.soft);
+	u8 irq = READ_ONCE(shared_vcpu->arch.interrupt.nr);
 
 	if (WARN_ON_ONCE(pkvm_interrupt_allowed(vcpu, true) <= 0))
 		return -EBUSY;
@@ -1122,12 +1124,11 @@ static int pkvm_inject_irq(struct kvm_vcpu *vcpu)
 	 * vector number by the Intel 64 and IA-32 architectures for
 	 * architecture-defined exceptions.
 	 */
-	if (pkvm_is_protected_vcpu(vcpu) && (shared_vcpu->arch.interrupt.soft ||
-					     shared_vcpu->arch.interrupt.nr < 32))
+	if (pkvm_is_protected_vcpu(vcpu) && (soft || irq < 32))
 		return -EPERM;
 
-	vcpu->arch.interrupt.soft = shared_vcpu->arch.interrupt.soft;
-	vcpu->arch.interrupt.nr = shared_vcpu->arch.interrupt.nr;
+	vcpu->arch.interrupt.soft = soft;
+	vcpu->arch.interrupt.nr = irq;
 	kvm_x86_call(inject_irq)(vcpu, false);
 
 	return 0;
