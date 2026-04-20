@@ -33,6 +33,23 @@
       "message": "espero y se logre hacer",
       "revId": "037660b116cb733997f7aac8aa34d76a7da7905e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2990ee03_6c3ef46b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-04-20T10:42:41Z",
+      "side": 1,
+      "message": "Note, in the future this is NOT how to properly version ioctl commands, please use the correct, and documented, ways instead.",
+      "revId": "037660b116cb733997f7aac8aa34d76a7da7905e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
