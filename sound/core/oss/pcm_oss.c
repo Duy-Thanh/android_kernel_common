@@ -1226,6 +1226,7 @@ snd_pcm_sframes_t snd_pcm_oss_write3(struct snd_pcm_substream *substream, const 
 {
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	int ret;
+	pr_err("[MM_pcmoss] %s: ++\c", __func__);
 	while (1) {
 		if (runtime->state == SNDRV_PCM_STATE_XRUN ||
 		    runtime->state == SNDRV_PCM_STATE_SUSPENDED) {

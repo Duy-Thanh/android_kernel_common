@@ -210,8 +210,11 @@ int snd_pcm_update_state(struct snd_pcm_substream *substream,
 			 struct snd_pcm_runtime *runtime)
 {
 	snd_pcm_uframes_t avail;
+	int is_playback = substream->stream == SNDRV_PCM_STREAM_PLAYBACK;
 
 	avail = snd_pcm_avail(substream);
+		if (is_playback)
+			pr_err("[MM_pcmlib]189 snd_pcm_update_state: avail %ld, avail_min %ld, twake %ld\n", avail, runtime->control->avail_min, runtime->twake);
 	if (avail > runtime->avail_max)
 		runtime->avail_max = avail;
 	if (runtime->state == SNDRV_PCM_STATE_DRAINING) {
@@ -221,15 +224,21 @@ int snd_pcm_update_state(struct snd_pcm_substream *substream,
 		}
 	} else {
 		if (avail >= runtime->stop_threshold) {
+			pr_err("[MM_pcmlib]199 snd_pcm_update_state: avail %ld, avail_min %ld, twake %ld\n", avail, runtime->control->avail_min, runtime->twake);
 			__snd_pcm_xrun(substream);
 			return -EPIPE;
 		}
 	}
 	if (runtime->twake) {
+		if (is_playback)
+			pr_err("[MM_pcmlib]snd_pcm_update_state avail %ld, avail_min %ld, twake %ld\n", avail, runtime->control->avail_min, runtime->twake);
 		if (avail >= runtime->twake)
 			wake_up(&runtime->tsleep);
-	} else if (avail >= runtime->control->avail_min)
+	} else if (avail >= runtime->control->avail_min) {
+		if (is_playback)
+			pr_err("[MM_pcmlib]snd_pcm_update_state avail %ld, avail_min %ld\n", avail, runtime->control->avail_min);
 		wake_up(&runtime->sleep);
+	}
 	return 0;
 }
 
@@ -1956,6 +1965,8 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	snd_pcm_uframes_t avail = 0;
 	long wait_time, tout;
 
+	if (is_playback)
+		pr_err("[MM_pcmlib]%s: ++\n", __func__);
 	init_waitqueue_entry(&wait, current);
 	set_current_state(TASK_INTERRUPTIBLE);
 	add_wait_queue(&runtime->tsleep, &wait);
@@ -1965,6 +1976,8 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	else {
 		/* use wait time from substream if available */
 		if (substream->wait_time) {
+			if (is_playback)
+				pr_err("[MM_pcmlib]%s: substream->wait_time = %ld\n", __func__, substream->wait_time);
 			wait_time = substream->wait_time;
 		} else {
 			wait_time = 100;
@@ -1975,6 +1988,8 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 			}
 		}
 		wait_time = msecs_to_jiffies(wait_time);
+		if (is_playback)
+			pr_err("[MM_pcmlib]%s: wait_time = %ld\n", __func__, wait_time);
 	}
 
 	for (;;) {
@@ -1991,8 +2006,13 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 		 * and having current state be INTERRUPTIBLE.
 		 */
 		avail = snd_pcm_avail(substream);
-		if (avail >= runtime->twake)
+		if (is_playback)
+			pr_err("[MM_pcmlib]1921 avail %ld, twake %ld\n", avail, runtime->twake);
+		if (avail >= runtime->twake) {
+			if (is_playback)
+				pr_err("[MM_pcmlib] avail %ld, twake %ld\n", avail, runtime->twake);
 			break;
+		}
 		snd_pcm_stream_unlock_irq(substream);
 
 		tout = schedule_timeout(wait_time);
@@ -2322,8 +2342,13 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 		goto _end_unlock;
 
 	runtime->twake = runtime->control->avail_min ? : 1;
-	if (runtime->state == SNDRV_PCM_STATE_RUNNING)
+	if (runtime->state == SNDRV_PCM_STATE_RUNNING) {
+		if (is_playback)
+			pr_err("[MM_pcmlib]%s: hw_ptr %ld\n", __func__, runtime->status->hw_ptr);
 		snd_pcm_update_hw_ptr(substream);
+		if (is_playback)
+			pr_err("[MM_pcmlib]%s:after updated hw_ptr %ld\n", __func__, runtime->status->hw_ptr);
+	}
 
 	/*
 	 * If size < start_threshold, wait indefinitely. Another
@@ -2338,6 +2363,12 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 	}
 
 	avail = snd_pcm_avail(substream);
+	if (is_playback) {
+		pr_err("[MM_pcmlib]%s: avail %ld, size %ld\n", __func__, avail, size);
+		pr_err("[MM_pcmlib]%s: hw_ptr %ld, buffer_size %ld, appl_ptr %ld\n",
+			__func__, runtime->status->hw_ptr, runtime->buffer_size, runtime->control->appl_ptr);
+
+	}
 
 	while (size > 0) {
 		snd_pcm_uframes_t frames, appl_ptr, appl_ofs;
@@ -2354,12 +2385,16 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 			}
 			runtime->twake = min_t(snd_pcm_uframes_t, size,
 					runtime->control->avail_min ? : 1);
+			if (is_playback)
+				pr_err("[MM_pcmlib] %s: twake %ld, call wait_for_avail\n", __func__, runtime->twake);
 			err = wait_for_avail(substream, &avail);
 			if (err < 0)
 				goto _end_unlock;
 			if (!avail)
 				continue; /* draining */
 		}
+		if (is_playback)
+			pr_err("[MM_pcmlib]%s: after wait, avail %ld, size %ld\n", __func__, avail, size);
 		frames = size > avail ? avail : size;
 		appl_ptr = READ_ONCE(runtime->control->appl_ptr);
 		appl_ofs = appl_ptr % runtime->buffer_size;
@@ -2399,12 +2434,15 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 		size -= frames;
 		xfer += frames;
 		avail -= frames;
-		if (is_playback &&
-		    runtime->state == SNDRV_PCM_STATE_PREPARED &&
+		if (is_playback) {
+			pr_info("[MM_AOSP] hw_avail %ld, start_threshold %ld\n", snd_pcm_playback_hw_avail(runtime), runtime->start_threshold);
+			if (runtime->state == SNDRV_PCM_STATE_PREPARED &&
 		    snd_pcm_playback_hw_avail(runtime) >= (snd_pcm_sframes_t)runtime->start_threshold) {
-			err = snd_pcm_start(substream);
-			if (err < 0)
-				goto _end_unlock;
+				pr_info("[MM_AOSP] trigger pcm start\n");
+				err = snd_pcm_start(substream);
+				if (err < 0)
+					goto _end_unlock;
+			}
 		}
 	}
  _end_unlock:
