@@ -66,6 +66,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c5378d_d8be3759",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2461,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-20T01:49:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb80b6c8_59b51de8",
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56f0535b_da301818",
@@ -101,6 +119,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4810e9_ead4baaa",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-20T01:49:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "56f0535b_da301818",
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1452384a_57532042",
@@ -114,6 +150,24 @@
       "writtenOn": "2026-04-17T15:15:59Z",
       "side": 1,
       "message": "Maybe still worth sanity-checking e.g. `\u0026\u0026 !WARN_ON(func0_index \u003e\u003d *nent)` ?",
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ee40e8_19f92742",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-20T01:49:46Z",
+      "side": 1,
+      "message": "Makes sense. Will add this check.",
+      "parentUuid": "1452384a_57532042",
       "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
