@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3735d209_da7050b3",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:18:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4e404163_ba4f9dc7",
+      "revId": "2b9e2480816685ac59ff9bb638e02fae9ad552f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1acab15c_1b22e028",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8ba883_712a0b92",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:18:58Z",
+      "side": 1,
+      "message": "Yeah, I think it is not so important for this patch series but since we introduce the pkvm_udelay function, which can be used by anyone for different purpose it is better to use what you suggested.",
+      "parentUuid": "1acab15c_1b22e028",
+      "revId": "2b9e2480816685ac59ff9bb638e02fae9ad552f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baad89bd_01f5e0a4",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-04-17T20:38:22Z",
       "side": 1,
       "message": "1. `pkvm_sym` is for the host, not for the hypervisor (in the hypervisor it does nothing)?\n2. `tsc_khz` may be zero (if kernel detects that the TSC is \"unreliable\"), which is why pkvm_wait_vcpu_kicked_out() checks it before trying to use it?",
+      "revId": "2b9e2480816685ac59ff9bb638e02fae9ad552f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3104ec07_e6baa39c",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:18:58Z",
+      "side": 1,
+      "message": "Yeah, good point - I\u0027ve added WARN_ON and some fallback just to not return immediately",
+      "parentUuid": "baad89bd_01f5e0a4",
       "revId": "2b9e2480816685ac59ff9bb638e02fae9ad552f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
