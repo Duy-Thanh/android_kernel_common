@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe28ea50_afa6b3ff",
+        "filename": "arch/x86/entry/vdso/vdso-layout.lds.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-20T10:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd3ed67_7ab3e129",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "e7f78b1999bd87b67b0856fc1ac46bbc058f70d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4767564e_6cf5335e",
