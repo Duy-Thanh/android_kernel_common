@@ -70,6 +70,30 @@
       },
       "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10741ce_ef0e3baf",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-20T17:06:59Z",
+      "side": 1,
+      "message": "Sorry, I made a typo, I meant `smmu_unmap_pages()`.\n\n`kvm_iommu_unmap_pages` can\u0027t take the lock as it is local for the driver.\n\nI updated the code now",
+      "parentUuid": "b934c241_6a84a20f",
+      "range": {
+        "startLine": 986,
+        "startChar": 0,
+        "endLine": 986,
+        "endChar": 39
+      },
+      "revId": "936c2775e8cf0236e41fe9bc02e4cd1fdf203798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
