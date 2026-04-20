@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34431f44_3e703f3e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T16:30:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e6e126e3_8f37c9b6",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 35
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d9df38_f62c0892",
@@ -103,6 +127,30 @@
       "side": 1,
       "message": "Now they are just ignored, do you mean we should fail the call?",
       "parentUuid": "73d9df38_f62c0892",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 26
+      },
+      "revId": "a64489fe871aed7767f7d90f0582ddda8a0b0d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a27fcf_4b29c23d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-20T16:30:41Z",
+      "side": 1,
+      "message": "Fail the call, otherwise you can\u0027t allocate the bits in future because you can\u0027t rely on existing callers passing 0.",
+      "parentUuid": "377da934_19e39c97",
       "range": {
         "startLine": 300,
         "startChar": 8,
