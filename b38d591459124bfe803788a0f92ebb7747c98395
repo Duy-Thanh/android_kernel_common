@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83994f64_4e1a8f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-20T15:58:58Z",
+      "side": 1,
+      "message": "Cherry-pick is not clean. Either make it clean or relabel as BACKPORT",
+      "revId": "b38d591459124bfe803788a0f92ebb7747c98395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
