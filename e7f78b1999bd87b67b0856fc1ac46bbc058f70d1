@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cd3ed67_7ab3e129",
+        "filename": "arch/x86/entry/vdso/vdso-layout.lds.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4269789
+      },
+      "writtenOn": "2026-04-20T10:07:16Z",
+      "side": 1,
+      "message": "I have actually removed it by moving #include in datapage.h out of `!__ASSEMBLY__` block.",
+      "parentUuid": "35c7405a_68b9696b",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "e7f78b1999bd87b67b0856fc1ac46bbc058f70d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4767564e_6cf5335e",
         "filename": "include/vdso/datapage.h",
         "patchSetId": 6
