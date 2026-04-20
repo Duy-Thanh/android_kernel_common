@@ -170,6 +170,24 @@
       "parentUuid": "1452384a_57532042",
       "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aba456c_8567be84",
+        "filename": "arch/x86/kvm/cpuid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2481,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T15:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ee40e8_19f92742",
+      "revId": "27cd049ae37a668ed52a2db52f6ed8d63eae16aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
