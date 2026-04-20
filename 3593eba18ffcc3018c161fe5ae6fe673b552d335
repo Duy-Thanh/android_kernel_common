@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7cb019_61b3a654",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c6505279_26dff5fd",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b307da86_eaaf4cd6",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-17T20:26:37Z",
       "side": 1,
       "message": "As I understand, it is not a multi-stage reset, it is just a sequence of fallbacks? I mean, each of this steps on its own is expected to successfully reset the system, and if it does, the next steps are not needed and are not performed, they are only performed if it fails to reset the system for some reason?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1a0551_b5286df0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "\u003e As I understand, it is not a multi-stage reset, it is just a sequence of fallbacks?\n\nYes\n\n\u003e ..the next steps are not needed and are not performed, they are only performed if it fails to reset the system for some reason?\n\ncorrect",
+      "parentUuid": "b307da86_eaaf4cd6",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf10592_18cf0be4",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dcfc3df1_99cadf82",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aab614b5_c173a13e",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-19T15:13:45Z",
       "side": 1,
       "message": "This probably makes the above _BUG_FLAGS redefinition not needed anymore?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec454e09_f2032793",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Yes, I forgot to remove them.",
+      "parentUuid": "aab614b5_c173a13e",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -124,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5851815_1e747243",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Ok, thanks for checking it especially on non-chromebook device. Yeah, for me, when I was testing this patch originally, I\u0027ve checked on ADL and PTL: the keyboard reset work just fine, so I\u0027ve implemented it as below. But I agree that we could change the order and start with PCI warm reset - will change it as suggested. As for the fallback as it is already implemented and it is namely several lines of code (counting pkvm_delay), I think it is worth keeping it.\n\nI am not sure if we need ACPI based reboot - will go back to it as I just notice your last comment - keeping it open and will respond soon.",
+      "parentUuid": "95fdd935_62d28d2d",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "998b2086_e72a849d",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
@@ -152,6 +242,24 @@
       "writtenOn": "2026-04-17T20:26:37Z",
       "side": 1,
       "message": "Do we need `cli`? I thought we never enabled interrupts?",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8396cc_0df0be90",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Yeah, we never enabled interrupts, but since it is panic handler and emergency reset, maybe it is worth keeping it. Most likely it is just no-op anyway, which we will not reach almost certainly due to above resets. But if we somehow end up here maybe it is worth keeping cli just in case hyp bug accidentally enabled interrupts before crash?",
+      "parentUuid": "075eccab_6f9c62de",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -191,6 +299,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "108d1a0f_acae9e4a",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Yeah, good point. I will switch to INIT. BTW instead of using pkvm_kick_vcpu I will use similar approach for broadcasting INIT to all other CPUs as it seems possible via `wrmsrl(0x830, 0xC4500)` but actually as you suggested do it rather via native_x2apic_icr_write than hard coding it.",
+      "parentUuid": "06041c63_dd1f6fa7",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d61e61d_6b9bcdd1",
@@ -226,6 +352,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f09bb6_5033efc1",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5d61e61d_6b9bcdd1",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f591e6b5_202328f9",
@@ -239,6 +383,24 @@
       "writtenOn": "2026-04-19T15:13:45Z",
       "side": 1,
       "message": "Why not include `\u003casm/ptrace.h\u003e`? BTW we are already doing that in some pKVM files.",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcaba87e_193f04e1",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f591e6b5_202328f9",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -274,6 +436,24 @@
       "side": 1,
       "message": "+1, and also independently of that: 1. we shouldn\u0027t add code before local variables declarations (even if C99 allows that, that is not the style used in the kernel code)? 2. do we really want to do this even before `pkvm_trace_vmexit_start()`?",
       "parentUuid": "bb98c1e2_105b57a8",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb0c123_d29137ed",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-20T19:23:30Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "a86719c0_c305e29d",
       "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
