@@ -5229,7 +5229,7 @@ static const struct address_space_operations shmem_aops = {
 #ifdef CONFIG_ASHMEM
 static long shmem_ashmem_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
-	if (!(SHMEM_I(file_inode(file))->flags & SHMEM_FL_MEMFD))
+	if (!(SHMEM_I(file_inode(file))->flags & SHMEM_F_MEMFD))
 		return -ENOTTY;
 	return ashmem_memfd_ioctl(file, cmd, arg);
 }
