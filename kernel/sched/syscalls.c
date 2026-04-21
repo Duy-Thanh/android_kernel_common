@@ -287,6 +287,35 @@ static bool check_same_owner(struct task_struct *p)
 		uid_eq(cred->euid, pcred->uid));
 }
 
+#ifdef CONFIG_RT_MUTEXES
+static inline void __setscheduler_dl_pi(int newprio, int policy,
+			      struct task_struct *p,
+			      struct sched_change_ctx *scope)
+{
+	/*
+	 * In case a DEADLINE task (either proper or boosted) gets
+	 * setscheduled to a lower priority class, check if it neeeds to
+	 * inherit parameters from a potential pi_task. In that case make
+	 * sure replenishment happens with the next enqueue.
+	 */
+
+	if (dl_prio(newprio) && !dl_policy(policy)) {
+		struct task_struct *pi_task = rt_mutex_get_top_task(p);
+
+		if (pi_task) {
+			p->dl.pi_se = pi_task->dl.pi_se;
+			scope->flags |= ENQUEUE_REPLENISH;
+		}
+	}
+}
+#else /* !CONFIG_RT_MUTEXES */
+static inline void __setscheduler_dl_pi(int newprio, int policy,
+			      struct task_struct *p,
+			      struct sched_change_ctx *scope)
+{
+}
+#endif /* !CONFIG_RT_MUTEXES */
+
 #ifdef CONFIG_UCLAMP_TASK
 
 static int uclamp_validate(struct task_struct *p,
@@ -666,7 +695,12 @@ change:
 			__setscheduler_params(p, attr);
 			p->sched_class = next_class;
 			p->prio = newprio;
+<<<<<<< HEAD   (eef80309dfeb25f0db121ce7f98e9c711e48a353 Merge 3b5d535c635c ("Merge tag 'scsi-fixes' of git://git.ker)
 			trace_android_rvh_setscheduler(p);
+||||||| BASE   (3b5d535c635cbf88dbb63231cbae265b22e6a5f5 Merge tag 'scsi-fixes' of git://git.kernel.org/pub/scm/linux)
+=======
+			__setscheduler_dl_pi(newprio, policy, p, scope);
+>>>>>>> BRANCH (b1b9a9d0b5c875decbc129c16c6e827fb50489a5 Merge tag 'sched-urgent-2026-03-08' of git://git.kernel.org/)
 		}
 		__setscheduler_uclamp(p, attr);
 
