@@ -16,6 +16,24 @@
       "message": "Cherry-pick is not clean. Either make it clean or relabel as BACKPORT",
       "revId": "b38d591459124bfe803788a0f92ebb7747c98395",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab5eb2c_777fdda3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4598251
+      },
+      "writtenOn": "2026-04-21T04:33:09Z",
+      "side": 1,
+      "message": "Same issue again. The upstream commit was properly applied to this branch, and there is no cherry-pick issue. That\u0027s the reason I did not add the backport label. However, it is still showing a cherry-pick problem, even though this change is not part of the commit. The upstream commit ID I mentioned in the commit is also correct.",
+      "parentUuid": "83994f64_4e1a8f82",
+      "revId": "b38d591459124bfe803788a0f92ebb7747c98395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
