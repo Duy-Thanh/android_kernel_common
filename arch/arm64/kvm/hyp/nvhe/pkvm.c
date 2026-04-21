@@ -1269,19 +1269,17 @@ struct pkvm_hyp_vcpu *pkvm_mpidr_to_hyp_vcpu(struct pkvm_hyp_vm *hyp_vm,
 
 	mpidr &= MPIDR_HWID_BITMASK;
 
-	hyp_spin_lock(&hyp_vm->vcpus_lock);
 	for (i = 0; i < hyp_vm->kvm.created_vcpus; i++) {
-		hyp_vcpu = hyp_vm->vcpus[i];
+		hyp_vcpu = smp_load_acquire(&hyp_vm->vcpus[i]);
+
 		if (!hyp_vcpu)
 			continue;
 
 		if (mpidr == kvm_vcpu_get_mpidr_aff(&hyp_vcpu->vcpu))
-			goto unlock;
+			return hyp_vcpu;
 	}
-	hyp_vcpu = NULL;
-unlock:
-	hyp_spin_unlock(&hyp_vm->vcpus_lock);
-	return hyp_vcpu;
+
+	return NULL;
 }
 
 /*
@@ -1380,9 +1378,11 @@ static bool pvm_psci_vcpu_affinity_info(struct pkvm_hyp_vcpu *hyp_vcpu)
 	 * then if at least one is PENDING_ON then return PENDING_ON.
 	 * Otherwise, return OFF.
 	 */
-	hyp_spin_lock(&hyp_vm->vcpus_lock);
 	for (i = 0; i < hyp_vm->kvm.created_vcpus; i++) {
-		struct pkvm_hyp_vcpu *target = hyp_vm->vcpus[i];
+		struct pkvm_hyp_vcpu *target = smp_load_acquire(&hyp_vm->vcpus[i]);
+
+		if (!target)
+			continue;
 
 		if (!target)
 			continue;
@@ -1400,20 +1400,18 @@ static bool pvm_psci_vcpu_affinity_info(struct pkvm_hyp_vcpu *hyp_vcpu)
 				break;
 			case PSCI_0_2_AFFINITY_LEVEL_ON:
 				ret = PSCI_0_2_AFFINITY_LEVEL_ON;
-				goto unlock;
+				goto done;
 			case PSCI_0_2_AFFINITY_LEVEL_OFF:
 				break;
 			default:
 				ret = PSCI_RET_INTERNAL_FAILURE;
-				goto unlock;
+				goto done;
 			}
 		}
 	}
 
 	if (!matching_cpus)
 		ret = PSCI_RET_INVALID_PARAMS;
-unlock:
-	hyp_spin_unlock(&hyp_vm->vcpus_lock);
 done:
 	/* Nothing to be handled by the host. Go back to the guest. */
 	smccc_set_retval(vcpu, ret, 0, 0, 0);
@@ -1438,13 +1436,6 @@ static bool pvm_psci_version(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	/* Nothing to be handled by the host. Go back to the guest. */
 	smccc_set_retval(&hyp_vcpu->vcpu, KVM_ARM_PSCI_1_1, 0, 0, 0);
-	return true;
-}
-
-static bool pvm_psci_not_supported(struct pkvm_hyp_vcpu *hyp_vcpu)
-{
-	/* Nothing to be handled by the host. Go back to the guest. */
-	smccc_set_retval(&hyp_vcpu->vcpu, PSCI_RET_NOT_SUPPORTED, 0, 0, 0);
 	return true;
 }
 
@@ -1511,10 +1502,10 @@ static bool pkvm_handle_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 	case PSCI_1_1_FN64_SYSTEM_RESET2:
 		return false; /* Handled by the host. */
 	default:
-		break;
+		/* Unknown PSCI calls are not forwarded to the untrusted host. */
+		smccc_set_retval(vcpu, PSCI_RET_NOT_SUPPORTED, 0, 0, 0);
+		return true;
 	}
-
-	return pvm_psci_not_supported(hyp_vcpu);
 }
 
 static int pkvm_request_vcpu_memcache(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
