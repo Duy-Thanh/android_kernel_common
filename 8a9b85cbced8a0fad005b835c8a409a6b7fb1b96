@@ -70,6 +70,24 @@
       "parentUuid": "04ebde20_0862ac13",
       "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2203337_de7efcdb",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T18:13:50Z",
+      "side": 1,
+      "message": "So to summarize what I just wrote, maybe let\u0027s proceed as follows:\n\n1. Keep this fallback sequence as is, with 50ms delays, not 50us (even if your intention was 50us)\n2. But move pkvm_udelay() to panic.c as an internal helper instead of an API function (and somehow rename it accordingly), so that this `!tsc_khz` fallback makes sense?\n\nWDYT?",
+      "parentUuid": "93887192_20883e9c",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
