@@ -153,7 +153,7 @@ isert_alloc_rx_descriptors(struct isert_conn *isert_conn)
 	int i, j;
 
 	isert_conn->rx_descs = kzalloc_objs(struct iser_rx_desc,
-					    ISERT_QP_MAX_RECV_DTOS, GFP_KERNEL);
+					    ISERT_QP_MAX_RECV_DTOS);
 	if (!isert_conn->rx_descs)
 		return -ENOMEM;
 
@@ -274,7 +274,7 @@ isert_device_get(struct rdma_cm_id *cma_id)
 		}
 	}
 
-	device = kzalloc_obj(struct isert_device, GFP_KERNEL);
+	device = kzalloc_obj(struct isert_device);
 	if (!device) {
 		mutex_unlock(&device_list_mutex);
 		return ERR_PTR(-ENOMEM);
@@ -332,8 +332,7 @@ isert_alloc_login_buf(struct isert_conn *isert_conn,
 {
 	int ret;
 
-	isert_conn->login_desc = kzalloc_obj(*isert_conn->login_desc,
-					     GFP_KERNEL);
+	isert_conn->login_desc = kzalloc_obj(*isert_conn->login_desc);
 	if (!isert_conn->login_desc)
 		return -ENOMEM;
 
@@ -428,7 +427,7 @@ isert_connect_request(struct rdma_cm_id *cma_id, struct rdma_cm_event *event)
 	isert_dbg("cma_id: %p, portal: %p\n",
 		 cma_id, cma_id->context);
 
-	isert_conn = kzalloc_obj(struct isert_conn, GFP_KERNEL);
+	isert_conn = kzalloc_obj(struct isert_conn);
 	if (!isert_conn)
 		return -ENOMEM;
 
@@ -2268,7 +2267,7 @@ isert_setup_np(struct iscsi_np *np,
 	struct rdma_cm_id *isert_lid;
 	int ret;
 
-	isert_np = kzalloc_obj(struct isert_np, GFP_KERNEL);
+	isert_np = kzalloc_obj(struct isert_np);
 	if (!isert_np)
 		return -ENOMEM;
 

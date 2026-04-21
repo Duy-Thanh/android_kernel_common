@@ -153,7 +153,7 @@ int cw1200_queue_stats_init(struct cw1200_queue_stats *stats,
 	spin_lock_init(&stats->lock);
 	init_waitqueue_head(&stats->wait_link_id_empty);
 
-	stats->link_map_cache = kzalloc_objs(int, map_capacity, GFP_KERNEL);
+	stats->link_map_cache = kzalloc_objs(int, map_capacity);
 	if (!stats->link_map_cache)
 		return -ENOMEM;
 
@@ -179,13 +179,11 @@ int cw1200_queue_init(struct cw1200_queue *queue,
 	spin_lock_init(&queue->lock);
 	timer_setup(&queue->gc, cw1200_queue_gc, 0);
 
-	queue->pool = kzalloc_objs(struct cw1200_queue_item, capacity,
-				   GFP_KERNEL);
+	queue->pool = kzalloc_objs(struct cw1200_queue_item, capacity);
 	if (!queue->pool)
 		return -ENOMEM;
 
-	queue->link_map_cache = kzalloc_objs(int, stats->map_capacity,
-					     GFP_KERNEL);
+	queue->link_map_cache = kzalloc_objs(int, stats->map_capacity);
 	if (!queue->link_map_cache) {
 		kfree(queue->pool);
 		queue->pool = NULL;

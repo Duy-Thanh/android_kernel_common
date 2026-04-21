@@ -3064,7 +3064,7 @@ static noinline int do_init_module(struct module *mod)
 	}
 #endif
 
-	freeinit = kmalloc_obj(*freeinit, GFP_KERNEL);
+	freeinit = kmalloc_obj(*freeinit);
 	if (!freeinit) {
 		ret = -ENOMEM;
 		goto fail;

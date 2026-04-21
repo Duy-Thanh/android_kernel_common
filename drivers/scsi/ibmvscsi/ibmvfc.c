@@ -797,7 +797,7 @@ static int ibmvfc_init_event_pool(struct ibmvfc_host *vhost,
 		return 0;
 
 	pool->size = queue->total_depth;
-	pool->events = kzalloc_objs(*pool->events, pool->size, GFP_KERNEL);
+	pool->events = kzalloc_objs(*pool->events, pool->size);
 	if (!pool->events)
 		return -ENOMEM;
 
@@ -6057,8 +6057,7 @@ static int ibmvfc_alloc_channels(struct ibmvfc_host *vhost,
 	int i, j;
 	int rc = 0;
 
-	channels->scrqs = kzalloc_objs(*channels->scrqs, channels->max_queues,
-				       GFP_KERNEL);
+	channels->scrqs = kzalloc_objs(*channels->scrqs, channels->max_queues);
 	if (!channels->scrqs)
 		return -ENOMEM;
 
@@ -6211,7 +6210,7 @@ static int ibmvfc_alloc_mem(struct ibmvfc_host *vhost)
 		goto free_login_buffer;
 
 	vhost->trace = kzalloc_objs(struct ibmvfc_trace_entry,
-				    IBMVFC_NUM_TRACE_ENTRIES, GFP_KERNEL);
+				    IBMVFC_NUM_TRACE_ENTRIES);
 	atomic_set(&vhost->trace_index, -1);
 
 	if (!vhost->trace)

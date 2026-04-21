@@ -814,7 +814,7 @@ static int enetc_init_port_rss_memory(struct enetc_si *si)
 	if (!num_rss)
 		return 0;
 
-	rss_table = kzalloc_objs(*rss_table, num_rss, GFP_KERNEL);
+	rss_table = kzalloc_objs(*rss_table, num_rss);
 	if (!rss_table)
 		return -ENOMEM;
 
@@ -959,7 +959,7 @@ static int enetc_pf_probe(struct pci_dev *pdev,
 	pf->total_vfs = pci_sriov_get_totalvfs(pdev);
 	if (pf->total_vfs) {
 		pf->vf_state = kzalloc_objs(struct enetc_vf_state,
-					    pf->total_vfs, GFP_KERNEL);
+					    pf->total_vfs);
 		if (!pf->vf_state)
 			goto err_alloc_vf_state;
 	}

@@ -309,8 +309,7 @@ static int pmu_sbi_check_event_info(void)
 	int i, j, k, result = 0, count = 0;
 	struct sbiret ret;
 
-	event_info_shmem = kzalloc_objs(*event_info_shmem, num_events,
-					GFP_KERNEL);
+	event_info_shmem = kzalloc_objs(*event_info_shmem, num_events);
 	if (!event_info_shmem)
 		return -ENOMEM;
 
@@ -873,7 +872,7 @@ static int pmu_sbi_get_ctrinfo(int nctr, unsigned long *mask)
 	int i, num_hw_ctr = 0, num_fw_ctr = 0;
 	union sbi_pmu_ctr_info cinfo;
 
-	pmu_ctr_list = kzalloc_objs(*pmu_ctr_list, nctr, GFP_KERNEL);
+	pmu_ctr_list = kzalloc_objs(*pmu_ctr_list, nctr);
 	if (!pmu_ctr_list)
 		return -ENOMEM;
 

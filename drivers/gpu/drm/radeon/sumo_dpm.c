@@ -1480,7 +1480,7 @@ static int sumo_parse_power_table(struct radeon_device *rdev)
 		 le16_to_cpu(power_info->pplib.usNonClockInfoArrayOffset));
 
 	rdev->pm.dpm.ps = kzalloc_objs(struct radeon_ps,
-				       state_array->ucNumEntries, GFP_KERNEL);
+				       state_array->ucNumEntries);
 	if (!rdev->pm.dpm.ps)
 		return -ENOMEM;
 	power_state_offset = (u8 *)state_array->states;
@@ -1494,7 +1494,7 @@ static int sumo_parse_power_table(struct radeon_device *rdev)
 			kfree(rdev->pm.dpm.ps);
 			return -EINVAL;
 		}
-		ps = kzalloc_obj(struct sumo_ps, GFP_KERNEL);
+		ps = kzalloc_obj(struct sumo_ps);
 		if (ps == NULL) {
 			kfree(rdev->pm.dpm.ps);
 			return -ENOMEM;
@@ -1744,7 +1744,7 @@ int sumo_dpm_init(struct radeon_device *rdev)
 	u32 hw_rev = (RREG32(HW_REV) & ATI_REV_ID_MASK) >> ATI_REV_ID_SHIFT;
 	int ret;
 
-	pi = kzalloc_obj(struct sumo_power_info, GFP_KERNEL);
+	pi = kzalloc_obj(struct sumo_power_info);
 	if (pi == NULL)
 		return -ENOMEM;
 	rdev->pm.dpm.priv = pi;

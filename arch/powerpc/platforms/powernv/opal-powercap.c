@@ -150,7 +150,7 @@ void __init opal_powercap_init(void)
 		return;
 	}
 
-	pcaps = kzalloc_objs(*pcaps, of_get_child_count(powercap), GFP_KERNEL);
+	pcaps = kzalloc_objs(*pcaps, of_get_child_count(powercap));
 	if (!pcaps)
 		goto out_put_powercap;
 
@@ -181,13 +181,11 @@ void __init opal_powercap_init(void)
 			has_cur = true;
 		}
 
-		pcaps[i].pattrs = kzalloc_objs(struct powercap_attr, j,
-					       GFP_KERNEL);
+		pcaps[i].pattrs = kzalloc_objs(struct powercap_attr, j);
 		if (!pcaps[i].pattrs)
 			goto out_pcaps_pattrs;
 
-		pcaps[i].pg.attrs = kzalloc_objs(struct attribute *, j + 1,
-						 GFP_KERNEL);
+		pcaps[i].pg.attrs = kzalloc_objs(struct attribute *, j + 1);
 		if (!pcaps[i].pg.attrs) {
 			kfree(pcaps[i].pattrs);
 			goto out_pcaps_pattrs;

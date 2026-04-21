@@ -303,7 +303,7 @@ int amdgpu_parse_extended_power_table(struct amdgpu_device *adev)
 
 			adev->pm.dpm.dyn_state.phase_shedding_limits_table.entries =
 				kzalloc_objs(struct amdgpu_phase_shedding_limits_entry,
-					     psl->ucNumEntries, GFP_KERNEL);
+					     psl->ucNumEntries);
 			if (!adev->pm.dpm.dyn_state.phase_shedding_limits_table.entries)
 				return -ENOMEM;
 
@@ -502,7 +502,7 @@ int amdgpu_parse_extended_power_table(struct amdgpu_device *adev)
 				(mode_info->atom_context->bios + data_offset +
 				 le16_to_cpu(ext_hdr->usPPMTableOffset));
 			adev->pm.dpm.dyn_state.ppm_table =
-				kzalloc_obj(struct amdgpu_ppm_table, GFP_KERNEL);
+				kzalloc_obj(struct amdgpu_ppm_table);
 			if (!adev->pm.dpm.dyn_state.ppm_table)
 				return -ENOMEM;
 			adev->pm.dpm.dyn_state.ppm_table->ppm_design = ppm->ucPpmDesign;
@@ -556,8 +556,7 @@ int amdgpu_parse_extended_power_table(struct amdgpu_device *adev)
 					 le16_to_cpu(ext_hdr->usPowerTuneTableOffset));
 			ATOM_PowerTune_Table *pt;
 			adev->pm.dpm.dyn_state.cac_tdp_table =
-				kzalloc_obj(struct amdgpu_cac_tdp_table,
-					    GFP_KERNEL);
+				kzalloc_obj(struct amdgpu_cac_tdp_table);
 			if (!adev->pm.dpm.dyn_state.cac_tdp_table)
 				return -ENOMEM;
 			if (rev > 0) {

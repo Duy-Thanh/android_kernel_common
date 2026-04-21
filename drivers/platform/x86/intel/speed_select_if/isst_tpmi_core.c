@@ -1603,7 +1603,7 @@ int tpmi_sst_dev_add(struct auxiliary_device *auxdev)
 		 * devm_* allocation here as each partition is a
 		 * different device, which can be unbound.
 		 */
-		tpmi_sst = kzalloc_obj(*tpmi_sst, GFP_KERNEL);
+		tpmi_sst = kzalloc_obj(*tpmi_sst);
 		if (!tpmi_sst) {
 			ret = -ENOMEM;
 			goto unlock_exit;
@@ -1820,7 +1820,7 @@ int tpmi_sst_init(void)
 	}
 
 	isst_common.sst_inst = kzalloc_objs(*isst_common.sst_inst,
-					    topology_max_packages(), GFP_KERNEL);
+					    topology_max_packages());
 	if (!isst_common.sst_inst) {
 		ret = -ENOMEM;
 		goto init_done;

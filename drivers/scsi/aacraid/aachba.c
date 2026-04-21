@@ -493,7 +493,7 @@ int aac_get_containers(struct aac_dev *dev)
 		fsa_dev_ptr = dev->fsa_dev;
 
 		dev->fsa_dev = kzalloc_objs(*fsa_dev_ptr,
-					    maximum_num_containers, GFP_KERNEL);
+					    maximum_num_containers);
 
 		kfree(fsa_dev_ptr);
 		fsa_dev_ptr = NULL;
@@ -820,7 +820,7 @@ int aac_probe_container(struct aac_dev *dev, int cid)
 {
 	struct aac_cmd_priv *cmd_priv;
 	struct scsi_cmnd *scsicmd = kzalloc(sizeof(*scsicmd) + sizeof(*cmd_priv), GFP_KERNEL);
-	struct scsi_device *scsidev = kzalloc_obj(*scsidev, GFP_KERNEL);
+	struct scsi_device *scsidev = kzalloc_obj(*scsidev);
 	int status;
 
 	if (!scsicmd || !scsidev) {

@@ -1137,7 +1137,7 @@ int mhi_ep_power_up(struct mhi_ep_cntrl *mhi_cntrl)
 	mhi_ep_mmio_init(mhi_cntrl);
 
 	mhi_cntrl->mhi_event = kzalloc_objs(*mhi_cntrl->mhi_event,
-					    mhi_cntrl->event_rings, GFP_KERNEL);
+					    mhi_cntrl->event_rings);
 	if (!mhi_cntrl->mhi_event)
 		return -ENOMEM;
 
@@ -1275,7 +1275,7 @@ static struct mhi_ep_device *mhi_ep_alloc_device(struct mhi_ep_cntrl *mhi_cntrl,
 	struct mhi_ep_device *mhi_dev;
 	struct device *dev;
 
-	mhi_dev = kzalloc_obj(*mhi_dev, GFP_KERNEL);
+	mhi_dev = kzalloc_obj(*mhi_dev);
 	if (!mhi_dev)
 		return ERR_PTR(-ENOMEM);
 
@@ -1400,7 +1400,7 @@ static int mhi_ep_chan_init(struct mhi_ep_cntrl *mhi_cntrl,
 	 * only the defined channels
 	 */
 	mhi_cntrl->mhi_chan = kzalloc_objs(*mhi_cntrl->mhi_chan,
-					   mhi_cntrl->max_chan, GFP_KERNEL);
+					   mhi_cntrl->max_chan);
 	if (!mhi_cntrl->mhi_chan)
 		return -ENOMEM;
 
@@ -1459,8 +1459,7 @@ int mhi_ep_register_controller(struct mhi_ep_cntrl *mhi_cntrl,
 	if (ret)
 		return ret;
 
-	mhi_cntrl->mhi_cmd = kzalloc_objs(*mhi_cntrl->mhi_cmd, NR_OF_CMD_RINGS,
-					  GFP_KERNEL);
+	mhi_cntrl->mhi_cmd = kzalloc_objs(*mhi_cntrl->mhi_cmd, NR_OF_CMD_RINGS);
 	if (!mhi_cntrl->mhi_cmd) {
 		ret = -ENOMEM;
 		goto err_free_ch;

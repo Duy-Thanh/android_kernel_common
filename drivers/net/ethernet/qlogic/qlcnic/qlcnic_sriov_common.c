@@ -149,15 +149,14 @@ int qlcnic_sriov_init(struct qlcnic_adapter *adapter, int num_vfs)
 	if (!qlcnic_sriov_enable_check(adapter))
 		return -EIO;
 
-	sriov  = kzalloc_obj(struct qlcnic_sriov, GFP_KERNEL);
+	sriov  = kzalloc_obj(struct qlcnic_sriov);
 	if (!sriov)
 		return -ENOMEM;
 
 	adapter->ahw->sriov = sriov;
 	sriov->num_vfs = num_vfs;
 	bc = &sriov->bc;
-	sriov->vf_info = kzalloc_objs(struct qlcnic_vf_info, num_vfs,
-				      GFP_KERNEL);
+	sriov->vf_info = kzalloc_objs(struct qlcnic_vf_info, num_vfs);
 	if (!sriov->vf_info) {
 		err = -ENOMEM;
 		goto qlcnic_free_sriov;
@@ -201,7 +200,7 @@ int qlcnic_sriov_init(struct qlcnic_adapter *adapter, int num_vfs)
 		INIT_WORK(&vf->trans_work, qlcnic_sriov_process_bc_cmd);
 
 		if (qlcnic_sriov_pf_check(adapter)) {
-			vp = kzalloc_obj(struct qlcnic_vport, GFP_KERNEL);
+			vp = kzalloc_obj(struct qlcnic_vport);
 			if (!vp) {
 				err = -ENOMEM;
 				goto qlcnic_destroy_async_wq;

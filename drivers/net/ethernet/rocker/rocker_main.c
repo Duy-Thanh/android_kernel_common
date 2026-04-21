@@ -66,7 +66,7 @@ static struct rocker_wait *rocker_wait_create(void)
 {
 	struct rocker_wait *wait;
 
-	wait = kzalloc_obj(*wait, GFP_KERNEL);
+	wait = kzalloc_obj(*wait);
 	if (!wait)
 		return NULL;
 	return wait;
@@ -435,7 +435,7 @@ static int rocker_dma_ring_create(const struct rocker *rocker,
 	info->type = type;
 	info->head = 0;
 	info->tail = 0;
-	info->desc_info = kzalloc_objs(*info->desc_info, info->size, GFP_KERNEL);
+	info->desc_info = kzalloc_objs(*info->desc_info, info->size);
 	if (!info->desc_info)
 		return -ENOMEM;
 
@@ -2647,8 +2647,7 @@ static int rocker_msix_init(struct rocker *rocker)
 	if (msix_entries != ROCKER_MSIX_VEC_COUNT(rocker->port_count))
 		return -EINVAL;
 
-	rocker->msix_entries = kmalloc_objs(struct msix_entry, msix_entries,
-					    GFP_KERNEL);
+	rocker->msix_entries = kmalloc_objs(struct msix_entry, msix_entries);
 	if (!rocker->msix_entries)
 		return -ENOMEM;
 
@@ -2848,7 +2847,7 @@ static int rocker_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	struct rocker *rocker;
 	int err;
 
-	rocker = kzalloc_obj(*rocker, GFP_KERNEL);
+	rocker = kzalloc_obj(*rocker);
 	if (!rocker)
 		return -ENOMEM;
 

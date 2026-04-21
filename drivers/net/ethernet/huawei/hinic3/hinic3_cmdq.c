@@ -614,8 +614,7 @@ static int init_cmdq(struct hinic3_cmdq *cmdq, struct hinic3_hwdev *hwdev,
 
 	spin_lock_init(&cmdq->cmdq_lock);
 
-	cmdq->cmd_infos = kzalloc_objs(*cmdq->cmd_infos, cmdq->wq.q_depth,
-				       GFP_KERNEL);
+	cmdq->cmd_infos = kzalloc_objs(*cmdq->cmd_infos, cmdq->wq.q_depth);
 	if (!cmdq->cmd_infos) {
 		err = -ENOMEM;
 		return err;
@@ -738,7 +737,7 @@ static int init_cmdqs(struct hinic3_hwdev *hwdev)
 {
 	struct hinic3_cmdqs *cmdqs;
 
-	cmdqs = kzalloc_obj(*cmdqs, GFP_KERNEL);
+	cmdqs = kzalloc_obj(*cmdqs);
 	if (!cmdqs)
 		return -ENOMEM;
 

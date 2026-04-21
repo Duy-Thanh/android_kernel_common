@@ -831,7 +831,7 @@ int gnttab_setup_auto_xlat_frames(phys_addr_t addr)
 			&addr);
 		return -ENOMEM;
 	}
-	pfn = kzalloc_objs(pfn[0], max_nr_gframes, GFP_KERNEL);
+	pfn = kzalloc_objs(pfn[0], max_nr_gframes);
 	if (!pfn) {
 		memunmap(vaddr);
 		return -ENOMEM;
@@ -868,7 +868,7 @@ int gnttab_pages_set_private(int nr_pages, struct page **pages)
 #if BITS_PER_LONG < 64
 		struct xen_page_foreign *foreign;
 
-		foreign = kzalloc_obj(*foreign, GFP_KERNEL);
+		foreign = kzalloc_obj(*foreign);
 		if (!foreign)
 			return -ENOMEM;
 
@@ -1635,8 +1635,7 @@ int gnttab_init(void)
 	 */
 	max_nr_glist_frames = max_nr_grefs / RPP;
 
-	gnttab_list = kmalloc_objs(grant_ref_t *, max_nr_glist_frames,
-				   GFP_KERNEL);
+	gnttab_list = kmalloc_objs(grant_ref_t *, max_nr_glist_frames);
 	if (gnttab_list == NULL)
 		return -ENOMEM;
 

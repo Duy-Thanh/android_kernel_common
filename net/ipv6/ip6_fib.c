@@ -2464,7 +2464,7 @@ static int __net_init fib6_net_init(struct net *net)
 	INIT_LIST_HEAD(&net->ipv6.fib6_walkers);
 	timer_setup(&net->ipv6.ip6_fib_timer, fib6_gc_timer_cb, 0);
 
-	net->ipv6.rt6_stats = kzalloc_obj(*net->ipv6.rt6_stats, GFP_KERNEL);
+	net->ipv6.rt6_stats = kzalloc_obj(*net->ipv6.rt6_stats);
 	if (!net->ipv6.rt6_stats)
 		goto out_notifier;
 
@@ -2477,8 +2477,7 @@ static int __net_init fib6_net_init(struct net *net)
 
 	spin_lock_init(&net->ipv6.fib_table_hash_lock);
 
-	net->ipv6.fib6_main_tbl = kzalloc_obj(*net->ipv6.fib6_main_tbl,
-					      GFP_KERNEL);
+	net->ipv6.fib6_main_tbl = kzalloc_obj(*net->ipv6.fib6_main_tbl);
 	if (!net->ipv6.fib6_main_tbl)
 		goto out_fib_table_hash;
 
@@ -2491,8 +2490,7 @@ static int __net_init fib6_net_init(struct net *net)
 	INIT_HLIST_HEAD(&net->ipv6.fib6_main_tbl->tb6_gc_hlist);
 
 #ifdef CONFIG_IPV6_MULTIPLE_TABLES
-	net->ipv6.fib6_local_tbl = kzalloc_obj(*net->ipv6.fib6_local_tbl,
-					       GFP_KERNEL);
+	net->ipv6.fib6_local_tbl = kzalloc_obj(*net->ipv6.fib6_local_tbl);
 	if (!net->ipv6.fib6_local_tbl)
 		goto out_fib6_main_tbl;
 	net->ipv6.fib6_local_tbl->tb6_id = RT6_TABLE_LOCAL;

@@ -803,7 +803,7 @@ int mana_pre_alloc_rxbufs(struct mana_port_context *mpc, int new_mtu, int num_qu
 	if (!mpc->rxbufs_pre)
 		goto error;
 
-	mpc->das_pre = kmalloc_objs(dma_addr_t, num_rxb, GFP_KERNEL);
+	mpc->das_pre = kmalloc_objs(dma_addr_t, num_rxb);
 	if (!mpc->das_pre)
 		goto error;
 
@@ -995,7 +995,7 @@ static void mana_cleanup_indir_table(struct mana_port_context *apc)
 
 static int mana_init_port_context(struct mana_port_context *apc)
 {
-	apc->rxqs = kzalloc_objs(struct mana_rxq *, apc->num_queues, GFP_KERNEL);
+	apc->rxqs = kzalloc_objs(struct mana_rxq *, apc->num_queues);
 
 	return !apc->rxqs ? -ENOMEM : 0;
 }
@@ -1632,7 +1632,7 @@ static int mana_create_eq(struct mana_context *ac)
 	int err;
 	int i;
 
-	ac->eqs = kzalloc_objs(struct mana_eq, gc->max_num_queues, GFP_KERNEL);
+	ac->eqs = kzalloc_objs(struct mana_eq, gc->max_num_queues);
 	if (!ac->eqs)
 		return -ENOMEM;
 
@@ -2326,8 +2326,7 @@ static int mana_create_txq(struct mana_port_context *apc,
 	int err;
 	int i;
 
-	apc->tx_qp = kzalloc_objs(struct mana_tx_qp, apc->num_queues,
-				  GFP_KERNEL);
+	apc->tx_qp = kzalloc_objs(struct mana_tx_qp, apc->num_queues);
 	if (!apc->tx_qp)
 		return -ENOMEM;
 
@@ -2637,7 +2636,7 @@ static struct mana_rxq *mana_create_rxq(struct mana_port_context *apc,
 
 	gc = gd->gdma_context;
 
-	rxq = kzalloc_flex(*rxq, rx_oobs, apc->rx_queue_size, GFP_KERNEL);
+	rxq = kzalloc_flex(*rxq, rx_oobs, apc->rx_queue_size);
 	if (!rxq)
 		return NULL;
 
@@ -2852,8 +2851,7 @@ static int mana_rss_table_alloc(struct mana_port_context *apc)
 	if (!apc->indir_table)
 		return -ENOMEM;
 
-	apc->rxobj_table = kzalloc_objs(mana_handle_t, apc->indir_table_sz,
-					GFP_KERNEL);
+	apc->rxobj_table = kzalloc_objs(mana_handle_t, apc->indir_table_sz);
 	if (!apc->rxobj_table) {
 		kfree(apc->indir_table);
 		return -ENOMEM;
@@ -3415,7 +3413,7 @@ static int add_adev(struct gdma_dev *gd, const char *name)
 	struct mana_adev *madev;
 	int ret;
 
-	madev = kzalloc_obj(*madev, GFP_KERNEL);
+	madev = kzalloc_obj(*madev);
 	if (!madev)
 		return -ENOMEM;
 
@@ -3559,7 +3557,7 @@ int mana_probe(struct gdma_dev *gd, bool resuming)
 		return err;
 
 	if (!resuming) {
-		ac = kzalloc_obj(*ac, GFP_KERNEL);
+		ac = kzalloc_obj(*ac);
 		if (!ac)
 			return -ENOMEM;
 

@@ -303,11 +303,11 @@ int input_ff_create(struct input_dev *dev, unsigned int max_effects)
 	}
 
 	struct ff_device *ff __free(kfree) =
-		kzalloc_flex(*ff, effect_owners, max_effects, GFP_KERNEL);
+		kzalloc_flex(*ff, effect_owners, max_effects);
 	if (!ff)
 		return -ENOMEM;
 
-	ff->effects = kzalloc_objs(*ff->effects, max_effects, GFP_KERNEL);
+	ff->effects = kzalloc_objs(*ff->effects, max_effects);
 	if (!ff->effects)
 		return -ENOMEM;
 

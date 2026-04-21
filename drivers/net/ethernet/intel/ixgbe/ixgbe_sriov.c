@@ -37,7 +37,7 @@ static inline void ixgbe_alloc_vf_macvlans(struct ixgbe_adapter *adapter,
 	if (!num_vf_macvlans)
 		return;
 
-	mv_list = kzalloc_objs(struct vf_macvlans, num_vf_macvlans, GFP_KERNEL);
+	mv_list = kzalloc_objs(struct vf_macvlans, num_vf_macvlans);
 	if (mv_list) {
 		for (i = 0; i < num_vf_macvlans; i++) {
 			mv_list[i].vf = -1;
@@ -64,8 +64,7 @@ static int __ixgbe_enable_sriov(struct ixgbe_adapter *adapter,
 			  IXGBE_FLAG_VMDQ_ENABLED;
 
 	/* Allocate memory for per VF control structures */
-	adapter->vfinfo = kzalloc_objs(struct vf_data_storage, num_vfs,
-				       GFP_KERNEL);
+	adapter->vfinfo = kzalloc_objs(struct vf_data_storage, num_vfs);
 	if (!adapter->vfinfo)
 		return -ENOMEM;
 

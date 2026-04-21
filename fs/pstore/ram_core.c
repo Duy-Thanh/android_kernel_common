@@ -230,7 +230,7 @@ static int persistent_ram_init_ecc(struct persistent_ram_zone *prz,
 
 	/* allocate workspace instead of using stack VLA */
 	prz->ecc_info.par = kmalloc_objs(*prz->ecc_info.par,
-					 prz->ecc_info.ecc_size, GFP_KERNEL);
+					 prz->ecc_info.ecc_size);
 	if (!prz->ecc_info.par) {
 		pr_err("cannot allocate ECC parity workspace\n");
 		return -ENOMEM;
@@ -438,7 +438,7 @@ static void *persistent_ram_vmap(phys_addr_t start, size_t size,
 		return NULL;
 	}
 
-	pages = kmalloc_objs(struct page *, page_count, GFP_KERNEL);
+	pages = kmalloc_objs(struct page *, page_count);
 	if (!pages) {
 		pr_err("%s: Failed to allocate array for %u pages\n",
 		       __func__, page_count);
@@ -605,7 +605,7 @@ struct persistent_ram_zone *persistent_ram_new(phys_addr_t start, size_t size,
 	struct persistent_ram_zone *prz;
 	int ret = -ENOMEM;
 
-	prz = kzalloc_obj(struct persistent_ram_zone, GFP_KERNEL);
+	prz = kzalloc_obj(struct persistent_ram_zone);
 	if (!prz) {
 		pr_err("failed to allocate persistent ram zone\n");
 		goto err;

@@ -3852,14 +3852,13 @@ static struct r10conf *setup_conf(struct mddev *mddev)
 	}
 
 	err = -ENOMEM;
-	conf = kzalloc_obj(struct r10conf, GFP_KERNEL);
+	conf = kzalloc_obj(struct r10conf);
 	if (!conf)
 		goto out;
 
 	/* FIXME calc properly */
 	conf->mirrors = kzalloc_objs(struct raid10_info,
-				     mddev->raid_disks + max(0, -mddev->delta_disks),
-				     GFP_KERNEL);
+				     mddev->raid_disks + max(0, -mddev->delta_disks));
 	if (!conf->mirrors)
 		goto out;
 
@@ -4282,8 +4281,7 @@ static int raid10_check_reshape(struct mddev *mddev)
 		/* allocate new 'mirrors' list */
 		conf->mirrors_new =
 			kzalloc_objs(struct raid10_info,
-				     mddev->raid_disks + mddev->delta_disks,
-				     GFP_KERNEL);
+				     mddev->raid_disks + mddev->delta_disks);
 		if (!conf->mirrors_new)
 			return -ENOMEM;
 	}

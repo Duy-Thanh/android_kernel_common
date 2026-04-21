@@ -807,8 +807,7 @@ chromeos_laptop_prepare_acpi_peripherals(struct chromeos_laptop *cros_laptop,
 	if (!n_peripherals)
 		return 0;
 
-	acpi_peripherals = kzalloc_objs(*src->acpi_peripherals, n_peripherals,
-					GFP_KERNEL);
+	acpi_peripherals = kzalloc_objs(*src->acpi_peripherals, n_peripherals);
 	if (!acpi_peripherals)
 		return -ENOMEM;
 
@@ -880,7 +879,7 @@ chromeos_laptop_prepare(const struct chromeos_laptop *src)
 	struct chromeos_laptop *cros_laptop;
 	int error;
 
-	cros_laptop = kzalloc_obj(*cros_laptop, GFP_KERNEL);
+	cros_laptop = kzalloc_obj(*cros_laptop);
 	if (!cros_laptop)
 		return ERR_PTR(-ENOMEM);
 

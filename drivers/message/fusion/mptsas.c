@@ -603,7 +603,7 @@ mptsas_add_device_component(MPT_ADAPTER *ioc, u8 channel, u8 id,
 		}
 	}
 
-	sas_info = kzalloc_obj(struct mptsas_device_info, GFP_KERNEL);
+	sas_info = kzalloc_obj(struct mptsas_device_info);
 	if (!sas_info)
 		goto out;
 
@@ -756,7 +756,7 @@ mptsas_add_device_component_starget_ir(MPT_ADAPTER *ioc,
 		}
 	}
 
-	sas_info = kzalloc_obj(struct mptsas_device_info, GFP_KERNEL);
+	sas_info = kzalloc_obj(struct mptsas_device_info);
 	if (sas_info) {
 		sas_info->fw.id = starget->id;
 		sas_info->os.id = starget->id;
@@ -907,8 +907,7 @@ mptsas_setup_wide_ports(MPT_ADAPTER *ioc, struct mptsas_portinfo *port_info)
 		 * Forming a port
 		 */
 		if (!port_details) {
-			port_details = kzalloc_obj(struct mptsas_portinfo_details,
-						   GFP_KERNEL);
+			port_details = kzalloc_obj(struct mptsas_portinfo_details);
 			if (!port_details)
 				goto out;
 			port_details->num_phys = 1;
@@ -1751,7 +1750,7 @@ mptsas_target_alloc(struct scsi_target *starget)
 	int 			 i;
 	MPT_ADAPTER		*ioc = hd->ioc;
 
-	vtarget = kzalloc_obj(VirtTarget, GFP_KERNEL);
+	vtarget = kzalloc_obj(VirtTarget);
 	if (!vtarget)
 		return -ENOMEM;
 
@@ -1878,7 +1877,7 @@ mptsas_sdev_init(struct scsi_device *sdev)
 	int 			i;
 	MPT_ADAPTER *ioc = hd->ioc;
 
-	vdevice = kzalloc_obj(VirtDevice, GFP_KERNEL);
+	vdevice = kzalloc_obj(VirtDevice);
 	if (!vdevice) {
 		printk(MYIOC_s_ERR_FMT "sdev_init kzalloc(%zd) FAILED!\n",
 				ioc->name, sizeof(VirtDevice));
@@ -2429,7 +2428,7 @@ mptsas_sas_io_unit_pg0(MPT_ADAPTER *ioc, struct mptsas_portinfo *port_info)
 
 	port_info->num_phys = buffer->NumPhys;
 	port_info->phy_info = kzalloc_objs(struct mptsas_phyinfo,
-					   port_info->num_phys, GFP_KERNEL);
+					   port_info->num_phys);
 	if (!port_info->phy_info) {
 		error = -ENOMEM;
 		goto out_free_consistent;
@@ -2720,7 +2719,7 @@ mptsas_sas_expander_pg0(MPT_ADAPTER *ioc, struct mptsas_portinfo *port_info,
 	/* save config data */
 	port_info->num_phys = (buffer->NumPhys) ? buffer->NumPhys : 1;
 	port_info->phy_info = kzalloc_objs(struct mptsas_phyinfo,
-					   port_info->num_phys, GFP_KERNEL);
+					   port_info->num_phys);
 	if (!port_info->phy_info) {
 		error = -ENOMEM;
 		goto out_free_consistent;
@@ -3309,7 +3308,7 @@ mptsas_probe_hba_phys(MPT_ADAPTER *ioc)
 	struct mptsas_portinfo *port_info, *hba;
 	int error = -ENOMEM, i;
 
-	hba = kzalloc_obj(struct mptsas_portinfo, GFP_KERNEL);
+	hba = kzalloc_obj(struct mptsas_portinfo);
 	if (! hba)
 		goto out;
 
@@ -3444,12 +3443,12 @@ mptsas_expander_event_add(MPT_ADAPTER *ioc,
 	int i;
 	__le64 sas_address;
 
-	port_info = kzalloc_obj(struct mptsas_portinfo, GFP_KERNEL);
+	port_info = kzalloc_obj(struct mptsas_portinfo);
 	BUG_ON(!port_info);
 	port_info->num_phys = (expander_data->NumPhys) ?
 	    expander_data->NumPhys : 1;
 	port_info->phy_info = kzalloc_objs(struct mptsas_phyinfo,
-					   port_info->num_phys, GFP_KERNEL);
+					   port_info->num_phys);
 	BUG_ON(!port_info->phy_info);
 	memcpy(&sas_address, &expander_data->SASAddress, sizeof(__le64));
 	for (i = 0; i < port_info->num_phys; i++) {
@@ -3677,7 +3676,7 @@ mptsas_expander_add(MPT_ADAPTER *ioc, u16 handle)
 	    MPI_SAS_EXPAND_PGAD_FORM_SHIFT), handle)))
 		return NULL;
 
-	port_info = kzalloc_obj(struct mptsas_portinfo, GFP_KERNEL);
+	port_info = kzalloc_obj(struct mptsas_portinfo);
 	if (!port_info) {
 		dfailprintk(ioc, printk(MYIOC_s_ERR_FMT
 		"%s: exit at line=%d\n", ioc->name,
@@ -3945,7 +3944,7 @@ mptsas_probe_expanders(MPT_ADAPTER *ioc)
 			continue;
 		}
 
-		port_info = kzalloc_obj(struct mptsas_portinfo, GFP_KERNEL);
+		port_info = kzalloc_obj(struct mptsas_portinfo);
 		if (!port_info) {
 			dfailprintk(ioc, printk(MYIOC_s_ERR_FMT
 			"%s: exit at line=%d\n", ioc->name,

@@ -241,14 +241,13 @@ struct bnx2fc_cmd_mgr *bnx2fc_cmd_mgr_alloc(struct bnx2fc_hba *hba)
 	}
 
 	cmgr->hba = hba;
-	cmgr->free_list = kzalloc_objs(*cmgr->free_list, arr_sz, GFP_KERNEL);
+	cmgr->free_list = kzalloc_objs(*cmgr->free_list, arr_sz);
 	if (!cmgr->free_list) {
 		printk(KERN_ERR PFX "failed to alloc free_list\n");
 		goto mem_err;
 	}
 
-	cmgr->free_list_lock = kzalloc_objs(*cmgr->free_list_lock, arr_sz,
-					    GFP_KERNEL);
+	cmgr->free_list_lock = kzalloc_objs(*cmgr->free_list_lock, arr_sz);
 	if (!cmgr->free_list_lock) {
 		printk(KERN_ERR PFX "failed to alloc free_list_lock\n");
 		kfree(cmgr->free_list);
@@ -271,7 +270,7 @@ struct bnx2fc_cmd_mgr *bnx2fc_cmd_mgr_alloc(struct bnx2fc_hba *hba)
 	xid = BNX2FC_MIN_XID;
 	num_pri_ios = num_ios - hba->elstm_xids;
 	for (i = 0; i < num_ios; i++) {
-		io_req = kzalloc_obj(*io_req, GFP_KERNEL);
+		io_req = kzalloc_obj(*io_req);
 
 		if (!io_req) {
 			printk(KERN_ERR PFX "failed to alloc io_req\n");

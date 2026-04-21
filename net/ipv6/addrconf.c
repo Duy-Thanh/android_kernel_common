@@ -357,8 +357,7 @@ static int snmp6_alloc_dev(struct inet6_dev *idev)
 	}
 
 
-	idev->stats.icmpv6dev = kzalloc_obj(struct icmpv6_mib_device,
-					    GFP_KERNEL);
+	idev->stats.icmpv6dev = kzalloc_obj(struct icmpv6_mib_device);
 	if (!idev->stats.icmpv6dev)
 		goto err_icmp;
 	idev->stats.icmpv6msgdev = kzalloc_obj(struct icmpv6msg_mib_device,
@@ -7428,7 +7427,7 @@ static int __net_init addrconf_init_net(struct net *net)
 	spin_lock_init(&net->ipv6.addrconf_hash_lock);
 	INIT_DEFERRABLE_WORK(&net->ipv6.addr_chk_work, addrconf_verify_work);
 	net->ipv6.inet6_addr_lst = kzalloc_objs(struct hlist_head,
-						IN6_ADDR_HSIZE, GFP_KERNEL);
+						IN6_ADDR_HSIZE);
 	if (!net->ipv6.inet6_addr_lst)
 		goto err_alloc_addr;
 

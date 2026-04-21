@@ -408,7 +408,7 @@ static int ath12k_dp_init_bank_profiles(struct ath12k_base *ab)
 
 	dp->num_bank_profiles = num_tcl_banks;
 	dp->bank_profiles = kmalloc_objs(struct ath12k_dp_tx_bank_profile,
-					 num_tcl_banks, GFP_KERNEL);
+					 num_tcl_banks);
 	if (!dp->bank_profiles)
 		return -ENOMEM;
 
@@ -1362,8 +1362,7 @@ static int ath12k_dp_cc_init(struct ath12k_base *ab)
 	if (dp->num_spt_pages > ATH12K_MAX_PPT_ENTRIES)
 		dp->num_spt_pages = ATH12K_MAX_PPT_ENTRIES;
 
-	dp->spt_info = kzalloc_objs(struct ath12k_spt_info, dp->num_spt_pages,
-				    GFP_KERNEL);
+	dp->spt_info = kzalloc_objs(struct ath12k_spt_info, dp->num_spt_pages);
 
 	if (!dp->spt_info) {
 		ath12k_warn(ab, "SPT page allocation failure");

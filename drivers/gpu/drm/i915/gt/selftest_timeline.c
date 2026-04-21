@@ -170,7 +170,7 @@ static int mock_hwsp_freelist(void *arg)
 
 	state.max = PAGE_SIZE / sizeof(*state.history);
 	state.count = 0;
-	state.history = kzalloc_objs(*state.history, state.max, GFP_KERNEL);
+	state.history = kzalloc_objs(*state.history, state.max);
 	if (!state.history) {
 		err = -ENOMEM;
 		goto err_put;
@@ -536,8 +536,7 @@ static int live_hwsp_engine(void *arg)
 	 * independently to each of their breadcrumb slots.
 	 */
 
-	timelines = kvmalloc_objs(*timelines, NUM_TIMELINES * I915_NUM_ENGINES,
-				  GFP_KERNEL);
+	timelines = kvmalloc_objs(*timelines, NUM_TIMELINES * I915_NUM_ENGINES);
 	if (!timelines)
 		return -ENOMEM;
 
@@ -610,8 +609,7 @@ static int live_hwsp_alternate(void *arg)
 	 * engines.
 	 */
 
-	timelines = kvmalloc_objs(*timelines, NUM_TIMELINES * I915_NUM_ENGINES,
-				  GFP_KERNEL);
+	timelines = kvmalloc_objs(*timelines, NUM_TIMELINES * I915_NUM_ENGINES);
 	if (!timelines)
 		return -ENOMEM;
 

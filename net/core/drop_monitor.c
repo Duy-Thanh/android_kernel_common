@@ -306,8 +306,7 @@ net_dm_hw_reset_per_cpu_data(struct per_cpu_dm_data *hw_data)
 	struct net_dm_hw_entries *hw_entries;
 	unsigned long flags;
 
-	hw_entries = kzalloc_flex(*hw_entries, entries, dm_hit_limit,
-				  GFP_KERNEL);
+	hw_entries = kzalloc_flex(*hw_entries, entries, dm_hit_limit);
 	if (!hw_entries) {
 		/* If the memory allocation failed, we try to perform another
 		 * allocation in 1/10 second. Otherwise, the probe function
@@ -1583,7 +1582,7 @@ static int dropmon_net_event(struct notifier_block *ev_block,
 	case NETDEV_REGISTER:
 		if (WARN_ON_ONCE(rtnl_dereference(dev->dm_private)))
 			break;
-		stat = kzalloc_obj(*stat, GFP_KERNEL);
+		stat = kzalloc_obj(*stat);
 		if (!stat)
 			break;
 

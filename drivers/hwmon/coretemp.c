@@ -493,12 +493,12 @@ init_temp_data(struct platform_data *pdata, unsigned int cpu, int pkg_flag)
 		 */
 		pdata->nr_cores = NUM_REAL_CORES;
 		pdata->core_data = kzalloc_objs(struct temp_data *,
-						pdata->nr_cores, GFP_KERNEL);
+						pdata->nr_cores);
 		if (!pdata->core_data)
 			return NULL;
 	}
 
-	tdata = kzalloc_obj(struct temp_data, GFP_KERNEL);
+	tdata = kzalloc_obj(struct temp_data);
 	if (!tdata)
 		return NULL;
 
@@ -625,7 +625,7 @@ static int coretemp_device_add(int zoneid)
 	int err;
 
 	/* Initialize the per-zone data structures */
-	pdata = kzalloc_obj(*pdata, GFP_KERNEL);
+	pdata = kzalloc_obj(*pdata);
 	if (!pdata)
 		return -ENOMEM;
 
@@ -804,8 +804,7 @@ static int __init coretemp_init(void)
 		return -ENODEV;
 
 	max_zones = topology_max_packages() * topology_max_dies_per_package();
-	zone_devices = kzalloc_objs(struct platform_device *, max_zones,
-				    GFP_KERNEL);
+	zone_devices = kzalloc_objs(struct platform_device *, max_zones);
 	if (!zone_devices)
 		return -ENOMEM;
 

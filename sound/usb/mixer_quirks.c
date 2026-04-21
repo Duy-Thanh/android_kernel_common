@@ -67,7 +67,7 @@ static int snd_create_std_mono_ctl_offset(struct usb_mixer_interface *mixer,
 	struct usb_mixer_elem_info *cval;
 	struct snd_kcontrol *kctl;
 
-	cval = kzalloc_obj(*cval, GFP_KERNEL);
+	cval = kzalloc_obj(*cval);
 	if (!cval)
 		return -ENOMEM;
 
@@ -151,7 +151,7 @@ static int add_single_ctl_with_resume(struct usb_mixer_interface *mixer,
 	struct usb_mixer_elem_list *list;
 	struct snd_kcontrol *kctl;
 
-	list = kzalloc_obj(*list, GFP_KERNEL);
+	list = kzalloc_obj(*list);
 	if (!list)
 		return -ENOMEM;
 	if (listp)
@@ -274,8 +274,7 @@ static int snd_usb_soundblaster_remote_init(struct usb_mixer_interface *mixer)
 	mixer->rc_urb = usb_alloc_urb(0, GFP_KERNEL);
 	if (!mixer->rc_urb)
 		return -ENOMEM;
-	mixer->rc_setup_packet = kmalloc_obj(*mixer->rc_setup_packet,
-					     GFP_KERNEL);
+	mixer->rc_setup_packet = kmalloc_obj(*mixer->rc_setup_packet);
 	if (!mixer->rc_setup_packet) {
 		usb_free_urb(mixer->rc_urb);
 		mixer->rc_urb = NULL;
@@ -617,7 +616,7 @@ static int snd_dualsense_ih_connect(struct input_handler *handler,
 	struct input_handle *handle;
 	int err;
 
-	handle = kzalloc_obj(*handle, GFP_KERNEL);
+	handle = kzalloc_obj(*handle);
 	if (!handle)
 		return -ENOMEM;
 
@@ -714,7 +713,7 @@ static int snd_dualsense_jack_create(struct usb_mixer_interface *mixer,
 	struct snd_kcontrol *kctl;
 	int err;
 
-	mei = kzalloc_obj(*mei, GFP_KERNEL);
+	mei = kzalloc_obj(*mei);
 	if (!mei)
 		return -ENOMEM;
 
@@ -2279,7 +2278,7 @@ static int realtek_add_jack(struct usb_mixer_interface *mixer,
 	struct usb_mixer_elem_info *cval;
 	struct snd_kcontrol *kctl;
 
-	cval = kzalloc_obj(*cval, GFP_KERNEL);
+	cval = kzalloc_obj(*cval);
 	if (!cval)
 		return -ENOMEM;
 	snd_usb_mixer_elem_init_std(&cval->head, mixer, unitid);

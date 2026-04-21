@@ -274,7 +274,7 @@ static struct netdev_name_node *netdev_name_node_alloc(struct net_device *dev,
 {
 	struct netdev_name_node *name_node;
 
-	name_node = kmalloc_obj(*name_node, GFP_KERNEL);
+	name_node = kmalloc_obj(*name_node);
 	if (!name_node)
 		return NULL;
 	INIT_HLIST_NODE(&name_node->hlist);
@@ -6517,7 +6517,7 @@ struct flush_backlogs {
 
 static struct flush_backlogs *flush_backlogs_alloc(void)
 {
-	return kmalloc_flex(struct flush_backlogs, w, nr_cpu_ids, GFP_KERNEL);
+	return kmalloc_flex(struct flush_backlogs, w, nr_cpu_ids);
 }
 
 static struct flush_backlogs *flush_backlogs_fallback;
@@ -8700,7 +8700,7 @@ static int __netdev_adjacent_dev_insert(struct net_device *dev,
 		return 0;
 	}
 
-	adj = kmalloc_obj(*adj, GFP_KERNEL);
+	adj = kmalloc_obj(*adj);
 	if (!adj)
 		return -ENOMEM;
 
@@ -9140,8 +9140,7 @@ static int netdev_offload_xstats_enable_l3(struct net_device *dev,
 	int err;
 	int rc;
 
-	dev->offload_xstats_l3 = kzalloc_obj(*dev->offload_xstats_l3,
-					     GFP_KERNEL);
+	dev->offload_xstats_l3 = kzalloc_obj(*dev->offload_xstats_l3);
 	if (!dev->offload_xstats_l3)
 		return -ENOMEM;
 
@@ -11947,7 +11946,7 @@ struct netdev_queue *dev_ingress_queue_create(struct net_device *dev)
 #ifdef CONFIG_NET_CLS_ACT
 	if (queue)
 		return queue;
-	queue = kzalloc_obj(*queue, GFP_KERNEL);
+	queue = kzalloc_obj(*queue);
 	if (!queue)
 		return NULL;
 	netdev_init_one_queue(dev, queue, NULL);
@@ -12864,7 +12863,7 @@ static struct hlist_head * __net_init netdev_create_hash(void)
 	int i;
 	struct hlist_head *hash;
 
-	hash = kmalloc_objs(*hash, NETDEV_HASHENTRIES, GFP_KERNEL);
+	hash = kmalloc_objs(*hash, NETDEV_HASHENTRIES);
 	if (hash != NULL)
 		for (i = 0; i < NETDEV_HASHENTRIES; i++)
 			INIT_HLIST_HEAD(&hash[i]);

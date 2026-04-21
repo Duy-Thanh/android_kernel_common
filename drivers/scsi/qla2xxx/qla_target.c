@@ -7458,15 +7458,14 @@ int qlt_add_target(struct qla_hw_data *ha, struct scsi_qla_host *base_vha)
 
 	BUG_ON(base_vha->vha_tgt.qla_tgt != NULL);
 
-	tgt = kzalloc_obj(struct qla_tgt, GFP_KERNEL);
+	tgt = kzalloc_obj(struct qla_tgt);
 	if (!tgt) {
 		ql_dbg(ql_dbg_tgt, base_vha, 0xe066,
 		    "Unable to allocate struct qla_tgt\n");
 		return -ENOMEM;
 	}
 
-	tgt->qphints = kzalloc_objs(struct qla_qpair_hint, ha->max_qpairs + 1,
-				    GFP_KERNEL);
+	tgt->qphints = kzalloc_objs(struct qla_qpair_hint, ha->max_qpairs + 1);
 	if (!tgt->qphints) {
 		kfree(tgt);
 		ql_log(ql_log_warn, base_vha, 0x0197,

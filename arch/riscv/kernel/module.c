@@ -663,7 +663,7 @@ static int add_relocation_to_accumulate(struct module *me, int type,
 	struct used_bucket *bucket;
 	unsigned long hash;
 
-	entry = kmalloc_obj(*entry, GFP_KERNEL);
+	entry = kmalloc_obj(*entry);
 
 	if (!entry)
 		return -ENOMEM;
@@ -697,7 +697,7 @@ static int add_relocation_to_accumulate(struct module *me, int type,
 	 * relocation_entry.
 	 */
 	if (!found) {
-		rel_head = kmalloc_obj(*rel_head, GFP_KERNEL);
+		rel_head = kmalloc_obj(*rel_head);
 
 		if (!rel_head) {
 			kfree(entry);
@@ -709,7 +709,7 @@ static int add_relocation_to_accumulate(struct module *me, int type,
 		INIT_HLIST_NODE(&rel_head->node);
 		if (!current_head->first) {
 			bucket =
-				kmalloc_obj(struct used_bucket, GFP_KERNEL);
+				kmalloc_obj(struct used_bucket);
 
 			if (!bucket) {
 				kfree(entry);
@@ -754,7 +754,7 @@ initialize_relocation_hashtable(unsigned int num_relocations,
 
 	/* Number of relocations may be large, so kvmalloc it */
 	*relocation_hashtable = kvmalloc_objs(**relocation_hashtable,
-					      hashtable_size, GFP_KERNEL);
+					      hashtable_size);
 	if (!*relocation_hashtable)
 		return 0;
 

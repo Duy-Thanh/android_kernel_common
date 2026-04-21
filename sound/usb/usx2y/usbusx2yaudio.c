@@ -657,13 +657,13 @@ static int usx2y_rate_set(struct usx2ydev *usx2y, int rate)
 	struct urb *urb;
 
 	if (usx2y->rate != rate) {
-		us = kzalloc_flex(*us, urb, NOOF_SETRATE_URBS, GFP_KERNEL);
+		us = kzalloc_flex(*us, urb, NOOF_SETRATE_URBS);
 		if (!us) {
 			err = -ENOMEM;
 			goto cleanup;
 		}
 		us->len = NOOF_SETRATE_URBS;
-		usbdata = kmalloc_objs(int, NOOF_SETRATE_URBS, GFP_KERNEL);
+		usbdata = kmalloc_objs(int, NOOF_SETRATE_URBS);
 		if (!usbdata) {
 			err = -ENOMEM;
 			goto cleanup;
@@ -942,8 +942,7 @@ static int usx2y_audio_stream_new(struct snd_card *card, int playback_endpoint, 
 
 	for (i = playback_endpoint ? SNDRV_PCM_STREAM_PLAYBACK : SNDRV_PCM_STREAM_CAPTURE;
 	     i <= SNDRV_PCM_STREAM_CAPTURE; ++i) {
-		usx2y_substream[i] = kzalloc_obj(struct snd_usx2y_substream,
-						 GFP_KERNEL);
+		usx2y_substream[i] = kzalloc_obj(struct snd_usx2y_substream);
 		if (!usx2y_substream[i])
 			return -ENOMEM;
 

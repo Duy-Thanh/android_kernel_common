@@ -740,7 +740,7 @@ struct idpf_queue_set *idpf_alloc_queue_set(struct idpf_adapter *adapter,
 {
 	struct idpf_queue_set *qp;
 
-	qp = kzalloc_flex(*qp, qs, num, GFP_KERNEL);
+	qp = kzalloc_flex(*qp, qs, num);
 	if (!qp)
 		return NULL;
 
@@ -1059,7 +1059,7 @@ static int idpf_send_get_lan_memory_regions(struct idpf_adapter *adapter)
 		return -EINVAL;
 
 	hw = &adapter->hw;
-	hw->lan_regs = kzalloc_objs(*hw->lan_regs, num_regions, GFP_KERNEL);
+	hw->lan_regs = kzalloc_objs(*hw->lan_regs, num_regions);
 	if (!hw->lan_regs)
 		return -ENOMEM;
 
@@ -1091,7 +1091,7 @@ static int idpf_calc_remaining_mmio_regs(struct idpf_adapter *adapter)
 	struct idpf_hw *hw = &adapter->hw;
 
 	hw->num_lan_regs = IDPF_MMIO_MAP_FALLBACK_MAX_REMAINING;
-	hw->lan_regs = kzalloc_objs(*hw->lan_regs, hw->num_lan_regs, GFP_KERNEL);
+	hw->lan_regs = kzalloc_objs(*hw->lan_regs, hw->num_lan_regs);
 	if (!hw->lan_regs)
 		return -ENOMEM;
 
@@ -1290,8 +1290,7 @@ idpf_vport_init_queue_reg_chunks(struct idpf_vport_config *vport_config,
 
 	kfree(q_info->queue_chunks);
 
-	q_info->queue_chunks = kzalloc_objs(*q_info->queue_chunks, num_chunks,
-					    GFP_KERNEL);
+	q_info->queue_chunks = kzalloc_objs(*q_info->queue_chunks, num_chunks);
 	if (!q_info->queue_chunks) {
 		q_info->num_chunks = 0;
 		return -ENOMEM;
@@ -1844,7 +1843,7 @@ static int idpf_send_config_tx_queue_set_msg(const struct idpf_queue_set *qs)
 		.chunk_sz	= sizeof(*qi),
 	};
 
-	qi = kzalloc_objs(*qi, qs->num, GFP_KERNEL);
+	qi = kzalloc_objs(*qi, qs->num);
 	if (!qi)
 		return -ENOMEM;
 
@@ -2033,7 +2032,7 @@ static int idpf_send_config_rx_queue_set_msg(const struct idpf_queue_set *qs)
 		.chunk_sz	= sizeof(*qi),
 	};
 
-	qi = kzalloc_objs(*qi, qs->num, GFP_KERNEL);
+	qi = kzalloc_objs(*qi, qs->num);
 	if (!qi)
 		return -ENOMEM;
 
@@ -2160,7 +2159,7 @@ static int idpf_send_ena_dis_queue_set_msg(const struct idpf_queue_set *qs,
 		.num_chunks	= qs->num,
 	};
 
-	qc = kzalloc_objs(*qc, qs->num, GFP_KERNEL);
+	qc = kzalloc_objs(*qc, qs->num);
 	if (!qc)
 		return -ENOMEM;
 
@@ -2327,7 +2326,7 @@ idpf_send_map_unmap_queue_set_vector_msg(const struct idpf_queue_set *qs,
 	};
 	bool split;
 
-	vqv = kzalloc_objs(*vqv, qs->num, GFP_KERNEL);
+	vqv = kzalloc_objs(*vqv, qs->num);
 	if (!vqv)
 		return -ENOMEM;
 
@@ -3197,16 +3196,15 @@ static int idpf_send_get_rx_ptype_msg(struct idpf_adapter *adapter)
 	u16 next_ptype_id = 0;
 	ssize_t reply_sz;
 
-	singleq_pt_lkup = kzalloc_objs(*singleq_pt_lkup, IDPF_RX_MAX_BASE_PTYPE,
-				       GFP_KERNEL);
+	singleq_pt_lkup = kzalloc_objs(*singleq_pt_lkup, IDPF_RX_MAX_BASE_PTYPE);
 	if (!singleq_pt_lkup)
 		return -ENOMEM;
 
-	splitq_pt_lkup = kzalloc_objs(*splitq_pt_lkup, max_ptype, GFP_KERNEL);
+	splitq_pt_lkup = kzalloc_objs(*splitq_pt_lkup, max_ptype);
 	if (!splitq_pt_lkup)
 		return -ENOMEM;
 
-	get_ptype_info = kzalloc_obj(*get_ptype_info, GFP_KERNEL);
+	get_ptype_info = kzalloc_obj(*get_ptype_info);
 	if (!get_ptype_info)
 		return -ENOMEM;
 
@@ -3435,12 +3433,12 @@ static int idpf_vport_params_buf_alloc(struct idpf_adapter *adapter)
 	u16 num_max_vports = idpf_get_max_vports(adapter);
 
 	adapter->vport_params_reqd = kzalloc_objs(*adapter->vport_params_reqd,
-						  num_max_vports, GFP_KERNEL);
+						  num_max_vports);
 	if (!adapter->vport_params_reqd)
 		return -ENOMEM;
 
 	adapter->vport_params_recvd = kzalloc_objs(*adapter->vport_params_recvd,
-						   num_max_vports, GFP_KERNEL);
+						   num_max_vports);
 	if (!adapter->vport_params_recvd)
 		goto err_mem;
 
@@ -3452,7 +3450,7 @@ static int idpf_vport_params_buf_alloc(struct idpf_adapter *adapter)
 		return 0;
 
 	adapter->vport_config = kzalloc_objs(*adapter->vport_config,
-					     num_max_vports, GFP_KERNEL);
+					     num_max_vports);
 	if (!adapter->vport_config)
 		goto err_mem;
 
@@ -3484,8 +3482,7 @@ int idpf_vc_core_init(struct idpf_adapter *adapter)
 	int err = 0;
 
 	if (!adapter->vcxn_mngr) {
-		adapter->vcxn_mngr = kzalloc_obj(*adapter->vcxn_mngr,
-						 GFP_KERNEL);
+		adapter->vcxn_mngr = kzalloc_obj(*adapter->vcxn_mngr);
 		if (!adapter->vcxn_mngr) {
 			err = -ENOMEM;
 			goto init_failed;
@@ -3557,14 +3554,13 @@ restart:
 	pci_sriov_set_totalvfs(adapter->pdev, idpf_get_max_vfs(adapter));
 	num_max_vports = idpf_get_max_vports(adapter);
 	adapter->max_vports = num_max_vports;
-	adapter->vports = kzalloc_objs(*adapter->vports, num_max_vports,
-				       GFP_KERNEL);
+	adapter->vports = kzalloc_objs(*adapter->vports, num_max_vports);
 	if (!adapter->vports)
 		return -ENOMEM;
 
 	if (!adapter->netdevs) {
 		adapter->netdevs = kzalloc_objs(struct net_device *,
-						num_max_vports, GFP_KERNEL);
+						num_max_vports);
 		if (!adapter->netdevs) {
 			err = -ENOMEM;
 			goto err_netdev_alloc;

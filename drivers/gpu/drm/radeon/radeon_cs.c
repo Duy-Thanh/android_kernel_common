@@ -93,7 +93,7 @@ static int radeon_cs_parser_relocs(struct radeon_cs_parser *p)
 	p->dma_reloc_idx = 0;
 	/* FIXME: we assume that each relocs use 4 dwords */
 	p->nrelocs = chunk->length_dw / 4;
-	p->relocs = kvzalloc_objs(struct radeon_bo_list, p->nrelocs, GFP_KERNEL);
+	p->relocs = kvzalloc_objs(struct radeon_bo_list, p->nrelocs);
 	if (p->relocs == NULL) {
 		return -ENOMEM;
 	}
@@ -296,8 +296,7 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
 	}
 	p->cs_flags = 0;
 	p->nchunks = cs->num_chunks;
-	p->chunks = kvzalloc_objs(struct radeon_cs_chunk, p->nchunks,
-				  GFP_KERNEL);
+	p->chunks = kvzalloc_objs(struct radeon_cs_chunk, p->nchunks);
 	if (p->chunks == NULL) {
 		return -ENOMEM;
 	}

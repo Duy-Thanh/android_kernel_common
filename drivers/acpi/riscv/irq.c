@@ -136,7 +136,7 @@ static int __init riscv_acpi_register_ext_intc(u32 gsi_base, u32 nr_irqs, u32 nr
 {
 	struct riscv_ext_intc_list *ext_intc_element, *node, *prev;
 
-	ext_intc_element = kzalloc_obj(*ext_intc_element, GFP_KERNEL);
+	ext_intc_element = kzalloc_obj(*ext_intc_element);
 	if (!ext_intc_element)
 		return -ENOMEM;
 
@@ -343,7 +343,7 @@ static u32 riscv_acpi_add_prt_dep(acpi_handle handle)
 			acpi_get_handle(handle, entry->source, &link_handle);
 			dep_devices.count = 1;
 			dep_devices.handles = kzalloc_objs(*dep_devices.handles,
-							   1, GFP_KERNEL);
+							   1);
 			if (!dep_devices.handles) {
 				acpi_handle_err(handle, "failed to allocate memory\n");
 				continue;
@@ -355,7 +355,7 @@ static u32 riscv_acpi_add_prt_dep(acpi_handle handle)
 			gsi_handle = riscv_acpi_get_gsi_handle(entry->source_index);
 			dep_devices.count = 1;
 			dep_devices.handles = kzalloc_objs(*dep_devices.handles,
-							   1, GFP_KERNEL);
+							   1);
 			if (!dep_devices.handles) {
 				acpi_handle_err(handle, "failed to allocate memory\n");
 				continue;
@@ -384,8 +384,7 @@ static u32 riscv_acpi_add_irq_dep(acpi_handle handle)
 	     riscv_acpi_irq_get_dep(handle, i, &gsi_handle);
 	     i++) {
 		dep_devices.count = 1;
-		dep_devices.handles = kzalloc_objs(*dep_devices.handles, 1,
-						   GFP_KERNEL);
+		dep_devices.handles = kzalloc_objs(*dep_devices.handles, 1);
 		if (!dep_devices.handles) {
 			acpi_handle_err(handle, "failed to allocate memory\n");
 			continue;

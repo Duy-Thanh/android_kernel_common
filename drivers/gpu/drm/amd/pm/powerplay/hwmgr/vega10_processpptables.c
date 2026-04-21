@@ -351,7 +351,7 @@ static int get_mm_clock_voltage_table(
 			"Invalid PowerPlay Table!", return -1);
 
 	mm_table = kzalloc_flex(*mm_table, entries,
-				mm_dependency_table->ucNumEntries, GFP_KERNEL);
+				mm_dependency_table->ucNumEntries);
 	if (!mm_table)
 		return -ENOMEM;
 
@@ -574,7 +574,7 @@ static int get_socclk_voltage_dependency_table(
 		"Invalid PowerPlay Table!", return -1);
 
 	clk_table = kzalloc_flex(*clk_table, entries,
-				 clk_dep_table->ucNumEntries, GFP_KERNEL);
+				 clk_dep_table->ucNumEntries);
 	if (!clk_table)
 		return -ENOMEM;
 
@@ -604,7 +604,7 @@ static int get_mclk_voltage_dependency_table(
 		"Invalid PowerPlay Table!", return -1);
 
 	mclk_table = kzalloc_flex(*mclk_table, entries,
-				  mclk_dep_table->ucNumEntries, GFP_KERNEL);
+				  mclk_dep_table->ucNumEntries);
 	if (!mclk_table)
 		return -ENOMEM;
 
@@ -641,7 +641,7 @@ static int get_gfxclk_voltage_dependency_table(
 			"Invalid PowerPlay Table!", return -1);
 
 	clk_table = kzalloc_flex(*clk_table, entries,
-				 clk_dep_table->ucNumEntries, GFP_KERNEL);
+				 clk_dep_table->ucNumEntries);
 	if (!clk_table)
 		return -ENOMEM;
 
@@ -703,7 +703,7 @@ static int get_pix_clk_voltage_dependency_table(
 			"Invalid PowerPlay Table!", return -1);
 
 	clk_table = kzalloc_flex(*clk_table, entries,
-				 clk_dep_table->ucNumEntries, GFP_KERNEL);
+				 clk_dep_table->ucNumEntries);
 	if (!clk_table)
 		return -ENOMEM;
 
@@ -755,7 +755,7 @@ static int get_dcefclk_voltage_dependency_table(
 		num_entries = clk_dep_table->ucNumEntries;
 
 
-	clk_table = kzalloc_flex(*clk_table, entries, num_entries, GFP_KERNEL);
+	clk_table = kzalloc_flex(*clk_table, entries, num_entries);
 	if (!clk_table)
 		return -ENOMEM;
 
@@ -794,7 +794,7 @@ static int get_pcie_table(struct pp_hwmgr *hwmgr,
 			return 0);
 
 	pcie_table = kzalloc_flex(*pcie_table, entries,
-				  atom_pcie_table->ucNumEntries, GFP_KERNEL);
+				  atom_pcie_table->ucNumEntries);
 	if (!pcie_table)
 		return -ENOMEM;
 
@@ -852,8 +852,7 @@ static int get_valid_clk(
 	PP_ASSERT_WITH_CODE(clk_volt_pp_table->count,
 			"Invalid PowerPlay Table!", return -1);
 
-	table = kzalloc_flex(*table, values, clk_volt_pp_table->count,
-			     GFP_KERNEL);
+	table = kzalloc_flex(*table, values, clk_volt_pp_table->count);
 	if (!table)
 		return -ENOMEM;
 
@@ -1040,7 +1039,7 @@ static int get_vddc_lookup_table(
 	PP_ASSERT_WITH_CODE((vddc_lookup_pp_tables->ucNumEntries != 0),
 			"Invalid SOC_VDDD Lookup Table!", return 1);
 
-	table = kzalloc_flex(*table, entries, max_levels, GFP_KERNEL);
+	table = kzalloc_flex(*table, entries, max_levels);
 	if (!table)
 		return -ENOMEM;
 
@@ -1148,7 +1147,7 @@ static int vega10_pp_tables_initialize(struct pp_hwmgr *hwmgr)
 	int result = 0;
 	const ATOM_Vega10_POWERPLAYTABLE *powerplay_table;
 
-	hwmgr->pptable = kzalloc_obj(struct phm_ppt_v2_information, GFP_KERNEL);
+	hwmgr->pptable = kzalloc_obj(struct phm_ppt_v2_information);
 
 	PP_ASSERT_WITH_CODE((hwmgr->pptable != NULL),
 			    "Failed to allocate hwmgr->pptable!", return -ENOMEM);

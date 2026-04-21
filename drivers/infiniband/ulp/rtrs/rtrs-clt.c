@@ -1364,8 +1364,7 @@ static int alloc_path_reqs(struct rtrs_clt_path *clt_path)
 	enum ib_mr_type mr_type;
 	int i, err = -ENOMEM;
 
-	clt_path->reqs = kzalloc_objs(*clt_path->reqs, clt_path->queue_depth,
-				      GFP_KERNEL);
+	clt_path->reqs = kzalloc_objs(*clt_path->reqs, clt_path->queue_depth);
 	if (!clt_path->reqs)
 		return -ENOMEM;
 
@@ -1383,7 +1382,7 @@ static int alloc_path_reqs(struct rtrs_clt_path *clt_path)
 		if (!req->iu)
 			goto out;
 
-		req->sge = kzalloc_objs(*req->sge, 2, GFP_KERNEL);
+		req->sge = kzalloc_objs(*req->sge, 2);
 		if (!req->sge)
 			goto out;
 
@@ -1537,7 +1536,7 @@ static struct rtrs_clt_path *alloc_path(struct rtrs_clt_sess *clt,
 	int cpu;
 	size_t total_con;
 
-	clt_path = kzalloc_obj(*clt_path, GFP_KERNEL);
+	clt_path = kzalloc_obj(*clt_path);
 	if (!clt_path)
 		goto err;
 
@@ -1546,14 +1545,14 @@ static struct rtrs_clt_path *alloc_path(struct rtrs_clt_sess *clt,
 	 * +1: Extra connection for user messages
 	 */
 	total_con = con_num + nr_poll_queues + 1;
-	clt_path->s.con = kzalloc_objs(*clt_path->s.con, total_con, GFP_KERNEL);
+	clt_path->s.con = kzalloc_objs(*clt_path->s.con, total_con);
 	if (!clt_path->s.con)
 		goto err_free_path;
 
 	clt_path->s.con_num = total_con;
 	clt_path->s.irq_con_num = con_num + 1;
 
-	clt_path->stats = kzalloc_obj(*clt_path->stats, GFP_KERNEL);
+	clt_path->stats = kzalloc_obj(*clt_path->stats);
 	if (!clt_path->stats)
 		goto err_free_con;
 
@@ -1620,7 +1619,7 @@ static int create_con(struct rtrs_clt_path *clt_path, unsigned int cid)
 {
 	struct rtrs_clt_con *con;
 
-	con = kzalloc_obj(*con, GFP_KERNEL);
+	con = kzalloc_obj(*con);
 	if (!con)
 		return -ENOMEM;
 
@@ -1872,7 +1871,7 @@ static int rtrs_rdma_conn_established(struct rtrs_clt_con *con,
 
 		if (!clt_path->rbufs) {
 			clt_path->rbufs = kzalloc_objs(*clt_path->rbufs,
-						       queue_depth, GFP_KERNEL);
+						       queue_depth);
 			if (!clt_path->rbufs)
 				return -ENOMEM;
 		}
@@ -2727,7 +2726,7 @@ static struct rtrs_clt_sess *alloc_clt(const char *sessname, size_t paths_num,
 	if (strlen(sessname) >= sizeof(clt->sessname))
 		return ERR_PTR(-EINVAL);
 
-	clt = kzalloc_obj(*clt, GFP_KERNEL);
+	clt = kzalloc_obj(*clt);
 	if (!clt)
 		return ERR_PTR(-ENOMEM);
 

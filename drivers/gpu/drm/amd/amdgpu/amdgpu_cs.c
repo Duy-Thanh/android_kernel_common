@@ -192,8 +192,7 @@ static int amdgpu_cs_pass1(struct amdgpu_cs_parser *p,
 		return PTR_ERR(chunk_array);
 
 	p->nchunks = cs->in.num_chunks;
-	p->chunks = kvmalloc_objs(struct amdgpu_cs_chunk, p->nchunks,
-				  GFP_KERNEL);
+	p->chunks = kvmalloc_objs(struct amdgpu_cs_chunk, p->nchunks);
 	if (!p->chunks) {
 		ret = -ENOMEM;
 		goto free_chunk;
@@ -523,7 +522,7 @@ static int amdgpu_cs_p2_syncobj_out(struct amdgpu_cs_parser *p,
 	if (p->post_deps)
 		return -EINVAL;
 
-	p->post_deps = kmalloc_objs(*p->post_deps, num_deps, GFP_KERNEL);
+	p->post_deps = kmalloc_objs(*p->post_deps, num_deps);
 	p->num_post_deps = 0;
 
 	if (!p->post_deps)
@@ -556,7 +555,7 @@ static int amdgpu_cs_p2_syncobj_timeline_signal(struct amdgpu_cs_parser *p,
 	if (p->post_deps)
 		return -EINVAL;
 
-	p->post_deps = kmalloc_objs(*p->post_deps, num_deps, GFP_KERNEL);
+	p->post_deps = kmalloc_objs(*p->post_deps, num_deps);
 	p->num_post_deps = 0;
 
 	if (!p->post_deps)
@@ -1689,7 +1688,7 @@ static int amdgpu_cs_wait_any_fence(struct amdgpu_device *adev,
 	long r;
 
 	/* Prepare the fence array */
-	array = kzalloc_objs(struct dma_fence *, fence_count, GFP_KERNEL);
+	array = kzalloc_objs(struct dma_fence *, fence_count);
 
 	if (array == NULL)
 		return -ENOMEM;

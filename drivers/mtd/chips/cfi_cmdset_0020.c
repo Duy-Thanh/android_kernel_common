@@ -172,7 +172,7 @@ static struct mtd_info *cfi_staa_setup(struct map_info *map)
 	int i,j;
 	unsigned long devsize = (1<<cfi->cfiq->DevSize) * cfi->interleave;
 
-	mtd = kzalloc_obj(*mtd, GFP_KERNEL);
+	mtd = kzalloc_obj(*mtd);
 	//printk(KERN_DEBUG "number of CFI chips: %d\n", cfi->numchips);
 
 	if (!mtd) {
@@ -186,7 +186,7 @@ static struct mtd_info *cfi_staa_setup(struct map_info *map)
 
 	mtd->numeraseregions = cfi->cfiq->NumEraseRegions * cfi->numchips;
 	mtd->eraseregions = kmalloc_objs(struct mtd_erase_region_info,
-					 mtd->numeraseregions, GFP_KERNEL);
+					 mtd->numeraseregions);
 	if (!mtd->eraseregions) {
 		kfree(cfi->cmdset_priv);
 		kfree(mtd);

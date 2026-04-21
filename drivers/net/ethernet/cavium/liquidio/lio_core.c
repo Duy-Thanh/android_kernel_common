@@ -89,12 +89,12 @@ int lio_setup_glists(struct octeon_device *oct, struct lio *lio, int num_iqs)
 	int i, j;
 
 	lio->glist_lock =
-	    kzalloc_objs(*lio->glist_lock, num_iqs, GFP_KERNEL);
+	    kzalloc_objs(*lio->glist_lock, num_iqs);
 	if (!lio->glist_lock)
 		return -ENOMEM;
 
 	lio->glist =
-	    kzalloc_objs(*lio->glist, num_iqs, GFP_KERNEL);
+	    kzalloc_objs(*lio->glist, num_iqs);
 	if (!lio->glist) {
 		kfree(lio->glist_lock);
 		lio->glist_lock = NULL;
@@ -107,10 +107,8 @@ int lio_setup_glists(struct octeon_device *oct, struct lio *lio, int num_iqs)
 	/* allocate memory to store virtual and dma base address of
 	 * per glist consistent memory
 	 */
-	lio->glists_virt_base = kzalloc_objs(*lio->glists_virt_base, num_iqs,
-					     GFP_KERNEL);
-	lio->glists_dma_base = kzalloc_objs(*lio->glists_dma_base, num_iqs,
-					    GFP_KERNEL);
+	lio->glists_virt_base = kzalloc_objs(*lio->glists_virt_base, num_iqs);
+	lio->glists_dma_base = kzalloc_objs(*lio->glists_dma_base, num_iqs);
 
 	if (!lio->glists_virt_base || !lio->glists_dma_base) {
 		lio_delete_glists(lio);
@@ -138,7 +136,7 @@ int lio_setup_glists(struct octeon_device *oct, struct lio *lio, int num_iqs)
 			g = kzalloc_node(sizeof(*g), GFP_KERNEL,
 					 numa_node);
 			if (!g)
-				g = kzalloc_obj(*g, GFP_KERNEL);
+				g = kzalloc_obj(*g);
 			if (!g)
 				break;
 
@@ -1052,7 +1050,7 @@ int octeon_setup_interrupt(struct octeon_device *oct, u32 num_ioqs)
 				[IRQ_NAME_OFF(MAX_IOQ_INTERRUPTS_PER_PF)];
 
 		oct->msix_entries = kzalloc_objs(struct msix_entry,
-						 oct->num_msix_irqs, GFP_KERNEL);
+						 oct->num_msix_irqs);
 		if (!oct->msix_entries) {
 			dev_err(&oct->pci_dev->dev, "Memory Alloc failed...\n");
 			kfree(oct->irq_name_storage);

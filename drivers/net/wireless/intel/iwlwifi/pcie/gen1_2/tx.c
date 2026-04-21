@@ -741,8 +741,7 @@ int iwl_pcie_txq_alloc(struct iwl_trans *trans, struct iwl_txq *txq,
 
 	txq->n_window = slots_num;
 
-	txq->entries = kzalloc_objs(struct iwl_pcie_txq_entry, slots_num,
-				    GFP_KERNEL);
+	txq->entries = kzalloc_objs(struct iwl_pcie_txq_entry, slots_num);
 
 	if (!txq->entries)
 		goto error;
@@ -750,7 +749,7 @@ int iwl_pcie_txq_alloc(struct iwl_trans *trans, struct iwl_txq *txq,
 	if (cmd_queue)
 		for (i = 0; i < slots_num; i++) {
 			txq->entries[i].cmd =
-				kmalloc_obj(struct iwl_device_cmd, GFP_KERNEL);
+				kmalloc_obj(struct iwl_device_cmd);
 			if (!txq->entries[i].cmd)
 				goto error;
 		}
@@ -837,7 +836,7 @@ static int iwl_pcie_tx_alloc(struct iwl_trans *trans)
 
 	trans_pcie->txq_memory =
 		kzalloc_objs(struct iwl_txq,
-			     trans->mac_cfg->base->num_of_queues, GFP_KERNEL);
+			     trans->mac_cfg->base->num_of_queues);
 	if (!trans_pcie->txq_memory) {
 		IWL_ERR(trans, "Not enough memory for txq\n");
 		ret = -ENOMEM;

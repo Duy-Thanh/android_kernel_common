@@ -114,8 +114,7 @@ int ocfs2_compute_replay_slots(struct ocfs2_super *osb)
 	if (osb->replay_map)
 		return 0;
 
-	replay_map = kzalloc_flex(*replay_map, rm_replay_slots, osb->max_slots,
-				  GFP_KERNEL);
+	replay_map = kzalloc_flex(*replay_map, rm_replay_slots, osb->max_slots);
 	if (!replay_map) {
 		mlog_errno(-ENOMEM);
 		return -ENOMEM;
@@ -177,7 +176,7 @@ int ocfs2_recovery_init(struct ocfs2_super *osb)
 	osb->recovery_thread_task = NULL;
 	init_waitqueue_head(&osb->recovery_event);
 
-	rm = kzalloc_flex(*rm, rm_entries, osb->max_slots, GFP_KERNEL);
+	rm = kzalloc_flex(*rm, rm_entries, osb->max_slots);
 	if (!rm) {
 		mlog_errno(-ENOMEM);
 		return -ENOMEM;
@@ -876,7 +875,7 @@ int ocfs2_journal_alloc(struct ocfs2_super *osb)
 	int status = 0;
 	struct ocfs2_journal *journal;
 
-	journal = kzalloc_obj(struct ocfs2_journal, GFP_KERNEL);
+	journal = kzalloc_obj(struct ocfs2_journal);
 	if (!journal) {
 		mlog(ML_ERROR, "unable to alloc journal\n");
 		status = -ENOMEM;

@@ -491,7 +491,7 @@ static int bond_ipsec_add_sa(struct net_device *bond_dev,
 		goto out;
 	}
 
-	ipsec = kmalloc_obj(*ipsec, GFP_KERNEL);
+	ipsec = kmalloc_obj(*ipsec);
 	if (!ipsec) {
 		err = -ENOMEM;
 		goto out;
@@ -1387,7 +1387,7 @@ static inline int slave_enable_netpoll(struct slave *slave)
 	struct netpoll *np;
 	int err = 0;
 
-	np = kzalloc_obj(*np, GFP_KERNEL);
+	np = kzalloc_obj(*np);
 	err = -ENOMEM;
 	if (!np)
 		goto out;
@@ -1711,7 +1711,7 @@ static struct slave *bond_alloc_slave(struct bonding *bond,
 {
 	struct slave *slave = NULL;
 
-	slave = kzalloc_obj(*slave, GFP_KERNEL);
+	slave = kzalloc_obj(*slave);
 	if (!slave)
 		return NULL;
 
@@ -1723,8 +1723,7 @@ static struct slave *bond_alloc_slave(struct bonding *bond,
 		return NULL;
 
 	if (BOND_MODE(bond) == BOND_MODE_8023AD) {
-		SLAVE_AD_INFO(slave) = kzalloc_obj(struct ad_slave_info,
-						   GFP_KERNEL);
+		SLAVE_AD_INFO(slave) = kzalloc_obj(struct ad_slave_info);
 		if (!SLAVE_AD_INFO(slave)) {
 			kobject_put(&slave->kobj);
 			return NULL;
@@ -5097,9 +5096,8 @@ int bond_update_slave_arr(struct bonding *bond, struct slave *skipslave)
 
 	might_sleep();
 
-	usable_slaves = kzalloc_flex(*usable_slaves, arr, bond->slave_cnt,
-				     GFP_KERNEL);
-	all_slaves = kzalloc_flex(*all_slaves, arr, bond->slave_cnt, GFP_KERNEL);
+	usable_slaves = kzalloc_flex(*usable_slaves, arr, bond->slave_cnt);
+	all_slaves = kzalloc_flex(*all_slaves, arr, bond->slave_cnt);
 	if (!usable_slaves || !all_slaves) {
 		ret = -ENOMEM;
 		goto out;

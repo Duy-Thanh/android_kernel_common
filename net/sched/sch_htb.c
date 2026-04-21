@@ -1096,8 +1096,7 @@ static int htb_init(struct Qdisc *sch, struct nlattr *opt,
 
 		q->num_direct_qdiscs = dev->real_num_tx_queues;
 		q->direct_qdiscs = kzalloc_objs(*q->direct_qdiscs,
-						q->num_direct_qdiscs,
-						GFP_KERNEL);
+						q->num_direct_qdiscs);
 		if (!q->direct_qdiscs)
 			return -ENOMEM;
 	}
@@ -1845,7 +1844,7 @@ static int htb_change_class(struct Qdisc *sch, u32 classid,
 			goto failure;
 		}
 		err = -ENOBUFS;
-		cl = kzalloc_obj(*cl, GFP_KERNEL);
+		cl = kzalloc_obj(*cl);
 		if (!cl)
 			goto failure;
 

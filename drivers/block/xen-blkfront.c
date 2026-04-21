@@ -1980,7 +1980,7 @@ static int blkfront_probe(struct xenbus_device *dev,
 		}
 		kfree(type);
 	}
-	info = kzalloc_obj(*info, GFP_KERNEL);
+	info = kzalloc_obj(*info);
 	if (!info) {
 		xenbus_dev_fatal(dev, -ENOMEM, "allocating info structure");
 		return -ENOMEM;
@@ -2207,15 +2207,13 @@ static int blkfront_setup_indirect(struct blkfront_ring_info *rinfo)
 
 	for (i = 0; i < BLK_RING_SIZE(info); i++) {
 		rinfo->shadow[i].grants_used =
-			kvzalloc_objs(rinfo->shadow[i].grants_used[0], grants,
-				      GFP_KERNEL);
+			kvzalloc_objs(rinfo->shadow[i].grants_used[0], grants);
 		rinfo->shadow[i].sg = kvzalloc_objs(rinfo->shadow[i].sg[0],
-						    psegs, GFP_KERNEL);
+						    psegs);
 		if (info->max_indirect_segments)
 			rinfo->shadow[i].indirect_grants =
 				kvzalloc_objs(rinfo->shadow[i].indirect_grants[0],
-					      INDIRECT_GREFS(grants),
-					      GFP_KERNEL);
+					      INDIRECT_GREFS(grants));
 		if ((rinfo->shadow[i].grants_used == NULL) ||
 			(rinfo->shadow[i].sg == NULL) ||
 		     (info->max_indirect_segments &&

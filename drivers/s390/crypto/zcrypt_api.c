@@ -397,7 +397,7 @@ static int zcdn_create(const char *name)
 	}
 
 	/* alloc and prepare a new zcdn device */
-	zcdndev = kzalloc_obj(*zcdndev, GFP_KERNEL);
+	zcdndev = kzalloc_obj(*zcdndev);
 	if (!zcdndev) {
 		rc = -ENOMEM;
 		goto unlockout;
@@ -1065,7 +1065,7 @@ static long _zcrypt_send_ep11_cprb(u32 xflags, struct ap_perms *perms,
 	rc = -ENOMEM;
 	if (target_num != 0) {
 		if (userspace) {
-			targets = kzalloc_objs(*targets, target_num, GFP_KERNEL);
+			targets = kzalloc_objs(*targets, target_num);
 			if (!targets)
 				goto out;
 			if (copy_from_user(targets, xcrb->targets,
@@ -1628,7 +1628,7 @@ static long zcrypt_unlocked_ioctl(struct file *filp, unsigned int cmd,
 			* sizeof(struct zcrypt_device_status_ext);
 
 		device_status = kvzalloc_objs(struct zcrypt_device_status_ext,
-					      MAX_ZDEV_ENTRIES_EXT, GFP_KERNEL);
+					      MAX_ZDEV_ENTRIES_EXT);
 		if (!device_status)
 			return -ENOMEM;
 		zcrypt_device_status_mask_ext(device_status,

@@ -812,7 +812,7 @@ static int alloc_port_data(struct ib_device *device)
 	 * empty slots at the beginning.
 	 */
 	pdata_rcu = kzalloc_flex(*pdata_rcu, pdata,
-				 size_add(rdma_end_port(device), 1), GFP_KERNEL);
+				 size_add(rdma_end_port(device), 1));
 	if (!pdata_rcu)
 		return -ENOMEM;
 	/*
@@ -957,7 +957,7 @@ static int add_one_compat_dev(struct ib_device *device,
 	if (ret)
 		goto done;
 
-	cdev = kzalloc_obj(*cdev, GFP_KERNEL);
+	cdev = kzalloc_obj(*cdev);
 	if (!cdev) {
 		ret = -ENOMEM;
 		goto cdev_err;
