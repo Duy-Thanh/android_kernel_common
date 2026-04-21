@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88abaa7d_3d606005",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T14:25:16Z",
+      "side": 1,
+      "message": "nit: it is _usually_ effectively the ACPI reset, maybe almost always, but still the ACPI standard allows a platform to specify other kinds of ACPI reset in FADT.\n\nSo e.g. \"...which is usually effectively the ACPI reset, i.e. the modern recommended default.\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "8e802926_5efc87f9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "\t * PCI warm reset (0xCF9), which is usually effectively the ACPI reset,\n\t * i.e. the modern recommended default.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "deae383b_37bde098",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
