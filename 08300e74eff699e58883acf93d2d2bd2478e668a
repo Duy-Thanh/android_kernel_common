@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d14470_423db116",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65a4274c_3d6386f4",
+      "range": {
+        "startLine": 7,
+        "startChar": 33,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "280314e9_a4a21019",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "572ca356_928c831a",
+      "range": {
+        "startLine": 7,
+        "startChar": 57,
+        "endLine": 7,
+        "endChar": 64
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0ceff00_90ae8328",
@@ -88,6 +136,54 @@
         "startChar": 0,
         "endLine": 10,
         "endChar": 62
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c777b1_36f9e95a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "I have updated the description. More detailed explanations are provided in the issue.",
+      "parentUuid": "c6c3fd84_87eec3d8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f553441a_622ac832",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0ceff00_90ae8328",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 37
       },
       "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -151,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c99d8c26_b435af83",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13c84fff_1f81f73d",
+      "range": {
+        "startLine": 282,
+        "startChar": 1,
+        "endLine": 282,
+        "endChar": 11
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f88d1c7_c4d0b5b5",
@@ -164,6 +284,30 @@
       "writtenOn": "2026-04-20T19:28:13Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 319,
+        "startChar": 1,
+        "endLine": 319,
+        "endChar": 12
+      },
+      "revId": "08300e74eff699e58883acf93d2d2bd2478e668a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75433c9_2492a9fd",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-04-21T06:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f88d1c7_c4d0b5b5",
       "range": {
         "startLine": 319,
         "startChar": 1,
