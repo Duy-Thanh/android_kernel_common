@@ -16,6 +16,24 @@
       "message": "Breaks KMI so added to April 29 KMI update",
       "revId": "eaa79c24d4139aa4e6b99a3fc6ec627a8a8192e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e9f76a_d96a83d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-21T18:55:48Z",
+      "side": 1,
+      "message": "resolved",
+      "parentUuid": "d644588b_98116f01",
+      "revId": "eaa79c24d4139aa4e6b99a3fc6ec627a8a8192e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
