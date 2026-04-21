@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574804d7_8171f8c3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-21T10:44:21Z",
+      "side": 1,
+      "message": "Missing \u0027~\u0027?",
+      "range": {
+        "startLine": 246,
+        "startChar": 12,
+        "endLine": 246,
+        "endChar": 30
+      },
+      "revId": "4a8379b9bc9d836e9cde8665dec151b23a61680f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
