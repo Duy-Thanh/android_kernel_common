@@ -393,6 +393,36 @@ static void cros_ec_hwmon_probe_temp_sensors(struct device *dev, struct cros_ec_
 		priv->temp_sensor_names[i] = devm_kasprintf(dev, GFP_KERNEL, "%.*s",
 							    (int)sensor_name_size,
 							    resp.sensor_name);
+
+		if (!priv->temp_sensor_names[i])
+					continue;
+
+		// Register as Thermal Zone
+		if (IS_ENABLED(CONFIG_THERMAL)) {
+				struct cros_ec_thermal_zone_priv *tz_priv;
+				struct thermal_zone_device *tzd;
+
+				tz_priv = devm_kzalloc(dev, sizeof(*tz_priv), GFP_KERNEL);
+				if (!tz_priv) {
+						dev_warn(dev, "Failed to allocate memory for thermal zone %zu\n", i);
+						continue;
+				}
+
+				tz_priv->hwmon_priv = priv;
+				tz_priv->sensor_id = i;
+
+				tzd = devm_thermal_zone_device_register(dev,
+														priv->temp_sensor_names[i],
+														0, 0, // No trips
+														tz_priv,
+														&cros_ec_thermal_ops,
+														NULL, 0, 0);
+
+				if (IS_ERR(tzd)) {
+						dev_warn(dev, "Failed to register thermal zone for sensor %zu (%s): %pe\n",
+									i, priv->temp_sensor_names[i], tzd);
+				}
+		}
 	}
 }
 
