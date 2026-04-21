@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deae383b_37bde098",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T01:06:34Z",
+      "side": 1,
+      "message": "...or the guest VM (as per my other comment)?\n\ni.e. just \"out of VMX non-root\"? (Hmm, OTOH this panic.c is \"generic\", not VMX-specific. :) So, well, \"out of guest mode\" or whatever? :))",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a0361c_85fcda06",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T01:06:34Z",
+      "side": 1,
+      "message": "very nit: there are no empty lines between any of the above function declarations, so no need for it here either?\n\nOr, BTW, we might declare pkvm_panic() in a separate panic.h header instead, for consistency with other pKVM source files?",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269e1e77_69f6bdad",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T01:06:34Z",
+      "side": 1,
+      "message": "We should do this in the guest vmexit handler as well? (We don\u0027t know which VM the CPU has been running, the host VM or a guest VM.)\n\n...And again, `pkvm_sym` is for the host, not for the hypervisor?",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
