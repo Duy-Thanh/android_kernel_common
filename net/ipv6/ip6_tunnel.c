@@ -870,6 +870,30 @@ static int __ip6_tnl_rcv(struct ip6_tnl *tunnel, struct sk_buff *skb,
 	}
 
 	skb_reset_network_header(skb);
+<<<<<<< HEAD   (cc0ae2abdc73d5432c9a86d8576c344c68a1e29c Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE   (aed5c3b77cd53ba74f66767b03bfb9177662af4b Linux 5.10.252)
+
+	if (skb_vlan_inet_prepare(skb, true)) {
+		DEV_STATS_INC(tunnel->dev, rx_length_errors);
+		DEV_STATS_INC(tunnel->dev, rx_errors);
+		goto drop;
+	}
+
+	/* Get the outer header. */
+	ipv6h = (struct ipv6hdr *)(skb->head + nh);
+
+=======
+
+	if (!skb_vlan_inet_prepare(skb, true)) {
+		DEV_STATS_INC(tunnel->dev, rx_length_errors);
+		DEV_STATS_INC(tunnel->dev, rx_errors);
+		goto drop;
+	}
+
+	/* Get the outer header. */
+	ipv6h = (struct ipv6hdr *)(skb->head + nh);
+
+>>>>>>> BRANCH (bf80a89da97285d9b877e0c6995e870d46b8025c ASoC: soc-core: flush delayed work before removing DAIs and )
 	memset(skb->cb, 0, sizeof(struct inet6_skb_parm));
 
 	__skb_tunnel_rx(skb, tunnel->dev, tunnel->net);
