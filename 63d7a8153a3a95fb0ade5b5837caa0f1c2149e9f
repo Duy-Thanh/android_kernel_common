@@ -34,6 +34,24 @@
       "parentUuid": "a4ffed7b_2594045b",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d26739_9d509745",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T12:49:39Z",
+      "side": 1,
+      "message": "\u003e You\u0027ve asked about it in previous comment\n\nSorry, I wasn\u0027t clear enough. What I meant then: your previous version was effectively forbidding using ramoops at address 0 by pKVM (i.e. even if the host kernel allowed it), so I was just wondering whether we really need to forbid it in pKVM (we don\u0027t).\n\n...So, IMHO this comment (at least in its present form) is more confusing than useful.\n\nIt is clear why we check for non-zero size - because if size is zero, there is no ramoops?\n\nIt is also clear why we _don\u0027t_ check for non-zero address - because from pKVM perspective there is indeed nothing special about physical address 0?\n\nSo there is nothing to comment about?",
+      "parentUuid": "2264b248_05e56b2d",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
