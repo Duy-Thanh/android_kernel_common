@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9c951ca_5ea7f246",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T13:04:40Z",
+      "side": 1,
+      "message": "So if we are unlucky and pKVM crashes on a cold boot and before chromeos_pstore is loaded, pKVM will not log its crash, just because it didn\u0027t find the signature?\n\nSo just wondering: would it make sense for pKVM itself to pre-initialize this persistent buffer (i.e. write the signature, set `start` to 0 etc) in this case?\n\nAfter all, pKVM knows that this memory region is for ramoops, according to ACPI?",
+      "parentUuid": "af951681_85224ec7",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e1df961_5e4697a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1
