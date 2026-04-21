@@ -136,6 +136,24 @@
       "message": "We should do this in the guest vmexit handler as well? (We don\u0027t know which VM the CPU has been running, the host VM or a guest VM.)\n\n...And again, `pkvm_sym` is for the host, not for the hypervisor?",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9c0afe_3102ee45",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T14:42:10Z",
+      "side": 1,
+      "message": "BTW if we need to do this in the guest vmexit handler as well, we might introduce a helper (e.g. `pkvm_handle_vcpu_kick()` or `pkvm_ack_vcpu_kick()`, or just `pkvm_handle_init_signal()`, or whatever) to use in both host and guest handlers?",
+      "parentUuid": "269e1e77_69f6bdad",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
