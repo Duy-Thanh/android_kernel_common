@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11e0cfa_4d242eb5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T00:18:21Z",
+      "side": 1,
+      "message": "From what I read, the PAUSE instruction (used by `cpu_relax()`) takes around 140 cycles on modern Intel CPUs (and that is also more or less consistent with my observations from some time ago, when I was measuring and printing both the number of TSC cycles and the number of the `cpu_idle()` loop iterations). We might take that into account, to make this not so arbitrary?\n\n...That is, if we need this `pkvm_udelay()` (and that fail-safe reset with multiple fallbacks and delays between them) at all. I\u0027m not sure about that. There were reasons why Linux kernel originally implemented that (and why the delay is specifically 50us, and so on). Do we understand whether those reasons are relevant to us, now, on the hardware we care about (and thus, whether it is worth this extra code complexity, these arbitrary assumptions etc)?",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
