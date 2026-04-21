@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af951681_85224ec7",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T12:10:01Z",
+      "side": 1,
+      "message": "\u003e What I meant is: if pKVM crashes earlier than chromeos_pstore is loaded, will it successfully log its crash to ramoops or not?\n\nIt depends on whether we are performing a cold boot or a soft reset(warm reboot):\n1) On a cold boot, we will lose logs for very early crashes that happen before the host chromeos_pstore driver initializes the buffer.\n2) On a soft reset, the SIG and buffer state survive in RAM from the previous boot and since pKVM autonomously discovers addresses via ACPI, it can successfully find and append crash state which happened even on the early boot.\n\nIt is a bit inconvenient since we could lose the the early crashes of a cold boot but taking into account that platform passes reboot stress test, we are quite confident that there are no bugs at an very early stage - otherwise this stress test would not pass.\n\nBTW please also note that this is how standard non-pKVM ramoops logging works, so e.g. if we decided to delegate the crash logging to untrusted host (which we agreed that is not a good idea for multiple reason) we would end up in similar or even worse situation, because then logging would work only after chromeos_pstore is fully initialized, even for soft reset cases.\n\n\u003e Who writes this signature, and when? chromeos_pstore driver, coreboot, both?\n\nIt is written by the host ramoops subsystem (which relies on chromeos_pstore initialization) so it starts being useful after chromeos_pstore (and pstore subsystem) is initialized, or immediately after soft reset since the signatures are already initialized in RAM.",
+      "parentUuid": "2d7d80ad_8d9d1210",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e1df961_5e4697a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 1

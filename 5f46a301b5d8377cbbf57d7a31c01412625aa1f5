@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77548fa6_c57e3fe4",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T12:10:01Z",
+      "side": 1,
+      "message": "but isn\u0027t it nicer and easier to follow? - it is only two extra empty lines :)",
+      "parentUuid": "219e0f08_716e4181",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a4f2c0_3f11882a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2905faa5_ad78822e",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T12:10:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57a4f2c0_3f11882a",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44124097_09a6351d",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2026-04-20T23:25:34Z",
       "side": 1,
       "message": "nit: this is, again, just a helper, so maybe just `find_ramoops()`?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "496316e8_3eaf2872",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T12:10:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44124097_09a6351d",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
