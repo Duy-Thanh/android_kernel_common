@@ -16,6 +16,24 @@
       "message": "Do we even need to mention this? This BIOS stuff is not pKVM\u0027s business at all, right?\n\n(IOW, pKVM does not really forbid ramoops at physical address 0, since it doesn\u0027t need to; if the host kernel forbids it for some reasons, those reasons are unrelated to pKVM? Likewise, we don\u0027t validate if the pvmfw address is not 0, etc.)\n\nBTW also, in aosp/4032092 you are still needlessly checking `!pkvm_ramoops_console_pa || !pkvm_ramoops_console_size` instead of just `!pkvm_ramoops_console_size`?",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2264b248_05e56b2d",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T12:30:54Z",
+      "side": 1,
+      "message": "\u003e Do we even need to mention this? This BIOS stuff is not pKVM\u0027s business at all, right?\n\u003e \n\u003e (IOW, pKVM does not really forbid ramoops at physical address 0, since it doesn\u0027t need to; if the host kernel forbids it for some reasons, those reasons are unrelated to pKVM? Likewise, we don\u0027t validate if the pvmfw address is not 0, etc.)\n\nYou\u0027ve asked about it in previous comment so I think it may be not clear for someone else who review this code later on - having this kind of comment here to explain the logic and justify the size-only check feels safer and better for me.\n\n\u003e BTW also, in aosp/4032092 you are still needlessly checking !pkvm_ramoops_console_pa || !pkvm_ramoops_console_size instead of just !pkvm_ramoops_console_size?\n\nyeah, thanks - will improve.",
+      "parentUuid": "a4ffed7b_2594045b",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
