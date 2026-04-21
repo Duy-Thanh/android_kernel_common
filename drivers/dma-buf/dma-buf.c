@@ -664,8 +664,7 @@ void put_dmabuf_info(struct task_dma_buf_info *dmabuf_info)
 
 #define COUNT_DMABUF_FDS(file_lookup_func) ({ \
 	size_t count = 0; \
-	unsigned int max_fds = files_fdtable(current->files)->max_fds; \
-	for (unsigned int n = 0; n < max_fds; ++n) { \
+	for (unsigned int n = 0; n < files_fdtable(current->files)->max_fds; ++n) { \
 		struct file *file = file_lookup_func(current->files, n); \
 		if (file && is_dma_buf_file(file)) \
 			++count; \
@@ -698,7 +697,6 @@ int dma_buf_begin_new_exec(struct files_struct *old_files)
 	if (my_files) {
 		size_t num_dmabuf_fds, num_dmabuf_fds_check;
 		unsigned int retries = 0;
-		unsigned int max_fds;
 
 		/* Attempt to count dmabuf FDs locklessly before allocating */
 		rcu_read_lock();
@@ -727,8 +725,7 @@ retry:
 			goto retry;
 		}
 
-		max_fds = files_fdtable(my_files)->max_fds;
-		for (unsigned int n = 0; n < max_fds; n++) {
+		for (unsigned int n = 0; n < files_fdtable(my_files)->max_fds; n++) {
 			struct file *file = files_lookup_fd_locked(my_files, n);
 			int err;
 
