@@ -88,6 +88,24 @@
       "parentUuid": "93887192_20883e9c",
       "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7950aa47_c6ca5713",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T18:44:48Z",
+      "side": 1,
+      "message": "\u003e But move pkvm_udelay() to panic.c as an internal helper instead of an API function (and somehow rename it accordingly), so that this !tsc_khz fallback makes sense?\n\nAlthough I\u0027m still hesitating whether it wouldn\u0027t be better to just require non-zero tsc_khz during pKVM initialization (so that in pKVM we can just rely on it, in this and other cases, without such hacky fallbacks)...",
+      "parentUuid": "f2203337_de7efcdb",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
