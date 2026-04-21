@@ -122,6 +122,23 @@
       "parentUuid": "44124097_09a6351d",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7df5b0_50ba6f21",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T13:08:16Z",
+      "side": 1,
+      "message": "Hmm, late thought: should we also validate if the ramoops size is at least sizeof(persistent_ram_buffer) (i.e. sig + start + size)?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
