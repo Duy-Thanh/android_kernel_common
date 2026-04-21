@@ -34,6 +34,24 @@
       "parentUuid": "e11e0cfa_4d242eb5",
       "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ebde20_0862ac13",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-21T15:05:44Z",
+      "side": 1,
+      "message": "My point is that we have already this code with reset fallback, which mimics what is implemented in mainline kernel, so what is the reason of removing it if it is already here? And this is again only several lines of code so it does not increase the ToC and may be potentially useful for some other platforms?\n\nRegarding test and:\n\u003e we just hope that this fallback sequence will actually succeed in that case, since we don\u0027t know how to test that\n\nwe\u0027ve at least partially tested fallback: keyboard reset works on ADL and PTL and I\u0027ve verified it, you also tested it on your thinkpad, same with cold pci reset. Additionally this is based on mainline kernel so probably battle-proven, right?\n\nLet me put it differently: if we want to implement it and test now from scratch it would be a different story but since it is already implemented and could be useful for some other platform, why removing it as it is only several lines of code?\n\nI agree with your point regarding `pkvm_udelay` introducing new API which could be used anywhere in pKVM, but if `tsc_khz` is zero we have `WARN_ON_ONCE()` - ins\u0027t this enough warning? Maybe to make it more annoying we could do `WARN_ON()` instead. Then anyone using it with tsc_khz not initialized (I think very unlikely as you also mentioned) will be immediately warned?",
+      "parentUuid": "6c748c52_8ef122e2",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
