@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2339fa8f_e165c28d",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T18:32:53Z",
+      "side": 1,
+      "message": "I\u0027ve just tried commenting out all the above steps except this triple fault, and then, on PTL, when I\u0027m triggering a pKVM panic, it doesn\u0027t reboot, it just completely hangs.\n\nIt looks like it is not getting warm. So my guess is that this code fails to trigger a triple fault for some reason, so it enters HLT below? (And hopefully all other CPUs vmexit to pKVM and enter HLT too, thanks to the INIT before.)",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "deae383b_37bde098",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
