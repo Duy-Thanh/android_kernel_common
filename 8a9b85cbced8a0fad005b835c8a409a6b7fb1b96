@@ -52,6 +52,24 @@
       "parentUuid": "6c748c52_8ef122e2",
       "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93887192_20883e9c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-21T17:59:24Z",
+      "side": 1,
+      "message": "\u003e so what is the reason of removing it if it is already here?\n\nIt is always good to have less code than more code. :)\n\nAnd it is not merged yet, so we still have a chance to not add it. :) \n\n\u003e And this is again only several lines of code\n\nIt is not just about the number of line of codes, it is about introducing uncertainties like \"what exactly to do if TSC frequency is unknown, and why\".\n\n\u003e and may be potentially useful for some other platforms?\n\nMy point is that I doubt so. In fact we hardly support pKVM on anything much older than ADL (for various reasons, e.g.: we don\u0027t really support S3 suspend; since recently we require APICv; etc), while that sequence in the host kernel\u0027s `native_machine_emergency_restart()` AFAICS hasn\u0027t been updated since 2014, so I\u0027m not sure how relevant it is on those CPUs that we really support.\n\n\u003e we\u0027ve at least partially tested fallback: keyboard reset works on ADL and PTL and I\u0027ve verified it, you also tested it on your thinkpad, same with cold pci reset.\n\nWe\u0027ve verified each of these 3 kinds of reset on its own, but we can\u0027t verify the entire _fallback sequence_ of them, with these 50us delays between them. E.g. we can\u0027t verify that if the PCI warm reset fails for whatever reason, this 50us delay after it will be enough.\n\nBTW just for the record, the host kernel after the ACPI reset waits even 15ms, at the end of `acpi_reboot():\n\n```\n\t/*\n\t * Some platforms do not shut down immediately after writing to the\n\t * ACPI reset register, and this results in racing with the\n\t * subsequent reboot mechanism.\n\t *\n\t * The 15ms delay has been found to be long enough for the system\n\t * to reboot on the affected platforms.\n\t */\n\tmdelay(15);\n```\n\n\u003e Additionally this is based on mainline kernel so probably battle-proven, right?\n\nIt is not the same sequence as in the host kernel, it is a (rather arbitrarily) reduced version of it, right? We don\u0027t do `kb_wait()` before keyboard reset, we don\u0027t retry ACPI reset after keyboard reset (`if (attempt \u003d\u003d 0 \u0026\u0026 orig_reboot_type \u003d\u003d BOOT_ACPI)`), we only wait for 50us instead of 15ms after ACPI reset (per above), etc.\n\nAnyway, I\u0027m not entirely against implementing this reduced sequence. After all, at least it does allow to try each of these 4 (easy to implement) reset methods to stay fail-safe, with some (even if arbitrary) delay between them.\n\nWell, maybe it would be safer to change the 1st delay from 50us to 15ms, to stay closer to what the host kernel does and avoid that potential race mentioned in the above comment in `acpi_reboot()`?\n\nWait... just now I\u0027ve noticed that you do `pkvm_udelay(50000)`, not `pkvm_udelay(50)`, i.e. waiting 50ms (between all the steps), not 50us like in the host kernel in `native_machine_emergency_restart()`? Is that intentional?\n\nIf that is intentional, then I stand corrected: 50ms is \"arbitrary\" but seems long enough and safe enough, so maybe yeah, let\u0027s do that.\n\n\u003e I agree with your point regarding pkvm_udelay introducing new API which could be used anywhere in pKVM, but if tsc_khz is zero we have WARN_ON_ONCE() - ins\u0027t this enough warning?\n\nThat is not what I\u0027m talking about. My point is simply that it makes the semantics of pkvm_udelay() confusing: instead of simple \"spin-wait for the specified number of microseconds\", it is \"spin-wait for the specified number of microseconds or, if TSC frequency is unknown, spin-wait for some arbitrary amount of time\".\n\nThe comment here explains that it is \"to ensure we don\u0027t return immediately\", but doesn\u0027t explain _why_ need to ensure that (i.e. what\u0027s wrong with simply returning immediately, if this `!tsc_khz` is an abnormal condition anyway? what\u0027s the purpose of \"not returning immediately\"?).\n\nWe could add an explanation that it is specifically for that fail-safe reset use case, but then it would not be clear why that is implemented as a generic reusable API function in pkvm.c, not just an internal helper in panic.c, for example.",
+      "parentUuid": "04ebde20_0862ac13",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
