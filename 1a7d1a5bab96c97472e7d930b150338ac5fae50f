@@ -22,6 +22,30 @@
       },
       "revId": "1a7d1a5bab96c97472e7d930b150338ac5fae50f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a808eb4_d8b12109",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4635,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-22T23:19:40Z",
+      "side": 1,
+      "message": "You need to put it into some header file which your .ko file can include to use this function. Using forward declarations everywhere is fragile.",
+      "parentUuid": "4f2c316b_691c6af0",
+      "range": {
+        "startLine": 4635,
+        "startChar": 0,
+        "endLine": 4635,
+        "endChar": 88
+      },
+      "revId": "1a7d1a5bab96c97472e7d930b150338ac5fae50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
