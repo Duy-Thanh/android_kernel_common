@@ -16,6 +16,24 @@
       "message": "why do we need both of these? Why is the rvh version not sufficient?",
       "revId": "ad7f4cafae15fa9d98f5f5345d91b1c7b902cc37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13d5060_9fe2a6b4",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 4030585
+      },
+      "writtenOn": "2026-04-22T03:40:13Z",
+      "side": 1,
+      "message": "In a multi-core environment, when there are operations of plugging or unplugging cores, the vh used before our added printk hook will have issues. We need to use rvh instead, otherwise it will cause time jumps.",
+      "parentUuid": "3403cae2_2513fa01",
+      "revId": "ad7f4cafae15fa9d98f5f5345d91b1c7b902cc37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
