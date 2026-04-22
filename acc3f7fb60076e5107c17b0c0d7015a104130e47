@@ -16,6 +16,51 @@
       "message": "Just noting: so, now for `%pS` we are using pKVM\u0027s limited `scnprintf()` for both `pkvm_panic` and `pkvm_err` below, so we have a \"functional regression\": even in debug mode, pKVM will not print an actual function name+offset anymore, it will only print a raw hex instead?",
       "revId": "acc3f7fb60076e5107c17b0c0d7015a104130e47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a91a47_dba7b71b",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-22T10:36:56Z",
+      "side": 1,
+      "message": "Just noticed: double `0x`:\n\n```\n[   97.253997] pkvm [CPU6]: \n[   97.253997] \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n[   97.253997] pKVM Exception 14 @ip 0xffffffff823f5aa0 (0x0xffffffff823f5aa0), err code 0x2\n[   97.253997] \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "a7e00a23_9a21a250",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/idt.c",
+              "range": {
+                "startLine": 144,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  \"pKVM Exception %d @ip %pS (%px), err code 0x%lx\\n\"\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/idt.c",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  \"pKVM Exception %d @ip %pS (%px), no err code\\n\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "acc3f7fb60076e5107c17b0c0d7015a104130e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
