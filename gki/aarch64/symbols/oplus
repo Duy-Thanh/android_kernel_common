@@ -503,3 +503,4 @@
   rtnl_link_unregister
   snd_soc_unregister_component_by_driver
   kthread_create_worker_on_node
+  isolate_folio
