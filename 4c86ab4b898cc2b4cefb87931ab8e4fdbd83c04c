@@ -16,6 +16,24 @@
       "message": "do we need to respin?",
       "revId": "4c86ab4b898cc2b4cefb87931ab8e4fdbd83c04c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70aa31db_04072f42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-04-22T16:06:06Z",
+      "side": 1,
+      "message": "After this CL has been merged. This CL has not yet been merged. Additionally, the ACK team asked to wait until this patch has been merged in the upstream kernel.",
+      "parentUuid": "01552b85_4a5c720a",
+      "revId": "4c86ab4b898cc2b4cefb87931ab8e4fdbd83c04c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
