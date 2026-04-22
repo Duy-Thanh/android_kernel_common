@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b63efa31_81b6716e",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-22T12:02:23Z",
+      "side": 1,
+      "message": "With CONFIG_PKVM_X86_DEBUG enabled and some prints added before and after this triple fault code, the 2nd print is not printed. So it looks like it doesn\u0027t reach the HLT loop. It feels like the triple fault actually happens, it just doesn\u0027t trigger a reset.\n\nAlso I\u0027m observing the same on ADL.\n\nOTOH, I\u0027m not observing it in qemu. In qemu, it triggers \"reset\" (i.e. restart of the qemu VM), not a hangup.\n\nMaybe this PTL and ADL behavior is chromebook-specific, e.g. due to some coreboot or EC behavior. I\u0027m gonna try also on my thinkpad.\n\nActually according to the SDM, triple fault per se does not trigger a \"reset\", it only puts the CPU into a shutdown state, and then it\u0027s up to the platform whether to reset or not:\n\n\u003e If another contributory or page fault exception occurs while attempting to call the double-fault handler, the\nprocessor enters shutdown mode. This mode is similar to the state following execution of an HLT instruction. In this\nmode, the processor stops executing instructions until an NMI interrupt, SMI interrupt, hardware reset, or INIT# is\nreceived. The processor generates a special bus cycle to indicate that it has entered shutdown mode. Software\ndesigners may need to be aware of the response of hardware when it goes into shutdown mode. For example, hardware may turn on an indicator light on the front panel, generate an NMI interrupt to record diagnostic information,\ninvoke reset initialization, generate an INIT initialization, or generate an SMI. If any events are pending during\nshutdown, they will be handled after an wake event from shutdown is processed (for example, A20M# interrupts).\n\nSo probably what we are doing here is fully correct.",
+      "parentUuid": "2339fa8f_e165c28d",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "deae383b_37bde098",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
