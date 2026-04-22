@@ -52,7 +52,10 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/virtio/virtio_pci.ko",
     "drivers/virtio/virtio_pci_legacy_dev.ko",
     "drivers/virtio/virtio_pci_modern_dev.ko",
+    "fs/efivarfs/efivarfs.ko",
     "fs/netfs/netfs.ko",
+    "fs/pstore/pstore_blk.ko",
+    "fs/pstore/pstore_zone.ko",
     "kernel/kheaders.ko",
     "lib/crypto/libarc4.ko",
     "mm/zsmalloc.ko",
@@ -85,6 +88,9 @@ _COMMON_GKI_MODULES_LIST = [
     "net/tipc/tipc.ko",
     "net/tipc/tipc_diag.ko",
     "net/vmw_vsock/vmw_vsock_virtio_transport.ko",
+    "sound/pci/hda/snd-hda-codec-hdmi.ko",
+    "sound/soc/generic/snd-soc-audio-graph-card.ko",
+    "sound/soc/generic/snd-soc-simple-card-utils.ko",
 ]
 
 # Deprecated - Use `get_gki_modules_list` function instead.
@@ -97,6 +103,7 @@ _ARM_GKI_MODULES_LIST = [
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+    "arch/arm64/crypto/aes-neon-blk.ko",
     "arch/arm64/geniezone/gzvm.ko",
     "drivers/android/binder/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
