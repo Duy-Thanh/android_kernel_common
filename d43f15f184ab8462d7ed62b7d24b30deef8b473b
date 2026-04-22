@@ -160,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8f96d3_20c3f211",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-22T08:59:13Z",
+      "side": 1,
+      "message": "Per the offline discussion, it seems fine to not address this in pKVM, since, as you noted, the same applies to the host kernel: if kernel crashes early, before chromeos_pstore is loaded, it will not log its crash to ramoops. And if we (in the future) address that by making chromeos_pstore compiled-in and initializing it as early as possible (in particular, earlier than pKVM initialization), to support logging as many early crashes as possible, that would automatically provide logging early pKVM crashes as well.",
+      "parentUuid": "b9c951ca_5ea7f246",
+      "revId": "d43f15f184ab8462d7ed62b7d24b30deef8b473b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e1df961_5e4697a7",
