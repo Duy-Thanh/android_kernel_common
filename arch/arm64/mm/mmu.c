@@ -175,7 +175,17 @@ static void init_pte(pte_t *ptep, unsigned long addr, unsigned long end,
 	do {
 		pte_t old_pte = __ptep_get(ptep);
 
+<<<<<<< HEAD   (60330729e01d3e03c24b110f462b549152480181 Merge 37413d064396 ("arm64: mm: Don't remap pgtables per-con)
 		__set_pte(ptep, pfn_pte(__phys_to_pfn(phys), prot));
+||||||| BASE   (37413d064396bee54457d0d51017d716c58343fb arm64: mm: Don't remap pgtables per-cont(pte|pmd) block)
+		set_pte(ptep, pfn_pte(__phys_to_pfn(phys), prot));
+=======
+		/*
+		 * Required barriers to make this visible to the table walker
+		 * are deferred to the end of alloc_init_cont_pte().
+		 */
+		set_pte_nosync(ptep, pfn_pte(__phys_to_pfn(phys), prot));
+>>>>>>> BRANCH (6a36c8e88af795f0cf519824d88dabb6d4b94a2f arm64: mm: Batch dsb and isb when populating pgtables)
 
 		/*
 		 * After the PTE entry has been populated once, we
@@ -229,6 +239,11 @@ static void alloc_init_cont_pte(pmd_t *pmdp, unsigned long addr,
 		phys += next - addr;
 	} while (addr = next, addr != end);
 
+	/*
+	 * Note: barriers and maintenance necessary to clear the fixmap slot
+	 * ensure that all previous pgtable writes are visible to the table
+	 * walker.
+	 */
 	pte_clear_fixmap();
 }
 

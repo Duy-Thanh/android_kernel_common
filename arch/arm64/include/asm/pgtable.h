@@ -261,9 +261,20 @@ static inline pte_t pte_mkdevmap(pte_t pte)
 	return set_pte_bit(pte, __pgprot(PTE_DEVMAP | PTE_SPECIAL));
 }
 
+<<<<<<< HEAD   (60330729e01d3e03c24b110f462b549152480181 Merge 37413d064396 ("arm64: mm: Don't remap pgtables per-con)
 static inline void __set_pte(pte_t *ptep, pte_t pte)
+||||||| BASE   (37413d064396bee54457d0d51017d716c58343fb arm64: mm: Don't remap pgtables per-cont(pte|pmd) block)
+static inline void set_pte(pte_t *ptep, pte_t pte)
+=======
+static inline void set_pte_nosync(pte_t *ptep, pte_t pte)
+>>>>>>> BRANCH (6a36c8e88af795f0cf519824d88dabb6d4b94a2f arm64: mm: Batch dsb and isb when populating pgtables)
 {
 	WRITE_ONCE(*ptep, pte);
+}
+
+static inline void set_pte(pte_t *ptep, pte_t pte)
+{
+	set_pte_nosync(ptep, pte);
 
 	/*
 	 * Only if the new pte is valid and kernel, otherwise TLB maintenance
