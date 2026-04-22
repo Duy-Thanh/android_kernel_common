@@ -391,7 +391,7 @@ static void *__bpf_map_area_alloc(u64 size, int numa_node, bool mmapable)
 	/* kmalloc()'ed memory can't be mmap()'ed */
 	if (mmapable) {
 		BUG_ON(!PAGE_ALIGNED(size));
-		align = SHMLBA;
+		align = max_t(unsigned long, SHMLBA, __PAGE_SIZE);
 		flags = VM_USERMAP;
 	} else if (size <= (PAGE_SIZE << PAGE_ALLOC_COSTLY_ORDER)) {
 		area = kmalloc_node(size, gfp | GFP_USER | __GFP_NORETRY,

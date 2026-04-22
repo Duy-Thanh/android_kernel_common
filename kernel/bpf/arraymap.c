@@ -122,7 +122,7 @@ static struct bpf_map *array_map_alloc(union bpf_attr *attr)
 		 * ensure array->value is exactly page-aligned
 		 */
 		if (attr->map_flags & BPF_F_MMAPABLE) {
-			array_size = PAGE_ALIGN(array_size);
+			array_size = __PAGE_ALIGN(array_size);
 			array_size += __PAGE_ALIGN((u64) max_entries * elem_size);
 		} else {
 			array_size += (u64) max_entries * elem_size;
@@ -137,7 +137,7 @@ static struct bpf_map *array_map_alloc(union bpf_attr *attr)
 		data = bpf_map_area_mmapable_alloc(array_size, numa_node);
 		if (!data)
 			return ERR_PTR(-ENOMEM);
-		array = data + PAGE_ALIGN(sizeof(struct bpf_array))
+		array = data + __PAGE_ALIGN(sizeof(struct bpf_array))
 			- offsetof(struct bpf_array, value);
 	} else {
 		array = bpf_map_area_alloc(array_size, numa_node);
@@ -441,7 +441,7 @@ static long array_map_delete_elem(struct bpf_map *map, void *key)
 
 static void *array_map_vmalloc_addr(struct bpf_array *array)
 {
-	return (void *)round_down((unsigned long)array, PAGE_SIZE);
+	return (void *)round_down((unsigned long)array, __PAGE_SIZE);
 }
 
 static void array_map_free_internal_structs(struct bpf_map *map)
@@ -570,7 +570,7 @@ static int array_map_check_btf(const struct bpf_map *map,
 static int array_map_mmap(struct bpf_map *map, struct vm_area_struct *vma)
 {
 	struct bpf_array *array = container_of(map, struct bpf_array, map);
-	pgoff_t pgoff = PAGE_ALIGN(sizeof(*array)) >> PAGE_SHIFT;
+	pgoff_t pgoff = __PAGE_ALIGN(sizeof(*array)) >> PAGE_SHIFT;
 
 	if (!(map->map_flags & BPF_F_MMAPABLE))
 		return -EINVAL;
@@ -782,7 +782,7 @@ static u64 array_map_mem_usage(const struct bpf_map *map)
 		usage += entries * elem_size * num_possible_cpus();
 	} else {
 		if (map->map_flags & BPF_F_MMAPABLE) {
-			usage = PAGE_ALIGN(usage);
+			usage = __PAGE_ALIGN(usage);
 			usage += __PAGE_ALIGN(entries * elem_size);
 		} else {
 			usage += entries * elem_size;
