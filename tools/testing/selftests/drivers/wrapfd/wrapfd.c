@@ -262,20 +262,152 @@ static void test_wrap(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static void *check_bytes(const u8 *start, u8 value, unsigned int bytes)
+{
+	while (bytes) {
+		if (*start != value)
+			return (void *)start;
+		start++;
+		bytes--;
+	}
+	return NULL;
+}
+
+static void *memchr_inv(const void *start, int c, size_t bytes)
+{
+	u8 value = c;
+	u64 value64;
+	unsigned int words, prefix;
+
+	if (bytes <= 16)
+		return check_bytes(start, value, bytes);
+
+	value64 = value;
+	value64 |= value64 << 8;
+	value64 |= value64 << 16;
+	value64 |= value64 << 32;
+
+	prefix = (unsigned long)start % 8;
+	if (prefix) {
+		u8 *r;
+
+		prefix = 8 - prefix;
+		r = check_bytes(start, value, prefix);
+		if (r)
+			return r;
+		start += prefix;
+		bytes -= prefix;
+	}
+
+	words = bytes / 8;
+
+	while (words) {
+		if (*(u64 *)start != value64)
+			return check_bytes(start, value, 8);
+		start += 8;
+		words--;
+	}
+
+	return check_bytes(start, value, bytes % 8);
+}
+
+static int poison_region(int wrapfd, void *start, int poison, size_t bytes)
+{
+	int ret = dmabuf_sync_start(wrapfd, DMA_BUF_SYNC_WRITE);
+
+	if (ret)
+		return ret;
+
+	memset(start, poison, bytes);
+
+	return dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_WRITE);
+}
+
+static int verify_region_poison(int wrapfd, void *start, int poison, size_t bytes)
+{
+	int ret = dmabuf_sync_start(wrapfd, DMA_BUF_SYNC_READ);
+	bool poisoned;
+
+	if (ret)
+		return ret;
+
+	poisoned = memchr_inv(start, poison, bytes) == NULL;
+
+	ret = dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_READ);
+	if (ret)
+		return ret;
+
+	return poisoned ? 0 : -1;
+}
+
 static int __test_load(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_tests) *self,
 		       int wrapfd, unsigned long file_offs, unsigned long buf_offs,
 		       unsigned long len)
 {
+	const char poison = 0xaa;
 	int ret;
+	char *head_ptr = NULL;
+	unsigned long tail_len, tail_aligned_offset, tail_map_len;
+	char *tail_page_ptr = NULL;
+	char *tail_ptr = NULL;
 
 	clear_content(_metadata, self, wrapfd);
 
 	EXPECT_NE(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0)
 		return -1;
 
+	if (buf_offs) {
+		head_ptr = mmap(NULL, buf_offs, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(head_ptr, MAP_FAILED)
+			return -1;
+
+		ret = poison_region(wrapfd, head_ptr, poison, buf_offs);
+		EXPECT_EQ(ret, 0)
+			goto out_unmap_head;
+	}
+
+	if ((buf_offs + len) < self->size) {
+		tail_len = self->size - buf_offs - len;
+		tail_aligned_offset = ALIGN_DOWN(buf_offs + len, self->page_size);
+		tail_map_len = self->size - tail_aligned_offset;
+		tail_page_ptr = mmap(NULL, tail_map_len, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd,
+				     tail_aligned_offset);
+		EXPECT_NE(tail_page_ptr, MAP_FAILED) {
+			ret = -1;
+			goto out_unmap_head;
+		}
+
+		tail_ptr = tail_page_ptr + offset_in_page(buf_offs + len, self->page_size);
+		ret = poison_region(wrapfd, tail_ptr, poison, tail_len);
+		EXPECT_EQ(ret, 0)
+			goto out_unmap_tail;
+	}
+
 	ret = wrapfd_load(wrapfd, self->fd, file_offs, buf_offs, len);
 	EXPECT_EQ(ret, 0)
+		goto out_unmap_tail;
 
+	if (head_ptr) {
+		ret = verify_region_poison(wrapfd, head_ptr, poison, buf_offs);
+		EXPECT_EQ(ret, 0)
+			goto out_unmap_tail;
+	}
+
+	ret = cmp_content(_metadata, self, wrapfd, file_offs, buf_offs, len);
+	EXPECT_EQ(ret, 0)
+		goto out_unmap_tail;
+
+	if (tail_ptr) {
+		ret = verify_region_poison(wrapfd, tail_ptr, poison, tail_len);
+		EXPECT_EQ(ret, 0);
+	}
+
+out_unmap_tail:
+	if (tail_page_ptr)
+		EXPECT_EQ(munmap(tail_page_ptr, tail_map_len), 0);
+out_unmap_head:
+	if (head_ptr)
+		EXPECT_EQ(munmap(head_ptr, buf_offs), 0);
 	return ret;
 }
 
@@ -283,23 +415,19 @@ static void test_load(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
 	int wrapfd;
-	char *ptr;
 
 	/* Load the file content first */
 	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
 	ASSERT_TRUE(wrapfd >= 0);
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
 
-	/* Loading while the owner has a mapping to the buffer should work. */
-	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
-	ASSERT_NE(ptr, MAP_FAILED);
-
+	/* Test a sub-page load and ensure only the requested part was written to. */
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 0, 0, self->page_size / 2), 0);
 	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size, self->page_size,
 			      self->size - self->page_size), 0);
 	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 0, 0, self->size), 0);
 	/* TODO: test more load offsets */
 
-	ASSERT_EQ(munmap(ptr, self->size), 0);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	close(wrapfd);
 }
