@@ -22,6 +22,30 @@
       },
       "revId": "ae0dd1f442a525092acbe622594bb3b727e853c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b97a56_7e0f3f98",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-04-22T11:06:19Z",
+      "side": 1,
+      "message": "Yes, you are right. I updated the patch to use the GFP_NOIO flags.",
+      "parentUuid": "02ba9d16_8e5595ef",
+      "range": {
+        "startLine": 1044,
+        "startChar": 6,
+        "endLine": 1044,
+        "endChar": 16
+      },
+      "revId": "ae0dd1f442a525092acbe622594bb3b727e853c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
