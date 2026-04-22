@@ -2780,6 +2780,21 @@ static int __init mpls_init(void)
 out:
 	return err;
 
+<<<<<<< HEAD   (86145b666810ff5650e971711794a07de2c6c3e9 Merge 4ada013fd7da ("mmc: sdhci: fix timing selection for 1-)
+||||||| BASE   (4ada013fd7dab61405f5ee9f4c0250998650855d mmc: sdhci: fix timing selection for 1-bit bus width)
+out_unregister_rtnl:
+	rtnl_unregister_many(mpls_rtnl_msg_handlers);
+out_unregister_rtnl_af:
+	rtnl_af_unregister(&mpls_af_ops);
+	dev_remove_pack(&mpls_packet_type);
+=======
+out_unregister_rtnl:
+	rtnl_unregister_many(mpls_rtnl_msg_handlers);
+out_unregister_rtnl_af:
+	rtnl_af_unregister(&mpls_af_ops);
+	dev_remove_pack(&mpls_packet_type);
+	unregister_netdevice_notifier(&mpls_dev_notifier);
+>>>>>>> BRANCH (c09fbcd31ae6d71e7c69545839bec92d8e15c13b Linux 6.6.130)
 out_unregister_pernet:
 	unregister_pernet_subsys(&mpls_net_ops);
 	goto out;
