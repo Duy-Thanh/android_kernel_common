@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b53971_d7a0f9aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3985017
+      },
+      "writtenOn": "2026-04-22T06:21:59Z",
+      "side": 1,
+      "message": "Noticed that PLDR patch is dependent on the upstream-patch https://git.kernel.org/pub/scm/linux/kernel/git/bluetooth/bluetooth-next.git/commit/?id\u003d69050f8d6d075dc01af7a5f2f550a8067510366f , kindly pull this changes into android-kernel for the PLDR patch to apply.",
+      "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
