@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36627d99_52e1af37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-22T20:08:05Z",
+      "side": 1,
+      "message": "You are not the author of the patch.",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 49
+      },
+      "revId": "1da47b52d6aacabf7438e674163034f8710192f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13200ab8_683865f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-22T20:08:05Z",
+      "side": 1,
+      "message": "this needs a space after the `:`",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "1da47b52d6aacabf7438e674163034f8710192f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f73e3c_36b4c88a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-22T20:08:05Z",
+      "side": 1,
+      "message": "This is not the way to propose cherry-picks from follow the guidelines at: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "1da47b52d6aacabf7438e674163034f8710192f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
