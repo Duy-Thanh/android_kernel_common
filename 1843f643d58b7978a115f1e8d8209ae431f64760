@@ -16,6 +16,24 @@
       "message": "Fix formatting. Should be \"Bug: 502595737\"",
       "revId": "1843f643d58b7978a115f1e8d8209ae431f64760",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78780cfc_c9a0468b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2026-04-22T17:39:03Z",
+      "side": 1,
+      "message": "Thanks. Updated on behalf of Intel.",
+      "parentUuid": "264f3e4f_ed71e049",
+      "revId": "1843f643d58b7978a115f1e8d8209ae431f64760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
