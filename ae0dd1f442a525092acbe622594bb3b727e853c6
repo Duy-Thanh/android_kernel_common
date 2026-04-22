@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ba9d16_8e5595ef",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1044,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-04-22T04:40:52Z",
+      "side": 1,
+      "message": "Please remind me.\n\nWe used `GFP_NOWAIT` because previously slot lock was not sleepable, but now we can do `GFP_NOIO` here? (same as the rest of zs_malloc() calls), or is there some specific reason why this needs to be `GFP_NOWAIT`?",
+      "range": {
+        "startLine": 1044,
+        "startChar": 6,
+        "endLine": 1044,
+        "endChar": 16
+      },
+      "revId": "ae0dd1f442a525092acbe622594bb3b727e853c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
