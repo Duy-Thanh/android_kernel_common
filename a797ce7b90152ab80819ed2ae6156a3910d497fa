@@ -22,6 +22,30 @@
       },
       "revId": "a797ce7b90152ab80819ed2ae6156a3910d497fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b389acca_11304017",
+        "filename": "drivers/staging/android/ashmem.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-22T21:09:01Z",
+      "side": 1,
+      "message": "in this scenario, `size` is always `ASHMEM_NAME_LEN`, and `len` is capped at `ASHMEM_NAME_LEN - 1`, so that\u0027s not possible. IOW, you\u0027ll at most write `ASHMEM_NAME_LEN` bytes into the user-provided buffer.",
+      "parentUuid": "327d31c5_52f2d196",
+      "range": {
+        "startLine": 554,
+        "startChar": 8,
+        "endLine": 554,
+        "endChar": 12
+      },
+      "revId": "a797ce7b90152ab80819ed2ae6156a3910d497fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
