@@ -2091,10 +2091,16 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 		if (!get_valid_blocks(sbi, segno, true))
 			continue;
 
+<<<<<<< HEAD   (4c3ffa7571d0da1662445e8d39265d60bf80506e Merge 5d305a95130a ("net/tcp-md5: Fix MAC comparison to be c)
 		if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
 			continue;
 
 		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true, false);
+||||||| BASE   (5d305a95130a8d08b9545e47f1e18d29d59866cb net/tcp-md5: Fix MAC comparison to be constant-time)
+=======
+		do_garbage_collect(sbi, segno, &gc_list, FG_GC,
+						dry_run_sections == 0);
+>>>>>>> BRANCH (37413d064396bee54457d0d51017d716c58343fb arm64: mm: Don't remap pgtables per-cont(pte|pmd) block)
 		put_gc_inode(&gc_list);
 
 		if (!dry_run && get_valid_blocks(sbi, segno, true))
