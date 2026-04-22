@@ -16,6 +16,24 @@
       "message": "local build pass",
       "revId": "b984284c49756d2d90459f09a49c03029e1fa21a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "545ea016_1748a3da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4245205
+      },
+      "writtenOn": "2026-04-22T16:55:39Z",
+      "side": 1,
+      "message": "boot complete",
+      "parentUuid": "3d1ea59d_8925f7e6",
+      "revId": "b984284c49756d2d90459f09a49c03029e1fa21a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
