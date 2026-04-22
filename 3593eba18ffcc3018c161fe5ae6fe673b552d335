@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de8a8304_71e5639c",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-22T09:15:04Z",
+      "side": 1,
+      "message": "\u003e [...] Perhaps a simplified version of it, for example if we only care about the ACPI_ADR_SPACE_SYSTEM_IO case, it would be basically just outb(reset_value, reset_register)?\n\nPer offline discussion, now I\u0027m not sure that would make a lot of sense. We are not aware of any specific real platforms on which the ACPI reset would be different from outb(0x06, 0xcf9), thus it seems we have no reason to assume that ACPI_ADR_SPACE_SYSTEM_IO would be more likely than ACPI_ADR_SPACE_SYSTEM_MEMORY or ACPI_ADR_SPACE_PCI_CONFIG on such platforms.\n\nIOW, it makes sense to either fully support generic ACPI reset (i.e. all 3 cases), or just hardcode outb(0x06, 0xcf9) as you already do. The former might not be hard, but since the latter is even simpler and fully covers our needs (and possibly any other real platforms\u0027 needs as well), maybe let\u0027s just do that.",
+      "parentUuid": "f5851815_1e747243",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "998b2086_e72a849d",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
