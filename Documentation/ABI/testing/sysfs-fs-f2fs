@@ -936,6 +936,11 @@ Contact:	"Chao Yu" <chao@kernel.org>
 Description:	It can be used to tune priority of f2fs critical task, e.g. f2fs_ckpt, f2fs_gc
 		threads, limitation as below:
 		- it requires user has CAP_SYS_NICE capability.
+<<<<<<< PATCH SET (9534fd2d9346cd1946e18981ba0bf2b2a2059ce0 UPSTREAM: f2fs: doc: fix the wrong description for critical_)
+		- the range is [100, 139], by default the value is 120.
+||||||| BASE      (2b5e96d68fe911755b8ae2865228f6f2debcd57a UPSTREAM: f2fs: Split f2fs_write_end_io())
+		- the range is [100, 139], by default the value is 100.
+=======
 		- the range is [100, 139], by default the value is 100.
 
 What:		/sys/fs/f2fs/<disk>/pinned_area_max_secno
@@ -944,3 +949,4 @@ Contact:	"Daeho Jeong" <daehojeong@google.com>
 Description:	This is a read-only entry to show the upper bound section number
 		for pinned files. Pinned files will only be allocated within
 		sections 0 to pinned_area_max_secno - 1.
+>>>>>>> BASE      (8415b277a60cbaf120110ef6718efd25f8dd47d5 UPSTREAM: f2fs: Split f2fs_write_end_io())
