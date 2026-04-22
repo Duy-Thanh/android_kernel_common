@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2c316b_691c6af0",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4635,
+      "author": {
+        "id": 4532726
+      },
+      "writtenOn": "2026-04-22T07:02:33Z",
+      "side": 1,
+      "message": "Fixed compilation issues\n error: no previous prototype for function \u0027isolate_folio\u0027 [-Werror,-Wmissing-prototypes]",
+      "range": {
+        "startLine": 4635,
+        "startChar": 0,
+        "endLine": 4635,
+        "endChar": 88
+      },
+      "revId": "1a7d1a5bab96c97472e7d930b150338ac5fae50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
