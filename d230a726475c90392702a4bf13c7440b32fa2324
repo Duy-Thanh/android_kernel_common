@@ -16,6 +16,23 @@
       "message": "Overriding lint on this since the fix is from -lts branch",
       "revId": "d230a726475c90392702a4bf13c7440b32fa2324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4cdcf2_bb8d2ef8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2020955
+      },
+      "writtenOn": "2026-04-22T21:50:39Z",
+      "side": 1,
+      "message": "Respin Bug: b/505386475",
+      "revId": "d230a726475c90392702a4bf13c7440b32fa2324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
