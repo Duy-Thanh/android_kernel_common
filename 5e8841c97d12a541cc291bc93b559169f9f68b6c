@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a38c0a6_8c6a1497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-04-22T21:57:10Z",
+      "side": 1,
+      "message": "I think this using this approach is tolerable for a backport, but I think a couple changes are missing:\n\n* neon_poly1305_update() in arch/arm64/crypto/poly1305-glue.c needs to be updated to put the kernel_neon_begin() and kernel_neon_end() in the same scope\n\n* The fixes for increased stack usage are missing: a9a8b1a383254c9f4ed7fe23b56937f8ad3ad3ab, 6f7d9481920e1bc06ff21c1e6a84fdea49c6ec3d,  and 652a3017c485937cdb0706aa54f9dc74312c97a7",
+      "revId": "5e8841c97d12a541cc291bc93b559169f9f68b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
