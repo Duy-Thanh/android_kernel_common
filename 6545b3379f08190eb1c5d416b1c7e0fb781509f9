@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ac92b0_e229e24c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-22T09:28:27Z",
+      "side": 1,
+      "message": "Seems the IOMMU driver also have the similar function to refill the pKVM\u0027s memcache from the host\u0027s memcache. Seems `admit_host_domain_page` and `refill_domain_memcache` can leverage the `admit_host_page` and `refill_memcache`?",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
