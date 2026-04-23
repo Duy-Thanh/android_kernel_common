@@ -106,6 +106,24 @@
       "parentUuid": "f2203337_de7efcdb",
       "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2f15f5_42675e96",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:41:41Z",
+      "side": 1,
+      "message": "Ok: I\u0027ve introduced aosp/4045933 to check for non-zero tsc_khz during pKVM initialization, removed the pkvm_udelay fallback and keep the fallback reset sequence as we agree (relevant for the next patch).",
+      "parentUuid": "7950aa47_c6ca5713",
+      "revId": "8a9b85cbced8a0fad005b835c8a409a6b7fb1b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
