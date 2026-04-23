@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be84ee5_3b53d41e",
+        "filename": "rust/helpers/compat.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-23T17:07:19Z",
+      "side": 1,
+      "message": "I might wrap this in `#ifdef CONFIG_COMPAT` too.",
+      "revId": "250fcc256caa4c6ca563d1a4957946daf2877b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
