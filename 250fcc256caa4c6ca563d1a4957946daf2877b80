@@ -34,6 +34,24 @@
       "parentUuid": "1be84ee5_3b53d41e",
       "revId": "250fcc256caa4c6ca563d1a4957946daf2877b80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d697da1_58df0b10",
+        "filename": "rust/helpers/compat.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:25:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64b9c2c7_a6d0c715",
+      "revId": "250fcc256caa4c6ca563d1a4957946daf2877b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
