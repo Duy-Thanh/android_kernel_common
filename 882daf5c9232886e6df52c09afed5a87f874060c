@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11d081be_4841c58e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-23T05:28:00Z",
+      "side": 1,
+      "message": "A compiling issue I observed with this patch is the objtool errors like below when using clang:\n```\n  arch/x86/kvm/pkvm/page_alloc.pkvm.o: error: objtool: pkvm_get_page() falls through to next function pkvm_alloc_pages()\n  arch/x86/kvm/pkvm/page_alloc.pkvm.o: error: objtool: pkvm_alloc_pages() falls through to next function pkvm_pool_init()\n  arch/x86/kvm/pkvm/page_alloc.pkvm.o: error: objtool: pkvm_pool_init(): unexpected end of section .text\n  make[6]: *** [../arch/x86/kvm/pkvm/Makefile:101: arch/x86/kvm/pkvm/page_alloc.pkvm.o] Error 1\n  make[6]: *** Deleting file \u0027arch/x86/kvm/pkvm/page_alloc.pkvm.o\u0027\n  make[6]: *** Waiting for unfinished jobs....\n```\n\nChat with AI, the fix suggestion is to add `pkvm_bug_panic` and `pkvm_panic` to `tools/objtool/noreturns.h` as these two functions are annotated with `__noreturn`. This can resolve this compiling issue for me.",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88abaa7d_3d606005",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
