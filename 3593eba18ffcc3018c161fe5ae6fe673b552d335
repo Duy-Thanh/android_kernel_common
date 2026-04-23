@@ -230,6 +230,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4869666_4629c90f",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Ok, so I think we agree to keep going with current reset sequence and not introduce generic ACPI reset (all 3 cases). So I am resolving this comment.",
+      "parentUuid": "de8a8304_71e5639c",
+      "revId": "3593eba18ffcc3018c161fe5ae6fe673b552d335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "998b2086_e72a849d",

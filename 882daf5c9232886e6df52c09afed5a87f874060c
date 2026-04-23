@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "470a00c9_5ea8103a",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88abaa7d_3d606005",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2339fa8f_e165c28d",
@@ -90,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9902871b_c1e2f312",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Cool - thanks for checking all of that.",
+      "parentUuid": "b63efa31_81b6716e",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "deae383b_37bde098",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
@@ -101,6 +137,24 @@
       "writtenOn": "2026-04-21T01:06:34Z",
       "side": 1,
       "message": "...or the guest VM (as per my other comment)?\n\ni.e. just \"out of VMX non-root\"? (Hmm, OTOH this panic.c is \"generic\", not VMX-specific. :) So, well, \"out of guest mode\" or whatever? :))",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dcfc14e_2fe1461b",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "deae383b_37bde098",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -122,6 +176,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e6312e_9ea4f644",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Actually I liked your other suggestion to make `pkvm_panic` variadic function, which takes care of formatting. So I\u0027ve introduced it and it allow me remove this helper and simplify things.",
+      "parentUuid": "3c11e653_14aa81e7",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a447ef6c_d313e7ac",
@@ -135,6 +207,24 @@
       "writtenOn": "2026-04-21T12:36:29Z",
       "side": 1,
       "message": "Just a thought: since we have `vscnprintf()`, not just `scnprintf()`, we may take advantage of that and make `pkvm_panic()` itself a variadic function, which itself takes care of formatting the buffer?\n\nIt seems that would also allow to do that after checking `pkvm_panic_in_progress`, not before, and thus allow to make `panic_msg` static, like I suggested in another comment?",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1318618c_84d1bd29",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Good idea - I\u0027ve re-miplemented it that way.",
+      "parentUuid": "a447ef6c_d313e7ac",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -156,6 +246,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "179fa376_2147ab05",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Good point",
+      "parentUuid": "8f8b0a2b_54412def",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59a0361c_85fcda06",
@@ -169,6 +277,24 @@
       "writtenOn": "2026-04-21T01:06:34Z",
       "side": 1,
       "message": "very nit: there are no empty lines between any of the above function declarations, so no need for it here either?\n\nOr, BTW, we might declare pkvm_panic() in a separate panic.h header instead, for consistency with other pKVM source files?",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6d32ef_c4ec5c71",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Agree: I\u0027ve introduced panic.h.",
+      "parentUuid": "59a0361c_85fcda06",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -204,6 +330,24 @@
       "side": 1,
       "message": "BTW if we need to do this in the guest vmexit handler as well, we might introduce a helper (e.g. `pkvm_handle_vcpu_kick()` or `pkvm_ack_vcpu_kick()`, or just `pkvm_handle_init_signal()`, or whatever) to use in both host and guest handlers?",
       "parentUuid": "269e1e77_69f6bdad",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8860417d_e440d075",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:07:41Z",
+      "side": 1,
+      "message": "Acknowledged. I mean the whole idea was to pull out Host VM so it will not interfere with ramoops writing but pulling out other guest also makes sense for non-ramoops related reason. BTW keeping this one open till I validate it a bit more.",
+      "parentUuid": "6b9c0afe_3102ee45",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
