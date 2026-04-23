@@ -97,6 +97,24 @@
       "parentUuid": "02a91a47_dba7b71b",
       "revId": "acc3f7fb60076e5107c17b0c0d7015a104130e47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1113c2_89cde3ff",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T18:25:45Z",
+      "side": 1,
+      "message": "\u003e Do you think we should restore this functionality in some nice way?\n\nIf it is possible to implement in some simple clean way, surely it would be nice. But it is not a blocker for merging this series, I think.",
+      "parentUuid": "ea865b91_2ca7d94b",
+      "revId": "acc3f7fb60076e5107c17b0c0d7015a104130e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
