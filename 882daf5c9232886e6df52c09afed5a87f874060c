@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33f4e55c_9499be61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T21:32:18Z",
+      "side": 1,
+      "message": "Interesting - I did not saw it even on Android build which uses LLVM - I wonder how this could be reproduced. I\u0027ve also tried with `make LLVM\u003d1 CC\u003dclang-19` (and some other combinations) and I didn\u0027t encounter any issue with that. AI suggests that it may be reproduicalbe with some older clang version e.g. clang-14 which instead of terminating noreturn function with ` ud2` (as clang-19 does) instead does not terminate with anything (stops generating asembly code) and then objtool reads the binary, follows the control flow to pkvm_get_page(), sees it call pkvm_panic(), and then sees the assembly just stop without a trap.\n\nIf that is the case and this could be only reproducible with some old clang version perhaps it is not worth polluting tools/objtool/noreturns.h. I am not sure, WDYT? @chuanxiao.dong@intel.corp-partner.google.com @dmaluka@google.com?",
+      "parentUuid": "11d081be_4841c58e",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88abaa7d_3d606005",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
