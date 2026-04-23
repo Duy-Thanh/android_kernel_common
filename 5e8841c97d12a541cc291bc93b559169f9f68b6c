@@ -34,6 +34,24 @@
       "parentUuid": "4a38c0a6_8c6a1497",
       "revId": "5e8841c97d12a541cc291bc93b559169f9f68b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "513d2088_5c100827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-04-23T18:13:29Z",
+      "side": 1,
+      "message": "Thanks.  I see these had to diverge quite a bit from the upstream commits.  Perhaps it would be easier to backport arm64 support for `scoped_ksimd()` itself?  I assume you didn\u0027t do that already because the upstream code doesn\u0027t support direct access to `kernel_neon_begin()` and `kernel_neon_end()` anymore, i.e. *all* callers of them had to be converted to `scoped_ksimd()`.  However, for the backport, we could actually support both ways.  The `ksimd` lock guard would just call the underscored functions `__kernel_neon_begin(_T-\u003elock)` and `__kernel_neon_end(_T-\u003elock)`, which are the equivalent of the non-underscored functions upstream.  With that, we\u0027d be able to backport arm64 code that uses `scoped_ksimd()` as-is, while still being able to keep code that doesn\u0027t use it.",
+      "parentUuid": "01792348_a3b910aa",
+      "revId": "5e8841c97d12a541cc291bc93b559169f9f68b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
