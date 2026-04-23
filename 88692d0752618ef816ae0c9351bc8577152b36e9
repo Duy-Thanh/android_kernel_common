@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f816d39_1f8d8098",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-23T16:01:43Z",
+      "side": 1,
+      "message": "not in alphabetical order (\"vh_skip\" should be after \"vh_sk_\")",
+      "revId": "88692d0752618ef816ae0c9351bc8577152b36e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
