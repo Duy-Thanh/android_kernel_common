@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85fc7af5_6a8f9def",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:40:47Z",
+      "side": 1,
+      "message": "\u003e It would be useful to print also which exception? Like we do in default_exception_handler() in debug mode?\n\u003e\n\u003e BTW shall we consolidate that logic for debug mode in default_exception_handler() with this logic for ramoops here? I.e. print the same message both to dmesg via printk() if debug mode is enabled, and to ramoops if ramoops is available, and do both those things here in pkvm_hyp_panic()?\n\nGood idea - I\u0027ve also reorganized this code a bit to make it more readable and cleaner.\n\n\u003e BTW it would be nice to print function name+offset in addition to just the RIP value, like default_exception_handler() in debug mode currently does via leveraging the host kernel printk\u0027s %pS. I\u0027m wondering how difficult that would be to implement...\n\nThis was my idea at the begining but it is not so easy for non-debug builds while it is relatively easy for debug builds. It is because to get %pS work host kernel uses kallsym which is not available for pKVM",
+      "parentUuid": "e9cca729_fe744569",
+      "revId": "752938063494b2cc0732c6fd9d471c89afbf6889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2152d6a2_4655baaa",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2026-04-20T17:15:28Z",
       "side": 1,
       "message": "`pkvm_sym` is for the host, not for the hypervisor (as I noted also in aosp/4032090)?",
+      "revId": "752938063494b2cc0732c6fd9d471c89afbf6889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dc668e_92163c0b",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T10:40:47Z",
+      "side": 1,
+      "message": "Yeah, it is harmless for hyp and does nothing but indeed it is not needed.",
+      "parentUuid": "2152d6a2_4655baaa",
       "revId": "752938063494b2cc0732c6fd9d471c89afbf6889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
