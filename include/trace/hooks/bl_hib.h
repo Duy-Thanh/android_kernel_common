@@ -22,8 +22,16 @@ DECLARE_HOOK(android_vh_save_hib_resume_bdev,
 	TP_ARGS(hib_resume_bdev));
 
 DECLARE_HOOK(android_vh_encrypt_page,
-	TP_PROTO(void *buf),
-	TP_ARGS(buf));
+	TP_PROTO(void *buf, sector_t sector),
+	TP_ARGS(buf, sector));
+
+DECLARE_HOOK(android_vh_decrypt_page,
+	TP_PROTO(void *page_addr, sector_t sector),
+	TP_ARGS(page_addr, sector));
+
+DECLARE_HOOK(android_vh_store_auth_slot_num,
+	TP_PROTO(uint32_t *auth_slot),
+	TP_ARGS(auth_slot));
 
 DECLARE_HOOK(android_vh_init_aes_encrypt,
 	TP_PROTO(void *unused),

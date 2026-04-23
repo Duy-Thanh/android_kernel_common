@@ -34,6 +34,7 @@
 
 #include "power.h"
 
+#define AUTH_SLOT	0
 #define HIBERNATE_SIG	"S1SUSPEND"
 
 /*
@@ -223,6 +224,9 @@ int swsusp_swap_in_use(void)
 static unsigned short root_swap = 0xffff;
 static struct block_device *hib_resume_bdev;
 
+uint32_t swap_auth_slot_offset;
+EXPORT_SYMBOL_GPL(swap_auth_slot_offset);
+
 struct hib_bio_batch {
 	atomic_t		count;
 	wait_queue_head_t	wait;
@@ -253,6 +257,9 @@ static void hib_end_io(struct bio *bio)
 			 MAJOR(bio_dev(bio)), MINOR(bio_dev(bio)),
 			 (unsigned long long)bio->bi_iter.bi_sector);
 	}
+
+	if (bio_data_dir(bio) == READ)
+		trace_android_vh_decrypt_page(page_to_virt(page), bio->bi_iter.bi_sector);
 
 	if (bio_data_dir(bio) == WRITE)
 		put_page(page);
@@ -317,6 +324,7 @@ static int hib_wait_io(struct hib_bio_batch *hb)
 static int mark_swapfiles(struct swap_map_handle *handle, unsigned int flags)
 {
 	int error;
+	uint32_t auth_slot = 0;
 
 	hib_submit_io(REQ_OP_READ, 0, swsusp_resume_block,
 		      swsusp_header, NULL);
@@ -326,6 +334,8 @@ static int mark_swapfiles(struct swap_map_handle *handle, unsigned int flags)
 		memcpy(swsusp_header->sig, HIBERNATE_SIG, 10);
 		swsusp_header->image = handle->first_sector;
 		swsusp_header->flags = flags;
+		trace_android_vh_store_auth_slot_num(&auth_slot);
+		((uint32_t *)(swsusp_header->reserved))[AUTH_SLOT] = auth_slot;
 		if (flags & SF_CRC32_MODE)
 			swsusp_header->crc32 = handle->crc32;
 		error = hib_submit_io(REQ_OP_WRITE, REQ_SYNC,
@@ -370,6 +380,8 @@ static int swsusp_swap_check(void)
 	res = set_blocksize(hib_resume_bdev, PAGE_SIZE);
 	if (res < 0)
 		blkdev_put(hib_resume_bdev, FMODE_WRITE);
+	else
+		trace_android_vh_save_hib_resume_bdev(hib_resume_bdev->bd_dev);
 
 	return res;
 }
@@ -463,6 +475,9 @@ static int swap_write_page(struct swap_map_handle *handle, void *buf,
 	if (!handle->cur)
 		return -EINVAL;
 	offset = alloc_swapdev_block(root_swap);
+	if (hb)
+		trace_android_vh_encrypt_page(buf, offset * (PAGE_SIZE >> 9));
+
 	error = write_page(buf, offset, hb);
 	if (error)
 		return error;
@@ -577,7 +592,6 @@ static int save_image(struct swap_map_handle *handle,
 		ret = snapshot_read_next(snapshot);
 		if (ret <= 0)
 			break;
-		trace_android_vh_encrypt_page(data_of(*snapshot));
 		ret = swap_write_page(handle, data_of(*snapshot), &hb);
 		if (ret)
 			break;
@@ -594,7 +608,6 @@ static int save_image(struct swap_map_handle *handle,
 	if (!ret)
 		pr_info("Image saving done\n");
 	swsusp_show_speed(start, stop, nr_to_write, "Wrote");
-	trace_android_vh_post_image_save(root_swap);
 	return ret;
 }
 
@@ -985,6 +998,8 @@ int swsusp_write(unsigned int flags)
 		error = (flags & SF_NOCOMPRESS_MODE) ?
 			save_image(&handle, &snapshot, pages - 1) :
 			save_compressed_image(&handle, &snapshot, pages - 1);
+		if (!error)
+			trace_android_vh_post_image_save(root_swap);
 	}
 out_finish:
 	error = swap_writer_finish(&handle, flags, error);
@@ -1585,6 +1600,8 @@ int swsusp_check(void)
 		set_blocksize(hib_resume_bdev, PAGE_SIZE);
 		trace_android_vh_save_hib_resume_bdev(hib_resume_bdev->bd_dev);
 		clear_page(swsusp_header);
+		swsusp_header = (struct swsusp_header *)__get_free_page(GFP_NOIO | __GFP_NOWARN |
+                                                __GFP_NORETRY);
 		error = hib_submit_io(REQ_OP_READ, 0,
 					swsusp_resume_block,
 					swsusp_header, NULL);
@@ -1594,6 +1611,7 @@ int swsusp_check(void)
 		if (!memcmp(HIBERNATE_SIG, swsusp_header->sig, 10)) {
 			memcpy(swsusp_header->sig, swsusp_header->orig_sig, 10);
 			swsusp_header_flags = swsusp_header->flags;
+			swap_auth_slot_offset =  ((uint32_t *)(swsusp_header->reserved))[AUTH_SLOT];
 			/* Reset swap signature now */
 			error = hib_submit_io(REQ_OP_WRITE, REQ_SYNC,
 						swsusp_resume_block,
