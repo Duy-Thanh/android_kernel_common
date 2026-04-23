@@ -22,6 +22,30 @@
       },
       "revId": "0a759dbcdfeda418f4fcab9a30015c9db466ab8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a575928_08a1a83d",
+        "filename": "drivers/staging/android/ashmem.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:03:19Z",
+      "side": 1,
+      "message": "Done, also guarded `compat_writer()` with `CONFIG_COMPAT`.",
+      "parentUuid": "33b8ae40_1121566d",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 13
+      },
+      "revId": "0a759dbcdfeda418f4fcab9a30015c9db466ab8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
