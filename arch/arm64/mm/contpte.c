@@ -279,6 +279,15 @@ retry:
 			break;
 		}
 
+
+				if (pte_young(pte)) {
+					orig_pte = pte_mkyoung(orig_pte);
+					break;
+				}
+			}
+			break;
+		}
+
 		if (pte_young(pte)) {
 			orig_pte = pte_mkyoung(orig_pte);
 			i++;
