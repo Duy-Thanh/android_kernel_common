@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "096b9bbd_a109ced3",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:36:12Z",
+      "side": 1,
+      "message": "Yes not consistent but still better, right? I mean I can remove it to be consistent with the other variable declarations if you insist but I think it is better as is.",
+      "parentUuid": "df105118_182b7b43",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a4f2c0_3f11882a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "57a4f2c0_3f11882a",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad518f33_77b5e425",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2905faa5_ad78822e",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +156,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "44124097_09a6351d",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f87e57_c30e4a32",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "496316e8_3eaf2872",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -188,6 +242,24 @@
       "writtenOn": "2026-04-21T13:08:16Z",
       "side": 1,
       "message": "Hmm, late thought: should we also validate if the ramoops size is at least sizeof(persistent_ram_buffer) (i.e. sig + start + size)?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e54655_fd6bcae5",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:36:12Z",
+      "side": 1,
+      "message": "On L1452 we already check `if (ramoops_size \u003e\u003d GOOG9999_RAMOOPS_NON_DMESG_SIZE) {` which should be sufficient.",
+      "parentUuid": "3d7df5b0_50ba6f21",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
