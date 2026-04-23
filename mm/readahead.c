@@ -374,8 +374,13 @@ void force_page_cache_ra(struct readahead_control *ractl,
 	struct file_ra_state *ra = ractl->ra;
 	struct backing_dev_info *bdi = inode_to_bdi(mapping->host);
 	unsigned long max_pages;
+	bool ra_done = false;
 
 	if (unlikely(!mapping->a_ops->read_folio && !mapping->a_ops->readahead))
+		return;
+
+	trace_android_rvh_customize_force_ra(ractl, nr_to_read, &ra_done);
+	if (ra_done)
 		return;
 
 	/*
@@ -676,6 +681,7 @@ void page_cache_sync_ra(struct readahead_control *ractl,
 readit:
 	ra_mmap_miss->order = 0;
 	ractl->_index = ra->start;
+	trace_android_vh_customize_ractl(ractl, ra, NULL, false);
 	page_cache_ra_order(ractl, ra);
 }
 EXPORT_SYMBOL_GPL(page_cache_sync_ra);
@@ -748,6 +754,7 @@ readit:
 		ra->size -= end - aligned_end;
 	ra->async_size = ra->size;
 	ractl->_index = ra->start;
+	trace_android_vh_customize_ractl(ractl, ra, NULL, true);
 	page_cache_ra_order(ractl, ra);
 }
 EXPORT_SYMBOL_GPL(page_cache_async_ra);
