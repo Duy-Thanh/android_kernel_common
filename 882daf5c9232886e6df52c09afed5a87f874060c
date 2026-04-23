@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3540701_e919d60a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T23:50:20Z",
+      "side": 1,
+      "message": "But it looks like kernel actually defines a (permanently temporary) rule that all __noreturn functions should be manually listed in `tools/objtool/noreturns.h` (at least on architectures that use objtool, I guess)? I\u0027m not an objtool expert, but this is what the comment in `tools/objtool/noreturns.h` says:\n\n```\n/*\n * This is a (sorted!) list of all known __noreturn functions in the kernel.\n * It\u0027s needed for objtool to properly reverse-engineer the control flow graph.\n *\n * Yes, this is unfortunate.  A better solution is in the works.\n */\n```\n\nAlso in `tools/objtool/Documentation/objtool.txt`:\n\u003e A noreturn function must be marked __noreturn in both its\n   declaration and its definition, and must have a NORETURN() annotation\n   in tools/objtool/noreturns.h.",
+      "parentUuid": "33f4e55c_9499be61",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88abaa7d_3d606005",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
