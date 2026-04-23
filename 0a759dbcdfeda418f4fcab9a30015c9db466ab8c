@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b8ae40_1121566d",
+        "filename": "drivers/staging/android/ashmem.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-04-23T14:08:59Z",
+      "side": 1,
+      "message": "This should probably be moved to `compat_ioctl` below.",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 13
+      },
+      "revId": "0a759dbcdfeda418f4fcab9a30015c9db466ab8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
