@@ -105,6 +105,24 @@
       "parentUuid": "aa1758ce_bbdc2e53",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff458828_4aa43040",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T15:04:22Z",
+      "side": 1,
+      "message": "Quick thought: if this (unlikely) problem ever occurs in practice, we will rather notice that (since `pkvm_hyp_mmu_map()` will fail, so pKVM initialization will fail, and that will rather happen deterministically, on each boot), and then we will address that. Until then, we don\u0027t need to worry about that, so we might just leave this as is?\n\n\u003e Actually I think that both pvmfw and ramoops should not be bigger than 4MB\n\nAndroid-specific assumption. :)",
+      "parentUuid": "c765e069_b506c4d0",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
