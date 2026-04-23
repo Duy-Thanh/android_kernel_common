@@ -52,6 +52,23 @@
       "parentUuid": "2264b248_05e56b2d",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1758ce_bbdc2e53",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-23T02:51:12Z",
+      "side": 1,
+      "message": "Just a note: The `pkvm_hyp_mmu_map` function consumes hyp_mmu page table pages, with the number calculated by `pkvm_hyp_pgtable_pages`. However, `pkvm_hyp_pgtable_pages` only calculates the number of pages needed to map blocks in the `pkvm_memory[]` array to the direct mapping address space and doesn\u0027t account for other mappings, such as additional ramoops. This could lead to failures due to insufficient page table pages(although this may not happen as `pkvm_hyp_pgtable_pages` actually counts more than required)?\n\nIf so, seems this isn\u0027t the first instance of this risk. We previously mapped pkvm\u0027s TEXT/DATA to the kernel symbol address space, pkvm_pages to the pkvm_memmap address space, and pvmfw to the direct mapping address space. We can address the TEXT/DATA and pkvm_pages by easily calculating the required page table pages in `pkvm_hyp_pgtable_pages`, as their sizes can be determined when reserving memory before deprivilege. However, the sizes for ramoops and pvmfw are not fixed: the ramoops size is determined according to different backends(for GOOG9999, the size is fixed, but not fixed for others, e.g,. command line option), and the pvmfw size, even more problematic, is determined when creating a pVM. Then seems a simple way to address this is just to let `pkvm_hyp_pgtable_pages` count more page table pages, e.g., additional 1GB memory size?",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
