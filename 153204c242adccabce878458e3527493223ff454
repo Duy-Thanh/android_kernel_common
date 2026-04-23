@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20ae194_d9726481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-23T12:43:15Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCheckPatch: WARNING:TYPO_SPELLING: \u0027existance\u0027 may be misspelled - perhaps \u0027existence\u0027?\n\nWARNING:TYPO_SPELLING: \u0027existance\u0027 may be misspelled - perhaps \u0027existence\u0027?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "153204c242adccabce878458e3527493223ff454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e723c6_0b75512d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-23T12:43:15Z",
+      "side": 1,
+      "message": "Upstream first?",
+      "revId": "153204c242adccabce878458e3527493223ff454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
