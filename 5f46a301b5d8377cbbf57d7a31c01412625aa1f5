@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19f3ffe3_75f3b6ce",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T11:14:46Z",
+      "side": 1,
+      "message": "ok, I think this is a good idea, perhaps better name is `acpi_find_cros_ramoops`?",
+      "parentUuid": "cae37f80_940ff675",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be454c67_e73b59f1",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
@@ -214,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c6ead16_0342f276",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T11:14:46Z",
+      "side": 1,
+      "message": "agree, maybe I will use `update_cros_ramoops_console_info`",
+      "parentUuid": "be454c67_e73b59f1",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a113b7b_e2830c96",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
@@ -225,6 +261,24 @@
       "writtenOn": "2026-04-23T01:55:02Z",
       "side": 1,
       "message": "As seems the pkvm_ramoops_init() and the other related functions are not vmx specific, maybe it is more suitable for putting them in arch/x86/kvm/pkvm.c?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8816ba20_5b11381b",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T11:14:46Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "7a113b7b_e2830c96",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
