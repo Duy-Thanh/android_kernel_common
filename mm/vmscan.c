@@ -5631,10 +5631,16 @@ static bool try_to_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 
 	while (true) {
 		int delta;
+		bool bypass = false;
 
 		nr_to_scan = get_nr_to_scan(lruvec, sc, swappiness);
 		if (nr_to_scan <= 0)
 			break;
+
+		trace_android_rvh_mglru_shrink_spec_lru(lruvec, sc, swappiness,
+						        nr_to_scan, &scanned, &bypass);
+		if (bypass)
+			goto check_abort;
 
 		delta = evict_folios(lruvec, sc, swappiness);
 		if (!delta)
@@ -5643,7 +5649,7 @@ static bool try_to_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 		scanned += delta;
 		if (scanned >= nr_to_scan)
 			break;
-
+check_abort:
 		if (should_abort_scan(lruvec, sc))
 			break;
 
