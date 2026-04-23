@@ -510,6 +510,7 @@ int kvm_vgic_inject_irq(struct kvm *kvm, struct kvm_vcpu *vcpu,
 
 	return 0;
 }
+EXPORT_SYMBOL(kvm_vgic_inject_irq);
 
 /* @irq->irq_lock must be held */
 static int kvm_vgic_map_irq(struct kvm_vcpu *vcpu, struct vgic_irq *irq,

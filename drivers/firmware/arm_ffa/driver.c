@@ -19,6 +19,7 @@
  * Copyright (C) 2021 ARM Ltd.
  */
 
+#include "linux/export.h"
 #define DRIVER_NAME "ARM FF-A"
 #define pr_fmt(fmt) DRIVER_NAME ": " fmt
 
@@ -1161,8 +1162,7 @@ struct notifier_cb_info {
 	void *cb_data;
 };
 
-static int
-ffa_sched_recv_cb_update(struct ffa_device *dev, ffa_sched_recv_cb callback,
+int ffa_sched_recv_cb_update(struct ffa_device *dev, ffa_sched_recv_cb callback,
 			 void *cb_data, bool is_registration)
 {
 	struct ffa_dev_part_info *partition = NULL, *tmp;
@@ -1201,6 +1201,7 @@ ffa_sched_recv_cb_update(struct ffa_device *dev, ffa_sched_recv_cb callback,
 	write_unlock(&partition->rw_lock);
 	return 0;
 }
+EXPORT_SYMBOL(ffa_sched_recv_cb_update);
 
 static int ffa_sched_recv_cb_register(struct ffa_device *dev,
 				      ffa_sched_recv_cb cb, void *cb_data)
@@ -1605,7 +1606,7 @@ static struct notifier_block ffa_bus_nb = {
 	.notifier_call = ffa_bus_notifier,
 };
 
-static int ffa_xa_add_partition_info(struct ffa_device *dev)
+int ffa_xa_add_partition_info(struct ffa_device *dev)
 {
 	struct ffa_dev_part_info *info;
 	struct list_head *head, *phead;
@@ -1653,6 +1654,7 @@ free_out:
 	kfree(info);
 	return ret;
 }
+EXPORT_SYMBOL(ffa_xa_add_partition_info);
 
 static int ffa_setup_host_partition(int vm_id)
 {

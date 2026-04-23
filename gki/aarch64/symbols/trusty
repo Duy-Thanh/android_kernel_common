@@ -295,3 +295,9 @@
   hrtimer_setup
   hrtimer_start_range_ns
   param_ops_ulong
+
+# required by trusty-notifications.ko
+  file_is_kvm
+  kvm_get_kvm_safe
+  pkvm_lookup_hyp_vm_partid
+  kvm_vgic_inject_irq
