@@ -126,6 +126,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cae37f80_940ff675",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-23T01:55:02Z",
+      "side": 1,
+      "message": "nit: Consider the TODO about supporting other kinds of ramoops, maybe can just clean this a bit as wrapping these GOOG9999 acpi stuff as another function, e.g, `static int find_goog9999_ramoops(struct pkvm_ramoops_console_info *info)` which can return 0 or -ENODEV or other negative error code to indicate if the info is updated or not, and calling this function inside this `pkvm_find_ramoops`?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be454c67_e73b59f1",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-23T01:55:02Z",
+      "side": 1,
+      "message": "nit: The function name `update_ramoops_console_info` is quite generic but the implementation inside is quite specific for GOOG9999. If we will have a `find_goog999_rammoops`, maybe can also rename it to `update_goog9999_ramoops_console_info`?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a113b7b_e2830c96",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-23T01:55:02Z",
+      "side": 1,
+      "message": "As seems the pkvm_ramoops_init() and the other related functions are not vmx specific, maybe it is more suitable for putting them in arch/x86/kvm/pkvm.c?",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d7df5b0_50ba6f21",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
