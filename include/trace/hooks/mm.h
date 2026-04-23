@@ -385,6 +385,12 @@ DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
 DECLARE_RESTRICTED_HOOK(android_rvh_read_swap_cache_async_timeout,
 	TP_PROTO(size_t *count, bool *skip),
 	TP_ARGS(count, skip), 2);
+DECLARE_HOOK(android_vh_add_file_rmap,
+	TP_PROTO(struct page *page, bool compound),
+	TP_ARGS(page, compound));
+DECLARE_HOOK(android_vh_remove_file_rmap,
+	TP_PROTO(struct page *page, bool compound),
+	TP_ARGS(page, compound));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
