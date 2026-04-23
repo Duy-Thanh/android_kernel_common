@@ -124,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b750b7_f93bb0f5",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T11:31:50Z",
+      "side": 1,
+      "message": "On my thinkpad the triple fault is also causing only a lockup, not a reset.\n\nAnyway, it is only the last step before the HLT loop, and from practical POV it is not worse than the HLT loop, so I guess we can keep it.",
+      "parentUuid": "9902871b_c1e2f312",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "deae383b_37bde098",
