@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd758316_408fe3ec",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-23T09:36:52Z",
+      "side": 1,
+      "message": "switched to pkvm_ramoops_console_size non zero validation in previous version so resolving this comment.",
+      "parentUuid": "80cbe077_4436f92c",
+      "revId": "e0a8d34742ed0770c343310eb24a5229eb92e45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8becff74_8a0924b7",
