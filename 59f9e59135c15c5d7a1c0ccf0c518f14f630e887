@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62976ff_d84395d0",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T18:04:02Z",
+      "side": 1,
+      "message": "Any reason for moving it out to the global scope (given that it is still only used inside `pkvm_panic()`?\n\nAlso, it is still only used in `panic.c`, so the `pkvm_` prefix is not necessary?",
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff498e73_624c5792",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T18:04:02Z",
+      "side": 1,
+      "message": "nit: just noticed: this sentence can be reduced to \"This also signals the VM exit handler to catch and hold all other CPUs.\" (it is clear from the code that we set the panic_in_progress flag)?",
+      "fixSuggestions": [
+        {
+          "fixId": "cd280748_8da78e9d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "\t * This also signals the VM exit handler to catch and hold all other CPUs.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e045c83_34fa6d83",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T18:04:02Z",
+      "side": 1,
+      "message": "This comment sounds a bit outdated now: it used to explain why we just do nothing here, but we don\u0027t do nothing anymore, we actually handle this vmexit in pkvm_handle_init_signal() just above?\n\nSo maybe we should just remove this comment?",
+      "fixSuggestions": [
+        {
+          "fixId": "be1b0a44_0b2f27c8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 331,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54307fee_7a65c34f",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6769,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-23T18:04:02Z",
+      "side": 1,
+      "message": "Similarly, \"Nothing needs to be handled by the pKVM hypervisor\" sounds outdated?\n\nSo we might e.g. just reduce this last sentence to: \"So no need to involve the host.\"?\n\nMaybe also s/is caused by/is only caused by/ ...",
+      "fixSuggestions": [
+        {
+          "fixId": "cca56b9f_6a521432",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 6767,
+                "startChar": 0,
+                "endLine": 6770,
+                "endChar": 0
+              },
+              "replacement": "\t * EXIT_REASON_INIT_SIGNAL is only caused by the pKVM hypervisor sending\n\t * INIT signal to kick vCPU out of non-root mode. So no need to involve\n\t * the host.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
