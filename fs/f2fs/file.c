@@ -38,6 +38,10 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/fs.h>
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_readpage);
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_readpages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_set_page_dirty);
+
 static void f2fs_zero_post_eof_page(struct inode *inode,
 					loff_t new_size, bool lock)
 {

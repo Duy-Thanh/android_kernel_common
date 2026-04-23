@@ -42,6 +42,7 @@ void f2fs_mark_inode_dirty_sync(struct inode *inode, bool sync)
 
 	mark_inode_dirty_sync(inode);
 }
+EXPORT_SYMBOL_GPL(f2fs_mark_inode_dirty_sync);
 
 void f2fs_set_inode_flags(struct inode *inode)
 {
