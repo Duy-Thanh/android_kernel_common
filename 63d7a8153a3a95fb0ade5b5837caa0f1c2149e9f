@@ -141,6 +141,24 @@
       "parentUuid": "ff458828_4aa43040",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8557c468_2aa16608",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T07:54:12Z",
+      "side": 1,
+      "message": "\u003e Android-specific assumption. :)\n\nFor pvmfw - yes, since pvmfw is android-specific maintained\u0026developed in Android\u0027s packages/modules/Virtualization repo, right? :)\nFor ramoops I think that this is generic assumption (I do not see a reason to reserve more then 1MB-2MB for it and I think it is typical) :)\n\nBut never mind: there seems to be a consensus to keep it as is and address it if the problem ever occurs or during a future rebase.",
+      "parentUuid": "108ebcaa_bb712898",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
