@@ -1586,6 +1586,14 @@ M:	Jiaxun Yang <jiaxun.yang@flygoat.com>
 S:	Supported
 F:	drivers/rtc/rtc-goldfish.c
 
+ANDROID KERNEL PROTECT
+M:	Saurabh Saxena <saursaxe@qti.qualcomm.com>
+L:	linux-arm-msm@vger.kernel.org
+S:	Supported
+F:	drivers/virt/gunyah/kp_el1_integrity_check.c
+F:	include/linux/kernel_protect.h
+F:	include/trace/hooks/kernel_protect.h
+
 AOA (Apple Onboard Audio) ALSA DRIVER
 M:	Johannes Berg <johannes@sipsolutions.net>
 L:	linuxppc-dev@lists.ozlabs.org
@@ -9966,6 +9974,8 @@ F:	Documentation/virt/gunyah/
 F:	arch/arm64/gunyah/
 F:	drivers/virt/gunyah/
 F:	include/linux/gunyah*.h
+F:	include/linux/kernel_protect.h
+F:	include/trace/hooks/kernel_protect.h
 K:	gunyah
 
 HABANALABS PCI DRIVER

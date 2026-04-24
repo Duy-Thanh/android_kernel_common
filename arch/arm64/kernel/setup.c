@@ -32,6 +32,8 @@
 #include <linux/sched/task.h>
 #include <linux/scs.h>
 #include <linux/mm.h>
+#include <linux/kernel_protect.h>
+#include <trace/hooks/kernel_protect.h>
 
 #include <asm/acpi.h>
 #include <asm/fixmap.h>
@@ -433,3 +435,47 @@ static int __init check_mmu_enabled_at_boot(void)
 	return 0;
 }
 device_initcall_sync(check_mmu_enabled_at_boot);
+
+#define ADD_SEG_INFO(_type, _start, _end)						\
+	do {										\
+		if (WARN_ON(layout.nr >= KP_REGION_MAX)) {				\
+			break;								\
+		}									\
+		phys_addr_t _pstart = ALIGN_DOWN(__pa_symbol(_start), PAGE_SIZE);	\
+		phys_addr_t kbase = __pa_symbol(_stext);				\
+		phys_addr_t _pend = ALIGN(__pa_symbol(_end), PAGE_SIZE);		\
+		segs[layout.nr].type = _type;						\
+		segs[layout.nr].offset = (u64)(_pstart - kbase);			\
+		segs[layout.nr].size = ALIGN((u64)(_pend) - (_pstart), PAGE_SIZE);	\
+		layout.nr++;								\
+	} while (0)
+
+static void freeze_kernel_protect_layout(void)
+{
+	static struct kp_segment_info segs[KP_REGION_MAX];
+	struct kp_layout_info layout;
+
+	layout.segs = segs;
+	layout.nr = 0;
+
+	ADD_SEG_INFO(KP_REGION_TEXT, _stext, _etext);
+	ADD_SEG_INFO(KP_REGION_RODATA, __start_rodata, __end_rodata);
+	ADD_SEG_INFO(KP_REGION_DATA, _sdata, _edata);
+	ADD_SEG_INFO(KP_REGION_BSS, __bss_start, __bss_stop);
+
+	if (!WARN_ON(layout.nr >= KP_REGION_MAX)) {
+		segs[layout.nr].type = KP_REGION_FIXMAP_TEXT_POKE0;
+		segs[layout.nr].offset = fix_to_virt(FIX_TEXT_POKE0);
+		segs[layout.nr].size = PAGE_SIZE;
+		layout.nr++;
+	}
+	trace_android_rvh_freeze_kernel_protect(&layout);
+}
+
+static int __init s2_freeze_late_init(void)
+{
+	freeze_kernel_protect_layout();
+	return 0;
+}
+late_initcall_sync(s2_freeze_late_init);
+
