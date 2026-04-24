@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dce613f_a5c61611",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T17:27:52Z",
+      "side": 1,
+      "message": "nit: just noticed: it seems more appropriate to declare `pkvm_panic_in_progress` in pkvm/panic.h instead (and without `pkvm_sym`), since, unlike `pkvm_ramoops_console_*`, it is only used by the hypervisor code, not by the host code?\n\n...FWIW, just tested this on my side:\n\n```\ndiff --git a/arch/x86/include/asm/kvm_pkvm.h b/arch/x86/include/asm/kvm_pkvm.h\nindex fed2031d54c7..de590988da2d 100644\n--- a/arch/x86/include/asm/kvm_pkvm.h\n+++ b/arch/x86/include/asm/kvm_pkvm.h\n@@ -654,7 +654,6 @@ extern bool pkvm_sym(pvmfw_present);\n extern phys_addr_t pkvm_sym(pvmfw_base);\n extern phys_addr_t pkvm_sym(pvmfw_size);\n \n-extern atomic_t pkvm_sym(pkvm_panic_in_progress);\n extern phys_addr_t pkvm_sym(pkvm_ramoops_console_pa);\n extern size_t pkvm_sym(pkvm_ramoops_console_size);\n \ndiff --git a/arch/x86/kvm/pkvm/panic.h b/arch/x86/kvm/pkvm/panic.h\nindex 79513f0497ff..0acde9b8b5b8 100644\n--- a/arch/x86/kvm/pkvm/panic.h\n+++ b/arch/x86/kvm/pkvm/panic.h\n@@ -2,7 +2,7 @@\n #ifndef __PKVM_X86_PANIC_H\n #define __PKVM_X86_PANIC_H\n \n-#include \u003casm/ptrace.h\u003e\n+extern atomic_t pkvm_panic_in_progress;\n \n void __noreturn pkvm_panic(const char *fmt, ...);\n \ndiff --git a/arch/x86/kvm/pkvm/pkvm.c b/arch/x86/kvm/pkvm/pkvm.c\nindex 899209f88acf..e89343b5c155 100644\n--- a/arch/x86/kvm/pkvm/pkvm.c\n+++ b/arch/x86/kvm/pkvm/pkvm.c\n@@ -9,6 +9,7 @@\n #include \"mem_protect.h\"\n #include \"memory.h\"\n #include \"mmu.h\"\n+#include \"panic.h\"\n #include \"pkvm.h\"\n #include \"trace.h\"\n #include \"../x86.h\"\n```",
+      "revId": "a8aa552e5f08aea1ef1bce739fab78da4145690d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785c3a2c_15723d33",
+        "filename": "arch/x86/kvm/pkvm/panic.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T17:27:52Z",
+      "side": 1,
+      "message": "nit: this include seems unneeded (leftover, I guess)?",
+      "fixSuggestions": [
+        {
+          "fixId": "00a7d7b6_7ca37415",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.h",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a8aa552e5f08aea1ef1bce739fab78da4145690d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
