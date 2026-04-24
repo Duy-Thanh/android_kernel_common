@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9b6e420_f90611e1",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:45:37Z",
+      "side": 1,
+      "message": "@chuanxiao.dong@intel.corp-partner.google.com is it ok as is for you or you prefer to change it?:)",
+      "parentUuid": "33e44c31_3abd4990",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a4f2c0_3f11882a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -285,6 +303,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde4a87c_c6941060",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef2a9b3_2151e056",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be454c67_e73b59f1",
@@ -334,6 +370,24 @@
       "side": 1,
       "message": "Yeah, for consistent, if we use `update_cros_ramoops_console_info`, then we can use `find_cros_ramoops`.",
       "parentUuid": "7c6ead16_0342f276",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fe10ce_e9de17b6",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99746a0a_ecb18cb1",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -459,6 +513,24 @@
       "side": 1,
       "message": "I thought about it as well but I think polluting arch/x86/kvm/ with yet another pkvm_* file (which is not under arch/x86/kvm/pkvm/) isn\u0027t probably best either.",
       "parentUuid": "1a5c0a7e_f88e83c1",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "543ca754_b6daea4a",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d26fc303_b0443b08",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
