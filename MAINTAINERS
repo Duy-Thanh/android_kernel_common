@@ -9966,6 +9966,8 @@ F:	Documentation/virt/gunyah/
 F:	arch/arm64/gunyah/
 F:	drivers/virt/gunyah/
 F:	include/linux/gunyah*.h
+F:	include/linux/gunyah_kernel_protect.h
+F:	include/trace/hooks/gunyah_kernel_protect.h
 K:	gunyah
 
 HABANALABS PCI DRIVER
