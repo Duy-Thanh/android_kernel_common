@@ -123,6 +123,24 @@
       "parentUuid": "c765e069_b506c4d0",
       "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108ebcaa_bb712898",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T01:36:54Z",
+      "side": 1,
+      "message": "\u003e Quick thought: if this (unlikely) problem ever occurs in practice, we will rather notice that (since pkvm_hyp_mmu_map() will fail, so pKVM initialization will fail, and that will rather happen deterministically, on each boot), and then we will address that. Until then, we don\u0027t need to worry about that, so we might just leave this as is?\n\nYeah, the reason it is unlikely happen is the hyp mmu is mapped as huge as possible, so saved a lot of page table pages. And we don\u0027t need to split the hyp mmu huge mapping as we don\u0027t store page state in it or unmap any memory from the hyp mmu, thus the saved page table pages are likely not be used forever. So I agree we can just leave it as it is right now until we saw real problems.\n\nJust want to point to this out this issue, and we may can take care this properly in the future rebase.",
+      "parentUuid": "ff458828_4aa43040",
+      "revId": "63d7a8153a3a95fb0ade5b5837caa0f1c2149e9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
