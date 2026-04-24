@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38fb4b8c_184a4cd9",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T15:42:48Z",
+      "side": 1,
+      "message": "If look at the arch/x86/kvm/vmx/x86_ops.h, most of the declarations doesn\u0027t have empty lines but a few still has. And if look at the arch/x86/include/asm/kvm_host.h, it has empty lines among some different types of declarations. So I don\u0027t have a strange preference and I am ok with this if you prefer to keep it.",
+      "parentUuid": "e9b6e420_f90611e1",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a4f2c0_3f11882a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
