@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eaf2f20_887d0188",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4532726
+      },
+      "writtenOn": "2026-04-24T06:13:51Z",
+      "side": 1,
+      "message": "When writing the prototype in the header file, if the parameter is `struct scan_control *`, you only need to perform a \"partial type\" forward declaration for `struct scan_control`.\n\nCompilation requires",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "revId": "574101db02f50c59d333cb27362eedeecd8bf07a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
