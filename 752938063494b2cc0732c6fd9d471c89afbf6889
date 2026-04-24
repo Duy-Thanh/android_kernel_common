@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f77ae5e_33ce29f3",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T15:46:24Z",
+      "side": 1,
+      "message": "IIUC you\u0027ve addressed this comment, so yes we can? :)",
+      "parentUuid": "a3afd691_aec5d6fd",
+      "revId": "752938063494b2cc0732c6fd9d471c89afbf6889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2152d6a2_4655baaa",
