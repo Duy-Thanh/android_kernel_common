@@ -251,6 +251,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4272961b_250a2971",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T01:27:25Z",
+      "side": 1,
+      "message": "I am ok with either name, just make it specific for chrome pstore. If the acpi is the only implementation of chrome pstore, then may be `find_chromeos_ramoops` or `find_cros_ramoops` is clear enough and simpler?",
+      "parentUuid": "a745ebe6_bcfb791c",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be454c67_e73b59f1",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
@@ -280,6 +298,24 @@
       "side": 1,
       "message": "agree, maybe I will use `update_cros_ramoops_console_info`",
       "parentUuid": "be454c67_e73b59f1",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99746a0a_ecb18cb1",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T01:27:25Z",
+      "side": 1,
+      "message": "Yeah, for consistent, if we use `update_cros_ramoops_console_info`, then we can use `find_cros_ramoops`.",
+      "parentUuid": "7c6ead16_0342f276",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -333,6 +369,24 @@
       "side": 1,
       "message": "Actually, it is not the only vmx-independent part here, for example the pvmfw stuff is not vmx-specific either?\n\nSo, since it so happens that all the host-side _initialization_ of pKVM is consolidated here in vmx/pkvm_init.c, maybe let\u0027s keep it that way? Otherwise, why move the ramoops init but not move the pvmfw init etc?",
       "parentUuid": "8816ba20_5b11381b",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837b490e_b50372fb",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T01:27:25Z",
+      "side": 1,
+      "message": "If this is not difficult, I think we can still move this to arch/x86/kvm/pkvm.c, to simplify the future rebasing, although we still have some other vmx-independent part here?\n\nIf we want to keep the fact that some vmx-independent part is already here, so we can also put ramoops here, I am also fine with this. Then may be worth to have some comments in the code to remind us to move those to x86 generic pkvm files in the future rebasing?",
+      "parentUuid": "fa10bc33_86afc4c9",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
