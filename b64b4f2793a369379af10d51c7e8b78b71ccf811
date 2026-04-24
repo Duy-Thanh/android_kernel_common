@@ -16,6 +16,24 @@
       "message": "Please create a patch on top of this one to add the new symbols to your symbol list",
       "revId": "b64b4f2793a369379af10d51c7e8b78b71ccf811",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54608ee2_348e28b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4030585
+      },
+      "writtenOn": "2026-04-24T08:01:41Z",
+      "side": 1,
+      "message": "After further investigation, we do need to keep trace_android_vh_logbuf in addition to trace_android_rvh_logbuf. Our vendor module printk_hook.ko depends on both hooks — the rvh version handles the core log ordering fix, while the vh version is used by our module for additional log processing.",
+      "parentUuid": "8781cf71_bcca2a58",
+      "revId": "b64b4f2793a369379af10d51c7e8b78b71ccf811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
