@@ -429,6 +429,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a5c0a7e_f88e83c1",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T10:47:12Z",
+      "side": 1,
+      "message": "I don\u0027t mind.\n\nAnother possible option I was thinking about is to move it to a separate file `pkvm_ramoops.c` (similar to `pkvm_debugfs.c`)...",
+      "parentUuid": "50909fb0_4ce5b8b6",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d7df5b0_50ba6f21",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
