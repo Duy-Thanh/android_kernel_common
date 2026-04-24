@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ebbdb3c_961cf2ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-24T02:08:07Z",
+      "side": 1,
+      "message": "My clang version is 18.1.3.\n\nThe related kernel config is CONFIG_GCOV_KERNEL or CONFIG_KGCOV. Both are off from my side. With enabling one of them, the compiling error is gone (have compiler option `--no-unreachable`). But disabling both, will get this compiling error(don\u0027t have compiler option `--no-unreachable`).",
+      "parentUuid": "e3540701_e919d60a",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88abaa7d_3d606005",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
