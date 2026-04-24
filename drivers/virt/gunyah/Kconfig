@@ -60,3 +60,15 @@ config GUNYAH_QCOM_TRUSTED_VM
 	  firmware.
 
 	  Say Y/M here if unsure and you want to support QTVMs.
+
+config GUNYAH_KERNEL_PROTECT
+	bool "EL2 Kernel Layout Protection"
+	depends on GUNYAH
+	help
+	  This enables EL2 protection of the kernel layout, enforcing
+	  read-only and execute permissions on kernel sections (text,
+	  rodata, data, bss) via the EL2 Gunyah hypervisor. It also
+	  verifies the integrity of EL1 kernel memory from EL2.
+
+	  Say Y here to enable kernel layout protection on Gunyah-based
+	  platforms.
