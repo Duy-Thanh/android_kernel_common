@@ -8,6 +8,7 @@
 struct gunyah_hypercall_vcpu_run_resp;
 struct gunyah_vcpu;
 struct gunyah_vm;
+struct kp_instance;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_gh_before_vcpu_run,
 	     TP_PROTO(u16 vmid, u32 vcpu_id),
@@ -25,6 +26,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_gh_vcpu_release,
 DECLARE_RESTRICTED_HOOK(android_rvh_gh_note_fw_parcel,
 	     TP_PROTO(struct gunyah_vm *ghvm, u16 ghvm_vmid, u32 fw_mem_handle),
 	     TP_ARGS(ghvm, ghvm_vmid, fw_mem_handle), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_gh_kp_status_read,
+	     TP_PROTO(const struct kp_instance *status),
+	     TP_ARGS(status), 1);
 
 #endif /* _TRACE_HOOK_GUNYAH_H */
 /* This part must be outside protection */

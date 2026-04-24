@@ -3395,6 +3395,7 @@
   __traceiter_android_rvh_get_nohz_timer_target
   __traceiter_android_rvh_gh_after_vcpu_run
   __traceiter_android_rvh_gh_before_vcpu_run
+  __traceiter_android_rvh_gh_kp_status_read
   __traceiter_android_rvh_gh_note_fw_parcel
   __traceiter_android_rvh_gh_vcpu_release
   __traceiter_android_rvh_gh_vm_release
@@ -3545,6 +3546,7 @@
   __tracepoint_android_rvh_get_nohz_timer_target
   __tracepoint_android_rvh_gh_after_vcpu_run
   __tracepoint_android_rvh_gh_before_vcpu_run
+  __tracepoint_android_rvh_gh_kp_status_read
   __tracepoint_android_rvh_gh_note_fw_parcel
   __tracepoint_android_rvh_gh_vcpu_release
   __tracepoint_android_rvh_gh_vm_release
