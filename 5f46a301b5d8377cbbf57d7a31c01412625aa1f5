@@ -269,6 +269,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fef2a9b3_2151e056",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T08:04:10Z",
+      "side": 1,
+      "message": "I will use `find_cros_ramoops` - cros shouldn\u0027t be too cryptic and it is used in different parts of the kernel already + I want to make it consistent with `update_cros_ramoops_console_info` which otherwise (update_chromeos_ramoops_console_info) will have too long name IMO",
+      "parentUuid": "a745ebe6_bcfb791c",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be454c67_e73b59f1",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
@@ -387,6 +405,24 @@
       "side": 1,
       "message": "If this is not difficult, I think we can still move this to arch/x86/kvm/pkvm.c, to simplify the future rebasing, although we still have some other vmx-independent part here?\n\nIf we want to keep the fact that some vmx-independent part is already here, so we can also put ramoops here, I am also fine with this. Then may be worth to have some comments in the code to remind us to move those to x86 generic pkvm files in the future rebasing?",
       "parentUuid": "fa10bc33_86afc4c9",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50909fb0_4ce5b8b6",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T08:04:10Z",
+      "side": 1,
+      "message": "Yeah, moving it to arch/x86/kvm/pkvm.c is not problematic and I agree with this suggestion - I\u0027ve already done it locally. @dmaluka@google.com - do you agree I do not want to move it back and forth :)",
+      "parentUuid": "837b490e_b50372fb",
       "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
