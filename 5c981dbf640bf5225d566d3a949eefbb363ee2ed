@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d95e8a_9c320f80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T23:45:26Z",
+      "side": 1,
+      "message": "When you get a final version of this, you need to also submit a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "5c981dbf640bf5225d566d3a949eefbb363ee2ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
