@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e7aef9_385ebe8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "Ok, thank you both for the input and clarification I will extend tools/objtool/noreturns.h then.",
+      "parentUuid": "6ebbdb3c_961cf2ab",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88abaa7d_3d606005",
@@ -420,6 +438,24 @@
       "side": 1,
       "message": "Acknowledged. I mean the whole idea was to pull out Host VM so it will not interfere with ramoops writing but pulling out other guest also makes sense for non-ramoops related reason. BTW keeping this one open till I validate it a bit more.",
       "parentUuid": "6b9c0afe_3102ee45",
+      "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37c1e52_63d51d1c",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "Ok - I\u0027ve checked that this should be fine so marking as resolved.",
+      "parentUuid": "8860417d_e440d075",
       "revId": "882daf5c9232886e6df52c09afed5a87f874060c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

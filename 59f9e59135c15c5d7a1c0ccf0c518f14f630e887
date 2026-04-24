@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c74e2b_7b6ce862",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "Yeah, no reason - I\u0027ve moved it back.",
+      "parentUuid": "b62976ff_d84395d0",
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff498e73_624c5792",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9ad7c6c_bf376698",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ff498e73_624c5792",
       "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6b03a3_7e5caf71",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7e045c83_34fa6d83",
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54307fee_7a65c34f",
@@ -119,6 +173,24 @@
           ]
         }
       ],
+      "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e3cc42_3d3d6468",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6769,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T14:48:35Z",
+      "side": 1,
+      "message": "yeah, good point",
+      "parentUuid": "54307fee_7a65c34f",
       "revId": "59f9e59135c15c5d7a1c0ccf0c518f14f630e887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
