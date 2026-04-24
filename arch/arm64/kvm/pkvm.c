@@ -1728,21 +1728,10 @@ static void pkvm_module_kmemleak(struct module *this,
 	kmemleak_scan_area(start, end - start, GFP_KERNEL);
 }
 
-#define PKVM_EL2_MOD_DIRECT_RANGE	SZ_128M
-
-static unsigned long mod_direct_kern_base;
-static unsigned long mod_direct_hyp_base;
-
 unsigned long pkvm_el2_mod_kern_va(unsigned long addr)
 {
 #ifdef CONFIG_PKVM_STACKTRACE
 	struct pkvm_el2_module *mod;
-
-	/* Fast lookup into the direct range */
-	if (mod_direct_hyp_base &&
-		addr >= mod_direct_hyp_base &&
-		addr < mod_direct_hyp_base + PKVM_EL2_MOD_DIRECT_RANGE)
-		return mod_direct_kern_base + (addr - mod_direct_hyp_base);
 
 	list_for_each_entry(mod, &pkvm_modules, node) {
 		unsigned long hyp_va = (unsigned long)mod->hyp_va;
@@ -1768,36 +1757,25 @@ static void *pkvm_el2_mod_alloc_hyp_va(size_t size)
 	return (void *)res.a1;
 }
 
-static __ref void *pkvm_el2_mod_alloc_mod_direct(unsigned long start, unsigned long end)
-{
-	if (mod_direct_hyp_base)
-		goto alloc;
-
-	mod_direct_kern_base = module_direct_base ?: module_plt_base;
-	if (WARN_ON(!mod_direct_kern_base))
-		return NULL;
-
-	mod_direct_hyp_base = (unsigned long)pkvm_el2_mod_alloc_hyp_va(PKVM_EL2_MOD_DIRECT_RANGE);
-	if (!mod_direct_hyp_base) {
-		mod_direct_kern_base = 0;
-		return NULL;
-	}
-
-alloc:
-	if (start < mod_direct_kern_base ||
-		end > mod_direct_kern_base + PKVM_EL2_MOD_DIRECT_RANGE)
-		return NULL;
-
-	return (void *)(mod_direct_hyp_base + (start - mod_direct_kern_base));
-}
-
+/*
+ * Allocate hypervisor VA space for an EL2 module.
+ *
+ * All EL2 modules use the same dynamic bump allocator to guarantee
+ * monotonically increasing hypervisor VAs. This ensures the invariant
+ * required by pkvm_reloc_imported_symbol(): the exporter module's
+ * hyp VA is always lower than the importer's hyp VA, since modules
+ * loaded earlier are allocated first from the bump allocator.
+ *
+ * Note: the direct mapping optimization (PKVM_EL2_MOD_DIRECT_RANGE)
+ * is intentionally not used here. With KASLR, modules may be scattered
+ * across the 2GB module region, causing some to fall outside the 128MB
+ * direct mapping window. Mixing direct-mapped and dynamically-allocated
+ * modules breaks the VA ordering invariant, leading to -EINVAL during
+ * symbol relocation.
+ */
 static void *pkvm_el2_mod_alloc_va(unsigned long start, unsigned long end)
 {
-	void *hyp_va;
-
-	hyp_va = pkvm_el2_mod_alloc_mod_direct(start, end);
-
-	return hyp_va ?: pkvm_el2_mod_alloc_hyp_va(end - start);
+	return pkvm_el2_mod_alloc_hyp_va(end - start);
 }
 
 int __pkvm_load_el2_module(struct module *this)
