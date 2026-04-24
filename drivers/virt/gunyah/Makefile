@@ -10,3 +10,4 @@ obj-$(CONFIG_GUNYAH_PLATFORM_HOOKS) += gunyah_platform_hooks.o
 obj-$(CONFIG_GUNYAH_QCOM_PLATFORM) += gunyah_qcom.o
 obj-$(CONFIG_GUNYAH_IRQFD) += gunyah_irqfd.o
 obj-$(CONFIG_GUNYAH_IOEVENTFD) += gunyah_ioeventfd.o
+obj-$(CONFIG_GUNYAH_KERNEL_PROTECT) += gunyah_kp_el1.o
