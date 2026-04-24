@@ -52,6 +52,24 @@
       "parentUuid": "54608ee2_348e28b8",
       "revId": "b64b4f2793a369379af10d51c7e8b78b71ccf811",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c7bbac_67cf98fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T23:44:35Z",
+      "side": 1,
+      "message": "Sorry, you can do both of those features with the same hook. There is no possible reason for these both to be needed. You can have multiple attachments to a hook so both of your handlers can just attach to the same hook. It is even possible to enforce ordering if you really need it.",
+      "parentUuid": "c44b4329_4b621846",
+      "revId": "b64b4f2793a369379af10d51c7e8b78b71ccf811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
