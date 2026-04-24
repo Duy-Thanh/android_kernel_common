@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c781e3_267ea77b",
+        "filename": "mm/memfd-ashmem-shim.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-24T22:45:25Z",
+      "side": 1,
+      "message": "same here, use compat_ptr?",
+      "range": {
+        "startLine": 116,
+        "startChar": 52,
+        "endLine": 116,
+        "endChar": 55
+      },
+      "revId": "9f2166ef627d37fca0939e9c38298aabb71d3f2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
