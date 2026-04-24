@@ -32,6 +32,8 @@ struct swap_iocb;
  * isn't directly visible to userspace.
  */
 #define SHMEM_F_MAPPING_FROZEN	BIT(2)
+/* ANDROID: Inode backs a shmem-backed memfd */
+#define SHMEM_F_MEMFD		BIT(31)
 
 struct shmem_inode_info {
 	spinlock_t		lock;
@@ -62,9 +64,6 @@ struct shmem_inode_info {
 #define SHMEM_FL_USER_MODIFIABLE \
 	(FS_IMMUTABLE_FL | FS_APPEND_FL | FS_NODUMP_FL | FS_NOATIME_FL | FS_CASEFOLD_FL)
 #define SHMEM_FL_INHERITED		(FS_NODUMP_FL | FS_NOATIME_FL | FS_CASEFOLD_FL)
-
-/* ANDROID: Inode backs a shmem-backed memfd */
-#define SHMEM_FL_MEMFD			0x40000000
 
 struct shmem_quota_limits {
 	qsize_t usrquota_bhardlimit; /* Default user quota block hard limit */
