@@ -447,6 +447,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d26fc303_b0443b08",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1491,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-24T11:04:57Z",
+      "side": 1,
+      "message": "I thought about it as well but I think polluting arch/x86/kvm/ with yet another pkvm_* file (which is not under arch/x86/kvm/pkvm/) isn\u0027t probably best either.",
+      "parentUuid": "1a5c0a7e_f88e83c1",
+      "revId": "5f46a301b5d8377cbbf57d7a31c01412625aa1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d7df5b0_50ba6f21",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 2
