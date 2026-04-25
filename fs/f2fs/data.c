@@ -1638,8 +1638,19 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	end = pgofs + maxblocks;
 
 next_dnode:
+<<<<<<< HEAD   (96815aa9af1d9e35f46f16e3f7c657262982da06 ANDROID: ashmem: Handle ASHMEM_GET_FILE_ID from 32-bit users)
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, &lc, flag);
+||||||| BASE   (ddd5813c91fcc9cd0c7723d7869163944514329a Merge tag 'android14-6.1.166_r00' into android14-6.1)
+	if (map->m_may_create)
+		f2fs_map_lock(sbi, flag);
+=======
+	if (map->m_may_create) {
+		if (f2fs_lfs_mode(sbi))
+			f2fs_balance_fs(sbi, true);
+		f2fs_map_lock(sbi, flag);
+	}
+>>>>>>> BRANCH (707f6267afd5238da0775ad89b11458f4915962b Merge 6.1.167 into android14-6.1-lts)
 
 	/* When reading holes, we need its node page */
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
