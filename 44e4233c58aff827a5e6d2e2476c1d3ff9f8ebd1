@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d74b30ac_13efec65",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 3001,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-25T16:22:54Z",
+      "side": 1,
+      "message": "This formatting error or the wrong * indentation above doesn\u0027t exist upstream. This should be fixed by the correct cherry-pick ordering. Also you missed a line at the end:\n```\n *     interference detection is not performed on these sub-channels, their\n *     corresponding bits are consistently set to zero.\n```",
+      "range": {
+        "startLine": 3001,
+        "startChar": 2,
+        "endLine": 3001,
+        "endChar": 3
+      },
+      "revId": "44e4233c58aff827a5e6d2e2476c1d3ff9f8ebd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
