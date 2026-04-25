@@ -63,6 +63,30 @@
       ],
       "revId": "574101db02f50c59d333cb27362eedeecd8bf07a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670dfe44_5c1fff1b",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4532726
+      },
+      "writtenOn": "2026-04-25T04:14:10Z",
+      "side": 1,
+      "message": "The definition of scan_control already exists; just refer to the exported symbols in 6.12. No other changes are needed. The internal implementation of ko still needs further debugging and is redundant, increasing the amount of code output.",
+      "parentUuid": "dbfc1f92_481cc48b",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "revId": "574101db02f50c59d333cb27362eedeecd8bf07a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
