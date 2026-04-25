@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8571c06_12605605",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-25T20:17:41Z",
+      "side": 1,
+      "message": "Indeed, thx - improved.",
+      "parentUuid": "5dce613f_a5c61611",
+      "revId": "a8aa552e5f08aea1ef1bce739fab78da4145690d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "785c3a2c_15723d33",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "a8aa552e5f08aea1ef1bce739fab78da4145690d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae945c9_7348ecc5",
+        "filename": "arch/x86/kvm/pkvm/panic.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-04-25T20:17:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "785c3a2c_15723d33",
       "revId": "a8aa552e5f08aea1ef1bce739fab78da4145690d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
