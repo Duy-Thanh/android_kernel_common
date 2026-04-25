@@ -22,6 +22,47 @@
       },
       "revId": "574101db02f50c59d333cb27362eedeecd8bf07a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfc1f92_481cc48b",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-25T00:02:17Z",
+      "side": 1,
+      "message": "Ugh. Now you will have to copy the definition of `struct scan_control` into your driver... I\u0027m wondering if you can simply open-code the isolate_folio() implementation in the driver? The function seems pretty simple and I think all the symbols it\u0027s using are available to the drivers. I think that should be possible and seems cleaner. All you need from scan_control is sc-\u003egfp_mask which you can pass as gfp_mask directly.",
+      "range": {
+        "startLine": 53,
+        "startChar": 7,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1640e666_876aade3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mm.h",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "574101db02f50c59d333cb27362eedeecd8bf07a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
