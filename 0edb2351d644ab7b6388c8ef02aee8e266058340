@@ -16,6 +16,24 @@
       "message": "why?",
       "revId": "0edb2351d644ab7b6388c8ef02aee8e266058340",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37aeaa7_cec1bd77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-04-26T10:31:00Z",
+      "side": 1,
+      "message": "This commit is no longer needed after the hook was modified, so discard it.",
+      "parentUuid": "791db7b9_87529756",
+      "revId": "0edb2351d644ab7b6388c8ef02aee8e266058340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
