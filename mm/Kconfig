@@ -1376,17 +1376,17 @@ config NUMA_EMU
 	  into virtual nodes when booted with "numa=fake=N", where N is the
 	  number of nodes. This is only useful for debugging.
 
-config ARCH_SUPPORTS_PT_RECLAIM
+config HAVE_ARCH_TLB_REMOVE_TABLE
 	def_bool n
 
 config PT_RECLAIM
-	bool "reclaim empty user page table pages"
-	default y
-	depends on ARCH_SUPPORTS_PT_RECLAIM && MMU && SMP
-	select MMU_GATHER_RCU_TABLE_FREE
+	def_bool y
+	depends on MMU_GATHER_RCU_TABLE_FREE && !HAVE_ARCH_TLB_REMOVE_TABLE
 	help
 	  Try to reclaim empty user page table pages in paths other than munmap
 	  and exit_mmap path.
+
+	  Note: now only empty user PTE page table pages will be reclaimed.
 
 	  Note: now only empty user PTE page table pages will be reclaimed.
 source "mm/damon/Kconfig"
