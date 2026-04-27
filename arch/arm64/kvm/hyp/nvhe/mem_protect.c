@@ -2392,7 +2392,9 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	struct kvm_hyp_pinned_page *ppage = hyp_ppages;
-	int ret;
+	int ret, count, i;
+	u64 phys, ipa;
+	size_t size;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -2402,31 +2404,25 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		goto unlock;
 
 	for_each_hyp_ppage(ppage) {
-		u64 phys = hyp_pfn_to_phys(ppage->pfn);
-		u64 ipa = hyp_pfn_to_phys(ppage->gfn);
-		size_t size;
+		phys = hyp_pfn_to_phys(ppage->pfn);
+		ipa = hyp_pfn_to_phys(ppage->gfn);
 
 		if (check_shl_overflow(PAGE_SIZE, ppage->order, &size)) {
 			ret = -EINVAL;
-			goto unlock;
+			goto err_page_state;
 		}
 
 		ret = ___host_check_page_state_range(phys, size, PKVM_PAGE_OWNED,
 						     HOST_CHECK_NULL_REFCNT |
 						     HOST_CHECK_IS_MEMORY);
 		if (ret)
-			goto unlock;
+			goto err_page_state;
 
 		ret = __guest_check_page_state_range(vcpu, ipa, size, PKVM_NOPAGE);
 		if (ret)
-			goto unlock;
-	}
+			goto err_page_state;
 
-	for_each_hyp_ppage(ppage) {
-		size_t size = PAGE_SIZE << ppage->order;
-		u64 phys = hyp_pfn_to_phys(ppage->pfn);
-		u64 ipa = hyp_pfn_to_phys(ppage->gfn);
-
+		size = PAGE_SIZE << ppage->order;
 		__host_set_owner_guest(vcpu, phys, ipa, size, HOST_SET_NO_COMPLETE);
 	}
 	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
@@ -2450,6 +2446,21 @@ unlock:
 	host_unlock_component();
 
 	return ret;
+err_page_state:
+	count = ppage - hyp_ppages;
+	if (count == 0)
+		goto unlock;
+
+	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
+	for (i = 0; i < count; i++) {
+		phys = hyp_pfn_to_phys(hyp_ppages[i].pfn);
+		size = PAGE_SIZE << hyp_ppages[i].order;
+
+		WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST, 0, HOST_SET_NO_COMPLETE));
+		psci_mem_protect_dec(1 << hyp_ppages[i].order);
+	}
+	__host_stage2_set_owner_complete(PKVM_ID_HOST, 0);
+	goto unlock;
 }
 
 int __pkvm_host_donate_sglist_hyp(struct pkvm_sglist_page *sglist, size_t nr_pages)
