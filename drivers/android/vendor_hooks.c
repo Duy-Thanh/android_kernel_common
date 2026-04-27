@@ -748,3 +748,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
