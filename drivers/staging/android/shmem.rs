@@ -13,7 +13,8 @@ use kernel::{
     mm::virt::{vm_flags_t, VmaNew},
     prelude::*,
     str::CStr,
-    types::{ARef, Opaque},
+    sync::aref::ARef,
+    types::Opaque,
 };
 
 use core::{
