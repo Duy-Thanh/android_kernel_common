@@ -803,6 +803,25 @@ DECLARE_RESTRICTED_HOOK(android_rvh_read_swap_cache_async_timeout,
 DECLARE_HOOK(android_vh_override_exec_folio_order,
 	TP_PROTO(struct vm_area_struct *vma, unsigned int *order),
 	TP_ARGS(vma, order));
+DECLARE_HOOK(android_vh_check_swap_entry_range_free,
+	TP_PROTO(struct swap_info_struct *si, swp_entry_t *entry,\
+		 unsigned int nr_pages),
+	TP_ARGS(si, entry, nr_pages));
+DECLARE_HOOK(android_vh_free_swap_slot_bypass,
+	TP_PROTO(swp_entry_t *entry, bool *bypass),
+	TP_ARGS(entry, bypass));
+DECLARE_HOOK(android_vh_folio_alloc_swap_bypass,
+	TP_PROTO(swp_entry_t *entry, struct folio *folio, bool *bypass),
+	TP_ARGS(entry, folio, bypass));
+DECLARE_HOOK(android_vh_pick_swap_device_bypass,
+	TP_PROTO(swp_entry_t *entry, struct swap_info_struct *si, bool *bypass),
+	TP_ARGS(entry, si, bypass));
+DECLARE_HOOK(android_vh_folio_end_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_start_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
