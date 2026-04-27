@@ -3604,7 +3604,7 @@ static DEFINE_XARRAY_ALLOC1(mem_cgroup_ids);
 static void mem_cgroup_id_remove(struct mem_cgroup *memcg)
 {
 	if (memcg->id.id > 0) {
-		trace_android_vh_mem_cgroup_id_remove(memcg);
+		trace_android_rvh_mem_cgroup_id_remove(memcg);
 		xa_erase(&mem_cgroup_ids, memcg->id.id);
 		memcg->id.id = 0;
 	}

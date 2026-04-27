@@ -73,9 +73,9 @@ DECLARE_HOOK(android_vh_mem_cgroup_alloc,
 DECLARE_HOOK(android_vh_mem_cgroup_free,
 	TP_PROTO(struct mem_cgroup *memcg),
 	TP_ARGS(memcg));
-DECLARE_HOOK(android_vh_mem_cgroup_id_remove,
+DECLARE_RESTRICTED_HOOK(android_rvh_mem_cgroup_id_remove,
 	TP_PROTO(struct mem_cgroup *memcg),
-	TP_ARGS(memcg));
+	TP_ARGS(memcg), 1);
 struct cgroup_subsys_state;
 DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
