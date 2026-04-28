@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a3631c_272f0a49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2026-04-28T07:49:09Z",
+      "side": 1,
+      "message": "It seems a conflict failure after 4047233 restored: \n$ git push aosp HEAD:refs/for/android14-6.1-2025-12 --force-with-lease \n! [remote rejected] HEAD -\u003e refs/for/android14-6.1-2025-12 (cannot add patch set to 4047233.) error: failed to push some refs to \u0027https://android.googlesource.com/kernel/common\u0027",
+      "parentUuid": "a0a6134f_9284df0a",
+      "revId": "aa7b2925ef3b4ec66299522575e3a98ef02f42ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a3e6e0d7_63cf7cf6",
