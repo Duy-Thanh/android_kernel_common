@@ -51,6 +51,24 @@
       "parentUuid": "9530f75e_79a4cedd",
       "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5639464_6e4d6e6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896606
+      },
+      "writtenOn": "2026-04-28T03:33:28Z",
+      "side": 1,
+      "message": "Hi Zhengping, AFAIU, We have 2 options to solve the current situation \n\nOption 1: Merge all the required dependent CL\u0027s from Open source bluetooth-next kernel (https://git.kernel.org/pub/scm/linux/kernel/git/bluetooth/bluetooth-next.git/commit/?id\u003d69050f8d6d075dc01af7a5f2f550a8067510366f) and follow the DDK process as you suggested \n\nOption 2: Only the current CL could be updated only for Android by keeping \"removal \u003d kzalloc(*removal, GFP_ATOMIC);\" instead of moving to the latest kernel API changes \"removal \u003d kzalloc_obj(*removal, GFP_ATOMIC);\". Please note that only the current CL would be Android specific. \n\nPlease suggest your feedback on the above approches.",
+      "parentUuid": "850bbaaf_6f89a37d",
+      "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
