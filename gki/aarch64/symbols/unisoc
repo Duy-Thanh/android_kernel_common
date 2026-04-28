@@ -1111,6 +1111,7 @@
   __traceiter_android_rvh_get_nohz_timer_target
   __traceiter_android_rvh_is_cpu_allowed
   __traceiter_android_rvh_kmalloc_large_fallback_cma
+  __traceiter_android_rvh_mem_cgroup_id_remove
   __traceiter_android_rvh_migrate_queued_task
   __traceiter_android_rvh_new_task_stats
   __traceiter_android_rvh_prepare_prio_fork
@@ -1284,6 +1285,7 @@
   __tracepoint_android_rvh_get_nohz_timer_target
   __tracepoint_android_rvh_is_cpu_allowed
   __tracepoint_android_rvh_kmalloc_large_fallback_cma
+  __tracepoint_android_rvh_mem_cgroup_id_remove
   __tracepoint_android_rvh_migrate_queued_task
   __tracepoint_android_rvh_new_task_stats
   __tracepoint_android_rvh_prepare_prio_fork
