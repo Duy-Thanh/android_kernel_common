@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70014fdd_c449dfa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-28T17:17:25Z",
+      "side": 1,
+      "message": "Please cherry-pick https://android-review.googlesource.com/c/kernel/common/+/3986473 and https://android-review.googlegooglesource.com/c/kernel/common/+/4027631 as two separate patches.",
+      "revId": "1406a2f2e329af18180d3558acb58791f6e6dbe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
