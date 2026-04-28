@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a6134f_9284df0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2026-04-28T03:37:17Z",
+      "side": 1,
+      "message": "I cannot push the new cherry-picking patch to remote branch, since an previous cherry-picking patch witch the same change-Id is abandoned that cannot be restored again. Here is the error message: \n$ git push aosp HEAD:refs/for/android14-6.1-2025-12 --force-with-lease\n! [remote rejected]           HEAD -\u003e refs/for/android14-6.1-2025-12 (change https://android-review.googlesource.com/c/kernel/common/+/4047233 closed)\nerror: failed to push some refs to \u0027https://android.googlesource.com/kernel/common\u0027\n\nCould you help me to resolve this issue?",
+      "parentUuid": "aa07a664_dede08ff",
+      "revId": "aa7b2925ef3b4ec66299522575e3a98ef02f42ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1be8b476_848f0760",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4255728
+      },
+      "writtenOn": "2026-04-28T03:37:17Z",
+      "side": 1,
+      "message": "The respin request bugid: 507212714",
+      "parentUuid": "e6219889_0a2c32d9",
+      "revId": "aa7b2925ef3b4ec66299522575e3a98ef02f42ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a3e6e0d7_63cf7cf6",
