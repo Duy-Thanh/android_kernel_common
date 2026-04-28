@@ -69,6 +69,24 @@
       "parentUuid": "850bbaaf_6f89a37d",
       "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc3cd45_e610fa96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2026-04-28T06:38:01Z",
+      "side": 1,
+      "message": "Hi Chethan,\n\nFor option1, if we want to use DDK module, there is no need to cherry pick the whole CL. The purpose of DDK is to only land this CL on Android17-6.18-intel branch on a private layer. But I tried last week and there is an issue to compile the module. See b/444363029 for the error. Since the DDK change is already done, maybe you can try to compile it locally.\n\nFor option 2, I am not sure I understand correctly. But the point is, we need a good reason to land an ANDROID patch here. If the CL is rejected, we still need to go option 1.",
+      "parentUuid": "d5639464_6e4d6e6f",
+      "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
