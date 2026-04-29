@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec21048_b5ff5cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4081698
+      },
+      "writtenOn": "2026-04-29T14:56:38Z",
+      "side": 1,
+      "message": "Switching to jstultz@, who reviewed the other cherry-pick: https://r.android.com/c/kernel/common/+/4051995",
+      "revId": "05378b17920be8200df8a3199223526d4d402138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
