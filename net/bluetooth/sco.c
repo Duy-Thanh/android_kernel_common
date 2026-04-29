@@ -401,7 +401,7 @@ static void sco_recv_frame(struct sco_conn *conn, struct sk_buff *skb)
 	struct sock *sk;
 
 	sco_conn_lock(conn);
-	sk = sco_sock_hold(conn);
+	sk = conn->sk;
 	sco_conn_unlock(conn);
 
 	if (!sk)
@@ -410,15 +410,11 @@ static void sco_recv_frame(struct sco_conn *conn, struct sk_buff *skb)
 	BT_DBG("sk %p len %u", sk, skb->len);
 
 	if (sk->sk_state != BT_CONNECTED)
-		goto drop_put;
+		goto drop;
 
-	if (!sock_queue_rcv_skb(sk, skb)) {
-		sock_put(sk);
+	if (!sock_queue_rcv_skb(sk, skb))
 		return;
-	}
 
-drop_put:
-	sock_put(sk);
 drop:
 	kfree_skb(skb);
 }

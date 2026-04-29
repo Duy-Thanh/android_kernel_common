@@ -222,13 +222,13 @@ static void ttm_bo_reserve_interrupted(struct kunit *test)
 		KUNIT_FAIL(test, "Couldn't create ttm bo reserve task\n");
 
 	/* Take a lock so the threaded reserve has to wait */
-	dma_resv_lock(bo->base.resv, NULL);
+	mutex_lock(&bo->base.resv->lock.base);
 
 	wake_up_process(task);
 	msleep(20);
 	err = kthread_stop(task);
 
-	dma_resv_unlock(bo->base.resv);
+	mutex_unlock(&bo->base.resv->lock.base);
 
 	KUNIT_ASSERT_EQ(test, err, -ERESTARTSYS);
 }
