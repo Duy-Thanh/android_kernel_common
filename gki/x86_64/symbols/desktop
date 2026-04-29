@@ -130,6 +130,7 @@
   backlight_device_register
   backlight_device_unregister
   backlight_force_update
+  baswap
   _bcd2bin
   bcmp
   bdev_getblk
@@ -2004,6 +2005,7 @@
   of_device_is_compatible
   of_dma_controller_free
   of_dma_controller_register
+  of_find_node_opts_by_path
   of_find_property
   of_fwnode_ops
   of_get_child_by_name
@@ -2025,6 +2027,7 @@
   of_property_read_bool
   of_property_read_reg
   of_property_read_string
+  of_property_read_string_helper
   of_property_read_variable_u16_array
   of_property_read_variable_u32_array
   of_prop_next_string
@@ -2080,9 +2083,11 @@
   pci_d3cold_enable
   pci_dev_get
   pci_device_is_present
+  pci_dev_lock
   pci_dev_present
   pci_dev_put
   pci_dev_run_wake
+  pci_dev_unlock
   pci_disable_device
   pci_disable_link_state
   pci_disable_link_state_locked
