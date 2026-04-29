@@ -54791,6 +54791,12 @@ member {
   offset: 2176
 }
 member {
+  id: 0xd671c3e5
+  name: "android_oem_data1"
+  type_id: 0x92233392
+  offset: 3968
+}
+member {
   id: 0xd671c469
   name: "android_oem_data1"
   type_id: 0x92233392
@@ -238625,7 +238631,7 @@ struct_union {
   kind: STRUCT
   name: "binder_thread"
   definition {
-    bytesize: 496
+    bytesize: 504
     member_id: 0x9719f7a4
     member_id: 0x23002647
     member_id: 0x34628ce3
@@ -238646,6 +238652,7 @@ struct_union {
     member_id: 0x1642280e
     member_id: 0xc3d0458d
     member_id: 0xa7436dc1
+    member_id: 0xd671c3e5
   }
 }
 struct_union {
@@ -351827,6 +351834,13 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9b3b1550
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x24373219
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9b3b4856
   return_type_id: 0x6720d32f
   parameter_id: 0x1aeeade4
@@ -373751,6 +373765,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_binder_set_priority"
 }
 elf_symbol {
+  id: 0xc07fe670
+  name: "__traceiter_android_vh_binder_skip_set_priority"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x30ac9990
+  type_id: 0x9b3b1550
+  full_name: "__traceiter_android_vh_binder_skip_set_priority"
+}
+elf_symbol {
   id: 0xbce49c1c
   name: "__traceiter_android_vh_binder_spawn_new_thread"
   is_defined: true
@@ -379788,6 +379811,15 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_binder_set_priority"
+}
+elf_symbol {
+  id: 0xd4ca51ba
+  name: "__tracepoint_android_vh_binder_skip_set_priority"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_binder_skip_set_priority"
 }
 elf_symbol {
   id: 0x14e4067e
@@ -445337,6 +445369,7 @@ interface {
   symbol_id: 0xc6c9353c
   symbol_id: 0xbe951464
   symbol_id: 0x2a9c6616
+  symbol_id: 0xc07fe670
   symbol_id: 0xbce49c1c
   symbol_id: 0x6bce867e
   symbol_id: 0x4785a3dd
@@ -446008,6 +446041,7 @@ interface {
   symbol_id: 0x57a9a36a
   symbol_id: 0x903775d2
   symbol_id: 0x2e04cb9c
+  symbol_id: 0xd4ca51ba
   symbol_id: 0x14e4067e
   symbol_id: 0xdda667b0
   symbol_id: 0x306b5ff7
