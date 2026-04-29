@@ -44,5 +44,48 @@ SPDX-License-Identifier: GPL-2.0 OR Apache-2.0
         <option name="test-command-line" key="kselftest_net_tests_psock_tpacket" value="cd &ktest_dir;; ./kselftest_net_tests_psock_tpacket" />
         <option name="test-command-line" key="kselftest_net_tests_reuseport_dualstack" value="cd &ktest_dir;; ./kselftest_net_tests_reuseport_dualstack" />
         <option name="test-command-line" key="kselftest_net_tests_reuseaddr_conflict" value="cd &ktest_dir;; ./kselftest_net_tests_reuseaddr_conflict" />
+        <option name="test-command-line" key="kselftest_memfd_test" value="cd &ktest_dir;; ./kselftest_memfd_test" />
+        <option name="test-command-line" key="kselftest_mm_compaction_test" value="cd &ktest_dir;; ./kselftest_mm_compaction_test" />
+        <option name="test-command-line" key="kselftest_mm_hugepage_mmap" value="cd &ktest_dir;; ./kselftest_mm_hugepage_mmap" />
+        <option name="test-command-line" key="kselftest_mm_hugepage_shm" value="cd &ktest_dir;; ./kselftest_mm_hugepage_shm" />
+        <option name="test-command-line" key="kselftest_mm_map_hugetlb" value="cd &ktest_dir;; ./kselftest_mm_map_hugetlb" />
+        <option name="test-command-line" key="kselftest_mm_mlock2_tests" value="cd &ktest_dir;; ./kselftest_mm_mlock2_tests" />
+        <option name="test-command-line" key="kselftest_mm_mlock_random_test" value="cd &ktest_dir;; ./kselftest_mm_mlock_random_test" />
+        <option name="test-command-line" key="kselftest_mm_mremap_dontunmap" value="cd &ktest_dir;; ./kselftest_mm_mremap_dontunmap" />
+        <option name="test-command-line" key="kselftest_mm_mremap_test" value="cd &ktest_dir;; ./kselftest_mm_mremap_test" />
+        <option name="test-command-line" key="kselftest_mm_on_fault_limit" value="cd &ktest_dir;; ./kselftest_mm_on_fault_limit" />
+        <option name="test-command-line" key="kselftest_mm_thuge_gen" value="cd &ktest_dir;; ./kselftest_mm_thuge_gen" />
+        <option name="test-command-line" key="kselftest_mm_transhuge_stress" value="cd &ktest_dir;; ./kselftest_mm_transhuge_stress" />
+        <option name="test-command-line" key="kselftest_mm_uffd_unit_tests" value="cd &ktest_dir;; ./kselftest_mm_uffd_unit_tests" />
+        <option name="test-command-line" key="kselftest_size_test_get_size" value="cd &ktest_dir;; ./kselftest_size_test_get_size" />
+        <option name="test-command-line" key="kselftest_timers_adjtick" value="cd &ktest_dir;; ./kselftest_timers_adjtick" />
+        <option name="test-command-line" key="kselftest_timers_alarmtimer_suspend" value="cd &ktest_dir;; ./kselftest_timers_alarmtimer_suspend" />
+        <option name="test-command-line" key="kselftest_timers_change_skew" value="cd &ktest_dir;; ./kselftest_timers_change_skew" />
+        <option name="test-command-line" key="kselftest_timers_clocksource_switch" value="cd &ktest_dir;; ./kselftest_timers_clocksource_switch" />
+        <option name="test-command-line" key="kselftest_timers_freq_step" value="cd &ktest_dir;; ./kselftest_timers_freq_step" />
+        <option name="test-command-line" key="kselftest_timers_inconsistency_check" value="cd &ktest_dir;; ./inconsistency-check" />
+        <option name="test-command-line" key="kselftest_timers_leap_a_day" value="cd &ktest_dir;; ./kselftest_timers_leap_a_day" />
+        <option name="test-command-line" key="kselftest_timers_leapcrash" value="cd &ktest_dir;; ./kselftest_timers_leapcrash" />
+        <option name="test-command-line" key="kselftest_timers_nanosleep" value="cd &ktest_dir;; ./nanosleep" />
+        <option name="test-command-line" key="kselftest_timers_nsleep_lat" value="cd &ktest_dir;; ./nsleep-lat" />
+        <option name="test-command-line" key="kselftest_timers_posix_timers" value="cd &ktest_dir;; ./kselftest_timers_posix_timers" />
+        <option name="test-command-line" key="kselftest_timers_set_2038" value="cd &ktest_dir;; ./kselftest_timers_set_2038" />
+        <option name="test-command-line" key="kselftest_timers_set_tai" value="cd &ktest_dir;; ./kselftest_timers_set_tai" />
+        <option name="test-command-line" key="kselftest_timers_set_timer_lat" value="cd &ktest_dir;; ./kselftest_timers_set_timer_lat" />
+        <option name="test-command-line" key="kselftest_timers_set_tz" value="cd &ktest_dir;; ./kselftest_timers_set_tz" />
+        <option name="test-command-line" key="kselftest_timers_skew_consistency" value="cd &ktest_dir;; ./kselftest_timers_skew_consistency" />
+        <option name="test-command-line" key="kselftest_timers_tests_raw_skew" value="cd &ktest_dir;; ./raw_skew" />
+        <option name="test-command-line" key="kselftest_timers_threadtest" value="cd &ktest_dir;; ./kselftest_timers_threadtest" />
+        <option name="test-command-line" key="kselftest_timers_valid_adjtimex" value="cd &ktest_dir;; ./kselftest_timers_valid_adjtimex" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_abi" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_abi" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_getcpu" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_getcpu" />
+        <option name="test-command-line" key="kselftest_vdso_vdso_test_gettimeofday" value="cd &ktest_dir;; ./kselftest_vdso_vdso_test_gettimeofday" />
+        <option name="test-command-line" key="kselftest_x86_check_initial_reg_state" value="cd &ktest_dir;; ./kselftest_x86_check_initial_reg_state" />
+        <option name="test-command-line" key="kselftest_x86_ldt_gdt" value="cd &ktest_dir;; ./kselftest_x86_ldt_gdt" />
+        <option name="test-command-line" key="kselftest_x86_ptrace_syscall" value="cd &ktest_dir;; ./kselftest_x86_ptrace_syscall" />
+        <option name="test-command-line" key="kselftest_x86_single_step_syscall" value="cd &ktest_dir;; ./kselftest_x86_single_step_syscall" />
+        <option name="test-command-line" key="kselftest_x86_syscall_nt" value="cd &ktest_dir;; ./kselftest_x86_syscall_nt" />
+        <option name="test-command-line" key="kselftest_x86_test_mremap_vdso" value="cd &ktest_dir;; ./kselftest_x86_test_mremap_vdso" />
+        <option name="test-command-line" key="kselftest_seccomp_seccomp_bpf" value="cd &ktest_dir;; ./kselftest_seccomp_seccomp_bpf" />
     </test>
 </configuration>
