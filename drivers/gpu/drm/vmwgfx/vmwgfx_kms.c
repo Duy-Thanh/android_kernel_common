@@ -771,8 +771,7 @@ err_out:
 		ret = vmw_bo_dirty_add(bo);
 		if (!ret && surface && surface->res.func->dirty_alloc) {
 			surface->res.coherent = true;
-			if (surface->res.dirty == NULL)
-				ret = surface->res.func->dirty_alloc(&surface->res);
+			ret = surface->res.func->dirty_alloc(&surface->res);
 		}
 		ttm_bo_unreserve(&bo->tbo);
 	}

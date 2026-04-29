@@ -90,11 +90,11 @@ pvr_power_request_pwr_off(struct pvr_device *pvr_dev)
 }
 
 static int
-pvr_power_fw_disable(struct pvr_device *pvr_dev, bool hard_reset, bool rpm_suspend)
+pvr_power_fw_disable(struct pvr_device *pvr_dev, bool hard_reset)
 {
-	int err;
-
 	if (!hard_reset) {
+		int err;
+
 		cancel_delayed_work_sync(&pvr_dev->watchdog.work);
 
 		err = pvr_power_request_idle(pvr_dev);
@@ -106,47 +106,29 @@ pvr_power_fw_disable(struct pvr_device *pvr_dev, bool hard_reset, bool rpm_suspe
 			return err;
 	}
 
-	if (rpm_suspend) {
-		/* This also waits for late processing of GPU or firmware IRQs in other cores */
-		disable_irq(pvr_dev->irq);
-	}
-
-	err = pvr_fw_stop(pvr_dev);
-	if (err && rpm_suspend)
-		enable_irq(pvr_dev->irq);
-
-	return err;
+	return pvr_fw_stop(pvr_dev);
 }
 
 static int
-pvr_power_fw_enable(struct pvr_device *pvr_dev, bool rpm_resume)
+pvr_power_fw_enable(struct pvr_device *pvr_dev)
 {
 	int err;
 
-	if (rpm_resume)
-		enable_irq(pvr_dev->irq);
-
 	err = pvr_fw_start(pvr_dev);
 	if (err)
-		goto out;
+		return err;
 
 	err = pvr_wait_for_fw_boot(pvr_dev);
 	if (err) {
 		drm_err(from_pvr_device(pvr_dev), "Firmware failed to boot\n");
 		pvr_fw_stop(pvr_dev);
-		goto out;
+		return err;
 	}
 
 	queue_delayed_work(pvr_dev->sched_wq, &pvr_dev->watchdog.work,
 			   msecs_to_jiffies(WATCHDOG_TIME_MS));
 
 	return 0;
-
-out:
-	if (rpm_resume)
-		disable_irq(pvr_dev->irq);
-
-	return err;
 }
 
 bool
@@ -379,7 +361,7 @@ pvr_power_device_suspend(struct device *dev)
 		return -EIO;
 
 	if (pvr_dev->fw_dev.booted) {
-		err = pvr_power_fw_disable(pvr_dev, false, true);
+		err = pvr_power_fw_disable(pvr_dev, false);
 		if (err)
 			goto err_drm_dev_exit;
 	}
@@ -409,7 +391,7 @@ pvr_power_device_resume(struct device *dev)
 		goto err_drm_dev_exit;
 
 	if (pvr_dev->fw_dev.booted) {
-		err = pvr_power_fw_enable(pvr_dev, true);
+		err = pvr_power_fw_enable(pvr_dev);
 		if (err)
 			goto err_power_off;
 	}
@@ -528,16 +510,7 @@ pvr_power_reset(struct pvr_device *pvr_dev, bool hard_reset)
 	}
 
 	/* Disable IRQs for the duration of the reset. */
-	if (hard_reset) {
-		disable_irq(pvr_dev->irq);
-	} else {
-		/*
-		 * Soft reset is triggered as a response to a FW command to the Host and is
-		 * processed from the threaded IRQ handler. This code cannot (nor needs to)
-		 * wait for any IRQ processing to complete.
-		 */
-		disable_irq_nosync(pvr_dev->irq);
-	}
+	disable_irq(pvr_dev->irq);
 
 	do {
 		if (hard_reset) {
@@ -545,7 +518,7 @@ pvr_power_reset(struct pvr_device *pvr_dev, bool hard_reset)
 			queues_disabled = true;
 		}
 
-		err = pvr_power_fw_disable(pvr_dev, hard_reset, false);
+		err = pvr_power_fw_disable(pvr_dev, hard_reset);
 		if (!err) {
 			if (hard_reset) {
 				pvr_dev->fw_dev.booted = false;
@@ -568,7 +541,7 @@ pvr_power_reset(struct pvr_device *pvr_dev, bool hard_reset)
 
 			pvr_fw_irq_clear(pvr_dev);
 
-			err = pvr_power_fw_enable(pvr_dev, false);
+			err = pvr_power_fw_enable(pvr_dev);
 		}
 
 		if (err && hard_reset)
