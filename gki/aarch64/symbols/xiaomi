@@ -280,3 +280,7 @@
  blk_mq_alloc_queue
  scsi_host_busy
  dev_pm_opp_find_freq_ceil_indexed
+
+# required by xiaomi binder
+__tracepoint_android_vh_binder_skip_set_priority
+__traceiter_android_vh_binder_skip_set_priority
