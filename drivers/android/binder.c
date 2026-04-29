@@ -822,6 +822,7 @@ static void binder_transaction_priority(struct binder_thread *thread,
 		.sched_policy = node->sched_policy,
 		.prio = node->min_priority,
 	};
+	bool skip = false;
 
 	if (t->set_priority_called)
 		return;
@@ -865,7 +866,9 @@ static void binder_transaction_priority(struct binder_thread *thread,
 	}
 	spin_unlock(&thread->prio_lock);
 
-	binder_set_priority(thread, &desired);
+	trace_android_vh_binder_skip_set_priority(thread, &skip);
+	if (!skip)
+		binder_set_priority(thread, &desired);
 	trace_android_vh_binder_set_priority(t, task);
 }
 
@@ -3959,6 +3962,7 @@ static void binder_transaction(struct binder_proc *proc,
 	}
 
 	if (reply) {
+		bool skip = false;
 		binder_enqueue_thread_work(thread, tcomplete);
 		binder_inner_proc_lock(target_proc);
 		if (target_thread->is_dead) {
@@ -3979,7 +3983,9 @@ static void binder_transaction(struct binder_proc *proc,
 		}
 		wake_up_interruptible_sync(&target_thread->wait);
 		trace_android_vh_binder_restore_priority(in_reply_to);
-		binder_restore_priority(thread, &in_reply_to->saved_priority);
+		trace_android_vh_binder_skip_set_priority(thread, &skip);
+        if (!skip)
+			binder_restore_priority(thread, &in_reply_to->saved_priority);
 		binder_free_transaction(in_reply_to);
 	} else if (!(t->flags & TF_ONE_WAY)) {
 		BUG_ON(t->buffer->async_transaction != 0);
@@ -4968,6 +4974,7 @@ static int binder_thread_read(struct binder_proc *proc,
 	int ret = 0;
 	bool nothing_to_do = false;
 	bool force_spawn = false;
+	bool skip = false;
 	int wait_for_proc_work;
 
 	if (*consumed == 0) {
@@ -4994,7 +5001,9 @@ retry:
 			wait_event_interruptible(binder_user_error_wait,
 						 binder_stop_on_user_error < 2);
 		}
-		binder_restore_priority(thread, &proc->default_priority);
+		trace_android_vh_binder_skip_set_priority(thread, &skip);
+		if (!skip)
+			binder_restore_priority(thread, &proc->default_priority);
 	}
 
 	if (non_block) {
