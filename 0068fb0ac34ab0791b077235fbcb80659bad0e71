@@ -87,6 +87,24 @@
       "parentUuid": "d5639464_6e4d6e6f",
       "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1ab9b2_ee84904a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896606
+      },
+      "writtenOn": "2026-04-29T03:46:31Z",
+      "side": 1,
+      "message": "Hi Zhengping,\n\nAs you suggested seems like option1 is the feasible solution. Please let us know once these CL\u0027s are landed. Accordingly, we shall take further action to build new CL\u0027s on top of these changes.",
+      "parentUuid": "2bc3cd45_e610fa96",
+      "revId": "0068fb0ac34ab0791b077235fbcb80659bad0e71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
