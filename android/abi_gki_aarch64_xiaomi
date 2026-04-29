@@ -657,3 +657,32 @@ __tracepoint_android_vh_mmap_lock_init
 __traceiter_android_vh_mmap_lock_free
 __tracepoint_android_vh_mmap_lock_free
 vendor_data_pad
+<<<<<<< HEAD   (5db175a96ccf5313cb1d057c0486658a9539f207 ANDROID: mm: add android_vh_folio_end_writeback hook)
+||||||| BASE   (00102f1c661495fe5232f89ab707379b6cdfa61e ANDROID: mm: add android_vh_folio_end_writeback hook)
+
+# low lat mem
+__tracepoint_android_vh_compact_bypass
+__traceiter_android_vh_compact_bypass
+__tracepoint_android_vh_cma_release_bypass
+__traceiter_android_vh_cma_release_bypass
+__tracepoint_android_vh_cma_alloc_end
+__traceiter_android_vh_cma_alloc_end
+__tracepoint_android_vh_cma_alloc_bypass
+__traceiter_android_vh_cma_alloc_bypass
+
+=======
+
+# low lat mem
+__tracepoint_android_vh_compact_bypass
+__traceiter_android_vh_compact_bypass
+__tracepoint_android_vh_cma_release_bypass
+__traceiter_android_vh_cma_release_bypass
+__tracepoint_android_vh_cma_alloc_end
+__traceiter_android_vh_cma_alloc_end
+__tracepoint_android_vh_cma_alloc_bypass
+__traceiter_android_vh_cma_alloc_bypass
+
+# folio writeback hooks
+__tracepoint_android_vh_folio_end_writeback
+__traceiter_android_vh_folio_end_writeback
+>>>>>>> CHANGE (9f3038e9502c128a8ca2914419d75c8b95d31e46 ANDROID: GKI: update symbol list for xiaomi)
