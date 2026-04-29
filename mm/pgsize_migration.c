@@ -135,10 +135,40 @@ void vma_set_pad_pages(struct vm_area_struct *vma,
 	__vm_flags_mod(vma, nr_pages << VM_PAD_SHIFT, 0);
 }
 
-unsigned long vma_pad_pages(struct vm_area_struct *vma)
+/**
+ * __vma_pad_pages - Get the number of padding pages for a VMA.
+ * @vma: The VMA to check.
+ * @new: The new VMA if this is called during a split.
+ *
+ * This is an internal helper only meant to be used by split_pad_vma() to
+ * handle the case where the VMA bounds have already been updated. Other
+ * callers should use vma_pad_pages().
+ *
+ * During a VMA split, the original VMA's bounds (vm_start/vm_end) are updated
+ * before its padding flags are adjusted. This means that at the time of the
+ * split, vma_pages(vma) might be smaller than the number of padding pages
+ * stored in its flags.
+ *
+ * If @new is provided, it is assumed to be the other half of the split VMA,
+ * and its page count is added to @vma's to reconstruct the original total
+ * page count for the padding check.
+ *
+ * Returns: The number of padding pages, or 0 if padding is disabled or
+ * the VMA is inconsistent.
+ */
+static unsigned long __vma_pad_pages(struct vm_area_struct *vma,
+				     struct vm_area_struct *new)
 {
+<<<<<<< HEAD   (41b645becbe672ec799ba743935537e24ec5951b ANDROID: 16K: Allow VMAs with all padding pages.)
 	int nr_pages = 0;
 	int nr_pad = 0;
+||||||| BASE   (4e1ff6cc0ae697b41be99bede3645a0e793f2354 ANDROID: dm-bow: ignore discard in CHECKPOINT state)
+	int nr_pages;
+	int nr_pad;
+=======
+	unsigned long nr_pages;
+	unsigned long nr_pad;
+>>>>>>> CHANGE (c24e8b63076ebc75e83ec3182e9ec9075eb667ef ANDROID: 16K: Fix padding calculation during VMA split)
 
 	if (!is_pgsize_migration_enabled())
 		return 0;
@@ -148,6 +178,8 @@ unsigned long vma_pad_pages(struct vm_area_struct *vma)
 		return 0;
 
 	nr_pages = vma_pages(vma);
+	if (new)
+		nr_pages += vma_pages(new);
 
 	/*
 	 * The number of padding pages should not exceed the total number of pages in
@@ -159,6 +191,11 @@ unsigned long vma_pad_pages(struct vm_area_struct *vma)
 		return 0;
 
 	return nr_pad;
+}
+
+unsigned long vma_pad_pages(struct vm_area_struct *vma)
+{
+	return __vma_pad_pages(vma, NULL);
 }
 
 static __always_inline bool str_has_suffix(const char *str, const char *suffix)
@@ -429,7 +466,7 @@ void show_map_pad_vma(struct vm_area_struct *vma, struct seq_file *m,
 void split_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *new,
 		   unsigned long addr, int new_below)
 {
-	unsigned long nr_pad_pages = vma_pad_pages(vma);
+	unsigned long nr_pad_pages = __vma_pad_pages(vma, new);
 	unsigned long nr_vma2_pages;
 	struct vm_area_struct *first;
 	struct vm_area_struct *second;
