@@ -658,3 +658,7 @@ __tracepoint_android_vh_mm_direct_reclaim_end
 __traceiter_android_vh_mm_direct_reclaim_end
 try_to_free_pages
 
+# folio writeback hooks
+__tracepoint_android_vh_folio_end_writeback
+__traceiter_android_vh_folio_end_writeback
+
