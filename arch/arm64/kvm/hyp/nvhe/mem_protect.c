@@ -2416,7 +2416,7 @@ int __pkvm_host_donate_sglist_hyp(struct pkvm_sglist_page *sglist, size_t nr_pag
 			kvm_iommu_host_stage2_idmap_complete(false);
 
 			/* Rollback */
-			for (; p >= 0; p--) {
+			while (p-- > 0) {
 				phys = hyp_pfn_to_phys(sglist[p].pfn);
 				size = PAGE_SIZE << sglist[p].order;
 
