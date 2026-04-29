@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3406a7b8_f6ae73ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-29T22:39:00Z",
+      "side": 1,
+      "message": "Please do not place vendor hooks and symbol exports into a single patch. This should be placed in a separate patch with its own explanation why it\u0027s needed.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 47
+      },
+      "revId": "22b3abbe3359141dda02a3f156ff992c59f8cbe0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f2424a_d0be8af3",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-29T22:39:00Z",
+      "side": 1,
+      "message": "Nope, jumping into the middle of another conditional block is not acceptable. It breaks code structure and makes it less maintainable. Please refactor this.",
+      "range": {
+        "startLine": 1415,
+        "startChar": 8,
+        "endLine": 1415,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e0781ec5_e785c1f6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 1415,
+                "startChar": 0,
+                "endLine": 1416,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tgoto handle_release_folio;\n\n\t\t/*\n\t\t * If the folio was split above, the tail pages will make\n\t\t * their own pass through this function and be accounted\n\t\t * then.\n\t\t */\n\t\tif ((nr_pages \u003e 1) \u0026\u0026 !folio_test_large(folio)) {\n\t\t\tsc-\u003enr_scanned -\u003d (nr_pages - 1);\n\t\t\tnr_pages \u003d 1;\n\t\t}\n\n\t\t/*\n\t\t * The folio is mapped into the page tables of one or more\n\t\t * processes. Try to unmap it here.\n\t\t */\n\t\tif (folio_mapped(folio)) {\n\t\t\tenum ttu_flags flags \u003d TTU_BATCH_FLUSH;\n\t\t\tbool was_swapbacked \u003d folio_test_swapbacked(folio);\n\n\t\t\tif (folio_test_pmd_mappable(folio))\n\t\t\t\tflags |\u003d TTU_SPLIT_HUGE_PMD;\n\t\t\t/*\n\t\t\t * Without TTU_SYNC, try_to_unmap will only begin to\n\t\t\t * hold PTL from the first present PTE within a large\n\t\t\t * folio. Some initial PTEs might be skipped due to\n\t\t\t * races with parallel PTE writes in which PTEs can be\n\t\t\t * cleared temporarily before being written new present\n\t\t\t * values. This will lead to a large folio is still\n\t\t\t * mapped while some subpages have been partially\n\t\t\t * unmapped after try_to_unmap; TTU_SYNC helps\n\t\t\t * try_to_unmap acquire PTL from the first PTE,\n\t\t\t * eliminating the influence of temporary PTE values.\n\t\t\t */\n\t\t\tif (folio_test_large(folio))\n\t\t\t\tflags |\u003d TTU_SYNC;\n\n\t\t\ttry_to_unmap(folio, flags);\n\t\t\tif (folio_mapped(folio)) {\n\t\t\t\tstat-\u003enr_unmap_fail +\u003d nr_pages;\n\t\t\t\tif (!was_swapbacked \u0026\u0026\n\t\t\t\t    folio_test_swapbacked(folio))\n\t\t\t\t\tstat-\u003enr_lazyfree_fail +\u003d nr_pages;\n\t\t\t\tgoto activate_locked;\n\t\t\t}\n\t\t}\n\n\t\t/*\n\t\t * Folio is unmapped now so it cannot be newly pinned anymore.\n\t\t * No point in trying to reclaim folio if it is pinned.\n\t\t * Furthermore we don\u0027t want to reclaim underlying fs metadata\n\t\t * if the folio is pinned and thus potentially modified by the\n\t\t * pinning process as that may upset the filesystem.\n\t\t */\n\t\tif (folio_maybe_dma_pinned(folio))\n\t\t\tgoto activate_locked;\n\n\t\tmapping \u003d folio_mapping(folio);\n\t\tif (folio_test_dirty(folio)) {\n\t\t\t/*\n\t\t\t * Only kswapd can writeback filesystem folios\n\t\t\t * to avoid risk of stack overflow. But avoid\n\t\t\t * injecting inefficient single-folio I/O into\n\t\t\t * flusher writeback as much as possible: only\n\t\t\t * write folios when we\u0027ve encountered many\n\t\t\t * dirty folios, and when we\u0027ve already scanned\n\t\t\t * the rest of the LRU for clean folios and see\n\t\t\t * the same dirty folios again (with the reclaim\n\t\t\t * flag set).\n\t\t\t */\n\t\t\tif (folio_is_file_lru(folio) \u0026\u0026\n\t\t\t    (!current_is_kswapd() ||\n\t\t\t     !folio_test_reclaim(folio) ||\n\t\t\t     !test_bit(PGDAT_DIRTY, \u0026pgdat-\u003eflags))) {\n\t\t\t\t/*\n\t\t\t\t * Immediately reclaim when written back.\n\t\t\t\t * Similar in principle to folio_deactivate()\n\t\t\t\t * except we already have the folio isolated\n\t\t\t\t * and know it\u0027s dirty\n\t\t\t\t */\n\t\t\t\tnode_stat_mod_folio(folio, NR_VMSCAN_IMMEDIATE,\n\t\t\t\t\t\tnr_pages);\n\t\t\t\tfolio_set_reclaim(folio);\n\n\t\t\t\tgoto activate_locked;\n\t\t\t}\n\n\t\t\tif (references \u003d\u003d FOLIOREF_RECLAIM_CLEAN)\n\t\t\t\tgoto keep_locked;\n\t\t\tif (!may_enter_fs(folio, sc-\u003egfp_mask))\n\t\t\t\tgoto keep_locked;\n\t\t\tif (!sc-\u003emay_writepage)\n\t\t\t\tgoto keep_locked;\n\n\t\t\t/*\n\t\t\t * Folio is dirty. Flush the TLB if a writable entry\n\t\t\t * potentially exists to avoid CPU writes after I/O\n\t\t\t * starts and then write it out here.\n\t\t\t */\n\t\t\ttry_to_unmap_flush_dirty();\n\t\t\tswitch (pageout(folio, mapping, \u0026plug, folio_list)) {\n\t\t\tcase PAGE_KEEP:\n\t\t\t\tgoto keep_locked;\n\t\t\tcase PAGE_ACTIVATE:\n\t\t\t\t/*\n\t\t\t\t * If shmem folio is split when writeback to swap,\n\t\t\t\t * the tail pages will make their own pass through\n\t\t\t\t * this function and be accounted then.\n\t\t\t\t */\n\t\t\t\tif (nr_pages \u003e 1 \u0026\u0026 !folio_test_large(folio)) {\n\t\t\t\t\tsc-\u003enr_scanned -\u003d (nr_pages - 1);\n\t\t\t\t\tnr_pages \u003d 1;\n\t\t\t\t}\n\t\t\t\tgoto activate_locked;\n\t\t\tcase PAGE_SUCCESS:\n\t\t\t\tif (nr_pages \u003e 1 \u0026\u0026 !folio_test_large(folio)) {\n\t\t\t\t\tsc-\u003enr_scanned -\u003d (nr_pages - 1);\n\t\t\t\t\tnr_pages \u003d 1;\n\t\t\t\t}\n\t\t\t\tstat-\u003enr_pageout +\u003d nr_pages;\n\n\t\t\t\tif (folio_test_writeback(folio)) {\n\t\t\t\t\ttrace_android_vh_handle_folio_writeback(folio, \u0026bypass);\n\t\t\t\t\tgoto keep;\n\t\t\t\t}\n\t\t\t\tif (folio_test_dirty(folio))\n\t\t\t\t\tgoto keep;\n\n\t\t\t\t/*\n\t\t\t\t * A synchronous write - probably a ramdisk.  Go\n\t\t\t\t * ahead and try to reclaim the folio.\n\t\t\t\t */\n\t\t\t\tif (!folio_trylock(folio))\n\t\t\t\t\tgoto keep;\n\t\t\t\tif (folio_test_dirty(folio) ||\n\t\t\t\t    folio_test_writeback(folio))\n\t\t\t\t\tgoto keep_locked;\n\t\t\t\tmapping \u003d folio_mapping(folio);\n\t\t\t\tfallthrough;\n\t\t\tcase PAGE_CLEAN:\n\t\t\t\t; /* try to free the folio below */\n\t\t\t}\n\t\t}\n\n\t\t/*\n\t\t * If the folio has buffers, try to free the buffer\n\t\t * mappings associated with this folio. If we succeed\n\t\t * we try to free the folio as well.\n\t\t *\n\t\t * We do this even if the folio is dirty.\n\t\t * filemap_release_folio() does not perform I/O, but it\n\t\t * is possible for a folio to have the dirty flag set,\n\t\t * but it is actually clean (all its buffers are clean).\n\t\t * This happens if the buffers were written out directly,\n\t\t * with submit_bh(). ext3 will do this, as well as\n\t\t * the blockdev mapping.  filemap_release_folio() will\n\t\t * discover that cleanness and will drop the buffers\n\t\t * and mark the folio clean - it can be freed.\n\t\t *\n\t\t * Rarely, folios can have buffers and no -\u003emapping.\n\t\t * These are the folios which were not successfully\n\t\t * invalidated in truncate_cleanup_folio().  We try to\n\t\t * drop those buffers here and if that worked, and the\n\t\t * folio is no longer mapped into process address space\n\t\t * (refcount \u003d\u003d 1) it can be freed.  Otherwise, leave\n\t\t * the folio on the LRU so it is swappable.\n\t\t */\n\t\tif (folio_needs_release(folio)) {\n\t\t\tif (!filemap_release_folio(folio, sc-\u003egfp_mask))\n\t\t\t\tgoto activate_locked;\n\t\t\tif (!mapping \u0026\u0026 folio_ref_count(folio) \u003d\u003d 1) {\nhandle_release_folio:\n\t\t\t\ttrace_android_vh_shrink_folio_lock_owner_clear(folio);\n\t\t\t\tfolio_unlock(folio);\n\t\t\t\tif (folio_put_testzero(folio))\n\t\t\t\t\tgoto free_it;\n\t\t\t\telse {\n\t\t\t\t\t/*\n\t\t\t\t\t * rare race with speculative reference.\n\t\t\t\t\t * the speculative reference will free\n\t\t\t\t\t * this folio shortly, so we may\n\t\t\t\t\t * increment nr_reclaimed here (and\n\t\t\t\t\t * leave it off the LRU).\n\t\t\t\t\t */\n\t\t\t\t\tnr_reclaimed +\u003d nr_pages;\n\t\t\t\t\tcontinue;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "22b3abbe3359141dda02a3f156ff992c59f8cbe0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
