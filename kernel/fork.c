@@ -300,7 +300,8 @@ static int alloc_thread_stack_node(struct task_struct *tsk, int node)
 			continue;
 
 		/* Reset stack metadata. */
-		kasan_unpoison_range(s->addr, THREAD_SIZE);
+		if (!kasan_hw_tags_enabled())
+			kasan_unpoison_range(s->addr, THREAD_SIZE);
 
 		stack = kasan_reset_tag(s->addr);
 
