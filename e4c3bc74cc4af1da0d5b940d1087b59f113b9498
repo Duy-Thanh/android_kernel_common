@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ae42d3_0022f769",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-29T17:24:21Z",
+      "side": 1,
+      "message": "nit: weird newline",
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "016c18fc_20b8757d",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-29T17:24:21Z",
+      "side": 1,
+      "message": "To avoid confusion between `hyp_page_count()` and `hyp_pagetable_count()`, I wonder if we could rework things slightly here? Specifically, I\u0027m thinking:\n\n1. Have `hyp_page_count()` do the `- 1` adjustment\n2. Introduce `static bool hyp_page_referenced()`, private to `mem_protect.c` which just tells you whether the underlying (unadjusted) refcount is non-zero.\n\nWDYT?",
+      "range": {
+        "startLine": 134,
+        "startChar": 18,
+        "endLine": 134,
+        "endChar": 37
+      },
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1f1370_1d9517fa",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-29T17:24:21Z",
+      "side": 1,
+      "message": "Might be worth a `#define` (+comment) given that this is used again by ``hyp_pool_reclaim()`?",
+      "range": {
+        "startLine": 158,
+        "startChar": 31,
+        "endLine": 158,
+        "endChar": 32
+      },
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
