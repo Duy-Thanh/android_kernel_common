@@ -16,6 +16,24 @@
       "message": "This will need to be rebased once the KMI update lands.",
       "revId": "073a4da136dc498f5e10bdb5c92bdc387a573be8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea859af9_0dcc7eb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-29T21:56:00Z",
+      "side": 1,
+      "message": "Now there are merge conflicts that need to be resolved.",
+      "parentUuid": "8aed1fe8_7970088b",
+      "revId": "073a4da136dc498f5e10bdb5c92bdc387a573be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
