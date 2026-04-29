@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5ec829_e58c165a",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 4224958
+      },
+      "writtenOn": "2026-04-29T09:45:52Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Keep Sorted: These lines are out of order.\n\nThese lines are out of order.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 622,
+        "endChar": 60
+      },
+      "revId": "73715451e59e18ff4fb3a1ddd638fd54f719cad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
