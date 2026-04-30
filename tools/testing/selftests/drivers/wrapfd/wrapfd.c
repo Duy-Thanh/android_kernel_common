@@ -183,14 +183,17 @@ FIXTURE_TEARDOWN(wrapfd_tests)
 }
 
 static int cmp_content(struct __test_metadata *_metadata,
-		       FIXTURE_DATA(wrapfd_tests) *self, int wrapfd, unsigned long len)
+		       FIXTURE_DATA(wrapfd_tests) *self, int wrapfd, unsigned long file_offs,
+		       unsigned long buf_offs, unsigned long len)
 {
+	const unsigned long aligned_buf_offs = buf_offs & ~(self->page_size - 1);
+	const unsigned long buf_pg_offs = buf_offs & (self->page_size - 1);
 	char *ptr;
 	int ret;
 
-	ptr = mmap(NULL, len, PROT_READ, MAP_SHARED, wrapfd, 0);
+	ptr = mmap(NULL, len, PROT_READ, MAP_SHARED, wrapfd, aligned_buf_offs);
 	ASSERT_NE(ptr, MAP_FAILED);
-	ret = memcmp(self->content, ptr, len);
+	ret = memcmp(self->content + file_offs, ptr + buf_offs, len);
 	ASSERT_EQ(munmap(ptr, len), 0);
 
 	return ret;
@@ -281,10 +284,59 @@ static void *memchr_inv(const void *start, int c, size_t bytes)
 	return check_bytes(start, value, bytes % 8);
 }
 
+static void __test_load(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_tests) *self,
+			int wrapfd, unsigned long file_offs, unsigned long buf_offs,
+			unsigned long len)
+{
+	const u8 poison_val = 0xaa;
+	unsigned long head_len = 0;
+	unsigned long tail_len = 0;
+	char *head_ptr, *tail_page_ptr, *tail_ptr;
+
+	clear_content(_metadata, self, wrapfd);
+	ASSERT_NE(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
+
+	/*
+	 * Poison the head and tail so that we can validate them after the load to ensure they
+	 * weren't written to by accident.
+	 *
+	 * Loading while the owner has a mapping to the buffer should work.
+	 */
+	if (buf_offs) {
+		head_len = buf_offs;
+
+		head_ptr = mmap(NULL, head_len, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		ASSERT_NE(head_ptr, MAP_FAILED);
+		memset(head_ptr, poison_val, head_len);
+	}
+
+	if ((buf_offs + len) < self->size) {
+		tail_len = self->size - (buf_offs + len);
+		tail_page_ptr = mmap(NULL, tail_len, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd,
+				     (buf_offs + len) & ~(self->page_size - 1));
+		ASSERT_NE(tail_page_ptr, MAP_FAILED);
+		tail_ptr = tail_page_ptr + buf_offs + len;
+		memset(tail_ptr, poison_val, tail_len);
+	}
+
+	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, file_offs, buf_offs, self->size), 0);
+
+	if (head_ptr) {
+		ASSERT_EQ(memchr_inv(head_ptr, poison_val, head_len), NULL);
+		ASSERT_EQ(munmap(head_ptr, head_len), 0);
+	}
+
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, file_offs, buf_offs, len), 0);
+
+	if (tail_page_ptr) {
+		ASSERT_EQ(memchr_inv(tail_ptr, poison_val, tail_len), NULL);
+		ASSERT_EQ(munmap(tail_page_ptr, tail_len), 0);
+	}
+}
+
 static void test_load(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
-	const u8 poison_val = 0xaa;
 	int wrapfd, i;
 	char *ptr, *ptr2;
 
@@ -294,22 +346,24 @@ static void test_load(struct __test_metadata *_metadata,
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
 
 	/* Test a sub-page load and ensure only the requested part was written to. */
-	clear_content(_metadata, self, wrapfd);
-	/* Loading while the owner has a mapping to the buffer should work. */
-	ptr = mmap(NULL, self->page_size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
-	ASSERT_NE(ptr, MAP_FAILED);
-
-	memset(&ptr[self->page_size / 2], poison_val, self->page_size / 2);
-	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, 0, 0, self->page_size / 2), 0);
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->page_size / 2), 0);
-	ASSERT_EQ(memchr_inv(&ptr[self->page_size / 2], poison_val, self->page_size / 2), NULL);
-	ASSERT_EQ(munmap(ptr, self->page_size), 0);
-
-	clear_content(_metadata, self, wrapfd);
-	ASSERT_NE(cmp_content(_metadata, self, wrapfd, self->size), 0);
-	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, 0, 0, self->size), 0);
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
-	/* TODO: test more load offsets */
+	__test_load(_metadata, self, wrapfd, 0, 0, self->page_size / 2);
+	__test_load(_metadata, self, wrapfd, 0, 0, self->size);
+	__test_load(_metadata, self, wrapfd, self->page_size, self->page_size,
+		    self->size - self->page_size);
+	__test_load(_metadata, self, wrapfd, self->page_size / 2, 0, self->page_size / 2);
+	/* Test tiny read at random offsets. */
+	__test_load(_metadata, self, wrapfd, 100, 0, 50);
+	/* Cross a page boundary in the file and then in the buffer. */
+	__test_load(_metadata, self, wrapfd, self->page_size - 1, 0, self->page_size);
+	__test_load(_metadata, self, wrapfd, 0, self->page_size - 1, self->page_size);
+	/*
+	 * Start bounce buffer, large O_DIRECT read and memmove() logic along wit end bounce buffer.
+	 */
+	__test_load(_metadata, self, wrapfd, self->page_size / 2, self->page_size / 4,
+		    self->page_size * 3);
+	/* Test logic for fitting everything within the first bounce page. */
+	__test_load(_metadata, self, wrapfd, self->page_size / 2, self->page_size / 2,
+		    self->page_size / 2);
 
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	close(wrapfd);
@@ -324,7 +378,7 @@ static void test_wrap_rdonly(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd >= 0);
 
 	/* Check content of the buffer */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	/* Try mapping as writable */
 	ASSERT_EQ(mmap(NULL, self->size, PROT_READ | PROT_WRITE,
@@ -344,7 +398,7 @@ static void test_wrap_rdwr(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd >= 0);
 
 	/* Check content of the buffer before modification */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	/* Modify buffer content */
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
@@ -353,13 +407,13 @@ static void test_wrap_rdwr(struct __test_metadata *_metadata,
 	ptr[0]++;
 
 	/* Check content of the buffer after modification */
-	ASSERT_NE(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_NE(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	/* Restore buffer content */
 	ptr[0]--;
 
 	/* Confirm the final content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	ASSERT_EQ(munmap(ptr, self->size), 0);
 
@@ -403,7 +457,7 @@ static void test_wrap_remap(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd >= 0);
 
 	/* Check content of the buffer before modification */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	/* Modify buffer content */
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
@@ -437,7 +491,7 @@ static void test_wrap_fork(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd >= 0);
 
 	/* Check content of the buffer before modification */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
 	/* Modify buffer content */
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
@@ -474,8 +528,8 @@ static void test_dup(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd2 >= 0);
 
 	/* Check content of the buffer using both fds */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, self->size), 0);
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, 0, 0, self->size), 0);
 
 	close(wrapfd2);
 	close(wrapfd);
@@ -553,7 +607,7 @@ static void test_rewrap(struct __test_metadata *_metadata,
 		    state == WRAPFD_CONTENT_EMPTY);
 
 	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, 0, 0, self->size), 0);
 
 	/* Take ownership of the rewrapped buffer */
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd2), 0);
@@ -572,7 +626,7 @@ static void test_rewrap(struct __test_metadata *_metadata,
 	ASSERT_TRUE(ptr == MAP_FAILED && errno == EACCES);
 
 	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd3, self->size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd3, 0, 0, self->size), 0);
 
 	/* Try mapping the original empty wrap file */
 	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED,
