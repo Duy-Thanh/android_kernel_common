@@ -2437,14 +2437,8 @@ inside:
 EXPORT_SYMBOL(hashlen_string);
 
 /*
- * hash_name - Calculate the length and hash of the path component
- * @nd: the path resolution state
- * @name: the pathname to read the component from
- * @lastword: if the component fits in a single word, LAST_WORD_IS_DOT,
- * LAST_WORD_IS_DOTDOT, or some other value depending on whether the
- * component is '.', '..', or something else. Otherwise, @lastword is 0.
- *
- * Returns: a pointer to the terminating '/' or NUL character in @name.
+ * Calculate the length and hash of the path component, and
+ * return the length as the result.
  */
 static inline const char *hash_name(struct nameidata *nd,
 				    const char *name,
