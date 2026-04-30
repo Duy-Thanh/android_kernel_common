@@ -16,6 +16,24 @@
       "message": "Please remove the `abi.stg` update and tag this commit with the next KMI update hashtag, `KMI-changes-for-2026-04-29`.\n\nSee https://docs.partner.android.com/partners/guides/gki/whatsnew#2026-April-15.",
       "revId": "eaef6d975a414fff9696ae36d557b337be5d526f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1626d923_556bfb82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-30T09:13:59Z",
+      "side": 1,
+      "message": "You missed the deadline. I have added the tag for the final KMI update.",
+      "parentUuid": "0331e96b_1f29a026",
+      "revId": "eaef6d975a414fff9696ae36d557b337be5d526f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
