@@ -16,6 +16,24 @@
       "message": "This should be submitted from android17-6.18-intel branch from private/desktop-google. Can you access that?",
       "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0e064a_9813bba2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2026-04-30T19:17:05Z",
+      "side": 1,
+      "message": "I mean `android17-6.18-desktop-intel`.",
+      "parentUuid": "bee2a4cd_c6d20855",
+      "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
