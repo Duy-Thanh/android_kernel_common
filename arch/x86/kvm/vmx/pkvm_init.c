@@ -1161,16 +1161,11 @@ static noinline int local_deprivilege_cpu(void)
 static DEFINE_PER_CPU(bool, deprivileged);
 static __init void pkvm_host_reprivilege_cpu(void *data)
 {
-	unsigned long flags;
-	int cpu = get_cpu();
+	int cpu = smp_processor_id();
 	int ret;
 
-	if (!this_cpu_read(deprivileged)) {
-		put_cpu();
+	if (!this_cpu_read(deprivileged))
 		return;
-	}
-
-	local_irq_save(flags);
 
 	/*
 	 * Load the RW GDT page for reprivilege code
@@ -1198,11 +1193,8 @@ static __init void pkvm_host_reprivilege_cpu(void *data)
 		kvm_cpu_vmxoff();
 		pr_info("%s: CPU%d back in host mode\n", __func__, cpu);
 	} else {
-		pr_warn("%s: CPU%d failed to reprivilege(err=%d)\n", __func__, cpu, ret);
+		panic("%s: CPU%d failed to reprivilege(err=%d)\n", __func__, cpu, ret);
 	}
-
-	local_irq_restore(flags);
-	put_cpu();
 }
 
 static __init void pkvm_host_reprivilege_cpus(void)
