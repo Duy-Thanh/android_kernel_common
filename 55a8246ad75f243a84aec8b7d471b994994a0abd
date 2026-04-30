@@ -34,6 +34,24 @@
       "parentUuid": "bee2a4cd_c6d20855",
       "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "710099ec_1be3ea6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2026-04-30T20:12:01Z",
+      "side": 1,
+      "message": "I have uploaded arsp/4528586 for this patch.",
+      "parentUuid": "0e0e064a_9813bba2",
+      "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
