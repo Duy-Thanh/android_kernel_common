@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886f2021_12268540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1128729
+      },
+      "writtenOn": "2026-04-30T02:07:15Z",
+      "side": 1,
+      "message": "All build verifications have passed. The current test failures are due to incomplete environment setup and can be safely ignored.",
+      "revId": "665b232d34bad74febbd30c7a554f2e32395e5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
