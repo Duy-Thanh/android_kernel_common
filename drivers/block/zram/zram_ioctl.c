@@ -262,6 +262,7 @@ static int zram_ioctl_process_prefetch(struct zram *zram,
 	struct zram_android_ioc_process_prefetch *ioc_prefetch)
 {
 	struct zram_pp_ctl *pp_ctl = NULL;
+	struct zram_prefetch_ctl pf_ctl;
 	int ret;
 
 	/* Require CAP_SYS_NICE for influencing process performance. */
@@ -291,10 +292,13 @@ static int zram_ioctl_process_prefetch(struct zram *zram,
 		goto clear_pp_in_progress;
 	}
 
+	atomic_set(&pf_ctl.num_inflight, 0);
+	init_waitqueue_head(&pf_ctl.done_wait);
+
 	ret = zram_ioctl_process_scan(zram, ZRAM_ANDROID_IOC_PROCESS_PREFETCH,
 				      ioc_prefetch->pidfd, NULL, pp_ctl);
 	if (!ret)
-		ret = zram_prefetch_slots(zram, pp_ctl);
+		ret = zram_prefetch_slots(zram, pp_ctl, &pf_ctl);
 
 	release_pp_ctl(zram, pp_ctl);
 clear_pp_in_progress:

@@ -181,6 +181,11 @@ struct zram_wb_ctl {
 	u64 processed_bytes;
 };
 
+struct zram_prefetch_ctl {
+	atomic_t num_inflight;
+	wait_queue_head_t done_wait;
+};
+
 struct zram_wb_ctl *init_wb_ctl(struct zram *zram);
 void release_wb_ctl(struct zram_wb_ctl *wb_ctl);
 int scan_slots_for_writeback(struct zram *zram, u32 mode,
@@ -191,7 +196,8 @@ int zram_writeback_slots(struct zram *zram,
 			 struct zram_wb_ctl *wb_ctl);
 int scan_slot_for_prefetch(struct zram *zram, unsigned long index,
 			   struct zram_pp_ctl *ctl);
-int zram_prefetch_slots(struct zram *zram, struct zram_pp_ctl *ctl);
+int zram_prefetch_slots(struct zram *zram, struct zram_pp_ctl *ctl,
+			struct zram_prefetch_ctl *pf_ctl);
 #endif
 
 #if IS_ENABLED(CONFIG_ZRAM_ANDROID_IOCTL)
