@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79e53d7_f563b319",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2522,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-30T16:00:13Z",
+      "side": 1,
+      "message": "Would it make sense to move this call out of the loop now? We could, for example, call it from `err_page_state:` when we see that `ppage \u003d\u003d hyp_ppages`.",
+      "range": {
+        "startLine": 2522,
+        "startChar": 10,
+        "endLine": 2522,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f149997a_0cdfda63",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2445,
+                "startChar": 0,
+                "endLine": 2446,
+                "endChar": 0
+              },
+              "replacement": "static int __pkvm_module_share_sglist_guest(struct pkvm_hyp_vcpu *vcpu)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2522,
+                "startChar": 0,
+                "endLine": 2523,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tret \u003d __pkvm_module_share_sglist_guest(vcpu);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0102f9ca9175330415433a9bd996170ef0a05c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
