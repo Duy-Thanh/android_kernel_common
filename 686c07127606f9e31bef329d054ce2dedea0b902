@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bdf1674_8fd269ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-30T10:13:38Z",
+      "side": 1,
+      "message": "You can drop these two lines because b93311673263bb98a200ab1cb6304f969bdada5c is identical and also in upstream master.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 68
+      },
+      "revId": "686c07127606f9e31bef329d054ce2dedea0b902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa78d34_70356100",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-04-30T10:13:38Z",
+      "side": 1,
+      "message": "Please use Git (RFC) style tags and do not leave a blank line between `Bug: `, `Test: ` and `Change-Id: `, `Signed-off-by: `.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 75
+      },
+      "revId": "686c07127606f9e31bef329d054ce2dedea0b902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
