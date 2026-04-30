@@ -464,7 +464,7 @@ static __init int pkvm_setup_per_cpu(int cpu)
 	 * as the same percpu base will be used by the pKVM and the host in the
 	 * debug build.
 	 */
-	if (pkvm_sym(pkvm_setup_per_cpu)(cpu, __pa(__per_cpu_offset[cpu]),
+	if (pkvm_sym(pkvm_setup_per_cpu)(cpu, __per_cpu_offset[cpu],
 					 __pa(pcpu), __pa(vcpu))) {
 		pr_err("no percpu page for CPU%d\n", cpu);
 		return -ENOMEM;
