@@ -103,12 +103,12 @@ static int allocate_pkvm_vm_handle(struct pkvm_vm *pkvm_vm)
 
 static struct pkvm_vm *free_pkvm_vm_handle(int handle)
 {
+	struct pkvm_vm *pkvm_vm = ERR_PTR(-EBUSY);
 	struct pkvm_vm_ref *pkvm_vm_ref;
-	struct pkvm_vm *pkvm_vm = NULL;
 	int idx = handle;
 
 	if (idx < 0 || idx >= MAX_PKVM_VMS)
-		return NULL;
+		return ERR_PTR(-EINVAL);
 
 	pkvm_spin_lock(&pkvm_vms_lock);
 
@@ -121,6 +121,12 @@ static struct pkvm_vm *free_pkvm_vm_handle(int handle)
 	}
 
 	pkvm_vm = pkvm_vm_ref->pkvm_vm;
+	/*
+	 * The pkvm_vm pointer should be guaranteed to point of struct pkvm_vm
+	 * by the pkvm_vm reference count mechanism. Otherwise it should be a
+	 * pKVM code bug.
+	 */
+	BUG_ON(!pkvm_vm);
 	pkvm_vm_ref->pkvm_vm = NULL;
 
 	__clear_bit(idx, pkvm_vms_bitmap);
@@ -213,14 +219,14 @@ static void teardown_donated_memory(struct pkvm_memcache *mc, void *addr, size_t
 	pkvm_hyp_donate_host(__pkvm_pa(addr), size, false);
 }
 
-static void pkvm_vm_destroy(int vm_handle, struct pkvm_memcache *mc)
+static int pkvm_vm_destroy(int vm_handle, struct pkvm_memcache *mc)
 {
 	struct pkvm_vm *pkvm_vm = free_pkvm_vm_handle(vm_handle);
 	unsigned long shared_kvm_pa;
 	int i;
 
-	if (!pkvm_vm)
-		return;
+	if (IS_ERR(pkvm_vm))
+		return PTR_ERR(pkvm_vm);
 
 	memset(mc, 0, sizeof(*mc));
 
@@ -241,6 +247,8 @@ static void pkvm_vm_destroy(int vm_handle, struct pkvm_memcache *mc)
 	teardown_donated_memory(mc, (void *)pkvm_vm, pkvm_vm->size);
 
 	pkvm_host_unshare_hyp(shared_kvm_pa, kvm_x86_ops.vm_size);
+
+	return 0;
 }
 
 static int attach_pkvm_vcpu_to_vm(struct pkvm_vm *pkvm_vm, struct pkvm_vcpu *pkvm_vcpu)
@@ -2092,7 +2100,7 @@ void pkvm_handle_host_hypercall(struct kvm_vcpu *vcpu)
 		ret = pkvm_vm_finalize(pkvm_hc_input1(vcpu));
 		break;
 	case __pkvm__vm_destroy:
-		pkvm_vm_destroy(pkvm_hc_input1(vcpu), &out.vm_destroy.memcache);
+		ret = pkvm_vm_destroy(pkvm_hc_input1(vcpu), &out.vm_destroy.memcache);
 		break;
 	case __pkvm__vcpu_create:
 		ret = pkvm_vcpu_create(pkvm_hc_input1(vcpu),
