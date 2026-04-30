@@ -2118,7 +2118,13 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 		if (IS_CURSEC(sbi, GET_SEC_FROM_SEG(sbi, segno)))
 			continue;
 
+<<<<<<< HEAD   (983b842c07734f1becfae0d59119e1a51682052d Merge android15-6.6 into android15-6.6-lts)
 		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true, false);
+||||||| BASE   (54322d95309d9aa4cb77b34ee4b6c8b541f3e21f arm64: mm: Don't remap pgtables for allocate vs populate)
+=======
+		do_garbage_collect(sbi, segno, &gc_list, FG_GC,
+						dry_run_sections == 0);
+>>>>>>> BRANCH (4ada013fd7dab61405f5ee9f4c0250998650855d mmc: sdhci: fix timing selection for 1-bit bus width)
 		put_gc_inode(&gc_list);
 
 		if (!dry_run && get_valid_blocks(sbi, segno, true))
