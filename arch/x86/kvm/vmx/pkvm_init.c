@@ -1168,16 +1168,11 @@ static noinline int local_deprivilege_cpu(void)
 static DEFINE_PER_CPU(bool, deprivileged);
 static __init void pkvm_host_reprivilege_cpu(void *data)
 {
-	unsigned long flags;
-	int cpu = get_cpu();
+	int cpu = smp_processor_id();
 	int ret;
 
-	if (!this_cpu_read(deprivileged)) {
-		put_cpu();
+	if (!this_cpu_read(deprivileged))
 		return;
-	}
-
-	local_irq_save(flags);
 
 	/*
 	 * Load the RW GDT page for reprivilege code
@@ -1204,12 +1199,9 @@ static __init void pkvm_host_reprivilege_cpu(void *data)
 		this_cpu_write(deprivileged, false);
 		kvm_cpu_vmxoff();
 		pr_info("%s: CPU%d back in host mode\n", __func__, cpu);
-	} else {
-		pr_warn("%s: CPU%d failed to reprivilege(err=%d)\n", __func__, cpu, ret);
 	}
 
-	local_irq_restore(flags);
-	put_cpu();
+	*(int *)data = ret;
 }
 
 static __init void pkvm_host_reprivilege_cpus(void)
@@ -1217,11 +1209,16 @@ static __init void pkvm_host_reprivilege_cpus(void)
 	int cpu;
 
 	for_each_possible_cpu(cpu) {
+		int ret, reprivilege_ret = 0;
+
 		if (!per_cpu(deprivileged, cpu))
 			continue;
 
-		smp_call_function_single(cpu, pkvm_host_reprivilege_cpu,
-					 NULL, true);
+		ret = smp_call_function_single(cpu, pkvm_host_reprivilege_cpu,
+					       &reprivilege_ret, true);
+		if (ret || reprivilege_ret)
+			panic("CPU%d failed to reprivilege(smp_call=%d, reprivilege=%d)\n",
+			      cpu, ret, reprivilege_ret);
 	}
 }
 
