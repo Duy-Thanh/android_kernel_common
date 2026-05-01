@@ -470,7 +470,12 @@
   __traceiter_android_rvh_kswapd_shrink_node
   __traceiter_android_rvh_perform_reclaim
   __traceiter_android_vh_mglru_should_abort_scan_ex
+<<<<<<< PATCH SET (1161915625526ccf53dbc3c74dd01f5ad8746da0 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  __traceiter_android_vh_alloc_pages_entry
+||||||| BASE      (21e183a24494071af6cc18677dea3d4f5951ded2 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
   __traceiter_android_vh_filemap_get_folio
+>>>>>>> BASE      (0250aa7ba851aed40e8b9253beb184cb363dc871 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
   __tracepoint_android_vh_lru_gen_add_folio_skip
   __tracepoint_android_vh_lru_gen_del_folio_skip
   __tracepoint_android_vh_evict_folios_bypass
@@ -480,7 +485,12 @@
   __tracepoint_android_rvh_kswapd_shrink_node
   __tracepoint_android_rvh_perform_reclaim
   __tracepoint_android_vh_mglru_should_abort_scan_ex
+<<<<<<< PATCH SET (1161915625526ccf53dbc3c74dd01f5ad8746da0 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  __tracepoint_android_vh_alloc_pages_entry
+||||||| BASE      (21e183a24494071af6cc18677dea3d4f5951ded2 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
   __tracepoint_android_vh_filemap_get_folio
+>>>>>>> BASE      (0250aa7ba851aed40e8b9253beb184cb363dc871 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
   timer_init_key
   alloc_workqueue_noprof
   alloc_workqueue_attrs_noprof
