@@ -5882,7 +5882,7 @@ static int handle_io(struct kvm_vcpu *vcpu)
 	 */
 	if ((vmx_get_exit_qual(vcpu) & 16) != 0) {
 		if (pkvm_is_protected_vcpu(vcpu)) {
-			kvm_queue_exception(vcpu, GP_VECTOR);
+			kvm_inject_gp(vcpu, 0);
 			return 1;
 		}
 	}
