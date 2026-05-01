@@ -74,6 +74,30 @@
       },
       "revId": "0102f9ca9175330415433a9bd996170ef0a05c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71223381_7d381322",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2522,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-01T08:46:39Z",
+      "side": 1,
+      "message": "The argument here is that this is a reasonable tightening of the API because the supplied sglist should be either *all* module or *no* module. A mix is not sensible to support.",
+      "parentUuid": "8e54ef35_44886107",
+      "range": {
+        "startLine": 2522,
+        "startChar": 10,
+        "endLine": 2522,
+        "endChar": 43
+      },
+      "revId": "0102f9ca9175330415433a9bd996170ef0a05c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
