@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf76ed5e_a8471020",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-01T08:20:27Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "e7ae42d3_0022f769",
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "016c18fc_20b8757d",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02775644_f629de49",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-01T08:20:27Z",
+      "side": 1,
+      "message": "I agree this is delicate and weird. The problem is that hyp_page_count() is used on pages not from page_alloc, hence won\u0027t have the extra ref, and also these pages can validly have a zero refcount. I\u0027m looking at __pkvm_host_unshare_hyp() and __pkvm_guest_relinquish_to_host() for example.\n\nHence I think we need to leave hyp_page_count() alone, but I\u0027m not greatly in love with hyp_pagetable_count() and we could: Rename it; and/or Move it; and/or Make its return value essentially a boolean-in-an-int as you suggest.",
+      "parentUuid": "016c18fc_20b8757d",
+      "range": {
+        "startLine": 134,
+        "startChar": 18,
+        "endLine": 134,
+        "endChar": 37
+      },
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b1f1370_1d9517fa",
         "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
         "patchSetId": 3
@@ -54,6 +96,30 @@
       "writtenOn": "2026-04-29T17:24:21Z",
       "side": 1,
       "message": "Might be worth a `#define` (+comment) given that this is used again by ``hyp_pool_reclaim()`?",
+      "range": {
+        "startLine": 158,
+        "startChar": 31,
+        "endLine": 158,
+        "endChar": 32
+      },
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b626b8_8f595ebb",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-01T08:20:27Z",
+      "side": 1,
+      "message": "Wondered about that and got lazy. I will do this.",
+      "parentUuid": "8b1f1370_1d9517fa",
       "range": {
         "startLine": 158,
         "startChar": 31,
