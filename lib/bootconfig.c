@@ -723,8 +723,7 @@ static int __init xbc_parse_kv(char **k, char *v, int op)
 		if (op == ':') {
 			unsigned short nidx = child->next;
 
-			if (xbc_init_node(child, v, XBC_VALUE) < 0)
-				return xbc_parse_error("Failed to override value", v);
+			xbc_init_node(child, v, XBC_VALUE);
 			child->next = nidx;	/* keep subkeys */
 			goto array;
 		}
