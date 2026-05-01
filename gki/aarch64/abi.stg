@@ -352769,6 +352769,15 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b64aa6c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x36f98e5c
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x2fb2b385
+}
+function {
   id: 0x9b65063d
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -373692,6 +373701,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_alloc_oem_binder_struct"
 }
 elf_symbol {
+<<<<<<< PATCH SET (ad96feaa7e71ba2b4ee4b4fcbc2de8f95a52c3b6 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+<<<<<<< PATCH SET (51b1183b2af5bc525c13a35b96994d0a771fffae ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  id: 0x91ee96d0
+  name: "__traceiter_android_vh_alloc_pages_entry"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd8633736
+  type_id: 0x9b64aa6c
+  full_name: "__traceiter_android_vh_alloc_pages_entry"
   id: 0x33f9278c
   name: "__traceiter_android_vh_alloc_pages_failure_bypass"
   is_defined: true
@@ -373701,6 +373719,30 @@ elf_symbol {
   full_name: "__traceiter_android_vh_alloc_pages_failure_bypass"
 }
 elf_symbol {
+||||||| BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
+  id: 0x33f9278c
+  name: "__traceiter_android_vh_alloc_pages_failure_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4525bdce
+  type_id: 0x98716c4f
+  full_name: "__traceiter_android_vh_alloc_pages_failure_bypass"
+}
+elf_symbol {
+=======
+>>>>>>> BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+||||||| BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
+  id: 0x33f9278c
+  name: "__traceiter_android_vh_alloc_pages_failure_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4525bdce
+  type_id: 0x98716c4f
+  full_name: "__traceiter_android_vh_alloc_pages_failure_bypass"
+}
+elf_symbol {
+>>>>>>> BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
   id: 0x2e343246
   name: "__traceiter_android_vh_alloc_pages_reclaim_bypass"
   is_defined: true
@@ -379839,6 +379881,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_alloc_oem_binder_struct"
 }
 elf_symbol {
+<<<<<<< PATCH SET (ad96feaa7e71ba2b4ee4b4fcbc2de8f95a52c3b6 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+<<<<<<< PATCH SET (51b1183b2af5bc525c13a35b96994d0a771fffae ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  id: 0x3edc110a
+  name: "__tracepoint_android_vh_alloc_pages_entry"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_alloc_pages_entry"
   id: 0x37776872
   name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
   is_defined: true
@@ -379848,6 +379899,30 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
 }
 elf_symbol {
+||||||| BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
+  id: 0x37776872
+  name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
+}
+elf_symbol {
+=======
+>>>>>>> BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+||||||| BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
+  id: 0x37776872
+  name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_alloc_pages_failure_bypass"
+}
+elf_symbol {
+>>>>>>> BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
   id: 0xfc735654
   name: "__tracepoint_android_vh_alloc_pages_reclaim_bypass"
   is_defined: true
@@ -445788,7 +445863,18 @@ interface {
   symbol_id: 0xa21ae582
   symbol_id: 0xa6133b26
   symbol_id: 0xd0b4a794
+<<<<<<< PATCH SET (ad96feaa7e71ba2b4ee4b4fcbc2de8f95a52c3b6 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+<<<<<<< PATCH SET (51b1183b2af5bc525c13a35b96994d0a771fffae ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  symbol_id: 0x91ee96d0
   symbol_id: 0x33f9278c
+||||||| BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
+  symbol_id: 0x33f9278c
+=======
+>>>>>>> BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+||||||| BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
+  symbol_id: 0x33f9278c
+>>>>>>> BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
   symbol_id: 0x2e343246
   symbol_id: 0xf3650061
   symbol_id: 0x23d552d4
@@ -446471,7 +446557,18 @@ interface {
   symbol_id: 0xbaee0a34
   symbol_id: 0xd85e5644
   symbol_id: 0xd7f9868e
+<<<<<<< PATCH SET (ad96feaa7e71ba2b4ee4b4fcbc2de8f95a52c3b6 ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+<<<<<<< PATCH SET (51b1183b2af5bc525c13a35b96994d0a771fffae ANDROID: ABI: Update oplus symbol list for android_vh_alloc_)
+  symbol_id: 0x3edc110a
   symbol_id: 0x37776872
+||||||| BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
+  symbol_id: 0x37776872
+=======
+>>>>>>> BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+||||||| BASE      (0e1ef9b25e2f8a89a0f311c023a0c8b61f62ad71 ANDROID: vendor_hooks: add vendor hook in __alloc_pages())
+=======
+  symbol_id: 0x37776872
+>>>>>>> BASE      (8b8df079e4cc1a31b1c77b12cd2656329f1441e1 ANDROID: GKI: update symbol list for xiaomi)
   symbol_id: 0xfc735654
   symbol_id: 0xff9480af
   symbol_id: 0xa47162fe
