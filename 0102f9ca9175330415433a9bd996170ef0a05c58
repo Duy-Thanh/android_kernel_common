@@ -50,6 +50,30 @@
       ],
       "revId": "0102f9ca9175330415433a9bd996170ef0a05c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e54ef35_44886107",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2522,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-05-01T07:19:33Z",
+      "side": 1,
+      "message": "I would like to keep it like this. This would change the current behavior. eg. sglist has 2 pages and the first one gets `0 \u003d ___host_check_page_state_range(..)` but the second page fails with `-EPERM`.\n\nWith the suggested change we would not call `___pkvm_module_share_guest_sglist` anymore because `ppage !\u003d hyp_ppages`",
+      "parentUuid": "b79e53d7_f563b319",
+      "range": {
+        "startLine": 2522,
+        "startChar": 10,
+        "endLine": 2522,
+        "endChar": 43
+      },
+      "revId": "0102f9ca9175330415433a9bd996170ef0a05c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
