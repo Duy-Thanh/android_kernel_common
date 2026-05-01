@@ -16,6 +16,42 @@
       "message": "The EPERM check should gate the call to ___pkvm_module_share_guest_sglist only. We should goto unlock if ppage \u003d\u003d hyp_ppages, regardless.\n```\nif (ppage \u003d\u003d hyp_ppages) {\n    if (ret \u003d\u003d -EPERM)\n        ret \u003d ___pkvm_module_share_guest_sglist(vcpu);\n    goto unlock;\n}\n```",
       "revId": "a06a237b7370c641e840788a39241426387954c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d53686_eefd2725",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-05-01T10:48:52Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "4ef90255_d236a009",
+      "fixSuggestions": [
+        {
+          "fixId": "f72b3be6_277f57d7",
+          "description": "GET_AI_FIX_FOR_COMMENT prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2548,
+                "startChar": 0,
+                "endLine": 2550,
+                "endChar": 0
+              },
+              "replacement": "\tif (ppage \u003d\u003d hyp_ppages) {\n\t\tif (ret \u003d\u003d -EPERM)\n\t\t\tret \u003d ___pkvm_module_share_guest_sglist(vcpu);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a06a237b7370c641e840788a39241426387954c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
