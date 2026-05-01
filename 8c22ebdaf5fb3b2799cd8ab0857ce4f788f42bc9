@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e793b16_f666dc41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-01T04:41:45Z",
+      "side": 1,
+      "message": "Since this patch is on top of a set of vendor hooks and an export, could you please keep it relevant to those changes? If you need to cleanup the list, please do that as a separate patch outside of this series.",
+      "revId": "8c22ebdaf5fb3b2799cd8ab0857ce4f788f42bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
