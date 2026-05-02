@@ -70,6 +70,24 @@
       "parentUuid": "710099ec_1be3ea6c",
       "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d70b75_8720f686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1966830
+      },
+      "writtenOn": "2026-05-02T01:47:18Z",
+      "side": 1,
+      "message": "Yes, please. Please submit to arsp directly for any BT driver changes in future.",
+      "parentUuid": "2b6cd32f_8d7268d4",
+      "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
