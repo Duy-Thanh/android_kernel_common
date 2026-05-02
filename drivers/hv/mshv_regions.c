@@ -314,17 +314,15 @@ int mshv_region_pin(struct mshv_mem_region *region)
 		ret = pin_user_pages_fast(userspace_addr, nr_pages,
 					  FOLL_WRITE | FOLL_LONGTERM,
 					  pages);
-		if (ret != nr_pages)
+		if (ret < 0)
 			goto release_pages;
 	}
 
 	return 0;
 
 release_pages:
-	if (ret > 0)
-		done_count += ret;
 	mshv_region_invalidate_pages(region, 0, done_count);
-	return ret < 0 ? ret : -ENOMEM;
+	return ret;
 }
 
 static int mshv_region_chunk_unmap(struct mshv_mem_region *region,

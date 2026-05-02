@@ -109,11 +109,8 @@ static int nsim_forward_skb(struct net_device *tx_dev,
 	int ret;
 
 	ret = __dev_forward_skb(rx_dev, skb);
-	if (ret) {
-		if (psp_ext)
-			__skb_ext_put(psp_ext);
+	if (ret)
 		return ret;
-	}
 
 	nsim_psp_handle_ext(skb, psp_ext);
 

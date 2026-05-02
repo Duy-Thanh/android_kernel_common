@@ -102,10 +102,8 @@ out_error:
 
 void ksmbd_tree_connect_put(struct ksmbd_tree_connect *tcon)
 {
-	if (atomic_dec_and_test(&tcon->refcount)) {
-		ksmbd_share_config_put(tcon->share_conf);
+	if (atomic_dec_and_test(&tcon->refcount))
 		kfree(tcon);
-	}
 }
 
 static int __ksmbd_tree_conn_disconnect(struct ksmbd_session *sess,
@@ -115,11 +113,10 @@ static int __ksmbd_tree_conn_disconnect(struct ksmbd_session *sess,
 
 	ret = ksmbd_ipc_tree_disconnect_request(sess->id, tree_conn->id);
 	ksmbd_release_tree_conn_id(sess, tree_conn->id);
+	ksmbd_share_config_put(tree_conn->share_conf);
 	ksmbd_counter_dec(KSMBD_COUNTER_TREE_CONNS);
-	if (atomic_dec_and_test(&tree_conn->refcount)) {
-		ksmbd_share_config_put(tree_conn->share_conf);
+	if (atomic_dec_and_test(&tree_conn->refcount))
 		kfree(tree_conn);
-	}
 	return ret;
 }
 

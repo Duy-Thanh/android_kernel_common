@@ -7998,9 +7998,7 @@ F:	Documentation/devicetree/bindings/display/himax,hx8357.yaml
 F:	drivers/gpu/drm/tiny/hx8357d.c
 
 DRM DRIVER FOR HYPERV SYNTHETIC VIDEO DEVICE
-M:	Dexuan Cui <decui@microsoft.com>
-M:	Long Li <longli@microsoft.com>
-M:	Saurabh Sengar <ssengar@linux.microsoft.com>
+M:	Deepak Rawat <drawat.floss@gmail.com>
 L:	linux-hyperv@vger.kernel.org
 L:	dri-devel@lists.freedesktop.org
 S:	Maintained
