@@ -52,6 +52,24 @@
       "parentUuid": "0e0e064a_9813bba2",
       "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6cd32f_8d7268d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2057970
+      },
+      "writtenOn": "2026-05-02T01:38:40Z",
+      "side": 1,
+      "message": "Hi @jiangzp@google.com, do you want me to abandon this patch ?",
+      "parentUuid": "710099ec_1be3ea6c",
+      "revId": "55a8246ad75f243a84aec8b7d471b994994a0abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
