@@ -359,9 +359,9 @@ static int setup_fifo_params(struct spi_device *spi_slv,
 		writel((spi_slv->mode & SPI_LOOP) ? LOOPBACK_ENABLE : 0, se->base + SE_SPI_LOOPBACK);
 	if (cs_changed)
 		writel(chipselect, se->base + SE_SPI_DEMUX_SEL);
-	if (mode_changed & SPI_CPHA)
+	if (mode_changed & SE_SPI_CPHA)
 		writel((spi_slv->mode & SPI_CPHA) ? CPHA : 0, se->base + SE_SPI_CPHA);
-	if (mode_changed & SPI_CPOL)
+	if (mode_changed & SE_SPI_CPOL)
 		writel((spi_slv->mode & SPI_CPOL) ? CPOL : 0, se->base + SE_SPI_CPOL);
 	if ((mode_changed & SPI_CS_HIGH) || (cs_changed && (spi_slv->mode & SPI_CS_HIGH)))
 		writel((spi_slv->mode & SPI_CS_HIGH) ? BIT(chipselect) : 0, se->base + SE_SPI_DEMUX_OUTPUT_INV);
@@ -906,13 +906,10 @@ static irqreturn_t geni_spi_isr(int irq, void *data)
 	struct spi_controller *spi = data;
 	struct spi_geni_master *mas = spi_controller_get_devdata(spi);
 	struct geni_se *se = &mas->se;
-	u32 m_irq, dma_tx_status, dma_rx_status;
+	u32 m_irq;
 
 	m_irq = readl(se->base + SE_GENI_M_IRQ_STATUS);
-	dma_tx_status = readl_relaxed(se->base + SE_DMA_TX_IRQ_STAT);
-	dma_rx_status = readl_relaxed(se->base + SE_DMA_RX_IRQ_STAT);
-
-	if (!m_irq && !dma_tx_status && !dma_rx_status)
+	if (!m_irq)
 		return IRQ_NONE;
 
 	if (m_irq & (M_CMD_OVERRUN_EN | M_ILLEGAL_CMD_EN | M_CMD_FAILURE_EN |
@@ -960,6 +957,8 @@ static irqreturn_t geni_spi_isr(int irq, void *data)
 		}
 	} else if (mas->cur_xfer_mode == GENI_SE_DMA) {
 		const struct spi_transfer *xfer = mas->cur_xfer;
+		u32 dma_tx_status = readl_relaxed(se->base + SE_DMA_TX_IRQ_STAT);
+		u32 dma_rx_status = readl_relaxed(se->base + SE_DMA_RX_IRQ_STAT);
 
 		if (dma_tx_status)
 			writel(dma_tx_status, se->base + SE_DMA_TX_IRQ_CLR);
