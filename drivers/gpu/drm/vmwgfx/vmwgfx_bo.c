@@ -817,7 +817,7 @@ void vmw_bo_placement_set(struct vmw_bo *bo, u32 domain, u32 busy_domain)
 	pl->placement = bo->places;
 	pl->num_placement = set_placement_list(bo->places, domain, busy_domain);
 
-	if (drm_debug_enabled(DRM_UT_DRIVER) && bo->tbo.resource) {
+	if (drm_debug_syslog_enabled(DRM_UT_DRIVER) && bo->tbo.resource) {
 		for (i = 0; i < pl->num_placement; ++i) {
 			if (bo->tbo.resource->mem_type == TTM_PL_SYSTEM ||
 			    bo->tbo.resource->mem_type == pl->placement[i].mem_type)

@@ -45,7 +45,7 @@ struct sil164_priv {
 	((struct sil164_priv *)to_encoder_i2c(x)->encoder_i2c_priv)
 
 #define sil164_dbg(client, format, ...) do {				\
-		if (drm_debug_enabled(DRM_UT_KMS))			\
+		if (drm_debug_syslog_enabled(DRM_UT_KMS))                                     \
 			dev_printk(KERN_DEBUG, &client->dev,		\
 				   "%s: " format, __func__, ## __VA_ARGS__); \
 	} while (0)
