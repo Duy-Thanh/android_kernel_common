@@ -40,6 +40,7 @@ struct seq_file;
 
 /* Do *not* use outside of drm_print.[ch]! */
 extern unsigned long __drm_debug_syslog;
+extern unsigned long __drm_debug_trace;
 extern unsigned long __drm_debug;
 
 /**
@@ -147,9 +148,15 @@ static inline bool drm_debug_syslog_enabled(enum drm_debug_category category)
 	return unlikely(__drm_debug_syslog & BIT(category));
 }
 
+static inline bool drm_debug_trace_enabled(enum drm_debug_category category)
+{
+	return unlikely(__drm_debug_trace & BIT(category));
+}
+
 static inline bool drm_debug_enabled_raw(enum drm_debug_category category)
 {
-	return drm_debug_syslog_enabled(category);
+	return drm_debug_syslog_enabled(category) ||
+	       drm_debug_trace_enabled(category);
 }
 
 #define drm_debug_enabled_instrumented(category)			\
@@ -198,6 +205,8 @@ void __drm_puts_seq_file(struct drm_printer *p, const char *str);
 void __drm_printfn_info(struct drm_printer *p, struct va_format *vaf);
 void __drm_printfn_debug_syslog(struct drm_printer *p, struct va_format *vaf);
 void __drm_printfn_dbg(struct drm_printer *p, struct va_format *vaf);
+void __drm_printfn_trace(struct drm_printer *p, struct va_format *vaf);
+void __drm_printfn_debug_syslog_and_trace(struct drm_printer *p, struct va_format *vaf);
 void __drm_printfn_err(struct drm_printer *p, struct va_format *vaf);
 void __drm_printfn_line(struct drm_printer *p, struct va_format *vaf);
 void __drm_printfn_noop(struct drm_printer *p, struct va_format *vaf);
@@ -520,7 +529,8 @@ drm_debug_category_printer(enum drm_debug_category category,
 			   const char *prefix)
 {
 	struct drm_printer p = {
-		.prefix = prefix
+		.prefix = prefix,
+		.category = category,
 	};
 
 	if (drm_debug_enabled_raw(category)) {
@@ -826,5 +836,25 @@ void __drm_err(const char *format, ...);
 #define drm_WARN_ON_ONCE(drm, x)					\
 	drm_WARN_ONCE((drm), (x), "%s",					\
 		      "drm_WARN_ON_ONCE(" __stringify(x) ")")
+
+#ifdef CONFIG_TRACING
+void drm_trace_init(void);
+__printf(1, 2)
+void drm_trace_printf(const char *format, ...);
+void drm_trace_cleanup(void);
+#else
+static inline void drm_trace_init(void)
+{
+}
+
+__printf(1, 2)
+static inline void drm_trace_printf(const char *format, ...)
+{
+}
+
+static inline void drm_trace_cleanup(void)
+{
+}
+#endif
 
 #endif /* DRM_PRINT_H_ */

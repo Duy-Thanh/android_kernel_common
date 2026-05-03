@@ -2207,7 +2207,7 @@ static void connector_bad_edid(struct drm_connector *connector,
 		connector->real_edid_checksum =
 			edid_block_compute_checksum(edid + last_block);
 
-	if (connector->bad_edid_counter++ && !drm_debug_enabled(DRM_UT_KMS))
+	if (connector->bad_edid_counter++ && !drm_debug_syslog_enabled(DRM_UT_KMS))
 		return;
 
 	drm_dbg_kms(connector->dev, "[CONNECTOR:%d:%s] EDID is invalid:\n",

@@ -1554,7 +1554,7 @@ static void drm_vblank_restore(struct drm_device *dev, unsigned int pipe)
 
 	vblank = drm_vblank_crtc(dev, pipe);
 	drm_WARN_ONCE(dev,
-		      drm_debug_enabled(DRM_UT_VBL) && !vblank->framedur_ns,
+		      drm_debug_syslog_enabled(DRM_UT_VBL) && !vblank->framedur_ns,
 		      "Cannot compute missed vblanks without frame duration\n");
 	framedur_ns = vblank->framedur_ns;
 
