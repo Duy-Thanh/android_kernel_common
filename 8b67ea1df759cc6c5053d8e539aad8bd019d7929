@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2155b0b0_fc6d0be0",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:54:51Z",
+      "side": 1,
+      "message": "Sorry leftover, will remove",
+      "parentUuid": "07f77e02_48cdae0d",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0ebda22b_31e0c595",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6741604a_86a12922",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:54:51Z",
+      "side": 1,
+      "message": "Yeah makes sense. Since there is no security risk, I think I will let ECMD/VCMD pass through to the hardware? WDYT?",
+      "parentUuid": "0ebda22b_31e0c595",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1faa7daf_4df6e288",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-04T15:42:37Z",
       "side": 1,
       "message": "What about operand A and B? I see this in ecmd_submit_sync() in the host driver:\n\n```\n\t/*\n\t * Unconditionally write the operand B, because\n\t * - There is no side effect if an ecmd doesn\u0027t require an\n\t *   operand B, but we set the register to some value.\n\t * - It\u0027s not invoked in any critical path. The extra MMIO\n\t *   write doesn\u0027t bring any performance concerns.\n\t */\n\tdmar_writeq(iommu-\u003ereg + DMAR_ECEO_REG, ob);\n\tdmar_writeq(iommu-\u003ereg + DMAR_ECMD_REG, ecmd | (oa \u003c\u003c DMA_ECMD_OA_SHIFT));\n```\n\nand it looks like the host does indeed use non-zero operand A (counter number aka perf event index) for ENABLE and DISABLE commands (and even if it didn\u0027t, it still does write DMAR_ECEO_REG every time)?",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d22546_e13abe29",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:54:51Z",
+      "side": 1,
+      "message": "Yeah true, missed testing this in the latest patches after converting to default deny. Doing one more sweep to see if I missed any other perf related registers or logic like this and test it out before sending out the next revision",
+      "parentUuid": "1faa7daf_4df6e288",
       "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
