@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eb91b23_9b13c95d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:50:37Z",
+      "side": 1,
+      "message": "Since it did not handle any memory related stuff(address or such) in the contents, I thought we can avoid checking that. Checking for reserved fields in all the IOMMU MMIO register space might not be trivial. Should we be doing that for all the registers?",
+      "parentUuid": "fb9f3fab_f54ee2d7",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f62eeea1_aec4215c",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 10
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44cb1337_f91e4412",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:50:37Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "f62eeea1_aec4215c",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b15e918f_853954fd",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 10
@@ -66,6 +102,24 @@
       "writtenOn": "2026-05-04T16:12:56Z",
       "side": 1,
       "message": "Very briefly looking into drivers/iommu/intel/perfmon.c I see a bunch of register writes outside this allowed set. Just one example: in `iommu_pmu_assign_event()`:\n\n```\n\tdmar_pmu_writeq(iommu_pmu, iommu_config_base(iommu_pmu, idx), hwc-\u003econfig);\n```\n\nwrites to DMAR_PERFCFGOFF_REG plus some offset.\n\nSo I guess IOMMU profiling is not workable at all with these patches? Did you test it?",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6919126e_15d25492",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-04T20:50:37Z",
+      "side": 1,
+      "message": "Ahh my bad. I did test it with simpleperf and /sysfs file during the initial patches when we were doing default passthrough of all registers. Then I created a jumbo script to do all the testing including some stress and I missed adding the simpleperf tests. I just checked and its failing for reading perf counters. Thanks for catching this. Will need a bit of rework and verify again with simpleperf again.",
+      "parentUuid": "b15e918f_853954fd",
       "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
