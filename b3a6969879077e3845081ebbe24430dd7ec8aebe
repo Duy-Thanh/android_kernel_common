@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6148a76_1dcf31a3",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T20:54:58Z",
+      "side": 1,
+      "message": "Not in all the register space, only in those registers which we explicitly allow?",
+      "parentUuid": "3eb91b23_9b13c95d",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f62eeea1_aec4215c",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 10
