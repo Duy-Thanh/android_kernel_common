@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282eb3e5_1e1672fc",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T15:04:55Z",
+      "side": 1,
+      "message": "What about the RsvdP bits?",
+      "revId": "5eb7fc8875392c5c45037396ab97b2544368a1b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11723961_d00ac123",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T15:04:55Z",
+      "side": 1,
+      "message": "Why read it second time?",
+      "fixSuggestions": [
+        {
+          "fixId": "57e0cbd4_6c49a568",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 766,
+                "startChar": 0,
+                "endLine": 769,
+                "endChar": 0
+              },
+              "replacement": "\tif (cap_plmr(iommu-\u003ecap) || cap_phmr(iommu-\u003ecap)) {\n\t\tu32 pmen \u003d readl(iommu-\u003ereg + DMAR_PMEN_REG);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 770,
+                "startChar": 0,
+                "endLine": 774,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (pmen \u0026 DMA_PMEN_EPM) {\n\t\t\tpkvm_dbg(\"iommu%d: disabling PMRs\\n\", iommu-\u003eseq_id);\n\t\t\tpmen \u0026\u003d ~DMA_PMEN_EPM;\n\t\t\twritel(pmen, iommu-\u003ereg + DMAR_PMEN_REG);\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5eb7fc8875392c5c45037396ab97b2544368a1b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
