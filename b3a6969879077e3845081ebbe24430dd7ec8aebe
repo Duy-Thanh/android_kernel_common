@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9f3fab_f54ee2d7",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T16:12:56Z",
+      "side": 1,
+      "message": "These registers have reserved fields too?",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62eeea1_aec4215c",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T16:12:56Z",
+      "side": 1,
+      "message": "nit: \"unrecognized\" might not be the best word, since many of those registers are pretty much known standard ones.\n\nSo maybe just \"unsupported\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "c93a653a_e7adcb58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 705,
+                "startChar": 0,
+                "endLine": 706,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"iommu%d: unsupported register write blocked at offset 0x%lx val 0x%llx\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15e918f_853954fd",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T16:12:56Z",
+      "side": 1,
+      "message": "Very briefly looking into drivers/iommu/intel/perfmon.c I see a bunch of register writes outside this allowed set. Just one example: in `iommu_pmu_assign_event()`:\n\n```\n\tdmar_pmu_writeq(iommu_pmu, iommu_config_base(iommu_pmu, idx), hwc-\u003econfig);\n```\n\nwrites to DMAR_PERFCFGOFF_REG plus some offset.\n\nSo I guess IOMMU profiling is not workable at all with these patches? Did you test it?",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
