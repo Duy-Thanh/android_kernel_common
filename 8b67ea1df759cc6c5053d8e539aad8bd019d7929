@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f77e02_48cdae0d",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T15:42:37Z",
+      "side": 1,
+      "message": "Where are you using these definitions?",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebda22b_31e0c595",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T15:42:37Z",
+      "side": 1,
+      "message": "Just a note: the \"Reset All Perfmon Counter Configuration\" and \"Reset All Perfmon Counter Values\" commands probably have no memory or DMA implications either. IIUC the only reason why we are not allowing them is that the host doesn\u0027t currently use them, plus it doesn\u0027t even define DMA_ECMD_xxx macros for them, and we have no reason to bother defining those macros on our own either.",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1faa7daf_4df6e288",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T15:42:37Z",
+      "side": 1,
+      "message": "What about operand A and B? I see this in ecmd_submit_sync() in the host driver:\n\n```\n\t/*\n\t * Unconditionally write the operand B, because\n\t * - There is no side effect if an ecmd doesn\u0027t require an\n\t *   operand B, but we set the register to some value.\n\t * - It\u0027s not invoked in any critical path. The extra MMIO\n\t *   write doesn\u0027t bring any performance concerns.\n\t */\n\tdmar_writeq(iommu-\u003ereg + DMAR_ECEO_REG, ob);\n\tdmar_writeq(iommu-\u003ereg + DMAR_ECMD_REG, ecmd | (oa \u003c\u003c DMA_ECMD_OA_SHIFT));\n```\n\nand it looks like the host does indeed use non-zero operand A (counter number aka perf event index) for ENABLE and DISABLE commands (and even if it didn\u0027t, it still does write DMAR_ECEO_REG every time)?",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
