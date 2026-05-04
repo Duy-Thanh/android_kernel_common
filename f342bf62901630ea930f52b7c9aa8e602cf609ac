@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba990cc_b6967cb4",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T14:46:20Z",
+      "side": 1,
+      "message": "Just a thought: looks like the validation we do for FECTL, FEDATA, FEADDR, FEUADDR is exactly the same as the validation we do for PERFINTRCTL, PERFINTRDATA, PERFINTRADDR, PERFINTRUADDR. So we could rearrange the cases in the `switch` to avoid code duplication, e.g. for the DATA registers as an example:\n\n```\n\tcase DMAR_FEDATA_REG:\n\tcase DMAR_PERFINTRDATA_REG:\n\t\t/* RsvdZ bits 31:16 */\n\t\tif (val \u003e\u003e 16) {\n\t\t\tpkvm_err(\"iommu%d: %s 0x%llx has reserved bits set\\n\",\n\t\t\t\t offset \u003d\u003d DMAR_FEDATA_REG ? \"FEDATA\" : \"PERFINTRDATA\",\n\t\t\t\t iommu-\u003eseq_id, val);\n\t\t\tret \u003d -EPERM;\n\t\t} else {\n\t\t\tret \u003d iommu_direct_mmio_write(iommu, phys, len, val);\n\t\t}\n\t\tbreak;\n```\n\n?",
+      "revId": "f342bf62901630ea930f52b7c9aa8e602cf609ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
