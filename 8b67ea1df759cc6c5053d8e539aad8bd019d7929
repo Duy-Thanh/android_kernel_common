@@ -176,6 +176,24 @@
       "parentUuid": "f4d22546_e13abe29",
       "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce28f3cd_c6d05722",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-05T14:57:39Z",
+      "side": 1,
+      "message": "Ah, I hadn\u0027t noticed that you had `ecmd \u003d val \u0026 0xff`, so I was thinking you were checking the entire value of the ECMD register, not just the lower 8 bits of it.\n\nI wasn\u0027t thinking about validating operand A and B values... Now thinking about it: I _hope_ we don\u0027t need to validate them, since according to VT-d spec section 10.5 \"Performance Monitoring Counter Configuration Error Checks\", an invalid Counter Number in operand A will be gracefully reported in the ECRSP register (and then BTW will be gracefully ignored by the host driver, it seems :)), rather than result in an undefined behavior?\n\nBTW similarly I _hope_ we don\u0027t need to check if the requested command is supported in DMA_ECMD_ECCAP3...",
+      "parentUuid": "2ee2910d_93776d7b",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
