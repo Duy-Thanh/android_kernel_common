@@ -236,11 +236,16 @@ static void test_load(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
 	int wrapfd;
+	char *ptr;
 
 	/* Load the file content first */
 	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
 	ASSERT_TRUE(wrapfd >= 0);
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	/* Loading while the owner has a mapping to the buffer should work. */
+	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
 
 	clear_content(_metadata, self, wrapfd);
 	ASSERT_NE(cmp_content(_metadata, self, wrapfd), 0);
@@ -248,6 +253,7 @@ static void test_load(struct __test_metadata *_metadata,
 	ASSERT_EQ(cmp_content(_metadata, self, wrapfd), 0);
 	/* TODO: test more load offsets */
 
+	ASSERT_EQ(munmap(ptr, self->size), 0);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	close(wrapfd);
 }
