@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4779869f_7fd345ac",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:02:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6148a76_1dcf31a3",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f62eeea1_aec4215c",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Will do",
       "parentUuid": "f62eeea1_aec4215c",
+      "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f99c8c_acc50c79",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:02:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44cb1337_f91e4412",
       "revId": "b3a6969879077e3845081ebbe24430dd7ec8aebe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
