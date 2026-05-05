@@ -2704,8 +2704,13 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 
 	if (!is_on)
 		ret = dwc3_gadget_soft_disconnect(dwc);
-	else
+	else {
+		if (!dwc->connected) {
+			pm_runtime_put(dwc->dev);
+			return 0;
+		}
 		ret = dwc3_gadget_soft_connect(dwc);
+	}
 
 	pm_runtime_put(dwc->dev);
 
