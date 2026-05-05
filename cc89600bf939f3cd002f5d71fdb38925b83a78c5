@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee010e3c_bc8c1f05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-05T23:24:13Z",
+      "side": 1,
+      "message": "nit: could you please add this as a `Fixes:` tag?",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "cc89600bf939f3cd002f5d71fdb38925b83a78c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d14be1_82352063",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-05T23:24:13Z",
+      "side": 1,
+      "message": "doesn\u0027t this mean that we are calling `sk_fullsock()` twice? It sounds like this should be refactored to obtain the full socket from the skb first and then that gets tested to obtain the uid no?",
+      "range": {
+        "startLine": 459,
+        "startChar": 27,
+        "endLine": 459,
+        "endChar": 38
+      },
+      "revId": "cc89600bf939f3cd002f5d71fdb38925b83a78c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
