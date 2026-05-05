@@ -275,10 +275,25 @@ static void esp_output_done(struct crypto_async_request *base, int err)
 		xfrm_dev_resume(skb);
 	} else {
 		if (!err &&
+<<<<<<< HEAD   (b06f61e488cabc9062b0b0d780f6fa4dfd831ece Merge 09815d6df7bf ("xfrm: Fix the usage of skb->sk") into a)
 		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP)
 			esp_output_tail_tcp(x, skb);
 		else
 			xfrm_output_resume(skb, err);
+||||||| BASE   (09815d6df7bf8b095fd56cd7a83b6e0b758976fc xfrm: Fix the usage of skb->sk)
+		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP)
+			esp_output_tail_tcp(x, skb);
+		else
+			xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+=======
+		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP) {
+			err = esp_output_tail_tcp(x, skb);
+			if (err != -EINPROGRESS)
+				kfree_skb(skb);
+		} else {
+			xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+		}
+>>>>>>> BRANCH (aca3ad0c262f54a5b5c95dda80a48365997d1224 esp: fix skb leak with espintcp and async crypto)
 	}
 }
 
