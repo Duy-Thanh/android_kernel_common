@@ -1,0 +1,149 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4859c510_f07e04d1",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T05:11:30Z",
+      "side": 1,
+      "message": "@gregkh@google.com, am I ok to repurpose this padding in this way?",
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff6ed44_fe94711c",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T05:11:30Z",
+      "side": 1,
+      "message": "Should I wrap all reads in READ_ONCE?",
+      "range": {
+        "startLine": 1116,
+        "startChar": 2,
+        "endLine": 1116,
+        "endChar": 34
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474188ca_d5d81bfa",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T05:11:30Z",
+      "side": 1,
+      "message": "I really don\u0027t love this pattern with the separate switch statements for io prior to locking, locking, then updating the data structures, but that\u0027s a much more invasive refactoring for another day. For now, match the dmabuf code.",
+      "range": {
+        "startLine": 1776,
+        "startChar": 1,
+        "endLine": 1779,
+        "endChar": 8
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f761bae3_3d7a6ea4",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T05:11:30Z",
+      "side": 1,
+      "message": "I intend to update this block to return -EINVAL if regardless of enable_zlp\u0027s value if called on an out ep.",
+      "range": {
+        "startLine": 1838,
+        "startChar": 2,
+        "endLine": 1841,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0defa5ea_46f03096",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/function/f_fs.c",
+              "range": {
+                "startLine": 1838,
+                "startChar": 0,
+                "endLine": 1839,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!epfile-\u003ein) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5bdb88e_8d654cd1",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T05:11:30Z",
+      "side": 1,
+      "message": "Should I wrap this in a WRITE_ONCE?",
+      "range": {
+        "startLine": 1842,
+        "startChar": 2,
+        "endLine": 1842,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "45fe683a_5e350b29",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/function/f_fs.c",
+              "range": {
+                "startLine": 1842,
+                "startChar": 0,
+                "endLine": 1843,
+                "endChar": 0
+              },
+              "replacement": "\t\tWRITE_ONCE(epfile-\u003ezlp_enabled, !!enable_zlp);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
