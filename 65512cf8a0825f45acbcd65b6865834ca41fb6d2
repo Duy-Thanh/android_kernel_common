@@ -160,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe746855_cd61fda6",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T19:00:48Z",
+      "side": 1,
+      "message": "Thinking about this further, the spinlock should be a memory barrier, and there are exactly one read/write operation within the critical section, so this is a non issue. \n\nResolving as we are protected by the `eps_lock`. Please feel free to re-open if I\u0027m wrong.",
+      "parentUuid": "de0cb4f7_40296478",
+      "range": {
+        "startLine": 1116,
+        "startChar": 2,
+        "endLine": 1116,
+        "endChar": 34
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dfa279e_8ebb2692",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "ack, will update the ictl signature to __u32 and change the enable_zlp type from int to u32.",
       "parentUuid": "6dfa279e_8ebb2692",
+      "range": {
+        "startLine": 1777,
+        "startChar": 63,
+        "endLine": 1777,
+        "endChar": 73
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c4032e2_bd057efb",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1777,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T19:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "984b7a13_3c5eed5d",
       "range": {
         "startLine": 1777,
         "startChar": 63,
@@ -295,6 +343,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e43b6d8_e74b81e3",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T19:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f761bae3_3d7a6ea4",
+      "range": {
+        "startLine": 1838,
+        "startChar": 2,
+        "endLine": 1841,
+        "endChar": 3
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5bdb88e_8d654cd1",
@@ -384,6 +456,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae4921b_920e65d2",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T19:00:48Z",
+      "side": 1,
+      "message": "Resolving per discussion above, `eps_lock` provides the necessary protection.",
+      "parentUuid": "b90cfc66_54eab72b",
+      "range": {
+        "startLine": 1842,
+        "startChar": 2,
+        "endLine": 1842,
+        "endChar": 36
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0da32069_7e674fe3",
@@ -421,6 +517,30 @@
       "side": 1,
       "message": "ack, will switch to __u32.",
       "parentUuid": "0da32069_7e674fe3",
+      "range": {
+        "startLine": 434,
+        "startChar": 54,
+        "endLine": 434,
+        "endChar": 57
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "280e23b0_3d10501c",
+        "filename": "include/uapi/linux/usb/functionfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T19:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "545ee90c_1be4222b",
       "range": {
         "startLine": 434,
         "startChar": 54,
