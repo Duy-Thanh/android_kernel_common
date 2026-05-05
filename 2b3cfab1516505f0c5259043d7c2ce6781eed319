@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76702750_b3959f3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-05T12:57:32Z",
+      "side": 1,
+      "message": "Hey Isaac, I\u0027ll let you decide whether to backport this right away or wait for upstream. Miguel tells me he intends to land this for 7.1-rc3 or -rc4, and from there it will in principle land in 6.12 and 6.18 through LTS backports.",
+      "revId": "2b3cfab1516505f0c5259043d7c2ce6781eed319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
