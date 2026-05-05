@@ -34,6 +34,24 @@
       "parentUuid": "a2d8c491_68f5b8e4",
       "revId": "96e335773b543fa35d0ceb179c214b8fef9369bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd6e411_a976e965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-05T23:43:57Z",
+      "side": 1,
+      "message": "Then update the commit message to explain that. The only patch you cite is an upstream patch. Also, add a Fixes: tag that cites the android-specific patch that introduced the issue.",
+      "parentUuid": "e153d3fc_6a7b0450",
+      "revId": "96e335773b543fa35d0ceb179c214b8fef9369bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
