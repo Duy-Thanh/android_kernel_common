@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c1c99f7_e56c1d2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T15:44:24Z",
+      "side": 1,
+      "message": "My understanding is that the hardware handles appending the packet (when req-\u003ezero is set), but it is ultimately up to the driver to let the hardware know that the transfer is complete with this request (by setting req-\u003ezero). Otherwise, the hardware would just append the zlp every time the request is full.\n\nThe other examples we have in android using function fs (adb, mtp, and ptp) all use the manual zlp workaround (aka sending an addtional 0 byte request to the kernel to indicate it should issue a zlp). \n\nWe\u0027re running into issues with this manual workaround because we have to maintain compatibility with the existing downstream accessory driver. The accessory driver exposes a single character file for read and write, while function fs exposes separate endpoint files - one for read, one for write. To provide app compatibility, we have added a \u0027legacy bridge\u0027 which wraps these two EP fds in a single socket which is exposed to the userspace app.\n\nThis legacy bridge app is where we are handling the ZLP, and ultimately, the addition of the workaround ZLP packet causes the userspace APP to see a separate transaction for the ZLP. This is compatibility breaking, meaning our userspace AOA implementation is not a drop in replacement.\n\nWe\u0027ve explored other approaches, but ultimately they added significant overhead causing reduced bandwidth through the legacy bridge.",
+      "parentUuid": "c3231024_a0f23df7",
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4859c510_f07e04d1",
         "filename": "drivers/usb/gadget/function/f_fs.c",
         "patchSetId": 1
@@ -120,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de0cb4f7_40296478",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T15:44:24Z",
+      "side": 1,
+      "message": "So, there is the `epfile-\u003effs-\u003eeps_lock` spinlock which this is technically protected by. However, that spinlock is meant to protect the ep from being torn down during an active transfer, and there\u0027s concern that the dynamic nature of this flag could cause issue with the io thread that is active. So more of a static vs dynamic locking concern. \n\nThere is also the `ffs-\u003emutex`, but we don\u0027t want to introduce this on the io thread as that could serialize things too much, and open up deadlock situations when contending for that and the eps_lock spinlock.\n\nTherefore, under the existing spinlock, the main concern is that the compiler would optimize or cache this value in some way. \n\nTherefore the proposal is to wrap these reads and writes with READ_ONCE/WRITE_ONCE, which prevents the compiler from caching this value. Another option is to change the definition from `u8` to `unsigned long` and use atomic bitops on it, though that will use more memory, and is slightly unnecessary for a single flag/bit.\n\nDo you have a preference?",
+      "parentUuid": "aafca0f1_2863ca61",
+      "range": {
+        "startLine": 1116,
+        "startChar": 2,
+        "endLine": 1116,
+        "endChar": 34
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6dfa279e_8ebb2692",
         "filename": "drivers/usb/gadget/function/f_fs.c",
         "patchSetId": 1
@@ -131,6 +173,30 @@
       "writtenOn": "2026-05-05T10:26:11Z",
       "side": 1,
       "message": "does not work, \"int\" is not a userspace type.",
+      "range": {
+        "startLine": 1777,
+        "startChar": 63,
+        "endLine": 1777,
+        "endChar": 73
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984b7a13_3c5eed5d",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1777,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T15:44:24Z",
+      "side": 1,
+      "message": "ack, will update the ictl signature to __u32 and change the enable_zlp type from int to u32.",
+      "parentUuid": "6dfa279e_8ebb2692",
       "range": {
         "startLine": 1777,
         "startChar": 63,
@@ -296,6 +362,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b90cfc66_54eab72b",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T15:44:24Z",
+      "side": 1,
+      "message": "Added discussion to the read path, we are within the `epfile-\u003effs-\u003eeps_lock` spinlock here, concern is with regards to compiler caching.",
+      "parentUuid": "a58f7279_823a7ae0",
+      "range": {
+        "startLine": 1842,
+        "startChar": 2,
+        "endLine": 1842,
+        "endChar": 36
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0da32069_7e674fe3",
         "filename": "include/uapi/linux/usb/functionfs.h",
         "patchSetId": 1
@@ -307,6 +397,30 @@
       "writtenOn": "2026-05-05T10:26:11Z",
       "side": 1,
       "message": "not a valid user/kernel type.",
+      "range": {
+        "startLine": 434,
+        "startChar": 54,
+        "endLine": 434,
+        "endChar": 57
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545ee90c_1be4222b",
+        "filename": "include/uapi/linux/usb/functionfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-05-05T15:44:24Z",
+      "side": 1,
+      "message": "ack, will switch to __u32.",
+      "parentUuid": "0da32069_7e674fe3",
       "range": {
         "startLine": 434,
         "startChar": 54,
