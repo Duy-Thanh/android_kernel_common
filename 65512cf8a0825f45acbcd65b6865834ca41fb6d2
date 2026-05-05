@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b0e08f_30d0e7a4",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "4859c510_f07e04d1",
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ff6ed44_fe94711c",
@@ -43,6 +61,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aafca0f1_2863ca61",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "Why?  Is there a lock that should be used somewhere else instead?",
+      "parentUuid": "5ff6ed44_fe94711c",
+      "range": {
+        "startLine": 1116,
+        "startChar": 2,
+        "endLine": 1116,
+        "endChar": 34
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dfa279e_8ebb2692",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1777,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "does not work, \"int\" is not a userspace type.",
+      "range": {
+        "startLine": 1777,
+        "startChar": 63,
+        "endLine": 1777,
+        "endChar": 73
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "474188ca_d5d81bfa",
         "filename": "drivers/usb/gadget/function/f_fs.c",
         "patchSetId": 1
@@ -54,6 +119,30 @@
       "writtenOn": "2026-05-05T05:11:30Z",
       "side": 1,
       "message": "I really don\u0027t love this pattern with the separate switch statements for io prior to locking, locking, then updating the data structures, but that\u0027s a much more invasive refactoring for another day. For now, match the dmabuf code.",
+      "range": {
+        "startLine": 1776,
+        "startChar": 1,
+        "endLine": 1779,
+        "endChar": 8
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f13474_7c6f5f8d",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "474188ca_d5d81bfa",
       "range": {
         "startLine": 1776,
         "startChar": 1,
@@ -142,6 +231,53 @@
           ]
         }
       ],
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a58f7279_823a7ae0",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1842,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "A lock should handle it properly.",
+      "parentUuid": "c5bdb88e_8d654cd1",
+      "range": {
+        "startLine": 1842,
+        "startChar": 2,
+        "endLine": 1842,
+        "endChar": 36
+      },
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da32069_7e674fe3",
+        "filename": "include/uapi/linux/usb/functionfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:11Z",
+      "side": 1,
+      "message": "not a valid user/kernel type.",
+      "range": {
+        "startLine": 434,
+        "startChar": 54,
+        "endLine": 434,
+        "endChar": 57
+      },
       "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
