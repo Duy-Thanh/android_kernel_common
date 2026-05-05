@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2417356f_d6cac60c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-05T20:23:25Z",
+      "side": 1,
+      "message": "nit: what did you change for this to be a BACKPORT? was it only trivial conflicts? please document these modifications in a `[changes]` block before your Sob.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
