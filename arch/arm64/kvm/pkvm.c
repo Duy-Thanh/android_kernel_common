@@ -339,6 +339,10 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 		}
 
 		atomic64_add(hyp_vcpu_sz, &host_kvm->stat.protected_hyp_mem);
+
+		/* For protected VMs, SVE state is now donated to hyp */
+		if (kvm_vm_is_protected(host_kvm))
+			host_vcpu->arch.sve_state = NULL;
 	}
 
 	return 0;
