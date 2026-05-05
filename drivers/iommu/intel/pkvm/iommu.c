@@ -104,10 +104,13 @@ bool overlaps_iommu_mmio(unsigned long phys, unsigned long size)
 }
 
 static int iommu_direct_mmio_read(struct intel_iommu *iommu, u64 phys,
-				  int len, u64 *val)
+				  int len, int expected_len, u64 *val)
 {
 	unsigned long offset = phys - iommu->reg_phys;
 	void *reg = iommu->reg + offset;
+
+	if (len > expected_len)
+		return -EINVAL;
 
 	switch (len) {
 	case 4:
@@ -124,10 +127,13 @@ static int iommu_direct_mmio_read(struct intel_iommu *iommu, u64 phys,
 }
 
 static int iommu_direct_mmio_write(struct intel_iommu *iommu, u64 phys,
-				   int len, u64 val)
+				   int len, int expected_len, u64 val)
 {
 	unsigned long offset = phys - iommu->reg_phys;
 	void *reg = iommu->reg + offset;
+
+	if (len > expected_len)
+		return -EINVAL;
 
 	switch (len) {
 	case 4:
@@ -442,8 +448,6 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_GSTS_REG:
 		*val = iommu->vgsts;
 		break;
-	case DMAR_IQH_REG:
-	case DMAR_IQT_REG:
 	case DMAR_VER_REG:
 	case DMAR_GCMD_REG:
 	case DMAR_PMEN_REG:
@@ -466,11 +470,13 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_PERFINTRUADDR_REG:
 	case DMAR_FSTS_REG:
 	case DMAR_FECTL_REG:
+	case DMAR_FEDATA_REG:
 	case DMAR_FEADDR_REG:
 	case DMAR_FEUADDR_REG:
-	case DMAR_FEDATA_REG:
-		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		ret = iommu_direct_mmio_read(iommu, phys, len, 4, val);
 		break;
+	case DMAR_IQH_REG:
+	case DMAR_IQT_REG:
 	case DMAR_ECRSP_REG:
 	case DMAR_IQER_REG:
 	case DMAR_PERFCAP_REG:
@@ -484,7 +490,7 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_MTRRDEF_REG:
 	case DMAR_MTRR_FIX64K_00000_REG ... DMAR_MTRR_FIX4K_F8000_REG:
 	case DMAR_MTRR_PHYSBASE0_REG ... DMAR_MTRR_PHYSMASK9_REG:
-		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		ret = iommu_direct_mmio_read(iommu, phys, len, 8, val);
 		break;
 	case DMAR_ECCAP_REG:
 	case DMAR_ECCAP_REG + DMA_ECMD_REG_STEP:
@@ -495,7 +501,7 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 				 iommu->seq_id);
 			ret = -EINVAL;
 		} else {
-			ret = iommu_direct_mmio_read(iommu, phys, len, val);
+			ret = iommu_direct_mmio_read(iommu, phys, len, 8, val);
 		}
 		break;
 	default: {
@@ -506,12 +512,12 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 			ret = iommu_frcd_validate_read(iommu, &frcd_info);
 			if (!ret)
 				ret = iommu_direct_mmio_read(iommu, phys,
-							     len, val);
+							     len, len, val);
 		} else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info)) {
 			ret = iommu_pmu_validate_read(iommu, &pmu_info);
 			if (!ret)
 				ret = iommu_direct_mmio_read(iommu, phys,
-							     len, val);
+							     len, len, val);
 		} else {
 			/*
 			 * Deny-by-default: block all registers not explicitly handled
@@ -601,7 +607,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 				 iommu->seq_id);
 			ret = -EPERM;
 		} else {
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
 		}
 		break;
 	}
@@ -617,7 +623,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = -EINVAL;
 		} else {
 			/* RW1C for clearing fault status bits */
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
 		}
 		break;
 	case DMAR_PERFINTRSTS_REG:
@@ -628,7 +634,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = -EINVAL;
 		} else {
 			/* RW1C for clearing fault status bits */
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
 		}
 		break;
 	case DMAR_ECEO_REG:
@@ -637,7 +643,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 				 iommu->seq_id, val);
 			ret = -EINVAL;
 		} else {
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			ret = iommu_direct_mmio_write(iommu, phys, len, 8, val);
 		}
 		break;
 	case DMAR_ECMD_REG:
@@ -665,7 +671,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 					 iommu->seq_id, ecmd);
 				ret = -EPERM;
 			} else {
-				ret = iommu_direct_mmio_write(iommu, phys, len, val);
+				ret = iommu_direct_mmio_write(iommu, phys, len, 8, val);
 			}
 		}
 		break;
@@ -691,7 +697,7 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 				 rsvdp, (u32)(val & rsvdp_mask));
 			ret = -EINVAL;
 		} else {
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
 		}
 		break;
 	}
@@ -703,12 +709,12 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = iommu_frcd_validate_write(iommu, &frcd_info, val);
 			if (!ret)
 				ret = iommu_direct_mmio_write(iommu, phys,
-							      len, val);
+							      len, len, val);
 		} else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info)) {
 			ret = iommu_pmu_validate_write(iommu, &pmu_info, val);
 			if (!ret)
 				ret = iommu_direct_mmio_write(iommu, phys,
-							      len, val);
+							      len, len, val);
 		} else {
 			/*
 			 * Deny-by-default: block all registers not explicitly handled
