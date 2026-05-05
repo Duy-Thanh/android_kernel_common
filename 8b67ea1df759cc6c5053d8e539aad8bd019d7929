@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5508d0dd_3b142886",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2155b0b0_fc6d0be0",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0ebda22b_31e0c595",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 12
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Yeah true, missed testing this in the latest patches after converting to default deny. Doing one more sweep to see if I missed any other perf related registers or logic like this and test it out before sending out the next revision",
       "parentUuid": "1faa7daf_4df6e288",
+      "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee2910d_93776d7b",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:03:02Z",
+      "side": 1,
+      "message": "\u003e What about operand A and B?\n\nAdded support for ECEO(operand B write). I currently extract ecmd out of val before checking if the cmd is supported. Did you mean to validate all values of operand A and B?\nB is always zero in current intel iommu driver code, but validating operand A would need more logic.",
+      "parentUuid": "f4d22546_e13abe29",
       "revId": "8b67ea1df759cc6c5053d8e539aad8bd019d7929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
