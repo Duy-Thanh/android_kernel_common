@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d8c491_68f5b8e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-05T23:26:10Z",
+      "side": 1,
+      "message": "This is fixing an upstream issue, so it must be sent upstream. It will land in android-mainline via a merge from upstream.",
+      "revId": "96e335773b543fa35d0ceb179c214b8fef9369bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
