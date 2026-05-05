@@ -22,6 +22,30 @@
       },
       "revId": "d04ba355359fc92f81939e3b8dc9d0f8414070b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5283833b_5b0aa723",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-05-05T15:07:10Z",
+      "side": 1,
+      "message": "\u003e Do we already have such optimizations (e.g. using per element mapping if element list is small) in the driver?\n\nNo\n\n\u003e or this is some future optimization in pipeline?\n\nWhen this change is merged, IOMMU drivers can choose to take advantage of this to implement potential optimizations.",
+      "parentUuid": "670b2cef_63f68ad0",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "d04ba355359fc92f81939e3b8dc9d0f8414070b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
