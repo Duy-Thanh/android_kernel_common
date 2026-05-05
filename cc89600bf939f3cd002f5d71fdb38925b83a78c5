@@ -26,6 +26,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "824e5a5a_97aab611",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-05T23:27:19Z",
+      "side": 1,
+      "message": "Fixing an upstream issue, so must be sent upstream first. Once it lands in a maintainer tree, you can cherry-pick it here as FROMGIT.",
+      "revId": "cc89600bf939f3cd002f5d71fdb38925b83a78c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2d14be1_82352063",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
