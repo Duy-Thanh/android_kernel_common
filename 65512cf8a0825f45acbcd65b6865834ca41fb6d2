@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a1659d7_f179ad94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-05T10:26:57Z",
+      "side": 1,
+      "message": "This feels odd, shouldn\u0027t the hardware do this automatically for us instead of having to manually do this?",
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4859c510_f07e04d1",
         "filename": "drivers/usb/gadget/function/f_fs.c",
         "patchSetId": 1
