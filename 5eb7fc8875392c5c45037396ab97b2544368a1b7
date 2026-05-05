@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "663f105f_f5f628b8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:03:18Z",
+      "side": 1,
+      "message": "Added check for RsvdP bits",
+      "parentUuid": "282eb3e5_1e1672fc",
+      "revId": "5eb7fc8875392c5c45037396ab97b2544368a1b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11723961_d00ac123",
@@ -77,6 +95,24 @@
       "side": 1,
       "message": "Will refactor to have a single read",
       "parentUuid": "11723961_d00ac123",
+      "revId": "5eb7fc8875392c5c45037396ab97b2544368a1b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "297fdcae_29b989c9",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f16c926_36bbe502",
       "revId": "5eb7fc8875392c5c45037396ab97b2544368a1b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
