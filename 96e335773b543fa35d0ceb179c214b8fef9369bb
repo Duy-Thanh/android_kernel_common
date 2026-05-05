@@ -16,6 +16,24 @@
       "message": "This is fixing an upstream issue, so it must be sent upstream. It will land in android-mainline via a merge from upstream.",
       "revId": "96e335773b543fa35d0ceb179c214b8fef9369bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e153d3fc_6a7b0450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1091044
+      },
+      "writtenOn": "2026-05-05T23:40:42Z",
+      "side": 1,
+      "message": "this portion of the code is not upstream though. it\u0027s android specific added by https://android.googlesource.com/kernel/common/+/382e68666b7f90c1d62b445f41973285410ccad5%5E%21/#F0",
+      "parentUuid": "a2d8c491_68f5b8e4",
+      "revId": "96e335773b543fa35d0ceb179c214b8fef9369bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
