@@ -34,6 +34,24 @@
       "parentUuid": "8ba990cc_b6967cb4",
       "revId": "f342bf62901630ea930f52b7c9aa8e602cf609ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f107d9_fdeb4436",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:03:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c82b751f_7f160519",
+      "revId": "f342bf62901630ea930f52b7c9aa8e602cf609ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
