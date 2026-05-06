@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bf0f7c_99428f75",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-06T13:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02775644_f629de49",
+      "range": {
+        "startLine": 134,
+        "startChar": 18,
+        "endLine": 134,
+        "endChar": 37
+      },
+      "revId": "e4c3bc74cc4af1da0d5b940d1087b59f113b9498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b1f1370_1d9517fa",
