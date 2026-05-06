@@ -2198,7 +2198,19 @@ static int w7090p_tuner_write_serpar(struct i2c_adapter *i2c_adap, struct i2c_ms
 	struct dib7000p_state *state = i2c_get_adapdata(i2c_adap);
 	u8 n_overflow = 1;
 	u16 i = 1000;
+<<<<<<< HEAD   (f3e26c3143095d8d320cf4bfdffc82047db8ac4f Merge 0f37d1e65c6d ("Bluetooth: MGMT: validate LTK enc_size )
 	u16 serpar_num = msg[0].buf[0];
+||||||| BASE   (0f37d1e65c6d71ad94ccfb5c602163c525db789d Bluetooth: MGMT: validate LTK enc_size on load)
+	if (msg[0].len < 3)
+		return -EOPNOTSUPP;
+	u16 serpar_num = msg[0].buf[0];
+=======
+	u16 serpar_num;
+
+	if (msg[0].len < 3)
+		return -EOPNOTSUPP;
+	serpar_num = msg[0].buf[0];
+>>>>>>> BRANCH (e808462dc45abd96e520dec5dd449e69620ac26b usb: ehci-brcm: fix sleep during atomic)
 
 	while (n_overflow == 1 && i) {
 		n_overflow = (dib7000p_read_word(state, 1984) >> 1) & 0x1;
@@ -2217,8 +2229,22 @@ static int w7090p_tuner_read_serpar(struct i2c_adapter *i2c_adap, struct i2c_msg
 	struct dib7000p_state *state = i2c_get_adapdata(i2c_adap);
 	u8 n_overflow = 1, n_empty = 1;
 	u16 i = 1000;
+<<<<<<< HEAD   (f3e26c3143095d8d320cf4bfdffc82047db8ac4f Merge 0f37d1e65c6d ("Bluetooth: MGMT: validate LTK enc_size )
 	u16 serpar_num = msg[0].buf[0];
 	u16 read_word;
+||||||| BASE   (0f37d1e65c6d71ad94ccfb5c602163c525db789d Bluetooth: MGMT: validate LTK enc_size on load)
+	if (msg[0].len < 1 || msg[1].len < 2)
+		return -EOPNOTSUPP;
+	u16 serpar_num = msg[0].buf[0];
+	u16 read_word;
+=======
+	u16 serpar_num;
+	u16 read_word;
+
+	if (msg[0].len < 1 || msg[1].len < 2)
+		return -EOPNOTSUPP;
+	serpar_num = msg[0].buf[0];
+>>>>>>> BRANCH (e808462dc45abd96e520dec5dd449e69620ac26b usb: ehci-brcm: fix sleep during atomic)
 
 	while (n_overflow == 1 && i) {
 		n_overflow = (dib7000p_read_word(state, 1984) >> 1) & 0x1;

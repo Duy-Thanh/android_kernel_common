@@ -99,12 +99,20 @@ static struct kobject *mokvar_kobj;
  */
 void __init efi_mokvar_table_init(void)
 {
+	struct efi_mokvar_table_entry __aligned(1) *mokvar_entry, *next_entry;
 	efi_memory_desc_t md;
 	void *va = NULL;
 	unsigned long cur_offset = 0;
 	unsigned long offset_limit;
 	unsigned long map_size_needed = 0;
+<<<<<<< HEAD   (f3e26c3143095d8d320cf4bfdffc82047db8ac4f Merge 0f37d1e65c6d ("Bluetooth: MGMT: validate LTK enc_size )
 	struct efi_mokvar_table_entry *mokvar_entry;
+||||||| BASE   (0f37d1e65c6d71ad94ccfb5c602163c525db789d Bluetooth: MGMT: validate LTK enc_size on load)
+	unsigned long size;
+	struct efi_mokvar_table_entry *mokvar_entry;
+=======
+	unsigned long size;
+>>>>>>> BRANCH (e808462dc45abd96e520dec5dd449e69620ac26b usb: ehci-brcm: fix sleep during atomic)
 	int err;
 
 	if (!efi_enabled(EFI_MEMMAP))
@@ -141,7 +149,7 @@ void __init efi_mokvar_table_init(void)
 			return;
 		}
 		mokvar_entry = va;
-
+next:
 		/* Check for last sentinel entry */
 		if (mokvar_entry->name[0] == '\0') {
 			if (mokvar_entry->data_size != 0)
@@ -155,7 +163,19 @@ void __init efi_mokvar_table_init(void)
 		mokvar_entry->name[sizeof(mokvar_entry->name) - 1] = '\0';
 
 		/* Advance to the next entry */
-		cur_offset += sizeof(*mokvar_entry) + mokvar_entry->data_size;
+		size = sizeof(*mokvar_entry) + mokvar_entry->data_size;
+		cur_offset += size;
+
+		/*
+		 * Don't bother remapping if the current entry header and the
+		 * next one end on the same page.
+		 */
+		next_entry = (void *)((unsigned long)mokvar_entry + size);
+		if (((((unsigned long)(mokvar_entry + 1) - 1) ^
+		      ((unsigned long)(next_entry + 1) - 1)) & PAGE_MASK) == 0) {
+			mokvar_entry = next_entry;
+			goto next;
+		}
 	}
 
 	if (va)
