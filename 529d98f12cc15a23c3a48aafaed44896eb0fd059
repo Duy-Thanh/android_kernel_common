@@ -34,6 +34,24 @@
       "parentUuid": "ee696e2c_c0c84d15",
       "revId": "529d98f12cc15a23c3a48aafaed44896eb0fd059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813a91d6_8bb633df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-06T18:25:44Z",
+      "side": 1,
+      "message": "With this we end up adding `blk_mq_queue_inflight`, `blk_mq_quiesce_queue_nowait` and `scsi_device_from_queue` to the symbol list. This will hinder our ability to backport important features/fixes. Can you please re-consider and see if you can upstream this?",
+      "parentUuid": "4c3b4a6e_1cbd90fb",
+      "revId": "529d98f12cc15a23c3a48aafaed44896eb0fd059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
