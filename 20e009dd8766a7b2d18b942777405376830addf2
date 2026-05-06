@@ -77,6 +77,30 @@
       ],
       "revId": "20e009dd8766a7b2d18b942777405376830addf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "799ddfde_ce328188",
+        "filename": "BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 3429,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-05-06T13:31:07Z",
+      "side": 1,
+      "message": "Right, looking at the list of [mm tools](https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/tools/mm/Makefile;l\u003d6), it should be `page-types`.",
+      "parentUuid": "9cb8e8ca_1f9e11cd",
+      "range": {
+        "startLine": 3429,
+        "startChar": 12,
+        "endLine": 3429,
+        "endChar": 22
+      },
+      "revId": "20e009dd8766a7b2d18b942777405376830addf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
