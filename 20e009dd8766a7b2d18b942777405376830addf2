@@ -16,6 +16,67 @@
       "message": "Friendly ping.",
       "revId": "20e009dd8766a7b2d18b942777405376830addf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb8e8ca_1f9e11cd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 3429,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-06T12:56:52Z",
+      "side": 1,
+      "message": "Should it be `page_types` or `page-types`?",
+      "range": {
+        "startLine": 3429,
+        "startChar": 12,
+        "endLine": 3429,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78c7f21d_689dfd29",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 3429,
+                "startChar": 0,
+                "endLine": 3430,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"page-types\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 3455,
+                "startChar": 0,
+                "endLine": 3456,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"page-types_android_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 3458,
+                "startChar": 0,
+                "endLine": 3459,
+                "endChar": 0
+              },
+              "replacement": "        \":page-types\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e009dd8766a7b2d18b942777405376830addf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
