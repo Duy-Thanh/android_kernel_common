@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59cd8c72_3d755c80",
+        "filename": "drivers/pmdomain/governor.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-06T17:11:38Z",
+      "side": 1,
+      "message": "If you add a \"ret\" parameter, can\u0027t this whole block be done inside the hook handler? Then this change reduces to:\n```\ntrace_android_vh_cpu_domain_power_down_ok(genpd, \u0026state, \u0026done, \u0026ret);\nif (done)\n    return ret;\n```",
+      "revId": "8cdaa2443ae4ce7c817842efb5c3d8ccbc052dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
