@@ -4175,12 +4175,235 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
 	if (!f2fs_update_errors(sbi))
 		goto out_unlock;
 
+<<<<<<< HEAD   (e257ee20f2fce037de1de29558ccf37927bba1ff ANDROID: GKI: export clear_wakeup_reasons symbol)
 	err = f2fs_commit_super(sbi, false);
 	if (err)
 		f2fs_err(sbi, "f2fs_commit_super fails to record errors:%u, err:%d",
 								error, err);
 out_unlock:
 	f2fs_up_write(&sbi->sb_lock);
+||||||| BASE   (aa49950484cafb621c49b0d7b51eb1253894fbb3 UPSTREAM: f2fs: annotate lockless NAT counter reads)
+static void f2fs_handle_critical_error(struct f2fs_sb_info *sbi,
+						unsigned char reason)
+{
+	struct super_block *sb = sbi->sb;
+	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
+	bool continue_fs = !shutdown &&
+			F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
+
+	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+
+	if (!f2fs_hw_is_readonly(sbi)) {
+		save_stop_reason(sbi, reason);
+
+		/*
+		 * always create an asynchronous task to record stop_reason
+		 * in order to avoid potential deadlock when running into
+		 * f2fs_record_stop_reason() synchronously.
+		 */
+		schedule_work(&sbi->s_error_work);
+	}
+
+	/*
+	 * We force ERRORS_RO behavior when system is rebooting. Otherwise we
+	 * could panic during 'reboot -f' as the underlying device got already
+	 * disabled.
+	 */
+	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC &&
+				!shutdown && !system_going_down() &&
+				!is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+		panic("F2FS-fs (device %s): panic forced after error\n",
+							sb->s_id);
+
+	if (shutdown)
+		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+	else
+		dump_stack();
+
+	/*
+	 * Continue filesystem operators if errors=continue. Should not set
+	 * RO by shutdown, since RO bypasses thaw_super which can hang the
+	 * system.
+	 */
+	if (continue_fs || f2fs_readonly(sb) || shutdown) {
+		f2fs_warn(sbi, "Stopped filesystem due to reason: %d", reason);
+		return;
+	}
+
+	f2fs_warn(sbi, "Remounting filesystem read-only");
+
+	/*
+	 * We have already set CP_ERROR_FLAG flag to stop all updates
+	 * to filesystem, so it doesn't need to set SB_RDONLY flag here
+	 * because the flag should be set covered w/ sb->s_umount semaphore
+	 * via remount procedure, otherwise, it will confuse code like
+	 * freeze_super() which will lead to deadlocks and other problems.
+	 */
+}
+
+void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+						unsigned char reason)
+{
+	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
+	if (!end_io)
+		f2fs_flush_merged_writes(sbi);
+	f2fs_handle_critical_error(sbi, reason);
+}
+
+
+static void f2fs_record_error_work(struct work_struct *work)
+{
+	struct f2fs_sb_info *sbi = container_of(work,
+					struct f2fs_sb_info, s_error_work);
+
+	f2fs_record_stop_reason(sbi);
+}
+
+static inline unsigned int get_first_seq_zone_segno(struct f2fs_sb_info *sbi)
+{
+#ifdef CONFIG_BLK_DEV_ZONED
+	unsigned int zoneno, total_zones;
+	int devi;
+
+	if (!f2fs_sb_has_blkzoned(sbi))
+		return NULL_SEGNO;
+
+	for (devi = 0; devi < sbi->s_ndevs; devi++) {
+		if (!bdev_is_zoned(FDEV(devi).bdev))
+			continue;
+
+		total_zones = GET_ZONE_FROM_SEG(sbi, FDEV(devi).total_segments);
+
+		for (zoneno = 0; zoneno < total_zones; zoneno++) {
+			unsigned int segs, blks;
+
+			if (!f2fs_zone_is_seq(sbi, devi, zoneno))
+				continue;
+
+			segs = GET_SEG_FROM_SEC(sbi,
+					zoneno * sbi->secs_per_zone);
+			blks = SEGS_TO_BLKS(sbi, segs);
+			return GET_SEGNO(sbi, FDEV(devi).start_blk + blks);
+		}
+	}
+#endif
+	return NULL_SEGNO;
+=======
+static void f2fs_handle_critical_error(struct f2fs_sb_info *sbi,
+						unsigned char reason)
+{
+	struct super_block *sb = sbi->sb;
+	bool shutdown = reason == STOP_CP_REASON_SHUTDOWN;
+	bool continue_fs = !shutdown &&
+			F2FS_OPTION(sbi).errors == MOUNT_ERRORS_CONTINUE;
+
+	set_ckpt_flags(sbi, CP_ERROR_FLAG);
+
+	if (!f2fs_hw_is_readonly(sbi)) {
+		save_stop_reason(sbi, reason);
+
+		/*
+		 * always create an asynchronous task to record stop_reason
+		 * in order to avoid potential deadlock when running into
+		 * f2fs_record_stop_reason() synchronously.
+		 */
+		schedule_work(&sbi->s_error_work);
+	}
+
+	/*
+	 * We force ERRORS_RO behavior when system is rebooting. Otherwise we
+	 * could panic during 'reboot -f' as the underlying device got already
+	 * disabled.
+	 */
+	if (F2FS_OPTION(sbi).errors == MOUNT_ERRORS_PANIC &&
+				!shutdown && !system_going_down() &&
+				!is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+		panic("F2FS-fs (device %s): panic forced after error\n",
+							sb->s_id);
+
+	if (shutdown)
+		set_sbi_flag(sbi, SBI_IS_SHUTDOWN);
+	else
+		dump_stack();
+
+	/*
+	 * Continue filesystem operators if errors=continue. Should not set
+	 * RO by shutdown, since RO bypasses thaw_super which can hang the
+	 * system.
+	 */
+	if (continue_fs || f2fs_readonly(sb) || shutdown) {
+		f2fs_warn(sbi, "Stopped filesystem due to reason: %d", reason);
+		return;
+	}
+
+	f2fs_warn(sbi, "Remounting filesystem read-only");
+
+	/*
+	 * We have already set CP_ERROR_FLAG flag to stop all updates
+	 * to filesystem, so it doesn't need to set SB_RDONLY flag here
+	 * because the flag should be set covered w/ sb->s_umount semaphore
+	 * via remount procedure, otherwise, it will confuse code like
+	 * freeze_super() which will lead to deadlocks and other problems.
+	 */
+}
+
+void f2fs_fault_report(struct super_block *sb, unsigned int err_code,
+			const char *func, unsigned int data)
+{
+	trace_f2fs_fault_report(sb, err_code, func, data);
+}
+
+void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+						unsigned char reason)
+{
+	if (reason != STOP_CP_REASON_SHUTDOWN)
+		f2fs_fault_report(sbi->sb, REPORT_FAULT_STOP_CP, __func__, reason);
+
+	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
+	if (!end_io)
+		f2fs_flush_merged_writes(sbi);
+	f2fs_handle_critical_error(sbi, reason);
+}
+
+
+static void f2fs_record_error_work(struct work_struct *work)
+{
+	struct f2fs_sb_info *sbi = container_of(work,
+					struct f2fs_sb_info, s_error_work);
+
+	f2fs_record_stop_reason(sbi);
+}
+
+static inline unsigned int get_first_seq_zone_segno(struct f2fs_sb_info *sbi)
+{
+#ifdef CONFIG_BLK_DEV_ZONED
+	unsigned int zoneno, total_zones;
+	int devi;
+
+	if (!f2fs_sb_has_blkzoned(sbi))
+		return NULL_SEGNO;
+
+	for (devi = 0; devi < sbi->s_ndevs; devi++) {
+		if (!bdev_is_zoned(FDEV(devi).bdev))
+			continue;
+
+		total_zones = GET_ZONE_FROM_SEG(sbi, FDEV(devi).total_segments);
+
+		for (zoneno = 0; zoneno < total_zones; zoneno++) {
+			unsigned int segs, blks;
+
+			if (!f2fs_zone_is_seq(sbi, devi, zoneno))
+				continue;
+
+			segs = GET_SEG_FROM_SEC(sbi,
+					zoneno * sbi->secs_per_zone);
+			blks = SEGS_TO_BLKS(sbi, segs);
+			return GET_SEGNO(sbi, FDEV(devi).start_blk + blks);
+		}
+	}
+#endif
+	return NULL_SEGNO;
+>>>>>>> CHANGE (bfaefa6c7d45d2de5b294b5341941e5d127ac6f7 UPSTREAM: f2fs: Add trace_f2fs_fault_report)
 }
 
 static int f2fs_scan_devices(struct f2fs_sb_info *sbi)
