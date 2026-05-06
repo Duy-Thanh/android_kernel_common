@@ -4373,6 +4373,39 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason)
 	 */
 }
 
+<<<<<<< HEAD   (e19fb465168c754e372547711af0641d1446fea0 ANDROID: FUSE: Clear inode after d_splice_alias() to prevent)
+||||||| BASE   (aa49950484cafb621c49b0d7b51eb1253894fbb3 UPSTREAM: f2fs: annotate lockless NAT counter reads)
+void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+						unsigned char reason)
+{
+	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
+	if (!end_io)
+		f2fs_flush_merged_writes(sbi);
+	f2fs_handle_critical_error(sbi, reason);
+}
+
+
+=======
+void f2fs_fault_report(struct super_block *sb, unsigned int err_code,
+			const char *func, unsigned int data)
+{
+	trace_f2fs_fault_report(sb, err_code, func, data);
+}
+
+void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
+						unsigned char reason)
+{
+	if (reason != STOP_CP_REASON_SHUTDOWN)
+		f2fs_fault_report(sbi->sb, REPORT_FAULT_STOP_CP, __func__, reason);
+
+	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
+	if (!end_io)
+		f2fs_flush_merged_writes(sbi);
+	f2fs_handle_critical_error(sbi, reason);
+}
+
+
+>>>>>>> CHANGE (bfaefa6c7d45d2de5b294b5341941e5d127ac6f7 UPSTREAM: f2fs: Add trace_f2fs_fault_report)
 static void f2fs_record_error_work(struct work_struct *work)
 {
 	struct f2fs_sb_info *sbi = container_of(work,
