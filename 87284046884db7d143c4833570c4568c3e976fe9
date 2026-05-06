@@ -67,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a739300_dfe81e6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-05-06T02:33:13Z",
+      "side": 1,
+      "message": "symbol list added in https://android-review.googlesource.com/c/kernel/common/+/4055615/",
+      "parentUuid": "f2ae5ba2_62ca3003",
+      "revId": "87284046884db7d143c4833570c4568c3e976fe9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "faaa5273_3b9f76f5",
         "filename": "drivers/pmdomain/governor.c",
         "patchSetId": 3
@@ -78,6 +96,24 @@
       "writtenOn": "2026-04-14T18:33:30Z",
       "side": 1,
       "message": "shouldn\u0027t genpd-\u003elast_enter and genpd-\u003ereflect_residency also be set here?",
+      "revId": "87284046884db7d143c4833570c4568c3e976fe9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64aef94d_70e10482",
+        "filename": "drivers/pmdomain/governor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-05-06T02:33:13Z",
+      "side": 1,
+      "message": "I was thinking it\u0027s a forced state, but sure, the patch is updated to set the two",
+      "parentUuid": "faaa5273_3b9f76f5",
       "revId": "87284046884db7d143c4833570c4568c3e976fe9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
