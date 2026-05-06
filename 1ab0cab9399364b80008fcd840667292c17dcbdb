@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f290c4a_55b69677",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T18:18:16Z",
+      "side": 1,
+      "message": "I\u0027ve been hesitating a bit whether we really should disallow zero-size walks, since there might be some potential use cases when a successful no-op would be actually the expected/desired behavior...\n\nIn particular, in `pkvm_guest_share_host()` and `pkvm_guest_unshare_host()` (unlike other memory protection API functions) we already allow size\u003d0, and I recall that I deliberately didn\u0027t add zero-size checks there, since I wasn\u0027t sure there are no cases when a guest kernel wants to share/unshare a zero-sized range (i.e. just do nothing and expect pKVM to return success in this case)...\n\nNow thinking more about it, probably there are no legitimate use cases for that, since at least, that would mean that the range address passed by the guest in those hypercalls makes no sense...\n\nAnd _probably_ in general we don\u0027t have and will not have legitimate use cases for zero-size pgtable walks in pKVM, so _probably_ disallowing them is a good idea...\n\nIf so, while we\u0027re at it, it may be also a good idea to \"fix\" `pkvm_guest_share_host()` and `pkvm_guest_unshare_host()` in this regard, i.e. add those missing zero-size checks to them?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb665e15_b6d65e01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T18:18:16Z",
+      "side": 1,
+      "message": "Just wondering: if the range exceeds the addressable space, `pkvm_pgtable_walk()` will simply not reach the end of this range, i.e. it will only walk until the end of the addressable space anyway? So nothing bad happens if we don\u0027t check this?\n\nSo this check is just to help catching caller bugs, not prevent misbehavior of `pkvm_pgtable_walk()` itself? And we define a contract that if the caller wants to just walk the entire pgtable, the caller is supposed to use precisely pkvm_pgtable_max_size(), not ULONG_MAX or whatever?\n\nBTW it seems that for the same reason, arithmetic overflow wouldn\u0027t happen either (so `end \u003e start` check is, again, just to help catching caller bugs)?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f331ed0_ed871455",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T18:18:16Z",
+      "side": 1,
+      "message": "nit: what are the advantages of having a separate function for this (given that it is only meant to be used inside pkvm_pgtable_walk(), and is very simple)? Why not just do these checks directly inside pkvm_pgtable_walk()?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
