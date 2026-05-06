@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0bc5ee9_9d6cf7f9",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T15:12:34Z",
+      "side": 1,
+      "message": "FECTL _or_ PERFINTRCTL?",
+      "fixSuggestions": [
+        {
+          "fixId": "5a99e041_5c6d21e7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 591,
+                "startChar": 0,
+                "endLine": 592,
+                "endChar": 0
+              },
+              "replacement": "\t\tu32 rsvdp \u003d readl(iommu-\u003ereg + offset) \u0026 rsvdp_mask;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba221208a5c62837b9f945e326029972ec0c2f6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
