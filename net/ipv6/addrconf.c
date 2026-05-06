@@ -2841,7 +2841,37 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 				/* not infinity */
 				fib6_set_expires(rt, jiffies + rt_expires);
 			} else {
+<<<<<<< HEAD   (770abf8dfcbeaec064a13608cbb17154323d3b06 Merge 9241d441feb4 ("ipv6: Remove permanent routes from tb6_)
 				fib6_clean_expires(rt);
+||||||| BASE   (9241d441feb40ea778e0589c3f9e81b4baca9e75 ipv6: Remove permanent routes from tb6_gc_hlist when all exc)
+				table = rt->fib6_table;
+				spin_lock_bh(&table->tb6_lock);
+
+				if (addrconf_finite_timeout(rt_expires)) {
+					/* not infinity */
+					fib6_set_expires(rt, jiffies + rt_expires);
+					fib6_add_gc_list(rt);
+				} else {
+					fib6_clean_expires(rt);
+					fib6_remove_gc_list(rt);
+				}
+
+				spin_unlock_bh(&table->tb6_lock);
+=======
+				table = rt->fib6_table;
+				spin_lock_bh(&table->tb6_lock);
+
+				if (addrconf_finite_timeout(rt_expires)) {
+					/* not infinity */
+					fib6_set_expires(rt, jiffies + rt_expires);
+					fib6_add_gc_list(rt);
+				} else {
+					fib6_clean_expires(rt);
+					fib6_may_remove_gc_list(net, rt);
+				}
+
+				spin_unlock_bh(&table->tb6_lock);
+>>>>>>> BRANCH (a8ec35bb7b503447f32158404293a1e318c21e30 ipv6: Don't remove permanent routes with exceptions from tb6)
 			}
 		} else if (valid_lft) {
 			clock_t expires = 0;
@@ -4818,7 +4848,15 @@ static int modify_prefix_route(struct inet6_ifaddr *ifp,
 	} else {
 		if (!expires)
 			fib6_clean_expires(f6i);
+<<<<<<< HEAD   (770abf8dfcbeaec064a13608cbb17154323d3b06 Merge 9241d441feb4 ("ipv6: Remove permanent routes from tb6_)
 		else
+||||||| BASE   (9241d441feb40ea778e0589c3f9e81b4baca9e75 ipv6: Remove permanent routes from tb6_gc_hlist when all exc)
+			fib6_remove_gc_list(f6i);
+		} else {
+=======
+			fib6_may_remove_gc_list(net, f6i);
+		} else {
+>>>>>>> BRANCH (a8ec35bb7b503447f32158404293a1e318c21e30 ipv6: Don't remove permanent routes with exceptions from tb6)
 			fib6_set_expires(f6i, expires);
 
 		fib6_info_release(f6i);

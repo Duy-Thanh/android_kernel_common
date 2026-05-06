@@ -1125,7 +1125,15 @@ static int fib6_add_rt2node(struct fib6_node *fn, struct fib6_info *rt,
 					return -EEXIST;
 				if (!(rt->fib6_flags & RTF_EXPIRES))
 					fib6_clean_expires(iter);
+<<<<<<< HEAD   (770abf8dfcbeaec064a13608cbb17154323d3b06 Merge 9241d441feb4 ("ipv6: Remove permanent routes from tb6_)
 				else
+||||||| BASE   (9241d441feb40ea778e0589c3f9e81b4baca9e75 ipv6: Remove permanent routes from tb6_gc_hlist when all exc)
+					fib6_remove_gc_list(iter);
+				} else {
+=======
+					fib6_may_remove_gc_list(info->nl_net, iter);
+				} else {
+>>>>>>> BRANCH (a8ec35bb7b503447f32158404293a1e318c21e30 ipv6: Don't remove permanent routes with exceptions from tb6)
 					fib6_set_expires(iter, rt->expires);
 
 				if (rt->fib6_pmtu)
@@ -2293,8 +2301,16 @@ static void fib6_flush_trees(struct net *net)
 /*
  *	Garbage collection
  */
+<<<<<<< HEAD   (770abf8dfcbeaec064a13608cbb17154323d3b06 Merge 9241d441feb4 ("ipv6: Remove permanent routes from tb6_)
 
 static int fib6_age(struct fib6_info *rt, void *arg)
+||||||| BASE   (9241d441feb40ea778e0589c3f9e81b4baca9e75 ipv6: Remove permanent routes from tb6_gc_hlist when all exc)
+static void fib6_age_exceptions(struct fib6_info *rt, struct fib6_gc_args *gc_args,
+				unsigned long now)
+=======
+void fib6_age_exceptions(struct fib6_info *rt, struct fib6_gc_args *gc_args,
+			 unsigned long now)
+>>>>>>> BRANCH (a8ec35bb7b503447f32158404293a1e318c21e30 ipv6: Don't remove permanent routes with exceptions from tb6)
 {
 	struct fib6_gc_args *gc_args = arg;
 	unsigned long now = jiffies;

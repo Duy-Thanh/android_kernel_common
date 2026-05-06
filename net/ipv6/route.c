@@ -1028,7 +1028,15 @@ int rt6_route_rcv(struct net_device *dev, u8 *opt, int len,
 	if (rt) {
 		if (!addrconf_finite_timeout(lifetime))
 			fib6_clean_expires(rt);
+<<<<<<< HEAD   (770abf8dfcbeaec064a13608cbb17154323d3b06 Merge 9241d441feb4 ("ipv6: Remove permanent routes from tb6_)
 		else
+||||||| BASE   (9241d441feb40ea778e0589c3f9e81b4baca9e75 ipv6: Remove permanent routes from tb6_gc_hlist when all exc)
+			fib6_remove_gc_list(rt);
+		} else {
+=======
+			fib6_may_remove_gc_list(net, rt);
+		} else {
+>>>>>>> BRANCH (a8ec35bb7b503447f32158404293a1e318c21e30 ipv6: Don't remove permanent routes with exceptions from tb6)
 			fib6_set_expires(rt, jiffies + HZ * lifetime);
 
 		fib6_info_release(rt);
