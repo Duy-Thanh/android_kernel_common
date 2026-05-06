@@ -34,6 +34,7 @@
 #include "ext4_jbd2.h"
 
 #include <trace/events/ext4.h>
+#include <trace/hooks/ext4.h>
 
 /*
  * If we're not journaling and this is a just-created file, we have to
@@ -136,6 +137,13 @@ int ext4_sync_file(struct file *file, loff_t start, loff_t end, int datasync)
 		return -EIO;
 
 	ASSERT(ext4_journal_current_handle() == NULL);
+
+	// Vendor hook for skipping fsync.
+	bool disabled = false;
+	trace_android_vh_disable_ext4_fsync(&disabled);
+	if (disabled) {
+		return 0;
+	}
 
 	trace_ext4_sync_file_enter(file, datasync);
 
