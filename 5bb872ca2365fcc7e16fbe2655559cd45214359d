@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "047befce_bbc0edad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T09:56:03Z",
+      "side": 1,
+      "message": "This statement is slightly outdated?",
+      "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1303f7fb_0aa6df61",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
