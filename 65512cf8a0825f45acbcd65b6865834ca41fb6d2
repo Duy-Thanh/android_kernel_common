@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87d855c5_ba08c367",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-06T06:28:32Z",
+      "side": 1,
+      "message": "But the hardware is supposed to send a ZLP every time the request is \"full\", that\u0027s how USB works here, right?  This should be transparent to userspace, you shouldn\u0027t have to manually set this to happen or not, the hardware should just do it automatically.\n\nHow can userspace see an extra transaction for ZLP, the hardware should just \"eat\" that as it now knows the buffer is completed and so the data should be sent further up the stack.  WHat host side software is seeing extra transactions like this?",
+      "parentUuid": "9c1c99f7_e56c1d2e",
+      "revId": "65512cf8a0825f45acbcd65b6865834ca41fb6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4859c510_f07e04d1",
         "filename": "drivers/usb/gadget/function/f_fs.c",
         "patchSetId": 1

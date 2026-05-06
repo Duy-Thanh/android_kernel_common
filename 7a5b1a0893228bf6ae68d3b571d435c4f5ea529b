@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4527e34f_83c94709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-06T06:28:32Z",
+      "side": 1,
+      "message": "Where is this new ioctl documented?",
+      "revId": "7a5b1a0893228bf6ae68d3b571d435c4f5ea529b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8cec83_796f21c3",
+        "filename": "drivers/usb/gadget/function/f_fs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1743,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-06T06:28:32Z",
+      "side": 1,
+      "message": "wrong type.",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1743,
+        "endChar": 4
+      },
+      "revId": "7a5b1a0893228bf6ae68d3b571d435c4f5ea529b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
