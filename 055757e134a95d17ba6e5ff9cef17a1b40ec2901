@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34de767d_2405c19a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4800900
+      },
+      "writtenOn": "2026-05-06T12:32:16Z",
+      "side": 1,
+      "message": "This patch has been reuploaded as https://android-review.googlesource.com/c/kernel/common/+/4060176 under my own account (the\n  previous upload used a colleague\u0027s account which had CLA issues). Please review the new CL instead. Abandoning this one",
+      "parentUuid": "c3c8d51f_f91b8a94",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "055757e134a95d17ba6e5ff9cef17a1b40ec2901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e32823f_b6361d1e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 5
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ab2f5bf_d9737abf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 4800900
+      },
+      "writtenOn": "2026-05-06T12:32:16Z",
+      "side": 1,
+      "message": "This patch has been reuploaded as https://android-review.googlesource.com/c/kernel/common/+/4060176 under my own account (the\n  previous upload used a colleague\u0027s account which had CLA issues). Please review the new CL instead. Abandoning this one.",
+      "parentUuid": "3e32823f_b6361d1e",
+      "range": {
+        "startLine": 869,
+        "startChar": 1,
+        "endLine": 869,
+        "endChar": 42
+      },
+      "revId": "055757e134a95d17ba6e5ff9cef17a1b40ec2901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e71da37d_785c796e",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2026-05-04T17:22:43Z",
       "side": 1,
       "message": "This should break the ABI, so I think it would need to be queued for the final KMI update.",
+      "range": {
+        "startLine": 553,
+        "startChar": 1,
+        "endLine": 553,
+        "endChar": 17
+      },
+      "revId": "055757e134a95d17ba6e5ff9cef17a1b40ec2901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c4cbdde_97b93ffa",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 4800900
+      },
+      "writtenOn": "2026-05-06T12:32:16Z",
+      "side": 1,
+      "message": "This patch has been reuploaded as https://android-review.googlesource.com/c/kernel/common/+/4060176 under my own account (the\n  previous upload used a colleague\u0027s account which had CLA issues). Please review the new CL instead. Abandoning this one",
+      "parentUuid": "e71da37d_785c796e",
       "range": {
         "startLine": 553,
         "startChar": 1,
