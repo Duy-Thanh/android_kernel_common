@@ -69,6 +69,41 @@
       "parentUuid": "3454969e_528904cf",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd47efcd_d647aadb",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T14:06:28Z",
+      "side": 1,
+      "message": "It might also make sense to use READ_ONCE, for the same reason (similarly as we do it for the host\u0027s `pvmfw_load_addr` value in `pkvm_vm_finalize()`?",
+      "fixSuggestions": [
+        {
+          "fixId": "23d0a1ce_0e62d6ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 517,
+                "startChar": 0,
+                "endLine": 518,
+                "endChar": 0
+              },
+              "replacement": "\tstruct pkvm_memcache tmp_mc \u003d READ_ONCE(*host_mc);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
