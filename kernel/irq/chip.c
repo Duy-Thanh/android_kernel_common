@@ -14,7 +14,12 @@
 #include <linux/interrupt.h>
 #include <linux/kernel_stat.h>
 #include <linux/irqdomain.h>
+<<<<<<< HEAD   (3258c5bae591b3b37d0e416d8074058956396e9c Merge 2ad332b0e221 ("Merge tag 'core-debugobjects-2026-04-12)
 #include <linux/wakeup_reason.h>
+||||||| BASE   (2ad332b0e221dedc4c483faef2003be3655f9d77 Merge tag 'core-debugobjects-2026-04-12' of git://git.kernel)
+=======
+#include <linux/random.h>
+>>>>>>> BRANCH (db23954eeaf23464669043ddbb38a64f7b301ebd Merge tag 'irq-core-2026-04-12' of git://git.kernel.org/pub/)
 
 #include <trace/events/irq.h>
 
@@ -943,6 +948,8 @@ void handle_percpu_devid_irq(struct irq_desc *desc)
 		pr_err_once("Spurious%s percpu IRQ%u on CPU%u\n",
 			    enabled ? " and unmasked" : "", irq, cpu);
 	}
+
+	add_interrupt_randomness(irq);
 
 	if (chip->irq_eoi)
 		chip->irq_eoi(&desc->irq_data);
