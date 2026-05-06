@@ -33,6 +33,24 @@
       "message": "So we are effectively restoring what was originally implemented in 6.12: https://android-review.git.corp.google.com/c/kernel/common/+/3702536 where we had:\n```\nstatic void *admit_host_page(void *arg)\n{\n\tstruct pkvm_memcache *host_mc \u003d arg;\n\n\tif (!host_mc-\u003enr_pages)\n\t\treturn NULL;\n\n\tif (__pkvm_host_donate_hyp(host_mc-\u003ehead, PAGE_SIZE)) {\n\t\tWARN_ON(1);\n\t\treturn NULL;\n\t}\n\n\treturn pop_pkvm_memcache(host_mc, hyp_phys_to_virt);\n}\n\n/* Refill our local memcache by popping pages from the one provided by the host. */\nstatic int refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,\n\t\t    struct pkvm_memcache *host_mc)\n{\n\tstruct pkvm_memcache tmp \u003d *host_mc;\n\tint ret;\n\n\tret \u003d  __topup_pkvm_memcache(mc, min_pages, admit_host_page,\n\t\t\t\t     hyp_virt_to_phys, \u0026tmp);\n\t*host_mc \u003d tmp;\n\n\treturn ret;\n}\n```\n@dmaluka@google.com, do you maybe recall why it was changed during porting to 6.18 in https://android-review.git.corp.google.com/c/kernel/common/+/3941664?",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3454969e_528904cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T13:48:11Z",
+      "side": 1,
+      "message": "I think I remember. This is my bad: when porting it to 6.18, I was wondering what\u0027s the point of this temporary variable etc, haven\u0027t found an answer anywhere (including the original pKVM-ARM patches e.g. https://lore.kernel.org/kvmarm/20220519134204.5379-23-will@kernel.org/), and assumed there was no real reason for it, and changed it to simplify the code.",
+      "parentUuid": "f7092322_6acb04b6",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
