@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1e9b497_5a6e4b26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T21:31:49Z",
+      "side": 1,
+      "message": "\u003e If so, while we\u0027re at it, it may be also a good idea to \"fix\" pkvm_guest_share_host() and pkvm_guest_unshare_host() in this regard, i.e. add those missing zero-size checks to them?\n\nAh, I see you are already effectively doing that in the next patch.",
+      "parentUuid": "9f290c4a_55b69677",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb665e15_b6d65e01",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -48,6 +66,23 @@
       "writtenOn": "2026-05-06T18:18:16Z",
       "side": 1,
       "message": "nit: what are the advantages of having a separate function for this (given that it is only meant to be used inside pkvm_pgtable_walk(), and is very simple)? Why not just do these checks directly inside pkvm_pgtable_walk()?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fcbb2f_b893874e",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T21:31:49Z",
+      "side": 1,
+      "message": "Maybe also worth using WARN_ON_ONCE (since pKVM is supposed to only pass correct values to `pkvm_pgtable_walk()`)?",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
