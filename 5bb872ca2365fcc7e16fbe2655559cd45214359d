@@ -34,6 +34,41 @@
       ],
       "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827c7fba_3cbff78f",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T09:54:44Z",
+      "side": 1,
+      "message": "nit: maybe EOPNOTSUPP?",
+      "fixSuggestions": [
+        {
+          "fixId": "86b40602_5cb5d75d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 688,
+                "startChar": 0,
+                "endLine": 689,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
