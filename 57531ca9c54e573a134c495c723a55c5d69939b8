@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de40ed2_f2005de3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-06T15:38:59Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need the cast here",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 10
+      },
+      "revId": "57531ca9c54e573a134c495c723a55c5d69939b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62af4098_6e44356f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-06T15:38:59Z",
+      "side": 1,
+      "message": "`WRITE_ONCE()`?",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 18
+      },
+      "revId": "57531ca9c54e573a134c495c723a55c5d69939b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
