@@ -27,8 +27,16 @@ SYM_FUNC_START(pkvm_host_vmexit_entry)
 	mov WORD_SIZE*1(%_ASM_SP), %_ASM_BX
 
 	/*
-	 * No need for FILL_RETURN_BUFFER since there is no unbalanced RET
-	 * after host vmexit.
+	 * FILL_RETURN_BUFFER is needed for retpoline and IBRS mitigations where
+	 * there is no hardware protection against guest RSB poisoning. As the
+	 * pKVM target platform ADL/PTL mitigates via eIBRS (with
+	 * pkvm_relax_cpu_bugs = false, pKVM won't be able to run if the CPU
+	 * bugs cannot be mitigated), so no filling is needed here. If eIBRS is
+	 * affected by PBRSB, filling single-entry in RSB to retire one CALL
+	 * instruction before executing the first RET instruction is still not
+	 * needed since pKVM has balanced CALL/RET after host vmexit, it will
+	 * execute the CALL instruction and let it retire before the first RET
+	 * instruction.
 	 */
 
 	mov %_ASM_AX, VCPU_RAX(%_ASM_BX)
