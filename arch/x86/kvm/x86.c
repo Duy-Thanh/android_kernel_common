@@ -12306,6 +12306,9 @@ static void kvm_load_guest_fpu(struct kvm_vcpu *vcpu)
 	/* Exclude PKRU, it's restored separately immediately after VM-Exit. */
 	fpu_swap_kvm_fpstate(&vcpu->arch.guest_fpu, true);
 	trace_kvm_fpu(1);
+#ifdef __PKVM_HYP__
+	clear_thread_flag(TIF_NEED_FPU_LOAD);
+#endif
 }
 
 /* When vcpu_run ends, restore user space FPU context. */
@@ -12317,6 +12320,9 @@ static void kvm_put_guest_fpu(struct kvm_vcpu *vcpu)
 	fpu_swap_kvm_fpstate(&vcpu->arch.guest_fpu, false);
 	++vcpu->stat.fpu_reload;
 	trace_kvm_fpu(0);
+#ifdef __PKVM_HYP__
+	set_thread_flag(TIF_NEED_FPU_LOAD);
+#endif
 }
 
 #ifndef __PKVM_HYP__
