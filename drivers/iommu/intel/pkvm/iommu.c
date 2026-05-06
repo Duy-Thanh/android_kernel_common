@@ -8,6 +8,7 @@
 #include "pkvm/pkvm.h"
 #include "pkvm/debug.h"
 #include "iommu.h"
+#include "iommu_pmu.h"
 
 /*
  * IOMMU supported page size and page levels for second stage page table.
@@ -443,9 +444,16 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_GSTS_REG:
 		*val = iommu->vgsts;
 		break;
-	default:
+	default: {
+		struct iommu_pmu_reg_info pmu_info;
+
+		if (iommu_pmu_get_reg_info(iommu, offset, len, &pmu_info))
+			ret = iommu_pmu_validate_read(iommu, &pmu_info);
+
 		/* Not emulated MMIO can directly go to hardware */
-		ret = iommu_direct_mmio_read(iommu, phys, len, val);
+		if (!ret)
+			ret = iommu_direct_mmio_read(iommu, phys, len, val);
+	}
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
@@ -627,9 +635,16 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = iommu_direct_mmio_write(iommu, phys, len, val);
 		}
 		break;
-	default:
+	default: {
+		struct iommu_pmu_reg_info pmu_info;
+
+		if (iommu_pmu_get_reg_info(iommu, offset, len, &pmu_info))
+			ret = iommu_pmu_validate_write(iommu, &pmu_info, val);
+
 		/* Not emulated MMIO can directly go to hardware */
-		ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		if (!ret)
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+	}
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
@@ -790,6 +805,8 @@ static int iommu_init(struct intel_iommu *iommu)
 	}
 
 	pkvm_spin_lock_init(&iommu->lock);
+
+	iommu_pmu_init(iommu);
 
 	/*
 	 * Take a snapshot of GSTS. GCMD updates will be handled by pKVM and
