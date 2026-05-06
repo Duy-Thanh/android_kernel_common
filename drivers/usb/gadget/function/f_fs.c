@@ -196,7 +196,7 @@ struct ffs_epfile {
 	unsigned char			in;	/* P: ffs->eps_lock */
 	unsigned char			isoc;	/* P: ffs->eps_lock */
 
-	unsigned char			_pad;
+	u8				zlp_enabled;
 };
 
 struct ffs_buffer {
@@ -1075,6 +1075,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1126,6 +1127,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1303,11 +1305,17 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	struct ffs_epfile *epfile = file->private_data;
 	struct ffs_ep *ep;
 	int ret;
+	u32 enable_zlp = 0;
 
 	ENTER();
 
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
+
+	if (code == FUNCTIONFS_ENDPOINT_ENABLE_ZLP) {
+		if (copy_from_user(&enable_zlp, (void __user *)value, sizeof(enable_zlp)))
+			return -EFAULT;
+	}
 
 	/* Wait for endpoint to be enabled */
 	ep = epfile->ep;
@@ -1369,6 +1377,14 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 			ret = -EFAULT;
 		return ret;
 	}
+	case FUNCTIONFS_ENDPOINT_ENABLE_ZLP:
+		if (!epfile->in) {
+			ret = -EINVAL;
+			break;
+		}
+		epfile->zlp_enabled = !!enable_zlp;
+		ret = 0;
+		break;
 	default:
 		ret = -ENOTTY;
 	}
