@@ -158,6 +158,7 @@
 #define DMAR_MTRR_PHYSMASK9_REG 0x218
 #define DMAR_PERFCAP_REG	0x300
 #define DMAR_PERFCFGOFF_REG	0x310
+#define DMAR_PERFFRZOFF_REG	0x314
 #define DMAR_PERFOVFOFF_REG	0x318
 #define DMAR_PERFCNTROFF_REG	0x31c
 #define DMAR_PERFINTRSTS_REG	0x324
@@ -777,7 +778,6 @@ struct dmar_domain {
 #endif /* !__PKVM_HYP__ */
 };
 
-#ifndef __PKVM_HYP__
 /*
  * In theory, the VT-d 4.0 spec can support up to 2 ^ 16 counters.
  * But in practice, there are only 14 counters for the existing
@@ -788,6 +788,7 @@ struct dmar_domain {
  */
 #define IOMMU_PMU_IDX_MAX		64
 
+#ifndef __PKVM_HYP__
 struct iommu_pmu {
 	struct intel_iommu	*iommu;
 	u32			num_cntr;	/* Number of counters */
