@@ -45,7 +45,7 @@
 
 .macro exception_entry name vector has_error_code
 SYM_CODE_START(handle_exception_\name)
-	UNWIND_HINT_UNDEFINED
+	UNWIND_HINT_IRET_REGS offset=\has_error_code*8
 	ENDBR
 
 	.if \has_error_code == 0
