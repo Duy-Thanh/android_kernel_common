@@ -2531,6 +2531,13 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 						     HOST_SET_PSCI_MEM_PROTECT);
 		if (ret)
 			goto err_page_state;
+	}
+	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
+
+	for_each_hyp_ppage(ppage) {
+		size = PAGE_SIZE << ppage->order;
+		phys = hyp_pfn_to_phys(ppage->pfn);
+		ipa = hyp_pfn_to_phys(ppage->gfn);
 
 		if (pkvm_ipa_range_has_pvmfw(vm, ipa, ipa + size))
 			WARN_ON(pkvm_load_pvmfw_pages(vm, ipa, phys, size));
@@ -2539,7 +2546,6 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
 					       &vcpu->vcpu.arch.stage2_mc, 0));
 	}
-	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
 
 unlock:
 	guest_unlock_component(vm);
@@ -2558,8 +2564,6 @@ err_page_state:
 		size = PAGE_SIZE << ppage->order;
 		phys = hyp_pfn_to_phys(ppage->pfn);
 		ipa = hyp_pfn_to_phys(ppage->gfn);
-
-		WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, size));
 		WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST, 0,
 						       HOST_SET_PSCI_MEM_PROTECT));
 	}
