@@ -16,6 +16,24 @@
       "message": "If you add a \"ret\" parameter, can\u0027t this whole block be done inside the hook handler? Then this change reduces to:\n```\ntrace_android_vh_cpu_domain_power_down_ok(genpd, \u0026state, \u0026done, \u0026ret);\nif (done)\n    return ret;\n```",
       "revId": "8cdaa2443ae4ce7c817842efb5c3d8ccbc052dfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59fd21c_e6243d5a",
+        "filename": "drivers/pmdomain/governor.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-05-07T06:03:52Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "59cd8c72_3d755c80",
+      "revId": "8cdaa2443ae4ce7c817842efb5c3d8ccbc052dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
