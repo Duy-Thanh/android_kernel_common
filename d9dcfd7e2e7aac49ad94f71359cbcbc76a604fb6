@@ -16,6 +16,24 @@
       "message": "@tkjos@google.com \nHi Todd, would you mind explaining the purpose of these reverts and whether they are planned for mainline?",
       "revId": "d9dcfd7e2e7aac49ad94f71359cbcbc76a604fb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d17f87be_a70be9fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-07T03:13:00Z",
+      "side": 1,
+      "message": "These reverts are not going to land",
+      "parentUuid": "cd057b68_1cc72a1c",
+      "revId": "d9dcfd7e2e7aac49ad94f71359cbcbc76a604fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
