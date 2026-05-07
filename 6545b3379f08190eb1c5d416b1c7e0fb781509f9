@@ -90,6 +90,58 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebcd3525_2e3d5fb4",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T17:35:45Z",
+      "side": 1,
+      "message": "Hmm, could you elaborate how exactly _reading_ this page by the hypervisor would leak sensitive data?\n\n(Though I think that moving this pop after donate (i.e. avoiding reading the page by the hypervisor before it is donated to the hypervisor) is a good thing to do anyway. In particular, if we eventually switch from mapping the entire RAM in the hypervisor MMU to mapping only what the hypervisor actually needs (like in pKVM-ARM), then donating before popping will be required, since the page will not be mapped in the hyp MMU until it is donated to the hypervisor.)",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a80782dd_302468ab",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T17:35:45Z",
+      "side": 1,
+      "message": "While we\u0027re at it, we might change this WARN_ON to WARN_ON_ONCE, which seems more suitable here? (Though of course that is not related to the issues fixed by this patch.)",
+      "fixSuggestions": [
+        {
+          "fixId": "d29acbf1_54f182f7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 491,
+                "startChar": 0,
+                "endLine": 493,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON_ONCE(pkvm_host_donate_hyp(pkvm_host_gpa_to_phys(host_mc-\u003ehead.addr),\n\t\t\t\t\t      PAGE_SIZE, false)))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd47efcd_d647aadb",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
