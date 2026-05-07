@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a973250c_3fcbd17c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-07T21:37:15Z",
+      "side": 1,
+      "message": "Breaks KMI. Please refactor to avoid breaking KMI or wait until KMI thaw window that starts in June.\n```\ntype \u0027struct thermal_zone_device\u0027 changed\n  byte size changed from 1440 to 1448\n  member \u0027struct thermal_debugfs* debugfs\u0027 was added\n  2 members (\u0027struct list_head user_thresholds\u0027 .. \u0027struct thermal_trip_desc trips[0]\u0027) changed\n    offset changed by 64\n\ntype \u0027struct thermal_cooling_device\u0027 changed\n  byte size changed from 1064 to 1072\n  member \u0027struct thermal_debugfs* debugfs\u0027 was added\n  member \u0027u64 __kabi_reserved1\u0027 changed\n    offset changed by 64\n```",
+      "revId": "13c4cae66ca09b2437ff4db42520e12f39da2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
