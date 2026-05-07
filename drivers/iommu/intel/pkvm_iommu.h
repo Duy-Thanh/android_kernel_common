@@ -230,6 +230,11 @@ int iommu_pmu_validate_read(struct intel_iommu *iommu, unsigned long offset,
 			    int len);
 int iommu_pmu_validate_write(struct intel_iommu *iommu, unsigned long offset,
 			     int len, u64 val);
+
+int iommu_frcd_validate_read(struct intel_iommu *iommu, unsigned long offset,
+			     int len);
+int iommu_frcd_validate_write(struct intel_iommu *iommu, unsigned long offset,
+			      int len, u64 val);
 #endif /* !__PKVM_HYP__ */
 #else /* !CONFIG_PKVM_INTEL */
 static inline int pkvm_iec_flush(struct intel_iommu *iommu, bool global,
