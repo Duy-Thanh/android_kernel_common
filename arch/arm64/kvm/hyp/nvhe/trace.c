@@ -441,8 +441,10 @@ static int rb_cpu_init(struct rb_page_desc *pdesc, struct hyp_rb_per_cpu *cpu_bu
 
 	cpu_buffer->meta = (struct trace_buffer_meta *)kern_hyp_va(pdesc->meta_va);
 	ret = load_page(cpu_buffer->meta);
-	if (ret)
+	if (ret) {
+		cpu_buffer->bpages = NULL;
 		goto err_free_bpages;
+	}
 
 	memset(cpu_buffer->meta, 0, sizeof(*cpu_buffer->meta));
 	cpu_buffer->meta->meta_page_size = PAGE_SIZE;
