@@ -22,3 +22,10 @@ unsigned int debug_smp_processor_id(void)
 	return raw_smp_processor_id();
 }
 #endif
+
+#ifndef CONFIG_PKVM_X86_DEBUG
+void panic(const char *fmt, ...)
+{
+	BUG();
+}
+#endif
