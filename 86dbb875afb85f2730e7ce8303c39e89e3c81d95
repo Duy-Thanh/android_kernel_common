@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70349c2d_a9cc5d17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-05-07T19:42:06Z",
+      "side": 1,
+      "message": "Just nits. Feel free to address them in a separate patch.",
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b61a010_81f05e1a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3418,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-05-07T19:42:06Z",
+      "side": 1,
+      "message": "Is this binary going to be executed on \"Android\" not \"Linux\"? if so, consider adding `target_compatible_with @platforms//os:android`.\n\nSame below",
+      "fixSuggestions": [
+        {
+          "fixId": "4abb3a50_1ef3f112",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "    target_compatible_with \u003d [\"@platforms//os:android\"],\n"
+            }
+          ]
+        }
+      ],
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ae63dc_6d20bd4e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3419,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-05-07T19:42:06Z",
+      "side": 1,
+      "message": "explain why",
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f82597_c1dcd507",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3455,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-05-07T19:42:06Z",
+      "side": 1,
+      "message": "Do we not need this for e.g. x86?",
+      "range": {
+        "startLine": 3455,
+        "startChar": 31,
+        "endLine": 3455,
+        "endChar": 36
+      },
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
