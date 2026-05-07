@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fea236e7_a8dad126",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4224958
+      },
+      "writtenOn": "2026-05-07T01:56:01Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [sourc...\n\nCherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/eec127b5484d09fef414b9914710cd1faa7be1bc).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@\n    - #include \u003ctrace/hooks/blk.h\u003e\n    - #include \u003ctrace/hooks/suspend.h\u003e\n    - #include \u003ctrace/hooks/fsnotify.h\u003e\n    + #include \u003ctrace/hooks/module.h\u003e\n    + #include \u003ctrace/hooks/mpam.h\u003e\n    + #include \u003ctrace/hooks/net.h\u003e\n     +#include \u003ctrace/hooks/perf.h\u003e\n    - \n    - /*\n    -  * Export tracepoints that act as a bare tracehook (ie: have no trace event\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fsnotify_open);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_control);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_smaps_swap_shared);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_smap_swap_shared);\n    + #include \u003ctrace/hooks/pm_domain.h\u003e\n    + #include \u003ctrace/hooks/power.h\u003e\n    + #include \u003ctrace/hooks/preemptirq.h\u003e\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_cycle_end);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_start);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_workqueue);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_armv8pmu_counter_overflowed);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bitmap_find_best_next_area);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bpf_skb_load_bytes);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cgroup_force_kthread_migration);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_kswapd_shrink_node_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_logbuf);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perf_rotate_context);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_process_madvise_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_prepare_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages_ok_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_perform_reclaim);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_disable);\n     \n      ## drivers/perf/arm_pmuv3.c ##\n     @@\n      #include \u003clinux/sched_clock.h\u003e\n      #include \u003clinux/smp.h\u003e\n      #include \u003clinux/nmi.h\u003e\n    --\n     +#include \u003ctrace/hooks/perf.h\u003e\n    - #include \u003casm/arm_pmuv3.h\u003e\n      \n    - /* ARMv8 Cortex-A53 specific event types. */\n    + #include \"arm_brbe.h\"\n    + \n     @@ drivers/perf/arm_pmuv3.c: static irqreturn_t armv8pmu_handle_irq(struct arm_pmu *cpu_pmu)\n      \n      \t\thwc \u003d \u0026event-\u003ehw;\n    @@ include/trace/hooks/perf.h (new)\n     \n      ## kernel/events/core.c ##\n     @@\n    - #include \u003clinux/pgtable.h\u003e\n      #include \u003clinux/buildid.h\u003e\n      #include \u003clinux/task_work.h\u003e\n    + #include \u003clinux/percpu-rwsem.h\u003e\n     -\n     +#include \u003ctrace/hooks/perf.h\u003e\n      #include \"internal.h\"\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "59294bdf5e3bd30c756f3ce7b9b1782a8c412c10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e522d3da_7e277384",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
