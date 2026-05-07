@@ -177,3 +177,12 @@ void __noreturn pkvm_panic(const char *fmt, ...)
 
 	pkvm_emergency_reset();
 }
+
+void __noreturn panic(const char *fmt, ...)
+{
+	va_list args;
+
+	va_start(args, fmt);
+	pkvm_panic(fmt, args);
+	va_end(args);
+}

@@ -403,7 +403,6 @@
 /* PERFINTRSTS_REG */
 #define DMA_PERFINTRSTS_PIS	((u32)1)
 
-#ifndef __PKVM_HYP__
 #define IOMMU_WAIT_OP(iommu, offset, op, cond, sts)			\
 do {									\
 	cycles_t start_time = get_cycles();				\
@@ -416,17 +415,6 @@ do {									\
 		cpu_relax();						\
 	}								\
 } while (0)
-#else
-#define IOMMU_WAIT_OP(iommu, offset, op, cond, sts)			\
-do {									\
-	while (1) {							\
-		sts = op(iommu->reg + offset);				\
-		if (cond)						\
-			break;						\
-		cpu_relax();						\
-	}								\
-} while (0)
-#endif /* !__PKVM_HYP__ */
 
 #define QI_LENGTH	256	/* queue length */
 
