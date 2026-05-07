@@ -16,6 +16,24 @@
       "message": "Is this patch needed if we have \"ANDROID: bpf: protect against OOB write in general\"? This patch seems like the right thing to do, but it would be better to get this done upstream rather than carrying it in ACK.",
       "revId": "0073751c3ba0ea0cbdbef12b93bbc99d13beea73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69736a4e_f1b47291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-07T15:34:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67914cb6_ae4be4a2",
+      "revId": "0073751c3ba0ea0cbdbef12b93bbc99d13beea73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
