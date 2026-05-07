@@ -316,6 +316,7 @@ struct pkvm_module_ops {
 	void (*arm_smccc_1_2_smc)(struct arm_smccc_1_2_regs *args,
 				  struct arm_smccc_1_2_regs *regs);
 	int (*request_hyp_alloc)(void);
+	u64 *(*get_panic_args)(void);
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);

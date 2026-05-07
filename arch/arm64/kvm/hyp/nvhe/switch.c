@@ -419,3 +419,8 @@ asmlinkage void kvm_unexpected_el2_exception(void)
 {
 	__kvm_unexpected_el2_exception();
 }
+
+u64 *pkvm_get_panic_args(void)
+{
+	return custom_args;
+}

@@ -163,10 +163,11 @@ extern bool kvm_nvhe_sym(smccc_trng_available);
 
 #include <module/nvhe/trace.h>
 
-extern u64 custom_args[4];
+u64 *pkvm_get_panic_args(void);
 
 static inline void kvm_nvhe_warn_args(u16 id, u64 arg1, u64 arg2, u64 arg3)
 {
+	u64 *custom_args = pkvm_get_panic_args();
 	custom_args[0] = id;
 	custom_args[1] = arg1;
 	custom_args[2] = arg2;

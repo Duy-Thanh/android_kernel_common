@@ -348,6 +348,7 @@ const struct pkvm_module_ops module_ops = {
 	.register_guest_accept_module_owned_handler = __register_guest_accept_module_owned_handler,
 	.arm_smccc_1_2_smc = nvhe_arm_smccc_1_2_smc,
 	.request_hyp_alloc = kvm_iommu_request_hyp_alloc,
+	.get_panic_args	= pkvm_get_panic_args,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)
