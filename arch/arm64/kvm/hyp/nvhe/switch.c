@@ -46,6 +46,9 @@ struct fgt_masks hfgitr2_masks;
 struct fgt_masks hdfgrtr2_masks;
 struct fgt_masks hdfgwtr2_masks;
 
+/* Panic args */
+u64 custom_args[4];
+
 extern void kvm_nvhe_prepare_backtrace(unsigned long fp, unsigned long pc);
 
 static void __activate_traps(struct kvm_vcpu *vcpu)

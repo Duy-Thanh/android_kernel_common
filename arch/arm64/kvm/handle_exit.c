@@ -638,6 +638,7 @@ struct hyp_panic_args {
 	uintptr_t vcpu;
 	u64 far;
 	u64 hpfar;
+	u64 args[4];
 };
 
 void __noreturn __cold nvhe_hyp_panic_handler_c(struct hyp_panic_args *args);
@@ -648,12 +649,13 @@ asm(
 "	.global	nvhe_hyp_panic_handler\n"
 "	.type	nvhe_hyp_panic_handler, %function\n"
 "nvhe_hyp_panic_handler:\n"
-"	sub	sp, sp, #80\n"
+"	sub	sp, sp, #96\n"
 "	stp	x0, x1, [sp, #0]\n"
 "	stp	x2, x3, [sp, #16]\n"
 "	stp	x4, x5, [sp, #32]\n"
 "	stp	x6, x7, [sp, #48]\n"
 "	stp	x8, x9, [sp, #64]\n"
+"	stp	x10, x11, [sp, #80]\n"
 "	mov	x0, sp\n"
 "	bl	nvhe_hyp_panic_handler_c\n"
 );

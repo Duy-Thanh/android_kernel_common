@@ -159,6 +159,26 @@ extern bool kvm_nvhe_sym(smccc_trng_available);
 #ifdef __KVM_NVHE_HYPERVISOR__
 #undef __init
 #define __init __section(".init.text") __attribute__((patchable_function_entry(0, 0)))
+
+extern u64 custom_args[4];
+
+static inline void kvm_nvhe_warn_args(u16 id, u64 arg1, u64 arg2, u64 arg3)
+{
+	custom_args[0] = id;
+	custom_args[1] = arg1;
+	custom_args[2] = arg2;
+	custom_args[3] = arg3;
+}
+
+#define __kvm_nvhe_warn_args(id, arg1, arg2, arg3, ...) \
+	kvm_nvhe_warn_args((id), (u64)(arg1), (u64)(arg2), (u64)(arg3))
+
+#undef __WARN_printf
+#define __WARN_printf(taint, __fmt, ...) do { \
+	__kvm_nvhe_warn_args(0, ##__VA_ARGS__, 0, 0, 0); \
+	__WARN_FLAGS(BUGFLAG_NO_CUT_HERE | BUGFLAG_TAINT(taint)); \
+} while (0)
+
 #endif
 
 #endif /* __ARM64_KVM_HYP_H__ */
