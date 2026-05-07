@@ -1769,8 +1769,8 @@ Kernel parameters
 	fred=		[X86-64]
 			Enable/disable Flexible Return and Event Delivery.
 			Format: { on | off }
-			on: enable FRED when it's present.
-			off: disable FRED, the default setting.
+			on: enable FRED when it's present, the default setting.
+			off: disable FRED.
 
 	ftrace=[tracer]
 			[FTRACE] will set and start the specified tracer
@@ -8421,7 +8421,9 @@ Kernel parameters
 
 			emulate     Vsyscalls turn into traps and are emulated
 			            reasonably safely.  The vsyscall page is
-				    readable.
+				    readable.  This disables the Linear
+				    Address Space Separation (LASS) security
+				    feature and makes the system less secure.
 
 			xonly       [default] Vsyscalls turn into traps and are
 			            emulated reasonably safely.  The vsyscall
