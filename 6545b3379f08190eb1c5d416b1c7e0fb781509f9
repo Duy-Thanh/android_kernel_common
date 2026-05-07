@@ -157,6 +157,24 @@
       "parentUuid": "e2400f92_043477b3",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95432981_5531e6d4",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T13:20:17Z",
+      "side": 1,
+      "message": "\u003e It might also make sense to use READ_ONCE, for the same reason\n\nAnd similarly in other patches fixing other similar TOCTOU issues in this series, as well as in other cases when we read values from `shared_vcpu` or `shared_kvm`, for example in `pkvm_update_exception_bitmap()`?\n\nFor the record, pKVM-ARM also seems to extensively use READ_ONCE in such cases, probably for the same reason, for example in `init_pkvm_hyp_vcpu()`:\n```\n\thyp_vcpu-\u003evcpu.vcpu_id \u003d READ_ONCE(host_vcpu-\u003evcpu_id);\n\thyp_vcpu-\u003evcpu.vcpu_idx \u003d READ_ONCE(host_vcpu-\u003evcpu_idx);\n\n\thyp_vcpu-\u003evcpu.arch.hw_mmu \u003d \u0026hyp_vm-\u003ekvm.arch.mmu;\n\thyp_vcpu-\u003evcpu.arch.cflags \u003d READ_ONCE(host_vcpu-\u003earch.cflags);\n```\n\n...Also wondering: should we similarly use WRITE_ONCE whenever writing data to `shared_vcpu` or `shared_kvm` (to prevent some other security issues)? According to gemini, we should:\n\n\u003e ...However, while \"torn writes\" are indeed a correctness issue, using WRITE_ONCE() here is still a **strict requirement for pKVM\u0027s security model** due to two other critical compiler behaviors:\n\u003e \n\u003e 1\\. **The Real Security Threat: \"invented\" Writes (Store Spilling)**\nWithout WRITE_ONCE(), the compiler does not know that host_vcpu is shared with an external entity (the Host). Under aggressive optimization, if the compiler runs out of registers while executing handle_pvm_exit_iabt(), it is legally allowed to use host_vcpu-\u003earch.fault.esr_el2 as a temporary \"scratchpad\" (spilling a temporary register value there) and then restore it later.\n\u003e \n\u003e \n\u003e **The Security Exploit:** If the compiler temporarily spills sensitive EL2 hypervisor data (like an EL2 stack pointer, a physical memory address, or cryptographic metadata) into the host-visible structure, a malicious Host running on another core can continuously poll that memory location and dump the hypervisor\u0027s private registers.\n\u003e\n\u003e **The Fix:** WRITE_ONCE() uses volatile access under the hood. The compiler is strictly forbidden from using volatile memory locations for register spilling or scratch space.\n\u003e\n\u003e 2\\. **Ensuring Strict State Cleanliness (Information Leakage)**\nIn pKVM, when a protected VM exits, the hypervisor must strictly control exactly what VM state is leaked to the Host.\n\u003e \n\u003e If the hypervisor decides to write esr_el2 and hpfar_el2 to the Host, it is doing so explicitly to share only those two values.\n\u003e \n\u003e If the compiler decides to optimize the two writes by merging them into a larger block copy (e.g., using a 128-bit load/store LDP/STP instruction that encompasses adjacent fields in the host_vcpu-\u003earch.fault struct), it might accidentally overwrite or leak adjacent EL2 register states that the hypervisor never intended to write.\n\u003e \n\u003e WRITE_ONCE() guarantees that the compiler only writes the exact 32-bit or 64-bit width of those specific fields, preserving the strict isolation boundary.\n\u003e \n\u003e **Summary**\n\u003e While a torn esr_el2 value only hurts the Host, WRITE_ONCE() **is used defensively in pKVM because any unconstrained write to shared Host memory allows the compiler to make optimizations that can leak EL2 secrets**. In a hard-hardened hypervisor like pKVM, the rule of thumb is simple: Every read from the Host must be READ_ONCE(), and every write to the Host must be WRITE_ONCE().",
+      "parentUuid": "00900de3_92b46c6f",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
