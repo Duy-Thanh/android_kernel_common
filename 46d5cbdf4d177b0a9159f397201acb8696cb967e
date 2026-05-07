@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52fd7789_93062fcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-07T11:47:03Z",
+      "side": 1,
+      "message": "I would prefer to reduce the divergence between x86 and arm modules first. See chat message.",
+      "revId": "46d5cbdf4d177b0a9159f397201acb8696cb967e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
