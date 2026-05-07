@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9919b150_525ca010",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T17:20:45Z",
+      "side": 1,
+      "message": "While we\u0027re at it, it seems that a correctly working host shouldn\u0027t pass a zero value, so maybe worth adding e.g. a WARN_ON here (instead of just silently ignoring it)?",
+      "fixSuggestions": [
+        {
+          "fixId": "c3bacbde_b62a54fd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 514,
+                "startChar": 0,
+                "endLine": 515,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON(!kvm-\u003earch.apic_bus_cycle_ns))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cb42c4_8a3c9586",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T17:20:45Z",
+      "side": 1,
+      "message": "nit: it seems a bit cleaner to read the host\u0027s value into a temporary variable first, and then assign it to `kvm-\u003earch.apic_bus_cycle_ns` only if it is non-zero (so that we don\u0027t need to \"re-initialize\" it back to APIC_BUS_CYCLE_NS_DEFAULT)?\n\nBTW actually it seems it would be nice to move this whole \"postponed per-VM setup\" (i.e. the setup which is not really about the vCPU) out of `__vcpu_create()` to a separate function called from here in `__vcpu_create()` (was there any reason why we didn\u0027t do that from the beginning?). So that, in particular, that temporary apic_bus_cycle_ns variable would be a local variable of that function, and thus wouldn\u0027t \"pollute\" the local variables of `__vcpu_create()`.",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
