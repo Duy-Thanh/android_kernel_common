@@ -2090,4 +2090,6 @@ static inline void *kvm_host_va(phys_addr_t phys)
 {
 	return __va(phys);
 }
+
+const char *hyp_printk_fmt_from_id(u16 fmt_id);
 #endif /* __ARM64_KVM_HOST_H__ */

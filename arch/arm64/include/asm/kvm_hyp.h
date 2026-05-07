@@ -160,6 +160,8 @@ extern bool kvm_nvhe_sym(smccc_trng_available);
 #undef __init
 #define __init __section(".init.text") __attribute__((patchable_function_entry(0, 0)))
 
+#include <module/nvhe/trace.h>
+
 extern u64 custom_args[4];
 
 static inline void kvm_nvhe_warn_args(u16 id, u64 arg1, u64 arg2, u64 arg3)
@@ -175,7 +177,12 @@ static inline void kvm_nvhe_warn_args(u16 id, u64 arg1, u64 arg2, u64 arg3)
 
 #undef __WARN_printf
 #define __WARN_printf(taint, __fmt, ...) do { \
-	__kvm_nvhe_warn_args(0, ##__VA_ARGS__, 0, 0, 0); \
+	static struct hyp_printk_fmt __used \
+			__section(".hyp.printk_fmts") \
+			ht_fmt = { \
+				.fmt = __fmt \
+	}; \
+	__kvm_nvhe_warn_args(hyp_printk_fmt_to_id(ht_fmt.fmt), ##__VA_ARGS__, 0, 0, 0); \
 	__WARN_FLAGS(BUGFLAG_NO_CUT_HERE | BUGFLAG_TAINT(taint)); \
 } while (0)
 

@@ -689,6 +689,10 @@ __cold void nvhe_hyp_panic_handler_c(struct hyp_panic_args *args)
 		   esr_brk_comment(esr) == BUG_BRK_IMM) {
 		const char *file = NULL;
 		unsigned int line = 0;
+		const char *fmt = hyp_printk_fmt_from_id(args->args[0]);
+
+		kvm_err("nVHE hyp WARN: ");
+		printk(fmt, args->args[1], args->args[2], args->args[3]);
 
 		/* All hyp bugs, including warnings, are treated as fatal. */
 		if (!is_protected_kvm_enabled() ||
