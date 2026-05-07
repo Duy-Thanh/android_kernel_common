@@ -175,6 +175,24 @@
       "parentUuid": "00900de3_92b46c6f",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1cf4c3_85ba5c9a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T13:58:11Z",
+      "side": 1,
+      "message": "Moreover, also according to gemini it is not secure, for example, to use `kvm_register_mark_available()` for `shared_vcpu` regs (which we are doing, for instance, in `share_vcpu_state_with_host()`), since it uses non-atomic `__set_bit()`, so:\n\n\u003e In a pKVM environment, executing a non-atomic __set_bit() on shared, untrusted Host memory is highly unsafe.\n\u003e\n\u003e 1\\. **Why __set_bit() on host_vcpu is a Security Risk**\nBecause __set_bit() is non-atomic, it compiles down to a read-modify-write (RMW) sequence. On arm64, it roughly translates to:\n\u003e\n\u003eLDR (Load current regs_avail bitmask from host_vcpu in Host memory into an EL2 register)\n\u003e\n\u003eORR (Set the bit in the register)\n\u003e\n\u003eSTR (Store the updated bitmask back to host_vcpu in Host memory)\n\u003e\n\u003eThis sequence introduces two major security vulnerabilities:\n\u003e\n\u003eA. **The TOCTOU / State Corruption Attack**\n\u003eBecause the Host runs concurrently on other CPU cores, a malicious Host can write to host_vcpu-\u003earch.regs_avail **at the exact instant** between the EL2 LDR and STR instructions.\n\u003eWhen EL2 writes its modified value back, it will overwrite and erase whatever legitimate updates the Host just made to other bits in that mask. This corrupts vCPU state tracking, leading to unpredictable hypervisor or VM behavior.\n\u003e\n\u003eB. **Register Spilling / Compiler Exploits**\n\u003eBecause the compiler does not know host_vcpu is shared with an untrusted entity, it is free to optimize register allocation. During the execution of the inlined __set_bit() macro, if the compiler faces register pressure, it could temporarily spill sensitive hypervisor data into the memory location pointed to by the volatile unsigned long *addr cast before finalizing the bitwise OR. A malicious Host polling that memory on another core could extract EL2 secrets.\n\u003e\n\u003e2\\. **How pKVM Actually Solves This**\n\u003eTo prevent this issue, pKVM design principles dictate that **the EL2 hypervisor must never perform direct bitwise operations (like __set_bit) on the untrusted host_vcpu struct**.\n\u003e\n\u003eInstead, pKVM uses a \"shadow copy\" design:\n\u003e\n\u003e**Private State Tracking:** The hypervisor maintains its own fully private, trusted state in hyp_vcpu-\u003evcpu. Any register availability tracking (e.g., calling kvm_register_mark_available()) is performed strictly on this private structure:\n\u003e\n\u003e ```\n\u003e kvm_register_mark_available(\u0026hyp_vcpu-\u003evcpu, ...);\n\u003e ```\n\u003e This is 100% safe because the Host cannot read, write, or map the memory pages belonging to the EL2 private vCPU structures.\n\u003e\n\u003e**Explicit Copy-Out (The Safe Sync):** When the hypervisor needs to update the Host\u0027s view of the vCPU state (for instance, when returning from an exit), it does not let the compiler write directly to the Host structures. Instead, it explicitly reads from its private hyp_vcpu-\u003evcpu, and uses WRITE_ONCE() or carefully structured, bounded copies to transfer only the safe, sanitized parameters back to the host_vcpu.\n\u003e\n\u003e**Rule of Thumb in pKVM:**\nAny helper function (like those in kvm/emulate.h or generic KVM code) that uses standard compiler-optimizable read/write patterns must only be invoked on the trusted, hypervisor-owned hyp_vcpu-\u003evcpu. Touching host_vcpu requires custom, strictly audited EL2 code explicitly hardened against concurrent Host modification.",
+      "parentUuid": "95432981_5531e6d4",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
