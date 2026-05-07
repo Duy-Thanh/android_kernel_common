@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cd33cf3_d7b7af7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-07T13:54:04Z",
+      "side": 1,
+      "message": "Sorry, but this is far too vague. How can a concurrent CPU advanced the target? Why is a cmpxchg() on its own (with the return value ignored) sufficient to solve the problem?\n\nPlease can you split this into three separate patches so that each issue can be reviewed and considered on its own?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "bbe88b6ff0faacab4edd12926405378db58588f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
