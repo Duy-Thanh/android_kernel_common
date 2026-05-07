@@ -629,11 +629,46 @@ static void kvm_nvhe_report_cfi_failure(u64 panic_addr, u64 kaslr_off)
 		kvm_err(" (CONFIG_CFI_PERMISSIVE ignored for hyp failures)\n");
 }
 
-void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
-					      u64 elr_virt, u64 elr_phys,
-					      u64 par, uintptr_t vcpu,
-					      u64 far, u64 hpfar)
+struct hyp_panic_args {
+	u64 esr;
+	u64 spsr;
+	u64 elr_virt;
+	u64 elr_phys;
+	u64 par;
+	uintptr_t vcpu;
+	u64 far;
+	u64 hpfar;
+};
+
+void __noreturn __cold nvhe_hyp_panic_handler_c(struct hyp_panic_args *args);
+
+asm(
+"	.text\n"
+"	.align	2\n"
+"	.global	nvhe_hyp_panic_handler\n"
+"	.type	nvhe_hyp_panic_handler, %function\n"
+"nvhe_hyp_panic_handler:\n"
+"	sub	sp, sp, #80\n"
+"	stp	x0, x1, [sp, #0]\n"
+"	stp	x2, x3, [sp, #16]\n"
+"	stp	x4, x5, [sp, #32]\n"
+"	stp	x6, x7, [sp, #48]\n"
+"	stp	x8, x9, [sp, #64]\n"
+"	mov	x0, sp\n"
+"	bl	nvhe_hyp_panic_handler_c\n"
+);
+
+__cold void nvhe_hyp_panic_handler_c(struct hyp_panic_args *args)
 {
+	u64 esr = args->esr;
+	u64 spsr = args->spsr;
+	u64 elr_virt = args->elr_virt;
+	u64 elr_phys = args->elr_phys;
+	u64 par = args->par;
+	uintptr_t vcpu = args->vcpu;
+	u64 far = args->far;
+	u64 hpfar = args->hpfar;
+
 	u64 elr_in_kimg = __phys_to_kimg(elr_phys);
 	u64 kaslr_off = kaslr_offset();
 	u64 hyp_offset = elr_in_kimg - kaslr_off - elr_virt;
