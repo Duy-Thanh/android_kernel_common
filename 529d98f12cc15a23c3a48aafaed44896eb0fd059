@@ -52,6 +52,24 @@
       "parentUuid": "4c3b4a6e_1cbd90fb",
       "revId": "529d98f12cc15a23c3a48aafaed44896eb0fd059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "799cbf64_4f7383ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2026-05-07T02:18:46Z",
+      "side": 1,
+      "message": "We understand the upstreaming concern. This is for a niche, personalized need in a subset of our products, and these functions are essential for our features. As these symbols are already exported by the upstream kernel, we believe the functions are sufficiently stable and safe. We request reconsideration for this specific use case.",
+      "parentUuid": "813a91d6_8bb633df",
+      "revId": "529d98f12cc15a23c3a48aafaed44896eb0fd059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
