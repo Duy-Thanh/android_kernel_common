@@ -79,11 +79,11 @@ __skip_pauth_restore:
 	ldp	x2, x3,   [x29, #CPU_XREG_OFFSET(2)]
 	ldp	x4, x5,   [x29, #CPU_XREG_OFFSET(4)]
 	ldp	x6, x7,   [x29, #CPU_XREG_OFFSET(6)]
-
-	/* x0-7 are use for panic arguments */
-__host_enter_for_panic:
 	ldp	x8, x9,   [x29, #CPU_XREG_OFFSET(8)]
 	ldp	x10, x11, [x29, #CPU_XREG_OFFSET(10)]
+
+	/* x0-11 are used for panic arguments */
+__host_enter_for_panic:
 	ldp	x12, x13, [x29, #CPU_XREG_OFFSET(12)]
 	ldp	x14, x15, [x29, #CPU_XREG_OFFSET(14)]
 	ldp	x16, x17, [x29, #CPU_XREG_OFFSET(16)]
@@ -138,6 +138,11 @@ SYM_FUNC_START(__hyp_do_panic)
 	get_vcpu_ptr x5, x6
 	mrs	x6, far_el2
 	mrs	x7, hpfar_el2
+
+	/* Load custom arguments into x8-x11 */
+	adr_l	x8, custom_args
+	ldp	x10, x11, [x8, #16]
+	ldp	x8, x9, [x8]
 
 	/* Enter the host, conditionally restoring the host context. */
 	cbz	x29, __host_enter_without_restoring
