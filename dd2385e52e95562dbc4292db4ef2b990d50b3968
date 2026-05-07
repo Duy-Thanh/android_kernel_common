@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e20d362_4aaf95e0",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T14:32:42Z",
+      "side": 1,
+      "message": "Per my comment in https://android-review.googlesource.com/c/kernel/common/+/4043296/2/arch/x86/kvm/pkvm/mmu.c#517 we might want to use READ_ONCE here? Although then a small \"problem\" is that we can\u0027t just use it with lapic_in_kernel(). So we could just directly `READ_ONCE(shared_vcpu-\u003earch.apic)` instead of using lapic_in_kernel() here, and then BTW we could pass this snapshot of the `shared_vcpu-\u003earch.apic` pointer value to `__vcpu_create()`, instead of passing this `has_lapic` flag?",
+      "revId": "dd2385e52e95562dbc4292db4ef2b990d50b3968",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
