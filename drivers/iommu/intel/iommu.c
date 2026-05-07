@@ -2250,7 +2250,7 @@ static int device_def_domain_type(struct device *dev)
 
 static int intel_iommu_init_qi(struct intel_iommu *iommu)
 {
-	int ret = 0;
+	int ret;
 
 	/*
 	 * Start from the sane iommu hardware state.
@@ -2292,7 +2292,7 @@ static int intel_iommu_init_qi(struct intel_iommu *iommu)
 		pr_info("%s: Using Queued invalidation\n", iommu->name);
 	}
 
-	return ret;
+	return 0;
 }
 
 static int copy_context_table(struct intel_iommu *iommu,
