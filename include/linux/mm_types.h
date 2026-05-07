@@ -21,7 +21,6 @@
 #include <linux/percpu_counter.h>
 #include <linux/types.h>
 #include <linux/bitmap.h>
-#include <linux/android_kabi.h>
 
 #include <asm/mmu.h>
 
@@ -915,11 +914,6 @@ struct vm_area_struct {
 #ifdef __HAVE_PFNMAP_TRACKING
 	struct pfnmap_track_ctx *pfnmap_track_ctx;
 #endif
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
-	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
 } __randomize_layout;
 
 #ifdef CONFIG_NUMA
@@ -1236,7 +1230,6 @@ struct mm_struct {
 
 		struct task_dma_buf_info *dmabuf_info;
 
-		ANDROID_KABI_RESERVE(1);
 		ANDROID_VENDOR_DATA(1);
 	} __randomize_layout;
 
