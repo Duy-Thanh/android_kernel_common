@@ -28,6 +28,8 @@
 #define CREATE_TRACE_POINTS
 #include "trace_handle_exit.h"
 
+#include "hyp_trace.h"
+
 typedef int (*exit_handle_fn)(struct kvm_vcpu *);
 
 static void kvm_handle_guest_serror(struct kvm_vcpu *vcpu, u64 esr)
@@ -703,6 +705,12 @@ __cold void nvhe_hyp_panic_handler_c(struct hyp_panic_args *args)
 			kvm_err("nVHE hyp BUG at: %s:%u!\n", file, line);
 		else
 			print_nvhe_hyp_panic("BUG", panic_addr, kaslr_off);
+
+		if (args->args[0] != 0xFFFF) {
+			const char *fmt = hyp_printk_fmt_from_id(args->args[0]);
+
+			printk(fmt, args->args[1], args->args[2], args->args[3]);
+		}
 	} else if (IS_ENABLED(CONFIG_CFI) && esr_is_cfi_brk(esr)) {
 		kvm_nvhe_report_cfi_failure(panic_addr, kaslr_off);
 	} else if (IS_ENABLED(CONFIG_UBSAN_KVM_EL2) &&

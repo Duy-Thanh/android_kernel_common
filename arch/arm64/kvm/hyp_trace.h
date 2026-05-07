@@ -23,4 +23,5 @@ static inline int hyp_trace_init_mod_events(struct pkvm_el2_module *mod)
 }
 static inline void hyp_trace_enable_event_early(void) { }
 #endif
+const char *hyp_printk_fmt_from_id(u16 fmt_id);
 #endif

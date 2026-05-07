@@ -14,8 +14,6 @@
 
 #include "hyp_trace.h"
 
-static const char *hyp_printk_fmt_from_id(u16 fmt_id);
-
 #include <asm/kvm_define_hypevents.h>
 
 struct hyp_table {
@@ -86,7 +84,7 @@ extern struct hyp_printk_fmt __hyp_printk_fmts_end[];
 static struct hyp_mod_tables mod_printk_fmt_tables;
 static unsigned long total_printk_fmts;
 
-static const char *hyp_printk_fmt_from_id(u16 fmt_id)
+const char *hyp_printk_fmt_from_id(u16 fmt_id)
 {
 	u16 nr_fmts = nr_entries(__hyp_printk_fmts_start, __hyp_printk_fmts_end);
 	struct hyp_printk_fmt *fmt = NULL;
