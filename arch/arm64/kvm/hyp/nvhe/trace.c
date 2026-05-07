@@ -403,8 +403,45 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 
 	memset(cpu_buffer, 0, sizeof(*cpu_buffer));
 
+<<<<<<< HEAD   (2f67b60886926273cd8b4ffa08c4dd6e916f4fe5 ANDROID: KVM: arm64: Check page alignment in __pkvm_guest_re)
 	cpu_buffer->bpages = start;
 	cpu_buffer->nr_pages = rb_pack->nr_pages + 1;
+||||||| BASE   (ab23570151846903f2b369cfee428cfcf58610c1 FROMGIT: mm/memory_hotplug: fix incorrect altmap passing in )
+	bpage = hyp_alloc(sizeof(*bpage) * pdesc->nr_page_va);
+	if (!bpage)
+		return hyp_alloc_errno();
+	cpu_buffer->bpages = bpage;
+
+	cpu_buffer->meta = (struct trace_buffer_meta *)kern_hyp_va(pdesc->meta_va);
+	ret = hyp_pin_shared_mem((void *)cpu_buffer->meta,
+				 ((void *)cpu_buffer->meta) + PAGE_SIZE);
+	if (ret) {
+		hyp_free(cpu_buffer->bpages);
+		return ret;
+	}
+
+	memset(cpu_buffer->meta, 0, sizeof(*cpu_buffer->meta));
+	cpu_buffer->meta->meta_page_size = PAGE_SIZE;
+	cpu_buffer->meta->nr_subbufs = cpu_buffer->nr_pages;
+=======
+	bpage = hyp_alloc(sizeof(*bpage) * pdesc->nr_page_va);
+	if (!bpage)
+		return hyp_alloc_errno();
+	cpu_buffer->bpages = bpage;
+
+	cpu_buffer->meta = (struct trace_buffer_meta *)kern_hyp_va(pdesc->meta_va);
+	ret = hyp_pin_shared_mem((void *)cpu_buffer->meta,
+				 ((void *)cpu_buffer->meta) + PAGE_SIZE);
+	if (ret) {
+		hyp_free(cpu_buffer->bpages);
+		cpu_buffer->bpages = NULL;
+		return ret;
+	}
+
+	memset(cpu_buffer->meta, 0, sizeof(*cpu_buffer->meta));
+	cpu_buffer->meta->meta_page_size = PAGE_SIZE;
+	cpu_buffer->meta->nr_subbufs = cpu_buffer->nr_pages;
+>>>>>>> CHANGE (ef3b28c9c5ed91ff67c013e0fbade9c6390bd7b3 ANDROID: KVM: arm64: Fix double free on hyp tracing error pa)
 
 	/* The reader page is not part of the ring initially */
 	ret = rb_page_init(bpage, rb_pack->reader_page_va);
