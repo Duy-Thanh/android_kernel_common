@@ -208,6 +208,9 @@ static int vmexit_trace_show(struct seq_file *m, void *unused)
 		vm_handle = PKVM_HOST_VM_HANDLE;
 	}
 
+	if (!size)
+		return 0;
+
 	perf = alloc_pages_exact(size, GFP_KERNEL_ACCOUNT);
 	if (!perf) {
 		pr_err("failed to allocate perf buffer\n");
