@@ -8,6 +8,7 @@
 #include "pkvm/pkvm.h"
 #include "pkvm/debug.h"
 #include "iommu.h"
+#include "iommu_frcd.h"
 #include "iommu_pmu.h"
 
 /*
@@ -445,10 +446,13 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 		*val = iommu->vgsts;
 		break;
 	default: {
-		struct pkvm_iommu_pmu_reg_info info;
+		struct pkvm_iommu_frcd_reg_info frcd_info;
+		struct pkvm_iommu_pmu_reg_info pmu_info;
 
-		if (iommu_pmu_reg_info(iommu, offset, len, &info))
-			ret = iommu_pmu_validate_read(iommu, &info);
+		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info))
+			ret = iommu_frcd_validate_read(iommu, &frcd_info);
+		else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info))
+			ret = iommu_pmu_validate_read(iommu, &pmu_info);
 
 		/* Not emulated MMIO can directly go to hardware */
 		if (!ret)
@@ -630,10 +634,13 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	default: {
-		struct pkvm_iommu_pmu_reg_info info;
+		struct pkvm_iommu_frcd_reg_info frcd_info;
+		struct pkvm_iommu_pmu_reg_info pmu_info;
 
-		if (iommu_pmu_reg_info(iommu, offset, len, &info))
-			ret = iommu_pmu_validate_write(iommu, &info, val);
+		if (iommu_frcd_reg_info(iommu, offset, len, &frcd_info))
+			ret = iommu_frcd_validate_write(iommu, &frcd_info, val);
+		else if (iommu_pmu_reg_info(iommu, offset, len, &pmu_info))
+			ret = iommu_pmu_validate_write(iommu, &pmu_info, val);
 
 		/* Not emulated MMIO can directly go to hardware */
 		if (!ret)
