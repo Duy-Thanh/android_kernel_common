@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/510669267",
       "revId": "7a9daaaf16b7e6b454c54f0d5340ec8a53ba974a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b616ae9b_c49a2202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4602721
+      },
+      "writtenOn": "2026-05-08T06:32:47Z",
+      "side": 1,
+      "message": "Hi Todd\nWhy does the android-gki/android16_pixel9_boot_test on kernel_aarch64 on aosp_kernel-common-android16-6.12-2025-12 always fail? \nI cannot retrieve the test error log. I think this patch only changes the ABI.",
+      "revId": "7a9daaaf16b7e6b454c54f0d5340ec8a53ba974a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
