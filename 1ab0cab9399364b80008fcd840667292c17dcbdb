@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6eb49a9_1da39c68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T02:23:01Z",
+      "side": 1,
+      "message": "I also didn\u0027t see a reason that zero-size walk is needed, so disable it by the next patch.",
+      "parentUuid": "b1e9b497_5a6e4b26",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb665e15_b6d65e01",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "writtenOn": "2026-05-06T18:18:16Z",
       "side": 1,
       "message": "Just wondering: if the range exceeds the addressable space, `pkvm_pgtable_walk()` will simply not reach the end of this range, i.e. it will only walk until the end of the addressable space anyway? So nothing bad happens if we don\u0027t check this?\n\nSo this check is just to help catching caller bugs, not prevent misbehavior of `pkvm_pgtable_walk()` itself? And we define a contract that if the caller wants to just walk the entire pgtable, the caller is supposed to use precisely pkvm_pgtable_max_size(), not ULONG_MAX or whatever?\n\nBTW it seems that for the same reason, arithmetic overflow wouldn\u0027t happen either (so `end \u003e start` check is, again, just to help catching caller bugs)?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6475f6_224a65dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T02:23:01Z",
+      "side": 1,
+      "message": "Yeah, at first I thought the range exceeds the addressable space may result in walking the page table from the beginning again, but this is not true. And a second thought is that, the caller send a range like this seems also abnormal. The similar to the overflow case (the overflow is actually already checked by the `_pgtable_walk()` in the for loop before this patch, although that check also serves the purpose to identify the end of the walk). But as you pointed out, neither case makes sense for the callers. Without this patch, the pgtable walk can silently success.",
+      "parentUuid": "bb665e15_b6d65e01",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -72,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4a0db41_cb391362",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T02:23:01Z",
+      "side": 1,
+      "message": "That is my first impression to have a function to do the walk address range check, to make it easier to read what this check is for. Merging to pkvm_pgtable_walk() should also be fine.",
+      "parentUuid": "6f331ed0_ed871455",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92fcbb2f_b893874e",
         "filename": "arch/x86/kvm/pkvm/pgtable.c",
         "patchSetId": 2
@@ -83,6 +137,24 @@
       "writtenOn": "2026-05-06T21:31:49Z",
       "side": 1,
       "message": "Maybe also worth using WARN_ON_ONCE (since pKVM is supposed to only pass correct values to `pkvm_pgtable_walk()`)?",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc926639_55250fe0",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T02:23:01Z",
+      "side": 1,
+      "message": "The inputs may from the host as well as, then host would trigger this WARN_ON_ONCE.",
+      "parentUuid": "92fcbb2f_b893874e",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
