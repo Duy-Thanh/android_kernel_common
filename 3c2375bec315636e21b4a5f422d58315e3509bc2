@@ -16,6 +16,23 @@
       "message": "Please refer to https://source.android.com/docs/core/architecture/kernel/gki-respin for future similar changes.",
       "revId": "3c2375bec315636e21b4a5f422d58315e3509bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b91b2b_9b317f80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-08T10:02:05Z",
+      "side": 1,
+      "message": "Note that this release branch is not supposed to result in any aarch64 GKI releases.\n\nYou will need to wait for the first release branch after the KMI freeze.",
+      "revId": "3c2375bec315636e21b4a5f422d58315e3509bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
