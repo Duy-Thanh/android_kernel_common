@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e47006a8_8ff6d407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T16:52:14Z",
+      "side": 1,
+      "message": "Yeah, seems so.",
+      "parentUuid": "b2ac92b0_e229e24c",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "The `pop_pkvm_memcache_page` will read the sizeof(struct pkvm_page_range) data from the memory page pointed by the host_mc-\u003ehead.addr, and save it to host_mc-\u003ehead, which is accessible to the host. The memory page at this moment is not validated yet. So if the host_mc-\u003ehead.addr is a physical address pointing to the private page of pVM or pKVM, the sensitive data is leaked to the host, although later donation will be failed later, it doesn\u0027t prevent the leak.",
       "parentUuid": "ebcd3525_2e3d5fb4",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b391ce66_b92318fe",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T16:52:14Z",
+      "side": 1,
+      "message": "\u003e and save it to host_mc-\u003ehead\n\nAh yeah, now I see.\n\nMaybe let\u0027s make the comment more clear in this regard (since otherwise it just sounds confusing how just _reading_ data could leak it to the host), e.g.: \"Should donate the page from the host memcache before pop it out because pop will read data from this page to get the next head, and then will write this data to the host memcache\u0027s head. Without donating, doing that may leak sensitive data as this page may be a private page of a pVM or the hypervisor.\" ?",
+      "parentUuid": "f11514b0_5b80330d",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -172,6 +208,24 @@
       "side": 1,
       "message": "Sure. Just want to understand the reason, is it to prevent the host triggering a lot of WARN_ON here?",
       "parentUuid": "a80782dd_302468ab",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "429981f7_c6b6f30f",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T16:52:14Z",
+      "side": 1,
+      "message": "Yep, I suppose it may potentially trigger a lot of WARN_ON e.g. during a pVM boot, when we donate a lot of pages?\n\nAlthough, after more thinking, _maybe_ most of the time there will be enough pages in the memcache, so admit_host_page() will not be called...\n\nAlthough, after even more thinking, we might be e.g. _repeatedly_ trying and failing to refill the memcache due to some bug, thus repeatedly triggering this WARN_ON...",
+      "parentUuid": "4c1e26e7_a7c1cdc9",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -297,6 +351,24 @@
       "side": 1,
       "message": "For this particular change `struct pkvm_memcache tmp_mc \u003d READ_ONCE(*host_mc);`, READ_ONCE is defined as below for x86:\n```\n  /*\n   * Yes, this permits 64-bit accesses on 32-bit architectures. These will\n   * actually be atomic in some cases (namely Armv7 + LPAE), but for others we\n   * rely on the access being split into 2x32-bit accesses for a 32-bit quantity\n   * (e.g. a virtual address) and a strong prevailing wind.\n   */\n  #define compiletime_assert_rwonce_type(t)                                       \\\n          compiletime_assert(__native_word(t) || sizeof(t) \u003d\u003d sizeof(long long),  \\\n                  \"Unsupported access size for {READ,WRITE}_ONCE().\")\n\n  /*\n   * Use __READ_ONCE() instead of READ_ONCE() if you do not require any\n   * atomicity. Note that this may result in tears!\n   */\n  #ifndef __READ_ONCE\n  #define __READ_ONCE(x)  (*(const volatile __unqual_scalar_typeof(x) *)\u0026(x))\n  #endif\n\n  #define READ_ONCE(x)                                                    \\\n  ({                                                                      \\\n          compiletime_assert_rwonce_type(x);                              \\\n          __READ_ONCE(x);                                                 \\\n  })\n```\nIt seems the type of x should be scalar type but host_mc isn\u0027t, so using READ_ONCE(*host_mc) will trigger a compiling error?\n\n\u003e For the record, pKVM-ARM also seems to extensively use READ_ONCE in such cases, probably for the same reason, for example in init_pkvm_hyp_vcpu():\n\nWhile looking at pKVM-ARM code, seems it doesn\u0027t strictly use READ_ONCE for every read of the shared structures?\n```\n  static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)\n  {\n          struct kvm_vcpu *host_vcpu \u003d hyp_vcpu-\u003ehost_vcpu;\n\n          fpsimd_sve_flush();\n          flush_debug_state(hyp_vcpu);\n\n          hyp_vcpu-\u003evcpu.arch.ctxt        \u003d host_vcpu-\u003earch.ctxt;\n\n          hyp_vcpu-\u003evcpu.arch.mdcr_el2    \u003d host_vcpu-\u003earch.mdcr_el2;\n          hyp_vcpu-\u003evcpu.arch.hcr_el2 \u0026\u003d ~(HCR_TWI | HCR_TWE);\n          hyp_vcpu-\u003evcpu.arch.hcr_el2 |\u003d READ_ONCE(host_vcpu-\u003earch.hcr_el2) \u0026\n                                                   (HCR_TWI | HCR_TWE);\n\n          hyp_vcpu-\u003evcpu.arch.iflags      \u003d host_vcpu-\u003earch.iflags;\n\n          hyp_vcpu-\u003evcpu.arch.vsesr_el2   \u003d host_vcpu-\u003earch.vsesr_el2;\n\n          hyp_vcpu-\u003evcpu.arch.vgic_cpu.vgic_v3 \u003d host_vcpu-\u003earch.vgic_cpu.vgic_v3;\n  }\n```\n\nThe core benefit of using A\u003dREAD_ONCE(B) I got from gemini is that: Prevent Load Tearing, Prevent Load Omission (Caching in Registers) and Prevent Code Reordering. And also asked her about the security risk without using READ_ONCE, and this seems a valid point:\n\u003e2. The Security Threat: Register Spilling of Stale ReadsIf the compiler reads a multi-word or large structure from the host without READ_ONCE(), it treats that data as plain, stable variables.The Exploit ScenarioIf your handler loads a few configuration flags from the Host using plain assignments:\ncuint64_t flag1 \u003d host_vcpu-\u003eflag1;\nuint64_t flag2 \u003d host_vcpu-\u003eflag2;\nUse code with caution.If the function gets interrupted or encounters register pressure downstream, the compiler may spill flag1 or flag2 onto the hypervisor\u0027s secure stack (rsp).If a malicious Host managed to inject malformed or malicious data into those flags right before the spill, the hypervisor writes un-sanitized, Host-controlled payloads directly into its secure stack frames. If there is a separate code path vulnerability (like a minor buffer overflow or stack-read bug), the Host can use this control to map out or attack the hypervisor stack structure.\n\nIf so, then seems all the read from shared kvm/kvm_vcpu should use READ_ONCE?\n\n\u003e ...Also wondering: should we similarly use WRITE_ONCE whenever writing data to shared_vcpu or shared_kvm (to prevent some other security issues)? According to gemini, we should:\n\nIt seems makes sense. But seems pKVM-ARM doesn\u0027t strictly use WRITE_ONCE?\n\n```\n  static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)\n  {\n          struct kvm_vcpu *host_vcpu \u003d hyp_vcpu-\u003ehost_vcpu;\n          struct vgic_v3_cpu_if *hyp_cpu_if \u003d \u0026hyp_vcpu-\u003evcpu.arch.vgic_cpu.vgic_v3;\n          struct vgic_v3_cpu_if *host_cpu_if \u003d \u0026host_vcpu-\u003earch.vgic_cpu.vgic_v3;\n          unsigned int i;\n\n          fpsimd_sve_sync(\u0026hyp_vcpu-\u003evcpu);\n          sync_debug_state(hyp_vcpu);\n\n          host_vcpu-\u003earch.ctxt            \u003d hyp_vcpu-\u003evcpu.arch.ctxt;\n\n          host_vcpu-\u003earch.hcr_el2         \u003d hyp_vcpu-\u003evcpu.arch.hcr_el2;\n\n          host_vcpu-\u003earch.fault           \u003d hyp_vcpu-\u003evcpu.arch.fault;\n\n          host_vcpu-\u003earch.iflags          \u003d hyp_vcpu-\u003evcpu.arch.iflags;\n\n          host_cpu_if-\u003evgic_hcr           \u003d hyp_cpu_if-\u003evgic_hcr;\n          for (i \u003d 0; i \u003c hyp_cpu_if-\u003eused_lrs; ++i)\n                  host_cpu_if-\u003evgic_lr[i] \u003d hyp_cpu_if-\u003evgic_lr[i];\n  }\n```\n\nConsidering that we have many places to plain access shared kvm/kvm_vcpu, I feel we need a separate fix serial to handle that.\n\nWhile for this one, as we cannot use READ_ONCE/WRITE_ONCE for structure, we can use memcpy() to copy from host to hyp and from hyp to host. The memcpy is implemented by memcpy_64.S which use `rep movsb` based on gemini:\n\n\u003eBypasses Compiler Optimizations: Because rep movsb is a single string-copy hardware instruction, the C compiler (GCC/Clang) has no visibility into how bytes are moved. It cannot optimize the loop away, it cannot perform \"dead store elimination,\" and it cannot merge adjacent writes into a wider register format that over-writes adjacent fields.\n\n\u003ePrevents Host Memory from Being a Scratchpad: Since the compiler is completely blind to the interior mechanics of the assembly block, it is legally blocked from using any destination memory references (%rdi) as a scratchpad or register spill destination.\n\n\u003eHardware-Enforced Byte Bounds: rep movsb copies exactly %rcx number of bytes. It will not write a single byte more or less, protecting adjacent secure fields from structure-bleeding.\n\nSo can be changed to like this:\n```\n+       struct pkvm_memcache tmp_mc \u003d {0};\n+       int ret;\n+\n+       memcpy(\u0026tmp_mc, host_mc, sizeof(struct pkvm_memcache));\n+\n+       ret \u003d topup_pkvm_memcache(mc, min_pages, admit_host_page,\n+                                 pkvm_virt_to_phys, \u0026tmp_mc);\n+\n+       memcpy(host_mc, \u0026tmp_mc, sizeof(struct pkvm_memcache));\n```",
       "parentUuid": "bc1cf4c3_85ba5c9a",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd7e015_4069047d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T16:52:14Z",
+      "side": 1,
+      "message": "\u003e It seems the type of x should be scalar type but host_mc isn\u0027t, so using READ_ONCE(*host_mc) will trigger a compiling error?\n\nAh, indeed...\n\nSo we could use READ_ONCE for each field of struct pkvm_memcache one by one... But that would be a bit ugly.\n\nSo maybe yeah, it\u0027s better to use memcpy() as you suggested. Although a small \"problem\" I see with it is that memcpy() doesn\u0027t _explicitly_ guarantee this safe behavior, we are just relying on the fact that currently, on x86, it is implemented fully in assembly so the compiler will not mess with it...\n\n\u003e And also asked her about the security risk without using READ_ONCE, and this seems a valid point:\n\u003e [...] If there is a separate code path vulnerability (like a minor buffer overflow or stack-read bug), the Host can use this control to map out or attack the hypervisor stack structure.\n\nThis sounds like not an actual security issue but just making it easier to exploit some other bug?\n\nBut actually, as I understand, the main reason for using READ_ONCE in such cases is to actually fully prevent TOCTOU/race issues like this. Without READ_ONCE (or more precisely, without `volatile`, which READ_ONCE relies on), we have no guarantee that the compiler will generate code that actually reads the value _once_, not multiple times. So, we may be using a temporarily variable to prevent TOCTOU, but the compiler is allowed to stubbornly implement that as loading the data from the host memory every time, instead of remembering it in a temporary storage. (And from what gemini told me, compilers may actually do that in practice, in order to save register space.)\n\n\u003e Considering that we have many places to plain access shared kvm/kvm_vcpu, I feel we need a separate fix serial to handle that.\n\nYeah, agree.\n\n\u003e If so, then seems all the read from shared kvm/kvm_vcpu should use READ_ONCE?\n\nSeems so... Well, _maybe_ in simple cases like reading `vcpu-\u003eguest_debug` in `pkvm_update_exception_bitmap()` (where we just copy the read value to the hypervisor\u0027s data structure and don\u0027t use it after that, we only use it much later) it is not so critical. OTOH, maybe even in such trivial cases it still wouldn\u0027t hurt to use READ_ONCE, for consistency and paranoia?",
+      "parentUuid": "1bce8edb_fa5188cd",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
