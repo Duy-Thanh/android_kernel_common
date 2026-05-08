@@ -16,6 +16,24 @@
       "message": "nit: maybe instead of copypasting the entire comment from vmx/vmenter.S it would be more useful to refer to that comment here, e.g.: \"Clear all general purpose registers except RSP and RBX to prevent speculative use of the guest\u0027s values, even those that are reloaded via the stack. See the analogous comment in vmx/vmenter.S.\" ?\n\n(Even though I see there is already a precedent of copypasting this comment verbatim between vmx/vmenter.S and svm/vmenter.S.)",
       "revId": "85fc7677aa4fc226ae256e6d6121da21b2e4987a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d6aa42_230dded2",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T00:42:37Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "42debb1a_1f3ec784",
+      "revId": "85fc7677aa4fc226ae256e6d6121da21b2e4987a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
