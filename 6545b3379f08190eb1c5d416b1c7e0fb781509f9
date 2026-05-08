@@ -371,6 +371,24 @@
       "parentUuid": "1bce8edb_fa5188cd",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7cece00_021069da",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T17:05:35Z",
+      "side": 1,
+      "message": "\u003e While looking at pKVM-ARM code, seems it doesn\u0027t strictly use READ_ONCE for every read of the shared structures?\n\u003e\n\u003e  static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)\n\u003e  {\n\u003e     ...\n\nYeah, but maybe that\u0027s an oversight?\n\n@willdeacon@google.com @qperret@google.com @tabba@google.com in pKVM on ARM, do you strictly follow a rule to use READ_ONCE/WRITE_ONCE or similar primitives (rather than plain reads and writes) whenever reading or writing data from host\u0027s shared structures (`host_kvm`, `host_vcpu` etc)?\n\nAnd generally, what are your thoughts on this whole thread?",
+      "parentUuid": "7fd7e015_4069047d",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
