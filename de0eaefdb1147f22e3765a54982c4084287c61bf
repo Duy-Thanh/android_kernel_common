@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dded0d1a_013d9203",
+        "filename": "drivers/pmdomain/governor.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-05-08T03:45:21Z",
+      "side": 1,
+      "message": "state removed, thx",
+      "parentUuid": "b4b11218_2c0db286",
+      "revId": "de0eaefdb1147f22e3765a54982c4084287c61bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e1d94b1_0ac5ce63",
         "filename": "drivers/pmdomain/governor.c",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-07T17:58:24Z",
       "side": 1,
       "message": "ret should be initialized to avoid linter warnings",
+      "revId": "de0eaefdb1147f22e3765a54982c4084287c61bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28891444_6292313f",
+        "filename": "drivers/pmdomain/governor.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 3794271
+      },
+      "writtenOn": "2026-05-08T03:45:21Z",
+      "side": 1,
+      "message": "inited to false, thx",
+      "parentUuid": "5e1d94b1_0ac5ce63",
       "revId": "de0eaefdb1147f22e3765a54982c4084287c61bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
