@@ -229,6 +229,24 @@
       "parentUuid": "cc926639_55250fe0",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2454abe4_ac82531a",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T11:45:28Z",
+      "side": 1,
+      "message": "Ah, I mean the memory protection API function doesn\u0027t check the walk address range against the `pkvm_pgtable_max_size`, although they have validated the page alignment and overflow. So the WRAN_ON_ONCE can be triggered by the host.",
+      "parentUuid": "729afa06_c5c1e74c",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
