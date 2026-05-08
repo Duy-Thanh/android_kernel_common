@@ -2015,7 +2015,7 @@ int io_submit_sqes(struct io_ring_ctx *ctx, unsigned int nr)
 	if (ctx->flags & IORING_SETUP_SQ_REWIND)
 		entries = ctx->sq_entries;
 	else
-		entries = __io_sqring_entries(ctx);
+		entries = io_sqring_entries(ctx);
 
 	entries = min(nr, entries);
 	if (unlikely(!entries))
@@ -2250,9 +2250,7 @@ static __poll_t io_uring_poll(struct file *file, poll_table *wait)
 	 */
 	poll_wait(file, &ctx->poll_wq, wait);
 
-	rcu_read_lock();
-
-	if (!__io_sqring_full(ctx))
+	if (!io_sqring_full(ctx))
 		mask |= EPOLLOUT | EPOLLWRNORM;
 
 	/*
@@ -2272,7 +2270,6 @@ static __poll_t io_uring_poll(struct file *file, poll_table *wait)
 	if (__io_cqring_events_user(ctx) || io_has_work(ctx))
 		mask |= EPOLLIN | EPOLLRDNORM;
 
-	rcu_read_unlock();
 	return mask;
 }
 

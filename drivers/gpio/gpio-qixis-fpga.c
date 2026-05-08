@@ -60,8 +60,8 @@ static int qixis_cpld_gpio_probe(struct platform_device *pdev)
 			return PTR_ERR(reg);
 
 		regmap = devm_regmap_init_mmio(&pdev->dev, reg, &regmap_config_8r_8v);
-		if (IS_ERR(regmap))
-			return PTR_ERR(regmap);
+		if (!regmap)
+			return -ENODEV;
 
 		/* In this case, the offset of our register is 0 inside the
 		 * regmap area that we just created.

@@ -28,15 +28,12 @@ void io_cqring_do_overflow_flush(struct io_ring_ctx *ctx);
 
 static inline unsigned int __io_cqring_events(struct io_ring_ctx *ctx)
 {
-	struct io_rings *rings = io_get_rings(ctx);
-	return ctx->cached_cq_tail - READ_ONCE(rings->cq.head);
+	return ctx->cached_cq_tail - READ_ONCE(ctx->rings->cq.head);
 }
 
 static inline unsigned int __io_cqring_events_user(struct io_ring_ctx *ctx)
 {
-	struct io_rings *rings = io_get_rings(ctx);
-
-	return READ_ONCE(rings->cq.tail) - READ_ONCE(rings->cq.head);
+	return READ_ONCE(ctx->rings->cq.tail) - READ_ONCE(ctx->rings->cq.head);
 }
 
 /*
