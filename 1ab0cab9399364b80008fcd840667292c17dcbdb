@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad4ed00_a75ebf38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T10:34:10Z",
+      "side": 1,
+      "message": "Yeah, makes sense. Resolving comment.",
+      "parentUuid": "b6eb49a9_1da39c68",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb665e15_b6d65e01",
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Yeah, at first I thought the range exceeds the addressable space may result in walking the page table from the beginning again, but this is not true. And a second thought is that, the caller send a range like this seems also abnormal. The similar to the overflow case (the overflow is actually already checked by the `_pgtable_walk()` in the for loop before this patch, although that check also serves the purpose to identify the end of the walk). But as you pointed out, neither case makes sense for the callers. Without this patch, the pgtable walk can silently success.",
       "parentUuid": "bb665e15_b6d65e01",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6840728f_984df075",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T10:34:10Z",
+      "side": 1,
+      "message": "\u003e And a second thought is that, the caller send a range like this seems also abnormal.\n\nThere is still a use case for walking the entire page table, and for that we call `pkvm_pgtable_walk()` for the range [0, pkvm_pgtable_max_size()), and BTW actually looks like that is the only use case we have for pkvm_pgtable_max_size(). So alternatively we could just allow callers to pass a larger range, e.g. [0, ULONG_MAX). BTW in KVM-high we are doing something like that, e.g. `__pkvm_unmap_gfn_range(kvm, 0, U64_MAX)`.\n\nBut yeah, since we have pkvm_pgtable_max_size() anyway, we have no actual need for allowing such larger ranges right now. So resolving comment.",
+      "parentUuid": "ff6475f6_224a65dd",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -126,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33a8eaea_1d958e94",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T10:34:10Z",
+      "side": 1,
+      "message": "It seems rather self-obvious to me that checking `start` and `end` values means checking that the walk range is valid...",
+      "parentUuid": "d4a0db41_cb391362",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92fcbb2f_b893874e",
         "filename": "arch/x86/kvm/pkvm/pgtable.c",
         "patchSetId": 2
@@ -155,6 +209,24 @@
       "side": 1,
       "message": "The inputs may from the host as well as, then host would trigger this WARN_ON_ONCE.",
       "parentUuid": "92fcbb2f_b893874e",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "729afa06_c5c1e74c",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T10:34:10Z",
+      "side": 1,
+      "message": "It seems any inputs from the host we already validate in the callers of `pkvm_pgtable_walk()`, e.g. in memory protection API functions like `pkvm_host_donate_guest()` etc. Do we have any cases when `pkvm_pgtable_walk()` directly takes unvalidated inputs from the host?",
+      "parentUuid": "cc926639_55250fe0",
       "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
