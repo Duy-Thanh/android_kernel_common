@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "937bb2db_6f25b972",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T18:19:15Z",
+      "side": 1,
+      "message": "Although, well, one small thing we might \"fix\": if EAX (denominator) ends up being zero, we might enforce EBX (numerator) to be zero too?",
+      "parentUuid": "b80c3e55_b3345c5e",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
