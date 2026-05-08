@@ -2014,6 +2014,28 @@ static void rb_meta_validate_events(struct ring_buffer_per_cpu *cpu_buffer)
 			entry_bytes += rb_page_size(head_page);
 			local_set(&head_page->entries, ret);
 		}
+<<<<<<< HEAD   (9597aa6100da86edf7969921fab31b22a1097720 Revert "bonding: prevent potential infinite loop in bond_hea)
+||||||| BASE   (93cad30c061f43f9bc08274ec436d1bb4b0cee59 i2c: pxa: defer reset on Armada 3700 when recovery is used)
+
+		/* If the buffer has content, update pages_touched */
+		if (ret)
+			local_inc(&cpu_buffer->pages_touched);
+
+		entries += ret;
+		entry_bytes += local_read(&head_page->page->commit);
+		local_set(&cpu_buffer->head_page->entries, ret);
+
+=======
+
+		/* If the buffer has content, update pages_touched */
+		if (ret)
+			local_inc(&cpu_buffer->pages_touched);
+
+		entries += ret;
+		entry_bytes += local_read(&head_page->page->commit);
+		local_set(&head_page->entries, ret);
+
+>>>>>>> BRANCH (48591125594050ab91c9156bccb3ddd9a869d9f1 Linux 6.12.78)
 		if (head_page == cpu_buffer->commit_page)
 			break;
 	}
