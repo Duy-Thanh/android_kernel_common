@@ -16,6 +16,24 @@
       "message": "We shouldn\u0027t reach here anymore, so maybe change this to BUG()?",
       "revId": "bdd80c6b5908848bd51c8a71336441c2d46a09d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ab6e54_ccf03bc2",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T02:23:53Z",
+      "side": 1,
+      "message": "Makes sense.",
+      "parentUuid": "95ab8fd5_059358f5",
+      "revId": "bdd80c6b5908848bd51c8a71336441c2d46a09d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
