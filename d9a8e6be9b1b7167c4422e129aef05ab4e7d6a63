@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b80c3e55_b3345c5e",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T18:13:31Z",
+      "side": 1,
+      "message": "Good catch. But...\n\n\u003e Do we need to check this against the boundary of [1, 27) to guarantee the cpuid 0x15 will have non-zero eax/ebx?\n\nBut _which_ non-zero value should we choose then?\n\nIt seems this just shows that this solution with emulated cpuid 0x15 is not the best one, and we should probably treat it as a temporary one, and eventually replace it with some PV-based solution?\n\nAnd in the meantime, crosvm doesn\u0027t use KVM_CAP_X86_APIC_BUS_CYCLES_NS (actually AFAIK KVM_CAP_X86_APIC_BUS_CYCLES_NS is only used for TDX, and was introduced specifically for TDX needs), so for our use cases apic_bus_cycle_ns will always have the default value i.e. 1. So we can probably leave this as is?",
+      "parentUuid": "936c2ce6_550408bb",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
