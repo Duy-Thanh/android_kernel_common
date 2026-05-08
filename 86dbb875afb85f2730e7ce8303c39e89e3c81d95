@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "326f8e6c_09ac6d21",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3418,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-05-08T11:15:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b61a010_81f05e1a",
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05ae63dc_6d20bd4e",
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8ee3b1_460e6885",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3419,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-05-08T11:15:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05ae63dc_6d20bd4e",
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88f82597_c1dcd507",
@@ -83,6 +119,30 @@
       "writtenOn": "2026-05-07T19:42:06Z",
       "side": 1,
       "message": "Do we not need this for e.g. x86?",
+      "range": {
+        "startLine": 3455,
+        "startChar": 31,
+        "endLine": 3455,
+        "endChar": 36
+      },
+      "revId": "86dbb875afb85f2730e7ce8303c39e89e3c81d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2481af2_00e190df",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 3455,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-05-08T11:15:40Z",
+      "side": 1,
+      "message": "I\u0027ve only tested this in android arm64. `x86_64` can be done as a follow-up if needed, just wanted to avoid submitting untested code.",
+      "parentUuid": "88f82597_c1dcd507",
       "range": {
         "startLine": 3455,
         "startChar": 31,
