@@ -39,6 +39,8 @@
 #include <linux/wrapfd.h>
 #include "../../kselftest_harness.h"
 
+#define offset_in_page(addr, page_size) ((addr) & (page_size - 1))
+
 /* ioctl wrappers */
 static inline int wrapfd_wrap(int dev_fd, int fd, int prot)
 {
@@ -205,15 +207,18 @@ static int cmp_content(struct __test_metadata *_metadata,
 		       FIXTURE_DATA(wrapfd_tests) *self, int wrapfd, unsigned long file_offs,
 		       unsigned long buf_offs, unsigned long len)
 {
+	unsigned long aligned_buf_offs = ALIGN_DOWN(buf_offs, self->page_size);
+	unsigned long buf_pg_offs = offset_in_page(buf_offs, self->page_size);
+	unsigned long aligned_len = ALIGN(buf_offs + len, self->page_size) - aligned_buf_offs;
 	char *ptr;
 	int ret;
 
-	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+	ptr = mmap(NULL, aligned_len, PROT_READ, MAP_SHARED, wrapfd, aligned_buf_offs);
 	ASSERT_NE(ptr, MAP_FAILED);
 	ASSERT_EQ(dmabuf_sync_start(wrapfd, DMA_BUF_SYNC_READ), 0);
-	ret = memcmp(self->content + file_offs, ptr + buf_offs, len);
+	ret = memcmp(self->content + file_offs, ptr + buf_pg_offs, len);
 	ASSERT_EQ(dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_READ), 0);
-	ASSERT_EQ(munmap(ptr, self->size), 0);
+	ASSERT_EQ(munmap(ptr, aligned_len), 0);
 
 	return ret;
 }
@@ -340,55 +345,68 @@ static int __test_load(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_te
 {
 	const char poison = 0xaa;
 	int ret;
-	char *ptr = NULL;
+	char *head_ptr = NULL;
+	unsigned long tail_len, tail_aligned_offset, tail_map_len;
+	char *tail_page_ptr = NULL;
+	char *tail_ptr = NULL;
 
 	clear_content(_metadata, self, wrapfd);
 
 	EXPECT_NE(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0)
 		return -1;
 
-	if (buf_offs || ((buf_offs + len) < self->size)) {
-		ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
-		EXPECT_NE(ptr, MAP_FAILED)
-			return -1;
-	}
-
 	if (buf_offs) {
-		ret = poison_region(wrapfd, ptr, poison, buf_offs);
+		head_ptr = mmap(NULL, buf_offs, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(head_ptr, MAP_FAILED)
+			return -1;
+
+		ret = poison_region(wrapfd, head_ptr, poison, buf_offs);
 		EXPECT_EQ(ret, 0)
-			goto out;
+			goto out_unmap_head;
 	}
 
 	if ((buf_offs + len) < self->size) {
-		ret = poison_region(wrapfd, ptr + buf_offs + len, poison,
-				    self->size - buf_offs - len);
+		tail_len = self->size - buf_offs - len;
+		tail_aligned_offset = ALIGN_DOWN(buf_offs + len, self->page_size);
+		tail_map_len = self->size - tail_aligned_offset;
+		tail_page_ptr = mmap(NULL, tail_map_len, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd,
+				     tail_aligned_offset);
+		EXPECT_NE(tail_page_ptr, MAP_FAILED) {
+			ret = -1;
+			goto out_unmap_head;
+		}
+
+		tail_ptr = tail_page_ptr + offset_in_page(buf_offs + len, self->page_size);
+		ret = poison_region(wrapfd, tail_ptr, poison, tail_len);
 		EXPECT_EQ(ret, 0)
-			goto out;
+			goto out_unmap_tail;
 	}
 
 	ret = wrapfd_load(wrapfd, self->fd, file_offs, buf_offs, len);
 	EXPECT_EQ(ret, 0)
-		goto out;
+		goto out_unmap_tail;
 
-	if (buf_offs) {
-		ret = verify_region_poison(wrapfd, ptr, poison, buf_offs);
+	if (head_ptr) {
+		ret = verify_region_poison(wrapfd, head_ptr, poison, buf_offs);
 		EXPECT_EQ(ret, 0)
-			goto out;
+			goto out_unmap_tail;
 	}
 
 	ret = cmp_content(_metadata, self, wrapfd, file_offs, buf_offs, len);
 	EXPECT_EQ(ret, 0)
-		goto out;
+		goto out_unmap_tail;
 
-	if ((buf_offs + len) < self->size) {
-		ret = verify_region_poison(wrapfd, ptr + buf_offs + len, poison,
-					   self->size - buf_offs - len);
+	if (tail_ptr) {
+		ret = verify_region_poison(wrapfd, tail_ptr, poison, tail_len);
 		EXPECT_EQ(ret, 0);
 	}
 
-out:
-	if (ptr)
-		EXPECT_EQ(munmap(ptr, self->size), 0);
+out_unmap_tail:
+	if (tail_page_ptr)
+		EXPECT_EQ(munmap(tail_page_ptr, tail_map_len), 0);
+out_unmap_head:
+	if (head_ptr)
+		EXPECT_EQ(munmap(head_ptr, buf_offs), 0);
 	return ret;
 }
 
