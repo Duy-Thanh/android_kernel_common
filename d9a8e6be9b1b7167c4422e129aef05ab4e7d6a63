@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "936c2ce6_550408bb",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T08:00:52Z",
+      "side": 1,
+      "message": "Sure.\n\nBTW, there might be another problem with this apic_bus_cycle_ns, not covered by this patch. The apic_bus_cycle_ns is used to calculate the cpuid 0x15 eax/ebx, to  make the guest\u0027s native_calibrate_tsc() passed. But if apic_bus_cycle_ns is larger than 27, the calculation will make eax to be 0, so does the ebx. In this case, the guest\u0027s native_calibrate_tsc() will return 0 to fallback to the original way which makes the original patch implementing cpuid 0x15 useless. Do we need to check this against the boundary of [1, 27) to guarantee the cpuid 0x15 will have non-zero eax/ebx?",
+      "parentUuid": "9919b150_525ca010",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "writtenOn": "2026-05-07T17:20:45Z",
       "side": 1,
       "message": "nit: it seems a bit cleaner to read the host\u0027s value into a temporary variable first, and then assign it to `kvm-\u003earch.apic_bus_cycle_ns` only if it is non-zero (so that we don\u0027t need to \"re-initialize\" it back to APIC_BUS_CYCLE_NS_DEFAULT)?\n\nBTW actually it seems it would be nice to move this whole \"postponed per-VM setup\" (i.e. the setup which is not really about the vCPU) out of `__vcpu_create()` to a separate function called from here in `__vcpu_create()` (was there any reason why we didn\u0027t do that from the beginning?). So that, in particular, that temporary apic_bus_cycle_ns variable would be a local variable of that function, and thus wouldn\u0027t \"pollute\" the local variables of `__vcpu_create()`.",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119e5705_386a330a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T08:00:52Z",
+      "side": 1,
+      "message": "Yeah, I can move these code to a dedicated function and read host\u0027s value into a local variable first.",
+      "parentUuid": "a2cb42c4_8a3c9586",
       "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
