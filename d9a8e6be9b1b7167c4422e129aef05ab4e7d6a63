@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a878b0ed_cce0b298",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-09T04:58:54Z",
+      "side": 1,
+      "message": "\u003e But which non-zero value should we choose then?\n\nWe just validate if apic_bus_cycle_ns is in the range of [1, 27), if not, return error code to the host. So that eax (denominator) is always non-zero (ebx is non-zero value regardless apic_bus_cycle_ns). We don\u0027t need to choose any non-zero value for eax. As long as eax is non-zero, the TSC calculation is correct.\n\n\u003e It seems this just shows that this solution with emulated cpuid 0x15 is not the best one, and we should probably treat it as a temporary one, and eventually replace it with some PV-based solution?\n\nIf we only accept the apic_bus_cycle_ns in the range of [1, 27) for pVM, this solution should be ok? From the other aspects, maybe PV-based solution would be better, but I don\u0027t have a clear picture right now.\n\n\u003e And in the meantime, crosvm doesn\u0027t use KVM_CAP_X86_APIC_BUS_CYCLES_NS (actually AFAIK KVM_CAP_X86_APIC_BUS_CYCLES_NS is only used for TDX, and was introduced specifically for TDX needs), so for our use cases apic_bus_cycle_ns will always have the default value i.e. 1. So we can probably leave this as is?\n\nWithout checking for apic_bus_cycle_ns, a malicious host would make the pVM fallback to use HPET/PIC calculation, which seems doesn\u0027t have security issue as long as the tsc is untrusted. Then we can leave it as is.\n\n\u003e Although, well, one small thing we might \"fix\": if EAX (denominator) ends up being zero, we might enforce EBX (numerator) to be zero too?\n\nFrom the `native_calibrate_tsc` implementation, it will return 0 either denominator or numerator is 0. Seems we don\u0027t need to enforce numerator to be zero? Or any other consideration for this enforcement?",
+      "parentUuid": "937bb2db_6f25b972",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
