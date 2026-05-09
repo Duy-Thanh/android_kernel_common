@@ -10,6 +10,7 @@
 #include <linux/bvec.h>
 #include <linux/compat.h>
 #include <linux/completion.h>
+#include <linux/debugfs.h>
 #include <linux/dma-buf.h>
 #include <linux/fdtable.h>
 #include <linux/file.h>
@@ -29,6 +30,9 @@
 struct wrap_ctx;
 struct wrap_content;
 static const struct file_operations wrap_fops;
+static DEFINE_SPINLOCK(force_disable_opts_lock);
+static bool force_disable_direct_io;
+static bool force_disable_hipri_io;
 
 struct wrap_content_operations {
 	int (*create_wrap)(struct wrap_content *content, struct wrap_ctx *ctx);
@@ -109,6 +113,7 @@ struct wrap_io_ctx {
 	size_t direct_read_len;
 	size_t bytes_read;
 	size_t file_read_len;
+	bool use_direct_io;
 	struct kiocb kiocb;
 	struct iov_iter iter;
 	/* At most 4 segments: beginning, middle, and 2 at the end. */
@@ -176,8 +181,9 @@ static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file, 
 	}
 
 	init_sync_kiocb(kiocb, file);
-	kiocb->ki_pos = PAGE_ALIGN_DOWN(io_ctx->file_offs);
-	kiocb->ki_flags |= IOCB_DIRECT;
+	kiocb->ki_pos = io_ctx->use_direct_io ? PAGE_ALIGN_DOWN(io_ctx->file_offs) :
+						io_ctx->file_offs;
+	kiocb->ki_flags |= io_ctx->use_direct_io ? IOCB_DIRECT : 0;
 	/* Only issue an async and high priority I/O request if the file supports polling. */
 	if (hipri && file->f_op->iopoll) {
 		init_completion(&io_ctx->async_io_done);
@@ -201,14 +207,22 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	size_t file_read_len;
 	loff_t buf_end = buf_offs + len;
 	int i, ret = 0;
+	bool use_direct_io;
+	bool use_hipri_io;
 
-	file_read_len = PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
+	spin_lock(&force_disable_opts_lock);
+	use_direct_io = !force_disable_direct_io;
+	use_hipri_io = use_direct_io && !force_disable_hipri_io;
+	spin_unlock(&force_disable_opts_lock);
+
+	file_read_len = use_direct_io ? PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs) :
+					len;
 
 	/*
 	 * If the file offset is unaligned, then writing it into the first page of the user's buffer
 	 * could overwrite some of their data. A similar scenario can happen with the buffer offset.
 	 */
-	if (!PAGE_ALIGNED(file_offs | buf_offs)) {
+	if (use_direct_io && !PAGE_ALIGNED(file_offs | buf_offs)) {
 		/*
 		 * Start directly reading into the buffer at the next page from where the data on
 		 * the bounce page will ultimately live. This avoids having to shift the data that
@@ -225,7 +239,9 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	 * the range we're supposed to write into, and since direct I/O is done in units of pages,
 	 * ensure that there is at least a page to read.
 	 */
-	if (direct_read_start_offs <= (buf_end - PAGE_SIZE))
+	if (!use_direct_io)
+		direct_read_len = file_read_len;
+	else if (direct_read_start_offs <= (buf_end - PAGE_SIZE))
 		direct_read_len = PAGE_ALIGN_DOWN(buf_end) - direct_read_start_offs;
 
 	/*
@@ -256,7 +272,8 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	io_ctx->direct_read_len = direct_read_len;
 	io_ctx->len = len;
 	io_ctx->file_read_len = file_read_len;
-	prepare_iocb_request(io_ctx, file, true);
+	io_ctx->use_direct_io = use_direct_io;
+	prepare_iocb_request(io_ctx, file, use_hipri_io);
 	return 0;
 
 err_free_bounce_pages:
@@ -273,7 +290,9 @@ static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 
 	while (io_ctx->bytes_read < io_ctx->file_read_len) {
 		io_ctx->iter.count = min_t(size_t, MAX_RW_COUNT,
-					   PAGE_ALIGN(io_ctx->file_read_len - io_ctx->bytes_read));
+					   io_ctx->use_direct_io ?
+					   PAGE_ALIGN(io_ctx->file_read_len - io_ctx->bytes_read) :
+					   io_ctx->file_read_len - io_ctx->bytes_read);
 
 		bytes_read = vfs_iocb_iter_read(file, &io_ctx->kiocb, &io_ctx->iter);
 		if (!is_sync_kiocb(&io_ctx->kiocb)) {
@@ -307,7 +326,10 @@ static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 	}
 
 	/* File was too short / early EOF. */
-	return io_ctx->bytes_read < offset_in_page(io_ctx->file_offs) + io_ctx->len ? -EINVAL : 0;
+	if (io_ctx->use_direct_io)
+		return (io_ctx->bytes_read < (offset_in_page(io_ctx->file_offs) + io_ctx->len)) ?
+			-EINVAL : 0;
+	return (io_ctx->bytes_read < io_ctx->len) ? -EINVAL : 0;
 }
 
 static void wrap_io_complete(struct wrap_io_ctx *io_ctx)
@@ -317,8 +339,12 @@ static void wrap_io_complete(struct wrap_io_ctx *io_ctx)
 	unsigned int cur_bounce_page = 0;
 	int i;
 
-	if (io_ctx->bytes_read < (offset_in_page(io_ctx->file_offs) + io_ctx->len))
-		goto out;
+	if (io_ctx->use_direct_io) {
+		if (io_ctx->bytes_read < (offset_in_page(io_ctx->file_offs) + io_ctx->len))
+			goto out;
+	} else if (io_ctx->bytes_read < io_ctx->len) {
+			goto out;
+	}
 
 	tot_len = io_ctx->len;
 	dst = io_ctx->dst_buf + io_ctx->buf_offs;
@@ -1553,6 +1579,101 @@ static struct miscdevice wrapfd_misc = {
 	.fops = &wrapfd_dev_fops,
 };
 
+#ifdef CONFIG_DEBUG_FS
+static struct dentry *wrapfd_debugfs_dir;
+
+static int force_disable_direct_io_show(struct seq_file *s, void *unused)
+{
+	int val;
+
+	spin_lock(&force_disable_opts_lock);
+	val = force_disable_direct_io ? 1 : 0;
+	spin_unlock(&force_disable_opts_lock);
+	seq_printf(s, "%d\n", val);
+	return 0;
+}
+
+static ssize_t force_disable_direct_io_write(struct file *file, const char __user *userbuf,
+					     size_t count, loff_t *ppos)
+{
+	int ret, val;
+
+	ret = kstrtoint_from_user(userbuf, count, 10, &val);
+	if (ret)
+		return ret;
+
+	if (val != 0 && val != 1)
+		return -EINVAL;
+
+	spin_lock(&force_disable_opts_lock);
+	force_disable_direct_io = !!val;
+	spin_unlock(&force_disable_opts_lock);
+	return count;
+}
+DEFINE_SHOW_STORE_ATTRIBUTE(force_disable_direct_io);
+
+static int force_disable_hipri_io_show(struct seq_file *s, void *unused)
+{
+	int val;
+
+	spin_lock(&force_disable_opts_lock);
+	val = force_disable_hipri_io ? 1 : 0;
+	spin_unlock(&force_disable_opts_lock);
+	seq_printf(s, "%d\n", val);
+	return 0;
+}
+
+static ssize_t force_disable_hipri_io_write(struct file *file, const char __user *userbuf,
+					     size_t count, loff_t *ppos)
+{
+	int ret, val;
+
+	ret = kstrtoint_from_user(userbuf, count, 10, &val);
+	if (ret)
+		return ret;
+
+	if (val != 0 && val != 1)
+		return -EINVAL;
+
+	spin_lock(&force_disable_opts_lock);
+	force_disable_hipri_io = !!val;
+	spin_unlock(&force_disable_opts_lock);
+	return count;
+}
+DEFINE_SHOW_STORE_ATTRIBUTE(force_disable_hipri_io);
+
+static void wrapfd_debugfs_init(void)
+{
+	struct dentry *d;
+
+	d = debugfs_create_dir("wrapfd", NULL);
+	if (IS_ERR(d))
+		return;
+
+	wrapfd_debugfs_dir = d;
+
+	d = debugfs_create_file("force-disable-direct-io", 0444, wrapfd_debugfs_dir, NULL,
+				&force_disable_direct_io_fops);
+	if (IS_ERR(d))
+		goto err;
+
+	d = debugfs_create_file("force-disable-hipri-io", 0444, wrapfd_debugfs_dir, NULL,
+				&force_disable_hipri_io_fops);
+	if (IS_ERR(d))
+		goto err;
+
+	return;
+
+err:
+	debugfs_remove_recursive(wrapfd_debugfs_dir);
+	wrapfd_debugfs_dir = NULL;
+}
+#else
+static void wrapfd_debugfs_init(void)
+{
+}
+#endif
+
 static int __init wrapfd_init(void)
 {
 	int ret;
@@ -1562,6 +1683,8 @@ static int __init wrapfd_init(void)
 		pr_err("failed to register misc device!\n");
 		return ret;
 	}
+
+	wrapfd_debugfs_init();
 
 	return 0;
 }
