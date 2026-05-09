@@ -9,6 +9,7 @@
 #include <linux/anon_inodes.h>
 #include <linux/bvec.h>
 #include <linux/compat.h>
+#include <linux/debugfs.h>
 #include <linux/dma-buf.h>
 #include <linux/fdtable.h>
 #include <linux/file.h>
@@ -28,6 +29,7 @@
 struct wrap_ctx;
 struct wrap_content;
 static const struct file_operations wrap_fops;
+static atomic_t force_buffered_io;
 
 struct wrap_content_operations {
 	int (*create_wrap)(struct wrap_content *content, struct wrap_ctx *ctx);
@@ -108,6 +110,7 @@ struct dmabuf_load_param {
 	size_t direct_read_len;
 	size_t bytes_read;
 	size_t file_read_len;
+	bool use_buffered_io;
 	struct kiocb kiocb;
 	struct iov_iter iter;
 	/* At most 4 segments: beginning, middle, and 2 at the end. */
@@ -143,7 +146,7 @@ static void prepare_iocb_request(struct dmabuf_load_param *param, struct file *f
 
 	init_sync_kiocb(&param->kiocb, file);
 	param->kiocb.ki_pos = PAGE_ALIGN_DOWN(param->file_offs);
-	param->kiocb.ki_flags |= IOCB_DIRECT;
+	param->kiocb.ki_flags |= param->use_buffered_io ? 0 : IOCB_DIRECT;
 	iov_iter_kvec(&param->iter, ITER_DEST, param->iov, nr_segs, param->file_read_len);
 }
 
@@ -160,6 +163,7 @@ static int dmabuf_content_load_prepare(struct file *file, struct dma_buf *dmabuf
 	loff_t buf_end;
 	struct iosys_map map;
 	int i, ret;
+	bool use_buffered_io = !!atomic_read(&force_buffered_io);
 
 	/* We will only write into buf_offs + len, so no need to page-align the length here. */
 	if (check_add_overflow(buf_offs, len, &buf_end))
@@ -168,13 +172,14 @@ static int dmabuf_content_load_prepare(struct file *file, struct dma_buf *dmabuf
 	if (buf_end > dmabuf->size)
 		return -EINVAL;
 
-	file_read_len = PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
+	file_read_len = use_buffered_io ? len : 
+	                                  PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
 
 	/*
 	 * If the file offset is unaligned, then writing it into the first page of the user's buffer
 	 * could overwrite some of their data. A similar scenario can happen with the buffer offset.
 	 */
-	if (!PAGE_ALIGNED(file_offs | buf_offs)) {
+	if (!use_buffered_io && !PAGE_ALIGNED(file_offs | buf_offs)) {
 		/*
 		 * Start directly reading into the buffer at the next page from where the data on
 		 * the bounce page will ultimately live. This avoids having to shift the data that
@@ -191,7 +196,10 @@ static int dmabuf_content_load_prepare(struct file *file, struct dma_buf *dmabuf
 	 * the range we're supposed to write into, and since direct I/O is done in units of pages,
 	 * ensure that there is at least a page to read.
 	 */
-	if ((direct_read_start_offs < buf_end) && ((buf_end - direct_read_start_offs) >= PAGE_SIZE))
+	if (use_buffered_io)
+		direct_read_len = file_read_len;
+	else if ((direct_read_start_offs < buf_end) &&
+		 ((buf_end - direct_read_start_offs) >= PAGE_SIZE))
 		direct_read_len = PAGE_ALIGN_DOWN(buf_end) - direct_read_start_offs;
 
 	/*
@@ -236,6 +244,7 @@ static int dmabuf_content_load_prepare(struct file *file, struct dma_buf *dmabuf
 	param->direct_read_len = direct_read_len;
 	param->len = len;
 	param->file_read_len = file_read_len;
+	param->use_buffered_io = use_buffered_io;
 	prepare_iocb_request(param, file);
 	return 0;
 
@@ -257,7 +266,8 @@ static void dmabuf_content_load_complete(struct dmabuf_load_param *param)
 	unsigned int cur_bounce_page = 0;
 	int i;
 
-	if (param->bytes_read < (offset_in_page(param->file_offs) + param->len))
+	if (param->bytes_read <
+	    (param->use_buffered_io ? param->len : (offset_in_page(param->file_offs) + param->len)))
 		goto out;
 
 	tot_len = param->len;
@@ -323,6 +333,8 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 
 	while (param.bytes_read < param.file_read_len) {
 		param.iter.count = min_t(size_t, MAX_RW_COUNT,
+					 param.use_buffered_io ?
+					 param.file_read_len - param.bytes_read :
 					 PAGE_ALIGN(param.file_read_len - param.bytes_read));
 
 		bytes_read = vfs_iocb_iter_read(file, &param.kiocb, &param.iter);
@@ -341,7 +353,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 		return ret;
 
 	/* File was too short / early EOF. */
-	return param.bytes_read < offset_in_page(file_offs) + len ? -EINVAL : 0;
+	return param.bytes_read < (param.use_buffered_io ? len : offset_in_page(file_offs) + len) ? -EINVAL : 0;
 }
 
 static struct wrap_content *
@@ -1449,6 +1461,55 @@ static struct miscdevice wrapfd_misc = {
 	.fops = &wrapfd_dev_fops,
 };
 
+#ifdef CONFIG_DEBUG_FS
+static struct dentry *wrapfd_debugfs_dir;
+
+static int force_buffered_io_show(struct seq_file *s, void *unused)
+{
+	seq_printf(s, "%d\n", atomic_read(&force_buffered_io));
+	return 0;
+}
+
+static ssize_t force_buffered_io_write(struct file *file, const char __user *userbuf, size_t count,
+				       loff_t *ppos)
+{
+	int ret, val;
+
+	ret = kstrtoint_from_user(userbuf, count, 10, &val);
+	if (ret)
+		return ret;
+
+	if (val != 0 && val != 1)
+		return -EINVAL;
+
+	atomic_set(&force_buffered_io, val);
+	return count;
+}
+DEFINE_SHOW_STORE_ATTRIBUTE(force_buffered_io);
+
+static void wrapfd_debugfs_init(void)
+{
+	struct dentry *d;
+
+	d = debugfs_create_dir("wrapfd", NULL);
+	if (IS_ERR(d))
+		return;
+
+	wrapfd_debugfs_dir = d;
+
+	d = debugfs_create_file("force-buffered-io", 0444, wrapfd_debugfs_dir, NULL,
+				&force_buffered_io_fops);
+	if (IS_ERR(d)) {
+		debugfs_remove_recursive(wrapfd_debugfs_dir);
+		wrapfd_debugfs_dir = NULL;
+	}
+}
+#else
+static void wrapfd_debugfs_init(void)
+{
+}
+#endif
+
 static int __init wrapfd_init(void)
 {
 	int ret;
@@ -1458,6 +1519,8 @@ static int __init wrapfd_init(void)
 		pr_err("failed to register misc device!\n");
 		return ret;
 	}
+
+	wrapfd_debugfs_init();
 
 	return 0;
 }
