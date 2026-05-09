@@ -6547,9 +6547,15 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 		param.p2p_device = true;
 	}
 
-	if (param.nan_device)
+	if (param.nan_device) {
+		if (param.multi_radio) {
+			NL_SET_ERR_MSG(info->extack,
+				       "NAN is not supported on multi-radio wiphys");
+			return -EINVAL;
+		}
 		param.iftypes |= BIT(NL80211_IFTYPE_NAN) |
 				 BIT(NL80211_IFTYPE_NAN_DATA);
+	}
 
 	if (info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]) {
 		u32 len = nla_len(info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]);
