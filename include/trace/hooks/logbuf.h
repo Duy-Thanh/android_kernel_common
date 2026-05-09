@@ -16,10 +16,6 @@ DECLARE_RESTRICTED_HOOK(android_rvh_logbuf,
 	TP_PROTO(struct printk_ringbuffer *rb, struct printk_record *r),
 	TP_ARGS(rb, r), true)
 
-DECLARE_HOOK(android_vh_logbuf,
-	TP_PROTO(struct printk_ringbuffer *rb, struct printk_record *r),
-	TP_ARGS(rb, r))
-
 DECLARE_HOOK(android_vh_logbuf_pr_cont,
 	TP_PROTO(struct printk_record *r, size_t text_len),
 	TP_ARGS(r, text_len))
