@@ -158,6 +158,9 @@ struct ffs_epfile {
 
 	struct ffs_data			*ffs;
 	struct ffs_ep			*ep;	/* P: ffs->eps_lock */
+	struct ffs_ep			*ep_in;	/* P: ffs->eps_lock */
+	struct ffs_ep			*ep_out;/* P: ffs->eps_lock */
+	bool				is_rw;
 
 	/*
 	 * Buffer for holding data from partial reads which may happen since
@@ -976,20 +979,34 @@ static ssize_t __ffs_epfile_read_data(struct ffs_epfile *epfile,
 	return ret;
 }
 
-static struct ffs_ep *ffs_epfile_wait_ep(struct file *file)
+static struct ffs_ep *ffs_epfile_wait_ep(struct file *file, bool read)
 {
 	struct ffs_epfile *epfile = file->private_data;
 	struct ffs_ep *ep;
 	int ret;
 
 	/* Wait for endpoint to be enabled */
-	ep = epfile->ep;
+	if (epfile->is_rw)
+		ep = read ? epfile->ep_out : epfile->ep_in;
+	else
+		ep = epfile->ep;
+
 	if (!ep) {
 		if (file->f_flags & O_NONBLOCK)
 			return ERR_PTR(-EAGAIN);
 
-		ret = wait_event_interruptible(
-				epfile->ffs->wait, (ep = epfile->ep));
+		if (epfile->is_rw) {
+			ret = wait_event_interruptible(
+					epfile->ffs->wait,
+					(read ? epfile->ep_out : epfile->ep_in));
+			if (!ret)
+				ep = read ? epfile->ep_out : epfile->ep_in;
+		} else {
+			ret = wait_event_interruptible(
+					epfile->ffs->wait, epfile->ep);
+			if (!ret)
+				ep = epfile->ep;
+		}
 		if (ret)
 			return ERR_PTR(-EINTR);
 	}
@@ -1010,12 +1027,16 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
 
-	ep = ffs_epfile_wait_ep(file);
+	ep = ffs_epfile_wait_ep(file, io_data->read);
 	if (IS_ERR(ep))
 		return PTR_ERR(ep);
 
 	/* Do we halt? */
-	halt = (!io_data->read == !epfile->in);
+	if (epfile->is_rw)
+		halt = 0;
+	else
+		halt = (!io_data->read == !epfile->in);
+
 	if (halt && epfile->isoc)
 		return -EINVAL;
 
@@ -1050,7 +1071,9 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 
 		spin_lock_irq(&epfile->ffs->eps_lock);
 		/* In the meantime, endpoint got disabled or changed. */
-		if (epfile->ep != ep) {
+		if (epfile->is_rw ?
+		    (epfile->ep_in != ep && epfile->ep_out != ep) :
+		    (epfile->ep != ep)) {
 			ret = -ESHUTDOWN;
 			goto error_lock;
 		}
@@ -1079,7 +1102,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 
 	spin_lock_irq(&epfile->ffs->eps_lock);
 
-	if (epfile->ep != ep) {
+	if (epfile->is_rw ? (epfile->ep_in != ep && epfile->ep_out != ep) : (epfile->ep != ep)) {
 		/* In the meantime, endpoint got disabled or changed. */
 		ret = -ESHUTDOWN;
 	} else if (halt) {
@@ -1128,7 +1151,9 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 
 		if (wait_for_completion_interruptible(&io_data->done)) {
 			spin_lock_irq(&epfile->ffs->eps_lock);
-			if (epfile->ep != ep) {
+			if (epfile->is_rw ?
+			    (epfile->ep_in != ep && epfile->ep_out != ep) :
+			    (epfile->ep != ep)) {
 				ret = -ESHUTDOWN;
 				goto error_lock;
 			}
@@ -1490,6 +1515,9 @@ static int ffs_dmabuf_attach(struct file *file, int fd)
 	struct dma_buf *dmabuf;
 	int err;
 
+	if (epfile->is_rw)
+		return -EOPNOTSUPP;
+
 	if (!gadget || !gadget->sg_supported)
 		return -EPERM;
 
@@ -1626,7 +1654,7 @@ static int ffs_dmabuf_transfer(struct file *file,
 
 	priv = attach->importer_priv;
 
-	ep = ffs_epfile_wait_ep(file);
+	ep = ffs_epfile_wait_ep(file, !epfile->in);
 	if (IS_ERR(ep)) {
 		ret = PTR_ERR(ep);
 		goto err_attachment_put;
@@ -1772,31 +1800,56 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	}
 
 	/* Wait for endpoint to be enabled */
-	ep = ffs_epfile_wait_ep(file);
+	ep = ffs_epfile_wait_ep(file, true);
 	if (IS_ERR(ep))
 		return PTR_ERR(ep);
 
 	spin_lock_irq(&epfile->ffs->eps_lock);
 
 	/* In the meantime, endpoint got disabled or changed. */
-	if (epfile->ep != ep) {
-		spin_unlock_irq(&epfile->ffs->eps_lock);
-		return -ESHUTDOWN;
+	if (epfile->is_rw) {
+		if (epfile->ep_out != ep) {
+			spin_unlock_irq(&epfile->ffs->eps_lock);
+			return -ESHUTDOWN;
+		}
+	} else {
+		if (epfile->ep != ep) {
+			spin_unlock_irq(&epfile->ffs->eps_lock);
+			return -ESHUTDOWN;
+		}
 	}
 
 	switch (code) {
 	case FUNCTIONFS_FIFO_STATUS:
-		ret = usb_ep_fifo_status(epfile->ep->ep);
+		if (epfile->is_rw)
+			ret = usb_ep_fifo_status(epfile->ep_out->ep) +
+			      usb_ep_fifo_status(epfile->ep_in->ep);
+		else
+			ret = usb_ep_fifo_status(epfile->ep->ep);
 		break;
 	case FUNCTIONFS_FIFO_FLUSH:
-		usb_ep_fifo_flush(epfile->ep->ep);
+		if (epfile->is_rw) {
+			usb_ep_fifo_flush(epfile->ep_out->ep);
+			usb_ep_fifo_flush(epfile->ep_in->ep);
+		} else {
+			usb_ep_fifo_flush(epfile->ep->ep);
+		}
 		ret = 0;
 		break;
 	case FUNCTIONFS_CLEAR_HALT:
-		ret = usb_ep_clear_halt(epfile->ep->ep);
+		if (epfile->is_rw) {
+			ret = usb_ep_clear_halt(epfile->ep_out->ep);
+			if (!ret)
+				ret = usb_ep_clear_halt(epfile->ep_in->ep);
+		} else {
+			ret = usb_ep_clear_halt(epfile->ep->ep);
+		}
 		break;
 	case FUNCTIONFS_ENDPOINT_REVMAP:
-		ret = epfile->ep->num;
+		if (epfile->is_rw)
+			ret = epfile->ep_out->num;
+		else
+			ret = epfile->ep->num;
 		break;
 	case FUNCTIONFS_ENDPOINT_DESC:
 	{
@@ -1815,7 +1868,10 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 			desc_idx = 0;
 		}
 
-		desc = epfile->ep->descs[desc_idx];
+		if (epfile->is_rw)
+			desc = epfile->ep_out->descs[desc_idx];
+		else
+			desc = epfile->ep->descs[desc_idx];
 		memcpy(&desc1, desc, desc->bLength);
 
 		spin_unlock_irq(&epfile->ffs->eps_lock);
@@ -1832,6 +1888,26 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	return ret;
 }
 
+static __poll_t ffs_epfile_poll(struct file *file, poll_table *wait)
+{
+	struct ffs_epfile *epfile = file->private_data;
+	__poll_t mask = 0;
+
+	poll_wait(file, &epfile->ffs->wait, wait);
+
+	if (epfile->is_rw) {
+		if (epfile->ep_in && epfile->ep_out)
+			mask |= EPOLLIN | EPOLLOUT;
+	} else if (epfile->ep) {
+		if (epfile->in)
+			mask |= EPOLLOUT;
+		else
+			mask |= EPOLLIN;
+	}
+
+	return mask;
+}
+
 static const struct file_operations ffs_epfile_operations = {
 
 	.open =		ffs_epfile_open,
@@ -1840,6 +1916,7 @@ static const struct file_operations ffs_epfile_operations = {
 	.release =	ffs_epfile_release,
 	.unlocked_ioctl =	ffs_epfile_ioctl,
 	.compat_ioctl = compat_ptr_ioctl,
+	.poll =		ffs_epfile_poll,
 };
 
 
@@ -2330,25 +2407,56 @@ static int ffs_epfiles_create(struct ffs_data *ffs)
 	int err;
 
 	count = ffs->eps_count;
+	if (ffs->user_flags & FUNCTIONFS_COMBINED_EPS)
+		count /= 2;
 	epfiles = kzalloc_objs(*epfiles, count);
 	if (!epfiles)
 		return -ENOMEM;
 
 	epfile = epfiles;
-	for (i = 1; i <= count; ++i, ++epfile) {
-		epfile->ffs = ffs;
-		mutex_init(&epfile->mutex);
-		mutex_init(&epfile->dmabufs_mutex);
-		INIT_LIST_HEAD(&epfile->dmabufs);
-		if (ffs->user_flags & FUNCTIONFS_VIRTUAL_ADDR)
-			sprintf(epfile->name, "ep%02x", ffs->eps_addrmap[i]);
-		else
-			sprintf(epfile->name, "ep%u", i);
-		err = ffs_sb_create_file(ffs->sb, epfile->name,
-					 epfile, &ffs_epfile_operations);
-		if (err) {
-			ffs_epfiles_destroy(ffs->sb, epfiles, i - 1);
-			return err;
+
+	if (ffs->user_flags & FUNCTIONFS_COMBINED_EPS) {
+		for (i = 1; i <= ffs->eps_count; i += 2, ++epfile) {
+			u8 addr1 = ffs->eps_addrmap[i];
+			u8 addr2 = ffs->eps_addrmap[i+1];
+
+			if ((addr1 & USB_ENDPOINT_NUMBER_MASK) !=
+			    (addr2 & USB_ENDPOINT_NUMBER_MASK) ||
+			    (addr1 & USB_ENDPOINT_DIR_MASK) ==
+			    (addr2 & USB_ENDPOINT_DIR_MASK)) {
+				kfree(epfiles);
+				return -EINVAL;
+			}
+
+			epfile->ffs = ffs;
+			mutex_init(&epfile->mutex);
+			mutex_init(&epfile->dmabufs_mutex);
+			INIT_LIST_HEAD(&epfile->dmabufs);
+			epfile->is_rw = true;
+			sprintf(epfile->name, "ep%u", (i + 1) / 2);
+			err = ffs_sb_create_file(ffs->sb, epfile->name,
+						 epfile, &ffs_epfile_operations);
+			if (err) {
+				ffs_epfiles_destroy(ffs->sb, epfiles, (i - 1) / 2);
+				return err;
+			}
+		}
+	} else {
+		for (i = 1; i <= count; ++i, ++epfile) {
+			epfile->ffs = ffs;
+			mutex_init(&epfile->mutex);
+			mutex_init(&epfile->dmabufs_mutex);
+			INIT_LIST_HEAD(&epfile->dmabufs);
+			if (ffs->user_flags & FUNCTIONFS_VIRTUAL_ADDR)
+				sprintf(epfile->name, "ep%02x", ffs->eps_addrmap[i]);
+			else
+				sprintf(epfile->name, "ep%u", i);
+			err = ffs_sb_create_file(ffs->sb, epfile->name,
+						 epfile, &ffs_epfile_operations);
+			if (err) {
+				ffs_epfiles_destroy(ffs->sb, epfiles, i - 1);
+				return err;
+			}
 		}
 	}
 
@@ -2391,9 +2499,19 @@ static void ffs_func_eps_disable(struct ffs_function *func)
 		if (ep->ep)
 			usb_ep_disable(ep->ep);
 		++ep;
+	}
 
-		if (epfile) {
-			epfile->ep = NULL;
+	count = func->ffs->eps_count;
+	if (epfile) {
+		if (func->ffs->user_flags & FUNCTIONFS_COMBINED_EPS)
+			count /= 2;
+		while (count--) {
+			if (func->ffs->user_flags & FUNCTIONFS_COMBINED_EPS) {
+				epfile->ep_in = NULL;
+				epfile->ep_out = NULL;
+			} else {
+				epfile->ep = NULL;
+			}
 			__ffs_epfile_read_buffer_free(epfile);
 			++epfile;
 		}
@@ -2409,6 +2527,7 @@ static int ffs_func_eps_enable(struct ffs_function *func)
 	unsigned short count;
 	unsigned long flags;
 	int ret = 0;
+	int i, file_idx = 0;
 
 	spin_lock_irqsave(&func->ffs->eps_lock, flags);
 	ffs = func->ffs;
@@ -2420,7 +2539,7 @@ static int ffs_func_eps_enable(struct ffs_function *func)
 		goto done;
 	}
 
-	while (count--) {
+	for (i = 0; i < count; ++i) {
 		ep->ep->driver_data = ep;
 
 		ret = config_ep_by_speed(func->gadget, &func->function, ep->ep);
@@ -2432,15 +2551,27 @@ static int ffs_func_eps_enable(struct ffs_function *func)
 
 		ret = usb_ep_enable(ep->ep);
 		if (!ret) {
-			epfile->ep = ep;
-			epfile->in = usb_endpoint_dir_in(ep->ep->desc);
-			epfile->isoc = usb_endpoint_xfer_isoc(ep->ep->desc);
+			if (ffs->user_flags & FUNCTIONFS_COMBINED_EPS) {
+				struct ffs_epfile *cur_epfile = &ffs->epfiles[file_idx];
+
+				if (usb_endpoint_dir_in(ep->ep->desc))
+					cur_epfile->ep_in = ep;
+				else
+					cur_epfile->ep_out = ep;
+
+				if (i % 2 == 1)
+					file_idx++;
+			} else {
+				epfile->ep = ep;
+				epfile->in = usb_endpoint_dir_in(ep->ep->desc);
+				epfile->isoc = usb_endpoint_xfer_isoc(ep->ep->desc);
+				++epfile;
+			}
 		} else {
 			break;
 		}
 
 		++ep;
-		++epfile;
 	}
 
 	wake_up_interruptible(&ffs->wait);
@@ -2929,7 +3060,8 @@ static int __ffs_data_got_descs(struct ffs_data *ffs,
 			      FUNCTIONFS_VIRTUAL_ADDR |
 			      FUNCTIONFS_EVENTFD |
 			      FUNCTIONFS_ALL_CTRL_RECIP |
-			      FUNCTIONFS_CONFIG0_SETUP)) {
+			      FUNCTIONFS_CONFIG0_SETUP |
+			      FUNCTIONFS_COMBINED_EPS)) {
 			ret = -ENOSYS;
 			goto error;
 		}
@@ -2990,6 +3122,10 @@ static int __ffs_data_got_descs(struct ffs_data *ffs,
 		if (!ffs->eps_count && !ffs->interfaces_count) {
 			ffs->eps_count = helper.eps_count;
 			ffs->interfaces_count = helper.interfaces_count;
+			if ((ffs->user_flags & FUNCTIONFS_COMBINED_EPS) && (ffs->eps_count % 2)) {
+				ret = -EINVAL;
+				goto error;
+			}
 		} else {
 			if (ffs->eps_count != helper.eps_count) {
 				ret = -EINVAL;
