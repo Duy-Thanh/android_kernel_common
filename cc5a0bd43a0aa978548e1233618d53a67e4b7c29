@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbb05507_8ba8014d",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-05-09T02:40:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76bd915e_a24e1b19",
+      "range": {
+        "startLine": 105,
+        "startChar": 1,
+        "endLine": 105,
+        "endChar": 47
+      },
+      "revId": "cc5a0bd43a0aa978548e1233618d53a67e4b7c29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4194bf6_6ef03fb8",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "cc5a0bd43a0aa978548e1233618d53a67e4b7c29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b7fd006_7d0db4ec",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-05-09T02:40:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4194bf6_6ef03fb8",
+      "range": {
+        "startLine": 480,
+        "startChar": 2,
+        "endLine": 480,
+        "endChar": 8
+      },
       "revId": "cc5a0bd43a0aa978548e1233618d53a67e4b7c29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
