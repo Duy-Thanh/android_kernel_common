@@ -46,6 +46,7 @@
 #include <trace/hooks/module.h>
 #include <trace/hooks/mpam.h>
 #include <trace/hooks/net.h>
+#include <trace/hooks/pci.h>
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/power.h>
 #include <trace/hooks/preemptirq.h>
@@ -623,4 +624,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_reuse);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+/* keep-sorted end */
+
+/* keep-sorted start */
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_choose_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_get_power_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_power_manageable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_set_power_state);
 /* keep-sorted end */
