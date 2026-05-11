@@ -146,6 +146,7 @@ int kvm_check_pvm_sysreg_table(void);
 
 void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu);
 int pkvm_request_host_s2(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code);
+int pkvm_refill_memcache(struct pkvm_hyp_vcpu *hyp_vcpu);
 
 
 bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code);
