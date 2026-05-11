@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4904d0_26e36134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-11T22:33:51Z",
+      "side": 1,
+      "message": "you\u0027ve added a second `Change-Id`",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "99158ab683596daa102488149baad0ae62bb8f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
