@@ -425,6 +425,24 @@
       "parentUuid": "7fd7e015_4069047d",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863a3bde_4586f276",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-11T10:47:42Z",
+      "side": 1,
+      "message": "You definitely need to use `READ_ONCE()` to avoid ToCToU issues but that doesn\u0027t mean you need to use it every time you access host-writable data. This stuff is really fiddly to get right and `flush_hyp_vcpu()` looks weird to me -- we probably  shouldn\u0027t care about `READ_ONCE()` for the non-protected case.",
+      "parentUuid": "a7cece00_021069da",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
