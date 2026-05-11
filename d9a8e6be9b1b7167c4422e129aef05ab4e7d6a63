@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7596e89c_afd56244",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-11T06:32:56Z",
+      "side": 1,
+      "message": "Yeah, and that\u0027s exactly my point. A malicious host may of course trigger this PnP issue, but it is no more than a DoS issue. If a malicious host wants to drain the battery, it can do that in lots of other ways, without even involving pVMs, anyway.",
+      "parentUuid": "1d91a50c_9c9b1ded",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
