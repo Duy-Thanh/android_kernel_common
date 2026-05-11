@@ -1532,6 +1532,13 @@ repeat:
 
 	lock_page(page);
 	if (likely(page->mapping == mc)) {
+<<<<<<< HEAD   (2de5eacfad123a64b5dbb3d029c2e484cd736e4f Merge 75669e987137 ("xfs: save ailp before dropping the AIL )
+||||||| BASE   (75669e987137f49c99ca44406bf0200d1892dd16 xfs: save ailp before dropping the AIL lock in push callback)
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+=======
+		WRITE_ONCE(pcl->compressed_bvecs[nr].page, page);
+		oldpage = page;
+>>>>>>> BRANCH (29242a6238213f22ce7ff29d6e5a939ee120232e Linux 6.6.131)
 
 		/*
 		 * The cached folio is still in managed cache but without
