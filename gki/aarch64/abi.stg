@@ -441480,6 +441480,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_update_load_avg_se"
 }
 elf_symbol {
+  id: 0x6fdb7fd2
+  name: "__traceiter_android_rvh_update_load_sum"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7ec1e1ef
+  type_id: 0x9be2da56
+  full_name: "__traceiter_android_rvh_update_load_sum"
+}
+elf_symbol {
   id: 0x16809a5a
   name: "__traceiter_android_rvh_update_misfit_status"
   is_defined: true
@@ -449434,6 +449443,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_update_load_avg_se"
+}
+elf_symbol {
+  id: 0x51c819cc
+  name: "__tracepoint_android_rvh_update_load_sum"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_update_load_sum"
 }
 elf_symbol {
   id: 0x1362c5b0
@@ -527840,6 +527858,7 @@ interface {
   symbol_id: 0xa1fc4e45
   symbol_id: 0xea6ec56d
   symbol_id: 0x42b8fcc6
+  symbol_id: 0x6fdb7fd2
   symbol_id: 0x16809a5a
   symbol_id: 0x47fa897e
   symbol_id: 0xfaa2e0a4
@@ -528724,6 +528743,7 @@ interface {
   symbol_id: 0x23231c63
   symbol_id: 0x1dace1db
   symbol_id: 0x8ca0ae74
+  symbol_id: 0x51c819cc
   symbol_id: 0x1362c5b0
   symbol_id: 0x6c04db48
   symbol_id: 0xaa2da792
