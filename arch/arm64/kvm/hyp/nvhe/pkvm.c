@@ -27,6 +27,16 @@
 #include <nvhe/pviommu.h>
 #include <nvhe/pviommu-host.h>
 #include <nvhe/trap_handler.h>
+#include <asm/kvm_hypevents.h>
+
+int pkvm_refill_memcache(struct pkvm_hyp_vcpu *hyp_vcpu)
+{
+	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
+
+	return refill_memcache(&hyp_vcpu->vcpu.arch.stage2_mc,
+			       host_vcpu->arch.stage2_mc.nr_pages,
+			       &host_vcpu->arch.stage2_mc);
+}
 
 /* Used by icache_is_aliasing(). */
 unsigned long __icache_flags;
@@ -1793,6 +1803,19 @@ static bool pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu,
 	else if (smccc_get_arg3(&hyp_vcpu->vcpu))
 		goto out_guest_err;
 
+	ret = pkvm_refill_memcache(hyp_vcpu);
+	switch (ret) {
+	case 0:
+		break;
+	case -ENOMEMHOSTS2:
+		if (pkvm_request_host_s2(hyp_vcpu, exit_code))
+			goto out_guest_err;
+
+		return false;
+	default:
+		goto out_guest_err;
+	}
+
 	ret = __pkvm_install_ioguard_page(hyp_vcpu, ipa, nr_pages, &nr_guarded);
 	if (ret == -ENOMEM && !pkvm_request_vcpu_memcache(hyp_vcpu, exit_code, true))
 		return false;
@@ -2018,6 +2041,7 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	struct arm_smccc_1_2_regs regs;
 	struct arm_smccc_1_2_regs res;
 	DECLARE_REG(u64, func_id, ctxt, 0);
+	int ret;
 
 	hyp_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
 	vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
@@ -2027,6 +2051,20 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 
 	if (!vm->kvm.arch.pkvm.smc_forwarded)
 		return false;
+
+	/* SMC handlers might use the vCPU memcache (GUEST_SMC_NEED_TOPUP) */
+	ret = pkvm_refill_memcache(hyp_vcpu);
+	switch (ret) {
+	case 0:
+		break;
+	case -ENOMEMHOSTS2:
+		if (pkvm_request_host_s2(hyp_vcpu, exit_code))
+			goto out_guest_err;
+
+		return false;
+	default:
+		goto out_guest_err;
+	}
 
 	memcpy(&regs, &ctxt->regs, sizeof(regs));
 	handler_ret = module_handle_guest_smc(&regs, &res, vm->kvm.arch.pkvm.handle);
@@ -2040,15 +2078,18 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 	case GUEST_SMC_NEED_TOPUP:
 		if (!pkvm_request_vcpu_memcache(hyp_vcpu, exit_code, false))
 			return false;
-		smccc_set_retval(vcpu, SMCCC_RET_INVALID_PARAMETER, 0, 0, 0);
-		break;
+		goto out_guest_err;
 	default:
 		WARN_ON(1);
 	}
 
+out:
 	__kvm_skip_instr(vcpu);
-
 	return true;
+
+out_guest_err:
+	smccc_set_retval(vcpu, SMCCC_RET_INVALID_PARAMETER, 0, 0, 0);
+	goto out;
 }
 
 /*
