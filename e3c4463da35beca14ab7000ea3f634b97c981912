@@ -22,6 +22,30 @@
       },
       "revId": "e3c4463da35beca14ab7000ea3f634b97c981912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994d8e48_e0b7c0d1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-11T15:10:17Z",
+      "side": 1,
+      "message": "Ok, I missed the critical line assigning `hyp_vcpu-\u003ehost_vcpu \u003d host_vcpu` after the initial pinning, but hopefully you can see what I mean!",
+      "parentUuid": "4edca0b6_ba8633e0",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 709,
+        "endChar": 35
+      },
+      "revId": "e3c4463da35beca14ab7000ea3f634b97c981912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
