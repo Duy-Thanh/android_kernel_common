@@ -118,6 +118,54 @@
       },
       "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66515085_d3e8d2d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2026-05-11T23:43:47Z",
+      "side": 1,
+      "message": "\u003e Hi,\n\u003e Its a small trivial conflict. One of the most recent patch landed has one line conflict with this change.",
+      "parentUuid": "047e4ff8_71227de2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e446c8ae_54b0aaa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2026-05-11T23:43:47Z",
+      "side": 1,
+      "message": "\u003e Hi,\n\u003e Its a small trivial conflict. One of the most recent patch landed has one line conflict with this change. Its not a backport. I have fixed it now.",
+      "parentUuid": "047e4ff8_71227de2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
