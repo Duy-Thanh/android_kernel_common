@@ -46,6 +46,30 @@
       },
       "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8bbd25_b9d06b7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2026-05-11T21:48:42Z",
+      "side": 1,
+      "message": "@Carlos Llamas, Its only a trivial conflicts.",
+      "parentUuid": "7076f985_6df6d746",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
