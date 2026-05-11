@@ -7335,6 +7335,54 @@ static irqreturn_t ufshcd_sl_intr(struct ufs_hba *hba, u32 intr_status)
 }
 
 /**
+ * ufshcd_intr - Threaded interrupt service routine
+ * @irq: irq number
+ * @__hba: pointer to adapter instance
+ *
+ * Return:
+ *  IRQ_HANDLED - If interrupt is valid
+ *  IRQ_NONE    - If invalid interrupt
+ */
+static irqreturn_t ufshcd_intr(int irq, void *__hba)
+{
+	u32 last_intr_status, intr_status, enabled_intr_status = 0;
+	irqreturn_t retval = IRQ_NONE;
+	struct ufs_hba *hba = __hba;
+	int retries = hba->nutrs;
+
+	last_intr_status = intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
+
+	/*
+	 * There could be max of hba->nutrs reqs in flight and in worst case
+	 * if the reqs get finished 1 by 1 after the interrupt status is
+	 * read, make sure we handle them by checking the interrupt status
+	 * again in a loop until we process all of the reqs before returning.
+	 */
+	while (intr_status && retries--) {
+		enabled_intr_status =
+			intr_status & ufshcd_readl(hba, REG_INTERRUPT_ENABLE);
+		ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
+		if (enabled_intr_status)
+			retval |= ufshcd_sl_intr(hba, enabled_intr_status);
+
+		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
+	}
+
+	if (enabled_intr_status && retval == IRQ_NONE &&
+	    (!(enabled_intr_status & UTP_TRANSFER_REQ_COMPL) ||
+	     hba->outstanding_reqs) && !ufshcd_eh_in_progress(hba)) {
+		dev_err(hba->dev, "%s: Unhandled interrupt 0x%08x (0x%08x, 0x%08x)\n",
+					__func__,
+					intr_status,
+					last_intr_status,
+					enabled_intr_status);
+		ufshcd_dump_regs(hba, 0, UFSHCI_REG_SPACE_SIZE, "host_regs: ");
+	}
+
+	return retval;
+}
+
+/**
  * ufshcd_threaded_intr - Threaded interrupt service routine
  * @irq: irq number
  * @__hba: pointer to adapter instance
@@ -7392,7 +7440,7 @@ static irqreturn_t ufshcd_threaded_intr(int irq, void *__hba)
  *  IRQ_WAKE_THREAD - If handling is moved to threaded handled
  *  IRQ_NONE        - If invalid interrupt
  */
-static irqreturn_t ufshcd_intr(int irq, void *__hba)
+static irqreturn_t ufshcd_mcq_intr(int irq, void *__hba)
 {
 	struct ufs_hba *hba = __hba;
 	u32 intr_status, enabled_intr_status;
@@ -11070,8 +11118,13 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 	ufshcd_readl(hba, REG_INTERRUPT_ENABLE);
 
 	/* IRQ registration */
-	err = devm_request_threaded_irq(dev, irq, ufshcd_intr, ufshcd_threaded_intr,
-					IRQF_ONESHOT | IRQF_SHARED, UFSHCD, hba);
+	if (is_mcq_supported(hba)) {
+		err = devm_request_threaded_irq(dev, irq, ufshcd_mcq_intr, ufshcd_threaded_intr,
+						IRQF_ONESHOT | IRQF_SHARED, UFSHCD, hba);
+	} else { /* legacy doorbell path */
+		err = devm_request_irq(dev, irq, ufshcd_intr, IRQF_SHARED, UFSHCD, hba);
+	}
+
 	if (err) {
 		dev_err(hba->dev, "request irq failed\n");
 		goto out_disable;
