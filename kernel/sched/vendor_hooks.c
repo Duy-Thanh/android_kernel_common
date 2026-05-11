@@ -91,9 +91,46 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_to_wake_up_success);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ttwu_cond);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_get);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);
+<<<<<<< HEAD   (1fb067c84c7678523f616d986e51751e6ed26461 ANDROID: GKI: oplus add symbols to symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpu_capacity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_deadline);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);
+||||||| BASE   (98413bc16eb8898b120427b78386b399eaeecd83 ANDROID: KVM: arm64: Fix off-by-one bounds check in hyp_allo)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_move_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_restore_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enq_to_priq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_switch_repeat_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_should_scx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_ops_consider_migration);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_fix_prev_slice);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_ops_enable_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_enabled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_set_cpus_allowed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_task_switch_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_task_can_run_on);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_exit_on_abnormal);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_switching_to_scx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rq_clock_pelt);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_move_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_restore_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enq_to_priq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_switch_repeat_skip);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_should_scx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_ops_consider_migration);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_fix_prev_slice);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_ops_enable_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_enabled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_set_cpus_allowed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_task_switch_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_task_can_run_on);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_exit_on_abnormal);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_switching_to_scx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rq_clock_pelt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_sum);
+>>>>>>> CHANGE (0e2699e020d5a38d5d49c89fbb2dbdde30eb530f ANDROID: sched: Add vendor hook to force update pelt signal)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_blocked_se);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_cfs_rq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_se);
