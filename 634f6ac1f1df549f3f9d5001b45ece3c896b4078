@@ -16,6 +16,24 @@
       "message": "Breaks KMI so either the series needs to be refactored or wait until the final KMI update on 5/15.\n```\nfunction symbol \u0027void wireless_send_event(struct net_device*, unsigned int, union iwreq_data*, const char*)\u0027 changed\n  CRC changed from 0x69b3cc53 to 0xf870aa0\n\ntype \u0027enum nl80211_iftype\u0027 changed\n  enumerator \u0027NL80211_IFTYPE_PD\u0027 (14) was added\n  enumerator \u0027NUM_NL80211_IFTYPES\u0027 value changed from 14 to 15\n  enumerator \u0027NL80211_IFTYPE_MAX\u0027 value changed from 13 to 14\n\ntype \u0027struct cfg80211_pmsr_capabilities\u0027 changed\n  byte size changed from 28 to 68\n  member changed from \u0027struct { u32 preambles; u32 bandwidths; s8 max_bursts_exponent; u8 max_ftms_per_burst; u8 supported:1; u8 asap:1; u8 non_asap:1; u8 request_lci:1; u8 request_civicloc:1; u8 trigger_based:1; u8 non_trigger_based:1; u8 support_6ghz:1; u8 max_tx_ltf_rep; u8 max_rx_ltf_rep; u8 max_tx_sts; u8 max_rx_sts; u8 max_total_ltf_tx; u8 max_total_ltf_rx; u8 support_rsta:1; } ftm\u0027 to \u0027struct { u32 preambles; u32 bandwidths; s8 max_bursts_exponent; u8 max_ftms_per_burst; u8 supported:1; u8 asap:1; u8 non_asap:1; u8 request_lci:1; u8 request_civicloc:1; u8 trigger_based:1; u8 non_trigger_based:1; u8 support_6ghz:1; u8 max_tx_ltf_rep; u8 max_rx_ltf_rep; u8 max_tx_sts; u8 max_rx_sts; u8 max_total_ltf_tx; u8 max_total_ltf_rx; struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } ista; struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } rsta; u8 max_no_of_tx_antennas; u8 max_no_of_rx_antennas; u32 min_allowed_ranging_interval_edca; u32 min_allowed_ranging_interval_ntb; struct { u8 infra_support:1; u8 pd_support:1; } type; u8 concurrent_ista_rsta_support:1; u32 pd_preambles; u32 pd_bandwidths; } ftm\u0027\n    type changed from \u0027struct { u32 preambles; u32 bandwidths; s8 max_bursts_exponent; u8 max_ftms_per_burst; u8 supported:1; u8 asap:1; u8 non_asap:1; u8 request_lci:1; u8 request_civicloc:1; u8 trigger_based:1; u8 non_trigger_based:1; u8 support_6ghz:1; u8 max_tx_ltf_rep; u8 max_rx_ltf_rep; u8 max_tx_sts; u8 max_rx_sts; u8 max_total_ltf_tx; u8 max_total_ltf_rx; u8 support_rsta:1; }\u0027 to \u0027struct { u32 preambles; u32 bandwidths; s8 max_bursts_exponent; u8 max_ftms_per_burst; u8 supported:1; u8 asap:1; u8 non_asap:1; u8 request_lci:1; u8 request_civicloc:1; u8 trigger_based:1; u8 non_trigger_based:1; u8 support_6ghz:1; u8 max_tx_ltf_rep; u8 max_rx_ltf_rep; u8 max_tx_sts; u8 max_rx_sts; u8 max_total_ltf_tx; u8 max_total_ltf_rx; struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } ista; struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } rsta; u8 max_no_of_tx_antennas; u8 max_no_of_rx_antennas; u32 min_allowed_ranging_interval_edca; u32 min_allowed_ranging_interval_ntb; struct { u8 infra_support:1; u8 pd_support:1; } type; u8 concurrent_ista_rsta_support:1; u32 pd_preambles; u32 pd_bandwidths; }\u0027\n      byte size changed from 20 to 60\n      member \u0027u8 support_rsta:1\u0027 was removed\n      member \u0027struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } ista\u0027 was added\n      member \u0027struct { u8 support_ntb:1; u8 support_tb:1; u8 support_edca:1; u32 max_peers; } rsta\u0027 was added\n      member \u0027u8 max_no_of_tx_antennas\u0027 was added\n      member \u0027u8 max_no_of_rx_antennas\u0027 was added\n      member \u0027u32 min_allowed_ranging_interval_edca\u0027 was added\n      member \u0027u32 min_allowed_ranging_interval_ntb\u0027 was added\n      member \u0027struct { u8 infra_support:1; u8 pd_support:1; } type\u0027 was added\n      member \u0027u8 concurrent_ista_rsta_support:1\u0027 was added\n      member \u0027u32 pd_preambles\u0027 was added\n      member \u0027u32 pd_bandwidths\u0027 was added\n```",
       "revId": "634f6ac1f1df549f3f9d5001b45ece3c896b4078",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36bc70c4_a74b6bca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-11T15:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1acc53d_90d01171",
+      "revId": "634f6ac1f1df549f3f9d5001b45ece3c896b4078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
