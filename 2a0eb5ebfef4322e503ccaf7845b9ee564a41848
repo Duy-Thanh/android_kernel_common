@@ -45,6 +45,30 @@
       },
       "revId": "2a0eb5ebfef4322e503ccaf7845b9ee564a41848",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d8359b0_f915c9f2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T16:07:16Z",
+      "side": 1,
+      "message": "Yes, I thought a lot about improving it with no luck, that arises from the fact that the SMMUv3 driver doesn\u0027t know about VMs and that free domains can be done with the VM not running.\n\nBut, I believe we can change it to point to the vm instead, but that require some rework.",
+      "parentUuid": "709893fe_63cfadfc",
+      "range": {
+        "startLine": 493,
+        "startChar": 1,
+        "endLine": 493,
+        "endChar": 12
+      },
+      "revId": "2a0eb5ebfef4322e503ccaf7845b9ee564a41848",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
