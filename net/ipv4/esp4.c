@@ -278,7 +278,13 @@ static void esp_output_done(struct crypto_async_request *base, int err)
 		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP)
 			esp_output_tail_tcp(x, skb);
 		else
+<<<<<<< HEAD   (5628bb7221801525b0253797d407630491341e45 Revert "wifi: libertas: fix use-after-free in lbs_free_adapt)
 			xfrm_output_resume(skb, err);
+||||||| BASE   (9192d1d7e20d5a31c8abe9a05d61782bf057ffbb xfrm: call xdo_dev_state_delete during state update)
+			xfrm_output_resume(skb->sk, skb, err);
+=======
+			xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+>>>>>>> BRANCH (7ff8dce35151e45ba0026d5a4f958d2268a512ce xfrm: Fix the usage of skb->sk)
 	}
 }
 
