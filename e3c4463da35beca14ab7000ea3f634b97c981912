@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edca0b6_ba8633e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-11T15:08:46Z",
+      "side": 1,
+      "message": "Could you instead reorder things slightly, so that you do something like:\n\n```\nint ret \u003d -EINVAL;\n\nif (hyp_pin_shared_mem(host_vcpu, host_vcpu + 1))\n\treturn -EBUSY;\n\t\nmp_state \u003d READ_ONCE(host_vcpu-\u003earch.mp_state.mp_state);\nif (mp_state !\u003d KVM_MP_STATE_RUNNABLE \u0026\u0026 mp_state !\u003d KVM_MP_STATE_STOPPED)\n\tgoto done;\n\nhyp_reqs \u003d READ_ONCE(host_vcpu-\u003earch.hyp_reqs);\nif (!PAGE_ALIGNED(hyp_reqs))\n\tgoto done;\n\nhyp_vcpu-\u003evcpu.arch.hyp_reqs \u003d kern_hyp_va(hyp_reqs);\nif (hyp_pin_shared_mem(hyp_vcpu-\u003evcpu.arch.hyp_reqs,\n\t\t       hyp_vcpu-\u003evcpu..arch.hyp_reqs + 1)) {\n\tgoto done;\n}\n\n...\n```\n\nThat way, the cleanup path is consistent (with the slight change that we now return `-EINVAL` instead of `-EBUSY` if we fail to pin the `hyp_req`).",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 709,
+        "endChar": 35
+      },
+      "revId": "e3c4463da35beca14ab7000ea3f634b97c981912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
