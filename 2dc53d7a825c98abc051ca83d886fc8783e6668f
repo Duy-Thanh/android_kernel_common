@@ -166,6 +166,30 @@
       },
       "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766f003a_834994e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-11T23:54:30Z",
+      "side": 1,
+      "message": "@fnu.vishwanatha@intel.corp-partner.google.com: \n\nCarlos is asking you to add a line in commit message for any `BACKPORT` CL that looks like:\n\n```\n[vishwanatha: fix trivial conflict with downstream vendor hook]\n```\n\nOf course, you should remark about whatever the change was if it was for something else.\n\nYou need to do this for any `BACKPORT:` CL in the series, and convert any `UPSTREAM:` to `BACKPORT:` if you had to make _any_ changes during the cherry-pick to get it to build.",
+      "parentUuid": "e446c8ae_54b0aaa4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
