@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4d250e_384f90e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-11T17:59:00Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s quite right -- `pkvm_reset_vcpu()` is only called if the vCPU is in the `ON_PENDING` state and (for pVMs with pvmfw), that can only happen via a `CPU_ON` from the guest. At which point, I think only the handling vCPU thread can end up calling `pkvm_reset_vcpu()` and so it can\u0027t race with itself.\n\nMaybe there\u0027s an issue for pVMs without pvmfw, but this needs some proper analysis because the text here doesn\u0027t appear to be accurate. The question I\u0027d like to answer is: why do we have different PSCI semantics for pVMs based on whether or not we have pvmfw?",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
