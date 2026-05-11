@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223ae57f_a84d8c68",
+        "filename": "kernel/sched/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-11T19:10:02Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Keep Sorted: These lines are out of order.\n\nThese lines are out of order.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 56
+      },
+      "revId": "c73cd22e649b206d878d573ff20797373b8202f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
