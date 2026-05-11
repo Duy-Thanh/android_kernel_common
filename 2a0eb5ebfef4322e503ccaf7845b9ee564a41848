@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "906646a3_5adf9054",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-05-11T16:54:48Z",
+      "side": 1,
+      "message": "it calls __pkvm_guest_unshare_ffa_page() which calls __pkvm_guest_share_hyp_page(struct() which in turn calls __guest_request_page_transition() passing vcpu to all, when all they need is the VM.\n\nIf you like I can refactor, but it would cause a bit of churn...",
+      "parentUuid": "e24963d9_9830d634",
+      "range": {
+        "startLine": 1843,
+        "startChar": 40,
+        "endLine": 1843,
+        "endChar": 48
+      },
+      "revId": "2a0eb5ebfef4322e503ccaf7845b9ee564a41848",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "709893fe_63cfadfc",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 2
