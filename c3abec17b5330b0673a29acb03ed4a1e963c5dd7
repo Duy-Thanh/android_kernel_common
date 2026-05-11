@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa85fe0_68f58c7a",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-05-11T18:24:08Z",
+      "side": 1,
+      "message": "I don\u0027t see any benefits to declaring and initializing this in `zram_ioctl_process_prefetch()` and then passing it to `zram_prefetch_slots()`. Can you just move it completely inside of `zram_prefetch_slots()`?",
+      "range": {
+        "startLine": 265,
+        "startChar": 1,
+        "endLine": 265,
+        "endChar": 33
+      },
+      "revId": "c3abec17b5330b0673a29acb03ed4a1e963c5dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
