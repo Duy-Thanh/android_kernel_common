@@ -684,6 +684,26 @@ void avg_vruntime_update(struct cfs_rq *cfs_rq, s64 delta)
 /*
  * Specifically: avg_runtime() + 0 must result in entity_eligible() := true
  * For this to be so, the result of this function must have a left bias.
+<<<<<<< HEAD   (a150c9d002db222b8dc73b91ecfca78a41b716b7 Merge 6.12.80 into android16-6.12-lts)
+||||||| BASE   (00d7934ffcc35e65b113ba4991c8a3338bd85fc1 Linux 6.12.80)
+ *
+ * Called in:
+ *  - place_entity()      -- before enqueue
+ *  - update_entity_lag() -- before dequeue
+ *  - entity_tick()
+ *
+ * This means it is one entry 'behind' but that puts it close enough to where
+ * the bound on entity_key() is at most two lag bounds.
+=======
+ *
+ * Called in:
+ *  - place_entity()      -- before enqueue
+ *  - update_entity_lag() -- before dequeue
+ *  - update_deadline()   -- slice expiration
+ *
+ * This means it is one entry 'behind' but that puts it close enough to where
+ * the bound on entity_key() is at most two lag bounds.
+>>>>>>> BRANCH (e7a3953084a7050ca349010deb22546834c2e196 Linux 6.12.81)
  */
 u64 avg_vruntime(struct cfs_rq *cfs_rq)
 {
@@ -1106,6 +1126,7 @@ static bool update_deadline(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	 * EEVDF: vd_i = ve_i + r_i / w_i
 	 */
 	se->deadline = se->vruntime + calc_delta_fair(se->slice, se);
+	avg_vruntime(cfs_rq);
 
 	/*
 	 * The task has consumed its request, reschedule.
@@ -1260,6 +1281,88 @@ static s64 update_se(struct rq *rq, struct sched_entity *se)
 	return delta_exec;
 }
 
+<<<<<<< HEAD   (a150c9d002db222b8dc73b91ecfca78a41b716b7 Merge 6.12.80 into android16-6.12-lts)
+||||||| BASE   (00d7934ffcc35e65b113ba4991c8a3338bd85fc1 Linux 6.12.80)
+static inline void update_curr_task(struct task_struct *p, s64 delta_exec)
+{
+	trace_sched_stat_runtime(p, delta_exec);
+	account_group_exec_runtime(p, delta_exec);
+	cgroup_account_cputime(p, delta_exec);
+}
+
+static inline bool did_preempt_short(struct cfs_rq *cfs_rq, struct sched_entity *curr)
+{
+	if (!sched_feat(PREEMPT_SHORT))
+		return false;
+
+	if (curr->vlag == curr->deadline)
+		return false;
+
+	return !entity_eligible(cfs_rq, curr);
+}
+
+static inline bool do_preempt_short(struct cfs_rq *cfs_rq,
+				    struct sched_entity *pse, struct sched_entity *se)
+{
+	if (!sched_feat(PREEMPT_SHORT))
+		return false;
+
+	if (pse->slice >= se->slice)
+		return false;
+
+	if (!entity_eligible(cfs_rq, pse))
+		return false;
+
+	if (entity_before(pse, se))
+		return true;
+
+	if (!entity_eligible(cfs_rq, se))
+		return true;
+
+	return false;
+}
+
+=======
+static inline void update_curr_task(struct task_struct *p, s64 delta_exec)
+{
+	trace_sched_stat_runtime(p, delta_exec);
+	account_group_exec_runtime(p, delta_exec);
+	cgroup_account_cputime(p, delta_exec);
+}
+
+static inline bool did_preempt_short(struct cfs_rq *cfs_rq, struct sched_entity *curr)
+{
+	if (!sched_feat(PREEMPT_SHORT))
+		return false;
+
+	if (protect_slice(curr))
+		return false;
+
+	return !entity_eligible(cfs_rq, curr);
+}
+
+static inline bool do_preempt_short(struct cfs_rq *cfs_rq,
+				    struct sched_entity *pse, struct sched_entity *se)
+{
+	if (!sched_feat(PREEMPT_SHORT))
+		return false;
+
+	if (pse->slice >= se->slice)
+		return false;
+
+	if (!entity_eligible(cfs_rq, pse))
+		return false;
+
+	if (entity_before(pse, se))
+		return true;
+
+	if (!entity_eligible(cfs_rq, se))
+		return true;
+
+	return false;
+}
+
+>>>>>>> BRANCH (e7a3953084a7050ca349010deb22546834c2e196 Linux 6.12.81)
 /*
  * Used by other classes to account runtime.
  */
@@ -9309,8 +9412,14 @@ static void yield_task_fair(struct rq *rq)
 	 */
 	if (entity_eligible(cfs_rq, se)) {
 		se->vruntime = se->deadline;
+<<<<<<< HEAD   (a150c9d002db222b8dc73b91ecfca78a41b716b7 Merge 6.12.80 into android16-6.12-lts)
 		se->deadline += calc_delta_fair(se->slice, se);
 		update_min_vruntime(cfs_rq);
+||||||| BASE   (00d7934ffcc35e65b113ba4991c8a3338bd85fc1 Linux 6.12.80)
+		se->deadline += calc_delta_fair(se->slice, se);
+=======
+		update_deadline(cfs_rq, se);
+>>>>>>> BRANCH (e7a3953084a7050ca349010deb22546834c2e196 Linux 6.12.81)
 	}
 }
 
