@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d91a50c_9c9b1ded",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-11T02:02:11Z",
+      "side": 1,
+      "message": "\u003e But I don\u0027t think it will happen in practice (since we\u0027re not really gonna use non-default apic_bus_cycle_ns values), so I\u0027m not sure it\u0027s worth adding extra code for that.\n\nYou mean it will not happen with a well-behaved host, right? But a malicious host can still do what ever it wants, to trigger this. Actually some security issues can only be triggered by a malicious host rather than a well-behaved host, and we still need to fix these security issues. But this one is not a security issue, so I agree it may not be worth adding extra code for that.\n\n\u003e I just see that the CPUID 0x15 description in the SDM says: \"If EBX[31:0] is 0, the TSC/”core crystal clock” ratio is not enumerated.\" but doesn\u0027t say what if EBX is not zero bug EAX is zero. So in such case, the behavior we emulate is architecturally undefined, and semantically means division by zero (denominator is 0)?\n\nMakes sense. Will enforce ebx as zero if eax is zero.",
+      "parentUuid": "5920a419_a6f4ae79",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2cb42c4_8a3c9586",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
