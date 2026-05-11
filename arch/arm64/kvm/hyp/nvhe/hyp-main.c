@@ -173,7 +173,6 @@ static void handle_pvm_entry_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 static void handle_pvm_entry_hvc64(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	u32 fn = smccc_get_function(&hyp_vcpu->vcpu);
-	u64 ret;
 
 	switch (fn) {
 	case ARM_SMCCC_VENDOR_HYP_KVM_MEM_SHARE_FUNC_ID:
@@ -184,12 +183,7 @@ static void handle_pvm_entry_hvc64(struct pkvm_hyp_vcpu *hyp_vcpu)
 		vcpu_set_reg(&hyp_vcpu->vcpu, 0, SMCCC_RET_SUCCESS);
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_DEV_REQ_PWR_FUNC_ID:
-		/* If the host said success, call power_lock */
-		ret = READ_ONCE(hyp_vcpu->host_vcpu->arch.ctxt.regs.regs[0]);
-		if (ret != SMCCC_RET_SUCCESS || pkvm_device_request_power_pvm_entry(hyp_vcpu))
-			ret = SMCCC_RET_INVALID_PARAMETER;
-
-		vcpu_set_reg(&hyp_vcpu->vcpu, 0, ret);
+		pkvm_device_request_power_pvm_entry(hyp_vcpu);
 		break;
 	default:
 		handle_pvm_entry_psci(hyp_vcpu);
@@ -1776,6 +1770,20 @@ static void handle___pkvm_host_iommu_nested_cfg_sync(struct kvm_cpu_context *hos
 							  cmd_desc_size);
 }
 
+static void handle___pkvm_host_iommu_page_response(struct kvm_cpu_context *host_ctxt)
+{
+	int ret;
+	DECLARE_REG(pkvm_handle_t, drv_id, host_ctxt, 1);
+	DECLARE_REG(pkvm_handle_t, iommu, host_ctxt, 2);
+	DECLARE_REG(unsigned int, endpoint, host_ctxt, 3);
+	DECLARE_REG(unsigned int, pasid, host_ctxt, 4);
+	DECLARE_REG(unsigned int, grpid, host_ctxt, 5);
+	DECLARE_REG(unsigned int, status_code, host_ctxt, 6);
+
+	ret = kvm_iommu_page_response(drv_id, iommu, endpoint, pasid, grpid, status_code);
+	this_cpu_hyp_req_to_smccc(ret, host_ctxt);
+}
+
 static void handle___pkvm_host_iommu_attach_dev(struct kvm_cpu_context *host_ctxt)
 {
 	int ret;
@@ -2063,6 +2071,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_host_map_guest_mmio),
 	HANDLE_FUNC(__pkvm_pviommu_attach),
 	HANDLE_FUNC(__pkvm_pviommu_add_vsid),
+	HANDLE_FUNC(__pkvm_host_iommu_page_response),
 };
 
 static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
@@ -2110,7 +2119,13 @@ inval:
 static void handle_host_smc(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(u64, func_id, host_ctxt, 0);
+	u64 esr = read_sysreg_el2(SYS_ESR);
 	bool handled;
+
+	if (esr & ESR_ELx_xVC_IMM_MASK) {
+		cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+		goto exit_skip_instr;
+	}
 
 	func_id &= ~ARM_SMCCC_CALL_HINTS;
 
@@ -2127,6 +2142,7 @@ static void handle_host_smc(struct kvm_cpu_context *host_ctxt)
 
 	trace_host_smc(func_id, !handled);
 
+exit_skip_instr:
 	/* SMC was trapped, move ELR past the current PC. */
 	kvm_skip_host_instr();
 }
