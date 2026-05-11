@@ -90,3 +90,12 @@ CONFIG_USERFAULTFD=y
 CONFIG_VXLAN=y
 CONFIG_XDP_SOCKETS=y
 CONFIG_XFRM_INTERFACE=y
+<<<<<<< HEAD   (cd64f8e57d218fc880f38cddb413f3c4b81714a7 UPSTREAM: f2fs: fix uninitialized one_time_gc in victim_sel_)
+||||||| BASE   (d0d7db1b102494a51e15a9b565f94d4abbd1219d FROMGIT: PM: wakeup: Add kfuncs to traverse over wakeup_sour)
+CONFIG_TCP_CONG_DCTCP=y
+CONFIG_TCP_CONG_BBR=y
+=======
+CONFIG_TCP_CONG_DCTCP=y
+CONFIG_TCP_CONG_BBR=y
+CONFIG_PM_WAKELOCKS=y
+>>>>>>> CHANGE (0714b79ecbc1f054fcbaaf1c583c15fac4cfcfbe FROMGIT: selftests/bpf: Add tests for wakeup_sources kfuncs)
