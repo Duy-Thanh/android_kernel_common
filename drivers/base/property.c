@@ -1036,7 +1036,57 @@ struct fwnode_handle *
 fwnode_graph_get_next_endpoint(const struct fwnode_handle *fwnode,
 			       struct fwnode_handle *prev)
 {
+<<<<<<< HEAD   (9c95f8b0c7048316cfcaac643f8cce18044018e5 Merge d1370a4f2aa0 ("device property: Allow secondary lookup)
 	return fwnode_call_ptr_op(fwnode, graph_get_next_endpoint, prev);
+||||||| BASE   (d1370a4f2aa0d811d419f6a6c6d257867d608956 device property: Allow secondary lookup in fwnode_get_next_c)
+	const struct fwnode_handle *parent;
+	struct fwnode_handle *ep;
+
+	/*
+	 * If this function is in a loop and the previous iteration returned
+	 * an endpoint from fwnode->secondary, then we need to use the secondary
+	 * as parent rather than @fwnode.
+	 */
+	if (prev)
+		parent = fwnode_graph_get_port_parent(prev);
+	else
+		parent = fwnode;
+	if (IS_ERR_OR_NULL(parent))
+		return NULL;
+
+	ep = fwnode_call_ptr_op(parent, graph_get_next_endpoint, prev);
+	if (ep)
+		return ep;
+
+	return fwnode_graph_get_next_endpoint(parent->secondary, NULL);
+=======
+	struct fwnode_handle *ep, *port_parent = NULL;
+	const struct fwnode_handle *parent;
+
+	/*
+	 * If this function is in a loop and the previous iteration returned
+	 * an endpoint from fwnode->secondary, then we need to use the secondary
+	 * as parent rather than @fwnode.
+	 */
+	if (prev) {
+		port_parent = fwnode_graph_get_port_parent(prev);
+		parent = port_parent;
+	} else {
+		parent = fwnode;
+	}
+	if (IS_ERR_OR_NULL(parent))
+		return NULL;
+
+	ep = fwnode_call_ptr_op(parent, graph_get_next_endpoint, prev);
+	if (ep)
+		goto out_put_port_parent;
+
+	ep = fwnode_graph_get_next_endpoint(parent->secondary, NULL);
+
+out_put_port_parent:
+	fwnode_handle_put(port_parent);
+	return ep;
+>>>>>>> BRANCH (49e5d20074c20b20773c6dc0f8dce0635591093b Linux 5.10.253)
 }
 EXPORT_SYMBOL_GPL(fwnode_graph_get_next_endpoint);
 
