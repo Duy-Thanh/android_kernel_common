@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ec9e1d_6fb8ed9d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6831c3d_defc6bc8",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2fb5b60_9067a896",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb62f774_5e90be3e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2fb5b60_9067a896",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "027c9278_9c78459b",
@@ -65,6 +101,24 @@
       "writtenOn": "2026-03-25T08:25:53Z",
       "side": 1,
       "message": "nit: Line too long.",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eb52f7a_53eb199f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "027c9278_9c78459b",
       "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -103,6 +157,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1bd9a81_e39f9db5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f286bfc4_9b1f2d0f",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81d7ad43_68c33947",
@@ -116,6 +188,24 @@
       "writtenOn": "2026-03-25T08:25:53Z",
       "side": 1,
       "message": "Everywhere in the hypervisor, end is excluded, I wouldn\u0027t change that. Remove the -1 and just change the comparison in the for loops in kasan_set_range() and kasan_check_range().",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "155eb53e_cb4c95fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d7ad43_68c33947",
       "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -137,6 +227,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92456311_32c9d70b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a8be8a7_75fb7637",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c975b2b_a695ee33",
@@ -150,6 +258,24 @@
       "writtenOn": "2026-03-25T08:25:53Z",
       "side": 1,
       "message": "nit: the line is too long. You can declare a struct hyp_allocator *allocator \u003d \u0026hyp_allocator; and use it instead. That would make the line short enough hopefully! (and also that would make the function look like hyp_alloc and hyp_free)",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486a23e2_cdfa400e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c975b2b_a695ee33",
       "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -171,6 +297,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6abd3fa3_60993ef5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da22dc5e_1c4c10ee",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fc493a3_cdaeb084",
@@ -188,6 +332,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "854b3cc1_db2e90a0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fc493a3_cdaeb084",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49e9c1fe_563391a6",
@@ -201,6 +363,24 @@
       "writtenOn": "2026-03-25T08:25:53Z",
       "side": 1,
       "message": "(unsigned long) cast",
+      "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d4e176_f63a5698",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-11T18:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e9c1fe_563391a6",
       "revId": "db40f6657fc1fef0d751bb1aa55521bc597f1157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
