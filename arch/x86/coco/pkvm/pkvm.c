@@ -185,6 +185,8 @@ __init void pkvm_guest_init_coco(void)
 	pv_ops.mmio.pci_mmcfg_writew = pkvm_mmio_writew;
 	pv_ops.mmio.pci_mmcfg_writel = pkvm_mmio_writel;
 
+	static_branch_enable(&pv_mmio);
+
 	apic_update_callback(wakeup_secondary_cpu, pkvm_wakeup_secondary_cpu);
 
 #ifdef CONFIG_VIRTIO_BALLOON_HYP_OPS
