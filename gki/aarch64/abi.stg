@@ -433053,6 +433053,11 @@ function {
   parameter_id: 0x0a193bb7
 }
 function {
+  id: 0xd630e79b
+  return_type_id: 0x1a8fcc43
+  parameter_id: 0x3e146274
+}
+function {
   id: 0xd673de47
   return_type_id: 0x02eb105a
   parameter_id: 0x02eb105a
@@ -480979,6 +480984,15 @@ elf_symbol {
   crc: 0x0ed4b370
   type_id: 0xd7432796
   full_name: "gpio_device_find"
+}
+elf_symbol {
+  id: 0xe346535b
+  name: "gpio_device_find_by_fwnode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x09041e3a
+  type_id: 0xd630e79b
+  full_name: "gpio_device_find_by_fwnode"
 }
 elf_symbol {
   id: 0xa2362332
@@ -532963,6 +532977,7 @@ interface {
   symbol_id: 0xd915e343
   symbol_id: 0x2b91f916
   symbol_id: 0xcf06489d
+  symbol_id: 0xe346535b
   symbol_id: 0xa2362332
   symbol_id: 0x6747ccfe
   symbol_id: 0xe39e3d07
