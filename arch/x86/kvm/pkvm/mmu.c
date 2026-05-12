@@ -304,15 +304,15 @@ static int fix_host_mmu_pgstate_walker(struct pkvm_pgtable_visit_ctx *ctx,
 				       void *const arg)
 {
 	const struct pkvm_pgtable_ops *pgt_ops = ctx->pgt->pgt_ops;
+	unsigned long phys = ctx->addr, size;
 	u64 pte;
 
+	size = pgt_ops->level_to_size(ctx->level);
+
 	if (pgt_ops->pte_present(ctx->ptep)) {
+		BUG_ON(pgt_ops->pte_to_phys(ctx->ptep) != ctx->addr);
+
 		/* A present pte could map either memory pages or MMIO pages. */
-		unsigned long phys, size;
-
-		phys = pgt_ops->pte_to_phys(ctx->ptep);
-		size = pgt_ops->level_to_size(ctx->level);
-
 		if (is_mmio_range(phys, size)) {
 			/*
 			 * Store PKVM_PAGE_OWNED page state in pte for the MMIO
@@ -332,17 +332,35 @@ static int fix_host_mmu_pgstate_walker(struct pkvm_pgtable_visit_ctx *ctx,
 			set_host_mem_pgstate(phys, size, PKVM_PAGE_OWNED, PKVM_ID_HOST);
 		}
 	} else {
-		/*
-		 * A non-present pte will be used by the pKVM hypervisor to
-		 * install MMIO mappings at runtime. Set the page state
-		 * as PKVM_PAGE_NONE to as it is non-present leaf. Meanwhile set
-		 * the owner ID as PKVM_ID_HYP so that only the pKVM hypervisor
-		 * can initiate the transition of this MMIO page to the host.
-		 */
-		pte = pgt_ops->pte_mk_pgstate(PKVM_PAGE_NONE) |
-		      pkvm_pte_mk_owner_id(PKVM_ID_HYP);
+		if (is_mmio_range(phys, size)) {
+			/*
+			 * A non-present MMIO pte will be used by the pKVM to
+			 * install MMIO mappings at runtime. Set the page state
+			 * as PKVM_PAGE_NONE since it is non-present leaf.
+			 * Meanwhile set the owner ID as PKVM_ID_HYP so that
+			 * only the pKVM can initiate the transition of this
+			 * MMIO page to the host.
+			 */
+			pte = pgt_ops->pte_mk_pgstate(PKVM_PAGE_NONE) |
+			      pkvm_pte_mk_owner_id(PKVM_ID_HYP);
 
-		pgt_ops->pte_set(ctx->ptep, pte);
+			pgt_ops->pte_set(ctx->ptep, pte);
+		} else if (is_memory_range(phys, size)) {
+			/*
+			 * A non-present memory PTE represents the unmapped pKVM
+			 * hypervisor's memory pages when creating the host MMU.
+			 * Set the page state as PKVM_PAGE_NONE and owner ID as
+			 * PKVM_ID_HYP to represent these pages are donated to
+			 * the pKVM.
+			 */
+			set_host_mem_pgstate(phys, size, PKVM_PAGE_NONE, PKVM_ID_HYP);
+		} else {
+			/*
+			 * A non-present PTE is neither MMIO nor memory, then it must
+			 * be a pvmfw range.
+			 */
+			BUG_ON(!is_pvmfw_range(phys, size));
+		}
 	}
 
 	return 0;
