@@ -200,7 +200,13 @@ static void mmio_flush_pending_writes(struct xe_mmio *mmio)
 		writel(0, mmio->regs + DUMMY_REG_OFFSET);
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 u8 xe_mmio_read8(struct xe_mmio *mmio, struct xe_reg reg)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+u8 xe_mmio_read8(struct xe_gt *gt, struct xe_reg reg)
+=======
+u8 __xe_mmio_read8(struct xe_mmio *mmio, struct xe_reg reg)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 	u8 val;
@@ -214,7 +220,13 @@ u8 xe_mmio_read8(struct xe_mmio *mmio, struct xe_reg reg)
 	return val;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 u16 xe_mmio_read16(struct xe_mmio *mmio, struct xe_reg reg)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+u16 xe_mmio_read16(struct xe_gt *gt, struct xe_reg reg)
+=======
+u16 __xe_mmio_read16(struct xe_mmio *mmio, struct xe_reg reg)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 	u16 val;
@@ -228,7 +240,13 @@ u16 xe_mmio_read16(struct xe_mmio *mmio, struct xe_reg reg)
 	return val;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 void xe_mmio_write32(struct xe_mmio *mmio, struct xe_reg reg, u32 val)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+void xe_mmio_write32(struct xe_gt *gt, struct xe_reg reg, u32 val)
+=======
+void __xe_mmio_write32(struct xe_mmio *mmio, struct xe_reg reg, u32 val)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 
@@ -240,7 +258,13 @@ void xe_mmio_write32(struct xe_mmio *mmio, struct xe_reg reg, u32 val)
 		writel(val, mmio->regs + addr);
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 u32 xe_mmio_read32(struct xe_mmio *mmio, struct xe_reg reg)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+u32 xe_mmio_read32(struct xe_gt *gt, struct xe_reg reg)
+=======
+u32 __xe_mmio_read32(struct xe_mmio *mmio, struct xe_reg reg)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 	u32 val;
@@ -258,7 +282,13 @@ u32 xe_mmio_read32(struct xe_mmio *mmio, struct xe_reg reg)
 	return val;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 u32 xe_mmio_rmw32(struct xe_mmio *mmio, struct xe_reg reg, u32 clr, u32 set)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+u32 xe_mmio_rmw32(struct xe_gt *gt, struct xe_reg reg, u32 clr, u32 set)
+=======
+u32 __xe_mmio_rmw32(struct xe_mmio *mmio, struct xe_reg reg, u32 clr, u32 set)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 old, reg_val;
 
@@ -269,8 +299,16 @@ u32 xe_mmio_rmw32(struct xe_mmio *mmio, struct xe_reg reg, u32 clr, u32 set)
 	return old;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 int xe_mmio_write32_and_verify(struct xe_mmio *mmio,
 			       struct xe_reg reg, u32 val, u32 mask, u32 eval)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+int xe_mmio_write32_and_verify(struct xe_gt *gt,
+			       struct xe_reg reg, u32 val, u32 mask, u32 eval)
+=======
+int __xe_mmio_write32_and_verify(struct xe_mmio *mmio,
+				 struct xe_reg reg, u32 val, u32 mask, u32 eval)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 reg_val;
 
@@ -280,9 +318,19 @@ int xe_mmio_write32_and_verify(struct xe_mmio *mmio,
 	return (reg_val & mask) != eval ? -EINVAL : 0;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 bool xe_mmio_in_range(const struct xe_mmio *mmio,
 		      const struct xe_mmio_range *range,
 		      struct xe_reg reg)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+bool xe_mmio_in_range(const struct xe_gt *gt,
+		      const struct xe_mmio_range *range,
+		      struct xe_reg reg)
+=======
+bool __xe_mmio_in_range(const struct xe_mmio *mmio,
+			const struct xe_mmio_range *range,
+			struct xe_reg reg)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	u32 addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 
@@ -311,17 +359,41 @@ bool xe_mmio_in_range(const struct xe_mmio *mmio,
  *
  * Returns the value of the 64-bit register.
  */
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 u64 xe_mmio_read64_2x32(struct xe_mmio *mmio, struct xe_reg reg)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+u64 xe_mmio_read64_2x32(struct xe_gt *gt, struct xe_reg reg)
+=======
+u64 __xe_mmio_read64_2x32(struct xe_mmio *mmio, struct xe_reg reg)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	struct xe_reg reg_udw = { .addr = reg.addr + 0x4 };
 	u32 ldw, udw, oldudw, retries;
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	reg.addr = xe_mmio_adjusted_addr(mmio, reg.addr);
 	reg_udw.addr = xe_mmio_adjusted_addr(mmio, reg_udw.addr);
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	reg.addr = xe_mmio_adjusted_addr(gt, reg.addr);
+	reg_udw.addr = xe_mmio_adjusted_addr(gt, reg_udw.addr);
+=======
+	/*
+	 * The two dwords of a 64-bit register can never straddle the offset
+	 * adjustment cutoff.
+	 */
+	xe_tile_assert(mmio->tile, !in_range(mmio->adj_limit, reg.addr + 1, 7));
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	/* we shouldn't adjust just one register address */
 	xe_tile_assert(mmio->tile, reg_udw.addr == reg.addr + 0x4);
 
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	/* we shouldn't adjust just one register address */
+	xe_gt_assert(gt, reg_udw.addr == reg.addr + 0x4);
+
+=======
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 	oldudw = xe_mmio_read32(mmio, reg_udw);
 	for (retries = 5; retries; --retries) {
 		ldw = xe_mmio_read32(mmio, reg);
@@ -339,8 +411,16 @@ u64 xe_mmio_read64_2x32(struct xe_mmio *mmio, struct xe_reg reg)
 	return (u64)udw << 32 | ldw;
 }
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 static int __xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
 			    u32 *out_val, bool atomic, bool expect_match)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+static int __xe_mmio_wait32(struct xe_gt *gt, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+			    u32 *out_val, bool atomic, bool expect_match)
+=======
+static int ____xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+			      u32 *out_val, bool atomic, bool expect_match)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
 	ktime_t cur = ktime_get_raw();
 	const ktime_t end = ktime_add_us(cur, timeout_us);
@@ -411,10 +491,24 @@ static int __xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u
  * @timeout_us for different reasons, specially in non-atomic contexts. Thus,
  * it is possible that this function succeeds even after @timeout_us has passed.
  */
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 int xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
 		   u32 *out_val, bool atomic)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+int xe_mmio_wait32(struct xe_gt *gt, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+		   u32 *out_val, bool atomic)
+=======
+int __xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+		     u32 *out_val, bool atomic)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	return __xe_mmio_wait32(mmio, reg, mask, val, timeout_us, out_val, atomic, true);
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	return __xe_mmio_wait32(gt, reg, mask, val, timeout_us, out_val, atomic, true);
+=======
+	return ____xe_mmio_wait32(mmio, reg, mask, val, timeout_us, out_val, atomic, true);
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 }
 
 /**
@@ -430,8 +524,22 @@ int xe_mmio_wait32(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u
  * This function works exactly like xe_mmio_wait32() with the exception that
  * @val is expected not to be matched.
  */
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 int xe_mmio_wait32_not(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
 		       u32 *out_val, bool atomic)
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+int xe_mmio_wait32_not(struct xe_gt *gt, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+		       u32 *out_val, bool atomic)
+=======
+int __xe_mmio_wait32_not(struct xe_mmio *mmio, struct xe_reg reg, u32 mask, u32 val, u32 timeout_us,
+			 u32 *out_val, bool atomic)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 {
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	return __xe_mmio_wait32(mmio, reg, mask, val, timeout_us, out_val, atomic, false);
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	return __xe_mmio_wait32(gt, reg, mask, val, timeout_us, out_val, atomic, false);
+=======
+	return ____xe_mmio_wait32(mmio, reg, mask, val, timeout_us, out_val, atomic, false);
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 }

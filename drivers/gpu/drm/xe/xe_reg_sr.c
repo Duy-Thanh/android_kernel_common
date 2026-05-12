@@ -102,10 +102,12 @@ int xe_reg_sr_add(struct xe_reg_sr *sr,
 	*pentry = *e;
 	ret = xa_err(xa_store(&sr->xa, idx, pentry, GFP_KERNEL));
 	if (ret)
-		goto fail;
+		goto fail_free;
 
 	return 0;
 
+fail_free:
+	kfree(pentry);
 fail:
 	xe_gt_err(gt,
 		  "discarding save-restore reg %04lx (clear: %08x, set: %08x, masked: %s, mcr: %s): ret=%d\n",
@@ -176,14 +178,30 @@ void xe_reg_sr_apply_mmio(struct xe_reg_sr *sr, struct xe_gt *gt)
 
 	xe_gt_dbg(gt, "Applying %s save-restore MMIOs\n", sr->name);
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
 	if (!xe_force_wake_ref_has_domain(fw_ref, XE_FORCEWAKE_ALL))
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	err = xe_force_wake_get(&gt->mmio.fw, XE_FORCEWAKE_ALL);
+	if (err)
+=======
+	err = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	if (err)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 		goto err_force_wake;
 
 	xa_for_each(&sr->xa, reg, entry)
 		apply_one_mmio(gt, entry);
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	xe_force_wake_put(gt_to_fw(gt), fw_ref);
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	err = xe_force_wake_put(&gt->mmio.fw, XE_FORCEWAKE_ALL);
+	XE_WARN_ON(err);
+=======
+	err = xe_force_wake_put(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	XE_WARN_ON(err);
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 
 	return;
 
@@ -209,8 +227,16 @@ void xe_reg_sr_apply_whitelist(struct xe_hw_engine *hwe)
 
 	drm_dbg(&xe->drm, "Whitelisting %s registers\n", sr->name);
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	fw_ref = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
 	if (!xe_force_wake_ref_has_domain(fw_ref, XE_FORCEWAKE_ALL))
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	err = xe_force_wake_get(&gt->mmio.fw, XE_FORCEWAKE_ALL);
+	if (err)
+=======
+	err = xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	if (err)
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 		goto err_force_wake;
 
 	p = drm_dbg_printer(&xe->drm, DRM_UT_DRIVER, NULL);
@@ -235,7 +261,15 @@ void xe_reg_sr_apply_whitelist(struct xe_hw_engine *hwe)
 		xe_mmio_write32(&gt->mmio, RING_FORCE_TO_NONPRIV(mmio_base, slot), addr);
 	}
 
+<<<<<<< TARGET BRANCH (20a1d6f1c48a1cdea99c1ffff1d7812dbbf3e0d1 ANDROID: ABI: Update the symbol list for mtk am: 1c5ded243b)
 	xe_force_wake_put(gt_to_fw(gt), fw_ref);
+||||||| BASE          (1c5ded243bc242777bc62632c082c086b90ed490 ANDROID: ABI: Update the symbol list for mtk)
+	err = xe_force_wake_put(&gt->mmio.fw, XE_FORCEWAKE_ALL);
+	XE_WARN_ON(err);
+=======
+	err = xe_force_wake_put(gt_to_fw(gt), XE_FORCEWAKE_ALL);
+	XE_WARN_ON(err);
+>>>>>>> SOURCE BRANCH (1cbb81cdf8fc5fa7f6735899639a7a5d1bb5be35 Merge tag 'android16-6.12.77_r00' into android16-6.12)
 
 	return;
 
