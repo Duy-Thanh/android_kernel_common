@@ -145,6 +145,12 @@ int strset__add_str(struct strset *set, const char *s)
 	void *p;
 	int err;
 
+	if (set->strs_data &&
+	    s >= (const char *)set->strs_data &&
+	    s < (const char *)set->strs_data + set->strs_data_len) {
+		return s - (const char *)set->strs_data;
+	}
+
 	/* Hashmap keys are always offsets within set->strs_data, so to even
 	 * look up some string from the "outside", we need to first append it
 	 * at the end, so that it can be addressed with an offset. Luckily,
