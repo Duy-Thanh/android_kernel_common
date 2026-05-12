@@ -177,6 +177,12 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 		return -EINVAL;
 	}
 
+	if (!list_empty(&domain->cache_tags)) {
+		pkvm_err("%s: cache_tags are not freed yet for domain pgd: %p\n",
+			 __func__, pgd);
+		return -EBUSY;
+	}
+
 	if (atomic_cmpxchg(&domain->refcount, 1, 0) != 1) {
 		pkvm_err("%s: domain[pgd:%p] has users, refcount %d\n",
 			 __func__, domain->pgd, atomic_read(&domain->refcount));
