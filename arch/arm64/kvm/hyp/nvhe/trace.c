@@ -288,12 +288,22 @@ static int rb_update_footers(struct hyp_rb_per_cpu *cpu_buffer)
 	return 0;
 }
 
+static int load_page(void *page)
+{
+	return hyp_pin_shared_mem(page, page + PAGE_SIZE);
+}
+
+static void unload_page(void *page)
+{
+	hyp_unpin_shared_mem(page, page + PAGE_SIZE);
+}
+
 static int rb_page_init(struct hyp_buffer_page *bpage, unsigned long hva)
 {
 	void *hyp_va = (void *)kern_hyp_va(hva);
 	int ret;
 
-	ret = hyp_pin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
+	ret = load_page(hyp_va);
 	if (ret)
 		return ret;
 
@@ -352,7 +362,18 @@ static void rb_cpu_teardown(struct hyp_rb_per_cpu *cpu_buffer)
 	if (!rb_cpu_loaded(cpu_buffer))
 		return;
 
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	rb_cpu_disable(cpu_buffer);
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+	rb_cpu_disable_writing(cpu_buffer);
+
+	hyp_unpin_shared_mem((void *)cpu_buffer->meta,
+			     (void *)(cpu_buffer->meta) + PAGE_SIZE);
+=======
+	rb_cpu_disable_writing(cpu_buffer);
+
+	unload_page(cpu_buffer->meta);
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 
 	for (i = 0; i < cpu_buffer->nr_pages; i++) {
 		struct hyp_buffer_page *bpage = &cpu_buffer->bpages[i];
@@ -360,8 +381,7 @@ static void rb_cpu_teardown(struct hyp_rb_per_cpu *cpu_buffer)
 		if (!bpage->page)
 			continue;
 
-		hyp_unpin_shared_mem((void *)bpage->page,
-				     (void *)bpage->page + PAGE_SIZE);
+		unload_page(bpage->page);
 	}
 
 	cpu_buffer->bpages = NULL;
@@ -394,7 +414,13 @@ static bool rb_cpu_fits_pack(struct ring_buffer_pack *rb_pack,
 static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page *start,
 		       struct hyp_rb_per_cpu *cpu_buffer)
 {
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	struct hyp_buffer_page *bpage = start;
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+	struct hyp_buffer_page *bpage;
+=======
+	struct hyp_buffer_page *bpages, *bpage;
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 	int i, ret;
 
 	if (!rb_pack->nr_pages ||
@@ -403,26 +429,88 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 
 	memset(cpu_buffer, 0, sizeof(*cpu_buffer));
 
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	cpu_buffer->bpages = start;
 	cpu_buffer->nr_pages = rb_pack->nr_pages + 1;
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+	bpage = hyp_alloc(sizeof(*bpage) * pdesc->nr_page_va);
+	if (!bpage)
+		return hyp_alloc_errno();
+	cpu_buffer->bpages = bpage;
+
+	cpu_buffer->meta = (struct ring_buffer_meta *)kern_hyp_va(pdesc->meta_va);
+	ret = hyp_pin_shared_mem((void *)cpu_buffer->meta,
+				 ((void *)cpu_buffer->meta) + PAGE_SIZE);
+	if (ret) {
+		hyp_free(cpu_buffer->bpages);
+		cpu_buffer->bpages = NULL;
+		return ret;
+	}
+
+	memset(cpu_buffer->meta, 0, sizeof(*cpu_buffer->meta));
+	cpu_buffer->meta->meta_page_size = PAGE_SIZE;
+	cpu_buffer->meta->nr_data_pages = cpu_buffer->nr_pages;
+=======
+	memset(cpu_buffer, 0, sizeof(*cpu_buffer));
+
+	bpage = bpages = hyp_alloc(sizeof(*bpages) * pdesc->nr_page_va);
+	if (!bpages)
+		return hyp_alloc_errno();
+
+	cpu_buffer->meta = (struct ring_buffer_meta *)kern_hyp_va(pdesc->meta_va);
+	ret = load_page(cpu_buffer->meta);
+	if (ret)
+		goto err_free_bpages;
+
+	memset(cpu_buffer->meta, 0, sizeof(*cpu_buffer->meta));
+	cpu_buffer->meta->meta_page_size = PAGE_SIZE;
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 
 	/* The reader page is not part of the ring initially */
 	ret = rb_page_init(bpage, rb_pack->reader_page_va);
 	if (ret)
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 		return ret;
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+		goto err;
+
+	cpu_buffer->nr_pages = 1;
+=======
+		goto err_unload_meta;
+
+	cpu_buffer->nr_pages = 1;
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 
 	cpu_buffer->reader_page = bpage;
 	cpu_buffer->tail_page = bpage + 1;
 	cpu_buffer->head_page = bpage + 1;
 
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	for (i = 0; i < rb_pack->nr_pages; i++) {
 		ret = rb_page_init(++bpage, rb_pack->page_va[i]);
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+	for (i = 1; i < pdesc->nr_page_va; i++) {
+		ret = rb_page_init(++bpage, pdesc->page_va[i]);
+=======
+	for (i = 1; i < pdesc->nr_page_va; i++) {
+		bpage = &bpages[i];
+		ret = rb_page_init(bpage, pdesc->page_va[i]);
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 		if (ret)
-			goto err;
+			break;
 
 		bpage->list.next = &(bpage + 1)->list;
 		bpage->list.prev = &(bpage - 1)->list;
 	}
+
+	if (ret) {
+		while (i--)
+			unload_page(bpages[i].page);
+
+		goto err_unload_meta;
+	}
+
+	cpu_buffer->meta->nr_data_pages = cpu_buffer->nr_pages;
 
 	/* Close the ring */
 	bpage->list.next = &cpu_buffer->tail_page->list;
@@ -431,16 +519,26 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 	/* The last init'ed page points to the head page */
 	rb_set_flag(bpage, HYP_RB_PAGE_HEAD);
 
+<<<<<<< HEAD   (b28955bde980eb66496cdb805703de4a0268d453 UPSTREAM: net: skbuff: propagate shared-frag marker through )
 	rb_footer_reader_status(cpu_buffer->reader_page, RB_PAGE_FT_READER);
 	rb_footer_reader_status(cpu_buffer->head_page, RB_PAGE_FT_HEAD);
 	rb_footer_writer_status(cpu_buffer->head_page, RB_PAGE_FT_COMMIT);
 
 	atomic_set(&cpu_buffer->overrun, 0);
 	atomic64_set(&cpu_buffer->write_stamp, 0);
+||||||| BASE   (36455e99b8c4e9baf362e914ed79680435d6b155 ANDROID: firmware: arm_ffa: Remove unused variable)
+	cpu_buffer->last_overrun = 0;
+=======
+	cpu_buffer->last_overrun = 0;
+	cpu_buffer->bpages = bpages;
+>>>>>>> CHANGE (e46b3a946c957ab463a8abf9333dea702e8a485e ANDROID: KVM: arm64: Remove rb_cpu_teardown from rb_cpu_init)
 
 	return 0;
-err:
-	rb_cpu_teardown(cpu_buffer);
+
+err_unload_meta:
+	unload_page(cpu_buffer->meta);
+err_free_bpages:
+	hyp_free(bpages);
 
 	return ret;
 }
