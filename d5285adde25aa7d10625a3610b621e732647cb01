@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139c348b_2f096259",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-12T23:03:05Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027zhe...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027zhengqi.arch@bytedance.com\nCherry pick author: \u0027jordanchang@google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x 2686d514c345243e06dba40298a13c7803400a61`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "d5285adde25aa7d10625a3610b621e732647cb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f50351_abf81619",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-12T23:03:05Z",
+      "side": 1,
+      "message": "The patch seems to be the same as upstream. Sounds like you had a merge conflict due to some surrounding code. In such cases you can simply say \"Resolved trivial merge conflicts\".",
+      "range": {
+        "startLine": 15,
+        "startChar": 24,
+        "endLine": 15,
+        "endChar": 169
+      },
+      "revId": "d5285adde25aa7d10625a3610b621e732647cb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
