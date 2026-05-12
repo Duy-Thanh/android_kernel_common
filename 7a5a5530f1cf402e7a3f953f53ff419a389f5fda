@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105dda77_df8b736c",
+        "filename": "gki/aarch64/abi.stg.allowed_breaks",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-05-12T17:07:28Z",
+      "side": 1,
+      "message": "CRC and ABI changes are not allowed.\n\nPlease rework patchset to not change ABI. If it is not possible, you would have to merge it to \"KMI Thaw\" branches, please refer to \"GKI Development Release Notes\" for the information about KMI Thaw.",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 25
+      },
+      "revId": "7a5a5530f1cf402e7a3f953f53ff419a389f5fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
