@@ -1155,6 +1155,7 @@ config ARM64_ERRATUM_3194386
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD   (29e5deb67d8e6841040a11f1d179f9992faef581 Merge ee5ce483d428 ("arm64: cputype: Add C1-Pro definitions")
 config ARM64_ERRATUM_4311569
 	bool "SI L1: 4311569: workaround for premature CMO completion erratum"
 	default y
@@ -1171,6 +1172,18 @@ config ARM64_ERRATUM_4311569
 	  second loop of Cache Maintenance Operation (CMO) immediately following the
 	  end of function to do CMOs. This ensures that the data is correctly serialized
 	  before the buffer is handed off to a non-coherent agent.
+||||||| BASE   (ee5ce483d42809b6c9e5bb25c33601e54229128f arm64: cputype: Add C1-Pro definitions)
+=======
+config ARM64_ERRATUM_4193714
+	bool "C1-Pro: 4193714: SME DVMSync early acknowledgement"
+	depends on ARM64_SME
+	default y
+	help
+	  Enable workaround for C1-Pro acknowledging the DVMSync before
+	  the SME memory accesses are complete. This will cause TLB
+	  maintenance for processes using SME to also issue an IPI to
+	  the affected CPUs.
+>>>>>>> BRANCH (c6c87a23de4bdf5a8a8a26d9d269f4026e35afef arm64: errata: Work around early CME DVMSync acknowledgement)
 
 	  If unsure, say Y.
 
