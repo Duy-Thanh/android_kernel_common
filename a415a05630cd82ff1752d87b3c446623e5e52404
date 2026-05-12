@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1583a6f5_434f8477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-12T16:49:53Z",
+      "side": 1,
+      "message": "Bypassing checkpatch due to b/510739119",
+      "revId": "a415a05630cd82ff1752d87b3c446623e5e52404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
