@@ -334,9 +334,6 @@ void pci_bus_add_device(struct pci_dev *dev)
 	struct platform_device *pdev;
 	int retval;
 
-	/* Save config space for error recoverability */
-	pci_save_state(dev);
-
 	/*
 	 * Can not put in pci_device_add yet because resources
 	 * are not assigned yet for some devices.
@@ -349,6 +346,7 @@ void pci_bus_add_device(struct pci_dev *dev)
 	pci_proc_attach_device(dev);
 	pci_bridge_d3_update(dev);
 
+<<<<<<< HEAD   (ba2ee96f6e689846a490e4e1be14a37c19b6699e Merge 6.12.82 into android16-6.12-lts)
 	/*
 	 * If the PCI device is associated with a pwrctrl device with a
 	 * power supply, create a device link between the PCI device and
@@ -373,6 +371,11 @@ void pci_bus_add_device(struct pci_dev *dev)
 	 * configured completely.
 	 */
 	pm_runtime_enable(&dev->dev);
+||||||| BASE   (d75ae3350fe8a29588a3f489952d06928cb85675 Linux 6.12.82)
+=======
+	/* Save config space for error recoverability */
+	pci_save_state(dev);
+>>>>>>> BRANCH (eefc95626b5cb02ea6268d1ae58237768004a60d Linux 6.12.83)
 
 	dev->match_driver = !dn || of_device_is_available(dn);
 	retval = device_attach(&dev->dev);
