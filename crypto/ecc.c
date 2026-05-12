@@ -90,24 +90,33 @@ void ecc_digits_from_bytes(const u8 *in, unsigned int nbytes,
 }
 EXPORT_SYMBOL(ecc_digits_from_bytes);
 
-struct ecc_point *ecc_alloc_point(unsigned int ndigits)
+static u64 *ecc_alloc_digits_space(unsigned int ndigits)
 {
-	struct ecc_point *p;
-	size_t ndigits_sz;
+	size_t len = ndigits * sizeof(u64);
 
-	if (!ndigits)
+	if (!len)
 		return NULL;
 
-	p = kmalloc(sizeof(*p), GFP_KERNEL);
+	return kmalloc(len, GFP_KERNEL);
+}
+
+static void ecc_free_digits_space(u64 *space)
+{
+	kfree_sensitive(space);
+}
+
+struct ecc_point *ecc_alloc_point(unsigned int ndigits)
+{
+	struct ecc_point *p = kmalloc(sizeof(*p), GFP_KERNEL);
+
 	if (!p)
 		return NULL;
 
-	ndigits_sz = ndigits * sizeof(u64);
-	p->x = kmalloc(ndigits_sz, GFP_KERNEL);
+	p->x = ecc_alloc_digits_space(ndigits);
 	if (!p->x)
 		goto err_alloc_x;
 
-	p->y = kmalloc(ndigits_sz, GFP_KERNEL);
+	p->y = ecc_alloc_digits_space(ndigits);
 	if (!p->y)
 		goto err_alloc_y;
 
@@ -116,7 +125,7 @@ struct ecc_point *ecc_alloc_point(unsigned int ndigits)
 	return p;
 
 err_alloc_y:
-	kfree(p->x);
+	ecc_free_digits_space(p->x);
 err_alloc_x:
 	kfree(p);
 	return NULL;

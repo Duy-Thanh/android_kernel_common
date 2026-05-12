@@ -228,7 +228,7 @@ static struct pci_tsm *dsm_probe(struct tsm_dev *tsmdev, struct pci_dev *pdev)
 
 	if (is_pci_tsm_pf0(pdev))
 		return tio_pf0_probe(pdev, sev);
-	return NULL;
+	return 0;
 }
 
 static void dsm_remove(struct pci_tsm *tsm)

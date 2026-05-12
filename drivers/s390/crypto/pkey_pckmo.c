@@ -215,8 +215,7 @@ out:
 }
 
 static int pckmo_key2protkey(const u8 *key, u32 keylen,
-			     u8 *protkey, u32 *protkeylen, u32 *protkeytype,
-			     u32 xflags)
+			     u8 *protkey, u32 *protkeylen, u32 *protkeytype)
 {
 	struct keytoken_header *hdr = (struct keytoken_header *)key;
 	int rc = -EINVAL;
@@ -267,11 +266,6 @@ static int pckmo_key2protkey(const u8 *key, u32 keylen,
 		struct clearkeytoken *t = (struct clearkeytoken *)key;
 		u32 keysize;
 
-		if (xflags & PKEY_XFLAG_NOCLEARKEY) {
-			PKEY_DBF_ERR("%s clear key token but xflag NOCLEARKEY\n",
-				     __func__);
-			goto out;
-		}
 		if (keylen < sizeof(*t) ||
 		    keylen < sizeof(*t) + t->len)
 			goto out;
@@ -412,10 +406,10 @@ static int pkey_pckmo_key2protkey(const struct pkey_apqn *_apqns,
 				  size_t _nr_apqns,
 				  const u8 *key, u32 keylen,
 				  u8 *protkey, u32 *protkeylen, u32 *keyinfo,
-				  u32 xflags)
+				  u32 _xflags __always_unused)
 {
 	return pckmo_key2protkey(key, keylen,
-				 protkey, protkeylen, keyinfo, xflags);
+				 protkey, protkeylen, keyinfo);
 }
 
 static int pkey_pckmo_gen_key(const struct pkey_apqn *_apqns, size_t _nr_apqns,

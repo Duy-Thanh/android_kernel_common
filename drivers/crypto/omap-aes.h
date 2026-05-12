@@ -98,7 +98,7 @@ struct omap_aes_ctx {
 
 struct omap_aes_gcm_ctx {
 	struct omap_aes_ctx	octx;
-	struct aes_enckey	akey;
+	struct crypto_aes_ctx	actx;
 };
 
 struct omap_aes_reqctx {

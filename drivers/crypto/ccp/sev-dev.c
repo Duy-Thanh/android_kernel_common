@@ -127,6 +127,13 @@ static size_t sev_es_tmr_size = SEV_TMR_SIZE;
 #define NV_LENGTH (32 * 1024)
 static void *sev_init_ex_buffer;
 
+/*
+ * SEV_DATA_RANGE_LIST:
+ *   Array containing range of pages that firmware transitions to HV-fixed
+ *   page state.
+ */
+static struct sev_data_range_list *snp_range_list;
+
 static void __sev_firmware_shutdown(struct sev_device *sev, bool panic);
 
 static int snp_shutdown_on_panic(struct notifier_block *nb,
@@ -1354,7 +1361,6 @@ static int snp_filter_reserved_mem_regions(struct resource *rs, void *arg)
 
 static int __sev_snp_init_locked(int *error, unsigned int max_snp_asid)
 {
-	struct sev_data_range_list *snp_range_list __free(kfree) = NULL;
 	struct psp_device *psp = psp_master;
 	struct sev_data_snp_init_ex data;
 	struct sev_device *sev;
@@ -2372,10 +2378,11 @@ e_free_pdh:
 static int sev_ioctl_do_snp_platform_status(struct sev_issue_cmd *argp)
 {
 	struct sev_device *sev = psp_master->sev_data;
+	bool shutdown_required = false;
 	struct sev_data_snp_addr buf;
 	struct page *status_page;
+	int ret, error;
 	void *data;
-	int ret;
 
 	if (!argp->data)
 		return -EINVAL;
@@ -2386,35 +2393,31 @@ static int sev_ioctl_do_snp_platform_status(struct sev_issue_cmd *argp)
 
 	data = page_address(status_page);
 
-	/*
-	 * SNP_PLATFORM_STATUS can be executed in any SNP state. But if executed
-	 * when SNP has been initialized, the status page must be firmware-owned.
-	 */
-	if (sev->snp_initialized) {
-		/*
-		 * Firmware expects the status page to be in Firmware state,
-		 * otherwise it will report an error INVALID_PAGE_STATE.
-		 */
-		if (rmp_mark_pages_firmware(__pa(data), 1, true)) {
-			ret = -EFAULT;
+	if (!sev->snp_initialized) {
+		ret = snp_move_to_init_state(argp, &shutdown_required);
+		if (ret)
 			goto cleanup;
-		}
+	}
+
+	/*
+	 * Firmware expects status page to be in firmware-owned state, otherwise
+	 * it will report firmware error code INVALID_PAGE_STATE (0x1A).
+	 */
+	if (rmp_mark_pages_firmware(__pa(data), 1, true)) {
+		ret = -EFAULT;
+		goto cleanup;
 	}
 
 	buf.address = __psp_pa(data);
 	ret = __sev_do_cmd_locked(SEV_CMD_SNP_PLATFORM_STATUS, &buf, &argp->error);
 
-	if (sev->snp_initialized) {
-		/*
-		 * The status page will be in Reclaim state on success, or left
-		 * in Firmware state on failure. Use snp_reclaim_pages() to
-		 * transition either case back to Hypervisor-owned state.
-		 */
-		if (snp_reclaim_pages(__pa(data), 1, true)) {
-			snp_leak_pages(__page_to_pfn(status_page), 1);
-			return -EFAULT;
-		}
-	}
+	/*
+	 * Status page will be transitioned to Reclaim state upon success, or
+	 * left in Firmware state in failure. Use snp_reclaim_pages() to
+	 * transition either case back to Hypervisor-owned state.
+	 */
+	if (snp_reclaim_pages(__pa(data), 1, true))
+		return -EFAULT;
 
 	if (ret)
 		goto cleanup;
@@ -2424,6 +2427,9 @@ static int sev_ioctl_do_snp_platform_status(struct sev_issue_cmd *argp)
 		ret = -EFAULT;
 
 cleanup:
+	if (shutdown_required)
+		__sev_snp_shutdown_locked(&error, false);
+
 	__free_pages(status_page, 0);
 	return ret;
 }
@@ -2772,6 +2778,11 @@ static void __sev_firmware_shutdown(struct sev_device *sev, bool panic)
 					  get_order(NV_LENGTH),
 					  true);
 		sev_init_ex_buffer = NULL;
+	}
+
+	if (snp_range_list) {
+		kfree(snp_range_list);
+		snp_range_list = NULL;
 	}
 
 	__sev_snp_shutdown_locked(&error, panic);

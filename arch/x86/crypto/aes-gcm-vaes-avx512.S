@@ -86,13 +86,10 @@
 #define NUM_H_POWERS		16
 
 // Offset to AES key length (in bytes) in the key struct
-#define OFFSETOF_AESKEYLEN	0
-
-// Offset to AES round keys in the key struct
-#define OFFSETOF_AESROUNDKEYS	16
+#define OFFSETOF_AESKEYLEN	480
 
 // Offset to start of hash key powers array in the key struct
-#define OFFSETOF_H_POWERS	320
+#define OFFSETOF_H_POWERS	512
 
 // Offset to end of hash key powers array in the key struct.
 //
@@ -304,9 +301,9 @@ SYM_FUNC_START(aes_gcm_precompute_vaes_avx512)
 
 	// Encrypt an all-zeroes block to get the raw hash subkey.
 	movl		OFFSETOF_AESKEYLEN(KEY), %eax
-	lea		OFFSETOF_AESROUNDKEYS+6*16(KEY,%rax,4), RNDKEYLAST_PTR
-	vmovdqu		OFFSETOF_AESROUNDKEYS(KEY), %xmm0
-	add		$OFFSETOF_AESROUNDKEYS+16, KEY
+	lea		6*16(KEY,%rax,4), RNDKEYLAST_PTR
+	vmovdqu		(KEY), %xmm0  // Zero-th round key XOR all-zeroes block
+	add		$16, KEY
 1:
 	vaesenc		(KEY), %xmm0, %xmm0
 	add		$16, KEY
@@ -793,8 +790,8 @@ SYM_FUNC_END(aes_gcm_aad_update_vaes_avx512)
 	// Make RNDKEYLAST_PTR point to the last AES round key.  This is the
 	// round key with index 10, 12, or 14 for AES-128, AES-192, or AES-256
 	// respectively.  Then load the zero-th and last round keys.
-	lea		OFFSETOF_AESROUNDKEYS+6*16(KEY,AESKEYLEN64,4), RNDKEYLAST_PTR
-	vbroadcasti32x4	OFFSETOF_AESROUNDKEYS(KEY), RNDKEY0
+	lea		6*16(KEY,AESKEYLEN64,4), RNDKEYLAST_PTR
+	vbroadcasti32x4	(KEY), RNDKEY0
 	vbroadcasti32x4	(RNDKEYLAST_PTR), RNDKEYLAST
 
 	// Finish initializing LE_CTR by adding [0, 1, ...] to its low words.
@@ -837,7 +834,7 @@ SYM_FUNC_END(aes_gcm_aad_update_vaes_avx512)
 	// Encrypt the first 4 vectors of plaintext blocks.  Leave the resulting
 	// ciphertext in GHASHDATA[0-3] for GHASH.
 	_ctr_begin_4x
-	lea		OFFSETOF_AESROUNDKEYS+16(KEY), %rax
+	lea		16(KEY), %rax
 1:
 	vbroadcasti32x4	(%rax), RNDKEY
 	_vaesenc_4x	RNDKEY
@@ -960,7 +957,7 @@ SYM_FUNC_END(aes_gcm_aad_update_vaes_avx512)
 	vpshufb		BSWAP_MASK, LE_CTR, %zmm0
 	vpaddd		LE_CTR_INC, LE_CTR, LE_CTR
 	vpxord		RNDKEY0, %zmm0, %zmm0
-	lea		OFFSETOF_AESROUNDKEYS+16(KEY), %rax
+	lea		16(KEY), %rax
 1:
 	vbroadcasti32x4	(%rax), RNDKEY
 	vaesenc		RNDKEY, %zmm0, %zmm0
@@ -1090,12 +1087,12 @@ SYM_FUNC_END(aes_gcm_aad_update_vaes_avx512)
 .endif
 
 	// Make %rax point to the last AES round key for the chosen AES variant.
-	lea		OFFSETOF_AESROUNDKEYS+6*16(KEY,AESKEYLEN64,4), %rax
+	lea		6*16(KEY,AESKEYLEN64,4), %rax
 
 	// Start the AES encryption of the counter block by swapping the counter
 	// block to big-endian and XOR-ing it with the zero-th AES round key.
 	vpshufb		BSWAP_MASK, LE_CTR, %xmm0
-	vpxor		OFFSETOF_AESROUNDKEYS(KEY), %xmm0, %xmm0
+	vpxor		(KEY), %xmm0, %xmm0
 
 	// Complete the AES encryption and multiply GHASH_ACC by H^1.
 	// Interleave the AES and GHASH instructions to improve performance.
