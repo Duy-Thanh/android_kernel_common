@@ -443,6 +443,24 @@
       "parentUuid": "a7cece00_021069da",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3523691_17402fd7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-12T10:45:55Z",
+      "side": 1,
+      "message": "Thanks for sharing the insight on using READ_ONCE!\n\nMaybe the READ_ONCE usage guidelines in the hypervisor could be summarized as:\n#1.If host-writable data controls code execution or is used to check conditions (e.g., size, boundary), READ_ONCE is mandatory to prevent ToCToU issues.\n#2.If the host-writable data is passed directly to the guest VM without hypervisor intervention, `READ_ONCE` is optional.",
+      "parentUuid": "863a3bde_4586f276",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
