@@ -104,6 +104,12 @@ static inline bool overlaps_pvmfw(unsigned long phys, unsigned long size)
 				(phys + size > pvmfw_base);
 }
 
+static inline bool is_pvmfw_range(unsigned long phys, unsigned long size)
+{
+	return pvmfw_present && (phys >= pvmfw_base) &&
+				(phys + size <= pvmfw_base + pvmfw_size);
+}
+
 bool pkvm_find_addr_range(unsigned long phys, struct range *range);
 
 static inline bool is_memory_range(unsigned long phys, unsigned long size)
