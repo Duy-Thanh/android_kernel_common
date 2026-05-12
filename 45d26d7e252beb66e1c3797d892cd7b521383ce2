@@ -33,6 +33,24 @@
       "message": "So, AI review pointed out this causes util_est_update() to reference p after dequeue_entities() finishes.   I know with proxy there were a lot of similar races around ttwu races where once dequeued, the task may get woken on another cpu, effectively changing the ownership, and any references I made to it could cause corruption.\n\nIs this not a concern here?",
       "revId": "45d26d7e252beb66e1c3797d892cd7b521383ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c18f0d5_9bb4c701",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7423,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-12T17:51:10Z",
+      "side": 1,
+      "message": "https://sashiko.dev/#/patchset/20260504020003.71306-1-qyousef%40layalina.io?part\u003d12",
+      "parentUuid": "cc7e4d4a_a175e203",
+      "revId": "45d26d7e252beb66e1c3797d892cd7b521383ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
