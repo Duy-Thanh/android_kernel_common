@@ -382,8 +382,18 @@ static void f2fs_write_end_io(struct bio *bio)
 						STOP_CP_REASON_WRITE_FAIL);
 		}
 
+<<<<<<< HEAD   (c63c99b5db20f5da440bc8d423496f916faa2e83 Merge 6.12.85 into android16-6.12-lts)
 		f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) &&
 				folio->index != nid_of_node(&folio->page));
+||||||| BASE   (18cd79ce247a35c2938698145d1834a09b5f7777 Linux 6.12.85)
+		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
+				page_folio(page)->index != nid_of_node(page));
+=======
+		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
+				page_folio(page)->index != nid_of_node(page));
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
 
 		dec_page_count(sbi, type);
 
@@ -395,10 +405,20 @@ static void f2fs_write_end_io(struct bio *bio)
 				wq_has_sleeper(&sbi->cp_wait))
 			wake_up(&sbi->cp_wait);
 
+<<<<<<< HEAD   (c63c99b5db20f5da440bc8d423496f916faa2e83 Merge 6.12.85 into android16-6.12-lts)
 		if (f2fs_in_warm_node_list(sbi, folio))
 			f2fs_del_fsync_node_entry(sbi, &folio->page);
 		clear_page_private_gcing(&folio->page);
 		folio_end_writeback(folio);
+||||||| BASE   (18cd79ce247a35c2938698145d1834a09b5f7777 Linux 6.12.85)
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+=======
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
 	}
 
 	bio_put(bio);
