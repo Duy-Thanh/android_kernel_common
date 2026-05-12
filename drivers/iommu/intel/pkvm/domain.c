@@ -58,7 +58,7 @@ struct dmar_domain *pkvm_get_iommu_domain(void *pgd)
  * This api is useful when there is a refcount on the domain
  * and refcount is guaranteed to be not dropped.
  */
-struct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd)
+static struct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd)
 {
 	struct dmar_domain *domain;
 
@@ -166,8 +166,17 @@ static void free_domain_memcache(struct dmar_domain *domain,
 	}
 }
 
-int pkvm_free_iommu_domain(struct dmar_domain *domain, struct pkvm_memcache *teardown_mc)
+int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 {
+	void *pgd = pkvm_host_gpa_to_virt(pgd_gpa);
+	struct dmar_domain *domain;
+
+	domain = pkvm_get_iommu_domain_noref(pgd);
+	if (!domain) {
+		pkvm_err("%s: no domain exist for pgd: %p\n", __func__, pgd);
+		return -EINVAL;
+	}
+
 	if (atomic_cmpxchg(&domain->refcount, 1, 0) != 1) {
 		pkvm_err("%s: domain[pgd:%p] has users, refcount %d\n",
 			 __func__, domain->pgd, atomic_read(&domain->refcount));
