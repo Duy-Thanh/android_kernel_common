@@ -629,6 +629,9 @@ struct io_kiocb {
 
 		/* stores selected buf, valid IFF REQ_F_BUFFER_SELECTED is set */
 		struct io_buffer	*kbuf;
+
+		/* ANDROID: DO NOT TOUCH!!! */
+		struct io_buffer_list   *android_stupid_genksyms_tool_hiding_mess;
 	};
 
 	union {
