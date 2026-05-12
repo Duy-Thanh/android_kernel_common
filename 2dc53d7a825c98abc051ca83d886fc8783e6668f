@@ -214,6 +214,30 @@
       },
       "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56803ead_464e4287",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2026-05-12T04:14:34Z",
+      "side": 1,
+      "message": "Thanks Ryan for providing me the pointers on this one. I have made the similar change in the commit msg.",
+      "parentUuid": "04d948e8_1ff85b82",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
