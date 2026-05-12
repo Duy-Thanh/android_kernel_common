@@ -2819,6 +2819,11 @@ pointer_reference {
   pointee_type_id: 0x349bc1b4
 }
 pointer_reference {
+  id: 0x07bc18d4
+  kind: POINTER
+  pointee_type_id: 0x34b085cc
+}
+pointer_reference {
   id: 0x07c58d49
   kind: POINTER
   pointee_type_id: 0x3556d3b8
@@ -351941,6 +351946,17 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x34b085cc
+  kind: STRUCT
+  name: "vsock_tap"
+  definition {
+    bytesize: 32
+    member_id: 0xce0b4469
+    member_id: 0x965f12df
+    member_id: 0x7c00e690
+  }
+}
+struct_union {
   id: 0x19d71054
   kind: STRUCT
   name: "vsock_transport"
@@ -389131,6 +389147,13 @@ function {
   parameter_id: 0x914dbfdc
 }
 function {
+  id: 0x1c823c8e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x2e18f543
+  parameter_id: 0x2e18f543
+}
+function {
   id: 0x1c827adb
   return_type_id: 0x48b5725f
   parameter_id: 0x361d606f
@@ -398332,6 +398355,15 @@ function {
   return_type_id: 0x054f691a
   parameter_id: 0x18019702
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x6fa3d22f
+  return_type_id: 0x054f691a
+  parameter_id: 0x1d44326e
+  parameter_id: 0x1f73dead
+  parameter_id: 0x4585663f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x6fa775f5
@@ -423461,6 +423493,11 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9c6fe51a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x07bc18d4
+}
+function {
   id: 0x9c707fe8
   return_type_id: 0xf435685e
   parameter_id: 0x2efe8065
@@ -430782,6 +430819,12 @@ function {
   parameter_id: 0x3f59ee8d
   parameter_id: 0x0483e6f8
   parameter_id: 0xf435685e
+}
+function {
+  id: 0xa91d2e30
+  return_type_id: 0xfc0e1dbd
+  parameter_id: 0x3a8e2ac6
+  parameter_id: 0x27a7c613
 }
 function {
   id: 0xa9432e62
@@ -440426,6 +440469,15 @@ elf_symbol {
   crc: 0xdbfdfb29
   type_id: 0x9d54e5f2
   full_name: "__skb_pad"
+}
+elf_symbol {
+  id: 0x39692b63
+  name: "__skb_recv_datagram"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3594896d
+  type_id: 0x6fa3d22f
+  full_name: "__skb_recv_datagram"
 }
 elf_symbol {
   id: 0x7809a362
@@ -466556,6 +466608,15 @@ elf_symbol {
   crc: 0xf57e3a94
   type_id: 0x13488e67
   full_name: "dev_load"
+}
+elf_symbol {
+  id: 0xa052b9b3
+  name: "dev_lstats_read"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7fd5bd77
+  type_id: 0x1c823c8e
+  full_name: "dev_lstats_read"
 }
 elf_symbol {
   id: 0x9a2dbfca
@@ -525235,6 +525296,15 @@ elf_symbol {
   full_name: "vfs_symlink"
 }
 elf_symbol {
+  id: 0x0796726a
+  name: "vfs_truncate"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3e8bd1e
+  type_id: 0xa91d2e30
+  full_name: "vfs_truncate"
+}
+elf_symbol {
   id: 0x2e5511da
   name: "vfs_unlink"
   is_defined: true
@@ -526612,6 +526682,15 @@ elf_symbol {
   full_name: "vsnprintf"
 }
 elf_symbol {
+  id: 0xbad4c4e9
+  name: "vsock_add_tap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7478d3d6
+  type_id: 0x9c6fe51a
+  full_name: "vsock_add_tap"
+}
+elf_symbol {
   id: 0x24b72fe8
   name: "vsock_addr_bound"
   is_defined: true
@@ -526682,6 +526761,15 @@ elf_symbol {
   crc: 0x4ece1cc5
   type_id: 0x139ca744
   full_name: "vsock_for_each_connected_socket"
+}
+elf_symbol {
+  id: 0x5ebc8c37
+  name: "vsock_remove_tap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7478d3d6
+  type_id: 0x9c6fe51a
+  full_name: "vsock_remove_tap"
 }
 elf_symbol {
   id: 0x0db9531c
@@ -528934,6 +529022,7 @@ interface {
   symbol_id: 0x442533a6
   symbol_id: 0x07c5a76f
   symbol_id: 0x55574d11
+  symbol_id: 0x39692b63
   symbol_id: 0x7809a362
   symbol_id: 0x91762fff
   symbol_id: 0x7a4705f8
@@ -531838,6 +531927,7 @@ interface {
   symbol_id: 0x8c0b66d7
   symbol_id: 0x4f142288
   symbol_id: 0x33035bf6
+  symbol_id: 0xa052b9b3
   symbol_id: 0x9a2dbfca
   symbol_id: 0xafae816a
   symbol_id: 0x47c790a6
@@ -538352,6 +538442,7 @@ interface {
   symbol_id: 0x15481b49
   symbol_id: 0xf96f1be3
   symbol_id: 0x355d4901
+  symbol_id: 0x0796726a
   symbol_id: 0x2e5511da
   symbol_id: 0xf33dadbd
   symbol_id: 0x743ba358
@@ -538505,6 +538596,7 @@ interface {
   symbol_id: 0xea7fc751
   symbol_id: 0xd574e01b
   symbol_id: 0x9af4ba91
+  symbol_id: 0xbad4c4e9
   symbol_id: 0x24b72fe8
   symbol_id: 0x74552293
   symbol_id: 0x79291ebd
@@ -538513,6 +538605,7 @@ interface {
   symbol_id: 0x584cd956
   symbol_id: 0x5af22a06
   symbol_id: 0x3d09e223
+  symbol_id: 0x5ebc8c37
   symbol_id: 0x0db9531c
   symbol_id: 0xf29d7680
   symbol_id: 0xbd4af188
