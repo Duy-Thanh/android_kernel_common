@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807694af_0499304f",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-12T02:34:05Z",
+      "side": 1,
+      "message": "6.12 KMI is frozen, so you can\u0027t change existing hooks without breaking KMI. Please keep existing hooks as is and only add your new ones.",
+      "range": {
+        "startLine": 104,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4ffdb4fe_62fe1d0e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-heap.c",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "699a64caf7809cfbea3a42c72cddeaa4737beae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
