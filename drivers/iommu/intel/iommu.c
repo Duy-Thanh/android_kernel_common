@@ -1916,8 +1916,16 @@ int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 		tmp = 0ULL;
 		if (!try_cmpxchg64_local(&pte->val, &tmp, pteval)) {
 #ifdef __PKVM_HYP__
-			if (tmp == pteval)
-				pkvm_host_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
+			struct dma_pte unused_pte = {
+				.val = pteval,
+			};
+
+			/*
+			 * Either the pte is mapped with a different value or
+			 * the same value, should unpin the previous pinned
+			 * memory pages.
+			 */
+			pkvm_host_unuse_dma(dma_pte_addr(&unused_pte), lvl_pages * VTD_PAGE_SIZE);
 #endif
 #ifndef __PKVM_HYP__
 			static int dumps = 5;
