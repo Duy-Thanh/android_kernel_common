@@ -16,6 +16,23 @@
       "message": "Can we split this off from the vendorhook and symbol update changes? We really try not to take FROMLIST patches (greatly preferring FROMGIT), and will need some further details and context to understand the urgency/impact if we\u0027re going to make an exception.",
       "revId": "45d26d7e252beb66e1c3797d892cd7b521383ce2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc7e4d4a_a175e203",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7423,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-12T17:49:16Z",
+      "side": 1,
+      "message": "So, AI review pointed out this causes util_est_update() to reference p after dequeue_entities() finishes.   I know with proxy there were a lot of similar races around ttwu races where once dequeued, the task may get woken on another cpu, effectively changing the ownership, and any references I made to it could cause corruption.\n\nIs this not a concern here?",
+      "revId": "45d26d7e252beb66e1c3797d892cd7b521383ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
