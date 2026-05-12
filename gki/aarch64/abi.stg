@@ -386654,6 +386654,13 @@ function {
   parameter_id: 0x96c0c5e1
 }
 function {
+  id: 0x195a7297
+  return_type_id: 0x48b5725f
+  parameter_id: 0x276a1779
+  parameter_id: 0x064d6086
+  parameter_id: 0x064d6086
+}
+function {
   id: 0x195adafa
   return_type_id: 0xd5cc9c9a
   parameter_id: 0x35a35647
@@ -467057,6 +467064,15 @@ elf_symbol {
   full_name: "devfreq_get_devfreq_by_phandle"
 }
 elf_symbol {
+  id: 0xe846639a
+  name: "devfreq_get_freq_range"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2bdd4cb6
+  type_id: 0x195a7297
+  full_name: "devfreq_get_freq_range"
+}
+elf_symbol {
   id: 0x4c5f0ec2
   name: "devfreq_monitor_resume"
   is_defined: true
@@ -467172,6 +467188,15 @@ elf_symbol {
   crc: 0x4725d0f4
   type_id: 0x9497b363
   full_name: "devfreq_update_status"
+}
+elf_symbol {
+  id: 0x6ff644b0
+  name: "devfreq_update_target"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4725d0f4
+  type_id: 0x9497b363
+  full_name: "devfreq_update_target"
 }
 elf_symbol {
   id: 0x2ad163ea
@@ -531395,6 +531420,7 @@ interface {
   symbol_id: 0xdd8da0cf
   symbol_id: 0x19e74e36
   symbol_id: 0xdb9d4783
+  symbol_id: 0xe846639a
   symbol_id: 0x4c5f0ec2
   symbol_id: 0xb3e16eb2
   symbol_id: 0xebc2af57
@@ -531408,6 +531434,7 @@ interface {
   symbol_id: 0x799c3ec1
   symbol_id: 0x34ba5507
   symbol_id: 0x13972c3d
+  symbol_id: 0x6ff644b0
   symbol_id: 0x2ad163ea
   symbol_id: 0x02599b70
   symbol_id: 0x21c2b40a
