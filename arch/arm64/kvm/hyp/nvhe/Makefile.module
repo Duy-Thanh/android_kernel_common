@@ -3,6 +3,22 @@
 $(obj)/hyp.lds: $(srctree)/arch/arm64/kvm/hyp/nvhe/module.lds.S FORCE
 	$(call if_changed_dep,cpp_lds_S)
 
+
+ifeq ($(KASAN_SANITIZE),n)
+DISABLE_PKVM_KASAN := 1
+endif
+
+ifeq ($(CONFIG_KASAN_GENERIC),y)
+ifneq ($(DISABLE_PKVM_KASAN),1)
+hyp-obj-$(CONFIG_KASAN_OUTLINE) += kasan.o
+endif
+endif
+
+KASAN_SANITIZE_kasan.nvhe.o := n
+
+$(obj)/kasan.nvhe.o: $(srctree)/arch/arm64/kvm/hyp/nvhe/kasan.c FORCE
+	$(call if_changed_rule,cc_o_c)
+
 include $(srctree)/arch/arm64/kvm/hyp/nvhe/Makefile.nvhe
 
 # LINT.IfChange(includes)

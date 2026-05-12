@@ -86,4 +86,6 @@ KBUILD_CFLAGS := $(filter-out -fprofile-sample-use=% -fprofile-use=%, $(KBUILD_C
 KBUILD_CFLAGS += -fno-asynchronous-unwind-tables -fno-unwind-tables
 
 # Hypervisor object doesn't have KASAN enabled by default unlike the kernel
+ifneq ($(DISABLE_PKVM_KASAN),1)
 KASAN_SANITIZE := y
+endif

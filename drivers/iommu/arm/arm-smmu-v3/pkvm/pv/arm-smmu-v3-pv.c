@@ -61,6 +61,18 @@ int pkvm_init_hvc_pd(struct kvm_power_domain *pd, const struct kvm_power_domain_
 	return CALL_FROM_OPS(init_hvc_pd, pd, ops);
 }
 
+#if defined (CONFIG_KASAN_GENERIC) && defined (CONFIG_KASAN_OUTLINE)
+void *__memcpy(void *dst, const void *src, size_t count)
+{
+	return memcpy(dst, src, count);
+}
+
+bool hyp_alloc_check_range(const volatile void *p, size_t size)
+{
+	return CALL_FROM_OPS(alloc_check_range, p, size);
+}
+#endif
+
 const struct pkvm_module_ops		*mod_ops;
 #endif
 
