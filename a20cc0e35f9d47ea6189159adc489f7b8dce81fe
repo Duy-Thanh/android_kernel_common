@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a684038_a2475603",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-05-12T23:11:59Z",
+      "side": 1,
+      "message": "Are we okay to change ret with pfn? \n\nI didn\u0027t check the details but thought it\u0027s worth to point out for double check.",
+      "range": {
+        "startLine": 1394,
+        "startChar": 2,
+        "endLine": 1394,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8a0c5ea_57532810",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/compaction.c",
+              "range": {
+                "startLine": 1394,
+                "startChar": 0,
+                "endLine": 1395,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d isolate_migratepages_block(\u0026cc_ext, pfn, block_end_pfn,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a20cc0e35f9d47ea6189159adc489f7b8dce81fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
