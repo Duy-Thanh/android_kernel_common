@@ -48,6 +48,7 @@ static int sg_version_num = 30536;	/* 2 digits for each component */
 #include <linux/ratelimit.h>
 #include <linux/uio.h>
 #include <linux/cred.h> /* for sg_check_file_access() */
+#include <linux/ioprio.h>
 
 #include <scsi/scsi.h>
 #include <scsi/scsi_cmnd.h>
@@ -1814,6 +1815,9 @@ sg_start_req(Sg_request *srp, unsigned char *cmd)
 			GFP_ATOMIC, iov_count, iov_count, 1, rw);
 	if (!res) {
 		srp->bio = rq->bio;
+
+		if (srp->bio && IOPRIO_PRIO_CLASS(srp->bio->bi_ioprio) == IOPRIO_CLASS_NONE)
+			srp->bio->bi_ioprio = get_current_ioprio();
 
 		if (!md) {
 			req_schp->dio_in_use = 1;
