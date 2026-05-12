@@ -22,6 +22,30 @@
       },
       "revId": "7a5a5530f1cf402e7a3f953f53ff419a389f5fda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de63ab6_4d27280a",
+        "filename": "gki/aarch64/abi.stg.allowed_breaks",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-05-12T17:15:09Z",
+      "side": 1,
+      "message": "Sorry, I have missed the context from the bug and the commit message initially. In your case change I think it would be ok to have these changes. But I\u0027ll leave the approval to Todd.",
+      "parentUuid": "105dda77_df8b736c",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 25
+      },
+      "revId": "7a5a5530f1cf402e7a3f953f53ff419a389f5fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
