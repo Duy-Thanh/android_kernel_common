@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bd9f48_5876358c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T22:31:24Z",
+      "side": 1,
+      "message": "Pure \"vendor\" driver changes like this CL should go into vendor repos instead, since they are untested in ACK.",
+      "revId": "72b6d2890ac92e3b2b6fd2fd80e685e989151b57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
