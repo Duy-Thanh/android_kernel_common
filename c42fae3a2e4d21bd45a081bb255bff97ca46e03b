@@ -16,6 +16,24 @@
       "message": "The `android12-5.10-lts` branch is only for LTS merges. Submit to `android12-5.10` instead.",
       "revId": "c42fae3a2e4d21bd45a081bb255bff97ca46e03b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d3f049_c3c9dd16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2021533
+      },
+      "writtenOn": "2026-05-12T16:25:37Z",
+      "side": 1,
+      "message": "Received. I will submit the patch again after merging the `android12-5.10-lts` branch into the `android12-5.10` branch.",
+      "parentUuid": "172bcb11_4ec8c377",
+      "revId": "c42fae3a2e4d21bd45a081bb255bff97ca46e03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
