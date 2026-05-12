@@ -43,28 +43,30 @@ static struct dmar_domain *__pkvm_get_iommu_domain_locked(void *pgd, bool inc_re
 	return NULL;
 }
 
+/*
+ * Retrieve the domain without incrementing refcount.
+ * This is useful when there is a refcount on the domain which is guaranteed
+ * to be >1 (at least one reference).
+ */
+static struct dmar_domain *__pkvm_get_iommu_domain_noref(void *pgd)
+{
+	struct dmar_domain *domain;
+
+	pkvm_spin_lock(&iommu_domain_lock);
+	domain = __pkvm_get_iommu_domain_locked(pgd, false);
+	if (domain && WARN_ON_ONCE(atomic_read(&domain->refcount) <= 1))
+		domain = NULL;
+	pkvm_spin_unlock(&iommu_domain_lock);
+
+	return domain;
+}
+
 struct dmar_domain *pkvm_get_iommu_domain(void *pgd)
 {
 	struct dmar_domain *domain;
 
 	pkvm_spin_lock(&iommu_domain_lock);
 	domain = __pkvm_get_iommu_domain_locked(pgd, true);
-	pkvm_spin_unlock(&iommu_domain_lock);
-
-	return domain;
-}
-
-/*
- * Retrieve the domain without incrementing refcount.
- * This api is useful when there is a refcount on the domain
- * and refcount is guaranteed to be not dropped.
- */
-struct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd)
-{
-	struct dmar_domain *domain;
-
-	pkvm_spin_lock(&iommu_domain_lock);
-	domain = __pkvm_get_iommu_domain_locked(pgd, false);
 	pkvm_spin_unlock(&iommu_domain_lock);
 
 	return domain;
@@ -111,8 +113,9 @@ void pkvm_put_domain_cache_tag_unassign(void *pgd, int did, u32 pasid,
 		return;
 	}
 
-	domain = pkvm_get_iommu_domain_noref(pgd);
-	BUG_ON(!domain);
+	domain = __pkvm_get_iommu_domain_noref(pgd);
+	if (WARN_ON_ONCE(!domain))
+		return;
 
 	cache_tag_unassign_domain(domain, did, &dev, pasid);
 	pkvm_put_iommu_domain(domain);
@@ -149,13 +152,36 @@ static void free_domain_memcache(struct dmar_domain *domain,
 	}
 }
 
-int pkvm_free_iommu_domain(struct dmar_domain *domain, struct pkvm_memcache *teardown_mc)
+int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 {
+	void *pgd = pkvm_host_gpa_to_virt(pgd_gpa);
+	struct dmar_domain *domain;
+
+	pkvm_spin_lock(&iommu_domain_lock);
+
+	domain = __pkvm_get_iommu_domain_locked(pgd, false);
+	if (!domain) {
+		pkvm_spin_unlock(&iommu_domain_lock);
+		pkvm_err("%s: no domain exist for pgd: %p\n", __func__, pgd);
+		return -EINVAL;
+	}
+
 	if (atomic_cmpxchg(&domain->refcount, 1, 0) != 1) {
 		pkvm_err("%s: domain[pgd:%p] has users, refcount %d\n",
 			 __func__, domain->pgd, atomic_read(&domain->refcount));
+		pkvm_spin_unlock(&iommu_domain_lock);
 		return -EBUSY;
 	}
+
+	__clear_bit(domain->index, iommu_domains_bitmap);
+	memset(domain, 0, sizeof(struct dmar_domain));
+	/*
+	 * Remove the domain from the hash list while still holding the lock,
+	 * to prevent someone else from getting this domain while freeing it.
+	 */
+	hash_del(&domain->hnode);
+
+	pkvm_spin_unlock(&iommu_domain_lock);
 
 	/* Unmap any remaining mappings. */
 	domain_unmap(domain, 0, DOMAIN_MAX_PFN(domain->gaw), NULL);
@@ -170,12 +196,6 @@ int pkvm_free_iommu_domain(struct dmar_domain *domain, struct pkvm_memcache *tea
 
 	pkvm_dbg("%s: freeing domain[pgd: %p], freed pages: %lu\n",
 		 __func__, domain->pgd, teardown_mc->count);
-
-	pkvm_spin_lock(&iommu_domain_lock);
-	hash_del(&domain->hnode);
-	__clear_bit(domain->index, iommu_domains_bitmap);
-	memset(domain, 0, sizeof(struct dmar_domain));
-	pkvm_spin_unlock(&iommu_domain_lock);
 
 	return 0;
 }
