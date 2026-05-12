@@ -190,6 +190,30 @@
       },
       "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d948e8_1ff85b82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-12T02:58:39Z",
+      "side": 1,
+      "message": "Yes, that is correct. Thanks Ryan for the detailed explanation. Note that this is only a \"nit\" which is not a _hard_ requirement.\n\nI\u0027m now lifting the -2 since the double `Change-Id:` has been removed.",
+      "parentUuid": "766f003a_834994e9",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "2dc53d7a825c98abc051ca83d886fc8783e6668f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
