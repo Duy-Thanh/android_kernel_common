@@ -22,6 +22,30 @@
       },
       "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7005049_54afe035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-05-12T14:14:48Z",
+      "side": 1,
+      "message": "`pkvm_reset_vcpu()` doesn\u0027t race with itself. The commit message isn\u0027t clear. I\u0027ve updated it.\n\nThe race is between the *source* vCPU (performing the failure rollback) and the *target* vCPU (executing `pkvm_reset_vcpu()`). This happens if an untrusted host maliciously schedules the target vCPU while concurrently returning a failure to the source vCPU.\n\nRegarding the PSCI semantics for pvmfw: I think they are the same. In both cases, the *primary* vCPU is initialized directly to `ON_PENDING` during VM creation (bypassing guest `CPU_ON`), while *secondary* vCPUs start `OFF` and use the exact same `CPU_ON` path.\n\nDoes that help?",
+      "parentUuid": "2e4d250e_384f90e7",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
