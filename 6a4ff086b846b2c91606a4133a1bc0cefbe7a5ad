@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/512272502",
       "revId": "6a4ff086b846b2c91606a4133a1bc0cefbe7a5ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5c2412_50db3403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-12T15:30:24Z",
+      "side": 1,
+      "message": "This isn\u0027t a clean cherry-pick of aosp/4065889, as that commit also adds `__traceiter_android_rvh_create_worker` which you don\u0027t have here. However, that wasn\u0027t mentioned in the commit message there so was it a mistake?",
+      "revId": "6a4ff086b846b2c91606a4133a1bc0cefbe7a5ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
