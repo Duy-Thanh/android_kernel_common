@@ -23,7 +23,7 @@ struct io_open {
 	struct file			*file;
 	int				dfd;
 	u32				file_slot;
-	struct delayed_filename		filename;
+	struct filename			*filename;
 	struct open_how			how;
 	unsigned long			nofile;
 };
@@ -67,9 +67,12 @@ static int __io_openat_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe
 
 	open->dfd = READ_ONCE(sqe->fd);
 	fname = u64_to_user_ptr(READ_ONCE(sqe->addr));
-	ret = delayed_getname(&open->filename, fname);
-	if (unlikely(ret))
+	open->filename = getname(fname);
+	if (IS_ERR(open->filename)) {
+		ret = PTR_ERR(open->filename);
+		open->filename = NULL;
 		return ret;
+	}
 	req->flags |= REQ_F_NEED_CLEANUP;
 
 	open->file_slot = READ_ONCE(sqe->file_index);
@@ -118,7 +121,6 @@ int io_openat2(struct io_kiocb *req, unsigned int issue_flags)
 	struct file *file;
 	bool resolve_nonblock, nonblock_set;
 	bool fixed = !!open->file_slot;
-	CLASS(filename_complete_delayed, name)(&open->filename);
 	int ret;
 
 	ret = build_open_flags(&open->how, &op);
@@ -138,7 +140,7 @@ int io_openat2(struct io_kiocb *req, unsigned int issue_flags)
 			goto err;
 	}
 
-	file = do_file_open(open->dfd, name, &op);
+	file = do_filp_open(open->dfd, open->filename, &op);
 	if (IS_ERR(file)) {
 		/*
 		 * We could hang on to this 'fd' on retrying, but seems like
@@ -150,13 +152,9 @@ int io_openat2(struct io_kiocb *req, unsigned int issue_flags)
 
 		ret = PTR_ERR(file);
 		/* only retry if RESOLVE_CACHED wasn't already set by application */
-		if (ret == -EAGAIN && !resolve_nonblock &&
-		    (issue_flags & IO_URING_F_NONBLOCK)) {
-			ret = putname_to_delayed(&open->filename,
-						 no_free_ptr(name));
-			if (likely(!ret))
-				return -EAGAIN;
-		}
+		if (ret == -EAGAIN &&
+		    (!resolve_nonblock && (issue_flags & IO_URING_F_NONBLOCK)))
+			return -EAGAIN;
 		goto err;
 	}
 
@@ -169,6 +167,7 @@ int io_openat2(struct io_kiocb *req, unsigned int issue_flags)
 		ret = io_fixed_fd_install(req, issue_flags, file,
 						open->file_slot);
 err:
+	putname(open->filename);
 	req->flags &= ~REQ_F_NEED_CLEANUP;
 	if (ret < 0)
 		req_set_fail(req);
@@ -185,7 +184,8 @@ void io_open_cleanup(struct io_kiocb *req)
 {
 	struct io_open *open = io_kiocb_to_cmd(req, struct io_open);
 
-	dismiss_delayed_filename(&open->filename);
+	if (open->filename)
+		putname(open->filename);
 }
 
 int __io_close_fixed(struct io_ring_ctx *ctx, unsigned int issue_flags,

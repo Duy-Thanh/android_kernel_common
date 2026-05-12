@@ -14,6 +14,7 @@
 #include <linux/mount.h>
 #include <linux/file.h>
 #include "cifsfs.h"
+#include "cifspdu.h"
 #include "cifsglob.h"
 #include "cifsproto.h"
 #include "cifs_debug.h"

@@ -365,13 +365,17 @@ retry:
 int vfs_fstatat(int dfd, const char __user *filename,
 			      struct kstat *stat, int flags)
 {
-	CLASS(filename_maybe_null, name)(filename, flags);
+	int ret;
+	int statx_flags = flags | AT_NO_AUTOMOUNT;
+	struct filename *name = getname_maybe_null(filename, flags);
 
 	if (!name && dfd >= 0)
 		return vfs_fstat(dfd, stat);
 
-	return vfs_statx(dfd, name, flags | AT_NO_AUTOMOUNT,
-			 stat, STATX_BASIC_STATS);
+	ret = vfs_statx(dfd, name, statx_flags, stat, STATX_BASIC_STATS);
+	putname(name);
+
+	return ret;
 }
 
 #ifdef __ARCH_WANT_OLD_STAT
@@ -560,17 +564,20 @@ static int do_readlinkat(int dfd, const char __user *pathname,
 			 char __user *buf, int bufsiz)
 {
 	struct path path;
+	struct filename *name;
 	int error;
-	unsigned int lookup_flags = 0;
+	unsigned int lookup_flags = LOOKUP_EMPTY;
 
 	if (bufsiz <= 0)
 		return -EINVAL;
 
-	CLASS(filename_flags, name)(pathname, LOOKUP_EMPTY);
 retry:
+	name = getname_flags(pathname, lookup_flags);
 	error = filename_lookup(dfd, name, lookup_flags, &path, NULL);
-	if (unlikely(error))
+	if (unlikely(error)) {
+		putname(name);
 		return error;
+	}
 
 	/*
 	 * AFS mountpoints allow readlink(2) but are not symlinks
@@ -586,6 +593,7 @@ retry:
 		error = (name->name[0] == '\0') ? -ENOENT : -EINVAL;
 	}
 	path_put(&path);
+	putname(name);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
@@ -806,12 +814,16 @@ SYSCALL_DEFINE5(statx,
 		unsigned int, mask,
 		struct statx __user *, buffer)
 {
-	CLASS(filename_maybe_null, name)(filename, flags);
+	int ret;
+	struct filename *name = getname_maybe_null(filename, flags);
 
 	if (!name && dfd >= 0)
 		return do_statx_fd(dfd, flags & ~AT_NO_AUTOMOUNT, mask, buffer);
 
-	return do_statx(dfd, name, flags, mask, buffer);
+	ret = do_statx(dfd, name, flags, mask, buffer);
+	putname(name);
+
+	return ret;
 }
 
 #if defined(CONFIG_COMPAT) && defined(__ARCH_WANT_COMPAT_STAT)

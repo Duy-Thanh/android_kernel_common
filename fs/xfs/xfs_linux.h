@@ -3,11 +3,24 @@
  * Copyright (c) 2000-2005 Silicon Graphics, Inc.
  * All Rights Reserved.
  */
-#ifndef _XFS_PLATFORM_H
-#define _XFS_PLATFORM_H
+#ifndef __XFS_LINUX__
+#define __XFS_LINUX__
 
 #include <linux/types.h>
 #include <linux/uuid.h>
+
+/*
+ * Kernel specific type declarations for XFS
+ */
+
+typedef __s64			xfs_off_t;	/* <file offset> type */
+typedef unsigned long long	xfs_ino_t;	/* <inode> type */
+typedef __s64			xfs_daddr_t;	/* <disk address> type */
+typedef __u32			xfs_dev_t;
+typedef __u32			xfs_nlink_t;
+
+#include "xfs_types.h"
+
 #include <linux/semaphore.h>
 #include <linux/mm.h>
 #include <linux/sched/mm.h>
@@ -50,6 +63,7 @@
 #include <linux/xattr.h>
 #include <linux/mnt_idmapping.h>
 #include <linux/debugfs.h>
+
 #include <asm/page.h>
 #include <asm/div64.h>
 #include <asm/param.h>
@@ -57,32 +71,6 @@
 #include <asm/byteorder.h>
 #include <linux/unaligned.h>
 
-#ifdef CONFIG_XFS_DEBUG
-#define DEBUG 1
-#endif
-
-#ifdef CONFIG_XFS_DEBUG_EXPENSIVE
-#define DEBUG_EXPENSIVE 1
-#endif
-
-#ifdef CONFIG_XFS_ASSERT_FATAL
-#define XFS_ASSERT_FATAL 1
-#endif
-
-#ifdef CONFIG_XFS_WARN
-#define XFS_WARN 1
-#endif
-
-/*
- * Kernel specific type declarations for XFS
- */
-typedef __s64			xfs_off_t;	/* <file offset> type */
-typedef unsigned long long	xfs_ino_t;	/* <inode> type */
-typedef __s64			xfs_daddr_t;	/* <disk address> type */
-typedef __u32			xfs_dev_t;
-typedef __u32			xfs_nlink_t;
-
-#include "xfs_types.h"
 #include "xfs_fs.h"
 #include "xfs_stats.h"
 #include "xfs_sysctl.h"
@@ -291,4 +279,4 @@ kmem_to_page(void *addr)
 	return virt_to_page(addr);
 }
 
-#endif /* _XFS_PLATFORM_H */
+#endif /* __XFS_LINUX__ */

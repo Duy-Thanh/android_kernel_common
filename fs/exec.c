@@ -777,8 +777,10 @@ static struct file *do_open_execat(int fd, struct filename *name, int flags)
 		return ERR_PTR(-EINVAL);
 	if (flags & AT_SYMLINK_NOFOLLOW)
 		open_exec_flags.lookup_flags &= ~LOOKUP_FOLLOW;
+	if (flags & AT_EMPTY_PATH)
+		open_exec_flags.lookup_flags |= LOOKUP_EMPTY;
 
-	file = do_file_open(fd, name, &open_exec_flags);
+	file = do_filp_open(fd, name, &open_exec_flags);
 	if (IS_ERR(file))
 		return file;
 
@@ -813,8 +815,14 @@ static struct file *do_open_execat(int fd, struct filename *name, int flags)
  */
 struct file *open_exec(const char *name)
 {
-	CLASS(filename_kernel, filename)(name);
-	return do_open_execat(AT_FDCWD, filename, 0);
+	struct filename *filename = getname_kernel(name);
+	struct file *f = ERR_CAST(filename);
+
+	if (!IS_ERR(filename)) {
+		f = do_open_execat(AT_FDCWD, filename, 0);
+		putname(filename);
+	}
+	return f;
 }
 EXPORT_SYMBOL(open_exec);
 
@@ -1463,9 +1471,6 @@ out_free:
 	return ERR_PTR(retval);
 }
 
-DEFINE_CLASS(bprm, struct linux_binprm *, if (!IS_ERR(_T)) free_bprm(_T),
-	alloc_bprm(fd, name, flags), int fd, struct filename *name, int flags)
-
 int bprm_change_interp(const char *interp, struct linux_binprm *bprm)
 {
 	/* If a binfmt changed the interp, free it first. */
@@ -1780,7 +1785,11 @@ static int do_execveat_common(int fd, struct filename *filename,
 			      struct user_arg_ptr envp,
 			      int flags)
 {
+	struct linux_binprm *bprm;
 	int retval;
+
+	if (IS_ERR(filename))
+		return PTR_ERR(filename);
 
 	/*
 	 * We move the actual failure in case of RLIMIT_NPROC excess from
@@ -1789,43 +1798,47 @@ static int do_execveat_common(int fd, struct filename *filename,
 	 * whether NPROC limit is still exceeded.
 	 */
 	if ((current->flags & PF_NPROC_EXCEEDED) &&
-	    is_rlimit_overlimit(current_ucounts(), UCOUNT_RLIMIT_NPROC, rlimit(RLIMIT_NPROC)))
-		return -EAGAIN;
+	    is_rlimit_overlimit(current_ucounts(), UCOUNT_RLIMIT_NPROC, rlimit(RLIMIT_NPROC))) {
+		retval = -EAGAIN;
+		goto out_ret;
+	}
 
 	/* We're below the limit (still or again), so we don't want to make
 	 * further execve() calls fail. */
 	current->flags &= ~PF_NPROC_EXCEEDED;
 
-	CLASS(bprm, bprm)(fd, filename, flags);
-	if (IS_ERR(bprm))
-		return PTR_ERR(bprm);
+	bprm = alloc_bprm(fd, filename, flags);
+	if (IS_ERR(bprm)) {
+		retval = PTR_ERR(bprm);
+		goto out_ret;
+	}
 
 	retval = count(argv, MAX_ARG_STRINGS);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->argc = retval;
 
 	retval = count(envp, MAX_ARG_STRINGS);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->envc = retval;
 
 	retval = bprm_stack_limits(bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
 	retval = copy_string_kernel(bprm->filename, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->exec = bprm->p;
 
 	retval = copy_strings(bprm->envc, envp, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
 	retval = copy_strings(bprm->argc, argv, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
 	/*
 	 * When argv is empty, add an empty string ("") as argv[0] to
@@ -1836,61 +1849,133 @@ static int do_execveat_common(int fd, struct filename *filename,
 	if (bprm->argc == 0) {
 		retval = copy_string_kernel("", bprm);
 		if (retval < 0)
-			return retval;
+			goto out_free;
 		bprm->argc = 1;
 
 		pr_warn_once("process '%s' launched '%s' with NULL argv: empty string added\n",
 			     current->comm, bprm->filename);
 	}
 
-	return bprm_execve(bprm);
+	retval = bprm_execve(bprm);
+out_free:
+	free_bprm(bprm);
+
+out_ret:
+	putname(filename);
+	return retval;
 }
 
 int kernel_execve(const char *kernel_filename,
 		  const char *const *argv, const char *const *envp)
 {
+	struct filename *filename;
+	struct linux_binprm *bprm;
+	int fd = AT_FDCWD;
 	int retval;
 
 	/* It is non-sense for kernel threads to call execve */
 	if (WARN_ON_ONCE(current->flags & PF_KTHREAD))
 		return -EINVAL;
 
-	CLASS(filename_kernel, filename)(kernel_filename);
-	CLASS(bprm, bprm)(AT_FDCWD, filename, 0);
-	if (IS_ERR(bprm))
-		return PTR_ERR(bprm);
+	filename = getname_kernel(kernel_filename);
+	if (IS_ERR(filename))
+		return PTR_ERR(filename);
+
+	bprm = alloc_bprm(fd, filename, 0);
+	if (IS_ERR(bprm)) {
+		retval = PTR_ERR(bprm);
+		goto out_ret;
+	}
 
 	retval = count_strings_kernel(argv);
 	if (WARN_ON_ONCE(retval == 0))
-		return -EINVAL;
+		retval = -EINVAL;
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->argc = retval;
 
 	retval = count_strings_kernel(envp);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->envc = retval;
 
 	retval = bprm_stack_limits(bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
 	retval = copy_string_kernel(bprm->filename, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 	bprm->exec = bprm->p;
 
 	retval = copy_strings_kernel(bprm->envc, envp, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
 	retval = copy_strings_kernel(bprm->argc, argv, bprm);
 	if (retval < 0)
-		return retval;
+		goto out_free;
 
-	return bprm_execve(bprm);
+	retval = bprm_execve(bprm);
+out_free:
+	free_bprm(bprm);
+out_ret:
+	putname(filename);
+	return retval;
 }
+
+static int do_execve(struct filename *filename,
+	const char __user *const __user *__argv,
+	const char __user *const __user *__envp)
+{
+	struct user_arg_ptr argv = { .ptr.native = __argv };
+	struct user_arg_ptr envp = { .ptr.native = __envp };
+	return do_execveat_common(AT_FDCWD, filename, argv, envp, 0);
+}
+
+static int do_execveat(int fd, struct filename *filename,
+		const char __user *const __user *__argv,
+		const char __user *const __user *__envp,
+		int flags)
+{
+	struct user_arg_ptr argv = { .ptr.native = __argv };
+	struct user_arg_ptr envp = { .ptr.native = __envp };
+
+	return do_execveat_common(fd, filename, argv, envp, flags);
+}
+
+#ifdef CONFIG_COMPAT
+static int compat_do_execve(struct filename *filename,
+	const compat_uptr_t __user *__argv,
+	const compat_uptr_t __user *__envp)
+{
+	struct user_arg_ptr argv = {
+		.is_compat = true,
+		.ptr.compat = __argv,
+	};
+	struct user_arg_ptr envp = {
+		.is_compat = true,
+		.ptr.compat = __envp,
+	};
+	return do_execveat_common(AT_FDCWD, filename, argv, envp, 0);
+}
+
+static int compat_do_execveat(int fd, struct filename *filename,
+			      const compat_uptr_t __user *__argv,
+			      const compat_uptr_t __user *__envp,
+			      int flags)
+{
+	struct user_arg_ptr argv = {
+		.is_compat = true,
+		.ptr.compat = __argv,
+	};
+	struct user_arg_ptr envp = {
+		.is_compat = true,
+		.ptr.compat = __envp,
+	};
+	return do_execveat_common(fd, filename, argv, envp, flags);
+}
+#endif
 
 void set_binfmt(struct linux_binfmt *new)
 {
@@ -1916,19 +2001,12 @@ void set_dumpable(struct mm_struct *mm, int value)
 	__mm_flags_set_mask_dumpable(mm, value);
 }
 
-static inline struct user_arg_ptr native_arg(const char __user *const __user *p)
-{
-	return (struct user_arg_ptr){.ptr.native = p};
-}
-
 SYSCALL_DEFINE3(execve,
 		const char __user *, filename,
 		const char __user *const __user *, argv,
 		const char __user *const __user *, envp)
 {
-	CLASS(filename, name)(filename);
-	return do_execveat_common(AT_FDCWD, name,
-				  native_arg(argv), native_arg(envp), 0);
+	return do_execve(getname(filename), argv, envp);
 }
 
 SYSCALL_DEFINE5(execveat,
@@ -1937,25 +2015,17 @@ SYSCALL_DEFINE5(execveat,
 		const char __user *const __user *, envp,
 		int, flags)
 {
-	CLASS(filename_uflags, name)(filename, flags);
-	return do_execveat_common(fd, name,
-				  native_arg(argv), native_arg(envp), flags);
+	return do_execveat(fd,
+			   getname_uflags(filename, flags),
+			   argv, envp, flags);
 }
 
 #ifdef CONFIG_COMPAT
-
-static inline struct user_arg_ptr compat_arg(const compat_uptr_t __user *p)
-{
-	return (struct user_arg_ptr){.is_compat = true, .ptr.compat = p};
-}
-
 COMPAT_SYSCALL_DEFINE3(execve, const char __user *, filename,
 	const compat_uptr_t __user *, argv,
 	const compat_uptr_t __user *, envp)
 {
-	CLASS(filename, name)(filename);
-	return do_execveat_common(AT_FDCWD, name,
-				  compat_arg(argv), compat_arg(envp), 0);
+	return compat_do_execve(getname(filename), argv, envp);
 }
 
 COMPAT_SYSCALL_DEFINE5(execveat, int, fd,
@@ -1964,9 +2034,9 @@ COMPAT_SYSCALL_DEFINE5(execveat, int, fd,
 		       const compat_uptr_t __user *, envp,
 		       int,  flags)
 {
-	CLASS(filename_uflags, name)(filename, flags);
-	return do_execveat_common(fd, name,
-				  compat_arg(argv), compat_arg(envp), flags);
+	return compat_do_execveat(fd,
+				  getname_uflags(filename, flags),
+				  argv, envp, flags);
 }
 #endif
 
