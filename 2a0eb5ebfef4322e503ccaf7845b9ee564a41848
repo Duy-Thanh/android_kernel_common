@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24775b96_a82fd25b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-05-12T12:09:55Z",
+      "side": 1,
+      "message": "Just wanted to note, i looked into this a bit more to see whether this is an actual bug that can be trigerred, and not just a hypothetical one, and I think it is. \n\nA VMM can choose any vCPU as the primary (0 is by convention, nothing that enforces it). A misbehaving VMM could call KVM_RUN on vCPU 1 (populating vm-\u003evcpus[1]) but skip 0. vCPU 1 could then issue the SMC to set up FFA or IOMMU. Later, it performs a teardown, which triggers this.\n\nI am happy to explore ways to fix this. A refactor to use VM is the best approach, if you think the churn is ok. In that case, better to have it as its own series. What do you think?",
+      "revId": "2a0eb5ebfef4322e503ccaf7845b9ee564a41848",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e24963d9_9830d634",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 2
