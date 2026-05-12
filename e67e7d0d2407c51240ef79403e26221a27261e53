@@ -34,6 +34,206 @@
       "parentUuid": "f803f83a_8a1a8970",
       "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b23628_26c88458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "My thoughts on the entire series:\n\nMost of the changes are neatly tucked under-the-hood in core DRM and don\u0027t affect devices until they configure the new `drm.trace\u003d` parameter, which configures additional logging to a new ftrace instance. I personally think these additions as `ANDROID:` are acceptable.\n\nWhile this series is still `ANDROID:` (not yet accepted upstream), it would be best to minimize the impact on drivers and vendor builds by making the changes purely additive.\n\nRather than renaming existing helpers to clarify their focus on \"syslog\" output, I suggest leaving them alone while introducing the new APIs for any driver to opt-in to the new \"drm.trace\" behavior as-needed.",
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063dbb17_f3bafd9f",
+        "filename": "drivers/gpu/drm/drm_atomic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "Move this to the previous CL \"ANDROID: drm/print: Add drm_debug_category_printer\"",
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd09bdd_5a4f82dc",
+        "filename": "drivers/gpu/drm/drm_print.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "Drop this test, since both outputs below are already guarded by more specific tests.",
+      "fixSuggestions": [
+        {
+          "fixId": "0e4ba5f8_20e8dca8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 242,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0454a93_d3520b7d",
+        "filename": "drivers/gpu/drm/drm_print.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "nit: add space after comma in `\"\",dev`",
+      "range": {
+        "startLine": 375,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "081b577f_ee23dbc1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 375,
+                "startChar": 0,
+                "endLine": 376,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t dev ? dev_name(dev) : \"\", dev ? \" \" : \"\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6777de9_f5f3277b",
+        "filename": "drivers/gpu/drm/drm_print.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "nit: fix indentation (use tabs not spaces)",
+      "fixSuggestions": [
+        {
+          "fixId": "f11ef099_36fe5d83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 565,
+                "startChar": 0,
+                "endLine": 567,
+                "endChar": 0
+              },
+              "replacement": "\tva_list args;\n\tchar buf[256];\n"
+            },
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 568,
+                "startChar": 0,
+                "endLine": 572,
+                "endChar": 0
+              },
+              "replacement": "\tva_start(args, format);\n\tvscnprintf(buf, sizeof(buf), format, args);\n\ttrace_array_printk(trace_arr, _THIS_IP_, \"%s\", buf);\n\tva_end(args);\n"
+            },
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 583,
+                "endChar": 0
+              },
+              "replacement": " {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c486d14b_74db8930",
+        "filename": "drivers/gpu/drm/nouveau/dispnv04/i2c/sil164_drv.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-12T16:49:39Z",
+      "side": 1,
+      "message": "nit: match back-slash alignment of prior line.",
+      "fixSuggestions": [
+        {
+          "fixId": "9847c097_8b4e1f8c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/nouveau/dispnv04/i2c/sil164_drv.c",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (drm_debug_syslog_enabled(DRM_UT_KMS))\t\t      \\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e67e7d0d2407c51240ef79403e26221a27261e53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
