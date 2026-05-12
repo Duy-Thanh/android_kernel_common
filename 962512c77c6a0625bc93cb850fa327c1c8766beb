@@ -46,6 +46,30 @@
       },
       "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2da561c_3f8f2678",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-12T16:01:56Z",
+      "side": 1,
+      "message": "My point isn\u0027t that `pkvm_reset_vcpu()` races with itself but rather that you need the same vCPU race with itself. The rollback code in `handle_pvm_entry_psci()` and the `power_state` change in `pkvm_reset_vcpu()` can only happen on the same vCPU thread.\n\n`pkvm_vcpu_init_psci()` is where pvmfw vs non-pvmfw guests are treated differently -- secondary CPUs in the RUNNABLE state are put into the `ON_PENDING` state if there is no pvmfw afaict.",
+      "parentUuid": "c7005049_54afe035",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
