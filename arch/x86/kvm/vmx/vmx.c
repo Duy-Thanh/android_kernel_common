@@ -7933,6 +7933,11 @@ static void vmx_complete_interrupts(struct vcpu_vmx *vmx)
 
 void vmx_cancel_injection(struct kvm_vcpu *vcpu)
 {
+#ifdef __PKVM_HYP__
+	if (pkvm_is_protected_vcpu(vcpu) &&
+	    !(vmcs_read32(VM_ENTRY_INTR_INFO_FIELD) & VECTORING_INFO_VALID_MASK))
+		return;
+#endif
 	__vmx_complete_interrupts(vcpu,
 				  vmcs_read32(VM_ENTRY_INTR_INFO_FIELD),
 				  VM_ENTRY_INSTRUCTION_LEN,
