@@ -722,9 +722,13 @@ void dmar_fault_dump_ptes(struct intel_iommu *iommu, u16 source_id,
 	if (pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_FL_ONLY) {
 		level = pte->val[2] & BIT_ULL(2) ? 5 : 4;
 		pgtable = phys_to_virt(pte->val[2] & VTD_PAGE_MASK);
-	} else {
+	} else if (pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_SL_ONLY ||
+		   pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_NESTED) {
 		level = agaw_to_level((pte->val[0] >> 2) & 0x7);
 		pgtable = phys_to_virt(pte->val[0] & VTD_PAGE_MASK);
+	} else {
+		pr_info("PGTT mode %d doesn't have page table to walk\n", pasid_pte_get_pgtt(pte));
+		return;
 	}
 
 pgtable_walk:
