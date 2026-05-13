@@ -46,6 +46,30 @@
       },
       "revId": "50ebe5d67e8c2992780e01857f0a686bd5ad1f4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c01dd76_fe5faadb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T04:00:31Z",
+      "side": 1,
+      "message": "Ah, I see. That\u0027s unfortunate...\nOk, I guess this is the best option we have now.",
+      "parentUuid": "8129da30_8e94a823",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "50ebe5d67e8c2992780e01857f0a686bd5ad1f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
