@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30fa9aa3_7ba75990",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2094,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-13T21:42:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03364e39_857a01da",
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "191dccc9_f1eb894c",
@@ -112,6 +130,42 @@
           ]
         }
       ],
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc175ee_9ea5264c",
+        "filename": "arch/arm64/kvm/handle_exit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-13T21:42:15Z",
+      "side": 1,
+      "message": "I did move the code, but `kvm_err` requires a string literal, so it won\u0027t work.",
+      "parentUuid": "00af9ddd_460ef31d",
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2915ef90_66cfddd2",
+        "filename": "arch/arm64/kvm/handle_exit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-13T21:42:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "191dccc9_f1eb894c",
       "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
