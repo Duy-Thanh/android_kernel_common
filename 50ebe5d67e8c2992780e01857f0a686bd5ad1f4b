@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c81763_d0231226",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T03:01:17Z",
+      "side": 1,
+      "message": "Please do not change Change-Id when cherry-picking. Should be `I860c2665088753a5c3b6d6dfeeb25a82aeefc8af`",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "50ebe5d67e8c2992780e01857f0a686bd5ad1f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
