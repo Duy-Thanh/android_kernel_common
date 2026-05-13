@@ -719,7 +719,10 @@ void dmar_fault_dump_ptes(struct intel_iommu *iommu, u16 source_id,
 		return;
 	}
 
-	if (pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_FL_ONLY) {
+	if (pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_PT) {
+		pr_info("PGTT passthrough mode doesn't have page table to walk\n");
+		return;
+	} else if (pasid_pte_get_pgtt(pte) == PASID_ENTRY_PGTT_FL_ONLY) {
 		level = pte->val[2] & BIT_ULL(2) ? 5 : 4;
 		pgtable = phys_to_virt(pte->val[2] & VTD_PAGE_MASK);
 	} else {
