@@ -24,7 +24,6 @@
 #include <linux/wait.h>
 #include <linux/refcount.h>
 #include <linux/atomic.h>
-#include <linux/android_kabi.h>
 
 struct device;
 struct dma_buf;
@@ -350,9 +349,6 @@ struct dma_buf_ops {
 	 * will be populated with the buffer's flags.
 	 */
 	int (*get_flags)(struct dma_buf *dmabuf, unsigned long *flags);
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 };
 
 /**
@@ -524,9 +520,6 @@ struct dma_buf {
 	 * The number of tasks that reference this buffer. For calculating PSS.
 	 */
 	atomic64_t nr_task_refs;
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 };
 
 /**
@@ -562,8 +555,6 @@ struct dma_buf_attach_ops {
 	 * point to the new location of the DMA-buf.
 	 */
 	void (*move_notify)(struct dma_buf_attachment *attach);
-
-	ANDROID_KABI_RESERVE(1);
 };
 
 /**
@@ -597,9 +588,6 @@ struct dma_buf_attachment {
 	void *importer_priv;
 	void *priv;
 	unsigned long dma_map_attrs;
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 };
 
 /**
@@ -623,9 +611,6 @@ struct dma_buf_export_info {
 	int flags;
 	struct dma_resv *resv;
 	void *priv;
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 };
 
 /**
