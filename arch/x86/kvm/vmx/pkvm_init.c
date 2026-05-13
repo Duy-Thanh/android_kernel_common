@@ -878,6 +878,10 @@ static __init void init_guest_state_area(struct vcpu_vmx *vmx)
 	vmcs_write32(GUEST_ACTIVITY_STATE, GUEST_ACTIVITY_ACTIVE);
 	vmcs_write32(GUEST_INTERRUPTIBILITY_INFO, 0);
 	vmcs_writel(GUEST_PENDING_DBG_EXCEPTIONS, 0);
+	/*
+	 * Shadow VMCS will not be used as the VMCS will be exposed via PV-based
+	 * method.
+	 */
 	vmcs_write64(VMCS_LINK_POINTER, -1ull);
 }
 
@@ -1038,12 +1042,6 @@ static __init void init_execution_control(struct vcpu_vmx *vmx)
 	if (boot_cpu_has(X86_FEATURE_INTEL_PT))
 		secondary_exec_controls_clearbit(vmx, SECONDARY_EXEC_PT_USE_GPA);
 
-	/*
-	 * Shadow VMCS will not be used as the VMCS will be exposed via PV-based
-	 * method.
-	 */
-	vmcs_write64(VMCS_LINK_POINTER, INVALID_GPA);
-
 	/* Host VM owns cr3 */
 	vmcs_write32(CR3_TARGET_COUNT, 0);
 
@@ -1119,6 +1117,7 @@ static __init void init_vmentry_control(struct vcpu_vmx *vmx)
 static __init int pkvm_host_init_vmx(struct vcpu_vmx *vmx)
 {
 	vmx->loaded_vmcs = &vmx->vmcs01;
+	vmcs_clear(vmx->loaded_vmcs->vmcs);
 	vmcs_load(vmx->loaded_vmcs->vmcs);
 	vmx->loaded_vmcs->cpu = smp_processor_id();
 
