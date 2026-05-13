@@ -16,6 +16,24 @@
       "message": "Could we stash those parameters into the .hyp.text, update them with the fixmap before the panic? \n\n.hyp.text is RO in the host stage-2 already. perhaps that\u0027d be simpler?",
       "revId": "71e8dbbaf24b863989eaf3029e4a3b50fda012c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d5155d_69c5d698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-05-13T21:41:45Z",
+      "side": 1,
+      "message": "I\u0027d avoid messing with the text section in the panic path, specially it\u0027s not guaranteed that the fix map is empty.",
+      "parentUuid": "d0f530d0_5949af65",
+      "revId": "71e8dbbaf24b863989eaf3029e4a3b50fda012c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
