@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7da6e19_99ee721c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T16:58:40Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2dccdf7076f671764d02c850e83a8b457105268d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2dccdf7076f671764d02c850e83a8b457105268d).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/2dccdf7076f671764d02c850e83a8b457105268d\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/b473d46c294d6b80ef18a06257500e49cfd3128f\n@@ -80,7 +80,7 @@\n  \t\tstruct page *page, bool delay_rmap, int page_size);\n @@  @@ static inline void pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,\n  \ttlb-\u003ecleared_pmds \u003d 1;\n- \tif (mm_alloc_pgste(tlb-\u003emm))\n+ \tif (mm_has_pgste(tlb-\u003emm))\n  \t\tgmap_unlink(tlb-\u003emm, (unsigned long *)pte, address);\n -\ttlb_remove_ptdesc(tlb, pte);\n +\ttlb_remove_ptdesc(tlb, virt_to_ptdesc(pte));\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "b473d46c294d6b80ef18a06257500e49cfd3128f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
