@@ -70,6 +70,30 @@
       },
       "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82be5db_a75b44fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-13T11:24:34Z",
+      "side": 1,
+      "message": "Fuad and I spoke offline. I got mixed up above (`pkvm_reset_vcpu()` and `handle_pvm_entry_psci()` do run on different vCPUs) but there _are_ wider concurrency concerns here and the presence of pvmfw plays into only a small part of that.",
+      "parentUuid": "d2da561c_3f8f2678",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "962512c77c6a0625bc93cb850fa327c1c8766beb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
