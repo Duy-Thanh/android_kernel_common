@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e63805da_15edcffc",
+        "filename": "arch/um/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T17:08:20Z",
+      "side": 1,
+      "message": "No, this is wrong. You should be adding only `MMU_GATHER_RCU_TABLE_FREE`, like upstream does.",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7e04f225_5b037ff0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/um/Kconfig",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f3f1d346820b191688a414f96478c330805697e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
