@@ -49,7 +49,6 @@
 #include <linux/tracepoint-defs.h>
 #include <linux/unwind_deferred_types.h>
 #include <linux/android_vendor.h>
-#include <linux/android_kabi.h>
 #include <asm/kmap_size.h>
 #ifndef COMPILE_OFFSETS
 #include <generated/rq-offsets.h>
@@ -641,11 +640,6 @@ struct sched_rt_entity {
 	/* rq "owned" by this entity/group: */
 	struct rt_rq			*my_q;
 #endif
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
-	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
 } __randomize_layout;
 
 struct rq_flags;
@@ -756,11 +750,6 @@ struct sched_dl_entity {
 	 */
 	struct sched_dl_entity *pi_se;
 #endif
-
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
-	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
 };
 
 #ifdef CONFIG_UCLAMP_TASK
@@ -1684,14 +1673,6 @@ struct task_struct {
 	 */
 	struct callback_head		l1d_flush_kill;
 #endif
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
-	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
-	ANDROID_KABI_RESERVE(5);
-	ANDROID_KABI_RESERVE(6);
-	ANDROID_KABI_RESERVE(7);
-	ANDROID_KABI_RESERVE(8);
 
 #ifdef CONFIG_RV
 	/*
