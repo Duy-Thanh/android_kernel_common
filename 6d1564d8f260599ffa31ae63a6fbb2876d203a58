@@ -16,6 +16,24 @@
       "message": "Let\u0027s see what upstream says about this first please.",
       "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88203cb1_e5bef551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4759922
+      },
+      "writtenOn": "2026-05-13T07:59:33Z",
+      "side": 1,
+      "message": "Hi gregkh,\n\nI\u0027d like to request early acceptance of the following fix into\nandroid17-6.18, while the upstream discussion wraps up.\n\nPatch (v2, upstream):\n  [PATCH v2] cpufreq: Fix hotplug-suspend race during reboot\n  https://lore.kernel.org/all/20260408141914.35281-1-nanmu@xiaomi.com/\n\nBug\n---\nNULL pointer dereference in cpufreq_suspend() during reboot. The reboot\npath (kernel_restart -\u003e device_shutdown -\u003e cpufreq_suspend) does NOT\ncall freeze_processes(), so CPU hotplug can run concurrently and free\npolicy-\u003egovernor_data while cpufreq_suspend() is still iterating it.\nReproducible on our devices; crash trace included in the commit\nmessage.\n\nUpstream status\n---------------\n  v1:            https://lore.kernel.org/all/20260407093529.4527-1-nanmu@xiaomi.com/\n  Rafael Q:      https://lore.kernel.org/all/CAJZ5v0hzhgf3mvdtHgT4Hwiqv22\u003dP\u003dxsWO8QZpeSGayOP-HO3w@mail.gmail.com/\n  My reply:      https://lore.kernel.org/all/20260408014640.174420-1-nanmu@xiaomi.com/\n  Rafael ack:    https://lore.kernel.org/all/CAJZ5v0ie54h2aK05qNZTWNw5bu7GZDgsxM55KSsuF\u003dReLMkm-w@mail.gmail.com/\n  v2:            https://lore.kernel.org/all/20260408141914.35281-1-nanmu@xiaomi.com/\n  Review Q:      https://lore.kernel.org/all/b3cabf3d-7672-4816-91f0-e6fafd9db4d0@oss.qualcomm.com/\n  Lockdep reply: https://lore.kernel.org/all/20260511111407.455-1-nanmu@xiaomi.com/\n\nKey points:\n  * Rafael J. Wysocki (cpufreq maintainer) confirmed the root-cause\n    analysis verbatim with \"That\u0027s correct.\" and only asked for a\n    clearer changelog, which v2 provides.\n  * No NAK or technical objection exists on v2.\n  * The only open review item was a lockdep question from Zhongqiu\n    Han (Qualcomm). I have tested v2 with CONFIG_PROVE_LOCKING\u003dy /\n    CONFIG_LOCKDEP\u003dy under the reboot + hotplug stress path and\n    observed no warnings; the lock order matches existing\n    cpufreq_offline/online usage and adds no new dependency. Replied\n    on-list (link above).\n\nUrgency\n-------\nThe crash is hit on our product reboot path and is blocking a release\nmilestone.\n\nCommitment\n----------\nIf v3 is requested upstream with code changes (not just changelog\nedits), I will promptly send a matching update to android17-6.18.\nIf v2 is superseded or NAKed for any reason, I will send a revert.",
+      "parentUuid": "b5a24073_caa77447",
+      "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
