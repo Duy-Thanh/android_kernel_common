@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c36c315_3ddc6f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2026-05-13T14:49:44Z",
+      "side": 1,
+      "message": "Lint+2: ABI change is intentional and the will never be upstreamed.",
+      "revId": "84ba5c370d1e473a59c44131e712e4ba935c7dc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
