@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3286d2b2_ff0bd09e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T17:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "453f3967_5bb968a7",
+      "revId": "f2afa51d6bcb69f3bc2c4207ab067e7ecc482140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac4e466f_35e0406a",
@@ -59,6 +77,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "332dc3ee_bdfd3b10",
+        "filename": "mm/userfaultfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T17:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac4e466f_35e0406a",
+      "range": {
+        "startLine": 1071,
+        "startChar": 3,
+        "endLine": 1071,
+        "endChar": 6
+      },
+      "revId": "f2afa51d6bcb69f3bc2c4207ab067e7ecc482140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a3d5f34_5aad69ca",
@@ -72,6 +114,30 @@
       "writtenOn": "2026-05-12T22:50:14Z",
       "side": 1,
       "message": "Upstream patch was removing these WARN_ON_ONCE\u0027s.",
+      "range": {
+        "startLine": 1303,
+        "startChar": 1,
+        "endLine": 1305,
+        "endChar": 88
+      },
+      "revId": "f2afa51d6bcb69f3bc2c4207ab067e7ecc482140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc0c9e36_b9739180",
+        "filename": "mm/userfaultfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T17:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a3d5f34_5aad69ca",
       "range": {
         "startLine": 1303,
         "startChar": 1,
