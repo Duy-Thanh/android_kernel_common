@@ -22,6 +22,30 @@
       },
       "revId": "50ebe5d67e8c2992780e01857f0a686bd5ad1f4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8129da30_8e94a823",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-05-13T03:52:14Z",
+      "side": 1,
+      "message": "I copied it from the issue.\n\nThe reason why https://android-review.googlesource.com/c/kernel/common/+/4047478 didn\u0027t use the original change-id\nis that it was already in use (see: https://android-review.googlesource.com/c/kernel/common/+/3983321).\n\nHowever, 3983321 didn\u0027t completely pick the entire patch; it only selected one hook commit.\nTherefore, this commit 4047478 re-picked it and committed it.",
+      "parentUuid": "38c81763_d0231226",
+      "range": {
+        "startLine": 28,
+        "startChar": 11,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "50ebe5d67e8c2992780e01857f0a686bd5ad1f4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
