@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344b2b35_f31fffc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-13T15:42:16Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: The second line of the commit message must be blank. The title must be on 1 line.\n\nPlease refer to the contri...\n\nThe second line of the commit message must be blank.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "ff772bffe3991f7feb1ded158fabdb232c75ea0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
