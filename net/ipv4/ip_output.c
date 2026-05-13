@@ -1443,7 +1443,12 @@ ssize_t	ip_append_page(struct sock *sk, struct flowi4 *fl4, struct page *page,
 			goto error;
 		}
 
+<<<<<<< HEAD   (b7a5c1a12af5eccb118c54298e72dd1f390b82ba UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
 		skb_shinfo(skb)->tx_flags |= SKBFL_SHARED_FRAG;
+||||||| BASE   (811843d875276b180a090b84f95ec26b20b558d0 Merge tag 'android13-5.15.202_r00' into android13-5.15)
+=======
+		skb_shinfo(skb)->flags |= SKBFL_SHARED_FRAG;
+>>>>>>> BRANCH (7f4b368e04101e5f8788b55d139505e6cb5e0b67 Merge 5.15.206 into android13-5.15-lts)
 
 		if (skb->ip_summed == CHECKSUM_NONE) {
 			__wsum csum;
