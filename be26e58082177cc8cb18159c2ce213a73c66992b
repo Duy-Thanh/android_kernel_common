@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89fe78a1_d836d000",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-13T16:19:23Z",
+      "side": 1,
+      "message": "this looks like a fix we would also want, but I would split this separately from the refactor to use just the harness API. This commit is clearly doing _more_ than asked since the tests are now genuinely failing because of this.",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 35
+      },
+      "revId": "be26e58082177cc8cb18159c2ce213a73c66992b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
