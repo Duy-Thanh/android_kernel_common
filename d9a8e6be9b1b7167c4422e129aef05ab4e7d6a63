@@ -162,6 +162,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dffeb599_9f7cd7b5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-13T07:44:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7596e89c_afd56244",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2cb42c4_8a3c9586",
@@ -193,6 +211,24 @@
       "side": 1,
       "message": "Yeah, I can move these code to a dedicated function and read host\u0027s value into a local variable first.",
       "parentUuid": "a2cb42c4_8a3c9586",
+      "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70c4ae1_98a6fc69",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-13T07:44:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "119e5705_386a330a",
       "revId": "d9a8e6be9b1b7167c4422e129aef05ab4e7d6a63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
