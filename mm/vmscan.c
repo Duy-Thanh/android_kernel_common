@@ -6822,6 +6822,7 @@ unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 
 	return nr_reclaimed;
 }
+EXPORT_SYMBOL_GPL(try_to_free_pages);
 
 #ifdef CONFIG_MEMCG
 
