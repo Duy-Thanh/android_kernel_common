@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57bd6c1_e9a0ea92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-13T15:50:49Z",
+      "side": 1,
+      "message": "nit: It looks as though the `Signed-off-by: Jiri Kosina \u003cjkosina@suse.com\u003e` signature in https://git.kernel.org/hid/hid/c/64ffa2e5e02f got somehow lost in the cherry-pick process? Also a minor nit but it would be preferable to keep the chronological order in the tags. e.g. `Bug:` and `Change-Id:` should be added _after_ the tags from upstream.",
+      "revId": "44136378220fe78054502729f696986d4fb792c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
