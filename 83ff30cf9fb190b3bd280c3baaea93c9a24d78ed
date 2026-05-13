@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e5191be_7cebcf1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T16:50:20Z",
+      "side": 1,
+      "message": "I dont\u0027s see upstream commit inlining __pte_offset_map(). Please clarify what you mean here.",
+      "range": {
+        "startLine": 46,
+        "startChar": 129,
+        "endLine": 46,
+        "endChar": 216
+      },
+      "revId": "83ff30cf9fb190b3bd280c3baaea93c9a24d78ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132abb59_85866799",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-13T16:50:20Z",
+      "side": 1,
+      "message": "I don\u0027t see this file changed at all. Where is this coming from?",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "83ff30cf9fb190b3bd280c3baaea93c9a24d78ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
