@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d5a71fe_1351c7a8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-13T14:07:35Z",
+      "side": 1,
+      "message": "Bit 7(DMA_FSTS_PRO) is deprecated, but currently used in host driver code:\nhttps://source.corp.google.com/h/android/kernel/common/+/android17-6.18:drivers/iommu/intel/dmar.c;l\u003d2106?q\u003ddmar_fault\u0026ss\u003dh%2Fandroid%2Fkernel%2Fcommon%2F%2B%2Frefs%2Fheads%2Fandroid17-6.18\n\nSo thought of keeping it as it is for now.",
+      "parentUuid": "1303f7fb_0aa6df61",
+      "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "827c7fba_3cbff78f",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
@@ -84,6 +102,24 @@
           ]
         }
       ],
+      "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8bd2698_98be9d4a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-13T14:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "827c7fba_3cbff78f",
       "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
