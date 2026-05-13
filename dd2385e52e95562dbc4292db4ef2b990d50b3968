@@ -52,6 +52,24 @@
       "parentUuid": "84aee8c2_a7cd9ffb",
       "revId": "dd2385e52e95562dbc4292db4ef2b990d50b3968",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc9af4e_0f70bcfd",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-13T07:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df48c8d_9898f03e",
+      "revId": "dd2385e52e95562dbc4292db4ef2b990d50b3968",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
