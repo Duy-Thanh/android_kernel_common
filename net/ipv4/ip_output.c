@@ -1463,7 +1463,12 @@ ssize_t	ip_append_page(struct sock *sk, struct flowi4 *fl4, struct page *page,
 			goto error;
 		}
 
+<<<<<<< HEAD   (17b41c3753e02a95f4c254b325857a19a1064efe UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
 		skb_shinfo(skb)->tx_flags |= SKBFL_SHARED_FRAG;
+||||||| BASE   (2d8ef4f239b0bfe7914ce74327f2f4a123a47473 UPSTREAM: nfc: llcp: add missing return after LLCP_CLOSED ch)
+=======
+		skb_shinfo(skb)->flags |= SKBFL_SHARED_FRAG;
+>>>>>>> BRANCH (fec170e6409ce49bc009a879fddb47f9a1ad9f01 Merge 6.1.172 into android14-6.1-lts)
 
 		if (skb->ip_summed == CHECKSUM_NONE) {
 			__wsum csum;
