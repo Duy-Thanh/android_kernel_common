@@ -16,6 +16,24 @@
       "message": "Please add a description for the patch.",
       "revId": "bb33a146c116101dac5ff1f4927a07a5651340e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef98778d_81a87290",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-05-13T08:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b71c4e4_873a1e7b",
+      "revId": "bb33a146c116101dac5ff1f4927a07a5651340e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
