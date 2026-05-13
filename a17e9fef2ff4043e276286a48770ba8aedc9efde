@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03364e39_857a01da",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2094,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-13T12:41:58Z",
+      "side": 1,
+      "message": "As this is related to tracing and provided by hyp_events.c, \n\nCould you move that to kvm/hyp_trace.h instead?",
+      "fixSuggestions": [
+        {
+          "fixId": "08f866da_9760ba66",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 2094,
+                "startChar": 0,
+                "endLine": 2095,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191dccc9_f1eb894c",
+        "filename": "arch/arm64/kvm/handle_exit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-13T12:41:58Z",
+      "side": 1,
+      "message": "Also, I believe this would print this no matter the presence of a message. Isn\u0027t it possible you get garbage here as args[0]?",
+      "fixSuggestions": [
+        {
+          "fixId": "f0c837eb_19f57a18",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/handle_exit.c",
+              "range": {
+                "startLine": 695,
+                "startChar": 0,
+                "endLine": 696,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (fmt)\n\t\t\tprintk(fmt, args-\u003eargs[1], args-\u003eargs[2], args-\u003eargs[3]);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00af9ddd_460ef31d",
+        "filename": "arch/arm64/kvm/handle_exit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-13T12:41:58Z",
+      "side": 1,
+      "message": "kvm_err(fmt, ...);\n\nAlso, I would drop that \"nVHE hyp WARN. and add the print after line 709.",
+      "fixSuggestions": [
+        {
+          "fixId": "4ede7eed_943c43c2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/handle_exit.c",
+              "range": {
+                "startLine": 694,
+                "startChar": 0,
+                "endLine": 697,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/handle_exit.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\t\tkvm_err(fmt, args-\u003eargs[1], args-\u003eargs[2], args-\u003eargs[3]);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
