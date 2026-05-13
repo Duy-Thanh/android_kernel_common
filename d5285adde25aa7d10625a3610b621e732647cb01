@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70dfdb80_6c60c5f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T18:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139c348b_2f096259",
+      "revId": "d5285adde25aa7d10625a3610b621e732647cb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33f50351_abf81619",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-05-12T23:03:05Z",
       "side": 1,
       "message": "The patch seems to be the same as upstream. Sounds like you had a merge conflict due to some surrounding code. In such cases you can simply say \"Resolved trivial merge conflicts\".",
+      "range": {
+        "startLine": 15,
+        "startChar": 24,
+        "endLine": 15,
+        "endChar": 169
+      },
+      "revId": "d5285adde25aa7d10625a3610b621e732647cb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4c49d0_5f5118a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T18:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33f50351_abf81619",
       "range": {
         "startLine": 15,
         "startChar": 24,
