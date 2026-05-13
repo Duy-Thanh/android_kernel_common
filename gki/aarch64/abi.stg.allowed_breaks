@@ -1,1 +1,18 @@
 # See http://go/approve-abi-break
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x11c402a8 to 0x6a95d4e9
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0xf514a129 to 0xce75ab86
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0xbfbe055e to 0x786feaab
+
+... 5799 omitted; 5802 symbols have only CRC changes
+
+type 'struct task_struct' changed
+  member 'unsigned int user_dumpable:1' was added
+  11 members ('unsigned int in_execve:1' .. 'unsigned int in_nf_duplicate:1') changed
+    offset changed by 1
+

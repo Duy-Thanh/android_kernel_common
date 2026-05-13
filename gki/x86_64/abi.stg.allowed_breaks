@@ -1,1 +1,18 @@
 # See http://go/approve-abi-break
+
+variable symbol 'struct static_call_key __SCK__tp_func_dma_fence_emit' changed
+  CRC changed from 0x69790067 to 0x1b4eed9c
+
+variable symbol 'struct static_call_key __SCK__tp_func_gpu_mem_total' changed
+  CRC changed from 0x69790067 to 0x1b4eed9c
+
+variable symbol 'struct static_call_key __SCK__tp_func_xdp_exception' changed
+  CRC changed from 0x5cec9393 to 0x47181441
+
+... 2875 omitted; 2878 symbols have only CRC changes
+
+type 'struct task_struct' changed
+  member 'unsigned int user_dumpable:1' was added
+  14 members ('unsigned int in_execve:1' .. 'unsigned int in_nf_duplicate:1') changed
+    offset changed by 1
+
