@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027zhe...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027zhengqi.arch@bytedance.com\nCherry pick author: \u0027jordanchang@google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x 45fec1e595145f1ee22fe8ebc087cf30ba0f03ea`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "ecb062c30f53b832180895ab13f40143dfa1be19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c80fcf8_b6000404",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-05-13T18:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4bb7b86_8bdc3807",
+      "revId": "ecb062c30f53b832180895ab13f40143dfa1be19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
