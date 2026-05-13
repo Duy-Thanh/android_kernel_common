@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e368e9_0941780c",
+        "filename": "drivers/iommu/io-pgtable-arm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 3131553
+      },
+      "writtenOn": "2026-05-13T16:54:20Z",
+      "side": 1,
+      "message": "Shoud it be `\u0026put_data-\u003edata-\u003eiop` instead of `put_data-\u003edata-\u003eiop.cookie`?",
+      "fixSuggestions": [
+        {
+          "fixId": "1e86e501_fe5fd8fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/io-pgtable-arm.c",
+              "range": {
+                "startLine": 585,
+                "startChar": 0,
+                "endLine": 586,
+                "endChar": 0
+              },
+              "replacement": "\tio_pgtable_put_pages(\u0026put_data-\u003edata-\u003eiop, iopte_to_paddr(pte, put_data-\u003edata),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2a08b4c06f5ed2ed51f7e23bcd77e45272d51e18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
