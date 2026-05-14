@@ -34,6 +34,24 @@
       "parentUuid": "52fd7789_93062fcd",
       "revId": "46d5cbdf4d177b0a9159f397201acb8696cb967e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80a7a4c_2b489dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-05-14T15:48:17Z",
+      "side": 1,
+      "message": "Resolved offline, let\u0027s fix the build break now, and add the modules (for `x86`) if there is a need for them later.",
+      "parentUuid": "8934df89_da15e7c6",
+      "revId": "46d5cbdf4d177b0a9159f397201acb8696cb967e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
