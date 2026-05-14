@@ -1463,6 +1463,16 @@ static bool pvm_psci_vcpu_on(struct pkvm_hyp_vcpu *hyp_vcpu)
 	}
 
 	reset_state = &target->vcpu.arch.reset_state;
+	/*
+	 * The target reads these fields on another CPU from inside
+	 * pkvm_reset_vcpu()/kvm_reset_vcpu_psci() without an explicit
+	 * acquire barrier. Cross-CPU happens-before is supplied implicitly
+	 * by the host scheduler's wakeup IPI between this CPU's return to
+	 * the host and the target's next entry to EL2. If the host's
+	 * wakeup path is ever changed to bypass such a barrier, these
+	 * writes must be paired with an explicit release here against the
+	 * target's run-gate read of power_state.
+	 */
 	reset_state->pc = smccc_get_arg2(&hyp_vcpu->vcpu);
 	reset_state->r0 = smccc_get_arg3(&hyp_vcpu->vcpu);
 	/* Propagate caller endianness */
