@@ -16,6 +16,24 @@
       "message": "Is the 6.12 bluey going to be GKI compatible? In that case, the upstream GKI kernel already has a backport CL https://r.android.com/3869716. We can just uprev in that case.",
       "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9572c6c_475956ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955868
+      },
+      "writtenOn": "2026-05-14T15:02:13Z",
+      "side": 1,
+      "message": "The plan is to replace this branch, rather than uprev it. Bluey is intended to launch with `android16-6.12` or equivalent, but `android16-6.12-desktop-bluey` is what’s currently used and what’s in http://go/bluey-care.\n\nThe latest announcement on AL kernel branch status mentioned for bluey that “GKI compatibility efforts are ongoing” (https://groups.google.com/a/google.com/g/al-kernel-announce/c/p30v7vFAEl4/m/thdvYW7kAwAJ).\n\nFinally, my reading of the “Kernel Branches” page at https://g3doc.corp.google.com/company/teams/peeps/pillars/xpeeps/aluminium/workstreams/llp/kernel/kernel-branches.md?cl\u003dhead#exceptions suggests this is the correct branch to land it. Under Exceptions, it says: “All qualcomm development happens directly on android16-6.12-desktop-bluey.”",
+      "parentUuid": "ac83ec80_86411e37",
+      "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
