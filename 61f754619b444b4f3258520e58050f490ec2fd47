@@ -16,6 +16,76 @@
       "message": "Thanks Ryan for the review. I\u0027ve pulled back the _syslog_ rename which dropped out all of the driver changes. Much more suitable for downstream now while we wait for dyndbg to come along.",
       "revId": "61f754619b444b4f3258520e58050f490ec2fd47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c8e9db_6a315bcb",
+        "filename": "drivers/gpu/drm/drm_print.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-14T21:35:07Z",
+      "side": 1,
+      "message": "nit: drop this redundant test",
+      "fixSuggestions": [
+        {
+          "fixId": "e03b5d30_54eecbc2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 376,
+                "startChar": 0,
+                "endLine": 379,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "61f754619b444b4f3258520e58050f490ec2fd47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b9c95c_6f214539",
+        "filename": "drivers/gpu/drm/drm_print.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-14T21:35:07Z",
+      "side": 1,
+      "message": "nit: use `__drm_debug_enabled(category)`",
+      "fixSuggestions": [
+        {
+          "fixId": "126d0745_4e7014ed",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_print.c",
+              "range": {
+                "startLine": 379,
+                "startChar": 0,
+                "endLine": 380,
+                "endChar": 0
+              },
+              "replacement": "\tif (__drm_debug_enabled(category)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "61f754619b444b4f3258520e58050f490ec2fd47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
