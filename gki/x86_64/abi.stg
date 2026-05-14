@@ -310491,7 +310491,7 @@ elf_symbol {
   name: "drm_bridge_is_panel"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x757f1af9
+  crc: 0x8167a925
   type_id: 0xf30ec649
   full_name: "drm_bridge_is_panel"
 }
@@ -312507,7 +312507,7 @@ elf_symbol {
   name: "drm_panel_bridge_set_orientation"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6e0be8a3
+  crc: 0x89308d2b
   type_id: 0x9174292d
   full_name: "drm_panel_bridge_set_orientation"
 }
