@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac83ec80_86411e37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981075
+      },
+      "writtenOn": "2026-05-14T08:42:10Z",
+      "side": 1,
+      "message": "Is the 6.12 bluey going to be GKI compatible? In that case, the upstream GKI kernel already has a backport CL https://r.android.com/3869716. We can just uprev in that case.",
+      "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
