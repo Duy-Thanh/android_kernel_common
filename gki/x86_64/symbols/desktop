@@ -894,6 +894,7 @@
   drm_dev_put
   drm_dev_register
   drm_dev_unplug
+  drm_dev_unregister
   drm_display_mode_from_cea_vic
   drm_edid_alloc
   drm_edid_connector_add_modes
@@ -3435,6 +3436,8 @@
   usb_autopm_put_interface
   usb_autopm_put_interface_async
   usb_bulk_msg
+  usb_check_bulk_endpoints
+  usb_check_int_endpoints
   usb_clear_halt
   usb_composite_overwrite_options
   usb_composite_probe
