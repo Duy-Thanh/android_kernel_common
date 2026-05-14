@@ -1546,6 +1546,11 @@ done:
  */
 static bool pvm_psci_vcpu_off(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
+	/*
+	 * Calling vCPU is running guest code, so power_state == ON.
+	 * No concurrent writer: CPU_ON's cmpxchg fires only on OFF;
+	 * the rollback's cmpxchg fires only on ON_PENDING.
+	 */
 	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON);
 	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_OFF);
 
