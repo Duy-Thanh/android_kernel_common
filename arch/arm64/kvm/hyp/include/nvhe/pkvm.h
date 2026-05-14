@@ -72,8 +72,19 @@ struct pkvm_hyp_vm {
 	struct list_head pviommus;
 	struct hyp_pool iommu_pool;
 	struct list_head domains;
-	/* Primary vCPU pending entry to the pvmfw */
-	struct pkvm_hyp_vcpu *pvmfw_entry_vcpu;
+	/*
+	 * The primary vCPU, designated at the first init that completes
+	 * for this VM and never cleared after it has run. For pvmfw VMs
+	 * the primary is the one that executes pvmfw.
+	 */
+	struct pkvm_hyp_vcpu *primary_vcpu;
+
+	/*
+	 * Set true the first time the primary executes pvmfw. Never
+	 * cleared. Gates the pvmfw boot block to one-shot semantics so
+	 * subsequent resets of the primary do not re-enter pvmfw.
+	 */
+	bool pvmfw_booted;
 
 	unsigned short refcount;
 
