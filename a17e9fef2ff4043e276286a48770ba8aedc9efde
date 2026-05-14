@@ -168,6 +168,24 @@
       "parentUuid": "191dccc9_f1eb894c",
       "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afe2afc_177cd1e8",
+        "filename": "arch/arm64/kvm/handle_exit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-14T07:47:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8dc175ee_9ea5264c",
+      "revId": "a17e9fef2ff4043e276286a48770ba8aedc9efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
