@@ -69,6 +69,24 @@
       "parentUuid": "da1d018c_bc6cc2e0",
       "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec20481_44591780",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-05-14T23:52:59Z",
+      "side": 1,
+      "message": "Thanks for clarifying. I have a follow up question:\n\n\u003e Sorry, at least the change to struct tcpm_port is exposed. For example, Pixel modules call tcpm_port_clean(struct tcpm_port *port) based on the pixel symbol list.\n\nI checked tcpm.h, and struct tcpm_port is only forward-declared there. This makes it an incomplete type (opaque pointer) for all external modules like tcpci_max77759.c and Pixel-specific modules.\n\nSince these modules cannot dereference the pointer or call sizeof() on the struct, the addition of internal fields doesn\u0027t change the binary contract between the modules.\n\nIs the requirement to refactor based on a technical risk (e.g., something actually dereferencing the struct) or is it to satisfy the ABI monitoring tool which is flagging the change in the underlying DWARF type? If it\u0027s just the tool, can we look into an ABI suppression rule instead of refactoring the core logic?",
+      "parentUuid": "4d831664_d368e97b",
+      "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
