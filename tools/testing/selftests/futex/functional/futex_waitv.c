@@ -134,10 +134,9 @@ TEST(invalid_flag)
 	to.tv_sec++;
 
 	res = futex_waitv(waitv, NR_FUTEXES, 0, &to, CLOCK_MONOTONIC);
-	if (res == EINVAL) {
-		EXPECT_TRUE(0) TH_LOG("futex_waitv private returned: %d %s",
-				      res ? errno : res,
-				      res ? strerror(errno) : "");
+	EXPECT_EQ(res, -1) TH_LOG("futex_waitv returned unexpected result: %d", res);
+	if (res == -1) {
+		EXPECT_EQ(errno, EINVAL) TH_LOG("futex_waitv returned unexpected errno: %d", errno);
 	}
 }
 
@@ -159,10 +158,9 @@ TEST(unaligned_address)
 	to.tv_sec++;
 
 	res = futex_waitv(waitv, NR_FUTEXES, 0, &to, CLOCK_MONOTONIC);
-	if (res == EINVAL) {
-		EXPECT_TRUE(0) TH_LOG("futex_wake private returned: %d %s",
-				      res ? errno : res,
-				      res ? strerror(errno) : "");
+	EXPECT_EQ(res, -1) TH_LOG("futex_waitv returned unexpected result: %d", res);
+	if (res == -1) {
+		EXPECT_EQ(errno, EINVAL) TH_LOG("futex_waitv returned unexpected errno: %d", errno);
 	}
 }
 
@@ -183,10 +181,9 @@ TEST(null_address)
 	to.tv_sec++;
 
 	res = futex_waitv(waitv, NR_FUTEXES, 0, &to, CLOCK_MONOTONIC);
-	if (res == EINVAL) {
-		EXPECT_TRUE(0) TH_LOG("futex_waitv private returned: %d %s",
-				      res ? errno : res,
-				      res ? strerror(errno) : "");
+	EXPECT_EQ(res, -1) TH_LOG("futex_waitv returned unexpected result: %d", res);
+	if (res == -1) {
+		EXPECT_EQ(errno, EINVAL) TH_LOG("futex_waitv returned unexpected errno: %d", errno);
 	}
 
 	/* Testing a NULL address for *waiters */
@@ -195,10 +192,9 @@ TEST(null_address)
 	to.tv_sec++;
 
 	res = futex_waitv(NULL, NR_FUTEXES, 0, &to, CLOCK_MONOTONIC);
-	if (res == EINVAL) {
-		EXPECT_TRUE(0) TH_LOG("futex_waitv private returned: %d %s",
-				      res ? errno : res,
-				      res ? strerror(errno) : "");
+	EXPECT_EQ(res, -1) TH_LOG("futex_waitv returned unexpected result: %d", res);
+	if (res == -1) {
+		EXPECT_EQ(errno, EINVAL) TH_LOG("futex_waitv returned unexpected errno: %d", errno);
 	}
 }
 
@@ -217,10 +213,9 @@ TEST(invalid_clockid)
 	to.tv_sec++;
 
 	res = futex_waitv(NULL, NR_FUTEXES, 0, &to, CLOCK_TAI);
-	if (res == EINVAL) {
-		EXPECT_TRUE(0) TH_LOG("futex_waitv private returned: %d %s",
-				      res ? errno : res,
-				      res ? strerror(errno) : "");
+	EXPECT_EQ(res, -1) TH_LOG("futex_waitv returned unexpected result: %d", res);
+	if (res == -1) {
+		EXPECT_EQ(errno, EINVAL) TH_LOG("futex_waitv returned unexpected errno: %d", errno);
 	}
 }
 
