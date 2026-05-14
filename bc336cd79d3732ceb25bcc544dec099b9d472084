@@ -34,6 +34,24 @@
       "parentUuid": "ac83ec80_86411e37",
       "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd336f3_311c2209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1299283
+      },
+      "writtenOn": "2026-05-14T16:27:37Z",
+      "side": 1,
+      "message": "I think it makes sense to pick this to unblock current development work as long as we know we will be covered after switching to the GKI kernel (which it sounds like we are).",
+      "parentUuid": "f9572c6c_475956ec",
+      "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
