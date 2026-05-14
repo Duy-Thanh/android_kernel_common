@@ -22,6 +22,30 @@
       },
       "revId": "7bbcce13ad48c3ea1c282bd8bd3c298a1671d324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2036f92_cafe3dc7",
+        "filename": "tools/lib/bpf/strset.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-14T15:20:16Z",
+      "side": 1,
+      "message": "In this scenario `s` is already in the `s-\u003estrset` buffer and `strs_data_len` reflects that already.",
+      "parentUuid": "c0be6e1c_6f46911a",
+      "range": {
+        "startLine": 150,
+        "startChar": 26,
+        "endLine": 150,
+        "endChar": 27
+      },
+      "revId": "7bbcce13ad48c3ea1c282bd8bd3c298a1671d324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
