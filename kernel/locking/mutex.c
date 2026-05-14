@@ -996,10 +996,10 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 	}
 
 	raw_spin_lock_irqsave(&lock->wait_lock, flags);
+	raw_spin_lock(&current->blocked_lock);
 	debug_mutex_unlock(lock);
 
 	if (sched_proxy_exec()) {
-		raw_spin_lock(&current->blocked_lock);
 		/*
 		 * If we have a task boosting current, and that task was boosting
 		 * current through this lock, hand the lock to that task, as that
@@ -1043,8 +1043,7 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 	if (owner & MUTEX_FLAG_HANDOFF)
 		__mutex_handoff(lock, next);
 
-	if (sched_proxy_exec())
-		raw_spin_unlock(&current->blocked_lock);
+	raw_spin_unlock(&current->blocked_lock);
 	trace_android_vh_mutex_unlock_slowpath_before_wakeq(lock);
 	preempt_disable();
 	raw_spin_unlock_irqrestore(&lock->wait_lock, flags);
