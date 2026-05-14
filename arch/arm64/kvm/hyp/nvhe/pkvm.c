@@ -1312,6 +1312,17 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 	struct vcpu_reset_state *reset_state = &vcpu->arch.reset_state;
 	struct pkvm_hyp_vm *hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 
+	/*
+	 * Commit to ON before any side effect. If a concurrent CPU_ON
+	 * rollback already advanced power_state to OFF, bail out before
+	 * mutating sysregs, the pvmfw slot, or SVE state. The run-gate's
+	 * power_state != ON check then routes the vCPU back to the host.
+	 */
+	if (cmpxchg(&hyp_vcpu->power_state,
+		    PSCI_0_2_AFFINITY_LEVEL_ON_PENDING,
+		    PSCI_0_2_AFFINITY_LEVEL_ON) != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING)
+		return;
+
 	WARN_ON(!reset_state->reset);
 
 	kvm_reset_vcpu_core(vcpu);
@@ -1348,9 +1359,6 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 	reset_state->reset = false;
 
 	hyp_vcpu->exit_code = 0;
-
-	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
-	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
 }
 
 struct kvm_hyp_req *pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type)
