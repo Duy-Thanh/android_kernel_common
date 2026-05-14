@@ -16,6 +16,24 @@
       "message": "What is the status on getting this upstream?  The link is from 2023, and the previous patch was taken months ago.  Why should we take this now again without any upstream merge movement?",
       "revId": "db565a3220997891388c00d5adc08f02369c73dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4cab87_d41f88b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-05-14T20:11:35Z",
+      "side": 1,
+      "message": "As per our discussion in b/510049321, we\u0027ll start working on that in the next months.",
+      "parentUuid": "f86d630f_1774c8de",
+      "revId": "db565a3220997891388c00d5adc08f02369c73dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [

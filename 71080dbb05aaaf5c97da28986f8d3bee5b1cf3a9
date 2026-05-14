@@ -16,6 +16,24 @@
       "message": "Do the needed work properly upstream, no PCI core hooks should be needed at all.",
       "revId": "71080dbb05aaaf5c97da28986f8d3bee5b1cf3a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b847b4_f4cb65df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-05-14T20:11:35Z",
+      "side": 1,
+      "message": "I agree with you. As per our discussion in b/510049321, we\u0027ll start working on that in the next months.",
+      "parentUuid": "3be6aa8d_49078ab3",
+      "revId": "71080dbb05aaaf5c97da28986f8d3bee5b1cf3a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
