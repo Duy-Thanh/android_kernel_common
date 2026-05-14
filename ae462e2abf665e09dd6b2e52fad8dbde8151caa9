@@ -33,6 +33,24 @@
       "message": "The ABI compatibility failure in this case seems like a false +ve. All of the failures mentioned are internal to tcpm and are not exposed outside this translation module. Please confirm.\n\n```\ntype \u0027struct tcpm_port\u0027 changed\n  member \u0027struct pd_revision_info pd_rev\u0027 was added\n\ntype \u0027enum pd_msg_request\u0027 changed\n  enumerator \u0027PD_MSG_DATA_REV\u0027 (6) was added\n\ntype \u0027enum tcpm_ams\u0027 changed\n  enumerator \u0027REVISION_INFORMATION\u0027 (34) was added\n```",
       "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1d018c_bc6cc2e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-05-14T22:05:26Z",
+      "side": 1,
+      "message": "Thanks for the review.\n\nThe ABI compatibility failure in this case seems like a false +ve. All of the failures mentioned are internal to tcpm and are not exposed outside this translation module.\n\nThe failures are:\n\n```\ntype \u0027struct tcpm_port\u0027 changed\n  member \u0027struct pd_revision_info pd_rev\u0027 was added\n\ntype \u0027enum pd_msg_request\u0027 changed\n  enumerator \u0027PD_MSG_DATA_REV\u0027 (6) was added\n\ntype \u0027enum tcpm_ams\u0027 changed\n  enumerator \u0027REVISION_INFORMATION\u0027 (34) was added\n```",
+      "parentUuid": "22f63ddb_1444b7d4",
+      "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
