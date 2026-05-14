@@ -51,6 +51,24 @@
       "parentUuid": "22f63ddb_1444b7d4",
       "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d831664_d368e97b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-14T23:05:18Z",
+      "side": 1,
+      "message": "Sorry, at least the change to `struct tcpm_port` is exposed. For example, Pixel modules call `tcpm_port_clean(struct tcpm_port *port)` based on the pixel symbol list (`android/abi_gki_aarch64_pixel`). The two enums might be false if the MAX value in those enums aren\u0027t used in ways that might break KMI (eg, to size arrays).\n\nThis series must be refactored to avoid changing `struct tcpm_port`",
+      "parentUuid": "da1d018c_bc6cc2e0",
+      "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
