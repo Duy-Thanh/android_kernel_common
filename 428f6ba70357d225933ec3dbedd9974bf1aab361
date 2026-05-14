@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b67eddf_3fb8ef04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-05-14T23:57:05Z",
+      "side": 1,
+      "message": "Note for future, lets keep ABI fixup as separate patch, so that when 6.12 ABI thaw happens we can just revert those ABI fixup patches.",
+      "revId": "428f6ba70357d225933ec3dbedd9974bf1aab361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
