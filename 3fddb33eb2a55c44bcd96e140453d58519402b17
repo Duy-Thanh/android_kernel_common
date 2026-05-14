@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a349d24_ae4919da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-14T21:42:28Z",
+      "side": 1,
+      "message": "The symbols for the new symbols need to be added to a symbol list - which should be done in a separate patch on top of this one. The STG update should also go in that new patch.",
+      "revId": "3fddb33eb2a55c44bcd96e140453d58519402b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
