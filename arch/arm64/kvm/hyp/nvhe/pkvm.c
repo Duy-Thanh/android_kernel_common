@@ -1301,16 +1301,35 @@ void pkvm_poison_pvmfw_pages(void)
 }
 
 /*
- * This function sets the registers on the vcpu to their architecturally defined
- * reset values.
+ * This function gates entry to the vcpu and, if it is the first entry after
+ * a power_state transition into ON_PENDING, resets the vcpu's registers to
+ * their architecturally defined reset values.
  *
- * Note: Can only be called by the vcpu on itself, after it has been turned on.
+ * Returns 0 when the vCPU is runnable (power_state == ON on return), or
+ * -ECANCELED if a concurrent CPU_ON rollback advanced power_state to OFF
+ * before this entry could claim the ON_PENDING → ON transition.
+ *
+ * Note: Can only be called by the vcpu on itself.
  */
-void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
+int pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
 	struct vcpu_reset_state *reset_state = &vcpu->arch.reset_state;
 	struct pkvm_hyp_vm *hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+	int prev;
+
+	/*
+	 * Commit ON_PENDING -> ON before any side effect: a concurrent
+	 * CPU_ON rollback can advance power_state to OFF while reset is
+	 * in flight, so route losers back to the host with no mutation.
+	 */
+	prev = cmpxchg(&hyp_vcpu->power_state,
+		       PSCI_0_2_AFFINITY_LEVEL_ON_PENDING,
+		       PSCI_0_2_AFFINITY_LEVEL_ON);
+	if (prev == PSCI_0_2_AFFINITY_LEVEL_ON)
+		return 0;
+	if (prev != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING)
+		return -ECANCELED;
 
 	WARN_ON(!reset_state->reset);
 
@@ -1349,8 +1368,7 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	hyp_vcpu->exit_code = 0;
 
-	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
-	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
+	return 0;
 }
 
 struct kvm_hyp_req *pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type)
