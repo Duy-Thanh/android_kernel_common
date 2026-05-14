@@ -70,6 +70,30 @@
       },
       "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6d71ed_48aac3bf",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 4
+      },
+      "lineNbr": 352775,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-05-14T20:06:01Z",
+      "side": 1,
+      "message": "Thanks Giuliano for checking.\n\nI ll proceed to resolve this comment if there isn\u0027t any other concern.",
+      "parentUuid": "30710424_775d607c",
+      "range": {
+        "startLine": 352775,
+        "startChar": 0,
+        "endLine": 352775,
+        "endChar": 17
+      },
+      "revId": "59d9761eb8ff317b99c90db065c2ffc9efd4a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
