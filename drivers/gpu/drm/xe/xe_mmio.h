@@ -34,6 +34,7 @@ static inline u32 xe_mmio_adjusted_addr(const struct xe_mmio *mmio, u32 addr)
 		addr += mmio->adj_offset;
 	return addr;
 }
+#define xe_mmio_adjusted_addr(p, addr) __xe_mmio_adjusted_addr(__to_xe_mmio(p), addr)
 
 static inline struct xe_mmio *xe_root_tile_mmio(struct xe_device *xe)
 {
