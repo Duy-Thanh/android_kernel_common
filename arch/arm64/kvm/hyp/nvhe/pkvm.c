@@ -1741,7 +1741,8 @@ static bool pkvm_memshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	if (arg3 || !PAGE_ALIGNED(ipa))
 		goto out_guest_err;
 
-	err = __pkvm_guest_share_host(ipa >> PAGE_SHIFT, hyp_vcpu, nr_pages, &nr_shared);
+	err = __pkvm_guest_share_host(ipa >> PAGE_SHIFT, hyp_vm, nr_pages, &nr_shared,
+				      &hyp_vcpu->vcpu.arch.stage2_mc);
 	switch (err) {
 	case 0:
 		atomic64_add(nr_shared * PAGE_SIZE,
@@ -1791,7 +1792,8 @@ static bool pkvm_memunshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	if (arg3 || !PAGE_ALIGNED(ipa))
 		goto out_guest_err;
 
-	err = __pkvm_guest_unshare_host(ipa >> PAGE_SHIFT, hyp_vcpu, nr_pages, &nr_unshared);
+	err = __pkvm_guest_unshare_host(ipa >> PAGE_SHIFT, hyp_vm, nr_pages, &nr_unshared,
+					&hyp_vcpu->vcpu.arch.stage2_mc);
 	switch (err) {
 	case 0:
 		atomic64_add(nr_unshared * PAGE_SIZE,

@@ -626,11 +626,13 @@ static int do_ffa_rxtx_guest_map(struct kvm_cpu_context *ctxt, struct pkvm_hyp_v
 	if (!PAGE_ALIGNED(tx) || !PAGE_ALIGNED(rx))
 		return -EINVAL;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, tx, &tx_va);
+	ret = __pkvm_guest_share_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx, &tx_va,
+					  &hyp_vcpu->vcpu.arch.stage2_mc);
 	if (ret)
 		goto out_err;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, rx, &rx_va);
+	ret = __pkvm_guest_share_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), rx, &rx_va,
+					  &hyp_vcpu->vcpu.arch.stage2_mc);
 	if (ret)
 		goto out_err_with_tx;
 
@@ -649,7 +651,8 @@ out_unlock:
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 	return ret;
 out_err_with_tx:
-	WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, tx));
+	WARN_ON(__pkvm_guest_unshare_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx,
+					      &hyp_vcpu->vcpu.arch.stage2_mc));
 out_err:
 	ret = __handle_mem_protect_err(hyp_vcpu, tx, ret);
 	ret = __handle_mem_protect_err(hyp_vcpu, rx, ret);
@@ -686,8 +689,11 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 
 		ffa_unmap_hyp_buffers();
 	} else {
-		WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, ffa_buf->tx_ipa));
-		WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, ffa_buf->rx_ipa));
+		struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+		struct kvm_hyp_memcache *mc = &hyp_vcpu->vcpu.arch.stage2_mc;
+
+		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa, mc));
+		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa, mc));
 	}
 
 	ffa_buf->rx = NULL;
@@ -773,10 +779,12 @@ static int ffa_store_translation(struct ffa_mem_transfer *transfer, u64 ipa, phy
 static void ffa_guest_unshare_ranges(struct pkvm_hyp_vcpu *vcpu,
 				     struct ffa_mem_transfer *transfer)
 {
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	struct kvm_hyp_memcache *mc = &vcpu->vcpu.arch.stage2_mc;
 	struct ffa_translation *translation, *tmp;
 
 	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
-		WARN_ON(__pkvm_guest_unshare_ffa_page(vcpu, translation->ipa));
+		WARN_ON(__pkvm_guest_unshare_ffa_page(vm, translation->ipa, mc));
 		list_del(&translation->node);
 		hyp_free(translation);
 	}
@@ -788,6 +796,8 @@ static int ffa_guest_share_ranges(struct ffa_mem_region_addr_range *ranges,
 				  size_t reg_len,
 				  struct ffa_mem_transfer *transfer)
 {
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	struct kvm_hyp_memcache *mc = &vcpu->vcpu.arch.stage2_mc;
 	struct ffa_mem_region_addr_range *range;
 	struct ffa_mem_region_addr_range *buf = out_region->constituents;
 	int i, j, ret;
@@ -809,13 +819,13 @@ static int ffa_guest_share_ranges(struct ffa_mem_region_addr_range *ranges,
 			}
 
 			ret = __handle_mem_protect_err(vcpu, ipa,
-					__pkvm_guest_share_ffa_page(vcpu, ipa, &pa));
+					__pkvm_guest_share_ffa_page(vm, ipa, &pa, mc));
 			if (ret)
 				goto unshare;
 
 			ret = ffa_store_translation(transfer, ipa, pa);
 			if (ret) {
-				WARN_ON(__pkvm_guest_unshare_ffa_page(vcpu, ipa));
+				WARN_ON(__pkvm_guest_unshare_ffa_page(vm, ipa, mc));
 				goto unshare;
 			}
 
@@ -1826,6 +1836,7 @@ out_guest:
 static void kvm_guest_try_reclaim_transfer(struct ffa_mem_transfer *transfer,
 					   struct pkvm_hyp_vm *vm)
 {
+	struct kvm_hyp_memcache *mc = &vm->host_kvm->arch.pkvm.stage2_teardown_mc;
 	struct ffa_translation *translation, *tmp;
 	struct arm_smccc_1_2_regs res;
 
@@ -1835,7 +1846,7 @@ static void kvm_guest_try_reclaim_transfer(struct ffa_mem_transfer *transfer,
 		return;
 
 	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
-		WARN_ON(__pkvm_guest_unshare_ffa_page(vm->vcpus[0], translation->ipa));
+		WARN_ON(__pkvm_guest_unshare_ffa_page(vm, translation->ipa, mc));
 		list_del(&translation->node);
 		hyp_free(translation);
 	}
@@ -1846,6 +1857,7 @@ static void kvm_guest_try_reclaim_transfer(struct ffa_mem_transfer *transfer,
 
 int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 {
+	struct kvm_hyp_memcache *mc = &vm->host_kvm->arch.pkvm.stage2_teardown_mc;
 	struct kvm_ffa_buffers *ffa_buf = &vm->ffa_buf;
 	struct ffa_mem_transfer *transfer;
 	int ret = 0;
@@ -1860,11 +1872,11 @@ int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 	if (list_empty(&ffa_buf->xfer_list)) {
 		/* XXX - needs an explicit rxtx unmap call ? */
 		if (ffa_buf->tx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm->vcpus[0], ffa_buf->tx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa, mc));
 			ffa_buf->tx = NULL;
 		}
 		if (ffa_buf->rx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm->vcpus[0], ffa_buf->rx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa, mc));
 			ffa_buf->rx = NULL;
 		}
 		goto unlock;
