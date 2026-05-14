@@ -144,16 +144,35 @@ static void handle_pvm_entry_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 			unsigned long cpu_id = smccc_get_arg1(&hyp_vcpu->vcpu);
 			struct pkvm_hyp_vcpu *target_vcpu;
 			struct pkvm_hyp_vm *hyp_vm;
+			int prev;
 
 			hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 			target_vcpu = pkvm_mpidr_to_hyp_vcpu(hyp_vm, cpu_id);
 
-			if (target_vcpu)
-				cmpxchg(&target_vcpu->power_state,
-					PSCI_0_2_AFFINITY_LEVEL_ON_PENDING,
-					PSCI_0_2_AFFINITY_LEVEL_OFF);
+			/*
+			 * The corresponding exit-side pvm_psci_vcpu_on()
+			 * already resolved this MPIDR to obtain target_vcpu
+			 * before forwarding the CPU_ON to the host. vCPUs are
+			 * never removed from hyp_vm->vcpus[] during the VM's
+			 * lifetime, so the same lookup here cannot return
+			 * NULL. A NULL here is an EL2-internal invariant
+			 * violation.
+			 */
+			WARN_ON(!target_vcpu);
 
-			ret = PSCI_RET_INTERNAL_FAILURE;
+			prev = cmpxchg(&target_vcpu->power_state,
+				       PSCI_0_2_AFFINITY_LEVEL_ON_PENDING,
+				       PSCI_0_2_AFFINITY_LEVEL_OFF);
+			/*
+			 * If the cmpxchg won (prior == ON_PENDING), the
+			 * target never ran. Otherwise the target's reset
+			 * advanced power_state to ON (and possibly on to
+			 * OFF via its own CPU_OFF), so the target did run
+			 * and the guest must observe SUCCESS per PSCI.
+			 */
+			ret = (prev == PSCI_0_2_AFFINITY_LEVEL_ON_PENDING)
+				? PSCI_RET_INTERNAL_FAILURE
+				: PSCI_RET_SUCCESS;
 		}
 
 		break;
