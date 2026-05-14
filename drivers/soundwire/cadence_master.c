@@ -1745,6 +1745,7 @@ int sdw_cdns_clock_stop(struct sdw_cdns *cdns, bool block_wake)
 		return ret;
 	}
 
+	msleep(1);
 	ret = cdns_set_wait(cdns, CDNS_MCP_STAT,
 			    CDNS_MCP_STAT_CLK_STOP,
 			    CDNS_MCP_STAT_CLK_STOP);
