@@ -52,6 +52,24 @@
       "parentUuid": "88203cb1_e5bef551",
       "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a249bf_58aedd75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4759922
+      },
+      "writtenOn": "2026-05-14T02:08:39Z",
+      "side": 1,
+      "message": "Hi Greg,\n\n  The current patch set 11 on this change is already identical to the v2\n  posted on LKML — both the code diff and the commit message/changelog\n  match v2 (the changelog was updated per Rafael\u0027s feedback before I\n  uploaded PS11).\n\n  - LKML v2: https://lore.kernel.org/all/20260408141914.35281-1-nanmu@xiaomi.com/\n  - Gerrit: this change, patch set 11\n\n  v2 is the latest — the only open review question (lockdep) was verified\n  clean with CONFIG_PROVE_LOCKING\u003dy / CONFIG_LOCKDEP\u003dy. Happy to spin a\n  v3 if there\u0027s a specific change you\u0027d like.",
+      "parentUuid": "6267d163_b2bce832",
+      "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
