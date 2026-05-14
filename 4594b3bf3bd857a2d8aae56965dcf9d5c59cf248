@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6201c09_11d44024",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-14T17:18:35Z",
+      "side": 1,
+      "message": "The change matches the upstream code. Did you really have to make these changes? If not, please remove this and change BACKPORT to UPSTREAM",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 176
+      },
+      "revId": "4594b3bf3bd857a2d8aae56965dcf9d5c59cf248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
