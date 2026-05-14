@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f63ddb_1444b7d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-14T21:57:50Z",
+      "side": 1,
+      "message": "It looks like this patch breaks KMI, so I\u0027m not sure we can take it.\n\nCan you try to rework the patch to get equivalent functionality working without KMI changes?",
+      "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
