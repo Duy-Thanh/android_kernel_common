@@ -1301,18 +1301,50 @@ void pkvm_poison_pvmfw_pages(void)
 }
 
 /*
- * This function sets the registers on the vcpu to their architecturally defined
- * reset values.
+ * This function gates entry to the vcpu and, if it is the first entry after
+ * a power_state transition into ON_PENDING, resets the vcpu's registers to
+ * their architecturally defined reset values.
  *
- * Note: Can only be called by the vcpu on itself, after it has been turned on.
+ * Returns 0 when the vCPU is runnable (power_state == ON on return), or
+ * -ECANCELED if a concurrent CPU_ON rollback advanced power_state to OFF
+ * before this entry could claim the ON_PENDING → ON transition, or if the
+ * source's reset_state writes have not yet been published when this entry
+ * runs (the host may schedule the target before the source completes).
+ *
+ * Note: Can only be called by the vcpu on itself.
  */
-void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
+int pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
 	struct vcpu_reset_state *reset_state = &vcpu->arch.reset_state;
 	struct pkvm_hyp_vm *hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+	int prev;
 
-	WARN_ON(!reset_state->reset);
+	/*
+	 * Commit ON_PENDING -> ON before any side effect: a concurrent
+	 * CPU_ON rollback can advance power_state to OFF while reset is
+	 * in flight, so route losers back to the host with no mutation.
+	 * Relaxed: atomic transition plus observe prior is the full
+	 * contract; reset_state publication is handled by the
+	 * release/acquire pair on reset_state->reset below.
+	 */
+	prev = cmpxchg_relaxed(&hyp_vcpu->power_state,
+			       PSCI_0_2_AFFINITY_LEVEL_ON_PENDING,
+			       PSCI_0_2_AFFINITY_LEVEL_ON);
+	if (prev == PSCI_0_2_AFFINITY_LEVEL_ON)
+		return 0;
+	if (prev != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING)
+		return -ECANCELED;
+
+	/*
+	 * Pair with smp_store_release(&reset_state->reset, true) in
+	 * pvm_psci_vcpu_on() (or the equivalent plain write under
+	 * vcpus_lock in pkvm_vcpu_init_psci() for first-run). If the
+	 * source has not yet published, the host scheduled us early;
+	 * bail and let the run-gate bounce back to the host.
+	 */
+	if (!smp_load_acquire(&reset_state->reset))
+		return -ECANCELED;
 
 	kvm_reset_vcpu_core(vcpu);
 	kvm_reset_pvm_sys_regs(vcpu);
@@ -1349,8 +1381,7 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	hyp_vcpu->exit_code = 0;
 
-	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
-	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
+	return 0;
 }
 
 struct kvm_hyp_req *pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type)
@@ -1430,11 +1461,15 @@ static bool pvm_psci_vcpu_on(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	/*
 	 * Make sure the requested vcpu is not on to begin with.
-	 * Atomic to avoid race between vcpus trying to power on the same vcpu.
+	 * Atomic to avoid race between vcpus trying to power on the
+	 * same vcpu. Relaxed: this CPU's contract is atomic transition
+	 * plus observe prior; cross-CPU publication of the reset_state
+	 * writes below is handled by the smp_store_release on
+	 * reset_state->reset.
 	 */
-	power_state = cmpxchg(&target->power_state,
-			      PSCI_0_2_AFFINITY_LEVEL_OFF,
-			      PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
+	power_state = cmpxchg_relaxed(&target->power_state,
+				      PSCI_0_2_AFFINITY_LEVEL_OFF,
+				      PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
 	switch (power_state) {
 	case PSCI_0_2_AFFINITY_LEVEL_ON_PENDING:
 		ret = PSCI_RET_ON_PENDING;
@@ -1454,7 +1489,12 @@ static bool pvm_psci_vcpu_on(struct pkvm_hyp_vcpu *hyp_vcpu)
 	reset_state->r0 = smccc_get_arg3(&hyp_vcpu->vcpu);
 	/* Propagate caller endianness */
 	reset_state->be = kvm_vcpu_is_be(&hyp_vcpu->vcpu);
-	reset_state->reset = true;
+	/*
+	 * Publish the reset_state writes to the target. The release
+	 * pairs with smp_load_acquire() in pkvm_reset_vcpu() before
+	 * the target reads pc/r0/be inside kvm_reset_vcpu_psci().
+	 */
+	smp_store_release(&reset_state->reset, true);
 
 	/*
 	 * Return to the host, which should make the KVM_REQ_VCPU_RESET request
