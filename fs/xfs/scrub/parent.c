@@ -3,7 +3,7 @@
  * Copyright (C) 2017-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -755,6 +755,7 @@ xchk_parent_pptr(
 	struct xfs_scrub	*sc)
 {
 	struct xchk_pptrs	*pp;
+	char			*descr;
 	int			error;
 
 	pp = kvzalloc(sizeof(struct xchk_pptrs), XCHK_GFP_FLAGS);
@@ -767,12 +768,16 @@ xchk_parent_pptr(
 	 * Set up some staging memory for parent pointers that we can't check
 	 * due to locking contention.
 	 */
-	error = xfarray_create("slow parent pointer entries", 0,
-			sizeof(struct xchk_pptr), &pp->pptr_entries);
+	descr = xchk_xfile_ino_descr(sc, "slow parent pointer entries");
+	error = xfarray_create(descr, 0, sizeof(struct xchk_pptr),
+			&pp->pptr_entries);
+	kfree(descr);
 	if (error)
 		goto out_pp;
 
-	error = xfblob_create("slow parent pointer names", &pp->pptr_names);
+	descr = xchk_xfile_ino_descr(sc, "slow parent pointer names");
+	error = xfblob_create(descr, &pp->pptr_names);
+	kfree(descr);
 	if (error)
 		goto out_entries;
 

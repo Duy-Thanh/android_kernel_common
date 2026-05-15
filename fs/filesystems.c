@@ -132,21 +132,24 @@ EXPORT_SYMBOL(unregister_filesystem);
 static int fs_index(const char __user * __name)
 {
 	struct file_system_type * tmp;
-	char *name __free(kfree) = strndup_user(__name, PATH_MAX);
+	struct filename *name;
 	int err, index;
 
+	name = getname(__name);
+	err = PTR_ERR(name);
 	if (IS_ERR(name))
-		return PTR_ERR(name);
+		return err;
 
 	err = -EINVAL;
 	read_lock(&file_systems_lock);
 	for (tmp=file_systems, index=0 ; tmp ; tmp=tmp->next, index++) {
-		if (strcmp(tmp->name, name) == 0) {
+		if (strcmp(tmp->name, name->name) == 0) {
 			err = index;
 			break;
 		}
 	}
 	read_unlock(&file_systems_lock);
+	putname(name);
 	return err;
 }
 

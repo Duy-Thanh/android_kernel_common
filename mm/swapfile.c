@@ -2832,6 +2832,7 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 	struct file *swap_file, *victim;
 	struct address_space *mapping;
 	struct inode *inode;
+	struct filename *pathname;
 	unsigned int maxpages;
 	int err, found = 0;
 
@@ -2840,10 +2841,14 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 
 	BUG_ON(!current->mm);
 
-	CLASS(filename, pathname)(specialfile);
+	pathname = getname(specialfile);
+	if (IS_ERR(pathname))
+		return PTR_ERR(pathname);
+
 	victim = file_open_name(pathname, O_RDWR|O_LARGEFILE, 0);
+	err = PTR_ERR(victim);
 	if (IS_ERR(victim))
-		return PTR_ERR(victim);
+		goto out;
 
 	mapping = victim->f_mapping;
 	spin_lock(&swap_lock);
@@ -2960,6 +2965,8 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 
 out_dput:
 	filp_close(victim, NULL);
+out:
+	putname(pathname);
 	return err;
 }
 
@@ -3386,6 +3393,7 @@ err:
 SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 {
 	struct swap_info_struct *si;
+	struct filename *name;
 	struct file *swap_file = NULL;
 	struct address_space *mapping;
 	struct dentry *dentry;
@@ -3415,7 +3423,12 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 	INIT_WORK(&si->discard_work, swap_discard_work);
 	INIT_WORK(&si->reclaim_work, swap_reclaim_work);
 
-	CLASS(filename, name)(specialfile);
+	name = getname(specialfile);
+	if (IS_ERR(name)) {
+		error = PTR_ERR(name);
+		name = NULL;
+		goto bad_swap;
+	}
 	swap_file = file_open_name(name, O_RDWR | O_LARGEFILE | O_EXCL, 0);
 	if (IS_ERR(swap_file)) {
 		error = PTR_ERR(swap_file);
@@ -3623,6 +3636,8 @@ bad_swap:
 out:
 	if (!IS_ERR_OR_NULL(folio))
 		folio_release_kmap(folio, swap_header);
+	if (name)
+		putname(name);
 	if (inode)
 		inode_unlock(inode);
 	return error;

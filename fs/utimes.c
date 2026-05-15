@@ -8,7 +8,6 @@
 #include <linux/compat.h>
 #include <asm/unistd.h>
 #include <linux/filelock.h>
-#include "internal.h"
 
 static bool nsec_valid(long nsec)
 {
@@ -90,18 +89,21 @@ static int do_utimes_path(int dfd, const char __user *filename,
 
 	if (!(flags & AT_SYMLINK_NOFOLLOW))
 		lookup_flags |= LOOKUP_FOLLOW;
+	if (flags & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
 
-	CLASS(filename_uflags, name)(filename, flags);
 retry:
-	error = filename_lookup(dfd, name, lookup_flags, &path, NULL);
+	error = user_path_at(dfd, filename, lookup_flags, &path);
 	if (error)
 		return error;
+
 	error = vfs_utimes(&path, times);
 	path_put(&path);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+
 	return error;
 }
 

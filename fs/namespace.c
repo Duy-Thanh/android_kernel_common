@@ -3195,6 +3195,8 @@ static struct file *vfs_open_tree(int dfd, const char __user *filename, unsigned
 		lookup_flags &= ~LOOKUP_AUTOMOUNT;
 	if (flags & AT_SYMLINK_NOFOLLOW)
 		lookup_flags &= ~LOOKUP_FOLLOW;
+	if (flags & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
 
 	/*
 	 * If we create a new mount namespace with the cloned mount tree we
@@ -3208,8 +3210,7 @@ static struct file *vfs_open_tree(int dfd, const char __user *filename, unsigned
 	if ((flags & OPEN_TREE_CLONE) && !may_mount())
 		return ERR_PTR(-EPERM);
 
-	CLASS(filename_uflags, name)(filename, flags);
-	ret = filename_lookup(dfd, name, lookup_flags, &path, NULL);
+	ret = user_path_at(dfd, filename, lookup_flags, &path);
 	if (unlikely(ret))
 		return ERR_PTR(ret);
 
@@ -4527,6 +4528,8 @@ SYSCALL_DEFINE5(move_mount,
 {
 	struct path to_path __free(path_put) = {};
 	struct path from_path __free(path_put) = {};
+	struct filename *to_name __free(putname) = NULL;
+	struct filename *from_name __free(putname) = NULL;
 	unsigned int lflags, uflags;
 	enum mnt_tree_flags_t mflags = 0;
 	int ret = 0;
@@ -4548,7 +4551,10 @@ SYSCALL_DEFINE5(move_mount,
 	if (flags & MOVE_MOUNT_T_EMPTY_PATH)
 		uflags = AT_EMPTY_PATH;
 
-	CLASS(filename_maybe_null,to_name)(to_pathname, uflags);
+	to_name = getname_maybe_null(to_pathname, uflags);
+	if (IS_ERR(to_name))
+		return PTR_ERR(to_name);
+
 	if (!to_name && to_dfd >= 0) {
 		CLASS(fd_raw, f_to)(to_dfd);
 		if (fd_empty(f_to))
@@ -4571,7 +4577,10 @@ SYSCALL_DEFINE5(move_mount,
 	if (flags & MOVE_MOUNT_F_EMPTY_PATH)
 		uflags = AT_EMPTY_PATH;
 
-	CLASS(filename_maybe_null,from_name)(from_pathname, uflags);
+	from_name = getname_maybe_null(from_pathname, uflags);
+	if (IS_ERR(from_name))
+		return PTR_ERR(from_name);
+
 	if (!from_name && from_dfd >= 0) {
 		CLASS(fd_raw, f_from)(from_dfd);
 		if (fd_empty(f_from))
@@ -5107,6 +5116,8 @@ SYSCALL_DEFINE5(mount_setattr, int, dfd, const char __user *, path,
 		lookup_flags &= ~LOOKUP_AUTOMOUNT;
 	if (flags & AT_SYMLINK_NOFOLLOW)
 		lookup_flags &= ~LOOKUP_FOLLOW;
+	if (flags & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
 
 	kattr = (struct mount_kattr) {
 		.lookup_flags	= lookup_flags,
@@ -5119,8 +5130,7 @@ SYSCALL_DEFINE5(mount_setattr, int, dfd, const char __user *, path,
 	if (err <= 0)
 		return err;
 
-	CLASS(filename_uflags, name)(path, flags);
-	err = filename_lookup(dfd, name, kattr.lookup_flags, &target, NULL);
+	err = user_path_at(dfd, path, kattr.lookup_flags, &target);
 	if (!err) {
 		err = do_mount_setattr(&target, &kattr);
 		path_put(&target);

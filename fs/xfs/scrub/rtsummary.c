@@ -3,7 +3,7 @@
  * Copyright (C) 2017-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -43,6 +43,7 @@ xchk_setup_rtsummary(
 	struct xfs_scrub	*sc)
 {
 	struct xfs_mount	*mp = sc->mp;
+	char			*descr;
 	struct xchk_rtsummary	*rts;
 	int			error;
 
@@ -69,8 +70,10 @@ xchk_setup_rtsummary(
 	 * Create an xfile to construct a new rtsummary file.  The xfile allows
 	 * us to avoid pinning kernel memory for this purpose.
 	 */
-	error = xfile_create("realtime summary file",
-			XFS_FSB_TO_B(mp, mp->m_rsumblocks), &sc->xfile);
+	descr = xchk_xfile_descr(sc, "realtime summary file");
+	error = xfile_create(descr, XFS_FSB_TO_B(mp, mp->m_rsumblocks),
+			&sc->xfile);
+	kfree(descr);
 	if (error)
 		return error;
 

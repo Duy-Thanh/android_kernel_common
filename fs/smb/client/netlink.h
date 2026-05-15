@@ -10,7 +10,7 @@
 
 extern struct genl_family cifs_genl_family;
 
-int cifs_genl_init(void);
-void cifs_genl_exit(void);
+extern int cifs_genl_init(void);
+extern void cifs_genl_exit(void);
 
 #endif /* _CIFS_NETLINK_H */

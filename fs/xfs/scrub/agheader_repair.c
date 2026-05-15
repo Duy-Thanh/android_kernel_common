@@ -3,7 +3,7 @@
  * Copyright (C) 2018-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -837,12 +837,8 @@ xrep_agi_buf_cleanup(
 {
 	struct xrep_agi	*ragi = buf;
 
-	if (ragi->iunlink_prev)
-		xfarray_destroy(ragi->iunlink_prev);
-	ragi->iunlink_prev = NULL;
-	if (ragi->iunlink_next)
-		xfarray_destroy(ragi->iunlink_next);
-	ragi->iunlink_next = NULL;
+	xfarray_destroy(ragi->iunlink_prev);
+	xfarray_destroy(ragi->iunlink_next);
 	xagino_bitmap_destroy(&ragi->iunlink_bmp);
 }
 
@@ -1712,6 +1708,7 @@ xrep_agi(
 {
 	struct xrep_agi		*ragi;
 	struct xfs_mount	*mp = sc->mp;
+	char			*descr;
 	unsigned int		i;
 	int			error;
 
@@ -1745,13 +1742,17 @@ xrep_agi(
 	xagino_bitmap_init(&ragi->iunlink_bmp);
 	sc->buf_cleanup = xrep_agi_buf_cleanup;
 
-	error = xfarray_create("iunlinked next pointers", 0,
-			sizeof(xfs_agino_t), &ragi->iunlink_next);
+	descr = xchk_xfile_ag_descr(sc, "iunlinked next pointers");
+	error = xfarray_create(descr, 0, sizeof(xfs_agino_t),
+			&ragi->iunlink_next);
+	kfree(descr);
 	if (error)
 		return error;
 
-	error = xfarray_create("iunlinked prev pointers", 0,
-			sizeof(xfs_agino_t), &ragi->iunlink_prev);
+	descr = xchk_xfile_ag_descr(sc, "iunlinked prev pointers");
+	error = xfarray_create(descr, 0, sizeof(xfs_agino_t),
+			&ragi->iunlink_prev);
+	kfree(descr);
 	if (error)
 		return error;
 

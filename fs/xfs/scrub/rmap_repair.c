@@ -3,7 +3,7 @@
  * Copyright (c) 2018-2024 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -164,11 +164,14 @@ xrep_setup_ag_rmapbt(
 	struct xfs_scrub	*sc)
 {
 	struct xrep_rmap	*rr;
+	char			*descr;
 	int			error;
 
 	xchk_fsgates_enable(sc, XCHK_FSGATES_RMAP);
 
-	error = xrep_setup_xfbtree(sc, "reverse mapping records");
+	descr = xchk_xfile_ag_descr(sc, "reverse mapping records");
+	error = xrep_setup_xfbtree(sc, descr);
+	kfree(descr);
 	if (error)
 		return error;
 

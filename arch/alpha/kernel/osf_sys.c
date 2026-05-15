@@ -454,30 +454,42 @@ static int
 osf_ufs_mount(const char __user *dirname,
 	      struct ufs_args __user *args, int flags)
 {
-	struct ufs_args tmp;
-	char *devname __free(kfree) = NULL;
+	int retval;
+	struct cdfs_args tmp;
+	struct filename *devname;
 
+	retval = -EFAULT;
 	if (copy_from_user(&tmp, args, sizeof(tmp)))
-		return -EFAULT;
-	devname = strndup_user(tmp.devname, PATH_MAX);
+		goto out;
+	devname = getname(tmp.devname);
+	retval = PTR_ERR(devname);
 	if (IS_ERR(devname))
-		return PTR_ERR(devname);
-	return do_mount(devname, dirname, "ext2", flags, NULL);
+		goto out;
+	retval = do_mount(devname->name, dirname, "ext2", flags, NULL);
+	putname(devname);
+ out:
+	return retval;
 }
 
 static int
 osf_cdfs_mount(const char __user *dirname,
 	       struct cdfs_args __user *args, int flags)
 {
+	int retval;
 	struct cdfs_args tmp;
-	char *devname __free(kfree) = NULL;
+	struct filename *devname;
 
+	retval = -EFAULT;
 	if (copy_from_user(&tmp, args, sizeof(tmp)))
-		return -EFAULT;
-	devname = strndup_user(tmp.devname, PATH_MAX);
+		goto out;
+	devname = getname(tmp.devname);
+	retval = PTR_ERR(devname);
 	if (IS_ERR(devname))
-		return PTR_ERR(devname);
-	return do_mount(devname, dirname, "iso9660", flags, NULL);
+		goto out;
+	retval = do_mount(devname->name, dirname, "iso9660", flags, NULL);
+	putname(devname);
+ out:
+	return retval;
 }
 
 static int
