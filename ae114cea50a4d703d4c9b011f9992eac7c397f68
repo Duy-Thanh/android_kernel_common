@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "823cd8da_6342df19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-15T17:40:00Z",
+      "side": 1,
+      "message": "`ANDROID: dma-buf:` please.\nI\u0027ve missed the `dma-buf` on some of the patches but it should really be there.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c061a337_3bfba066",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-15T17:40:00Z",
+      "side": 1,
+      "message": "This is optimization not a fix. Pls remove.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
