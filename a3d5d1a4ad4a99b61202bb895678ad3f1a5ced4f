@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb229d7_6a39189c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-15T15:30:19Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be changed to:\n```\nif (size \u003d\u003d 0 || addr + size \u003c addr || PAGE_ALIGN(addr + size) \u003c (addr + size))?\n```\n\nOtherwise this check will give incorrect result:\ne.g. size \u003d 0xFFFFFFFFFFFFFFFF, addr \u003d 0x1FFF\nPAGE_ALIGN(addr + size) will be 0x2000\nPAGE_ALIGN_DOWN(0x1FFF) will be 0x1000\n\nand for page_alinged being false this function will return true",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 15
+      },
+      "revId": "a3d5d1a4ad4a99b61202bb895678ad3f1a5ced4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
