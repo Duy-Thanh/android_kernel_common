@@ -21,6 +21,8 @@
 #include <asm/hwcap.h>
 #include <asm/simd.h>
 
+#include "aes-ce-setkey.h"
+
 #ifdef USE_V8_CRYPTO_EXTENSIONS
 #define MODE			"ce"
 #define PRIO			300

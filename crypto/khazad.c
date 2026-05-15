@@ -859,7 +859,10 @@ static struct crypto_alg khazad_alg = {
 
 static int __init khazad_mod_init(void)
 {
-	return crypto_register_alg(&khazad_alg);
+	int ret = 0;
+	
+	ret = crypto_register_alg(&khazad_alg);
+	return ret;
 }
 
 static void __exit khazad_mod_fini(void)

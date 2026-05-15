@@ -121,8 +121,8 @@ int asymmetric_verify(struct key *keyring, const char *sig,
 		goto out;
 	}
 
-	pks.m = (u8 *)data;
-	pks.m_size = datalen;
+	pks.digest = (u8 *)data;
+	pks.digest_size = datalen;
 	pks.s = hdr->sig;
 	pks.s_size = siglen;
 	ret = verify_signature(key, &pks);

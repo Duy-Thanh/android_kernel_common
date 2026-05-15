@@ -27,9 +27,13 @@ static int __init p8_init(void)
 	if (ret)
 		goto err;
 
-	ret = crypto_register_skcipher(&p8_aes_cbc_alg);
+	ret = crypto_register_alg(&p8_aes_alg);
 	if (ret)
 		goto err_unregister_ghash;
+
+	ret = crypto_register_skcipher(&p8_aes_cbc_alg);
+	if (ret)
+		goto err_unregister_aes;
 
 	ret = crypto_register_skcipher(&p8_aes_ctr_alg);
 	if (ret)
@@ -45,6 +49,8 @@ err_unregister_aes_ctr:
 	crypto_unregister_skcipher(&p8_aes_ctr_alg);
 err_unregister_aes_cbc:
 	crypto_unregister_skcipher(&p8_aes_cbc_alg);
+err_unregister_aes:
+	crypto_unregister_alg(&p8_aes_alg);
 err_unregister_ghash:
 	crypto_unregister_shash(&p8_ghash_alg);
 err:
@@ -56,6 +62,7 @@ static void __exit p8_exit(void)
 	crypto_unregister_skcipher(&p8_aes_xts_alg);
 	crypto_unregister_skcipher(&p8_aes_ctr_alg);
 	crypto_unregister_skcipher(&p8_aes_cbc_alg);
+	crypto_unregister_alg(&p8_aes_alg);
 	crypto_unregister_shash(&p8_ghash_alg);
 }
 
@@ -67,3 +74,4 @@ MODULE_DESCRIPTION("IBM VMX cryptographic acceleration instructions "
 		   "support on Power 8");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("1.0.0");
+MODULE_IMPORT_NS("CRYPTO_INTERNAL");
