@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5ada31_4bdebf53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4276001
+      },
+      "writtenOn": "2026-05-15T02:17:49Z",
+      "side": 1,
+      "message": "The CL is still in wireless-next, so I change the wording from UPSTREAM to FROMGIT, can we merge this CL together on the 0515 KMI window? thanks",
+      "revId": "038bed6e70d5d25b22f5a949bb94a43b5dae4164",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
