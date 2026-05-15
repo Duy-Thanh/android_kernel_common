@@ -51,6 +51,24 @@
       "message": "We don\u0027t know that this passes presubmit as the tests were stopped early due to the pixel build failures.",
       "revId": "634f6ac1f1df549f3f9d5001b45ece3c896b4078",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a206ed0_29f556e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-15T16:48:58Z",
+      "side": 1,
+      "message": "I\u0027ve published pixel patches at change 4076813.",
+      "parentUuid": "9def7097_72190286",
+      "revId": "634f6ac1f1df549f3f9d5001b45ece3c896b4078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
