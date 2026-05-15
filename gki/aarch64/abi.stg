@@ -362258,7 +362258,7 @@ function {
   parameter_id: 0x33756485
   parameter_id: 0x33756485
   parameter_id: 0x064d6086
-  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x33756485
 }
 function {
   id: 0x9bbb9163
@@ -380457,7 +380457,7 @@ elf_symbol {
   name: "__traceiter_android_rvh_bitmap_find_best_next_area"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa090a01c
+  crc: 0x79ba23b0
   type_id: 0x9bba8ecd
   full_name: "__traceiter_android_rvh_bitmap_find_best_next_area"
 }
