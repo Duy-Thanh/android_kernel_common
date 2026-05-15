@@ -16,6 +16,24 @@
       "message": "The CL is still in wireless-next, so I change the wording from UPSTREAM to FROMGIT, can we merge this CL together on the 0515 KMI window? thanks",
       "revId": "038bed6e70d5d25b22f5a949bb94a43b5dae4164",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffd0b212_e7222cb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-15T16:53:01Z",
+      "side": 1,
+      "message": "ok, but the `FROMGIT` tags requires you to add the repo/branch in the `cherry-picked from` line.\n\nalso, is there a specific reason this needs to go together with the KMI update? Couldn\u0027t it go in _now_?",
+      "parentUuid": "dc5ada31_4bdebf53",
+      "revId": "038bed6e70d5d25b22f5a949bb94a43b5dae4164",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
