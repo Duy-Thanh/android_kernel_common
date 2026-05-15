@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb972dd_3b874030",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2026-05-15T16:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54d2d458_bf5f2e5e",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "e479a6643de246d72707c396d12b4cff9684167a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae9bd65_8dd36598",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "did this advice become out of date, because this sat for months?\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3858817/comment/033b018e_70cd436c/\n\ni.e., now we _do_ care about freezing ABI?",
       "parentUuid": "eae9bd65_8dd36598",
+      "revId": "e479a6643de246d72707c396d12b4cff9684167a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4347101f_fe459561",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2026-05-15T16:40:38Z",
+      "side": 1,
+      "message": "Done. Hey, we\u0027re back to version 1!",
+      "parentUuid": "7ac36e3b_1c3c464d",
       "revId": "e479a6643de246d72707c396d12b4cff9684167a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
