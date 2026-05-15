@@ -39,6 +39,24 @@
       "message": "The CRC issues are probably caused by a change in visibility due to this added inclusion. I suspect it would be fixed by adding:\n```\n#include \u003clinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\n\nIf not, then use the instructions at https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch to resolve the issue",
       "revId": "e479a6643de246d72707c396d12b4cff9684167a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac36e3b_1c3c464d",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1096846
+      },
+      "writtenOn": "2026-05-15T16:22:15Z",
+      "side": 1,
+      "message": "did this advice become out of date, because this sat for months?\n\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3858817/comment/033b018e_70cd436c/\n\ni.e., now we _do_ care about freezing ABI?",
+      "parentUuid": "eae9bd65_8dd36598",
+      "revId": "e479a6643de246d72707c396d12b4cff9684167a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
