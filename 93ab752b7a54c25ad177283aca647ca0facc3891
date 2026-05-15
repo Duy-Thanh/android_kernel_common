@@ -16,6 +16,24 @@
       "message": "Hi Suren Baghdasaryan,\nI tried to fix the Lint -1 issue, but it caused the Code-Review +2 label to be removed. Could you please review the code again?\n\nAlso, I couldn’t identify what caused the Lint -1. Could you help check what might have triggered it? Thanks.",
       "revId": "93ab752b7a54c25ad177283aca647ca0facc3891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dec7159_b9731a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-15T03:55:07Z",
+      "side": 1,
+      "message": "Did you see my comment in https://b.corp.google.com/issues/511027684#comment6 ? That\u0027s the error I was getting and I explained how to avoid it.",
+      "parentUuid": "3c37ef5d_ecad254a",
+      "revId": "93ab752b7a54c25ad177283aca647ca0facc3891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
