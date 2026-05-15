@@ -463,6 +463,8 @@ drm_atomic_helper_colorop_duplicate_state(struct drm_colorop *colorop)
 void drm_colorop_atomic_destroy_state(struct drm_colorop *colorop,
 				      struct drm_colorop_state *state)
 {
+	if (state->data)
+		drm_property_blob_put(state->data);
 	kfree(state);
 }
 
@@ -513,9 +515,10 @@ static void __drm_colorop_reset(struct drm_colorop *colorop,
 
 void drm_colorop_reset(struct drm_colorop *colorop)
 {
-	kfree(colorop->state);
-	colorop->state = kzalloc(sizeof(*colorop->state), GFP_KERNEL);
+	if (colorop->state)
+		drm_colorop_atomic_destroy_state(colorop, colorop->state);
 
+	colorop->state = kzalloc(sizeof(*colorop->state), GFP_KERNEL);
 	if (colorop->state)
 		__drm_colorop_reset(colorop, colorop->state);
 }
