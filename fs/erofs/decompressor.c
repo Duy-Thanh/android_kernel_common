@@ -34,10 +34,7 @@ static int z_erofs_load_lz4_config(struct super_block *sb,
 		}
 	} else {
 		distance = le16_to_cpu(dsb->u1.lz4_max_distance);
-		if (!distance && !erofs_sb_has_lz4_0padding(sbi))
-			return 0;
 		sbi->lz4.max_pclusterblks = 1;
-		sbi->available_compr_algs = 1 << Z_EROFS_COMPRESSION_LZ4;
 	}
 
 	sbi->lz4.max_distance_pages = distance ?
@@ -198,47 +195,55 @@ const char *z_erofs_fixup_insize(struct z_erofs_decompress_req *rq,
 	return NULL;
 }
 
-static const char *__z_erofs_lz4_decompress(struct z_erofs_decompress_req *rq,
-					    u8 *dst)
+static int z_erofs_lz4_decompress_mem(struct z_erofs_decompress_req *rq, u8 *dst)
 {
-	bool may_inplace = false;
+	bool support_0padding = false, may_inplace = false;
 	unsigned int inputmargin;
 	u8 *out, *headpage, *src;
 	const char *reason;
 	int ret, maptype;
 
+	DBG_BUGON(*rq->in == NULL);
 	headpage = kmap_local_page(*rq->in);
-	reason = z_erofs_fixup_insize(rq, headpage + rq->pageofs_in,
-			min_t(unsigned int, rq->inputsize,
-			      rq->sb->s_blocksize - rq->pageofs_in));
-	if (reason) {
-		kunmap_local(headpage);
-		return reason;
+
+	/* LZ4 decompression inplace is only safe if zero_padding is enabled */
+	if (erofs_sb_has_zero_padding(EROFS_SB(rq->sb))) {
+		support_0padding = true;
+		reason = z_erofs_fixup_insize(rq, headpage + rq->pageofs_in,
+				min_t(unsigned int, rq->inputsize,
+				      rq->sb->s_blocksize - rq->pageofs_in));
+		if (reason) {
+			kunmap_local(headpage);
+			return IS_ERR(reason) ? PTR_ERR(reason) : -EFSCORRUPTED;
+		}
+		may_inplace = !((rq->pageofs_in + rq->inputsize) &
+				(rq->sb->s_blocksize - 1));
 	}
-	may_inplace = !((rq->pageofs_in + rq->inputsize) &
-			(rq->sb->s_blocksize - 1));
 
 	inputmargin = rq->pageofs_in;
 	src = z_erofs_lz4_handle_overlap(rq, headpage, dst, &inputmargin,
 					 &maptype, may_inplace);
 	if (IS_ERR(src))
-		return ERR_CAST(src);
+		return PTR_ERR(src);
 
 	out = dst + rq->pageofs_out;
-	if (rq->partial_decoding)
+	/* legacy format could compress extra data in a pcluster. */
+	if (rq->partial_decoding || !support_0padding)
 		ret = LZ4_decompress_safe_partial(src + inputmargin, out,
 				rq->inputsize, rq->outputsize, rq->outputsize);
 	else
 		ret = LZ4_decompress_safe(src + inputmargin, out,
 					  rq->inputsize, rq->outputsize);
-	if (ret == rq->outputsize)
-		reason = NULL;
-	else if (ret < 0)
-		reason = "corrupted compressed data";
-	else
-		reason = "unexpected end of stream";
 
-	if (!maptype) {
+	if (ret != rq->outputsize) {
+		if (ret >= 0)
+			memset(out + ret, 0, rq->outputsize - ret);
+		ret = -EFSCORRUPTED;
+	} else {
+		ret = 0;
+	}
+
+	if (maptype == 0) {
 		kunmap_local(headpage);
 	} else if (maptype == 1) {
 		vm_unmap_ram(src, rq->inpages);
@@ -246,16 +251,15 @@ static const char *__z_erofs_lz4_decompress(struct z_erofs_decompress_req *rq,
 		z_erofs_put_gbuf(src);
 	} else if (maptype != 3) {
 		DBG_BUGON(1);
-		return ERR_PTR(-EFAULT);
+		return -EFAULT;
 	}
-	return reason;
+	return ret;
 }
 
 static const char *z_erofs_lz4_decompress(struct z_erofs_decompress_req *rq,
 					  struct page **pagepool)
 {
 	unsigned int dst_maptype;
-	const char *reason;
 	void *dst;
 	int ret;
 
@@ -279,12 +283,12 @@ static const char *z_erofs_lz4_decompress(struct z_erofs_decompress_req *rq,
 			dst_maptype = 2;
 		}
 	}
-	reason = __z_erofs_lz4_decompress(rq, dst);
+	ret = z_erofs_lz4_decompress_mem(rq, dst);
 	if (!dst_maptype)
 		kunmap_local(dst);
 	else if (dst_maptype == 2)
 		vm_unmap_ram(dst, rq->outpages);
-	return reason;
+	return ERR_PTR(ret);
 }
 
 static const char *z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
@@ -448,26 +452,31 @@ int z_erofs_parse_cfgs(struct super_block *sb, struct erofs_super_block *dsb)
 {
 	struct erofs_sb_info *sbi = EROFS_SB(sb);
 	struct erofs_buf buf = __EROFS_BUF_INITIALIZER;
-	unsigned long algs, alg;
+	unsigned int algs, alg;
 	erofs_off_t offset;
 	int size, ret = 0;
 
-	if (!erofs_sb_has_compr_cfgs(sbi))
+	if (!erofs_sb_has_compr_cfgs(sbi)) {
+		sbi->available_compr_algs = 1 << Z_EROFS_COMPRESSION_LZ4;
 		return z_erofs_load_lz4_config(sb, dsb, NULL, 0);
+	}
 
-	algs = le16_to_cpu(dsb->u1.available_compr_algs);
-	sbi->available_compr_algs = algs;
-	if (algs & ~Z_EROFS_ALL_COMPR_ALGS) {
-		erofs_err(sb, "unidentified algorithms %lx, please upgrade kernel",
-			  algs & ~Z_EROFS_ALL_COMPR_ALGS);
+	sbi->available_compr_algs = le16_to_cpu(dsb->u1.available_compr_algs);
+	if (sbi->available_compr_algs & ~Z_EROFS_ALL_COMPR_ALGS) {
+		erofs_err(sb, "unidentified algorithms %x, please upgrade kernel",
+			  sbi->available_compr_algs & ~Z_EROFS_ALL_COMPR_ALGS);
 		return -EOPNOTSUPP;
 	}
 
 	(void)erofs_init_metabuf(&buf, sb, false);
 	offset = EROFS_SUPER_OFFSET + sbi->sb_size;
-	for_each_set_bit(alg, &algs, Z_EROFS_COMPRESSION_MAX) {
+	alg = 0;
+	for (algs = sbi->available_compr_algs; algs; algs >>= 1, ++alg) {
 		const struct z_erofs_decompressor *dec = z_erofs_decomp[alg];
 		void *data;
+
+		if (!(algs & 1))
+			continue;
 
 		data = erofs_read_metadata(sb, &buf, &offset, &size);
 		if (IS_ERR(data)) {
@@ -475,10 +484,10 @@ int z_erofs_parse_cfgs(struct super_block *sb, struct erofs_super_block *dsb)
 			break;
 		}
 
-		if (dec && dec->config) {
+		if (alg < Z_EROFS_COMPRESSION_MAX && dec && dec->config) {
 			ret = dec->config(sb, dsb, data, size);
 		} else {
-			erofs_err(sb, "algorithm %ld isn't enabled on this kernel",
+			erofs_err(sb, "algorithm %d isn't enabled on this kernel",
 				  alg);
 			ret = -EOPNOTSUPP;
 		}
