@@ -16,6 +16,24 @@
       "message": "You need to file a respin request.",
       "revId": "1ac3023317a04c496fad1ba0311db8f65d0e23ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "078043a1_ffb29dfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-15T06:13:39Z",
+      "side": 1,
+      "message": "Done; b/513428566",
+      "parentUuid": "b3d6fab4_746d9a40",
+      "revId": "1ac3023317a04c496fad1ba0311db8f65d0e23ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
