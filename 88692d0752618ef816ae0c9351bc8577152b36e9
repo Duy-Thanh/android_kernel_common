@@ -16,6 +16,24 @@
       "message": "not in alphabetical order (\"vh_skip\" should be after \"vh_sk_\")",
       "revId": "88692d0752618ef816ae0c9351bc8577152b36e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc42fb3_1ab21e90",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T15:22:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f816d39_1f8d8098",
+      "revId": "88692d0752618ef816ae0c9351bc8577152b36e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
