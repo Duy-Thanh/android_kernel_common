@@ -8,7 +8,6 @@
 #define _LINUX_BITFIELD_H
 
 #include <linux/build_bug.h>
-#include <linux/compiler.h>
 #include <linux/typecheck.h>
 #include <asm/byteorder.h>
 
@@ -244,7 +243,7 @@ __MAKE_OP(64)
 
 #define __field_prep(mask, val)						\
 	({								\
-		auto __mask = (mask);					\
+		__auto_type __mask = (mask);				\
 		typeof(__mask) __val = (val);				\
 		unsigned int __shift = BITS_PER_TYPE(__mask) <= 32 ?	\
 				       __ffs(__mask) : __ffs64(__mask);	\
@@ -253,7 +252,7 @@ __MAKE_OP(64)
 
 #define __field_get(mask, reg)						\
 	({								\
-		auto __mask = (mask);					\
+		__auto_type __mask = (mask);				\
 		typeof(__mask) __reg =  (reg);				\
 		unsigned int __shift = BITS_PER_TYPE(__mask) <= 32 ?	\
 				       __ffs(__mask) : __ffs64(__mask);	\

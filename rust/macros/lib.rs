@@ -11,6 +11,8 @@
 // to avoid depending on the full `proc_macro_span` on Rust >= 1.88.0.
 #![cfg_attr(not(CONFIG_RUSTC_HAS_SPAN_FILE), feature(proc_macro_span))]
 
+#[macro_use]
+mod quote;
 mod concat_idents;
 mod export;
 mod fmt;
@@ -21,8 +23,6 @@ mod paste;
 mod vtable;
 
 use proc_macro::TokenStream;
-
-use syn::parse_macro_input;
 
 /// Declares a kernel module.
 ///
@@ -131,10 +131,8 @@ use syn::parse_macro_input;
 ///   - `firmware`: array of ASCII string literals of the firmware files of
 ///     the kernel module.
 #[proc_macro]
-pub fn module(input: TokenStream) -> TokenStream {
-    module::module(parse_macro_input!(input))
-        .unwrap_or_else(|e| e.into_compile_error())
-        .into()
+pub fn module(ts: TokenStream) -> TokenStream {
+    module::module(ts)
 }
 
 /// Declares or implements a vtable trait.
@@ -156,7 +154,7 @@ pub fn module(input: TokenStream) -> TokenStream {
 /// case the default implementation will never be executed. The reason for this
 /// is that the functions will be called through function pointers installed in
 /// C side vtables. When an optional method is not implemented on a `#[vtable]`
-/// trait, a `NULL` entry is installed in the vtable. Thus the default
+/// trait, a NULL entry is installed in the vtable. Thus the default
 /// implementation is never called. Since these traits are not designed to be
 /// used on the Rust side, it should not be possible to call the default
 /// implementation. This is done to ensure that we call the vtable methods
@@ -208,11 +206,8 @@ pub fn module(input: TokenStream) -> TokenStream {
 ///
 /// [`kernel::error::VTABLE_DEFAULT_ERROR`]: ../kernel/error/constant.VTABLE_DEFAULT_ERROR.html
 #[proc_macro_attribute]
-pub fn vtable(attr: TokenStream, input: TokenStream) -> TokenStream {
-    parse_macro_input!(attr as syn::parse::Nothing);
-    vtable::vtable(parse_macro_input!(input))
-        .unwrap_or_else(|e| e.into_compile_error())
-        .into()
+pub fn vtable(attr: TokenStream, ts: TokenStream) -> TokenStream {
+    vtable::vtable(attr, ts)
 }
 
 /// Export a function so that C code can call it via a header file.
@@ -234,9 +229,8 @@ pub fn vtable(attr: TokenStream, input: TokenStream) -> TokenStream {
 /// This macro is *not* the same as the C macros `EXPORT_SYMBOL_*`. All Rust symbols are currently
 /// automatically exported with `EXPORT_SYMBOL_GPL`.
 #[proc_macro_attribute]
-pub fn export(attr: TokenStream, input: TokenStream) -> TokenStream {
-    parse_macro_input!(attr as syn::parse::Nothing);
-    export::export(parse_macro_input!(input)).into()
+pub fn export(attr: TokenStream, ts: TokenStream) -> TokenStream {
+    export::export(attr, ts)
 }
 
 /// Like [`core::format_args!`], but automatically wraps arguments in [`kernel::fmt::Adapter`].
@@ -254,7 +248,7 @@ pub fn export(attr: TokenStream, input: TokenStream) -> TokenStream {
 /// [`pr_info!`]: ../kernel/macro.pr_info.html
 #[proc_macro]
 pub fn fmt(input: TokenStream) -> TokenStream {
-    fmt::fmt(input.into()).into()
+    fmt::fmt(input)
 }
 
 /// Concatenate two identifiers.
@@ -311,8 +305,8 @@ pub fn fmt(input: TokenStream) -> TokenStream {
 /// assert_eq!(BR_OK, binder_driver_return_protocol_BR_OK);
 /// ```
 #[proc_macro]
-pub fn concat_idents(input: TokenStream) -> TokenStream {
-    concat_idents::concat_idents(parse_macro_input!(input)).into()
+pub fn concat_idents(ts: TokenStream) -> TokenStream {
+    concat_idents::concat_idents(ts)
 }
 
 /// Paste identifiers together.
@@ -450,12 +444,9 @@ pub fn concat_idents(input: TokenStream) -> TokenStream {
 /// [`paste`]: https://docs.rs/paste/
 #[proc_macro]
 pub fn paste(input: TokenStream) -> TokenStream {
-    let mut tokens = proc_macro2::TokenStream::from(input).into_iter().collect();
+    let mut tokens = input.into_iter().collect();
     paste::expand(&mut tokens);
-    tokens
-        .into_iter()
-        .collect::<proc_macro2::TokenStream>()
-        .into()
+    tokens.into_iter().collect()
 }
 
 /// Registers a KUnit test suite and its test cases using a user-space like syntax.
@@ -481,8 +472,6 @@ pub fn paste(input: TokenStream) -> TokenStream {
 /// }
 /// ```
 #[proc_macro_attribute]
-pub fn kunit_tests(attr: TokenStream, input: TokenStream) -> TokenStream {
-    kunit::kunit_tests(parse_macro_input!(attr), parse_macro_input!(input))
-        .unwrap_or_else(|e| e.into_compile_error())
-        .into()
+pub fn kunit_tests(attr: TokenStream, ts: TokenStream) -> TokenStream {
+    kunit::kunit_tests(attr, ts)
 }

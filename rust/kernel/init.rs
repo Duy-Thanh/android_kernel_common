@@ -219,12 +219,20 @@ pub trait InPlaceInit<T>: Sized {
 /// [`Error`]: crate::error::Error
 #[macro_export]
 macro_rules! try_init {
-    ($($args:tt)*) => {
-        ::pin_init::init!(
-            #[default_error($crate::error::Error)]
-            $($args)*
-        )
-    }
+    ($(&$this:ident in)? $t:ident $(::<$($generics:ty),* $(,)?>)? {
+        $($fields:tt)*
+    }) => {
+        ::pin_init::try_init!($(&$this in)? $t $(::<$($generics),*>)? {
+            $($fields)*
+        }? $crate::error::Error)
+    };
+    ($(&$this:ident in)? $t:ident $(::<$($generics:ty),* $(,)?>)? {
+        $($fields:tt)*
+    }? $err:ty) => {
+        ::pin_init::try_init!($(&$this in)? $t $(::<$($generics),*>)? {
+            $($fields)*
+        }? $err)
+    };
 }
 
 /// Construct an in-place, fallible pinned initializer for `struct`s.
@@ -271,10 +279,18 @@ macro_rules! try_init {
 /// [`Error`]: crate::error::Error
 #[macro_export]
 macro_rules! try_pin_init {
-    ($($args:tt)*) => {
-        ::pin_init::pin_init!(
-            #[default_error($crate::error::Error)]
-            $($args)*
-        )
-    }
+    ($(&$this:ident in)? $t:ident $(::<$($generics:ty),* $(,)?>)? {
+        $($fields:tt)*
+    }) => {
+        ::pin_init::try_pin_init!($(&$this in)? $t $(::<$($generics),*>)? {
+            $($fields)*
+        }? $crate::error::Error)
+    };
+    ($(&$this:ident in)? $t:ident $(::<$($generics:ty),* $(,)?>)? {
+        $($fields:tt)*
+    }? $err:ty) => {
+        ::pin_init::try_pin_init!($(&$this in)? $t $(::<$($generics),*>)? {
+            $($fields)*
+        }? $err)
+    };
 }
