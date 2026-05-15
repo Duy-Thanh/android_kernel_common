@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="generic_03"
 ERR_CODE=0
 
 _prep_test "null" "check dma & segment limits for zero copy"

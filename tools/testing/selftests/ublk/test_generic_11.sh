@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="generic_11"
 ERR_CODE=0
 
 ublk_run_quiesce_recover()

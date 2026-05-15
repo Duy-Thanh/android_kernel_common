@@ -18,6 +18,11 @@
 struct raid10_info {
 	struct md_rdev	*rdev, *replacement;
 	sector_t	head_position;
+	int		recovery_disabled;	/* matches
+						 * mddev->recovery_disabled
+						 * when we shouldn't try
+						 * recovering this device.
+						 */
 };
 
 struct r10conf {

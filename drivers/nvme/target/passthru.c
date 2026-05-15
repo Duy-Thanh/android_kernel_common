@@ -247,8 +247,7 @@ static void nvmet_passthru_execute_cmd_work(struct work_struct *w)
 }
 
 static enum rq_end_io_ret nvmet_passthru_req_done(struct request *rq,
-						  blk_status_t blk_status,
-						  const struct io_comp_batch *iob)
+						  blk_status_t blk_status)
 {
 	struct nvmet_req *req = rq->end_io_data;
 

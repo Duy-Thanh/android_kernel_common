@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="generic_10"
 ERR_CODE=0
 
 if ! _have_feature "UPDATE_SIZE"; then

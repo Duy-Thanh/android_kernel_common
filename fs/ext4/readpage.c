@@ -36,7 +36,6 @@
 #include <linux/bio.h>
 #include <linux/fs.h>
 #include <linux/buffer_head.h>
-#include <linux/blk-crypto.h>
 #include <linux/blkdev.h>
 #include <linux/highmem.h>
 #include <linux/prefetch.h>
@@ -346,7 +345,7 @@ int ext4_mpage_readpages(struct inode *inode,
 		if (bio && (last_block_in_bio != first_block - 1 ||
 			    !fscrypt_mergeable_bio(bio, inode, next_block))) {
 		submit_and_realloc:
-			blk_crypto_submit_bio(bio);
+			submit_bio(bio);
 			bio = NULL;
 		}
 		if (bio == NULL) {
@@ -372,14 +371,14 @@ int ext4_mpage_readpages(struct inode *inode,
 		if (((map.m_flags & EXT4_MAP_BOUNDARY) &&
 		     (relative_block == map.m_len)) ||
 		    (first_hole != blocks_per_folio)) {
-			blk_crypto_submit_bio(bio);
+			submit_bio(bio);
 			bio = NULL;
 		} else
 			last_block_in_bio = first_block + blocks_per_folio - 1;
 		continue;
 	confused:
 		if (bio) {
-			blk_crypto_submit_bio(bio);
+			submit_bio(bio);
 			bio = NULL;
 		}
 		if (!folio_test_uptodate(folio))
@@ -390,7 +389,7 @@ next_page:
 		; /* A label shall be followed by a statement until C23 */
 	}
 	if (bio)
-		blk_crypto_submit_bio(bio);
+		submit_bio(bio);
 	return 0;
 }
 
