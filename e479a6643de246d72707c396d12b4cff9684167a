@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6104fafd_1885eb80",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T17:31:19Z",
+      "side": 1,
+      "message": "Still not in alpha order (all _rvh_ must be before all _vh_)",
+      "parentUuid": "8eb972dd_3b874030",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "e479a6643de246d72707c396d12b4cff9684167a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eae9bd65_8dd36598",
         "filename": "drivers/pci/pci.c",
         "patchSetId": 12
