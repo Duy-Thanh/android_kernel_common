@@ -699,19 +699,21 @@ out:
 	ffa_to_smccc_res(res, ret);
 }
 
-static u32 __ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
-				   u32 nranges, bool is_lend)
+static int __ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
+				   u32 nranges, bool is_lend, u32 *nshared)
 {
+	int ret = 0;
 	u32 i;
-	int ret;
 
 	for (i = 0; i < nranges; ++i) {
 		struct ffa_mem_region_addr_range *range = &ranges[i];
 		u64 sz = (u64)range->pg_cnt * FFA_PAGE_SIZE;
 		u64 pfn = hyp_phys_to_pfn(range->address);
 
-		if (!PAGE_ALIGNED(sz))
+		if (!PAGE_ALIGNED(sz)) {
+			ret = -EINVAL;
 			break;
+		}
 
 		if (static_branch_unlikely(&kvm_ffa_unmap_on_lend) && is_lend)
 			ret = __pkvm_host_donate_ffa(pfn, sz / PAGE_SIZE);
@@ -721,7 +723,9 @@ static u32 __ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
 			break;
 	}
 
-	return i;
+	*nshared = i;
+
+	return ret;
 }
 
 /*
@@ -729,19 +733,21 @@ static u32 __ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
  * On success, return the number of *unshared* pages and store in the
  * is_lend argument whether the range was shared or lent.
  */
-static u32 __ffa_host_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
-				     u32 nranges, bool is_lend)
+static int __ffa_host_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
+				     u32 nranges, bool is_lend, u32 *nunshared)
 {
 	u32 i;
-	int ret;
+	int ret = 0;
 
 	for (i = 0; i < nranges; ++i) {
 		struct ffa_mem_region_addr_range *range = &ranges[i];
 		u64 sz = (u64)range->pg_cnt * FFA_PAGE_SIZE;
 		u64 pfn = hyp_phys_to_pfn(range->address);
 
-		if (!PAGE_ALIGNED(sz))
+		if (!PAGE_ALIGNED(sz)) {
+			ret = -EINVAL;
 			break;
+		}
 
 		if (static_branch_unlikely(&kvm_ffa_unmap_on_lend) && is_lend)
 			ret = __pkvm_host_reclaim_ffa(pfn, sz / PAGE_SIZE);
@@ -752,7 +758,9 @@ static u32 __ffa_host_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
 			break;
 	}
 
-	return i;
+	*nunshared = i;
+
+	return ret;
 }
 
 static int ffa_store_translation(struct ffa_mem_transfer *transfer, u64 ipa, phys_addr_t pa)
@@ -841,13 +849,12 @@ unshare:
 static int ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
 				 u32 nranges, bool is_lend)
 {
-	u32 nshared = __ffa_host_share_ranges(ranges, nranges, is_lend);
-	int ret = 0;
+	u32 nshared;
+	int ret;
 
-	if (nshared != nranges) {
-		WARN_ON(__ffa_host_unshare_ranges(ranges, nshared, is_lend) != nshared);
-		ret = -EACCES;
-	}
+	ret = __ffa_host_share_ranges(ranges, nranges, is_lend, &nshared);
+	if (ret)
+		WARN_ON(__ffa_host_unshare_ranges(ranges, nshared, is_lend, NULL));
 
 	return ret;
 }
@@ -855,13 +862,12 @@ static int ffa_host_share_ranges(struct ffa_mem_region_addr_range *ranges,
 static int ffa_host_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
 				   u32 nranges, bool is_lend)
 {
-	int ret = 0;
-	u32 nunshared = __ffa_host_unshare_ranges(ranges, nranges, is_lend);
+	u32 nunshared;
+	int ret;
 
-	if (nunshared != nranges) {
-		WARN_ON(__ffa_host_share_ranges(ranges, nunshared, is_lend) != nunshared);
-		ret = -EACCES;
-	}
+	ret = __ffa_host_unshare_ranges(ranges, nranges, is_lend, &nunshared);
+	if (ret)
+		WARN_ON(__ffa_host_share_ranges(ranges, nunshared, is_lend, NULL));
 
 	return ret;
 }
