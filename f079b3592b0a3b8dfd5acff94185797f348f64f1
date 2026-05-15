@@ -16,6 +16,23 @@
       "message": "Hello Team,\nPlease review this change. If anything required from my side, please let me know.",
       "revId": "f079b3592b0a3b8dfd5acff94185797f348f64f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20456101_56911fac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-15T13:23:00Z",
+      "side": 1,
+      "message": "I\u0027ll pick this up for the KMI freeze but it looks like `struct skb_shared_info` is not part of the monitored symbols yet.",
+      "revId": "f079b3592b0a3b8dfd5acff94185797f348f64f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
