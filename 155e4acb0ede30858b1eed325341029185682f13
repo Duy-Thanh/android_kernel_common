@@ -16,6 +16,24 @@
       "message": "This series breaks the KMI so it will be queued for the May 15 KMI update after the build-break is fixed.\n\nBuild-break for arm64 allmodconfig:\n```\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n...rc/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/lib/crypto/Kbuild.fips140:36: FORCE prerequisite is missing\n...rc/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/lib/crypto/Kbuild.fips140:38: FORCE prerequisite is missing\n.../linux-sandbox/252/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n.../linux-sandbox/252/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\nERROR: modpost: missing MODULE_LICENSE() in arch/arm64/gunyah/timer.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in arch/arm64/gunyah/timer.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in crypto/fips140.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in drivers/tty/serial/pkvm-pl011/pkvm_pl011.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in drivers/iommu/arm/arm-smmu-v3/arm_smmu_v3_kvm_pv.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in drivers/dma-buf/heaps/system_heap.o\nWARNING: modpost: missing MODULE_DESCRIPTION() in drivers/md/dm-bow.o\nWARNING: modpost: module gunyah_rsc_mgr uses symbol touch_atime from namespace ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\n...disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/scripts/Makefile.modpost:195: Module.symvers] Error 1\n...*** [/mnt/disks/build-disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/Makefile:2025: modpost] Error 2\n...* [/mnt/disks/build-disk/src/android/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/Makefile:266: __sub-make] Error 2\nmake: *** [Makefile:266: __sub-make] Error 2\nINFO: Found 1 target...\nTarget //common:kernel_aarch64_allmodconfig failed to build\n```",
       "revId": "155e4acb0ede30858b1eed325341029185682f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af975e06_cc05ef8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-15T20:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f8b224e_807df99b",
+      "revId": "155e4acb0ede30858b1eed325341029185682f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
