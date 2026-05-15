@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "997e83c3_8728e918",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-15T22:47:09Z",
+      "side": 0,
+      "message": "I don\u0027t see this cmp_content() inside __test_load(). Did you miss that or removed it on purpose?",
+      "range": {
+        "startLine": 276,
+        "startChar": 1,
+        "endLine": 276,
+        "endChar": 52
+      },
+      "revId": "1384986222080c5d4856a2e2d450f6642d1b96c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
