@@ -123,6 +123,24 @@
       "parentUuid": "75f70b29_a14ffae5",
       "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f67449_dac8437b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T00:52:09Z",
+      "side": 1,
+      "message": "Actually, now I need to apologize. That struct is only defined in a .c file, so you are right, there is no way that anything outside that .c file can know what the format is, so even though it fully defined in the ABI, it is unreachable (as you said). So I completely reverse my position, and we can override the ABI for this case.\n\n@gprocida@google.com, does this need to be updated in allowed_fixes in 14-6.1 or do we just update the ABI to the new definition?",
+      "parentUuid": "0d6f25fa_5e8242a0",
+      "revId": "ae462e2abf665e09dd6b2e52fad8dbde8151caa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
