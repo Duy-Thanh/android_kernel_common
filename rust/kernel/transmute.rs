@@ -170,10 +170,6 @@ macro_rules! impl_frombytes {
 }
 
 impl_frombytes! {
-    // SAFETY: Inhabited ZSTs only have one possible bit pattern, and these two have no invariant.
-    (),
-    {<T>} core::marker::PhantomData<T>,
-
     // SAFETY: All bit patterns are acceptable values of the types below.
     u8, u16, u32, u64, usize,
     i8, i16, i32, i64, isize,
@@ -234,10 +230,6 @@ macro_rules! impl_asbytes {
 }
 
 impl_asbytes! {
-    // SAFETY: Inhabited ZSTs only have one possible bit pattern, and these two have no invariant.
-    (),
-    {<T>} core::marker::PhantomData<T>,
-
     // SAFETY: Instances of the following types have no uninitialized portions.
     u8, u16, u32, u64, usize,
     i8, i16, i32, i64, isize,

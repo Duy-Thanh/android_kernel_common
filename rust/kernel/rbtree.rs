@@ -414,17 +414,14 @@ where
             // SAFETY: By the type invariant of `Self`, all non-null `rb_node` pointers stored in `self`
             // point to the links field of `Node<K, V>` objects.
             let this = unsafe { container_of!(node, Node<K, V>, links) };
-
             // SAFETY: `this` is a non-null node so it is valid by the type invariants.
-            let this_ref = unsafe { &*this };
-
-            // SAFETY: `node` is a non-null node so it is valid by the type invariants.
-            let node_ref = unsafe { &*node };
-
-            node = match key.cmp(&this_ref.key) {
-                Ordering::Less => node_ref.rb_left,
-                Ordering::Greater => node_ref.rb_right,
-                Ordering::Equal => return Some(&this_ref.value),
+            node = match key.cmp(unsafe { &(*this).key }) {
+                // SAFETY: `node` is a non-null node so it is valid by the type invariants.
+                Ordering::Less => unsafe { (*node).rb_left },
+                // SAFETY: `node` is a non-null node so it is valid by the type invariants.
+                Ordering::Greater => unsafe { (*node).rb_right },
+                // SAFETY: `node` is a non-null node so it is valid by the type invariants.
+                Ordering::Equal => return Some(unsafe { &(*this).value }),
             }
         }
         None
@@ -501,10 +498,10 @@ where
             let this = unsafe { container_of!(node, Node<K, V>, links) };
             // SAFETY: `this` is a non-null node so it is valid by the type invariants.
             let this_key = unsafe { &(*this).key };
-
             // SAFETY: `node` is a non-null node so it is valid by the type invariants.
-            let node_ref = unsafe { &*node };
-
+            let left_child = unsafe { (*node).rb_left };
+            // SAFETY: `node` is a non-null node so it is valid by the type invariants.
+            let right_child = unsafe { (*node).rb_right };
             match key.cmp(this_key) {
                 Ordering::Equal => {
                     // SAFETY: `this` is a non-null node so it is valid by the type invariants.
@@ -512,7 +509,7 @@ where
                     break;
                 }
                 Ordering::Greater => {
-                    node = node_ref.rb_right;
+                    node = right_child;
                 }
                 Ordering::Less => {
                     let is_better_match = match best_key {
@@ -524,7 +521,7 @@ where
                         // SAFETY: `this` is a non-null node so it is valid by the type invariants.
                         best_links = Some(unsafe { NonNull::new_unchecked(&mut (*this).links) });
                     }
-                    node = node_ref.rb_left;
+                    node = left_child;
                 }
             };
         }

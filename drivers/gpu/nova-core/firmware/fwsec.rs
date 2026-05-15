@@ -12,6 +12,7 @@
 
 use core::{
     marker::PhantomData,
+    mem::size_of,
     ops::Deref, //
 };
 

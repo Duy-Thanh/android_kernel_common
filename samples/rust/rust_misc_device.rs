@@ -95,6 +95,8 @@
 //! }
 //! ```
 
+use core::pin::Pin;
+
 use kernel::{
     c_str,
     device::Device,
