@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199269b3_ce94d975",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-15T21:12:11Z",
+      "side": 1,
+      "message": "Should we test both cases:\n1. loading into a mapped buffer\n2. loading into unmapped buffer.\n?",
+      "range": {
+        "startLine": 246,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab86a5d0_bfca8c86",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 242,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\t/* Loading while the owner has no mapping to the buffer should work. */\n\tclear_content(_metadata, self, wrapfd);\n\tASSERT_NE(cmp_content(_metadata, self, wrapfd), 0);\n\tASSERT_EQ(wrapfd_load(wrapfd, self-\u003efd, 0, 0, self-\u003esize), 0);\n\tASSERT_EQ(cmp_content(_metadata, self, wrapfd), 0);\n"
+            },
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/* TODO: test more load offsets */\n"
+            },
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 254,
+                "startChar": 0,
+                "endLine": 255,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f0c3937c675c1614175bbe96def120a8508df1e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
