@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237152ca_e210cccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T20:55:00Z",
+      "side": 1,
+      "message": "Needs to be rebased again to resolve the merge conflict. I suggest you wait until tonight\u0027s KMI update is complete since it will definitely need to be rebased again after that, but if you are willing to risk a wasted rebase, you can try to squeeze it in before.",
+      "revId": "c1671c04aff69e31fb5a2290c237d262e9ad18ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
