@@ -566,7 +566,7 @@ int btrfs_mark_extent_written(struct btrfs_trans_handle *trans,
 	int del_nr = 0;
 	int del_slot = 0;
 	int recow;
-	int ret;
+	int ret = 0;
 	u64 ino = btrfs_ino(inode);
 
 	path = btrfs_alloc_path();
@@ -581,7 +581,7 @@ again:
 
 	ret = btrfs_search_slot(trans, root, &key, path, -1, 1);
 	if (ret < 0)
-		return ret;
+		goto out;
 	if (ret > 0 && path->slots[0] > 0)
 		path->slots[0]--;
 
@@ -590,20 +590,20 @@ again:
 	if (unlikely(key.objectid != ino || key.type != BTRFS_EXTENT_DATA_KEY)) {
 		ret = -EINVAL;
 		btrfs_abort_transaction(trans, ret);
-		return ret;
+		goto out;
 	}
 	fi = btrfs_item_ptr(leaf, path->slots[0],
 			    struct btrfs_file_extent_item);
 	if (unlikely(btrfs_file_extent_type(leaf, fi) != BTRFS_FILE_EXTENT_PREALLOC)) {
 		ret = -EINVAL;
 		btrfs_abort_transaction(trans, ret);
-		return ret;
+		goto out;
 	}
 	extent_end = key.offset + btrfs_file_extent_num_bytes(leaf, fi);
 	if (unlikely(key.offset > start || extent_end < end)) {
 		ret = -EINVAL;
 		btrfs_abort_transaction(trans, ret);
-		return ret;
+		goto out;
 	}
 
 	bytenr = btrfs_file_extent_disk_bytenr(leaf, fi);
@@ -633,7 +633,7 @@ again:
 							 trans->transid);
 			btrfs_set_file_extent_num_bytes(leaf, fi,
 							end - other_start);
-			return 0;
+			goto out;
 		}
 	}
 
@@ -661,7 +661,7 @@ again:
 							other_end - start);
 			btrfs_set_file_extent_offset(leaf, fi,
 						     start - orig_offset);
-			return 0;
+			goto out;
 		}
 	}
 
@@ -677,7 +677,7 @@ again:
 		}
 		if (unlikely(ret < 0)) {
 			btrfs_abort_transaction(trans, ret);
-			return ret;
+			goto out;
 		}
 
 		leaf = path->nodes[0];
@@ -705,7 +705,7 @@ again:
 		ret = btrfs_inc_extent_ref(trans, &ref);
 		if (unlikely(ret)) {
 			btrfs_abort_transaction(trans, ret);
-			return ret;
+			goto out;
 		}
 
 		if (split == start) {
@@ -714,7 +714,7 @@ again:
 			if (unlikely(start != key.offset)) {
 				ret = -EINVAL;
 				btrfs_abort_transaction(trans, ret);
-				return ret;
+				goto out;
 			}
 			path->slots[0]--;
 			extent_end = end;
@@ -745,7 +745,7 @@ again:
 		ret = btrfs_free_extent(trans, &ref);
 		if (unlikely(ret)) {
 			btrfs_abort_transaction(trans, ret);
-			return ret;
+			goto out;
 		}
 	}
 	other_start = 0;
@@ -763,7 +763,7 @@ again:
 		ret = btrfs_free_extent(trans, &ref);
 		if (unlikely(ret)) {
 			btrfs_abort_transaction(trans, ret);
-			return ret;
+			goto out;
 		}
 	}
 	if (del_nr == 0) {
@@ -784,11 +784,11 @@ again:
 		ret = btrfs_del_items(trans, root, path, del_slot, del_nr);
 		if (unlikely(ret < 0)) {
 			btrfs_abort_transaction(trans, ret);
-			return ret;
+			goto out;
 		}
 	}
-
-	return 0;
+out:
+	return ret;
 }
 
 /*
@@ -860,7 +860,7 @@ static noinline int prepare_one_folio(struct inode *inode, struct folio **folio_
 	fgf_t fgp_flags = (nowait ? FGP_WRITEBEGIN | FGP_NOWAIT : FGP_WRITEBEGIN) |
 			  fgf_set_order(write_bytes);
 	struct folio *folio;
-	int ret;
+	int ret = 0;
 
 again:
 	folio = __filemap_get_folio(inode->i_mapping, index, fgp_flags, mask);
@@ -877,8 +877,10 @@ again:
 	if (ret) {
 		/* The folio is already unlocked. */
 		folio_put(folio);
-		if (!nowait && ret == -EAGAIN)
+		if (!nowait && ret == -EAGAIN) {
+			ret = 0;
 			goto again;
+		}
 		return ret;
 	}
 	*folio_ret = folio;
@@ -1273,7 +1275,8 @@ again:
 		btrfs_delalloc_release_extents(inode, reserved_len);
 		release_space(inode, *data_reserved, reserved_start, reserved_len,
 			      only_release_metadata);
-		return extents_locked;
+		ret = extents_locked;
+		return ret;
 	}
 
 	copied = copy_folio_from_iter_atomic(folio, offset_in_folio(folio, start),
@@ -1438,7 +1441,7 @@ ssize_t btrfs_do_write_iter(struct kiocb *iocb, struct iov_iter *from,
 	struct btrfs_inode *inode = BTRFS_I(file_inode(file));
 	ssize_t num_written, num_sync;
 
-	if (btrfs_is_shutdown(inode->root->fs_info))
+	if (unlikely(btrfs_is_shutdown(inode->root->fs_info)))
 		return -EIO;
 	/*
 	 * If the fs flips readonly due to some impossible error, although we
@@ -2043,7 +2046,7 @@ static int btrfs_file_mmap_prepare(struct vm_area_desc *desc)
 	struct file *filp = desc->file;
 	struct address_space *mapping = filp->f_mapping;
 
-	if (btrfs_is_shutdown(inode_to_fs_info(file_inode(filp))))
+	if (unlikely(btrfs_is_shutdown(inode_to_fs_info(file_inode(filp)))))
 		return -EIO;
 	if (!mapping->a_ops->read_folio)
 		return -ENOEXEC;
@@ -2196,11 +2199,10 @@ static int find_first_non_hole(struct btrfs_inode *inode, u64 *start, u64 *len)
 
 	/* Hole or vacuum extent(only exists in no-hole mode) */
 	if (em->disk_bytenr == EXTENT_MAP_HOLE) {
-		const u64 em_end = btrfs_extent_map_end(em);
-
 		ret = 1;
-		*len = (em_end > *start + *len) ? 0 : (*start + *len - em_end);
-		*start = em_end;
+		*len = em->start + em->len > *start + *len ?
+		       0 : *start + *len - em->start - em->len;
+		*start = em->start + em->len;
 	}
 	btrfs_free_extent_map(em);
 	return ret;
@@ -2949,7 +2951,7 @@ static int btrfs_zero_range(struct inode *inode,
 	 * new prealloc extent, so that we get a larger contiguous disk extent.
 	 */
 	if (em->start <= alloc_start && (em->flags & EXTENT_FLAG_PREALLOC)) {
-		const u64 em_end = btrfs_extent_map_end(em);
+		const u64 em_end = em->start + em->len;
 
 		if (em_end >= offset + len) {
 			/*
@@ -3115,7 +3117,7 @@ static long btrfs_fallocate(struct file *file, int mode,
 	int blocksize = BTRFS_I(inode)->root->fs_info->sectorsize;
 	int ret;
 
-	if (btrfs_is_shutdown(inode_to_fs_info(inode)))
+	if (unlikely(btrfs_is_shutdown(inode_to_fs_info(inode))))
 		return -EIO;
 
 	/* Do not allow fallocate in ZONED mode */
@@ -3809,7 +3811,7 @@ static int btrfs_file_open(struct inode *inode, struct file *filp)
 {
 	int ret;
 
-	if (btrfs_is_shutdown(inode_to_fs_info(inode)))
+	if (unlikely(btrfs_is_shutdown(inode_to_fs_info(inode))))
 		return -EIO;
 
 	filp->f_mode |= FMODE_NOWAIT | FMODE_CAN_ODIRECT;
@@ -3824,7 +3826,7 @@ static ssize_t btrfs_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
 {
 	ssize_t ret = 0;
 
-	if (btrfs_is_shutdown(inode_to_fs_info(file_inode(iocb->ki_filp))))
+	if (unlikely(btrfs_is_shutdown(inode_to_fs_info(file_inode(iocb->ki_filp)))))
 		return -EIO;
 
 	if (iocb->ki_flags & IOCB_DIRECT) {
@@ -3841,7 +3843,7 @@ static ssize_t btrfs_file_splice_read(struct file *in, loff_t *ppos,
 				      struct pipe_inode_info *pipe,
 				      size_t len, unsigned int flags)
 {
-	if (btrfs_is_shutdown(inode_to_fs_info(file_inode(in))))
+	if (unlikely(btrfs_is_shutdown(inode_to_fs_info(file_inode(in)))))
 		return -EIO;
 
 	return filemap_splice_read(in, ppos, pipe, len, flags);
