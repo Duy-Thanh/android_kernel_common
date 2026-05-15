@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfe17c4_fbe7ae64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-15T01:36:28Z",
+      "side": 1,
+      "message": "Can you please fix multiple change-ids in this patch as well? And use the same change-id for other patch (https://r.android.com/4076081)",
+      "revId": "03ef6a92ec5530c912c851d406322d491878d40e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
