@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56189792_ce004286",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-15T01:24:14Z",
+      "side": 1,
+      "message": "There should not be 2 `Change-Id`s, it would be better if you keep change-id same as patch on other branch (https://r.android.com/4075685), even more so for critical fixes so we can track which branch has changes. Can you please fix it?",
+      "revId": "2c6f4ed13b77232e7725fbc41b324c477803a850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
