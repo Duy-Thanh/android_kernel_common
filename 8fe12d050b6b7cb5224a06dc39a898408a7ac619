@@ -16,6 +16,24 @@
       "message": "This is a duplicate (line 3349)",
       "revId": "8fe12d050b6b7cb5224a06dc39a898408a7ac619",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7cb1a6c_80047634",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 11
+      },
+      "lineNbr": 3359,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T15:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f19bd95_0c01b68b",
+      "revId": "8fe12d050b6b7cb5224a06dc39a898408a7ac619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
