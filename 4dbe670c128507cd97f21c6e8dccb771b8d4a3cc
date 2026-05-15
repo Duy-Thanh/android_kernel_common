@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aca025f_fab2d733",
+        "filename": "drivers/virt/gunyah/trace_vcpu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-15T14:00:08Z",
+      "side": 1,
+      "message": "This seems like valid feedback:\n```\nPlease fix this WARNING reported by KernelCheckPatch: WARNING:SPLIT_STRING: quoted string split across lines\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "4dbe670c128507cd97f21c6e8dccb771b8d4a3cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
