@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d5b665_4030950f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-15T21:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50e2a4ad_d6f9fd10",
+      "range": {
+        "startLine": 386,
+        "startChar": 7,
+        "endLine": 386,
+        "endChar": 10
+      },
+      "revId": "713ea72f2ce9d8a34e7513dcae3f539b19740dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d58b3d11_f54cad8a",
@@ -125,6 +149,30 @@
       "writtenOn": "2026-04-22T00:16:52Z",
       "side": 1,
       "message": "This actually fixes a bug where we can\u0027t load into a mapped buffer, which should be allowed, so you might want to add a `Fixes` tag as well as a test case?",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 24
+      },
+      "revId": "713ea72f2ce9d8a34e7513dcae3f539b19740dd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "221c0af6_5cd08841",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-15T21:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d58b3d11_f54cad8a",
       "range": {
         "startLine": 767,
         "startChar": 0,
