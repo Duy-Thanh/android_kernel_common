@@ -196,6 +196,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a198df9_0f56d260",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-15T15:04:21Z",
+      "side": 1,
+      "message": "I\u0027ve actually liked the previous version with separate function better but I am fine with both :)",
+      "parentUuid": "f83e6eee_22c5f228",
+      "revId": "1ab0cab9399364b80008fcd840667292c17dcbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92fcbb2f_b893874e",
