@@ -16,6 +16,24 @@
       "message": "Bart, from the discussion here: https://r.android.com/4073732\n\n```\nAkilesh Kailash\nYes, but if revert this we will have to notify upfront as a heads-up before the revert.\n\nCan\u0027t we opt-out through init.rc in platform side instead of the revert ?\n\nBart Van Assche\nNo. Opting out from WBT through init.rc is not possible because not all loop and dm devices have already been instantiated when init.rc is executed. Opting out from WBT via user space changes would only be feasible if an equivalent of udevd would be available in Android.\n\n```\n\nWhy can\u0027t we do this in sys.boot_completed\u003d1 - By then we should have all the loop and dm devices ready and we should be able to walk through all those devices and disable it per your recommendataion\n\necho 2000 \u003e /sys/block/\u003cdevice\u003e/queue/wbt_lat_usec\n\n\nIf there are any hotplug devices, we still get those events in ueventd - not sure if we have init.rc support for hotplug though.",
       "revId": "60f1a1ff7b8144129b239f6e426abb7891f163d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d73174a_c5a61291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-05-15T15:19:02Z",
+      "side": 1,
+      "message": "Are rebootless APEX updates still supported? If so, is this an example of a use case where a loop device can be instantiated long after booting completed?",
+      "parentUuid": "68d4e030_a19f05ba",
+      "revId": "60f1a1ff7b8144129b239f6e426abb7891f163d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
