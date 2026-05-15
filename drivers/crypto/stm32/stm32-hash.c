@@ -1115,7 +1115,8 @@ static int stm32_hash_copy_sgs(struct stm32_hash_request_ctx *rctx,
 		return -ENOMEM;
 	}
 
-	memcpy(buf, rctx->hdev->xmit_buf, state->bufcnt);
+	if (state->bufcnt)
+		memcpy(buf, rctx->hdev->xmit_buf, state->bufcnt);
 
 	scatterwalk_map_and_copy(buf + state->bufcnt, sg, rctx->offset,
 				 min(new_len, rctx->total) - state->bufcnt, 0);
@@ -1299,7 +1300,8 @@ static int stm32_hash_prepare_request(struct ahash_request *req)
 	}
 
 	/* copy buffer in a temporary one that is used for sg alignment */
-	memcpy(hdev->xmit_buf, state->buffer, state->bufcnt);
+	if (state->bufcnt)
+		memcpy(hdev->xmit_buf, state->buffer, state->bufcnt);
 
 	ret = stm32_hash_align_sgs(req->src, nbytes, bs, init, final, rctx);
 	if (ret)

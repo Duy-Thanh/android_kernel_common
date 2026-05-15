@@ -491,19 +491,19 @@ static int crypto4xx_aes_gcm_validate_keylen(unsigned int keylen)
 static int crypto4xx_compute_gcm_hash_key_sw(__le32 *hash_start, const u8 *key,
 					     unsigned int keylen)
 {
-	struct aes_enckey aes;
+	struct crypto_aes_ctx ctx;
 	uint8_t src[16] = { 0 };
 	int rc;
 
-	rc = aes_prepareenckey(&aes, key, keylen);
+	rc = aes_expandkey(&ctx, key, keylen);
 	if (rc) {
-		pr_err("aes_prepareenckey() failed: %d\n", rc);
+		pr_err("aes_expandkey() failed: %d\n", rc);
 		return rc;
 	}
 
-	aes_encrypt(&aes, src, src);
+	aes_encrypt(&ctx, src, src);
 	crypto4xx_memcpy_to_le32(hash_start, src, 16);
-	memzero_explicit(&aes, sizeof(aes));
+	memzero_explicit(&ctx, sizeof(ctx));
 	return 0;
 }
 

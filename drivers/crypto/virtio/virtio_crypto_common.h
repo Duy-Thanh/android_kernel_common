@@ -135,7 +135,7 @@ static inline int virtio_crypto_get_current_node(void)
 	int cpu, node;
 
 	cpu = get_cpu();
-	node = cpu_to_node(cpu);
+	node = topology_physical_package_id(cpu);
 	put_cpu();
 
 	return node;
