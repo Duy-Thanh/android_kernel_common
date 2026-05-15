@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "954fbc76_5457b3fd",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T03:19:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4186946e_b96959c6",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 0
+      },
+      "revId": "fdfb13d4c0348e6fe45defb61de30b8be4f43923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de7c1f3c_c7756348",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-15T03:17:48Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LEADING_SPACE: please, no spaces at the start of a line",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 555,
+        "endChar": 0
+      },
+      "revId": "fdfb13d4c0348e6fe45defb61de30b8be4f43923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97f2fd4c_64c3dc21",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T03:19:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de7c1f3c_c7756348",
       "range": {
         "startLine": 554,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae123f2b_27f44961",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T03:19:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ce97ece5_bb3139e1",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 0
+      },
+      "revId": "fdfb13d4c0348e6fe45defb61de30b8be4f43923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee832069_2a4840e4",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-05-15T03:17:48Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LEADING_SPACE: please, no spaces at the start of a line",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 0
+      },
+      "revId": "fdfb13d4c0348e6fe45defb61de30b8be4f43923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5d9c87_223b6650",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-15T03:19:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ee832069_2a4840e4",
       "range": {
         "startLine": 557,
         "startChar": 0,
