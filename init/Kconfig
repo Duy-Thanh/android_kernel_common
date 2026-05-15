@@ -178,7 +178,7 @@ config RUSTC_HAS_FILE_AS_C_STR
 
 config PAHOLE_VERSION
 	int
-	default "$(PAHOLE_VERSION)"
+	default $(shell,$(srctree)/scripts/pahole-version.sh $(PAHOLE))
 
 config CONSTRUCTORS
 	bool

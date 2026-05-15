@@ -123,10 +123,10 @@ static int insn_array_map_direct_value_addr(const struct bpf_map *map, u64 *imm,
 
 	if ((off % sizeof(long)) != 0 ||
 	    (off / sizeof(long)) >= map->max_entries)
-		return -EACCES;
+		return -EINVAL;
 
 	/* from BPF's point of view, this map is a jump table */
-	*imm = (unsigned long)insn_array->ips;
+	*imm = (unsigned long)insn_array->ips + off;
 
 	return 0;
 }

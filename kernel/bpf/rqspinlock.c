@@ -265,11 +265,10 @@ int __lockfunc resilient_tas_spin_lock(rqspinlock_t *lock)
 
 	RES_INIT_TIMEOUT(ts);
 	/*
-	 * We are either called directly from res_spin_lock after grabbing the
-	 * deadlock detection entry when queued spinlocks are disabled, or from
-	 * resilient_queued_spin_lock_slowpath after grabbing the deadlock
-	 * detection entry. No need to obtain it here.
+	 * The fast path is not invoked for the TAS fallback, so we must grab
+	 * the deadlock detection entry here.
 	 */
+	grab_held_lock_entry(lock);
 
 	/*
 	 * Since the waiting loop's time is dependent on the amount of

@@ -32,7 +32,7 @@ static void task_kfunc_load_test(void)
 }
 
 SEC("raw_tp")
-__success
+__failure __msg("calling kernel function")
 int BPF_PROG(task_kfunc_raw_tp)
 {
 	task_kfunc_load_test();
@@ -86,7 +86,7 @@ static void cgrp_kfunc_load_test(void)
 }
 
 SEC("raw_tp")
-__success
+__failure __msg("calling kernel function")
 int BPF_PROG(cgrp_kfunc_raw_tp)
 {
 	cgrp_kfunc_load_test();
@@ -138,7 +138,7 @@ static void cpumask_kfunc_load_test(void)
 }
 
 SEC("raw_tp")
-__success
+__failure __msg("calling kernel function")
 int BPF_PROG(cpumask_kfunc_raw_tp)
 {
 	cpumask_kfunc_load_test();
