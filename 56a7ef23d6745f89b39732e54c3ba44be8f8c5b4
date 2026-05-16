@@ -1,0 +1,132 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dca49df_f732d395",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-16T00:55:41Z",
+      "side": 1,
+      "message": "extra?",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76c4b770_ba189261",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-16T00:55:41Z",
+      "side": 1,
+      "message": "but only when load is unaligned, right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b9f563_cdd5384b",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-16T00:55:41Z",
+      "side": 1,
+      "message": "Can `ret` be anything but 0 here?",
+      "range": {
+        "startLine": 180,
+        "startChar": 5,
+        "endLine": 180,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb3ee5cc_6e3321e8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 181,
+                "endChar": 0
+              },
+              "replacement": "\tif (bounce_len)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b1ab30_25e3999f",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-16T00:55:41Z",
+      "side": 1,
+      "message": "Is this an optimization to check 64 bits at a time? If so, I don\u0027t think we should be doing this in the tests where it\u0027s not performance critical. Much better to keep it simple.",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f199047f_122dcd78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 278,
+                "startChar": 0,
+                "endLine": 312,
+                "endChar": 0
+              },
+              "replacement": "\treturn check_bytes(start, c, bytes);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
