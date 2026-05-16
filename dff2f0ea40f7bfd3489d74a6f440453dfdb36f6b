@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34e2969b_bb1fbe7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-16T14:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87445dd3_cd12fa3b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "dff2f0ea40f7bfd3489d74a6f440453dfdb36f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2810cd84_8f7139ff",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Sure, then I will keep the title as upstream",
       "parentUuid": "406e943e_e06efddb",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 67
+      },
+      "revId": "dff2f0ea40f7bfd3489d74a6f440453dfdb36f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e800247e_e250eb68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-16T14:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa71066_234b3b7c",
       "range": {
         "startLine": 22,
         "startChar": 27,
