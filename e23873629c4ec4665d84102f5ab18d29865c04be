@@ -1,0 +1,256 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d9a4a5_6014e980",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6651369_87f98602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "remove extra whitespace",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82af38ce_3139bcda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "\"Bug:\"",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c57edfd_363f0ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Create a patch on top of this one to add the new symbols to your symbol list.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2308447_f89601e9",
+        "filename": "MAINTAINERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Send this feature upstream. No android-specific maintainers lists.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6067901_44422437",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Rename new headers with gunyah-specific names. If this is a general kernel protection feature, then it must go upstream first.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d67e42f_4811d5c9",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Either send this upstream or rework to use vendor hooks.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428f7d3a_b5c37d6d",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "why is this here if there are no vendor hooks being exported below?",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb40e07b_adfefa8a",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"GUNYAH_KERNEL_PROTECT\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "e73c36d1_5b614f5a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/gunyah/Kconfig",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "config GUNYAH_KERNEL_PROTECT\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69dd7868_64d47038",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "depends on GUNYAH?",
+      "fixSuggestions": [
+        {
+          "fixId": "889f2603_a6854c60",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/gunyah/Kconfig",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tdepends on G\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb09761_c86c131e",
+        "filename": "include/linux/kernel_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Is this gunyah specific? Please don\u0027t give it such a generic name. If this is a general linux kernel protection feature, then this must go upstream first. Why does it need to be in include/linux if it is gunyah-specific?",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c3b3d95_c2ad7554",
+        "filename": "include/trace/hooks/kernel_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:03:19Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. The...\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor-hooks for details.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
