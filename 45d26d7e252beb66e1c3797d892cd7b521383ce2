@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d868fb_09180459",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-16T00:23:42Z",
+      "side": 1,
+      "message": "It seems like Vincent has a alternative approach which hopefully can be cherry-picked once he sends out a proper patch",
+      "revId": "45d26d7e252beb66e1c3797d892cd7b521383ce2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc7e4d4a_a175e203",
