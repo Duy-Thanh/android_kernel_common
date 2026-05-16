@@ -111,6 +111,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80342739_75599c1f",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:10:36Z",
+      "side": 1,
+      "message": "You are using this like a pseudo function. Please make the implied parameters explicit (layout should be passed as a parameter)",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d67e42f_4811d5c9",
         "filename": "arch/arm64/kernel/setup.c",
         "patchSetId": 1
@@ -122,6 +139,23 @@
       "writtenOn": "2026-05-16T18:03:19Z",
       "side": 1,
       "message": "Either send this upstream or rework to use vendor hooks.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e35b181_9c704f56",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-16T18:10:36Z",
+      "side": 1,
+      "message": "why isn\u0027t your vendor hook call here? Is there a reason the whole freeze_kernel_protect_layout() function can\u0027t be in your hook handler?",
       "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
