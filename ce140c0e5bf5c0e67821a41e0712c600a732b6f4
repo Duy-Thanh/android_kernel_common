@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbc86cb_a5ee6fef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-05-16T03:03:00Z",
+      "side": 1,
+      "message": "Note to the reviewer:\n\nThis CL is an exact cherry-pick of https://android-review.git.corp.google.com/c/kernel/common/+/4069700/5. This means the GKI ABI metadata is an exact replica. I hope that this not a problem and that we do not need to regenerate them again ToT.",
+      "revId": "ce140c0e5bf5c0e67821a41e0712c600a732b6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
