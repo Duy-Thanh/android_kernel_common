@@ -791,20 +791,42 @@ static void disk_zone_wplug_schedule_bio_work(struct gendisk *disk,
 	lockdep_assert_held(&zwplug->lock);
 
 	/*
+<<<<<<< HEAD   (d2e57dc78dfa0fc7a0277deae921ced83d674aa2 Revert "device property: Make modifications of fwnode "flags)
 	 * Schedule a blk_zone_wplug_bio_work() call and increase the zone write
 	 * plug reference count. blk_zone_wplug_bio_work() will release the
 	 * reference we take here. Increasing the zone write plug reference
 	 * count after the queue_work_on() call is safe because all callers hold
 	 * the zone write plug lock and blk_zone_wplug_bio_work() obtains the
 	 * same lock before decrementing the reference count.
+||||||| BASE   (e42527bf30589c14e8b53dff2ae27adb0b0aa8bb device property: Make modifications of fwnode "flags" thread)
+	 * Take a reference on the zone write plug and schedule the submission
+	 * of the next plugged BIO. blk_zone_wplug_bio_work() will release the
+	 * reference we take here.
+=======
+	 * Schedule the submission of the next plugged BIO. Taking a reference
+	 * to the zone write plug is required as the bio_work belongs to the
+	 * plug, and thus we must ensure that the write plug does not go away
+	 * while the work is being scheduled but has not run yet.
+	 * blk_zone_wplug_bio_work() will release the reference we take here,
+	 * and we also drop this reference if the work is already scheduled.
+>>>>>>> BRANCH (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
 	 */
 	WARN_ON_ONCE(!(zwplug->flags & BLK_ZONE_WPLUG_PLUGGED));
+<<<<<<< HEAD   (d2e57dc78dfa0fc7a0277deae921ced83d674aa2 Revert "device property: Make modifications of fwnode "flags)
 	if (zwplug->from_cpu >= 0)
 		cpu = zwplug->from_cpu;
 	else
 		cpu = WORK_CPU_UNBOUND;
 	if (queue_work_on(cpu, disk->zone_wplugs_wq, &zwplug->bio_work))
 		refcount_inc(&zwplug->ref);
+||||||| BASE   (e42527bf30589c14e8b53dff2ae27adb0b0aa8bb device property: Make modifications of fwnode "flags" thread)
+	refcount_inc(&zwplug->ref);
+	queue_work(disk->zone_wplugs_wq, &zwplug->bio_work);
+=======
+	refcount_inc(&zwplug->ref);
+	if (!queue_work(disk->zone_wplugs_wq, &zwplug->bio_work))
+		disk_put_zone_wplug(zwplug);
+>>>>>>> BRANCH (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
 }
 
 static inline void disk_zone_wplug_add_bio(struct gendisk *disk,
