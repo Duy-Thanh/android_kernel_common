@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e638e0b8_843f8a17",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-16T00:32:16Z",
+      "side": 1,
+      "message": "Note that in my previous patch the return value semantics of `context_use` is reversed. This needs to be adjusted accordingly.",
+      "range": {
+        "startLine": 634,
+        "startChar": 5,
+        "endLine": 634,
+        "endChar": 16
+      },
+      "revId": "c214f57143c638d1fbb67e1680c9c8528331a305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
