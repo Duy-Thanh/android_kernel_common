@@ -9,7 +9,7 @@
 bool reclaim_pt_is_enabled(unsigned long start, unsigned long end,
 			   struct zap_details *details)
 {
-	return details && details->reclaim_pt && (end - start >= PMD_SIZE);
+	return details && (details->zap_flags & ZAP_FLAG_RECLAIM_PT) && (end - start >= PMD_SIZE);
 }
 
 bool try_get_and_clear_pmd(struct mm_struct *mm, pmd_t *pmd, pmd_t *pmdval)
