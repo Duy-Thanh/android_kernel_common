@@ -501,6 +501,41 @@ struct device_physical_location {
 };
 
 /**
+<<<<<<< HEAD   (38e79064f21aca7310dff8526248d5cd19c770b5 Merge 1ae94eb0cf38 ("io_uring/poll: ensure EPOLL_ONESHOT is )
+||||||| BASE   (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
+ * enum struct_device_flags - Flags in struct device
+ *
+ * Each flag should have a set of accessor functions created via
+ * __create_dev_flag_accessors() for each access.
+ *
+ * @DEV_FLAG_READY_TO_PROBE: If set then device_add() has finished enough
+ *		initialization that probe could be called.
+ */
+enum struct_device_flags {
+	DEV_FLAG_READY_TO_PROBE = 0,
+
+	DEV_FLAG_COUNT
+};
+
+/**
+=======
+ * enum struct_device_flags - Flags in struct device
+ *
+ * Each flag should have a set of accessor functions created via
+ * __create_dev_flag_accessors() for each access.
+ *
+ * @DEV_FLAG_READY_TO_PROBE: If set then device_add() has finished enough
+ *		initialization that probe could be called.
+ * @DEV_FLAG_COUNT: Number of defined struct_device_flags.
+ */
+enum struct_device_flags {
+	DEV_FLAG_READY_TO_PROBE = 0,
+
+	DEV_FLAG_COUNT
+};
+
+/**
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
  * struct device - The basic device structure
  * @parent:	The device's "parent" device, the device to which it is attached.
  * 		In most cases, a parent device is some sort of bus or host

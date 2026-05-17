@@ -921,6 +921,7 @@ static void thermal_release(struct device *dev)
 		     sizeof("thermal_zone") - 1)) {
 		tz = to_thermal_zone(dev);
 		thermal_zone_destroy_device_groups(tz);
+		thermal_set_governor(tz, NULL);
 		mutex_destroy(&tz->lock);
 		complete(&tz->removal);
 	} else if (!strncmp(dev_name(dev), "cooling_device",
@@ -1492,8 +1493,10 @@ thermal_zone_device_register_with_trips(const char *type,
 	/* sys I/F */
 	/* Add nodes that are always present via .groups */
 	result = thermal_zone_create_device_groups(tz);
-	if (result)
+	if (result) {
+		thermal_set_governor(tz, NULL);
 		goto remove_id;
+	}
 
 	/* A new thermal zone needs to be updated anyway. */
 	atomic_set(&tz->need_update, 1);
@@ -1645,9 +1648,15 @@ void thermal_zone_device_unregister(struct thermal_zone_device *tz)
 
 	cancel_delayed_work_sync(&tz->poll_queue);
 
+<<<<<<< HEAD   (38e79064f21aca7310dff8526248d5cd19c770b5 Merge 1ae94eb0cf38 ("io_uring/poll: ensure EPOLL_ONESHOT is )
 	thermal_set_governor(tz, NULL);
 
 	thermal_thresholds_exit(tz);
+||||||| BASE   (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
+	thermal_set_governor(tz, NULL);
+
+=======
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
 	thermal_remove_hwmon_sysfs(tz);
 	ida_free(&thermal_tz_ida, tz->id);
 	ida_destroy(&tz->ida);

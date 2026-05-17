@@ -382,8 +382,18 @@ static void f2fs_write_end_io(struct bio *bio)
 						STOP_CP_REASON_WRITE_FAIL);
 		}
 
+<<<<<<< HEAD   (38e79064f21aca7310dff8526248d5cd19c770b5 Merge 1ae94eb0cf38 ("io_uring/poll: ensure EPOLL_ONESHOT is )
 		f2fs_bug_on(sbi, folio->mapping == NODE_MAPPING(sbi) &&
 				folio->index != nid_of_node(&folio->page));
+||||||| BASE   (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
+		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
+				page_folio(page)->index != nid_of_node(page));
+=======
+		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
+				page_folio(page)->index != nid_of_node(page));
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
 
 		dec_page_count(sbi, type);
 
@@ -395,10 +405,20 @@ static void f2fs_write_end_io(struct bio *bio)
 				wq_has_sleeper(&sbi->cp_wait))
 			wake_up(&sbi->cp_wait);
 
+<<<<<<< HEAD   (38e79064f21aca7310dff8526248d5cd19c770b5 Merge 1ae94eb0cf38 ("io_uring/poll: ensure EPOLL_ONESHOT is )
 		if (f2fs_in_warm_node_list(sbi, folio))
 			f2fs_del_fsync_node_entry(sbi, &folio->page);
 		clear_page_private_gcing(&folio->page);
 		folio_end_writeback(folio);
+||||||| BASE   (1ae94eb0cf383349bd6467c8a2874df3f3d4bdef io_uring/poll: ensure EPOLL_ONESHOT is propagated for EPOLL_)
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+=======
+		clear_page_private_gcing(page);
+		end_page_writeback(page);
+>>>>>>> BRANCH (bf89928ffeb731c623a15ee7327261131a80ddcb Linux 6.12.86)
 	}
 
 	bio_put(bio);
