@@ -883,7 +883,7 @@ static long madvise_dontneed_single_vma(struct vm_area_struct *vma,
 					unsigned long start, unsigned long end)
 {
 	struct zap_details details = {
-		.reclaim_pt = true,
+		.zap_flags = ZAP_FLAG_RECLAIM_PT,
 		.even_cows = true,
 	};
 
