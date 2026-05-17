@@ -1444,7 +1444,7 @@ copy_page_range(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma)
 static inline bool should_zap_cows(struct zap_details *details)
 {
 	/* By default, zap all pages */
-	if (!details || details->reclaim_pt)
+	if (!details || (details->zap_flags & ZAP_FLAG_RECLAIM_PT))
 		return true;
 
 	/* Or, we zap COWed pages only if the caller wants to */
