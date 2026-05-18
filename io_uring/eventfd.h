@@ -1,4 +1,3 @@
-/* SPDX-License-Identifier: GPL-2.0 */
 
 struct io_ring_ctx;
 int io_eventfd_register(struct io_ring_ctx *ctx, void __user *arg,

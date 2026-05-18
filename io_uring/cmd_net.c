@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0
 #include <asm/ioctls.h>
 #include <linux/io_uring/net.h>
 #include <linux/errqueue.h>

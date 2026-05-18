@@ -1,4 +1,3 @@
-/* SPDX-License-Identifier: GPL-2.0 */
 #ifndef INTERNAL_IO_SLIST_H
 #define INTERNAL_IO_SLIST_H
 
@@ -9,6 +8,9 @@
 
 #define wq_list_for_each(pos, prv, head)			\
 	for (pos = (head)->first, prv = NULL; pos; prv = pos, pos = (pos)->next)
+
+#define wq_list_for_each_resume(pos, prv)			\
+	for (; pos; prv = pos, pos = (pos)->next)
 
 #define wq_list_empty(list)	(READ_ONCE((list)->first) == NULL)
 
@@ -39,6 +41,15 @@ static inline void wq_list_add_tail(struct io_wq_work_node *node,
 		list->last->next = node;
 		list->last = node;
 	}
+}
+
+static inline void wq_list_add_head(struct io_wq_work_node *node,
+				    struct io_wq_work_list *list)
+{
+	node->next = list->first;
+	if (!node->next)
+		list->last = node;
+	WRITE_ONCE(list->first, node);
 }
 
 static inline void wq_list_cut(struct io_wq_work_list *list,
