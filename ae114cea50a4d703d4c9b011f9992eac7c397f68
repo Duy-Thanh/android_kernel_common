@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec6bbdd_107fc4e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2026-05-18T04:20:36Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "823cd8da_6342df19",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c061a337_3bfba066",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-15T17:40:00Z",
       "side": 1,
       "message": "This is optimization not a fix. Pls remove.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "065dfde3_f2c92b76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2026-05-18T04:20:36Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "c061a337_3bfba066",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b105814c_da591ca9",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2026-05-18T04:20:36Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "403d6244_028a92b3",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 23
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb2866d8_b95a18e9",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-05-15T17:47:27Z",
       "side": 1,
       "message": "Let\u0027s switch to `static_branch_likely` since this key is defaulted to TRUE.",
+      "range": {
+        "startLine": 779,
+        "startChar": 8,
+        "endLine": 779,
+        "endChar": 26
+      },
+      "revId": "ae114cea50a4d703d4c9b011f9992eac7c397f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989f71aa_956af4f9",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 3077297
+      },
+      "writtenOn": "2026-05-18T04:20:36Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "cb2866d8_b95a18e9",
       "range": {
         "startLine": 779,
         "startChar": 8,
