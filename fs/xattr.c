@@ -649,6 +649,7 @@ int file_setxattr(struct file *f, struct kernel_xattr_ctx *ctx)
 	return error;
 }
 
+/* unconditionally consumes filename */
 int filename_setxattr(int dfd, struct filename *filename,
 		      unsigned int lookup_flags, struct kernel_xattr_ctx *ctx)
 {
@@ -658,7 +659,7 @@ int filename_setxattr(int dfd, struct filename *filename,
 retry:
 	error = filename_lookup(dfd, filename, lookup_flags, &path, NULL);
 	if (error)
-		return error;
+		goto out;
 	error = mnt_want_write(path.mnt);
 	if (!error) {
 		error = do_setxattr(mnt_idmap(path.mnt), path.dentry, ctx);
@@ -669,6 +670,9 @@ retry:
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+
+out:
+	putname(filename);
 	return error;
 }
 
@@ -684,6 +688,7 @@ static int path_setxattrat(int dfd, const char __user *pathname,
 		.kname	= &kname,
 		.flags	= flags,
 	};
+	struct filename *filename;
 	unsigned int lookup_flags = 0;
 	int error;
 
@@ -697,7 +702,7 @@ static int path_setxattrat(int dfd, const char __user *pathname,
 	if (error)
 		return error;
 
-	CLASS(filename_maybe_null, filename)(pathname, at_flags);
+	filename = getname_maybe_null(pathname, at_flags);
 	if (!filename && dfd >= 0) {
 		CLASS(fd, f)(dfd);
 		if (fd_empty(f))
@@ -799,6 +804,7 @@ ssize_t file_getxattr(struct file *f, struct kernel_xattr_ctx *ctx)
 	return do_getxattr(file_mnt_idmap(f), f->f_path.dentry, ctx);
 }
 
+/* unconditionally consumes filename */
 ssize_t filename_getxattr(int dfd, struct filename *filename,
 			  unsigned int lookup_flags, struct kernel_xattr_ctx *ctx)
 {
@@ -807,13 +813,15 @@ ssize_t filename_getxattr(int dfd, struct filename *filename,
 retry:
 	error = filename_lookup(dfd, filename, lookup_flags, &path, NULL);
 	if (error)
-		return error;
+		goto out;
 	error = do_getxattr(mnt_idmap(path.mnt), path.dentry, ctx);
 	path_put(&path);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+out:
+	putname(filename);
 	return error;
 }
 
@@ -828,6 +836,7 @@ static ssize_t path_getxattrat(int dfd, const char __user *pathname,
 		.kname    = &kname,
 		.flags    = 0,
 	};
+	struct filename *filename;
 	ssize_t error;
 
 	if ((at_flags & ~(AT_SYMLINK_NOFOLLOW | AT_EMPTY_PATH)) != 0)
@@ -837,7 +846,7 @@ static ssize_t path_getxattrat(int dfd, const char __user *pathname,
 	if (error)
 		return error;
 
-	CLASS(filename_maybe_null, filename)(pathname, at_flags);
+	filename = getname_maybe_null(pathname, at_flags);
 	if (!filename && dfd >= 0) {
 		CLASS(fd, f)(dfd);
 		if (fd_empty(f))
@@ -934,6 +943,7 @@ ssize_t file_listxattr(struct file *f, char __user *list, size_t size)
 	return listxattr(f->f_path.dentry, list, size);
 }
 
+/* unconditionally consumes filename */
 static
 ssize_t filename_listxattr(int dfd, struct filename *filename,
 			   unsigned int lookup_flags,
@@ -944,13 +954,15 @@ ssize_t filename_listxattr(int dfd, struct filename *filename,
 retry:
 	error = filename_lookup(dfd, filename, lookup_flags, &path, NULL);
 	if (error)
-		return error;
+		goto out;
 	error = listxattr(path.dentry, list, size);
 	path_put(&path);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+out:
+	putname(filename);
 	return error;
 }
 
@@ -958,12 +970,13 @@ static ssize_t path_listxattrat(int dfd, const char __user *pathname,
 				unsigned int at_flags, char __user *list,
 				size_t size)
 {
+	struct filename *filename;
 	int lookup_flags;
 
 	if ((at_flags & ~(AT_SYMLINK_NOFOLLOW | AT_EMPTY_PATH)) != 0)
 		return -EINVAL;
 
-	CLASS(filename_maybe_null, filename)(pathname, at_flags);
+	filename = getname_maybe_null(pathname, at_flags);
 	if (!filename) {
 		CLASS(fd, f)(dfd);
 		if (fd_empty(f))
@@ -1023,6 +1036,7 @@ static int file_removexattr(struct file *f, struct xattr_name *kname)
 	return error;
 }
 
+/* unconditionally consumes filename */
 static int filename_removexattr(int dfd, struct filename *filename,
 				unsigned int lookup_flags, struct xattr_name *kname)
 {
@@ -1032,7 +1046,7 @@ static int filename_removexattr(int dfd, struct filename *filename,
 retry:
 	error = filename_lookup(dfd, filename, lookup_flags, &path, NULL);
 	if (error)
-		return error;
+		goto out;
 	error = mnt_want_write(path.mnt);
 	if (!error) {
 		error = removexattr(mnt_idmap(path.mnt), path.dentry, kname->name);
@@ -1043,6 +1057,8 @@ retry:
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+out:
+	putname(filename);
 	return error;
 }
 
@@ -1050,6 +1066,7 @@ static int path_removexattrat(int dfd, const char __user *pathname,
 			      unsigned int at_flags, const char __user *name)
 {
 	struct xattr_name kname;
+	struct filename *filename;
 	unsigned int lookup_flags;
 	int error;
 
@@ -1060,7 +1077,7 @@ static int path_removexattrat(int dfd, const char __user *pathname,
 	if (error)
 		return error;
 
-	CLASS(filename_maybe_null, filename)(pathname, at_flags);
+	filename = getname_maybe_null(pathname, at_flags);
 	if (!filename) {
 		CLASS(fd, f)(dfd);
 		if (fd_empty(f))

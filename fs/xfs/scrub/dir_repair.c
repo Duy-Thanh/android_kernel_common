@@ -3,7 +3,7 @@
  * Copyright (c) 2020-2024 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -172,12 +172,8 @@ xrep_dir_teardown(
 	struct xrep_dir		*rd = sc->buf;
 
 	xrep_findparent_scan_teardown(&rd->pscan);
-	if (rd->dir_names)
-		xfblob_destroy(rd->dir_names);
-	rd->dir_names = NULL;
-	if (rd->dir_entries)
-		xfarray_destroy(rd->dir_entries);
-	rd->dir_names = NULL;
+	xfblob_destroy(rd->dir_names);
+	xfarray_destroy(rd->dir_entries);
 }
 
 /* Set up for a directory repair. */
@@ -1788,15 +1784,20 @@ xrep_dir_setup_scan(
 	struct xrep_dir		*rd)
 {
 	struct xfs_scrub	*sc = rd->sc;
+	char			*descr;
 	int			error;
 
 	/* Set up some staging memory for salvaging dirents. */
-	error = xfarray_create("directory entries", 0,
-			sizeof(struct xrep_dirent), &rd->dir_entries);
+	descr = xchk_xfile_ino_descr(sc, "directory entries");
+	error = xfarray_create(descr, 0, sizeof(struct xrep_dirent),
+			&rd->dir_entries);
+	kfree(descr);
 	if (error)
 		return error;
 
-	error = xfblob_create("directory entry names", &rd->dir_names);
+	descr = xchk_xfile_ino_descr(sc, "directory entry names");
+	error = xfblob_create(descr, &rd->dir_names);
+	kfree(descr);
 	if (error)
 		goto out_xfarray;
 

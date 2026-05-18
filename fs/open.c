@@ -136,16 +136,15 @@ int do_sys_truncate(const char __user *pathname, loff_t length)
 	if (length < 0)	/* sorry, but loff_t says... */
 		return -EINVAL;
 
-	CLASS(filename, name)(pathname);
 retry:
-	error = filename_lookup(AT_FDCWD, name, lookup_flags, &path, NULL);
+	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
 	if (!error) {
 		error = vfs_truncate(&path, length);
 		path_put(&path);
-		if (retry_estale(error, lookup_flags)) {
-			lookup_flags |= LOOKUP_REVAL;
-			goto retry;
-		}
+	}
+	if (retry_estale(error, lookup_flags)) {
+		lookup_flags |= LOOKUP_REVAL;
+		goto retry;
 	}
 	return error;
 }
@@ -479,6 +478,8 @@ static int do_faccessat(int dfd, const char __user *filename, int mode, int flag
 
 	if (flags & AT_SYMLINK_NOFOLLOW)
 		lookup_flags &= ~LOOKUP_FOLLOW;
+	if (flags & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
 
 	if (access_need_override_creds(flags)) {
 		old_cred = access_override_creds();
@@ -486,9 +487,8 @@ static int do_faccessat(int dfd, const char __user *filename, int mode, int flag
 			return -ENOMEM;
 	}
 
-	CLASS(filename_uflags, name)(filename, flags);
 retry:
-	res = filename_lookup(dfd, name, lookup_flags, &path, NULL);
+	res = user_path_at(dfd, filename, lookup_flags, &path);
 	if (res)
 		goto out;
 
@@ -555,19 +555,24 @@ SYSCALL_DEFINE1(chdir, const char __user *, filename)
 	struct path path;
 	int error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW | LOOKUP_DIRECTORY;
-	CLASS(filename, name)(filename);
 retry:
-	error = filename_lookup(AT_FDCWD, name, lookup_flags, &path, NULL);
-	if (!error) {
-		error = path_permission(&path, MAY_EXEC | MAY_CHDIR);
-		if (!error)
-			set_fs_pwd(current->fs, &path);
-		path_put(&path);
-		if (retry_estale(error, lookup_flags)) {
-			lookup_flags |= LOOKUP_REVAL;
-			goto retry;
-		}
+	error = user_path_at(AT_FDCWD, filename, lookup_flags, &path);
+	if (error)
+		goto out;
+
+	error = path_permission(&path, MAY_EXEC | MAY_CHDIR);
+	if (error)
+		goto dput_and_out;
+
+	set_fs_pwd(current->fs, &path);
+
+dput_and_out:
+	path_put(&path);
+	if (retry_estale(error, lookup_flags)) {
+		lookup_flags |= LOOKUP_REVAL;
+		goto retry;
 	}
+out:
 	return error;
 }
 
@@ -593,11 +598,10 @@ SYSCALL_DEFINE1(chroot, const char __user *, filename)
 	struct path path;
 	int error;
 	unsigned int lookup_flags = LOOKUP_FOLLOW | LOOKUP_DIRECTORY;
-	CLASS(filename, name)(filename);
 retry:
-	error = filename_lookup(AT_FDCWD, name, lookup_flags, &path, NULL);
+	error = user_path_at(AT_FDCWD, filename, lookup_flags, &path);
 	if (error)
-		return error;
+		goto out;
 
 	error = path_permission(&path, MAY_EXEC | MAY_CHDIR);
 	if (error)
@@ -607,14 +611,18 @@ retry:
 	if (!ns_capable(current_user_ns(), CAP_SYS_CHROOT))
 		goto dput_and_out;
 	error = security_path_chroot(&path);
-	if (!error)
-		set_fs_root(current->fs, &path);
+	if (error)
+		goto dput_and_out;
+
+	set_fs_root(current->fs, &path);
+	error = 0;
 dput_and_out:
 	path_put(&path);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
 		goto retry;
 	}
+out:
 	return error;
 }
 
@@ -678,9 +686,11 @@ static int do_fchmodat(int dfd, const char __user *filename, umode_t mode,
 		return -EINVAL;
 
 	lookup_flags = (flags & AT_SYMLINK_NOFOLLOW) ? 0 : LOOKUP_FOLLOW;
-	CLASS(filename_uflags, name)(filename, flags);
+	if (flags & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
+
 retry:
-	error = filename_lookup(dfd, name, lookup_flags, &path, NULL);
+	error = user_path_at(dfd, filename, lookup_flags, &path);
 	if (!error) {
 		error = chmod_common(&path, mode);
 		path_put(&path);
@@ -791,28 +801,31 @@ int do_fchownat(int dfd, const char __user *filename, uid_t user, gid_t group,
 		int flag)
 {
 	struct path path;
-	int error;
+	int error = -EINVAL;
 	int lookup_flags;
 
 	if ((flag & ~(AT_SYMLINK_NOFOLLOW | AT_EMPTY_PATH)) != 0)
-		return -EINVAL;
+		goto out;
 
 	lookup_flags = (flag & AT_SYMLINK_NOFOLLOW) ? 0 : LOOKUP_FOLLOW;
-	CLASS(filename_uflags, name)(filename, flag);
+	if (flag & AT_EMPTY_PATH)
+		lookup_flags |= LOOKUP_EMPTY;
 retry:
-	error = filename_lookup(dfd, name, lookup_flags, &path, NULL);
-	if (!error) {
-		error = mnt_want_write(path.mnt);
-		if (!error) {
-			error = chown_common(&path, user, group);
-			mnt_drop_write(path.mnt);
-		}
-		path_put(&path);
-		if (retry_estale(error, lookup_flags)) {
-			lookup_flags |= LOOKUP_REVAL;
-			goto retry;
-		}
+	error = user_path_at(dfd, filename, lookup_flags, &path);
+	if (error)
+		goto out;
+	error = mnt_want_write(path.mnt);
+	if (error)
+		goto out_release;
+	error = chown_common(&path, user, group);
+	mnt_drop_write(path.mnt);
+out_release:
+	path_put(&path);
+	if (retry_estale(error, lookup_flags)) {
+		lookup_flags |= LOOKUP_REVAL;
+		goto retry;
 	}
+out:
 	return error;
 }
 
@@ -1323,7 +1336,7 @@ struct file *file_open_name(struct filename *name, int flags, umode_t mode)
 	int err = build_open_flags(&how, &op);
 	if (err)
 		return ERR_PTR(err);
-	return do_file_open(AT_FDCWD, name, &op);
+	return do_filp_open(AT_FDCWD, name, &op);
 }
 
 /**
@@ -1339,8 +1352,14 @@ struct file *file_open_name(struct filename *name, int flags, umode_t mode)
  */
 struct file *filp_open(const char *filename, int flags, umode_t mode)
 {
-	CLASS(filename_kernel, name)(filename);
-	return file_open_name(name, flags, mode);
+	struct filename *name = getname_kernel(filename);
+	struct file *file = ERR_CAST(name);
+
+	if (!IS_ERR(name)) {
+		file = file_open_name(name, flags, mode);
+		putname(name);
+	}
+	return file;
 }
 EXPORT_SYMBOL(filp_open);
 
@@ -1360,12 +1379,18 @@ static int do_sys_openat2(int dfd, const char __user *filename,
 			  struct open_how *how)
 {
 	struct open_flags op;
-	int err = build_open_flags(how, &op);
+	struct filename *tmp __free(putname) = NULL;
+	int err;
+
+	err = build_open_flags(how, &op);
 	if (unlikely(err))
 		return err;
 
-	CLASS(filename, name)(filename);
-	return FD_ADD(how->flags, do_file_open(dfd, name, &op));
+	tmp = getname(filename);
+	if (IS_ERR(tmp))
+		return PTR_ERR(tmp);
+
+	return FD_ADD(how->flags, do_filp_open(dfd, tmp, &op));
 }
 
 int do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)

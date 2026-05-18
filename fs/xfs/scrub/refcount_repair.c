@@ -3,7 +3,7 @@
  * Copyright (C) 2018-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -123,7 +123,13 @@ int
 xrep_setup_ag_refcountbt(
 	struct xfs_scrub	*sc)
 {
-	return xrep_setup_xfbtree(sc, "rmap record bag");
+	char			*descr;
+	int			error;
+
+	descr = xchk_xfile_ag_descr(sc, "rmap record bag");
+	error = xrep_setup_xfbtree(sc, descr);
+	kfree(descr);
+	return error;
 }
 
 /* Check for any obvious conflicts with this shared/CoW staging extent. */
@@ -698,6 +704,7 @@ xrep_refcountbt(
 {
 	struct xrep_refc	*rr;
 	struct xfs_mount	*mp = sc->mp;
+	char			*descr;
 	int			error;
 
 	/* We require the rmapbt to rebuild anything. */
@@ -710,9 +717,11 @@ xrep_refcountbt(
 	rr->sc = sc;
 
 	/* Set up enough storage to handle one refcount record per block. */
-	error = xfarray_create("reference count records", mp->m_sb.sb_agblocks,
+	descr = xchk_xfile_ag_descr(sc, "reference count records");
+	error = xfarray_create(descr, mp->m_sb.sb_agblocks,
 			sizeof(struct xfs_refcount_irec),
 			&rr->refcount_records);
+	kfree(descr);
 	if (error)
 		goto out_rr;
 

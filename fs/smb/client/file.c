@@ -25,6 +25,7 @@
 #include <linux/mm.h>
 #include <asm/div64.h>
 #include "cifsfs.h"
+#include "cifspdu.h"
 #include "cifsglob.h"
 #include "cifsproto.h"
 #include "smb2proto.h"

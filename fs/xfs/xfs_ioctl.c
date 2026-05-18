@@ -3,7 +3,7 @@
  * Copyright (c) 2000-2005 Silicon Graphics, Inc.
  * All Rights Reserved.
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -41,8 +41,6 @@
 #include "xfs_exchrange.h"
 #include "xfs_handle.h"
 #include "xfs_rtgroup.h"
-#include "xfs_healthmon.h"
-#include "xfs_verify_media.h"
 
 #include <linux/mount.h>
 #include <linux/fileattr.h>
@@ -1420,11 +1418,6 @@ xfs_file_ioctl(
 		return xfs_ioc_start_commit(filp, arg);
 	case XFS_IOC_COMMIT_RANGE:
 		return xfs_ioc_commit_range(filp, arg);
-
-	case XFS_IOC_HEALTH_MONITOR:
-		return xfs_ioc_health_monitor(filp, arg);
-	case XFS_IOC_VERIFY_MEDIA:
-		return xfs_ioc_verify_media(filp, arg);
 
 	default:
 		return -ENOTTY;

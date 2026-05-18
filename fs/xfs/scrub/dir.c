@@ -3,7 +3,7 @@
  * Copyright (C) 2017-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -1102,17 +1102,22 @@ xchk_directory(
 	sd->xname.name = sd->namebuf;
 
 	if (xfs_has_parent(sc->mp)) {
+		char		*descr;
+
 		/*
 		 * Set up some staging memory for dirents that we can't check
 		 * due to locking contention.
 		 */
-		error = xfarray_create("slow directory entries", 0,
-				sizeof(struct xchk_dirent), &sd->dir_entries);
+		descr = xchk_xfile_ino_descr(sc, "slow directory entries");
+		error = xfarray_create(descr, 0, sizeof(struct xchk_dirent),
+				&sd->dir_entries);
+		kfree(descr);
 		if (error)
 			goto out_sd;
 
-		error = xfblob_create("slow directory entry names",
-				&sd->dir_names);
+		descr = xchk_xfile_ino_descr(sc, "slow directory entry names");
+		error = xfblob_create(descr, &sd->dir_names);
+		kfree(descr);
 		if (error)
 			goto out_entries;
 	}

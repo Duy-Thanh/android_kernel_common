@@ -4692,18 +4692,23 @@ static int split_huge_pages_in_file(const char *file_path, pgoff_t off_start,
 				pgoff_t off_end, unsigned int new_order,
 				long in_folio_offset)
 {
+	struct filename *file;
 	struct file *candidate;
 	struct address_space *mapping;
+	int ret = -EINVAL;
 	pgoff_t index;
 	int nr_pages = 1;
 	unsigned long total = 0, split = 0;
 	unsigned int min_order;
 	unsigned int target_order;
 
-	CLASS(filename_kernel, file)(file_path);
+	file = getname_kernel(file_path);
+	if (IS_ERR(file))
+		return ret;
+
 	candidate = file_open_name(file, O_RDONLY, 0);
 	if (IS_ERR(candidate))
-		return -EINVAL;
+		goto out;
 
 	pr_debug("split file-backed THPs in file: %s, page offset: [0x%lx - 0x%lx], new_order: %u, in_folio_offset: %ld\n",
 		 file_path, off_start, off_end, new_order, in_folio_offset);
@@ -4752,8 +4757,12 @@ next:
 	}
 
 	filp_close(candidate, NULL);
+	ret = 0;
+
 	pr_debug("%lu of %lu file-backed THP split\n", split, total);
-	return 0;
+out:
+	putname(file);
+	return ret;
 }
 
 #define MAX_INPUT_BUF_SZ 255

@@ -324,39 +324,39 @@ struct dlm_member_gone {
 	struct list_head list; /* space->members_gone */
 };
 
-static const struct configfs_group_operations clusters_ops = {
+static struct configfs_group_operations clusters_ops = {
 	.make_group = make_cluster,
 	.drop_item = drop_cluster,
 };
 
-static const struct configfs_item_operations cluster_ops = {
+static struct configfs_item_operations cluster_ops = {
 	.release = release_cluster,
 };
 
-static const struct configfs_group_operations spaces_ops = {
+static struct configfs_group_operations spaces_ops = {
 	.make_group = make_space,
 	.drop_item = drop_space,
 };
 
-static const struct configfs_item_operations space_ops = {
+static struct configfs_item_operations space_ops = {
 	.release = release_space,
 };
 
-static const struct configfs_group_operations comms_ops = {
+static struct configfs_group_operations comms_ops = {
 	.make_item = make_comm,
 	.drop_item = drop_comm,
 };
 
-static const struct configfs_item_operations comm_ops = {
+static struct configfs_item_operations comm_ops = {
 	.release = release_comm,
 };
 
-static const struct configfs_group_operations nodes_ops = {
+static struct configfs_group_operations nodes_ops = {
 	.make_item = make_node,
 	.drop_item = drop_node,
 };
 
-static const struct configfs_item_operations node_ops = {
+static struct configfs_item_operations node_ops = {
 	.release = release_node,
 };
 

@@ -3,7 +3,7 @@
  * Copyright (C) 2018-2023 Oracle.  All Rights Reserved.
  * Author: Darrick J. Wong <djwong@kernel.org>
  */
-#include "xfs_platform.h"
+#include "xfs.h"
 #include "xfs_fs.h"
 #include "xfs_shared.h"
 #include "xfs_format.h"
@@ -797,6 +797,7 @@ xrep_iallocbt(
 {
 	struct xrep_ibt		*ri;
 	struct xfs_mount	*mp = sc->mp;
+	char			*descr;
 	xfs_agino_t		first_agino, last_agino;
 	int			error = 0;
 
@@ -815,9 +816,11 @@ xrep_iallocbt(
 	/* Set up enough storage to handle an AG with nothing but inodes. */
 	xfs_agino_range(mp, pag_agno(sc->sa.pag), &first_agino, &last_agino);
 	last_agino /= XFS_INODES_PER_CHUNK;
-	error = xfarray_create("inode index records", last_agino,
+	descr = xchk_xfile_ag_descr(sc, "inode index records");
+	error = xfarray_create(descr, last_agino,
 			sizeof(struct xfs_inobt_rec_incore),
 			&ri->inode_records);
+	kfree(descr);
 	if (error)
 		goto out_ri;
 
@@ -863,24 +866,10 @@ xrep_revalidate_iallocbt(
 	if (error)
 		goto out;
 
-	/*
-	 * If the inobt is still corrupt, we've failed to repair the filesystem
-	 * and should just bail out.
-	 *
-	 * If the inobt fails cross-examination with the finobt, the scan will
-	 * free the finobt cursor, so we need to mark the repair incomplete
-	 * and avoid walking off the end of the NULL finobt cursor.
-	 */
-	if (!xfs_has_finobt(sc->mp) ||
-	    (sc->sm->sm_flags & XFS_SCRUB_OFLAG_CORRUPT))
-		goto out;
-
-	sc->sm->sm_type = XFS_SCRUB_TYPE_FINOBT;
-	if (!sc->sa.fino_cur) {
-		xchk_set_incomplete(sc);
-		goto out;
+	if (xfs_has_finobt(sc->mp)) {
+		sc->sm->sm_type = XFS_SCRUB_TYPE_FINOBT;
+		error = xchk_iallocbt(sc);
 	}
-	error = xchk_iallocbt(sc);
 
 out:
 	sc->sm->sm_type = old_type;
