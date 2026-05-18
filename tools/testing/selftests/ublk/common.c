@@ -12,11 +12,11 @@ void backing_file_tgt_deinit(struct ublk_dev *dev)
 	}
 }
 
-int backing_file_tgt_init(struct ublk_dev *dev, unsigned int nr_direct)
+int backing_file_tgt_init(struct ublk_dev *dev)
 {
 	int fd, i;
 
-	ublk_assert(dev->nr_fds == 1);
+	assert(dev->nr_fds == 1);
 
 	for (i = 0; i < dev->tgt.nr_backing_files; i++) {
 		char *file = dev->tgt.backing_file[i];
@@ -25,7 +25,7 @@ int backing_file_tgt_init(struct ublk_dev *dev, unsigned int nr_direct)
 
 		ublk_dbg(UBLK_DBG_DEV, "%s: file %d: %s\n", __func__, i, file);
 
-		fd = open(file, O_RDWR | (i < nr_direct ? O_DIRECT : 0));
+		fd = open(file, O_RDWR | O_DIRECT);
 		if (fd < 0) {
 			ublk_err("%s: backing file %s can't be opened: %s\n",
 					__func__, file, strerror(errno));

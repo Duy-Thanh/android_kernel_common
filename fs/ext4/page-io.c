@@ -7,7 +7,6 @@
  * Written by Theodore Ts'o, 2010.
  */
 
-#include <linux/blk-crypto.h>
 #include <linux/fs.h>
 #include <linux/time.h>
 #include <linux/highuid.h>
@@ -402,7 +401,7 @@ void ext4_io_submit(struct ext4_io_submit *io)
 	if (bio) {
 		if (io->io_wbc->sync_mode == WB_SYNC_ALL)
 			io->io_bio->bi_opf |= REQ_SYNC;
-		blk_crypto_submit_bio(io->io_bio);
+		submit_bio(io->io_bio);
 	}
 	io->io_bio = NULL;
 }

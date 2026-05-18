@@ -231,7 +231,7 @@ static struct kmem_cache *bfq_pool;
 #define BFQ_RQ_SEEKY(bfqd, last_pos, rq) \
 	(get_sdist(last_pos, rq) >			\
 	 BFQQ_SEEK_THR &&				\
-	 (blk_queue_rot(bfqd->queue) ||			\
+	 (!blk_queue_nonrot(bfqd->queue) ||		\
 	  blk_rq_sectors(rq) < BFQQ_SECT_THR_NONROT))
 #define BFQQ_CLOSE_THR		(sector_t)(8 * 1024)
 #define BFQQ_SEEKY(bfqq)	(hweight32(bfqq->seek_history) > 19)
@@ -697,7 +697,7 @@ static void bfq_limit_depth(blk_opf_t opf, struct blk_mq_alloc_data *data)
 	unsigned int limit, act_idx;
 
 	/* Sync reads have full depth available */
-	if (blk_mq_is_sync_read(opf))
+	if (op_is_sync(opf) && !op_is_write(opf))
 		limit = data->q->nr_requests;
 	else
 		limit = bfqd->async_depths[!!bfqd->wr_busy_queues][op_is_sync(opf)];
@@ -4165,7 +4165,7 @@ static bool bfq_bfqq_is_slow(struct bfq_data *bfqd, struct bfq_queue *bfqq,
 
 	/* don't use too short time intervals */
 	if (delta_usecs < 1000) {
-		if (!blk_queue_rot(bfqd->queue))
+		if (blk_queue_nonrot(bfqd->queue))
 			 /*
 			  * give same worst-case guarantees as idling
 			  * for seeky
@@ -4487,7 +4487,7 @@ static bool idling_boosts_thr_without_issues(struct bfq_data *bfqd,
 					     struct bfq_queue *bfqq)
 {
 	bool rot_without_queueing =
-		blk_queue_rot(bfqd->queue) && !bfqd->hw_tag,
+		!blk_queue_nonrot(bfqd->queue) && !bfqd->hw_tag,
 		bfqq_sequential_and_IO_bound,
 		idling_boosts_thr;
 
@@ -4521,7 +4521,7 @@ static bool idling_boosts_thr_without_issues(struct bfq_data *bfqd,
 	 * flash-based device.
 	 */
 	idling_boosts_thr = rot_without_queueing ||
-		((blk_queue_rot(bfqd->queue) || !bfqd->hw_tag) &&
+		((!blk_queue_nonrot(bfqd->queue) || !bfqd->hw_tag) &&
 		 bfqq_sequential_and_IO_bound);
 
 	/*
@@ -4722,7 +4722,7 @@ bfq_choose_bfqq_for_injection(struct bfq_data *bfqd)
 			 * there is only one in-flight large request
 			 * at a time.
 			 */
-			if (!blk_queue_rot(bfqd->queue) &&
+			if (blk_queue_nonrot(bfqd->queue) &&
 			    blk_rq_sectors(bfqq->next_rq) >=
 			    BFQQ_SECT_THR_NONROT &&
 			    bfqd->tot_rq_in_driver >= 1)
@@ -6340,7 +6340,7 @@ static void bfq_update_hw_tag(struct bfq_data *bfqd)
 	bfqd->hw_tag_samples = 0;
 
 	bfqd->nonrot_with_queueing =
-		!blk_queue_rot(bfqd->queue) && bfqd->hw_tag;
+		blk_queue_nonrot(bfqd->queue) && bfqd->hw_tag;
 }
 
 static void bfq_completed_request(struct bfq_queue *bfqq, struct bfq_data *bfqd)
@@ -7112,29 +7112,39 @@ void bfq_put_async_queues(struct bfq_data *bfqd, struct bfq_group *bfqg)
 static void bfq_depth_updated(struct request_queue *q)
 {
 	struct bfq_data *bfqd = q->elevator->elevator_data;
-	unsigned int async_depth = q->async_depth;
+	unsigned int nr_requests = q->nr_requests;
 
 	/*
-	 * By default:
-	 *  - sync reads are not limited
-	 * If bfqq is not being weight-raised:
-	 *  - sync writes are limited to 75%(async depth default value)
-	 *  - async IO are limited to 50%
-	 * If bfqq is being weight-raised:
-	 *  - sync writes are limited to ~37%
-	 *  - async IO are limited to ~18
+	 * In-word depths if no bfq_queue is being weight-raised:
+	 * leaving 25% of tags only for sync reads.
 	 *
-	 * If request_queue->async_depth is updated by user, all limit are
-	 * updated relatively.
+	 * In next formulas, right-shift the value
+	 * (1U<<bt->sb.shift), instead of computing directly
+	 * (1U<<(bt->sb.shift - something)), to be robust against
+	 * any possible value of bt->sb.shift, without having to
+	 * limit 'something'.
 	 */
-	bfqd->async_depths[0][1] = async_depth;
-	bfqd->async_depths[0][0] = max(async_depth * 2 / 3, 1U);
-	bfqd->async_depths[1][1] = max(async_depth >> 1, 1U);
-	bfqd->async_depths[1][0] = max(async_depth >> 2, 1U);
+	/* no more than 50% of tags for async I/O */
+	bfqd->async_depths[0][0] = max(nr_requests >> 1, 1U);
+	/*
+	 * no more than 75% of tags for sync writes (25% extra tags
+	 * w.r.t. async I/O, to prevent async I/O from starving sync
+	 * writes)
+	 */
+	bfqd->async_depths[0][1] = max((nr_requests * 3) >> 2, 1U);
 
 	/*
-	 * Due to cgroup qos, the allowed request for bfqq might be 1
+	 * In-word depths in case some bfq_queue is being weight-
+	 * raised: leaving ~63% of tags for sync reads. This is the
+	 * highest percentage for which, in our tests, application
+	 * start-up times didn't suffer from any regression due to tag
+	 * shortage.
 	 */
+	/* no more than ~18% of tags for async I/O */
+	bfqd->async_depths[1][0] = max((nr_requests * 3) >> 4, 1U);
+	/* no more than ~37% of tags for sync writes (~20% extra tags) */
+	bfqd->async_depths[1][1] = max((nr_requests * 6) >> 4, 1U);
+
 	blk_mq_set_min_shallow_depth(q, 1);
 }
 
@@ -7283,7 +7293,7 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_queue *eq)
 	INIT_HLIST_HEAD(&bfqd->burst_list);
 
 	bfqd->hw_tag = -1;
-	bfqd->nonrot_with_queueing = !blk_queue_rot(bfqd->queue);
+	bfqd->nonrot_with_queueing = blk_queue_nonrot(bfqd->queue);
 
 	bfqd->bfq_max_budget = bfq_default_max_budget;
 
@@ -7318,9 +7328,9 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_queue *eq)
 	 * Begin by assuming, optimistically, that the device peak
 	 * rate is equal to 2/3 of the highest reference rate.
 	 */
-	bfqd->rate_dur_prod = ref_rate[!blk_queue_rot(bfqd->queue)] *
-		ref_wr_duration[!blk_queue_rot(bfqd->queue)];
-	bfqd->peak_rate = ref_rate[!blk_queue_rot(bfqd->queue)] * 2 / 3;
+	bfqd->rate_dur_prod = ref_rate[blk_queue_nonrot(bfqd->queue)] *
+		ref_wr_duration[blk_queue_nonrot(bfqd->queue)];
+	bfqd->peak_rate = ref_rate[blk_queue_nonrot(bfqd->queue)] * 2 / 3;
 
 	/* see comments on the definition of next field inside bfq_data */
 	bfqd->actuator_load_threshold = 4;
@@ -7355,7 +7365,6 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_queue *eq)
 	blk_queue_flag_set(QUEUE_FLAG_DISABLE_WBT_DEF, q);
 	wbt_disable_default(q->disk);
 	blk_stat_enable_accounting(q);
-	q->async_depth = (q->nr_requests * 3) >> 2;
 
 	return 0;
 

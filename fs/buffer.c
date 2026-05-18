@@ -29,7 +29,6 @@
 #include <linux/slab.h>
 #include <linux/capability.h>
 #include <linux/blkdev.h>
-#include <linux/blk-crypto.h>
 #include <linux/file.h>
 #include <linux/quotaops.h>
 #include <linux/highmem.h>
@@ -2822,7 +2821,7 @@ static void submit_bh_wbc(blk_opf_t opf, struct buffer_head *bh,
 		wbc_account_cgroup_owner(wbc, bh->b_folio, bh->b_size);
 	}
 
-	blk_crypto_submit_bio(bio);
+	submit_bio(bio);
 }
 
 void submit_bh(blk_opf_t opf, struct buffer_head *bh)

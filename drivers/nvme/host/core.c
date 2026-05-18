@@ -1333,8 +1333,7 @@ static void nvme_queue_keep_alive_work(struct nvme_ctrl *ctrl)
 }
 
 static enum rq_end_io_ret nvme_keep_alive_end_io(struct request *rq,
-						 blk_status_t status,
-						 const struct io_comp_batch *iob)
+						 blk_status_t status)
 {
 	struct nvme_ctrl *ctrl = rq->end_io_data;
 	unsigned long rtt = jiffies - (rq->deadline - rq->timeout);

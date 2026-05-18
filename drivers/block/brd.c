@@ -247,7 +247,8 @@ MODULE_ALIAS("rd");
 /* Legacy boot options - nonmodular */
 static int __init ramdisk_size(char *str)
 {
-	return kstrtoul(str, 0, &rd_size) == 0;
+	rd_size = simple_strtol(str, NULL, 0);
+	return 1;
 }
 __setup("ramdisk_size=", ramdisk_size);
 #endif

@@ -525,8 +525,7 @@ static void st_do_stats(struct scsi_tape *STp, struct request *req)
 }
 
 static enum rq_end_io_ret st_scsi_execute_end(struct request *req,
-					      blk_status_t status,
-					      const struct io_comp_batch *iob)
+					      blk_status_t status)
 {
 	struct scsi_cmnd *scmd = blk_mq_rq_to_pdu(req);
 	struct st_request *SRpnt = req->end_io_data;

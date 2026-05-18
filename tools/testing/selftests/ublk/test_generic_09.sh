@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="generic_09"
 ERR_CODE=0
 
 if ! _have_feature "AUTO_BUF_REG"; then

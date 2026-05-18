@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
+TID="stress_04"
 ERR_CODE=0
 
 ublk_io_and_kill_daemon()

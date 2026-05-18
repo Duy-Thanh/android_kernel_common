@@ -13,7 +13,6 @@
 
 struct blk_mq_tags;
 struct blk_flush_queue;
-struct io_comp_batch;
 
 #define BLKDEV_MIN_RQ	4
 #define BLKDEV_DEFAULT_RQ	128
@@ -23,8 +22,7 @@ enum rq_end_io_ret {
 	RQ_END_IO_FREE,
 };
 
-typedef enum rq_end_io_ret (rq_end_io_fn)(struct request *, blk_status_t,
-					  const struct io_comp_batch *);
+typedef enum rq_end_io_ret (rq_end_io_fn)(struct request *, blk_status_t);
 
 /*
  * request flags */

@@ -39,8 +39,7 @@ static inline struct pscsi_dev_virt *PSCSI_DEV(struct se_device *dev)
 }
 
 static sense_reason_t pscsi_execute_cmd(struct se_cmd *cmd);
-static enum rq_end_io_ret pscsi_req_done(struct request *, blk_status_t,
-					 const struct io_comp_batch *);
+static enum rq_end_io_ret pscsi_req_done(struct request *, blk_status_t);
 
 /*	pscsi_attach_hba():
  *
@@ -1002,8 +1001,7 @@ static sector_t pscsi_get_blocks(struct se_device *dev)
 }
 
 static enum rq_end_io_ret pscsi_req_done(struct request *req,
-					 blk_status_t status,
-					 const struct io_comp_batch *iob)
+					 blk_status_t status)
 {
 	struct se_cmd *cmd = req->end_io_data;
 	struct scsi_cmnd *scmd = blk_mq_rq_to_pdu(req);

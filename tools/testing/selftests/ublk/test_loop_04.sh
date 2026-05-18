@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="loop_04"
 ERR_CODE=0
 
 _prep_test "loop" "mkfs & mount & umount with zero copy"

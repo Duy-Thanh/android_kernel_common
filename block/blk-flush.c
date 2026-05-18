@@ -199,8 +199,7 @@ static void blk_flush_complete_seq(struct request *rq,
 }
 
 static enum rq_end_io_ret flush_end_io(struct request *flush_rq,
-				       blk_status_t error,
-				       const struct io_comp_batch *iob)
+				       blk_status_t error)
 {
 	struct request_queue *q = flush_rq->q;
 	struct list_head *running;
@@ -336,8 +335,7 @@ static void blk_kick_flush(struct request_queue *q, struct blk_flush_queue *fq,
 }
 
 static enum rq_end_io_ret mq_flush_data_end_io(struct request *rq,
-					       blk_status_t error,
-					       const struct io_comp_batch *iob)
+					       blk_status_t error)
 {
 	struct request_queue *q = rq->q;
 	struct blk_mq_hw_ctx *hctx = rq->mq_hctx;

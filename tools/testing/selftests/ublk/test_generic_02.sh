@@ -3,6 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
+TID="generic_02"
 ERR_CODE=0
 
 if ! _have_program bpftrace; then
@@ -13,7 +14,7 @@ if ! _have_program fio; then
 	exit "$UBLK_SKIP_CODE"
 fi
 
-_prep_test "null" "ublk dispatch won't reorder IO for MQ"
+_prep_test "null" "sequential io order for MQ"
 
 dev_id=$(_add_ublk_dev -t null -q 2)
 _check_add_dev $TID $?
@@ -21,20 +22,15 @@ _check_add_dev $TID $?
 dev_t=$(_get_disk_dev_t "$dev_id")
 bpftrace trace/seq_io.bt "$dev_t" "W" 1 > "$UBLK_TMP" 2>&1 &
 btrace_pid=$!
+sleep 2
 
-# Wait for bpftrace probes to be attached (BEGIN block prints BPFTRACE_READY)
-for _ in $(seq 100); do
-	grep -q "BPFTRACE_READY" "$UBLK_TMP" 2>/dev/null && break
-	sleep 0.1
-done
-
-if ! kill -0 "$btrace_pid" 2>/dev/null; then
+if ! kill -0 "$btrace_pid" > /dev/null 2>&1; then
 	_cleanup_test "null"
 	exit "$UBLK_SKIP_CODE"
 fi
 
-# run fio over this ublk disk (pinned to CPU 0)
-taskset -c 0 fio --name=write_seq \
+# run fio over this ublk disk
+fio --name=write_seq \
     --filename=/dev/ublkb"${dev_id}" \
     --ioengine=libaio --iodepth=16 \
     --rw=write \
@@ -44,11 +40,8 @@ taskset -c 0 fio --name=write_seq \
 ERR_CODE=$?
 kill "$btrace_pid"
 wait
-
-# Check for out-of-order completions detected by bpftrace
-if grep -q "^out_of_order:" "$UBLK_TMP"; then
-	echo "I/O reordering detected:"
-	grep "^out_of_order:" "$UBLK_TMP"
+if grep -q "io_out_of_order" "$UBLK_TMP"; then
+	cat "$UBLK_TMP"
 	ERR_CODE=255
 fi
 _cleanup_test "null"

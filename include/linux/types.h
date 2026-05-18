@@ -171,11 +171,6 @@ typedef u64 phys_addr_t;
 typedef u32 phys_addr_t;
 #endif
 
-struct phys_vec {
-	phys_addr_t	paddr;
-	size_t		len;
-};
-
 typedef phys_addr_t resource_size_t;
 
 /*
