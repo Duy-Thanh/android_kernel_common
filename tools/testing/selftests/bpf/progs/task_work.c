@@ -65,7 +65,8 @@ int oncpu_hash_map(struct pt_regs *args)
 	work = bpf_map_lookup_elem(&hmap, &key);
 	if (!work)
 		return 0;
-	bpf_task_work_schedule_resume(task, &work->tw, &hmap, process_work);
+
+	bpf_task_work_schedule_resume_impl(task, &work->tw, &hmap, process_work, NULL);
 	return 0;
 }
 
@@ -79,7 +80,7 @@ int oncpu_array_map(struct pt_regs *args)
 	work = bpf_map_lookup_elem(&arrmap, &key);
 	if (!work)
 		return 0;
-	bpf_task_work_schedule_signal(task, &work->tw, &arrmap, process_work);
+	bpf_task_work_schedule_signal_impl(task, &work->tw, &arrmap, process_work, NULL);
 	return 0;
 }
 
@@ -101,6 +102,6 @@ int oncpu_lru_map(struct pt_regs *args)
 	work = bpf_map_lookup_elem(&lrumap, &key);
 	if (!work || work->data[0])
 		return 0;
-	bpf_task_work_schedule_resume(task, &work->tw, &lrumap, process_work);
+	bpf_task_work_schedule_resume_impl(task, &work->tw, &lrumap, process_work, NULL);
 	return 0;
 }

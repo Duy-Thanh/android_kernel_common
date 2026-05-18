@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0
 
 #include "vmlinux.h"
-#include <errno.h>
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_tracing.h>
 
 char _license[] SEC("license") = "GPL";
+
+#ifndef EBUSY
+#define EBUSY 16
+#endif
 
 extern bool CONFIG_PREEMPTION __kconfig __weak;
 int nr_get_errs = 0;
@@ -37,7 +40,7 @@ int BPF_PROG(socket_post_create, struct socket *sock, int family, int type,
 
 	ret = bpf_task_storage_delete(&task_storage,
 				      bpf_get_current_task_btf());
-	if (ret == -EDEADLK || ret == -ETIMEDOUT)
+	if (ret == -EBUSY)
 		__sync_fetch_and_add(&nr_del_errs, 1);
 
 	return 0;

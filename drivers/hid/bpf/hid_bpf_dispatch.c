@@ -295,6 +295,9 @@ hid_bpf_get_data(struct hid_bpf_ctx *ctx, unsigned int offset, const size_t rdwr
 {
 	struct hid_bpf_ctx_kern *ctx_kern;
 
+	if (!ctx)
+		return NULL;
+
 	ctx_kern = container_of(ctx, struct hid_bpf_ctx_kern, ctx);
 
 	if (rdwr_buf_size + offset > ctx->allocated_size)
@@ -361,7 +364,7 @@ __hid_bpf_hw_check_params(struct hid_bpf_ctx *ctx, __u8 *buf, size_t *buf__sz,
 	u32 report_len;
 
 	/* check arguments */
-	if (!hid_ops)
+	if (!ctx || !hid_ops || !buf)
 		return -EINVAL;
 
 	switch (rtype) {

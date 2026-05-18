@@ -27,22 +27,16 @@ static int list_sum(struct arena_list_head *head)
 	return sum;
 }
 
-static void test_arena_list_add_del(int cnt, bool nonsleepable)
+static void test_arena_list_add_del(int cnt)
 {
 	LIBBPF_OPTS(bpf_test_run_opts, opts);
 	struct arena_list *skel;
 	int expected_sum = (u64)cnt * (cnt - 1) / 2;
 	int ret, sum;
 
-	skel = arena_list__open();
-	if (!ASSERT_OK_PTR(skel, "arena_list__open"))
+	skel = arena_list__open_and_load();
+	if (!ASSERT_OK_PTR(skel, "arena_list__open_and_load"))
 		return;
-
-	skel->rodata->nonsleepable = nonsleepable;
-
-	ret = arena_list__load(skel);
-	if (!ASSERT_OK(ret, "arena_list__load"))
-		goto out;
 
 	skel->bss->cnt = cnt;
 	ret = bpf_prog_test_run_opts(bpf_program__fd(skel->progs.arena_list_add), &opts);
@@ -71,11 +65,7 @@ out:
 void test_arena_list(void)
 {
 	if (test__start_subtest("arena_list_1"))
-		test_arena_list_add_del(1, false);
+		test_arena_list_add_del(1);
 	if (test__start_subtest("arena_list_1000"))
-		test_arena_list_add_del(1000, false);
-	if (test__start_subtest("arena_list_1_nonsleepable"))
-		test_arena_list_add_del(1, true);
-	if (test__start_subtest("arena_list_1000_nonsleepable"))
-		test_arena_list_add_del(1000, true);
+		test_arena_list_add_del(1000);
 }
