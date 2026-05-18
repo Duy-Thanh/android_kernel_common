@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c994218_0a8ce9d8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-18T17:25:34Z",
+      "side": 1,
+      "message": "Ok, maybe at least worth adding a short comment about that?",
+      "parentUuid": "1d5a71fe_1351c7a8",
+      "revId": "5bb872ca2365fcc7e16fbe2655559cd45214359d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "827c7fba_3cbff78f",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
