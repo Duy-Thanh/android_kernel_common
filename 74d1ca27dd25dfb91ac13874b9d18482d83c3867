@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a3cc85_560b51e4",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-18T16:26:31Z",
+      "side": 1,
+      "message": "nit: it may not be clear why we are saying that FEUADDR is zero in xAPIC mode and yet we are not validating that. So maybe e.g. remove this paragraph and modify the below one: \"In x2APIC mode (required by pKVM), ...\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "06b2a276_a6ca52cf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 507,
+                "startChar": 0,
+                "endLine": 513,
+                "endChar": 0
+              },
+              "replacement": "\t\t * In x2APIC mode (required by pKVM), the IOMMU places APIC ID\n\t\t * bits [31:8] in FEUADDR bits [31:8]; bits [7:0] are reserved\n\t\t * and must be zero. Reject writes that set the reserved low byte.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "74d1ca27dd25dfb91ac13874b9d18482d83c3867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c49958d5_d36ae458",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-18T16:26:31Z",
+      "side": 1,
+      "message": "nit: we could spare this obvious last sentence?",
+      "fixSuggestions": [
+        {
+          "fixId": "d0230a7d_d5daf2ce",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 512,
+                "startChar": 0,
+                "endLine": 513,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "74d1ca27dd25dfb91ac13874b9d18482d83c3867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
