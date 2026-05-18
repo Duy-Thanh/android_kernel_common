@@ -104,6 +104,24 @@
       "message": "@allenwebb@google.com I don\u0027t have the +2 power here. Can you?",
       "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea8a875_568f4698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955868
+      },
+      "writtenOn": "2026-05-18T17:59:00Z",
+      "side": 1,
+      "message": "It looks like the backport may need to land in android16-6.12-2026-03 first.",
+      "parentUuid": "c129ba4d_8f5c7067",
+      "revId": "bc336cd79d3732ceb25bcc544dec099b9d472084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
