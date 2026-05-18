@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8595274c_d7cfb49e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-18T14:28:35Z",
+      "side": 1,
+      "message": "Abandon this patch and cherry-pick properly from aosp/3904238 so the Change-Id is preserved. Also, open a new bug for this patch and explain why it is needed in android-mainline.",
+      "revId": "18f5e6bf2a4e1feb7a75ac0b2ca5378ee272bd68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
