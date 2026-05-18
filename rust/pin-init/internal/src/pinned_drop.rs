@@ -1,61 +1,51 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
-use proc_macro2::TokenStream;
-use quote::quote;
-use syn::{parse::Nothing, parse_quote, spanned::Spanned, ImplItem, ItemImpl, Token};
+#[cfg(not(kernel))]
+use proc_macro2 as proc_macro;
 
-use crate::diagnostics::{DiagCtxt, ErrorGuaranteed};
+use proc_macro::{TokenStream, TokenTree};
 
-pub(crate) fn pinned_drop(
-    _args: Nothing,
-    mut input: ItemImpl,
-    dcx: &mut DiagCtxt,
-) -> Result<TokenStream, ErrorGuaranteed> {
-    if let Some(unsafety) = input.unsafety {
-        dcx.error(unsafety, "implementing `PinnedDrop` is safe");
-    }
-    input.unsafety = Some(Token![unsafe](input.impl_token.span));
-    match &mut input.trait_ {
-        Some((not, path, _for)) => {
-            if let Some(not) = not {
-                dcx.error(not, "cannot implement `!PinnedDrop`");
+pub(crate) fn pinned_drop(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let mut toks = input.into_iter().collect::<Vec<_>>();
+    assert!(!toks.is_empty());
+    // Ensure that we have an `impl` item.
+    assert!(matches!(&toks[0], TokenTree::Ident(i) if i.to_string() == "impl"));
+    // Ensure that we are implementing `PinnedDrop`.
+    let mut nesting: usize = 0;
+    let mut pinned_drop_idx = None;
+    for (i, tt) in toks.iter().enumerate() {
+        match tt {
+            TokenTree::Punct(p) if p.as_char() == '<' => {
+                nesting += 1;
             }
-            for (seg, expected) in path
-                .segments
-                .iter()
-                .rev()
-                .zip(["PinnedDrop", "pin_init", ""])
-            {
-                if expected.is_empty() || seg.ident != expected {
-                    dcx.error(seg, "bad import path for `PinnedDrop`");
-                }
-                if !seg.arguments.is_none() {
-                    dcx.error(&seg.arguments, "unexpected arguments for `PinnedDrop` path");
-                }
+            TokenTree::Punct(p) if p.as_char() == '>' => {
+                nesting = nesting.checked_sub(1).unwrap();
+                continue;
             }
-            *path = parse_quote!(::pin_init::PinnedDrop);
+            _ => {}
         }
-        None => {
-            let span = input
-                .impl_token
-                .span
-                .join(input.self_ty.span())
-                .unwrap_or(input.impl_token.span);
-            dcx.error(
-                span,
-                "expected `impl ... PinnedDrop for ...`, got inherent impl",
+        if i >= 1 && nesting == 0 {
+            // Found the end of the generics, this should be `PinnedDrop`.
+            assert!(
+                matches!(tt, TokenTree::Ident(i) if i.to_string() == "PinnedDrop"),
+                "expected 'PinnedDrop', found: '{tt:?}'"
             );
+            pinned_drop_idx = Some(i);
+            break;
         }
     }
-    for item in &mut input.items {
-        if let ImplItem::Fn(fn_item) = item {
-            if fn_item.sig.ident == "drop" {
-                fn_item
-                    .sig
-                    .inputs
-                    .push(parse_quote!(_: ::pin_init::__internal::OnlyCallFromDrop));
-            }
-        }
+    let idx = pinned_drop_idx
+        .unwrap_or_else(|| panic!("Expected an `impl` block implementing `PinnedDrop`."));
+    // Fully qualify the `PinnedDrop`, as to avoid any tampering.
+    toks.splice(idx..idx, quote!(::pin_init::));
+    // Take the `{}` body and call the declarative macro.
+    if let Some(TokenTree::Group(last)) = toks.pop() {
+        let last = last.stream();
+        quote!(::pin_init::__pinned_drop! {
+            @impl_sig(#(#toks)*),
+            @impl_body(#last),
+        })
+    } else {
+        TokenStream::from_iter(toks)
     }
-    Ok(quote!(#input))
 }

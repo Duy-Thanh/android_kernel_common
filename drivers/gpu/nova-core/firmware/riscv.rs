@@ -3,6 +3,8 @@
 //! Support for firmware binaries designed to run on a RISC-V core. Such firmwares files have a
 //! dedicated header.
 
+use core::mem::size_of;
+
 use kernel::{
     device,
     firmware::Firmware,

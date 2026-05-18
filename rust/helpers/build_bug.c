@@ -2,7 +2,7 @@
 
 #include <linux/errname.h>
 
-__rust_helper const char *rust_helper_errname(int err)
+const char *rust_helper_errname(int err)
 {
 	return errname(err);
 }

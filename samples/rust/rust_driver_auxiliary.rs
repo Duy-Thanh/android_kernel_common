@@ -16,6 +16,7 @@ use kernel::{
 };
 
 use core::any::TypeId;
+use pin_init::PinInit;
 
 const MODULE_NAME: &CStr = <LocalModule as kernel::ModuleMetadata>::NAME;
 const AUXILIARY_NAME: &CStr = c_str!("auxiliary");

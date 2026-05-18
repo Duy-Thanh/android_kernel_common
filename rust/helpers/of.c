@@ -2,7 +2,7 @@
 
 #include <linux/of.h>
 
-__rust_helper bool rust_helper_is_of_node(const struct fwnode_handle *fwnode)
+bool rust_helper_is_of_node(const struct fwnode_handle *fwnode)
 {
 	return is_of_node(fwnode);
 }
