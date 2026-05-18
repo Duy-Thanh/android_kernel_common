@@ -371,13 +371,14 @@ int btrfs_insert_empty_inode(struct btrfs_trans_handle *trans,
 			     struct btrfs_path *path, u64 objectid)
 {
 	struct btrfs_key key;
-
+	int ret;
 	key.objectid = objectid;
 	key.type = BTRFS_INODE_ITEM_KEY;
 	key.offset = 0;
 
-	return btrfs_insert_empty_item(trans, root, path, &key,
-				       sizeof(struct btrfs_inode_item));
+	ret = btrfs_insert_empty_item(trans, root, path, &key,
+				      sizeof(struct btrfs_inode_item));
+	return ret;
 }
 
 int btrfs_lookup_inode(struct btrfs_trans_handle *trans, struct btrfs_root
