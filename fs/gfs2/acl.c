@@ -83,14 +83,21 @@ struct posix_acl *gfs2_get_acl(struct inode *inode, int type, bool rcu)
 int __gfs2_set_acl(struct inode *inode, struct posix_acl *acl, int type)
 {
 	int error;
-	size_t len = 0;
-	char *data = NULL;
+	size_t len;
+	char *data;
 	const char *name = gfs2_acl_name(type);
 
 	if (acl) {
-		data = posix_acl_to_xattr(&init_user_ns, acl, &len, GFP_NOFS);
+		len = posix_acl_xattr_size(acl->a_count);
+		data = kmalloc(len, GFP_NOFS);
 		if (data == NULL)
 			return -ENOMEM;
+		error = posix_acl_to_xattr(&init_user_ns, acl, data, len);
+		if (error < 0)
+			goto out;
+	} else {
+		data = NULL;
+		len = 0;
 	}
 
 	error = __gfs2_xattr_set(inode, name, data, len, 0, GFS2_EATYPE_SYS);

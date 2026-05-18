@@ -178,6 +178,7 @@ locks_get_lock_context(struct inode *inode, int type)
 {
 	struct file_lock_context *ctx;
 
+	/* paired with cmpxchg() below */
 	ctx = locks_inode_context(inode);
 	if (likely(ctx) || type == F_UNLCK)
 		goto out;
@@ -195,18 +196,7 @@ locks_get_lock_context(struct inode *inode, int type)
 	 * Assign the pointer if it's not already assigned. If it is, then
 	 * free the context we just allocated.
 	 */
-	spin_lock(&inode->i_lock);
-	if (!(inode->i_opflags & IOP_FLCTX)) {
-		VFS_BUG_ON_INODE(inode->i_flctx, inode);
-		WRITE_ONCE(inode->i_flctx, ctx);
-		/*
-		 * Paired with locks_inode_context().
-		 */
-		smp_store_release(&inode->i_opflags, inode->i_opflags | IOP_FLCTX);
-		spin_unlock(&inode->i_lock);
-	} else {
-		VFS_BUG_ON_INODE(!inode->i_flctx, inode);
-		spin_unlock(&inode->i_lock);
+	if (cmpxchg(&inode->i_flctx, NULL, ctx)) {
 		kmem_cache_free(flctx_cache, ctx);
 		ctx = locks_inode_context(inode);
 	}

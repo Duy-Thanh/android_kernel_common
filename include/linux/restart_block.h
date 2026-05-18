@@ -6,7 +6,6 @@
 #define __LINUX_RESTART_BLOCK_H
 
 #include <linux/compiler.h>
-#include <linux/time64.h>
 #include <linux/types.h>
 
 struct __kernel_timespec;
@@ -51,7 +50,8 @@ struct restart_block {
 			struct pollfd __user *ufds;
 			int nfds;
 			int has_timeout;
-			struct timespec64 end_time;
+			unsigned long tv_sec;
+			unsigned long tv_nsec;
 		} poll;
 	};
 };

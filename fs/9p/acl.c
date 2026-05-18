@@ -167,11 +167,17 @@ int v9fs_iop_set_acl(struct mnt_idmap *idmap, struct dentry *dentry,
 		if (retval)
 			goto err_out;
 
-		value = posix_acl_to_xattr(&init_user_ns, acl, &size, GFP_NOFS);
+		size = posix_acl_xattr_size(acl->a_count);
+
+		value = kzalloc(size, GFP_NOFS);
 		if (!value) {
 			retval = -ENOMEM;
 			goto err_out;
 		}
+
+		retval = posix_acl_to_xattr(&init_user_ns, acl, value, size);
+		if (retval < 0)
+			goto err_out;
 	}
 
 	/*
@@ -251,10 +257,13 @@ static int v9fs_set_acl(struct p9_fid *fid, int type, struct posix_acl *acl)
 		return 0;
 
 	/* Set a setxattr request to server */
-	buffer = posix_acl_to_xattr(&init_user_ns, acl, &size, GFP_KERNEL);
+	size = posix_acl_xattr_size(acl->a_count);
+	buffer = kmalloc(size, GFP_KERNEL);
 	if (!buffer)
 		return -ENOMEM;
-
+	retval = posix_acl_to_xattr(&init_user_ns, acl, buffer, size);
+	if (retval < 0)
+		goto err_free_out;
 	switch (type) {
 	case ACL_TYPE_ACCESS:
 		name = XATTR_NAME_POSIX_ACL_ACCESS;
@@ -266,6 +275,7 @@ static int v9fs_set_acl(struct p9_fid *fid, int type, struct posix_acl *acl)
 		BUG();
 	}
 	retval = v9fs_fid_xattr_set(fid, name, buffer, size, 0);
+err_free_out:
 	kfree(buffer);
 	return retval;
 }
