@@ -38,9 +38,15 @@ struct crypto_async_request *
 mv_cesa_dequeue_req_locked(struct mv_cesa_engine *engine,
 			   struct crypto_async_request **backlog)
 {
-	*backlog = crypto_get_backlog(&engine->queue);
+	struct crypto_async_request *req;
 
-	return crypto_dequeue_request(&engine->queue);
+	*backlog = crypto_get_backlog(&engine->queue);
+	req = crypto_dequeue_request(&engine->queue);
+
+	if (!req)
+		return NULL;
+
+	return req;
 }
 
 static void mv_cesa_rearm_engine(struct mv_cesa_engine *engine)

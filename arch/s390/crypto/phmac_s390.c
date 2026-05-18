@@ -23,10 +23,6 @@
 static struct crypto_engine *phmac_crypto_engine;
 #define MAX_QLEN 10
 
-static bool pkey_clrkey_allowed;
-module_param_named(clrkey, pkey_clrkey_allowed, bool, 0444);
-MODULE_PARM_DESC(clrkey, "Allow clear key material (default N)");
-
 /*
  * A simple hash walk helper
  */
@@ -315,13 +311,9 @@ static inline int phmac_tfm_ctx_setkey(struct phmac_tfm_ctx *tfm_ctx,
  * This function may sleep - don't call in non-sleeping context.
  */
 static inline int convert_key(const u8 *key, unsigned int keylen,
-			      struct phmac_protkey *pk, bool tested)
+			      struct phmac_protkey *pk)
 {
-	u32 xflags = PKEY_XFLAG_NOMEMALLOC;
 	int rc, i;
-
-	if (tested && !pkey_clrkey_allowed)
-		xflags |= PKEY_XFLAG_NOCLEARKEY;
 
 	pk->len = sizeof(pk->protkey);
 
@@ -336,7 +328,7 @@ static inline int convert_key(const u8 *key, unsigned int keylen,
 		}
 		rc = pkey_key2protkey(key, keylen,
 				      pk->protkey, &pk->len, &pk->type,
-				      xflags);
+				      PKEY_XFLAG_NOMEMALLOC);
 	}
 
 out:
@@ -358,7 +350,7 @@ out:
  * unnecessary additional conversion but never to invalid data on the
  * hash operation.
  */
-static int phmac_convert_key(struct phmac_tfm_ctx *tfm_ctx, bool tested)
+static int phmac_convert_key(struct phmac_tfm_ctx *tfm_ctx)
 {
 	struct phmac_protkey pk;
 	int rc;
@@ -367,7 +359,7 @@ static int phmac_convert_key(struct phmac_tfm_ctx *tfm_ctx, bool tested)
 	tfm_ctx->pk_state = PK_STATE_CONVERT_IN_PROGRESS;
 	spin_unlock_bh(&tfm_ctx->pk_lock);
 
-	rc = convert_key(tfm_ctx->keybuf, tfm_ctx->keylen, &pk, tested);
+	rc = convert_key(tfm_ctx->keybuf, tfm_ctx->keylen, &pk);
 
 	/* update context */
 	spin_lock_bh(&tfm_ctx->pk_lock);
@@ -412,7 +404,6 @@ static int phmac_kmac_update(struct ahash_request *req, bool maysleep)
 	struct kmac_sha2_ctx *ctx = &req_ctx->kmac_ctx;
 	struct hash_walk_helper *hwh = &req_ctx->hwh;
 	unsigned int bs = crypto_ahash_blocksize(tfm);
-	bool tested = crypto_ahash_tested(tfm);
 	unsigned int offset, k, n;
 	int rc = 0;
 
@@ -453,7 +444,7 @@ static int phmac_kmac_update(struct ahash_request *req, bool maysleep)
 					rc = -EKEYEXPIRED;
 					goto out;
 				}
-				rc = phmac_convert_key(tfm_ctx, tested);
+				rc = phmac_convert_key(tfm_ctx);
 				if (rc)
 					goto out;
 				spin_lock_bh(&tfm_ctx->pk_lock);
@@ -489,7 +480,7 @@ static int phmac_kmac_update(struct ahash_request *req, bool maysleep)
 					rc = -EKEYEXPIRED;
 					goto out;
 				}
-				rc = phmac_convert_key(tfm_ctx, tested);
+				rc = phmac_convert_key(tfm_ctx);
 				if (rc)
 					goto out;
 				spin_lock_bh(&tfm_ctx->pk_lock);
@@ -526,7 +517,6 @@ static int phmac_kmac_final(struct ahash_request *req, bool maysleep)
 	struct kmac_sha2_ctx *ctx = &req_ctx->kmac_ctx;
 	unsigned int ds = crypto_ahash_digestsize(tfm);
 	unsigned int bs = crypto_ahash_blocksize(tfm);
-	bool tested = crypto_ahash_tested(tfm);
 	unsigned int k, n;
 	int rc = 0;
 
@@ -547,7 +537,7 @@ static int phmac_kmac_final(struct ahash_request *req, bool maysleep)
 			rc = -EKEYEXPIRED;
 			goto out;
 		}
-		rc = phmac_convert_key(tfm_ctx, tested);
+		rc = phmac_convert_key(tfm_ctx);
 		if (rc)
 			goto out;
 		spin_lock_bh(&tfm_ctx->pk_lock);
@@ -751,12 +741,11 @@ static int phmac_setkey(struct crypto_ahash *tfm,
 	struct phmac_tfm_ctx *tfm_ctx = crypto_ahash_ctx(tfm);
 	unsigned int ds = crypto_ahash_digestsize(tfm);
 	unsigned int bs = crypto_ahash_blocksize(tfm);
-	bool tested = crypto_ahash_tested(tfm);
 	unsigned int tmpkeylen;
 	u8 *tmpkey = NULL;
 	int rc = 0;
 
-	if (!tested) {
+	if (!crypto_ahash_tested(tfm)) {
 		/*
 		 * selftest running: key is a raw hmac clear key and needs
 		 * to get embedded into a 'clear key token' in order to have
@@ -781,7 +770,7 @@ static int phmac_setkey(struct crypto_ahash *tfm,
 		goto out;
 
 	/* convert raw key into protected key */
-	rc = phmac_convert_key(tfm_ctx, tested);
+	rc = phmac_convert_key(tfm_ctx);
 	if (rc)
 		goto out;
 

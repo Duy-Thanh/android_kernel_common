@@ -58,8 +58,10 @@ static int __maybe_unused crypto_scomp_report(
 		       sizeof(rscomp), &rscomp);
 }
 
-static void __maybe_unused crypto_scomp_show(struct seq_file *m,
-					     struct crypto_alg *alg)
+static void crypto_scomp_show(struct seq_file *m, struct crypto_alg *alg)
+	__maybe_unused;
+
+static void crypto_scomp_show(struct seq_file *m, struct crypto_alg *alg)
 {
 	seq_puts(m, "type         : scomp\n");
 }
@@ -381,13 +383,17 @@ int crypto_register_scomps(struct scomp_alg *algs, int count)
 
 	for (i = 0; i < count; i++) {
 		ret = crypto_register_scomp(&algs[i]);
-		if (ret) {
-			crypto_unregister_scomps(algs, i);
-			return ret;
-		}
+		if (ret)
+			goto err;
 	}
 
 	return 0;
+
+err:
+	for (--i; i >= 0; --i)
+		crypto_unregister_scomp(&algs[i]);
+
+	return ret;
 }
 EXPORT_SYMBOL_GPL(crypto_register_scomps);
 

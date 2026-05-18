@@ -8,6 +8,7 @@
  */
 
 #include <linux/linkage.h>
+#include <linux/cfi_types.h>
 
 	KEY		.req	x0
 	MESSAGE		.req	x1
@@ -62,7 +63,7 @@
  *
  * It's guaranteed that message_len % 16 == 0.
  */
-SYM_FUNC_START(nh_neon)
+SYM_TYPED_FUNC_START(nh_neon)
 
 	ld1		{K0.4s,K1.4s}, [KEY], #32
 	  movi		PASS0_SUMS.2d, #0

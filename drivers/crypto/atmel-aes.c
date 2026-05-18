@@ -2201,10 +2201,12 @@ static irqreturn_t atmel_aes_irq(int irq, void *dev_id)
 
 static void atmel_aes_unregister_algs(struct atmel_aes_dev *dd)
 {
+	int i;
+
 #if IS_ENABLED(CONFIG_CRYPTO_DEV_ATMEL_AUTHENC)
 	if (dd->caps.has_authenc)
-		crypto_unregister_aeads(aes_authenc_algs,
-					ARRAY_SIZE(aes_authenc_algs));
+		for (i = 0; i < ARRAY_SIZE(aes_authenc_algs); i++)
+			crypto_unregister_aead(&aes_authenc_algs[i]);
 #endif
 
 	if (dd->caps.has_xts)
@@ -2213,7 +2215,8 @@ static void atmel_aes_unregister_algs(struct atmel_aes_dev *dd)
 	if (dd->caps.has_gcm)
 		crypto_unregister_aead(&aes_gcm_alg);
 
-	crypto_unregister_skciphers(aes_algs, ARRAY_SIZE(aes_algs));
+	for (i = 0; i < ARRAY_SIZE(aes_algs); i++)
+		crypto_unregister_skcipher(&aes_algs[i]);
 }
 
 static void atmel_aes_crypto_alg_init(struct crypto_alg *alg)
@@ -2226,7 +2229,7 @@ static void atmel_aes_crypto_alg_init(struct crypto_alg *alg)
 
 static int atmel_aes_register_algs(struct atmel_aes_dev *dd)
 {
-	int err, i;
+	int err, i, j;
 
 	for (i = 0; i < ARRAY_SIZE(aes_algs); i++) {
 		atmel_aes_crypto_alg_init(&aes_algs[i].base);
@@ -2269,7 +2272,8 @@ static int atmel_aes_register_algs(struct atmel_aes_dev *dd)
 #if IS_ENABLED(CONFIG_CRYPTO_DEV_ATMEL_AUTHENC)
 	/* i = ARRAY_SIZE(aes_authenc_algs); */
 err_aes_authenc_alg:
-	crypto_unregister_aeads(aes_authenc_algs, i);
+	for (j = 0; j < i; j++)
+		crypto_unregister_aead(&aes_authenc_algs[j]);
 	crypto_unregister_skcipher(&aes_xts_alg);
 #endif
 err_aes_xts_alg:
@@ -2277,7 +2281,8 @@ err_aes_xts_alg:
 err_aes_gcm_alg:
 	i = ARRAY_SIZE(aes_algs);
 err_aes_algs:
-	crypto_unregister_skciphers(aes_algs, i);
+	for (j = 0; j < i; j++)
+		crypto_unregister_skcipher(&aes_algs[j]);
 
 	return err;
 }

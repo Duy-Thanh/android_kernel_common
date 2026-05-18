@@ -8,6 +8,7 @@
  */
 
 #include <linux/linkage.h>
+#include <linux/cfi_types.h>
 
 #define		PASS0_SUMS	%xmm0
 #define		PASS1_SUMS	%xmm1
@@ -71,7 +72,7 @@
  *
  * It's guaranteed that message_len % 16 == 0.
  */
-SYM_FUNC_START(nh_sse2)
+SYM_TYPED_FUNC_START(nh_sse2)
 
 	movdqu		0x00(KEY), K0
 	movdqu		0x10(KEY), K1
