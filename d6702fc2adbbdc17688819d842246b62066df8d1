@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d01e74_771ce268",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-18T19:08:07Z",
+      "side": 1,
+      "message": "You might want to choose some higher bit to decrease probability that some future feature backport could use the same bit.",
+      "range": {
+        "startLine": 2499,
+        "startChar": 64,
+        "endLine": 2499,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75157f78_af4eddcb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mm.h",
+              "range": {
+                "startLine": 2499,
+                "startChar": 0,
+                "endLine": 2500,
+                "endChar": 0
+              },
+              "replacement": "#define  ZAP_FLAG_RECLAIM_PT         ((__force zap_flags_t) BIT(31))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d6702fc2adbbdc17688819d842246b62066df8d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
