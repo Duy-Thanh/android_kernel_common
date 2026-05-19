@@ -34205,6 +34205,7 @@ unsafe extern "C" fn binder_init() -> ::core::ffi::c_int {
     let mut tmp: *mut hlist_node = ::core::ptr::null_mut::<hlist_node>();
     let mut device_names: *mut ::core::ffi::c_char = ::core::ptr::null_mut::<::core::ffi::c_char>();
     let mut db_entry: *const binder_debugfs_entry = ::core::ptr::null::<binder_debugfs_entry>();
+    c2rust_run_static_initializers();
     ret = binder_alloc_shrinker_init();
     if ret != 0 {
         return ret;
@@ -36663,11 +36664,6 @@ unsafe extern "C" fn c2rust_run_static_initializers() {
         },
     };
 }
-#[used]
-#[cfg_attr(target_os = "linux", link_section = ".init_array")]
-#[cfg_attr(target_os = "windows", link_section = ".CRT$XIB")]
-#[cfg_attr(target_os = "macos", link_section = "__DATA,__mod_init_func")]
-static INIT_ARRAY: [unsafe extern "C" fn(); 1] = [c2rust_run_static_initializers];
 
 impl task_struct {
     #[inline]
