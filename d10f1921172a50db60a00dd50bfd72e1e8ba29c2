@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3711bd_36f34d23",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-19T15:09:13Z",
+      "side": 1,
+      "message": "If we could have this outside of the if branch, we need not set it down after IOMMU_WAIT_OP? similarly for `!set` as well. Something like this:\n```\nif (set) {\n        iommu-\u003evgsts |\u003d gcmd_bit;\n        if (gcmd \u0026 gcmd_bit)\n                return 0;\n\tgcmd |\u003d gcmd_bit;\n} else {\n\tiommu-\u003evgsts \u0026\u003d ~gcmd_bit;\n\tif (!(gcmd \u0026 gcmd_bit))\n\t\treturn 0;\n\tgcmd \u0026\u003d ~gcmd_bit;\n}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "85ad6983_01bb58e6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": "\t\tiommu-\u003evgsts |\u003d gcmd_bit;\n\t\tif (gcmd \u0026 gcmd_bit)\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 144,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "\t\tiommu-\u003evgsts \u0026\u003d ~gcmd_bit;\n\t\tif (!(gcmd \u0026 gcmd_bit))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 158,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 161,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
