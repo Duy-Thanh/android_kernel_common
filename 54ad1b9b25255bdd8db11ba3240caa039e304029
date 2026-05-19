@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a34702d_da15b0a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-19T03:27:07Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/32360bf6a5d4016669c3545e7b0ec939937f5331) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d32360bf6a5d4016669c3545e7b0ec939937f5331).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/32360bf6a5d4016669c3545e7b0ec939937f5331\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/54ad1b9b25255bdd8db11ba3240caa039e304029\n@@ -5,7 +5,7 @@\n  static DEFINE_MUTEX(leds_lookup_lock);\n  static LIST_HEAD(leds_lookup_list);\n  \n-+static struct workqueue_struct *leds_wq;\n++struct workqueue_struct *leds_wq;\n +\n  static ssize_t brightness_show(struct device *dev,\n  \t\tstruct device_attribute *attr, char *buf)\n@@ -18,22 +18,13 @@\n  \n  \tret \u003d size;\n  unlock:\n-@@  @@ int led_classdev_register_ext(struct device *parent,\n- \n- \tled_update_brightness(led_cdev);\n- \n-+\tled_cdev-\u003ewq \u003d leds_wq;\n-+\n- \tled_init_core(led_cdev);\n- \n- #ifdef CONFIG_LEDS_TRIGGERS\n @@  @@ EXPORT_SYMBOL_GPL(devm_led_classdev_unregister);\n  \n  static int __init leds_init(void)\n  {\n +\tleds_wq \u003d alloc_ordered_workqueue(\"leds\", 0);\n +\tif (!leds_wq) {\n-+\t\tpr_err(\"Failed to create LEDs ordered workqueue\\n\");\n++\t\tpr_err(\"failed to create LEDs ordered workqueue\\n\");\n +\t\treturn -ENOMEM;\n +\t}\n +\n@@ -55,7 +46,7 @@\n  \t\tled_cdev-\u003edelayed_delay_off \u003d delay_off;\n  \t\tset_bit(LED_SET_BLINK, \u0026led_cdev-\u003ework_flags);\n -\t\tschedule_work(\u0026led_cdev-\u003eset_brightness_work);\n-+\t\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n++\t\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n  \t\treturn;\n  \t}\n  \n@@ -64,7 +55,7 @@\n  \t\tif (!brightness) {\n  \t\t\tset_bit(LED_BLINK_DISABLE, \u0026led_cdev-\u003ework_flags);\n -\t\t\tschedule_work(\u0026led_cdev-\u003eset_brightness_work);\n-+\t\t\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n++\t\t\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n  \t\t} else {\n  \t\t\tset_bit(LED_BLINK_BRIGHTNESS_CHANGE,\n  \t\t\t\t\u0026led_cdev-\u003ework_flags);\n@@ -73,18 +64,17 @@\n  \t}\n  \n -\tschedule_work(\u0026led_cdev-\u003eset_brightness_work);\n-+\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n++\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n  }\n  EXPORT_SYMBOL_GPL(led_set_brightness_nopm);\n  \n-diff --git a/include/linux/leds.h b/include/linux/leds.h\n---- a/include/linux/leds.h\n-+++ b/include/linux/leds.h\n-@@  @@ struct led_classdev {\n- \tint\t\t\t new_blink_brightness;\n- \tvoid\t\t\t(*flash_resume)(struct led_classdev *led_cdev);\n+diff --git a/drivers/leds/leds.h b/drivers/leds/leds.h\n+--- a/drivers/leds/leds.h\n++++ b/drivers/leds/leds.h\n+@@  @@ extern struct rw_semaphore leds_list_lock;\n+ extern struct list_head leds_list;\n+ extern struct list_head trigger_list;\n+ extern const char * const led_colors[LED_COLOR_ID_MAX];\n++extern struct workqueue_struct *leds_wq;\n  \n-+\tstruct workqueue_struct *wq;\t\t\t/* LED workqueue */\n- \tstruct work_struct\tset_brightness_work;\n- \tint\t\t\tdelayed_set_value;\n- \tunsigned long\t\tdelayed_delay_on;\n+ #endif\t/* __LEDS_H_INCLUDED */\n```\n\nDifference between automated attempt and current commit.\n\n```\ndiff --git a/drivers/leds/led-class.c b/drivers/leds/led-class.c\n--- a/drivers/leds/led-class.c\n+++ b/drivers/leds/led-class.c\n@@  @@\n static DEFINE_MUTEX(leds_lookup_lock);\n static LIST_HEAD(leds_lookup_list);\n \n-static struct workqueue_struct *leds_wq;\n+struct workqueue_struct *leds_wq;\n \n static ssize_t brightness_show(struct device *dev,\n \t\tstruct device_attribute *attr, char *buf)\n@@  @@ int led_classdev_register_ext(struct device *parent,\n \n \tled_update_brightness(led_cdev);\n \n-\tled_cdev-\u003ewq \u003d leds_wq;\n-\n \tled_init_core(led_cdev);\n \n \t/* add to the list of leds */\n@@  @@ static int __init leds_init(void)\n {\n \tleds_wq \u003d alloc_ordered_workqueue(\"leds\", 0);\n \tif (!leds_wq) {\n-\t\tpr_err(\"Failed to create LEDs ordered workqueue\\n\");\n+\t\tpr_err(\"failed to create LEDs ordered workqueue\\n\");\n \t\treturn -ENOMEM;\n \t}\n \ndiff --git a/drivers/leds/led-core.c b/drivers/leds/led-core.c\n--- a/drivers/leds/led-core.c\n+++ b/drivers/leds/led-core.c\n@@  @@ void led_blink_set_nosleep(struct led_classdev *led_cdev, unsigned long delay_on\n \t\tled_cdev-\u003edelayed_delay_on \u003d delay_on;\n \t\tled_cdev-\u003edelayed_delay_off \u003d delay_off;\n \t\tset_bit(LED_SET_BLINK, \u0026led_cdev-\u003ework_flags);\n-\t\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n+\t\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n \t\treturn;\n \t}\n \n@@  @@ void led_set_brightness(struct led_classdev *led_cdev, unsigned int brightness)\n \t\t */\n \t\tif (!brightness) {\n \t\t\tset_bit(LED_BLINK_DISABLE, \u0026led_cdev-\u003ework_flags);\n-\t\t\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n+\t\t\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n \t\t} else {\n \t\t\tset_bit(LED_BLINK_BRIGHTNESS_CHANGE,\n \t\t\t\t\u0026led_cdev-\u003ework_flags);\n@@  @@ void led_set_brightness_nopm(struct led_classdev *led_cdev, unsigned int value)\n \t\tset_bit(LED_SET_BRIGHTNESS_OFF, \u0026led_cdev-\u003ework_flags);\n \t}\n \n-\tqueue_work(led_cdev-\u003ewq, \u0026led_cdev-\u003eset_brightness_work);\n+\tqueue_work(leds_wq, \u0026led_cdev-\u003eset_brightness_work);\n }\n EXPORT_SYMBOL_GPL(led_set_brightness_nopm);\n \ndiff --git a/drivers/leds/leds.h b/drivers/leds/leds.h\n--- a/drivers/leds/leds.h\n+++ b/drivers/leds/leds.h\n@@  @@ extern struct rw_semaphore leds_list_lock;\n extern struct list_head leds_list;\n extern struct list_head trigger_list;\n extern const char * const led_colors[LED_COLOR_ID_MAX];\n+extern struct workqueue_struct *leds_wq;\n \n #endif\t/* __LEDS_H_INCLUDED */\ndiff --git a/include/linux/leds.h b/include/linux/leds.h\n--- a/include/linux/leds.h\n+++ b/include/linux/leds.h\n@@  @@ struct led_classdev {\n \tint\t\t\t new_blink_brightness;\n \tvoid\t\t\t(*flash_resume)(struct led_classdev *led_cdev);\n \n-\tstruct workqueue_struct *wq;\t\t\t/* LED workqueue */\n \tstruct work_struct\tset_brightness_work;\n \tint\t\t\tdelayed_set_value;\n \tunsigned long\t\tdelayed_delay_on;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "54ad1b9b25255bdd8db11ba3240caa039e304029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc52fcff_fb1bfb1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-19T03:27:07Z",
+      "side": 1,
+      "message": "keep chronological order of the tags, these did not come from upstream",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "54ad1b9b25255bdd8db11ba3240caa039e304029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972f1e41_2535b440",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-19T03:27:07Z",
+      "side": 1,
+      "message": "where is your SoB?",
+      "revId": "54ad1b9b25255bdd8db11ba3240caa039e304029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
