@@ -43,7 +43,6 @@
         <option name='binary' key='lib/crypto/tests/sha1_kunit' value='/data/kunit/arm64/sha1_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/sha224_kunit' value='/data/kunit/arm64/sha224_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/sha256_kunit' value='/data/kunit/arm64/sha256_kunit.ko' />
-        <option name='binary' key='lib/crypto/tests/sha3_kunit' value='/data/kunit/arm64/sha3_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/sha384_kunit' value='/data/kunit/arm64/sha384_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/sha512_kunit' value='/data/kunit/arm64/sha512_kunit.ko' />
         <!-- <option name='binary' key='lib/kunit/kunit-example-test' value='/data/kunit/arm64/kunit-example-test.ko' /> -->
