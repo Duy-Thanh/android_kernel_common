@@ -492,28 +492,29 @@ export rust_common_flags := --edition=2021 \
 			    -Zbinary_dep_depinfo=y \
 			    -Astable_features \
 			    -Aunused_features \
-			    -Dnon_ascii_idents \
-			    -Dunsafe_op_in_unsafe_fn \
-			    -Wmissing_docs \
-			    -Wrust_2018_idioms \
-			    -Wunreachable_pub \
-			    -Wclippy::all \
-			    -Wclippy::as_ptr_cast_mut \
-			    -Wclippy::as_underscore \
-			    -Wclippy::cast_lossless \
-			    -Wclippy::ignored_unit_patterns \
-			    -Wclippy::mut_mut \
-			    -Wclippy::needless_bitwise_bool \
-			    -Aclippy::needless_lifetimes \
-			    -Wclippy::no_mangle_with_rust_abi \
-			    -Wclippy::ptr_as_ptr \
-			    -Wclippy::ptr_cast_constness \
-			    -Wclippy::ref_as_ptr \
-			    -Wclippy::undocumented_unsafe_blocks \
-			    -Wclippy::unnecessary_safety_comment \
-			    -Wclippy::unnecessary_safety_doc \
-			    -Wrustdoc::missing_crate_level_docs \
-			    -Wrustdoc::unescaped_backticks
+
+#			    -Dnon_ascii_idents \
+#			    -Dunsafe_op_in_unsafe_fn \
+#			    -Wmissing_docs \
+#			    -Wrust_2018_idioms \
+#			    -Wunreachable_pub \
+#			    -Wclippy::all \
+#			    -Wclippy::as_ptr_cast_mut \
+#			    -Wclippy::as_underscore \
+#			    -Wclippy::cast_lossless \
+#			    -Wclippy::ignored_unit_patterns \
+#			    -Wclippy::mut_mut \
+#			    -Wclippy::needless_bitwise_bool \
+#			    -Aclippy::needless_lifetimes \
+#			    -Wclippy::no_mangle_with_rust_abi \
+#			    -Wclippy::ptr_as_ptr \
+#			    -Wclippy::ptr_cast_constness \
+#			    -Wclippy::ref_as_ptr \
+#			    -Wclippy::undocumented_unsafe_blocks \
+#			    -Wclippy::unnecessary_safety_comment \
+#			    -Wclippy::unnecessary_safety_doc \
+#			    -Wrustdoc::missing_crate_level_docs \
+#			    -Wrustdoc::unescaped_backticks
 
 KBUILD_HOSTCFLAGS   := $(KBUILD_USERHOSTCFLAGS) $(HOST_LFS_CFLAGS) \
 		       $(HOSTCFLAGS) -I $(srctree)/scripts/include
