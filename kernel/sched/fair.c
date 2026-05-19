@@ -839,6 +839,8 @@ static int vruntime_eligible(struct cfs_rq *cfs_rq, u64 vruntime)
 	struct sched_entity *curr = cfs_rq->curr;
 	s64 avg = cfs_rq->sum_w_vruntime;
 	long load = cfs_rq->sum_weight;
+	s64 a = (s64)vruntime_op(vruntime, "-", cfs_rq->zero_vruntime);
+	s64 b, d;
 
 	if (curr && curr->on_rq) {
 		unsigned long weight = scale_load_down(curr->load.weight);
@@ -847,7 +849,11 @@ static int vruntime_eligible(struct cfs_rq *cfs_rq, u64 vruntime)
 		load += weight;
 	}
 
-	return avg >= vruntime_op(vruntime, "-", cfs_rq->zero_vruntime) * load;
+	b = (s64)load;
+	if (check_mul_overflow(a, b, &d))
+		return 1;
+
+	return vruntime_op(avg, "-", d) >= 0;
 }
 
 int entity_eligible(struct cfs_rq *cfs_rq, struct sched_entity *se)
