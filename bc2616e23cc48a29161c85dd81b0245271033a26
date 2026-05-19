@@ -16,6 +16,23 @@
       "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "bc2616e23cc48a29161c85dd81b0245271033a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8525428_c980aa9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-19T20:09:33Z",
+      "side": 1,
+      "message": "This appears to introduce new uAPI and behavior, so I\u0027m not sure we will want to take this as a FROMLIST patch as there isn\u0027t much certainty it will land upstream yet (haven\u0027t seen maintainer feedback either).\n\nIf possible, please open a bug and clearly document \n1) Why this change is needed\n2) What measured benefit you see from it\n\nAnd provide context for urgency so that we understand why it is necessary to take it before it lands in a maintainer tree.",
+      "revId": "bc2616e23cc48a29161c85dd81b0245271033a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
