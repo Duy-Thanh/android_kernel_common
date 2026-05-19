@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81f7d0f_967c5d0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-19T14:52:42Z",
+      "side": 1,
+      "message": "I think this might not happen as we don\u0027t do SRTP before enabling QI and the host is trusted at this point. But a check doesn\u0027t hurt :-)",
+      "revId": "57e2ce4171b05481a052df1f5b57990b0cb3f06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
