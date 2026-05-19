@@ -16,6 +16,24 @@
       "message": "Can you please tag the patch as `ANDROID:`, rest of the patch looks good.",
       "revId": "7d48206f0b01bfab3d3ed97a8d9038b12ce1172e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9abbd0_1e6eef57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-05-19T00:39:45Z",
+      "side": 1,
+      "message": "Since this is a generic (non-Android-specific) kernel patch, I\u0027m considering submitting this patch to the LKML first and updating the subject prefix of this CL to \u0027FROMLIST:\u0027. What do you think?",
+      "parentUuid": "8955b4fa_1318abf8",
+      "revId": "7d48206f0b01bfab3d3ed97a8d9038b12ce1172e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
