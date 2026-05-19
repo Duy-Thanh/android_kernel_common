@@ -16,6 +16,24 @@
       "message": "Has this been seen against android17-6.18?",
       "revId": "44b27391ed33c49e49af051d39a538ff16a95213",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c18a60_409d54e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-05-19T07:20:37Z",
+      "side": 1,
+      "message": "Yes, this issue has also been observed on the android17-6.18 branch. We have merged the fix into our local branch and would like it to be synced to GKI.",
+      "parentUuid": "3afaa647_9215b9ad",
+      "revId": "44b27391ed33c49e49af051d39a538ff16a95213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
