@@ -34187,7 +34187,15 @@ unsafe extern "C" fn init_binder_device(
     binder_add_device(binder_device);
     return ret;
 }
+::core::arch::global_asm!(
+    r#".section ".initcall6.init", "a"
+    __binder_initcall:
+    .long binder_init - .
+    .previous
+    "#
+);
 #[cold]
+#[no_mangle]
 #[link_section = ".init.text"]
 unsafe extern "C" fn binder_init() -> ::core::ffi::c_int {
     let mut ret: ::core::ffi::c_int = 0;
