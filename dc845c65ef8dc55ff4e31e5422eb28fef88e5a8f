@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3102e6_b8c36836",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-19T17:34:46Z",
+      "side": 1,
+      "message": "It seems better to move this temp var logic back into `refill_memcache()`, to align with the pKVM-ARM implementation: https://android.googlesource.com/kernel/common/+/refs/heads/android17-6.18/arch/arm64/kvm/hyp/nvhe/mm.c#626 and possibly for better reusability?",
+      "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcac2883_3122fb1b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-19T17:34:46Z",
+      "side": 1,
+      "message": "Hmm, late thought: can\u0027t we just use `*(volatile struct pkvm_memcache *)host_mc` (instead of relying on memcpy in a non-obvious way)?\n\n...BTW @willdeacon@google.com @tabba@google.com @qperret@google.com FYI here we are trying to address a potential TOCTOU which seems to exist in the ARM\u0027s `refill_memcache()` as well, due to `tmp \u003d *host_mc` which could be implemented by the compiler as multiple loads of the same data (IOW, due to the lack of an effective READ_ONCE).",
+      "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
