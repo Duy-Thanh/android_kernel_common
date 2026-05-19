@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60f6177_dac05ac3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-19T17:11:05Z",
+      "side": 1,
+      "message": "Approving to run presubmits but still need to understand how these hooks help in resolving the priority inversion.",
+      "revId": "677ffcf6287ad9067505cd59b0f3fa8104912c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
