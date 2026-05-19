@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Commit does not link to an upstream reference at lore.\nPlease add a line like \u0027L...\n\nCommit does not link to an upstream reference at lore.\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "f41898d7d846dd83b6a6f3b48037ed94a3c97ec2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61492754_b993b937",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-19T06:30:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62cf8900_47070d28",
+      "revId": "f41898d7d846dd83b6a6f3b48037ed94a3c97ec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
