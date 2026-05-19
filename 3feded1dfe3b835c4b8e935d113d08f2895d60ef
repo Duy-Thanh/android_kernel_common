@@ -16,6 +16,24 @@
       "message": "Waiting on respin bug",
       "revId": "3feded1dfe3b835c4b8e935d113d08f2895d60ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904b0fe8_c9fde695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-05-19T09:01:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44e0bde4_e01b2673",
+      "revId": "3feded1dfe3b835c4b8e935d113d08f2895d60ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
