@@ -474,6 +474,23 @@ static void acpi_button_notify(acpi_handle handle, u32 event, void *data)
 					event, ++button->pushed);
 }
 
+void acpi_power_button_wakeup(struct acpi_device *device)
+{
+	struct acpi_button *button = acpi_driver_data(device);
+	struct input_dev *input;
+
+	if (button->type == ACPI_BUTTON_TYPE_POWER) {
+		input = button->input;
+		input_report_key(input, KEY_WAKEUP, 1);
+		input_sync(input);
+		input_report_key(input, KEY_WAKEUP, 0);
+		input_sync(input);
+	}
+
+	return;
+}
+EXPORT_SYMBOL(acpi_power_button_wakeup);
+
 static void acpi_button_notify_run(void *data)
 {
 	acpi_button_notify(NULL, ACPI_BUTTON_NOTIFY_STATUS, data);
@@ -497,7 +514,6 @@ static int acpi_button_suspend(struct device *dev)
 
 static int acpi_button_resume(struct device *dev)
 {
-	struct input_dev *input;
 	struct acpi_device *device = to_acpi_device(dev);
 	struct acpi_button *button = acpi_driver_data(device);
 
@@ -508,13 +524,6 @@ static int acpi_button_resume(struct device *dev)
 		acpi_lid_initialize_state(device);
 	}
 
-	if (button->type == ACPI_BUTTON_TYPE_POWER) {
-		input = button->input;
-		input_report_key(input, KEY_WAKEUP, 1);
-		input_sync(input);
-		input_report_key(input, KEY_WAKEUP, 0);
-		input_sync(input);
-	}
 	return 0;
 }
 #endif

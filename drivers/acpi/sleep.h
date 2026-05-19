@@ -20,6 +20,7 @@ extern int acpi_s2idle_prepare(void);
 extern int acpi_s2idle_prepare_late(void);
 extern void acpi_s2idle_check(void);
 extern bool acpi_s2idle_wake(void);
+extern void acpi_s2idle_restore_check_powerkey(void);
 extern void acpi_s2idle_restore_early(void);
 extern void acpi_s2idle_restore(void);
 extern void acpi_s2idle_end(void);

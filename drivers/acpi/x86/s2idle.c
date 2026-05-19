@@ -605,8 +605,14 @@ void acpi_s2idle_restore_early(void)
 {
 	struct acpi_s2idle_dev_ops *handler;
 
-	if (!lps0_device_handle || sleep_no_lps0)
+	if (!lps0_device_handle || sleep_no_lps0) {
+		/*
+		 * If we don't have lsp0 device to processing, check if power
+		 * button pressed and notify userspace to wakeup screen.
+		 * */
+		acpi_s2idle_restore_check_powerkey();
 		return;
+	}
 
 	list_for_each_entry(handler, &lps0_s2idle_devops_head, list_node)
 		if (handler->restore)
