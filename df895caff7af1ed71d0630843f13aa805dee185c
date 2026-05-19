@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a16428e_2ee79ea9",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-19T16:25:23Z",
+      "side": 1,
+      "message": "Theoretically context-\u003elo can contain a valid pgd/pasid_table even if !context_present(). Would it be better to check `if (!(context-\u003elo \u0026 VTD_PAGE_MASK))` so that we don\u0027t miss freeing of a valid pgd/pasid_table?",
+      "fixSuggestions": [
+        {
+          "fixId": "8477247c_acb04e20",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Theoretically context-\u003elo can contain a stale address if the present bit is\n\t * clear. Ensure we don\u0027t try to dereference it.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
