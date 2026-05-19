@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e5ec4a_9ec0676b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-19T18:08:08Z",
+      "side": 1,
+      "message": "Just a note: in future rebases we\u0027d better keep this postponed setup in a dedicated function from the beginning (rather than move it there in a later patch).",
+      "revId": "1b5def6bb2c0054de691111a2ade2dfa6d3e8a7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
