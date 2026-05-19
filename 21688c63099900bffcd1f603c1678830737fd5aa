@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/514260015",
       "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31450b5d_c223ca32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-19T15:07:30Z",
+      "side": 1,
+      "message": "The additional hook has been inserted in the wrong place in `vendor_hooks.c`.\n\nI will see if I can fix this for you.",
+      "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
