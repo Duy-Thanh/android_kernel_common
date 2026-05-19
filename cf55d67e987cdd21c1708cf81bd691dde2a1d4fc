@@ -34,6 +34,24 @@
       "parentUuid": "c50e4c6c_38d1f0a8",
       "revId": "cf55d67e987cdd21c1708cf81bd691dde2a1d4fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a5fef3f_5e405492",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-19T16:47:43Z",
+      "side": 1,
+      "message": "Actually, after discussing this with Tim Murray, he decided that we should change the polling period to 2sec now: https://googleplex-android-review.git.corp.google.com/c/platform/frameworks/base/+/39980850. This will remove the need for this patch in the future releases.",
+      "parentUuid": "7fdd259d_c7c5b1bc",
+      "revId": "cf55d67e987cdd21c1708cf81bd691dde2a1d4fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
