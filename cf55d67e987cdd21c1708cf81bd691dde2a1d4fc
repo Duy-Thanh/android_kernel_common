@@ -16,6 +16,24 @@
       "message": "@surenb@google.com, is this something we plan to carry forever? Should it be sent upstream? If we do intend to carry it forever, it should be cherry-picked to android-mainline.",
       "revId": "cf55d67e987cdd21c1708cf81bd691dde2a1d4fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fdd259d_c7c5b1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-19T16:40:55Z",
+      "side": 1,
+      "message": "I discussed with upstream and it would not be accepted as is. The small windows permission is tied to CAP_SYS_RESOURCE to allow only privileged processes to set it. Although system_server is our main system process, security team does not want to enable extra capabilities for it, so we have to carry this workaround.\nWith memcg v2 enable we are discussing ways to enable PSI for selected cgroups and this will affect android_server_am_LowMemDetector. Once that\u0027s finalized we might end up with 2sec windows and this change won\u0027t be needed anymore. So, I would prefer to keep it out of android-mainline for now unless we find out that it\u0027s absolutely necessary.",
+      "parentUuid": "c50e4c6c_38d1f0a8",
+      "revId": "cf55d67e987cdd21c1708cf81bd691dde2a1d4fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
