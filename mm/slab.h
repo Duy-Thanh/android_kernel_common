@@ -192,6 +192,11 @@ struct kmem_cache_order_objects {
 	unsigned int x;
 };
 
+struct kmem_cache_per_node_ptrs {
+	struct node_barn *barn;
+	struct kmem_cache_node *node;
+};
+
 /*
  * Slab cache management.
  */
@@ -248,7 +253,7 @@ struct kmem_cache {
 	struct kmem_cache_stats __percpu *cpu_stats;
 #endif
 
-	struct kmem_cache_node *node[MAX_NUMNODES];
+	struct kmem_cache_per_node_ptrs per_node[MAX_NUMNODES];
 };
 
 /*
