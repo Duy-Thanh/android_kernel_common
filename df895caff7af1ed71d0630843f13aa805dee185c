@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0a8a40_4f253385",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-20T16:55:21Z",
+      "side": 1,
+      "message": "Current code doesn\u0027t do this, but theoretically its possible to have just the present entry unset without violating the spec. Was proposing a better check that we are trying to address here",
+      "parentUuid": "24d6e74d_1bd4cd78",
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46e7eb87_0ec25067",
