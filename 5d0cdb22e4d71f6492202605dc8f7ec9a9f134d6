@@ -16,6 +16,24 @@
       "message": "Is this now broken in aosp/4080432?",
       "revId": "5d0cdb22e4d71f6492202605dc8f7ec9a9f134d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "254f095b_9090cc8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4079418
+      },
+      "writtenOn": "2026-05-20T02:55:59Z",
+      "side": 1,
+      "message": "The connection isn\u0027t immediately obvious to me, let me know if there\u0027s any issue, thanks.",
+      "parentUuid": "aad59bcb_bd6de5fb",
+      "revId": "5d0cdb22e4d71f6492202605dc8f7ec9a9f134d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
