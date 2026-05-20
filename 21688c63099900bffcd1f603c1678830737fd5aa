@@ -33,6 +33,24 @@
       "message": "The additional hook has been inserted in the wrong place in `vendor_hooks.c`.\n\nI will see if I can fix this for you.",
       "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cde8ef15_1e722467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-20T14:47:28Z",
+      "side": 1,
+      "message": "My mistake. Our cherry-pick linter has had some recent changes and the report that was generated did not include the latest improvements.",
+      "parentUuid": "31450b5d_c223ca32",
+      "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
