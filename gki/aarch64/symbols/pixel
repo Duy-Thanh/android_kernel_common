@@ -775,6 +775,8 @@
   dump_backtrace
   dump_stack
   dw_handle_msi_irq
+  dw_i3c_master_register_host
+  dw_i3c_master_unregister_host
   dw_pcie_find_capability
   dw_pcie_host_init
   dw_pcie_read
