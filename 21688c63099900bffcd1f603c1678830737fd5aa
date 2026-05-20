@@ -51,6 +51,24 @@
       "parentUuid": "31450b5d_c223ca32",
       "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f1e3b5_05fb9f74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-20T15:20:08Z",
+      "side": 1,
+      "message": "The problem was that the commit message was incorrect. A plain `git cherry-pick -xs` and the addition of the `Bug:` line was all that was needed.\n\nI have reinstated the missing cherry picked and signed-off-by lines.",
+      "parentUuid": "cde8ef15_1e722467",
+      "revId": "21688c63099900bffcd1f603c1678830737fd5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
