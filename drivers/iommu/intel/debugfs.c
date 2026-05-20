@@ -10,6 +10,7 @@
 
 #include <linux/debugfs.h>
 #include <linux/dmar.h>
+#include <linux/mm.h>
 #include <linux/pci.h>
 
 #include <asm/irq_remapping.h>
@@ -107,6 +108,109 @@ static const struct iommu_regset iommu_regs_64[] = {
 };
 
 static struct dentry *intel_iommu_debug;
+
+#ifdef CONFIG_PKVM_INTEL
+static phys_addr_t debugfs_host_pa(void *addr)
+{
+	return virt_to_phys(addr);
+}
+
+static void *debugfs_host_va(phys_addr_t phys)
+{
+	return phys_to_virt(phys);
+}
+
+static void free_test_memcache(struct pkvm_memcache *mc)
+{
+	while (mc->count)
+		free_page((unsigned long)pop_pkvm_memcache_page(mc, debugfs_host_va));
+}
+
+static ssize_t pkvm_partial_unmap_test_write(struct file *filp,
+					     const char __user *ubuf,
+					     size_t cnt, loff_t *ppos)
+{
+	union pkvm_hc_data d = { 0 };
+	struct iommu_test_partial_unmap_data *data = &d.iommu_test_partial_unmap.in;
+	unsigned int order = get_order(SZ_2M);
+	struct page *data_pages;
+	void *page, *pgd;
+	int i, ret;
+
+	if (!pkvm_enabled())
+		return -EOPNOTSUPP;
+
+	data_pages = alloc_pages(GFP_KERNEL | __GFP_ZERO, order);
+	if (!data_pages)
+		return -ENOMEM;
+
+	page = page_address(data_pages);
+	if (!IS_ALIGNED(virt_to_phys(page), SZ_2M)) {
+		ret = -EINVAL;
+		goto free_data;
+	}
+
+	pgd = (void *)get_zeroed_page(GFP_KERNEL);
+	if (!pgd) {
+		ret = -ENOMEM;
+		goto free_data;
+	}
+
+	for (i = 0; i < 4; i++) {
+		void *p = (void *)get_zeroed_page(GFP_KERNEL);
+
+		if (!p) {
+			ret = -ENOMEM;
+			goto free_memcache;
+		}
+		push_pkvm_memcache_page(&data->mc, p, debugfs_host_pa);
+	}
+
+	/*
+	 * If a partial superpage unmap incorrectly descends into the DMA page,
+	 * this fake PTE makes it drop the DMA pin for the target page.
+	 */
+	*(u64 *)page = virt_to_phys(page) | DMA_PTE_READ | DMA_PTE_WRITE |
+		       DMA_PTE_MAPPED;
+
+	data->pgd_gpa = virt_to_phys(pgd);
+	data->data_gpa = virt_to_phys(page);
+	data->iov_pfn = 0;
+	data->nr_pages = SZ_2M / VTD_PAGE_SIZE;
+
+	ret = pkvm_hypercall_inout(iommu_test_partial_unmap, &d, &d);
+	free_test_memcache(&d.iommu_test_partial_unmap.out.mc);
+
+	if (ret) {
+		pr_err("pkvm partial unmap test failed: ret=%d\n", ret);
+		goto free_pgd;
+	}
+
+	pr_info("pkvm partial unmap test: unmap_ret=%d donate_ret=%d\n",
+		d.iommu_test_partial_unmap.out.unmap_ret,
+		d.iommu_test_partial_unmap.out.donate_ret);
+
+	if (!d.iommu_test_partial_unmap.out.unmap_ret ||
+	    !d.iommu_test_partial_unmap.out.donate_ret)
+		ret = -EUCLEAN;
+
+free_pgd:
+	free_page((unsigned long)pgd);
+free_data:
+	__free_pages(data_pages, order);
+	return ret ?: cnt;
+
+free_memcache:
+	free_test_memcache(&data->mc);
+	free_page((unsigned long)pgd);
+	goto free_data;
+}
+
+static const struct file_operations pkvm_partial_unmap_test_fops = {
+	.write = pkvm_partial_unmap_test_write,
+	.llseek = noop_llseek,
+};
+#endif
 
 static int iommu_regset_show(struct seq_file *m, void *unused)
 {
@@ -764,6 +868,10 @@ void __init intel_iommu_debugfs_init(void)
 #endif
 	debugfs_create_file("dmar_perf_latency", 0644, intel_iommu_debug,
 			    NULL, &dmar_perf_latency_fops);
+#ifdef CONFIG_PKVM_INTEL
+	debugfs_create_file("pkvm_partial_unmap_test", 0200, intel_iommu_debug,
+			    NULL, &pkvm_partial_unmap_test_fops);
+#endif
 }
 
 /*

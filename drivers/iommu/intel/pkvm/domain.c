@@ -315,3 +315,84 @@ int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 
 	return 0;
 }
+
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+int pkvm_iommu_test_partial_unmap(struct iommu_test_partial_unmap_data *in,
+				  struct iommu_test_partial_unmap_data *out)
+{
+	unsigned long data_pa = pkvm_host_gpa_to_phys(in->data_gpa);
+	unsigned long pgd_pa = pkvm_host_gpa_to_phys(in->pgd_gpa);
+	struct alloc_domain_data alloc = { 0 };
+	struct dmar_domain *domain = NULL;
+	bool domain_allocated = false;
+	int ret;
+
+	*out = *in;
+	out->unmap_ret = 0;
+	out->donate_ret = 0;
+
+	if (!PAGE_ALIGNED(data_pa) || !PAGE_ALIGNED(pgd_pa) ||
+	    in->nr_pages != SZ_2M / VTD_PAGE_SIZE)
+		return -EINVAL;
+
+	ret = pkvm_host_donate_hyp_share_ro(pgd_pa, VTD_PAGE_SIZE, true);
+	if (ret)
+		return ret;
+
+	alloc.pgd_gpa = in->pgd_gpa;
+	alloc.gaw = ADDR_WIDTH_4LEVEL;
+	alloc.agaw = width_to_agaw(alloc.gaw);
+	alloc.max_addr = __DOMAIN_MAX_ADDR(alloc.gaw);
+	alloc.iommu_superpage = 1;
+	alloc.iommu_coherency = true;
+
+	domain = pkvm_alloc_iommu_domain(&alloc, false);
+	if (IS_ERR(domain)) {
+		ret = PTR_ERR(domain);
+		domain = NULL;
+		goto out;
+	}
+	domain_allocated = true;
+
+	ret = refill_domain_memcache(domain, &out->mc);
+	if (ret)
+		goto out;
+
+	ret = domain_map(domain, in->iov_pfn, data_pa >> VTD_PAGE_SHIFT,
+			 in->nr_pages, DMA_PTE_READ | DMA_PTE_WRITE, 0);
+	if (ret)
+		goto out;
+
+	out->unmap_ret = pkvm_iommu_domain_unmap(in->pgd_gpa, in->iov_pfn,
+						 in->iov_pfn);
+
+	out->donate_ret = pkvm_host_donate_hyp(data_pa, PAGE_SIZE, false);
+	if (!out->donate_ret) {
+		pkvm_hyp_donate_host(data_pa, PAGE_SIZE, false);
+		/*
+		 * Vulnerable kernels can drop the first page's DMA pin via the
+		 * crafted PTE above. Re-pin it so full-domain cleanup below can
+		 * unmap the remaining 2M mapping without underflowing refcounts.
+		 */
+		pkvm_host_use_dma(data_pa, PAGE_SIZE);
+	}
+
+	domain_unmap(domain, in->iov_pfn, in->iov_pfn + in->nr_pages - 1, NULL);
+
+out:
+	if (domain_allocated) {
+		pkvm_spin_lock(&iommu_domain_lock);
+		hash_del(&domain->hnode);
+		__clear_bit(domain->index, iommu_domains_bitmap);
+		pkvm_spin_unlock(&iommu_domain_lock);
+	}
+	if (domain)
+		free_domain_memcache(domain, &out->mc);
+	if (domain)
+		memset(domain, 0, sizeof(*domain));
+
+	pkvm_hyp_donate_host(pgd_pa, VTD_PAGE_SIZE, false);
+
+	return ret;
+}
+#endif

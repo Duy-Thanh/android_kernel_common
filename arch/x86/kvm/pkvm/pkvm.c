@@ -2125,6 +2125,12 @@ void pkvm_handle_host_hypercall(struct kvm_vcpu *vcpu)
 					      pkvm_hc_input2(vcpu),
 					      pkvm_hc_input3(vcpu));
 		break;
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+	case __pkvm__iommu_test_partial_unmap:
+		ret = pkvm_iommu_test_partial_unmap(&in.iommu_test_partial_unmap.in,
+						    &out.iommu_test_partial_unmap.out);
+		break;
+#endif
 #endif
 	default:
 		ret = pkvm_vcpu_handle_host_hypercall(vcpu, hc, &in, &out);

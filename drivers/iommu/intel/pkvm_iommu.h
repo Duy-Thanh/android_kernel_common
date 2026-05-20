@@ -209,6 +209,10 @@ int pkvm_iommu_alloc_domain(struct alloc_domain_data *data);
 int pkvm_iommu_free_domain(u64 pgd_gpa, struct pkvm_memcache *mc);
 int pkvm_iommu_domain_map(struct domain_map_data *in, struct domain_map_data *out);
 int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn);
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+int pkvm_iommu_test_partial_unmap(struct iommu_test_partial_unmap_data *in,
+				  struct iommu_test_partial_unmap_data *out);
+#endif
 #endif /* !__PKVM_HYP__ */
 #else /* !CONFIG_PKVM_INTEL */
 static inline int pkvm_iec_flush(struct intel_iommu *iommu, bool global,

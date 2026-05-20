@@ -104,6 +104,9 @@ PKVM_HC_IN(iommu_alloc_domain)
 PKVM_HC_OUT(iommu_free_domain)
 PKVM_HC_INOUT(iommu_domain_map)
 PKVM_HC(iommu_domain_unmap)
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+PKVM_HC_INOUT(iommu_test_partial_unmap)
+#endif
 #endif
 
 #undef PKVM_HC
