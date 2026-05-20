@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b44876_8283edc2",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-05-20T02:52:20Z",
+      "side": 0,
+      "message": "Is it expected that this config is not enabled anymore?",
+      "revId": "96758a63629b48993e73918c757cdc9436ccf232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
