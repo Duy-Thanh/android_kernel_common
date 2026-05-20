@@ -52,6 +52,79 @@
       "parentUuid": "7a16428e_2ee79ea9",
       "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d6e74d_1bd4cd78",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T16:34:50Z",
+      "side": 1,
+      "message": "\u003e Theoretically context-\u003elo can contain a valid pgd/pasid_table even if !context_present().\n\nJust wondering: in what cases?",
+      "parentUuid": "d7b6b37a_7a0d2a21",
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e7eb87_0ec25067",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T16:34:50Z",
+      "side": 1,
+      "message": "nit: seems no reason why not put the below `if (sm) { ... } else { ... }` into an `if`, instead of adding a `goto`?",
+      "fixSuggestions": [
+        {
+          "fixId": "716471ec_7684b455",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 2029,
+                "startChar": 0,
+                "endLine": 2038,
+                "endChar": 0
+              },
+              "replacement": "\tif (context_present(context)) {\n\t\tif (sm) {\n\t\t\tpasid_dir \u003d __pkvm_va(context-\u003elo \u0026 VTD_PAGE_MASK);\n\t\t\tpasid_dir_sz \u003d get_pasid_dir_size(context);\n\t\t\tif (WARN_ON(pasid_table_has_present_entries(pasid_dir, pasid_dir_sz))) {\n\t\t\t\tspin_unlock(\u0026iommu-\u003elock);\n\t\t\t\treturn;\n\t\t\t}\n\t\t} else {\n\t\t\tpgd \u003d __pkvm_va(context-\u003elo \u0026 VTD_PAGE_MASK);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 2039,
+                "startChar": 0,
+                "endLine": 2041,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 2042,
+                "startChar": 0,
+                "endLine": 2043,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
