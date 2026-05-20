@@ -33,6 +33,24 @@
       "message": "Other change should be part of the Topic? It currently shows only 1 change and hence the linter complaining.",
       "revId": "de239993b06af7565bad26c7cefa30b389668d96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ffd7aeb_42730252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-20T20:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d14d12a3_bc5c6e65",
+      "revId": "de239993b06af7565bad26c7cefa30b389668d96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
