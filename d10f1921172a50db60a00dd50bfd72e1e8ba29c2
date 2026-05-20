@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d390e3_e7678e6b",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T13:18:40Z",
+      "side": 1,
+      "message": "Ah, just noticed this already seems to be answered in the comment message: \"Add early-return paths to avoid unnecessary hardware writes when the target bit already matches the desired state\"",
+      "parentUuid": "cfd23b4c_77caf659",
+      "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d3711bd_36f34d23",
