@@ -142,6 +142,18 @@ struct domain_map_data {
 	u64 prot;
 	struct pkvm_memcache mc;
 };
+
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+struct iommu_test_partial_unmap_data {
+	u64 pgd_gpa;
+	u64 data_gpa;
+	u64 iov_pfn;
+	u64 nr_pages;
+	struct pkvm_memcache mc;
+	s32 unmap_ret;
+	s32 donate_ret;
+};
+#endif
 #endif
 
 #define TO_PKVM_HC(f)		CONCATENATE(__pkvm__, f)
@@ -254,6 +266,12 @@ union pkvm_hc_data {
 		struct domain_map_data in;
 		struct domain_map_data out;
 	} iommu_domain_map;
+#ifdef CONFIG_INTEL_IOMMU_DEBUGFS
+	union {
+		struct iommu_test_partial_unmap_data in;
+		struct iommu_test_partial_unmap_data out;
+	} iommu_test_partial_unmap;
+#endif
 #endif
 	struct {
 		bool has_intr;
