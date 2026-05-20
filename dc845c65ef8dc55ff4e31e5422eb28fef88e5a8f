@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "281fc6b1_0e3e823e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-20T04:58:33Z",
+      "side": 1,
+      "message": "The original code reads host_mc-\u003ecount as the min_pages parameter for refill_memcache(). As we will copy the host_mc to tmp_mc to access the mc, move the tmp_mc here so that the count can be read from the tmp_mc. Maybe this is not important, we can just use READ_ONCE(host_mc-\u003ecount) if we prefer having tmp_mc in refill_memcache() for better reusability?",
+      "parentUuid": "de3102e6_b8c36836",
+      "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcac2883_3122fb1b",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 4
