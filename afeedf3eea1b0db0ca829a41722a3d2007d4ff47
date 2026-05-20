@@ -34,6 +34,24 @@
       "parentUuid": "749bb334_1f3a5f1c",
       "revId": "afeedf3eea1b0db0ca829a41722a3d2007d4ff47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5fbfdae_179b40f0",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4059,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-20T23:29:28Z",
+      "side": 1,
+      "message": "Ah yes, my comment was actually building on top of the old patch(3). I was suggesting to pass `iova` and `size` to domain_unmap and let it figure out size expansion and all (as was assumed in patch 3 that the host does size expansion correctly so why not pkvm do it?). And make domain_unmap return size so host know what was actually unmapped.\n\nBut I see, for unmapping an arbitrary range [a, b], where [a, c] is a partial superpage from the top, (c, d) is good unmap range, and [d, b] is again a partial superpage from the bottom, making sure [a, c] and [d, b] don\u0027t exist is still tricky and complex. So I guess, we can drop this idea.",
+      "parentUuid": "1bfea92c_d37610e6",
+      "revId": "afeedf3eea1b0db0ca829a41722a3d2007d4ff47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
