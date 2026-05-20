@@ -2393,6 +2393,8 @@
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_logbuf
   __traceiter_android_vh_logbuf_pr_cont
+  __traceiter_android_vh_lruvec_add_folio
+  __traceiter_android_vh_lruvec_del_folio
   __traceiter_android_vh_mmap_region
   __traceiter_android_vh_mmc_attach_sd
   __traceiter_android_vh_mmc_blk_mq_rw_recovery
@@ -2542,6 +2544,8 @@
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_logbuf
   __tracepoint_android_vh_logbuf_pr_cont
+  __tracepoint_android_vh_lruvec_add_folio
+  __tracepoint_android_vh_lruvec_del_folio
   __tracepoint_android_vh_mmap_region
   __tracepoint_android_vh_mmc_attach_sd
   __tracepoint_android_vh_mmc_blk_mq_rw_recovery
