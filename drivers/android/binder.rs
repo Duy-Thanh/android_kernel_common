@@ -28320,10 +28320,18 @@ unsafe extern "C" fn binder_thread_write(
     while ptr < end && (*thread).return_error.cmd == BR_OK as ::core::ffi::c_uint as uint32_t {
         let mut ret: ::core::ffi::c_int = 0;
         if ({
-            let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-            cmd = 0 as ::core::ffi::c_int as uint32_t as uint32_t;
-            __gu_err = 0 as ::core::ffi::c_int;
-            __gu_err
+            let mut reader = kernel::uaccess::UserSlice::new(
+                kernel::uaccess::UserPtr::from_ptr(ptr),
+                core::mem::size_of::<uint32_t>(),
+            )
+            .reader();
+            match reader.read::<uint32_t>() {
+                Ok(v) => {
+                    cmd = v;
+                    0
+                }
+                Err(_) => -EFAULT,
+            }
         }) != 0
         {
             return -EFAULT;
@@ -28369,10 +28377,18 @@ unsafe extern "C" fn binder_thread_write(
                         weak: 0,
                     };
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        target = 0 as ::core::ffi::c_int as uint32_t as uint32_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<uint32_t>(),
+                        )
+                        .reader();
+                        match reader.read::<uint32_t>() {
+                            Ok(v) => {
+                                target = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -28470,20 +28486,36 @@ unsafe extern "C" fn binder_thread_write(
                     let mut node: *mut binder_node = ::core::ptr::null_mut::<binder_node>();
                     let mut free_node: bool_0 = false;
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        node_ptr = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                node_ptr = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
                     }
                     ptr = ptr.offset(::core::mem::size_of::<binder_uintptr_t>() as usize as isize);
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        cookie = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                cookie = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -28618,10 +28650,18 @@ unsafe extern "C" fn binder_thread_write(
                     let mut data_ptr: binder_uintptr_t = 0;
                     let mut buffer_0: *mut binder_buffer = ::core::ptr::null_mut::<binder_buffer>();
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        data_ptr = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                data_ptr = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -28818,20 +28858,36 @@ unsafe extern "C" fn binder_thread_write(
                     let mut death: *mut binder_ref_death =
                         ::core::ptr::null_mut::<binder_ref_death>();
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        target_0 = 0 as ::core::ffi::c_int as uint32_t as uint32_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<uint32_t>(),
+                        )
+                        .reader();
+                        match reader.read::<uint32_t>() {
+                            Ok(v) => {
+                                target_0 = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
                     }
                     ptr = ptr.offset(::core::mem::size_of::<uint32_t>() as usize as isize);
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        cookie_0 = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                cookie_0 = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -29081,10 +29137,18 @@ unsafe extern "C" fn binder_thread_write(
                     let mut death_0: *mut binder_ref_death =
                         ::core::ptr::null_mut::<binder_ref_death>();
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        cookie_1 = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                cookie_1 = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -29208,10 +29272,18 @@ unsafe extern "C" fn binder_thread_write(
                     let mut cookie_2: binder_uintptr_t = 0;
                     let mut error_1: ::core::ffi::c_int = 0;
                     if ({
-                        let mut __gu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        cookie_2 = 0 as ::core::ffi::c_int as binder_uintptr_t as binder_uintptr_t;
-                        __gu_err = 0 as ::core::ffi::c_int;
-                        __gu_err
+                        let mut reader = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<binder_uintptr_t>(),
+                        )
+                        .reader();
+                        match reader.read::<binder_uintptr_t>() {
+                            Ok(v) => {
+                                cookie_2 = v;
+                                0
+                            }
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -29281,27 +29353,45 @@ unsafe extern "C" fn binder_put_node_cmd(
 ) -> ::core::ffi::c_int {
     let mut ptr: *mut ::core::ffi::c_void = *ptrp;
     if ({
-        let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-        __pu_err = 0 as ::core::ffi::c_int;
-        __pu_err
+        let mut writer = kernel::uaccess::UserSlice::new(
+            kernel::uaccess::UserPtr::from_ptr(ptr),
+            core::mem::size_of::<uint32_t>(),
+        )
+        .writer();
+        match writer.write(&cmd) {
+            Ok(_) => 0,
+            Err(_) => -EFAULT,
+        }
     }) != 0
     {
         return -EFAULT;
     }
     ptr = ptr.offset(::core::mem::size_of::<uint32_t>() as usize as isize);
     if ({
-        let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-        __pu_err = 0 as ::core::ffi::c_int;
-        __pu_err
+        let mut writer = kernel::uaccess::UserSlice::new(
+            kernel::uaccess::UserPtr::from_ptr(ptr),
+            core::mem::size_of::<binder_uintptr_t>(),
+        )
+        .writer();
+        match writer.write(&node_ptr) {
+            Ok(_) => 0,
+            Err(_) => -EFAULT,
+        }
     }) != 0
     {
         return -EFAULT;
     }
     ptr = ptr.offset(::core::mem::size_of::<binder_uintptr_t>() as usize as isize);
     if ({
-        let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-        __pu_err = 0 as ::core::ffi::c_int;
-        __pu_err
+        let mut writer = kernel::uaccess::UserSlice::new(
+            kernel::uaccess::UserPtr::from_ptr(ptr),
+            core::mem::size_of::<binder_uintptr_t>(),
+        )
+        .writer();
+        match writer.write(&node_cookie) {
+            Ok(_) => 0,
+            Err(_) => -EFAULT,
+        }
     }) != 0
     {
         return -EFAULT;
@@ -29479,9 +29569,15 @@ unsafe extern "C" fn binder_thread_read(
     let mut wait_for_proc_work: ::core::ffi::c_int = 0;
     if *consumed == 0 as binder_size_t {
         if ({
-            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-            __pu_err = 0 as ::core::ffi::c_int;
-            __pu_err
+            let mut writer = kernel::uaccess::UserSlice::new(
+                kernel::uaccess::UserPtr::from_ptr(ptr),
+                core::mem::size_of::<uint32_t>(),
+            )
+            .writer();
+            match writer.write(&(BR_NOOP as uint32_t)) {
+                Ok(_) => 0,
+                Err(_) => -EFAULT,
+            }
         }) != 0
         {
             return -EFAULT;
@@ -29675,9 +29771,15 @@ unsafe extern "C" fn binder_thread_read(
                         });
                         _binder_inner_proc_unlock(proc, 5090 as ::core::ffi::c_int);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<uint32_t>(),
+                            )
+                            .writer();
+                            match writer.write(&(*e).cmd) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
@@ -29706,9 +29808,15 @@ unsafe extern "C" fn binder_thread_read(
                         kfree(w as *const ::core::ffi::c_void);
                         binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<uint32_t>(),
+                            )
+                            .writer();
+                            match writer.write(&cmd) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
@@ -29912,18 +30020,30 @@ unsafe extern "C" fn binder_thread_read(
                             _binder_inner_proc_unlock(proc, 5236 as ::core::ffi::c_int);
                         }
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<uint32_t>(),
+                            )
+                            .writer();
+                            match writer.write(&cmd_0) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
                         }
                         ptr = ptr.offset(::core::mem::size_of::<uint32_t>() as usize as isize);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<binder_uintptr_t>(),
+                            )
+                            .writer();
+                            match writer.write(&cookie) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
@@ -29979,9 +30099,15 @@ unsafe extern "C" fn binder_thread_read(
                         binder_enqueue_work_ilocked(w, &raw mut (*proc).delivered_freeze);
                         _binder_inner_proc_unlock(proc, 5260 as ::core::ffi::c_int);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<uint32_t>(),
+                            )
+                            .writer();
+                            match writer.write(&(BR_FROZEN_BINDER as uint32_t)) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
@@ -30018,18 +30144,30 @@ unsafe extern "C" fn binder_thread_read(
                         kfree(freeze_0 as *const ::core::ffi::c_void);
                         binder_stats_deleted(BINDER_STAT_FREEZE);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<uint32_t>(),
+                            )
+                            .writer();
+                            match writer.write(&(BR_CLEAR_FREEZE_NOTIFICATION_DONE as uint32_t)) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
                         }
                         ptr = ptr.offset(::core::mem::size_of::<uint32_t>() as usize as isize);
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(ptr),
+                                core::mem::size_of::<binder_uintptr_t>(),
+                            )
+                            .writer();
+                            match writer.write(&cookie_0) {
+                                Ok(_) => 0,
+                                Err(_) => -EFAULT,
+                            }
                         }) != 0
                         {
                             return -EFAULT;
@@ -30129,9 +30267,15 @@ unsafe extern "C" fn binder_thread_read(
                     }
                     cmd = BR_FAILED_REPLY as ::core::ffi::c_uint as uint32_t;
                     if ({
-                        let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        __pu_err = 0 as ::core::ffi::c_int;
-                        __pu_err
+                        let mut writer = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<uint32_t>(),
+                        )
+                        .writer();
+                        match writer.write(&cmd) {
+                            Ok(_) => 0,
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         return -EFAULT;
@@ -30157,9 +30301,15 @@ unsafe extern "C" fn binder_thread_read(
                             as size_t;
                     }
                     if ({
-                        let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                        __pu_err = 0 as ::core::ffi::c_int;
-                        __pu_err
+                        let mut writer = kernel::uaccess::UserSlice::new(
+                            kernel::uaccess::UserPtr::from_ptr(ptr),
+                            core::mem::size_of::<uint32_t>(),
+                        )
+                        .writer();
+                        match writer.write(&cmd) {
+                            Ok(_) => 0,
+                            Err(_) => -EFAULT,
+                        }
                     }) != 0
                     {
                         if !t_from.is_null() {
@@ -30262,9 +30412,15 @@ unsafe extern "C" fn binder_thread_read(
             (*thread).pid,
         );
         if ({
-            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-            __pu_err = 0 as ::core::ffi::c_int;
-            __pu_err
+            let mut writer = kernel::uaccess::UserSlice::new(
+                kernel::uaccess::UserPtr::from_ptr(buffer),
+                core::mem::size_of::<uint32_t>(),
+            )
+            .writer();
+            match writer.write(&(BR_SPAWN_LOOPER as uint32_t)) {
+                Ok(_) => 0,
+                Err(_) => -EFAULT,
+            }
         }) != 0
         {
             return -EFAULT;
@@ -31328,9 +31484,17 @@ unsafe extern "C" fn binder_ioctl(
                     3221512713 => {
                         let mut ver: *mut binder_version = ubuf as *mut binder_version;
                         if ({
-                            let mut __pu_err: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
-                            __pu_err = 0 as ::core::ffi::c_int;
-                            __pu_err
+                            let mut writer = kernel::uaccess::UserSlice::new(
+                                kernel::uaccess::UserPtr::from_ptr(
+                                    &raw mut (*ver).protocol_version as *mut core::ffi::c_void,
+                                ),
+                                core::mem::size_of::<__s32>(),
+                            )
+                            .writer();
+                            match writer.write(&(8 as __s32)) {
+                                Ok(_) => 0,
+                                Err(_) => -EINVAL,
+                            }
                         }) != 0
                         {
                             ret = -EINVAL;
