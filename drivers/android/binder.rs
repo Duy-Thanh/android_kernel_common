@@ -11216,10 +11216,17 @@ pub const ___GFP_MOVABLE_BIT: C2Rust_Unnamed_344 = 3;
 pub const ___GFP_DMA32_BIT: C2Rust_Unnamed_344 = 2;
 pub const ___GFP_HIGHMEM_BIT: C2Rust_Unnamed_344 = 1;
 pub const ___GFP_DMA_BIT: C2Rust_Unnamed_344 = 0;
-#[derive(Copy, Clone)]
+#[derive(Clone)]
 #[repr(C)]
 pub struct class_spinlock_t {
     pub lock: *mut spinlock_t,
+}
+impl Drop for class_spinlock_t {
+    fn drop(&mut self) {
+        unsafe {
+            spin_unlock(self.lock);
+        }
+    }
 }
 pub type class_mutex_t = *mut mutex;
 #[derive(Copy, Clone)]
