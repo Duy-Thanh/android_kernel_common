@@ -11228,7 +11228,17 @@ impl Drop for class_spinlock_t {
         }
     }
 }
-pub type class_mutex_t = *mut mutex;
+#[repr(C)]
+pub struct class_mutex_t {
+    pub lock: *mut mutex,
+}
+impl Drop for class_mutex_t {
+    fn drop(&mut self) {
+        unsafe {
+            mutex_unlock(self.lock);
+        }
+    }
+}
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct sched_param {
@@ -21035,12 +21045,9 @@ unsafe extern "C" fn mem_alloc_profiling_enabled() -> bool_0 {
     } != 0;
 }
 #[inline]
-unsafe extern "C" fn class_mutex_constructor(mut _T: *mut mutex) -> *mut mutex {
-    let mut t: *mut mutex = ({
-        mutex_lock(_T);
-        _T
-    });
-    return t;
+unsafe extern "C" fn class_mutex_constructor(mut _T: *mut mutex) -> class_mutex_t {
+    mutex_lock(_T);
+    return class_mutex_t { lock: _T };
 }
 pub const TASK_INTERRUPTIBLE: ::core::ffi::c_int = 0x1 as ::core::ffi::c_int;
 pub const TASK_UNINTERRUPTIBLE: ::core::ffi::c_int = 0x2 as ::core::ffi::c_int;
@@ -30762,7 +30769,7 @@ unsafe extern "C" fn binder_ioctl_set_ctx_mgr(
     let mut new_node: *mut binder_node = ::core::ptr::null_mut::<binder_node>();
     let mut curr_euid: kuid_t = ({ (*(*get_current()).cred).euid });
     let mut __UNIQUE_ID_guard872: class_mutex_t =
-        class_mutex_constructor(&raw mut (*context).context_mgr_node_lock) as class_mutex_t;
+        class_mutex_constructor(&raw mut (*context).context_mgr_node_lock);
     if !(*context).binder_context_mgr_node.is_null() {
         ({
             _printk(
@@ -32379,7 +32386,7 @@ unsafe extern "C" fn binder_defer_work(
     mut defer: binder_deferred_state,
 ) {
     let mut __UNIQUE_ID_guard874: class_mutex_t =
-        class_mutex_constructor(&raw mut binder_deferred_lock) as class_mutex_t;
+        class_mutex_constructor(&raw mut binder_deferred_lock);
     (*proc).deferred_work = ((*proc).deferred_work as ::core::ffi::c_uint
         | defer as ::core::ffi::c_uint) as ::core::ffi::c_int;
     if hlist_unhashed(&raw mut (*proc).deferred_work_node) != 0 {
@@ -33424,7 +33431,7 @@ unsafe extern "C" fn proc_show(
     let mut itr: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
     let mut pid: ::core::ffi::c_int = (*m).private as ::core::ffi::c_ulong as ::core::ffi::c_int;
     let mut __UNIQUE_ID_guard879: class_mutex_t =
-        class_mutex_constructor(&raw mut binder_procs_lock) as class_mutex_t;
+        class_mutex_constructor(&raw mut binder_procs_lock);
     itr = ({
         let mut ____ptr: *mut hlist_node = binder_procs.first as *mut hlist_node;
         if !____ptr.is_null() {
@@ -34621,7 +34628,7 @@ unsafe extern "C" fn genl_has_listeners(
 #[inline]
 unsafe extern "C" fn binder_alloc_get_free_async_space(mut alloc: *mut binder_alloc) -> size_t {
     let mut __UNIQUE_ID_guard822: class_mutex_t =
-        class_mutex_constructor(&raw mut (*alloc).mutex) as class_mutex_t;
+        class_mutex_constructor(&raw mut (*alloc).mutex);
     return (*alloc).free_async_space;
 }
 pub const NBITS_MIN: usize =
