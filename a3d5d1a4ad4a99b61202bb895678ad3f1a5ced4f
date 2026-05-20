@@ -22,6 +22,30 @@
       },
       "revId": "a3d5d1a4ad4a99b61202bb895678ad3f1a5ced4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149ad8bc_fcfef16e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-20T03:24:18Z",
+      "side": 1,
+      "message": "Indeed this is an overflow inputs. Luckily we always use PAGE_ALIGNED addr/size rather than addr/size, e.g., is_memory_range(), for_each_pkvm_page(), check_host_mem_pgstate() so we should be safe without this check.\n\nBut performing the overflow check for the raw inputs can help to capture the invalid inputs from the user rather than silently allow them via page aligning",
+      "parentUuid": "abb229d7_6a39189c",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 15
+      },
+      "revId": "a3d5d1a4ad4a99b61202bb895678ad3f1a5ced4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
