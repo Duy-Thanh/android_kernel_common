@@ -15,6 +15,7 @@
 #include <linux/miscdevice.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
+#include <linux/mmap_lock.h>
 #include <linux/pagemap.h>
 #include <linux/scatterlist.h>
 #include <linux/seq_file.h>
@@ -46,7 +47,7 @@ struct wrap_content_operations {
 			    union wrapfd_mappable *mappable);
 	int (*ioctl)(struct wrap_content *content,
 		     unsigned int cmd, unsigned long arg);
-
+	struct file *(*get_vma_file)(struct wrap_content *content);
 };
 
 /* Abstract wrap content to be embedded in a concrete content object. */
@@ -262,6 +263,15 @@ static int dmabuf_content_ioctl(struct wrap_content *content,
 	return file->f_op->unlocked_ioctl(file, cmd, arg);
 }
 
+static struct file *dmabuf_content_get_vma_file(struct wrap_content *content)
+{
+	struct wrap_content_dmabuf *dmabuf_content;
+
+	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
+				      content);
+	return dmabuf_content->dmabuf->file;
+}
+
 static struct wrap_content_operations dmabuf_content_ops = {
 	.create_wrap		= dmabuf_content_create_wrap,
 	.load			= dmabuf_content_load,
@@ -272,6 +282,7 @@ static struct wrap_content_operations dmabuf_content_ops = {
 	.show_fdinfo		= dmabuf_content_show_fdinfo,
 	.get_mappable		= dmabuf_content_get_mappable,
 	.ioctl			= dmabuf_content_ioctl,
+	.get_vma_file		= dmabuf_content_get_vma_file,
 };
 
 static struct wrap_content *alloc_dmabuf_content(struct dma_buf *dmabuf,
@@ -310,10 +321,10 @@ struct wrap_ctx_mapping {
 
 struct wrap_ctx {
 	struct wrap_content *content;
+	struct file *vma_file;
 	spinlock_t lock; /* protects all fields below */
 	struct wrap_owner owner;
 	bool allow_guests;
-	unsigned long map_count;
 	unsigned long use_count;
 	/*
 	 * Mask of blocked operations when lock is not held due to possiblity
@@ -382,12 +393,23 @@ static inline int publish_wrap(struct wrap_ctx *ctx,
 	int ret;
 
 	ctx->content = content;
+	if (content->ops->get_vma_file)
+		ctx->vma_file = content->ops->get_vma_file(content);
 	ret = content->ops->create_wrap(content, ctx);
 	/* Set FD_CLOEXEC flag for wrapfd the same as its content */
 	if (ret >= 0)
 		set_close_on_exec(ret, content->close_on_exec ? 1 : 0);
 
 	return ret;
+}
+
+static bool is_wrapfd_mapped(struct wrap_ctx *ctx)
+{
+	assert_spin_locked(&ctx->lock);
+	if (!ctx->vma_file)
+		return false;
+
+	return mapping_mapped(ctx->vma_file->f_mapping);
 }
 
 static int can_modify(struct wrap_ctx *ctx, struct task_struct *task,
@@ -397,7 +419,7 @@ static int can_modify(struct wrap_ctx *ctx, struct task_struct *task,
 	if (!is_owner_task(ctx, task))
 		return -EBUSY;
 
-	if (ctx->map_count > 0 || ctx->use_count > 0)
+	if (is_wrapfd_mapped(ctx) || ctx->use_count > 0)
 		return -EINVAL;
 
 	if (check_content && !ctx->content)
@@ -456,7 +478,6 @@ static void wrap_vm_open(struct vm_area_struct *vma)
 		mapping->content_vm_ops->open(vma);
 
 	spin_lock(&mapping->ctx->lock);
-	mapping->ctx->map_count++;
 	refcount_inc(&mapping->refcnt);
 	spin_unlock(&mapping->ctx->lock);
 }
@@ -473,10 +494,6 @@ static void wrap_vm_close(struct vm_area_struct *vma)
 
 	ctx = mapping->ctx;
 	spin_lock(&ctx->lock);
-	if (ctx->map_count > 0)
-		ctx->map_count--;
-	else
-		pr_warn("wrapfd map count underflow\n");
 	if (refcount_dec_and_test(&mapping->refcnt)) {
 		if (mapping->file)
 			file = mapping->file;
@@ -534,12 +551,6 @@ static int wrap_mmap(struct file *file, struct vm_area_struct *vma)
 			goto unlock;
 		}
 	}
-	/*
-	 * Increased map_count prevents changes in the
-	 * ownership, rewrapping or emptying the content.
-	 * Content is stable.
-	 */
-	ctx->map_count++;
 unlock:
 	spin_unlock(&ctx->lock);
 
@@ -550,7 +561,7 @@ unlock:
 	mapping = kzalloc(sizeof(*mapping), GFP_KERNEL);
 	if (!mapping) {
 		ret = -ENOMEM;
-		goto err_dec;
+		goto err;
 	}
 
 	ret = content->ops->mmap(content, vma);
@@ -593,10 +604,6 @@ unlock:
 	return 0;
 err_free_mapping:
 	kfree(mapping);
-err_dec:
-	spin_lock(&ctx->lock);
-	ctx->map_count--;
-	spin_unlock(&ctx->lock);
 err:
 	return ret;
 }
@@ -660,7 +667,7 @@ static int wrap_file_acquire_ownership(struct wrap_ctx *ctx)
 		goto unlock;
 	}
 
-	if (ctx->map_count > 0 || ctx->use_count > 0) {
+	if (is_wrapfd_mapped(ctx) || ctx->use_count > 0) {
 		ret = -EINVAL;
 		goto unlock;
 	}
@@ -797,12 +804,16 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 	if (wrapfd_rewrap.reserved || wrapfd_rewrap.pad)
 		return -EINVAL;
 
+	if (current->mm)
+		mmap_read_lock(current->mm);
+
 	spin_lock(&ctx->lock);
 	ret = block_operations(ctx,
 			       MODIFICATIONS_BLOCKED | USAGE_BLOCKED);
 	if (!ret) {
 		content = ctx->content;
 		ctx->content = NULL;
+		ctx->vma_file = NULL;
 	}
 	spin_unlock(&ctx->lock);
 
@@ -848,9 +859,13 @@ restore_content:
 	 */
 	spin_lock(&ctx->lock);
 	ctx->content = content;
+	if (content->ops->get_vma_file)
+		ctx->vma_file = content->ops->get_vma_file(content);
 	unblock_operations(ctx);
 	spin_unlock(&ctx->lock);
 out:
+	if (current->mm)
+		mmap_read_unlock(current->mm);
 	return ret;
 }
 
@@ -858,6 +873,9 @@ static int wrap_file_empty(struct wrap_ctx *ctx)
 {
 	struct wrap_content *content;
 	int ret = 0;
+
+	if (current->mm)
+		mmap_read_lock(current->mm);
 
 	spin_lock(&ctx->lock);
 
@@ -868,9 +886,13 @@ static int wrap_file_empty(struct wrap_ctx *ctx)
 
 	content = ctx->content;
 	ctx->content = NULL;
+	ctx->vma_file = NULL;
 	unblock_operations(ctx);
 unlock:
 	spin_unlock(&ctx->lock);
+
+	if (current->mm)
+		mmap_read_unlock(current->mm);
 
 	if (!ret)
 		content->ops->free(content);
@@ -1004,7 +1026,7 @@ static void wrap_show_fdinfo(struct seq_file *m, struct file *file)
 			seq_printf(m, "owner:\t<none>\n");
 	}
 	seq_printf(m, "guests:\t%s\n", ctx->allow_guests ? "yes" : "no");
-	seq_printf(m, "maps:\t%lu\n", ctx->map_count);
+	seq_printf(m, "maps:\t%d\n", is_wrapfd_mapped(ctx) ? 1 : 0);
 	seq_printf(m, "empty:\t%s\n", ctx->content ? "no" : "yes");
 	if (ctx->content) {
 		struct wrap_content *content = ctx->content;
@@ -1043,7 +1065,7 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 		goto unlock;
 	}
 
-	if (ctx->map_count > 0 || ctx->use_count > 0) {
+	if (is_wrapfd_mapped(ctx) || ctx->use_count > 0) {
 		ret = -EINVAL;
 		goto unlock;
 	}
