@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c9294e_e1c03835",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-05-20T06:31:54Z",
+      "side": 1,
+      "message": "Need to update the commit message for the current patchset.",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "117377a980631bb825842b0279e578be69281edb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
