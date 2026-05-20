@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd87ea4_a23b6d4a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-05-20T13:24:26Z",
+      "side": 1,
+      "message": "Yes — OFF is reachable. Three benign cases reach EL2 only through the\nhost\u0027s EL1 gate (kvm_vcpu_sleep): a secondary that was never CPU_ON\u0027d\n(power_state\u003dOFF at init), a vCPU after guest CPU_OFF (ON-\u003eOFF in\npvm_psci_vcpu_off), and a vCPU after CPU_ON failure rollback\n(ON_PENDING-\u003eOFF in handle_psci_cpu_on\u0027s failure path). The switch\u0027s\ndefault arm bails for those.",
+      "parentUuid": "924af717_ed158a17",
+      "revId": "ccbf3ea14301781040cf51257c0e70afdfda0a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d0ffbf0_5b2fb82d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-20T12:14:29Z",
       "side": 1,
       "message": "I was expecting this not to be reordered wrt the cmpxchg_relaxed, and to become a WARN_ON. Did you change your mind for some reason?",
+      "revId": "ccbf3ea14301781040cf51257c0e70afdfda0a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fbd028_992ed83f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-05-20T13:24:26Z",
+      "side": 1,
+      "message": "The new WARN_ON() is below, the one we talked about (after the cmpxchg).\n\nI did move this. After checking the patches again and passing it through a review, Gemini noted (and I confirmed) that the original order is load-bearing, not a style choice. Producer is cmpxchg_relaxed(power_state) -\u003e plain writes -\u003e store_release(reset). The cmpxchg is relaxed, so another CPU can observe ON_PENDING (or win ON_PENDING -\u003e ON) before the release on `reset` has propagated.\n\nIf the check is post-cmpxchg, that window leaves power_state \u003d\u003d ON with the reset body skipped, and the next KVM_RUN\u0027s READ_ONCE fast-paths straight into the guest with stale sysregs (and stale PC for the pvmfw primary). Acquire-first costs nothing on a false read, power_state stays at ON_PENDING and the host retries when the release propagates.\n\nAnd not a WARN: that false case is the legitimate release-not-yet-visible window, host-reachable, and an EL2 WARN traps to hyp_panic. The other WARN_ON(prev !\u003d OFF) on the cmpxchg-miss path does stay, because only rollback can produce that prior and the per-CPU loaded_hyp_vcpu cmpxchg keeps the vCPU single-loaded.",
+      "parentUuid": "7d0ffbf0_5b2fb82d",
       "revId": "ccbf3ea14301781040cf51257c0e70afdfda0a4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
