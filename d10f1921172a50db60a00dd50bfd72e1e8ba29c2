@@ -102,6 +102,24 @@
       "parentUuid": "2d3711bd_36f34d23",
       "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f440e7e_0363a06d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-20T10:43:16Z",
+      "side": 1,
+      "message": "\u003e As we have hold the spinlock so the host is not able to read vgsts until this function is completed, and the pKVM itself won\u0027t read vgsts, from the functionality point of view, we can move it outside the if branch.\n\nYeah this is what I was thinking - so that the code can be a little shorter and readable, probably add a comment about the correctness.\n\n\u003e But seems the original code also set the vgsts after the gcmd is done, maybe it is still better to do it in the end, which is logically correct?\n\nTrue, orginal code set it after the WAIT and we did it only at one place. But with this fix, since we had to do it at two places, I thought we could shorten it out.\n\nBut I am fine with having it this way for semantic correctness.",
+      "parentUuid": "da1b8dc4_94620bf1",
+      "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
