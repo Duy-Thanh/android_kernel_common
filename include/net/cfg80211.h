@@ -3645,6 +3645,17 @@ struct cfg80211_pmk_conf {
  *	the real status code for failures. Used only for the authentication
  *	response command interface (user space to driver).
  * @pmkid: The identifier to refer a PMKSA.
+ * @mld_addr: MLD address of the peer. Used by the authentication request event
+ *	interface. Driver indicates this to enable MLO during the authentication
+ *	offload to user space. Driver shall look at %NL80211_ATTR_MLO_SUPPORT
+ *	flag capability in NL80211_CMD_CONNECT to know whether the user space
+ *	supports enabling MLO during the authentication offload.
+ *	User space should use the address of the interface (on which the
+ *	authentication request event reported) as self MLD address. User space
+ *	and driver should use MLD addresses in RA, TA and BSSID fields of
+ *	authentication frames sent or received via cfg80211. The driver
+ *	translates the MLD addresses to/from link addresses based on the link
+ *	chosen for the authentication.
  */
 struct cfg80211_external_auth_params {
 	enum nl80211_external_auth_action action;
@@ -3653,6 +3664,7 @@ struct cfg80211_external_auth_params {
 	unsigned int key_mgmt_suite;
 	u16 status;
 	const u8 *pmkid;
+	u8 mld_addr[ETH_ALEN] __aligned(2);
 };
 
 /**
@@ -3909,12 +3921,22 @@ struct cfg80211_pmsr_request {
  *	the IEs of the remote peer in the event from the host driver and
  *	the constructed IEs by the user space in the request interface.
  * @ie_len: Length of IEs in octets.
+ * @assoc_link_id: MLO link ID of the AP, with which (re)association requested
+ *	by peer. This will be filled by driver for both MLO and non-MLO station
+ *	connections when the AP affiliated with an MLD. For non-MLD AP mode, it
+ *	will be -1. Used only with OWE update event (driver to user space).
+ * @peer_mld_addr: For MLO connection, MLD address of the peer. For non-MLO
+ *	connection, it will be all zeros. This is applicable only when
+ *	@assoc_link_id is not -1, i.e., the AP affiliated with an MLD. Used only
+ *	with OWE update event (driver to user space).
  */
 struct cfg80211_update_owe_info {
 	u8 peer[ETH_ALEN] __aligned(2);
 	u16 status;
 	const u8 *ie;
 	size_t ie_len;
+	int assoc_link_id;
+	u8 peer_mld_addr[ETH_ALEN] __aligned(2);
 };
 
 /**
