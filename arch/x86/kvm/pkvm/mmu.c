@@ -1451,15 +1451,11 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 		return -EPERM;
 
 	pkvm_host_mmu_lock();
-	pkvm_guest_mmu_lock(pkvm_vm);
-
 	ret = check_host_mem_pgstate(hpa, size, PKVM_PAGE_OWNED, PKVM_ID_HOST, true);
-	if (ret)
-		goto unlock;
-
-	ret = check_page_state(&pkvm_vm->mmu, gpa, size, PKVM_PAGE_NONE);
-	if (ret)
-		goto unlock;
+	if (ret) {
+		pkvm_host_mmu_unlock();
+		return ret;
+	}
 
 	/* The vaddr == phys for the host MMU. */
 	ret = pkvm_pgtable_unmap(&host_mmu, hpa, hpa, size);
@@ -1470,6 +1466,17 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 	BUG_ON(ret);
 
 	set_host_mem_pgstate(hpa, size, PKVM_PAGE_NONE, PKVM_ID_GUEST);
+	pkvm_host_mmu_unlock();
+
+	pkvm_guest_mmu_lock(pkvm_vm);
+	ret = check_page_state(&pkvm_vm->mmu, gpa, size, PKVM_PAGE_NONE);
+	if (ret) {
+		/*
+		 * [hpa, size) is already unmapped from host, but we don't
+		 * map it back on error to avoid complexity.
+		 */
+		goto unlock;
+	}
 
 	if (gpa_range_overlaps_pvmfw(&pkvm_vm->kvm, gpa, size, &gpa_offset,
 				     &pvmfw_offset, &load_size)) {
@@ -1495,7 +1502,6 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 			       &vcpu->arch.pkvm.guest_mmu_memcache);
 unlock:
 	pkvm_guest_mmu_unlock(pkvm_vm);
-	pkvm_host_mmu_unlock();
 
 	return ret;
 }
