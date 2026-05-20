@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e13e909c_acf5a0db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-20T01:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dca49df_f732d395",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76c4b770_ba189261",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-16T00:55:41Z",
       "side": 1,
       "message": "but only when load is unaligned, right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca0583f_7991f768",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-20T01:09:02Z",
+      "side": 1,
+      "message": "We know test loads with and without the buffer mapped, so this is no longer relevant.",
+      "parentUuid": "76c4b770_ba189261",
       "range": {
         "startLine": 30,
         "startChar": 15,
@@ -149,6 +197,30 @@
           ]
         }
       ],
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1be755_d71782e4",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-20T01:09:02Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "86b1ab30_25e3999f",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 2
+      },
       "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
