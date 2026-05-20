@@ -1008,6 +1008,11 @@ static bool dma_pte_clear_level(struct dmar_domain *domain, int level,
 				first_pte = pte;
 			last_pte = pte;
 		} else if (level > 1) {
+#ifdef __PKVM_HYP__
+			if (WARN_ON_ONCE(dma_pte_superpage(pte)))
+				goto next;
+#endif
+
 			/* Recurse down into a level that isn't *entirely* obsolete */
 			leaf_ptes_only = dma_pte_clear_level(domain, level - 1,
 							     phys_to_virt(dma_pte_addr(pte)),
@@ -1095,6 +1100,9 @@ static void dma_unuse_range(struct dmar_domain *domain, int level,
 				first_pte = pte;
 			last_pte = pte;
 		} else if (level > 1) {
+			if (WARN_ON_ONCE(dma_pte_superpage(pte)))
+				goto next;
+
 			dma_unuse_range(domain, level - 1,
 					phys_to_virt(dma_pte_addr(pte)),
 					level_pfn, start_pfn, last_pfn);
@@ -1106,6 +1114,48 @@ next:
 	if (first_pte)
 		domain_flush_cache(domain, first_pte,
 				   (void *)(++last_pte) - (void *)first_pte);
+}
+
+/*
+ * Reject partial superpage unmaps from the host.
+ *
+ * A well-behaved host IOMMU driver expands unmap requests to cover the full
+ * superpage leaf. pKVM cannot rely on that at the hypercall boundary. If the
+ * range only partially covers a superpage, the walkers below would otherwise
+ * treat the leaf's physical address as a lower-level page table.
+ */
+int domain_unmap_check_range(struct dmar_domain *domain,
+			     unsigned long start_pfn,
+			     unsigned long last_pfn)
+{
+	unsigned long level_pfn;
+	struct dma_pte *pte;
+	int level = 0;
+
+	pte = pfn_to_dma_pte(domain, start_pfn, &level, GFP_ATOMIC);
+	if (unlikely(!pte))
+		return -EFAULT;
+
+	if (dma_pte_present(pte) && dma_pte_superpage(pte)) {
+		level_pfn = start_pfn & level_mask(level);
+		if (start_pfn > level_pfn ||
+		    last_pfn < level_pfn + level_size(level) - 1)
+			return -EFAULT;
+	}
+
+	level = 0;
+	pte = pfn_to_dma_pte(domain, last_pfn, &level, GFP_ATOMIC);
+	if (unlikely(!pte))
+		return -EFAULT;
+
+	if (dma_pte_present(pte) && dma_pte_superpage(pte)) {
+		level_pfn = last_pfn & level_mask(level);
+		if (start_pfn > level_pfn ||
+		    last_pfn < level_pfn + level_size(level) - 1)
+			return -EFAULT;
+	}
+
+	return 0;
 }
 #endif /* __PKVM_HYP__ */
 
