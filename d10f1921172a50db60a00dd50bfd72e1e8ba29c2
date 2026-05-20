@@ -3,6 +3,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfd23b4c_77caf659",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T13:16:09Z",
+      "side": 1,
+      "message": "Question just to understand: are these `if (gcmd \u0026 gcmd_bit)` and `if (!(gcmd \u0026 gcmd_bit))` branches basically just an optimization, to avoid redundant write to GCMD if it already has the given bit set/cleared? i.e. we could just remove them (i.e. unconditionally write GCMD below), and it would be still correct and secure? (I\u0027m not suggesting to do that.)",
+      "fixSuggestions": [
+        {
+          "fixId": "8b0ea298_cdd17c28",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d3711bd_36f34d23",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 4
