@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4da08d0_b34d06a6",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-05-20T22:27:29Z",
+      "side": 1,
+      "message": "the patch applied cleanly, except for changing the new field to use the reservation to avoid an ABI break. let me know if that is worth making it as BACKPORT",
+      "revId": "7740610dd1b95aea06315d489ed2c06a1a52589e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
