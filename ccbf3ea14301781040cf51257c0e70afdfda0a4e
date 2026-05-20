@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "924af717_ed158a17",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-20T12:14:29Z",
+      "side": 1,
+      "message": "Could we possibly see AFFINITY_LEVEL_OFF here (and hence need to handle it somewhat gracefully)? If not I would just check for AFFINITY_LEVEL_ON_PENDING to hand off to pkvm_reset_vcpu(), and skip the switch statement.",
+      "revId": "ccbf3ea14301781040cf51257c0e70afdfda0a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0ffbf0_5b2fb82d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-05-20T12:14:29Z",
+      "side": 1,
+      "message": "I was expecting this not to be reordered wrt the cmpxchg_relaxed, and to become a WARN_ON. Did you change your mind for some reason?",
+      "revId": "ccbf3ea14301781040cf51257c0e70afdfda0a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
