@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749bb334_1f3a5f1c",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4059,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-20T18:47:14Z",
+      "side": 1,
+      "message": "Maybe we move this part of the code (from line 4052-4062) into domain_unmap and change it\u0027s prototype to return the size (of the successful unmap) instead of returning void. And also subsequently change the pkvm_domain_unmap\u0027s prototype.\n\nThis way, we can make an easy check in the starting of domain_unmap (line 4052-4059) that if the unmapping contains a partial overlap with a superpage, size 0 (or the expanded correct size) would be returned instead of doing a partial unmapping, which isn\u0027t exactly right. This would move the check from host to pkvm giving it more control.",
+      "revId": "afeedf3eea1b0db0ca829a41722a3d2007d4ff47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
