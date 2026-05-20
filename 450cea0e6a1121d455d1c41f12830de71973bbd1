@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a380ef6_ffdb4993",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-05-20T06:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "511adf37_0c4c6367",
+      "revId": "450cea0e6a1121d455d1c41f12830de71973bbd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8439b4_db522354",
@@ -84,6 +102,24 @@
           ]
         }
       ],
+      "revId": "450cea0e6a1121d455d1c41f12830de71973bbd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b186d403_4228617f",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-05-20T06:59:44Z",
+      "side": 1,
+      "message": "\u003e What\u0027s the background behind this specific choice of timeout?\n\nThey are from ChromeOS (but I just realized they are from some old builds).\n\nUpdated the timeout values.",
+      "parentUuid": "7b8439b4_db522354",
       "revId": "450cea0e6a1121d455d1c41f12830de71973bbd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
