@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d41daa5d_e0cf2293",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T18:26:29Z",
+      "side": 1,
+      "message": "nit: seems we can drop these functions `pkvm_interrupt_allowed()` and `pkvm_nmi_allowed()` now, and just directly call `kvm_x86_call(interrupt_allowed)()` and `kvm_x86_call(nmi_allowed)()` instead?",
+      "fixSuggestions": [
+        {
+          "fixId": "fdcf9905_a667b4d9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1139,
+                "startChar": 0,
+                "endLine": 1149,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1155,
+                "startChar": 0,
+                "endLine": 1156,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON_ONCE(kvm_x86_call(interrupt_allowed)(vcpu, true) \u003c\u003d 0 ||\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1181,
+                "startChar": 0,
+                "endLine": 1182,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON_ONCE(kvm_x86_call(nmi_allowed)(vcpu, true) \u003c\u003d 0 ||\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1948,
+                "startChar": 0,
+                "endLine": 1949,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d kvm_x86_call(interrupt_allowed)(vcpu, pkvm_hc_input1(hvcpu));\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1951,
+                "startChar": 0,
+                "endLine": 1952,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d kvm_x86_call(nmi_allowed)(vcpu, pkvm_hc_input1(hvcpu));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
