@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd138f3_3c0a1a7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T15:12:23Z",
+      "side": 1,
+      "message": "Add `Reported-by: Yi Ran \u003cyyi@stu.pku.edu.cn\u003e` and `Closes: https://github.com/intel-staging/pKVM-IA/issues/104`?",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f287fbcd_7cd2c34e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T15:12:23Z",
+      "side": 1,
+      "message": "almost nit: actually this check seems useful for the host driver code (w/o pKVM) as well)?\n\n(We could even consider upstreaming it, but thankfully in upstream kernels \u003e\u003d6.19 all this code has been thrown away anyway, since commit d373449d8e97 (\"iommu/vt-d: Use the generic iommu page table\") which replaces it with using generic IOPT code, which BTW doesn\u0027t seem to have such an issue with lack of checking the superpage bit.)",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b48dbb_633a59f7",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T15:12:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure we need this. Since well-behaving host shouldn\u0027t try to do partial unmaps, it seems ok to just rely on those `WARN_ON_ONCE(dma_pte_superpage(pte))` checks to refuse unmapping pages that are within a superpage (while still possibly successfully unmap other pages in the requested range)? That\u0027s not \"perfect\" (as we don\u0027t return an error to the host) but avoids extra non-trivial bug-prone code complexity like this function?",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
