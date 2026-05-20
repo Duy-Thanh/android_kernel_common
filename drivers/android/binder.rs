@@ -10959,7 +10959,7 @@ pub struct va_format<'a> {
     pub fmt: *const ::core::ffi::c_char,
     pub va: *mut ::core::ffi::VaListImpl<'a>,
 }
-#[derive(Copy, Clone)]
+#[derive(Clone)]
 #[repr(C)]
 pub struct class_preempt_notrace_t {
     pub lock: *mut ::core::ffi::c_void,
@@ -13433,6 +13433,73 @@ unsafe extern "C" fn class_preempt_notrace_constructor() -> class_preempt_notrac
     __preempt_count_add(1 as ::core::ffi::c_int);
     asm!("\n", options(preserves_flags));
     return _t;
+}
+#[inline]
+unsafe extern "C" fn __preempt_count_sub(mut val: ::core::ffi::c_int) {
+    let mut pc: u32_0 = ({
+        extern "C" {
+            #[link_name = "__compiletime_assert_21"]
+            fn __compiletime_assert_21_0() -> !;
+        }
+        if !(::core::mem::size_of::<u32_0>() as usize
+            == ::core::mem::size_of::<::core::ffi::c_char>() as usize
+            || ::core::mem::size_of::<u32_0>() as usize
+                == ::core::mem::size_of::<::core::ffi::c_short>() as usize
+            || ::core::mem::size_of::<u32_0>() as usize
+                == ::core::mem::size_of::<::core::ffi::c_int>() as usize
+            || ::core::mem::size_of::<u32_0>() as usize
+                == ::core::mem::size_of::<::core::ffi::c_long>() as usize
+            || ::core::mem::size_of::<u32_0>() as usize
+                == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
+        {
+            __compiletime_assert_21_0();
+        }
+        ::core::ptr::read_volatile::<::core::ffi::c_uint>(
+            (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
+                as *mut thread_info))
+                .c2rust_unnamed
+                .preempt
+                .count as *const ::core::ffi::c_uint),
+        )
+    });
+    pc = pc.wrapping_sub(val as u32_0);
+    extern "C" {
+        #[link_name = "__compiletime_assert_22"]
+        fn __compiletime_assert_22_0() -> !;
+    }
+    if !(::core::mem::size_of::<u32_0>() as usize
+        == ::core::mem::size_of::<::core::ffi::c_char>() as usize
+        || ::core::mem::size_of::<u32_0>() as usize
+            == ::core::mem::size_of::<::core::ffi::c_short>() as usize
+        || ::core::mem::size_of::<u32_0>() as usize
+            == ::core::mem::size_of::<::core::ffi::c_int>() as usize
+        || ::core::mem::size_of::<u32_0>() as usize
+            == ::core::mem::size_of::<::core::ffi::c_long>() as usize
+        || ::core::mem::size_of::<u32_0>() as usize
+            == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
+    {
+        __compiletime_assert_22_0();
+    }
+    ::core::ptr::write_volatile(
+        (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
+            as *mut thread_info))
+            .c2rust_unnamed
+            .preempt
+            .count as *mut u32_0),
+        pc as u32_0,
+    );
+}
+#[inline]
+unsafe extern "C" fn class_preempt_notrace_destructor(mut _T: *mut class_preempt_notrace_t) {
+    asm!("\n", options(preserves_flags));
+    __preempt_count_sub(1 as ::core::ffi::c_int);
+}
+impl Drop for class_preempt_notrace_t {
+    fn drop(&mut self) {
+        unsafe {
+            class_preempt_notrace_destructor(self as *mut class_preempt_notrace_t);
+        }
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn arch_static_branch(key: *mut static_key, branch: bool_0) -> bool_0 {
