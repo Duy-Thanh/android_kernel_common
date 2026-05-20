@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62529dd_fa97bba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-05-20T02:47:15Z",
+      "side": 1,
+      "message": "I think we should do the same for other archs to keep the behavior consistent.",
+      "revId": "7a79949700fbd3e4d655a9a0403afe1b726d4074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261228a6_fdc05bc7",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-05-20T02:47:15Z",
+      "side": 1,
+      "message": "I suppose we may want to keep this at \u003dn to avoid introducing reboots on devices on which it isn\u0027t desirable. On AL we can then enable it from kernel cmdline.",
+      "fixSuggestions": [
+        {
+          "fixId": "d054e811_7e477716",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/configs/gki_defconfig",
+              "range": {
+                "startLine": 737,
+                "startChar": 0,
+                "endLine": 738,
+                "endChar": 0
+              },
+              "replacement": "CONFIG_BOOTPARAM_HARDLOCKUP_PANIC\u003dn\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7a79949700fbd3e4d655a9a0403afe1b726d4074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
