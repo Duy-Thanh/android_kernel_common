@@ -874,6 +874,7 @@
   gen_pool_has_addr
   gen_pool_set_algo
   gen_pool_size
+  get_cmdline
   get_cpu_device
   get_cpu_idle_time
   get_cpu_idle_time_us
@@ -2094,6 +2095,7 @@
   trace_handle_return
   __traceiter_android_rvh_hw_protection_shutdown
   __traceiter_android_rvh_ufs_reprogram_all_keys
+  __traceiter_android_rvh_update_load_sum
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
   __traceiter_android_vh_ipi_stop
@@ -2125,6 +2127,7 @@
   trace_output_call
   __tracepoint_android_rvh_hw_protection_shutdown
   __tracepoint_android_rvh_ufs_reprogram_all_keys
+  __tracepoint_android_rvh_update_load_sum
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_ipi_stop
