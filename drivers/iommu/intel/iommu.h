@@ -1248,6 +1248,11 @@ int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 	       unsigned long phys_pfn, unsigned long nr_pages,
 	       int prot, gfp_t gfp);
 
+#ifdef __PKVM_HYP__
+int domain_unmap_check_range(struct dmar_domain *domain,
+			     unsigned long start_pfn,
+			     unsigned long last_pfn);
+#endif
 void domain_unmap(struct dmar_domain *domain, unsigned long start_pfn,
 		  unsigned long last_pfn, struct iommu_pages_list *freelist);
 
