@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6155a1a1_f063fdf9",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-20T00:36:45Z",
+      "side": 1,
+      "message": "It could be a negative value if `vfs_iocb_iter_read()` returns an error.",
+      "parentUuid": "64b9f563_cdd5384b",
+      "range": {
+        "startLine": 180,
+        "startChar": 5,
+        "endLine": 180,
+        "endChar": 10
+      },
+      "revId": "56a7ef23d6745f89b39732e54c3ba44be8f8c5b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86b1ab30_25e3999f",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 9
