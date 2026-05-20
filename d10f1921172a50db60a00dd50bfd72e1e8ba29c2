@@ -84,6 +84,24 @@
       ],
       "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1b8dc4_94620bf1",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-20T05:40:18Z",
+      "side": 1,
+      "message": "Logically the vgsts should modify the status once the IOMMU_WAIT_OP is completed to prevent someone else got an inaccurate vgsts.\n\nAs we have hold the spinlock so the host is not able to read vgsts until this function is completed, and the pKVM itself won\u0027t read vgsts, from the functionality point of view, we can move it outside the if branch.\n\nBut seems the original code also set the vgsts after the gcmd is done, maybe it is still better to do it in the end, which is logically correct?",
+      "parentUuid": "2d3711bd_36f34d23",
+      "revId": "d10f1921172a50db60a00dd50bfd72e1e8ba29c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
