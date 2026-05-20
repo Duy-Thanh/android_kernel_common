@@ -51,6 +51,24 @@
       "message": "FWIW, a local Sashiko run says \"Result: No regressions\"",
       "revId": "f4e46c78bb1e56f21dc86890f1daabedf891977f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46e7eb97_f96c6a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-05-20T21:48:57Z",
+      "side": 1,
+      "message": "the CL is now FROMGIT",
+      "parentUuid": "bcc9ae0a_4c6169dc",
+      "revId": "f4e46c78bb1e56f21dc86890f1daabedf891977f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
