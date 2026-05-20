@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ecd6325_201b4eed",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T17:54:34Z",
+      "side": 1,
+      "message": "This actually makes me think: with current code, what if a non-present context entry contains a non-zero address _because of a bug_? In such case, it seems safer to just WARN_ON about that, without trying to undonate this address, unassign cache tag etc?\n\nAlso, from a different angle: so, you are proposing to use zero/non-zero address (instead of present/non-present entry) as an indication whether the address is valid or not, but what if a zero address is legitimately used as a PASID directory or page table address in a present context entry? :) We know that Linux kernel will not do that, but does the VT-d spec forbid doing that?",
+      "parentUuid": "9f0a8a40_4f253385",
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46e7eb87_0ec25067",
