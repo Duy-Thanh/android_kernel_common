@@ -299,6 +299,7 @@ int pkvm_iommu_domain_map(struct domain_map_data *in, struct domain_map_data *ou
 int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 {
 	struct dmar_domain *domain;
+	int ret = 0;
 
 	domain = pkvm_get_iommu_domain(pkvm_host_gpa_to_virt(pgd_gpa));
 	if (!domain) {
@@ -308,10 +309,12 @@ int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 	}
 
 	pkvm_spin_lock(&domain->lock);
-	domain_unmap(domain, start_pfn, last_pfn, NULL);
+	ret = domain_unmap_check_range(domain, start_pfn, last_pfn);
+	if (!ret)
+		domain_unmap(domain, start_pfn, last_pfn, NULL);
 	pkvm_spin_unlock(&domain->lock);
 
 	pkvm_put_iommu_domain(domain);
 
-	return 0;
+	return ret;
 }
