@@ -74,6 +74,41 @@
       ],
       "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c78f8e1e_f952ceab",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T21:45:36Z",
+      "side": 1,
+      "message": "If the reason for using memcpy here is to avoid TOCTOU as we discussed in aosp/4043296, maybe better use more explicit `vcpu-\u003earch.exception \u003d *(volatile struct kvm_queued_exception *)\u0026to_pkvm_vcpu(vcpu)-\u003eshared_vcpu-\u003earch.exception` instead, like I suggested in aosp/4043296?\n\nP.S. The AI here is suggesting using `typeof(vcpu-\u003earch.exception)` instead of `struct kvm_queued_exception`, which also seems a good idea.",
+      "fixSuggestions": [
+        {
+          "fixId": "ecfe8dca_f40186f8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1199,
+                "startChar": 0,
+                "endLine": 1201,
+                "endChar": 0
+              },
+              "replacement": "\tvcpu-\u003earch.exception \u003d *(volatile typeof(vcpu-\u003earch.exception) *)\u0026to_pkvm_vcpu(vcpu)-\u003eshared_vcpu-\u003earch.exception;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
