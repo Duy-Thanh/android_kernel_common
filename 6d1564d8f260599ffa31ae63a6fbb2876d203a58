@@ -88,6 +88,23 @@
       "parentUuid": "d1a249bf_58aedd75",
       "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "649ed63c_c7a61e45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4759922
+      },
+      "writtenOn": "2026-05-20T06:04:12Z",
+      "side": 1,
+      "message": "Hi, the Lint-1 vote has been blocking this change across all patch sets\n  but I cannot find specific lint violation details. Could someone help\n  clarify what the exact issue is, or help override the Lint check?",
+      "revId": "6d1564d8f260599ffa31ae63a6fbb2876d203a58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
