@@ -16,6 +16,24 @@
       "message": "Is it expected that this config is not enabled anymore?",
       "revId": "96758a63629b48993e73918c757cdc9436ccf232",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46bc5fc3_37cfcfba",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-05-20T03:05:20Z",
+      "side": 0,
+      "message": "Selecting HARDLOCKUP_DETECTOR will also select SOFTLOCKUP_DETECTOR.  \n\nE.g.:\nHARDLOCKUP_DETECTOR implies HARDLOCKUP_DETECTOR_PERF\nHARDLOCKUP_DETECTOR_PERF selects HARDLOCKUP_DETECTOR_COUNTS_HRTIMER\nHARDLOCKUP_DETECTOR_COUNTS_HRTIMER selects SOFTLOCKUP_DETECTOR",
+      "parentUuid": "95b44876_8283edc2",
+      "revId": "96758a63629b48993e73918c757cdc9436ccf232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

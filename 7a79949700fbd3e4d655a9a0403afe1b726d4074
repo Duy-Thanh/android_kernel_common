@@ -51,6 +51,24 @@
       ],
       "revId": "7a79949700fbd3e4d655a9a0403afe1b726d4074",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43248e42_396fb5d0",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-05-20T03:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "261228a6_fdc05bc7",
+      "revId": "7a79949700fbd3e4d655a9a0403afe1b726d4074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
