@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62c67067_7d2386aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-20T15:57:32Z",
+      "side": 1,
+      "message": "Sorry missed this. Will add",
+      "parentUuid": "3cd138f3_3c0a1a7f",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f287fbcd_7cd2c34e",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4404d378_cd70b5a4",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-20T15:57:32Z",
+      "side": 1,
+      "message": "Makes sense, will remove the ifdef",
+      "parentUuid": "f287fbcd_7cd2c34e",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0b48dbb_633a59f7",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-20T15:12:23Z",
       "side": 1,
       "message": "I\u0027m not sure we need this. Since well-behaving host shouldn\u0027t try to do partial unmaps, it seems ok to just rely on those `WARN_ON_ONCE(dma_pte_superpage(pte))` checks to refuse unmapping pages that are within a superpage (while still possibly successfully unmap other pages in the requested range)? That\u0027s not \"perfect\" (as we don\u0027t return an error to the host) but avoids extra non-trivial bug-prone code complexity like this function?",
+      "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8803a9e4_44625c70",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-20T15:57:32Z",
+      "side": 1,
+      "message": "Yeah its a bit non-trivial :-). Took me a while to get the conditions correct - start_pfn and last_pfn should not be inside a superpage, but its okay for start_pfn to be the first page of a superpage and last_pfn to be the last page in a superpage.\n\nI agree that this is not strictly needed if we don\u0027t bother partial unmaps from a request and a well behaved host would not make such a request.\n\nWill remove this.",
+      "parentUuid": "d0b48dbb_633a59f7",
       "revId": "0a0fcfd067eea584761e62d97691af17ed9a4a15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
