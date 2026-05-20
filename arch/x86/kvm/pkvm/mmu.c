@@ -1441,6 +1441,7 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 	u64 prot = guest_mmu_pte_prot(vcpu, gpa, true, PKVM_PAGE_OWNED);
 	struct pkvm_vm *pkvm_vm = to_pkvm_vcpu(vcpu)->pkvm_vm;
 	unsigned long gpa_offset, pvmfw_offset, load_size;
+	bool pvmfw_loaded = false;
 	int ret;
 
 	if (!is_valid_addr_range(gpa, size, true) ||
@@ -1451,15 +1452,12 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 		return -EPERM;
 
 	pkvm_host_mmu_lock();
-	pkvm_guest_mmu_lock(pkvm_vm);
 
 	ret = check_host_mem_pgstate(hpa, size, PKVM_PAGE_OWNED, PKVM_ID_HOST, true);
-	if (ret)
-		goto unlock;
-
-	ret = check_page_state(&pkvm_vm->mmu, gpa, size, PKVM_PAGE_NONE);
-	if (ret)
-		goto unlock;
+	if (ret) {
+		pkvm_host_mmu_unlock();
+		return ret;
+	}
 
 	/* The vaddr == phys for the host MMU. */
 	ret = pkvm_pgtable_unmap(&host_mmu, hpa, hpa, size);
@@ -1470,6 +1468,13 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 	BUG_ON(ret);
 
 	set_host_mem_pgstate(hpa, size, PKVM_PAGE_NONE, PKVM_ID_GUEST);
+	pkvm_host_mmu_unlock();
+
+	pkvm_guest_mmu_lock(pkvm_vm);
+
+	ret = check_page_state(&pkvm_vm->mmu, gpa, size, PKVM_PAGE_NONE);
+	if (ret)
+		goto unlock;
 
 	if (gpa_range_overlaps_pvmfw(&pkvm_vm->kvm, gpa, size, &gpa_offset,
 				     &pvmfw_offset, &load_size)) {
@@ -1482,6 +1487,7 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 		memcpy(__pkvm_va(hpa + gpa_offset),
 		       __pkvm_va(pvmfw_base + pvmfw_offset),
 		       load_size);
+		pvmfw_loaded = true;
 
 		/*
 		 * Make sure pvmfw is loaded into the guest memory pages before
@@ -1493,9 +1499,21 @@ int pkvm_host_donate_guest(struct kvm_vcpu *vcpu, unsigned long gpa,
 
 	ret = pkvm_pgtable_map(&pkvm_vm->mmu, gpa, hpa, size, prot,
 			       &vcpu->arch.pkvm.guest_mmu_memcache);
+
 unlock:
 	pkvm_guest_mmu_unlock(pkvm_vm);
-	pkvm_host_mmu_unlock();
+	if (unlikely(ret)) {
+		if (pvmfw_loaded)
+			pkvm_clear_memory(__pkvm_va(hpa + gpa_offset), load_size);
+
+		pkvm_host_mmu_lock();
+		BUG_ON(check_host_mem_pgstate(hpa, size, PKVM_PAGE_NONE,
+					      PKVM_ID_GUEST, false));
+		BUG_ON(pkvm_pgtable_map(&host_mmu, hpa, hpa, size,
+					host_mmu_pte_prot(true, false), NULL));
+		set_host_mem_pgstate(hpa, size, PKVM_PAGE_OWNED, PKVM_ID_HOST);
+		pkvm_host_mmu_unlock();
+	}
 
 	return ret;
 }
