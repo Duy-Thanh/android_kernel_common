@@ -16,6 +16,24 @@
       "message": "Maybe we move this part of the code (from line 4052-4062) into domain_unmap and change it\u0027s prototype to return the size (of the successful unmap) instead of returning void. And also subsequently change the pkvm_domain_unmap\u0027s prototype.\n\nThis way, we can make an easy check in the starting of domain_unmap (line 4052-4059) that if the unmapping contains a partial overlap with a superpage, size 0 (or the expanded correct size) would be returned instead of doing a partial unmapping, which isn\u0027t exactly right. This would move the check from host to pkvm giving it more control.",
       "revId": "afeedf3eea1b0db0ca829a41722a3d2007d4ff47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bfea92c_d37610e6",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4059,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-20T21:57:13Z",
+      "side": 1,
+      "message": "That is more or less what was already implemented in the previous version of this CL, before I suggested to remove it? :) https://android-review.googlesource.com/c/kernel/common/+/4081712/3/drivers/iommu/intel/iommu.c#1127",
+      "parentUuid": "749bb334_1f3a5f1c",
+      "revId": "afeedf3eea1b0db0ca829a41722a3d2007d4ff47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
