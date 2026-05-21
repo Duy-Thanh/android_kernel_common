@@ -16,6 +16,24 @@
       "message": "What I\u0027m used to seeing, and what I think we should do here is take this patch `FROMGIT`, and then have an `ANDROID` patch for the ABI fixups like this including the abi.stg changes.",
       "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b2f6b1_bec87cb9",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-05-21T03:57:23Z",
+      "side": 1,
+      "message": "We should separate the ABI fixup changes into it\u0027s own patch as this allows us to revert them easily once 6.18 ABI thaws.",
+      "parentUuid": "bbe7e91b_710908e5",
+      "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
