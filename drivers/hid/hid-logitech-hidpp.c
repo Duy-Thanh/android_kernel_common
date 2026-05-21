@@ -4699,6 +4699,7 @@ static const struct hid_device_id hidpp_devices[] = {
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb391) },
 	{ /* MX Master 4 mouse over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb042) },
+<<<<<<< HEAD   (9d40b257ba08a2ae9a2cb55b34afe1cff4721b18 ANDROID: drivers/wrapfd: Fix unaligned size loading issues)
 	{ /* Logitech Signature K650 over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb36f) },
 	{ /* Logitech Signature K650 B2B over Bluetooth */
@@ -4737,6 +4738,9 @@ static const struct hid_device_id hidpp_devices[] = {
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb39c) },
 	{ /* Logitech Signature Comfort K880 B2B over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb39d) },
+||||||| BASE   (98413bc16eb8898b120427b78386b399eaeecd83 ANDROID: KVM: arm64: Fix off-by-one bounds check in hyp_allo)
+=======
+>>>>>>> BRANCH (e01b3db50974a76353ce98b82ab6eee38abc5a36 ANDROID: GKI: fix up struct io_kiocb and struct io_ring_ctx )
 	{}
 };
 
