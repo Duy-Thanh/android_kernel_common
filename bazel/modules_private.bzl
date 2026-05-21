@@ -102,6 +102,7 @@ _ARM_GKI_MODULES_LIST = [
 
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
+    "drivers/android/wonder/wonder.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
