@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d439f5_2344fa01",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T14:40:08Z",
+      "side": 1,
+      "message": "s/is PMU/if PMU/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "79f759a1_809a0b25",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 489,
+                "startChar": 0,
+                "endLine": 490,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* RsvdZ if PMU is not supported */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 513,
+                "startChar": 0,
+                "endLine": 514,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* RsvdZ if PMU is not supported */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 537,
+                "startChar": 0,
+                "endLine": 538,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* RsvdZ if PMU is not supported */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 556,
+                "startChar": 0,
+                "endLine": 557,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* RsvdZ if PMU is not supported */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "94784e38422885321ac52cdae7316d135376373d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
