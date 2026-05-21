@@ -10,22 +10,39 @@
  *	Andrew F. Davis <afd@ti.com>
  */
 
+#include <linux/cc_platform.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-direct.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-heap.h>
 #include <linux/err.h>
 #include <linux/highmem.h>
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 #include <linux/iommu.h>
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+#include <linux/mem_encrypt.h>
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 #include <linux/mm.h>
+#include <linux/set_memory.h>
 #include <linux/module.h>
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 #include <linux/printk.h>
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+#include <linux/pgtable.h>
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 #include <linux/scatterlist.h>
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
 
 struct system_heap_priv {
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	bool uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	bool cc_shared;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 };
 
 struct system_heap_buffer {
@@ -36,8 +53,13 @@ struct system_heap_buffer {
 	struct sg_table sg_table;
 	int vmap_cnt;
 	void *vaddr;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 
 	bool uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	bool cc_shared;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 };
 
 struct dma_heap_attachment {
@@ -45,8 +67,13 @@ struct dma_heap_attachment {
 	struct sg_table table;
 	struct list_head list;
 	bool mapped;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 
 	bool uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	bool cc_shared;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 };
 
 #define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
@@ -62,6 +89,34 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
  */
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
+
+static int system_heap_set_page_decrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_decrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
+				    page_address(page));
+
+	return ret;
+}
+
+static int system_heap_set_page_encrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_encrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
+				    page_address(page));
+
+	return ret;
+}
 
 static int dup_sg_table(struct sg_table *from, struct sg_table *to)
 {
@@ -101,7 +156,14 @@ static int system_heap_attach(struct dma_buf *dmabuf,
 	a->dev = attachment->dev;
 	INIT_LIST_HEAD(&a->list);
 	a->mapped = false;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	a->uncached = buffer->uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+
+=======
+	a->cc_shared = buffer->cc_shared;
+
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 	attachment->priv = a;
 
 	mutex_lock(&buffer->lock);
@@ -152,12 +214,22 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 {
 	struct dma_heap_attachment *a = attachment->priv;
 	struct sg_table *table = &a->table;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	unsigned long attrs = attachment->dma_map_attrs;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	unsigned long attrs;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 	int ret;
 
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	if (a->uncached)
 		attrs |= DMA_ATTR_SKIP_CPU_SYNC;
 
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	attrs = a->cc_shared ? DMA_ATTR_CC_SHARED : 0;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
 	if (ret)
 		return ERR_PTR(ret);
@@ -239,10 +311,18 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 	unsigned long addr = vma->vm_start;
 	unsigned long pgoff = vma->vm_pgoff;
 	struct scatterlist *sg;
+	pgprot_t prot;
 	int i, ret;
 
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	if (buffer->uncached)
 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	prot = vma->vm_page_prot;
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 
 	for_each_sgtable_sg(table, sg, i) {
 		unsigned long n = sg->length >> PAGE_SHIFT;
@@ -260,8 +340,7 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 		if (addr + size > vma->vm_end)
 			size = vma->vm_end - addr;
 
-		ret = remap_pfn_range(vma, addr, page_to_pfn(page),
-				size, vma->vm_page_prot);
+		ret = remap_pfn_range(vma, addr, page_to_pfn(page), size, prot);
 		if (ret)
 			return ret;
 
@@ -291,9 +370,15 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
 	}
 
 	prot = PAGE_KERNEL;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	if (buffer->uncached)
 		prot = pgprot_writecombine(prot);
 
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 	vaddr = vmap(pages, npages, VM_MAP, prot);
 	vfree(pages);
 
@@ -355,6 +440,14 @@ static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *page = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(page))
+			continue;
+
 		__free_pages(page, compound_order(page));
 	}
 	sg_free_table(table);
@@ -407,7 +500,12 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 	unsigned long size_remaining = len;
 	unsigned int max_order = orders[0];
 	struct system_heap_priv *priv = dma_heap_get_drvdata(heap);
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	bool uncached = priv->uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	bool cc_shared = priv->cc_shared;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 	struct dma_buf *dmabuf;
 	struct sg_table *table;
 	struct scatterlist *sg;
@@ -423,7 +521,12 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 	mutex_init(&buffer->lock);
 	buffer->heap = heap;
 	buffer->len = len;
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	buffer->uncached = uncached;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	buffer->cc_shared = cc_shared;
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 
 	INIT_LIST_HEAD(&pages);
 	i = 0;
@@ -458,6 +561,14 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 		list_del(&page->lru);
 	}
 
+	if (cc_shared) {
+		for_each_sgtable_sg(table, sg, i) {
+			ret = system_heap_set_page_decrypted(sg_page(sg));
+			if (ret)
+				goto free_pages;
+		}
+	}
+
 	/* create the dmabuf */
 	exp_info.exp_name = dma_heap_get_name(heap);
 	exp_info.ops = &system_heap_buf_ops;
@@ -487,6 +598,13 @@ free_pages:
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *p = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(p))
+			continue;
 		__free_pages(p, compound_order(p));
 	}
 	sg_free_table(table);
@@ -502,6 +620,7 @@ static const struct dma_heap_ops system_heap_ops = {
 	.allocate = system_heap_allocate,
 };
 
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 /* Dummy function to be used until we can call coerce_mask_and_coherent */
 static struct dma_buf *system_uncached_heap_not_initialized(struct dma_heap *heap,
 							    unsigned long len,
@@ -522,6 +641,15 @@ static struct system_heap_priv system_heap_priv = {
 
 static struct system_heap_priv system_uncached_heap_priv = {
 	.uncached = true,
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+static struct system_heap_priv system_heap_priv = {
+	.cc_shared = false,
+};
+
+static struct system_heap_priv system_heap_cc_shared_priv = {
+	.cc_shared = true,
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 };
 
 static int __init system_heap_create(void)
@@ -538,6 +666,7 @@ static int __init system_heap_create(void)
 	if (IS_ERR(sys_heap))
 		return PTR_ERR(sys_heap);
 
+<<<<<<< HEAD   (4782efe2e69a654fbe059fe1760dbe615c92751c ANDROID: dma-buf: heaps: store 'uncached' under driver data)
 	exp_info.name = "system-uncached";
 	exp_info.ops = &system_uncached_heap_ops;
 	exp_info.priv = &system_uncached_heap_priv;
@@ -549,6 +678,18 @@ static int __init system_heap_create(void)
 	dma_coerce_mask_and_coherent(dma_heap_get_dev(sys_uncached_heap), DMA_BIT_MASK(64));
 	mb(); /* make sure we only set allocate after dma_mask is set */
 	system_uncached_heap_ops.allocate = system_heap_allocate;
+||||||| BASE   (d662a710c668a86a39ebaad334d9960a0cc776c2 Merge tag 'dmaengine-7.1-rc1' of git://git.kernel.org/pub/sc)
+=======
+	if (IS_ENABLED(CONFIG_HIGHMEM) ||
+	    !cc_platform_has(CC_ATTR_MEM_ENCRYPT))
+		return 0;
+
+	exp_info.name = "system_cc_shared";
+	exp_info.priv = &system_heap_cc_shared_priv;
+	sys_heap = dma_heap_add(&exp_info);
+	if (IS_ERR(sys_heap))
+		return PTR_ERR(sys_heap);
+>>>>>>> BRANCH (87768582a440e7049a04e8af7383b86738d15b38 Merge tag 'dma-mapping-7.1-2026-04-16' of git://git.kernel.o)
 
 	return 0;
 }
