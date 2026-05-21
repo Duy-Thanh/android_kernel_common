@@ -46,6 +46,30 @@
       },
       "revId": "a3d5d1a4ad4a99b61202bb895678ad3f1a5ced4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6178d7d3_a311f513",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-21T13:09:14Z",
+      "side": 1,
+      "message": "Above is applied so resolving. BTW yeah it is better to change it even if is_memory_range(), for_each_pkvm_page(), check_host_mem_pgstate()  uses PAGE_ALIGNED addr/size since this function could be used later in some different context.",
+      "parentUuid": "149ad8bc_fcfef16e",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 15
+      },
+      "revId": "a3d5d1a4ad4a99b61202bb895678ad3f1a5ced4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
