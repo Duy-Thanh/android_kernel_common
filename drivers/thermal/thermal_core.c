@@ -921,6 +921,13 @@ static void thermal_release(struct device *dev)
 		     sizeof("thermal_zone") - 1)) {
 		tz = to_thermal_zone(dev);
 		thermal_zone_destroy_device_groups(tz);
+<<<<<<< HEAD   (782c70af424c5005797176f563642a1cf284835e Merge 1bda80a7be91 ("mm: convert mm_lock_seq to a proper seq)
+||||||| BASE   (1bda80a7be91404fb849ccdde08437e86e38e816 mm: convert mm_lock_seq to a proper seqcount)
+		thermal_set_governor(tz, NULL);
+=======
+		thermal_set_governor(tz, NULL);
+		ida_destroy(&tz->ida);
+>>>>>>> BRANCH (a40f33ea3573bb57683ac39138ff64010dc25cb3 Linux 6.12.88)
 		mutex_destroy(&tz->lock);
 		complete(&tz->removal);
 	} else if (!strncmp(dev_name(dev), "cooling_device",
@@ -1649,8 +1656,6 @@ void thermal_zone_device_unregister(struct thermal_zone_device *tz)
 
 	thermal_thresholds_exit(tz);
 	thermal_remove_hwmon_sysfs(tz);
-	ida_free(&thermal_tz_ida, tz->id);
-	ida_destroy(&tz->ida);
 
 	device_del(&tz->device);
 	put_device(&tz->device);
@@ -1658,6 +1663,9 @@ void thermal_zone_device_unregister(struct thermal_zone_device *tz)
 	thermal_notify_tz_delete(tz);
 
 	wait_for_completion(&tz->removal);
+
+	ida_free(&thermal_tz_ida, tz->id);
+
 	kfree(tz->tzp);
 	kfree(tz);
 }
