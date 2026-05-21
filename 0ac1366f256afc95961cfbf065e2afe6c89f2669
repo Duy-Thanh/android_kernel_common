@@ -52,6 +52,24 @@
       "parentUuid": "14b2f6b1_bec87cb9",
       "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a14bf6_537a27a1",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-05-21T23:58:11Z",
+      "side": 1,
+      "message": "Strange. I think I\u0027ve done this correctly and put them together in a topic, but somehow the presubmit seems to be compiling a version of the code that has both fields\n\n```\n...18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/576/execroot/_main/common/include/linux/pagemap.h:1354:30: error: member of anonymous union redeclares \u0027_max_index\u0027\n 1354 |         ANDROID_KABI_USE(1, pgoff_t _max_index); /* limit readahead to _max_index, inclusive */\n      |                                     ^\n...id/common-android17-6.18/out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/576/execroot/_main/common/include/linux/pagemap.h:1346:10: note: previous declaration is here\n 1346 |         pgoff_t _max_index; /* limit readahead to _max_index, inclusive */\n      |                 ^\n1 error generated.\n```",
+      "parentUuid": "4ef3c481_c47e6f46",
+      "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
