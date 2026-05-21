@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c677f6_1763bac6",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-05-21T19:49:39Z",
+      "side": 1,
+      "message": "this change will break the ABI.\n\nCould you use one of the fields in ANDROID_VENDOR_DATA_ARRAY(1, 2) instead?",
+      "range": {
+        "startLine": 232,
+        "startChar": 1,
+        "endLine": 235,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb08bf0d_f784bc5f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/iommu.h",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "\tiommu_fault_handler_t handler;\n\tvoid *handler_token;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95b384df9e83bd3d544133ff807dce40f1a1cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
