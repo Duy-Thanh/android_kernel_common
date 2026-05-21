@@ -181,6 +181,24 @@
       "parentUuid": "1d495b35_60a28cb2",
       "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25c5837_08cb442c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T09:43:42Z",
+      "side": 1,
+      "message": "Yep, in \"Use of volatile is usually wrong\" the key word is \"usually\". :)",
+      "parentUuid": "fbb2135b_e9a7bde1",
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
