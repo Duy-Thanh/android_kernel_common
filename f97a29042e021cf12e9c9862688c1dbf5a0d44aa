@@ -22,6 +22,30 @@
       },
       "revId": "f97a29042e021cf12e9c9862688c1dbf5a0d44aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10693bb1_a8f2fff8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-05-21T01:52:35Z",
+      "side": 1,
+      "message": "Hi Suren, thanks for the comment! \n  \nIt\u0027s actually addressing b/502442322, and a possible race between concurrent `mmap` and `rewrap`/`empty`.\n  \nI suppose it can happen with a sequence like this:\n`wrap_mmap` releases `ctx-\u003elock` before calling `content-\u003eops-\u003emmap` (which actually sets up the mapping). If `rewrap` runs concurrently, it can grab \n`ctx-\u003elock` in that window. Since the mapping isn\u0027t established yet, `mapping_mapped` returns 0, so `rewrap` thinks it\u0027s safe to free the content. When `mmap` resumes, it tries to use that freed content, leading to a UAF.             \n  \nSince `sys_mmap` holds `mmap_write_lock`, taking `mmap_read_lock` in the `rewrap` paths is a straightforward way to serialize these operations and keep the mapping check stable.  \n  \nHowever, your point about `mmap_read_lock` contention is spot on. Holding it during sleeping operations like `free` or `make_writable` is definitely not ideal. \n\nIf you agree this is a valid issue and worth fixing, I\u0027d be happy to upload a refined patchset.\n  \nWhat do you think?",
+      "parentUuid": "26d0a215_ffd2c396",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "f97a29042e021cf12e9c9862688c1dbf5a0d44aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
