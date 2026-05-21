@@ -13,6 +13,33 @@ use ::core::arch::asm;
 
 use kernel::prelude::*;
 
+pub use kernel::bindings::mutex;
+pub use kernel::bindings::spinlock_t;
+pub type spinlock = spinlock_t;
+pub use kernel::bindings::raw_spinlock_t;
+pub use kernel::bindings::raw_spinlock;
+pub use kernel::bindings::lock_class_key;
+pub use kernel::bindings::optimistic_spin_queue;
+pub use kernel::bindings::arch_spinlock_t;
+
+#[inline]
+pub unsafe fn spin_lock_init(lock: *mut spinlock_t) {
+    static mut __key: lock_class_key = lock_class_key {};
+    kernel::bindings::__spin_lock_init(lock, b"spinlock\0".as_ptr() as *const ::core::ffi::c_char, &raw mut __key);
+}
+
+#[inline]
+pub unsafe fn mutex_init(lock: *mut mutex) {
+    static mut __key: lock_class_key = lock_class_key {};
+    kernel::bindings::__mutex_init(lock, b"mutex\0".as_ptr() as *const ::core::ffi::c_char, &raw mut __key);
+}
+
+#[inline]
+pub unsafe fn init_waitqueue_head(wq_head: *mut wait_queue_head) {
+    static mut __key: lock_class_key = lock_class_key {};
+    __init_waitqueue_head(wq_head, b"waitqueue\0".as_ptr() as *const ::core::ffi::c_char, &raw mut __key);
+}
+
 const __LOG_PREFIX: &[u8] = b"binder\0";
 
 #[inline]
@@ -1415,51 +1442,6 @@ pub struct bpf_stream {
 pub struct llist_node {
     pub next: *mut llist_node,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct mutex {
-    pub owner: atomic_long_t,
-    pub wait_lock: raw_spinlock_t,
-    pub osq: optimistic_spin_queue,
-    pub wait_list: list_head,
-    pub android_oem_data1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct optimistic_spin_queue {
-    pub tail: atomic_t,
-}
-pub type raw_spinlock_t = raw_spinlock;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct raw_spinlock {
-    pub raw_lock: arch_spinlock_t,
-}
-pub type arch_spinlock_t = qspinlock;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct qspinlock {
-    pub c2rust_unnamed: C2Rust_Unnamed_6,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_6 {
-    pub val: atomic_t,
-    pub c2rust_unnamed: C2Rust_Unnamed_8,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_7,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_7 {
-    pub locked_pending: u16_0,
-    pub tail: u16_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_8 {
-    pub locked: u8_0,
-    pub pending: u8_0,
-}
 pub type atomic_long_t = atomic64_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1759,17 +1741,6 @@ pub struct completion {
 pub struct swait_queue_head {
     pub lock: raw_spinlock_t,
     pub task_list: list_head,
-}
-pub type spinlock_t = spinlock;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct spinlock {
-    pub c2rust_unnamed: C2Rust_Unnamed_12,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_12 {
-    pub rlock: raw_spinlock,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -3372,9 +3343,6 @@ pub struct cftype {
     pub lockdep_key: lock_class_key,
     pub __kabi_reserved1: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct lock_class_key {}
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct poll_table_struct {
@@ -19897,23 +19865,21 @@ unsafe extern "C" fn arch_local_irq_restore(mut flags: ::core::ffi::c_ulong) {
     };
 }
 #[inline(always)]
-unsafe extern "C" fn queued_spin_is_locked(mut lock: *mut qspinlock) -> ::core::ffi::c_int {
-    return atomic_read(&raw mut (*lock).c2rust_unnamed.val);
+unsafe extern "C" fn queued_spin_is_locked(mut lock: *mut spinlock_t) -> ::core::ffi::c_int {
+    return atomic_read(lock as *const atomic_t);
 }
 pub const RLIMIT_NICE: ::core::ffi::c_int = 13 as ::core::ffi::c_int;
 pub const RLIMIT_RTPRIO: ::core::ffi::c_int = 14 as ::core::ffi::c_int;
 pub const TASK_SIZE_MAX: ::core::ffi::c_ulong = (1 as ::core::ffi::c_ulong) << VA_BITS;
 #[inline(always)]
-unsafe extern "C" fn spinlock_check(mut lock: *mut spinlock_t) -> *mut raw_spinlock_t {
-    return &raw mut (*lock).c2rust_unnamed.rlock;
-}
+unsafe extern "C" fn spinlock_check(mut _lock: *mut spinlock_t) {}
 #[inline(always)]
 unsafe extern "C" fn spin_lock(mut lock: *mut spinlock_t) {
-    _raw_spin_lock(&raw mut (*lock).c2rust_unnamed.rlock);
+    kernel::bindings::spin_lock(lock);
 }
 #[inline(always)]
 unsafe extern "C" fn spin_unlock(mut lock: *mut spinlock_t) {
-    _raw_spin_unlock(&raw mut (*lock).c2rust_unnamed.rlock);
+    kernel::bindings::spin_unlock(lock);
 }
 #[inline]
 unsafe extern "C" fn class_spinlock_constructor(mut l: *mut spinlock_t) -> class_spinlock_t {
@@ -20905,77 +20871,19 @@ unsafe extern "C" fn init_task_work(mut twork: *mut callback_head, mut func: tas
 static mut binder_deferred_list: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
-static mut binder_deferred_lock: mutex = mutex {
-    owner: atomic_long_t { counter: 0 },
-    wait_lock: raw_spinlock_t {
-        raw_lock: arch_spinlock_t {
-            c2rust_unnamed: C2Rust_Unnamed_6 {
-                val: atomic_t { counter: 0 },
-            },
-        },
-    },
-    osq: optimistic_spin_queue {
-        tail: atomic_t { counter: 0 },
-    },
-    wait_list: list_head {
-        next: ::core::ptr::null_mut::<list_head>(),
-        prev: ::core::ptr::null_mut::<list_head>(),
-    },
-    android_oem_data1: 0,
-};
+static mut binder_deferred_lock: mutex = unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() };
 static mut binder_devices: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
-static mut binder_devices_lock: spinlock_t = spinlock {
-    c2rust_unnamed: C2Rust_Unnamed_12 {
-        rlock: raw_spinlock {
-            raw_lock: qspinlock {
-                c2rust_unnamed: C2Rust_Unnamed_6 {
-                    val: atomic_t {
-                        counter: 0 as ::core::ffi::c_int,
-                    },
-                },
-            },
-        },
-    },
-};
+static mut binder_devices_lock: spinlock_t = unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() };
 static mut binder_procs: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
-static mut binder_procs_lock: mutex = mutex {
-    owner: atomic_long_t { counter: 0 },
-    wait_lock: raw_spinlock_t {
-        raw_lock: arch_spinlock_t {
-            c2rust_unnamed: C2Rust_Unnamed_6 {
-                val: atomic_t { counter: 0 },
-            },
-        },
-    },
-    osq: optimistic_spin_queue {
-        tail: atomic_t { counter: 0 },
-    },
-    wait_list: list_head {
-        next: ::core::ptr::null_mut::<list_head>(),
-        prev: ::core::ptr::null_mut::<list_head>(),
-    },
-    android_oem_data1: 0,
-};
+static mut binder_procs_lock: mutex = unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() };
 static mut binder_dead_nodes: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
-static mut binder_dead_nodes_lock: spinlock_t = spinlock {
-    c2rust_unnamed: C2Rust_Unnamed_12 {
-        rlock: raw_spinlock {
-            raw_lock: qspinlock {
-                c2rust_unnamed: C2Rust_Unnamed_6 {
-                    val: atomic_t {
-                        counter: 0 as ::core::ffi::c_int,
-                    },
-                },
-            },
-        },
-    },
-};
+static mut binder_dead_nodes_lock: spinlock_t = unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() };
 static mut binder_debugfs_dir_entry_root: *mut dentry = ::core::ptr::null_mut::<dentry>();
 static mut binder_debugfs_dir_entry_proc: *mut dentry = ::core::ptr::null_mut::<dentry>();
 static mut binder_last_id: atomic_t = atomic_t { counter: 0 };
@@ -21111,17 +21019,7 @@ static mut __UNIQUE_ID_modinfo855: [::core::ffi::c_char; 30] = unsafe {
     )
 };
 static mut binder_user_error_wait: wait_queue_head = wait_queue_head {
-    lock: spinlock_t {
-        c2rust_unnamed: C2Rust_Unnamed_12 {
-            rlock: raw_spinlock_t {
-                raw_lock: arch_spinlock_t {
-                    c2rust_unnamed: C2Rust_Unnamed_6 {
-                        val: atomic_t { counter: 0 },
-                    },
-                },
-            },
-        },
-    },
+    lock: unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() },
     head: list_head {
         next: ::core::ptr::null_mut::<list_head>(),
         prev: ::core::ptr::null_mut::<list_head>(),
@@ -21203,15 +21101,7 @@ unsafe extern "C" fn binder_debug(
         vaf.fmt = format;
         '_c2rust_label: {
             static mut _rs: ratelimit_state = ratelimit_state {
-                lock: raw_spinlock {
-                    raw_lock: qspinlock {
-                        c2rust_unnamed: C2Rust_Unnamed_6 {
-                            val: atomic_t {
-                                counter: 0 as ::core::ffi::c_int,
-                            },
-                        },
-                    },
-                },
+                lock: unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() },
                 interval: 5 as ::core::ffi::c_int * 250 as ::core::ffi::c_int,
                 burst: 10 as ::core::ffi::c_int,
                 rs_n_left: atomic_t { counter: 0 },
@@ -21249,15 +21139,7 @@ unsafe extern "C" fn binder_user_error(
         vaf.fmt = format;
         '_c2rust_label: {
             static mut _rs: ratelimit_state = ratelimit_state {
-                lock: raw_spinlock {
-                    raw_lock: qspinlock {
-                        c2rust_unnamed: C2Rust_Unnamed_6 {
-                            val: atomic_t {
-                                counter: 0 as ::core::ffi::c_int,
-                            },
-                        },
-                    },
-                },
+                lock: unsafe { ::core::mem::MaybeUninit::zeroed().assume_init() },
                 interval: 5 as ::core::ffi::c_int * 250 as ::core::ffi::c_int,
                 burst: 10 as ::core::ffi::c_int,
                 rs_n_left: atomic_t { counter: 0 },
@@ -21697,7 +21579,7 @@ unsafe extern "C" fn binder_select_thread_ilocked(
     mut proc: *mut binder_proc,
 ) -> *mut binder_thread {
     let mut thread: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
-    if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -21750,7 +21632,7 @@ unsafe extern "C" fn binder_wakeup_thread_ilocked(
     mut thread: *mut binder_thread,
     mut sync: bool_0,
 ) {
-    if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -21977,7 +21859,7 @@ unsafe extern "C" fn binder_get_node_ilocked(
 ) -> *mut binder_node {
     let mut n: *mut rb_node = (*proc).nodes.rb_node;
     let mut node: *mut binder_node = ::core::ptr::null_mut::<binder_node>();
-    if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -22037,7 +21919,7 @@ unsafe extern "C" fn binder_init_node_ilocked(
         0 as __u32
     };
     let mut priority: s8 = 0;
-    if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -22096,20 +21978,7 @@ unsafe extern "C" fn binder_init_node_ilocked(
         (flags & FLAT_BINDER_FLAG_TXN_SECURITY_CTX as ::core::ffi::c_int as __u32 != 0)
             as ::core::ffi::c_int as u8_0 as u8_0,
     );
-    spinlock_check(&raw mut (*node).lock);
-    (*node).lock = spinlock {
-        c2rust_unnamed: C2Rust_Unnamed_12 {
-            rlock: raw_spinlock {
-                raw_lock: qspinlock {
-                    c2rust_unnamed: C2Rust_Unnamed_6 {
-                        val: atomic_t {
-                            counter: 0 as ::core::ffi::c_int,
-                        },
-                    },
-                },
-            },
-        },
-    };
+    spin_lock_init(&raw mut (*node).lock);
     INIT_LIST_HEAD(&raw mut (*node).work.entry);
     INIT_LIST_HEAD(&raw mut (*node).async_todo);
     binder_debug(
@@ -22199,7 +22068,7 @@ unsafe extern "C" fn binder_inc_node_nilocked(
     mut target_list: *mut list_head,
 ) -> ::core::ffi::c_int {
     let mut proc: *mut binder_proc = (*node).proc as *mut binder_proc;
-    if (queued_spin_is_locked(&raw mut (*node).lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*node).lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -22210,7 +22079,7 @@ unsafe extern "C" fn binder_inc_node_nilocked(
         unreachable!();
     }
     if !proc.is_null() {
-        if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+        if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
             as ::core::ffi::c_int as ::core::ffi::c_long
             != 0
         {
@@ -22290,7 +22159,7 @@ unsafe extern "C" fn binder_dec_node_nilocked(
     mut internal: ::core::ffi::c_int,
 ) -> bool_0 {
     let mut proc: *mut binder_proc = (*node).proc as *mut binder_proc;
-    if (queued_spin_is_locked(&raw mut (*node).lock.c2rust_unnamed.rlock.raw_lock) == 0)
+    if (queued_spin_is_locked(&raw mut (*node).lock) == 0)
         as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
@@ -22301,7 +22170,7 @@ unsafe extern "C" fn binder_dec_node_nilocked(
         unreachable!();
     }
     if !proc.is_null() {
-        if (queued_spin_is_locked(&raw mut (*proc).inner_lock.c2rust_unnamed.rlock.raw_lock) == 0)
+        if (queued_spin_is_locked(&raw mut (*proc).inner_lock) == 0)
             as ::core::ffi::c_int as ::core::ffi::c_long
             != 0
         {
@@ -22951,13 +22820,7 @@ unsafe extern "C" fn binder_pop_transaction_ilocked(
         );
         unreachable!();
     }
-    if (queued_spin_is_locked(
-        &raw mut (*(*target_thread).proc)
-            .inner_lock
-            .c2rust_unnamed
-            .rlock
-            .raw_lock,
-    ) == 0) as ::core::ffi::c_int as ::core::ffi::c_long
+    if (queued_spin_is_locked(&raw mut (*(*target_thread).proc).inner_lock) == 0) as ::core::ffi::c_int as ::core::ffi::c_long
         != 0
     {
         asm!(
@@ -25185,20 +25048,7 @@ unsafe extern "C" fn binder_transaction(
     } else {
         INIT_LIST_HEAD(&raw mut (*t).fd_fixups);
         binder_stats_created(BINDER_STAT_TRANSACTION);
-        spinlock_check(&raw mut (*t).lock);
-        (*t).lock = spinlock {
-            c2rust_unnamed: C2Rust_Unnamed_12 {
-                rlock: raw_spinlock {
-                    raw_lock: qspinlock {
-                        c2rust_unnamed: C2Rust_Unnamed_6 {
-                            val: atomic_t {
-                                counter: 0 as ::core::ffi::c_int,
-                            },
-                        },
-                    },
-                },
-            },
-        };
+        spin_lock_init(&raw mut (*t).lock);
         trace_android_vh_binder_transaction_init(t);
         (*t).debug_id = t_debug_id;
         (*t).start_time = t_start_time;
@@ -29488,20 +29338,7 @@ unsafe extern "C" fn binder_get_thread_ilocked(
     (*thread).return_error.cmd = BR_OK as ::core::ffi::c_uint as uint32_t;
     (*thread).reply_error.work.type_0 = BINDER_WORK_RETURN_ERROR;
     (*thread).reply_error.cmd = BR_OK as ::core::ffi::c_uint as uint32_t;
-    spinlock_check(&raw mut (*thread).prio_lock);
-    (*thread).prio_lock = spinlock {
-        c2rust_unnamed: C2Rust_Unnamed_12 {
-            rlock: raw_spinlock {
-                raw_lock: qspinlock {
-                    c2rust_unnamed: C2Rust_Unnamed_6 {
-                        val: atomic_t {
-                            counter: 0 as ::core::ffi::c_int,
-                        },
-                    },
-                },
-            },
-        },
-    };
+    spin_lock_init(&raw mut (*thread).prio_lock);
     (*thread).prio_state = BINDER_PRIO_SET;
     (*thread).ee.command = BR_OK as ::core::ffi::c_uint as __u32;
     INIT_LIST_HEAD(&raw mut (*new_thread).waiting_thread_node);
@@ -31025,34 +30862,8 @@ unsafe extern "C" fn binder_open(mut nodp: *mut inode, mut filp: *mut file) -> :
         return -ENOMEM;
     }
     dbitmap_init(&raw mut (*proc).dmap);
-    spinlock_check(&raw mut (*proc).inner_lock);
-    (*proc).inner_lock = spinlock {
-        c2rust_unnamed: C2Rust_Unnamed_12 {
-            rlock: raw_spinlock {
-                raw_lock: qspinlock {
-                    c2rust_unnamed: C2Rust_Unnamed_6 {
-                        val: atomic_t {
-                            counter: 0 as ::core::ffi::c_int,
-                        },
-                    },
-                },
-            },
-        },
-    };
-    spinlock_check(&raw mut (*proc).outer_lock);
-    (*proc).outer_lock = spinlock {
-        c2rust_unnamed: C2Rust_Unnamed_12 {
-            rlock: raw_spinlock {
-                raw_lock: qspinlock {
-                    c2rust_unnamed: C2Rust_Unnamed_6 {
-                        val: atomic_t {
-                            counter: 0 as ::core::ffi::c_int,
-                        },
-                    },
-                },
-            },
-        },
-    };
+    spin_lock_init(&raw mut (*proc).inner_lock);
+    spin_lock_init(&raw mut (*proc).outer_lock);
     get_task_struct((*get_current()).group_leader);
     (*proc).tsk = (*get_current()).group_leader;
     (*proc).cred = get_cred((*filp).f_cred);
@@ -35704,65 +35515,11 @@ unsafe extern "C" fn c2rust_run_static_initializers() {
         },
         func: Some(binder_deferred_func as unsafe extern "C" fn(*mut work_struct) -> ()),
     };
-    binder_procs_lock = mutex {
-        owner: atomic64_t { counter: 0 as s64 },
-        wait_lock: raw_spinlock {
-            raw_lock: qspinlock {
-                c2rust_unnamed: C2Rust_Unnamed_6 {
-                    val: atomic_t {
-                        counter: 0 as ::core::ffi::c_int,
-                    },
-                },
-            },
-        },
-        osq: optimistic_spin_queue {
-            tail: atomic_t { counter: 0 },
-        },
-        wait_list: list_head {
-            next: &raw mut binder_procs_lock.wait_list,
-            prev: &raw mut binder_procs_lock.wait_list,
-        },
-        android_oem_data1: 0,
-    };
-    binder_deferred_lock = mutex {
-        owner: atomic64_t { counter: 0 as s64 },
-        wait_lock: raw_spinlock {
-            raw_lock: qspinlock {
-                c2rust_unnamed: C2Rust_Unnamed_6 {
-                    val: atomic_t {
-                        counter: 0 as ::core::ffi::c_int,
-                    },
-                },
-            },
-        },
-        osq: optimistic_spin_queue {
-            tail: atomic_t { counter: 0 },
-        },
-        wait_list: list_head {
-            next: &raw mut binder_deferred_lock.wait_list,
-            prev: &raw mut binder_deferred_lock.wait_list,
-        },
-        android_oem_data1: 0,
-    };
-    binder_user_error_wait = wait_queue_head {
-        lock: spinlock {
-            c2rust_unnamed: C2Rust_Unnamed_12 {
-                rlock: raw_spinlock {
-                    raw_lock: qspinlock {
-                        c2rust_unnamed: C2Rust_Unnamed_6 {
-                            val: atomic_t {
-                                counter: 0 as ::core::ffi::c_int,
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        head: list_head {
-            next: &raw mut binder_user_error_wait.head,
-            prev: &raw mut binder_user_error_wait.head,
-        },
-    };
+    mutex_init(&raw mut binder_procs_lock);
+    mutex_init(&raw mut binder_deferred_lock);
+    spin_lock_init(&raw mut binder_devices_lock);
+    spin_lock_init(&raw mut binder_dead_nodes_lock);
+    init_waitqueue_head(&raw mut binder_user_error_wait);
 }
 
 impl task_struct {
