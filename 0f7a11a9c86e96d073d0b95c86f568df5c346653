@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc8d758_07cf12f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-21T06:08:18Z",
+      "side": 1,
+      "message": "Checkpatch believes that the function parameter declaration is a binary operation. This is a known bug in checkpatch, so bypassing Lint. See [1] for an example.\n\n[1] https://lore.kernel.org/all/aaXSGSEY_3WQvjYS@J2N7QTR9R3/",
+      "revId": "0f7a11a9c86e96d073d0b95c86f568df5c346653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
