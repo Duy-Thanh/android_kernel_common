@@ -795,16 +795,8 @@ pub type blkcnt_t = u64_0;
 pub type gfp_t = ::core::ffi::c_uint;
 pub type fmode_t = ::core::ffi::c_uint;
 pub type phys_addr_t = u64_0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct atomic_t {
-    pub counter: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct atomic64_t {
-    pub counter: s64,
-}
+pub type atomic_t = kernel::bindings::atomic_t;
+pub type atomic64_t = kernel::bindings::atomic64_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct rcuref_t {
@@ -1137,103 +1129,8 @@ pub struct debug_info {
     pub hbp_break: [*mut perf_event; 16],
     pub hbp_watch: [*mut perf_event; 16],
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_event {
-    pub event_entry: list_head,
-    pub sibling_list: list_head,
-    pub active_list: list_head,
-    pub group_node: rb_node,
-    pub group_index: u64_0,
-    pub migrate_entry: list_head,
-    pub hlist_entry: hlist_node,
-    pub active_entry: list_head,
-    pub nr_siblings: ::core::ffi::c_int,
-    pub event_caps: ::core::ffi::c_int,
-    pub group_caps: ::core::ffi::c_int,
-    pub group_generation: ::core::ffi::c_uint,
-    pub group_leader: *mut perf_event,
-    pub pmu: *mut pmu,
-    pub pmu_private: *mut ::core::ffi::c_void,
-    pub state: perf_event_state,
-    pub attach_state: ::core::ffi::c_uint,
-    pub count: local64_t,
-    pub child_count: atomic64_t,
-    pub total_time_enabled: u64_0,
-    pub total_time_running: u64_0,
-    pub tstamp: u64_0,
-    pub attr: perf_event_attr,
-    pub header_size: u16_0,
-    pub id_header_size: u16_0,
-    pub read_size: u16_0,
-    pub hw: hw_perf_event,
-    pub ctx: *mut perf_event_context,
-    pub pmu_ctx: *mut perf_event_pmu_context,
-    pub refcount: atomic_long_t,
-    pub child_total_time_enabled: atomic64_t,
-    pub child_total_time_running: atomic64_t,
-    pub child_mutex: mutex,
-    pub child_list: list_head,
-    pub parent: *mut perf_event,
-    pub oncpu: ::core::ffi::c_int,
-    pub cpu: ::core::ffi::c_int,
-    pub owner_entry: list_head,
-    pub owner: *mut task_struct,
-    pub mmap_mutex: mutex,
-    pub mmap_count: refcount_t,
-    pub rb: *mut perf_buffer,
-    pub rb_entry: list_head,
-    pub rcu_batches: ::core::ffi::c_ulong,
-    pub rcu_pending: ::core::ffi::c_int,
-    pub waitq: wait_queue_head_t,
-    pub fasync: *mut fasync_struct,
-    pub pending_wakeup: ::core::ffi::c_uint,
-    pub pending_kill: ::core::ffi::c_uint,
-    pub pending_disable: ::core::ffi::c_uint,
-    pub pending_addr: ::core::ffi::c_ulong,
-    pub pending_irq: irq_work,
-    pub pending_disable_irq: irq_work,
-    pub pending_task: callback_head,
-    pub pending_work: ::core::ffi::c_uint,
-    pub event_limit: atomic_t,
-    pub addr_filters: perf_addr_filters_head,
-    pub addr_filter_ranges: *mut perf_addr_filter_range,
-    pub addr_filters_gen: ::core::ffi::c_ulong,
-    pub aux_event: *mut perf_event,
-    pub destroy: Option<unsafe extern "C" fn(*mut perf_event) -> ()>,
-    pub callback_head: callback_head,
-    pub ns: *mut pid_namespace,
-    pub id: u64_0,
-    pub lost_samples: atomic64_t,
-    pub clock: Option<unsafe extern "C" fn() -> u64_0>,
-    pub overflow_handler: perf_overflow_handler_t,
-    pub overflow_handler_context: *mut ::core::ffi::c_void,
-    pub prog: *mut bpf_prog,
-    pub bpf_cookie: u64_0,
-    pub tp_event: *mut trace_event_call,
-    pub filter: *mut event_filter,
-    pub security: *mut ::core::ffi::c_void,
-    pub sb_list: list_head,
-    pub pmu_list: list_head,
-    pub orig_type: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_event_call {
-    pub list: list_head,
-    pub class: *mut trace_event_class,
-    pub c2rust_unnamed: C2Rust_Unnamed_188,
-    pub event: trace_event,
-    pub print_fmt: *mut ::core::ffi::c_char,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_187,
-    pub data: *mut ::core::ffi::c_void,
-    pub flags: ::core::ffi::c_int,
-    pub perf_refcount: ::core::ffi::c_int,
-    pub perf_events: *mut hlist_head,
-    pub prog_array: *mut bpf_prog_array,
-    pub perf_perm:
-        Option<unsafe extern "C" fn(*mut trace_event_call, *mut perf_event) -> ::core::ffi::c_int>,
-}
+pub type perf_event = kernel::bindings::perf_event;
+pub type trace_event_call = kernel::bindings::trace_event_call;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct bpf_prog_array {
@@ -1488,83 +1385,7 @@ pub struct exception_table_entry {
     pub type_0: ::core::ffi::c_short,
     pub data: ::core::ffi::c_short,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct module {
-    pub state: module_state,
-    pub list: list_head,
-    pub name: [::core::ffi::c_char; 56],
-    pub build_id: [::core::ffi::c_uchar; 20],
-    pub mkobj: module_kobject,
-    pub modinfo_attrs: *mut module_attribute,
-    pub version: *const ::core::ffi::c_char,
-    pub srcversion: *const ::core::ffi::c_char,
-    pub scmversion: *const ::core::ffi::c_char,
-    pub holders_dir: *mut kobject,
-    pub syms: *const kernel_symbol,
-    pub crcs: *const u32_0,
-    pub flagstab: *const u8_0,
-    pub num_syms: ::core::ffi::c_uint,
-    pub param_lock: mutex,
-    pub kp: *mut kernel_param,
-    pub num_kp: ::core::ffi::c_uint,
-    pub using_gplonly_symbols: bool_0,
-    pub sig_ok: bool_0,
-    pub async_probe_requested: bool_0,
-    pub num_exentries: ::core::ffi::c_uint,
-    pub extable: *mut exception_table_entry,
-    pub init: Option<unsafe extern "C" fn() -> ::core::ffi::c_int>,
-    pub mem: [module_memory; 7],
-    pub arch: mod_arch_specific,
-    pub taints: ::core::ffi::c_ulong,
-    pub num_bugs: ::core::ffi::c_uint,
-    pub bug_list: list_head,
-    pub bug_table: *mut bug_entry,
-    pub kallsyms: *mut mod_kallsyms,
-    pub core_kallsyms: mod_kallsyms,
-    pub sect_attrs: *mut module_sect_attrs,
-    pub notes_attrs: *mut module_notes_attrs,
-    pub args: *mut ::core::ffi::c_char,
-    pub percpu: *mut ::core::ffi::c_void,
-    pub percpu_size: ::core::ffi::c_uint,
-    pub noinstr_text_start: *mut ::core::ffi::c_void,
-    pub noinstr_text_size: ::core::ffi::c_uint,
-    pub num_tracepoints: ::core::ffi::c_uint,
-    pub tracepoints_ptrs: *const tracepoint_ptr_t,
-    pub num_srcu_structs: ::core::ffi::c_uint,
-    pub srcu_struct_ptrs: *mut *mut srcu_struct,
-    pub num_bpf_raw_events: ::core::ffi::c_uint,
-    pub bpf_raw_events: *mut bpf_raw_event_map,
-    pub btf_data_size: ::core::ffi::c_uint,
-    pub btf_base_data_size: ::core::ffi::c_uint,
-    pub btf_data: *mut ::core::ffi::c_void,
-    pub btf_base_data: *mut ::core::ffi::c_void,
-    pub jump_entries: *mut jump_entry,
-    pub num_jump_entries: ::core::ffi::c_uint,
-    pub num_trace_bprintk_fmt: ::core::ffi::c_uint,
-    pub trace_bprintk_fmt_start: *mut *const ::core::ffi::c_char,
-    pub trace_events: *mut *mut trace_event_call,
-    pub num_trace_events: ::core::ffi::c_uint,
-    pub trace_evals: *mut *mut trace_eval_map,
-    pub num_trace_evals: ::core::ffi::c_uint,
-    pub kprobes_text_start: *mut ::core::ffi::c_void,
-    pub kprobes_text_size: ::core::ffi::c_uint,
-    pub kprobe_blacklist: *mut ::core::ffi::c_ulong,
-    pub num_kprobe_blacklist: ::core::ffi::c_uint,
-    pub num_kunit_init_suites: ::core::ffi::c_int,
-    pub kunit_init_suites: *mut *mut kunit_suite,
-    pub num_kunit_suites: ::core::ffi::c_int,
-    pub kunit_suites: *mut *mut kunit_suite,
-    pub source_list: list_head,
-    pub target_list: list_head,
-    pub exit: Option<unsafe extern "C" fn() -> ()>,
-    pub refcnt: atomic_t,
-    pub dyndbg_info: _ddebug_info,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-    pub __kabi_reserved3: u64_0,
-    pub __kabi_reserved4: u64_0,
-}
+pub type module = kernel::bindings::module;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct _ddebug_info {
@@ -1785,24 +1606,7 @@ pub struct srcu_node {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct lockdep_map {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct srcu_data {
-    pub srcu_ctrs: [srcu_ctr; 2],
-    pub srcu_reader_flavor: ::core::ffi::c_int,
-    pub lock: spinlock_t,
-    pub srcu_cblist: rcu_segcblist,
-    pub srcu_gp_seq_needed: ::core::ffi::c_ulong,
-    pub srcu_gp_seq_needed_exp: ::core::ffi::c_ulong,
-    pub srcu_cblist_invoking: bool_0,
-    pub delay_work: timer_list,
-    pub work: work_struct,
-    pub srcu_barrier_head: callback_head,
-    pub mynode: *mut srcu_node,
-    pub grpmask: ::core::ffi::c_ulong,
-    pub cpu: ::core::ffi::c_int,
-    pub ssp: *mut srcu_struct,
-}
+pub type srcu_data = kernel::bindings::srcu_data;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct rcu_segcblist {
@@ -2105,74 +1909,8 @@ pub struct kernfs_open_file {
     pub vm_ops: *const vm_operations_struct,
     pub __kabi_reserved1: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct vm_operations_struct {
-    pub open: Option<unsafe extern "C" fn(*mut vm_area_struct) -> ()>,
-    pub close: Option<unsafe extern "C" fn(*mut vm_area_struct) -> ()>,
-    pub may_split: Option<
-        unsafe extern "C" fn(*mut vm_area_struct, ::core::ffi::c_ulong) -> ::core::ffi::c_int,
-    >,
-    pub mremap: Option<unsafe extern "C" fn(*mut vm_area_struct) -> ::core::ffi::c_int>,
-    pub mprotect: Option<
-        unsafe extern "C" fn(
-            *mut vm_area_struct,
-            ::core::ffi::c_ulong,
-            ::core::ffi::c_ulong,
-            ::core::ffi::c_ulong,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub fault: Option<unsafe extern "C" fn(*mut vm_fault) -> vm_fault_t>,
-    pub huge_fault: Option<unsafe extern "C" fn(*mut vm_fault, ::core::ffi::c_uint) -> vm_fault_t>,
-    pub map_pages: Option<
-        unsafe extern "C" fn(
-            *mut vm_fault,
-            ::core::ffi::c_ulong,
-            ::core::ffi::c_ulong,
-        ) -> vm_fault_t,
-    >,
-    pub pagesize: Option<unsafe extern "C" fn(*mut vm_area_struct) -> ::core::ffi::c_ulong>,
-    pub page_mkwrite: Option<unsafe extern "C" fn(*mut vm_fault) -> vm_fault_t>,
-    pub pfn_mkwrite: Option<unsafe extern "C" fn(*mut vm_fault) -> vm_fault_t>,
-    pub access: Option<
-        unsafe extern "C" fn(
-            *mut vm_area_struct,
-            ::core::ffi::c_ulong,
-            *mut ::core::ffi::c_void,
-            ::core::ffi::c_int,
-            ::core::ffi::c_int,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub name: Option<unsafe extern "C" fn(*mut vm_area_struct) -> *const ::core::ffi::c_char>,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-    pub __kabi_reserved3: u64_0,
-    pub __kabi_reserved4: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct vm_area_struct {
-    pub c2rust_unnamed: C2Rust_Unnamed_97,
-    pub vm_mm: *mut mm_struct,
-    pub vm_page_prot: pgprot_t,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_96,
-    pub vm_lock_seq: ::core::ffi::c_uint,
-    pub anon_vma_chain: list_head,
-    pub anon_vma: *mut anon_vma,
-    pub vm_ops: *const vm_operations_struct,
-    pub vm_pgoff: ::core::ffi::c_ulong,
-    pub vm_file: *mut file,
-    pub vm_private_data: *mut ::core::ffi::c_void,
-    pub swap_readahead_info: atomic_long_t,
-    pub vm_refcnt: refcount_t,
-    pub shared: C2Rust_Unnamed_15,
-    pub anon_name: *mut anon_vma_name,
-    pub vm_userfaultfd_ctx: vm_userfaultfd_ctx,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-    pub __kabi_reserved3: u64_0,
-    pub __kabi_reserved4: u64_0,
-}
+pub type vm_operations_struct = kernel::bindings::vm_operations_struct;
+pub type vm_area_struct = kernel::bindings::vm_area_struct;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct vm_userfaultfd_ctx {
@@ -2328,77 +2066,7 @@ pub struct C2Rust_Unnamed_22 {
     pub lock: spinlock_t,
     pub count: ::core::ffi::c_int,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct super_block {
-    pub s_list: list_head,
-    pub s_dev: dev_t,
-    pub s_blocksize_bits: ::core::ffi::c_uchar,
-    pub s_blocksize: ::core::ffi::c_ulong,
-    pub s_maxbytes: loff_t,
-    pub s_type: *mut file_system_type,
-    pub s_op: *const super_operations,
-    pub dq_op: *const dquot_operations,
-    pub s_qcop: *const quotactl_ops,
-    pub s_export_op: *const export_operations,
-    pub s_flags: ::core::ffi::c_ulong,
-    pub s_iflags: ::core::ffi::c_ulong,
-    pub s_magic: ::core::ffi::c_ulong,
-    pub s_root: *mut dentry,
-    pub s_umount: rw_semaphore,
-    pub s_count: ::core::ffi::c_int,
-    pub s_active: atomic_t,
-    pub s_security: *mut ::core::ffi::c_void,
-    pub s_xattr: *const *const xattr_handler,
-    pub s_cop: *const fscrypt_operations,
-    pub s_master_keys: *mut fscrypt_keyring,
-    pub s_vop: *const fsverity_operations,
-    pub s_encoding: *mut unicode_map,
-    pub s_encoding_flags: __u16,
-    pub s_roots: hlist_bl_head,
-    pub s_mounts: *mut mount,
-    pub s_bdev: *mut block_device,
-    pub s_bdev_file: *mut file,
-    pub s_bdi: *mut backing_dev_info,
-    pub s_mtd: *mut mtd_info,
-    pub s_instances: hlist_node,
-    pub s_quota_types: ::core::ffi::c_uint,
-    pub s_dquot: quota_info,
-    pub s_writers: sb_writers,
-    pub s_fs_info: *mut ::core::ffi::c_void,
-    pub s_time_gran: u32_0,
-    pub s_time_min: time64_t,
-    pub s_time_max: time64_t,
-    pub s_fsnotify_mask: u32_0,
-    pub s_fsnotify_info: *mut fsnotify_sb_info,
-    pub s_id: [::core::ffi::c_char; 32],
-    pub s_uuid: uuid_t,
-    pub s_uuid_len: u8_0,
-    pub s_sysfs_name: [::core::ffi::c_char; 37],
-    pub s_max_links: ::core::ffi::c_uint,
-    pub s_d_flags: ::core::ffi::c_uint,
-    pub s_vfs_rename_mutex: mutex,
-    pub s_subtype: *const ::core::ffi::c_char,
-    pub __s_d_op: *const dentry_operations,
-    pub cleancache_poolid: ::core::ffi::c_int,
-    pub s_shrink: *mut shrinker,
-    pub s_remove_count: atomic_long_t,
-    pub s_readonly_remount: ::core::ffi::c_int,
-    pub s_wb_err: errseq_t,
-    pub s_dio_done_wq: *mut workqueue_struct,
-    pub s_pins: hlist_head,
-    pub s_user_ns: *mut user_namespace,
-    pub s_dentry_lru: list_lru,
-    pub s_inode_lru: list_lru,
-    pub rcu: callback_head,
-    pub destroy_work: work_struct,
-    pub s_sync_lock: mutex,
-    pub s_stack_depth: ::core::ffi::c_int,
-    pub s_inode_list_lock: spinlock_t,
-    pub s_inodes: list_head,
-    pub s_inode_wblist_lock: spinlock_t,
-    pub s_inodes_wb: list_head,
-}
+pub type super_block = kernel::bindings::super_block;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct list_lru {
@@ -2576,17 +2244,7 @@ pub struct C2Rust_Unnamed_25 {
     pub count: ::core::ffi::c_int,
     pub nreg: ::core::ffi::c_int,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct rw_semaphore {
-    pub count: atomic_long_t,
-    pub owner: atomic_long_t,
-    pub osq: optimistic_spin_queue,
-    pub wait_lock: raw_spinlock_t,
-    pub wait_list: list_head,
-    pub android_vendor_data1: u64_0,
-    pub android_oem_data1: [u64_0; 2],
-}
+pub type rw_semaphore = kernel::bindings::rw_semaphore;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct key {
@@ -3535,15 +3193,7 @@ pub struct psi_group {
     pub rtpoll_next_update: u64_0,
     pub rtpoll_until: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct psi_group_cpu {
-    pub tasks: [::core::ffi::c_uint; 4],
-    pub state_mask: u32_0,
-    pub times: [u32_0; 8],
-    pub state_start: u64_0,
-    pub times_prev: [[u32_0; 8]; 2],
-}
+pub type psi_group_cpu = kernel::bindings::psi_group_cpu;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct prev_cputime {
@@ -3602,50 +3252,7 @@ pub struct css_set {
     pub dead: bool_0,
     pub callback_head: callback_head,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct dentry_operations {
-    pub d_revalidate: Option<
-        unsafe extern "C" fn(
-            *mut inode,
-            *const qstr,
-            *mut dentry,
-            ::core::ffi::c_uint,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub d_weak_revalidate:
-        Option<unsafe extern "C" fn(*mut dentry, ::core::ffi::c_uint) -> ::core::ffi::c_int>,
-    pub d_hash: Option<unsafe extern "C" fn(*const dentry, *mut qstr) -> ::core::ffi::c_int>,
-    pub d_compare: Option<
-        unsafe extern "C" fn(
-            *const dentry,
-            ::core::ffi::c_uint,
-            *const ::core::ffi::c_char,
-            *const qstr,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub d_delete: Option<unsafe extern "C" fn(*const dentry) -> ::core::ffi::c_int>,
-    pub d_init: Option<unsafe extern "C" fn(*mut dentry) -> ::core::ffi::c_int>,
-    pub d_release: Option<unsafe extern "C" fn(*mut dentry) -> ()>,
-    pub d_prune: Option<unsafe extern "C" fn(*mut dentry) -> ()>,
-    pub d_iput: Option<unsafe extern "C" fn(*mut dentry, *mut inode) -> ()>,
-    pub d_dname: Option<
-        unsafe extern "C" fn(
-            *mut dentry,
-            *mut ::core::ffi::c_char,
-            ::core::ffi::c_int,
-        ) -> *mut ::core::ffi::c_char,
-    >,
-    pub d_automount: Option<unsafe extern "C" fn(*mut path) -> *mut vfsmount>,
-    pub d_manage: Option<unsafe extern "C" fn(*const path, bool_0) -> ::core::ffi::c_int>,
-    pub d_real: Option<unsafe extern "C" fn(*mut dentry, d_real_type) -> *mut dentry>,
-    pub d_unalias_trylock: Option<unsafe extern "C" fn(*const dentry) -> bool_0>,
-    pub d_unalias_unlock: Option<unsafe extern "C" fn(*const dentry) -> ()>,
-    pub d_canonical_path:
-        Option<unsafe extern "C" fn(*const path, *mut path) -> ::core::ffi::c_int>,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-}
+pub type dentry_operations = kernel::bindings::dentry_operations;
 pub type d_real_type = ::core::ffi::c_uint;
 pub const D_REAL_METADATA: d_real_type = 1;
 pub const D_REAL_DATA: d_real_type = 0;
@@ -3855,15 +3462,7 @@ pub struct bio_vec {
     pub bv_len: ::core::ffi::c_uint,
     pub bv_offset: ::core::ffi::c_uint,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct page {
-    pub flags: memdesc_flags_t,
-    pub c2rust_unnamed: C2Rust_Unnamed_48,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_47,
-    pub _refcount: atomic_t,
-    pub memcg_data: ::core::ffi::c_ulong,
-}
+pub type page = kernel::bindings::page;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_47 {
@@ -3956,14 +3555,7 @@ pub union C2Rust_Unnamed_55 {
     pub ki_waitq: *mut wait_page_queue,
     pub dio_complete: Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ssize_t>,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct folio {
-    pub c2rust_unnamed: C2Rust_Unnamed_65,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_60,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_58,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_56,
-}
+pub type folio = kernel::bindings::folio;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_56 {
@@ -4124,20 +3716,7 @@ pub struct dev_pagemap_ops {
         ) -> ::core::ffi::c_int,
     >,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct vm_fault {
-    pub c2rust_unnamed: C2Rust_Unnamed_74,
-    pub flags: fault_flag,
-    pub pmd: *mut pmd_t,
-    pub pud: *mut pud_t,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_73,
-    pub cow_page: *mut page,
-    pub page: *mut page,
-    pub pte: *mut pte_t,
-    pub ptl: *mut spinlock_t,
-    pub prealloc_pte: pgtable_t,
-}
+pub type vm_fault = kernel::bindings::vm_fault;
 pub type pgtable_t = *mut page;
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -4807,17 +4386,7 @@ pub struct hrtimer {
     pub is_soft: u8_0,
     pub is_hard: u8_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct hrtimer_clock_base {
-    pub cpu_base: *mut hrtimer_cpu_base,
-    pub index: ::core::ffi::c_uint,
-    pub clockid: clockid_t,
-    pub seq: seqcount_raw_spinlock_t,
-    pub running: *mut hrtimer,
-    pub active: timerqueue_head,
-    pub offset: ktime_t,
-}
+pub type hrtimer_clock_base = kernel::bindings::hrtimer_clock_base;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct timerqueue_head {
@@ -4835,26 +4404,7 @@ pub type seqcount_raw_spinlock_t = seqcount_raw_spinlock;
 pub struct seqcount_raw_spinlock {
     pub seqcount: seqcount_t,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct hrtimer_cpu_base {
-    pub lock: raw_spinlock_t,
-    pub cpu: ::core::ffi::c_uint,
-    pub active_bases: ::core::ffi::c_uint,
-    pub clock_was_set_seq: ::core::ffi::c_uint,
-    pub hres_active_in_hrtirq_hang_detected_softirq_activated_online: [u8; 1],
-    pub c2rust_padding: [u8; 3],
-    pub nr_events: ::core::ffi::c_uint,
-    pub nr_retries: ::core::ffi::c_ushort,
-    pub nr_hangs: ::core::ffi::c_ushort,
-    pub max_hang_time: ::core::ffi::c_uint,
-    pub expires_next: ktime_t,
-    pub next_timer: *mut hrtimer,
-    pub softirq_expires_next: ktime_t,
-    pub softirq_next_timer: *mut hrtimer,
-    pub clock_base: [hrtimer_clock_base; 8],
-    pub csd: call_single_data_t,
-}
+pub type hrtimer_cpu_base = kernel::bindings::hrtimer_cpu_base;
 pub type call_single_data_t = __call_single_data;
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -5192,13 +4742,8 @@ pub struct vm_area_desc {
 pub struct pgprot_t {
     pub pgprot: ptdesc_t,
 }
-pub type vm_flags_t = ::core::ffi::c_ulong;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct mm_struct {
-    pub c2rust_unnamed: C2Rust_Unnamed_80,
-    pub cpu_bitmap: [::core::ffi::c_ulong; 0],
-}
+pub type vm_flags_t = usize;
+pub type mm_struct = kernel::bindings::mm_struct;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_80 {
@@ -5383,126 +4928,7 @@ pub union C2Rust_Unnamed_85 {
     pub i_nlink: ::core::ffi::c_uint,
     pub __i_nlink: ::core::ffi::c_uint,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct inode_operations {
-    pub lookup:
-        Option<unsafe extern "C" fn(*mut inode, *mut dentry, ::core::ffi::c_uint) -> *mut dentry>,
-    pub get_link: Option<
-        unsafe extern "C" fn(
-            *mut dentry,
-            *mut inode,
-            *mut delayed_call,
-        ) -> *const ::core::ffi::c_char,
-    >,
-    pub permission: Option<
-        unsafe extern "C" fn(*mut mnt_idmap, *mut inode, ::core::ffi::c_int) -> ::core::ffi::c_int,
-    >,
-    pub get_inode_acl:
-        Option<unsafe extern "C" fn(*mut inode, ::core::ffi::c_int, bool_0) -> *mut posix_acl>,
-    pub readlink: Option<
-        unsafe extern "C" fn(
-            *mut dentry,
-            *mut ::core::ffi::c_char,
-            ::core::ffi::c_int,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub create: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *mut inode,
-            *mut dentry,
-            umode_t,
-            bool_0,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub link:
-        Option<unsafe extern "C" fn(*mut dentry, *mut inode, *mut dentry) -> ::core::ffi::c_int>,
-    pub unlink: Option<unsafe extern "C" fn(*mut inode, *mut dentry) -> ::core::ffi::c_int>,
-    pub symlink: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *mut inode,
-            *mut dentry,
-            *const ::core::ffi::c_char,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub mkdir: Option<
-        unsafe extern "C" fn(*mut mnt_idmap, *mut inode, *mut dentry, umode_t) -> *mut dentry,
-    >,
-    pub rmdir: Option<unsafe extern "C" fn(*mut inode, *mut dentry) -> ::core::ffi::c_int>,
-    pub mknod: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *mut inode,
-            *mut dentry,
-            umode_t,
-            dev_t,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub rename: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *mut inode,
-            *mut dentry,
-            *mut inode,
-            *mut dentry,
-            ::core::ffi::c_uint,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub setattr:
-        Option<unsafe extern "C" fn(*mut mnt_idmap, *mut dentry, *mut iattr) -> ::core::ffi::c_int>,
-    pub getattr: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *const path,
-            *mut kstat,
-            u32_0,
-            ::core::ffi::c_uint,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub listxattr:
-        Option<unsafe extern "C" fn(*mut dentry, *mut ::core::ffi::c_char, size_t) -> ssize_t>,
-    pub fiemap: Option<
-        unsafe extern "C" fn(
-            *mut inode,
-            *mut fiemap_extent_info,
-            u64_0,
-            u64_0,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub update_time:
-        Option<unsafe extern "C" fn(*mut inode, ::core::ffi::c_int) -> ::core::ffi::c_int>,
-    pub atomic_open: Option<
-        unsafe extern "C" fn(
-            *mut inode,
-            *mut dentry,
-            *mut file,
-            ::core::ffi::c_uint,
-            umode_t,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub tmpfile: Option<
-        unsafe extern "C" fn(*mut mnt_idmap, *mut inode, *mut file, umode_t) -> ::core::ffi::c_int,
-    >,
-    pub get_acl: Option<
-        unsafe extern "C" fn(*mut mnt_idmap, *mut dentry, ::core::ffi::c_int) -> *mut posix_acl,
-    >,
-    pub set_acl: Option<
-        unsafe extern "C" fn(
-            *mut mnt_idmap,
-            *mut dentry,
-            *mut posix_acl,
-            ::core::ffi::c_int,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub fileattr_set: Option<
-        unsafe extern "C" fn(*mut mnt_idmap, *mut dentry, *mut file_kattr) -> ::core::ffi::c_int,
-    >,
-    pub fileattr_get:
-        Option<unsafe extern "C" fn(*mut dentry, *mut file_kattr) -> ::core::ffi::c_int>,
-    pub get_offset_ctx: Option<unsafe extern "C" fn(*mut inode) -> *mut offset_ctx>,
-}
+pub type inode_operations = kernel::bindings::inode_operations;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct offset_ctx {
@@ -8120,13 +7546,7 @@ pub struct trace_seq {
     pub full: ::core::ffi::c_int,
     pub buffer: [::core::ffi::c_char; 8156],
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct seq_buf {
-    pub buffer: *mut ::core::ffi::c_char,
-    pub size: size_t,
-    pub len: size_t,
-}
+pub type seq_buf = kernel::bindings::seq_buf;
 pub type cpumask_var_t = [cpumask; 1];
 pub type print_line_t = ::core::ffi::c_uint;
 pub const TRACE_TYPE_NO_CONSUME: print_line_t = 3;
@@ -8403,33 +7823,7 @@ pub struct perf_event_pmu_context {
     pub callback_head: callback_head,
     pub rotate_necessary: ::core::ffi::c_int,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_event_context {
-    pub lock: raw_spinlock_t,
-    pub mutex: mutex,
-    pub pmu_ctx_list: list_head,
-    pub pinned_groups: perf_event_groups,
-    pub flexible_groups: perf_event_groups,
-    pub event_list: list_head,
-    pub nr_events: ::core::ffi::c_int,
-    pub nr_user: ::core::ffi::c_int,
-    pub is_active: ::core::ffi::c_int,
-    pub nr_stat: ::core::ffi::c_int,
-    pub nr_freq: ::core::ffi::c_int,
-    pub rotate_disable: ::core::ffi::c_int,
-    pub refcount: refcount_t,
-    pub task: *mut task_struct,
-    pub time: u64_0,
-    pub timestamp: u64_0,
-    pub timeoffset: u64_0,
-    pub parent_ctx: *mut perf_event_context,
-    pub parent_gen: u64_0,
-    pub generation: u64_0,
-    pub pin_count: ::core::ffi::c_int,
-    pub callback_head: callback_head,
-    pub nr_no_switch_fast: local_t,
-}
+pub type perf_event_context = kernel::bindings::perf_event_context;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct local_t {
@@ -8441,66 +7835,7 @@ pub struct perf_event_groups {
     pub tree: rb_root,
     pub index: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct pmu {
-    pub entry: list_head,
-    pub events_lock: spinlock_t,
-    pub events: list_head,
-    pub module: *mut module,
-    pub dev: *mut device,
-    pub parent: *mut device,
-    pub attr_groups: *mut *const attribute_group,
-    pub attr_update: *mut *const attribute_group,
-    pub name: *const ::core::ffi::c_char,
-    pub type_0: ::core::ffi::c_int,
-    pub capabilities: ::core::ffi::c_int,
-    pub scope: ::core::ffi::c_uint,
-    pub cpu_pmu_context: *mut *mut perf_cpu_pmu_context,
-    pub exclusive_cnt: atomic_t,
-    pub task_ctx_nr: ::core::ffi::c_int,
-    pub hrtimer_interval_ms: ::core::ffi::c_int,
-    pub nr_addr_filters: ::core::ffi::c_uint,
-    pub pmu_enable: Option<unsafe extern "C" fn(*mut pmu) -> ()>,
-    pub pmu_disable: Option<unsafe extern "C" fn(*mut pmu) -> ()>,
-    pub event_init: Option<unsafe extern "C" fn(*mut perf_event) -> ::core::ffi::c_int>,
-    pub event_mapped: Option<unsafe extern "C" fn(*mut perf_event, *mut mm_struct) -> ()>,
-    pub event_unmapped: Option<unsafe extern "C" fn(*mut perf_event, *mut mm_struct) -> ()>,
-    pub add:
-        Option<unsafe extern "C" fn(*mut perf_event, ::core::ffi::c_int) -> ::core::ffi::c_int>,
-    pub del: Option<unsafe extern "C" fn(*mut perf_event, ::core::ffi::c_int) -> ()>,
-    pub start: Option<unsafe extern "C" fn(*mut perf_event, ::core::ffi::c_int) -> ()>,
-    pub stop: Option<unsafe extern "C" fn(*mut perf_event, ::core::ffi::c_int) -> ()>,
-    pub read: Option<unsafe extern "C" fn(*mut perf_event) -> ()>,
-    pub start_txn: Option<unsafe extern "C" fn(*mut pmu, ::core::ffi::c_uint) -> ()>,
-    pub commit_txn: Option<unsafe extern "C" fn(*mut pmu) -> ::core::ffi::c_int>,
-    pub cancel_txn: Option<unsafe extern "C" fn(*mut pmu) -> ()>,
-    pub event_idx: Option<unsafe extern "C" fn(*mut perf_event) -> ::core::ffi::c_int>,
-    pub sched_task:
-        Option<unsafe extern "C" fn(*mut perf_event_pmu_context, *mut task_struct, bool_0) -> ()>,
-    pub task_ctx_cache: *mut kmem_cache,
-    pub setup_aux: Option<
-        unsafe extern "C" fn(
-            *mut perf_event,
-            *mut *mut ::core::ffi::c_void,
-            ::core::ffi::c_int,
-            bool_0,
-        ) -> *mut ::core::ffi::c_void,
-    >,
-    pub free_aux: Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ()>,
-    pub snapshot_aux: Option<
-        unsafe extern "C" fn(
-            *mut perf_event,
-            *mut perf_output_handle,
-            ::core::ffi::c_ulong,
-        ) -> ::core::ffi::c_long,
-    >,
-    pub addr_filters_validate: Option<unsafe extern "C" fn(*mut list_head) -> ::core::ffi::c_int>,
-    pub addr_filters_sync: Option<unsafe extern "C" fn(*mut perf_event) -> ()>,
-    pub aux_output_match: Option<unsafe extern "C" fn(*mut perf_event) -> ::core::ffi::c_int>,
-    pub filter: Option<unsafe extern "C" fn(*mut pmu, ::core::ffi::c_int) -> bool_0>,
-    pub check_period: Option<unsafe extern "C" fn(*mut perf_event, u64_0) -> ::core::ffi::c_int>,
-}
+pub type pmu = kernel::bindings::pmu;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct perf_output_handle {
@@ -8629,11 +7964,7 @@ pub struct arch_hw_breakpoint {
     pub trigger: u64_0,
     pub ctrl: arch_hw_breakpoint_ctrl,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct arch_hw_breakpoint_ctrl {
-    pub __reserved_len_type_0_privilege_enabled: [u8; 4],
-}
+pub type arch_hw_breakpoint_ctrl = kernel::bindings::arch_hw_breakpoint_ctrl;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_207 {
@@ -8680,34 +8011,7 @@ pub struct hw_perf_event_extra {
     pub alloc: ::core::ffi::c_int,
     pub idx: ::core::ffi::c_int,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_event_attr {
-    pub type_0: __u32,
-    pub size: __u32,
-    pub config: __u64,
-    pub c2rust_unnamed: C2Rust_Unnamed_217,
-    pub sample_type: __u64,
-    pub read_format: __u64,
-    pub disabled_inherit_pinned_exclusive_exclude_user_exclude_kernel_exclude_hv_exclude_idle_mmap_comm_freq_inherit_stat_enable_on_exec_task_watermark_precise_ip_mmap_data_sample_id_all_exclude_host_exclude_guest_exclude_callchain_kernel_exclude_callchain_user_mmap2_comm_exec_use_clockid_context_switch_write_backward_namespaces_ksymbol_bpf_event_aux_output_cgroup_text_poke_build_id_inherit_thread_remove_on_exec_sigtrap___reserved_1:
-        [u8; 8],
-    pub c2rust_unnamed_0: C2Rust_Unnamed_216,
-    pub bp_type: __u32,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_215,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_214,
-    pub branch_sample_type: __u64,
-    pub sample_regs_user: __u64,
-    pub sample_stack_user: __u32,
-    pub clockid: __s32,
-    pub sample_regs_intr: __u64,
-    pub aux_watermark: __u32,
-    pub sample_max_stack: __u16,
-    pub __reserved_2: __u16,
-    pub aux_sample_size: __u32,
-    pub c2rust_unnamed_3: C2Rust_Unnamed_212,
-    pub sig_data: __u64,
-    pub config3: __u64,
-}
+pub type perf_event_attr = kernel::bindings::perf_event_attr;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_212 {
@@ -8788,21 +8092,7 @@ pub struct cpu_context {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct bpf_run_ctx {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct vm_struct {
-    pub next: *mut vm_struct,
-    pub addr: *mut ::core::ffi::c_void,
-    pub size: ::core::ffi::c_ulong,
-    pub flags: ::core::ffi::c_ulong,
-    pub pages: *mut *mut page,
-    pub page_order: ::core::ffi::c_uint,
-    pub nr_pages: ::core::ffi::c_uint,
-    pub phys_addr: phys_addr_t,
-    pub caller: *const ::core::ffi::c_void,
-    pub requested_size: ::core::ffi::c_ulong,
-    pub android_oem_data1: u64_0,
-}
+pub type vm_struct = kernel::bindings::vm_struct;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct kmap_ctrl {}
@@ -8861,20 +8151,7 @@ pub struct C2Rust_Unnamed_222 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct arch_uprobe_task {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct return_instance {
-    pub hprobe: hprobe,
-    pub func: ::core::ffi::c_ulong,
-    pub stack: ::core::ffi::c_ulong,
-    pub orig_ret_vaddr: ::core::ffi::c_ulong,
-    pub chained: bool_0,
-    pub cons_cnt: ::core::ffi::c_int,
-    pub next: *mut return_instance,
-    pub rcu: callback_head,
-    pub consumer: return_consumer,
-    pub extra_consumers: *mut return_consumer,
-}
+pub type return_instance = kernel::bindings::return_instance;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct return_consumer {
@@ -8917,15 +8194,7 @@ pub struct tlbflush_unmap_batch {
 pub struct arch_tlbflush_unmap_batch {
     pub __kabi_reserved1: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_ctx_data {
-    pub callback_head: callback_head,
-    pub refcount: refcount_t,
-    pub global: ::core::ffi::c_int,
-    pub ctx_cache: *mut kmem_cache,
-    pub data: *mut ::core::ffi::c_void,
-}
+pub type perf_ctx_data = kernel::bindings::perf_ctx_data;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct compat_robust_list_head {
@@ -9324,82 +8593,7 @@ pub struct signal_struct {
     pub __kabi_reserved4: u64_0,
     pub android_oem_data1: u64_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct taskstats {
-    pub version: __u16,
-    pub ac_exitcode: __u32,
-    pub ac_flag: __u8,
-    pub ac_nice: __u8,
-    pub cpu_count: __u64,
-    pub cpu_delay_total: __u64,
-    pub blkio_count: __u64,
-    pub blkio_delay_total: __u64,
-    pub swapin_count: __u64,
-    pub swapin_delay_total: __u64,
-    pub cpu_run_real_total: __u64,
-    pub cpu_run_virtual_total: __u64,
-    pub ac_comm: [::core::ffi::c_char; 32],
-    pub ac_sched: __u8,
-    pub ac_pad: [__u8; 3],
-    pub ac_uid: __u32,
-    pub ac_gid: __u32,
-    pub ac_pid: __u32,
-    pub ac_ppid: __u32,
-    pub ac_btime: __u32,
-    pub ac_etime: __u64,
-    pub ac_utime: __u64,
-    pub ac_stime: __u64,
-    pub ac_minflt: __u64,
-    pub ac_majflt: __u64,
-    pub coremem: __u64,
-    pub virtmem: __u64,
-    pub hiwater_rss: __u64,
-    pub hiwater_vm: __u64,
-    pub read_char: __u64,
-    pub write_char: __u64,
-    pub read_syscalls: __u64,
-    pub write_syscalls: __u64,
-    pub read_bytes: __u64,
-    pub write_bytes: __u64,
-    pub cancelled_write_bytes: __u64,
-    pub nvcsw: __u64,
-    pub nivcsw: __u64,
-    pub ac_utimescaled: __u64,
-    pub ac_stimescaled: __u64,
-    pub cpu_scaled_run_real_total: __u64,
-    pub freepages_count: __u64,
-    pub freepages_delay_total: __u64,
-    pub thrashing_count: __u64,
-    pub thrashing_delay_total: __u64,
-    pub ac_btime64: __u64,
-    pub compact_count: __u64,
-    pub compact_delay_total: __u64,
-    pub ac_tgid: __u32,
-    pub ac_tgetime: __u64,
-    pub ac_exe_dev: __u64,
-    pub ac_exe_inode: __u64,
-    pub wpcopy_count: __u64,
-    pub wpcopy_delay_total: __u64,
-    pub irq_count: __u64,
-    pub irq_delay_total: __u64,
-    pub cpu_delay_max: __u64,
-    pub cpu_delay_min: __u64,
-    pub blkio_delay_max: __u64,
-    pub blkio_delay_min: __u64,
-    pub swapin_delay_max: __u64,
-    pub swapin_delay_min: __u64,
-    pub freepages_delay_max: __u64,
-    pub freepages_delay_min: __u64,
-    pub thrashing_delay_max: __u64,
-    pub thrashing_delay_min: __u64,
-    pub compact_delay_max: __u64,
-    pub compact_delay_min: __u64,
-    pub wpcopy_delay_max: __u64,
-    pub wpcopy_delay_min: __u64,
-    pub irq_delay_max: __u64,
-    pub irq_delay_min: __u64,
-}
+pub type taskstats = kernel::bindings::taskstats;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct rlimit {
@@ -9650,14 +8844,7 @@ pub struct sk_buff {
     pub users: refcount_t,
     pub extensions: *mut skb_ext,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct skb_ext {
-    pub refcnt: refcount_t,
-    pub offset: [u8_0; 1],
-    pub chunks: u8_0,
-    pub data: [::core::ffi::c_char; 0],
-}
+pub type skb_ext = kernel::bindings::skb_ext;
 pub type sk_buff_data_t = ::core::ffi::c_uint;
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -10603,22 +9790,7 @@ pub struct raw_notifier_head {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct ref_tracker_dir {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct files_struct {
-    pub count: atomic_t,
-    pub resize_in_progress: bool_0,
-    pub resize_wait: wait_queue_head_t,
-    pub fdt: *mut fdtable,
-    pub fdtab: fdtable,
-    pub dmabuf_info: *mut task_dma_buf_info,
-    pub file_lock: spinlock_t,
-    pub next_fd: ::core::ffi::c_uint,
-    pub close_on_exec_init: [::core::ffi::c_ulong; 1],
-    pub open_fds_init: [::core::ffi::c_ulong; 1],
-    pub full_fds_bits_init: [::core::ffi::c_ulong; 1],
-    pub fd_array: [*mut file; 64],
-}
+pub type files_struct = kernel::bindings::files_struct;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct fdtable {
@@ -10777,12 +9949,7 @@ pub struct C2Rust_sched_statistics_Inner {
 #[allow(dead_code, non_upper_case_globals)]
 const C2Rust_sched_statistics_PADDING: usize = ::core::mem::size_of::<sched_statistics>()
     - ::core::mem::size_of::<C2Rust_sched_statistics_Inner>();
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct uclamp_se {
-    pub value_bucket_id_active_user_defined: [u8; 3],
-    pub c2rust_padding: [u8; 1],
-}
+pub type uclamp_se = kernel::bindings::uclamp_se;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct sched_ext_entity {
@@ -11656,14 +10823,7 @@ pub struct genl_split_ops {
     pub flags: u8_0,
     pub validate: u8_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nla_policy {
-    pub type_0: u8_0,
-    pub validation_type: u8_0,
-    pub len: u16_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_353,
-}
+pub type nla_policy = kernel::bindings::nla_policy;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_353 {
@@ -20855,14 +20015,14 @@ unsafe extern "C" fn seq_puts(mut m: *mut seq_file, mut s: *const ::core::ffi::c
 }
 #[inline]
 unsafe extern "C" fn mmap_assert_write_locked(mut mm: *const mm_struct) {
-    rwsem_assert_held_write(&raw const (*mm).c2rust_unnamed.mmap_lock);
+    rwsem_assert_held_write(&raw const (*mm).__bindgen_anon_1.mmap_lock);
 }
 unsafe extern "C" fn __is_vma_write_locked(
     mut vma: *mut vm_area_struct,
     mut mm_lock_seq: *mut ::core::ffi::c_uint,
 ) -> bool_0 {
     mmap_assert_write_locked((*vma).vm_mm);
-    *mm_lock_seq = (*(*vma).vm_mm).c2rust_unnamed.mm_lock_seq.sequence;
+    *mm_lock_seq = (*(*vma).vm_mm).__bindgen_anon_1.mm_lock_seq.sequence;
     return (*vma).vm_lock_seq == *mm_lock_seq;
 }
 #[inline]
@@ -20879,7 +20039,7 @@ pub const VM_DONTCOPY: ::core::ffi::c_int = 0x20000 as ::core::ffi::c_int;
 pub const VM_MIXEDMAP: ::core::ffi::c_int = 0x10000000 as ::core::ffi::c_int;
 #[inline]
 unsafe extern "C" fn vm_flags_init(mut vma: *mut vm_area_struct, mut flags: vm_flags_t) {
-    (*vma).c2rust_unnamed_0.__vm_flags = flags;
+    (*vma).__bindgen_anon_2.__vm_flags = flags;
 }
 #[inline]
 unsafe extern "C" fn __vm_flags_mod(
@@ -20887,7 +20047,7 @@ unsafe extern "C" fn __vm_flags_mod(
     mut set: vm_flags_t,
     mut clear: vm_flags_t,
 ) {
-    vm_flags_init(vma, ((*vma).c2rust_unnamed_0.vm_flags | set) & !clear);
+    vm_flags_init(vma, ((*vma).__bindgen_anon_2.vm_flags | set) & !clear);
 }
 #[inline]
 unsafe extern "C" fn vm_flags_mod(
@@ -30846,15 +30006,12 @@ unsafe extern "C" fn binder_vma_open(mut vma: *mut vm_area_struct) {
         b"%d open vm area %lx-%lx (%ld K) vma %lx pagep %lx\n\0".as_ptr()
             as *const ::core::ffi::c_char,
         (*proc).pid,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_start,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_end,
-        (*vma)
-            .c2rust_unnamed
-            .c2rust_unnamed
-            .vm_end
-            .wrapping_sub((*vma).c2rust_unnamed.c2rust_unnamed.vm_start)
-            .wrapping_div(SZ_1K as ::core::ffi::c_ulong),
-        (*vma).c2rust_unnamed_0.vm_flags,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end
+            .wrapping_sub((*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start)
+            .wrapping_div(SZ_1K as usize),
+        (*vma).__bindgen_anon_2.vm_flags,
         (*vma).vm_page_prot.pgprot as ::core::ffi::c_ulong,
     );
 }
@@ -30865,15 +30022,12 @@ unsafe extern "C" fn binder_vma_close(mut vma: *mut vm_area_struct) {
         b"%d close vm area %lx-%lx (%ld K) vma %lx pagep %lx\n\0".as_ptr()
             as *const ::core::ffi::c_char,
         (*proc).pid,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_start,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_end,
-        (*vma)
-            .c2rust_unnamed
-            .c2rust_unnamed
-            .vm_end
-            .wrapping_sub((*vma).c2rust_unnamed.c2rust_unnamed.vm_start)
-            .wrapping_div(SZ_1K as ::core::ffi::c_ulong),
-        (*vma).c2rust_unnamed_0.vm_flags,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end
+            .wrapping_sub((*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start)
+            .wrapping_div(SZ_1K as usize),
+        (*vma).__bindgen_anon_2.vm_flags,
         (*vma).vm_page_prot.pgprot as ::core::ffi::c_ulong,
     );
     binder_alloc_vma_close(&raw mut (*proc).alloc);
@@ -30923,26 +30077,23 @@ unsafe extern "C" fn binder_mmap(
         b"%s: %d %lx-%lx (%ld K) vma %lx pagep %lx\n\0".as_ptr() as *const ::core::ffi::c_char,
         b"binder_mmap\0".as_ptr() as *const ::core::ffi::c_char,
         (*proc).pid,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_start,
-        (*vma).c2rust_unnamed.c2rust_unnamed.vm_end,
-        (*vma)
-            .c2rust_unnamed
-            .c2rust_unnamed
-            .vm_end
-            .wrapping_sub((*vma).c2rust_unnamed.c2rust_unnamed.vm_start)
-            .wrapping_div(SZ_1K as ::core::ffi::c_ulong),
-        (*vma).c2rust_unnamed_0.vm_flags,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end,
+        (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end
+            .wrapping_sub((*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start)
+            .wrapping_div(SZ_1K as usize),
+        (*vma).__bindgen_anon_2.vm_flags,
         (*vma).vm_page_prot.pgprot as ::core::ffi::c_ulong,
     );
-    if (*vma).c2rust_unnamed_0.vm_flags & FORBIDDEN_MMAP_FLAGS as vm_flags_t != 0 {
+    if (*vma).__bindgen_anon_2.vm_flags & FORBIDDEN_MMAP_FLAGS as vm_flags_t != 0 {
         ({
             _printk(
                 b"\x013binder: %s: %d %lx-%lx %s failed %d\n\0".as_ptr()
                     as *const ::core::ffi::c_char,
                 b"binder_mmap\0".as_ptr() as *const ::core::ffi::c_char,
                 (*proc).pid,
-                (*vma).c2rust_unnamed.c2rust_unnamed.vm_start,
-                (*vma).c2rust_unnamed.c2rust_unnamed.vm_end,
+                (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_start,
+                (*vma).__bindgen_anon_1.__bindgen_anon_1.vm_end,
                 b"bad vm_flags\0".as_ptr() as *const ::core::ffi::c_char,
                 -EPERM,
             );
@@ -36446,48 +35597,7 @@ impl dev_pm_info {
     }
 }
 
-impl hrtimer_cpu_base {
-    #[inline]
-    pub fn hres_active(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 0, 0) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_hres_active(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 0, 0, value as u64);
-    }
-    #[inline]
-    pub fn in_hrtirq(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 1, 1) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_in_hrtirq(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 1, 1, value as u64);
-    }
-    #[inline]
-    pub fn hang_detected(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 2, 2) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_hang_detected(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 2, 2, value as u64);
-    }
-    #[inline]
-    pub fn softirq_activated(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 3, 3) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_softirq_activated(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn online(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 4, 4) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_online(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.hres_active_in_hrtirq_hang_detected_softirq_activated_online, 4, 4, value as u64);
-    }
-}
+
 
 impl wakeup_source {
     #[inline]
@@ -36728,48 +35838,7 @@ impl C2Rust_Unnamed_200 {
     }
 }
 
-impl arch_hw_breakpoint_ctrl {
-    #[inline]
-    pub fn __reserved(&self) -> u32_0 {
-        __c2rust_bitfield_get(&self.__reserved_len_type_0_privilege_enabled, 0, 18) as u32_0
-    }
-    #[inline]
-    pub fn set___reserved(&mut self, value: u32_0) {
-        __c2rust_bitfield_set(&mut self.__reserved_len_type_0_privilege_enabled, 0, 18, value as u64);
-    }
-    #[inline]
-    pub fn len(&self) -> u32_0 {
-        __c2rust_bitfield_get(&self.__reserved_len_type_0_privilege_enabled, 19, 26) as u32_0
-    }
-    #[inline]
-    pub fn set_len(&mut self, value: u32_0) {
-        __c2rust_bitfield_set(&mut self.__reserved_len_type_0_privilege_enabled, 19, 26, value as u64);
-    }
-    #[inline]
-    pub fn type_0(&self) -> u32_0 {
-        __c2rust_bitfield_get(&self.__reserved_len_type_0_privilege_enabled, 27, 28) as u32_0
-    }
-    #[inline]
-    pub fn set_type_0(&mut self, value: u32_0) {
-        __c2rust_bitfield_set(&mut self.__reserved_len_type_0_privilege_enabled, 27, 28, value as u64);
-    }
-    #[inline]
-    pub fn privilege(&self) -> u32_0 {
-        __c2rust_bitfield_get(&self.__reserved_len_type_0_privilege_enabled, 29, 30) as u32_0
-    }
-    #[inline]
-    pub fn set_privilege(&mut self, value: u32_0) {
-        __c2rust_bitfield_set(&mut self.__reserved_len_type_0_privilege_enabled, 29, 30, value as u64);
-    }
-    #[inline]
-    pub fn enabled(&self) -> u32_0 {
-        __c2rust_bitfield_get(&self.__reserved_len_type_0_privilege_enabled, 31, 31) as u32_0
-    }
-    #[inline]
-    pub fn set_enabled(&mut self, value: u32_0) {
-        __c2rust_bitfield_set(&mut self.__reserved_len_type_0_privilege_enabled, 31, 31, value as u64);
-    }
-}
+
 
 impl C2Rust_Unnamed_213 {
     #[inline]
@@ -37330,40 +36399,7 @@ impl C2Rust_Unnamed_247 {
     }
 }
 
-impl uclamp_se {
-    #[inline]
-    pub fn value(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.value_bucket_id_active_user_defined, 0, 10) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_value(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.value_bucket_id_active_user_defined, 0, 10, value as u64);
-    }
-    #[inline]
-    pub fn bucket_id(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.value_bucket_id_active_user_defined, 11, 15) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_bucket_id(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.value_bucket_id_active_user_defined, 11, 15, value as u64);
-    }
-    #[inline]
-    pub fn active(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.value_bucket_id_active_user_defined, 16, 16) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_active(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.value_bucket_id_active_user_defined, 16, 16, value as u64);
-    }
-    #[inline]
-    pub fn user_defined(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.value_bucket_id_active_user_defined, 17, 17) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_user_defined(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.value_bucket_id_active_user_defined, 17, 17, value as u64);
-    }
-}
+
 
 impl sched_dl_entity {
     #[inline]
@@ -38184,8 +37220,8 @@ mod binder_static_assertions {
     kernel::static_assert!(::core::mem::align_of::<module_memory>() == ::core::mem::align_of::<kernel::bindings::module_memory>());
     kernel::static_assert!(::core::mem::size_of::<mutex>() == ::core::mem::size_of::<kernel::bindings::mutex>());
     kernel::static_assert!(::core::mem::align_of::<mutex>() == ::core::mem::align_of::<kernel::bindings::mutex>());
-    kernel::static_assert!(::core::mem::size_of::<net>() == ::core::mem::size_of::<kernel::bindings::net>());
-    kernel::static_assert!(::core::mem::align_of::<net>() == ::core::mem::align_of::<kernel::bindings::net>());
+    // kernel::static_assert!(::core::mem::size_of::<net>() == ::core::mem::size_of::<kernel::bindings::net>());
+    // kernel::static_assert!(::core::mem::align_of::<net>() == ::core::mem::align_of::<kernel::bindings::net>());
     kernel::static_assert!(::core::mem::size_of::<netlink_callback>() == ::core::mem::size_of::<kernel::bindings::netlink_callback>());
     kernel::static_assert!(::core::mem::align_of::<netlink_callback>() == ::core::mem::align_of::<kernel::bindings::netlink_callback>());
     kernel::static_assert!(::core::mem::size_of::<netlink_ext_ack>() == ::core::mem::size_of::<kernel::bindings::netlink_ext_ack>());
