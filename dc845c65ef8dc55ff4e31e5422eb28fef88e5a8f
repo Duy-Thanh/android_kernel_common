@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fba61d3_ebdea71d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-21T05:59:32Z",
+      "side": 1,
+      "message": "OK. Then let\u0027s add it back to refill_memcache() for better reusability and use READ_ONCE in this function.",
+      "parentUuid": "b14ac2e7_10d326be",
+      "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcac2883_3122fb1b",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 4
