@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe7e91b_710908e5",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-21T02:08:52Z",
+      "side": 1,
+      "message": "What I\u0027m used to seeing, and what I think we should do here is take this patch `FROMGIT`, and then have an `ANDROID` patch for the ABI fixups like this including the abi.stg changes.",
+      "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
