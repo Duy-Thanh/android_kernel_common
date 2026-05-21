@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21149273_167921f1",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-21T05:57:15Z",
+      "side": 1,
+      "message": "\u003e Also, from a different angle: so, you are proposing to use zero/non-zero address (instead of present/non-present entry) as an indication whether the address is valid or not, but what if a zero address is legitimately used as a PASID directory or page table address in a present context entry? :) We know that Linux kernel will not do that, but does the VT-d spec forbid doing that?\n\nSeems pKVM also doesn\u0027t forbid to use zero address as PASID directory, as long as the pasid table memory page is able to be donated? In this case, 0 address is also an valid address for pkvm to free. Then the only indicator is the present bit.\n\nAs Vineeth pointed out, currently the pKVM is implemented to unpreset the context entry together with clearing the address bits via context_clear_entry(), I agree it makes sense to use WARN_ON() for the case of non-present but have non-zero address bits.",
+      "parentUuid": "6ecd6325_201b4eed",
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46e7eb87_0ec25067",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 4
@@ -159,6 +177,24 @@
           ]
         }
       ],
+      "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c6e3ba_6f3b2331",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-21T05:57:15Z",
+      "side": 1,
+      "message": "Sure, and probably add an else case for non-present check to `WARN_ON(context-\u003elo \u0026 VTD_PAGE_MASK);`",
+      "parentUuid": "46e7eb87_0ec25067",
       "revId": "df895caff7af1ed71d0630843f13aa805dee185c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
