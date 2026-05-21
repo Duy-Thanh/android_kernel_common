@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be72169e_92846502",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-21T20:13:27Z",
+      "side": 1,
+      "message": "Breaks KMI. Please refactor to avoid changing `struct ufshcd_tx_eq_params`.\n```\ntype \u0027struct ufshcd_tx_eq_params\u0027 changed\n  member \u0027bool is_trained\u0027 was added\n\ntype \u0027enum attr_idn\u0027 changed\n  enumerator \u0027QUERY_ATTR_IDN_TX_EQ_GN_SETTINGS\u0027 (71) was added\n  ... 1 other enumerator(s) added\n```",
+      "revId": "56d19422235b0fe549f6405664c24a64dfc6badf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
