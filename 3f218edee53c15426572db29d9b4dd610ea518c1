@@ -145,6 +145,24 @@
       "parentUuid": "c78f8e1e_f952ceab",
       "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9c275b_0e149347",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T09:33:50Z",
+      "side": 1,
+      "message": "\u003e Although both left and right objects are the same type, maybe semantically it is more clear to use typeof(shared_vcpu-\u003earch.exception) as this is the structure the volatile intent is about?\n\nSure, SGTM.",
+      "parentUuid": "1d495b35_60a28cb2",
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
