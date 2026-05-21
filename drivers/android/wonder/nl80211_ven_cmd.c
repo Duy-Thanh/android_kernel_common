@@ -779,7 +779,8 @@ static int wonder_vendor_cmd_set_station_info(struct wiphy *wiphy,
 	action = nla_get_u32(tb[WONDER_VEN_ATTR_STA_INFO_ACTION]);
 
 	if (nla_len(tb[WONDER_VEN_ATTR_STA_INFO_MAC]) != ETH_ALEN) {
-		pr_err("Invalid MAC address length: %d\n", nla_len(tb[WONDER_VEN_ATTR_STA_INFO_MAC]));
+		pr_err("Invalid MAC address length: %d\n",
+		       nla_len(tb[WONDER_VEN_ATTR_STA_INFO_MAC]));
 		return -EINVAL;
 	}
 	nla_memcpy(sta_info.mac, tb[WONDER_VEN_ATTR_STA_INFO_MAC], ETH_ALEN);

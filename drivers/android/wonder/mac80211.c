@@ -567,7 +567,7 @@ static void wonder_tx(struct ieee80211_hw *hw,
 
 	if (IS_ENABLED(CONFIG_ANDROID_WONDER_TX_DEBUG)) {
 		pr_err("Forward packet to pdev %s, len %d\n", pdev->name, skb->len);
-		print_hex_dump(KERN_DEBUG, "wonder_tx: ", DUMP_PREFIX_NONE, 16, 1,
+		print_hex_dump(KERN_DEBUG, __func__, DUMP_PREFIX_NONE, 16, 1,
 			       skb->data, skb->len, false);
 	}
 
@@ -634,7 +634,7 @@ static int wonder_start(struct ieee80211_hw *hw)
 {
 	struct wonder_data *wonder = hw->priv;
 	struct wondertap_init_params *init_params = &wonder->wondertap_data.init_params;
-	const char* pdev_name = physical_name;
+	const char *pdev_name = physical_name;
 	int ret;
 
 	/* This should turn on the hardware and frame reception. */
@@ -996,7 +996,7 @@ static int wonder_update_station_state(struct ieee80211_hw *hw,
 	struct wonder_data *wonder = hw->priv;
 	struct wondertap_station_info *sta_info;
 
-	swork = kzalloc(sizeof(*swork), GFP_ATOMIC);
+	swork = kzalloc_obj(*swork, GFP_ATOMIC);
 	if (!swork)
 		return -ENOMEM;
 
