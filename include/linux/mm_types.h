@@ -753,6 +753,14 @@ struct vm_area_struct {
 	 * slowpath.
 	 */
 	unsigned int vm_lock_seq;
+<<<<<<< HEAD   (2b340f21d2b0c29d5fb535e69381ae628a3388ef Merge ac0481830d98 ("ksmbd: rewrite stop_sessions() with res)
+||||||| BASE   (ac0481830d98cbd90c332b7cdc7d076c8c59dcf3 ksmbd: rewrite stop_sessions() with restartable iteration)
+	/* Unstable RCU readers are allowed to read this. */
+	struct vma_lock *vm_lock;
+=======
+	/* Unstable RCU readers are allowed to read this. */
+	struct vma_lock *vm_lock;
+>>>>>>> BRANCH (1bda80a7be91404fb849ccdde08437e86e38e816 mm: convert mm_lock_seq to a proper seqcount)
 #endif
 	/*
 	 * A file's MAP_PRIVATE vma can be in both i_mmap tree and anon_vma

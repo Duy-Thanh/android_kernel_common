@@ -222,6 +222,12 @@ struct vm_area_struct {
 	 * slowpath.
 	 */
 	unsigned int vm_lock_seq;
+<<<<<<< HEAD   (2b340f21d2b0c29d5fb535e69381ae628a3388ef Merge ac0481830d98 ("ksmbd: rewrite stop_sessions() with res)
+||||||| BASE   (ac0481830d98cbd90c332b7cdc7d076c8c59dcf3 ksmbd: rewrite stop_sessions() with restartable iteration)
+	struct vma_lock *vm_lock;
+=======
+	struct vma_lock *vm_lock;
+>>>>>>> BRANCH (1bda80a7be91404fb849ccdde08437e86e38e816 mm: convert mm_lock_seq to a proper seqcount)
 #endif
 
 	/*
@@ -400,9 +406,27 @@ static inline void vma_assert_attached(struct vm_area_struct *vma)
 	WARN_ON_ONCE(!refcount_read(&vma->vm_refcnt));
 }
 
+<<<<<<< HEAD   (2b340f21d2b0c29d5fb535e69381ae628a3388ef Merge ac0481830d98 ("ksmbd: rewrite stop_sessions() with res)
 static inline void vma_assert_detached(struct vm_area_struct *vma)
 {
 	WARN_ON_ONCE(refcount_read(&vma->vm_refcnt));
+||||||| BASE   (ac0481830d98cbd90c332b7cdc7d076c8c59dcf3 ksmbd: rewrite stop_sessions() with restartable iteration)
+	if (!vma->vm_lock)
+		return false;
+
+	init_rwsem(&vma->vm_lock->lock);
+	vma->vm_lock_seq = -1;
+
+	return true;
+=======
+	if (!vma->vm_lock)
+		return false;
+
+	init_rwsem(&vma->vm_lock->lock);
+	vma->vm_lock_seq = UINT_MAX;
+
+	return true;
+>>>>>>> BRANCH (1bda80a7be91404fb849ccdde08437e86e38e816 mm: convert mm_lock_seq to a proper seqcount)
 }
 
 static inline void vma_assert_write_locked(struct vm_area_struct *);

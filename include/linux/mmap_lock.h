@@ -71,6 +71,7 @@ static inline void mmap_assert_write_locked(const struct mm_struct *mm)
 }
 
 #ifdef CONFIG_PER_VMA_LOCK
+<<<<<<< HEAD   (2b340f21d2b0c29d5fb535e69381ae628a3388ef Merge ac0481830d98 ("ksmbd: rewrite stop_sessions() with res)
 
 static inline void mm_lock_seqcount_init(struct mm_struct *mm)
 {
@@ -132,6 +133,36 @@ static inline bool mmap_lock_speculate_retry(struct mm_struct *mm, unsigned int 
 }
 
 #endif /* CONFIG_PER_VMA_LOCK */
+||||||| BASE   (ac0481830d98cbd90c332b7cdc7d076c8c59dcf3 ksmbd: rewrite stop_sessions() with restartable iteration)
+=======
+static inline void mm_lock_seqcount_init(struct mm_struct *mm)
+{
+	seqcount_init(&mm->mm_lock_seq);
+}
+
+static inline void mm_lock_seqcount_begin(struct mm_struct *mm)
+{
+	do_raw_write_seqcount_begin(&mm->mm_lock_seq);
+}
+
+static inline void mm_lock_seqcount_end(struct mm_struct *mm)
+{
+	ASSERT_EXCLUSIVE_WRITER(mm->mm_lock_seq);
+	do_raw_write_seqcount_end(&mm->mm_lock_seq);
+}
+
+#else
+static inline void mm_lock_seqcount_init(struct mm_struct *mm) {}
+static inline void mm_lock_seqcount_begin(struct mm_struct *mm) {}
+static inline void mm_lock_seqcount_end(struct mm_struct *mm) {}
+#endif
+
+static inline void mmap_init_lock(struct mm_struct *mm)
+{
+	init_rwsem(&mm->mmap_lock);
+	mm_lock_seqcount_init(mm);
+}
+>>>>>>> BRANCH (1bda80a7be91404fb849ccdde08437e86e38e816 mm: convert mm_lock_seq to a proper seqcount)
 
 static inline void mmap_write_lock(struct mm_struct *mm)
 {
