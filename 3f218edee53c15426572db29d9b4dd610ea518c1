@@ -76,6 +76,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e603f6_a4025582",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-21T09:29:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d41daa5d_e0cf2293",
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c78f8e1e_f952ceab",
@@ -107,6 +125,24 @@
           ]
         }
       ],
+      "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d495b35_60a28cb2",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-21T09:29:17Z",
+      "side": 1,
+      "message": "\u003eIf the reason for using memcpy here is to avoid TOCTOU as we discussed in aosp/4043296, maybe better use more explicit vcpu-\u003earch.exception \u003d *(volatile struct kvm_queued_exception *)\u0026to_pkvm_vcpu(vcpu)-\u003eshared_vcpu-\u003earch.exception instead, like I suggested in aosp/4043296?\n\nYes, to prevent the TOCTOU issues we discussed.\n\nIn this case, let\u0027s also use volatile read and write-back in aosp/4043296, for consistent.\n\n\n\u003e P.S. The AI here is suggesting using typeof(vcpu-\u003earch.exception) instead of struct kvm_queued_exception, which also seems a good idea.\n\nSounds good to me. The `sizeof()` is also using `vcpu-\u003earch.exception` rather than `struct kvm_queued_exception`.\n\nAlthough both left and right objects are the same type, maybe semantically it is more clear to use typeof(shared_vcpu-\u003earch.exception) as this is the structure the volatile intent is about?",
+      "parentUuid": "c78f8e1e_f952ceab",
       "revId": "3f218edee53c15426572db29d9b4dd610ea518c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
