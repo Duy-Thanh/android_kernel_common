@@ -251,6 +251,12 @@ extern "C" {
     fn binder_rust_write_daif(val: u64_0);
     fn binder_rust_write_ttbr0_el1(val: u64_0);
     fn binder_rust_write_ttbr1_el1(val: u64_0);
+    fn binder_rust_uaccess_ttbr0_enable() -> bool_0;
+    fn binder_rust_uaccess_ttbr0_disable() -> bool_0;
+    fn binder_rust_arch_local_irq_save() -> ::core::ffi::c_ulong;
+    fn binder_rust_arch_local_irq_restore(flags: ::core::ffi::c_ulong);
+    fn binder_rust_arch_local_irq_enable();
+    fn binder_rust_arch_local_irq_disable();
     fn strsep(
         _: *mut *mut ::core::ffi::c_char,
         _: *const ::core::ffi::c_char,
@@ -18897,164 +18903,20 @@ unsafe extern "C" fn cpu_online(mut cpu: ::core::ffi::c_uint) -> bool_0 {
     );
 }
 #[inline]
-unsafe extern "C" fn system_uses_hw_pan() -> bool_0 {
-    return alternative_has_cap_unlikely(ARM64_HAS_PAN as ::core::ffi::c_ulong);
-}
-#[inline]
-unsafe extern "C" fn system_uses_ttbr0_pan() -> bool_0 {
-    return true && !system_uses_hw_pan();
-}
-#[inline(always)]
-unsafe extern "C" fn system_uses_irq_prio_masking() -> bool_0 {
-    return alternative_has_cap_unlikely(ARM64_HAS_GIC_PRIO_MASKING as ::core::ffi::c_ulong);
-}
-pub const GICV3_PRIO_UNMASKED: ::core::ffi::c_int = 0xe0 as ::core::ffi::c_int;
-pub const GIC_PRIO_IRQON: ::core::ffi::c_int = GICV3_PRIO_UNMASKED;
-#[inline(always)]
-unsafe extern "C" fn __daif_local_irq_disable() {
-    asm!("\n", options(preserves_flags));
-    asm!("msr daifset, #3\n", options(preserves_flags));
-    asm!("\n", options(preserves_flags));
-}
-#[inline(always)]
-unsafe extern "C" fn __pmr_local_irq_disable() {
-    asm!("\n", options(preserves_flags));
-    let mut __val: u64_0 = 0xc0 as ::core::ffi::c_int as u64_0;
-    let mut __check_r: u32_0 = ((3 as ::core::ffi::c_int) << 19 as ::core::ffi::c_int
-        | (0 as ::core::ffi::c_int) << 16 as ::core::ffi::c_int
-        | (4 as ::core::ffi::c_int) << 12 as ::core::ffi::c_int
-        | (6 as ::core::ffi::c_int) << 8 as ::core::ffi::c_int
-        | (0 as ::core::ffi::c_int) << 5 as ::core::ffi::c_int)
-        as u32_0;
-    if 0 != 0 && __val == 0 as u64_0 {
-        asm!(
-            "\t.irp\tnum,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\n",
-            "\t.equ\t.L__gpr_num_x\\num, \\num\n", "\t.equ\t.L__gpr_num_w\\num, \\num\n",
-            "\t.endr\n", "\t.equ\t.L__gpr_num_xzr, 31\n",
-            "\t.equ\t.L__gpr_num_wzr, 31\n", "\t.macro\tmsr_s, sreg, rt\n",
-            ".inst (0xd5000000|(\\sreg)|(.L__gpr_num_\\rt))\n", "\t\t.endm\n",
-            "\tmsr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((6) << 8) | ((0) << 5)), xzr\n",
-            "\t.purgem\tmsr_s\n", "\n", options(preserves_flags)
-        );
-    } else {
-        asm!(
-            "\t.irp\tnum,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\n",
-            "\t.equ\t.L__gpr_num_x\\num, \\num\n", "\t.equ\t.L__gpr_num_w\\num, \\num\n",
-            "\t.endr\n", "\t.equ\t.L__gpr_num_xzr, 31\n",
-            "\t.equ\t.L__gpr_num_wzr, 31\n", "\t.macro\tmsr_s, sreg, rt\n",
-            ".inst (0xd5000000|(\\sreg)|(.L__gpr_num_\\rt))\n", "\t\t.endm\n",
-            "\tmsr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((6) << 8) | ((0) << 5)), {0:x}\n",
-            "\t.purgem\tmsr_s\n", "\n", inlateout(reg) __val => _,
-            options(preserves_flags)
-        );
-    }
-    asm!("\n", options(preserves_flags));
-}
-#[inline(always)]
-unsafe extern "C" fn __daif_local_save_flags() -> ::core::ffi::c_ulong {
-    return ({
-        let mut __val: u64_0 = 0;
-        asm!("mrs {0}, daif\n", lateout(reg) __val, options(preserves_flags));
-        __val
-    }) as ::core::ffi::c_ulong;
-}
-#[inline(always)]
-unsafe extern "C" fn __pmr_local_save_flags() -> ::core::ffi::c_ulong {
-    return ({
-        let mut __val: u64_0 = 0;
-        let mut __check_r: u32_0 = ((3 as ::core::ffi::c_int) << 19 as ::core::ffi::c_int
-            | (0 as ::core::ffi::c_int) << 16 as ::core::ffi::c_int
-            | (4 as ::core::ffi::c_int) << 12 as ::core::ffi::c_int
-            | (6 as ::core::ffi::c_int) << 8 as ::core::ffi::c_int
-            | (0 as ::core::ffi::c_int) << 5 as ::core::ffi::c_int)
-            as u32_0;
-        asm!(
-            "\t.irp\tnum,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\n",
-            "\t.equ\t.L__gpr_num_x\\num, \\num\n", "\t.equ\t.L__gpr_num_w\\num, \\num\n",
-            "\t.endr\n", "\t.equ\t.L__gpr_num_xzr, 31\n",
-            "\t.equ\t.L__gpr_num_wzr, 31\n", "\t.macro\tmrs_s, rt, sreg\n",
-            ".inst (0xd5200000|(\\sreg)|(.L__gpr_num_\\rt))\n", "\t\t.endm\n",
-            "\tmrs_s {0}, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((6) << 8) | ((0) << 5))\n",
-            "\t.purgem\tmrs_s\n", "\n", lateout(reg) __val, options(preserves_flags)
-        );
-        __val
-    }) as ::core::ffi::c_ulong;
-}
-#[inline(always)]
-unsafe extern "C" fn __pmr_irqs_disabled_flags(mut flags: ::core::ffi::c_ulong) -> bool_0 {
-    return flags != GIC_PRIO_IRQON as ::core::ffi::c_ulong;
-}
-#[inline(always)]
-unsafe extern "C" fn __daif_local_irq_save() -> ::core::ffi::c_ulong {
-    let mut flags: ::core::ffi::c_ulong = __daif_local_save_flags();
-    __daif_local_irq_disable();
-    return flags;
-}
-#[inline(always)]
-unsafe extern "C" fn __pmr_local_irq_save() -> ::core::ffi::c_ulong {
-    let mut flags: ::core::ffi::c_ulong = __pmr_local_save_flags();
-    if !__pmr_irqs_disabled_flags(flags) {
-        __pmr_local_irq_disable();
-    }
-    return flags;
-}
-#[inline]
 unsafe extern "C" fn arch_local_irq_save() -> ::core::ffi::c_ulong {
-    if system_uses_irq_prio_masking() {
-        return __pmr_local_irq_save();
-    } else {
-        return __daif_local_irq_save();
-    };
-}
-#[inline(always)]
-unsafe extern "C" fn __daif_local_irq_restore(mut flags: ::core::ffi::c_ulong) {
-    asm!("\n", options(preserves_flags));
-    let mut __val: u64_0 = flags as u64_0;
-    binder_rust_write_daif(__val);
-    asm!("\n", options(preserves_flags));
-}
-#[inline(always)]
-unsafe extern "C" fn __pmr_local_irq_restore(mut flags: ::core::ffi::c_ulong) {
-    asm!("\n", options(preserves_flags));
-    let mut __val: u64_0 = flags as u64_0;
-    let mut __check_r: u32_0 = ((3 as ::core::ffi::c_int) << 19 as ::core::ffi::c_int
-        | (0 as ::core::ffi::c_int) << 16 as ::core::ffi::c_int
-        | (4 as ::core::ffi::c_int) << 12 as ::core::ffi::c_int
-        | (6 as ::core::ffi::c_int) << 8 as ::core::ffi::c_int
-        | (0 as ::core::ffi::c_int) << 5 as ::core::ffi::c_int)
-        as u32_0;
-    if 0 != 0 && __val == 0 as u64_0 {
-        asm!(
-            "\t.irp\tnum,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\n",
-            "\t.equ\t.L__gpr_num_x\\num, \\num\n", "\t.equ\t.L__gpr_num_w\\num, \\num\n",
-            "\t.endr\n", "\t.equ\t.L__gpr_num_xzr, 31\n",
-            "\t.equ\t.L__gpr_num_wzr, 31\n", "\t.macro\tmsr_s, sreg, rt\n",
-            ".inst (0xd5000000|(\\sreg)|(.L__gpr_num_\\rt))\n", "\t\t.endm\n",
-            "\tmsr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((6) << 8) | ((0) << 5)), xzr\n",
-            "\t.purgem\tmsr_s\n", "\n", options(preserves_flags)
-        );
-    } else {
-        asm!(
-            "\t.irp\tnum,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\n",
-            "\t.equ\t.L__gpr_num_x\\num, \\num\n", "\t.equ\t.L__gpr_num_w\\num, \\num\n",
-            "\t.endr\n", "\t.equ\t.L__gpr_num_xzr, 31\n",
-            "\t.equ\t.L__gpr_num_wzr, 31\n", "\t.macro\tmsr_s, sreg, rt\n",
-            ".inst (0xd5000000|(\\sreg)|(.L__gpr_num_\\rt))\n", "\t\t.endm\n",
-            "\tmsr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((6) << 8) | ((0) << 5)), {0:x}\n",
-            "\t.purgem\tmsr_s\n", "\n", inlateout(reg) __val => _,
-            options(preserves_flags)
-        );
-    }
-    asm!("dsb sy\n", options(preserves_flags));
-    asm!("\n", options(preserves_flags));
+    return binder_rust_arch_local_irq_save();
 }
 #[inline]
 unsafe extern "C" fn arch_local_irq_restore(mut flags: ::core::ffi::c_ulong) {
-    if system_uses_irq_prio_masking() {
-        __pmr_local_irq_restore(flags);
-    } else {
-        __daif_local_irq_restore(flags);
-    };
+    binder_rust_arch_local_irq_restore(flags);
+}
+#[inline]
+unsafe extern "C" fn arch_local_irq_enable() {
+    binder_rust_arch_local_irq_enable();
+}
+#[inline]
+unsafe extern "C" fn arch_local_irq_disable() {
+    binder_rust_arch_local_irq_disable();
 }
 #[inline(always)]
 unsafe extern "C" fn queued_spin_is_locked(mut lock: *mut qspinlock) -> ::core::ffi::c_int {
@@ -19462,107 +19324,12 @@ unsafe extern "C" fn __access_ok(
     return (size <= limit && addr <= limit.wrapping_sub(size)) as ::core::ffi::c_int;
 }
 #[inline]
-unsafe extern "C" fn __uaccess_ttbr0_disable() {
-    let mut flags: ::core::ffi::c_ulong = 0;
-    let mut ttbr: ::core::ffi::c_ulong = 0;
-    ({
-        let mut __dummy: ::core::ffi::c_ulong = 0;
-        let mut __dummy2: ::core::ffi::c_ulong = 0;
-        &raw mut __dummy;
-        &raw mut __dummy2;
-    });
-    flags = arch_local_irq_save();
-    ttbr = ({
-        let mut __val: u64_0 = 0;
-        asm!("mrs {0}, ttbr1_el1\n", lateout(reg) __val, options(preserves_flags));
-        __val
-    }) as ::core::ffi::c_ulong;
-    ttbr &= !TTBR_ASID_MASK;
-    let mut __val: u64_0 =
-        ttbr.wrapping_sub((1 as ::core::ffi::c_ulong) << 12 as ::core::ffi::c_int) as u64_0;
-    binder_rust_write_ttbr0_el1(__val);
-    let mut __val_0: u64_0 = ttbr as u64_0;
-    binder_rust_write_ttbr1_el1(__val_0);
-    asm!("isb\n", options(preserves_flags));
-    ({
-        let mut __dummy: ::core::ffi::c_ulong = 0;
-        let mut __dummy2: ::core::ffi::c_ulong = 0;
-        &raw mut __dummy;
-        &raw mut __dummy2;
-    });
-    arch_local_irq_restore(flags);
-}
-#[inline]
-unsafe extern "C" fn __uaccess_ttbr0_enable() {
-    let mut flags: ::core::ffi::c_ulong = 0;
-    let mut ttbr0: ::core::ffi::c_ulong = 0;
-    let mut ttbr1: ::core::ffi::c_ulong = 0;
-    ({
-        let mut __dummy: ::core::ffi::c_ulong = 0;
-        let mut __dummy2: ::core::ffi::c_ulong = 0;
-        &raw mut __dummy;
-        &raw mut __dummy2;
-    });
-    flags = arch_local_irq_save();
-    ttbr0 = ({
-        extern "C" {
-            #[link_name = "__compiletime_assert_483"]
-            fn __compiletime_assert_483_0() -> !;
-        }
-        if !(::core::mem::size_of::<u64_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_char>() as usize
-            || ::core::mem::size_of::<u64_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_short>() as usize
-            || ::core::mem::size_of::<u64_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_int>() as usize
-            || ::core::mem::size_of::<u64_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_long>() as usize
-            || ::core::mem::size_of::<u64_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
-        {
-            __compiletime_assert_483_0();
-        }
-        ::core::ptr::read_volatile::<::core::ffi::c_ulonglong>(
-            (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
-                as *mut thread_info))
-                .ttbr0 as *const ::core::ffi::c_ulonglong),
-        )
-    }) as ::core::ffi::c_ulong;
-    ttbr1 = ({
-        let mut __val: u64_0 = 0;
-        asm!("mrs {0}, ttbr1_el1\n", lateout(reg) __val, options(preserves_flags));
-        __val
-    }) as ::core::ffi::c_ulong;
-    ttbr1 &= !TTBR_ASID_MASK;
-    ttbr1 |= ttbr0 & TTBR_ASID_MASK;
-    let mut __val: u64_0 = ttbr1 as u64_0;
-    binder_rust_write_ttbr1_el1(__val);
-    let mut __val_0: u64_0 = ttbr0 as u64_0;
-    binder_rust_write_ttbr0_el1(__val_0);
-    asm!("isb\n", options(preserves_flags));
-    ({
-        let mut __dummy: ::core::ffi::c_ulong = 0;
-        let mut __dummy2: ::core::ffi::c_ulong = 0;
-        &raw mut __dummy;
-        &raw mut __dummy2;
-    });
-    arch_local_irq_restore(flags);
-}
-#[inline]
 unsafe extern "C" fn uaccess_ttbr0_disable() -> bool_0 {
-    if !system_uses_ttbr0_pan() {
-        return false_0 as ::core::ffi::c_int != 0;
-    }
-    __uaccess_ttbr0_disable();
-    return true_0 as ::core::ffi::c_int != 0;
+    return binder_rust_uaccess_ttbr0_disable();
 }
 #[inline]
 unsafe extern "C" fn uaccess_ttbr0_enable() -> bool_0 {
-    if !system_uses_ttbr0_pan() {
-        return false_0 as ::core::ffi::c_int != 0;
-    }
-    __uaccess_ttbr0_enable();
-    return true_0 as ::core::ffi::c_int != 0;
+    return binder_rust_uaccess_ttbr0_enable();
 }
 #[inline]
 unsafe extern "C" fn __uaccess_mask_ptr(
@@ -20379,7 +20146,7 @@ unsafe extern "C" fn binder_debug(
                 flags: 0 as ::core::ffi::c_uint,
                 begin: 0,
             };
-            if ___ratelimit(
+            if true || ___ratelimit(
                 &raw mut _rs,
                 b"binder_debug\0".as_ptr() as *const ::core::ffi::c_char,
             ) != 0
@@ -32455,7 +32222,6 @@ unsafe extern "C" fn binder_init() -> ::core::ffi::c_int {
     let mut tmp: *mut hlist_node = ::core::ptr::null_mut::<hlist_node>();
     let mut device_names: *mut ::core::ffi::c_char = ::core::ptr::null_mut::<::core::ffi::c_char>();
     let mut db_entry: *const binder_debugfs_entry = ::core::ptr::null::<binder_debugfs_entry>();
-    pr_warn!("binder_init() starting...");
     c2rust_run_static_initializers();
     ret = binder_alloc_shrinker_init();
     if ret != 0 {
