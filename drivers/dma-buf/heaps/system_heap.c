@@ -59,28 +59,6 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
 
-static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
-{
-	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
-	struct scatterlist *sg;
-	int i;
-
-	for_each_sgtable_dma_sg(table, sg, i) {
-		// SG_DMA_SWIOTLB is set only for dma-iommu, not for dma-direct
-		if (domain && IS_ENABLED(CONFIG_NEED_SG_DMA_FLAGS)) {
-			if (sg_dma_is_swiotlb(table->sgl))
-				return true;
-		} else {
-			phys_addr_t paddr = domain ?
-					    iommu_iova_to_phys(domain, sg_dma_address(sg)) :
-					    dma_to_phys(dev, sg_dma_address(sg));
-			if (swiotlb_find_pool(dev, paddr))
-				return true;
-		}
-	}
-	return false;
-}
-
 static int dup_sg_table(struct sg_table *from, struct sg_table *to)
 {
 	struct scatterlist *sg, *new_sg;
@@ -141,6 +119,28 @@ static void system_heap_detach(struct dma_buf *dmabuf,
 
 	sg_free_table(&a->table);
 	kfree(a);
+}
+
+static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
+{
+	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
+	struct scatterlist *sg;
+	int i;
+
+	for_each_sgtable_dma_sg(table, sg, i) {
+		// SG_DMA_SWIOTLB is set only for dma-iommu, not for dma-direct
+		if (domain && IS_ENABLED(CONFIG_NEED_SG_DMA_FLAGS)) {
+			if (sg_dma_is_swiotlb(table->sgl))
+				return true;
+		} else {
+			phys_addr_t paddr = domain ?
+					    iommu_iova_to_phys(domain, sg_dma_address(sg)) :
+					    dma_to_phys(dev, sg_dma_address(sg));
+			if (swiotlb_find_pool(dev, paddr))
+				return true;
+		}
+	}
+	return false;
 }
 
 static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attachment,
