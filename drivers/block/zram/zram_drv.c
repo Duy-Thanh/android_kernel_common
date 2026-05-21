@@ -2465,6 +2465,7 @@ static int zram_read_page(struct zram *zram, struct page *page, u32 index,
 			  struct bio *parent)
 {
 	int ret;
+        u32 blk_idx;
 
 	zram_slot_lock(zram, index);
 	if (!zram_test_flag(zram, index, ZRAM_WB)) {
@@ -2472,13 +2473,13 @@ static int zram_read_page(struct zram *zram, struct page *page, u32 index,
 		ret = read_from_zspool(zram, page, index);
 		zram_slot_unlock(zram, index);
 	} else {
-		unsigned long blk_idx = zram_get_handle(zram, index);
-
 		/*
 		 * The slot should be unlocked before reading from the backing
 		 * device.
 		 */
 		zram_slot_unlock(zram, index);
+
+                blk_idx = zram_get_element(zram, index);
 
 		ret = read_from_bdev(zram, page, index, blk_idx, parent);
 	}
