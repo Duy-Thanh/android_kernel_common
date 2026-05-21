@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb75dee_ad828d01",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 1,
+      "message": "take both",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7774ffff_d7814628",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 1,
+      "message": "keep",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cad93a_b9e3bce0",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 1,
+      "message": "I\u0027d rework this to be similar to the `if (a-\u003euncached)` case above, just `if (a-\u003ecc_shared) attrs \u003d DMA_ATTR_CC_SHARED`",
+      "fixSuggestions": [
+        {
+          "fixId": "781b2e44_748fe73d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/heaps/system_heap.c",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/heaps/system_heap.c",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/heaps/system_heap.c",
+              "range": {
+                "startLine": 224,
+                "startChar": 0,
+                "endLine": 225,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/heaps/system_heap.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (a-\u003ecc_shared)\n\t\tattr |\u003d DMA_ATTR_CC_SHARED;\n"
+            },
+            {
+              "path": "drivers/dma-buf/heaps/system_heap.c",
+              "range": {
+                "startLine": 229,
+                "startChar": 0,
+                "endLine": 235,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e55bca5_ffa072bf",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 1,
+      "message": "I\u0027d keep the initialized version.",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df1f0c4_b38b446b",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 1,
+      "message": "keep the logic check cc_shared and assign pgprot.  unify the vmap calls using pgprot",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

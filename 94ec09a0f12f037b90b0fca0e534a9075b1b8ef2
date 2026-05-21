@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2715444a_e9c24ef9",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "take both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8646aab1_6c31ad73",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep needs_swiotbl_bounce",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4be5ec_0ef6e68c",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "take both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97d84ae_b165587b",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "I\u0027d keep the default assignment not the unassigned version",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb140a0c_117f6579",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep both, but initialize prot first then use if/else",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aefdb43c_b12171b0",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9aa429b_a85eaf0f",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8751672_092c13a1",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b264e56b_521b0767",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-21T04:04:31Z",
+      "side": 0,
+      "message": "keep both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
