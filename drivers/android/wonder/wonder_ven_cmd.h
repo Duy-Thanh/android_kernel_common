@@ -139,7 +139,7 @@ enum wonder_vendor_fixed_tx_rate_preamble {
 	WONDER_VEN_ATTR_FIXED_TX_RATE_PREAMBLE_HT     = 1, /* 802.11n (High Throughput) */
 	WONDER_VEN_ATTR_FIXED_TX_RATE_PREAMBLE_VHT    = 2, /* 802.11ac (Very High Throughput) */
 	WONDER_VEN_ATTR_FIXED_TX_RATE_PREAMBLE_HE     = 3, /* 802.11ax (High Efficiency) */
-	WONDER_VEN_ATTR_FIXED_TX_RATE_PREAMBLE_EHT    = 4, /* 802.11be (Extremely High Throughput) */
+	WONDER_VEN_ATTR_FIXED_TX_RATE_PREAMBLE_EHT    = 4, /* 802.11be (Extreme Throughput) */
 };
 
 enum wonder_vendor_fixed_tx_rate_bw {
