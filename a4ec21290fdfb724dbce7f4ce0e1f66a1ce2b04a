@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3884c67e_89d35c00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T12:38:03Z",
+      "side": 1,
+      "message": "This seems to describe what Vineeth suggested to implement (i.e. check non-zero address instead of the present bit), not what you ended up implementing?",
+      "revId": "a4ec21290fdfb724dbce7f4ce0e1f66a1ce2b04a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
