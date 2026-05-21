@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a417eaa4_7699ae6b",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T16:36:37Z",
+      "side": 1,
+      "message": "\u003e I do not have logic to validate 32bit APIC ID yet though.\n\nMaybe add a TODO for that for now, to address that in a later patch?\n\nBTW can we test this on an actual HW (i.e. hack the code to program a non-existent APIC ID in FEUADDR:FEADDR, and then trigger an MSI via a DMAR fault or whatever, and see what happens)?",
+      "parentUuid": "ad03d0c6_a4c48542",
+      "revId": "acf672b261ba2b17d2fb843adec54ea9e8279cb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f0fe03_049b6522",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
