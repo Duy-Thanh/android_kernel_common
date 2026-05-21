@@ -10,19 +10,35 @@
  *	Andrew F. Davis <afd@ti.com>
  */
 
+#include <linux/cc_platform.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-direct.h>
 #include <linux/dma-mapping.h>
 #include <linux/dma-heap.h>
 #include <linux/err.h>
 #include <linux/highmem.h>
+<<<<<<< HEAD
 #include <linux/iommu.h>
+||||||| d662a710c668
+=======
+#include <linux/mem_encrypt.h>
+>>>>>>> 87768582a440
 #include <linux/mm.h>
+#include <linux/set_memory.h>
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/printk.h>
+||||||| d662a710c668
+=======
+#include <linux/pgtable.h>
+>>>>>>> 87768582a440
 #include <linux/scatterlist.h>
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
+
+struct system_heap_priv {
+	bool cc_shared;
+};
 
 struct system_heap_buffer {
 	struct dma_heap *heap;
@@ -32,8 +48,13 @@ struct system_heap_buffer {
 	struct sg_table sg_table;
 	int vmap_cnt;
 	void *vaddr;
+<<<<<<< HEAD
 
 	bool uncached;
+||||||| d662a710c668
+=======
+	bool cc_shared;
+>>>>>>> 87768582a440
 };
 
 struct dma_heap_attachment {
@@ -41,8 +62,13 @@ struct dma_heap_attachment {
 	struct sg_table table;
 	struct list_head list;
 	bool mapped;
+<<<<<<< HEAD
 
 	bool uncached;
+||||||| d662a710c668
+=======
+	bool cc_shared;
+>>>>>>> 87768582a440
 };
 
 #define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
@@ -59,6 +85,7 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
 
+<<<<<<< HEAD
 static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 {
 	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
@@ -81,6 +108,37 @@ static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 	return false;
 }
 
+||||||| d662a710c668
+=======
+static int system_heap_set_page_decrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_decrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
+				    page_address(page));
+
+	return ret;
+}
+
+static int system_heap_set_page_encrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_encrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
+				    page_address(page));
+
+	return ret;
+}
+
+>>>>>>> 87768582a440
 static int dup_sg_table(struct sg_table *from, struct sg_table *to)
 {
 	struct scatterlist *sg, *new_sg;
@@ -119,7 +177,14 @@ static int system_heap_attach(struct dma_buf *dmabuf,
 	a->dev = attachment->dev;
 	INIT_LIST_HEAD(&a->list);
 	a->mapped = false;
+<<<<<<< HEAD
 	a->uncached = buffer->uncached;
+||||||| d662a710c668
+
+=======
+	a->cc_shared = buffer->cc_shared;
+
+>>>>>>> 87768582a440
 	attachment->priv = a;
 
 	mutex_lock(&buffer->lock);
@@ -148,13 +213,25 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 {
 	struct dma_heap_attachment *a = attachment->priv;
 	struct sg_table *table = &a->table;
+<<<<<<< HEAD
 	int attr = attachment->dma_map_attrs;
+||||||| d662a710c668
+=======
+	unsigned long attrs;
+>>>>>>> 87768582a440
 	int ret;
 
+<<<<<<< HEAD
 	if (a->uncached)
 		attr |= DMA_ATTR_SKIP_CPU_SYNC;
 
 	ret = dma_map_sgtable(attachment->dev, table, direction, attr);
+||||||| d662a710c668
+	ret = dma_map_sgtable(attachment->dev, table, direction, 0);
+=======
+	attrs = a->cc_shared ? DMA_ATTR_CC_SHARED : 0;
+	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
+>>>>>>> 87768582a440
 	if (ret)
 		return ERR_PTR(ret);
 
@@ -235,11 +312,20 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 	unsigned long addr = vma->vm_start;
 	unsigned long pgoff = vma->vm_pgoff;
 	struct scatterlist *sg;
+	pgprot_t prot;
 	int i, ret;
 
+<<<<<<< HEAD
 	if (buffer->uncached)
 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
 
+||||||| d662a710c668
+=======
+	prot = vma->vm_page_prot;
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
+
+>>>>>>> 87768582a440
 	for_each_sgtable_sg(table, sg, i) {
 		unsigned long n = sg->length >> PAGE_SHIFT;
 
@@ -256,8 +342,7 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 		if (addr + size > vma->vm_end)
 			size = vma->vm_end - addr;
 
-		ret = remap_pfn_range(vma, addr, page_to_pfn(page),
-				size, vma->vm_page_prot);
+		ret = remap_pfn_range(vma, addr, page_to_pfn(page), size, prot);
 		if (ret)
 			return ret;
 
@@ -275,7 +360,12 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
 	struct page **pages = vmalloc(sizeof(struct page *) * npages);
 	struct page **tmp = pages;
 	struct sg_page_iter piter;
+<<<<<<< HEAD
 	pgprot_t pgprot = PAGE_KERNEL;
+||||||| d662a710c668
+=======
+	pgprot_t prot;
+>>>>>>> 87768582a440
 	void *vaddr;
 
 	if (!pages)
@@ -289,7 +379,16 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
 		*tmp++ = sg_page_iter_page(&piter);
 	}
 
+<<<<<<< HEAD
 	vaddr = vmap(pages, npages, VM_MAP, pgprot);
+||||||| d662a710c668
+	vaddr = vmap(pages, npages, VM_MAP, PAGE_KERNEL);
+=======
+	prot = PAGE_KERNEL;
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
+	vaddr = vmap(pages, npages, VM_MAP, prot);
+>>>>>>> 87768582a440
 	vfree(pages);
 
 	if (!vaddr)
@@ -350,6 +449,14 @@ static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *page = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(page))
+			continue;
+
 		__free_pages(page, compound_order(page));
 	}
 	sg_free_table(table);
@@ -402,6 +509,8 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
 	unsigned long size_remaining = len;
 	unsigned int max_order = orders[0];
+	struct system_heap_priv *priv = dma_heap_get_drvdata(heap);
+	bool cc_shared = priv->cc_shared;
 	struct dma_buf *dmabuf;
 	struct sg_table *table;
 	struct scatterlist *sg;
@@ -417,7 +526,12 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 	mutex_init(&buffer->lock);
 	buffer->heap = heap;
 	buffer->len = len;
+<<<<<<< HEAD
 	buffer->uncached = uncached;
+||||||| d662a710c668
+=======
+	buffer->cc_shared = cc_shared;
+>>>>>>> 87768582a440
 
 	INIT_LIST_HEAD(&pages);
 	i = 0;
@@ -452,6 +566,14 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 		list_del(&page->lru);
 	}
 
+	if (cc_shared) {
+		for_each_sgtable_sg(table, sg, i) {
+			ret = system_heap_set_page_decrypted(sg_page(sg));
+			if (ret)
+				goto free_pages;
+		}
+	}
+
 	/* create the dmabuf */
 	exp_info.exp_name = dma_heap_get_name(heap);
 	exp_info.ops = &system_heap_buf_ops;
@@ -481,6 +603,13 @@ free_pages:
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *p = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(p))
+			continue;
 		__free_pages(p, compound_order(p));
 	}
 	sg_free_table(table);
@@ -504,6 +633,7 @@ static const struct dma_heap_ops system_heap_ops = {
 	.allocate = system_heap_allocate,
 };
 
+<<<<<<< HEAD
 static struct dma_buf *system_uncached_heap_allocate(struct dma_heap *heap,
 						     unsigned long len,
 						     u32 fd_flags,
@@ -526,6 +656,17 @@ static struct dma_heap_ops system_uncached_heap_ops = {
 	.allocate = system_uncached_heap_not_initialized,
 };
 
+||||||| d662a710c668
+=======
+static struct system_heap_priv system_heap_priv = {
+	.cc_shared = false,
+};
+
+static struct system_heap_priv system_heap_cc_shared_priv = {
+	.cc_shared = true,
+};
+
+>>>>>>> 87768582a440
 static int __init system_heap_create(void)
 {
 	struct dma_heap_export_info exp_info;
@@ -534,12 +675,13 @@ static int __init system_heap_create(void)
 
 	exp_info.name = "system";
 	exp_info.ops = &system_heap_ops;
-	exp_info.priv = NULL;
+	exp_info.priv = &system_heap_priv;
 
 	sys_heap = dma_heap_add(&exp_info);
 	if (IS_ERR(sys_heap))
 		return PTR_ERR(sys_heap);
 
+<<<<<<< HEAD
 	exp_info.name = "system-uncached";
 	exp_info.ops = &system_uncached_heap_ops;
 	exp_info.priv = NULL;
@@ -552,6 +694,19 @@ static int __init system_heap_create(void)
 	mb(); /* make sure we only set allocate after dma_mask is set */
 	system_uncached_heap_ops.allocate = system_uncached_heap_allocate;
 
+||||||| d662a710c668
+=======
+	if (IS_ENABLED(CONFIG_HIGHMEM) ||
+	    !cc_platform_has(CC_ATTR_MEM_ENCRYPT))
+		return 0;
+
+	exp_info.name = "system_cc_shared";
+	exp_info.priv = &system_heap_cc_shared_priv;
+	sys_heap = dma_heap_add(&exp_info);
+	if (IS_ERR(sys_heap))
+		return PTR_ERR(sys_heap);
+
+>>>>>>> 87768582a440
 	return 0;
 }
 module_init(system_heap_create);
