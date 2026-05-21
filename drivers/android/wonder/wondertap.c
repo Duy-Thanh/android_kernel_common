@@ -374,7 +374,8 @@ int wondertap_channel_schedule_request(struct wondertap_data *wondertap,
 
 	if (wondertap_is_up(wondertap)) {
 		if (request->channel_list_len > 0) {
-			if (wondertap->wonder_ops && wondertap->wonder_ops->channel_schedule_request) {
+			if (wondertap->wonder_ops &&
+			    wondertap->wonder_ops->channel_schedule_request) {
 				ret = wondertap->wonder_ops->channel_schedule_request(
 									wondertap->vendor_handle,
 									request);
