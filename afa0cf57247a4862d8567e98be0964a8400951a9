@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf7a766_a1610d8d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T12:13:22Z",
+      "side": 1,
+      "message": "tiny nit: copy `host_mc` to `tmp_mc` here, not below (for brevity and also because the above comment is talking about copying it)?",
+      "fixSuggestions": [
+        {
+          "fixId": "6da291ad_699e7657",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 518,
+                "startChar": 0,
+                "endLine": 519,
+                "endChar": 0
+              },
+              "replacement": "\tstruct pkvm_memcache tmp_mc \u003d *(volatile typeof(*host_mc) *)host_mc;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 521,
+                "startChar": 0,
+                "endLine": 523,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e136555_ee73b0ab",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-21T12:13:22Z",
+      "side": 1,
+      "message": "Regarding this, it seems we haven\u0027t concluded that we really should avoid plain (non-volatile) _writes_ to the host\u0027s structures? i.e. simple `*host_mc \u003d tmp_mc` is fine? (Otherwise we should change such writes to WRITE_ONCE in other such places as well?)",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
