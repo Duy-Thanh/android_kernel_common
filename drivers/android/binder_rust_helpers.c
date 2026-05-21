@@ -3,12 +3,20 @@
 #include <linux/types.h>
 #include <kunit/visibility.h>
 #include <asm/sysreg.h>
+#include <asm/uaccess.h>
+#include <asm/irqflags.h>
 
 #include "binder_internal.h"
 
 void binder_rust_write_daif(u64 val);
 void binder_rust_write_ttbr0_el1(u64 val);
 void binder_rust_write_ttbr1_el1(u64 val);
+bool binder_rust_uaccess_ttbr0_enable(void);
+bool binder_rust_uaccess_ttbr0_disable(void);
+unsigned long binder_rust_arch_local_irq_save(void);
+void binder_rust_arch_local_irq_restore(unsigned long flags);
+void binder_rust_arch_local_irq_enable(void);
+void binder_rust_arch_local_irq_disable(void);
 
 void binder_rust_write_daif(u64 val)
 {
@@ -23,6 +31,36 @@ void binder_rust_write_ttbr0_el1(u64 val)
 void binder_rust_write_ttbr1_el1(u64 val)
 {
 	write_sysreg(val, ttbr1_el1);
+}
+
+bool binder_rust_uaccess_ttbr0_enable(void)
+{
+	return uaccess_ttbr0_enable();
+}
+
+bool binder_rust_uaccess_ttbr0_disable(void)
+{
+	return uaccess_ttbr0_disable();
+}
+
+unsigned long binder_rust_arch_local_irq_save(void)
+{
+	return arch_local_irq_save();
+}
+
+void binder_rust_arch_local_irq_restore(unsigned long flags)
+{
+	arch_local_irq_restore(flags);
+}
+
+void binder_rust_arch_local_irq_enable(void)
+{
+	arch_local_irq_enable();
+}
+
+void binder_rust_arch_local_irq_disable(void)
+{
+	arch_local_irq_disable();
 }
 
 EXPORT_SYMBOL_IF_KUNIT(binder_vm_fault);
