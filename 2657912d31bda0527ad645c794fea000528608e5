@@ -16,6 +16,24 @@
       "message": "According to VT-d spec: \"This register is treated as RsvdZ by implementations reporting Performance Monitoring (PMS) as not\nsupported in the Extended Capability register.\"\n\nso we should validate these registers in the ecap_pms\u003d0 case as well (i.e. validate that they are zero in this case), and not just here (and first of all not here) but in pkvm_iommu_mmio_write(), and not just PERFINTRADDR/PERFINTRUADDR but PERFINTRDATA/PERFINTRCTL as well?\n\nDon\u0027t know, maybe something like this (for all 4 registers)?\n\n```\n--- a/drivers/iommu/intel/pkvm/iommu.c\n+++ b/drivers/iommu/intel/pkvm/iommu.c\n@@ -645,8 +645,12 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)\n                        }\n                }\n                break;\n-       case DMAR_FEADDR_REG:\n        case DMAR_PERFINTRADDR_REG:\n+               /* RsvdZ if no PMU support */\n+               if (!ecap_pms(iommu-\u003eecap) \u0026\u0026 val)\n+                       ret \u003d -EINVAL;\n+               fallthrough;\n+       case DMAR_FEADDR_REG:\n                /*\n                 * FEADDR/PERFINTADDR holds the MSI destination address.\n                 * The IOMMU writes to this address when a fault occurs, bypassing\n```\n\n...As for these checks of FEADDR/FEUADDR and PERFINTRADDR/PERFINTRUADDR here in iommu_init(), I\u0027m not sure we need them at all. If we really want to sanitize _initial_ values of _physical_ IOMMU registers during pKVM initialization, why these specific registers only?",
       "revId": "2657912d31bda0527ad645c794fea000528608e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ef106a_8452bda4",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-21T14:18:35Z",
+      "side": 1,
+      "message": "\u003e Don\u0027t know, maybe something like this (for all 4 registers)?\n\nDone\n\n\u003e As for these checks of FEADDR/FEUADDR and PERFINTRADDR/PERFINTRUADDR here in iommu_init(), I\u0027m not sure we need them at all. If we really want to sanitize initial values of physical IOMMU registers during pKVM initialization, why these specific registers only?\n\nThis check was added as the memory contained memory addresses. Since host is trusted at this point, it might not be needed and I am removing these now.",
+      "parentUuid": "9e636548_94f7862b",
+      "revId": "2657912d31bda0527ad645c794fea000528608e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
