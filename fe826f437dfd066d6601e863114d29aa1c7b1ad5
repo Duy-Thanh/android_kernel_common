@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abebb9b_1befa810",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-21T02:27:42Z",
+      "side": 1,
+      "message": "I\u0027m surprised nobody complained about these github links for an upstream patch. https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/ is what I\u0027d suggest in the future.",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "fe826f437dfd066d6601e863114d29aa1c7b1ad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
