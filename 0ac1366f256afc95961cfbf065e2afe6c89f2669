@@ -34,6 +34,24 @@
       "parentUuid": "bbe7e91b_710908e5",
       "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef3c481_c47e6f46",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-05-21T23:20:40Z",
+      "side": 1,
+      "message": "I\u0027ve split the ABI stuff out into https://r.android.com/c/4083794",
+      "parentUuid": "14b2f6b1_bec87cb9",
+      "revId": "0ac1366f256afc95961cfbf065e2afe6c89f2669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
