@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cad010e_b96f42dc",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-22T01:16:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5bf7a766_a1610d8d",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e136555_ee73b0ab",
@@ -59,6 +77,24 @@
       "writtenOn": "2026-05-21T12:13:22Z",
       "side": 1,
       "message": "Regarding this, it seems we haven\u0027t concluded that we really should avoid plain (non-volatile) _writes_ to the host\u0027s structures? i.e. simple `*host_mc \u003d tmp_mc` is fine? (Otherwise we should change such writes to WRITE_ONCE in other such places as well?)",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df2bae1e_14116461",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-22T01:16:23Z",
+      "side": 1,
+      "message": "The threat \"1. The Real Security Threat: \"invented\" Writes (Store Spilling)\" in one of your comments, pointed that, if register pressure is high, the compiler can use the shared variables as scratch space during the function — storing unrelated intermediate values there temporarily - because it \"knows\" it will overwrite the location later anyway. A concurrent reader can observe sensitive hypervisor data. So I understand this is the single-threaded as-if rule. Based on this, we need volatile write-back?\n\n\u003e (Otherwise we should change such writes to WRITE_ONCE in other such places as well?)\n\nAs we discussed, we will have another patch serial to replace the plain assignment with READ_ONCE/WRITE_ONCE, so we can cover such places in that patch serial.",
+      "parentUuid": "2e136555_ee73b0ab",
       "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
