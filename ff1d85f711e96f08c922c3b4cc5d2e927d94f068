@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa338e4c_6fc978e3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-22T20:50:54Z",
+      "side": 1,
+      "message": "why built-in and not GKI module (\"\u003dm\")",
+      "revId": "ff1d85f711e96f08c922c3b4cc5d2e927d94f068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0a1ff6_5464a23d",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-22T20:50:54Z",
+      "side": 1,
+      "message": "why built-in and not GKI module?",
+      "revId": "ff1d85f711e96f08c922c3b4cc5d2e927d94f068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
