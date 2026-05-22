@@ -2387,6 +2387,9 @@
   __traceiter_android_vh_ftrace_oops_exit
   __traceiter_android_vh_ftrace_size_check
   __traceiter_android_vh_fuse_request_end
+  __traceiter_android_vh_filemap_update_page
+  __traceiter_android_vh_lock_folio_drop_mmap_end
+  __traceiter_android_vh_lock_folio_drop_mmap_start
   __traceiter_android_vh_gic_resume
   __traceiter_android_vh_init_adjust_zone_wmark
   __traceiter_android_vh_ipi_stop
@@ -2539,6 +2542,9 @@
   __tracepoint_android_vh_ftrace_oops_exit
   __tracepoint_android_vh_ftrace_size_check
   __tracepoint_android_vh_fuse_request_end
+  __tracepoint_android_vh_filemap_update_page
+  __tracepoint_android_vh_lock_folio_drop_mmap_end
+  __tracepoint_android_vh_lock_folio_drop_mmap_start
   __tracepoint_android_vh_gic_resume
   __tracepoint_android_vh_init_adjust_zone_wmark
   __tracepoint_android_vh_ipi_stop
