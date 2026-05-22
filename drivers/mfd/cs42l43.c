@@ -790,8 +790,8 @@ static int cs42l43_mcu_update_step(struct cs42l43 *cs42l43)
 		return -EPERM;
 	}
 
-	dev_dbg(cs42l43->dev, "Firmware(0x%x, 0x%x) in boot stage %d\n",
-		mcu_rev, bios_rev, boot_status);
+	dev_info(cs42l43->dev, "Firmware(0x%x, 0x%x, patched:%u) in boot stage %d\n",
+		mcu_rev, bios_rev, !!patched, boot_status);
 
 	switch (boot_status) {
 	case CS42L43_MCU_BOOT_STAGE2:
@@ -1210,6 +1210,8 @@ static int cs42l43_runtime_resume(struct device *dev)
 		dev_err(cs42l43->dev, "Failed to check reset canary: %d\n", ret);
 		goto err;
 	}
+
+	dev_info(cs42l43->dev, "Reset canary: %#x\n", reset_canary);
 
 	if (!reset_canary) {
 		/*
