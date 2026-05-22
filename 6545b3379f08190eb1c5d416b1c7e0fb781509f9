@@ -160,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4a59b6_25d4f27b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-22T20:41:14Z",
+      "side": 1,
+      "message": "Resolving comment to unblock merging the series. (Let\u0027s just not forget to fix that similar issue with the IOMMU\u0027s memcache, in a separate patch...)",
+      "parentUuid": "43a1d77c_828834d2",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebcd3525_2e3d5fb4",
