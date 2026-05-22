@@ -23305,6 +23305,7 @@ unsafe extern "C" fn binder_ioctl(
             if thread.is_null() {
                 ret = -ENOMEM;
             } else {
+                pr_warn!("Rust binder_ioctl cmd:{cmd}");
                 match cmd {
                     3224396289 => {
                         ret = binder_ioctl_write_read(filp, arg as u64, thread);
@@ -26107,7 +26108,7 @@ unsafe extern "C" fn binder_init() -> ::core::ffi::c_int {
     let mut tmp: *mut hlist_node = ::core::ptr::null_mut::<hlist_node>();
     let mut device_names: *mut ::core::ffi::c_char = ::core::ptr::null_mut::<::core::ffi::c_char>();
     let mut db_entry: *const binder_debugfs_entry = ::core::ptr::null::<binder_debugfs_entry>();
-    pr_warn!("binder_init() starting...");
+    pr_warn!("Rust binder_init() starting...");
     c2rust_run_static_initializers();
     ret = binder_alloc_shrinker_init();
     if ret != 0 {
