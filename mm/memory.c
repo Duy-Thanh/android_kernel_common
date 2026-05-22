@@ -4608,6 +4608,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	unsigned long page_idx;
 	unsigned long address;
 	pte_t *ptep;
+	bool bypass = false;
 
 	if (!pte_unmap_same(vmf))
 		goto out;
@@ -4703,6 +4704,9 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 					 * Relax a bit to prevent rapid
 					 * repeated page faults.
 					 */
+					trace_android_rvh_do_swap_page_relax(entry, &bypass);
+					if (bypass)
+						goto out_page;
 					add_wait_queue(&swapcache_wq, &wait);
 					schedule_timeout_uninterruptible(1);
 					remove_wait_queue(&swapcache_wq, &wait);
@@ -5021,6 +5025,7 @@ out:
 		swapcache_clear(si, entry, nr_pages);
 		if (waitqueue_active(&swapcache_wq))
 			wake_up(&swapcache_wq);
+		trace_android_vh_do_swap_page_done(entry);
 	}
 	if (si)
 		put_swap_device(si);
@@ -5040,6 +5045,7 @@ out_release:
 		swapcache_clear(si, entry, nr_pages);
 		if (waitqueue_active(&swapcache_wq))
 			wake_up(&swapcache_wq);
+		trace_android_vh_do_swap_page_done(entry);
 	}
 	if (si)
 		put_swap_device(si);
