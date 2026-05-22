@@ -115,6 +115,24 @@
       "parentUuid": "df2bae1e_14116461",
       "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc732a6_705ffefe",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-22T20:30:32Z",
+      "side": 1,
+      "message": "Resolving comment, so we can merge the series.",
+      "parentUuid": "cb409b89_9286496e",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

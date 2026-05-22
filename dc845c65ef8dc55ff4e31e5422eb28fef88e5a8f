@@ -105,6 +105,24 @@
       "message": "Hmm, late thought: can\u0027t we just use `*(volatile struct pkvm_memcache *)host_mc` (instead of relying on memcpy in a non-obvious way)?\n\n...BTW @willdeacon@google.com @tabba@google.com @qperret@google.com FYI here we are trying to address a potential TOCTOU which seems to exist in the ARM\u0027s `refill_memcache()` as well, due to `tmp \u003d *host_mc` which could be implemented by the compiler as multiple loads of the same data (IOW, due to the lack of an effective READ_ONCE).",
       "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4d595b_f639788f",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-22T20:30:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcac2883_3122fb1b",
+      "revId": "dc845c65ef8dc55ff4e31e5422eb28fef88e5a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
