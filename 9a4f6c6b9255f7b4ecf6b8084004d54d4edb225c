@@ -46,6 +46,30 @@
       },
       "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60efe616_14397a8b",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:54:58Z",
+      "side": 1,
+      "message": "If you think is better, I can add the explicit `false` to the other two? `system_uncached_heap_priv` and `system_heap_cc_shared_priv`.",
+      "parentUuid": "23f53ab2_bfd1df0b",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 20
+      },
+      "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
