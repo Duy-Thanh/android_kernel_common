@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c277463_3dff3e1f",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-22T14:01:54Z",
+      "side": 1,
+      "message": "\u003e Maybe add a TODO for that for now, to address that in a later patch?\n\nI was trying to implement it and have a patch for that now: aosp/4085812. It was not as complex as I initially thought, but increases pkvm mem usage slightly: for CONFIG_NR_CPUS\u003d32, about 256~280 bytes extra usage. I cache the APIC ids in pkvm before deprivilege and use that for validation.\n\nWhile investigating this, I learned that linux kernel uses FEUADDR as it uses the cluster mode addressing which uses all 64bits. The implmentation in aosp/4085812 supports both physical APIC addressing as well as cluster mode.\n\n\u003e BTW can we test this on an actual HW (i.e. hack the code to program a non-existent APIC ID in FEUADDR:FEADDR, and then trigger an MSI via a DMAR fault or whatever, and see what happens)?\n\nI cooked up a simple test for this and from my testing, I don\u0027t see any errors in dmesg when this happens(DMAR fault is not obviously triggered due to bad address). USB adb connection gets disconnected and is no longer connectable. Did not try network adb. But on the system everything works(UI, network storage etc). Not sure why the USB adb connection stopped and not able to restart until a reboot(tried disconnecting and connecting USB cable but did not help)",
+      "parentUuid": "a417eaa4_7699ae6b",
+      "revId": "acf672b261ba2b17d2fb843adec54ea9e8279cb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f0fe03_049b6522",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
