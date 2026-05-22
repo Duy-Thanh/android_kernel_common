@@ -228,6 +228,37 @@ static int psci_system_suspend(u64 func_id, struct kvm_cpu_context *host_ctxt)
 			 __hyp_pa(init_params), 0);
 }
 
+DEFINE_PER_CPU(bool, pkvm_cpu_context_initialized);
+
+static void pkvm_cpu_context_init(struct kvm_cpu_context *host_ctxt)
+{
+	u64 dfr0;
+
+	if (*this_cpu_ptr(&pkvm_cpu_context_initialized))
+		return;
+
+	ctxt_sys_reg(host_ctxt, MPIDR_EL1) = read_cpuid_mpidr();
+
+	dfr0 = read_sysreg(id_aa64dfr0_el1);
+
+	if (cpuid_feature_extract_unsigned_field(dfr0, ID_AA64DFR0_EL1_PMSVer_SHIFT) &&
+	       !(read_sysreg_s(SYS_PMBIDR_EL1) & PMBIDR_EL1_P))
+		host_data_set_flag(HAS_SPE);
+
+	if (cpuid_feature_extract_unsigned_field(dfr0, ID_AA64DFR0_EL1_BRBE_SHIFT))
+		host_data_set_flag(HAS_BRBE);
+
+	if (cpuid_feature_extract_unsigned_field(dfr0, ID_AA64DFR0_EL1_TraceFilt_SHIFT)) {
+		host_data_set_flag(EL1_TRACING_CONFIGURED);
+
+		if (cpuid_feature_extract_unsigned_field(dfr0, ID_AA64DFR0_EL1_TraceBuffer_SHIFT) &&
+		    !(read_sysreg_s(SYS_TRBIDR_EL1) & TRBIDR_EL1_P))
+			 host_data_set_flag(HAS_TRBE);
+	}
+
+	*this_cpu_ptr(&pkvm_cpu_context_initialized) = true;
+}
+
 asmlinkage void __noreturn __kvm_host_psci_cpu_entry(bool is_cpu_on)
 {
 	struct psci_boot_args *boot_args;
@@ -236,6 +267,7 @@ asmlinkage void __noreturn __kvm_host_psci_cpu_entry(bool is_cpu_on)
 	__hyp_enter();
 
 	host_ctxt = host_data_ptr(host_ctxt);
+	pkvm_cpu_context_init(host_ctxt);
 
 	if (is_cpu_on)
 		boot_args = this_cpu_ptr(&cpu_on_args);

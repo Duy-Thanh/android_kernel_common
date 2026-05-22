@@ -2204,10 +2204,16 @@ static void cpu_set_hyp_vector(void)
 		kvm_call_hyp_nvhe(__pkvm_cpu_set_vector, data->slot);
 }
 
+DECLARE_KVM_NVHE_PER_CPU(bool, pkvm_cpu_context_initialized);
+
 static void cpu_hyp_init_context(void)
 {
 	kvm_init_host_cpu_context(host_data_ptr(host_ctxt));
 	kvm_init_host_debug_data();
+
+	if (is_protected_kvm_enabled() &&
+	    !is_pkvm_initialized())
+		*this_cpu_ptr_nvhe_sym(pkvm_cpu_context_initialized) = true;
 
 	if (!is_kernel_in_hyp_mode())
 		cpu_init_hyp_mode();
