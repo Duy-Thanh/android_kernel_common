@@ -25,6 +25,10 @@ unsigned int iommu_pglvl_mask = IOMMU_PGT_4LEVEL | IOMMU_PGT_5LEVEL;
 #define X86_MSI_ADDR_BASE	0xfee00000U
 /* Mask for 0xFEE and RsvdZ bits 11:4 and 1:0 */
 #define X86_MSI_ADDR_MASK	0xfff00ff3U
+#define X86_MSI_ADDR_DEST_ID_MASK	GENMASK_U32(19, 12)
+#define X86_MSI_ADDR_DEST_ID_SHIFT	12
+#define X86_MSI_ADDR_DEST_MODE_LOGICAL	BIT(2)
+#define X86_MSI_UADDR_DEST_ID_MASK	GENMASK_U32(31, 8)
 
 /* GCMD bits that handle enabling/disabling of IOMMU features */
 #define DMAR_GSTS_EN_BITS	(DMA_GCMD_TE | DMA_GCMD_QIE | DMA_GCMD_IRE | DMA_GCMD_CFI)
@@ -41,6 +45,9 @@ int nr_satc_devs;
 #define PKVM_MAX_IOMMU_NUM	16
 static struct intel_iommu iommus[PKVM_MAX_IOMMU_NUM];
 static int nr_iommus;
+u32 pkvm_cpu_apicid[CONFIG_NR_CPUS];
+u32 pkvm_cpu_msi_dest_id[CONFIG_NR_CPUS];
+bool pkvm_msi_dest_mode_logical;
 
 /*
  * Flag denoting if all IOMMUs in the system have page walk coherency support.
@@ -427,6 +434,42 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	return ret;
 }
 
+static u32 iommu_msi_dest_id(u32 addr, u32 uaddr)
+{
+	return ((addr & X86_MSI_ADDR_DEST_ID_MASK) >> X86_MSI_ADDR_DEST_ID_SHIFT) |
+	       (uaddr & X86_MSI_UADDR_DEST_ID_MASK);
+}
+
+static bool iommu_msi_dest_id_valid(u32 dest_id)
+{
+	int cpu;
+
+	for_each_possible_cpu(cpu) {
+		u32 cpu_dest_id = pkvm_msi_dest_mode_logical ?
+				  pkvm_cpu_msi_dest_id[cpu] :
+				  pkvm_cpu_apicid[cpu];
+
+		if (dest_id == cpu_dest_id)
+			return true;
+	}
+
+	return false;
+}
+
+static int iommu_validate_msi_dest_id(struct intel_iommu *iommu, u32 addr,
+				      u32 uaddr, const char *name)
+{
+	u32 dest_id = iommu_msi_dest_id(addr, uaddr);
+
+	if (!iommu_msi_dest_id_valid(dest_id)) {
+		pkvm_err("iommu%d: %s MSI destination 0x%x is not a pKVM CPU\n",
+			 iommu->seq_id, name, dest_id);
+		return -EINVAL;
+	}
+
+	return 0;
+}
+
 int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 {
 	struct intel_iommu *iommu = iommu_from_phys(phys);
@@ -496,23 +539,46 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			pkvm_err("iommu%d: FEADDR 0x%llx not in MSI address range\n",
 				 iommu->seq_id, val);
 			ret = -EINVAL;
+		} else if (!!(val & X86_MSI_ADDR_DEST_MODE_LOGICAL) !=
+			   pkvm_msi_dest_mode_logical) {
+			pkvm_err("iommu%d: ADDR 0x%llx has invalid destination mode\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
 		} else {
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			iommu->staged_feaddr = val;
 		}
 		break;
 	case DMAR_FEUADDR_REG:
 		/*
 		 * FEUADDR holds the upper 32 bits of the MSI address.
 		 *
-		 * In x2APIC mode(required by pKVM), the IOMMU places APIC ID bits [31:8]
-		 * in FEUADDR bits [31:8]; bits [7:0] are reserved and must be zero.
+		 * In x2APIC mode(required by pKVM), the IOMMU places MSI
+		 * destination ID bits [31:8] in FEUADDR bits [31:8]; bits
+		 * [7:0] are reserved and must be zero.
 		 */
 		if (val & 0xFF) {
 			pkvm_err("iommu%d: FEUADDR 0x%llx has reserved bits set\n",
 				 iommu->seq_id, val);
 			ret = -EINVAL;
 		} else {
-			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+			if (!iommu->staged_feaddr) {
+				pkvm_err("iommu%d: FEUADDR write without staged FEADDR\n",
+					 iommu->seq_id);
+				ret = -EINVAL;
+			} else {
+				ret = iommu_validate_msi_dest_id(iommu,
+								 iommu->staged_feaddr,
+								 val, "fault event");
+			}
+
+			if (!ret) {
+				ret = iommu_direct_mmio_write(iommu,
+							      iommu->reg_phys + DMAR_FEADDR_REG,
+							      len, iommu->staged_feaddr);
+				if (!ret)
+					ret = iommu_direct_mmio_write(iommu, phys, len, val);
+				iommu->staged_feaddr = 0;
+			}
 		}
 		break;
 	case DMAR_FEDATA_REG:
