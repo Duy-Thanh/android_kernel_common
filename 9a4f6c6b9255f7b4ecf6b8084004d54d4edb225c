@@ -22,6 +22,30 @@
       },
       "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f53ab2_bfd1df0b",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:52:29Z",
+      "side": 1,
+      "message": "It\u0027s very likely that it is for \"documentation\" purposes. The other ones already have a `true` member so it is assumed everything else is implicitly initalized to zero. This is exactly what upstream has.",
+      "parentUuid": "ead04ccb_b3c36fc5",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 20
+      },
+      "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
