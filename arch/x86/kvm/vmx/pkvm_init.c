@@ -4,9 +4,11 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/extable.h>
+#include <asm/apic.h>
 #include <asm/e820/api.h>
 #include <asm/pkvm_image.h>
 #include <asm/setup.h>
+#include <asm/smp.h>
 #include <asm/set_memory.h>
 #include "pkvm_constants.h"
 #include "vmx.h"
@@ -116,6 +118,11 @@ static __init void pkvm_setup_syms(void)
 #endif
 	cpumask_copy(&pkvm_sym(__cpu_possible_mask), cpu_possible_mask);
 	pkvm_sym(nr_cpu_ids) = nr_cpu_ids;
+	pkvm_sym(pkvm_msi_dest_mode_logical) = apic->dest_mode_logical;
+	for_each_possible_cpu(i) {
+		pkvm_sym(pkvm_cpu_apicid)[i] = per_cpu(x86_cpu_to_apicid, i);
+		pkvm_sym(pkvm_cpu_msi_dest_id)[i] = apic->calc_dest_apicid(i);
+	}
 	pkvm_sym(fpu_kernel_cfg) = fpu_kernel_cfg;
 	pkvm_sym(fpu_user_cfg) = fpu_user_cfg;
 #ifdef CONFIG_X86_64

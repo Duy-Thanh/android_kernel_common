@@ -876,6 +876,7 @@ struct intel_iommu {
 	u64		viqa;  /* Virtual IQA register */
 	u64		vrta; /* Virtual RTA register */
 	u64		virta; /* Virtual IRTA register */
+	u32		staged_feaddr; /* Pending FEADDR write */
 	struct irte	*ir_table; /* VA of hypervisor-protected interrupt remapping table */
 	int		seq_id;	/* sequence id of the iommu */
 	int		agaw; /* agaw of this iommu */
