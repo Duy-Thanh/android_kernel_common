@@ -6899,6 +6899,9 @@ out:
 	return ret;
 }
 
+extern int sysctl_exec_folio_order;
+static int sysctl_exec_folio_order_max = 10;
+
 static struct ctl_table page_alloc_sysctl_table[] = {
 	{
 		.procname	= "min_free_kbytes",
@@ -6967,6 +6970,15 @@ static struct ctl_table page_alloc_sysctl_table[] = {
 		.extra2		= SYSCTL_ONE_HUNDRED,
 	},
 #endif
+	{
+		.procname	= "exec_folio_order",
+		.data		= &sysctl_exec_folio_order,
+		.maxlen		= sizeof(sysctl_exec_folio_order),
+		.mode		= 0644,
+		.proc_handler	= proc_dointvec_minmax,
+		.extra1		= SYSCTL_NEG_ONE,
+		.extra2		= &sysctl_exec_folio_order_max,
+	},
 };
 
 void __init page_alloc_sysctl_init(void)
