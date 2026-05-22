@@ -97,6 +97,24 @@
       "parentUuid": "2e136555_ee73b0ab",
       "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb409b89_9286496e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-22T10:05:50Z",
+      "side": 1,
+      "message": "\u003e The threat \"1. The Real Security Threat: \"invented\" Writes (Store Spilling)\" in one of your comments, pointed that, if register pressure is high, the compiler can use the shared variables as scratch space during the function — storing unrelated intermediate values there temporarily - because it \"knows\" it will overwrite the location later anyway. A concurrent reader can observe sensitive hypervisor data. So I understand this is the single-threaded as-if rule. Based on this, we need volatile write-back?\n\nOk, unfortunately I\u0027m not a compiler expert at all, so I can\u0027t be 100% sure that this Gemini\u0027s suggestion makes sense, but at least it _sounds_ sensible...\n\n@willdeacon@google.com you were saying you see no point in using READ_ONCE in _each and every_ case of reading from host-owned memory. Do you have the same opinion about using WRITE_ONCE in _each and every_ case of writing to host-owned memory?\n\n\u003e As we discussed, we will have another patch serial to replace the plain assignment with READ_ONCE/WRITE_ONCE, so we can cover such places in that patch serial.\n\nOk, I\u0027d say it would make sense to address this `*host_mc \u003d tmp_mc` in that later series as well, not in this patch (to not mix things up), but I\u0027m also ok with doing it in this patch right away.",
+      "parentUuid": "df2bae1e_14116461",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
