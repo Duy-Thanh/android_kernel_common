@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06e8bcea_755c1295",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "2715444a_e9c24ef9",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8646aab1_6c31ad73",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 0,
       "message": "keep needs_swiotbl_bounce",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b0752b_78423c1e",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8646aab1_6c31ad73",
       "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61857150_e11daabc",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "9b4be5ec_0ef6e68c",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b97d84ae_b165587b",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 0,
       "message": "I\u0027d keep the default assignment not the unassigned version",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cdd877_7e25bac8",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "I did but reworked the code to do the \"assignment\" later thinking it\u0027s a simpler merge this way.",
+      "parentUuid": "b97d84ae_b165587b",
       "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a4f1fa_9aa1a8b3",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "bb140a0c_117f6579",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aefdb43c_b12171b0",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 0,
       "message": "keep both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6b0f89_652f4b76",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "aefdb43c_b12171b0",
       "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c29c0091_ac657b8b",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b9aa429b_a85eaf0f",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8751672_092c13a1",
@@ -137,6 +263,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad9e340_01077367",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a8751672_092c13a1",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b264e56b_521b0767",
@@ -150,6 +294,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 0,
       "message": "keep both",
+      "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d34188_1bd4daec",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 0,
+      "message": "So this case is interesting, I can\u0027t really keep both. If you look closely, the upstream implementation relies on `exp_info.ops` to be `system_heap_ops` implicitly as it is reusing the setup for the regular \"system\" heap. My idea is to create a separate patch that does our \"system-uncached\" registration first, then the two upstream \"system\" and \"system_cc_shared\" would follow. That way we avoid merge conflicts completely and we avoid the bug of using the wrong ops for cc_shared.",
+      "parentUuid": "b264e56b_521b0767",
       "revId": "94ec09a0f12f037b90b0fca0e534a9075b1b8ef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

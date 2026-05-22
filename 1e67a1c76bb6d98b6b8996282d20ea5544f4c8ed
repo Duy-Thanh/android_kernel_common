@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb815b74_975985f1",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb75dee_ad828d01",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7774ffff_d7814628",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 1,
       "message": "keep",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77040fa2_b2a91ce7",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7774ffff_d7814628",
       "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +146,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a65509_05c65212",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 1,
+      "message": "I decided to keep this line intact, but then do the OOT assignments as the next steps.",
+      "parentUuid": "e8cad93a_b9e3bce0",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e55bca5_ffa072bf",
@@ -127,6 +181,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08fb79b_3e0ae002",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 1,
+      "message": "switch to do the assignment below just like upstream does.",
+      "parentUuid": "4e55bca5_ffa072bf",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7df1f0c4_b38b446b",
@@ -140,6 +212,24 @@
       "writtenOn": "2026-05-21T04:04:31Z",
       "side": 1,
       "message": "keep the logic check cc_shared and assign pgprot.  unify the vmap calls using pgprot",
+      "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf2b31d_41e12a6f",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T18:15:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7df1f0c4_b38b446b",
       "revId": "1e67a1c76bb6d98b6b8996282d20ea5544f4c8ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
