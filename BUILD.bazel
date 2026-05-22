@@ -2233,6 +2233,7 @@ cc_binary_with_abi(
     ],
 )
 
+<<<<<<< HEAD   (4f48c6403c6169c64a545a68803c249318338f6c Merge tag 'android15-6.6.138_r00' into android15-6.6)
 copy_file(
     name = "kselftest_gen_config",
     src = select({
@@ -2242,6 +2243,37 @@ copy_file(
         "//build/kernel/kleaf/platforms/config_settings:android_arm": "tools/testing/selftests/android/config_arm.xml",
     }),
     out = _KSELFTEST_DIR + "/selftests.config",
+||||||| BASE   (1b167eabb752a6515e8e075049b46070ef11a532 ANDROID: selftests/wrapfd: Define a wrapper for remap_file_p)
+pkg_files(
+    name = "kselftest_config_x86_64",
+    srcs = ["tools/testing/selftests/android/config_x86_64.xml"],
+    renames = {"tools/testing/selftests/android/config_x86_64.xml": _KSELFTEST_DIR + "/selftests.config"},
+=======
+cc_binary_with_abi(
+    name = "kselftest_wrapfd_test",
+    srcs = [
+        "include/uapi/linux/wrapfd.h",
+        "tools/include/linux/align.h",
+        "tools/include/uapi/linux/const.h",
+        "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+    ],
+    copts = _KSELFTEST_COPTS,
+    includes = [
+        "include/uapi",
+        "tools/include",
+        "tools/testing/selftests",
+    ],
+    linkopts = ["-static"],
+    path_prefix = _KSELFTEST_DIR,
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+pkg_files(
+    name = "kselftest_config_x86_64",
+    srcs = ["tools/testing/selftests/android/config_x86_64.xml"],
+    renames = {"tools/testing/selftests/android/config_x86_64.xml": _KSELFTEST_DIR + "/selftests.config"},
+>>>>>>> CHANGE (9245448fca070a99ff451a619f8615ed6ea7350f ANDROID: Define bazel target for wrapfd kselftests and run i)
     visibility = ["//visibility:private"],
 )
 
@@ -2306,6 +2338,7 @@ android_filegroup(
         ":kselftest_vdso_vdso_test_clock_getres_x86_64",
         ":kselftest_vdso_vdso_test_getcpu_x86_64",
         ":kselftest_vdso_vdso_test_gettimeofday_x86_64",
+        ":kselftest_wrapfd_test_x86_64",
         ":kselftest_x86_check_initial_reg_state_x86_64",
         ":kselftest_x86_ldt_gdt_x86_64",
         ":kselftest_x86_ptrace_syscall_x86_64",
@@ -2511,6 +2544,7 @@ android_filegroup(
         ":kselftest_vdso_vdso_test_clock_getres_arm64",
         ":kselftest_vdso_vdso_test_getcpu_arm64",
         ":kselftest_vdso_vdso_test_gettimeofday_arm64",
+        ":kselftest_wrapfd_test_arm64",
     ],
     cpu = "arm64",
     visibility = ["//visibility:private"],
