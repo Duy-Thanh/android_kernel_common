@@ -277,21 +277,21 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
 	struct page **pages = vmalloc(sizeof(struct page *) * npages);
 	struct page **tmp = pages;
 	struct sg_page_iter piter;
-	pgprot_t pgprot = PAGE_KERNEL;
+	pgprot_t prot;
 	void *vaddr;
 
 	if (!pages)
 		return ERR_PTR(-ENOMEM);
-
-	if (buffer->uncached)
-		pgprot = pgprot_writecombine(PAGE_KERNEL);
 
 	for_each_sgtable_page(table, &piter, 0) {
 		WARN_ON(tmp - pages >= npages);
 		*tmp++ = sg_page_iter_page(&piter);
 	}
 
-	vaddr = vmap(pages, npages, VM_MAP, pgprot);
+	prot = PAGE_KERNEL;
+	if (buffer->uncached)
+		prot = pgprot_writecombine(prot);
+	vaddr = vmap(pages, npages, VM_MAP, prot);
 	vfree(pages);
 
 	if (!vaddr)
