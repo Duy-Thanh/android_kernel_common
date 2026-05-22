@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51bda71e_92c5c156",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-22T19:58:21Z",
+      "side": 1,
+      "message": "Ok, so we are back on track.",
+      "parentUuid": "b91f6ccc_b00cfc6a",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebcd3525_2e3d5fb4",
@@ -191,6 +209,24 @@
       "side": 1,
       "message": "\u003e and save it to host_mc-\u003ehead\n\nAh yeah, now I see.\n\nMaybe let\u0027s make the comment more clear in this regard (since otherwise it just sounds confusing how just _reading_ data could leak it to the host), e.g.: \"Should donate the page from the host memcache before pop it out because pop will read data from this page to get the next head, and then will write this data to the host memcache\u0027s head. Without donating, doing that may leak sensitive data as this page may be a private page of a pVM or the hypervisor.\" ?",
       "parentUuid": "f11514b0_5b80330d",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a18b4bb9_1b5c0476",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-22T19:58:21Z",
+      "side": 1,
+      "message": "Suggested comment was added - resolving.",
+      "parentUuid": "b391ce66_b92318fe",
       "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
