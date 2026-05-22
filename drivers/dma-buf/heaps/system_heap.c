@@ -529,14 +529,6 @@ static int __init system_heap_create(void)
 	struct dma_heap *sys_uncached_heap;
 	struct dma_heap *sys_heap;
 
-	exp_info.name = "system";
-	exp_info.ops = &system_heap_ops;
-	exp_info.priv = &system_heap_priv;
-
-	sys_heap = dma_heap_add(&exp_info);
-	if (IS_ERR(sys_heap))
-		return PTR_ERR(sys_heap);
-
 	exp_info.name = "system-uncached";
 	exp_info.ops = &system_uncached_heap_ops;
 	exp_info.priv = &system_uncached_heap_priv;
@@ -548,6 +540,14 @@ static int __init system_heap_create(void)
 	dma_coerce_mask_and_coherent(dma_heap_get_dev(sys_uncached_heap), DMA_BIT_MASK(64));
 	mb(); /* make sure we only set allocate after dma_mask is set */
 	system_uncached_heap_ops.allocate = system_heap_allocate;
+
+	exp_info.name = "system";
+	exp_info.ops = &system_heap_ops;
+	exp_info.priv = &system_heap_priv;
+
+	sys_heap = dma_heap_add(&exp_info);
+	if (IS_ERR(sys_heap))
+		return PTR_ERR(sys_heap);
 
 	return 0;
 }
