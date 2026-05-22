@@ -70,6 +70,30 @@
       },
       "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b00e072_6aee14c6",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-22T18:56:29Z",
+      "side": 1,
+      "message": "Ah of course, upstream doesn\u0027t have `system_uncached_heap_priv` so it couldn\u0027t have been added there.",
+      "parentUuid": "23f53ab2_bfd1df0b",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 20
+      },
+      "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
