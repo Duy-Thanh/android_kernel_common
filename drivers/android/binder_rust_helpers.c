@@ -17,6 +17,10 @@ unsigned long binder_rust_arch_local_irq_save(void);
 void binder_rust_arch_local_irq_restore(unsigned long flags);
 void binder_rust_arch_local_irq_enable(void);
 void binder_rust_arch_local_irq_disable(void);
+struct sock *binder_rust_get_genl_sock(struct net *net);
+void binder_rust_spin_lock(spinlock_t *lock);
+void binder_rust_spin_unlock(spinlock_t *lock);
+int binder_rust_spin_is_locked(spinlock_t *lock);
 
 void binder_rust_write_daif(u64 val)
 {
@@ -120,3 +124,28 @@ static const char * const binder_command_strings[] = {
 #include "binder_trace.h"
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(binder_transaction_received);
+
+#include <net/net_namespace.h>
+#include <net/sock.h>
+
+struct sock *binder_rust_get_genl_sock(struct net *net)
+{
+	return net->genl_sock;
+}
+
+void binder_rust_spin_lock(spinlock_t *lock)
+{
+	spin_lock(lock);
+}
+
+void binder_rust_spin_unlock(spinlock_t *lock)
+{
+	spin_unlock(lock);
+}
+
+int binder_rust_spin_is_locked(spinlock_t *lock)
+{
+	return spin_is_locked(lock);
+}
+
+
