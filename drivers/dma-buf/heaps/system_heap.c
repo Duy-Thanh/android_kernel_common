@@ -24,6 +24,10 @@
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
 
+struct system_heap_priv {
+	bool uncached;
+};
+
 struct system_heap_buffer {
 	struct dma_heap *heap;
 	struct list_head attachments;
@@ -32,7 +36,6 @@ struct system_heap_buffer {
 	struct sg_table sg_table;
 	int vmap_cnt;
 	void *vaddr;
-
 	bool uncached;
 };
 
@@ -41,7 +44,6 @@ struct dma_heap_attachment {
 	struct sg_table table;
 	struct list_head list;
 	bool mapped;
-
 	bool uncached;
 };
 
@@ -394,16 +396,17 @@ static struct page *alloc_largest_available(unsigned long size,
 	return NULL;
 }
 
-static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
-					       unsigned long len,
-					       u32 fd_flags,
-					       u64 heap_flags,
-					       bool uncached)
+static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+					    unsigned long len,
+					    u32 fd_flags,
+					    u64 heap_flags)
 {
 	struct system_heap_buffer *buffer;
 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
 	unsigned long size_remaining = len;
 	unsigned int max_order = orders[0];
+	struct system_heap_priv *priv = dma_heap_get_drvdata(heap);
+	bool uncached = priv->uncached;
 	struct dma_buf *dmabuf;
 	struct sg_table *table;
 	struct scatterlist *sg;
@@ -494,25 +497,9 @@ free_buffer:
 	return ERR_PTR(ret);
 }
 
-static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
-					    unsigned long len,
-					    u32 fd_flags,
-					    u64 heap_flags)
-{
-	return system_heap_do_allocate(heap, len, fd_flags, heap_flags, false);
-}
-
 static const struct dma_heap_ops system_heap_ops = {
 	.allocate = system_heap_allocate,
 };
-
-static struct dma_buf *system_uncached_heap_allocate(struct dma_heap *heap,
-						     unsigned long len,
-						     u32 fd_flags,
-						     u64 heap_flags)
-{
-	return system_heap_do_allocate(heap, len, fd_flags, heap_flags, true);
-}
 
 /* Dummy function to be used until we can call coerce_mask_and_coherent */
 static struct dma_buf *system_uncached_heap_not_initialized(struct dma_heap *heap,
@@ -528,6 +515,14 @@ static struct dma_heap_ops system_uncached_heap_ops = {
 	.allocate = system_uncached_heap_not_initialized,
 };
 
+static struct system_heap_priv system_heap_priv = {
+	.uncached = false,
+};
+
+static struct system_heap_priv system_uncached_heap_priv = {
+	.uncached = true,
+};
+
 static int __init system_heap_create(void)
 {
 	struct dma_heap_export_info exp_info;
@@ -536,7 +531,7 @@ static int __init system_heap_create(void)
 
 	exp_info.name = "system";
 	exp_info.ops = &system_heap_ops;
-	exp_info.priv = NULL;
+	exp_info.priv = &system_heap_priv;
 
 	sys_heap = dma_heap_add(&exp_info);
 	if (IS_ERR(sys_heap))
@@ -544,7 +539,7 @@ static int __init system_heap_create(void)
 
 	exp_info.name = "system-uncached";
 	exp_info.ops = &system_uncached_heap_ops;
-	exp_info.priv = NULL;
+	exp_info.priv = &system_uncached_heap_priv;
 
 	sys_uncached_heap = dma_heap_add(&exp_info);
 	if (IS_ERR(sys_uncached_heap))
@@ -552,7 +547,7 @@ static int __init system_heap_create(void)
 
 	dma_coerce_mask_and_coherent(dma_heap_get_dev(sys_uncached_heap), DMA_BIT_MASK(64));
 	mb(); /* make sure we only set allocate after dma_mask is set */
-	system_uncached_heap_ops.allocate = system_uncached_heap_allocate;
+	system_uncached_heap_ops.allocate = system_heap_allocate;
 
 	return 0;
 }
