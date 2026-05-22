@@ -16,6 +16,24 @@
       "message": "By \"scratched\" you probably meant \"squashed\"?",
       "revId": "c93c6934bf1a6d5604005eb15f40d956f73c2a4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09731adf_2580a975",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-22T01:19:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06c845ef_02997dc2",
+      "revId": "c93c6934bf1a6d5604005eb15f40d956f73c2a4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
