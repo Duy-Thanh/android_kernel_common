@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead04ccb_b3c36fc5",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-05-22T18:48:57Z",
+      "side": 1,
+      "message": "Why is this one special to get an explicit `false` for `cc_shared` (but `system_uncached_heap_priv` doesnt)?",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 20
+      },
+      "revId": "9a4f6c6b9255f7b4ecf6b8084004d54d4edb225c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
