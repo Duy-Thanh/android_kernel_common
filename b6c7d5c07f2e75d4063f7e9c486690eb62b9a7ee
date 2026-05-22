@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d1dc72_a65b535a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-22T21:44:51Z",
+      "side": 1,
+      "message": "I believe all these are upstream no? Does it make more sense to enable the modules you\u0027ll use e.g. `CONFIG_DRM_XE\u003dm` instead of adding a hidden `select`? Getting (and maintaining) the dependencies of a `select` downstream can be tricky.",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "b6c7d5c07f2e75d4063f7e9c486690eb62b9a7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
