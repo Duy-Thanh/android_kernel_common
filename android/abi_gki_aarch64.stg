@@ -42605,13 +42605,13 @@ member {
   id: 0x2d08133a
   name: "android_kabi_reserved1"
   type_id: 0x92233392
-  offset: 8960
+  offset: 3008
 }
 member {
   id: 0x2d08133b
   name: "android_kabi_reserved1"
   type_id: 0x92233392
-  offset: 3008
+  offset: 8960
 }
 member {
   id: 0x2d081341
@@ -237037,7 +237037,7 @@ struct_union {
     member_id: 0x4624a2cb
     member_id: 0x9f00bba4
     member_id: 0xed700cf7
-    member_id: 0x2d08133b
+    member_id: 0x2d08133a
   }
 }
 struct_union {
@@ -242455,7 +242455,7 @@ struct_union {
     member_id: 0xcd687a69
     member_id: 0xa54b2087
     member_id: 0xbcbb0a8f
-    member_id: 0x2d08133a
+    member_id: 0x2d08133b
   }
 }
 struct_union {
@@ -269644,6 +269644,14 @@ function {
   parameter_id: 0x11c404ba
 }
 function {
+  id: 0x14d9bc35
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1200e2aa
+  parameter_id: 0x335d253d
+  parameter_id: 0x358ff5b7
+  parameter_id: 0x709946fa
+}
+function {
   id: 0x14d9dc3c
   return_type_id: 0x48b5725f
   parameter_id: 0x12d04cc7
@@ -272142,6 +272150,13 @@ function {
   id: 0x19394f8b
   return_type_id: 0x48b5725f
   parameter_id: 0x26847863
+}
+function {
+  id: 0x193999f5
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2668e644
+  parameter_id: 0x0f77ab9d
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x19413e0d
@@ -276794,6 +276809,11 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x26e18424
+  return_type_id: 0x709946fa
+  parameter_id: 0x358ff5b7
+}
+function {
   id: 0x26fe438d
   return_type_id: 0x239e18b5
   parameter_id: 0x37d7ca8b
@@ -277764,6 +277784,15 @@ function {
   return_type_id: 0x1c2f6323
   parameter_id: 0x3b04bead
   parameter_id: 0xf435685e
+}
+function {
+  id: 0x3ab9f23e
+  return_type_id: 0x64a5f25f
+  parameter_id: 0x14b9453b
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0xa8fff47c
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x3abef0c1
@@ -285263,6 +285292,13 @@ function {
   id: 0x922e978f
   return_type_id: 0x6720d32f
   parameter_id: 0x3eb9d280
+}
+function {
+  id: 0x92320486
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3dcbc303
+  parameter_id: 0x335d253d
+  parameter_id: 0x358ff5b7
 }
 function {
   id: 0x9232e21d
@@ -310216,6 +310252,15 @@ elf_symbol {
   full_name: "__skb_pad"
 }
 elf_symbol {
+  id: 0x82abaac5
+  name: "__snd_pcm_lib_xfer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbbcf62d3
+  type_id: 0x3ab9f23e
+  full_name: "__snd_pcm_lib_xfer"
+}
+elf_symbol {
   id: 0x7809a362
   name: "__sock_create"
   is_defined: true
@@ -326329,6 +326374,15 @@ elf_symbol {
   full_name: "devm_clk_get_optional"
 }
 elf_symbol {
+  id: 0x8837a38c
+  name: "devm_clk_get_optional_enabled"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa29e9f7
+  type_id: 0xa671941e
+  full_name: "devm_clk_get_optional_enabled"
+}
+elf_symbol {
   id: 0x0d9ec99a
   name: "devm_clk_hw_register"
   is_defined: true
@@ -329884,6 +329938,24 @@ elf_symbol {
   full_name: "drm_bridge_detect"
 }
 elf_symbol {
+  id: 0x89139c9d
+  name: "drm_bridge_hpd_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2fc312af
+  type_id: 0x19026802
+  full_name: "drm_bridge_hpd_disable"
+}
+elf_symbol {
+  id: 0xf80bd100
+  name: "drm_bridge_hpd_enable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5a3ba3db
+  type_id: 0x193999f5
+  full_name: "drm_bridge_hpd_enable"
+}
+elf_symbol {
   id: 0xd82232b3
   name: "drm_bridge_hpd_notify"
   is_defined: true
@@ -330413,6 +330485,15 @@ elf_symbol {
   crc: 0x94cf48e9
   type_id: 0x1f0d7714
   full_name: "drm_debugfs_create_files"
+}
+elf_symbol {
+  id: 0x858617be
+  name: "drm_default_rgb_quant_range"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x65702bd6
+  type_id: 0x26e18424
+  full_name: "drm_default_rgb_quant_range"
 }
 elf_symbol {
   id: 0x3a4d5745
@@ -331765,6 +331846,15 @@ elf_symbol {
   full_name: "drm_hdmi_avi_infoframe_from_display_mode"
 }
 elf_symbol {
+  id: 0x2a53ebba
+  name: "drm_hdmi_avi_infoframe_quant_range"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x25868c03
+  type_id: 0x14d9bc35
+  full_name: "drm_hdmi_avi_infoframe_quant_range"
+}
+elf_symbol {
   id: 0x078346f5
   name: "drm_hdmi_infoframe_set_hdr_metadata"
   is_defined: true
@@ -331772,6 +331862,15 @@ elf_symbol {
   crc: 0x5b181edf
   type_id: 0x9fed0a16
   full_name: "drm_hdmi_infoframe_set_hdr_metadata"
+}
+elf_symbol {
+  id: 0xebe5f6cf
+  name: "drm_hdmi_vendor_infoframe_from_display_mode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb11e5f49
+  type_id: 0x92320486
+  full_name: "drm_hdmi_vendor_infoframe_from_display_mode"
 }
 elf_symbol {
   id: 0x80d03c2c
@@ -335619,6 +335718,60 @@ elf_symbol {
   crc: 0x4b40143f
   type_id: 0x91dd4b0e
   full_name: "genphy_aneg_done"
+}
+elf_symbol {
+  id: 0xd1e108fe
+  name: "genphy_c45_an_config_aneg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7de52d34
+  type_id: 0x91dd4b0e
+  full_name: "genphy_c45_an_config_aneg"
+}
+elf_symbol {
+  id: 0x084b19b7
+  name: "genphy_c45_check_and_restart_aneg"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa19ed211
+  type_id: 0x9068b671
+  full_name: "genphy_c45_check_and_restart_aneg"
+}
+elf_symbol {
+  id: 0xb0dc66ba
+  name: "genphy_c45_pma_read_abilities"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6d8047d9
+  type_id: 0x91dd4b0e
+  full_name: "genphy_c45_pma_read_abilities"
+}
+elf_symbol {
+  id: 0x96b85248
+  name: "genphy_c45_pma_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2a75a862
+  type_id: 0x91dd4b0e
+  full_name: "genphy_c45_pma_resume"
+}
+elf_symbol {
+  id: 0xd99708c7
+  name: "genphy_c45_pma_setup_forced"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8c83368e
+  type_id: 0x91dd4b0e
+  full_name: "genphy_c45_pma_setup_forced"
+}
+elf_symbol {
+  id: 0x35c6801f
+  name: "genphy_c45_pma_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0e8b3d80
+  type_id: 0x91dd4b0e
+  full_name: "genphy_c45_pma_suspend"
 }
 elf_symbol {
   id: 0xa3a0e5a9
@@ -345701,6 +345854,15 @@ elf_symbol {
   full_name: "nvmem_unregister"
 }
 elf_symbol {
+  id: 0x4fa74969
+  name: "of_add_property"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x59d5c344
+  type_id: 0x90903ad4
+  full_name: "of_add_property"
+}
+elf_symbol {
   id: 0x458a15db
   name: "of_address_to_resource"
   is_defined: true
@@ -349436,6 +349598,15 @@ elf_symbol {
   crc: 0x3a99e9c1
   type_id: 0x9071eb2d
   full_name: "phy_modify_mmd"
+}
+elf_symbol {
+  id: 0x90818f05
+  name: "phy_modify_mmd_changed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8390accb
+  type_id: 0x9071eb2d
+  full_name: "phy_modify_mmd_changed"
 }
 elf_symbol {
   id: 0x49b0b3dc
@@ -370616,6 +370787,7 @@ interface {
   symbol_id: 0xe614bbc1
   symbol_id: 0x07c5a76f
   symbol_id: 0x55574d11
+  symbol_id: 0x82abaac5
   symbol_id: 0x7809a362
   symbol_id: 0x91762fff
   symbol_id: 0x7a4705f8
@@ -372406,6 +372578,7 @@ interface {
   symbol_id: 0xf770e060
   symbol_id: 0xfe156c9a
   symbol_id: 0xf569682d
+  symbol_id: 0x8837a38c
   symbol_id: 0x0d9ec99a
   symbol_id: 0x159517e6
   symbol_id: 0x08be3ee4
@@ -372801,6 +372974,8 @@ interface {
   symbol_id: 0x0dfe64b8
   symbol_id: 0x51b726c8
   symbol_id: 0x5d9f16f7
+  symbol_id: 0x89139c9d
+  symbol_id: 0xf80bd100
   symbol_id: 0xd82232b3
   symbol_id: 0x69a31cde
   symbol_id: 0xe2f527ca
@@ -372860,6 +373035,7 @@ interface {
   symbol_id: 0x94cd1327
   symbol_id: 0x9a9fe23f
   symbol_id: 0x6d0482ba
+  symbol_id: 0x858617be
   symbol_id: 0x3a4d5745
   symbol_id: 0xd76880e9
   symbol_id: 0xe2df98e8
@@ -373010,7 +373186,9 @@ interface {
   symbol_id: 0x04c5af8f
   symbol_id: 0x0c07683e
   symbol_id: 0xe5568c92
+  symbol_id: 0x2a53ebba
   symbol_id: 0x078346f5
+  symbol_id: 0xebe5f6cf
   symbol_id: 0x80d03c2c
   symbol_id: 0xf8c3c062
   symbol_id: 0xc00007fe
@@ -373437,6 +373615,12 @@ interface {
   symbol_id: 0x3598fbb3
   symbol_id: 0x343a2d56
   symbol_id: 0x806101d6
+  symbol_id: 0xd1e108fe
+  symbol_id: 0x084b19b7
+  symbol_id: 0xb0dc66ba
+  symbol_id: 0x96b85248
+  symbol_id: 0xd99708c7
+  symbol_id: 0x35c6801f
   symbol_id: 0xa3a0e5a9
   symbol_id: 0x07b1add0
   symbol_id: 0x618539bc
@@ -374554,6 +374738,7 @@ interface {
   symbol_id: 0x28ba8e50
   symbol_id: 0x65d6ca81
   symbol_id: 0x27081fa8
+  symbol_id: 0x4fa74969
   symbol_id: 0x458a15db
   symbol_id: 0x058addcb
   symbol_id: 0x93579cdd
@@ -374969,6 +375154,7 @@ interface {
   symbol_id: 0xa22df476
   symbol_id: 0x3b5dbc43
   symbol_id: 0x06367b1f
+  symbol_id: 0x90818f05
   symbol_id: 0x49b0b3dc
   symbol_id: 0xe4264e80
   symbol_id: 0xb37c1005
