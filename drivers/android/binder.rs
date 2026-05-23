@@ -456,14 +456,6 @@ pub struct class_preempt_notrace_t {
     pub lock: *mut ::core::ffi::c_void,
 }
 
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_276 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_277 {}
-
 pub const FORTIFY_FUNC_memcpy: fortify_func = 8;
 
 pub const FORTIFY_FUNC_memset: fortify_func = 7;
@@ -471,206 +463,6 @@ pub const FORTIFY_FUNC_memset: fortify_func = 7;
 pub const FORTIFY_FUNC_strlen: fortify_func = 2;
 
 pub const FORTIFY_FUNC_strnlen: fortify_func = 1;
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_278 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_279 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_280 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_281 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_282 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_283 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_284 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_285 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_286 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_287 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_289 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_290 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_291 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_292 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_293 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_294 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_295 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_296 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_297 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_298 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_311 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_312 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_313 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_314 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_315 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_316 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_317 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_318 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_319 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_320 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_322 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_323 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_324 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_325 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_326 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_327 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_328 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_329 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_330 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_331 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_333 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_334 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_335 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_336 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_337 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_338 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_339 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_340 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_341 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_342 {}
 
 #[derive(Clone)]
 #[repr(C)]
@@ -1575,10 +1367,6 @@ pub const BINDER_DEBUG_THREADS: C2Rust_Unnamed_393 = 256;
 
 pub const BINDER_DEBUG_READ_WRITE: C2Rust_Unnamed_393 = 64;
 
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_370 {}
-
 pub const BINDER_LOOPER_STATE_ENTERED: C2Rust_Unnamed_412 = 2;
 
 pub const BINDER_LOOPER_STATE_REGISTERED: C2Rust_Unnamed_412 = 1;
@@ -1650,14 +1438,6 @@ pub struct binder_transaction_log {
 
 #[derive(Copy, Clone)]
 #[repr(C)]
-pub struct C2Rust_Unnamed_372 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_373 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
 pub struct binder_ptr_fixup {
     pub offset: binder_size_t,
     pub skip_size: size_t,
@@ -1674,19 +1454,7 @@ pub struct binder_sg_copy {
     pub node: list_head,
 }
 
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_374 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_375 {}
-
 pub const BINDER_DEBUG_FREE_BUFFER: C2Rust_Unnamed_393 = 2048;
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_376 {}
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1697,143 +1465,7 @@ pub struct binder_debugfs_entry {
     pub data: *mut ::core::ffi::c_void,
 }
 
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_377 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_378 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_379 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_380 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_381 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_382 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_383 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_384 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_385 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_386 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_387 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_388 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_389 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_390 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_391 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_392 {}
-
 pub type C2Rust_Unnamed_393 = ::core::ffi::c_uint;
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_394 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_395 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_396 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_397 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_398 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_399 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_400 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_401 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_402 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_403 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_404 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_405 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_406 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_407 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_408 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_409 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_410 {}
-
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_411 {}
 
 pub type C2Rust_Unnamed_412 = ::core::ffi::c_uint;
 
@@ -2567,7 +2199,7 @@ unsafe extern "C" fn find_next_zero_bit(
             return size;
         }
         val = *addr
-            | !(::core::mem::size_of::<C2Rust_Unnamed_276>() as ::core::ffi::c_int
+            | !(0 as ::core::ffi::c_int
                 as ::core::ffi::c_ulong)
                 .wrapping_add(
                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -2641,7 +2273,7 @@ unsafe extern "C" fn find_last_bit(
 ) -> ::core::ffi::c_ulong {
     if 0 != 0 && size <= BITS_PER_LONG as ::core::ffi::c_ulong && size > 0 as ::core::ffi::c_ulong {
         let mut val: ::core::ffi::c_ulong = *addr
-            & (::core::mem::size_of::<C2Rust_Unnamed_277>() as ::core::ffi::c_int
+            & (0 as ::core::ffi::c_int
                 as ::core::ffi::c_ulong)
                 .wrapping_add(
                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -2874,7 +2506,7 @@ unsafe extern "C" fn strnlen(
                         #[link_name = "__compiletime_assert_154"]
                         fn __compiletime_assert_154_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_287>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -2946,7 +2578,7 @@ unsafe extern "C" fn strnlen(
                         fn __compiletime_assert_155_0() -> !;
                     }
                     if (if 0 != 0 {
-                        !((::core::mem::size_of::<C2Rust_Unnamed_286>() as ::core::ffi::c_int
+                        !((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3016,7 +2648,7 @@ unsafe extern "C" fn strnlen(
                                         .wrapping_sub(1 as usize)
                                         .wrapping_sub(7 as usize),
                             )
-                            >> if (::core::mem::size_of::<C2Rust_Unnamed_285>()
+                            >> if (0
                                 as ::core::ffi::c_int
                                 as ::core::ffi::c_ulong)
                                 .wrapping_add(
@@ -3097,7 +2729,7 @@ unsafe extern "C" fn strnlen(
                             {
                                 0
                             } else {
-                                ((::core::mem::size_of::<C2Rust_Unnamed_285>() as ::core::ffi::c_int
+                                ((0 as ::core::ffi::c_int
                                     as ::core::ffi::c_ulong)
                                     .wrapping_add(
                                         ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3190,7 +2822,7 @@ unsafe extern "C" fn strnlen(
                         #[link_name = "__compiletime_assert_156"]
                         fn __compiletime_assert_156_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_284>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3261,7 +2893,7 @@ unsafe extern "C" fn strnlen(
                         #[link_name = "__compiletime_assert_157"]
                         fn __compiletime_assert_157_0() -> !;
                     }
-                    if ((::core::mem::size_of::<C2Rust_Unnamed_283>()
+                    if ((0
                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3321,7 +2953,7 @@ unsafe extern "C" fn strnlen(
                             ) as ::core::ffi::c_ulonglong)
                             .wrapping_add(
                                 (1 as ::core::ffi::c_ulonglong)
-                                    << if (::core::mem::size_of::<C2Rust_Unnamed_282>()
+                                    << if (0
                                         as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                         .wrapping_add(
                                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3382,7 +3014,7 @@ unsafe extern "C" fn strnlen(
                                     {
                                         0
                                     } else {
-                                        ((::core::mem::size_of::<C2Rust_Unnamed_282>()
+                                        ((0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3443,7 +3075,7 @@ unsafe extern "C" fn strnlen(
                                             .trailing_zeros() as i32 + 1
                                     } - 1 as ::core::ffi::c_int,
                             )
-                            & ((::core::mem::size_of::<C2Rust_Unnamed_281>()
+                            & ((0
                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                 .wrapping_add(
                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3503,7 +3135,7 @@ unsafe extern "C" fn strnlen(
                                 ) as ::core::ffi::c_ulonglong)
                                 .wrapping_add(
                                     (1 as ::core::ffi::c_ulonglong)
-                                        << if (::core::mem::size_of::<C2Rust_Unnamed_280>()
+                                        << if (0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3564,7 +3196,7 @@ unsafe extern "C" fn strnlen(
                                         {
                                             0
                                         } else {
-                                            ((::core::mem::size_of::<C2Rust_Unnamed_280>()
+                                            ((0
                                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                                 .wrapping_add(
                                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3632,7 +3264,7 @@ unsafe extern "C" fn strnlen(
                         }
                 };
                 (FORTIFY_FUNC_strnlen as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                    << if (::core::mem::size_of::<C2Rust_Unnamed_279>() as ::core::ffi::c_int
+                    << if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3699,7 +3331,7 @@ unsafe extern "C" fn strnlen(
                     {
                         0
                     } else {
-                        ((::core::mem::size_of::<C2Rust_Unnamed_279>() as ::core::ffi::c_int
+                        ((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3772,7 +3404,7 @@ unsafe extern "C" fn strnlen(
                             .trailing_zeros() as i32
                             + 1
                     } - 1 as ::core::ffi::c_int
-                    & (::core::mem::size_of::<C2Rust_Unnamed_278>() as ::core::ffi::c_int
+                    & (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -3979,7 +3611,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                         #[link_name = "__compiletime_assert_164"]
                         fn __compiletime_assert_164_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_298>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4051,7 +3683,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                         fn __compiletime_assert_165_0() -> !;
                     }
                     if (if 0 != 0 {
-                        !((::core::mem::size_of::<C2Rust_Unnamed_297>() as ::core::ffi::c_int
+                        !((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4121,7 +3753,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                                         .wrapping_sub(1 as usize)
                                         .wrapping_sub(7 as usize),
                             )
-                            >> if (::core::mem::size_of::<C2Rust_Unnamed_296>()
+                            >> if (0
                                 as ::core::ffi::c_int
                                 as ::core::ffi::c_ulong)
                                 .wrapping_add(
@@ -4202,7 +3834,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                             {
                                 0
                             } else {
-                                ((::core::mem::size_of::<C2Rust_Unnamed_296>() as ::core::ffi::c_int
+                                ((0 as ::core::ffi::c_int
                                     as ::core::ffi::c_ulong)
                                     .wrapping_add(
                                         ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4295,7 +3927,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                         #[link_name = "__compiletime_assert_166"]
                         fn __compiletime_assert_166_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_295>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4366,7 +3998,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                         #[link_name = "__compiletime_assert_167"]
                         fn __compiletime_assert_167_0() -> !;
                     }
-                    if ((::core::mem::size_of::<C2Rust_Unnamed_294>()
+                    if ((0
                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4426,7 +4058,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                             ) as ::core::ffi::c_ulonglong)
                             .wrapping_add(
                                 (1 as ::core::ffi::c_ulonglong)
-                                    << if (::core::mem::size_of::<C2Rust_Unnamed_293>()
+                                    << if (0
                                         as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                         .wrapping_add(
                                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4487,7 +4119,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                                     {
                                         0
                                     } else {
-                                        ((::core::mem::size_of::<C2Rust_Unnamed_293>()
+                                        ((0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4548,7 +4180,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                                             .trailing_zeros() as i32 + 1
                                     } - 1 as ::core::ffi::c_int,
                             )
-                            & ((::core::mem::size_of::<C2Rust_Unnamed_292>()
+                            & ((0
                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                 .wrapping_add(
                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4608,7 +4240,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                                 ) as ::core::ffi::c_ulonglong)
                                 .wrapping_add(
                                     (1 as ::core::ffi::c_ulonglong)
-                                        << if (::core::mem::size_of::<C2Rust_Unnamed_291>()
+                                        << if (0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4669,7 +4301,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                                         {
                                             0
                                         } else {
-                                            ((::core::mem::size_of::<C2Rust_Unnamed_291>()
+                                            ((0
                                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                                 .wrapping_add(
                                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4737,7 +4369,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                         }
                 };
                 (FORTIFY_FUNC_strlen as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                    << if (::core::mem::size_of::<C2Rust_Unnamed_290>() as ::core::ffi::c_int
+                    << if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4804,7 +4436,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                     {
                         0
                     } else {
-                        ((::core::mem::size_of::<C2Rust_Unnamed_290>() as ::core::ffi::c_int
+                        ((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -4877,7 +4509,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
                             .trailing_zeros() as i32
                             + 1
                     } - 1 as ::core::ffi::c_int
-                    & (::core::mem::size_of::<C2Rust_Unnamed_289>() as ::core::ffi::c_int
+                    & (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5086,7 +4718,7 @@ unsafe extern "C" fn fortify_memset_chk(
                         #[link_name = "__compiletime_assert_224"]
                         fn __compiletime_assert_224_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_320>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5158,7 +4790,7 @@ unsafe extern "C" fn fortify_memset_chk(
                         fn __compiletime_assert_225_0() -> !;
                     }
                     if (if 0 != 0 {
-                        !((::core::mem::size_of::<C2Rust_Unnamed_319>() as ::core::ffi::c_int
+                        !((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5228,7 +4860,7 @@ unsafe extern "C" fn fortify_memset_chk(
                                         .wrapping_sub(1 as usize)
                                         .wrapping_sub(7 as usize),
                             )
-                            >> if (::core::mem::size_of::<C2Rust_Unnamed_318>()
+                            >> if (0
                                 as ::core::ffi::c_int
                                 as ::core::ffi::c_ulong)
                                 .wrapping_add(
@@ -5309,7 +4941,7 @@ unsafe extern "C" fn fortify_memset_chk(
                             {
                                 0
                             } else {
-                                ((::core::mem::size_of::<C2Rust_Unnamed_318>() as ::core::ffi::c_int
+                                ((0 as ::core::ffi::c_int
                                     as ::core::ffi::c_ulong)
                                     .wrapping_add(
                                         ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5402,7 +5034,7 @@ unsafe extern "C" fn fortify_memset_chk(
                         #[link_name = "__compiletime_assert_226"]
                         fn __compiletime_assert_226_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_317>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5473,7 +5105,7 @@ unsafe extern "C" fn fortify_memset_chk(
                         #[link_name = "__compiletime_assert_227"]
                         fn __compiletime_assert_227_0() -> !;
                     }
-                    if ((::core::mem::size_of::<C2Rust_Unnamed_316>()
+                    if ((0
                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5533,7 +5165,7 @@ unsafe extern "C" fn fortify_memset_chk(
                             ) as ::core::ffi::c_ulonglong)
                             .wrapping_add(
                                 (1 as ::core::ffi::c_ulonglong)
-                                    << if (::core::mem::size_of::<C2Rust_Unnamed_315>()
+                                    << if (0
                                         as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                         .wrapping_add(
                                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5594,7 +5226,7 @@ unsafe extern "C" fn fortify_memset_chk(
                                     {
                                         0
                                     } else {
-                                        ((::core::mem::size_of::<C2Rust_Unnamed_315>()
+                                        ((0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5655,7 +5287,7 @@ unsafe extern "C" fn fortify_memset_chk(
                                             .trailing_zeros() as i32 + 1
                                     } - 1 as ::core::ffi::c_int,
                             )
-                            & ((::core::mem::size_of::<C2Rust_Unnamed_314>()
+                            & ((0
                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                 .wrapping_add(
                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5715,7 +5347,7 @@ unsafe extern "C" fn fortify_memset_chk(
                                 ) as ::core::ffi::c_ulonglong)
                                 .wrapping_add(
                                     (1 as ::core::ffi::c_ulonglong)
-                                        << if (::core::mem::size_of::<C2Rust_Unnamed_313>()
+                                        << if (0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5776,7 +5408,7 @@ unsafe extern "C" fn fortify_memset_chk(
                                         {
                                             0
                                         } else {
-                                            ((::core::mem::size_of::<C2Rust_Unnamed_313>()
+                                            ((0
                                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                                 .wrapping_add(
                                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5844,7 +5476,7 @@ unsafe extern "C" fn fortify_memset_chk(
                         }
                 };
                 (FORTIFY_FUNC_memset as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                    << if (::core::mem::size_of::<C2Rust_Unnamed_312>() as ::core::ffi::c_int
+                    << if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5911,7 +5543,7 @@ unsafe extern "C" fn fortify_memset_chk(
                     {
                         0
                     } else {
-                        ((::core::mem::size_of::<C2Rust_Unnamed_312>() as ::core::ffi::c_int
+                        ((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -5984,7 +5616,7 @@ unsafe extern "C" fn fortify_memset_chk(
                             .trailing_zeros() as i32
                             + 1
                     } - 1 as ::core::ffi::c_int
-                    & (::core::mem::size_of::<C2Rust_Unnamed_311>() as ::core::ffi::c_int
+                    & (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6202,7 +5834,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_234"]
                         fn __compiletime_assert_234_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_342>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6274,7 +5906,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         fn __compiletime_assert_235_0() -> !;
                     }
                     if (if 0 != 0 {
-                        !((::core::mem::size_of::<C2Rust_Unnamed_341>() as ::core::ffi::c_int
+                        !((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6344,7 +5976,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                         .wrapping_sub(1 as usize)
                                         .wrapping_sub(7 as usize),
                             )
-                            >> if (::core::mem::size_of::<C2Rust_Unnamed_340>()
+                            >> if (0
                                 as ::core::ffi::c_int
                                 as ::core::ffi::c_ulong)
                                 .wrapping_add(
@@ -6425,7 +6057,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             {
                                 0
                             } else {
-                                ((::core::mem::size_of::<C2Rust_Unnamed_340>() as ::core::ffi::c_int
+                                ((0 as ::core::ffi::c_int
                                     as ::core::ffi::c_ulong)
                                     .wrapping_add(
                                         ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6518,7 +6150,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_236"]
                         fn __compiletime_assert_236_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_339>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6589,7 +6221,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_237"]
                         fn __compiletime_assert_237_0() -> !;
                     }
-                    if ((::core::mem::size_of::<C2Rust_Unnamed_338>()
+                    if ((0
                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6649,7 +6281,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             ) as ::core::ffi::c_ulonglong)
                             .wrapping_add(
                                 (1 as ::core::ffi::c_ulonglong)
-                                    << if (::core::mem::size_of::<C2Rust_Unnamed_337>()
+                                    << if (0
                                         as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                         .wrapping_add(
                                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6710,7 +6342,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                     {
                                         0
                                     } else {
-                                        ((::core::mem::size_of::<C2Rust_Unnamed_337>()
+                                        ((0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6771,7 +6403,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                             .trailing_zeros() as i32 + 1
                                     } - 1 as ::core::ffi::c_int,
                             )
-                            & ((::core::mem::size_of::<C2Rust_Unnamed_336>()
+                            & ((0
                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                 .wrapping_add(
                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6831,7 +6463,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                 ) as ::core::ffi::c_ulonglong)
                                 .wrapping_add(
                                     (1 as ::core::ffi::c_ulonglong)
-                                        << if (::core::mem::size_of::<C2Rust_Unnamed_335>()
+                                        << if (0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6892,7 +6524,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                         {
                                             0
                                         } else {
-                                            ((::core::mem::size_of::<C2Rust_Unnamed_335>()
+                                            ((0
                                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                                 .wrapping_add(
                                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -6960,7 +6592,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         }
                 };
                 (func as ::core::ffi::c_ulong)
-                    << if (::core::mem::size_of::<C2Rust_Unnamed_334>() as ::core::ffi::c_int
+                    << if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7027,7 +6659,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                     {
                         0
                     } else {
-                        ((::core::mem::size_of::<C2Rust_Unnamed_334>() as ::core::ffi::c_int
+                        ((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7100,7 +6732,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             .trailing_zeros() as i32
                             + 1
                     } - 1 as ::core::ffi::c_int
-                    & (::core::mem::size_of::<C2Rust_Unnamed_333>() as ::core::ffi::c_int
+                    & (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7291,7 +6923,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_244"]
                         fn __compiletime_assert_244_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_331>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7363,7 +6995,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         fn __compiletime_assert_245_0() -> !;
                     }
                     if (if 0 != 0 {
-                        !((::core::mem::size_of::<C2Rust_Unnamed_330>() as ::core::ffi::c_int
+                        !((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7433,7 +7065,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                         .wrapping_sub(1 as usize)
                                         .wrapping_sub(7 as usize),
                             )
-                            >> if (::core::mem::size_of::<C2Rust_Unnamed_329>()
+                            >> if (0
                                 as ::core::ffi::c_int
                                 as ::core::ffi::c_ulong)
                                 .wrapping_add(
@@ -7514,7 +7146,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             {
                                 0
                             } else {
-                                ((::core::mem::size_of::<C2Rust_Unnamed_329>() as ::core::ffi::c_int
+                                ((0 as ::core::ffi::c_int
                                     as ::core::ffi::c_ulong)
                                     .wrapping_add(
                                         ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7607,7 +7239,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_246"]
                         fn __compiletime_assert_246_0() -> !;
                     }
-                    if (::core::mem::size_of::<C2Rust_Unnamed_328>() as ::core::ffi::c_int
+                    if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7678,7 +7310,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         #[link_name = "__compiletime_assert_247"]
                         fn __compiletime_assert_247_0() -> !;
                     }
-                    if ((::core::mem::size_of::<C2Rust_Unnamed_327>()
+                    if ((0
                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7738,7 +7370,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             ) as ::core::ffi::c_ulonglong)
                             .wrapping_add(
                                 (1 as ::core::ffi::c_ulonglong)
-                                    << if (::core::mem::size_of::<C2Rust_Unnamed_326>()
+                                    << if (0
                                         as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                         .wrapping_add(
                                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7799,7 +7431,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                     {
                                         0
                                     } else {
-                                        ((::core::mem::size_of::<C2Rust_Unnamed_326>()
+                                        ((0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7860,7 +7492,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                             .trailing_zeros() as i32 + 1
                                     } - 1 as ::core::ffi::c_int,
                             )
-                            & ((::core::mem::size_of::<C2Rust_Unnamed_325>()
+                            & ((0
                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                 .wrapping_add(
                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7920,7 +7552,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                 ) as ::core::ffi::c_ulonglong)
                                 .wrapping_add(
                                     (1 as ::core::ffi::c_ulonglong)
-                                        << if (::core::mem::size_of::<C2Rust_Unnamed_324>()
+                                        << if (0
                                             as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                             .wrapping_add(
                                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -7981,7 +7613,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                                         {
                                             0
                                         } else {
-                                            ((::core::mem::size_of::<C2Rust_Unnamed_324>()
+                                            ((0
                                                 as ::core::ffi::c_int as ::core::ffi::c_ulong)
                                                 .wrapping_add(
                                                     ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -8049,7 +7681,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                         }
                 };
                 (func as ::core::ffi::c_ulong)
-                    << if (::core::mem::size_of::<C2Rust_Unnamed_323>() as ::core::ffi::c_int
+                    << if (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -8116,7 +7748,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                     {
                         0
                     } else {
-                        ((::core::mem::size_of::<C2Rust_Unnamed_323>() as ::core::ffi::c_int
+                        ((0 as ::core::ffi::c_int
                             as ::core::ffi::c_ulong)
                             .wrapping_add(
                                 ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -8189,7 +7821,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
                             .trailing_zeros() as i32
                             + 1
                     } - 1 as ::core::ffi::c_int
-                    & (::core::mem::size_of::<C2Rust_Unnamed_322>() as ::core::ffi::c_int
+                    & (0 as ::core::ffi::c_int
                         as ::core::ffi::c_ulong)
                         .wrapping_add(
                             ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
@@ -9951,12 +9583,12 @@ static mut __param_debug_mask: kernel_param = unsafe {
         name: &raw const __param_str_debug_mask as *const ::core::ffi::c_char,
         mod_: THIS_MODULE,
         ops: &raw const param_ops_uint,
-        perm: (::core::mem::size_of::<C2Rust_Unnamed_399>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_398>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_397>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_396>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_395>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_394>() as ::core::ffi::c_int
+        perm: (0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
             + 0o644 as ::core::ffi::c_int) as u16_0,
         level: -1 as s8,
         flags: 0 as u8_0,
@@ -9988,12 +9620,12 @@ static mut __param_devices: kernel_param = unsafe {
         name: &raw const __param_str_devices as *const ::core::ffi::c_char,
         mod_: THIS_MODULE,
         ops: &raw const param_ops_charp,
-        perm: (::core::mem::size_of::<C2Rust_Unnamed_405>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_404>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_403>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_402>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_401>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_400>() as ::core::ffi::c_int
+        perm: (0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
             + 0o444 as ::core::ffi::c_int) as u16_0,
         level: -1 as s8,
         flags: 0 as u8_0,
@@ -10048,12 +9680,12 @@ static mut __param_stop_on_user_error: kernel_param = unsafe {
         name: &raw const __param_str_stop_on_user_error as *const ::core::ffi::c_char,
         mod_: THIS_MODULE,
         ops: &raw const __param_ops_stop_on_user_error,
-        perm: (::core::mem::size_of::<C2Rust_Unnamed_411>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_410>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_409>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_408>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_407>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_406>() as ::core::ffi::c_int
+        perm: (0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int
             + 0o644 as ::core::ffi::c_int) as u16_0,
         level: -1 as s8,
         flags: 0 as u8_0,
@@ -10243,7 +9875,7 @@ unsafe extern "C" fn binder_transaction_log_add(
         >= (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
             .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_373>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         (*log).full = true_0 as ::core::ffi::c_int != 0;
@@ -10253,7 +9885,7 @@ unsafe extern "C" fn binder_transaction_log_add(
             (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
                 .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
                 .wrapping_add(
-                    ::core::mem::size_of::<C2Rust_Unnamed_372>() as ::core::ffi::c_int as usize,
+                    0 as ::core::ffi::c_int as usize,
                 ),
         ) as isize,
     ) as *mut binder_transaction_log_entry;
@@ -14076,8 +13708,8 @@ unsafe extern "C" fn binder_transaction(
         &raw mut (*e).context_name as *mut ::core::ffi::c_char,
         (*(*proc).context).name,
         (255 as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_375>() as ::core::ffi::c_int
-            + ::core::mem::size_of::<C2Rust_Unnamed_374>() as ::core::ffi::c_int) as usize,
+            + 0 as ::core::ffi::c_int
+            + 0 as ::core::ffi::c_int) as usize,
     );
     _binder_inner_proc_lock(proc, 3324 as ::core::ffi::c_int);
     (*thread).ee.id = t_debug_id as __u32;
@@ -16212,7 +15844,7 @@ unsafe extern "C" fn binder_thread_write(
             < (::core::mem::size_of::<[atomic_t; 22]>() as usize)
                 .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
                 .wrapping_add(
-                    ::core::mem::size_of::<C2Rust_Unnamed_376>() as ::core::ffi::c_int as usize,
+                    0 as ::core::ffi::c_int as usize,
                 )
         {
             atomic_inc(
@@ -17193,7 +16825,7 @@ unsafe extern "C" fn binder_stat_br(
         < (::core::mem::size_of::<[atomic_t; 23]>() as usize)
             .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_370>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         atomic_inc(
@@ -21020,11 +20652,11 @@ unsafe extern "C" fn print_binder_stats(
     }
     if (::core::mem::size_of::<[atomic_t; 22]>() as usize)
         .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
-        .wrapping_add(::core::mem::size_of::<C2Rust_Unnamed_392>() as ::core::ffi::c_int as usize)
+        .wrapping_add(0 as ::core::ffi::c_int as usize)
         != (::core::mem::size_of::<[*const ::core::ffi::c_char; 22]>() as usize)
             .wrapping_div(::core::mem::size_of::<*const ::core::ffi::c_char>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_391>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         __compiletime_assert_875_0();
@@ -21034,7 +20666,7 @@ unsafe extern "C" fn print_binder_stats(
         < (::core::mem::size_of::<[atomic_t; 22]>() as usize)
             .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_390>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         let mut temp: ::core::ffi::c_int = atomic_read(
@@ -21057,11 +20689,11 @@ unsafe extern "C" fn print_binder_stats(
     }
     if (::core::mem::size_of::<[atomic_t; 23]>() as usize)
         .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
-        .wrapping_add(::core::mem::size_of::<C2Rust_Unnamed_389>() as ::core::ffi::c_int as usize)
+        .wrapping_add(0 as ::core::ffi::c_int as usize)
         != (::core::mem::size_of::<[*const ::core::ffi::c_char; 23]>() as usize)
             .wrapping_div(::core::mem::size_of::<*const ::core::ffi::c_char>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_388>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         __compiletime_assert_876_0();
@@ -21071,7 +20703,7 @@ unsafe extern "C" fn print_binder_stats(
         < (::core::mem::size_of::<[atomic_t; 23]>() as usize)
             .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_387>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         let mut temp_0: ::core::ffi::c_int = atomic_read(
@@ -21094,11 +20726,11 @@ unsafe extern "C" fn print_binder_stats(
     }
     if (::core::mem::size_of::<[atomic_t; 8]>() as usize)
         .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
-        .wrapping_add(::core::mem::size_of::<C2Rust_Unnamed_386>() as ::core::ffi::c_int as usize)
+        .wrapping_add(0 as ::core::ffi::c_int as usize)
         != (::core::mem::size_of::<[*const ::core::ffi::c_char; 8]>() as usize)
             .wrapping_div(::core::mem::size_of::<*const ::core::ffi::c_char>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_385>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         __compiletime_assert_877_0();
@@ -21109,11 +20741,11 @@ unsafe extern "C" fn print_binder_stats(
     }
     if (::core::mem::size_of::<[atomic_t; 8]>() as usize)
         .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
-        .wrapping_add(::core::mem::size_of::<C2Rust_Unnamed_384>() as ::core::ffi::c_int as usize)
+        .wrapping_add(0 as ::core::ffi::c_int as usize)
         != (::core::mem::size_of::<[atomic_t; 8]>() as usize)
             .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_383>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         __compiletime_assert_878_0();
@@ -21123,7 +20755,7 @@ unsafe extern "C" fn print_binder_stats(
         < (::core::mem::size_of::<[atomic_t; 8]>() as usize)
             .wrapping_div(::core::mem::size_of::<atomic_t>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_382>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
     {
         let mut created: ::core::ffi::c_int = atomic_read(
@@ -21613,7 +21245,7 @@ unsafe extern "C" fn transaction_log_show(
         < (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
             .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_381>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
         && !(*log).full
     {
@@ -21623,7 +21255,7 @@ unsafe extern "C" fn transaction_log_show(
             (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
                 .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
                 .wrapping_add(
-                    ::core::mem::size_of::<C2Rust_Unnamed_380>() as ::core::ffi::c_int as usize,
+                    0 as ::core::ffi::c_int as usize,
                 ),
         )
     }) as ::core::ffi::c_uint;
@@ -21631,14 +21263,14 @@ unsafe extern "C" fn transaction_log_show(
         > (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
             .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_379>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             )
         || (*log).full as ::core::ffi::c_int != 0
     {
         count = (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
             .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
             .wrapping_add(
-                ::core::mem::size_of::<C2Rust_Unnamed_378>() as ::core::ffi::c_int as usize,
+                0 as ::core::ffi::c_int as usize,
             ) as ::core::ffi::c_uint;
     }
     i = 0 as ::core::ffi::c_int;
@@ -21649,7 +21281,7 @@ unsafe extern "C" fn transaction_log_show(
             (::core::mem::size_of::<[binder_transaction_log_entry; 32]>() as usize)
                 .wrapping_div(::core::mem::size_of::<binder_transaction_log_entry>() as usize)
                 .wrapping_add(
-                    ::core::mem::size_of::<C2Rust_Unnamed_377>() as ::core::ffi::c_int as usize,
+                    0 as ::core::ffi::c_int as usize,
                 ),
         ) as ::core::ffi::c_uint;
         print_binder_transaction_log_entry(
