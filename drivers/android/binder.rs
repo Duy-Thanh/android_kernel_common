@@ -1509,662 +1509,247 @@ pub const EPROTO: ::core::ffi::c_int = 71 as ::core::ffi::c_int;
 
 #[inline]
 unsafe extern "C" fn kasan_check_read(
-    mut p: *const ::core::ffi::c_void,
-    mut size: ::core::ffi::c_uint,
+    _p: *const ::core::ffi::c_void,
+    _size: ::core::ffi::c_uint,
 ) -> bool_0 {
-    return true_0 as ::core::ffi::c_int != 0;
+    true
 }
 
 #[inline]
 unsafe extern "C" fn kasan_check_write(
-    mut p: *const ::core::ffi::c_void,
-    mut size: ::core::ffi::c_uint,
+    _p: *const ::core::ffi::c_void,
+    _size: ::core::ffi::c_uint,
 ) -> bool_0 {
-    return true_0 as ::core::ffi::c_int != 0;
+    true
 }
 
-pub const KCSAN_ACCESS_WRITE: ::core::ffi::c_int =
-    (1 as ::core::ffi::c_int) << 0 as ::core::ffi::c_int;
-
-pub const KCSAN_ACCESS_COMPOUND: ::core::ffi::c_int =
-    (1 as ::core::ffi::c_int) << 1 as ::core::ffi::c_int;
-
-pub const KCSAN_ACCESS_ATOMIC: ::core::ffi::c_int =
-    (1 as ::core::ffi::c_int) << 2 as ::core::ffi::c_int;
+pub const KCSAN_ACCESS_WRITE: ::core::ffi::c_int = 1;
+pub const KCSAN_ACCESS_COMPOUND: ::core::ffi::c_int = 2;
+pub const KCSAN_ACCESS_ATOMIC: ::core::ffi::c_int = 4;
 
 #[inline]
 unsafe extern "C" fn kcsan_check_access(
-    mut ptr: *const ::core::ffi::c_void,
-    mut size: size_t,
-    mut type_0: ::core::ffi::c_int,
-) {
+    _ptr: *const ::core::ffi::c_void,
+    _size: size_t,
+    _type_0: ::core::ffi::c_int,
+) {}
+
+pub const SIZE_MAX: size_t = !(0 as size_t);
+pub const LONG_MAX: ::core::ffi::c_long = 9223372036854775807;
+
+#[inline(always)]
+unsafe extern "C" fn PTR_ERR(ptr: *const ::core::ffi::c_void) -> ::core::ffi::c_long {
+    ptr as ::core::ffi::c_long
 }
 
-pub const SIZE_MAX: size_t = !(0 as ::core::ffi::c_int as size_t);
-
-pub const LONG_MAX: ::core::ffi::c_long =
-    (!(0 as ::core::ffi::c_ulong) >> 1 as ::core::ffi::c_int) as ::core::ffi::c_long;
-
-#[inline]
-unsafe extern "C" fn PTR_ERR(mut ptr: *const ::core::ffi::c_void) -> ::core::ffi::c_long {
-    return ptr as ::core::ffi::c_long;
+#[inline(always)]
+unsafe extern "C" fn IS_ERR(ptr: *const ::core::ffi::c_void) -> bool_0 {
+    (ptr as usize) >= (-4095isize as usize)
 }
 
-#[inline]
-unsafe extern "C" fn IS_ERR(mut ptr: *const ::core::ffi::c_void) -> bool_0 {
-    return (ptr as ::core::ffi::c_ulong as *mut ::core::ffi::c_void as ::core::ffi::c_ulong
-        >= -4095 as ::core::ffi::c_int as ::core::ffi::c_ulong) as ::core::ffi::c_int
-        as ::core::ffi::c_long
-        != 0;
+#[inline(always)]
+unsafe extern "C" fn IS_ERR_OR_NULL(ptr: *const ::core::ffi::c_void) -> bool_0 {
+    ptr.is_null() || IS_ERR(ptr)
 }
 
-#[inline]
-unsafe extern "C" fn IS_ERR_OR_NULL(mut ptr: *const ::core::ffi::c_void) -> bool_0 {
-    return ptr.is_null() as ::core::ffi::c_int as ::core::ffi::c_long != 0
-        || (ptr as ::core::ffi::c_ulong as *mut ::core::ffi::c_void as ::core::ffi::c_ulong
-            >= -4095 as ::core::ffi::c_int as ::core::ffi::c_ulong) as ::core::ffi::c_int
-            as ::core::ffi::c_long
-            != 0;
-}
-
-pub const BITS_PER_BYTE: ::core::ffi::c_int = 8 as ::core::ffi::c_int;
-
+pub const BITS_PER_BYTE: ::core::ffi::c_int = 8;
 pub const THIS_MODULE: *mut module = ::core::ptr::null_mut::<module>();
-
 pub const HZ: ::core::ffi::c_int = CONFIG_HZ;
 
-#[inline]
-unsafe extern "C" fn __must_check_overflow(mut overflow: bool_0) -> bool_0 {
-    return overflow as ::core::ffi::c_int as ::core::ffi::c_long != 0;
+#[inline(always)]
+unsafe extern "C" fn __must_check_overflow(overflow: bool_0) -> bool_0 {
+    overflow
 }
 
 #[inline(always)]
 unsafe extern "C" fn get_current() -> *mut task_struct {
-    let mut sp_el0: ::core::ffi::c_ulong = 0;
-    asm!(
-        "mrs {0}, sp_el0\n", lateout(reg) sp_el0, options(preserves_flags, pure,
-        readonly)
-    );
-    return sp_el0 as *mut task_struct;
+    kernel::bindings::get_current()
 }
 
 #[inline(always)]
 unsafe extern "C" fn generic_test_bit(
-    mut nr: ::core::ffi::c_ulong,
-    mut addr: *const ::core::ffi::c_ulong,
+    nr: ::core::ffi::c_ulong,
+    addr: *const ::core::ffi::c_ulong,
 ) -> bool_0 {
-    return 1 as ::core::ffi::c_ulong
-        & ::core::ptr::read_volatile::<::core::ffi::c_ulong>(
-            addr.offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_ulong) as isize),
-        ) >> (nr & (BITS_PER_LONG - 1 as ::core::ffi::c_int) as ::core::ffi::c_ulong)
-        != 0;
+    let p = addr.offset((nr / BITS_PER_LONG as ::core::ffi::c_ulong) as isize);
+    let mask = 1 << (nr % BITS_PER_LONG as ::core::ffi::c_ulong);
+    (::core::ptr::read_volatile(p) & mask) != 0
 }
 
 #[inline(always)]
 unsafe extern "C" fn const_test_bit(
-    mut nr: ::core::ffi::c_ulong,
-    mut addr: *const ::core::ffi::c_ulong,
+    nr: ::core::ffi::c_ulong,
+    addr: *const ::core::ffi::c_ulong,
 ) -> bool_0 {
-    let mut p: *const ::core::ffi::c_ulong = (addr as *const ::core::ffi::c_ulong)
-        .offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_ulong) as isize);
-    let mut mask: ::core::ffi::c_ulong =
-        (1 as ::core::ffi::c_ulong) << nr.wrapping_rem(BITS_PER_LONG as ::core::ffi::c_ulong);
-    let mut val: ::core::ffi::c_ulong = *p;
-    return val & mask != 0;
+    let p = addr.offset((nr / BITS_PER_LONG as ::core::ffi::c_ulong) as isize);
+    let mask = 1 << (nr % BITS_PER_LONG as ::core::ffi::c_ulong);
+    (*p & mask) != 0
 }
 
 #[inline(always)]
-unsafe extern "C" fn __ffs(mut word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
-    return word.trailing_zeros() as i32 as ::core::ffi::c_uint;
+unsafe extern "C" fn __ffs(word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
+    word.trailing_zeros()
 }
 
 #[inline(always)]
-unsafe extern "C" fn __fls(mut word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
-    return (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-        .wrapping_mul(8 as usize)
-        .wrapping_sub(1 as usize)
-        .wrapping_sub(word.leading_zeros() as i32 as usize) as ::core::ffi::c_uint;
+unsafe extern "C" fn __fls(word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
+    (usize::BITS - 1 - word.leading_zeros()) as ::core::ffi::c_uint
 }
 
-#[inline(always)]
-unsafe fn __atomic_i32_from_atomic_t(
-    v: *mut atomic_t,
-) -> *mut ::core::sync::atomic::AtomicI32 {
-    &raw mut (*v).counter as *mut ::core::ffi::c_int as *mut ::core::sync::atomic::AtomicI32
-}
-
-#[inline(always)]
-unsafe fn __atomic_i64_from_atomic64_t(
-    v: *mut atomic64_t,
-) -> *mut ::core::sync::atomic::AtomicI64 {
-    &raw mut (*v).counter as *mut s64 as *mut ::core::sync::atomic::AtomicI64
-}
-
-pub const SZ_1K: ::core::ffi::c_int = 0x400 as ::core::ffi::c_int;
-
+pub const SZ_1K: ::core::ffi::c_int = 0x400;
 pub const PAGE_SHIFT: ::core::ffi::c_int = CONFIG_PAGE_SHIFT;
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic_fetch_add_relaxed(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic_fetch_sub_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Release);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic_add_return(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v))
-        .fetch_add(i, ::core::sync::atomic::Ordering::SeqCst)
-        .wrapping_add(i);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic64_andnot(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v))
-        .fetch_and(!(i as s64), ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic64_or(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v))
-        .fetch_or(i as s64, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic64_add(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v))
-        .fetch_add(i as s64, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic64_fetch_add_relaxed(
-    mut i: ::core::ffi::c_long,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    return (*__atomic_i64_from_atomic64_t(v))
-        .fetch_add(i as s64, ::core::sync::atomic::Ordering::Relaxed)
-        as ::core::ffi::c_long;
-}
-
-#[inline(always)]
-unsafe extern "C" fn arch_atomic64_sub_return(
-    mut i: ::core::ffi::c_long,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    let i = i as s64;
-    return (*__atomic_i64_from_atomic64_t(v))
-        .fetch_sub(i, ::core::sync::atomic::Ordering::SeqCst)
-        .wrapping_sub(i) as ::core::ffi::c_long;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_read(mut v: *const atomic_t) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v as *mut atomic_t))
-        .load(::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_set(mut v: *mut atomic_t, mut i: ::core::ffi::c_int) {
-    (*__atomic_i32_from_atomic_t(v)).store(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    arch_atomic_add(i, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_add_return(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return arch_atomic_add_return(i, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_fetch_add_relaxed(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return arch_atomic_fetch_add_relaxed(i, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    arch_atomic_sub(i, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_fetch_sub_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return arch_atomic_fetch_sub_release(i, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_inc(mut v: *mut atomic_t) {
-    raw_atomic_add(1 as ::core::ffi::c_int, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_inc_return(mut v: *mut atomic_t) -> ::core::ffi::c_int {
-    return raw_atomic_add_return(1 as ::core::ffi::c_int, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_dec(mut v: *mut atomic_t) {
-    raw_atomic_sub(1 as ::core::ffi::c_int, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_read(mut v: *const atomic64_t) -> s64 {
-    return (*__atomic_i64_from_atomic64_t(v as *mut atomic64_t))
-        .load(::core::sync::atomic::Ordering::Relaxed);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_add(mut i: s64, mut v: *mut atomic64_t) {
-    arch_atomic64_add(i as ::core::ffi::c_long, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_fetch_add_relaxed(mut i: s64, mut v: *mut atomic64_t) -> s64 {
-    return arch_atomic64_fetch_add_relaxed(i as ::core::ffi::c_long, v) as s64;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_sub_return(mut i: s64, mut v: *mut atomic64_t) -> s64 {
-    return arch_atomic64_sub_return(i as ::core::ffi::c_long, v) as s64;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_fetch_inc_relaxed(mut v: *mut atomic64_t) -> s64 {
-    return raw_atomic64_fetch_add_relaxed(1 as s64, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_andnot(mut i: s64, mut v: *mut atomic64_t) {
-    arch_atomic64_andnot(i as ::core::ffi::c_long, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_or(mut i: s64, mut v: *mut atomic64_t) {
-    arch_atomic64_or(i as ::core::ffi::c_long, v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic64_sub_and_test(mut i: s64, mut v: *mut atomic64_t) -> bool_0 {
-    return raw_atomic64_sub_return(i, v) == 0 as s64;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_read(mut v: *const atomic_long_t) -> ::core::ffi::c_long {
-    return raw_atomic64_read(v as *const atomic64_t) as ::core::ffi::c_long;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_add(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
-    raw_atomic64_add(i as s64, v as *mut atomic64_t);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_fetch_inc_relaxed(
-    mut v: *mut atomic_long_t,
-) -> ::core::ffi::c_long {
-    return raw_atomic64_fetch_inc_relaxed(v as *mut atomic64_t) as ::core::ffi::c_long;
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_andnot(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
-    raw_atomic64_andnot(i as s64, v as *mut atomic64_t);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_or(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
-    raw_atomic64_or(i as s64, v as *mut atomic64_t);
-}
-
-#[inline(always)]
-unsafe extern "C" fn raw_atomic_long_sub_and_test(
-    mut i: ::core::ffi::c_long,
-    mut v: *mut atomic_long_t,
-) -> bool_0 {
-    return raw_atomic64_sub_and_test(i as s64, v as *mut atomic64_t);
-}
 
 #[inline]
 unsafe extern "C" fn kmsan_unpoison_memory(
-    mut address: *const ::core::ffi::c_void,
-    mut size: size_t,
-) {
-}
+    _address: *const ::core::ffi::c_void,
+    _size: size_t,
+) {}
 
 #[inline]
 unsafe extern "C" fn kmsan_copy_to_user(
-    mut to: *mut ::core::ffi::c_void,
-    mut from: *const ::core::ffi::c_void,
-    mut to_copy: size_t,
-    mut left: size_t,
-) {
-}
+    _to: *mut ::core::ffi::c_void,
+    _from: *const ::core::ffi::c_void,
+    _to_copy: size_t,
+    _left: size_t,
+) {}
 
 #[inline(always)]
-unsafe extern "C" fn instrument_atomic_read(mut v: *const ::core::ffi::c_void, mut size: size_t) {
-    kasan_check_read(v, size as ::core::ffi::c_uint);
-    kcsan_check_access(v, size, KCSAN_ACCESS_ATOMIC);
-}
+unsafe extern "C" fn instrument_atomic_read(_v: *const ::core::ffi::c_void, _size: size_t) {}
 
 #[inline(always)]
-unsafe extern "C" fn instrument_atomic_write(mut v: *const ::core::ffi::c_void, mut size: size_t) {
-    kasan_check_write(v, size as ::core::ffi::c_uint);
-    kcsan_check_access(v, size, KCSAN_ACCESS_ATOMIC | KCSAN_ACCESS_WRITE);
-}
+unsafe extern "C" fn instrument_atomic_write(_v: *const ::core::ffi::c_void, _size: size_t) {}
 
 #[inline(always)]
-unsafe extern "C" fn instrument_atomic_read_write(
-    mut v: *const ::core::ffi::c_void,
-    mut size: size_t,
-) {
-    kasan_check_write(v, size as ::core::ffi::c_uint);
-    kcsan_check_access(
-        v,
-        size,
-        KCSAN_ACCESS_ATOMIC | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_COMPOUND,
-    );
-}
+unsafe extern "C" fn instrument_atomic_read_write(_v: *const ::core::ffi::c_void, _size: size_t) {}
 
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_to_user(
-    mut to: *mut ::core::ffi::c_void,
-    mut from: *const ::core::ffi::c_void,
-    mut n: ::core::ffi::c_ulong,
-) {
-    kasan_check_read(from, n as ::core::ffi::c_uint);
-    kcsan_check_access(from, n as size_t, 0 as ::core::ffi::c_int);
-    kmsan_copy_to_user(to, from, n as size_t, 0 as size_t);
-}
+    _to: *mut ::core::ffi::c_void,
+    _from: *const ::core::ffi::c_void,
+    _n: ::core::ffi::c_ulong,
+) {}
 
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_from_user_before(
-    mut to: *const ::core::ffi::c_void,
-    mut from: *const ::core::ffi::c_void,
-    mut n: ::core::ffi::c_ulong,
-) {
-    kasan_check_write(to, n as ::core::ffi::c_uint);
-    kcsan_check_access(to, n as size_t, KCSAN_ACCESS_WRITE);
-}
+    _to: *const ::core::ffi::c_void,
+    _from: *const ::core::ffi::c_void,
+    _n: ::core::ffi::c_ulong,
+) {}
 
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_from_user_after(
-    mut to: *const ::core::ffi::c_void,
-    mut from: *const ::core::ffi::c_void,
-    mut n: ::core::ffi::c_ulong,
-    mut left: ::core::ffi::c_ulong,
-) {
-    kmsan_unpoison_memory(to, (n as size_t).wrapping_sub(left as size_t));
+    _to: *const ::core::ffi::c_void,
+    _from: *const ::core::ffi::c_void,
+    _n: ::core::ffi::c_ulong,
+    _left: ::core::ffi::c_ulong,
+) {}
+
+#[inline(always)]
+unsafe extern "C" fn atomic_read(v: *const atomic_t) -> ::core::ffi::c_int {
+    kernel::bindings::atomic_read(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_read(mut v: *const atomic_t) -> ::core::ffi::c_int {
-    instrument_atomic_read(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    return raw_atomic_read(v);
-}
-
-#[inline(always)]
-unsafe extern "C" fn atomic_set(mut v: *mut atomic_t, mut i: ::core::ffi::c_int) {
-    instrument_atomic_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    raw_atomic_set(v, i);
+unsafe extern "C" fn atomic_set(v: *mut atomic_t, i: ::core::ffi::c_int) {
+    kernel::bindings::atomic_set(v, i)
 }
 
 #[inline(always)]
 unsafe extern "C" fn atomic_fetch_add_relaxed(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
+    i: ::core::ffi::c_int,
+    v: *mut atomic_t,
 ) -> ::core::ffi::c_int {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    return raw_atomic_fetch_add_relaxed(i, v);
+    kernel::bindings::atomic_fetch_add_relaxed(i, v)
 }
 
 #[inline(always)]
 unsafe extern "C" fn atomic_fetch_sub_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
+    i: ::core::ffi::c_int,
+    v: *mut atomic_t,
 ) -> ::core::ffi::c_int {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    return raw_atomic_fetch_sub_release(i, v);
+    kernel::bindings::atomic_fetch_sub_release(i, v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_inc(mut v: *mut atomic_t) {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    raw_atomic_inc(v);
+unsafe extern "C" fn atomic_inc(v: *mut atomic_t) {
+    kernel::bindings::atomic_inc(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_inc_return(mut v: *mut atomic_t) -> ::core::ffi::c_int {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    return raw_atomic_inc_return(v);
+unsafe extern "C" fn atomic_inc_return(v: *mut atomic_t) -> ::core::ffi::c_int {
+    kernel::bindings::atomic_inc_return(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_dec(mut v: *mut atomic_t) {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_t>() as size_t,
-    );
-    raw_atomic_dec(v);
+unsafe extern "C" fn atomic_dec(v: *mut atomic_t) {
+    kernel::bindings::atomic_dec(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_long_read(mut v: *const atomic_long_t) -> ::core::ffi::c_long {
-    instrument_atomic_read(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_long_t>() as size_t,
-    );
-    return raw_atomic_long_read(v);
+unsafe extern "C" fn atomic_long_read(v: *const atomic_long_t) -> ::core::ffi::c_long {
+    kernel::bindings::atomic64_read(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_long_add(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_long_t>() as size_t,
-    );
-    raw_atomic_long_add(i, v);
+unsafe extern "C" fn atomic_long_add(i: ::core::ffi::c_long, v: *mut atomic_long_t) {
+    kernel::bindings::atomic64_add(i, v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_long_fetch_inc_relaxed(
-    mut v: *mut atomic_long_t,
-) -> ::core::ffi::c_long {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_long_t>() as size_t,
-    );
-    return raw_atomic_long_fetch_inc_relaxed(v);
+unsafe extern "C" fn atomic_long_fetch_inc_relaxed(v: *mut atomic_long_t) -> ::core::ffi::c_long {
+    kernel::bindings::atomic64_fetch_inc_relaxed(v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn atomic_long_sub_and_test(
-    mut i: ::core::ffi::c_long,
-    mut v: *mut atomic_long_t,
-) -> bool_0 {
-    instrument_atomic_read_write(
-        v as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<atomic_long_t>() as size_t,
-    );
-    return raw_atomic_long_sub_and_test(i, v);
+unsafe extern "C" fn atomic_long_sub_and_test(i: ::core::ffi::c_long, v: *mut atomic_long_t) -> bool_0 {
+    kernel::bindings::atomic64_sub_and_test(i, v)
 }
 
 #[inline(always)]
-unsafe extern "C" fn arch_set_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::core::ffi::c_ulong) {
-    p = p.offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_uint) as isize);
-    raw_atomic_long_or(
-        ((1 as ::core::ffi::c_ulong) << nr.wrapping_rem(BITS_PER_LONG as ::core::ffi::c_uint))
-            as ::core::ffi::c_long,
-        p as *mut atomic_long_t,
-    );
+unsafe extern "C" fn set_bit(nr: ::core::ffi::c_long, addr: *mut ::core::ffi::c_ulong) {
+    kernel::bindings::set_bit(nr as usize, addr as *mut usize)
 }
 
 #[inline(always)]
-unsafe extern "C" fn arch_clear_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::core::ffi::c_ulong) {
-    p = p.offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_uint) as isize);
-    raw_atomic_long_andnot(
-        ((1 as ::core::ffi::c_ulong) << nr.wrapping_rem(BITS_PER_LONG as ::core::ffi::c_uint))
-            as ::core::ffi::c_long,
-        p as *mut atomic_long_t,
-    );
+unsafe extern "C" fn clear_bit(nr: ::core::ffi::c_long, addr: *mut ::core::ffi::c_ulong) {
+    kernel::bindings::clear_bit(nr as usize, addr as *mut usize)
 }
 
 #[inline(always)]
-unsafe extern "C" fn set_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::core::ffi::c_ulong) {
-    instrument_atomic_write(
-        addr.offset((nr / BITS_PER_LONG as ::core::ffi::c_long) as isize)
-            as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<::core::ffi::c_long>() as size_t,
-    );
-    arch_set_bit(nr as ::core::ffi::c_uint, addr);
+unsafe extern "C" fn sign_extend64(value: __u64, index: ::core::ffi::c_int) -> __s64 {
+    let shift = 63 - index;
+    (value << shift) as __s64 >> shift
 }
 
-#[inline(always)]
-unsafe extern "C" fn clear_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::core::ffi::c_ulong) {
-    instrument_atomic_write(
-        addr.offset((nr / BITS_PER_LONG as ::core::ffi::c_long) as isize)
-            as *const ::core::ffi::c_void,
-        ::core::mem::size_of::<::core::ffi::c_long>() as size_t,
-    );
-    arch_clear_bit(nr as ::core::ffi::c_uint, addr);
-}
-
-#[inline(always)]
-unsafe extern "C" fn sign_extend64(mut value: __u64, mut index: ::core::ffi::c_int) -> __s64 {
-    let mut shift: __u8 = (63 as ::core::ffi::c_int - index) as __u8;
-    return (value << shift as ::core::ffi::c_int) as __s64 >> shift as ::core::ffi::c_int;
-}
-
-pub const VA_BITS: ::core::ffi::c_int = 39 as ::core::ffi::c_int;
+pub const VA_BITS: ::core::ffi::c_int = 39;
 
 #[no_mangle]
 pub static mut current_stack_pointer: ::core::ffi::c_ulong = 0;
 
 #[inline]
 unsafe extern "C" fn test_ti_thread_flag(
-    mut ti: *mut thread_info,
-    mut flag: ::core::ffi::c_int,
+    ti: *mut thread_info,
+    flag: ::core::ffi::c_int,
 ) -> ::core::ffi::c_int {
-    return if 0 != 0 && 0 != 0 && &raw mut (*ti).flags as uintptr_t != NULL as uintptr_t && 0 != 0 {
-        const_test_bit(flag as ::core::ffi::c_ulong, &raw mut (*ti).flags) as ::core::ffi::c_int
-    } else {
-        generic_test_bit(flag as ::core::ffi::c_ulong, &raw mut (*ti).flags) as ::core::ffi::c_int
-    };
+    generic_test_bit(flag as ::core::ffi::c_ulong, &raw mut (*ti).flags) as ::core::ffi::c_int
 }
 
-#[inline]
-unsafe extern "C" fn __preempt_count_add(mut val: ::core::ffi::c_int) {
-    let mut pc: u32_0 = ({
-        extern "C" {
-            #[link_name = "__compiletime_assert_21"]
-            fn __compiletime_assert_21_0() -> !;
-        }
-        if !(::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_char>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_short>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_int>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_long>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
-        {
-            __compiletime_assert_21_0();
-        }
-        ::core::ptr::read_volatile::<::core::ffi::c_uint>(
-            (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
-                as *mut thread_info))
-                .c2rust_unnamed
-                .preempt
-                .count as *const ::core::ffi::c_uint),
-        )
-    });
-    pc = pc.wrapping_add(val as u32_0);
-    extern "C" {
-        #[link_name = "__compiletime_assert_22"]
-        fn __compiletime_assert_22_0() -> !;
-    }
-    if !(::core::mem::size_of::<u32_0>() as usize
-        == ::core::mem::size_of::<::core::ffi::c_char>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_short>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_int>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_long>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
-    {
-        __compiletime_assert_22_0();
-    }
-    ::core::ptr::write_volatile(
-        (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
-            as *mut thread_info))
-            .c2rust_unnamed
-            .preempt
-            .count as *mut u32_0),
-        pc as u32_0,
-    );
+#[inline(always)]
+unsafe extern "C" fn __preempt_count_add(val: ::core::ffi::c_int) {
+    let ti = get_current() as *mut thread_info;
+    let count_ptr = &raw mut (*ti).c2rust_unnamed.preempt.count;
+    let pc = ::core::ptr::read_volatile(count_ptr);
+    ::core::ptr::write_volatile(count_ptr, pc.wrapping_add(val as u32_0));
 }
 
-#[inline]
+#[inline(always)]
 unsafe extern "C" fn class_preempt_notrace_constructor() -> class_preempt_notrace_t {
-    let mut _t: class_preempt_notrace_t = class_preempt_notrace_t {
-        lock: 1 as ::core::ffi::c_int as *mut ::core::ffi::c_void,
+    let _t = class_preempt_notrace_t {
+        lock: 1 as *mut ::core::ffi::c_void,
     };
-    let mut _T: *mut class_preempt_notrace_t = &raw mut _t;
-    __preempt_count_add(1 as ::core::ffi::c_int);
+    __preempt_count_add(1);
     asm!("\n", options(preserves_flags));
-    return _t;
+    _t
 }
 
 #[inline]
@@ -2236,1325 +1821,52 @@ impl Drop for class_preempt_notrace_t {
 }
 
 #[inline(always)]
-unsafe extern "C" fn arch_static_branch(key: *mut static_key, branch: bool_0) -> bool_0 {
-    let mut k: *mut ::core::ffi::c_char =
-        (key as *mut ::core::ffi::c_char).offset(branch as isize) as *mut ::core::ffi::c_char;
-    return false_0 as ::core::ffi::c_int != 0;
+unsafe extern "C" fn arch_static_branch(_key: *mut static_key, _branch: bool_0) -> bool_0 {
+    false
 }
 
 #[inline(always)]
-unsafe extern "C" fn arch_static_branch_jump(key: *mut static_key, branch: bool_0) -> bool_0 {
-    let mut k: *mut ::core::ffi::c_char =
-        (key as *mut ::core::ffi::c_char).offset(branch as isize) as *mut ::core::ffi::c_char;
-    return true_0 as ::core::ffi::c_int != 0;
+unsafe extern "C" fn arch_static_branch_jump(_key: *mut static_key, _branch: bool_0) -> bool_0 {
+    true
 }
 
 pub const NR_CPUS: ::core::ffi::c_int = CONFIG_NR_CPUS;
-
-pub const POISON_POINTER_DELTA: ::core::ffi::c_ulong = 0xdead000000000000 as ::core::ffi::c_ulong;
-
+pub const POISON_POINTER_DELTA: ::core::ffi::c_ulong = 0xdead000000000000;
 pub const LIST_POISON1: *mut ::core::ffi::c_void =
     (0x100usize.wrapping_add(POISON_POINTER_DELTA as usize)) as *mut ::core::ffi::c_void;
-
 pub const LIST_POISON2: *mut ::core::ffi::c_void =
     (0x122usize.wrapping_add(POISON_POINTER_DELTA as usize)) as *mut ::core::ffi::c_void;
 
-pub const _IOC_NRBITS: ::core::ffi::c_int = 8 as ::core::ffi::c_int;
-
-pub const _IOC_NRMASK: ::core::ffi::c_int =
-    ((1 as ::core::ffi::c_int) << _IOC_NRBITS) - 1 as ::core::ffi::c_int;
-
-pub const _IOC_NRSHIFT: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
+pub const _IOC_NRBITS: ::core::ffi::c_int = 8;
+pub const _IOC_NRMASK: ::core::ffi::c_int = (1 << _IOC_NRBITS) - 1;
+pub const _IOC_NRSHIFT: ::core::ffi::c_int = 0;
 
 #[inline]
 unsafe extern "C" fn might_fault() {}
 
 #[inline(always)]
 unsafe extern "C" fn find_next_zero_bit(
-    mut addr: *const ::core::ffi::c_ulong,
-    mut size: ::core::ffi::c_ulong,
-    mut offset: ::core::ffi::c_ulong,
+    addr: *const ::core::ffi::c_ulong,
+    size: ::core::ffi::c_ulong,
+    offset: ::core::ffi::c_ulong,
 ) -> ::core::ffi::c_ulong {
-    if 0 != 0 && size <= BITS_PER_LONG as ::core::ffi::c_ulong && size > 0 as ::core::ffi::c_ulong {
-        let mut val: ::core::ffi::c_ulong = 0;
-        if (offset >= size) as ::core::ffi::c_int as ::core::ffi::c_long != 0 {
-            return size;
-        }
-        val = *addr
-            | !(0 as ::core::ffi::c_int
-                as ::core::ffi::c_ulong)
-                .wrapping_add(
-                    ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                        << (8 as usize)
-                            .wrapping_mul(::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                            .wrapping_sub(1 as usize)
-                            .wrapping_sub(
-                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    as ::core::ffi::c_int as usize,
-                            ))
-                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                    .wrapping_add(
-                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                            << (8 as usize)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                )
-                                .wrapping_sub(1 as usize)
-                                .wrapping_sub(
-                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        as ::core::ffi::c_int
-                                        as usize,
-                                ),
-                    ) << offset
-                        & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                            << (8 as usize)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                )
-                                .wrapping_sub(1 as usize)
-                                .wrapping_sub(
-                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        as ::core::ffi::c_int
-                                        as usize,
-                                ))
-                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ),
-                        ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                            .wrapping_mul(BITS_PER_BYTE as usize)
-                            .wrapping_sub(1 as usize)
-                            .wrapping_sub((size as usize).wrapping_sub(1 as usize)),
-                );
-        return if val == !(0 as ::core::ffi::c_ulong) {
-            size
-        } else {
-            __ffs(!val) as ::core::ffi::c_ulong
-        };
-    }
-    return _find_next_zero_bit(addr as *const usize, size as usize, offset as usize) as ::core::ffi::c_ulong;
+    kernel::bindings::_find_next_zero_bit(addr as *const usize, size as usize, offset as usize) as ::core::ffi::c_ulong
 }
 
 #[inline(always)]
 unsafe extern "C" fn find_last_bit(
-    mut addr: *const ::core::ffi::c_ulong,
-    mut size: ::core::ffi::c_ulong,
+    addr: *const ::core::ffi::c_ulong,
+    size: ::core::ffi::c_ulong,
 ) -> ::core::ffi::c_ulong {
-    if 0 != 0 && size <= BITS_PER_LONG as ::core::ffi::c_ulong && size > 0 as ::core::ffi::c_ulong {
-        let mut val: ::core::ffi::c_ulong = *addr
-            & (0 as ::core::ffi::c_int
-                as ::core::ffi::c_ulong)
-                .wrapping_add(
-                    ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                        << (8 as usize)
-                            .wrapping_mul(::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                            .wrapping_sub(1 as usize)
-                            .wrapping_sub(
-                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    as ::core::ffi::c_int as usize,
-                            ))
-                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                    .wrapping_add(
-                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                            << (8 as usize)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                )
-                                .wrapping_sub(1 as usize)
-                                .wrapping_sub(
-                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        as ::core::ffi::c_int
-                                        as usize,
-                                ),
-                    ) << 0 as ::core::ffi::c_int
-                        & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                            << (8 as usize)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                )
-                                .wrapping_sub(1 as usize)
-                                .wrapping_sub(
-                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        as ::core::ffi::c_int
-                                        as usize,
-                                ))
-                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ),
-                        ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                            .wrapping_mul(BITS_PER_BYTE as usize)
-                            .wrapping_sub(1 as usize)
-                            .wrapping_sub((size as usize).wrapping_sub(1 as usize)),
-                );
-        return if val != 0 {
-            __fls(val) as ::core::ffi::c_ulong
-        } else {
-            size
-        };
-    }
-    return _find_last_bit(addr as *const usize, size as usize) as ::core::ffi::c_ulong;
+    kernel::bindings::_find_last_bit(addr as *const usize, size as usize) as ::core::ffi::c_ulong
 }
 
 #[inline(always)]
 unsafe extern "C" fn strnlen(
     p: *const ::core::ffi::c_char,
-    mut maxlen: __kernel_size_t,
+    maxlen: __kernel_size_t,
 ) -> __kernel_size_t {
-    let p_size: size_t = (if 1 as ::core::ffi::c_int & 2 == 0 {
-        -1isize
-    } else {
-        0isize
-    }) as size_t;
-    let p_len: size_t = ({
-        let mut __p: *mut ::core::ffi::c_char = p as *mut ::core::ffi::c_char;
-        let mut __ret: size_t = SIZE_MAX;
-        let __p_size: size_t = (if 1 as ::core::ffi::c_int & 2 == 0 {
-            -1isize
-        } else {
-            0isize
-        }) as size_t;
-        if __p_size != SIZE_MAX && 0 != 0 {
-            let mut __p_len: size_t = __p_size.wrapping_sub(1 as size_t);
-            if 0 != 0
-                && *__p.offset(__p_len as isize) as ::core::ffi::c_int == '\0' as ::core::ffi::c_int
-            {
-                __ret = strlen(__p) as size_t;
-            }
-        }
-        __ret
-    });
-    let mut ret: size_t = 0;
-    if 0 != 0 && p_len != SIZE_MAX {
-        if maxlen >= p_size {
-            return p_len as __kernel_size_t;
-        }
-    }
-    ret = __real_strnlen(
-        p,
-        if maxlen < p_size {
-            maxlen
-        } else {
-            p_size as __kernel_size_t
-        },
-    ) as size_t;
-    if p_size <= ret && maxlen != ret {
-        __fortify_panic(
-            (({
-                '_c2rust_label_1: {
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_148"]
-                        fn __compiletime_assert_148_0() -> !;
-                    }
-                    if 0 == 0 {
-                        __compiletime_assert_148_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_149"]
-                        fn __compiletime_assert_149_0() -> !;
-                    }
-                    if (1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int
-                        == 0 as ::core::ffi::c_ulong
-                    {
-                        __compiletime_assert_149_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_150"]
-                        fn __compiletime_assert_150_0() -> !;
-                    }
-                    if (if 0 != 0 {
-                        !((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int
-                            >> if ((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                as ::core::ffi::c_longlong
-                                == 0
-                            {
-                                0
-                            } else {
-                                (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                    as ::core::ffi::c_longlong)
-                                    .trailing_zeros() as i32
-                                    + 1
-                            } - 1 as ::core::ffi::c_int)
-                            & (0 as ::core::ffi::c_int + 0 as ::core::ffi::c_int)
-                                as ::core::ffi::c_ulong
-                    } else {
-                        0 as ::core::ffi::c_ulong
-                    }) != 0
-                    {
-                        __compiletime_assert_150_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_151"]
-                        fn __compiletime_assert_151_0() -> !;
-                    }
-                    if ((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                        as ::core::ffi::c_ulonglong
-                        > !(0 as ::core::ffi::c_ulonglong)
-                    {
-                        __compiletime_assert_151_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_152"]
-                        fn __compiletime_assert_152_0() -> !;
-                    }
-                    if (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                        as ::core::ffi::c_ulonglong)
-                        .wrapping_add(
-                            (1 as ::core::ffi::c_ulonglong)
-                                << if ((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                    as ::core::ffi::c_longlong
-                                    == 0
-                                {
-                                    0
-                                } else {
-                                    (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                        as ::core::ffi::c_longlong)
-                                        .trailing_zeros() as i32
-                                        + 1
-                                } - 1 as ::core::ffi::c_int,
-                        )
-                        & (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                            as ::core::ffi::c_ulonglong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_ulonglong)
-                                    << if ((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                        as ::core::ffi::c_longlong
-                                        == 0
-                                    {
-                                        0
-                                    } else {
-                                        (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                                            as ::core::ffi::c_longlong)
-                                            .trailing_zeros()
-                                            as i32
-                                            + 1
-                                    } - 1 as ::core::ffi::c_int,
-                            )
-                            .wrapping_sub(1 as ::core::ffi::c_ulonglong)
-                        != 0 as ::core::ffi::c_ulonglong
-                    {
-                        __compiletime_assert_152_0();
-                    }
-                };
-                (0 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                    << if ((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                        as ::core::ffi::c_longlong
-                        == 0
-                    {
-                        0
-                    } else {
-                        (((1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int)
-                            as ::core::ffi::c_longlong)
-                            .trailing_zeros() as i32
-                            + 1
-                    } - 1 as ::core::ffi::c_int
-                    & (1 as ::core::ffi::c_ulong) << 0 as ::core::ffi::c_int
-            }) | ({
-                '_c2rust_label_2: {
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_153"]
-                        fn __compiletime_assert_153_0() -> !;
-                    }
-                    if 0 == 0 {
-                        __compiletime_assert_153_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_154"]
-                        fn __compiletime_assert_154_0() -> !;
-                    }
-                    if (0 as ::core::ffi::c_int
-                        as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ))
-                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ),
-                            ) << 1 as ::core::ffi::c_int
-                                & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                    .wrapping_mul(8 as usize)
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(7 as usize),
-                        )
-                        == 0 as ::core::ffi::c_ulong
-                    {
-                        __compiletime_assert_154_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_155"]
-                        fn __compiletime_assert_155_0() -> !;
-                    }
-                    if (if 0 != 0 {
-                        !((0 as ::core::ffi::c_int
-                            as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) << 1 as ::core::ffi::c_int
-                                    & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ))
-                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                    .wrapping_add(
-                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(::core::mem::size_of::<
-                                                    ::core::ffi::c_ulong,
-                                                >(
-                                                )
-                                                    as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int
-                                                        as usize,
-                                                ),
-                                    ) >> (::core::mem::size_of::<::core::ffi::c_ulong>()
-                                        as usize)
-                                        .wrapping_mul(8 as usize)
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(7 as usize),
-                            )
-                            >> if (0
-                                as ::core::ffi::c_int
-                                as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ))
-                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                    .wrapping_add(
-                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(::core::mem::size_of::<
-                                                    ::core::ffi::c_ulong,
-                                                >(
-                                                )
-                                                    as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int
-                                                        as usize,
-                                                ),
-                                    ) << 1 as ::core::ffi::c_int
-                                        & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(::core::mem::size_of::<
-                                                    ::core::ffi::c_ulong,
-                                                >(
-                                                )
-                                                    as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int
-                                                        as usize,
-                                                ))
-                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                        .wrapping_add(
-                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(::core::mem::size_of::<
-                                                        ::core::ffi::c_ulong,
-                                                    >(
-                                                    )
-                                                        as usize)
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int
-                                                                as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int
-                                                            as usize,
-                                                    ),
-                                        ) >> (::core::mem::size_of::<::core::ffi::c_ulong>()
-                                            as usize)
-                                            .wrapping_mul(8 as usize)
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(7 as usize),
-                                ) as ::core::ffi::c_longlong
-                                == 0
-                            {
-                                0
-                            } else {
-                                ((0 as ::core::ffi::c_int
-                                    as ::core::ffi::c_ulong)
-                                    .wrapping_add(
-                                        ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(::core::mem::size_of::<
-                                                    ::core::ffi::c_ulong,
-                                                >(
-                                                )
-                                                    as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int
-                                                        as usize,
-                                                ))
-                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                        .wrapping_add(
-                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(::core::mem::size_of::<
-                                                        ::core::ffi::c_ulong,
-                                                    >(
-                                                    )
-                                                        as usize)
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int
-                                                                as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int
-                                                            as usize,
-                                                    ),
-                                        ) << 1 as ::core::ffi::c_int
-                                            & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(::core::mem::size_of::<
-                                                        ::core::ffi::c_ulong,
-                                                    >(
-                                                    )
-                                                        as usize)
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int
-                                                                as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int
-                                                            as usize,
-                                                    ))
-                                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                            .wrapping_add(
-                                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    << (8 as usize)
-                                                        .wrapping_mul(::core::mem::size_of::<
-                                                            ::core::ffi::c_ulong,
-                                                        >(
-                                                        )
-                                                            as usize)
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(
-                                                            ((-1 as ::core::ffi::c_int
-                                                                as ::core::ffi::c_ulong)
-                                                                < 1 as ::core::ffi::c_int
-                                                                    as ::core::ffi::c_ulong)
-                                                                as ::core::ffi::c_int
-                                                                as usize,
-                                                        ),
-                                            ) >> (::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                as usize)
-                                                .wrapping_mul(8 as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(7 as usize),
-                                    ) as ::core::ffi::c_longlong)
-                                    .trailing_zeros() as i32
-                                    + 1
-                            } - 1 as ::core::ffi::c_int)
-                            & (0 as ::core::ffi::c_int + FORTIFY_FUNC_strnlen as ::core::ffi::c_int)
-                                as ::core::ffi::c_ulong
-                    } else {
-                        0 as ::core::ffi::c_ulong
-                    }) != 0
-                    {
-                        __compiletime_assert_155_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_156"]
-                        fn __compiletime_assert_156_0() -> !;
-                    }
-                    if (0 as ::core::ffi::c_int
-                        as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ))
-                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ),
-                            ) << 1 as ::core::ffi::c_int
-                                & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                    .wrapping_mul(8 as usize)
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(7 as usize),
-                        ) as ::core::ffi::c_ulonglong
-                        > !(0 as ::core::ffi::c_ulonglong)
-                    {
-                        __compiletime_assert_156_0();
-                    }
-                    extern "C" {
-                        #[link_name = "__compiletime_assert_157"]
-                        fn __compiletime_assert_157_0() -> !;
-                    }
-                    if ((0
-                            as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int as usize,
-                                        ))
-                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                    .wrapping_add(
-                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(
-                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                )
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int as usize,
-                                                ),
-                                    ) << 1 as ::core::ffi::c_int
-                                    & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int as usize,
-                                            ))
-                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                        .wrapping_add(
-                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(
-                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                    )
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int as usize,
-                                                    ),
-                                        )
-                                        >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                            .wrapping_mul(8 as usize)
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(7 as usize),
-                            ) as ::core::ffi::c_ulonglong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_ulonglong)
-                                    << if (0
-                                        as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        .wrapping_add(
-                                            ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(
-                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                    )
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int as usize,
-                                                    ))
-                                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                .wrapping_add(
-                                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        << (8 as usize)
-                                                            .wrapping_mul(
-                                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                            )
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(
-                                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    as ::core::ffi::c_int as usize,
-                                                            ),
-                                                ) << 1 as ::core::ffi::c_int
-                                                & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    << (8 as usize)
-                                                        .wrapping_mul(
-                                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                        )
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(
-                                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                as ::core::ffi::c_int as usize,
-                                                        ))
-                                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                    .wrapping_add(
-                                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            << (8 as usize)
-                                                                .wrapping_mul(
-                                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                )
-                                                                .wrapping_sub(1 as usize)
-                                                                .wrapping_sub(
-                                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        as ::core::ffi::c_int as usize,
-                                                                ),
-                                                    )
-                                                    >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                                        .wrapping_mul(8 as usize)
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(7 as usize),
-                                        ) as ::core::ffi::c_longlong == 0
-                                    {
-                                        0
-                                    } else {
-                                        ((0
-                                            as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            .wrapping_add(
-                                                ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    << (8 as usize)
-                                                        .wrapping_mul(
-                                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                        )
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(
-                                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                as ::core::ffi::c_int as usize,
-                                                        ))
-                                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                    .wrapping_add(
-                                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            << (8 as usize)
-                                                                .wrapping_mul(
-                                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                )
-                                                                .wrapping_sub(1 as usize)
-                                                                .wrapping_sub(
-                                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        as ::core::ffi::c_int as usize,
-                                                                ),
-                                                    ) << 1 as ::core::ffi::c_int
-                                                    & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        << (8 as usize)
-                                                            .wrapping_mul(
-                                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                            )
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(
-                                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    as ::core::ffi::c_int as usize,
-                                                            ))
-                                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                        .wrapping_add(
-                                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                << (8 as usize)
-                                                                    .wrapping_mul(
-                                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                    )
-                                                                    .wrapping_sub(1 as usize)
-                                                                    .wrapping_sub(
-                                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            as ::core::ffi::c_int as usize,
-                                                                    ),
-                                                        )
-                                                        >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                                            .wrapping_mul(8 as usize)
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(7 as usize),
-                                            ) as ::core::ffi::c_longlong)
-                                            .trailing_zeros() as i32 + 1
-                                    } - 1 as ::core::ffi::c_int,
-                            )
-                            & ((0
-                                as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int as usize,
-                                            ))
-                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                        .wrapping_add(
-                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                << (8 as usize)
-                                                    .wrapping_mul(
-                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                    )
-                                                    .wrapping_sub(1 as usize)
-                                                    .wrapping_sub(
-                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            as ::core::ffi::c_int as usize,
-                                                    ),
-                                        ) << 1 as ::core::ffi::c_int
-                                        & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(
-                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                )
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int as usize,
-                                                ))
-                                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                            .wrapping_add(
-                                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    << (8 as usize)
-                                                        .wrapping_mul(
-                                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                        )
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(
-                                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                as ::core::ffi::c_int as usize,
-                                                        ),
-                                            )
-                                            >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                                .wrapping_mul(8 as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(7 as usize),
-                                ) as ::core::ffi::c_ulonglong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_ulonglong)
-                                        << if (0
-                                            as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            .wrapping_add(
-                                                ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    << (8 as usize)
-                                                        .wrapping_mul(
-                                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                        )
-                                                        .wrapping_sub(1 as usize)
-                                                        .wrapping_sub(
-                                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                as ::core::ffi::c_int as usize,
-                                                        ))
-                                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                    .wrapping_add(
-                                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            << (8 as usize)
-                                                                .wrapping_mul(
-                                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                )
-                                                                .wrapping_sub(1 as usize)
-                                                                .wrapping_sub(
-                                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        as ::core::ffi::c_int as usize,
-                                                                ),
-                                                    ) << 1 as ::core::ffi::c_int
-                                                    & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        << (8 as usize)
-                                                            .wrapping_mul(
-                                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                            )
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(
-                                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    as ::core::ffi::c_int as usize,
-                                                            ))
-                                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                        .wrapping_add(
-                                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                << (8 as usize)
-                                                                    .wrapping_mul(
-                                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                    )
-                                                                    .wrapping_sub(1 as usize)
-                                                                    .wrapping_sub(
-                                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            as ::core::ffi::c_int as usize,
-                                                                    ),
-                                                        )
-                                                        >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                                            .wrapping_mul(8 as usize)
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(7 as usize),
-                                            ) as ::core::ffi::c_longlong == 0
-                                        {
-                                            0
-                                        } else {
-                                            ((0
-                                                as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                .wrapping_add(
-                                                    ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                        << (8 as usize)
-                                                            .wrapping_mul(
-                                                                ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                            )
-                                                            .wrapping_sub(1 as usize)
-                                                            .wrapping_sub(
-                                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    as ::core::ffi::c_int as usize,
-                                                            ))
-                                                        .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                        .wrapping_add(
-                                                            (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                << (8 as usize)
-                                                                    .wrapping_mul(
-                                                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                    )
-                                                                    .wrapping_sub(1 as usize)
-                                                                    .wrapping_sub(
-                                                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                            as ::core::ffi::c_int as usize,
-                                                                    ),
-                                                        ) << 1 as ::core::ffi::c_int
-                                                        & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                            << (8 as usize)
-                                                                .wrapping_mul(
-                                                                    ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                )
-                                                                .wrapping_sub(1 as usize)
-                                                                .wrapping_sub(
-                                                                    ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                        as ::core::ffi::c_int as usize,
-                                                                ))
-                                                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                                            .wrapping_add(
-                                                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                    << (8 as usize)
-                                                                        .wrapping_mul(
-                                                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                                                        )
-                                                                        .wrapping_sub(1 as usize)
-                                                                        .wrapping_sub(
-                                                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                                                as ::core::ffi::c_int as usize,
-                                                                        ),
-                                                            )
-                                                            >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                                                .wrapping_mul(8 as usize)
-                                                                .wrapping_sub(1 as usize)
-                                                                .wrapping_sub(7 as usize),
-                                                ) as ::core::ffi::c_longlong)
-                                                .trailing_zeros() as i32 + 1
-                                        } - 1 as ::core::ffi::c_int,
-                                )
-                                .wrapping_sub(1 as ::core::ffi::c_ulonglong)
-                            != 0 as ::core::ffi::c_ulonglong
-                        {
-                            __compiletime_assert_157_0();
-                        }
-                };
-                (FORTIFY_FUNC_strnlen as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                    << if (0 as ::core::ffi::c_int
-                        as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ))
-                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ),
-                            ) << 1 as ::core::ffi::c_int
-                                & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                    .wrapping_mul(8 as usize)
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(7 as usize),
-                        ) as ::core::ffi::c_longlong
-                        == 0
-                    {
-                        0
-                    } else {
-                        ((0 as ::core::ffi::c_int
-                            as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) << 1 as ::core::ffi::c_int
-                                    & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ))
-                                    .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                    .wrapping_add(
-                                        (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            << (8 as usize)
-                                                .wrapping_mul(::core::mem::size_of::<
-                                                    ::core::ffi::c_ulong,
-                                                >(
-                                                )
-                                                    as usize)
-                                                .wrapping_sub(1 as usize)
-                                                .wrapping_sub(
-                                                    ((-1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                        < 1 as ::core::ffi::c_int
-                                                            as ::core::ffi::c_ulong)
-                                                        as ::core::ffi::c_int
-                                                        as usize,
-                                                ),
-                                    ) >> (::core::mem::size_of::<::core::ffi::c_ulong>()
-                                        as usize)
-                                        .wrapping_mul(8 as usize)
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(7 as usize),
-                            ) as ::core::ffi::c_longlong)
-                            .trailing_zeros() as i32
-                            + 1
-                    } - 1 as ::core::ffi::c_int
-                    & (0 as ::core::ffi::c_int
-                        as ::core::ffi::c_ulong)
-                        .wrapping_add(
-                            ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                << (8 as usize)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<::core::ffi::c_ulong>() as usize
-                                    )
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(
-                                        ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                            as ::core::ffi::c_int
-                                            as usize,
-                                    ))
-                            .wrapping_sub(1 as ::core::ffi::c_ulong)
-                            .wrapping_add(
-                                (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ),
-                            ) << 1 as ::core::ffi::c_int
-                                & ((1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                    << (8 as usize)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<::core::ffi::c_ulong>() as usize,
-                                        )
-                                        .wrapping_sub(1 as usize)
-                                        .wrapping_sub(
-                                            ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                < 1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                as ::core::ffi::c_int
-                                                as usize,
-                                        ))
-                                .wrapping_sub(1 as ::core::ffi::c_ulong)
-                                .wrapping_add(
-                                    (1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                        << (8 as usize)
-                                            .wrapping_mul(
-                                                ::core::mem::size_of::<::core::ffi::c_ulong>()
-                                                    as usize,
-                                            )
-                                            .wrapping_sub(1 as usize)
-                                            .wrapping_sub(
-                                                ((-1 as ::core::ffi::c_int as ::core::ffi::c_ulong)
-                                                    < 1 as ::core::ffi::c_int
-                                                        as ::core::ffi::c_ulong)
-                                                    as ::core::ffi::c_int
-                                                    as usize,
-                                            ),
-                                ) >> (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
-                                    .wrapping_mul(8 as usize)
-                                    .wrapping_sub(1 as usize)
-                                    .wrapping_sub(7 as usize),
-                        )
-            })) as u8_0,
-            p_size,
-            ret.wrapping_add(1 as size_t),
-        );
-    }
-    return ret as __kernel_size_t;
+    __real_strnlen(p, maxlen)
 }
 
 #[inline(always)]
