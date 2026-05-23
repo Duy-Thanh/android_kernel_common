@@ -516,10 +516,6 @@ __traceiter_android_vh_do_folio_trylock
 __tracepoint_android_vh_do_folio_trylock
 reclaim_pages
 
-LZ4_compress_default
-LZ4_decompress_safe
-find_inode_nowait
-
 #required by mi_iod_debug.ko
 page_swap_info
 
