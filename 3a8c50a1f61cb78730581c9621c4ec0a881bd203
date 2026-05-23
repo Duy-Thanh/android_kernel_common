@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b898ea65_d897b9d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-05-23T04:10:45Z",
+      "side": 1,
+      "message": "upstream rejected this as-is",
+      "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3cad4877_ee39eca9",
         "filename": "drivers/hid/hid-logitech-hidpp.c",
         "patchSetId": 2
