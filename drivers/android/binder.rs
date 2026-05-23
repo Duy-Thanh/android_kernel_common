@@ -9,91 +9,24 @@
     warnings,
     unsafe_op_in_unsafe_fn,
 )]
+
 use ::core::arch::asm;
 
+
+
 use kernel::prelude::*;
+
 use kernel::bindings::*;
+
+
 
 extern "C" {
     fn binder_rust_get_genl_sock(net: *mut net) -> *mut sock;
     fn binder_rust_spin_lock(lock: *mut spinlock_t);
     fn binder_rust_spin_unlock(lock: *mut spinlock_t);
     fn binder_rust_spin_is_locked(lock: *mut spinlock_t) -> ::core::ffi::c_int;
-}
-
-const __LOG_PREFIX: &[u8] = b"binder\0";
-
-#[inline]
-fn __c2rust_bitfield_get(bytes: &[u8], lo: u32, hi: u32) -> u64 {
-    let mut value = 0u64;
-    let mut bit = lo;
-    while bit <= hi {
-        let byte = bytes[(bit / 8) as usize];
-        let set = (byte >> (bit % 8)) & 1;
-        value |= (set as u64) << (bit - lo);
-        bit += 1;
-    }
-    value
-}
-
-#[inline]
-fn __c2rust_bitfield_set(bytes: &mut [u8], lo: u32, hi: u32, value: u64) {
-    let mut bit = lo;
-    while bit <= hi {
-        let idx = (bit / 8) as usize;
-        let mask = 1u8 << (bit % 8);
-        if ((value >> (bit - lo)) & 1) != 0 {
-            bytes[idx] |= mask;
-        } else {
-            bytes[idx] &= !mask;
-        }
-        bit += 1;
-    }
-}
-
-extern "C" {
-    pub type event_filter;
-    pub type ring_buffer_iter;
-    pub type array_buffer;
-    pub type tracer;
-    pub type trace_array;
-    pub type perf_buffer;
-    pub type can_rcv_lists_stats;
-    pub type can_pkg_stats;
-    pub type can_dev_rcv_lists;
-    pub type neighbour;
-    pub type net_generic;
-    pub type nf_ct_event_notifier;
-    pub type nf_hook_entries;
-    pub type nf_logger;
-    pub type ioam6_pernet_data;
-    pub type fib_notifier_ops;
-    pub type seg6_pernet_data;
-    pub type fib_rules_ops;
-    pub type fib6_table;
-    pub type rt6_info;
-    pub type rt6_statistics;
-    pub type fib6_info;
-    pub type inet_peer_base;
-    pub type ipv6_devconf;
-    pub type tcp_fastopen_context;
-    pub type tcp_congestion_ops;
-    pub type fib_table;
-    pub type ip_ra_chain;
-    pub type ipv4_devconf;
-    pub type udp_table;
-    pub type inet_hashinfo;
-    pub type prot_inuse;
-    pub type uevent_sock;
-    fn binder_rust_write_daif(val: u64_0);
-    fn binder_rust_write_ttbr0_el1(val: u64_0);
-    fn binder_rust_write_ttbr1_el1(val: u64_0);
     fn binder_rust_uaccess_ttbr0_enable() -> bool_0;
     fn binder_rust_uaccess_ttbr0_disable() -> bool_0;
-    fn binder_rust_arch_local_irq_save() -> ::core::ffi::c_ulong;
-    fn binder_rust_arch_local_irq_restore(flags: ::core::ffi::c_ulong);
-    fn binder_rust_arch_local_irq_enable();
-    fn binder_rust_arch_local_irq_disable();
     fn __fortify_panic(reason: u8_0, avail: size_t, size: size_t) -> !;
     fn __read_overflow2_field(avail: size_t, wanted: size_t);
     fn __write_overflow_field(avail: size_t, wanted: size_t);
@@ -393,3751 +326,105 @@ extern "C" {
         ref_desc: uint32_t,
     ) -> ::core::ffi::c_int;
 }
-pub type __builtin_va_list = __va_list;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct __va_list {
-    pub __stack: *mut ::core::ffi::c_void,
-    pub __gr_top: *mut ::core::ffi::c_void,
-    pub __vr_top: *mut ::core::ffi::c_void,
-    pub __gr_offs: ::core::ffi::c_int,
-    pub __vr_offs: ::core::ffi::c_int,
+
+
+
+const __LOG_PREFIX: &[u8] = b"binder\0";
+
+
+
+#[inline]
+fn __c2rust_bitfield_get(bytes: &[u8], lo: u32, hi: u32) -> u64 {
+    let mut value = 0u64;
+    let mut bit = lo;
+    while bit <= hi {
+        let byte = bytes[(bit / 8) as usize];
+        let set = (byte >> (bit % 8)) & 1;
+        value |= (set as u64) << (bit - lo);
+        bit += 1;
+    }
+    value
 }
+
+
+
+#[inline]
+fn __c2rust_bitfield_set(bytes: &mut [u8], lo: u32, hi: u32, value: u64) {
+    let mut bit = lo;
+    while bit <= hi {
+        let idx = (bit / 8) as usize;
+        let mask = 1u8 << (bit % 8);
+        if ((value >> (bit - lo)) & 1) != 0 {
+            bytes[idx] |= mask;
+        } else {
+            bytes[idx] &= !mask;
+        }
+        bit += 1;
+    }
+}
+
+
+
 pub type C2Rust_Unnamed = ::core::ffi::c_uint;
+
 pub const true_0: C2Rust_Unnamed = 1;
+
 pub const false_0: C2Rust_Unnamed = 0;
-pub type __kernel_long_t = ::core::ffi::c_long;
+
 pub type __kernel_ulong_t = ::core::ffi::c_ulong;
+
 pub type __kernel_pid_t = ::core::ffi::c_int;
+
 pub type __kernel_uid32_t = ::core::ffi::c_uint;
-pub type __kernel_gid32_t = ::core::ffi::c_uint;
+
 pub type __kernel_size_t = __kernel_ulong_t;
-pub type __kernel_loff_t = ::core::ffi::c_longlong;
-pub type __kernel_time64_t = ::core::ffi::c_longlong;
-pub type __kernel_clock_t = __kernel_long_t;
-pub type __kernel_timer_t = ::core::ffi::c_int;
-pub type __kernel_clockid_t = ::core::ffi::c_int;
+
 pub type __s8 = ::core::ffi::c_schar;
+
 pub type __u8 = ::core::ffi::c_uchar;
-pub type __s16 = ::core::ffi::c_short;
+
 pub type __u16 = ::core::ffi::c_ushort;
+
 pub type __s32 = ::core::ffi::c_int;
+
 pub type __u32 = ::core::ffi::c_uint;
+
 pub type __s64 = ::core::ffi::c_longlong;
+
 pub type __u64 = ::core::ffi::c_ulonglong;
+
 pub type s8 = __s8;
+
 pub type u8_0 = __u8;
-pub type s16 = __s16;
+
 pub type u16_0 = __u16;
-pub type s32 = __s32;
+
 pub type u32_0 = __u32;
+
 pub type s64 = __s64;
+
 pub type u64_0 = __u64;
-pub type __kernel_dev_t = u32_0;
-pub type dev_t = __kernel_dev_t;
+
 pub type pid_t = __kernel_pid_t;
+
 pub type bool_0 = bool;
+
 pub type uid_t = __kernel_uid32_t;
-pub type gid_t = __kernel_gid32_t;
+
 pub type uintptr_t = usize;
-pub type loff_t = __kernel_loff_t;
+
 pub type size_t = __kernel_size_t;
-pub type ssize_t = isize;
+
 pub type int32_t = i32;
+
 pub type uint32_t = u32;
+
 pub type ktime_t = s64;
-pub type sector_t = u64_0;
-pub type blkcnt_t = u64_0;
+
 pub type gfp_t = ::core::ffi::c_uint;
-pub type fmode_t = ::core::ffi::c_uint;
-pub type phys_addr_t = u64_0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_0 {
-    pub cgroup_storage: [*mut bpf_cgroup_storage; 2],
-    pub bpf_cookie: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_1 {
-    pub c2rust_unnamed: C2Rust_Unnamed_4,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_2,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_2 {
-    pub __empty_insnsi: C2Rust_Unnamed_3,
-    pub insnsi: [bpf_insn; 0],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_3 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_4 {
-    pub __empty_insns: C2Rust_Unnamed_5,
-    pub insns: [sock_filter; 0],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_5 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_6 {
-    pub val: atomic_t,
-    pub c2rust_unnamed: C2Rust_Unnamed_8,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_7,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_7 {
-    pub locked_pending: u16_0,
-    pub tail: u16_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_8 {
-    pub locked: u8_0,
-    pub pending: u8_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_9 {
-    pub work: work_struct,
-    pub rcu: callback_head,
-}
-pub const DD_CLASS_TYPE_LEVEL_NAMES: class_map_type = 3;
-pub const DD_CLASS_TYPE_DISJOINT_NAMES: class_map_type = 2;
-pub const DD_CLASS_TYPE_LEVEL_NUM: class_map_type = 1;
-pub const DD_CLASS_TYPE_DISJOINT_BITS: class_map_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust__ddebug_Inner {
-    pub modname: *const ::core::ffi::c_char,
-    pub function: *const ::core::ffi::c_char,
-    pub filename: *const ::core::ffi::c_char,
-    pub format: *const ::core::ffi::c_char,
-    pub lineno_class_id_flags: [u8; 4],
-    pub c2rust_padding: [u8; 4],
-    pub key: C2Rust_Unnamed_10,
-}
-#[allow(dead_code, non_upper_case_globals)]
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_10 {
-    pub dd_key_true: static_key_true,
-    pub dd_key_false: static_key_false,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_11 {
-    pub type_0: ::core::ffi::c_ulong,
-    pub entries: *mut jump_entry,
-    pub next: *mut static_key_mod,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_12 {
-    pub rlock: raw_spinlock,
-}
-#[allow(dead_code, non_upper_case_globals)]
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_13 {
-    pub arg: *mut ::core::ffi::c_void,
-    pub str: *const kparam_string,
-    pub arr: *const kparam_array,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_14 {
-    pub dir: kernfs_elem_dir,
-    pub symlink: kernfs_elem_symlink,
-    pub attr: kernfs_elem_attr,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_15 {
-    pub rb: rb_node,
-    pub rb_subtree_last: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_16 {
-    pub f_task_work: callback_head,
-    pub f_llist: llist_node,
-    pub f_ra: file_ra_state,
-    pub f_freeptr: freeptr_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_17 {
-    pub f_pos_lock: mutex,
-    pub f_pipe: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_18 {
-    pub f_path: path,
-    pub __f_path: path,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_19 {
-    pub d_alias: hlist_node,
-    pub d_in_lookup_hash: hlist_bl_node,
-    pub d_rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_20 {
-    pub d_lru: list_head,
-    pub d_wait: *mut wait_queue_head_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_21 {
-    pub lock_count: __u64,
-    pub c2rust_unnamed: C2Rust_Unnamed_22,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_22 {
-    pub lock: spinlock_t,
-    pub count: ::core::ffi::c_int,
-}
-#[allow(dead_code, non_upper_case_globals)]
-pub type C2Rust_Unnamed_23 = ::core::ffi::c_uint;
-pub const SYSCTL_TABLE_TYPE_PERMANENTLY_EMPTY: C2Rust_Unnamed_23 = 1;
-pub const SYSCTL_TABLE_TYPE_DEFAULT: C2Rust_Unnamed_23 = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_24 {
-    pub c2rust_unnamed: C2Rust_Unnamed_25,
-    pub rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_25 {
-    pub ctl_table: *const ctl_table,
-    pub ctl_table_size: ::core::ffi::c_int,
-    pub used: ::core::ffi::c_int,
-    pub count: ::core::ffi::c_int,
-    pub nreg: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_26 {
-    pub payload: key_payload,
-    pub c2rust_unnamed: C2Rust_Unnamed_27,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_27 {
-    pub name_link: list_head,
-    pub keys: assoc_array,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_28 {
-    pub index_key: keyring_index_key,
-    pub c2rust_unnamed: C2Rust_Unnamed_29,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_29 {
-    pub hash: ::core::ffi::c_ulong,
-    pub len_desc: ::core::ffi::c_ulong,
-    pub type_0: *mut key_type,
-    pub domain_tag: *mut key_tag,
-    pub description: *mut ::core::ffi::c_char,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_30 {
-    pub c2rust_unnamed: C2Rust_Unnamed_31,
-    pub x: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_31 {
-    pub desc_len: u16_0,
-    pub desc: [::core::ffi::c_char; 6],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_32 {
-    pub expiry: time64_t,
-    pub revoked_at: time64_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_33 {
-    pub graveyard_link: list_head,
-    pub serial_node: rb_node,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_34 {
-    pub c2rust_unnamed: C2Rust_Unnamed_35,
-    pub ns_rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_35 {
-    pub ns_id: u64_0,
-    pub ns_tree_node: rb_node,
-    pub ns_list_node: list_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_36 {
-    pub c2rust_unnamed: C2Rust_Unnamed_38,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_37,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_37 {
-    pub forward: *mut uid_gid_extent,
-    pub reverse: *mut uid_gid_extent,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_38 {
-    pub extent: [uid_gid_extent; 5],
-    pub nr_extents: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C, align(64))]
-pub struct cacheline_padding(pub C2Rust_cacheline_padding_Inner);
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_cacheline_padding_Inner {
-    pub x: [::core::ffi::c_char; 0],
-}
-pub const __MAX_NR_ZONES: zone_type = 3;
-pub const ZONE_MOVABLE: zone_type = 2;
-pub const ZONE_NORMAL: zone_type = 1;
-pub const ZONE_DMA32: zone_type = 0;
-#[allow(dead_code, non_upper_case_globals)]
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_39 {
-    pub list: list_head,
-    pub rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_40 {
-    pub swap: page_counter,
-    pub memsw: page_counter,
-}
-#[derive(Copy, Clone)]
-#[repr(C, align(64))]
-pub struct page_counter(pub C2Rust_page_counter_Inner);
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_page_counter_Inner {
-    pub usage: atomic_long_t,
-    pub failcnt: ::core::ffi::c_ulong,
-    pub _pad1_: cacheline_padding,
-    pub emin: ::core::ffi::c_ulong,
-    pub min_usage: atomic_long_t,
-    pub children_min_usage: atomic_long_t,
-    pub elow: ::core::ffi::c_ulong,
-    pub low_usage: atomic_long_t,
-    pub children_low_usage: atomic_long_t,
-    pub watermark: ::core::ffi::c_ulong,
-    pub local_watermark: ::core::ffi::c_ulong,
-    pub _pad2_: cacheline_padding,
-    pub protection_support: bool_0,
-    pub track_failcnt: bool_0,
-    pub min: ::core::ffi::c_ulong,
-    pub low: ::core::ffi::c_ulong,
-    pub high: ::core::ffi::c_ulong,
-    pub max: ::core::ffi::c_ulong,
-    pub parent: *mut page_counter,
-}
-pub const D_REAL_METADATA: d_real_type = 1;
-pub const D_REAL_DATA: d_real_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_41 {
-    pub i_pipe: *mut pipe_inode_info,
-    pub i_cdev: *mut cdev,
-    pub i_link: *mut ::core::ffi::c_char,
-    pub i_dir_seq: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_42 {
-    pub i_devices: list_head,
-    pub i_linklen: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_43 {
-    pub nr_segs: ::core::ffi::c_ulong,
-    pub folioq_slot: u8_0,
-    pub xarray_start: loff_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_44 {
-    pub __ubuf_iovec: iovec,
-    pub c2rust_unnamed: C2Rust_Unnamed_45,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_45 {
-    pub c2rust_unnamed: C2Rust_Unnamed_46,
-    pub count: size_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_46 {
-    pub __iov: *const iovec,
-    pub kvec: *const kvec,
-    pub bvec: *const bio_vec,
-    pub folioq: *const folio_queue,
-    pub xarray: *mut xarray,
-    pub ubuf: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_47 {
-    pub page_type: ::core::ffi::c_uint,
-    pub _mapcount: atomic_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_48 {
-    pub c2rust_unnamed: C2Rust_Unnamed_52,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_51,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_50,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_49,
-    pub callback_head: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_49 {
-    pub _unused_pgmap_compound_head: *mut ::core::ffi::c_void,
-    pub zone_device_data: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_50 {
-    pub compound_head: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_51 {
-    pub pp_magic: ::core::ffi::c_ulong,
-    pub pp: *mut page_pool,
-    pub _pp_mapping_pad: ::core::ffi::c_ulong,
-    pub dma_addr: ::core::ffi::c_ulong,
-    pub pp_ref_count: atomic_long_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_52 {
-    pub c2rust_unnamed: C2Rust_Unnamed_54,
-    pub mapping: *mut address_space,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_53,
-    pub private: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_53 {
-    pub __folio_index: ::core::ffi::c_ulong,
-    pub share: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_54 {
-    pub lru: list_head,
-    pub buddy_list: list_head,
-    pub pcp_list: list_head,
-    pub pcp_llist: llist_node,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct iovec {
-    pub iov_base: *mut ::core::ffi::c_void,
-    pub iov_len: __kernel_size_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_55 {
-    pub ki_waitq: *mut wait_page_queue,
-    pub dio_complete: Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ssize_t>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_56 {
-    pub c2rust_unnamed: C2Rust_Unnamed_57,
-    pub __page_3: page,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_57 {
-    pub _flags_3: ::core::ffi::c_ulong,
-    pub _head_3: ::core::ffi::c_ulong,
-    pub _hugetlb_subpool: *mut ::core::ffi::c_void,
-    pub _hugetlb_cgroup: *mut ::core::ffi::c_void,
-    pub _hugetlb_cgroup_rsvd: *mut ::core::ffi::c_void,
-    pub _hugetlb_hwpoison: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_58 {
-    pub c2rust_unnamed: C2Rust_Unnamed_59,
-    pub __page_2: page,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_59 {
-    pub _flags_2: ::core::ffi::c_ulong,
-    pub _head_2: ::core::ffi::c_ulong,
-    pub _deferred_list: list_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_60 {
-    pub c2rust_unnamed: C2Rust_Unnamed_61,
-    pub __page_1: page,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_61 {
-    pub _flags_1: ::core::ffi::c_ulong,
-    pub _head_1: ::core::ffi::c_ulong,
-    pub c2rust_unnamed: C2Rust_Unnamed_62,
-    pub _mapcount_1: atomic_t,
-    pub _refcount_1: atomic_t,
-    pub _nr_pages: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_62 {
-    pub c2rust_unnamed: C2Rust_Unnamed_63,
-    pub _usable_1: [::core::ffi::c_ulong; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_63 {
-    pub _large_mapcount: atomic_t,
-    pub _nr_pages_mapped: atomic_t,
-    pub _entire_mapcount: atomic_t,
-    pub _pincount: atomic_t,
-    pub _mm_id_mapcount: [mm_id_mapcount_t; 2],
-    pub c2rust_unnamed: C2Rust_Unnamed_64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_64 {
-    pub _mm_id: [mm_id_t; 2],
-    pub _mm_ids: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_65 {
-    pub c2rust_unnamed: C2Rust_Unnamed_66,
-    pub page: page,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_66 {
-    pub flags: memdesc_flags_t,
-    pub c2rust_unnamed: C2Rust_Unnamed_69,
-    pub mapping: *mut address_space,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_68,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_67,
-    pub _mapcount: atomic_t,
-    pub _refcount: atomic_t,
-    pub memcg_data: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_67 {
-    pub private: *mut ::core::ffi::c_void,
-    pub swap: swp_entry_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_68 {
-    pub index: ::core::ffi::c_ulong,
-    pub share: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_69 {
-    pub lru: list_head,
-    pub c2rust_unnamed: C2Rust_Unnamed_75,
-    pub pgmap: *mut dev_pagemap,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_70 {
-    pub range: range,
-    pub c2rust_unnamed: C2Rust_Unnamed_71,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_71 {
-    pub __empty_ranges: C2Rust_Unnamed_72,
-    pub ranges: [range; 0],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_72 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_73 {
-    pub orig_pte: pte_t,
-    pub orig_pmd: pmd_t,
-}
-pub const FAULT_FLAG_VMA_LOCK: fault_flag = 4096;
-pub const FAULT_FLAG_ORIG_PTE_VALID: fault_flag = 2048;
-pub const FAULT_FLAG_UNSHARE: fault_flag = 1024;
-pub const FAULT_FLAG_INTERRUPTIBLE: fault_flag = 512;
-pub const FAULT_FLAG_INSTRUCTION: fault_flag = 256;
-pub const FAULT_FLAG_REMOTE: fault_flag = 128;
-pub const FAULT_FLAG_USER: fault_flag = 64;
-pub const FAULT_FLAG_TRIED: fault_flag = 32;
-pub const FAULT_FLAG_KILLABLE: fault_flag = 16;
-pub const FAULT_FLAG_RETRY_NOWAIT: fault_flag = 8;
-pub const FAULT_FLAG_ALLOW_RETRY: fault_flag = 4;
-pub const FAULT_FLAG_MKWRITE: fault_flag = 2;
-pub const FAULT_FLAG_WRITE: fault_flag = 1;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_74 {
-    pub vma: *mut vm_area_struct,
-    pub gfp_mask: gfp_t,
-    pub pgoff: ::core::ffi::c_ulong,
-    pub address: ::core::ffi::c_ulong,
-    pub real_address: ::core::ffi::c_ulong,
-}
-pub const MEMORY_DEVICE_PCI_P2PDMA: memory_type = 5;
-pub const MEMORY_DEVICE_GENERIC: memory_type = 4;
-pub const MEMORY_DEVICE_FS_DAX: memory_type = 3;
-pub const MEMORY_DEVICE_COHERENT: memory_type = 2;
-pub const MEMORY_DEVICE_PRIVATE: memory_type = 1;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_75 {
-    pub __filler: *mut ::core::ffi::c_void,
-    pub mlock_count: ::core::ffi::c_uint,
-}
-pub const MIGRATE_SYNC: migrate_mode = 2;
-pub const MIGRATE_SYNC_LIGHT: migrate_mode = 1;
-pub const MIGRATE_ASYNC: migrate_mode = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_76 {
-    pub release_work: work_struct,
-    pub rcu: callback_head,
-}
-pub const WB_REASON_MAX: wb_reason = 8;
-pub const WB_REASON_FOREIGN_FLUSH: wb_reason = 7;
-pub const WB_REASON_FORKER_THREAD: wb_reason = 6;
-pub const WB_REASON_FS_FREE_SPACE: wb_reason = 5;
-pub const WB_REASON_LAPTOP_TIMER: wb_reason = 4;
-pub const WB_REASON_PERIODIC: wb_reason = 3;
-pub const WB_REASON_SYNC: wb_reason = 2;
-pub const WB_REASON_VMSCAN: wb_reason = 1;
-pub const WB_REASON_BACKGROUND: wb_reason = 0;
-pub const DEVICE_REMOVABLE: device_removable = 3;
-pub const DEVICE_FIXED: device_removable = 2;
-pub const DEVICE_REMOVABLE_UNKNOWN: device_removable = 1;
-pub const DEVICE_REMOVABLE_NOT_SUPPORTED: device_removable = 0;
-pub const DEVICE_HORI_POS_RIGHT: device_physical_location_horizontal_position = 2;
-pub const DEVICE_HORI_POS_CENTER: device_physical_location_horizontal_position = 1;
-pub const DEVICE_HORI_POS_LEFT: device_physical_location_horizontal_position = 0;
-pub const DEVICE_VERT_POS_LOWER: device_physical_location_vertical_position = 2;
-pub const DEVICE_VERT_POS_CENTER: device_physical_location_vertical_position = 1;
-pub const DEVICE_VERT_POS_UPPER: device_physical_location_vertical_position = 0;
-pub const DEVICE_PANEL_UNKNOWN: device_physical_location_panel = 6;
-pub const DEVICE_PANEL_BACK: device_physical_location_panel = 5;
-pub const DEVICE_PANEL_FRONT: device_physical_location_panel = 4;
-pub const DEVICE_PANEL_RIGHT: device_physical_location_panel = 3;
-pub const DEVICE_PANEL_LEFT: device_physical_location_panel = 2;
-pub const DEVICE_PANEL_BOTTOM: device_physical_location_panel = 1;
-pub const DEVICE_PANEL_TOP: device_physical_location_panel = 0;
-pub const KOBJ_NS_TYPES: kobj_ns_type = 2;
-pub const KOBJ_NS_TYPE_NET: kobj_ns_type = 1;
-pub const KOBJ_NS_TYPE_NONE: kobj_ns_type = 0;
-pub const DEV_DMA_COHERENT: dev_dma_attr = 2;
-pub const DEV_DMA_NON_COHERENT: dev_dma_attr = 1;
-pub const DEV_DMA_NOT_SUPPORTED: dev_dma_attr = 0;
-pub const RPM_BLOCKED: rpm_status = 4;
-pub const RPM_SUSPENDING: rpm_status = 3;
-pub const RPM_SUSPENDED: rpm_status = 2;
-pub const RPM_RESUMING: rpm_status = 1;
-pub const RPM_ACTIVE: rpm_status = 0;
-pub const RPM_INVALID: rpm_status = -1;
-pub const RPM_REQ_RESUME: rpm_request = 4;
-pub const RPM_REQ_AUTOSUSPEND: rpm_request = 3;
-pub const RPM_REQ_SUSPEND: rpm_request = 2;
-pub const RPM_REQ_IDLE: rpm_request = 1;
-pub const RPM_REQ_NONE: rpm_request = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_77 {
-    pub u_flags: ::core::ffi::c_uint,
-    pub a_flags: atomic_t,
-}
-pub const HRTIMER_RESTART: hrtimer_restart = 1;
-pub const HRTIMER_NORESTART: hrtimer_restart = 0;
-pub const DL_DEV_UNBINDING: dl_dev_state = 3;
-pub const DL_DEV_DRIVER_BOUND: dl_dev_state = 2;
-pub const DL_DEV_PROBING: dl_dev_state = 1;
-pub const DL_DEV_NO_DRIVER: dl_dev_state = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_78 {
-    pub name: *const ::core::ffi::c_char,
-    pub lock: spinlock_t,
-}
-pub const PROBE_FORCE_SYNCHRONOUS: probe_type = 2;
-pub const PROBE_PREFER_ASYNCHRONOUS: probe_type = 1;
-pub const PROBE_DEFAULT_STRATEGY: probe_type = 0;
-pub const WB_SYNC_ALL: writeback_sync_modes = 1;
-pub const WB_SYNC_NONE: writeback_sync_modes = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_79 {
-    pub i_fop: *const file_operations,
-    pub free_inode: Option<unsafe extern "C" fn(*mut inode) -> ()>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_80 {
-    pub c2rust_unnamed: C2Rust_Unnamed_83,
-    pub mm_mt: maple_tree,
-    pub mmap_base: ::core::ffi::c_ulong,
-    pub mmap_legacy_base: ::core::ffi::c_ulong,
-    pub task_size: ::core::ffi::c_ulong,
-    pub pgd: *mut pgd_t,
-    pub membarrier_state: atomic_t,
-    pub mm_users: atomic_t,
-    pub pgtables_bytes: atomic_long_t,
-    pub map_count: ::core::ffi::c_int,
-    pub page_table_lock: spinlock_t,
-    pub mmap_lock: rw_semaphore,
-    pub mmlist: list_head,
-    pub vma_writer_wait: rcuwait,
-    pub mm_lock_seq: seqcount_t,
-    pub futex_hash_lock: mutex,
-    pub futex_phash: *mut futex_private_hash,
-    pub futex_phash_new: *mut futex_private_hash,
-    pub futex_batches: ::core::ffi::c_ulong,
-    pub futex_rcu: callback_head,
-    pub futex_atomic: atomic_long_t,
-    pub futex_ref: *mut ::core::ffi::c_uint,
-    pub hiwater_rss: ::core::ffi::c_ulong,
-    pub hiwater_vm: ::core::ffi::c_ulong,
-    pub total_vm: ::core::ffi::c_ulong,
-    pub locked_vm: ::core::ffi::c_ulong,
-    pub pinned_vm: atomic64_t,
-    pub data_vm: ::core::ffi::c_ulong,
-    pub exec_vm: ::core::ffi::c_ulong,
-    pub stack_vm: ::core::ffi::c_ulong,
-    pub def_flags: vm_flags_t,
-    pub write_protect_seq: seqcount_t,
-    pub arg_lock: spinlock_t,
-    pub start_code: ::core::ffi::c_ulong,
-    pub end_code: ::core::ffi::c_ulong,
-    pub start_data: ::core::ffi::c_ulong,
-    pub end_data: ::core::ffi::c_ulong,
-    pub start_brk: ::core::ffi::c_ulong,
-    pub brk: ::core::ffi::c_ulong,
-    pub start_stack: ::core::ffi::c_ulong,
-    pub arg_start: ::core::ffi::c_ulong,
-    pub arg_end: ::core::ffi::c_ulong,
-    pub env_start: ::core::ffi::c_ulong,
-    pub env_end: ::core::ffi::c_ulong,
-    pub saved_auxv: [::core::ffi::c_ulong; 54],
-    pub rss_stat: [percpu_counter; 4],
-    pub binfmt: *mut linux_binfmt,
-    pub context: mm_context_t,
-    pub flags: mm_flags_t,
-    pub ioctx_lock: spinlock_t,
-    pub ioctx_table: *mut kioctx_table,
-    pub owner: *mut task_struct,
-    pub user_ns: *mut user_namespace,
-    pub exe_file: *mut file,
-    pub notifier_subscriptions: *mut mmu_notifier_subscriptions,
-    pub tlb_flush_pending: atomic_t,
-    pub tlb_flush_batched: atomic_t,
-    pub uprobes_state: uprobes_state,
-    pub async_put_work: work_struct,
-    pub iommu_mm: *mut iommu_mm_data,
-    pub lru_gen: C2Rust_Unnamed_81,
-    pub mm_id: mm_id_t,
-    pub dmabuf_info: *mut task_dma_buf_info,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved_backport1: u64_0,
-    pub android_vendor_data1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_81 {
-    pub list: list_head,
-    pub bitmap: ::core::ffi::c_ulong,
-    pub memcg: *mut mem_cgroup,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_82 {
-    pub ma_lock: spinlock_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C, align(64))]
-pub struct C2Rust_Unnamed_83(pub C2Rust_C2Rust_Unnamed_83_Inner);
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_C2Rust_Unnamed_83_Inner {
-    pub mm_count: atomic_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_84 {
-    pub i_dentry: hlist_head,
-    pub i_rcu: callback_head,
-}
-pub const I_PINNING_NETFS_WB: inode_state_flags_t = 262144;
-pub const I_SYNC_QUEUED: inode_state_flags_t = 131072;
-pub const I_DONTCACHE: inode_state_flags_t = 65536;
-pub const I_CREATING: inode_state_flags_t = 32768;
-pub const I_OVL_INUSE: inode_state_flags_t = 16384;
-pub const I_WB_SWITCH: inode_state_flags_t = 8192;
-pub const I_DIRTY_TIME: inode_state_flags_t = 4096;
-pub const I_LINKABLE: inode_state_flags_t = 2048;
-pub const I_REFERENCED: inode_state_flags_t = 1024;
-pub const I_CLEAR: inode_state_flags_t = 512;
-pub const I_FREEING: inode_state_flags_t = 256;
-pub const I_WILL_FREE: inode_state_flags_t = 128;
-pub const I_DIRTY_PAGES: inode_state_flags_t = 64;
-pub const I_DIRTY_DATASYNC: inode_state_flags_t = 32;
-pub const I_DIRTY_SYNC: inode_state_flags_t = 16;
-pub const I_LRU_ISOLATING: inode_state_flags_t = 4;
-pub const I_SYNC: inode_state_flags_t = 2;
-pub const I_NEW: inode_state_flags_t = 1;
-pub const WRITE_LIFE_HINT_NR: rw_hint = 6;
-pub const WRITE_LIFE_EXTREME: rw_hint = 5;
-pub const WRITE_LIFE_LONG: rw_hint = 4;
-pub const WRITE_LIFE_MEDIUM: rw_hint = 3;
-pub const WRITE_LIFE_SHORT: rw_hint = 2;
-pub const WRITE_LIFE_NONE: rw_hint = 1;
-pub const WRITE_LIFE_NOT_SET: rw_hint = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_85 {
-    pub i_nlink: ::core::ffi::c_uint,
-    pub __i_nlink: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_86 {
-    pub ia_gid: kgid_t,
-    pub ia_vfsgid: vfsgid_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_87 {
-    pub ia_uid: kuid_t,
-    pub ia_vfsuid: vfsuid_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_88 {
-    pub c2rust_unnamed: C2Rust_Unnamed_89,
-    pub hash_len: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_89 {
-    pub hash: u32_0,
-    pub len: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_90 {
-    pub uid: kuid_t,
-    pub gid: kgid_t,
-    pub projid: kprojid_t,
-}
-pub const FREEZE_EXCL: freeze_holder = 8;
-pub const FREEZE_MAY_NEST: freeze_holder = 4;
-pub const FREEZE_HOLDER_USERSPACE: freeze_holder = 2;
-pub const FREEZE_HOLDER_KERNEL: freeze_holder = 1;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_91 {
-    pub __d_name: qstr,
-    pub d_name: qstr,
-}
-pub const PIDTYPE_MAX: pid_type = 4;
-pub const PIDTYPE_SID: pid_type = 3;
-pub const PIDTYPE_PGID: pid_type = 2;
+
 pub const PIDTYPE_TGID: pid_type = 1;
-pub const PIDTYPE_PID: pid_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_92 {
-    pub ino: u64_0,
-    pub pidfs_node: rb_node,
-    pub stashed: *mut dentry,
-    pub attr: *mut pidfs_attr,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_93 {
-    pub cnts: atomic_t,
-    pub c2rust_unnamed: C2Rust_Unnamed_94,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_94 {
-    pub wlocked: u8_0,
-    pub __lstate: [u8_0; 3],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_95 {
-    pub non_rcu: ::core::ffi::c_int,
-    pub rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_96 {
-    pub vm_flags: vm_flags_t,
-    pub __vm_flags: vm_flags_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_97 {
-    pub c2rust_unnamed: C2Rust_Unnamed_98,
-    pub vm_freeptr: freeptr_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_98 {
-    pub vm_start: ::core::ffi::c_ulong,
-    pub vm_end: ::core::ffi::c_ulong,
-}
-pub const MODULE_STATE_UNFORMED: module_state = 3;
-pub const MODULE_STATE_GOING: module_state = 2;
-pub const MODULE_STATE_COMING: module_state = 1;
-pub const MODULE_STATE_LIVE: module_state = 0;
-pub const __MAX_BPF_ATTACH_TYPE: bpf_attach_type = 58;
-pub const BPF_TRACE_UPROBE_SESSION: bpf_attach_type = 57;
-pub const BPF_TRACE_KPROBE_SESSION: bpf_attach_type = 56;
-pub const BPF_NETKIT_PEER: bpf_attach_type = 55;
-pub const BPF_NETKIT_PRIMARY: bpf_attach_type = 54;
-pub const BPF_CGROUP_UNIX_GETSOCKNAME: bpf_attach_type = 53;
-pub const BPF_CGROUP_UNIX_GETPEERNAME: bpf_attach_type = 52;
-pub const BPF_CGROUP_UNIX_RECVMSG: bpf_attach_type = 51;
-pub const BPF_CGROUP_UNIX_SENDMSG: bpf_attach_type = 50;
-pub const BPF_CGROUP_UNIX_CONNECT: bpf_attach_type = 49;
-pub const BPF_TRACE_UPROBE_MULTI: bpf_attach_type = 48;
-pub const BPF_TCX_EGRESS: bpf_attach_type = 47;
-pub const BPF_TCX_INGRESS: bpf_attach_type = 46;
-pub const BPF_NETFILTER: bpf_attach_type = 45;
-pub const BPF_STRUCT_OPS: bpf_attach_type = 44;
-pub const BPF_LSM_CGROUP: bpf_attach_type = 43;
-pub const BPF_TRACE_KPROBE_MULTI: bpf_attach_type = 42;
-pub const BPF_PERF_EVENT: bpf_attach_type = 41;
-pub const BPF_SK_REUSEPORT_SELECT_OR_MIGRATE: bpf_attach_type = 40;
-pub const BPF_SK_REUSEPORT_SELECT: bpf_attach_type = 39;
-pub const BPF_SK_SKB_VERDICT: bpf_attach_type = 38;
-pub const BPF_XDP: bpf_attach_type = 37;
-pub const BPF_SK_LOOKUP: bpf_attach_type = 36;
-pub const BPF_XDP_CPUMAP: bpf_attach_type = 35;
-pub const BPF_CGROUP_INET_SOCK_RELEASE: bpf_attach_type = 34;
-pub const BPF_XDP_DEVMAP: bpf_attach_type = 33;
-pub const BPF_CGROUP_INET6_GETSOCKNAME: bpf_attach_type = 32;
-pub const BPF_CGROUP_INET4_GETSOCKNAME: bpf_attach_type = 31;
-pub const BPF_CGROUP_INET6_GETPEERNAME: bpf_attach_type = 30;
-pub const BPF_CGROUP_INET4_GETPEERNAME: bpf_attach_type = 29;
-pub const BPF_TRACE_ITER: bpf_attach_type = 28;
-pub const BPF_LSM_MAC: bpf_attach_type = 27;
-pub const BPF_MODIFY_RETURN: bpf_attach_type = 26;
-pub const BPF_TRACE_FEXIT: bpf_attach_type = 25;
-pub const BPF_TRACE_FENTRY: bpf_attach_type = 24;
-pub const BPF_TRACE_RAW_TP: bpf_attach_type = 23;
-pub const BPF_CGROUP_SETSOCKOPT: bpf_attach_type = 22;
-pub const BPF_CGROUP_GETSOCKOPT: bpf_attach_type = 21;
-pub const BPF_CGROUP_UDP6_RECVMSG: bpf_attach_type = 20;
-pub const BPF_CGROUP_UDP4_RECVMSG: bpf_attach_type = 19;
-pub const BPF_CGROUP_SYSCTL: bpf_attach_type = 18;
-pub const BPF_FLOW_DISSECTOR: bpf_attach_type = 17;
-pub const BPF_LIRC_MODE2: bpf_attach_type = 16;
-pub const BPF_CGROUP_UDP6_SENDMSG: bpf_attach_type = 15;
-pub const BPF_CGROUP_UDP4_SENDMSG: bpf_attach_type = 14;
-pub const BPF_CGROUP_INET6_POST_BIND: bpf_attach_type = 13;
-pub const BPF_CGROUP_INET4_POST_BIND: bpf_attach_type = 12;
-pub const BPF_CGROUP_INET6_CONNECT: bpf_attach_type = 11;
-pub const BPF_CGROUP_INET4_CONNECT: bpf_attach_type = 10;
-pub const BPF_CGROUP_INET6_BIND: bpf_attach_type = 9;
-pub const BPF_CGROUP_INET4_BIND: bpf_attach_type = 8;
-pub const BPF_SK_MSG_VERDICT: bpf_attach_type = 7;
-pub const BPF_CGROUP_DEVICE: bpf_attach_type = 6;
-pub const BPF_SK_SKB_STREAM_VERDICT: bpf_attach_type = 5;
-pub const BPF_SK_SKB_STREAM_PARSER: bpf_attach_type = 4;
-pub const BPF_CGROUP_SOCK_OPS: bpf_attach_type = 3;
-pub const BPF_CGROUP_INET_SOCK_CREATE: bpf_attach_type = 2;
-pub const BPF_CGROUP_INET_EGRESS: bpf_attach_type = 1;
-pub const BPF_CGROUP_INET_INGRESS: bpf_attach_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_99 {
-    pub size: __u32,
-    pub type_0: __u32,
-}
-pub const __MAX_BPF_PROG_TYPE: bpf_prog_type = 34;
-pub const BPF_PROG_TYPE_FUSE: bpf_prog_type = 33;
-pub const BPF_PROG_TYPE_NETFILTER: bpf_prog_type = 32;
-pub const BPF_PROG_TYPE_SYSCALL: bpf_prog_type = 31;
-pub const BPF_PROG_TYPE_SK_LOOKUP: bpf_prog_type = 30;
-pub const BPF_PROG_TYPE_LSM: bpf_prog_type = 29;
-pub const BPF_PROG_TYPE_EXT: bpf_prog_type = 28;
-pub const BPF_PROG_TYPE_STRUCT_OPS: bpf_prog_type = 27;
-pub const BPF_PROG_TYPE_TRACING: bpf_prog_type = 26;
-pub const BPF_PROG_TYPE_CGROUP_SOCKOPT: bpf_prog_type = 25;
-pub const BPF_PROG_TYPE_RAW_TRACEPOINT_WRITABLE: bpf_prog_type = 24;
-pub const BPF_PROG_TYPE_CGROUP_SYSCTL: bpf_prog_type = 23;
-pub const BPF_PROG_TYPE_FLOW_DISSECTOR: bpf_prog_type = 22;
-pub const BPF_PROG_TYPE_SK_REUSEPORT: bpf_prog_type = 21;
-pub const BPF_PROG_TYPE_LIRC_MODE2: bpf_prog_type = 20;
-pub const BPF_PROG_TYPE_LWT_SEG6LOCAL: bpf_prog_type = 19;
-pub const BPF_PROG_TYPE_CGROUP_SOCK_ADDR: bpf_prog_type = 18;
-pub const BPF_PROG_TYPE_RAW_TRACEPOINT: bpf_prog_type = 17;
-pub const BPF_PROG_TYPE_SK_MSG: bpf_prog_type = 16;
-pub const BPF_PROG_TYPE_CGROUP_DEVICE: bpf_prog_type = 15;
-pub const BPF_PROG_TYPE_SK_SKB: bpf_prog_type = 14;
-pub const BPF_PROG_TYPE_SOCK_OPS: bpf_prog_type = 13;
-pub const BPF_PROG_TYPE_LWT_XMIT: bpf_prog_type = 12;
-pub const BPF_PROG_TYPE_LWT_OUT: bpf_prog_type = 11;
-pub const BPF_PROG_TYPE_LWT_IN: bpf_prog_type = 10;
-pub const BPF_PROG_TYPE_CGROUP_SOCK: bpf_prog_type = 9;
-pub const BPF_PROG_TYPE_CGROUP_SKB: bpf_prog_type = 8;
-pub const BPF_PROG_TYPE_PERF_EVENT: bpf_prog_type = 7;
-pub const BPF_PROG_TYPE_XDP: bpf_prog_type = 6;
-pub const BPF_PROG_TYPE_TRACEPOINT: bpf_prog_type = 5;
-pub const BPF_PROG_TYPE_SCHED_ACT: bpf_prog_type = 4;
-pub const BPF_PROG_TYPE_SCHED_CLS: bpf_prog_type = 3;
-pub const BPF_PROG_TYPE_KPROBE: bpf_prog_type = 2;
-pub const BPF_PROG_TYPE_SOCKET_FILTER: bpf_prog_type = 1;
-pub const BPF_PROG_TYPE_UNSPEC: bpf_prog_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_100 {
-    pub work: work_struct,
-    pub rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_101 {
-    pub kptr: btf_field_kptr,
-    pub graph_root: btf_field_graph_root,
-}
-pub const BPF_TASK_WORK: btf_field_type = 8192;
-pub const BPF_RES_SPIN_LOCK: btf_field_type = 4096;
-pub const BPF_UPTR: btf_field_type = 2048;
-pub const BPF_WORKQUEUE: btf_field_type = 1024;
-pub const BPF_REFCOUNT: btf_field_type = 512;
-pub const BPF_GRAPH_ROOT: btf_field_type = 160;
-pub const BPF_GRAPH_NODE: btf_field_type = 320;
-pub const BPF_RB_NODE: btf_field_type = 256;
-pub const BPF_RB_ROOT: btf_field_type = 128;
-pub const BPF_LIST_NODE: btf_field_type = 64;
-pub const BPF_LIST_HEAD: btf_field_type = 32;
-pub const BPF_KPTR: btf_field_type = 28;
-pub const BPF_KPTR_PERCPU: btf_field_type = 16;
-pub const BPF_KPTR_REF: btf_field_type = 8;
-pub const BPF_KPTR_UNREF: btf_field_type = 4;
-pub const BPF_TIMER: btf_field_type = 2;
-pub const BPF_SPIN_LOCK: btf_field_type = 1;
-pub const __MAX_BPF_MAP_TYPE: bpf_map_type = 34;
-pub const BPF_MAP_TYPE_ARENA: bpf_map_type = 33;
-pub const BPF_MAP_TYPE_CGRP_STORAGE: bpf_map_type = 32;
-pub const BPF_MAP_TYPE_USER_RINGBUF: bpf_map_type = 31;
-pub const BPF_MAP_TYPE_BLOOM_FILTER: bpf_map_type = 30;
-pub const BPF_MAP_TYPE_TASK_STORAGE: bpf_map_type = 29;
-pub const BPF_MAP_TYPE_INODE_STORAGE: bpf_map_type = 28;
-pub const BPF_MAP_TYPE_RINGBUF: bpf_map_type = 27;
-pub const BPF_MAP_TYPE_STRUCT_OPS: bpf_map_type = 26;
-pub const BPF_MAP_TYPE_DEVMAP_HASH: bpf_map_type = 25;
-pub const BPF_MAP_TYPE_SK_STORAGE: bpf_map_type = 24;
-pub const BPF_MAP_TYPE_STACK: bpf_map_type = 23;
-pub const BPF_MAP_TYPE_QUEUE: bpf_map_type = 22;
-pub const BPF_MAP_TYPE_PERCPU_CGROUP_STORAGE: bpf_map_type = 21;
-pub const BPF_MAP_TYPE_PERCPU_CGROUP_STORAGE_DEPRECATED: bpf_map_type = 21;
-pub const BPF_MAP_TYPE_REUSEPORT_SOCKARRAY: bpf_map_type = 20;
-pub const BPF_MAP_TYPE_CGROUP_STORAGE: bpf_map_type = 19;
-pub const BPF_MAP_TYPE_CGROUP_STORAGE_DEPRECATED: bpf_map_type = 19;
-pub const BPF_MAP_TYPE_SOCKHASH: bpf_map_type = 18;
-pub const BPF_MAP_TYPE_XSKMAP: bpf_map_type = 17;
-pub const BPF_MAP_TYPE_CPUMAP: bpf_map_type = 16;
-pub const BPF_MAP_TYPE_SOCKMAP: bpf_map_type = 15;
-pub const BPF_MAP_TYPE_DEVMAP: bpf_map_type = 14;
-pub const BPF_MAP_TYPE_HASH_OF_MAPS: bpf_map_type = 13;
-pub const BPF_MAP_TYPE_ARRAY_OF_MAPS: bpf_map_type = 12;
-pub const BPF_MAP_TYPE_LPM_TRIE: bpf_map_type = 11;
-pub const BPF_MAP_TYPE_LRU_PERCPU_HASH: bpf_map_type = 10;
-pub const BPF_MAP_TYPE_LRU_HASH: bpf_map_type = 9;
-pub const BPF_MAP_TYPE_CGROUP_ARRAY: bpf_map_type = 8;
-pub const BPF_MAP_TYPE_STACK_TRACE: bpf_map_type = 7;
-pub const BPF_MAP_TYPE_PERCPU_ARRAY: bpf_map_type = 6;
-pub const BPF_MAP_TYPE_PERCPU_HASH: bpf_map_type = 5;
-pub const BPF_MAP_TYPE_PERF_EVENT_ARRAY: bpf_map_type = 4;
-pub const BPF_MAP_TYPE_PROG_ARRAY: bpf_map_type = 3;
-pub const BPF_MAP_TYPE_ARRAY: bpf_map_type = 2;
-pub const BPF_MAP_TYPE_HASH: bpf_map_type = 1;
-pub const BPF_MAP_TYPE_UNSPEC: bpf_map_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_102 {
-    pub type_0: bpf_iter_task_type,
-    pub pid: u32_0,
-}
-pub const BPF_TASK_ITER_TGID: bpf_iter_task_type = 2;
-pub const BPF_TASK_ITER_TID: bpf_iter_task_type = 1;
-pub const BPF_TASK_ITER_ALL: bpf_iter_task_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_103 {
-    pub start: *mut cgroup,
-    pub order: bpf_cgroup_iter_order,
-}
-pub const BPF_CGROUP_ITER_ANCESTORS_UP: bpf_cgroup_iter_order = 4;
-pub const BPF_CGROUP_ITER_DESCENDANTS_POST: bpf_cgroup_iter_order = 3;
-pub const BPF_CGROUP_ITER_DESCENDANTS_PRE: bpf_cgroup_iter_order = 2;
-pub const BPF_CGROUP_ITER_SELF_ONLY: bpf_cgroup_iter_order = 1;
-pub const BPF_CGROUP_ITER_ORDER_UNSPEC: bpf_cgroup_iter_order = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_104 {
-    pub stream_buf: __u64,
-    pub stream_buf_len: __u32,
-    pub stream_id: __u32,
-    pub prog_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_105 {
-    pub flags: __u32,
-    pub bpffs_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_106 {
-    pub prog_fd: __u32,
-    pub map_fd: __u32,
-    pub flags: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_107 {
-    pub link_fd: __u32,
-    pub flags: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_108 {
-    pub type_0: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_109 {
-    pub link_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_110 {
-    pub link_fd: __u32,
-    pub c2rust_unnamed: C2Rust_Unnamed_112,
-    pub flags: __u32,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_111,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_111 {
-    pub old_prog_fd: __u32,
-    pub old_map_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_112 {
-    pub new_prog_fd: __u32,
-    pub new_map_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_113 {
-    pub c2rust_unnamed: C2Rust_Unnamed_128,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_127,
-    pub attach_type: __u32,
-    pub flags: __u32,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_114,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_114 {
-    pub target_btf_id: __u32,
-    pub c2rust_unnamed: C2Rust_Unnamed_126,
-    pub perf_event: C2Rust_Unnamed_125,
-    pub kprobe_multi: C2Rust_Unnamed_124,
-    pub tracing: C2Rust_Unnamed_123,
-    pub netfilter: C2Rust_Unnamed_122,
-    pub tcx: C2Rust_Unnamed_120,
-    pub uprobe_multi: C2Rust_Unnamed_119,
-    pub netkit: C2Rust_Unnamed_117,
-    pub cgroup: C2Rust_Unnamed_115,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_115 {
-    pub c2rust_unnamed: C2Rust_Unnamed_116,
-    pub expected_revision: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_116 {
-    pub relative_fd: __u32,
-    pub relative_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_117 {
-    pub c2rust_unnamed: C2Rust_Unnamed_118,
-    pub expected_revision: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_118 {
-    pub relative_fd: __u32,
-    pub relative_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_119 {
-    pub path: __u64,
-    pub offsets: __u64,
-    pub ref_ctr_offsets: __u64,
-    pub cookies: __u64,
-    pub cnt: __u32,
-    pub flags: __u32,
-    pub pid: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_120 {
-    pub c2rust_unnamed: C2Rust_Unnamed_121,
-    pub expected_revision: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_121 {
-    pub relative_fd: __u32,
-    pub relative_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_122 {
-    pub pf: __u32,
-    pub hooknum: __u32,
-    pub priority: __s32,
-    pub flags: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_123 {
-    pub target_btf_id: __u32,
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_124 {
-    pub flags: __u32,
-    pub cnt: __u32,
-    pub syms: __u64,
-    pub addrs: __u64,
-    pub cookies: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_125 {
-    pub bpf_cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_126 {
-    pub iter_info: __u64,
-    pub iter_info_len: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_127 {
-    pub target_fd: __u32,
-    pub target_ifindex: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_128 {
-    pub prog_fd: __u32,
-    pub map_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_129 {
-    pub pid: __u32,
-    pub fd: __u32,
-    pub flags: __u32,
-    pub buf_len: __u32,
-    pub buf: __u64,
-    pub prog_id: __u32,
-    pub fd_type: __u32,
-    pub probe_offset: __u64,
-    pub probe_addr: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_130 {
-    pub btf: __u64,
-    pub btf_log_buf: __u64,
-    pub btf_size: __u32,
-    pub btf_log_size: __u32,
-    pub btf_log_level: __u32,
-    pub btf_log_true_size: __u32,
-    pub btf_flags: __u32,
-    pub btf_token_fd: __s32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_131 {
-    pub name: __u64,
-    pub prog_fd: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_132 {
-    pub c2rust_unnamed: C2Rust_Unnamed_134,
-    pub attach_type: __u32,
-    pub query_flags: __u32,
-    pub attach_flags: __u32,
-    pub prog_ids: __u64,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_133,
-    pub c2rust_unnamed_1: [u8; 4],
-    pub prog_attach_flags: __u64,
-    pub link_ids: __u64,
-    pub link_attach_flags: __u64,
-    pub revision: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_133 {
-    pub prog_cnt: __u32,
-    pub count: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_134 {
-    pub target_fd: __u32,
-    pub target_ifindex: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_135 {
-    pub bpf_fd: __u32,
-    pub info_len: __u32,
-    pub info: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_136 {
-    pub c2rust_unnamed: C2Rust_Unnamed_137,
-    pub next_id: __u32,
-    pub open_flags: __u32,
-    pub fd_by_id_token_fd: __s32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_137 {
-    pub start_id: __u32,
-    pub prog_id: __u32,
-    pub map_id: __u32,
-    pub btf_id: __u32,
-    pub link_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_138 {
-    pub prog_fd: __u32,
-    pub retval: __u32,
-    pub data_size_in: __u32,
-    pub data_size_out: __u32,
-    pub data_in: __u64,
-    pub data_out: __u64,
-    pub repeat: __u32,
-    pub duration: __u32,
-    pub ctx_size_in: __u32,
-    pub ctx_size_out: __u32,
-    pub ctx_in: __u64,
-    pub ctx_out: __u64,
-    pub flags: __u32,
-    pub cpu: __u32,
-    pub batch_size: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_139 {
-    pub c2rust_unnamed: C2Rust_Unnamed_141,
-    pub attach_bpf_fd: __u32,
-    pub attach_type: __u32,
-    pub attach_flags: __u32,
-    pub replace_bpf_fd: __u32,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_140,
-    pub expected_revision: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_140 {
-    pub relative_fd: __u32,
-    pub relative_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_141 {
-    pub target_fd: __u32,
-    pub target_ifindex: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_142 {
-    pub pathname: __u64,
-    pub bpf_fd: __u32,
-    pub file_flags: __u32,
-    pub path_fd: __s32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_143 {
-    pub prog_type: __u32,
-    pub insn_cnt: __u32,
-    pub insns: __u64,
-    pub license: __u64,
-    pub log_level: __u32,
-    pub log_size: __u32,
-    pub log_buf: __u64,
-    pub kern_version: __u32,
-    pub prog_flags: __u32,
-    pub prog_name: [::core::ffi::c_char; 16],
-    pub prog_ifindex: __u32,
-    pub expected_attach_type: __u32,
-    pub prog_btf_fd: __u32,
-    pub func_info_rec_size: __u32,
-    pub func_info: __u64,
-    pub func_info_cnt: __u32,
-    pub line_info_rec_size: __u32,
-    pub line_info: __u64,
-    pub line_info_cnt: __u32,
-    pub attach_btf_id: __u32,
-    pub c2rust_unnamed: C2Rust_Unnamed_144,
-    pub core_relo_cnt: __u32,
-    pub fd_array: __u64,
-    pub core_relos: __u64,
-    pub core_relo_rec_size: __u32,
-    pub log_true_size: __u32,
-    pub prog_token_fd: __s32,
-    pub fd_array_cnt: __u32,
-    pub signature: __u64,
-    pub signature_size: __u32,
-    pub keyring_id: __s32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_144 {
-    pub attach_prog_fd: __u32,
-    pub attach_btf_obj_fd: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_145 {
-    pub in_batch: __u64,
-    pub out_batch: __u64,
-    pub keys: __u64,
-    pub values: __u64,
-    pub count: __u32,
-    pub map_fd: __u32,
-    pub elem_flags: __u64,
-    pub flags: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_146 {
-    pub map_fd: __u32,
-    pub key: __u64,
-    pub c2rust_unnamed: C2Rust_Unnamed_147,
-    pub flags: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_147 {
-    pub value: __u64,
-    pub next_key: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_148 {
-    pub map_type: __u32,
-    pub key_size: __u32,
-    pub value_size: __u32,
-    pub max_entries: __u32,
-    pub map_flags: __u32,
-    pub inner_map_fd: __u32,
-    pub numa_node: __u32,
-    pub map_name: [::core::ffi::c_char; 16],
-    pub map_ifindex: __u32,
-    pub btf_fd: __u32,
-    pub btf_key_type_id: __u32,
-    pub btf_value_type_id: __u32,
-    pub btf_vmlinux_value_type_id: __u32,
-    pub map_extra: __u64,
-    pub value_type_btf_obj_fd: __s32,
-    pub map_token_fd: __s32,
-    pub excl_prog_hash: __u64,
-    pub excl_prog_hash_size: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_149 {
-    pub rcu: callback_head,
-    pub work: work_struct,
-}
-#[allow(dead_code, non_upper_case_globals)]
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_150 {
-    pub raw_tracepoint: C2Rust_Unnamed_174,
-    pub tracing: C2Rust_Unnamed_173,
-    pub cgroup: C2Rust_Unnamed_172,
-    pub iter: C2Rust_Unnamed_166,
-    pub netns: C2Rust_Unnamed_165,
-    pub xdp: C2Rust_Unnamed_164,
-    pub struct_ops: C2Rust_Unnamed_163,
-    pub netfilter: C2Rust_Unnamed_162,
-    pub kprobe_multi: C2Rust_Unnamed_161,
-    pub uprobe_multi: C2Rust_Unnamed_160,
-    pub perf_event: C2Rust_Unnamed_154,
-    pub tcx: C2Rust_Unnamed_153,
-    pub netkit: C2Rust_Unnamed_152,
-    pub sockmap: C2Rust_Unnamed_151,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_151 {
-    pub map_id: __u32,
-    pub attach_type: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_152 {
-    pub ifindex: __u32,
-    pub attach_type: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_153 {
-    pub ifindex: __u32,
-    pub attach_type: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_154 {
-    pub type_0: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub c2rust_unnamed_0: C2Rust_Unnamed_155,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_155 {
-    pub uprobe: C2Rust_Unnamed_159,
-    pub kprobe: C2Rust_Unnamed_158,
-    pub tracepoint: C2Rust_Unnamed_157,
-    pub event: C2Rust_Unnamed_156,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_156 {
-    pub config: __u64,
-    pub type_0: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_157 {
-    pub tp_name: __u64,
-    pub name_len: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_158 {
-    pub func_name: __u64,
-    pub name_len: __u32,
-    pub offset: __u32,
-    pub addr: __u64,
-    pub missed: __u64,
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_159 {
-    pub file_name: __u64,
-    pub name_len: __u32,
-    pub offset: __u32,
-    pub cookie: __u64,
-    pub ref_ctr_offset: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_160 {
-    pub path: __u64,
-    pub offsets: __u64,
-    pub ref_ctr_offsets: __u64,
-    pub cookies: __u64,
-    pub path_size: __u32,
-    pub count: __u32,
-    pub flags: __u32,
-    pub pid: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_161 {
-    pub addrs: __u64,
-    pub count: __u32,
-    pub flags: __u32,
-    pub missed: __u64,
-    pub cookies: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_162 {
-    pub pf: __u32,
-    pub hooknum: __u32,
-    pub priority: __s32,
-    pub flags: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_163 {
-    pub map_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_164 {
-    pub ifindex: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_165 {
-    pub netns_ino: __u32,
-    pub attach_type: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_166 {
-    pub target_name: __u64,
-    pub target_name_len: __u32,
-    pub c2rust_unnamed: C2Rust_Unnamed_170,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_167,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_167 {
-    pub cgroup: C2Rust_Unnamed_169,
-    pub task: C2Rust_Unnamed_168,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_168 {
-    pub tid: __u32,
-    pub pid: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_169 {
-    pub cgroup_id: __u64,
-    pub order: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_170 {
-    pub map: C2Rust_Unnamed_171,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_171 {
-    pub map_id: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_172 {
-    pub cgroup_id: __u64,
-    pub attach_type: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_173 {
-    pub attach_type: __u32,
-    pub target_obj_id: __u32,
-    pub target_btf_id: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub cookie: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_174 {
-    pub tp_name: __u64,
-    pub tp_name_len: __u32,
-    pub c2rust_unnamed: [u8; 4],
-    pub cookie: __u64,
-}
-pub const __MAX_BPF_LINK_TYPE: bpf_link_type = 15;
-pub const BPF_LINK_TYPE_SOCKMAP: bpf_link_type = 14;
-pub const BPF_LINK_TYPE_NETKIT: bpf_link_type = 13;
-pub const BPF_LINK_TYPE_UPROBE_MULTI: bpf_link_type = 12;
-pub const BPF_LINK_TYPE_TCX: bpf_link_type = 11;
-pub const BPF_LINK_TYPE_NETFILTER: bpf_link_type = 10;
-pub const BPF_LINK_TYPE_STRUCT_OPS: bpf_link_type = 9;
-pub const BPF_LINK_TYPE_KPROBE_MULTI: bpf_link_type = 8;
-pub const BPF_LINK_TYPE_PERF_EVENT: bpf_link_type = 7;
-pub const BPF_LINK_TYPE_XDP: bpf_link_type = 6;
-pub const BPF_LINK_TYPE_NETNS: bpf_link_type = 5;
-pub const BPF_LINK_TYPE_ITER: bpf_link_type = 4;
-pub const BPF_LINK_TYPE_CGROUP: bpf_link_type = 3;
-pub const BPF_LINK_TYPE_TRACING: bpf_link_type = 2;
-pub const BPF_LINK_TYPE_RAW_TRACEPOINT: bpf_link_type = 1;
-pub const BPF_LINK_TYPE_UNSPEC: bpf_link_type = 0;
-pub const BPF_WRITE: bpf_access_type = 2;
-pub const BPF_READ: bpf_access_type = 1;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_175 {
-    pub ctx_field_size: ::core::ffi::c_int,
-    pub c2rust_unnamed: C2Rust_Unnamed_176,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_176 {
-    pub btf: *mut btf,
-    pub btf_id: u32_0,
-    pub ref_obj_id: u32_0,
-}
-pub const __BPF_REG_TYPE_LIMIT: bpf_reg_type = 268435455;
-pub const PTR_TO_BTF_ID_OR_NULL: bpf_reg_type = 272;
-pub const PTR_TO_TCP_SOCK_OR_NULL: bpf_reg_type = 269;
-pub const PTR_TO_SOCK_COMMON_OR_NULL: bpf_reg_type = 268;
-pub const PTR_TO_SOCKET_OR_NULL: bpf_reg_type = 267;
-pub const PTR_TO_MAP_VALUE_OR_NULL: bpf_reg_type = 260;
-pub const __BPF_REG_TYPE_MAX: bpf_reg_type = 22;
-pub const CONST_PTR_TO_DYNPTR: bpf_reg_type = 21;
-pub const PTR_TO_FUNC: bpf_reg_type = 20;
-pub const PTR_TO_BUF: bpf_reg_type = 19;
-pub const PTR_TO_ARENA: bpf_reg_type = 18;
-pub const PTR_TO_MEM: bpf_reg_type = 17;
-pub const PTR_TO_BTF_ID: bpf_reg_type = 16;
-pub const PTR_TO_XDP_SOCK: bpf_reg_type = 15;
-pub const PTR_TO_TP_BUFFER: bpf_reg_type = 14;
-pub const PTR_TO_TCP_SOCK: bpf_reg_type = 13;
-pub const PTR_TO_SOCK_COMMON: bpf_reg_type = 12;
-pub const PTR_TO_SOCKET: bpf_reg_type = 11;
-pub const PTR_TO_FLOW_KEYS: bpf_reg_type = 10;
-pub const PTR_TO_PACKET_END: bpf_reg_type = 9;
-pub const PTR_TO_PACKET: bpf_reg_type = 8;
-pub const PTR_TO_PACKET_META: bpf_reg_type = 7;
-pub const PTR_TO_STACK: bpf_reg_type = 6;
-pub const PTR_TO_MAP_KEY: bpf_reg_type = 5;
-pub const PTR_TO_MAP_VALUE: bpf_reg_type = 4;
-pub const CONST_PTR_TO_MAP: bpf_reg_type = 3;
-pub const PTR_TO_CTX: bpf_reg_type = 2;
-pub const SCALAR_VALUE: bpf_reg_type = 1;
-pub const NOT_INIT: bpf_reg_type = 0;
-pub const __BPF_FUNC_MAX_ID: bpf_func_id = 212;
-pub const BPF_FUNC_cgrp_storage_delete: bpf_func_id = 211;
-pub const BPF_FUNC_cgrp_storage_get: bpf_func_id = 210;
-pub const BPF_FUNC_user_ringbuf_drain: bpf_func_id = 209;
-pub const BPF_FUNC_ktime_get_tai_ns: bpf_func_id = 208;
-pub const BPF_FUNC_tcp_raw_check_syncookie_ipv6: bpf_func_id = 207;
-pub const BPF_FUNC_tcp_raw_check_syncookie_ipv4: bpf_func_id = 206;
-pub const BPF_FUNC_tcp_raw_gen_syncookie_ipv6: bpf_func_id = 205;
-pub const BPF_FUNC_tcp_raw_gen_syncookie_ipv4: bpf_func_id = 204;
-pub const BPF_FUNC_dynptr_data: bpf_func_id = 203;
-pub const BPF_FUNC_dynptr_write: bpf_func_id = 202;
-pub const BPF_FUNC_dynptr_read: bpf_func_id = 201;
-pub const BPF_FUNC_ringbuf_discard_dynptr: bpf_func_id = 200;
-pub const BPF_FUNC_ringbuf_submit_dynptr: bpf_func_id = 199;
-pub const BPF_FUNC_ringbuf_reserve_dynptr: bpf_func_id = 198;
-pub const BPF_FUNC_dynptr_from_mem: bpf_func_id = 197;
-pub const BPF_FUNC_skc_to_mptcp_sock: bpf_func_id = 196;
-pub const BPF_FUNC_map_lookup_percpu_elem: bpf_func_id = 195;
-pub const BPF_FUNC_kptr_xchg: bpf_func_id = 194;
-pub const BPF_FUNC_ima_file_hash: bpf_func_id = 193;
-pub const BPF_FUNC_skb_set_tstamp: bpf_func_id = 192;
-pub const BPF_FUNC_copy_from_user_task: bpf_func_id = 191;
-pub const BPF_FUNC_xdp_store_bytes: bpf_func_id = 190;
-pub const BPF_FUNC_xdp_load_bytes: bpf_func_id = 189;
-pub const BPF_FUNC_xdp_get_buff_len: bpf_func_id = 188;
-pub const BPF_FUNC_set_retval: bpf_func_id = 187;
-pub const BPF_FUNC_get_retval: bpf_func_id = 186;
-pub const BPF_FUNC_get_func_arg_cnt: bpf_func_id = 185;
-pub const BPF_FUNC_get_func_ret: bpf_func_id = 184;
-pub const BPF_FUNC_get_func_arg: bpf_func_id = 183;
-pub const BPF_FUNC_strncmp: bpf_func_id = 182;
-pub const BPF_FUNC_loop: bpf_func_id = 181;
-pub const BPF_FUNC_find_vma: bpf_func_id = 180;
-pub const BPF_FUNC_kallsyms_lookup_name: bpf_func_id = 179;
-pub const BPF_FUNC_skc_to_unix_sock: bpf_func_id = 178;
-pub const BPF_FUNC_trace_vprintk: bpf_func_id = 177;
-pub const BPF_FUNC_get_branch_snapshot: bpf_func_id = 176;
-pub const BPF_FUNC_task_pt_regs: bpf_func_id = 175;
-pub const BPF_FUNC_get_attach_cookie: bpf_func_id = 174;
-pub const BPF_FUNC_get_func_ip: bpf_func_id = 173;
-pub const BPF_FUNC_timer_cancel: bpf_func_id = 172;
-pub const BPF_FUNC_timer_start: bpf_func_id = 171;
-pub const BPF_FUNC_timer_set_callback: bpf_func_id = 170;
-pub const BPF_FUNC_timer_init: bpf_func_id = 169;
-pub const BPF_FUNC_sys_close: bpf_func_id = 168;
-pub const BPF_FUNC_btf_find_by_name_kind: bpf_func_id = 167;
-pub const BPF_FUNC_sys_bpf: bpf_func_id = 166;
-pub const BPF_FUNC_snprintf: bpf_func_id = 165;
-pub const BPF_FUNC_for_each_map_elem: bpf_func_id = 164;
-pub const BPF_FUNC_check_mtu: bpf_func_id = 163;
-pub const BPF_FUNC_sock_from_file: bpf_func_id = 162;
-pub const BPF_FUNC_ima_inode_hash: bpf_func_id = 161;
-pub const BPF_FUNC_ktime_get_coarse_ns: bpf_func_id = 160;
-pub const BPF_FUNC_bprm_opts_set: bpf_func_id = 159;
-pub const BPF_FUNC_get_current_task_btf: bpf_func_id = 158;
-pub const BPF_FUNC_task_storage_delete: bpf_func_id = 157;
-pub const BPF_FUNC_task_storage_get: bpf_func_id = 156;
-pub const BPF_FUNC_redirect_peer: bpf_func_id = 155;
-pub const BPF_FUNC_this_cpu_ptr: bpf_func_id = 154;
-pub const BPF_FUNC_per_cpu_ptr: bpf_func_id = 153;
-pub const BPF_FUNC_redirect_neigh: bpf_func_id = 152;
-pub const BPF_FUNC_skb_cgroup_classid: bpf_func_id = 151;
-pub const BPF_FUNC_seq_printf_btf: bpf_func_id = 150;
-pub const BPF_FUNC_snprintf_btf: bpf_func_id = 149;
-pub const BPF_FUNC_copy_from_user: bpf_func_id = 148;
-pub const BPF_FUNC_d_path: bpf_func_id = 147;
-pub const BPF_FUNC_inode_storage_delete: bpf_func_id = 146;
-pub const BPF_FUNC_inode_storage_get: bpf_func_id = 145;
-pub const BPF_FUNC_reserve_hdr_opt: bpf_func_id = 144;
-pub const BPF_FUNC_store_hdr_opt: bpf_func_id = 143;
-pub const BPF_FUNC_load_hdr_opt: bpf_func_id = 142;
-pub const BPF_FUNC_get_task_stack: bpf_func_id = 141;
-pub const BPF_FUNC_skc_to_udp6_sock: bpf_func_id = 140;
-pub const BPF_FUNC_skc_to_tcp_request_sock: bpf_func_id = 139;
-pub const BPF_FUNC_skc_to_tcp_timewait_sock: bpf_func_id = 138;
-pub const BPF_FUNC_skc_to_tcp_sock: bpf_func_id = 137;
-pub const BPF_FUNC_skc_to_tcp6_sock: bpf_func_id = 136;
-pub const BPF_FUNC_csum_level: bpf_func_id = 135;
-pub const BPF_FUNC_ringbuf_query: bpf_func_id = 134;
-pub const BPF_FUNC_ringbuf_discard: bpf_func_id = 133;
-pub const BPF_FUNC_ringbuf_submit: bpf_func_id = 132;
-pub const BPF_FUNC_ringbuf_reserve: bpf_func_id = 131;
-pub const BPF_FUNC_ringbuf_output: bpf_func_id = 130;
-pub const BPF_FUNC_sk_ancestor_cgroup_id: bpf_func_id = 129;
-pub const BPF_FUNC_sk_cgroup_id: bpf_func_id = 128;
-pub const BPF_FUNC_seq_write: bpf_func_id = 127;
-pub const BPF_FUNC_seq_printf: bpf_func_id = 126;
-pub const BPF_FUNC_ktime_get_boot_ns: bpf_func_id = 125;
-pub const BPF_FUNC_sk_assign: bpf_func_id = 124;
-pub const BPF_FUNC_get_current_ancestor_cgroup_id: bpf_func_id = 123;
-pub const BPF_FUNC_get_netns_cookie: bpf_func_id = 122;
-pub const BPF_FUNC_xdp_output: bpf_func_id = 121;
-pub const BPF_FUNC_get_ns_current_pid_tgid: bpf_func_id = 120;
-pub const BPF_FUNC_read_branch_records: bpf_func_id = 119;
-pub const BPF_FUNC_jiffies64: bpf_func_id = 118;
-pub const BPF_FUNC_send_signal_thread: bpf_func_id = 117;
-pub const BPF_FUNC_tcp_send_ack: bpf_func_id = 116;
-pub const BPF_FUNC_probe_read_kernel_str: bpf_func_id = 115;
-pub const BPF_FUNC_probe_read_user_str: bpf_func_id = 114;
-pub const BPF_FUNC_probe_read_kernel: bpf_func_id = 113;
-pub const BPF_FUNC_probe_read_user: bpf_func_id = 112;
-pub const BPF_FUNC_skb_output: bpf_func_id = 111;
-pub const BPF_FUNC_tcp_gen_syncookie: bpf_func_id = 110;
-pub const BPF_FUNC_send_signal: bpf_func_id = 109;
-pub const BPF_FUNC_sk_storage_delete: bpf_func_id = 108;
-pub const BPF_FUNC_sk_storage_get: bpf_func_id = 107;
-pub const BPF_FUNC_strtoul: bpf_func_id = 106;
-pub const BPF_FUNC_strtol: bpf_func_id = 105;
-pub const BPF_FUNC_sysctl_set_new_value: bpf_func_id = 104;
-pub const BPF_FUNC_sysctl_get_new_value: bpf_func_id = 103;
-pub const BPF_FUNC_sysctl_get_current_value: bpf_func_id = 102;
-pub const BPF_FUNC_sysctl_get_name: bpf_func_id = 101;
-pub const BPF_FUNC_tcp_check_syncookie: bpf_func_id = 100;
-pub const BPF_FUNC_skc_lookup_tcp: bpf_func_id = 99;
-pub const BPF_FUNC_get_listener_sock: bpf_func_id = 98;
-pub const BPF_FUNC_skb_ecn_set_ce: bpf_func_id = 97;
-pub const BPF_FUNC_tcp_sock: bpf_func_id = 96;
-pub const BPF_FUNC_sk_fullsock: bpf_func_id = 95;
-pub const BPF_FUNC_spin_unlock: bpf_func_id = 94;
-pub const BPF_FUNC_spin_lock: bpf_func_id = 93;
-pub const BPF_FUNC_rc_pointer_rel: bpf_func_id = 92;
-pub const BPF_FUNC_msg_pop_data: bpf_func_id = 91;
-pub const BPF_FUNC_msg_push_data: bpf_func_id = 90;
-pub const BPF_FUNC_map_peek_elem: bpf_func_id = 89;
-pub const BPF_FUNC_map_pop_elem: bpf_func_id = 88;
-pub const BPF_FUNC_map_push_elem: bpf_func_id = 87;
-pub const BPF_FUNC_sk_release: bpf_func_id = 86;
-pub const BPF_FUNC_sk_lookup_udp: bpf_func_id = 85;
-pub const BPF_FUNC_sk_lookup_tcp: bpf_func_id = 84;
-pub const BPF_FUNC_skb_ancestor_cgroup_id: bpf_func_id = 83;
-pub const BPF_FUNC_sk_select_reuseport: bpf_func_id = 82;
-pub const BPF_FUNC_get_local_storage: bpf_func_id = 81;
-pub const BPF_FUNC_get_current_cgroup_id: bpf_func_id = 80;
-pub const BPF_FUNC_skb_cgroup_id: bpf_func_id = 79;
-pub const BPF_FUNC_rc_keydown: bpf_func_id = 78;
-pub const BPF_FUNC_rc_repeat: bpf_func_id = 77;
-pub const BPF_FUNC_lwt_seg6_action: bpf_func_id = 76;
-pub const BPF_FUNC_lwt_seg6_adjust_srh: bpf_func_id = 75;
-pub const BPF_FUNC_lwt_seg6_store_bytes: bpf_func_id = 74;
-pub const BPF_FUNC_lwt_push_encap: bpf_func_id = 73;
-pub const BPF_FUNC_sk_redirect_hash: bpf_func_id = 72;
-pub const BPF_FUNC_msg_redirect_hash: bpf_func_id = 71;
-pub const BPF_FUNC_sock_hash_update: bpf_func_id = 70;
-pub const BPF_FUNC_fib_lookup: bpf_func_id = 69;
-pub const BPF_FUNC_skb_load_bytes_relative: bpf_func_id = 68;
-pub const BPF_FUNC_get_stack: bpf_func_id = 67;
-pub const BPF_FUNC_skb_get_xfrm_state: bpf_func_id = 66;
-pub const BPF_FUNC_xdp_adjust_tail: bpf_func_id = 65;
-pub const BPF_FUNC_bind: bpf_func_id = 64;
-pub const BPF_FUNC_msg_pull_data: bpf_func_id = 63;
-pub const BPF_FUNC_msg_cork_bytes: bpf_func_id = 62;
-pub const BPF_FUNC_msg_apply_bytes: bpf_func_id = 61;
-pub const BPF_FUNC_msg_redirect_map: bpf_func_id = 60;
-pub const BPF_FUNC_sock_ops_cb_flags_set: bpf_func_id = 59;
-pub const BPF_FUNC_override_return: bpf_func_id = 58;
-pub const BPF_FUNC_getsockopt: bpf_func_id = 57;
-pub const BPF_FUNC_perf_prog_read_value: bpf_func_id = 56;
-pub const BPF_FUNC_perf_event_read_value: bpf_func_id = 55;
-pub const BPF_FUNC_xdp_adjust_meta: bpf_func_id = 54;
-pub const BPF_FUNC_sock_map_update: bpf_func_id = 53;
-pub const BPF_FUNC_sk_redirect_map: bpf_func_id = 52;
-pub const BPF_FUNC_redirect_map: bpf_func_id = 51;
-pub const BPF_FUNC_skb_adjust_room: bpf_func_id = 50;
-pub const BPF_FUNC_setsockopt: bpf_func_id = 49;
-pub const BPF_FUNC_set_hash: bpf_func_id = 48;
-pub const BPF_FUNC_get_socket_uid: bpf_func_id = 47;
-pub const BPF_FUNC_get_socket_cookie: bpf_func_id = 46;
-pub const BPF_FUNC_probe_read_str: bpf_func_id = 45;
-pub const BPF_FUNC_xdp_adjust_head: bpf_func_id = 44;
-pub const BPF_FUNC_skb_change_head: bpf_func_id = 43;
-pub const BPF_FUNC_get_numa_node_id: bpf_func_id = 42;
-pub const BPF_FUNC_set_hash_invalid: bpf_func_id = 41;
-pub const BPF_FUNC_csum_update: bpf_func_id = 40;
-pub const BPF_FUNC_skb_pull_data: bpf_func_id = 39;
-pub const BPF_FUNC_skb_change_tail: bpf_func_id = 38;
-pub const BPF_FUNC_current_task_under_cgroup: bpf_func_id = 37;
-pub const BPF_FUNC_probe_write_user: bpf_func_id = 36;
-pub const BPF_FUNC_get_current_task: bpf_func_id = 35;
-pub const BPF_FUNC_get_hash_recalc: bpf_func_id = 34;
-pub const BPF_FUNC_skb_under_cgroup: bpf_func_id = 33;
-pub const BPF_FUNC_skb_change_type: bpf_func_id = 32;
-pub const BPF_FUNC_skb_change_proto: bpf_func_id = 31;
-pub const BPF_FUNC_skb_set_tunnel_opt: bpf_func_id = 30;
-pub const BPF_FUNC_skb_get_tunnel_opt: bpf_func_id = 29;
-pub const BPF_FUNC_csum_diff: bpf_func_id = 28;
-pub const BPF_FUNC_get_stackid: bpf_func_id = 27;
-pub const BPF_FUNC_skb_load_bytes: bpf_func_id = 26;
-pub const BPF_FUNC_perf_event_output: bpf_func_id = 25;
-pub const BPF_FUNC_get_route_realm: bpf_func_id = 24;
-pub const BPF_FUNC_redirect: bpf_func_id = 23;
-pub const BPF_FUNC_perf_event_read: bpf_func_id = 22;
-pub const BPF_FUNC_skb_set_tunnel_key: bpf_func_id = 21;
-pub const BPF_FUNC_skb_get_tunnel_key: bpf_func_id = 20;
-pub const BPF_FUNC_skb_vlan_pop: bpf_func_id = 19;
-pub const BPF_FUNC_skb_vlan_push: bpf_func_id = 18;
-pub const BPF_FUNC_get_cgroup_classid: bpf_func_id = 17;
-pub const BPF_FUNC_get_current_comm: bpf_func_id = 16;
-pub const BPF_FUNC_get_current_uid_gid: bpf_func_id = 15;
-pub const BPF_FUNC_get_current_pid_tgid: bpf_func_id = 14;
-pub const BPF_FUNC_clone_redirect: bpf_func_id = 13;
-pub const BPF_FUNC_tail_call: bpf_func_id = 12;
-pub const BPF_FUNC_l4_csum_replace: bpf_func_id = 11;
-pub const BPF_FUNC_l3_csum_replace: bpf_func_id = 10;
-pub const BPF_FUNC_skb_store_bytes: bpf_func_id = 9;
-pub const BPF_FUNC_get_smp_processor_id: bpf_func_id = 8;
-pub const BPF_FUNC_get_prandom_u32: bpf_func_id = 7;
-pub const BPF_FUNC_trace_printk: bpf_func_id = 6;
-pub const BPF_FUNC_ktime_get_ns: bpf_func_id = 5;
-pub const BPF_FUNC_probe_read: bpf_func_id = 4;
-pub const BPF_FUNC_map_delete_elem: bpf_func_id = 3;
-pub const BPF_FUNC_map_update_elem: bpf_func_id = 2;
-pub const BPF_FUNC_map_lookup_elem: bpf_func_id = 1;
-pub const BPF_FUNC_unspec: bpf_func_id = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_177 {
-    pub c2rust_unnamed: C2Rust_Unnamed_179,
-    pub arg_btf_id: [*mut u32_0; 5],
-    pub c2rust_unnamed_0: C2Rust_Unnamed_178,
-    pub arg_size: [size_t; 5],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_178 {
-    pub arg1_size: size_t,
-    pub arg2_size: size_t,
-    pub arg3_size: size_t,
-    pub arg4_size: size_t,
-    pub arg5_size: size_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_179 {
-    pub arg1_btf_id: *mut u32_0,
-    pub arg2_btf_id: *mut u32_0,
-    pub arg3_btf_id: *mut u32_0,
-    pub arg4_btf_id: *mut u32_0,
-    pub arg5_btf_id: *mut u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_180 {
-    pub c2rust_unnamed: C2Rust_Unnamed_181,
-    pub arg_type: [bpf_arg_type; 5],
-}
-pub const __BPF_ARG_TYPE_LIMIT: bpf_arg_type = 268435455;
-pub const ARG_PTR_TO_FIXED_SIZE_MEM: bpf_arg_type = 262148;
-pub const ARG_PTR_TO_UNINIT_MEM: bpf_arg_type = 67141636;
-pub const ARG_PTR_TO_BTF_ID_OR_NULL: bpf_arg_type = 269;
-pub const ARG_PTR_TO_STACK_OR_NULL: bpf_arg_type = 275;
-pub const ARG_PTR_TO_SOCKET_OR_NULL: bpf_arg_type = 268;
-pub const ARG_PTR_TO_CTX_OR_NULL: bpf_arg_type = 264;
-pub const ARG_PTR_TO_MEM_OR_NULL: bpf_arg_type = 260;
-pub const ARG_PTR_TO_MAP_VALUE_OR_NULL: bpf_arg_type = 259;
-pub const __BPF_ARG_TYPE_MAX: bpf_arg_type = 24;
-pub const ARG_PTR_TO_DYNPTR: bpf_arg_type = 23;
-pub const ARG_KPTR_XCHG_DEST: bpf_arg_type = 22;
-pub const ARG_PTR_TO_TIMER: bpf_arg_type = 21;
-pub const ARG_PTR_TO_CONST_STR: bpf_arg_type = 20;
-pub const ARG_PTR_TO_STACK: bpf_arg_type = 19;
-pub const ARG_PTR_TO_FUNC: bpf_arg_type = 18;
-pub const ARG_PTR_TO_PERCPU_BTF_ID: bpf_arg_type = 17;
-pub const ARG_PTR_TO_BTF_ID_SOCK_COMMON: bpf_arg_type = 16;
-pub const ARG_CONST_ALLOC_SIZE_OR_ZERO: bpf_arg_type = 15;
-pub const ARG_PTR_TO_RINGBUF_MEM: bpf_arg_type = 14;
-pub const ARG_PTR_TO_BTF_ID: bpf_arg_type = 13;
-pub const ARG_PTR_TO_SOCKET: bpf_arg_type = 12;
-pub const ARG_PTR_TO_SOCK_COMMON: bpf_arg_type = 11;
-pub const ARG_PTR_TO_SPIN_LOCK: bpf_arg_type = 10;
-pub const ARG_ANYTHING: bpf_arg_type = 9;
-pub const ARG_PTR_TO_CTX: bpf_arg_type = 8;
-pub const ARG_CONST_SIZE_OR_ZERO: bpf_arg_type = 7;
-pub const ARG_CONST_SIZE: bpf_arg_type = 6;
-pub const ARG_PTR_TO_ARENA: bpf_arg_type = 5;
-pub const ARG_PTR_TO_MEM: bpf_arg_type = 4;
-pub const ARG_PTR_TO_MAP_VALUE: bpf_arg_type = 3;
-pub const ARG_PTR_TO_MAP_KEY: bpf_arg_type = 2;
-pub const ARG_CONST_MAP_PTR: bpf_arg_type = 1;
-pub const ARG_DONTCARE: bpf_arg_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_181 {
-    pub arg1_type: bpf_arg_type,
-    pub arg2_type: bpf_arg_type,
-    pub arg3_type: bpf_arg_type,
-    pub arg4_type: bpf_arg_type,
-    pub arg5_type: bpf_arg_type,
-}
-pub const __BPF_RET_TYPE_LIMIT: bpf_return_type = 268435455;
-pub const RET_PTR_TO_BTF_ID_TRUSTED: bpf_return_type = 1048584;
-pub const RET_PTR_TO_BTF_ID_OR_NULL: bpf_return_type = 264;
-pub const RET_PTR_TO_DYNPTR_MEM_OR_NULL: bpf_return_type = 262;
-pub const RET_PTR_TO_RINGBUF_MEM_OR_NULL: bpf_return_type = 1286;
-pub const RET_PTR_TO_SOCK_COMMON_OR_NULL: bpf_return_type = 261;
-pub const RET_PTR_TO_TCP_SOCK_OR_NULL: bpf_return_type = 260;
-pub const RET_PTR_TO_SOCKET_OR_NULL: bpf_return_type = 259;
-pub const RET_PTR_TO_MAP_VALUE_OR_NULL: bpf_return_type = 258;
-pub const __BPF_RET_TYPE_MAX: bpf_return_type = 9;
-pub const RET_PTR_TO_BTF_ID: bpf_return_type = 8;
-pub const RET_PTR_TO_MEM_OR_BTF_ID: bpf_return_type = 7;
-pub const RET_PTR_TO_MEM: bpf_return_type = 6;
-pub const RET_PTR_TO_SOCK_COMMON: bpf_return_type = 5;
-pub const RET_PTR_TO_TCP_SOCK: bpf_return_type = 4;
-pub const RET_PTR_TO_SOCKET: bpf_return_type = 3;
-pub const RET_PTR_TO_MAP_VALUE: bpf_return_type = 2;
-pub const RET_VOID: bpf_return_type = 1;
-pub const RET_INTEGER: bpf_return_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_182 {
-    pub tail_call: C2Rust_Unnamed_183,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_183 {
-    pub map: *mut bpf_map,
-    pub key: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_184 {
-    pub rcu: callback_head,
-    pub work: work_struct,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_185 {
-    pub model: btf_func_model,
-    pub addr: *mut ::core::ffi::c_void,
-    pub ftrace_managed: bool_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_186 {
-    pub digest: [u8_0; 32],
-    pub tag: [u8_0; 8],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_187 {
-    pub module: *mut ::core::ffi::c_void,
-    pub refcnt: atomic_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_event {
-    pub node: hlist_node,
-    pub type_0: ::core::ffi::c_int,
-    pub funcs: *mut trace_event_functions,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_event_functions {
-    pub trace: trace_print_func,
-    pub raw: trace_print_func,
-    pub hex: trace_print_func,
-    pub binary: trace_print_func,
-}
-pub type trace_print_func = Option<
-    unsafe extern "C" fn(*mut trace_iterator, ::core::ffi::c_int, *mut trace_event) -> print_line_t,
->;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_iterator {
-    pub tr: *mut trace_array,
-    pub trace: *mut tracer,
-    pub array_buffer: *mut array_buffer,
-    pub private: *mut ::core::ffi::c_void,
-    pub cpu_file: ::core::ffi::c_int,
-    pub mutex: mutex,
-    pub buffer_iter: *mut *mut ring_buffer_iter,
-    pub iter_flags: ::core::ffi::c_ulong,
-    pub temp: *mut ::core::ffi::c_void,
-    pub temp_size: ::core::ffi::c_uint,
-    pub fmt: *mut ::core::ffi::c_char,
-    pub fmt_size: ::core::ffi::c_uint,
-    pub wait_index: atomic_t,
-    pub tmp_seq: trace_seq,
-    pub started: cpumask_var_t,
-    pub closed: bool_0,
-    pub snapshot: bool_0,
-    pub seq: trace_seq,
-    pub ent: *mut trace_entry,
-    pub lost_events: ::core::ffi::c_ulong,
-    pub leftover: ::core::ffi::c_int,
-    pub ent_size: ::core::ffi::c_int,
-    pub cpu: ::core::ffi::c_int,
-    pub ts: u64_0,
-    pub pos: loff_t,
-    pub idx: ::core::ffi::c_long,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_entry {
-    pub type_0: ::core::ffi::c_ushort,
-    pub flags: ::core::ffi::c_uchar,
-    pub preempt_count: ::core::ffi::c_uchar,
-    pub pid: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_seq {
-    pub seq: seq_buf,
-    pub readpos: size_t,
-    pub full: ::core::ffi::c_int,
-    pub buffer: [::core::ffi::c_char; 8156],
-}
-pub type print_line_t = ::core::ffi::c_uint;
-pub const TRACE_TYPE_NO_CONSUME: print_line_t = 3;
-pub const TRACE_TYPE_UNHANDLED: print_line_t = 2;
-pub const TRACE_TYPE_HANDLED: print_line_t = 1;
-pub const TRACE_TYPE_PARTIAL_LINE: print_line_t = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_188 {
-    pub name: *const ::core::ffi::c_char,
-    pub tp: *mut tracepoint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_event_class {
-    pub system: *const ::core::ffi::c_char,
-    pub probe: *mut ::core::ffi::c_void,
-    pub perf_probe: *mut ::core::ffi::c_void,
-    pub reg: Option<
-        unsafe extern "C" fn(
-            *mut trace_event_call,
-            trace_reg,
-            *mut ::core::ffi::c_void,
-        ) -> ::core::ffi::c_int,
-    >,
-    pub fields_array: *mut trace_event_fields,
-    pub get_fields: Option<unsafe extern "C" fn(*mut trace_event_call) -> *mut list_head>,
-    pub fields: list_head,
-    pub raw_init: Option<unsafe extern "C" fn(*mut trace_event_call) -> ::core::ffi::c_int>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct trace_event_fields {
-    pub type_0: *const ::core::ffi::c_char,
-    pub c2rust_unnamed: C2Rust_Unnamed_189,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_189 {
-    pub c2rust_unnamed: C2Rust_Unnamed_190,
-    pub define_fields: Option<unsafe extern "C" fn(*mut trace_event_call) -> ::core::ffi::c_int>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_190 {
-    pub name: *const ::core::ffi::c_char,
-    pub size: ::core::ffi::c_int,
-    pub align: ::core::ffi::c_int,
-    pub is_signed_needs_test: [u8; 1],
-    pub c2rust_padding: [u8; 3],
-    pub filter_type: ::core::ffi::c_int,
-    pub len: ::core::ffi::c_int,
-}
-pub type trace_reg = ::core::ffi::c_uint;
-pub const TRACE_REG_PERF_DEL: trace_reg = 7;
-pub const TRACE_REG_PERF_ADD: trace_reg = 6;
-pub const TRACE_REG_PERF_CLOSE: trace_reg = 5;
-pub const TRACE_REG_PERF_OPEN: trace_reg = 4;
-pub const TRACE_REG_PERF_UNREGISTER: trace_reg = 3;
-pub const TRACE_REG_PERF_REGISTER: trace_reg = 2;
-pub const TRACE_REG_UNREGISTER: trace_reg = 1;
-pub const TRACE_REG_REGISTER: trace_reg = 0;
-pub type perf_overflow_handler_t =
-    Option<unsafe extern "C" fn(*mut perf_event, *mut perf_sample_data, *mut pt_regs) -> ()>;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_191 {
-    pub user_regs: user_pt_regs,
-    pub c2rust_unnamed: C2Rust_Unnamed_192,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_192 {
-    pub regs: [u64_0; 31],
-    pub sp: u64_0,
-    pub pc: u64_0,
-    pub pstate: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_sample_data {
-    pub sample_flags: u64_0,
-    pub period: u64_0,
-    pub dyn_size: u64_0,
-    pub type_0: u64_0,
-    pub tid_entry: C2Rust_Unnamed_197,
-    pub time: u64_0,
-    pub id: u64_0,
-    pub cpu_entry: C2Rust_Unnamed_196,
-    pub ip: u64_0,
-    pub callchain: *mut perf_callchain_entry,
-    pub raw: *mut perf_raw_record,
-    pub br_stack: *mut perf_branch_stack,
-    pub br_stack_cntr: *mut u64_0,
-    pub weight: perf_sample_weight,
-    pub data_src: perf_mem_data_src,
-    pub txn: u64_0,
-    pub regs_user: perf_regs,
-    pub regs_intr: perf_regs,
-    pub stack_user_size: u64_0,
-    pub stream_id: u64_0,
-    pub cgroup: u64_0,
-    pub addr: u64_0,
-    pub phys_addr: u64_0,
-    pub data_page_size: u64_0,
-    pub code_page_size: u64_0,
-    pub aux_size: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_regs {
-    pub abi: __u64,
-    pub regs: *mut pt_regs,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union perf_mem_data_src {
-    pub val: __u64,
-    pub c2rust_unnamed: C2Rust_Unnamed_193,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_193 {
-    pub mem_op_mem_lvl_mem_snoop_mem_lock_mem_dtlb_mem_lvl_num_mem_remote_mem_snoopx_mem_blk_mem_hops_mem_rsvd:
-        [u8; 8],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union perf_sample_weight {
-    pub full: __u64,
-    pub c2rust_unnamed: C2Rust_Unnamed_194,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_194 {
-    pub var1_dw: __u32,
-    pub var2_w: __u16,
-    pub var3_w: __u16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_branch_stack {
-    pub nr: u64_0,
-    pub hw_idx: u64_0,
-    pub entries: [perf_branch_entry; 0],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_branch_entry {
-    pub from: __u64,
-    pub to: __u64,
-    pub mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved: [u8; 8],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_raw_record {
-    pub frag: perf_raw_frag,
-    pub size: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C, packed)]
-pub struct perf_raw_frag {
-    pub c2rust_unnamed: C2Rust_Unnamed_195,
-    pub copy: perf_copy_f,
-    pub data: *mut ::core::ffi::c_void,
-    pub size: u32_0,
-}
-pub type perf_copy_f = Option<
-    unsafe extern "C" fn(
-        *mut ::core::ffi::c_void,
-        *const ::core::ffi::c_void,
-        ::core::ffi::c_ulong,
-        ::core::ffi::c_ulong,
-    ) -> ::core::ffi::c_ulong,
->;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_195 {
-    pub next: *mut perf_raw_frag,
-    pub pad: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_callchain_entry {
-    pub nr: u64_0,
-    pub ip: [u64_0; 0],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_196 {
-    pub cpu: u32_0,
-    pub reserved: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_197 {
-    pub pid: u32_0,
-    pub tid: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_addr_filter_range {
-    pub start: ::core::ffi::c_ulong,
-    pub size: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_addr_filters_head {
-    pub list: list_head,
-    pub lock: raw_spinlock_t,
-    pub nr_file_filters: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct irq_work {
-    pub node: __call_single_node,
-    pub func: Option<unsafe extern "C" fn(*mut irq_work) -> ()>,
-    pub irqwait: rcuwait,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_event_pmu_context {
-    pub pmu: *mut pmu,
-    pub ctx: *mut perf_event_context,
-    pub pmu_ctx_entry: list_head,
-    pub pinned_active: list_head,
-    pub flexible_active: list_head,
-    pub embedded: [u8; 1],
-    pub c2rust_padding: [u8; 3],
-    pub nr_events: ::core::ffi::c_uint,
-    pub nr_cgroups: ::core::ffi::c_uint,
-    pub nr_freq: ::core::ffi::c_uint,
-    pub refcount: atomic_t,
-    pub callback_head: callback_head,
-    pub rotate_necessary: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_event_groups {
-    pub tree: rb_root,
-    pub index: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_output_handle {
-    pub event: *mut perf_event,
-    pub rb: *mut perf_buffer,
-    pub wakeup: ::core::ffi::c_ulong,
-    pub size: ::core::ffi::c_ulong,
-    pub c2rust_unnamed: C2Rust_Unnamed_199,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_198,
-    pub page: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_198 {
-    pub addr: *mut ::core::ffi::c_void,
-    pub head: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_199 {
-    pub flags: u64_0,
-    pub aux_flags: u64_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_200,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_200 {
-    pub skip_read: [u8; 1],
-    pub c2rust_padding: [u8; 7],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct perf_cpu_pmu_context {
-    pub epc: perf_event_pmu_context,
-    pub task_epc: *mut perf_event_pmu_context,
-    pub sched_cb_entry: list_head,
-    pub sched_cb_usage: ::core::ffi::c_int,
-    pub active_oncpu: ::core::ffi::c_int,
-    pub exclusive: ::core::ffi::c_int,
-    pub pmu_disable_count: ::core::ffi::c_int,
-    pub hrtimer_lock: raw_spinlock_t,
-    pub hrtimer: hrtimer,
-    pub hrtimer_interval: ktime_t,
-    pub hrtimer_active: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct hw_perf_event {
-    pub c2rust_unnamed: C2Rust_Unnamed_204,
-    pub target: *mut task_struct,
-    pub addr_filters: *mut ::core::ffi::c_void,
-    pub addr_filters_gen: ::core::ffi::c_ulong,
-    pub state: ::core::ffi::c_int,
-    pub prev_count: local64_t,
-    pub sample_period: u64_0,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_201,
-    pub interrupts_seq: u64_0,
-    pub interrupts: u64_0,
-    pub freq_time_stamp: u64_0,
-    pub freq_count_stamp: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_201 {
-    pub c2rust_unnamed: C2Rust_Unnamed_203,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_202,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_202 {
-    pub saved_metric: u64_0,
-    pub saved_slots: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_203 {
-    pub last_period: u64_0,
-    pub period_left: local64_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_204 {
-    pub c2rust_unnamed: C2Rust_Unnamed_211,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_210,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_209,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_208,
-    pub c2rust_unnamed_3: C2Rust_Unnamed_207,
-    pub c2rust_unnamed_4: C2Rust_Unnamed_206,
-    pub c2rust_unnamed_5: C2Rust_Unnamed_205,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_205 {
-    pub iommu_bank: u8_0,
-    pub iommu_cntr: u8_0,
-    pub padding: u16_0,
-    pub conf: u64_0,
-    pub conf1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_206 {
-    pub info: arch_hw_breakpoint,
-    pub bp_list: rhlist_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_207 {
-    pub pwr_acc: u64_0,
-    pub ptsc: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_208 {
-    pub tp_list: list_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_209 {
-    pub hrtimer: hrtimer,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_210 {
-    pub aux_config: u64_0,
-    pub aux_paused: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_211 {
-    pub config: u64_0,
-    pub config1: u64_0,
-    pub last_tag: u64_0,
-    pub dyn_constraint: u64_0,
-    pub config_base: ::core::ffi::c_ulong,
-    pub event_base: ::core::ffi::c_ulong,
-    pub event_base_rdpmc: ::core::ffi::c_int,
-    pub idx: ::core::ffi::c_int,
-    pub last_cpu: ::core::ffi::c_int,
-    pub flags: ::core::ffi::c_int,
-    pub extra_reg: hw_perf_event_extra,
-    pub branch_reg: hw_perf_event_extra,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct hw_perf_event_extra {
-    pub config: u64_0,
-    pub reg: ::core::ffi::c_uint,
-    pub alloc: ::core::ffi::c_int,
-    pub idx: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_212 {
-    pub aux_action: __u32,
-    pub c2rust_unnamed: C2Rust_Unnamed_213,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_213 {
-    pub aux_start_paused_aux_pause_aux_resume___reserved_3: [u8; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_214 {
-    pub bp_len: __u64,
-    pub kprobe_addr: __u64,
-    pub probe_offset: __u64,
-    pub config2: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_215 {
-    pub bp_addr: __u64,
-    pub kprobe_func: __u64,
-    pub uprobe_path: __u64,
-    pub config1: __u64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_216 {
-    pub wakeup_events: __u32,
-    pub wakeup_watermark: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_217 {
-    pub sample_period: __u64,
-    pub sample_freq: __u64,
-}
-pub type perf_event_state = ::core::ffi::c_int;
-pub const PERF_EVENT_STATE_ACTIVE: perf_event_state = 1;
-pub const PERF_EVENT_STATE_INACTIVE: perf_event_state = 0;
-pub const PERF_EVENT_STATE_OFF: perf_event_state = -1;
-pub const PERF_EVENT_STATE_ERROR: perf_event_state = -2;
-pub const PERF_EVENT_STATE_EXIT: perf_event_state = -3;
-pub const PERF_EVENT_STATE_REVOKED: perf_event_state = -4;
-pub const PERF_EVENT_STATE_DEAD: perf_event_state = -5;
-pub const FP_STATE_SVE: fp_type = 2;
-pub const FP_STATE_FPSIMD: fp_type = 1;
-pub const FP_STATE_CURRENT: fp_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_218 {
-    pub tp_value: ::core::ffi::c_ulong,
-    pub tp2_value: ::core::ffi::c_ulong,
-    pub fpmr: u64_0,
-    pub pad: ::core::ffi::c_ulong,
-    pub fpsimd_state: user_fpsimd_state,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_219 {
-    pub insn: __le32,
-    pub ixol: __le32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_220 {
-    pub c2rust_unnamed: C2Rust_Unnamed_222,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_221,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_221 {
-    pub dup_xol_work: callback_head,
-    pub dup_xol_addr: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_222 {
-    pub autask: arch_uprobe_task,
-    pub vaddr: ::core::ffi::c_ulong,
-}
-pub const HPROBE_CONSUMED: hprobe_state = 3;
-pub const HPROBE_GONE: hprobe_state = 2;
-pub const HPROBE_STABLE: hprobe_state = 1;
-pub const HPROBE_LEASED: hprobe_state = 0;
-pub const UTASK_SSTEP_TRAPPED: uprobe_task_state = 3;
-pub const UTASK_SSTEP_ACK: uprobe_task_state = 2;
-pub const UTASK_SSTEP: uprobe_task_state = 1;
-pub const UTASK_RUNNING: uprobe_task_state = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_223 {
-    pub si_signo: ::core::ffi::c_int,
-    pub si_errno: ::core::ffi::c_int,
-    pub si_code: ::core::ffi::c_int,
-    pub _sifields: __sifields,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_224 {
-    pub _call_addr: *mut ::core::ffi::c_void,
-    pub _syscall: ::core::ffi::c_int,
-    pub _arch: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_225 {
-    pub _band: ::core::ffi::c_long,
-    pub _fd: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_226 {
-    pub _addr: *mut ::core::ffi::c_void,
-    pub c2rust_unnamed: C2Rust_Unnamed_227,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_227 {
-    pub _trapno: ::core::ffi::c_int,
-    pub _addr_lsb: ::core::ffi::c_short,
-    pub _addr_bnd: C2Rust_Unnamed_230,
-    pub _addr_pkey: C2Rust_Unnamed_229,
-    pub _perf: C2Rust_Unnamed_228,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_228 {
-    pub _data: ::core::ffi::c_ulong,
-    pub _type: __u32,
-    pub _flags: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_229 {
-    pub _dummy_pkey: [::core::ffi::c_char; 8],
-    pub _pkey: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_230 {
-    pub _dummy_bnd: [::core::ffi::c_char; 8],
-    pub _lower: *mut ::core::ffi::c_void,
-    pub _upper: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_231 {
-    pub _pid: __kernel_pid_t,
-    pub _uid: __kernel_uid32_t,
-    pub _status: ::core::ffi::c_int,
-    pub _utime: __kernel_clock_t,
-    pub _stime: __kernel_clock_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_232 {
-    pub _pid: __kernel_pid_t,
-    pub _uid: __kernel_uid32_t,
-    pub _sigval: sigval_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_233 {
-    pub _tid: __kernel_timer_t,
-    pub _overrun: ::core::ffi::c_int,
-    pub _sigval: sigval_t,
-    pub _sys_private: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_234 {
-    pub _pid: __kernel_pid_t,
-    pub _uid: __kernel_uid32_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_235 {
-    pub ioc_node: hlist_node,
-    pub __rcu_head: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_236 {
-    pub q_node: list_head,
-    pub __rcu_icq_cache: *mut kmem_cache,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_237 {
-    pub bi_cookie: blk_qc_t,
-    pub __bi_nr_segments: ::core::ffi::c_uint,
-}
-pub const BO_T_RWSEM: blocked_on_type = 2;
-pub const BO_T_MUTEX: blocked_on_type = 1;
-pub const BO_T_NONE: blocked_on_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_xdp {
-    pub lock: mutex,
-    pub list: hlist_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_can {
-    pub proc_dir: *mut proc_dir_entry,
-    pub pde_stats: *mut proc_dir_entry,
-    pub pde_reset_stats: *mut proc_dir_entry,
-    pub pde_rcvlist_all: *mut proc_dir_entry,
-    pub pde_rcvlist_fil: *mut proc_dir_entry,
-    pub pde_rcvlist_inv: *mut proc_dir_entry,
-    pub pde_rcvlist_sff: *mut proc_dir_entry,
-    pub pde_rcvlist_eff: *mut proc_dir_entry,
-    pub pde_rcvlist_err: *mut proc_dir_entry,
-    pub bcmproc_dir: *mut proc_dir_entry,
-    pub rx_alldev_list: *mut can_dev_rcv_lists,
-    pub rcvlists_lock: spinlock_t,
-    pub stattimer: timer_list,
-    pub pkg_stats: *mut can_pkg_stats,
-    pub rcv_lists_stats: *mut can_rcv_lists_stats,
-    pub cgw_list: hlist_head,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_xfrm {
-    pub state_all: list_head,
-    pub state_bydst: *mut hlist_head,
-    pub state_bysrc: *mut hlist_head,
-    pub state_byspi: *mut hlist_head,
-    pub state_byseq: *mut hlist_head,
-    pub state_cache_input: *mut hlist_head,
-    pub state_hmask: ::core::ffi::c_uint,
-    pub state_num: ::core::ffi::c_uint,
-    pub state_hash_work: work_struct,
-    pub policy_all: list_head,
-    pub policy_byidx: *mut hlist_head,
-    pub policy_idx_hmask: ::core::ffi::c_uint,
-    pub idx_generator: ::core::ffi::c_uint,
-    pub policy_bydst: [xfrm_policy_hash; 3],
-    pub policy_count: [::core::ffi::c_uint; 6],
-    pub policy_hash_work: work_struct,
-    pub policy_hthresh: xfrm_policy_hthresh,
-    pub inexact_bins: list_head,
-    pub nlsk: *mut sock,
-    pub nlsk_stash: *mut sock,
-    pub sysctl_aevent_etime: u32_0,
-    pub sysctl_aevent_rseqth: u32_0,
-    pub sysctl_larval_drop: ::core::ffi::c_int,
-    pub sysctl_acq_expires: u32_0,
-    pub policy_default: [u8_0; 3],
-    pub sysctl_hdr: *mut ctl_table_header,
-    pub xfrm4_dst_ops: dst_ops,
-    pub xfrm6_dst_ops: dst_ops,
-    pub xfrm_state_lock: spinlock_t,
-    pub xfrm_state_hash_generation: seqcount_spinlock_t,
-    pub xfrm_policy_hash_generation: seqcount_spinlock_t,
-    pub xfrm_policy_lock: spinlock_t,
-    pub xfrm_cfg_mutex: mutex,
-    pub nat_keepalive_work: delayed_work,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct dst_ops {
-    pub family: ::core::ffi::c_ushort,
-    pub gc_thresh: ::core::ffi::c_uint,
-    pub gc: Option<unsafe extern "C" fn(*mut dst_ops) -> ()>,
-    pub check: Option<unsafe extern "C" fn(*mut dst_entry, __u32) -> *mut dst_entry>,
-    pub default_advmss: Option<unsafe extern "C" fn(*const dst_entry) -> ::core::ffi::c_uint>,
-    pub mtu: Option<unsafe extern "C" fn(*const dst_entry) -> ::core::ffi::c_uint>,
-    pub cow_metrics:
-        Option<unsafe extern "C" fn(*mut dst_entry, ::core::ffi::c_ulong) -> *mut u32_0>,
-    pub destroy: Option<unsafe extern "C" fn(*mut dst_entry) -> ()>,
-    pub ifdown: Option<unsafe extern "C" fn(*mut dst_entry, *mut net_device) -> ()>,
-    pub negative_advice: Option<unsafe extern "C" fn(*mut sock, *mut dst_entry) -> ()>,
-    pub link_failure: Option<unsafe extern "C" fn(*mut sk_buff) -> ()>,
-    pub update_pmtu:
-        Option<unsafe extern "C" fn(*mut dst_entry, *mut sock, *mut sk_buff, u32_0, bool_0) -> ()>,
-    pub redirect: Option<unsafe extern "C" fn(*mut dst_entry, *mut sock, *mut sk_buff) -> ()>,
-    pub local_out:
-        Option<unsafe extern "C" fn(*mut net, *mut sock, *mut sk_buff) -> ::core::ffi::c_int>,
-    pub neigh_lookup: Option<
-        unsafe extern "C" fn(
-            *const dst_entry,
-            *mut sk_buff,
-            *const ::core::ffi::c_void,
-        ) -> *mut neighbour,
-    >,
-    pub confirm_neigh:
-        Option<unsafe extern "C" fn(*const dst_entry, *const ::core::ffi::c_void) -> ()>,
-    pub kmem_cachep: *mut kmem_cache,
-    pub pcpuc_entries: percpu_counter,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_238 {
-    pub c2rust_unnamed: C2Rust_Unnamed_247,
-    pub headers: C2Rust_Unnamed_239,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_239 {
-    pub __pkt_type_offset: [__u8; 0],
-    pub pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay: [u8; 1],
-    pub __mono_tc_offset: [__u8; 0],
-    pub tstamp_type_tc_at_ingress_tc_skip_classify_remcsum_offload_csum_complete_sw_csum_level_inner_protocol_type_l4_hash_sw_hash_wifi_acked_valid_wifi_acked_no_fcs_encapsulation_encap_hdr_csum_csum_valid_ndisc_nodetype_nf_trace_redirected_from_ingress_nf_skip_egress_slow_gro_unreadable:
-        [u8; 4],
-    pub c2rust_padding: [u8; 1],
-    pub tc_index: __u16,
-    pub alloc_cpu: u16_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_245,
-    pub priority: __u32,
-    pub skb_iif: ::core::ffi::c_int,
-    pub hash: __u32,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_243,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_242,
-    pub secmark: __u32,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_241,
-    pub c2rust_unnamed_3: C2Rust_Unnamed_240,
-    pub inner_transport_header: __u16,
-    pub inner_network_header: __u16,
-    pub inner_mac_header: __u16,
-    pub protocol: __be16,
-    pub transport_header: __u16,
-    pub network_header: __u16,
-    pub mac_header: __u16,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_240 {
-    pub inner_protocol: __be16,
-    pub inner_ipproto: __u8,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_241 {
-    pub mark: __u32,
-    pub reserved_tailroom: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_242 {
-    pub napi_id: ::core::ffi::c_uint,
-    pub sender_cpu: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_243 {
-    pub vlan_all: u32_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_244,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_244 {
-    pub vlan_proto: __be16,
-    pub vlan_tci: __u16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_245 {
-    pub csum: __wsum,
-    pub c2rust_unnamed: C2Rust_Unnamed_246,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_246 {
-    pub csum_start: __u16,
-    pub csum_offset: __u16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_247 {
-    pub __pkt_type_offset: [__u8; 0],
-    pub pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay: [u8; 1],
-    pub __mono_tc_offset: [__u8; 0],
-    pub tstamp_type_tc_at_ingress_tc_skip_classify_remcsum_offload_csum_complete_sw_csum_level_inner_protocol_type_l4_hash_sw_hash_wifi_acked_valid_wifi_acked_no_fcs_encapsulation_encap_hdr_csum_csum_valid_ndisc_nodetype_nf_trace_redirected_from_ingress_nf_skip_egress_slow_gro_unreadable:
-        [u8; 4],
-    pub c2rust_padding: [u8; 1],
-    pub tc_index: __u16,
-    pub alloc_cpu: u16_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_253,
-    pub priority: __u32,
-    pub skb_iif: ::core::ffi::c_int,
-    pub hash: __u32,
-    pub c2rust_unnamed_0: C2Rust_Unnamed_251,
-    pub c2rust_unnamed_1: C2Rust_Unnamed_250,
-    pub secmark: __u32,
-    pub c2rust_unnamed_2: C2Rust_Unnamed_249,
-    pub c2rust_unnamed_3: C2Rust_Unnamed_248,
-    pub inner_transport_header: __u16,
-    pub inner_network_header: __u16,
-    pub inner_mac_header: __u16,
-    pub protocol: __be16,
-    pub transport_header: __u16,
-    pub network_header: __u16,
-    pub mac_header: __u16,
-    pub __kabi_reserved1: u64_0,
-    pub __kabi_reserved2: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_248 {
-    pub inner_protocol: __be16,
-    pub inner_ipproto: __u8,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_249 {
-    pub mark: __u32,
-    pub reserved_tailroom: __u32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_250 {
-    pub napi_id: ::core::ffi::c_uint,
-    pub sender_cpu: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_251 {
-    pub vlan_all: u32_0,
-    pub c2rust_unnamed: C2Rust_Unnamed_252,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_252 {
-    pub vlan_proto: __be16,
-    pub vlan_tci: __u16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_253 {
-    pub csum: __wsum,
-    pub c2rust_unnamed: C2Rust_Unnamed_254,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_254 {
-    pub csum_start: __u16,
-    pub csum_offset: __u16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_255 {
-    pub c2rust_unnamed: C2Rust_Unnamed_256,
-    pub tcp_tsorted_anchor: list_head,
-    pub _sk_redir: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_256 {
-    pub _skb_refdst: ::core::ffi::c_ulong,
-    pub destructor: Option<unsafe extern "C" fn(*mut sk_buff) -> ()>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_257 {
-    pub tstamp: ktime_t,
-    pub skb_mstamp_ns: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_258 {
-    pub c2rust_unnamed: C2Rust_Unnamed_259,
-    pub rbnode: rb_node,
-    pub list: list_head,
-    pub ll_node: llist_node,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_259 {
-    pub next: *mut sk_buff,
-    pub prev: *mut sk_buff,
-    pub c2rust_unnamed: C2Rust_Unnamed_260,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_260 {
-    pub dev: *mut net_device,
-    pub dev_scratch: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct xfrm_policy_hthresh {
-    pub work: work_struct,
-    pub lock: seqlock_t,
-    pub lbits4: u8_0,
-    pub rbits4: u8_0,
-    pub lbits6: u8_0,
-    pub rbits6: u8_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct xfrm_policy_hash {
-    pub table: *mut hlist_head,
-    pub hmask: ::core::ffi::c_uint,
-    pub dbits4: u8_0,
-    pub sbits4: u8_0,
-    pub dbits6: u8_0,
-    pub sbits6: u8_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_bpf {
-    pub run_array: [*mut bpf_prog_array; 2],
-    pub progs: [*mut bpf_prog; 2],
-    pub links: [list_head; 2],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_261 {
-    pub c2rust_unnamed: C2Rust_Unnamed_262,
-    pub list: sk_buff_list,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct sk_buff_list {
-    pub next: *mut sk_buff,
-    pub prev: *mut sk_buff,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_262 {
-    pub next: *mut sk_buff,
-    pub prev: *mut sk_buff,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_ct {
-    pub ecache_dwork_pending: bool_0,
-    pub sysctl_log_invalid: u8_0,
-    pub sysctl_events: u8_0,
-    pub sysctl_acct: u8_0,
-    pub sysctl_tstamp: u8_0,
-    pub sysctl_checksum: u8_0,
-    pub stat: *mut ip_conntrack_stat,
-    pub nf_conntrack_event_cb: *mut nf_ct_event_notifier,
-    pub nf_ct_proto: nf_ip_net,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_ip_net {
-    pub generic: nf_generic_net,
-    pub tcp: nf_tcp_net,
-    pub udp: nf_udp_net,
-    pub icmp: nf_icmp_net,
-    pub icmpv6: nf_icmp_net,
-    pub sctp: nf_sctp_net,
-    pub gre: nf_gre_net,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_gre_net {
-    pub keymap_list: list_head,
-    pub timeouts: [::core::ffi::c_uint; 2],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_sctp_net {
-    pub timeouts: [::core::ffi::c_uint; 10],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_icmp_net {
-    pub timeout: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_udp_net {
-    pub timeouts: [::core::ffi::c_uint; 2],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_tcp_net {
-    pub timeouts: [::core::ffi::c_uint; 14],
-    pub tcp_loose: u8_0,
-    pub tcp_be_liberal: u8_0,
-    pub tcp_max_retrans: u8_0,
-    pub tcp_ignore_invalid_rst: u8_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct nf_generic_net {
-    pub timeout: ::core::ffi::c_uint,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_nf {
-    pub proc_netfilter: *mut proc_dir_entry,
-    pub nf_loggers: [*const nf_logger; 11],
-    pub nf_log_dir_header: *mut ctl_table_header,
-    pub hooks_ipv4: [*mut nf_hook_entries; 5],
-    pub hooks_ipv6: [*mut nf_hook_entries; 5],
-    pub hooks_arp: [*mut nf_hook_entries; 3],
-    pub defrag_ipv4_users: ::core::ffi::c_uint,
-    pub defrag_ipv6_users: ::core::ffi::c_uint,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_ieee802154_lowpan {
-    pub sysctl: netns_sysctl_lowpan,
-    pub fqdir: *mut fqdir,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct fqdir {
-    pub high_thresh: ::core::ffi::c_long,
-    pub low_thresh: ::core::ffi::c_long,
-    pub timeout: ::core::ffi::c_int,
-    pub max_dist: ::core::ffi::c_int,
-    pub f: *mut inet_frags,
-    pub net: *mut net,
-    pub dead: bool_0,
-    pub rhashtable: rhashtable,
-    pub mem: atomic_long_t,
-    pub destroy_work: work_struct,
-    pub free_list: llist_node,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct inet_frags {
-    pub qsize: ::core::ffi::c_uint,
-    pub constructor:
-        Option<unsafe extern "C" fn(*mut inet_frag_queue, *const ::core::ffi::c_void) -> ()>,
-    pub destructor: Option<unsafe extern "C" fn(*mut inet_frag_queue) -> ()>,
-    pub frag_expire: Option<unsafe extern "C" fn(*mut timer_list) -> ()>,
-    pub frags_cachep: *mut kmem_cache,
-    pub frags_cache_name: *const ::core::ffi::c_char,
-    pub rhash_params: rhashtable_params,
-    pub refcnt: refcount_t,
-    pub completion: completion,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct inet_frag_queue {
-    pub node: rhash_head,
-    pub key: C2Rust_Unnamed_263,
-    pub timer: timer_list,
-    pub lock: spinlock_t,
-    pub refcnt: refcount_t,
-    pub rb_fragments: rb_root,
-    pub fragments_tail: *mut sk_buff,
-    pub last_run_head: *mut sk_buff,
-    pub stamp: ktime_t,
-    pub len: ::core::ffi::c_int,
-    pub meat: ::core::ffi::c_int,
-    pub tstamp_type: u8_0,
-    pub flags: __u8,
-    pub max_size: u16_0,
-    pub fqdir: *mut fqdir,
-    pub rcu: callback_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_263 {
-    pub v4: frag_v4_compare_key,
-    pub v6: frag_v6_compare_key,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct frag_v6_compare_key {
-    pub saddr: in6_addr,
-    pub daddr: in6_addr,
-    pub user: u32_0,
-    pub id: __be32,
-    pub iif: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_264 {
-    pub u6_addr8: [__u8; 16],
-    pub u6_addr16: [__be16; 8],
-    pub u6_addr32: [__be32; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct frag_v4_compare_key {
-    pub saddr: __be32,
-    pub daddr: __be32,
-    pub user: u32_0,
-    pub vif: u32_0,
-    pub id: __be16,
-    pub protocol: u16_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_sysctl_lowpan {
-    pub frags_hdr: *mut ctl_table_header,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_ipv6 {
-    pub ip6_dst_ops: dst_ops,
-    pub sysctl: netns_sysctl_ipv6,
-    pub devconf_all: *mut ipv6_devconf,
-    pub devconf_dflt: *mut ipv6_devconf,
-    pub peers: *mut inet_peer_base,
-    pub fqdir: *mut fqdir,
-    pub fib6_null_entry: *mut fib6_info,
-    pub ip6_null_entry: *mut rt6_info,
-    pub rt6_stats: *mut rt6_statistics,
-    pub ip6_fib_timer: timer_list,
-    pub fib_table_hash: *mut hlist_head,
-    pub fib_table_hash_lock: spinlock_t,
-    pub fib6_main_tbl: *mut fib6_table,
-    pub fib6_walkers: list_head,
-    pub fib6_walker_lock: rwlock_t,
-    pub fib6_gc_lock: spinlock_t,
-    pub ip6_rt_gc_expire: atomic_t,
-    pub ip6_rt_last_gc: ::core::ffi::c_ulong,
-    pub flowlabel_has_excl: ::core::ffi::c_uchar,
-    pub fib6_has_custom_rules: bool_0,
-    pub fib6_rules_require_fldissect: ::core::ffi::c_uint,
-    pub fib6_routes_require_src: ::core::ffi::c_uint,
-    pub ip6_prohibit_entry: *mut rt6_info,
-    pub ip6_blk_hole_entry: *mut rt6_info,
-    pub fib6_local_tbl: *mut fib6_table,
-    pub fib6_rules_ops: *mut fib_rules_ops,
-    pub ndisc_sk: *mut sock,
-    pub tcp_sk: *mut sock,
-    pub igmp_sk: *mut sock,
-    pub mc_autojoin_sk: *mut sock,
-    pub inet6_addr_lst: *mut hlist_head,
-    pub addrconf_hash_lock: spinlock_t,
-    pub addr_chk_work: delayed_work,
-    pub mr6_tables: list_head,
-    pub mr6_rules_ops: *mut fib_rules_ops,
-    pub dev_addr_genid: atomic_t,
-    pub fib6_sernum: atomic_t,
-    pub seg6_data: *mut seg6_pernet_data,
-    pub notifier_ops: *mut fib_notifier_ops,
-    pub ip6mr_notifier_ops: *mut fib_notifier_ops,
-    pub ipmr_seq: ::core::ffi::c_uint,
-    pub ip6addrlbl_table: C2Rust_Unnamed_265,
-    pub ioam6_data: *mut ioam6_pernet_data,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_265 {
-    pub head: hlist_head,
-    pub lock: spinlock_t,
-    pub seq: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_sysctl_ipv6 {
-    pub hdr: *mut ctl_table_header,
-    pub route_hdr: *mut ctl_table_header,
-    pub icmp_hdr: *mut ctl_table_header,
-    pub frags_hdr: *mut ctl_table_header,
-    pub xfrm6_hdr: *mut ctl_table_header,
-    pub flush_delay: ::core::ffi::c_int,
-    pub ip6_rt_max_size: ::core::ffi::c_int,
-    pub ip6_rt_gc_min_interval: ::core::ffi::c_int,
-    pub ip6_rt_gc_timeout: ::core::ffi::c_int,
-    pub ip6_rt_gc_interval: ::core::ffi::c_int,
-    pub ip6_rt_gc_elasticity: ::core::ffi::c_int,
-    pub ip6_rt_mtu_expires: ::core::ffi::c_int,
-    pub ip6_rt_min_advmss: ::core::ffi::c_int,
-    pub multipath_hash_fields: u32_0,
-    pub multipath_hash_policy: u8_0,
-    pub bindv6only: u8_0,
-    pub flowlabel_consistency: u8_0,
-    pub auto_flowlabels: u8_0,
-    pub icmpv6_time: ::core::ffi::c_int,
-    pub icmpv6_echo_ignore_all: u8_0,
-    pub icmpv6_echo_ignore_multicast: u8_0,
-    pub icmpv6_echo_ignore_anycast: u8_0,
-    pub icmpv6_ratemask: [::core::ffi::c_ulong; 4],
-    pub icmpv6_ratemask_ptr: *mut ::core::ffi::c_ulong,
-    pub anycast_src_echo_reply: u8_0,
-    pub ip_nonlocal_bind: u8_0,
-    pub fwmark_reflect: u8_0,
-    pub flowlabel_state_ranges: u8_0,
-    pub idgen_retries: ::core::ffi::c_int,
-    pub idgen_delay: ::core::ffi::c_int,
-    pub flowlabel_reflect: ::core::ffi::c_int,
-    pub max_dst_opts_cnt: ::core::ffi::c_int,
-    pub max_hbh_opts_cnt: ::core::ffi::c_int,
-    pub max_dst_opts_len: ::core::ffi::c_int,
-    pub max_hbh_opts_len: ::core::ffi::c_int,
-    pub seg6_flowlabel: ::core::ffi::c_int,
-    pub ioam6_id: u32_0,
-    pub ioam6_id_wide: u64_0,
-    pub skip_notify_on_dev_down: u8_0,
-    pub fib_notify_on_flag_change: u8_0,
-    pub icmpv6_error_anycast_as_unicast: u8_0,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_ipv4 {
-    pub __cacheline_group_begin__netns_ipv4_read_tx: [__u8; 0],
-    pub sysctl_tcp_early_retrans: u8_0,
-    pub sysctl_tcp_tso_win_divisor: u8_0,
-    pub sysctl_tcp_tso_rtt_log: u8_0,
-    pub sysctl_tcp_autocorking: u8_0,
-    pub sysctl_tcp_min_snd_mss: ::core::ffi::c_int,
-    pub sysctl_tcp_notsent_lowat: ::core::ffi::c_uint,
-    pub sysctl_tcp_limit_output_bytes: ::core::ffi::c_int,
-    pub sysctl_tcp_min_rtt_wlen: ::core::ffi::c_int,
-    pub sysctl_tcp_wmem: [::core::ffi::c_int; 3],
-    pub sysctl_ip_fwd_use_pmtu: u8_0,
-    pub __cacheline_group_end__netns_ipv4_read_tx: [__u8; 0],
-    pub __cacheline_group_begin__netns_ipv4_read_txrx: [__u8; 0],
-    pub sysctl_tcp_moderate_rcvbuf: u8_0,
-    pub __cacheline_group_end__netns_ipv4_read_txrx: [__u8; 0],
-    pub __cacheline_group_begin__netns_ipv4_read_rx: [__u8; 0],
-    pub sysctl_ip_early_demux: u8_0,
-    pub sysctl_tcp_early_demux: u8_0,
-    pub sysctl_tcp_l3mdev_accept: u8_0,
-    pub sysctl_tcp_reordering: ::core::ffi::c_int,
-    pub sysctl_tcp_rmem: [::core::ffi::c_int; 3],
-    pub __cacheline_group_end__netns_ipv4_read_rx: [__u8; 0],
-    pub __cacheline_group_begin__icmp: [__u8; 0],
-    pub icmp_global_credit: atomic_t,
-    pub icmp_global_stamp: u32_0,
-    pub __cacheline_group_end__icmp: [__u8; 0],
-    pub __cacheline_group_pad__icmp: C2Rust_Unnamed_266,
-    pub tcp_death_row: inet_timewait_death_row,
-    pub udp_table: *mut udp_table,
-    pub udp_tunnel_gro: [udp_tunnel_gro; 2],
-    pub forw_hdr: *mut ctl_table_header,
-    pub frags_hdr: *mut ctl_table_header,
-    pub ipv4_hdr: *mut ctl_table_header,
-    pub route_hdr: *mut ctl_table_header,
-    pub xfrm4_hdr: *mut ctl_table_header,
-    pub devconf_all: *mut ipv4_devconf,
-    pub devconf_dflt: *mut ipv4_devconf,
-    pub ra_chain: *mut ip_ra_chain,
-    pub ra_mutex: mutex,
-    pub rules_ops: *mut fib_rules_ops,
-    pub fib_main: *mut fib_table,
-    pub fib_default: *mut fib_table,
-    pub fib_rules_require_fldissect: ::core::ffi::c_uint,
-    pub fib_has_custom_rules: bool_0,
-    pub fib_has_custom_local_routes: bool_0,
-    pub fib_offload_disabled: bool_0,
-    pub sysctl_tcp_shrink_window: u8_0,
-    pub fib_table_hash: *mut hlist_head,
-    pub fibnl: *mut sock,
-    pub fib_info_hash: *mut hlist_head,
-    pub fib_info_hash_bits: ::core::ffi::c_uint,
-    pub fib_info_cnt: ::core::ffi::c_uint,
-    pub mc_autojoin_sk: *mut sock,
-    pub peers: *mut inet_peer_base,
-    pub fqdir: *mut fqdir,
-    pub sysctl_icmp_echo_ignore_all: u8_0,
-    pub sysctl_icmp_echo_enable_probe: u8_0,
-    pub sysctl_icmp_echo_ignore_broadcasts: u8_0,
-    pub sysctl_icmp_ignore_bogus_error_responses: u8_0,
-    pub sysctl_icmp_errors_use_inbound_ifaddr: u8_0,
-    pub sysctl_icmp_ratelimit: ::core::ffi::c_int,
-    pub sysctl_icmp_ratemask: ::core::ffi::c_int,
-    pub sysctl_icmp_msgs_per_sec: ::core::ffi::c_int,
-    pub sysctl_icmp_msgs_burst: ::core::ffi::c_int,
-    pub ip_rt_min_pmtu: u32_0,
-    pub ip_rt_mtu_expires: ::core::ffi::c_int,
-    pub ip_rt_min_advmss: ::core::ffi::c_int,
-    pub ip_local_ports: local_ports,
-    pub sysctl_tcp_ecn: u8_0,
-    pub sysctl_tcp_ecn_option: u8_0,
-    pub sysctl_tcp_ecn_option_beacon: u8_0,
-    pub sysctl_tcp_ecn_fallback: u8_0,
-    pub sysctl_ip_default_ttl: u8_0,
-    pub sysctl_ip_no_pmtu_disc: u8_0,
-    pub sysctl_ip_fwd_update_priority: u8_0,
-    pub sysctl_ip_nonlocal_bind: u8_0,
-    pub sysctl_ip_autobind_reuse: u8_0,
-    pub sysctl_ip_dynaddr: u8_0,
-    pub sysctl_udp_early_demux: u8_0,
-    pub sysctl_nexthop_compat_mode: u8_0,
-    pub sysctl_fwmark_reflect: u8_0,
-    pub sysctl_tcp_fwmark_accept: u8_0,
-    pub sysctl_tcp_mtu_probing: u8_0,
-    pub sysctl_tcp_mtu_probe_floor: ::core::ffi::c_int,
-    pub sysctl_tcp_base_mss: ::core::ffi::c_int,
-    pub sysctl_tcp_probe_threshold: ::core::ffi::c_int,
-    pub sysctl_tcp_probe_interval: u32_0,
-    pub sysctl_tcp_keepalive_time: ::core::ffi::c_int,
-    pub sysctl_tcp_keepalive_intvl: ::core::ffi::c_int,
-    pub sysctl_tcp_keepalive_probes: u8_0,
-    pub sysctl_tcp_syn_retries: u8_0,
-    pub sysctl_tcp_synack_retries: u8_0,
-    pub sysctl_tcp_syncookies: u8_0,
-    pub sysctl_tcp_migrate_req: u8_0,
-    pub sysctl_tcp_comp_sack_nr: u8_0,
-    pub sysctl_tcp_backlog_ack_defer: u8_0,
-    pub sysctl_tcp_pingpong_thresh: u8_0,
-    pub sysctl_tcp_retries1: u8_0,
-    pub sysctl_tcp_retries2: u8_0,
-    pub sysctl_tcp_orphan_retries: u8_0,
-    pub sysctl_tcp_tw_reuse: u8_0,
-    pub sysctl_tcp_tw_reuse_delay: ::core::ffi::c_uint,
-    pub sysctl_tcp_fin_timeout: ::core::ffi::c_int,
-    pub sysctl_tcp_sack: u8_0,
-    pub sysctl_tcp_window_scaling: u8_0,
-    pub sysctl_tcp_timestamps: u8_0,
-    pub sysctl_tcp_rto_min_us: ::core::ffi::c_int,
-    pub sysctl_tcp_rto_max_ms: ::core::ffi::c_int,
-    pub sysctl_tcp_recovery: u8_0,
-    pub sysctl_tcp_thin_linear_timeouts: u8_0,
-    pub sysctl_tcp_slow_start_after_idle: u8_0,
-    pub sysctl_tcp_retrans_collapse: u8_0,
-    pub sysctl_tcp_stdurg: u8_0,
-    pub sysctl_tcp_rfc1337: u8_0,
-    pub sysctl_tcp_abort_on_overflow: u8_0,
-    pub sysctl_tcp_fack: u8_0,
-    pub sysctl_tcp_max_reordering: ::core::ffi::c_int,
-    pub sysctl_tcp_adv_win_scale: ::core::ffi::c_int,
-    pub sysctl_tcp_dsack: u8_0,
-    pub sysctl_tcp_app_win: u8_0,
-    pub sysctl_tcp_frto: u8_0,
-    pub sysctl_tcp_nometrics_save: u8_0,
-    pub sysctl_tcp_no_ssthresh_metrics_save: u8_0,
-    pub sysctl_tcp_workaround_signed_windows: u8_0,
-    pub sysctl_tcp_challenge_ack_limit: ::core::ffi::c_int,
-    pub sysctl_tcp_min_tso_segs: u8_0,
-    pub sysctl_tcp_reflect_tos: u8_0,
-    pub sysctl_tcp_invalid_ratelimit: ::core::ffi::c_int,
-    pub sysctl_tcp_pacing_ss_ratio: ::core::ffi::c_int,
-    pub sysctl_tcp_pacing_ca_ratio: ::core::ffi::c_int,
-    pub sysctl_tcp_child_ehash_entries: ::core::ffi::c_uint,
-    pub sysctl_tcp_comp_sack_delay_ns: ::core::ffi::c_ulong,
-    pub sysctl_tcp_comp_sack_slack_ns: ::core::ffi::c_ulong,
-    pub sysctl_max_syn_backlog: ::core::ffi::c_int,
-    pub sysctl_tcp_fastopen: ::core::ffi::c_int,
-    pub tcp_congestion_control: *const tcp_congestion_ops,
-    pub tcp_fastopen_ctx: *mut tcp_fastopen_context,
-    pub sysctl_tcp_fastopen_blackhole_timeout: ::core::ffi::c_uint,
-    pub tfo_active_disable_times: atomic_t,
-    pub tfo_active_disable_stamp: ::core::ffi::c_ulong,
-    pub tcp_challenge_timestamp: u32_0,
-    pub tcp_challenge_count: u32_0,
-    pub sysctl_tcp_plb_enabled: u8_0,
-    pub sysctl_tcp_plb_idle_rehash_rounds: u8_0,
-    pub sysctl_tcp_plb_rehash_rounds: u8_0,
-    pub sysctl_tcp_plb_suspend_rto_sec: u8_0,
-    pub sysctl_tcp_plb_cong_thresh: ::core::ffi::c_int,
-    pub sysctl_udp_wmem_min: ::core::ffi::c_int,
-    pub sysctl_udp_rmem_min: ::core::ffi::c_int,
-    pub sysctl_fib_notify_on_flag_change: u8_0,
-    pub sysctl_tcp_syn_linear_timeouts: u8_0,
-    pub sysctl_igmp_llm_reports: u8_0,
-    pub sysctl_igmp_max_memberships: ::core::ffi::c_int,
-    pub sysctl_igmp_max_msf: ::core::ffi::c_int,
-    pub sysctl_igmp_qrv: ::core::ffi::c_int,
-    pub ping_group_range: ping_group_range,
-    pub ping_port_rover: u16_0,
-    pub dev_addr_genid: atomic_t,
-    pub sysctl_udp_child_hash_entries: ::core::ffi::c_uint,
-    pub sysctl_local_reserved_ports: *mut ::core::ffi::c_ulong,
-    pub sysctl_ip_prot_sock: ::core::ffi::c_int,
-    pub notifier_ops: *mut fib_notifier_ops,
-    pub fib_seq: ::core::ffi::c_uint,
-    pub ipmr_notifier_ops: *mut fib_notifier_ops,
-    pub ipmr_seq: ::core::ffi::c_uint,
-    pub rt_genid: atomic_t,
-    pub ip_id_key: siphash_key_t,
-    pub inet_addr_lst: *mut hlist_head,
-    pub addr_chk_work: delayed_work,
-    pub __kabi_reserved1: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct ping_group_range {
-    pub lock: seqlock_t,
-    pub range: [kgid_t; 2],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct local_ports {
-    pub range: u32_0,
-    pub warned: bool_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct udp_tunnel_gro {
-    pub sk: *mut sock,
-    pub list: hlist_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct inet_timewait_death_row {
-    pub tw_refcount: refcount_t,
-    pub hashinfo: *mut inet_hashinfo,
-    pub sysctl_max_tw_buckets: ::core::ffi::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_266 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_nexthop {
-    pub rb_root: rb_root,
-    pub devhash: *mut hlist_head,
-    pub seq: ::core::ffi::c_uint,
-    pub last_id_allocated: u32_0,
-    pub notifier_chain: blocking_notifier_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_unix {
-    pub table: unix_table,
-    pub sysctl_max_dgram_qlen: ::core::ffi::c_int,
-    pub ctl: *mut ctl_table_header,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct unix_table {
-    pub locks: *mut spinlock_t,
-    pub buckets: *mut hlist_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_packet {
-    pub sklist_lock: mutex,
-    pub sklist: hlist_head,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_mib {
-    pub ip_statistics: *mut ipstats_mib,
-    pub ipv6_statistics: *mut ipstats_mib,
-    pub tcp_statistics: *mut tcp_mib,
-    pub net_statistics: *mut linux_mib,
-    pub udp_statistics: *mut udp_mib,
-    pub udp_stats_in6: *mut udp_mib,
-    pub xfrm_statistics: *mut linux_xfrm_mib,
-    pub udplite_statistics: *mut udp_mib,
-    pub udplite_stats_in6: *mut udp_mib,
-    pub icmp_statistics: *mut icmp_mib,
-    pub icmpmsg_statistics: *mut icmpmsg_mib,
-    pub icmpv6_statistics: *mut icmpv6_mib,
-    pub icmpv6msg_statistics: *mut icmpv6msg_mib,
-    pub proc_net_devsnmp6: *mut proc_dir_entry,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct icmpv6msg_mib {
-    pub mibs: [atomic_long_t; 512],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct icmpv6_mib {
-    pub mibs: [::core::ffi::c_ulong; 7],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct icmpmsg_mib {
-    pub mibs: [atomic_long_t; 512],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct icmp_mib {
-    pub mibs: [::core::ffi::c_ulong; 30],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct udp_mib {
-    pub mibs: [::core::ffi::c_ulong; 10],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct linux_xfrm_mib {
-    pub mibs: [::core::ffi::c_ulong; 33],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct linux_mib {
-    pub mibs: [::core::ffi::c_ulong; 136],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct tcp_mib {
-    pub mibs: [::core::ffi::c_ulong; 16],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct ipstats_mib {
-    pub mibs: [u64_0; 38],
-    pub syncp: u64_stats_sync,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netns_core {
-    pub sysctl_hdr: *mut ctl_table_header,
-    pub sysctl_somaxconn: ::core::ffi::c_int,
-    pub sysctl_optmem_max: ::core::ffi::c_int,
-    pub sysctl_txrehash: u8_0,
-    pub sysctl_tstamp_allow_data: u8_0,
-    pub prot_inuse: *mut prot_inuse,
-    pub rps_default_mask: *mut cpumask,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct ref_tracker_dir {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_267 {
-    pub futex: C2Rust_Unnamed_271,
-    pub nanosleep: C2Rust_Unnamed_269,
-    pub poll: C2Rust_Unnamed_268,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_268 {
-    pub ufds: *mut pollfd,
-    pub nfds: ::core::ffi::c_int,
-    pub has_timeout: ::core::ffi::c_int,
-    pub tv_sec: ::core::ffi::c_ulong,
-    pub tv_nsec: ::core::ffi::c_ulong,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_269 {
-    pub clockid: clockid_t,
-    pub type_0: timespec_type,
-    pub c2rust_unnamed: C2Rust_Unnamed_270,
-    pub expires: u64_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_270 {
-    pub rmtp: *mut __kernel_timespec,
-    pub compat_rmtp: *mut old_timespec32,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct __kernel_timespec {
-    pub tv_sec: __kernel_time64_t,
-    pub tv_nsec: ::core::ffi::c_longlong,
-}
-pub const TT_COMPAT: timespec_type = 2;
-pub const TT_NATIVE: timespec_type = 1;
-pub const TT_NONE: timespec_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_271 {
-    pub uaddr: *mut u32_0,
-    pub val: u32_0,
-    pub flags: u32_0,
-    pub bitset: u32_0,
-    pub time: u64_0,
-    pub uaddr2: *mut u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_272 {
-    pub blocked: u8_0,
-    pub need_qs: u8_0,
-    pub exp_hint: u8_0,
-    pub need_mb: u8_0,
-}
-#[allow(dead_code, non_upper_case_globals)]
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_273 {
-    pub vlag: s64,
-    pub vprot: u64_0,
-}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct thread_info {
@@ -4148,343 +435,306 @@ pub struct thread_info {
     pub scs_sp: *mut ::core::ffi::c_void,
     pub cpu: u32_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_274 {
     pub preempt_count: u64_0,
     pub preempt: C2Rust_Unnamed_275,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_275 {
     pub count: u32_0,
     pub need_resched: u32_0,
 }
+
 #[derive(Clone)]
 #[repr(C)]
 pub struct class_preempt_notrace_t {
     pub lock: *mut ::core::ffi::c_void,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_276 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_277 {}
-pub const FORTIFY_FUNC_UNKNOWN: fortify_func = 16;
-pub const FORTIFY_FUNC_strcpy: fortify_func = 15;
-pub const FORTIFY_FUNC_kmemdup: fortify_func = 14;
-pub const FORTIFY_FUNC_memchr_inv: fortify_func = 13;
-pub const FORTIFY_FUNC_memchr: fortify_func = 12;
-pub const FORTIFY_FUNC_memcmp: fortify_func = 11;
-pub const FORTIFY_FUNC_memscan: fortify_func = 10;
-pub const FORTIFY_FUNC_memmove: fortify_func = 9;
+
 pub const FORTIFY_FUNC_memcpy: fortify_func = 8;
+
 pub const FORTIFY_FUNC_memset: fortify_func = 7;
-pub const FORTIFY_FUNC_strncat: fortify_func = 6;
-pub const FORTIFY_FUNC_strcat: fortify_func = 5;
-pub const FORTIFY_FUNC_strlcat: fortify_func = 4;
-pub const FORTIFY_FUNC_strscpy: fortify_func = 3;
+
 pub const FORTIFY_FUNC_strlen: fortify_func = 2;
+
 pub const FORTIFY_FUNC_strnlen: fortify_func = 1;
-pub const FORTIFY_FUNC_strncpy: fortify_func = 0;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_278 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_279 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_280 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_281 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_282 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_283 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_284 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_285 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_286 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_287 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_288 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_289 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_290 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_291 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_292 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_293 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_294 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_295 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_296 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_297 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_298 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_299 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_300 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_301 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_302 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_303 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_304 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_305 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_306 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_307 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_308 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_309 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_310 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_311 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_312 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_313 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_314 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_315 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_316 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_317 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_318 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_319 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_320 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_321 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_322 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_323 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_324 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_325 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_326 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_327 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_328 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_329 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_330 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_331 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_332 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_333 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_334 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_335 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_336 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_337 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_338 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_339 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_340 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_341 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_342 {}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_343 {}
-pub type C2Rust_Unnamed_344 = ::core::ffi::c_uint;
+
 #[derive(Clone)]
 #[repr(C)]
 pub struct class_spinlock_t {
     pub lock: *mut spinlock_t,
 }
-impl Drop for class_spinlock_t {
-    fn drop(&mut self) {
-        unsafe {
-            spin_unlock(self.lock);
-        }
-    }
-}
+
 #[repr(C)]
 pub struct class_mutex_t {
     pub lock: *mut mutex,
 }
-impl Drop for class_mutex_t {
-    fn drop(&mut self) {
-        unsafe {
-            mutex_unlock(self.lock);
-        }
-    }
-}
-pub const REFCOUNT_DEC_LEAK: refcount_saturation_type = 4;
+
 pub const REFCOUNT_SUB_UAF: refcount_saturation_type = 3;
+
 pub const REFCOUNT_ADD_UAF: refcount_saturation_type = 2;
+
 pub const REFCOUNT_ADD_OVF: refcount_saturation_type = 1;
-pub const REFCOUNT_ADD_NOT_ZERO_OVF: refcount_saturation_type = 0;
+
 pub const WORK_OFFQ_POOL_BITS: work_bits = 31;
-pub const WORK_OFFQ_LEFT: work_bits = 43;
+
 pub const WORK_OFFQ_POOL_SHIFT: work_bits = 21;
-pub const WORK_OFFQ_DISABLE_BITS: work_bits = 16;
-pub const WORK_OFFQ_DISABLE_SHIFT: work_bits = 5;
-pub const WORK_OFFQ_FLAG_BITS: work_bits = 1;
-pub const WORK_OFFQ_FLAG_END: work_bits = 5;
-pub const WORK_OFFQ_BH_BIT: work_bits = 4;
-pub const WORK_OFFQ_FLAG_SHIFT: work_bits = 4;
-pub const WORK_STRUCT_PWQ_SHIFT: work_bits = 8;
-pub const WORK_STRUCT_COLOR_BITS: work_bits = 4;
-pub const WORK_STRUCT_COLOR_SHIFT: work_bits = 4;
-pub const WORK_STRUCT_FLAG_BITS: work_bits = 4;
-pub const WORK_STRUCT_LINKED_BIT: work_bits = 3;
-pub const WORK_STRUCT_PWQ_BIT: work_bits = 2;
-pub const WORK_STRUCT_INACTIVE_BIT: work_bits = 1;
-pub const WORK_STRUCT_PENDING_BIT: work_bits = 0;
+
 pub const WORK_STRUCT_STATIC: work_flags = 0;
-pub const WORK_STRUCT_LINKED: work_flags = 8;
-pub const WORK_STRUCT_PWQ: work_flags = 4;
-pub const WORK_STRUCT_INACTIVE: work_flags = 2;
-pub const WORK_STRUCT_PENDING: work_flags = 1;
-pub const WORKER_DESC_LEN: wq_misc_consts = 32;
-pub const WORK_BUSY_RUNNING: wq_misc_consts = 2;
-pub const WORK_BUSY_PENDING: wq_misc_consts = 1;
+
 pub const WORK_CPU_UNBOUND: wq_misc_consts = 32;
-pub const WORK_NR_COLORS: wq_misc_consts = 16;
-pub const VM_FAULT_HINDEX_MASK: vm_fault_reason = 983040;
-pub const VM_FAULT_NEED_ANONPAGE: vm_fault_reason = 524288;
-pub const VM_FAULT_COMPLETED: vm_fault_reason = 16384;
-pub const VM_FAULT_NEEDDSYNC: vm_fault_reason = 8192;
-pub const VM_FAULT_DONE_COW: vm_fault_reason = 4096;
-pub const VM_FAULT_FALLBACK: vm_fault_reason = 2048;
-pub const VM_FAULT_RETRY: vm_fault_reason = 1024;
-pub const VM_FAULT_LOCKED: vm_fault_reason = 512;
-pub const VM_FAULT_NOPAGE: vm_fault_reason = 256;
-pub const VM_FAULT_SIGSEGV: vm_fault_reason = 64;
-pub const VM_FAULT_HWPOISON_LARGE: vm_fault_reason = 32;
-pub const VM_FAULT_HWPOISON: vm_fault_reason = 16;
-pub const VM_FAULT_MAJOR: vm_fault_reason = 4;
+
 pub const VM_FAULT_SIGBUS: vm_fault_reason = 2;
-pub const VM_FAULT_OOM: vm_fault_reason = 1;
-pub const NR_KMALLOC_TYPES: kmalloc_cache_type = 3;
+
 pub const KMALLOC_CGROUP: kmalloc_cache_type = 2;
+
 pub const KMALLOC_RECLAIM: kmalloc_cache_type = 1;
-pub const KMALLOC_RANDOM_END: kmalloc_cache_type = 0;
-pub const KMALLOC_RANDOM_START: kmalloc_cache_type = 0;
+
 pub const KMALLOC_DMA: kmalloc_cache_type = 0;
+
 pub const KMALLOC_NORMAL: kmalloc_cache_type = 0;
-pub const TWA_NMI_CURRENT: task_work_notify_mode = 4;
-pub const TWA_SIGNAL_NO_IPI: task_work_notify_mode = 3;
-pub const TWA_SIGNAL: task_work_notify_mode = 2;
+
 pub const TWA_RESUME: task_work_notify_mode = 1;
-pub const TWA_NONE: task_work_notify_mode = 0;
-pub type C2Rust_Unnamed_345 = ::core::ffi::c_uint;
+
 pub type flat_binder_object_shifts = ::core::ffi::c_uint;
+
 pub const FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT: flat_binder_object_shifts = 9;
+
 pub type flat_binder_object_flags = ::core::ffi::c_uint;
+
 pub const FLAT_BINDER_FLAG_TXN_SECURITY_CTX: flat_binder_object_flags = 4096;
+
 pub const FLAT_BINDER_FLAG_INHERIT_RT: flat_binder_object_flags = 2048;
+
 pub const FLAT_BINDER_FLAG_SCHED_POLICY_MASK: flat_binder_object_flags = 1536;
+
 pub const FLAT_BINDER_FLAG_ACCEPTS_FDS: flat_binder_object_flags = 256;
+
 pub const FLAT_BINDER_FLAG_PRIORITY_MASK: flat_binder_object_flags = 255;
+
 pub type binder_size_t = __u64;
+
 pub type binder_uintptr_t = __u64;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_object_header {
     pub type_0: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct flat_binder_object {
@@ -4493,12 +743,14 @@ pub struct flat_binder_object {
     pub c2rust_unnamed: C2Rust_Unnamed_346,
     pub cookie: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_346 {
     pub binder: binder_uintptr_t,
     pub handle: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_fd_object {
@@ -4507,12 +759,14 @@ pub struct binder_fd_object {
     pub c2rust_unnamed: C2Rust_Unnamed_347,
     pub cookie: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_347 {
     pub pad_binder: binder_uintptr_t,
     pub fd: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_buffer_object {
@@ -4523,7 +777,7 @@ pub struct binder_buffer_object {
     pub parent: binder_size_t,
     pub parent_offset: binder_size_t,
 }
-pub type C2Rust_Unnamed_348 = ::core::ffi::c_uint;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_fd_array_object {
@@ -4533,6 +787,7 @@ pub struct binder_fd_array_object {
     pub parent: binder_size_t,
     pub parent_offset: binder_size_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_write_read {
@@ -4543,11 +798,13 @@ pub struct binder_write_read {
     pub read_consumed: binder_size_t,
     pub read_buffer: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_version {
     pub protocol_version: __s32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_node_debug_info {
@@ -4556,6 +813,7 @@ pub struct binder_node_debug_info {
     pub has_strong_ref: __u32,
     pub has_weak_ref: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_node_info_for_ref {
@@ -4566,6 +824,7 @@ pub struct binder_node_info_for_ref {
     pub reserved2: __u32,
     pub reserved3: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_freeze_info {
@@ -4573,6 +832,7 @@ pub struct binder_freeze_info {
     pub enable: __u32,
     pub timeout_ms: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_frozen_status_info {
@@ -4580,6 +840,7 @@ pub struct binder_frozen_status_info {
     pub sync_recv: __u32,
     pub async_recv: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_frozen_state_info {
@@ -4587,6 +848,7 @@ pub struct binder_frozen_state_info {
     pub is_frozen: __u32,
     pub reserved: __u32,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_extended_error {
@@ -4594,13 +856,15 @@ pub struct binder_extended_error {
     pub command: __u32,
     pub param: __s32,
 }
-pub type C2Rust_Unnamed_349 = ::core::ffi::c_uint;
+
 pub const TF_UPDATE_TXN: transaction_flags = 64;
+
 pub const TF_CLEAR_BUF: transaction_flags = 32;
+
 pub const TF_ACCEPT_FDS: transaction_flags = 16;
-pub const TF_STATUS_CODE: transaction_flags = 8;
-pub const TF_ROOT_OBJECT: transaction_flags = 4;
+
 pub const TF_ONE_WAY: transaction_flags = 1;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction_data {
@@ -4614,90 +878,145 @@ pub struct binder_transaction_data {
     pub offsets_size: binder_size_t,
     pub data: C2Rust_Unnamed_350,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_350 {
     pub ptr: C2Rust_Unnamed_351,
     pub buf: [__u8; 8],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_351 {
     pub buffer: binder_uintptr_t,
     pub offsets: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_352 {
     pub handle: __u32,
     pub ptr: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction_data_secctx {
     pub transaction_data: binder_transaction_data,
     pub secctx: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction_data_sg {
     pub transaction_data: binder_transaction_data,
     pub buffers_size: binder_size_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C, packed)]
 pub struct binder_handle_cookie {
     pub handle: __u32,
     pub cookie: binder_uintptr_t,
 }
+
 pub type binder_driver_return_protocol = ::core::ffi::c_uint;
+
 pub const BR_CLEAR_FREEZE_NOTIFICATION_DONE: binder_driver_return_protocol = 2148037142;
+
 pub const BR_FROZEN_BINDER: binder_driver_return_protocol = 2148561429;
+
 pub const BR_TRANSACTION_PENDING_FROZEN: binder_driver_return_protocol = 29204;
+
 pub const BR_ONEWAY_SPAM_SUSPECT: binder_driver_return_protocol = 29203;
+
 pub const BR_FROZEN_REPLY: binder_driver_return_protocol = 29202;
+
 pub const BR_FAILED_REPLY: binder_driver_return_protocol = 29201;
+
 pub const BR_CLEAR_DEATH_NOTIFICATION_DONE: binder_driver_return_protocol = 2148037136;
+
 pub const BR_DEAD_BINDER: binder_driver_return_protocol = 2148037135;
+
 pub const BR_FINISHED: binder_driver_return_protocol = 29198;
+
 pub const BR_SPAWN_LOOPER: binder_driver_return_protocol = 29197;
+
 pub const BR_NOOP: binder_driver_return_protocol = 29196;
+
 pub const BR_ATTEMPT_ACQUIRE: binder_driver_return_protocol = 2149085707;
+
 pub const BR_DECREFS: binder_driver_return_protocol = 2148561418;
+
 pub const BR_RELEASE: binder_driver_return_protocol = 2148561417;
+
 pub const BR_ACQUIRE: binder_driver_return_protocol = 2148561416;
+
 pub const BR_INCREFS: binder_driver_return_protocol = 2148561415;
+
 pub const BR_TRANSACTION_COMPLETE: binder_driver_return_protocol = 29190;
+
 pub const BR_DEAD_REPLY: binder_driver_return_protocol = 29189;
+
 pub const BR_ACQUIRE_RESULT: binder_driver_return_protocol = 2147774980;
+
 pub const BR_REPLY: binder_driver_return_protocol = 2151707139;
+
 pub const BR_TRANSACTION: binder_driver_return_protocol = 2151707138;
+
 pub const BR_TRANSACTION_SEC_CTX: binder_driver_return_protocol = 2152231426;
+
 pub const BR_OK: binder_driver_return_protocol = 29185;
+
 pub const BR_ERROR: binder_driver_return_protocol = 2147774976;
+
 pub type binder_driver_command_protocol = ::core::ffi::c_uint;
+
 pub const BC_FREEZE_NOTIFICATION_DONE: binder_driver_command_protocol = 1074291477;
+
 pub const BC_CLEAR_FREEZE_NOTIFICATION: binder_driver_command_protocol = 1074553620;
+
 pub const BC_REQUEST_FREEZE_NOTIFICATION: binder_driver_command_protocol = 1074553619;
+
 pub const BC_REPLY_SG: binder_driver_command_protocol = 1078485778;
+
 pub const BC_TRANSACTION_SG: binder_driver_command_protocol = 1078485777;
+
 pub const BC_DEAD_BINDER_DONE: binder_driver_command_protocol = 1074291472;
+
 pub const BC_CLEAR_DEATH_NOTIFICATION: binder_driver_command_protocol = 1074553615;
+
 pub const BC_REQUEST_DEATH_NOTIFICATION: binder_driver_command_protocol = 1074553614;
+
 pub const BC_EXIT_LOOPER: binder_driver_command_protocol = 25357;
+
 pub const BC_ENTER_LOOPER: binder_driver_command_protocol = 25356;
+
 pub const BC_REGISTER_LOOPER: binder_driver_command_protocol = 25355;
+
 pub const BC_ATTEMPT_ACQUIRE: binder_driver_command_protocol = 1074291466;
+
 pub const BC_ACQUIRE_DONE: binder_driver_command_protocol = 1074815753;
+
 pub const BC_INCREFS_DONE: binder_driver_command_protocol = 1074815752;
+
 pub const BC_DECREFS: binder_driver_command_protocol = 1074029319;
+
 pub const BC_RELEASE: binder_driver_command_protocol = 1074029318;
+
 pub const BC_ACQUIRE: binder_driver_command_protocol = 1074029317;
+
 pub const BC_INCREFS: binder_driver_command_protocol = 1074029316;
+
 pub const BC_FREE_BUFFER: binder_driver_command_protocol = 1074291459;
+
 pub const BC_ACQUIRE_RESULT: binder_driver_command_protocol = 1074029314;
+
 pub const BC_REPLY: binder_driver_command_protocol = 1077961473;
+
 pub const BC_TRANSACTION: binder_driver_command_protocol = 1077961472;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_family {
@@ -4736,12 +1055,14 @@ pub struct genl_family {
     pub sock_privs: *mut xarray,
     pub __kabi_reserved1: u64_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_multicast_group {
     pub name: [::core::ffi::c_char; 16],
     pub flags: u8_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_split_ops {
@@ -4753,44 +1074,14 @@ pub struct genl_split_ops {
     pub flags: u8_0,
     pub validate: u8_0,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_353 {
-    pub strict_start_type: u16_0,
-    pub bitfield32_valid: u32_0,
-    pub mask: u32_0,
-    pub reject_message: *const ::core::ffi::c_char,
-    pub nested_policy: *const nla_policy,
-    pub range: *const netlink_range_validation,
-    pub range_signed: *const netlink_range_validation_signed,
-    pub c2rust_unnamed: C2Rust_Unnamed_354,
-    pub validate:
-        Option<unsafe extern "C" fn(*const nlattr, *mut netlink_ext_ack) -> ::core::ffi::c_int>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_354 {
-    pub min: s16,
-    pub max: s16,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netlink_range_validation_signed {
-    pub min: s64,
-    pub max: s64,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct netlink_range_validation {
-    pub min: u64_0,
-    pub max: u64_0,
-}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_355 {
     pub c2rust_unnamed: C2Rust_Unnamed_358,
     pub c2rust_unnamed_0: C2Rust_Unnamed_356,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_356 {
@@ -4799,12 +1090,7 @@ pub struct C2Rust_Unnamed_356 {
         Option<unsafe extern "C" fn(*mut sk_buff, *mut netlink_callback) -> ::core::ffi::c_int>,
     pub done: Option<unsafe extern "C" fn(*mut netlink_callback) -> ::core::ffi::c_int>,
 }
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_357 {
-    pub ctx: [u8_0; 48],
-    pub args: [::core::ffi::c_long; 6],
-}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_358 {
@@ -4819,6 +1105,7 @@ pub struct C2Rust_Unnamed_358 {
     pub post_doit:
         Option<unsafe extern "C" fn(*const genl_split_ops, *mut sk_buff, *mut genl_info) -> ()>,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_info {
@@ -4832,17 +1119,20 @@ pub struct genl_info {
     pub c2rust_unnamed: C2Rust_Unnamed_359,
     pub extack: *mut netlink_ext_ack,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_359 {
     pub ctx: [u8_0; 48],
     pub user_ptr: [*mut ::core::ffi::c_void; 2],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct possible_net_t {
     pub net: *mut net,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genlmsghdr {
@@ -4850,6 +1140,7 @@ pub struct genlmsghdr {
     pub version: __u8,
     pub reserved: __u16,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_small_ops {
@@ -4861,6 +1152,7 @@ pub struct genl_small_ops {
     pub flags: u8_0,
     pub validate: u8_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct genl_ops {
@@ -4877,178 +1169,39 @@ pub struct genl_ops {
     pub validate: u8_0,
     pub __kabi_reserved1: u64_0,
 }
-pub const SKB_DROP_REASON_SUBSYS_MASK: skb_drop_reason = 4294901760;
-pub const SKB_DROP_REASON_MAX: skb_drop_reason = 127;
-pub const SKB_DROP_REASON_PSP_OUTPUT: skb_drop_reason = 126;
-pub const SKB_DROP_REASON_PSP_INPUT: skb_drop_reason = 125;
-pub const SKB_DROP_REASON_DUALPI2_STEP_DROP: skb_drop_reason = 124;
-pub const SKB_DROP_REASON_PFMEMALLOC: skb_drop_reason = 123;
-pub const SKB_DROP_REASON_CANXL_RX_INVALID_FRAME: skb_drop_reason = 122;
-pub const SKB_DROP_REASON_CANFD_RX_INVALID_FRAME: skb_drop_reason = 121;
-pub const SKB_DROP_REASON_CAN_RX_INVALID_FRAME: skb_drop_reason = 120;
-pub const SKB_DROP_REASON_BRIDGE_INGRESS_STP_STATE: skb_drop_reason = 119;
-pub const SKB_DROP_REASON_MAC_IEEE_MAC_CONTROL: skb_drop_reason = 118;
-pub const SKB_DROP_REASON_ARP_PVLAN_DISABLE: skb_drop_reason = 117;
-pub const SKB_DROP_REASON_LOCAL_MAC: skb_drop_reason = 116;
-pub const SKB_DROP_REASON_TUNNEL_TXINFO: skb_drop_reason = 115;
-pub const SKB_DROP_REASON_IP_TUNNEL_ECN: skb_drop_reason = 114;
-pub const SKB_DROP_REASON_NO_TX_TARGET: skb_drop_reason = 113;
-pub const SKB_DROP_REASON_VXLAN_ENTRY_EXISTS: skb_drop_reason = 112;
-pub const SKB_DROP_REASON_MAC_INVALID_SOURCE: skb_drop_reason = 111;
-pub const SKB_DROP_REASON_VXLAN_VNI_NOT_FOUND: skb_drop_reason = 110;
-pub const SKB_DROP_REASON_VXLAN_INVALID_HDR: skb_drop_reason = 109;
-pub const SKB_DROP_REASON_TC_RECLASSIFY_LOOP: skb_drop_reason = 108;
-pub const SKB_DROP_REASON_TC_CHAIN_NOTFOUND: skb_drop_reason = 107;
-pub const SKB_DROP_REASON_PACKET_SOCK_ERROR: skb_drop_reason = 106;
-pub const SKB_DROP_REASON_TC_COOKIE_ERROR: skb_drop_reason = 105;
-pub const SKB_DROP_REASON_QUEUE_PURGE: skb_drop_reason = 104;
-pub const SKB_DROP_REASON_IPV6_NDISC_NS_OTHERHOST: skb_drop_reason = 103;
-pub const SKB_DROP_REASON_IPV6_NDISC_BAD_OPTIONS: skb_drop_reason = 102;
-pub const SKB_DROP_REASON_IPV6_NDISC_BAD_CODE: skb_drop_reason = 101;
-pub const SKB_DROP_REASON_IPV6_NDISC_HOP_LIMIT: skb_drop_reason = 100;
-pub const SKB_DROP_REASON_IPV6_NDISC_FRAG: skb_drop_reason = 99;
-pub const SKB_DROP_REASON_IPV6_BAD_EXTHDR: skb_drop_reason = 98;
-pub const SKB_DROP_REASON_TCP_MINTTL: skb_drop_reason = 97;
-pub const SKB_DROP_REASON_FRAG_TOO_FAR: skb_drop_reason = 96;
-pub const SKB_DROP_REASON_FRAG_REASM_TIMEOUT: skb_drop_reason = 95;
-pub const SKB_DROP_REASON_DUP_FRAG: skb_drop_reason = 94;
-pub const SKB_DROP_REASON_PKT_TOO_BIG: skb_drop_reason = 93;
-pub const SKB_DROP_REASON_IP_INVALID_DEST: skb_drop_reason = 92;
-pub const SKB_DROP_REASON_IP_LOCALNET: skb_drop_reason = 91;
-pub const SKB_DROP_REASON_IP_INVALID_SOURCE: skb_drop_reason = 90;
-pub const SKB_DROP_REASON_IP_LOCAL_SOURCE: skb_drop_reason = 89;
-pub const SKB_DROP_REASON_IP_INNOROUTES: skb_drop_reason = 88;
-pub const SKB_DROP_REASON_IP_INADDRERRORS: skb_drop_reason = 87;
-pub const SKB_DROP_REASON_INVALID_PROTO: skb_drop_reason = 86;
-pub const SKB_DROP_REASON_ICMP_CSUM: skb_drop_reason = 85;
-pub const SKB_DROP_REASON_TAP_TXFILTER: skb_drop_reason = 84;
-pub const SKB_DROP_REASON_TAP_FILTER: skb_drop_reason = 83;
-pub const SKB_DROP_REASON_HDR_TRUNC: skb_drop_reason = 82;
-pub const SKB_DROP_REASON_NOMEM: skb_drop_reason = 81;
-pub const SKB_DROP_REASON_FULL_RING: skb_drop_reason = 80;
-pub const SKB_DROP_REASON_DEV_READY: skb_drop_reason = 79;
-pub const SKB_DROP_REASON_DEV_HDR: skb_drop_reason = 78;
-pub const SKB_DROP_REASON_SKB_UCOPY_FAULT: skb_drop_reason = 77;
-pub const SKB_DROP_REASON_SKB_GSO_SEG: skb_drop_reason = 76;
-pub const SKB_DROP_REASON_SKB_CSUM: skb_drop_reason = 75;
-pub const SKB_DROP_REASON_UNHANDLED_PROTO: skb_drop_reason = 74;
-pub const SKB_DROP_REASON_TC_INGRESS: skb_drop_reason = 73;
-pub const SKB_DROP_REASON_XDP: skb_drop_reason = 72;
-pub const SKB_DROP_REASON_CPU_BACKLOG: skb_drop_reason = 71;
-pub const SKB_DROP_REASON_FQ_FLOW_LIMIT: skb_drop_reason = 70;
-pub const SKB_DROP_REASON_FQ_HORIZON_LIMIT: skb_drop_reason = 69;
-pub const SKB_DROP_REASON_FQ_BAND_LIMIT: skb_drop_reason = 68;
-pub const SKB_DROP_REASON_CAKE_FLOOD: skb_drop_reason = 67;
-pub const SKB_DROP_REASON_QDISC_CONGESTED: skb_drop_reason = 66;
-pub const SKB_DROP_REASON_QDISC_OVERLIMIT: skb_drop_reason = 65;
-pub const SKB_DROP_REASON_QDISC_DROP: skb_drop_reason = 64;
-pub const SKB_DROP_REASON_SECURITY_HOOK: skb_drop_reason = 63;
-pub const SKB_DROP_REASON_TC_EGRESS: skb_drop_reason = 62;
-pub const SKB_DROP_REASON_NEIGH_HH_FILLFAIL: skb_drop_reason = 61;
-pub const SKB_DROP_REASON_NEIGH_DEAD: skb_drop_reason = 60;
-pub const SKB_DROP_REASON_NEIGH_QUEUEFULL: skb_drop_reason = 59;
-pub const SKB_DROP_REASON_NEIGH_FAILED: skb_drop_reason = 58;
-pub const SKB_DROP_REASON_NEIGH_CREATEFAIL: skb_drop_reason = 57;
-pub const SKB_DROP_REASON_IPV6DISABLED: skb_drop_reason = 56;
-pub const SKB_DROP_REASON_BPF_CGROUP_EGRESS: skb_drop_reason = 55;
-pub const SKB_DROP_REASON_IP_OUTNOROUTES: skb_drop_reason = 54;
-pub const SKB_DROP_REASON_TCP_OFO_DROP: skb_drop_reason = 53;
-pub const SKB_DROP_REASON_TCP_OFO_QUEUE_PRUNE: skb_drop_reason = 52;
-pub const SKB_DROP_REASON_TCP_ACK_UNSENT_DATA: skb_drop_reason = 51;
-pub const SKB_DROP_REASON_TCP_TOO_OLD_ACK: skb_drop_reason = 50;
-pub const SKB_DROP_REASON_TCP_OLD_ACK: skb_drop_reason = 49;
-pub const SKB_DROP_REASON_TCP_FASTOPEN: skb_drop_reason = 48;
-pub const SKB_DROP_REASON_TCP_CLOSE: skb_drop_reason = 47;
-pub const SKB_DROP_REASON_TCP_INVALID_SYN: skb_drop_reason = 46;
-pub const SKB_DROP_REASON_TCP_RESET: skb_drop_reason = 45;
-pub const SKB_DROP_REASON_TCP_INVALID_ACK_SEQUENCE: skb_drop_reason = 44;
-pub const SKB_DROP_REASON_TCP_INVALID_END_SEQUENCE: skb_drop_reason = 43;
-pub const SKB_DROP_REASON_TCP_INVALID_SEQUENCE: skb_drop_reason = 42;
-pub const SKB_DROP_REASON_TCP_OLD_SEQUENCE: skb_drop_reason = 41;
-pub const SKB_DROP_REASON_TCP_LISTEN_OVERFLOW: skb_drop_reason = 40;
-pub const SKB_DROP_REASON_TCP_RFC7323_TSECR: skb_drop_reason = 39;
-pub const SKB_DROP_REASON_TCP_RFC7323_TW_PAWS: skb_drop_reason = 38;
-pub const SKB_DROP_REASON_TCP_RFC7323_PAWS_ACK: skb_drop_reason = 37;
-pub const SKB_DROP_REASON_TCP_RFC7323_PAWS: skb_drop_reason = 36;
-pub const SKB_DROP_REASON_TCP_OFOMERGE: skb_drop_reason = 35;
-pub const SKB_DROP_REASON_TCP_OVERWINDOW: skb_drop_reason = 34;
-pub const SKB_DROP_REASON_TCP_OLD_DATA: skb_drop_reason = 33;
-pub const SKB_DROP_REASON_TCP_ZEROWINDOW: skb_drop_reason = 32;
-pub const SKB_DROP_REASON_TCP_ABORT_ON_DATA: skb_drop_reason = 31;
-pub const SKB_DROP_REASON_TCP_FLAGS: skb_drop_reason = 30;
-pub const SKB_DROP_REASON_SOCKET_BACKLOG: skb_drop_reason = 29;
-pub const SKB_DROP_REASON_TCP_AOFAILURE: skb_drop_reason = 28;
-pub const SKB_DROP_REASON_TCP_AOKEYNOTFOUND: skb_drop_reason = 27;
-pub const SKB_DROP_REASON_TCP_AOUNEXPECTED: skb_drop_reason = 26;
-pub const SKB_DROP_REASON_TCP_AONOTFOUND: skb_drop_reason = 25;
-pub const SKB_DROP_REASON_TCP_MD5FAILURE: skb_drop_reason = 24;
-pub const SKB_DROP_REASON_TCP_MD5UNEXPECTED: skb_drop_reason = 23;
-pub const SKB_DROP_REASON_TCP_MD5NOTFOUND: skb_drop_reason = 22;
-pub const SKB_DROP_REASON_TCP_AUTH_HDR: skb_drop_reason = 21;
-pub const SKB_DROP_REASON_PROTO_MEM: skb_drop_reason = 20;
-pub const SKB_DROP_REASON_IP_NOPROTO: skb_drop_reason = 19;
-pub const SKB_DROP_REASON_XFRM_POLICY: skb_drop_reason = 18;
-pub const SKB_DROP_REASON_UNICAST_IN_L2_MULTICAST: skb_drop_reason = 17;
-pub const SKB_DROP_REASON_IP_RPFILTER: skb_drop_reason = 16;
-pub const SKB_DROP_REASON_IP_INHDR: skb_drop_reason = 15;
-pub const SKB_DROP_REASON_IP_CSUM: skb_drop_reason = 14;
-pub const SKB_DROP_REASON_OTHERHOST: skb_drop_reason = 13;
-pub const SKB_DROP_REASON_NETFILTER_DROP: skb_drop_reason = 12;
-pub const SKB_DROP_REASON_UDP_CSUM: skb_drop_reason = 11;
-pub const SKB_DROP_REASON_TCP_CSUM: skb_drop_reason = 10;
-pub const SKB_DROP_REASON_PKT_TOO_SMALL: skb_drop_reason = 9;
-pub const SKB_DROP_REASON_UNIX_SKIP_OOB: skb_drop_reason = 8;
-pub const SKB_DROP_REASON_UNIX_DISCONNECT: skb_drop_reason = 7;
-pub const SKB_DROP_REASON_SOCKET_RCVBUFF: skb_drop_reason = 6;
-pub const SKB_DROP_REASON_SOCKET_FILTER: skb_drop_reason = 5;
-pub const SKB_DROP_REASON_SOCKET_CLOSE: skb_drop_reason = 4;
-pub const SKB_DROP_REASON_NO_SOCKET: skb_drop_reason = 3;
+
 pub const SKB_DROP_REASON_NOT_SPECIFIED: skb_drop_reason = 2;
-pub const SKB_CONSUMED: skb_drop_reason = 1;
-pub const SKB_NOT_DROPPED_YET: skb_drop_reason = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_360 {
-    pub hwtstamp: ktime_t,
-    pub netdev_data: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_361 {
-    pub c2rust_unnamed: C2Rust_Unnamed_362,
-    pub destructor_arg: *mut ::core::ffi::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct C2Rust_Unnamed_362 {
-    pub xdp_frags_size: u32_0,
-    pub xdp_frags_truesize: u32_0,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2Rust_Unnamed_363 {
-    pub hwtstamps: skb_shared_hwtstamps,
-    pub xsk_meta: xsk_tx_metadata_compl,
-}
+
 pub type C2Rust_Unnamed_364 = ::core::ffi::c_uint;
-pub const BINDER_A_REPORT_MAX: C2Rust_Unnamed_364 = 10;
-pub const __BINDER_A_REPORT_MAX: C2Rust_Unnamed_364 = 11;
+
 pub const BINDER_A_REPORT_DATA_SIZE: C2Rust_Unnamed_364 = 10;
+
 pub const BINDER_A_REPORT_CODE: C2Rust_Unnamed_364 = 9;
+
 pub const BINDER_A_REPORT_FLAGS: C2Rust_Unnamed_364 = 8;
+
 pub const BINDER_A_REPORT_IS_REPLY: C2Rust_Unnamed_364 = 7;
+
 pub const BINDER_A_REPORT_TO_TID: C2Rust_Unnamed_364 = 6;
+
 pub const BINDER_A_REPORT_TO_PID: C2Rust_Unnamed_364 = 5;
+
 pub const BINDER_A_REPORT_FROM_TID: C2Rust_Unnamed_364 = 4;
+
 pub const BINDER_A_REPORT_FROM_PID: C2Rust_Unnamed_364 = 3;
+
 pub const BINDER_A_REPORT_CONTEXT: C2Rust_Unnamed_364 = 2;
+
 pub const BINDER_A_REPORT_ERROR: C2Rust_Unnamed_364 = 1;
+
 pub type C2Rust_Unnamed_365 = ::core::ffi::c_uint;
-pub const BINDER_CMD_MAX: C2Rust_Unnamed_365 = 1;
-pub const __BINDER_CMD_MAX: C2Rust_Unnamed_365 = 2;
+
 pub const BINDER_CMD_REPORT: C2Rust_Unnamed_365 = 1;
+
 pub type C2Rust_Unnamed_366 = ::core::ffi::c_uint;
+
 pub const BINDER_NLGRP_REPORT: C2Rust_Unnamed_366 = 0;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction {
@@ -5078,12 +1231,14 @@ pub struct binder_transaction {
     pub android_vendor_data1: u64_0,
     pub android_oem_data1: u64_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_priority {
     pub sched_policy: ::core::ffi::c_uint,
     pub prio: ::core::ffi::c_int,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_buffer {
@@ -5099,6 +1254,7 @@ pub struct binder_buffer {
     pub user_data: ::core::ffi::c_ulong,
     pub pid: ::core::ffi::c_int,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_node {
@@ -5119,17 +1275,20 @@ pub struct binder_node {
     pub has_async_transaction: bool_0,
     pub async_todo: list_head,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_367 {
     pub sched_policy_inherit_rt_accept_fds_txn_security_ctx: [u8; 1],
     pub min_priority: u8_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_368 {
     pub has_strong_ref_pending_strong_ref_has_weak_ref_pending_weak_ref: [u8; 1],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_proc {
@@ -5169,6 +1328,7 @@ pub struct binder_proc {
     pub oneway_spam_detection_enabled: bool_0,
     pub android_oem_data1: u64_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_context {
@@ -5177,6 +1337,7 @@ pub struct binder_context {
     pub binder_context_mgr_uid: kuid_t,
     pub name: *const ::core::ffi::c_char,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_alloc {
@@ -5196,6 +1357,7 @@ pub struct binder_alloc {
     pub oneway_spam_detected: bool_0,
     pub android_oem_data1: u64_0,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_stats {
@@ -5204,18 +1366,21 @@ pub struct binder_stats {
     pub obj_created: [atomic_t; 8],
     pub obj_deleted: [atomic_t; 8],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct dbitmap {
     pub nbits: ::core::ffi::c_uint,
     pub map: *mut ::core::ffi::c_ulong,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_369 {
     pub rb_node: rb_node,
     pub dead_node: hlist_node,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_work {
@@ -5223,18 +1388,31 @@ pub struct binder_work {
     pub type_0: binder_work_type,
     pub android_oem_data1: u64_0,
 }
+
 pub type binder_work_type = ::core::ffi::c_uint;
+
 pub const BINDER_WORK_CLEAR_FREEZE_NOTIFICATION: binder_work_type = 11;
+
 pub const BINDER_WORK_FROZEN_BINDER: binder_work_type = 10;
+
 pub const BINDER_WORK_CLEAR_DEATH_NOTIFICATION: binder_work_type = 9;
+
 pub const BINDER_WORK_DEAD_BINDER_AND_CLEAR: binder_work_type = 8;
+
 pub const BINDER_WORK_DEAD_BINDER: binder_work_type = 7;
+
 pub const BINDER_WORK_NODE: binder_work_type = 6;
+
 pub const BINDER_WORK_RETURN_ERROR: binder_work_type = 5;
+
 pub const BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT: binder_work_type = 4;
+
 pub const BINDER_WORK_TRANSACTION_PENDING: binder_work_type = 3;
+
 pub const BINDER_WORK_TRANSACTION_COMPLETE: binder_work_type = 2;
+
 pub const BINDER_WORK_TRANSACTION: binder_work_type = 1;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_thread {
@@ -5259,16 +1437,22 @@ pub struct binder_thread {
     pub prio_next: binder_priority,
     pub prio_state: binder_prio_state,
 }
+
 pub type binder_prio_state = ::core::ffi::c_uint;
+
 pub const BINDER_PRIO_ABORT: binder_prio_state = 2;
+
 pub const BINDER_PRIO_PENDING: binder_prio_state = 1;
+
 pub const BINDER_PRIO_SET: binder_prio_state = 0;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_error {
     pub work: binder_work,
     pub cmd: uint32_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_device {
@@ -5278,12 +1462,14 @@ pub struct binder_device {
     pub binderfs_inode: *mut inode,
     pub ref_0: refcount_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binderfs_mount_opts {
     pub max: ::core::ffi::c_int,
     pub stats_mode: ::core::ffi::c_int,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binderfs_info {
@@ -5295,24 +1481,41 @@ pub struct binderfs_info {
     pub device_count: ::core::ffi::c_int,
     pub proc_log_dir: *mut dentry,
 }
+
 pub type binder_deferred_state = ::core::ffi::c_uint;
+
 pub const BINDER_DEFERRED_RELEASE: binder_deferred_state = 2;
+
 pub const BINDER_DEFERRED_FLUSH: binder_deferred_state = 1;
+
 pub const BINDER_DEBUG_SPINLOCKS: C2Rust_Unnamed_393 = 16384;
+
 pub const BINDER_DEBUG_DEAD_TRANSACTION: C2Rust_Unnamed_393 = 4;
+
 pub const BINDER_DEBUG_FAILED_TRANSACTION: C2Rust_Unnamed_393 = 2;
+
 pub const BINDER_DEBUG_USER_ERROR: C2Rust_Unnamed_393 = 1;
+
 pub type binder_stat_types = ::core::ffi::c_uint;
-pub const BINDER_STAT_COUNT: binder_stat_types = 8;
+
 pub const BINDER_STAT_FREEZE: binder_stat_types = 7;
+
 pub const BINDER_STAT_TRANSACTION_COMPLETE: binder_stat_types = 6;
+
 pub const BINDER_STAT_TRANSACTION: binder_stat_types = 5;
+
 pub const BINDER_STAT_DEATH: binder_stat_types = 4;
+
 pub const BINDER_STAT_REF: binder_stat_types = 3;
+
 pub const BINDER_STAT_NODE: binder_stat_types = 2;
+
 pub const BINDER_STAT_THREAD: binder_stat_types = 1;
+
 pub const BINDER_STAT_PROC: binder_stat_types = 0;
+
 pub const BINDER_DEBUG_OPEN_CLOSE: C2Rust_Unnamed_393 = 8;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_ref_freeze {
@@ -5321,12 +1524,14 @@ pub struct binder_ref_freeze {
     pub is_frozen_sent_resend: [u8; 1],
     pub c2rust_padding: [u8; 7],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_ref_death {
     pub work: binder_work,
     pub cookie: binder_uintptr_t,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_txn_fd_fixup {
@@ -5335,8 +1540,11 @@ pub struct binder_txn_fd_fixup {
     pub offset: size_t,
     pub target_fd: ::core::ffi::c_int,
 }
+
 pub const BINDER_DEBUG_DEAD_BINDER: C2Rust_Unnamed_393 = 16;
+
 pub const BINDER_LOOPER_STATE_POLL: C2Rust_Unnamed_412 = 32;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_ref {
@@ -5349,6 +1557,7 @@ pub struct binder_ref {
     pub death: *mut binder_ref_death,
     pub freeze: *mut binder_ref_freeze,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_ref_data {
@@ -5357,27 +1566,38 @@ pub struct binder_ref_data {
     pub strong: ::core::ffi::c_int,
     pub weak: ::core::ffi::c_int,
 }
+
 pub const BINDER_DEBUG_INTERNAL_REFS: C2Rust_Unnamed_393 = 4096;
+
 pub const BINDER_LOOPER_STATE_WAITING: C2Rust_Unnamed_412 = 16;
+
 pub const BINDER_DEBUG_THREADS: C2Rust_Unnamed_393 = 256;
+
 pub const BINDER_DEBUG_READ_WRITE: C2Rust_Unnamed_393 = 64;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_370 {}
+
 pub const BINDER_LOOPER_STATE_ENTERED: C2Rust_Unnamed_412 = 2;
+
 pub const BINDER_LOOPER_STATE_REGISTERED: C2Rust_Unnamed_412 = 1;
+
 pub const BINDER_DEBUG_TRANSACTION: C2Rust_Unnamed_393 = 512;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_task_work_cb {
     pub twork: callback_head,
     pub file: *mut file,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_object {
     pub c2rust_unnamed: C2Rust_Unnamed_371,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_371 {
@@ -5387,12 +1607,19 @@ pub union C2Rust_Unnamed_371 {
     pub bbo: binder_buffer_object,
     pub fdao: binder_fd_array_object,
 }
+
 pub const BINDER_DEBUG_PRIORITY_CAP: C2Rust_Unnamed_393 = 8192;
+
 pub const BINDER_DEBUG_DEATH_NOTIFICATION: C2Rust_Unnamed_393 = 32;
+
 pub const BINDER_DEBUG_USER_REFS: C2Rust_Unnamed_393 = 128;
+
 pub const BINDER_DEBUG_TRANSACTION_COMPLETE: C2Rust_Unnamed_393 = 1024;
+
 pub const BINDER_LOOPER_STATE_EXITED: C2Rust_Unnamed_412 = 4;
+
 pub const BINDER_LOOPER_STATE_INVALID: C2Rust_Unnamed_412 = 8;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction_log_entry {
@@ -5412,6 +1639,7 @@ pub struct binder_transaction_log_entry {
     pub return_error_param: uint32_t,
     pub context_name: [::core::ffi::c_char; 256],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_transaction_log {
@@ -5419,12 +1647,15 @@ pub struct binder_transaction_log {
     pub full: bool_0,
     pub entry: [binder_transaction_log_entry; 32],
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_372 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_373 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_ptr_fixup {
@@ -5433,6 +1664,7 @@ pub struct binder_ptr_fixup {
     pub fixup_data: binder_uintptr_t,
     pub node: list_head,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_sg_copy {
@@ -5441,16 +1673,21 @@ pub struct binder_sg_copy {
     pub length: size_t,
     pub node: list_head,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_374 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_375 {}
+
 pub const BINDER_DEBUG_FREE_BUFFER: C2Rust_Unnamed_393 = 2048;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_376 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_debugfs_entry {
@@ -5459,122 +1696,171 @@ pub struct binder_debugfs_entry {
     pub fops: *const file_operations,
     pub data: *mut ::core::ffi::c_void,
 }
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_377 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_378 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_379 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_380 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_381 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_382 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_383 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_384 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_385 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_386 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_387 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_388 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_389 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_390 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_391 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_392 {}
+
 pub type C2Rust_Unnamed_393 = ::core::ffi::c_uint;
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_394 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_395 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_396 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_397 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_398 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_399 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_400 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_401 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_402 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_403 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_404 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_405 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_406 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_407 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_408 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_409 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_410 {}
+
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_411 {}
+
 pub type C2Rust_Unnamed_412 = ::core::ffi::c_uint;
+
 pub const NULL: *mut ::core::ffi::c_void = ::core::ptr::null_mut::<::core::ffi::c_void>();
+
 pub const EPERM: ::core::ffi::c_int = 1 as ::core::ffi::c_int;
+
 pub const ESRCH: ::core::ffi::c_int = 3 as ::core::ffi::c_int;
+
 pub const EINTR: ::core::ffi::c_int = 4 as ::core::ffi::c_int;
+
 pub const EBADF: ::core::ffi::c_int = 9 as ::core::ffi::c_int;
+
 pub const EAGAIN: ::core::ffi::c_int = 11 as ::core::ffi::c_int;
+
 pub const ENOMEM: ::core::ffi::c_int = 12 as ::core::ffi::c_int;
+
 pub const EFAULT: ::core::ffi::c_int = 14 as ::core::ffi::c_int;
+
 pub const EBUSY: ::core::ffi::c_int = 16 as ::core::ffi::c_int;
+
 pub const EINVAL: ::core::ffi::c_int = 22 as ::core::ffi::c_int;
+
 pub const ENOSPC: ::core::ffi::c_int = 28 as ::core::ffi::c_int;
+
 pub const EPROTO: ::core::ffi::c_int = 71 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn kasan_check_read(
     mut p: *const ::core::ffi::c_void,
@@ -5582,6 +1868,7 @@ unsafe extern "C" fn kasan_check_read(
 ) -> bool_0 {
     return true_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline]
 unsafe extern "C" fn kasan_check_write(
     mut p: *const ::core::ffi::c_void,
@@ -5589,12 +1876,16 @@ unsafe extern "C" fn kasan_check_write(
 ) -> bool_0 {
     return true_0 as ::core::ffi::c_int != 0;
 }
+
 pub const KCSAN_ACCESS_WRITE: ::core::ffi::c_int =
     (1 as ::core::ffi::c_int) << 0 as ::core::ffi::c_int;
+
 pub const KCSAN_ACCESS_COMPOUND: ::core::ffi::c_int =
     (1 as ::core::ffi::c_int) << 1 as ::core::ffi::c_int;
+
 pub const KCSAN_ACCESS_ATOMIC: ::core::ffi::c_int =
     (1 as ::core::ffi::c_int) << 2 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn kcsan_check_access(
     mut ptr: *const ::core::ffi::c_void,
@@ -5602,13 +1893,17 @@ unsafe extern "C" fn kcsan_check_access(
     mut type_0: ::core::ffi::c_int,
 ) {
 }
+
 pub const SIZE_MAX: size_t = !(0 as ::core::ffi::c_int as size_t);
+
 pub const LONG_MAX: ::core::ffi::c_long =
     (!(0 as ::core::ffi::c_ulong) >> 1 as ::core::ffi::c_int) as ::core::ffi::c_long;
+
 #[inline]
 unsafe extern "C" fn PTR_ERR(mut ptr: *const ::core::ffi::c_void) -> ::core::ffi::c_long {
     return ptr as ::core::ffi::c_long;
 }
+
 #[inline]
 unsafe extern "C" fn IS_ERR(mut ptr: *const ::core::ffi::c_void) -> bool_0 {
     return (ptr as ::core::ffi::c_ulong as *mut ::core::ffi::c_void as ::core::ffi::c_ulong
@@ -5616,6 +1911,7 @@ unsafe extern "C" fn IS_ERR(mut ptr: *const ::core::ffi::c_void) -> bool_0 {
         as ::core::ffi::c_long
         != 0;
 }
+
 #[inline]
 unsafe extern "C" fn IS_ERR_OR_NULL(mut ptr: *const ::core::ffi::c_void) -> bool_0 {
     return ptr.is_null() as ::core::ffi::c_int as ::core::ffi::c_long != 0
@@ -5624,41 +1920,18 @@ unsafe extern "C" fn IS_ERR_OR_NULL(mut ptr: *const ::core::ffi::c_void) -> bool
             as ::core::ffi::c_long
             != 0;
 }
+
 pub const BITS_PER_BYTE: ::core::ffi::c_int = 8 as ::core::ffi::c_int;
+
 pub const THIS_MODULE: *mut module = ::core::ptr::null_mut::<module>();
-pub const ARM64_BTI: ::core::ffi::c_int = 2 as ::core::ffi::c_int;
-pub const ARM64_HAS_ADDRESS_AUTH: ::core::ffi::c_int = 5 as ::core::ffi::c_int;
-pub const ARM64_HAS_CNP: ::core::ffi::c_int = 13 as ::core::ffi::c_int;
-pub const ARM64_HAS_EPAN: ::core::ffi::c_uint = 21 as ::core::ffi::c_uint;
-pub const ARM64_HAS_GCS: ::core::ffi::c_int = 27 as ::core::ffi::c_int;
-pub const ARM64_HAS_GENERIC_AUTH: ::core::ffi::c_int = 28 as ::core::ffi::c_int;
-pub const ARM64_HAS_GIC_PRIO_MASKING: ::core::ffi::c_int = 35 as ::core::ffi::c_int;
-pub const ARM64_HAS_LSE_ATOMICS: ::core::ffi::c_int = 41 as ::core::ffi::c_int;
-pub const ARM64_HAS_PAN: ::core::ffi::c_int = 45 as ::core::ffi::c_int;
-pub const ARM64_HAS_PMUV3: ::core::ffi::c_int = 46 as ::core::ffi::c_int;
-pub const ARM64_HAS_S1POE: ::core::ffi::c_int = 48 as ::core::ffi::c_int;
-pub const ARM64_HAS_TLB_RANGE: ::core::ffi::c_int = 57 as ::core::ffi::c_int;
-pub const ARM64_HAFT: ::core::ffi::c_int = 61 as ::core::ffi::c_int;
-pub const ARM64_MPAM: ::core::ffi::c_int = 66 as ::core::ffi::c_int;
-pub const ARM64_MTE: ::core::ffi::c_int = 68 as ::core::ffi::c_int;
-pub const ARM64_SME: ::core::ffi::c_int = 72 as ::core::ffi::c_int;
-pub const ARM64_SME_FA64: ::core::ffi::c_int = 73 as ::core::ffi::c_int;
-pub const ARM64_SME2: ::core::ffi::c_int = 74 as ::core::ffi::c_int;
-pub const ARM64_SVE: ::core::ffi::c_int = 80 as ::core::ffi::c_int;
-pub const ARM64_UNMAP_KERNEL_AT_EL0: ::core::ffi::c_int = 81 as ::core::ffi::c_int;
-pub const ARM64_WORKAROUND_843419: ::core::ffi::c_int = 83 as ::core::ffi::c_int;
-pub const ARM64_WORKAROUND_1742098: ::core::ffi::c_uint = 90 as ::core::ffi::c_uint;
-pub const ARM64_WORKAROUND_2645198: ::core::ffi::c_uint = 96 as ::core::ffi::c_uint;
-pub const ARM64_WORKAROUND_2658417: ::core::ffi::c_uint = 97 as ::core::ffi::c_uint;
-pub const ARM64_WORKAROUND_CAVIUM_23154: ::core::ffi::c_uint = 104 as ::core::ffi::c_uint;
-pub const ARM64_WORKAROUND_NVIDIA_CARMEL_CNP: ::core::ffi::c_uint = 111 as ::core::ffi::c_uint;
-pub const ARM64_WORKAROUND_REPEAT_TLBI: ::core::ffi::c_int = 115 as ::core::ffi::c_int;
-pub const ARM64_WORKAROUND_SPECULATIVE_SSBS: ::core::ffi::c_uint = 117 as ::core::ffi::c_uint;
+
 pub const HZ: ::core::ffi::c_int = CONFIG_HZ;
+
 #[inline]
 unsafe extern "C" fn __must_check_overflow(mut overflow: bool_0) -> bool_0 {
     return overflow as ::core::ffi::c_int as ::core::ffi::c_long != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn get_current() -> *mut task_struct {
     let mut sp_el0: ::core::ffi::c_ulong = 0;
@@ -5668,65 +1941,7 @@ unsafe extern "C" fn get_current() -> *mut task_struct {
     );
     return sp_el0 as *mut task_struct;
 }
-#[inline(always)]
-unsafe extern "C" fn cpucap_is_possible(cap: ::core::ffi::c_uint) -> bool_0 {
-    extern "C" {
-        #[link_name = "__compiletime_assert_0"]
-        fn __compiletime_assert_0_0() -> !;
-    }
-    if false {
-        __compiletime_assert_0_0();
-    }
-    extern "C" {
-        #[link_name = "__compiletime_assert_1"]
-        fn __compiletime_assert_1_0() -> !;
-    }
-    if !(cap < 139 as ::core::ffi::c_uint) {
-        __compiletime_assert_1_0();
-    }
-    match cap {
-        45 => return true,
-        21 => return true,
-        80 => return true,
-        72 | 74 | 73 => return true,
-        13 => return true,
-        5 | 28 => return true,
-        35 => return true,
-        68 => return true,
-        2 => return true,
-        57 => return true,
-        48 => return true,
-        27 => return true,
-        61 => return true,
-        81 => return true,
-        83 => return true,
-        90 => return true,
-        96 => return true,
-        97 => return true,
-        104 => return true,
-        111 => return true,
-        115 => return true,
-        117 => return true,
-        66 => return true_0 as ::core::ffi::c_int != 0,
-        46 => return true,
-        _ => {}
-    }
-    return true_0 as ::core::ffi::c_int != 0;
-}
-#[inline(always)]
-unsafe extern "C" fn alternative_has_cap_likely(cpucap: ::core::ffi::c_ulong) -> bool_0 {
-    if !cpucap_is_possible(cpucap as ::core::ffi::c_uint) {
-        return false_0 as ::core::ffi::c_int != 0;
-    }
-    return true_0 as ::core::ffi::c_int != 0;
-}
-#[inline(always)]
-unsafe extern "C" fn alternative_has_cap_unlikely(cpucap: ::core::ffi::c_ulong) -> bool_0 {
-    if !cpucap_is_possible(cpucap as ::core::ffi::c_uint) {
-        return false_0 as ::core::ffi::c_int != 0;
-    }
-    return false_0 as ::core::ffi::c_int != 0;
-}
+
 #[inline(always)]
 unsafe extern "C" fn generic_test_bit(
     mut nr: ::core::ffi::c_ulong,
@@ -5738,6 +1953,7 @@ unsafe extern "C" fn generic_test_bit(
         ) >> (nr & (BITS_PER_LONG - 1 as ::core::ffi::c_int) as ::core::ffi::c_ulong)
         != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn const_test_bit(
     mut nr: ::core::ffi::c_ulong,
@@ -5750,10 +1966,12 @@ unsafe extern "C" fn const_test_bit(
     let mut val: ::core::ffi::c_ulong = *p;
     return val & mask != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn __ffs(mut word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
     return word.trailing_zeros() as i32 as ::core::ffi::c_uint;
 }
+
 #[inline(always)]
 unsafe extern "C" fn __fls(mut word: ::core::ffi::c_ulong) -> ::core::ffi::c_uint {
     return (::core::mem::size_of::<::core::ffi::c_ulong>() as usize)
@@ -5761,209 +1979,35 @@ unsafe extern "C" fn __fls(mut word: ::core::ffi::c_ulong) -> ::core::ffi::c_uin
         .wrapping_sub(1 as usize)
         .wrapping_sub(word.leading_zeros() as i32 as usize) as ::core::ffi::c_uint;
 }
+
 #[inline(always)]
 unsafe fn __atomic_i32_from_atomic_t(
     v: *mut atomic_t,
 ) -> *mut ::core::sync::atomic::AtomicI32 {
     &raw mut (*v).counter as *mut ::core::ffi::c_int as *mut ::core::sync::atomic::AtomicI32
 }
+
 #[inline(always)]
 unsafe fn __atomic_i64_from_atomic64_t(
     v: *mut atomic64_t,
 ) -> *mut ::core::sync::atomic::AtomicI64 {
     &raw mut (*v).counter as *mut s64 as *mut ::core::sync::atomic::AtomicI64
 }
+
 pub const SZ_1K: ::core::ffi::c_int = 0x400 as ::core::ffi::c_int;
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic_add_return(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v))
-        .fetch_add(i, ::core::sync::atomic::Ordering::SeqCst)
-        .wrapping_add(i);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic_fetch_add_relaxed(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic_fetch_sub_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Release);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic64_fetch_add_relaxed(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    return (*__atomic_i64_from_atomic64_t(v))
-        .fetch_add(i, ::core::sync::atomic::Ordering::Relaxed)
-        as ::core::ffi::c_long;
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic64_add(mut i: s64, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic64_sub_return(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    return (*__atomic_i64_from_atomic64_t(v))
-        .fetch_sub(i, ::core::sync::atomic::Ordering::SeqCst)
-        .wrapping_sub(i) as ::core::ffi::c_long;
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic64_or(mut i: s64, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v)).fetch_or(i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __ll_sc_atomic64_andnot(mut i: s64, mut v: *mut atomic64_t) {
-    (*__atomic_i64_from_atomic64_t(v)).fetch_and(!i, ::core::sync::atomic::Ordering::Relaxed);
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    asm!(
-        ".arch_extension lse\n", "\tstadd\t{1:w}, [{0}]\n", "\n", in (reg) & raw mut (*
-        v).counter, inlateout(reg) i => _, options(preserves_flags)
-    );
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
-    __lse_atomic_add(-i, v);
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_fetch_add_relaxed(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    let mut old: ::core::ffi::c_int = 0;
-    asm!(
-        ".arch_extension lse\n", "\tldadd\t{2:w}, {1:w}, [{0}]\n", in (reg) & raw mut (*
-        v).counter, lateout(reg) old, inlateout(reg) i => _, options(preserves_flags)
-    );
-    return old;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_fetch_add_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    let mut old: ::core::ffi::c_int = 0;
-    asm!(
-        ".arch_extension lse\n", "\tldaddl\t{2:w}, {1:w}, [{0}]\n", in (reg) & raw mut (*
-        v).counter, lateout(reg) old, inlateout(reg) i => _, options(preserves_flags)
-    );
-    return old;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_fetch_add(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    let mut old: ::core::ffi::c_int = 0;
-    asm!(
-        ".arch_extension lse\n", "\tldaddal\t{2:w}, {1:w}, [{0}]\n", in (reg) & raw mut
-        (* v).counter, lateout(reg) old, inlateout(reg) i => _, options(preserves_flags)
-    );
-    return old;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_fetch_sub_release(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return __lse_atomic_fetch_add_release(-i, v);
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic_add_return(
-    mut i: ::core::ffi::c_int,
-    mut v: *mut atomic_t,
-) -> ::core::ffi::c_int {
-    return __lse_atomic_fetch_add(i, v) + i;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_andnot(mut i: s64, mut v: *mut atomic64_t) {
-    asm!(
-        ".arch_extension lse\n", "\tstclr\t{1}, [{0}]\n", "\n", in (reg) & raw mut (* v)
-        .counter, inlateout(reg) i => _, options(preserves_flags)
-    );
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_or(mut i: s64, mut v: *mut atomic64_t) {
-    asm!(
-        ".arch_extension lse\n", "\tstset\t{1}, [{0}]\n", "\n", in (reg) & raw mut (* v)
-        .counter, inlateout(reg) i => _, options(preserves_flags)
-    );
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_add(mut i: s64, mut v: *mut atomic64_t) {
-    asm!(
-        ".arch_extension lse\n", "\tstadd\t{1}, [{0}]\n", "\n", in (reg) & raw mut (* v)
-        .counter, inlateout(reg) i => _, options(preserves_flags)
-    );
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_fetch_add_relaxed(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    let mut old: s64 = 0;
-    asm!(
-        ".arch_extension lse\n", "\tldadd\t{2}, {1}, [{0}]\n", in (reg) & raw mut (* v)
-        .counter, lateout(reg) old, inlateout(reg) i => _, options(preserves_flags)
-    );
-    return old as ::core::ffi::c_long;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_fetch_add(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    let mut old: s64 = 0;
-    asm!(
-        ".arch_extension lse\n", "\tldaddal\t{2}, {1}, [{0}]\n", in (reg) & raw mut (* v)
-        .counter, lateout(reg) old, inlateout(reg) i => _, options(preserves_flags)
-    );
-    return old as ::core::ffi::c_long;
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_fetch_sub(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    return __lse_atomic64_fetch_add(-i, v);
-}
-#[inline(always)]
-unsafe extern "C" fn __lse_atomic64_sub_return(
-    mut i: s64,
-    mut v: *mut atomic64_t,
-) -> ::core::ffi::c_long {
-    return (__lse_atomic64_fetch_sub(i, v) as s64 - i) as ::core::ffi::c_long;
-}
+
 pub const PAGE_SHIFT: ::core::ffi::c_int = CONFIG_PAGE_SHIFT;
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
     (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
     (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic_fetch_add_relaxed(
     mut i: ::core::ffi::c_int,
@@ -5971,6 +2015,7 @@ unsafe extern "C" fn arch_atomic_fetch_add_relaxed(
 ) -> ::core::ffi::c_int {
     return (*__atomic_i32_from_atomic_t(v)).fetch_add(i, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic_fetch_sub_release(
     mut i: ::core::ffi::c_int,
@@ -5978,6 +2023,7 @@ unsafe extern "C" fn arch_atomic_fetch_sub_release(
 ) -> ::core::ffi::c_int {
     return (*__atomic_i32_from_atomic_t(v)).fetch_sub(i, ::core::sync::atomic::Ordering::Release);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic_add_return(
     mut i: ::core::ffi::c_int,
@@ -5987,21 +2033,25 @@ unsafe extern "C" fn arch_atomic_add_return(
         .fetch_add(i, ::core::sync::atomic::Ordering::SeqCst)
         .wrapping_add(i);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic64_andnot(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
     (*__atomic_i64_from_atomic64_t(v))
         .fetch_and(!(i as s64), ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic64_or(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
     (*__atomic_i64_from_atomic64_t(v))
         .fetch_or(i as s64, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic64_add(mut i: ::core::ffi::c_long, mut v: *mut atomic64_t) {
     (*__atomic_i64_from_atomic64_t(v))
         .fetch_add(i as s64, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic64_fetch_add_relaxed(
     mut i: ::core::ffi::c_long,
@@ -6011,6 +2061,7 @@ unsafe extern "C" fn arch_atomic64_fetch_add_relaxed(
         .fetch_add(i as s64, ::core::sync::atomic::Ordering::Relaxed)
         as ::core::ffi::c_long;
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_atomic64_sub_return(
     mut i: ::core::ffi::c_long,
@@ -6021,19 +2072,23 @@ unsafe extern "C" fn arch_atomic64_sub_return(
         .fetch_sub(i, ::core::sync::atomic::Ordering::SeqCst)
         .wrapping_sub(i) as ::core::ffi::c_long;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_read(mut v: *const atomic_t) -> ::core::ffi::c_int {
     return (*__atomic_i32_from_atomic_t(v as *mut atomic_t))
         .load(::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_set(mut v: *mut atomic_t, mut i: ::core::ffi::c_int) {
     (*__atomic_i32_from_atomic_t(v)).store(i, ::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_add(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
     arch_atomic_add(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_add_return(
     mut i: ::core::ffi::c_int,
@@ -6041,6 +2096,7 @@ unsafe extern "C" fn raw_atomic_add_return(
 ) -> ::core::ffi::c_int {
     return arch_atomic_add_return(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_fetch_add_relaxed(
     mut i: ::core::ffi::c_int,
@@ -6048,10 +2104,12 @@ unsafe extern "C" fn raw_atomic_fetch_add_relaxed(
 ) -> ::core::ffi::c_int {
     return arch_atomic_fetch_add_relaxed(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_sub(mut i: ::core::ffi::c_int, mut v: *mut atomic_t) {
     arch_atomic_sub(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_fetch_sub_release(
     mut i: ::core::ffi::c_int,
@@ -6059,73 +2117,90 @@ unsafe extern "C" fn raw_atomic_fetch_sub_release(
 ) -> ::core::ffi::c_int {
     return arch_atomic_fetch_sub_release(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_inc(mut v: *mut atomic_t) {
     raw_atomic_add(1 as ::core::ffi::c_int, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_inc_return(mut v: *mut atomic_t) -> ::core::ffi::c_int {
     return raw_atomic_add_return(1 as ::core::ffi::c_int, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_dec(mut v: *mut atomic_t) {
     raw_atomic_sub(1 as ::core::ffi::c_int, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_read(mut v: *const atomic64_t) -> s64 {
     return (*__atomic_i64_from_atomic64_t(v as *mut atomic64_t))
         .load(::core::sync::atomic::Ordering::Relaxed);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_add(mut i: s64, mut v: *mut atomic64_t) {
     arch_atomic64_add(i as ::core::ffi::c_long, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_fetch_add_relaxed(mut i: s64, mut v: *mut atomic64_t) -> s64 {
     return arch_atomic64_fetch_add_relaxed(i as ::core::ffi::c_long, v) as s64;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_sub_return(mut i: s64, mut v: *mut atomic64_t) -> s64 {
     return arch_atomic64_sub_return(i as ::core::ffi::c_long, v) as s64;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_fetch_inc_relaxed(mut v: *mut atomic64_t) -> s64 {
     return raw_atomic64_fetch_add_relaxed(1 as s64, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_andnot(mut i: s64, mut v: *mut atomic64_t) {
     arch_atomic64_andnot(i as ::core::ffi::c_long, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_or(mut i: s64, mut v: *mut atomic64_t) {
     arch_atomic64_or(i as ::core::ffi::c_long, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic64_sub_and_test(mut i: s64, mut v: *mut atomic64_t) -> bool_0 {
     return raw_atomic64_sub_return(i, v) == 0 as s64;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_read(mut v: *const atomic_long_t) -> ::core::ffi::c_long {
     return raw_atomic64_read(v as *const atomic64_t) as ::core::ffi::c_long;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_add(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
     raw_atomic64_add(i as s64, v as *mut atomic64_t);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_fetch_inc_relaxed(
     mut v: *mut atomic_long_t,
 ) -> ::core::ffi::c_long {
     return raw_atomic64_fetch_inc_relaxed(v as *mut atomic64_t) as ::core::ffi::c_long;
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_andnot(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
     raw_atomic64_andnot(i as s64, v as *mut atomic64_t);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_or(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
     raw_atomic64_or(i as s64, v as *mut atomic64_t);
 }
+
 #[inline(always)]
 unsafe extern "C" fn raw_atomic_long_sub_and_test(
     mut i: ::core::ffi::c_long,
@@ -6133,12 +2208,14 @@ unsafe extern "C" fn raw_atomic_long_sub_and_test(
 ) -> bool_0 {
     return raw_atomic64_sub_and_test(i as s64, v as *mut atomic64_t);
 }
+
 #[inline]
 unsafe extern "C" fn kmsan_unpoison_memory(
     mut address: *const ::core::ffi::c_void,
     mut size: size_t,
 ) {
 }
+
 #[inline]
 unsafe extern "C" fn kmsan_copy_to_user(
     mut to: *mut ::core::ffi::c_void,
@@ -6147,16 +2224,19 @@ unsafe extern "C" fn kmsan_copy_to_user(
     mut left: size_t,
 ) {
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_atomic_read(mut v: *const ::core::ffi::c_void, mut size: size_t) {
     kasan_check_read(v, size as ::core::ffi::c_uint);
     kcsan_check_access(v, size, KCSAN_ACCESS_ATOMIC);
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_atomic_write(mut v: *const ::core::ffi::c_void, mut size: size_t) {
     kasan_check_write(v, size as ::core::ffi::c_uint);
     kcsan_check_access(v, size, KCSAN_ACCESS_ATOMIC | KCSAN_ACCESS_WRITE);
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_atomic_read_write(
     mut v: *const ::core::ffi::c_void,
@@ -6169,6 +2249,7 @@ unsafe extern "C" fn instrument_atomic_read_write(
         KCSAN_ACCESS_ATOMIC | KCSAN_ACCESS_WRITE | KCSAN_ACCESS_COMPOUND,
     );
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_to_user(
     mut to: *mut ::core::ffi::c_void,
@@ -6179,6 +2260,7 @@ unsafe extern "C" fn instrument_copy_to_user(
     kcsan_check_access(from, n as size_t, 0 as ::core::ffi::c_int);
     kmsan_copy_to_user(to, from, n as size_t, 0 as size_t);
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_from_user_before(
     mut to: *const ::core::ffi::c_void,
@@ -6188,6 +2270,7 @@ unsafe extern "C" fn instrument_copy_from_user_before(
     kasan_check_write(to, n as ::core::ffi::c_uint);
     kcsan_check_access(to, n as size_t, KCSAN_ACCESS_WRITE);
 }
+
 #[inline(always)]
 unsafe extern "C" fn instrument_copy_from_user_after(
     mut to: *const ::core::ffi::c_void,
@@ -6197,6 +2280,7 @@ unsafe extern "C" fn instrument_copy_from_user_after(
 ) {
     kmsan_unpoison_memory(to, (n as size_t).wrapping_sub(left as size_t));
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_read(mut v: *const atomic_t) -> ::core::ffi::c_int {
     instrument_atomic_read(
@@ -6205,6 +2289,7 @@ unsafe extern "C" fn atomic_read(mut v: *const atomic_t) -> ::core::ffi::c_int {
     );
     return raw_atomic_read(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_set(mut v: *mut atomic_t, mut i: ::core::ffi::c_int) {
     instrument_atomic_write(
@@ -6213,6 +2298,7 @@ unsafe extern "C" fn atomic_set(mut v: *mut atomic_t, mut i: ::core::ffi::c_int)
     );
     raw_atomic_set(v, i);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_fetch_add_relaxed(
     mut i: ::core::ffi::c_int,
@@ -6224,6 +2310,7 @@ unsafe extern "C" fn atomic_fetch_add_relaxed(
     );
     return raw_atomic_fetch_add_relaxed(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_fetch_sub_release(
     mut i: ::core::ffi::c_int,
@@ -6235,6 +2322,7 @@ unsafe extern "C" fn atomic_fetch_sub_release(
     );
     return raw_atomic_fetch_sub_release(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_inc(mut v: *mut atomic_t) {
     instrument_atomic_read_write(
@@ -6243,6 +2331,7 @@ unsafe extern "C" fn atomic_inc(mut v: *mut atomic_t) {
     );
     raw_atomic_inc(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_inc_return(mut v: *mut atomic_t) -> ::core::ffi::c_int {
     instrument_atomic_read_write(
@@ -6251,6 +2340,7 @@ unsafe extern "C" fn atomic_inc_return(mut v: *mut atomic_t) -> ::core::ffi::c_i
     );
     return raw_atomic_inc_return(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_dec(mut v: *mut atomic_t) {
     instrument_atomic_read_write(
@@ -6259,6 +2349,7 @@ unsafe extern "C" fn atomic_dec(mut v: *mut atomic_t) {
     );
     raw_atomic_dec(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_long_read(mut v: *const atomic_long_t) -> ::core::ffi::c_long {
     instrument_atomic_read(
@@ -6267,6 +2358,7 @@ unsafe extern "C" fn atomic_long_read(mut v: *const atomic_long_t) -> ::core::ff
     );
     return raw_atomic_long_read(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_long_add(mut i: ::core::ffi::c_long, mut v: *mut atomic_long_t) {
     instrument_atomic_read_write(
@@ -6275,6 +2367,7 @@ unsafe extern "C" fn atomic_long_add(mut i: ::core::ffi::c_long, mut v: *mut ato
     );
     raw_atomic_long_add(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_long_fetch_inc_relaxed(
     mut v: *mut atomic_long_t,
@@ -6285,6 +2378,7 @@ unsafe extern "C" fn atomic_long_fetch_inc_relaxed(
     );
     return raw_atomic_long_fetch_inc_relaxed(v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn atomic_long_sub_and_test(
     mut i: ::core::ffi::c_long,
@@ -6296,6 +2390,7 @@ unsafe extern "C" fn atomic_long_sub_and_test(
     );
     return raw_atomic_long_sub_and_test(i, v);
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_set_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::core::ffi::c_ulong) {
     p = p.offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_uint) as isize);
@@ -6305,6 +2400,7 @@ unsafe extern "C" fn arch_set_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::cor
         p as *mut atomic_long_t,
     );
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_clear_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::core::ffi::c_ulong) {
     p = p.offset(nr.wrapping_div(BITS_PER_LONG as ::core::ffi::c_uint) as isize);
@@ -6314,6 +2410,7 @@ unsafe extern "C" fn arch_clear_bit(mut nr: ::core::ffi::c_uint, mut p: *mut ::c
         p as *mut atomic_long_t,
     );
 }
+
 #[inline(always)]
 unsafe extern "C" fn set_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::core::ffi::c_ulong) {
     instrument_atomic_write(
@@ -6323,6 +2420,7 @@ unsafe extern "C" fn set_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::core:
     );
     arch_set_bit(nr as ::core::ffi::c_uint, addr);
 }
+
 #[inline(always)]
 unsafe extern "C" fn clear_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::core::ffi::c_ulong) {
     instrument_atomic_write(
@@ -6332,14 +2430,18 @@ unsafe extern "C" fn clear_bit(mut nr: ::core::ffi::c_long, mut addr: *mut ::cor
     );
     arch_clear_bit(nr as ::core::ffi::c_uint, addr);
 }
+
 #[inline(always)]
 unsafe extern "C" fn sign_extend64(mut value: __u64, mut index: ::core::ffi::c_int) -> __s64 {
     let mut shift: __u8 = (63 as ::core::ffi::c_int - index) as __u8;
     return (value << shift as ::core::ffi::c_int) as __s64 >> shift as ::core::ffi::c_int;
 }
+
 pub const VA_BITS: ::core::ffi::c_int = 39 as ::core::ffi::c_int;
+
 #[no_mangle]
 pub static mut current_stack_pointer: ::core::ffi::c_ulong = 0;
+
 #[inline]
 unsafe extern "C" fn test_ti_thread_flag(
     mut ti: *mut thread_info,
@@ -6351,6 +2453,7 @@ unsafe extern "C" fn test_ti_thread_flag(
         generic_test_bit(flag as ::core::ffi::c_ulong, &raw mut (*ti).flags) as ::core::ffi::c_int
     };
 }
+
 #[inline]
 unsafe extern "C" fn __preempt_count_add(mut val: ::core::ffi::c_int) {
     let mut pc: u32_0 = ({
@@ -6406,6 +2509,7 @@ unsafe extern "C" fn __preempt_count_add(mut val: ::core::ffi::c_int) {
         pc as u32_0,
     );
 }
+
 #[inline]
 unsafe extern "C" fn class_preempt_notrace_constructor() -> class_preempt_notrace_t {
     let mut _t: class_preempt_notrace_t = class_preempt_notrace_t {
@@ -6416,97 +2520,41 @@ unsafe extern "C" fn class_preempt_notrace_constructor() -> class_preempt_notrac
     asm!("\n", options(preserves_flags));
     return _t;
 }
-#[inline]
-unsafe extern "C" fn __preempt_count_sub(mut val: ::core::ffi::c_int) {
-    let mut pc: u32_0 = ({
-        extern "C" {
-            #[link_name = "__compiletime_assert_21"]
-            fn __compiletime_assert_21_0() -> !;
-        }
-        if !(::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_char>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_short>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_int>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_long>() as usize
-            || ::core::mem::size_of::<u32_0>() as usize
-                == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
-        {
-            __compiletime_assert_21_0();
-        }
-        ::core::ptr::read_volatile::<::core::ffi::c_uint>(
-            (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
-                as *mut thread_info))
-                .c2rust_unnamed
-                .preempt
-                .count as *const ::core::ffi::c_uint),
-        )
-    });
-    pc = pc.wrapping_sub(val as u32_0);
-    extern "C" {
-        #[link_name = "__compiletime_assert_22"]
-        fn __compiletime_assert_22_0() -> !;
-    }
-    if !(::core::mem::size_of::<u32_0>() as usize
-        == ::core::mem::size_of::<::core::ffi::c_char>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_short>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_int>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_long>() as usize
-        || ::core::mem::size_of::<u32_0>() as usize
-            == ::core::mem::size_of::<::core::ffi::c_longlong>() as usize)
-    {
-        __compiletime_assert_22_0();
-    }
-    ::core::ptr::write_volatile(
-        (&raw mut (*((get_current as unsafe extern "C" fn() -> *mut task_struct)()
-            as *mut thread_info))
-            .c2rust_unnamed
-            .preempt
-            .count as *mut u32_0),
-        pc as u32_0,
-    );
-}
-#[inline]
-unsafe extern "C" fn class_preempt_notrace_destructor(mut _T: *mut class_preempt_notrace_t) {
-    asm!("\n", options(preserves_flags));
-    __preempt_count_sub(1 as ::core::ffi::c_int);
-}
-impl Drop for class_preempt_notrace_t {
-    fn drop(&mut self) {
-        unsafe {
-            class_preempt_notrace_destructor(self as *mut class_preempt_notrace_t);
-        }
-    }
-}
+
 #[inline(always)]
 unsafe extern "C" fn arch_static_branch(key: *mut static_key, branch: bool_0) -> bool_0 {
     let mut k: *mut ::core::ffi::c_char =
         (key as *mut ::core::ffi::c_char).offset(branch as isize) as *mut ::core::ffi::c_char;
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn arch_static_branch_jump(key: *mut static_key, branch: bool_0) -> bool_0 {
     let mut k: *mut ::core::ffi::c_char =
         (key as *mut ::core::ffi::c_char).offset(branch as isize) as *mut ::core::ffi::c_char;
     return true_0 as ::core::ffi::c_int != 0;
 }
+
 pub const NR_CPUS: ::core::ffi::c_int = CONFIG_NR_CPUS;
+
 pub const POISON_POINTER_DELTA: ::core::ffi::c_ulong = 0xdead000000000000 as ::core::ffi::c_ulong;
+
 pub const LIST_POISON1: *mut ::core::ffi::c_void =
     (0x100usize.wrapping_add(POISON_POINTER_DELTA as usize)) as *mut ::core::ffi::c_void;
+
 pub const LIST_POISON2: *mut ::core::ffi::c_void =
     (0x122usize.wrapping_add(POISON_POINTER_DELTA as usize)) as *mut ::core::ffi::c_void;
+
 pub const _IOC_NRBITS: ::core::ffi::c_int = 8 as ::core::ffi::c_int;
+
 pub const _IOC_NRMASK: ::core::ffi::c_int =
     ((1 as ::core::ffi::c_int) << _IOC_NRBITS) - 1 as ::core::ffi::c_int;
+
 pub const _IOC_NRSHIFT: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn might_fault() {}
+
 #[inline(always)]
 unsafe extern "C" fn find_next_zero_bit(
     mut addr: *const ::core::ffi::c_ulong,
@@ -6585,6 +2633,7 @@ unsafe extern "C" fn find_next_zero_bit(
     }
     return _find_next_zero_bit(addr as *const usize, size as usize, offset as usize) as ::core::ffi::c_ulong;
 }
+
 #[inline(always)]
 unsafe extern "C" fn find_last_bit(
     mut addr: *const ::core::ffi::c_ulong,
@@ -6658,6 +2707,7 @@ unsafe extern "C" fn find_last_bit(
     }
     return _find_last_bit(addr as *const usize, size as usize) as ::core::ffi::c_ulong;
 }
+
 #[inline(always)]
 unsafe extern "C" fn strnlen(
     p: *const ::core::ffi::c_char,
@@ -7792,6 +3842,7 @@ unsafe extern "C" fn strnlen(
     }
     return ret as __kernel_size_t;
 }
+
 #[inline(always)]
 unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel_size_t {
     let p_size: size_t = (if 1 as ::core::ffi::c_int & 2 == 0 {
@@ -8896,6 +4947,7 @@ unsafe extern "C" fn __fortify_strlen(p: *const ::core::ffi::c_char) -> __kernel
     }
     return ret;
 }
+
 #[inline(always)]
 unsafe extern "C" fn fortify_memset_chk(
     mut size: __kernel_size_t,
@@ -10002,6 +6054,7 @@ unsafe extern "C" fn fortify_memset_chk(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn fortify_memcpy_chk(
     mut size: __kernel_size_t,
@@ -12209,6 +8262,7 @@ unsafe extern "C" fn fortify_memcpy_chk(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn bitmap_copy(
     mut dst: *mut ::core::ffi::c_ulong,
@@ -12297,7 +8351,9 @@ unsafe extern "C" fn bitmap_copy(
         });
     };
 }
+
 pub const NUMA_NO_NODE: ::core::ffi::c_int = -1 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn INIT_LIST_HEAD(mut list: *mut list_head) {
     extern "C" {
@@ -12339,6 +8395,7 @@ unsafe extern "C" fn INIT_LIST_HEAD(mut list: *mut list_head) {
     let ref mut c2rust_fresh4 = *(&raw mut (*list).prev as *mut *mut list_head);
     ::core::ptr::write_volatile(c2rust_fresh4, list as *mut list_head);
 }
+
 #[inline(always)]
 unsafe extern "C" fn __list_add_valid(
     mut new: *mut list_head,
@@ -12360,6 +8417,7 @@ unsafe extern "C" fn __list_add_valid(
         != 0;
     return ret;
 }
+
 #[inline(always)]
 unsafe extern "C" fn __list_del_entry_valid(mut entry: *mut list_head) -> bool_0 {
     let mut ret: bool_0 = true_0 as ::core::ffi::c_int != 0;
@@ -12378,6 +8436,7 @@ unsafe extern "C" fn __list_del_entry_valid(mut entry: *mut list_head) -> bool_0
         != 0;
     return ret;
 }
+
 #[inline]
 unsafe extern "C" fn __list_add(
     mut new: *mut list_head,
@@ -12410,14 +8469,17 @@ unsafe extern "C" fn __list_add(
     let ref mut c2rust_fresh5 = *(&raw mut (*prev).next as *mut *mut list_head);
     ::core::ptr::write_volatile(c2rust_fresh5, new as *mut list_head);
 }
+
 #[inline]
 unsafe extern "C" fn list_add(mut new: *mut list_head, mut head: *mut list_head) {
     __list_add(new, head, (*head).next);
 }
+
 #[inline]
 unsafe extern "C" fn list_add_tail(mut new: *mut list_head, mut head: *mut list_head) {
     __list_add(new, (*head).prev, head);
 }
+
 #[inline]
 unsafe extern "C" fn __list_del(mut prev: *mut list_head, mut next: *mut list_head) {
     (*next).prev = prev;
@@ -12441,6 +8503,7 @@ unsafe extern "C" fn __list_del(mut prev: *mut list_head, mut next: *mut list_he
     let ref mut c2rust_fresh6 = *(&raw mut (*prev).next as *mut *mut list_head);
     ::core::ptr::write_volatile(c2rust_fresh6, next as *mut list_head);
 }
+
 #[inline]
 unsafe extern "C" fn __list_del_entry(mut entry: *mut list_head) {
     if !__list_del_entry_valid(entry) {
@@ -12448,17 +8511,20 @@ unsafe extern "C" fn __list_del_entry(mut entry: *mut list_head) {
     }
     __list_del((*entry).prev, (*entry).next);
 }
+
 #[inline]
 unsafe extern "C" fn list_del(mut entry: *mut list_head) {
     __list_del_entry(entry);
     (*entry).next = LIST_POISON1 as *mut list_head;
     (*entry).prev = LIST_POISON2 as *mut list_head;
 }
+
 #[inline]
 unsafe extern "C" fn list_del_init(mut entry: *mut list_head) {
     __list_del_entry(entry);
     INIT_LIST_HEAD(entry);
 }
+
 #[inline]
 unsafe extern "C" fn list_is_head(
     mut list: *const list_head,
@@ -12466,6 +8532,7 @@ unsafe extern "C" fn list_is_head(
 ) -> ::core::ffi::c_int {
     return (list == head) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn list_empty(mut head: *const list_head) -> ::core::ffi::c_int {
     return (({
@@ -12491,15 +8558,18 @@ unsafe extern "C" fn list_empty(mut head: *const list_head) -> ::core::ffi::c_in
         ) as *mut list_head
     }) == head as *mut list_head) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn INIT_HLIST_NODE(mut h: *mut hlist_node) {
     (*h).next = ::core::ptr::null_mut::<hlist_node>();
     (*h).pprev = ::core::ptr::null_mut::<*mut hlist_node>();
 }
+
 #[inline]
 unsafe extern "C" fn hlist_unhashed(mut h: *const hlist_node) -> ::core::ffi::c_int {
     return (*h).pprev.is_null() as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn hlist_empty(mut h: *const hlist_head) -> ::core::ffi::c_int {
     return ({
@@ -12526,6 +8596,7 @@ unsafe extern "C" fn hlist_empty(mut h: *const hlist_head) -> ::core::ffi::c_int
     })
     .is_null() as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn __hlist_del(mut n: *mut hlist_node) {
     let mut next: *mut hlist_node = (*n).next;
@@ -12571,12 +8642,14 @@ unsafe extern "C" fn __hlist_del(mut n: *mut hlist_node) {
         ::core::ptr::write_volatile(c2rust_fresh8, pprev as *mut *mut hlist_node);
     }
 }
+
 #[inline]
 unsafe extern "C" fn hlist_del(mut n: *mut hlist_node) {
     __hlist_del(n);
     (*n).next = LIST_POISON1 as *mut hlist_node;
     (*n).pprev = LIST_POISON2 as *mut *mut hlist_node;
 }
+
 #[inline]
 unsafe extern "C" fn hlist_del_init(mut n: *mut hlist_node) {
     if hlist_unhashed(n) == 0 {
@@ -12584,6 +8657,7 @@ unsafe extern "C" fn hlist_del_init(mut n: *mut hlist_node) {
         INIT_HLIST_NODE(n);
     }
 }
+
 #[inline]
 unsafe extern "C" fn hlist_add_head(mut n: *mut hlist_node, mut h: *mut hlist_head) {
     let mut first: *mut hlist_node = (*h).first as *mut hlist_node;
@@ -12666,6 +8740,7 @@ unsafe extern "C" fn hlist_add_head(mut n: *mut hlist_node, mut h: *mut hlist_he
     let ref mut c2rust_fresh12 = *(&raw mut (*n).pprev as *mut *mut *mut hlist_node);
     ::core::ptr::write_volatile(c2rust_fresh12, &raw mut (*h).first as *mut *mut hlist_node);
 }
+
 #[inline]
 unsafe extern "C" fn hlist_count_nodes(mut head: *mut hlist_head) -> size_t {
     let mut pos: *mut hlist_node = ::core::ptr::null_mut::<hlist_node>();
@@ -12677,18 +8752,22 @@ unsafe extern "C" fn hlist_count_nodes(mut head: *mut hlist_head) -> size_t {
     }
     return count;
 }
+
 pub const small_cpumask_bits: ::core::ffi::c_uint = NR_CPUS as ::core::ffi::c_uint;
+
 #[inline(always)]
 unsafe extern "C" fn cpu_max_bits_warn(
     mut cpu: ::core::ffi::c_uint,
     mut bits: ::core::ffi::c_uint,
 ) {
 }
+
 #[inline(always)]
 unsafe extern "C" fn cpumask_check(mut cpu: ::core::ffi::c_uint) -> ::core::ffi::c_uint {
     cpu_max_bits_warn(cpu, small_cpumask_bits);
     return cpu;
 }
+
 #[inline(always)]
 unsafe extern "C" fn cpumask_test_cpu(
     mut cpu: ::core::ffi::c_int,
@@ -12711,6 +8790,7 @@ unsafe extern "C" fn cpumask_test_cpu(
         ) as ::core::ffi::c_int
     } != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn cpu_online(mut cpu: ::core::ffi::c_uint) -> bool_0 {
     return cpumask_test_cpu(
@@ -12718,44 +8798,32 @@ unsafe extern "C" fn cpu_online(mut cpu: ::core::ffi::c_uint) -> bool_0 {
         &raw mut __cpu_online_mask as *const cpumask,
     );
 }
-#[inline]
-unsafe extern "C" fn arch_local_irq_save() -> ::core::ffi::c_ulong {
-    return binder_rust_arch_local_irq_save();
-}
-#[inline]
-unsafe extern "C" fn arch_local_irq_restore(mut flags: ::core::ffi::c_ulong) {
-    binder_rust_arch_local_irq_restore(flags);
-}
-#[inline]
-unsafe extern "C" fn arch_local_irq_enable() {
-    binder_rust_arch_local_irq_enable();
-}
-#[inline]
-unsafe extern "C" fn arch_local_irq_disable() {
-    binder_rust_arch_local_irq_disable();
-}
-#[inline(always)]
-unsafe extern "C" fn queued_spin_is_locked(mut lock: *mut qspinlock) -> ::core::ffi::c_int {
-    return 0;
-}
+
 unsafe extern "C" fn spin_is_locked(mut lock: *mut spinlock_t) -> ::core::ffi::c_int {
     return binder_rust_spin_is_locked(lock);
 }
+
 pub const RLIMIT_NICE: ::core::ffi::c_int = 13 as ::core::ffi::c_int;
+
 pub const RLIMIT_RTPRIO: ::core::ffi::c_int = 14 as ::core::ffi::c_int;
+
 pub const TASK_SIZE_MAX: ::core::ffi::c_ulong = (1 as ::core::ffi::c_ulong) << VA_BITS;
+
 #[inline(always)]
 unsafe extern "C" fn spinlock_check(mut lock: *mut spinlock_t) -> *mut raw_spinlock_t {
     return ::core::ptr::null_mut();
 }
+
 #[inline(always)]
 unsafe extern "C" fn spin_lock(mut lock: *mut spinlock_t) {
     binder_rust_spin_lock(lock);
 }
+
 #[inline(always)]
 unsafe extern "C" fn spin_unlock(mut lock: *mut spinlock_t) {
     binder_rust_spin_unlock(lock);
 }
+
 #[inline]
 unsafe extern "C" fn class_spinlock_constructor(mut l: *mut spinlock_t) -> class_spinlock_t {
     let mut _t: class_spinlock_t = class_spinlock_t { lock: l };
@@ -12763,23 +8831,36 @@ unsafe extern "C" fn class_spinlock_constructor(mut l: *mut spinlock_t) -> class
     spin_lock((*_T).lock);
     return _t;
 }
+
 pub const SCHED_NORMAL: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
+
 pub const SCHED_FIFO: ::core::ffi::c_int = 1 as ::core::ffi::c_int;
+
 pub const SCHED_RR: ::core::ffi::c_int = 2 as ::core::ffi::c_int;
+
 pub const SCHED_BATCH: ::core::ffi::c_int = 3 as ::core::ffi::c_int;
+
 pub const SCHED_RESET_ON_FORK: ::core::ffi::c_int = 0x40000000 as ::core::ffi::c_int;
+
 pub const MAX_NICE: ::core::ffi::c_int = 19 as ::core::ffi::c_int;
+
 pub const MIN_NICE: ::core::ffi::c_int = -20 as ::core::ffi::c_int;
+
 pub const NICE_WIDTH: ::core::ffi::c_int = MAX_NICE - MIN_NICE + 1 as ::core::ffi::c_int;
+
 pub const MAX_RT_PRIO: ::core::ffi::c_int = 100 as ::core::ffi::c_int;
+
 pub const DEFAULT_PRIO: ::core::ffi::c_int = MAX_RT_PRIO + NICE_WIDTH / 2 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn rlimit_to_nice(mut prio: ::core::ffi::c_long) -> ::core::ffi::c_long {
     return MAX_NICE as ::core::ffi::c_long - prio + 1 as ::core::ffi::c_long;
 }
+
 pub const MSEC_PER_SEC: ::core::ffi::c_long = 1000 as ::core::ffi::c_long;
+
 pub const NSEC_PER_MSEC: ::core::ffi::c_long = 1000000 as ::core::ffi::c_long;
-pub const CT_MODULE_NAME: *mut ::core::ffi::c_void = NULL;
+
 #[inline]
 unsafe extern "C" fn mem_alloc_profiling_enabled() -> bool_0 {
     return if false {
@@ -12802,17 +8883,25 @@ unsafe extern "C" fn mem_alloc_profiling_enabled() -> bool_0 {
         })
     } != 0;
 }
+
 #[inline]
 unsafe extern "C" fn class_mutex_constructor(mut _T: *mut mutex) -> class_mutex_t {
     mutex_lock(_T);
     return class_mutex_t { lock: _T };
 }
+
 pub const TASK_INTERRUPTIBLE: ::core::ffi::c_int = 0x1 as ::core::ffi::c_int;
+
 pub const TASK_UNINTERRUPTIBLE: ::core::ffi::c_int = 0x2 as ::core::ffi::c_int;
+
 pub const TASK_WAKEKILL: ::core::ffi::c_int = 0x100 as ::core::ffi::c_int;
+
 pub const TASK_FREEZABLE: ::core::ffi::c_int = 0x2000 as ::core::ffi::c_int;
+
 pub const TASK_NORMAL: ::core::ffi::c_int = TASK_INTERRUPTIBLE | TASK_UNINTERRUPTIBLE;
+
 pub const PF_KTHREAD: ::core::ffi::c_int = 0x200000 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn test_tsk_thread_flag(
     mut tsk: *mut task_struct,
@@ -12820,6 +8909,7 @@ unsafe extern "C" fn test_tsk_thread_flag(
 ) -> ::core::ffi::c_int {
     return test_ti_thread_flag(&raw mut (*tsk).thread_info as *mut _, flag);
 }
+
 #[inline(always)]
 unsafe extern "C" fn alloc_tag_save(mut tag: *mut alloc_tag) -> *mut alloc_tag {
     let mut __tmp: *mut alloc_tag = (*get_current()).alloc_tag as *mut alloc_tag;
@@ -12828,36 +8918,44 @@ unsafe extern "C" fn alloc_tag_save(mut tag: *mut alloc_tag) -> *mut alloc_tag {
     tag = __tmp as *mut alloc_tag;
     return tag;
 }
+
 #[inline(always)]
 unsafe extern "C" fn alloc_tag_restore(mut tag: *mut alloc_tag, mut old: *mut alloc_tag) {
     let ref mut c2rust_fresh14 = (*get_current()).alloc_tag;
     *c2rust_fresh14 = old;
 }
+
 #[inline(always)]
 unsafe extern "C" fn rcu_read_lock() {
     __rcu_read_lock();
     while false && !rcu_is_watching() {}
 }
+
 #[inline]
 unsafe extern "C" fn rcu_read_unlock() {
     while false && !rcu_is_watching() {}
     __rcu_read_unlock();
 }
+
 pub const WQ_FLAG_EXCLUSIVE: ::core::ffi::c_int = 0x1 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn waitqueue_active(mut wq_head: *mut wait_queue_head) -> ::core::ffi::c_int {
     return (list_empty(&raw mut (*wq_head).head) == 0) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn wake_up_pollfree(mut wq_head: *mut wait_queue_head) {
     if waitqueue_active(wq_head) != 0 {
         __wake_up_pollfree(wq_head);
     }
 }
+
 #[inline]
 unsafe extern "C" fn refcount_set(mut r: *mut refcount_t, mut n: ::core::ffi::c_int) {
     atomic_set(&raw mut (*r).refs, n);
 }
+
 #[inline]
 unsafe extern "C" fn __refcount_add(
     mut i: ::core::ffi::c_int,
@@ -12877,14 +8975,17 @@ unsafe extern "C" fn __refcount_add(
         refcount_warn_saturate(r, REFCOUNT_ADD_OVF);
     }
 }
+
 #[inline]
 unsafe extern "C" fn __refcount_inc(mut r: *mut refcount_t, mut oldp: *mut ::core::ffi::c_int) {
     __refcount_add(1 as ::core::ffi::c_int, r, oldp);
 }
+
 #[inline]
 unsafe extern "C" fn refcount_inc(mut r: *mut refcount_t) {
     __refcount_inc(r, ::core::ptr::null_mut::<::core::ffi::c_int>());
 }
+
 #[inline]
 unsafe extern "C" fn __refcount_sub_and_test(
     mut i: ::core::ffi::c_int,
@@ -12907,6 +9008,7 @@ unsafe extern "C" fn __refcount_sub_and_test(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline]
 unsafe extern "C" fn __refcount_dec_and_test(
     mut r: *mut refcount_t,
@@ -12914,29 +9016,36 @@ unsafe extern "C" fn __refcount_dec_and_test(
 ) -> bool_0 {
     return __refcount_sub_and_test(1 as ::core::ffi::c_int, r, oldp);
 }
+
 #[inline]
 unsafe extern "C" fn refcount_dec_and_test(mut r: *mut refcount_t) -> bool_0 {
     return __refcount_dec_and_test(r, ::core::ptr::null_mut::<::core::ffi::c_int>());
 }
+
 #[inline]
 unsafe extern "C" fn __kuid_val(mut uid: kuid_t) -> uid_t {
     return uid.val;
 }
+
 pub const INVALID_UID: kuid_t = kuid_t {
     val: -1 as ::core::ffi::c_int as uid_t,
 };
+
 #[inline]
 unsafe extern "C" fn uid_eq(mut left: kuid_t, mut right: kuid_t) -> bool_0 {
     return __kuid_val(left) == __kuid_val(right);
 }
+
 #[inline]
 unsafe extern "C" fn uid_valid(mut uid: kuid_t) -> bool_0 {
     return __kuid_val(uid) != -1 as ::core::ffi::c_int as uid_t;
 }
+
 #[inline]
 unsafe extern "C" fn from_kuid(mut to: *mut user_namespace, mut kuid: kuid_t) -> uid_t {
     return __kuid_val(kuid);
 }
+
 #[inline]
 unsafe extern "C" fn rb_link_node(
     mut node: *mut rb_node,
@@ -12948,6 +9057,7 @@ unsafe extern "C" fn rb_link_node(
     (*node).rb_left = (*node).rb_right;
     *rb_link = node;
 }
+
 #[inline]
 unsafe extern "C" fn rwsem_assert_held_write_nolockdep(mut sem: *const rw_semaphore) {
     ({
@@ -12963,18 +9073,22 @@ unsafe extern "C" fn rwsem_assert_held_write_nolockdep(mut sem: *const rw_semaph
         }
     });
 }
+
 #[inline]
 unsafe extern "C" fn rwsem_assert_held_write(mut sem: *const rw_semaphore) {
     rwsem_assert_held_write_nolockdep(sem);
 }
+
 pub const MAX_JIFFY_OFFSET: ::core::ffi::c_long =
     (LONG_MAX >> 1 as ::core::ffi::c_int) - 1 as ::core::ffi::c_long;
+
 #[inline]
 unsafe extern "C" fn _msecs_to_jiffies(m: ::core::ffi::c_uint) -> ::core::ffi::c_ulong {
     return ((m as ::core::ffi::c_long + MSEC_PER_SEC / HZ as ::core::ffi::c_long
         - 1 as ::core::ffi::c_long)
         / (MSEC_PER_SEC / HZ as ::core::ffi::c_long)) as ::core::ffi::c_ulong;
 }
+
 #[inline(always)]
 unsafe extern "C" fn msecs_to_jiffies(m: ::core::ffi::c_uint) -> ::core::ffi::c_ulong {
     if 0 != 0 {
@@ -12986,6 +9100,7 @@ unsafe extern "C" fn msecs_to_jiffies(m: ::core::ffi::c_uint) -> ::core::ffi::c_
         return __msecs_to_jiffies(m);
     };
 }
+
 #[inline]
 unsafe extern "C" fn ktime_divns(kt: ktime_t, mut div: s64) -> s64 {
     ({
@@ -12999,14 +9114,17 @@ unsafe extern "C" fn ktime_divns(kt: ktime_t, mut div: s64) -> s64 {
     });
     return kt as s64 / div;
 }
+
 #[inline]
 unsafe extern "C" fn ktime_to_ms(kt: ktime_t) -> s64 {
     return ktime_divns(kt, NSEC_PER_MSEC as s64);
 }
+
 #[inline]
 unsafe extern "C" fn ktime_ms_delta(later: ktime_t, earlier: ktime_t) -> s64 {
     return ktime_to_ms(later - earlier);
 }
+
 #[inline]
 unsafe extern "C" fn queue_work(
     mut wq: *mut workqueue_struct,
@@ -13014,12 +9132,12 @@ unsafe extern "C" fn queue_work(
 ) -> bool_0 {
     return queue_work_on(WORK_CPU_UNBOUND as ::core::ffi::c_int, wq, work);
 }
+
 #[inline]
 unsafe extern "C" fn schedule_work(mut work: *mut work_struct) -> bool_0 {
     return queue_work(system_percpu_wq, work);
 }
-pub const TTBR_ASID_MASK: ::core::ffi::c_ulong =
-    (0xffff as ::core::ffi::c_ulong) << 48 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn task_tgid_nr_ns(
     mut tsk: *mut task_struct,
@@ -13027,13 +9145,18 @@ unsafe extern "C" fn task_tgid_nr_ns(
 ) -> pid_t {
     return __task_pid_nr_ns(tsk, PIDTYPE_TGID, ns);
 }
+
 pub const CAP_SYS_NICE: ::core::ffi::c_int = 23 as ::core::ffi::c_int;
+
 pub const O_NONBLOCK: ::core::ffi::c_int = 0o4000 as ::core::ffi::c_int;
+
 pub const O_CLOEXEC: ::core::ffi::c_int = 0o2000000 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn should_fail_usercopy() -> bool_0 {
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline(always)]
 unsafe extern "C" fn check_object_size(
     mut ptr: *const ::core::ffi::c_void,
@@ -13064,10 +9187,12 @@ unsafe extern "C" fn check_object_size(
         __check_object_size(ptr, n, to_user);
     }
 }
+
 #[inline]
 unsafe extern "C" fn copy_overflow(mut size: ::core::ffi::c_int, mut count: ::core::ffi::c_ulong) {
     __copy_overflow(size, count);
 }
+
 #[inline(always)]
 unsafe extern "C" fn check_copy_size(
     mut addr: *const ::core::ffi::c_void,
@@ -13111,6 +9236,7 @@ unsafe extern "C" fn check_copy_size(
     check_object_size(addr, bytes as ::core::ffi::c_ulong, is_source);
     return true_0 as ::core::ffi::c_int != 0;
 }
+
 #[inline]
 unsafe extern "C" fn access_ok(
     mut addr: *const ::core::ffi::c_void,
@@ -13130,6 +9256,7 @@ unsafe extern "C" fn access_ok(
     return (__access_ok(addr, size) != 0) as ::core::ffi::c_int as ::core::ffi::c_long
         as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn __access_ok(
     mut ptr: *const ::core::ffi::c_void,
@@ -13142,14 +9269,17 @@ unsafe extern "C" fn __access_ok(
     }
     return (size <= limit && addr <= limit.wrapping_sub(size)) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn uaccess_ttbr0_disable() -> bool_0 {
     return binder_rust_uaccess_ttbr0_disable();
 }
+
 #[inline]
 unsafe extern "C" fn uaccess_ttbr0_enable() -> bool_0 {
     return binder_rust_uaccess_ttbr0_enable();
 }
+
 #[inline]
 unsafe extern "C" fn __uaccess_mask_ptr(
     mut ptr: *const ::core::ffi::c_void,
@@ -13162,6 +9292,7 @@ unsafe extern "C" fn __uaccess_mask_ptr(
     );
     return safe_ptr;
 }
+
 #[inline]
 unsafe extern "C" fn _inline_copy_from_user(
     mut to: *mut ::core::ffi::c_void,
@@ -13209,6 +9340,7 @@ unsafe extern "C" fn _inline_copy_from_user(
     });
     return res;
 }
+
 #[inline]
 unsafe extern "C" fn _inline_copy_to_user(
     mut to: *mut ::core::ffi::c_void,
@@ -13231,6 +9363,7 @@ unsafe extern "C" fn _inline_copy_to_user(
     }
     return n;
 }
+
 #[inline(always)]
 unsafe extern "C" fn copy_from_user(
     mut to: *mut ::core::ffi::c_void,
@@ -13242,6 +9375,7 @@ unsafe extern "C" fn copy_from_user(
     }
     return _inline_copy_from_user(to, from, n);
 }
+
 #[inline(always)]
 unsafe extern "C" fn copy_to_user(
     mut to: *mut ::core::ffi::c_void,
@@ -13253,11 +9387,13 @@ unsafe extern "C" fn copy_to_user(
     }
     return _inline_copy_to_user(to, from, n);
 }
+
 #[inline]
 unsafe extern "C" fn get_task_struct(mut t: *mut task_struct) -> *mut task_struct {
     refcount_inc(&raw mut (*t).usage);
     return t;
 }
+
 #[inline]
 unsafe extern "C" fn put_task_struct(mut t: *mut task_struct) {
     if !refcount_dec_and_test(&raw mut (*t).usage) {
@@ -13268,6 +9404,7 @@ unsafe extern "C" fn put_task_struct(mut t: *mut task_struct) {
         Some(__put_task_struct_rcu_cb),
     );
 }
+
 #[inline]
 unsafe extern "C" fn get_cred_many(
     mut cred: *const cred,
@@ -13281,10 +9418,12 @@ unsafe extern "C" fn get_cred_many(
     atomic_long_add(nr as ::core::ffi::c_long, &raw mut (*nonconst_cred).usage);
     return cred;
 }
+
 #[inline]
 unsafe extern "C" fn get_cred(mut cred: *const cred) -> *const cred {
     return get_cred_many(cred, 1 as ::core::ffi::c_int);
 }
+
 #[inline]
 unsafe extern "C" fn put_cred_many(mut _cred: *const cred, mut nr: ::core::ffi::c_int) {
     let mut cred: *mut cred = _cred as *mut cred;
@@ -13294,19 +9433,23 @@ unsafe extern "C" fn put_cred_many(mut _cred: *const cred, mut nr: ::core::ffi::
         }
     }
 }
+
 #[inline]
 unsafe extern "C" fn put_cred(mut cred: *const cred) {
     put_cred_many(cred, 1 as ::core::ffi::c_int);
 }
+
 #[inline]
 unsafe extern "C" fn current_user_ns() -> *mut user_namespace {
     return &raw mut init_user_ns;
 }
+
 #[inline]
 unsafe extern "C" fn task_sigpending(mut p: *mut task_struct) -> ::core::ffi::c_int {
     return (test_tsk_thread_flag(p, 0 as ::core::ffi::c_int) != 0) as ::core::ffi::c_int
         as ::core::ffi::c_long as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn signal_pending(mut p: *mut task_struct) -> ::core::ffi::c_int {
     if (test_tsk_thread_flag(p, 7 as ::core::ffi::c_int) != 0) as ::core::ffi::c_int
@@ -13317,6 +9460,7 @@ unsafe extern "C" fn signal_pending(mut p: *mut task_struct) -> ::core::ffi::c_i
     }
     return task_sigpending(p);
 }
+
 #[inline]
 unsafe extern "C" fn task_rlimit(
     mut task: *const task_struct,
@@ -13346,11 +9490,16 @@ unsafe extern "C" fn task_rlimit(
         )
     });
 }
+
 pub const KMALLOC_SHIFT_HIGH: ::core::ffi::c_int = PAGE_SHIFT + 1 as ::core::ffi::c_int;
+
 pub const KMALLOC_SHIFT_LOW: ::core::ffi::c_int = 3 as ::core::ffi::c_int;
+
 pub const KMALLOC_MAX_CACHE_SIZE: ::core::ffi::c_ulong =
     (1 as ::core::ffi::c_ulong) << KMALLOC_SHIFT_HIGH;
+
 pub const KMALLOC_MIN_SIZE: ::core::ffi::c_int = (1 as ::core::ffi::c_int) << KMALLOC_SHIFT_LOW;
+
 #[inline(always)]
 unsafe extern "C" fn kmalloc_type(
     mut flags: gfp_t,
@@ -13389,6 +9538,7 @@ unsafe extern "C" fn kmalloc_type(
         return KMALLOC_CGROUP;
     };
 }
+
 #[inline(always)]
 unsafe extern "C" fn __kmalloc_index(
     mut size: size_t,
@@ -13484,6 +9634,7 @@ unsafe extern "C" fn __kmalloc_index(
     }
     return -1 as ::core::ffi::c_int as ::core::ffi::c_uint;
 }
+
 #[inline(always)]
 unsafe extern "C" fn kmalloc_noprof(
     mut size: size_t,
@@ -13506,6 +9657,7 @@ unsafe extern "C" fn kmalloc_noprof(
     }
     return __kmalloc_noprof(size, flags);
 }
+
 #[inline]
 unsafe extern "C" fn kmalloc_array_noprof(
     mut n: size_t,
@@ -13520,6 +9672,7 @@ unsafe extern "C" fn kmalloc_array_noprof(
     }
     return kmalloc_noprof(bytes, flags);
 }
+
 #[inline]
 unsafe extern "C" fn kzalloc_noprof(
     mut size: size_t,
@@ -13530,6 +9683,7 @@ unsafe extern "C" fn kzalloc_noprof(
         flags | ((1 as ::core::ffi::c_ulong) << ___GFP_ZERO_BIT as ::core::ffi::c_int) as gfp_t,
     );
 }
+
 #[inline(always)]
 unsafe extern "C" fn file_ref_inc(mut ref_0: *mut file_ref_t) {
     let mut prior: ::core::ffi::c_long = atomic_long_fetch_inc_relaxed(&raw mut (*ref_0).refcnt);
@@ -13564,14 +9718,19 @@ unsafe extern "C" fn file_ref_inc(mut ref_0: *mut file_ref_t) {
         }
     });
 }
+
 #[inline]
 unsafe extern "C" fn get_file(mut f: *mut file) -> *mut file {
     file_ref_inc(&raw mut (*f).f_ref);
     return f;
 }
+
 pub const MISC_DYNAMIC_MINOR: ::core::ffi::c_int = 255 as ::core::ffi::c_int;
+
 pub const EPOLLIN: __poll_t = 0x1 as ::core::ffi::c_int as __poll_t;
+
 pub const EPOLLERR: __poll_t = 0x8 as ::core::ffi::c_int as __poll_t;
+
 #[inline]
 unsafe extern "C" fn poll_wait(
     mut filp: *mut file,
@@ -13587,6 +9746,7 @@ unsafe extern "C" fn poll_wait(
         asm!("dmb ish\n", options(preserves_flags));
     }
 }
+
 #[inline(always)]
 unsafe extern "C" fn seq_puts(mut m: *mut seq_file, mut s: *const ::core::ffi::c_char) {
     if 0 == 0 {
@@ -13599,10 +9759,12 @@ unsafe extern "C" fn seq_puts(mut m: *mut seq_file, mut s: *const ::core::ffi::c
         seq_write(m, s as *const ::core::ffi::c_void, strlen(s));
     };
 }
+
 #[inline]
 unsafe extern "C" fn mmap_assert_write_locked(mut mm: *const mm_struct) {
     rwsem_assert_held_write(&raw const (*mm).__bindgen_anon_1.mmap_lock);
 }
+
 unsafe extern "C" fn __is_vma_write_locked(
     mut vma: *mut vm_area_struct,
     mut mm_lock_seq: *mut ::core::ffi::c_uint,
@@ -13611,6 +9773,7 @@ unsafe extern "C" fn __is_vma_write_locked(
     *mm_lock_seq = (*(*vma).vm_mm).__bindgen_anon_1.mm_lock_seq.sequence;
     return (*vma).vm_lock_seq == *mm_lock_seq;
 }
+
 #[inline]
 unsafe extern "C" fn vma_start_write(mut vma: *mut vm_area_struct) {
     let mut mm_lock_seq: ::core::ffi::c_uint = 0;
@@ -13619,14 +9782,18 @@ unsafe extern "C" fn vma_start_write(mut vma: *mut vm_area_struct) {
     }
     __vma_start_write(vma, mm_lock_seq);
 }
-pub const VM_WRITE: ::core::ffi::c_int = 0x2 as ::core::ffi::c_int;
+
 pub const VM_MAYWRITE: ::core::ffi::c_int = 0x20 as ::core::ffi::c_int;
+
 pub const VM_DONTCOPY: ::core::ffi::c_int = 0x20000 as ::core::ffi::c_int;
+
 pub const VM_MIXEDMAP: ::core::ffi::c_int = 0x10000000 as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn vm_flags_init(mut vma: *mut vm_area_struct, mut flags: vm_flags_t) {
     (*vma).__bindgen_anon_2.__vm_flags = flags;
 }
+
 #[inline]
 unsafe extern "C" fn __vm_flags_mod(
     mut vma: *mut vm_area_struct,
@@ -13635,6 +9802,7 @@ unsafe extern "C" fn __vm_flags_mod(
 ) {
     vm_flags_init(vma, ((*vma).__bindgen_anon_2.vm_flags | set) & !clear);
 }
+
 #[inline]
 unsafe extern "C" fn vm_flags_mod(
     mut vma: *mut vm_area_struct,
@@ -13644,13 +9812,16 @@ unsafe extern "C" fn vm_flags_mod(
     vma_start_write(vma);
     __vm_flags_mod(vma, set, clear);
 }
+
 #[inline]
 unsafe extern "C" fn init_task_work(mut twork: *mut callback_head, mut func: task_work_func_t) {
     (*twork).func = func as Option<unsafe extern "C" fn(*mut callback_head) -> ()>;
 }
+
 static mut binder_deferred_list: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
+
 static mut binder_deferred_lock: mutex = mutex {
     owner: atomic_long_t { counter: 0 },
     wait_lock: raw_spinlock_t {
@@ -13667,15 +9838,19 @@ static mut binder_deferred_lock: mutex = mutex {
     },
     android_oem_data1: 0,
 };
+
 static mut binder_devices: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
+
 static mut binder_devices_lock: spinlock_t = spinlock_t {
     _bindgen_opaque_blob: 0,
 };
+
 static mut binder_procs: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
+
 static mut binder_procs_lock: mutex = mutex {
     owner: atomic_long_t { counter: 0 },
     wait_lock: raw_spinlock_t {
@@ -13698,15 +9873,21 @@ static mut binder_procs_lock: mutex = mutex {
     },
     android_oem_data1: 0,
 };
+
 static mut binder_dead_nodes: hlist_head = hlist_head {
     first: ::core::ptr::null_mut::<hlist_node>(),
 };
+
 static mut binder_dead_nodes_lock: spinlock_t = spinlock_t {
     _bindgen_opaque_blob: 0,
 };
+
 static mut binder_debugfs_dir_entry_root: *mut dentry = ::core::ptr::null_mut::<dentry>();
+
 static mut binder_debugfs_dir_entry_proc: *mut dentry = ::core::ptr::null_mut::<dentry>();
+
 static mut binder_last_id: atomic_t = atomic_t { counter: 0 };
+
 static mut proc_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -13743,6 +9924,7 @@ static mut proc_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn proc_open(mut inode: *mut inode, mut file: *mut file) -> ::core::ffi::c_int {
     return single_open(
         file,
@@ -13750,14 +9932,18 @@ unsafe extern "C" fn proc_open(mut inode: *mut inode, mut file: *mut file) -> ::
         (*inode).i_private,
     );
 }
+
 pub const FORBIDDEN_MMAP_FLAGS: ::core::ffi::c_int = 0x2 as ::core::ffi::c_int;
+
 static mut binder_debug_mask: uint32_t = (BINDER_DEBUG_USER_ERROR as ::core::ffi::c_int
     | BINDER_DEBUG_FAILED_TRANSACTION as ::core::ffi::c_int
     | BINDER_DEBUG_DEAD_TRANSACTION as ::core::ffi::c_int)
     as uint32_t;
+
 static mut __param_str_debug_mask: [::core::ffi::c_char; 18] = unsafe {
     ::core::mem::transmute::<[u8; 18], [::core::ffi::c_char; 18]>(*b"binder.debug_mask\0")
 };
+
 #[used]
 #[link_section = "__param"]
 static mut __param_debug_mask: kernel_param = unsafe {
@@ -13779,6 +9965,7 @@ static mut __param_debug_mask: kernel_param = unsafe {
         },
     }
 };
+
 #[used]
 #[link_section = ".modinfo"]
 static mut __UNIQUE_ID_modinfo854: [::core::ffi::c_char; 32] = unsafe {
@@ -13786,11 +9973,14 @@ static mut __UNIQUE_ID_modinfo854: [::core::ffi::c_char; 32] = unsafe {
         *b"binder.parmtype=debug_mask:uint\0",
     )
 };
+
 #[no_mangle]
 pub static mut binder_devices_param: *mut ::core::ffi::c_char =
     CONFIG_ANDROID_BINDER_DEVICES.as_ptr() as *mut ::core::ffi::c_char;
+
 static mut __param_str_devices: [::core::ffi::c_char; 15] =
     unsafe { ::core::mem::transmute::<[u8; 15], [::core::ffi::c_char; 15]>(*b"binder.devices\0") };
+
 #[used]
 #[link_section = "__param"]
 static mut __param_devices: kernel_param = unsafe {
@@ -13813,6 +10003,7 @@ static mut __param_devices: kernel_param = unsafe {
         },
     }
 };
+
 #[used]
 #[link_section = ".modinfo"]
 static mut __UNIQUE_ID_modinfo855: [::core::ffi::c_char; 30] = unsafe {
@@ -13820,6 +10011,7 @@ static mut __UNIQUE_ID_modinfo855: [::core::ffi::c_char; 30] = unsafe {
         *b"binder.parmtype=devices:charp\0",
     )
 };
+
 static mut binder_user_error_wait: wait_queue_head = wait_queue_head {
     lock: spinlock_t {
         _bindgen_opaque_blob: 0,
@@ -13829,7 +10021,9 @@ static mut binder_user_error_wait: wait_queue_head = wait_queue_head {
         prev: ::core::ptr::null_mut::<list_head>(),
     },
 };
+
 static mut binder_stop_on_user_error: ::core::ffi::c_int = 0;
+
 unsafe extern "C" fn binder_set_stop_on_user_error(
     mut val: *const ::core::ffi::c_char,
     mut kp: *const kernel_param,
@@ -13846,6 +10040,7 @@ unsafe extern "C" fn binder_set_stop_on_user_error(
     }
     return ret;
 }
+
 #[used]
 #[link_section = "__param"]
 static mut __param_stop_on_user_error: kernel_param = unsafe {
@@ -13868,15 +10063,18 @@ static mut __param_stop_on_user_error: kernel_param = unsafe {
         },
     }
 };
+
 static mut __param_ops_stop_on_user_error: kernel_param_ops = kernel_param_ops {
     flags: 0 as ::core::ffi::c_uint,
     set: Some(binder_set_stop_on_user_error),
     get: Some(param_get_int),
     free: None,
 };
+
 static mut __param_str_stop_on_user_error: [::core::ffi::c_char; 26] = unsafe {
     ::core::mem::transmute::<[u8; 26], [::core::ffi::c_char; 26]>(*b"binder.stop_on_user_error\0")
 };
+
 unsafe extern "C" fn binder_debug(
     mut mask: ::core::ffi::c_int,
     mut format: *const ::core::ffi::c_char,
@@ -13920,6 +10118,7 @@ unsafe extern "C" fn binder_debug(
         };
     }
 }
+
 unsafe extern "C" fn binder_user_error(
     mut format: *const ::core::ffi::c_char,
     mut c2rust_args: ...
@@ -13965,12 +10164,14 @@ unsafe extern "C" fn binder_user_error(
         binder_stop_on_user_error = 2 as ::core::ffi::c_int;
     }
 }
+
 static mut binder_stats: binder_stats = binder_stats {
     br: [atomic_t { counter: 0 }; 23],
     bc: [atomic_t { counter: 0 }; 22],
     obj_created: [atomic_t { counter: 0 }; 8],
     obj_deleted: [atomic_t { counter: 0 }; 8],
 };
+
 #[inline]
 unsafe extern "C" fn binder_stats_deleted(mut type_0: binder_stat_types) {
     atomic_inc(
@@ -13978,6 +10179,7 @@ unsafe extern "C" fn binder_stats_deleted(mut type_0: binder_stat_types) {
             as *mut atomic_t,
     );
 }
+
 #[inline]
 unsafe extern "C" fn binder_stats_created(mut type_0: binder_stat_types) {
     atomic_inc(
@@ -13985,6 +10187,7 @@ unsafe extern "C" fn binder_stats_created(mut type_0: binder_stat_types) {
             as *mut atomic_t,
     );
 }
+
 static mut binder_transaction_log: binder_transaction_log = binder_transaction_log {
     cur: atomic_t { counter: 0 },
     full: false,
@@ -14006,6 +10209,7 @@ static mut binder_transaction_log: binder_transaction_log = binder_transaction_l
         context_name: [0; 256],
     }; 32],
 };
+
 static mut binder_transaction_log_failed: binder_transaction_log = binder_transaction_log {
     cur: atomic_t { counter: 0 },
     full: false,
@@ -14027,6 +10231,7 @@ static mut binder_transaction_log_failed: binder_transaction_log = binder_transa
         context_name: [0; 256],
     }; 32],
 };
+
 unsafe extern "C" fn binder_transaction_log_add(
     mut log: *mut binder_transaction_log,
 ) -> *mut binder_transaction_log_entry {
@@ -14098,6 +10303,7 @@ unsafe extern "C" fn binder_transaction_log_add(
     });
     return e;
 }
+
 unsafe extern "C" fn _binder_proc_lock(mut proc: *mut binder_proc, mut line: ::core::ffi::c_int) {
     binder_debug(
         BINDER_DEBUG_SPINLOCKS as ::core::ffi::c_int,
@@ -14107,6 +10313,7 @@ unsafe extern "C" fn _binder_proc_lock(mut proc: *mut binder_proc, mut line: ::c
     );
     spin_lock(&raw mut (*proc).outer_lock);
 }
+
 unsafe extern "C" fn _binder_proc_unlock(mut proc: *mut binder_proc, mut line: ::core::ffi::c_int) {
     binder_debug(
         BINDER_DEBUG_SPINLOCKS as ::core::ffi::c_int,
@@ -14116,6 +10323,7 @@ unsafe extern "C" fn _binder_proc_unlock(mut proc: *mut binder_proc, mut line: :
     );
     spin_unlock(&raw mut (*proc).outer_lock);
 }
+
 unsafe extern "C" fn _binder_inner_proc_lock(
     mut proc: *mut binder_proc,
     mut line: ::core::ffi::c_int,
@@ -14128,6 +10336,7 @@ unsafe extern "C" fn _binder_inner_proc_lock(
     );
     spin_lock(&raw mut (*proc).inner_lock);
 }
+
 unsafe extern "C" fn _binder_inner_proc_unlock(
     mut proc: *mut binder_proc,
     mut line: ::core::ffi::c_int,
@@ -14140,6 +10349,7 @@ unsafe extern "C" fn _binder_inner_proc_unlock(
     );
     spin_unlock(&raw mut (*proc).inner_lock);
 }
+
 unsafe extern "C" fn _binder_node_lock(mut node: *mut binder_node, mut line: ::core::ffi::c_int) {
     binder_debug(
         BINDER_DEBUG_SPINLOCKS as ::core::ffi::c_int,
@@ -14149,6 +10359,7 @@ unsafe extern "C" fn _binder_node_lock(mut node: *mut binder_node, mut line: ::c
     );
     spin_lock(&raw mut (*node).lock);
 }
+
 unsafe extern "C" fn _binder_node_unlock(mut node: *mut binder_node, mut line: ::core::ffi::c_int) {
     binder_debug(
         BINDER_DEBUG_SPINLOCKS as ::core::ffi::c_int,
@@ -14158,6 +10369,7 @@ unsafe extern "C" fn _binder_node_unlock(mut node: *mut binder_node, mut line: :
     );
     spin_unlock(&raw mut (*node).lock);
 }
+
 unsafe extern "C" fn _binder_node_inner_lock(
     mut node: *mut binder_node,
     mut line: ::core::ffi::c_int,
@@ -14173,6 +10385,7 @@ unsafe extern "C" fn _binder_node_inner_lock(
         _binder_inner_proc_lock((*node).proc as *mut binder_proc, 409 as ::core::ffi::c_int);
     }
 }
+
 unsafe extern "C" fn _binder_node_inner_unlock(
     mut node: *mut binder_node,
     mut line: ::core::ffi::c_int,
@@ -14189,9 +10402,11 @@ unsafe extern "C" fn _binder_node_inner_unlock(
     }
     spin_unlock(&raw mut (*node).lock);
 }
+
 unsafe extern "C" fn binder_worklist_empty_ilocked(mut list: *mut list_head) -> bool_0 {
     return list_empty(list) != 0;
 }
+
 unsafe extern "C" fn binder_enqueue_work_ilocked(
     mut work: *mut binder_work,
     mut target_list: *mut list_head,
@@ -14216,6 +10431,7 @@ unsafe extern "C" fn binder_enqueue_work_ilocked(
     trace_android_vh_binder_list_add_work(work, target_list);
     list_add_tail(&raw mut (*work).entry, target_list);
 }
+
 unsafe extern "C" fn binder_enqueue_deferred_thread_work_ilocked(
     mut thread: *mut binder_thread,
     mut work: *mut binder_work,
@@ -14232,6 +10448,7 @@ unsafe extern "C" fn binder_enqueue_deferred_thread_work_ilocked(
     });
     binder_enqueue_work_ilocked(work, &raw mut (*thread).todo);
 }
+
 unsafe extern "C" fn binder_enqueue_thread_work_ilocked(
     mut thread: *mut binder_thread,
     mut work: *mut binder_work,
@@ -14258,6 +10475,7 @@ unsafe extern "C" fn binder_enqueue_thread_work_ilocked(
     }
     (*thread).process_todo = true_0 as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_enqueue_thread_work(
     mut thread: *mut binder_thread,
     mut work: *mut binder_work,
@@ -14266,14 +10484,17 @@ unsafe extern "C" fn binder_enqueue_thread_work(
     binder_enqueue_thread_work_ilocked(thread, work);
     _binder_inner_proc_unlock((*thread).proc, 543 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_dequeue_work_ilocked(mut work: *mut binder_work) {
     list_del_init(&raw mut (*work).entry);
 }
+
 unsafe extern "C" fn binder_dequeue_work(mut proc: *mut binder_proc, mut work: *mut binder_work) {
     _binder_inner_proc_lock(proc, 563 as ::core::ffi::c_int);
     binder_dequeue_work_ilocked(work);
     _binder_inner_proc_unlock(proc, 565 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_dequeue_work_head_ilocked(
     mut list: *mut list_head,
 ) -> *mut binder_work {
@@ -14316,6 +10537,7 @@ unsafe extern "C" fn binder_dequeue_work_head_ilocked(
     }
     return w;
 }
+
 unsafe extern "C" fn binder_has_work_ilocked(
     mut thread: *mut binder_thread,
     mut do_proc_work: bool_0,
@@ -14327,6 +10549,7 @@ unsafe extern "C" fn binder_has_work_ilocked(
     trace_android_vh_binder_has_special_work_ilocked(thread, do_proc_work, &raw mut has_work);
     return has_work;
 }
+
 unsafe extern "C" fn binder_has_work(
     mut thread: *mut binder_thread,
     mut do_proc_work: bool_0,
@@ -14337,12 +10560,14 @@ unsafe extern "C" fn binder_has_work(
     _binder_inner_proc_unlock((*thread).proc, 602 as ::core::ffi::c_int);
     return has_work;
 }
+
 unsafe extern "C" fn binder_available_for_proc_work_ilocked(
     mut thread: *mut binder_thread,
 ) -> bool_0 {
     return (*thread).transaction_stack.is_null()
         && binder_worklist_empty_ilocked(&raw mut (*thread).todo) as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_wakeup_poll_threads_ilocked(
     mut proc: *mut binder_proc,
     mut sync: bool_0,
@@ -14375,6 +10600,7 @@ unsafe extern "C" fn binder_wakeup_poll_threads_ilocked(
         n = rb_next(n);
     }
 }
+
 unsafe extern "C" fn binder_select_thread_ilocked(
     mut proc: *mut binder_proc,
 ) -> *mut binder_thread {
@@ -14427,6 +10653,7 @@ unsafe extern "C" fn binder_select_thread_ilocked(
     }
     return thread;
 }
+
 unsafe extern "C" fn binder_wakeup_thread_ilocked(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -14460,20 +10687,25 @@ unsafe extern "C" fn binder_wakeup_thread_ilocked(
     }
     binder_wakeup_poll_threads_ilocked(proc, sync);
 }
+
 unsafe extern "C" fn binder_wakeup_proc_ilocked(mut proc: *mut binder_proc) {
     let mut thread: *mut binder_thread = binder_select_thread_ilocked(proc);
     binder_wakeup_thread_ilocked(proc, thread, false_0 as ::core::ffi::c_int != 0);
 }
+
 unsafe extern "C" fn is_rt_policy(mut policy: ::core::ffi::c_int) -> bool_0 {
     return policy == SCHED_FIFO || policy == SCHED_RR;
 }
+
 unsafe extern "C" fn is_fair_policy(mut policy: ::core::ffi::c_int) -> bool_0 {
     return policy == SCHED_NORMAL || policy == SCHED_BATCH;
 }
+
 unsafe extern "C" fn binder_supported_policy(mut policy: ::core::ffi::c_int) -> bool_0 {
     return is_fair_policy(policy) as ::core::ffi::c_int != 0
         || is_rt_policy(policy) as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn to_userspace_prio(
     mut policy: ::core::ffi::c_int,
     mut kernel_priority: ::core::ffi::c_int,
@@ -14484,6 +10716,7 @@ unsafe extern "C" fn to_userspace_prio(
         return MAX_RT_PRIO - 1 as ::core::ffi::c_int - kernel_priority;
     };
 }
+
 unsafe extern "C" fn to_kernel_prio(
     mut policy: ::core::ffi::c_int,
     mut user_priority: ::core::ffi::c_int,
@@ -14494,6 +10727,7 @@ unsafe extern "C" fn to_kernel_prio(
         return MAX_RT_PRIO - 1 as ::core::ffi::c_int - user_priority;
     };
 }
+
 unsafe extern "C" fn binder_do_set_priority(
     mut thread: *mut binder_thread,
     mut desired: *const binder_priority,
@@ -14594,18 +10828,21 @@ unsafe extern "C" fn binder_do_set_priority(
     (*thread).prio_state = BINDER_PRIO_SET;
     spin_unlock(&raw mut (*thread).prio_lock);
 }
+
 unsafe extern "C" fn binder_set_priority(
     mut thread: *mut binder_thread,
     mut desired: *const binder_priority,
 ) {
     binder_do_set_priority(thread, desired, true_0 as ::core::ffi::c_int != 0);
 }
+
 unsafe extern "C" fn binder_restore_priority(
     mut thread: *mut binder_thread,
     mut desired: *const binder_priority,
 ) {
     binder_do_set_priority(thread, desired, false_0 as ::core::ffi::c_int != 0);
 }
+
 unsafe extern "C" fn binder_transaction_priority(
     mut thread: *mut binder_thread,
     mut t: *mut binder_transaction,
@@ -14653,6 +10890,7 @@ unsafe extern "C" fn binder_transaction_priority(
     binder_set_priority(thread, &raw mut desired);
     trace_android_vh_binder_set_priority(t, task);
 }
+
 unsafe extern "C" fn binder_get_node_ilocked(
     mut proc: *mut binder_proc,
     mut ptr: binder_uintptr_t,
@@ -14685,6 +10923,7 @@ unsafe extern "C" fn binder_get_node_ilocked(
     }
     return ::core::ptr::null_mut::<binder_node>();
 }
+
 unsafe extern "C" fn binder_get_node(
     mut proc: *mut binder_proc,
     mut ptr: binder_uintptr_t,
@@ -14695,6 +10934,7 @@ unsafe extern "C" fn binder_get_node(
     _binder_inner_proc_unlock(proc, 933 as ::core::ffi::c_int);
     return node;
 }
+
 unsafe extern "C" fn binder_init_node_ilocked(
     mut proc: *mut binder_proc,
     mut new_node: *mut binder_node,
@@ -14793,6 +11033,7 @@ unsafe extern "C" fn binder_init_node_ilocked(
     );
     return node;
 }
+
 unsafe extern "C" fn binder_new_node(
     mut proc: *mut binder_proc,
     mut fp: *mut flat_binder_object,
@@ -14858,10 +11099,12 @@ unsafe extern "C" fn binder_new_node(
     }
     return node;
 }
+
 unsafe extern "C" fn binder_free_node(mut node: *mut binder_node) {
     kfree(node as *const ::core::ffi::c_void);
     binder_stats_deleted(BINDER_STAT_NODE);
 }
+
 unsafe extern "C" fn binder_inc_node_nilocked(
     mut node: *mut binder_node,
     mut strong: ::core::ffi::c_int,
@@ -14942,6 +11185,7 @@ unsafe extern "C" fn binder_inc_node_nilocked(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_inc_node(
     mut node: *mut binder_node,
     mut strong: ::core::ffi::c_int,
@@ -14954,6 +11198,7 @@ unsafe extern "C" fn binder_inc_node(
     _binder_node_inner_unlock(node, 1072 as ::core::ffi::c_int);
     return ret;
 }
+
 unsafe extern "C" fn binder_dec_node_nilocked(
     mut node: *mut binder_node,
     mut strong: ::core::ffi::c_int,
@@ -15054,6 +11299,7 @@ unsafe extern "C" fn binder_dec_node_nilocked(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_dec_node(
     mut node: *mut binder_node,
     mut strong: ::core::ffi::c_int,
@@ -15067,9 +11313,11 @@ unsafe extern "C" fn binder_dec_node(
         binder_free_node(node);
     }
 }
+
 unsafe extern "C" fn binder_inc_node_tmpref_ilocked(mut node: *mut binder_node) {
     (*node).tmp_refs += 1;
 }
+
 unsafe extern "C" fn binder_inc_node_tmpref(mut node: *mut binder_node) {
     _binder_node_lock(node, 1173 as ::core::ffi::c_int);
     if !(*node).proc.is_null() {
@@ -15085,6 +11333,7 @@ unsafe extern "C" fn binder_inc_node_tmpref(mut node: *mut binder_node) {
     }
     _binder_node_unlock(node, 1183 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_dec_node_tmpref(mut node: *mut binder_node) {
     let mut free_node: bool_0 = false;
     _binder_node_inner_lock(node, 1196 as ::core::ffi::c_int);
@@ -15110,9 +11359,11 @@ unsafe extern "C" fn binder_dec_node_tmpref(mut node: *mut binder_node) {
         binder_free_node(node);
     }
 }
+
 unsafe extern "C" fn binder_put_node(mut node: *mut binder_node) {
     binder_dec_node_tmpref(node);
 }
+
 unsafe extern "C" fn binder_get_ref_olocked(
     mut proc: *mut binder_proc,
     mut desc: u32_0,
@@ -15140,6 +11391,7 @@ unsafe extern "C" fn binder_get_ref_olocked(
     }
     return ::core::ptr::null_mut::<binder_ref>();
 }
+
 unsafe extern "C" fn slow_desc_lookup_olocked(
     mut proc: *mut binder_proc,
     mut offset: u32_0,
@@ -15162,6 +11414,7 @@ unsafe extern "C" fn slow_desc_lookup_olocked(
     }
     return desc;
 }
+
 unsafe extern "C" fn get_ref_desc_olocked(
     mut proc: *mut binder_proc,
     mut node: *mut binder_node,
@@ -15201,6 +11454,7 @@ unsafe extern "C" fn get_ref_desc_olocked(
     dbitmap_grow(dmap, new, nbits);
     return -EAGAIN;
 }
+
 unsafe extern "C" fn binder_get_ref_for_node_olocked(
     mut proc: *mut binder_proc,
     mut node: *mut binder_node,
@@ -15282,6 +11536,7 @@ unsafe extern "C" fn binder_get_ref_for_node_olocked(
     _binder_node_unlock(node, 1384 as ::core::ffi::c_int);
     return new_ref;
 }
+
 unsafe extern "C" fn binder_cleanup_ref_olocked(mut ref_0: *mut binder_ref) {
     let mut dmap: *mut dbitmap = &raw mut (*(*ref_0).proc).dmap;
     let mut delete_node: bool_0 = false_0 as ::core::ffi::c_int != 0;
@@ -15340,6 +11595,7 @@ unsafe extern "C" fn binder_cleanup_ref_olocked(mut ref_0: *mut binder_ref) {
     }
     binder_stats_deleted(BINDER_STAT_REF);
 }
+
 unsafe extern "C" fn binder_inc_ref_olocked(
     mut ref_0: *mut binder_ref,
     mut strong: ::core::ffi::c_int,
@@ -15375,6 +11631,7 @@ unsafe extern "C" fn binder_inc_ref_olocked(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_dec_ref_olocked(
     mut ref_0: *mut binder_ref,
     mut strong: ::core::ffi::c_int,
@@ -15419,6 +11676,7 @@ unsafe extern "C" fn binder_dec_ref_olocked(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_get_node_from_ref(
     mut proc: *mut binder_proc,
     mut desc: u32_0,
@@ -15442,6 +11700,7 @@ unsafe extern "C" fn binder_get_node_from_ref(
         return node;
     };
 }
+
 unsafe extern "C" fn binder_free_ref(mut ref_0: *mut binder_ref) {
     trace_android_vh_binder_del_ref((*ref_0).proc, (*ref_0).data.desc);
     if !(*ref_0).node.is_null() {
@@ -15451,6 +11710,7 @@ unsafe extern "C" fn binder_free_ref(mut ref_0: *mut binder_ref) {
     kfree((*ref_0).freeze as *const ::core::ffi::c_void);
     kfree(ref_0 as *const ::core::ffi::c_void);
 }
+
 unsafe extern "C" fn try_shrink_dmap(mut proc: *mut binder_proc) {
     let mut new: *mut ::core::ffi::c_ulong = ::core::ptr::null_mut::<::core::ffi::c_ulong>();
     let mut nbits: ::core::ffi::c_int = 0;
@@ -15472,6 +11732,7 @@ unsafe extern "C" fn try_shrink_dmap(mut proc: *mut binder_proc) {
     dbitmap_shrink(&raw mut (*proc).dmap, new, nbits as ::core::ffi::c_uint);
     _binder_proc_unlock(proc, 1584 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_update_ref_for_handle(
     mut proc: *mut binder_proc,
     mut desc: uint32_t,
@@ -15509,6 +11770,7 @@ unsafe extern "C" fn binder_update_ref_for_handle(
         return ret;
     };
 }
+
 unsafe extern "C" fn binder_dec_ref_for_handle(
     mut proc: *mut binder_proc,
     mut desc: uint32_t,
@@ -15523,6 +11785,7 @@ unsafe extern "C" fn binder_dec_ref_for_handle(
         rdata,
     );
 }
+
 unsafe extern "C" fn binder_inc_ref_for_node(
     mut proc: *mut binder_proc,
     mut node: *mut binder_node,
@@ -15610,6 +11873,7 @@ unsafe extern "C" fn binder_inc_ref_for_node(
     }
     return ret;
 }
+
 unsafe extern "C" fn binder_pop_transaction_ilocked(
     mut target_thread: *mut binder_thread,
     mut t: *mut binder_transaction,
@@ -15651,6 +11915,7 @@ unsafe extern "C" fn binder_pop_transaction_ilocked(
     (*target_thread).transaction_stack = (*(*target_thread).transaction_stack).from_parent;
     (*t).from = ::core::ptr::null_mut::<binder_thread>();
 }
+
 unsafe extern "C" fn binder_thread_dec_tmpref(mut thread: *mut binder_thread) {
     _binder_inner_proc_lock((*thread).proc, 1739 as ::core::ffi::c_int);
     atomic_dec(&raw mut (*thread).tmp_ref);
@@ -15662,6 +11927,7 @@ unsafe extern "C" fn binder_thread_dec_tmpref(mut thread: *mut binder_thread) {
     }
     _binder_inner_proc_unlock((*thread).proc, 1746 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_proc_dec_tmpref(mut proc: *mut binder_proc) {
     _binder_inner_proc_lock(proc, 1763 as ::core::ffi::c_int);
     (*proc).tmp_ref -= 1;
@@ -15697,6 +11963,7 @@ unsafe extern "C" fn binder_proc_dec_tmpref(mut proc: *mut binder_proc) {
     }
     _binder_inner_proc_unlock(proc, 1771 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn binder_get_txn_from(mut t: *mut binder_transaction) -> *mut binder_thread {
     let mut from: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
     let mut __UNIQUE_ID_guard860: class_spinlock_t = class_spinlock_constructor(&raw mut (*t).lock);
@@ -15706,6 +11973,7 @@ unsafe extern "C" fn binder_get_txn_from(mut t: *mut binder_transaction) -> *mut
     }
     return from;
 }
+
 unsafe extern "C" fn binder_get_txn_from_and_acq_inner(
     mut t: *mut binder_transaction,
 ) -> *mut binder_thread {
@@ -15729,6 +11997,7 @@ unsafe extern "C" fn binder_get_txn_from_and_acq_inner(
     binder_thread_dec_tmpref(from);
     return ::core::ptr::null_mut::<binder_thread>();
 }
+
 unsafe extern "C" fn binder_free_txn_fixups(mut t: *mut binder_transaction) {
     let mut fixup: *mut binder_txn_fd_fixup = ::core::ptr::null_mut::<binder_txn_fd_fixup>();
     let mut tmp: *mut binder_txn_fd_fixup = ::core::ptr::null_mut::<binder_txn_fd_fixup>();
@@ -15756,6 +12025,7 @@ unsafe extern "C" fn binder_free_txn_fixups(mut t: *mut binder_transaction) {
         }) as *mut binder_txn_fd_fixup;
     }
 }
+
 unsafe extern "C" fn binder_txn_latency_free(mut t: *mut binder_transaction) {
     let mut from_proc: ::core::ffi::c_int = 0;
     let mut from_thread: ::core::ffi::c_int = 0;
@@ -15784,6 +12054,7 @@ unsafe extern "C" fn binder_txn_latency_free(mut t: *mut binder_transaction) {
     };
     spin_unlock(&raw mut (*t).lock);
 }
+
 unsafe extern "C" fn binder_free_transaction(mut t: *mut binder_transaction) {
     let mut target_proc: *mut binder_proc = (*t).to_proc;
     trace_android_vh_free_oem_binder_struct(t);
@@ -15822,6 +12093,7 @@ unsafe extern "C" fn binder_free_transaction(mut t: *mut binder_transaction) {
     kfree(t as *const ::core::ffi::c_void);
     binder_stats_deleted(BINDER_STAT_TRANSACTION);
 }
+
 unsafe extern "C" fn binder_send_failed_reply(
     mut t: *mut binder_transaction,
     mut error_code: uint32_t,
@@ -15901,6 +12173,7 @@ unsafe extern "C" fn binder_send_failed_reply(
         );
     }
 }
+
 unsafe extern "C" fn binder_cleanup_transaction(
     mut t: *mut binder_transaction,
     mut reason: *const ::core::ffi::c_char,
@@ -15920,6 +12193,7 @@ unsafe extern "C" fn binder_cleanup_transaction(
         binder_free_transaction(t);
     };
 }
+
 unsafe extern "C" fn binder_get_object(
     mut proc: *mut binder_proc,
     mut u: *const ::core::ffi::c_void,
@@ -15990,6 +12264,7 @@ unsafe extern "C" fn binder_get_object(
         return 0 as size_t;
     };
 }
+
 unsafe extern "C" fn binder_validate_ptr(
     mut proc: *mut binder_proc,
     mut b: *mut binder_buffer,
@@ -16035,6 +12310,7 @@ unsafe extern "C" fn binder_validate_ptr(
     }
     return &raw mut (*object).c2rust_unnamed.bbo;
 }
+
 unsafe extern "C" fn binder_validate_fixup(
     mut proc: *mut binder_proc,
     mut b: *mut binder_buffer,
@@ -16092,6 +12368,7 @@ unsafe extern "C" fn binder_validate_fixup(
     }
     return fixup_offset >= last_min_offset;
 }
+
 unsafe extern "C" fn binder_do_fd_close(mut twork: *mut callback_head) {
     let mut twcb: *mut binder_task_work_cb = ({
         let mut __mptr: *mut ::core::ffi::c_void = twork as *mut ::core::ffi::c_void;
@@ -16100,6 +12377,7 @@ unsafe extern "C" fn binder_do_fd_close(mut twork: *mut callback_head) {
     fput((*twcb).file);
     kfree(twcb as *const ::core::ffi::c_void);
 }
+
 unsafe extern "C" fn binder_deferred_fd_close(mut fd: ::core::ffi::c_int) {
     let mut twcb: *mut binder_task_work_cb = ::core::ptr::null_mut::<binder_task_work_cb>();
     twcb = ({
@@ -16167,6 +12445,7 @@ unsafe extern "C" fn binder_deferred_fd_close(mut fd: ::core::ffi::c_int) {
         kfree(twcb as *const ::core::ffi::c_void);
     };
 }
+
 unsafe extern "C" fn binder_transaction_buffer_release(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -16445,6 +12724,7 @@ unsafe extern "C" fn binder_transaction_buffer_release(
             buffer_offset.wrapping_add(::core::mem::size_of::<binder_size_t>() as binder_size_t);
     }
 }
+
 #[inline]
 unsafe extern "C" fn binder_release_entire_buffer(
     mut proc: *mut binder_proc,
@@ -16460,6 +12740,7 @@ unsafe extern "C" fn binder_release_entire_buffer(
     off_end_offset = off_end_offset.wrapping_add((*buffer).offsets_size as binder_size_t);
     binder_transaction_buffer_release(proc, thread, buffer, off_end_offset, is_failure);
 }
+
 unsafe extern "C" fn binder_translate_binder(
     mut fp: *mut flat_binder_object,
     mut t: *mut binder_transaction,
@@ -16527,6 +12808,7 @@ unsafe extern "C" fn binder_translate_binder(
     binder_put_node(node);
     return ret;
 }
+
 unsafe extern "C" fn binder_translate_handle(
     mut fp: *mut flat_binder_object,
     mut t: *mut binder_transaction,
@@ -16634,6 +12916,7 @@ unsafe extern "C" fn binder_translate_handle(
     binder_put_node(node);
     return ret;
 }
+
 unsafe extern "C" fn binder_translate_fd(
     mut fd: u32_0,
     mut fd_offset: binder_size_t,
@@ -16757,6 +13040,7 @@ unsafe extern "C" fn binder_translate_fd(
     }
     return ret;
 }
+
 unsafe extern "C" fn binder_do_deferred_txn_copies(
     mut alloc: *mut binder_alloc,
     mut buffer: *mut binder_buffer,
@@ -16982,6 +13266,7 @@ unsafe extern "C" fn binder_do_deferred_txn_copies(
         ret
     };
 }
+
 unsafe extern "C" fn binder_cleanup_deferred_txn_lists(
     mut sgc_head: *mut list_head,
     mut pf_head: *mut list_head,
@@ -17027,6 +13312,7 @@ unsafe extern "C" fn binder_cleanup_deferred_txn_lists(
         }) as *mut binder_ptr_fixup;
     }
 }
+
 unsafe extern "C" fn binder_defer_copy(
     mut sgc_head: *mut list_head,
     mut offset: binder_size_t,
@@ -17092,6 +13378,7 @@ unsafe extern "C" fn binder_defer_copy(
     list_add_tail(&raw mut (*bc).node, sgc_head);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_add_fixup(
     mut pf_head: *mut list_head,
     mut offset: binder_size_t,
@@ -17173,6 +13460,7 @@ unsafe extern "C" fn binder_add_fixup(
     list_add(&raw mut (*pf).node, pf_head);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_translate_fd_array(
     mut pf_head: *mut list_head,
     mut fda: *mut binder_fd_array_object,
@@ -17278,6 +13566,7 @@ unsafe extern "C" fn binder_translate_fd_array(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_fixup_parent(
     mut pf_head: *mut list_head,
     mut t: *mut binder_transaction,
@@ -17356,6 +13645,7 @@ unsafe extern "C" fn binder_fixup_parent(
         .wrapping_sub((*b).user_data as __u64) as binder_size_t;
     return binder_add_fixup(pf_head, buffer_offset, (*bp).buffer, 0 as size_t);
 }
+
 unsafe extern "C" fn binder_can_update_transaction(
     mut t1: *mut binder_transaction,
     mut t2: *mut binder_transaction,
@@ -17382,6 +13672,7 @@ unsafe extern "C" fn binder_can_update_transaction(
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_find_outdated_transaction_ilocked(
     mut t: *mut binder_transaction,
     mut target_list: *mut list_head,
@@ -17411,6 +13702,7 @@ unsafe extern "C" fn binder_find_outdated_transaction_ilocked(
     }
     return ::core::ptr::null_mut::<binder_transaction>();
 }
+
 unsafe extern "C" fn binder_proc_transaction(
     mut t: *mut binder_transaction,
     mut proc: *mut binder_proc,
@@ -17561,6 +13853,7 @@ unsafe extern "C" fn binder_proc_transaction(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_get_node_refs_for_txn(
     mut node: *mut binder_node,
     mut procp: *mut *mut binder_proc,
@@ -17585,6 +13878,7 @@ unsafe extern "C" fn binder_get_node_refs_for_txn(
     _binder_node_inner_unlock(node, 3188 as ::core::ffi::c_int);
     return target_node;
 }
+
 unsafe extern "C" fn binder_set_txn_from_error(
     mut t: *mut binder_transaction,
     mut id: ::core::ffi::c_int,
@@ -17603,6 +13897,7 @@ unsafe extern "C" fn binder_set_txn_from_error(
     _binder_inner_proc_unlock((*from).proc, 3207 as ::core::ffi::c_int);
     binder_thread_dec_tmpref(from);
 }
+
 unsafe extern "C" fn binder_netlink_report(
     mut proc: *mut binder_proc,
     mut t: *mut binder_transaction,
@@ -17714,6 +14009,7 @@ unsafe extern "C" fn binder_netlink_report(
     }
     nlmsg_free(skb);
 }
+
 unsafe extern "C" fn binder_transaction(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -19585,6 +15881,7 @@ unsafe extern "C" fn binder_transaction(
         binder_enqueue_thread_work(thread, &raw mut (*thread).return_error.work);
     };
 }
+
 unsafe extern "C" fn binder_request_freeze_notification(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -19700,6 +15997,7 @@ unsafe extern "C" fn binder_request_freeze_notification(
     _binder_proc_unlock(proc, 4218 as ::core::ffi::c_int);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_clear_freeze_notification(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -19765,6 +16063,7 @@ unsafe extern "C" fn binder_clear_freeze_notification(
     _binder_proc_unlock(proc, 4277 as ::core::ffi::c_int);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_freeze_notification_done(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -19815,6 +16114,7 @@ unsafe extern "C" fn binder_freeze_notification_done(
     _binder_inner_proc_unlock(proc, 4312 as ::core::ffi::c_int);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_free_buf(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -19874,6 +16174,7 @@ unsafe extern "C" fn binder_free_buf(
     binder_release_entire_buffer(proc, thread, buffer, is_failure);
     binder_alloc_free_buf(&raw mut (*proc).alloc, buffer);
 }
+
 unsafe extern "C" fn binder_thread_write(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -20882,6 +17183,7 @@ unsafe extern "C" fn binder_thread_write(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_stat_br(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -20911,6 +17213,7 @@ unsafe extern "C" fn binder_stat_br(
         );
     }
 }
+
 unsafe extern "C" fn binder_put_node_cmd(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -20981,6 +17284,7 @@ unsafe extern "C" fn binder_put_node_cmd(
     *ptrp = ptr;
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_wait_for_work(
     mut thread: *mut binder_thread,
     mut do_proc_work: bool_0,
@@ -21036,6 +17340,7 @@ unsafe extern "C" fn binder_wait_for_work(
     _binder_inner_proc_unlock(proc, 4926 as ::core::ffi::c_int);
     return ret;
 }
+
 unsafe extern "C" fn binder_apply_fd_fixups(
     mut proc: *mut binder_proc,
     mut t: *mut binder_transaction,
@@ -21113,6 +17418,7 @@ unsafe extern "C" fn binder_apply_fd_fixups(
     binder_free_txn_fixups(t);
     return ret;
 }
+
 unsafe extern "C" fn binder_thread_read(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -21997,6 +18303,7 @@ unsafe extern "C" fn binder_thread_read(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_release_work(mut proc: *mut binder_proc, mut list: *mut list_head) {
     let mut w: *mut binder_work = ::core::ptr::null_mut::<binder_work>();
     let mut wtype: binder_work_type = 0 as binder_work_type;
@@ -22088,6 +18395,7 @@ unsafe extern "C" fn binder_release_work(mut proc: *mut binder_proc, mut list: *
         }
     }
 }
+
 unsafe extern "C" fn binder_get_thread_ilocked(
     mut proc: *mut binder_proc,
     mut new_thread: *mut binder_thread,
@@ -22140,6 +18448,7 @@ unsafe extern "C" fn binder_get_thread_ilocked(
     INIT_LIST_HEAD(&raw mut (*new_thread).waiting_thread_node);
     return thread;
 }
+
 unsafe extern "C" fn binder_get_thread(mut proc: *mut binder_proc) -> *mut binder_thread {
     let mut thread: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
     let mut new_thread: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
@@ -22213,6 +18522,7 @@ unsafe extern "C" fn binder_get_thread(mut proc: *mut binder_proc) -> *mut binde
     }
     return thread;
 }
+
 unsafe extern "C" fn binder_free_proc(mut proc: *mut binder_proc) {
     let mut device: *mut binder_device = ::core::ptr::null_mut::<binder_device>();
     if (list_empty(&raw mut (*proc).todo) == 0) as ::core::ffi::c_int as ::core::ffi::c_long != 0 {
@@ -22259,6 +18569,7 @@ unsafe extern "C" fn binder_free_proc(mut proc: *mut binder_proc) {
     trace_android_vh_binder_free_proc(proc);
     kfree(proc as *const ::core::ffi::c_void);
 }
+
 unsafe extern "C" fn binder_free_thread(mut thread: *mut binder_thread) {
     if (list_empty(&raw mut (*thread).todo) == 0) as ::core::ffi::c_int as ::core::ffi::c_long != 0
     {
@@ -22273,6 +18584,7 @@ unsafe extern "C" fn binder_free_thread(mut thread: *mut binder_thread) {
     put_task_struct((*thread).task);
     kfree(thread as *const ::core::ffi::c_void);
 }
+
 unsafe extern "C" fn binder_thread_release(
     mut proc: *mut binder_proc,
     mut thread: *mut binder_thread,
@@ -22347,6 +18659,7 @@ unsafe extern "C" fn binder_thread_release(
     binder_thread_dec_tmpref(thread);
     return active_transactions;
 }
+
 unsafe extern "C" fn binder_poll(
     mut filp: *mut file,
     mut wait: *mut poll_table_struct,
@@ -22368,6 +18681,7 @@ unsafe extern "C" fn binder_poll(
     }
     return 0 as __poll_t;
 }
+
 unsafe extern "C" fn binder_ioctl_write_read(
     mut filp: *mut file,
     mut arg: ::core::ffi::c_ulong,
@@ -22465,6 +18779,7 @@ unsafe extern "C" fn binder_ioctl_write_read(
     }
     return ret;
 }
+
 unsafe extern "C" fn binder_ioctl_set_ctx_mgr(
     mut filp: *mut file,
     mut fbo: *mut flat_binder_object,
@@ -22522,6 +18837,7 @@ unsafe extern "C" fn binder_ioctl_set_ctx_mgr(
     binder_put_node(new_node);
     return ret;
 }
+
 unsafe extern "C" fn binder_ioctl_get_node_info_for_ref(
     mut proc: *mut binder_proc,
     mut info: *mut binder_node_info_for_ref,
@@ -22564,6 +18880,7 @@ unsafe extern "C" fn binder_ioctl_get_node_info_for_ref(
     binder_put_node(node);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_ioctl_get_node_debug_info(
     mut proc: *mut binder_proc,
     mut info: *mut binder_node_debug_info,
@@ -22611,6 +18928,7 @@ unsafe extern "C" fn binder_ioctl_get_node_debug_info(
     _binder_inner_proc_unlock(proc, 5878 as ::core::ffi::c_int);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_txns_pending_ilocked(mut proc: *mut binder_proc) -> bool_0 {
     let mut n: *mut rb_node = ::core::ptr::null_mut::<rb_node>();
     let mut thread: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
@@ -22630,6 +18948,7 @@ unsafe extern "C" fn binder_txns_pending_ilocked(mut proc: *mut binder_proc) -> 
     }
     return false_0 as ::core::ffi::c_int != 0;
 }
+
 unsafe extern "C" fn binder_add_freeze_work(mut proc: *mut binder_proc, mut is_frozen: bool_0) {
     let mut prev: *mut binder_node = ::core::ptr::null_mut::<binder_node>();
     let mut n: *mut rb_node = ::core::ptr::null_mut::<rb_node>();
@@ -22710,6 +19029,7 @@ unsafe extern "C" fn binder_add_freeze_work(mut proc: *mut binder_proc, mut is_f
         binder_put_node(prev);
     }
 }
+
 unsafe extern "C" fn binder_ioctl_freeze(
     mut info: *mut binder_freeze_info,
     mut target_proc: *mut binder_proc,
@@ -22826,6 +19146,7 @@ unsafe extern "C" fn binder_ioctl_freeze(
     }
     return ret;
 }
+
 unsafe extern "C" fn binder_ioctl_get_freezer_info(
     mut info: *mut binder_frozen_status_info,
 ) -> ::core::ffi::c_int {
@@ -22874,6 +19195,7 @@ unsafe extern "C" fn binder_ioctl_get_freezer_info(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_ioctl_get_extended_error(
     mut thread: *mut binder_thread,
     mut ubuf: *mut ::core::ffi::c_void,
@@ -22899,6 +19221,7 @@ unsafe extern "C" fn binder_ioctl_get_extended_error(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_ioctl(
     mut filp: *mut file,
     mut cmd: ::core::ffi::c_uint,
@@ -23473,6 +19796,7 @@ unsafe extern "C" fn binder_ioctl(
     }
     return ret as isize;
 }
+
 unsafe extern "C" fn binder_vma_open(mut vma: *mut vm_area_struct) {
     let mut proc: *mut binder_proc = (*vma).vm_private_data as *mut binder_proc;
     binder_debug(
@@ -23489,6 +19813,7 @@ unsafe extern "C" fn binder_vma_open(mut vma: *mut vm_area_struct) {
         (*vma).vm_page_prot.pgprot as ::core::ffi::c_ulong,
     );
 }
+
 unsafe extern "C" fn binder_vma_close(mut vma: *mut vm_area_struct) {
     let mut proc: *mut binder_proc = (*vma).vm_private_data as *mut binder_proc;
     binder_debug(
@@ -23506,19 +19831,23 @@ unsafe extern "C" fn binder_vma_close(mut vma: *mut vm_area_struct) {
     );
     binder_alloc_vma_close(&raw mut (*proc).alloc);
 }
+
 #[no_mangle]
 pub unsafe extern "C" fn binder_vm_fault(mut vmf: *mut vm_fault) -> vm_fault_t {
     return VM_FAULT_SIGBUS as ::core::ffi::c_int as vm_fault_t;
 }
+
 #[used]
 #[link_section = ".discard.addressable"]
 static mut __UNIQUE_ID___addressable_binder_vm_fault873: *mut ::core::ffi::c_void =
     ::core::ptr::null_mut::<::core::ffi::c_void>();
+
 #[used]
 #[link_section = ".discard.gendwarfksyms"]
 static mut __gendwarfksyms_ptr_binder_vm_fault: Option<
     unsafe extern "C" fn(*mut vm_fault) -> vm_fault_t,
 > = Some(binder_vm_fault);
+
 static mut binder_vm_ops: vm_operations_struct = vm_operations_struct {
     open: Some(binder_vma_open),
     close: Some(binder_vma_close),
@@ -23538,6 +19867,7 @@ static mut binder_vm_ops: vm_operations_struct = vm_operations_struct {
     __kabi_reserved3: 0,
     __kabi_reserved4: 0,
 };
+
 unsafe extern "C" fn binder_mmap(
     mut filp: *mut file,
     mut vma: *mut vm_area_struct,
@@ -23583,6 +19913,7 @@ unsafe extern "C" fn binder_mmap(
     (*vma).vm_private_data = proc as *mut ::core::ffi::c_void;
     return binder_alloc_mmap_handler(&raw mut (*proc).alloc, vma);
 }
+
 unsafe extern "C" fn binder_open(mut nodp: *mut inode, mut filp: *mut file) -> ::core::ffi::c_int {
     let mut proc: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
     let mut itr: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
@@ -23773,11 +20104,13 @@ unsafe extern "C" fn binder_open(mut nodp: *mut inode, mut filp: *mut file) -> :
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_flush(mut filp: *mut file, mut id: fl_owner_t) -> ::core::ffi::c_int {
     let mut proc: *mut binder_proc = (*filp).private_data as *mut binder_proc;
     binder_defer_work(proc, BINDER_DEFERRED_FLUSH);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_deferred_flush(mut proc: *mut binder_proc) {
     let mut n: *mut rb_node = ::core::ptr::null_mut::<rb_node>();
     let mut wake_count: ::core::ffi::c_int = 0 as ::core::ffi::c_int;
@@ -23808,6 +20141,7 @@ unsafe extern "C" fn binder_deferred_flush(mut proc: *mut binder_proc) {
         wake_count,
     );
 }
+
 unsafe extern "C" fn binder_release(
     mut nodp: *mut inode,
     mut filp: *mut file,
@@ -23821,6 +20155,7 @@ unsafe extern "C" fn binder_release(
     binder_defer_work(proc, BINDER_DEFERRED_RELEASE);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn binder_node_release(
     mut node: *mut binder_node,
     mut refs: ::core::ffi::c_int,
@@ -23914,6 +20249,7 @@ unsafe extern "C" fn binder_node_release(
     binder_put_node(node);
     return refs;
 }
+
 unsafe extern "C" fn binder_deferred_release(mut proc: *mut binder_proc) {
     let mut context: *mut binder_context = (*proc).context;
     let mut n: *mut rb_node = ::core::ptr::null_mut::<rb_node>();
@@ -24025,6 +20361,7 @@ unsafe extern "C" fn binder_deferred_release(mut proc: *mut binder_proc) {
     );
     binder_proc_dec_tmpref(proc);
 }
+
 unsafe extern "C" fn binder_deferred_func(mut work: *mut work_struct) {
     let mut proc: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
     let mut defer: ::core::ffi::c_int = 0;
@@ -24055,6 +20392,7 @@ unsafe extern "C" fn binder_deferred_func(mut work: *mut work_struct) {
         }
     }
 }
+
 static mut binder_deferred_work: work_struct = work_struct {
     data: atomic_long_t { counter: 0 },
     entry: list_head {
@@ -24063,6 +20401,7 @@ static mut binder_deferred_work: work_struct = work_struct {
     },
     func: None,
 };
+
 unsafe extern "C" fn binder_defer_work(
     mut proc: *mut binder_proc,
     mut defer: binder_deferred_state,
@@ -24079,6 +20418,7 @@ unsafe extern "C" fn binder_defer_work(
         schedule_work(&raw mut binder_deferred_work);
     }
 }
+
 unsafe extern "C" fn print_binder_transaction_ilocked(
     mut m: *mut seq_file,
     mut proc: *mut binder_proc,
@@ -24144,6 +20484,7 @@ unsafe extern "C" fn print_binder_transaction_ilocked(
         (*buffer).user_data.wrapping_sub((*proc).alloc.vm_start),
     );
 }
+
 unsafe extern "C" fn print_binder_work_ilocked(
     mut m: *mut seq_file,
     mut proc: *mut binder_proc,
@@ -24251,6 +20592,7 @@ unsafe extern "C" fn print_binder_work_ilocked(
         }
     };
 }
+
 unsafe extern "C" fn print_binder_thread_ilocked(
     mut m: *mut seq_file,
     mut thread: *mut binder_thread,
@@ -24320,6 +20662,7 @@ unsafe extern "C" fn print_binder_thread_ilocked(
         (*m).count = start_pos;
     }
 }
+
 unsafe extern "C" fn print_binder_node_nilocked(
     mut m: *mut seq_file,
     mut node: *mut binder_node,
@@ -24417,6 +20760,7 @@ unsafe extern "C" fn print_binder_node_nilocked(
         }
     }
 }
+
 unsafe extern "C" fn print_binder_ref_olocked(mut m: *mut seq_file, mut ref_0: *mut binder_ref) {
     _binder_node_lock((*ref_0).node, 6855 as ::core::ffi::c_int);
     seq_printf(
@@ -24436,6 +20780,7 @@ unsafe extern "C" fn print_binder_ref_olocked(mut m: *mut seq_file, mut ref_0: *
     );
     _binder_node_unlock((*ref_0).node, 6861 as ::core::ffi::c_int);
 }
+
 unsafe extern "C" fn print_next_binder_node_ilocked(
     mut m: *mut seq_file,
     mut proc: *mut binder_proc,
@@ -24462,6 +20807,7 @@ unsafe extern "C" fn print_next_binder_node_ilocked(
     }
     return node;
 }
+
 unsafe extern "C" fn print_binder_proc(
     mut m: *mut seq_file,
     mut proc: *mut binder_proc,
@@ -24599,6 +20945,7 @@ unsafe extern "C" fn print_binder_proc(
         (*m).count = start_pos;
     }
 }
+
 static mut binder_return_strings: [*const ::core::ffi::c_char; 23] = [
     b"BR_ERROR\0".as_ptr() as *const ::core::ffi::c_char,
     b"BR_OK\0".as_ptr() as *const ::core::ffi::c_char,
@@ -24624,6 +20971,7 @@ static mut binder_return_strings: [*const ::core::ffi::c_char; 23] = [
     b"BR_FROZEN_BINDER\0".as_ptr() as *const ::core::ffi::c_char,
     b"BR_CLEAR_FREEZE_NOTIFICATION_DONE\0".as_ptr() as *const ::core::ffi::c_char,
 ];
+
 static mut binder_command_strings: [*const ::core::ffi::c_char; 22] = [
     b"BC_TRANSACTION\0".as_ptr() as *const ::core::ffi::c_char,
     b"BC_REPLY\0".as_ptr() as *const ::core::ffi::c_char,
@@ -24648,6 +20996,7 @@ static mut binder_command_strings: [*const ::core::ffi::c_char; 22] = [
     b"BC_CLEAR_FREEZE_NOTIFICATION\0".as_ptr() as *const ::core::ffi::c_char,
     b"BC_FREEZE_NOTIFICATION_DONE\0".as_ptr() as *const ::core::ffi::c_char,
 ];
+
 static mut binder_objstat_strings: [*const ::core::ffi::c_char; 8] = [
     b"proc\0".as_ptr() as *const ::core::ffi::c_char,
     b"thread\0".as_ptr() as *const ::core::ffi::c_char,
@@ -24658,6 +21007,7 @@ static mut binder_objstat_strings: [*const ::core::ffi::c_char; 8] = [
     b"transaction_complete\0".as_ptr() as *const ::core::ffi::c_char,
     b"freeze\0".as_ptr() as *const ::core::ffi::c_char,
 ];
+
 unsafe extern "C" fn print_binder_stats(
     mut m: *mut seq_file,
     mut prefix: *const ::core::ffi::c_char,
@@ -24795,6 +21145,7 @@ unsafe extern "C" fn print_binder_stats(
         i += 1;
     }
 }
+
 unsafe extern "C" fn print_binder_proc_stats(mut m: *mut seq_file, mut proc: *mut binder_proc) {
     let mut w: *mut binder_work = ::core::ptr::null_mut::<binder_work>();
     let mut thread: *mut binder_thread = ::core::ptr::null_mut::<binder_thread>();
@@ -24925,6 +21276,7 @@ unsafe extern "C" fn print_binder_proc_stats(mut m: *mut seq_file, mut proc: *mu
         &raw mut (*proc).stats,
     );
 }
+
 unsafe extern "C" fn print_binder_state(mut m: *mut seq_file, mut hash_ptrs: bool_0) {
     let mut proc: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
     let mut node: *mut binder_node = ::core::ptr::null_mut::<binder_node>();
@@ -25001,6 +21353,7 @@ unsafe extern "C" fn print_binder_state(mut m: *mut seq_file, mut hash_ptrs: boo
     }
     mutex_unlock(&raw mut binder_procs_lock);
 }
+
 unsafe extern "C" fn print_binder_transactions(mut m: *mut seq_file, mut hash_ptrs: bool_0) {
     let mut proc: *mut binder_proc = ::core::ptr::null_mut::<binder_proc>();
     seq_puts(
@@ -25035,6 +21388,7 @@ unsafe extern "C" fn print_binder_transactions(mut m: *mut seq_file, mut hash_pt
     }
     mutex_unlock(&raw mut binder_procs_lock);
 }
+
 unsafe extern "C" fn state_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25042,6 +21396,7 @@ unsafe extern "C" fn state_show(
     print_binder_state(m, false_0 as ::core::ffi::c_int != 0);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn state_hashed_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25049,6 +21404,7 @@ unsafe extern "C" fn state_hashed_show(
     print_binder_state(m, true_0 as ::core::ffi::c_int != 0);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn stats_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25092,6 +21448,7 @@ unsafe extern "C" fn stats_show(
     mutex_unlock(&raw mut binder_procs_lock);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn transactions_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25099,6 +21456,7 @@ unsafe extern "C" fn transactions_show(
     print_binder_transactions(m, false_0 as ::core::ffi::c_int != 0);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn transactions_hashed_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25106,6 +21464,7 @@ unsafe extern "C" fn transactions_hashed_show(
     print_binder_transactions(m, true_0 as ::core::ffi::c_int != 0);
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn proc_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25152,6 +21511,7 @@ unsafe extern "C" fn proc_show(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 unsafe extern "C" fn print_binder_transaction_log_entry(
     mut m: *mut seq_file,
     mut e: *mut binder_transaction_log_entry,
@@ -25238,6 +21598,7 @@ unsafe extern "C" fn print_binder_transaction_log_entry(
         },
     );
 }
+
 unsafe extern "C" fn transaction_log_show(
     mut m: *mut seq_file,
     mut unused: *mut ::core::ffi::c_void,
@@ -25300,6 +21661,7 @@ unsafe extern "C" fn transaction_log_show(
     }
     return 0 as ::core::ffi::c_int;
 }
+
 #[no_mangle]
 pub static mut binder_fops: file_operations = file_operations {
     owner: THIS_MODULE,
@@ -25337,6 +21699,7 @@ pub static mut binder_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn state_open(mut inode: *mut inode, mut file: *mut file) -> ::core::ffi::c_int {
     return single_open(
         file,
@@ -25344,6 +21707,7 @@ unsafe extern "C" fn state_open(mut inode: *mut inode, mut file: *mut file) -> :
         (*inode).i_private,
     );
 }
+
 static mut state_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25380,6 +21744,7 @@ static mut state_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn state_hashed_open(
     mut inode: *mut inode,
     mut file: *mut file,
@@ -25390,6 +21755,7 @@ unsafe extern "C" fn state_hashed_open(
         (*inode).i_private,
     );
 }
+
 static mut state_hashed_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25426,6 +21792,7 @@ static mut state_hashed_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn stats_open(mut inode: *mut inode, mut file: *mut file) -> ::core::ffi::c_int {
     return single_open(
         file,
@@ -25433,6 +21800,7 @@ unsafe extern "C" fn stats_open(mut inode: *mut inode, mut file: *mut file) -> :
         (*inode).i_private,
     );
 }
+
 static mut stats_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25469,6 +21837,7 @@ static mut stats_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn transactions_open(
     mut inode: *mut inode,
     mut file: *mut file,
@@ -25479,6 +21848,7 @@ unsafe extern "C" fn transactions_open(
         (*inode).i_private,
     );
 }
+
 static mut transactions_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25515,6 +21885,7 @@ static mut transactions_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 static mut transactions_hashed_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25551,6 +21922,7 @@ static mut transactions_hashed_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn transactions_hashed_open(
     mut inode: *mut inode,
     mut file: *mut file,
@@ -25561,6 +21933,7 @@ unsafe extern "C" fn transactions_hashed_open(
         (*inode).i_private,
     );
 }
+
 static mut transaction_log_fops: file_operations = file_operations {
     owner: THIS_MODULE,
     fop_flags: 0,
@@ -25597,6 +21970,7 @@ static mut transaction_log_fops: file_operations = file_operations {
     uring_cmd_iopoll: None,
     mmap_prepare: None,
 };
+
 unsafe extern "C" fn transaction_log_open(
     mut inode: *mut inode,
     mut file: *mut file,
@@ -25607,6 +21981,7 @@ unsafe extern "C" fn transaction_log_open(
         (*inode).i_private,
     );
 }
+
 #[no_mangle]
 pub static mut binder_debugfs_entries: [binder_debugfs_entry; 8] = unsafe {
     [
@@ -25662,18 +22037,21 @@ pub static mut binder_debugfs_entries: [binder_debugfs_entry; 8] = unsafe {
         },
     ]
 };
+
 #[no_mangle]
 pub unsafe extern "C" fn binder_add_device(mut device: *mut binder_device) {
     let mut __UNIQUE_ID_guard882: class_spinlock_t =
         class_spinlock_constructor(&raw mut binder_devices_lock);
     hlist_add_head(&raw mut (*device).hlist, &raw mut binder_devices);
 }
+
 #[no_mangle]
 pub unsafe extern "C" fn binder_remove_device(mut device: *mut binder_device) {
     let mut __UNIQUE_ID_guard883: class_spinlock_t =
         class_spinlock_constructor(&raw mut binder_devices_lock);
     hlist_del_init(&raw mut (*device).hlist);
 }
+
 #[cold]
 unsafe extern "C" fn init_binder_device(
     mut name: *const ::core::ffi::c_char,
@@ -25752,6 +22130,7 @@ unsafe extern "C" fn init_binder_device(
     binder_add_device(binder_device);
     return ret;
 }
+
 ::core::arch::global_asm!(
     r#".section ".initcall6.init", "a"
     __binder_initcall:
@@ -25759,6 +22138,7 @@ unsafe extern "C" fn init_binder_device(
     .previous
     "#
 );
+
 #[cold]
 #[no_mangle]
 #[link_section = ".init.text"]
@@ -25895,6 +22275,7 @@ unsafe extern "C" fn binder_init() -> ::core::ffi::c_int {
     binder_alloc_shrinker_exit();
     return ret;
 }
+
 #[no_mangle]
 pub unsafe extern "C" fn binder_unload_builtin() {
     genl_unregister_family(&raw mut binder_nl_family);
@@ -25902,42 +22283,53 @@ pub unsafe extern "C" fn binder_unload_builtin() {
     debugfs_remove(binder_debugfs_dir_entry_root);
     binder_alloc_shrinker_exit();
 }
+
 #[used]
 #[link_section = ".discard.addressable"]
 static mut __UNIQUE_ID___addressable_binder_init885: *mut ::core::ffi::c_void =
     ::core::ptr::null_mut::<::core::ffi::c_void>();
+
 pub const NLMSG_ALIGNTO: ::core::ffi::c_uint = 4 as ::core::ffi::c_uint;
+
 pub const NLMSG_HDRLEN: ::core::ffi::c_int = ((::core::mem::size_of::<nlmsghdr>() as usize)
     .wrapping_add(NLMSG_ALIGNTO as usize)
     .wrapping_sub(1 as usize)
     & !NLMSG_ALIGNTO.wrapping_sub(1 as ::core::ffi::c_uint) as usize)
     as ::core::ffi::c_int;
+
 #[inline]
 unsafe extern "C" fn kfree_skb_reason(mut skb: *mut sk_buff, mut reason: skb_drop_reason) {
     sk_skb_reason_drop(::core::ptr::null_mut::<sock>(), skb, reason);
 }
+
 #[inline]
 unsafe extern "C" fn kfree_skb(mut skb: *mut sk_buff) {
     kfree_skb_reason(skb, SKB_DROP_REASON_NOT_SPECIFIED);
 }
+
 #[inline]
 unsafe extern "C" fn alloc_skb(mut size: ::core::ffi::c_uint, mut priority: gfp_t) -> *mut sk_buff {
     return __alloc_skb(size, priority, 0 as ::core::ffi::c_int, NUMA_NO_NODE);
 }
+
 #[inline]
 unsafe extern "C" fn skb_tail_pointer(mut skb: *const sk_buff) -> *mut ::core::ffi::c_uchar {
     return (*skb).head.offset((*skb).tail as isize);
 }
+
 pub const NLMSG_GOODSIZE: usize = ((1 as usize) << 12 as ::core::ffi::c_int).wrapping_sub(
     (::core::mem::size_of::<skb_shared_info>() as usize).wrapping_add(
         (((1 as ::core::ffi::c_int) << 6 as ::core::ffi::c_int) as usize).wrapping_sub(1 as usize),
     ) & !(((1 as ::core::ffi::c_int) << 6 as ::core::ffi::c_int) as usize).wrapping_sub(1 as usize),
 );
+
 pub const NLMSG_DEFAULT_SIZE: usize = NLMSG_GOODSIZE.wrapping_sub(NLMSG_HDRLEN as usize);
+
 #[inline]
 unsafe extern "C" fn nlmsg_msg_size(mut payload: ::core::ffi::c_int) -> ::core::ffi::c_int {
     return NLMSG_HDRLEN + payload;
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_total_size(mut payload: ::core::ffi::c_int) -> ::core::ffi::c_int {
     return ((nlmsg_msg_size(payload) as ::core::ffi::c_uint)
@@ -25945,6 +22337,7 @@ unsafe extern "C" fn nlmsg_total_size(mut payload: ::core::ffi::c_int) -> ::core
         .wrapping_sub(1 as ::core::ffi::c_uint)
         & !NLMSG_ALIGNTO.wrapping_sub(1 as ::core::ffi::c_uint)) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_new(mut payload: size_t, mut flags: gfp_t) -> *mut sk_buff {
     return alloc_skb(
@@ -25952,11 +22345,13 @@ unsafe extern "C" fn nlmsg_new(mut payload: size_t, mut flags: gfp_t) -> *mut sk
         flags,
     );
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_end(mut skb: *mut sk_buff, mut nlh: *mut nlmsghdr) {
     (*nlh).nlmsg_len = skb_tail_pointer(skb).offset_from(nlh as *mut ::core::ffi::c_uchar)
         as ::core::ffi::c_long as __u32;
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_trim(mut skb: *mut sk_buff, mut mark: *const ::core::ffi::c_void) {
     if !mark.is_null() {
@@ -25977,14 +22372,17 @@ unsafe extern "C" fn nlmsg_trim(mut skb: *mut sk_buff, mut mark: *const ::core::
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_cancel(mut skb: *mut sk_buff, mut nlh: *mut nlmsghdr) {
     nlmsg_trim(skb, nlh as *const ::core::ffi::c_void);
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_free(mut skb: *mut sk_buff) {
     kfree_skb(skb);
 }
+
 #[inline]
 unsafe extern "C" fn nlmsg_multicast_filtered(
     mut sk: *mut sock,
@@ -26011,6 +22409,7 @@ unsafe extern "C" fn nlmsg_multicast_filtered(
     }
     return err;
 }
+
 #[inline]
 unsafe extern "C" fn nla_put_u32(
     mut skb: *mut sk_buff,
@@ -26025,6 +22424,7 @@ unsafe extern "C" fn nla_put_u32(
         &raw mut tmp as *const ::core::ffi::c_void,
     );
 }
+
 #[inline]
 unsafe extern "C" fn nla_put_string(
     mut skb: *mut sk_buff,
@@ -26038,6 +22438,7 @@ unsafe extern "C" fn nla_put_string(
         str as *const ::core::ffi::c_void,
     );
 }
+
 #[inline]
 unsafe extern "C" fn nla_put_flag(
     mut skb: *mut sk_buff,
@@ -26050,12 +22451,15 @@ unsafe extern "C" fn nla_put_flag(
         ::core::ptr::null::<::core::ffi::c_void>(),
     );
 }
+
 pub const GENL_HDRLEN: ::core::ffi::c_ulong = (::core::mem::size_of::<genlmsghdr>()
     as ::core::ffi::c_ulong)
     .wrapping_add(NLMSG_ALIGNTO as ::core::ffi::c_ulong)
     .wrapping_sub(1 as ::core::ffi::c_ulong)
     & !NLMSG_ALIGNTO.wrapping_sub(1 as ::core::ffi::c_uint) as ::core::ffi::c_ulong;
+
 pub const GENLMSG_DEFAULT_SIZE: usize = NLMSG_DEFAULT_SIZE.wrapping_sub(GENL_HDRLEN as usize);
+
 #[inline]
 unsafe extern "C" fn genlmsg_end(mut skb: *mut sk_buff, mut hdr: *mut ::core::ffi::c_void) {
     nlmsg_end(
@@ -26064,6 +22468,7 @@ unsafe extern "C" fn genlmsg_end(mut skb: *mut sk_buff, mut hdr: *mut ::core::ff
             .offset(-(NLMSG_HDRLEN as isize)) as *mut nlmsghdr,
     );
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_cancel(mut skb: *mut sk_buff, mut hdr: *mut ::core::ffi::c_void) {
     if !hdr.is_null() {
@@ -26074,6 +22479,7 @@ unsafe extern "C" fn genlmsg_cancel(mut skb: *mut sk_buff, mut hdr: *mut ::core:
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_multicast_netns_filtered(
     mut family: *const genl_family,
@@ -26110,6 +22516,7 @@ unsafe extern "C" fn genlmsg_multicast_netns_filtered(
         filter_data,
     );
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_multicast_netns(
     mut family: *const genl_family,
@@ -26121,6 +22528,7 @@ unsafe extern "C" fn genlmsg_multicast_netns(
 ) -> ::core::ffi::c_int {
     return genlmsg_multicast_netns_filtered(family, net, skb, portid, group, flags, None, NULL);
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_multicast(
     mut family: *const genl_family,
@@ -26131,10 +22539,12 @@ unsafe extern "C" fn genlmsg_multicast(
 ) -> ::core::ffi::c_int {
     return genlmsg_multicast_netns(family, &raw mut init_net, skb, portid, group, flags);
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_msg_size(mut payload: ::core::ffi::c_int) -> ::core::ffi::c_int {
     return (GENL_HDRLEN as usize).wrapping_add(payload as usize) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_total_size(mut payload: ::core::ffi::c_int) -> ::core::ffi::c_int {
     return ((genlmsg_msg_size(payload) as ::core::ffi::c_uint)
@@ -26142,6 +22552,7 @@ unsafe extern "C" fn genlmsg_total_size(mut payload: ::core::ffi::c_int) -> ::co
         .wrapping_sub(1 as ::core::ffi::c_uint)
         & !NLMSG_ALIGNTO.wrapping_sub(1 as ::core::ffi::c_uint)) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn genlmsg_new(mut payload: size_t, mut flags: gfp_t) -> *mut sk_buff {
     return nlmsg_new(
@@ -26149,6 +22560,7 @@ unsafe extern "C" fn genlmsg_new(mut payload: size_t, mut flags: gfp_t) -> *mut 
         flags,
     );
 }
+
 #[inline]
 unsafe extern "C" fn genl_has_listeners(
     mut family: *const genl_family,
@@ -26172,24 +22584,29 @@ unsafe extern "C" fn genl_has_listeners(
     group = (*family).mcgrp_offset.wrapping_add(group);
     return netlink_has_listeners(binder_rust_get_genl_sock(net), group);
 }
+
 #[inline]
 unsafe extern "C" fn binder_alloc_get_free_async_space(mut alloc: *mut binder_alloc) -> size_t {
     let mut __UNIQUE_ID_guard822: class_mutex_t =
         class_mutex_constructor(&raw mut (*alloc).mutex);
     return (*alloc).free_async_space;
 }
+
 pub const NBITS_MIN: usize =
     (::core::mem::size_of::<::core::ffi::c_ulong>() as usize).wrapping_mul(BITS_PER_BYTE as usize);
+
 #[inline]
 unsafe extern "C" fn dbitmap_enabled(mut dmap: *mut dbitmap) -> ::core::ffi::c_int {
     return ((*dmap).nbits != 0) as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_free(mut dmap: *mut dbitmap) {
     (*dmap).nbits = 0 as ::core::ffi::c_uint;
     kfree((*dmap).map as *const ::core::ffi::c_void);
     (*dmap).map = ::core::ptr::null_mut::<::core::ffi::c_ulong>();
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_shrink_nbits(mut dmap: *mut dbitmap) -> ::core::ffi::c_uint {
     let mut bit: ::core::ffi::c_uint = 0;
@@ -26205,6 +22622,7 @@ unsafe extern "C" fn dbitmap_shrink_nbits(mut dmap: *mut dbitmap) -> ::core::ffi
     }
     return 0 as ::core::ffi::c_uint;
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_replace(
     mut dmap: *mut dbitmap,
@@ -26262,6 +22680,7 @@ unsafe extern "C" fn dbitmap_replace(
     (*dmap).map = new;
     (*dmap).nbits = nbits;
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_shrink(
     mut dmap: *mut dbitmap,
@@ -26277,10 +22696,12 @@ unsafe extern "C" fn dbitmap_shrink(
     }
     dbitmap_replace(dmap, new, nbits);
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_grow_nbits(mut dmap: *mut dbitmap) -> ::core::ffi::c_uint {
     return (*dmap).nbits << 1 as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_grow(
     mut dmap: *mut dbitmap,
@@ -26297,6 +22718,7 @@ unsafe extern "C" fn dbitmap_grow(
     }
     dbitmap_replace(dmap, new, nbits);
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_acquire_next_zero_bit(
     mut dmap: *mut dbitmap,
@@ -26315,6 +22737,7 @@ unsafe extern "C" fn dbitmap_acquire_next_zero_bit(
     );
     return 0 as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_clear_bit(mut dmap: *mut dbitmap, mut bit: ::core::ffi::c_ulong) {
     clear_bit(
@@ -26322,6 +22745,7 @@ unsafe extern "C" fn dbitmap_clear_bit(mut dmap: *mut dbitmap, mut bit: ::core::
         (*dmap).map as *mut ::core::ffi::c_ulong,
     );
 }
+
 #[inline]
 unsafe extern "C" fn dbitmap_init(mut dmap: *mut dbitmap) -> ::core::ffi::c_int {
     (*dmap).map = bitmap_zalloc(
@@ -26339,6 +22763,7 @@ unsafe extern "C" fn dbitmap_init(mut dmap: *mut dbitmap) -> ::core::ffi::c_int 
     (*dmap).nbits = NBITS_MIN as ::core::ffi::c_uint;
     return 0 as ::core::ffi::c_int;
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_transaction_init(mut t: *mut binder_transaction) {
     if ({
@@ -26389,6 +22814,7 @@ unsafe extern "C" fn trace_android_vh_binder_transaction_init(mut t: *mut binder
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_transaction_init(mut t: *mut binder_transaction) {
     if cpu_online((*(get_current() as *mut thread_info)).cpu as ::core::ffi::c_uint) {
@@ -26396,6 +22822,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_transaction_init(mut t: *mut b
         __traceiter_android_vh_binder_transaction_init(NULL, t);
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_set_priority(
     mut t: *mut binder_transaction,
@@ -26406,6 +22833,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_set_priority(
         __traceiter_android_vh_binder_set_priority(NULL, t, task);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_set_priority(
     mut t: *mut binder_transaction,
@@ -26459,6 +22887,7 @@ unsafe extern "C" fn trace_android_vh_binder_set_priority(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_restore_priority(mut t: *mut binder_transaction) {
     if ({
@@ -26509,6 +22938,7 @@ unsafe extern "C" fn trace_android_vh_binder_restore_priority(mut t: *mut binder
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_restore_priority(mut t: *mut binder_transaction) {
     if cpu_online((*(get_current() as *mut thread_info)).cpu as ::core::ffi::c_uint) {
@@ -26516,6 +22946,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_restore_priority(mut t: *mut b
         __traceiter_android_vh_binder_restore_priority(NULL, t);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_wait_for_work(
     mut do_proc_work: bool_0,
@@ -26570,6 +23001,7 @@ unsafe extern "C" fn trace_android_vh_binder_wait_for_work(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_wait_for_work(
     mut do_proc_work: bool_0,
@@ -26581,6 +23013,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_wait_for_work(
         __traceiter_android_vh_binder_wait_for_work(NULL, do_proc_work, tsk, proc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_sync_txn_recvd(
     mut tsk: *mut task_struct,
@@ -26634,6 +23067,7 @@ unsafe extern "C" fn trace_android_vh_sync_txn_recvd(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_sync_txn_recvd(
     mut tsk: *mut task_struct,
@@ -26644,6 +23078,7 @@ unsafe extern "C" fn __do_trace_android_vh_sync_txn_recvd(
         __traceiter_android_vh_sync_txn_recvd(NULL, tsk, from);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_proc_transaction_finish(
     mut proc: *mut binder_proc,
@@ -26708,6 +23143,7 @@ unsafe extern "C" fn trace_android_vh_binder_proc_transaction_finish(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_proc_transaction_finish(
     mut proc: *mut binder_proc,
@@ -26728,6 +23164,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_proc_transaction_finish(
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_select_special_worklist(
     mut list: *mut *mut list_head,
@@ -26792,6 +23229,7 @@ unsafe extern "C" fn trace_android_vh_binder_select_special_worklist(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_select_special_worklist(
     mut list: *mut *mut list_head,
@@ -26812,6 +23250,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_select_special_worklist(
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_alloc_oem_binder_struct(
     mut tr: *mut binder_transaction_data,
@@ -26866,6 +23305,7 @@ unsafe extern "C" fn trace_android_vh_alloc_oem_binder_struct(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_alloc_oem_binder_struct(
     mut tr: *mut binder_transaction_data,
@@ -26877,6 +23317,7 @@ unsafe extern "C" fn __do_trace_android_vh_alloc_oem_binder_struct(
         __traceiter_android_vh_alloc_oem_binder_struct(NULL, tr, t, proc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_transaction_received(
     mut t: *mut binder_transaction,
@@ -26932,6 +23373,7 @@ unsafe extern "C" fn trace_android_vh_binder_transaction_received(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_transaction_received(
     mut t: *mut binder_transaction,
@@ -26944,6 +23386,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_transaction_received(
         __traceiter_android_vh_binder_transaction_received(NULL, t, proc, thread, cmd);
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_free_oem_binder_struct(mut t: *mut binder_transaction) {
     if cpu_online((*(get_current() as *mut thread_info)).cpu as ::core::ffi::c_uint) {
@@ -26951,6 +23394,7 @@ unsafe extern "C" fn __do_trace_android_vh_free_oem_binder_struct(mut t: *mut bi
         __traceiter_android_vh_free_oem_binder_struct(NULL, t);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_free_oem_binder_struct(mut t: *mut binder_transaction) {
     if ({
@@ -27001,6 +23445,7 @@ unsafe extern "C" fn trace_android_vh_free_oem_binder_struct(mut t: *mut binder_
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_special_task(
     mut t: *mut binder_transaction,
@@ -27059,6 +23504,7 @@ unsafe extern "C" fn trace_android_vh_binder_special_task(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_special_task(
     mut t: *mut binder_transaction,
@@ -27083,6 +23529,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_special_task(
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_buffer_release(
     mut proc: *mut binder_proc,
@@ -27095,6 +23542,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_buffer_release(
         __traceiter_android_vh_binder_buffer_release(NULL, proc, thread, buffer, has_transaction);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_buffer_release(
     mut proc: *mut binder_proc,
@@ -27150,6 +23598,7 @@ unsafe extern "C" fn trace_android_vh_binder_buffer_release(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_ioctl_end(
     mut caller_task: *mut task_struct,
@@ -27207,6 +23656,7 @@ unsafe extern "C" fn trace_android_vh_binder_ioctl_end(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_ioctl_end(
     mut caller_task: *mut task_struct,
@@ -27221,6 +23671,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_ioctl_end(
         __traceiter_android_vh_binder_ioctl_end(NULL, caller_task, cmd, arg, thread, proc, ret);
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_looper_exited(
     mut thread: *mut binder_thread,
@@ -27231,6 +23682,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_looper_exited(
         __traceiter_android_vh_binder_looper_exited(NULL, thread, proc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_looper_exited(
     mut thread: *mut binder_thread,
@@ -27284,6 +23736,7 @@ unsafe extern "C" fn trace_android_vh_binder_looper_exited(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_spawn_new_thread(
     mut thread: *mut binder_thread,
@@ -27295,6 +23748,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_spawn_new_thread(
         __traceiter_android_vh_binder_spawn_new_thread(NULL, thread, proc, force_spawn);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_spawn_new_thread(
     mut thread: *mut binder_thread,
@@ -27349,6 +23803,7 @@ unsafe extern "C" fn trace_android_vh_binder_spawn_new_thread(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_has_special_work_ilocked(
     mut thread: *mut binder_thread,
@@ -27365,6 +23820,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_has_special_work_ilocked(
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_has_special_work_ilocked(
     mut thread: *mut binder_thread,
@@ -27421,6 +23877,7 @@ unsafe extern "C" fn trace_android_vh_binder_has_special_work_ilocked(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_list_add_work(
     mut work: *mut binder_work,
@@ -27431,6 +23888,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_list_add_work(
         __traceiter_android_vh_binder_list_add_work(NULL, work, target_list);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_list_add_work(
     mut work: *mut binder_work,
@@ -27484,6 +23942,7 @@ unsafe extern "C" fn trace_android_vh_binder_list_add_work(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_has_proc_work_ilocked(
     mut thread: *mut binder_thread,
@@ -27538,6 +23997,7 @@ unsafe extern "C" fn trace_android_vh_binder_has_proc_work_ilocked(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_has_proc_work_ilocked(
     mut thread: *mut binder_thread,
@@ -27549,6 +24009,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_has_proc_work_ilocked(
         __traceiter_android_vh_binder_has_proc_work_ilocked(NULL, thread, do_proc_work, has_work);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_check_special_work(
     mut proc: *mut binder_proc,
@@ -27602,6 +24063,7 @@ unsafe extern "C" fn trace_android_vh_binder_check_special_work(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_check_special_work(
     mut proc: *mut binder_proc,
@@ -27612,6 +24074,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_check_special_work(
         __traceiter_android_vh_binder_check_special_work(NULL, proc, special_list);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_free_proc(mut proc: *mut binder_proc) {
     if ({
@@ -27662,6 +24125,7 @@ unsafe extern "C" fn trace_android_vh_binder_free_proc(mut proc: *mut binder_pro
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_free_proc(mut proc: *mut binder_proc) {
     if cpu_online((*(get_current() as *mut thread_info)).cpu as ::core::ffi::c_uint) {
@@ -27669,6 +24133,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_free_proc(mut proc: *mut binde
         __traceiter_android_vh_binder_free_proc(NULL, proc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_preset(
     mut hhead: *mut hlist_head,
@@ -27723,6 +24188,7 @@ unsafe extern "C" fn trace_android_vh_binder_preset(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_preset(
     mut hhead: *mut hlist_head,
@@ -27734,6 +24200,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_preset(
         __traceiter_android_vh_binder_preset(NULL, hhead, lock, proc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_reply(
     mut target_proc: *mut binder_proc,
@@ -27789,6 +24256,7 @@ unsafe extern "C" fn trace_android_vh_binder_reply(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_reply(
     mut target_proc: *mut binder_proc,
@@ -27801,6 +24269,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_reply(
         __traceiter_android_vh_binder_reply(NULL, target_proc, proc, thread, tr);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_trans(
     mut target_proc: *mut binder_proc,
@@ -27856,6 +24325,7 @@ unsafe extern "C" fn trace_android_vh_binder_trans(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_trans(
     mut target_proc: *mut binder_proc,
@@ -27868,6 +24338,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_trans(
         __traceiter_android_vh_binder_trans(NULL, target_proc, proc, thread, tr);
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_proc_transaction(
     mut caller_task: *mut task_struct,
@@ -27890,6 +24361,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_proc_transaction(
         );
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_proc_transaction(
     mut caller_task: *mut task_struct,
@@ -27954,6 +24426,7 @@ unsafe extern "C" fn trace_android_vh_binder_proc_transaction(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_thread_read(
     mut list: *mut *mut list_head,
@@ -27965,6 +24438,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_thread_read(
         __traceiter_android_vh_binder_thread_read(NULL, list, proc, thread);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_thread_read(
     mut list: *mut *mut list_head,
@@ -28019,6 +24493,7 @@ unsafe extern "C" fn trace_android_vh_binder_thread_read(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_new_ref(
     mut proc: *mut binder_proc,
@@ -28030,6 +24505,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_new_ref(
         __traceiter_android_vh_binder_new_ref(NULL, proc, ref_desc, node_debug_id);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_new_ref(
     mut proc: *mut binder_proc,
@@ -28084,6 +24560,7 @@ unsafe extern "C" fn trace_android_vh_binder_new_ref(
         });
     }
 }
+
 #[inline]
 unsafe extern "C" fn __do_trace_android_vh_binder_del_ref(
     mut proc: *mut binder_proc,
@@ -28094,6 +24571,7 @@ unsafe extern "C" fn __do_trace_android_vh_binder_del_ref(
         __traceiter_android_vh_binder_del_ref(NULL, proc, ref_desc);
     }
 }
+
 #[inline]
 unsafe extern "C" fn trace_android_vh_binder_del_ref(
     mut proc: *mut binder_proc,
@@ -28147,14 +24625,19 @@ unsafe extern "C" fn trace_android_vh_binder_del_ref(
         });
     }
 }
+
 pub const CONFIG_ANDROID_BINDER_DEVICES: [::core::ffi::c_char; 26] = unsafe {
     ::core::mem::transmute::<[u8; 26], [::core::ffi::c_char; 26]>(*b"binder,hwbinder,vndbinder\0")
 };
+
 pub const CONFIG_PAGE_SHIFT: ::core::ffi::c_int = 12 as ::core::ffi::c_int;
+
 pub const CONFIG_NR_CPUS: ::core::ffi::c_int = 32 as ::core::ffi::c_int;
+
 pub const CONFIG_HZ: ::core::ffi::c_int = 250 as ::core::ffi::c_int;
-pub const CONFIG_ARM64_VA_BITS: ::core::ffi::c_int = 39 as ::core::ffi::c_int;
+
 pub const BITS_PER_LONG: ::core::ffi::c_int = 64 as ::core::ffi::c_int;
+
 unsafe extern "C" fn c2rust_run_static_initializers() {
     binder_deferred_work = work_struct {
         data: atomic64_t {
@@ -28203,708 +24686,41 @@ unsafe extern "C" fn c2rust_run_static_initializers() {
     };
 }
 
-impl C2Rust__ddebug_Inner {
-    #[inline]
-    pub fn lineno(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.lineno_class_id_flags, 0, 17) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_lineno(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.lineno_class_id_flags, 0, 17, value as u64);
-    }
-    #[inline]
-    pub fn class_id(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.lineno_class_id_flags, 18, 23) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_class_id(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.lineno_class_id_flags, 18, 23, value as u64);
-    }
-    #[inline]
-    pub fn flags(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.lineno_class_id_flags, 24, 31) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_flags(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.lineno_class_id_flags, 24, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_131 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_132 {
-    #[inline]
-    pub fn c2rust_unnamed_1(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed_1, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed_1(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed_1, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_154 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_156 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_157 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_173 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_174 {
-    #[inline]
-    pub fn c2rust_unnamed(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.c2rust_unnamed, 0, 31) as __u32
-    }
-    #[inline]
-    pub fn set_c2rust_unnamed(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.c2rust_unnamed, 0, 31, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_190 {
-    #[inline]
-    pub fn is_signed(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.is_signed_needs_test, 0, 0) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_is_signed(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.is_signed_needs_test, 0, 0, value as u64);
-    }
-    #[inline]
-    pub fn needs_test(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.is_signed_needs_test, 1, 1) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_needs_test(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.is_signed_needs_test, 1, 1, value as u64);
-    }
-}
-
-impl perf_branch_entry {
-    #[inline]
-    pub fn mispred(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 0, 0) as __u64
-    }
-    #[inline]
-    pub fn set_mispred(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 0, 0, value as u64);
-    }
-    #[inline]
-    pub fn predicted(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 1, 1) as __u64
-    }
-    #[inline]
-    pub fn set_predicted(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 1, 1, value as u64);
-    }
-    #[inline]
-    pub fn in_tx(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 2, 2) as __u64
-    }
-    #[inline]
-    pub fn set_in_tx(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 2, 2, value as u64);
-    }
-    #[inline]
-    pub fn abort(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 3, 3) as __u64
-    }
-    #[inline]
-    pub fn set_abort(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn cycles(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 4, 19) as __u64
-    }
-    #[inline]
-    pub fn set_cycles(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 4, 19, value as u64);
-    }
-    #[inline]
-    pub fn type_0(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 20, 23) as __u64
-    }
-    #[inline]
-    pub fn set_type_0(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 20, 23, value as u64);
-    }
-    #[inline]
-    pub fn spec(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 24, 25) as __u64
-    }
-    #[inline]
-    pub fn set_spec(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 24, 25, value as u64);
-    }
-    #[inline]
-    pub fn new_type(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 26, 29) as __u64
-    }
-    #[inline]
-    pub fn set_new_type(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 26, 29, value as u64);
-    }
-    #[inline]
-    pub fn priv_0(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 30, 32) as __u64
-    }
-    #[inline]
-    pub fn set_priv_0(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 30, 32, value as u64);
-    }
-    #[inline]
-    pub fn reserved(&self) -> __u64 {
-        __c2rust_bitfield_get(&self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 33, 63) as __u64
-    }
-    #[inline]
-    pub fn set_reserved(&mut self, value: __u64) {
-        __c2rust_bitfield_set(&mut self.mispred_predicted_in_tx_abort_cycles_type_0_spec_new_type_priv_0_reserved, 33, 63, value as u64);
-    }
-}
-
-impl perf_event_pmu_context {
-    #[inline]
-    pub fn embedded(&self) -> ::core::ffi::c_uint {
-        __c2rust_bitfield_get(&self.embedded, 0, 0) as ::core::ffi::c_uint
-    }
-    #[inline]
-    pub fn set_embedded(&mut self, value: ::core::ffi::c_uint) {
-        __c2rust_bitfield_set(&mut self.embedded, 0, 0, value as u64);
-    }
-}
-
-impl C2Rust_Unnamed_200 {
-    #[inline]
-    pub fn skip_read(&self) -> u64_0 {
-        __c2rust_bitfield_get(&self.skip_read, 0, 0) as u64_0
-    }
-    #[inline]
-    pub fn set_skip_read(&mut self, value: u64_0) {
-        __c2rust_bitfield_set(&mut self.skip_read, 0, 0, value as u64);
-    }
-}
 
 
 
-impl C2Rust_Unnamed_213 {
-    #[inline]
-    pub fn aux_start_paused(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.aux_start_paused_aux_pause_aux_resume___reserved_3, 0, 0) as __u32
-    }
-    #[inline]
-    pub fn set_aux_start_paused(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.aux_start_paused_aux_pause_aux_resume___reserved_3, 0, 0, value as u64);
-    }
-    #[inline]
-    pub fn aux_pause(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.aux_start_paused_aux_pause_aux_resume___reserved_3, 1, 1) as __u32
-    }
-    #[inline]
-    pub fn set_aux_pause(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.aux_start_paused_aux_pause_aux_resume___reserved_3, 1, 1, value as u64);
-    }
-    #[inline]
-    pub fn aux_resume(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.aux_start_paused_aux_pause_aux_resume___reserved_3, 2, 2) as __u32
-    }
-    #[inline]
-    pub fn set_aux_resume(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.aux_start_paused_aux_pause_aux_resume___reserved_3, 2, 2, value as u64);
-    }
-    #[inline]
-    pub fn __reserved_3(&self) -> __u32 {
-        __c2rust_bitfield_get(&self.aux_start_paused_aux_pause_aux_resume___reserved_3, 3, 31) as __u32
-    }
-    #[inline]
-    pub fn set___reserved_3(&mut self, value: __u32) {
-        __c2rust_bitfield_set(&mut self.aux_start_paused_aux_pause_aux_resume___reserved_3, 3, 31, value as u64);
-    }
-}
 
-impl C2Rust_Unnamed_239 {
-    #[inline]
-    pub fn pkt_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 0, 2) as __u8
-    }
-    #[inline]
-    pub fn set_pkt_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 0, 2, value as u64);
-    }
-    #[inline]
-    pub fn ignore_df(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 3, 3) as __u8
-    }
-    #[inline]
-    pub fn set_ignore_df(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn dst_pending_confirm(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 4, 4) as __u8
-    }
-    #[inline]
-    pub fn set_dst_pending_confirm(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 4, 4, value as u64);
-    }
-    #[inline]
-    pub fn ip_summed(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 5, 6) as __u8
-    }
-    #[inline]
-    pub fn set_ip_summed(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 5, 6, value as u64);
-    }
-    #[inline]
-    pub fn ooo_okay(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 7, 7) as __u8
-    }
-    #[inline]
-    pub fn set_ooo_okay(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 7, 7, value as u64);
-    }
-    #[inline]
-    pub fn tstamp_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 0, 1) as __u8
-    }
-    #[inline]
-    pub fn set_tstamp_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 0, 1, value as u64);
-    }
-    #[inline]
-    pub fn tc_at_ingress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 2, 2) as __u8
-    }
-    #[inline]
-    pub fn set_tc_at_ingress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 2, 2, value as u64);
-    }
-    #[inline]
-    pub fn tc_skip_classify(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 3, 3) as __u8
-    }
-    #[inline]
-    pub fn set_tc_skip_classify(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn remcsum_offload(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 4, 4) as __u8
-    }
-    #[inline]
-    pub fn set_remcsum_offload(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 4, 4, value as u64);
-    }
-    #[inline]
-    pub fn csum_complete_sw(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 5, 5) as __u8
-    }
-    #[inline]
-    pub fn set_csum_complete_sw(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 5, 5, value as u64);
-    }
-    #[inline]
-    pub fn csum_level(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 6, 7) as __u8
-    }
-    #[inline]
-    pub fn set_csum_level(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 6, 7, value as u64);
-    }
-    #[inline]
-    pub fn inner_protocol_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 8, 8) as __u8
-    }
-    #[inline]
-    pub fn set_inner_protocol_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 8, 8, value as u64);
-    }
-    #[inline]
-    pub fn l4_hash(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 9, 9) as __u8
-    }
-    #[inline]
-    pub fn set_l4_hash(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 9, 9, value as u64);
-    }
-    #[inline]
-    pub fn sw_hash(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 10, 10) as __u8
-    }
-    #[inline]
-    pub fn set_sw_hash(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 10, 10, value as u64);
-    }
-    #[inline]
-    pub fn wifi_acked_valid(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 11, 11) as __u8
-    }
-    #[inline]
-    pub fn set_wifi_acked_valid(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 11, 11, value as u64);
-    }
-    #[inline]
-    pub fn wifi_acked(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 12, 12) as __u8
-    }
-    #[inline]
-    pub fn set_wifi_acked(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 12, 12, value as u64);
-    }
-    #[inline]
-    pub fn no_fcs(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 13, 13) as __u8
-    }
-    #[inline]
-    pub fn set_no_fcs(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 13, 13, value as u64);
-    }
-    #[inline]
-    pub fn encapsulation(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 14, 14) as __u8
-    }
-    #[inline]
-    pub fn set_encapsulation(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 14, 14, value as u64);
-    }
-    #[inline]
-    pub fn encap_hdr_csum(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 15, 15) as __u8
-    }
-    #[inline]
-    pub fn set_encap_hdr_csum(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 15, 15, value as u64);
-    }
-    #[inline]
-    pub fn csum_valid(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 16, 16) as __u8
-    }
-    #[inline]
-    pub fn set_csum_valid(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 16, 16, value as u64);
-    }
-    #[inline]
-    pub fn ndisc_nodetype(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 17, 18) as __u8
-    }
-    #[inline]
-    pub fn set_ndisc_nodetype(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 17, 18, value as u64);
-    }
-    #[inline]
-    pub fn nf_trace(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 19, 19) as __u8
-    }
-    #[inline]
-    pub fn set_nf_trace(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 19, 19, value as u64);
-    }
-    #[inline]
-    pub fn redirected(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 20, 20) as __u8
-    }
-    #[inline]
-    pub fn set_redirected(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 20, 20, value as u64);
-    }
-    #[inline]
-    pub fn from_ingress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 21, 21) as __u8
-    }
-    #[inline]
-    pub fn set_from_ingress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 21, 21, value as u64);
-    }
-    #[inline]
-    pub fn nf_skip_egress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 22, 22) as __u8
-    }
-    #[inline]
-    pub fn set_nf_skip_egress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 22, 22, value as u64);
-    }
-    #[inline]
-    pub fn slow_gro(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 23, 23) as __u8
-    }
-    #[inline]
-    pub fn set_slow_gro(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 23, 23, value as u64);
-    }
-    #[inline]
-    pub fn unreadable(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 24, 24) as __u8
-    }
-    #[inline]
-    pub fn set_unreadable(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 24, 24, value as u64);
-    }
-}
 
-impl C2Rust_Unnamed_247 {
-    #[inline]
-    pub fn pkt_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 0, 2) as __u8
-    }
-    #[inline]
-    pub fn set_pkt_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 0, 2, value as u64);
-    }
-    #[inline]
-    pub fn ignore_df(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 3, 3) as __u8
-    }
-    #[inline]
-    pub fn set_ignore_df(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn dst_pending_confirm(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 4, 4) as __u8
-    }
-    #[inline]
-    pub fn set_dst_pending_confirm(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 4, 4, value as u64);
-    }
-    #[inline]
-    pub fn ip_summed(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 5, 6) as __u8
-    }
-    #[inline]
-    pub fn set_ip_summed(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 5, 6, value as u64);
-    }
-    #[inline]
-    pub fn ooo_okay(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 7, 7) as __u8
-    }
-    #[inline]
-    pub fn set_ooo_okay(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.pkt_type_ignore_df_dst_pending_confirm_ip_summed_ooo_okay, 7, 7, value as u64);
-    }
-    #[inline]
-    pub fn tstamp_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 0, 1) as __u8
-    }
-    #[inline]
-    pub fn set_tstamp_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 0, 1, value as u64);
-    }
-    #[inline]
-    pub fn tc_at_ingress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 2, 2) as __u8
-    }
-    #[inline]
-    pub fn set_tc_at_ingress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 2, 2, value as u64);
-    }
-    #[inline]
-    pub fn tc_skip_classify(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 3, 3) as __u8
-    }
-    #[inline]
-    pub fn set_tc_skip_classify(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 3, 3, value as u64);
-    }
-    #[inline]
-    pub fn remcsum_offload(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 4, 4) as __u8
-    }
-    #[inline]
-    pub fn set_remcsum_offload(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 4, 4, value as u64);
-    }
-    #[inline]
-    pub fn csum_complete_sw(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 5, 5) as __u8
-    }
-    #[inline]
-    pub fn set_csum_complete_sw(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 5, 5, value as u64);
-    }
-    #[inline]
-    pub fn csum_level(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 6, 7) as __u8
-    }
-    #[inline]
-    pub fn set_csum_level(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 6, 7, value as u64);
-    }
-    #[inline]
-    pub fn inner_protocol_type(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 8, 8) as __u8
-    }
-    #[inline]
-    pub fn set_inner_protocol_type(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 8, 8, value as u64);
-    }
-    #[inline]
-    pub fn l4_hash(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 9, 9) as __u8
-    }
-    #[inline]
-    pub fn set_l4_hash(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 9, 9, value as u64);
-    }
-    #[inline]
-    pub fn sw_hash(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 10, 10) as __u8
-    }
-    #[inline]
-    pub fn set_sw_hash(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 10, 10, value as u64);
-    }
-    #[inline]
-    pub fn wifi_acked_valid(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 11, 11) as __u8
-    }
-    #[inline]
-    pub fn set_wifi_acked_valid(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 11, 11, value as u64);
-    }
-    #[inline]
-    pub fn wifi_acked(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 12, 12) as __u8
-    }
-    #[inline]
-    pub fn set_wifi_acked(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 12, 12, value as u64);
-    }
-    #[inline]
-    pub fn no_fcs(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 13, 13) as __u8
-    }
-    #[inline]
-    pub fn set_no_fcs(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 13, 13, value as u64);
-    }
-    #[inline]
-    pub fn encapsulation(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 14, 14) as __u8
-    }
-    #[inline]
-    pub fn set_encapsulation(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 14, 14, value as u64);
-    }
-    #[inline]
-    pub fn encap_hdr_csum(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 15, 15) as __u8
-    }
-    #[inline]
-    pub fn set_encap_hdr_csum(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 15, 15, value as u64);
-    }
-    #[inline]
-    pub fn csum_valid(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 16, 16) as __u8
-    }
-    #[inline]
-    pub fn set_csum_valid(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 16, 16, value as u64);
-    }
-    #[inline]
-    pub fn ndisc_nodetype(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 17, 18) as __u8
-    }
-    #[inline]
-    pub fn set_ndisc_nodetype(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 17, 18, value as u64);
-    }
-    #[inline]
-    pub fn nf_trace(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 19, 19) as __u8
-    }
-    #[inline]
-    pub fn set_nf_trace(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 19, 19, value as u64);
-    }
-    #[inline]
-    pub fn redirected(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 20, 20) as __u8
-    }
-    #[inline]
-    pub fn set_redirected(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 20, 20, value as u64);
-    }
-    #[inline]
-    pub fn from_ingress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 21, 21) as __u8
-    }
-    #[inline]
-    pub fn set_from_ingress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 21, 21, value as u64);
-    }
-    #[inline]
-    pub fn nf_skip_egress(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 22, 22) as __u8
-    }
-    #[inline]
-    pub fn set_nf_skip_egress(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 22, 22, value as u64);
-    }
-    #[inline]
-    pub fn slow_gro(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 23, 23) as __u8
-    }
-    #[inline]
-    pub fn set_slow_gro(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 23, 23, value as u64);
-    }
-    #[inline]
-    pub fn unreadable(&self) -> __u8 {
-        __c2rust_bitfield_get(&self.c2rust_padding, 24, 24) as __u8
-    }
-    #[inline]
-    pub fn set_unreadable(&mut self, value: __u8) {
-        __c2rust_bitfield_set(&mut self.c2rust_padding, 24, 24, value as u64);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 impl genl_family {
     #[inline]
@@ -28925,6 +24741,8 @@ impl genl_family {
     }
 }
 
+
+
 impl binder_transaction {
     #[inline]
     pub fn is_async(&self) -> ::core::ffi::c_uint {
@@ -28943,6 +24761,8 @@ impl binder_transaction {
         __c2rust_bitfield_set(&mut self.is_async_is_reply, 1, 1, value as u64);
     }
 }
+
+
 
 impl binder_buffer {
     #[inline]
@@ -28995,6 +24815,8 @@ impl binder_buffer {
     }
 }
 
+
+
 impl C2Rust_Unnamed_367 {
     #[inline]
     pub fn sched_policy(&self) -> u8_0 {
@@ -29029,6 +24851,8 @@ impl C2Rust_Unnamed_367 {
         __c2rust_bitfield_set(&mut self.sched_policy_inherit_rt_accept_fds_txn_security_ctx, 4, 4, value as u64);
     }
 }
+
+
 
 impl C2Rust_Unnamed_368 {
     #[inline]
@@ -29065,6 +24889,8 @@ impl C2Rust_Unnamed_368 {
     }
 }
 
+
+
 impl binder_ref_freeze {
     #[inline]
     pub fn is_frozen(&self) -> bool_0 {
@@ -29092,974 +24918,93 @@ impl binder_ref_freeze {
     }
 }
 
-// Static assertions verifying that the size and alignment of types defined in binder.rs
-// match their equivalent definitions in the bindings crate (common/rust/bindings).
 #[allow(non_camel_case_types, dead_code)]
 mod binder_static_assertions {
     use super::*;
-
-    kernel::static_assert!(::core::mem::size_of::<__call_single_data>() == ::core::mem::size_of::<kernel::bindings::__call_single_data>());
-    kernel::static_assert!(::core::mem::align_of::<__call_single_data>() == ::core::mem::align_of::<kernel::bindings::__call_single_data>());
-    kernel::static_assert!(::core::mem::size_of::<__call_single_node>() == ::core::mem::size_of::<kernel::bindings::__call_single_node>());
-    kernel::static_assert!(::core::mem::align_of::<__call_single_node>() == ::core::mem::align_of::<kernel::bindings::__call_single_node>());
-    kernel::static_assert!(::core::mem::size_of::<__kernel_timespec>() == ::core::mem::size_of::<kernel::bindings::__kernel_timespec>());
-    kernel::static_assert!(::core::mem::align_of::<__kernel_timespec>() == ::core::mem::align_of::<kernel::bindings::__kernel_timespec>());
-    kernel::static_assert!(::core::mem::size_of::<_ddebug>() == ::core::mem::size_of::<kernel::bindings::_ddebug>());
-    kernel::static_assert!(::core::mem::align_of::<_ddebug>() == ::core::mem::align_of::<kernel::bindings::_ddebug>());
-    kernel::static_assert!(::core::mem::size_of::<_ddebug_info>() == ::core::mem::size_of::<kernel::bindings::_ddebug_info>());
-    kernel::static_assert!(::core::mem::align_of::<_ddebug_info>() == ::core::mem::align_of::<kernel::bindings::_ddebug_info>());
-    kernel::static_assert!(::core::mem::size_of::<address_space>() == ::core::mem::size_of::<kernel::bindings::address_space>());
-    kernel::static_assert!(::core::mem::align_of::<address_space>() == ::core::mem::align_of::<kernel::bindings::address_space>());
-    kernel::static_assert!(::core::mem::size_of::<address_space_operations>() == ::core::mem::size_of::<kernel::bindings::address_space_operations>());
-    kernel::static_assert!(::core::mem::align_of::<address_space_operations>() == ::core::mem::align_of::<kernel::bindings::address_space_operations>());
     kernel::static_assert!(::core::mem::size_of::<alloc_tag>() == ::core::mem::size_of::<kernel::bindings::alloc_tag>());
-    kernel::static_assert!(::core::mem::align_of::<alloc_tag>() == ::core::mem::align_of::<kernel::bindings::alloc_tag>());
     kernel::static_assert!(::core::mem::size_of::<alloc_tag_counters>() == ::core::mem::size_of::<kernel::bindings::alloc_tag_counters>());
-    kernel::static_assert!(::core::mem::align_of::<alloc_tag_counters>() == ::core::mem::align_of::<kernel::bindings::alloc_tag_counters>());
-    kernel::static_assert!(::core::mem::size_of::<anon_vma_name>() == ::core::mem::size_of::<kernel::bindings::anon_vma_name>());
-    kernel::static_assert!(::core::mem::align_of::<anon_vma_name>() == ::core::mem::align_of::<kernel::bindings::anon_vma_name>());
-    kernel::static_assert!(::core::mem::size_of::<arch_hw_breakpoint>() == ::core::mem::size_of::<kernel::bindings::arch_hw_breakpoint>());
-    kernel::static_assert!(::core::mem::align_of::<arch_hw_breakpoint>() == ::core::mem::align_of::<kernel::bindings::arch_hw_breakpoint>());
-    kernel::static_assert!(::core::mem::size_of::<arch_hw_breakpoint_ctrl>() == ::core::mem::size_of::<kernel::bindings::arch_hw_breakpoint_ctrl>());
-    kernel::static_assert!(::core::mem::align_of::<arch_hw_breakpoint_ctrl>() == ::core::mem::align_of::<kernel::bindings::arch_hw_breakpoint_ctrl>());
-    kernel::static_assert!(::core::mem::size_of::<arch_probe_insn>() == ::core::mem::size_of::<kernel::bindings::arch_probe_insn>());
-    kernel::static_assert!(::core::mem::align_of::<arch_probe_insn>() == ::core::mem::align_of::<kernel::bindings::arch_probe_insn>());
-    kernel::static_assert!(::core::mem::size_of::<arch_tlbflush_unmap_batch>() == ::core::mem::size_of::<kernel::bindings::arch_tlbflush_unmap_batch>());
-    kernel::static_assert!(::core::mem::align_of::<arch_tlbflush_unmap_batch>() == ::core::mem::align_of::<kernel::bindings::arch_tlbflush_unmap_batch>());
-    kernel::static_assert!(::core::mem::size_of::<arch_uprobe>() == ::core::mem::size_of::<kernel::bindings::arch_uprobe>());
-    kernel::static_assert!(::core::mem::align_of::<arch_uprobe>() == ::core::mem::align_of::<kernel::bindings::arch_uprobe>());
-    kernel::static_assert!(::core::mem::size_of::<arch_uprobe_task>() == ::core::mem::size_of::<kernel::bindings::arch_uprobe_task>());
-    kernel::static_assert!(::core::mem::align_of::<arch_uprobe_task>() == ::core::mem::align_of::<kernel::bindings::arch_uprobe_task>());
-    kernel::static_assert!(::core::mem::size_of::<assoc_array>() == ::core::mem::size_of::<kernel::bindings::assoc_array>());
-    kernel::static_assert!(::core::mem::align_of::<assoc_array>() == ::core::mem::align_of::<kernel::bindings::assoc_array>());
     kernel::static_assert!(::core::mem::size_of::<atomic64_t>() == ::core::mem::size_of::<kernel::bindings::atomic64_t>());
-    kernel::static_assert!(::core::mem::align_of::<atomic64_t>() == ::core::mem::align_of::<kernel::bindings::atomic64_t>());
     kernel::static_assert!(::core::mem::size_of::<atomic_t>() == ::core::mem::size_of::<kernel::bindings::atomic_t>());
-    kernel::static_assert!(::core::mem::align_of::<atomic_t>() == ::core::mem::align_of::<kernel::bindings::atomic_t>());
-    kernel::static_assert!(::core::mem::size_of::<attribute>() == ::core::mem::size_of::<kernel::bindings::attribute>());
-    kernel::static_assert!(::core::mem::align_of::<attribute>() == ::core::mem::align_of::<kernel::bindings::attribute>());
-    kernel::static_assert!(::core::mem::size_of::<attribute_group>() == ::core::mem::size_of::<kernel::bindings::attribute_group>());
-    kernel::static_assert!(::core::mem::align_of::<attribute_group>() == ::core::mem::align_of::<kernel::bindings::attribute_group>());
-    kernel::static_assert!(::core::mem::size_of::<backing_dev_info>() == ::core::mem::size_of::<kernel::bindings::backing_dev_info>());
-    kernel::static_assert!(::core::mem::align_of::<backing_dev_info>() == ::core::mem::align_of::<kernel::bindings::backing_dev_info>());
-    kernel::static_assert!(::core::mem::size_of::<bdi_writeback>() == ::core::mem::size_of::<kernel::bindings::bdi_writeback>());
-    kernel::static_assert!(::core::mem::align_of::<bdi_writeback>() == ::core::mem::align_of::<kernel::bindings::bdi_writeback>());
-    kernel::static_assert!(::core::mem::size_of::<bin_attribute>() == ::core::mem::size_of::<kernel::bindings::bin_attribute>());
-    kernel::static_assert!(::core::mem::align_of::<bin_attribute>() == ::core::mem::align_of::<kernel::bindings::bin_attribute>());
     kernel::static_assert!(::core::mem::size_of::<binder_buffer_object>() == ::core::mem::size_of::<kernel::bindings::binder_buffer_object>());
-    kernel::static_assert!(::core::mem::align_of::<binder_buffer_object>() == ::core::mem::align_of::<kernel::bindings::binder_buffer_object>());
     kernel::static_assert!(::core::mem::size_of::<binder_extended_error>() == ::core::mem::size_of::<kernel::bindings::binder_extended_error>());
-    kernel::static_assert!(::core::mem::align_of::<binder_extended_error>() == ::core::mem::align_of::<kernel::bindings::binder_extended_error>());
     kernel::static_assert!(::core::mem::size_of::<binder_fd_array_object>() == ::core::mem::size_of::<kernel::bindings::binder_fd_array_object>());
-    kernel::static_assert!(::core::mem::align_of::<binder_fd_array_object>() == ::core::mem::align_of::<kernel::bindings::binder_fd_array_object>());
     kernel::static_assert!(::core::mem::size_of::<binder_fd_object>() == ::core::mem::size_of::<kernel::bindings::binder_fd_object>());
-    kernel::static_assert!(::core::mem::align_of::<binder_fd_object>() == ::core::mem::align_of::<kernel::bindings::binder_fd_object>());
     kernel::static_assert!(::core::mem::size_of::<binder_freeze_info>() == ::core::mem::size_of::<kernel::bindings::binder_freeze_info>());
-    kernel::static_assert!(::core::mem::align_of::<binder_freeze_info>() == ::core::mem::align_of::<kernel::bindings::binder_freeze_info>());
     kernel::static_assert!(::core::mem::size_of::<binder_frozen_state_info>() == ::core::mem::size_of::<kernel::bindings::binder_frozen_state_info>());
-    kernel::static_assert!(::core::mem::align_of::<binder_frozen_state_info>() == ::core::mem::align_of::<kernel::bindings::binder_frozen_state_info>());
     kernel::static_assert!(::core::mem::size_of::<binder_frozen_status_info>() == ::core::mem::size_of::<kernel::bindings::binder_frozen_status_info>());
-    kernel::static_assert!(::core::mem::align_of::<binder_frozen_status_info>() == ::core::mem::align_of::<kernel::bindings::binder_frozen_status_info>());
     kernel::static_assert!(::core::mem::size_of::<binder_handle_cookie>() == ::core::mem::size_of::<kernel::bindings::binder_handle_cookie>());
-    kernel::static_assert!(::core::mem::align_of::<binder_handle_cookie>() == ::core::mem::align_of::<kernel::bindings::binder_handle_cookie>());
     kernel::static_assert!(::core::mem::size_of::<binder_node_debug_info>() == ::core::mem::size_of::<kernel::bindings::binder_node_debug_info>());
-    kernel::static_assert!(::core::mem::align_of::<binder_node_debug_info>() == ::core::mem::align_of::<kernel::bindings::binder_node_debug_info>());
     kernel::static_assert!(::core::mem::size_of::<binder_node_info_for_ref>() == ::core::mem::size_of::<kernel::bindings::binder_node_info_for_ref>());
-    kernel::static_assert!(::core::mem::align_of::<binder_node_info_for_ref>() == ::core::mem::align_of::<kernel::bindings::binder_node_info_for_ref>());
     kernel::static_assert!(::core::mem::size_of::<binder_object_header>() == ::core::mem::size_of::<kernel::bindings::binder_object_header>());
-    kernel::static_assert!(::core::mem::align_of::<binder_object_header>() == ::core::mem::align_of::<kernel::bindings::binder_object_header>());
     kernel::static_assert!(::core::mem::size_of::<binder_transaction_data>() == ::core::mem::size_of::<kernel::bindings::binder_transaction_data>());
-    kernel::static_assert!(::core::mem::align_of::<binder_transaction_data>() == ::core::mem::align_of::<kernel::bindings::binder_transaction_data>());
     kernel::static_assert!(::core::mem::size_of::<binder_transaction_data_secctx>() == ::core::mem::size_of::<kernel::bindings::binder_transaction_data_secctx>());
-    kernel::static_assert!(::core::mem::align_of::<binder_transaction_data_secctx>() == ::core::mem::align_of::<kernel::bindings::binder_transaction_data_secctx>());
     kernel::static_assert!(::core::mem::size_of::<binder_transaction_data_sg>() == ::core::mem::size_of::<kernel::bindings::binder_transaction_data_sg>());
-    kernel::static_assert!(::core::mem::align_of::<binder_transaction_data_sg>() == ::core::mem::align_of::<kernel::bindings::binder_transaction_data_sg>());
     kernel::static_assert!(::core::mem::size_of::<binder_version>() == ::core::mem::size_of::<kernel::bindings::binder_version>());
-    kernel::static_assert!(::core::mem::align_of::<binder_version>() == ::core::mem::align_of::<kernel::bindings::binder_version>());
     kernel::static_assert!(::core::mem::size_of::<binder_write_read>() == ::core::mem::size_of::<kernel::bindings::binder_write_read>());
-    kernel::static_assert!(::core::mem::align_of::<binder_write_read>() == ::core::mem::align_of::<kernel::bindings::binder_write_read>());
-    kernel::static_assert!(::core::mem::size_of::<bio>() == ::core::mem::size_of::<kernel::bindings::bio>());
-    kernel::static_assert!(::core::mem::align_of::<bio>() == ::core::mem::align_of::<kernel::bindings::bio>());
-    kernel::static_assert!(::core::mem::size_of::<bio_list>() == ::core::mem::size_of::<kernel::bindings::bio_list>());
-    kernel::static_assert!(::core::mem::align_of::<bio_list>() == ::core::mem::align_of::<kernel::bindings::bio_list>());
-    kernel::static_assert!(::core::mem::size_of::<bio_set>() == ::core::mem::size_of::<kernel::bindings::bio_set>());
-    kernel::static_assert!(::core::mem::align_of::<bio_set>() == ::core::mem::align_of::<kernel::bindings::bio_set>());
-    kernel::static_assert!(::core::mem::size_of::<bio_vec>() == ::core::mem::size_of::<kernel::bindings::bio_vec>());
-    kernel::static_assert!(::core::mem::align_of::<bio_vec>() == ::core::mem::align_of::<kernel::bindings::bio_vec>());
-    kernel::static_assert!(::core::mem::size_of::<block_device>() == ::core::mem::size_of::<kernel::bindings::block_device>());
-    kernel::static_assert!(::core::mem::align_of::<block_device>() == ::core::mem::align_of::<kernel::bindings::block_device>());
-    kernel::static_assert!(::core::mem::size_of::<blocked_on_lock>() == ::core::mem::size_of::<kernel::bindings::blocked_on_lock>());
-    kernel::static_assert!(::core::mem::align_of::<blocked_on_lock>() == ::core::mem::align_of::<kernel::bindings::blocked_on_lock>());
-    kernel::static_assert!(::core::mem::size_of::<blocking_notifier_head>() == ::core::mem::size_of::<kernel::bindings::blocking_notifier_head>());
-    kernel::static_assert!(::core::mem::align_of::<blocking_notifier_head>() == ::core::mem::align_of::<kernel::bindings::blocking_notifier_head>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_ctx_arg_aux>() == ::core::mem::size_of::<kernel::bindings::bpf_ctx_arg_aux>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_ctx_arg_aux>() == ::core::mem::align_of::<kernel::bindings::bpf_ctx_arg_aux>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_func_info>() == ::core::mem::size_of::<kernel::bindings::bpf_func_info>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_func_info>() == ::core::mem::align_of::<kernel::bindings::bpf_func_info>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_func_info_aux>() == ::core::mem::size_of::<kernel::bindings::bpf_func_info_aux>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_func_info_aux>() == ::core::mem::align_of::<kernel::bindings::bpf_func_info_aux>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_func_proto>() == ::core::mem::size_of::<kernel::bindings::bpf_func_proto>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_func_proto>() == ::core::mem::align_of::<kernel::bindings::bpf_func_proto>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_insn>() == ::core::mem::size_of::<kernel::bindings::bpf_insn>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_insn>() == ::core::mem::align_of::<kernel::bindings::bpf_insn>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_insn_access_aux>() == ::core::mem::size_of::<kernel::bindings::bpf_insn_access_aux>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_insn_access_aux>() == ::core::mem::align_of::<kernel::bindings::bpf_insn_access_aux>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_iter_aux_info>() == ::core::mem::size_of::<kernel::bindings::bpf_iter_aux_info>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_iter_aux_info>() == ::core::mem::align_of::<kernel::bindings::bpf_iter_aux_info>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_iter_seq_info>() == ::core::mem::size_of::<kernel::bindings::bpf_iter_seq_info>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_iter_seq_info>() == ::core::mem::align_of::<kernel::bindings::bpf_iter_seq_info>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_jit_poke_descriptor>() == ::core::mem::size_of::<kernel::bindings::bpf_jit_poke_descriptor>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_jit_poke_descriptor>() == ::core::mem::align_of::<kernel::bindings::bpf_jit_poke_descriptor>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_ksym>() == ::core::mem::size_of::<kernel::bindings::bpf_ksym>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_ksym>() == ::core::mem::align_of::<kernel::bindings::bpf_ksym>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_line_info>() == ::core::mem::size_of::<kernel::bindings::bpf_line_info>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_line_info>() == ::core::mem::align_of::<kernel::bindings::bpf_line_info>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_link>() == ::core::mem::size_of::<kernel::bindings::bpf_link>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_link>() == ::core::mem::align_of::<kernel::bindings::bpf_link>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_link_info>() == ::core::mem::size_of::<kernel::bindings::bpf_link_info>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_link_info>() == ::core::mem::align_of::<kernel::bindings::bpf_link_info>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_link_ops>() == ::core::mem::size_of::<kernel::bindings::bpf_link_ops>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_link_ops>() == ::core::mem::align_of::<kernel::bindings::bpf_link_ops>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_map>() == ::core::mem::size_of::<kernel::bindings::bpf_map>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_map>() == ::core::mem::align_of::<kernel::bindings::bpf_map>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_map_ops>() == ::core::mem::size_of::<kernel::bindings::bpf_map_ops>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_map_ops>() == ::core::mem::align_of::<kernel::bindings::bpf_map_ops>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_map_owner>() == ::core::mem::size_of::<kernel::bindings::bpf_map_owner>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_map_owner>() == ::core::mem::align_of::<kernel::bindings::bpf_map_owner>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog>() == ::core::mem::size_of::<kernel::bindings::bpf_prog>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog>() == ::core::mem::align_of::<kernel::bindings::bpf_prog>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog_array>() == ::core::mem::size_of::<kernel::bindings::bpf_prog_array>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog_array>() == ::core::mem::align_of::<kernel::bindings::bpf_prog_array>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog_array_item>() == ::core::mem::size_of::<kernel::bindings::bpf_prog_array_item>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog_array_item>() == ::core::mem::align_of::<kernel::bindings::bpf_prog_array_item>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog_aux>() == ::core::mem::size_of::<kernel::bindings::bpf_prog_aux>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog_aux>() == ::core::mem::align_of::<kernel::bindings::bpf_prog_aux>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog_offload>() == ::core::mem::size_of::<kernel::bindings::bpf_prog_offload>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog_offload>() == ::core::mem::align_of::<kernel::bindings::bpf_prog_offload>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_prog_ops>() == ::core::mem::size_of::<kernel::bindings::bpf_prog_ops>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_prog_ops>() == ::core::mem::align_of::<kernel::bindings::bpf_prog_ops>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_raw_event_map>() == ::core::mem::size_of::<kernel::bindings::bpf_raw_event_map>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_raw_event_map>() == ::core::mem::align_of::<kernel::bindings::bpf_raw_event_map>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_run_ctx>() == ::core::mem::size_of::<kernel::bindings::bpf_run_ctx>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_run_ctx>() == ::core::mem::align_of::<kernel::bindings::bpf_run_ctx>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_stream>() == ::core::mem::size_of::<kernel::bindings::bpf_stream>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_stream>() == ::core::mem::align_of::<kernel::bindings::bpf_stream>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_struct_ops>() == ::core::mem::size_of::<kernel::bindings::bpf_struct_ops>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_struct_ops>() == ::core::mem::align_of::<kernel::bindings::bpf_struct_ops>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_token>() == ::core::mem::size_of::<kernel::bindings::bpf_token>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_token>() == ::core::mem::align_of::<kernel::bindings::bpf_token>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_tramp_image>() == ::core::mem::size_of::<kernel::bindings::bpf_tramp_image>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_tramp_image>() == ::core::mem::align_of::<kernel::bindings::bpf_tramp_image>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_trampoline>() == ::core::mem::size_of::<kernel::bindings::bpf_trampoline>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_trampoline>() == ::core::mem::align_of::<kernel::bindings::bpf_trampoline>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_verifier_ops>() == ::core::mem::size_of::<kernel::bindings::bpf_verifier_ops>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_verifier_ops>() == ::core::mem::align_of::<kernel::bindings::bpf_verifier_ops>());
-    kernel::static_assert!(::core::mem::size_of::<btf_field>() == ::core::mem::size_of::<kernel::bindings::btf_field>());
-    kernel::static_assert!(::core::mem::align_of::<btf_field>() == ::core::mem::align_of::<kernel::bindings::btf_field>());
-    kernel::static_assert!(::core::mem::size_of::<btf_field_graph_root>() == ::core::mem::size_of::<kernel::bindings::btf_field_graph_root>());
-    kernel::static_assert!(::core::mem::align_of::<btf_field_graph_root>() == ::core::mem::align_of::<kernel::bindings::btf_field_graph_root>());
-    kernel::static_assert!(::core::mem::size_of::<btf_field_kptr>() == ::core::mem::size_of::<kernel::bindings::btf_field_kptr>());
-    kernel::static_assert!(::core::mem::align_of::<btf_field_kptr>() == ::core::mem::align_of::<kernel::bindings::btf_field_kptr>());
-    kernel::static_assert!(::core::mem::size_of::<btf_func_model>() == ::core::mem::size_of::<kernel::bindings::btf_func_model>());
-    kernel::static_assert!(::core::mem::align_of::<btf_func_model>() == ::core::mem::align_of::<kernel::bindings::btf_func_model>());
-    kernel::static_assert!(::core::mem::size_of::<btf_member>() == ::core::mem::size_of::<kernel::bindings::btf_member>());
-    kernel::static_assert!(::core::mem::align_of::<btf_member>() == ::core::mem::align_of::<kernel::bindings::btf_member>());
-    kernel::static_assert!(::core::mem::size_of::<btf_mod_pair>() == ::core::mem::size_of::<kernel::bindings::btf_mod_pair>());
-    kernel::static_assert!(::core::mem::align_of::<btf_mod_pair>() == ::core::mem::align_of::<kernel::bindings::btf_mod_pair>());
-    kernel::static_assert!(::core::mem::size_of::<btf_record>() == ::core::mem::size_of::<kernel::bindings::btf_record>());
-    kernel::static_assert!(::core::mem::align_of::<btf_record>() == ::core::mem::align_of::<kernel::bindings::btf_record>());
-    kernel::static_assert!(::core::mem::size_of::<btf_type>() == ::core::mem::size_of::<kernel::bindings::btf_type>());
-    kernel::static_assert!(::core::mem::align_of::<btf_type>() == ::core::mem::align_of::<kernel::bindings::btf_type>());
-    kernel::static_assert!(::core::mem::size_of::<bug_entry>() == ::core::mem::size_of::<kernel::bindings::bug_entry>());
-    kernel::static_assert!(::core::mem::align_of::<bug_entry>() == ::core::mem::align_of::<kernel::bindings::bug_entry>());
-    kernel::static_assert!(::core::mem::size_of::<bus_type>() == ::core::mem::size_of::<kernel::bindings::bus_type>());
-    kernel::static_assert!(::core::mem::align_of::<bus_type>() == ::core::mem::align_of::<kernel::bindings::bus_type>());
-    kernel::static_assert!(::core::mem::size_of::<bvec_iter>() == ::core::mem::size_of::<kernel::bindings::bvec_iter>());
-    kernel::static_assert!(::core::mem::align_of::<bvec_iter>() == ::core::mem::align_of::<kernel::bindings::bvec_iter>());
-    kernel::static_assert!(::core::mem::size_of::<cacheline_padding>() == ::core::mem::size_of::<kernel::bindings::cacheline_padding>());
-    kernel::static_assert!(::core::mem::align_of::<cacheline_padding>() == ::core::mem::align_of::<kernel::bindings::cacheline_padding>());
     kernel::static_assert!(::core::mem::size_of::<callback_head>() == ::core::mem::size_of::<kernel::bindings::callback_head>());
-    kernel::static_assert!(::core::mem::align_of::<callback_head>() == ::core::mem::align_of::<kernel::bindings::callback_head>());
-    kernel::static_assert!(::core::mem::size_of::<cftype>() == ::core::mem::size_of::<kernel::bindings::cftype>());
-    kernel::static_assert!(::core::mem::align_of::<cftype>() == ::core::mem::align_of::<kernel::bindings::cftype>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup>() == ::core::mem::size_of::<kernel::bindings::cgroup>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup>() == ::core::mem::align_of::<kernel::bindings::cgroup>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_base_stat>() == ::core::mem::size_of::<kernel::bindings::cgroup_base_stat>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_base_stat>() == ::core::mem::align_of::<kernel::bindings::cgroup_base_stat>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_bpf>() == ::core::mem::size_of::<kernel::bindings::cgroup_bpf>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_bpf>() == ::core::mem::align_of::<kernel::bindings::cgroup_bpf>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_file>() == ::core::mem::size_of::<kernel::bindings::cgroup_file>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_file>() == ::core::mem::align_of::<kernel::bindings::cgroup_file>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_freezer_state>() == ::core::mem::size_of::<kernel::bindings::cgroup_freezer_state>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_freezer_state>() == ::core::mem::align_of::<kernel::bindings::cgroup_freezer_state>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_namespace>() == ::core::mem::size_of::<kernel::bindings::cgroup_namespace>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_namespace>() == ::core::mem::align_of::<kernel::bindings::cgroup_namespace>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_root>() == ::core::mem::size_of::<kernel::bindings::cgroup_root>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_root>() == ::core::mem::align_of::<kernel::bindings::cgroup_root>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_rstat_base_cpu>() == ::core::mem::size_of::<kernel::bindings::cgroup_rstat_base_cpu>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_rstat_base_cpu>() == ::core::mem::align_of::<kernel::bindings::cgroup_rstat_base_cpu>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_subsys>() == ::core::mem::size_of::<kernel::bindings::cgroup_subsys>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_subsys>() == ::core::mem::align_of::<kernel::bindings::cgroup_subsys>());
-    kernel::static_assert!(::core::mem::size_of::<cgroup_subsys_state>() == ::core::mem::size_of::<kernel::bindings::cgroup_subsys_state>());
-    kernel::static_assert!(::core::mem::align_of::<cgroup_subsys_state>() == ::core::mem::align_of::<kernel::bindings::cgroup_subsys_state>());
-    kernel::static_assert!(::core::mem::size_of::<class>() == ::core::mem::size_of::<kernel::bindings::class>());
-    kernel::static_assert!(::core::mem::align_of::<class>() == ::core::mem::align_of::<kernel::bindings::class>());
     kernel::static_assert!(::core::mem::size_of::<class_mutex_t>() == ::core::mem::size_of::<kernel::bindings::class_mutex_t>());
-    kernel::static_assert!(::core::mem::align_of::<class_mutex_t>() == ::core::mem::align_of::<kernel::bindings::class_mutex_t>());
     kernel::static_assert!(::core::mem::size_of::<class_preempt_notrace_t>() == ::core::mem::size_of::<kernel::bindings::class_preempt_notrace_t>());
-    kernel::static_assert!(::core::mem::align_of::<class_preempt_notrace_t>() == ::core::mem::align_of::<kernel::bindings::class_preempt_notrace_t>());
     kernel::static_assert!(::core::mem::size_of::<class_spinlock_t>() == ::core::mem::size_of::<kernel::bindings::class_spinlock_t>());
-    kernel::static_assert!(::core::mem::align_of::<class_spinlock_t>() == ::core::mem::align_of::<kernel::bindings::class_spinlock_t>());
     kernel::static_assert!(::core::mem::size_of::<codetag>() == ::core::mem::size_of::<kernel::bindings::codetag>());
-    kernel::static_assert!(::core::mem::align_of::<codetag>() == ::core::mem::align_of::<kernel::bindings::codetag>());
-    kernel::static_assert!(::core::mem::size_of::<compat_robust_list>() == ::core::mem::size_of::<kernel::bindings::compat_robust_list>());
-    kernel::static_assert!(::core::mem::align_of::<compat_robust_list>() == ::core::mem::align_of::<kernel::bindings::compat_robust_list>());
-    kernel::static_assert!(::core::mem::size_of::<compat_robust_list_head>() == ::core::mem::size_of::<kernel::bindings::compat_robust_list_head>());
-    kernel::static_assert!(::core::mem::align_of::<compat_robust_list_head>() == ::core::mem::align_of::<kernel::bindings::compat_robust_list_head>());
-    kernel::static_assert!(::core::mem::size_of::<completion>() == ::core::mem::size_of::<kernel::bindings::completion>());
-    kernel::static_assert!(::core::mem::align_of::<completion>() == ::core::mem::align_of::<kernel::bindings::completion>());
-    kernel::static_assert!(::core::mem::size_of::<core_state>() == ::core::mem::size_of::<kernel::bindings::core_state>());
-    kernel::static_assert!(::core::mem::align_of::<core_state>() == ::core::mem::align_of::<kernel::bindings::core_state>());
-    kernel::static_assert!(::core::mem::size_of::<core_thread>() == ::core::mem::size_of::<kernel::bindings::core_thread>());
-    kernel::static_assert!(::core::mem::align_of::<core_thread>() == ::core::mem::align_of::<kernel::bindings::core_thread>());
-    kernel::static_assert!(::core::mem::size_of::<cpu_context>() == ::core::mem::size_of::<kernel::bindings::cpu_context>());
-    kernel::static_assert!(::core::mem::align_of::<cpu_context>() == ::core::mem::align_of::<kernel::bindings::cpu_context>());
-    kernel::static_assert!(::core::mem::size_of::<cpu_itimer>() == ::core::mem::size_of::<kernel::bindings::cpu_itimer>());
-    kernel::static_assert!(::core::mem::align_of::<cpu_itimer>() == ::core::mem::align_of::<kernel::bindings::cpu_itimer>());
     kernel::static_assert!(::core::mem::size_of::<cpumask>() == ::core::mem::size_of::<kernel::bindings::cpumask>());
-    kernel::static_assert!(::core::mem::align_of::<cpumask>() == ::core::mem::align_of::<kernel::bindings::cpumask>());
     kernel::static_assert!(::core::mem::size_of::<cred>() == ::core::mem::size_of::<kernel::bindings::cred>());
-    kernel::static_assert!(::core::mem::align_of::<cred>() == ::core::mem::align_of::<kernel::bindings::cred>());
-    kernel::static_assert!(::core::mem::size_of::<css_rstat_cpu>() == ::core::mem::size_of::<kernel::bindings::css_rstat_cpu>());
-    kernel::static_assert!(::core::mem::align_of::<css_rstat_cpu>() == ::core::mem::align_of::<kernel::bindings::css_rstat_cpu>());
-    kernel::static_assert!(::core::mem::size_of::<css_set>() == ::core::mem::size_of::<kernel::bindings::css_set>());
-    kernel::static_assert!(::core::mem::align_of::<css_set>() == ::core::mem::align_of::<kernel::bindings::css_set>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_dir>() == ::core::mem::size_of::<kernel::bindings::ctl_dir>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_dir>() == ::core::mem::align_of::<kernel::bindings::ctl_dir>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_node>() == ::core::mem::size_of::<kernel::bindings::ctl_node>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_node>() == ::core::mem::align_of::<kernel::bindings::ctl_node>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_table>() == ::core::mem::size_of::<kernel::bindings::ctl_table>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_table>() == ::core::mem::align_of::<kernel::bindings::ctl_table>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_table_header>() == ::core::mem::size_of::<kernel::bindings::ctl_table_header>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_table_header>() == ::core::mem::align_of::<kernel::bindings::ctl_table_header>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_table_poll>() == ::core::mem::size_of::<kernel::bindings::ctl_table_poll>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_table_poll>() == ::core::mem::align_of::<kernel::bindings::ctl_table_poll>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_table_root>() == ::core::mem::size_of::<kernel::bindings::ctl_table_root>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_table_root>() == ::core::mem::align_of::<kernel::bindings::ctl_table_root>());
-    kernel::static_assert!(::core::mem::size_of::<ctl_table_set>() == ::core::mem::size_of::<kernel::bindings::ctl_table_set>());
-    kernel::static_assert!(::core::mem::align_of::<ctl_table_set>() == ::core::mem::align_of::<kernel::bindings::ctl_table_set>());
-    kernel::static_assert!(::core::mem::size_of::<ddebug_class_map>() == ::core::mem::size_of::<kernel::bindings::ddebug_class_map>());
-    kernel::static_assert!(::core::mem::align_of::<ddebug_class_map>() == ::core::mem::align_of::<kernel::bindings::ddebug_class_map>());
-    kernel::static_assert!(::core::mem::size_of::<debug_info>() == ::core::mem::size_of::<kernel::bindings::debug_info>());
-    kernel::static_assert!(::core::mem::align_of::<debug_info>() == ::core::mem::align_of::<kernel::bindings::debug_info>());
-    kernel::static_assert!(::core::mem::size_of::<deferred_split>() == ::core::mem::size_of::<kernel::bindings::deferred_split>());
-    kernel::static_assert!(::core::mem::align_of::<deferred_split>() == ::core::mem::align_of::<kernel::bindings::deferred_split>());
-    kernel::static_assert!(::core::mem::size_of::<delayed_call>() == ::core::mem::size_of::<kernel::bindings::delayed_call>());
-    kernel::static_assert!(::core::mem::align_of::<delayed_call>() == ::core::mem::align_of::<kernel::bindings::delayed_call>());
-    kernel::static_assert!(::core::mem::size_of::<delayed_work>() == ::core::mem::size_of::<kernel::bindings::delayed_work>());
-    kernel::static_assert!(::core::mem::align_of::<delayed_work>() == ::core::mem::align_of::<kernel::bindings::delayed_work>());
     kernel::static_assert!(::core::mem::size_of::<dentry>() == ::core::mem::size_of::<kernel::bindings::dentry>());
-    kernel::static_assert!(::core::mem::align_of::<dentry>() == ::core::mem::align_of::<kernel::bindings::dentry>());
-    kernel::static_assert!(::core::mem::size_of::<dentry_operations>() == ::core::mem::size_of::<kernel::bindings::dentry_operations>());
-    kernel::static_assert!(::core::mem::align_of::<dentry_operations>() == ::core::mem::align_of::<kernel::bindings::dentry_operations>());
-    kernel::static_assert!(::core::mem::size_of::<dev_archdata>() == ::core::mem::size_of::<kernel::bindings::dev_archdata>());
-    kernel::static_assert!(::core::mem::align_of::<dev_archdata>() == ::core::mem::align_of::<kernel::bindings::dev_archdata>());
-    kernel::static_assert!(::core::mem::size_of::<dev_links_info>() == ::core::mem::size_of::<kernel::bindings::dev_links_info>());
-    kernel::static_assert!(::core::mem::align_of::<dev_links_info>() == ::core::mem::align_of::<kernel::bindings::dev_links_info>());
-    kernel::static_assert!(::core::mem::size_of::<dev_msi_info>() == ::core::mem::size_of::<kernel::bindings::dev_msi_info>());
-    kernel::static_assert!(::core::mem::align_of::<dev_msi_info>() == ::core::mem::align_of::<kernel::bindings::dev_msi_info>());
-    kernel::static_assert!(::core::mem::size_of::<dev_pagemap>() == ::core::mem::size_of::<kernel::bindings::dev_pagemap>());
-    kernel::static_assert!(::core::mem::align_of::<dev_pagemap>() == ::core::mem::align_of::<kernel::bindings::dev_pagemap>());
-    kernel::static_assert!(::core::mem::size_of::<dev_pagemap_ops>() == ::core::mem::size_of::<kernel::bindings::dev_pagemap_ops>());
-    kernel::static_assert!(::core::mem::align_of::<dev_pagemap_ops>() == ::core::mem::align_of::<kernel::bindings::dev_pagemap_ops>());
-    kernel::static_assert!(::core::mem::size_of::<dev_pm_domain>() == ::core::mem::size_of::<kernel::bindings::dev_pm_domain>());
-    kernel::static_assert!(::core::mem::align_of::<dev_pm_domain>() == ::core::mem::align_of::<kernel::bindings::dev_pm_domain>());
-    kernel::static_assert!(::core::mem::size_of::<dev_pm_info>() == ::core::mem::size_of::<kernel::bindings::dev_pm_info>());
-    kernel::static_assert!(::core::mem::align_of::<dev_pm_info>() == ::core::mem::align_of::<kernel::bindings::dev_pm_info>());
-    kernel::static_assert!(::core::mem::size_of::<dev_pm_ops>() == ::core::mem::size_of::<kernel::bindings::dev_pm_ops>());
-    kernel::static_assert!(::core::mem::align_of::<dev_pm_ops>() == ::core::mem::align_of::<kernel::bindings::dev_pm_ops>());
     kernel::static_assert!(::core::mem::size_of::<device>() == ::core::mem::size_of::<kernel::bindings::device>());
-    kernel::static_assert!(::core::mem::align_of::<device>() == ::core::mem::align_of::<kernel::bindings::device>());
-    kernel::static_assert!(::core::mem::size_of::<device_dma_parameters>() == ::core::mem::size_of::<kernel::bindings::device_dma_parameters>());
-    kernel::static_assert!(::core::mem::align_of::<device_dma_parameters>() == ::core::mem::align_of::<kernel::bindings::device_dma_parameters>());
-    kernel::static_assert!(::core::mem::size_of::<device_driver>() == ::core::mem::size_of::<kernel::bindings::device_driver>());
-    kernel::static_assert!(::core::mem::align_of::<device_driver>() == ::core::mem::align_of::<kernel::bindings::device_driver>());
-    kernel::static_assert!(::core::mem::size_of::<device_physical_location>() == ::core::mem::size_of::<kernel::bindings::device_physical_location>());
-    kernel::static_assert!(::core::mem::align_of::<device_physical_location>() == ::core::mem::align_of::<kernel::bindings::device_physical_location>());
-    kernel::static_assert!(::core::mem::size_of::<device_type>() == ::core::mem::size_of::<kernel::bindings::device_type>());
-    kernel::static_assert!(::core::mem::align_of::<device_type>() == ::core::mem::align_of::<kernel::bindings::device_type>());
-    kernel::static_assert!(::core::mem::size_of::<dir_context>() == ::core::mem::size_of::<kernel::bindings::dir_context>());
-    kernel::static_assert!(::core::mem::align_of::<dir_context>() == ::core::mem::align_of::<kernel::bindings::dir_context>());
-    kernel::static_assert!(::core::mem::size_of::<dquot>() == ::core::mem::size_of::<kernel::bindings::dquot>());
-    kernel::static_assert!(::core::mem::align_of::<dquot>() == ::core::mem::align_of::<kernel::bindings::dquot>());
-    kernel::static_assert!(::core::mem::size_of::<dquot_operations>() == ::core::mem::size_of::<kernel::bindings::dquot_operations>());
-    kernel::static_assert!(::core::mem::align_of::<dquot_operations>() == ::core::mem::align_of::<kernel::bindings::dquot_operations>());
-    kernel::static_assert!(::core::mem::size_of::<elf64_sym>() == ::core::mem::size_of::<kernel::bindings::elf64_sym>());
-    kernel::static_assert!(::core::mem::align_of::<elf64_sym>() == ::core::mem::align_of::<kernel::bindings::elf64_sym>());
-    kernel::static_assert!(::core::mem::size_of::<em_perf_domain>() == ::core::mem::size_of::<kernel::bindings::em_perf_domain>());
-    kernel::static_assert!(::core::mem::align_of::<em_perf_domain>() == ::core::mem::align_of::<kernel::bindings::em_perf_domain>());
-    kernel::static_assert!(::core::mem::size_of::<em_perf_state>() == ::core::mem::size_of::<kernel::bindings::em_perf_state>());
-    kernel::static_assert!(::core::mem::align_of::<em_perf_state>() == ::core::mem::align_of::<kernel::bindings::em_perf_state>());
-    kernel::static_assert!(::core::mem::size_of::<em_perf_table>() == ::core::mem::size_of::<kernel::bindings::em_perf_table>());
-    kernel::static_assert!(::core::mem::align_of::<em_perf_table>() == ::core::mem::align_of::<kernel::bindings::em_perf_table>());
-    kernel::static_assert!(::core::mem::size_of::<exception_table_entry>() == ::core::mem::size_of::<kernel::bindings::exception_table_entry>());
-    kernel::static_assert!(::core::mem::align_of::<exception_table_entry>() == ::core::mem::align_of::<kernel::bindings::exception_table_entry>());
-    kernel::static_assert!(::core::mem::size_of::<fasync_struct>() == ::core::mem::size_of::<kernel::bindings::fasync_struct>());
-    kernel::static_assert!(::core::mem::align_of::<fasync_struct>() == ::core::mem::align_of::<kernel::bindings::fasync_struct>());
-    kernel::static_assert!(::core::mem::size_of::<fdtable>() == ::core::mem::size_of::<kernel::bindings::fdtable>());
-    kernel::static_assert!(::core::mem::align_of::<fdtable>() == ::core::mem::align_of::<kernel::bindings::fdtable>());
     kernel::static_assert!(::core::mem::size_of::<file>() == ::core::mem::size_of::<kernel::bindings::file>());
-    kernel::static_assert!(::core::mem::align_of::<file>() == ::core::mem::align_of::<kernel::bindings::file>());
     kernel::static_assert!(::core::mem::size_of::<file_operations>() == ::core::mem::size_of::<kernel::bindings::file_operations>());
-    kernel::static_assert!(::core::mem::align_of::<file_operations>() == ::core::mem::align_of::<kernel::bindings::file_operations>());
-    kernel::static_assert!(::core::mem::size_of::<file_ra_state>() == ::core::mem::size_of::<kernel::bindings::file_ra_state>());
-    kernel::static_assert!(::core::mem::align_of::<file_ra_state>() == ::core::mem::align_of::<kernel::bindings::file_ra_state>());
     kernel::static_assert!(::core::mem::size_of::<file_ref_t>() == ::core::mem::size_of::<kernel::bindings::file_ref_t>());
-    kernel::static_assert!(::core::mem::align_of::<file_ref_t>() == ::core::mem::align_of::<kernel::bindings::file_ref_t>());
-    kernel::static_assert!(::core::mem::size_of::<file_system_type>() == ::core::mem::size_of::<kernel::bindings::file_system_type>());
-    kernel::static_assert!(::core::mem::align_of::<file_system_type>() == ::core::mem::align_of::<kernel::bindings::file_system_type>());
-    kernel::static_assert!(::core::mem::size_of::<files_struct>() == ::core::mem::size_of::<kernel::bindings::files_struct>());
-    kernel::static_assert!(::core::mem::align_of::<files_struct>() == ::core::mem::align_of::<kernel::bindings::files_struct>());
     kernel::static_assert!(::core::mem::size_of::<flat_binder_object>() == ::core::mem::size_of::<kernel::bindings::flat_binder_object>());
-    kernel::static_assert!(::core::mem::align_of::<flat_binder_object>() == ::core::mem::align_of::<kernel::bindings::flat_binder_object>());
-    kernel::static_assert!(::core::mem::size_of::<folio>() == ::core::mem::size_of::<kernel::bindings::folio>());
-    kernel::static_assert!(::core::mem::align_of::<folio>() == ::core::mem::align_of::<kernel::bindings::folio>());
-    kernel::static_assert!(::core::mem::size_of::<folio_batch>() == ::core::mem::size_of::<kernel::bindings::folio_batch>());
-    kernel::static_assert!(::core::mem::align_of::<folio_batch>() == ::core::mem::align_of::<kernel::bindings::folio_batch>());
-    kernel::static_assert!(::core::mem::size_of::<fown_struct>() == ::core::mem::size_of::<kernel::bindings::fown_struct>());
-    kernel::static_assert!(::core::mem::align_of::<fown_struct>() == ::core::mem::align_of::<kernel::bindings::fown_struct>());
-    kernel::static_assert!(::core::mem::size_of::<fprop_global>() == ::core::mem::size_of::<kernel::bindings::fprop_global>());
-    kernel::static_assert!(::core::mem::align_of::<fprop_global>() == ::core::mem::align_of::<kernel::bindings::fprop_global>());
-    kernel::static_assert!(::core::mem::size_of::<fprop_local_percpu>() == ::core::mem::size_of::<kernel::bindings::fprop_local_percpu>());
-    kernel::static_assert!(::core::mem::align_of::<fprop_local_percpu>() == ::core::mem::align_of::<kernel::bindings::fprop_local_percpu>());
-    kernel::static_assert!(::core::mem::size_of::<frame_record>() == ::core::mem::size_of::<kernel::bindings::frame_record>());
-    kernel::static_assert!(::core::mem::align_of::<frame_record>() == ::core::mem::align_of::<kernel::bindings::frame_record>());
-    kernel::static_assert!(::core::mem::size_of::<frame_record_meta>() == ::core::mem::size_of::<kernel::bindings::frame_record_meta>());
-    kernel::static_assert!(::core::mem::align_of::<frame_record_meta>() == ::core::mem::align_of::<kernel::bindings::frame_record_meta>());
-    kernel::static_assert!(::core::mem::size_of::<free_area>() == ::core::mem::size_of::<kernel::bindings::free_area>());
-    kernel::static_assert!(::core::mem::align_of::<free_area>() == ::core::mem::align_of::<kernel::bindings::free_area>());
-    kernel::static_assert!(::core::mem::size_of::<freeptr_t>() == ::core::mem::size_of::<kernel::bindings::freeptr_t>());
-    kernel::static_assert!(::core::mem::align_of::<freeptr_t>() == ::core::mem::align_of::<kernel::bindings::freeptr_t>());
-    kernel::static_assert!(::core::mem::size_of::<fwnode_endpoint>() == ::core::mem::size_of::<kernel::bindings::fwnode_endpoint>());
-    kernel::static_assert!(::core::mem::align_of::<fwnode_endpoint>() == ::core::mem::align_of::<kernel::bindings::fwnode_endpoint>());
-    kernel::static_assert!(::core::mem::size_of::<fwnode_handle>() == ::core::mem::size_of::<kernel::bindings::fwnode_handle>());
-    kernel::static_assert!(::core::mem::align_of::<fwnode_handle>() == ::core::mem::align_of::<kernel::bindings::fwnode_handle>());
-    kernel::static_assert!(::core::mem::size_of::<fwnode_operations>() == ::core::mem::size_of::<kernel::bindings::fwnode_operations>());
-    kernel::static_assert!(::core::mem::align_of::<fwnode_operations>() == ::core::mem::align_of::<kernel::bindings::fwnode_operations>());
-    kernel::static_assert!(::core::mem::size_of::<fwnode_reference_args>() == ::core::mem::size_of::<kernel::bindings::fwnode_reference_args>());
-    kernel::static_assert!(::core::mem::align_of::<fwnode_reference_args>() == ::core::mem::align_of::<kernel::bindings::fwnode_reference_args>());
-    kernel::static_assert!(::core::mem::size_of::<group_info>() == ::core::mem::size_of::<kernel::bindings::group_info>());
-    kernel::static_assert!(::core::mem::align_of::<group_info>() == ::core::mem::align_of::<kernel::bindings::group_info>());
-    kernel::static_assert!(::core::mem::size_of::<hlist_bl_head>() == ::core::mem::size_of::<kernel::bindings::hlist_bl_head>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_bl_head>() == ::core::mem::align_of::<kernel::bindings::hlist_bl_head>());
-    kernel::static_assert!(::core::mem::size_of::<hlist_bl_node>() == ::core::mem::size_of::<kernel::bindings::hlist_bl_node>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_bl_node>() == ::core::mem::align_of::<kernel::bindings::hlist_bl_node>());
     kernel::static_assert!(::core::mem::size_of::<hlist_head>() == ::core::mem::size_of::<kernel::bindings::hlist_head>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_head>() == ::core::mem::align_of::<kernel::bindings::hlist_head>());
     kernel::static_assert!(::core::mem::size_of::<hlist_node>() == ::core::mem::size_of::<kernel::bindings::hlist_node>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_node>() == ::core::mem::align_of::<kernel::bindings::hlist_node>());
-    kernel::static_assert!(::core::mem::size_of::<hlist_nulls_head>() == ::core::mem::size_of::<kernel::bindings::hlist_nulls_head>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_nulls_head>() == ::core::mem::align_of::<kernel::bindings::hlist_nulls_head>());
-    kernel::static_assert!(::core::mem::size_of::<hlist_nulls_node>() == ::core::mem::size_of::<kernel::bindings::hlist_nulls_node>());
-    kernel::static_assert!(::core::mem::align_of::<hlist_nulls_node>() == ::core::mem::align_of::<kernel::bindings::hlist_nulls_node>());
-    kernel::static_assert!(::core::mem::size_of::<hprobe>() == ::core::mem::size_of::<kernel::bindings::hprobe>());
-    kernel::static_assert!(::core::mem::align_of::<hprobe>() == ::core::mem::align_of::<kernel::bindings::hprobe>());
-    kernel::static_assert!(::core::mem::size_of::<hrtimer>() == ::core::mem::size_of::<kernel::bindings::hrtimer>());
-    kernel::static_assert!(::core::mem::align_of::<hrtimer>() == ::core::mem::align_of::<kernel::bindings::hrtimer>());
-    kernel::static_assert!(::core::mem::size_of::<hrtimer_clock_base>() == ::core::mem::size_of::<kernel::bindings::hrtimer_clock_base>());
-    kernel::static_assert!(::core::mem::align_of::<hrtimer_clock_base>() == ::core::mem::align_of::<kernel::bindings::hrtimer_clock_base>());
-    kernel::static_assert!(::core::mem::size_of::<hrtimer_cpu_base>() == ::core::mem::size_of::<kernel::bindings::hrtimer_cpu_base>());
-    kernel::static_assert!(::core::mem::align_of::<hrtimer_cpu_base>() == ::core::mem::align_of::<kernel::bindings::hrtimer_cpu_base>());
-    kernel::static_assert!(::core::mem::size_of::<iattr>() == ::core::mem::size_of::<kernel::bindings::iattr>());
-    kernel::static_assert!(::core::mem::align_of::<iattr>() == ::core::mem::align_of::<kernel::bindings::iattr>());
-    kernel::static_assert!(::core::mem::size_of::<idr>() == ::core::mem::size_of::<kernel::bindings::idr>());
-    kernel::static_assert!(::core::mem::align_of::<idr>() == ::core::mem::align_of::<kernel::bindings::idr>());
-    kernel::static_assert!(::core::mem::size_of::<in6_addr>() == ::core::mem::size_of::<kernel::bindings::in6_addr>());
-    kernel::static_assert!(::core::mem::align_of::<in6_addr>() == ::core::mem::align_of::<kernel::bindings::in6_addr>());
     kernel::static_assert!(::core::mem::size_of::<inode>() == ::core::mem::size_of::<kernel::bindings::inode>());
-    kernel::static_assert!(::core::mem::align_of::<inode>() == ::core::mem::align_of::<kernel::bindings::inode>());
-    kernel::static_assert!(::core::mem::size_of::<inode_operations>() == ::core::mem::size_of::<kernel::bindings::inode_operations>());
-    kernel::static_assert!(::core::mem::align_of::<inode_operations>() == ::core::mem::align_of::<kernel::bindings::inode_operations>());
-    kernel::static_assert!(::core::mem::size_of::<io_context>() == ::core::mem::size_of::<kernel::bindings::io_context>());
-    kernel::static_assert!(::core::mem::align_of::<io_context>() == ::core::mem::align_of::<kernel::bindings::io_context>());
-    kernel::static_assert!(::core::mem::size_of::<io_cq>() == ::core::mem::size_of::<kernel::bindings::io_cq>());
-    kernel::static_assert!(::core::mem::align_of::<io_cq>() == ::core::mem::align_of::<kernel::bindings::io_cq>());
-    kernel::static_assert!(::core::mem::size_of::<iov_iter>() == ::core::mem::size_of::<kernel::bindings::iov_iter>());
-    kernel::static_assert!(::core::mem::align_of::<iov_iter>() == ::core::mem::align_of::<kernel::bindings::iov_iter>());
-    kernel::static_assert!(::core::mem::size_of::<iovec>() == ::core::mem::size_of::<kernel::bindings::iovec>());
-    kernel::static_assert!(::core::mem::align_of::<iovec>() == ::core::mem::align_of::<kernel::bindings::iovec>());
-    kernel::static_assert!(::core::mem::size_of::<ip_conntrack_stat>() == ::core::mem::size_of::<kernel::bindings::ip_conntrack_stat>());
-    kernel::static_assert!(::core::mem::align_of::<ip_conntrack_stat>() == ::core::mem::align_of::<kernel::bindings::ip_conntrack_stat>());
-    kernel::static_assert!(::core::mem::size_of::<jump_entry>() == ::core::mem::size_of::<kernel::bindings::jump_entry>());
-    kernel::static_assert!(::core::mem::align_of::<jump_entry>() == ::core::mem::align_of::<kernel::bindings::jump_entry>());
-    kernel::static_assert!(::core::mem::size_of::<k_sigaction>() == ::core::mem::size_of::<kernel::bindings::k_sigaction>());
-    kernel::static_assert!(::core::mem::align_of::<k_sigaction>() == ::core::mem::align_of::<kernel::bindings::k_sigaction>());
-    kernel::static_assert!(::core::mem::size_of::<kernel_cap_t>() == ::core::mem::size_of::<kernel::bindings::kernel_cap_t>());
-    kernel::static_assert!(::core::mem::align_of::<kernel_cap_t>() == ::core::mem::align_of::<kernel::bindings::kernel_cap_t>());
     kernel::static_assert!(::core::mem::size_of::<kernel_param>() == ::core::mem::size_of::<kernel::bindings::kernel_param>());
-    kernel::static_assert!(::core::mem::align_of::<kernel_param>() == ::core::mem::align_of::<kernel::bindings::kernel_param>());
     kernel::static_assert!(::core::mem::size_of::<kernel_param_ops>() == ::core::mem::size_of::<kernel::bindings::kernel_param_ops>());
-    kernel::static_assert!(::core::mem::align_of::<kernel_param_ops>() == ::core::mem::align_of::<kernel::bindings::kernel_param_ops>());
-    kernel::static_assert!(::core::mem::size_of::<kernel_siginfo>() == ::core::mem::size_of::<kernel::bindings::kernel_siginfo>());
-    kernel::static_assert!(::core::mem::align_of::<kernel_siginfo>() == ::core::mem::align_of::<kernel::bindings::kernel_siginfo>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_elem_attr>() == ::core::mem::size_of::<kernel::bindings::kernfs_elem_attr>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_elem_attr>() == ::core::mem::align_of::<kernel::bindings::kernfs_elem_attr>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_elem_dir>() == ::core::mem::size_of::<kernel::bindings::kernfs_elem_dir>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_elem_dir>() == ::core::mem::align_of::<kernel::bindings::kernfs_elem_dir>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_elem_symlink>() == ::core::mem::size_of::<kernel::bindings::kernfs_elem_symlink>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_elem_symlink>() == ::core::mem::align_of::<kernel::bindings::kernfs_elem_symlink>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_node>() == ::core::mem::size_of::<kernel::bindings::kernfs_node>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_node>() == ::core::mem::align_of::<kernel::bindings::kernfs_node>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_open_file>() == ::core::mem::size_of::<kernel::bindings::kernfs_open_file>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_open_file>() == ::core::mem::align_of::<kernel::bindings::kernfs_open_file>());
-    kernel::static_assert!(::core::mem::size_of::<kernfs_ops>() == ::core::mem::size_of::<kernel::bindings::kernfs_ops>());
-    kernel::static_assert!(::core::mem::align_of::<kernfs_ops>() == ::core::mem::align_of::<kernel::bindings::kernfs_ops>());
     kernel::static_assert!(::core::mem::size_of::<key>() == ::core::mem::size_of::<kernel::bindings::key>());
-    kernel::static_assert!(::core::mem::align_of::<key>() == ::core::mem::align_of::<kernel::bindings::key>());
-    kernel::static_assert!(::core::mem::size_of::<key_restriction>() == ::core::mem::size_of::<kernel::bindings::key_restriction>());
-    kernel::static_assert!(::core::mem::align_of::<key_restriction>() == ::core::mem::align_of::<kernel::bindings::key_restriction>());
-    kernel::static_assert!(::core::mem::size_of::<key_tag>() == ::core::mem::size_of::<kernel::bindings::key_tag>());
-    kernel::static_assert!(::core::mem::align_of::<key_tag>() == ::core::mem::align_of::<kernel::bindings::key_tag>());
-    kernel::static_assert!(::core::mem::size_of::<keyring_index_key>() == ::core::mem::size_of::<kernel::bindings::keyring_index_key>());
-    kernel::static_assert!(::core::mem::align_of::<keyring_index_key>() == ::core::mem::align_of::<kernel::bindings::keyring_index_key>());
     kernel::static_assert!(::core::mem::size_of::<kgid_t>() == ::core::mem::size_of::<kernel::bindings::kgid_t>());
-    kernel::static_assert!(::core::mem::align_of::<kgid_t>() == ::core::mem::align_of::<kernel::bindings::kgid_t>());
-    kernel::static_assert!(::core::mem::size_of::<kiocb>() == ::core::mem::size_of::<kernel::bindings::kiocb>());
-    kernel::static_assert!(::core::mem::align_of::<kiocb>() == ::core::mem::align_of::<kernel::bindings::kiocb>());
-    kernel::static_assert!(::core::mem::size_of::<kmap_ctrl>() == ::core::mem::size_of::<kernel::bindings::kmap_ctrl>());
-    kernel::static_assert!(::core::mem::align_of::<kmap_ctrl>() == ::core::mem::align_of::<kernel::bindings::kmap_ctrl>());
-    kernel::static_assert!(::core::mem::size_of::<kobj_ns_type_operations>() == ::core::mem::size_of::<kernel::bindings::kobj_ns_type_operations>());
-    kernel::static_assert!(::core::mem::align_of::<kobj_ns_type_operations>() == ::core::mem::align_of::<kernel::bindings::kobj_ns_type_operations>());
-    kernel::static_assert!(::core::mem::size_of::<kobj_type>() == ::core::mem::size_of::<kernel::bindings::kobj_type>());
-    kernel::static_assert!(::core::mem::align_of::<kobj_type>() == ::core::mem::align_of::<kernel::bindings::kobj_type>());
-    kernel::static_assert!(::core::mem::size_of::<kobj_uevent_env>() == ::core::mem::size_of::<kernel::bindings::kobj_uevent_env>());
-    kernel::static_assert!(::core::mem::align_of::<kobj_uevent_env>() == ::core::mem::align_of::<kernel::bindings::kobj_uevent_env>());
-    kernel::static_assert!(::core::mem::size_of::<kobject>() == ::core::mem::size_of::<kernel::bindings::kobject>());
-    kernel::static_assert!(::core::mem::align_of::<kobject>() == ::core::mem::align_of::<kernel::bindings::kobject>());
-    kernel::static_assert!(::core::mem::size_of::<kparam_array>() == ::core::mem::size_of::<kernel::bindings::kparam_array>());
-    kernel::static_assert!(::core::mem::align_of::<kparam_array>() == ::core::mem::align_of::<kernel::bindings::kparam_array>());
-    kernel::static_assert!(::core::mem::size_of::<kparam_string>() == ::core::mem::size_of::<kernel::bindings::kparam_string>());
-    kernel::static_assert!(::core::mem::align_of::<kparam_string>() == ::core::mem::align_of::<kernel::bindings::kparam_string>());
-    kernel::static_assert!(::core::mem::size_of::<kprojid_t>() == ::core::mem::size_of::<kernel::bindings::kprojid_t>());
-    kernel::static_assert!(::core::mem::align_of::<kprojid_t>() == ::core::mem::align_of::<kernel::bindings::kprojid_t>());
-    kernel::static_assert!(::core::mem::size_of::<kqid>() == ::core::mem::size_of::<kernel::bindings::kqid>());
-    kernel::static_assert!(::core::mem::align_of::<kqid>() == ::core::mem::align_of::<kernel::bindings::kqid>());
-    kernel::static_assert!(::core::mem::size_of::<kref>() == ::core::mem::size_of::<kernel::bindings::kref>());
-    kernel::static_assert!(::core::mem::align_of::<kref>() == ::core::mem::align_of::<kernel::bindings::kref>());
-    kernel::static_assert!(::core::mem::size_of::<kset>() == ::core::mem::size_of::<kernel::bindings::kset>());
-    kernel::static_assert!(::core::mem::align_of::<kset>() == ::core::mem::align_of::<kernel::bindings::kset>());
-    kernel::static_assert!(::core::mem::size_of::<kset_uevent_ops>() == ::core::mem::size_of::<kernel::bindings::kset_uevent_ops>());
-    kernel::static_assert!(::core::mem::align_of::<kset_uevent_ops>() == ::core::mem::align_of::<kernel::bindings::kset_uevent_ops>());
-    kernel::static_assert!(::core::mem::size_of::<kstat>() == ::core::mem::size_of::<kernel::bindings::kstat>());
-    kernel::static_assert!(::core::mem::align_of::<kstat>() == ::core::mem::align_of::<kernel::bindings::kstat>());
     kernel::static_assert!(::core::mem::size_of::<kuid_t>() == ::core::mem::size_of::<kernel::bindings::kuid_t>());
-    kernel::static_assert!(::core::mem::align_of::<kuid_t>() == ::core::mem::align_of::<kernel::bindings::kuid_t>());
-    kernel::static_assert!(::core::mem::size_of::<kvec>() == ::core::mem::size_of::<kernel::bindings::kvec>());
-    kernel::static_assert!(::core::mem::align_of::<kvec>() == ::core::mem::align_of::<kernel::bindings::kvec>());
-    kernel::static_assert!(::core::mem::size_of::<latch_tree_node>() == ::core::mem::size_of::<kernel::bindings::latch_tree_node>());
-    kernel::static_assert!(::core::mem::align_of::<latch_tree_node>() == ::core::mem::align_of::<kernel::bindings::latch_tree_node>());
     kernel::static_assert!(::core::mem::size_of::<list_head>() == ::core::mem::size_of::<kernel::bindings::list_head>());
-    kernel::static_assert!(::core::mem::align_of::<list_head>() == ::core::mem::align_of::<kernel::bindings::list_head>());
     kernel::static_assert!(::core::mem::size_of::<list_lru>() == ::core::mem::size_of::<kernel::bindings::list_lru>());
-    kernel::static_assert!(::core::mem::align_of::<list_lru>() == ::core::mem::align_of::<kernel::bindings::list_lru>());
-    kernel::static_assert!(::core::mem::size_of::<list_lru_node>() == ::core::mem::size_of::<kernel::bindings::list_lru_node>());
-    kernel::static_assert!(::core::mem::align_of::<list_lru_node>() == ::core::mem::align_of::<kernel::bindings::list_lru_node>());
-    kernel::static_assert!(::core::mem::size_of::<list_lru_one>() == ::core::mem::size_of::<kernel::bindings::list_lru_one>());
-    kernel::static_assert!(::core::mem::align_of::<list_lru_one>() == ::core::mem::align_of::<kernel::bindings::list_lru_one>());
-    kernel::static_assert!(::core::mem::size_of::<llist_head>() == ::core::mem::size_of::<kernel::bindings::llist_head>());
-    kernel::static_assert!(::core::mem::align_of::<llist_head>() == ::core::mem::align_of::<kernel::bindings::llist_head>());
-    kernel::static_assert!(::core::mem::size_of::<llist_node>() == ::core::mem::size_of::<kernel::bindings::llist_node>());
-    kernel::static_assert!(::core::mem::align_of::<llist_node>() == ::core::mem::align_of::<kernel::bindings::llist_node>());
-    kernel::static_assert!(::core::mem::size_of::<load_weight>() == ::core::mem::size_of::<kernel::bindings::load_weight>());
-    kernel::static_assert!(::core::mem::align_of::<load_weight>() == ::core::mem::align_of::<kernel::bindings::load_weight>());
-    kernel::static_assert!(::core::mem::size_of::<local64_t>() == ::core::mem::size_of::<kernel::bindings::local64_t>());
-    kernel::static_assert!(::core::mem::align_of::<local64_t>() == ::core::mem::align_of::<kernel::bindings::local64_t>());
-    kernel::static_assert!(::core::mem::size_of::<local_t>() == ::core::mem::size_of::<kernel::bindings::local_t>());
-    kernel::static_assert!(::core::mem::align_of::<local_t>() == ::core::mem::align_of::<kernel::bindings::local_t>());
     kernel::static_assert!(::core::mem::size_of::<lock_class_key>() == ::core::mem::size_of::<kernel::bindings::lock_class_key>());
-    kernel::static_assert!(::core::mem::align_of::<lock_class_key>() == ::core::mem::align_of::<kernel::bindings::lock_class_key>());
-    kernel::static_assert!(::core::mem::size_of::<lockdep_map>() == ::core::mem::size_of::<kernel::bindings::lockdep_map>());
-    kernel::static_assert!(::core::mem::align_of::<lockdep_map>() == ::core::mem::align_of::<kernel::bindings::lockdep_map>());
-    kernel::static_assert!(::core::mem::size_of::<lockref>() == ::core::mem::size_of::<kernel::bindings::lockref>());
-    kernel::static_assert!(::core::mem::align_of::<lockref>() == ::core::mem::align_of::<kernel::bindings::lockref>());
-    kernel::static_assert!(::core::mem::size_of::<lru_gen_folio>() == ::core::mem::size_of::<kernel::bindings::lru_gen_folio>());
-    kernel::static_assert!(::core::mem::align_of::<lru_gen_folio>() == ::core::mem::align_of::<kernel::bindings::lru_gen_folio>());
-    kernel::static_assert!(::core::mem::size_of::<lru_gen_memcg>() == ::core::mem::size_of::<kernel::bindings::lru_gen_memcg>());
-    kernel::static_assert!(::core::mem::align_of::<lru_gen_memcg>() == ::core::mem::align_of::<kernel::bindings::lru_gen_memcg>());
-    kernel::static_assert!(::core::mem::size_of::<lru_gen_mm_list>() == ::core::mem::size_of::<kernel::bindings::lru_gen_mm_list>());
-    kernel::static_assert!(::core::mem::align_of::<lru_gen_mm_list>() == ::core::mem::align_of::<kernel::bindings::lru_gen_mm_list>());
-    kernel::static_assert!(::core::mem::size_of::<lru_gen_mm_state>() == ::core::mem::size_of::<kernel::bindings::lru_gen_mm_state>());
-    kernel::static_assert!(::core::mem::align_of::<lru_gen_mm_state>() == ::core::mem::align_of::<kernel::bindings::lru_gen_mm_state>());
-    kernel::static_assert!(::core::mem::size_of::<lru_gen_mm_walk>() == ::core::mem::size_of::<kernel::bindings::lru_gen_mm_walk>());
-    kernel::static_assert!(::core::mem::align_of::<lru_gen_mm_walk>() == ::core::mem::align_of::<kernel::bindings::lru_gen_mm_walk>());
-    kernel::static_assert!(::core::mem::size_of::<lruvec>() == ::core::mem::size_of::<kernel::bindings::lruvec>());
-    kernel::static_assert!(::core::mem::align_of::<lruvec>() == ::core::mem::align_of::<kernel::bindings::lruvec>());
     kernel::static_assert!(::core::mem::size_of::<lsm_context>() == ::core::mem::size_of::<kernel::bindings::lsm_context>());
-    kernel::static_assert!(::core::mem::align_of::<lsm_context>() == ::core::mem::align_of::<kernel::bindings::lsm_context>());
-    kernel::static_assert!(::core::mem::size_of::<maple_tree>() == ::core::mem::size_of::<kernel::bindings::maple_tree>());
-    kernel::static_assert!(::core::mem::align_of::<maple_tree>() == ::core::mem::align_of::<kernel::bindings::maple_tree>());
-    kernel::static_assert!(::core::mem::size_of::<mem_cgroup>() == ::core::mem::size_of::<kernel::bindings::mem_cgroup>());
-    kernel::static_assert!(::core::mem::align_of::<mem_cgroup>() == ::core::mem::align_of::<kernel::bindings::mem_cgroup>());
-    kernel::static_assert!(::core::mem::size_of::<mem_cgroup_id>() == ::core::mem::size_of::<kernel::bindings::mem_cgroup_id>());
-    kernel::static_assert!(::core::mem::align_of::<mem_cgroup_id>() == ::core::mem::align_of::<kernel::bindings::mem_cgroup_id>());
-    kernel::static_assert!(::core::mem::size_of::<mem_cgroup_per_node>() == ::core::mem::size_of::<kernel::bindings::mem_cgroup_per_node>());
-    kernel::static_assert!(::core::mem::align_of::<mem_cgroup_per_node>() == ::core::mem::align_of::<kernel::bindings::mem_cgroup_per_node>());
-    kernel::static_assert!(::core::mem::size_of::<mem_cgroup_reclaim_iter>() == ::core::mem::size_of::<kernel::bindings::mem_cgroup_reclaim_iter>());
-    kernel::static_assert!(::core::mem::align_of::<mem_cgroup_reclaim_iter>() == ::core::mem::align_of::<kernel::bindings::mem_cgroup_reclaim_iter>());
-    kernel::static_assert!(::core::mem::size_of::<mem_dqblk>() == ::core::mem::size_of::<kernel::bindings::mem_dqblk>());
-    kernel::static_assert!(::core::mem::align_of::<mem_dqblk>() == ::core::mem::align_of::<kernel::bindings::mem_dqblk>());
-    kernel::static_assert!(::core::mem::size_of::<mem_dqinfo>() == ::core::mem::size_of::<kernel::bindings::mem_dqinfo>());
-    kernel::static_assert!(::core::mem::align_of::<mem_dqinfo>() == ::core::mem::align_of::<kernel::bindings::mem_dqinfo>());
-    kernel::static_assert!(::core::mem::size_of::<memcg_cgwb_frn>() == ::core::mem::size_of::<kernel::bindings::memcg_cgwb_frn>());
-    kernel::static_assert!(::core::mem::align_of::<memcg_cgwb_frn>() == ::core::mem::align_of::<kernel::bindings::memcg_cgwb_frn>());
-    kernel::static_assert!(::core::mem::size_of::<memdesc_flags_t>() == ::core::mem::size_of::<kernel::bindings::memdesc_flags_t>());
-    kernel::static_assert!(::core::mem::align_of::<memdesc_flags_t>() == ::core::mem::align_of::<kernel::bindings::memdesc_flags_t>());
-    kernel::static_assert!(::core::mem::size_of::<mempool>() == ::core::mem::size_of::<kernel::bindings::mempool>());
-    kernel::static_assert!(::core::mem::align_of::<mempool>() == ::core::mem::align_of::<kernel::bindings::mempool>());
     kernel::static_assert!(::core::mem::size_of::<miscdevice>() == ::core::mem::size_of::<kernel::bindings::miscdevice>());
-    kernel::static_assert!(::core::mem::align_of::<miscdevice>() == ::core::mem::align_of::<kernel::bindings::miscdevice>());
-    kernel::static_assert!(::core::mem::size_of::<mm_context_t>() == ::core::mem::size_of::<kernel::bindings::mm_context_t>());
-    kernel::static_assert!(::core::mem::align_of::<mm_context_t>() == ::core::mem::align_of::<kernel::bindings::mm_context_t>());
-    kernel::static_assert!(::core::mem::size_of::<mm_flags_t>() == ::core::mem::size_of::<kernel::bindings::mm_flags_t>());
-    kernel::static_assert!(::core::mem::align_of::<mm_flags_t>() == ::core::mem::align_of::<kernel::bindings::mm_flags_t>());
     kernel::static_assert!(::core::mem::size_of::<mm_struct>() == ::core::mem::size_of::<kernel::bindings::mm_struct>());
-    kernel::static_assert!(::core::mem::align_of::<mm_struct>() == ::core::mem::align_of::<kernel::bindings::mm_struct>());
-    kernel::static_assert!(::core::mem::size_of::<mod_arch_specific>() == ::core::mem::size_of::<kernel::bindings::mod_arch_specific>());
-    kernel::static_assert!(::core::mem::align_of::<mod_arch_specific>() == ::core::mem::align_of::<kernel::bindings::mod_arch_specific>());
-    kernel::static_assert!(::core::mem::size_of::<mod_kallsyms>() == ::core::mem::size_of::<kernel::bindings::mod_kallsyms>());
-    kernel::static_assert!(::core::mem::align_of::<mod_kallsyms>() == ::core::mem::align_of::<kernel::bindings::mod_kallsyms>());
-    kernel::static_assert!(::core::mem::size_of::<mod_plt_sec>() == ::core::mem::size_of::<kernel::bindings::mod_plt_sec>());
-    kernel::static_assert!(::core::mem::align_of::<mod_plt_sec>() == ::core::mem::align_of::<kernel::bindings::mod_plt_sec>());
-    kernel::static_assert!(::core::mem::size_of::<mod_tree_node>() == ::core::mem::size_of::<kernel::bindings::mod_tree_node>());
-    kernel::static_assert!(::core::mem::align_of::<mod_tree_node>() == ::core::mem::align_of::<kernel::bindings::mod_tree_node>());
     kernel::static_assert!(::core::mem::size_of::<module>() == ::core::mem::size_of::<kernel::bindings::module>());
-    kernel::static_assert!(::core::mem::align_of::<module>() == ::core::mem::align_of::<kernel::bindings::module>());
-    kernel::static_assert!(::core::mem::size_of::<module_attribute>() == ::core::mem::size_of::<kernel::bindings::module_attribute>());
-    kernel::static_assert!(::core::mem::align_of::<module_attribute>() == ::core::mem::align_of::<kernel::bindings::module_attribute>());
-    kernel::static_assert!(::core::mem::size_of::<module_kobject>() == ::core::mem::size_of::<kernel::bindings::module_kobject>());
-    kernel::static_assert!(::core::mem::align_of::<module_kobject>() == ::core::mem::align_of::<kernel::bindings::module_kobject>());
-    kernel::static_assert!(::core::mem::size_of::<module_memory>() == ::core::mem::size_of::<kernel::bindings::module_memory>());
-    kernel::static_assert!(::core::mem::align_of::<module_memory>() == ::core::mem::align_of::<kernel::bindings::module_memory>());
     kernel::static_assert!(::core::mem::size_of::<mutex>() == ::core::mem::size_of::<kernel::bindings::mutex>());
-    kernel::static_assert!(::core::mem::align_of::<mutex>() == ::core::mem::align_of::<kernel::bindings::mutex>());
     // kernel::static_assert!(::core::mem::size_of::<net>() == ::core::mem::size_of::<kernel::bindings::net>());
-    // kernel::static_assert!(::core::mem::align_of::<net>() == ::core::mem::align_of::<kernel::bindings::net>());
     kernel::static_assert!(::core::mem::size_of::<netlink_callback>() == ::core::mem::size_of::<kernel::bindings::netlink_callback>());
-    kernel::static_assert!(::core::mem::align_of::<netlink_callback>() == ::core::mem::align_of::<kernel::bindings::netlink_callback>());
     kernel::static_assert!(::core::mem::size_of::<netlink_ext_ack>() == ::core::mem::size_of::<kernel::bindings::netlink_ext_ack>());
-    kernel::static_assert!(::core::mem::align_of::<netlink_ext_ack>() == ::core::mem::align_of::<kernel::bindings::netlink_ext_ack>());
     kernel::static_assert!(::core::mem::size_of::<netlink_skb_parms>() == ::core::mem::size_of::<kernel::bindings::netlink_skb_parms>());
-    kernel::static_assert!(::core::mem::align_of::<netlink_skb_parms>() == ::core::mem::align_of::<kernel::bindings::netlink_skb_parms>());
     kernel::static_assert!(::core::mem::size_of::<nla_policy>() == ::core::mem::size_of::<kernel::bindings::nla_policy>());
-    kernel::static_assert!(::core::mem::align_of::<nla_policy>() == ::core::mem::align_of::<kernel::bindings::nla_policy>());
     kernel::static_assert!(::core::mem::size_of::<nlattr>() == ::core::mem::size_of::<kernel::bindings::nlattr>());
-    kernel::static_assert!(::core::mem::align_of::<nlattr>() == ::core::mem::align_of::<kernel::bindings::nlattr>());
     kernel::static_assert!(::core::mem::size_of::<nlmsghdr>() == ::core::mem::size_of::<kernel::bindings::nlmsghdr>());
-    kernel::static_assert!(::core::mem::align_of::<nlmsghdr>() == ::core::mem::align_of::<kernel::bindings::nlmsghdr>());
-    kernel::static_assert!(::core::mem::size_of::<nodemask_t>() == ::core::mem::size_of::<kernel::bindings::nodemask_t>());
-    kernel::static_assert!(::core::mem::align_of::<nodemask_t>() == ::core::mem::align_of::<kernel::bindings::nodemask_t>());
-    kernel::static_assert!(::core::mem::size_of::<notifier_block>() == ::core::mem::size_of::<kernel::bindings::notifier_block>());
-    kernel::static_assert!(::core::mem::align_of::<notifier_block>() == ::core::mem::align_of::<kernel::bindings::notifier_block>());
-    kernel::static_assert!(::core::mem::size_of::<ns_common>() == ::core::mem::size_of::<kernel::bindings::ns_common>());
-    kernel::static_assert!(::core::mem::align_of::<ns_common>() == ::core::mem::align_of::<kernel::bindings::ns_common>());
-    kernel::static_assert!(::core::mem::size_of::<nsproxy>() == ::core::mem::size_of::<kernel::bindings::nsproxy>());
-    kernel::static_assert!(::core::mem::align_of::<nsproxy>() == ::core::mem::align_of::<kernel::bindings::nsproxy>());
-    kernel::static_assert!(::core::mem::size_of::<obj_cgroup>() == ::core::mem::size_of::<kernel::bindings::obj_cgroup>());
-    kernel::static_assert!(::core::mem::align_of::<obj_cgroup>() == ::core::mem::align_of::<kernel::bindings::obj_cgroup>());
-    kernel::static_assert!(::core::mem::size_of::<offset_ctx>() == ::core::mem::size_of::<kernel::bindings::offset_ctx>());
-    kernel::static_assert!(::core::mem::align_of::<offset_ctx>() == ::core::mem::align_of::<kernel::bindings::offset_ctx>());
-    kernel::static_assert!(::core::mem::size_of::<old_timespec32>() == ::core::mem::size_of::<kernel::bindings::old_timespec32>());
-    kernel::static_assert!(::core::mem::align_of::<old_timespec32>() == ::core::mem::align_of::<kernel::bindings::old_timespec32>());
     kernel::static_assert!(::core::mem::size_of::<optimistic_spin_queue>() == ::core::mem::size_of::<kernel::bindings::optimistic_spin_queue>());
-    kernel::static_assert!(::core::mem::align_of::<optimistic_spin_queue>() == ::core::mem::align_of::<kernel::bindings::optimistic_spin_queue>());
-    kernel::static_assert!(::core::mem::size_of::<p4d_t>() == ::core::mem::size_of::<kernel::bindings::p4d_t>());
-    kernel::static_assert!(::core::mem::align_of::<p4d_t>() == ::core::mem::align_of::<kernel::bindings::p4d_t>());
     kernel::static_assert!(::core::mem::size_of::<page>() == ::core::mem::size_of::<kernel::bindings::page>());
-    kernel::static_assert!(::core::mem::align_of::<page>() == ::core::mem::align_of::<kernel::bindings::page>());
-    kernel::static_assert!(::core::mem::size_of::<page_counter>() == ::core::mem::size_of::<kernel::bindings::page_counter>());
-    kernel::static_assert!(::core::mem::align_of::<page_counter>() == ::core::mem::align_of::<kernel::bindings::page_counter>());
-    kernel::static_assert!(::core::mem::size_of::<page_frag>() == ::core::mem::size_of::<kernel::bindings::page_frag>());
-    kernel::static_assert!(::core::mem::align_of::<page_frag>() == ::core::mem::align_of::<kernel::bindings::page_frag>());
-    kernel::static_assert!(::core::mem::size_of::<path>() == ::core::mem::size_of::<kernel::bindings::path>());
-    kernel::static_assert!(::core::mem::align_of::<path>() == ::core::mem::align_of::<kernel::bindings::path>());
-    kernel::static_assert!(::core::mem::size_of::<per_cpu_nodestat>() == ::core::mem::size_of::<kernel::bindings::per_cpu_nodestat>());
-    kernel::static_assert!(::core::mem::align_of::<per_cpu_nodestat>() == ::core::mem::align_of::<kernel::bindings::per_cpu_nodestat>());
-    kernel::static_assert!(::core::mem::size_of::<per_cpu_pages>() == ::core::mem::size_of::<kernel::bindings::per_cpu_pages>());
-    kernel::static_assert!(::core::mem::align_of::<per_cpu_pages>() == ::core::mem::align_of::<kernel::bindings::per_cpu_pages>());
-    kernel::static_assert!(::core::mem::size_of::<per_cpu_zonestat>() == ::core::mem::size_of::<kernel::bindings::per_cpu_zonestat>());
-    kernel::static_assert!(::core::mem::align_of::<per_cpu_zonestat>() == ::core::mem::align_of::<kernel::bindings::per_cpu_zonestat>());
-    kernel::static_assert!(::core::mem::size_of::<percpu_counter>() == ::core::mem::size_of::<kernel::bindings::percpu_counter>());
-    kernel::static_assert!(::core::mem::align_of::<percpu_counter>() == ::core::mem::align_of::<kernel::bindings::percpu_counter>());
-    kernel::static_assert!(::core::mem::size_of::<percpu_ref>() == ::core::mem::size_of::<kernel::bindings::percpu_ref>());
-    kernel::static_assert!(::core::mem::align_of::<percpu_ref>() == ::core::mem::align_of::<kernel::bindings::percpu_ref>());
-    kernel::static_assert!(::core::mem::size_of::<percpu_ref_data>() == ::core::mem::size_of::<kernel::bindings::percpu_ref_data>());
-    kernel::static_assert!(::core::mem::align_of::<percpu_ref_data>() == ::core::mem::align_of::<kernel::bindings::percpu_ref_data>());
-    kernel::static_assert!(::core::mem::size_of::<percpu_rw_semaphore>() == ::core::mem::size_of::<kernel::bindings::percpu_rw_semaphore>());
-    kernel::static_assert!(::core::mem::align_of::<percpu_rw_semaphore>() == ::core::mem::align_of::<kernel::bindings::percpu_rw_semaphore>());
-    kernel::static_assert!(::core::mem::size_of::<perf_ctx_data>() == ::core::mem::size_of::<kernel::bindings::perf_ctx_data>());
-    kernel::static_assert!(::core::mem::align_of::<perf_ctx_data>() == ::core::mem::align_of::<kernel::bindings::perf_ctx_data>());
-    kernel::static_assert!(::core::mem::size_of::<perf_event>() == ::core::mem::size_of::<kernel::bindings::perf_event>());
-    kernel::static_assert!(::core::mem::align_of::<perf_event>() == ::core::mem::align_of::<kernel::bindings::perf_event>());
-    kernel::static_assert!(::core::mem::size_of::<perf_event_attr>() == ::core::mem::size_of::<kernel::bindings::perf_event_attr>());
-    kernel::static_assert!(::core::mem::align_of::<perf_event_attr>() == ::core::mem::align_of::<kernel::bindings::perf_event_attr>());
-    kernel::static_assert!(::core::mem::size_of::<perf_event_context>() == ::core::mem::size_of::<kernel::bindings::perf_event_context>());
-    kernel::static_assert!(::core::mem::align_of::<perf_event_context>() == ::core::mem::align_of::<kernel::bindings::perf_event_context>());
-    kernel::static_assert!(::core::mem::size_of::<pgd_t>() == ::core::mem::size_of::<kernel::bindings::pgd_t>());
-    kernel::static_assert!(::core::mem::align_of::<pgd_t>() == ::core::mem::align_of::<kernel::bindings::pgd_t>());
-    kernel::static_assert!(::core::mem::size_of::<pglist_data>() == ::core::mem::size_of::<kernel::bindings::pglist_data>());
-    kernel::static_assert!(::core::mem::align_of::<pglist_data>() == ::core::mem::align_of::<kernel::bindings::pglist_data>());
-    kernel::static_assert!(::core::mem::size_of::<pgprot_t>() == ::core::mem::size_of::<kernel::bindings::pgprot_t>());
-    kernel::static_assert!(::core::mem::align_of::<pgprot_t>() == ::core::mem::align_of::<kernel::bindings::pgprot_t>());
     kernel::static_assert!(::core::mem::size_of::<pid>() == ::core::mem::size_of::<kernel::bindings::pid>());
-    kernel::static_assert!(::core::mem::align_of::<pid>() == ::core::mem::align_of::<kernel::bindings::pid>());
     kernel::static_assert!(::core::mem::size_of::<pid_namespace>() == ::core::mem::size_of::<kernel::bindings::pid_namespace>());
-    kernel::static_assert!(::core::mem::align_of::<pid_namespace>() == ::core::mem::align_of::<kernel::bindings::pid_namespace>());
-    kernel::static_assert!(::core::mem::size_of::<pkvm_el2_module>() == ::core::mem::size_of::<kernel::bindings::pkvm_el2_module>());
-    kernel::static_assert!(::core::mem::align_of::<pkvm_el2_module>() == ::core::mem::align_of::<kernel::bindings::pkvm_el2_module>());
-    kernel::static_assert!(::core::mem::size_of::<pkvm_module_section>() == ::core::mem::size_of::<kernel::bindings::pkvm_module_section>());
-    kernel::static_assert!(::core::mem::align_of::<pkvm_module_section>() == ::core::mem::align_of::<kernel::bindings::pkvm_module_section>());
-    kernel::static_assert!(::core::mem::size_of::<plist_node>() == ::core::mem::size_of::<kernel::bindings::plist_node>());
-    kernel::static_assert!(::core::mem::align_of::<plist_node>() == ::core::mem::align_of::<kernel::bindings::plist_node>());
-    kernel::static_assert!(::core::mem::size_of::<plt_entry>() == ::core::mem::size_of::<kernel::bindings::plt_entry>());
-    kernel::static_assert!(::core::mem::align_of::<plt_entry>() == ::core::mem::align_of::<kernel::bindings::plt_entry>());
-    kernel::static_assert!(::core::mem::size_of::<pm_message>() == ::core::mem::size_of::<kernel::bindings::pm_message>());
-    kernel::static_assert!(::core::mem::align_of::<pm_message>() == ::core::mem::align_of::<kernel::bindings::pm_message>());
-    kernel::static_assert!(::core::mem::size_of::<pm_subsys_data>() == ::core::mem::size_of::<kernel::bindings::pm_subsys_data>());
-    kernel::static_assert!(::core::mem::align_of::<pm_subsys_data>() == ::core::mem::align_of::<kernel::bindings::pm_subsys_data>());
-    kernel::static_assert!(::core::mem::size_of::<pmd_t>() == ::core::mem::size_of::<kernel::bindings::pmd_t>());
-    kernel::static_assert!(::core::mem::align_of::<pmd_t>() == ::core::mem::align_of::<kernel::bindings::pmd_t>());
-    kernel::static_assert!(::core::mem::size_of::<pmu>() == ::core::mem::size_of::<kernel::bindings::pmu>());
-    kernel::static_assert!(::core::mem::align_of::<pmu>() == ::core::mem::align_of::<kernel::bindings::pmu>());
     kernel::static_assert!(::core::mem::size_of::<poll_table_struct>() == ::core::mem::size_of::<kernel::bindings::poll_table_struct>());
-    kernel::static_assert!(::core::mem::align_of::<poll_table_struct>() == ::core::mem::align_of::<kernel::bindings::poll_table_struct>());
-    kernel::static_assert!(::core::mem::size_of::<pollfd>() == ::core::mem::size_of::<kernel::bindings::pollfd>());
-    kernel::static_assert!(::core::mem::align_of::<pollfd>() == ::core::mem::align_of::<kernel::bindings::pollfd>());
-    kernel::static_assert!(::core::mem::size_of::<posix_cputimer_base>() == ::core::mem::size_of::<kernel::bindings::posix_cputimer_base>());
-    kernel::static_assert!(::core::mem::align_of::<posix_cputimer_base>() == ::core::mem::align_of::<kernel::bindings::posix_cputimer_base>());
-    kernel::static_assert!(::core::mem::size_of::<posix_cputimers>() == ::core::mem::size_of::<kernel::bindings::posix_cputimers>());
-    kernel::static_assert!(::core::mem::align_of::<posix_cputimers>() == ::core::mem::align_of::<kernel::bindings::posix_cputimers>());
-    kernel::static_assert!(::core::mem::size_of::<posix_cputimers_work>() == ::core::mem::size_of::<kernel::bindings::posix_cputimers_work>());
-    kernel::static_assert!(::core::mem::align_of::<posix_cputimers_work>() == ::core::mem::align_of::<kernel::bindings::posix_cputimers_work>());
-    kernel::static_assert!(::core::mem::size_of::<prev_cputime>() == ::core::mem::size_of::<kernel::bindings::prev_cputime>());
-    kernel::static_assert!(::core::mem::align_of::<prev_cputime>() == ::core::mem::align_of::<kernel::bindings::prev_cputime>());
-    kernel::static_assert!(::core::mem::size_of::<psi_group>() == ::core::mem::size_of::<kernel::bindings::psi_group>());
-    kernel::static_assert!(::core::mem::align_of::<psi_group>() == ::core::mem::align_of::<kernel::bindings::psi_group>());
-    kernel::static_assert!(::core::mem::size_of::<psi_group_cpu>() == ::core::mem::size_of::<kernel::bindings::psi_group_cpu>());
-    kernel::static_assert!(::core::mem::align_of::<psi_group_cpu>() == ::core::mem::align_of::<kernel::bindings::psi_group_cpu>());
-    kernel::static_assert!(::core::mem::size_of::<pt_regs>() == ::core::mem::size_of::<kernel::bindings::pt_regs>());
-    kernel::static_assert!(::core::mem::align_of::<pt_regs>() == ::core::mem::align_of::<kernel::bindings::pt_regs>());
-    kernel::static_assert!(::core::mem::size_of::<pte_t>() == ::core::mem::size_of::<kernel::bindings::pte_t>());
-    kernel::static_assert!(::core::mem::align_of::<pte_t>() == ::core::mem::align_of::<kernel::bindings::pte_t>());
-    kernel::static_assert!(::core::mem::size_of::<ptrauth_key>() == ::core::mem::size_of::<kernel::bindings::ptrauth_key>());
-    kernel::static_assert!(::core::mem::align_of::<ptrauth_key>() == ::core::mem::align_of::<kernel::bindings::ptrauth_key>());
-    kernel::static_assert!(::core::mem::size_of::<ptrauth_keys_kernel>() == ::core::mem::size_of::<kernel::bindings::ptrauth_keys_kernel>());
-    kernel::static_assert!(::core::mem::align_of::<ptrauth_keys_kernel>() == ::core::mem::align_of::<kernel::bindings::ptrauth_keys_kernel>());
-    kernel::static_assert!(::core::mem::size_of::<ptrauth_keys_user>() == ::core::mem::size_of::<kernel::bindings::ptrauth_keys_user>());
-    kernel::static_assert!(::core::mem::align_of::<ptrauth_keys_user>() == ::core::mem::align_of::<kernel::bindings::ptrauth_keys_user>());
-    kernel::static_assert!(::core::mem::size_of::<pud_t>() == ::core::mem::size_of::<kernel::bindings::pud_t>());
-    kernel::static_assert!(::core::mem::align_of::<pud_t>() == ::core::mem::align_of::<kernel::bindings::pud_t>());
-    kernel::static_assert!(::core::mem::size_of::<qc_dqblk>() == ::core::mem::size_of::<kernel::bindings::qc_dqblk>());
-    kernel::static_assert!(::core::mem::align_of::<qc_dqblk>() == ::core::mem::align_of::<kernel::bindings::qc_dqblk>());
-    kernel::static_assert!(::core::mem::size_of::<qc_info>() == ::core::mem::size_of::<kernel::bindings::qc_info>());
-    kernel::static_assert!(::core::mem::align_of::<qc_info>() == ::core::mem::align_of::<kernel::bindings::qc_info>());
-    kernel::static_assert!(::core::mem::size_of::<qc_state>() == ::core::mem::size_of::<kernel::bindings::qc_state>());
-    kernel::static_assert!(::core::mem::align_of::<qc_state>() == ::core::mem::align_of::<kernel::bindings::qc_state>());
-    kernel::static_assert!(::core::mem::size_of::<qc_type_state>() == ::core::mem::size_of::<kernel::bindings::qc_type_state>());
-    kernel::static_assert!(::core::mem::align_of::<qc_type_state>() == ::core::mem::align_of::<kernel::bindings::qc_type_state>());
-    kernel::static_assert!(::core::mem::size_of::<qrwlock>() == ::core::mem::size_of::<kernel::bindings::qrwlock>());
-    kernel::static_assert!(::core::mem::align_of::<qrwlock>() == ::core::mem::align_of::<kernel::bindings::qrwlock>());
     kernel::static_assert!(::core::mem::size_of::<qspinlock>() == ::core::mem::size_of::<kernel::bindings::qspinlock>());
-    kernel::static_assert!(::core::mem::align_of::<qspinlock>() == ::core::mem::align_of::<kernel::bindings::qspinlock>());
-    kernel::static_assert!(::core::mem::size_of::<qstr>() == ::core::mem::size_of::<kernel::bindings::qstr>());
-    kernel::static_assert!(::core::mem::align_of::<qstr>() == ::core::mem::align_of::<kernel::bindings::qstr>());
-    kernel::static_assert!(::core::mem::size_of::<quota_format_ops>() == ::core::mem::size_of::<kernel::bindings::quota_format_ops>());
-    kernel::static_assert!(::core::mem::align_of::<quota_format_ops>() == ::core::mem::align_of::<kernel::bindings::quota_format_ops>());
-    kernel::static_assert!(::core::mem::size_of::<quota_format_type>() == ::core::mem::size_of::<kernel::bindings::quota_format_type>());
-    kernel::static_assert!(::core::mem::align_of::<quota_format_type>() == ::core::mem::align_of::<kernel::bindings::quota_format_type>());
-    kernel::static_assert!(::core::mem::size_of::<quota_info>() == ::core::mem::size_of::<kernel::bindings::quota_info>());
-    kernel::static_assert!(::core::mem::align_of::<quota_info>() == ::core::mem::align_of::<kernel::bindings::quota_info>());
-    kernel::static_assert!(::core::mem::size_of::<quotactl_ops>() == ::core::mem::size_of::<kernel::bindings::quotactl_ops>());
-    kernel::static_assert!(::core::mem::align_of::<quotactl_ops>() == ::core::mem::align_of::<kernel::bindings::quotactl_ops>());
-    kernel::static_assert!(::core::mem::size_of::<range>() == ::core::mem::size_of::<kernel::bindings::range>());
-    kernel::static_assert!(::core::mem::align_of::<range>() == ::core::mem::align_of::<kernel::bindings::range>());
     kernel::static_assert!(::core::mem::size_of::<ratelimit_state>() == ::core::mem::size_of::<kernel::bindings::ratelimit_state>());
-    kernel::static_assert!(::core::mem::align_of::<ratelimit_state>() == ::core::mem::align_of::<kernel::bindings::ratelimit_state>());
-    kernel::static_assert!(::core::mem::size_of::<raw_notifier_head>() == ::core::mem::size_of::<kernel::bindings::raw_notifier_head>());
-    kernel::static_assert!(::core::mem::align_of::<raw_notifier_head>() == ::core::mem::align_of::<kernel::bindings::raw_notifier_head>());
     kernel::static_assert!(::core::mem::size_of::<raw_spinlock>() == ::core::mem::size_of::<kernel::bindings::raw_spinlock>());
-    kernel::static_assert!(::core::mem::align_of::<raw_spinlock>() == ::core::mem::align_of::<kernel::bindings::raw_spinlock>());
     kernel::static_assert!(::core::mem::size_of::<rb_node>() == ::core::mem::size_of::<kernel::bindings::rb_node>());
-    kernel::static_assert!(::core::mem::align_of::<rb_node>() == ::core::mem::align_of::<kernel::bindings::rb_node>());
     kernel::static_assert!(::core::mem::size_of::<rb_root>() == ::core::mem::size_of::<kernel::bindings::rb_root>());
-    kernel::static_assert!(::core::mem::align_of::<rb_root>() == ::core::mem::align_of::<kernel::bindings::rb_root>());
-    kernel::static_assert!(::core::mem::size_of::<rb_root_cached>() == ::core::mem::size_of::<kernel::bindings::rb_root_cached>());
-    kernel::static_assert!(::core::mem::align_of::<rb_root_cached>() == ::core::mem::align_of::<kernel::bindings::rb_root_cached>());
-    kernel::static_assert!(::core::mem::size_of::<rcu_segcblist>() == ::core::mem::size_of::<kernel::bindings::rcu_segcblist>());
-    kernel::static_assert!(::core::mem::align_of::<rcu_segcblist>() == ::core::mem::align_of::<kernel::bindings::rcu_segcblist>());
-    kernel::static_assert!(::core::mem::size_of::<rcu_sync>() == ::core::mem::size_of::<kernel::bindings::rcu_sync>());
-    kernel::static_assert!(::core::mem::align_of::<rcu_sync>() == ::core::mem::align_of::<kernel::bindings::rcu_sync>());
-    kernel::static_assert!(::core::mem::size_of::<rcu_work>() == ::core::mem::size_of::<kernel::bindings::rcu_work>());
-    kernel::static_assert!(::core::mem::align_of::<rcu_work>() == ::core::mem::align_of::<kernel::bindings::rcu_work>());
-    kernel::static_assert!(::core::mem::size_of::<rcuref_t>() == ::core::mem::size_of::<kernel::bindings::rcuref_t>());
-    kernel::static_assert!(::core::mem::align_of::<rcuref_t>() == ::core::mem::align_of::<kernel::bindings::rcuref_t>());
-    kernel::static_assert!(::core::mem::size_of::<rcuwait>() == ::core::mem::size_of::<kernel::bindings::rcuwait>());
-    kernel::static_assert!(::core::mem::align_of::<rcuwait>() == ::core::mem::align_of::<kernel::bindings::rcuwait>());
-    kernel::static_assert!(::core::mem::size_of::<refcount_struct>() == ::core::mem::size_of::<kernel::bindings::refcount_struct>());
-    kernel::static_assert!(::core::mem::align_of::<refcount_struct>() == ::core::mem::align_of::<kernel::bindings::refcount_struct>());
-    kernel::static_assert!(::core::mem::size_of::<restart_block>() == ::core::mem::size_of::<kernel::bindings::restart_block>());
-    kernel::static_assert!(::core::mem::align_of::<restart_block>() == ::core::mem::align_of::<kernel::bindings::restart_block>());
-    kernel::static_assert!(::core::mem::size_of::<return_consumer>() == ::core::mem::size_of::<kernel::bindings::return_consumer>());
-    kernel::static_assert!(::core::mem::align_of::<return_consumer>() == ::core::mem::align_of::<kernel::bindings::return_consumer>());
-    kernel::static_assert!(::core::mem::size_of::<return_instance>() == ::core::mem::size_of::<kernel::bindings::return_instance>());
-    kernel::static_assert!(::core::mem::align_of::<return_instance>() == ::core::mem::align_of::<kernel::bindings::return_instance>());
-    kernel::static_assert!(::core::mem::size_of::<rhash_head>() == ::core::mem::size_of::<kernel::bindings::rhash_head>());
-    kernel::static_assert!(::core::mem::align_of::<rhash_head>() == ::core::mem::align_of::<kernel::bindings::rhash_head>());
-    kernel::static_assert!(::core::mem::size_of::<rhashtable>() == ::core::mem::size_of::<kernel::bindings::rhashtable>());
-    kernel::static_assert!(::core::mem::align_of::<rhashtable>() == ::core::mem::align_of::<kernel::bindings::rhashtable>());
-    kernel::static_assert!(::core::mem::size_of::<rhashtable_compare_arg>() == ::core::mem::size_of::<kernel::bindings::rhashtable_compare_arg>());
-    kernel::static_assert!(::core::mem::align_of::<rhashtable_compare_arg>() == ::core::mem::align_of::<kernel::bindings::rhashtable_compare_arg>());
-    kernel::static_assert!(::core::mem::size_of::<rhashtable_params>() == ::core::mem::size_of::<kernel::bindings::rhashtable_params>());
-    kernel::static_assert!(::core::mem::align_of::<rhashtable_params>() == ::core::mem::align_of::<kernel::bindings::rhashtable_params>());
-    kernel::static_assert!(::core::mem::size_of::<rhlist_head>() == ::core::mem::size_of::<kernel::bindings::rhlist_head>());
-    kernel::static_assert!(::core::mem::align_of::<rhlist_head>() == ::core::mem::align_of::<kernel::bindings::rhlist_head>());
     kernel::static_assert!(::core::mem::size_of::<rlimit>() == ::core::mem::size_of::<kernel::bindings::rlimit>());
-    kernel::static_assert!(::core::mem::align_of::<rlimit>() == ::core::mem::align_of::<kernel::bindings::rlimit>());
     kernel::static_assert!(::core::mem::size_of::<rw_semaphore>() == ::core::mem::size_of::<kernel::bindings::rw_semaphore>());
-    kernel::static_assert!(::core::mem::align_of::<rw_semaphore>() == ::core::mem::align_of::<kernel::bindings::rw_semaphore>());
-    kernel::static_assert!(::core::mem::size_of::<rwlock_t>() == ::core::mem::size_of::<kernel::bindings::rwlock_t>());
-    kernel::static_assert!(::core::mem::align_of::<rwlock_t>() == ::core::mem::align_of::<kernel::bindings::rwlock_t>());
-    kernel::static_assert!(::core::mem::size_of::<sb_writers>() == ::core::mem::size_of::<kernel::bindings::sb_writers>());
-    kernel::static_assert!(::core::mem::align_of::<sb_writers>() == ::core::mem::align_of::<kernel::bindings::sb_writers>());
-    kernel::static_assert!(::core::mem::size_of::<sched_avg>() == ::core::mem::size_of::<kernel::bindings::sched_avg>());
-    kernel::static_assert!(::core::mem::align_of::<sched_avg>() == ::core::mem::align_of::<kernel::bindings::sched_avg>());
-    kernel::static_assert!(::core::mem::size_of::<sched_dl_entity>() == ::core::mem::size_of::<kernel::bindings::sched_dl_entity>());
-    kernel::static_assert!(::core::mem::align_of::<sched_dl_entity>() == ::core::mem::align_of::<kernel::bindings::sched_dl_entity>());
-    kernel::static_assert!(::core::mem::size_of::<sched_entity>() == ::core::mem::size_of::<kernel::bindings::sched_entity>());
-    kernel::static_assert!(::core::mem::align_of::<sched_entity>() == ::core::mem::align_of::<kernel::bindings::sched_entity>());
-    kernel::static_assert!(::core::mem::size_of::<sched_ext_entity>() == ::core::mem::size_of::<kernel::bindings::sched_ext_entity>());
-    kernel::static_assert!(::core::mem::align_of::<sched_ext_entity>() == ::core::mem::align_of::<kernel::bindings::sched_ext_entity>());
-    kernel::static_assert!(::core::mem::size_of::<sched_info>() == ::core::mem::size_of::<kernel::bindings::sched_info>());
-    kernel::static_assert!(::core::mem::align_of::<sched_info>() == ::core::mem::align_of::<kernel::bindings::sched_info>());
     kernel::static_assert!(::core::mem::size_of::<sched_param>() == ::core::mem::size_of::<kernel::bindings::sched_param>());
-    kernel::static_assert!(::core::mem::align_of::<sched_param>() == ::core::mem::align_of::<kernel::bindings::sched_param>());
-    kernel::static_assert!(::core::mem::size_of::<sched_rt_entity>() == ::core::mem::size_of::<kernel::bindings::sched_rt_entity>());
-    kernel::static_assert!(::core::mem::align_of::<sched_rt_entity>() == ::core::mem::align_of::<kernel::bindings::sched_rt_entity>());
-    kernel::static_assert!(::core::mem::size_of::<sched_statistics>() == ::core::mem::size_of::<kernel::bindings::sched_statistics>());
-    kernel::static_assert!(::core::mem::align_of::<sched_statistics>() == ::core::mem::align_of::<kernel::bindings::sched_statistics>());
-    kernel::static_assert!(::core::mem::size_of::<scm_creds>() == ::core::mem::size_of::<kernel::bindings::scm_creds>());
-    kernel::static_assert!(::core::mem::align_of::<scm_creds>() == ::core::mem::align_of::<kernel::bindings::scm_creds>());
-    kernel::static_assert!(::core::mem::size_of::<scx_dispatch_q>() == ::core::mem::size_of::<kernel::bindings::scx_dispatch_q>());
-    kernel::static_assert!(::core::mem::align_of::<scx_dispatch_q>() == ::core::mem::align_of::<kernel::bindings::scx_dispatch_q>());
-    kernel::static_assert!(::core::mem::size_of::<scx_dsq_list_node>() == ::core::mem::size_of::<kernel::bindings::scx_dsq_list_node>());
-    kernel::static_assert!(::core::mem::align_of::<scx_dsq_list_node>() == ::core::mem::align_of::<kernel::bindings::scx_dsq_list_node>());
-    kernel::static_assert!(::core::mem::size_of::<seccomp>() == ::core::mem::size_of::<kernel::bindings::seccomp>());
-    kernel::static_assert!(::core::mem::align_of::<seccomp>() == ::core::mem::align_of::<kernel::bindings::seccomp>());
-    kernel::static_assert!(::core::mem::size_of::<seq_buf>() == ::core::mem::size_of::<kernel::bindings::seq_buf>());
-    kernel::static_assert!(::core::mem::align_of::<seq_buf>() == ::core::mem::align_of::<kernel::bindings::seq_buf>());
     kernel::static_assert!(::core::mem::size_of::<seq_file>() == ::core::mem::size_of::<kernel::bindings::seq_file>());
-    kernel::static_assert!(::core::mem::align_of::<seq_file>() == ::core::mem::align_of::<kernel::bindings::seq_file>());
-    kernel::static_assert!(::core::mem::size_of::<seq_operations>() == ::core::mem::size_of::<kernel::bindings::seq_operations>());
-    kernel::static_assert!(::core::mem::align_of::<seq_operations>() == ::core::mem::align_of::<kernel::bindings::seq_operations>());
-    kernel::static_assert!(::core::mem::size_of::<seqcount>() == ::core::mem::size_of::<kernel::bindings::seqcount>());
-    kernel::static_assert!(::core::mem::align_of::<seqcount>() == ::core::mem::align_of::<kernel::bindings::seqcount>());
-    kernel::static_assert!(::core::mem::size_of::<seqcount_raw_spinlock>() == ::core::mem::size_of::<kernel::bindings::seqcount_raw_spinlock>());
-    kernel::static_assert!(::core::mem::align_of::<seqcount_raw_spinlock>() == ::core::mem::align_of::<kernel::bindings::seqcount_raw_spinlock>());
-    kernel::static_assert!(::core::mem::size_of::<seqcount_spinlock>() == ::core::mem::size_of::<kernel::bindings::seqcount_spinlock>());
-    kernel::static_assert!(::core::mem::align_of::<seqcount_spinlock>() == ::core::mem::align_of::<kernel::bindings::seqcount_spinlock>());
-    kernel::static_assert!(::core::mem::size_of::<seqlock_t>() == ::core::mem::size_of::<kernel::bindings::seqlock_t>());
-    kernel::static_assert!(::core::mem::align_of::<seqlock_t>() == ::core::mem::align_of::<kernel::bindings::seqlock_t>());
-    kernel::static_assert!(::core::mem::size_of::<shrink_control>() == ::core::mem::size_of::<kernel::bindings::shrink_control>());
-    kernel::static_assert!(::core::mem::align_of::<shrink_control>() == ::core::mem::align_of::<kernel::bindings::shrink_control>());
-    kernel::static_assert!(::core::mem::size_of::<shrinker>() == ::core::mem::size_of::<kernel::bindings::shrinker>());
-    kernel::static_assert!(::core::mem::align_of::<shrinker>() == ::core::mem::align_of::<kernel::bindings::shrinker>());
-    kernel::static_assert!(::core::mem::size_of::<shrinker_info>() == ::core::mem::size_of::<kernel::bindings::shrinker_info>());
-    kernel::static_assert!(::core::mem::align_of::<shrinker_info>() == ::core::mem::align_of::<kernel::bindings::shrinker_info>());
-    kernel::static_assert!(::core::mem::size_of::<shrinker_info_unit>() == ::core::mem::size_of::<kernel::bindings::shrinker_info_unit>());
-    kernel::static_assert!(::core::mem::align_of::<shrinker_info_unit>() == ::core::mem::align_of::<kernel::bindings::shrinker_info_unit>());
-    kernel::static_assert!(::core::mem::size_of::<sigaction>() == ::core::mem::size_of::<kernel::bindings::sigaction>());
-    kernel::static_assert!(::core::mem::align_of::<sigaction>() == ::core::mem::align_of::<kernel::bindings::sigaction>());
-    kernel::static_assert!(::core::mem::size_of::<sighand_struct>() == ::core::mem::size_of::<kernel::bindings::sighand_struct>());
-    kernel::static_assert!(::core::mem::align_of::<sighand_struct>() == ::core::mem::align_of::<kernel::bindings::sighand_struct>());
-    kernel::static_assert!(::core::mem::size_of::<signal_struct>() == ::core::mem::size_of::<kernel::bindings::signal_struct>());
-    kernel::static_assert!(::core::mem::align_of::<signal_struct>() == ::core::mem::align_of::<kernel::bindings::signal_struct>());
-    kernel::static_assert!(::core::mem::size_of::<sigpending>() == ::core::mem::size_of::<kernel::bindings::sigpending>());
-    kernel::static_assert!(::core::mem::align_of::<sigpending>() == ::core::mem::align_of::<kernel::bindings::sigpending>());
-    kernel::static_assert!(::core::mem::size_of::<sigset_t>() == ::core::mem::size_of::<kernel::bindings::sigset_t>());
-    kernel::static_assert!(::core::mem::align_of::<sigset_t>() == ::core::mem::align_of::<kernel::bindings::sigset_t>());
-    kernel::static_assert!(::core::mem::size_of::<siphash_key_t>() == ::core::mem::size_of::<kernel::bindings::siphash_key_t>());
-    kernel::static_assert!(::core::mem::align_of::<siphash_key_t>() == ::core::mem::align_of::<kernel::bindings::siphash_key_t>());
     kernel::static_assert!(::core::mem::size_of::<sk_buff>() == ::core::mem::size_of::<kernel::bindings::sk_buff>());
-    kernel::static_assert!(::core::mem::align_of::<sk_buff>() == ::core::mem::align_of::<kernel::bindings::sk_buff>());
-    kernel::static_assert!(::core::mem::size_of::<sk_buff_head>() == ::core::mem::size_of::<kernel::bindings::sk_buff_head>());
-    kernel::static_assert!(::core::mem::align_of::<sk_buff_head>() == ::core::mem::align_of::<kernel::bindings::sk_buff_head>());
-    kernel::static_assert!(::core::mem::size_of::<skb_ext>() == ::core::mem::size_of::<kernel::bindings::skb_ext>());
-    kernel::static_assert!(::core::mem::align_of::<skb_ext>() == ::core::mem::align_of::<kernel::bindings::skb_ext>());
-    kernel::static_assert!(::core::mem::size_of::<skb_frag>() == ::core::mem::size_of::<kernel::bindings::skb_frag>());
-    kernel::static_assert!(::core::mem::align_of::<skb_frag>() == ::core::mem::align_of::<kernel::bindings::skb_frag>());
-    kernel::static_assert!(::core::mem::size_of::<skb_shared_hwtstamps>() == ::core::mem::size_of::<kernel::bindings::skb_shared_hwtstamps>());
-    kernel::static_assert!(::core::mem::align_of::<skb_shared_hwtstamps>() == ::core::mem::align_of::<kernel::bindings::skb_shared_hwtstamps>());
     kernel::static_assert!(::core::mem::size_of::<skb_shared_info>() == ::core::mem::size_of::<kernel::bindings::skb_shared_info>());
-    kernel::static_assert!(::core::mem::align_of::<skb_shared_info>() == ::core::mem::align_of::<kernel::bindings::skb_shared_info>());
-    kernel::static_assert!(::core::mem::size_of::<sock_filter>() == ::core::mem::size_of::<kernel::bindings::sock_filter>());
-    kernel::static_assert!(::core::mem::align_of::<sock_filter>() == ::core::mem::align_of::<kernel::bindings::sock_filter>());
-    kernel::static_assert!(::core::mem::size_of::<spinlock>() == ::core::mem::size_of::<kernel::bindings::spinlock>());
-    kernel::static_assert!(::core::mem::align_of::<spinlock>() == ::core::mem::align_of::<kernel::bindings::spinlock>());
-    kernel::static_assert!(::core::mem::size_of::<srcu_ctr>() == ::core::mem::size_of::<kernel::bindings::srcu_ctr>());
-    kernel::static_assert!(::core::mem::align_of::<srcu_ctr>() == ::core::mem::align_of::<kernel::bindings::srcu_ctr>());
-    kernel::static_assert!(::core::mem::size_of::<srcu_data>() == ::core::mem::size_of::<kernel::bindings::srcu_data>());
-    kernel::static_assert!(::core::mem::align_of::<srcu_data>() == ::core::mem::align_of::<kernel::bindings::srcu_data>());
-    kernel::static_assert!(::core::mem::size_of::<srcu_node>() == ::core::mem::size_of::<kernel::bindings::srcu_node>());
-    kernel::static_assert!(::core::mem::align_of::<srcu_node>() == ::core::mem::align_of::<kernel::bindings::srcu_node>());
-    kernel::static_assert!(::core::mem::size_of::<srcu_struct>() == ::core::mem::size_of::<kernel::bindings::srcu_struct>());
-    kernel::static_assert!(::core::mem::align_of::<srcu_struct>() == ::core::mem::align_of::<kernel::bindings::srcu_struct>());
-    kernel::static_assert!(::core::mem::size_of::<srcu_usage>() == ::core::mem::size_of::<kernel::bindings::srcu_usage>());
-    kernel::static_assert!(::core::mem::align_of::<srcu_usage>() == ::core::mem::align_of::<kernel::bindings::srcu_usage>());
-    kernel::static_assert!(::core::mem::size_of::<static_call_key>() == ::core::mem::size_of::<kernel::bindings::static_call_key>());
-    kernel::static_assert!(::core::mem::align_of::<static_call_key>() == ::core::mem::align_of::<kernel::bindings::static_call_key>());
     kernel::static_assert!(::core::mem::size_of::<static_key>() == ::core::mem::size_of::<kernel::bindings::static_key>());
-    kernel::static_assert!(::core::mem::align_of::<static_key>() == ::core::mem::align_of::<kernel::bindings::static_key>());
-    kernel::static_assert!(::core::mem::size_of::<static_key_false>() == ::core::mem::size_of::<kernel::bindings::static_key_false>());
-    kernel::static_assert!(::core::mem::align_of::<static_key_false>() == ::core::mem::align_of::<kernel::bindings::static_key_false>());
-    kernel::static_assert!(::core::mem::size_of::<static_key_true>() == ::core::mem::size_of::<kernel::bindings::static_key_true>());
-    kernel::static_assert!(::core::mem::align_of::<static_key_true>() == ::core::mem::align_of::<kernel::bindings::static_key_true>());
-    kernel::static_assert!(::core::mem::size_of::<super_block>() == ::core::mem::size_of::<kernel::bindings::super_block>());
-    kernel::static_assert!(::core::mem::align_of::<super_block>() == ::core::mem::align_of::<kernel::bindings::super_block>());
-    kernel::static_assert!(::core::mem::size_of::<super_operations>() == ::core::mem::size_of::<kernel::bindings::super_operations>());
-    kernel::static_assert!(::core::mem::align_of::<super_operations>() == ::core::mem::align_of::<kernel::bindings::super_operations>());
-    kernel::static_assert!(::core::mem::size_of::<swait_queue_head>() == ::core::mem::size_of::<kernel::bindings::swait_queue_head>());
-    kernel::static_assert!(::core::mem::align_of::<swait_queue_head>() == ::core::mem::align_of::<kernel::bindings::swait_queue_head>());
-    kernel::static_assert!(::core::mem::size_of::<swp_entry_t>() == ::core::mem::size_of::<kernel::bindings::swp_entry_t>());
-    kernel::static_assert!(::core::mem::align_of::<swp_entry_t>() == ::core::mem::align_of::<kernel::bindings::swp_entry_t>());
-    kernel::static_assert!(::core::mem::size_of::<syscall_user_dispatch>() == ::core::mem::size_of::<kernel::bindings::syscall_user_dispatch>());
-    kernel::static_assert!(::core::mem::align_of::<syscall_user_dispatch>() == ::core::mem::align_of::<kernel::bindings::syscall_user_dispatch>());
-    kernel::static_assert!(::core::mem::size_of::<sysfs_ops>() == ::core::mem::size_of::<kernel::bindings::sysfs_ops>());
-    kernel::static_assert!(::core::mem::align_of::<sysfs_ops>() == ::core::mem::align_of::<kernel::bindings::sysfs_ops>());
-    kernel::static_assert!(::core::mem::size_of::<task_cputime>() == ::core::mem::size_of::<kernel::bindings::task_cputime>());
-    kernel::static_assert!(::core::mem::align_of::<task_cputime>() == ::core::mem::align_of::<kernel::bindings::task_cputime>());
-    kernel::static_assert!(::core::mem::size_of::<task_cputime_atomic>() == ::core::mem::size_of::<kernel::bindings::task_cputime_atomic>());
-    kernel::static_assert!(::core::mem::align_of::<task_cputime_atomic>() == ::core::mem::align_of::<kernel::bindings::task_cputime_atomic>());
-    kernel::static_assert!(::core::mem::size_of::<task_io_accounting>() == ::core::mem::size_of::<kernel::bindings::task_io_accounting>());
-    kernel::static_assert!(::core::mem::align_of::<task_io_accounting>() == ::core::mem::align_of::<kernel::bindings::task_io_accounting>());
     kernel::static_assert!(::core::mem::size_of::<task_struct>() == ::core::mem::size_of::<kernel::bindings::task_struct>());
-    kernel::static_assert!(::core::mem::align_of::<task_struct>() == ::core::mem::align_of::<kernel::bindings::task_struct>());
-    kernel::static_assert!(::core::mem::size_of::<taskstats>() == ::core::mem::size_of::<kernel::bindings::taskstats>());
-    kernel::static_assert!(::core::mem::align_of::<taskstats>() == ::core::mem::align_of::<kernel::bindings::taskstats>());
-    kernel::static_assert!(::core::mem::size_of::<thread_group_cputimer>() == ::core::mem::size_of::<kernel::bindings::thread_group_cputimer>());
-    kernel::static_assert!(::core::mem::align_of::<thread_group_cputimer>() == ::core::mem::align_of::<kernel::bindings::thread_group_cputimer>());
     kernel::static_assert!(::core::mem::size_of::<thread_info>() == ::core::mem::size_of::<kernel::bindings::thread_info>());
-    kernel::static_assert!(::core::mem::align_of::<thread_info>() == ::core::mem::align_of::<kernel::bindings::thread_info>());
-    kernel::static_assert!(::core::mem::size_of::<thread_struct>() == ::core::mem::size_of::<kernel::bindings::thread_struct>());
-    kernel::static_assert!(::core::mem::align_of::<thread_struct>() == ::core::mem::align_of::<kernel::bindings::thread_struct>());
-    kernel::static_assert!(::core::mem::size_of::<timer_list>() == ::core::mem::size_of::<kernel::bindings::timer_list>());
-    kernel::static_assert!(::core::mem::align_of::<timer_list>() == ::core::mem::align_of::<kernel::bindings::timer_list>());
-    kernel::static_assert!(::core::mem::size_of::<timerqueue_head>() == ::core::mem::size_of::<kernel::bindings::timerqueue_head>());
-    kernel::static_assert!(::core::mem::align_of::<timerqueue_head>() == ::core::mem::align_of::<kernel::bindings::timerqueue_head>());
-    kernel::static_assert!(::core::mem::size_of::<timerqueue_node>() == ::core::mem::size_of::<kernel::bindings::timerqueue_node>());
-    kernel::static_assert!(::core::mem::align_of::<timerqueue_node>() == ::core::mem::align_of::<kernel::bindings::timerqueue_node>());
-    kernel::static_assert!(::core::mem::size_of::<timespec64>() == ::core::mem::size_of::<kernel::bindings::timespec64>());
-    kernel::static_assert!(::core::mem::align_of::<timespec64>() == ::core::mem::align_of::<kernel::bindings::timespec64>());
-    kernel::static_assert!(::core::mem::size_of::<tlbflush_unmap_batch>() == ::core::mem::size_of::<kernel::bindings::tlbflush_unmap_batch>());
-    kernel::static_assert!(::core::mem::align_of::<tlbflush_unmap_batch>() == ::core::mem::align_of::<kernel::bindings::tlbflush_unmap_batch>());
-    kernel::static_assert!(::core::mem::size_of::<trace_eval_map>() == ::core::mem::size_of::<kernel::bindings::trace_eval_map>());
-    kernel::static_assert!(::core::mem::align_of::<trace_eval_map>() == ::core::mem::align_of::<kernel::bindings::trace_eval_map>());
-    kernel::static_assert!(::core::mem::size_of::<trace_event_call>() == ::core::mem::size_of::<kernel::bindings::trace_event_call>());
-    kernel::static_assert!(::core::mem::align_of::<trace_event_call>() == ::core::mem::align_of::<kernel::bindings::trace_event_call>());
     kernel::static_assert!(::core::mem::size_of::<tracepoint>() == ::core::mem::size_of::<kernel::bindings::tracepoint>());
-    kernel::static_assert!(::core::mem::align_of::<tracepoint>() == ::core::mem::align_of::<kernel::bindings::tracepoint>());
-    kernel::static_assert!(::core::mem::size_of::<tracepoint_ext>() == ::core::mem::size_of::<kernel::bindings::tracepoint_ext>());
-    kernel::static_assert!(::core::mem::align_of::<tracepoint_ext>() == ::core::mem::align_of::<kernel::bindings::tracepoint_ext>());
-    kernel::static_assert!(::core::mem::size_of::<tracepoint_func>() == ::core::mem::size_of::<kernel::bindings::tracepoint_func>());
-    kernel::static_assert!(::core::mem::align_of::<tracepoint_func>() == ::core::mem::align_of::<kernel::bindings::tracepoint_func>());
-    kernel::static_assert!(::core::mem::size_of::<u64_stats_sync>() == ::core::mem::size_of::<kernel::bindings::u64_stats_sync>());
-    kernel::static_assert!(::core::mem::align_of::<u64_stats_sync>() == ::core::mem::align_of::<kernel::bindings::u64_stats_sync>());
-    kernel::static_assert!(::core::mem::size_of::<uclamp_se>() == ::core::mem::size_of::<kernel::bindings::uclamp_se>());
-    kernel::static_assert!(::core::mem::align_of::<uclamp_se>() == ::core::mem::align_of::<kernel::bindings::uclamp_se>());
-    kernel::static_assert!(::core::mem::size_of::<ucounts>() == ::core::mem::size_of::<kernel::bindings::ucounts>());
-    kernel::static_assert!(::core::mem::align_of::<ucounts>() == ::core::mem::align_of::<kernel::bindings::ucounts>());
-    kernel::static_assert!(::core::mem::size_of::<uid_gid_extent>() == ::core::mem::size_of::<kernel::bindings::uid_gid_extent>());
-    kernel::static_assert!(::core::mem::align_of::<uid_gid_extent>() == ::core::mem::align_of::<kernel::bindings::uid_gid_extent>());
-    kernel::static_assert!(::core::mem::size_of::<uid_gid_map>() == ::core::mem::size_of::<kernel::bindings::uid_gid_map>());
-    kernel::static_assert!(::core::mem::align_of::<uid_gid_map>() == ::core::mem::align_of::<kernel::bindings::uid_gid_map>());
-    kernel::static_assert!(::core::mem::size_of::<unicode_map>() == ::core::mem::size_of::<kernel::bindings::unicode_map>());
-    kernel::static_assert!(::core::mem::align_of::<unicode_map>() == ::core::mem::align_of::<kernel::bindings::unicode_map>());
-    kernel::static_assert!(::core::mem::size_of::<upid>() == ::core::mem::size_of::<kernel::bindings::upid>());
-    kernel::static_assert!(::core::mem::align_of::<upid>() == ::core::mem::align_of::<kernel::bindings::upid>());
-    kernel::static_assert!(::core::mem::size_of::<uprobe_task>() == ::core::mem::size_of::<kernel::bindings::uprobe_task>());
-    kernel::static_assert!(::core::mem::align_of::<uprobe_task>() == ::core::mem::align_of::<kernel::bindings::uprobe_task>());
-    kernel::static_assert!(::core::mem::size_of::<uprobes_state>() == ::core::mem::size_of::<kernel::bindings::uprobes_state>());
-    kernel::static_assert!(::core::mem::align_of::<uprobes_state>() == ::core::mem::align_of::<kernel::bindings::uprobes_state>());
-    kernel::static_assert!(::core::mem::size_of::<user_fpsimd_state>() == ::core::mem::size_of::<kernel::bindings::user_fpsimd_state>());
-    kernel::static_assert!(::core::mem::align_of::<user_fpsimd_state>() == ::core::mem::align_of::<kernel::bindings::user_fpsimd_state>());
     kernel::static_assert!(::core::mem::size_of::<user_namespace>() == ::core::mem::size_of::<kernel::bindings::user_namespace>());
-    kernel::static_assert!(::core::mem::align_of::<user_namespace>() == ::core::mem::align_of::<kernel::bindings::user_namespace>());
-    kernel::static_assert!(::core::mem::size_of::<user_pt_regs>() == ::core::mem::size_of::<kernel::bindings::user_pt_regs>());
-    kernel::static_assert!(::core::mem::align_of::<user_pt_regs>() == ::core::mem::align_of::<kernel::bindings::user_pt_regs>());
-    kernel::static_assert!(::core::mem::size_of::<user_struct>() == ::core::mem::size_of::<kernel::bindings::user_struct>());
-    kernel::static_assert!(::core::mem::align_of::<user_struct>() == ::core::mem::align_of::<kernel::bindings::user_struct>());
-    kernel::static_assert!(::core::mem::size_of::<uuid_t>() == ::core::mem::size_of::<kernel::bindings::uuid_t>());
-    kernel::static_assert!(::core::mem::align_of::<uuid_t>() == ::core::mem::align_of::<kernel::bindings::uuid_t>());
     kernel::static_assert!(::core::mem::size_of::<va_format>() == ::core::mem::size_of::<kernel::bindings::va_format>());
-    kernel::static_assert!(::core::mem::align_of::<va_format>() == ::core::mem::align_of::<kernel::bindings::va_format>());
-    kernel::static_assert!(::core::mem::size_of::<vfsgid_t>() == ::core::mem::size_of::<kernel::bindings::vfsgid_t>());
-    kernel::static_assert!(::core::mem::align_of::<vfsgid_t>() == ::core::mem::align_of::<kernel::bindings::vfsgid_t>());
-    kernel::static_assert!(::core::mem::size_of::<vfsmount>() == ::core::mem::size_of::<kernel::bindings::vfsmount>());
-    kernel::static_assert!(::core::mem::align_of::<vfsmount>() == ::core::mem::align_of::<kernel::bindings::vfsmount>());
-    kernel::static_assert!(::core::mem::size_of::<vfsuid_t>() == ::core::mem::size_of::<kernel::bindings::vfsuid_t>());
-    kernel::static_assert!(::core::mem::align_of::<vfsuid_t>() == ::core::mem::align_of::<kernel::bindings::vfsuid_t>());
-    kernel::static_assert!(::core::mem::size_of::<vm_area_desc>() == ::core::mem::size_of::<kernel::bindings::vm_area_desc>());
-    kernel::static_assert!(::core::mem::align_of::<vm_area_desc>() == ::core::mem::align_of::<kernel::bindings::vm_area_desc>());
     kernel::static_assert!(::core::mem::size_of::<vm_area_struct>() == ::core::mem::size_of::<kernel::bindings::vm_area_struct>());
-    kernel::static_assert!(::core::mem::align_of::<vm_area_struct>() == ::core::mem::align_of::<kernel::bindings::vm_area_struct>());
     kernel::static_assert!(::core::mem::size_of::<vm_fault>() == ::core::mem::size_of::<kernel::bindings::vm_fault>());
-    kernel::static_assert!(::core::mem::align_of::<vm_fault>() == ::core::mem::align_of::<kernel::bindings::vm_fault>());
     kernel::static_assert!(::core::mem::size_of::<vm_operations_struct>() == ::core::mem::size_of::<kernel::bindings::vm_operations_struct>());
-    kernel::static_assert!(::core::mem::align_of::<vm_operations_struct>() == ::core::mem::align_of::<kernel::bindings::vm_operations_struct>());
-    kernel::static_assert!(::core::mem::size_of::<vm_struct>() == ::core::mem::size_of::<kernel::bindings::vm_struct>());
-    kernel::static_assert!(::core::mem::align_of::<vm_struct>() == ::core::mem::align_of::<kernel::bindings::vm_struct>());
-    kernel::static_assert!(::core::mem::size_of::<vm_userfaultfd_ctx>() == ::core::mem::size_of::<kernel::bindings::vm_userfaultfd_ctx>());
-    kernel::static_assert!(::core::mem::align_of::<vm_userfaultfd_ctx>() == ::core::mem::align_of::<kernel::bindings::vm_userfaultfd_ctx>());
-    kernel::static_assert!(::core::mem::size_of::<vmem_altmap>() == ::core::mem::size_of::<kernel::bindings::vmem_altmap>());
-    kernel::static_assert!(::core::mem::align_of::<vmem_altmap>() == ::core::mem::align_of::<kernel::bindings::vmem_altmap>());
-    kernel::static_assert!(::core::mem::size_of::<vmpressure>() == ::core::mem::size_of::<kernel::bindings::vmpressure>());
-    kernel::static_assert!(::core::mem::align_of::<vmpressure>() == ::core::mem::align_of::<kernel::bindings::vmpressure>());
     kernel::static_assert!(::core::mem::size_of::<wait_queue_entry>() == ::core::mem::size_of::<kernel::bindings::wait_queue_entry>());
-    kernel::static_assert!(::core::mem::align_of::<wait_queue_entry>() == ::core::mem::align_of::<kernel::bindings::wait_queue_entry>());
     kernel::static_assert!(::core::mem::size_of::<wait_queue_head>() == ::core::mem::size_of::<kernel::bindings::wait_queue_head>());
-    kernel::static_assert!(::core::mem::align_of::<wait_queue_head>() == ::core::mem::align_of::<kernel::bindings::wait_queue_head>());
-    kernel::static_assert!(::core::mem::size_of::<wake_q_node>() == ::core::mem::size_of::<kernel::bindings::wake_q_node>());
-    kernel::static_assert!(::core::mem::align_of::<wake_q_node>() == ::core::mem::align_of::<kernel::bindings::wake_q_node>());
-    kernel::static_assert!(::core::mem::size_of::<wakeup_source>() == ::core::mem::size_of::<kernel::bindings::wakeup_source>());
-    kernel::static_assert!(::core::mem::align_of::<wakeup_source>() == ::core::mem::align_of::<kernel::bindings::wakeup_source>());
-    kernel::static_assert!(::core::mem::size_of::<wb_completion>() == ::core::mem::size_of::<kernel::bindings::wb_completion>());
-    kernel::static_assert!(::core::mem::align_of::<wb_completion>() == ::core::mem::align_of::<kernel::bindings::wb_completion>());
-    kernel::static_assert!(::core::mem::size_of::<wb_domain>() == ::core::mem::size_of::<kernel::bindings::wb_domain>());
-    kernel::static_assert!(::core::mem::align_of::<wb_domain>() == ::core::mem::align_of::<kernel::bindings::wb_domain>());
     kernel::static_assert!(::core::mem::size_of::<work_struct>() == ::core::mem::size_of::<kernel::bindings::work_struct>());
-    kernel::static_assert!(::core::mem::align_of::<work_struct>() == ::core::mem::align_of::<kernel::bindings::work_struct>());
-    kernel::static_assert!(::core::mem::size_of::<writeback_control>() == ::core::mem::size_of::<kernel::bindings::writeback_control>());
-    kernel::static_assert!(::core::mem::align_of::<writeback_control>() == ::core::mem::align_of::<kernel::bindings::writeback_control>());
     kernel::static_assert!(::core::mem::size_of::<xarray>() == ::core::mem::size_of::<kernel::bindings::xarray>());
-    kernel::static_assert!(::core::mem::align_of::<xarray>() == ::core::mem::align_of::<kernel::bindings::xarray>());
-    kernel::static_assert!(::core::mem::size_of::<xsk_tx_metadata_compl>() == ::core::mem::size_of::<kernel::bindings::xsk_tx_metadata_compl>());
-    kernel::static_assert!(::core::mem::align_of::<xsk_tx_metadata_compl>() == ::core::mem::align_of::<kernel::bindings::xsk_tx_metadata_compl>());
-    kernel::static_assert!(::core::mem::size_of::<zone>() == ::core::mem::size_of::<kernel::bindings::zone>());
-    kernel::static_assert!(::core::mem::align_of::<zone>() == ::core::mem::align_of::<kernel::bindings::zone>());
-    kernel::static_assert!(::core::mem::size_of::<zonelist>() == ::core::mem::size_of::<kernel::bindings::zonelist>());
-    kernel::static_assert!(::core::mem::align_of::<zonelist>() == ::core::mem::align_of::<kernel::bindings::zonelist>());
-    kernel::static_assert!(::core::mem::size_of::<zoneref>() == ::core::mem::size_of::<kernel::bindings::zoneref>());
-    kernel::static_assert!(::core::mem::align_of::<zoneref>() == ::core::mem::align_of::<kernel::bindings::zoneref>());
-    kernel::static_assert!(::core::mem::size_of::<zswap_lruvec_state>() == ::core::mem::size_of::<kernel::bindings::zswap_lruvec_state>());
-    kernel::static_assert!(::core::mem::align_of::<zswap_lruvec_state>() == ::core::mem::align_of::<kernel::bindings::zswap_lruvec_state>());
-    kernel::static_assert!(::core::mem::size_of::<__sifields>() == ::core::mem::size_of::<kernel::bindings::__sifields>());
-    kernel::static_assert!(::core::mem::align_of::<__sifields>() == ::core::mem::align_of::<kernel::bindings::__sifields>());
-    kernel::static_assert!(::core::mem::size_of::<bpf_attr>() == ::core::mem::size_of::<kernel::bindings::bpf_attr>());
-    kernel::static_assert!(::core::mem::align_of::<bpf_attr>() == ::core::mem::align_of::<kernel::bindings::bpf_attr>());
-    kernel::static_assert!(::core::mem::size_of::<key_payload>() == ::core::mem::size_of::<kernel::bindings::key_payload>());
-    kernel::static_assert!(::core::mem::align_of::<key_payload>() == ::core::mem::align_of::<kernel::bindings::key_payload>());
-    kernel::static_assert!(::core::mem::size_of::<rcu_special>() == ::core::mem::size_of::<kernel::bindings::rcu_special>());
-    kernel::static_assert!(::core::mem::align_of::<rcu_special>() == ::core::mem::align_of::<kernel::bindings::rcu_special>());
-    kernel::static_assert!(::core::mem::size_of::<shortname_store>() == ::core::mem::size_of::<kernel::bindings::shortname_store>());
-    kernel::static_assert!(::core::mem::align_of::<shortname_store>() == ::core::mem::align_of::<kernel::bindings::shortname_store>());
-    kernel::static_assert!(::core::mem::size_of::<sigval>() == ::core::mem::size_of::<kernel::bindings::sigval>());
-    kernel::static_assert!(::core::mem::align_of::<sigval>() == ::core::mem::align_of::<kernel::bindings::sigval>());
 }
+
