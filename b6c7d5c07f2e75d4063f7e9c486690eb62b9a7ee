@@ -22,6 +22,30 @@
       },
       "revId": "b6c7d5c07f2e75d4063f7e9c486690eb62b9a7ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0ac6b9_6adf77ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2026-05-23T02:42:11Z",
+      "side": 1,
+      "message": "We have strongly customized Xe with many UPSTREAM/FROMGIT patches which are not yet included to LTS version, so it needs to be maintained as a vendor module.",
+      "parentUuid": "29d1dc72_a65b535a",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "b6c7d5c07f2e75d4063f7e9c486690eb62b9a7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
