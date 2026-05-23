@@ -187,7 +187,19 @@ type 'struct wiphy' changed
   member 'u64 android_kabi_reserved1' was removed
   member 'union { struct { u16 hw_timestamp_max_peers; u16 android_kabi_reserve1; }; struct { u64 android_kabi_reserved1; }; union { }; }' was added
 
+<<<<<<< HEAD   (85a3b1c62eafe7162de570b1b5629a6bb654010d ANDROID: GKI: preserve the kernel API for struct task_struct)
 type 'struct task_struct' changed
   member 'u64 android_kabi_reserved3' was removed
   member 'union { struct { unsigned int user_dumpable:1; }; struct { u64 android_kabi_reserved3; }; union { }; }' was added
+||||||| BASE   (fec170e6409ce49bc009a879fddb47f9a1ad9f01 Merge 6.1.172 into android14-6.1-lts)
+=======
+type 'struct tcpm_port' changed
+  member 'struct pd_revision_info pd_rev' was added
+
+type 'enum pd_msg_request' changed
+  enumerator 'PD_MSG_DATA_REV' (6) was added
+
+type 'enum tcpm_ams' changed
+  enumerator 'REVISION_INFORMATION' (34) was added
+>>>>>>> BRANCH (108b53924ea33cadfc5b446f4e1d841465f278f1 Merge tag 'android14-6.1.172_r00' into android14-6.1)
 
