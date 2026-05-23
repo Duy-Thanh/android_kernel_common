@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4bc947_64984906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-05-23T13:52:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b898ea65_d897b9d0",
+      "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cad4877_ee39eca9",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-05-23T04:09:50Z",
       "side": 1,
       "message": "should not use module parameters for new drivers/features at all.",
+      "range": {
+        "startLine": 4387,
+        "startChar": 0,
+        "endLine": 4387,
+        "endChar": 103
+      },
+      "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfda23b_551a7ea7",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4387,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-05-23T13:52:46Z",
+      "side": 1,
+      "message": "Ack. Will work on getting a sysfs only version submitted upstream.\n\nDo you happen to know if the move away from module parameters is captured anywhere?",
+      "parentUuid": "3cad4877_ee39eca9",
       "range": {
         "startLine": 4387,
         "startChar": 0,
