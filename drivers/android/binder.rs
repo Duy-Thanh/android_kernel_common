@@ -85,12 +85,6 @@ extern "C" {
     pub type inet_hashinfo;
     pub type prot_inuse;
     pub type uevent_sock;
-    fn ___ratelimit(
-        rs: *mut ratelimit_state,
-        func: *const ::core::ffi::c_char,
-    ) -> ::core::ffi::c_int;
-    fn __warn_printk(fmt: *const ::core::ffi::c_char, ...);
-    fn ____wrong_branch_error() -> bool_0;
     fn binder_rust_write_daif(val: u64_0);
     fn binder_rust_write_ttbr0_el1(val: u64_0);
     fn binder_rust_write_ttbr1_el1(val: u64_0);
@@ -101,9 +95,7 @@ extern "C" {
     fn binder_rust_arch_local_irq_enable();
     fn binder_rust_arch_local_irq_disable();
     fn __fortify_panic(reason: u8_0, avail: size_t, size: size_t) -> !;
-    fn __read_overflow2();
     fn __read_overflow2_field(avail: size_t, wanted: size_t);
-    fn __write_overflow();
     fn __write_overflow_field(avail: size_t, wanted: size_t);
     fn __real_strnlen(_: *const ::core::ffi::c_char, _: __kernel_size_t) -> __kernel_size_t;
     fn __list_add_valid_or_report(
@@ -112,36 +104,12 @@ extern "C" {
         next: *mut list_head,
     ) -> bool_0;
     fn __list_del_entry_valid_or_report(entry: *mut list_head) -> bool_0;
-    static mut __cpu_online_mask: cpumask;
-    static mut mem_alloc_profiling_key: static_key_false;
-    fn __mutex_init(lock: *mut mutex, name: *const ::core::ffi::c_char, key: *mut lock_class_key);
-    fn __rcu_read_lock();
-    fn __rcu_read_unlock();
-    fn __init_waitqueue_head(
-        wq_head: *mut wait_queue_head,
-        name: *const ::core::ffi::c_char,
-        _: *mut lock_class_key,
-    );
-    fn __wake_up(
-        wq_head: *mut wait_queue_head,
-        mode: ::core::ffi::c_uint,
-        nr: ::core::ffi::c_int,
-        key: *mut ::core::ffi::c_void,
-    ) -> ::core::ffi::c_int;
-    fn __wake_up_sync(wq_head: *mut wait_queue_head, mode: ::core::ffi::c_uint);
-    fn __wake_up_pollfree(wq_head: *mut wait_queue_head);
-    static mut init_user_ns: user_namespace;
     fn __msecs_to_jiffies(m: ::core::ffi::c_uint) -> ::core::ffi::c_ulong;
-    static mut system_percpu_wq: *mut workqueue_struct;
-    fn __task_pid_nr_ns(task: *mut task_struct, type_0: pid_type, ns: *mut pid_namespace) -> pid_t;
     fn __check_object_size(
         ptr: *const ::core::ffi::c_void,
         n: ::core::ffi::c_ulong,
         to_user: bool_0,
     );
-    static mut validate_usercopy_range: static_key_true;
-    fn __bad_copy_from();
-    fn __bad_copy_to();
     fn __copy_overflow(size: ::core::ffi::c_int, count: ::core::ffi::c_ulong);
     fn __arch_copy_from_user(
         to: *mut ::core::ffi::c_void,
@@ -153,9 +121,6 @@ extern "C" {
         from: *const ::core::ffi::c_void,
         n: ::core::ffi::c_ulong,
     ) -> ::core::ffi::c_ulong;
-    fn __put_task_struct_rcu_cb(rhp: *mut callback_head);
-    fn __put_cred(_: *mut cred);
-    static mut kmalloc_caches: [kmem_buckets; 3];
     fn __kmalloc_noprof(size: size_t, flags: gfp_t) -> *mut ::core::ffi::c_void;
     fn __kmalloc_cache_noprof(
         s: *mut kmem_cache,
@@ -163,17 +128,6 @@ extern "C" {
         size: size_t,
     ) -> *mut ::core::ffi::c_void;
     fn __kmalloc_large_noprof(size: size_t, flags: gfp_t) -> *mut ::core::ffi::c_void;
-    static param_ops_uint: kernel_param_ops;
-    static param_ops_charp: kernel_param_ops;
-    fn __seq_puts(m: *mut seq_file, s: *const ::core::ffi::c_char);
-    fn __vma_start_write(vma: *mut vm_area_struct, mm_lock_seq: ::core::ffi::c_uint);
-    static mut init_net: net;
-    fn __alloc_skb(
-        size: ::core::ffi::c_uint,
-        priority: gfp_t,
-        flags: ::core::ffi::c_int,
-        node: ::core::ffi::c_int,
-    ) -> *mut sk_buff;
     fn nla_put(
         skb: *mut sk_buff,
         attrtype: ::core::ffi::c_int,
@@ -439,7 +393,6 @@ extern "C" {
         ref_desc: uint32_t,
     ) -> ::core::ffi::c_int;
 }
-pub type __uint128_t = u128;
 pub type __builtin_va_list = __va_list;
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -480,16 +433,9 @@ pub type s32 = __s32;
 pub type u32_0 = __u32;
 pub type s64 = __s64;
 pub type u64_0 = __u64;
-pub type __be16 = __u16;
-pub type __le32 = __u32;
-pub type __be32 = __u32;
-pub type __wsum = __u32;
-pub type __poll_t = ::core::ffi::c_uint;
 pub type __kernel_dev_t = u32_0;
 pub type dev_t = __kernel_dev_t;
-pub type umode_t = ::core::ffi::c_ushort;
 pub type pid_t = __kernel_pid_t;
-pub type clockid_t = __kernel_clockid_t;
 pub type bool_0 = bool;
 pub type uid_t = __kernel_uid32_t;
 pub type gid_t = __kernel_gid32_t;
@@ -505,8 +451,6 @@ pub type blkcnt_t = u64_0;
 pub type gfp_t = ::core::ffi::c_uint;
 pub type fmode_t = ::core::ffi::c_uint;
 pub type phys_addr_t = u64_0;
-#[allow(dead_code, non_upper_case_globals)]
-pub type rcu_callback_t = Option<unsafe extern "C" fn(*mut callback_head) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_0 {
@@ -537,8 +481,6 @@ pub struct C2Rust_Unnamed_4 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_5 {}
-pub type raw_spinlock_t = raw_spinlock;
-pub type arch_spinlock_t = qspinlock;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_6 {
@@ -558,30 +500,16 @@ pub struct C2Rust_Unnamed_8 {
     pub locked: u8_0,
     pub pending: u8_0,
 }
-pub type atomic_long_t = atomic64_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_9 {
     pub work: work_struct,
     pub rcu: callback_head,
 }
-pub type work_func_t = Option<unsafe extern "C" fn(*mut work_struct) -> ()>;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct _ddebug_info {
-    pub descs: *mut _ddebug,
-    pub classes: *mut ddebug_class_map,
-    pub num_descs: ::core::ffi::c_uint,
-    pub num_classes: ::core::ffi::c_uint,
-}
-pub type class_map_type = ::core::ffi::c_uint;
 pub const DD_CLASS_TYPE_LEVEL_NAMES: class_map_type = 3;
 pub const DD_CLASS_TYPE_DISJOINT_NAMES: class_map_type = 2;
 pub const DD_CLASS_TYPE_LEVEL_NUM: class_map_type = 1;
 pub const DD_CLASS_TYPE_DISJOINT_BITS: class_map_type = 0;
-#[derive(Copy, Clone)]
-#[repr(C, align(8))]
-pub struct _ddebug(pub C2Rust__ddebug_Inner);
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust__ddebug_Inner {
@@ -607,20 +535,11 @@ pub union C2Rust_Unnamed_11 {
     pub entries: *mut jump_entry,
     pub next: *mut static_key_mod,
 }
-#[allow(dead_code, non_upper_case_globals)]
-pub type spinlock_t = spinlock;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_12 {
     pub rlock: raw_spinlock,
 }
-pub type tracepoint_ptr_t = ::core::ffi::c_int;
-pub type Elf64_Sym = elf64_sym;
-pub type Elf64_Xword = __u64;
-pub type Elf64_Addr = __u64;
-pub type Elf64_Half = __u16;
-pub type Elf64_Word = __u32;
-pub type kvm_nvhe_reloc_t = s32;
 #[allow(dead_code, non_upper_case_globals)]
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -629,7 +548,6 @@ pub union C2Rust_Unnamed_13 {
     pub str: *const kparam_string,
     pub arr: *const kparam_array,
 }
-pub type refcount_t = refcount_struct;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_14 {
@@ -651,7 +569,6 @@ pub union C2Rust_Unnamed_16 {
     pub f_ra: file_ra_state,
     pub f_freeptr: freeptr_t,
 }
-pub type errseq_t = u32_0;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_17 {
@@ -677,7 +594,6 @@ pub union C2Rust_Unnamed_20 {
     pub d_lru: list_head,
     pub d_wait: *mut wait_queue_head_t,
 }
-pub type wait_queue_head_t = wait_queue_head;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_21 {
@@ -694,13 +610,6 @@ pub struct C2Rust_Unnamed_22 {
 pub type C2Rust_Unnamed_23 = ::core::ffi::c_uint;
 pub const SYSCTL_TABLE_TYPE_PERMANENTLY_EMPTY: C2Rust_Unnamed_23 = 1;
 pub const SYSCTL_TABLE_TYPE_DEFAULT: C2Rust_Unnamed_23 = 0;
-pub type proc_handler = unsafe extern "C" fn(
-    *const ctl_table,
-    ::core::ffi::c_int,
-    *mut ::core::ffi::c_void,
-    *mut size_t,
-    *mut loff_t,
-) -> ::core::ffi::c_int;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_24 {
@@ -716,14 +625,6 @@ pub struct C2Rust_Unnamed_25 {
     pub count: ::core::ffi::c_int,
     pub nreg: ::core::ffi::c_int,
 }
-pub type key_restrict_link_func_t = Option<
-    unsafe extern "C" fn(
-        *mut key,
-        *const key_type,
-        *const key_payload,
-        *mut key,
-    ) -> ::core::ffi::c_int,
->;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_26 {
@@ -763,8 +664,6 @@ pub struct C2Rust_Unnamed_31 {
     pub desc_len: u16_0,
     pub desc: [::core::ffi::c_char; 6],
 }
-pub type key_perm_t = uint32_t;
-pub type time64_t = __s64;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_32 {
@@ -777,7 +676,6 @@ pub union C2Rust_Unnamed_33 {
     pub graveyard_link: list_head,
     pub serial_node: rb_node,
 }
-pub type key_serial_t = int32_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_34 {
@@ -817,15 +715,10 @@ pub struct cacheline_padding(pub C2Rust_cacheline_padding_Inner);
 pub struct C2Rust_cacheline_padding_Inner {
     pub x: [::core::ffi::c_char; 0],
 }
-#[allow(dead_code, non_upper_case_globals)]
-pub type zone_type = ::core::ffi::c_uint;
 pub const __MAX_NR_ZONES: zone_type = 3;
 pub const ZONE_MOVABLE: zone_type = 2;
 pub const ZONE_NORMAL: zone_type = 1;
 pub const ZONE_DMA32: zone_type = 0;
-#[allow(dead_code, non_upper_case_globals)]
-pub type seqcount_spinlock_t = seqcount_spinlock;
-pub type seqcount_t = seqcount;
 #[allow(dead_code, non_upper_case_globals)]
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -833,7 +726,6 @@ pub union C2Rust_Unnamed_39 {
     pub list: list_head,
     pub rcu: callback_head,
 }
-pub type percpu_ref_func_t = unsafe extern "C" fn(*mut percpu_ref) -> ();
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_40 {
@@ -866,10 +758,6 @@ pub struct C2Rust_page_counter_Inner {
     pub max: ::core::ffi::c_ulong,
     pub parent: *mut page_counter,
 }
-#[allow(dead_code, non_upper_case_globals)]
-pub type poll_queue_proc =
-    Option<unsafe extern "C" fn(*mut file, *mut wait_queue_head_t, *mut poll_table_struct) -> ()>;
-pub type d_real_type = ::core::ffi::c_uint;
 pub const D_REAL_METADATA: d_real_type = 1;
 pub const D_REAL_DATA: d_real_type = 0;
 #[derive(Copy, Clone)]
@@ -1051,8 +939,6 @@ pub union C2Rust_Unnamed_64 {
     pub _mm_id: [mm_id_t; 2],
     pub _mm_ids: ::core::ffi::c_ulong,
 }
-pub type mm_id_t = ::core::ffi::c_uint;
-pub type mm_id_mapcount_t = ::core::ffi::c_int;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_65 {
@@ -1105,18 +991,12 @@ pub struct C2Rust_Unnamed_71 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_72 {}
-pub type pgtable_t = *mut page;
-pub type pteval_t = ptdesc_t;
-pub type ptdesc_t = u64_0;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_73 {
     pub orig_pte: pte_t,
     pub orig_pmd: pmd_t,
 }
-pub type pmdval_t = ptdesc_t;
-pub type pgdval_t = ptdesc_t;
-pub type fault_flag = ::core::ffi::c_uint;
 pub const FAULT_FLAG_VMA_LOCK: fault_flag = 4096;
 pub const FAULT_FLAG_ORIG_PTE_VALID: fault_flag = 2048;
 pub const FAULT_FLAG_UNSHARE: fault_flag = 1024;
@@ -1139,8 +1019,6 @@ pub struct C2Rust_Unnamed_74 {
     pub address: ::core::ffi::c_ulong,
     pub real_address: ::core::ffi::c_ulong,
 }
-pub type vm_fault_t = ::core::ffi::c_uint;
-pub type memory_type = ::core::ffi::c_uint;
 pub const MEMORY_DEVICE_PCI_P2PDMA: memory_type = 5;
 pub const MEMORY_DEVICE_GENERIC: memory_type = 4;
 pub const MEMORY_DEVICE_FS_DAX: memory_type = 3;
@@ -1152,7 +1030,6 @@ pub struct C2Rust_Unnamed_75 {
     pub __filler: *mut ::core::ffi::c_void,
     pub mlock_count: ::core::ffi::c_uint,
 }
-pub type migrate_mode = ::core::ffi::c_uint;
 pub const MIGRATE_SYNC: migrate_mode = 2;
 pub const MIGRATE_SYNC_LIGHT: migrate_mode = 1;
 pub const MIGRATE_ASYNC: migrate_mode = 0;
@@ -1162,7 +1039,6 @@ pub union C2Rust_Unnamed_76 {
     pub release_work: work_struct,
     pub rcu: callback_head,
 }
-pub type wb_reason = ::core::ffi::c_uint;
 pub const WB_REASON_MAX: wb_reason = 8;
 pub const WB_REASON_FOREIGN_FLUSH: wb_reason = 7;
 pub const WB_REASON_FORKER_THREAD: wb_reason = 6;
@@ -1172,20 +1048,16 @@ pub const WB_REASON_PERIODIC: wb_reason = 3;
 pub const WB_REASON_SYNC: wb_reason = 2;
 pub const WB_REASON_VMSCAN: wb_reason = 1;
 pub const WB_REASON_BACKGROUND: wb_reason = 0;
-pub type device_removable = ::core::ffi::c_uint;
 pub const DEVICE_REMOVABLE: device_removable = 3;
 pub const DEVICE_FIXED: device_removable = 2;
 pub const DEVICE_REMOVABLE_UNKNOWN: device_removable = 1;
 pub const DEVICE_REMOVABLE_NOT_SUPPORTED: device_removable = 0;
-pub type device_physical_location_horizontal_position = ::core::ffi::c_uint;
 pub const DEVICE_HORI_POS_RIGHT: device_physical_location_horizontal_position = 2;
 pub const DEVICE_HORI_POS_CENTER: device_physical_location_horizontal_position = 1;
 pub const DEVICE_HORI_POS_LEFT: device_physical_location_horizontal_position = 0;
-pub type device_physical_location_vertical_position = ::core::ffi::c_uint;
 pub const DEVICE_VERT_POS_LOWER: device_physical_location_vertical_position = 2;
 pub const DEVICE_VERT_POS_CENTER: device_physical_location_vertical_position = 1;
 pub const DEVICE_VERT_POS_UPPER: device_physical_location_vertical_position = 0;
-pub type device_physical_location_panel = ::core::ffi::c_uint;
 pub const DEVICE_PANEL_UNKNOWN: device_physical_location_panel = 6;
 pub const DEVICE_PANEL_BACK: device_physical_location_panel = 5;
 pub const DEVICE_PANEL_FRONT: device_physical_location_panel = 4;
@@ -1193,56 +1065,31 @@ pub const DEVICE_PANEL_RIGHT: device_physical_location_panel = 3;
 pub const DEVICE_PANEL_LEFT: device_physical_location_panel = 2;
 pub const DEVICE_PANEL_BOTTOM: device_physical_location_panel = 1;
 pub const DEVICE_PANEL_TOP: device_physical_location_panel = 0;
-pub type kobj_ns_type = ::core::ffi::c_uint;
 pub const KOBJ_NS_TYPES: kobj_ns_type = 2;
 pub const KOBJ_NS_TYPE_NET: kobj_ns_type = 1;
 pub const KOBJ_NS_TYPE_NONE: kobj_ns_type = 0;
-pub type dev_dma_attr = ::core::ffi::c_uint;
 pub const DEV_DMA_COHERENT: dev_dma_attr = 2;
 pub const DEV_DMA_NON_COHERENT: dev_dma_attr = 1;
 pub const DEV_DMA_NOT_SUPPORTED: dev_dma_attr = 0;
-pub type rpm_status = ::core::ffi::c_int;
 pub const RPM_BLOCKED: rpm_status = 4;
 pub const RPM_SUSPENDING: rpm_status = 3;
 pub const RPM_SUSPENDED: rpm_status = 2;
 pub const RPM_RESUMING: rpm_status = 1;
 pub const RPM_ACTIVE: rpm_status = 0;
 pub const RPM_INVALID: rpm_status = -1;
-pub type rpm_request = ::core::ffi::c_uint;
 pub const RPM_REQ_RESUME: rpm_request = 4;
 pub const RPM_REQ_AUTOSUSPEND: rpm_request = 3;
 pub const RPM_REQ_SUSPEND: rpm_request = 2;
 pub const RPM_REQ_IDLE: rpm_request = 1;
 pub const RPM_REQ_NONE: rpm_request = 0;
-pub type seqcount_raw_spinlock_t = seqcount_raw_spinlock;
-pub type call_single_data_t = __call_single_data;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct __call_single_data {
-    pub node: __call_single_node,
-    pub func: smp_call_func_t,
-    pub info: *mut ::core::ffi::c_void,
-}
-pub type smp_call_func_t = Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ()>;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct __call_single_node {
-    pub llist: llist_node,
-    pub c2rust_unnamed: C2Rust_Unnamed_77,
-    pub src: u16_0,
-    pub dst: u16_0,
-}
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_77 {
     pub u_flags: ::core::ffi::c_uint,
     pub a_flags: atomic_t,
 }
-pub type hrtimer_restart = ::core::ffi::c_uint;
 pub const HRTIMER_RESTART: hrtimer_restart = 1;
 pub const HRTIMER_NORESTART: hrtimer_restart = 0;
-pub type pm_message_t = pm_message;
-pub type dl_dev_state = ::core::ffi::c_uint;
 pub const DL_DEV_UNBINDING: dl_dev_state = 3;
 pub const DL_DEV_DRIVER_BOUND: dl_dev_state = 2;
 pub const DL_DEV_PROBING: dl_dev_state = 1;
@@ -1253,11 +1100,9 @@ pub struct C2Rust_Unnamed_78 {
     pub name: *const ::core::ffi::c_char,
     pub lock: spinlock_t,
 }
-pub type probe_type = ::core::ffi::c_uint;
 pub const PROBE_FORCE_SYNCHRONOUS: probe_type = 2;
 pub const PROBE_PREFER_ASYNCHRONOUS: probe_type = 1;
 pub const PROBE_DEFAULT_STRATEGY: probe_type = 0;
-pub type writeback_sync_modes = ::core::ffi::c_uint;
 pub const WB_SYNC_ALL: writeback_sync_modes = 1;
 pub const WB_SYNC_NONE: writeback_sync_modes = 0;
 #[derive(Copy, Clone)]
@@ -1266,7 +1111,6 @@ pub union C2Rust_Unnamed_79 {
     pub i_fop: *const file_operations,
     pub free_inode: Option<unsafe extern "C" fn(*mut inode) -> ()>,
 }
-pub type vm_flags_t = usize;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_80 {
@@ -1357,26 +1201,12 @@ pub struct C2Rust_Unnamed_83(pub C2Rust_C2Rust_Unnamed_83_Inner);
 pub struct C2Rust_C2Rust_Unnamed_83_Inner {
     pub mm_count: atomic_t,
 }
-#[allow(dead_code, non_upper_case_globals)]
-pub type fl_owner_t = *mut ::core::ffi::c_void;
-pub type filldir_t = Option<
-    unsafe extern "C" fn(
-        *mut dir_context,
-        *const ::core::ffi::c_char,
-        ::core::ffi::c_int,
-        loff_t,
-        u64_0,
-        ::core::ffi::c_uint,
-    ) -> bool_0,
->;
-pub type fop_flags_t = ::core::ffi::c_uint;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_84 {
     pub i_dentry: hlist_head,
     pub i_rcu: callback_head,
 }
-pub type inode_state_flags_t = ::core::ffi::c_uint;
 pub const I_PINNING_NETFS_WB: inode_state_flags_t = 262144;
 pub const I_SYNC_QUEUED: inode_state_flags_t = 131072;
 pub const I_DONTCACHE: inode_state_flags_t = 65536;
@@ -1395,7 +1225,6 @@ pub const I_DIRTY_SYNC: inode_state_flags_t = 16;
 pub const I_LRU_ISOLATING: inode_state_flags_t = 4;
 pub const I_SYNC: inode_state_flags_t = 2;
 pub const I_NEW: inode_state_flags_t = 1;
-pub type rw_hint = ::core::ffi::c_uchar;
 pub const WRITE_LIFE_HINT_NR: rw_hint = 6;
 pub const WRITE_LIFE_EXTREME: rw_hint = 5;
 pub const WRITE_LIFE_LONG: rw_hint = 4;
@@ -1433,10 +1262,6 @@ pub struct C2Rust_Unnamed_89 {
     pub hash: u32_0,
     pub len: u32_0,
 }
-pub type quota_type = ::core::ffi::c_uint;
-pub const PRJQUOTA: quota_type = 2;
-pub const GRPQUOTA: quota_type = 1;
-pub const USRQUOTA: quota_type = 0;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_90 {
@@ -1444,9 +1269,6 @@ pub union C2Rust_Unnamed_90 {
     pub gid: kgid_t,
     pub projid: kprojid_t,
 }
-pub type projid_t = __kernel_uid32_t;
-pub type qsize_t = ::core::ffi::c_longlong;
-pub type freeze_holder = ::core::ffi::c_uint;
 pub const FREEZE_EXCL: freeze_holder = 8;
 pub const FREEZE_MAY_NEST: freeze_holder = 4;
 pub const FREEZE_HOLDER_USERSPACE: freeze_holder = 2;
@@ -1457,7 +1279,6 @@ pub union C2Rust_Unnamed_91 {
     pub __d_name: qstr,
     pub d_name: qstr,
 }
-pub type pid_type = ::core::ffi::c_uint;
 pub const PIDTYPE_MAX: pid_type = 4;
 pub const PIDTYPE_SID: pid_type = 3;
 pub const PIDTYPE_PGID: pid_type = 2;
@@ -1471,7 +1292,6 @@ pub struct C2Rust_Unnamed_92 {
     pub stashed: *mut dentry,
     pub attr: *mut pidfs_attr,
 }
-pub type arch_rwlock_t = qrwlock;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_93 {
@@ -1508,12 +1328,10 @@ pub struct C2Rust_Unnamed_98 {
     pub vm_start: ::core::ffi::c_ulong,
     pub vm_end: ::core::ffi::c_ulong,
 }
-pub type module_state = ::core::ffi::c_uint;
 pub const MODULE_STATE_UNFORMED: module_state = 3;
 pub const MODULE_STATE_GOING: module_state = 2;
 pub const MODULE_STATE_COMING: module_state = 1;
 pub const MODULE_STATE_LIVE: module_state = 0;
-pub type bpf_attach_type = ::core::ffi::c_uint;
 pub const __MAX_BPF_ATTACH_TYPE: bpf_attach_type = 58;
 pub const BPF_TRACE_UPROBE_SESSION: bpf_attach_type = 57;
 pub const BPF_TRACE_KPROBE_SESSION: bpf_attach_type = 56;
@@ -1579,7 +1397,6 @@ pub union C2Rust_Unnamed_99 {
     pub size: __u32,
     pub type_0: __u32,
 }
-pub type bpf_prog_type = ::core::ffi::c_uint;
 pub const __MAX_BPF_PROG_TYPE: bpf_prog_type = 34;
 pub const BPF_PROG_TYPE_FUSE: bpf_prog_type = 33;
 pub const BPF_PROG_TYPE_NETFILTER: bpf_prog_type = 32;
@@ -1627,8 +1444,6 @@ pub union C2Rust_Unnamed_101 {
     pub kptr: btf_field_kptr,
     pub graph_root: btf_field_graph_root,
 }
-pub type btf_dtor_kfunc_t = Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ()>;
-pub type btf_field_type = ::core::ffi::c_uint;
 pub const BPF_TASK_WORK: btf_field_type = 8192;
 pub const BPF_RES_SPIN_LOCK: btf_field_type = 4096;
 pub const BPF_UPTR: btf_field_type = 2048;
@@ -1646,7 +1461,6 @@ pub const BPF_KPTR_REF: btf_field_type = 8;
 pub const BPF_KPTR_UNREF: btf_field_type = 4;
 pub const BPF_TIMER: btf_field_type = 2;
 pub const BPF_SPIN_LOCK: btf_field_type = 1;
-pub type bpf_map_type = ::core::ffi::c_uint;
 pub const __MAX_BPF_MAP_TYPE: bpf_map_type = 34;
 pub const BPF_MAP_TYPE_ARENA: bpf_map_type = 33;
 pub const BPF_MAP_TYPE_CGRP_STORAGE: bpf_map_type = 32;
@@ -1684,17 +1498,12 @@ pub const BPF_MAP_TYPE_PROG_ARRAY: bpf_map_type = 3;
 pub const BPF_MAP_TYPE_ARRAY: bpf_map_type = 2;
 pub const BPF_MAP_TYPE_HASH: bpf_map_type = 1;
 pub const BPF_MAP_TYPE_UNSPEC: bpf_map_type = 0;
-pub type bpf_iter_fini_seq_priv_t = Option<unsafe extern "C" fn(*mut ::core::ffi::c_void) -> ()>;
-pub type bpf_iter_init_seq_priv_t = Option<
-    unsafe extern "C" fn(*mut ::core::ffi::c_void, *mut bpf_iter_aux_info) -> ::core::ffi::c_int,
->;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_102 {
     pub type_0: bpf_iter_task_type,
     pub pid: u32_0,
 }
-pub type bpf_iter_task_type = ::core::ffi::c_uint;
 pub const BPF_TASK_ITER_TGID: bpf_iter_task_type = 2;
 pub const BPF_TASK_ITER_TID: bpf_iter_task_type = 1;
 pub const BPF_TASK_ITER_ALL: bpf_iter_task_type = 0;
@@ -1704,13 +1513,11 @@ pub struct C2Rust_Unnamed_103 {
     pub start: *mut cgroup,
     pub order: bpf_cgroup_iter_order,
 }
-pub type bpf_cgroup_iter_order = ::core::ffi::c_uint;
 pub const BPF_CGROUP_ITER_ANCESTORS_UP: bpf_cgroup_iter_order = 4;
 pub const BPF_CGROUP_ITER_DESCENDANTS_POST: bpf_cgroup_iter_order = 3;
 pub const BPF_CGROUP_ITER_DESCENDANTS_PRE: bpf_cgroup_iter_order = 2;
 pub const BPF_CGROUP_ITER_SELF_ONLY: bpf_cgroup_iter_order = 1;
 pub const BPF_CGROUP_ITER_ORDER_UNSPEC: bpf_cgroup_iter_order = 0;
-pub type bpf_callback_t = Option<unsafe extern "C" fn(u64_0, u64_0, u64_0, u64_0, u64_0) -> u64_0>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_104 {
@@ -2304,7 +2111,6 @@ pub struct C2Rust_Unnamed_174 {
     pub c2rust_unnamed: [u8; 4],
     pub cookie: __u64,
 }
-pub type bpf_link_type = ::core::ffi::c_uint;
 pub const __MAX_BPF_LINK_TYPE: bpf_link_type = 15;
 pub const BPF_LINK_TYPE_SOCKMAP: bpf_link_type = 14;
 pub const BPF_LINK_TYPE_NETKIT: bpf_link_type = 13;
@@ -2321,7 +2127,6 @@ pub const BPF_LINK_TYPE_CGROUP: bpf_link_type = 3;
 pub const BPF_LINK_TYPE_TRACING: bpf_link_type = 2;
 pub const BPF_LINK_TYPE_RAW_TRACEPOINT: bpf_link_type = 1;
 pub const BPF_LINK_TYPE_UNSPEC: bpf_link_type = 0;
-pub type bpf_access_type = ::core::ffi::c_uint;
 pub const BPF_WRITE: bpf_access_type = 2;
 pub const BPF_READ: bpf_access_type = 1;
 #[derive(Copy, Clone)]
@@ -2337,7 +2142,6 @@ pub struct C2Rust_Unnamed_176 {
     pub btf_id: u32_0,
     pub ref_obj_id: u32_0,
 }
-pub type bpf_reg_type = ::core::ffi::c_uint;
 pub const __BPF_REG_TYPE_LIMIT: bpf_reg_type = 268435455;
 pub const PTR_TO_BTF_ID_OR_NULL: bpf_reg_type = 272;
 pub const PTR_TO_TCP_SOCK_OR_NULL: bpf_reg_type = 269;
@@ -2367,7 +2171,6 @@ pub const CONST_PTR_TO_MAP: bpf_reg_type = 3;
 pub const PTR_TO_CTX: bpf_reg_type = 2;
 pub const SCALAR_VALUE: bpf_reg_type = 1;
 pub const NOT_INIT: bpf_reg_type = 0;
-pub type bpf_func_id = ::core::ffi::c_uint;
 pub const __BPF_FUNC_MAX_ID: bpf_func_id = 212;
 pub const BPF_FUNC_cgrp_storage_delete: bpf_func_id = 211;
 pub const BPF_FUNC_cgrp_storage_get: bpf_func_id = 210;
@@ -2613,7 +2416,6 @@ pub union C2Rust_Unnamed_180 {
     pub c2rust_unnamed: C2Rust_Unnamed_181,
     pub arg_type: [bpf_arg_type; 5],
 }
-pub type bpf_arg_type = ::core::ffi::c_uint;
 pub const __BPF_ARG_TYPE_LIMIT: bpf_arg_type = 268435455;
 pub const ARG_PTR_TO_FIXED_SIZE_MEM: bpf_arg_type = 262148;
 pub const ARG_PTR_TO_UNINIT_MEM: bpf_arg_type = 67141636;
@@ -2657,7 +2459,6 @@ pub struct C2Rust_Unnamed_181 {
     pub arg4_type: bpf_arg_type,
     pub arg5_type: bpf_arg_type,
 }
-pub type bpf_return_type = ::core::ffi::c_uint;
 pub const __BPF_RET_TYPE_LIMIT: bpf_return_type = 268435455;
 pub const RET_PTR_TO_BTF_ID_TRUSTED: bpf_return_type = 1048584;
 pub const RET_PTR_TO_BTF_ID_OR_NULL: bpf_return_type = 264;
@@ -2777,7 +2578,6 @@ pub struct trace_seq {
     pub full: ::core::ffi::c_int,
     pub buffer: [::core::ffi::c_char; 8156],
 }
-pub type cpumask_var_t = [cpumask; 1];
 pub type print_line_t = ::core::ffi::c_uint;
 pub const TRACE_TYPE_NO_CONSUME: print_line_t = 3;
 pub const TRACE_TYPE_UNHANDLED: print_line_t = 2;
@@ -3217,7 +3017,6 @@ pub const PERF_EVENT_STATE_ERROR: perf_event_state = -2;
 pub const PERF_EVENT_STATE_EXIT: perf_event_state = -3;
 pub const PERF_EVENT_STATE_REVOKED: perf_event_state = -4;
 pub const PERF_EVENT_STATE_DEAD: perf_event_state = -5;
-pub type fp_type = ::core::ffi::c_uint;
 pub const FP_STATE_SVE: fp_type = 2;
 pub const FP_STATE_FPSIMD: fp_type = 1;
 pub const FP_STATE_CURRENT: fp_type = 0;
@@ -3230,7 +3029,6 @@ pub struct C2Rust_Unnamed_218 {
     pub pad: ::core::ffi::c_ulong,
     pub fpsimd_state: user_fpsimd_state,
 }
-pub type probes_handler_t = unsafe extern "C" fn(u32_0, ::core::ffi::c_long, *mut pt_regs) -> ();
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_219 {
@@ -3255,19 +3053,14 @@ pub struct C2Rust_Unnamed_222 {
     pub autask: arch_uprobe_task,
     pub vaddr: ::core::ffi::c_ulong,
 }
-pub type hprobe_state = ::core::ffi::c_uint;
 pub const HPROBE_CONSUMED: hprobe_state = 3;
 pub const HPROBE_GONE: hprobe_state = 2;
 pub const HPROBE_STABLE: hprobe_state = 1;
 pub const HPROBE_LEASED: hprobe_state = 0;
-pub type uprobe_task_state = ::core::ffi::c_uint;
 pub const UTASK_SSTEP_TRAPPED: uprobe_task_state = 3;
 pub const UTASK_SSTEP_ACK: uprobe_task_state = 2;
 pub const UTASK_SSTEP: uprobe_task_state = 1;
 pub const UTASK_RUNNING: uprobe_task_state = 0;
-pub type compat_uptr_t = u32_0;
-pub type compat_long_t = s32;
-pub type kernel_siginfo_t = kernel_siginfo;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_223 {
@@ -3275,17 +3068,6 @@ pub struct C2Rust_Unnamed_223 {
     pub si_errno: ::core::ffi::c_int,
     pub si_code: ::core::ffi::c_int,
     pub _sifields: __sifields,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union __sifields {
-    pub _kill: C2Rust_Unnamed_234,
-    pub _timer: C2Rust_Unnamed_233,
-    pub _rt: C2Rust_Unnamed_232,
-    pub _sigchld: C2Rust_Unnamed_231,
-    pub _sigfault: C2Rust_Unnamed_226,
-    pub _sigpoll: C2Rust_Unnamed_225,
-    pub _sigsys: C2Rust_Unnamed_224,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -3351,7 +3133,6 @@ pub struct C2Rust_Unnamed_232 {
     pub _uid: __kernel_uid32_t,
     pub _sigval: sigval_t,
 }
-pub type sigval_t = sigval;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_233 {
@@ -3378,30 +3159,15 @@ pub union C2Rust_Unnamed_236 {
     pub q_node: list_head,
     pub __rcu_icq_cache: *mut kmem_cache,
 }
-pub type mempool_t = mempool;
-pub type mempool_free_t =
-    unsafe extern "C" fn(*mut ::core::ffi::c_void, *mut ::core::ffi::c_void) -> ();
-pub type mempool_alloc_t =
-    unsafe extern "C" fn(gfp_t, *mut ::core::ffi::c_void) -> *mut ::core::ffi::c_void;
-pub type bio_end_io_t = unsafe extern "C" fn(*mut bio) -> ();
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_237 {
     pub bi_cookie: blk_qc_t,
     pub __bi_nr_segments: ::core::ffi::c_uint,
 }
-pub type blk_qc_t = ::core::ffi::c_uint;
-#[allow(dead_code, non_upper_case_globals)]
-pub type blk_status_t = u8_0;
-pub type blk_opf_t = __u32;
-pub type blocked_on_type = ::core::ffi::c_uint;
 pub const BO_T_RWSEM: blocked_on_type = 2;
 pub const BO_T_MUTEX: blocked_on_type = 1;
 pub const BO_T_NONE: blocked_on_type = 0;
-pub type __sigrestore_t = Option<__restorefn_t>;
-pub type __restorefn_t = unsafe extern "C" fn() -> ();
-pub type __sighandler_t = Option<__signalfn_t>;
-pub type __signalfn_t = unsafe extern "C" fn(::core::ffi::c_int) -> ();
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct netns_xdp {
@@ -3500,7 +3266,6 @@ pub struct dst_ops {
     pub kmem_cachep: *mut kmem_cache,
     pub pcpuc_entries: percpu_counter,
 }
-pub type sk_buff_data_t = ::core::ffi::c_uint;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_238 {
@@ -3829,18 +3594,6 @@ pub struct fqdir {
     pub destroy_work: work_struct,
     pub free_list: llist_node,
 }
-#[allow(dead_code, non_upper_case_globals)]
-#[allow(dead_code, non_upper_case_globals)]
-pub type rht_obj_cmpfn_t = Option<
-    unsafe extern "C" fn(
-        *mut rhashtable_compare_arg,
-        *const ::core::ffi::c_void,
-    ) -> ::core::ffi::c_int,
->;
-pub type rht_obj_hashfn_t =
-    Option<unsafe extern "C" fn(*const ::core::ffi::c_void, u32_0, u32_0) -> u32_0>;
-pub type rht_hashfn_t =
-    Option<unsafe extern "C" fn(*const ::core::ffi::c_void, u32_0, u32_0) -> u32_0>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct inet_frags {
@@ -4224,13 +3977,6 @@ pub struct netns_nexthop {
     pub last_id_allocated: u32_0,
     pub notifier_chain: blocking_notifier_head,
 }
-pub type notifier_fn_t = Option<
-    unsafe extern "C" fn(
-        *mut notifier_block,
-        ::core::ffi::c_ulong,
-        *mut ::core::ffi::c_void,
-    ) -> ::core::ffi::c_int,
->;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct netns_unix {
@@ -4358,14 +4104,12 @@ pub union C2Rust_Unnamed_270 {
     pub rmtp: *mut __kernel_timespec,
     pub compat_rmtp: *mut old_timespec32,
 }
-pub type old_time32_t = s32;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct __kernel_timespec {
     pub tv_sec: __kernel_time64_t,
     pub tv_nsec: ::core::ffi::c_longlong,
 }
-pub type timespec_type = ::core::ffi::c_uint;
 pub const TT_COMPAT: timespec_type = 2;
 pub const TT_NATIVE: timespec_type = 1;
 pub const TT_NONE: timespec_type = 0;
@@ -4387,10 +4131,6 @@ pub struct C2Rust_Unnamed_272 {
     pub exp_hint: u8_0,
     pub need_mb: u8_0,
 }
-pub type cpumask_t = cpumask;
-#[allow(dead_code, non_upper_case_globals)]
-pub type dl_server_pick_f =
-    Option<unsafe extern "C" fn(*mut sched_dl_entity, *mut rq_flags) -> *mut task_struct>;
 #[allow(dead_code, non_upper_case_globals)]
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -4420,7 +4160,6 @@ pub struct C2Rust_Unnamed_275 {
     pub count: u32_0,
     pub need_resched: u32_0,
 }
-pub type va_list = __builtin_va_list;
 #[derive(Clone)]
 #[repr(C)]
 pub struct class_preempt_notrace_t {
@@ -4432,7 +4171,6 @@ pub struct C2Rust_Unnamed_276 {}
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2Rust_Unnamed_277 {}
-pub type fortify_func = ::core::ffi::c_uint;
 pub const FORTIFY_FUNC_UNKNOWN: fortify_func = 16;
 pub const FORTIFY_FUNC_strcpy: fortify_func = 15;
 pub const FORTIFY_FUNC_kmemdup: fortify_func = 14;
@@ -4649,35 +4387,6 @@ pub struct C2Rust_Unnamed_342 {}
 #[repr(C)]
 pub struct C2Rust_Unnamed_343 {}
 pub type C2Rust_Unnamed_344 = ::core::ffi::c_uint;
-pub const ___GFP_LAST_BIT: C2Rust_Unnamed_344 = 28;
-pub const ___GFP_CMA_BIT: C2Rust_Unnamed_344 = 27;
-pub const ___GFP_NO_OBJ_EXT_BIT: C2Rust_Unnamed_344 = 26;
-pub const ___GFP_SKIP_KASAN_BIT: C2Rust_Unnamed_344 = 25;
-pub const ___GFP_SKIP_ZERO_BIT: C2Rust_Unnamed_344 = 24;
-pub const ___GFP_ZEROTAGS_BIT: C2Rust_Unnamed_344 = 23;
-pub const ___GFP_ACCOUNT_BIT: C2Rust_Unnamed_344 = 22;
-pub const ___GFP_THISNODE_BIT: C2Rust_Unnamed_344 = 21;
-pub const ___GFP_HARDWALL_BIT: C2Rust_Unnamed_344 = 20;
-pub const ___GFP_NOMEMALLOC_BIT: C2Rust_Unnamed_344 = 19;
-pub const ___GFP_COMP_BIT: C2Rust_Unnamed_344 = 18;
-pub const ___GFP_MEMALLOC_BIT: C2Rust_Unnamed_344 = 17;
-pub const ___GFP_NORETRY_BIT: C2Rust_Unnamed_344 = 16;
-pub const ___GFP_NOFAIL_BIT: C2Rust_Unnamed_344 = 15;
-pub const ___GFP_RETRY_MAYFAIL_BIT: C2Rust_Unnamed_344 = 14;
-pub const ___GFP_NOWARN_BIT: C2Rust_Unnamed_344 = 13;
-pub const ___GFP_WRITE_BIT: C2Rust_Unnamed_344 = 12;
-pub const ___GFP_KSWAPD_RECLAIM_BIT: C2Rust_Unnamed_344 = 11;
-pub const ___GFP_DIRECT_RECLAIM_BIT: C2Rust_Unnamed_344 = 10;
-pub const ___GFP_UNUSED_BIT: C2Rust_Unnamed_344 = 9;
-pub const ___GFP_ZERO_BIT: C2Rust_Unnamed_344 = 8;
-pub const ___GFP_FS_BIT: C2Rust_Unnamed_344 = 7;
-pub const ___GFP_IO_BIT: C2Rust_Unnamed_344 = 6;
-pub const ___GFP_HIGH_BIT: C2Rust_Unnamed_344 = 5;
-pub const ___GFP_RECLAIMABLE_BIT: C2Rust_Unnamed_344 = 4;
-pub const ___GFP_MOVABLE_BIT: C2Rust_Unnamed_344 = 3;
-pub const ___GFP_DMA32_BIT: C2Rust_Unnamed_344 = 2;
-pub const ___GFP_HIGHMEM_BIT: C2Rust_Unnamed_344 = 1;
-pub const ___GFP_DMA_BIT: C2Rust_Unnamed_344 = 0;
 #[derive(Clone)]
 #[repr(C)]
 pub struct class_spinlock_t {
@@ -4701,21 +4410,11 @@ impl Drop for class_mutex_t {
         }
     }
 }
-pub type wait_queue_func_t = Option<
-    unsafe extern "C" fn(
-        *mut wait_queue_entry,
-        ::core::ffi::c_uint,
-        ::core::ffi::c_int,
-        *mut ::core::ffi::c_void,
-    ) -> ::core::ffi::c_int,
->;
-pub type refcount_saturation_type = ::core::ffi::c_uint;
 pub const REFCOUNT_DEC_LEAK: refcount_saturation_type = 4;
 pub const REFCOUNT_SUB_UAF: refcount_saturation_type = 3;
 pub const REFCOUNT_ADD_UAF: refcount_saturation_type = 2;
 pub const REFCOUNT_ADD_OVF: refcount_saturation_type = 1;
 pub const REFCOUNT_ADD_NOT_ZERO_OVF: refcount_saturation_type = 0;
-pub type work_bits = ::core::ffi::c_uint;
 pub const WORK_OFFQ_POOL_BITS: work_bits = 31;
 pub const WORK_OFFQ_LEFT: work_bits = 43;
 pub const WORK_OFFQ_POOL_SHIFT: work_bits = 21;
@@ -4733,19 +4432,16 @@ pub const WORK_STRUCT_LINKED_BIT: work_bits = 3;
 pub const WORK_STRUCT_PWQ_BIT: work_bits = 2;
 pub const WORK_STRUCT_INACTIVE_BIT: work_bits = 1;
 pub const WORK_STRUCT_PENDING_BIT: work_bits = 0;
-pub type work_flags = ::core::ffi::c_uint;
 pub const WORK_STRUCT_STATIC: work_flags = 0;
 pub const WORK_STRUCT_LINKED: work_flags = 8;
 pub const WORK_STRUCT_PWQ: work_flags = 4;
 pub const WORK_STRUCT_INACTIVE: work_flags = 2;
 pub const WORK_STRUCT_PENDING: work_flags = 1;
-pub type wq_misc_consts = ::core::ffi::c_uint;
 pub const WORKER_DESC_LEN: wq_misc_consts = 32;
 pub const WORK_BUSY_RUNNING: wq_misc_consts = 2;
 pub const WORK_BUSY_PENDING: wq_misc_consts = 1;
 pub const WORK_CPU_UNBOUND: wq_misc_consts = 32;
 pub const WORK_NR_COLORS: wq_misc_consts = 16;
-pub type vm_fault_reason = ::core::ffi::c_uint;
 pub const VM_FAULT_HINDEX_MASK: vm_fault_reason = 983040;
 pub const VM_FAULT_NEED_ANONPAGE: vm_fault_reason = 524288;
 pub const VM_FAULT_COMPLETED: vm_fault_reason = 16384;
@@ -4761,7 +4457,6 @@ pub const VM_FAULT_HWPOISON: vm_fault_reason = 16;
 pub const VM_FAULT_MAJOR: vm_fault_reason = 4;
 pub const VM_FAULT_SIGBUS: vm_fault_reason = 2;
 pub const VM_FAULT_OOM: vm_fault_reason = 1;
-pub type kmalloc_cache_type = ::core::ffi::c_uint;
 pub const NR_KMALLOC_TYPES: kmalloc_cache_type = 3;
 pub const KMALLOC_CGROUP: kmalloc_cache_type = 2;
 pub const KMALLOC_RECLAIM: kmalloc_cache_type = 1;
@@ -4769,23 +4464,12 @@ pub const KMALLOC_RANDOM_END: kmalloc_cache_type = 0;
 pub const KMALLOC_RANDOM_START: kmalloc_cache_type = 0;
 pub const KMALLOC_DMA: kmalloc_cache_type = 0;
 pub const KMALLOC_NORMAL: kmalloc_cache_type = 0;
-pub type kmem_buckets = [*mut kmem_cache; 14];
-pub type poll_table = poll_table_struct;
-pub type task_work_func_t = Option<unsafe extern "C" fn(*mut callback_head) -> ()>;
-pub type task_work_notify_mode = ::core::ffi::c_uint;
 pub const TWA_NMI_CURRENT: task_work_notify_mode = 4;
 pub const TWA_SIGNAL_NO_IPI: task_work_notify_mode = 3;
 pub const TWA_SIGNAL: task_work_notify_mode = 2;
 pub const TWA_RESUME: task_work_notify_mode = 1;
 pub const TWA_NONE: task_work_notify_mode = 0;
 pub type C2Rust_Unnamed_345 = ::core::ffi::c_uint;
-pub const BINDER_TYPE_PTR: C2Rust_Unnamed_345 = 1886661253;
-pub const BINDER_TYPE_FDA: C2Rust_Unnamed_345 = 1717854597;
-pub const BINDER_TYPE_FD: C2Rust_Unnamed_345 = 1717840517;
-pub const BINDER_TYPE_WEAK_HANDLE: C2Rust_Unnamed_345 = 2003315333;
-pub const BINDER_TYPE_HANDLE: C2Rust_Unnamed_345 = 1936206469;
-pub const BINDER_TYPE_WEAK_BINDER: C2Rust_Unnamed_345 = 2002922117;
-pub const BINDER_TYPE_BINDER: C2Rust_Unnamed_345 = 1935813253;
 pub type flat_binder_object_shifts = ::core::ffi::c_uint;
 pub const FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT: flat_binder_object_shifts = 9;
 pub type flat_binder_object_flags = ::core::ffi::c_uint;
@@ -4840,7 +4524,6 @@ pub struct binder_buffer_object {
     pub parent_offset: binder_size_t,
 }
 pub type C2Rust_Unnamed_348 = ::core::ffi::c_uint;
-pub const BINDER_BUFFER_FLAG_HAS_PARENT: C2Rust_Unnamed_348 = 1;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct binder_fd_array_object {
@@ -4912,21 +4595,6 @@ pub struct binder_extended_error {
     pub param: __s32,
 }
 pub type C2Rust_Unnamed_349 = ::core::ffi::c_uint;
-pub const BINDER_GET_EXTENDED_ERROR: C2Rust_Unnamed_349 = 3222037009;
-pub const BINDER_ENABLE_ONEWAY_SPAM_DETECTION: C2Rust_Unnamed_349 = 1074029072;
-pub const BINDER_GET_FROZEN_INFO: C2Rust_Unnamed_349 = 3222037007;
-pub const BINDER_FREEZE: C2Rust_Unnamed_349 = 1074553358;
-pub const BINDER_SET_CONTEXT_MGR_EXT: C2Rust_Unnamed_349 = 1075339789;
-pub const BINDER_GET_NODE_INFO_FOR_REF: C2Rust_Unnamed_349 = 3222823436;
-pub const BINDER_GET_NODE_DEBUG_INFO: C2Rust_Unnamed_349 = 3222823435;
-pub const BINDER_VERSION: C2Rust_Unnamed_349 = 3221512713;
-pub const BINDER_THREAD_EXIT: C2Rust_Unnamed_349 = 1074029064;
-pub const BINDER_SET_CONTEXT_MGR: C2Rust_Unnamed_349 = 1074029063;
-pub const BINDER_SET_IDLE_PRIORITY: C2Rust_Unnamed_349 = 1074029062;
-pub const BINDER_SET_MAX_THREADS: C2Rust_Unnamed_349 = 1074029061;
-pub const BINDER_SET_IDLE_TIMEOUT: C2Rust_Unnamed_349 = 1074291203;
-pub const BINDER_WRITE_READ: C2Rust_Unnamed_349 = 3224396289;
-pub type transaction_flags = ::core::ffi::c_uint;
 pub const TF_UPDATE_TXN: transaction_flags = 64;
 pub const TF_CLEAR_BUF: transaction_flags = 32;
 pub const TF_ACCEPT_FDS: transaction_flags = 16;
@@ -5209,7 +4877,6 @@ pub struct genl_ops {
     pub validate: u8_0,
     pub __kabi_reserved1: u64_0,
 }
-pub type skb_drop_reason = ::core::ffi::c_uint;
 pub const SKB_DROP_REASON_SUBSYS_MASK: skb_drop_reason = 4294901760;
 pub const SKB_DROP_REASON_MAX: skb_drop_reason = 127;
 pub const SKB_DROP_REASON_PSP_OUTPUT: skb_drop_reason = 126;
@@ -5339,8 +5006,6 @@ pub const SKB_DROP_REASON_NO_SOCKET: skb_drop_reason = 3;
 pub const SKB_DROP_REASON_NOT_SPECIFIED: skb_drop_reason = 2;
 pub const SKB_CONSUMED: skb_drop_reason = 1;
 pub const SKB_NOT_DROPPED_YET: skb_drop_reason = 0;
-pub type netmem_ref = ::core::ffi::c_ulong;
-pub type skb_frag_t = skb_frag;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub union C2Rust_Unnamed_360 {
@@ -5365,9 +5030,6 @@ pub union C2Rust_Unnamed_363 {
     pub hwtstamps: skb_shared_hwtstamps,
     pub xsk_meta: xsk_tx_metadata_compl,
 }
-pub type netlink_filter_fn = Option<
-    unsafe extern "C" fn(*mut sock, *mut sk_buff, *mut ::core::ffi::c_void) -> ::core::ffi::c_int,
->;
 pub type C2Rust_Unnamed_364 = ::core::ffi::c_uint;
 pub const BINDER_A_REPORT_MAX: C2Rust_Unnamed_364 = 10;
 pub const __BINDER_A_REPORT_MAX: C2Rust_Unnamed_364 = 11;
