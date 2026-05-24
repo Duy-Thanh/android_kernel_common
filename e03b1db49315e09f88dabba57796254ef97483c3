@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fbbcf1_df675c86",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-24T10:46:11Z",
+      "side": 1,
+      "message": "It seems better to add `apic_id` and `msi_dest_id` fields to the `pkvm_pcpu` struct (and set them in `pkvm_setup_pcpu()`), in particular in line with Chuanxiao\u0027s fix aosp/4023919 ?\n\n(If so, perhaps we can also add `for_each_pkvm_cpu()` for this purpose, similar to the existing `for_each_pkvm_initialized_cpu()` but without checking if the CPU is already initialized by pKVM, since in our case such check seems unneeded and potentially undesirable.)",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c2edff_969e6295",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-24T10:46:11Z",
+      "side": 1,
+      "message": "nit: the `pkvm_` prefix seems a bit redundant (since distinction between pKVM symbols and host kernel symbols is already provided by `pkvm_sym()` i.e. by the `__pkvm` suffix)?",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9573b35_40d69b70",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-24T10:46:11Z",
+      "side": 1,
+      "message": "nit: maybe it would be better to define this in arch/x86/kvm/pkvm/cpu.c instead, since perhaps potentially these values could be reused by other pKVM code not related to IOMMU (and also because this seems x86-generic, not Intel-specific)?",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53089653_9c90e800",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-24T10:46:11Z",
+      "side": 1,
+      "message": "Maybe instead of adding this `staged_feaddr` and the logic for it (and `staged_perfintraddr` and even more logic in the next patch), we\u0027d better just add a hypercall for the host\u0027s `dmar_msi_write()` instead?\n\nThat might make the code more readable even independently of APIC ID validation: no more tricky `fallthrough`s etc here, just one hypercall with clean semantics for setting all 3 regs DATA, ADDR and UADDR at once, for either FE or PERFINTR (and also reusable for PE in the future, if we support PRQ in the future)?",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
