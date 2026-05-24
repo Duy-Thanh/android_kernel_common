@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9585b909_20d24dac",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-24T11:26:21Z",
+      "side": 1,
+      "message": "EOPNOTSUPP, similarly to the write case?",
+      "fixSuggestions": [
+        {
+          "fixId": "db63fecd_5ef4e5fe",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 506,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4fbe41d109572dffa6d78b372dcd2564a2fc0fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
