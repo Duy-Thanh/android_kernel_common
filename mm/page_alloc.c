@@ -3565,6 +3565,9 @@ bool __zone_watermark_ok(struct zone *z, unsigned int order, unsigned long mark,
 	if (customized)
 		return wmark_ok;
 
+	if (rt_task(current) && in_task())
+		alloc_flags &= ~ALLOC_RESERVES;
+
 	/* free_pages may go negative - that's OK */
 	free_pages -= __zone_watermark_unusable_free(z, order, alloc_flags);
 
