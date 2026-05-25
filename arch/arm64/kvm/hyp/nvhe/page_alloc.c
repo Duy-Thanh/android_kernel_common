@@ -393,6 +393,9 @@ int hyp_pool_reclaim(struct hyp_pool *pool, struct hyp_page *p, u8 order, bool f
 
 unsigned long hyp_pool_reclaimable(struct hyp_pool *pool, u8 order)
 {
+	if (!pool->range_reclaimable)
+		return 0;
+
 	switch (order) {
 	case 0:
 		return hyp_pool_free_pages(pool);
