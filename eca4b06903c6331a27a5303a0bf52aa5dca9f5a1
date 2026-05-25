@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f58db0_9179b728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-25T15:50:35Z",
+      "side": 1,
+      "message": "This series breaks the KMI. Refactor to avoid changing these structs:\n```\ntype \u0027struct iio_trigger\u0027 changed\n  byte size changed from 1368 to 1376\n  6 members (\u0027int subirq_base\u0027 .. \u0027struct work_struct reenable_work\u0027) changed\n    offset changed by 64\n\ntype \u0027struct irq_desc\u0027 changed\n  member \u0027struct irq_redirect redirect\u0027 was added\n  18 members (\u0027const struct cpumask* affinity_hint\u0027 .. \u0027u64 android_vendor_data1\u0027) changed\n    offset changed by 320\n\ntype \u0027struct irq_chip\u0027 changed\n  byte size changed from 272 to 280\n  member \u0027void(* irq_pre_redirect)(struct irq_data*)\u0027 was added\n  23 members (\u0027int(* irq_retrigger)(struct irq_data*)\u0027 .. \u0027unsigned long flags\u0027) changed\n    offset changed by 64\n\ntype \u0027struct irq_chip_type\u0027 changed\n  byte size changed from 344 to 352\n  5 members (\u0027struct irq_chip_regs regs\u0027 .. \u0027u32* mask_cache\u0027) changed\n    offset changed by 64\n```",
+      "revId": "eca4b06903c6331a27a5303a0bf52aa5dca9f5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
