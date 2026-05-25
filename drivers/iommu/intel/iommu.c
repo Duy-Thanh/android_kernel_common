@@ -2717,14 +2717,19 @@ static void iommu_resume(void)
 	}
 
 	for_each_active_iommu(iommu, drhd) {
+		u32 data = iommu->iommu_state[SR_DMAR_FEDATA_REG];
+		u32 addr = iommu->iommu_state[SR_DMAR_FEADDR_REG];
+		u32 uaddr = iommu->iommu_state[SR_DMAR_FEUADDR_REG];
 
 		raw_spin_lock_irqsave(&iommu->register_lock, flag);
-
 		dmar_writel(iommu, DMAR_FECTL_REG, iommu->iommu_state[SR_DMAR_FECTL_REG]);
-		dmar_writel(iommu, DMAR_FEDATA_REG, iommu->iommu_state[SR_DMAR_FEDATA_REG]);
-		dmar_writel(iommu, DMAR_FEADDR_REG, iommu->iommu_state[SR_DMAR_FEADDR_REG]);
-		dmar_writel(iommu, DMAR_FEUADDR_REG, iommu->iommu_state[SR_DMAR_FEUADDR_REG]);
-
+		if (pkvm_enabled()) {
+			pkvm_write_iommu_msi(iommu, DMAR_FECTL_REG, data, addr, uaddr);
+		} else {
+			dmar_writel(iommu, DMAR_FEDATA_REG, data);
+			dmar_writel(iommu, DMAR_FEADDR_REG, addr);
+			dmar_writel(iommu, DMAR_FEUADDR_REG, uaddr);
+		}
 		raw_spin_unlock_irqrestore(&iommu->register_lock, flag);
 	}
 }
