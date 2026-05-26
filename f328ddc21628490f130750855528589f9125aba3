@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499ec38d_4a103ea6",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3378,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T21:48:06Z",
+      "side": 1,
+      "message": "This needs to be reworked as a vendor hook instead. New sysctl interfaces from the core kernel need to be submitted upstream first.",
+      "revId": "f328ddc21628490f130750855528589f9125aba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
