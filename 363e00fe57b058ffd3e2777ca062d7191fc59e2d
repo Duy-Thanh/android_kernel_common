@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7fd9673_d0f9dfc6",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T12:43:29Z",
+      "side": 1,
+      "message": "nit: this extra pointer variable seems a bit overkill here, we can just do this?\n\n```\nif (offset \u003d\u003d DMAR_FEADDR_REG)\n\tiommu-\u003estaged_feaddr \u003d val;\nelse\n\tiommu-\u003estaged_perfintraddr \u003d val;\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "071c8838_e6271bfd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 557,
+                "startChar": 0,
+                "endLine": 562,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (offset \u003d\u003d DMAR_FEADDR_REG)\n\t\t\t\tiommu-\u003estaged_feaddr \u003d val;\n\t\t\telse\n\t\t\t\tiommu-\u003estaged_perfintraddr \u003d val;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "363e00fe57b058ffd3e2777ca062d7191fc59e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23a37db_55d93d4a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T12:43:29Z",
+      "side": 1,
+      "message": "nit: it might be actually a bit more readable to open-code `addr_name`, so that the code looks like this:\n\n```\npkvm_err(\"iommu%d: %s write without staged %s\\n\",\n\t iommu-\u003eseq_id,\n\t offset \u003d\u003d DMAR_FEUADDR_REG ? \"FEUADDR\" : \"PERFINTRUADDR\",\n\t offset \u003d\u003d DMAR_FEUADDR_REG ? \"FEADDR\" : \"PERFINTRADDR\");\n```\n?",
+      "fixSuggestions": [
+        {
+          "fixId": "e2f637b5_ba5f41e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 591,
+                "startChar": 0,
+                "endLine": 593,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 600,
+                "startChar": 0,
+                "endLine": 601,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t offset \u003d\u003d DMAR_FEUADDR_REG ? \"FEADDR\" : \"PERFINTRADDR\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "363e00fe57b058ffd3e2777ca062d7191fc59e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
