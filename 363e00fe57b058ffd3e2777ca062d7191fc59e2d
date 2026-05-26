@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4d7f69_eb8c7163",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T14:29:55Z",
+      "side": 1,
+      "message": "Code removed with hypercall implementation for MSI writes",
+      "parentUuid": "f7fd9673_d0f9dfc6",
+      "revId": "363e00fe57b058ffd3e2777ca062d7191fc59e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d23a37db_55d93d4a",
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "363e00fe57b058ffd3e2777ca062d7191fc59e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c53381cf_36937719",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T14:29:55Z",
+      "side": 1,
+      "message": "Code is removed with hypercall for MSI writes",
+      "parentUuid": "d23a37db_55d93d4a",
       "revId": "363e00fe57b058ffd3e2777ca062d7191fc59e2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
