@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "195e6031_0c46b5e2",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T22:40:09Z",
+      "side": 1,
+      "message": "EOPNOTSUPP? or EINVAL?",
+      "fixSuggestions": [
+        {
+          "fixId": "13b558bf_da9f7305",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 548,
+                "startChar": 0,
+                "endLine": 549,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5196223_2c3c67e8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T22:40:09Z",
+      "side": 1,
+      "message": "This validation can be done before taking iommu-\u003elock?",
+      "fixSuggestions": [
+        {
+          "fixId": "b901ed76_87013456",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 551,
+                "startChar": 0,
+                "endLine": 552,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 553,
+                "startChar": 0,
+                "endLine": 558,
+                "endChar": 0
+              },
+              "replacement": "\tif (ret)\n\t\treturn ret;\n\n\tpkvm_spin_lock(\u0026iommu-\u003elock);\n\twritel(data, iommu-\u003ereg + offset + 4);\n\twritel(addr, iommu-\u003ereg + offset + 8);\n\twritel(uaddr, iommu-\u003ereg + offset + 12);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d541656d_d07d2272",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T22:40:09Z",
+      "side": 1,
+      "message": "Let\u0027s add all this code after pkvm_iommu_mmio_write(), not between pkvm_iommu_mmio_read() and pkvm_iommu_mmio_write()?",
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
