@@ -133,6 +133,24 @@
       "parentUuid": "cb409b89_9286496e",
       "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a201bd7_bf5a184b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-26T10:38:27Z",
+      "side": 1,
+      "message": "@dmaluka@google.com I was OoO and lost track of this thread, but please feel free to reply on b/512029611 if you need anything on the arm64 side.",
+      "parentUuid": "1bc732a6_705ffefe",
+      "revId": "afa0cf57247a4862d8567e98be0964a8400951a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
