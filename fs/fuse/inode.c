@@ -972,11 +972,18 @@ static int fuse_parse_param(struct fs_context *fsc, struct fs_parameter *param)
 		}
 		break;
 
-	case OPT_ROOT_DIR:
-		ctx->root_dir = fget(result.uint_32);
-		if (!ctx->root_dir)
+	case OPT_ROOT_DIR: {
+		struct file *rd = fget(result.uint_32);
+		if (!rd)
 			return invalfc(fsc, "Unable to open root directory");
+		if (rd->f_inode->i_sb->s_magic == FUSE_SUPER_MAGIC ||
+		    rd->f_inode->i_sb->s_stack_depth >= FILESYSTEM_MAX_STACK_DEPTH) {
+			fput(rd);
+			return invalfc(fsc, "Invalid root directory (FUSE or too deep)");
+		}
+		ctx->root_dir = rd;
 		break;
+	}
 
 	case OPT_NO_DAEMON:
 		ctx->no_daemon = true;
@@ -1894,6 +1901,8 @@ int fuse_fill_super_common(struct super_block *sb, struct fuse_fs_context *ctx)
 	fc->no_daemon = ctx->no_daemon;
 #ifdef CONFIG_FUSE_BPF
 	fc->bpf_backing_allowed = !!ctx->root_dir;
+	if (ctx->root_dir)
+		fm->sb->s_stack_depth = ctx->root_dir->f_inode->i_sb->s_stack_depth + 1;
 #endif
 
 	err = -ENOMEM;
