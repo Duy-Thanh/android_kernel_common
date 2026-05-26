@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35cb6b69_39f4cca8",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:05:19Z",
+      "side": 1,
+      "message": "why can\u0027t all of this be in gunyah_kp_el1? It is built into the GKI image - there is no apparent reason to modify this file at all. Please keep all the gunyah implementation in gunyah specific files. I guess you don\u0027t really need this hook either since you can just implement this stuff in gunyat_kp_el1.",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7338e2_09cb411c",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:05:19Z",
+      "side": 1,
+      "message": "no exports below? Why is this included? How does  your vendor hook work if not exported?",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3b71b8_58b74e6e",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:05:19Z",
+      "side": 1,
+      "message": "\"depends on GUNYAH\"? This should not be enabled without the rest of GUNYAH.",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e4333b_d4724517",
+        "filename": "include/linux/gunyah_kernel_protect.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:05:19Z",
+      "side": 1,
+      "message": "This should be a gunyah specific header (under the gunyah directory)",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
