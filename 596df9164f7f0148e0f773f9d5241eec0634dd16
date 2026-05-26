@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23466832_a7c6e62a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T19:05:35Z",
+      "side": 1,
+      "message": "Sorry forgot to update the commit message after switch to Deny-by-default. Fixed",
+      "parentUuid": "c6338a60_2dc85e77",
+      "revId": "596df9164f7f0148e0f773f9d5241eec0634dd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "362f124b_78e96245",
