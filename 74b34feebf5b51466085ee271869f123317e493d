@@ -16,6 +16,23 @@
       "message": "It is \"performance event interrupt control\", not \"performance monitoring control\" (i.e. narrower than that)?",
       "revId": "74b34feebf5b51466085ee271869f123317e493d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e3f6b9_648ecf64",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T23:05:01Z",
+      "side": 1,
+      "message": "Late thought: it seems we can actually make it more readable by avoiding `fallthrough`, as follows:\n\n```\ncase DMAR_FECTL_REG:\ncase DMAR_PERFINTRCTL_REG: {\n\t/* RsvdP bits: 29:0 */\n\tu32 rsvdp_mask \u003d (~0U) \u003e\u003e 2;\n\tu32 rsvdp;\n\n\tif (offset \u003d\u003d DMAR_PERFINTRCTL_REG) {\n\t\t/* RsvdZ if PMU is not supported */\t\n\t\tif (!ecap_pms(iommu-\u003eecap) \u0026\u0026 val) {\n\t\t\tret \u003d -EINVAL;\n\t\t\tbreak;\n\t\t}\n\t}\n\n\trsvdp \u003d readl(iommu-\u003ereg + offset) \u0026 rsvdp_mask;\n\n\t...\n}\n```\n\n(so that it is easily seen that this code block is responsible for both FECTL and PERFINTRCTL)?",
+      "revId": "74b34feebf5b51466085ee271869f123317e493d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
