@@ -1298,6 +1298,8 @@ static int __maybe_unused cs35l56_runtime_resume_i2c_spi(struct device *dev)
 
 int cs35l56_system_suspend(struct device *dev)
 {
+	int ret;
+
 	struct cs35l56_private *cs35l56 = dev_get_drvdata(dev);
 
 	dev_dbg(dev, "system_suspend\n");
@@ -1313,6 +1315,10 @@ int cs35l56_system_suspend(struct device *dev)
 	 */
 	if (cs35l56->base.irq)
 		disable_irq(cs35l56->base.irq);
+
+	ret = cs35l56_mbox_send(&cs35l56->base, CS35L56_MBOX_CMD_AUDIO_REINIT);
+	if (ret < 0)
+		dev_warn(dev, "%s failed to send REINIT: %d\n", __func__, ret);
 
 	return pm_runtime_force_suspend(dev);
 }
