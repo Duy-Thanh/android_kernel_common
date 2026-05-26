@@ -46,6 +46,30 @@
       },
       "revId": "b6c7d5c07f2e75d4063f7e9c486690eb62b9a7ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae169af_d992b92d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-26T16:44:50Z",
+      "side": 1,
+      "message": "You could replace unprotected modules as needed. Anyway, I just wanted to point out the potential issues with `select` which we use way too often.",
+      "parentUuid": "8b0ac6b9_6adf77ce",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 12,
+        "endChar": 70
+      },
+      "revId": "b6c7d5c07f2e75d4063f7e9c486690eb62b9a7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
