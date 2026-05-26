@@ -16,6 +16,24 @@
       "message": "The commit message format is not correct. Change commit name from \n\u0027ANDROID:GKI:erofs supports the zstd compression algorithm\u0027 to \n\u0027ANDROID: erofs: support the zstd compression algorithm\u0027",
       "revId": "7c499a894944cb0238e58b6be23ccc57ef844aaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025e1b3a_a596865e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4721349
+      },
+      "writtenOn": "2026-05-26T12:07:29Z",
+      "side": 1,
+      "message": "It has been modified, please review it again.",
+      "parentUuid": "a42808c2_abb76798",
+      "revId": "7c499a894944cb0238e58b6be23ccc57ef844aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
