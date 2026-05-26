@@ -135,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31e66d8_e4ae4c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T19:46:24Z",
+      "side": 1,
+      "message": "Since no new hook anymore, there are no symbol additions needed",
+      "parentUuid": "4c57edfd_363f0ebc",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2308447_f89601e9",
