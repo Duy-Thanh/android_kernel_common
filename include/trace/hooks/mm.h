@@ -791,6 +791,9 @@ DECLARE_HOOK(android_vh_cma_alloc_lat_end,
 DECLARE_RESTRICTED_HOOK(android_rvh_read_swap_cache_async_timeout,
 	TP_PROTO(size_t *count, bool *skip),
 	TP_ARGS(count, skip), 2);
+DECLARE_HOOK(android_vh_override_exec_folio_order,
+	TP_PROTO(struct vm_area_struct *vma, unsigned int *order),
+	TP_ARGS(vma, order));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
