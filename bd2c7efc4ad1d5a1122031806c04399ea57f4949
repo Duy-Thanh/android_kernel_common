@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5c9457_b422daef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T19:40:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d2c3725_6c5d79b6",
+      "range": {
+        "startLine": 7,
+        "startChar": 39,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "bd2c7efc4ad1d5a1122031806c04399ea57f4949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47192dac_88e92706",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "100c2ef0_dbb1a883",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T19:40:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "47192dac_88e92706",
+      "range": {
+        "startLine": 15,
+        "startChar": 36,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "bd2c7efc4ad1d5a1122031806c04399ea57f4949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "589c0dfc_40e0a133",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-05-26T19:03:50Z",
       "side": 1,
       "message": "no hook, so this test is meaningless",
+      "revId": "bd2c7efc4ad1d5a1122031806c04399ea57f4949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f380c7_b7a18165",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T19:40:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "589c0dfc_40e0a133",
       "revId": "bd2c7efc4ad1d5a1122031806c04399ea57f4949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
