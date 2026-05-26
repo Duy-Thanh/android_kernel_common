@@ -215,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfc77f33_aee23371",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:13:10Z",
+      "side": 1,
+      "message": "Its a restricted vendor hook",
+      "parentUuid": "428f7d3a_b5c37d6d",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb40e07b_adfefa8a",
         "filename": "drivers/virt/gunyah/Kconfig",
         "patchSetId": 1
