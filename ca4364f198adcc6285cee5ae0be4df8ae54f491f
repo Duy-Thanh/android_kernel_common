@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37fe7003_dfb14085",
+        "filename": "MAINTAINERS",
+        "patchSetId": 8
+      },
+      "lineNbr": 9968,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eb5183d_b0e12c86",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "839864d8_d92a1cb5",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-05-26T18:06:17Z",
       "side": 1,
       "message": "Is this file even needed?",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14311d34_2b1ff868",
+        "filename": "MAINTAINERS",
+        "patchSetId": 8
+      },
+      "lineNbr": 9970,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "839864d8_d92a1cb5",
       "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -231,6 +267,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "699a7972_7d8254e8",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 8
+      },
+      "lineNbr": 3395,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0273b24b_0cdd5fcb",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7af91f73_9d1e7377",
@@ -244,6 +298,24 @@
       "writtenOn": "2026-05-26T18:06:17Z",
       "side": 1,
       "message": "why is this hook needed now? How can you even use it without exporting the hook in vendor_hooks.c?\n\nIf it is needed, add a paragraph to the commit message explaining how it is used - in particular, how it can even work without being exported in vendor_hooks.c.",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c606f3a1_e83a2113",
+        "filename": "include/trace/hooks/gunyah_kernel_protect.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7af91f73_9d1e7377",
       "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
