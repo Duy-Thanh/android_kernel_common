@@ -52,6 +52,24 @@
       "parentUuid": "b9622318_ea3676a9",
       "revId": "8f4c667c6e7d6e1f05af6c8f07a2c5bf4b283745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f91eca_e122a05d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T13:54:22Z",
+      "side": 1,
+      "message": "No. The KMI freeze was May 15. This patch cannot be accepted. There will be a KMI thaw which will accept submissions from June 1 through Aug 15 (submit patches to android17-6.18-kminext). The new KMI thaw will be released in the 2026-12 GKI release.",
+      "parentUuid": "dfde20ef_f5b7eba1",
+      "revId": "8f4c667c6e7d6e1f05af6c8f07a2c5bf4b283745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
