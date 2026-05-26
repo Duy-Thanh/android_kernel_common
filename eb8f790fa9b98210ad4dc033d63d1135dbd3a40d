@@ -33,6 +33,24 @@
       "message": "Would it be better to move this patch earlier in this series, so that other patches in this series that add such iommu_direct_mmio_read()/iommu_direct_mmio_write() calls already use the final versions of iommu_direct_mmio_read()/iommu_direct_mmio_write() (so that this patch doesn\u0027t need to fix up after them)?",
       "revId": "eb8f790fa9b98210ad4dc033d63d1135dbd3a40d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672ea119_445b1c34",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T12:53:01Z",
+      "side": 1,
+      "message": "Before the deny-by-default, we have a catch all write/read call and we do not know the size of all the registers handled by that. Thats the reason I have this as the last patch as we know the sizes of registers we are handling now",
+      "parentUuid": "e28dd15d_b8d9f8af",
+      "revId": "eb8f790fa9b98210ad4dc033d63d1135dbd3a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
