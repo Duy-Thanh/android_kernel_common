@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eb5183d_b0e12c86",
+        "filename": "MAINTAINERS",
+        "patchSetId": 8
+      },
+      "lineNbr": 9968,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T18:45:30Z",
+      "side": 1,
+      "message": "ACk",
+      "parentUuid": "8a12447e_e0716e63",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "839864d8_d92a1cb5",
         "filename": "MAINTAINERS",
         "patchSetId": 8
@@ -173,6 +191,24 @@
       "writtenOn": "2026-05-26T18:06:17Z",
       "side": 1,
       "message": "Without an export in vendor_hooks.c, this is meaningless (and will result in ABI errors for symbols not being in the kernel exports)",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0273b24b_0cdd5fcb",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 8
+      },
+      "lineNbr": 3395,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T18:45:30Z",
+      "side": 1,
+      "message": "Correct, we had more changes coming in but for now vendor hook is not required ,will make a static module and remove this",
+      "parentUuid": "b799706c_1bc4feb2",
       "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
