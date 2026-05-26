@@ -742,4 +742,23 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_read_swap_cache_async_timeout);
+<<<<<<< HEAD   (407568a5ba1e781119d4b8e2b5e1c311c19e3c3f UPSTREAM: xfrm: esp: avoid in-place decrypt on shared skb fr)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_cma);
+||||||| BASE   (b04c6166b13784315a9e3464507a8ccbc754af93 ANDROID: PCI: brcmstb: Turn off PWRCTRL behvior at runtime)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_swap_entry_range_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_swap_slot_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_alloc_swap_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_swap_entry_range_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_swap_slot_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_alloc_swap_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+>>>>>>> CHANGE (2630283811f8e2495b9882cfbf3dfc70bf351bc9 ANDROID: mm: Introduce GKI vendor hook to override VM_EXEC f)
