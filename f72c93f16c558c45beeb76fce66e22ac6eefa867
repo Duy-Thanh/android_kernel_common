@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa0d13d_1bac5b73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:09:09Z",
+      "side": 1,
+      "message": "Needs a \"Bug: \" tag citing an open IssueTracker bug",
+      "revId": "f72c93f16c558c45beeb76fce66e22ac6eefa867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb22d18b_ad0b98d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T15:09:09Z",
+      "side": 1,
+      "message": "Send upstream first or implement with vendor hooks",
+      "revId": "f72c93f16c558c45beeb76fce66e22ac6eefa867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
