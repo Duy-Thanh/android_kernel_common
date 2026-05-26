@@ -2425,6 +2425,8 @@ static int read_from_zspool_raw(struct zram *zram, struct page *page, u32 index)
 	zs_obj_read_end(zram->mem_pool, handle, src);
 	zcomp_stream_put(zstrm);
 
+	memzero_page(page, size, PAGE_SIZE - size);
+
 	return 0;
 }
 #endif
