@@ -67,6 +67,24 @@
       "message": "Maybe instead of adding this `staged_feaddr` and the logic for it (and `staged_perfintraddr` and even more logic in the next patch), we\u0027d better just add a hypercall for the host\u0027s `dmar_msi_write()` instead?\n\nThat might make the code more readable even independently of APIC ID validation: no more tricky `fallthrough`s etc here, just one hypercall with clean semantics for setting all 3 regs DATA, ADDR and UADDR at once, for either FE or PERFINTR (and also reusable for PE in the future, if we support PRQ in the future)?",
       "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa46804_055c5fb8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T12:26:31Z",
+      "side": 1,
+      "message": "Basically, I\u0027m fine with keeping this staged_feaddr + staged_perfintraddr solution (it seems correct too, after all), so please feel free to resolve this comment.\n\nI\u0027m just thinking that _maybe_ a hypercall would be better, at least because it would avoid this assumption that the host always sets UADDR immediately after ADDR, as well as avoid carrying this extra staged_feaddr + staged_perfintraddr state in pKVM\u0027s data structures.",
+      "parentUuid": "53089653_9c90e800",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
