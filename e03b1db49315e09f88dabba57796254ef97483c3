@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b0c147f_0f2b37a0",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T12:51:44Z",
+      "side": 1,
+      "message": "makes sense. Will do",
+      "parentUuid": "d4fbbcf1_df675c86",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2c2edff_969e6295",
         "filename": "arch/x86/include/asm/kvm_pkvm.h",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9b355cb_7f7d84ad",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T12:51:44Z",
+      "side": 1,
+      "message": "true, will fix",
+      "parentUuid": "d2c2edff_969e6295",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9573b35_40d69b70",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2026-05-24T10:46:11Z",
       "side": 1,
       "message": "nit: maybe it would be better to define this in arch/x86/kvm/pkvm/cpu.c instead, since perhaps potentially these values could be reused by other pKVM code not related to IOMMU (and also because this seems x86-generic, not Intel-specific)?",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07a9111_32b71d42",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T12:51:44Z",
+      "side": 1,
+      "message": "Indeed. Will do",
+      "parentUuid": "a9573b35_40d69b70",
       "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -101,6 +155,24 @@
       "side": 1,
       "message": "BTW regarding:\n\n\u003e That might make the code more readable even independently of APIC ID validation: no more tricky fallthroughs etc here, just one hypercall with clean semantics for setting all 3 regs DATA, ADDR and UADDR at once, for either FE or PERFINTR (and also reusable for PE in the future, if we support PRQ in the future)?\n\nSo alternatively we could keep this \"staged\" model (if we prefer it over introducing a hypercall), but still, independently of that, refactor the code here, to move handling these dmar_msi_write()-related register writes (FE/PERFINTR ADDR/UADDR/DATA/CTL) into a separate clean function, instead of having all this logic right here as a part of this big `switch`?\n\n(But again, I\u0027m fine with _not_ doing that now.)",
       "parentUuid": "7aa46804_055c5fb8",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6633f9d_5ee2182f",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-26T12:51:44Z",
+      "side": 1,
+      "message": "I have implemented the hypercall approach and it seems much readable as you pointed out :-). Will post the changes soon after a bit more testing.",
+      "parentUuid": "d1fdcb7b_de26e3c7",
       "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
