@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41af2a90_ed81ac6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a2d9a4a5_6014e980",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6651369_87f98602",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c2ab93_ed205e11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e6651369_87f98602",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 1
+      },
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82af38ce_3139bcda",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-05-16T18:03:19Z",
       "side": 1,
       "message": "\"Bug:\"",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d9fbfa4_e45189c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "82af38ce_3139bcda",
       "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +148,24 @@
       "writtenOn": "2026-05-16T18:03:19Z",
       "side": 1,
       "message": "Send this feature upstream. No android-specific maintainers lists.",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a969e7e_9b5a8e09",
+        "filename": "MAINTAINERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Removed moved to gunyah",
+      "parentUuid": "e2308447_f89601e9",
       "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -266,6 +344,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d5015f_e3187f10",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eb40e07b_adfefa8a",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69dd7868_64d47038",
@@ -301,6 +397,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8357818_d2035f12",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "69dd7868_64d47038",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcb09761_c86c131e",
@@ -318,6 +432,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bdcbb0c_122d44bb",
+        "filename": "include/linux/kernel_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dcb09761_c86c131e",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c3b3d95_c2ad7554",
@@ -331,6 +463,30 @@
       "writtenOn": "2026-05-16T18:03:19Z",
       "side": 1,
       "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. The...\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor-hooks for details.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f743d4_0c01b4ce",
+        "filename": "include/trace/hooks/kernel_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:15:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c3b3d95_c2ad7554",
       "range": {
         "startLine": 11,
         "startChar": 0,
