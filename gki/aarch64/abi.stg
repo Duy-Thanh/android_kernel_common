@@ -509618,6 +509618,15 @@ elf_symbol {
   full_name: "set_cpus_allowed_ptr"
 }
 elf_symbol {
+  id: 0xedaf39ed
+  name: "set_direct_map_default_noflush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb30a7e29
+  type_id: 0x9c203488
+  full_name: "set_direct_map_default_noflush"
+}
+elf_symbol {
   id: 0x07f97511
   name: "set_direct_map_invalid_noflush"
   is_defined: true
@@ -536700,6 +536709,7 @@ interface {
   symbol_id: 0x2c6a64fa
   symbol_id: 0x689737cf
   symbol_id: 0x7b6738b5
+  symbol_id: 0xedaf39ed
   symbol_id: 0x07f97511
   symbol_id: 0x1f625c64
   symbol_id: 0x180ceb0c
