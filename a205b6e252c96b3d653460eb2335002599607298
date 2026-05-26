@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6c9f7ea_f5403bf2",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "We\u0027re going to want a Rust `DmaBuf` type to wrap this. This lets you avoid the `dma_buf_put` in the destructor of this type. There are other Android/Pixel projects that also need this abstraction.",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ae9dcac_9173012a",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "I was told by Suren that this method is temporary and not intended to be part of the final driver. If that\u0027s still the case, then I won\u0027t be too worried about this logic.",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 23
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e69a1a1_c74fca01",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "This type has a type alias in kernel as of commit db7bd1affa85",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 34
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503de6ab_bdf87665",
+        "filename": "drivers/android/wrapfd/helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "Using fds for `my_set_close_on_exec` and `my_get_close_on_exec` is susceptible to races because userspace can swap out the file descriptor behind your back.",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d0eed0_39f4180b",
+        "filename": "drivers/android/wrapfd/helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "These are ideally in `rust/helpers/` instead of here.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0e06ff_ead49b81",
+        "filename": "drivers/android/wrapfd/rust_wrapfd_main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "There is a patch upstream that lets you do this in `module!` macro, which we can backport.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 2
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f01926_0da69e79",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "I would ideally like to avoid drivers writing their own abstractions such as this one, if it\u0027s possible to place this logic in the kernel crate.",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbae188e_090b03cf",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "I know this is how the C driver does it, but to me it would be a lot clearer to use two `Mutex\u003c()\u003e` instances with `try_lock()`.\n\nThis will allow you to add `_guard: \u0026mut MutexGuard\u003c()\u003e` or similar to methods that require the given guard to be held, enforcing that callers actually own the appropriate modification block.",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 43
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8c28a5_dc86e136",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-26T13:15:49Z",
+      "side": 1,
+      "message": "The C side does not use `fdget_pos` when invoking `mmap`, so we know there is no `fdget_pos` on the current thread (for any file).",
+      "range": {
+        "startLine": 760,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 87
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
