@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant...\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "0b16e7b596690a789f8c3f8499c349129ea2e33e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36ae9ba_ddc0ef1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4598251
+      },
+      "writtenOn": "2026-05-26T06:07:46Z",
+      "side": 1,
+      "message": "Thanks Todd. I have added ANDROID tag.",
+      "parentUuid": "ea918b5b_9cc930c6",
+      "revId": "0b16e7b596690a789f8c3f8499c349129ea2e33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
