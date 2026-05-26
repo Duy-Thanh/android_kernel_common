@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a12447e_e0716e63",
+        "filename": "MAINTAINERS",
+        "patchSetId": 8
+      },
+      "lineNbr": 9968,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T18:06:17Z",
+      "side": 1,
+      "message": "not needed (covered by drivers/virt/gunyah/)",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839864d8_d92a1cb5",
+        "filename": "MAINTAINERS",
+        "patchSetId": 8
+      },
+      "lineNbr": 9970,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T18:06:17Z",
+      "side": 1,
+      "message": "Is this file even needed?",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8118c02d_20bedc38",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T18:06:17Z",
+      "side": 1,
+      "message": "why is this needed? Can\u0027t you just put whatever this handler would do right here and get rid of the hook completely?",
+      "fixSuggestions": [
+        {
+          "fixId": "b9709176_13266a89",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "static int __init kp_s2_freeze_late_init(void)\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tstatic struct kp_segment_info segs[KP_REGION_MAX];\n\tstruct kp_layout_info layout;\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tmemset(\u0026kp_status, 0, sizeof(kp_status));\n\n\tlayout.segs \u003d segs;\n\tlayout.nr   \u003d 0;\n\n\tADD_SEG_INFO(\u0026layout, KP_REGION_TEXT,    _stext,        _etext);\n\tADD_SEG_INFO(\u0026layout, KP_REGION_RODATA,  __start_rodata, __end_rodata);\n\tADD_SEG_INFO(\u0026layout, KP_REGION_DATA,    _sdata,        _edata);\n\tADD_SEG_INFO(\u0026layout, KP_REGION_BSS,     __bss_start,   __bss_stop);\n\n\tif (!WARN_ON(layout.nr \u003e\u003d KP_REGION_MAX)) {\n\t\tsegs[layout.nr].type   \u003d KP_REGION_FIXMAP_TEXT_POKE0;\n\t\tsegs[layout.nr].offset \u003d (u64)__pa(fix_to_virt(FIX_TEXT_POKE0));\n\t\tsegs[layout.nr].size   \u003d PAGE_SIZE;\n\t\tlayout.nr++;\n\t}\n\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  layout.segs[KP_REGION_FIXMAP_TEXT_POKE0].offset,\n\t\t\t  layout.segs[KP_REGION_FIXMAP_TEXT_POKE0].size,\n\t\t\t  layout.segs[KP_REGION_FIXMAP_TEXT_POKE0].type, \u0026res);\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  layout.segs[KP_REGION_TEXT].offset,\n\t\t\t  layout.segs[KP_REGION_TEXT].size,\n\t\t\t  layout.segs[KP_REGION_TEXT].type, \u0026res);\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 71,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  layout.segs[KP_REGION_RODATA].offset,\n\t\t\t  layout.segs[KP_REGION_RODATA].size,\n\t\t\t  layout.segs[KP_REGION_RODATA].type, \u0026res);\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  layout.segs[KP_REGION_DATA].offset,\n\t\t\t  layout.segs[KP_REGION_DATA].size,\n\t\t\t  layout.segs[KP_REGION_DATA].type, \u0026res);\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  layout.segs[KP_REGION_BSS].offset,\n\t\t\t  layout.segs[KP_REGION_BSS].size,\n\t\t\t  layout.segs[KP_REGION_BSS].type, \u0026res);\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t  virt_to_phys(\u0026layout), sizeof(layout),\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_kp_el1.c",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b799706c_1bc4feb2",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 8
+      },
+      "lineNbr": 3395,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T18:06:17Z",
+      "side": 1,
+      "message": "Without an export in vendor_hooks.c, this is meaningless (and will result in ABI errors for symbols not being in the kernel exports)",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af91f73_9d1e7377",
+        "filename": "include/trace/hooks/gunyah_kernel_protect.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-26T18:06:17Z",
+      "side": 1,
+      "message": "why is this hook needed now? How can you even use it without exporting the hook in vendor_hooks.c?\n\nIf it is needed, add a paragraph to the commit message explaining how it is used - in particular, how it can even work without being exported in vendor_hooks.c.",
+      "revId": "ca4364f198adcc6285cee5ae0be4df8ae54f491f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
