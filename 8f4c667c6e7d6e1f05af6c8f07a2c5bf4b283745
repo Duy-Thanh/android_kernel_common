@@ -34,6 +34,24 @@
       "parentUuid": "99eef31f_e26e63c4",
       "revId": "8f4c667c6e7d6e1f05af6c8f07a2c5bf4b283745",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfde20ef_f5b7eba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2026-05-26T04:20:28Z",
+      "side": 1,
+      "message": "so we still have some window to merge this kind of change that will break ABI ?",
+      "parentUuid": "b9622318_ea3676a9",
+      "revId": "8f4c667c6e7d6e1f05af6c8f07a2c5bf4b283745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
