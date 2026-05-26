@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "835f8ea8_91b1870d",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T16:45:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "35cb6b69_39f4cca8",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7338e2_09cb411c",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-26T15:05:19Z",
       "side": 1,
       "message": "no exports below? Why is this included? How does  your vendor hook work if not exported?",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aaad14e_ccef8ec7",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T16:45:55Z",
+      "side": 1,
+      "message": "We dont want a *.ko to use these segments",
+      "parentUuid": "8a7338e2_09cb411c",
       "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb8618a_a85f5ee2",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T16:45:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3c3b71b8_58b74e6e",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91e4333b_d4724517",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-26T15:05:19Z",
       "side": 1,
       "message": "This should be a gunyah specific header (under the gunyah directory)",
+      "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d18f4eb1_3627bba3",
+        "filename": "include/linux/gunyah_kernel_protect.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T16:45:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "91e4333b_d4724517",
       "revId": "f4cc4c76253ee1c15ad4e44fe2a0cf0aecf85cee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
