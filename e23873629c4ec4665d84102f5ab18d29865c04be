@@ -204,6 +204,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7550d69b_09b779e1",
+        "filename": "arch/arm64/kernel/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:37:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80342739_75599c1f",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d67e42f_4811d5c9",
@@ -305,6 +323,24 @@
       "side": 1,
       "message": "Its a restricted vendor hook",
       "parentUuid": "428f7d3a_b5c37d6d",
+      "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef0ed0e_00893817",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-26T13:37:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cfc77f33_aee23371",
       "revId": "e23873629c4ec4665d84102f5ab18d29865c04be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
