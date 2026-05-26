@@ -85,6 +85,24 @@
       "parentUuid": "53089653_9c90e800",
       "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1fdcb7b_de26e3c7",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T12:50:00Z",
+      "side": 1,
+      "message": "BTW regarding:\n\n\u003e That might make the code more readable even independently of APIC ID validation: no more tricky fallthroughs etc here, just one hypercall with clean semantics for setting all 3 regs DATA, ADDR and UADDR at once, for either FE or PERFINTR (and also reusable for PE in the future, if we support PRQ in the future)?\n\nSo alternatively we could keep this \"staged\" model (if we prefer it over introducing a hypercall), but still, independently of that, refactor the code here, to move handling these dmar_msi_write()-related register writes (FE/PERFINTR ADDR/UADDR/DATA/CTL) into a separate clean function, instead of having all this logic right here as a part of this big `switch`?\n\n(But again, I\u0027m fine with _not_ doing that now.)",
+      "parentUuid": "7aa46804_055c5fb8",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
