@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4078f75_a4eeba81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4790607
+      },
+      "writtenOn": "2026-05-26T12:07:43Z",
+      "side": 1,
+      "message": "You should insert a space between \u0027ANDROID:\u0027 and \u0027erofs:\u0027. Also, you need insert space between \u0027erofs:\u0027 and \u0027supports\u0027.",
+      "revId": "d5c9ca8200c37d5a971dee2ce1a66c011311ed79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
