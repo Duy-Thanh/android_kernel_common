@@ -1,0 +1,828 @@
+// SPDX-License-Identifier: GPL-2.0
+
+// Copyright (C) 2026 Google LLC.
+
+use core::marker::PhantomData;
+use core::mem::MaybeUninit;
+
+use crate::content::WrapDMAContent;
+use crate::defs::{WrapFdGetState, WrapFdLoad, WrapFdRewrap};
+use crate::helpers;
+
+use kernel::{
+    bindings, device,
+    error::{from_err_ptr, to_result, VTABLE_DEFAULT_ERROR},
+    fs::{File, LocalFile},
+    mm::virt::VmaNew,
+    new_mutex, new_spinlock,
+    prelude::*,
+    seq_file::SeqFile,
+    sync::{Arc, SpinLock},
+    task::Task,
+    types::{ARef, ForeignOwnable},
+    uaccess::UserSlice,
+    uapi,
+};
+
+/// Trait implemented by the private data of an open wrapped device.
+#[vtable]
+pub(crate) trait WrappedDeviceInterface: Sized {
+    /// What kind of pointer should `Self` be wrapped in.
+    type Ptr: ForeignOwnable + Send + Sync;
+
+    /// Called when the device is released.
+    fn release(device: Self::Ptr, _file: &File) {
+        pr_info!("WrappedDevice::release");
+        drop(device);
+    }
+
+    /// Handle for mmap.
+    ///
+    /// This function is invoked when a user space process invokes the `mmap` system call on
+    /// `file`. The function is a callback that is part of the VMA initializer. The kernel will do
+    /// initial setup of the VMA before calling this function. The function can then interact with
+    /// the VMA initialization by calling methods of `vma`. If the function does not return an
+    /// error, the kernel will complete initialization of the VMA according to the properties of
+    /// `vma`.
+    fn mmap(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _file: &File,
+        _vma: &VmaNew,
+    ) -> Result {
+        build_error!(VTABLE_DEFAULT_ERROR)
+    }
+
+    /// Handler for ioctls.
+    ///
+    /// The `cmd` argument is usually manipulated using the utilities in [`kernel::ioctl`].
+    ///
+    /// [`kernel::ioctl`]: mod@crate::ioctl
+    fn ioctl(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _file: &File,
+        _cmd: u32,
+        _arg: usize,
+    ) -> Result<isize> {
+        build_error!(VTABLE_DEFAULT_ERROR)
+    }
+
+    /// Handler for ioctls.
+    ///
+    /// Used for 32-bit userspace on 64-bit platforms.
+    ///
+    /// This method is optional and only needs to be provided if the ioctl relies on structures
+    /// that have different layout on 32-bit and 64-bit userspace. If no implementation is
+    /// provided, then `compat_ptr_ioctl` will be used instead.
+    #[cfg(CONFIG_COMPAT)]
+    fn compat_ioctl(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _file: &File,
+        _cmd: u32,
+        _arg: usize,
+    ) -> Result<isize> {
+        build_error!(VTABLE_DEFAULT_ERROR)
+    }
+
+    /// Show info for this fd.
+    fn show_fdinfo(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _m: &SeqFile,
+        _file: &File,
+    ) {
+        build_error!(VTABLE_DEFAULT_ERROR)
+    }
+}
+
+/// A vtable for the file operations of a Rust WrappedDevice.
+pub(crate) struct WrappedDeviceVTable<T: WrappedDeviceInterface>(PhantomData<T>);
+
+impl<T: WrappedDeviceInterface> WrappedDeviceVTable<T> {
+    /// # Safety
+    ///
+    /// `file` and `inode` must be the file and inode for a file that is being released. The file
+    /// must be associated with a `WrappedDeviceRegistration<T>`.
+    unsafe extern "C" fn release(_inode: *mut bindings::inode, file: *mut bindings::file) -> c_int {
+        // SAFETY: The release call of a file owns the private data.
+        let private = unsafe { (*file).private_data };
+
+        if private.is_null() {
+            pr_warn!("release called with null private_data\n");
+            return 0;
+        }
+
+        // SAFETY: The release call of a file owns the private data.
+        let device = unsafe { <T::Ptr as ForeignOwnable>::from_foreign(private) };
+
+        // XXX unlike the code that inspired this (kernel/miscdevice.rs) we do NOT construct
+        // a file object for the duration of the release call because that would (temporarily)
+        // increase the reference count of the file object already in the process of being released.
+
+        // SAFETY:
+        // * The file_ref is valid for the duration of this call.
+        // * There is no active fdget_pos region on the file on this thread.
+        let file_ref = unsafe { &*file.cast::<File>() };
+        T::release(device, file_ref);
+
+        0
+    }
+
+    /// # Safety
+    ///
+    /// `file` must be a valid file that is associated with a `WrappedDeviceRegistration<T>`.
+    /// `vma` must be a vma that is currently being mmap'ed with this file.
+    unsafe extern "C" fn mmap(
+        file: *mut bindings::file,
+        vma: *mut bindings::vm_area_struct,
+    ) -> c_int {
+        // SAFETY: The mmap call of a file can access the private data.
+        let private = unsafe { (*file).private_data };
+        // SAFETY: This is a Rust WrappedDevice, so we call `into_foreign` in `open` and
+        // `from_foreign` in `release`, and `fops_mmap` is guaranteed to be called between those
+        // two operations.
+        let device = unsafe { <T::Ptr as ForeignOwnable>::borrow(private.cast()) };
+        // SAFETY: The caller provides a vma that is undergoing initial VMA setup.
+        let area = unsafe { VmaNew::from_raw(vma) };
+        // SAFETY:
+        // * The file is valid for the duration of this call.
+        // * There is no active fdget_pos region on the file on this thread.
+        let file = unsafe { File::from_raw_file(file) };
+
+        match T::mmap(device, file, area) {
+            Ok(()) => 0,
+            Err(err) => err.to_errno(),
+        }
+    }
+
+    /// # Safety
+    ///
+    /// `file` must be a valid file that is associated with a `WrappedDeviceRegistration<T>`.
+    unsafe extern "C" fn ioctl(file: *mut bindings::file, cmd: c_uint, arg: c_ulong) -> c_long {
+        // SAFETY: The ioctl call of a file can access the private data.
+        let private = unsafe { (*file).private_data };
+        // SAFETY: Ioctl calls can borrow the private data of the file.
+        let device = unsafe { <T::Ptr as ForeignOwnable>::borrow(private.cast()) };
+
+        // SAFETY:
+        // * The file is valid for the duration of this call.
+        // * There is no active fdget_pos region on the file on this thread.
+        let file = unsafe { File::from_raw_file(file) };
+
+        match T::ioctl(device, file, cmd, arg) {
+            Ok(ret) => ret as c_long,
+            Err(err) => err.to_errno() as c_long,
+        }
+    }
+
+    /// # Safety
+    ///
+    /// `file` must be a valid file that is associated with a `WrappedDeviceRegistration<T>`.
+    #[cfg(CONFIG_COMPAT)]
+    unsafe extern "C" fn compat_ioctl(
+        file: *mut bindings::file,
+        cmd: c_uint,
+        arg: c_ulong,
+    ) -> c_long {
+        // SAFETY: The compat ioctl call of a file can access the private data.
+        let private = unsafe { (*file).private_data };
+        // SAFETY: Ioctl calls can borrow the private data of the file.
+        let device = unsafe { <T::Ptr as ForeignOwnable>::borrow(private.cast()) };
+
+        // SAFETY:
+        // * The file is valid for the duration of this call.
+        // * There is no active fdget_pos region on the file on this thread.
+        let file = unsafe { File::from_raw_file(file) };
+
+        match T::compat_ioctl(device, file, cmd, arg) {
+            Ok(ret) => ret as c_long,
+            Err(err) => err.to_errno() as c_long,
+        }
+    }
+
+    /// # Safety
+    ///
+    /// - `file` must be a valid file that is associated with a `WrappedDeviceRegistration<T>`.
+    /// - `seq_file` must be a valid `struct seq_file` that we can write to.
+    unsafe extern "C" fn show_fdinfo(seq_file: *mut bindings::seq_file, file: *mut bindings::file) {
+        // SAFETY: The show_fdinfo call of a file owns the private data.
+        let private = unsafe { (*file).private_data };
+        // SAFETY: show_fdinfo calls can borrow the private data of the file.
+        let device = unsafe { <T::Ptr as ForeignOwnable>::borrow(private.cast()) };
+
+        // SAFETY:
+        // * The file is valid for the duration of this call.
+        // * There is no active fdget_pos region on the file on this thread.
+        let file = unsafe { File::from_raw_file(file) };
+        // SAFETY: The caller ensures that the pointer is valid and exclusive for the duration in
+        // which this method is called.
+        let m = unsafe { SeqFile::from_raw(seq_file) };
+
+        T::show_fdinfo(device, m, file);
+    }
+
+    const VTABLE: bindings::file_operations = bindings::file_operations {
+        release: Some(Self::release),
+        mmap: Some(Self::mmap),
+        unlocked_ioctl: Some(Self::ioctl),
+        #[cfg(CONFIG_COMPAT)]
+        compat_ioctl: Some(Self::compat_ioctl),
+        show_fdinfo: Some(Self::show_fdinfo),
+        // SAFETY: All zeros is a valid value for `bindings::file_operations`.
+        ..unsafe { MaybeUninit::zeroed().assume_init() }
+    };
+
+    pub(crate) const fn build() -> &'static bindings::file_operations {
+        &Self::VTABLE
+    }
+}
+
+pub(crate) fn open_wrapped_device<T: WrappedDeviceInterface>(
+    name: *const c_char,
+    ptr: T::Ptr,
+    flags: u32,
+) -> Result<ARef<File>> {
+    let priv_data = ptr.into_foreign();
+
+    let raw_file_or_err = from_err_ptr(unsafe {
+        bindings::anon_inode_create_getfile(
+            name,
+            WrappedDeviceVTable::<T>::build(),
+            priv_data,
+            flags as i32,
+            core::ptr::null(), // context_inode
+        )
+    });
+
+    match raw_file_or_err {
+        Err(err) => {
+            // Convert foreign-owned pointer back to a rust-owned one (and drop it).
+            _ = unsafe { <T::Ptr as ForeignOwnable>::from_foreign(priv_data) };
+            return Err(err);
+        }
+        Ok(raw_file) => {
+            let file: ARef<File> = unsafe { File::from_raw_file(raw_file) }.into();
+
+            // Creating an ARef<File> from &File above added an addition reference we don't want.
+            unsafe { bindings::fput(raw_file) };
+
+            Ok(file)
+        }
+    }
+}
+
+enum WrapOwner {
+    Task(kernel::task::Pid),
+    Device(ARef<device::Device>),
+    None,
+}
+
+impl WrapOwner {
+    fn owned_by_current_task(&self) -> bool {
+        match self {
+            Self::Task(task_pid) => *task_pid == current!().pid(),
+            _ => false,
+        }
+    }
+}
+
+#[derive(Clone, Copy)]
+struct BlockMask(u32);
+
+impl BlockMask {
+    const MODIFICATIONS_BLOCKED: Self = Self(0b1);
+    const USAGE_BLOCKED: Self = Self(0b10);
+
+    fn empty() -> Self {
+        Self(0)
+    }
+
+    fn is_empty(&self) -> bool {
+        self.0 == 0
+    }
+
+    fn set(&mut self, mask: Self) {
+        self.0 |= mask.0;
+    }
+
+    fn clear(&mut self, mask: Self) {
+        self.0 &= !mask.0;
+    }
+
+    fn clear_all(&mut self) {
+        self.0 = 0;
+    }
+
+    fn is_set(&self, mask: Self) -> bool {
+        (self.0 & mask.0) != 0
+    }
+}
+
+impl core::ops::BitAnd for BlockMask {
+    type Output = Self;
+
+    fn bitand(self, mask: Self) -> Self::Output {
+        BlockMask(self.0 & mask.0)
+    }
+}
+
+impl core::ops::BitOr for BlockMask {
+    type Output = Self;
+
+    fn bitor(self, mask: Self) -> Self::Output {
+        BlockMask(self.0 | mask.0)
+    }
+}
+
+pub(crate) struct WrapInfo {
+    pub(crate) content: Option<Arc<WrapDMAContent>>,
+    owner: WrapOwner,
+    allow_guests: bool,
+    use_count: usize,
+    // Mask of blocked operations when lock is not held due to possibility of sleep during
+    // the ongoing operation.
+    block_mask: BlockMask,
+    vma_file: Option<ARef<File>>,
+}
+
+impl WrapInfo {
+    fn new() -> Self {
+        Self {
+            content: None,
+            owner: WrapOwner::None,
+            allow_guests: false,
+            use_count: 0,
+            block_mask: BlockMask::empty(),
+            vma_file: None,
+        }
+    }
+
+    fn is_mapped(&self) -> bool {
+        let Some(ref vma_file) = self.vma_file else {
+            return false;
+        };
+
+        let mapping = unsafe { (*vma_file.as_ptr()).f_mapping };
+
+        let mut is_mapped = false;
+        unsafe { helpers::my_i_mmap_lock_read(mapping as *mut c_void) };
+        let rb_root_ref = unsafe { &(*mapping).i_mmap.rb_root };
+        is_mapped = !unsafe { helpers::my_rb_empty_root(rb_root_ref) };
+        unsafe { helpers::my_i_mmap_unlock_read(mapping as *mut c_void) };
+
+        is_mapped
+    }
+
+    fn check_modifiable(&self) -> Result<()> {
+        if !self.owner.owned_by_current_task() {
+            return Err(EBUSY);
+        }
+
+        if self.use_count > 0 || self.is_mapped() {
+            return Err(EINVAL);
+        }
+
+        Ok(())
+    }
+
+    fn check_modifiable_and_has_content(&self) -> Result<()> {
+        self.check_modifiable()?;
+
+        if self.content.is_none() {
+            return Err(ENOENT);
+        }
+
+        Ok(())
+    }
+
+    fn block_operations(&mut self, mask: BlockMask) -> Result<()> {
+        if (mask & BlockMask::MODIFICATIONS_BLOCKED).is_empty() {
+            pr_warn!("block_operations not even blocking modifications!\n");
+            return Err(EINVAL);
+        }
+
+        self.check_modifiable_and_has_content()?;
+
+        // The task is the owner, the content can't be modified by other processes, but
+        // racing threads of the owner process can still modify it. Use block_mask bitmask
+        // to prevent that.
+        if self.block_mask.is_set(mask) {
+            return Err(EAGAIN);
+        }
+
+        self.block_mask.set(mask);
+
+        Ok(())
+    }
+
+    fn unblock_operations(&mut self) {
+        if self.block_mask.is_empty() {
+            pr_warn!("unblock_operations called on an empty mask!\n");
+            return;
+        }
+
+        self.block_mask.clear_all();
+    }
+}
+
+fn is_page_aligned(addr: usize) -> bool {
+    (addr & !kernel::page::PAGE_MASK) == 0
+}
+
+#[pin_data]
+pub(crate) struct WrappedDevice {
+    #[pin]
+    pub(crate) lock: SpinLock<WrapInfo>,
+}
+
+impl WrappedDevice {
+    pub(crate) fn new() -> impl PinInit<Self> {
+        pin_init!(Self {
+            lock <- new_spinlock!(WrapInfo::new()),
+        })
+    }
+
+    fn file_ioctl(device: Pin<&Self>, cmd: u32, arg: usize) -> Result<isize> {
+        let content = {
+            let mut guard = device.lock.lock();
+
+            if !guard.allow_guests
+                && !matches!(guard.owner, WrapOwner::None)
+                && !guard.owner.owned_by_current_task()
+            {
+                return Err(EBUSY);
+            }
+
+            // If usage is blocked, the content is being rewrapped or emptied. Treat this
+            // as if the wrap was already empty.
+            if guard.block_mask.is_set(BlockMask::USAGE_BLOCKED) {
+                return Err(ENOENT);
+            }
+
+            let Some(ref content) = guard.content else {
+                return Err(ENOENT);
+            };
+
+            // This somewhat odd sequence keeps the borrow checker happy.
+            let content = content.clone();
+
+            // Increased use_count prevent changes in ownership, rewrapping or emptying
+            // the content. Content is stable.
+            guard.use_count += 1;
+
+            content
+        };
+
+        let result = content.ioctl(cmd, arg);
+
+        {
+            let mut guard = device.lock.lock();
+            guard.use_count -= 1;
+        }
+
+        result
+    }
+
+    fn get_wrap_state(device: Pin<&Self>, user_slice: UserSlice) -> Result<isize> {
+        let (mut reader, mut writer) = user_slice.reader_writer();
+        let mut get_state_args = reader.read::<WrapFdGetState>()?;
+
+        if get_state_args.reserved != 0 || get_state_args.pad != 0 {
+            return Err(EINVAL);
+        }
+
+        let mut guard = device.lock.lock();
+
+        // Let-chains would make this a bit cleaner.
+        get_state_args.state = if let Some(ref content) = guard.content {
+            if !guard.block_mask.is_set(BlockMask::USAGE_BLOCKED) {
+                if content.writable {
+                    uapi::WRAPFD_CONTENT_RDWR
+                } else {
+                    uapi::WRAPFD_CONTENT_RDONLY
+                }
+            } else {
+                uapi::WRAPFD_CONTENT_EMPTY
+            }
+        } else {
+            uapi::WRAPFD_CONTENT_EMPTY
+        };
+
+        writer.write(&get_state_args)?;
+
+        Ok(0)
+    }
+
+    fn acquire_ownership(device: Pin<&Self>) -> Result<isize> {
+        let mut guard = device.lock.lock();
+
+        if guard.owner.owned_by_current_task() {
+            return Ok(0);
+        }
+
+        if !matches!(guard.owner, WrapOwner::None) {
+            return Err(EBUSY);
+        }
+
+        if guard.use_count > 0 || guard.is_mapped() {
+            return Err(EINVAL);
+        }
+
+        if guard.content.is_none() {
+            return Err(ENOENT);
+        }
+
+        guard.owner = WrapOwner::Task(current!().pid());
+
+        Ok(0)
+    }
+
+    fn release_ownership(device: Pin<&Self>) -> Result<isize> {
+        let mut guard = device.lock.lock();
+
+        guard.check_modifiable()?;
+
+        guard.owner = WrapOwner::None;
+        guard.allow_guests = false;
+
+        Ok(0)
+    }
+
+    fn load(device: Pin<&Self>, user_slice: UserSlice) -> Result<isize> {
+        let mut reader = user_slice.reader();
+        let load_args = reader.read::<WrapFdLoad>()?;
+
+        let file_offset: bindings::loff_t = load_args.file_offs.try_into()?;
+        let buf_offset: bindings::loff_t = load_args.buf_offs.try_into()?;
+        let len: bindings::loff_t = load_args.len.try_into()?;
+
+        if !is_page_aligned(file_offset.try_into()?) || !is_page_aligned(buf_offset.try_into()?) {
+            return Err(EINVAL);
+        }
+
+        if load_args.reserved != 0 || load_args.pad != 0 {
+            return Err(EINVAL);
+        }
+
+        let localfile = LocalFile::fget(load_args.fd)?;
+
+        let f_mode = unsafe { (*localfile.as_ptr()).f_mode };
+
+        if (f_mode & bindings::MY_FMODE_READ) == 0 {
+            return Err(EBADF);
+        }
+
+        if unsafe { (*(*localfile.as_ptr()).f_op).read_iter }.is_none() {
+            return Err(EINVAL);
+        }
+
+        if (f_mode & bindings::MY_FMODE_CAN_READ) == 0 {
+            return Err(EBADF);
+        }
+
+        if (f_mode & bindings::MY_FMODE_CAN_ODIRECT) == 0 {
+            return Err(EBADF);
+        }
+
+        let Some(end) = file_offset.checked_add(len) else {
+            return Err(EINVAL);
+        };
+
+        if end
+            > unsafe {
+                helpers::my_i_size_read(helpers::my_file_inode(localfile.as_ptr() as *const c_void))
+            }
+        {
+            return Err(EINVAL);
+        }
+
+        let content = {
+            let mut guard = device.lock.lock();
+
+            guard.block_operations(BlockMask::MODIFICATIONS_BLOCKED)?;
+
+            let Some(ref content) = guard.content else {
+                guard.unblock_operations();
+                return Err(ENOENT);
+            };
+
+            content.clone()
+        };
+
+        let result = content.load(localfile, file_offset, buf_offset, len);
+
+        device.lock.lock().unblock_operations();
+
+        result
+    }
+
+    fn rewrap(device: Pin<&Self>, user_slice: UserSlice) -> Result<u32> {
+        let mut reader = user_slice.reader();
+        let rewrap_args = reader.read::<WrapFdRewrap>()?;
+
+        if (rewrap_args.prot & !(bindings::PROT_WRITE | bindings::PROT_READ)) != 0 {
+            return Err(EINVAL);
+        }
+
+        if rewrap_args.reserved != 0 || rewrap_args.pad != 0 {
+            return Err(EINVAL);
+        }
+
+        let content: Arc<_> = {
+            let mut guard = device.lock.lock();
+            guard.block_operations(BlockMask::MODIFICATIONS_BLOCKED | BlockMask::USAGE_BLOCKED)?;
+
+            let Some(content) = guard.content.take() else {
+                guard.unblock_operations();
+                return Err(ENOENT);
+            };
+
+            let Some(mut content) = Arc::into_unique_or_drop(content) else {
+                // XXX This really shouldn't happen, somehow there's another user of this
+                // Arc even though we're supposed to have exclusive access according to
+                // the successful call to block_operations above.
+                guard.unblock_operations();
+                return Err(ENOENT);
+            };
+
+            // SAFETY: Safe because modifying the "writable" field does not violate the
+            // Pin contract.
+            unsafe {
+                *content
+                    .as_mut()
+                    .map_unchecked_mut(|content| &mut content.writable) =
+                    (rewrap_args.prot & bindings::PROT_WRITE) != 0;
+            }
+
+            // Convert the Pin<UniqueArc<_>> back into an Arc<_> with guaranteed refcount 1.
+            content.into()
+        };
+
+        let result = match KBox::pin_init(WrappedDevice::new(), GFP_KERNEL) {
+            Ok(new_device) => crate::WrappingDevice::publish_wrap(new_device, content),
+            Err(err) => Err((content, err)),
+        };
+
+        let result = match result {
+            Err((content, err)) => {
+                // Restore original wrap. XXX hasn't writeability potentially changed?
+                let mut guard = device.lock.lock();
+                guard.content = Some(content);
+                guard.unblock_operations();
+
+                Err(err)
+            }
+            Ok(fd) => {
+                device.lock.lock().unblock_operations();
+                Ok(fd)
+            }
+        };
+
+        result
+    }
+
+    fn empty(device: Pin<&Self>) -> Result<isize> {
+        let mut guard = device.lock.lock();
+        guard.block_operations(BlockMask::MODIFICATIONS_BLOCKED | BlockMask::USAGE_BLOCKED)?;
+
+        let result = if let Some(_content) = guard.content.take() {
+            Ok(0)
+        } else {
+            Err(ENOENT)
+        };
+
+        guard.unblock_operations();
+
+        result
+    }
+
+    fn allow_guests(device: Pin<&Self>, allow: bool) -> Result<isize> {
+        let mut guard = device.lock.lock();
+
+        guard.check_modifiable_and_has_content()?;
+
+        guard.allow_guests = allow;
+
+        Ok(0)
+    }
+}
+
+#[vtable]
+impl WrappedDeviceInterface for WrappedDevice {
+    type Ptr = Pin<KBox<Self>>;
+
+    fn mmap(
+        device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        file: &File,
+        vma: &VmaNew,
+    ) -> Result {
+        pr_info!("WrappedDevice::mmap\n");
+
+        let mut guard = device.lock.lock();
+
+        if !guard.allow_guests
+            && !matches!(guard.owner, WrapOwner::None)
+            && !guard.owner.owned_by_current_task()
+        {
+            return Err(EBUSY);
+        }
+
+        if guard.block_mask.is_set(BlockMask::USAGE_BLOCKED) {
+            return Err(ENOENT);
+        }
+
+        let Some(ref content) = guard.content else {
+            return Err(ENOENT);
+        };
+
+        let mut make_rdonly = false;
+
+        if !content.writable {
+            if vma.writable() {
+                return Err(EACCES);
+            }
+
+            make_rdonly = (vma.flags() & kernel::mm::virt::flags::MAYWRITE) != 0;
+        }
+
+        to_result(unsafe {
+            bindings::dma_buf_mmap(content.dmabuf, vma.as_ptr(), 0 /* pgoff */)
+        })?;
+
+        if make_rdonly {
+            if vma.writable() {
+                pr_warn!("wrapfd read-only content was mapped as writable\n");
+                return Err(EACCES);
+            }
+
+            vma.try_clear_maywrite()?;
+        }
+
+        let vma_file_raw = unsafe { (*vma.as_ptr()).vm_file };
+        // XXX Is it guaranteed that there are nno active 'fdget_pos' calls on this file?
+        let vma_file: ARef<File> = unsafe { File::from_raw_file(vma_file_raw) }.into();
+
+        match guard.vma_file {
+            Some(ref old_vma_file) => {
+                // Let's double check that the vma_file has not changed if we're already mapped.
+                if old_vma_file.as_ptr() != vma_file.as_ptr() {
+                    return Err(EINVAL);
+                }
+            }
+            None => {
+                guard.vma_file = Some(vma_file);
+            }
+        }
+
+        Ok(())
+    }
+
+    fn ioctl(
+        device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _file: &File,
+        cmd: u32,
+        arg: usize,
+    ) -> Result<isize> {
+        pr_info!("WrappedDevice::ioctl cmd {cmd:#x}\n");
+
+        use kernel::ioctl::_IOC_SIZE;
+
+        match cmd {
+            uapi::WRAPFD_DEV_IOC_GET_STATE => {
+                let user_slice = UserSlice::new(UserPtr::from_addr(arg), _IOC_SIZE(cmd));
+                Self::get_wrap_state(device, user_slice)
+            }
+            uapi::WRAPFD_DEV_IOC_ACQUIRE_OWNERSHIP => Self::acquire_ownership(device),
+            uapi::WRAPFD_DEV_IOC_RELEASE_OWNERSHIP => Self::release_ownership(device),
+            uapi::WRAPFD_DEV_IOC_LOAD => {
+                let user_slice = UserSlice::new(UserPtr::from_addr(arg), _IOC_SIZE(cmd));
+                Self::load(device, user_slice)
+            }
+            uapi::WRAPFD_DEV_IOC_REWRAP => {
+                let user_slice = UserSlice::new(UserPtr::from_addr(arg), _IOC_SIZE(cmd));
+                Self::rewrap(device, user_slice).map(|fd| fd as isize)
+            }
+            uapi::WRAPFD_DEV_IOC_EMPTY => Self::empty(device),
+            uapi::WRAPFD_DEV_IOC_ALLOW_GUESTS => Self::allow_guests(device, true),
+            uapi::WRAPFD_DEV_IOC_PROHIBIT_GUESTS => Self::allow_guests(device, false),
+            _ => Self::file_ioctl(device, cmd, arg),
+        }
+    }
+
+    #[cfg(CONFIG_COMPAT)]
+    fn compat_ioctl(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _file: &File,
+        _cmd: u32,
+        _arg: usize,
+    ) -> Result<isize> {
+        pr_info!("WrappedDevice::compat_ioctl\n");
+        Err(ENOTTY)
+    }
+
+    fn show_fdinfo(
+        _device: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
+        _m: &SeqFile,
+        _file: &File,
+    ) {
+        pr_info!("WrappedDevice::show_fdinfo\n");
+    }
+}
