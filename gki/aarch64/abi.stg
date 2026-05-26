@@ -394246,6 +394246,15 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x3ab9f23e
+  return_type_id: 0x64a5f25f
+  parameter_id: 0x14b9453b
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0xa8fff47c
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x3abef0c1
   return_type_id: 0x0483e6f8
   parameter_id: 0x1d19a9d5
@@ -440478,6 +440487,15 @@ elf_symbol {
   crc: 0x3594896d
   type_id: 0x6fa3d22f
   full_name: "__skb_recv_datagram"
+}
+elf_symbol {
+  id: 0x82abaac5
+  name: "__snd_pcm_lib_xfer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd1b5f3df
+  type_id: 0x3ab9f23e
+  full_name: "__snd_pcm_lib_xfer"
 }
 elf_symbol {
   id: 0x7809a362
@@ -529032,6 +529050,7 @@ interface {
   symbol_id: 0x07c5a76f
   symbol_id: 0x55574d11
   symbol_id: 0x39692b63
+  symbol_id: 0x82abaac5
   symbol_id: 0x7809a362
   symbol_id: 0x91762fff
   symbol_id: 0x7a4705f8
