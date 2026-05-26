@@ -3366,7 +3366,10 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 		unsigned long end = start + vma_pages(vma);
 		unsigned long ra_end;
 
-		ra_mmap_miss->order = exec_folio_order();
+		unsigned int order = exec_folio_order();
+
+		trace_android_vh_override_exec_folio_order(vma, &order);
+		ra_mmap_miss->order = order;
 		ra->start = round_down(vmf->pgoff, 1UL << ra_mmap_miss->order);
 		ra->start = max(ra->start, start);
 		ra_end = round_up(ra->start + ra->ra_pages,
