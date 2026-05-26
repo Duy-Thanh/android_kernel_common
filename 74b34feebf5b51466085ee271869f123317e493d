@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2886309c_9e7ee57f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-26T22:45:34Z",
+      "side": 1,
+      "message": "It is \"performance event interrupt control\", not \"performance monitoring control\" (i.e. narrower than that)?",
+      "revId": "74b34feebf5b51466085ee271869f123317e493d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
