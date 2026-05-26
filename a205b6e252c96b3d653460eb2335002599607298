@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6807d9ed_76f7567c",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-05-26T17:28:40Z",
+      "side": 1,
+      "message": "That doesn\u0027t seem to be in the aosp-kernel-6.12 tree (yet)?",
+      "parentUuid": "8e69a1a1_c74fca01",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 34
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "503de6ab_bdf87665",
         "filename": "drivers/android/wrapfd/helpers.c",
         "patchSetId": 1
@@ -157,6 +181,30 @@
       "writtenOn": "2026-05-26T13:15:49Z",
       "side": 1,
       "message": "I know this is how the C driver does it, but to me it would be a lot clearer to use two `Mutex\u003c()\u003e` instances with `try_lock()`.\n\nThis will allow you to add `_guard: \u0026mut MutexGuard\u003c()\u003e` or similar to methods that require the given guard to be held, enforcing that callers actually own the appropriate modification block.",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 43
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9986c4_b1aca88d",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-05-26T17:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbae188e_090b03cf",
       "range": {
         "startLine": 287,
         "startChar": 0,
