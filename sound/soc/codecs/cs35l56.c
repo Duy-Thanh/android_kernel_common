@@ -1316,6 +1316,12 @@ int cs35l56_system_suspend(struct device *dev)
 	if (cs35l56->base.irq)
 		disable_irq(cs35l56->base.irq);
 
+	ret = cs35l56_mbox_send(&cs35l56->base, CS35L56_MBOX_CMD_AUDIO_PAUSE);
+	if (ret < 0)
+		dev_warn(dev, "%s failed to send PAUSE: %d\n", __func__, ret);
+
+	msleep(100);
+
 	ret = cs35l56_mbox_send(&cs35l56->base, CS35L56_MBOX_CMD_AUDIO_REINIT);
 	if (ret < 0)
 		dev_warn(dev, "%s failed to send REINIT: %d\n", __func__, ret);
