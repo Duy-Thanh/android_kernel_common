@@ -1326,6 +1326,10 @@ int cs35l56_system_suspend(struct device *dev)
 	if (ret < 0)
 		dev_warn(dev, "%s failed to send REINIT: %d\n", __func__, ret);
 
+	ret = cs35l56_firmware_shutdown(&cs35l56->base);
+	if (ret < 0)
+		dev_warn(dev, "%s failed to send SHUTDOWN %d\n", __func__, ret);
+
 	return pm_runtime_force_suspend(dev);
 }
 EXPORT_SYMBOL_GPL(cs35l56_system_suspend);
