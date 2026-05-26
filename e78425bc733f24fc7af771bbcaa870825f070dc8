@@ -211,6 +211,30 @@
       },
       "revId": "e78425bc733f24fc7af771bbcaa870825f070dc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0c8ee4_325c4392",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-26T14:57:18Z",
+      "side": 1,
+      "message": "FTR, I believe this also misses __vgic_v3_init_lrs()",
+      "parentUuid": "473ebf6a_f781a6ee",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 38
+      },
+      "revId": "e78425bc733f24fc7af771bbcaa870825f070dc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
