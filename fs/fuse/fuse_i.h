@@ -946,6 +946,11 @@ struct fuse_conn {
 	/** BPF Only, no Daemon running */
 	unsigned int no_daemon:1;
 
+#ifdef CONFIG_FUSE_BPF
+	/** Mount was created with root_dir= and may use FUSE-BPF backing */
+	unsigned int bpf_backing_allowed:1;
+#endif
+
 	/** Maximum stack depth for passthrough backing files */
 	int max_stack_depth;
 
