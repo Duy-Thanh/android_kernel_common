@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8a8eb6_98c784d1",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T17:44:56Z",
+      "side": 1,
+      "message": "what happens if gunyah is not present?",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50260f6_295110c6",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T17:44:56Z",
+      "side": 1,
+      "message": "is this going to print if there is no gunyah?",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4662265_fa8bd44f",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T17:44:56Z",
+      "side": 1,
+      "message": "should we bail out early if there is no gunyah?",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
