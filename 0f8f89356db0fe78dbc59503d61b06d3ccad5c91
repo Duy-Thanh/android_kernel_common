@@ -106,6 +106,24 @@
       "parentUuid": "3db499ee_99bb491c",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb6aed0_8c4458f4",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T22:22:23Z",
+      "side": 1,
+      "message": "\u003e I still think we should just WARN_ON here. iommu_suspend() doesn\u0027t seem to be the right place for printing logs like \"pKVM does not support S3 suspend\", since S3 is not about IOMMU, and iommu_suspend() is just one of many S3-specific suspend callbacks in the kernel. \n\nI agree, The message seems a bit off - probably \"IOMMU suspend callback with pKVM enabled\" or something? My idea of WARN_ON usage is if a code path that should not happen - like iommu_resume() being called if iommu_suspend() fails. But I do not have a strong opinion and shall use WARN_ON() \n\n\u003e (Also, ratelimiting is not quite needed in this case?)\n\nSince this is user initiated which could be a loop as well(like a stress suspend/resume test), I thought rate limiting would be better.\n\n\u003e And again, per the above, if we reached iommu_suspend() while pKVM is enabled, we are already in a pretty bad unrecoverable state, so a noisy WARN_ON seems more appropriate?\n\nI am fine with this. Will change it.",
+      "parentUuid": "e0a464c1_214e815e",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
