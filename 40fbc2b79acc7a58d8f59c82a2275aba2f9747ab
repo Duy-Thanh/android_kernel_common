@@ -44,6 +44,24 @@
       ],
       "revId": "40fbc2b79acc7a58d8f59c82a2275aba2f9747ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be192c4d_a36491f3",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-27T20:41:48Z",
+      "side": 1,
+      "message": "I missed the change, https://r.android.com/c/4041230/3",
+      "parentUuid": "57020294_067076c5",
+      "revId": "40fbc2b79acc7a58d8f59c82a2275aba2f9747ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
