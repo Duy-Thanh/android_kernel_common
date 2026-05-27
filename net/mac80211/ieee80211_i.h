@@ -1933,6 +1933,11 @@ u64 ieee80211_calculate_rx_timestamp(struct ieee80211_local *local,
 				     struct ieee80211_rx_status *status,
 				     unsigned int mpdu_len,
 				     unsigned int mpdu_offset);
+
+static inline bool ieee80211_sdata_running(struct ieee80211_sub_if_data *sdata)
+{
+	return test_bit(SDATA_STATE_RUNNING, &sdata->state);
+}
 int ieee80211_hw_config(struct ieee80211_local *local, int radio_idx,
 			u32 changed);
 int ieee80211_hw_conf_chan(struct ieee80211_local *local);
@@ -2040,6 +2045,23 @@ int ieee80211_nan_set_peer_sched(struct ieee80211_sub_if_data *sdata,
 void ieee80211_nan_free_peer_sched(struct ieee80211_nan_peer_sched *sched);
 void ieee80211_nan_update_ndi_carrier(struct ieee80211_sub_if_data *ndi_sdata);
 
+static inline struct ieee80211_sub_if_data *
+ieee80211_find_nan_sdata(struct ieee80211_local *local)
+{
+	struct ieee80211_sub_if_data *sdata;
+
+	lockdep_assert_wiphy(local->hw.wiphy);
+
+	/* Find the NAN interface - there can only be one */
+	list_for_each_entry(sdata, &local->interfaces, list) {
+		if (ieee80211_sdata_running(sdata) &&
+		    sdata->vif.type == NL80211_IFTYPE_NAN)
+			return sdata;
+	}
+
+	return NULL;
+}
+
 /* scan/BSS handling */
 void ieee80211_scan_work(struct wiphy *wiphy, struct wiphy_work *work);
 int ieee80211_request_ibss_scan(struct ieee80211_sub_if_data *sdata,
@@ -2138,11 +2160,6 @@ bool __ieee80211_recalc_txpower(struct ieee80211_link_data *link);
 void ieee80211_recalc_txpower(struct ieee80211_link_data *link,
 			      bool update_bss);
 void ieee80211_recalc_offload(struct ieee80211_local *local);
-
-static inline bool ieee80211_sdata_running(struct ieee80211_sub_if_data *sdata)
-{
-	return test_bit(SDATA_STATE_RUNNING, &sdata->state);
-}
 
 /* link handling */
 void ieee80211_link_setup(struct ieee80211_link_data *link);
