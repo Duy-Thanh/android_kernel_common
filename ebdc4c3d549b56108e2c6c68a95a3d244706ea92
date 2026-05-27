@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb3bd89d_a2a2de48",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-27T14:55:35Z",
+      "side": 1,
+      "message": "Sure I will add this later logic is to expose each hvc return value to vendor modules via hook, so that it can perform some operations",
+      "parentUuid": "c950ce1f_7f452d0c",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90aa5485_0a3cdc15",
         "filename": "gki/aarch64/symbols/qcom",
         "patchSetId": 12
