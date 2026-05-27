@@ -231,6 +231,24 @@
       "parentUuid": "54149c52_abeb4681",
       "revId": "a2affb299ac13e9257f8cb4a8722336bee44027e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d393270_9566188a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T10:03:06Z",
+      "side": 1,
+      "message": "I have modified `pkvm_host_donate_guest` API to take host mmu lock first to update the host mmu state, unlock host mmu lock and perform iotlb flush, then do guest mmu update with guest mmu lock held. This avoids the deadlock scenario and allows us to do the iotlb flush before updating guest mmu. The changes are in aosp/4090071. I feel there should not be any correctness or performance issue with this change. Please have a look and let me know.",
+      "parentUuid": "dbe1f16c_394ff221",
+      "revId": "a2affb299ac13e9257f8cb4a8722336bee44027e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
