@@ -340,6 +340,7 @@ static const struct cs35l56_fw_reg cs35l56_fw_reg = {
 	.pm_cur_stat = CS35L56_DSP1_PM_CUR_STATE,
 	.prot_sts = CS35L56_PROTECTION_STATUS,
 	.transducer_actual_ps = CS35L56_TRANSDUCER_ACTUAL_PS,
+	.req_active = CS35L56_DSP1_REQ_ACTIVE,
 	.user_mute = CS35L56_MAIN_RENDER_USER_MUTE,
 	.user_volume = CS35L56_MAIN_RENDER_USER_VOLUME,
 	.posture_number = CS35L56_MAIN_POSTURE_NUMBER,
@@ -765,6 +766,25 @@ static int cs35l56_wait_for_ps3(struct cs35l56_base *cs35l56_base)
 	return ret;
 }
 
+static int cs35l56_wait_for_req_inactive(struct cs35l56_base *cs35l56_base)
+{
+	unsigned int val;
+	int ret;
+
+	if (!cs35l56_base->fw_reg->req_active)
+		return 0;
+
+	ret = regmap_read_poll_timeout(cs35l56_base->regmap,
+				       cs35l56_base->fw_reg->req_active,
+				       val, (val == 0),
+				       CS35L56_REQ_ACTIVE_POLL_US,
+				       CS35L56_REQ_ACTIVE_TIMEOUT_US);
+	if (ret)
+		dev_warn(cs35l56_base->dev, "REQ active wait failed: %d\n", ret);
+
+	return ret;
+}
+
 int cs35l56_runtime_suspend_common(struct cs35l56_base *cs35l56_base)
 {
 	if (!cs35l56_base->init_done)
@@ -772,6 +792,8 @@ int cs35l56_runtime_suspend_common(struct cs35l56_base *cs35l56_base)
 
 	/* Firmware must have entered a power-save state */
 	cs35l56_wait_for_ps3(cs35l56_base);
+
+	cs35l56_wait_for_req_inactive(cs35l56_base);
 
 	/* Clear BOOT_DONE so it can be used to detect a reboot */
 	regmap_write(cs35l56_base->regmap, CS35L56_IRQ1_EINT_4, CS35L56_OTP_BOOT_DONE_MASK);

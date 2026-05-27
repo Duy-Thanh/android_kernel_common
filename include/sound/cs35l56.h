@@ -93,6 +93,7 @@ struct snd_ctl_elem_value;
 #define CS35L56_B2_DSP1_HALO_STATE			0x2803D20
 #define CS35L56_DSP1_PM_CUR_STATE			0x2804308
 #define CS35L56_B2_DSP1_PM_CUR_STATE			0x2804678
+#define CS35L56_DSP1_REQ_ACTIVE				0x2804768
 #define CS35L56_DSP1_XMEM_UNPACKED24_8191		0x2807FFC
 #define CS35L56_DSP1_CORE_BASE				0x2B80000
 #define CS35L56_DSP1_SCRATCH1				0x2B805C0
@@ -266,6 +267,8 @@ struct snd_ctl_elem_value;
 #define CS35L56_PS0_TIMEOUT_US				50000
 #define CS35L56_PS3_POLL_US				500
 #define CS35L56_PS3_TIMEOUT_US				300000
+#define CS35L56_REQ_ACTIVE_POLL_US			500
+#define CS35L56_REQ_ACTIVE_TIMEOUT_US			300000
 
 #define CS35L56_CAL_STATUS_SUCCESS			1
 #define CS35L56_CAL_STATUS_OUT_OF_RANGE			3
@@ -305,6 +308,7 @@ struct cs35l56_fw_reg {
 	unsigned int pm_cur_stat;
 	unsigned int prot_sts;
 	unsigned int transducer_actual_ps;
+	unsigned int req_active;
 	unsigned int user_mute;
 	unsigned int user_volume;
 	unsigned int posture_number;
