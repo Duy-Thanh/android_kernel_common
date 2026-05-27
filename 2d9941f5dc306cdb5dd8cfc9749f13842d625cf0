@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dcf8be5_05e15299",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T07:01:26Z",
+      "side": 1,
+      "message": "these are not in alphabetical order. (\"finish\" \u003c \"init\"). Please fix",
+      "revId": "2d9941f5dc306cdb5dd8cfc9749f13842d625cf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
