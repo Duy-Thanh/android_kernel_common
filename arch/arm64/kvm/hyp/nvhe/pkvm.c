@@ -287,7 +287,123 @@ static struct pkvm_hyp_vm *get_vm_by_handle(pkvm_handle_t handle)
 	if (unlikely(hyp_vm == RESERVED_ENTRY || hyp_vm == LEAKED_ENTRY))
 		return NULL;
 
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
 	return vm_table[idx];
+||||||| BASE   (082e9b2a0d09cab678913a5f7f163fb35def761a Merge tag 'android16-6.12.89_r00' into android16-6.12)
+struct pkvm_hyp_vm *get_pkvm_hyp_vm(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+
+	hyp_read_lock(&vm_table_lock);
+
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm)
+		goto unlock;
+	if (hyp_vm->is_dying)
+		hyp_vm = NULL;
+	else
+		hyp_refcount_inc(hyp_vm->refcount);
+
+unlock:
+	hyp_read_unlock(&vm_table_lock);
+
+	return hyp_vm;
+}
+
+void put_pkvm_hyp_vm(struct pkvm_hyp_vm *hyp_vm)
+{
+	hyp_refcount_dec(hyp_vm->refcount);
+}
+
+struct pkvm_hyp_vm *get_np_pkvm_hyp_vm(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm = get_pkvm_hyp_vm(handle);
+
+	if (hyp_vm && pkvm_hyp_vm_is_protected(hyp_vm)) {
+		put_pkvm_hyp_vm(hyp_vm);
+		hyp_vm = NULL;
+	}
+
+	return hyp_vm;
+}
+
+int __pkvm_reclaim_dying_guest_page(pkvm_handle_t handle, u64 pfn, u64 gfn, u8 order)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	int ret = -EINVAL;
+
+	hyp_read_lock(&vm_table_lock);
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm || !hyp_vm->is_dying)
+		goto unlock;
+
+	ret = __pkvm_host_reclaim_page(hyp_vm, pfn, gfn << PAGE_SHIFT, order);
+	if (ret)
+		goto unlock;
+
+	drain_hyp_pool(&hyp_vm->pool, &hyp_vm->host_kvm->arch.pkvm.stage2_teardown_mc);
+unlock:
+	hyp_read_unlock(&vm_table_lock);
+
+	return ret;
+=======
+struct pkvm_hyp_vm *get_pkvm_hyp_vm(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+
+	hyp_read_lock(&vm_table_lock);
+
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm)
+		goto unlock;
+	if (hyp_vm->is_dying)
+		hyp_vm = NULL;
+	else
+		hyp_refcount_inc(hyp_vm->refcount);
+
+unlock:
+	hyp_read_unlock(&vm_table_lock);
+
+	return hyp_vm;
+}
+
+void put_pkvm_hyp_vm(struct pkvm_hyp_vm *hyp_vm)
+{
+	hyp_refcount_dec(hyp_vm->refcount);
+}
+
+struct pkvm_hyp_vm *get_np_pkvm_hyp_vm(pkvm_handle_t handle)
+{
+	struct pkvm_hyp_vm *hyp_vm = get_pkvm_hyp_vm(handle);
+
+	if (hyp_vm && pkvm_hyp_vm_is_protected(hyp_vm)) {
+		put_pkvm_hyp_vm(hyp_vm);
+		hyp_vm = NULL;
+	}
+
+	return hyp_vm;
+}
+
+int __pkvm_reclaim_dying_guest_page(pkvm_handle_t handle, u64 pfn, u64 gfn, u8 order)
+{
+	struct pkvm_hyp_vm *hyp_vm;
+	int ret = -EINVAL;
+
+	hyp_read_lock(&vm_table_lock);
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm || (hyp_vm->is_dying != PROTECTED_VM_DEAD))
+		goto unlock;
+
+	ret = __pkvm_host_reclaim_page(hyp_vm, pfn, gfn << PAGE_SHIFT, order);
+	if (ret)
+		goto unlock;
+
+	drain_hyp_pool(&hyp_vm->pool, &hyp_vm->host_kvm->arch.pkvm.stage2_teardown_mc);
+unlock:
+	hyp_read_unlock(&vm_table_lock);
+
+	return ret;
+>>>>>>> CHANGE (a4e59da7cad6b445229ae67c0ebed83a7b18dcb5 ANDROID: KVM: arm64: Disable devices at teardown start)
 }
 
 int __pkvm_reclaim_dying_guest_ffa_resources(pkvm_handle_t handle)
@@ -1170,8 +1286,30 @@ int __pkvm_start_teardown_vm(pkvm_handle_t handle)
 		goto unlock;
 	}
 
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
 	hyp_vm->is_dying = true;
+||||||| BASE   (082e9b2a0d09cab678913a5f7f163fb35def761a Merge tag 'android16-6.12.89_r00' into android16-6.12)
+	hyp_vm->is_dying = true;
+
+=======
+	hyp_vm->is_dying = PROTECTED_VM_DYING;
+
+>>>>>>> CHANGE (a4e59da7cad6b445229ae67c0ebed83a7b18dcb5 ANDROID: KVM: arm64: Disable devices at teardown start)
 unlock:
+	hyp_write_unlock(&vm_table_lock);
+
+	/*
+	 * vCPUs are quiescent, but assigned devices may still be issuing DMA
+	 * via the guest's SMMU domains. Block DMA and tear down guest IOMMU
+	 * translations *before* allowing __pkvm_host_reclaim_page() to hand
+	 * OWNED pages (which may still carry a DMA hyp_page->refcount) back
+	 * to the host.
+	 */
+	pkvm_devices_teardown(hyp_vm);
+	pkvm_pviommu_teardown(hyp_vm);
+
+	hyp_write_lock(&vm_table_lock);
+	hyp_vm->is_dying = PROTECTED_VM_DEAD;
 	hyp_write_unlock(&vm_table_lock);
 
 	return ret;
@@ -1186,9 +1324,25 @@ int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 	int err;
 
 	hyp_write_lock(&vm_table_lock);
+<<<<<<< HEAD   (6b4697ecc45845bba75d1bf613a275e1adf20b40 ANDROID: fix build break due to abi update and merge)
 	hyp_vm = get_pkvm_unref_hyp_vm_locked(handle);
 	if (!hyp_vm || !hyp_vm->is_dying) {
 		err = -EINVAL;
+||||||| BASE   (082e9b2a0d09cab678913a5f7f163fb35def761a Merge tag 'android16-6.12.89_r00' into android16-6.12)
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm) {
+		err = -ENOENT;
+		goto err_unlock;
+	} else if (!hyp_vm->is_dying) {
+		err = -EBUSY;
+=======
+	hyp_vm = get_vm_by_handle(handle);
+	if (!hyp_vm) {
+		err = -ENOENT;
+		goto err_unlock;
+	} else if (hyp_vm->is_dying != PROTECTED_VM_DEAD) {
+		err = -EBUSY;
+>>>>>>> CHANGE (a4e59da7cad6b445229ae67c0ebed83a7b18dcb5 ANDROID: KVM: arm64: Disable devices at teardown start)
 		goto err_unlock;
 	}
 
@@ -1204,10 +1358,6 @@ int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 		err = kvm_dying_guest_reclaim_ffa_resources(hyp_vm);
 	} while (err == -EAGAIN);
 	WARN_ON(err);
-
-	pkvm_devices_teardown(hyp_vm);
-
-	pkvm_pviommu_teardown(hyp_vm);
 
 	/*
 	 * At this point all page tables are destroyed and should be pushed to the pool
