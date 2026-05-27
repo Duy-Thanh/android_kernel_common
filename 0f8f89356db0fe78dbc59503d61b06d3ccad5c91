@@ -124,6 +124,24 @@
       "parentUuid": "e0a464c1_214e815e",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9aa5475_2e4da105",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T22:24:46Z",
+      "side": 1,
+      "message": "\u003e\u003e (Also, ratelimiting is not quite needed in this case?)\n\n\u003e Since this is user initiated which could be a loop as well(like a stress suspend/resume test), I thought rate limiting would be better.\n\nSorry this is not a valid argument as we reboot on trying S3 suspend :-).",
+      "parentUuid": "aeb6aed0_8c4458f4",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
