@@ -279,6 +279,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e053d9_411163ee",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T10:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5636216_0b5e3036",
+      "revId": "f61cd346baefda5f6e40c03dde01678520eaf417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d54a21_9b635d8a",
@@ -417,6 +435,24 @@
       "side": 1,
       "message": "Makes sense. I shall update `domain_flush()` to flush only if flush_pending",
       "parentUuid": "a8d480db_45642ebb",
+      "revId": "f61cd346baefda5f6e40c03dde01678520eaf417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef85e088_bc7c4aab",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T10:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "674341e5_5ae8206a",
       "revId": "f61cd346baefda5f6e40c03dde01678520eaf417",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
