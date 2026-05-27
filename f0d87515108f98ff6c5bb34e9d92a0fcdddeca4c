@@ -16,6 +16,24 @@
       "message": "build-break in arm64 allmodconfig:\n```\n.../linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n...dbox/146/execroot/_main/common/drivers/of/unittest-data/tests-interrupts.dtsi:33.26-51.6: Warning (interrupt_map): /testcase-data/interrupts/intmap1: Missing \u0027#address-cells\u0027 in interrupt-map provider\n.../linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n...dbox/146/execroot/_main/common/drivers/of/unittest-data/tests-interrupts.dtsi:33.26-51.6: Warning (interrupt_map): /testcase-data/interrupts/intmap1: Missing \u0027#address-cells\u0027 in interrupt-map provider\n....12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/drivers/virt/gunyah/gunyah_kp_el1.c:8:10: fatal error: \u0027linux/sections.h\u0027 file not found\n    8 | #include \u003clinux/sections.h\u003e\n      |          ^~~~~~~~~~~~~~~~~~\n1 error generated.\n```",
       "revId": "f0d87515108f98ff6c5bb34e9d92a0fcdddeca4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53270355_171c7250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-27T10:37:48Z",
+      "side": 1,
+      "message": "Updated the correct location for sections.h header\n\nAdded a hook for exporting status post updating hvc calls",
+      "parentUuid": "0e400e50_33c96a87",
+      "revId": "f0d87515108f98ff6c5bb34e9d92a0fcdddeca4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
