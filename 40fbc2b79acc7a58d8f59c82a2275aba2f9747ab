@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57020294_067076c5",
+        "filename": "drivers/ufs/core/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-27T20:37:48Z",
+      "side": 1,
+      "message": "Because registers are not written, the trace will provide garbage (prev?) values.\n\n```\nstatic void ufshcd_add_uic_command_trace(struct ufs_hba *hba,\n                                         const struct uic_command *ucmd,\n                                         enum ufs_trace_str_t str_t)\n{\n        u32 cmd;\n\n        trace_android_vh_ufs_send_uic_command(hba, ucmd, (int)str_t);\n\n        if (!trace_ufshcd_uic_command_enabled())\n                return;\n\n        if (str_t \u003d\u003d UFS_CMD_SEND)\n                cmd \u003d ucmd-\u003ecommand;\n        else\n                cmd \u003d ufshcd_readl(hba, REG_UIC_COMMAND);\n\n        trace_ufshcd_uic_command(hba, str_t, cmd,\n                                 ufshcd_readl(hba, REG_UIC_COMMAND_ARG_1),\n                                 ufshcd_readl(hba, REG_UIC_COMMAND_ARG_2),\n                                 ufshcd_readl(hba, REG_UIC_COMMAND_ARG_3));\n}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "fabcbc8e_ddc9d4b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/ufs/core/ufshcd.c",
+              "range": {
+                "startLine": 2590,
+                "startChar": 0,
+                "endLine": 2592,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/ufs/core/ufshcd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\tufshcd_add_uic_command_trace(hba, uic_cmd, UFS_CMD_SEND);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "40fbc2b79acc7a58d8f59c82a2275aba2f9747ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
