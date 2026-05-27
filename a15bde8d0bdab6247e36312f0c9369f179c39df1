@@ -16,6 +16,23 @@
       "message": "LGTM, pending code review from maintainers",
       "revId": "a15bde8d0bdab6247e36312f0c9369f179c39df1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d19bde_16e7814e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4790607
+      },
+      "writtenOn": "2026-05-27T07:52:48Z",
+      "side": 1,
+      "message": "@dhavale@google.com I\u0027m sorry, but could you please send the failure logs from the internal tests?",
+      "revId": "a15bde8d0bdab6247e36312f0c9369f179c39df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
