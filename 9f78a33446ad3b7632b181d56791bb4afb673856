@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73816124_fe8ed91a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T14:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc526f8_bdfde43a",
+      "revId": "9f78a33446ad3b7632b181d56791bb4afb673856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce609e4e_3132db22",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-26T22:40:09Z",
       "side": 1,
       "message": "Actually iommu_suspend()/iommu_resume() are only used for S3 suspend, which is not really supported by pKVM (we only support s2idle suspend).\n\nSo we can leave this code alone?\n\n...We might implement a change similar to aosp/3999613, to explicitly disable S3 suspend as an unsupported feature when pKVM is enabled. And/or in the meantime we can also add a `WARN_ON(pkvm_enabled())` at the beginning of iommu_suspend() and iommu_resume().",
+      "revId": "9f78a33446ad3b7632b181d56791bb4afb673856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada94e9b_9b182f81",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T14:50:21Z",
+      "side": 1,
+      "message": "\u003e Actually iommu_suspend()/iommu_resume() are only used for S3 suspend, which is not really supported by pKVM (we only support s2idle suspend).\n\u003e\n\u003e So we can leave this code alone?\n\nI thought about that but since we already changed s/writel/dmar_writel/ I thought I will have this as well. I have removed it now.\n\n\u003e We might implement a change similar to aosp/3999613, to explicitly disable S3 suspend as an unsupported feature when pKVM is enabled. And/or in the meantime we can also add a WARN_ON(pkvm_enabled()) at the beginning of iommu_suspend() and iommu_resume().\n\nDone! I return -EOPNOTSUPP on suspend callback so that suspend does not proceed. And added a WARN_ON on resume callback. This is a separate CL: aosp/4090251",
+      "parentUuid": "ce609e4e_3132db22",
       "revId": "9f78a33446ad3b7632b181d56791bb4afb673856",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

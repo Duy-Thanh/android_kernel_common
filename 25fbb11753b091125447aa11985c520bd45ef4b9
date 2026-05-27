@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3cd41e_76f03cdd",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T14:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "195e6031_0c46b5e2",
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5196223_2c3c67e8",
@@ -81,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61f68fc_dc9e167a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T14:50:21Z",
+      "side": 1,
+      "message": "Indeed. Moved it out",
+      "parentUuid": "f5196223_2c3c67e8",
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d541656d_d07d2272",
@@ -94,6 +130,24 @@
       "writtenOn": "2026-05-26T22:40:09Z",
       "side": 1,
       "message": "Let\u0027s add all this code after pkvm_iommu_mmio_write(), not between pkvm_iommu_mmio_read() and pkvm_iommu_mmio_write()?",
+      "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d953684_824f1b6a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T14:50:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d541656d_d07d2272",
       "revId": "25fbb11753b091125447aa11985c520bd45ef4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
