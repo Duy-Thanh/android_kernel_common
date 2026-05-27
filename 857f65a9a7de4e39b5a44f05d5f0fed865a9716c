@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0febb0b7_92e27117",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-27T19:16:01Z",
+      "side": 1,
+      "message": "Since now `hash_del(\u0026domain-\u003ehnode)` happens before the `pkvm_spin_unlock(\u0026iommu_domain_lock)`, in what case `refcount \u003d\u003d 0` and a domain still being retured?",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b49c08b1_dfabf4bb",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
