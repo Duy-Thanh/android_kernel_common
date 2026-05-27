@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f01111_791f3c75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-27T16:46:07Z",
+      "side": 1,
+      "message": "Reverted the patch back no hooks, Separate change can be added later.\nBuild Bug fixed",
+      "parentUuid": "8a17ce91_ad58df63",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c950ce1f_7f452d0c",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc599706_92262da7",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-27T16:46:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fb3bd89d_a2a2de48",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90aa5485_0a3cdc15",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-05-27T14:47:29Z",
       "side": 1,
       "message": "These symbols are not exported, so this will cause build failures.",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37205820_5c195c75",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 12
+      },
+      "lineNbr": 3398,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-27T16:46:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "90aa5485_0a3cdc15",
       "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
