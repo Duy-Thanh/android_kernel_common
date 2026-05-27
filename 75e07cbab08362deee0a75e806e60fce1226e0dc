@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e273c634_194d1cba",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-27T13:43:23Z",
+      "side": 1,
+      "message": "nit: just thinking: these definitions per se are not exactly pKVM-specific, i.e. perhaps potentially they could be reused by some non-pKVM code for some purposes, so maybe s/pkvm_// s/PKVM_//?",
+      "fixSuggestions": [
+        {
+          "fixId": "b1f2a59a_0926a09e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "enum iommu_pmu_reg {\n\tIOMMU_PMU_REG_NONE,\n\tIOMMU_PMU_REG_EVENT_CAP,       /* fixed PERFEVNTCAP array */\n\tIOMMU_PMU_REG_CFG,             /* 64-bit PERFCNTRCFG */\n\tIOMMU_PMU_REG_FILTER_RID,      /* 32-bit requester-id filter */\n\tIOMMU_PMU_REG_FILTER_DID,      /* 32-bit domain-id filter */\n\tIOMMU_PMU_REG_FILTER_PASID,    /* 32-bit PASID filter */\n\tIOMMU_PMU_REG_FILTER_AT,       /* 32-bit address-type filter */\n\tIOMMU_PMU_REG_FILTER_PTL,      /* 32-bit page-table-level filter */\n\tIOMMU_PMU_REG_CNTR_CAP,        /* 32-bit PERFCNTRCAP */\n\tIOMMU_PMU_REG_CNTR_EVENT_CAP,  /* 32-bit per-counter event cap */\n\tIOMMU_PMU_REG_FREEZE,          /* 64-bit PERFFRZSTS */\n\tIOMMU_PMU_REG_OVERFLOW,        /* 64-bit PERFOVFSTS */\n\tIOMMU_PMU_REG_COUNTER,         /* 64-bit PERFCNTR */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "struct iommu_pmu_reg_info {\n\tenum iommu_pmu_reg type;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "bool iommu_pmu_reg_info(struct intel_iommu *iommu, unsigned long offset, int len,\n\t\t\tstruct iommu_pmu_reg_info *info);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t    struct iommu_pmu_reg_info *info);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t     struct iommu_pmu_reg_info *info, u64 val);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "75e07cbab08362deee0a75e806e60fce1226e0dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

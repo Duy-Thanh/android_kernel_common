@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f0b33b1_5d9cdaae",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-27T13:43:23Z",
+      "side": 1,
+      "message": "Why not cache perfcap and other values (num_cntr, num_eg, cfg_reg, freeze_reg and so on) in the iommu struct at initialization (similarly to the host\u0027s `alloc_iommu_pmu()`), instead of reading them from HW every time?",
+      "revId": "7de0865da609cf1e018e0a62c3ccd378221fa309",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
