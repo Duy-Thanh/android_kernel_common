@@ -16,6 +16,23 @@
       "message": "Since Giuliano is out today, adding Lee Jones as another OWNER.",
       "revId": "34fd52662e12b627b331a9e15c778ebb73b2881a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1e5afb_f1ded32d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3516803
+      },
+      "writtenOn": "2026-05-27T22:02:33Z",
+      "side": 1,
+      "message": "@gprocida@google.com, @joneslee@google.com, would either of you be able to take a look at this? We\u0027ve landed a similar change for 6.12 already (https://android-review.git.corp.google.com/c/kernel/common/+/4015322), we\u0027re now intending to do it for 6.18 as well.",
+      "revId": "34fd52662e12b627b331a9e15c778ebb73b2881a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
