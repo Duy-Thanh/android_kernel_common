@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b49c08b1_dfabf4bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-27T18:35:03Z",
+      "side": 1,
+      "message": "nit: s/servers/serves",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcf0b8ac_21aea8c0",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-27T18:35:03Z",
+      "side": 1,
+      "message": "nit: \u0027lease\u0027 should be \u0027least\u0027.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
