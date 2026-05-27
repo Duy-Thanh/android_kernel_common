@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a17ce91_ad58df63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T14:47:29Z",
+      "side": 1,
+      "message": "This version went backwards. Please go back to the hookless version and just fix the allmodconfig build issues. You clearly have not tested this hook since it is not exported and cannot be attached by any vendor module.",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c950ce1f_7f452d0c",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T14:47:29Z",
+      "side": 1,
+      "message": "why is this back? why can\u0027t this function just do everything needed? Is your hook handler in an \"__init\" segment which will go away after boot? How does it even work without being exported?\n\nPlease go back to the hookless implementation. This is broken.",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90aa5485_0a3cdc15",
+        "filename": "gki/aarch64/symbols/qcom",
+        "patchSetId": 12
+      },
+      "lineNbr": 3398,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T14:47:29Z",
+      "side": 1,
+      "message": "These symbols are not exported, so this will cause build failures.",
+      "revId": "ebdc4c3d549b56108e2c6c68a95a3d244706ea92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
