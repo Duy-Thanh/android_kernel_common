@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a8e5db7_30b8fdde",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-05-27T06:09:51Z",
+      "side": 1,
+      "message": "I think this is a bug in IOMMU code and not necessarily related to pKVM. Esp. with pkvm enabled, pgtt type can never be passthrough, as in when host wants it to be passthrough, pkvm will always convert it to PGTT_SL_ONLY.",
+      "revId": "6dbf2a09601dbc92d3c1f2d0eeb495836c86e3a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
