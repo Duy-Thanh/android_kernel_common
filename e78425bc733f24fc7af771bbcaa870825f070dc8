@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eecd766d_5827126e",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2345,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-27T13:18:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "755bb1b9_560c656b",
+      "range": {
+        "startLine": 2343,
+        "startChar": 0,
+        "endLine": 2345,
+        "endChar": 57
+      },
+      "revId": "e78425bc733f24fc7af771bbcaa870825f070dc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "999af142_d3761b60",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Yep I guess that should work too.",
       "parentUuid": "2effd41f_b7c9814f",
+      "range": {
+        "startLine": 611,
+        "startChar": 1,
+        "endLine": 611,
+        "endChar": 33
+      },
+      "revId": "e78425bc733f24fc7af771bbcaa870825f070dc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9704a0_3b2370cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-27T13:18:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d752dc21_0fc1328d",
       "range": {
         "startLine": 611,
         "startChar": 1,
@@ -227,6 +275,30 @@
       "side": 1,
       "message": "FTR, I believe this also misses __vgic_v3_init_lrs()",
       "parentUuid": "473ebf6a_f781a6ee",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 38
+      },
+      "revId": "e78425bc733f24fc7af771bbcaa870825f070dc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "963b85df_441d5fb8",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-05-27T13:18:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d0c8ee4_325c4392",
       "range": {
         "startLine": 766,
         "startChar": 0,
