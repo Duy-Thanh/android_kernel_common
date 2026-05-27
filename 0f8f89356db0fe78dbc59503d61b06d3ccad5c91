@@ -52,6 +52,24 @@
       "parentUuid": "7b70ec6c_0d795b81",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b274c78_be7d1488",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T19:04:49Z",
+      "side": 1,
+      "message": "\u003e So, with S3 suspend, secondary CPUs are offlined in pm_sleep_disable_secondary_cpus() which happens before syscore_suspend() -\u003e iommu_suspend(). So if we reached iommu_suspend(), it is already too late.\n\nAhh I see. Thanks for testing. Based on some documentation I read, I was under the impression that suspend will fail if any of the device suspend calback fails. This experiment shows that its not the case.\n\n\u003e So in the meantime, let\u0027s add WARN_ON here in iommu_suspend() as well?\n\nSure will do.",
+      "parentUuid": "30f57548_864519e4",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
