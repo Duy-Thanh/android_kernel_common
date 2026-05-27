@@ -34,6 +34,24 @@
       "parentUuid": "fbab114b_bf28e56d",
       "revId": "7c702839aa3b61187f2dc87812b4d4c38ec63e14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14e040b_9c581c91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-05-27T18:48:06Z",
+      "side": 1,
+      "message": "\u003e periodic reports of similar\n\nI should clarify, periodic reports of similar issues against previous android kernels, this is the first for android17-6.18",
+      "parentUuid": "99edf805_8e58846d",
+      "revId": "7c702839aa3b61187f2dc87812b4d4c38ec63e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
