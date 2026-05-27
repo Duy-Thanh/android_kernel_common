@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1dbc971_a16acd7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-27T16:30:54Z",
+      "side": 1,
+      "message": "build-break for many builds:\n```\nERROR: The following kernel modules are built but not copied. Add these lines to the module_outs attribute of @@//common:kernel_aarch64_16k:\n    \"drivers/usb/host/xhci-pci.ko\",\n```\nLooks like another module needs to be added to modules.bzl",
+      "revId": "acc601a126222e8a289b236d7126009987e96562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
