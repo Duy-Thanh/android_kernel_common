@@ -16,6 +16,24 @@
       "message": "Redundant `cherry picked from` here",
       "revId": "fdd4e7457750c1072c07e6be4b1b83c4c58e7f35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d472dc_120bb9a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3832128
+      },
+      "writtenOn": "2026-05-27T01:46:13Z",
+      "side": 1,
+      "message": "Fixed, thanks",
+      "parentUuid": "bc2122a8_d882f6b3",
+      "revId": "fdd4e7457750c1072c07e6be4b1b83c4c58e7f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
