@@ -70,6 +70,24 @@
       "parentUuid": "30f57548_864519e4",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db499ee_99bb491c",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-27T20:02:04Z",
+      "side": 1,
+      "message": "Updated the patch with `pr_warn_ratelimited`. Since its user initiated, I think its better to warn there. From reading the code, resume() will not be called for failed device suspend callbacks and hence WARN_ON on resume seems appropriate. WDYT?",
+      "parentUuid": "5b274c78_be7d1488",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
