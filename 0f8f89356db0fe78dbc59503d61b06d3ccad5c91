@@ -88,6 +88,24 @@
       "parentUuid": "5b274c78_be7d1488",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a464c1_214e815e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-27T21:39:44Z",
+      "side": 1,
+      "message": "I still think we should just WARN_ON here. iommu_suspend() doesn\u0027t seem to be the right place for printing logs like \"pKVM does not support S3 suspend\", since S3 is not about IOMMU, and iommu_suspend() is just one of many S3-specific suspend callbacks in the kernel. (Also, ratelimiting is not quite needed in this case?)\n\nAnd again, per the above, if we reached iommu_suspend() while pKVM is enabled, we are already in a pretty bad unrecoverable state, so a noisy WARN_ON seems more appropriate?",
+      "parentUuid": "3db499ee_99bb491c",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
