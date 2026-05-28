@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d18f0d5_090b51e8",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T18:00:48Z",
+      "side": 1,
+      "message": "You mean the Kconfig dependency? That is build-time. Since this is GKI, it is built-in to all ecosystem kernels. At runtime, when running on non-QCOM HW, what happens?",
+      "parentUuid": "011c0ef4_de4a54db",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a50260f6_295110c6",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -114,6 +132,24 @@
       "side": 1,
       "message": "same as above",
       "parentUuid": "a50260f6_295110c6",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c273fe4e_ba67c075",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T18:00:48Z",
+      "side": 1,
+      "message": "This is not going in if you are relying on that built-time config to prevent runtime problems.",
+      "parentUuid": "2ad842c6_2e835f37",
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
