@@ -299,6 +299,9 @@ int main(int argc, char **argv)
 		cms = CMS_sign(NULL, NULL, NULL, NULL, flags);
 		ERR(!cms, "CMS_sign");
 
+		/* TODO(b/316589225): Remove once BoringSSL supports this */
+		flags &= ~CMS_PARTIAL;
+
 		ERR(!CMS_add1_signer(cms, x509, private_key, digest_algo, flags),
 		    "CMS_add1_signer");
 		ERR(CMS_final(cms, bm, NULL, flags) != 1,
