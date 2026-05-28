@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01eb5b2b_c91e1347",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1628,
+      "author": {
+        "id": 2039846
+      },
+      "writtenOn": "2026-05-28T14:42:14Z",
+      "side": 1,
+      "message": "Since task_rq-\u003elock is not held here, checking p-\u003eon_cpu in the call chain\n`do_pick_task_scx -\u003e balance_one -\u003e consume_dispatch_q -\u003e consume_remote_task -\u003e move_remote_task_to_local_dsq` may still select a task that is currently running on remote CPU due to the proxy_sched feature.",
+      "range": {
+        "startLine": 1621,
+        "startChar": 0,
+        "endLine": 1628,
+        "endChar": 0
+      },
+      "revId": "a3b4919255109d746906a1c6a0f9bdb2c236efcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
