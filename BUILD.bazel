@@ -68,6 +68,7 @@ _GKI_X86_64_MAKE_GOALS = [
     "modules",
 ]
 
+<<<<<<< HEAD   (6955f4925e3dc17c6ef3b51e226789bd6c3e15c4 ANDROID: debug_kinfo: add _reserved in debug_kinfo am: e8177)
 _GKI_AARCH64_BOOT_IMAGE_SIZES = {
     "": "67108864",
     "lz4": "53477376",
@@ -85,6 +86,20 @@ _GKI_X86_64_BOOT_IMAGE_SIZES = {
     "": "67108864",
 }
 
+||||||| BASE   (e81770ba8467978557df33740da4e4eb5e90e9ce ANDROID: debug_kinfo: add _reserved in debug_kinfo)
+_GKI_AARCH64_BOOT_IMAGE_SIZES = {
+    "": "67108864",
+    "lz4": "53477376",
+    "gz": "47185920",
+    "lzma": "47185920",
+}
+
+_GKI_X86_64_BOOT_IMAGE_SIZES = {
+    "": "67108864",
+}
+
+=======
+>>>>>>> BRANCH (a1681c41612548b2f06ec46bba41b5ac05061201 ANDROID: Stop setting boot partition sizes)
 # Extra generated headers below $OUT_DIR for external modules.
 _GENERATED_HEADERS_FOR_MODULE = [
     "security/selinux/flask.h",
@@ -257,7 +272,6 @@ common_kernel(
         ":tests_zip_arm64",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
-    gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
@@ -292,7 +306,6 @@ common_kernel(
         ":tests_zip_arm64_16k",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
-    gki_boot_img_sizes = _GKI_AARCH64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_arm64",
     kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_AARCH64_MAKE_GOALS,
@@ -354,7 +367,6 @@ common_kernel(
         ":tests_zip_x86_64",
     ],
     generated_headers_for_module = _GENERATED_HEADERS_FOR_MODULE,
-    gki_boot_img_sizes = _GKI_X86_64_BOOT_IMAGE_SIZES,
     gki_system_dlkm_modules = ":gki_system_dlkm_modules_x86_64",
     kcflags = COMMON_KCFLAGS,
     make_goals = _GKI_X86_64_MAKE_GOALS,
