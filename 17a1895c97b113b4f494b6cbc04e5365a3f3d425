@@ -33,6 +33,23 @@
       "message": "Looks like this is good-to-go once Reviewed by OWNER.\n\nPTAL and let me know if anything is needed.",
       "revId": "17a1895c97b113b4f494b6cbc04e5365a3f3d425",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e55bb98_4ea488be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-05-28T16:58:43Z",
+      "side": 1,
+      "message": "John, can you help with this review while Lee is out?",
+      "revId": "17a1895c97b113b4f494b6cbc04e5365a3f3d425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
