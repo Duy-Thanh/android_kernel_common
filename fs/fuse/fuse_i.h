@@ -946,6 +946,8 @@ struct fuse_conn {
 	/** BPF Only, no Daemon running */
 	unsigned int no_daemon:1;
 
+
+
 	/** Maximum stack depth for passthrough backing files */
 	int max_stack_depth;
 
@@ -2233,6 +2235,27 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 									\
 	fer;								\
 })
+
+#ifdef CONFIG_FUSE_BPF
+static inline bool fuse_bpf_backing_allowed(struct super_block *sb)
+{
+	if (sb && sb->s_root) {
+		struct inode *root_inode = d_inode(sb->s_root);
+
+		if (root_inode) {
+			struct fuse_inode *fi = get_fuse_inode(root_inode);
+
+			return fi && fi->backing_inode;
+		}
+	}
+	return false;
+}
+#else
+static inline bool fuse_bpf_backing_allowed(struct super_block *sb)
+{
+	return false;
+}
+#endif
 
 #endif /* CONFIG_FUSE_BPF */
 
