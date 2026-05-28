@@ -16,6 +16,24 @@
       "message": "Looks like you also need to run `tools/bazel run //common:kernel_x86_64_abi_update`",
       "revId": "d5380c14d8dfad91c42837b10550dfb0d5704281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a075126_b4e32146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-28T23:33:26Z",
+      "side": 1,
+      "message": "I\u0027ve done that in the next patch aosp/4092631 (which already passed presubmit, and this presubmit result covers these 2 patches as well). AFAICS these x86 ABI failures are actually independent of this automerge. Here: https://android-build.corp.google.com/build_explorer/branch/arsp_kernel-common-android16-6.12-desktop/?gridSize\u003d20\u0026selectionType\u003dMOST_RECENT_N_BUILDS\u0026numBuilds\u003d20\u0026buildType\u003ddefault  kernel_x86_64 builds have been already failing for some time, with the same ABI failures.",
+      "parentUuid": "c5df9030_efa964e8",
+      "revId": "d5380c14d8dfad91c42837b10550dfb0d5704281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
