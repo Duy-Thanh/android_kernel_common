@@ -160,6 +160,24 @@
       "parentUuid": "e9aa5475_2e4da105",
       "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c1e86a_3227e141",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2685,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-28T08:46:41Z",
+      "side": 1,
+      "message": "\u003e My idea of WARN_ON usage is if a code path that should not happen\n\nYes, so my idea is that, like I said, we should eventually implement a change which will ensure that this code path will not happen. (And I suppose it is not a big deal if we will have this WARN_ON even before we implement that. Or if it is a big deal, we can just restrain from merging this patch until that change is implemented. :))\n\n(BTW actually I\u0027m treating this WARN_ON not as something very useful functionally for debugging at runtime, but rather as something useful just for documentation purpose, when reading the code.)\n\n\u003e Sorry this is not a valid argument as we reboot on trying S3 suspend :-).\n\nAnd even if we didn\u0027t, suspend/resume is a rather slow operation anyway. Plus, every suspend attempt already produces a bunch of other kernel logs anyway, independently of IOMMU. So printing this warning during some S3 suspend attempts but not printing it during others would be weird.",
+      "parentUuid": "4fb60582_8e5c1e1d",
+      "revId": "0f8f89356db0fe78dbc59503d61b06d3ccad5c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
