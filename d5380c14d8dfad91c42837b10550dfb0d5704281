@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5df9030_efa964e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-05-28T19:31:50Z",
+      "side": 1,
+      "message": "Looks like you also need to run `tools/bazel run //common:kernel_x86_64_abi_update`",
+      "revId": "d5380c14d8dfad91c42837b10550dfb0d5704281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
