@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "707710ee_4f26ff45",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T16:05:58Z",
+      "side": 1,
+      "message": "On production Android builds we disable Live patching and KPROBES.\n\nThe freeze is intentionally delayed to late_initcall_sync() to avoid conflicts with jump labels/static keys and tracing initialization. We are validating remaining post-boot text patchers (kprobes/ftrace/livepatch/module apply paths) before enforcement.\n\nWith recent agentic solution deployment, we are seeing rogue models breaching security threats, here we are limiting these via AUTO FLEX requirements.\n\nmodule load are disabled post freeze",
+      "parentUuid": "979cd23d_2e083177",
+      "range": {
+        "startLine": 69,
+        "startChar": 57,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec8a8eb6_98c784d1",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -37,6 +61,24 @@
       "writtenOn": "2026-05-27T17:44:56Z",
       "side": 1,
       "message": "what happens if gunyah is not present?",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "011c0ef4_de4a54db",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T16:05:58Z",
+      "side": 1,
+      "message": "Marked dependency on Gunyah, without it we dont enable this module.",
+      "parentUuid": "ec8a8eb6_98c784d1",
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ad842c6_2e835f37",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T16:05:58Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "a50260f6_295110c6",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4662265_fa8bd44f",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d532a275_1d494778",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T16:05:58Z",
+      "side": 1,
+      "message": "The module is only built for gunyah",
+      "parentUuid": "a4662265_fa8bd44f",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c6c350d_274ebca8",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -88,6 +166,30 @@
       "writtenOn": "2026-05-28T08:17:48Z",
       "side": 1,
       "message": "Why can\u0027t this be done in a module? Why should we carry this snake oil in ACK?",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71ac31a_9f32f591",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T16:05:58Z",
+      "side": 1,
+      "message": "Thanks for the concern, The intent here is to enforce post-init kernel text/rodata integrity from El2 using S2 permissions (This comes as a part of FLEX requirement from AUTO), not to add generic ACK policy. The protection values comes from EL2 being outside EL1\u0027s write authority after layout is frozen.\n\nIntroducing a vendor specific hook will expand the kernel attack surface, since the information is security sensitive and consumed only once by Gunyah EL2, we are trying to keep handoff tightly scoped.",
+      "parentUuid": "5c6c350d_274ebca8",
       "range": {
         "startLine": 100,
         "startChar": 0,
