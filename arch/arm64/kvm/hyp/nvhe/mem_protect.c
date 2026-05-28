@@ -2341,17 +2341,40 @@ static void __guest_set_owner_host(struct pkvm_hyp_vcpu *vcpu, u64 phys, u64 ipa
 	psci_mem_protect_dec(nr_pages);
 }
 
+static int __guest_check_transition_size(u64 phys, u64 ipa, u64 nr_pages, u64 *size)
+{
+	size_t block_size;
+
+	if (nr_pages == 1) {
+		*size = PAGE_SIZE;
+		return 0;
+	}
+
+	/* We solely support second to last level huge mapping */
+	block_size = kvm_granule_size(KVM_PGTABLE_LAST_LEVEL - 1);
+
+	if (nr_pages != block_size >> PAGE_SHIFT)
+		return -EINVAL;
+
+	if (!IS_ALIGNED(phys | ipa, block_size))
+		return -EINVAL;
+
+	*size = block_size;
+	return 0;
+}
+
 int __pkvm_host_donate_guest(u64 pfn, u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 nr_pages)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	u64 phys = hyp_pfn_to_phys(pfn);
 	u64 ipa = hyp_pfn_to_phys(gfn);
 	enum kvm_pgtable_prot prot;
-	size_t size;
+	u64 size;
 	int ret;
 
-	if (check_mul_overflow(nr_pages, PAGE_SIZE, &size))
-		return -EINVAL;
+	ret = __guest_check_transition_size(phys, ipa, nr_pages, &size);
+	if (ret)
+		return ret;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -2414,9 +2437,8 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	struct kvm_hyp_pinned_page *ppage = hyp_ppages;
-	u64 phys, ipa;
+	u64 phys, ipa, size;
 	int ret;
-	size_t size;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -2431,18 +2453,22 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 
 		if (check_shl_overflow(PAGE_SIZE, ppage->order, &size)) {
 			ret = -EINVAL;
-			goto err_page_state;
+			goto err_rollback;
 		}
+
+		ret = __guest_check_transition_size(phys, ipa, 1UL << ppage->order, &size);
+		if (ret)
+			goto err_rollback;
 
 		ret = ___host_check_page_state_range(phys, size, PKVM_PAGE_OWNED,
 						     HOST_CHECK_NULL_REFCNT |
 						     HOST_CHECK_IS_MEMORY);
 		if (ret)
-			goto err_page_state;
+			goto err_rollback;
 
 		ret = __guest_check_page_state_range(vcpu, ipa, size, PKVM_NOPAGE);
 		if (ret)
-			goto err_page_state;
+			goto err_rollback;
 
 		__host_set_owner_guest(vcpu, phys, ipa, size, HOST_SET_NO_COMPLETE);
 	}
@@ -2467,7 +2493,7 @@ unlock:
 	host_unlock_component();
 
 	return ret;
-err_page_state:
+err_rollback:
 	if (ppage == hyp_ppages)
 		goto unlock;
 
