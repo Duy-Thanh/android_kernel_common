@@ -174,6 +174,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c71a94c_c61aacdc",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-28T18:23:23Z",
+      "side": 1,
+      "message": "Added a check to call this for gunyah",
+      "parentUuid": "c273fe4e_ba67c075",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4662265_fa8bd44f",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
