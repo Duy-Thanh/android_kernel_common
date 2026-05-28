@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4c61c2_c3e40ef8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-28T16:31:46Z",
+      "side": 1,
+      "message": "Strictly speaking, malicious host shouldn\u0027t be able to do that, since SRTP is issued during pKVM initialization, when the host is still trusted (and is supposed to successfully set SRTP, or fail pKVM initialization otherwise).\n\nBut an extra sanity check shouldn\u0027t hurt.",
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
