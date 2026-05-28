@@ -963,6 +963,9 @@ CC_FLAGS_SCS	:= -fsanitize=shadow-call-stack
 KBUILD_CFLAGS	+= $(CC_FLAGS_SCS)
 KBUILD_RUSTFLAGS += -Zsanitizer=shadow-call-stack
 endif
+ifdef CONFIG_UNWIND_PATCH_PAC_INTO_SCS
+KBUILD_RUSTFLAGS += -Zllvm_module_flag=uwtable:u32:2:max
+endif
 export CC_FLAGS_SCS
 endif
 
