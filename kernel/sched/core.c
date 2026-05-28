@@ -739,7 +739,7 @@ struct rq *___task_rq_lock(struct task_struct *p, struct rq_flags *rf)
 			cpu_relax();
 	}
 }
-EXPORT_SYMBOL_GPL(__task_rq_lock);
+EXPORT_SYMBOL_GPL(___task_rq_lock);
 
 /*
  * task_rq_lock - lock p->pi_lock and lock the rq @p resides on.
@@ -780,7 +780,7 @@ struct rq *_task_rq_lock(struct task_struct *p, struct rq_flags *rf)
 			cpu_relax();
 	}
 }
-EXPORT_SYMBOL_GPL(task_rq_lock);
+EXPORT_SYMBOL_GPL(_task_rq_lock);
 
 /*
  * RQ-clock updating methods:
