@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b002a49_6f1e8c08",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T22:34:15Z",
+      "side": 1,
+      "message": "\u003e On production Android builds we disable Live patching and KPROBES\n\nJust so we understand...how are you doing that? Is it being done in the EL2 gunyah code at \"freeze\"? (It can\u0027t be build-time \"for production Android builds\" since CONFIG_KPROBES is enabled for GKI kernels)",
+      "parentUuid": "707710ee_4f26ff45",
+      "range": {
+        "startLine": 69,
+        "startChar": 57,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec8a8eb6_98c784d1",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -115,6 +139,24 @@
       "side": 1,
       "message": "Correct this makes sense, I should return ENODEV on basis of EL2 HYP call uid. Thanks",
       "parentUuid": "4d18f0d5_090b51e8",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20223dae_bfd52126",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T22:34:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fbe1e0a_9b2a8172",
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -186,6 +228,24 @@
       "side": 1,
       "message": "Added a check to call this for gunyah",
       "parentUuid": "c273fe4e_ba67c075",
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37dc105_366b7d88",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T22:34:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c71a94c_c61aacdc",
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -280,6 +340,30 @@
       "side": 1,
       "message": "Thanks for the concern, The intent here is to enforce post-init kernel text/rodata integrity from El2 using S2 permissions (This comes as a part of FLEX requirement from AUTO), not to add generic ACK policy. The protection values comes from EL2 being outside EL1\u0027s write authority after layout is frozen.\n\nIntroducing a vendor specific hook will expand the kernel attack surface, since the information is security sensitive and consumed only once by Gunyah EL2, we are trying to keep handoff tightly scoped.",
       "parentUuid": "5c6c350d_274ebca8",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23219b7_2faafed4",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-28T22:34:15Z",
+      "side": 1,
+      "message": "But Will\u0027s question stands, why can\u0027t you do this late_inicall_sync() from a vendor module? It would still call into gunyah where the EL2 magic would occur. This doesn\u0027t require a new hook, it just requires moving all of this to your gunyah GKI module (no increase in attack surface). Then we wouldn\u0027t need any gunyah-specific code in the core kernel.\n\nI think your answer is that it would require adding `_stext, _etext, __start_rodata, __end_rodata, _sdata, _edata, __bss_start` and `__bss_stop` symbols to the KMI and adding this small bit of \"snake oil\" is better than polluting the KMI with symbols that are not needed otherwise.\n\nWill, which is worse in your view?",
+      "parentUuid": "c71ac31a_9f32f591",
       "range": {
         "startLine": 100,
         "startChar": 0,
