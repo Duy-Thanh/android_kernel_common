@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b72928_b4914bd5",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-28T12:11:27Z",
+      "side": 1,
+      "message": "To avoid future merge conflicts, please order `bio_free_pages` before `bio_reset` as it is in `android14-6.1`.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 16
+      },
+      "revId": "d8b4fa62e7827bde2e3d1fc524fbb932f3170260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
