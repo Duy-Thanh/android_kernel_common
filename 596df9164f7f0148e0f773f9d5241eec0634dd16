@@ -69,6 +69,24 @@
       "parentUuid": "362f124b_78e96245",
       "revId": "596df9164f7f0148e0f773f9d5241eec0634dd16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ba57f1_973cdbeb",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T16:53:31Z",
+      "side": 1,
+      "message": "AFAICS if ecmd_has_pmu_essential() fails, the host doesn\u0027t fail IOMMU initialization. So later the untrusted host may try to issue these commands even though they are not supported?\n\n...But actually I\u0027ve just noticed that section 11.4.14.3 \"Enhanced Command Response Register\" says: \"Usage of any command that is reported as unsupported by the\nEnhanced Command Capability Register will return Undefined Command.\"\n\nso hopefully this means that it will not result in an undefined behavior, it will be just gracefully reported in ECRSP.",
+      "parentUuid": "7a3a42b8_65cb8446",
+      "revId": "596df9164f7f0148e0f773f9d5241eec0634dd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
