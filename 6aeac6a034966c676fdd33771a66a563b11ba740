@@ -516,6 +516,30 @@
       },
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604f29a9_87270ac0",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-29T12:50:20Z",
+      "side": 1,
+      "message": "In gunyah, RM(EL1) is the privileged host-side manager for VM resources, while EL2(Hyp) Act as enforcement layer, So there is a trust contract between the two. Not covered here neither part of this patch",
+      "parentUuid": "f661678c_d0f19cbb",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
