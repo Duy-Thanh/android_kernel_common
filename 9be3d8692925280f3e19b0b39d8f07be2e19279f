@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78201a34_28b7762c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2026-05-29T12:48:56Z",
+      "side": 1,
+      "message": "We don\u0027t care about ABI break on android16-6.12-desktop branch.",
+      "revId": "9be3d8692925280f3e19b0b39d8f07be2e19279f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
