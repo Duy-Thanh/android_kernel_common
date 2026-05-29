@@ -603,7 +603,6 @@ pkg_install(
 
 _DB845C_MODULE_OUTS = [
     # keep sorted
-    "crypto/michael_mic.ko",
     "drivers/base/regmap/regmap-sdw.ko",
     "drivers/base/regmap/regmap-slimbus.ko",
     "drivers/bus/mhi/host/mhi.ko",
