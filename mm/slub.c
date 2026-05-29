@@ -2665,7 +2665,7 @@ bool slab_free_hook(struct kmem_cache *s, void *x, bool init,
 	if (still_accessible) {
 		struct rcu_delayed_free *delayed_free;
 
-		delayed_free = kmalloc(sizeof(*delayed_free), GFP_NOWAIT);
+		delayed_free = kmalloc_obj(*delayed_free, GFP_NOWAIT);
 		if (delayed_free) {
 			/*
 			 * Let KASAN track our call stack as a "related work
@@ -4957,7 +4957,7 @@ kmem_cache_prefill_sheaf(struct kmem_cache *s, gfp_t gfp, unsigned int size)
 
 	if (unlikely(size > s->sheaf_capacity)) {
 
-		sheaf = kzalloc(struct_size(sheaf, objects, size), gfp);
+		sheaf = kzalloc_flex(*sheaf, objects, size, gfp);
 		if (!sheaf)
 			return NULL;
 
@@ -9168,7 +9168,7 @@ static int show_stat(struct kmem_cache *s, char *buf, enum stat_item si)
 	unsigned long sum  = 0;
 	int cpu;
 	int len = 0;
-	int *data = kmalloc_array(nr_cpu_ids, sizeof(int), GFP_KERNEL);
+	int *data = kmalloc_objs(int, nr_cpu_ids, GFP_KERNEL);
 
 	if (!data)
 		return -ENOMEM;
@@ -9539,7 +9539,7 @@ int sysfs_slab_alias(struct kmem_cache *s, const char *name)
 		return sysfs_create_link(&slab_kset->kobj, &s->kobj, name);
 	}
 
-	al = kmalloc(sizeof(struct saved_alias), GFP_KERNEL);
+	al = kmalloc_obj(struct saved_alias, GFP_KERNEL);
 	if (!al)
 		return -ENOMEM;
 

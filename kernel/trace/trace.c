@@ -1063,7 +1063,7 @@ int tracing_snapshot_cond_enable(struct trace_array *tr, void *cond_data,
 				 cond_update_fn_t update)
 {
 	struct cond_snapshot *cond_snapshot __free(kfree) =
-		kzalloc(sizeof(*cond_snapshot), GFP_KERNEL);
+		kzalloc_obj(*cond_snapshot, GFP_KERNEL);
 	int ret;
 
 	if (!cond_snapshot)
@@ -3901,8 +3901,8 @@ __tracing_open(struct inode *inode, struct file *file, bool snapshot)
 	if (!iter)
 		return ERR_PTR(-ENOMEM);
 
-	iter->buffer_iter = kcalloc(nr_cpu_ids, sizeof(*iter->buffer_iter),
-				    GFP_KERNEL);
+	iter->buffer_iter = kzalloc_objs(*iter->buffer_iter, nr_cpu_ids,
+					 GFP_KERNEL);
 	if (!iter->buffer_iter)
 		goto release;
 
@@ -5130,7 +5130,7 @@ trace_insert_eval_map_file(struct module *mod, struct trace_eval_map **start,
 	 * where the head holds the module and length of array, and the
 	 * tail holds a pointer to the next list.
 	 */
-	map_array = kmalloc_array(len + 2, sizeof(*map_array), GFP_KERNEL);
+	map_array = kmalloc_objs(*map_array, len + 2, GFP_KERNEL);
 	if (!map_array) {
 		pr_warn("Unable to allocate trace eval mapping\n");
 		return;
@@ -5807,7 +5807,7 @@ static int tracing_open_pipe(struct inode *inode, struct file *filp)
 		goto fail_pipe_on_cpu;
 
 	/* create a buffer to store the information to pass to userspace */
-	iter = kzalloc(sizeof(*iter), GFP_KERNEL);
+	iter = kzalloc_obj(*iter, GFP_KERNEL);
 	if (!iter) {
 		ret = -ENOMEM;
 		goto fail_alloc_iter;
@@ -6626,7 +6626,7 @@ static int user_buffer_init(struct trace_user_buf_info **tinfo, size_t size)
 
 	if (!*tinfo) {
 		alloc = true;
-		*tinfo = kzalloc(sizeof(**tinfo), GFP_KERNEL);
+		*tinfo = kzalloc_obj(**tinfo, GFP_KERNEL);
 		if (!*tinfo)
 			return -ENOMEM;
 	}
@@ -7151,10 +7151,10 @@ static int tracing_snapshot_open(struct inode *inode, struct file *file)
 	} else {
 		/* Writes still need the seq_file to hold the private data */
 		ret = -ENOMEM;
-		m = kzalloc(sizeof(*m), GFP_KERNEL);
+		m = kzalloc_obj(*m, GFP_KERNEL);
 		if (!m)
 			goto out;
-		iter = kzalloc(sizeof(*iter), GFP_KERNEL);
+		iter = kzalloc_obj(*iter, GFP_KERNEL);
 		if (!iter) {
 			kfree(m);
 			goto out;
@@ -7543,7 +7543,7 @@ static struct tracing_log_err *alloc_tracing_log_err(int len)
 {
 	struct tracing_log_err *err;
 
-	err = kzalloc(sizeof(*err), GFP_KERNEL);
+	err = kzalloc_obj(*err, GFP_KERNEL);
 	if (!err)
 		return ERR_PTR(-ENOMEM);
 
@@ -7802,7 +7802,7 @@ static int tracing_buffers_open(struct inode *inode, struct file *filp)
 	if (ret)
 		return ret;
 
-	info = kvzalloc(sizeof(*info), GFP_KERNEL);
+	info = kvzalloc_obj(*info, GFP_KERNEL);
 	if (!info) {
 		trace_array_put(tr);
 		return -ENOMEM;
@@ -8063,7 +8063,7 @@ tracing_buffers_splice_read(struct file *file, loff_t *ppos,
 		struct page *page;
 		int r;
 
-		ref = kzalloc(sizeof(*ref), GFP_KERNEL);
+		ref = kzalloc_obj(*ref, GFP_KERNEL);
 		if (!ref) {
 			ret = -ENOMEM;
 			break;
@@ -8282,7 +8282,7 @@ tracing_stats_read(struct file *filp, char __user *ubuf,
 	unsigned long long t;
 	unsigned long usec_rem;
 
-	s = kmalloc(sizeof(*s), GFP_KERNEL);
+	s = kmalloc_obj(*s, GFP_KERNEL);
 	if (!s)
 		return -ENOMEM;
 
@@ -8876,7 +8876,7 @@ create_trace_option_files(struct trace_array *tr, struct tracer *tracer,
 	for (cnt = 0; opts[cnt].name; cnt++)
 		;
 
-	topts = kcalloc(cnt + 1, sizeof(*topts), GFP_KERNEL);
+	topts = kzalloc_objs(*topts, cnt + 1, GFP_KERNEL);
 	if (!topts)
 		return 0;
 
@@ -8948,7 +8948,7 @@ static int add_tracer(struct trace_array *tr, struct tracer *tracer)
 	if (!trace_ok_for_array(tracer, tr))
 		return 0;
 
-	t = kmalloc(sizeof(*t), GFP_KERNEL);
+	t = kmalloc_obj(*t, GFP_KERNEL);
 	if (!t)
 		return -ENOMEM;
 
@@ -8965,7 +8965,7 @@ static int add_tracer(struct trace_array *tr, struct tracer *tracer)
 		 * If the tracer defines default flags, it means the flags are
 		 * per trace instance.
 		 */
-		flags = kmalloc(sizeof(*flags), GFP_KERNEL);
+		flags = kmalloc_obj(*flags, GFP_KERNEL);
 		if (!flags)
 			return -ENOMEM;
 
@@ -9308,7 +9308,8 @@ static void setup_trace_scratch(struct trace_array *tr,
 	       mod_addr_comp, NULL, NULL);
 
 	if (IS_ENABLED(CONFIG_MODULES)) {
-		module_delta = kzalloc(struct_size(module_delta, delta, nr_entries), GFP_KERNEL);
+		module_delta = kzalloc_flex(*module_delta, delta, nr_entries,
+					    GFP_KERNEL);
 		if (!module_delta) {
 			pr_info("module_delta allocation failed. Not able to decode module address.");
 			goto reset;
@@ -9535,7 +9536,7 @@ trace_array_create_systems(const char *name, const char *systems,
 	int ret;
 
 	ret = -ENOMEM;
-	tr = kzalloc(sizeof(*tr), GFP_KERNEL);
+	tr = kzalloc_obj(*tr, GFP_KERNEL);
 	if (!tr)
 		return ERR_PTR(ret);
 
@@ -10926,8 +10927,8 @@ void __init ftrace_boot_snapshot(void)
 void __init early_trace_init(void)
 {
 	if (tracepoint_printk) {
-		tracepoint_print_iter =
-			kzalloc(sizeof(*tracepoint_print_iter), GFP_KERNEL);
+		tracepoint_print_iter = kzalloc_obj(*tracepoint_print_iter,
+						    GFP_KERNEL);
 		if (MEM_FAIL(!tracepoint_print_iter,
 			     "Failed to allocate trace iterator\n"))
 			tracepoint_printk = 0;
