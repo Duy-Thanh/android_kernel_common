@@ -37134,6 +37134,11 @@ pointer_reference {
   pointee_type_id: 0xd159863f
 }
 pointer_reference {
+  id: 0x3ec77a5e
+  kind: POINTER
+  pointee_type_id: 0xd15d0fe4
+}
+pointer_reference {
   id: 0x3ec7cfc4
   kind: POINTER
   pointee_type_id: 0xd15fd98f
@@ -41862,6 +41867,11 @@ qualified {
   id: 0xd13e9e44
   qualifier: CONST
   qualified_type_id: 0x34bdcf99
+}
+qualified {
+  id: 0xd15d0fe4
+  qualifier: CONST
+  qualified_type_id: 0x35338919
 }
 qualified {
   id: 0xd1740ca6
@@ -381046,6 +381056,14 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x119c2286
+  return_type_id: 0x48b5725f
+  parameter_id: 0x054f691a
+  parameter_id: 0x13a69eb7
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3ec77a5e
+}
+function {
   id: 0x119d5131
   return_type_id: 0x48b5725f
   parameter_id: 0x0258f96e
@@ -496210,6 +496228,15 @@ elf_symbol {
   full_name: "netif_tx_wake_queue"
 }
 elf_symbol {
+  id: 0x894a0130
+  name: "netlink_ack"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5c7cefe3
+  type_id: 0x119c2286
+  full_name: "netlink_ack"
+}
+elf_symbol {
   id: 0xab1506fb
   name: "netlink_broadcast"
   is_defined: true
@@ -537036,6 +537063,7 @@ interface {
   symbol_id: 0xcad08fbc
   symbol_id: 0xbf885171
   symbol_id: 0x8cb67134
+  symbol_id: 0x894a0130
   symbol_id: 0xab1506fb
   symbol_id: 0x712179c0
   symbol_id: 0x8a6ce95c
