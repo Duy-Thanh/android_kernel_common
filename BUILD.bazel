@@ -3000,6 +3000,9 @@ pkg_filegroup(
         ":kselftest_net_tests_reuseaddr_conflict_x86_64",
         ":kselftest_net_tests_reuseport_dualstack_x86_64",
         ":kselftest_net_tests_socket_x86_64",
+        ":kselftest_mm_mremap_dontunmap_x86_64",
+        ":kselftest_mm_mremap_test_x86_64",
+        ":kselftest_mm_uffd_unit_tests_x86_64",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3096,6 +3099,9 @@ pkg_filegroup(
         ":kselftest_net_tests_reuseaddr_conflict_x86",
         ":kselftest_net_tests_reuseport_dualstack_x86",
         ":kselftest_net_tests_socket_x86",
+        ":kselftest_mm_mremap_dontunmap_x86",
+        ":kselftest_mm_mremap_test_x86",
+        ":kselftest_mm_uffd_unit_tests_x86",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3185,6 +3191,9 @@ pkg_filegroup(
         ":kselftest_net_tests_reuseaddr_conflict_arm",
         ":kselftest_net_tests_reuseport_dualstack_arm",
         ":kselftest_net_tests_socket_arm",
+        ":kselftest_mm_mremap_dontunmap_arm",
+        ":kselftest_mm_mremap_test_arm",
+        ":kselftest_mm_uffd_unit_tests_arm",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3276,6 +3285,9 @@ pkg_filegroup(
         ":kselftest_net_tests_reuseaddr_conflict_arm64",
         ":kselftest_net_tests_reuseport_dualstack_arm64",
         ":kselftest_net_tests_socket_arm64",
+        ":kselftest_mm_mremap_dontunmap_arm64",
+        ":kselftest_mm_mremap_test_arm64",
+        ":kselftest_mm_uffd_unit_tests_arm64",
     ],
     visibility = ["//visibility:private"],
 )
