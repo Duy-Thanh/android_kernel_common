@@ -468,6 +468,30 @@
       },
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f661678c_d0f19cbb",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-29T12:00:32Z",
+      "side": 1,
+      "message": "This is about the host, not protected guests.\n\nWhat is a \"trusted protection contract\"? Why does it matter if the data is passed in memory or via a hypercall?",
+      "parentUuid": "d9118019_bb8258cb",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
