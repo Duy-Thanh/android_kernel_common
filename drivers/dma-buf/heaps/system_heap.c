@@ -148,20 +148,21 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 {
 	struct dma_heap_attachment *a = attachment->priv;
 	struct sg_table *table = &a->table;
-	int attr = attachment->dma_map_attrs;
+	unsigned long attrs;
 	int ret;
 
+	attrs = attachment->dma_map_attrs;
 	if (a->uncached)
-		attr |= DMA_ATTR_SKIP_CPU_SYNC;
+		attrs |= DMA_ATTR_SKIP_CPU_SYNC;
 
-	ret = dma_map_sgtable(attachment->dev, table, direction, attr);
+	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
 	if (ret)
 		return ERR_PTR(ret);
 
 	if (a->uncached && needs_swiotlb_bounce(attachment->dev, table)) {
 		pr_err("Cannot map uncached system heap buffer for %s, as it requires SWIOTLB",
 			dev_name(attachment->dev));
-		dma_unmap_sgtable(attachment->dev, table, direction, attr);
+		dma_unmap_sgtable(attachment->dev, table, direction, attrs);
 		return ERR_PTR(-EINVAL);
 	}
 
@@ -174,12 +175,13 @@ static void system_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
 				      enum dma_data_direction direction)
 {
 	struct dma_heap_attachment *a = attachment->priv;
-	int attr = attachment->dma_map_attrs;
+	unsigned long attrs;
 
+	attrs = attachment->dma_map_attrs;
 	if (a->uncached)
-		attr |= DMA_ATTR_SKIP_CPU_SYNC;
+		attrs |= DMA_ATTR_SKIP_CPU_SYNC;
 	a->mapped = false;
-	dma_unmap_sgtable(attachment->dev, table, direction, attr);
+	dma_unmap_sgtable(attachment->dev, table, direction, attrs);
 }
 
 static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
