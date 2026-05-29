@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66a631b_dbf095c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-29T12:43:18Z",
+      "side": 1,
+      "message": "Previously, these were called without the `vm_table_lock` held, but now you\u0027re calling them with it held for write which seems like a bad idea because it could unnecessarily stall other VMs for an extended period of time.\n\nI wonder if you need to rework `hyp_vm-\u003eis_dying` to be tristate (e.g. `ALIVE`, `DYING` and `DEAD`), where `DYING` behaves like `is_dying` today but we only allow reclaim in the `DEAD` state (after DMA has been stopped). WDYT?",
+      "range": {
+        "startLine": 1068,
+        "startChar": 0,
+        "endLine": 1069,
+        "endChar": 31
+      },
+      "revId": "35a1cee5e690b9c10a50bb2b335ba600e7e03893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
