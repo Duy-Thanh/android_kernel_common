@@ -54,6 +54,7 @@ _GKI_AARCH64_MAKE_GOALS = [
     "Image.lz4",
     "Image.gz",
     "Image.lzma",
+    "Image.zst",
     "modules",
 ]
 
