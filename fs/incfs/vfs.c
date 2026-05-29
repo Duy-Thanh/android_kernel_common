@@ -309,7 +309,7 @@ static int inode_set(struct inode *inode, void *opaque)
 	inode_set_atime_to_ts(inode, inode_get_atime(backing_inode));
 	inode->i_ino = backing_inode->i_ino;
 	if (backing_inode->i_ino < INCFS_START_INO_RANGE) {
-		pr_warn("incfs: ino conflict with backing FS %ld\n",
+		pr_warn("incfs: ino conflict with backing FS %lld\n",
 			backing_inode->i_ino);
 	}
 
