@@ -697,6 +697,7 @@ _DB845C_MODULE_OUTS = [
     "drivers/net/wireless/ath/ath11k/ath11k_ahb.ko",
     "drivers/net/wireless/ath/ath11k/ath11k_pci.ko",
     "drivers/net/wireless/ath/ath12k/ath12k.ko",
+    "drivers/net/wireless/ath/ath12k/wifi7/ath12k_wifi7.ko",
     "drivers/nvmem/nvmem_qfprom.ko",
     "drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.ko",
     "drivers/phy/phy-snps-eusb2.ko",
