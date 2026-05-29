@@ -107,10 +107,14 @@ long ashmem_memfd_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	unsigned long inode_nr;
 
 #ifdef CONFIG_COMPAT
-	if (cmd == COMPAT_ASHMEM_SET_SIZE)
+	if (cmd == COMPAT_ASHMEM_SET_SIZE) {
 		cmd = ASHMEM_SET_SIZE;
-	else if (cmd == COMPAT_ASHMEM_SET_PROT_MASK)
+	} else if (cmd == COMPAT_ASHMEM_SET_PROT_MASK) {
 		cmd = ASHMEM_SET_PROT_MASK;
+	} else if (cmd == COMPAT_ASHMEM_GET_FILE_ID) {
+		inode_nr = file_inode(file)->i_ino;
+		return put_user(inode_nr, (compat_uptr_t __user *)compat_ptr(arg)) ? -EFAULT : 0;
+	}
 #endif
 
 	switch (cmd) {
