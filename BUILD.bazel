@@ -4,7 +4,7 @@
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
-load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_shared_library")
 load("@rules_devicetree//devicetree:devicetree_library.bzl", "devicetree_library")
 load("@rules_pkg//pkg:install.bzl", "pkg_install")
 load("@rules_pkg//pkg:mappings.bzl", "pkg_filegroup", "pkg_files", "strip_prefix")
@@ -20,6 +20,7 @@ load("//build/kernel/kleaf:dwarves.bzl", "pahole")
 load("//build/kernel/kleaf:fail.bzl", "fail_rule")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "android_filegroup",
     "checkpatch",
     "ddk_headers",
     "ddk_headers_archive",
@@ -3460,3 +3461,80 @@ pkg_zip(
 exports_files([
     "Makefile",
 ])
+
+# Kernel Development Tools - BEGIN #
+#  The following exemplifies how to define the rules to compile
+#  tools for the target platform (e.g. android arm64) used for
+#  debugging purposes.
+
+cc_library(
+    name = "libapi",
+    srcs = glob(["tools/lib/api/**/*.c"]) + [
+        "tools/lib/str_error_r.c",
+    ],
+    hdrs = glob([
+        "tools/lib/api/**/*.h",
+        "tools/include/**/*.h",
+    ]),
+    copts = [
+        "-ggdb3",
+        "-Wall",
+        "-Wextra",
+        "-std=gnu99",
+        "-U_FORTIFY_SOURCE",
+        "-fPIC",
+    ],
+    defines = [
+        "LARGEFILE64_SOURCE",
+        "FILE_OFFSET_BITS=64",
+    ],
+    includes = [
+        "tools/include",
+        "tools/include/uapi",
+        "tools/lib/api",
+    ],
+    # Do not change; unless due diligence in terms of licensing was done.
+    linkstatic = False,
+    target_compatible_with = ["@platforms//os:android"],
+)
+
+cc_shared_library(
+    name = "api_shared",
+    deps = [":libapi"],
+)
+
+cc_binary(
+    name = "page-types",
+    srcs = [
+        "include/uapi/linux/kernel-page-flags.h",
+        "include/uapi/linux/magic.h",
+        "tools/lib/api/fs/fs.h",
+        "tools/mm/page-types.c",
+    ],
+    copts = [
+        "-Wall",
+        "-Wextra",
+        "-pthread",
+    ],
+    dynamic_deps = [
+        ":api_shared",
+    ],
+    includes = ["tools/lib"],
+    linkopts = [
+        "-pthread",
+    ],
+    # Do not change.
+    linkstatic = False,
+)
+
+# This is a convenient wrapper which saves the user
+#  from specifying --config=android_arm64.
+android_filegroup(
+    name = "page-types_android_arm64",
+    srcs = [
+        ":api_shared",
+        ":page-types",
+    ],
+    cpu = "arm64",
+)
+# Kernel Development Tools - END #
