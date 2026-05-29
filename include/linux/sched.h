@@ -50,6 +50,7 @@
 #include <linux/unwind_deferred_types.h>
 #include <linux/android_vendor.h>
 #include <asm/kmap_size.h>
+#include <linux/time64.h>
 #ifndef COMPILE_OFFSETS
 #include <generated/rq-offsets.h>
 #endif
@@ -87,6 +88,7 @@ struct signal_struct;
 struct task_delay_info;
 struct task_group;
 struct task_struct;
+struct timespec64;
 struct user_event_mm;
 
 #include <linux/sched/ext.h>
@@ -436,6 +438,9 @@ struct sched_info {
 
 	/* When were we last queued to run? */
 	unsigned long long		last_queued;
+
+	/* Timestamp of max time spent waiting on a runqueue: */
+	struct timespec64		max_run_delay_ts;
 
 #endif /* CONFIG_SCHED_INFO */
 };
