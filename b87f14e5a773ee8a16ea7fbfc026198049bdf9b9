@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7efbaa28_b17ba05e",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T14:07:26Z",
+      "side": 1,
+      "message": "Why not keep it simple and just explicitly list all those registers (like `iommu_regs_64` in debugfs.c explicitly lists them)?",
+      "parentUuid": "56aff5b2_8711ee58",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c589086b_bc0570c6",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 25
