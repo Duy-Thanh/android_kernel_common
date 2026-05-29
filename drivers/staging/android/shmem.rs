@@ -56,7 +56,12 @@ impl ShmemFile {
     pub(crate) fn new(name: &CStr, size: usize, flags: vm_flags_t) -> Result<Self> {
         // SAFETY: The name is a nul-terminated string.
         let vmfile = from_err_ptr(unsafe {
-            bindings::shmem_file_setup(name.as_char_ptr(), size as _, flags)
+            // VmaNew needs to be converted to use the new type vma_flags_t. In the mean time,
+            // let's do the manual translation similar to the C helper vma_flags_set_word(). The
+            // entire bitmap is first zeroed out and then the flags are stored in the first word.
+            let mut vma_flags: bindings::vma_flags_t = core::mem::zeroed();
+            vma_flags.__vma_flags[0] = flags as _;
+            bindings::shmem_file_setup(name.as_char_ptr(), size as _, vma_flags)
         })?;
 
         // SAFETY: The call to `shmem_file_setup` was successful, so `vmfile` is a valid pointer to
