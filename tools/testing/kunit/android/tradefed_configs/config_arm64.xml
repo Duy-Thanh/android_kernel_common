@@ -31,7 +31,7 @@
         <!-- <option name='binary' key='drivers/iio/test/iio-test-format' value='/data/kunit/arm64/iio-test-format.ko' /> -->
         <option name='binary' key='drivers/input/tests/input_test' value='/data/kunit/arm64/input_test.ko' />
         <option name='binary' key='drivers/rtc/test_rtc_lib' value='/data/kunit/arm64/test_rtc_lib.ko' />
-        <option name='binary' key='fs/ext4/ext4-inode-test' value='/data/kunit/arm64/ext4-inode-test.ko' />
+        <option name='binary' key='fs/ext4/ext4-test' value='/data/kunit/arm64/ext4-test.ko' />
         <option name='binary' key='fs/fat/fat_test' value='/data/kunit/arm64/fat_test.ko' />
         <option name='binary' key='kernel/time/time_test' value='/data/kunit/arm64/time_test.ko' />
         <option name='binary' key='lib/crypto/tests/blake2b_kunit' value='/data/kunit/arm64/blake2b_kunit.ko' />

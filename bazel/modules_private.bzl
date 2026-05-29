@@ -228,7 +228,7 @@ _KUNIT_COMMON_MODULES_LIST = [
     "drivers/input/tests/input_test.ko",
     "drivers/of/of_kunit_helpers.ko",
     "drivers/rtc/test_rtc_lib.ko",
-    "fs/ext4/ext4-inode-test.ko",
+    "fs/ext4/ext4-test.ko",
     "fs/fat/fat_test.ko",
     "kernel/time/time_test.ko",
     "lib/crypto/tests/blake2b_kunit.ko",
