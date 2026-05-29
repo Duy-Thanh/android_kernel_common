@@ -51,6 +51,24 @@
       "message": "So, should we also validate if the command is supported in ECCAP_REG_3?",
       "revId": "596df9164f7f0148e0f773f9d5241eec0634dd16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a3a42b8_65cb8446",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:16:32Z",
+      "side": 1,
+      "message": "The host validates this during iommu initialization(ecmd_has_pmu_essential()) and since we don\u0027t support IOMMU hotplug, I think we can safely assume that the essential commands are supported after iommu initialization returns success. So thought of avoiding the check here",
+      "parentUuid": "362f124b_78e96245",
+      "revId": "596df9164f7f0148e0f773f9d5241eec0634dd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
