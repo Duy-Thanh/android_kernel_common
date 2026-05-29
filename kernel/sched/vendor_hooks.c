@@ -84,7 +84,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_wake_up_new_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_sched_domains);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dump_dl_server);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dump_throttled_rt_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dup_task_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_jiffies_update);

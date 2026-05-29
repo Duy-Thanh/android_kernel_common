@@ -85,11 +85,6 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_balance_find_src_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
 		TP_ARGS(busiest, dst_rq, out_balance), 1);
 
-DECLARE_HOOK(android_vh_dump_throttled_rt_tasks,
-	TP_PROTO(int cpu, u64 clock, ktime_t rt_period, u64 rt_runtime,
-			s64 rt_period_timer_expires),
-	TP_ARGS(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires));
-
 DECLARE_HOOK(android_vh_jiffies_update,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
