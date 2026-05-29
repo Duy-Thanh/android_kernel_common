@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b57e28_29aa092a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-29T19:28:32Z",
+      "side": 1,
+      "message": "Bypassing lint as the hooks were added at different points in time on `android13-5.15` and therefore, there is no equivalent commit to cherrypick from that branch.",
+      "revId": "76bae970471fe74ba1fb6f5312804d35ed15ab8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
