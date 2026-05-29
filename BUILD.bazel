@@ -3015,6 +3015,11 @@ pkg_filegroup(
         ":kselftest_vdso_vdso_test_abi_x86_64",
         ":kselftest_vdso_vdso_test_getcpu_x86_64",
         ":kselftest_vdso_vdso_test_gettimeofday_x86_64",
+        ":kselftest_x86_check_initial_reg_state_x86_64",
+        ":kselftest_x86_ldt_gdt_x86_64",
+        ":kselftest_x86_ptrace_syscall_x86_64",
+        ":kselftest_x86_single_step_syscall_x86_64",
+        ":kselftest_x86_syscall_nt_x86_64",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3126,6 +3131,11 @@ pkg_filegroup(
         ":kselftest_vdso_vdso_test_abi_x86",
         ":kselftest_vdso_vdso_test_getcpu_x86",
         ":kselftest_vdso_vdso_test_gettimeofday_x86",
+        ":kselftest_x86_check_initial_reg_state_x86",
+        ":kselftest_x86_ldt_gdt_x86",
+        ":kselftest_x86_ptrace_syscall_x86",
+        ":kselftest_x86_single_step_syscall_x86",
+        ":kselftest_x86_syscall_nt_x86",
     ],
     visibility = ["//visibility:private"],
 )
