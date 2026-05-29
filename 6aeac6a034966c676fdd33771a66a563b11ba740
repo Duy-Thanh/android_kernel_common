@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c400def_e07c5f04",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-29T11:18:12Z",
+      "side": 1,
+      "message": "... but static keys don\u0027t freeze. Many can be toggled on and off at runtime, so how do you deal with those?\n\n\nModule loading might be disabled, but the module ELF sections aren\u0027t \"protected\" from what I can tell. Why does it make sense to enforce stage-2 permissions on the kernel image but not modules? And what about eBPF JIT regions? Presumably you\u0027d want to make sure that they are not writable either?",
+      "parentUuid": "a7d367ed_f20617cf",
+      "range": {
+        "startLine": 69,
+        "startChar": 57,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec8a8eb6_98c784d1",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
@@ -388,6 +412,30 @@
       "side": 1,
       "message": "But Will\u0027s question stands, why can\u0027t you do this late_inicall_sync() from a vendor module? It would still call into gunyah where the EL2 magic would occur. This doesn\u0027t require a new hook, it just requires moving all of this to your gunyah GKI module (no increase in attack surface). Then we wouldn\u0027t need any gunyah-specific code in the core kernel.\n\nI think your answer is that it would require adding `_stext, _etext, __start_rodata, __end_rodata, _sdata, _edata, __bss_start` and `__bss_stop` symbols to the KMI and adding this small bit of \"snake oil\" is better than polluting the KMI with symbols that are not needed otherwise.\n\nWill, which is worse in your view?",
       "parentUuid": "c71ac31a_9f32f591",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b09b6e_fb935251",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-29T11:18:12Z",
+      "side": 1,
+      "message": "tbh, I find the whole thing bizarre. We\u0027re going out of our way to limit the stage-2 permissions for a small portion of memory, yet the rest of DRAM appears to be RWX at stage-2? So a determined attacker could presumably copy the kernel image to another piece of memory, then change the stage-1 page-table to map that instead. Game over...\n\nOn the topic of those symbols, it looks to me like `drivers/android/debug_kinfo.c` already has code to copy them into a reserved memory region. Perhaps that\u0027s a better way to handle this? (i.e. just have Gunyah pull them out of there)",
+      "parentUuid": "c23219b7_2faafed4",
       "range": {
         "startLine": 100,
         "startChar": 0,
