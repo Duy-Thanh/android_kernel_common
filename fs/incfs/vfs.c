@@ -1323,7 +1323,6 @@ static int dir_rename(struct inode *old_dir, struct dentry *old_dentry,
 	struct dentry *backing_old_dir_dentry;
 	struct dentry *backing_new_dir_dentry;
 	struct inode *target_inode;
-	struct dentry *trap;
 	struct renamedata rd = {};
 	int error = 0;
 
@@ -1341,38 +1340,26 @@ static int dir_rename(struct inode *old_dir, struct dentry *old_dentry,
 	}
 
 	backing_new_dentry = get_incfs_dentry(new_dentry)->backing_path.dentry;
-	dget(backing_old_dentry);
-	dget(backing_new_dentry);
-
-	backing_old_dir_dentry = dget_parent(backing_old_dentry);
-	backing_new_dir_dentry = dget_parent(backing_new_dentry);
+	backing_old_dir_dentry = backing_old_dentry->d_parent;
+	backing_new_dir_dentry = backing_new_dentry->d_parent;
 	target_inode = d_inode(new_dentry);
 
 	if (backing_old_dir_dentry == mi->mi_index_dir ||
 	    backing_old_dir_dentry == mi->mi_incomplete_dir) {
 		/* Direct moves from .index or .incomplete are not allowed. */
 		error = -EBUSY;
-		goto out;
-	}
-
-	trap = lock_rename(backing_old_dir_dentry, backing_new_dir_dentry);
-
-	if (trap == backing_old_dentry) {
-		error = -EINVAL;
-		goto unlock_out;
-	}
-	if (trap == backing_new_dentry) {
-		error = -ENOTEMPTY;
-		goto unlock_out;
+		goto exit;
 	}
 
 	rd.old_parent	= backing_old_dir_dentry;
-	rd.old_dentry	= backing_old_dentry;
 	rd.new_parent	= backing_new_dir_dentry;
-	rd.new_dentry	= backing_new_dentry;
 	rd.flags	= flags;
 	rd.mnt_idmap	= &nop_mnt_idmap;
 	rd.delegated_inode = NULL;
+
+	error = start_renaming_two_dentries(&rd, backing_old_dentry, backing_new_dentry);
+	if (error)
+		goto exit;
 
 	error = vfs_rename(&rd);
 	if (error)
@@ -1385,13 +1372,7 @@ static int dir_rename(struct inode *old_dir, struct dentry *old_dentry,
 		fsstack_copy_attr_all(old_dir, d_inode(backing_old_dir_dentry));
 
 unlock_out:
-	unlock_rename(backing_old_dir_dentry, backing_new_dir_dentry);
-
-out:
-	dput(backing_new_dir_dentry);
-	dput(backing_old_dir_dentry);
-	dput(backing_new_dentry);
-	dput(backing_old_dentry);
+	end_renaming(&rd);
 
 exit:
 	mutex_unlock(&mi->mi_dir_struct_mutex);
