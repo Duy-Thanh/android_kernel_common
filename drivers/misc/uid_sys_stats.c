@@ -28,6 +28,7 @@
 #include <linux/slab.h>
 #include <linux/uaccess.h>
 #include <linux/spinlock_types.h>
+#include <trace/events/sched.h>
 
 #define UID_HASH_BITS	10
 #define UID_HASH_NUMS	(1 << UID_HASH_BITS)
@@ -493,16 +494,14 @@ next:
 }
 static DECLARE_WORK(update_stats_work, update_stats_workfn);
 
-static int process_notifier(struct notifier_block *self,
-			unsigned long cmd, void *v)
+static void uid_process_exit(void *data, struct task_struct *task, bool group)
 {
-	struct task_struct *task = v;
 	struct uid_entry *uid_entry;
 	u64 utime, stime;
 	uid_t uid;
 
 	if (!task)
-		return NOTIFY_OK;
+		return;
 
 	uid = from_kuid_munged(current_user_ns(), task_uid(task));
 	if (!trylock_uid(uid)) {
@@ -520,7 +519,7 @@ static int process_notifier(struct notifier_block *self,
 			llist_add(&usw->node, &work_usw);
 			schedule_work(&update_stats_work);
 		}
-		return NOTIFY_OK;
+		return;
 	}
 
 	uid_entry = find_or_register_uid(uid);
@@ -537,12 +536,7 @@ static int process_notifier(struct notifier_block *self,
 
 exit:
 	unlock_uid(uid);
-	return NOTIFY_OK;
 }
-
-static struct notifier_block process_notifier_block = {
-	.notifier_call	= process_notifier,
-};
 
 static int __init proc_uid_sys_stats_init(void)
 {
@@ -580,7 +574,7 @@ static int __init proc_uid_sys_stats_init(void)
 	proc_create_data("set", 0222, proc_parent,
 		&uid_procstat_fops, NULL);
 
-	profile_event_register(PROFILE_TASK_EXIT, &process_notifier_block);
+	register_trace_sched_process_exit(uid_process_exit, NULL);
 
 	return 0;
 
