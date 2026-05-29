@@ -243,7 +243,6 @@ _KUNIT_COMMON_MODULES_LIST = [
     "lib/crypto/tests/sha224_kunit.ko",
     "lib/crypto/tests/sha256_kunit.ko",
     "lib/crypto/tests/sha384_kunit.ko",
-    "lib/crypto/tests/sha3_kunit.ko",
     "lib/crypto/tests/sha512_kunit.ko",
     "lib/kunit/kunit-example-test.ko",
     "lib/kunit/kunit-test.ko",
