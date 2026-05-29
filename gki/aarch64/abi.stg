@@ -459492,7 +459492,7 @@ elf_symbol {
   name: "_snd_ctl_add_follower"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf6b1a369
+  crc: 0x264a918f
   type_id: 0x97dc7ad4
   full_name: "_snd_ctl_add_follower"
 }
@@ -513251,7 +513251,7 @@ elf_symbol {
   name: "snd_component_add"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdc8b3501
+  crc: 0xc9f8b252
   type_id: 0x91868ca9
   full_name: "snd_component_add"
 }
@@ -513260,7 +513260,7 @@ elf_symbol {
   name: "snd_compr_free_pages"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x705a8b2e
+  crc: 0xda60f4c3
   type_id: 0x9b3b4856
   full_name: "snd_compr_free_pages"
 }
@@ -513305,7 +513305,7 @@ elf_symbol {
   name: "snd_ctl_add_vmaster_hook"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8ac14ca4
+  crc: 0x901d422d
   type_id: 0x975863f7
   full_name: "snd_ctl_add_vmaster_hook"
 }
@@ -513314,7 +513314,7 @@ elf_symbol {
   name: "snd_ctl_apply_vmaster_followers"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x35207d8f
+  crc: 0x8081208a
   type_id: 0x97d88348
   full_name: "snd_ctl_apply_vmaster_followers"
 }
@@ -513359,7 +513359,7 @@ elf_symbol {
   name: "snd_ctl_make_virtual_master"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x73c83022
+  crc: 0x51b4856e
   type_id: 0x2d033b7e
   full_name: "snd_ctl_make_virtual_master"
 }
@@ -513413,7 +513413,7 @@ elf_symbol {
   name: "snd_ctl_rename_id"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x648b1964
+  crc: 0x2153ef8e
   type_id: 0x9153f48d
   full_name: "snd_ctl_rename_id"
 }
@@ -513422,7 +513422,7 @@ elf_symbol {
   name: "snd_ctl_sync_vmaster"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6dc1bd62
+  crc: 0x5c110c09
   type_id: 0x1bce6800
   full_name: "snd_ctl_sync_vmaster"
 }
@@ -513431,7 +513431,7 @@ elf_symbol {
   name: "snd_device_disconnect"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xad49dbd3
+  crc: 0xce6cb5a1
   type_id: 0x1c048955
   full_name: "snd_device_disconnect"
 }
