@@ -10,6 +10,7 @@
  *	Andrew F. Davis <afd@ti.com>
  */
 
+#include <linux/cc_platform.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-direct.h>
 #include <linux/dma-mapping.h>
@@ -17,8 +18,11 @@
 #include <linux/err.h>
 #include <linux/highmem.h>
 #include <linux/iommu.h>
+#include <linux/mem_encrypt.h>
 #include <linux/mm.h>
+#include <linux/set_memory.h>
 #include <linux/module.h>
+#include <linux/pgtable.h>
 #include <linux/printk.h>
 #include <linux/scatterlist.h>
 #include <linux/swiotlb.h>
@@ -26,6 +30,7 @@
 
 struct system_heap_priv {
 	bool uncached;
+	bool cc_shared;
 };
 
 struct system_heap_buffer {
@@ -37,6 +42,7 @@ struct system_heap_buffer {
 	int vmap_cnt;
 	void *vaddr;
 	bool uncached;
+	bool cc_shared;
 };
 
 struct dma_heap_attachment {
@@ -45,6 +51,7 @@ struct dma_heap_attachment {
 	struct list_head list;
 	bool mapped;
 	bool uncached;
+	bool cc_shared;
 };
 
 #define LOW_ORDER_GFP (GFP_HIGHUSER | __GFP_ZERO)
@@ -60,6 +67,34 @@ static gfp_t order_flags[] = {HIGH_ORDER_GFP, HIGH_ORDER_GFP, LOW_ORDER_GFP};
  */
 static const unsigned int orders[] = {8, 4, 0};
 #define NUM_ORDERS ARRAY_SIZE(orders)
+
+static int system_heap_set_page_decrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_decrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to decrypt page at %p\n",
+				    page_address(page));
+
+	return ret;
+}
+
+static int system_heap_set_page_encrypted(struct page *page)
+{
+	unsigned long addr = (unsigned long)page_address(page);
+	unsigned int nr_pages = 1 << compound_order(page);
+	int ret;
+
+	ret = set_memory_encrypted(addr, nr_pages);
+	if (ret)
+		pr_warn_ratelimited("dma-buf system heap: failed to re-encrypt page at %p, leaking memory\n",
+				    page_address(page));
+
+	return ret;
+}
 
 static int dup_sg_table(struct sg_table *from, struct sg_table *to)
 {
@@ -100,6 +135,8 @@ static int system_heap_attach(struct dma_buf *dmabuf,
 	INIT_LIST_HEAD(&a->list);
 	a->mapped = false;
 	a->uncached = buffer->uncached;
+	a->cc_shared = buffer->cc_shared;
+
 	attachment->priv = a;
 
 	mutex_lock(&buffer->lock);
@@ -153,7 +190,8 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
 	unsigned long attrs;
 	int ret;
 
-	attrs = attachment->dma_map_attrs;
+	attrs = a->cc_shared ? DMA_ATTR_CC_SHARED : 0;
+	attrs |= attachment->dma_map_attrs;
 	if (a->uncached)
 		attrs |= DMA_ATTR_SKIP_CPU_SYNC;
 
@@ -239,10 +277,15 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 	unsigned long addr = vma->vm_start;
 	unsigned long pgoff = vma->vm_pgoff;
 	struct scatterlist *sg;
+	pgprot_t prot;
 	int i, ret;
 
 	if (buffer->uncached)
 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
+
+	prot = vma->vm_page_prot;
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
 
 	for_each_sgtable_sg(table, sg, i) {
 		unsigned long n = sg->length >> PAGE_SHIFT;
@@ -260,8 +303,7 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 		if (addr + size > vma->vm_end)
 			size = vma->vm_end - addr;
 
-		ret = remap_pfn_range(vma, addr, page_to_pfn(page),
-				size, vma->vm_page_prot);
+		ret = remap_pfn_range(vma, addr, page_to_pfn(page), size, prot);
 		if (ret)
 			return ret;
 
@@ -293,6 +335,8 @@ static void *system_heap_do_vmap(struct system_heap_buffer *buffer)
 	prot = PAGE_KERNEL;
 	if (buffer->uncached)
 		prot = pgprot_writecombine(prot);
+	if (buffer->cc_shared)
+		prot = pgprot_decrypted(prot);
 	vaddr = vmap(pages, npages, VM_MAP, prot);
 	vfree(pages);
 
@@ -354,6 +398,14 @@ static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *page = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(page))
+			continue;
+
 		__free_pages(page, compound_order(page));
 	}
 	sg_free_table(table);
@@ -407,6 +459,7 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 	unsigned int max_order = orders[0];
 	struct system_heap_priv *priv = dma_heap_get_drvdata(heap);
 	bool uncached = priv->uncached;
+	bool cc_shared = priv->cc_shared;
 	struct dma_buf *dmabuf;
 	struct sg_table *table;
 	struct scatterlist *sg;
@@ -423,6 +476,7 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 	buffer->heap = heap;
 	buffer->len = len;
 	buffer->uncached = uncached;
+	buffer->cc_shared = cc_shared;
 
 	INIT_LIST_HEAD(&pages);
 	i = 0;
@@ -457,6 +511,14 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 		list_del(&page->lru);
 	}
 
+	if (cc_shared) {
+		for_each_sgtable_sg(table, sg, i) {
+			ret = system_heap_set_page_decrypted(sg_page(sg));
+			if (ret)
+				goto free_pages;
+		}
+	}
+
 	/* create the dmabuf */
 	exp_info.exp_name = dma_heap_get_name(heap);
 	exp_info.ops = &system_heap_buf_ops;
@@ -486,6 +548,13 @@ free_pages:
 	for_each_sgtable_sg(table, sg, i) {
 		struct page *p = sg_page(sg);
 
+		/*
+		 * Intentionally leak pages that cannot be re-encrypted
+		 * to prevent shared memory from being reused.
+		 */
+		if (buffer->cc_shared &&
+		    system_heap_set_page_encrypted(p))
+			continue;
 		__free_pages(p, compound_order(p));
 	}
 	sg_free_table(table);
@@ -517,10 +586,15 @@ static struct dma_heap_ops system_uncached_heap_ops = {
 
 static struct system_heap_priv system_heap_priv = {
 	.uncached = false,
+	.cc_shared = false,
 };
 
 static struct system_heap_priv system_uncached_heap_priv = {
 	.uncached = true,
+};
+
+static struct system_heap_priv system_heap_cc_shared_priv = {
+	.cc_shared = true,
 };
 
 static int __init system_heap_create(void)
@@ -545,6 +619,16 @@ static int __init system_heap_create(void)
 	exp_info.ops = &system_heap_ops;
 	exp_info.priv = &system_heap_priv;
 
+	sys_heap = dma_heap_add(&exp_info);
+	if (IS_ERR(sys_heap))
+		return PTR_ERR(sys_heap);
+
+	if (IS_ENABLED(CONFIG_HIGHMEM) ||
+	    !cc_platform_has(CC_ATTR_MEM_ENCRYPT))
+		return 0;
+
+	exp_info.name = "system_cc_shared";
+	exp_info.priv = &system_heap_cc_shared_priv;
 	sys_heap = dma_heap_add(&exp_info);
 	if (IS_ERR(sys_heap))
 		return PTR_ERR(sys_heap);
