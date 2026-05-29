@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83d2a0b_cdbd8b0d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T11:55:29Z",
+      "side": 1,
+      "message": "These ranges include all the integer numbers in them, not just multiples of 8 (i.e. not just actual register offsets)?",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "debc5159_5842888b",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T11:55:29Z",
+      "side": 1,
+      "message": "Do we really have any concerns about allowing the host to _read_ these ECCAP registers if cap_ecmds\u003d0?\n\nIf we do, why don\u0027t we have the same concerns about DMAR_ECRSP_REG above?",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
