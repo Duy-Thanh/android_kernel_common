@@ -802,6 +802,7 @@ static int wrap_file_load(struct wrap_ctx *ctx,
 			  struct wrapfd_load __user *user_wrapfd_load)
 {
 	struct wrapfd_load wrapfd_load;
+	struct wrap_content *content;
 	struct file *file;
 	loff_t file_offs;
 	loff_t buf_offs;
@@ -865,8 +866,14 @@ static int wrap_file_load(struct wrap_ctx *ctx,
 	if (ret)
 		goto put_file;
 
-	ret = ctx->content->ops->load(ctx->content, file,
-				      file_offs, buf_offs, len);
+	content = ctx->content;
+	if (!content) {
+		ret = -ENOENT;
+		goto put_ctx;
+	}
+
+	ret = content->ops->load(content, file, file_offs, buf_offs, len);
+put_ctx:
 	spin_lock(&ctx->lock);
 	context_unuse(ctx);
 	spin_unlock(&ctx->lock);
