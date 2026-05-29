@@ -1506,6 +1506,15 @@ u32 ufshcd_us_to_ahit(unsigned int timer);
  * in <ufs/ufshcd.h> in the Android kernel.
  */
 
+#define HAVE_UFSHCD_RPM_GET_SYNC
+
+static inline u8 ufshcd_wb_get_query_index(struct ufs_hba *hba)
+{
+	if (hba->dev_info.wb_buffer_type == WB_BUF_MODE_LU_DEDICATED)
+		return hba->dev_info.wb_dedicated_lu;
+	return 0;
+}
+
 static inline int ufshcd_rpm_get_sync(struct ufs_hba *hba)
 {
 	return pm_runtime_get_sync(&hba->ufs_device_wlun->sdev_gendev);
