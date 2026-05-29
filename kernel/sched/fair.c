@@ -5461,7 +5461,8 @@ dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int flags)
 	return true;
 }
 
-static void set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
+static void
+set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
 {
 	clear_buddies(cfs_rq, se);
 
