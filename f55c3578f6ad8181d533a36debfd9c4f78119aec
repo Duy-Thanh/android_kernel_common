@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3f22e0_b449fd9a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T17:21:16Z",
+      "side": 1,
+      "message": "Same question as in aosp/4071481: why not just 4 and 8, like in iommu_direct_mmio_read()/iommu_direct_mmio_write()?",
+      "revId": "f55c3578f6ad8181d533a36debfd9c4f78119aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a8a50a_d7367818",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T17:21:16Z",
+      "side": 1,
+      "message": "Maybe `if (val \u0026 ~((u64)DMA_FRCD_F \u003c\u003c 32))`?",
+      "fixSuggestions": [
+        {
+          "fixId": "aca22025_f4e42cee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 149,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val \u0026 ~((u64)DMA_FRCD_F \u003c\u003c 32)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f55c3578f6ad8181d533a36debfd9c4f78119aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

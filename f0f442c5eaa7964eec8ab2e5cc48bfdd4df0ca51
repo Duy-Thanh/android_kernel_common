@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6091e8_b7d94d13",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T17:21:16Z",
+      "side": 1,
+      "message": "Just a question: am I correct that the host doesn\u0027t really use such 64-bit writes, it only clears the F bit via 32-bit write? (So the above \"_must_ allow\" might be a bit misleading?)",
+      "revId": "f0f442c5eaa7964eec8ab2e5cc48bfdd4df0ca51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea28a50d_7a1911f4",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T17:21:16Z",
+      "side": 1,
+      "message": "Just a note: as I understand, this is purely hypothetical (i.e. we haven\u0027t really encountered such a buggy IOMMU hardware with FRO\u003d0), so this check is purely optional?\n\nBTW, FRO\u003d1 or FRO\u003d2 wouldn\u0027t be a valid configuration either?",
+      "revId": "f0f442c5eaa7964eec8ab2e5cc48bfdd4df0ca51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
