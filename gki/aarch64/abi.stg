@@ -9479,6 +9479,11 @@ pointer_reference {
   pointee_type_id: 0x17bab5d0
 }
 pointer_reference {
+  id: 0x0f7ee7cd
+  kind: POINTER
+  pointee_type_id: 0x17bb79ab
+}
+pointer_reference {
   id: 0x0f7fad31
   kind: POINTER
   pointee_type_id: 0x17be5258
@@ -33347,6 +33352,11 @@ pointer_reference {
   id: 0x37d5e1c1
   kind: POINTER
   pointee_type_id: 0xf5176198
+}
+pointer_reference {
+  id: 0x37d79bd6
+  kind: POINTER
+  pointee_type_id: 0xf51e89c7
 }
 pointer_reference {
   id: 0x37d7ca8b
@@ -197308,6 +197318,12 @@ member {
   offset: 2112
 }
 member {
+  id: 0xd77a390f
+  name: "probe"
+  type_id: 0x2c38cb62
+  offset: 1408
+}
+member {
   id: 0xd77a3f94
   name: "probe"
   type_id: 0x2c3e50b1
@@ -208292,6 +208308,12 @@ member {
   name: "remove"
   type_id: 0x0fa0559d
   offset: 512
+}
+member {
+  id: 0xb4aca90d
+  name: "remove"
+  type_id: 0x0f7ee7cd
+  offset: 1472
 }
 member {
   id: 0xb4acaf96
@@ -327636,6 +327658,17 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xf51e89c7
+  kind: STRUCT
+  name: "nvmem_layout_driver"
+  definition {
+    bytesize: 192
+    member_id: 0xd4ad4c68
+    member_id: 0xd77a390f
+    member_id: 0xb4aca90d
+  }
+}
+struct_union {
   id: 0x480b5dec
   kind: STRUCT
   name: "obj_cgroup"
@@ -386711,6 +386744,11 @@ function {
   parameter_id: 0x19238db3
 }
 function {
+  id: 0x17bb79ab
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1c8ca0e2
+}
+function {
   id: 0x17be5258
   return_type_id: 0x48b5725f
   parameter_id: 0x1d44326e
@@ -391088,6 +391126,11 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x3564a5a2
   parameter_id: 0x2b79f509
+}
+function {
+  id: 0x1d6db766
+  return_type_id: 0x48b5725f
+  parameter_id: 0x37d79bd6
 }
 function {
   id: 0x1d6f4d07
@@ -399858,6 +399901,11 @@ function {
   parameter_id: 0x31e13722
 }
 function {
+  id: 0x73e40016
+  return_type_id: 0x347303b4
+  parameter_id: 0x145f7b00
+}
+function {
   id: 0x74154359
   return_type_id: 0x150d4db0
   parameter_id: 0x00878020
@@ -402826,6 +402874,12 @@ function {
   id: 0x9058feb4
   return_type_id: 0x6720d32f
   parameter_id: 0x3760766d
+}
+function {
+  id: 0x90599aab
+  return_type_id: 0x6720d32f
+  parameter_id: 0x37d79bd6
+  parameter_id: 0x0b27dc43
 }
 function {
   id: 0x905a52d9
@@ -413460,6 +413514,12 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x33756485
   parameter_id: 0x0d7d7298
+}
+function {
+  id: 0x987406e4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x145f7b00
+  parameter_id: 0x38cec2ca
 }
 function {
   id: 0x9875fddd
@@ -440951,6 +441011,15 @@ elf_symbol {
   crc: 0x2182515b
   type_id: 0x74d29cf1
   full_name: "__num_online_cpus"
+}
+elf_symbol {
+  id: 0x1fae328b
+  name: "__nvmem_layout_driver_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf92c8238
+  type_id: 0x90599aab
+  full_name: "__nvmem_layout_driver_register"
 }
 elf_symbol {
   id: 0xdc28d30d
@@ -497434,6 +497503,15 @@ elf_symbol {
   full_name: "nvdimm_pmem_region_create"
 }
 elf_symbol {
+  id: 0x18050c34
+  name: "nvmem_add_one_cell"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9252be21
+  type_id: 0x987406e4
+  full_name: "nvmem_add_one_cell"
+}
+elf_symbol {
   id: 0xd19691bd
   name: "nvmem_cell_get"
   is_defined: true
@@ -497567,6 +497645,33 @@ elf_symbol {
   crc: 0xf3135c37
   type_id: 0x99bc47d8
   full_name: "nvmem_device_write"
+}
+elf_symbol {
+  id: 0x75314dd0
+  name: "nvmem_layout_driver_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe8d484e9
+  type_id: 0x1d6db766
+  full_name: "nvmem_layout_driver_unregister"
+}
+elf_symbol {
+  id: 0x02782503
+  name: "nvmem_layout_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1bc6fcaa
+  type_id: 0x9aa3cb17
+  full_name: "nvmem_layout_register"
+}
+elf_symbol {
+  id: 0x73c49761
+  name: "nvmem_layout_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x90bc3441
+  type_id: 0x17bb79ab
+  full_name: "nvmem_layout_unregister"
 }
 elf_symbol {
   id: 0x65d6ca81
@@ -498701,6 +498806,15 @@ elf_symbol {
   crc: 0x7ea2c140
   type_id: 0x2c22370c
   full_name: "of_nvmem_device_get"
+}
+elf_symbol {
+  id: 0xb4120167
+  name: "of_nvmem_layout_get_container"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x68b0e675
+  type_id: 0x73e40016
+  full_name: "of_nvmem_layout_get_container"
 }
 elf_symbol {
   id: 0x7e41af4d
@@ -531414,6 +531528,7 @@ interface {
   symbol_id: 0x3a48fbc1
   symbol_id: 0x690bf184
   symbol_id: 0x420b07ce
+  symbol_id: 0x1fae328b
   symbol_id: 0xdc28d30d
   symbol_id: 0x38c74e33
   symbol_id: 0xcbeef20f
@@ -537686,6 +537801,7 @@ interface {
   symbol_id: 0x77722cfe
   symbol_id: 0x58765106
   symbol_id: 0x14f0cfc8
+  symbol_id: 0x18050c34
   symbol_id: 0xd19691bd
   symbol_id: 0x8689cf0f
   symbol_id: 0x8da2cfcb
@@ -537701,6 +537817,9 @@ interface {
   symbol_id: 0x23113228
   symbol_id: 0xc1013b0e
   symbol_id: 0x28ba8e50
+  symbol_id: 0x75314dd0
+  symbol_id: 0x02782503
+  symbol_id: 0x73c49761
   symbol_id: 0x65d6ca81
   symbol_id: 0x27081fa8
   symbol_id: 0x4fa74969
@@ -537827,6 +537946,7 @@ interface {
   symbol_id: 0xc4acef3c
   symbol_id: 0x01465bb9
   symbol_id: 0x24945e17
+  symbol_id: 0xb4120167
   symbol_id: 0x7e41af4d
   symbol_id: 0xd7a6c809
   symbol_id: 0xe4080d9a
