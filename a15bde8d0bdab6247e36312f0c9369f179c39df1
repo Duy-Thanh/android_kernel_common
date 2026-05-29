@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe8c961_9c4a8a68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-05-29T21:09:27Z",
+      "side": 1,
+      "message": "Please fix the linter warning,\n\n`WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: caozhiyong \u003ccao.zhiyong@vivo.com\u003e\u0027 !\u003d \u0027Signed-off-by: zhiyong Cao \u003ccao.zhiyong@vivo.com\u003e\u0027`",
+      "revId": "a15bde8d0bdab6247e36312f0c9369f179c39df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3dd7a5a9_7ee58fa5",
