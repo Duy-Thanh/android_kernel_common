@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aafc16cb_00987bfd",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-29T12:44:16Z",
+      "side": 1,
+      "message": "I should clarify the meaning of freeze here.\nThe current patch freezes the layout metadata, not every future runtime text patching mechanism.\n\nAFAIK Static Keys/jump labels do not create a new executable regions, so they dont need a separate layout notification like others. So even after freeze patching can be done or denied based on EL2 policy, but its mediated.\n\nThis patch doesn\u0027t implement that mediation here.\nonly scope is initial vm layout notification.\n\nBPF/JIT is different because it can create new executable memory. If BPF and JIT are enabled they must be mediated.",
+      "parentUuid": "0c400def_e07c5f04",
+      "range": {
+        "startLine": 69,
+        "startChar": 57,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec8a8eb6_98c784d1",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
