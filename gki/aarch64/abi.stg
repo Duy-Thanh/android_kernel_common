@@ -39889,6 +39889,11 @@ typedef {
   referred_type_id: 0x2d883419
 }
 typedef {
+  id: 0x03476274
+  name: "rust_binder_thread"
+  referred_type_id: 0x18bd6530
+}
+typedef {
   id: 0x79348be0
   name: "rust_binder_transaction"
   referred_type_id: 0x18bd6530
@@ -419490,6 +419495,13 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9bb3c6b3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x03476274
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9bb49c5c
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -445535,6 +445547,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_rtmutex_wait_start"
 }
 elf_symbol {
+  id: 0x42e7b689
+  name: "__traceiter_android_vh_rust_binder_looper_entry"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbd183552
+  type_id: 0x9bb3c6b3
+  full_name: "__traceiter_android_vh_rust_binder_looper_entry"
+}
+elf_symbol {
   id: 0x452224ed
   name: "__traceiter_android_vh_rust_binder_restore_priority"
   is_defined: true
@@ -453570,6 +453591,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_rtmutex_wait_start"
+}
+elf_symbol {
+  id: 0x7181eb6f
+  name: "__tracepoint_android_vh_rust_binder_looper_entry"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_rust_binder_looper_entry"
 }
 elf_symbol {
   id: 0x0d79140b
@@ -528506,6 +528536,7 @@ interface {
   symbol_id: 0x91384eff
   symbol_id: 0x3ef508a2
   symbol_id: 0xfb1b8d64
+  symbol_id: 0x42e7b689
   symbol_id: 0x452224ed
   symbol_id: 0x79848d02
   symbol_id: 0x5858f827
@@ -529399,6 +529430,7 @@ interface {
   symbol_id: 0x3fc5ffc9
   symbol_id: 0xa3915d70
   symbol_id: 0xf01f02ea
+  symbol_id: 0x7181eb6f
   symbol_id: 0x0d79140b
   symbol_id: 0x5acb67f0
   symbol_id: 0xe471b8d5
