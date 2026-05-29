@@ -14,6 +14,7 @@
 #include <linux/interrupt.h>
 #include <linux/kernel_stat.h>
 #include <linux/irqdomain.h>
+#include <linux/preempt.h>
 #include <linux/random.h>
 #include <linux/wakeup_reason.h>
 
@@ -908,7 +909,10 @@ void handle_percpu_irq(struct irq_desc *desc)
  *
  * action->percpu_dev_id is a pointer to percpu variables which
  * contain the real device id for the cpu on which this handler is
- * called
+ * called.
+ *
+ * May be used for NMI interrupt lines, and so may be called in IRQ or NMI
+ * context.
  */
 void handle_percpu_devid_irq(struct irq_desc *desc)
 {
@@ -945,7 +949,8 @@ void handle_percpu_devid_irq(struct irq_desc *desc)
 			    enabled ? " and unmasked" : "", irq, cpu);
 	}
 
-	add_interrupt_randomness(irq);
+	if (!in_nmi())
+		add_interrupt_randomness(irq);
 
 	if (chip->irq_eoi)
 		chip->irq_eoi(&desc->irq_data);
