@@ -407,7 +407,6 @@ again:
 	pte_unmap_unlock(pte, ptl);
 	goto again;
 }
-EXPORT_SYMBOL_GPL(pte_offset_map_lock);
 
 #ifdef CONFIG_ASYNC_KERNEL_PGTABLE_FREE
 static void kernel_pgtable_work_func(struct work_struct *work);
