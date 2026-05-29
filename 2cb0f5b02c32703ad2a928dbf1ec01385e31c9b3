@@ -16,6 +16,24 @@
       "message": "So, this patch LGTM, but I see you\u0027ve just added this paragraph which seems misleading (per my last comment)?",
       "revId": "2cb0f5b02c32703ad2a928dbf1ec01385e31c9b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e70c6fd_91fb8481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T17:06:41Z",
+      "side": 1,
+      "message": "Youre right, malicious host may still be able to send unsupported commands. Updated the commit message to reflect your findings in the other comment.",
+      "parentUuid": "0cb10f30_e1dd8881",
+      "revId": "2cb0f5b02c32703ad2a928dbf1ec01385e31c9b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
