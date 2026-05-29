@@ -261516,44 +261516,48 @@ enumeration {
       value: 19
     }
     enumerator {
-      name: "LOCKDOWN_INTEGRITY_MAX"
+      name: "LOCKDOWN_XEN_USER_ACTIONS"
       value: 20
     }
     enumerator {
-      name: "LOCKDOWN_KCORE"
+      name: "LOCKDOWN_INTEGRITY_MAX"
       value: 21
     }
     enumerator {
-      name: "LOCKDOWN_KPROBES"
+      name: "LOCKDOWN_KCORE"
       value: 22
     }
     enumerator {
-      name: "LOCKDOWN_BPF_READ_KERNEL"
+      name: "LOCKDOWN_KPROBES"
       value: 23
     }
     enumerator {
-      name: "LOCKDOWN_DBG_READ_KERNEL"
+      name: "LOCKDOWN_BPF_READ_KERNEL"
       value: 24
     }
     enumerator {
-      name: "LOCKDOWN_PERF"
+      name: "LOCKDOWN_DBG_READ_KERNEL"
       value: 25
     }
     enumerator {
-      name: "LOCKDOWN_TRACEFS"
+      name: "LOCKDOWN_PERF"
       value: 26
     }
     enumerator {
-      name: "LOCKDOWN_XMON_RW"
+      name: "LOCKDOWN_TRACEFS"
       value: 27
     }
     enumerator {
-      name: "LOCKDOWN_XFRM_SECRET"
+      name: "LOCKDOWN_XMON_RW"
       value: 28
     }
     enumerator {
-      name: "LOCKDOWN_CONFIDENTIALITY_MAX"
+      name: "LOCKDOWN_XFRM_SECRET"
       value: 29
+    }
+    enumerator {
+      name: "LOCKDOWN_CONFIDENTIALITY_MAX"
+      value: 30
     }
   }
 }
@@ -325962,7 +325966,7 @@ elf_symbol {
   name: "security_locked_down"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf5e2a31c
+  crc: 0x0190c772
   type_id: 0x8c5285cc
   full_name: "security_locked_down"
 }
