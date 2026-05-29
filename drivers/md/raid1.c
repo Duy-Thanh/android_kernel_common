@@ -3069,25 +3069,23 @@ static struct r1conf *setup_conf(struct mddev *mddev)
 	size_t r1bio_size;
 	int err = -ENOMEM;
 
-	conf = kzalloc_obj(struct r1conf, GFP_KERNEL);
+	conf = kzalloc_obj(struct r1conf);
 	if (!conf)
 		goto abort;
 
-	conf->nr_pending = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR,
-					GFP_KERNEL);
+	conf->nr_pending = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR);
 	if (!conf->nr_pending)
 		goto abort;
 
-	conf->nr_waiting = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR,
-					GFP_KERNEL);
+	conf->nr_waiting = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR);
 	if (!conf->nr_waiting)
 		goto abort;
 
-	conf->nr_queued = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR, GFP_KERNEL);
+	conf->nr_queued = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR);
 	if (!conf->nr_queued)
 		goto abort;
 
-	conf->barrier = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR, GFP_KERNEL);
+	conf->barrier = kzalloc_objs(atomic_t, BARRIER_BUCKETS_NR);
 	if (!conf->barrier)
 		goto abort;
 

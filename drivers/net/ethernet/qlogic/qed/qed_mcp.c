@@ -241,7 +241,7 @@ int qed_mcp_cmd_init(struct qed_hwfn *p_hwfn, struct qed_ptt *p_ptt)
 	u32 size;
 
 	/* Allocate mcp_info structure */
-	p_hwfn->mcp_info = kzalloc_obj(*p_hwfn->mcp_info, GFP_KERNEL);
+	p_hwfn->mcp_info = kzalloc_obj(*p_hwfn->mcp_info);
 	if (!p_hwfn->mcp_info)
 		goto err;
 	p_info = p_hwfn->mcp_info;
@@ -3366,7 +3366,7 @@ int qed_mcp_nvm_info_populate(struct qed_hwfn *p_hwfn)
 	}
 
 	nvm_info.image_att = kmalloc_objs(struct bist_nvm_image_att,
-					  nvm_info.num_images, GFP_KERNEL);
+					  nvm_info.num_images);
 	if (!nvm_info.image_att) {
 		rc = -ENOMEM;
 		goto err0;

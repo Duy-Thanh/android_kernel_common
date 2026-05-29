@@ -987,7 +987,7 @@ static int mlx4_create_eq(struct mlx4_dev *dev, int nent,
 	 */
 	npages = PAGE_ALIGN(eq->nent * dev->caps.eqe_size) / PAGE_SIZE;
 
-	eq->page_list = kmalloc_objs(*eq->page_list, npages, GFP_KERNEL);
+	eq->page_list = kmalloc_objs(*eq->page_list, npages);
 	if (!eq->page_list)
 		goto err_out;
 
@@ -1158,8 +1158,7 @@ int mlx4_alloc_eq_table(struct mlx4_dev *dev)
 	struct mlx4_priv *priv = mlx4_priv(dev);
 
 	priv->eq_table.eq = kzalloc_objs(*priv->eq_table.eq,
-					 dev->caps.num_eqs - dev->caps.reserved_eqs,
-					 GFP_KERNEL);
+					 dev->caps.num_eqs - dev->caps.reserved_eqs);
 	if (!priv->eq_table.eq)
 		return -ENOMEM;
 
@@ -1178,7 +1177,7 @@ int mlx4_init_eq_table(struct mlx4_dev *dev)
 	int i;
 
 	priv->eq_table.uar_map = kzalloc_objs(*priv->eq_table.uar_map,
-					      mlx4_num_eq_uar(dev), GFP_KERNEL);
+					      mlx4_num_eq_uar(dev));
 	if (!priv->eq_table.uar_map) {
 		err = -ENOMEM;
 		goto err_out_free;

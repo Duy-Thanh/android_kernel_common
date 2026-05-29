@@ -732,7 +732,7 @@ static struct config_group *config_desc_make(
 	if (ret)
 		return ERR_PTR(ret);
 
-	cfg = kzalloc_obj(*cfg, GFP_KERNEL);
+	cfg = kzalloc_obj(*cfg);
 	if (!cfg)
 		return ERR_PTR(-ENOMEM);
 	cfg->c.label = kstrdup(buf, GFP_KERNEL);
@@ -875,7 +875,7 @@ static struct config_item *gadget_language_string_make(struct config_group *grou
 
 	language = to_gadget_language(&group->cg_item);
 
-	string = kzalloc_obj(*string, GFP_KERNEL);
+	string = kzalloc_obj(*string);
 	if (!string)
 		return ERR_PTR(-ENOMEM);
 
@@ -927,7 +927,7 @@ static struct config_group *gadget_language_make(struct config_group *group,
 	int langs = 0;
 	int ret;
 
-	new = kzalloc_obj(*new, GFP_KERNEL);
+	new = kzalloc_obj(*new);
 	if (!new)
 		return ERR_PTR(-ENOMEM);
 
@@ -1634,8 +1634,7 @@ configfs_attach_gadget_strings(struct gadget_info *gi)
 	if (!nlangs)
 		return NULL;
 
-	gadget_strings = kzalloc_objs(struct usb_gadget_strings *, nlangs + 1,
-				      GFP_KERNEL)/* including NULL terminator */;
+	gadget_strings = kzalloc_objs(struct usb_gadget_strings *, nlangs + 1)/* including NULL terminator */;
 	if (!gadget_strings)
 		return ERR_PTR(-ENOMEM);
 
@@ -1651,7 +1650,7 @@ configfs_attach_gadget_strings(struct gadget_info *gi)
 		}
 
 		stringtab = kzalloc_objs(struct usb_string,
-					 language->nstrings + 1, GFP_KERNEL);
+					 language->nstrings + 1);
 		if (!stringtab) {
 			us = ERR_PTR(-ENOMEM);
 			goto cleanup;
@@ -1997,7 +1996,7 @@ static struct config_group *gadgets_make(
 {
 	struct gadget_info *gi;
 
-	gi = kzalloc_obj(*gi, GFP_KERNEL);
+	gi = kzalloc_obj(*gi);
 	if (!gi)
 		return ERR_PTR(-ENOMEM);
 

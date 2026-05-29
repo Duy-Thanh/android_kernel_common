@@ -4207,7 +4207,7 @@ static int be_vf_setup_init(struct be_adapter *adapter)
 	struct be_vf_cfg *vf_cfg;
 	int vf;
 
-	adapter->vf_cfg = kzalloc_objs(*vf_cfg, adapter->num_vfs, GFP_KERNEL);
+	adapter->vf_cfg = kzalloc_objs(*vf_cfg, adapter->num_vfs);
 	if (!adapter->vf_cfg)
 		return -ENOMEM;
 
@@ -4685,13 +4685,11 @@ static int be_if_create(struct be_adapter *adapter)
 	if (!adapter->pmac_id)
 		return -ENOMEM;
 
-	adapter->mc_list = kzalloc_objs(*adapter->mc_list, be_max_mc(adapter),
-					GFP_KERNEL);
+	adapter->mc_list = kzalloc_objs(*adapter->mc_list, be_max_mc(adapter));
 	if (!adapter->mc_list)
 		return -ENOMEM;
 
-	adapter->uc_list = kzalloc_objs(*adapter->uc_list, be_max_uc(adapter),
-					GFP_KERNEL);
+	adapter->uc_list = kzalloc_objs(*adapter->uc_list, be_max_uc(adapter));
 	if (!adapter->uc_list)
 		return -ENOMEM;
 

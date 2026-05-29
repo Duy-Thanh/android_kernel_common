@@ -147,7 +147,7 @@ xpc_create_gru_mq_uv(unsigned int mq_size, int cpu, char *irq_name,
 	struct xpc_gru_mq_uv *mq;
 	struct uv_IO_APIC_route_entry *mmr_value;
 
-	mq = kmalloc_obj(struct xpc_gru_mq_uv, GFP_KERNEL);
+	mq = kmalloc_obj(struct xpc_gru_mq_uv);
 	if (mq == NULL) {
 		dev_err(xpc_part, "xpc_create_gru_mq_uv() failed to kmalloc() "
 			"a xpc_gru_mq_uv structure\n");
@@ -155,7 +155,7 @@ xpc_create_gru_mq_uv(unsigned int mq_size, int cpu, char *irq_name,
 		goto out_0;
 	}
 
-	mq->gru_mq_desc = kzalloc_obj(struct gru_message_queue_desc, GFP_KERNEL);
+	mq->gru_mq_desc = kzalloc_obj(struct gru_message_queue_desc);
 	if (mq->gru_mq_desc == NULL) {
 		dev_err(xpc_part, "xpc_create_gru_mq_uv() failed to kmalloc() "
 			"a gru_message_queue_desc structure\n");
@@ -1073,8 +1073,7 @@ xpc_setup_msg_structures_uv(struct xpc_channel *ch)
 
 	DBUG_ON(ch->flags & XPC_C_SETUP);
 
-	ch_uv->cached_notify_gru_mq_desc = kmalloc_obj(struct gru_message_queue_desc,
-						       GFP_KERNEL);
+	ch_uv->cached_notify_gru_mq_desc = kmalloc_obj(struct gru_message_queue_desc);
 	if (ch_uv->cached_notify_gru_mq_desc == NULL)
 		return xpNoMemory;
 

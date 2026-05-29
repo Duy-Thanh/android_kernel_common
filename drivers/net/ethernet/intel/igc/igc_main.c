@@ -4633,8 +4633,7 @@ static void igc_set_interrupt_capability(struct igc_adapter *adapter,
 	/* add 1 vector for link status interrupts */
 	numvecs++;
 
-	adapter->msix_entries = kzalloc_objs(struct msix_entry, numvecs,
-				             GFP_KERNEL);
+	adapter->msix_entries = kzalloc_objs(struct msix_entry, numvecs);
 
 	if (!adapter->msix_entries)
 		return;
@@ -4863,7 +4862,7 @@ static int igc_alloc_q_vector(struct igc_adapter *adapter,
 	/* allocate q_vector and rings */
 	q_vector = adapter->q_vector[v_idx];
 	if (!q_vector)
-		q_vector = kzalloc_flex(*q_vector, ring, ring_count, GFP_KERNEL);
+		q_vector = kzalloc_flex(*q_vector, ring, ring_count);
 	else
 		memset(q_vector, 0, struct_size(q_vector, ring, ring_count));
 	if (!q_vector)

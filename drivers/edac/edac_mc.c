@@ -216,14 +216,14 @@ static int edac_mc_alloc_csrows(struct mem_ctl_info *mci)
 	/*
 	 * Allocate and fill the csrow/channels structs
 	 */
-	mci->csrows = kzalloc_objs(*mci->csrows, tot_csrows, GFP_KERNEL);
+	mci->csrows = kzalloc_objs(*mci->csrows, tot_csrows);
 	if (!mci->csrows)
 		return -ENOMEM;
 
 	for (row = 0; row < tot_csrows; row++) {
 		struct csrow_info *csr;
 
-		csr = kzalloc_obj(**mci->csrows, GFP_KERNEL);
+		csr = kzalloc_obj(**mci->csrows);
 		if (!csr)
 			return -ENOMEM;
 
@@ -231,15 +231,14 @@ static int edac_mc_alloc_csrows(struct mem_ctl_info *mci)
 		csr->csrow_idx = row;
 		csr->mci = mci;
 		csr->nr_channels = tot_channels;
-		csr->channels = kzalloc_objs(*csr->channels, tot_channels,
-					     GFP_KERNEL);
+		csr->channels = kzalloc_objs(*csr->channels, tot_channels);
 		if (!csr->channels)
 			return -ENOMEM;
 
 		for (chn = 0; chn < tot_channels; chn++) {
 			struct rank_info *chan;
 
-			chan = kzalloc_obj(**csr->channels, GFP_KERNEL);
+			chan = kzalloc_obj(**csr->channels);
 			if (!chan)
 				return -ENOMEM;
 
@@ -262,7 +261,7 @@ static int edac_mc_alloc_dimms(struct mem_ctl_info *mci)
 	/*
 	 * Allocate and fill the dimm structs
 	 */
-	mci->dimms  = kzalloc_objs(*mci->dimms, mci->tot_dimms, GFP_KERNEL);
+	mci->dimms  = kzalloc_objs(*mci->dimms, mci->tot_dimms);
 	if (!mci->dimms)
 		return -ENOMEM;
 
@@ -276,7 +275,7 @@ static int edac_mc_alloc_dimms(struct mem_ctl_info *mci)
 
 		chan = mci->csrows[row]->channels[chn];
 
-		dimm = kzalloc_obj(**mci->dimms, GFP_KERNEL);
+		dimm = kzalloc_obj(**mci->dimms);
 		if (!dimm)
 			return -ENOMEM;
 		mci->dimms[idx] = dimm;
@@ -362,11 +361,11 @@ struct mem_ctl_info *edac_mc_alloc(unsigned int mc_num,
 			per_rank = true;
 	}
 
-	mci = kzalloc_obj(struct mem_ctl_info, GFP_KERNEL);
+	mci = kzalloc_obj(struct mem_ctl_info);
 	if (!mci)
 		return NULL;
 
-	mci->layers = kzalloc_objs(struct edac_mc_layer, n_layers, GFP_KERNEL);
+	mci->layers = kzalloc_objs(struct edac_mc_layer, n_layers);
 	if (!mci->layers)
 		goto error;
 

@@ -11907,13 +11907,12 @@ static int rt2800_probe_hw_mode(struct rt2x00_dev *rt2x00dev)
 	/*
 	 * Create channel information and survey arrays
 	 */
-	info = kzalloc_objs(*info, spec->num_channels, GFP_KERNEL);
+	info = kzalloc_objs(*info, spec->num_channels);
 	if (!info)
 		return -ENOMEM;
 
 	rt2x00dev->chan_survey =
-		kzalloc_objs(struct rt2x00_chan_survey, spec->num_channels,
-			     GFP_KERNEL);
+		kzalloc_objs(struct rt2x00_chan_survey, spec->num_channels);
 	if (!rt2x00dev->chan_survey) {
 		kfree(info);
 		return -ENOMEM;

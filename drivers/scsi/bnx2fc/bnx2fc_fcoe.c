@@ -1356,7 +1356,7 @@ static struct bnx2fc_hba *bnx2fc_hba_create(struct cnic_dev *cnic)
 	struct fcoe_capabilities *fcoe_cap;
 	int rc;
 
-	hba = kzalloc_obj(*hba, GFP_KERNEL);
+	hba = kzalloc_obj(*hba);
 	if (!hba) {
 		printk(KERN_ERR PFX "Unable to allocate hba structure\n");
 		return NULL;
@@ -1381,8 +1381,7 @@ static struct bnx2fc_hba *bnx2fc_hba_create(struct cnic_dev *cnic)
 	hba->next_conn_id = 0;
 
 	hba->tgt_ofld_list =
-		kzalloc_objs(struct bnx2fc_rport *, BNX2FC_NUM_MAX_SESS,
-			     GFP_KERNEL);
+		kzalloc_objs(struct bnx2fc_rport *, BNX2FC_NUM_MAX_SESS);
 	if (!hba->tgt_ofld_list) {
 		printk(KERN_ERR PFX "Unable to allocate tgt offload list\n");
 		goto tgtofld_err;
@@ -1492,7 +1491,7 @@ static struct fc_lport *bnx2fc_if_create(struct bnx2fc_interface *interface,
 	struct bnx2fc_hba	*hba = interface->hba;
 	int			rc = 0;
 
-	blport = kzalloc_obj(struct bnx2fc_lport, GFP_KERNEL);
+	blport = kzalloc_obj(struct bnx2fc_lport);
 	if (!blport) {
 		BNX2FC_HBA_DBG(ctlr->lp, "Unable to alloc blport\n");
 		return NULL;
@@ -2200,7 +2199,7 @@ static int __bnx2fc_enable(struct fcoe_ctlr *ctlr)
 	if (!hba->cnic->get_fc_npiv_tbl)
 		goto done;
 
-	npiv_tbl = kzalloc_obj(struct cnic_fc_npiv_tbl, GFP_KERNEL);
+	npiv_tbl = kzalloc_obj(struct cnic_fc_npiv_tbl);
 	if (!npiv_tbl)
 		goto done;
 

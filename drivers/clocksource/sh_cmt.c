@@ -1084,8 +1084,7 @@ static int sh_cmt_setup(struct sh_cmt_device *cmt, struct platform_device *pdev)
 
 	/* Allocate and setup the channels. */
 	cmt->num_channels = hweight8(cmt->hw_channels);
-	cmt->channels = kzalloc_objs(*cmt->channels, cmt->num_channels,
-				     GFP_KERNEL);
+	cmt->channels = kzalloc_objs(*cmt->channels, cmt->num_channels);
 	if (cmt->channels == NULL) {
 		ret = -ENOMEM;
 		goto err_unmap;
@@ -1139,7 +1138,7 @@ static int sh_cmt_probe(struct platform_device *pdev)
 		goto out;
 	}
 
-	cmt = kzalloc_obj(*cmt, GFP_KERNEL);
+	cmt = kzalloc_obj(*cmt);
 	if (cmt == NULL)
 		return -ENOMEM;
 

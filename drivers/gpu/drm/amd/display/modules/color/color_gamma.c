@@ -933,7 +933,7 @@ static bool build_regamma(struct pwl_float_data_ex *rgb_regamma,
 	struct pwl_float_data_ex *rgb = rgb_regamma;
 	const struct hw_x_point *coord_x = coordinate_x;
 
-	coeff = kvzalloc_obj(*coeff, GFP_KERNEL);
+	coeff = kvzalloc_obj(*coeff);
 	if (!coeff)
 		goto release;
 
@@ -1715,14 +1715,12 @@ bool mod_color_calculate_degamma_params(struct dc_color_caps *dc_caps,
 
 	if (map_user_ramp && ramp && ramp->type == GAMMA_RGB_256) {
 		rgb_user = kvzalloc_objs(*rgb_user,
-					 ramp->num_entries + _EXTRA_POINTS,
-					 GFP_KERNEL);
+					 ramp->num_entries + _EXTRA_POINTS);
 		if (!rgb_user)
 			goto rgb_user_alloc_fail;
 
 		axis_x = kvzalloc_objs(*axis_x,
-				       ramp->num_entries + _EXTRA_POINTS,
-				       GFP_KERNEL);
+				       ramp->num_entries + _EXTRA_POINTS);
 		if (!axis_x)
 			goto axis_x_alloc_fail;
 
@@ -1738,11 +1736,11 @@ bool mod_color_calculate_degamma_params(struct dc_color_caps *dc_caps,
 		scale_gamma(rgb_user, ramp, dividers);
 	}
 
-	curve = kvzalloc_objs(*curve, MAX_HW_POINTS + _EXTRA_POINTS, GFP_KERNEL);
+	curve = kvzalloc_objs(*curve, MAX_HW_POINTS + _EXTRA_POINTS);
 	if (!curve)
 		goto curve_alloc_fail;
 
-	coeff = kvzalloc_objs(*coeff, MAX_HW_POINTS + _EXTRA_POINTS, GFP_KERNEL);
+	coeff = kvzalloc_objs(*coeff, MAX_HW_POINTS + _EXTRA_POINTS);
 	if (!coeff)
 		goto coeff_alloc_fail;
 
@@ -1940,13 +1938,11 @@ bool mod_color_calculate_regamma_params(struct dc_transfer_func *output_tf,
 	if (ramp && ramp->type != GAMMA_CS_TFM_1D &&
 	    (map_user_ramp || ramp->type != GAMMA_RGB_256)) {
 		rgb_user = kvzalloc_objs(*rgb_user,
-					 ramp->num_entries + _EXTRA_POINTS,
-					 GFP_KERNEL);
+					 ramp->num_entries + _EXTRA_POINTS);
 		if (!rgb_user)
 			goto rgb_user_alloc_fail;
 
-		axis_x = kvzalloc_objs(*axis_x, ramp->num_entries + 3,
-				       GFP_KERNEL);
+		axis_x = kvzalloc_objs(*axis_x, ramp->num_entries + 3);
 		if (!axis_x)
 			goto axis_x_alloc_fail;
 
@@ -1965,12 +1961,11 @@ bool mod_color_calculate_regamma_params(struct dc_transfer_func *output_tf,
 			scale_gamma_dx(rgb_user, ramp, dividers);
 	}
 
-	rgb_regamma = kvzalloc_objs(*rgb_regamma, MAX_HW_POINTS + _EXTRA_POINTS,
-				    GFP_KERNEL);
+	rgb_regamma = kvzalloc_objs(*rgb_regamma, MAX_HW_POINTS + _EXTRA_POINTS);
 	if (!rgb_regamma)
 		goto rgb_regamma_alloc_fail;
 
-	coeff = kvzalloc_objs(*coeff, MAX_HW_POINTS + _EXTRA_POINTS, GFP_KERNEL);
+	coeff = kvzalloc_objs(*coeff, MAX_HW_POINTS + _EXTRA_POINTS);
 	if (!coeff)
 		goto coeff_alloc_fail;
 

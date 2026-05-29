@@ -295,7 +295,7 @@ retry:
 		goto out_free_esi_buf;
 	}
 
-	papr_groups = kzalloc_objs(*papr_groups, num_attrs, GFP_KERNEL);
+	papr_groups = kzalloc_objs(*papr_groups, num_attrs);
 	if (!papr_groups)
 		goto out_free_esi_buf;
 
@@ -314,8 +314,7 @@ retry:
 	/* Allocate the groups before registering */
 	for (idx = 0; idx < num_attrs; idx++) {
 		papr_groups[idx].pg.attrs = kzalloc_objs(*papr_groups[idx].pg.attrs,
-							 KOBJ_MAX_ATTRS + 1,
-							 GFP_KERNEL);
+							 KOBJ_MAX_ATTRS + 1);
 		if (!papr_groups[idx].pg.attrs)
 			goto out_pgattrs;
 

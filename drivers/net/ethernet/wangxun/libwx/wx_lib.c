@@ -1905,14 +1905,14 @@ static int wx_acquire_msix_vectors(struct wx *wx)
 	nvecs = min_t(int, nvecs, num_online_cpus());
 	nvecs = min_t(int, nvecs, wx->mac.max_msix_vectors);
 
-	wx->msix_q_entries = kzalloc_objs(struct msix_entry, nvecs, GFP_KERNEL);
+	wx->msix_q_entries = kzalloc_objs(struct msix_entry, nvecs);
 	if (!wx->msix_q_entries)
 		return -ENOMEM;
 
 	/* One for non-queue interrupts */
 	nvecs += 1;
 
-	wx->msix_entry = kzalloc_objs(struct msix_entry, 1, GFP_KERNEL);
+	wx->msix_entry = kzalloc_objs(struct msix_entry, 1);
 	if (!wx->msix_entry) {
 		kfree(wx->msix_q_entries);
 		wx->msix_q_entries = NULL;
@@ -2095,7 +2095,7 @@ static int wx_alloc_q_vector(struct wx *wx,
 	/* note this will allocate space for the ring structure as well! */
 	ring_count = txr_count + rxr_count;
 
-	q_vector = kzalloc_flex(*q_vector, ring, ring_count, GFP_KERNEL);
+	q_vector = kzalloc_flex(*q_vector, ring, ring_count);
 	if (!q_vector)
 		return -ENOMEM;
 

@@ -209,7 +209,7 @@ static struct gelic_eurus_cmd *gelic_eurus_sync_cmd(struct gelic_wl_info *wl,
 	struct gelic_eurus_cmd *cmd;
 
 	/* allocate cmd */
-	cmd = kzalloc_obj(*cmd, GFP_KERNEL);
+	cmd = kzalloc_obj(*cmd);
 	if (!cmd)
 		return NULL;
 
@@ -2306,7 +2306,7 @@ static struct net_device *gelic_wl_alloc(struct gelic_card *card)
 
 	/* allocate scan list */
 	wl->networks = kzalloc_objs(struct gelic_wl_scan_info,
-				    GELIC_WL_BSS_MAX_ENT, GFP_KERNEL);
+				    GELIC_WL_BSS_MAX_ENT);
 
 	if (!wl->networks)
 		goto fail_bss;

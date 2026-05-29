@@ -1062,7 +1062,7 @@ static int nand_choose_interface_config(struct nand_chip *chip)
 	if (!nand_controller_can_setup_interface(chip))
 		return 0;
 
-	iface = kzalloc_obj(*iface, GFP_KERNEL);
+	iface = kzalloc_obj(*iface);
 	if (!iface)
 		return -ENOMEM;
 
@@ -5430,7 +5430,7 @@ static int of_get_nand_secure_regions(struct nand_chip *chip)
 
 	chip->nr_secure_regions = nr_elem / 2;
 	chip->secure_regions = kzalloc_objs(*chip->secure_regions,
-					    chip->nr_secure_regions, GFP_KERNEL);
+					    chip->nr_secure_regions);
 	if (!chip->secure_regions)
 		return -ENOMEM;
 

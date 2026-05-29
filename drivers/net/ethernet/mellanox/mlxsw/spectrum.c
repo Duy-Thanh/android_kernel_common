@@ -972,7 +972,7 @@ mlxsw_sp_port_vlan_create(struct mlxsw_sp_port *mlxsw_sp_port, u16 vid)
 	if (err)
 		return ERR_PTR(err);
 
-	mlxsw_sp_port_vlan = kzalloc_obj(*mlxsw_sp_port_vlan, GFP_KERNEL);
+	mlxsw_sp_port_vlan = kzalloc_obj(*mlxsw_sp_port_vlan);
 	if (!mlxsw_sp_port_vlan) {
 		err = -ENOMEM;
 		goto err_port_vlan_alloc;
@@ -1776,7 +1776,7 @@ static int mlxsw_sp_cpu_port_create(struct mlxsw_sp *mlxsw_sp)
 	struct mlxsw_sp_port *mlxsw_sp_port;
 	int err;
 
-	mlxsw_sp_port = kzalloc_obj(*mlxsw_sp_port, GFP_KERNEL);
+	mlxsw_sp_port = kzalloc_obj(*mlxsw_sp_port);
 	if (!mlxsw_sp_port)
 		return -ENOMEM;
 
@@ -2020,7 +2020,7 @@ static int mlxsw_sp_port_module_info_init(struct mlxsw_sp *mlxsw_sp)
 	int err;
 
 	mlxsw_sp->port_mapping = kzalloc_objs(struct mlxsw_sp_port_mapping,
-					      max_ports, GFP_KERNEL);
+					      max_ports);
 	if (!mlxsw_sp->port_mapping)
 		return -ENOMEM;
 
@@ -2489,8 +2489,7 @@ static int mlxsw_sp_traps_init(struct mlxsw_sp *mlxsw_sp)
 	if (!MLXSW_CORE_RES_VALID(mlxsw_sp->core, MAX_CPU_POLICERS))
 		return -EIO;
 	max_policers = MLXSW_CORE_RES_GET(mlxsw_sp->core, MAX_CPU_POLICERS);
-	trap = kzalloc_flex(*trap, policers_usage, BITS_TO_LONGS(max_policers),
-			    GFP_KERNEL);
+	trap = kzalloc_flex(*trap, policers_usage, BITS_TO_LONGS(max_policers));
 	if (!trap)
 		return -ENOMEM;
 	trap->max_policers = max_policers;
@@ -2623,8 +2622,7 @@ static int mlxsw_sp_lag_init(struct mlxsw_sp *mlxsw_sp)
 	if (err)
 		return err;
 
-	mlxsw_sp->lags = kzalloc_objs(struct mlxsw_sp_lag, mlxsw_sp->max_lag,
-				      GFP_KERNEL);
+	mlxsw_sp->lags = kzalloc_objs(struct mlxsw_sp_lag, mlxsw_sp->max_lag);
 	if (!mlxsw_sp->lags) {
 		err = -ENOMEM;
 		goto err_kcalloc;
@@ -2747,7 +2745,7 @@ mlxsw_sp_sample_trigger_node_init(struct mlxsw_sp *mlxsw_sp,
 	struct mlxsw_sp_sample_trigger_node *trigger_node;
 	int err;
 
-	trigger_node = kzalloc_obj(*trigger_node, GFP_KERNEL);
+	trigger_node = kzalloc_obj(*trigger_node);
 	if (!trigger_node)
 		return -ENOMEM;
 
@@ -2893,7 +2891,7 @@ mlxsw_sp_ipv6_addr_init(struct mlxsw_sp *mlxsw_sp, const struct in6_addr *addr6,
 	if (err)
 		goto err_rips_write;
 
-	node = kzalloc_obj(*node, GFP_KERNEL);
+	node = kzalloc_obj(*node);
 	if (!node) {
 		err = -ENOMEM;
 		goto err_node_alloc;

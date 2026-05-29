@@ -221,7 +221,7 @@ static size_t irt_num_entry;
 
 static struct irt_entry *iosapic_alloc_irt(int num_entries)
 {
-	return kzalloc_objs(struct irt_entry, num_entries, GFP_KERNEL);
+	return kzalloc_objs(struct irt_entry, num_entries);
 }
 
 /**
@@ -915,7 +915,7 @@ void *iosapic_register(unsigned long hpa, void __iomem *vaddr)
 		return NULL;
 	}
 
-	isi = kzalloc_obj(struct iosapic_info, GFP_KERNEL);
+	isi = kzalloc_obj(struct iosapic_info);
 	if (!isi) {
 		BUG();
 		return NULL;
@@ -928,7 +928,7 @@ void *iosapic_register(unsigned long hpa, void __iomem *vaddr)
 	DBG_IRT("iosapic_register: num vectors = %d\n", isi->isi_num_vectors);
 
 	vip = isi->isi_vector = kzalloc_objs(struct vector_info,
-					     isi->isi_num_vectors, GFP_KERNEL);
+					     isi->isi_num_vectors);
 	if (vip == NULL) {
 		kfree(isi);
 		return NULL;

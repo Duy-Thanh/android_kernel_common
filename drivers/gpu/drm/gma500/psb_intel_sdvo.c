@@ -1977,8 +1977,7 @@ psb_intel_sdvo_dvi_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct gma_connector *intel_connector;
 	struct psb_intel_sdvo_connector *psb_intel_sdvo_connector;
 
-	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector,
-					       GFP_KERNEL);
+	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector);
 	if (!psb_intel_sdvo_connector)
 		return false;
 
@@ -2018,8 +2017,7 @@ psb_intel_sdvo_tv_init(struct psb_intel_sdvo *psb_intel_sdvo, int type)
 	struct gma_connector *intel_connector;
 	struct psb_intel_sdvo_connector *psb_intel_sdvo_connector;
 
-	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector,
-					       GFP_KERNEL);
+	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector);
 	if (!psb_intel_sdvo_connector)
 		return false;
 
@@ -2058,8 +2056,7 @@ psb_intel_sdvo_analog_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct gma_connector *intel_connector;
 	struct psb_intel_sdvo_connector *psb_intel_sdvo_connector;
 
-	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector,
-					       GFP_KERNEL);
+	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector);
 	if (!psb_intel_sdvo_connector)
 		return false;
 
@@ -2093,8 +2090,7 @@ psb_intel_sdvo_lvds_init(struct psb_intel_sdvo *psb_intel_sdvo, int device)
 	struct gma_connector *intel_connector;
 	struct psb_intel_sdvo_connector *psb_intel_sdvo_connector;
 
-	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector,
-					       GFP_KERNEL);
+	psb_intel_sdvo_connector = kzalloc_obj(struct psb_intel_sdvo_connector);
 	if (!psb_intel_sdvo_connector)
 		return false;
 
@@ -2446,7 +2442,7 @@ bool psb_intel_sdvo_init(struct drm_device *dev, int sdvo_reg)
 	struct psb_intel_sdvo *psb_intel_sdvo;
 	int i;
 
-	psb_intel_sdvo = kzalloc_obj(struct psb_intel_sdvo, GFP_KERNEL);
+	psb_intel_sdvo = kzalloc_obj(struct psb_intel_sdvo);
 	if (!psb_intel_sdvo)
 		return false;
 

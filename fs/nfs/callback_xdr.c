@@ -272,7 +272,7 @@ __be32 decode_devicenotify_args(struct svc_rqst *rqstp,
 	if (n == 0)
 		goto out;
 
-	args->devs = kmalloc_objs(*args->devs, n, GFP_KERNEL);
+	args->devs = kmalloc_objs(*args->devs, n);
 	if (!args->devs) {
 		status = htonl(NFS4ERR_DELAY);
 		goto out;
@@ -379,8 +379,7 @@ static __be32 decode_rc_list(struct xdr_stream *xdr,
 		if (unlikely(p == NULL))
 			goto out;
 		rc_list->rcl_refcalls = kmalloc_objs(*rc_list->rcl_refcalls,
-						     rc_list->rcl_nrefcalls,
-						     GFP_KERNEL);
+						     rc_list->rcl_nrefcalls);
 		if (unlikely(rc_list->rcl_refcalls == NULL))
 			goto out;
 		for (i = 0; i < rc_list->rcl_nrefcalls; i++) {
@@ -420,7 +419,7 @@ static __be32 decode_cb_sequence_args(struct svc_rqst *rqstp,
 	args->csa_rclists = NULL;
 	if (args->csa_nrclists) {
 		args->csa_rclists = kmalloc_objs(*args->csa_rclists,
-						 args->csa_nrclists, GFP_KERNEL);
+						 args->csa_nrclists);
 		if (unlikely(args->csa_rclists == NULL))
 			return htonl(NFS4ERR_RESOURCE);
 

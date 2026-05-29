@@ -38,7 +38,7 @@ static struct mlx5_qos_domain *esw_qos_domain_alloc(void)
 {
 	struct mlx5_qos_domain *qos_domain;
 
-	qos_domain = kzalloc_obj(*qos_domain, GFP_KERNEL);
+	qos_domain = kzalloc_obj(*qos_domain);
 	if (!qos_domain)
 		return NULL;
 
@@ -518,7 +518,7 @@ __esw_qos_alloc_node(struct mlx5_eswitch *esw, u32 tsar_ix, enum sched_node_type
 {
 	struct mlx5_esw_sched_node *node;
 
-	node = kzalloc_obj(*node, GFP_KERNEL);
+	node = kzalloc_obj(*node);
 	if (!node)
 		return NULL;
 
@@ -917,7 +917,7 @@ esw_qos_create_vport_tc_sched_elements(struct mlx5_vport *vport,
 	u32 rate_limit_elem_ix;
 
 	vport->qos.sched_nodes = kzalloc_objs(struct mlx5_esw_sched_node *,
-					      num_tcs, GFP_KERNEL);
+					      num_tcs);
 	if (!vport->qos.sched_nodes) {
 		NL_SET_ERR_MSG_MOD(extack,
 				   "Allocating the vport TC scheduling elements failed.");

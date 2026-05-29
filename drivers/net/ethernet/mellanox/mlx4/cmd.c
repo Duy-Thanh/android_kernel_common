@@ -1674,7 +1674,7 @@ static int mlx4_master_process_vhcr(struct mlx4_dev *dev, int slave,
 	int err = 0;
 
 	/* Create sw representation of Virtual HCR */
-	vhcr = kzalloc_obj(struct mlx4_vhcr, GFP_KERNEL);
+	vhcr = kzalloc_obj(struct mlx4_vhcr);
 	if (!vhcr)
 		return -ENOMEM;
 
@@ -1873,7 +1873,7 @@ static int mlx4_master_immediate_activate_vlan_qos(struct mlx4_priv *priv,
 		 vp_admin->default_vlan, vp_admin->default_qos,
 		 vp_admin->link_state);
 
-	work = kzalloc_obj(*work, GFP_KERNEL);
+	work = kzalloc_obj(*work);
 	if (!work)
 		return -ENOMEM;
 
@@ -2368,20 +2368,18 @@ int mlx4_multi_func_init(struct mlx4_dev *dev)
 		struct mlx4_vf_admin_state *vf_admin;
 
 		priv->mfunc.master.slave_state =
-			kzalloc_objs(struct mlx4_slave_state, dev->num_slaves,
-				     GFP_KERNEL);
+			kzalloc_objs(struct mlx4_slave_state, dev->num_slaves);
 		if (!priv->mfunc.master.slave_state)
 			goto err_comm;
 
 		priv->mfunc.master.vf_admin =
 			kzalloc_objs(struct mlx4_vf_admin_state,
-				     dev->num_slaves, GFP_KERNEL);
+				     dev->num_slaves);
 		if (!priv->mfunc.master.vf_admin)
 			goto err_comm_admin;
 
 		priv->mfunc.master.vf_oper =
-			kzalloc_objs(struct mlx4_vf_oper_state, dev->num_slaves,
-				     GFP_KERNEL);
+			kzalloc_objs(struct mlx4_vf_oper_state, dev->num_slaves);
 		if (!priv->mfunc.master.vf_oper)
 			goto err_comm_oper;
 
@@ -2405,8 +2403,7 @@ int mlx4_multi_func_init(struct mlx4_dev *dev)
 				struct mlx4_vport_state *oper_vport;
 
 				s_state->vlan_filter[port] =
-					kzalloc_obj(struct mlx4_vlan_fltr,
-						    GFP_KERNEL);
+					kzalloc_obj(struct mlx4_vlan_fltr);
 				if (!s_state->vlan_filter[port]) {
 					if (--port)
 						kfree(s_state->vlan_filter[port]);
@@ -2623,7 +2620,7 @@ int mlx4_cmd_use_events(struct mlx4_dev *dev)
 	int err = 0;
 
 	priv->cmd.context = kmalloc_objs(struct mlx4_cmd_context,
-					 priv->cmd.max_cmds, GFP_KERNEL);
+					 priv->cmd.max_cmds);
 	if (!priv->cmd.context)
 		return -ENOMEM;
 
@@ -2689,7 +2686,7 @@ struct mlx4_cmd_mailbox *mlx4_alloc_cmd_mailbox(struct mlx4_dev *dev)
 {
 	struct mlx4_cmd_mailbox *mailbox;
 
-	mailbox = kmalloc_obj(*mailbox, GFP_KERNEL);
+	mailbox = kmalloc_obj(*mailbox);
 	if (!mailbox)
 		return ERR_PTR(-ENOMEM);
 

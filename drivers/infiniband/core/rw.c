@@ -162,7 +162,7 @@ static int rdma_rw_init_mr_wrs(struct rdma_rw_ctx *ctx, struct ib_qp *qp,
 	int i, j, ret = 0, count = 0;
 
 	ctx->nr_ops = DIV_ROUND_UP(sg_cnt, pages_per_mr);
-	ctx->reg = kzalloc_objs(*ctx->reg, ctx->nr_ops, GFP_KERNEL);
+	ctx->reg = kzalloc_objs(*ctx->reg, ctx->nr_ops);
 	if (!ctx->reg) {
 		ret = -ENOMEM;
 		goto out;
@@ -213,8 +213,7 @@ static int rdma_rw_init_mr_wrs_bvec(struct rdma_rw_ctx *ctx, struct ib_qp *qp,
 	int i, ret, count = 0;
 	u32 nents = 0;
 
-	ctx->reg = kzalloc_objs(*ctx->reg, DIV_ROUND_UP(nr_bvec, pages_per_mr),
-				GFP_KERNEL);
+	ctx->reg = kzalloc_objs(*ctx->reg, DIV_ROUND_UP(nr_bvec, pages_per_mr));
 	if (!ctx->reg)
 		return -ENOMEM;
 
@@ -222,8 +221,7 @@ static int rdma_rw_init_mr_wrs_bvec(struct rdma_rw_ctx *ctx, struct ib_qp *qp,
 	 * Build scatterlist from bvecs using the iterator. This follows
 	 * the pattern from __blk_rq_map_sg.
 	 */
-	ctx->reg[0].sgt.sgl = kmalloc_objs(*ctx->reg[0].sgt.sgl, nr_bvec,
-					   GFP_KERNEL);
+	ctx->reg[0].sgt.sgl = kmalloc_objs(*ctx->reg[0].sgt.sgl, nr_bvec);
 	if (!ctx->reg[0].sgt.sgl) {
 		ret = -ENOMEM;
 		goto out_free_reg;
@@ -297,11 +295,11 @@ static int rdma_rw_init_map_wrs(struct rdma_rw_ctx *ctx, struct ib_qp *qp,
 
 	ctx->nr_ops = DIV_ROUND_UP(sg_cnt, max_sge);
 
-	ctx->map.sges = sge = kzalloc_objs(*sge, sg_cnt, GFP_KERNEL);
+	ctx->map.sges = sge = kzalloc_objs(*sge, sg_cnt);
 	if (!ctx->map.sges)
 		goto out;
 
-	ctx->map.wrs = kzalloc_objs(*ctx->map.wrs, ctx->nr_ops, GFP_KERNEL);
+	ctx->map.wrs = kzalloc_objs(*ctx->map.wrs, ctx->nr_ops);
 	if (!ctx->map.wrs)
 		goto out_free_sges;
 
@@ -756,7 +754,7 @@ int rdma_rw_ctx_signature_init(struct rdma_rw_ctx *ctx, struct ib_qp *qp,
 
 	ctx->type = RDMA_RW_SIG_MR;
 	ctx->nr_ops = 1;
-	ctx->reg = kzalloc_obj(*ctx->reg, GFP_KERNEL);
+	ctx->reg = kzalloc_obj(*ctx->reg);
 	if (!ctx->reg) {
 		ret = -ENOMEM;
 		goto out_unmap_prot_sg;

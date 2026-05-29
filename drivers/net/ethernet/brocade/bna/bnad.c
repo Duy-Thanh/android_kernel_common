@@ -1345,8 +1345,7 @@ bnad_mem_alloc(struct bnad *bnad,
 		return 0;
 	}
 
-	mem_info->mdl = kzalloc_objs(struct bna_mem_descr, mem_info->num,
-				     GFP_KERNEL);
+	mem_info->mdl = kzalloc_objs(struct bna_mem_descr, mem_info->num);
 	if (mem_info->mdl == NULL)
 		return -ENOMEM;
 
@@ -1459,7 +1458,7 @@ bnad_txrx_irq_alloc(struct bnad *bnad, enum bnad_intr_source src,
 	if (cfg_flags & BNAD_CF_MSIX) {
 		intr_info->intr_type = BNA_INTR_T_MSIX;
 		intr_info->idl = kzalloc_objs(struct bna_intr_descr,
-					      intr_info->num, GFP_KERNEL);
+					      intr_info->num);
 		if (!intr_info->idl)
 			return -ENOMEM;
 
@@ -1484,7 +1483,7 @@ bnad_txrx_irq_alloc(struct bnad *bnad, enum bnad_intr_source src,
 		intr_info->intr_type = BNA_INTR_T_INTX;
 		intr_info->num = 1;
 		intr_info->idl = kzalloc_objs(struct bna_intr_descr,
-					      intr_info->num, GFP_KERNEL);
+					      intr_info->num);
 		if (!intr_info->idl)
 			return -ENOMEM;
 
@@ -2640,7 +2639,7 @@ bnad_enable_msix(struct bnad *bnad)
 		return;
 
 	bnad->msix_table =
-		kzalloc_objs(struct msix_entry, bnad->msix_num, GFP_KERNEL);
+		kzalloc_objs(struct msix_entry, bnad->msix_num);
 
 	if (!bnad->msix_table)
 		goto intx_mode;

@@ -67,7 +67,7 @@ sesInfoAlloc(void)
 {
 	struct cifs_ses *ret_buf;
 
-	ret_buf = kzalloc_obj(struct cifs_ses, GFP_KERNEL);
+	ret_buf = kzalloc_obj(struct cifs_ses);
 	if (ret_buf) {
 		atomic_inc(&sesInfoAllocCount);
 		spin_lock_init(&ret_buf->ses_lock);
@@ -118,7 +118,7 @@ tcon_info_alloc(bool dir_leases_enabled, enum smb3_tcon_ref_trace trace)
 	struct cifs_tcon *ret_buf;
 	static atomic_t tcon_debug_id;
 
-	ret_buf = kzalloc_obj(*ret_buf, GFP_KERNEL);
+	ret_buf = kzalloc_obj(*ret_buf);
 	if (!ret_buf)
 		return NULL;
 
@@ -673,8 +673,7 @@ parse_dfs_referrals(struct get_dfs_referral_rsp *rsp, u32 rsp_size,
 	cifs_dbg(FYI, "num_referrals: %d dfs flags: 0x%x ...\n",
 		 *num_of_nodes, le32_to_cpu(rsp->DFSFlags));
 
-	*target_nodes = kzalloc_objs(struct dfs_info3_param, *num_of_nodes,
-				     GFP_KERNEL);
+	*target_nodes = kzalloc_objs(struct dfs_info3_param, *num_of_nodes);
 	if (*target_nodes == NULL) {
 		rc = -ENOMEM;
 		goto parse_DFS_referrals_exit;

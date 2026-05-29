@@ -1692,7 +1692,7 @@ static bool run_delalloc_compressed(struct btrfs_inode *inode,
 	const blk_opf_t write_flags = wbc_to_write_flags(wbc);
 
 	nofs_flag = memalloc_nofs_save();
-	ctx = kvmalloc_flex(*ctx, chunks, num_chunks, GFP_KERNEL);
+	ctx = kvmalloc_flex(*ctx, chunks, num_chunks);
 	memalloc_nofs_restore(nofs_flag);
 	if (!ctx)
 		return false;
@@ -3967,7 +3967,7 @@ static int btrfs_init_file_extent_tree(struct btrfs_inode *inode)
 	if (btrfs_is_free_space_inode(inode))
 		return 0;
 
-	inode->file_extent_tree = kmalloc_obj(struct extent_io_tree, GFP_KERNEL);
+	inode->file_extent_tree = kmalloc_obj(struct extent_io_tree);
 	if (!inode->file_extent_tree)
 		return -ENOMEM;
 
@@ -6221,7 +6221,7 @@ static int btrfs_opendir(struct inode *inode, struct file *file)
 	if (ret)
 		return ret;
 
-	private = kzalloc_obj(struct btrfs_file_private, GFP_KERNEL);
+	private = kzalloc_obj(struct btrfs_file_private);
 	if (!private)
 		return -ENOMEM;
 	private->last_index = last_index;

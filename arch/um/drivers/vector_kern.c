@@ -515,7 +515,7 @@ static struct vector_queue *create_queue(
 	struct iovec *iov;
 	struct mmsghdr *mmsg_vector;
 
-	result = kmalloc_obj(struct vector_queue, GFP_KERNEL);
+	result = kmalloc_obj(struct vector_queue);
 	if (result == NULL)
 		return NULL;
 	result->max_depth = max_size;
@@ -544,11 +544,9 @@ static struct vector_queue *create_queue(
 	result->max_iov_frags = num_extra_frags;
 	for (i = 0; i < max_size; i++) {
 		if (vp->header_size > 0)
-			iov = kmalloc_objs(struct iovec, 3 + num_extra_frags,
-					   GFP_KERNEL);
+			iov = kmalloc_objs(struct iovec, 3 + num_extra_frags);
 		else
-			iov = kmalloc_objs(struct iovec, 2 + num_extra_frags,
-					   GFP_KERNEL);
+			iov = kmalloc_objs(struct iovec, 2 + num_extra_frags);
 		if (iov == NULL)
 			goto out_fail;
 		mmsg_vector->msg_hdr.msg_iov = iov;
@@ -1583,7 +1581,7 @@ static void vector_eth_configure(
 	struct vector_private *vp;
 	int err;
 
-	device = kzalloc_obj(*device, GFP_KERNEL);
+	device = kzalloc_obj(*device);
 	if (device == NULL) {
 		pr_err("Failed to allocate struct vector_device for vec%d\n", n);
 		return;

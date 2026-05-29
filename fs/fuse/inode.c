@@ -1614,11 +1614,11 @@ struct fuse_dev *fuse_dev_alloc(void)
 	struct fuse_dev *fud;
 	struct list_head *pq;
 
-	fud = kzalloc_obj(struct fuse_dev, GFP_KERNEL);
+	fud = kzalloc_obj(struct fuse_dev);
 	if (!fud)
 		return NULL;
 
-	pq = kzalloc_objs(struct list_head, FUSE_PQ_HASH_SIZE, GFP_KERNEL);
+	pq = kzalloc_objs(struct list_head, FUSE_PQ_HASH_SIZE);
 	if (!pq) {
 		kfree(fud);
 		return NULL;
@@ -1776,7 +1776,7 @@ static int fuse_get_tree_submount(struct fs_context *fsc)
 	struct super_block *sb;
 	int err;
 
-	fm = kzalloc_obj(struct fuse_mount, GFP_KERNEL);
+	fm = kzalloc_obj(struct fuse_mount);
 	if (!fm)
 		return -ENOMEM;
 
@@ -1977,11 +1977,11 @@ static int fuse_get_tree(struct fs_context *fsc)
 	struct super_block *sb;
 	int err;
 
-	fc = kmalloc_obj(*fc, GFP_KERNEL);
+	fc = kmalloc_obj(*fc);
 	if (!fc)
 		return -ENOMEM;
 
-	fm = kzalloc_obj(*fm, GFP_KERNEL);
+	fm = kzalloc_obj(*fm);
 	if (!fm) {
 		kfree(fc);
 		return -ENOMEM;
@@ -2043,7 +2043,7 @@ static int fuse_init_fs_context(struct fs_context *fsc)
 {
 	struct fuse_fs_context *ctx;
 
-	ctx = kzalloc_obj(struct fuse_fs_context, GFP_KERNEL);
+	ctx = kzalloc_obj(struct fuse_fs_context);
 	if (!ctx)
 		return -ENOMEM;
 

@@ -27,7 +27,7 @@ int jffs2_sum_init(struct jffs2_sb_info *c)
 {
 	uint32_t sum_size = min_t(uint32_t, c->sector_size, MAX_SUMMARY_SIZE);
 
-	c->summary = kzalloc_obj(struct jffs2_summary, GFP_KERNEL);
+	c->summary = kzalloc_obj(struct jffs2_summary);
 
 	if (!c->summary) {
 		JFFS2_WARNING("Can't allocate memory for summary information!\n");
@@ -115,8 +115,7 @@ int jffs2_sum_add_padding_mem(struct jffs2_summary *s, uint32_t size)
 int jffs2_sum_add_inode_mem(struct jffs2_summary *s, struct jffs2_raw_inode *ri,
 				uint32_t ofs)
 {
-	struct jffs2_sum_inode_mem *temp = kmalloc_obj(struct jffs2_sum_inode_mem,
-						       GFP_KERNEL);
+	struct jffs2_sum_inode_mem *temp = kmalloc_obj(struct jffs2_sum_inode_mem);
 
 	if (!temp)
 		return -ENOMEM;
@@ -160,7 +159,7 @@ int jffs2_sum_add_xattr_mem(struct jffs2_summary *s, struct jffs2_raw_xattr *rx,
 {
 	struct jffs2_sum_xattr_mem *temp;
 
-	temp = kmalloc_obj(struct jffs2_sum_xattr_mem, GFP_KERNEL);
+	temp = kmalloc_obj(struct jffs2_sum_xattr_mem);
 	if (!temp)
 		return -ENOMEM;
 
@@ -178,7 +177,7 @@ int jffs2_sum_add_xref_mem(struct jffs2_summary *s, struct jffs2_raw_xref *rr, u
 {
 	struct jffs2_sum_xref_mem *temp;
 
-	temp = kmalloc_obj(struct jffs2_sum_xref_mem, GFP_KERNEL);
+	temp = kmalloc_obj(struct jffs2_sum_xref_mem);
 	if (!temp)
 		return -ENOMEM;
 
@@ -264,8 +263,7 @@ int jffs2_sum_add_kvec(struct jffs2_sb_info *c, const struct kvec *invecs,
 	switch (je16_to_cpu(node->u.nodetype)) {
 		case JFFS2_NODETYPE_INODE: {
 			struct jffs2_sum_inode_mem *temp =
-				kmalloc_obj(struct jffs2_sum_inode_mem,
-					    GFP_KERNEL);
+				kmalloc_obj(struct jffs2_sum_inode_mem);
 
 			if (!temp)
 				goto no_mem;
@@ -316,8 +314,7 @@ int jffs2_sum_add_kvec(struct jffs2_sb_info *c, const struct kvec *invecs,
 #ifdef CONFIG_JFFS2_FS_XATTR
 		case JFFS2_NODETYPE_XATTR: {
 			struct jffs2_sum_xattr_mem *temp;
-			temp = kmalloc_obj(struct jffs2_sum_xattr_mem,
-					   GFP_KERNEL);
+			temp = kmalloc_obj(struct jffs2_sum_xattr_mem);
 			if (!temp)
 				goto no_mem;
 
@@ -332,8 +329,7 @@ int jffs2_sum_add_kvec(struct jffs2_sb_info *c, const struct kvec *invecs,
 		}
 		case JFFS2_NODETYPE_XREF: {
 			struct jffs2_sum_xref_mem *temp;
-			temp = kmalloc_obj(struct jffs2_sum_xref_mem,
-					   GFP_KERNEL);
+			temp = kmalloc_obj(struct jffs2_sum_xref_mem);
 			if (!temp)
 				goto no_mem;
 			temp->nodetype = node->r.nodetype;

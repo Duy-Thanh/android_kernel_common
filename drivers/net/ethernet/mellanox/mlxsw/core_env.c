@@ -1245,8 +1245,7 @@ static int mlxsw_env_line_cards_alloc(struct mlxsw_env *env)
 	for (i = 0; i < env->num_of_slots; i++) {
 		env->line_cards[i] = kzalloc_flex(*env->line_cards[i],
 						  module_info,
-						  env->max_module_count,
-						  GFP_KERNEL);
+						  env->max_module_count);
 		if (!env->line_cards[i])
 			goto kzalloc_err;
 
@@ -1453,7 +1452,7 @@ int mlxsw_env_init(struct mlxsw_core *mlxsw_core,
 			   mlxsw_reg_mgpir_max_modules_per_slot_get(mgpir_pl) :
 			   module_count;
 
-	env = kzalloc_flex(*env, line_cards, num_of_slots + 1, GFP_KERNEL);
+	env = kzalloc_flex(*env, line_cards, num_of_slots + 1);
 	if (!env)
 		return -ENOMEM;
 

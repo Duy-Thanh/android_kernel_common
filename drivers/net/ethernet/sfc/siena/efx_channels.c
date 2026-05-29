@@ -536,7 +536,7 @@ static struct efx_channel *efx_alloc_channel(struct efx_nic *efx, int i)
 	struct efx_channel *channel;
 	int j;
 
-	channel = kzalloc_obj(*channel, GFP_KERNEL);
+	channel = kzalloc_obj(*channel);
 	if (!channel)
 		return NULL;
 
@@ -607,7 +607,7 @@ struct efx_channel *efx_copy_channel(const struct efx_channel *old_channel)
 	struct efx_channel *channel;
 	int j;
 
-	channel = kmalloc_obj(*channel, GFP_KERNEL);
+	channel = kmalloc_obj(*channel);
 	if (!channel)
 		return NULL;
 
@@ -967,8 +967,7 @@ int efx_siena_set_channels(struct efx_nic *efx)
 
 		/* Allocate array for XDP TX queue lookup. */
 		efx->xdp_tx_queues = kzalloc_objs(*efx->xdp_tx_queues,
-						  efx->xdp_tx_queue_count,
-						  GFP_KERNEL);
+						  efx->xdp_tx_queue_count);
 		if (!efx->xdp_tx_queues)
 			return -ENOMEM;
 	}

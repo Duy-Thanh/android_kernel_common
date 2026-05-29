@@ -216,8 +216,7 @@ static int uv_hubs_init(void)
 	u64 sz;
 	int i, ret;
 
-	prev_obj_to_cnode = kmalloc_objs(*prev_obj_to_cnode, uv_bios_obj_cnt,
-					 GFP_KERNEL);
+	prev_obj_to_cnode = kmalloc_objs(*prev_obj_to_cnode, uv_bios_obj_cnt);
 	if (!prev_obj_to_cnode)
 		return -ENOMEM;
 
@@ -242,14 +241,14 @@ static int uv_hubs_init(void)
 		goto err_enum_objs;
 	}
 
-	uv_hubs = kzalloc_objs(*uv_hubs, uv_bios_obj_cnt, GFP_KERNEL);
+	uv_hubs = kzalloc_objs(*uv_hubs, uv_bios_obj_cnt);
 	if (!uv_hubs) {
 		ret = -ENOMEM;
 		goto err_enum_objs;
 	}
 
 	for (i = 0; i < uv_bios_obj_cnt; i++) {
-		uv_hubs[i] = kzalloc_obj(*uv_hubs[i], GFP_KERNEL);
+		uv_hubs[i] = kzalloc_obj(*uv_hubs[i]);
 		if (!uv_hubs[i]) {
 			i--;
 			ret = -ENOMEM;
@@ -368,7 +367,7 @@ static int uv_ports_init(void)
 	s64 biosr;
 	int j = 0, k = 0, ret, sz;
 
-	port_buf = kzalloc_objs(*port_buf, uv_bios_obj_cnt, GFP_KERNEL);
+	port_buf = kzalloc_objs(*port_buf, uv_bios_obj_cnt);
 	if (!port_buf)
 		return -ENOMEM;
 
@@ -389,7 +388,7 @@ static int uv_ports_init(void)
 	}
 	for (j = 0; j < uv_bios_obj_cnt; j++) {
 		uv_hubs[j]->ports = kzalloc_objs(*uv_hubs[j]->ports,
-						 hub_buf[j].ports, GFP_KERNEL);
+						 hub_buf[j].ports);
 		if (!uv_hubs[j]->ports) {
 			ret = -ENOMEM;
 			j--;
@@ -398,8 +397,7 @@ static int uv_ports_init(void)
 	}
 	for (j = 0; j < uv_bios_obj_cnt; j++) {
 		for (k = 0; k < hub_buf[j].ports; k++) {
-			uv_hubs[j]->ports[k] = kzalloc_obj(*uv_hubs[j]->ports[k],
-							   GFP_KERNEL);
+			uv_hubs[j]->ports[k] = kzalloc_obj(*uv_hubs[j]->ports[k]);
 			if (!uv_hubs[j]->ports[k]) {
 				ret = -ENOMEM;
 				k--;
@@ -675,8 +673,7 @@ static int pci_topology_init(void)
 			}
 			num_pci_lines = l;
 
-			uv_pci_objs = kzalloc_objs(*uv_pci_objs, num_pci_lines,
-						   GFP_KERNEL);
+			uv_pci_objs = kzalloc_objs(*uv_pci_objs, num_pci_lines);
 			if (!uv_pci_objs) {
 				kfree(pci_top_str);
 				ret = -ENOMEM;
@@ -684,8 +681,7 @@ static int pci_topology_init(void)
 			}
 			start = pci_top_str;
 			while ((found = strsep(&start, "\n")) != NULL) {
-				uv_pci_objs[k] = kzalloc_obj(*uv_pci_objs[k],
-							     GFP_KERNEL);
+				uv_pci_objs[k] = kzalloc_obj(*uv_pci_objs[k]);
 				if (!uv_pci_objs[k]) {
 					ret = -ENOMEM;
 					goto err_pci_obj;

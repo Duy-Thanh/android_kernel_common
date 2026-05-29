@@ -276,7 +276,7 @@ static int qedi_alloc_uio_rings(struct qedi_ctx *qedi)
 		}
 	}
 
-	udev = kzalloc_obj(*udev, GFP_KERNEL);
+	udev = kzalloc_obj(*udev);
 	if (!udev)
 		goto err_udev;
 
@@ -411,7 +411,7 @@ static int qedi_alloc_fp(struct qedi_ctx *qedi)
 	int ret = 0;
 
 	qedi->fp_array = kzalloc_objs(struct qedi_fastpath,
-				      MIN_NUM_CPUS_MSIX(qedi), GFP_KERNEL);
+				      MIN_NUM_CPUS_MSIX(qedi));
 	if (!qedi->fp_array) {
 		QEDI_ERR(&qedi->dbg_ctx,
 			 "fastpath fp array allocation failed.\n");
@@ -419,7 +419,7 @@ static int qedi_alloc_fp(struct qedi_ctx *qedi)
 	}
 
 	qedi->sb_array = kzalloc_objs(struct qed_sb_info,
-				      MIN_NUM_CPUS_MSIX(qedi), GFP_KERNEL);
+				      MIN_NUM_CPUS_MSIX(qedi));
 	if (!qedi->sb_array) {
 		QEDI_ERR(&qedi->dbg_ctx,
 			 "fastpath sb array allocation failed.\n");
@@ -499,8 +499,7 @@ static int qedi_setup_cid_que(struct qedi_ctx *qedi)
 		return -ENOMEM;
 
 	qedi->cid_que.conn_cid_tbl = kmalloc_objs(struct qedi_conn *,
-						  qedi->max_active_conns,
-						  GFP_KERNEL);
+						  qedi->max_active_conns);
 	if (!qedi->cid_que.conn_cid_tbl) {
 		kfree(qedi->cid_que.cid_que_base);
 		qedi->cid_que.cid_que_base = NULL;
@@ -956,7 +955,7 @@ static int qedi_find_boot_info(struct qedi_ctx *qedi,
 	pri_ctrl_flags = !!(block->target[0].ctrl_flags &
 					NVM_ISCSI_CFG_TARGET_ENABLED);
 	if (pri_ctrl_flags) {
-		pri_tgt = kzalloc_obj(*pri_tgt, GFP_KERNEL);
+		pri_tgt = kzalloc_obj(*pri_tgt);
 		if (!pri_tgt)
 			return -1;
 		qedi_get_boot_tgt_info(block, pri_tgt, 0);
@@ -965,7 +964,7 @@ static int qedi_find_boot_info(struct qedi_ctx *qedi,
 	sec_ctrl_flags = !!(block->target[1].ctrl_flags &
 					NVM_ISCSI_CFG_TARGET_ENABLED);
 	if (sec_ctrl_flags) {
-		sec_tgt = kzalloc_obj(*sec_tgt, GFP_KERNEL);
+		sec_tgt = kzalloc_obj(*sec_tgt);
 		if (!sec_tgt) {
 			ret = -1;
 			goto free_tgt;
@@ -1066,7 +1065,7 @@ static void qedi_get_protocol_tlv_data(void *dev, void *data)
 	struct qedi_ctx *qedi = dev;
 	int rval = 0;
 
-	fw_iscsi_stats = kmalloc_obj(*fw_iscsi_stats, GFP_KERNEL);
+	fw_iscsi_stats = kmalloc_obj(*fw_iscsi_stats);
 	if (!fw_iscsi_stats) {
 		QEDI_ERR(&qedi->dbg_ctx,
 			 "Could not allocate memory for fw_iscsi_stats.\n");
@@ -1668,8 +1667,7 @@ static int qedi_alloc_global_queues(struct qedi_ctx *qedi)
 	 */
 	for (i = 0; i < qedi->num_queues; i++) {
 		qedi->global_queues[i] =
-					kzalloc_obj(*qedi->global_queues[0],
-						    GFP_KERNEL);
+					kzalloc_obj(*qedi->global_queues[0]);
 		if (!qedi->global_queues[i]) {
 			QEDI_ERR(&qedi->dbg_ctx,
 				 "Unable to allocation global queue %d.\n", i);
@@ -1896,7 +1894,7 @@ struct qedi_cmd *qedi_get_cmd_from_tid(struct qedi_ctx *qedi, u32 tid)
 static int qedi_alloc_itt(struct qedi_ctx *qedi)
 {
 	qedi->itt_map = kzalloc_objs(struct qedi_itt_map,
-				     MAX_ISCSI_TASK_ENTRIES, GFP_KERNEL);
+				     MAX_ISCSI_TASK_ENTRIES);
 	if (!qedi->itt_map) {
 		QEDI_ERR(&qedi->dbg_ctx,
 			 "Unable to allocate itt map array memory\n");

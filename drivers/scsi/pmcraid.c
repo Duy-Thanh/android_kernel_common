@@ -3468,7 +3468,7 @@ static long pmcraid_chr_ioctl(
 	void __user *argp = (void __user *)arg;
 	int retval = -ENOTTY;
 
-	hdr = kmalloc_obj(struct pmcraid_ioctl_header, GFP_KERNEL);
+	hdr = kmalloc_obj(struct pmcraid_ioctl_header);
 
 	if (!hdr) {
 		pmcraid_err("failed to allocate memory for ioctl header\n");
@@ -4386,7 +4386,7 @@ static int pmcraid_allocate_config_buffers(struct pmcraid_instance *pinstance)
 
 	pinstance->res_entries =
 			kzalloc_objs(struct pmcraid_resource_entry,
-				     PMCRAID_MAX_RESOURCES, GFP_KERNEL);
+				     PMCRAID_MAX_RESOURCES);
 
 	if (NULL == pinstance->res_entries) {
 		pmcraid_err("failed to allocate memory for resource table\n");

@@ -157,7 +157,7 @@ struct display_timings *of_get_display_timings(const struct device_node *np)
 		return NULL;
 	}
 
-	disp = kzalloc_obj(*disp, GFP_KERNEL);
+	disp = kzalloc_obj(*disp);
 	if (!disp) {
 		pr_err("%pOF: could not allocate struct disp'\n", np);
 		goto dispfail;
@@ -184,8 +184,7 @@ struct display_timings *of_get_display_timings(const struct device_node *np)
 		goto timingfail;
 	}
 
-	disp->timings = kzalloc_objs(struct display_timing *, disp->num_timings,
-				     GFP_KERNEL);
+	disp->timings = kzalloc_objs(struct display_timing *, disp->num_timings);
 	if (!disp->timings) {
 		pr_err("%pOF: could not allocate timings array\n", np);
 		goto timingfail;
@@ -198,7 +197,7 @@ struct display_timings *of_get_display_timings(const struct device_node *np)
 		struct display_timing *dt;
 		int r;
 
-		dt = kmalloc_obj(*dt, GFP_KERNEL);
+		dt = kmalloc_obj(*dt);
 		if (!dt) {
 			pr_err("%pOF: could not allocate display_timing struct\n",
 				np);

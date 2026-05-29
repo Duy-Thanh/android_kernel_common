@@ -299,11 +299,11 @@ brcmf_msgbuf_init_pktids(u32 nr_array_entries,
 	struct brcmf_msgbuf_pktid *array;
 	struct brcmf_msgbuf_pktids *pktids;
 
-	array = kzalloc_objs(*array, nr_array_entries, GFP_KERNEL);
+	array = kzalloc_objs(*array, nr_array_entries);
 	if (!array)
 		return NULL;
 
-	pktids = kzalloc_obj(*pktids, GFP_KERNEL);
+	pktids = kzalloc_obj(*pktids);
 	if (!pktids) {
 		kfree(array);
 		return NULL;
@@ -1539,7 +1539,7 @@ int brcmf_proto_msgbuf_attach(struct brcmf_pub *drvr)
 		if_msgbuf->max_flowrings = BRCMF_FLOWRING_HASHSIZE - 1;
 	}
 
-	msgbuf = kzalloc_obj(*msgbuf, GFP_KERNEL);
+	msgbuf = kzalloc_obj(*msgbuf);
 	if (!msgbuf)
 		goto fail;
 
@@ -1589,7 +1589,7 @@ int brcmf_proto_msgbuf_attach(struct brcmf_pub *drvr)
 	msgbuf->max_flowrings = if_msgbuf->max_flowrings;
 	msgbuf->flowring_dma_handle =
 		kzalloc_objs(*msgbuf->flowring_dma_handle,
-			     msgbuf->max_flowrings, GFP_KERNEL);
+			     msgbuf->max_flowrings);
 	if (!msgbuf->flowring_dma_handle)
 		goto fail;
 

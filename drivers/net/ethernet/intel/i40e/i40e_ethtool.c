@@ -2120,8 +2120,7 @@ static int i40e_set_ringparam(struct net_device *netdev,
 		netdev_info(netdev,
 			    "Changing Tx descriptor count from %d to %d.\n",
 			    vsi->tx_rings[0]->count, new_tx_count);
-		tx_rings = kzalloc_objs(struct i40e_ring, tx_alloc_queue_pairs,
-					GFP_KERNEL);
+		tx_rings = kzalloc_objs(struct i40e_ring, tx_alloc_queue_pairs);
 		if (!tx_rings) {
 			err = -ENOMEM;
 			goto done;
@@ -2160,7 +2159,7 @@ static int i40e_set_ringparam(struct net_device *netdev,
 			    "Changing Rx descriptor count from %d to %d\n",
 			    vsi->rx_rings[0]->count, new_rx_count);
 		rx_rings = kzalloc_objs(struct i40e_ring,
-					vsi->alloc_queue_pairs, GFP_KERNEL);
+					vsi->alloc_queue_pairs);
 		if (!rx_rings) {
 			err = -ENOMEM;
 			goto free_tx;
@@ -3976,7 +3975,7 @@ static int i40e_add_flex_offset(struct list_head *flex_pit_list,
 {
 	struct i40e_flex_pit *new_pit, *entry;
 
-	new_pit = kzalloc_obj(*entry, GFP_KERNEL);
+	new_pit = kzalloc_obj(*entry);
 	if (!new_pit)
 		return -ENOMEM;
 
@@ -4867,7 +4866,7 @@ static int i40e_add_fdir_ethtool(struct i40e_vsi *vsi,
 		q_index = ring;
 	}
 
-	input = kzalloc_obj(*input, GFP_KERNEL);
+	input = kzalloc_obj(*input);
 
 	if (!input)
 		return -ENOMEM;

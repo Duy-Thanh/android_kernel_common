@@ -514,10 +514,9 @@ static long vhost_dev_alloc_iovecs(struct vhost_dev *dev)
 
 	for (i = 0; i < dev->nvqs; ++i) {
 		vq = dev->vqs[i];
-		vq->indirect = kmalloc_objs(*vq->indirect, UIO_MAXIOV,
-					    GFP_KERNEL);
-		vq->log = kmalloc_objs(*vq->log, dev->iov_limit, GFP_KERNEL);
-		vq->heads = kmalloc_objs(*vq->heads, dev->iov_limit, GFP_KERNEL);
+		vq->indirect = kmalloc_objs(*vq->indirect, UIO_MAXIOV);
+		vq->log = kmalloc_objs(*vq->log, dev->iov_limit);
+		vq->heads = kmalloc_objs(*vq->heads, dev->iov_limit);
 		vq->nheads = kmalloc_array(dev->iov_limit, sizeof(*vq->nheads),
 					   GFP_KERNEL);
 		if (!vq->indirect || !vq->log || !vq->heads || !vq->nheads)
@@ -1979,7 +1978,7 @@ static long vhost_set_memory(struct vhost_dev *d, struct vhost_memory __user *m)
 		return -EOPNOTSUPP;
 	if (mem.nregions > max_mem_regions)
 		return -E2BIG;
-	newmem = kvzalloc_flex(*newmem, regions, mem.nregions, GFP_KERNEL);
+	newmem = kvzalloc_flex(*newmem, regions, mem.nregions);
 	if (!newmem)
 		return -ENOMEM;
 
@@ -3268,7 +3267,7 @@ EXPORT_SYMBOL_GPL(vhost_disable_notify);
 struct vhost_msg_node *vhost_new_msg(struct vhost_virtqueue *vq, int type)
 {
 	/* Make sure all padding within the structure is initialized. */
-	struct vhost_msg_node *node = kzalloc_obj(*node, GFP_KERNEL);
+	struct vhost_msg_node *node = kzalloc_obj(*node);
 	if (!node)
 		return NULL;
 

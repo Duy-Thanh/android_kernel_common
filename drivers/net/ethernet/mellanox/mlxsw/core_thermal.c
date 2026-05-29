@@ -432,7 +432,7 @@ mlxsw_thermal_modules_init(struct device *dev, struct mlxsw_core *core,
 		return 0;
 
 	area->tz_module_arr = kzalloc_objs(*area->tz_module_arr,
-					   area->tz_module_num, GFP_KERNEL);
+					   area->tz_module_num);
 	if (!area->tz_module_arr)
 		return -ENOMEM;
 
@@ -522,7 +522,7 @@ mlxsw_thermal_gearboxes_init(struct device *dev, struct mlxsw_core *core,
 
 	area->tz_gearbox_num = gbox_num;
 	area->tz_gearbox_arr = kzalloc_objs(*area->tz_gearbox_arr,
-					    area->tz_gearbox_num, GFP_KERNEL);
+					    area->tz_gearbox_num);
 	if (!area->tz_gearbox_arr)
 		return -ENOMEM;
 
@@ -642,8 +642,7 @@ int mlxsw_thermal_init(struct mlxsw_core *core,
 	mlxsw_reg_mgpir_unpack(mgpir_pl, NULL, NULL, NULL, NULL,
 			       &num_of_slots);
 
-	thermal = kzalloc_flex(*thermal, line_cards, num_of_slots + 1,
-			       GFP_KERNEL);
+	thermal = kzalloc_flex(*thermal, line_cards, num_of_slots + 1);
 	if (!thermal)
 		return -ENOMEM;
 

@@ -1172,7 +1172,7 @@ iwl_mld_set_netdetect_info(struct iwl_mld *mld,
 		for (int k = 0; k < SCAN_OFFLOAD_MATCHING_CHANNELS_LEN; k++)
 			n_channels +=
 				hweight8(matches[i].matching_channels[k]);
-		match = kzalloc_flex(*match, channels, n_channels, GFP_KERNEL);
+		match = kzalloc_flex(*match, channels, n_channels);
 		if (!match)
 			return;
 
@@ -1249,8 +1249,7 @@ iwl_mld_process_netdetect_res(struct iwl_mld *mld,
 		goto out;
 	}
 	n_matches = hweight_long(matched_profiles);
-	netdetect_info = kzalloc_flex(*netdetect_info, matches, n_matches,
-				      GFP_KERNEL);
+	netdetect_info = kzalloc_flex(*netdetect_info, matches, n_matches);
 	if (netdetect_info)
 		iwl_mld_set_netdetect_info(mld, netdetect_cfg, netdetect_info,
 					   resume_data->netdetect_res,
@@ -1654,7 +1653,7 @@ iwl_mld_suspend_send_security_cmds(struct iwl_mld *mld,
 	struct iwl_mld_suspend_key_iter_data data = {};
 	int ret;
 
-	data.rsc = kzalloc_obj(*data.rsc, GFP_KERNEL);
+	data.rsc = kzalloc_obj(*data.rsc);
 	if (!data.rsc)
 		return -ENOMEM;
 
@@ -2000,8 +1999,7 @@ int iwl_mld_wowlan_resume(struct iwl_mld *mld)
 
 	iwl_fw_dbg_read_d3_debug_data(&mld->fwrt);
 
-	resume_data.wowlan_status = kzalloc_obj(*resume_data.wowlan_status,
-						GFP_KERNEL);
+	resume_data.wowlan_status = kzalloc_obj(*resume_data.wowlan_status);
 	if (!resume_data.wowlan_status)
 		return -ENOMEM;
 

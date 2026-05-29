@@ -688,8 +688,7 @@ int bnxt_qplib_create_srq(struct bnxt_qplib_res *res,
 	srq->start_idx = 0;
 	srq->last_idx = srq->hwq.max_elements - 1;
 	if (!srq->hwq.is_user) {
-		srq->swq = kzalloc_objs(*srq->swq, srq->hwq.max_elements,
-					GFP_KERNEL);
+		srq->swq = kzalloc_objs(*srq->swq, srq->hwq.max_elements);
 		if (!srq->swq) {
 			rc = -ENOMEM;
 			goto fail;
@@ -799,7 +798,7 @@ static int bnxt_qplib_alloc_init_swq(struct bnxt_qplib_q *que)
 {
 	int indx;
 
-	que->swq = kzalloc_objs(*que->swq, que->max_sw_wqe, GFP_KERNEL);
+	que->swq = kzalloc_objs(*que->swq, que->max_sw_wqe);
 	if (!que->swq)
 		return -ENOMEM;
 

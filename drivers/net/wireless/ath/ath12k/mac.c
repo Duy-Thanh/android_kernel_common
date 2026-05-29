@@ -3838,7 +3838,7 @@ static void ath12k_bss_assoc(struct ath12k *ar,
 	lockdep_assert_wiphy(ath12k_ar_to_hw(ar)->wiphy);
 
 	struct ath12k_wmi_peer_assoc_arg *peer_arg __free(kfree) =
-					kzalloc_obj(*peer_arg, GFP_KERNEL);
+					kzalloc_obj(*peer_arg);
 	if (!peer_arg)
 		return;
 
@@ -4217,7 +4217,7 @@ static struct ath12k_link_vif *ath12k_mac_assign_link_vif(struct ath12k_hw *ah,
 		if (vif->type == NL80211_IFTYPE_STATION)
 			arvif->is_sta_assoc_link = true;
 	} else {
-		arvif = kzalloc_obj(*arvif, GFP_KERNEL);
+		arvif = kzalloc_obj(*arvif);
 		if (!arvif)
 			return NULL;
 	}
@@ -5024,8 +5024,7 @@ static struct ath12k_vif_cache *ath12k_ahvif_get_link_cache(struct ath12k_vif *a
 							    u8 link_id)
 {
 	if (!ahvif->cache[link_id]) {
-		ahvif->cache[link_id] = kzalloc_obj(*ahvif->cache[0],
-						    GFP_KERNEL);
+		ahvif->cache[link_id] = kzalloc_obj(*ahvif->cache[0]);
 		if (ahvif->cache[link_id])
 			INIT_LIST_HEAD(&ahvif->cache[link_id]->key_conf.list);
 	}
@@ -5603,7 +5602,7 @@ static int ath12k_mac_initiate_hw_scan(struct ieee80211_hw *hw,
 	if (ret)
 		goto exit;
 
-	arg = kzalloc_obj(*arg, GFP_KERNEL);
+	arg = kzalloc_obj(*arg);
 	if (!arg) {
 		ret = -ENOMEM;
 		goto exit;
@@ -5693,7 +5692,7 @@ int ath12k_mac_op_hw_scan(struct ieee80211_hw *hw,
 
 	lockdep_assert_wiphy(hw->wiphy);
 
-	chan_list = kzalloc_objs(*chan_list, hw_req->req.n_channels, GFP_KERNEL);
+	chan_list = kzalloc_objs(*chan_list, hw_req->req.n_channels);
 	if (!chan_list)
 		return -ENOMEM;
 
@@ -6123,7 +6122,7 @@ static int ath12k_mac_update_key_cache(struct ath12k_vif_cache *cache,
 	}
 
 	if (cmd == SET_KEY) {
-		key_conf = kzalloc_obj(*key_conf, GFP_KERNEL);
+		key_conf = kzalloc_obj(*key_conf);
 
 		if (!key_conf)
 			return -ENOMEM;
@@ -6457,7 +6456,7 @@ static int ath12k_mac_station_assoc(struct ath12k *ar,
 	mask = &arvif->bitrate_mask;
 
 	struct ath12k_wmi_peer_assoc_arg *peer_arg __free(kfree) =
-		kzalloc_obj(*peer_arg, GFP_KERNEL);
+		kzalloc_obj(*peer_arg);
 	if (!peer_arg)
 		return -ENOMEM;
 
@@ -6620,7 +6619,7 @@ static void ath12k_sta_rc_update_wk(struct wiphy *wiphy, struct wiphy_work *wk)
 	nss = min(nss, mac_nss);
 
 	struct ath12k_wmi_peer_assoc_arg *peer_arg __free(kfree) =
-					kzalloc_obj(*peer_arg, GFP_KERNEL);
+					kzalloc_obj(*peer_arg);
 	if (!peer_arg)
 		return;
 
@@ -7975,7 +7974,7 @@ static struct ath12k_link_sta *ath12k_mac_alloc_assign_link_sta(struct ath12k_hw
 	if (arsta)
 		return NULL;
 
-	arsta = kmalloc_obj(*arsta, GFP_KERNEL);
+	arsta = kmalloc_obj(*arsta);
 	if (!arsta)
 		return NULL;
 
@@ -11550,7 +11549,7 @@ ath12k_mac_update_active_vif_chan(struct ath12k *ar,
 	if (arg.n_vifs == 0)
 		return;
 
-	arg.vifs = kzalloc_objs(arg.vifs[0], arg.n_vifs, GFP_KERNEL);
+	arg.vifs = kzalloc_objs(arg.vifs[0], arg.n_vifs);
 	if (!arg.vifs)
 		return;
 
@@ -13715,7 +13714,7 @@ int ath12k_mac_op_remain_on_channel(struct ieee80211_hw *hw,
 	scan_time_msec = hw->wiphy->max_remain_on_channel_duration * 2;
 
 	struct ath12k_wmi_scan_req_arg *arg __free(kfree) =
-					kzalloc_obj(*arg, GFP_KERNEL);
+					kzalloc_obj(*arg);
 	if (!arg)
 		return -ENOMEM;
 
@@ -14123,7 +14122,7 @@ ath12k_mac_setup_radio_iface_comb(struct ath12k *ar,
 		max_interfaces = 1;
 	}
 
-	limits = kzalloc_objs(*limits, n_limits, GFP_KERNEL);
+	limits = kzalloc_objs(*limits, n_limits);
 	if (!limits)
 		return -ENOMEM;
 
@@ -14187,7 +14186,7 @@ ath12k_mac_setup_global_iface_comb(struct ath12k_hw *ah,
 	else
 		n_limits = 1;
 
-	limits = kzalloc_objs(*limits, n_limits, GFP_KERNEL);
+	limits = kzalloc_objs(*limits, n_limits);
 	if (!limits)
 		return -ENOMEM;
 
@@ -14250,8 +14249,7 @@ static int ath12k_mac_setup_iface_combinations(struct ath12k_hw *ah)
 		if (ar->ab->hw_params->single_pdev_only)
 			n_combinations = 2;
 
-		combinations = kzalloc_objs(*combinations, n_combinations,
-					    GFP_KERNEL);
+		combinations = kzalloc_objs(*combinations, n_combinations);
 		if (!combinations)
 			return -ENOMEM;
 
@@ -14272,20 +14270,20 @@ static int ath12k_mac_setup_iface_combinations(struct ath12k_hw *ah)
 		goto out;
 	}
 
-	combinations = kzalloc_objs(*combinations, n_combinations, GFP_KERNEL);
+	combinations = kzalloc_objs(*combinations, n_combinations);
 	if (!combinations)
 		return -ENOMEM;
 
 	/* there are multiple radios */
 
-	radio = kzalloc_objs(*radio, ah->num_radio, GFP_KERNEL);
+	radio = kzalloc_objs(*radio, ah->num_radio);
 	if (!radio) {
 		ret = -ENOMEM;
 		goto err_free_combinations;
 	}
 
 	for_each_ar(ah, ar, i) {
-		comb = kzalloc_obj(*comb, GFP_KERNEL);
+		comb = kzalloc_obj(*comb);
 		if (!comb) {
 			ret = -ENOMEM;
 			goto err_free_radios;

@@ -3270,7 +3270,7 @@ static int b43legacy_wireless_core_init(struct b43legacy_wldev *dev)
 	if ((phy->type == B43legacy_PHYTYPE_B) ||
 	    (phy->type == B43legacy_PHYTYPE_G)) {
 		phy->_lo_pairs = kzalloc_objs(struct b43legacy_lopair,
-					      B43legacy_LO_COUNT, GFP_KERNEL);
+					      B43legacy_LO_COUNT);
 		if (!phy->_lo_pairs)
 			return -ENOMEM;
 	}
@@ -3738,7 +3738,7 @@ static int b43legacy_one_core_attach(struct ssb_device *dev,
 	struct b43legacy_wldev *wldev;
 	int err = -ENOMEM;
 
-	wldev = kzalloc_obj(*wldev, GFP_KERNEL);
+	wldev = kzalloc_obj(*wldev);
 	if (!wldev)
 		goto out;
 

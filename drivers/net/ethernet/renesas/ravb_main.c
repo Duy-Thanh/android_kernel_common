@@ -437,13 +437,12 @@ static int ravb_ring_init(struct net_device *ndev, int q)
 
 	/* Allocate RX buffers */
 	priv->rx_buffers[q] = kzalloc_objs(*priv->rx_buffers[q],
-					   priv->num_rx_ring[q], GFP_KERNEL);
+					   priv->num_rx_ring[q]);
 	if (!priv->rx_buffers[q])
 		goto error;
 
 	/* Allocate TX skb rings */
-	priv->tx_skb[q] = kzalloc_objs(*priv->tx_skb[q], priv->num_tx_ring[q],
-				       GFP_KERNEL);
+	priv->tx_skb[q] = kzalloc_objs(*priv->tx_skb[q], priv->num_tx_ring[q]);
 	if (!priv->tx_skb[q])
 		goto error;
 
