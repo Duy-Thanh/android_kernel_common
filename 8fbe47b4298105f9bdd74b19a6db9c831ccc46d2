@@ -52,6 +52,41 @@
       "parentUuid": "8ea871b0_0c97cbd1",
       "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be76c80b_6436ec51",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T09:05:06Z",
+      "side": 1,
+      "message": "BTW nit thought: seems it makes sense to add WARN_ON here, since: 1. as I noted, this shouldn\u0027t happen since the (still trusted) host should set SRTP during IOMMU initialization (IOW if this happens, it means a pKVM bug). 2. this is upstream code used without pKVM as well, and without pKVM this shouldn\u0027t happen either.",
+      "fixSuggestions": [
+        {
+          "fixId": "b0cf3439_77bdc12a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 385,
+                "startChar": 0,
+                "endLine": 386,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON(!iommu-\u003eroot_entry))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
