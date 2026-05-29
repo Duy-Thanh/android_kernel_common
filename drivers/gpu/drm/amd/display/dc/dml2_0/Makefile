@@ -55,8 +55,9 @@ subdir-ccflags-y += -I$(FULL_AMD_DISPLAY_PATH)/dc/dml2_0/dml21/
 
 # Add FPU flags to all dml2 files by default, remove NO_FPU flags.
 # FPU flags step 1: Find all .c files in dal/dc/dml2_0 and it's subfolders
+rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$(2)) $(filter $(subst *,%,$(2)),$d))
 DML2_ABS_PATH := $(FULL_AMD_DISPLAY_PATH)/dc/dml2_0
-DML2_C_FILES := $(shell find $(DML2_ABS_PATH) -name '*.c' -type f)
+DML2_C_FILES := $(call rwildcard,$(DML2_ABS_PATH)/,*.c)
 
 # FPU flags step 2: Convert to .o and make paths relative to $(AMDDALPATH)/dc/dml2_0/
 DML2_RELATIVE_O_FILES := $(patsubst $(DML2_ABS_PATH)/%,dc/dml2_0/%,$(patsubst %.c,%.o,$(DML2_C_FILES)))
