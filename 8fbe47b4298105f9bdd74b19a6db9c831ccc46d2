@@ -34,6 +34,24 @@
       "parentUuid": "2b4c61c2_c3e40ef8",
       "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd76883c_cd6ae8f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T08:57:08Z",
+      "side": 1,
+      "message": "\u003e It is issued after depriviledging as part of intel_iommu_init so I think we consider that the host is not trusted anymore at this point.\n\nNo, at that point we still consider the host trusted, at least because we rely on the host to (ask pKVM to) initialize IOMMU and thus enable pKVM\u0027s DMA protection, right?\n\nIn fact there is a precise point when we start considering the host untrusted - it is when the host issues the `init_finalize` hypercall and pKVM sets the `pkvm_initialized` flag to true. That happens after `intel_iommu_init()`.",
+      "parentUuid": "8ea871b0_0c97cbd1",
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
