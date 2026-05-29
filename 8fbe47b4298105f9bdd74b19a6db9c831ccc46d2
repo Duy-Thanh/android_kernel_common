@@ -16,6 +16,24 @@
       "message": "Strictly speaking, malicious host shouldn\u0027t be able to do that, since SRTP is issued during pKVM initialization, when the host is still trusted (and is supposed to successfully set SRTP, or fail pKVM initialization otherwise).\n\nBut an extra sanity check shouldn\u0027t hurt.",
       "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea871b0_0c97cbd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-29T07:55:43Z",
+      "side": 1,
+      "message": "\u003e Strictly speaking, malicious host shouldn\u0027t be able to do that, since SRTP is issued during pKVM initialization, when the host is still trusted\n\nIt is issued after depriviledging as part of `intel_iommu_init` so I think we consider that the host is not trusted anymore at this point. And as it is done after deprivilidging, the malicious host could skip `iommu_set_root_entry` and mmio write hypercall for DMA_GCMD_SRTP.\n\nAlthough I agree that this all is very unlikely to happen: since kernel is considered trusted at early boot and the window after deprivileding and before SRTP issuing is very small and probably very difficult to compromise.",
+      "parentUuid": "2b4c61c2_c3e40ef8",
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
