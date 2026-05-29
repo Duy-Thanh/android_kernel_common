@@ -16,6 +16,24 @@
       "message": "Why isn\u0027t this submitted upstream?",
       "revId": "410931b7bb8a77f201d265e1ab69a8d98b803178",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "789c7186_af3a3244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-05-29T09:09:00Z",
+      "side": 1,
+      "message": "It was discussed in https://b.corp.google.com/issues/468281238. MTK will work on upstreaming this change but they need it ASAP for device bringup that they do based on ACK.",
+      "parentUuid": "f5639bdc_89dad941",
+      "revId": "410931b7bb8a77f201d265e1ab69a8d98b803178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
