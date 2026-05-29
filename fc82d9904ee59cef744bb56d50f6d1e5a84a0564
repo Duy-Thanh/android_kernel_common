@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dde1842_9f258526",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-29T18:55:04Z",
+      "side": 1,
+      "message": "nit: `BACKPORT` and `UPSTREAM` are mutually exclusive; since you had to make some changes, `BACKPORT` should suffice.",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "fc82d9904ee59cef744bb56d50f6d1e5a84a0564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd2f8b93_7f525577",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-05-29T18:55:04Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "fc82d9904ee59cef744bb56d50f6d1e5a84a0564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
