@@ -34,6 +34,24 @@
       "parentUuid": "0cb10f30_e1dd8881",
       "revId": "2cb0f5b02c32703ad2a928dbf1ec01385e31c9b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12af8701_2ff27b2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T17:08:54Z",
+      "side": 1,
+      "message": "I was actually about to post this comment:\n\n\u003e i.e. this should be rather something like \"For simplicity don\u0027t validate that the command is supported in ECCAP3, since per VT-d spec section 11.4.14.3, usage of an unsupported command shall only result in an error reported in ECRSP rather than in an undefined behavior.\"?\n\u003e \n\u003e BTW also this clarification seems more useful in the comment in the code (since we already have a comment there), than here in the commit message?\n\nSo, how about adding such an explanation to that comment in the code instead?",
+      "parentUuid": "5e70c6fd_91fb8481",
+      "revId": "2cb0f5b02c32703ad2a928dbf1ec01385e31c9b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
