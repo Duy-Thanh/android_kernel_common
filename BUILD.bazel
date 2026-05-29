@@ -1488,6 +1488,14 @@ ddk_headers(
     visibility = ["//visibility:public"],
 )
 
+ddk_headers_archive(
+    name = "kernel_x86_64_ddk_headers_archive",
+    srcs = [
+        "all_headers_x86_64",
+    ],
+    visibility = ["//visibility:private"],
+)
+
 ddk_headers(
     name = "all_headers_riscv64",
     hdrs = [":all_headers_allowlist_riscv64"] + select({
