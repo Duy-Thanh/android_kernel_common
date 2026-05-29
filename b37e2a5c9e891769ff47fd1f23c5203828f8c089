@@ -33,6 +33,23 @@
       "message": "The commit message should look like:\n\n\nBACKPORT: original commit message\n\ndown to the final Signed-off-by line\n[blank line]\nnew things\n\nThe new things must end with Signed-off-by.\n\nOne possible format for them is:\n\nBug: 135791357\n(cherry picked from commit c31e73211f4c1ce41143423ac6ce3ce6dafdcec1)\n[alice: Resolved minor conflict in drivers/foo/bar.c]\nSigned-off-by: Joe Smith \u003cjoe.smith@foo.org\u003e",
       "revId": "b37e2a5c9e891769ff47fd1f23c5203828f8c089",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e5204ba_c33ed2de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-29T16:17:42Z",
+      "side": 1,
+      "message": "This should also be cherry-pick from the actual change on the base branch, not upstream Git. BACKPORT: FROMLIST: etc.",
+      "revId": "b37e2a5c9e891769ff47fd1f23c5203828f8c089",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
