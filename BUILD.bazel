@@ -3012,6 +3012,9 @@ pkg_filegroup(
         ":kselftest_timers_tests_raw_skew_x86_64",
         ":kselftest_timers_threadtest_x86_64",
         ":kselftest_timers_valid_adjtimex_x86_64",
+        ":kselftest_vdso_vdso_test_abi_x86_64",
+        ":kselftest_vdso_vdso_test_getcpu_x86_64",
+        ":kselftest_vdso_vdso_test_gettimeofday_x86_64",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3120,6 +3123,9 @@ pkg_filegroup(
         ":kselftest_timers_tests_raw_skew_x86",
         ":kselftest_timers_threadtest_x86",
         ":kselftest_timers_valid_adjtimex_x86",
+        ":kselftest_vdso_vdso_test_abi_x86",
+        ":kselftest_vdso_vdso_test_getcpu_x86",
+        ":kselftest_vdso_vdso_test_gettimeofday_x86",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3221,6 +3227,9 @@ pkg_filegroup(
         ":kselftest_timers_tests_raw_skew_arm",
         ":kselftest_timers_threadtest_arm",
         ":kselftest_timers_valid_adjtimex_arm",
+        ":kselftest_vdso_vdso_test_abi_arm",
+        ":kselftest_vdso_vdso_test_getcpu_arm",
+        ":kselftest_vdso_vdso_test_gettimeofday_arm",
     ],
     visibility = ["//visibility:private"],
 )
@@ -3324,6 +3333,9 @@ pkg_filegroup(
         ":kselftest_timers_tests_raw_skew_arm64",
         ":kselftest_timers_threadtest_arm64",
         ":kselftest_timers_valid_adjtimex_arm64",
+        ":kselftest_vdso_vdso_test_abi_arm64",
+        ":kselftest_vdso_vdso_test_getcpu_arm64",
+        ":kselftest_vdso_vdso_test_gettimeofday_arm64",
     ],
     visibility = ["//visibility:private"],
 )
