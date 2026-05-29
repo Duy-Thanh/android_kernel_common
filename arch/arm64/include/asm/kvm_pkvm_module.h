@@ -323,7 +323,7 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(4, int (*request_hyp_alloc)(void));
 	ANDROID_KABI_USE(5, int (*device_register_power_lock)(u64 phys, void *cookie,
 					     int(*cb)(void *cookie, bool lock)));
-	ANDROID_KABI_RESERVE(6);
+	ANDROID_KABI_USE(6, size_t (*running_pvms_count)(void));
 	ANDROID_KABI_RESERVE(7);
 	ANDROID_KABI_RESERVE(8);
 	ANDROID_KABI_RESERVE(9);
