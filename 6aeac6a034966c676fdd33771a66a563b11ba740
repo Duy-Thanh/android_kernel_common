@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7d367ed_f20617cf",
+        "filename": "drivers/virt/gunyah/Kconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-05-29T06:43:10Z",
+      "side": 1,
+      "message": "The intended production enforcement is at the EL2 stage after a freeze point (Thats a proprietary logic). Once freeze is applied the protected kernel is immutable, we also have a telemetry logic for post kprobe and patching attempts. For debugging freeze can be disabled on remote targets (proprietary).\n\nAny additional production policy such as restricting debugfs/tracefs access or module loading is outside of this patch. This change is only a notification of intended frozen ranges to EL2/",
+      "parentUuid": "6b002a49_6f1e8c08",
+      "range": {
+        "startLine": 69,
+        "startChar": 57,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec8a8eb6_98c784d1",
         "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
         "patchSetId": 13
