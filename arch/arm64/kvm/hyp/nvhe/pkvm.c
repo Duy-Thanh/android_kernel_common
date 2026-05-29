@@ -371,6 +371,23 @@ struct pkvm_hyp_vm *get_np_pkvm_hyp_vm(pkvm_handle_t handle)
 	return hyp_vm;
 }
 
+size_t pkvm_running_pvms_count(void)
+{
+	struct pkvm_hyp_vm *vm;
+	size_t count = 0;
+
+	hyp_read_lock(&vm_table_lock);
+
+	list_for_each_entry(vm, &running_vms, vm_list) {
+		if (!pkvm_hyp_vm_is_protected(vm))
+			continue;
+		count++;
+	}
+
+	hyp_read_unlock(&vm_table_lock);
+	return count;
+}
+
 int __pkvm_reclaim_dying_guest_page(pkvm_handle_t handle, u64 pfn, u64 gfn, u8 order)
 {
 	struct pkvm_hyp_vm *hyp_vm;
