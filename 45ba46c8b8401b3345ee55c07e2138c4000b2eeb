@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa7b3bec_ef2a2755",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-29T19:16:26Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry pi...\n\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "45ba46c8b8401b3345ee55c07e2138c4000b2eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b98f9b_8d0d6d1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-05-29T19:16:26Z",
+      "side": 1,
+      "message": "\"BACKPORT\" patches should have an annotation explaining what needed to change as part of the backport.\n\nSee the contribution guidelines at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-backports-from-mainline-linux",
+      "revId": "45ba46c8b8401b3345ee55c07e2138c4000b2eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
