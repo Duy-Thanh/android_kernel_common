@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c589086b_bc0570c6",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T12:26:49Z",
+      "side": 1,
+      "message": "nit: this branch is exactly the same as the branch at line 472? So it would make more sense to have them combined into one branch in this patch, and then split it in patch aosp/4060773?",
+      "fixSuggestions": [
+        {
+          "fixId": "df185edb_dbc9ca8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 472,
+                "startChar": 0,
+                "endLine": 474,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "debc5159_5842888b",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 25
