@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b620a35e_52cdd09d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "012862dd_de32a85c",
+      "revId": "34dfe26a632a47a73ea6537c92d6dfb6ab2d8996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a260a86_35e2b885",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-29T12:23:23Z",
       "side": 1,
       "message": "nit: similar question: maybe put DMAR_IQH_REG and DMAR_IQT_REG here from the beginning, instead of moving them here in this patch?",
+      "revId": "34dfe26a632a47a73ea6537c92d6dfb6ab2d8996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6de671f7_078d29f0",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a260a86_35e2b885",
       "revId": "34dfe26a632a47a73ea6537c92d6dfb6ab2d8996",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
