@@ -16,6 +16,24 @@
       "message": "Please fold this change into its parent.",
       "revId": "efdcb28182f151ad6f4d3787426bee4e3beaf6cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7aaf0e_3c0630d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983825
+      },
+      "writtenOn": "2026-05-29T14:33:45Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b7ce1ffa_2dcac8e0",
+      "revId": "efdcb28182f151ad6f4d3787426bee4e3beaf6cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
