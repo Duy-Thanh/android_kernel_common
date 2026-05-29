@@ -32559,6 +32559,11 @@ pointer_reference {
   pointee_type_id: 0xf013a996
 }
 pointer_reference {
+  id: 0x3695f49b
+  kind: POINTER
+  pointee_type_id: 0xf01734f2
+}
+pointer_reference {
   id: 0x369662d6
   kind: POINTER
   pointee_type_id: 0xf0196dc4
@@ -43997,6 +44002,11 @@ qualified {
   id: 0xf013a996
   qualifier: CONST
   qualified_type_id: 0xb00910d2
+}
+qualified {
+  id: 0xf01734f2
+  qualifier: CONST
+  qualified_type_id: 0xb01b6540
 }
 qualified {
   id: 0xf02f20a3
@@ -72553,6 +72563,12 @@ member {
   name: "bit"
   type_id: 0xc9082b19
   offset: 64
+}
+member {
+  id: 0x13b29d75
+  name: "bit"
+  type_id: 0x295c7202
+  offset: 40
 }
 member {
   id: 0x13de4517
@@ -105847,6 +105863,12 @@ member {
   name: "duplex"
   type_id: 0xb3e7bac9
   offset: 64
+}
+member {
+  id: 0x70a3bdf2
+  name: "duplex"
+  type_id: 0x295c7202
+  offset: 32
 }
 member {
   id: 0x70edc889
@@ -229597,6 +229619,11 @@ member {
   offset: 32
 }
 member {
+  id: 0xa02385f2
+  name: "speed"
+  type_id: 0xc9082b19
+}
+member {
   id: 0xa03e3712
   name: "speed"
   type_id: 0xd4bacb77
@@ -329822,6 +329849,17 @@ struct_union {
     member_id: 0x4a965b92
     member_id: 0x7c00e79b
     member_id: 0x4a5feae8
+  }
+}
+struct_union {
+  id: 0xb01b6540
+  kind: STRUCT
+  name: "phy_setting"
+  definition {
+    bytesize: 8
+    member_id: 0xa02385f2
+    member_id: 0x70a3bdf2
+    member_id: 0x13b29d75
   }
 }
 struct_union {
@@ -433316,6 +433354,13 @@ function {
   parameter_id: 0x92233392
 }
 function {
+  id: 0xbf2cc0f8
+  return_type_id: 0x3176a085
+  parameter_id: 0x35d510c3
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0xbf379f2f
   return_type_id: 0x3176a085
   parameter_id: 0x35d510c3
@@ -435291,6 +435336,14 @@ function {
   parameter_id: 0x4585663f
   parameter_id: 0x4585663f
   parameter_id: 0x4585663f
+}
+function {
+  id: 0xe50a8d7f
+  return_type_id: 0x3695f49b
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3ea31487
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0xe543d9ca
@@ -482784,6 +482837,15 @@ elf_symbol {
   full_name: "get_pfnblock_flags_mask"
 }
 elf_symbol {
+  id: 0xde4e3c15
+  name: "get_phy_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2afa33eb
+  type_id: 0xbf2cc0f8
+  full_name: "get_phy_device"
+}
+elf_symbol {
   id: 0x475d45f1
   name: "get_pid_task"
   is_defined: true
@@ -495968,6 +496030,15 @@ elf_symbol {
   full_name: "netdev_err"
 }
 elf_symbol {
+  id: 0xeb2d9bd2
+  name: "netdev_features_change"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x042c21b8
+  type_id: 0x1c31d966
+  full_name: "netdev_features_change"
+}
+elf_symbol {
   id: 0x980489ec
   name: "netdev_get_name"
   is_defined: true
@@ -498198,6 +498269,15 @@ elf_symbol {
   crc: 0x71314b5f
   type_id: 0x909f3f56
   full_name: "of_get_mac_address"
+}
+elf_symbol {
+  id: 0x2434c654
+  name: "of_get_mac_address_nvmem"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x71314b5f
+  type_id: 0x909f3f56
+  full_name: "of_get_mac_address_nvmem"
 }
 elf_symbol {
   id: 0xd020be14
@@ -501716,6 +501796,15 @@ elf_symbol {
   full_name: "phy_device_free"
 }
 elf_symbol {
+  id: 0x3d4eb5a9
+  name: "phy_device_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4269afa1
+  type_id: 0x91dd4b0e
+  full_name: "phy_device_register"
+}
+elf_symbol {
   id: 0x5ebc16d0
   name: "phy_disconnect"
   is_defined: true
@@ -501948,6 +502037,15 @@ elf_symbol {
   crc: 0x4269afa1
   type_id: 0x91dd4b0e
   full_name: "phy_init_hw"
+}
+elf_symbol {
+  id: 0xf708e277
+  name: "phy_lookup_setting"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x34e4bd32
+  type_id: 0xe50a8d7f
+  full_name: "phy_lookup_setting"
 }
 elf_symbol {
   id: 0xe099752c
@@ -535967,6 +536065,7 @@ interface {
   symbol_id: 0xb3083c09
   symbol_id: 0x3746f7a2
   symbol_id: 0x7fafe916
+  symbol_id: 0xde4e3c15
   symbol_id: 0x475d45f1
   symbol_id: 0x8f644487
   symbol_id: 0xbc123b47
@@ -537431,6 +537530,7 @@ interface {
   symbol_id: 0x023c08b0
   symbol_id: 0x2ebee953
   symbol_id: 0xfac0e8e6
+  symbol_id: 0xeb2d9bd2
   symbol_id: 0x980489ec
   symbol_id: 0x1a34a34f
   symbol_id: 0x06bf2dbd
@@ -537679,6 +537779,7 @@ interface {
   symbol_id: 0xcb1195f1
   symbol_id: 0x71228b96
   symbol_id: 0x26fb2401
+  symbol_id: 0x2434c654
   symbol_id: 0xd020be14
   symbol_id: 0xf5728f86
   symbol_id: 0xb71ce21c
@@ -538069,6 +538170,7 @@ interface {
   symbol_id: 0x2bf61c61
   symbol_id: 0xa024235d
   symbol_id: 0x5b3ff607
+  symbol_id: 0x3d4eb5a9
   symbol_id: 0x5ebc16d0
   symbol_id: 0xb39736f6
   symbol_id: 0xd338b0a8
@@ -538095,6 +538197,7 @@ interface {
   symbol_id: 0x30e87de6
   symbol_id: 0x6fc1e83f
   symbol_id: 0x0e1df21c
+  symbol_id: 0xf708e277
   symbol_id: 0xe099752c
   symbol_id: 0xac520589
   symbol_id: 0x2eeef935
