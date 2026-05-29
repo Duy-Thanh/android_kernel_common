@@ -883,7 +883,7 @@ out:
 	return ret;
 }
 
-struct page *__cma_alloc(struct cma *cma, unsigned long count,
+static struct page *__cma_alloc(struct cma *cma, unsigned long count,
 		       unsigned int align, gfp_t gfp)
 {
 	struct page *page = NULL;
@@ -944,7 +944,6 @@ struct page *__cma_alloc(struct cma *cma, unsigned long count,
 
 	return page;
 }
-EXPORT_SYMBOL_GPL(__cma_alloc);
 
 /**
  * cma_alloc() - allocate pages from contiguous area
