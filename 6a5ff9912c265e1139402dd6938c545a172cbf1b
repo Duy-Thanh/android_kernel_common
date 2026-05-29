@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12811cae_d8a3d461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-05-29T12:44:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/6c8e95805dba19a28cdef25e28ac27afae1870f4) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d6c8e95805dba19a28cdef25e28ac27afae1870f4).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/6c8e95805dba19a28cdef25e28ac27afae1870f4\n\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/6a5ff9912c265e1139402dd6938c545a172cbf1b\n\n@@ -16,8 +16,16 @@\n\n  extern void pgd_init(void *addr);\n  extern pgd_t *pgd_alloc(struct mm_struct *mm);\n  \n--#define __pte_free_tlb(tlb, pte, address)\t\\\\\n--\ttlb_remove_ptdesc((tlb), page_ptdesc(pte))\n+-static inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)\n+-{\n+-\tpagetable_free(virt_to_ptdesc(pgd));\n+-}\n+-\n+-#define __pte_free_tlb(tlb, pte, address)\t\t\t\\\\\n+-do {\t\t\t\t\t\t\t\t\\\\\n+-\tpagetable_dtor(page_ptdesc(pte));\t\t\t\\\\\n+-\ttlb_remove_page_ptdesc((tlb), page_ptdesc(pte));\t\\\\\n+-} while (0)\n +#define __pte_free_tlb(tlb, pte, address)\ttlb_remove_ptdesc((tlb), page_ptdesc(pte))\n  \n  #ifndef __PAGETABLE_PMD_FOLDED\n```",
+      "revId": "6a5ff9912c265e1139402dd6938c545a172cbf1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
