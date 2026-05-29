@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c30646a_5c43e9c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-29T09:52:49Z",
+      "side": 1,
+      "message": "Ah yes, you are right. The point when we consider the host untrusted is after init_finalize, as this is the point where we can\u0027t reprivilege anymore.",
+      "parentUuid": "fd76883c_cd6ae8f4",
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be76c80b_6436ec51",
@@ -85,6 +103,24 @@
           ]
         }
       ],
+      "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a700a93d_51ca8efc",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-05-29T09:52:49Z",
+      "side": 1,
+      "message": "Agree, done.",
+      "parentUuid": "be76c80b_6436ec51",
       "revId": "8fbe47b4298105f9bdd74b19a6db9c831ccc46d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
