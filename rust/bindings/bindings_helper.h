@@ -84,6 +84,7 @@
 #include <linux/security.h>
 #include <linux/shmem_fs.h>
 #include <linux/slab.h>
+#include <linux/sys_soc.h>
 #include <linux/task_work.h>
 #include <linux/tracepoint.h>
 #include <linux/usb.h>
