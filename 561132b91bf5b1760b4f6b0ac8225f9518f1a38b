@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af24643_018c3d95",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T16:04:34Z",
+      "side": 1,
+      "message": "Any actual advantage of using `sizeof(u32)` and `sizeof(u64)` instead of simple `4` and `8` (like e.g. in iommu_direct_mmio_read()/iommu_direct_mmio_write())?",
+      "fixSuggestions": [
+        {
+          "fixId": "99a5dac7_6a63b98f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\tif (len \u003d\u003d 8 \u0026\u0026\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "\t    !iommu_pmu_window_in_range(iommu, freeze, 8) ||\n\t    !iommu_pmu_window_in_range(iommu, overflow, 8) ||\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t       (num_cntr - 1) * stride + 8))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 153,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (len !\u003d 8)\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 159,
+                "startChar": 0,
+                "endLine": 160,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (len !\u003d 4)\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 225,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": "\tif (len !\u003d 8)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "561132b91bf5b1760b4f6b0ac8225f9518f1a38b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
