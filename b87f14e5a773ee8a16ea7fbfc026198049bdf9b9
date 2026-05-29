@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56aff5b2_8711ee58",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T14:02:35Z",
+      "side": 1,
+      "message": "Ahh nice catch. Did not think through this. Will fix it by adding a check here:\n```\n-               ret \u003d iommu_direct_mmio_read(iommu, phys, len, val);\n+               if (!IS_ALIGNED(offset, 8))\n+                       ret \u003d -EINVAL;\n+               else\n+                       ret \u003d iommu_direct_mmio_read(iommu, phys, len, val);\n```",
+      "parentUuid": "c83d2a0b_cdbd8b0d",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c589086b_bc0570c6",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 25
@@ -66,6 +84,24 @@
       "writtenOn": "2026-05-29T11:55:29Z",
       "side": 1,
       "message": "Do we really have any concerns about allowing the host to _read_ these ECCAP registers if cap_ecmds\u003d0?\n\nIf we do, why don\u0027t we have the same concerns about DMAR_ECRSP_REG above?",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da32006_f9747a9d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T14:02:35Z",
+      "side": 1,
+      "message": "True, no security concerns. Was just a sanity check and I missed this for DMAR_ECRSP_REG. Will remove this",
+      "parentUuid": "debc5159_5842888b",
       "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
