@@ -1341,8 +1341,15 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 	if (fault & DMA_FSTS_ITE) {
 		head = dmar_readl(iommu, DMAR_IQH_REG);
 		head = ((head >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
+<<<<<<< TARGET BRANCH (6926de48649452c434832c81980e1da7544b1227 ANDROID: nvmem: add layout driver API symbols to qcom allowl)
 		head |= 1;
 		tail = dmar_readl(iommu, DMAR_IQT_REG);
+||||||| BASE          (b36512b017e9e782db80ca364d9f1ccba8b5bcdb ANDROID: nvmem: add layout driver API symbols to qcom allowl)
+		head |= 1;
+		tail = readl(iommu->reg + DMAR_IQT_REG);
+=======
+		tail = readl(iommu->reg + DMAR_IQT_REG);
+>>>>>>> SOURCE BRANCH (28ab3740535fed3db0d29b05219e2d962d43f5fd Merge tag 'android16-6.12.81_r00' into android16-6.12)
 		tail = ((tail >> shift) - 1 + QI_LENGTH) % QI_LENGTH;
 
 		/*
@@ -1358,7 +1365,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 		do {
 			if (qi->desc_status[head] == QI_IN_USE)
 				qi->desc_status[head] = QI_ABORT;
-			head = (head - 2 + QI_LENGTH) % QI_LENGTH;
+			head = (head - 1 + QI_LENGTH) % QI_LENGTH;
 		} while (head != tail);
 
 		/*
