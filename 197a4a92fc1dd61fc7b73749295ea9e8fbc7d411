@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65292887_b9cb660b",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-29T12:06:08Z",
+      "side": 1,
+      "message": "This handling of FSTS and PERFINTRSTS is a bit distinct from enabling deny-by-default, so seems better to add it in a separate patch instead? or for example squash them into aosp/4024201 and aosp/4024202 respectively (and rename those patches respectively as \"Validate fault event control/status registers\" and \"Validate perf event interrupt control/status registers\")?",
+      "revId": "197a4a92fc1dd61fc7b73749295ea9e8fbc7d411",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
