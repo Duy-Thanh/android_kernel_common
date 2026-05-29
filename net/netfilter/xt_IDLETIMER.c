@@ -366,7 +366,7 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 {
 	int ret;
 
-	info->timer = kzalloc(sizeof(*info->timer), GFP_KERNEL);
+	info->timer = kmalloc(sizeof(*info->timer), GFP_KERNEL);
 	if (!info->timer) {
 		ret = -ENOMEM;
 		goto out;
@@ -408,6 +408,7 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 	info->timer->uid = 0;
 	info->timer->last_modified_timer =
 		ktime_to_timespec64(ktime_get_boottime());
+	info->timer->suspend_time_valid = false;
 
 	info->timer->pm_nb.notifier_call = idletimer_resume;
 	ret = register_pm_notifier(&info->timer->pm_nb);
