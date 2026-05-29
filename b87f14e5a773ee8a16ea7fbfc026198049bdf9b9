@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c884f9e5_92c068c7",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65b152ed_137b734f",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c589086b_bc0570c6",
@@ -143,6 +161,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "425c0dde_1548c082",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c589086b_bc0570c6",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "debc5159_5842888b",
@@ -174,6 +210,24 @@
       "side": 1,
       "message": "True, no security concerns. Was just a sanity check and I missed this for DMAR_ECRSP_REG. Will remove this",
       "parentUuid": "debc5159_5842888b",
+      "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f533d164_45fc4441",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-29T16:14:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da32006_f9747a9d",
       "revId": "b87f14e5a773ee8a16ea7fbfc026198049bdf9b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
