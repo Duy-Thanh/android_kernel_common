@@ -417245,6 +417245,14 @@ function {
   parameter_id: 0x3c63caea
 }
 function {
+  id: 0x9b1036d3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2e029f76
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x3029eaf7
+}
+function {
   id: 0x9b10b4a6
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -441830,6 +441838,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_cgroup_force_kthread_migration"
 }
 elf_symbol {
+  id: 0x51af3ddb
+  name: "__traceiter_android_rvh_check_class_changing"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x94c5eea7
+  type_id: 0x9b1036d3
+  full_name: "__traceiter_android_rvh_check_class_changing"
+}
+elf_symbol {
   id: 0xc93c7d6d
   name: "__traceiter_android_rvh_check_preempt_tick"
   is_defined: true
@@ -450099,6 +450116,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_cgroup_force_kthread_migration"
+}
+elf_symbol {
+  id: 0x449ef0d1
+  name: "__tracepoint_android_rvh_check_class_changing"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_check_class_changing"
 }
 elf_symbol {
   id: 0x60b5a917
@@ -531077,6 +531103,7 @@ interface {
   symbol_id: 0x192bbbd5
   symbol_id: 0xadc13d20
   symbol_id: 0xbbd04d50
+  symbol_id: 0x51af3ddb
   symbol_id: 0xc93c7d6d
   symbol_id: 0x1a98f488
   symbol_id: 0x5e9397c4
@@ -531996,6 +532023,7 @@ interface {
   symbol_id: 0x1e8a7e23
   symbol_id: 0xfe3875f6
   symbol_id: 0xb208306e
+  symbol_id: 0x449ef0d1
   symbol_id: 0x60b5a917
   symbol_id: 0xca558d1e
   symbol_id: 0x070d1e2a
