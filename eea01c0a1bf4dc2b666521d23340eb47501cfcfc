@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8b4b11_48852a4c",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-30T11:02:44Z",
+      "side": 1,
+      "message": "nit: just wondering: why not arrange the patches in such a way that we only need to add new lines of code in this patch here, without modifying existing ones that are not related to FRCD (thus make it easier to review)? I.e.: use the `pmu_info` variable name already in the previous patch (instead of renaming it in this patch), and flip the order or PMU and FRCD here (or alternatively flip the order of patches themselves) so that we just add an `else if` without modifying the existing `if`?",
+      "revId": "eea01c0a1bf4dc2b666521d23340eb47501cfcfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65a2cc3_4a7987a0",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-30T11:02:44Z",
+      "side": 1,
+      "message": "`num_frcd` is already u32, no need to cast it?",
+      "fixSuggestions": [
+        {
+          "fixId": "4412d080_18dde845",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "\tif (offset \u003c fro || offset \u003e\u003d fro + num_frcd * FRCD_REG_SIZE)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eea01c0a1bf4dc2b666521d23340eb47501cfcfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
