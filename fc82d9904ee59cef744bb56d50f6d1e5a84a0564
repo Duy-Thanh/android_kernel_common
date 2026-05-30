@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9054ee_6e142bfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-30T12:56:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dde1842_9f258526",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "fc82d9904ee59cef744bb56d50f6d1e5a84a0564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd2f8b93_7f525577",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-05-29T18:55:04Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "fc82d9904ee59cef744bb56d50f6d1e5a84a0564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6519a5f5_331a870f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-05-30T12:56:15Z",
+      "side": 1,
+      "message": "The file was changed a lot, and it only has a minimal QoL effect on IDE usage.",
+      "parentUuid": "bd2f8b93_7f525577",
       "range": {
         "startLine": 48,
         "startChar": 12,
