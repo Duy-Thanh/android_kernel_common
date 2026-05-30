@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60963ba_26731c9a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-30T21:56:35Z",
+      "side": 1,
+      "message": "This would be more readable?\n\n```\n\tif (!(perfcap \u0026 BIT_ULL(51))) {\n\t\tinfo-\u003ecntr_width \u003d pcap_cntr_width(perfcap);\n\t\tinfo-\u003ecntr_gfs \u003d perfcap \u0026 BIT_ULL(49);\n\t\tinfo-\u003ecntr_ios \u003d perfcap \u0026 BIT_ULL(50);\n\t\treturn;\n\t}\n```",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0869e9a_4bfdf291",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-30T21:56:35Z",
+      "side": 1,
+      "message": "Interesting, the corresponding host driver code seems a bit buggy in this regard... Asked about that at https://lore.kernel.org/all/d94621d0-8cc8-bb2e-7323-97e500b6a3fa@linux.intel.com/",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693f78ce_234b04de",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-30T21:56:35Z",
+      "side": 1,
+      "message": "These are boolean, so e.g.:\n\n```\n\tinfo-\u003ecntr_gfs \u003d !!(cap \u0026 BIT(17));\n\tinfo-\u003ecntr_ios \u003d iommu_cntrcap_ios(cap);\n```\n\n?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
