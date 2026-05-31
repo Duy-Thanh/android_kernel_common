@@ -596,6 +596,7 @@ struct binder_thread {
 	int pid;
 	int looper;              /* only modified by this thread */
 	bool looper_need_return; /* can be written by other thread */
+	bool shrink;             /* can be written by other thread */
 	struct binder_transaction *transaction_stack;
 	struct list_head todo;
 	bool process_todo;
