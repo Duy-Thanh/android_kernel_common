@@ -153,6 +153,291 @@
       "message": "Instead of this loop we could just check:\n\n```\n\tif (offset \u003e\u003d counter \u0026\u0026 offset \u003c counter + num_cntr * stride \u0026\u0026\n\t    (offset - counter) % stride \u003d\u003d 0) {\n\t\tinfo-\u003etype \u003d PKVM_IOMMU_PMU_REG_COUNTER;\n\t\tinfo-\u003ecounter \u003d (offset - counter) / stride;\n\t\tiommu_pmu_counter_caps(iommu, perfcap, cfg, info-\u003ecounter, info);\n\t\treturn true;\n\t}\n```\n\n?",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd730feb_88767767",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T21:23:51Z",
+      "side": 1,
+      "message": "nit: maybe `val32` for clarity?",
+      "fixSuggestions": [
+        {
+          "fixId": "fba764a2_23f40ab3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 270,
+                "startChar": 0,
+                "endLine": 271,
+                "endChar": 0
+              },
+              "replacement": "\tu32 val32 \u003d (u32)val;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 299,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val32 \u0026 GENMASK(30, 16)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 300,
+                "startChar": 0,
+                "endLine": 301,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t iommu-\u003eseq_id, val32);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 306,
+                "startChar": 0,
+                "endLine": 307,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val32 \u0026 GENMASK(30, 22)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 309,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t iommu-\u003eseq_id, val32);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 311,
+                "startChar": 0,
+                "endLine": 312,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (FIELD_GET(GENMASK(21, 20), val32) \u003d\u003d 3) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 319,
+                "startChar": 0,
+                "endLine": 320,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val32 \u0026 (GENMASK(30, 5) | BIT(3))) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 321,
+                "startChar": 0,
+                "endLine": 322,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t iommu-\u003eseq_id, val32);\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 327,
+                "startChar": 0,
+                "endLine": 328,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val32 \u0026 GENMASK(30, 5)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t iommu-\u003eseq_id, val32);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c2d2f65_eb31f16a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T21:23:51Z",
+      "side": 1,
+      "message": "Just thinking: since the host doesn\u0027t really use GFO, maybe it\u0027s better to not allow it (and return EOPNOTSUPP)? The less we allow, the better (from security standpoint)?",
+      "fixSuggestions": [
+        {
+          "fixId": "4875849b_c5dcd396",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 284,
+                "startChar": 0,
+                "endLine": 286,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val \u0026 BIT_ULL(2)) {\n\t\t\tpkvm_err(\"iommu%d: PERFCNTRCFG.GFO is not supported\\n\",\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 287,
+                "startChar": 0,
+                "endLine": 288,
+                "endChar": 0
+              },
+              "replacement": "\t\t\treturn -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9753bed2_2e06c00b",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T21:23:51Z",
+      "side": 1,
+      "message": "Maybe use IOMMU_EVENT_CFG_INT?",
+      "fixSuggestions": [
+        {
+          "fixId": "db65a762_d3b97224",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 289,
+                "startChar": 0,
+                "endLine": 290,
+                "endChar": 0
+              },
+              "replacement": "\t\tif ((val \u0026 IOMMU_EVENT_CFG_INT) \u0026\u0026 !info-\u003ecntr_ios) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e67057e1_423be369",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T21:23:51Z",
+      "side": 1,
+      "message": "AFAICS `info-\u003ecntr_width \u003e BITS_PER_TYPE(u64)` shouldn\u0027t happen unless we have a bug (since both pcap_cntr_width() and iommu_cntrcap_cw() make sure it is no more than 8 bits), so maybe use a WARN_ON_ONCE for it?\n\nAnd again, why not just 64 instead of BITS_PER_TYPE(u64)?",
+      "fixSuggestions": [
+        {
+          "fixId": "cd13a48a_7a4c9f9e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 342,
+                "startChar": 0,
+                "endLine": 343,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!info-\u003ecntr_width || WARN_ON_ONCE(info-\u003ecntr_width \u003e 64)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 347,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (info-\u003ecntr_width \u003c 64 \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24fcb7c_b3de7c4a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T21:23:51Z",
+      "side": 1,
+      "message": "It seems we don\u0027t need this `info-\u003ecntr_width \u003c BITS_PER_TYPE(u64)` check here, since the case when cntr_width \u003e 64 is already prevented by the above check, and in the case when cntr_width \u003d\u003d 64 the condition `val \u0026 ~GENMASK_ULL(info-\u003ecntr_width - 1, 0)` will be false?",
+      "fixSuggestions": [
+        {
+          "fixId": "8ca2d0c3_f4201833",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 347,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val \u0026 ~GENMASK_ULL(info-\u003ecntr_width - 1, 0)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
