@@ -5031,6 +5031,46 @@ retry:
 		size_t trsize = sizeof(*trd);
 
 		binder_inner_proc_lock(proc);
+
+		// KMI-safe shrink check
+		bool should_shrink = false;
+		bool buffer_full = false;
+		struct binder_proc_wrap *proc_wrap = proc_wrapper(proc);
+		struct binder_thread_shrink_node *shrink_node, *tmp;
+
+		spin_lock(&proc_wrap->shrink_lock);
+		list_for_each_entry_safe(shrink_node, tmp, &proc_wrap->threads_to_shrink, entry) {
+			if (shrink_node->thread == thread) {
+				if (binder_worklist_empty_ilocked(&thread->todo)) {
+					if (ptr + sizeof(uint32_t) > end) {
+						buffer_full = true;
+						break;
+					}
+					should_shrink = true;
+				}
+				list_del(&shrink_node->entry);
+				kfree(shrink_node);
+				break;
+			}
+		}
+		spin_unlock(&proc_wrap->shrink_lock);
+
+		if (buffer_full) {
+			binder_inner_proc_unlock(proc);
+			break;
+		}
+
+		if (should_shrink) {
+			binder_inner_proc_unlock(proc);
+			if (put_user(BR_SHRINK_THREAD, (uint32_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(uint32_t);
+			binder_stat_br(proc, thread, BR_SHRINK_THREAD);
+			binder_debug(BINDER_DEBUG_THREADS,
+				     "%d:%d BR_SHRINK_THREAD\n",
+				     proc->pid, thread->pid);
+			break;
+		}
 		trace_android_vh_binder_select_special_worklist(&list, thread,
 						proc, wait_for_proc_work, &nothing_to_do);
 		if (list)
@@ -5600,6 +5640,19 @@ static int binder_thread_release(struct binder_proc *proc,
 	struct binder_transaction *send_reply = NULL;
 	int active_transactions = 0;
 	struct binder_transaction *last_t = NULL;
+	struct binder_proc_wrap *proc_wrap = proc_wrapper(proc);
+	struct binder_thread_shrink_node *shrink_node, *tmp;
+
+	// Clean up any pending shrink requests for this thread
+	spin_lock(&proc_wrap->shrink_lock);
+	list_for_each_entry_safe(shrink_node, tmp, &proc_wrap->threads_to_shrink, entry) {
+		if (shrink_node->thread == thread) {
+			list_del(&shrink_node->entry);
+			kfree(shrink_node);
+			break;
+		}
+	}
+	spin_unlock(&proc_wrap->shrink_lock);
 
 	binder_inner_proc_lock(thread->proc);
 	/*
@@ -6046,6 +6099,100 @@ static int binder_ioctl_get_extended_error(struct binder_thread *thread,
 	return 0;
 }
 
+static bool binder_is_idle_looper_ilocked(struct binder_thread *thread)
+{
+	return (thread->looper & BINDER_LOOPER_STATE_WAITING) &&
+		(thread->looper & BINDER_LOOPER_STATE_REGISTERED) &&
+		binder_available_for_proc_work_ilocked(thread);
+}
+
+static int binder_ioctl_trim_threads(struct binder_proc *proc, uint32_t target)
+{
+	struct rb_node *n;
+	struct binder_thread *thread;
+	int idle_count = 0;
+	int trim_count = 0;
+	struct binder_thread_shrink_node **nodes = NULL;
+	int to_trim = 0;
+	struct binder_proc_wrap *proc_wrap = proc_wrapper(proc);
+
+	// 1. Count idle threads
+	binder_inner_proc_lock(proc);
+	for (n = rb_first(&proc->threads); n != NULL; n = rb_next(n)) {
+		thread = rb_entry(n, struct binder_thread, rb_node);
+		if (binder_is_idle_looper_ilocked(thread)) {
+			idle_count++;
+		}
+	}
+	binder_inner_proc_unlock(proc);
+
+	if (idle_count <= target) {
+		return 0;
+	}
+
+	to_trim = idle_count - target;
+
+	// 2. Allocate nodes outside lock
+	nodes = kmalloc_array(to_trim, sizeof(*nodes), GFP_KERNEL);
+	if (!nodes)
+		return -ENOMEM;
+
+	for (int i = 0; i < to_trim; i++) {
+		nodes[i] = kzalloc(sizeof(**nodes), GFP_KERNEL);
+		if (!nodes[i]) {
+			for (int j = 0; j < i; j++)
+				kfree(nodes[j]);
+			kfree(nodes);
+			return -ENOMEM;
+		}
+	}
+
+	// 3. Apply shrink under lock
+	binder_inner_proc_lock(proc);
+	spin_lock(&proc_wrap->shrink_lock);
+
+	// Recalculate in case it changed
+	idle_count = 0;
+	for (n = rb_first(&proc->threads); n != NULL; n = rb_next(n)) {
+		thread = rb_entry(n, struct binder_thread, rb_node);
+		if (binder_is_idle_looper_ilocked(thread)) {
+			idle_count++;
+		}
+	}
+
+	to_trim = idle_count - target;
+	if (to_trim <= 0) {
+		spin_unlock(&proc_wrap->shrink_lock);
+		binder_inner_proc_unlock(proc);
+		trim_count = 0;
+		goto free_all;
+	}
+
+	trim_count = 0;
+	for (n = rb_first(&proc->threads); n != NULL && trim_count < to_trim; n = rb_next(n)) {
+		thread = rb_entry(n, struct binder_thread, rb_node);
+		if (binder_is_idle_looper_ilocked(thread)) {
+			struct binder_thread_shrink_node *node = nodes[trim_count];
+			node->thread = thread;
+			list_add_tail(&node->entry, &proc_wrap->threads_to_shrink);
+			thread->looper_need_return = true;
+
+			pr_info("binder: %d:%d selected for shrink (KMI safe)\n", proc->pid, thread->pid);
+			wake_up_interruptible(&thread->wait);
+			trim_count++;
+		}
+	}
+	spin_unlock(&proc_wrap->shrink_lock);
+	binder_inner_proc_unlock(proc);
+
+free_all:
+	for (int i = trim_count; i < to_trim; i++) {
+		kfree(nodes[i]);
+	}
+	kfree(nodes);
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -6087,6 +6234,18 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_lock(proc);
 		proc->max_threads = max_threads;
 		binder_inner_proc_unlock(proc);
+		break;
+	}
+	case BINDER_TRIM_THREADS: {
+		u32 target;
+
+		if (copy_from_user(&target, ubuf, sizeof(target))) {
+			ret = -EFAULT;
+			goto err;
+		}
+		ret = binder_ioctl_trim_threads(proc, target);
+		if (ret)
+			goto err;
 		break;
 	}
 	case BINDER_SET_CONTEXT_MGR_EXT: {
@@ -6347,6 +6506,8 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	if (proc_wrap == NULL)
 		return -ENOMEM;
 	proc = &proc_wrap->proc;
+	INIT_LIST_HEAD(&proc_wrap->threads_to_shrink);
+	spin_lock_init(&proc_wrap->shrink_lock);
 
 	dbitmap_init(&proc->dmap);
 	spin_lock_init(&proc->inner_lock);

@@ -502,6 +502,8 @@ struct binder_proc {
  * @mapped:                  whether the vm area is mapped, each binderinstance
  *                           is allowed a single mapping throughout its lifetime
  */
+struct binder_thread_shrink_node;
+
 struct binder_proc_wrap {
 	struct binder_proc proc;
 	struct binder_alloc_wrap {
@@ -509,6 +511,8 @@ struct binder_proc_wrap {
 		struct page **pages;
 		bool mapped;
 	} alloc;
+	struct list_head threads_to_shrink;
+	spinlock_t shrink_lock;
 };
 
 static inline
@@ -684,6 +688,11 @@ struct binder_object {
 		struct binder_buffer_object bbo;
 		struct binder_fd_array_object fdao;
 	};
+};
+
+struct binder_thread_shrink_node {
+	struct list_head entry;
+	struct binder_thread *thread;
 };
 
 #endif /* _LINUX_BINDER_INTERNAL_H */
