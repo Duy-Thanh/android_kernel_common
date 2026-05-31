@@ -73,6 +73,24 @@
       "message": "This patch has been submitted to android15-6.1 branch before, so could cherry-pick that instead. See https://r.android.com/2470891.",
       "revId": "45ba46c8b8401b3345ee55c07e2138c4000b2eeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519ca660_6e51cf1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-31T14:48:42Z",
+      "side": 1,
+      "message": "Actually, maybe cherry-pick this because it is the same release branch: https://r.android.com/2450266",
+      "parentUuid": "6b55791e_ce77cd01",
+      "revId": "45ba46c8b8401b3345ee55c07e2138c4000b2eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
