@@ -320,6 +320,7 @@ enum {
 	BINDER_GET_FROZEN_INFO		= _IOWR('b', 15, struct binder_frozen_status_info),
 	BINDER_ENABLE_ONEWAY_SPAM_DETECTION	= _IOW('b', 16, __u32),
 	BINDER_GET_EXTENDED_ERROR	= _IOWR('b', 17, struct binder_extended_error),
+	BINDER_TRIM_THREADS		= _IOW('b', 18, __u32),
 };
 
 /*
@@ -532,6 +533,7 @@ enum binder_driver_return_protocol {
 	/*
 	 * void *: cookie
 	 */
+	BR_SHRINK_THREAD = _IO('r', 23),
 };
 
 enum binder_driver_command_protocol {
