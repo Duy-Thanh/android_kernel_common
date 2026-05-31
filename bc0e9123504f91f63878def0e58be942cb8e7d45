@@ -50,6 +50,109 @@
       "message": "These are boolean, so e.g.:\n\n```\n\tinfo-\u003ecntr_gfs \u003d !!(cap \u0026 BIT(17));\n\tinfo-\u003ecntr_ios \u003d iommu_cntrcap_ios(cap);\n```\n\n?",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a32bd35_15d24572",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T19:25:55Z",
+      "side": 1,
+      "message": "Looks like we are reading the same register we\u0027ve already read in iommu_pmu_counter_caps() above? We could avoid reading it 2nd time?\n\n(For example, we would avoid that if we read all these registers just once at pKVM initialization, similarly to the the host driver, per my other comment?)",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b2c983_5ba29639",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T19:25:55Z",
+      "side": 1,
+      "message": "It looks like the host doesn\u0027t really use the PERFFRZSTS registers? So perhaps we don\u0027t really need to support them (and thus, in particular, don\u0027t need to add the DMAR_PERFFRZOFF_REG definition to iommu.h, and so on)?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e4c5e1_2afa178f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T19:25:55Z",
+      "side": 1,
+      "message": "I guess the reason why we only support the first PERFOVFSTS register is that the host currently uses no more than 64 counters (IOMMU_PMU_IDX_MAX), so they all fit in one register? But it is not so obvious, so may be worth adding a short comment about it?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdebe2cf_f20ea566",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T19:25:55Z",
+      "side": 1,
+      "message": "`num_ctrl` is capped at IOMMU_PMU_IDX_MAX in `iommu_pmu_num_counters()`, so we never have the `num_cntr \u003e BITS_PER_TYPE(u64)` case (otherwise we would need to support multiple PERFOVFSTS registers, per above)? So `GENMASK_ULL(num_cntr - 1, 0)` covers all needed cases?\n\n...Besides, using `BITS_PER_TYPE(u64)` instead of just 64 surely is an overkill? :)",
+      "fixSuggestions": [
+        {
+          "fixId": "efe158c3_234aa015",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 239,
+                "startChar": 0,
+                "endLine": 241,
+                "endChar": 0
+              },
+              "replacement": "\t\tinfo-\u003ewritable_mask \u003d GENMASK_ULL(num_cntr - 1, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8f2d6e_ac47776e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-31T19:25:55Z",
+      "side": 1,
+      "message": "Instead of this loop we could just check:\n\n```\n\tif (offset \u003e\u003d counter \u0026\u0026 offset \u003c counter + num_cntr * stride \u0026\u0026\n\t    (offset - counter) % stride \u003d\u003d 0) {\n\t\tinfo-\u003etype \u003d PKVM_IOMMU_PMU_REG_COUNTER;\n\t\tinfo-\u003ecounter \u003d (offset - counter) / stride;\n\t\tiommu_pmu_counter_caps(iommu, perfcap, cfg, info-\u003ecounter, info);\n\t\treturn true;\n\t}\n```\n\n?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
