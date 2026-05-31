@@ -16,6 +16,24 @@
       "message": "FROMGIT is only permitted if the branch will eventually be merged into `master`. If the changes will be rebased before this happens, then the SHA in the commit message will not match.\n\nPlease confirm!",
       "revId": "bc022d28bf26ec71f3ee52af8f18e03fe8b5d965",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b31ac5d_e933ffb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-31T15:16:54Z",
+      "side": 1,
+      "message": "The commit was already amended to add the `Fixes` tag in the maintainers branch, thus the change in the `(cherry picked from ...` line between patchsets here. So, this has a high chance of changing SHAs by the time it lands in mainline.\n\nHowever, this is a valid fix and I am actually not sure what tag would be more appropriate. This wasn\u0027t sent to lkml, so there is no FROMLIST to be linked. Maybe `ANDROID:`? Otherwise, it LGTM as is.",
+      "parentUuid": "b08f6be8_ae545fe1",
+      "revId": "bc022d28bf26ec71f3ee52af8f18e03fe8b5d965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
