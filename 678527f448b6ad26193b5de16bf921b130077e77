@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2c9d3e7_0f5a0de6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-31T14:18:10Z",
+      "side": 1,
+      "message": "You are missing a block before your signature explaining what you changed during the backport and why. Have a look at other `BACKPORT:` commit for examples.",
+      "revId": "678527f448b6ad26193b5de16bf921b130077e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
