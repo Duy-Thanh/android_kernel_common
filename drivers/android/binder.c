@@ -558,6 +558,7 @@ static bool binder_has_work_ilocked(struct binder_thread *thread,
 {
 	bool has_work = thread->process_todo ||
 		thread->looper_need_return ||
+		thread->shrink ||
 		(do_proc_work &&
 		!binder_worklist_empty_ilocked(&thread->proc->todo));
 	trace_android_vh_binder_has_special_work_ilocked(thread, do_proc_work, &has_work);
@@ -5031,6 +5032,22 @@ retry:
 		size_t trsize = sizeof(*trd);
 
 		binder_inner_proc_lock(proc);
+		if (thread->shrink) {
+			if (binder_worklist_empty_ilocked(&thread->todo)) {
+				thread->shrink = false;
+				binder_inner_proc_unlock(proc);
+				if (put_user(BR_SHRINK_THREAD, (uint32_t __user *)ptr))
+					return -EFAULT;
+				ptr += sizeof(uint32_t);
+				binder_stat_br(proc, thread, BR_SHRINK_THREAD);
+				binder_debug(BINDER_DEBUG_THREADS,
+					     "%d:%d BR_SHRINK_THREAD\n",
+					     proc->pid, thread->pid);
+				break;
+			} else {
+				thread->shrink = false;
+			}
+		}
 		trace_android_vh_binder_select_special_worklist(&list, thread,
 						proc, wait_for_proc_work, &nothing_to_do);
 		if (list)
@@ -6046,6 +6063,48 @@ static int binder_ioctl_get_extended_error(struct binder_thread *thread,
 	return 0;
 }
 
+static bool binder_is_idle_looper_ilocked(struct binder_thread *thread)
+{
+	return (thread->looper & BINDER_LOOPER_STATE_WAITING) &&
+		(thread->looper & BINDER_LOOPER_STATE_REGISTERED) &&
+		binder_available_for_proc_work_ilocked(thread);
+}
+
+static int binder_ioctl_trim_threads(struct binder_proc *proc, uint32_t target)
+{
+	struct rb_node *n;
+	struct binder_thread *thread;
+	int idle_count = 0;
+	int trim_count = 0;
+
+	binder_inner_proc_lock(proc);
+	for (n = rb_first(&proc->threads); n != NULL; n = rb_next(n)) {
+		thread = rb_entry(n, struct binder_thread, rb_node);
+		if (binder_is_idle_looper_ilocked(thread)) {
+			idle_count++;
+		}
+	}
+
+	if (idle_count <= target) {
+		binder_inner_proc_unlock(proc);
+		return 0;
+	}
+
+	int to_trim = idle_count - target;
+	for (n = rb_first(&proc->threads); n != NULL && trim_count < to_trim; n = rb_next(n)) {
+		thread = rb_entry(n, struct binder_thread, rb_node);
+		if (binder_is_idle_looper_ilocked(thread)) {
+			thread->shrink = true;
+			pr_info("binder: %d:%d selected for shrink\n", proc->pid, thread->pid);
+			wake_up_interruptible(&thread->wait);
+			trim_count++;
+		}
+	}
+	binder_inner_proc_unlock(proc);
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -6087,6 +6146,18 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_lock(proc);
 		proc->max_threads = max_threads;
 		binder_inner_proc_unlock(proc);
+		break;
+	}
+	case BINDER_TRIM_THREADS: {
+		u32 target;
+
+		if (copy_from_user(&target, ubuf, sizeof(target))) {
+			ret = -EINVAL;
+			goto err;
+		}
+		ret = binder_ioctl_trim_threads(proc, target);
+		if (ret)
+			goto err;
 		break;
 	}
 	case BINDER_SET_CONTEXT_MGR_EXT: {
