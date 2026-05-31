@@ -16,6 +16,24 @@
       "message": "To avoid false-positive ABI break being detected, I probably need to get rid of this and keep the `RUST_BINDER_LAYOUT` back into the previous file.",
       "revId": "d7097f9a570e3319bd9db559052ea0d74e744801",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526b4f09_1d9e994a",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-31T15:25:41Z",
+      "side": 1,
+      "message": "Let me try the ifdef GENKSYMS tick",
+      "parentUuid": "91ae7fed_f33675a4",
+      "revId": "d7097f9a570e3319bd9db559052ea0d74e744801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
