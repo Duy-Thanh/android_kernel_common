@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edc78d55_07eb680a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T12:17:36Z",
+      "side": 1,
+      "message": "nit: IMHO it would be clearer to keep the previous version of this comment (i.e. without mentioning PMU and FRCD, to keep it brief and general), at its previous location (i.e. right before the pkvm_err below, i.e. where we actually deny the access).",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54174c02_e87c6111",
         "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
         "patchSetId": 1
