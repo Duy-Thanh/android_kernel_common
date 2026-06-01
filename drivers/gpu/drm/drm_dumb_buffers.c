@@ -206,8 +206,11 @@ int drm_mode_create_dumb(struct drm_device *dev,
 	 * rendering; nothing legitimate needs more than 8192x8192 at 32bpp.
 	 * This prevents overflows in downstream alignment helpers.
 	 */
-	if (args->width >= 8192 || args->height >= 8192 || args->bpp > 32)
+	if (WARN_ON(args->width >= 8192 || args->height >= 8192 || args->bpp > 32)) {
+		pr_err("%s: invalid request from:%s w=%u h=%u b=%u\n",
+				__func__, current->comm, args->width, args->height, args->bpp);
 		return -EINVAL;
+	}
 
 	/* overflow checks for 32bit size calculations */
 	if (args->bpp > U32_MAX - 8)
