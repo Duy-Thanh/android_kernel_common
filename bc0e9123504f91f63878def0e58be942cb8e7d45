@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1d81d9b2_91518f09",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T11:30:03Z",
+      "side": 1,
+      "message": "Ah, got it.",
+      "parentUuid": "b4295c2c_0b7757bf",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b0869e9a_4bfdf291",
         "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
         "patchSetId": 18
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Nice catch, thanks for posting it upstream. I was mostly looking into the Vt-d spec and missed this in the host code.",
       "parentUuid": "b0869e9a_4bfdf291",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "607e91bd_a0a2849e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T11:30:03Z",
+      "side": 1,
+      "message": "Looks like I posted a wrong link. I meant this one: https://lore.kernel.org/all/ahtZFmndygWdQU3r@google.com/",
+      "parentUuid": "fb5a56f8_4f51f49f",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
