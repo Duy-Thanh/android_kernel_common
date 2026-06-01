@@ -45216,8 +45216,9 @@ member {
   type_id: 0x273b165d
 }
 member {
-  id: 0x2a406106
+  id: 0x2a406874
   type_id: 0x262ff409
+  offset: 576
 }
 member {
   id: 0x2a426327
@@ -45657,9 +45658,9 @@ member {
   offset: 192
 }
 member {
-  id: 0x31f51231
-  type_id: 0x48fa1d1d
-  offset: 576
+  id: 0x31f5197e
+  type_id: 0x48fa1d1e
+  offset: 704
 }
 member {
   id: 0x3200b309
@@ -56348,10 +56349,10 @@ member {
   offset: 4160
 }
 member {
-  id: 0xedaa04a9
+  id: 0xedaa0fe0
   name: "android_vendor_data1"
   type_id: 0x48218c07
-  offset: 832
+  offset: 960
 }
 member {
   id: 0xb4368dc5
@@ -238531,14 +238532,13 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x48fa1d1d
+  id: 0x48fa1d1e
   kind: UNION
   definition {
     bytesize: 32
     member_id: 0x78e80f19
     member_id: 0xeb44a07e
     member_id: 0x48e2b027
-    member_id: 0x2a406106
     member_id: 0x26da8dd3
   }
 }
@@ -266098,7 +266098,7 @@ struct_union {
   kind: STRUCT
   name: "iommu_domain"
   definition {
-    bytesize: 120
+    bytesize: 136
     member_id: 0x5c135018
     member_id: 0x3453603b
     member_id: 0xafbb0d65
@@ -266107,8 +266107,9 @@ struct_union {
     member_id: 0xa55694ee
     member_id: 0x3a570591
     member_id: 0x90a33f63
-    member_id: 0x31f51231
-    member_id: 0xedaa04a9
+    member_id: 0x2a406874
+    member_id: 0x31f5197e
+    member_id: 0xedaa0fe0
   }
 }
 struct_union {
@@ -314359,16 +314360,12 @@ enumeration {
       value: 2
     }
     enumerator {
-      name: "IOMMU_COOKIE_FAULT_HANDLER"
+      name: "IOMMU_COOKIE_SVA"
       value: 3
     }
     enumerator {
-      name: "IOMMU_COOKIE_SVA"
-      value: 4
-    }
-    enumerator {
       name: "IOMMU_COOKIE_IOMMUFD"
-      value: 5
+      value: 4
     }
   }
 }
@@ -376706,7 +376703,13 @@ elf_symbol {
   name: "__amba_driver_register"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd1401689
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xf6b8d914
+=======
   crc: 0x46976a3d
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9284e891
   full_name: "__amba_driver_register"
 }
@@ -379008,7 +379011,13 @@ elf_symbol {
   name: "__mmdrop"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd6d0af0a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9a18492e
+=======
   crc: 0x0a909f5b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1655e07b
   full_name: "__mmdrop"
 }
@@ -379332,7 +379341,13 @@ elf_symbol {
   name: "__pci_register_driver"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x9aeeffb6
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xe026e9b6
+=======
   crc: 0x5e190210
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97374fe9
   full_name: "__pci_register_driver"
 }
@@ -379404,7 +379419,13 @@ elf_symbol {
   name: "__pkvm_load_el2_module"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x592506cb
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x371ec184
+=======
   crc: 0x183c4e6e
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9f49143f
   full_name: "__pkvm_load_el2_module"
 }
@@ -379422,7 +379443,13 @@ elf_symbol {
   name: "__platform_driver_probe"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x43626139
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xa72002e2
+=======
   crc: 0x6ac0caca
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9bf6c118
   full_name: "__platform_driver_probe"
 }
@@ -379431,7 +379458,13 @@ elf_symbol {
   name: "__platform_driver_register"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xe160e32d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x2cda1855
+=======
   crc: 0xa57f4d50
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9b609a6d
   full_name: "__platform_driver_register"
 }
@@ -379440,7 +379473,13 @@ elf_symbol {
   name: "__platform_register_drivers"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xf99f1392
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9fe06218
+=======
   crc: 0x25912e43
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x939de190
   full_name: "__platform_register_drivers"
 }
@@ -379557,7 +379596,13 @@ elf_symbol {
   name: "__pte_offset_map_lock"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x4ec06435
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x23b39153
+=======
   crc: 0xbc52e434
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xe1f0bd48
   full_name: "__pte_offset_map_lock"
 }
@@ -379584,7 +379629,13 @@ elf_symbol {
   name: "__put_task_struct"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x711d9f8b
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xe1cb743b
+=======
   crc: 0xe8728fd3
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x17de3be6
   full_name: "__put_task_struct"
 }
@@ -386731,7 +386782,13 @@ elf_symbol {
   name: "__traceiter_task_newtask"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1bcbade1
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x5ea63a67
+=======
   crc: 0x7e3864d9
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9bff5408
   full_name: "__traceiter_task_newtask"
 }
@@ -386740,7 +386797,13 @@ elf_symbol {
   name: "__traceiter_task_rename"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x001849df
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xd39284b1
+=======
   crc: 0x22ff5245
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9bd458e9
   full_name: "__traceiter_task_rename"
 }
@@ -394624,7 +394687,13 @@ elf_symbol {
   name: "alloc_io_pgtable_ops"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x0869250f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xebada937
+=======
   crc: 0x2f44ad46
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xca4b711f
   full_name: "alloc_io_pgtable_ops"
 }
@@ -394705,7 +394774,13 @@ elf_symbol {
   name: "amba_bustype"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x86c296f2
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x73becdff
+=======
   crc: 0x780b0390
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xd54fa0c8
   full_name: "amba_bustype"
 }
@@ -394714,7 +394789,13 @@ elf_symbol {
   name: "amba_driver_unregister"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x81d33aa7
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x34eb7b2a
+=======
   crc: 0xa1ea67ab
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1fb0c55c
   full_name: "amba_driver_unregister"
 }
@@ -394723,7 +394804,13 @@ elf_symbol {
   name: "amba_release_regions"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1f071e36
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x0570f1a2
+=======
   crc: 0xf471e5a8
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1edfcb66
   full_name: "amba_release_regions"
 }
@@ -394732,7 +394819,13 @@ elf_symbol {
   name: "amba_request_regions"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x6358186d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x8640a7c5
+=======
   crc: 0x320b5634
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x933f3b0e
   full_name: "amba_request_regions"
 }
@@ -401422,7 +401515,13 @@ elf_symbol {
   name: "dev_iommu_priv_set"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x987dec0d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xf40d002c
+=======
   crc: 0xe3ef0831
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x106c9a5c
   full_name: "dev_iommu_priv_set"
 }
@@ -401431,7 +401530,13 @@ elf_symbol {
   name: "dev_is_amba"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xf3c5bc04
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc2aa1e7b
+=======
   crc: 0x4ad8bf2b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xf14dc7bb
   full_name: "dev_is_amba"
 }
@@ -402655,7 +402760,13 @@ elf_symbol {
   name: "device_iommu_capable"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x800c5e34
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xbfec2dcd
+=======
   crc: 0x6140efda
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xfda4bf28
   full_name: "device_iommu_capable"
 }
@@ -404123,7 +404234,13 @@ elf_symbol {
   name: "devm_platform_get_and_ioremap_resource"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xac58ad54
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc873a033
+=======
   crc: 0x664ca059
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x584c42dc
   full_name: "devm_platform_get_and_ioremap_resource"
 }
@@ -404132,7 +404249,13 @@ elf_symbol {
   name: "devm_platform_ioremap_resource"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x7baa7e9d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xa082e137
+=======
   crc: 0xe5f4d348
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x584d521c
   full_name: "devm_platform_ioremap_resource"
 }
@@ -404141,7 +404264,13 @@ elf_symbol {
   name: "devm_platform_ioremap_resource_byname"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1dc4fd50
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xfd9dbc60
+=======
   crc: 0x427aea04
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x59a30550
   full_name: "devm_platform_ioremap_resource_byname"
 }
@@ -404494,7 +404623,13 @@ elf_symbol {
   name: "devm_rproc_add"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1df26791
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xa54a5274
+=======
   crc: 0xd10f78c9
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9db1c576
   full_name: "devm_rproc_add"
 }
@@ -404503,7 +404638,13 @@ elf_symbol {
   name: "devm_rproc_alloc"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xbcde0bc9
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x675aa41b
+=======
   crc: 0x559c6a72
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xbd324cd3
   full_name: "devm_rproc_alloc"
 }
@@ -405746,7 +405887,13 @@ elf_symbol {
   name: "dma_iova_free"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x0457e793
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x97c37e65
+=======
   crc: 0x1bd371fd
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x10730664
   full_name: "dma_iova_free"
 }
@@ -405755,7 +405902,13 @@ elf_symbol {
   name: "dma_iova_link"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x7f70759a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x33a78e22
+=======
   crc: 0xf60d02fd
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9d472e58
   full_name: "dma_iova_link"
 }
@@ -405764,7 +405917,13 @@ elf_symbol {
   name: "dma_iova_sync"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x7cb4024d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x3289b89a
+=======
   crc: 0x61e4c869
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9d556957
   full_name: "dma_iova_sync"
 }
@@ -405773,7 +405932,13 @@ elf_symbol {
   name: "dma_iova_try_alloc"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xbdb2fe82
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xd250c77c
+=======
   crc: 0x7b967e5a
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xfe63a844
   full_name: "dma_iova_try_alloc"
 }
@@ -405782,7 +405947,13 @@ elf_symbol {
   name: "dma_iova_unlink"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x3eda8fef
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x94c6f8a5
+=======
   crc: 0xe455a389
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x104de847
   full_name: "dma_iova_unlink"
 }
@@ -413551,7 +413722,13 @@ elf_symbol {
   name: "generic_device_group"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x98a047d5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x06cd645c
+=======
   crc: 0x8a8de456
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x6356f86d
   full_name: "generic_device_group"
 }
@@ -414557,7 +414734,13 @@ elf_symbol {
   name: "get_task_mm"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x312dc309
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x964186e2
+=======
   crc: 0xce7a6036
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xf152640a
   full_name: "get_task_mm"
 }
@@ -418985,7 +419168,13 @@ elf_symbol {
   name: "iommu_alloc_resv_region"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xb3bc8951
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9000e2a7
+=======
   crc: 0xed390a5d
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x221b39b7
   full_name: "iommu_alloc_resv_region"
 }
@@ -418994,7 +419183,13 @@ elf_symbol {
   name: "iommu_attach_device"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1e2f4e52
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x5f755c4c
+=======
   crc: 0x593c7065
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x962ca8b2
   full_name: "iommu_attach_device"
 }
@@ -419003,7 +419198,13 @@ elf_symbol {
   name: "iommu_attach_device_pasid"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x07a5ec48
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x4553a7bb
+=======
   crc: 0xd65215b6
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x962b7f88
   full_name: "iommu_attach_device_pasid"
 }
@@ -419012,7 +419213,13 @@ elf_symbol {
   name: "iommu_attach_group"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd372c1a8
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xfb866d99
+=======
   crc: 0xa145b17f
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x969772a9
   full_name: "iommu_attach_group"
 }
@@ -419021,7 +419228,13 @@ elf_symbol {
   name: "iommu_detach_device"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xbcf8da49
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x06552faa
+=======
   crc: 0x4cc1f685
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1b341a0e
   full_name: "iommu_detach_device"
 }
@@ -419030,7 +419243,13 @@ elf_symbol {
   name: "iommu_detach_device_pasid"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd5e37408
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xa18f3625
+=======
   crc: 0xb9249fbc
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1b338a63
   full_name: "iommu_detach_device_pasid"
 }
@@ -419039,7 +419258,13 @@ elf_symbol {
   name: "iommu_device_register"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x20c687f5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xd436a7e1
+=======
   crc: 0x62ec7564
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x92c1e3df
   full_name: "iommu_device_register"
 }
@@ -419048,7 +419273,13 @@ elf_symbol {
   name: "iommu_device_sysfs_add"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xea503e46
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x7df73ec5
+=======
   crc: 0xa5ccfcb6
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9232e21d
   full_name: "iommu_device_sysfs_add"
 }
@@ -419057,7 +419288,13 @@ elf_symbol {
   name: "iommu_device_sysfs_remove"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xfd05f442
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x4bd3b997
+=======
   crc: 0x97232fc2
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f227282
   full_name: "iommu_device_sysfs_remove"
 }
@@ -419066,7 +419303,13 @@ elf_symbol {
   name: "iommu_device_unregister"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x5b947d2a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x8ad84e4e
+=======
   crc: 0xa054146c
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f227282
   full_name: "iommu_device_unregister"
 }
@@ -419075,7 +419318,13 @@ elf_symbol {
   name: "iommu_dma_get_resv_regions"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x250b04d1
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xec67563c
+=======
   crc: 0x77000aca
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x10f7e72f
   full_name: "iommu_dma_get_resv_regions"
 }
@@ -419084,7 +419333,13 @@ elf_symbol {
   name: "iommu_domain_free"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xab96c75b
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x3b2a594e
+=======
   crc: 0x98eab35f
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1b3d79eb
   full_name: "iommu_domain_free"
 }
@@ -419102,7 +419357,13 @@ elf_symbol {
   name: "iommu_fwspec_add_ids"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x86e4de9e
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xf412e07f
+=======
   crc: 0xb5d408a9
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9dcb0641
   full_name: "iommu_fwspec_add_ids"
 }
@@ -419111,7 +419372,13 @@ elf_symbol {
   name: "iommu_get_domain_for_dev"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x02b99572
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9643c3d5
+=======
   crc: 0x761a6a4b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xe7724f97
   full_name: "iommu_get_domain_for_dev"
 }
@@ -419120,7 +419387,13 @@ elf_symbol {
   name: "iommu_get_msi_cookie"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x520eea95
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x25e1f8fd
+=======
   crc: 0x6cc031c2
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x95a57304
   full_name: "iommu_get_msi_cookie"
 }
@@ -419138,7 +419411,13 @@ elf_symbol {
   name: "iommu_group_for_each_dev"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xbbc77da9
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x64c7f94c
+=======
   crc: 0x2e3d44b2
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x96c2fa1d
   full_name: "iommu_group_for_each_dev"
 }
@@ -419147,7 +419426,13 @@ elf_symbol {
   name: "iommu_group_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x98a047d5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x06cd645c
+=======
   crc: 0x8a8de456
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x6356f86d
   full_name: "iommu_group_get"
 }
@@ -419201,7 +419486,13 @@ elf_symbol {
   name: "iommu_iova_to_phys"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x18ed047f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x5bf27675
+=======
   crc: 0xe3e2e038
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x098dcb5d
   full_name: "iommu_iova_to_phys"
 }
@@ -419210,7 +419501,13 @@ elf_symbol {
   name: "iommu_map"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd3a08237
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xe28ef325
+=======
   crc: 0x0b64fab8
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x96c4a07c
   full_name: "iommu_map"
 }
@@ -419219,7 +419516,13 @@ elf_symbol {
   name: "iommu_map_sg"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x989130fc
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x1105478f
+=======
   crc: 0xe100ce39
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f9c638e
   full_name: "iommu_map_sg"
 }
@@ -419228,7 +419531,13 @@ elf_symbol {
   name: "iommu_paging_domain_alloc_flags"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xb0e45461
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xbf5b3c4e
+=======
   crc: 0xe4f03527
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xe6645a0f
   full_name: "iommu_paging_domain_alloc_flags"
 }
@@ -419237,7 +419546,13 @@ elf_symbol {
   name: "iommu_put_resv_regions"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x3e929fec
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xb9e3b4cb
+=======
   crc: 0xa7282d33
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x10f7e72f
   full_name: "iommu_put_resv_regions"
 }
@@ -419246,7 +419561,13 @@ elf_symbol {
   name: "iommu_set_fault_handler"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xf5ea6b8b
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x5d8a50b0
+=======
   crc: 0x233592db
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x197a8250
   full_name: "iommu_set_fault_handler"
 }
@@ -419255,7 +419576,13 @@ elf_symbol {
   name: "iommu_set_pgtable_quirks"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xcc1b0fc5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x417d2c3c
+=======
   crc: 0xd1ffd780
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x96e81ec5
   full_name: "iommu_set_pgtable_quirks"
 }
@@ -419264,7 +419591,13 @@ elf_symbol {
   name: "iommu_unmap"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x4e57a0fa
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x294e061a
+=======
   crc: 0x4b515cb8
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9c6a39e2
   full_name: "iommu_unmap"
 }
@@ -419273,7 +419606,13 @@ elf_symbol {
   name: "iommu_unmap_fast"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xb9f109d6
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xe112fee5
+=======
   crc: 0x13132c59
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9c6a1325
   full_name: "iommu_unmap_fast"
 }
@@ -422410,7 +422749,13 @@ elf_symbol {
   name: "kvm_iommu_register_driver"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x90ea6134
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x6bdac7b6
+=======
   crc: 0xb9bb2b20
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x987bfadf
   full_name: "kvm_iommu_register_driver"
 }
@@ -424886,7 +425231,13 @@ elf_symbol {
   name: "mm_access"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x580ee371
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x1cc5c46c
+=======
   crc: 0x322d679f
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xf0447192
   full_name: "mm_access"
 }
@@ -425264,7 +425615,13 @@ elf_symbol {
   name: "mmput"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xd6d0af0a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9a18492e
+=======
   crc: 0x0a909f5b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1655e07b
   full_name: "mmput"
 }
@@ -429650,7 +430007,13 @@ elf_symbol {
   name: "pci_bus_type"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xdac2b7b1
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc342a07f
+=======
   crc: 0x13c5767b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xd54fa0c8
   full_name: "pci_bus_type"
 }
@@ -429686,7 +430049,13 @@ elf_symbol {
   name: "pci_dev_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1491b6c9
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x34c9489d
+=======
   crc: 0xf95f8dd0
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x832143d7
   full_name: "pci_dev_get"
 }
@@ -429704,7 +430073,13 @@ elf_symbol {
   name: "pci_dev_put"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x50bffe03
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x4a3a70e4
+=======
   crc: 0x7b04e339
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x14e1f000
   full_name: "pci_dev_put"
 }
@@ -429713,7 +430088,13 @@ elf_symbol {
   name: "pci_device_group"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x98a047d5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x06cd645c
+=======
   crc: 0x8a8de456
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x6356f86d
   full_name: "pci_device_group"
 }
@@ -430145,7 +430526,13 @@ elf_symbol {
   name: "pci_match_id"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1430d8ad
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x2eb845db
+=======
   crc: 0xee1c9ffb
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xaddc5fdc
   full_name: "pci_match_id"
 }
@@ -430478,7 +430865,13 @@ elf_symbol {
   name: "pci_unregister_driver"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x0ca295fd
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x7e0686d2
+=======
   crc: 0xcf6fa0b8
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1a0ce609
   full_name: "pci_unregister_driver"
 }
@@ -432423,7 +432816,13 @@ elf_symbol {
   name: "pkvm_enable_smc_forwarding"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x7d4224b4
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xac5cd959
+=======
   crc: 0x7f684b16
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9bba7997
   full_name: "pkvm_enable_smc_forwarding"
 }
@@ -432450,7 +432849,13 @@ elf_symbol {
   name: "platform_bus"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xc7cd141d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x0c053bdc
+=======
   crc: 0x21fb229f
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x23230326
   full_name: "platform_bus"
 }
@@ -432459,7 +432864,13 @@ elf_symbol {
   name: "platform_bus_type"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x4f6faf07
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x72d3f04b
+=======
   crc: 0x85afc984
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xd54fa0c8
   full_name: "platform_bus_type"
 }
@@ -432468,7 +432879,13 @@ elf_symbol {
   name: "platform_device_add"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x844a13f2
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x23b71140
+=======
   crc: 0xd0bcb797
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x924d155a
   full_name: "platform_device_add"
 }
@@ -432477,7 +432894,13 @@ elf_symbol {
   name: "platform_device_add_data"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x7e04379d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xa89fbeba
+=======
   crc: 0x6a842195
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x92946457
   full_name: "platform_device_add_data"
 }
@@ -432486,7 +432909,13 @@ elf_symbol {
   name: "platform_device_add_resources"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x060cec20
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x5286b6ec
+=======
   crc: 0xa1a0d589
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x929bf9d1
   full_name: "platform_device_add_resources"
 }
@@ -432495,7 +432924,13 @@ elf_symbol {
   name: "platform_device_alloc"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x1fa29487
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc6393d30
+=======
   crc: 0x602c4952
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xc748ecf5
   full_name: "platform_device_alloc"
 }
@@ -432504,7 +432939,13 @@ elf_symbol {
   name: "platform_device_del"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa0feab87
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9d97a1be
+=======
   crc: 0x96464b02
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f55a7e6
   full_name: "platform_device_del"
 }
@@ -432531,7 +432972,13 @@ elf_symbol {
   name: "platform_device_put"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa0feab87
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9d97a1be
+=======
   crc: 0x96464b02
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f55a7e6
   full_name: "platform_device_put"
 }
@@ -432540,7 +432987,13 @@ elf_symbol {
   name: "platform_device_register"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x844a13f2
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x23b71140
+=======
   crc: 0xd0bcb797
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x924d155a
   full_name: "platform_device_register"
 }
@@ -432549,7 +433002,13 @@ elf_symbol {
   name: "platform_device_register_full"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x0f24850f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xbea58b78
+=======
   crc: 0xb908abbe
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xc5663ffe
   full_name: "platform_device_register_full"
 }
@@ -432558,7 +433017,13 @@ elf_symbol {
   name: "platform_device_unregister"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa0feab87
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9d97a1be
+=======
   crc: 0x96464b02
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1f55a7e6
   full_name: "platform_device_unregister"
 }
@@ -432567,7 +433032,13 @@ elf_symbol {
   name: "platform_driver_unregister"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x55e958e4
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc4f0ba91
+=======
   crc: 0xb473e4d7
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1654b7a0
   full_name: "platform_driver_unregister"
 }
@@ -432576,7 +433047,13 @@ elf_symbol {
   name: "platform_find_device_by_driver"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x10e4f63a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xfb9948a9
+=======
   crc: 0x5282de7d
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xad77a8f0
   full_name: "platform_find_device_by_driver"
 }
@@ -432585,7 +433062,13 @@ elf_symbol {
   name: "platform_get_irq"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x82630f01
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x1aa6ac5b
+=======
   crc: 0x71c64600
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x935b00c2
   full_name: "platform_get_irq"
 }
@@ -432594,7 +433077,13 @@ elf_symbol {
   name: "platform_get_irq_byname"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xc8cbc600
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xb6c520dc
+=======
   crc: 0x17599757
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x92b5578e
   full_name: "platform_get_irq_byname"
 }
@@ -432603,7 +433092,13 @@ elf_symbol {
   name: "platform_get_irq_byname_optional"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xc8cbc600
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xb6c520dc
+=======
   crc: 0x17599757
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x92b5578e
   full_name: "platform_get_irq_byname_optional"
 }
@@ -432612,7 +433107,13 @@ elf_symbol {
   name: "platform_get_irq_optional"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x82630f01
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x1aa6ac5b
+=======
   crc: 0x71c64600
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x935b00c2
   full_name: "platform_get_irq_optional"
 }
@@ -432621,7 +433122,13 @@ elf_symbol {
   name: "platform_get_resource"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x84610752
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x424445d9
+=======
   crc: 0x682887c0
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xcf28148d
   full_name: "platform_get_resource"
 }
@@ -432630,7 +433137,13 @@ elf_symbol {
   name: "platform_get_resource_byname"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa2a23a97
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x8711672d
+=======
   crc: 0xfc9e0a74
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xcf36f1f9
   full_name: "platform_get_resource_byname"
 }
@@ -432639,7 +433152,13 @@ elf_symbol {
   name: "platform_irq_count"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xcd1344a7
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x57379743
+=======
   crc: 0xe5e00851
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x924d155a
   full_name: "platform_irq_count"
 }
@@ -432657,7 +433176,13 @@ elf_symbol {
   name: "platform_unregister_drivers"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x94480c5a
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xaba9d8ee
+=======
   crc: 0x873c8d93
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1e879adb
   full_name: "platform_unregister_drivers"
 }
@@ -436404,7 +436929,13 @@ elf_symbol {
   name: "report_iommu_fault"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x41d168c0
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x4540f7d4
+=======
   crc: 0xc071e62b
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9621e968
   full_name: "report_iommu_fault"
 }
@@ -437160,7 +437691,13 @@ elf_symbol {
   name: "rproc_add"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x2bcb4b11
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc04159ef
+=======
   crc: 0x28b48d0a
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97f16301
   full_name: "rproc_add"
 }
@@ -437169,7 +437706,13 @@ elf_symbol {
   name: "rproc_add_carveout"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xce63587f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x7e797c56
+=======
   crc: 0x7e79a6ac
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1a816041
   full_name: "rproc_add_carveout"
 }
@@ -437178,7 +437721,13 @@ elf_symbol {
   name: "rproc_add_subdev"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x8827d64d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x0e150669
+=======
   crc: 0xbb8f751e
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1a5a9df1
   full_name: "rproc_add_subdev"
 }
@@ -437187,7 +437736,13 @@ elf_symbol {
   name: "rproc_alloc"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xbcde0bc9
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x675aa41b
+=======
   crc: 0x559c6a72
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xbd324cd3
   full_name: "rproc_alloc"
 }
@@ -437196,7 +437751,13 @@ elf_symbol {
   name: "rproc_boot"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x2bcb4b11
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc04159ef
+=======
   crc: 0x28b48d0a
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97f16301
   full_name: "rproc_boot"
 }
@@ -437259,7 +437820,13 @@ elf_symbol {
   name: "rproc_da_to_va"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x8765ad7f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x86b1f119
+=======
   crc: 0xcb9d06c2
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x5e92f774
   full_name: "rproc_da_to_va"
 }
@@ -437268,7 +437835,13 @@ elf_symbol {
   name: "rproc_del"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x2bcb4b11
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc04159ef
+=======
   crc: 0x28b48d0a
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97f16301
   full_name: "rproc_del"
 }
@@ -437322,7 +437895,13 @@ elf_symbol {
   name: "rproc_free"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xcf10187f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x122523e0
+=======
   crc: 0x73bd1554
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1ae9d1bd
   full_name: "rproc_free"
 }
@@ -437331,7 +437910,13 @@ elf_symbol {
   name: "rproc_get_by_child"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa4eea901
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x549f5bd4
+=======
   crc: 0xc0717a7c
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xbdc4e083
   full_name: "rproc_get_by_child"
 }
@@ -437340,7 +437925,13 @@ elf_symbol {
   name: "rproc_get_by_phandle"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa504ea62
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x6095c8cd
+=======
   crc: 0x962adc26
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xba5ef4b3
   full_name: "rproc_get_by_phandle"
 }
@@ -437349,7 +437940,13 @@ elf_symbol {
   name: "rproc_mem_entry_init"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x989d8017
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x93896f88
+=======
   crc: 0x8314d919
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0xb0ad4fdd
   full_name: "rproc_mem_entry_init"
 }
@@ -437358,7 +437955,13 @@ elf_symbol {
   name: "rproc_of_parse_firmware"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x5a369a38
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xdbb86ccd
+=======
   crc: 0xaac1fe52
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x9c8b1b3d
   full_name: "rproc_of_parse_firmware"
 }
@@ -437367,7 +437970,13 @@ elf_symbol {
   name: "rproc_put"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xcf10187f
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x122523e0
+=======
   crc: 0x73bd1554
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1ae9d1bd
   full_name: "rproc_put"
 }
@@ -437376,7 +437985,13 @@ elf_symbol {
   name: "rproc_remove_subdev"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x8827d64d
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x0e150669
+=======
   crc: 0xbb8f751e
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x1a5a9df1
   full_name: "rproc_remove_subdev"
 }
@@ -437385,7 +438000,13 @@ elf_symbol {
   name: "rproc_report_crash"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x63bae780
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x36b1ee8c
+=======
   crc: 0x4a6a2495
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x197c612f
   full_name: "rproc_report_crash"
 }
@@ -437394,7 +438015,13 @@ elf_symbol {
   name: "rproc_set_firmware"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x32cae1a5
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x6bf98483
+=======
   crc: 0xccf9eb47
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x970921d5
   full_name: "rproc_set_firmware"
 }
@@ -437403,7 +438030,13 @@ elf_symbol {
   name: "rproc_shutdown"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x2bcb4b11
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xc04159ef
+=======
   crc: 0x28b48d0a
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97f16301
   full_name: "rproc_shutdown"
 }
@@ -454828,7 +455461,13 @@ elf_symbol {
   name: "xhci_gen_setup"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x2c51f9bf
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x00e6a052
+=======
   crc: 0x148ee2a4
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x97b34018
   full_name: "xhci_gen_setup"
 }
@@ -454855,7 +455494,13 @@ elf_symbol {
   name: "xhci_init_driver"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x9a9e9b93
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x448a288a
+=======
   crc: 0x372a6a45
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x14d9dc3c
   full_name: "xhci_init_driver"
 }
@@ -454902,7 +455547,13 @@ elf_symbol {
   name: "xhci_resume"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0xa1947928
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x9a5a12b8
+=======
   crc: 0x5e97d480
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x988f0584
   full_name: "xhci_resume"
 }
@@ -454911,7 +455562,13 @@ elf_symbol {
   name: "xhci_run"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x4214ccfb
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0x787232b8
+=======
   crc: 0x69cdc194
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x94deebf7
   full_name: "xhci_run"
 }
@@ -455010,7 +455667,13 @@ elf_symbol {
   name: "xhci_stop_endpoint_sync"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x998bbbfd
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xf9c1edf7
+=======
   crc: 0x75941847
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x99499c1e
   full_name: "xhci_stop_endpoint_sync"
 }
@@ -455019,7 +455682,13 @@ elf_symbol {
   name: "xhci_suspend"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (33204a312db37f47d29e6987ab1547153a022dd6 ANDROID: GKI: Update ABI due to changes to struct iommu_doma)
+  crc: 0x18c8b390
+||||||| BASE      (c9e3e56489e19098b173faab62f41597c1d8f0fe ANDROID: drivers/iommu: move fault handler out of cookie uni)
+  crc: 0xe885e0b9
+=======
   crc: 0xa3fca759
+>>>>>>> BASE      (21fdb47bbae36a974f5d74d1e895fbf7304e51db ANDROID: drivers/iommu: move fault handler out of cookie uni)
   type_id: 0x98945a53
   full_name: "xhci_suspend"
 }
