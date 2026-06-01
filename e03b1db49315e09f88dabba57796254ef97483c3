@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc90e79_1295160f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T11:45:35Z",
+      "side": 1,
+      "message": "Shall we remove this patch from the topic (and then probably abandon it)?",
+      "revId": "e03b1db49315e09f88dabba57796254ef97483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4fbbcf1_df675c86",
