@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e73a672_d482617f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T18:31:04Z",
+      "side": 1,
+      "message": "If this approach seems fine with you, I shall squash it in the next iteration. Thanks",
+      "parentUuid": "b50740e9_f20438f8",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edc78d55_07eb680a",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 1
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2824f8ad_fc1600df",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T18:31:04Z",
+      "side": 1,
+      "message": "Ok, will revert as you suggested.",
+      "parentUuid": "edc78d55_07eb680a",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54174c02_e87c6111",
         "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
         "patchSetId": 1
@@ -66,6 +102,24 @@
       "writtenOn": "2026-06-01T12:03:22Z",
       "side": 1,
       "message": "With this patch, `iommu_pmu.h` and `iommu_frcd.h` contain only a few declarations. And I\u0027ve recalled that currently we don\u0027t have any headers in `drivers/iommu/intel/pkvm/`, we put pKVM definitions in `drivers/iommu/intel/pkvm_iommu.h` instead. I don\u0027t quite remember why we decided to do so, but we may keep doing that for consistency, i.e. declare these functions in `pkvm_iommu.h` instead (if we\u0027re gonna squash this patch anyway)?\n\nAnd in this regard, regarding the above comment: generally we add documentation comments for functions in C files where functions are implemented, not in header files where they are declared?",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b6e30c_4ed085d4",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T18:31:04Z",
+      "side": 1,
+      "message": "Agreed, will remove the header files and have these in pkvm_iommu.h. Will move the comments to C files as well",
+      "parentUuid": "54174c02_e87c6111",
       "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
