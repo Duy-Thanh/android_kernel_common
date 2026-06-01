@@ -22,6 +22,30 @@
       },
       "revId": "4ae29ada6061274d8f26e976e2ba3dd0fba21f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32152ff_cca23ca9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-01T14:29:17Z",
+      "side": 1,
+      "message": "That was patchset 1...",
+      "parentUuid": "84aac210_75be62b9",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "4ae29ada6061274d8f26e976e2ba3dd0fba21f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
