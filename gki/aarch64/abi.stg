@@ -37584,6 +37584,11 @@ pointer_reference {
   pointee_type_id: 0xd6c8573e
 }
 pointer_reference {
+  id: 0x3f224729
+  kind: POINTER
+  pointee_type_id: 0xd6c9fa39
+}
+pointer_reference {
   id: 0x3f22c375
   kind: POINTER
   pointee_type_id: 0xd6cbeb4b
@@ -79267,6 +79272,12 @@ member {
   offset: 960
 }
 member {
+  id: 0x32fe533d
+  name: "cap_control"
+  type_id: 0xc9082b19
+  offset: 192
+}
+member {
   id: 0x1b176051
   name: "cap_effective"
   type_id: 0xd9449876
@@ -88233,10 +88244,28 @@ member {
   offset: 128
 }
 member {
+  id: 0x2b979f97
+  name: "cor_err_source"
+  type_id: 0x914dbfdc
+  offset: 416
+}
+member {
   id: 0xca492719
   name: "cor_error_detected"
   type_id: 0x0fa845a7
   offset: 384
+}
+member {
+  id: 0x9fe8a35c
+  name: "cor_mask"
+  type_id: 0xc9082b19
+  offset: 160
+}
+member {
+  id: 0xfdee1867
+  name: "cor_status"
+  type_id: 0xc9082b19
+  offset: 128
 }
 member {
   id: 0x3e7a0099
@@ -106722,6 +106751,11 @@ member {
   name: "dvi_i_subconnector_property"
   type_id: 0x2a670b41
   offset: 6848
+}
+member {
+  id: 0x943c597f
+  name: "dw"
+  type_id: 0xbe0f19dc
 }
 member {
   id: 0x94935c8b
@@ -131068,6 +131102,11 @@ member {
   type_id: 0xfb11ce60
 }
 member {
+  id: 0xefe5d69a
+  name: "header"
+  type_id: 0xc9082b19
+}
+member {
   id: 0x863e4b4b
   name: "headerBuffer"
   type_id: 0x36be520c
@@ -131106,6 +131145,12 @@ member {
   id: 0x7aa45c87
   name: "header_len"
   type_id: 0x6720d32f
+  offset: 224
+}
+member {
+  id: 0x13130599
+  name: "header_log"
+  type_id: 0x3dfdf028
   offset: 224
 }
 member {
@@ -215236,6 +215281,12 @@ member {
   offset: 448
 }
 member {
+  id: 0xa19e9fc2
+  name: "root_command"
+  type_id: 0xc9082b19
+  offset: 352
+}
+member {
   id: 0x83c4175b
   name: "root_cset"
   type_id: 0x0d821a01
@@ -215306,6 +215357,12 @@ member {
   name: "root_skb"
   type_id: 0x054f691a
   offset: 128
+}
+member {
+  id: 0x0a778f9c
+  name: "root_status"
+  type_id: 0xc9082b19
+  offset: 384
 }
 member {
   id: 0x3537a868
@@ -254477,6 +254534,30 @@ member {
   offset: 944
 }
 member {
+  id: 0x3da79032
+  name: "uncor_err_source"
+  type_id: 0x914dbfdc
+  offset: 432
+}
+member {
+  id: 0xc9e17525
+  name: "uncor_mask"
+  type_id: 0xc9082b19
+  offset: 64
+}
+member {
+  id: 0x69586a81
+  name: "uncor_severity"
+  type_id: 0xc9082b19
+  offset: 96
+}
+member {
+  id: 0x05ca2251
+  name: "uncor_status"
+  type_id: 0xc9082b19
+  offset: 32
+}
+member {
   id: 0x45ce329c
   name: "uncorrectable_blocks"
   type_id: 0xec739179
@@ -281768,6 +281849,26 @@ struct_union {
     member_id: 0x4427aee7
     member_id: 0xbbe06faa
     member_id: 0x75906b50
+  }
+}
+struct_union {
+  id: 0xd6c9fa39
+  kind: STRUCT
+  name: "aer_capability_regs"
+  definition {
+    bytesize: 56
+    member_id: 0xefe5d69a
+    member_id: 0x05ca2251
+    member_id: 0xc9e17525
+    member_id: 0x69586a81
+    member_id: 0xfdee1867
+    member_id: 0x9fe8a35c
+    member_id: 0x32fe533d
+    member_id: 0x13130599
+    member_id: 0xa19e9fc2
+    member_id: 0x0a778f9c
+    member_id: 0x2b979f97
+    member_id: 0x3da79032
   }
 }
 struct_union {
@@ -333778,6 +333879,15 @@ struct_union {
   id: 0x1331bf3c
   kind: STRUCT
   name: "pcie_link_state"
+}
+struct_union {
+  id: 0x3dfdf028
+  kind: STRUCT
+  name: "pcie_tlp_log"
+  definition {
+    bytesize: 16
+    member_id: 0x943c597f
+  }
 }
 struct_union {
   id: 0xc5968b0c
@@ -389553,6 +389663,13 @@ function {
   return_type_id: 0x9519135f
   parameter_id: 0x12209d55
   parameter_id: 0x33756485
+}
+function {
+  id: 0x1572bbdd
+  return_type_id: 0x48b5725f
+  parameter_id: 0x11e6864c
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3f224729
 }
 function {
   id: 0x1572d585
@@ -504231,6 +504348,16 @@ elf_symbol {
   full_name: "pci_prepare_to_sleep"
 }
 elf_symbol {
+  id: 0x98ca554e
+  name: "pci_print_aer"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x17317f52
+  namespace: "CXL"
+  type_id: 0x1572bbdd
+  full_name: "pci_print_aer"
+}
+elf_symbol {
   id: 0x162de729
   name: "pci_read_config_byte"
   is_defined: true
@@ -540991,6 +541118,7 @@ interface {
   symbol_id: 0xf32782d8
   symbol_id: 0x258080ab
   symbol_id: 0x4d0b5a53
+  symbol_id: 0x98ca554e
   symbol_id: 0x162de729
   symbol_id: 0x5983afac
   symbol_id: 0x8c3e2fab
