@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fefdcd2_2bd7c7b4",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-01T18:03:42Z",
+      "side": 1,
+      "message": "Because of `({.. ; true; })` even if the pcpu will be null this statement will be true and the loop continues. So I think it may be better to change it to something like this:\n```\nfor ((i) \u003d 0; (i) \u003c pkvm_hyp-\u003enum_cpus; (i)++)\n    if (((pcpu) \u003d pkvm_hyp-\u003epcpus[(i)]) !\u003d NULL)\n```    \nto prevent accidental NULL pointer deference. Or maybe extend the comment about \"Callers should check if (!pcpu) inside the loop\"\n\nWDYT? See also https://android-review.git.corp.google.com/c/kernel/common/+/4087795/comment/8f31cc7c_bf583de1/ for the context.",
+      "range": {
+        "startLine": 67,
+        "startChar": 42,
+        "endLine": 67,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cd7f60fa_0d1c696e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/init.h",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": " * Iterates over all initialized pKVM physical CPUs.\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/init.h",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "\tfor ((i) \u003d 0; (i) \u003c pkvm_hyp-\u003enum_cpus; (i)++)\t\t\t\t\\\n\t\tif (((pcpu) \u003d pkvm_hyp-\u003epcpus[(i)]) !\u003d NULL)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ba475b3db85ee5f96245e4850eb52c7cc435172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
