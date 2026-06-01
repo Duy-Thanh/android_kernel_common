@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf102d31_bbd202d6",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-01T13:10:07Z",
+      "side": 1,
+      "message": "If qi_flush_iec could potentially fail we probably should change line below to:\n`if (!ret \u0026\u0026 unpin_pda_pa !\u003d -1UL)`\nor `BUG_ON(qi_flush_iec(iommu, data-\u003eindex, 0)`?\n\nOtherwise, IIUC, we could endup with IOMMU HW using old cached values, which is now unpinned thanks to `pkvm_host_unuse_dma` and malicious host could donate it to pVM/pKVM and later corrupt pVM/pKVM memory when interrupt actually fires.",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 64
+      },
+      "revId": "9bf7b0cfef0e8487be6895da21bbcad5765e6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
