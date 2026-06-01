@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219164bf_50451dae",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T18:05:35Z",
+      "side": 1,
+      "message": "Gemini suggests that if the only reason to allow all these MTRRs and other regs is to make the debugfs happy, it unnecessarily increases security risk (violates the principle of least privilege).\n\nSo I\u0027m thinking: we can just gate all such regs here with an `#ifdef CONFIG_INTEL_IOMMU_DEBUGFS` (or maybe better `#ifdef CONFIG_DMAR_DEBUG`)? (since CONFIG_INTEL_IOMMU_DEBUGFS is explicitly not supposed to be enabled in production builds anyway)",
+      "revId": "596fc1d59da58f7fc4d93d76b84f7da485adea99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
