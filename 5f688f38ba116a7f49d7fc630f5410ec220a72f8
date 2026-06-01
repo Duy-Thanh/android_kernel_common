@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e723464b_f96a84c0",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T11:41:13Z",
+      "side": 1,
+      "message": "Now this function is quite pKVM-specific, so it seems better to name it e.g. `pkvm_iommu_pmu_init()`? (Otherwise it might be misleading/confusing, since this function doesn\u0027t initialize the PMU, it only initializes the pKVM\u0027s info about the PMU for the MMIO validation?)\n\nAnd the same probably for the other 3 functions as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "44c2843b_eb5a3082",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "void pkvm_iommu_pmu_init(struct intel_iommu *iommu);\nbool pkvm_iommu_pmu_get_reg_info(struct intel_iommu *iommu,\n\t\t\t\t unsigned long offset, int len,\n\t\t\t\t struct iommu_pmu_reg_info *info);\nint pkvm_iommu_pmu_validate_read(struct intel_iommu *iommu,\n\t\t\t\t struct iommu_pmu_reg_info *info);\nint pkvm_iommu_pmu_validate_write(struct intel_iommu *iommu,\n\t\t\t\t  struct iommu_pmu_reg_info *info, u64 val);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
