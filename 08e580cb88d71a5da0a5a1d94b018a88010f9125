@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba92bf88_c50e576c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T21:20:34Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve looked through the patch and it looks good to me, please feel free to squash it.",
+      "parentUuid": "6e73a672_d482617f",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edc78d55_07eb680a",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 1
