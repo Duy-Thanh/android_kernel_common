@@ -34,6 +34,23 @@
       "parentUuid": "637ad96c_dce0b5c6",
       "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54174c02_e87c6111",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T12:03:22Z",
+      "side": 1,
+      "message": "With this patch, `iommu_pmu.h` and `iommu_frcd.h` contain only a few declarations. And I\u0027ve recalled that currently we don\u0027t have any headers in `drivers/iommu/intel/pkvm/`, we put pKVM definitions in `drivers/iommu/intel/pkvm_iommu.h` instead. I don\u0027t quite remember why we decided to do so, but we may keep doing that for consistency, i.e. declare these functions in `pkvm_iommu.h` instead (if we\u0027re gonna squash this patch anyway)?\n\nAnd in this regard, regarding the above comment: generally we add documentation comments for functions in C files where functions are implemented, not in header files where they are declared?",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
