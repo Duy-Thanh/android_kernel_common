@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54307c99_50090a32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T09:56:01Z",
+      "side": 1,
+      "message": "Presubmit is failing because this depends on http://arsp/4626528.\n\nFurthermore, http://arsp/4626528 and this CL mutually depend on each other, so probably need to submit them both at the same time, with presubmit bypassed.",
+      "revId": "e433026884408c281e65be35e40f9f282c3a2582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
