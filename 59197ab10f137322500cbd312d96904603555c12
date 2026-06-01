@@ -46,6 +46,30 @@
       },
       "revId": "59197ab10f137322500cbd312d96904603555c12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7587e95c_56c5fce4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-01T09:40:09Z",
+      "side": 1,
+      "message": "Yes, that\u0027s much better, this should be solved with in the guest.\n\nI believe ideally, pvmfw as a \"bootloader\", it should pass that to the guest (through a command line for example), but that\u0027s a bigger change.",
+      "parentUuid": "acad1cf7_70d69e0f",
+      "range": {
+        "startLine": 10,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "59197ab10f137322500cbd312d96904603555c12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
