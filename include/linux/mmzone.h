@@ -524,7 +524,6 @@ struct lru_gen_folio {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
-	ANDROID_OEM_DATA_ARRAY(1, 6);
 };
 
 enum {
