@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f31cc7c_bf583de1",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-01T17:50:56Z",
+      "side": 1,
+      "message": "Due to how for_each_pkvm_pcpu is implemented, adding check like\n```\nif (!cpu)\n    continue;\n```\n   \ninside for_each_pkvm_pcpu loop will be good to add. I think that because of how pcpus are populated in `vmx_pkvm_init`, a NULL cpu shouldn\u0027t occur. However, if the internal implementation changes (while leaving the current implementation of `for_each_pkvm_pcpu` intact), adding this check is better.",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c577959b_80725a40",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!cpu)\n\t\t\tcontinue;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b86525516170b2791f5300bbc069d5424fcd99f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
