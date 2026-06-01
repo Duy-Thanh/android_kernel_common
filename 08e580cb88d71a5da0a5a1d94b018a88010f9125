@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637ad96c_dce0b5c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:33:53Z",
+      "side": 1,
+      "message": "This is a pure refactor to make the code a bit more simpler and readable and is a SQUASHME patch. Keeping it separate for now to not hinder the review thats already in progress. After review, if this feel worth to do, I shall squash it.",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
