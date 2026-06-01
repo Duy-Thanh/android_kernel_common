@@ -1390,7 +1390,7 @@ void do_sve_acc(unsigned long esr, struct pt_regs *regs)
 /*
  * SME/CME erratum handling.
  */
-static cpumask_t sme_dvmsync_cpus;
+cpumask_t sme_dvmsync_cpus;
 
 /*
  * These helpers are only called from non-preemptible contexts, so
