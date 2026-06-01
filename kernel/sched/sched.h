@@ -4047,7 +4047,7 @@ void sched_enq_and_set_task(struct sched_enq_and_set_ctx *ctx);
 
 #include "ext.h"
 
-extern void set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, bool first);
+extern void set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se);
 
 #ifdef CONFIG_RT_SOFTIRQ_AWARE_SCHED
 extern bool cpu_busy_with_softirqs(int cpu);
