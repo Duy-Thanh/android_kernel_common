@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84aac210_75be62b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-01T14:26:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure I agree with that. Exposing `MMIO_GUARD_ENROLL` in the first place was a mistake and we\u0027ve deliberately not done this in the upstream guest code. Instead, the hypervisor shouldn\u0027t advertise the `ARM_SMCCC_KVM_FUNC_MMIO_GUARD_MAP` call (just called `ARM_SMCCC_KVM_FUNC_MMIO_GUARD` upstream) when pvmfw is not used.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "4ae29ada6061274d8f26e976e2ba3dd0fba21f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
