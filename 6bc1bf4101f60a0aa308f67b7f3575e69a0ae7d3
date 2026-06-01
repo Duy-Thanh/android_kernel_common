@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1aaa0bc_33d9e223",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2026-06-01T11:50:28Z",
+      "side": 1,
+      "message": "On why we need this, dropping here in the comment direct link to the design doc for the following reviewers: go/al-pkvm-mem-protect-proposal (option 2)",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "6bc1bf4101f60a0aa308f67b7f3575e69a0ae7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
