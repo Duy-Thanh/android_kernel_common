@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4295c2c_0b7757bf",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "we would need global values if the counter doesn\u0027t support per-counter capabilities(check below). So I think we need it. Added a comment to make it clear.",
+      "parentUuid": "e60963ba_26731c9a",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b0869e9a_4bfdf291",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-30T21:56:35Z",
       "side": 1,
       "message": "Interesting, the corresponding host driver code seems a bit buggy in this regard... Asked about that at https://lore.kernel.org/all/d94621d0-8cc8-bb2e-7323-97e500b6a3fa@linux.intel.com/",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5a56f8_4f51f49f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Nice catch, thanks for posting it upstream. I was mostly looking into the Vt-d spec and missed this in the host code.",
+      "parentUuid": "b0869e9a_4bfdf291",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0dfa602_ee06b396",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "693f78ce_234b04de",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a32bd35_15d24572",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-05-31T19:25:55Z",
       "side": 1,
       "message": "Looks like we are reading the same register we\u0027ve already read in iommu_pmu_counter_caps() above? We could avoid reading it 2nd time?\n\n(For example, we would avoid that if we read all these registers just once at pKVM initialization, similarly to the the host driver, per my other comment?)",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b52e9b_fdb616c8",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Youre right, fixed",
+      "parentUuid": "8a32bd35_15d24572",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2026-05-31T19:25:55Z",
       "side": 1,
       "message": "I guess the reason why we only support the first PERFOVFSTS register is that the host currently uses no more than 64 counters (IOMMU_PMU_IDX_MAX), so they all fit in one register? But it is not so obvious, so may be worth adding a short comment about it?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992f604d_d82fb657",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Added a comment",
+      "parentUuid": "55e4c5e1_2afa178f",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -140,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f76a75e_a9258c87",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "\u003e num_ctrl is capped at IOMMU_PMU_IDX_MAX in iommu_pmu_num_counters(), so we never have the num_cntr \u003e BITS_PER_TYPE(u64) case (otherwise we would need to support multiple PERFOVFSTS registers, per above)? So GENMASK_ULL(num_cntr - 1, 0) covers all needed cases?\n\nAgreed.\n\n\u003e ...Besides, using BITS_PER_TYPE(u64) instead of just 64 surely is an overkill? :)\n\nSorry about this, I did not intend to over-engineer. BITS_PER_TYPE is compile time and doesn\u0027t incur runtime cost and my intention was to have implicitly commented code (better readability than 64). I have removed it now.",
+      "parentUuid": "fdebe2cf_f20ea566",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8f2d6e_ac47776e",
         "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
         "patchSetId": 18
@@ -151,6 +259,24 @@
       "writtenOn": "2026-05-31T19:25:55Z",
       "side": 1,
       "message": "Instead of this loop we could just check:\n\n```\n\tif (offset \u003e\u003d counter \u0026\u0026 offset \u003c counter + num_cntr * stride \u0026\u0026\n\t    (offset - counter) % stride \u003d\u003d 0) {\n\t\tinfo-\u003etype \u003d PKVM_IOMMU_PMU_REG_COUNTER;\n\t\tinfo-\u003ecounter \u003d (offset - counter) / stride;\n\t\tiommu_pmu_counter_caps(iommu, perfcap, cfg, info-\u003ecounter, info);\n\t\treturn true;\n\t}\n```\n\n?",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98330232_9b675b27",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Makes sense. Updated",
+      "parentUuid": "9b8f2d6e_ac47776e",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -280,6 +406,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce11dea5_3adb92d7",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd730feb_88767767",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c2d2f65_eb31f16a",
@@ -325,6 +469,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfe61ed_e9d6ab19",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "make sense, done.",
+      "parentUuid": "9c2d2f65_eb31f16a",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9753bed2_2e06c00b",
@@ -356,6 +518,24 @@
           ]
         }
       ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aa76e96_cc1c0151",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9753bed2_2e06c00b",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -405,6 +585,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68ed9a5_468a377f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "True, updated.",
+      "parentUuid": "e67057e1_423be369",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e24fcb7c_b3de7c4a",
@@ -436,6 +634,24 @@
           ]
         }
       ],
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92504797_520a89d3",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:24Z",
+      "side": 1,
+      "message": "True, updated.",
+      "parentUuid": "e24fcb7c_b3de7c4a",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
