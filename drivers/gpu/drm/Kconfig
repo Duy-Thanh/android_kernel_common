@@ -205,13 +205,13 @@ config DRM_TTM
 	  uses it.
 
 config DRM_EXEC
-	tristate
+	tristate "DRM execution context support"
 	depends on DRM
 	help
 	  Execution context for command submissions
 
 config DRM_GPUVM
-	tristate
+	tristate "DRM GPUVM support"
 	depends on DRM
 	select DRM_EXEC
 	help
@@ -280,7 +280,7 @@ config DRM_SUBALLOC_HELPER
 	depends on DRM
 
 config DRM_SCHED
-	tristate
+	tristate "DRM scheduler support"
 	depends on DRM
 
 # Separate option as not all DRM drivers use it
