@@ -2204,18 +2204,22 @@ bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_HYP_MEMINFO);
 		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MEM_SHARE);
 		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MEM_UNSHARE);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_INFO);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_ENROLL);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_MAP);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_UNMAP);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_MAP);
-		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_UNMAP);
+		if (pkvm_hyp_vm_has_pvmfw(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu))) {
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_INFO);
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_ENROLL);
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_MAP);
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_GUARD_UNMAP);
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_MAP);
+			__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MMIO_RGUARD_UNMAP);
+		}
 		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_MEM_RELINQUISH);
 		__smccc_kvm_func_to_feature_args(val, ARM_SMCCC_KVM_FUNC_DEV_REQ_PWR);
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID:
-		set_bit(KVM_ARCH_FLAG_MMIO_GUARD, &vcpu->kvm->arch.flags);
-		val[0] = SMCCC_RET_SUCCESS;
+		if (pkvm_hyp_vm_has_pvmfw(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu))) {
+			set_bit(KVM_ARCH_FLAG_MMIO_GUARD, &vcpu->kvm->arch.flags);
+			val[0] = SMCCC_RET_SUCCESS;
+		}
 		break;
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID:
 	case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_RGUARD_MAP_FUNC_ID:
