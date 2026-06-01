@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "340c4e09_4dd46184",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:16Z",
+      "side": 1,
+      "message": "Yeah true. Updated the comment to more precise",
+      "parentUuid": "2b6091e8_b7d94d13",
+      "revId": "f0f442c5eaa7964eec8ab2e5cc48bfdd4df0ca51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ea28a50d_7a1911f4",
         "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
         "patchSetId": 16
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-29T17:21:16Z",
       "side": 1,
       "message": "Just a note: as I understand, this is purely hypothetical (i.e. we haven\u0027t really encountered such a buggy IOMMU hardware with FRO\u003d0), so this check is purely optional?\n\nBTW, FRO\u003d1 or FRO\u003d2 wouldn\u0027t be a valid configuration either?",
+      "revId": "f0f442c5eaa7964eec8ab2e5cc48bfdd4df0ca51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45c3349_3bd80086",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-01T10:31:16Z",
+      "side": 1,
+      "message": "Yeah true, its hypothetical. Intention was to say \"no FRCD present\" and not to catch hypothetical invalid configuration. Updated the comment to make it clear.",
+      "parentUuid": "ea28a50d_7a1911f4",
       "revId": "f0f442c5eaa7964eec8ab2e5cc48bfdd4df0ca51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
