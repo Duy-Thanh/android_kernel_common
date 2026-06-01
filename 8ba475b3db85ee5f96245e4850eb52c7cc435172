@@ -50,6 +50,30 @@
       ],
       "revId": "8ba475b3db85ee5f96245e4850eb52c7cc435172",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7b8309_bfa25192",
+        "filename": "arch/x86/kvm/pkvm/init.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T18:22:53Z",
+      "side": 1,
+      "message": "In the current implementation it is guaranteed to be non-NULL (and I doubt we will want to change that in the future).\n\nSo if we really want to check that, we should also use a WARN_ON_ONCE for that?\n\nBut actually, we would catch such a bug anyway (it would trigger a NULL dereference \u003d\u003e #PF exception \u003d\u003e hypervisor panic), so why make the implementation of `for_each_pkvm_pcpu` more complicated and bug-prone just for that?",
+      "parentUuid": "3fefdcd2_2bd7c7b4",
+      "range": {
+        "startLine": 67,
+        "startChar": 42,
+        "endLine": 67,
+        "endChar": 46
+      },
+      "revId": "8ba475b3db85ee5f96245e4850eb52c7cc435172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
