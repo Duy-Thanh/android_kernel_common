@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9b1281_4b0f5898",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-01T14:30:39Z",
+      "side": 1,
+      "message": "abi.stg appears to be corrupt (dupliate node definition). Please rebase and regenerate the STG file",
+      "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
