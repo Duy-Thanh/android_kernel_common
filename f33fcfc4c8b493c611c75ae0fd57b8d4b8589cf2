@@ -52,6 +52,24 @@
       "parentUuid": "963b9b99_bd58b17f",
       "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec84dbe1_75108984",
+        "filename": "arch/arm64/mm/mem_relinquish.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-01T11:29:00Z",
+      "side": 1,
+      "message": "The idea is that the boolean is changed from its default value, and hence disables balloon driver initialisation, iff we are running on pKVM as a guest and have a granule size greater than PAGE_SIZE (or in the likely impossible event that we can\u0027t probe the granule size). Hence the default behaviour, when FALSE, should be to leave the balloon driver able to initialise, and hence the current naming.",
+      "parentUuid": "9fdf57a5_f926599a",
+      "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
