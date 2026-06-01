@@ -26,6 +26,29 @@
  * access. All other writes are denied.
  */
 
+/*
+ * Sub-register types within a 128-bit Fault Recording Register (FRCD).
+ *
+ * Per VT-d spec 11.4.7.6, each FRCD is 16 bytes (128 bits):
+ *   +0  (64-bit, FRCD_LO):    FI[63:12] fault address (ROS), RsvdZ[11:0]
+ *   +8  (32-bit, FRCD_HI_LO): PP[31], EXE[30], PRIV[29], T2[28],
+ *                              SID[15:0] (ROS), RsvdZ[27:16]
+ *   +12 (32-bit, FRCD_HI_HI): F[31](RW1CS), T1[30], AT[29:28], PV[27:8],
+ *                              FR[7:0] -> F is RW1CS, rest ROS
+ *   +8  (64-bit, FRCD_HI):    64-bit access covering FRCD_HI_LO + FRCD_HI_HI
+ */
+enum iommu_frcd_reg {
+	IOMMU_FRCD_REG_NONE,
+	IOMMU_FRCD_REG_LO,        /* +0: FI (fault address), all ROS */
+	IOMMU_FRCD_REG_HI_LO,     /* +8 (32-bit): SID/PP/EXE/PRIV/T2, all ROS */
+	IOMMU_FRCD_REG_HI_HI,     /* +12 (32-bit): F(RW1CS)/T1/AT/PV/FR */
+	IOMMU_FRCD_REG_HI,        /* +8 (64-bit): full FRCD_HI word */
+};
+
+struct iommu_frcd_reg_info {
+	enum iommu_frcd_reg type;
+};
+
 /* Each fault recording register is 128 bits (16 bytes) */
 #define FRCD_REG_SIZE	16
 
@@ -54,8 +77,8 @@ static bool iommu_frcd_window_in_range(struct intel_iommu *iommu,
  * sub-register; returns false for any access outside the FRCD array or with
  * an unsupported access size or alignment.
  */
-bool iommu_frcd_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
-			     int len, struct iommu_frcd_reg_info *info)
+static bool iommu_frcd_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
+				    int len, struct iommu_frcd_reg_info *info)
 {
 	u32 fro, num_frcd, sub_off;
 
@@ -116,22 +139,27 @@ bool iommu_frcd_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
 	}
 }
 
-int iommu_frcd_validate_read(struct intel_iommu *iommu,
-			     const struct iommu_frcd_reg_info *info)
+int iommu_frcd_validate_read(struct intel_iommu *iommu, unsigned long offset,
+			     int len)
 {
-	if (info->type == IOMMU_FRCD_REG_NONE) {
-		pkvm_err("iommu%d: invalid fault recording register read\n",
-			 iommu->seq_id);
-		return -EINVAL;
-	}
+	struct iommu_frcd_reg_info info;
+
+	if (!iommu_frcd_get_reg_info(iommu, offset, len, &info))
+		return IOMMU_REG_NOT_HANDLED;
+
+	/* Any recognized FRCD sub-register is readable. */
 	return 0;
 }
 
-int iommu_frcd_validate_write(struct intel_iommu *iommu,
-			      const struct iommu_frcd_reg_info *info,
-			      u64 val)
+int iommu_frcd_validate_write(struct intel_iommu *iommu, unsigned long offset,
+			      int len, u64 val)
 {
-	switch (info->type) {
+	struct iommu_frcd_reg_info info;
+
+	if (!iommu_frcd_get_reg_info(iommu, offset, len, &info))
+		return IOMMU_REG_NOT_HANDLED;
+
+	switch (info.type) {
 	case IOMMU_FRCD_REG_HI_HI:
 		/*
 		 * 32-bit write to FRCD_HI_HI (+12). The F bit (bit 31) is

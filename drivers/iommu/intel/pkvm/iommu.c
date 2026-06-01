@@ -523,32 +523,25 @@ int pkvm_iommu_mmio_read(u64 phys, int len, u64 *val)
 	case DMAR_ECCAP_REG + 3 * DMA_ECMD_REG_STEP:
 		ret = iommu_direct_mmio_read(iommu, phys, len, 8, val);
 		break;
-	default: {
-		struct iommu_frcd_reg_info frcd_info;
-		struct iommu_pmu_reg_info pmu_info;
-
-		if (iommu_pmu_get_reg_info(iommu, offset, len, &pmu_info)) {
-			ret = iommu_pmu_validate_read(iommu, &pmu_info);
-			if (!ret)
-				ret = iommu_direct_mmio_read(iommu, phys,
-							     len, len, val);
-		} else if (iommu_frcd_get_reg_info(iommu, offset, len, &frcd_info)) {
-			ret = iommu_frcd_validate_read(iommu, &frcd_info);
-			if (!ret)
-				ret = iommu_direct_mmio_read(iommu, phys,
-							     len, len, val);
-		} else {
-			/*
-			 * Deny-by-default: block all registers not explicitly handled
-			 * above. Any register the host driver legitimately needs must
-			 * be added as an explicit case; unknown or unreviewed registers
-			 * must not reach hardware.
-			 */
+	default:
+		/*
+		 * Deny-by-default: each validator returns IOMMU_REG_NOT_HANDLED if
+		 * @offset is not one of its registers. Try PMU then FRCD; if neither
+		 * claims it, block the access. A register the host driver legitimately
+		 * needs must be added to one of the validators or as an explicit case;
+		 * unknown or unreviewed registers must not reach hardware.
+		 */
+		ret = iommu_pmu_validate_read(iommu, offset, len);
+		if (ret == IOMMU_REG_NOT_HANDLED)
+			ret = iommu_frcd_validate_read(iommu, offset, len);
+		if (ret == IOMMU_REG_NOT_HANDLED) {
 			pkvm_err("iommu%d: unsupported register read blocked at offset 0x%lx\n",
 				 iommu->seq_id, offset);
 			ret = -EOPNOTSUPP;
 		}
-	}
+		if (!ret)
+			ret = iommu_direct_mmio_read(iommu, phys, len, len, val);
+		break;
 	}
 
 	pkvm_spin_unlock(&iommu->lock);
@@ -726,32 +719,25 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
 		}
 		break;
-	default: {
-		struct iommu_frcd_reg_info frcd_info;
-		struct iommu_pmu_reg_info pmu_info;
-
-		if (iommu_pmu_get_reg_info(iommu, offset, len, &pmu_info)) {
-			ret = iommu_pmu_validate_write(iommu, &pmu_info, val);
-			if (!ret)
-				ret = iommu_direct_mmio_write(iommu, phys,
-							      len, len, val);
-		} else if (iommu_frcd_get_reg_info(iommu, offset, len, &frcd_info)) {
-			ret = iommu_frcd_validate_write(iommu, &frcd_info, val);
-			if (!ret)
-				ret = iommu_direct_mmio_write(iommu, phys,
-							      len, len, val);
-		} else {
-			/*
-			 * Deny-by-default: block all registers not explicitly handled
-			 * above. Any register the host driver legitimately needs must
-			 * be added as an explicit case; unknown or unreviewed registers
-			 * must not reach hardware.
-			 */
+	default:
+		/*
+		 * Deny-by-default: each validator returns IOMMU_REG_NOT_HANDLED if
+		 * @offset is not one of its registers. Try PMU then FRCD; if neither
+		 * claims it, block the access. A register the host driver legitimately
+		 * needs must be added to one of the validators or as an explicit case;
+		 * unknown or unreviewed registers must not reach hardware.
+		 */
+		ret = iommu_pmu_validate_write(iommu, offset, len, val);
+		if (ret == IOMMU_REG_NOT_HANDLED)
+			ret = iommu_frcd_validate_write(iommu, offset, len, val);
+		if (ret == IOMMU_REG_NOT_HANDLED) {
 			pkvm_err("iommu%d: unsupported register write blocked at offset 0x%lx val 0x%llx\n",
 				 iommu->seq_id, offset, val);
 			ret = -EOPNOTSUPP;
 		}
-	}
+		if (!ret)
+			ret = iommu_direct_mmio_write(iommu, phys, len, len, val);
+		break;
 	}
 
 	pkvm_spin_unlock(&iommu->lock);

@@ -26,6 +26,35 @@
  */
 
 /*
+ * PMU register classes understood by the pKVM MMIO validator. Some classes
+ * identify fixed registers, while others identify entries inside dynamic
+ * windows reported by the PMU offset registers.
+ */
+enum iommu_pmu_reg {
+	IOMMU_PMU_REG_NONE,
+	IOMMU_PMU_REG_EVENT_CAP,       /* fixed PERFEVNTCAP array */
+	IOMMU_PMU_REG_CFG,             /* 64-bit PERFCNTRCFG */
+	IOMMU_PMU_REG_FILTER_RID,      /* 32-bit requester-id filter */
+	IOMMU_PMU_REG_FILTER_DID,      /* 32-bit domain-id filter */
+	IOMMU_PMU_REG_FILTER_PASID,    /* 32-bit PASID filter */
+	IOMMU_PMU_REG_FILTER_AT,       /* 32-bit address-type filter */
+	IOMMU_PMU_REG_FILTER_PTL,      /* 32-bit page-table-level filter */
+	IOMMU_PMU_REG_CNTR_CAP,        /* 32-bit PERFCNTRCAP */
+	IOMMU_PMU_REG_CNTR_EVENT_CAP,  /* 32-bit per-counter event cap */
+	IOMMU_PMU_REG_OVERFLOW,        /* 64-bit PERFOVFSTS */
+	IOMMU_PMU_REG_COUNTER,         /* 64-bit PERFCNTR */
+};
+
+struct iommu_pmu_reg_info {
+	enum iommu_pmu_reg type;
+	u32 counter;
+	u32 cntr_width;
+	u32 filter_mask;
+	bool cntr_ios;
+	u64 writable_mask;
+};
+
+/*
  * Verify a PMU register window fits in the remapping hardware MMIO region.
  * The offsets come from hardware registers and must not be trusted blindly.
  */
@@ -139,8 +168,8 @@ static void iommu_pmu_counter_caps(struct intel_iommu *iommu, u32 counter,
  * windows outside the MMIO region, and capability-dependent registers that are
  * not reported by hardware.
  */
-bool iommu_pmu_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
-			    int len, struct iommu_pmu_reg_info *info)
+static bool iommu_pmu_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
+				   int len, struct iommu_pmu_reg_info *info)
 {
 	u32 num_cntr, num_eg, stride;
 	u32 cfg, overflow, counter;
@@ -310,23 +339,28 @@ bool iommu_pmu_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
 	return false;
 }
 
-int iommu_pmu_validate_read(struct intel_iommu *iommu,
-			    struct iommu_pmu_reg_info *info)
+int iommu_pmu_validate_read(struct intel_iommu *iommu, unsigned long offset,
+			    int len)
 {
-	if (info->type == IOMMU_PMU_REG_NONE) {
-		pkvm_err("iommu%d: invalid PMU register read\n", iommu->seq_id);
-		return -EINVAL;
-	}
+	struct iommu_pmu_reg_info info;
 
+	if (!iommu_pmu_get_reg_info(iommu, offset, len, &info))
+		return IOMMU_REG_NOT_HANDLED;
+
+	/* Any recognized PMU register is readable. */
 	return 0;
 }
 
-int iommu_pmu_validate_write(struct intel_iommu *iommu,
-			     struct iommu_pmu_reg_info *info, u64 val)
+int iommu_pmu_validate_write(struct intel_iommu *iommu, unsigned long offset,
+			     int len, u64 val)
 {
+	struct iommu_pmu_reg_info info;
 	u32 val32 = (u32)val;
 
-	switch (info->type) {
+	if (!iommu_pmu_get_reg_info(iommu, offset, len, &info))
+		return IOMMU_REG_NOT_HANDLED;
+
+	switch (info.type) {
 	case IOMMU_PMU_REG_CFG:
 		/*
 		 * PERFCNTRCFG is writable, but most bits are reserved and the
@@ -349,7 +383,7 @@ int iommu_pmu_validate_write(struct intel_iommu *iommu,
 				 iommu->seq_id);
 			return -EOPNOTSUPP;
 		}
-		if ((val & IOMMU_EVENT_CFG_INT) && !info->cntr_ios) {
+		if ((val & IOMMU_EVENT_CFG_INT) && !info.cntr_ios) {
 			pkvm_err("iommu%d: PERFCNTRCFG.IO set without IOS support\n",
 				 iommu->seq_id);
 			return -EINVAL;
@@ -394,7 +428,7 @@ int iommu_pmu_validate_write(struct intel_iommu *iommu,
 		}
 		return 0;
 	case IOMMU_PMU_REG_OVERFLOW:
-		if (val & ~info->writable_mask) {
+		if (val & ~info.writable_mask) {
 			pkvm_err("iommu%d: PERFOVFSTS 0x%llx has reserved bits set\n",
 				 iommu->seq_id, val);
 			return -EINVAL;
@@ -413,9 +447,9 @@ int iommu_pmu_validate_write(struct intel_iommu *iommu,
 		 * pcap_cntr_width()/iommu_cntrcap_cw(), so a value of 0 or >64 can
 		 * only come from a hardware or programming bug; flag it and reject.
 		 */
-		if (WARN_ON_ONCE(!info->cntr_width || info->cntr_width > 64))
+		if (WARN_ON_ONCE(!info.cntr_width || info.cntr_width > 64))
 			return -EINVAL;
-		if (val & ~GENMASK_ULL(info->cntr_width - 1, 0)) {
+		if (val & ~GENMASK_ULL(info.cntr_width - 1, 0)) {
 			pkvm_err("iommu%d: PERFCNTR 0x%llx has reserved bits set\n",
 				 iommu->seq_id, val);
 			return -EINVAL;

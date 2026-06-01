@@ -11,34 +11,16 @@
 struct intel_iommu;
 
 /*
- * Sub-register types within a 128-bit Fault Recording Register (FRCD).
+ * Validate a host MMIO read/write to a fault recording register at @offset/@len.
  *
- * Per VT-d spec 11.4.7.6, each FRCD is 16 bytes (128 bits):
- *   +0  (64-bit, FRCD_LO):    FI[63:12] fault address (ROS), RsvdZ[11:0]
- *   +8  (32-bit, FRCD_HI_LO): PP[31], EXE[30], PRIV[29], T2[28],
- *                              SID[15:0] (ROS), RsvdZ[27:16]
- *   +12 (32-bit, FRCD_HI_HI): F[31](RW1CS), T1[30], AT[29:28], PV[27:8],
- *                              FR[7:0] -> F is RW1CS, rest ROS
- *   +8  (64-bit, FRCD_HI):    64-bit access covering FRCD_HI_LO + FRCD_HI_HI
+ * Returns 0 if the access targets an FRCD sub-register and is permitted (the
+ * caller may pass it to hardware), IOMMU_REG_NOT_HANDLED if @offset is not an
+ * FRCD register (the caller should try the next handler / deny-by-default), or
+ * another negative errno if it is an FRCD register but the access is rejected.
  */
-enum iommu_frcd_reg {
-	IOMMU_FRCD_REG_NONE,
-	IOMMU_FRCD_REG_LO,        /* +0: FI (fault address), all ROS */
-	IOMMU_FRCD_REG_HI_LO,     /* +8 (32-bit): SID/PP/EXE/PRIV/T2, all ROS */
-	IOMMU_FRCD_REG_HI_HI,     /* +12 (32-bit): F(RW1CS)/T1/AT/PV/FR */
-	IOMMU_FRCD_REG_HI,        /* +8 (64-bit): full FRCD_HI word */
-};
-
-struct iommu_frcd_reg_info {
-	enum iommu_frcd_reg type;
-};
-
-bool iommu_frcd_get_reg_info(struct intel_iommu *iommu, unsigned long offset,
-			     int len, struct iommu_frcd_reg_info *info);
-int iommu_frcd_validate_read(struct intel_iommu *iommu,
-			     const struct iommu_frcd_reg_info *info);
-int iommu_frcd_validate_write(struct intel_iommu *iommu,
-			      const struct iommu_frcd_reg_info *info,
-			      u64 val);
+int iommu_frcd_validate_read(struct intel_iommu *iommu, unsigned long offset,
+			     int len);
+int iommu_frcd_validate_write(struct intel_iommu *iommu, unsigned long offset,
+			      int len, u64 val);
 
 #endif /* __PKVM_IOMMU_FRCD_H */

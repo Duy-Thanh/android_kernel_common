@@ -16,6 +16,13 @@
 #define IOMMU_PGT_4LEVEL	BIT(2)
 #define IOMMU_PGT_5LEVEL	BIT(3)
 
+/*
+ * Return value from a pKVM MMIO register validator meaning "this offset is not
+ * one of my registers" -- the dispatcher should try the next handler or fall to
+ * deny-by-default. Distinct from the validators' rejection codes (-EINVAL etc).
+ */
+#define IOMMU_REG_NOT_HANDLED	(-ENXIO)
+
 struct intel_iommu_info {
 	u64 reg_phys;
 	u64 reg_size;
