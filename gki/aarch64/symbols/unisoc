@@ -496,7 +496,7 @@
   input_unregister_handle
   int_sqrt
   iomem_resource
-  __ioremap_prot
+  ioremap_prot
   iounmap
   ip_route_output_flow
   ip_send_check

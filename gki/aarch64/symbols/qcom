@@ -1531,7 +1531,7 @@
   iommu_set_pgtable_quirks
   iommu_unmap
   __ioread32_copy
-  __ioremap_prot
+  ioremap_prot
   iounmap
   iov_iter_init
   iov_iter_kvec
