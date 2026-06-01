@@ -65,13 +65,19 @@ static int drm_mode_align_dumb(struct drm_mode_create_dumb *args,
 			       unsigned long hw_size_align)
 {
 	u32 pitch = args->pitch;
-	u32 size;
+	u32 size, tmp;
 
 	if (!pitch)
 		return -EINVAL;
 
-	if (hw_pitch_align)
+	if (hw_pitch_align) {
 		pitch = roundup(pitch, hw_pitch_align);
+		if (WARN_ON(pitch < hw_pitch_align)) {
+			pr_err("%s: from %s pitch=%u vs hw_pitch=%lu\n",
+					__func__, current->comm, pitch, hw_pitch_align);
+			return -EINVAL;
+		}
+	}
 
 	if (!hw_size_align)
 		hw_size_align = PAGE_SIZE;
@@ -80,9 +86,13 @@ static int drm_mode_align_dumb(struct drm_mode_create_dumb *args,
 
 	if (check_mul_overflow(args->height, pitch, &size))
 		return -EINVAL;
-	size = ALIGN(size, hw_size_align);
-	if (!size)
+	tmp = roundup(size, hw_size_align);
+	if (WARN_ON(!tmp)) {
+		pr_err("%s: from %s invalid roundup size=%u hw_size_align=%lu\n",
+				__func__, current->comm, size, hw_size_align);
 		return -EINVAL;
+	}
+	size = tmp;
 
 	args->pitch = pitch;
 	args->size = size;
@@ -198,6 +208,16 @@ int drm_mode_create_dumb(struct drm_device *dev,
 		return -ENOSYS;
 	if (!args->width || !args->height || !args->bpp)
 		return -EINVAL;
+
+	/* Reject unreasonable inputs early.  Dumb buffers are for software
+	 * rendering; nothing legitimate needs more than 8192x8192 at 32bpp.
+	 * This prevents overflows in downstream alignment helpers.
+	 */
+	if (WARN_ON(args->width >= 8192 || args->height >= 8192 || args->bpp > 32)) {
+		pr_err("%s: invalid request from:%s w=%u h=%u b=%u\n",
+				__func__, current->comm, args->width, args->height, args->bpp);
+		return -EINVAL;
+	}
 
 	/* overflow checks for 32bit size calculations */
 	if (args->bpp > U32_MAX - 8)
