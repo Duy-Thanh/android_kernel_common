@@ -16,6 +16,24 @@
       "message": "nit: I believe in the kernel, it\u0027s always __\n\nAlso I wonder if it isn\u0027t more robust to make that `__page_relinquish_enabled`. So that it defaults off, until kvm_init_memrelinquish_services() is called?",
       "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963b9b99_bd58b17f",
+        "filename": "arch/arm64/mm/mem_relinquish.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-01T11:13:02Z",
+      "side": 1,
+      "message": "Agree with the double underscore, but I think this needs to default to off, as we will not call kvm_init_memrelinquish_services() on all systems, when when it is built into the kernel.",
+      "parentUuid": "c21cf29c_1359e345",
+      "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
