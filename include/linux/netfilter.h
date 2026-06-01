@@ -15,7 +15,6 @@
 #include <linux/netfilter_defs.h>
 #include <linux/netdevice.h>
 #include <linux/sockptr.h>
-#include <linux/android_kabi.h>
 #include <net/net_namespace.h>
 
 static inline int NF_DROP_GETERR(int verdict)
@@ -194,8 +193,6 @@ struct nf_sockopt_ops {
 	int (*get)(struct sock *sk, int optval, void __user *user, int *len);
 	/* Use the module struct to lock set/get code in place */
 	struct module *owner;
-
-	ANDROID_KABI_RESERVE(1);
 };
 
 /* Function to register/unregister hook points. */
@@ -389,8 +386,6 @@ struct nf_nat_hook {
 			       const struct nlattr *attr);
 	void (*decode_session)(struct sk_buff *skb, struct flowi *fl);
 	void (*remove_nat_bysrc)(struct nf_conn *ct);
-
-	ANDROID_KABI_RESERVE(1);
 };
 
 extern const struct nf_nat_hook __rcu *nf_nat_hook;
@@ -495,8 +490,6 @@ struct nfnl_ct_hook {
 			     u32 portid, u32 report);
 	void (*seq_adjust)(struct sk_buff *skb, struct nf_conn *ct,
 			   enum ip_conntrack_info ctinfo, s32 off);
-
-	ANDROID_KABI_RESERVE(1);
 };
 extern const struct nfnl_ct_hook __rcu *nfnl_ct_hook;
 
