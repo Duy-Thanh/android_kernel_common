@@ -70,6 +70,24 @@
       "parentUuid": "9fdf57a5_f926599a",
       "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8cea5cc_be3e8682",
+        "filename": "arch/arm64/mm/mem_relinquish.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-01T11:44:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ec84dbe1_75108984",
+      "revId": "f33fcfc4c8b493c611c75ae0fd57b8d4b8589cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
