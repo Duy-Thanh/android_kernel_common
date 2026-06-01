@@ -260,7 +260,7 @@
   iommu_get_domain_for_dev
   iommu_map
   iommu_unmap
-  __ioremap_prot
+  ioremap_prot
   iounmap
   __irq_apply_affinity_hint
   irq_create_mapping_affinity
