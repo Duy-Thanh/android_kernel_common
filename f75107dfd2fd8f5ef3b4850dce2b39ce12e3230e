@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff01f57_660fd839",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-01T14:59:02Z",
+      "side": 1,
+      "message": "All ANDROID patches must have a \"Bug:\" tag citing an open issuetracker case.",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
