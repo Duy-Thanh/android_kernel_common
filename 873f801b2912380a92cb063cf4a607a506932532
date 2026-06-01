@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed30bde5_ef955d6d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T10:58:03Z",
+      "side": 1,
+      "message": "tiny nit: the order of these declarations can be also flipped for consistency? :)",
+      "revId": "873f801b2912380a92cb063cf4a607a506932532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08268a17_b8110845",
+        "filename": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T10:58:03Z",
+      "side": 1,
+      "message": "tiny nit: these empty lines are unnecessary (or if we do want them, we want one after line 170 as well)?",
+      "fixSuggestions": [
+        {
+          "fixId": "31cffda0_dd5eee88",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_frcd.c",
+              "range": {
+                "startLine": 161,
+                "startChar": 0,
+                "endLine": 162,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "873f801b2912380a92cb063cf4a607a506932532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
