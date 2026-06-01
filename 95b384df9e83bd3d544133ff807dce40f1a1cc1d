@@ -40,6 +40,30 @@
       ],
       "revId": "95b384df9e83bd3d544133ff807dce40f1a1cc1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aece712_19549d0a",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-06-01T17:24:09Z",
+      "side": 1,
+      "message": "I moved this change to `android17-6.18-kminext` where KMI breaking changes are still allowed.",
+      "parentUuid": "b8c677f6_1763bac6",
+      "range": {
+        "startLine": 232,
+        "startChar": 1,
+        "endLine": 235,
+        "endChar": 3
+      },
+      "revId": "95b384df9e83bd3d544133ff807dce40f1a1cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
