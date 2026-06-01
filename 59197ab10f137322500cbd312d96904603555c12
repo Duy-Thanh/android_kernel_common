@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a75a002_5364c30d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-01T08:54:41Z",
+      "side": 1,
+      "message": "Not really a big fan of this:\n- that will limit testing, as some setups have no pvmfw (and have custom code for mmio guard as device assignement relies on it)\n- I believe this should be fixed from the guest, it should not call MMIO guard if it was not enrolled (even if pvmfw is the one that does it, it is till considered the guest from pKVM PoV).",
+      "range": {
+        "startLine": 10,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "59197ab10f137322500cbd312d96904603555c12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
