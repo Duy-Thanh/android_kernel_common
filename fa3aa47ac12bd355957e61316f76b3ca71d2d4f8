@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc304af7_10a60efd",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T16:27:27Z",
+      "side": 1,
+      "message": "A couple of issues here found with the help of Gemini:\n\n1. `pda_pa` was pinned only if `modified.pst \u003d\u003d 1`, not if `irte-\u003epst \u003d\u003d 1` but `modified.pst !\u003d 1`\n2. In this case we fail to actually modify the IRTE, yet we still return success to the host. So we might return e.g. -EAGAIN or whatever?\n\n...Actually, this try_cmpxchg128 failure shouldn\u0027t really happen (since we hold iommu-\u003elock and since IRTEs are only modified by SW, not by HW). So we could just replace WARN_ON with BUG_ON here (thus avoid the need to think how to correctly handle the case when it happens)?",
+      "fixSuggestions": [
+        {
+          "fixId": "6ca95cf6_25c1f854",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 574,
+                "startChar": 0,
+                "endLine": 582,
+                "endChar": 0
+              },
+              "replacement": "\t\tBUG_ON(!try_cmpxchg128(\u0026irte-\u003eirte, \u0026old, modified.irte));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fa3aa47ac12bd355957e61316f76b3ca71d2d4f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
