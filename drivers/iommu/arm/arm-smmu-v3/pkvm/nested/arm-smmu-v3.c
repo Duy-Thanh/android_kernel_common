@@ -941,7 +941,7 @@ static size_t smmu_pgsize_idmap(size_t size, u64 paddr, size_t pgsize_bitmap)
 	return BIT(__fls(pgsizes));
 }
 
-static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
+static void smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 {
 	size_t size = end - start;
 	size_t pgsize, pgcount;
@@ -952,7 +952,7 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 
 	end = min(end, BIT(pgtable->cfg.oas));
 	if (start >= end)
-		return 0;
+		return;
 
 	if (prot) {
 		if (!(prot & IOMMU_MMIO))
@@ -965,15 +965,10 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 			pgcount = size / pgsize;
 			ret = pgtable->ops.map_pages(&pgtable->ops, start, start,
 						     pgsize, pgcount, prot, 0, &mapped);
-			/*
-			 * Failing to map isn't compromising security. Make sure we don't crash for
-			 * that.
-			 */
-			if (ret || !mapped)
-				return 0;
-
 			size -= mapped;
 			start += mapped;
+			if (!mapped || ret)
+				return;
 		}
 	} else {
 		while (size) {
@@ -981,18 +976,14 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 			pgcount = size / pgsize;
 			unmapped = pgtable->ops.unmap_pages(&pgtable->ops, start,
 							    pgsize, pgcount, &gather);
-			if (!unmapped)
-				break;
-
 			size -= unmapped;
 			start += unmapped;
+			if (!unmapped)
+				break;
 		}
 		/* Some memory were not unmapped. */
-		if (WARN_ON(size))
-			return -EINVAL;
+		WARN_ON(size);
 	}
-
-	return 0;
 }
 
 #ifdef MODULE
