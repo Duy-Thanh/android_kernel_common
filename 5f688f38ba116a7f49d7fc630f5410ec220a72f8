@@ -3,6 +3,253 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c751301d_ad226492",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T13:09:38Z",
+      "side": 1,
+      "message": "nit: iommu_pmu_num_counters() is used in only one place, so we can open-code it?",
+      "fixSuggestions": [
+        {
+          "fixId": "1a53d47b_e6fce9df",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "\tiommu-\u003epmu_num_cntr \u003d min_t(u32, pcap_num_cntr(perfcap), IOMMU_PMU_IDX_MAX);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c659cb_06c190d4",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T13:09:38Z",
+      "side": 1,
+      "message": "Maybe instead of a separate struct field for this, we can just reset `iommu-\u003epmu_supported` to false in the above `if`s (or, equally, set it to true only here, after the above `if`s)? (It just seems not worth a dedicated struct field, and extra logic for checking this field, for such a purely hypothetical corner case of buggy HW?)\n\nThat would mean denying accesses to the \"static\" PERFEVNTCAP registers as well, but that seems fine, since if we ever really encounter such a buggy HW, the PMU as a whole won\u0027t be useful anyway?",
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c68cff_874ae69f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T13:09:38Z",
+      "side": 1,
+      "message": "nit: the code inside iommu_pmu_counter_caps() seems clear enough already (or maybe after applying my below suggestion :)), so this comment is not needed very much?",
+      "fixSuggestions": [
+        {
+          "fixId": "6de507eb_83ace01b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe2ad796_79505480",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T13:09:38Z",
+      "side": 1,
+      "message": "Just a nit thought: maybe it would be more readable to put the entire below code into `if (iommu-\u003epmu_perfcap \u0026 BIT_ULL(51))` instead?",
+      "fixSuggestions": [
+        {
+          "fixId": "78fa6faa_255a9afc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "\tif (iommu-\u003epmu_perfcap \u0026 BIT_ULL(51)) {\n\t\tu32 cap \u003d iommu-\u003epmu_cntrcap[counter];\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 125,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!iommu_cntrcap_pcc(cap))\n\t\t\treturn; /* counter has no per-counter caps: keep globals set above */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "\t\tinfo-\u003ecntr_width \u003d iommu_cntrcap_cw(cap);\n\t\tinfo-\u003ecntr_ios \u003d iommu_cntrcap_ios(cap);\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8709d774_88fe43d1",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-01T13:09:38Z",
+      "side": 1,
+      "message": "We can just directly use `iommu-\u003epmu_filter` everywhere?",
+      "fixSuggestions": [
+        {
+          "fixId": "3cff53ad_d2438b9a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 201,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (!(iommu-\u003epmu_filter \u0026 IOMMU_PMU_FILTER_REQUESTER_ID))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 221,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (!(iommu-\u003epmu_filter \u0026 IOMMU_PMU_FILTER_DOMAIN))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 226,
+                "startChar": 0,
+                "endLine": 227,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (!(iommu-\u003epmu_filter \u0026 IOMMU_PMU_FILTER_PASID))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 231,
+                "startChar": 0,
+                "endLine": 232,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (!(iommu-\u003epmu_filter \u0026 IOMMU_PMU_FILTER_ATS))\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 237,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif (!(iommu-\u003epmu_filter \u0026 IOMMU_PMU_FILTER_PAGE_TABLE))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5f688f38ba116a7f49d7fc630f5410ec220a72f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e723464b_f96a84c0",
         "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
         "patchSetId": 19
