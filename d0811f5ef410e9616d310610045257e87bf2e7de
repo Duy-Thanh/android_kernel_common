@@ -16,6 +16,24 @@
       "message": "abi.stg appears to be corrupt (dupliate node definition). Please rebase and regenerate the STG file",
       "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064635eb_3eb8c01c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-01T15:35:38Z",
+      "side": 1,
+      "message": "Actually, the STG file should not even be in this patch. Please create a new patch on top of this one with the changes to your symbol file.",
+      "parentUuid": "ea9b1281_4b0f5898",
+      "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
