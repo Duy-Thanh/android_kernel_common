@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7c0026f_1dd910d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-06-02T00:42:59Z",
+      "side": 1,
+      "message": "Yeah, if domain is already removed from hash list, no one can get its refcount. Will refine this. Thanks!",
+      "parentUuid": "0febb0b7_92e27117",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b49c08b1_dfabf4bb",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
