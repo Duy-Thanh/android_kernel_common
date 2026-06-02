@@ -16,6 +16,24 @@
       "message": "nit: \"while the host-provided hardware discovery state is still trusted\" sounds misleading, since AFAICS we don\u0027t really use that host-provided state even during initialization, we read PERFCAP etc from HW on our own, independently of the host?",
       "revId": "97208e9305db52ed7bdb7d411cfb401adc8ddda2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40ab231_0172b2c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T15:54:44Z",
+      "side": 1,
+      "message": "You\u0027re right, we are only caching registers that are read only like capability and offset. Removed that line",
+      "parentUuid": "1b3ceda5_db19f13f",
+      "revId": "97208e9305db52ed7bdb7d411cfb401adc8ddda2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
