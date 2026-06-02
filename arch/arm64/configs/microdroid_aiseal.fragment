@@ -1,0 +1,13 @@
+# Required to load vendor-provided device drivers
+CONFIG_MODULES=y
+# If CONFIG_MODULES=y then CONFIG_HW_RANDOM defaults to 'm'.
+CONFIG_HW_RANDOM=y
+# Required for device assignment
+CONFIG_PKVM_PVIOMMU=y
+CONFIG_IOMMU_SUPPORT=y
+# Some NPU stacks depend on dmabufs.
+CONFIG_SYNC_FILE=y
+CONFIG_DMABUF_HEAPS=y
+CONFIG_DMABUF_HEAPS_SYSTEM=y
+# Required by some NPU drivers
+CONFIG_THERMAL=y
