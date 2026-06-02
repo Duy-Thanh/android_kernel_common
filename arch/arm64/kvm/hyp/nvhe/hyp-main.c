@@ -312,10 +312,10 @@ static void handle_pvm_entry_dabt(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 static void handle_pvm_exit_wfx(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.ctxt.regs.pstate,
-		   hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK);
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
+	hyp_vcpu->host_vcpu->arch.ctxt.regs.pstate =
+		hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK;
+	hyp_vcpu->host_vcpu->arch.fault.esr_el2 =
+		hyp_vcpu->vcpu.arch.fault.esr_el2;
 }
 
 static void handle_pvm_exit_sys64(struct pkvm_hyp_vcpu *hyp_vcpu)
@@ -324,18 +324,17 @@ static void handle_pvm_exit_sys64(struct pkvm_hyp_vcpu *hyp_vcpu)
 	u32 esr_el2 = hyp_vcpu->vcpu.arch.fault.esr_el2;
 
 	/* r0 as transfer register between the guest and the host. */
-	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-		   esr_el2 & ~ESR_ELx_SYS64_ISS_RT_MASK);
+	host_vcpu->arch.fault.esr_el2 = esr_el2 & ~ESR_ELx_SYS64_ISS_RT_MASK;
 
 	/* The mode is required for the host to emulate some sysregs */
-	WRITE_ONCE(host_vcpu->arch.ctxt.regs.pstate,
-		   hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK);
+	host_vcpu->arch.ctxt.regs.pstate =
+		hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK;
 
 	if (esr_sys64_to_params(esr_el2).is_write) {
 		int rt = kvm_vcpu_sys_get_rt(&hyp_vcpu->vcpu);
 		u64 rt_val = vcpu_get_reg(&hyp_vcpu->vcpu, rt);
 
-		WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[0], rt_val);
+		host_vcpu->arch.ctxt.regs.regs[0] = rt_val;
 	}
 }
 
@@ -381,22 +380,21 @@ static void handle_pvm_exit_hvc64(struct pkvm_hyp_vcpu *hyp_vcpu)
 		BUG();
 	}
 
-	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
+	host_vcpu->arch.fault.esr_el2 = hyp_vcpu->vcpu.arch.fault.esr_el2;
 
 	/* Pass the hvc function id (r0) as well as any potential arguments. */
 	for (i = 0; i < n; i++) {
-		WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[i],
-			   vcpu_get_reg(&hyp_vcpu->vcpu, i));
+		host_vcpu->arch.ctxt.regs.regs[i] =
+			vcpu_get_reg(&hyp_vcpu->vcpu, i);
 	}
 }
 
 static void handle_pvm_exit_iabt(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.fault.hpfar_el2,
-		   hyp_vcpu->vcpu.arch.fault.hpfar_el2);
+	hyp_vcpu->host_vcpu->arch.fault.esr_el2 =
+		hyp_vcpu->vcpu.arch.fault.esr_el2;
+	hyp_vcpu->host_vcpu->arch.fault.hpfar_el2 =
+		hyp_vcpu->vcpu.arch.fault.hpfar_el2;
 }
 
 static void handle_pvm_exit_dabt(struct pkvm_hyp_vcpu *hyp_vcpu)
@@ -407,26 +405,26 @@ static void handle_pvm_exit_dabt(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	if (hyp_vcpu->vcpu.mmio_needed) {
 		/* r0 as transfer register between the guest and the host. */
-		WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-			   hyp_vcpu->vcpu.arch.fault.esr_el2 & ~ESR_ELx_SRT_MASK);
+		host_vcpu->arch.fault.esr_el2 =
+			hyp_vcpu->vcpu.arch.fault.esr_el2 & ~ESR_ELx_SRT_MASK;
 
 		if (kvm_vcpu_dabt_iswrite(&hyp_vcpu->vcpu)) {
 			int rt = kvm_vcpu_dabt_get_rd(&hyp_vcpu->vcpu);
 			u64 rt_val = vcpu_get_reg(&hyp_vcpu->vcpu, rt);
 
-			WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[0], rt_val);
+			host_vcpu->arch.ctxt.regs.regs[0] = rt_val;
 		}
 	} else {
-		WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-			   hyp_vcpu->vcpu.arch.fault.esr_el2 & ~ESR_ELx_ISV);
+		host_vcpu->arch.fault.esr_el2 =
+			hyp_vcpu->vcpu.arch.fault.esr_el2 & ~ESR_ELx_ISV;
 	}
 
-	WRITE_ONCE(host_vcpu->arch.ctxt.regs.pstate,
-		   hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK);
-	WRITE_ONCE(host_vcpu->arch.fault.far_el2,
-		   hyp_vcpu->vcpu.arch.fault.far_el2 & GENMASK(11, 0));
-	WRITE_ONCE(host_vcpu->arch.fault.hpfar_el2,
-		   hyp_vcpu->vcpu.arch.fault.hpfar_el2);
+	host_vcpu->arch.ctxt.regs.pstate =
+		hyp_vcpu->vcpu.arch.ctxt.regs.pstate & PSR_MODE_MASK;
+	host_vcpu->arch.fault.far_el2 =
+		hyp_vcpu->vcpu.arch.fault.far_el2 & GENMASK(11, 0);
+	host_vcpu->arch.fault.hpfar_el2 =
+		hyp_vcpu->vcpu.arch.fault.hpfar_el2;
 	__vcpu_assign_sys_reg(host_vcpu, SCTLR_EL1,
 			      __vcpu_sys_reg(&hyp_vcpu->vcpu, SCTLR_EL1) &
 			      (SCTLR_ELx_EE | SCTLR_EL1_E0E));
@@ -439,22 +437,18 @@ static void handle_vm_entry_generic(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 static void handle_vm_exit_generic(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
+	hyp_vcpu->host_vcpu->arch.fault.esr_el2 =
+		hyp_vcpu->vcpu.arch.fault.esr_el2;
 }
 
 static void handle_vm_exit_abt(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
 
-	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.far_el2,
-		   hyp_vcpu->vcpu.arch.fault.far_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.hpfar_el2,
-		   hyp_vcpu->vcpu.arch.fault.hpfar_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.disr_el1,
-		   hyp_vcpu->vcpu.arch.fault.disr_el1);
+	host_vcpu->arch.fault.esr_el2 = hyp_vcpu->vcpu.arch.fault.esr_el2;
+	host_vcpu->arch.fault.far_el2 = hyp_vcpu->vcpu.arch.fault.far_el2;
+	host_vcpu->arch.fault.hpfar_el2 = hyp_vcpu->vcpu.arch.fault.hpfar_el2;
+	host_vcpu->arch.fault.disr_el1 = hyp_vcpu->vcpu.arch.fault.disr_el1;
 }
 
 static const hyp_entry_exit_handler_fn entry_hyp_pvm_handlers[] = {
@@ -780,7 +774,7 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 	 * vcpu.
 	 */
 	if (!pkvm_hyp_vcpu_is_protected(hyp_vcpu)) {
-		u8 host_iflags = READ_ONCE(host_vcpu->arch.iflags);
+		u8 host_iflags = host_vcpu->arch.iflags;
 
 		if (host_iflags & unpack_vcpu_flag(PKVM_HOST_STATE_DIRTY))
 			__flush_hyp_vcpu(hyp_vcpu);
