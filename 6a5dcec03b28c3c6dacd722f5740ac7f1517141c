@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fecc80a_35f273fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-02T09:47:14Z",
+      "side": 1,
+      "message": "It looks like this series needs a bit more TLC. I\u0027ll take a look at the ksymtypes regressions.",
+      "revId": "6a5dcec03b28c3c6dacd722f5740ac7f1517141c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
