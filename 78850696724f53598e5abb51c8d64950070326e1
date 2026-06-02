@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d94340c_88b041b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2026-06-02T08:42:39Z",
+      "side": 1,
+      "message": "Hi @cmllamas@google.com, could you review this? These configs for helper are invisible as they expect other DRM modules to select them. But with DDK design, an out-of-tree module selecting an in-tree configs does not really change the config.\nSo we need to expicility select them in our defconfig.",
+      "revId": "78850696724f53598e5abb51c8d64950070326e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
