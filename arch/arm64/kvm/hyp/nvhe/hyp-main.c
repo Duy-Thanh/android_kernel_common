@@ -2207,7 +2207,9 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 		handle_host_mem_abort(host_ctxt);
 		break;
 	default:
-		BUG_ON(!READ_ONCE(default_trap_handler) || !default_trap_handler(&host_ctxt->regs));
+		/* Acquire the handler published by __pkvm_register_default_trap_handler(). */
+		BUG_ON(!smp_load_acquire(&default_trap_handler) ||
+		       !default_trap_handler(&host_ctxt->regs));
 	}
 
 	__hyp_exit();
