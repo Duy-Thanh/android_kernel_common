@@ -47,14 +47,9 @@ static void hyp_ftrace_func_reset(void)
 		struct hyp_ftrace_stack *stack;
 
 		stack = per_cpu_ptr(&__ftrace_saved_frames, cpu);
-		stack->idx = -1;
+		/* Paired with smp_load_acquire() in hyp_ftrace_func_push(). */
+		smp_store_release(&stack->idx, -1);
 	}
-
-	/*
-	 * Make sure the stack init is observed by all CPUs before patching the
-	 * code. Paired with smp_load_acquire() in hyp_ftrace_func_push().
-	 */
-	smp_mb();
 }
 
 static __always_inline bool hyp_ftrace_func_push(unsigned long func, unsigned long ret)
