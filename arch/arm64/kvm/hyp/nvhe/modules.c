@@ -242,7 +242,7 @@ static int __register_guest_trng_ops(const struct pkvm_module_trng_ops *ops)
 	if (!ops->trng_uuid || !ops->trng_rnd64)
 		return -EINVAL;
 
-	if (cmpxchg64_relaxed(&module_guest_trng_ops, NULL, ops))
+	if (cmpxchg64_release(&module_guest_trng_ops, NULL, ops))
 		return -EBUSY;
 
 	return 0;
@@ -252,7 +252,7 @@ const uuid_t *module_get_guest_trng_uuid(void)
 {
 	const struct pkvm_module_trng_ops *ops;
 
-	ops = READ_ONCE(module_guest_trng_ops);
+	ops = smp_load_acquire(&module_guest_trng_ops);
 	if (!ops)
 		return NULL;
 
@@ -264,7 +264,7 @@ u64 module_get_guest_trng_rng(u64 *entropy, int nbits)
 {
 	const struct pkvm_module_trng_ops *ops;
 
-	ops = READ_ONCE(module_guest_trng_ops);
+	ops = smp_load_acquire(&module_guest_trng_ops);
 	if (!ops)
 		return SMCCC_RET_NOT_SUPPORTED;
 
