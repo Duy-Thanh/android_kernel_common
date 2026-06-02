@@ -58,7 +58,8 @@ void __pkvm_unmask_serror(void)
 {
 	u64 hcr = read_sysreg(HCR_EL2);
 
-	if (!unmask_serror || !unmask_serror())
+	/* Paired with smp_store_release() in __pkvm_register_unmask_serror(). */
+	if (!smp_load_acquire(&unmask_serror) || !unmask_serror())
 		return;
 
 	write_sysreg(hcr | HCR_AMO, HCR_EL2);
@@ -93,11 +94,11 @@ int __pkvm_register_unmask_serror(bool (*unmask)(void),
 
 	mask_serror = mask;
 	/*
-	 * Paired with the CB + isb() in __pkvm_unmask_serror(). Makes sure a
-	 * reader can't unmask serrors before being able to mask them.
+	 * Paired with smp_load_acquire(&unmask_serror) in
+	 * __pkvm_unmask_serror(). A reader that observes the published unmask
+	 * callback is guaranteed to also observe the matching mask callback.
 	 */
-	smp_wmb();
-	unmask_serror = unmask;
+	smp_store_release(&unmask_serror, unmask);
 
 	return 0;
 }
