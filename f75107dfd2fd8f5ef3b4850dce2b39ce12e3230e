@@ -34,6 +34,24 @@
       "parentUuid": "5ff01f57_660fd839",
       "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6449aa4_c0cca518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-02T08:47:24Z",
+      "side": 1,
+      "message": "I\u0027ve created https://issuetracker.google.com/519054319 for tracking these fixes.",
+      "parentUuid": "be8fbcb8_017bc745",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
