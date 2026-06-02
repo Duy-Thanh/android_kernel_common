@@ -16,6 +16,24 @@
       "message": "Will break the kmi, this should be fixed properly in the normal branch, why apply it here this way?",
       "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3793d9f4_e06a31c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-02T18:01:38Z",
+      "side": 1,
+      "message": "Greg, what is the issue with this patch? It breaks KMI so -kminext is the right approach if they are OK waiting until 2026-12 for the release.",
+      "parentUuid": "3bcdea82_3f00eb2a",
+      "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
