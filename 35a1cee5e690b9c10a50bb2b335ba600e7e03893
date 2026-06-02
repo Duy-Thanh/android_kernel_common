@@ -22,6 +22,30 @@
       },
       "revId": "35a1cee5e690b9c10a50bb2b335ba600e7e03893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa22606b_df820f49",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-02T13:55:13Z",
+      "side": 1,
+      "message": "I moved it of the lock and made the `is_dying` a tri-state in the least intrusive way.",
+      "parentUuid": "f66a631b_dbf095c4",
+      "range": {
+        "startLine": 1068,
+        "startChar": 0,
+        "endLine": 1069,
+        "endChar": 31
+      },
+      "revId": "35a1cee5e690b9c10a50bb2b335ba600e7e03893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
