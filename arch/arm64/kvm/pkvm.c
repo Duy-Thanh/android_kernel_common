@@ -412,7 +412,7 @@ static void __pkvm_finalize_destroy_hyp_vm(struct kvm *kvm)
 	}
 
 	kvm->arch.pkvm.handle = 0;
-	kvm->arch.pkvm.is_created = false;
+	WRITE_ONCE(kvm->arch.pkvm.is_created, false);
 	atomic64_sub(kvm->arch.pkvm.stage2_teardown_mc.nr_pages << PAGE_SHIFT,
 		     &kvm->stat.protected_hyp_mem);
 	free_hyp_memcache(&kvm->arch.pkvm.stage2_teardown_mc);
@@ -552,7 +552,7 @@ static int __pkvm_create_hyp_vm(struct kvm *kvm)
 	if (ret)
 		goto free_pgd;
 
-	kvm->arch.pkvm.is_created = true;
+	WRITE_ONCE(kvm->arch.pkvm.is_created, true);
 	kvm->arch.pkvm.stage2_teardown_mc.flags |= HYP_MEMCACHE_ACCOUNT_STAGE2;
 	kvm_account_pgtable_pages(pgd, pgd_sz / PAGE_SIZE);
 
@@ -565,6 +565,11 @@ free_pgd:
 
 bool pkvm_hyp_vm_is_created(struct kvm *kvm)
 {
+	/*
+	 * Writers hold config_lock, but pkvm_vm_ioctl_set_fw_ipa() reads this
+	 * under kvm->lock, so the read can race a write. A stale value only
+	 * costs a spurious -EBUSY there, so tolerate it and read it once.
+	 */
 	return READ_ONCE(kvm->arch.pkvm.is_created);
 }
 
