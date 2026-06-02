@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01bde7b3_6e5ac9f1",
+        "filename": "gki/aarch64/abi.stg.allowed_breaks",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-06-02T23:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ec4e53_0a4db344",
+      "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cb43d18_93312ee7",
@@ -84,6 +102,24 @@
           ]
         }
       ],
+      "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2165c2d0_28a95ff3",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-06-02T23:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb43d18_93312ee7",
       "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
