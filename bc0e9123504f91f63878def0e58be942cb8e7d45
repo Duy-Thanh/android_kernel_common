@@ -194,6 +194,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4358b261_21d4b829",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0b2c983_5ba29639",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55e4c5e1_2afa178f",
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "Added a comment",
       "parentUuid": "55e4c5e1_2afa178f",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84dc4fd3_0a9d48ad",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "992f604d_d82fb657",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -278,6 +314,24 @@
       "side": 1,
       "message": "\u003e num_ctrl is capped at IOMMU_PMU_IDX_MAX in iommu_pmu_num_counters(), so we never have the num_cntr \u003e BITS_PER_TYPE(u64) case (otherwise we would need to support multiple PERFOVFSTS registers, per above)? So GENMASK_ULL(num_cntr - 1, 0) covers all needed cases?\n\nAgreed.\n\n\u003e ...Besides, using BITS_PER_TYPE(u64) instead of just 64 surely is an overkill? :)\n\nSorry about this, I did not intend to over-engineer. BITS_PER_TYPE is compile time and doesn\u0027t incur runtime cost and my intention was to have implicitly commented code (better readability than 64). I have removed it now.",
       "parentUuid": "fdebe2cf_f20ea566",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2a26b9_ebfa5736",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f76a75e_a9258c87",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -688,6 +742,24 @@
       "side": 1,
       "message": "True, updated.",
       "parentUuid": "e24fcb7c_b3de7c4a",
+      "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf492bd_dcd70180",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:46:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92504797_520a89d3",
       "revId": "bc0e9123504f91f63878def0e58be942cb8e7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
