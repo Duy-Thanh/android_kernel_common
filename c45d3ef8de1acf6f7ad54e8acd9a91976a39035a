@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "309ba584_70c8775f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3246487
+      },
+      "writtenOn": "2026-06-02T02:01:56Z",
+      "side": 1,
+      "message": "According to https://android-review.googlesource.com/c/kernel/common/+/407985: https://android-review.googlesource.com/c/kernel/common/+/2450266 is cherry-picked",
+      "revId": "c45d3ef8de1acf6f7ad54e8acd9a91976a39035a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
