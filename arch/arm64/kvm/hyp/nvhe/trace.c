@@ -379,11 +379,11 @@ static int rb_cpu_reset(struct hyp_rb_per_cpu *cpu_buffer)
 
 	cpu_buffer->meta->reader.read = 0;
 	cpu_buffer->meta->reader.lost_events = 0;
-	cpu_buffer->meta->entries = 0;
-	cpu_buffer->meta->overrun = 0;
+	WRITE_ONCE(cpu_buffer->meta->entries, 0);
+	WRITE_ONCE(cpu_buffer->meta->overrun, 0);
 	cpu_buffer->meta->read = 0;
-	meta_pages_lost(cpu_buffer->meta) = 0;
-	meta_pages_touched(cpu_buffer->meta) = 0;
+	WRITE_ONCE(meta_pages_lost(cpu_buffer->meta), 0);
+	WRITE_ONCE(meta_pages_touched(cpu_buffer->meta), 0);
 
 	if (prev_status == HYP_RB_READY)
 		rb_cpu_enable_writing(cpu_buffer);
