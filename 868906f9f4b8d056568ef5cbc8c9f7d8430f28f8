@@ -16,6 +16,23 @@
       "message": "@surenb@google.com\nHello. Could you review this patch in your side?",
       "revId": "868906f9f4b8d056568ef5cbc8c9f7d8430f28f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ea70be_fc944279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-02T17:50:46Z",
+      "side": 1,
+      "message": "This patch must be sen",
+      "revId": "868906f9f4b8d056568ef5cbc8c9f7d8430f28f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
