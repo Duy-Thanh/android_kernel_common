@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d859d3_0194d481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1651900
+      },
+      "writtenOn": "2026-06-02T16:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bb97e2f_de6a3b7e",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "c45d3ef8de1acf6f7ad54e8acd9a91976a39035a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16a871bd_bde43dd0",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-06-02T02:46:47Z",
       "side": 1,
       "message": "This needs an explanation of what you changed between brackets, look at other `BACKPORT` patches for examples and your `Signed-off-by`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "c45d3ef8de1acf6f7ad54e8acd9a91976a39035a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8648e1ee_bb00833d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1651900
+      },
+      "writtenOn": "2026-06-02T16:28:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16a871bd_bde43dd0",
       "range": {
         "startLine": 30,
         "startChar": 0,
