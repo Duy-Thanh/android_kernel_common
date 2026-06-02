@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6251a9f6_0e704dca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-02T15:10:22Z",
+      "side": 1,
+      "message": "Landing this in GKI could cause issues with other vendors. Can you make this a vendor driver?",
+      "revId": "834a09dd6fcd12c7e370ab543d749d09d2d056d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
