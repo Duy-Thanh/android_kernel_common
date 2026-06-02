@@ -16,6 +16,76 @@
       "message": "need owners for the abi.stg files",
       "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ec4e53_0a4db344",
+        "filename": "gki/aarch64/abi.stg.allowed_breaks",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-02T22:50:14Z",
+      "side": 1,
+      "message": "I think you\u0027re supposed to have a newline after this, at least going off of other commits from different branches and the previous one.",
+      "fixSuggestions": [
+        {
+          "fixId": "f0e863ed_ae8e6809",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/abi.stg.allowed_breaks",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb43d18_93312ee7",
+        "filename": "gki/x86_64/abi.stg.allowed_breaks",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-02T22:50:14Z",
+      "side": 1,
+      "message": "ditto",
+      "fixSuggestions": [
+        {
+          "fixId": "affcdbc2_9092abdb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/x86_64/abi.stg.allowed_breaks",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bbdeab86773f047ae5efb044f6d8f508eafa5650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
