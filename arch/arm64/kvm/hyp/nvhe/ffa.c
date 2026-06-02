@@ -1646,14 +1646,15 @@ bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
 	 * Notify TZ of host VM creation immediately
 	 * before handling the first non-version SMC/HVC
 	 */
-	if (func_id != FFA_VERSION && !has_host_signalled) {
+	if (func_id != FFA_VERSION && !smp_load_acquire(&has_host_signalled)) {
 		ret = kvm_host_ffa_signal_availability();
 		if (!ret)
 			/*
-			 * Ensure that the write to `has_host_signalled` is visible
-			 * to other CPUs after the previous operations.
+			 * Publish the signalling to other CPUs after the SPMD
+			 * availability calls complete. Paired with
+			 * smp_load_acquire(&has_host_signalled) above.
 			 */
-			has_host_signalled = true;
+			smp_store_release(&has_host_signalled, true);
 		else if (ret == -EAGAIN || ret == -EINTR) {
 			/*
 			 * Don't retry with interrupts masked as we will spin
