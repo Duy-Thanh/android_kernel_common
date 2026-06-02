@@ -52,6 +52,24 @@
       "parentUuid": "be8fbcb8_017bc745",
       "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d06becf_fca96f0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-02T23:38:10Z",
+      "side": 1,
+      "message": "Well, the rule hasn\u0027t changed, but this is a huge patchset so more context is needed. Thank you for the bug - this allows us to assign ownership to review this patchset.",
+      "parentUuid": "d6449aa4_c0cca518",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
