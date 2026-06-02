@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c3550f_2fa770f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-02T21:07:19Z",
+      "side": 1,
+      "message": "nit: perhaps it is worth adding in the commit log that configuring FEADDR, FEUADDR, and FEDATA is only possible via introduced in this commit hypercall as one of next commit forbids setting them individually (as they are not in allowlist) and therefore bypassing security. WDYT?",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "df28554e07e936cfc749920671386de9a795fc6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
