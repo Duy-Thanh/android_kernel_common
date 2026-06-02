@@ -387,7 +387,8 @@ asmlinkage void __noreturn hyp_panic(void)
 	host_ctxt = host_data_ptr(host_ctxt);
 	vcpu = host_ctxt->__hyp_running_vcpu;
 
-	if (READ_ONCE(hyp_panic_notifier))
+	/* Acquire the notifier published by __pkvm_register_hyp_panic_notifier(). */
+	if (smp_load_acquire(&hyp_panic_notifier))
 		hyp_panic_notifier(&host_ctxt->regs);
 
 	if (vcpu) {
