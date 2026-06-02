@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e85b4a_80d557c3",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-02T08:25:10Z",
+      "side": 0,
+      "message": "Can we keep that and maintain the value for `cookie_type` even if it is not used by `report_iommu_fault`. AFAIK, this KMI should be source compatible and that enum change might break some builds.",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 27
+      },
+      "revId": "c931c0a87c358b8ff988a0e32319a29907288afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
