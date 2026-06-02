@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6be08082_8c7d940d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T19:01:26Z",
+      "side": 1,
+      "message": "Sorry about this. reverted.",
+      "parentUuid": "5893ee31_b549cace",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51abd92a_e4136ab2",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 33
@@ -75,6 +93,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e393f74a_76901f73",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T19:01:26Z",
+      "side": 1,
+      "message": "Agreed. Moved to ifdef",
+      "parentUuid": "51abd92a_e4136ab2",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bd0ec09_59a46b12",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 33
@@ -86,6 +122,24 @@
       "writtenOn": "2026-06-02T18:03:44Z",
       "side": 1,
       "message": "Without debugfs the host only writes FEDATA/FEADDR/FEUADDR, not reads them (similarly to PERFINTRDATA/PERFINTRADDR/PERFINTRUADDR)?\n\n...After a closer look, I see it reads them in iommu_suspend(). But as we discussed, since pKVM doesn\u0027t support S3 suspend, iommu_suspend() shouldn\u0027t be executed anyway?",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b711aec2_3321749c",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T19:01:26Z",
+      "side": 1,
+      "message": "Yeah agreed, iommu_suspend() need not be supported. moved to ifdef",
+      "parentUuid": "9bd0ec09_59a46b12",
       "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
