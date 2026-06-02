@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd2a38f_a486b822",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-02T17:36:19Z",
+      "side": 1,
+      "message": "This series breaks KMI:\n```\ntype \u0027enum snd_jack_types\u0027 changed\n  enumerator \u0027SND_JACK_USB\u0027 (64) was added\n\ntype \u0027struct audioformat\u0027 changed\n  member \u0027unsigned int fmt_sz\u0027 was added\n  20 members (\u0027unsigned int frame_size\u0027 .. \u0027unsigned int nr_rates\u0027) changed\n    offset changed by 32\n\ntype \u0027struct snd_usb_substream\u0027 changed\n  member \u0027unsigned int opened:1\u0027 was added\n  member \u0027unsigned int running:1\u0027 changed\n    offset changed by 1\n```",
+      "revId": "91c92d001336fe60413bf70c7088b1529d0f9368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
