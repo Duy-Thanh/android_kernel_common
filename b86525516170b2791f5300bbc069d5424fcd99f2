@@ -64,6 +64,30 @@
       },
       "revId": "b86525516170b2791f5300bbc069d5424fcd99f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db76657b_8add6651",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-02T11:38:00Z",
+      "side": 1,
+      "message": "Agree, lets discuss further in https://android-review.git.corp.google.com/c/kernel/common/+/4087793/comment/3fefdcd2_2bd7c7b4/ - marking this one as resolved.",
+      "parentUuid": "36cde6d5_e2cf93fb",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 19
+      },
+      "revId": "b86525516170b2791f5300bbc069d5424fcd99f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
