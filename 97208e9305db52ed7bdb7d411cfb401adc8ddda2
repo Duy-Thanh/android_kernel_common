@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3ceda5_db19f13f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-02T11:12:52Z",
+      "side": 1,
+      "message": "nit: \"while the host-provided hardware discovery state is still trusted\" sounds misleading, since AFAICS we don\u0027t really use that host-provided state even during initialization, we read PERFCAP etc from HW on our own, independently of the host?",
+      "revId": "97208e9305db52ed7bdb7d411cfb401adc8ddda2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
