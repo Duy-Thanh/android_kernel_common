@@ -34,6 +34,24 @@
       "parentUuid": "ea9b1281_4b0f5898",
       "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f129b9a_c759f288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4874519
+      },
+      "writtenOn": "2026-06-02T09:54:00Z",
+      "side": 1,
+      "message": "Hello, the new link has been generated. Please check it. Thank you.\nhttps://android-review.googlesource.com/c/kernel/common/+/4099315\nhttps://android-review.googlesource.com/c/kernel/common/+/4099316",
+      "parentUuid": "064635eb_3eb8c01c",
+      "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
