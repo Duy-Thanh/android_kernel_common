@@ -803,10 +803,17 @@ done:
 
 int hyp_alloc_refill(struct kvm_hyp_memcache *host_mc)
 {
-	struct kvm_hyp_memcache *alloc_mc = this_cpu_ptr(&hyp_allocator_mc);
+	struct hyp_allocator *allocator = &hyp_allocator;
+	struct kvm_hyp_memcache *alloc_mc;
+	int ret;
 
-	return refill_memcache(alloc_mc, host_mc->nr_pages + alloc_mc->nr_pages,
-			       host_mc);
+	hyp_spin_lock(&allocator->lock);
+	alloc_mc = this_cpu_ptr(&hyp_allocator_mc);
+	ret = refill_memcache(alloc_mc, host_mc->nr_pages + alloc_mc->nr_pages,
+			      host_mc);
+	hyp_spin_unlock(&allocator->lock);
+
+	return ret;
 }
 
 int hyp_alloc_init(size_t size)
