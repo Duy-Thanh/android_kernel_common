@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71854321_5a19e371",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-02T22:21:55Z",
+      "side": 1,
+      "message": "I didn\u0027t mean reverting it to exactly how it was, I just meant moving it under the #ifdef. With this revert, I suppose we, again, have \"iommu_mmio_read failed\" in dmesg whenever we read `/sys/kernel/debug/iommu/intel/iommu_regset`? (Which we actually had even before this patch, but it\u0027s a good moment to fix it anyway?)",
+      "parentUuid": "6be08082_8c7d940d",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51abd92a_e4136ab2",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 33
@@ -105,6 +123,24 @@
       "side": 1,
       "message": "Agreed. Moved to ifdef",
       "parentUuid": "51abd92a_e4136ab2",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b6caeac_0fc11f47",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-02T22:21:55Z",
+      "side": 1,
+      "message": "Still, what about PECTL? :)",
+      "parentUuid": "e393f74a_76901f73",
       "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
