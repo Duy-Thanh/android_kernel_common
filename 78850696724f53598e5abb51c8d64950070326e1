@@ -16,6 +16,23 @@
       "message": "Hi @cmllamas@google.com, could you review this? These configs for helper are invisible as they expect other DRM modules to select them. But with DDK design, an out-of-tree module selecting an in-tree configs does not really change the config.\nSo we need to expicility select them in our defconfig.",
       "revId": "78850696724f53598e5abb51c8d64950070326e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da3a641_95290ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-02T13:55:14Z",
+      "side": 1,
+      "message": "You _should_ be able to `select` the config from your OOT kconfig, let\u0027s fix that instead.",
+      "revId": "78850696724f53598e5abb51c8d64950070326e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
