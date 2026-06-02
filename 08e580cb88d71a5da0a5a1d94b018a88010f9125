@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "499e9746_c7621188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:43:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba92bf88_c50e576c",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edc78d55_07eb680a",
@@ -107,6 +125,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d87fa4c_6b23024e",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:43:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2824f8ad_fc1600df",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54174c02_e87c6111",
@@ -138,6 +174,24 @@
       "side": 1,
       "message": "Agreed, will remove the header files and have these in pkvm_iommu.h. Will move the comments to C files as well",
       "parentUuid": "54174c02_e87c6111",
+      "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54e34ae_613479a5",
+        "filename": "drivers/iommu/intel/pkvm/iommu_pmu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T08:43:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b6e30c_4ed085d4",
       "revId": "08e580cb88d71a5da0a5a1d94b018a88010f9125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
