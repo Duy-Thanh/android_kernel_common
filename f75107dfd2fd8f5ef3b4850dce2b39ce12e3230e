@@ -16,6 +16,24 @@
       "message": "All ANDROID patches must have a \"Bug:\" tag citing an open issuetracker case.",
       "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8fbcb8_017bc745",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-06-02T00:46:08Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t know the rule has been changed. Previously, the patch was allowed to have either the \"Bug\" tag or the \"Fixes\" tag. So you mean, now the \"Bug\" tag is a must-to-have?",
+      "parentUuid": "5ff01f57_660fd839",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
