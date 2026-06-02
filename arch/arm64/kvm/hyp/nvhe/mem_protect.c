@@ -1025,7 +1025,8 @@ static void host_inject_abort(struct kvm_cpu_context *host_ctxt)
 	u64 esr = read_sysreg_el2(SYS_ESR);
 	u64 ventry, ec;
 
-	if (READ_ONCE(illegal_abt_notifier))
+	/* Acquire the callback published by __pkvm_register_illegal_abt_notifier(). */
+	if (smp_load_acquire(&illegal_abt_notifier))
 		illegal_abt_notifier(&host_ctxt->regs);
 
 	/* Repaint the ESR to report a same-level fault if taken from EL1 */
