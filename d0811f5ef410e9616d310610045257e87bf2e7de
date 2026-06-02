@@ -70,6 +70,24 @@
       "parentUuid": "3f129b9a_c759f288",
       "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e7e65b1_999f220a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-02T23:57:43Z",
+      "side": 1,
+      "message": "In the future, please update the same patch instead of creating a new one (make sure the Change-Id matches). I\u0027ll abandon this patch in favor of the new one...but next time you need to update the same patch.",
+      "parentUuid": "1720da6c_997caae6",
+      "revId": "d0811f5ef410e9616d310610045257e87bf2e7de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
