@@ -34,6 +34,24 @@
       ],
       "revId": "fa3aa47ac12bd355957e61316f76b3ca71d2d4f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13521d5_8440b028",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-02T14:42:56Z",
+      "side": 1,
+      "message": "Agreed, BUG_ON() is better here. Updated.",
+      "parentUuid": "bc304af7_10a60efd",
+      "revId": "fa3aa47ac12bd355957e61316f76b3ca71d2d4f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
