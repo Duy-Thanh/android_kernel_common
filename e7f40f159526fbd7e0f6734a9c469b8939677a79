@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2af43bc_e3161b92",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-02T17:49:27Z",
+      "side": 1,
+      "message": "I guess FFA will need similar treatment to the DMA scenario? Hopefully it can reuse the mechanism you\u0027re introducing here.",
+      "range": {
+        "startLine": 402,
+        "startChar": 23,
+        "endLine": 402,
+        "endChar": 31
+      },
+      "revId": "e7f40f159526fbd7e0f6734a9c469b8939677a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da16144_aa3d597a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1109,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-02T17:49:27Z",
+      "side": 1,
+      "message": "Should this check for DEAD?",
+      "range": {
+        "startLine": 1109,
+        "startChar": 21,
+        "endLine": 1109,
+        "endChar": 29
+      },
+      "revId": "e7f40f159526fbd7e0f6734a9c469b8939677a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
