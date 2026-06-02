@@ -81,6 +81,30 @@
       },
       "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8053a70c_e1868f87",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4387,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-06-02T16:13:23Z",
+      "side": 1,
+      "message": "If you search my constant lkml reviews where I say \"do not add new module parameters!\" you should get a hint about this 😊",
+      "parentUuid": "9dfda23b_551a7ea7",
+      "range": {
+        "startLine": 4387,
+        "startChar": 0,
+        "endLine": 4387,
+        "endChar": 103
+      },
+      "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
