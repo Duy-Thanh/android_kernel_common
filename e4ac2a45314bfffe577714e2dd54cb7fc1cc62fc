@@ -52,6 +52,24 @@
       "parentUuid": "3793d9f4_e06a31c0",
       "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8e291f_75b15453",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-03T15:29:59Z",
+      "side": 1,
+      "message": "Please drop the allowed breaks and ABI update changes for now. We will likely batch this with other things.\n\nNo allowed breaks during the unstable phase.\n\nABI updates can be refreshed at the point this is rebased on top of whatever bigger changes are happening.",
+      "parentUuid": "5c688dae_4edc1d68",
+      "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
