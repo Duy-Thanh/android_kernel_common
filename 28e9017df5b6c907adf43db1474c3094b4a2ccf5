@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10d3bbef_21942c55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-03T15:12:37Z",
+      "side": 1,
+      "message": "From my reading of the code this \"continue\" statement is done not to retry but to skip the incompatible area. If after skipping we go past bitmap_maxno then the requests should fail.\n\nIf you still think there is a problem, please describe it in more details and post the fix upstream as you are changing the upstream code.",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 53
+      },
+      "revId": "28e9017df5b6c907adf43db1474c3094b4a2ccf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb16e4e2_59e004f9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
