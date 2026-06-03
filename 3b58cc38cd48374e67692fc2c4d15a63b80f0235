@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600ab7b7_4a8b536a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-03T09:51:54Z",
+      "side": 1,
+      "message": "nit: perhaps -EOPNOTSUPP?",
+      "range": {
+        "startLine": 539,
+        "startChar": 10,
+        "endLine": 539,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f01335a6_881557ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 539,
+                "startChar": 0,
+                "endLine": 540,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b018a5e1_036347ec",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-03T09:51:54Z",
+      "side": 1,
+      "message": "nit: same here -EOPNOTSUPP?",
+      "range": {
+        "startLine": 548,
+        "startChar": 10,
+        "endLine": 548,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9b784605_c6a9a70c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 548,
+                "startChar": 0,
+                "endLine": 549,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
