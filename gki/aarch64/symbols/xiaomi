@@ -338,6 +338,10 @@
 __tracepoint_android_vh_binder_skip_set_priority
 __traceiter_android_vh_binder_skip_set_priority
 
+<<<<<<< PATCH SET (0bfa82e98ecb3884e350431c40975b95eca9c15e ANDROID: GKI: update the ABI symbol list)
+jiffies_64
+||||||| BASE      (eac9b74cb7ed7b68f0962d50764077f82211feac ANDROID: KVM: arm64: Add keep= option to kvm-arm.host_s2 cmd)
+=======
 # required by xiaomi game
 __traceiter_android_vh_free_user
 __traceiter_android_vh_alloc_uid
@@ -347,3 +351,4 @@ __tracepoint_android_vh_alloc_uid
 __tracepoint_android_rvh_cpuset_fork
 free_uid
 find_user
+>>>>>>> BASE      (7471471a5b1c6c336bff6fe9f8759a921cee5ee6 ANDROID: GKI: update the ABI symbol list)
