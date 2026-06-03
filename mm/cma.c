@@ -804,6 +804,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 		goto out;
 
 	for (start = 0; ; start = bitmap_no + mask + 1) {
+retry:
 		spin_lock_irq(&cma->lock);
 		/*
 		 * If the request is larger than the available number
@@ -835,7 +836,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 				ret = -ENOMEM;
 				schedule_timeout_killable(msecs_to_jiffies(100));
 				num_attempts++;
-				continue;
+				goto retry;
 			} else {
 				spin_unlock_irq(&cma->lock);
 				break;
