@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18c4712_6796dd3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:19:30Z",
+      "side": 1,
+      "message": "Is this fixing an android-specific issue? If so, add a \"Fixes:\" tag citing the patch that introduced the issue.\n\nIf this is an upstream issue, this patch must be submitted upstream first.",
+      "revId": "28e9017df5b6c907adf43db1474c3094b4a2ccf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb16e4e2_59e004f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:19:30Z",
+      "side": 1,
+      "message": "typo? Please rephrase.",
+      "range": {
+        "startLine": 9,
+        "startChar": 59,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "28e9017df5b6c907adf43db1474c3094b4a2ccf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
