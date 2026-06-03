@@ -16,6 +16,24 @@
       "message": "If this is fixing an upstream issue, it should be reported upstream. Please submit a real fix upstream.\n\n...or is your fix really a device-specific tune and not really a bug fix?",
       "revId": "24474ad30f30f4c486bd18f0206413a2deb65d3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4fda5d_b0487713",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:43:07Z",
+      "side": 1,
+      "message": "If this is not really a bug-fix, then there must be a \"Bug:\" tag pointing to a bug that describes why this is needed.",
+      "parentUuid": "4deb71c1_b90e1785",
+      "revId": "24474ad30f30f4c486bd18f0206413a2deb65d3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
