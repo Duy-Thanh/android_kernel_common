@@ -807,7 +807,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 				struct page **pagep, gfp_t gfp)
 {
 	unsigned long bitmap_maxno, bitmap_no, bitmap_count;
-	unsigned long start, pfn, mask, offset;
+	unsigned long start = 0, pfn, mask, offset;
 	int ret = -EBUSY;
 	struct page *page = NULL;
 	int num_attempts = 0;
@@ -822,7 +822,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 		goto out;
 
 	trace_android_vh_cma_alloc_retry(cma->name, &max_retries);
-	for (start = 0; ; start = bitmap_no + mask + 1) {
+	for (;;) {
 		spin_lock_irq(&cma->lock);
 		/*
 		 * If the request is larger than the available number
@@ -878,6 +878,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 			spin_unlock_irq(&cma->lock);
 			pr_warn_ratelimited("%s: %s: skipping incompatible area [0x%lx-0x%lx]",
 					    __func__, cma->name, pfn, pfn + count - 1);
+			start = bitmap_no + mask + 1;
 			continue;
 		}
 
@@ -909,6 +910,7 @@ static int cma_range_alloc(struct cma *cma, struct cma_memrange *cmr,
 			 __func__, pfn, page);
 
 		trace_cma_alloc_busy_retry(cma->name, pfn, page, count, align);
+		start = bitmap_no + mask + 1;
 	}
 out:
 	if (!ret)
