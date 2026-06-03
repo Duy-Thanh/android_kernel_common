@@ -33,6 +33,24 @@
       "message": "You _should_ be able to `select` the config from your OOT kconfig, let\u0027s fix that instead.",
       "revId": "78850696724f53598e5abb51c8d64950070326e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c212fe8_3438d15b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2026-06-03T02:21:21Z",
+      "side": 1,
+      "message": "See b/503683235#comment12\nIn DDK desing, a ddk module is a downstream of kenrel build. \nSimilar to a vendor module can not change GKI. A DDK module can not change in-tree modules either.",
+      "parentUuid": "0da3a641_95290ada",
+      "revId": "78850696724f53598e5abb51c8d64950070326e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
