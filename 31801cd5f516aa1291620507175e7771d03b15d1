@@ -22,6 +22,30 @@
       },
       "revId": "31801cd5f516aa1291620507175e7771d03b15d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e90994d_e4bdb909",
+        "filename": "include/linux/module_symbol.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-06-03T15:34:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42753f75_d3081a7a",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "31801cd5f516aa1291620507175e7771d03b15d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
