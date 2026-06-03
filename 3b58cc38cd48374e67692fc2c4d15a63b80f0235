@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e42d322_74b26c9f",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-03T10:12:41Z",
+      "side": 1,
+      "message": "Arguably -EINVAL makes sense too: these regs are RsvdZ if ECMD is not supported, which means that a non-zero value is an invalid value in this case? (So BTW returning -EINVAL here is consistent with returning -EINVAL in other such RsvdZ cases.)\n\nAnd also this helps to distinguish this failure from -EOPNOTSUPP in aosp/4025958, i.e. from a failure due to a completely unsupported (by pKVM) register write?",
+      "parentUuid": "600ab7b7_4a8b536a",
+      "range": {
+        "startLine": 539,
+        "startChar": 10,
+        "endLine": 539,
+        "endChar": 16
+      },
+      "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b018a5e1_036347ec",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 39
