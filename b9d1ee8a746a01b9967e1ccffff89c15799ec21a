@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce7ff36_292e0618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-03T18:19:12Z",
+      "side": 1,
+      "message": "Unfortunately this would break KABI, so we won\u0027t be able to take this until maybe the KABI thaw.",
+      "revId": "b9d1ee8a746a01b9967e1ccffff89c15799ec21a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
