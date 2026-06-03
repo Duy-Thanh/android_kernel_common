@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe0d3a4_d40dff71",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-03T10:36:18Z",
+      "side": 1,
+      "message": "Ok, so lets keep it than",
+      "parentUuid": "1e42d322_74b26c9f",
+      "range": {
+        "startLine": 539,
+        "startChar": 10,
+        "endLine": 539,
+        "endChar": 16
+      },
+      "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b018a5e1_036347ec",
@@ -103,6 +127,30 @@
           ]
         }
       ],
+      "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d502063_62ebc990",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-03T10:36:18Z",
+      "side": 1,
+      "message": "As above",
+      "parentUuid": "b018a5e1_036347ec",
+      "range": {
+        "startLine": 548,
+        "startChar": 10,
+        "endLine": 548,
+        "endChar": 16
+      },
       "revId": "3b58cc38cd48374e67692fc2c4d15a63b80f0235",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
