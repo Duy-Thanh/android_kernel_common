@@ -710,11 +710,12 @@ __mutex_lock_common(struct mutex *lock, unsigned int state, unsigned int subclas
 
 		raw_spin_lock_irqsave(&lock->wait_lock, flags);
 		raw_spin_lock(&current->blocked_lock);
-
 		/*
-		 * Re-set blocked_on_state as unlock path set it to WAKING/RUNNABLE
+		 * As we likely have been woken up by task
+		 * that has cleared our blocked_on state, re-set
+		 * it to the lock we are trying to acquire.
 		 */
-		current->blocked_on_state = BO_BLOCKED;
+		__set_task_blocked_on(current, lock);
 		set_current_state(state);
 		/*
 		 * Here we order against unlock; we must either see it change
@@ -733,7 +734,7 @@ __mutex_lock_common(struct mutex *lock, unsigned int state, unsigned int subclas
 			 * and clear blocked on so we don't become unselectable
 			 * to run.
 			 */
-			current->blocked_on_state = BO_RUNNABLE;
+			__clear_task_blocked_on(current, lock);
 			raw_spin_unlock(&current->blocked_lock);
 			raw_spin_unlock_irqrestore(&lock->wait_lock, flags);
 
@@ -742,8 +743,7 @@ __mutex_lock_common(struct mutex *lock, unsigned int state, unsigned int subclas
 
 			raw_spin_lock_irqsave(&lock->wait_lock, flags);
 			raw_spin_lock(&current->blocked_lock);
-			current->blocked_on_state = BO_BLOCKED;
-			set_current_state(state);
+			__set_task_blocked_on(current, lock);
 
 			if (opt_acquired)
 				break;
@@ -1013,7 +1013,7 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 			next_lock = __get_task_blocked_on(donor);
 			if (next_lock == lock) {
 				next = donor;
-				__set_blocked_on_waking(donor);
+				__set_task_blocked_on_waking(donor, next_lock);
 				wake_q_add(&wake_q, donor);
 				current->blocked_donor = NULL;
 			}
@@ -1034,8 +1034,7 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 
 		raw_spin_lock_nested(&next->blocked_lock, SINGLE_DEPTH_NESTING);
 		debug_mutex_wake_waiter(lock, waiter);
-		WARN_ON_ONCE(__get_task_blocked_on(next) != lock);
-		__set_blocked_on_waking(next);
+		__set_task_blocked_on_waking(next, lock);
 		raw_spin_unlock(&next->blocked_lock);
 		wake_q_add(&wake_q, next);
 
