@@ -46,6 +46,30 @@
       },
       "revId": "df28554e07e936cfc749920671386de9a795fc6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2d66ce_8f029e66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-03T06:28:54Z",
+      "side": 1,
+      "message": "Thanks, LGTM",
+      "parentUuid": "d9f5b8a0_26245d91",
+      "range": {
+        "startLine": 11,
+        "startChar": 46,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "df28554e07e936cfc749920671386de9a795fc6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
