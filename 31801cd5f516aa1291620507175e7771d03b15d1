@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42753f75_d3081a7a",
+        "filename": "include/linux/module_symbol.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-03T15:10:02Z",
+      "side": 1,
+      "message": "The `android17-6.18` version of this was fine.\n\n* no comment - I haven\u0027t found a single `enum` in the kernel with this kind of comment\n* `1 \u003c\u003c 1`, it\u0027s not an externally stable value and I think we\u0027ll notice if someone adds another flag!",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "31801cd5f516aa1291620507175e7771d03b15d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
