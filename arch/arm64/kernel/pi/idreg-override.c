@@ -235,6 +235,7 @@ static const struct {
 	{ "nokaslr",			"arm64_sw.nokaslr=1" },
 	{ "rodata=off",			"arm64_sw.rodataoff=1" },
 	{ "arm64.nolva",		"id_aa64mmfr2.varange=0" },
+	{ "arm64.32bit_el0",		"id_aa64pfr0.el0=2" },
 	{ "arm64.no32bit_el0",		"id_aa64pfr0.el0=1" },
 	{ "arm64.nompam",		"id_aa64pfr0.mpam=0 id_aa64pfr1.mpam_frac=0" },
 };
