@@ -3927,7 +3927,7 @@ static bool proxy_task_runnable_but_waking(struct task_struct *p)
 	if (!sched_proxy_exec())
 		return false;
 	return (READ_ONCE(p->__state) == TASK_RUNNING &&
-		READ_ONCE(p->blocked_on_state) == BO_WAKING);
+		READ_ONCE(p->blocked_on) == PROXY_WAKING);
 }
 
 static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct *p, int en_flags)
@@ -4097,7 +4097,8 @@ struct task_struct *find_exec_ctx(struct rq *rq, struct task_struct *p)
 
 	for (exec_ctx = p; task_is_blocked(exec_ctx) && !task_on_cpu(rq, exec_ctx);
 							exec_ctx = owner) {
-		owner = __mutex_owner(exec_ctx->blocked_on);
+		guard(raw_spinlock)(&exec_ctx->blocked_lock);
+		owner = __mutex_owner(__get_task_blocked_on(exec_ctx));
 		if (!owner || owner == exec_ctx)
 			break;
 
@@ -4212,11 +4213,11 @@ static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
 
 	guard(raw_spinlock)(&p->blocked_lock);
 
-	/* If task isn't BO_WAKING, we don't need to do return migration */
-	if (p->blocked_on_state != BO_WAKING)
+	/* If task isn't PROXY_WAKING, we don't need to do return migration */
+	if (p->blocked_on != PROXY_WAKING)
 		return false;
 
-	__set_blocked_on_runnable(p);
+	__clear_task_blocked_on(p, PROXY_WAKING);
 
 	/* If already current, don't need to return migrate */
 	if (task_current(rq, p))
@@ -4774,8 +4775,8 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 		 *    it disabling IRQs (this allows not taking ->pi_lock).
 		 */
 		SCHED_WARN_ON(p->se.sched_delayed);
-		/* If current is waking up, we know we can run here, so set BO_RUNNBLE */
-		set_blocked_on_runnable(p);
+		/* If p is current, we know we can run here, so clear blocked_on */
+		clear_task_blocked_on(p, NULL);
 		if (!ttwu_state_match(p, state, &success))
 			goto out;
 
@@ -4794,7 +4795,7 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 		smp_mb__after_spinlock();
 		if (!ttwu_state_match(p, state, &success)) {
 			/*
-			 * If we're already TASK_RUNNING, and BO_WAKING
+			 * If we're already TASK_RUNNING, and PROXY_WAKING
 			 * continue on to ttwu_runnable check to force
 			 * proxy_needs_return evaluation
 			 */
@@ -4863,7 +4864,6 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 		 * enqueue, such as ttwu_queue_wakelist().
 		 */
 		WRITE_ONCE(p->__state, TASK_WAKING);
-		set_blocked_on_runnable(p);
 
 		/*
 		 * If the owning (remote) CPU is still in the middle of schedule() with
@@ -7419,7 +7419,7 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 	cpu = select_task_rq(p, p->wake_cpu, &wake_flag);
 	set_task_cpu(p, cpu);
 	target_rq = cpu_rq(cpu);
-	force_blocked_on_runnable(p);
+	clear_task_blocked_on(p, NULL);
 	task_rq_unlock(this_rq, p, &this_rf);
 
 	/* Drop this_rq and grab target_rq for activation */
@@ -7520,43 +7520,22 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 		if (!mutex)
 			return NULL;
 
+		/* if its PROXY_WAKING, do return migration or run if current */
+		if (mutex == PROXY_WAKING) {
+			if (task_current(rq, p)) {
+				clear_task_blocked_on(p, PROXY_WAKING);
+				return p;
+			}
+			action = NEEDS_RETURN;
+			break;
+		}
+
 		/*
 		 * By taking mutex->wait_lock we hold off concurrent mutex_unlock()
 		 * and ensure @owner sticks around.
 		 */
 		guard(raw_spinlock)(&mutex->wait_lock);
 		guard(raw_spinlock)(&p->blocked_lock);
-
-		/* Double check blocked_on_state now we're holding the lock */
-		if (p->blocked_on_state == BO_RUNNABLE)
-			return p;
-
-		/*
-		 * If a ww_mutex hits the die/wound case, it marks the task as
-		 * BO_WAKING and calls try_to_wake_up(), so that the mutex
-		 * cycle can be broken and we avoid a deadlock.
-		 *
-		 * However, if at that moment, we are here on the cpu which the
-		 * die/wounded task is enqueued, we might loop on the cycle as
-		 * BO_WAKING still causes task_is_blocked() to return true
-		 * (since we want return migration to occur before we run the
-		 * task).
-		 *
-		 * Unfortunately since we hold the rq lock, it will block
-		 * try_to_wake_up from completing and doing the return
-		 * migration.
-		 *
-		 * So when we hit a BO_WAKING task try to wake it up ourselves.
-		 */
-		if (p->blocked_on_state == BO_WAKING) {
-			if (task_current(rq, p)) {
-				/* If its current just set it runnable */
-				__force_blocked_on_runnable(p);
-				return p;
-			}
-			action = NEEDS_RETURN;
-			break;
-		}
 
 		/* Check again that p is blocked with blocked_lock held */
 		if (mutex != __get_task_blocked_on(p)) {
@@ -7580,7 +7559,7 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 			 * just run on this rq), or return-migrate the task.
 			 */
 			if (task_current(rq, p)) {
-				__force_blocked_on_runnable(p);
+				__clear_task_blocked_on(p, NULL);
 				return p;
 			}
 			action = NEEDS_RETURN;
@@ -7861,7 +7840,7 @@ static void __sched notrace __schedule(int sched_mode)
 		 */
 		if (prev_state & TASK_NORMAL) {
 			WRITE_ONCE(prev->__state, TASK_RUNNING);
-			force_blocked_on_runnable(prev);
+			clear_task_blocked_on(prev, NULL);
 		}
 	}
 
