@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "846216a1_ee17b525",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:30:02Z",
+      "side": 1,
+      "message": "Needs a space after \u0027:\u0027",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "119e1d6f_c1a9a34f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +31,41 @@
       "writtenOn": "2026-06-03T12:34:22Z",
       "side": 1,
       "message": "@tkjos@google.com Should the tag be just ANDROID or does it have to be UPSTREAM?",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1480915_77891d38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:30:02Z",
+      "side": 1,
+      "message": "If this is needed for arm64, isn\u0027t it needed for x86 too?\n\nI assume you are planning to cherry-pick this to production kernels (android17-6.18, android16-6.12). Which ones?",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aebe77e_31ae0ca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:30:02Z",
+      "side": 1,
+      "message": "Should be ANDROID (UPSTREAM is used for cherry-picks from upstream Linux)",
+      "parentUuid": "119e1d6f_c1a9a34f",
       "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
