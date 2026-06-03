@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd02ff01_abdd0c36",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-03T02:25:28Z",
+      "side": 1,
+      "message": "My bad. I fixed it now and tested and verified we do not see error message when cating iommu_regset",
+      "parentUuid": "71854321_5a19e371",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51abd92a_e4136ab2",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 33
@@ -141,6 +159,24 @@
       "side": 1,
       "message": "Still, what about PECTL? :)",
       "parentUuid": "e393f74a_76901f73",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d34049_14936e54",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-03T02:25:28Z",
+      "side": 1,
+      "message": "Indeed, missed it ;-). Fixed",
+      "parentUuid": "1b6caeac_0fc11f47",
       "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
