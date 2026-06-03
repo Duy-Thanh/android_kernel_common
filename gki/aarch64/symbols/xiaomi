@@ -337,3 +337,5 @@
 # required by xiaomi binder
 __tracepoint_android_vh_binder_skip_set_priority
 __traceiter_android_vh_binder_skip_set_priority
+
+jiffies_64
