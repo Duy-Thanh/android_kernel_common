@@ -34,6 +34,24 @@
       "parentUuid": "3bcdea82_3f00eb2a",
       "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c688dae_4edc1d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-06-03T01:28:34Z",
+      "side": 1,
+      "message": "Yes, since this patch breaks KMI and the KMI is already frozen, I\u0027m sending it to android17-6.18-kminext for review.",
+      "parentUuid": "3793d9f4_e06a31c0",
+      "revId": "e4ac2a45314bfffe577714e2dd54cb7fc1cc62fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
