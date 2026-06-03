@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4deb71c1_b90e1785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:42:09Z",
+      "side": 1,
+      "message": "If this is fixing an upstream issue, it should be reported upstream. Please submit a real fix upstream.\n\n...or is your fix really a device-specific tune and not really a bug fix?",
+      "revId": "24474ad30f30f4c486bd18f0206413a2deb65d3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
