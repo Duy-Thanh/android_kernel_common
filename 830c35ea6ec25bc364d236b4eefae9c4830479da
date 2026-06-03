@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5b4c87f_b883a0b4",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-03T12:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd02ff01_abdd0c36",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51abd92a_e4136ab2",
@@ -181,6 +199,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b48c454_3d9f001f",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-03T12:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d34049_14936e54",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bd0ec09_59a46b12",
@@ -212,6 +248,24 @@
       "side": 1,
       "message": "Yeah agreed, iommu_suspend() need not be supported. moved to ifdef",
       "parentUuid": "9bd0ec09_59a46b12",
+      "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df298308_5edd2776",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-03T12:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b711aec2_3321749c",
       "revId": "830c35ea6ec25bc364d236b4eefae9c4830479da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
