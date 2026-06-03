@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a63a930_6eacae33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:08:59Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant...\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "834a09dd6fcd12c7e370ab543d749d09d2d056d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6251a9f6_0e704dca",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +31,23 @@
       "writtenOn": "2026-06-02T15:10:22Z",
       "side": 1,
       "message": "Landing this in GKI could cause issues with other vendors. Can you make this a vendor driver?",
+      "revId": "834a09dd6fcd12c7e370ab543d749d09d2d056d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb3d9d7_259bb5f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-03T14:08:59Z",
+      "side": 1,
+      "message": "This patch must be sent upstream first or implemented with a vendor hook",
       "revId": "834a09dd6fcd12c7e370ab543d749d09d2d056d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
