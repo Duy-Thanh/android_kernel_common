@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "079a80ec_c323dbfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4412837
+      },
+      "writtenOn": "2026-06-03T15:22:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "846216a1_ee17b525",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "119e1d6f_c1a9a34f",
@@ -66,6 +84,42 @@
       "side": 1,
       "message": "Should be ANDROID (UPSTREAM is used for cherry-picks from upstream Linux)",
       "parentUuid": "119e1d6f_c1a9a34f",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496cafb7_08a9928e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4412837
+      },
+      "writtenOn": "2026-06-03T15:22:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aebe77e_31ae0ca9",
+      "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c058091_5f0c2962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4412837
+      },
+      "writtenOn": "2026-06-03T15:22:07Z",
+      "side": 1,
+      "message": "Yes, it\u0027s needed for both arm64 and x86 (updated the commit msg). \nAnd yes, we would like to cherrypick this into all the production kernels ideally as we want to provide this feature to all the devices out there.",
+      "parentUuid": "a1480915_77891d38",
       "revId": "970353616a330177e1eb98c27621f8ef8fcafdb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
