@@ -22,6 +22,30 @@
       },
       "revId": "c931c0a87c358b8ff988a0e32319a29907288afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8dc1f4b_075db246",
+        "filename": "include/linux/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-03T09:24:42Z",
+      "side": 0,
+      "message": "If partners are not impacted, it\u0027s safe to remove, of course.\n\nI don\u0027t think keeping it will be helpful if partners actually care about `cookie_type` and could be impacted by this change.\n\n---\n\nThis wider change should be announced to partners in the GKI newsletter. The enumerator can then be dropped.",
+      "parentUuid": "a7e85b4a_80d557c3",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 27
+      },
+      "revId": "c931c0a87c358b8ff988a0e32319a29907288afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
