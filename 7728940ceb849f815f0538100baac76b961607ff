@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0a44c5_797b7351",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-06-03T15:37:54Z",
+      "side": 1,
+      "message": "nit: additional lines ?",
+      "fixSuggestions": [
+        {
+          "fixId": "62504e05_2ee0be4c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/fuse/fuse_i.h",
+              "range": {
+                "startLine": 949,
+                "startChar": 0,
+                "endLine": 951,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7728940ceb849f815f0538100baac76b961607ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
