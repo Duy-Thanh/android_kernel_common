@@ -22,15 +22,7 @@ bool rodata_full __ro_after_init = IS_ENABLED(CONFIG_RODATA_FULL_DEFAULT_ENABLED
 
 bool can_set_direct_map(void)
 {
-	/*
-	 * rodata_full and DEBUG_PAGEALLOC require linear map to be
-	 * mapped at page granularity, so that it is possible to
-	 * protect/unprotect single pages.
-	 *
-	 * KFENCE pool requires page-granular mapping if initialized late.
-	 */
-	return rodata_full || debug_pagealloc_enabled() ||
-	       arm64_kfence_can_set_direct_map();
+	return true;
 }
 
 static int change_page_range(pte_t *ptep, unsigned long addr, void *data)
@@ -168,13 +160,16 @@ int set_direct_map_invalid_noflush(struct page *page)
 		.set_mask = __pgprot(0),
 		.clear_mask = __pgprot(PTE_VALID),
 	};
+	unsigned long addr = (unsigned long)page_address(page);
+	int ret;
 
 	if (!can_set_direct_map())
 		return 0;
 
-	return apply_to_page_range(&init_mm,
-				   (unsigned long)page_address(page),
+	ret = apply_to_page_range(&init_mm, addr,
 				   PAGE_SIZE, change_page_range, &data);
+	flush_tlb_kernel_range(addr, addr + PAGE_SIZE);
+	return ret;
 }
 EXPORT_SYMBOL_GPL(set_direct_map_invalid_noflush);
 
@@ -184,13 +179,16 @@ int set_direct_map_default_noflush(struct page *page)
 		.set_mask = __pgprot(PTE_VALID | PTE_WRITE),
 		.clear_mask = __pgprot(PTE_RDONLY),
 	};
+	unsigned long addr = (unsigned long)page_address(page);
+	int ret;
 
 	if (!can_set_direct_map())
 		return 0;
 
-	return apply_to_page_range(&init_mm,
-				   (unsigned long)page_address(page),
+	ret = apply_to_page_range(&init_mm, addr,
 				   PAGE_SIZE, change_page_range, &data);
+	flush_tlb_kernel_range(addr, addr + PAGE_SIZE);
+	return ret;
 }
 EXPORT_SYMBOL_GPL(set_direct_map_default_noflush);
 

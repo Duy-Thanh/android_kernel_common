@@ -31,6 +31,7 @@
 #include <linux/vmalloc.h>
 #include <trace/events/swiotlb.h>
 #include <trace/hooks/iommu.h>
+#include <linux/set_memory.h>
 
 #include "dma-iommu.h"
 
@@ -777,18 +778,64 @@ static dma_addr_t __iommu_dma_map(struct device *dev, phys_addr_t phys,
 	return iova + iova_off;
 }
 
+#define MAX_POISONED_PAGES 256
+static struct page *poisoned_pages[MAX_POISONED_PAGES];
+static int poisoned_pages_count;
+static DEFINE_SPINLOCK(poison_lock);
+
+static void add_poisoned_page(struct page *page)
+{
+	unsigned long flags;
+
+	spin_lock_irqsave(&poison_lock, flags);
+	if (poisoned_pages_count < MAX_POISONED_PAGES) {
+		poisoned_pages[poisoned_pages_count++] = page;
+	} else {
+		pr_err("JETS_DEBUG: poisoned_pages array full, cannot hold page!\n");
+	}
+	spin_unlock_irqrestore(&poison_lock, flags);
+}
+
 static void __iommu_dma_free_pages(struct page **pages, int count)
 {
-	while (count--)
-		__free_page(pages[count]);
+	while (count--) {
+		struct page *page = pages[count];
+		unsigned long flags;
+		int i;
+
+		spin_lock_irqsave(&poison_lock, flags);
+		for (i = 0; i < poisoned_pages_count; i++) {
+			if (poisoned_pages[i] == page + 1) {
+				struct page *p_page = poisoned_pages[i];
+
+				set_direct_map_default_noflush(p_page);
+				__free_page(p_page);
+				poisoned_pages[i] =
+					poisoned_pages[--poisoned_pages_count];
+				break;
+			}
+		}
+		spin_unlock_irqrestore(&poison_lock, flags);
+
+		__free_page(page);
+	}
 	kvfree(pages);
 }
 
+#define DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG (1UL << 20)
+
 static struct page **__iommu_dma_alloc_pages(struct device *dev,
-		unsigned int count, unsigned long order_mask, gfp_t gfp)
+		unsigned int count, unsigned long order_mask, gfp_t gfp,
+		unsigned long attrs)
 {
 	struct page **pages;
+	struct page **pages_to_free = NULL;
+	unsigned int to_free_count = 0;
 	unsigned int i = 0, nid = dev_to_node(dev);
+	bool force_noncontiguous = (attrs & DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG);
+
+	if (force_noncontiguous)
+		order_mask = 1;
 
 	order_mask &= GENMASK(MAX_ORDER, 0);
 	if (!order_mask)
@@ -798,43 +845,76 @@ static struct page **__iommu_dma_alloc_pages(struct device *dev,
 	if (!pages)
 		return NULL;
 
+	if (force_noncontiguous)
+		pages_to_free = kvcalloc(count * 10, sizeof(*pages_to_free), GFP_KERNEL);
+
 	/* IOMMU can map any pages, so himem can also be used here */
 	gfp |= __GFP_NOWARN | __GFP_HIGHMEM;
 
 	while (count) {
 		struct page *page = NULL;
-		unsigned int order_size;
+		unsigned int order_size = 1;
 
-		/*
-		 * Higher-order allocations are a convenience rather
-		 * than a necessity, hence using __GFP_NORETRY until
-		 * falling back to minimum-order allocations.
-		 */
-		for (order_mask &= GENMASK(__fls(count), 0);
-		     order_mask; order_mask &= ~order_size) {
-			unsigned int order = __fls(order_mask);
-			gfp_t alloc_flags = gfp;
+		if (force_noncontiguous) {
+			struct page *order1_page =
+				alloc_pages_node(nid, gfp, 1);
+			if (!order1_page)
+				goto err_free;
 
-			order_size = 1U << order;
-			if (order_mask > order_size)
-				alloc_flags |= __GFP_NORETRY;
-			trace_android_vh_adjust_alloc_flags(order, &alloc_flags);
-			page = alloc_pages_node(nid, alloc_flags, order);
-			if (!page)
+			split_page(order1_page, 1);
+			page = order1_page;
+			struct page *poison_page = order1_page + 1;
+
+			set_direct_map_invalid_noflush(poison_page);
+			add_poisoned_page(poison_page);
+
+			if (i > 0 && (abs((long)page_to_pfn(page) - (long)page_to_pfn(pages[i - 1])) <= 1)) {
+				if (pages_to_free)
+					pages_to_free[to_free_count++] = page;
 				continue;
-			if (order)
-				split_page(page, order);
-			break;
-		}
-		if (!page) {
-			__iommu_dma_free_pages(pages, i);
-			return NULL;
+			}
+		} else {
+			for (order_mask &= GENMASK(__fls(count), 0);
+			     order_mask; order_mask &= ~order_size) {
+				unsigned int order = __fls(order_mask);
+				gfp_t alloc_flags = gfp;
+
+				order_size = 1U << order;
+				if (order_mask > order_size)
+					alloc_flags |= __GFP_NORETRY;
+				trace_android_vh_adjust_alloc_flags(order, &alloc_flags);
+				page = alloc_pages_node(nid, alloc_flags, order);
+				if (!page)
+					continue;
+				if (order)
+					split_page(page, order);
+				break;
+			}
+			if (!page) {
+				__iommu_dma_free_pages(pages, i);
+				return NULL;
+			}
 		}
 		count -= order_size;
 		while (order_size--)
 			pages[i++] = page++;
 	}
+
+	if (pages_to_free) {
+		for (unsigned int j = 0; j < to_free_count; j++)
+			__free_page(pages_to_free[j]);
+		kvfree(pages_to_free);
+	}
 	return pages;
+
+err_free:
+	if (pages_to_free) {
+		for (unsigned int j = 0; j < to_free_count; j++)
+			__free_page(pages_to_free[j]);
+		kvfree(pages_to_free);
+	}
+	__iommu_dma_free_pages(pages, i);
+	return NULL;
 }
 
 /*
@@ -871,7 +951,7 @@ static struct page **__iommu_dma_alloc_noncontiguous(struct device *dev,
 
 	count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 	pages = __iommu_dma_alloc_pages(dev, count, alloc_sizes >> PAGE_SHIFT,
-					gfp);
+					gfp, attrs);
 	if (!pages)
 		return NULL;
 

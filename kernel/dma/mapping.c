@@ -643,13 +643,16 @@ out_free_sgt:
 	return NULL;
 }
 
+#define DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG (1UL << 20)
+
 struct sg_table *dma_alloc_noncontiguous(struct device *dev, size_t size,
 		enum dma_data_direction dir, gfp_t gfp, unsigned long attrs)
 {
 	const struct dma_map_ops *ops = get_dma_ops(dev);
 	struct sg_table *sgt;
 
-	if (WARN_ON_ONCE(attrs & ~DMA_ATTR_ALLOC_SINGLE_PAGES))
+	if (WARN_ON_ONCE((attrs & ~DMA_ATTR_ALLOC_SINGLE_PAGES) &
+			 ~DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG))
 		return NULL;
 	if (WARN_ON_ONCE(gfp & __GFP_COMP))
 		return NULL;
