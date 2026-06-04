@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12c889f_be9b928f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-06-04T19:57:10Z",
+      "side": 1,
+      "message": "Thank you for the patches, can you just call them as BACKPORT instead? and add a `cherry-picked from xxxx` with upstream commit sha. In the backport notes, mention that part of the patches were dropped during LTS merge.",
+      "revId": "47b2d4d0df0706e053c59ff9d3dd7d4e233110d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
