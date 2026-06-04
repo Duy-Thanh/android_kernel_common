@@ -784,11 +784,31 @@ static void __iommu_dma_free_pages(struct page **pages, int count)
 	kvfree(pages);
 }
 
+#define DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG (1UL << 20)
+
 static struct page **__iommu_dma_alloc_pages(struct device *dev,
-		unsigned int count, unsigned long order_mask, gfp_t gfp)
+		unsigned int count, unsigned long order_mask, gfp_t gfp,
+		unsigned long attrs)
 {
 	struct page **pages;
+	struct page **pages_to_free = NULL;
+	unsigned int to_free_count = 0;
 	unsigned int i = 0, nid = dev_to_node(dev);
+	bool force_noncontiguous = (attrs & DMA_ATTR_FORCE_NONCONTIGUOUS_DEBUG);
+
+	if (force_noncontiguous)
+		order_mask = 1;
+
+	order_mask &= GENMASK(MAX_ORDER, 0);
+	if (!order_mask)
+		return NULL;
+
+	pages = kvcalloc(count, sizeof(*pages), GFP_KERNEL);
+	if (!pages)
+		return NULL;
+
+	if (force_noncontiguous)
+		pages_to_free = kvcalloc(count * 10, sizeof(*pages_to_free), GFP_KERNEL);
 
 	order_mask &= GENMASK(MAX_ORDER, 0);
 	if (!order_mask)
@@ -803,38 +823,60 @@ static struct page **__iommu_dma_alloc_pages(struct device *dev,
 
 	while (count) {
 		struct page *page = NULL;
-		unsigned int order_size;
+		unsigned int order_size = 1;
 
-		/*
-		 * Higher-order allocations are a convenience rather
-		 * than a necessity, hence using __GFP_NORETRY until
-		 * falling back to minimum-order allocations.
-		 */
-		for (order_mask &= GENMASK(__fls(count), 0);
-		     order_mask; order_mask &= ~order_size) {
-			unsigned int order = __fls(order_mask);
-			gfp_t alloc_flags = gfp;
-
-			order_size = 1U << order;
-			if (order_mask > order_size)
-				alloc_flags |= __GFP_NORETRY;
-			trace_android_vh_adjust_alloc_flags(order, &alloc_flags);
-			page = alloc_pages_node(nid, alloc_flags, order);
+		if (force_noncontiguous) {
+			page = alloc_pages_node(nid, gfp, 0);
 			if (!page)
+				goto err_free;
+
+			if (i > 0 && (abs((long)page_to_pfn(page) - (long)page_to_pfn(pages[i - 1])) <= 1)) {
+				if (pages_to_free)
+					pages_to_free[to_free_count++] = page;
 				continue;
-			if (order)
-				split_page(page, order);
-			break;
-		}
-		if (!page) {
-			__iommu_dma_free_pages(pages, i);
-			return NULL;
+			}
+		} else {
+			for (order_mask &= GENMASK(__fls(count), 0);
+			     order_mask; order_mask &= ~order_size) {
+				unsigned int order = __fls(order_mask);
+				gfp_t alloc_flags = gfp;
+
+				order_size = 1U << order;
+				if (order_mask > order_size)
+					alloc_flags |= __GFP_NORETRY;
+				trace_android_vh_adjust_alloc_flags(order, &alloc_flags);
+				page = alloc_pages_node(nid, alloc_flags, order);
+				if (!page)
+					continue;
+				if (order)
+					split_page(page, order);
+				break;
+			}
+			if (!page) {
+				__iommu_dma_free_pages(pages, i);
+				return NULL;
+			}
 		}
 		count -= order_size;
 		while (order_size--)
 			pages[i++] = page++;
 	}
+
+	if (pages_to_free) {
+		for (unsigned int j = 0; j < to_free_count; j++)
+			__free_page(pages_to_free[j]);
+		kvfree(pages_to_free);
+	}
 	return pages;
+
+err_free:
+	if (pages_to_free) {
+		for (unsigned int j = 0; j < to_free_count; j++)
+			__free_page(pages_to_free[j]);
+		kvfree(pages_to_free);
+	}
+	__iommu_dma_free_pages(pages, i);
+	return NULL;
 }
 
 /*
@@ -871,7 +913,7 @@ static struct page **__iommu_dma_alloc_noncontiguous(struct device *dev,
 
 	count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 	pages = __iommu_dma_alloc_pages(dev, count, alloc_sizes >> PAGE_SHIFT,
-					gfp);
+					gfp, attrs);
 	if (!pages)
 		return NULL;
 
