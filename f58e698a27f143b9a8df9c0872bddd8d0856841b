@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a082eb25_15146eab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-04T22:45:46Z",
+      "side": 1,
+      "message": "Please cherry-pick this fix to android14-5.15 too. Looks like 6.1+ kernels have the upstream version.",
+      "revId": "f58e698a27f143b9a8df9c0872bddd8d0856841b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
