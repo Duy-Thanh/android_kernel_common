@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "649df0b0_bb1a25be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-04T15:57:55Z",
+      "side": 1,
+      "message": "A BACKPORT requires other tags such as `(cherry picked from...` and a comment block explaining the changes you added on top of the original patch. Have a look at our contribution guidelines https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "a8c14bff01af241e0cb91bfb20a62d95dcfff7f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e721a89f_55d2658c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-04T15:57:55Z",
+      "side": 1,
+      "message": "It sounds like this should be a `FROMGIT:` patch because it hasn\u0027t landed on mainline yet.",
+      "range": {
+        "startLine": 22,
+        "startChar": 88,
+        "endLine": 22,
+        "endChar": 128
+      },
+      "revId": "a8c14bff01af241e0cb91bfb20a62d95dcfff7f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3dcd7ec0_b36c9c1e",
@@ -14,6 +60,23 @@
       "writtenOn": "2026-06-04T11:32:12Z",
       "side": 1,
       "message": "hi guys,pls help to review it",
+      "revId": "a8c14bff01af241e0cb91bfb20a62d95dcfff7f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3671450_bb9cea2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-04T15:57:55Z",
+      "side": 1,
+      "message": "This patch needs to land in the main dev branch android15-6.6 first, before being cherry-picked into the release branch.",
       "revId": "a8c14bff01af241e0cb91bfb20a62d95dcfff7f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
