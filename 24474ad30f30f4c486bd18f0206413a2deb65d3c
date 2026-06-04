@@ -34,6 +34,24 @@
       "parentUuid": "4deb71c1_b90e1785",
       "revId": "24474ad30f30f4c486bd18f0206413a2deb65d3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b0be16f_880fa5eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4874519
+      },
+      "writtenOn": "2026-06-04T03:57:24Z",
+      "side": 1,
+      "message": "hello ,bugid has been updated,please review it,thanks a lot\nBug: 514180995",
+      "parentUuid": "9a4fda5d_b0487713",
+      "revId": "24474ad30f30f4c486bd18f0206413a2deb65d3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
