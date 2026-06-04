@@ -3992,7 +3992,8 @@ rescale_entity(struct sched_entity *se, unsigned long weight, bool rel_vprot)
 	 *	   = V  - vl * w / w'
 	 *	   = V  - vl'
 	 */
-	se->vlag = div64_long(se->vlag * old_weight, weight);
+	if (!se->on_rq)
+		se->vlag = div64_long(se->vlag * old_weight, weight);
 
 	/*
 	 * DEADLINE
@@ -4019,12 +4020,14 @@ static void reweight_entity(struct cfs_rq *cfs_rq, struct sched_entity *se,
 	bool curr = cfs_rq->curr == se;
 	bool rel_vprot = false;
 	u64 avruntime = 0;
+	u64 vlag = 0;
 
 	if (se->on_rq) {
 		/* commit outstanding execution time */
 		update_curr(cfs_rq);
 		avruntime = avg_vruntime(cfs_rq);
-		se->vlag = entity_lag(cfs_rq, se, avruntime);
+		vlag = entity_lag(cfs_rq, se, avruntime);
+
 		se->deadline -= avruntime;
 		se->rel_deadline = 1;
 		if (curr && protect_slice(se)) {
@@ -4056,7 +4059,7 @@ static void reweight_entity(struct cfs_rq *cfs_rq, struct sched_entity *se,
 			se->vprot += avruntime;
 		se->deadline += avruntime;
 		se->rel_deadline = 0;
-		se->vruntime = avruntime - se->vlag;
+		se->vruntime = avruntime - vlag;
 
 		update_load_add(&cfs_rq->load, se->load.weight);
 		if (!curr)
