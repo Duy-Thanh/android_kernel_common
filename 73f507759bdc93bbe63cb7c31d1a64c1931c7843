@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac85b24_84771c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-04T13:31:46Z",
+      "side": 1,
+      "message": "abandon this patch and cherry-pick from the android17-6.18 version preserving the Change-Id. Same with the other non-symbol/ABI patches in this series unless there is a good reason why you can\u0027t.",
+      "revId": "73f507759bdc93bbe63cb7c31d1a64c1931c7843",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
