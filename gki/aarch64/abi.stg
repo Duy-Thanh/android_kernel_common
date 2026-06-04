@@ -421949,6 +421949,12 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9c014417
+  return_type_id: 0x6720d32f
+  parameter_id: 0x078316ff
+  parameter_id: 0x1858a1e0
+}
+function {
   id: 0x9c03de2b
   return_type_id: 0x6720d32f
   parameter_id: 0x060cf413
@@ -518785,6 +518791,15 @@ elf_symbol {
   full_name: "ufshcd_runtime_suspend"
 }
 elf_symbol {
+  id: 0x9d3db1e6
+  name: "ufshcd_send_uic_cmd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x79f193e6
+  type_id: 0x9c014417
+  full_name: "ufshcd_send_uic_cmd"
+}
+elf_symbol {
   id: 0x29719a35
   name: "ufshcd_suspend_prepare"
   is_defined: true
@@ -536669,6 +536684,7 @@ interface {
   symbol_id: 0xeb091e22
   symbol_id: 0x17299607
   symbol_id: 0xd4da9de2
+  symbol_id: 0x9d3db1e6
   symbol_id: 0x29719a35
   symbol_id: 0x25606668
   symbol_id: 0x0a316c12
