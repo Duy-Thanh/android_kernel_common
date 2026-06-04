@@ -508,7 +508,7 @@ static int rpm_idle(struct device *dev, int rpmflags)
 		dev->power.request = RPM_REQ_IDLE;
 		if (!dev->power.request_pending) {
 			dev->power.request_pending = true;
-			queue_work(pm_wq, &dev->power.work);
+			queue_work(system_highpri_wq, &dev->power.work);
 		}
 		trace_rpm_return_int(dev, _THIS_IP_, 0);
 		return 0;
@@ -659,7 +659,7 @@ static int rpm_suspend(struct device *dev, int rpmflags)
 		    RPM_REQ_AUTOSUSPEND : RPM_REQ_SUSPEND;
 		if (!dev->power.request_pending) {
 			dev->power.request_pending = true;
-			queue_work(pm_wq, &dev->power.work);
+			queue_work(system_highpri_wq, &dev->power.work);
 		}
 		goto out;
 	}
@@ -862,7 +862,7 @@ static int rpm_resume(struct device *dev, int rpmflags)
 		dev->power.request = RPM_REQ_RESUME;
 		if (!dev->power.request_pending) {
 			dev->power.request_pending = true;
-			queue_work(pm_wq, &dev->power.work);
+			queue_work(system_highpri_wq, &dev->power.work);
 		}
 		retval = 0;
 		goto out;
