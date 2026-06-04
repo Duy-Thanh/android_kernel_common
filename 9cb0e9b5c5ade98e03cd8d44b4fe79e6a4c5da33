@@ -80,6 +80,30 @@
       ],
       "revId": "9cb0e9b5c5ade98e03cd8d44b4fe79e6a4c5da33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55bc833_9fe07412",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-04T17:14:38Z",
+      "side": 1,
+      "message": "Right; I documented that in the commit message with the `Fixes:` tag for posterity.",
+      "parentUuid": "1a065152_32fc9b71",
+      "range": {
+        "startLine": 867,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 24
+      },
+      "revId": "9cb0e9b5c5ade98e03cd8d44b4fe79e6a4c5da33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
