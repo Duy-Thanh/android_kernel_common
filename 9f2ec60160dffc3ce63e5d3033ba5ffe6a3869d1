@@ -16,6 +16,24 @@
       "message": "I didn\u0027t get the same build error as presubmit, but I did encounter the following error: \n\n```\n--- common/arch/arm64/configs/gki_defconfig     2026-06-04 17:46:38.255828944 +0000\n+++ /usr/local/google/home/isaacmanjarres/workspace/kernel/out/bazel/output_user_root/48b080691e66a6bce7d4bd26728e1c02/sandbox/linux-sandbox/563/execroot/_main/out/android17-6.18/common/defconfig    2026-06-04 17:48:10.645316982 +0000\n@@ -824,4 +824,3 @@\n CONFIG_KUNIT_EXAMPLE_TEST\u003dm\n # CONFIG_KUNIT_DEFAULT_ENABLED is not set\n # CONFIG_RUNTIME_TESTING_MENU is not set\n-CONFIG_RUST_INLINE_HELPERS\u003dy\nERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\nTarget //common:kernel_aarch64_dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nINFO: Elapsed time: 13.646s, Critical Path: 6.19s\nINFO: 2 processes: 466 action cache hit, 2 internal.\nERROR: Build did NOT complete successfully\nERROR: Build failed. Not running target\n```\n\nWhich seems to be happening because this is no longer true: https://cs.android.com/android/kernel/superproject/+/common-android17-6.18:common/init/Kconfig;l\u003d91",
       "revId": "9f2ec60160dffc3ce63e5d3033ba5ffe6a3869d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d9b502f_b0c4cb7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-04T20:01:54Z",
+      "side": 1,
+      "message": "There appears to be an issue with the respin: https://b.corp.google.com/issues/517148969#comment8",
+      "parentUuid": "87404765_8b2308e1",
+      "revId": "9f2ec60160dffc3ce63e5d3033ba5ffe6a3869d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
