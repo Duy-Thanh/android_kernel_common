@@ -1658,8 +1658,15 @@ devicetree_library(
     name = "dt-bindings",
     hdrs = glob([
         "scripts/dtc/include-prefixes/dt-bindings/**/*.h",
-    ]),
-    includes = ["scripts/dtc/include-prefixes"],
+    ]) + [
+        "include/linux/kconfig.h",
+        "tools/virtio/generated/autoconf.h",
+    ],
+    includes = [
+        "include",
+        "scripts/dtc/include-prefixes",
+        "tools/virtio",
+    ],
     visibility = ["//visibility:private"],
 )
 
