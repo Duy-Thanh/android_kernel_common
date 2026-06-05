@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa1f9bc_ba201588",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-05T01:45:17Z",
+      "side": 1,
+      "message": "So, with this change you would wait a concurrent zram_writeback_endio() to finish before freeing wb_ctl. But that means you allow `wb_ctl-\u003edone_reqs` to contain elements when you are freeing `wb_ctl`. Wouldn\u0027t that leak memory?\n\nAt line 824 you also have `WARN_ON(!list_empty(\u0026wb_ctl-\u003edone_reqs))`. If you allow zram_writeback_endio() to run concurrently with that code, then this warning will be triggered.\n\nI don\u0027t think you are properly resolving this race with this change.",
+      "range": {
+        "startLine": 835,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5b32e62d_0fa4149f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 817,
+                "startChar": 0,
+                "endLine": 818,
+                "endChar": 0
+              },
+              "replacement": "void release_wb_ctl(struct zram *zram, struct zram_wb_ctl *wb_ctl)\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 822,
+                "startChar": 0,
+                "endLine": 824,
+                "endChar": 0
+              },
+              "replacement": "\t/* Wait for all in-flight requests to complete */\n\twait_event(wb_ctl-\u003edone_wait, atomic_read(\u0026wb_ctl-\u003enum_inflight) \u003d\u003d 0);\n\n\t/* Process any requests that completed after the main loop in zram_writeback_slots */\n\tzram_complete_done_reqs(zram, wb_ctl);\n\n\t/*\n\t * At this point, num_inflight is 0 and done_reqs must be empty.\n\t */\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 884,
+                "startChar": 0,
+                "endLine": 885,
+                "endChar": 0
+              },
+              "replacement": "\trelease_wb_ctl(zram, wb_ctl);\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 1622,
+                "startChar": 0,
+                "endLine": 1623,
+                "endChar": 0
+              },
+              "replacement": "\trelease_wb_ctl(zram, wb_ctl);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
