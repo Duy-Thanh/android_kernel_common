@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bdad5df_005cf236",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4342,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-05T15:29:14Z",
+      "side": 1,
+      "message": "You added `android_rvh_do_swap_page_start` hook but not are not using it.",
+      "range": {
+        "startLine": 4342,
+        "startChar": 4,
+        "endLine": 4342,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ca361bf1_6670f0bd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/memory.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\ttrace_android_rvh_do_swap_page_start(vmf);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d59a98b29f0da64cffa6de52f268a9c54ffd4c3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
