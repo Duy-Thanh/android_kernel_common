@@ -70,6 +70,23 @@
       ],
       "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6f64de_13f3edab",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-06-05T02:49:30Z",
+      "side": 1,
+      "message": "Would moving the wake_up call inside the spin lock critical section be sufficient?",
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
