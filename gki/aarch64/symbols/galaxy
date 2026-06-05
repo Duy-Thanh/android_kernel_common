@@ -76,6 +76,7 @@
   __traceiter_android_rvh_do_sea
   __traceiter_android_rvh_do_sp_pc_abort
   __traceiter_android_rvh_do_swap_page_relax
+  __traceiter_android_rvh_do_swap_page_start
   __traceiter_android_rvh_exec_binprm_check
   __traceiter_android_rvh_exec_binprm_fail
   __traceiter_android_rvh_handle_bad_stack
@@ -164,6 +165,7 @@
   __tracepoint_android_rvh_do_sea
   __tracepoint_android_rvh_do_sp_pc_abort
   __tracepoint_android_rvh_do_swap_page_relax
+  __tracepoint_android_rvh_do_swap_page_start
   __tracepoint_android_rvh_exec_binprm_check
   __tracepoint_android_rvh_exec_binprm_fail
   __tracepoint_android_rvh_handle_bad_stack
