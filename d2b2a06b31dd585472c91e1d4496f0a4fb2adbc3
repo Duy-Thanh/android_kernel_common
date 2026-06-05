@@ -74,6 +74,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c591980_6d04b256",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-06-05T03:42:28Z",
+      "side": 1,
+      "message": "Thanks for the comment! But I don\u0027t think wb_ctl-\u003edone_reqs can contain elements when release_wb_ctl(wb_ctl) is called, Here is the detailed flow:\n\n1. release_wb_ctl is only called after zram_writeback_slots exits\n2. zram_writeback_slots blockingly waits for wb_ctl-\u003enum_inflight to become 0 before exiting\n3. wb_ctl-\u003enum_inflight is only decremented in zram_complete_done_reqs after a request is successfully popped from wb_ctl-\u003edone_reqs\n4. If zram_writeback_endio runs concurrently with release_wb_ctl (which can only happen when the endio thread is in the window between spin_unlock_irqrestore(\u0026wb_ctl-\u003edone_lock) and rcu_read_unlock()), the request has already been popped and processed, so done_reqs is empty and num_inflight is 0\n\nIs there anything I missed?",
+      "parentUuid": "4fa1f9bc_ba201588",
+      "range": {
+        "startLine": 835,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 10
+      },
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b63d2f_6fcf40be",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-06-05T03:42:28Z",
+      "side": 1,
+      "message": "Thanks for the comment! I don\u0027t think `wb_ctl-\u003edone_reqs` can contain elements when `release_wb_ctl(wb_ctl)` is called, so there is no memory leak or warning trigger. Here is why:\n\n1. `release_wb_ctl` is only called after `zram_writeback_slots` exits.\n2. `zram_writeback_slots` always blockingly waits for `wb_ctl-\u003enum_inflight` to become `0` before exiting (both in normal and error paths):\n   ```c\n   while (atomic_read(\u0026wb_ctl-\u003enum_inflight) \u003e 0) {\n       wait_event(wb_ctl-\u003edone_wait, !list_empty(\u0026wb_ctl-\u003edone_reqs));\n       err \u003d zram_complete_done_reqs(zram, wb_ctl);\n       ...\n   }\n   ```\n3. `wb_ctl-\u003enum_inflight` is only decremented in `zram_complete_done_reqs` *after* the request is successfully popped from `wb_ctl-\u003edone_reqs`.\n4. Therefore, `num_inflight` represents `in_flight` + `in_done_reqs` + `popped_but_not_yet_decremented`. When `num_inflight` reaches `0`, it is mathematically guaranteed that all completed requests have been popped from `done_reqs` and processed (moved back to `idle_reqs` and freed).\n5. If `zram_writeback_endio` runs concurrently with `release_wb_ctl` (which can only happen between `spin_unlock_irqrestore(\u0026wb_ctl-\u003edone_lock)` and `rcu_read_unlock()` in `zram_writeback_endio`), the request has already been popped and processed, so `done_reqs` is empty and `num_inflight` is `0`.\n6. Since `rcu_read_lock()` is held during this window, `kfree_rcu(wb_ctl, rcu)` ensures that `wb_ctl` is not freed until `rcu_read_unlock()` is called, preventing the UAF on `wake_up`.\n\nThus, `done_reqs` is guaranteed to be empty, and no requests will be leaked.",
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f6f64de_13f3edab",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
@@ -85,6 +126,24 @@
       "writtenOn": "2026-06-05T02:49:30Z",
       "side": 1,
       "message": "Would moving the wake_up call inside the spin lock critical section be sufficient?",
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32efb9fd_b2ad0dda",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-06-05T03:42:28Z",
+      "side": 1,
+      "message": "Yes, we have discussed multiple solutions including moving the wake_up() inside the spinlock. And kfree_rcu is the final solution we choose due to the lockdep concern. This CL is a backport from upstream in 7.1rc6.",
+      "parentUuid": "7f6f64de_13f3edab",
       "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
