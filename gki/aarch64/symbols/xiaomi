@@ -337,3 +337,31 @@
 # required by xiaomi binder
 __tracepoint_android_vh_binder_skip_set_priority
 __traceiter_android_vh_binder_skip_set_priority
+<<<<<<< HEAD   (eac9b74cb7ed7b68f0962d50764077f82211feac ANDROID: KVM: arm64: Add keep= option to kvm-arm.host_s2 cmd)
+||||||| BASE   (e6eaf93d425e7ac23dd11aebcf287a2f02d39704 ANDROID: GKI: Add symbol list for xring)
+
+# required by xiaomi game
+__traceiter_android_vh_free_user
+__traceiter_android_vh_alloc_uid
+__traceiter_android_rvh_cpuset_fork
+__tracepoint_android_vh_free_user
+__tracepoint_android_vh_alloc_uid
+__tracepoint_android_rvh_cpuset_fork
+free_uid
+find_user
+jiffies_64
+=======
+
+# required by xiaomi game
+__traceiter_android_vh_free_user
+__traceiter_android_vh_alloc_uid
+__traceiter_android_rvh_cpuset_fork
+__traceiter_android_vh_sched_setaffinity_early
+__tracepoint_android_vh_free_user
+__tracepoint_android_vh_alloc_uid
+__tracepoint_android_rvh_cpuset_fork
+__tracepoint_android_vh_sched_setaffinity_early
+free_uid
+find_user
+jiffies_64
+>>>>>>> CHANGE (562cc548950c0ee51b8bbae3c493375f697a3274 ANDROID: GKI: Update symbols to symbol list)
