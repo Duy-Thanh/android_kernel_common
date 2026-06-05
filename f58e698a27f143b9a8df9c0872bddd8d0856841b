@@ -16,6 +16,23 @@
       "message": "Please cherry-pick this fix to android14-5.15 too. Looks like 6.1+ kernels have the upstream version.",
       "revId": "f58e698a27f143b9a8df9c0872bddd8d0856841b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d448b419_116915e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2026-06-05T17:56:58Z",
+      "side": 1,
+      "message": "Would someone be able to show me the error reported by Presumbit? IIRC it looks only internally accessible to Google employees.",
+      "revId": "f58e698a27f143b9a8df9c0872bddd8d0856841b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
