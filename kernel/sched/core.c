@@ -4131,7 +4131,7 @@ void move_queued_task_locked(struct rq *src_rq, struct rq *dst_rq, struct task_s
 			break;
 
 		if (task_is_blocked(task))
-			owner = __mutex_owner(task->blocked_on);
+			owner = __mutex_owner(get_task_blocked_on(task));
 
 		__move_queued_task_locked(src_rq, dst_rq, task);
 		if (task == owner)
