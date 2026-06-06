@@ -700,4 +700,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_reuse);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_alloc_fast_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_percpu_swap_cluster_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_swap_entries_free);
 /* keep-sorted end */
