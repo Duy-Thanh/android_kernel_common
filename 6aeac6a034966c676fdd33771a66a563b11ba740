@@ -540,6 +540,30 @@
       },
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996f9577_2295ec8e",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-06-07T07:59:29Z",
+      "side": 1,
+      "message": "To answer more on Will Concern,\nIt\u0027s common to strip of the debug_kinfo module on most build because its more of a debug infrastructure and not guaranteed to exist in production\nSo the complete model is:\n\n1. Initial vmlinux layout reporting provides the base layout for each section.\n2. EL2 applies S2 permissions (depending on policy by RM/Gunyah Hyp post spawning VM) but its like text(R-X) rodata(R--/NX), normal DRAM(NX).\n3. TVM/sysreg traps provide active intrusion reporting for attempts to change the EL1 translation-control state\n4. page-table content tampering under the same TTBR root is handled by S2 NX executable whitelisting and can later be strengthened with page-table/page monitoring/protection.\n\nThis patch is only the first part.\n\nI hope I have answered question here.",
+      "parentUuid": "604f29a9_87270ac0",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
