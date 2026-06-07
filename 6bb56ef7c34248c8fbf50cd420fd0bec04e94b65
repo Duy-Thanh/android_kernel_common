@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5419c2_f873ba41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3911847
+      },
+      "writtenOn": "2026-06-07T05:29:37Z",
+      "side": 1,
+      "message": "git pull https://android.googlesource.com/kernel/common refs/changes/95/4105895/1",
+      "revId": "6bb56ef7c34248c8fbf50cd420fd0bec04e94b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
