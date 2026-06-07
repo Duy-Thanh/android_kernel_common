@@ -1177,6 +1177,7 @@ unsigned int reclaim_clean_pages_from_list(struct zone *zone,
 #endif
 #define ALLOC_HIGHATOMIC	0x200 /* Allows access to MIGRATE_HIGHATOMIC */
 #define ALLOC_KSWAPD		0x800 /* allow waking of kswapd, __GFP_KSWAPD_RECLAIM set */
+#define ALLOC_CMA_FORCED       0x1000 /* Force CMA for requests without __GFP_MOVABLE */
 
 /* Flags that allow allocations below the min watermark. */
 #define ALLOC_RESERVES (ALLOC_NON_BLOCK|ALLOC_MIN_RESERVE|ALLOC_HIGHATOMIC|ALLOC_OOM)
@@ -1593,4 +1594,14 @@ static inline bool can_modify_vma_madv(struct vm_area_struct *vma, int behavior)
 }
 
 #endif
+
+#ifdef CONFIG_CMA
+extern bool cma_try_reclaim(gfp_t gfp, unsigned long retries);
+#else
+extern bool cma_try_reclaim(gfp_t gfp, unsigned long retries);
+{
+	return false;
+}
+#endif
+
 #endif	/* __MM_INTERNAL_H */

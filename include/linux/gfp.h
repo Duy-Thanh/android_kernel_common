@@ -394,4 +394,11 @@ extern struct page *alloc_contig_pages(unsigned long nr_pages, gfp_t gfp_mask,
 #endif
 void free_contig_range(unsigned long pfn, unsigned long nr_pages);
 
+DECLARE_STATIC_KEY_FALSE(force_cma);
+
+static inline bool cma_forced(void)
+{
+	return static_key_enabled(&force_cma);
+}
+
 #endif /* __LINUX_GFP_H */

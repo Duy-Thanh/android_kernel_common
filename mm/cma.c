@@ -34,6 +34,7 @@
 #include <linux/kmemleak.h>
 #include <linux/sched.h>
 #include <linux/jiffies.h>
+#include <linux/page-isolation.h>
 #include <trace/events/cma.h>
 
 #include "internal.h"
@@ -206,6 +207,11 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 {
 	struct cma *cma;
 
+	if (cma_forced() && cma_area_count) {
+		pr_err("Only one slot can be reserved with force_cma.\n");
+		return -ENOSPC;
+	}
+
 	/* Sanity checks */
 	if (cma_area_count == ARRAY_SIZE(cma_areas)) {
 		pr_err("Not enough slots for CMA reserved regions!\n");
@@ -236,6 +242,9 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 	*res_cma = cma;
 	cma_area_count++;
 	totalcma_pages += (size / PAGE_SIZE);
+
+	if (cma_forced())
+		pr_info("\"%s\" can serve unmovable allocations\n", cma->name);
 
 	return 0;
 }
@@ -658,6 +667,69 @@ bool cma_release(struct cma *cma, const struct page *pages,
 	return true;
 }
 EXPORT_SYMBOL_GPL(cma_release);
+
+static void cma_migrate_range(unsigned long start, unsigned long end, gfp_t gfp)
+{
+	struct compact_control cc = {
+		.zone = page_zone(pfn_to_page(start)),
+		.order = -1,
+		.mode = gfp & __GFP_NORETRY ? MIGRATE_ASYNC : MIGRATE_SYNC,
+		.alloc_contig = true,
+		.ignore_skip_hint = true,
+		.no_set_skip_hint = true,
+		.gfp_mask = current_gfp_context(gfp),
+	};
+
+	INIT_LIST_HEAD(&cc.migratepages);
+
+	if (!start_isolate_page_range(start, end, MIGRATE_CMA, 0, gfp)) {
+		drain_all_pages(cc.zone);
+		__alloc_contig_migrate_range(&cc, start, end, MIGRATE_CMA);
+	}
+
+	undo_isolate_page_range(start, end, MIGRATE_CMA);
+}
+
+bool cma_try_reclaim(gfp_t gfp, unsigned long retries)
+{
+	static int offset;
+
+	int nr_blocks;
+	unsigned long start, end;
+
+	if (WARN_ON_ONCE(!cma_forced() || cma_area_count != 1 || !cma_areas->count))
+		return false;
+	/*
+	 * Gradually sweep the entire area based on where the last attempt left
+	 * off. Return false to avoid livelock after the full coverage is achieved.
+	 */
+	start = pageblock_start_pfn(cma_areas->base_pfn);
+	end = pageblock_end_pfn(cma_areas->base_pfn + cma_areas->count);
+	nr_blocks = (end - start) / pageblock_nr_pages;
+
+	if (retries > nr_blocks)
+		return false;
+
+	mutex_lock(&cma_mutex);
+
+	offset = offset % nr_blocks;
+
+	start = pageblock_start_pfn(cma_areas->base_pfn + pageblock_nr_pages * offset);
+	if (start < cma_areas->base_pfn)
+		start = cma_areas->base_pfn;
+
+	end = pageblock_end_pfn(start);
+	if (end > cma_areas->base_pfn + cma_areas->count)
+		end = cma_areas->base_pfn + cma_areas->count;
+
+	cma_migrate_range(start, end, gfp);
+
+	offset++;
+
+	mutex_unlock(&cma_mutex);
+
+	return true;
+}
 
 int cma_for_each_area(int (*it)(struct cma *cma, void *data), void *data)
 {

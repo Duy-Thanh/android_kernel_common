@@ -220,6 +220,25 @@ static inline bool cma_has_pcplist(void)
 	return static_key_enabled(&restrict_cma_redirect);
 }
 
+/*
+ * Force CMA for requests without __GFP_MOVABLE if __GFP_CMA is set. This
+ * restricts the number of CMA pools to one.
+ */
+DEFINE_STATIC_KEY_FALSE(force_cma);
+
+static int __init enable_force_cma(char *str)
+{
+	if (IS_ENABLED(CONFIG_CMA)) {
+		static_branch_enable(&force_cma);
+		return 0;
+	}
+
+	pr_err("CONFIG_CMA is required for force_cma.\n");
+
+	return -ENODEV;
+}
+early_param("force_cma", enable_force_cma);
+
 #ifdef CONFIG_HAVE_MEMORYLESS_NODES
 /*
  * N.B., Do NOT reference the '_numa_mem_' per cpu variable directly.
@@ -2294,6 +2313,9 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
 {
 	struct page *page = NULL;
 
+	if (WARN_ON_ONCE(alloc_flags & ALLOC_CMA_FORCED))
+		return NULL;
+
 	trace_android_vh_rmqueue_smallest_bypass(&page, zone, order, migratetype);
 	if (page)
 		return page;
@@ -2341,6 +2363,11 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 	for (i = 0; i < count; ++i) {
 		struct page *page;
 
+		if (alloc_flags & ALLOC_CMA_FORCED) {
+			page = __rmqueue_cma_fallback(zone, order);
+			goto next;
+		}
+
 		/*
 		 * If CMA redirect is restricted, use CMA region only for
 		 * MIGRATE_CMA pages. cma_rediret_restricted() is false
@@ -2350,7 +2377,7 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 			page = __rmqueue_cma_fallback(zone, order);
 		else
 			page = __rmqueue(zone, order, migratetype, alloc_flags);
-
+next:
 		if (unlikely(page == NULL))
 			break;
 
@@ -2885,6 +2912,12 @@ struct page *rmqueue_buddy(struct zone *preferred_zone, struct zone *zone,
 	do {
 		page = NULL;
 		spin_lock_irqsave(&zone->lock, flags);
+
+		if (alloc_flags & ALLOC_CMA_FORCED) {
+			page = __rmqueue_cma_fallback(zone, order);
+			goto next;
+		}
+
 		if (alloc_flags & ALLOC_HIGHATOMIC)
 			page = __rmqueue_smallest(zone, order, MIGRATE_HIGHATOMIC);
 		if (!page) {
@@ -2903,7 +2936,7 @@ struct page *rmqueue_buddy(struct zone *preferred_zone, struct zone *zone,
 			 */
 			if (!page && (alloc_flags & (ALLOC_OOM|ALLOC_NON_BLOCK)))
 				page = __rmqueue_smallest(zone, order, MIGRATE_HIGHATOMIC);
-
+next:
 			if (!page) {
 				spin_unlock_irqrestore(&zone->lock, flags);
 				return NULL;
@@ -2972,6 +3005,16 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 			struct per_cpu_pages *pcp,
 			struct list_head *list)
 {
+
+	if (alloc_flags & ALLOC_CMA_FORCED) {
+		migratetype = get_cma_migrate_type();
+		list = pcp->lists + order_to_pindex(migratetype, order);
+
+		if (!cma_has_pcplist())
+			return NULL;
+
+		return ___rmqueue_pcplist(zone, order, migratetype, alloc_flags, pcp, list);
+	}
 
 	if (cma_redirect_restricted() && alloc_flags & ALLOC_CMA) {
 		struct page *page;
@@ -3339,6 +3382,14 @@ static inline unsigned int gfp_to_alloc_flags_cma(gfp_t gfp_mask,
 		alloc_flags |= ALLOC_CMA;
 	trace_android_vh_alloc_flags_cma_adjust(gfp_mask, &alloc_flags);
 #endif
+	/*
+	 * cma_forced() needs to be handled regardless of CONFIG_CMA because
+	 * it needs to fail unsupported requests rather than let them fall back
+	 * to other migration types.
+	 */
+	if (cma_forced() && (gfp_mask & __GFP_CMA) && !(gfp_mask & __GFP_MOVABLE))
+		alloc_flags |= ALLOC_CMA | ALLOC_CMA_FORCED;
+
 	return alloc_flags;
 }
 
@@ -4409,6 +4460,10 @@ retry:
 	pages_reclaimed += did_some_progress;
 	if (page)
 		goto got_pg;
+
+	if ((alloc_flags & ALLOC_CMA_FORCED) &&
+	    cma_try_reclaim(gfp_mask, direct_reclaim_retries))
+		did_some_progress++;
 
 	/* Try direct compaction and then allocating */
 	page = __alloc_pages_direct_compact(gfp_mask, order, alloc_flags, ac,
