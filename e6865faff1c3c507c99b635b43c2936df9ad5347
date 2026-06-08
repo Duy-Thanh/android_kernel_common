@@ -34,6 +34,24 @@
       "parentUuid": "3b773f68_1014a800",
       "revId": "e6865faff1c3c507c99b635b43c2936df9ad5347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70a6bd3_9d979b01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-08T11:31:10Z",
+      "side": 1,
+      "message": "I think it\u0027s still wrong.\n\nThe conflict region was:\n\n```\n\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD\nstatic inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)\n{\n\tpagetable_free(virt_to_ptdesc(pgd));\n}\n\n#define __pte_free_tlb(tlb, pte, address)\t\t\t\\\ndo {\t\t\t\t\t\t\t\t\\\n\tpagetable_dtor(page_ptdesc(pte));\t\t\t\\\n\ttlb_remove_page_ptdesc((tlb), page_ptdesc(pte));\t\\\n} while (0)\n||||||| parent of 6c8e95805dba (mips: mm: enable MMU_GATHER_RCU_TABLE_FREE)\n#define __pte_free_tlb(tlb, pte, address)\t\\\n\ttlb_remove_ptdesc((tlb), page_ptdesc(pte))\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n#define __pte_free_tlb(tlb, pte, address)\ttlb_remove_ptdesc((tlb), page_ptdesc(pte))\n\u003e\u003e\u003e\u003e\u003e\u003e\u003e 6c8e95805dba (mips: mm: enable MMU_GATHER_RCU_TABLE_FREE)\n```\n\nThe base and lower regions are identical apart from the line break. This means that resolution should just pick the upper region:\n\n```\nstatic inline void pgd_free(struct mm_struct *mm, pgd_t *pgd)\n{\n\tpagetable_free(virt_to_ptdesc(pgd));\n}\n\n#define __pte_free_tlb(tlb, pte, address)\t\t\t\\\ndo {\t\t\t\t\t\t\t\t\\\n\tpagetable_dtor(page_ptdesc(pte));\t\t\t\\\n\ttlb_remove_page_ptdesc((tlb), page_ptdesc(pte));\t\\\n} while (0)\n```",
+      "parentUuid": "7db99b7f_07fa11be",
+      "revId": "e6865faff1c3c507c99b635b43c2936df9ad5347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
