@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93d1035_604955b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-08T16:35:42Z",
+      "side": 1,
+      "message": "Belated note: this should have been `pKVM: x86:`, not just `pKVM:`. Same for aosp/4087793 and aosp/4087794.",
+      "revId": "5f83cd2f8ad60ac9d30fc7e50df5d5fbf7e2c5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
