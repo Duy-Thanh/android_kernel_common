@@ -70,6 +70,24 @@
       "parentUuid": "e1b1ddd5_f9899515",
       "revId": "4d9b8c0c8bb2b08ad1f82497b4850f40196f87dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c86abd_355b00cf",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4065,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-08T20:17:56Z",
+      "side": 1,
+      "message": "Just to clarify on this point, looking at the comments the key piece is here:\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/fair.c#n4020\n\n```\n(V - v)*w \u003d (V\u0027 - v\u0027)*w\u0027\n\u003d\u003d\u003e    v\u0027 \u003d V\u0027 - (V - v)*w/w\u0027\t\t(4)\n```\n\nWhich renaming things to be clearer:\n```\nvlag_old * weight_old \u003d vlag_new * weight_new\n\u003d\u003d\u003d\u003e vlag_new \u003d (vlag_old*weight_old)/weight_new\n```",
+      "parentUuid": "3005f6b4_e2bacd8f",
+      "revId": "4d9b8c0c8bb2b08ad1f82497b4850f40196f87dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
