@@ -404,8 +404,17 @@ struct fuse_args {
 	bool is_ext:1;
 	bool is_pinned:1;
 	bool invalidate_vmap:1;
+<<<<<<< HEAD   (69aed449705be28a3f7ab2897be621d64d6e9fcc Merge 59970b2586fe ("f2fs: fix to avoid uninit-value access )
 	struct fuse_in_arg in_args[FUSE_MAX_IN_ARGS];
 	struct fuse_arg out_args[FUSE_MAX_OUT_ARGS];
+||||||| BASE   (59970b2586fef4b13e96527b9d232bed30b640cd f2fs: fix to avoid uninit-value access in f2fs_sanity_check_)
+	struct fuse_in_arg in_args[4];
+	struct fuse_arg out_args[2];
+=======
+	bool abort_on_kill:1;
+	struct fuse_in_arg in_args[4];
+	struct fuse_arg out_args[2];
+>>>>>>> BRANCH (a256b1e6892e7fe840f0f9746316fa938e9a421f Linux 6.18.25)
 	void (*end)(struct fuse_mount *fm, struct fuse_args *args, int error);
 
 	/* Used for kvec iter backed by vmalloc address */
