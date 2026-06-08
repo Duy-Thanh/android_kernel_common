@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c5bb4c_123890d4",
+        "filename": "arch/x86/include/asm/io.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-06-08T07:51:58Z",
+      "side": 1,
+      "message": "This is much simpler. Will update.",
+      "parentUuid": "fcaecfe7_57a1e423",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7b2fe699_d2c31a72",
@@ -120,6 +138,24 @@
       "writtenOn": "2026-06-05T16:09:53Z",
       "side": 1,
       "message": "Just a note: it looks like this change makes this usage of PVOP_CALL dispatching not really useful anymore. We could just directly call our hypercall wrappers like `pkvm_mmio_readb()` etc from `__pv_mmio_read()` and `__pv_mmio_write()`, thus eliminate the need for pv_mmio_ops in `struct paravirt_patch_template` and for these intermediate wrappers.\n\nI\u0027m not suggesting to do that now (at least because removing it from `struct paravirt_patch_template` would probably mean changing the KMI), but we may consider that in the future, especially for upstreaming. In particular, if we generalize our PV MMIO hypercalls to make them generic KVM hypercalls, not pKVM-specific.",
+      "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17acdf2d_e2dd6fcf",
+        "filename": "arch/x86/include/asm/paravirt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-06-08T07:51:58Z",
+      "side": 1,
+      "message": "Yeah, agree.",
+      "parentUuid": "7b2fe699_d2c31a72",
       "revId": "f75107dfd2fd8f5ef3b4850dce2b39ce12e3230e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
