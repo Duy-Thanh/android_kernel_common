@@ -16,6 +16,24 @@
       "message": "No blank lines in the section with tags please.",
       "revId": "517f7a672908deeb0bfeb3e5c0f0679d5b0762b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcba7364_d9f85099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1084763
+      },
+      "writtenOn": "2026-06-08T11:53:27Z",
+      "side": 1,
+      "message": "Removed the blank line in the tags/footer section.",
+      "parentUuid": "40600979_13de93fa",
+      "revId": "517f7a672908deeb0bfeb3e5c0f0679d5b0762b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
