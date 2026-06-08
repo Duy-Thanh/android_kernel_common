@@ -34,6 +34,24 @@
       "parentUuid": "76255960_d111eacd",
       "revId": "9c472db04f33f7e75fdaf05d7fcc3687a83fd955",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d14d31_8e6ccce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-08T11:17:43Z",
+      "side": 1,
+      "message": "This is outside my area of expertise. Leaving this to @tkjos@google.com.",
+      "parentUuid": "f3c2fa2d_4553780d",
+      "revId": "9c472db04f33f7e75fdaf05d7fcc3687a83fd955",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
