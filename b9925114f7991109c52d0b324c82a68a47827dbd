@@ -16,6 +16,24 @@
       "message": "Is this really needed? Don\u0027t we have better ways of getting data into a dmabuf than wrapfd?",
       "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c18cc11_f7ca6275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-08T22:23:30Z",
+      "side": 1,
+      "message": "Not if we want to read directly into the dmabuf and avoid polluting the pagecache.",
+      "parentUuid": "5eafe5a0_62c2be5c",
+      "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
