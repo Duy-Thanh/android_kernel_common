@@ -234,6 +234,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3740cfa1_25cc2b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-08T20:49:33Z",
+      "side": 1,
+      "message": "\u003e Main motivation was to avoid the conditional donation api call and clear flag came as a bonus :-). What do you think about passing the function pointer instead(pkvm_host_donate_hyp/pkvm_host_donate_hyp_share_ro)?\n\nI just see no benefit in trying to generalize it like this. Any such callbacks would need to have the same signature as pkvm_host_donate_hyp/pkvm_host_donate_hyp_share_ro. Do we really anticipate having any more such functions with the same exact signature?\n\nIn fact, we could do it the other way around: \"merge\" pkvm_host_donate_hyp_share_ro() into pkvm_host_donate_hyp() so that we have just one function serving both cases, if we really wanted to. (But I don\u0027t see a huge problem in having e.g. `ret \u003d share_ro ? pkvm_host_donate_hyp_share_ro(...) ? pkvm_host_donate_hyp(...)`)",
+      "parentUuid": "8836a22f_e3c0025f",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
