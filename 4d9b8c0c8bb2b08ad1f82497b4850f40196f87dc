@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc3553ca_85696b99",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4065,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-08T18:22:18Z",
+      "side": 1,
+      "message": "is this correct? I would have thought that rescaling to the new weight would be:\n\nnew_vlag \u003d (old_vlag * new_weight) / old_weight;",
+      "fixSuggestions": [
+        {
+          "fixId": "92ce8fe9_01087739",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/sched/fair.c",
+              "range": {
+                "startLine": 4065,
+                "startChar": 0,
+                "endLine": 4066,
+                "endChar": 0
+              },
+              "replacement": "\t\tvlag \u003d mul_s64_ul_div_ul(vlag, old_weight, weight);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4d9b8c0c8bb2b08ad1f82497b4850f40196f87dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
