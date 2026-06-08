@@ -393,7 +393,12 @@ static void f2fs_write_end_io(struct bio *bio)
 				folio->index, NODE_TYPE_REGULAR, true);
 			f2fs_bug_on(sbi, folio->index != nid_of_node(folio));
 		}
+<<<<<<< HEAD   (ba10ca7c8cf683a044884a8621924836b5ad5905 Merge 748c5d08f1a9 ("f2fs: fix to do sanity check on dcc->di)
 		if (f2fs_in_warm_node_list(folio))
+||||||| BASE   (748c5d08f1a92eb56d1d381e8811cd1c51cdca7f f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
+=======
+		if (f2fs_in_warm_node_list(sbi, folio))
+>>>>>>> BRANCH (963d2e24d9d92a31e6773b0f642214f10013ebf7 f2fs: fix UAF caused by decrementing sbi->nr_pages[] in f2fs)
 			f2fs_del_fsync_node_entry(sbi, folio);
 
 		dec_page_count(sbi, type);
