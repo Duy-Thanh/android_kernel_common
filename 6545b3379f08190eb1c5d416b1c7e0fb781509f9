@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8836a22f_e3c0025f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-08T18:55:52Z",
+      "side": 1,
+      "message": "\u003e If the only difference is pkvm_host_donate_hyp vs pkvm_host_donate_hyp_share_ro, I\u0027d rather use a simple bool share_ro flag instead of passing callbacks around.\n\nMain motivation was to avoid the conditional donation api call and clear flag came as a bonus :-). What do you think about passing the function pointer instead(pkvm_host_donate_hyp/pkvm_host_donate_hyp_share_ro)?\n\n\u003e So to keep the API simpler, we might clear the page in both cases? And if we still want to avoid the redundant memset in the MMU case, we might do it the other way around: avoid the memset in guest_mmu_zalloc_page() (with a similar comment explaining that the page was already cleared when donated)?\n\nSounds good. Shall do it such a way that memset is avoided in guest_mmu_zalloc_page",
+      "parentUuid": "8270bce5_1f020f3c",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
