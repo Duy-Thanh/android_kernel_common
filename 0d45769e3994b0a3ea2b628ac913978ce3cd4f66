@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "72db41d0_4b2cd725",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-08T20:04:33Z",
+      "side": 1,
+      "message": "Patch description looks completely different from the one linked here: https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h\u003ddev\u0026id\u003dfefdf07236505864476850e96e5a69a09f6fd97f\n\nBACKPORT should not be changing the original description. It should also list the changes you had to do when backporting.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "0d45769e3994b0a3ea2b628ac913978ce3cd4f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22d5a4e7_8e3c8e48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-08T20:04:33Z",
+      "side": 1,
+      "message": "If the change is in the maintainer\u0027s tree then it should be titled FROMGIT and not FROMLIST. It should contain the link to the maintainer\u0027s tree and its SHA.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 128
+      },
+      "revId": "0d45769e3994b0a3ea2b628ac913978ce3cd4f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1af62ef1_9d53fc61",
