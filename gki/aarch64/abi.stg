@@ -52315,6 +52315,13 @@ member {
   bitsize: 1
 }
 member {
+  id: 0x2cfb3158
+  name: "abort_on_kill"
+  type_id: 0x6d7f5ff6
+  offset: 165
+  bitsize: 1
+}
+member {
   id: 0x25d2275d
   name: "abort_reason"
   type_id: 0xb3e7bac9
@@ -259577,6 +259584,7 @@ struct_union {
     member_id: 0x2c9e66d6
     member_id: 0x8b9b5e04
     member_id: 0x096a71c4
+    member_id: 0x2cfb3158
     member_id: 0x8db827d2
     member_id: 0x03f5128b
     member_id: 0x82034435
