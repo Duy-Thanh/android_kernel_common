@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0bc6928_7d69251c",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 3406862
+      },
+      "writtenOn": "2026-06-08T03:03:30Z",
+      "side": 1,
+      "message": "bypass fast",
+      "range": {
+        "startLine": 1446,
+        "startChar": 6,
+        "endLine": 1446,
+        "endChar": 13
+      },
+      "revId": "f8169a5f047260cfce99773f359b2846f940dae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
