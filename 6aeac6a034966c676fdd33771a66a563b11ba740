@@ -588,6 +588,30 @@
       },
       "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4273243e_4701d68e",
+        "filename": "drivers/virt/gunyah/gunyah_kp_el1.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4840250
+      },
+      "writtenOn": "2026-06-08T11:22:47Z",
+      "side": 1,
+      "message": "Hi, Will.\n\nThanks for the comment, I saw your comment about patch.\nThanks for your comment, we will keep this offline. I mark as ACK rejected this change.\n\nAny how this is proprietary change I don\u0027t think Android has Flex requirements to support",
+      "parentUuid": "9d603508_acb324b0",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "6aeac6a034966c676fdd33771a66a563b11ba740",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
