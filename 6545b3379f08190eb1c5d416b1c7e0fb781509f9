@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8270bce5_1f020f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-08T17:17:30Z",
+      "side": 1,
+      "message": "If the only difference is pkvm_host_donate_hyp vs pkvm_host_donate_hyp_share_ro, I\u0027d rather use a simple `bool share_ro` flag instead of passing callbacks around.\n\nAs for the `clear` flag, the only reason why we pass clear\u003dfalse in the MMU case is this:\n\n```\n\t* The page will be cleared by zalloc_page when allocating it from\n\t* the memcache, thus no need to clear it now.\n```\n\nSo to keep the API simpler, we might clear the page in both cases? And if we still want to avoid the redundant memset in the MMU case, we might do it the other way around: avoid the memset in `guest_mmu_zalloc_page()` (with a similar comment explaining that the page was already cleared when donated)?",
+      "parentUuid": "1df53150_7b353ee1",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
