@@ -16,6 +16,24 @@
       "message": "No blank lines in the section with tags please.",
       "revId": "6efe993b88f2c085bccaff1ceef4613f36674642",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9bbacf2_866ce875",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1084763
+      },
+      "writtenOn": "2026-06-08T11:54:03Z",
+      "side": 1,
+      "message": "Removed the blank line in the tags section.",
+      "parentUuid": "e368b39a_6dfbe72c",
+      "revId": "6efe993b88f2c085bccaff1ceef4613f36674642",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
