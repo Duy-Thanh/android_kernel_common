@@ -2149,6 +2149,7 @@
   readahead_expand
   read_comp_algo_dictionary
   reboot_mode
+  refcount_dec_and_mutex_lock
   refcount_dec_not_one
   refcount_warn_saturate
   __refrigerator
@@ -2744,6 +2745,7 @@
   __traceiter_android_rvh_swap_readpage_bdev_sync
   __traceiter_android_rvh_task_fits_cpu
   __traceiter_android_rvh_tick_entry
+  __traceiter_android_rvh_try_alloc_pages_gfp
   __traceiter_android_rvh_try_to_wake_up_success
   __traceiter_android_rvh_uclamp_eff_get
   __traceiter_android_rvh_ufs_complete_init
@@ -2790,6 +2792,7 @@
   __traceiter_android_vh_resume_end
   __traceiter_android_vh_rmqueue
   __traceiter_android_vh_scheduler_tick
+  __traceiter_android_vh_send_signal_locked
   __traceiter_android_vh_setscheduler_uclamp
   __traceiter_android_vh_set_task_comm
   __traceiter_android_vh_show_mem
@@ -2901,6 +2904,7 @@
   __tracepoint_android_rvh_swap_readpage_bdev_sync
   __tracepoint_android_rvh_task_fits_cpu
   __tracepoint_android_rvh_tick_entry
+  __tracepoint_android_rvh_try_alloc_pages_gfp
   __tracepoint_android_rvh_try_to_wake_up_success
   __tracepoint_android_rvh_uclamp_eff_get
   __tracepoint_android_rvh_ufs_complete_init
@@ -2947,6 +2951,7 @@
   __tracepoint_android_vh_resume_end
   __tracepoint_android_vh_rmqueue
   __tracepoint_android_vh_scheduler_tick
+  __tracepoint_android_vh_send_signal_locked
   __tracepoint_android_vh_setscheduler_uclamp
   __tracepoint_android_vh_set_task_comm
   __tracepoint_android_vh_show_mem
