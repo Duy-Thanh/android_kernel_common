@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb65477a_7078cccd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-08T13:35:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a23e7dc_c091c1f8",
+      "revId": "84debc3355d4caf13a5bee09796ecf7e8527c31a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a7634b8_64668d7b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-08T13:25:13Z",
       "side": 1,
       "message": "why wasn\u0027t this backported through stable? checking...",
+      "revId": "84debc3355d4caf13a5bee09796ecf7e8527c31a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8e1226_6ebe76e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-08T13:35:33Z",
+      "side": 1,
+      "message": "it seems it was somehow missed for upstream stable, I\u0027ve sent the patch here: https://lore.kernel.org/all/20260608133216.1396790-1-cmllamas@google.com/",
+      "parentUuid": "9a7634b8_64668d7b",
       "revId": "84debc3355d4caf13a5bee09796ecf7e8527c31a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
