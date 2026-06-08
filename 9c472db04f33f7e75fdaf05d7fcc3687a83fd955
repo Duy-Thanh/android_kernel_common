@@ -16,6 +16,24 @@
       "message": "Why are you not using these?\n\n```\n  __traceiter_android_vh_pcpu_rwsem_lock_acquired\n  __traceiter_android_vh_pcpu_rwsem_lock_released\n  __tracepoint_android_vh_pcpu_rwsem_lock_acquired\n  __tracepoint_android_vh_pcpu_rwsem_lock_released\n ```",
       "revId": "9c472db04f33f7e75fdaf05d7fcc3687a83fd955",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c2fa2d_4553780d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4361992
+      },
+      "writtenOn": "2026-06-08T02:08:01Z",
+      "side": 1,
+      "message": "We primarily use percpu_down_read and percpu_up_read. However, their implementations in percpu-rwsem.h utilize _trace_android_vh_pcpu_rwsem_lock_acquired and _trace_android_vh_pcpu_rwsem_lock_released. These functions are implemented in percpu-rwsem.c and are EXPORT_SYMBOL_GPLed, but they are not included in the ABI. To pass ABI compilation checks, we must add them to the ABI.",
+      "parentUuid": "76255960_d111eacd",
+      "revId": "9c472db04f33f7e75fdaf05d7fcc3687a83fd955",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
