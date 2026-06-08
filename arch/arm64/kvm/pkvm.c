@@ -397,7 +397,7 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 	 * page granularity. So, use alloc_pages_exact() to get individual
 	 * refcounts.
 	 */
-	pgd = alloc_pages_exact(pgd_sz, GFP_KERNEL_ACCOUNT);
+	pgd = alloc_pages_exact(pgd_sz, GFP_KERNEL_ACCOUNT | __GFP_CMA);
 	if (!pgd)
 		return -ENOMEM;
 	atomic64_add(pgd_sz, &host_kvm->stat.protected_hyp_mem);

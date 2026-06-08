@@ -1183,7 +1183,7 @@ static void *hyp_mc_alloc_fn(void *flags, unsigned long order)
 	gfp_mask = __flags & HYP_MEMCACHE_ACCOUNT_KMEMCG ?
 		   GFP_KERNEL_ACCOUNT : GFP_KERNEL;
 
-	addr = (void *)__get_free_pages(gfp_mask, order);
+	addr = (void *)__get_free_pages(gfp_mask | __GFP_CMA, order);
 
 	if (addr && __flags & HYP_MEMCACHE_ACCOUNT_STAGE2)
 		kvm_account_pgtable_pages(addr, 1);
@@ -1193,7 +1193,7 @@ static void *hyp_mc_alloc_fn(void *flags, unsigned long order)
 
 static void *hyp_mc_alloc_gfp_fn(void *flags, unsigned long order)
 {
-	return (void *)__get_free_pages(*(gfp_t *)flags, order);
+	return (void *)__get_free_pages(*(gfp_t *)flags | __GFP_CMA, order);
 }
 
 void free_hyp_memcache(struct kvm_hyp_memcache *mc)
