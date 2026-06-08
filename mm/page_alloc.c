@@ -2694,6 +2694,10 @@ void free_unref_page(struct page *page, unsigned int order)
 	trace_android_vh_free_unref_page_bypass(page, order, migratetype, &skip_free_unref_page);
 	if (skip_free_unref_page)
 		return;
+	if (unlikely(migratetype == MIGRATE_CMA && order > PAGE_ALLOC_COSTLY_ORDER)) {
+		free_one_page(page_zone(page), page, pfn, order, FPI_NONE);
+		return;
+	}
 	if (unlikely(migratetype > MIGRATE_RECLAIMABLE)) {
 		if (unlikely(is_migrate_isolate(migratetype))) {
 			free_one_page(page_zone(page), page, pfn, order, FPI_NONE);
@@ -2769,9 +2773,12 @@ void free_unref_folios(struct folio_batch *folios)
 		folio->private = NULL;
 		migratetype = get_pfnblock_migratetype(&folio->page, pfn);
 
+		bool is_cma_thp = (migratetype == MIGRATE_CMA && order > PAGE_ALLOC_COSTLY_ORDER);
+
 		/* Different zone requires a different pcp lock */
 		if (zone != locked_zone ||
-		    is_migrate_isolate(migratetype)) {
+		    is_migrate_isolate(migratetype) ||
+		    is_cma_thp) {
 			if (pcp) {
 				pcp_spin_unlock(pcp);
 				pcp_trylock_finish(UP_flags);
@@ -2783,7 +2790,7 @@ void free_unref_folios(struct folio_batch *folios)
 			 * Free isolated pages directly to the
 			 * allocator, see comment in free_unref_page.
 			 */
-			if (is_migrate_isolate(migratetype)) {
+			if (is_migrate_isolate(migratetype) || is_cma_thp) {
 				free_one_page(zone, &folio->page, pfn,
 					      order, FPI_NONE);
 				continue;
