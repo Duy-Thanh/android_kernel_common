@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a23e7dc_c091c1f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-08T13:33:44Z",
+      "side": 1,
+      "message": "i\u0027ll fixup the tags according to our guidelines.",
+      "revId": "84debc3355d4caf13a5bee09796ecf7e8527c31a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a7634b8_64668d7b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
