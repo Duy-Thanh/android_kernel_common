@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5bb97f2_3dc1f488",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1760635
+      },
+      "writtenOn": "2026-06-08T01:33:09Z",
+      "side": 1,
+      "message": "Twenty units were retested for 48 hours but failed to reproduce",
+      "revId": "18615693d6731c8b94c81e979196e788e7d0eb95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
