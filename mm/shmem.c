@@ -2508,6 +2508,8 @@ static struct inode *__shmem_get_inode(struct mnt_idmap *idmap,
 	INIT_LIST_HEAD(&info->swaplist);
 	if (sbinfo->noswap)
 		mapping_set_unevictable(inode->i_mapping);
+	if (cma_forced() && sbinfo->noswap)
+		mapping_set_gfp_mask(inode->i_mapping, GFP_KERNEL | __GFP_CMA);
 	simple_xattrs_init(&info->xattrs);
 	cache_no_acl(inode);
 	mapping_set_large_folios(inode->i_mapping);
@@ -4218,6 +4220,8 @@ static int shmem_reconfigure(struct fs_context *fc)
 		ctx->mpol = NULL;
 	}
 
+	WARN_ON_ONCE(cma_forced() && sbinfo->noswap != ctx->noswap);
+
 	if (ctx->noswap)
 		sbinfo->noswap = true;
 
@@ -4397,6 +4401,9 @@ static int shmem_fill_super(struct super_block *sb, struct fs_context *fc)
 	sb->s_root = d_make_root(inode);
 	if (!sb->s_root)
 		goto failed;
+
+	if (cma_forced() && sbinfo->noswap)
+		pr_info("\"%s\" will use CMA for unmovable allocations\n", sb->s_root->d_iname);
 	return 0;
 
 failed:
