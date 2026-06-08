@@ -82,3 +82,51 @@ have been written to their ep0's.
 
 Conversely, the gadget is unregistered after the first USB function
 closes its endpoints.
+
+RW Proxy Endpoints
+==================
+
+If the ``FUNCTIONFS_RW_PROXY_EPS`` flag is passed in the descriptor header
+(requires ``FUNCTIONFS_DESCRIPTORS_MAGIC_V2``), FunctionFS will provision a
+bidirectional rw_proxy file descriptor (e.g., "ep1_rw") alongside each pair
+of IN and OUT endpoints. The rw_proxy file aliases the underlying hardware
+endpoints, allowing userspace to use a single file descriptor for both reading
+(OUT) and writing (IN).
+
+This flag requires the total number of hardware endpoints to be an even number.
+FunctionFS will automatically walk the provided endpoints and group them into
+adjacent pairs (e.g., ep1 and ep2 form the first pair, ep3 and ep4 form the
+second pair). Each pair must consist of exactly one IN endpoint and one OUT
+endpoint.
+
+For each valid pair, a rw_proxy file is created and named after the first
+endpoint in the pair with a "_rw" suffix. For example, if ep1 and ep2 are
+paired, a rw_proxy file named "ep1_rw" is created. If ep3 and ep4 are paired,
+"ep3_rw" is created.
+
+If the ``FUNCTIONFS_VIRTUAL_ADDR`` flag is also enabled, the endpoints will be
+named using their physical endpoint address in hexadecimal instead of their
+index. RW proxy files will inherit this naming convention. For example, if the
+first endpoint of a pair maps to address 0x02, the rw_proxy file will be
+named "ep02_rw".
+
+When this flag is enabled, userspace has the choice of performing data transfers
+via the single rw_proxy file descriptor or the two base file descriptors. The
+rw_proxy file descriptor acts as a pure VFS alias that proxies all operations
+directly to the underlying base file descriptors.
+
+Because it is a pure proxy, there are no data races or buffer corruptions if
+userspace uses both the rw_proxy endpoint and the base endpoints concurrently.
+The native mutexes of the base endpoints perfectly serialize all concurrent
+transfers. However, userspace should generally pick one method and stick to it
+to avoid interleaving its own data stream.
+
+- **IOCTLs (Clear Halt, etc.):** RW proxy endpoints do not support IOCTLs and
+  will return ``-ENOTTY``. To clear a host-initiated halt, userspace must issue
+  the ``FUNCTIONFS_CLEAR_HALT`` ioctl directly on the corresponding base
+  endpoint file descriptor.
+- **Intentional Stalls:** The traditional mechanism for intentionally halting an
+  endpoint by issuing a reverse-direction data operation (e.g., attempting to
+  read from an IN endpoint) continues to work, but it must be issued on the
+  base endpoint. RW proxy endpoints cannot be used to trigger a stall because
+  they are fully bidirectional.
