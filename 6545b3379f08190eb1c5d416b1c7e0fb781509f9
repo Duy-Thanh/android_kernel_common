@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1df53150_7b353ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-08T15:38:30Z",
+      "side": 1,
+      "message": "Reviving this :-)\n\n\u003e\u003e Looking at these code in the IOMMU driver, seems they are almost the same with the code in mmu.c, but didn\u0027t share code. Not sure if there is any consideration for that?\n\n\u003e I suppose it was just faster to implement (i.e. no need to think how factor out the existing code from mmu.c into a common API)?\n\nyeah true. And the donation API was different between the one in mmu.c and iommu(pkvm_host_donate_hyp vs pkvm_host_donate_hyp_share_ro). Thought of not disturbing the mmu.c code for iommu.\n\n@chuanxiao.dong@intel.corp-partner.google.com, are you working on this? If not, I shall take this up.\n\nWe could converge the code by passing the donate function as an argument to admit_host_page. I was thinking of something like this:\n\n```\n+struct refill_memcache_data {\n+       struct pkvm_memcache *host_mc;\n+       pkvm_memcache_donate_fn_t donate;\n+       bool clear;\n+};\n+\n static void *admit_host_page(void *arg)\n {\n-       struct pkvm_memcache *host_mc \u003d arg;\n+       struct refill_memcache_data *data \u003d arg;\n+       struct pkvm_memcache *host_mc \u003d data-\u003ehost_mc;\n        void *page;\n\n        if (!host_mc-\u003ecount || WARN_ON_ONCE(host_mc-\u003ehead.nr_pages !\u003d 1))\n@@ -489,8 +496,8 @@ static void *admit_host_page(void *arg)\n         * The page will be cleared by zalloc_page when allocating it from\n         * the memcache, thus no need to clear it now.\n         */\n-       if (WARN_ON_ONCE(pkvm_host_donate_hyp(pkvm_host_gpa_to_phys(host_mc-\u003ehead.addr),\n-                                             PAGE_SIZE, false)))\n+       if (WARN_ON_ONCE(data-\u003edonate(pkvm_host_gpa_to_phys(host_mc-\u003ehead.addr),\n+                                     PAGE_SIZE, data-\u003eclear)))\n                return NULL;\n\n        page \u003d pop_pkvm_memcache_page(host_mc, pkvm_host_gpa_to_virt);\n@@ -504,8 +511,9 @@ static void *admit_host_page(void *arg)\n }\n\n```\n\nAnd related changes in `refill_memcache` and expose it as an api `pkvm_refill_memcache` so that iommu code can now use it. WDYT?",
+      "parentUuid": "0d4a59b6_25d4f27b",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
