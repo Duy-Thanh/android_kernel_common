@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81e32e6_97862502",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2697,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-06-08T17:47:00Z",
+      "side": 1,
+      "message": "Should we also check `IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE)` ?",
+      "range": {
+        "startLine": 2697,
+        "startChar": 1,
+        "endLine": 2697,
+        "endChar": 3
+      },
+      "revId": "e59a092bd62f0094abdbb578b7d7b13925945d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
