@@ -52,6 +52,24 @@
       "parentUuid": "7db99b7f_07fa11be",
       "revId": "e6865faff1c3c507c99b635b43c2936df9ad5347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581b3922_f544885c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4262158
+      },
+      "writtenOn": "2026-06-08T17:33:07Z",
+      "side": 1,
+      "message": "Hi Giuliano,\n\nI think I missed backporting the patch aosp/4107453, which is why the whole thing looks a bit weird. If possible, could you please review both patches together?",
+      "parentUuid": "f70a6bd3_9d979b01",
+      "revId": "e6865faff1c3c507c99b635b43c2936df9ad5347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
