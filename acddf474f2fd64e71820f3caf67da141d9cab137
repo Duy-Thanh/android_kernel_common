@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea46717f_070734fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-08T20:26:15Z",
+      "side": 1,
+      "message": "You should keep the `Change-Id` unchanged. Should be `I9589164a216afc3f13ce41226bcfc5f8295120f3`",
+      "range": {
+        "startLine": 12,
+        "startChar": 11,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "acddf474f2fd64e71820f3caf67da141d9cab137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01c8379_28a3d451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-08T20:26:15Z",
+      "side": 1,
+      "message": "You need a follop-up patch adding new hooks into your symbols list and updating the ABI.",
+      "revId": "acddf474f2fd64e71820f3caf67da141d9cab137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4155813c_b4e118e6",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-08T20:26:15Z",
+      "side": 1,
+      "message": "This set of hooks is different from the ones you added in 6.12 version of this patch. Please explain why.",
+      "range": {
+        "startLine": 777,
+        "startChar": 0,
+        "endLine": 789,
+        "endChar": 31
+      },
+      "revId": "acddf474f2fd64e71820f3caf67da141d9cab137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
