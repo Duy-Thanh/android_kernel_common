@@ -196,7 +196,7 @@ struct ffs_epfile {
 	unsigned char			in;	/* P: ffs->eps_lock */
 	unsigned char			isoc;	/* P: ffs->eps_lock */
 
-	unsigned char			_pad;
+	u8				zlp_enabled; /* P: ffs->eps_lock */
 };
 
 struct ffs_buffer {
@@ -1075,6 +1075,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1126,6 +1128,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1308,6 +1312,27 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
+
+	/*
+	 * We handle this IOCTL before waiting for the endpoint to allow userspace
+	 * to configure ZLP behavior immediately without blocking indefinitely
+	 * while waiting for the USB host to connect and enable the endpoint.
+	 */
+	if (code == FUNCTIONFS_ENDPOINT_ENABLE_ZLP) {
+		__u32 enable_zlp = 0;
+
+		if (!epfile->in)
+			return -EINVAL;
+
+		if (copy_from_user(&enable_zlp, (void __user *)value, sizeof(enable_zlp)))
+			return -EFAULT;
+
+		spin_lock_irq(&epfile->ffs->eps_lock);
+		epfile->zlp_enabled = !!enable_zlp;
+		spin_unlock_irq(&epfile->ffs->eps_lock);
+
+		return 0;
+	}
 
 	/* Wait for endpoint to be enabled */
 	ep = epfile->ep;
