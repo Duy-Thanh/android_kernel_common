@@ -170,6 +170,7 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
 		if (folio_test_large(folio)) {
 			struct f2fs_folio_state *ffs = folio->private;
 
+<<<<<<< HEAD   (7389350cda644e11038d7e1cc005d6b7d7bc4d39 Merge 047c0aef6af3 ("f2fs: fix to avoid memory leak in f2fs_)
 			spin_lock_irqsave(&ffs->state_lock, flags);
 			ffs->read_pages_pending -= nr_pages;
 			finished = !ffs->read_pages_pending;
@@ -179,6 +180,9 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
 		while (nr_pages--)
 			dec_page_count(F2FS_F_SB(folio), __read_io_type(folio));
 
+||||||| BASE   (047c0aef6af37a2a35181aa085c616ad286386f1 f2fs: fix to avoid memory leak in f2fs_rename())
+=======
+>>>>>>> BRANCH (59970b2586fef4b13e96527b9d232bed30b640cd f2fs: fix to avoid uninit-value access in f2fs_sanity_check_)
 		if (bio->bi_status == BLK_STS_OK &&
 			F2FS_F_SB(folio)->node_inode && is_node_folio(folio) &&
 			f2fs_sanity_check_node_footer(F2FS_F_SB(folio),
