@@ -16,6 +16,24 @@
       "message": "Belated note: this should have been `pKVM: x86:`, not just `pKVM:`. Same for aosp/4087793 and aosp/4087794.",
       "revId": "5f83cd2f8ad60ac9d30fc7e50df5d5fbf7e2c5d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "104bfbce_818708cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-08T19:03:33Z",
+      "side": 1,
+      "message": "Ahh yes, sorry about this. Will have it correct while working on kernel uprev.",
+      "parentUuid": "a93d1035_604955b8",
+      "revId": "5f83cd2f8ad60ac9d30fc7e50df5d5fbf7e2c5d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
