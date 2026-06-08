@@ -34,6 +34,24 @@
       ],
       "revId": "4d9b8c0c8bb2b08ad1f82497b4850f40196f87dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b1ddd5_f9899515",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4065,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-08T19:12:41Z",
+      "side": 1,
+      "message": "So the change here matches the logic used in `rescale_entity()` which we\u0027re trying to preserve without actually writing to se-\u003evlag.\n\nYou\u0027re point that the conversion ratio seems to be inverted is fair, and confuses me some, but its that way in 6.18-stable: https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/kernel/sched/fair.c?h\u003dlinux-6.18.y#n3872\n\nas well as upstream:\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/kernel/sched/fair.c#n4047\n\n\nSo I\u0027ll stare a bit more at it, but if that is an issue, its a bigger separate issue then what this patch is addressing.",
+      "parentUuid": "bc3553ca_85696b99",
+      "revId": "4d9b8c0c8bb2b08ad1f82497b4850f40196f87dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
