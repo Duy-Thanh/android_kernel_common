@@ -2200,8 +2200,21 @@ static int i3c_master_i2c_adapter_init(struct i3c_master_controller *master)
 	 * We silently ignore failures here. The bus should keep working
 	 * correctly even if one or more i2c devices are not registered.
 	 */
+<<<<<<< HEAD   (b7466bf39a8f2040a11682cdcab355210e45cd31 Merge f0d52cc242f2 ("bpf, sockmap: Fix an infinite loop erro)
 	i3c_bus_for_each_i2cdev(&master->bus, i2cdev)
 		i2cdev->dev = i2c_new_client_device(adap, &i2cdev->boardinfo->base);
+||||||| BASE   (f0d52cc242f279c422b487dcaaccd98b99672fd0 bpf, sockmap: Fix an infinite loop error when len is 0 in tc)
+	list_for_each_entry(i2cboardinfo, &master->boardinfo.i2c, node)
+		i2cdev->dev = i2c_new_client_device(adap, &i2cboardinfo->base);
+=======
+	list_for_each_entry(i2cboardinfo, &master->boardinfo.i2c, node) {
+		i2cdev = i3c_master_find_i2c_dev_by_addr(master,
+							 i2cboardinfo->base.addr);
+		if (WARN_ON(!i2cdev))
+			continue;
+		i2cdev->dev = i2c_new_client_device(adap, &i2cboardinfo->base);
+	}
+>>>>>>> BRANCH (493b3a682ededc804555755f5d2193201339612d ALSA: caiaq: take a reference on the USB device in create_ca)
 
 	return 0;
 }
