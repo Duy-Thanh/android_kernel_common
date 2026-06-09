@@ -22,6 +22,30 @@
       },
       "revId": "e59a092bd62f0094abdbb578b7d7b13925945d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d9d676_4e2655b2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2697,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-09T15:19:09Z",
+      "side": 1,
+      "message": "Yeah also `#ifdef CONFIG_CMA` for `MIGRATE_CMA`",
+      "parentUuid": "c81e32e6_97862502",
+      "range": {
+        "startLine": 2697,
+        "startChar": 1,
+        "endLine": 2697,
+        "endChar": 3
+      },
+      "revId": "e59a092bd62f0094abdbb578b7d7b13925945d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
