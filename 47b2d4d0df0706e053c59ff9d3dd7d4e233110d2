@@ -16,6 +16,24 @@
       "message": "Thank you for the patches, can you just call them as BACKPORT instead? and add a `cherry-picked from xxxx` with upstream commit sha. In the backport notes, mention that part of the patches were dropped during LTS merge.",
       "revId": "47b2d4d0df0706e053c59ff9d3dd7d4e233110d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a51105_2589efbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1941466
+      },
+      "writtenOn": "2026-06-09T12:07:35Z",
+      "side": 1,
+      "message": "Hi, the patch description has been updated.",
+      "parentUuid": "a12c889f_be9b928f",
+      "revId": "47b2d4d0df0706e053c59ff9d3dd7d4e233110d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
