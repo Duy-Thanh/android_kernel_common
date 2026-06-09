@@ -23,6 +23,23 @@
 
 #include "trace.h"
 
+<<<<<<< HEAD   (e64da38e2e7380b65b4bda2884ee5e287656588f UPSTREAM: binder: fix UAF in binder_free_transaction())
+||||||| BASE   (21b931853e8dd5812106992c10063b465553543e BACKPORT: usb: host: xhci-plat: Parse xhci-missing_cas_quirk)
+static DEFINE_IDA(gadget_id_numbers);
+
+static struct bus_type gadget_bus_type;
+
+=======
+static DEFINE_IDA(gadget_id_numbers);
+/*
+ * ANDROID: Global lock used instead of a per-gadget lock to maintain KABI
+ * compatibility. Serializes state changes during gadget teardown.
+ */
+static DEFINE_SPINLOCK(android_udc_state_lock);
+
+static struct bus_type gadget_bus_type;
+
+>>>>>>> CHANGE (47455f9704a1ebd8dc7516a48613ef6b79302a56 ANDROID: usb: gadget: udc: fix UAF in usb_gadget_state_work )
 /**
  * struct usb_udc - describes one usb device controller
  * @driver: the gadget driver pointer. For use by the class code
@@ -1032,7 +1049,18 @@ EXPORT_SYMBOL_GPL(usb_gadget_check_config);
 static void usb_gadget_state_work(struct work_struct *work)
 {
 	struct usb_gadget *gadget = work_to_gadget(work);
-	struct usb_udc *udc = gadget->udc;
+	struct usb_udc *udc;
+	unsigned long flags;
+
+	/*
+	 * ANDROID: Serialize gadget->udc read with teardown. If teardown has already
+	 * nullified the pointer, skip notification. If the read occurs before
+	 * teardown, flush_work() in usb_del_gadget() ensures this work
+	 * completes before the UDC memory is freed.
+	 */
+	spin_lock_irqsave(&android_udc_state_lock, flags);
+	udc = gadget->udc;
+	spin_unlock_irqrestore(&android_udc_state_lock, flags);
 
 	if (udc)
 		sysfs_notify(&udc->dev.kobj, NULL, "state");
@@ -1041,8 +1069,25 @@ static void usb_gadget_state_work(struct work_struct *work)
 void usb_gadget_set_state(struct usb_gadget *gadget,
 		enum usb_device_state state)
 {
+	unsigned long flags;
+
+	spin_lock_irqsave(&android_udc_state_lock, flags);
 	gadget->state = state;
+<<<<<<< HEAD   (e64da38e2e7380b65b4bda2884ee5e287656588f UPSTREAM: binder: fix UAF in binder_free_transaction())
 	schedule_work(&gadget->work);
+||||||| BASE   (21b931853e8dd5812106992c10063b465553543e BACKPORT: usb: host: xhci-plat: Parse xhci-missing_cas_quirk)
+	schedule_work(&gadget->work);
+	trace_usb_gadget_set_state(gadget, 0);
+=======
+	/*
+	 * ANDROID: Check if the gadget is undergoing teardown (gadget->udc is NULL)
+	 * to prevent scheduling new work after cleanup has commenced.
+	 */
+	if (gadget->udc)
+		schedule_work(&gadget->work);
+	spin_unlock_irqrestore(&android_udc_state_lock, flags);
+	trace_usb_gadget_set_state(gadget, 0);
+>>>>>>> CHANGE (47455f9704a1ebd8dc7516a48613ef6b79302a56 ANDROID: usb: gadget: udc: fix UAF in usb_gadget_state_work )
 }
 EXPORT_SYMBOL_GPL(usb_gadget_set_state);
 
@@ -1071,12 +1116,20 @@ static int usb_udc_connect_control(struct usb_udc *udc)
  */
 void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
 {
-	struct usb_udc *udc = gadget->udc;
+	struct usb_udc *udc;
+	unsigned long flags;
 
+	/*
+	 * ANDROID: Protect gadget->udc read to ensure the UDC structure is not
+	 * freed concurrently during teardown.
+	 */
+	spin_lock_irqsave(&android_udc_state_lock, flags);
+	udc = gadget->udc;
 	if (udc) {
 		udc->vbus = status;
 		usb_udc_connect_control(udc);
 	}
+	spin_unlock_irqrestore(&android_udc_state_lock, flags);
 }
 EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
 
@@ -1457,6 +1510,7 @@ static void usb_gadget_remove_driver(struct usb_udc *udc)
 void usb_del_gadget(struct usb_gadget *gadget)
 {
 	struct usb_udc *udc = gadget->udc;
+	unsigned long flags;
 
 	if (!udc)
 		return;
@@ -1475,6 +1529,21 @@ void usb_del_gadget(struct usb_gadget *gadget)
 	mutex_unlock(&udc_lock);
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
+<<<<<<< HEAD   (e64da38e2e7380b65b4bda2884ee5e287656588f UPSTREAM: binder: fix UAF in binder_free_transaction())
+||||||| BASE   (21b931853e8dd5812106992c10063b465553543e BACKPORT: usb: host: xhci-plat: Parse xhci-missing_cas_quirk)
+	sysfs_remove_link(&udc->dev.kobj, "gadget");
+	device_del(&gadget->dev);
+=======
+	sysfs_remove_link(&udc->dev.kobj, "gadget");
+	device_del(&gadget->dev);
+	/*
+	 * ANDROID: Clear gadget->udc (acting as teardown flag) before flushing the work
+	 * to prevent new work from being scheduled while we are cleaning up.
+	 */
+	spin_lock_irqsave(&android_udc_state_lock, flags);
+	gadget->udc = NULL;
+	spin_unlock_irqrestore(&android_udc_state_lock, flags);
+>>>>>>> CHANGE (47455f9704a1ebd8dc7516a48613ef6b79302a56 ANDROID: usb: gadget: udc: fix UAF in usb_gadget_state_work )
 	flush_work(&gadget->work);
 	device_unregister(&udc->dev);
 	device_del(&gadget->dev);
