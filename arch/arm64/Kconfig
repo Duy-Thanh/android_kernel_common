@@ -1177,7 +1177,12 @@ config ARM64_ERRATUM_4311569
 config ARM64_ERRATUM_4193714
 	bool "C1-Pro: 4193714: SME DVMSync early acknowledgement"
 	depends on ARM64_SME
+<<<<<<< HEAD   (e99aab26ecd1f3967045b8c07aa8e13e301ed770 Merge c6c87a23de4b ("arm64: errata: Work around early CME DV)
 	default n
+||||||| BASE   (42c0dddfeb0769ff388e9244b1edf1482d7b4358 ANDROID: GKI: vivo add symbols to symbol list)
+=======
+	default y
+>>>>>>> BRANCH (e932dac5a9a775d515ec0def692f9e3e974cb3e2 ANDROID: GKI: update symbol list for galaxy)
 	help
 	  Enable workaround for C1-Pro acknowledging the DVMSync before
 	  the SME memory accesses are complete. This will cause TLB
