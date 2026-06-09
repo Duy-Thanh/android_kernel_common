@@ -7383,7 +7383,7 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 			       struct task_struct *p)
 {
-	struct rq *this_rq, *target_rq;
+	struct rq *this_rq, *target_rq = NULL;
 	struct rq_flags this_rf;
 	int cpu, wake_flag = WF_TTWU;
 
@@ -7392,7 +7392,11 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 
 	_trace_sched_pe_return_migration(p);
 
+	if (p == rq->donor)
+		proxy_resched_idle(rq);
+
 	proxy_release_rq_lock(rq, rf);
+
 	/*
 	 * We drop the rq lock, and re-grab task_rq_lock to get
 	 * the pi_lock (needed for select_task_rq) as well.
@@ -7427,22 +7431,18 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 	}
 
 	update_rq_clock(this_rq);
-	proxy_resched_idle(this_rq);
 	deactivate_task(this_rq, p, DEQUEUE_NOCLOCK);
 	cpu = select_task_rq(p, p->wake_cpu, &wake_flag);
 	set_task_cpu(p, cpu);
 	target_rq = cpu_rq(cpu);
 	clear_task_blocked_on(p, NULL);
-	task_rq_unlock(this_rq, p, &this_rf);
-
-	attach_one_task(target_rq, p);
-
-	/* Finally, re-grab the origianl rq lock and return to pick-again */
-	proxy_reacquire_rq_lock(rq, rf);
-	return;
 
 err_out:
 	task_rq_unlock(this_rq, p, &this_rf);
+
+	if (target_rq)
+		attach_one_task(target_rq, p);
+
 	proxy_reacquire_rq_lock(rq, rf);
 }
 #else /* !CONFIG_SMP */
@@ -7834,9 +7834,11 @@ static void __sched notrace __schedule(int sched_mode)
 	trace_sched_start_task_selection(prev, cpu, task_is_blocked(prev));
 pick_again:
 	next = pick_next_task(rq, rq->donor, &rf);
-	rq_set_donor(rq, next);
-	next->blocked_donor = NULL;
 	if (sched_proxy_exec()) {
+		struct task_struct *prev_donor = rq->donor;
+
+		rq_set_donor(rq, next);
+		next->blocked_donor = NULL;
 		if (unlikely(next->blocked_on)) {
 			next = find_proxy_task(rq, next, &rf);
 			if (!next) {
@@ -7866,13 +7868,15 @@ pick_again:
 			donor->sched_class->put_prev_task(rq, donor, donor);
 			donor->sched_class->set_next_task(rq, donor, true);
 		}
+	} else {
+		rq_set_donor(rq, next);
 	}
-	trace_sched_finish_task_selection(rq->donor, next, cpu);
 picked:
 	clear_tsk_need_resched(prev);
 	clear_preempt_need_resched();
 	trace_android_vh_clear_curr_lazy(prev);
 keep_resched:
+	trace_sched_finish_task_selection(rq->donor, next, cpu);
 #ifdef CONFIG_SCHED_DEBUG
 	rq->last_seen_need_resched_ns = 0;
 #endif
