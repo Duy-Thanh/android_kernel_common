@@ -1293,6 +1293,7 @@ int get_swap_pages(int n_goal, swp_entry_t swp_entries[], int entry_order)
 	int n_ret = 0;
 	int node;
 	bool skip_swap = false;
+	bool bypass = false;
 
 	spin_lock(&swap_avail_lock);
 
@@ -1309,6 +1310,9 @@ int get_swap_pages(int n_goal, swp_entry_t swp_entries[], int entry_order)
 start_over:
 	node = numa_node_id();
 	plist_for_each_entry_safe(si, next, &swap_avail_heads[node], avail_lists[node]) {
+		trace_android_vh_pick_swap_device_bypass(swp_entries, si, &bypass);
+		if (bypass)
+			goto nextsi;
 
 		trace_android_vh_get_swap_pages_bypass(si, entry_order, &skip_swap);
 		if (skip_swap)
@@ -1608,6 +1612,7 @@ static void swap_entry_range_free(struct swap_info_struct *p, swp_entry_t entry,
 	unsigned char *map = p->swap_map + offset;
 	unsigned char *map_end = map + nr_pages;
 	struct swap_cluster_info *ci;
+	trace_android_vh_check_swap_entry_range_free(p, &entry, nr_pages);
 
 	ci = lock_cluster(p, offset);
 	do {
