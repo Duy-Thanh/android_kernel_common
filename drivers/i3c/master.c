@@ -2197,8 +2197,21 @@ static int i3c_master_i2c_adapter_init(struct i3c_master_controller *master)
 	 * We silently ignore failures here. The bus should keep working
 	 * correctly even if one or more i2c devices are not registered.
 	 */
+<<<<<<< HEAD   (30f5554a846e565d04f99727f2c8d875e7472035 Merge 5.15.208 into android13-5.15-lts)
 	i3c_bus_for_each_i2cdev(&master->bus, i2cdev)
 		i2cdev->dev = i2c_new_client_device(adap, &i2cdev->boardinfo->base);
+||||||| BASE   (241d66fa280c91b65942d641e92d06c9ae6a0b95 Linux 5.15.208)
+	list_for_each_entry(i2cboardinfo, &master->boardinfo.i2c, node)
+		i2cdev->dev = i2c_new_client_device(adap, &i2cboardinfo->base);
+=======
+	list_for_each_entry(i2cboardinfo, &master->boardinfo.i2c, node) {
+		i2cdev = i3c_master_find_i2c_dev_by_addr(master,
+							 i2cboardinfo->base.addr);
+		if (WARN_ON(!i2cdev))
+			continue;
+		i2cdev->dev = i2c_new_client_device(adap, &i2cboardinfo->base);
+	}
+>>>>>>> BRANCH (0e39d8dd87622feebe09fa75ec566504bb65c25e MIPS: Always record SEGBITS in cpu_data.vmbits)
 
 	return 0;
 }
