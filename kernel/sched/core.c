@@ -4806,14 +4806,6 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	scoped_guard (raw_spinlock_irqsave, &p->pi_lock) {
 		smp_mb__after_spinlock();
 
-		/*
-		 * We could get a wakeup from a signal which wouldn't
-		 * mark the blocked_on state as PROXY_WAKING. So
-		 * set the woken task as PROXY_WAKING here so we are
-		 * sure the task will wake and run.
-		 */
-		set_task_blocked_on_waking(p, NULL);
-
 		if (!ttwu_state_match(p, state, &success))
 			break;
 
