@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0f52653_e19ee2a0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-09T11:48:25Z",
+      "side": 1,
+      "message": "You are right. Just curious, are you mentioning about a bug in pKVM that could cause the state change or is it any action from host or pVM? I think host or pVM cannot trigger any action that could change the state as we have protective checks in all the functions that manipulate the page states.",
+      "parentUuid": "f77c5a9c_585e2369",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "writtenOn": "2026-06-09T11:34:54Z",
       "side": 1,
       "message": "Also just noticed that you are using a BUG_ON instead of returning an error. Whereas this condition may be caused by a malicious host, not by a pKVM bug? So it\u0027s probably better to just return an error to the host instead? (Which is easy if we re-check this before copying pvmfw and mapping pages for the guest, not after?).",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85057485_e5fd8a08",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-09T11:48:25Z",
+      "side": 1,
+      "message": "\u003e Also just noticed that you are using a BUG_ON instead of returning an error. Whereas this condition may be caused by a malicious host, not by a pKVM bug? \n\nI think we will never reach here through invocation by a malicious host action. We have a check above to make sure that the page state is host owned and we fail early if thats not the case. And since host do not initiate donation from pkvm or guest back to host, I thought this should be a pkvm BUG. Which scenario do you feel that we could reach here as part of malicious host triggering?",
+      "parentUuid": "f1277a20_8be8f8a0",
       "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
