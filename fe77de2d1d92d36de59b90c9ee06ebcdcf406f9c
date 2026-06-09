@@ -55,6 +55,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f77c5a9c_585e2369",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T11:34:54Z",
+      "side": 1,
+      "message": "Its state is (PKVM_PAGE_NONE, PKVM_ID_GUEST) as long as we keep host_mmu_lock locked. But here we have already unlocked host_mmu_lock and even guest_mmu_lock?",
+      "parentUuid": "20dc6512_4771250d",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1277a20_8be8f8a0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T11:34:54Z",
+      "side": 1,
+      "message": "Also just noticed that you are using a BUG_ON instead of returning an error. Whereas this condition may be caused by a malicious host, not by a pKVM bug? So it\u0027s probably better to just return an error to the host instead? (Which is easy if we re-check this before copying pvmfw and mapping pages for the guest, not after?).",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cd1edde_25ff415d",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
@@ -84,6 +119,24 @@
       "side": 1,
       "message": "\u003e We are doing all this after we already mapped the pages for the guest. Isn\u0027t that too late already? The guest may be already accessing these pages (including e.g. writing sensitive data to them etc)?\n\nWe reach here only if the guest mapping fails - that means guest wouldn\u0027t be accessing it right? \n\nAre you mentioning about partial map before pkvm_pgtable_map returns failure?\n\n\u003e Also it doesn\u0027t look like we are even unmapping those pages from the guest here?\n\nI was wondering if we need to? previous code also did not unmap if ret was non-zero.\n\n\u003e And even regardless of that, the fact that we are copying pvmfw and mapping pages for the guest without holding host_mmu_lock still feels tricky, and hard to be sure it is gonna be really secure in all cases. (Which seems especially worrisome given how sensitive the pvmfw data is.)\n\nBased on the page state, i couldn\u0027t find a scenario where this would leak pages. But there might be cases which couldn\u0027t envision. So I agree, it might be tricky.\n\n\u003e So why not do it the simple way: after flushing IOMMU TLB, lock host_mmu_lock again, together with locking guest_mmu_lock (just like before this patch), then re-check the host page state, and only after that proceed to copying pvmfw and mapping the pages in the guest MMU (and keep holding both host_mmu_lock and guest_mmu_lock while doing that - again, like before this patch)?\n\nMakes sense. will do.",
       "parentUuid": "1cd1edde_25ff415d",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b67f3b_6a2fdfa8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1515,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T11:34:54Z",
+      "side": 1,
+      "message": "\u003e We reach here only if the guest mapping fails\n\nAh, I haven\u0027t thought about that.\n\nBut still, yes, there may be already a successful partial mapping. Which is a problem _at least_ because we clear pvmfw above without taking that into account?\n\n...So, all this just seems way too fragile.",
+      "parentUuid": "d728bc97_f801cc86",
       "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
