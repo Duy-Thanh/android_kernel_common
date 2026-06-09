@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e74723ee_b3140a9b",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2026-06-09T22:50:17Z",
+      "side": 1,
+      "message": "Can we ensure that the caller cannot forget to call `begin_cpu_access()` by moving the `memcpy_*` methods to `CpuAccessGuard`, for example?",
+      "range": {
+        "startLine": 251,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 29
+      },
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
