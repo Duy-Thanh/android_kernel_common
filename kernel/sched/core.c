@@ -4214,11 +4214,11 @@ static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
 
 	guard(raw_spinlock)(&p->blocked_lock);
 
-	/* If task isn't PROXY_WAKING, we don't need to do return migration */
-	if (p->blocked_on != PROXY_WAKING)
+	/* If task isn't blocked_on, we don't need to do return migration */
+	if (!p->blocked_on)
 		return false;
 
-	__clear_task_blocked_on(p, PROXY_WAKING);
+	__clear_task_blocked_on(p, NULL);
 
 	/* If already current, don't need to return migrate */
 	if (task_current(rq, p))
@@ -4794,6 +4794,15 @@ int try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	 */
 	scoped_guard (raw_spinlock_irqsave, &p->pi_lock) {
 		smp_mb__after_spinlock();
+
+		/*
+		 * We could get a wakeup from a signal which wouldn't
+		 * mark the blocked_on state as PROXY_WAKING. So
+		 * set the woken task as PROXY_WAKING here so we are
+		 * sure the task will wake and run.
+		 */
+		set_task_blocked_on_waking(p, NULL);
+
 		if (!ttwu_state_match(p, state, &success)) {
 			/*
 			 * If we're already TASK_RUNNING, and PROXY_WAKING
@@ -7240,6 +7249,8 @@ static bool try_to_block_task(struct rq *rq, struct task_struct *p,
 	if (signal_pending_state(task_state, p)) {
 		WRITE_ONCE(p->__state, TASK_RUNNING);
 		*task_state_p = TASK_RUNNING;
+		set_task_blocked_on_waking(p, NULL);
+
 		return false;
 	}
 
@@ -7283,6 +7294,32 @@ static inline struct task_struct *proxy_resched_idle(struct rq *rq)
 	rq_set_donor(rq, rq->idle);
 	set_tsk_need_resched(rq->idle);
 	return rq->idle;
+}
+
+static inline void proxy_release_rq_lock(struct rq *rq, struct rq_flags *rf)
+{
+	/*
+	 * The class scheduler may have queued a balance callback
+	 * from pick_next_task() called earlier.
+	 *
+	 * So here we have to zap callbacks before unlocking the rq
+	 * as another CPU may jump in and call sched_balance_rq
+	 * which can trip the warning in rq_pin_lock() if we
+	 * leave callbacks set.
+	 *
+	 * After we later reaquire the rq lock, we will force __schedule()
+	 * to pick_again, so the callbacks will get re-established.
+	 */
+	zap_balance_callbacks(rq);
+	rq_unpin_lock(rq, rf);
+	raw_spin_rq_unlock(rq);
+}
+
+static inline void proxy_reacquire_rq_lock(struct rq *rq, struct rq_flags *rf)
+{
+	raw_spin_rq_lock(rq);
+	rq_repin_lock(rq, rf);
+	update_rq_clock(rq);
 }
 
 #ifdef CONFIG_SMP
@@ -7330,27 +7367,18 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 		 */
 		list_add(&p->se.group_node, &migrate_list);
 	}
-	/*
-	 * We have to zap callbacks before unlocking the rq
-	 * as another CPU may jump in and call sched_balance_rq
-	 * which can trip the warning in rq_pin_lock() if we
-	 * leave callbacks set.
-	 */
-	zap_balance_callbacks(rq);
-	rq_unpin_lock(rq, rf);
-	raw_spin_rq_unlock(rq);
+	proxy_release_rq_lock(rq, rf);
+
 
 	__attach_tasks(target_rq, &migrate_list);
 
-	raw_spin_rq_lock(rq);
-	rq_repin_lock(rq, rf);
-	update_rq_clock(rq);
+	proxy_reacquire_rq_lock(rq, rf);
 }
 
 static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 			       struct task_struct *p)
 {
-	struct rq *this_rq, *target_rq;
+	struct rq *this_rq, *target_rq = NULL;
 	struct rq_flags this_rf;
 	int cpu, wake_flag = WF_TTWU;
 
@@ -7359,15 +7387,10 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 
 	_trace_sched_pe_return_migration(p);
 
-	/*
-	 * We have to zap callbacks before unlocking the rq
-	 * as another CPU may jump in and call sched_balance_rq
-	 * which can trip the warning in rq_pin_lock() if we
-	 * leave callbacks set.
-	 */
-	zap_balance_callbacks(rq);
-	rq_unpin_lock(rq, rf);
-	raw_spin_rq_unlock(rq);
+	if (p == rq->donor)
+		proxy_resched_idle(rq);
+
+	proxy_release_rq_lock(rq, rf);
 
 	/*
 	 * We drop the rq lock, and re-grab task_rq_lock to get
@@ -7403,27 +7426,19 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 	}
 
 	update_rq_clock(this_rq);
-	proxy_resched_idle(this_rq);
 	deactivate_task(this_rq, p, DEQUEUE_NOCLOCK);
 	cpu = select_task_rq(p, p->wake_cpu, &wake_flag);
 	set_task_cpu(p, cpu);
 	target_rq = cpu_rq(cpu);
 	clear_task_blocked_on(p, NULL);
-	task_rq_unlock(this_rq, p, &this_rf);
-
-	attach_one_task(target_rq, p);
-
-	/* Finally, re-grab the origianl rq lock and return to pick-again */
-	raw_spin_rq_lock(rq);
-	rq_repin_lock(rq, rf);
-	update_rq_clock(rq);
-	return;
 
 err_out:
 	task_rq_unlock(this_rq, p, &this_rf);
-	raw_spin_rq_lock(rq);
-	rq_repin_lock(rq, rf);
-	update_rq_clock(rq);
+
+	if (target_rq)
+		attach_one_task(target_rq, p);
+
+	proxy_reacquire_rq_lock(rq, rf);
 }
 #else /* !CONFIG_SMP */
 static inline void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
@@ -7814,9 +7829,11 @@ static void __sched notrace __schedule(int sched_mode)
 	trace_sched_start_task_selection(prev, cpu, task_is_blocked(prev));
 pick_again:
 	next = pick_next_task(rq, rq->donor, &rf);
-	rq_set_donor(rq, next);
-	next->blocked_donor = NULL;
 	if (sched_proxy_exec()) {
+		struct task_struct *prev_donor = rq->donor;
+
+		rq_set_donor(rq, next);
+		next->blocked_donor = NULL;
 		if (unlikely(next->blocked_on)) {
 			next = find_proxy_task(rq, next, &rf);
 			if (!next) {
@@ -7846,13 +7863,15 @@ pick_again:
 			donor->sched_class->put_prev_task(rq, donor, donor);
 			donor->sched_class->set_next_task(rq, donor, true);
 		}
+	} else {
+		rq_set_donor(rq, next);
 	}
-	trace_sched_finish_task_selection(rq->donor, next, cpu);
 picked:
 	clear_tsk_need_resched(prev);
 	clear_preempt_need_resched();
 	trace_android_vh_clear_curr_lazy(prev);
 keep_resched:
+	trace_sched_finish_task_selection(rq->donor, next, cpu);
 #ifdef CONFIG_SCHED_DEBUG
 	rq->last_seen_need_resched_ns = 0;
 #endif
