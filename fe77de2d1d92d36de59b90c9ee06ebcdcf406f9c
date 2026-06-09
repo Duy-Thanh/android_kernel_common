@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "580b2cb9_bd089b9b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-09T15:32:57Z",
+      "side": 1,
+      "message": "\u003e After looking at your patch again, looks like I misunderstood your intentions. Looks like your assumption was that it is already perfectly safe to decouple host and guest mmu lock? And this entire if (unlikely(ret)) check is just an extra optional change?\n\nIts not an optional change. Before this patch, we check the host and guest page state atomically before unmapping from host. With this change, we check host state, unmap it and then check guest state and if guest check fails, we map it back to restore it back to the host(to have the same behaviour as previous code).\n\nBut we also try to revert the page back to host if guest pagetable update fails. And thats a change in behaviour. I can revert this change if thats what you were pointing to?",
+      "parentUuid": "fec0f390_13652900",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
