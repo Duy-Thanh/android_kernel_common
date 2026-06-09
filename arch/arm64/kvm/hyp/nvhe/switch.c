@@ -257,6 +257,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	struct kvm_cpu_context *guest_ctxt;
 	struct kvm_s2_mmu *mmu;
 	bool pmu_switch_needed;
+	u64 host_pmcnten = 0;
 	u64 exit_code;
 
 	/*
@@ -275,6 +276,16 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	guest_ctxt = &vcpu->arch.ctxt;
 
 	pmu_switch_needed = __pmu_switch_to_guest(vcpu);
+
+	/*
+	 * MDCR_EL2.HPME=0 disables a protected guest's event counters but not
+	 * PMCCNTR_EL0/PMICNTR_EL0, which would otherwise leak guest cycles and
+	 * retired instructions to the untrusted host. Restore the enables on exit.
+	 */
+	if (vcpu_is_protected(vcpu)) {
+		host_pmcnten = read_sysreg(pmcntenset_el0);
+		write_sysreg(host_pmcnten, pmcntenclr_el0);
+	}
 
 	__sysreg_save_state_nvhe(host_ctxt);
 	/*
@@ -358,6 +369,9 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 
 	if (pmu_switch_needed)
 		__pmu_switch_to_host(vcpu);
+
+	if (vcpu_is_protected(vcpu))
+		write_sysreg(host_pmcnten, pmcntenset_el0);
 
 	/* Returning to host will clear PSR.I, remask PMR if needed */
 	if (system_uses_irq_prio_masking())
