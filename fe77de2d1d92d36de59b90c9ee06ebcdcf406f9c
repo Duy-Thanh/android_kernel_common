@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc5b86ea_d8cea563",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T14:33:27Z",
+      "side": 1,
+      "message": "This page state will not remain (PKVM_PAGE_NONE, PKVM_ID_GUEST) forever, it changes back to (PKVM_PAGE_OWNED, PKVM_ID_HOST) at least when destroying the pVM (in host_reclaim_guest_walker()).\n\nNow thinking more about it: probably it is guaranteed that host_reclaim_guest_walker() will not run in parallel with pkvm_host_donate_guest() _for the same VM_, since VM is only destroyed after all its vCPU have been torn down, while pkvm_host_donate_guest() is only executed in a context of some vCPU loaded on the current CPU (so it is guaranteed that this vCPU will not be torn down as long as pkvm_host_donate_guest() is executing).\n\nSo _maybe_ currently such a race is already prevented, unless there is a bug in pKVM. But still, that is not quite obvious. It is better to avoid relying on such tricky assumptions?\n\nAlso, at least once we support balloon for pVMs, that will be no longer the case, since the page state will also change back to (PKVM_PAGE_OWNED, PKVM_ID_HOST) as a result of pVM relinquishing its pages to the host, and that may well occur in parallel with pkvm_host_donate_guest() on another CPU?",
+      "parentUuid": "c0f52653_e19ee2a0",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "\u003e Also just noticed that you are using a BUG_ON instead of returning an error. Whereas this condition may be caused by a malicious host, not by a pKVM bug? \n\nI think we will never reach here through invocation by a malicious host action. We have a check above to make sure that the page state is host owned and we fail early if thats not the case. And since host do not initiate donation from pkvm or guest back to host, I thought this should be a pkvm BUG. Which scenario do you feel that we could reach here as part of malicious host triggering?",
       "parentUuid": "f1277a20_8be8f8a0",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129a7084_a31abbbb",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T14:33:27Z",
+      "side": 1,
+      "message": "\u003e And since host do not initiate donation from pkvm or guest back to host, I thought this should be a pkvm BUG.\n\nThat may be no longer the case _at least_ once we support balloon for pVMs?",
+      "parentUuid": "85057485_e5fd8a08",
       "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
