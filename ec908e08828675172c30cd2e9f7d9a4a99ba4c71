@@ -16,6 +16,24 @@
       "message": "Is there a reason we can\u0027t wait for these to land in Linus\u0027 tree and take them as UPSTREAM?",
       "revId": "ec908e08828675172c30cd2e9f7d9a4a99ba4c71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437bbc4c_fe0c11ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3495189
+      },
+      "writtenOn": "2026-06-09T02:40:37Z",
+      "side": 1,
+      "message": "This includes critical fix that we need to include in the 26Q3 release for desktop devices. Sorry I\u0027m not familiar with the release timeline. Are they going to be picked up before that?",
+      "parentUuid": "1f395d43_37db72b5",
+      "revId": "ec908e08828675172c30cd2e9f7d9a4a99ba4c71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
