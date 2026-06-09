@@ -419,8 +419,16 @@ static void handle_pvm_exit_dabt(struct pkvm_hyp_vcpu *hyp_vcpu)
 			   hyp_vcpu->vcpu.arch.fault.esr_el2 & ~ESR_ELx_SRT_MASK);
 
 		if (kvm_vcpu_dabt_iswrite(&hyp_vcpu->vcpu)) {
+			unsigned int len = kvm_vcpu_dabt_get_as(&hyp_vcpu->vcpu);
 			int rt = kvm_vcpu_dabt_get_rd(&hyp_vcpu->vcpu);
 			u64 rt_val = vcpu_get_reg(&hyp_vcpu->vcpu, rt);
+
+			/*
+			 * Only the accessed bytes are part of the write; mask the
+			 * rest so the untrusted host cannot observe adjacent guest
+			 * register state (it re-applies vcpu_data_guest_to_host()).
+			 */
+			rt_val &= GENMASK_ULL(len * 8 - 1, 0);
 
 			WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[0], rt_val);
 		}
