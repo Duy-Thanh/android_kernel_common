@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad6e96be_06907188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-09T00:17:19Z",
+      "side": 1,
+      "message": "Actually, forget what I said about splitting into two changes. It looks like you need:\n\nlinux/kconfig.h (for macros? Let\u0027s discuss offline)\n\n**some** generated/autoconf.h, though you are using an empty one here\n\n... so they are kinda connected. But still, let\u0027s discuss offline to talk about Kconfig support.",
+      "parentUuid": "a5f23fd6_8361a918",
+      "revId": "a8c628f9e683667bc008c0427e42675bd2c01789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c356f92_98ee4235",
         "filename": "BUILD.bazel",
         "patchSetId": 3
