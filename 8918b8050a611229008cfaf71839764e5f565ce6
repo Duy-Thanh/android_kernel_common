@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1cc57b_c7897ec4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-09T16:15:09Z",
+      "side": 1,
+      "message": "We likely should indicate this is a revert of `f69d2652da88`, reapplying `10014310193c` , (upstream change `baeb66fbd420`) in a KABI safe manner.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc683106_baabc3ea",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-09T16:15:09Z",
+      "side": 1,
+      "message": "Generally, global variables are frowned upon upstream and should be avoided. That being said, due to the nature of this change working around the KABI, this seems like a good approach.\n\nMy one concern is for maintainability- if some code is introduce which refactors something which uses udc, and does not check for it to be null, then we would be introducing a new UAF.\n\nLet\u0027s rename this `android_udc_state_lock` and add a comment above it:\n\n```\n/* \n * ANDROID: Global lock used instead of a per-gadget lock to maintain KABI \n * compatibility. Serializes state changes during gadget teardown.\n */\n```",
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46eb63da_752495b5",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-09T16:15:09Z",
+      "side": 1,
+      "message": "`checkpatch.pl --strict` reports: \n\n```\nWARNING: Missing a blank line after declarations\n```\n\nPlease add a blank line after variable definition prior to the remaining code.",
+      "fixSuggestions": [
+        {
+          "fixId": "e0fb3f82_86933527",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/udc/core.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8773c184_f58b8a54",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-09T16:15:09Z",
+      "side": 1,
+      "message": "Please add `ANDROID:` to the start of this comment to highlight it is an android modification.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 4,
+        "endLine": 1102,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f81727e5_fa05ee76",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/udc/core.c",
+              "range": {
+                "startLine": 1102,
+                "startChar": 0,
+                "endLine": 1103,
+                "endChar": 0
+              },
+              "replacement": "\t * ANDROID: Check if the gadget is undergoing teardown (gadget-\u003eudc is NULL)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea46c70b_01cffa70",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-09T16:15:09Z",
+      "side": 1,
+      "message": "Please add `ANDROID:` to the start of this comment to highlight it is an android modification.",
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
