@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c4724c5_5805131f",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-09T14:55:48Z",
+      "side": 1,
+      "message": "\u003e Now thinking more about it: probably it is guaranteed that host_reclaim_guest_walker() will not run in parallel with pkvm_host_donate_guest() for the same VM, since VM is only destroyed after all its vCPU have been torn down, while pkvm_host_donate_guest() is only executed in a context of some vCPU loaded on the current CPU (so it is guaranteed that this vCPU will not be torn down as long as pkvm_host_donate_guest() is executing).\n\nYes this was my understanding as well. There was no host or pVM initiated logic which can change the page state back once hypervisor sets it to (PKVM_PAGE_NONE, PKVM_ID_GUEST).\n\n\u003e Also, at least once we support balloon for pVMs, that will be no longer the case, since the page state will also change back to (PKVM_PAGE_OWNED, PKVM_ID_HOST) as a result of pVM relinquishing its pages to the host, and that may well occur in parallel with pkvm_host_donate_guest() on another CPU?\n\nI think that might also be not a possibility because we clear this only in an error case where the pages are not in pVM page tables.\n\n\u003e So maybe currently such a race is already prevented, unless there is a bug in pKVM. But still, that is not quite obvious. It is better to avoid relying on such tricky assumptions?\n\nAgreed. I shall implement two phased approach you mentioned.",
+      "parentUuid": "fc5b86ea_d8cea563",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
