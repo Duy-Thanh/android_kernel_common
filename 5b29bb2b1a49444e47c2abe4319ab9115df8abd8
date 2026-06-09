@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fad348_d38d3d82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4689162
+      },
+      "writtenOn": "2026-06-09T13:43:29Z",
+      "side": 1,
+      "message": "4106214: Merge 09feffa073d8 (\"Merge tag \u0027timers-urgent-2026-06-07\u0027 of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip\") into android-mainline | https://android-review.googlesource.com/c/kernel/common/+/4106214",
+      "revId": "5b29bb2b1a49444e47c2abe4319ab9115df8abd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
