@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1baf9cd3_3eeaefcc",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-09T18:34:58Z",
+      "side": 1,
+      "message": "\u003e From \"system robustness\" standpoint it might be not so ok (ideally we would gracefully restore the original state), but our implementation is already not ideal in this regard anyway, since e.g. if pkvm_pgtable_map() for the guest MMU fails in the middle with -ENOMEM, we don\u0027t restore the original states of those guest pages that we\u0027ve already successfully mapped. (I.e. we tend to prefer simpler code, rather than trying to perfectly gracefully handle all such failure cases.)\n\nUnderstood. Will revert the error handling code and return error instead. Also will add comments mentioning the justification",
+      "parentUuid": "62987755_b67f7400",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
