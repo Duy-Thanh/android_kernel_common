@@ -302,7 +302,15 @@ static void handle_pvm_entry_dabt(struct pkvm_hyp_vcpu *hyp_vcpu)
 	if (pc_update && !kvm_vcpu_dabt_iswrite(&hyp_vcpu->vcpu)) {
 		/* r0 as transfer register between the guest and the host. */
 		u64 rd_val = READ_ONCE(host_vcpu->arch.ctxt.regs.regs[0]);
+		unsigned int len = kvm_vcpu_dabt_get_as(&hyp_vcpu->vcpu);
 		int rd = kvm_vcpu_dabt_get_rd(&hyp_vcpu->vcpu);
+
+		/*
+		 * The host is untrusted and only emulates the accessed bytes, so
+		 * clamp its value to the access width to stop it injecting guest
+		 * register bits beyond the load (mirrors kvm_handle_mmio_return()).
+		 */
+		rd_val &= GENMASK_ULL(len * 8 - 1, 0);
 
 		vcpu_set_reg(&hyp_vcpu->vcpu, rd, rd_val);
 	}
