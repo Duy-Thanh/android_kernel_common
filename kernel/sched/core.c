@@ -194,6 +194,7 @@ static int __init setup_proxy_exec_toggle(void)
 {
 	int retval;
 
+	pr_info("sched_proxy_exec: %s\n", sched_proxy_exec() ? "enabled" : "disabled");
 	sched_proxy_exec_kobj = kobject_create_and_add("sched_proxy_exec", kernel_kobj);
 	if (!sched_proxy_exec_kobj)
 		return -ENOMEM;
@@ -7355,14 +7356,12 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 {
 	struct rq *this_rq, *target_rq;
 	struct rq_flags this_rf;
-	int cpu, wake_flag = 0;
+	int cpu, wake_flag = WF_TTWU;
 
 	lockdep_assert_rq_held(rq);
 	WARN_ON(p == rq->curr);
 
 	_trace_sched_pe_return_migration(p);
-
-	get_task_struct(p);
 
 	/*
 	 * We have to zap callbacks before unlocking the rq
@@ -7416,12 +7415,7 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 	clear_task_blocked_on(p, NULL);
 	task_rq_unlock(this_rq, p, &this_rf);
 
-	/* Drop this_rq and grab target_rq for activation */
-	raw_spin_rq_lock(target_rq);
-	activate_task(target_rq, p, 0);
-	wakeup_preempt(target_rq, p, 0);
-	put_task_struct(p);
-	raw_spin_rq_unlock(target_rq);
+	attach_one_task(target_rq, p);
 
 	/* Finally, re-grab the origianl rq lock and return to pick-again */
 	raw_spin_rq_lock(rq);
@@ -7431,7 +7425,6 @@ static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 
 err_out:
 	task_rq_unlock(this_rq, p, &this_rf);
-	put_task_struct(p);
 	raw_spin_rq_lock(rq);
 	rq_repin_lock(rq, rf);
 	update_rq_clock(rq);
@@ -7735,7 +7728,6 @@ static void __sched notrace __schedule(int sched_mode)
 	unsigned long prev_state;
 	struct rq_flags rf;
 	struct rq *rq;
-	bool prev_not_proxied;
 	int cpu;
 	bool skip_schedule = false;
 
@@ -7823,23 +7815,23 @@ static void __sched notrace __schedule(int sched_mode)
 		}
 	}
 
-	prev_not_proxied = !prev->blocked_donor;
-
 	trace_sched_start_task_selection(prev, cpu, task_is_blocked(prev));
 pick_again:
 	next = pick_next_task(rq, rq->donor, &rf);
 	rq_set_donor(rq, next);
 	next->blocked_donor = NULL;
-	if (unlikely(task_is_blocked(next))) {
-		next = find_proxy_task(rq, next, &rf);
-		if (!next) {
-			/* zap the balance_callbacks before picking again */
-			zap_balance_callbacks(rq);
-			goto pick_again;
-		}
-		if (next == rq->idle) {
-			zap_balance_callbacks(rq);
-			goto keep_resched;
+	if (sched_proxy_exec()) {
+		if (unlikely(next->blocked_on)) {
+			next = find_proxy_task(rq, next, &rf);
+			if (!next) {
+				/* zap the balance_callbacks before picking again */
+				zap_balance_callbacks(rq);
+				goto pick_again;
+			}
+			if (next == rq->idle) {
+				zap_balance_callbacks(rq);
+				goto keep_resched;
+			}
 		}
 		if (rq->donor == prev_donor && prev != next) {
 			struct task_struct *donor = rq->donor;
