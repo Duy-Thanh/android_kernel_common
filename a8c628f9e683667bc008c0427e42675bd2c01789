@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f23fd6_8361a918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-09T00:11:38Z",
+      "side": 1,
+      "message": "I think this should be split into two changes.\n\nThe kconfig change makes sense to me -- we\u0027ll need that to actually look into Kconfig.\n\nI am not very sure about the `tools/virtio/generated/autoconf.h` change -- that file looks empty, and tools/virtio isn\u0027t really part of DTC_INCLUDE:\n \nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/scripts/Makefile.dtbs;l\u003d127;drc\u003d7d8deb5e05aad8da2ebfe9fa852654185821b6e2\n\nDo you know why we need tools/virtio with an EMPTY, checked-in, generated autoconf.h?",
+      "revId": "a8c628f9e683667bc008c0427e42675bd2c01789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c356f92_98ee4235",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-09T00:11:38Z",
+      "side": 1,
+      "message": "This file looks empty",
+      "range": {
+        "startLine": 1787,
+        "startChar": 9,
+        "endLine": 1787,
+        "endChar": 42
+      },
+      "revId": "a8c628f9e683667bc008c0427e42675bd2c01789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
