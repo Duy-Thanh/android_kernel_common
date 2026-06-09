@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fec0f390_13652900",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T15:23:09Z",
+      "side": 1,
+      "message": "After looking at your patch again, looks like I misunderstood your intentions. Looks like your assumption was that it is _already_ perfectly safe to decouple host and guest mmu lock? And this entire `if (unlikely(ret))` check is just an extra optional change?\n\nBut then it is not quite clear to me what\u0027s the point of this `if (unlikely(ret))`. And whatever the point is, it seems not quite related to decoupling host and guest mmu lock, so why is it done in the same patch?\n\nIOW, the commit message says: \"if guest mmu state verification fails, we need to undo the host mmu update with host mmu lock held.\" - so, if we really need to undo it, why didn\u0027t we need to undo it before this patch?",
+      "parentUuid": "5c4724c5_5805131f",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
