@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62987755_b67f7400",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T18:03:04Z",
+      "side": 1,
+      "message": "Ah ok, got it.\n\nNow, thinking: what if we just don\u0027t bother restoring the original host state if the guest check fails, i.e. let this page remain in such an orphaned state (i.e. not accessible by the host, but not owned by any guest either), and just return an error?\n\nFrom security standpoint it seems ok (it is just a misbehaving host\u0027s problem)?\n\nFrom \"system robustness\" standpoint it might be not so ok (ideally we would gracefully restore the original state), but our implementation is already not ideal in this regard anyway, since e.g. if pkvm_pgtable_map() for the guest MMU fails in the middle with -ENOMEM, we don\u0027t restore the original states of those guest pages that we\u0027ve already successfully mapped. (I.e. we tend to prefer simpler code, rather than trying to perfectly gracefully handle all such failure cases.)",
+      "parentUuid": "580b2cb9_bd089b9b",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1277a20_8be8f8a0",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
