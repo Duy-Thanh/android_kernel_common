@@ -16319,6 +16319,11 @@ pointer_reference {
   pointee_type_id: 0xadad1e92
 }
 pointer_reference {
+  id: 0x21ff2197
+  kind: POINTER
+  pointee_type_id: 0xadbc60c1
+}
+pointer_reference {
   id: 0x2208f89a
   kind: POINTER
   pointee_type_id: 0xa26304f7
@@ -36419,6 +36424,11 @@ pointer_reference {
   pointee_type_id: 0xd920878f
 }
 pointer_reference {
+  id: 0x3cd992e5
+  kind: POINTER
+  pointee_type_id: 0xd926ad09
+}
+pointer_reference {
   id: 0x3cdda08b
   kind: POINTER
   pointee_type_id: 0xd93664b2
@@ -42792,6 +42802,11 @@ qualified {
   id: 0xd90933f7
   qualifier: CONST
   qualified_type_id: 0x14637955
+}
+qualified {
+  id: 0xd926ad09
+  qualifier: CONST
+  qualified_type_id: 0x14dd02ac
 }
 qualified {
   id: 0xd93664b2
@@ -184436,6 +184451,11 @@ member {
   id: 0x71ef81cb
   name: "on"
   type_id: 0x9c649622
+}
+member {
+  id: 0xe5761377
+  name: "on_content_release"
+  type_id: 0x0f3dfb90
 }
 member {
   id: 0x094de909
@@ -361846,6 +361866,24 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x14dd02ac
+  kind: STRUCT
+  name: "wrapfd_listener_operations"
+  definition {
+    bytesize: 8
+    member_id: 0xe5761377
+  }
+}
+struct_union {
+  id: 0xadbc60c1
+  kind: UNION
+  name: "wrapfd_mappable"
+  definition {
+    bytesize: 8
+    member_id: 0x590c841e
+  }
+}
+struct_union {
   id: 0xaa41279c
   kind: STRUCT
   name: "writeback_control"
@@ -431129,6 +431167,13 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9bbb65ba
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x0258f96e
+  parameter_id: 0x21ff2197
+}
+function {
   id: 0x9bbb71e7
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -431151,6 +431196,15 @@ function {
   parameter_id: 0x0b0164a7
   parameter_id: 0x11cfee5a
   parameter_id: 0x11cfee5a
+}
+function {
+  id: 0x9bbc4dcc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x0258f96e
+  parameter_id: 0x3cd992e5
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0cbf60eb
 }
 function {
   id: 0x9bbc66c0
@@ -540533,6 +540587,42 @@ elf_symbol {
   full_name: "wrap_directory_iterator"
 }
 elf_symbol {
+  id: 0x752af6cd
+  name: "wrapfd_add_listener"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1f64179f
+  type_id: 0x9bbc4dcc
+  full_name: "wrapfd_add_listener"
+}
+elf_symbol {
+  id: 0xbbaaefca
+  name: "wrapfd_del_listener"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xff54298f
+  type_id: 0x9bd88c03
+  full_name: "wrapfd_del_listener"
+}
+elf_symbol {
+  id: 0x11cc816d
+  name: "wrapfd_get_mappable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc68728b4
+  type_id: 0x9bbb65ba
+  full_name: "wrapfd_get_mappable"
+}
+elf_symbol {
+  id: 0xdb8b2835
+  name: "wrapfd_put_mappable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc68728b4
+  type_id: 0x9bbb65ba
+  full_name: "wrapfd_put_mappable"
+}
+elf_symbol {
   id: 0xac8c5d67
   name: "write_cache_pages"
   is_defined: true
@@ -552185,6 +552275,10 @@ interface {
   symbol_id: 0x887e1dde
   symbol_id: 0x180eeaeb
   symbol_id: 0xee792a97
+  symbol_id: 0x752af6cd
+  symbol_id: 0xbbaaefca
+  symbol_id: 0x11cc816d
+  symbol_id: 0xdb8b2835
   symbol_id: 0xac8c5d67
   symbol_id: 0xa643ac3f
   symbol_id: 0xe6024301
