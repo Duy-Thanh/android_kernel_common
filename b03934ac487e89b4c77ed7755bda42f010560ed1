@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86440571_62b9ac22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-06-09T18:01:09Z",
+      "side": 1,
+      "message": "This should have no effect on brya builds, and I\u0027ve confirmed that brya still builds successfully in my local checkout.\n\nThis must be a build infra flake. I\u0027ll keep trying and eventually I expect it to magically succeed.",
+      "revId": "b03934ac487e89b4c77ed7755bda42f010560ed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
