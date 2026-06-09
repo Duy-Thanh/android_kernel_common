@@ -252,6 +252,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4b3a358_2cb479ce",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-09T20:10:51Z",
+      "side": 1,
+      "message": "After more thinking, I tend to agree with what you said in another thread: \"I think that might also be not a possibility because we clear this only in an error case where the pages are not in pVM page tables.\"\n\n...So now it seems the best way to do it is like this:\n```\n\tpkvm_host_mmu_lock();\n\n\t...\n\n\tpkvm_host_mmu_unlock();\n\n\tiommu_tlb_flush(hpa, size);\n\n\tpkvm_host_mmu_lock();\n\tpkvm_guest_mmu_lock(pkvm_vm);\n\n\tBUG_ON(check_host_mem_pgstate(hpa, size, PKVM_PAGE_NONE, PKVM_ID_GUEST, true);\n\n\tret \u003d check_page_state(\u0026pkvm_vm-\u003emmu, gpa, size, PKVM_PAGE_NONE);\n\tif (ret)\n\t\tgoto unlock;\n\n\t...\nunlock:\n\tpkvm_guest_mmu_unlock(pkvm_vm);\n\tpkvm_host_mmu_unlock();\n\t\n\treturn ret;\n```\n\nOTOH, now if this BUG_ON check is the only reason to lock host_mmu_lock second time, maybe it\u0027s not a strong enough reason? So we may sacrifice this BUG_ON and then just lock guest_mmu_lock, without locking host_mmu_lock second time (and thus possibly slightly reduce lock contention, etc)?\n\nOr maybe we are missing some other, more important reasons to keep host_mmu_lock locked while we are doing all this (copying pvmfw and mapping pages for the guest)?",
+      "parentUuid": "129a7084_a31abbbb",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cd1edde_25ff415d",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
