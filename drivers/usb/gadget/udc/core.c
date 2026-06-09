@@ -25,6 +25,7 @@
 #include "trace.h"
 
 static DEFINE_IDA(gadget_id_numbers);
+static DEFINE_SPINLOCK(udc_state_lock);
 
 static struct bus_type gadget_bus_type;
 
@@ -1094,8 +1095,16 @@ static void usb_gadget_state_work(struct work_struct *work)
 void usb_gadget_set_state(struct usb_gadget *gadget,
 		enum usb_device_state state)
 {
+	unsigned long flags;
+	spin_lock_irqsave(&udc_state_lock, flags);
 	gadget->state = state;
-	schedule_work(&gadget->work);
+	/*
+	 * Check if the gadget is undergoing teardown (gadget->udc is NULL)
+	 * to prevent scheduling new work after cleanup has commenced.
+	 */
+	if (gadget->udc)
+		schedule_work(&gadget->work);
+	spin_unlock_irqrestore(&udc_state_lock, flags);
 	trace_usb_gadget_set_state(gadget, 0);
 }
 EXPORT_SYMBOL_GPL(usb_gadget_set_state);
@@ -1503,6 +1512,7 @@ EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
 void usb_del_gadget(struct usb_gadget *gadget)
 {
 	struct usb_udc *udc = gadget->udc;
+	unsigned long flags;
 
 	if (!udc)
 		return;
@@ -1516,6 +1526,13 @@ void usb_del_gadget(struct usb_gadget *gadget)
 	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
 	sysfs_remove_link(&udc->dev.kobj, "gadget");
 	device_del(&gadget->dev);
+	/*
+	 * Clear gadget->udc (acting as teardown flag) before flushing the work
+	 * to prevent new work from being scheduled while we are cleaning up.
+	 */
+	spin_lock_irqsave(&udc_state_lock, flags);
+	gadget->udc = NULL;
+	spin_unlock_irqrestore(&udc_state_lock, flags);
 	flush_work(&gadget->work);
 	ida_free(&gadget_id_numbers, gadget->id_number);
 	cancel_work_sync(&udc->vbus_work);
