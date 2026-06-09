@@ -16,6 +16,24 @@
       "message": "Please file a dedicated bug in the Android bug component for adding this",
       "revId": "7fd987346b4deb93c03ce6fb55f659373be93805",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e53b36_533a1aae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4678007
+      },
+      "writtenOn": "2026-06-09T08:27:36Z",
+      "side": 1,
+      "message": "I have filed the bug b/521682208. what\u0027s the Android component id?",
+      "parentUuid": "1932c6af_22c733e4",
+      "revId": "7fd987346b4deb93c03ce6fb55f659373be93805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
