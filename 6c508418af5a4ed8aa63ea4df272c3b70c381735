@@ -3,6 +3,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3e4e536_919190f9",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "I\u0027m not going to put this every time, but every safety comment appears to just list the input pointers and say they are \"valid\". The fact that `size` can be accessed in a non-racy way is not obvious from \"I have a valid dma_buf pointer\"",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d625a31_bfce71d9",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "Should this maybe be a method on `DmaBufAttachment` rather than an associated method here?",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80547f2_057575ea",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "Should this maybe be Option\u003cdma::DmaAddress\u003e and return None if either it has more than one mapping or if it has no mappings?",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c6c35e_534fc888",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "This means we must never give callers any way to hold the dma-buf reservation lock in the future.",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e74723ee_b3140a9b",
         "filename": "rust/kernel/dma_buf/buf.rs",
         "patchSetId": 1
@@ -20,6 +88,40 @@
         "endLine": 252,
         "endChar": 29
       },
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cbbd07_0de472ac",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "This means we must never give callers any way to hold the dma-buf reservation lock in the future.",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c27e94f_7ad796e2",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2026-06-09T23:00:11Z",
+      "side": 1,
+      "message": "Should we at least log any errors? Should we consider just having an exploding drop instead to encourage users to explicitly `.end()?`?",
       "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
