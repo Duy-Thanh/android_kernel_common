@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3172af6f_954772de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2026-06-10T05:56:34Z",
+      "side": 1,
+      "message": "@joneslee@google.com context: this CL adds a new trackpad model to a driver to have it supported. The change was submitted upstream, landed in mainline, we\u0027d like to have the support for this device on 6.18.",
+      "revId": "ff06d7d86d65fa0b56a45b8808b29abf55304cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
