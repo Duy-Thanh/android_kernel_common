@@ -1,0 +1,160 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637e010c_b0781173",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-10T21:17:23Z",
+      "side": 1,
+      "message": "This should be expanded to explain when exactly is this hook being invoked: before or after the page cache read, only on successful reads or on unsuccessful too, is read expected to be done when it\u0027s called or only scheduled.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "15392a9e9a0c314f87be5783a05326ef5b3e0051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7bf7c6_73328878",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3027,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-10T21:17:23Z",
+      "side": 1,
+      "message": "do_page_cache_ra is a partially synchronous, partially asynchronous operation. So, not all the pages within that ra-\u003esize will be read into the page cache at the time this hook is invoked.",
+      "range": {
+        "startLine": 3027,
+        "startChar": 1,
+        "endLine": 3027,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "29d5e69c_4598001e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3027,
+                "startChar": 0,
+                "endLine": 3028,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_page_cache_read(file-\u003ef_inode, ra-\u003estart,\n\t\t\tra-\u003esize - ra-\u003easync_size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "15392a9e9a0c314f87be5783a05326ef5b3e0051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8849c183_84f3b42f",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-10T21:17:23Z",
+      "side": 1,
+      "message": "You will be invoking this hook even it error !\u003d 0. Is that really what you want?",
+      "range": {
+        "startLine": 3263,
+        "startChar": 1,
+        "endLine": 3263,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "091747c5_2d390a57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/* We will be invoking this hook even it error */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "15392a9e9a0c314f87be5783a05326ef5b3e0051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2a6b0a_63e02659",
+        "filename": "mm/filemap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3555,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-10T21:17:23Z",
+      "side": 1,
+      "message": "It\u0027s unclear when this hook should be called. Before the read of the page from the cache or after. In this case it\u0027s before. Please explain in the patch description when this hook is expected to fire.",
+      "range": {
+        "startLine": 3555,
+        "startChar": 1,
+        "endLine": 3555,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "657bda9f_7e06d27e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3555,
+                "startChar": 0,
+                "endLine": 3556,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_page_cache_read(mapping-\u003ehost, index, 1);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "15392a9e9a0c314f87be5783a05326ef5b3e0051",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
