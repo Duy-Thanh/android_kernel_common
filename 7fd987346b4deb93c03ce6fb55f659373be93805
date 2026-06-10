@@ -34,6 +34,24 @@
       "parentUuid": "1932c6af_22c733e4",
       "revId": "7fd987346b4deb93c03ce6fb55f659373be93805",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49dcd764_11e143e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2026-06-10T02:31:23Z",
+      "side": 1,
+      "message": "I have moved the bug to GKI component",
+      "parentUuid": "c6e53b36_533a1aae",
+      "revId": "7fd987346b4deb93c03ce6fb55f659373be93805",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
