@@ -1,0 +1,13 @@
+obj-m += rust_wrapfd.o
+
+rust_wrapfd-m := \
+	rust_wrapfd_main.o	\
+	helpers.o		\
+
+KDIR=${HOME}/android16-6.12
+
+all:
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
+
+clean:
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
