@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05263ca_407c5437",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-10T11:21:56Z",
+      "side": 1,
+      "message": "Removed the empty line in 1455",
+      "parentUuid": "293d406a_3cd46563",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "873a3b15_8d18f6cf",
