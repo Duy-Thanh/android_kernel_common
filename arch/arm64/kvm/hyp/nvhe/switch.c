@@ -133,7 +133,7 @@ static void __hyp_vgic_restore_state(struct kvm_vcpu *vcpu)
  * Disable host events, enable guest events
  */
 #ifdef CONFIG_HW_PERF_EVENTS
-static bool __pmu_switch_to_guest(struct kvm_vcpu *vcpu)
+static bool __pmu_events_switch_to_guest(struct kvm_vcpu *vcpu)
 {
 	struct kvm_pmu_events *pmu = &vcpu->arch.pmu.events;
 
@@ -149,7 +149,7 @@ static bool __pmu_switch_to_guest(struct kvm_vcpu *vcpu)
 /*
  * Disable guest events, enable host events
  */
-static void __pmu_switch_to_host(struct kvm_vcpu *vcpu)
+static void __pmu_events_switch_to_host(struct kvm_vcpu *vcpu)
 {
 	struct kvm_pmu_events *pmu = &vcpu->arch.pmu.events;
 
@@ -160,9 +160,38 @@ static void __pmu_switch_to_host(struct kvm_vcpu *vcpu)
 		write_sysreg(pmu->events_host, pmcntenset_el0);
 }
 #else
-#define __pmu_switch_to_guest(v)	({ false; })
-#define __pmu_switch_to_host(v)		do {} while (0)
+#define __pmu_events_switch_to_guest(v)	({ false; })
+#define __pmu_events_switch_to_host(v)		do {} while (0)
 #endif
+
+/* Host PMU state changed for a guest run, restored on exit. */
+struct kvm_pmu_switch {
+	bool events_switched;	/* perf event counters toggled (non-protected) */
+	u64 host_cnten;		/* saved PMCNTENSET_EL0 (protected) */
+};
+
+static void __pmu_switch_to_guest(struct kvm_vcpu *vcpu, struct kvm_pmu_switch *pmu)
+{
+	pmu->events_switched = __pmu_events_switch_to_guest(vcpu);
+
+	/*
+	 * HPME=0 stops a protected guest's event counters but not the cycle and
+	 * instruction counters, which would leak guest activity to the host.
+	 */
+	if (vcpu_is_protected(vcpu) && system_supports_pmuv3()) {
+		pmu->host_cnten = read_sysreg(pmcntenset_el0);
+		write_sysreg(pmu->host_cnten, pmcntenclr_el0);
+	}
+}
+
+static void __pmu_switch_to_host(struct kvm_vcpu *vcpu, struct kvm_pmu_switch *pmu)
+{
+	if (pmu->events_switched)
+		__pmu_events_switch_to_host(vcpu);
+
+	if (vcpu_is_protected(vcpu) && system_supports_pmuv3())
+		write_sysreg(pmu->host_cnten, pmcntenset_el0);
+}
 
 /*
  * Handler for protected VM MSR, MRS or System instruction execution in AArch64.
@@ -256,8 +285,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	struct kvm_cpu_context *host_ctxt;
 	struct kvm_cpu_context *guest_ctxt;
 	struct kvm_s2_mmu *mmu;
-	bool pmu_switch_needed;
-	u64 host_pmcnten = 0;
+	struct kvm_pmu_switch pmu_switch = {};
 	u64 exit_code;
 
 	/*
@@ -275,16 +303,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	host_ctxt->__hyp_running_vcpu = vcpu;
 	guest_ctxt = &vcpu->arch.ctxt;
 
-	pmu_switch_needed = __pmu_switch_to_guest(vcpu);
-
-	/*
-	 * HPME=0 stops a protected guest's event counters but not the cycle and
-	 * instruction counters, which would leak guest activity to the host.
-	 */
-	if (vcpu_is_protected(vcpu) && system_supports_pmuv3()) {
-		host_pmcnten = read_sysreg(pmcntenset_el0);
-		write_sysreg(host_pmcnten, pmcntenclr_el0);
-	}
+	__pmu_switch_to_guest(vcpu, &pmu_switch);
 
 	__sysreg_save_state_nvhe(host_ctxt);
 	/*
@@ -366,11 +385,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	 */
 	__debug_restore_host_buffers_nvhe(vcpu);
 
-	if (pmu_switch_needed)
-		__pmu_switch_to_host(vcpu);
-
-	if (vcpu_is_protected(vcpu) && system_supports_pmuv3())
-		write_sysreg(host_pmcnten, pmcntenset_el0);
+	__pmu_switch_to_host(vcpu, &pmu_switch);
 
 	/* Returning to host will clear PSR.I, remask PMR if needed */
 	if (system_uses_irq_prio_masking())
