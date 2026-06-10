@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912aac94_67ea80de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2026-06-10T06:10:44Z",
+      "side": 1,
+      "message": "@gprocida@google.com context: this changes adds the support for a new trackpad to an HID driver. It was submitted upstream, landed on mainline and we\u0027d like to have the support for this trackpad on 6.12.",
+      "revId": "d8b9b07c6ef9637f8be1e4eb66783a9185b2f49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
