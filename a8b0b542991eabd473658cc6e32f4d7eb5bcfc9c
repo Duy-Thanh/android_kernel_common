@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ab9c73fa_242fe035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-10T04:01:06Z",
+      "side": 1,
+      "message": "Note: The linter is complaining:\n\nKernelCommit: Can not find the original change on base branch (android14-6.1) for this change....\n\nCan not find the original change on base branch (android14-6.1) for this change.\n\nBut the change is present in android14-6.1 via -stable as commit 5a48efc7624ea5d5d0a78a28a2be192a0a72627f",
+      "revId": "a8b0b542991eabd473658cc6e32f4d7eb5bcfc9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cd6bcbdd_dc3f17ce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
