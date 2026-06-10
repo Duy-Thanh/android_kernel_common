@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d5da82a_fe7bca98",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-10T18:50:24Z",
+      "side": 1,
+      "message": "Is it possible that after zram_writeback_slots() is done, confirmed that wb_ctl-\u003enum_inflight is 0 and called release_wb_ctl() the task is preempted and some other task calls zram_writeback_slots(), which calls zram_writeback_endio(), which adds an entry into wb_ctl-\u003edone_reqs? If so, then there is a possibility that release_wb_ctl() will later be called while wb_ctl-\u003edone_reqs is not empty. What prevents this scenario?",
+      "parentUuid": "9c591980_6d04b256",
+      "range": {
+        "startLine": 835,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 10
+      },
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f6f64de_13f3edab",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
