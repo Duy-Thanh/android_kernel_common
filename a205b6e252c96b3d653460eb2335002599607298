@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "360a89f4_679dcf6a",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "I\u0027m using the DmaBuf abstraction you\u0027re proposing in b/517382125",
+      "parentUuid": "e6c9f7ea_f5403bf2",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ae9dcac_9173012a",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-05-26T13:15:49Z",
       "side": 1,
       "message": "I was told by Suren that this method is temporary and not intended to be part of the final driver. If that\u0027s still the case, then I won\u0027t be too worried about this logic.",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 23
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3becd5_2cc40a6f",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "It seems that this is still alive and kicking given the latest development of load(). I\u0027m keeping this for now, I can always get rid of it if it comes to that.",
+      "parentUuid": "3ae9dcac_9173012a",
       "range": {
         "startLine": 141,
         "startChar": 0,
@@ -107,6 +149,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95f4de00_aa0a4945",
+        "filename": "drivers/android/wrapfd/helpers.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "I\u0027m replicating what the plain-C code does. the close-on-exec flag appears to be a property of the file descriptor table, not the file itself as far as I can tell, is there even a way to avoid this race?",
+      "parentUuid": "503de6ab_bdf87665",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8d0eed0_39f4180b",
         "filename": "drivers/android/wrapfd/helpers.c",
         "patchSetId": 1
@@ -153,6 +213,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16dd2423_ec0b114b",
+        "filename": "drivers/android/wrapfd/rust_wrapfd_main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "I believe you cherry-picked this, so I\u0027ll look into adopting it.",
+      "parentUuid": "ae0e06ff_ead49b81",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 2
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94f01926_0da69e79",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 1
@@ -164,6 +248,24 @@
       "writtenOn": "2026-05-26T13:15:49Z",
       "side": 1,
       "message": "I would ideally like to avoid drivers writing their own abstractions such as this one, if it\u0027s possible to place this logic in the kernel crate.",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c40121_cf85538c",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "I\u0027ll look into moving this into the kernel crate for wider use.",
+      "parentUuid": "94f01926_0da69e79",
       "revId": "a205b6e252c96b3d653460eb2335002599607298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -228,6 +330,30 @@
       "writtenOn": "2026-05-26T13:15:49Z",
       "side": 1,
       "message": "The C side does not use `fdget_pos` when invoking `mmap`, so we know there is no `fdget_pos` on the current thread (for any file).",
+      "range": {
+        "startLine": 760,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 87
+      },
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23550315_f6e99af1",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T13:55:36Z",
+      "side": 1,
+      "message": "ah, that\u0027s good to know, thanks.",
+      "parentUuid": "3c8c28a5_dc86e136",
       "range": {
         "startLine": 760,
         "startChar": 0,
