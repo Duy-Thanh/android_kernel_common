@@ -52,6 +52,47 @@
       "parentUuid": "7c18cc11_f7ca6275",
       "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30131ac9_73b6aac0",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-10T15:42:41Z",
+      "side": 1,
+      "message": "Should this really be called here? I am under the impression that a successful vfs_iocb_iter_read already advances the iterator and doing it here again might unintentionally skip things.",
+      "range": {
+        "startLine": 335,
+        "startChar": 2,
+        "endLine": 335,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "90e749b6_43e433d7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 335,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
