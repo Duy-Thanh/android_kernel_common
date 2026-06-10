@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea77893_3d5b33b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee1cc57b_c7897ec4",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc683106_baabc3ea",
@@ -37,6 +61,42 @@
       "writtenOn": "2026-06-09T16:15:09Z",
       "side": 1,
       "message": "Generally, global variables are frowned upon upstream and should be avoided. That being said, due to the nature of this change working around the KABI, this seems like a good approach.\n\nMy one concern is for maintainability- if some code is introduce which refactors something which uses udc, and does not check for it to be null, then we would be introducing a new UAF.\n\nLet\u0027s rename this `android_udc_state_lock` and add a comment above it:\n\n```\n/* \n * ANDROID: Global lock used instead of a per-gadget lock to maintain KABI \n * compatibility. Serializes state changes during gadget teardown.\n */\n```",
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1488553b_8263ad5a",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc683106_baabc3ea",
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00680f3f_b2ef452d",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc683106_baabc3ea",
       "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -72,6 +132,24 @@
           ]
         }
       ],
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802a0bd4_2129bbbe",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46eb63da_752495b5",
       "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -117,6 +195,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba334dec_3e929cca",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8773c184_f58b8a54",
+      "range": {
+        "startLine": 1102,
+        "startChar": 4,
+        "endLine": 1102,
+        "endChar": 9
+      },
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea46c70b_01cffa70",
@@ -130,6 +232,24 @@
       "writtenOn": "2026-06-09T16:15:09Z",
       "side": 1,
       "message": "Please add `ANDROID:` to the start of this comment to highlight it is an android modification.",
+      "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45200587_e0bf4df9",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-10T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea46c70b_01cffa70",
       "revId": "8918b8050a611229008cfaf71839764e5f565ce6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
