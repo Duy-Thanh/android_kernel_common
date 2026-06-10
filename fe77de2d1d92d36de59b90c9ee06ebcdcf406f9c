@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0891a6dc_8ba0e135",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-10T10:40:08Z",
+      "side": 1,
+      "message": "\u003e OTOH, now if this BUG_ON check is the only reason to lock host_mmu_lock second time, maybe it\u0027s not a strong enough reason? So we may sacrifice this BUG_ON and then just lock guest_mmu_lock, without locking host_mmu_lock second time (and thus possibly slightly reduce lock contention, etc)?\n\nThis is what I am also leaning towards. Once the page state is changed to (PKVM_PAGE_NONE, PKVM_ID_GUEST), it is as good as pkvm_host_donate_hyp() succeeded. And I feel this path is hardened and any bugs in this path would have been noticed. We could probably avoid host mmu locking here and the BUG_ON as well and have the logic simple as you suggested above. Will post patches soon.",
+      "parentUuid": "e4b3a358_2cb479ce",
+      "revId": "fe77de2d1d92d36de59b90c9ee06ebcdcf406f9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cd1edde_25ff415d",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
