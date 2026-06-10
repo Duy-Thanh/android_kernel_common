@@ -34,6 +34,24 @@
       "parentUuid": "5eafe5a0_62c2be5c",
       "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277a11a9_db85f091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-10T07:31:03Z",
+      "side": 1,
+      "message": "We\u0027ve been using dma-buf for years. It sounds weird to me that there isn\u0027t already a way to write data from a file to a dma-buf already.",
+      "parentUuid": "7c18cc11_f7ca6275",
+      "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
