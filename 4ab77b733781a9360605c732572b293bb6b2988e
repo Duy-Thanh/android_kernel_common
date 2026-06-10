@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5454ed2b_a6b930d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-10T13:05:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we leverage `__pmu_switch_to_{guest,host}()` by ensuring `vcpu-\u003earch.pmu.events` is accurate instead of rolling our own register accesses?",
+      "revId": "4ab77b733781a9360605c732572b293bb6b2988e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
