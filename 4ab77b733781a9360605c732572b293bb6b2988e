@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t we leverage `__pmu_switch_to_{guest,host}()` by ensuring `vcpu-\u003earch.pmu.events` is accurate instead of rolling our own register accesses?",
       "revId": "4ab77b733781a9360605c732572b293bb6b2988e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52282035_07d1ef6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-10T13:35:09Z",
+      "side": 1,
+      "message": "The snag is that vcpu-\u003earch.pmu.events is maintained by the host perf driver (kvm_set_pmu_events), which only records a counter when exclude_host !\u003d exclude_guest (kvm_pmu_switch_needed). A host counter opened with neither flag set, which is the default and precisely the leak scenario, never lands in events_host. So even with a well-behaved host the mask is incomplete, and for a protected vCPU the host is untrusted anyway, so EL2 cannot rely on host-maintained state. It has to read PMCNTENSET_EL0 itself to know what to disable.\n\nI can feed that EL2-read mask into events_host and let __pmu_switch_to_{guest,host}() do the writes rather than open-coding them. The register read stays but the clear/restore is shared. One side effect: it ties the disable to CONFIG_HW_PERF_EVENTS, since events/__pmu_switch_*() are no-ops without it. Happy to go that way if you prefer it to the standalone read/clear/restore.",
+      "parentUuid": "5454ed2b_a6b930d3",
+      "revId": "4ab77b733781a9360605c732572b293bb6b2988e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
