@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5496447a_089083a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-10T16:40:54Z",
+      "side": 1,
+      "message": "nit: maybe e.g. s/update/check and update/ (to emphasize that this change also affects the order of checks)?",
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01631f92_31bfed07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-10T16:40:54Z",
+      "side": 1,
+      "message": "nit: might be worth saying a word or two about why we believe it is still secure and safe if we rearrange the locks this way? (capturing what we discussed/brainstormed yesterday)",
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e6ed91_6d7cf1d3",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-10T16:40:54Z",
+      "side": 1,
+      "message": "IIUC these 3 first lines of the comment are just explaining the purpose of this check_page_state() check, which is independent from the change implemented by this patch (i.e. from decoupling the locks)?\n\nIf so, I\u0027m not sure why we want to explain that for this specific check here? i.e. it\u0027s just of many such page state checks we have in these memory protection API functions (pkvm_host_share_guest() and so on), what\u0027s so special about this particular check?",
+      "fixSuggestions": [
+        {
+          "fixId": "ad18b086_fda4e318",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1474,
+                "startChar": 0,
+                "endLine": 1477,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d134c9_8f9a2484",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-10T16:40:54Z",
+      "side": 1,
+      "message": "Similarly: why add `unlikely` in this specific patch, and for this specific check for guest page state here? I mean, yes, this check is unlikely to fail, and with a well-behaving host it shouldn\u0027t fail at all, but the same applies to pretty much any other such security checks we have in all these memory protection API functions?",
+      "fixSuggestions": [
+        {
+          "fixId": "e0dad0ce_e63e002b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1480,
+                "startChar": 0,
+                "endLine": 1481,
+                "endChar": 0
+              },
+              "replacement": "\tif (ret)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
