@@ -49580,6 +49580,11 @@ member {
   offset: 32
 }
 member {
+  id: 0x3094664a
+  type_id: 0x4d7fc6c8
+  offset: 27456
+}
+member {
   id: 0x309cb6d6
   type_id: 0x4d5cb8cd
   offset: 64
@@ -49688,11 +49693,6 @@ member {
 member {
   id: 0x3190e1a6
   type_id: 0x496df688
-}
-member {
-  id: 0x31a41cbe
-  type_id: 0x49be2d18
-  offset: 27456
 }
 member {
   id: 0x31aa1057
@@ -54975,6 +54975,16 @@ member {
   id: 0xf4d5cba6
   name: "__devices"
   type_id: 0xd3c80119
+}
+member {
+  id: 0x6e216a53
+  name: "__donotuse_b448672457"
+  type_id: 0x89d2d38c
+}
+member {
+  id: 0x6e3a9bb3
+  name: "__donotuse_b448672457"
+  type_id: 0x92233392
 }
 member {
   id: 0x6d24d29f
@@ -87839,16 +87849,6 @@ member {
   name: "cpumask"
   type_id: 0xc8e4d7d1
   offset: 384
-}
-member {
-  id: 0x7d136a1a
-  name: "cpumask_sme_dvmsync"
-  type_id: 0xb79448be
-}
-member {
-  id: 0x7d3d34f2
-  name: "cpumask_sme_dvmsync"
-  type_id: 0x99caa0ae
 }
 member {
   id: 0x06a558af
@@ -270631,16 +270631,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x49be2d18
-  kind: UNION
-  definition {
-    bytesize: 8
-    member_id: 0x7d3d34f2
-    member_id: 0x2ec1e396
-    member_id: 0x36752b74
-  }
-}
-struct_union {
   id: 0x49df90a7
   kind: UNION
   definition {
@@ -270874,6 +270864,16 @@ struct_union {
     bytesize: 8
     member_id: 0x6e4d805e
     member_id: 0xd4146c29
+  }
+}
+struct_union {
+  id: 0x4d7fc6c8
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x6e3a9bb3
+    member_id: 0x2ec1e396
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -286145,7 +286145,7 @@ struct_union {
   name: "bindings::bindings_raw::task_struct__bindgen_ty_2"
   definition {
     bytesize: 8
-    member_id: 0x7d136a1a
+    member_id: 0x6e216a53
     member_id: 0xaa377e00
     member_id: 0xc5d102b3
   }
@@ -338615,7 +338615,7 @@ struct_union {
     member_id: 0xd666c96b
     member_id: 0x9a3adcaf
     member_id: 0x355c7c3c
-    member_id: 0x31a41cbe
+    member_id: 0x3094664a
     member_id: 0xf0d65f1a
     member_id: 0x04993174
     member_id: 0x4454f9d3
