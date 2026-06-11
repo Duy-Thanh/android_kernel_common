@@ -540,10 +540,10 @@ static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu, u32 mp_state)
 		reset_state->reset = false;
 		hyp_vcpu->power_state = PSCI_0_2_AFFINITY_LEVEL_OFF;
 	} else if (pkvm_hyp_vm_has_pvmfw(hyp_vm)) {
-		if (READ_ONCE(hyp_vm->primary_vcpu))
+		if (hyp_vm->pvmfw_entry_vcpu)
 			return -EINVAL;
 
-		WRITE_ONCE(hyp_vm->primary_vcpu, hyp_vcpu);
+		hyp_vm->pvmfw_entry_vcpu = hyp_vcpu;
 		reset_state->reset = true;
 		hyp_vcpu->power_state = PSCI_0_2_AFFINITY_LEVEL_ON_PENDING;
 	} else {
@@ -596,9 +596,8 @@ static void teardown_hyp_vcpu_init(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	unpin_host_vcpu(hyp_vcpu);
 
-	/* Only runs pre-publish; the slot can only hold NULL or this vCPU. */
-	if (READ_ONCE(hyp_vm->primary_vcpu) == hyp_vcpu)
-		WRITE_ONCE(hyp_vm->primary_vcpu, NULL);
+	if (hyp_vm->pvmfw_entry_vcpu == hyp_vcpu)
+		hyp_vm->pvmfw_entry_vcpu = NULL;
 
 	if (!hyp_vcpu->vcpu.arch.sve_state)
 		return;
@@ -1262,7 +1261,7 @@ int pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	/* Must be done after reseting sys registers. */
 	kvm_reset_vcpu_psci(vcpu, reset_state);
-	if (READ_ONCE(hyp_vm->primary_vcpu) == hyp_vcpu) {
+	if (hyp_vm->pvmfw_entry_vcpu == hyp_vcpu) {
 		struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
 		u64 entry = hyp_vm->kvm.arch.pkvm.pvmfw_load_addr;
 		int i;
@@ -1279,13 +1278,7 @@ int pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 		/* PC: IPA of pvmfw base */
 		*vcpu_pc(&hyp_vcpu->vcpu) = entry;
-
-		/*
-		 * Single-writer (this vCPU, post cmpxchg ON_PENDING -> ON).
-		 * WRITE_ONCE pairs with READ_ONCE under vcpus_lock in
-		 * pkvm_vcpu_init_psci() / pkvm_reset_vcpu().
-		 */
-		WRITE_ONCE(hyp_vm->primary_vcpu, PKVM_PVMFW_ENTERED);
+		hyp_vm->pvmfw_entry_vcpu = NULL;
 
 		/* Auto enroll MMIO guard */
 		set_bit(KVM_ARCH_FLAG_MMIO_GUARD, &hyp_vm->kvm.arch.flags);
