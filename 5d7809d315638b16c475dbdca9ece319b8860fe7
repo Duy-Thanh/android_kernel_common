@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c165b8_a93e1c2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-11T19:36:25Z",
+      "side": 1,
+      "message": "what is the default behavior of this? Is it the same as before with only SOFTLOCKUP?",
+      "revId": "5d7809d315638b16c475dbdca9ece319b8860fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
