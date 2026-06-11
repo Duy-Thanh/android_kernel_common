@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "060f8b43_90856c22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-11T09:07:40Z",
+      "side": 1,
+      "message": "Nit: s/flows/copies, it\u0027s not a river.",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac27894f_87108b2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-11T09:07:40Z",
+      "side": 1,
+      "message": "It doesn\u0027t \"already\" as that\u0027s added by this patch, right?",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
