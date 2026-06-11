@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0612c83e_6a1a0c37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:40:48Z",
+      "side": 1,
+      "message": "Fixed it and noted the fix in the parenthetical comment",
+      "parentUuid": "901756c5_21614976",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac27894f_87108b2b",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "This is FROMLIST:, but this is wrong (unlike the river one, which is just bad wording), I could add a parenthetical comment saying it isn\u0027t so. WTDY?",
       "parentUuid": "ac27894f_87108b2b",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54d8ed6_954955c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:40:48Z",
+      "side": 1,
+      "message": "Fixed it and noted the fix in the parenthetical comment",
+      "parentUuid": "deafd4ca_dddf579a",
       "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
