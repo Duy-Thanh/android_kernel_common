@@ -22,6 +22,30 @@
       },
       "revId": "8759108beee2447429ed3e516df177c106c88813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce60e1f_a08b03f3",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1570,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-11T17:08:02Z",
+      "side": 1,
+      "message": "oh, thanks. Yes, let me look into that too. I assumed since this is 6.12 it was already present in this release branch. 1 sec.",
+      "parentUuid": "2d493a44_18eaa27f",
+      "range": {
+        "startLine": 1570,
+        "startChar": 0,
+        "endLine": 1570,
+        "endChar": 26
+      },
+      "revId": "8759108beee2447429ed3e516df177c106c88813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
