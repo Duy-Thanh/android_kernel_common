@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "901756c5_21614976",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:09:50Z",
+      "side": 1,
+      "message": "Lol :) agree, but this _is_ FROMLIST.",
+      "parentUuid": "060f8b43_90856c22",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac27894f_87108b2b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-11T09:07:40Z",
       "side": 1,
       "message": "It doesn\u0027t \"already\" as that\u0027s added by this patch, right?",
+      "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deafd4ca_dddf579a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:09:50Z",
+      "side": 1,
+      "message": "This is FROMLIST:, but this is wrong (unlike the river one, which is just bad wording), I could add a parenthetical comment saying it isn\u0027t so. WTDY?",
+      "parentUuid": "ac27894f_87108b2b",
       "revId": "79e341409743abbc7e68fdb03f6984bc797e3d35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
