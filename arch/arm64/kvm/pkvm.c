@@ -51,6 +51,12 @@
 
 DEFINE_STATIC_KEY_FALSE(kvm_protected_mode_initialized);
 
+/*
+ * Maximum number of consitutents allowed in a ffa mem descriptor by default.
+ * This can be overridden via command line.
+ */
+static size_t ffa_max_nr_constituents = 4096;
+
 static phys_addr_t pvmfw_base;
 static phys_addr_t pvmfw_size;
 
@@ -63,6 +69,8 @@ phys_addr_t hyp_mem_size;
 
 extern struct pkvm_device *kvm_nvhe_sym(registered_devices);
 extern u32 kvm_nvhe_sym(registered_devices_nr);
+
+extern size_t kvm_nvhe_sym(hyp_ffa_proxy_pages);
 
 static enum {
 	PKVM_HOST_S2_CMA,
@@ -310,6 +318,46 @@ early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
 DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
 
+static unsigned long __init ffa_proxy_pages(void)
+{
+	size_t desc_max;
+	unsigned long num_pages;
+
+	/*
+	 * SG_MAX_SEGMENTS is supposed to bound the number of elements in an
+	 * sglist, which should match the number of consituents in the
+	 * corresponding FFA descriptor. As such, the EL2 buffer needs to be
+	 * large enough to hold a descriptor with SG_MAX_SEGMENTS consituents
+	 * at least. But the kernel's DMA code doesn't enforce the limit, and
+	 * it is sometimes abused, so let's allow larger descriptors and hope
+	 * for the best.
+	 */
+	BUG_ON(ffa_max_nr_constituents < SG_MAX_SEGMENTS);
+
+	/*
+	 * The hypervisor FFA proxy needs enough memory to buffer a fragmented
+	 * descriptor returned from EL3 in response to a RETRIEVE_REQ call.
+	 */
+	desc_max = sizeof(struct ffa_mem_region) +
+		   sizeof(struct ffa_mem_region_attributes) +
+		   sizeof(struct ffa_composite_mem_region) +
+		   ffa_max_nr_constituents * sizeof(struct ffa_mem_region_addr_range);
+
+	/* Plus a page each for the hypervisor's RX and TX mailboxes. */
+	num_pages = (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
+
+	kvm_nvhe_sym(hyp_ffa_proxy_pages) = num_pages;
+
+	return num_pages;
+}
+
+static int __init early_ffa_max_nr_constituents(char *arg)
+{
+	return kstrtoul(arg, 10, &ffa_max_nr_constituents);
+}
+
+early_param("kvm-arm.ffa_max_nr_constituents", early_ffa_max_nr_constituents);
+
 void __init kvm_hyp_reserve(void)
 {
 	u64 hyp_mem_pages = 0;
@@ -342,7 +390,7 @@ void __init kvm_hyp_reserve(void)
 	hyp_mem_pages += host_s2_pgtable_pages();
 	hyp_mem_pages += hyp_vmemmap_pages(STRUCT_HYP_PAGE_SIZE);
 	hyp_mem_pages += pkvm_selftest_pages();
-	hyp_mem_pages += hyp_ffa_proxy_pages();
+	hyp_mem_pages += ffa_proxy_pages();
 	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend))
 		hyp_mem_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
 	hyp_mem_pages++; /* hyp_ppages */
