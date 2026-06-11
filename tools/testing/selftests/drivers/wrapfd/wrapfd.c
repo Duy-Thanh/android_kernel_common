@@ -979,9 +979,34 @@ static void test_lseek(struct __test_metadata *_metadata,
 }
 
 
+static void test_close_while_mapped(struct __test_metadata *_metadata,
+				    FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd;
+	char *ptr;
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+
+	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		   wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
+
+	/* Close wrapfd while mapping is still active */
+	close(wrapfd);
+
+	/* Access mapping to ensure it's still valid */
+	ptr[0]++;
+	ptr[0]--;
+
+	/* Unmap, which should trigger wrap_release */
+	ASSERT_EQ(munmap(ptr, self->size), 0);
+}
+
 static void run_tests(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd, int rdonly_fd)
 {
+	test_close_while_mapped(_metadata, self, fd);
 	test_wrap(_metadata, self, fd);
 	test_wrap_rdonly_file(_metadata, self, rdonly_fd);
 	test_load_mapped(_metadata, self, fd);

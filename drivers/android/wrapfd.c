@@ -22,6 +22,7 @@
 #include <linux/spinlock.h>
 #include <linux/uaccess.h>
 #include <linux/uio.h>
+#include <linux/kref.h>
 #include <linux/wrapfd.h>
 #include <uapi/linux/wrapfd.h>
 
@@ -368,7 +369,18 @@ struct wrap_ctx {
 	unsigned long map_count;
 	unsigned long use_count;
 	bool unusable;
+	struct kref refcount;
 };
+
+static void wrap_ctx_destroy(struct kref *kref)
+{
+	struct wrap_ctx *ctx = container_of(kref, struct wrap_ctx, refcount);
+
+	if (ctx->content)
+		ctx->content->ops->free(ctx->content);
+	kfree(ctx);
+}
+
 
 static struct wrap_ctx *create_wrap_ctx(void)
 {
@@ -379,6 +391,7 @@ static struct wrap_ctx *create_wrap_ctx(void)
 		return NULL;
 
 	spin_lock_init(&ctx->lock);
+	kref_init(&ctx->refcount);
 
 	return ctx;
 }
@@ -521,6 +534,7 @@ static void wrap_vm_close(struct vm_area_struct *vma)
 	struct wrap_ctx_mapping *mapping;
 	struct file *file = NULL;
 	struct wrap_ctx *ctx;
+	bool destroy_ctx = false;
 
 	mapping = container_of(vma->vm_ops, struct wrap_ctx_mapping, vm_ops);
 	if (mapping->content_vm_ops && mapping->content_vm_ops->close)
@@ -536,10 +550,13 @@ static void wrap_vm_close(struct vm_area_struct *vma)
 		if (mapping->file)
 			file = mapping->file;
 		kfree(mapping);
+		destroy_ctx = true;
 	}
 	spin_unlock(&ctx->lock);
 	if (file)
 		fput(file);
+	if (destroy_ctx)
+		kref_put(&ctx->refcount, wrap_ctx_destroy);
 }
 
 static int wrap_mmap(struct file *file, struct vm_area_struct *vma)
@@ -636,6 +653,7 @@ unlock:
 	mapping->vm_ops.close = wrap_vm_close;
 	vma->vm_ops = &mapping->vm_ops;
 	mapping->ctx = ctx;
+	kref_get(&ctx->refcount);
 	refcount_set(&mapping->refcnt, 1);
 	/*
 	 * content->ops->mmap might replace original vma->vm_file and vma will
@@ -703,9 +721,7 @@ static int wrap_release(struct inode *ignored, struct file *file)
 {
 	struct wrap_ctx *ctx = file->private_data;
 
-	if (ctx->content)
-		ctx->content->ops->free(ctx->content);
-	kfree(ctx);
+	kref_put(&ctx->refcount, wrap_ctx_destroy);
 
 	return 0;
 }
