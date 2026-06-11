@@ -34,10 +34,15 @@
         <option name='binary' key='fs/ext4/ext4-test' value='/data/kunit/x86_64/ext4-test.ko' />
         <option name='binary' key='fs/fat/fat_test' value='/data/kunit/x86_64/fat_test.ko' />
         <option name='binary' key='kernel/time/time_test' value='/data/kunit/x86_64/time_test.ko' />
+        <option name='binary' key='lib/crc/tests/crc_kunit' value='/data/kunit/x86_64/crc_kunit.ko' />
+        <option name='binary' key='lib/crypto/tests/aes_cbc_macs_kunit' value='/data/kunit/x86_64/aes_cbc_macs_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/blake2b_kunit' value='/data/kunit/x86_64/blake2b_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/blake2s_kunit' value='/data/kunit/x86_64/blake2s_kunit.ko' />
+        <option name='binary' key='lib/crypto/tests/chacha20poly1305_kunit' value='/data/kunit/x86_64/chacha20poly1305_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/curve25519_kunit' value='/data/kunit/x86_64/curve25519_kunit.ko' />
+        <option name='binary' key='lib/crypto/tests/ghash_kunit' value='/data/kunit/x86_64/ghash_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/md5_kunit' value='/data/kunit/x86_64/md5_kunit.ko' />
+        <option name='binary' key='lib/crypto/tests/nh_kunit' value='/data/kunit/x86_64/nh_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/poly1305_kunit' value='/data/kunit/x86_64/poly1305_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/polyval_kunit' value='/data/kunit/x86_64/polyval_kunit.ko' />
         <option name='binary' key='lib/crypto/tests/sha1_kunit' value='/data/kunit/x86_64/sha1_kunit.ko' />
