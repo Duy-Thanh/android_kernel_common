@@ -16,6 +16,24 @@
       "message": "So attach_task() and attach_one_task() have static copies in the device vh drivers, and moving this to sched.h causes a collision there.\n\n@cmllamas remind me to chat with you on Monday about ideas for transitioning this in the smoothest way.",
       "revId": "00b355c65e1aa0f211642c21c18914dec253cbc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e13f7e_1da9dbd8",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2949,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-11T19:53:12Z",
+      "side": 1,
+      "message": "Resolved - pa/4047209",
+      "parentUuid": "1bb8348b_a617541f",
+      "revId": "00b355c65e1aa0f211642c21c18914dec253cbc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
