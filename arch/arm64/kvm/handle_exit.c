@@ -490,7 +490,7 @@ int handle_hyp_req(struct kvm_vcpu *vcpu, struct kvm_hyp_req *req, void *arg)
 
 	switch (req->type) {
 	case KVM_HYP_REQ_TYPE_HYP_ALLOC:
-		return __pkvm_topup_hyp_alloc(req->mem.nr_pages);
+		return __pkvm_topup_hyp_alloc(req->mem.nr_pages, arg ? (gfp_t)(uintptr_t)arg : GFP_KERNEL);
 
 	case KVM_HYP_REQ_TYPE_MEM_IOMMU:
 		return __pkvm_topup_hyp_iommu(1, req->mem.nr_pages << PAGE_SHIFT,
