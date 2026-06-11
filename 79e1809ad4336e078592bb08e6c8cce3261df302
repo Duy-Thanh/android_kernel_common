@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3801a8b4_033ad0e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:58:41Z",
+      "side": 1,
+      "message": "Abandoned this patch since I modified the previous one.",
+      "parentUuid": "a9ac6fa7_585765a6",
+      "revId": "79e1809ad4336e078592bb08e6c8cce3261df302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8a1c779_e994ff15",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-11T09:22:19Z",
       "side": 1,
       "message": "Nit: Needlessly verbose. Just \"two locals.\" or even stop after \"struct.\"",
+      "revId": "79e1809ad4336e078592bb08e6c8cce3261df302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a17f1d2c_edb5eef7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:58:41Z",
+      "side": 1,
+      "message": "Abandoned this patch since I modified the previous one.",
+      "parentUuid": "d8a1c779_e994ff15",
       "revId": "79e1809ad4336e078592bb08e6c8cce3261df302",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
