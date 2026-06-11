@@ -123,7 +123,7 @@ static void *__host_stage2_alloc(void *arg, unsigned long order)
 	gfp_t gfp = (gfp_t)(uintptr_t)arg;
 	struct page *p;
 
-	p = __cma_alloc(host_s2_cma, 1, 0, gfp);
+	p = __cma_alloc(host_s2_cma, 1, 0, gfp & (GFP_KERNEL | GFP_ATOMIC | __GFP_NOWARN | __GFP_NORETRY));
 	if (!p)
 		return NULL;
 
@@ -142,6 +142,9 @@ int pkvm_host_stage2_topup(gfp_t gfp)
 
 	if (!gfpflags_allow_blocking(gfp) && host_s2_mode != PKVM_HOST_S2_GCMA)
 		goto err;
+
+	if (host_s2_mode == PKVM_HOST_S2_GCMA)
+		gfp |= __GFP_ATOMIC;
 
 	init_hyp_memcache(&mc);
 	ret = __topup_hyp_memcache(&mc, 3, __host_stage2_alloc, kvm_host_pa,
@@ -1941,11 +1944,15 @@ int __pkvm_topup_hyp_alloc_mgt_mc(enum hyp_alloc_mgt_id id, struct kvm_hyp_memca
 int __pkvm_topup_hyp_alloc(unsigned long nr_pages)
 {
 	struct kvm_hyp_memcache mc;
+	gfp_t gfp = GFP_KERNEL;
 	int ret;
+
+	if (host_s2_mode == PKVM_HOST_S2_GCMA)
+		gfp = GFP_ATOMIC;
 
 	init_hyp_memcache(&mc);
 
-	ret = topup_hyp_memcache(&mc, nr_pages, 0);
+	ret = topup_hyp_memcache_gfp(&mc, nr_pages, 0, gfp);
 	if (ret)
 		return ret;
 
