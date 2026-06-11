@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ac6fa7_585765a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-11T09:22:19Z",
+      "side": 1,
+      "message": "\"s/into the/into/\" better indicates that these wrappers are new in this patch.",
+      "revId": "79e1809ad4336e078592bb08e6c8cce3261df302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a1c779_e994ff15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-06-11T09:22:19Z",
+      "side": 1,
+      "message": "Nit: Needlessly verbose. Just \"two locals.\" or even stop after \"struct.\"",
+      "revId": "79e1809ad4336e078592bb08e6c8cce3261df302",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
