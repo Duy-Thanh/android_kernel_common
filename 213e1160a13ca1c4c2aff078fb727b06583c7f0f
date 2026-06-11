@@ -33,6 +33,24 @@
       "message": "To add more context: this patch enables hardlockup detection in all Android devices, and we\u0027ll only enable hardlockup_panic in AL devices.",
       "revId": "213e1160a13ca1c4c2aff078fb727b06583c7f0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce02125_224711ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-06-11T05:16:59Z",
+      "side": 1,
+      "message": "Please add this rationale to the commit message.",
+      "parentUuid": "99401fe9_3881562c",
+      "revId": "213e1160a13ca1c4c2aff078fb727b06583c7f0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
