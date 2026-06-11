@@ -9,7 +9,10 @@ use crate::{
     error::Result,
     uaccess::UserSliceReader,
 };
-use core::ptr::{self, NonNull};
+use core::{
+    num::NonZero,
+    ptr::{self, NonNull},
+};
 
 /// A bitwise shift for the page size.
 pub const PAGE_SHIFT: usize = bindings::PAGE_SHIFT as usize;
@@ -28,6 +31,21 @@ pub const fn page_align(addr: usize) -> usize {
     // Parentheses around `PAGE_SIZE - 1` to avoid triggering overflow sanitizers in the wrong
     // cases.
     (addr + (PAGE_SIZE - 1)) & PAGE_MASK
+}
+
+/// Round down the given number to the nearest multiple of [`PAGE_SIZE`].
+pub fn page_align_down(addr: usize) -> usize {
+    addr & PAGE_MASK
+}
+
+/// Extract the offset within the page from the full address.
+pub fn offset_in_page(addr: usize) -> usize {
+    addr & !PAGE_MASK
+}
+
+/// Returns whether or not the given address falls on a page boundary.
+pub fn is_page_aligned(addr: usize) -> bool {
+    offset_in_page(addr) == 0
 }
 
 /// A pointer to a page that owns the page allocation.
@@ -264,5 +282,53 @@ impl Drop for Page {
     fn drop(&mut self) {
         // SAFETY: By the type invariants, we have ownership of the page and can free it.
         unsafe { bindings::__free_pages(self.page.as_ptr(), 0) };
+    }
+}
+
+/// Represents a page allocated using the kernel's __get_free_page() API.
+/// The underlying memory is implicitly mapped but uninitialized.
+pub struct FreePage(NonNull<ffi::c_void>);
+
+/// Returns a single low-memory page that's implicitly mapped.
+pub fn get_free_page(flags: kernel::alloc::Flags) -> Result<FreePage> {
+    // SAFETY: Always safe to call with valid flags.
+    let addr = unsafe { bindings::get_free_page(flags.as_raw()) };
+
+    let addr = NonZero::new(addr).ok_or(ENOMEM)?;
+    let page_ptr = NonNull::with_exposed_provenance(addr);
+
+    Ok(FreePage(page_ptr))
+}
+
+impl FreePage {
+    /// Returns the address of the page as a raw pointer.
+    pub fn as_ptr(&self) -> *mut ffi::c_void {
+        self.0.as_ptr()
+    }
+}
+
+impl core::ops::Deref for FreePage {
+    type Target = [u8];
+
+    fn deref(&self) -> &Self::Target {
+        // SAFETY: We received a valid, non-null pointer to a page-sized allocation from
+        // __get_free_page.
+        unsafe { core::slice::from_raw_parts(self.as_ptr() as *const u8, PAGE_SIZE) }
+    }
+}
+
+impl core::ops::DerefMut for FreePage {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: We received a valid, non-null pointer to a page-sized allocation from
+        // __get_free_page.
+        unsafe { core::slice::from_raw_parts_mut(self.as_ptr() as *mut u8, PAGE_SIZE) }
+    }
+}
+
+impl Drop for FreePage {
+    fn drop(&mut self) {
+        // SAFETY: We received a valid, non-null pointer to a page-sized allocation from
+        // __get_free_page.
+        unsafe { bindings::free_page(self.0.addr().get()) };
     }
 }

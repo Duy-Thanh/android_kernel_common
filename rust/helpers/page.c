@@ -25,3 +25,13 @@ __rust_helper int rust_helper_page_to_nid(const struct page *page)
 	return page_to_nid(page);
 }
 #endif
+
+__rust_helper unsigned long rust_helper_get_free_page(unsigned int gfp_mask)
+{
+	return __get_free_page(gfp_mask);
+}
+
+__rust_helper void rust_helper_free_page(unsigned long addr)
+{
+	free_page(addr);
+}
