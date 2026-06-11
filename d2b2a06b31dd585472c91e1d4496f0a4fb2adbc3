@@ -161,6 +161,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c53b89_3809687e",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-11T14:34:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21d8ba8b_9ada9910",
+      "range": {
+        "startLine": 835,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 10
+      },
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f6f64de_13f3edab",
