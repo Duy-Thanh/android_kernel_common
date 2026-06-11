@@ -258,7 +258,7 @@ static inline unsigned long pkvm_selftest_pages(void) { return 0; }
  * Maximum number of consitutents allowed in a descriptor. This number is
  * arbitrary, see comment below on SG_MAX_SEGMENTS in hyp_ffa_proxy_pages().
  */
-#define KVM_FFA_MAX_NR_CONSTITUENTS	4096
+#define KVM_FFA_MAX_NR_CONSTITUENTS	40960
 
 static inline unsigned long hyp_ffa_proxy_pages(void)
 {
