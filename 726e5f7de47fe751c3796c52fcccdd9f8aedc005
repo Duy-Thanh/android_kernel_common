@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b675304_97998293",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-11T11:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5496447a_089083a0",
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01631f92_31bfed07",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-10T16:40:54Z",
       "side": 1,
       "message": "nit: might be worth saying a word or two about why we believe it is still secure and safe if we rearrange the locks this way? (capturing what we discussed/brainstormed yesterday)",
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd574afb_bd592870",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-11T11:34:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01631f92_31bfed07",
       "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -70,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b2ec0d_6d822197",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-11T11:34:41Z",
+      "side": 1,
+      "message": "Two sentences were just laying context for the third one. Removed",
+      "parentUuid": "d6e6ed91_6d7cf1d3",
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88d134c9_8f9a2484",
@@ -101,6 +155,24 @@
           ]
         }
       ],
+      "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d702fa0d_ca72218c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-11T11:34:41Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "88d134c9_8f9a2484",
       "revId": "726e5f7de47fe751c3796c52fcccdd9f8aedc005",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
