@@ -143,6 +143,9 @@ int pkvm_host_stage2_topup(gfp_t gfp)
 	if (!gfpflags_allow_blocking(gfp) && host_s2_mode != PKVM_HOST_S2_GCMA)
 		goto err;
 
+	if (host_s2_mode == PKVM_HOST_S2_GCMA)
+		gfp |= GFP_ATOMIC;
+
 	init_hyp_memcache(&mc);
 	ret = __topup_hyp_memcache(&mc, 3, __host_stage2_alloc, kvm_host_pa,
 				   (void *)(uintptr_t)(gfp | __GFP_NOWARN), 0);
