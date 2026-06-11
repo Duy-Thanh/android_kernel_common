@@ -33,6 +33,47 @@
       "message": "338973",
       "revId": "04002d5ce92e413dc9ed11f87cc3c1fd92366a93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4472667d_850f18e0",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-11T10:54:04Z",
+      "side": 1,
+      "message": "You need a semi colon here (which is why the build failed)",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2b07edcb_7ed539ac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "04002d5ce92e413dc9ed11f87cc3c1fd92366a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
