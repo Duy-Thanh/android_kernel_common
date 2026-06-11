@@ -16,6 +16,24 @@
       "message": "\"The syndrome is inert there\" is a weird way of putting it. \"The register has no effect there\" perhaps, or something like that?",
       "revId": "ce3e86cedee1ebcac2f6aa398687973d1fc2ecf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5471a67_fb4b6a8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-11T09:39:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fed22275_82fda57e",
+      "revId": "ce3e86cedee1ebcac2f6aa398687973d1fc2ecf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
