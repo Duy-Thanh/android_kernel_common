@@ -34,6 +34,24 @@
       "parentUuid": "5454ed2b_a6b930d3",
       "revId": "4ab77b733781a9360605c732572b293bb6b2988e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725dcd4e_fd862369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-11T08:38:26Z",
+      "side": 1,
+      "message": "Yeah, I was thinking of setting the `event` field for the `hyp_vcpu` based on the register read so that we can reuse the existing logic for doing the switch.",
+      "parentUuid": "52282035_07d1ef6e",
+      "revId": "4ab77b733781a9360605c732572b293bb6b2988e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
