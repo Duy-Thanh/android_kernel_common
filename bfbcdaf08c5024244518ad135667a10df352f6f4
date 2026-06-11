@@ -56,6 +56,24 @@
       "message": "Can you also pull in the fix https://lore.kernel.org/all/20260521053050.1785858-1-qiwenjie@xiaomi.com/?",
       "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de244667_89547b98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-06-11T18:09:38Z",
+      "side": 1,
+      "message": "Good spot William.\n\nActually the fix which made it in is logcically same commit by Chao. \n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h\u003ddev\u0026id\u003d4ae625bb5a410b96e71da0c86385059b3333d480\n\nPlease add that to the series as well.",
+      "parentUuid": "cd79b3e6_98449336",
+      "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
