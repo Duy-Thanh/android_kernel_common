@@ -90,6 +90,8 @@ static bool has_host_signalled;
 static struct ffa_handle *spm_handles, *spm_free_handle;
 static u32 num_spm_handles;
 
+size_t hyp_ffa_proxy_pages;
+
 static DEFINE_HYP_SPINLOCK(version_lock);
 static DEFINE_HYP_SPINLOCK(kvm_ffa_hyp_lock);
 
@@ -1972,7 +1974,7 @@ int hyp_ffa_init(void *pages)
 	ffa_desc_buf = (struct kvm_ffa_descriptor_buffer) {
 		.buf	= pages,
 		.len	= PAGE_SIZE *
-			  (hyp_ffa_proxy_pages() - (2 * KVM_FFA_MBOX_NR_PAGES)),
+			  (hyp_ffa_proxy_pages - (2 * KVM_FFA_MBOX_NR_PAGES)),
 	};
 
 	hyp_buffers = (struct kvm_ffa_buffers) {

@@ -90,7 +90,7 @@ static int divide_memory_pool(void *virt, unsigned long size)
 	if (!host_s2_mmio_base)
 		return -ENOMEM;
 
-	nr_pages = hyp_ffa_proxy_pages();
+	nr_pages = hyp_ffa_proxy_pages;
 	ffa_proxy_pages = hyp_early_alloc_contig(nr_pages);
 	if (!ffa_proxy_pages)
 		return -ENOMEM;
