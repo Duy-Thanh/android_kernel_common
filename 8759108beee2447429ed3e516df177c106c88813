@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d493a44_18eaa27f",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1570,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-06-11T16:56:09Z",
+      "side": 1,
+      "message": "Some of the builds are complaining this macro is missing. Do you need to cherry-pick the upstream commit 092d00ead733563f6d278295e0b5c5f97558b726?",
+      "range": {
+        "startLine": 1570,
+        "startChar": 0,
+        "endLine": 1570,
+        "endChar": 26
+      },
+      "revId": "8759108beee2447429ed3e516df177c106c88813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
