@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21d8ba8b_9ada9910",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-06-11T03:17:12Z",
+      "side": 1,
+      "message": "No, that scenario cannot happen. It is prevented by two independent mechanisms in zram: per-invocation wb_ctl allocation and device-level mutual exclusion via pp_in_progress.\n\n1. wb_ctl is allocated per-writeback invocation (Not shared)\n`wb_ctl \u003d init_wb_ctl(zram);`\n2. Writeback concurrency is strictly mutually excluded.\nzram-\u003epp_in_progress is reset back to 0 only after release_wb_ctl() has fully finished.",
+      "parentUuid": "7d5da82a_fe7bca98",
+      "range": {
+        "startLine": 835,
+        "startChar": 1,
+        "endLine": 835,
+        "endChar": 10
+      },
+      "revId": "d2b2a06b31dd585472c91e1d4496f0a4fb2adbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f6f64de_13f3edab",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 1
