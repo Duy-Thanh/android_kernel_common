@@ -904,6 +904,7 @@
   get_user_pages
   get_user_pages_fast
   get_vaddr_frames
+  get_zeroed_page_noprof
   glob_match
   gpiochip_generic_config
   gpiochip_generic_free
@@ -2421,6 +2422,7 @@
   vmap
   __vma_start_write
   vmf_insert_pfn_prot
+  vm_insert_page
   vm_node_stat
   vm_unmapped_area
   vprintk
