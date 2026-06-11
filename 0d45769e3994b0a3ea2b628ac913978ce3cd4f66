@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16cef49_bab0eee7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2026-06-11T07:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72db41d0_4b2cd725",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "0d45769e3994b0a3ea2b628ac913978ce3cd4f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22d5a4e7_8e3c8e48",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-06-08T20:04:33Z",
       "side": 1,
       "message": "If the change is in the maintainer\u0027s tree then it should be titled FROMGIT and not FROMLIST. It should contain the link to the maintainer\u0027s tree and its SHA.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 128
+      },
+      "revId": "0d45769e3994b0a3ea2b628ac913978ce3cd4f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503fc4a2_0c7330cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2026-06-11T07:56:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22d5a4e7_8e3c8e48",
       "range": {
         "startLine": 22,
         "startChar": 0,
