@@ -52,6 +52,24 @@
       "parentUuid": "acf80f87_c237e1f6",
       "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3bf5371_c7279ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-12T13:52:59Z",
+      "side": 1,
+      "message": "It looks like a bug. For now you could do one of:\n\n- ignore the issue, the symbols are harmless here\n- drop the 3 lines and change the description to \"add empty symbol list\"\n\nThen ack my comment and carry on.\n\nI don\u0027t mind which.",
+      "parentUuid": "de051bb9_46b77eee",
+      "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
