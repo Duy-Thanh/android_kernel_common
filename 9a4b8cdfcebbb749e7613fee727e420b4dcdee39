@@ -16,6 +16,24 @@
       "message": "please fix the checkpatch issues",
       "revId": "9a4b8cdfcebbb749e7613fee727e420b4dcdee39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "363c6b27_16b051ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-06-12T16:16:10Z",
+      "side": 1,
+      "message": "I squashed the checkpatch fixes into this change.",
+      "parentUuid": "19014a11_b65b52fd",
+      "revId": "9a4b8cdfcebbb749e7613fee727e420b4dcdee39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
