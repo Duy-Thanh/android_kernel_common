@@ -2581,6 +2581,9 @@ static struct platform_device *pci_pwrctrl_create_device(struct pci_bus *bus, in
 		goto err_put_of_node;
 	}
 
+	if (pci_pwrctrl_vendor_skip(np))
+		goto err_put_of_node;
+
 	/*
 	 * First check whether the pwrctrl device really needs to be created or
 	 * not. This is decided based on at least one of the power supplies
