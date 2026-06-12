@@ -16,6 +16,23 @@
       "message": "Needs respin bug cited by \"Bug: \" tag. Should be cherry-picked from the version in the android16-6.12 branch.",
       "revId": "132067b6ef12c9eb909dd165dc7a9d83b897b15c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371600d2_02d6747a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2026-06-12T01:25:19Z",
+      "side": 1,
+      "message": "Respin Bug: b/519494131",
+      "revId": "132067b6ef12c9eb909dd165dc7a9d83b897b15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
