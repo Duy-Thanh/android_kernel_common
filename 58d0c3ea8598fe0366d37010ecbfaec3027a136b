@@ -16,6 +16,24 @@
       "message": "is wonder ARM64 only? Not needed for desktop cases?",
       "revId": "58d0c3ea8598fe0366d37010ecbfaec3027a136b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9974db_fba9b401",
+        "filename": "bazel/modules_private.bzl",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-06-12T18:47:06Z",
+      "side": 1,
+      "message": "I have no way of testing this on x86_64 and I\u0027m not sure if there is a vendor who will be using it on x86_64. So I\u0027m punting enabling on x86_64 until someone requests for it and can verify it works.",
+      "parentUuid": "bcd8e501_d40e86c9",
+      "revId": "58d0c3ea8598fe0366d37010ecbfaec3027a136b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
