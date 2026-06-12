@@ -16,6 +16,24 @@
       "message": "what is the default behavior of this? Is it the same as before with only SOFTLOCKUP?",
       "revId": "5d7809d315638b16c475dbdca9ece319b8860fe7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d751f051_9eee77b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-06-12T02:23:03Z",
+      "side": 1,
+      "message": "After applying the CL, in addition to the original soft lockup detector, it is expected to run one more hard lockup detector at [1].\n\nIf a hard lockup is detected, it prints some more logs at [2].\n\n[1] https://elixir.bootlin.com/linux/v6.18/source/kernel/watchdog.c#L877\n[2] https://elixir.bootlin.com/linux/v6.18/source/kernel/watchdog.c#L221",
+      "parentUuid": "48c165b8_a93e1c2b",
+      "revId": "5d7809d315638b16c475dbdca9ece319b8860fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
