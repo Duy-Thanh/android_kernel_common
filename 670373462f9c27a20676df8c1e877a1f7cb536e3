@@ -16,6 +16,24 @@
       "message": "Can you fix all the checkpatch warnings?",
       "revId": "670373462f9c27a20676df8c1e877a1f7cb536e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a521f49_cdd182b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-06-12T17:42:38Z",
+      "side": 1,
+      "message": "yes, I thought I did, but see a bunch of warnings still exist.",
+      "parentUuid": "019a23ab_3f7432da",
+      "revId": "670373462f9c27a20676df8c1e877a1f7cb536e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
