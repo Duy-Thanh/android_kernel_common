@@ -33,6 +33,24 @@
       "message": "Respin Bug: b/519494131",
       "revId": "132067b6ef12c9eb909dd165dc7a9d83b897b15c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25ebdca_8b845c65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1980655
+      },
+      "writtenOn": "2026-06-12T02:13:01Z",
+      "side": 1,
+      "message": "I upload this patch to include `pci_print_aer` symbol. Initially I try cherrypick aosp/4101093 but there will be conflicts (aosp/41183530).\n\nTwo ways to avoid conflicts:\n1. Cherrypick  aosp/4006133, aosp/4006134, aosp/4006137 first, but it will make the symbol list on this branch inconsistent, which was rejected in the previous discussion.\n\n2. (This patch) Re-generating the Pixel symbol list directly on `android16-6.12-2026-03` branch, but it\u0027s a cherrypick CL.\n\nCould you suggest what\u0027s the best way to have `pci_print_aer` symbol in `android16-6.12-2026-03`?",
+      "parentUuid": "1fb77de8_9ffbcddb",
+      "revId": "132067b6ef12c9eb909dd165dc7a9d83b897b15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
