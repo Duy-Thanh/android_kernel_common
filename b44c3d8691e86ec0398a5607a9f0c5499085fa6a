@@ -16,6 +16,24 @@
       "message": "Drop this change. These symbols are taken care of elsewhere.",
       "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf80f87_c237e1f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-06-12T13:42:30Z",
+      "side": 1,
+      "message": "What am I missing then if [..]\u003cdevice\u003e_abi_update_symbol_list adds them?",
+      "parentUuid": "5ee28ef2_af420e13",
+      "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
