@@ -35,6 +35,14 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/pci.h>
 
+bool pci_pwrctrl_vendor_skip(struct device_node *np)
+{
+	bool skip = false;
+
+	trace_android_vh_pci_pwrctrl_should_skip(np, &skip);
+	return skip;
+}
+
 #include <linux/android_kabi.h>
 ANDROID_KABI_DECLONLY(static_call_mod);
 ANDROID_KABI_DECLONLY(trace_eval_map);
