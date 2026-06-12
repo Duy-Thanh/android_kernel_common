@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a03a8bc_c7c43d11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-12T21:18:44Z",
+      "side": 1,
+      "message": "I seem to hit a bug in wrapfd that close() may sometimes hang when the wrapfd is being mapped, and the agent gives me this fix and a test case for it. I don\u0027t know if this is a valid fix or not.\n\nCould you please take a look, and if it is a valid fix, help cherry-pick it to the right branches? Thanks!",
+      "revId": "fa9f6f426c03450c5cc46cb160b5f4f56db25f7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
