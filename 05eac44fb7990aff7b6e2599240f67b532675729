@@ -16,6 +16,23 @@
       "message": "@tinghsin@google.com, please open a respin bug and update the commit message",
       "revId": "05eac44fb7990aff7b6e2599240f67b532675729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64035b2d_3e41a90c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-12T10:19:58Z",
+      "side": 1,
+      "message": "Note to other reviewers: This cherry-pick is good; the conflicts were all mechanically resolved.",
+      "revId": "05eac44fb7990aff7b6e2599240f67b532675729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
