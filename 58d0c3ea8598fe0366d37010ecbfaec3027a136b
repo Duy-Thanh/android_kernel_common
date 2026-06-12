@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd8e501_d40e86c9",
+        "filename": "bazel/modules_private.bzl",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-12T17:35:23Z",
+      "side": 1,
+      "message": "is wonder ARM64 only? Not needed for desktop cases?",
+      "revId": "58d0c3ea8598fe0366d37010ecbfaec3027a136b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
