@@ -34,6 +34,24 @@
       "parentUuid": "bcd8e501_d40e86c9",
       "revId": "58d0c3ea8598fe0366d37010ecbfaec3027a136b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9418096a_f32dae5a",
+        "filename": "bazel/modules_private.bzl",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-12T22:06:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4d9974db_fba9b401",
+      "revId": "58d0c3ea8598fe0366d37010ecbfaec3027a136b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
