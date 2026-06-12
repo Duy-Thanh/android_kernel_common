@@ -1085,6 +1085,7 @@ void pci_release_bus_of_node(struct pci_bus *bus);
 
 int devm_of_pci_bridge_init(struct device *dev, struct pci_host_bridge *bridge);
 bool of_pci_supply_present(struct device_node *np);
+bool pci_pwrctrl_vendor_skip(struct device_node *np);
 int of_pci_get_equalization_presets(struct device *dev,
 				    struct pci_eq_presets *presets,
 				    int num_lanes);
@@ -1129,6 +1130,11 @@ static inline int devm_of_pci_bridge_init(struct device *dev, struct pci_host_br
 }
 
 static inline bool of_pci_supply_present(struct device_node *np)
+{
+	return false;
+}
+
+static inline bool pci_pwrctrl_vendor_skip(struct device_node *np)
 {
 	return false;
 }
