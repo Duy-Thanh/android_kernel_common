@@ -2565,11 +2565,13 @@ bool pci_bus_read_dev_vendor_id(struct pci_bus *bus, int devfn, u32 *l,
 EXPORT_SYMBOL(pci_bus_read_dev_vendor_id);
 
 #if IS_ENABLED(CONFIG_PCI_PWRCTRL)
+#include <trace/hooks/pci.h>
 static struct platform_device *pci_pwrctrl_create_device(struct pci_bus *bus, int devfn)
 {
 	struct pci_host_bridge *host = pci_find_host_bridge(bus);
 	struct platform_device *pdev;
 	struct device_node *np;
+	bool skip = false;
 
 	np = of_pci_find_child_device(dev_of_node(&bus->dev), devfn);
 	if (!np)
@@ -2580,6 +2582,10 @@ static struct platform_device *pci_pwrctrl_create_device(struct pci_bus *bus, in
 		put_device(&pdev->dev);
 		goto err_put_of_node;
 	}
+
+	trace_android_vh_pci_pwrctrl_should_skip(np, &skip);
+	if (skip)
+		goto err_put_of_node;
 
 	/*
 	 * First check whether the pwrctrl device really needs to be created or
