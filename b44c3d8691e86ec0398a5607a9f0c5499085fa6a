@@ -70,6 +70,24 @@
       "parentUuid": "de051bb9_46b77eee",
       "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fda5d31_a3c1e1d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-06-12T15:08:39Z",
+      "side": 1,
+      "message": "I can drop the CL - it doesn\u0027t affect the build but the symbols will probably sneak in anyway with the next symbol update.",
+      "parentUuid": "c3bf5371_c7279ad1",
+      "revId": "b44c3d8691e86ec0398a5607a9f0c5499085fa6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
