@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b87798_cd8a3b2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-12T15:40:29Z",
+      "side": 1,
+      "message": "Let\u0027s get rid of the wrapper and deal with the CRC issues. We can help with CRC issues suppression.",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d93cda86_57a52fdd",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-12T15:40:29Z",
+      "side": 1,
+      "message": "why is this function needed? Can\u0027t the trace_android_vh_pci_pwrctrl_should_skip be called directly?",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c12278_5e168987",
+        "filename": "drivers/pci/probe.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2584,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-12T15:40:29Z",
+      "side": 1,
+      "message": "why can\u0027t the hook be placed here instead of wrapping it in this function?",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
