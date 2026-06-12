@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8feb3049_45c4caa6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-12T07:27:58Z",
+      "side": 1,
+      "message": "What is the use-case for this that the existing `Page` type doesn\u0027t already do?",
+      "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4327360_2a645d75",
         "filename": "rust/helpers/page.c",
         "patchSetId": 1
@@ -20,6 +37,81 @@
         "endLine": 29,
         "endChar": 66
       },
+      "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2e1cad_d24f1508",
+        "filename": "rust/helpers/page.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-12T07:27:58Z",
+      "side": 1,
+      "message": "Looks like this calls a C function declared with gfp_t, so yes.",
+      "parentUuid": "c4327360_2a645d75",
+      "range": {
+        "startLine": 29,
+        "startChar": 63,
+        "endLine": 29,
+        "endChar": 66
+      },
+      "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8498591_3271086f",
+        "filename": "rust/kernel/page.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-12T07:27:58Z",
+      "side": 1,
+      "message": "If you use `AllocError` here, then the compiler knows that the error case only has one possible value, and it will be able to represent `Err(AllocError)` as a null-pointer by applying Rust\u0027s null-pointer optimization.\n```suggestion\npub fn get_free_page(flags: kernel::alloc::Flags) -\u003e Result\u003cFreePage, AllocError\u003e {\n```",
+      "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556a8c05_5ae09629",
+        "filename": "rust/kernel/page.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-12T07:27:58Z",
+      "side": 1,
+      "message": "I\u0027d make this a constructor on `FreePage`.",
+      "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be8c1c2_c429b989",
+        "filename": "rust/kernel/page.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-12T07:27:58Z",
+      "side": 1,
+      "message": "If the memory is uninitialized, then you can\u0027t hand out an `\u0026[u8]` because it can let you read uninit memory.",
       "revId": "8f56d686fdfd97b13b35ffd49f0d641467e843be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
