@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e208bac1_b26cd406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-13T01:39:00Z",
+      "side": 1,
+      "message": "As noted in the comment: Lint is complaining on this, but fallthrough; label doesn\u0027t work on the last entry (the suggestion doesn\u0027t build). This eventually is removed in a later patch in this series so I think we can ignore it",
+      "revId": "693497eef55ad68cd5dc531c7a39e894b7a0564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb11568_83e6b883",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 7697,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-13T01:39:00Z",
+      "side": 1,
+      "message": "Lint is complaining on this, but fallthrough; label doesn\u0027t work on the last entry (the suggestion doesn\u0027t build). This eventually is removed in a later patch in this series so I think we can ignore it.",
+      "revId": "693497eef55ad68cd5dc531c7a39e894b7a0564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
