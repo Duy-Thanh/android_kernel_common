@@ -830,8 +830,11 @@ int esp6_input_done2(struct sk_buff *skb, int err)
 		skb_set_transport_header(skb, -hdr_len);
 
 	/* RFC4303: Drop dummy packets without any error */
+	/* Temporarily disabled for ESP Ping testing */
+	/*
 	if (err == IPPROTO_NONE)
 		err = -EINVAL;
+	*/
 
 out:
 	return err;
