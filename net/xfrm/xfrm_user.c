@@ -2637,6 +2637,15 @@ const int xfrm_msg_min[XFRM_NR_MSGTYPES] = {
 	[XFRM_MSG_GETSADINFO  - XFRM_MSG_BASE] = sizeof(u32),
 	[XFRM_MSG_NEWSPDINFO  - XFRM_MSG_BASE] = sizeof(u32),
 	[XFRM_MSG_GETSPDINFO  - XFRM_MSG_BASE] = sizeof(u32),
+<<<<<<< HEAD   (dc6b1e8763ab57b926de1122ed50f26759e8fa18 Merge a5b4323a8c3c ("ALSA: firewire-tascam: Do not drop unre)
+||||||| BASE   (a5b4323a8c3cddd951fb708270777e0c0fd0a259 ALSA: firewire-tascam: Do not drop unread control events)
+	[XFRM_MSG_SETDEFAULT  - XFRM_MSG_BASE] = XMSGSIZE(xfrm_userpolicy_default),
+	[XFRM_MSG_GETDEFAULT  - XFRM_MSG_BASE] = XMSGSIZE(xfrm_userpolicy_default),
+=======
+	[XFRM_MSG_MAPPING     - XFRM_MSG_BASE] = XMSGSIZE(xfrm_user_mapping),
+	[XFRM_MSG_SETDEFAULT  - XFRM_MSG_BASE] = XMSGSIZE(xfrm_userpolicy_default),
+	[XFRM_MSG_GETDEFAULT  - XFRM_MSG_BASE] = XMSGSIZE(xfrm_userpolicy_default),
+>>>>>>> BRANCH (49a42c86b9af8b8a799a177f2b14d07322ec5c33 xfrm: provide message size for XFRM_MSG_MAPPING)
 };
 EXPORT_SYMBOL_GPL(xfrm_msg_min);
 
