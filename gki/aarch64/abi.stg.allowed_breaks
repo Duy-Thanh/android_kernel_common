@@ -192,6 +192,7 @@ type 'struct tegra_mc_ops' changed
   member 'int(* probe_device)(struct tegra_mc*, struct device*)' changed
     offset changed by -64
 
+<<<<<<< HEAD   (a5dca2389c9e2e3c43bedb72f556bf0eafe0cffd UPSTREAM: HID: playstation: Clamp num_touch_reports)
 type 'struct bindings::bindings_raw::net' changed
   byte size changed from 0 to 4160
   member 'u8 _unused[0]' was removed
@@ -246,4 +247,14 @@ type 'struct bindings::bindings_raw::net' changed
   member 'struct bindings::bindings_raw::netns_can can' was added
   member 'struct bindings::bindings_raw::netns_xdp xdp' was added
   member 'struct bindings::bindings_raw::sock* diag_nlsk' was added
+||||||| BASE   (28ab3740535fed3db0d29b05219e2d962d43f5fd Merge tag 'android16-6.12.81_r00' into android16-6.12)
+=======
+type 'struct task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { struct { unsigned int user_dumpable:1; }; struct { u64 __kabi_reserved3; }; union { }; }' was added
+
+type 'struct bindings::bindings_raw::task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union bindings::bindings_raw::task_struct__bindgen_ty_3 __bindgen_anon_3' was added
+>>>>>>> BRANCH (7d38f5b0e4b0d06970e261174e220a997a0908e7 ANDROID: GKI: preserve the kernel API for struct task_struct)
 
