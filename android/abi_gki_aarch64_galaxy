@@ -78,7 +78,6 @@
   __traceiter_android_rvh_do_sea
   __traceiter_android_rvh_do_sp_pc_abort
   __traceiter_android_rvh_do_swap_page_relax
-  __traceiter_android_rvh_do_swap_page_start
   __traceiter_android_rvh_ksys_umount
   __traceiter_android_rvh_panic_unhandled
   __traceiter_android_rvh_process_madvise_bypass
@@ -176,7 +175,6 @@
   __tracepoint_android_rvh_do_sea
   __tracepoint_android_rvh_do_sp_pc_abort
   __tracepoint_android_rvh_do_swap_page_relax
-  __tracepoint_android_rvh_do_swap_page_start
   __tracepoint_android_rvh_ksys_umount
   __tracepoint_android_rvh_panic_unhandled
   __tracepoint_android_rvh_process_madvise_bypass
