@@ -227,9 +227,13 @@ struct eventpoll {
 	 */
 	refcount_t refcount;
 
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 	/* used to defer freeing past ep_get_upwards_depth_proc() RCU walk */
 	struct rcu_head rcu;
 
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+=======
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	/* used to track busy poll napi_id */
 	unsigned int napi_id;
@@ -713,8 +717,13 @@ static void ep_free(struct eventpoll *ep)
 	mutex_destroy(&ep->mtx);
 	free_uid(ep->user);
 	wakeup_source_unregister(ep->ws);
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 	/* ep_get_upwards_depth_proc() may still hold epi->ep under RCU */
 	kfree_rcu(ep, rcu);
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+=======
+	kfree(ep);
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 }
 
 /*
@@ -779,7 +788,14 @@ static bool __ep_remove(struct eventpoll *ep, struct epitem *epi, bool force)
 	call_rcu(&epi->rcu, epi_rcu_free);
 
 	percpu_counter_dec(&ep->user->epoll_watches);
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 	return true;
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+
+	return 0;
+=======
+	return ep_refcount_dec_and_test(ep);
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 }
 
 /*
@@ -787,14 +803,20 @@ static bool __ep_remove(struct eventpoll *ep, struct epitem *epi, bool force)
  */
 static void ep_remove_safe(struct eventpoll *ep, struct epitem *epi)
 {
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 	if (__ep_remove(ep, epi, false))
 		WARN_ON_ONCE(ep_refcount_dec_and_test(ep));
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+=======
+	WARN_ON_ONCE(__ep_remove(ep, epi, false));
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 }
 
 static void ep_clear_and_put(struct eventpoll *ep)
 {
 	struct rb_node *rbp, *next;
 	struct epitem *epi;
+	bool dispose;
 
 	/* We need to release all tasks waiting for these file */
 	if (waitqueue_active(&ep->poll_wait))
@@ -826,9 +848,26 @@ static void ep_clear_and_put(struct eventpoll *ep)
 		ep_remove_safe(ep, epi);
 		cond_resched();
 	}
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+	mutex_unlock(&ep->mtx);
+=======
 
+	dispose = ep_refcount_dec_and_test(ep);
+	mutex_unlock(&ep->mtx);
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
+
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 	mutex_unlock(&ep->mtx);
 	if (ep_refcount_dec_and_test(ep))
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+	mutex_unlock(&epmutex);
+	mutex_destroy(&ep->mtx);
+	free_uid(ep->user);
+	wakeup_source_unregister(ep->ws);
+=======
+	if (dispose)
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 		ep_free(ep);
 }
 
@@ -1008,7 +1047,12 @@ again:
 		dispose = __ep_remove(ep, epi, true);
 		mutex_unlock(&ep->mtx);
 
+<<<<<<< HEAD   (4a0ea93187d973a9b749ec09aabc572d94b49162 Merge android14-6.1 into android14-6.1-lts)
 		if (dispose && ep_refcount_dec_and_test(ep))
+||||||| BASE   (4fd016be1e4977f90cd704de5bf55c5d6cd5e176 drm/vc4: Protect madv read in vc4_gem_object_mmap() with mad)
+=======
+		if (dispose)
+>>>>>>> BRANCH (a1f93804449d13f97dabd4b996817de4bf1ed67a epoll: use refcount to reduce ep_mutex contention)
 			ep_free(ep);
 		goto again;
 	}
