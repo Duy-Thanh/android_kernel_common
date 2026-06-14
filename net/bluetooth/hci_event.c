@@ -2787,8 +2787,6 @@ static void hci_conn_request_evt(struct hci_dev *hdev, struct sk_buff *skb)
 
 	memcpy(conn->dev_class, ev->dev_class, 3);
 
-	hci_dev_unlock(hdev);
-
 	if (ev->link_type == ACL_LINK ||
 	    (!(flags & HCI_PROTO_DEFER) && !lmp_esco_capable(hdev))) {
 		struct hci_cp_accept_conn_req cp;
@@ -2821,6 +2819,17 @@ static void hci_conn_request_evt(struct hci_dev *hdev, struct sk_buff *skb)
 		conn->state = BT_CONNECT2;
 		hci_connect_cfm(conn, 0);
 	}
+<<<<<<< HEAD   (3313e94244db8d5b7a55b74a0c0cc888a291372d Merge ebb39b2d8173 ("Bluetooth: hci_ldisc: Clear HCI_UART_PR)
+||||||| BASE   (ebb39b2d81731b83ee71a1ba6dd0291a57b5ac07 Bluetooth: hci_ldisc: Clear HCI_UART_PROTO_INIT on error)
+
+	return;
+unlock:
+	hci_dev_unlock(hdev);
+=======
+
+unlock:
+	hci_dev_unlock(hdev);
+>>>>>>> BRANCH (60e3f4ff02d1f2d55bfbf2ca32a97285a9771ee4 Bluetooth: fix locking in hci_conn_request_evt() with HCI_PR)
 }
 
 static u8 hci_to_mgmt_reason(u8 err)
