@@ -23,6 +23,11 @@
   gpiod_cansleep
   gpio_device_find
   gpio_device_get_chip
+  gs_alloc_req
+  gs_free_req
+  gserial_free_line
+  gserial_resume
+  gserial_suspend
   mas_walk
   mas_prev
   mas_next
@@ -60,6 +65,7 @@
   __traceiter_android_rvh_process_madvise_bypass
   __traceiter_android_rvh_report_bug
   __traceiter_android_rvh_try_alloc_pages_gfp
+  __traceiter_android_rvh_usb_dev_suspend
   __traceiter_android_vh_adjust_nr_reclaimed
   __traceiter_android_vh_exit_oom_victim
   __traceiter_android_vh_oom_killer_disable
@@ -122,6 +128,7 @@
   __traceiter_android_vh_try_to_freeze_todo
   __traceiter_android_vh_try_to_freeze_todo_unfrozen
   __traceiter_android_vh_tune_scan_control
+  __traceiter_android_vh_usb_dev_resume
   __traceiter_android_vh_use_vm_swappiness
   __traceiter_android_vh_warn_alloc_tune_ratelimit
   __traceiter_android_vh_warn_alloc_show_mem_bypass
@@ -155,6 +162,7 @@
   __tracepoint_android_rvh_process_madvise_bypass
   __tracepoint_android_rvh_report_bug
   __tracepoint_android_rvh_try_alloc_pages_gfp
+  __tracepoint_android_rvh_usb_dev_suspend
   __tracepoint_android_vh_adjust_nr_reclaimed
   __tracepoint_android_vh_exit_oom_victim
   __tracepoint_android_vh_oom_killer_disable
@@ -217,6 +225,7 @@
   __tracepoint_android_vh_tune_scan_control
   __tracepoint_android_vh_try_to_freeze_todo
   __tracepoint_android_vh_try_to_freeze_todo_unfrozen
+  __tracepoint_android_vh_usb_dev_resume
   __tracepoint_android_vh_use_vm_swappiness
   __tracepoint_android_vh_warn_alloc_tune_ratelimit
   __tracepoint_android_vh_warn_alloc_show_mem_bypass
