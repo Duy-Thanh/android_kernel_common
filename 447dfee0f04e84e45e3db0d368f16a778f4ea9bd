@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9707bd61_03ee08c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-06-15T02:37:09Z",
+      "side": 1,
+      "message": "Done. Removed the wrapper and placed the hook call directly in probe.c. Thanks for the offer to help with CRC suppression.",
+      "parentUuid": "f5b87798_cd8a3b2b",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d93cda86_57a52fdd",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28767800_434ee60d",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-06-15T02:37:09Z",
+      "side": 1,
+      "message": "You\u0027re right, removed the wrapper. The hook is now called directly in pci_pwrctrl_create_device()",
+      "parentUuid": "d93cda86_57a52fdd",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84c12278_5e168987",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-06-12T15:40:29Z",
       "side": 1,
       "message": "why can\u0027t the hook be placed here instead of wrapping it in this function?",
+      "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0857ade1_05fdf8e1",
+        "filename": "drivers/pci/probe.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2584,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-06-15T02:37:09Z",
+      "side": 1,
+      "message": "Agreed, done. The trace_android_vh_pci_pwrctrl_should_skip() call is now inline here. The wrapper was originally added to avoid CRC changes in probe.c exports, but per your suggestion those can be suppressed instead.",
+      "parentUuid": "84c12278_5e168987",
       "revId": "447dfee0f04e84e45e3db0d368f16a778f4ea9bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
