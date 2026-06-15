@@ -700,7 +700,7 @@ static int pkvm_init_its_emulation(phys_addr_t dev_addr, struct its_shadow_table
 	void *its_state;
 	int ret;
 
-	its_state = (void *)__get_free_page(GFP_KERNEL_ACCOUNT | __GFP_ZERO);
+	its_state = (void *)__get_free_page(GFP_ATOMIC | __GFP_ZERO);
 	if (!its_state)
 		return -ENOMEM;
 
