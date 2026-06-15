@@ -69,6 +69,24 @@
       "parentUuid": "3f970fb7_3a462a22",
       "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddab5905_ec7d408b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-15T21:31:21Z",
+      "side": 1,
+      "message": "Also, if its the same change as aosp/3507370 it should have the same Change-Id. You may need to abandon this submission and re-submit using the other Change-Id.",
+      "parentUuid": "62140cae_cb3e1b72",
+      "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
