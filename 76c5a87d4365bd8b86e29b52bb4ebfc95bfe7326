@@ -87,6 +87,24 @@
       "parentUuid": "62140cae_cb3e1b72",
       "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48a88de_b52f5a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-15T23:33:23Z",
+      "side": 1,
+      "message": "Makes sense. Re-submitted as aosp/4123233",
+      "parentUuid": "ddab5905_ec7d408b",
+      "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
