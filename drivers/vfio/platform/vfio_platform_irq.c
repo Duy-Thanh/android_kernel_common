@@ -12,8 +12,7 @@
 #include <linux/types.h>
 #include <linux/vfio.h>
 #include <linux/irq.h>
-
-#include "vfio_platform_private.h"
+#include <linux/vfio_platform.h>
 
 static void vfio_platform_mask(struct vfio_platform_irq *irq_ctx)
 {

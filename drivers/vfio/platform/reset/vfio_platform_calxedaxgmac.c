@@ -12,8 +12,7 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/io.h>
-
-#include "../vfio_platform_private.h"
+#include <linux/vfio_platform.h>
 
 #define DRIVER_VERSION  "0.1"
 #define DRIVER_AUTHOR   "Eric Auger <eric.auger@linaro.org>"

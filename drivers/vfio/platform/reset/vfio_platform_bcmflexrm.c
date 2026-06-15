@@ -14,8 +14,7 @@
 #include <linux/io.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
-
-#include "../vfio_platform_private.h"
+#include <linux/vfio_platform.h>
 
 /* FlexRM configuration */
 #define RING_REGS_SIZE					0x10000

@@ -16,8 +16,7 @@
 #include <linux/types.h>
 #include <linux/uaccess.h>
 #include <linux/vfio.h>
-
-#include "vfio_platform_private.h"
+#include <linux/vfio_platform.h>
 
 #define DRIVER_VERSION  "0.10"
 #define DRIVER_AUTHOR   "Antonios Motakis <a.motakis@virtualopensystems.com>"

@@ -4,8 +4,8 @@
  * Author: Antonios Motakis <a.motakis@virtualopensystems.com>
  */
 
-#ifndef VFIO_PLATFORM_PRIVATE_H
-#define VFIO_PLATFORM_PRIVATE_H
+#ifndef VFIO_PLATFORM_H
+#define VFIO_PLATFORM_H
 
 #include <linux/types.h>
 #include <linux/interrupt.h>
@@ -129,4 +129,4 @@ static void __exit reset ## _module_exit(void)			\
 module_init(reset ## _module_init);				\
 module_exit(reset ## _module_exit)
 
-#endif /* VFIO_PLATFORM_PRIVATE_H */
+#endif /* VFIO_PLATFORM_H */
