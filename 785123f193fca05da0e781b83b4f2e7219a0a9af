@@ -22,6 +22,30 @@
       },
       "revId": "785123f193fca05da0e781b83b4f2e7219a0a9af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e827e6_6ea4fbdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-15T17:10:26Z",
+      "side": 1,
+      "message": "6.12 and 6.18 actually have that commit without the revert since it arrived before their KMI freezes.",
+      "parentUuid": "bed49638_9258f8e6",
+      "range": {
+        "startLine": 18,
+        "startChar": 33,
+        "endLine": 19,
+        "endChar": 49
+      },
+      "revId": "785123f193fca05da0e781b83b4f2e7219a0a9af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
