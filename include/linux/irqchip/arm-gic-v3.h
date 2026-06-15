@@ -698,7 +698,7 @@ struct its_shadow_tables {
 
 typedef int (*its_init_emulate)(phys_addr_t its_phys_base, struct its_shadow_tables *shadow);
 
-void *its_start_depriviledge(void);
+void its_start_depriviledge(unsigned long *flags);
 int its_end_depriviledge(int ret, unsigned long *flags, its_init_emulate cb);
 
 #endif

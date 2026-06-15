@@ -714,7 +714,7 @@ static int pkvm_init_its_emulation(phys_addr_t dev_addr, struct its_shadow_table
 static int __init pkvm_drop_host_privileges(void)
 {
 	int ret = 0;
-	void *flags;
+	unsigned long its_flags;
 
 	/*
 	 * Flip the static key upfront as that may no longer be possible
@@ -722,9 +722,9 @@ static int __init pkvm_drop_host_privileges(void)
 	 */
 	static_branch_enable(&kvm_protected_mode_initialized);
 
-	flags = its_start_depriviledge();
+	its_start_depriviledge(&its_flags);
 	on_each_cpu(_kvm_host_prot_finalize, &ret, 1);
-	its_end_depriviledge(ret, flags, &pkvm_init_its_emulation);
+	its_end_depriviledge(ret, &its_flags, &pkvm_init_its_emulation);
 
 	return ret;
 }

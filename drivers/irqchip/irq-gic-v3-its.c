@@ -5257,28 +5257,18 @@ err_alloc_shadow:
 	return NULL;
 }
 
-void *its_start_depriviledge(void)
+void its_start_depriviledge(unsigned long *flags)
 {
 	struct its_node *its;
-	int num_nodes = 0, i = 0;
-	unsigned long *flags;
 
+	if (WARN_ON(!flags))
+		return;
+
+	raw_local_irq_save(*flags);
 	raw_spin_lock(&its_lock);
 	list_for_each_entry(its, &its_nodes, entry) {
-		num_nodes++;
+		raw_spin_lock(&its->lock);
 	}
-
-	flags = kzalloc(num_nodes * sizeof(unsigned long), GFP_KERNEL_ACCOUNT);
-	if (!flags) {
-		raw_spin_unlock(&its_lock);
-		return NULL;
-	}
-
-	list_for_each_entry(its, &its_nodes, entry) {
-		raw_spin_lock_irqsave(&its->lock, flags[i++]);
-	}
-
-	return flags;
 }
 EXPORT_SYMBOL_GPL(its_start_depriviledge);
 
@@ -5326,20 +5316,21 @@ static int its_switch_to_shadow_locked(struct its_node *its, its_init_emulate in
 int its_end_depriviledge(int ret_pkvm_finalize, unsigned long *flags, its_init_emulate cb)
 {
 	struct its_node *its;
-	int i = 0, ret = 0;
+	int ret = 0;
 
-	if (!flags || !cb)
-		return -EINVAL;
+	if (WARN_ON(!flags || !cb))
+		ret = -EINVAL;
 
 	list_for_each_entry(its, &its_nodes, entry) {
 		if (!ret_pkvm_finalize && !ret)
 			ret = its_switch_to_shadow_locked(its, cb);
 
-		raw_spin_unlock_irqrestore(&its->lock, flags[i++]);
+		raw_spin_unlock(&its->lock);
 	}
 
-	kfree(flags);
 	raw_spin_unlock(&its_lock);
+	if (flags)
+		raw_local_irq_restore(*flags);
 
 	return ret;
 }
