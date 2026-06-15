@@ -16,6 +16,24 @@
       "message": "nit: maybe to make it clearer what this sentence it trying to convey: \"...is only initiated by pKVM on pVM destroy(host_reclaim_guest_walker()) which is guaranteed to not run in parallel with pkvm_host_donate_guest() for the same VM.\" ?\n\n...And perhaps also still worth noting about the future use case for ballooning, e.g. a footnote like this:\n\n[*] In the future pKVM may also support relinquishing pages from a still-running pVM to the host, to support virtio-balloon for pVMs. But even then, decoupling the locks done by this patch should be still safe, since if such a relinquish operation is requested by a pVM within the window between host_mmu_unlock() and guest_mmu_lock(), it will fail, since the page is still not owned by this (or any other) pVM at this point.\n\n?",
       "revId": "3a7a7d21ccd687adc825d95fa146e7fd309d4dfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de3f4e4_007be2cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-15T14:38:24Z",
+      "side": 1,
+      "message": "makes sense, done.",
+      "parentUuid": "4c8e1835_1f07ab32",
+      "revId": "3a7a7d21ccd687adc825d95fa146e7fd309d4dfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
