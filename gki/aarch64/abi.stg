@@ -402334,6 +402334,15 @@ elf_symbol {
   full_name: "compat_ptr_ioctl"
 }
 elf_symbol {
+  id: 0xc35c4166
+  name: "compat_vma_mmap_prepare"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe733907f
+  type_id: 0x9b923492
+  full_name: "compat_vma_mmap_prepare"
+}
+elf_symbol {
   id: 0xda163e44
   name: "complete"
   is_defined: true
@@ -416979,6 +416988,15 @@ elf_symbol {
   full_name: "fs_param_is_bool"
 }
 elf_symbol {
+  id: 0xca69a964
+  name: "fs_param_is_enum"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9f4daee0
+  type_id: 0x96b04c18
+  full_name: "fs_param_is_enum"
+}
+elf_symbol {
   id: 0x875fd21b
   name: "fs_param_is_gid"
   is_defined: true
@@ -418696,6 +418714,15 @@ elf_symbol {
   crc: 0xa3319806
   type_id: 0x96e9d652
   full_name: "get_tree_bdev"
+}
+elf_symbol {
+  id: 0x178eee95
+  name: "get_tree_nodev"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa3319806
+  type_id: 0x96e9d652
+  full_name: "get_tree_nodev"
 }
 elf_symbol {
   id: 0x18a5fee3
@@ -426996,6 +427023,15 @@ elf_symbol {
   full_name: "led_get_default_pattern"
 }
 elf_symbol {
+  id: 0x62cd5012
+  name: "led_get_flash_fault"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x55d86568
+  type_id: 0x92625532
+  full_name: "led_get_flash_fault"
+}
+elf_symbol {
   id: 0xda95494e
   name: "led_init_default_state_get"
   is_defined: true
@@ -427095,6 +427131,15 @@ elf_symbol {
   full_name: "led_trigger_register_simple"
 }
 elf_symbol {
+  id: 0xbadeab0f
+  name: "led_trigger_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x194e0375
+  type_id: 0x1c2afa5a
+  full_name: "led_trigger_remove"
+}
+elf_symbol {
   id: 0xa60f59c7
   name: "led_trigger_unregister"
   is_defined: true
@@ -427111,6 +427156,15 @@ elf_symbol {
   crc: 0xf75f5154
   type_id: 0x1302b82e
   full_name: "led_trigger_unregister_simple"
+}
+elf_symbol {
+  id: 0xf4949824
+  name: "led_update_brightness"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x84d07e7a
+  type_id: 0x913248e6
+  full_name: "led_update_brightness"
 }
 elf_symbol {
   id: 0xf48c4979
@@ -462933,6 +462987,7 @@ interface {
   symbol_id: 0xdbbde05c
   symbol_id: 0x036561b6
   symbol_id: 0x4f627b39
+  symbol_id: 0xc35c4166
   symbol_id: 0xda163e44
   symbol_id: 0xb375007c
   symbol_id: 0x9bc8eb84
@@ -464555,6 +464610,7 @@ interface {
   symbol_id: 0xec31d371
   symbol_id: 0xf6f9afad
   symbol_id: 0x55ce3162
+  symbol_id: 0xca69a964
   symbol_id: 0x875fd21b
   symbol_id: 0x6c9f28bc
   symbol_id: 0x35a180e7
@@ -464745,6 +464801,7 @@ interface {
   symbol_id: 0x6d155c9e
   symbol_id: 0xc4a5fc1a
   symbol_id: 0x53f9f7b3
+  symbol_id: 0x178eee95
   symbol_id: 0x18a5fee3
   symbol_id: 0x0ac85cf7
   symbol_id: 0x853a2529
@@ -465665,6 +465722,7 @@ interface {
   symbol_id: 0xfe24eb71
   symbol_id: 0x27d77d55
   symbol_id: 0x61740d72
+  symbol_id: 0x62cd5012
   symbol_id: 0xda95494e
   symbol_id: 0x76f00da5
   symbol_id: 0xa5be7046
@@ -465676,8 +465734,10 @@ interface {
   symbol_id: 0x678fcec9
   symbol_id: 0x73ea3871
   symbol_id: 0xaaa8b4f9
+  symbol_id: 0xbadeab0f
   symbol_id: 0xa60f59c7
   symbol_id: 0x61d92429
+  symbol_id: 0xf4949824
   symbol_id: 0xf48c4979
   symbol_id: 0xe30546d3
   symbol_id: 0xb514ffaf
