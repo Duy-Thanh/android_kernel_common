@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b6f978_3fc35623",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-15T14:46:18Z",
+      "side": 1,
+      "message": "nit: use { } braces (since the `if` body is multiple lines)?",
+      "fixSuggestions": [
+        {
+          "fixId": "c0216fde_4fa2c034",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1473,
+                "startChar": 0,
+                "endLine": 1474,
+                "endChar": 0
+              },
+              "replacement": "\tif (ret) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6773e95f1c2cc9c6b48cd79b5112000582dbda76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
