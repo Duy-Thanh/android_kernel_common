@@ -16,6 +16,24 @@
       "message": "Why included here and not up at the top with the other includes?",
       "revId": "1a09efa84d96b33dbcda1b8d45b87c1eac3cb144",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527d7294_55a80230",
+        "filename": "drivers/pci/probe.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-15T21:15:14Z",
+      "side": 1,
+      "message": "Note: this is probably the source of the CRC issues. Most likely this changes the visibility of trace_eval_map.\n\nwhen you move this inclusion to the top, add a statement to suppress the full visibility of trace_eval_map:\n\n```\n#include \u003clinux/android_kabi.h\u003e\n#include \u003ctrace/hooks/pci.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\nI think this will get rid of the CRC issues. If not, we can help fix it.",
+      "parentUuid": "b7b4b777_649a353a",
+      "revId": "1a09efa84d96b33dbcda1b8d45b87c1eac3cb144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
