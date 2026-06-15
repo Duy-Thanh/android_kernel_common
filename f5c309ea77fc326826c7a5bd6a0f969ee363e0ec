@@ -46,6 +46,30 @@
       },
       "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f752210_6bf07af8",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-15T17:28:11Z",
+      "side": 0,
+      "message": "You are proposing this as an out-of-tree ANDROID patch so we should try to minimise divergence from upstream. That means you can either (a) (preferred) post this upstream for review there or (b) avoid pointless changes.\n\nFor (2), I\u0027m not suggesting to parse the cmdline at EL2. We don\u0027t do that for any of the other cmdline options that affect the hyperbvisor.",
+      "parentUuid": "73e16eb0_2cf4ae05",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 53
+      },
+      "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
