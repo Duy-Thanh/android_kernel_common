@@ -16,6 +16,23 @@
       "message": "Hi @tkjos@google.com @maennich@google.com may I ask for your approval of this patch?\n\nIt is the same patch that was merged into android16-6.12 last year in aosp/3507370. Also it was approved by Greg KH on LKML last year [1] but still didn\u0027t end up merged into the upstream kernel. I resent it to the list 3 weeks ago [2], now waiting for a response from maintainers. In the meantime we need this patch in GKI 6.18 to meet both security and performance requirements for untrusted DMA-capable devices on x86.\n\n[1] https://lore.kernel.org/all/2025022136-demanding-affluent-c72a@gregkh/\n[2] https://lore.kernel.org/all/20260525224023.2753569-1-dmaluka@chromium.org/",
       "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8bccbf_b098f5a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-15T17:48:12Z",
+      "side": 1,
+      "message": "Is there some context for urgency: Is there a reason we shouldn\u0027t wait for this to be queued by a maintainer and submitted as FROMGIT instead of FROMLIST?",
+      "revId": "76c5a87d4365bd8b86e29b52bb4ebfc95bfe7326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
