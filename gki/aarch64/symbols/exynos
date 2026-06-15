@@ -953,6 +953,7 @@
   __traceiter_clock_set_rate
   __traceiter_device_pm_callback_end
   __traceiter_device_pm_callback_start
+  __traceiter_devfreq_frequency
   __traceiter_mmap_lock_acquire_returned
   __traceiter_mmap_lock_released
   __traceiter_mmap_lock_start_locking
@@ -969,6 +970,7 @@
   __tracepoint_clock_set_rate
   __tracepoint_device_pm_callback_end
   __tracepoint_device_pm_callback_start
+  __tracepoint_devfreq_frequency
   __tracepoint_mmap_lock_acquire_returned
   __tracepoint_mmap_lock_released
   __tracepoint_mmap_lock_start_locking
