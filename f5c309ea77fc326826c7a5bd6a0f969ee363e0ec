@@ -22,6 +22,30 @@
       },
       "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e16eb0_2cf4ae05",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3802377
+      },
+      "writtenOn": "2026-06-15T16:55:24Z",
+      "side": 0,
+      "message": "1. This code only needs to run once at EL1 — it computes a result that is then handed to EL2. There\u0027s no need for EL2 to run it again.\n  2. EL2 currently has no ability to parse the cmdline. Having EL1 parse the cmdline, compute the result, and pass it down to EL2 is the\n  established/common approach here.",
+      "parentUuid": "587e3bcf_9d446140",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 53
+      },
+      "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

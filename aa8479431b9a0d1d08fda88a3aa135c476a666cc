@@ -22,6 +22,30 @@
       },
       "revId": "aa8479431b9a0d1d08fda88a3aa135c476a666cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e6dbec_1580cb3d",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 3802377
+      },
+      "writtenOn": "2026-06-15T16:55:24Z",
+      "side": 1,
+      "message": "335 lines check BUG_ON(ffa_max_nr_constituents \u003c SG_MAX_SEGMENTS);",
+      "parentUuid": "3b310f11_94106f79",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 52
+      },
+      "revId": "aa8479431b9a0d1d08fda88a3aa135c476a666cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
