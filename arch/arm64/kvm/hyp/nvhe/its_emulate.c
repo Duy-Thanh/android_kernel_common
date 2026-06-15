@@ -192,7 +192,7 @@ static int check_table_update(struct its_priv_state *its, u32 id, u64 type)
 
 static int process_its_mapd(struct its_priv_state *its, struct its_cmd_block *cmd)
 {
-	phys_addr_t itt_addr = cmd->raw_cmd[2] & GENMASK(51, 8) << 8;
+	phys_addr_t itt_addr = cmd->raw_cmd[2] & GENMASK(51, 8);
 	u8 size = cmd->raw_cmd[1] & GENMASK(4, 0);
 	bool remove = !(cmd->raw_cmd[2] & BIT(63));
 	u32 device_id = cmd->raw_cmd[0] >> 32;
@@ -388,9 +388,9 @@ static void baser_read(struct its_priv_state *its, u64 offset, u64 *read)
 	ITS_HANDLER(off, sz, 1, write_cb, read_cb)
 
 static struct its_handler its_handlers[] = {
-	ITS_HANDLER(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
-	ITS_HANDLER(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
-	ITS_HANDLER(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
+	ITS_REG(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
+	ITS_REG(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
+	ITS_REG(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
 	ITS_HANDLER(GITS_BASER, sizeof(u64), 8, baser_write, baser_read),
 	{},
 };
