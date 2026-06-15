@@ -1896,13 +1896,12 @@ static struct dentry *__lookup_slow(const struct qstr *name,
 {
 	struct dentry *dentry, *old;
 	struct inode *inode = dir->d_inode;
-	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
 
 	/* Don't go there if it's already dead */
 	if (unlikely(IS_DEADDIR(inode)))
 		return ERR_PTR(-ENOENT);
 again:
-	dentry = d_alloc_parallel(dir, name, &wq);
+	dentry = d_alloc_parallel(dir, name);
 	if (IS_ERR(dentry))
 		return dentry;
 	if (unlikely(!d_in_lookup(dentry))) {
@@ -2960,16 +2959,17 @@ void end_dirop(struct dentry *de)
 EXPORT_SYMBOL(end_dirop);
 
 /* does lookup, returns the object with parent locked */
-static struct dentry *__start_removing_path(int dfd, struct filename *name,
-					   struct path *path)
+struct dentry *start_removing_path(const char *name, struct path *path)
 {
+	CLASS(filename_kernel, filename)(name);
 	struct path parent_path __free(path_put) = {};
 	struct dentry *d;
 	struct qstr last;
 	enum last_type type;
 	int error;
 
-	error = filename_parentat(dfd, name, 0, &parent_path, &last, &type);
+	error = filename_parentat(AT_FDCWD, filename, 0, &parent_path, &last,
+			&type);
 	if (error)
 		return ERR_PTR(error);
 	if (unlikely(type != LAST_NORM))
@@ -3029,21 +3029,6 @@ struct dentry *kern_path_parent(const char *name, struct path *path)
 	path->mnt = no_free_ptr(parent_path.mnt);
 	return d;
 }
-
-struct dentry *start_removing_path(const char *name, struct path *path)
-{
-	CLASS(filename_kernel, filename)(name);
-	return __start_removing_path(AT_FDCWD, filename, path);
-}
-
-struct dentry *start_removing_user_path_at(int dfd,
-					   const char __user *name,
-					   struct path *path)
-{
-	CLASS(filename, filename)(name);
-	return __start_removing_path(dfd, filename, path);
-}
-EXPORT_SYMBOL(start_removing_user_path_at);
 
 int kern_path(const char *name, unsigned int flags, struct path *path)
 {
@@ -3631,7 +3616,6 @@ int path_pts(struct path *path)
 	 */
 	struct dentry *parent = dget_parent(path->dentry);
 	struct dentry *child;
-	struct qstr this = QSTR_INIT("pts", 3);
 
 	if (unlikely(!path_connected(path->mnt, parent))) {
 		dput(parent);
@@ -3639,7 +3623,7 @@ int path_pts(struct path *path)
 	}
 	dput(path->dentry);
 	path->dentry = parent;
-	child = d_hash_and_lookup(parent, &this);
+	child = d_hash_and_lookup(parent, &QSTR("pts"));
 	if (IS_ERR_OR_NULL(child))
 		return -ENOENT;
 
@@ -4428,7 +4412,6 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
 	struct dentry *dentry;
 	int error, create_error = 0;
 	umode_t mode = op->mode;
-	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
 
 	if (unlikely(IS_DEADDIR(dir_inode)))
 		return ERR_PTR(-ENOENT);
@@ -4437,7 +4420,7 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
 	dentry = d_lookup(dir, &nd->last);
 	for (;;) {
 		if (!dentry) {
-			dentry = d_alloc_parallel(dir, &nd->last, &wq);
+			dentry = d_alloc_parallel(dir, &nd->last);
 			if (IS_ERR(dentry))
 				return dentry;
 		}
