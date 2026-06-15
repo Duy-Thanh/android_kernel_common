@@ -5214,13 +5214,13 @@ static struct its_shadow_tables *its_get_shadow_tables(struct its_node *its)
 	struct its_shadow_tables *shadow;
 	int i;
 
-	page = its_alloc_pages_node(its->numa_node, GFP_KERNEL | __GFP_ZERO, 0);
+	page = its_alloc_pages_node(its->numa_node, GFP_ATOMIC | __GFP_ZERO, 0);
 	if (!page)
 		return NULL;
 
 	shadow = (void *)page_address(page);
 	page = its_alloc_pages_node(its->numa_node,
-				    GFP_KERNEL | __GFP_ZERO,
+				    GFP_ATOMIC | __GFP_ZERO,
 				    get_order(ITS_CMD_QUEUE_SZ));
 	if (!page)
 		goto err_alloc_shadow;
@@ -5240,7 +5240,7 @@ static struct its_shadow_tables *its_get_shadow_tables(struct its_node *its)
 			continue;
 
 		page = its_alloc_pages_node(its->numa_node,
-					    GFP_KERNEL | __GFP_ZERO,
+					    GFP_ATOMIC | __GFP_ZERO,
 					    shadow->tables[i].order);
 		if (!page)
 			goto err_alloc_shadow;
