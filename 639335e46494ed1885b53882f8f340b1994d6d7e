@@ -16,6 +16,23 @@
       "message": "Respin Bug b/524163854",
       "revId": "639335e46494ed1885b53882f8f340b1994d6d7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80cf2d79_7c4907b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-15T17:42:33Z",
+      "side": 1,
+      "message": "Please fix this issue:\n\n```\nCommit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like (cherry picked from commit f17c14b8ada74de55fd58bf34f26f0396148f6ea).\n\nPlease cherry-pick using: git cherry-pick -s -x f17c14b8ada74de55fd58bf34f26f0396148f6ea.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n```",
+      "revId": "639335e46494ed1885b53882f8f340b1994d6d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
