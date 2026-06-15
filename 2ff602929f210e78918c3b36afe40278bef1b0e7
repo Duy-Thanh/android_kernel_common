@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70386fae_ec6df96c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-15T16:21:43Z",
+      "side": 1,
+      "message": "This should be a GKI module (\u003dm) like it is android14-6.1 and android16-6.12. If there is a reason why it can\u0027t be, you must explain in the commit message.",
+      "revId": "2ff602929f210e78918c3b36afe40278bef1b0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
