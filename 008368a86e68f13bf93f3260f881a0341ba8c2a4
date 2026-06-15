@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1373d5_d170a8d0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1951,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-15T15:58:55Z",
+      "side": 1,
+      "message": "This function has nothing to do with GCMA. Only host_stage2_topup should be modified.",
+      "fixSuggestions": [
+        {
+          "fixId": "41763e15_80362164",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 1950,
+                "startChar": 0,
+                "endLine": 1953,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "008368a86e68f13bf93f3260f881a0341ba8c2a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
