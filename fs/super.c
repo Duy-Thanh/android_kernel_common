@@ -359,6 +359,7 @@ static struct super_block *alloc_super(struct file_system_type *type, int flags,
 		s->s_iflags |= SB_I_NODEV;
 	INIT_HLIST_NODE(&s->s_instances);
 	INIT_HLIST_BL_HEAD(&s->s_roots);
+	spin_lock_init(&s->s_roots_lock);
 	mutex_init(&s->s_sync_lock);
 	INIT_LIST_HEAD(&s->s_inodes);
 	spin_lock_init(&s->s_inode_list_lock);
@@ -741,12 +742,13 @@ struct super_block *sget_fc(struct fs_context *fc,
 	int err;
 
 	/*
-	 * Never allow s_user_ns != &init_user_ns when FS_USERNS_MOUNT is
-	 * not set, as the filesystem is likely unprepared to handle it.
-	 * This can happen when fsconfig() is called from init_user_ns with
-	 * an fs_fd opened in another user namespace.
+	 * Never allow s_user_ns != &init_user_ns when FS_USERNS_MOUNT or
+	 * FS_USERNS_DELEGATABLE is not set, as the filesystem is likely
+	 * unprepared to handle it. This can happen when fsconfig() is called
+	 * from init_user_ns with an fs_fd opened in another user namespace.
 	 */
-	if (user_ns != &init_user_ns && !(fc->fs_type->fs_flags & FS_USERNS_MOUNT)) {
+	if (user_ns != &init_user_ns &&
+	    !(fc->fs_type->fs_flags & (FS_USERNS_MOUNT | FS_USERNS_DELEGATABLE))) {
 		errorfc(fc, "VFS: Mounting from non-initial user namespace is not allowed");
 		return ERR_PTR(-EPERM);
 	}
@@ -821,7 +823,6 @@ void drop_super_exclusive(struct super_block *sb)
 	super_unlock_excl(sb);
 	put_super(sb);
 }
-EXPORT_SYMBOL(drop_super_exclusive);
 
 enum super_iter_flags_t {
 	SUPER_ITER_EXCL		= (1U << 0),
