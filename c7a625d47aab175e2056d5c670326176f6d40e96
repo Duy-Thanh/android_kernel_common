@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93341e42_b9ba52ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-15T17:17:48Z",
+      "side": 1,
+      "message": "This looks like its cherry-picking the change here: https://r.android.com/3181943\n\nUnfortunately this was submitted with a different Change-Id. Please abandon this submission and re-cherry-pick the desired change preserving the original Change-Id.",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
