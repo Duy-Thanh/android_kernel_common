@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed49638_9258f8e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-15T16:17:59Z",
+      "side": 1,
+      "message": "If we are missing this fix in 6.12 and 6.18 then let\u0027s queue the upstream fix for the next KMI thaw window.",
+      "range": {
+        "startLine": 18,
+        "startChar": 33,
+        "endLine": 19,
+        "endChar": 49
+      },
+      "revId": "785123f193fca05da0e781b83b4f2e7219a0a9af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
