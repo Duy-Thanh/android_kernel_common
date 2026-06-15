@@ -424664,6 +424664,14 @@ function {
   parameter_id: 0x07dcdbe1
 }
 function {
+  id: 0x9b3e02b2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x276a1779
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
   id: 0x9b3e4950
   return_type_id: 0x6720d32f
   parameter_id: 0x191de370
@@ -455817,6 +455825,15 @@ elf_symbol {
   full_name: "__traceiter_cpu_idle"
 }
 elf_symbol {
+  id: 0x0c0e9d22
+  name: "__traceiter_devfreq_frequency"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0da08201
+  type_id: 0x9b3e02b2
+  full_name: "__traceiter_devfreq_frequency"
+}
+elf_symbol {
   id: 0x7e705ab7
   name: "__traceiter_device_pm_callback_end"
   is_defined: true
@@ -464131,6 +464148,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_cpu_idle"
+}
+elf_symbol {
+  id: 0x58333cac
+  name: "__tracepoint_devfreq_frequency"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_devfreq_frequency"
 }
 elf_symbol {
   id: 0xbf086359
@@ -538592,6 +538618,7 @@ interface {
   symbol_id: 0x58dd6501
   symbol_id: 0x1643e606
   symbol_id: 0x4576397a
+  symbol_id: 0x0c0e9d22
   symbol_id: 0x7e705ab7
   symbol_id: 0x7b03aae7
   symbol_id: 0x92373f85
@@ -539516,6 +539543,7 @@ interface {
   symbol_id: 0x78b22997
   symbol_id: 0x10bc6dec
   symbol_id: 0x64c2c28c
+  symbol_id: 0x58333cac
   symbol_id: 0xbf086359
   symbol_id: 0xef6e6795
   symbol_id: 0xb2d6f207
