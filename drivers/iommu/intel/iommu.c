@@ -4207,6 +4207,7 @@ static bool intel_iommu_capable(struct device *dev, enum iommu_cap cap)
 
 	switch (cap) {
 	case IOMMU_CAP_CACHE_COHERENCY:
+		return true;
 	case IOMMU_CAP_DEFERRED_FLUSH:
 		/*
 		 * pKVM enforces immediate flush and hence
