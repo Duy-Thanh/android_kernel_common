@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9bf609d9_45c5f61c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-15T20:41:34Z",
+      "side": 1,
+      "message": "Putting a -1 on this just briefly to make sure no one accidentally merged this before the 2026-06 branch is fully forked off",
+      "revId": "693497eef55ad68cd5dc531c7a39e894b7a0564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3bb11568_83e6b883",
         "filename": "kernel/sched/core.c",
         "patchSetId": 11
