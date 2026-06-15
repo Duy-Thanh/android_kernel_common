@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f6fa7b_3b05f748",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-15T09:54:10Z",
+      "side": 1,
+      "message": "Sadly this breaks KMI. I believe we are better off enforcing GFP_ATOMIC.\n\nHow about the following?\n\ndiff --git a/arch/arm64/kvm/pkvm.c b/arch/arm64/kvm/pkvm.c\nindex fcaa3f14c25a..254e78e9d41e 100644\n--- a/arch/arm64/kvm/pkvm.c\n+++ b/arch/arm64/kvm/pkvm.c\n@@ -144,6 +144,15 @@ int pkvm_host_stage2_topup(gfp_t gfp)\n        if (!gfpflags_allow_blocking(gfp) \u0026\u0026 host_s2_mode !\u003d PKVM_HOST_S2_GCMA)\n                goto err;\n \n+       /*\n+        * GCMA intends to allow host stage-2 topup in atomic context, which can\n+        * happen on systems using IOMMU domains. Keeping track of the context\n+        * is cumbersome with nested hypervisor requests. So instead enforce the\n+        * atomic context when GCMA used.\n+        */\n+       if (host_s2_mode \u003d\u003d PKVM_HOST_S2_GCMA)\n+               gfp |\u003d __GFP_ATOMIC;",
+      "revId": "a1eeb2e73c2ffee2c1ca509881a2d36bed0d8f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
