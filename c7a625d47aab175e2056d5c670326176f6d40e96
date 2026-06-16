@@ -16,6 +16,24 @@
       "message": "This looks like its cherry-picking the change here: https://r.android.com/3181943\n\nUnfortunately this was submitted with a different Change-Id. Please abandon this submission and re-cherry-pick the desired change preserving the original Change-Id.",
       "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b08668_39dbbd1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2026-06-16T02:13:09Z",
+      "side": 1,
+      "message": "I tried to submit the patch with the original change-id, but it is rejected, new change-id is OK instead\n\nTo https://android.googlesource.com/kernel/common\n ! [remote rejected]           HEAD -\u003e refs/for/android17-6.18 (cannot add patch set to 4053417.)\nerror: failed to push some refs to \u0027https://android.googlesource.com/kernel/common\u0027",
+      "parentUuid": "93341e42_b9ba52ae",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
