@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf549108_7ae24543",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-16T08:14:08Z",
+      "side": 1,
+      "message": "I don\u0027t think this policying is necessary anymore. \n\nEven if it was, it should be put in the caller, that is pkvm_host_stage2_topup().",
+      "fixSuggestions": [
+        {
+          "fixId": "8693e6d8_8bd809b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": "\tp \u003d __cma_alloc(host_s2_cma, 1, 0, gfp);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "008368a86e68f13bf93f3260f881a0341ba8c2a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f1373d5_d170a8d0",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 2
