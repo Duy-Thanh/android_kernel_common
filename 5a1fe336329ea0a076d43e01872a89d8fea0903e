@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d1da003_5d062fb3",
+        "filename": "arch/arm64/tools/cpucaps",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-06-16T16:18:26Z",
+      "side": 1,
+      "message": "This is already defined in line 104, which might be causing build breaks and test failures (see CI and/or b/522314803 for a sample report).",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 18
+      },
+      "revId": "5a1fe336329ea0a076d43e01872a89d8fea0903e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
