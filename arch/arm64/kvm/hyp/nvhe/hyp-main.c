@@ -1351,6 +1351,18 @@ static void handle___pkvm_init_its_emulation(struct kvm_cpu_context *host_ctxt)
 	cpu_reg(host_ctxt, 1) = pkvm_init_gic_its_emulation(dev_addr, its_state, shadow);
 }
 
+static void handle___pkvm_init_redist_emulation(struct kvm_cpu_context *host_ctxt)
+{
+	DECLARE_REG(phys_addr_t, dev_addr, host_ctxt, 1);
+	DECLARE_REG(void *, redist_state, host_ctxt, 2);
+
+	if (!is_protected_kvm_enabled())
+		return;
+
+	cpu_reg(host_ctxt, 1) =
+		pkvm_init_redist_emulation(dev_addr, redist_state);
+}
+
 static void handle___pkvm_tlb_flush_vmid(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(pkvm_handle_t, handle, host_ctxt, 1);
@@ -2113,6 +2125,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_pviommu_add_vsid),
 	HANDLE_FUNC(__pkvm_host_get_ffa_version),
 	HANDLE_FUNC(__pkvm_init_its_emulation),
+	HANDLE_FUNC(__pkvm_init_redist_emulation),
 };
 
 static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
