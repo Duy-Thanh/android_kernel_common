@@ -854,19 +854,134 @@ err_unlock:
 static DEFINE_HYP_SPINLOCK(redist_lock);
 static LIST_HEAD(redist_states);
 
+#define for_each_redist(__redist) \
+	list_for_each_entry(__redist, &redist_states, entry)
+
 struct redist_priv_state {
 	void *base;
 	struct list_head entry;
+
+	u64 typer;
+	u64 lpi_aff;
+	bool lpi_enabled;
+	u64 propbaser;
 };
 
-static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
-				  struct redist_priv_state *redist)
+static inline u64 redist_lpi_aff(u64 typer)
 {
-	reg->priv = redist;
+	u64 aff;
+	u64 lpi_aff;
 
-	redist->base = __hyp_va(reg->start);
+	aff = FIELD_GET(GICR_TYPER_AFFINITY, typer);
+	lpi_aff = FIELD_GET(GICR_TYPER_COMMON_LPI_AFF, typer);
+
+	return aff & ~GENMASK_ULL(31 - (lpi_aff << 3), 0);
+}
+
+static int hyp_share_pin_mem(u64 phys, u64 size, bool share)
+{
+	u64 start_pfn = phys >> PAGE_SHIFT;
+	u64 num_pages = size >> PAGE_SHIFT;
+	void *virt;
+	int ret, i;
+
+	virt = hyp_phys_to_virt(phys);
+	if (!share)
+		return hyp_pin_shared_mem(virt, virt + size);
+
+	for (i = 0; i < num_pages; i++) {
+		ret = __pkvm_host_share_hyp(start_pfn + i);
+		if (ret)
+			goto unshare;
+	}
+
+	ret = hyp_pin_shared_mem(virt, virt + size);
+	if (ret)
+		goto unshare;
 
 	return 0;
+unshare:
+	for (i = i - 1; i >= 0; i--)
+		__pkvm_host_unshare_hyp(start_pfn + i);
+
+	return ret;
+}
+
+/* Minimum and maximum possible values of GICD_TYPER.IDbits */
+#define MIN_LPI_ID_BITS	13
+#define MAX_LPI_ID_BITS	31
+
+static int handle_lpi_enable(struct redist_priv_state *redist)
+{
+	struct redist_priv_state *other;
+	bool share_prop = true;
+	u64 id_bits, prop_sz;
+	int ret;
+
+	id_bits = FIELD_GET(GICR_PROPBASER_IDBITS_MASK, redist->propbaser);
+	id_bits = clamp_t(u64, id_bits, MIN_LPI_ID_BITS, MAX_LPI_ID_BITS);
+
+	/*
+	 * Require all GICRs in the affinity or sharing property table to
+	 * share the same propbaser value.
+	 */
+	for_each_redist(other) {
+		/* Ignore self and GICR with disabled LPI */
+		if (redist == other || !other->lpi_enabled)
+			continue;
+
+		/*
+		 * Process only the GICRs in the same affinity group or
+		 * sharing the same property table.
+		 */
+		if (GICR_PROPBASER_ADDRESS(other->propbaser) !=
+			    GICR_PROPBASER_ADDRESS(redist->propbaser) &&
+		    redist->lpi_aff != other->lpi_aff)
+			continue;
+
+		if (redist->propbaser != other->propbaser)
+			return -EFAULT;
+
+		/*
+		 * This is not the first GICR with this property table
+		 * and LPI enabled. The table has been already shared.
+		 */
+		share_prop = false;
+	}
+
+	/* Increase refcount for the property table */
+	prop_sz = ALIGN(BIT_ULL(id_bits + 1), SZ_64K);
+	ret = hyp_share_pin_mem(GICR_PROPBASER_ADDRESS(redist->propbaser),
+				prop_sz, share_prop);
+	if (ret)
+		return ret;
+
+	redist->lpi_enabled = true;
+	return 0;
+
+}
+
+static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
+				  struct redist_priv_state *redist,
+				  u64 typer)
+{
+	int ret = 0;
+	u32 ctrl;
+
+	redist->base = __hyp_va(reg->start);
+	redist->typer = typer;
+	redist->lpi_aff = redist_lpi_aff(typer);
+	redist->propbaser = readq_relaxed(redist->base + GICR_PROPBASER);
+
+	/* If LPI are enabled, there's work to do */
+	ctrl = readl_relaxed(redist->base + GICR_CTLR);
+	if (FIELD_GET(GICR_CTLR_ENABLE_LPIS, ctrl))
+		ret = handle_lpi_enable(redist);
+
+	if (!ret)
+		reg->priv = redist;
+
+	return ret;
 }
 
 int pkvm_init_redist_emulation(phys_addr_t redist_base, void *host_priv_states)
@@ -907,7 +1022,7 @@ int pkvm_init_redist_emulation(phys_addr_t redist_base, void *host_priv_states)
 		goto unlock;
 
 	/* Initialize RD_Base state */
-	ret = init_redist_priv_state(rd_reg, &redist[0]);
+	ret = init_redist_priv_state(rd_reg, &redist[0], typer);
 	if (ret)
 		goto err;
 
