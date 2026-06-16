@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc392ad_8c929be1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-16T09:44:04Z",
+      "side": 1,
+      "message": "As suggested we have pushed the common patch from series (https://arsp-review.googlesource.com/c/kernel-desktop/private/desktop-google/+/4685000/1) here.\n\nRight now this was pulled as FROMLIST on urgency basis\nFROMGIT would take little more time maybe a couple days. We are following up with driver team.",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
