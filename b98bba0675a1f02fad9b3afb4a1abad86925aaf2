@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a44ae6_0def7a65",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-16T08:29:19Z",
+      "side": 1,
+      "message": "Could you just add a comment here, as this isn\u0027t obvious why we take gfp as an argument... but enforce GFP_ATOMIC.\n\n```\n  /*\n   * GCMA allows host stage-2 topup in atomic context which can\n   * happen on systems using IOMMU domains. Keeping track of the context\n   * is cumbersome with nested hypervisor requests. So instead enforce the\n   * atomic context when GCMA used.\n   */\n```",
+      "revId": "b98bba0675a1f02fad9b3afb4a1abad86925aaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
