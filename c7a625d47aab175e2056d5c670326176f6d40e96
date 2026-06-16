@@ -52,6 +52,24 @@
       "parentUuid": "c0b08668_39dbbd1d",
       "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80061536_3126fc13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-16T03:23:37Z",
+      "side": 1,
+      "message": "And the same feedback on  https://r.android.com/4053417 applies on this as well, you need to add a follow on patch that adds the new symbols and updates the kmi",
+      "parentUuid": "55dc5f78_fd2bfc79",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
