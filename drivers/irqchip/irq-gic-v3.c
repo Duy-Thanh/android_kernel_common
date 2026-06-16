@@ -2404,6 +2404,167 @@ out_unmap_dist:
 	return err;
 }
 
+static phys_addr_t gic_pkvm_early_redists[NR_CPUS];
+static int gic_pkvm_nr_early_redists;
+static size_t gic_pkvm_redist_stride;
+
+static ssize_t __init gic_probe_pkvm_redist(phys_addr_t phys, u64 dt_stride)
+{
+	void __iomem *ptr;
+	ssize_t stride;
+	u64 typer;
+	u32 reg;
+
+	ptr = early_ioremap(phys, SZ_64K);
+	if (!ptr)
+		return -ENOMEM;
+
+	reg = readl_relaxed(ptr + GICR_PIDR2) & GIC_PIDR2_ARCH_MASK;
+	if (reg != GIC_PIDR2_ARCH_GICv3 && reg != GIC_PIDR2_ARCH_GICv4) {
+		early_iounmap(ptr, SZ_64K);
+		return -ENODEV;
+	}
+
+	typer = gic_read_typer(ptr + GICR_TYPER);
+
+	stride = dt_stride;
+	if (!stride) {
+		stride = SZ_64K * 2;
+		if (FIELD_GET(GICR_TYPER_VLPIS, typer))
+			stride += SZ_64K * 2;
+	}
+
+	if (!gic_pkvm_redist_stride)
+		gic_pkvm_redist_stride = stride;
+
+	if (gic_pkvm_nr_early_redists < NR_CPUS)
+		gic_pkvm_early_redists[gic_pkvm_nr_early_redists++] = phys;
+
+	early_iounmap(ptr, SZ_64K);
+
+	if (typer & GICR_TYPER_LAST)
+		return 0;
+
+	return stride;
+}
+
+static int __init gic_init_pkvm_data(void)
+{
+	struct device_node *node;
+	struct resource res;
+	u32 nr_redist_regions;
+	u64 dt_stride;
+	int i;
+
+	if (gic_pkvm_redist_stride)
+		return 0;
+
+	node = of_find_compatible_node(NULL, NULL, "arm,gic-v3");
+	if (!node)
+		return -ENODEV;
+
+	if (of_property_read_u32(node, "#redistributor-regions", &nr_redist_regions))
+		nr_redist_regions = 1;
+
+	if (of_property_read_u64(node, "redistributor-stride", &dt_stride))
+		dt_stride = 0;
+
+	for (i = 0; i < nr_redist_regions; i++) {
+		phys_addr_t phys, phys_end;
+
+		if (of_address_to_resource(node, 1 + i, &res))
+			continue;
+
+		phys = res.start;
+		phys_end = res.start + resource_size(&res);
+
+		while (phys < phys_end) {
+			ssize_t stride = gic_probe_pkvm_redist(phys, dt_stride);
+
+			if (stride == 0)
+				break;
+			else if (stride < 0) {
+				of_node_put(node);
+				return stride;
+			}
+
+			phys += stride;
+		}
+	}
+
+	of_node_put(node);
+	return 0;
+}
+
+int __init gic_pkvm_iter_early_redists(int (*cb)(phys_addr_t, u64))
+{
+	int i, ret;
+
+	if (!gic_pkvm_redist_stride) {
+		ret = gic_init_pkvm_data();
+		if (ret)
+			return ret;
+	}
+
+	for (i = 0; i < gic_pkvm_nr_early_redists; i++) {
+		ret = cb(gic_pkvm_early_redists[i], gic_pkvm_redist_stride);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
+
+void gic_start_deprivilege(unsigned long *flags)
+{
+	int cpu;
+	typeof(*gic_data.rdists.rdist) *rdist;
+
+	if (WARN_ON(!flags))
+		return;
+
+	raw_local_irq_save(*flags);
+	if (!gic_data.rdists.rdist)
+		return;
+
+	for_each_possible_cpu(cpu) {
+		rdist = per_cpu_ptr(gic_data.rdists.rdist, cpu);
+		if (rdist->phys_base)
+			raw_spin_lock(&rdist->rd_lock);
+	}
+}
+
+int gic_end_deprivilege(unsigned long *flags, int (*cb)(phys_addr_t))
+{
+	int cpu, i, ret = 0;
+	typeof(*gic_data.rdists.rdist) *rdist;
+
+	if (WARN_ON(!gic_pkvm_redist_stride) || WARN_ON(!flags || !cb))
+		ret = -ENODEV;
+
+	for (i = gic_pkvm_nr_early_redists - 1; i >= 0; i--) {
+		if (!ret)
+			ret = cb(gic_pkvm_early_redists[i]);
+	}
+
+	/* Unlock redist's rd_lock in reverse order */
+	for (cpu = nr_cpu_ids - 1; cpu >= 0; cpu--) {
+		if (!cpu_possible(cpu))
+			continue;
+
+		if (gic_data.rdists.rdist) {
+			rdist = per_cpu_ptr(gic_data.rdists.rdist, cpu);
+			if (rdist->phys_base)
+				raw_spin_unlock(&rdist->rd_lock);
+		}
+	}
+
+	if (flags)
+		raw_local_irq_restore(*flags);
+
+	return ret;
+}
+
 IRQCHIP_DECLARE(gic_v3, "arm,gic-v3", gic_of_init);
 
 #ifdef CONFIG_ACPI
