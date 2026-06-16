@@ -52,6 +52,24 @@
       "parentUuid": "97394cf7_61394e43",
       "revId": "a1eeb2e73c2ffee2c1ca509881a2d36bed0d8f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e6d524_c46b2c75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3532942
+      },
+      "writtenOn": "2026-06-16T09:25:01Z",
+      "side": 1,
+      "message": "50 iterations of boot worked fine.",
+      "parentUuid": "97394cf7_61394e43",
+      "revId": "a1eeb2e73c2ffee2c1ca509881a2d36bed0d8f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
