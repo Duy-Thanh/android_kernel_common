@@ -34,6 +34,24 @@
       "parentUuid": "93341e42_b9ba52ae",
       "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55dc5f78_fd2bfc79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-16T03:22:46Z",
+      "side": 1,
+      "message": "It looks like the same change was submitted as https://r.android.com/4053417 and then the open issues were not resolved.\n\nI\u0027m guessing you got the rejection because you aren\u0027t the owner of that change.\n\nI can try to cherry-pick your change and push it to override the owner issue.",
+      "parentUuid": "c0b08668_39dbbd1d",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
