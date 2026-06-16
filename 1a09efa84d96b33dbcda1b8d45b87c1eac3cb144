@@ -34,6 +34,24 @@
       "parentUuid": "b7b4b777_649a353a",
       "revId": "1a09efa84d96b33dbcda1b8d45b87c1eac3cb144",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2b3d69_1596f06a",
+        "filename": "drivers/pci/probe.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-06-16T02:46:33Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Moved the include to the top of probe.c with ANDROID_KABI_DECLONLY(trace_eval_map) — this eliminates the CRC changes.",
+      "parentUuid": "527d7294_55a80230",
+      "revId": "1a09efa84d96b33dbcda1b8d45b87c1eac3cb144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
