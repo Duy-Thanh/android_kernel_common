@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a939f60_849c27b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-16T02:46:50Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Commit is missing a cherry pick line pointing to the original commit on the base...\n\nCommit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like `(cherry picked from commit c55604c2de635a7f7b35e6082ceb5506be3f8d49)`.\n\nPlease cherry-pick using: `git cherry-pick -s -x c55604c2de635a7f7b35e6082ceb5506be3f8d49`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "5ba7174ee7e651eb116e6928c3f703adcfdecd23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18084da9_ff0c68bc",
