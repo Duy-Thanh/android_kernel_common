@@ -22,6 +22,30 @@
       },
       "revId": "5a1fe336329ea0a076d43e01872a89d8fea0903e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a376bf9c_eb04dbec",
+        "filename": "arch/arm64/tools/cpucaps",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-16T22:25:27Z",
+      "side": 1,
+      "message": "fix: aosp/4125873",
+      "parentUuid": "8d1da003_5d062fb3",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 18
+      },
+      "revId": "5a1fe336329ea0a076d43e01872a89d8fea0903e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
