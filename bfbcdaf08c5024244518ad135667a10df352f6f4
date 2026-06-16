@@ -116,6 +116,24 @@
       "parentUuid": "de244667_89547b98",
       "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7861774_d72c2141",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-06-16T17:17:42Z",
+      "side": 1,
+      "message": "Please include the fixes as a stack of changes with this change.",
+      "parentUuid": "eb5d57f3_df5bc85b",
+      "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
