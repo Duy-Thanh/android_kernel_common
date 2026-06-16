@@ -70,6 +70,30 @@
       },
       "revId": "aa8479431b9a0d1d08fda88a3aa135c476a666cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cb3862_1b5da549",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 3802377
+      },
+      "writtenOn": "2026-06-16T03:24:27Z",
+      "side": 1,
+      "message": "Ok, I will fix it right now.",
+      "parentUuid": "07679df4_d4833a0e",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 356,
+        "endChar": 52
+      },
+      "revId": "aa8479431b9a0d1d08fda88a3aa135c476a666cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
