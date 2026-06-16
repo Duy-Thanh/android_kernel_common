@@ -71,6 +71,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c02661a1_f648ff0e",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-16T22:02:08Z",
+      "side": 1,
+      "message": "Agreed with Todd above, please do not modify this driver. We are working to deprecate it in future kernel versions and do not recommend building functionality which relies on it.",
+      "parentUuid": "adcc8858_d724abac",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0086f0f6_a17d7446",
+        "filename": "drivers/usb/host/xhci-plat.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-16T22:02:08Z",
+      "side": 1,
+      "message": "We really try to keep vendor hooks out of the usb stack due to maintainability concerns. What are you doing with this hook exactly? Please work upstream to land this in a generic way.",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 11
+      },
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4e95394_d69a0592",
         "filename": "include/trace/hooks/xhci.h",
         "patchSetId": 3
