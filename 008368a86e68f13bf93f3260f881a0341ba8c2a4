@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad565fc1_e3f6f52f",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3532942
+      },
+      "writtenOn": "2026-06-16T08:18:42Z",
+      "side": 1,
+      "message": "patch set #5 is the latest",
+      "parentUuid": "e0f9bfe6_6f2bc798",
+      "revId": "008368a86e68f13bf93f3260f881a0341ba8c2a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f1373d5_d170a8d0",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 2
