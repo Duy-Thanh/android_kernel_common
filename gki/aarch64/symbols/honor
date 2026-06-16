@@ -57,12 +57,6 @@
   __tracepoint_android_rvh_cpuinfo_c_show
   __tracepoint_android_vh_security_audit_log_setid
   __traceiter_android_vh_security_audit_log_setid
-  __traceiter_signal_generate
-  __tracepoint_signal_generate
-  __traceiter_android_rvh_do_el1_bti
-  __tracepoint_android_rvh_do_el1_bti
-  __traceiter_android_rvh_panic_unhandled
-  __tracepoint_android_rvh_panic_unhandled
   __traceiter_android_vh_mutex_init
   __tracepoint_android_vh_mutex_init
   __traceiter_android_vh_rwsem_write_finished
@@ -350,6 +344,8 @@
   __tracepoint_android_vh_tcp_select_window
   __traceiter_android_vh_uplink_send_msg
   __tracepoint_android_vh_uplink_send_msg
+  __traceiter_tcp_send_reset
+  __tracepoint_tcp_send_reset
   __traceiter_android_vh_tcp_fastsyn
   __tracepoint_android_vh_tcp_fastsyn
   __traceiter_android_vh_tcp_state_change
