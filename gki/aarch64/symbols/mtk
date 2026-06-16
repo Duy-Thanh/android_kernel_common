@@ -1281,6 +1281,9 @@
   kvm_iommu_register_hyp_ops
   __kvm_nvhe_kvm_patch_physvirt_offset
   __kvm_nvhe_kvm_update_va_mask
+  led_get_flash_fault
+  led_trigger_remove
+  led_update_brightness
   linear_range_get_max_value
   linear_range_get_selector_high
   linear_range_get_selector_within
@@ -2672,6 +2675,7 @@
   unregister_reboot_notifier
   unregister_restart_handler
   unregister_rpmsg_driver
+  unregister_sys_off_handler
   unregister_virtio_device
   unregister_virtio_driver
   up
