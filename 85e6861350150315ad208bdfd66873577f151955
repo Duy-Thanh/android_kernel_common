@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f45a3f1_07321092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4180009
+      },
+      "writtenOn": "2026-06-16T01:28:41Z",
+      "side": 1,
+      "message": "git fetch https://android.googlesource.com/kernel/common refs/changes/54/4123454/1 \u0026\u0026 git checkout -b change-4123454 FETCH_HEAD",
+      "revId": "85e6861350150315ad208bdfd66873577f151955",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
