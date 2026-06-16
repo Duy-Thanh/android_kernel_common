@@ -70,6 +70,24 @@
       "parentUuid": "55dc5f78_fd2bfc79",
       "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9ba7635_7ddd7d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-16T03:38:45Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve rebased the change https://r.android.com/4053417 to resolve the merge conflicts and re-uploaded it. Lets abandon this submission and move discussions to that one. You still need to get a symbols list update added on top.",
+      "parentUuid": "80061536_3126fc13",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
