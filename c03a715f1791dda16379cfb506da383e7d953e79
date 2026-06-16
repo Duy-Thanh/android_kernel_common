@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7055cc24_80c42dec",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-16T16:02:08Z",
+      "side": 1,
+      "message": "Follow \u0027C\u0027 comment conventions.",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adcc8858_d724abac",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-16T16:02:08Z",
+      "side": 1,
+      "message": "why is this function necessary? It seems to have nothing to do with the rest of this patch. Why can\u0027t this be in your vendor module?",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4e95394_d69a0592",
         "filename": "include/trace/hooks/xhci.h",
         "patchSetId": 3
