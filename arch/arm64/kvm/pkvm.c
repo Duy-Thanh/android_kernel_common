@@ -180,6 +180,39 @@ static int __init register_moveable_fdt_resource(struct device_node *np,
 	return 0;
 }
 
+static int pkvm_register_gic_redist_cb(phys_addr_t phys, u64 size)
+{
+	unsigned int idx = kvm_nvhe_sym(pkvm_moveable_regs_nr);
+
+	if (idx >= PKVM_NR_MOVEABLE_REGS)
+		return -ENOMEM;
+	if (size < SZ_64K)
+		return -EINVAL;
+
+	moveable_regs[idx].start = phys;
+	moveable_regs[idx].size = SZ_64K;
+	moveable_regs[idx].type = PKVM_MREG_EMULATE_MMIO;
+	moveable_regs[idx].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+	idx++;
+
+	/* Skip SGI_Base to avoid bottlenecking vgic with emulation */
+
+	if (size >= 3 * SZ_64K) {
+		if (idx >= PKVM_NR_MOVEABLE_REGS)
+			return -ENOMEM;
+
+		moveable_regs[idx].start = phys + SZ_128K;
+		moveable_regs[idx].size = SZ_64K;
+		moveable_regs[idx].type = PKVM_MREG_EMULATE_MMIO;
+		moveable_regs[idx].cb =
+			lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+		idx++;
+	}
+
+	kvm_nvhe_sym(pkvm_moveable_regs_nr) = idx;
+	return 0;
+}
+
 static int __init register_moveable_regions(void)
 {
 	struct memblock_region *reg;
@@ -238,6 +271,14 @@ static int __init register_moveable_regions(void)
 			if (ret)
 				goto out_fail;
 		}
+	}
+
+	ret = gic_pkvm_iter_early_redists(pkvm_register_gic_redist_cb);
+	if (ret < 0) {
+		kvm_err("Failed to register GIC redistributors for emulation: %d\n",
+			ret);
+		kvm_nvhe_sym(pkvm_moveable_regs_nr) = 0;
+		return ret;
 	}
 
 	sort_moveable_regs();
