@@ -3488,17 +3488,18 @@ static int snd_pcm_common_ioctl(struct file *file,
 		return snd_pcm_forward_ioctl(substream, arg);
 	}
 	pcm_dbg(substream->pcm, "unknown ioctl = 0x%x\n", cmd);
-	return -ENOTTY;
+	return snd_pcm_ops_ioctl(substream, cmd, arg);
 }
 
 static long snd_pcm_ioctl(struct file *file, unsigned int cmd,
 			  unsigned long arg)
 {
 	struct snd_pcm_file *pcm_file;
+	unsigned char ioctl_magic = ((cmd >> 8) & 0xff);
 
 	pcm_file = file->private_data;
 
-	if (((cmd >> 8) & 0xff) != 'A')
+	if (ioctl_magic != 'A' && ioctl_magic != 'U')
 		return -ENOTTY;
 
 	return snd_pcm_common_ioctl(file, pcm_file->substream, cmd,
