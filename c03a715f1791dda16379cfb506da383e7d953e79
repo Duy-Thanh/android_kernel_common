@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a1ce9b0_e596f0be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-16T16:00:03Z",
+      "side": 1,
+      "message": "This is not an accurate description of this patch. Please describe the new vendor hooks and why they are needed",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4e95394_d69a0592",
         "filename": "include/trace/hooks/xhci.h",
         "patchSetId": 3
