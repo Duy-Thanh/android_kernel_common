@@ -1446,6 +1446,22 @@ static inline bool ufshcd_is_tx_eq_supported(struct ufs_hba *hba)
 	       hba->dev_info.wspecversion >= 0x500;
 }
 
+static inline bool is_tx_eq_params_from_dt(struct ufshcd_tx_eq_params *params)
+{
+	return PTR_ERR(params->eqtr_record) == -ENODATA;
+}
+
+static inline void set_tx_eq_params_from_dt(struct ufshcd_tx_eq_params *params)
+{
+	params->eqtr_record = ERR_PTR(-ENODATA);
+}
+
+static inline void clear_tx_eq_params_from_dt(struct ufshcd_tx_eq_params *params)
+{
+	if (is_tx_eq_params_from_dt(params))
+		params->eqtr_record = NULL;
+}
+
 #define ufsmcq_writel(hba, val, reg)	\
 	writel((val), (hba)->mcq_base + (reg))
 #define ufsmcq_readl(hba, reg)	\

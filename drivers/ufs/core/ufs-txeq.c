@@ -1218,7 +1218,7 @@ static int ufshcd_tx_eqtr(struct ufs_hba *hba,
 	struct ufs_pa_layer_attr old_pwr_info;
 	int ret;
 
-	if (!params->eqtr_record) {
+	if (!params->eqtr_record || is_tx_eq_params_from_dt(params)) {
 		params->eqtr_record = devm_kzalloc(hba->dev,
 						   sizeof(*params->eqtr_record),
 						   GFP_KERNEL);
@@ -1301,7 +1301,13 @@ int ufshcd_config_tx_eq_settings(struct ufs_hba *hba,
 	}
 
 	params = &hba->tx_eq_params[gear - 1];
-	if (!params->is_valid || force_tx_eqtr) {
+	/*
+	 * TX EQTR must run for the following cases:
+	 * 1. TX EQ settings are invalid.
+	 * 2. TX EQ settings are from Device Tree.
+	 * 3. TX EQTR procedure is forced.
+	 */
+	if (!params->is_valid || is_tx_eq_params_from_dt(params) || force_tx_eqtr) {
 		int ret;
 
 		ret = ufshcd_tx_eqtr(hba, params, pwr_mode);
@@ -1313,6 +1319,8 @@ int ufshcd_config_tx_eq_settings(struct ufs_hba *hba,
 
 		/* Mark TX Equalization settings as valid */
 		params->is_valid = true;
+		/* TX EQTR succeeds, clear from_dt flag */
+		clear_tx_eq_params_from_dt(params);
 		params->is_applied = false;
 	}
 
@@ -1498,6 +1506,11 @@ static void ufshcd_extract_tx_eq_settings_attrs(struct ufs_hba *hba, u8 gear)
 	}
 
 	params->is_valid = true;
+	/*
+	 * Optimal TX EQ settings are retrieved from UFS device attributes,
+	 * clear from_dt flag to avoid TX EQTR procedure.
+	 */
+	clear_tx_eq_params_from_dt(params);
 }
 
 void ufshcd_retrieve_tx_eq_settings(struct ufs_hba *hba)
@@ -1535,7 +1548,7 @@ static void ufshcd_update_tx_eq_settings_attrs(struct ufs_hba *hba, u8 gear)
 
 	params = &hba->tx_eq_params[gear - 1];
 	if (!params->is_valid || !params->eqtr_record ||
-	    !params->eqtr_record->last_record_index)
+	    is_tx_eq_params_from_dt(params) || !params->eqtr_record->last_record_index)
 		return;
 
 	for (lane = 0; lane < UFS_MAX_LANES; lane++) {

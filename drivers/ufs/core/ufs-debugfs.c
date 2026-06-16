@@ -324,7 +324,7 @@ static int ufs_tx_eqtr_record_show(struct seq_file *s, void *data)
 	}
 
 	rec = params->eqtr_record;
-	if (!rec || !rec->last_record_index) {
+	if (!rec || is_tx_eq_params_from_dt(params) || !rec->last_record_index) {
 		seq_printf(s, "No TX EQTR records found for HS-G%u, Rate-%s.\n",
 			   gear, ufs_hs_rate_to_str(rate));
 		return 0;
