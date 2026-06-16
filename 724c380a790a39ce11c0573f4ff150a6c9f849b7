@@ -33,6 +33,24 @@
       "message": "Security fixes only on this branch.",
       "revId": "724c380a790a39ce11c0573f4ff150a6c9f849b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a64e38e_700ce75d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-16T15:35:01Z",
+      "side": 1,
+      "message": "Security fixes + critical bug fixes.",
+      "parentUuid": "2656f669_614db97d",
+      "revId": "724c380a790a39ce11c0573f4ff150a6c9f849b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
