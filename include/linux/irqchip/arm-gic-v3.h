@@ -701,6 +701,11 @@ typedef int (*its_init_emulate)(phys_addr_t its_phys_base, struct its_shadow_tab
 void its_start_deprivilege(unsigned long *flags);
 int its_end_deprivilege(int ret, unsigned long *flags, its_init_emulate cb);
 
+int __init gic_pkvm_iter_early_redists(int (*cb)(phys_addr_t, u64));
+
+void gic_start_deprivilege(unsigned long *flags);
+int gic_end_deprivilege(unsigned long *flags, int (*cb)(phys_addr_t));
+
 #endif
 
 #endif
