@@ -62,6 +62,24 @@
       "message": "Should the associated `usb: gadget: u_ether: Fix NULL pointer deref in eth_get_drvinfo` (commit e002e92) be cherry-picked as well?",
       "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d538205c_f2b22c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-17T17:51:04Z",
+      "side": 1,
+      "message": "Wait, both of these changes are tagged stable and have been backported since the 6.18.22 lts. They should land as part of the next lts merge.",
+      "parentUuid": "3aebf3e3_1991bdb1",
+      "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
