@@ -33,6 +33,29 @@
       "message": "Alistair,\n\nThis patch is sent as FROMLIST by Intel with some urgency after testing on x86 Android devices. This shouldn\u0027t negatively impact the rest of the Android ecosystem since this requires userspace opt-in via the new uapi flag.\n\nPlease let us know if you need anything to expedite merging this CL.",
       "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8525f533_5cb56188",
+        "filename": "include/drm/drm_modes.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-17T20:15:51Z",
+      "side": 1,
+      "message": "This opens up potential conflict for future DRM changes if this series is not accepted. The series is less than a week old, and you are only asking to merge the first patch of the series here. Why the rush, and why only the first patch?",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 43
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
