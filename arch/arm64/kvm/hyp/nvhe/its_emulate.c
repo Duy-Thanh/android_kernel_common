@@ -1016,3 +1016,19 @@ unlock:
 	hyp_spin_unlock(&redist_lock);
 	return ret;
 }
+
+static struct emu_handler redist_handlers[] = {
+	{},
+};
+
+void pkvm_handle_rdist_emulation(struct pkvm_moveable_reg *region, u64 offset,
+				 bool write, u64 *reg, u8 reg_size)
+{
+	struct redist_priv_state *redist = region->priv;
+
+	if (!redist)
+		return;
+
+	handle_emulation(region, offset, write, reg, reg_size, redist_handlers,
+			 &redist_lock);
+}
