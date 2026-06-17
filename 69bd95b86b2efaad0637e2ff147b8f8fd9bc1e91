@@ -45,6 +45,23 @@
       },
       "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aebf3e3_1991bdb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-17T17:42:25Z",
+      "side": 1,
+      "message": "Should the associated `usb: gadget: u_ether: Fix NULL pointer deref in eth_get_drvinfo` (commit e002e92) be cherry-picked as well?",
+      "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
