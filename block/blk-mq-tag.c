@@ -17,6 +17,9 @@
 #include "blk-mq.h"
 #include "blk-mq-sched.h"
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/blk.h>
+
 /*
  * Recalculate wakeup batch when tag is shared by hctx.
  */
@@ -184,6 +187,7 @@ unsigned int blk_mq_get_tag(struct blk_mq_alloc_data *data)
 			break;
 
 		bt_prev = bt;
+		trace_android_rvh_blk_mq_get_tag(NULL);
 		io_schedule();
 
 		sbitmap_finish_wait(bt, ws, &wait);
