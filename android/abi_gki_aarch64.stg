@@ -315199,6 +315199,11 @@ function {
   parameter_id: 0x21951c89
 }
 function {
+  id: 0x84ef115b
+  return_type_id: 0x2e0f9112
+  parameter_id: 0x0baf61c0
+}
+function {
   id: 0x84ffea0d
   return_type_id: 0x11cffa09
   parameter_id: 0x11cffa09
@@ -348760,6 +348765,15 @@ elf_symbol {
   crc: 0x3f2166a9
   type_id: 0x9fef01bd
   full_name: "__percpu_counter_init"
+}
+elf_symbol {
+  id: 0x9483a27b
+  name: "__percpu_counter_sum"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd59cf8b2
+  type_id: 0x84ef115b
+  full_name: "__percpu_counter_sum"
 }
 elf_symbol {
   id: 0xf7e48028
@@ -425788,6 +425802,7 @@ interface {
   symbol_id: 0xafa216a9
   symbol_id: 0xdb2427ba
   symbol_id: 0x963958c0
+  symbol_id: 0x9483a27b
   symbol_id: 0xf7e48028
   symbol_id: 0x34126b3d
   symbol_id: 0x28bdd181
