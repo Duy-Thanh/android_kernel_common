@@ -2818,6 +2818,7 @@
   __traceiter_android_vh_use_amu_fie
   __traceiter_android_vh_vmscan_kswapd_done
   __traceiter_android_vh_xhci_full_reset_on_remove
+  __traceiter_android_vh_zone_watermark_avoid_reserves
   __traceiter_clock_set_rate
   __traceiter_cma_alloc_finish
   __traceiter_cma_alloc_start
@@ -2975,6 +2976,7 @@
   __tracepoint_android_vh_use_amu_fie
   __tracepoint_android_vh_vmscan_kswapd_done
   __tracepoint_android_vh_xhci_full_reset_on_remove
+  __tracepoint_android_vh_zone_watermark_avoid_reserves
   __tracepoint_clock_set_rate
   __tracepoint_cma_alloc_finish
   __tracepoint_cma_alloc_start

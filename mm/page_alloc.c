@@ -3351,6 +3351,11 @@ bool __zone_watermark_ok(struct zone *z, unsigned int order, unsigned long mark,
 {
 	long min = mark;
 	int o;
+	bool avoid_reserves = false;
+
+	trace_android_vh_zone_watermark_avoid_reserves(z, order, mark, &avoid_reserves);
+	if (avoid_reserves)
+		alloc_flags &= ~ALLOC_RESERVES;
 
 	if (!zone_is_suitable(z, order))
 		return false;

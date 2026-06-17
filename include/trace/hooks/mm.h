@@ -823,6 +823,9 @@ DECLARE_HOOK(android_vh_folio_end_writeback,
 DECLARE_HOOK(android_vh_folio_start_writeback,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_zone_watermark_avoid_reserves,
+	TP_PROTO(struct zone *z, unsigned int order, unsigned long mark, bool *avoid_reserves),
+	TP_ARGS(z, order, mark, avoid_reserves));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
