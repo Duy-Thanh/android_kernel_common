@@ -16,6 +16,23 @@
       "message": "Xamarim IOS",
       "revId": "8dc3c2e1deae690df40595f299c397b72dd1346e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f4d3f9_2b81e29b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2020955
+      },
+      "writtenOn": "2026-06-17T20:45:36Z",
+      "side": 1,
+      "message": "Respin Bug: b/524972640",
+      "revId": "8dc3c2e1deae690df40595f299c397b72dd1346e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
