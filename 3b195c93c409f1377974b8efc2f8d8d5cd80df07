@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3430e5ee_8af4f5fe",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-17T18:31:42Z",
+      "side": 1,
+      "message": "Looks like clear flag is notneeded. domain_map explicitly clears the page",
+      "fixSuggestions": [
+        {
+          "fixId": "fd75db7e_c3be8441",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 477,
+                "startChar": 0,
+                "endLine": 478,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 499,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON_ONCE(data-\u003edonate(pkvm_host_gpa_to_phys(host_mc-\u003ehead.addr), PAGE_SIZE, false)))\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 515,
+                "startChar": 0,
+                "endLine": 517,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t struct pkvm_memcache *host_mc, pkvm_memcache_donate_fn_t donate)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 530,
+                "startChar": 0,
+                "endLine": 531,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1020,
+                "startChar": 0,
+                "endLine": 1022,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t    READ_ONCE(host_mc-\u003ecount), host_mc, pkvm_host_donate_hyp);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b195c93c409f1377974b8efc2f8d8d5cd80df07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
