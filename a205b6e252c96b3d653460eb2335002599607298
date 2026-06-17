@@ -270,6 +270,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "179f7920_d50f3712",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-17T17:09:42Z",
+      "side": 1,
+      "message": "I\u0027ve added go/aog/4127613 for this purpose.",
+      "parentUuid": "47c40121_cf85538c",
+      "revId": "a205b6e252c96b3d653460eb2335002599607298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbae188e_090b03cf",
