@@ -865,6 +865,7 @@ struct redist_priv_state {
 	u64 lpi_aff;
 	bool lpi_enabled;
 	u64 propbaser;
+	u64 pendbaser;
 };
 
 static inline u64 redist_lpi_aff(u64 typer)
@@ -907,6 +908,23 @@ unshare:
 	return ret;
 }
 
+static void hyp_unshare_unpin_mem(u64 phys, u64 size, bool unshare)
+{
+	u64 start_pfn = phys >> PAGE_SHIFT;
+	u64 num_pages = size >> PAGE_SHIFT;
+	void *virt;
+	int i;
+
+	virt = hyp_phys_to_virt(phys);
+	hyp_unpin_shared_mem(virt, virt + size);
+
+	if (!unshare)
+		return;
+
+	for (i = 0; i < num_pages; i++)
+		WARN_ON(__pkvm_host_unshare_hyp(start_pfn + i));
+}
+
 /* Minimum and maximum possible values of GICD_TYPER.IDbits */
 #define MIN_LPI_ID_BITS	13
 #define MAX_LPI_ID_BITS	31
@@ -915,7 +933,7 @@ static int handle_lpi_enable(struct redist_priv_state *redist)
 {
 	struct redist_priv_state *other;
 	bool share_prop = true;
-	u64 id_bits, prop_sz;
+	u64 id_bits, prop_sz, pend_sz;
 	int ret;
 
 	id_bits = FIELD_GET(GICR_PROPBASER_IDBITS_MASK, redist->propbaser);
@@ -956,9 +974,19 @@ static int handle_lpi_enable(struct redist_priv_state *redist)
 	if (ret)
 		return ret;
 
+	/* Share and pin the pending table */
+	pend_sz = ALIGN(BIT_ULL(id_bits + 1) / 8, SZ_64K);
+	ret = hyp_share_pin_mem(GICR_PENDBASER_ADDRESS(redist->pendbaser),
+				pend_sz, /* share */ true);
+	if (ret)
+		goto unshare_prop_tab;
+
 	redist->lpi_enabled = true;
 	return 0;
-
+unshare_prop_tab:
+	hyp_unshare_unpin_mem(GICR_PROPBASER_ADDRESS(redist->propbaser),
+			      prop_sz, share_prop);
+	return ret;
 }
 
 static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
@@ -972,6 +1000,7 @@ static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
 	redist->typer = typer;
 	redist->lpi_aff = redist_lpi_aff(typer);
 	redist->propbaser = readq_relaxed(redist->base + GICR_PROPBASER);
+	redist->pendbaser = readq_relaxed(redist->base + GICR_PENDBASER);
 
 	/* If LPI are enabled, there's work to do */
 	ctrl = readl_relaxed(redist->base + GICR_CTLR);
