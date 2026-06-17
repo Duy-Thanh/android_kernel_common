@@ -39,6 +39,11 @@ void pkvm_guest_mmu_setup(const struct pkvm_pgtable_ops *pgt_ops,
 int pkvm_guest_mmu_max_level(void);
 int pkvm_guest_mmu_init(struct pkvm_vm *pkvm_vm, phys_addr_t pgd_pa);
 void pkvm_guest_mmu_destroy(struct pkvm_vm *pkvm_vm);
+typedef int (*pkvm_memcache_donate_fn_t)(unsigned long phys,
+					 unsigned long size, bool clear);
+int pkvm_refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
+			 struct pkvm_memcache *host_mc,
+			 pkvm_memcache_donate_fn_t donate, bool clear);
 int pkvm_guest_mmu_refill_memcache(struct pkvm_vcpu *pkvm_vcpu);
 void pkvm_guest_mmu_free_memcache(struct pkvm_vcpu *pkvm_vcpu);
 
