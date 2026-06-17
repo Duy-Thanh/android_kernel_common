@@ -471,9 +471,16 @@ static void drain_pool(struct pkvm_pool *pool, struct pkvm_memcache *host_mc)
 	}
 }
 
+struct refill_memcache_data {
+	struct pkvm_memcache *host_mc;
+	pkvm_memcache_donate_fn_t donate;
+	bool clear;
+};
+
 static void *admit_host_page(void *arg)
 {
-	struct pkvm_memcache *host_mc = arg;
+	struct refill_memcache_data *data = arg;
+	struct pkvm_memcache *host_mc = data->host_mc;
 	void *page;
 
 	if (!host_mc->count || WARN_ON_ONCE(host_mc->head.nr_pages != 1))
@@ -489,8 +496,8 @@ static void *admit_host_page(void *arg)
 	 * The page will be cleared by zalloc_page when allocating it from
 	 * the memcache, thus no need to clear it now.
 	 */
-	if (WARN_ON_ONCE(pkvm_host_donate_hyp(pkvm_host_gpa_to_phys(host_mc->head.addr),
-					      PAGE_SIZE, false)))
+	if (WARN_ON_ONCE(data->donate(pkvm_host_gpa_to_phys(host_mc->head.addr),
+				      PAGE_SIZE, data->clear)))
 		return NULL;
 
 	page = pop_pkvm_memcache_page(host_mc, pkvm_host_gpa_to_virt);
@@ -504,8 +511,9 @@ static void *admit_host_page(void *arg)
 }
 
 /* Refill our local memcache by popping pages from the one provided by the host. */
-static int refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
-			   struct pkvm_memcache *host_mc)
+int pkvm_refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
+			 struct pkvm_memcache *host_mc,
+			 pkvm_memcache_donate_fn_t donate, bool clear)
 {
 	/*
 	 * The host mc is shared and can be modified by the host while popping.
@@ -516,10 +524,15 @@ static int refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
 	 * from the private page and leaking data to the host.
 	 */
 	struct pkvm_memcache tmp_mc = *(volatile typeof(*host_mc) *)host_mc;
+	struct refill_memcache_data data = {
+		.host_mc = &tmp_mc,
+		.donate = donate,
+		.clear = clear,
+	};
 	int ret;
 
 	ret = topup_pkvm_memcache(mc, min_pages, admit_host_page,
-				  pkvm_virt_to_phys, &tmp_mc);
+				  pkvm_virt_to_phys, &data);
 
 	*(volatile typeof(*host_mc) *)host_mc = tmp_mc;
 
@@ -1003,8 +1016,9 @@ int pkvm_guest_mmu_refill_memcache(struct pkvm_vcpu *pkvm_vcpu)
 
 	host_mc = &pkvm_vcpu->shared_vcpu->arch.pkvm.guest_mmu_memcache;
 
-	return refill_memcache(&vcpu->arch.pkvm.guest_mmu_memcache,
-			       READ_ONCE(host_mc->count), host_mc);
+	return pkvm_refill_memcache(&vcpu->arch.pkvm.guest_mmu_memcache,
+				    READ_ONCE(host_mc->count), host_mc,
+				    pkvm_host_donate_hyp, false);
 }
 
 void pkvm_guest_mmu_free_memcache(struct pkvm_vcpu *pkvm_vcpu)
