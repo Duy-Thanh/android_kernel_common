@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20bc10ae_59f449c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-17T15:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ab9309f_68681a43",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a1ce9b0_e596f0be",
@@ -48,6 +66,24 @@
       "writtenOn": "2026-06-16T16:02:08Z",
       "side": 1,
       "message": "Follow \u0027C\u0027 comment conventions.",
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d353cf6_1dbd6f99",
+        "filename": "drivers/usb/gadget/android_configfs_uevent.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-17T15:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7055cc24_80c42dec",
       "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -123,6 +159,30 @@
       "writtenOn": "2026-06-16T15:47:36Z",
       "side": 1,
       "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. The...\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to [ack-contribution-guidelines](https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md) and [vendor-hooks](https://source.android.com/docs/core/architecture/kernel/kernel-code#defining-vendor-hooks) for details.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "c03a715f1791dda16379cfb506da383e7d953e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bdea4c_6ba3f459",
+        "filename": "include/trace/hooks/xhci.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-17T15:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4e95394_d69a0592",
       "range": {
         "startLine": 8,
         "startChar": 0,
