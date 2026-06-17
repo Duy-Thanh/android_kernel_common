@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4519d8ab_ed924184",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-17T13:36:56Z",
+      "side": 1,
+      "message": "I\u0027ve tried this test locally and I\u0027m not seeing it fail on either the unmodified plain-c driver or my rust replacement.",
+      "fixSuggestions": [
+        {
+          "fixId": "b20a2ab7_f210e53c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tstruct stat sb;\n"
+            },
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\t/* Operations on the closed wrapfd should now fail */\n\tASSERT_EQ(fstat(wrapfd, \u0026sb), -1);\n\tASSERT_EQ(errno, EBADF);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8921357aa65c69dfe446f5677d4a616dabe22b76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
