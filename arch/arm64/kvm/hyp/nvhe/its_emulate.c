@@ -6,6 +6,70 @@
 #include <nvhe/mem_protect.h>
 #include <nvhe/serial.h>
 
+struct emu_handler {
+	u64 offset;
+	u8 access_size;
+	u8 num_registers;
+	void (*write)(struct pkvm_moveable_reg *region, u64 offset, u64 value);
+	void (*read)(struct pkvm_moveable_reg *region, u64 offset, u64 *read);
+};
+
+#define EMU_HANDLER(off, sz, num, write_cb, read_cb)	\
+{							\
+	.offset = (off),				\
+	.access_size = (sz),				\
+	.num_registers = (num),				\
+	.write = (write_cb),				\
+	.read = (read_cb),				\
+}
+
+#define EMU_REG(off, sz, write_cb, read_cb)	\
+	EMU_HANDLER(off, sz, 1, write_cb, read_cb)
+
+static void handle_emulation(struct pkvm_moveable_reg *region, u64 offset, bool write,
+				  u64 *reg, u8 reg_size, struct emu_handler *handlers,
+				  hyp_spinlock_t *lock)
+{
+	struct emu_handler *reg_handler;
+	u64 end;
+
+	if (!region->priv)
+		return;
+
+	for (reg_handler = handlers; reg_handler->access_size; reg_handler++) {
+		end = reg_handler->offset + reg_handler->access_size * reg_handler->num_registers;
+
+		if (reg_handler->offset > offset || end <= offset)
+			continue;
+
+		if (reg_handler->access_size & (reg_size - 1))
+			continue;
+
+		if (write && reg_handler->write) {
+			if (lock)
+				hyp_spin_lock(lock);
+			reg_handler->write(region, offset, *reg);
+			if (lock)
+				hyp_spin_unlock(lock);
+			return;
+		}
+
+		if (!write && reg_handler->read) {
+			if (lock)
+				hyp_spin_lock(lock);
+			reg_handler->read(region, offset, reg);
+			if (lock)
+				hyp_spin_unlock(lock);
+			return;
+		}
+
+		return;
+	}
+
+	pkvm_handle_forward_req(region, offset, write, reg, reg_size);
+}
+
+
 struct its_priv_state {
 	void *base;
 	void *cmd_hyp_base;
@@ -19,14 +83,6 @@ struct its_priv_state {
 
 #define MAX_TRACKED_PFNS	((PAGE_SIZE - offsetof(struct its_priv_state, \
 				  tracked_pfns)) / sizeof(u64))
-
-struct its_handler {
-	u64 offset;
-	u8 access_size;
-	u8 num_registers;
-	void (*write)(struct its_priv_state *its, u64 offset, u64 value);
-	void (*read)(struct its_priv_state *its, u64 offset, u64 *read);
-};
 
 DEFINE_HYP_SPINLOCK(its_setup_lock);
 
@@ -269,8 +325,9 @@ static int parse_its_cmdq(struct its_priv_state *its, int offset, ssize_t len)
 	return ret;
 }
 
-static void cwriter_write(struct its_priv_state *its, u64 offset, u64 value)
+static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
+	struct its_priv_state *its = region->priv;
 	u64 cwriter_offset = value & GENMASK(19, 5);
 	int cmd_len, cmd_offset;
 	size_t cmdq_sz = its->shadow->cmdq_len;
@@ -303,18 +360,21 @@ static void cwriter_write(struct its_priv_state *its, u64 offset, u64 value)
 	writeq_relaxed(value, its->base + GITS_CWRITER);
 }
 
-static void cwriter_read(struct its_priv_state *its, u64 offset, u64 *read)
+static void cwriter_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
 {
+	struct its_priv_state *its = region->priv;
 	*read = readq_relaxed(its->base + GITS_CWRITER);
 }
 
-static void ctlr_read(struct its_priv_state *its, u64 offset, u64 *read)
+static void ctlr_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
 {
+	struct its_priv_state *its = region->priv;
 	*read = readl_relaxed(its->base + GITS_CTLR);
 }
 
-static void ctlr_write(struct its_priv_state *its, u64 offset, u64 value)
+static void ctlr_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
+	struct its_priv_state *its = region->priv;
 	u32 ctlr = readl_relaxed(its->base + GITS_CTLR);
 	bool is_quiescent = !!(ctlr & GITS_CTLR_QUIESCENT);
 	bool is_enabled = !!(ctlr & GITS_CTLR_ENABLE);
@@ -325,8 +385,9 @@ static void ctlr_write(struct its_priv_state *its, u64 offset, u64 value)
 	writel_relaxed(value, its->base + GITS_CTLR);
 }
 
-static void cbaser_write(struct its_priv_state *its, u64 offset, u64 value)
+static void cbaser_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
+	struct its_priv_state *its = region->priv;
 	u64 ctlr = readl_relaxed(its->base + GITS_CTLR);
 	int num_pages;
 
@@ -344,13 +405,15 @@ static void cbaser_write(struct its_priv_state *its, u64 offset, u64 value)
 	writeq_relaxed(value, its->base + GITS_CBASER);
 }
 
-static void cbaser_read(struct its_priv_state *its, u64 offset, u64 *read)
+static void cbaser_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
 {
+	struct its_priv_state *its = region->priv;
 	*read = readq_relaxed(its->base + GITS_CBASER);
 }
 
-static void baser_write(struct its_priv_state *its, u64 offset, u64 value)
+static void baser_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
+	struct its_priv_state *its = region->priv;
 	u32 ctlr = readl_relaxed(its->base + GITS_CTLR);
 	int baser_idx;
 	u64 baser;
@@ -370,28 +433,17 @@ static void baser_write(struct its_priv_state *its, u64 offset, u64 value)
 	writeq_relaxed(value, its->base + offset);
 }
 
-static void baser_read(struct its_priv_state *its, u64 offset, u64 *read)
+static void baser_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
 {
+	struct its_priv_state *its = region->priv;
 	*read = readq_relaxed(its->base + offset);
 }
 
-#define ITS_HANDLER(off, sz, num, write_cb, read_cb)	\
-{							\
-	.offset = (off),				\
-	.access_size = (sz),				\
-	.num_registers = (num),				\
-	.write = (write_cb),				\
-	.read = (read_cb),				\
-}
-
-#define ITS_REG(off, sz, write_cb, read_cb)	\
-	ITS_HANDLER(off, sz, 1, write_cb, read_cb)
-
-static struct its_handler its_handlers[] = {
-	ITS_REG(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
-	ITS_REG(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
-	ITS_REG(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
-	ITS_HANDLER(GITS_BASER, sizeof(u64), 8, baser_write, baser_read),
+static struct emu_handler its_handlers[] = {
+	EMU_REG(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
+	EMU_REG(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
+	EMU_REG(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
+	EMU_HANDLER(GITS_BASER, sizeof(u64), 8, baser_write, baser_read),
 	{},
 };
 
@@ -417,41 +469,12 @@ void pkvm_handle_gic_emulation(struct pkvm_moveable_reg *region, u64 offset, boo
 			       u64 *reg, u8 reg_size)
 {
 	struct its_priv_state *its_priv = region->priv;
-	void __iomem *addr;
-	struct its_handler *reg_handler;
-	u64 end;
 
 	if (!its_priv)
 		return;
 
-	addr = its_priv->base + offset;
-	for (reg_handler = its_handlers; reg_handler->access_size; reg_handler++) {
-		end = reg_handler->offset + reg_handler->access_size * reg_handler->num_registers;
-
-		if (reg_handler->offset > offset || end <= offset)
-			continue;
-
-		if (reg_handler->access_size & (reg_size - 1))
-			continue;
-
-		if (write && reg_handler->write) {
-			hyp_spin_lock(&its_priv->its_lock);
-			reg_handler->write(its_priv, offset, *reg);
-			hyp_spin_unlock(&its_priv->its_lock);
-			return;
-		}
-
-		if (!write && reg_handler->read) {
-			hyp_spin_lock(&its_priv->its_lock);
-			reg_handler->read(its_priv, offset, reg);
-			hyp_spin_unlock(&its_priv->its_lock);
-			return;
-		}
-
-		return;
-	}
-
-	pkvm_handle_forward_req(region, offset, write, reg, reg_size);
+	handle_emulation(region, offset, write, reg, reg_size, its_handlers,
+			 &its_priv->its_lock);
 }
 
 static struct pkvm_moveable_reg *get_region(phys_addr_t dev_addr)
