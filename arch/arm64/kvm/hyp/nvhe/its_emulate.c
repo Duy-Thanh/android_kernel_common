@@ -1017,7 +1017,27 @@ unlock:
 	return ret;
 }
 
+static void propbaser_write(struct pkvm_moveable_reg *region, u64 offset,
+			    u64 value)
+{
+	struct redist_priv_state *redist = region->priv;
+
+	/* Modifications to GICR_PROPBASER are not allowed when LPIs are enabled */
+	if (redist->lpi_enabled)
+		return;
+
+	redist->propbaser = value;
+}
+
+static void propbaser_read(struct pkvm_moveable_reg *region, u64 offset,
+			   u64 *read)
+{
+	struct redist_priv_state *redist = region->priv;
+	*read = redist->propbaser;
+}
+
 static struct emu_handler redist_handlers[] = {
+	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
 	{},
 };
 
