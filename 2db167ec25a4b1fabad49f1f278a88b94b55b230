@@ -52,6 +52,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3efb153_9ec14ecd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-17T20:33:07Z",
+      "side": 1,
+      "message": "nit: please fix all these tags, these are not GKI standard. e.g. please pick the main bug, do you really need all of them? What is `Upstream-Task:`? Drop the extra spaces in between the tags and please use lore links, not patchwork. Further more these should all come _after_ the original tags from the LKML patch e.g. keep chronological order. Please check examples in our contributions guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dfc392ad_8c929be1",
