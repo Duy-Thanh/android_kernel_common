@@ -276,7 +276,7 @@ static int ffa_map_hyp_buffers(u64 ffa_page_count)
 
 static int ffa_unmap_hyp_buffers(void)
 {
-	struct arm_smccc_1_2_regs res;
+	struct arm_smccc_1_2_regs res = {0};
 
 	/*
 	 * Ensure that the read of `has_hyp_ffa_buffer_mapped` is visible
