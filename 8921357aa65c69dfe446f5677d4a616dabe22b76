@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e1dcdaa_bf7799b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-17T20:35:37Z",
+      "side": 1,
+      "message": "Yifan, do you still have the logs of that failure? Would like to take a closer look at the root cause.",
+      "revId": "8921357aa65c69dfe446f5677d4a616dabe22b76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4519d8ab_ed924184",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 2
