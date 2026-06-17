@@ -14,7 +14,7 @@ extern struct hyp_event_id __hyp_event_ids_end[];
 
 #define MAX_MOD_EVENTS 16 /* Max number of modules with events */
 
-static atomic_t num_hyp_event_mods = ATOMIC_INIT(0);
+static int num_hyp_event_mods;
 static DEFINE_HYP_SPINLOCK(hyp_mod_events_lock);
 static struct {
 	struct {
@@ -33,10 +33,9 @@ static struct {
 int __pkvm_sync_ftrace(unsigned long host_funcs_pg)
 {
 	unsigned long *funcs_pg = (unsigned long *)kern_hyp_va(host_funcs_pg);
-	int mod, nr_mods = atomic_read(&num_hyp_event_mods);
 	u64 pfn = hyp_virt_to_pfn(funcs_pg);
+	int ret, mod;
 	void *func;
-	int ret;
 
 	ret = __pkvm_host_donate_hyp(pfn, 1);
 	if (ret)
@@ -51,7 +50,7 @@ int __pkvm_sync_ftrace(unsigned long host_funcs_pg)
 		funcs_pg = hyp_ftrace_sync(funcs_pg, func, NULL, 0, NULL);
 
 	/* Look into modules */
-	for (mod = 0; mod < nr_mods; mod++) {
+	for (mod = 0; mod < num_hyp_event_mods; mod++) {
 		unsigned long *start = hyp_mod_events[mod].funcs.start;
 		unsigned long *end = hyp_mod_events[mod].funcs.end;
 		unsigned long offset_idx = hyp_mod_events[mod].funcs.offset_idx;
@@ -76,7 +75,7 @@ int __pkvm_sync_ftrace(unsigned long host_funcs_pg)
 
 int __pkvm_disable_ftrace(void)
 {
-	int mod, nr_mods = atomic_read_acquire(&num_hyp_event_mods);
+	int mod, nr_mods = smp_load_acquire(&num_hyp_event_mods);
 
 	hyp_ftrace_disable(NULL, NULL);
 
@@ -129,7 +128,7 @@ static bool try_set_mod_event(unsigned short id, bool enable)
 	 * Order access between num_hyp_event_mods and hyp_mod_events.
 	 * Paired with register_hyp_mod_events()
 	 */
-	nr_mods = atomic_read_acquire(&num_hyp_event_mods);
+	nr_mods = smp_load_acquire(&num_hyp_event_mods);
 
 	for (i = 0; i < nr_mods; i++) {
 		if (__try_set_event(id, enable,
@@ -154,7 +153,7 @@ int register_hyp_mod_events(void *event_ids, size_t nr_events,
 
 	hyp_spin_lock(&hyp_mod_events_lock);
 
-	mod = atomic_read(&num_hyp_event_mods);
+	mod = num_hyp_event_mods;
 	if (mod < MAX_MOD_EVENTS) {
 		hyp_mod_events[mod].event_ids.start =
 			(struct hyp_event_id *)event_ids;
@@ -168,7 +167,7 @@ int register_hyp_mod_events(void *event_ids, size_t nr_events,
 		 * Order access between num_hyp_event_mods and hyp_mod_events.
 		 * Paired with try_set_mod_event()
 		 */
-		atomic_set_release(&num_hyp_event_mods, mod + 1);
+		smp_store_release(&num_hyp_event_mods, mod + 1);
 		ret = 0;
 	}
 
