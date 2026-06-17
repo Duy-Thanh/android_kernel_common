@@ -1,1 +1,19 @@
 # See http://go/approve-abi-break
+<<<<<<< HEAD   (839a808be3da5300418d7231fa1f5ae5f05d5ab3 UPSTREAM: ptrace: slightly saner 'get_dumpable()' logic)
+||||||| BASE   (54103a1f7260c580d36febff418a76342e399bca ANDROID: GKI ABI fixup for readahead_control->_max_index)
+
+type 'enum attr_idn' changed
+  enumerator 'QUERY_ATTR_IDN_TX_EQ_GN_SETTINGS' (71) was added
+  ... 1 other enumerator(s) added
+
+type 'struct readahead_control' changed
+  member 'u64 __kabi_reserved1' was removed
+  member 'union { unsigned long _max_index; struct { u64 __kabi_reserved1; }; union { }; }' was added
+
+=======
+
+type 'enum attr_idn' changed
+  enumerator 'QUERY_ATTR_IDN_TX_EQ_GN_SETTINGS' (71) was added
+  ... 1 other enumerator(s) added
+
+>>>>>>> CHANGE (77741143fb20f85fe78c629f26c10f9c94e3a38e Revert "ANDROID: GKI ABI fixup for readahead_control->_max_i)
