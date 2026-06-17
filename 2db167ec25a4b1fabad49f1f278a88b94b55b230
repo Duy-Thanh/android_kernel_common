@@ -111,6 +111,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fa1c290_3c11883c",
+        "filename": "drivers/gpu/drm/drm_modes.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-17T20:35:26Z",
+      "side": 1,
+      "message": "How does the DRM_MODE_MATCH_TIMINGS_VRR get set?",
+      "fixSuggestions": [
+        {
+          "fixId": "73074acf_b3d6ffe2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/drm_modes.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "/**\n * drm_mode_match_timings_vrr - test modes for timing equality considering VRR\n * @mode1: first mode\n * @mode2: second mode\n *\n * Check to see if the horizontal timings, vertical display, and vertical\n * sync/blanking offsets are equivalent. This is used for Variable Refresh Rate\n * (VRR) where the vtotal can vary, but the relationship between vdisplay,\n * vsync_start, vsync_end, and vtotal remains consistent. Specifically,\n * instead of checking vtotal, vsync_start, and vsync_end directly, it checks\n * the offsets of vsync_start and vsync_end from vtotal.\n *\n * Returns:\n * True if the modes have matching VRR timings, false otherwise.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8525f533_5cb56188",
         "filename": "include/drm/drm_modes.h",
         "patchSetId": 1
