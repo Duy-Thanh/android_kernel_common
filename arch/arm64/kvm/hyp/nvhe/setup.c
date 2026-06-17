@@ -50,6 +50,8 @@ static struct kvm_pgtable_mm_ops pkvm_pgtable_mm_ops;
 static struct hyp_pool hpool;
 static void *iommu_base;
 
+DECLARE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
+
 static int divide_memory_pool(void *virt, unsigned long size)
 {
 	unsigned long nr_pages;
@@ -91,6 +93,9 @@ static int divide_memory_pool(void *virt, unsigned long size)
 		return -ENOMEM;
 
 	nr_pages = hyp_ffa_proxy_pages();
+	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend))
+		nr_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
+
 	ffa_proxy_pages = hyp_early_alloc_contig(nr_pages);
 	if (!ffa_proxy_pages)
 		return -ENOMEM;
