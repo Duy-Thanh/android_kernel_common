@@ -1109,8 +1109,34 @@ static void propbaser_read(struct pkvm_moveable_reg *region, u64 offset,
 	*read = redist->propbaser;
 }
 
+static void pendbaser_write(struct pkvm_moveable_reg *region, u64 offset,
+			    u64 value)
+{
+	struct redist_priv_state *redist = region->priv;
+
+	/* Modifications to GICR_PENDBASER are not allowed when LPIs are enabled */
+	if (redist->lpi_enabled)
+		return;
+
+	value &= GICR_PENDBASER_PTZ | GICR_PENDBASER_OUTER_CACHEABILITY_MASK |
+		 /* Address */ GENMASK_ULL(51, 16) |
+		 GICR_PENDBASER_SHAREABILITY_MASK |
+		 GICR_PENDBASER_INNER_CACHEABILITY_MASK;
+
+	writeq_relaxed(value, redist->base + GICR_PENDBASER);
+	redist->pendbaser = readq_relaxed(redist->base + GICR_PENDBASER);
+}
+
+static void pendbaser_read(struct pkvm_moveable_reg *region, u64 offset,
+			   u64 *read)
+{
+	struct redist_priv_state *redist = region->priv;
+	*read = redist->pendbaser;
+}
+
 static struct emu_handler redist_handlers[] = {
 	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
+	EMU_REG(GICR_PENDBASER, sizeof(u64), pendbaser_write, pendbaser_read),
 	{},
 };
 
@@ -1121,6 +1147,7 @@ static struct emu_handler redist_handlers[] = {
  */
 static struct emu_handler redist_handlers_pre_init[] = {
 	EMU_REG_RAZ_WI(GICR_PROPBASER, sizeof(u64)),
+	EMU_REG_RAZ_WI(GICR_PENDBASER, sizeof(u64)),
 	{},
 };
 
