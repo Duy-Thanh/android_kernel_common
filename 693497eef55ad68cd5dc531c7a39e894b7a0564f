@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5c0b0779_6734af54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-17T23:45:13Z",
+      "side": 1,
+      "message": "Removing the hold on this as 2026-06 is cut.",
+      "revId": "693497eef55ad68cd5dc531c7a39e894b7a0564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3bb11568_83e6b883",
         "filename": "kernel/sched/core.c",
         "patchSetId": 11
