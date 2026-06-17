@@ -88,6 +88,24 @@
       "parentUuid": "80061536_3126fc13",
       "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada60128_4ed936ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3525127
+      },
+      "writtenOn": "2026-06-17T01:24:05Z",
+      "side": 1,
+      "message": "I see the commit https://android-review.googlesource.com/c/kernel/common/+/4053417, I will abandom this commit. thanks.",
+      "parentUuid": "d9ba7635_7ddd7d00",
+      "revId": "c7a625d47aab175e2056d5c670326176f6d40e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
