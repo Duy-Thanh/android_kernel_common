@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f82eb8_ace7c2ac",
+        "filename": "drivers/pci/probe.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-06-17T18:34:06Z",
+      "side": 1,
+      "message": "There is still a CRC issue for x86_64 builds. It can be fixed by adding:\n```\nANDROID_KABI_DECLONLY(static_call_mod);\n```",
+      "revId": "2f3616654498ab634f0b8d4749f5085a409d9b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
