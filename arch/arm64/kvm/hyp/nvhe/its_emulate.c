@@ -1007,6 +1007,47 @@ unshare_prop_tab:
 	return ret;
 }
 
+static int handle_lpi_disable(struct redist_priv_state *redist)
+{
+	struct redist_priv_state *other;
+	bool unshare_prop = true;
+	u64 id_bits, prop_sz, pend_sz;
+
+	id_bits = FIELD_GET(GICR_PROPBASER_IDBITS_MASK, redist->propbaser);
+	id_bits = clamp_t(u64, id_bits, MIN_LPI_ID_BITS, MAX_LPI_ID_BITS);
+
+	/* Check if this is a last GICR that uses the property table */
+	for_each_redist(other) {
+		/* Ignore self and GICR with disabled LPI */
+		if (redist == other || !other->lpi_enabled)
+			continue;
+
+		/* Ignore GICR that do not use the same property table */
+		if (GICR_PROPBASER_ADDRESS(other->propbaser) !=
+		    GICR_PROPBASER_ADDRESS(redist->propbaser))
+			continue;
+
+		/*
+		 * Another GICR still uses this property table with LPIs
+		 * enabled. Do not unshare the property table.
+		 */
+		unshare_prop = false;
+	}
+
+	/* Decrease refcount for property table */
+	prop_sz = ALIGN(BIT_ULL(id_bits + 1), SZ_64K);
+	hyp_unshare_unpin_mem(GICR_PROPBASER_ADDRESS(redist->propbaser),
+			      prop_sz, unshare_prop);
+
+	/* Unshare and unpin the pending table */
+	pend_sz = ALIGN(BIT_ULL(id_bits + 1) / 8, SZ_64K);
+	hyp_unshare_unpin_mem(GICR_PENDBASER_ADDRESS(redist->pendbaser),
+			      pend_sz, /* unshare */ true);
+
+	redist->lpi_enabled = false;
+	return 0;
+}
+
 static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
 				  struct redist_priv_state *redist,
 				  u64 typer)
@@ -1083,6 +1124,108 @@ unlock:
 	return ret;
 }
 
+static u32 update_ctlr(struct redist_priv_state *redist, u32 ctlr)
+{
+	u64 timeout = 1000;
+
+	writel_relaxed(ctlr, redist->base + GICR_CTLR);
+
+	ctlr = readl_relaxed(redist->base + GICR_CTLR);
+	while (FIELD_GET(GICR_CTLR_RWP, ctlr)) {
+		if (!timeout--)
+			break;
+
+		pkvm_udelay(100);
+		ctlr = readl_relaxed(redist->base + GICR_CTLR);
+	}
+
+	return ctlr;
+}
+
+static void enable_lpi(struct redist_priv_state *redist, u32 ctlr)
+{
+	int ret;
+
+	/* Try to verify if the LPI is safe to enable first */
+	ret = handle_lpi_enable(redist);
+	if (ret)
+		return;
+
+	writeq_relaxed(redist->propbaser, redist->base + GICR_PROPBASER);
+	writeq_relaxed(redist->pendbaser, redist->base + GICR_PENDBASER);
+
+	/*
+	 * Try to update the GICR_CTLR to EnableLPI=1. If RWP=0 but
+	 * EnableLPI stays disabled then revert to disabled.
+	 */
+	ctlr = update_ctlr(redist, ctlr);
+	if (!FIELD_GET(GICR_CTLR_ENABLE_LPIS, ctlr) &&
+	    !FIELD_GET(GICR_CTLR_RWP, ctlr))
+		handle_lpi_disable(redist);
+}
+
+static void disable_lpi(struct redist_priv_state *redist, u32 ctlr)
+{
+	/*
+	 * Try to update the GICR_CTLR to EnableLPI=0. If RWP=0 but
+	 * EnableLPI stays enabled then drop write.
+	 */
+	ctlr = update_ctlr(redist, ctlr);
+	if (FIELD_GET(GICR_CTLR_ENABLE_LPIS, ctlr) ||
+	    FIELD_GET(GICR_CTLR_RWP, ctlr))
+		return;
+
+	/* Disabling was successful we can safely unshare memory */
+	handle_lpi_disable(redist);
+}
+
+static void redist_ctlr_write(struct pkvm_moveable_reg *region, u64 offset,
+			      u64 value)
+{
+	struct redist_priv_state *redist = region->priv;
+	bool lpi;
+	u32 ctlr;
+
+	/*
+	 * Check if previous write to GICR_CTLR is still pending
+	 * indicated by GICR_CTLR.RWP. If so deny update.
+	 */
+	ctlr = readl_relaxed(redist->base + GICR_CTLR);
+	if (FIELD_GET(GICR_CTLR_RWP, ctlr))
+		return;
+
+	lpi = FIELD_GET(GICR_CTLR_ENABLE_LPIS, value);
+
+	/*
+	 * Handle toggling EnableLPI in special manner.
+	 * Forward oher writes.
+	 */
+	if (lpi && !redist->lpi_enabled)
+		enable_lpi(redist, value);
+	else if (!lpi && redist->lpi_enabled)
+		disable_lpi(redist, value);
+	else
+		writel_relaxed(value, redist->base + GICR_CTLR);
+}
+
+static void redist_ctlr_read(struct pkvm_moveable_reg *region, u64 offset,
+			     u64 *read)
+{
+	struct redist_priv_state *redist = region->priv;
+	*read = readl_relaxed(redist->base + GICR_CTLR);
+}
+
+static void redist_ctlr_pre_init(struct pkvm_moveable_reg *region,
+				      u64 offset, u64 *read)
+{
+	/*
+	 * Pretend that there is a register write pending until
+	 * redistributor is initialized using pkvm_init_redist_emulation.
+	 * This should keep the driver busy for some time...
+	 */
+	*read = GICR_CTLR_RWP;
+}
+
 static void propbaser_write(struct pkvm_moveable_reg *region, u64 offset,
 			    u64 value)
 {
@@ -1135,6 +1278,7 @@ static void pendbaser_read(struct pkvm_moveable_reg *region, u64 offset,
 }
 
 static struct emu_handler redist_handlers[] = {
+	EMU_REG(GICR_CTLR, sizeof(u32), redist_ctlr_write, redist_ctlr_read),
 	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
 	EMU_REG(GICR_PENDBASER, sizeof(u64), pendbaser_write, pendbaser_read),
 	{},
@@ -1146,11 +1290,11 @@ static struct emu_handler redist_handlers[] = {
  * window.
  */
 static struct emu_handler redist_handlers_pre_init[] = {
+	EMU_REG(GICR_CTLR, sizeof(u32), write_ignore, redist_ctlr_pre_init),
 	EMU_REG_RAZ_WI(GICR_PROPBASER, sizeof(u64)),
 	EMU_REG_RAZ_WI(GICR_PENDBASER, sizeof(u64)),
 	{},
 };
-
 
 void pkvm_handle_rdist_emulation(struct pkvm_moveable_reg *region, u64 offset,
 				 bool write, u64 *reg, u8 reg_size)
