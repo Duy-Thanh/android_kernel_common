@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a0fa07c_b72268be",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-17T21:01:52Z",
+      "side": 1,
+      "message": "You can use `ARef::from_raw` instead to avoid this inc/dec.",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c184d357_bc24d88e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "rust/kernel/anon_inodes.rs",
+              "range": {
+                "startLine": 298,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "            // SAFETY: `anon_inode_create_getfile` returns a file pointer with an incremented\n            // reference count, which `ARef::from_raw` takes ownership of.\n            let file \u003d unsafe { ARef::from_raw(raw_file) };\n"
+            }
+          ]
+        }
+      ],
+      "revId": "adaf65a6b30e63247cb16655cf25a679bda0c34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
