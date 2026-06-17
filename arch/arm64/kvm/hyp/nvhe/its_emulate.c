@@ -43,16 +43,20 @@ static void handle_emulation(struct pkvm_moveable_reg *region, u64 offset,
 			return;
 
 		if (write && reg_handler->write) {
-			hyp_spin_lock(lock);
+			if (lock)
+				hyp_spin_lock(lock);
 			reg_handler->write(region, offset, *reg);
-			hyp_spin_unlock(lock);
+			if (lock)
+				hyp_spin_unlock(lock);
 			return;
 		}
 
 		if (!write && reg_handler->read) {
-			hyp_spin_lock(lock);
+			if (lock)
+				hyp_spin_lock(lock);
 			reg_handler->read(region, offset, reg);
-			hyp_spin_unlock(lock);
+			if (lock)
+				hyp_spin_unlock(lock);
 			return;
 		}
 
@@ -1063,4 +1067,35 @@ err:
 unlock:
 	hyp_spin_unlock(&redist_lock);
 	return ret;
+}
+
+static struct emu_handler redist_handlers[] = {
+	{},
+};
+
+/*
+ * Emulation handlers for redistributors not yet initialized
+ * by pkvm_init_redist_emulation in pkvm_drop_host_privileges
+ * window.
+ */
+static struct emu_handler redist_handlers_pre_init[] = {
+	{},
+};
+
+
+void pkvm_handle_rdist_emulation(struct pkvm_moveable_reg *region, u64 offset,
+				 bool write, u64 *reg, u8 reg_size)
+{
+	struct redist_priv_state *redist;
+
+	hyp_spin_lock(&redist_lock);
+	redist = region->priv;
+	hyp_spin_unlock(&redist_lock);
+
+	if (redist)
+		handle_emulation(region, offset, write, reg, reg_size,
+				 redist_handlers, &redist_lock);
+	else
+		handle_emulation(region, offset, write, reg, reg_size,
+				 redist_handlers_pre_init, NULL);
 }
