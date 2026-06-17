@@ -252,6 +252,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9af737e_e70a2f00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-17T13:32:43Z",
+      "side": 1,
+      "message": "After looking more into it, now I remember one more reason why I did it this way. We call `admit_host_page` from `topup_pkvm_memcache` where it is passed as a callback with arg as the single argument. `refill_memcache` calls `topup_pkvm_memcache` with `admit_host_page` as the `alloc_pg` callback. So to pass more arguments to `alloc_pg`, we could either use a struct as above or change the alloc_pg signature and pass extra args when calling `topup_pkvm_memcache`. I chose this structure method because that way we need not touch other parts which use `topup_pkvm_memcache` like `kvm_topup_pkvm_memcache`.\n\nThe `share_ro` flag needs to be passed to admit_host_page. So just confirming if you were referring to changing `admit_host_page` signature and pass share_ro as an extra arg to `topup_pkvm_memcache` and update `kvm_topup_pkvm_memcache` as well ? I feel its cleaner to have it a struct passed in to `admit_host_page` and then my initial idea would not add any more complexity than having share_ro and mc wrapped in a struct. WDYT?\n\nI have posted a WIP CL with my initial idea so that you get the whole picture: aosp/4127313. We can probably continue the discussion there.",
+      "parentUuid": "3740cfa1_25cc2b95",
+      "revId": "6545b3379f08190eb1c5d416b1c7e0fb781509f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebcd3525_2e3d5fb4",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 2
