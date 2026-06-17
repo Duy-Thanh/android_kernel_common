@@ -257,12 +257,13 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 		if (ret <= 0) {
 			goto out;
 		}
+		return ret;
 	}
 #endif
 	if (time_before64(fuse_dentry_time(entry), get_jiffies_64()) ||
 		 (flags & (LOOKUP_EXCL | LOOKUP_REVAL | LOOKUP_RENAME_TARGET))) {
 		struct fuse_entry_out outarg;
-		struct fuse_entry_bpf bpf_arg;
+		struct fuse_entry_bpf bpf_arg = {0};
 		FUSE_ARGS(args);
 		struct fuse_forget_link *forget;
 		u64 attr_version;
@@ -309,7 +310,7 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 			fi = get_fuse_inode(inode);
 			if (outarg.nodeid != get_node_id(inode) ||
 #ifdef CONFIG_FUSE_BPF
-			    (fuse_bpf_backing_allowed(entry->d_sb) && ret == sizeof(bpf_arg.out) &&
+			    (ret == sizeof(bpf_arg.out) && fuse_bpf_backing_allowed(entry->d_sb) &&
 					    backing_data_changed(fi, entry, &bpf_arg)) ||
 #endif
 			    (bool) IS_AUTOMOUNT(inode) != (bool) (outarg.attr.flags & FUSE_ATTR_SUBMOUNT)) {
@@ -320,6 +321,12 @@ static int fuse_dentry_revalidate(struct dentry *entry, unsigned int flags)
 			spin_lock(&fi->lock);
 			fi->nlookup++;
 			spin_unlock(&fi->lock);
+#ifdef CONFIG_FUSE_BPF
+			if (ret == sizeof(bpf_arg.out)) {
+				/* BPF part processed/ignored, treat as success */
+				ret = 0;
+			}
+#endif
 		}
 		kfree(forget);
 		if (ret == -ENOMEM || ret == -EINTR)
