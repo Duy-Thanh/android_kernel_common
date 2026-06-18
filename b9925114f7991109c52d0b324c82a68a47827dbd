@@ -93,6 +93,30 @@
       ],
       "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d5cbcc4_1328db13",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-18T22:43:29Z",
+      "side": 1,
+      "message": "Good catch. I checked the value and count is actually 0 here, so this is a nop/unnecessary.",
+      "parentUuid": "30131ac9_73b6aac0",
+      "range": {
+        "startLine": 335,
+        "startChar": 2,
+        "endLine": 335,
+        "endChar": 18
+      },
+      "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
