@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a42f4c1_db63fb2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-18T11:49:17Z",
+      "side": 1,
+      "message": "The commit message frames this as a pure type conversion, but the change also moves the read of num_hyp_event_mods in __pkvm_sync_ftrace from outside the lock to inside it. Before, the count was snapshot before hyp_spin_lock(), so a concurrent register_hyp_mod_events() could add a module between the read and the lock acquire, and __pkvm_sync_ftrace would miss it. After, the read is under the lock and sees the latest value.\n\nThat is a behavioral fix worth calling out in the commit message, not just a side effect of dropping atomic_t.",
+      "revId": "89c75fea172ec3e1df51707b3a16456e83590eef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f76fb02_2bb8d1a9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/events.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-06-18T11:49:17Z",
+      "side": 1,
+      "message": "This writes offset_idx after the lock is released, but smp_store_release(num_hyp_event_mods) already made this slot visible to readers inside the critical section. Can a concurrent __pkvm_sync_ftrace see the new num_hyp_event_mods but read a stale/uninitialized offset_idx here?\n\nIf yes, separate fix of course...",
+      "revId": "89c75fea172ec3e1df51707b3a16456e83590eef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
