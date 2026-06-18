@@ -37,6 +37,9 @@
 #include <asm/exception.h>
 #include <asm/smp_plat.h>
 #include <asm/virt.h>
+#if IS_ENABLED(CONFIG_ARM64)
+#include <asm/kvm_host.h>
+#endif
 
 #include "irq-gic-common.h"
 
@@ -1165,6 +1168,19 @@ static int __gic_update_rdist_properties(struct redist_region *region,
 		gic_data.rdists.has_vlpis = false;
 		gic_data.rdists.has_rvpeid = false;
 	}
+
+	/*
+	 * Disable GIC v4.0 features when protected KVM is used. Currently
+	 * pKVM does not have proper sanitization in place to ensure that
+	 * VLPI could not be exploited to compromise hypervisor and
+	 * pVM security.
+	 */
+#if IS_ENABLED(CONFIG_ARM64)
+	if (kvm_get_mode() == KVM_MODE_PROTECTED) {
+		gic_data.rdists.has_vlpis = false;
+		gic_data.rdists.has_rvpeid = false;
+	}
+#endif
 
 	gic_data.ppi_nr = min(GICR_TYPER_NR_PPIS(typer), gic_data.ppi_nr);
 
