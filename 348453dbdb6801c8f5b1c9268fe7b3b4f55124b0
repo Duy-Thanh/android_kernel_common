@@ -34,6 +34,24 @@
       "parentUuid": "d3ed8338_f33d0625",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e20e01_d308b904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-18T14:55:18Z",
+      "side": 1,
+      "message": "ah, that\u0027s a branch forked off prior to the first release of android17-6.18, so I wonder whether it\u0027s even eligible for respins? @tkjos will know...",
+      "parentUuid": "415c2bbb_7a7a8d1d",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
