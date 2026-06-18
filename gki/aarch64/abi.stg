@@ -427332,6 +427332,14 @@ function {
   parameter_id: 0x019e2530
 }
 function {
+  id: 0x9ba9cbf1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x078316ff
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9ba9d798
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -455385,6 +455393,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_ufs_link_startup"
 }
 elf_symbol {
+  id: 0xc0cbc804
+  name: "__traceiter_android_vh_ufs_mcq_cleanup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9085acca
+  type_id: 0x9ba9cbf1
+  full_name: "__traceiter_android_vh_ufs_mcq_cleanup"
+}
+elf_symbol {
   id: 0x834b91de
   name: "__traceiter_android_vh_ufs_prepare_command"
   is_defined: true
@@ -463699,6 +463716,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ufs_link_startup"
+}
+elf_symbol {
+  id: 0xc036eda2
+  name: "__tracepoint_android_vh_ufs_mcq_cleanup"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ufs_mcq_cleanup"
 }
 elf_symbol {
   id: 0xc23168f8
@@ -528161,7 +528187,7 @@ elf_symbol {
   name: "ufshcd_mcq_config_esi"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x853cc7ea
+  crc: 0x03246fbd
   type_id: 0x11ebebf2
   full_name: "ufshcd_mcq_config_esi"
 }
@@ -528170,7 +528196,7 @@ elf_symbol {
   name: "ufshcd_mcq_config_mac"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x77341298
+  crc: 0x38cb5f90
   type_id: 0x125cb480
   full_name: "ufshcd_mcq_config_mac"
 }
@@ -528179,7 +528205,7 @@ elf_symbol {
   name: "ufshcd_mcq_enable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb92e5b63
+  crc: 0x8569fd35
   type_id: 0x1178942c
   full_name: "ufshcd_mcq_enable"
 }
@@ -528188,7 +528214,7 @@ elf_symbol {
   name: "ufshcd_mcq_enable_esi"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb92e5b63
+  crc: 0x8569fd35
   type_id: 0x1178942c
   full_name: "ufshcd_mcq_enable_esi"
 }
@@ -528197,7 +528223,7 @@ elf_symbol {
   name: "ufshcd_mcq_make_queues_operational"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb92e5b63
+  crc: 0x8569fd35
   type_id: 0x1178942c
   full_name: "ufshcd_mcq_make_queues_operational"
 }
@@ -528206,7 +528232,7 @@ elf_symbol {
   name: "ufshcd_mcq_poll_cqe_lock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7953fce7
+  crc: 0xfb332a7b
   type_id: 0x30f8e5d3
   full_name: "ufshcd_mcq_poll_cqe_lock"
 }
@@ -528215,7 +528241,7 @@ elf_symbol {
   name: "ufshcd_mcq_poll_n_cqe_lock"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xac74b2b9
+  crc: 0x16e87d65
   type_id: 0x30e9848a
   full_name: "ufshcd_mcq_poll_n_cqe_lock"
 }
@@ -528224,7 +528250,7 @@ elf_symbol {
   name: "ufshcd_mcq_read_cqis"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x39e01a4c
+  crc: 0x91e2bd9e
   type_id: 0x45846d91
   full_name: "ufshcd_mcq_read_cqis"
 }
@@ -528233,7 +528259,7 @@ elf_symbol {
   name: "ufshcd_mcq_write_cqis"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2572ec30
+  crc: 0xa7123aac
   type_id: 0x12457cb4
   full_name: "ufshcd_mcq_write_cqis"
 }
@@ -538544,6 +538570,7 @@ interface {
   symbol_id: 0xa4d0760d
   symbol_id: 0x15f6cf54
   symbol_id: 0x6801121b
+  symbol_id: 0xc0cbc804
   symbol_id: 0x834b91de
   symbol_id: 0x79a41c1c
   symbol_id: 0x2e0ec34f
@@ -539468,6 +539495,7 @@ interface {
   symbol_id: 0x5fe3b2ff
   symbol_id: 0xc9f46bb2
   symbol_id: 0x09e01899
+  symbol_id: 0xc036eda2
   symbol_id: 0xc23168f8
   symbol_id: 0x602cdd1a
   symbol_id: 0xf8de19a9
