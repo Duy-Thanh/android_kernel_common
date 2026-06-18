@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14437f63_9ab586ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:40:01Z",
+      "side": 1,
+      "message": "nit: checkpatch:\n```\nWARNING: Prefer a maximum 75 chars per line (possible unwrapped commit description?)\n#14: \n[1]: 4dc9c4dbfea5 (\"ANDROID: pKVM: x86: Fix TOCTOU and donate ordering in memcache refill\")\n\nERROR: Please use git commit description style \u0027commit \u003c12+ chars of sha1\u003e (\"\u003ctitle line\u003e\")\u0027 - ie: \u0027commit 4dc9c4dbfea5 (\"ANDROID: pKVM: x86: Fix TOCTOU and donate ordering in memcache refill\")\u0027\n#14: \n[1]: 4dc9c4dbfea5 (\"ANDROID: pKVM: x86: Fix TOCTOU and donate ordering in memcache refill\")\n\n```\n\nAlso it is more conventional to add such commit references inline in the commit message text, not in a footnote?",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df05d69_0ff378e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:40:01Z",
+      "side": 1,
+      "message": "nit: remove this empty line between tags, to follow conventional style?",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62761ff2_116d4f86",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:40:01Z",
+      "side": 1,
+      "message": "Continuing the discussion from aosp/4043296:\n\n\u003e The `share_ro` flag needs to be passed to admit_host_page. So just confirming if you were referring to changing `admit_host_page` signature and pass share_ro as an extra arg to `topup_pkvm_memcache` and update `kvm_topup_pkvm_memcache` as well ? I feel its cleaner to have it a struct passed in to `admit_host_page` and then my initial idea would not add any more complexity than having share_ro and mc wrapped in a struct. WDYT?\n\nI agree that a struct is better, and that wasn\u0027t my point. My idea is just to add a `bool share_ro` field to this struct here, instead of this `donate` callback field.\n\nMy point is that it merely happens that we have those 2 similar functions `pkvm_host_donate_hyp()` and `pkvm_host_donate_hyp_share_ro()`, it\u0027s unlikely that we\u0027ll have any other donate functions with exactly the same signature, so this `pkvm_memcache_donate_fn_t` seems like a bit overgeneralized ad-hoc solution rather than a useful abstraction. So it seems the code would be simpler if we do it the straightforward way: add a `share_ro` flag to this struct and use `ret \u003d share_ro ? pkvm_host_donate_hyp_share_ro(...) ? pkvm_host_donate_hyp(...)` in `admit_host_page()`.",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8172169_8b014579",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:40:01Z",
+      "side": 1,
+      "message": "This function becomes not exactly MMU-specific (it is reused for the IOMMU memcache now, and might be also reused for any other memcache in the future), so perhaps it\u0027s better to move it from `mmu.c` to a more generic place? E.g. to the end of `pkvm.c` (that seems to be the most suitable place for it currently).",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b42ff81_4d693fbb",
+        "filename": "arch/x86/kvm/pkvm/mmu.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:40:01Z",
+      "side": 1,
+      "message": "Here we have pkvm_guest_mmu_*() declarations grouped together, so we\u0027d better move the `pkvm_refill_memcache()` declaration elsewhere (as it is not guest_mmu specific anymore)?\n\n(For example, if we move its implementation to `pkvm.c` per my other comment, we\u0027d correspondingly move its declaration to `pkvm.h`.)",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
