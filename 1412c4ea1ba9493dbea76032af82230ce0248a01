@@ -34,6 +34,24 @@
       "parentUuid": "8ab02153_10343440",
       "revId": "1412c4ea1ba9493dbea76032af82230ce0248a01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47020f2f_23224527",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-18T09:44:52Z",
+      "side": 1,
+      "message": "Sure, I was thinking of doing that as well but I wanted to keep the change small enough. Please have another look at it.",
+      "parentUuid": "8ab02153_10343440",
+      "revId": "1412c4ea1ba9493dbea76032af82230ce0248a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
