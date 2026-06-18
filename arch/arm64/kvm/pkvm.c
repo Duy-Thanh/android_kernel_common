@@ -205,7 +205,7 @@ static int pkvm_register_gic_redist_cb(phys_addr_t phys, u64 size)
 		moveable_regs[idx].size = SZ_64K;
 		moveable_regs[idx].type = PKVM_MREG_EMULATE_MMIO;
 		moveable_regs[idx].cb =
-			lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+			lm_alias(&kvm_nvhe_sym(pkvm_handle_vlpi_emulation));
 		idx++;
 	}
 
