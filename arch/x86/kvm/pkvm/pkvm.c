@@ -2405,3 +2405,69 @@ int pkvm_walk_each_vm(pkvm_vm_func_t func, void *arg)
 
 	return ret;
 }
+
+struct refill_memcache_data {
+	struct pkvm_memcache *host_mc;
+	pkvm_memcache_donate_fn_t donate;
+};
+
+static void *admit_host_page(void *arg)
+{
+	struct refill_memcache_data *data = arg;
+	struct pkvm_memcache *host_mc = data->host_mc;
+	void *page;
+
+	if (!host_mc->count || WARN_ON_ONCE(host_mc->head.nr_pages != 1))
+		return NULL;
+
+	/*
+	 * Should donate the page from the host memcache before pop it out
+	 * because pop will read data from this page to get the next head, and
+	 * then will write this data to the host memcache's head. Without
+	 * donating, doing that may leak sensitive data as this page may be a
+	 * private page of a pVM or the hypervisor.
+	 *
+	 * Responsibility of clearing the page is with the callers of
+	 * pkvm_refill_memcache api. Existing callers do this.
+	 */
+	if (WARN_ON_ONCE(data->donate(pkvm_host_gpa_to_phys(host_mc->head.addr),
+				      PAGE_SIZE, false)))
+		return NULL;
+
+	page = pop_pkvm_memcache_page(host_mc, pkvm_host_gpa_to_virt);
+	/*
+	 * The head page is already donated so the pop has no reason to fail
+	 * unless there is a code bug.
+	 */
+	BUG_ON(!page);
+
+	return page;
+}
+
+/* Refill our local memcache by popping pages from the one provided by the host. */
+int pkvm_refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
+			 struct pkvm_memcache *host_mc,
+			 pkvm_memcache_donate_fn_t donate)
+{
+	/*
+	 * The host mc is shared and can be modified by the host while popping.
+	 * Copy it to local and use the local one to prevent the host from
+	 * changing it with unexpected values, e.g., the host change the
+	 * host_mc->head.addr to a private page address after addr is donated
+	 * but before popping up, making the pop_pkvm_memcache_page reading
+	 * from the private page and leaking data to the host.
+	 */
+	struct pkvm_memcache tmp_mc = *(volatile typeof(*host_mc) *)host_mc;
+	struct refill_memcache_data data = {
+		.host_mc = &tmp_mc,
+		.donate = donate,
+	};
+	int ret;
+
+	ret = topup_pkvm_memcache(mc, min_pages, admit_host_page,
+				  pkvm_virt_to_phys, &data);
+
+	*(volatile typeof(*host_mc) *)host_mc = tmp_mc;
+
+	return ret;
+}
