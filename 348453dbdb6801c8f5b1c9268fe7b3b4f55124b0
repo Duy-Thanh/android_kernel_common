@@ -16,6 +16,24 @@
       "message": "You need a respin bug for these (https://source.android.com/docs/core/architecture/kernel/gki-respin)",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415c2bbb_7a7a8d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-18T14:25:36Z",
+      "side": 1,
+      "message": "Yeah but for some reason android17-6.18-2026-04 doesn\u0027t show up in the list of branches in the respin request form.",
+      "parentUuid": "d3ed8338_f33d0625",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
