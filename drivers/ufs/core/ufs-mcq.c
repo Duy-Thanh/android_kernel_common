@@ -12,6 +12,7 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include "ufshcd-priv.h"
+#include <trace/hooks/ufshcd.h>
 #include <linux/delay.h>
 #include <scsi/scsi_cmnd.h>
 #include <linux/bitfield.h>
@@ -574,6 +575,8 @@ int ufshcd_mcq_sq_cleanup(struct ufs_hba *hba, int task_tag)
 
 	mutex_lock(&hwq->sq_mutex);
 
+	trace_android_vh_ufs_mcq_cleanup(hba, task_tag, true);
+
 	/* stop the SQ fetching before working on it */
 	err = ufshcd_mcq_sq_stop(hba, hwq);
 	if (err)
@@ -601,6 +604,7 @@ int ufshcd_mcq_sq_cleanup(struct ufs_hba *hba, int task_tag)
 		err = -ETIMEDOUT;
 
 unlock:
+	trace_android_vh_ufs_mcq_cleanup(hba, task_tag, false);
 	mutex_unlock(&hwq->sq_mutex);
 	return err;
 }
