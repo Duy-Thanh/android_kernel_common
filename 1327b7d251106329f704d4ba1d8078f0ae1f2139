@@ -39,6 +39,30 @@
       },
       "revId": "1327b7d251106329f704d4ba1d8078f0ae1f2139",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e5b8887_d818a54c",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2026-06-18T20:11:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fcfd93a5_ff0fe8bc",
+      "range": {
+        "startLine": 328,
+        "startChar": 53,
+        "endLine": 328,
+        "endChar": 60
+      },
+      "revId": "1327b7d251106329f704d4ba1d8078f0ae1f2139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
