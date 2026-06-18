@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "056b06cb_2c2556df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3515397
+      },
+      "writtenOn": "2026-06-18T17:30:45Z",
+      "side": 1,
+      "message": "Hi All,\n\nThis patch has received positive reviews upstream and also has a Reviewed-by internally which is CR+2 equivalent and would be mostly accepted. Could we please get this landed into ACK since now there is min risk of upstream divergence",
+      "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
