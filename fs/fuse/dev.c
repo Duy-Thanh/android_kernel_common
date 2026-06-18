@@ -578,11 +578,6 @@ static void request_wait_answer(struct fuse_req *req)
 		if (!err)
 			return;
 
-		if (req->args->abort_on_kill) {
-			fuse_abort_conn(fc);
-			return;
-		}
-
 		if (test_bit(FR_URING, &req->flags))
 			removed = fuse_uring_remove_pending_req(req);
 		else
@@ -691,8 +686,7 @@ ssize_t __fuse_simple_request(struct mnt_idmap *idmap,
 			fuse_force_creds(req);
 
 		__set_bit(FR_WAITING, &req->flags);
-		if (!args->abort_on_kill)
-			__set_bit(FR_FORCE, &req->flags);
+		__set_bit(FR_FORCE, &req->flags);
 	} else {
 		WARN_ON(args->nocreds);
 		req = fuse_get_req(idmap, fm, false);
