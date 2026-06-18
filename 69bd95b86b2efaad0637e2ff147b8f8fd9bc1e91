@@ -80,6 +80,24 @@
       "parentUuid": "3aebf3e3_1991bdb1",
       "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8717c57_6be64190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4911972
+      },
+      "writtenOn": "2026-06-18T03:48:08Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. I see the fix is already in the LTS branch. Our product branch syncs with android17-6.18-2026-06, and the fix doesn\u0027t appear to be in that branch yet.\nCould you help clarify:\n1. When is the next LTS merge scheduled for the main android17-6.18 branch?\n2. Will the 2026-06 branch get another LTS sync to pick up this fix? If not, should we cherry-pick it ourselves after it merges into main?",
+      "parentUuid": "d538205c_f2b22c19",
+      "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
