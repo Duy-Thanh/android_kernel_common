@@ -1160,11 +1160,30 @@ static void invlpir_read(struct pkvm_moveable_reg *region, u64 offset,
 	/* GICR_INVLPIR is write only */
 }
 
+static void invallr_write(struct pkvm_moveable_reg *region, u64 offset,
+			  u64 value)
+{
+	struct redist_priv_state *redist = region->priv;
+
+	/* VLPIs are currently not allowed */
+	if (FIELD_GET(GICR_INVALLR_V, value))
+		return;
+
+	writeq_relaxed(value, redist->base + GICR_INVALLR);
+}
+
+static void invallr_read(struct pkvm_moveable_reg *region, u64 offset,
+			 u64 *read)
+{
+	/* GICR_INVALLR is write only */
+}
+
 static struct emu_handler redist_handlers[] = {
 	EMU_REG(GICR_CTLR, sizeof(u32), redist_ctlr_write, redist_ctlr_read),
 	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
 	EMU_REG(GICR_PENDBASER, sizeof(u64), pendbaser_write, pendbaser_read),
 	EMU_REG(GICR_INVLPIR, sizeof(u64), invlpir_write, invlpir_read),
+	EMU_REG(GICR_INVALLR, sizeof(u64), invallr_write, invallr_read),
 	{},
 };
 
