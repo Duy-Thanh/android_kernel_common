@@ -37,6 +37,7 @@
 #include <asm/exception.h>
 #include <asm/smp_plat.h>
 #include <asm/virt.h>
+#include <asm/kvm_host.h>
 
 #include "irq-gic-common.h"
 
@@ -1159,8 +1160,15 @@ static int __gic_update_rdist_properties(struct redist_region *region,
 					   gic_data.rdists.has_rvpeid);
 	gic_data.rdists.has_vpend_valid_dirty &= !!(typer & GICR_TYPER_DIRTY);
 
-	/* Detect non-sensical configurations */
-	if (WARN_ON_ONCE(gic_data.rdists.has_rvpeid && !gic_data.rdists.has_vlpis)) {
+	/*
+	 * Detect non-sensical configurations or disable GIC v4.0 features
+	 * when protected KVM is used. Currently pKVM does not have proper
+	 * sanitization in place to ensure that VLPI could not be exploited
+	 * to compromise hypervisor and pVM security.
+	 */
+	if (WARN_ON_ONCE(gic_data.rdists.has_rvpeid &&
+			 !gic_data.rdists.has_vlpis) ||
+	    kvm_get_mode() == KVM_MODE_PROTECTED) {
 		gic_data.rdists.has_direct_lpi = false;
 		gic_data.rdists.has_vlpis = false;
 		gic_data.rdists.has_rvpeid = false;
