@@ -303,6 +303,13 @@ static int parse_its_cmdq(struct its_priv_state *its, int offset, ssize_t len)
 	while (len > 0 && !ret) {
 		req_type = cmd->raw_cmd[0] & GENMASK(7, 0);
 
+		/*
+		 * Block all VLPI related commands until proper sanitization
+		 * is shipped.
+		 */
+		if (req_type & 0x20)
+			return -EFAULT;
+
 		switch (req_type) {
 		case GITS_CMD_MAPD:
 			ret = process_its_mapd(its, cmd);
