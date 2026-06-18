@@ -16,6 +16,24 @@
       "message": "FYI, this should be sent upstream when ready, not to android.",
       "revId": "45b4ea8fc98d944798b22ff24654f54787494515",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca20ad00_feb6e32d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-06-18T04:53:07Z",
+      "side": 1,
+      "message": "Yes, this I added for now to trigger the presubmit check (it was flagging otherwise). I\u0027ll remove it while upstreaming.",
+      "parentUuid": "17af327d_83fb0680",
+      "revId": "45b4ea8fc98d944798b22ff24654f54787494515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
