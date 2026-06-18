@@ -70,6 +70,24 @@
       "parentUuid": "d7e20e01_d308b904",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2121d447_00580ec7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-18T15:35:29Z",
+      "side": 1,
+      "message": "This branch was intended for Google use only. It has an incompatible KMI from later branches.",
+      "parentUuid": "bd3fd71e_27ea0614",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
