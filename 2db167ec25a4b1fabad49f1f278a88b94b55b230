@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae54456_6fc43419",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "The patch is RB\u0027d so driver team has good confidence it will get merged. Will follow up with driver team as well.",
+      "parentUuid": "0c1fb347_76e78275",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97d23b22_16aa834d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-17T20:27:10Z",
       "side": 1,
       "message": "Separate line per bug and a space after \"Bug:\"",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d9dfe2_729f2631",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "Thank you, sorry will address it.",
+      "parentUuid": "97d23b22_16aa834d",
       "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5280fd9_3fe70f60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "Sure, will use lore link.",
+      "parentUuid": "700f0cea_7474c399",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3efb153_9ec14ecd",
@@ -65,6 +119,30 @@
       "writtenOn": "2026-06-17T20:33:07Z",
       "side": 1,
       "message": "nit: please fix all these tags, these are not GKI standard. e.g. please pick the main bug, do you really need all of them? What is `Upstream-Task:`? Drop the extra spaces in between the tags and please use lore links, not patchwork. Further more these should all come _after_ the original tags from the LKML patch e.g. keep chronological order. Please check examples in our contributions guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ecb9797_7c7b99e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "Thank you. For vendor module in past, we were told to add Upstream-Task when it is a FROMLIST patch. Sorry, will address it.",
+      "parentUuid": "e3efb153_9ec14ecd",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -109,6 +187,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfafaa8f_55ed6f45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "Thank you all. We will address the comments and update the commit tags accordingly",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fa1c290_3c11883c",
@@ -144,6 +239,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84695c12_31295c11",
+        "filename": "drivers/gpu/drm/drm_modes.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "The other patches submitted to vendor module (private/desktop) https://arsp-review.googlesource.com/c/kernel-desktop/private/desktop-google/+/4684998/1\nfunction is_vrr_compatible checks for the condition via this flag \n\nFor example\nWe have a panel with 2 modes\n                \"2880x1800\": 120 787968 2880 2928 2960 3040 1800 2146 2154 2160 0x48 0xa\n                \"2880x1800\": 60 787968 2880 2928 2960 3040 1800 4306 4314 4320 0x40 0xa\n\nThe function will send this 2 modes to drm_mode_match and ask it to check with respect to DRM_MODE_MATCH_TIMINGS_VRR \n\ndrm_mode_match will check DRM_MODE_MATCH_TIMINGS_VRR is the criteria being asked. So it will call drm_mode_match_timings_vrr to determine if condition is true.\n\nIn above example, vtotal will be different and rest all will be same.\nSo, drm_mode_match_timings_vrr will return true and fastset can be allowed.",
+      "parentUuid": "6fa1c290_3c11883c",
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8525f533_5cb56188",
@@ -157,6 +270,30 @@
       "writtenOn": "2026-06-17T20:15:51Z",
       "side": 1,
       "message": "This opens up potential conflict for future DRM changes if this series is not accepted. The series is less than a week old, and you are only asking to merge the first patch of the series here. Why the rush, and why only the first patch?",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 43
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec2d739_4b7a6d80",
+        "filename": "include/drm/drm_modes.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:28:14Z",
+      "side": 1,
+      "message": "The patch is RB\u0027d so driver team has good confidence it will get merged. Will follow up with driver team as well.",
+      "parentUuid": "8525f533_5cb56188",
       "range": {
         "startLine": 196,
         "startChar": 0,
