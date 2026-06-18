@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae6078b4_bca3550a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-18T17:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14437f63_9ab586ae",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0df05d69_0ff378e6",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-18T14:40:01Z",
       "side": 1,
       "message": "nit: remove this empty line between tags, to follow conventional style?",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd9f42b_a5dc7f7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-18T17:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df05d69_0ff378e6",
       "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ad6eb26_507687a8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-18T17:28:06Z",
+      "side": 1,
+      "message": "\u003e I agree that a struct is better, and that wasn\u0027t my point. My idea is just to add a bool share_ro field to this struct here, instead of this donate callback field.\n\nAhh ok understood.\n\n\u003e My point is that it merely happens that we have those 2 similar functions pkvm_host_donate_hyp() and pkvm_host_donate_hyp_share_ro(), it\u0027s unlikely that we\u0027ll have any other donate functions with exactly the same signature, so this pkvm_memcache_donate_fn_t seems like a bit overgeneralized ad-hoc solution rather than a useful abstraction. So it seems the code would be simpler if we do it the straightforward way: add a share_ro flag to this struct and use ret \u003d share_ro ? pkvm_host_donate_hyp_share_ro(...) ? pkvm_host_donate_hyp(...) in admit_host_page().\n\nI get your argument. But I feel this is straightforward and does not cause much complication. I feel passing the callback function is bit more readable than true/false at the caller site.\n\nBut I do not have a strong opinion. I can do share_ro flag is you are strongly inclined.",
+      "parentUuid": "62761ff2_116d4f86",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8172169_8b014579",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 3
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64190e5b_6a1b6819",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-18T17:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8172169_8b014579",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b42ff81_4d693fbb",
         "filename": "arch/x86/kvm/pkvm/mmu.h",
         "patchSetId": 3
@@ -82,6 +154,24 @@
       "writtenOn": "2026-06-18T14:40:01Z",
       "side": 1,
       "message": "Here we have pkvm_guest_mmu_*() declarations grouped together, so we\u0027d better move the `pkvm_refill_memcache()` declaration elsewhere (as it is not guest_mmu specific anymore)?\n\n(For example, if we move its implementation to `pkvm.c` per my other comment, we\u0027d correspondingly move its declaration to `pkvm.h`.)",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77df749c_57b8c398",
+        "filename": "arch/x86/kvm/pkvm/mmu.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-18T17:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b42ff81_4d693fbb",
       "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
