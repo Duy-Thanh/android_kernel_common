@@ -16,6 +16,24 @@
       "message": "I believe the patch fixes the issue, however we got the issue in a first place due to the several call sites of hyp_ffa_proxy_pages():\n\nperhaps it would be cleaner to account for that memory directly in hyp_ffa_proxy_pages()? The function already accounts for different things.\n\nWe would keep that static_branch_unlikely() into a single callsite.\n\nAnd perhaps you could add a \"hyp_ffa_desc_pages()\" to set ffa_desc_buf.len?",
       "revId": "1412c4ea1ba9493dbea76032af82230ce0248a01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ddca3b4_f467d1cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-18T09:33:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ab02153_10343440",
+      "revId": "1412c4ea1ba9493dbea76032af82230ce0248a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
