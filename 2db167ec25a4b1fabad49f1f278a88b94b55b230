@@ -302,6 +302,30 @@
       },
       "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95cfbd9_88f471f9",
+        "filename": "include/drm/drm_modes.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-18T00:50:29Z",
+      "side": 1,
+      "message": "Remaining patches are submitted to vendor module (private/desktop-google)\nhttps://arsp-review.googlesource.com/c/kernel-desktop/private/desktop-google/+/4684996/1\nhttps://arsp-review.googlesource.com/c/kernel-desktop/private/desktop-google/+/4684997/1\nhttps://arsp-review.googlesource.com/c/kernel-desktop/private/desktop-google/+/4684998/1",
+      "parentUuid": "cec2d739_4b7a6d80",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 43
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
