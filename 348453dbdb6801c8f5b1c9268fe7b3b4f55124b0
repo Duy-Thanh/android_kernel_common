@@ -52,6 +52,24 @@
       "parentUuid": "415c2bbb_7a7a8d1d",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3fd71e_27ea0614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-06-18T14:56:49Z",
+      "side": 1,
+      "message": "I\u0027ve pinged the Release Team about this an hour or two ago.\n\nWaiting for a response.",
+      "parentUuid": "d7e20e01_d308b904",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
