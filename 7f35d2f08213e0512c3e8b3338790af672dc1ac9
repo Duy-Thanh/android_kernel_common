@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f285ef_80df970d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1927,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-18T09:39:42Z",
+      "side": 1,
+      "message": "Could you make this \"unsigned long\" to keep the same return prototype as hyp_ffa_proxy_pages(). \n\nWe tend to use size_t for values in bytes while nr_pages is always u64 or unsigned long.\n\nAlso, can you put this declaration at the top of the function to keep that \"inverted christmas tree\"?",
+      "revId": "7f35d2f08213e0512c3e8b3338790af672dc1ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
