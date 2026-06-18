@@ -323,6 +323,8 @@ extern void kvm_nvhe_sym(pkvm_handle_gic_emulation)(struct pkvm_moveable_reg *re
 						    bool write, u64 *reg, u8 reg_size);
 extern void kvm_nvhe_sym(pkvm_handle_rdist_emulation)(struct pkvm_moveable_reg *region, u64 offset,
 						      bool write, u64 *reg, u8 reg_size);
+extern void kvm_nvhe_sym(pkvm_handle_vlpi_emulation)(struct pkvm_moveable_reg *region, u64 offset,
+						     bool write, u64 *reg, u8 reg_size);
 
 extern struct memblock_region kvm_nvhe_sym(hyp_memory)[];
 extern unsigned int kvm_nvhe_sym(hyp_memblock_nr);
