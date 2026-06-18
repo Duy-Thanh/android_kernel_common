@@ -1312,3 +1312,9 @@ void pkvm_handle_rdist_emulation(struct pkvm_moveable_reg *region, u64 offset,
 		handle_emulation(region, offset, write, reg, reg_size,
 				 redist_handlers_pre_init, NULL);
 }
+
+void pkvm_handle_vlpi_emulation(struct pkvm_moveable_reg *region, u64 offset,
+				 bool write, u64 *reg, u8 reg_size)
+{
+	/* Do nothing. We block VLPIs for now until we can ship proper sanitization */
+}
