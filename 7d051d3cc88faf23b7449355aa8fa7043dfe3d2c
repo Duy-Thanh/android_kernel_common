@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289fb69c_2c62d739",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-06-18T09:19:36Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against cherry pick source.\nSource commit: [go...\n\nCherry pick is not clean. Checked against cherry pick source.\nSource commit: [googlesource](https://android.googlesource.com/kernel/common/+/32360bf6a5d4016669c3545e7b0ec939937f5331).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/32360bf6a5d4016669c3545e7b0ec939937f5331\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/7d051d3cc88faf23b7449355aa8fa7043dfe3d2c\n@@ -26,7 +26,7 @@\n +\n  \tled_init_core(led_cdev);\n  \n- #ifdef CONFIG_LEDS_TRIGGERS\n+ \t/* add to the list of leds */\n @@  @@ EXPORT_SYMBOL_GPL(devm_led_classdev_unregister);\n  \n  static int __init leds_init(void)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\n-------\nIs this a false positive?",
+      "revId": "7d051d3cc88faf23b7449355aa8fa7043dfe3d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
