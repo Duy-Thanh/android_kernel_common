@@ -98,6 +98,24 @@
       "parentUuid": "d538205c_f2b22c19",
       "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab3e803_30caa4c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-06-18T05:01:20Z",
+      "side": 1,
+      "message": "1. I think the LTS merge is a work in progress currently.\n2. @tkjos@google.com, can you comment here?",
+      "parentUuid": "b8717c57_6be64190",
+      "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
