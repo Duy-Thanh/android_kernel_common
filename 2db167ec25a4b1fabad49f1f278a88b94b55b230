@@ -155,6 +155,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dc1892ba_0cc15d75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-18T17:55:09Z",
+      "side": 1,
+      "message": "I see. This is not a tag in GKI though, so thanks for dropping it.\n\nIf you look at our examples, we try to keep chonological order with the tags too. You are also missing your SoB. These are minor nits though but I would have expected the tags to look something like this:\n\n```\nFROMLIST: drm/modes: Add DRM_MODE_MATCH_TIMINGS_VRR\n\nAdd a new mode matching flag DRM_MODE_MATCH_TIMINGS_VRR. This is\nidentical to DRM_MODE_MATCH_TIMINGS, except it requires the vsync\npulse to remain anchored to the end of vtotal, as opposed to the\nstart of the frame. VRR capable hardware can therefore treat\nmatching modes as just variants of the same mode with a different\nvblank lengths.\n\nSigned-off-by: Ville Syrjälä \u003cville.syrjala@linux.intel.com\u003e\n\nBug: 503853270\nLink: https://lore.kernel.org/intel-xe/20260612144203.31715-2-ville.syrjala@linux.intel.com\nChange-Id: I3696d13d73f89092a8fdeb2b673a937b89e76111\nSigned-off-by: Shawn Lee \u003cshawn.c.lee@intel.corp-partner.google.com\u003e\nSigned-off-by: Vidya Srinivas \u003cvidya.srinivas@intel.corp-partner.google.com\u003e\n```\n\nMaybe next time, though. The current format should be fine.",
+      "parentUuid": "8ecb9797_7c7b99e0",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dfc392ad_8c929be1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
