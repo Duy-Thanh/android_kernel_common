@@ -34,6 +34,24 @@
       "parentUuid": "056b06cb_2c2556df",
       "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24522147_9af7ef53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3515397
+      },
+      "writtenOn": "2026-06-18T21:39:29Z",
+      "side": 1,
+      "message": "For the Upstream kernel reviews, Reviewed-By is CR+2 equivalent and is sufficient for a maintainer to land the patch",
+      "parentUuid": "46fb9cf5_fda3503d",
+      "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
