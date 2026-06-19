@@ -33,6 +33,24 @@
       "message": "This writes offset_idx after the lock is released, but smp_store_release(num_hyp_event_mods) already made this slot visible to readers inside the critical section. Can a concurrent __pkvm_sync_ftrace see the new num_hyp_event_mods but read a stale/uninitialized offset_idx here?\n\nIf yes, separate fix of course...",
       "revId": "89c75fea172ec3e1df51707b3a16456e83590eef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f303113_9a7aec51",
+        "filename": "arch/arm64/kvm/hyp/nvhe/events.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-19T15:51:14Z",
+      "side": 1,
+      "message": "damn, why on earth isn\u0027t it under the lock?\n\nI am pretty sure, none of that really matters because pKVM module registration is already sequential and the the ftrace filter can only be updated when userspace is ready, which is **way** after modules have registered.\n\nI need some time to think what\u0027s the best way forward. Just improving this locking or simply embracing we don\u0027t care about locking pre-deprivilege.",
+      "parentUuid": "4f76fb02_2bb8d1a9",
+      "revId": "89c75fea172ec3e1df51707b3a16456e83590eef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
