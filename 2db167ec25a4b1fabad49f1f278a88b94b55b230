@@ -179,6 +179,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9e090763_805c4213",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3922210
+      },
+      "writtenOn": "2026-06-19T01:45:40Z",
+      "side": 1,
+      "message": "Thank you very much, next time I will remember this and take care.",
+      "parentUuid": "dc1892ba_0cc15d75",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "2db167ec25a4b1fabad49f1f278a88b94b55b230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dfc392ad_8c929be1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
