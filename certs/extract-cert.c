@@ -40,6 +40,7 @@ void format(void)
 	exit(2);
 }
 
+<<<<<<< HEAD   (6530c9102688427a40aa5573c2dd15042d66a7a9 Merge fa0c4283efef ("net: ks8851: Avoid excess softirq sched)
 static void display_openssl_errors(int l)
 {
 	const char *file;
@@ -77,7 +78,12 @@ static void drain_openssl_errors(void)
 		}					\
 	} while(0)
 
+||||||| BASE   (fa0c4283efefea51dc402c8b8a992af63dd85383 net: ks8851: Avoid excess softirq scheduling)
+=======
+#ifdef USE_PKCS11_ENGINE
+>>>>>>> BRANCH (b69933e97efea238ebbfcf70c2b1be1cd03f13e3 crypto: authencesn - reject short ahash digests during insta)
 static const char *key_pass;
+#endif
 static BIO *wb;
 static char *cert_dst;
 static bool verbose;
@@ -109,7 +115,9 @@ int main(int argc, char **argv)
 	if (verbose_env && strchr(verbose_env, '1'))
 		verbose = true;
 
-        key_pass = getenv("KBUILD_SIGN_PIN");
+#ifdef USE_PKCS11_ENGINE
+	key_pass = getenv("KBUILD_SIGN_PIN");
+#endif
 
 	if (argc != 3)
 		format();
