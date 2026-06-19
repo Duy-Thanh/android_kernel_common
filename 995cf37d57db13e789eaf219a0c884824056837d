@@ -33,6 +33,24 @@
       "message": "This whole series needs respin request bug added.",
       "revId": "995cf37d57db13e789eaf219a0c884824056837d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "992cebcf_daaa02d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-19T08:46:36Z",
+      "side": 1,
+      "message": "Please see https://android-review.googlesource.com/c/kernel/common/+/4127055/comments/d3ed8338_f33d0625\n\nI\u0027ll probably abandon this series, as it seems there is no need to backport the patches to this particular branch.",
+      "parentUuid": "5e369aab_9c8d0c81",
+      "revId": "995cf37d57db13e789eaf219a0c884824056837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
