@@ -6,12 +6,7 @@
 
 #![crate_name = "rust_binder"]
 #![recursion_limit = "256"]
-#![allow(
-    clippy::as_underscore,
-    clippy::ref_as_ptr,
-    clippy::ptr_as_ptr,
-    clippy::cast_lossless
-)]
+#![allow(clippy::as_underscore, clippy::ref_as_ptr, clippy::ptr_as_ptr, clippy::cast_lossless)]
 
 use kernel::{
     bindings::{self, seq_file},
@@ -81,12 +76,31 @@ mod binderfs {
     }
 }
 
+pub(crate) const BINDER_DEBUG_USER_ERROR: u32 = 1 << 0;
+pub(crate) const BINDER_DEBUG_FAILED_TRANSACTION: u32 = 1 << 1;
+pub(crate) const BINDER_DEBUG_DEAD_TRANSACTION: u32 = 1 << 2;
+pub(crate) const BINDER_DEBUG_OPEN_CLOSE: u32 = 1 << 3;
+
 module! {
     type: BinderModule,
     name: "rust_binder",
     authors: ["Wedson Almeida Filho", "Alice Ryhl"],
     description: "Android Binder",
     license: "GPL",
+    params: {
+        debug_mask: u32 {
+            default: BINDER_DEBUG_USER_ERROR | BINDER_DEBUG_FAILED_TRANSACTION | BINDER_DEBUG_DEAD_TRANSACTION | BINDER_DEBUG_OPEN_CLOSE,
+            description: "Controls what debug logs are printed to dmesg",
+            permissions: 0o644,
+        },
+    },
+}
+
+pub(crate) fn binder_debug(mask_type: u32, message: &str) {
+    let active_mask = *module_parameters::debug_mask.value();
+    if (active_mask & mask_type) != 0 {
+        pr_info!("binder: {}\n", message);
+    }
 }
 
 use kernel::bindings::rust_binder_layout;
@@ -233,10 +247,7 @@ kernel::list::impl_list_arc_safe! {
 
 impl DeliverCode {
     fn new(code: u32) -> Self {
-        Self {
-            code,
-            skip: Atomic::new(false),
-        }
+        Self { code, skip: Atomic::new(false) }
     }
 
     /// Disable this DeliverCode and make it do nothing.

@@ -63,10 +63,7 @@ struct Mapping {
 
 impl Mapping {
     fn new(address: usize, size: usize) -> Self {
-        Self {
-            address,
-            alloc: RangeAllocator::new(size),
-        }
+        Self { address, alloc: RangeAllocator::new(size) }
     }
 }
 
@@ -257,9 +254,7 @@ impl ProcessInner {
         wrapper: Option<CritIncrWrapper>,
     ) -> Result<NodeRef, CouldNotDeliverCriticalIncrement> {
         let push = match wrapper {
-            None => node
-                .incr_refcount_allow_zero2one(strong, self)?
-                .map(|node| node as _),
+            None => node.incr_refcount_allow_zero2one(strong, self)?.map(|node| node as _),
             Some(wrapper) => node.incr_refcount_allow_zero2one_with_wrapper(strong, wrapper, self),
         };
         if let Some(node) = push {
@@ -421,10 +416,8 @@ impl ProcessNodeRefs {
 
 use core::mem::offset_of;
 use kernel::bindings::rb_process_layout;
-pub(crate) const PROCESS_LAYOUT: rb_process_layout = rb_process_layout {
-    arc_offset: Arc::<Process>::DATA_OFFSET,
-    task: offset_of!(Process, task),
-};
+pub(crate) const PROCESS_LAYOUT: rb_process_layout =
+    rb_process_layout { arc_offset: Arc::<Process>::DATA_OFFSET, task: offset_of!(Process, task) };
 
 /// A process using binder.
 ///
@@ -544,18 +537,10 @@ impl Process {
             inner.max_threads,
         );
         if let Some(mapping) = &inner.mapping {
-            seq_print!(
-                m,
-                "  free oneway space: {}\n",
-                mapping.alloc.free_oneway_space()
-            );
+            seq_print!(m, "  free oneway space: {}\n", mapping.alloc.free_oneway_space());
             seq_print!(m, "  buffers: {}\n", mapping.alloc.count_buffers());
         }
-        seq_print!(
-            m,
-            "  outstanding transactions: {}\n",
-            inner.outstanding_txns
-        );
+        seq_print!(m, "  outstanding transactions: {}\n", inner.outstanding_txns);
         seq_print!(m, "  nodes: {}\n", inner.nodes.iter().count());
         drop(inner);
 
@@ -780,9 +765,7 @@ impl Process {
         inner.nodes.insert(rbnode);
         // This can only fail if someone has already pushed the node to a list, but we just created
         // it and still hold the lock, so it can't fail right now.
-        let node_ref = inner
-            .new_node_ref_with_thread(node, strong, thread, wrapper)
-            .unwrap();
+        let node_ref = inner.new_node_ref_with_thread(node, strong, thread, wrapper).unwrap();
 
         Ok(Ok(node_ref))
     }
@@ -907,13 +890,7 @@ impl Process {
     }
 
     pub(crate) fn get_node_from_handle(&self, handle: u32, strong: bool) -> Result<NodeRef> {
-        self.node_refs
-            .lock()
-            .by_handle
-            .get_mut(&handle)
-            .ok_or(ENOENT)?
-            .node_ref()
-            .clone(strong)
+        self.node_refs.lock().by_handle.get_mut(&handle).ok_or(ENOENT)?.node_ref().clone(strong)
     }
 
     pub(crate) fn remove_from_delivered_deaths(&self, death: &DArc<NodeDeath>) {
@@ -1047,10 +1024,10 @@ impl Process {
         // We will not call `stop_using_range` in parallel with this on the same page, because the
         // allocation can only be removed via the destructor of the `Allocation` object that we
         // currently own.
-        match self.pages.use_range(
-            new_alloc.offset / PAGE_SIZE,
-            (new_alloc.offset + size).div_ceil(PAGE_SIZE),
-        ) {
+        match self
+            .pages
+            .use_range(new_alloc.offset / PAGE_SIZE, (new_alloc.offset + size).div_ceil(PAGE_SIZE))
+        {
             Ok(()) => {}
             Err(err) => {
                 pr_warn!("use_range failure {:?}", err);
@@ -1084,11 +1061,7 @@ impl Process {
             let freed_range = match mapping.alloc.reservation_abort(offset) {
                 Ok(freed_range) => freed_range,
                 Err(_) => {
-                    pr_warn!(
-                        "Pointer {:x} failed to free, base = {:x}\n",
-                        ptr,
-                        mapping.address
-                    );
+                    pr_warn!("Pointer {:x} failed to free, base = {:x}\n", ptr, mapping.address);
                     return;
                 }
             };
@@ -1097,8 +1070,7 @@ impl Process {
             //
             // Must be done before we release the lock so that `use_range` is not used on these
             // indices until `stop_using_range` returns.
-            self.pages
-                .stop_using_range(freed_range.start_page_idx, freed_range.end_page_idx);
+            self.pages.stop_using_range(freed_range.start_page_idx, freed_range.end_page_idx);
         }
     }
 
@@ -1307,10 +1279,7 @@ impl Process {
     /// the codebase exclusive access to `ProcessInner`.
     pub(crate) fn lock_with_nodes(&self) -> WithNodes<'_> {
         let mut inner = self.inner.lock();
-        WithNodes {
-            nodes: take(&mut inner.nodes),
-            inner,
-        }
+        WithNodes { nodes: take(&mut inner.nodes), inner }
     }
 
     fn deferred_flush(&self) {
@@ -1415,16 +1384,14 @@ impl Process {
         let omapping = self.inner.lock().mapping.take();
         if let Some(mut mapping) = omapping {
             let address = mapping.address;
-            mapping
-                .alloc
-                .take_for_each(|offset, size, debug_id, odata| {
-                    let ptr = offset + address;
-                    let mut alloc = Allocation::new(self.clone(), debug_id, offset, size, ptr);
-                    if let Some(data) = odata {
-                        alloc.set_info(data);
-                    }
-                    drop(alloc)
-                });
+            mapping.alloc.take_for_each(|offset, size, debug_id, odata| {
+                let ptr = offset + address;
+                let mut alloc = Allocation::new(self.clone(), debug_id, offset, size, ptr);
+                if let Some(data) = odata {
+                    alloc.set_info(data);
+                }
+                drop(alloc)
+            });
         }
 
         // calls to synchronize_rcu() in thread drop will happen here
@@ -1474,10 +1441,7 @@ impl Process {
                     break;
                 }
 
-                match self
-                    .freeze_wait
-                    .wait_interruptible_timeout(&mut inner, jiffies)
-                {
+                match self.freeze_wait.wait_interruptible_timeout(&mut inner, jiffies) {
                     CondVarTimeoutResult::Signal { .. } => {
                         inner.is_frozen = IsFrozen::No;
                         return Err(ERESTARTSYS);
@@ -1616,10 +1580,12 @@ impl Process {
 /// The file operations supported by `Process`.
 impl Process {
     pub(crate) fn open(ctx: ArcBorrow<'_, Context>, file: &File) -> Result<Arc<Process>> {
+        crate::binder_debug(crate::BINDER_DEBUG_OPEN_CLOSE, "binder process open");
         Self::new(ctx.into(), ARef::from(file.cred()))
     }
 
     pub(crate) fn release(this: Arc<Process>, _file: &File) {
+        crate::binder_debug(crate::BINDER_DEBUG_OPEN_CLOSE, "binder process release");
         let binderfs_file;
         let should_schedule;
         {
