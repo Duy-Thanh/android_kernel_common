@@ -4671,6 +4671,7 @@ static const struct hid_device_id hidpp_devices[] = {
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb391) },
 	{ /* MX Master 4 mouse over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb042) },
+<<<<<<< HEAD   (a6ab27c4dc68ee6b23f0c476e272302ea3b9b3d0 ANDROID: KVM: arm64: Use the correct number of pages for the)
 	{ /* Logitech Signature K650 over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb36f) },
 	{ /* Logitech Signature K650 B2B over Bluetooth */
@@ -4709,6 +4710,9 @@ static const struct hid_device_id hidpp_devices[] = {
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb39c) },
 	{ /* Logitech Signature Comfort K880 B2B over Bluetooth */
 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb39d) },
+||||||| BASE   (42c0dddfeb0769ff388e9244b1edf1482d7b4358 ANDROID: GKI: vivo add symbols to symbol list)
+=======
+>>>>>>> BRANCH (e99aab26ecd1f3967045b8c07aa8e13e301ed770 Merge c6c87a23de4b ("arm64: errata: Work around early CME DV)
 	{}
 };
 
