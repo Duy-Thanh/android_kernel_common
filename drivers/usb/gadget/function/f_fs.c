@@ -158,7 +158,9 @@ struct ffs_epfile {
 	struct mutex			mutex;
 
 	struct ffs_data			*ffs;
-	struct ffs_ep			*ep;	/* P: ffs->eps_lock */
+	struct ffs_ep			*ep;		/* P: ffs->eps_lock */
+	struct ffs_epfile		*epfile_in;	/* P: ffs->eps_lock */
+	struct ffs_epfile		*epfile_out;	/* P: ffs->eps_lock */
 
 	struct dentry			*dentry;
 
@@ -220,12 +222,13 @@ struct ffs_epfile {
 	struct ffs_buffer		*read_buffer;
 #define READ_BUFFER_DROP ((struct ffs_buffer *)ERR_PTR(-ESHUTDOWN))
 
-	char				name[5];
+	char				name[8];
 
 	unsigned char			in;	/* P: ffs->eps_lock */
 	unsigned char			isoc;	/* P: ffs->eps_lock */
 
 	u8				zlp_enabled; /* P: ffs->eps_lock */
+	bool				is_rw_proxy;
 
 	/* Protects dmabufs */
 	struct mutex			dmabufs_mutex;
@@ -972,9 +975,8 @@ static ssize_t __ffs_epfile_read_data(struct ffs_epfile *epfile,
 	return ret;
 }
 
-static struct ffs_ep *ffs_epfile_wait_ep(struct file *file)
+static struct ffs_ep *ffs_epfile_wait_ep(struct ffs_epfile *epfile, struct file *file)
 {
-	struct ffs_epfile *epfile = file->private_data;
 	struct ffs_ep *ep;
 	int ret;
 
@@ -1001,17 +1003,22 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 	char *data = NULL;
 	ssize_t ret, data_len = -EINVAL;
 	int halt;
+	bool is_rw_proxy = epfile->is_rw_proxy;
 
 	/* Are we still active? */
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
 
-	ep = ffs_epfile_wait_ep(file);
+	/* Proxy to base endpoint if rw_proxy */
+	if (is_rw_proxy)
+		epfile = io_data->read ? epfile->epfile_out : epfile->epfile_in;
+
+	ep = ffs_epfile_wait_ep(epfile, file);
 	if (IS_ERR(ep))
 		return PTR_ERR(ep);
 
 	/* Do we halt? */
-	halt = (!io_data->read == !epfile->in);
+	halt = is_rw_proxy ? 0 : (!io_data->read == !epfile->in);
 	if (halt && epfile->isoc)
 		return -EINVAL;
 
@@ -1109,7 +1116,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->num_sgs = 0;
 		}
 
-		req->zero = epfile->zlp_enabled;
+		req->zero = !io_data->read ? epfile->zlp_enabled : 0;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1162,7 +1169,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->num_sgs = 0;
 		}
 
-		req->zero = epfile->zlp_enabled;
+		req->zero = !io_data->read ? epfile->zlp_enabled : 0;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1619,7 +1626,7 @@ static int ffs_dmabuf_transfer(struct file *file,
 
 	priv = attach->importer_priv;
 
-	ep = ffs_epfile_wait_ep(file);
+	ep = ffs_epfile_wait_ep(epfile, file);
 	if (IS_ERR(ep)) {
 		ret = PTR_ERR(ep);
 		goto err_attachment_put;
@@ -1734,6 +1741,9 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
 
+	if (epfile->is_rw_proxy)
+		return -ENOTTY;
+
 	switch (code) {
 	case FUNCTIONFS_DMABUF_ATTACH:
 	{
@@ -1784,7 +1794,7 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	}
 
 	/* Wait for endpoint to be enabled */
-	ep = ffs_epfile_wait_ep(file);
+	ep = ffs_epfile_wait_ep(epfile, file);
 	if (IS_ERR(ep))
 		return PTR_ERR(ep);
 
@@ -2188,7 +2198,7 @@ static void ffs_data_closed(struct ffs_data *ffs)
 
 			if (epfiles)
 				ffs_epfiles_destroy(epfiles,
-						 ffs->eps_count);
+						 ffs->epfiles_count);
 
 			if (ffs->setup_state == FFS_SETUP_PENDING)
 				__ffs_ep0_stall(ffs);
@@ -2252,7 +2262,7 @@ static void ffs_data_clear(struct ffs_data *ffs)
 	 * copy of epfile will save us from use-after-free.
 	 */
 	if (epfiles) {
-		ffs_epfiles_destroy(epfiles, ffs->eps_count);
+		ffs_epfiles_destroy(epfiles, ffs->epfiles_count);
 		ffs->epfiles = NULL;
 	}
 
@@ -2348,10 +2358,15 @@ static void functionfs_unbind(struct ffs_data *ffs)
 static int ffs_epfiles_create(struct ffs_data *ffs)
 {
 	struct ffs_epfile *epfile, *epfiles;
-	unsigned i, count;
+	unsigned int i, count, epfiles_count;
 
 	count = ffs->eps_count;
-	epfiles = kcalloc(count, sizeof(*epfiles), GFP_KERNEL);
+	epfiles_count = count;
+	if (ffs->user_flags & FUNCTIONFS_RW_PROXY_EPS)
+		epfiles_count += count / 2;
+	ffs->epfiles_count = epfiles_count;
+
+	epfiles = kcalloc(epfiles_count, sizeof(*epfiles), GFP_KERNEL);
 	if (!epfiles)
 		return -ENOMEM;
 
@@ -2372,6 +2387,32 @@ static int ffs_epfiles_create(struct ffs_data *ffs)
 		if (!epfile->dentry) {
 			ffs_epfiles_destroy(epfiles, i - 1);
 			return -ENOMEM;
+		}
+	}
+
+	if (ffs->user_flags & FUNCTIONFS_RW_PROXY_EPS) {
+		struct ffs_epfile *comp = epfiles + count;
+
+		for (i = 0; i < count; i += 2, ++comp) {
+			struct ffs_epfile *ep1 = &epfiles[i];
+			struct ffs_epfile *ep2 = &epfiles[i + 1];
+			bool ep1_in = ffs->eps_addrmap[i + 1] & USB_ENDPOINT_DIR_MASK;
+
+			comp->ffs = ffs;
+			comp->is_rw_proxy = true;
+			comp->epfile_in = ep1_in ? ep1 : ep2;
+			comp->epfile_out = ep1_in ? ep2 : ep1;
+			mutex_init(&comp->mutex);
+			mutex_init(&comp->dmabufs_mutex);
+			INIT_LIST_HEAD(&comp->dmabufs);
+			snprintf(comp->name, sizeof(comp->name), "%s_rw",
+				 epfiles[i].name);
+			comp->dentry = ffs_sb_create_file(ffs->sb, comp->name,
+							  comp, &ffs_epfile_operations);
+			if (!comp->dentry) {
+				ffs_epfiles_destroy(epfiles, count + (i / 2));
+				return -ENOMEM;
+			}
 		}
 	}
 
@@ -2949,7 +2990,8 @@ static int __ffs_data_got_descs(struct ffs_data *ffs,
 			      FUNCTIONFS_VIRTUAL_ADDR |
 			      FUNCTIONFS_EVENTFD |
 			      FUNCTIONFS_ALL_CTRL_RECIP |
-			      FUNCTIONFS_CONFIG0_SETUP)) {
+			      FUNCTIONFS_CONFIG0_SETUP |
+			      FUNCTIONFS_RW_PROXY_EPS)) {
 			ret = -ENOSYS;
 			goto error;
 		}
@@ -3035,6 +3077,21 @@ static int __ffs_data_got_descs(struct ffs_data *ffs,
 	if (raw_descs == data || len) {
 		ret = -EINVAL;
 		goto error;
+	}
+
+	if (ffs->user_flags & FUNCTIONFS_RW_PROXY_EPS) {
+		if (ffs->eps_count % 2) {
+			ret = -EINVAL;
+			goto error;
+		}
+
+		for (i = 1; i < ffs->eps_count; i += 2) {
+			if ((ffs->eps_addrmap[i] & USB_ENDPOINT_DIR_MASK) ==
+			    (ffs->eps_addrmap[i + 1] & USB_ENDPOINT_DIR_MASK)) {
+				ret = -EINVAL;
+				goto error;
+			}
+		}
 	}
 
 	ffs->raw_descs_data	= _data;
