@@ -225,7 +225,7 @@ struct ffs_epfile {
 	unsigned char			in;	/* P: ffs->eps_lock */
 	unsigned char			isoc;	/* P: ffs->eps_lock */
 
-	unsigned char			_pad;
+	u8				zlp_enabled; /* P: ffs->eps_lock */
 
 	/* Protects dmabufs */
 	struct mutex			dmabufs_mutex;
@@ -1108,6 +1108,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1159,6 +1161,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = epfile->zlp_enabled;
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1680,6 +1684,7 @@ static int ffs_dmabuf_transfer(struct file *file,
 
 	/* Now that the dma_fence is in place, queue the transfer. */
 
+	usb_req->zero = epfile->zlp_enabled;
 	usb_req->length = req->length;
 	usb_req->buf = NULL;
 	usb_req->sg = priv->sgt->sgl;
@@ -1724,6 +1729,7 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 	struct ffs_epfile *epfile = file->private_data;
 	struct ffs_ep *ep;
 	int ret;
+	__u32 enable_zlp = 0;
 
 	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
 		return -ENODEV;
@@ -1756,6 +1762,23 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 
 		return ffs_dmabuf_transfer(file, &req);
 	}
+	/*
+	 * We handle this IOCTL before ffs_epfile_wait_ep() to allow userspace
+	 * to configure ZLP behavior immediately without blocking indefinitely
+	 * while waiting for the USB host to connect and enable the endpoint.
+	 */
+	case FUNCTIONFS_ENDPOINT_ENABLE_ZLP:
+		if (!epfile->in)
+			return -EINVAL;
+
+		if (copy_from_user(&enable_zlp, (void __user *)value, sizeof(enable_zlp)))
+			return -EFAULT;
+
+		spin_lock_irq(&epfile->ffs->eps_lock);
+		epfile->zlp_enabled = !!enable_zlp;
+		spin_unlock_irq(&epfile->ffs->eps_lock);
+
+		return 0;
 	default:
 		break;
 	}
