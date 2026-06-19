@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0962f77_f2548f11",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-19T22:40:41Z",
+      "side": 1,
+      "message": "Ahh yes, true - I remember you mentioning this once in the chat. On disassembling I saw about 5 extra instructions related to KCFI and then this `0xffffffff82737695 \u003c+133\u003e:\tcs call 0xffffffff8272bd60 \u003c__x86_indirect_thunk_array+352\u003e` and forgot the fact we were relying on HW based mitigations. Thanks for reminding :-)",
+      "parentUuid": "d93da99a_83101d39",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8172169_8b014579",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "a8172169_8b014579",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6d4d70_ad28fcd9",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-19T22:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64190e5b_6a1b6819",
       "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

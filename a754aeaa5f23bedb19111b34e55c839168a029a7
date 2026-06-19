@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cedf1d8_2411a549",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-19T22:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "904ddd4f_0263ae34",
+      "revId": "a754aeaa5f23bedb19111b34e55c839168a029a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23930d83_9cf47e67",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-19T11:18:59Z",
       "side": 1,
       "message": "nit: technically this patch doesn\u0027t fix a bug in ae56783d9b55 (it was already fixed by 4dc9c4dbfea5), it only refactors the code?",
+      "revId": "a754aeaa5f23bedb19111b34e55c839168a029a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae5b005_19d5be70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-19T22:40:41Z",
+      "side": 1,
+      "message": "True. Removed",
+      "parentUuid": "23930d83_9cf47e67",
       "revId": "a754aeaa5f23bedb19111b34e55c839168a029a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
