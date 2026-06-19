@@ -124,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d93da99a_83101d39",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-19T11:16:21Z",
+      "side": 1,
+      "message": "Thanks. Actually I was going to say that if you are strongly inclined to using a callback, I\u0027m ok with that. :) \n\nI wasn\u0027t thinking about the overhead... FWIW speaking of retpoline, we aren\u0027t really using retpoline (we are relying on HW-based mitigations like eIBRS instead), so I think those retpoline chunks are patched out (replaced with raw indirect calls) by kernel during early boot anyway.",
+      "parentUuid": "5c4132ad_e72c0c06",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8172169_8b014579",

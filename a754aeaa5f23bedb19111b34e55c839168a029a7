@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904ddd4f_0263ae34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-19T11:16:21Z",
+      "side": 1,
+      "message": "Add a `Bug:` tag (as e.g. Todd recently asked in aosp/4076340)?\n\nMaybe we can just reuse b/519054319 for that.",
+      "revId": "a754aeaa5f23bedb19111b34e55c839168a029a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
