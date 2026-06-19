@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c4132ad_e72c0c06",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-19T02:53:54Z",
+      "side": 1,
+      "message": "I was curious to see the generated code based on both these ideas. Verified that indirect callback generates bigger assembly because of KCFI and retpoline. So I agree with your suggestion to have simple direct calls based on a boolean flag. Update the code as per your suggestion",
+      "parentUuid": "0ad6eb26_507687a8",
+      "revId": "562d5aa9229a87e99443a1123e807cd3c4bfd0b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8172169_8b014579",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 3
