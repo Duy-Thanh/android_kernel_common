@@ -50,6 +50,24 @@
       "message": "Please work to get the needed feature upstream first.",
       "revId": "ba041c785ebe0ec9a4451390574b9d22459c45f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7b2849_50182e29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-06-20T00:27:12Z",
+      "side": 1,
+      "message": "I have updated the description. More detailed conflict explanations are provided in the issue.\nPlease help to review again.",
+      "parentUuid": "b2a51afe_cdd0d0ce",
+      "revId": "ba041c785ebe0ec9a4451390574b9d22459c45f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
