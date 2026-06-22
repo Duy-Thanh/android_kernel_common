@@ -393,7 +393,13 @@ int rtc_read_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 		return err;
 	if (!rtc->ops) {
 		err = -ENODEV;
+<<<<<<< HEAD   (72aefab72b3df4bd6839fb55113646b4e364443e Merge android13-5.10 into android13-5.10-lts)
 	} else if (!rtc->ops->read_alarm) {
+||||||| BASE   (6f98b95184b9ece4f591d6373c39e43aa1210d11 ASoC: codecs: ab8500: Fix casting of private data)
+	} else if (!test_bit(RTC_FEATURE_ALARM, rtc->features) || !rtc->ops->read_alarm) {
+=======
+	} else if (!test_bit(RTC_FEATURE_ALARM, rtc->features)) {
+>>>>>>> BRANCH (9eb240b1a0258d63daf4aae98b56f21d456dd56e rtc: allow rtc_read_alarm without read_alarm callback)
 		err = -EINVAL;
 	} else {
 		memset(alarm, 0, sizeof(struct rtc_wkalrm));
