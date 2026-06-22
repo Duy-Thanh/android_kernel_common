@@ -6,6 +6,7 @@
 
 #include <linux/arm_ffa.h>
 #include <linux/cma.h>
+#include <linux/cpu.h>
 #include <linux/delay.h>
 #include <linux/init.h>
 #include <linux/initrd.h>
@@ -142,6 +143,15 @@ int pkvm_host_stage2_topup(gfp_t gfp)
 
 	if (!gfpflags_allow_blocking(gfp) && host_s2_mode != PKVM_HOST_S2_GCMA)
 		goto err;
+
+	if (host_s2_mode == PKVM_HOST_S2_GCMA)
+		/*
+		 * GCMA allows host stage-2 topup in atomic context which can
+		 * happen on systems using IOMMU domains. Keeping track of the context
+		 * is cumbersome with nested hypervisor requests. So instead enforce the
+		 * atomic context when GCMA used.
+		 */
+		gfp |= GFP_ATOMIC;
 
 	init_hyp_memcache(&mc);
 	ret = __topup_hyp_memcache(&mc, 3, __host_stage2_alloc, kvm_host_pa,
@@ -343,8 +353,6 @@ void __init kvm_hyp_reserve(void)
 	hyp_mem_pages += hyp_vmemmap_pages(STRUCT_HYP_PAGE_SIZE);
 	hyp_mem_pages += pkvm_selftest_pages();
 	hyp_mem_pages += hyp_ffa_proxy_pages();
-	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend))
-		hyp_mem_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
 	hyp_mem_pages++; /* hyp_ppages */
 	hyp_mem_pages += kvm_iommu_pages();
 
@@ -758,6 +766,23 @@ static void __init _kvm_host_prot_finalize(void *arg)
 static int __init pkvm_drop_host_privileges(void)
 {
 	int ret = 0;
+	int cpu;
+
+	/*
+	 * Prevent races between this function and the CPU hotplug path for
+	 * kvm_hyp_vector and kvm_protected_mode_initialized.
+
+	 * After this point, new CPUs will most likely use HYP_VECTOR_INDIRECT.
+	 */
+	guard(cpus_read_lock)();
+
+	for_each_possible_cpu(cpu) {
+		if (!cpu_online(cpu))
+			set_bit(KVM_HOST_DATA_FLAG_PKVM_LATE_CPU,
+				&per_cpu_ptr_hyp_sym(kvm_host_data, cpu)->flags);
+	}
+
+	kvm_call_hyp_nvhe(__pkvm_late_cpus_finalize);
 
 	/*
 	 * Flip the static key upfront as that may no longer be possible
