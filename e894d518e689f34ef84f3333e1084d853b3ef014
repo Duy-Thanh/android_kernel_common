@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23ceb33_7f2e7870",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-22T14:13:48Z",
+      "side": 1,
+      "message": "Nit: this commit is not only about exposing memcache refill API as mentioned in commit log but also to aligning it to IOMMU usage (extending about share_ro). So perhaps it is better  to split it into two commits:\n1) pure API exposure and moving the definitions to arch/x86/kvm/pkvm/pkvm.c\n2) extending about share_ro usage in speparate commit\n\nWDYT? Other than that LGTM.",
+      "range": {
+        "startLine": 2455,
+        "startChar": 35,
+        "endLine": 2455,
+        "endChar": 49
+      },
+      "revId": "e894d518e689f34ef84f3333e1084d853b3ef014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
