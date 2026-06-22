@@ -34,6 +34,24 @@
       "parentUuid": "fc9d47d3_ee542b2d",
       "revId": "98a8bbb17445810b1b69674891c3cb168674a335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840cf9d6_a8c5140c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-22T10:00:53Z",
+      "side": 1,
+      "message": "Only by hiding the type definition and changing lots of code so that `VIVALDI_MAX_FUNCTION_ROW_KEYS` is replaced with something dynamically works out the size of the array.\n\nUnless there are plans to increase the size of this constant outside of a KMI thaw window, I think adding the struct to the ABI is OK.",
+      "parentUuid": "ac0a69d9_e451641e",
+      "revId": "98a8bbb17445810b1b69674891c3cb168674a335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
