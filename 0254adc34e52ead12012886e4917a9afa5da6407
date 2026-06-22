@@ -69,6 +69,24 @@
       "message": "Hi, we repo kernel source to the latest today. Got error in below while building the full MRR CLs. We also tried applying the patch to /common/staging, /common/ack, and /private/desktop-google, but the build is still failing. Any suggestions on how to fix this? Thanks!\n\n/home/shawnle1/work/android/ww26_kernel/out/bazel/output_user_root/613d4175565155645d8bca760dabec1e/sandbox/linux-sandbox/652/execroot/_main/private/desktop-google/drivers/gpu/drm/i915/display/intel_panel.c:90:10: error: use of undeclared identifier \u0027DRM_MODE_MATCH_TIMINGS_VRR\u0027\n   90 |                               DRM_MODE_MATCH_TIMINGS_VRR |\n      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
       "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2592b8fc_00d2647e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-22T21:30:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure what project you\u0027re using to build this, but \"/common/staging, /common/ack\" reminds me of the Pixel tree which defaults to kernel prebuilts for GKI. But you\u0027re changing GKI here, so I\u0027m guesing you need a build flag similar to `--nouse_prebuilt_kernel`",
+      "parentUuid": "b82bc2b7_f26a4314",
+      "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
