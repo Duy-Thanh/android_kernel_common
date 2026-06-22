@@ -1,0 +1,40 @@
+load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+
+string_flag(
+    name = "profile",
+    build_setting_default = "none",
+    values = [
+        "none",
+        "gki",
+        "qcom",
+        "mtk",
+        "xring",
+    ],
+)
+
+config_setting(
+    name = "gki",
+    flag_values = {":profile": "gki"},
+)
+
+config_setting(
+    name = "qcom",
+    flag_values = {":profile": "qcom"},
+)
+
+config_setting(
+    name = "mtk",
+    flag_values = {":profile": "mtk"},
+)
+
+config_setting(
+    name = "xring",
+    flag_values = {":profile": "xring"},
+)
+
+exports_files([
+    "kernel.afdo",
+    "kernel_qcom.afdo",
+    "kernel_mtk.afdo",
+    "kernel_xring.afdo",
+])
