@@ -88,3 +88,7 @@ type 'struct prefix_info' changed
           member '__u8 preferpd' was added
           member '__u8 routeraddr' was added
 
+type 'struct task_struct' changed
+  member 'u64 android_kabi_reserved2' was removed
+  member 'union { struct { unsigned int user_dumpable; }; struct { u64 android_kabi_reserved2; }; union { }; }' was added
+
