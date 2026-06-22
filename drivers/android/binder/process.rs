@@ -1632,10 +1632,21 @@ impl Process {
 /// The file operations supported by `Process`.
 impl Process {
     pub(crate) fn open(ctx: ArcBorrow<'_, Context>, file: &File) -> Result<Arc<Process>> {
-        Self::new(ctx.into(), ARef::from(file.cred()))
+        let proc = Self::new(ctx.into(), ARef::from(file.cred()))?;
+        binder_debug!(
+            crate::debug::BINDER_DEBUG_OPEN_CLOSE,
+            "rust_binder: opened process {}",
+            proc.pid_in_current_ns()
+        );
+        Ok(proc)
     }
 
     pub(crate) fn release(this: Arc<Process>, _file: &File) {
+        binder_debug!(
+            crate::debug::BINDER_DEBUG_OPEN_CLOSE,
+            "rust_binder: released process {}",
+            this.pid_in_current_ns()
+        );
         let binderfs_file;
         let should_schedule;
         {
