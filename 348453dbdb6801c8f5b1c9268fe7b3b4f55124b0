@@ -122,6 +122,24 @@
       "message": "Dmytro, this branch is only meant for AL FSI which are pretty much done - did you mean for this to land for FAU? In which case could you move the request to 2026-06?",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "154281de_54aaab1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-22T12:12:01Z",
+      "side": 1,
+      "message": "As clarified offline, these cherry-picks were just for following the policy of backporting security fixes to all affected GKI release branches. Since it turns out that 2026-04 is not a \"proper\" release branch (we are not publishing any GKI release images built from this branch, and so on), I think we can abandon these cherry-picks.",
+      "parentUuid": "fed7a9f8_678291b6",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
