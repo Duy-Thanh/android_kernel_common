@@ -205,3 +205,27 @@ type 'struct bindings::bindings_raw::net' changed
   member 'struct bindings::bindings_raw::netns_xdp xdp' was added
   member 'struct bindings::bindings_raw::sock* diag_nlsk' was added
 
+<<<<<<< HEAD   (1ee55d7e657cf5b8f8fb4b8b2bc9b74fefc44566 BACKPORT: sched/eevdf: Fix min_vruntime vs avg_vruntime)
+||||||| BASE   (1bdb85e550ff3afbb5c6a957865102bc88594c68 BACKPORT: sched/eevdf: Fix min_vruntime vs avg_vruntime)
+type 'struct task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { struct { unsigned int user_dumpable:1; }; struct { u64 __kabi_reserved3; }; union { }; }' was added
+
+type 'struct bindings::bindings_raw::task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union bindings::bindings_raw::task_struct__bindgen_ty_3 __bindgen_anon_3' was added
+
+=======
+type 'struct task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { struct { unsigned int user_dumpable:1; }; struct { u64 __kabi_reserved3; }; union { }; }' was added
+
+type 'struct bindings::bindings_raw::task_struct' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union bindings::bindings_raw::task_struct__bindgen_ty_3 __bindgen_anon_3' was added
+
+type 'struct cfs_rq' changed
+  member 'u64 min_vruntime' was removed
+  member 'union { struct { union { u64 min_vruntime; u64 zero_vruntime; }; }; struct { u64 __kabi_renamedmin_vruntime; }; union { }; }' was added
+
+>>>>>>> CHANGE (6be376017d08647bd8a487474d14e920393b210c ANDROID: Update ABI after preserving renamed min_vruntime fo)

@@ -50133,6 +50133,10 @@ member {
   type_id: 0x14096380
 }
 member {
+  id: 0x26d4fbf7
+  type_id: 0x147d9fcc
+}
+member {
   id: 0x26d82350
   type_id: 0x144efd53
 }
@@ -50442,6 +50446,10 @@ member {
   type_id: 0x32e2151e
 }
 member {
+  id: 0x2fa00c60
+  type_id: 0x31ae4193
+}
+member {
   id: 0x2fbbfd62
   type_id: 0x31c1859a
 }
@@ -50517,6 +50525,10 @@ member {
   id: 0x304242fd
   type_id: 0x4e276861
   offset: 64
+}
+member {
+  id: 0x30476c5e
+  type_id: 0x4e33c168
 }
 member {
   id: 0x304c3690
@@ -50927,6 +50939,11 @@ member {
   id: 0x3419ac94
   type_id: 0x5f48d1c4
   offset: 64
+}
+member {
+  id: 0x341a9adb
+  type_id: 0x5f4406a2
+  offset: 448
 }
 member {
   id: 0x341aeb54
@@ -56368,6 +56385,11 @@ member {
   id: 0x0e6698fa
   name: "__kabi_renamedh_nr_queued"
   type_id: 0x4585663f
+}
+member {
+  id: 0xa7081522
+  name: "__kabi_renamedmin_vruntime"
+  type_id: 0x92233392
 }
 member {
   id: 0x4140f02a
@@ -165526,10 +165548,9 @@ member {
   offset: 384
 }
 member {
-  id: 0x63fbeb6e
+  id: 0x63fbec19
   name: "min_vruntime"
   type_id: 0x92233392
-  offset: 448
 }
 member {
   id: 0x63fbed8b
@@ -267650,6 +267671,11 @@ member {
   offset: 2176
 }
 member {
+  id: 0xdf9ebf14
+  name: "zero_vruntime"
+  type_id: 0x92233392
+}
+member {
   id: 0x58a045bc
   name: "zeromap"
   type_id: 0x054a7c73
@@ -273741,6 +273767,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x147d9fcc
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x30476c5e
+  }
+}
+struct_union {
   id: 0x148546d4
   kind: STRUCT
   definition {
@@ -275760,6 +275794,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x31ae4193
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xa7081522
+  }
+}
+struct_union {
   id: 0x31c1859a
   kind: STRUCT
   definition {
@@ -277716,6 +277758,15 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x4e33c168
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x63fbec19
+    member_id: 0xdf9ebf14
+  }
+}
+struct_union {
   id: 0x4ec29f8c
   kind: UNION
   definition {
@@ -279038,6 +279089,16 @@ struct_union {
     member_id: 0x26977e15
     member_id: 0x76173152
     member_id: 0x1af81eef
+  }
+}
+struct_union {
+  id: 0x5f4406a2
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x26d4fbf7
+    member_id: 0x2fa00c60
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -298759,7 +298820,7 @@ struct_union {
     member_id: 0x3f84ca4c
     member_id: 0xe05addab
     member_id: 0xbd75bf18
-    member_id: 0x63fbeb6e
+    member_id: 0x341a9adb
     member_id: 0x197cb9fb
     member_id: 0x8ddd7b59
     member_id: 0x11fb2906
