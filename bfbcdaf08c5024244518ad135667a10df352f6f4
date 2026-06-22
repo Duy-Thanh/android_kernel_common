@@ -152,6 +152,24 @@
       "parentUuid": "d7861774_d72c2141",
       "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54fb60c6_a8435349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-06-22T20:03:28Z",
+      "side": 1,
+      "message": "I don\u0027t see 2 changes. Both changes need to be stacked (separate commits and not combined)",
+      "parentUuid": "0afa4ed8_4bf09baf",
+      "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
