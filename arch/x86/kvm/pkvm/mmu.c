@@ -949,7 +949,8 @@ int pkvm_guest_mmu_refill_memcache(struct pkvm_vcpu *pkvm_vcpu)
 	host_mc = &pkvm_vcpu->shared_vcpu->arch.pkvm.guest_mmu_memcache;
 
 	return pkvm_refill_memcache(&vcpu->arch.pkvm.guest_mmu_memcache,
-				    READ_ONCE(host_mc->count), host_mc);
+				    READ_ONCE(host_mc->count), host_mc,
+				    false);
 }
 
 void pkvm_guest_mmu_free_memcache(struct pkvm_vcpu *pkvm_vcpu)
