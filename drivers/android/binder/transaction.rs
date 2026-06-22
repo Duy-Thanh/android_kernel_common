@@ -176,6 +176,14 @@ impl Transaction {
         alloc.set_info_target_node(node_ref);
         let data_address = alloc.ptr;
 
+        binder_debug!(
+            crate::debug::BINDER_DEBUG_TRANSACTION,
+            "txn {} to node {} (alloc at {:#x})",
+            info.debug_id,
+            target_node.debug_id,
+            data_address
+        );
+
         let priority = if !info.is_oneway() && prio::is_supported_policy(from.task.policy()) {
             BinderPriority {
                 sched_policy: from.task.policy(),
