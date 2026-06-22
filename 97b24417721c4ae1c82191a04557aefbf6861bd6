@@ -16,6 +16,24 @@
       "message": "The commit message does not match the code change",
       "revId": "97b24417721c4ae1c82191a04557aefbf6861bd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daad81b3_de49876e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2026-06-22T02:57:01Z",
+      "side": 1,
+      "message": "Commit message now fixed. Please review again.",
+      "parentUuid": "74b0f780_e808eaef",
+      "revId": "97b24417721c4ae1c82191a04557aefbf6861bd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
