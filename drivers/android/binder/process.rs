@@ -1360,6 +1360,11 @@ impl Process {
     }
 
     fn deferred_flush(&self) {
+        binder_debug!(
+            crate::debug::BINDER_DEBUG_OPEN_CLOSE,
+            "binder_flush: process {}",
+            self.pid_in_current_ns()
+        );
         let inner = self.inner.lock();
         for thread in inner.threads.values() {
             thread.exit_looper();
@@ -1367,6 +1372,11 @@ impl Process {
     }
 
     fn deferred_release(self: Arc<Self>) {
+        binder_debug!(
+            crate::debug::BINDER_DEBUG_OPEN_CLOSE,
+            "binder_deferred_release: process {}",
+            self.pid_in_current_ns()
+        );
         let is_manager = {
             let mut inner = self.inner.lock();
             inner.is_dead = true;
@@ -1669,7 +1679,9 @@ impl Process {
 /// The file operations supported by `Process`.
 impl Process {
     pub(crate) fn open(ctx: ArcBorrow<'_, Context>, file: &File) -> Result<Arc<Process>> {
-        Self::new(ctx.into(), ARef::from(file.cred()))
+        let proc = Self::new(ctx.into(), ARef::from(file.cred()))?;
+        binder_debug!(crate::debug::BINDER_DEBUG_OPEN_CLOSE, "opened process");
+        Ok(proc)
     }
 
     pub(crate) fn release(this: Arc<Process>, _file: &File) {
