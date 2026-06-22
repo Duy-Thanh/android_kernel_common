@@ -205,3 +205,7 @@ type 'struct bindings::bindings_raw::net' changed
   member 'struct bindings::bindings_raw::netns_xdp xdp' was added
   member 'struct bindings::bindings_raw::sock* diag_nlsk' was added
 
+type 'struct cfs_rq' changed
+  member 'u64 min_vruntime' was removed
+  member 'union { struct { union { u64 min_vruntime; u64 zero_vruntime; }; }; struct { u64 __kabi_renamedmin_vruntime; }; union { }; }' was added
+
