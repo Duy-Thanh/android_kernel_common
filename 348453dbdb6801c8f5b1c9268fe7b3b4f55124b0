@@ -105,6 +105,23 @@
       "message": "On hold for now.",
       "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed7a9f8_678291b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1136238
+      },
+      "writtenOn": "2026-06-22T04:07:24Z",
+      "side": 1,
+      "message": "Dmytro, this branch is only meant for AL FSI which are pretty much done - did you mean for this to land for FAU? In which case could you move the request to 2026-06?",
+      "revId": "348453dbdb6801c8f5b1c9268fe7b3b4f55124b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
