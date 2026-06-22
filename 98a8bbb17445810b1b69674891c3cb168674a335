@@ -16,6 +16,24 @@
       "message": "If you are happy for `struct vivaldi_data` to become a frozen part of the ABI, then resolve this comment. Otherwise, we can discuss.",
       "revId": "98a8bbb17445810b1b69674891c3cb168674a335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0a69d9_e451641e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-06-22T09:20:56Z",
+      "side": 1,
+      "message": "Is there an alternative?",
+      "parentUuid": "fc9d47d3_ee542b2d",
+      "revId": "98a8bbb17445810b1b69674891c3cb168674a335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
