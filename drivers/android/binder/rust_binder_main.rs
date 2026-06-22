@@ -32,6 +32,8 @@ mod allocation;
 mod context;
 mod deferred_close;
 mod defs;
+#[macro_use]
+mod debug;
 mod error;
 mod node;
 mod page_range;
@@ -42,6 +44,7 @@ mod stats;
 mod thread;
 mod trace;
 mod transaction;
+
 
 #[allow(warnings)] // generated bindgen code
 mod binderfs {
