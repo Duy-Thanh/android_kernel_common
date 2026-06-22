@@ -2406,10 +2406,18 @@ int pkvm_walk_each_vm(pkvm_vm_func_t func, void *arg)
 	return ret;
 }
 
+struct refill_memcache_data {
+	struct pkvm_memcache *host_mc;
+	bool share_ro;
+};
+
 static void *admit_host_page(void *arg)
 {
-	struct pkvm_memcache *host_mc = arg;
+	struct refill_memcache_data *data = arg;
+	struct pkvm_memcache *host_mc = data->host_mc;
+	phys_addr_t addr;
 	void *page;
+	int ret;
 
 	if (!host_mc->count || WARN_ON_ONCE(host_mc->head.nr_pages != 1))
 		return NULL;
@@ -2421,11 +2429,15 @@ static void *admit_host_page(void *arg)
 	 * donating, doing that may leak sensitive data as this page may be a
 	 * private page of a pVM or the hypervisor.
 	 *
-	 * The page will be cleared by zalloc_page when allocating it from
-	 * the memcache, thus no need to clear it now.
+	 * The page is donated uncleared. Consumers of the refilled memcache
+	 * are responsible for zeroing the page before use. Currently, the
+	 * Guest MMU handles this via zalloc_page(), and the VT-d IOMMU does
+	 * so by explicitly calling memset() after popping the page.
 	 */
-	if (WARN_ON_ONCE(pkvm_host_donate_hyp(pkvm_host_gpa_to_phys(host_mc->head.addr),
-					      PAGE_SIZE, false)))
+	addr = pkvm_host_gpa_to_phys(host_mc->head.addr);
+	ret = data->share_ro ? pkvm_host_donate_hyp_share_ro(addr, PAGE_SIZE, false) :
+			       pkvm_host_donate_hyp(addr, PAGE_SIZE, false);
+	if (WARN_ON_ONCE(ret))
 		return NULL;
 
 	page = pop_pkvm_memcache_page(host_mc, pkvm_host_gpa_to_virt);
@@ -2440,7 +2452,7 @@ static void *admit_host_page(void *arg)
 
 /* Refill our local memcache by popping pages from the one provided by the host. */
 int pkvm_refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
-			 struct pkvm_memcache *host_mc)
+			 struct pkvm_memcache *host_mc, bool share_ro)
 {
 	/*
 	 * The host mc is shared and can be modified by the host while popping.
@@ -2451,10 +2463,14 @@ int pkvm_refill_memcache(struct pkvm_memcache *mc, unsigned long min_pages,
 	 * from the private page and leaking data to the host.
 	 */
 	struct pkvm_memcache tmp_mc = *(volatile typeof(*host_mc) *)host_mc;
+	struct refill_memcache_data data = {
+		.host_mc = &tmp_mc,
+		.share_ro = share_ro,
+	};
 	int ret;
 
 	ret = topup_pkvm_memcache(mc, min_pages, admit_host_page,
-				  pkvm_virt_to_phys, &tmp_mc);
+				  pkvm_virt_to_phys, &data);
 
 	*(volatile typeof(*host_mc) *)host_mc = tmp_mc;
 
