@@ -22,6 +22,47 @@
       },
       "revId": "e894d518e689f34ef84f3333e1084d853b3ef014",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e42b2b_172a3ed0",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-22T14:25:01Z",
+      "side": 1,
+      "message": "Seems a good idea. So that in a future rebase we can squash the 1st patch (without share_ro) into the original MMU patch \"pKVM: x86: add support for filling memcache with host backed pages\", and apply the 2nd patch (adding share_ro support) later in the series as a part of adding IOMMU support.",
+      "parentUuid": "e23ceb33_7f2e7870",
+      "range": {
+        "startLine": 2455,
+        "startChar": 35,
+        "endLine": 2455,
+        "endChar": 49
+      },
+      "revId": "e894d518e689f34ef84f3333e1084d853b3ef014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844afa55_2415dd35",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-22T14:25:01Z",
+      "side": 1,
+      "message": "very nit: to keep it consistent: 1. keep empty line before the #endif. 2. don\u0027t add empty line before `pkvm_refill_memcache()` (since there are no empty lines between other function declarations above)?",
+      "revId": "e894d518e689f34ef84f3333e1084d853b3ef014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
