@@ -229,6 +229,7 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+AFDO_PACKAGE = package_name() + "/gki/aarch64/afdo"
 common_kernel(
     name = "kernel_aarch64",
     outs = DEFAULT_GKI_OUTS,
@@ -236,7 +237,13 @@ common_kernel(
     additional_kmi_symbol_lists = [":aarch64_additional_kmi_symbol_lists"],
     arch = "arm64",
     build_gki_artifacts = True,
-    clang_autofdo_profile = ":gki/aarch64/afdo/kernel.afdo",
+    clang_autofdo_profile = select({
+       "//{}:gki".format(AFDO_PACKAGE): "//{}:kernel.afdo".format(AFDO_PACKAGE),
+       "//{}:qcom".format(AFDO_PACKAGE): "//{}:kernel_qcom.afdo".format(AFDO_PACKAGE),
+       "//{}:mtk".format(AFDO_PACKAGE): "//{}:kernel_mtk.afdo".format(AFDO_PACKAGE),
+       "//{}:xring".format(AFDO_PACKAGE): "//{}:kernel_xring.afdo".format(AFDO_PACKAGE),
+        "//conditions:default": None,
+    }),
     ddk_headers_archive = ":kernel_aarch64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_aarch64"],
     defconfig = "arch/arm64/configs/gki_defconfig",
@@ -327,7 +334,7 @@ common_kernel(
     build_gki_artifacts = True,
     # We use aarch64 here because it's readily available and improves performance.
     # See b/500458317 for more on x86_64 collection efforts.
-    clang_autofdo_profile = ":gki/aarch64/afdo/kernel.afdo",
+    clang_autofdo_profile = "//{}:kernel.afdo".format(AFDO_PACKAGE),
     ddk_headers_archive = ":kernel_x86_64_ddk_headers_archive",
     ddk_module_headers = [":all_headers_x86_64"],
     defconfig = "arch/x86/configs/gki_defconfig",
