@@ -222,12 +222,16 @@ struct eventpoll {
 	struct hlist_head refs;
 	u8 loop_check_depth;
 
+<<<<<<< HEAD   (19800d6d4dc1b95b78facf0a91608cdf821f9231 Revert "netfilter: conntrack: add missing netlink policy val)
 	/*
 	 * usage count, used together with epitem->dying to
 	 * orchestrate the disposal of this struct
 	 */
 	refcount_t refcount;
 
+||||||| BASE   (3015eb739b7815b6f51ce0622345ac8336b5c45e Merge 5.15.208 into android14-5.15-lts)
+=======
+>>>>>>> BRANCH (6b980414f8faf498b7a044819b51eb3760623968 Merge tag 'android14-5.15.208_r00' into android14-5.15)
 	/* used to defer freeing past ep_get_upwards_depth_proc() RCU walk */
 	struct rcu_head rcu;
 
@@ -824,8 +828,23 @@ static void ep_clear_and_put(struct eventpoll *ep)
 	dispose = ep_refcount_dec_and_test(ep);
 	mutex_unlock(&ep->mtx);
 
+<<<<<<< HEAD   (19800d6d4dc1b95b78facf0a91608cdf821f9231 Revert "netfilter: conntrack: add missing netlink policy val)
 	if (dispose)
 		ep_free(ep);
+||||||| BASE   (3015eb739b7815b6f51ce0622345ac8336b5c45e Merge 5.15.208 into android14-5.15-lts)
+	mutex_unlock(&epmutex);
+	mutex_destroy(&ep->mtx);
+	free_uid(ep->user);
+	wakeup_source_unregister(ep->ws);
+	kfree(ep);
+=======
+	mutex_unlock(&epmutex);
+	mutex_destroy(&ep->mtx);
+	free_uid(ep->user);
+	wakeup_source_unregister(ep->ws);
+	/* ep_get_upwards_depth_proc() may still hold epi->ep under RCU */
+	kfree_rcu(ep, rcu);
+>>>>>>> BRANCH (6b980414f8faf498b7a044819b51eb3760623968 Merge tag 'android14-5.15.208_r00' into android14-5.15)
 }
 
 static int ep_eventpoll_release(struct inode *inode, struct file *file)
