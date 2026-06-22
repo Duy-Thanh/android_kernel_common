@@ -52,6 +52,23 @@
       "parentUuid": "46fb9cf5_fda3503d",
       "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82bc2b7_f26a4314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3792151
+      },
+      "writtenOn": "2026-06-22T14:44:09Z",
+      "side": 1,
+      "message": "Hi, we repo kernel source to the latest today. Got error in below while building the full MRR CLs. We also tried applying the patch to /common/staging, /common/ack, and /private/desktop-google, but the build is still failing. Any suggestions on how to fix this? Thanks!\n\n/home/shawnle1/work/android/ww26_kernel/out/bazel/output_user_root/613d4175565155645d8bca760dabec1e/sandbox/linux-sandbox/652/execroot/_main/private/desktop-google/drivers/gpu/drm/i915/display/intel_panel.c:90:10: error: use of undeclared identifier \u0027DRM_MODE_MATCH_TIMINGS_VRR\u0027\n   90 |                               DRM_MODE_MATCH_TIMINGS_VRR |\n      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+      "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
