@@ -393,7 +393,13 @@ int rtc_read_alarm(struct rtc_device *rtc, struct rtc_wkalrm *alarm)
 		return err;
 	if (!rtc->ops) {
 		err = -ENODEV;
+<<<<<<< HEAD   (763966daccbad20e07ad45eb0caa7c26de42d9bf Merge aa12a04d4578 ("net/sched: taprio: Fix init procedure"))
 	} else if (!rtc->ops->read_alarm) {
+||||||| BASE   (aa12a04d457818eb048be5d9b83d9d4782cefff8 net/sched: taprio: Fix init procedure)
+	} else if (!test_bit(RTC_FEATURE_ALARM, rtc->features) || !rtc->ops->read_alarm) {
+=======
+	} else if (!test_bit(RTC_FEATURE_ALARM, rtc->features)) {
+>>>>>>> BRANCH (9eb240b1a0258d63daf4aae98b56f21d456dd56e rtc: allow rtc_read_alarm without read_alarm callback)
 		err = -EINVAL;
 	} else {
 		memset(alarm, 0, sizeof(struct rtc_wkalrm));
