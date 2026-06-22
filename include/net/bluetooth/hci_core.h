@@ -28,7 +28,12 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (b1e3875af7cfde416dfe9242362168f99b61aa01 Merge 447ba770cfe7 ("net: tap: NULL pointer derefence in dev)
 #include <linux/android_kabi.h>
+||||||| BASE   (447ba770cfe798925f4923548b367fd49f0ee5f0 net: tap: NULL pointer derefence in dev_parse_header_protoco)
+=======
+#include <linux/srcu.h>
+>>>>>>> BRANCH (60458ecb0779fe8ee5dc5f61bbf14a2b46496fd3 tty: n_gsm: fix flow control handling in tx path)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sock.h>
@@ -309,6 +314,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	char		name[8];
