@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "658d7a67_d38ec893",
+        "filename": "drivers/ufs/core/ufs-mcq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-06-22T20:31:55Z",
+      "side": 1,
+      "message": "This causes CRC changes for function and causes ABI failure.\n ```\nfunction symbol \u0027void ufshcd_mcq_config_esi(struct ufs_hba*, struct msi_msg*)\u0027 changed\n  CRC changed from 0x853cc7ea to 0x3246fbd\n\nfunction symbol \u0027void ufshcd_mcq_config_mac(struct ufs_hba*, u32)\u0027 changed\n  CRC changed from 0x77341298 to 0x38cb5f90\n\nfunction symbol \u0027void ufshcd_mcq_enable(struct ufs_hba*)\u0027 changed\n  CRC changed from 0xb92e5b63 to 0x8569fd35\n\n... 6 omitted; 9 symbols have only CRC changes\n```\n\nPlease also add below current include\n```\n#include \u003clinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\n\nThis should help with ABI problems.",
+      "revId": "98584dd7bd9fa3547794a1b8f495ce3c474a38c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
