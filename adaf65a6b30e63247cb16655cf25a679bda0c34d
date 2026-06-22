@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "685e410c_e4a409ed",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-22T15:15:04Z",
+      "side": 1,
+      "message": "Could you comment on this, is this a potential issue with the way the equivalent code does things in miscdevice.rs?",
+      "revId": "adaf65a6b30e63247cb16655cf25a679bda0c34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a0fa07c_b72268be",
         "filename": "rust/kernel/anon_inodes.rs",
         "patchSetId": 3
@@ -38,6 +55,30 @@
           ]
         }
       ],
+      "revId": "adaf65a6b30e63247cb16655cf25a679bda0c34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba29a2f0_80c52ede",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-22T15:15:04Z",
+      "side": 1,
+      "message": "Thanks, I missed that option.",
+      "parentUuid": "6a0fa07c_b72268be",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 48
+      },
       "revId": "adaf65a6b30e63247cb16655cf25a679bda0c34d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
