@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe7e3bec_f009cbcd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-22T20:53:21Z",
+      "side": 1,
+      "message": "I want to understand the root cause here. So, if generate_btf\u003dFalse, KBUILD_MIXED_TREE would not be set? And why is it the case? Does it make sense to NOT export KBUILD_MIXED_TREE when generate_btf\u003dTrue?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 74
+      },
+      "revId": "131e2e7d0258b11cf17952e1a029656b251103fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7cf1f1_f96c8ca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-06-22T20:53:21Z",
+      "side": 1,
+      "message": "@willmcvicker@google.com could you PTAL at this change?",
+      "revId": "131e2e7d0258b11cf17952e1a029656b251103fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
