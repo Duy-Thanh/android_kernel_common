@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09885127_5a7b7a57",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2542,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-06-22T18:15:33Z",
+      "side": 0,
+      "message": "Can you please add BACKPORT tag to commit message to account for divergence from the cherry-pick? The change looks correct, but it helps us to track the patches which needed to be adjusted when applying for resolving conflict.",
+      "revId": "47745ac7b908616aefc17374a408e051864c4cfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
