@@ -16,6 +16,24 @@
       "message": "Please add GKI respin bug to the commit message.",
       "revId": "204f14d494dcbc6f645559a01294dcea68359d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61004b01_d50351cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2020955
+      },
+      "writtenOn": "2026-06-23T20:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7fe68e9_d4becc92",
+      "revId": "204f14d494dcbc6f645559a01294dcea68359d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
