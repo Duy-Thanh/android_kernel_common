@@ -116,6 +116,24 @@
       "parentUuid": "b8717c57_6be64190",
       "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba4c8de_ee577dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4911972
+      },
+      "writtenOn": "2026-06-23T02:12:22Z",
+      "side": 1,
+      "message": "Hi Neill,\n\nThanks for the clarification. I\u0027ve cherry-picked the fix to the\nandroid17-6.18-2026-06 branch for our production needs:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/4133393\n\nThe KernelCommit check shows a warning about \"Cherry pick is not clean\"\nbecause I cherry-picked a subset of the LTS merge commit. Could you\nplease review this patch and let me know if the warning is acceptable\nor if there\u0027s a better approach?",
+      "parentUuid": "0ab3e803_30caa4c7",
+      "revId": "69bd95b86b2efaad0637e2ff147b8f8fd9bc1e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
