@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732ff57a_b1bf3907",
+        "filename": "drivers/android/binder/debug.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-23T11:49:48Z",
+      "side": 1,
+      "message": "We can reduce the scope of this unsafe block. Also, let\u0027s use `\u0026raw const` to create a raw pointer instead of a reference.\n```suggestion\n    // SAFETY: `rust_binder_debug_mask` is defined in the companion C code linked in the module.\n    let current_mask \u003d unsafe { core::ptr::read_volatile(\u0026raw const rust_binder_debug_mask) };\n    (current_mask \u0026 mask) !\u003d 0\n```",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7594bc3a_d376853f",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-23T11:49:48Z",
+      "side": 1,
+      "message": "To match C Binder, I would move this to deferred_flush and deferred_release.",
+      "range": {
+        "startLine": 1682,
+        "startChar": 0,
+        "endLine": 1686,
+        "endChar": 10
+      },
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ea43e7_39f9abad",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-23T11:49:48Z",
+      "side": 1,
+      "message": "Print statements should include a newline `\\n` character at the end. (I know some existing prints are missing it. That\u0027s a bug.\n```suggestion\n            \"rust_binder: txn {} to node {} (alloc at {:#x})\\n\",\n```",
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
