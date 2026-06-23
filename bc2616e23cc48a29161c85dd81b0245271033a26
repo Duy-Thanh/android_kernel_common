@@ -33,6 +33,24 @@
       "message": "This appears to introduce new uAPI and behavior, so I\u0027m not sure we will want to take this as a FROMLIST patch as there isn\u0027t much certainty it will land upstream yet (haven\u0027t seen maintainer feedback either).\n\nIf possible, please open a bug and clearly document \n1) Why this change is needed\n2) What measured benefit you see from it\n\nAnd provide context for urgency so that we understand why it is necessary to take it before it lands in a maintainer tree.",
       "revId": "bc2616e23cc48a29161c85dd81b0245271033a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea7dbab_bf8eaa66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-06-23T03:22:14Z",
+      "side": 1,
+      "message": "okay, We\u0027ll push this commit to ogki branch, Thx",
+      "parentUuid": "b8525428_c980aa9d",
+      "revId": "bc2616e23cc48a29161c85dd81b0245271033a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
