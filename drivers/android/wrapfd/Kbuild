@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0
+
+obj-m := rust_wrapfd.o
+
+rust_wrapfd-y :=	\
+	rust_wrapfd_main.o	\
+	helpers.o		\
