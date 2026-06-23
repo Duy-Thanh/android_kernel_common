@@ -708,6 +708,9 @@ struct kvm_host_psci_config {
 	bool psci_0_1_cpu_on_implemented;
 	bool psci_0_1_cpu_off_implemented;
 	bool psci_0_1_migrate_implemented;
+
+	/* Function IDs used by host if version is v1.1. */
+	bool psci_1_1_mem_protect_implemented;
 };
 
 extern struct kvm_host_psci_config kvm_nvhe_sym(kvm_host_psci_config);

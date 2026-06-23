@@ -537,6 +537,11 @@ static void __init psci_init_system_reset2(void)
 		psci_system_reset2_supported = true;
 }
 
+static bool psci_mem_protect_supported(void)
+{
+	return psci_features(PSCI_FN_NATIVE(1_1, MEM_PROTECT)) != PSCI_RET_NOT_SUPPORTED;
+}
+
 static void __init psci_init_system_suspend(void)
 {
 	int ret;
@@ -635,6 +640,7 @@ static void __init psci_0_2_set_functions(void)
 		.migrate = psci_0_2_migrate,
 		.affinity_info = psci_affinity_info,
 		.migrate_info_type = psci_migrate_info_type,
+		.mem_protect_supported = psci_mem_protect_supported,
 	};
 
 	register_restart_handler(&psci_sys_reset_nb);
