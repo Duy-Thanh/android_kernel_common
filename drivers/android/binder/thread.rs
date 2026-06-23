@@ -838,6 +838,11 @@ impl Thread {
             }
             BinderObjectRef::Fd(obj) => {
                 if !allow_fds {
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} got transaction with fd, but target does not allow fds",
+                        self.task.pid()
+                    );
                     return Err(EPERM.into());
                 }
 
@@ -873,11 +878,13 @@ impl Thread {
                 let alloc_offset = match sg_state.unused_buffer_space.claim_next(obj_length) {
                     Ok(alloc_offset) => alloc_offset,
                     Err(err) => {
-                        pr_warn!(
-                            "Failed to claim space for a BINDER_TYPE_PTR. (offset: {}, limit: {}, size: {})",
+                        binder_debug!(
+                            crate::debug::BINDER_DEBUG_USER_ERROR,
+                            "rust_binder: {} failed to claim space for a BINDER_TYPE_PTR (offset: {}, limit: {}, size: {})",
+                            self.task.pid(),
                             sg_state.unused_buffer_space.offset,
                             sg_state.unused_buffer_space.limit,
-                            obj_length,
+                            obj_length
                         );
                         return Err(err.into());
                     }
@@ -948,6 +955,11 @@ impl Thread {
             }
             BinderObjectRef::Fda(obj) => {
                 if !allow_fds {
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} got transaction with fd array, but target does not allow fds",
+                        self.task.pid()
+                    );
                     return Err(EPERM.into());
                 }
                 let parent_index = usize::try_from(obj.parent).map_err(|_| EINVAL)?;
@@ -956,6 +968,11 @@ impl Thread {
                 let fds_len = num_fds.checked_mul(size_of::<u32>()).ok_or(EINVAL)?;
 
                 if !is_aligned(parent_offset, size_of::<u32>()) {
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} FDA parent offset not aligned correctly",
+                        self.task.pid()
+                    );
                     return Err(EINVAL.into());
                 }
 
@@ -974,6 +991,11 @@ impl Thread {
                 };
 
                 if !is_aligned(parent_entry.sender_uaddr, size_of::<u32>()) {
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} FDA parent buffer not aligned correctly",
+                        self.task.pid()
+                    );
                     return Err(EINVAL.into());
                 }
 
@@ -1055,8 +1077,10 @@ impl Thread {
 
                 let target_offset_end = fixup_offset.checked_add(fixup_len).ok_or(EINVAL)?;
                 if fixup_offset < end_of_previous_fixup || offset_end < target_offset_end {
-                    pr_warn!(
-                        "Fixups oob {} {} {} {}",
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} fixups oob {} {} {} {}",
+                        self.task.pid(),
                         fixup_offset,
                         end_of_previous_fixup,
                         offset_end,
@@ -1068,18 +1092,34 @@ impl Thread {
                 let copy_off = end_of_previous_fixup;
                 let copy_len = fixup_offset - end_of_previous_fixup;
                 if let Err(err) = alloc.copy_into(&mut reader, copy_off, copy_len) {
-                    pr_warn!("Failed copying into alloc: {:?}", err);
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} failed copying into alloc: {:?}",
+                        self.task.pid(),
+                        err
+                    );
                     return Err(err.into());
                 }
                 if let PointerFixupEntry::Fixup { pointer_value, .. } = fixup {
                     let res = alloc.write::<u64>(fixup_offset, pointer_value);
                     if let Err(err) = res {
-                        pr_warn!("Failed copying ptr into alloc: {:?}", err);
+                        binder_debug!(
+                            crate::debug::BINDER_DEBUG_USER_ERROR,
+                            "rust_binder: {} failed copying ptr into alloc: {:?}",
+                            self.task.pid(),
+                            err
+                        );
                         return Err(err.into());
                     }
                 }
                 if let Err(err) = reader.skip(fixup_len) {
-                    pr_warn!("Failed skipping {} from reader: {:?}", fixup_len, err);
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} failed skipping {} from reader: {:?}",
+                        self.task.pid(),
+                        fixup_len,
+                        err
+                    );
                     return Err(err.into());
                 }
                 end_of_previous_fixup = target_offset_end;
@@ -1087,7 +1127,12 @@ impl Thread {
             let copy_off = end_of_previous_fixup;
             let copy_len = offset_end - end_of_previous_fixup;
             if let Err(err) = alloc.copy_into(&mut reader, copy_off, copy_len) {
-                pr_warn!("Failed copying remainder into alloc: {:?}", err);
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} failed copying remainder into alloc: {:?}",
+                    self.task.pid(),
+                    err
+                );
                 return Err(err.into());
             }
         }
@@ -1193,7 +1238,11 @@ impl Thread {
                 let offset: usize = offset.try_into().map_err(|_| EINVAL)?;
 
                 if offset < end_of_previous_object || !is_aligned(offset, size_of::<u32>()) {
-                    pr_warn!("Got transaction with invalid offset.");
+                    binder_debug!(
+                        crate::debug::BINDER_DEBUG_USER_ERROR,
+                        "rust_binder: {} got transaction with invalid offset",
+                        self.task.pid()
+                    );
                     return Err(EINVAL.into());
                 }
 
@@ -1218,7 +1267,12 @@ impl Thread {
                 ) {
                     Ok(()) => end_of_previous_object = offset + object.size(),
                     Err(err) => {
-                        pr_warn!("Error while translating object.");
+                        binder_debug!(
+                            crate::debug::BINDER_DEBUG_USER_ERROR,
+                            "rust_binder: {} error while translating object: {:?}",
+                            self.task.pid(),
+                            err
+                        );
                         return Err(err);
                     }
                 }
@@ -1239,14 +1293,24 @@ impl Thread {
 
         if let Some(sg_state) = sg_state.as_mut() {
             if let Err(err) = self.apply_sg(&mut alloc, sg_state) {
-                pr_warn!("Failure in apply_sg: {:?}", err);
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} failure in apply_sg: {:?}",
+                    self.task.pid(),
+                    err
+                );
                 return Err(err);
             }
         }
 
         if let Some((off_out, secctx)) = secctx.as_mut() {
             if let Err(err) = alloc.write(secctx_off, secctx.as_bytes()) {
-                pr_warn!("Failed to write security context: {:?}", err);
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} failed to write security context: {:?}",
+                    self.task.pid(),
+                    err
+                );
                 return Err(err.into());
             }
             **off_out = secctx_off;
@@ -1445,7 +1509,18 @@ impl Thread {
     }
 
     fn transaction_inner(self: &Arc<Self>, info: &mut TransactionInfo) -> BinderResult {
-        let node_ref = self.process.get_transaction_node(info.target_handle)?;
+        let node_ref = match self.process.get_transaction_node(info.target_handle) {
+            Ok(node_ref) => node_ref,
+            Err(err) => {
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} got transaction to invalid handle {}",
+                    self.task.pid(),
+                    info.target_handle
+                );
+                return Err(err);
+            }
+        };
         info.to_pid = node_ref.node.owner.task.pid();
         security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
         // TODO: We need to ensure that there isn't a pending transaction in the work queue. How
@@ -1460,7 +1535,11 @@ impl Thread {
         {
             let mut inner = self.inner.lock();
             if !transaction.is_stacked_on(&inner.current_transaction) {
-                pr_warn!("Transaction stack changed during transaction!");
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} got new transaction with bad transaction stack",
+                    self.task.pid()
+                );
                 return Err(EINVAL.into());
             }
             inner.current_transaction = Some(transaction.clone_arc());
@@ -1483,8 +1562,23 @@ impl Thread {
     }
 
     fn reply_inner(self: &Arc<Self>, info: &mut TransactionInfo) -> BinderResult {
-        let orig = self.inner.lock().pop_transaction_to_reply(self)?;
+        let orig = match self.inner.lock().pop_transaction_to_reply(self) {
+            Ok(orig) => orig,
+            Err(err) => {
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} got reply transaction with no transaction stack",
+                    self.task.pid()
+                );
+                return Err(err.into());
+            }
+        };
         if !orig.from.is_current_transaction(&orig) {
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "rust_binder: {} got reply transaction with bad transaction stack",
+                self.task.pid()
+            );
             return Err(EINVAL.into());
         }
 
@@ -1527,7 +1621,18 @@ impl Thread {
     }
 
     fn oneway_transaction_inner(self: &Arc<Self>, info: &mut TransactionInfo) -> BinderResult {
-        let node_ref = self.process.get_transaction_node(info.target_handle)?;
+        let node_ref = match self.process.get_transaction_node(info.target_handle) {
+            Ok(node_ref) => node_ref,
+            Err(err) => {
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "rust_binder: {} got transaction to invalid handle {}",
+                    self.task.pid(),
+                    info.target_handle
+                );
+                return Err(err);
+            }
+        };
         info.to_pid = node_ref.node.owner.task.pid();
         security::binder_transaction(&self.process.cred, &node_ref.node.owner.cred)?;
         let transaction = Transaction::new(node_ref, None, self, info)?;
