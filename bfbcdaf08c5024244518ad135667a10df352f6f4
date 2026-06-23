@@ -170,6 +170,24 @@
       "parentUuid": "0afa4ed8_4bf09baf",
       "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0d4ae1_7825a098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3686143
+      },
+      "writtenOn": "2026-06-23T12:31:46Z",
+      "side": 1,
+      "message": "Can you merge this commit first, and then I can submit the other commit and merge it later?",
+      "parentUuid": "54fb60c6_a8435349",
+      "revId": "bfbcdaf08c5024244518ad135667a10df352f6f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
