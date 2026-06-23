@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c7d593_9f3a24b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-23T08:52:55Z",
+      "side": 1,
+      "message": "Note to reviewers, this is a cherry-pick out of a merge and a Lint override will be needed once all other checks have passed.",
+      "revId": "8d15847bce7a22db2dc11a20f7d76c4f8a668cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
