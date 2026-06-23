@@ -16,6 +16,24 @@
       "message": "@damiendejean@google.com Please note the correct formatting of the commit message as per https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-backports-from-mainline-linux.",
       "revId": "e054a1b1c7bc781c097a0ed9705596029076ff8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffc07c4_32955201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2026-06-23T14:44:28Z",
+      "side": 1,
+      "message": "Noted! Thanks for the fix.",
+      "parentUuid": "49382917_4f99ea04",
+      "revId": "e054a1b1c7bc781c097a0ed9705596029076ff8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
