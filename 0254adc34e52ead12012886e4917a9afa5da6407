@@ -87,6 +87,24 @@
       "parentUuid": "b82bc2b7_f26a4314",
       "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcde7990_353fb1f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3792151
+      },
+      "writtenOn": "2026-06-23T14:36:32Z",
+      "side": 1,
+      "message": "I\u0027m building ARSP kernel. Added this flag (--nouse_prebuilt_kernel) while building local kernel. But I still encounter this error on my local machine. I will fix it manually to build local OS image. Thanks!",
+      "parentUuid": "2592b8fc_00d2647e",
+      "revId": "0254adc34e52ead12012886e4917a9afa5da6407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
