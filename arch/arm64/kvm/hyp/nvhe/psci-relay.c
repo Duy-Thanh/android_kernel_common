@@ -265,7 +265,8 @@ static u64 psci_mem_protect(s64 offset)
 
 	hyp_assert_lock_held(&mem_protect_lock);
 
-	if (!offset || kvm_host_psci_config.version < PSCI_VERSION(1, 1))
+	if (!offset || kvm_host_psci_config.version < PSCI_VERSION(1, 1) ||
+	    !kvm_host_psci_config.psci_1_1_mem_protect_implemented)
 		return cnt;
 
 	if (!cnt || !new)

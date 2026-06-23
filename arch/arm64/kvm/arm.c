@@ -2364,6 +2364,11 @@ static bool __init init_psci_relay(void)
 		init_psci_0_1_impl_state(kvm_host_psci_config, cpu_off);
 		init_psci_0_1_impl_state(kvm_host_psci_config, migrate);
 	}
+
+	if (kvm_host_psci_config.version >= PSCI_VERSION(1, 1)) {
+		kvm_host_psci_config.psci_1_1_mem_protect_implemented =
+				psci_ops.mem_protect_supported();
+	}
 	return true;
 }
 
