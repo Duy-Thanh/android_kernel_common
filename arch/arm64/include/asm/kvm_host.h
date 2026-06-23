@@ -825,6 +825,12 @@ struct kvm_host_data {
 	unsigned int debug_wrps;
 };
 
+enum kvm_psci_mem_protect_mode {
+	KVM_PSCI_MEM_PROTECT_AUTO,	/* Probe capabilities and call if supported */
+	KVM_PSCI_MEM_PROTECT_FORCE,	/* Enforce PSCI MEM_PROTECT handling */
+	KVM_PSCI_MEM_PROTECT_OFF,	/* Skip PSCI MEM_PROTECT handling */
+};
+
 struct kvm_host_psci_config {
 	/* PSCI version used by host. */
 	u32 version;
@@ -838,6 +844,9 @@ struct kvm_host_psci_config {
 	bool psci_0_1_cpu_off_implemented;
 	bool psci_0_1_migrate_implemented;
 };
+
+extern enum kvm_psci_mem_protect_mode kvm_nvhe_sym(kvm_psci_mem_protect_mode);
+#define kvm_psci_mem_protect_mode CHOOSE_NVHE_SYM(kvm_psci_mem_protect_mode)
 
 extern struct kvm_host_psci_config kvm_nvhe_sym(kvm_host_psci_config);
 #define kvm_host_psci_config CHOOSE_NVHE_SYM(kvm_host_psci_config)
