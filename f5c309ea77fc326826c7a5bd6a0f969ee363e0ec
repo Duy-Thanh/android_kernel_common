@@ -94,6 +94,30 @@
       },
       "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c76c1c_2e50057b",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-23T10:47:05Z",
+      "side": 0,
+      "message": "My point is that you can implement this change without needlessly moving the code around.",
+      "parentUuid": "2c211a51_7b2e82db",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 53
+      },
+      "revId": "f5c309ea77fc326826c7a5bd6a0f969ee363e0ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
