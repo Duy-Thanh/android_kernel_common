@@ -9,6 +9,7 @@
 #include <linux/anon_inodes.h>
 #include <linux/bvec.h>
 #include <linux/compat.h>
+#include <linux/completion.h>
 #include <linux/dma-buf.h>
 #include <linux/fdtable.h>
 #include <linux/file.h>
@@ -95,6 +96,12 @@ static int dmabuf_content_create_wrap(struct wrap_content *content,
 	return fd;
 }
 
+struct wrap_io_ctx {
+	struct kiocb kiocb;
+	struct completion async_io_done;
+	long async_io_ret;
+};
+
 struct dmabuf_load_param {
 	struct dma_buf *dmabuf;
 	u8 *bounce_bufs[3];
@@ -108,16 +115,43 @@ struct dmabuf_load_param {
 	size_t direct_read_len;
 	size_t bytes_read;
 	size_t file_read_len;
-	struct kiocb kiocb;
 	struct iov_iter iter;
 	/* At most 4 segments: beginning, middle, and 2 at the end. */
 	struct kvec iov[4];
+	struct wrap_io_ctx io_ctx;
 };
+
+static void async_io_complete(struct kiocb *kiocb, long ret)
+{
+	struct wrap_io_ctx *io_ctx = container_of(kiocb, struct wrap_io_ctx, kiocb);
+
+	io_ctx->async_io_ret = ret;
+	complete(&io_ctx->async_io_done);
+}
+
+static int async_io_poll(struct wrap_io_ctx *io_ctx, struct file *file)
+{
+	int ret;
+
+	while(!try_wait_for_completion(&io_ctx->async_io_done)) {
+		ret = file->f_op->iopoll(&io_ctx->kiocb, NULL, 0);
+		if (ret < 0)
+			return ret;
+	}
+
+	reinit_completion(&io_ctx->async_io_done);
+	/*
+	 * return 0 instead of ret, as ret can be positive to indicate number of I/O requests
+	 * completed.
+	 */
+	return 0;
+}
 
 static void prepare_iocb_request(struct dmabuf_load_param *param, struct file *file)
 {
 	unsigned int nr_segs = 0;
 	unsigned int cur_bounce_page = 0;
+	struct kiocb *kiocb = &param->io_ctx.kiocb;
 	int i;
 
 	if (param->start_bounce_len) {
@@ -141,9 +175,15 @@ static void prepare_iocb_request(struct dmabuf_load_param *param, struct file *f
 		cur_bounce_page++;
 	}
 
-	init_sync_kiocb(&param->kiocb, file);
-	param->kiocb.ki_pos = PAGE_ALIGN_DOWN(param->file_offs);
-	param->kiocb.ki_flags |= IOCB_DIRECT;
+	init_sync_kiocb(kiocb, file);
+	kiocb->ki_pos = PAGE_ALIGN_DOWN(param->file_offs);
+	kiocb->ki_flags |= IOCB_DIRECT;
+	/* Only issue an async and high priority I/O request if the file supports polling. */
+	if (file->f_op->iopoll) {
+		init_completion(&param->io_ctx.async_io_done);
+		kiocb->ki_flags |= IOCB_HIPRI;
+		kiocb->ki_complete = async_io_complete;
+	}
 	iov_iter_kvec(&param->iter, ITER_DEST, param->iov, nr_segs, param->file_read_len);
 }
 
@@ -325,7 +365,16 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 		param.iter.count = min_t(size_t, MAX_RW_COUNT,
 					 PAGE_ALIGN(param.file_read_len - param.bytes_read));
 
-		bytes_read = vfs_iocb_iter_read(file, &param.kiocb, &param.iter);
+		bytes_read = vfs_iocb_iter_read(file, &param.io_ctx.kiocb, &param.iter);
+		/* -EIOCBQUEUED implies that an async request was queued. */
+		if (bytes_read == -EIOCBQUEUED) {
+			ret = async_io_poll(&param.io_ctx, file);
+			if (ret)
+				break;
+
+			bytes_read = param.io_ctx.async_io_ret;
+		}
+
 		if (bytes_read <= 0) {
 			ret = bytes_read;
 			break;
