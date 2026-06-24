@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ede7333_9366b4e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-06-24T07:48:41Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Tzung-Bi Sh...\n\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Tzung-Bi Shih \u003ctzungbi@kernel.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "22e9c2b5870bb8d98adf168b2005732a544571c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
