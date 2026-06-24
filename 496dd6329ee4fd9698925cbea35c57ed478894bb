@@ -81,6 +81,30 @@
       },
       "revId": "496dd6329ee4fd9698925cbea35c57ed478894bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed93808d_c7d7dfe2",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 6245,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-24T16:39:10Z",
+      "side": 1,
+      "message": "Why would you need a comment updated for this new arch?",
+      "parentUuid": "f6a2aa54_403d9c1c",
+      "range": {
+        "startLine": 6245,
+        "startChar": 60,
+        "endLine": 6245,
+        "endChar": 72
+      },
+      "revId": "496dd6329ee4fd9698925cbea35c57ed478894bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
