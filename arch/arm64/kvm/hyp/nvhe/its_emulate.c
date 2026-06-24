@@ -294,7 +294,7 @@ static void cwriter_write(struct its_priv_state *its, u64 offset, u64 value)
 		(cmd_offset + cmd_len) % cmdq_sz;
 	if (its->cmd_host_cwriter == its->cmd_host_base) {
 		memcpy(its->cmd_hyp_base, its->cmd_host_base, cwriter_offset);
-		if (parse_its_cmdq(its, cmd_offset, cmd_len))
+		if (parse_its_cmdq(its, 0, cwriter_offset))
 			return;
 
 		its->cmd_host_cwriter = its->cmd_host_base + cwriter_offset;
