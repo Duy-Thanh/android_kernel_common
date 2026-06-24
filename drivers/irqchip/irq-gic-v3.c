@@ -1572,8 +1572,37 @@ static int gic_v3_suspend(void)
 	return ret;
 }
 
+static void gic_v3_resume(void)
+{
+	void __iomem *base = gic_data.dist_base;
+	unsigned int i;
+	u32 val;
+
+	if (base) {
+		for (i = 32; i < GIC_LINE_NR; i += 32) {
+			val = readl_relaxed(base + GICD_ISPENDR + (i / 32) * 4);
+			if (val) {
+				pr_info("GICD_ISPENDR(%d): 0x%08x (irqs %d-%d)\n",
+					i / 32, val, i, i + 31);
+			}
+		}
+	}
+
+	if (gic_data.rdists.rdist) {
+		void __iomem *rd_base = gic_data_rdist_rd_base();
+		if (rd_base) {
+			void __iomem *sgi_base = rd_base + SZ_64K;
+			val = readl_relaxed(sgi_base + GICR_ISPENDR0);
+			if (val) {
+				pr_info("GICR_ISPENDR0: 0x%08x (irqs 0-31)\n", val);
+			}
+		}
+	}
+}
+
 static struct syscore_ops gic_syscore_ops = {
 	.suspend = gic_v3_suspend,
+	.resume = gic_v3_resume,
 };
 
 static void gic_syscore_init(void)
