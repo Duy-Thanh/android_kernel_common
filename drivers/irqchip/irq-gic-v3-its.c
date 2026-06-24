@@ -5202,7 +5202,7 @@ static void its_free_shadow_tables(struct its_shadow_tables *shadow)
 		if (!shadow->tables[i].shadow)
 			continue;
 
-		its_free_pages(shadow->tables[i].shadow, 0);
+		its_free_pages(shadow->tables[i].shadow, shadow->tables[i].order);
 	}
 
 	its_free_pages(shadow, 0);
