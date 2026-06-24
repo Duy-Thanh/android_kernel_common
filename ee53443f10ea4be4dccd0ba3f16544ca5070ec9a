@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241c722e_f8992ba9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-24T09:37:45Z",
+      "side": 1,
+      "message": "Check the \"KernelCommit\" linter, this needs a \"Bug: \"",
+      "revId": "ee53443f10ea4be4dccd0ba3f16544ca5070ec9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
