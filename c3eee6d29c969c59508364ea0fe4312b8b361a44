@@ -16,6 +16,24 @@
       "message": "Removed myself as a reviewer, as it seems I was added accidentally. Did you mean quic_ziqichen@quicinc.com instead?",
       "revId": "c3eee6d29c969c59508364ea0fe4312b8b361a44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d008e7_67392eac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2026-06-24T06:10:31Z",
+      "side": 1,
+      "message": "Yes, sorry about that.",
+      "parentUuid": "a0371cdd_727ef109",
+      "revId": "c3eee6d29c969c59508364ea0fe4312b8b361a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
