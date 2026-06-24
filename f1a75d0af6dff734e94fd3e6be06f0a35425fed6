@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/527320983",
       "revId": "f1a75d0af6dff734e94fd3e6be06f0a35425fed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da0b590_8551c144",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-24T10:59:08Z",
+      "side": 1,
+      "message": "Pending KernelCommit checks",
+      "revId": "f1a75d0af6dff734e94fd3e6be06f0a35425fed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
