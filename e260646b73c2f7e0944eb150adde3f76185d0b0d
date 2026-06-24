@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea38643_2cf43dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2026-06-24T16:36:31Z",
+      "side": 1,
+      "message": "Is this suitable to go upstream? I am not sure why 6.12 is particularly targeted. Could this be clarified?",
+      "revId": "e260646b73c2f7e0944eb150adde3f76185d0b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
