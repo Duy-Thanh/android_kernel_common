@@ -179,7 +179,7 @@ impl Transaction {
         binder_debug!(
             crate::debug::BINDER_DEBUG_TRANSACTION,
             "rust_binder: txn {} to node {} (alloc at {:#x})",
-            debug_id,
+            info.debug_id,
             target_node.debug_id,
             data_address
         );
@@ -492,6 +492,12 @@ impl DeliverToRead for Transaction {
         } else {
             // On failure to process the list, we send a reply back to the sender and ignore the
             // transaction on the recipient.
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_FAILED_TRANSACTION,
+                "rust_binder: {} transaction {} fd fixups failed",
+                thread.task.pid(),
+                self.debug_id
+            );
             return Ok(true);
         };
 
