@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31d37d6_e9384e92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-24T19:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbb266c0_70eb4c84",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "f0034fa45724fceb1604bd43b6eeac7dd80a2850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef61273e_5fc8a630",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-06-24T18:18:17Z",
       "side": 1,
       "message": "Where is:\n```\n    Tested-by: Vidya Srinivas \u003cvidya.srinivas@intel.com\u003e\n    Acked-by: Jani Nikula \u003cjani.nikula@intel.com\u003e\n```",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 82
+      },
+      "revId": "f0034fa45724fceb1604bd43b6eeac7dd80a2850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bef6ae8_175e8a75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-24T19:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef61273e_5fc8a630",
       "range": {
         "startLine": 22,
         "startChar": 0,

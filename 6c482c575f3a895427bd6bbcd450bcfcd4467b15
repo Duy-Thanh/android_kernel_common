@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "05289f00_c662ee72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-06-24T19:13:26Z",
+      "side": 1,
+      "message": "Please move this cherrypick line down below `Acked-by: Jani Nikula \u003cjani.nikula@intel.com\u003e`\n\nThe commit message should only be appended to, not inserted to in the middle.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 67
+      },
+      "revId": "6c482c575f3a895427bd6bbcd450bcfcd4467b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0a4fa782_40d47355",
