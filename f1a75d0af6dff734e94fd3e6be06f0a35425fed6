@@ -33,6 +33,24 @@
       "message": "Pending KernelCommit checks",
       "revId": "f1a75d0af6dff734e94fd3e6be06f0a35425fed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6985fac_8238b857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-24T11:40:46Z",
+      "side": 1,
+      "message": "Please fix the cherry pick line as per the KernelCommit warning.",
+      "parentUuid": "1da0b590_8551c144",
+      "revId": "f1a75d0af6dff734e94fd3e6be06f0a35425fed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
