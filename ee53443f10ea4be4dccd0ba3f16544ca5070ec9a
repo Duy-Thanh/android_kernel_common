@@ -16,6 +16,24 @@
       "message": "Check the \"KernelCommit\" linter, this needs a \"Bug: \"",
       "revId": "ee53443f10ea4be4dccd0ba3f16544ca5070ec9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3120816a_e9b1b6c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3532942
+      },
+      "writtenOn": "2026-06-24T10:59:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "241c722e_f8992ba9",
+      "revId": "ee53443f10ea4be4dccd0ba3f16544ca5070ec9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
