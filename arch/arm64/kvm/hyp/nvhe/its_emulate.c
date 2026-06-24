@@ -330,6 +330,7 @@ static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 valu
 	struct its_priv_state *its = region->priv;
 	u64 cwriter_offset = value & GENMASK(19, 5);
 	int cmd_len, cmd_offset;
+	void *new_cwriter;
 	size_t cmdq_sz = its->shadow->cmdq_len;
 
 	if (cwriter_offset > cmdq_sz)
@@ -347,16 +348,16 @@ static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 valu
 	if (parse_its_cmdq(its, cmd_offset, cmd_len))
 		return;
 
-	its->cmd_host_cwriter = its->cmd_host_base +
-		(cmd_offset + cmd_len) % cmdq_sz;
-	if (its->cmd_host_cwriter == its->cmd_host_base) {
+	new_cwriter = its->cmd_host_base + (cmd_offset + cmd_len) % cmdq_sz;
+	if (new_cwriter == its->cmd_host_base) {
 		memcpy(its->cmd_hyp_base, its->cmd_host_base, cwriter_offset);
 		if (parse_its_cmdq(its, 0, cwriter_offset))
 			return;
 
-		its->cmd_host_cwriter = its->cmd_host_base + cwriter_offset;
+		new_cwriter = its->cmd_host_base + cwriter_offset;
 	}
 
+	its->cmd_host_cwriter = new_cwriter;
 	writeq_relaxed(value, its->base + GITS_CWRITER);
 }
 
