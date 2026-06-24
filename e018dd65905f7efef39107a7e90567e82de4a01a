@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/527320894",
       "revId": "e018dd65905f7efef39107a7e90567e82de4a01a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2048f3fd_c7b2f45c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-06-24T21:22:34Z",
+      "side": 1,
+      "message": "Please fix the following error: \n\nThe cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: 83f1262811ade80ac9508cbc72ae3f7d8608866e\nFound commit: 58b17244049f1bce970647c88d36d39c235e95df\n\nPlease cherry-pick using: git cherry-pick -s -x 83f1262811ade80ac9508cbc72ae3f7d8608866e.\n\nI think you can just add a second cherry picked from line; please don\u0027t change the first one.",
+      "revId": "e018dd65905f7efef39107a7e90567e82de4a01a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
