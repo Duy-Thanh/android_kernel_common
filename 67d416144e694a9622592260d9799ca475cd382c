@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec2fafc5_a42da126",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2435,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-24T11:36:59Z",
+      "side": 1,
+      "message": "nit: this change of the comment about clearing is not quite related to what this patch is doing (adding share_ro argument)?\n\nI\u0027d suggest to add the first 2 sentences (\"The page is donated uncleared. Consumers of the refilled memcache are responsible for zeroing the page before use.\") in the previous patch, and just omit the last sentence.\n\nOtherwise, all LGTM.",
+      "revId": "67d416144e694a9622592260d9799ca475cd382c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
