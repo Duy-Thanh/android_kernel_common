@@ -9,6 +9,7 @@
 #include <linux/anon_inodes.h>
 #include <linux/bvec.h>
 #include <linux/compat.h>
+#include <linux/completion.h>
 #include <linux/dma-buf.h>
 #include <linux/fdtable.h>
 #include <linux/file.h>
@@ -112,7 +113,36 @@ struct wrap_io_ctx {
 	struct iov_iter iter;
 	/* At most 4 segments: beginning, middle, and 2 at the end. */
 	struct kvec iov[4];
+	struct completion async_io_done;
+	long async_io_ret;
+
 };
+
+static void async_io_complete(struct kiocb *kiocb, long ret)
+{
+	struct wrap_io_ctx *io_ctx = container_of(kiocb, struct wrap_io_ctx, kiocb);
+
+	io_ctx->async_io_ret = ret;
+	complete(&io_ctx->async_io_done);
+}
+
+static int async_io_poll(struct wrap_io_ctx *io_ctx, struct file *file)
+{
+	int ret;
+
+	while (!try_wait_for_completion(&io_ctx->async_io_done)) {
+		ret = file->f_op->iopoll(&io_ctx->kiocb, NULL, 0);
+		if (ret < 0)
+			return ret;
+	}
+
+	reinit_completion(&io_ctx->async_io_done);
+	/*
+	 * return 0 instead of ret, as ret can be positive to indicate number of I/O requests
+	 * completed.
+	 */
+	return 0;
+}
 
 struct dmabuf_load_param {
 	struct dma_buf *dmabuf;
@@ -150,6 +180,12 @@ static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file)
 	init_sync_kiocb(kiocb, file);
 	kiocb->ki_pos = PAGE_ALIGN_DOWN(io_ctx->file_offs);
 	kiocb->ki_flags |= IOCB_DIRECT;
+	/* Only issue an async and high priority I/O request if the file supports polling. */
+	if (file->f_op->iopoll) {
+		init_completion(&io_ctx->async_io_done);
+		kiocb->ki_flags |= IOCB_HIPRI;
+		kiocb->ki_complete = async_io_complete;
+	}
 	iov_iter_kvec(&io_ctx->iter, ITER_DEST, io_ctx->iov, nr_segs, io_ctx->file_read_len);
 }
 
@@ -234,12 +270,34 @@ err_free_bounce_pages:
 static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 {
 	ssize_t bytes_read;
+	int ret;
 
 	while (io_ctx->bytes_read < io_ctx->file_read_len) {
 		io_ctx->iter.count = min_t(size_t, MAX_RW_COUNT,
 					   PAGE_ALIGN(io_ctx->file_read_len - io_ctx->bytes_read));
 
 		bytes_read = vfs_iocb_iter_read(file, &io_ctx->kiocb, &io_ctx->iter);
+		if (!is_sync_kiocb(&io_ctx->kiocb)) {
+			/*
+			 * The underlying block device may not support polling, in which case
+			 * disable async I/O and retry with synchronous I/O.
+			 */
+			if (bytes_read == -EOPNOTSUPP) {
+				io_ctx->kiocb.ki_flags &= ~IOCB_HIPRI;
+				io_ctx->kiocb.ki_complete = NULL;
+				continue;
+			}
+
+			/* -EIOCBQUEUED implies that an async request was queued. */
+			if (bytes_read == -EIOCBQUEUED) {
+				ret = async_io_poll(io_ctx, file);
+				if (ret)
+					return ret;
+
+				bytes_read = io_ctx->async_io_ret;
+			}
+		}
+
 		if (bytes_read <= 0)
 			return bytes_read;
 
