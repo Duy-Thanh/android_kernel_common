@@ -893,13 +893,13 @@ static bool handle_host_mmio_trap(struct kvm_cpu_context *host_ctxt, u64 esr, u6
 		write = (esr & ESR_ELx_WNR) == ESR_ELx_WNR;
 		offset = addr - start;
 
-		if (write)
+		if (write && reg_index != 31)
 			reg_value = host_ctxt->regs.regs[reg_index];
 
 		pkvm_moveable_regs[i].cb(&pkvm_moveable_regs[i], offset, write,
 					 &reg_value, reg_size);
 
-		if (!write)
+		if (!write && reg_index != 31)
 			host_ctxt->regs.regs[reg_index] = reg_value;
 
 		kvm_skip_host_instr();
