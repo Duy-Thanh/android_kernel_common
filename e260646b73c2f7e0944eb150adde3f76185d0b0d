@@ -16,6 +16,24 @@
       "message": "Is this suitable to go upstream? I am not sure why 6.12 is particularly targeted. Could this be clarified?",
       "revId": "e260646b73c2f7e0944eb150adde3f76185d0b0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f13afb_63c37d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-06-24T17:04:05Z",
+      "side": 1,
+      "message": "Eventually this could go upstream, in the near term this is a support CL for the wrapfd driver rust migration targeted to be released on 6.12 AFAIK.",
+      "parentUuid": "fea38643_2cf43dbb",
+      "revId": "e260646b73c2f7e0944eb150adde3f76185d0b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
