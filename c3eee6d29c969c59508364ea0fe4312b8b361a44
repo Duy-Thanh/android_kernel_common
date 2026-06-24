@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0371cdd_727ef109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994450
+      },
+      "writtenOn": "2026-06-24T06:00:06Z",
+      "side": 1,
+      "message": "Removed myself as a reviewer, as it seems I was added accidentally. Did you mean quic_ziqichen@quicinc.com instead?",
+      "revId": "c3eee6d29c969c59508364ea0fe4312b8b361a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
