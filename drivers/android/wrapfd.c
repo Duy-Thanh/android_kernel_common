@@ -9,6 +9,7 @@
 #include <linux/anon_inodes.h>
 #include <linux/bvec.h>
 #include <linux/compat.h>
+#include <linux/completion.h>
 #include <linux/dma-buf.h>
 #include <linux/fdtable.h>
 #include <linux/file.h>
@@ -112,7 +113,17 @@ struct dmabuf_load_param {
 	struct iov_iter iter;
 	/* At most 4 segments: beginning, middle, and 2 at the end. */
 	struct kvec iov[4];
+	struct completion io_done;
+	long io_ret;
 };
+
+static void read_complete(struct kiocb *kiocb, long ret)
+{
+	struct dmabuf_load_param *param = container_of(kiocb, struct dmabuf_load_param, kiocb);
+
+	param->io_ret = ret;
+	complete(&param->io_done);
+}
 
 static void prepare_iocb_request(struct dmabuf_load_param *param, struct file *file)
 {
@@ -144,6 +155,11 @@ static void prepare_iocb_request(struct dmabuf_load_param *param, struct file *f
 	init_sync_kiocb(&param->kiocb, file);
 	param->kiocb.ki_pos = PAGE_ALIGN_DOWN(param->file_offs);
 	param->kiocb.ki_flags |= IOCB_DIRECT;
+	/* Only issue an async and high priority I/O request if the file supports polling. */
+	if (file->f_op->iopoll) {
+		param->kiocb.ki_flags |= IOCB_HIPRI;
+		param->kiocb.ki_complete = read_complete;
+	}
 	iov_iter_kvec(&param->iter, ITER_DEST, param->iov, nr_segs, param->file_read_len);
 }
 
@@ -236,6 +252,7 @@ static int dmabuf_content_load_prepare(struct file *file, struct dma_buf *dmabuf
 	param->direct_read_len = direct_read_len;
 	param->len = len;
 	param->file_read_len = file_read_len;
+	init_completion(&param->io_done);
 	prepare_iocb_request(param, file);
 	return 0;
 
@@ -326,6 +343,19 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 					 PAGE_ALIGN(param.file_read_len - param.bytes_read));
 
 		bytes_read = vfs_iocb_iter_read(file, &param.kiocb, &param.iter);
+		/* -EIOCBQUEUED implies that an async request was queued. */
+		if (bytes_read == -EIOCBQUEUED) {
+			while(!try_wait_for_completion(&param.io_done)) {
+				ret = file->f_op->iopoll(&param.kiocb, NULL, 0);
+
+				if (ret < 0)
+					break;
+			}
+
+			reinit_completion(&param.io_done);
+			bytes_read = ret < 0 ? ret : param.io_ret;
+		}
+
 		if (bytes_read <= 0) {
 			ret = bytes_read;
 			break;
