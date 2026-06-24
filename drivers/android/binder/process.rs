@@ -948,7 +948,6 @@ impl Process {
         }
     }
 
-
     pub(crate) fn get_node_from_handle(&self, handle: u32, strong: bool) -> Result<NodeRef> {
         self.node_refs
             .lock()
@@ -1283,6 +1282,12 @@ impl Process {
         // Queue BR_ERROR if we can't allocate memory for the death notification.
         let death = UniqueArc::new_uninit(GFP_KERNEL).map_err(|err| {
             thread.push_return_work(BR_ERROR);
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_FAILED_TRANSACTION,
+                "rust_binder: {}:{} BC_REQUEST_DEATH_NOTIFICATION failed",
+                self.pid_in_current_ns(),
+                thread.task.pid()
+            );
             err
         })?;
         let mut refs = self.node_refs.lock();
