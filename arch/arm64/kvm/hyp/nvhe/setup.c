@@ -343,7 +343,7 @@ static int unmap_emulated_mmio(struct pkvm_moveable_reg *reg)
 
 	return 0;
 err_setup:
-	for (i = i - 1; i >= 0; i--)
+	while (i--)
 		__pkvm_hyp_donate_host_mmio(start_pfn + i);
 	return ret;
 }

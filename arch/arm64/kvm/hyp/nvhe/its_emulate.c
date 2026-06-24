@@ -533,7 +533,7 @@ static int pkvm_share_shadow_table(void *shadow, u64 nr_pages)
 
 	return ret;
 unshare:
-	for (i = i - 1; i >= 0; i--)
+	while (i--)
 		__pkvm_host_unshare_hyp(start_pfn + i);
 	return ret;
 }
