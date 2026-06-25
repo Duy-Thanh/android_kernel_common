@@ -1203,7 +1203,9 @@ static inline u32 hid_report_len(struct hid_report *report)
 }
 
 int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
-			 size_t bufsize, u32 size, int interrupt);
+			 u32 size, int interrupt);
+int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+			   size_t bufsize, u32 size, int interrupt);
 
 /* HID quirks API */
 unsigned long hid_lookup_quirk(const struct hid_device *hdev);
