@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68d054c1_82268e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2008256
+      },
+      "writtenOn": "2026-06-25T21:14:40Z",
+      "side": 1,
+      "message": "I see that issuetracker also talking about another issue related to GH_VM_SET_USER_MEM_REGION. Are we solving it here or in a different patch.\n\nhttps://partnerissuetracker.corp.google.com/issues/527167428",
+      "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48d732a8_3af73bb4",
         "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
         "patchSetId": 2
