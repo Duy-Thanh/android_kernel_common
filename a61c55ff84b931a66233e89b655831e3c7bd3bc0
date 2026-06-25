@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "faa6fc92_823fb110",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5216,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:29:10Z",
+      "side": 1,
+      "message": "We need to specify the order to avoid leaking memory. Please see aosp/4141183",
+      "range": {
+        "startLine": 5216,
+        "startChar": 2,
+        "endLine": 5216,
+        "endChar": 46
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6446c306_fd022b8f",
         "filename": "drivers/irqchip/irq-gic-v3-its.c",
         "patchSetId": 1
