@@ -16,6 +16,23 @@
       "message": "This change has also broken some tests that are blocking a release b/512641133.",
       "revId": "9ce73429941ce3a276f9b4c14a4fe4d9996b62dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229efe2e_e0632a55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2026-06-25T16:50:54Z",
+      "side": 1,
+      "message": "It\u0027s also an android16-6.12-2026-06 release blocker. https://b.corp.google.com/issues/512641133#comment20",
+      "revId": "9ce73429941ce3a276f9b4c14a4fe4d9996b62dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
