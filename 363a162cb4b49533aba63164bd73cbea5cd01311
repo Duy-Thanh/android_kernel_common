@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fbbfb9_d3817ab2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:25:32Z",
+      "side": 1,
+      "message": "`reg_index` can be 31 (ie. `xzr` zero register) and lead into a out of bounds array access. Please see aosp/4141182",
+      "range": {
+        "startLine": 895,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 47
+      },
+      "revId": "363a162cb4b49533aba63164bd73cbea5cd01311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
