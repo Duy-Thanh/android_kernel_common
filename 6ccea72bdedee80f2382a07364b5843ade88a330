@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86eea9a_9cc14312",
+        "filename": "drivers/android/binder/debug.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-25T04:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "732ff57a_b1bf3907",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7594bc3a_d376853f",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-06-23T11:49:48Z",
       "side": 1,
       "message": "To match C Binder, I would move this to deferred_flush and deferred_release.",
+      "range": {
+        "startLine": 1682,
+        "startChar": 0,
+        "endLine": 1686,
+        "endChar": 10
+      },
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29a52fd_84aa81d6",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1686,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-25T04:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7594bc3a_d376853f",
       "range": {
         "startLine": 1682,
         "startChar": 0,
