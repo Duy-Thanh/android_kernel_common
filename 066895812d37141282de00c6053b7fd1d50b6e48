@@ -16,6 +16,52 @@
       "message": "The size does not have to be page aligned unfortunately ;/ I\u0027ve uploaded a workaround in the GIC driver, but I don\u0027t think it\u0027s good for long term aosp/4141176",
       "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b86aca67_90844da0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:11:14Z",
+      "side": 1,
+      "message": "When the command queue wraps around we need process commands from 0 to cmdq offset (uploaded aosp/4141179 to hopefully fix it).",
+      "range": {
+        "startLine": 261,
+        "startChar": 2,
+        "endLine": 261,
+        "endChar": 47
+      },
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e98e5d_c8afa292",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:11:14Z",
+      "side": 1,
+      "message": "If it failed to parse in the second `parse_its_cmd` call, the `cmd_host_cwriter` would be lest updated non atomically (ie. previous commands were parsed correctly and changes to host page table was already done however hw would not be notified). I\u0027ve uploaded a mitigation in aosp/4141184 however as discussed over the chat it might not be enough.",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 62
+      },
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
