@@ -88017,6 +88017,12 @@ member {
   offset: 576
 }
 member {
+  id: 0x7045393c
+  name: "gadget_release"
+  type_id: 0x0e93a255
+  offset: 128
+}
+member {
   id: 0xf52a06bf
   name: "gain"
   type_id: 0xe62ebf07
@@ -108675,12 +108681,6 @@ member {
   offset: 1088
 }
 member {
-  id: 0x7c00e340
-  name: "list"
-  type_id: 0xd3c80119
-  offset: 7424
-}
-member {
   id: 0x7c00e41a
   name: "list"
   type_id: 0xd3c80119
@@ -108787,6 +108787,12 @@ member {
   name: "list"
   type_id: 0xd3c80119
   offset: 2176
+}
+member {
+  id: 0x7c00eb44
+  name: "list"
+  type_id: 0xd3c80119
+  offset: 7488
 }
 member {
   id: 0x7c00ebab
@@ -169162,10 +169168,10 @@ member {
   offset: 1408
 }
 member {
-  id: 0x5367cfd2
+  id: 0x5367c615
   name: "started"
   type_id: 0x6d7f5ff6
-  offset: 7560
+  offset: 7624
 }
 member {
   id: 0x539372a0
@@ -187050,10 +187056,10 @@ member {
   offset: 960
 }
 member {
-  id: 0xa8b1a153
+  id: 0xa8b1af73
   name: "vbus"
   type_id: 0x6d7f5ff6
-  offset: 7552
+  offset: 7616
 }
 member {
   id: 0x7dc18c28
@@ -245531,13 +245537,14 @@ struct_union {
   kind: STRUCT
   name: "usb_udc"
   definition {
-    bytesize: 952
+    bytesize: 960
     member_id: 0xd477fd9a
     member_id: 0x1875f4a8
-    member_id: 0xce1ac88b
-    member_id: 0x7c00e340
-    member_id: 0xa8b1a153
-    member_id: 0x5367cfd2
+    member_id: 0x7045393c
+    member_id: 0xce1ac980
+    member_id: 0x7c00eb44
+    member_id: 0xa8b1af73
+    member_id: 0x5367c615
   }
 }
 struct_union {
