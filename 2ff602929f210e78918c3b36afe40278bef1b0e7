@@ -16,6 +16,24 @@
       "message": "This should be a GKI module (\u003dm) like it is android14-6.1 and android16-6.12. If there is a reason why it can\u0027t be, you must explain in the commit message.",
       "revId": "2ff602929f210e78918c3b36afe40278bef1b0e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb38e62_6591f737",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4713336
+      },
+      "writtenOn": "2026-06-25T14:16:47Z",
+      "side": 1,
+      "message": "We are getting compilation issue while setting it to as a GKI module(\u003dm). Can we keep it as \u0027y\u0027 which was done earlier in android14-6.1",
+      "parentUuid": "70386fae_ec6df96c",
+      "revId": "2ff602929f210e78918c3b36afe40278bef1b0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
