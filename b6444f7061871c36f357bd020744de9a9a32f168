@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7cf86eb3_268ed440",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-25T14:08:02Z",
+      "side": 1,
+      "message": "Yeah, no problem. I just wanted to take the actual cherry-pick to minimize manual modifications. We are good to go now.",
+      "parentUuid": "1e5ce09e_fff457b8",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "b6444f7061871c36f357bd020744de9a9a32f168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d4bba845_24eefe27",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
