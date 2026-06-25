@@ -26,6 +26,13 @@ void _trace_android_vh_record_pcpu_rwsem_starttime(struct percpu_rw_semaphore *s
 }
 EXPORT_SYMBOL_GPL(_trace_android_vh_record_pcpu_rwsem_starttime);
 
+void _trace_android_vh_record_pcpu_rwsem_starttime_new(struct percpu_rw_semaphore *sem,
+		unsigned long settime)
+{
+	trace_android_vh_record_pcpu_rwsem_starttime_new(sem, settime);
+}
+EXPORT_SYMBOL_GPL(_trace_android_vh_record_pcpu_rwsem_starttime_new);
+
 int __percpu_init_rwsem(struct percpu_rw_semaphore *sem,
 			const char *name, struct lock_class_key *key)
 {
