@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e148bfe_94f034b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-25T16:08:37Z",
+      "side": 1,
+      "message": "this was cherry-picked before the change on the main branch landed (which was rebased by treehugger) and thus the SHA is incorrect and should be 5a8fb799022ad5e0b88307cf4fcdbdb25d4493b6 instead.",
+      "range": {
+        "startLine": 35,
+        "startChar": 27,
+        "endLine": 35,
+        "endChar": 67
+      },
+      "revId": "4c80767e55643f006071fec6dd2b70da65c66b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5dc862d8_54c61d8e",
