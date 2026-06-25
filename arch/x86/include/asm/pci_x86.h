@@ -236,6 +236,7 @@ static inline void pci_mmcfg_writel(unsigned int val, volatile void __iomem *pos
 }
 
 #ifdef CONFIG_PARAVIRT
+#include <asm/paravirt.h>
 static inline unsigned char mmio_config_readb(void __iomem *pos)
 {
 	return pv_pci_mmcfg_readb(pos);
