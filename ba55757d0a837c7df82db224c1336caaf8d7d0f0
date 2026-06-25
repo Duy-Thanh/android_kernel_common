@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "872586c6_b7799ad8",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T13:57:20Z",
+      "side": 1,
+      "message": "Value zero in `tracked_pfns` is used to mark free record, so we need to zero the allocated page. Please see aosp/4141177",
+      "revId": "ba55757d0a837c7df82db224c1336caaf8d7d0f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
