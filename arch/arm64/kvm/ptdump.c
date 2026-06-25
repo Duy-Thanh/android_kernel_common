@@ -456,14 +456,26 @@ void kvm_s2_ptdump_create_debugfs(struct kvm *kvm)
 			    kvm, &kvm_pgtable_levels_fops);
 }
 
+static int kvm_host_pgtable_range_show(struct seq_file *m, void *unused)
+{
+	seq_printf(m, "%2u\n", ptdump_get_ranges(NULL));
+	return 0;
+}
+
+static int kvm_host_pgtable_levels_show(struct seq_file *m, void *unused)
+{
+	seq_printf(m, "%1d\n", KVM_PGTABLE_MAX_LEVELS - ptdump_get_level(NULL));
+	return 0;
+}
+
 static int kvm_host_pgtable_range_open(struct inode *m, struct file *file)
 {
-	return single_open(file, kvm_pgtable_range_show, NULL);
+	return single_open(file, kvm_host_pgtable_range_show, NULL);
 }
 
 static int kvm_host_pgtable_levels_open(struct inode *m, struct file *file)
 {
-	return single_open(file, kvm_pgtable_levels_show, NULL);
+	return single_open(file, kvm_host_pgtable_levels_show, NULL);
 }
 
 static const struct file_operations kvm_host_pgtable_range_fops = {
