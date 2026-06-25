@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d9e2e4_a2d71569",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-25T18:00:34Z",
+      "side": 1,
+      "message": "You probably meant FROMLIST here.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "310e0f395d361e68330656a2aabb919628186d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a65932_6a08d08c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-25T18:00:34Z",
+      "side": 1,
+      "message": "IIUC, this was just sent upstream and doesn\u0027t have any feedback yet correct?",
+      "revId": "310e0f395d361e68330656a2aabb919628186d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
