@@ -16,6 +16,77 @@
       "message": "nit: this change of the comment about clearing is not quite related to what this patch is doing (adding share_ro argument)?\n\nI\u0027d suggest to add the first 2 sentences (\"The page is donated uncleared. Consumers of the refilled memcache are responsible for zeroing the page before use.\") in the previous patch, and just omit the last sentence.\n\nOtherwise, all LGTM.",
       "revId": "67d416144e694a9622592260d9799ca475cd382c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b66a5006_e897d8ca",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-06-25T10:35:38Z",
+      "side": 1,
+      "message": "Nit: Using false/true here looks a bit awkward at the call sites IMO. Perhaps it would be better to either:\n1) Define an enum (e.g., PKVM_MC_DONATE_SHARE_RO and PKVM_MC_DONATE_EXCLUSIVE ) and pass it to  pkvm_refill_memcache().\n2. Use  pkvm_memcache  flags (which are already used for other purposes, like PKVM_MC_ACCOUNT_PGTABLE_PAGES). We could mark the IOMMU memcache with a new PKVM_MC_DONATE_SHARE_RO  flag, and check this flag during the refill\n\nWDYT? I would probably prefer 2). But other than that LGTM - if you want to keep it as is, I am ok with that too.",
+      "range": {
+        "startLine": 2455,
+        "startChar": 34,
+        "endLine": 2455,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cea6cb20_0764e521",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 2411,
+                "startChar": 0,
+                "endLine": 2412,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 2438,
+                "startChar": 0,
+                "endLine": 2440,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d (host_mc-\u003eflags \u0026 PKVM_MC_SHARE_RO) ? pkvm_host_donate_hyp_share_ro(addr, PAGE_SIZE, false) :\n\t\t\t\t\t\t    pkvm_host_donate_hyp(addr, PAGE_SIZE, false);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 2455,
+                "startChar": 0,
+                "endLine": 2456,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t struct pkvm_memcache *host_mc)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 2468,
+                "startChar": 0,
+                "endLine": 2469,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "67d416144e694a9622592260d9799ca475cd382c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
