@@ -56,6 +56,24 @@
       "message": "Where has the cherry picked from line come from? See KernelCommit finding.",
       "revId": "4c80767e55643f006071fec6dd2b70da65c66b40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e00627_9849e38c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-25T16:10:22Z",
+      "side": 1,
+      "message": "Duplicate.",
+      "parentUuid": "282b00d7_7de7a6e2",
+      "revId": "4c80767e55643f006071fec6dd2b70da65c66b40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
