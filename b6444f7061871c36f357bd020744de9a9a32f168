@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c68f8be_9697f82c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-25T13:53:36Z",
+      "side": 1,
+      "message": "I don\u0027t think this was cherry-picked as the metadata is a bit off... let me just do that. I\u0027ll update this change.",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "b6444f7061871c36f357bd020744de9a9a32f168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d4bba845_24eefe27",
