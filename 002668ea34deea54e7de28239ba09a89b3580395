@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acbf9d40_512e3621",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:13:01Z",
+      "side": 1,
+      "message": "Could you please decouple emulation logic from ITS? Uploaded aosp/4141180 for this. In GICR hardening I also used this logic.",
+      "range": {
+        "startLine": 17,
+        "startChar": 7,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "002668ea34deea54e7de28239ba09a89b3580395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
