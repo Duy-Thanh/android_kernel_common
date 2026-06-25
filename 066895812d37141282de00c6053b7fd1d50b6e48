@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0f7023_b7d82dca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T13:54:52Z",
+      "side": 1,
+      "message": "The size does not have to be page aligned unfortunately ;/ I\u0027ve uploaded a workaround in the GIC driver, but I don\u0027t think it\u0027s good for long term aosp/4141176",
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
