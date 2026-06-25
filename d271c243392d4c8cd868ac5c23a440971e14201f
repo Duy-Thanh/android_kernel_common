@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caaa03b4_7b0d06dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4555223
+      },
+      "writtenOn": "2026-06-25T06:33:44Z",
+      "side": 1,
+      "message": "/MERGE_LIST",
+      "revId": "d271c243392d4c8cd868ac5c23a440971e14201f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
