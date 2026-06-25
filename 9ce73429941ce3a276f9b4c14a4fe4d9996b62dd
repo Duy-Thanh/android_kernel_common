@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0e8b7f_6e1dabb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2048517
+      },
+      "writtenOn": "2026-06-25T14:21:10Z",
+      "side": 1,
+      "message": "This change has also broken some tests that are blocking a release b/512641133.",
+      "revId": "9ce73429941ce3a276f9b4c14a4fe4d9996b62dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
