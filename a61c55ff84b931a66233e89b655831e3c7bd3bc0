@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace9f413_1e63b46d",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5290,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T13:51:51Z",
+      "side": 1,
+      "message": "This is redundant, because the irq\u0027s were saved on the first ITS instance. Please see aosp/4141175 with suggestion how to address it.",
+      "range": {
+        "startLine": 5290,
+        "startChar": 0,
+        "endLine": 5290,
+        "endChar": 48
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
