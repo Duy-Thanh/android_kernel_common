@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6446c306_fd022b8f",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5228,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-06-25T14:01:04Z",
+      "side": 1,
+      "message": "This code is executed when lock is held (`its_lock`) so I think all allocation in this function should be mark as atomic allocation. Please see aosp/4141178.",
+      "range": {
+        "startLine": 5228,
+        "startChar": 45,
+        "endLine": 5228,
+        "endChar": 68
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace9f413_1e63b46d",
         "filename": "drivers/irqchip/irq-gic-v3-its.c",
         "patchSetId": 1
