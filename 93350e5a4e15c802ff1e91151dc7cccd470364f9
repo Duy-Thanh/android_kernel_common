@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d732a8_3af73bb4",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 2008256
+      },
+      "writtenOn": "2026-06-25T21:11:51Z",
+      "side": 1,
+      "message": "Don\u0027t we have to guard this against the lock ? this is what AI suggests me. Just sharing the same here.\n\n\ngunyah_share_range_as_parcels() called gunyah_count_bindings() which\nheld bindings_lock only for the count, then dropped it.  After the\nlock was released, kzalloc() allocated an N-entry parcel array based\non that stale count.  A racing GH_VM_SET_USER_MEM_REGION from another\nthread of the same process could insert K additional bindings before\nthe unlocked mt_for_each() loop ran, causing it to iterate N+K entries\nand write K × ~64 bytes past the end of the N-entry kmalloc\u0027d array.",
+      "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
