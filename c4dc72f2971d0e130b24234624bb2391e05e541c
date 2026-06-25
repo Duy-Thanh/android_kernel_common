@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6124b7c3_134ac4d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3832128
+      },
+      "writtenOn": "2026-06-25T02:02:54Z",
+      "side": 1,
+      "message": "I just use go/android-cherry to cherry-pick from aosp/4085288, I have no idea why message is wrong, anyway let me fix manually.",
+      "parentUuid": "feedda9a_2619aadf",
+      "revId": "c4dc72f2971d0e130b24234624bb2391e05e541c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "95eb01f1_e61040bb",
