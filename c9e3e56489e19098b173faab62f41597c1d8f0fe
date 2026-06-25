@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d331bd_c1e2dbe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2026-06-25T15:15:47Z",
+      "side": 1,
+      "message": "My preference is to have a proposal sent upstream and do an UPSTREAM/FROMGIT/FROMLIST patch instead. I think this is not an android-specific bug, so we shouldn\u0027t fix it with an ANDROID patch.",
+      "revId": "c9e3e56489e19098b173faab62f41597c1d8f0fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
