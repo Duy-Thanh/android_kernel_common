@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cbc9a2_9760d343",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1656,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T08:57:09Z",
+      "side": 1,
+      "message": "nit: you call this `vm_handle` in other functions.",
+      "range": {
+        "startLine": 1656,
+        "startChar": 8,
+        "endLine": 1656,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "43bd7caf_1d1281f7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1656,
+                "startChar": 0,
+                "endLine": 1657,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tu64 vm_handle)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1667,
+                "startChar": 0,
+                "endLine": 1668,
+                "endChar": 0
+              },
+              "replacement": "\tif (FIELD_GET(FFA_NOTIF_RECEIVER_ENDP_MASK, endp_id) !\u003d vm_handle) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "86974ade34080c24092bd2ae13557942f5f30008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
