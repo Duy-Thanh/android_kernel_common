@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d73219fb_bdfdf34a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T14:30:40Z",
+      "side": 1,
+      "message": "nit: Can you please pick one and close the other bug as duplicate?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "8c457cf59c6a315d0d544e96783c1afcdcb9d992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237610eb_c7aa9d65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T14:30:40Z",
+      "side": 1,
+      "message": "nit: Please remove this emtpy line in between tags",
+      "revId": "8c457cf59c6a315d0d544e96783c1afcdcb9d992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "705ea7a8_25f9fb30",
