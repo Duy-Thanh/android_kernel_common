@@ -33,6 +33,23 @@
       "message": "4122236: Merge de02909ae81a (\"Merge tag \u0027pull-configfs-fixed\u0027 of git://git.kernel.org/pub/scm/linux/kernel/git/viro/vfs\") into android-mainline | https://android-review.googlesource.com/c/kernel/common/+/4122236",
       "revId": "d271c243392d4c8cd868ac5c23a440971e14201f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6df6efe_47eaa0c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4578824
+      },
+      "writtenOn": "2026-06-26T22:00:13Z",
+      "side": 1,
+      "message": "d271c243392d4c8cd868ac5c23a440971e14201f",
+      "revId": "d271c243392d4c8cd868ac5c23a440971e14201f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
