@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f9e8ab0_33491010",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-06-26T14:18:38Z",
+      "side": 1,
+      "message": "Sounds like this is a generic upstream x86 kernel issue, not pKVM or Android specific? So we should fix it upstream?",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3c482f_a320f575",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
