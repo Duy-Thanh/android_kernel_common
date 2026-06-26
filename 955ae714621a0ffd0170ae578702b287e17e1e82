@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eae1c93_870f728d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:04:28Z",
+      "side": 1,
+      "message": "same wording nit",
+      "range": {
+        "startLine": 1699,
+        "startChar": 12,
+        "endLine": 1699,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "63c1dba8_3e0f39bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1699,
+                "startChar": 0,
+                "endLine": 1700,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t     u64 vm_handle)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1705,
+                "startChar": 0,
+                "endLine": 1706,
+                "endChar": 0
+              },
+              "replacement": "\tif (FIELD_GET(FFA_NOTIF_RECEIVER_ENDP_MASK, endp_id) !\u003d vm_handle) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "955ae714621a0ffd0170ae578702b287e17e1e82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1223249c_df258917",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1940,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:04:28Z",
+      "side": 1,
+      "message": "use a local",
+      "range": {
+        "startLine": 1940,
+        "startChar": 31,
+        "endLine": 1940,
+        "endChar": 53
+      },
+      "revId": "955ae714621a0ffd0170ae578702b287e17e1e82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
