@@ -37,6 +37,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fe67b7c_82fb5c4b",
+        "filename": "drivers/android/binder/debug.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-26T13:05:59Z",
+      "side": 1,
+      "message": "I\u0027ve noticed that almost every single `binder_debug!` statement will call `pid_in_current_ns()` to include the pid. I think it would be better to include it in the macro here so that the pid is always included automatically.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8cc76550_f7234f22",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder/debug.rs",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "            kernel::pr_info!(concat!(\"{:?} \", $fmt, \"\\n\"), $crate::sys::pid_in_current_ns() $(, $($arg)*)?);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6af0cbc_028a6ac6",
         "filename": "drivers/android/binder/process.rs",
         "patchSetId": 10
