@@ -33,6 +33,24 @@
       "message": "Don\u0027t we have to guard this against the lock ? this is what AI suggests me. Just sharing the same here.\n\n\ngunyah_share_range_as_parcels() called gunyah_count_bindings() which\nheld bindings_lock only for the count, then dropped it.  After the\nlock was released, kzalloc() allocated an N-entry parcel array based\non that stale count.  A racing GH_VM_SET_USER_MEM_REGION from another\nthread of the same process could insert K additional bindings before\nthe unlocked mt_for_each() loop ran, causing it to iterate N+K entries\nand write K × ~64 bytes past the end of the N-entry kmalloc\u0027d array.",
       "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10bf7200_126df6ef",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1967274
+      },
+      "writtenOn": "2026-06-26T01:13:20Z",
+      "side": 1,
+      "message": "Yes, I am only addressing the TOCTOU race condition here. Rejecting `GH_VM_SET_USER_MEM_REGION` ioctl while VM is not in INIT state can be taken up later after internal discussion. I don\u0027t want to change user behavior or limit any of future work related to this issue. Currently, this patch fixes the race condition. The behavior is same. The ioctl will succed but silently ignored or if it races with this , we will catch it here an fail it.",
+      "parentUuid": "48d732a8_3af73bb4",
+      "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
