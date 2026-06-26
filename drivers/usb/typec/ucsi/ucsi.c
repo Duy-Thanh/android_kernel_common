@@ -1863,29 +1863,49 @@ static int ucsi_init(struct ucsi *ucsi)
 	u32 cci;
 	int ret;
 	int i;
+	dev_info(ucsi->dev, "Entry: ucsi_init\n");
 
 	/* Reset the PPM */
+	dev_info(ucsi->dev, "UCSI init: Resetting PPM\n");
 	ret = ucsi_reset_ppm(ucsi);
 	if (ret) {
 		dev_err(ucsi->dev, "failed to reset PPM!\n");
 		goto err;
 	}
+	dev_info(ucsi->dev, "UCSI init: Reset PPM done\n");
 
 	/* Enable basic notifications */
+	dev_info(ucsi->dev, "UCSI init: Enabling basic notifications\n");
 	ntfy = UCSI_ENABLE_NTFY_CMD_COMPLETE | UCSI_ENABLE_NTFY_ERROR;
 	command = UCSI_SET_NOTIFICATION_ENABLE | ntfy;
 	ret = ucsi_send_command(ucsi, command, NULL, 0);
-	if (ret < 0)
+	if (ret < 0) {
+		dev_err(ucsi->dev, "failed to enable basic notifications (%d)\n", ret);
 		goto err_reset;
+	}
+	dev_info(ucsi->dev, "UCSI init: Enabling basic notifications done\n");
 
 	/* Get PPM capabilities */
+	dev_info(ucsi->dev, "UCSI init: Getting PPM capabilities\n");
 	command = UCSI_GET_CAPABILITY;
+<<<<<<< side #1
 	ret = ucsi_send_command(ucsi, command, &ucsi->cap,
 				BITS_TO_BYTES(UCSI_GET_CAPABILITY_SIZE));
 	if (ret < 0)
+||||||| base
+	ret = ucsi_send_command(ucsi, command, &ucsi->cap, sizeof(ucsi->cap));
+	if (ret < 0)
+=======
+	ret = ucsi_send_command(ucsi, command, &ucsi->cap, sizeof(ucsi->cap));
+	if (ret < 0) {
+		dev_err(ucsi->dev, "failed to get PPM capabilities (%d)\n", ret);
+>>>>>>> side #2
 		goto err_reset;
+	}
+	dev_info(ucsi->dev, "UCSI init: Getting PPM capabilities done\n");
 
 	if (!ucsi->cap.num_connectors) {
+		dev_err(ucsi->dev, "UCSI init: No connectors found\n");
 		ret = -ENODEV;
 		goto err_reset;
 	}
@@ -1897,42 +1917,67 @@ static int ucsi_init(struct ucsi *ucsi)
 	}
 
 	/* Allocate the connectors. Released in ucsi_unregister() */
+	dev_info(ucsi->dev, "UCSI init: Allocating connectors\n");
 	connector = kzalloc_objs(*connector, ucsi->cap.num_connectors + 1);
 	if (!connector) {
+		dev_err(ucsi->dev, "UCSI init: Failed to allocate connectors\n");
 		ret = -ENOMEM;
 		goto err_reset;
 	}
+	dev_info(ucsi->dev, "UCSI init: Allocating connectors done\n");
 
 	/* Register all connectors */
+	dev_info(ucsi->dev, "UCSI init: Registering connectors\n");
 	for (i = 0; i < ucsi->cap.num_connectors; i++) {
+		dev_info(ucsi->dev, "UCSI init: Registering connector %d\n", i);
 		connector[i].num = i + 1;
 		ret = ucsi_register_port(ucsi, &connector[i]);
-		if (ret)
+		if (ret) {
+			dev_err(ucsi->dev, "UCSI init: Failed to register connector %d, ret=%d\n", i, ret);
 			goto err_unregister;
 	}
+	}
+	dev_info(ucsi->dev, "UCSI init: Registering connectors done\n");
+
 
 	/* Enable all supported notifications */
+	dev_info(ucsi->dev, "UCSI init: Enabling all supported notifications\n");
 	ntfy = ucsi_get_supported_notifications(ucsi);
 	command = UCSI_SET_NOTIFICATION_ENABLE | ntfy;
 	ret = ucsi_send_command(ucsi, command, NULL, 0);
-	if (ret < 0)
+	if (ret < 0) {
+		dev_err(ucsi->dev, "UCSI init: Failed to enable all supported notifications (%d)\n", ret);
 		goto err_unregister;
+	}
+	dev_info(ucsi->dev, "UCSI init: Enabling all supported notifications done\n");
 
 	ucsi->connector = connector;
 	ucsi->ntfy = ntfy;
 
+	/* Read the connector status */
+	dev_info(ucsi->dev, "UCSI init: Reading connector status\n");
 	mutex_lock(&ucsi->ppm_lock);
+  dev_info(ucsi->dev, "UCSI init: Reading connector status: mutex locked\n");
 	ret = ucsi->ops->read_cci(ucsi, &cci);
 	mutex_unlock(&ucsi->ppm_lock);
-	if (ret)
-		return ret;
-	if (UCSI_CCI_CONNECTOR(cci))
-		ucsi_connector_change(ucsi, UCSI_CCI_CONNECTOR(cci));
+	dev_info(ucsi->dev, "UCSI init: Reading connector status: mutex unlocked\n");
 
+	if (ret) {
+		dev_err(ucsi->dev, "UCSI init: Failed to read connector status (%d)\n", ret);
+		return ret;
+	}
+	if (UCSI_CCI_CONNECTOR(cci)) {
+		dev_info(ucsi->dev, "UCSI init: Connector status changed, cci=%d, connector=%d\n", cci, UCSI_CCI_CONNECTOR(cci));
+		ucsi_connector_change(ucsi, UCSI_CCI_CONNECTOR(cci));
+	}
+
+	dev_info(ucsi->dev, "UCSI init: Successfully initialized UCSI\n");
 	return 0;
 
 err_unregister:
+	dev_info(ucsi->dev, "UCSI init failed, err_unregister: Unregistering ports\n");
 	for (con = connector; con->port; con++) {
+		dev_info(ucsi->dev, "UCSI init: Unregistering connector %d\n", con->num);
 		if (con->wq)
 			destroy_workqueue(con->wq);
 		ucsi_unregister_partner(con);
@@ -1950,9 +1995,11 @@ err_unregister:
 	}
 	kfree(connector);
 err_reset:
+	dev_info(ucsi->dev, "UCSI init failed, err_reset: Resetting PPM\n");
 	memset(&ucsi->cap, 0, sizeof(ucsi->cap));
 	ucsi_reset_ppm(ucsi);
 err:
+	dev_info(ucsi->dev, "UCSI init failed, err: Returning with ret=%d\n", ret);
 	return ret;
 }
 
