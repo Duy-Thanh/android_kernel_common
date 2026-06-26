@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9520a3d2_e9cdbb15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4072339
+      },
+      "writtenOn": "2026-06-26T15:42:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d73219fb_bdfdf34a",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "8c457cf59c6a315d0d544e96783c1afcdcb9d992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "237610eb_c7aa9d65",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-06-26T14:30:40Z",
       "side": 1,
       "message": "nit: Please remove this emtpy line in between tags",
+      "revId": "8c457cf59c6a315d0d544e96783c1afcdcb9d992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92436539_c341c4c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4072339
+      },
+      "writtenOn": "2026-06-26T15:42:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "237610eb_c7aa9d65",
       "revId": "8c457cf59c6a315d0d544e96783c1afcdcb9d992",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
