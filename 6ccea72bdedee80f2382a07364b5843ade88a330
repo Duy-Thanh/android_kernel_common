@@ -110,6 +110,24 @@
       "message": "Print statements should include a newline `\\n` character at the end. (I know some existing prints are missing it. That\u0027s a bug.\n```suggestion\n            \"rust_binder: txn {} to node {} (alloc at {:#x})\\n\",\n```",
       "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18740c67_b3453a94",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-26T07:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ea43e7_39f9abad",
+      "revId": "6ccea72bdedee80f2382a07364b5843ade88a330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
