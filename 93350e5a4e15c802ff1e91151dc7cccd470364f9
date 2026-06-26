@@ -51,6 +51,24 @@
       "parentUuid": "48d732a8_3af73bb4",
       "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72972970_601301d1",
+        "filename": "drivers/virt/gunyah/vm_mgr_mem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 2008256
+      },
+      "writtenOn": "2026-06-26T01:40:08Z",
+      "side": 1,
+      "message": "got it.",
+      "parentUuid": "10bf7200_126df6ef",
+      "revId": "93350e5a4e15c802ff1e91151dc7cccd470364f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
