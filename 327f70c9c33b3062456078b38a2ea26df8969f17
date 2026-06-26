@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d831acab_cf9f9307",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-26T04:46:54Z",
+      "side": 1,
+      "message": "6.6 KMI is frozen, you can\u0027t change existing hooks.",
+      "range": {
+        "startLine": 680,
+        "startChar": 23,
+        "endLine": 680,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "63cc867c_f7c310e7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 679,
+                "startChar": 0,
+                "endLine": 680,
+                "endChar": 0
+              },
+              "replacement": "DECLARE_RESTRICTED_HOOK(android_vh_alloc_swap_slot_cache,\n"
+            },
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 681,
+                "startChar": 0,
+                "endLine": 682,
+                "endChar": 0
+              },
+              "replacement": "\tTP_ARGS(cache, entry, bypass), 2);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "327f70c9c33b3062456078b38a2ea26df8969f17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609b7225_400c8c12",
+        "filename": "include/trace/hooks/swapfile.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-06-26T04:46:54Z",
+      "side": 1,
+      "message": "6.6 KMI is frozen, you can\u0027t change existing hooks.",
+      "range": {
+        "startLine": 14,
+        "startChar": 39,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "327f70c9c33b3062456078b38a2ea26df8969f17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
