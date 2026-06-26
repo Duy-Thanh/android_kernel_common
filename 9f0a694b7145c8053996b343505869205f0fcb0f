@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c17e44f_c616fa72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T18:34:24Z",
+      "side": 1,
+      "message": "nit: this is missing the section this change is targeted for, which in this case it should probably be `sched:`",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa7f29a_340b2c0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T18:34:24Z",
+      "side": 1,
+      "message": "nit: drop this, it will be incorrect if this is every cherry-picked to other branches.",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f54577_62e0eefe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T18:34:24Z",
+      "side": 1,
+      "message": "nit: This is duplicated from the seconds paragraph please drop.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c820294_7b8c0379",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-26T18:34:24Z",
+      "side": 1,
+      "message": "Please drop this random emtpy line in between tags.",
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
