@@ -22,6 +22,30 @@
       },
       "revId": "561f8c13d9a36e47aac94997c7179d8efcbf788f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb11b60c_544bbd42",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-26T11:04:54Z",
+      "side": 1,
+      "message": "yes, if it fails at the first page (i \u003d 0) we are doomed",
+      "parentUuid": "db255414_5afccf34",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 45
+      },
+      "revId": "561f8c13d9a36e47aac94997c7179d8efcbf788f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
