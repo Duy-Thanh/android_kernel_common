@@ -50,6 +50,23 @@
       "message": "d271c243392d4c8cd868ac5c23a440971e14201f",
       "revId": "d271c243392d4c8cd868ac5c23a440971e14201f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ce3173_cf9c1034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4578824
+      },
+      "writtenOn": "2026-06-26T22:01:50Z",
+      "side": 1,
+      "message": "4122233: Merge tag \u0027v7.1\u0027 into android-mainline | https://android-review.googlesource.com/c/kernel/common/+/4122233",
+      "revId": "d271c243392d4c8cd868ac5c23a440971e14201f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
