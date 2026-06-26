@@ -82,6 +82,8 @@ static __init void update_static_calls(void)
 
 void __init apic_setup_apic_calls(void)
 {
+	x2apic_phys_early_init();
+
 	/* Ensure that the default APIC has native_eoi populated */
 	apic->native_eoi = apic->eoi;
 	update_static_calls();

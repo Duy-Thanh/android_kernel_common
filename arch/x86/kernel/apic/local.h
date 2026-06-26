@@ -21,6 +21,11 @@ void x2apic_send_IPI_all(int vector);
 void x2apic_send_IPI_allbutself(int vector);
 void x2apic_send_IPI_self(int vector);
 extern u32 x2apic_max_apicid;
+#ifdef CONFIG_X86_X2APIC
+void x2apic_phys_early_init(void);
+#else
+static inline void x2apic_phys_early_init(void) { }
+#endif
 
 /* IPI */
 
