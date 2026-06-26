@@ -16,6 +16,24 @@
       "message": "This is missing the cherry-picked from trailer and your Signed-off-by.\n\na76172963ea2c03f4e9f3ae44b432a9110efdc65",
       "revId": "2a1e4727939a43c95b4f49d2b6b7b3157af9870d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d738517_61436009",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-26T08:12:16Z",
+      "side": 1,
+      "message": "Note that your commit message should look like:\n\n```\nBACKPORT: f2fs: remove the unused flush argument to change_curseg\n\n[ Upstream commit 5bcd655fffaec24e849bda1207446f5cc821713e ]\n\nSigned-off-by: Christoph Hellwig \u003chch@lst.de\u003e\nReviewed-by: Chao Yu \u003cchao@kernel.org\u003e\nSigned-off-by: Jaegeuk Kim \u003cjaegeuk@kernel.org\u003e\nStable-dep-of: 43563069e1c1 (\"f2fs: check curseg-\u003einited before write_sum_page in change_curseg\")\nSigned-off-by: Sasha Levin \u003csashal@kernel.org\u003e\n\nBug: xxx\nChange-Id: xxx\n(cherry ...)\n[description of the backport]\nSigned-off-by: xxx\n```",
+      "parentUuid": "9aa2f50b_12bd9faf",
+      "revId": "2a1e4727939a43c95b4f49d2b6b7b3157af9870d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
