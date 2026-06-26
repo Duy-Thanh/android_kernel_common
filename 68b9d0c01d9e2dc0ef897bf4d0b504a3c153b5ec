@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79fbcd08_365a01d4",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-06-26T13:07:52Z",
+      "side": 1,
+      "message": "Please make sure to remove the `rust_binder:` prefix everywhere.",
+      "revId": "68b9d0c01d9e2dc0ef897bf4d0b504a3c153b5ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
