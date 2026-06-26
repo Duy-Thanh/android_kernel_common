@@ -1,0 +1,156 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eaebf2e_ff92d705",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:03:05Z",
+      "side": 1,
+      "message": "Same wording nit.",
+      "range": {
+        "startLine": 1678,
+        "startChar": 12,
+        "endLine": 1678,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7e262dfb_70affa07",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1678,
+                "startChar": 0,
+                "endLine": 1679,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t     u64 vm_handle)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1684,
+                "startChar": 0,
+                "endLine": 1685,
+                "endChar": 0
+              },
+              "replacement": "\tif (FIELD_GET(FFA_NOTIF_SENDER_ENDP_MASK, endp_id) !\u003d vm_handle) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "30e1ac598ac6a9e43e001e0b5c3fb9be9d77bf7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd819f73_75a443ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:03:05Z",
+      "side": 1,
+      "message": "We\u0027ve now got 5 callers of `hyp_vcpu_to_ffa_handle()` in this function. Use a local variable?",
+      "range": {
+        "startLine": 1913,
+        "startChar": 31,
+        "endLine": 1913,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3399ec2a_86fd5339",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tu64 vm_handle \u003d hyp_vcpu_to_ffa_handle(hyp_vcpu);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1882,
+                "startChar": 0,
+                "endLine": 1883,
+                "endChar": 0
+              },
+              "replacement": "\t\tffa_to_smccc_res_prop(\u0026res, FFA_RET_SUCCESS, vm_handle);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1900,
+                "startChar": 0,
+                "endLine": 1901,
+                "endChar": 0
+              },
+              "replacement": "\t\tdo_ffa_direct_msg(\u0026res, ctxt, vm_handle);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1904,
+                "startChar": 0,
+                "endLine": 1905,
+                "endChar": 0
+              },
+              "replacement": "\t\tdo_ffa_notif_bitmap(\u0026res, ctxt, vm_handle);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1907,
+                "startChar": 0,
+                "endLine": 1908,
+                "endChar": 0
+              },
+              "replacement": "\t\tdo_ffa_notif_bind(\u0026res, ctxt, vm_handle);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1910,
+                "startChar": 0,
+                "endLine": 1911,
+                "endChar": 0
+              },
+              "replacement": "\t\tdo_ffa_notif_unbind(\u0026res, ctxt, vm_handle);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1913,
+                "startChar": 0,
+                "endLine": 1914,
+                "endChar": 0
+              },
+              "replacement": "\t\tdo_ffa_notif_set(\u0026res, ctxt, vm_handle);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "30e1ac598ac6a9e43e001e0b5c3fb9be9d77bf7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
