@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c4615f_8f83acb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-26T08:14:22Z",
+      "side": 1,
+      "message": "Your commit message should look like:\n\n```\nf2fs: check curseg-\u003einited before write_sum_page in change_curseg\n\nIn the __f2fs_init_atgc_curseg-\u003eget_atssr_segment calling,\ncurseg-\u003esegno is NULL_SEGNO, indicating that there is no summary\nblock that needs to be written.\n\nFixes: 093749e296e2 (\"f2fs: support age threshold based garbage collection\")\nSigned-off-by: Yongpeng Yang \u003cyangyongpeng1@oppo.com\u003e\nReviewed-by: Chao Yu \u003cchao@kernel.org\u003e\nSigned-off-by: Jaegeuk Kim \u003cjaegeuk@kernel.org\u003e\n\nBug: xxx\nChange-Id: xxx\n(cherry ...)\nSigned-of-by: xxx\n```",
+      "revId": "c33b7b91a1b784573e114761dd4e9919d054cc0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
