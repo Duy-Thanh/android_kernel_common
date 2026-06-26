@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d617574f_5b229405",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1725,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:05:56Z",
+      "side": 1,
+      "message": "Why is this needed? It\u0027s not part of the upstream change and this is used for the host.",
+      "range": {
+        "startLine": 1717,
+        "startChar": 0,
+        "endLine": 1725,
+        "endChar": 0
+      },
+      "revId": "917193220c10d0612e40a645a60f42a728cb3735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480ac9ca_91bfe56a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1848,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-26T09:05:56Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 1845,
+        "startChar": 0,
+        "endLine": 1848,
+        "endChar": 19
+      },
+      "revId": "917193220c10d0612e40a645a60f42a728cb3735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
