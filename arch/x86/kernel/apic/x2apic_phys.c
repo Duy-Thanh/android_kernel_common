@@ -163,3 +163,13 @@ static struct apic apic_x2apic_phys __ro_after_init = {
 };
 
 apic_driver(apic_x2apic_phys);
+
+void __init x2apic_phys_early_init(void)
+{
+	if (x2apic_enabled()) {
+		apic = &apic_x2apic_phys;
+		if (apic->x2apic_set_max_apicid)
+			apic->max_apic_id = x2apic_max_apicid;
+		pr_info("Switched default APIC to: %s\n", apic->name);
+	}
+}
