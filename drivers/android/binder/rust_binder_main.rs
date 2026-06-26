@@ -46,7 +46,6 @@ mod thread;
 mod trace;
 mod transaction;
 
-
 #[allow(warnings)] // generated bindgen code
 mod binderfs {
     use kernel::bindings::{dentry, inode};
@@ -275,7 +274,14 @@ impl DeliverToRead for DeliverCode {
         Ok(true)
     }
 
-    fn cancel(self: DArc<Self>) {}
+    fn cancel(self: DArc<Self>) {
+        if !self.skip.load(Ordering::Relaxed) {
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_DEAD_TRANSACTION,
+                "undelivered TRANSACTION_COMPLETE"
+            );
+        }
+    }
     fn on_thread_selected(&self, _thread: &Thread) {}
 
     fn should_sync_wakeup(&self) -> bool {
