@@ -16,6 +16,41 @@
       "message": "If this is \"UPSTREAM\" then it will land in android-mainline via the next merge. Please abandon.",
       "revId": "3e5630c05a5cdda931cdfc013c52f42266b64af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1d14f6_07fa42a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4833842
+      },
+      "writtenOn": "2026-06-27T12:39:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "42c09ffc_d2ba3560",
+      "revId": "3e5630c05a5cdda931cdfc013c52f42266b64af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61a70ca_751133cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4833842
+      },
+      "writtenOn": "2026-06-27T12:39:32Z",
+      "side": 1,
+      "message": "Жжг",
+      "revId": "3e5630c05a5cdda931cdfc013c52f42266b64af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
