@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70db782b_b2eae06c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "122969ac_87adc2e4",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ba6bfd9_1354bc53",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-26T13:04:20Z",
       "side": 1,
       "message": "This explains what this commit is doing, but not why.\n\nAlso, it would be nice to include an explanation of why changing `rust_binderfs.c` is required rather than just using the `module!` macro.",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a973578_860d13ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ba6bfd9_1354bc53",
       "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -76,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ab15ac_cc2643a7",
+        "filename": "drivers/android/binder/debug.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fe67b7c_82fb5c4b",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6af0cbc_028a6ac6",
@@ -93,6 +153,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "657685e0_b184c82a",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1365,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6af0cbc_028a6ac6",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb32574f_a4e16de9",
@@ -106,6 +184,24 @@
       "writtenOn": "2026-06-26T13:04:20Z",
       "side": 1,
       "message": "This will print as `rust_binder: binder_deferred_release: 10`, which I don\u0027t think is particularly intuitive.\n```suggestion\n            \"process {} is being released\",\n```",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3508c7a3_934fb8bf",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1377,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb32574f_a4e16de9",
       "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -145,6 +241,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ea7dd2_3d347481",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1685,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e080f5f8_e79dec74",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceb3dee1_00c97bd2",
@@ -162,6 +276,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17f32ba_9175645c",
+        "filename": "drivers/android/binder/rust_binder_main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb3dee1_00c97bd2",
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f145b1c_da2255de",
@@ -175,6 +307,30 @@
       "writtenOn": "2026-06-26T13:04:20Z",
       "side": 1,
       "message": "A few notes on this. This uses the node debug ids, but they\u0027re not particularly useful to anyone seeing the log. Instead, it would be more useful to include the process id of the sender and receiver.\n\nFurthermore, I think this is not the best location for this. This is now part of `Transaction::new` and not `Transaction::new_reply`, which means that it\u0027s not printed for reply transactions.\n\nFinally, we should avoid printing the `data_address` field. In general, we should not print pointer values. Because of [ASLR](https://en.wikipedia.org/wiki/Address_space_layout_randomization), we should keep pointer values private.\n\nMy suggestion here would be to move this log statement to a different CL. That\u0027s because the purpose of this CL is to introduce the debug logging feature, and so this CL should focus on that and not do anything else. Keeping the simplest possible prints in this CL only is more useful (e.g. process open/close is good).",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 10
+      },
+      "revId": "5b956b43edf5da363b4b6295fcdab47bd7c5a212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733dfdf0_0d2758c7",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 4926609
+      },
+      "writtenOn": "2026-06-28T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f145b1c_da2255de",
       "range": {
         "startLine": 179,
         "startChar": 0,
