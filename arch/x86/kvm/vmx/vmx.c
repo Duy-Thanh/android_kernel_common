@@ -5039,14 +5039,10 @@ static int vmx_alloc_ipiv_pid_table(struct kvm *kvm)
 #else
 	struct kvm *shared_kvm = to_pkvm(kvm)->shared_kvm;
 	struct kvm_vmx *kvm_vmx = to_kvm_vmx(kvm);
-	struct kvm_vmx *shared_kvm_vmx;
-	u32 max_vcpu_ids;
 	u64 *pid_table;
-	int ret, mode;
+	int ret;
 
-	mode = READ_ONCE(shared_kvm->arch.irqchip_mode);
-
-	if (!enable_ipiv || (mode != KVM_IRQCHIP_KERNEL && mode != KVM_IRQCHIP_SPLIT))
+	if (!irqchip_in_kernel(kvm) || !enable_ipiv)
 		return 0;
 
 	pkvm_spin_lock(&to_pkvm(kvm)->lock);
@@ -5057,17 +5053,12 @@ static int vmx_alloc_ipiv_pid_table(struct kvm *kvm)
 		goto unlock;
 	}
 
-	max_vcpu_ids = READ_ONCE(shared_kvm->arch.max_vcpu_ids);
-	shared_kvm_vmx = to_kvm_vmx(shared_kvm);
-	pid_table = kern_pkvm_va(READ_ONCE(shared_kvm_vmx->pid_table));
-
-	if (max_vcpu_ids == 0 || max_vcpu_ids > KVM_MAX_VCPU_IDS || !pid_table) {
+	pid_table = kern_pkvm_va(READ_ONCE(to_kvm_vmx(shared_kvm)->pid_table));
+	if (!pid_table) {
 		ret = -EINVAL;
 		goto unlock;
 	}
 
-	kvm->arch.irqchip_mode = mode;
-	kvm->arch.max_vcpu_ids = max_vcpu_ids;
 	/*
 	 * Although the contents in pid_table is not secret since it is
 	 * constructed following the SDM, still donate the pid_table pages to
