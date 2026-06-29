@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa657c62_1dd43859",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T14:34:43Z",
+      "side": 1,
+      "message": "We can probably get rid of the method and use ___pkvm_host_donate_hyp_prot directly",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c1d0540c_52bb8f58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/setup.c",
+              "range": {
+                "startLine": 328,
+                "startChar": 0,
+                "endLine": 341,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/setup.c",
+              "range": {
+                "startLine": 355,
+                "startChar": 0,
+                "endLine": 356,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d ___pkvm_host_donate_hyp_prot(reg-\u003estart \u003e\u003e PAGE_SHIFT,\n\t\t\t\t\t\t\t    reg-\u003esize \u003e\u003e PAGE_SHIFT,\n\t\t\t\t\t\t\t    true, PAGE_HYP_DEVICE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0951af6559136683147ad315c6bf039ac27b1434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
