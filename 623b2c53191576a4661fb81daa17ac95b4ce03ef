@@ -16,6 +16,24 @@
       "message": "Left a comment on the upstream posting",
       "revId": "623b2c53191576a4661fb81daa17ac95b4ce03ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "473c7e9a_ac199734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T09:39:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26d0c120_24adf036",
+      "revId": "623b2c53191576a4661fb81daa17ac95b4ce03ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
