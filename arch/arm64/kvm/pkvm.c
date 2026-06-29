@@ -52,6 +52,7 @@
 
 DEFINE_STATIC_KEY_FALSE(kvm_protected_mode_initialized);
 
+size_t ffa_max_nr_constituents = KVM_FFA_MAX_NR_CONSTITUENTS;
 static phys_addr_t pvmfw_base;
 static phys_addr_t pvmfw_size;
 
@@ -64,6 +65,7 @@ phys_addr_t hyp_mem_size;
 
 extern struct pkvm_device *kvm_nvhe_sym(registered_devices);
 extern u32 kvm_nvhe_sym(registered_devices_nr);
+extern size_t kvm_nvhe_sym(ffa_max_nr_constituents);
 
 static enum {
 	PKVM_HOST_S2_CMA,
@@ -319,6 +321,17 @@ static int __init early_hyp_lm_size_mb_cfg(char *arg)
 early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
 DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
+
+static int __init early_ffa_max_nr_constituents(char *arg)
+{
+
+	int ret= kstrtoul(arg, 10, &ffa_max_nr_constituents);
+	kvm_nvhe_sym(ffa_max_nr_constituents) = ffa_max_nr_constituents;
+
+	return ret;
+}
+
+early_param("kvm-arm.ffa_max_nr_constituents", early_ffa_max_nr_constituents);
 
 void __init kvm_hyp_reserve(void)
 {
