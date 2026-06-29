@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e825a13_a8b20f25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-29T21:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caa7f29a_340b2c0c",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf2c65b4_368fad66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-29T21:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c17e44f_c616fa72",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09f54577_62e0eefe",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-06-26T18:34:24Z",
       "side": 1,
       "message": "nit: This is duplicated from the seconds paragraph please drop.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41790f9b_5e72be99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-29T21:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09f54577_62e0eefe",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -101,6 +173,24 @@
       "side": 1,
       "message": "Thanks for the review. All nits addressed in PS\u003cN\u003e:\n- Added sched: to the subject\n- Dropped \"for 6.18\"\n- Removed duplicated paragraph\n- Removed empty line between tags",
       "parentUuid": "2c820294_7b8c0379",
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22171961_d7db334a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-06-29T21:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8753655c_4413643a",
       "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
