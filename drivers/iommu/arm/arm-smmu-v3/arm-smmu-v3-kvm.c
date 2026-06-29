@@ -227,14 +227,10 @@ static struct iommu_domain *kvm_arm_smmu_domain_alloc(unsigned type)
 {
 	struct kvm_arm_smmu_domain *kvm_smmu_domain;
 
-	/*
-	 * We don't support
-	 * - IOMMU_DOMAIN_DMA_FQ because lazy unmap would clash with memory
-	 *   donation to guests.
-	 */
 	if (type != IOMMU_DOMAIN_DMA &&
 	    type != IOMMU_DOMAIN_UNMANAGED &&
 	    type != IOMMU_DOMAIN_IDENTITY &&
+	    type != IOMMU_DOMAIN_DMA_FQ &&
 		type != IOMMU_DOMAIN_BLOCKED)
 		return ERR_PTR(-EOPNOTSUPP);
 
@@ -483,6 +479,8 @@ static bool kvm_arm_smmu_capable(struct device *dev, enum iommu_cap cap)
 	case IOMMU_CAP_CACHE_COHERENCY:
 		return master->smmu->features & ARM_SMMU_FEAT_COHERENCY;
 	case IOMMU_CAP_NOEXEC:
+	case IOMMU_CAP_DEFERRED_FLUSH:
+		return true;
 	default:
 		return false;
 	}
@@ -514,6 +512,27 @@ static size_t kvm_arm_smmu_unmap_pages(struct iommu_domain *domain,
 		return 0;
 
 	return kvm_iommu_unmap_pages(kvm_smmu_domain->id, iova, pgsize, pgcount, sync);
+}
+
+static void kvm_arm_smmu_iotlb_sync(struct iommu_domain *domain,
+				    struct iommu_iotlb_gather *gather)
+{
+	struct kvm_arm_smmu_domain *kvm_smmu_domain = to_kvm_smmu_domain(domain);
+
+	if (!kvm_smmu_domain->smmu)
+		return;
+
+	kvm_iommu_iotlb_sync_domain(kvm_smmu_domain->id);
+}
+
+static void kvm_arm_smmu_flush_iotlb_all(struct iommu_domain *domain)
+{
+	struct kvm_arm_smmu_domain *kvm_smmu_domain = to_kvm_smmu_domain(domain);
+
+	if (!kvm_smmu_domain->smmu)
+		return;
+
+	kvm_iommu_iotlb_sync_domain(kvm_smmu_domain->id);
 }
 
 static phys_addr_t kvm_arm_smmu_iova_to_phys(struct iommu_domain *domain,
@@ -647,11 +666,13 @@ static struct iommu_ops kvm_arm_smmu_ops = {
 		.free		= kvm_arm_smmu_domain_free,
 		.map_pages	= kvm_arm_smmu_map_pages,
 		.unmap_pages	= kvm_arm_smmu_unmap_pages,
+		.iotlb_sync	= kvm_arm_smmu_iotlb_sync,
 		.iova_to_phys	= kvm_arm_smmu_iova_to_phys,
 		.set_dev_pasid	= kvm_arm_smmu_set_dev_pasid,
 		.alloc_cookie_sg = kvm_arm_smmu_alloc_cookie_sg,
 		.add_deferred_map_sg = kvm_arm_smmu_add_deferred_map_sg,
 		.consume_deferred_map_sg = kvm_arm_smmu_consume_deferred_map_sg,
+		.flush_iotlb_all = kvm_arm_smmu_flush_iotlb_all,
 	}
 };
 
