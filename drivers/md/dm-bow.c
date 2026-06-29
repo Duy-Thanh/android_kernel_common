@@ -599,6 +599,7 @@ static void dm_bow_dtr(struct dm_target *ti)
 	struct bow_context *bc = (struct bow_context *) ti->private;
 	struct kobject *kobj;
 
+<<<<<<< HEAD   (c6284a493b8970f7095ab0d09aa25240d0fda41c UPSTREAM: Bluetooth: RFCOMM: hold listener socket in rfcomm_)
 	mutex_lock(&bc->ranges_lock);
 	while (rb_first(&bc->ranges)) {
 		struct bow_range *br = container_of(rb_first(&bc->ranges),
@@ -614,12 +615,51 @@ static void dm_bow_dtr(struct dm_target *ti)
 	if (bc->bufio)
 		dm_bufio_client_destroy(bc->bufio);
 
+||||||| BASE   (7eebb4e1420ffe868b6c6e50dd309ced05fe428d ANDROID: gki_defconfig: Enable CONFIG_CRYPTO_SHA512)
+	if (bc->workqueue)
+		destroy_workqueue(bc->workqueue);
+	if (bc->bufio)
+		dm_bufio_client_destroy(bc->bufio);
+
+=======
+>>>>>>> CHANGE (902088f65dbd8f3daeddd90f249acd0215289f9c ANDROID: dm-bow: Fix Use-After-free in dm_bow_dtr())
 	kobj = &bc->kobj_holder.kobj;
 	if (kobj->state_initialized) {
 		kobject_put(kobj);
 		wait_for_completion(dm_get_completion_from_kobject(kobj));
 	}
 
+<<<<<<< HEAD   (c6284a493b8970f7095ab0d09aa25240d0fda41c UPSTREAM: Bluetooth: RFCOMM: hold listener socket in rfcomm_)
+||||||| BASE   (7eebb4e1420ffe868b6c6e50dd309ced05fe428d ANDROID: gki_defconfig: Enable CONFIG_CRYPTO_SHA512)
+	mutex_lock(&bc->ranges_lock);
+	while (rb_first(&bc->ranges)) {
+		struct bow_range *br = container_of(rb_first(&bc->ranges),
+					      struct bow_range, node);
+
+		rb_erase(&br->node, &bc->ranges);
+		kfree(br);
+	}
+	mutex_unlock(&bc->ranges_lock);
+
+	mutex_destroy(&bc->ranges_lock);
+=======
+	if (bc->workqueue)
+		destroy_workqueue(bc->workqueue);
+	if (bc->bufio)
+		dm_bufio_client_destroy(bc->bufio);
+
+	mutex_lock(&bc->ranges_lock);
+	while (rb_first(&bc->ranges)) {
+		struct bow_range *br = container_of(rb_first(&bc->ranges),
+					      struct bow_range, node);
+
+		rb_erase(&br->node, &bc->ranges);
+		kfree(br);
+	}
+	mutex_unlock(&bc->ranges_lock);
+
+	mutex_destroy(&bc->ranges_lock);
+>>>>>>> CHANGE (902088f65dbd8f3daeddd90f249acd0215289f9c ANDROID: dm-bow: Fix Use-After-free in dm_bow_dtr())
 	kfree(bc->log_sector);
 	kfree(bc);
 }
