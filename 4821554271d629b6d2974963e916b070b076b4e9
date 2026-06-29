@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c43904_8f82b141",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-06-29T08:05:02Z",
+      "side": 1,
+      "message": "I believe it\u0027s better to keep the private file, and create the new one `include/linux/vfio_platform.h` just for reset without having to expose all those internal structs to the rest of the kernel.",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "4821554271d629b6d2974963e916b070b076b4e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
