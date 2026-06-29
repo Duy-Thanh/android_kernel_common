@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c43238b_5d101dd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-06-29T16:38:44Z",
+      "side": 1,
+      "message": "This fixes a bug in an earlier patch series: https://android-review.git.corp.google.com/c/kernel/common/+/4040067",
+      "revId": "dc75220fedec74ffa08709c2427c1f4c62e62d89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
