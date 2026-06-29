@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "152ad7d8_244587f9",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2435,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-29T13:04:06Z",
+      "side": 1,
+      "message": "makes sense. Done",
+      "parentUuid": "ec2fafc5_a42da126",
+      "revId": "67d416144e694a9622592260d9799ca475cd382c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b66a5006_e897d8ca",
@@ -127,6 +145,30 @@
       "side": 1,
       "message": "Agree, option 2 seems a good fit here. Will do",
       "parentUuid": "24a63327_2cbf2c29",
+      "range": {
+        "startLine": 2455,
+        "startChar": 34,
+        "endLine": 2455,
+        "endChar": 49
+      },
+      "revId": "67d416144e694a9622592260d9799ca475cd382c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d935d1_c1035b90",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-06-29T13:04:06Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "613ef566_27681fc9",
       "range": {
         "startLine": 2455,
         "startChar": 34,
