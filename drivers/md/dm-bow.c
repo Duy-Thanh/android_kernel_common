@@ -610,16 +610,20 @@ static void dm_bow_dtr(struct dm_target *ti)
 	struct bow_context *bc = (struct bow_context *) ti->private;
 	struct kobject *kobj;
 
-	if (bc->workqueue)
-		destroy_workqueue(bc->workqueue);
-	if (bc->bufio)
-		dm_bufio_client_destroy(bc->bufio);
+	DMINFO("[VOVA] Destroying bow context");
 
 	kobj = &bc->kobj_holder.kobj;
 	if (kobj->state_initialized) {
 		kobject_put(kobj);
 		wait_for_completion(dm_get_completion_from_kobject(kobj));
 	}
+
+	DMINFO("[VOVA] Destroying bow context done");
+
+	if (bc->workqueue)
+		destroy_workqueue(bc->workqueue);
+	if (bc->bufio)
+		dm_bufio_client_destroy(bc->bufio);
 
 	mutex_lock(&bc->ranges_lock);
 	while (rb_first(&bc->ranges)) {
@@ -703,6 +707,7 @@ static int dm_bow_ctr_optional(struct dm_target *ti, unsigned int argc, char **a
 
 static int dm_bow_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 {
+	DMINFO("[VOVA] Creating bow context");
 	struct bow_context *bc;
 	struct bow_range *br;
 	int ret;
@@ -804,6 +809,7 @@ bad:
 
 static void dm_bow_resume(struct dm_target *ti)
 {
+	DMINFO("[VOVA] Resuming bow context");
 	struct mapped_device *md = dm_table_get_md(ti->table);
 	struct bow_context *bc = ti->private;
 	int ret;
