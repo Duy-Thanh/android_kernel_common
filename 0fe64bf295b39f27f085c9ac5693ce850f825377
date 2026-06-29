@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f2d5dc_91294386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-29T23:16:18Z",
+      "side": 1,
+      "message": "This commit changed the abi_gki_aarch64.stg file mode from 644 to 755. Please resubmit without modifying the mode bits of the stg file.",
+      "revId": "0fe64bf295b39f27f085c9ac5693ce850f825377",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
