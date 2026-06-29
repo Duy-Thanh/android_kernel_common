@@ -439,7 +439,7 @@ int kvm_iommu_map_pages(pkvm_handle_t domain_id, unsigned long iova,
 EXPORT_SYMBOL(kvm_iommu_map_pages);
 
 size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
-			     size_t pgsize, size_t pgcount)
+			     size_t pgsize, size_t pgcount, bool sync)
 {
 	size_t unmapped;
 	size_t total_unmapped = 0;
@@ -448,7 +448,7 @@ size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
 
 	do {
 		res = kvm_call_hyp_nvhe_smccc(__pkvm_host_iommu_unmap_pages,
-					      domain_id, iova, pgsize, pgcount);
+					      domain_id, iova, pgsize, pgcount, sync);
 		unmapped = res.a1;
 		total_unmapped += unmapped;
 		iova += unmapped;
@@ -480,6 +480,12 @@ int kvm_iommu_iotlb_sync_map(pkvm_handle_t domain_id, unsigned long iova, size_t
 	return kvm_call_hyp_nvhe(__pkvm_host_iommu_iotlb_sync_map, domain_id, iova, size);
 }
 EXPORT_SYMBOL(kvm_iommu_iotlb_sync_map);
+
+int kvm_iommu_iotlb_sync_domain(pkvm_handle_t domain_id)
+{
+	return kvm_call_hyp_nvhe(__pkvm_host_iommu_iotlb_sync, domain_id);
+}
+EXPORT_SYMBOL(kvm_iommu_iotlb_sync_domain);
 
 size_t kvm_iommu_map_sg(pkvm_handle_t domain_id, struct kvm_iommu_sg *sg,
 			unsigned long iova, unsigned int nent,

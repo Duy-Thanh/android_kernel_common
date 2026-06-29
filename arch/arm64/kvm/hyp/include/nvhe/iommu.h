@@ -26,7 +26,7 @@ size_t kvm_iommu_map_pages(pkvm_handle_t domain_id,
 			   unsigned long iova, phys_addr_t paddr, size_t pgsize,
 			   size_t pgcount, int prot, unsigned long *mapped);
 size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
-			     size_t pgsize, size_t pgcount);
+			     size_t pgsize, size_t pgcount, bool sync);
 int kvm_iommu_attach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id, u32 endpoint_id,
 				u32 pasid, unsigned long flags, void *s1_desc_hva,
 				size_t s1_desc_size);
@@ -37,6 +37,7 @@ int kvm_iommu_iotlb_inv_nested_domain(pkvm_handle_t domain_id, unsigned long iov
 int kvm_iommu_nested_cfg_sync(pkvm_handle_t iommu_id, void *cmd_desc, size_t cmd_desc_size);
 phys_addr_t kvm_iommu_iova_to_phys(pkvm_handle_t domain_id, unsigned long iova);
 int kvm_iommu_iotlb_sync_map(pkvm_handle_t domain_id, unsigned long iova, size_t size);
+int kvm_iommu_iotlb_sync_domain(pkvm_handle_t domain_id);
 bool kvm_iommu_host_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr);
 size_t kvm_iommu_map_sg(pkvm_handle_t domain, unsigned long iova, struct kvm_iommu_sg *sg,
 			unsigned int nent, unsigned int prot);

@@ -875,7 +875,7 @@ void kvm_iommu_iotlb_gather_add_page(struct kvm_hyp_iommu_domain *domain,
 }
 
 size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
-			     size_t pgsize, size_t pgcount)
+			     size_t pgsize, size_t pgcount, bool sync)
 {
 	size_t size;
 	size_t unmapped;
@@ -903,6 +903,7 @@ size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
 		return 0;
 
 	iommu_iotlb_gather_init(&iotlb_gather);
+	iotlb_gather.queued = !sync;
 	/*
 	 * Unlike map, the common code doesn't call the __pkvm_host_unuse_dma,
 	 * because this means that we need either walk the table using iova_to_phys
@@ -915,7 +916,8 @@ size_t kvm_iommu_unmap_pages(pkvm_handle_t domain_id, unsigned long iova,
 	 */
 	unmapped = kvm_iommu_ops->unmap_pages(domain, iova, pgsize,
 						pgcount, &iotlb_gather);
-	kvm_iommu_iotlb_sync(domain, &iotlb_gather);
+	if (sync)
+		kvm_iommu_iotlb_sync(domain, &iotlb_gather);
 
 	domain_put(domain);
 	return unmapped;
@@ -940,6 +942,25 @@ phys_addr_t kvm_iommu_iova_to_phys(pkvm_handle_t domain_id, unsigned long iova)
 	phys = kvm_iommu_ops->iova_to_phys(domain, iova);
 	domain_put(domain);
 	return phys;
+}
+
+int kvm_iommu_iotlb_sync_domain(pkvm_handle_t domain_id)
+{
+	struct kvm_hyp_iommu_domain *domain;
+
+	if (!kvm_iommu_ops || !kvm_iommu_ops->iotlb_sync)
+		return -ENODEV;
+
+	if (domain_id == KVM_IOMMU_DOMAIN_IDMAP_ID)
+		return 0;
+
+	domain = handle_to_domain(domain_id);
+	if (!domain || domain_get(domain))
+		return -EINVAL;
+
+	kvm_iommu_ops->iotlb_sync(domain, NULL);
+	domain_put(domain);
+	return 0;
 }
 
 bool kvm_iommu_host_dabt_handler(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)

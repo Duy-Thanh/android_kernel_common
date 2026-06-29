@@ -508,11 +508,12 @@ static size_t kvm_arm_smmu_unmap_pages(struct iommu_domain *domain,
 				       struct iommu_iotlb_gather *iotlb_gather)
 {
 	struct kvm_arm_smmu_domain *kvm_smmu_domain = to_kvm_smmu_domain(domain);
+	bool sync = !iommu_iotlb_gather_queued(iotlb_gather);
 
 	if (!kvm_smmu_domain->smmu)
 		return 0;
 
-	return kvm_iommu_unmap_pages(kvm_smmu_domain->id, iova, pgsize, pgcount);
+	return kvm_iommu_unmap_pages(kvm_smmu_domain->id, iova, pgsize, pgcount, sync);
 }
 
 static phys_addr_t kvm_arm_smmu_iova_to_phys(struct iommu_domain *domain,

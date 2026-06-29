@@ -362,7 +362,7 @@ static bool pkvm_guest_iommu_unmap(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_cod
 		return true;
 	}
 
-	unmapped = kvm_iommu_unmap_pages(domain, iova, PAGE_SIZE, size / PAGE_SIZE);
+	unmapped = kvm_iommu_unmap_pages(domain, iova, PAGE_SIZE, size / PAGE_SIZE, true);
 	if (unmapped < size) {
 		if (!__need_req(vcpu)) {
 			ret = SMCCC_RET_INVALID_PARAMETER;
