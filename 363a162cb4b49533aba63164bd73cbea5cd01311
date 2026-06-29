@@ -46,6 +46,30 @@
       },
       "revId": "363a162cb4b49533aba63164bd73cbea5cd01311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "120d4a99_9d66af13",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T16:08:30Z",
+      "side": 1,
+      "message": "Ok, I checked and it seem that even though it is not present in D1.9.1.1, the section `Table C1-3 Naming of general-purpose registers, the zero register, and the stack pointer` lists it. I think that a data abort caused by this instruction might generate it: `str xzr, [x0]`. Mostafa already fixed this upstream here: https://lore.kernel.org/all/20260501111928.259252-15-smostafa@google.com/. I will have to fold the fix",
+      "parentUuid": "faf469e2_5d522abd",
+      "range": {
+        "startLine": 895,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 47
+      },
+      "revId": "363a162cb4b49533aba63164bd73cbea5cd01311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
