@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 #include <linux/hugetlb.h>
-#include <linux/pgalloc.h>
-
-#include <asm/tlb.h>
+#include <asm-generic/tlb.h>
+#include <asm/pgalloc.h>
 
 #include "internal.h"
 
