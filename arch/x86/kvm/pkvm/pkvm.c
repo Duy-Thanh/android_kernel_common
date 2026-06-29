@@ -567,7 +567,10 @@ static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate 
 	/* Set cpu to -1 to indicate it is not loaded on any CPU */
 	vcpu->cpu = -1;
 
-	vcpu->vcpu_id = pkvm_vcpu->shared_vcpu->vcpu_id;
+	vcpu->vcpu_id = READ_ONCE(pkvm_vcpu->shared_vcpu->vcpu_id);
+	if (vcpu->vcpu_id < 0 || vcpu->vcpu_id >= kvm->arch.max_vcpu_ids)
+		return -EINVAL;
+
 	vcpu->arch.last_vmentry_cpu = -1;
 	vcpu->arch.regs_avail = ~0;
 	vcpu->arch.regs_dirty = ~0;
