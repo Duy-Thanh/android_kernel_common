@@ -85,6 +85,24 @@
       "message": "Please drop this random emtpy line in between tags.",
       "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8753655c_4413643a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-06-29T02:11:34Z",
+      "side": 1,
+      "message": "Thanks for the review. All nits addressed in PS\u003cN\u003e:\n- Added sched: to the subject\n- Dropped \"for 6.18\"\n- Removed duplicated paragraph\n- Removed empty line between tags",
+      "parentUuid": "2c820294_7b8c0379",
+      "revId": "9f0a694b7145c8053996b343505869205f0fcb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
