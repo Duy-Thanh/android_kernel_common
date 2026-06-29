@@ -944,10 +944,17 @@ static int hugepage_vma_revalidate(struct mm_struct *mm, unsigned long address,
 	return SCAN_SUCCEED;
 }
 
-static inline int check_pmd_state(pmd_t *pmd)
+static int find_pmd_or_thp_or_none(struct mm_struct *mm,
+				   unsigned long address,
+				   pmd_t **pmd)
 {
-	pmd_t pmde = pmdp_get_lockless(pmd);
+	pmd_t pmde;
 
+	*pmd = mm_find_pmd(mm, address);
+	if (!*pmd)
+		return SCAN_PMD_NULL;
+
+	pmde = pmdp_get_lockless(*pmd);
 	if (pmd_none(pmde))
 		return SCAN_PMD_NONE;
 	if (!pmd_present(pmde))
@@ -959,17 +966,6 @@ static inline int check_pmd_state(pmd_t *pmd)
 	if (pmd_bad(pmde))
 		return SCAN_PMD_NULL;
 	return SCAN_SUCCEED;
-}
-
-static int find_pmd_or_thp_or_none(struct mm_struct *mm,
-				   unsigned long address,
-				   pmd_t **pmd)
-{
-	*pmd = mm_find_pmd(mm, address);
-	if (!*pmd)
-		return SCAN_PMD_NULL;
-
-	return check_pmd_state(*pmd);
 }
 
 static int check_pmd_still_valid(struct mm_struct *mm,
@@ -1721,7 +1717,7 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 		pmd_t *pmd, pgt_pmd;
 		spinlock_t *pml;
 		spinlock_t *ptl;
-		bool success = false;
+		bool skipped_uffd = false;
 
 		/*
 		 * Check vma->anon_vma to exclude MAP_PRIVATE mappings that
@@ -1758,19 +1754,6 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 		mmu_notifier_invalidate_range_start(&range);
 
 		pml = pmd_lock(mm, pmd);
-		/*
-		 * The lock of new_folio is still held, we will be blocked in
-		 * the page fault path, which prevents the pte entries from
-		 * being set again. So even though the old empty PTE page may be
-		 * concurrently freed and a new PTE page is filled into the pmd
-		 * entry, it is still empty and can be removed.
-		 *
-		 * So here we only need to recheck if the state of pmd entry
-		 * still meets our requirements, rather than checking pmd_same()
-		 * like elsewhere.
-		 */
-		if (check_pmd_state(pmd) != SCAN_SUCCEED)
-			goto drop_pml;
 		ptl = pte_lockptr(mm, pmd);
 		if (ptl != pml)
 			spin_lock_nested(ptl, SINGLE_DEPTH_NESTING);
@@ -1784,20 +1767,20 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 		 * repeating the anon_vma check protects from one category,
 		 * and repeating the userfaultfd_wp() check from another.
 		 */
-		if (likely(!vma->anon_vma && !userfaultfd_wp(vma))) {
+		if (unlikely(vma->anon_vma || userfaultfd_wp(vma))) {
+			skipped_uffd = true;
+		} else {
 			pgt_pmd = pmdp_collapse_flush(vma, addr, pmd);
 			pmdp_get_lockless_sync();
-			success = true;
 		}
 
 		if (ptl != pml)
 			spin_unlock(ptl);
-drop_pml:
 		spin_unlock(pml);
 
 		mmu_notifier_invalidate_range_end(&range);
 
-		if (success) {
+		if (!skipped_uffd) {
 			mm_dec_nr_ptes(mm);
 			page_table_check_pte_clear_range(mm, addr, pgt_pmd);
 			pte_free_defer(mm, pmd_pgtable(pgt_pmd));
