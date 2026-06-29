@@ -1364,7 +1364,18 @@ static void arm_cmn_clear_state(struct arm_cmn *cmn, u32 state)
 
 static void arm_cmn_pmu_enable(struct pmu *pmu)
 {
-	arm_cmn_clear_state(to_cmn(pmu), CMN_STATE_DISABLED);
+	struct arm_cmn *cmn = to_cmn(pmu);
+	int i;
+
+	arm_cmn_clear_state(cmn, CMN_STATE_DISABLED);
+
+	for (i = 0; i < cmn->num_dtcs; ++i) {
+		/* Re-enable DTC in case it was power-gated during idle */
+		writel_relaxed(CMN_DT_DTC_CTL_DT_EN, cmn->dtc[i].base + CMN_DT_DTC_CTL);
+
+		writel_relaxed(CMN_DT_PMCR_PMU_EN | CMN_DT_PMCR_OVFL_INTR_EN,
+			       cmn->dtc[i].base + CMN_DT_PMCR);
+	}
 }
 
 static void arm_cmn_pmu_disable(struct pmu *pmu)
