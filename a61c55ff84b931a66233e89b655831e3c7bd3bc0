@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1037763f_984c6d15",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5216,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T15:20:13Z",
+      "side": 1,
+      "message": "Right, thanks for raising this, I will fold the fix/",
+      "parentUuid": "faa6fc92_823fb110",
+      "range": {
+        "startLine": 5216,
+        "startChar": 2,
+        "endLine": 5216,
+        "endChar": 46
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6446c306_fd022b8f",
         "filename": "drivers/irqchip/irq-gic-v3-its.c",
         "patchSetId": 1
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35d8ea03_93974845",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5228,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T15:20:13Z",
+      "side": 1,
+      "message": "The issue is legit, I wonder if I can do the allocation up-front before the spinlock is acquired",
+      "parentUuid": "6446c306_fd022b8f",
+      "range": {
+        "startLine": 5228,
+        "startChar": 45,
+        "endLine": 5228,
+        "endChar": 68
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace9f413_1e63b46d",
         "filename": "drivers/irqchip/irq-gic-v3-its.c",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2026-06-25T13:51:51Z",
       "side": 1,
       "message": "This is redundant, because the irq\u0027s were saved on the first ITS instance. Please see aosp/4141175 with suggestion how to address it.",
+      "range": {
+        "startLine": 5290,
+        "startChar": 0,
+        "endLine": 5290,
+        "endChar": 48
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc962421_bd3571ea",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5290,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T15:20:13Z",
+      "side": 1,
+      "message": "Will fold the fix, thanks",
+      "parentUuid": "ace9f413_1e63b46d",
       "range": {
         "startLine": 5290,
         "startChar": 0,
