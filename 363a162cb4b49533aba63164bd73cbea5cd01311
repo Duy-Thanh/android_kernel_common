@@ -22,6 +22,30 @@
       },
       "revId": "363a162cb4b49533aba63164bd73cbea5cd01311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf469e2_5d522abd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-06-29T14:52:37Z",
+      "side": 1,
+      "message": "let me cross check this with Mostafa. While reading the ARM arch manual I found out that the SRT can be one of the fields in `D1.9.1.1 Mapping of the general-purpose registers between the Execution states` but there is no index 31",
+      "parentUuid": "b7fbbfb9_d3817ab2",
+      "range": {
+        "startLine": 895,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 47
+      },
+      "revId": "363a162cb4b49533aba63164bd73cbea5cd01311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
