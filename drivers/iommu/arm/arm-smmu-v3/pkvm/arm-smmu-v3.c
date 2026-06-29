@@ -106,6 +106,7 @@ struct hyp_arm_smmu_v3_domain {
 	u32				type;
 	hyp_spinlock_t			pgt_lock;
 	struct io_pgtable		*pgtable;
+	bool				tainted;
 };
 
 static struct hyp_arm_smmu_v3_device *to_smmu(struct kvm_hyp_iommu *iommu)
@@ -722,10 +723,14 @@ static int smmu_alloc_domain(struct kvm_hyp_iommu_domain *domain, int type)
 	return 0;
 }
 
+static void remove_lazy_domain(struct hyp_arm_smmu_v3_domain *domain);
+
 static void smmu_free_domain(struct kvm_hyp_iommu_domain *domain)
 {
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
 	struct domain_iommu_node *iommu_node, *temp;
+
+	remove_lazy_domain(smmu_domain);
 
 	if (smmu_domain->pgtable)
 		kvm_arm_io_pgtable_free(smmu_domain->pgtable);
@@ -959,10 +964,58 @@ static const struct iommu_flush_ops smmu_tlb_ops = {
 	.free_leaf	= smmu_free_leaf,
 };
 
-static void smmu_iotlb_sync(struct kvm_hyp_iommu_domain *domain,
-			    struct iommu_iotlb_gather *gather)
+#define MAX_LAZY_DOMAINS 16
+static struct hyp_arm_smmu_v3_domain *lazy_domains[MAX_LAZY_DOMAINS];
+static int num_lazy_domains;
+static DEFINE_HYP_SPINLOCK(lazy_domains_lock);
+
+static bool add_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
 {
-	size_t size;
+	bool added = false;
+
+	hyp_spin_lock(&lazy_domains_lock);
+	if (domain->tainted) {
+		added = true;
+		goto out;
+	}
+
+	if (num_lazy_domains < MAX_LAZY_DOMAINS) {
+		lazy_domains[num_lazy_domains++] = domain;
+		domain->tainted = true;
+		added = true;
+	}
+out:
+	hyp_spin_unlock(&lazy_domains_lock);
+	return added;
+}
+
+static void remove_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
+{
+	int i;
+	bool was_tainted = false;
+
+	hyp_spin_lock(&lazy_domains_lock);
+	for (i = 0; i < num_lazy_domains; i++) {
+		if (lazy_domains[i] == domain) {
+			lazy_domains[i] = lazy_domains[--num_lazy_domains];
+			break;
+		}
+	}
+
+	if (domain->tainted) {
+		domain->tainted = false;
+		was_tainted = true;
+	}
+	hyp_spin_unlock(&lazy_domains_lock);
+
+	if (was_tainted)
+		smmu_tlb_flush_all(domain->domain);
+}
+
+static void __smmu_iotlb_sync(struct kvm_hyp_iommu_domain *domain,
+			      unsigned long iova, size_t size, size_t pgsize,
+			      bool lazy)
+{
 	struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
 	struct io_pgtable *pgtable = smmu_domain->pgtable;
 	struct arm_lpae_io_pgtable *data = io_pgtable_to_data(pgtable);
@@ -974,16 +1027,35 @@ static void smmu_iotlb_sync(struct kvm_hyp_iommu_domain *domain,
 		.data = &wd,
 	};
 
-	if (!gather->pgsize)
+	if (!size)
 		return;
-	size = gather->end - gather->start + 1;
-	smmu_tlb_inv_range(domain, gather->start, size,  gather->pgsize, true);
+
+	if (!lazy)
+		smmu_tlb_inv_range(domain, iova, size, pgsize, true);
 
 	/*
 	 * Now decrement the refcount of unmapped pages thanks to
 	 * IO_PGTABLE_QUIRK_UNMAP_INVAL
 	 */
-	pgtable->ops.pgtable_walk(&pgtable->ops, gather->start, size, &walk_data);
+	pgtable->ops.pgtable_walk(&pgtable->ops, iova, size, &walk_data);
+}
+
+static void smmu_iotlb_sync(struct kvm_hyp_iommu_domain *domain,
+			    struct iommu_iotlb_gather *gather)
+{
+	if (!gather) {
+		struct hyp_arm_smmu_v3_domain *smmu_domain = domain->priv;
+
+		remove_lazy_domain(smmu_domain);
+		return;
+	}
+
+	if (!gather->pgsize)
+		return;
+
+	__smmu_iotlb_sync(domain, gather->start,
+			  gather->end - gather->start + 1, gather->pgsize,
+			  gather->queued);
 }
 
 static int smmu_domain_config_s2(struct kvm_hyp_iommu_domain *domain,
@@ -1537,6 +1609,8 @@ static size_t smmu_unmap_pages(struct kvm_hyp_iommu_domain *domain, unsigned lon
 	granule = 1UL << __ffs(smmu_domain->pgtable->cfg.pgsize_bitmap);
 	if (!IS_ALIGNED(iova | pgsize, granule))
 		return 0;
+	unsigned long orig_iova = iova;
+	bool lazy = false;
 
 	hyp_spin_lock(&smmu_domain->pgt_lock);
 	while (total_unmapped < size) {
@@ -1549,13 +1623,19 @@ static size_t smmu_unmap_pages(struct kvm_hyp_iommu_domain *domain, unsigned lon
 		pgcount -= unmapped / pgsize;
 	}
 
+	if (gather && gather->queued)
+		lazy = add_lazy_domain(smmu_domain);
+
 	/*
 	 * Eagerly drain the gather list before the core code does to Keep
 	 * the page table walk locked.
 	 */
-	smmu_iotlb_sync(domain, gather);
-	gather->pgsize = 0;
-	iommu_iotlb_gather_init(gather);
+	__smmu_iotlb_sync(domain, orig_iova, total_unmapped,
+			  gather ? gather->pgsize : pgsize, lazy);
+	if (gather) {
+		gather->pgsize = 0;
+		iommu_iotlb_gather_init(gather);
+	}
 	hyp_spin_unlock(&smmu_domain->pgt_lock);
 	return total_unmapped;
 }
