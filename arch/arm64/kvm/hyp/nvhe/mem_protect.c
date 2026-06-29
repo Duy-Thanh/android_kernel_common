@@ -2350,7 +2350,11 @@ int __pkvm_guest_share_host(u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 nr_pages, u
 	if (ret)
 		goto unlock;
 
-	ret = host_stage2_idmap_locked(phys, size, PKVM_HOST_MEM_PROT, true);
+	/*
+	 * Setting SW0 ensures this mapping is refcounted which prevents
+	 * stage-2 coalescing.
+	 */
+	ret = host_stage2_idmap_locked(phys, size, PKVM_HOST_MEM_PROT | KVM_PGTABLE_PROT_SW0, true);
 	if (ret)
 		goto unlock;
 
