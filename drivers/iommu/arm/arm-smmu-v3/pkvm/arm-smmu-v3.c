@@ -1012,6 +1012,23 @@ static void remove_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
 		smmu_tlb_flush_all(domain->domain);
 }
 
+static void force_clean_lazy_domains(void)
+{
+	struct hyp_arm_smmu_v3_domain *domain;
+
+	while (true) {
+		hyp_spin_lock(&lazy_domains_lock);
+		if (!num_lazy_domains) {
+			hyp_spin_unlock(&lazy_domains_lock);
+			break;
+		}
+		domain = lazy_domains[num_lazy_domains - 1];
+		hyp_spin_unlock(&lazy_domains_lock);
+
+		remove_lazy_domain(domain);
+	}
+}
+
 static void __smmu_iotlb_sync(struct kvm_hyp_iommu_domain *domain,
 			      unsigned long iova, size_t size, size_t pgsize,
 			      bool lazy)
@@ -1842,6 +1859,8 @@ static void smmu_host_stage2_idmap(struct kvm_hyp_iommu_domain *domain,
 	end = min(end, BIT(pgtable->cfg.oas));
 	if (start >= end)
 		return;
+
+	force_clean_lazy_domains();
 
 	if (prot) {
 		if (!(prot & IOMMU_MMIO))
