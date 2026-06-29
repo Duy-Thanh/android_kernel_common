@@ -928,10 +928,22 @@ impl Process {
 
     pub(crate) fn get_transaction_node(&self, handle: u32) -> BinderResult<NodeRef> {
         // When handle is zero, try to get the context manager.
-        if handle == 0 {
-            Ok(self.ctx.get_manager_node(true)?)
+        let res = if handle == 0 {
+            self.ctx.get_manager_node(true).map_err(Into::into)
         } else {
-            Ok(self.get_node_from_handle(handle, true)?)
+            self.get_node_from_handle(handle, true).map_err(Into::into)
+        };
+
+        match res {
+            Ok(node_ref) => Ok(node_ref),
+            Err(err) => {
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "got transaction to invalid handle {}",
+                    handle
+                );
+                Err(err)
+            }
         }
     }
 
@@ -1012,10 +1024,13 @@ impl Process {
                     }
                 }
             }
-        } else {
             // All refs are cleared in process exit, so this warning is expected in that case.
             if !self.inner.lock().is_dead {
-                pr_warn!("{}: no such ref {handle}\n", self.pid_in_current_ns());
+                binder_debug!(
+                    crate::debug::BINDER_DEBUG_USER_ERROR,
+                    "no such ref {}",
+                    handle
+                );
             }
         }
         Ok(())
@@ -1269,13 +1284,20 @@ impl Process {
         })?;
         let mut refs = self.node_refs.lock();
         let Some(info) = refs.by_handle.get_mut(&handle) else {
-            pr_warn!("BC_REQUEST_DEATH_NOTIFICATION invalid ref {handle}\n");
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "BC_REQUEST_DEATH_NOTIFICATION invalid ref {}",
+                handle
+            );
             return Ok(());
         };
 
         // Nothing to do if there is already a death notification request for this handle.
         if info.death().is_some() {
-            pr_warn!("BC_REQUEST_DEATH_NOTIFICATION death notification already set\n");
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "BC_REQUEST_DEATH_NOTIFICATION death notification already set"
+            );
             return Ok(());
         }
 
@@ -1312,17 +1334,27 @@ impl Process {
 
         let mut refs = self.node_refs.lock();
         let Some(info) = refs.by_handle.get_mut(&handle) else {
-            pr_warn!("BC_CLEAR_DEATH_NOTIFICATION invalid ref {handle}\n");
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "BC_CLEAR_DEATH_NOTIFICATION invalid ref {}",
+                handle
+            );
             return Ok(());
         };
 
         let Some(death) = info.death().take() else {
-            pr_warn!("BC_CLEAR_DEATH_NOTIFICATION death notification not active\n");
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "BC_CLEAR_DEATH_NOTIFICATION death notification not active"
+            );
             return Ok(());
         };
         if death.cookie != cookie {
             *info.death() = Some(death);
-            pr_warn!("BC_CLEAR_DEATH_NOTIFICATION death notification cookie mismatch\n");
+            binder_debug!(
+                crate::debug::BINDER_DEBUG_USER_ERROR,
+                "BC_CLEAR_DEATH_NOTIFICATION death notification cookie mismatch"
+            );
             return Ok(());
         }
 
