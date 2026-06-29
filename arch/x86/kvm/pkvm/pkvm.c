@@ -487,15 +487,26 @@ static void pkvm_vcpu_reset(struct kvm_vcpu *vcpu, bool init_event)
 	}
 }
 
-static void postponed_per_vm_setup(struct kvm *kvm)
+static int postponed_per_vm_setup(struct kvm *kvm)
 {
 	struct pkvm_vm *pkvm_vm = to_pkvm(kvm);
-	struct kvm *shared_kvm;
+	struct kvm *shared_kvm = pkvm_vm->shared_kvm;
+	enum kvm_irqchip_mode irqchip_mode;
 	u64 apic_bus_cycle_ns;
+	u32 max_vcpu_ids;
+
+	irqchip_mode = READ_ONCE(shared_kvm->arch.irqchip_mode);
+	if (irqchip_mode != KVM_IRQCHIP_NONE &&
+	    irqchip_mode != KVM_IRQCHIP_KERNEL &&
+	    irqchip_mode != KVM_IRQCHIP_SPLIT)
+		return -EINVAL;
+
+	max_vcpu_ids = READ_ONCE(shared_kvm->arch.max_vcpu_ids);
+	if (!max_vcpu_ids || max_vcpu_ids > KVM_MAX_VCPU_IDS)
+		return -EINVAL;
 
 	pkvm_spin_lock(&pkvm_vm->lock);
 
-	shared_kvm = pkvm_vm->shared_kvm;
 	/*
 	 * The following setup is per VM, not per vCPU, however it cannot be
 	 * done during VM creation, since these values are set by the host VMM
@@ -505,6 +516,9 @@ static void postponed_per_vm_setup(struct kvm *kvm)
 	 * creating vCPUs. So it is ok to assume these host's values here are
 	 * up-to-date.
 	 */
+
+	kvm->arch.irqchip_mode = irqchip_mode;
+	kvm->arch.max_vcpu_ids = max_vcpu_ids;
 
 	if (kvm_caps.has_bus_lock_exit)
 		kvm->arch.bus_lock_detection_enabled =
@@ -525,24 +539,29 @@ static void postponed_per_vm_setup(struct kvm *kvm)
 	kvm->arch.bsp_vcpu_id = shared_kvm->arch.bsp_vcpu_id;
 
 	pkvm_spin_unlock(&pkvm_vm->lock);
+	return 0;
 }
 
 static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate *fps,
 			 struct kvm_lapic *shared_apic)
 {
 	struct pkvm_vcpu *pkvm_vcpu = to_pkvm_vcpu(vcpu);
-	int ret = kvm_x86_call(vcpu_precreate)(kvm);
 	struct pkvm_vm *pkvm_vm = to_pkvm(kvm);
 	void *unused = (void *)pkvm_vcpu +
 		       PKVM_VCPU_BASE_SIZE +
 		       kvm_vcpu_sz;
 	int cpu = raw_smp_processor_id();
+	int ret;
 
+	if (!kvm->created_vcpus) {
+		ret = postponed_per_vm_setup(kvm);
+		if (ret)
+			return ret;
+	}
+
+	ret = kvm_x86_call(vcpu_precreate)(kvm);
 	if (ret)
 		return ret;
-
-	if (!kvm->created_vcpus)
-		postponed_per_vm_setup(kvm);
 
 	vcpu->kvm = kvm;
 	/* Set cpu to -1 to indicate it is not loaded on any CPU */
