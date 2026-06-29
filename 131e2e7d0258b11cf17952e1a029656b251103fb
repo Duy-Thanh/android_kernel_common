@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0210b77_0a162f0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-06-29T12:37:14Z",
+      "side": 1,
+      "message": "When `generate_btf` is set, additional outputs [are required](https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kernel_module.bzl;l\u003d402-406;drc\u003dac8f2ab58d5cf215fd898ad8e34dabf8c07c9aac), i.e. `mod_full_env` instead of `mod_min_env`.\n\n`mod_full_env` [includes the mixed build tree command setup](https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kernel_build.bzl;l\u003d2170;drc\u003d1ff7ba00f932fc57eaf2381f7464177f5913c2fd) which [sets](https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kernel_build.bzl;l\u003d1137;drc\u003d1ff7ba00f932fc57eaf2381f7464177f5913c2fd) the `KBUILD_MIXED_TREE` variable.",
+      "parentUuid": "fe7e3bec_f009cbcd",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 74
+      },
+      "revId": "131e2e7d0258b11cf17952e1a029656b251103fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4a7cf1f1_f96c8ca9",
@@ -37,6 +61,23 @@
       "writtenOn": "2026-06-22T20:53:21Z",
       "side": 1,
       "message": "@willmcvicker@google.com could you PTAL at this change?",
+      "revId": "131e2e7d0258b11cf17952e1a029656b251103fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0559a612_2d907de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-06-29T12:37:14Z",
+      "side": 1,
+      "message": "Friendly ping.",
       "revId": "131e2e7d0258b11cf17952e1a029656b251103fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
