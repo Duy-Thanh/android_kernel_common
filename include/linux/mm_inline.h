@@ -590,9 +590,9 @@ static inline pte_marker copy_pte_marker(
  * Must be called with pgtable lock held so that no thread will see the none
  * pte, and if they see it, they'll fault and serialize at the pgtable lock.
  *
- * Returns true if an uffd-wp pte was installed, false otherwise.
+ * This function is a no-op if PTE_MARKER_UFFD_WP is not enabled.
  */
-static inline bool
+static inline void
 pte_install_uffd_wp_if_needed(struct vm_area_struct *vma, unsigned long addr,
 			      pte_t *pte, pte_t pteval)
 {
@@ -609,7 +609,7 @@ pte_install_uffd_wp_if_needed(struct vm_area_struct *vma, unsigned long addr,
 	 * with a swap pte.  There's no way of leaking the bit.
 	 */
 	if (vma_is_anonymous(vma) || !userfaultfd_wp(vma))
-		return false;
+		return;
 
 	/* A uffd-wp wr-protected normal pte */
 	if (unlikely(pte_present(pteval) && pte_uffd_wp(pteval)))
@@ -622,13 +622,10 @@ pte_install_uffd_wp_if_needed(struct vm_area_struct *vma, unsigned long addr,
 	if (unlikely(pte_swp_uffd_wp_any(pteval)))
 		arm_uffd_pte = true;
 
-	if (unlikely(arm_uffd_pte)) {
+	if (unlikely(arm_uffd_pte))
 		set_pte_at(vma->vm_mm, addr, pte,
 			   make_pte_marker(PTE_MARKER_UFFD_WP));
-		return true;
-	}
 #endif
-	return false;
 }
 
 static inline bool vma_has_recency(struct vm_area_struct *vma)
