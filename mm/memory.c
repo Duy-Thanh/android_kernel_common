@@ -1729,7 +1729,7 @@ static unsigned long zap_pte_range(struct mmu_gather *tlb,
 	pte_t *pte;
 	int nr;
 
-retry:
+
 	tlb_change_page_size(tlb, PAGE_SIZE);
 	init_rss_vec(rss);
 	start_pte = pte = pte_offset_map_lock(mm, pmd, addr, &ptl);
@@ -1769,13 +1769,6 @@ retry:
 	 */
 	if (force_flush)
 		tlb_flush_mmu(tlb);
-
-	if (addr != end) {
-		cond_resched();
-		force_flush = false;
-		force_break = false;
-		goto retry;
-	}
 
 	return addr;
 }
