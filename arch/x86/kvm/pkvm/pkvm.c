@@ -492,8 +492,8 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 	struct pkvm_vm *pkvm_vm = to_pkvm(kvm);
 	struct kvm *shared_kvm = pkvm_vm->shared_kvm;
 	enum kvm_irqchip_mode irqchip_mode;
+	u32 max_vcpu_ids, bsp_vcpu_id;
 	u64 apic_bus_cycle_ns;
-	u32 max_vcpu_ids;
 
 	irqchip_mode = READ_ONCE(shared_kvm->arch.irqchip_mode);
 	if (irqchip_mode != KVM_IRQCHIP_NONE &&
@@ -503,6 +503,10 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 
 	max_vcpu_ids = READ_ONCE(shared_kvm->arch.max_vcpu_ids);
 	if (!max_vcpu_ids || max_vcpu_ids > KVM_MAX_VCPU_IDS)
+		return -EINVAL;
+
+	bsp_vcpu_id = READ_ONCE(shared_kvm->arch.bsp_vcpu_id);
+	if (bsp_vcpu_id > max_vcpu_ids)
 		return -EINVAL;
 
 	pkvm_spin_lock(&pkvm_vm->lock);
@@ -519,6 +523,7 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 
 	kvm->arch.irqchip_mode = irqchip_mode;
 	kvm->arch.max_vcpu_ids = max_vcpu_ids;
+	kvm->arch.bsp_vcpu_id = bsp_vcpu_id;
 
 	if (kvm_caps.has_bus_lock_exit)
 		kvm->arch.bus_lock_detection_enabled =
@@ -535,8 +540,6 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 
 	if (!pkvm_is_protected_vm(kvm))
 		kvm->arch.disabled_exits = shared_kvm->arch.disabled_exits;
-
-	kvm->arch.bsp_vcpu_id = shared_kvm->arch.bsp_vcpu_id;
 
 	pkvm_spin_unlock(&pkvm_vm->lock);
 	return 0;
