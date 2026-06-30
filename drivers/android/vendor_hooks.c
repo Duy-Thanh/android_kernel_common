@@ -84,6 +84,13 @@
 #include <trace/hooks/typec.h>
 #include <trace/events/android_vendor_lmk.h>
 #include <trace/hooks/swapfile.h>
+<<<<<<< HEAD   (2d963f6437daae36d8a6a14f7a561db28963c4d8 BACKPORT: ANDROID: KVM: arm64: Verify pinned pages match THP)
+||||||| BASE   (5ab7e399bea3d09c2d3e659dd72028062b2f3158 ANDROID: gzvm: manage gzvm->mm lifetime and add mm checks)
+#include <trace/hooks/rcu.h>
+=======
+#include <trace/hooks/rcu.h>
+#include <trace/hooks/sound.h>
+>>>>>>> CHANGE (d40e58eee0203d75926b5cb5808f961cdf2b69a9 ANDROID: sound: add vendor hooks for dailink get playback & )
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -764,5 +771,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_device_swapon);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_device_swapoff);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_swap_slot_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_swap_pages_bypass);
+<<<<<<< HEAD   (2d963f6437daae36d8a6a14f7a561db28963c4d8 BACKPORT: ANDROID: KVM: arm64: Verify pinned pages match THP)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_has_unmovable_pages_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_skip_lru);
+||||||| BASE   (5ab7e399bea3d09c2d3e659dd72028062b2f3158 ANDROID: gzvm: manage gzvm->mm lifetime and add mm checks)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_get_play_cap);
+>>>>>>> CHANGE (d40e58eee0203d75926b5cb5808f961cdf2b69a9 ANDROID: sound: add vendor hooks for dailink get playback & )
