@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b232edb_e32fc20c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-30T17:12:20Z",
+      "side": 1,
+      "message": "This is more of an issue with the andorid14-6.1 branch version of this patch, instead of the cherry-pick here, but the commit message does not map to what the patch is doing. __set_task_comm() is not exported in this patch, and two other workqueue_attrs functions are exported instead. \n\nNot going to block this in this case, since it should have been caught in the dev tree, but do please be careful when submitting patches to ensure the commit message reflects the changes being made.",
+      "revId": "44dcd14df37856dc0adc9d47dfa3cc3ffd2e3a20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
