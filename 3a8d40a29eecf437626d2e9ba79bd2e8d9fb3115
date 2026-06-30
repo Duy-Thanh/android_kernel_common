@@ -16,6 +16,23 @@
       "message": "I don\u0027t think we should revert this, as it also reverts the `abi.stg` file, which we have to be careful with now that we\u0027re past release.\n\nCan we fix-forward instead?",
       "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc142dff_afa41fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-06-30T11:41:14Z",
+      "side": 1,
+      "message": "Do you want to target -kminext instead?",
+      "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
