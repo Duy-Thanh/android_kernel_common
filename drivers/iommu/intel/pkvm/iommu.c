@@ -248,10 +248,12 @@ static int handle_gcmd_qie(struct intel_iommu *iommu, bool enable)
 
 		ret = initialize_qi(iommu);
 	} else {
-		if (!iommu->qi)
+		if (!iommu->qi) {
 			ret = handle_gcmd_direct(iommu, DMA_GCMD_QIE, false);
-		else
-			iommu->vgsts &= ~DMA_GSTS_QIES;
+		} else {
+			pkvm_warn("iommu%d: Disabling QI is not allowed!\n", iommu->seq_id);
+			return -EPERM;
+		}
 	}
 
 	pkvm_dbg("iommu%d: Quueued Invalidation %s!\n", iommu->seq_id,
@@ -361,11 +363,10 @@ static int handle_gcmd_te(struct intel_iommu *iommu, bool enable)
 		pkvm_dbg("iommu%d: Translation enabled!\n", iommu->seq_id);
 	} else {
 		/*
-		 * Translation is not really disabled as it would
-		 * compromise pKVM security guarantees.
+		 * Translation is not allowed to be disabled under pKVM.
 		 */
-		iommu->vgsts &= ~DMA_GSTS_TES;
-		pkvm_dbg("iommu%d: Translation marked as disabled!\n", iommu->seq_id);
+		pkvm_warn("iommu%d: Disabling Translation is not allowed!\n", iommu->seq_id);
+		return -EPERM;
 	}
 
 	return 0;
