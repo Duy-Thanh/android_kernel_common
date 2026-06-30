@@ -690,3 +690,10 @@ prep_new_page
 
 # required by xiaomi new symbols
 memory_cgrp_subsys_on_dfl_key
+
+# required by custom network policy
+nf_sk_lookup_slow_v4
+xt_register_matches
+xt_unregister_matches
+xt_register_targets
+xt_unregister_targets
