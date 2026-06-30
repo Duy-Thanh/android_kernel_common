@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64fc78d2_a1de7678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-30T11:34:01Z",
+      "side": 1,
+      "message": "I don\u0027t think we should revert this, as it also reverts the `abi.stg` file, which we have to be careful with now that we\u0027re past release.\n\nCan we fix-forward instead?",
+      "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
