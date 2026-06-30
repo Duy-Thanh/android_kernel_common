@@ -1044,6 +1044,15 @@ static int reenable_irq_remapping(int eim)
 	bool setup = false;
 	struct intel_iommu *iommu = NULL;
 
+	/*
+	 * This path is used for system-wide IRQ-remapping re-enable flows
+	 * such as resume from S3. pKVM does not support those transitions
+	 * once IOMMU is initialized, and re-enabling here would disable QI
+	 * from host context.
+	 */
+	if (pkvm_enabled())
+		return -EOPNOTSUPP;
+
 	for_each_iommu(iommu, drhd)
 		if (iommu->qi)
 			dmar_reenable_qi(iommu);
