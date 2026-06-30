@@ -93,7 +93,7 @@ struct pasid_setup_fl_data {
 	u64 fsptptr_gpa;
 	u64 donation_page_gpa;
 	u32 pasid;
-	u32 flags;
+	u8 force_snoop;
 	u16 did;
 	u16 old_did; /* replace_fl */
 	u8 bus;
