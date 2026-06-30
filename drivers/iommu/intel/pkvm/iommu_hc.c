@@ -273,8 +273,8 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	struct pkvm_device dev = { .info = &info };
 	struct pasid_table table = { 0 };
 	struct dmar_domain *domain;
+	int flags = 0, level, ret;
 	void *pgd;
-	int ret;
 
 	if (!iommu)
 		return -EINVAL;
@@ -292,6 +292,12 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	if (data->did == FLPT_DEFAULT_DID) {
 		pkvm_err("%s: First-level setup not allowed for default domain\n", __func__);
 		return -EPERM;
+	}
+
+	if (data->force_snoop && !ecap_sc_support(iommu->ecap)) {
+		pkvm_err("%s: iommu%d does not support snoop control\n",
+			 __func__, iommu->seq_id);
+		return -EINVAL;
 	}
 
 	ret = __get_pasid_table(iommu, data->bus, data->devfn, &table);
@@ -318,6 +324,20 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 		return -EINVAL;
 	}
 
+	ret = -EINVAL;
+	if (!domain->use_first_level) {
+		pkvm_err("%s: Domain did %d does not use first-level translation\n",
+			 __func__, data->did);
+		goto put_domain;
+	}
+
+	level = agaw_to_level(domain->agaw);
+	if (level != 4 && level != 5) {
+		pkvm_err("%s: Domain has invalid level %d\n",
+			 __func__, level);
+		goto put_domain;
+	}
+
 	pkvm_dbg("%s: dev[%x:%x], pasid: %x, fsptptr_gpa: %llx, did: %d\n", __func__,
 		 data->bus, data->devfn, data->pasid, data->fsptptr_gpa, data->did);
 
@@ -325,8 +345,12 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	if (ret)
 		goto put_domain;
 
+	if (data->force_snoop)
+		flags |= PASID_FLAG_PAGE_SNOOP;
+	if (level == 5)
+		flags |= PASID_FLAG_FL5LP;
 	ret = intel_pasid_setup_first_level(iommu, &dev, __pkvm_pa(pgd),
-					    data->pasid, data->did, data->flags);
+					    data->pasid, data->did, flags);
 	if (!ret)
 		return 0;
 
