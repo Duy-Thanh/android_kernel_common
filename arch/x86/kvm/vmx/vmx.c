@@ -8360,6 +8360,10 @@ void vmx_vcpu_free(struct kvm_vcpu *vcpu)
 #ifndef __PKVM_HYP__
 	free_page((unsigned long)vmx->ve_info);
 #endif
+#ifdef __PKVM_HYP__
+	if (vmx_can_use_ipiv(vcpu))
+		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id], 0);
+#endif
 }
 
 int vmx_vcpu_create(struct kvm_vcpu *vcpu)
