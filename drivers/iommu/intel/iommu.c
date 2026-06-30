@@ -2076,8 +2076,24 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 	spin_unlock(&iommu->lock);
 	intel_context_flush_no_pasid(info, context, did);
+
+#ifdef __PKVM_HYP__
+	/*
+	 * The host driver serializes context setup and teardown with
+	 * iommu_group->mutex. pKVM context hypercalls lack equivalent
+	 * serialization, so setup may have re-installed this entry while the
+	 * context flush was in progress.
+	 */
+	spin_lock(&iommu->lock);
+	if (!context_present(context)) {
+		context_clear_entry(context);
+		__iommu_flush_cache(iommu, context, sizeof(*context));
+	}
+	spin_unlock(&iommu->lock);
+#else
 	context_clear_entry(context);
 	__iommu_flush_cache(iommu, context, sizeof(*context));
+#endif
 
 #ifdef __PKVM_HYP__
 	if (pasid_dir)
