@@ -116,6 +116,9 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -200,6 +203,9 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -261,6 +267,9 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	void *pgd;
 
 	if (!iommu)
+		return -EINVAL;
+
+	if (!sm_supported(iommu))
 		return -EINVAL;
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
@@ -361,6 +370,9 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -426,6 +438,9 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)
 	u16 did;
 
 	if (!iommu)
+		return -EINVAL;
+
+	if (!sm_supported(iommu))
 		return -EINVAL;
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
