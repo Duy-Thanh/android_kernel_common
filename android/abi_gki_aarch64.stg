@@ -347380,6 +347380,14 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9bbe92d8
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x056cf603
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
+}
+function {
   id: 0x9bbebc0c
   return_type_id: 0x6720d32f
   parameter_id: 0x1ce748dd
@@ -371997,6 +372005,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_sock_create"
 }
 elf_symbol {
+  id: 0xf7fbc5c6
+  name: "__traceiter_android_vh_sound_soc_get_playback_capture"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x724048df
+  type_id: 0x9bbe92d8
+  full_name: "__traceiter_android_vh_sound_soc_get_playback_capture"
+}
+elf_symbol {
   id: 0x805e06dd
   name: "__traceiter_android_vh_spec_promote_folio"
   is_defined: true
@@ -380176,6 +380193,15 @@ elf_symbol {
   crc: 0xa07293cf
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sock_create"
+}
+elf_symbol {
+  id: 0x2168fee8
+  name: "__tracepoint_android_vh_sound_soc_get_playback_capture"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x2c6c6c03
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sound_soc_get_playback_capture"
 }
 elf_symbol {
   id: 0x2629138f
@@ -448231,6 +448257,7 @@ interface {
   symbol_id: 0x08f4cbb0
   symbol_id: 0xa082ad86
   symbol_id: 0x57cb67b6
+  symbol_id: 0xf7fbc5c6
   symbol_id: 0x805e06dd
   symbol_id: 0x7068c1fb
   symbol_id: 0x3b03fccf
@@ -449140,6 +449167,7 @@ interface {
   symbol_id: 0x547e3912
   symbol_id: 0x227ce62c
   symbol_id: 0xb11763a0
+  symbol_id: 0x2168fee8
   symbol_id: 0x2629138f
   symbol_id: 0x02bb68bd
   symbol_id: 0x0c098155
