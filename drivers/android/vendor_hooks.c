@@ -84,6 +84,8 @@
 #include <trace/hooks/typec.h>
 #include <trace/events/android_vendor_lmk.h>
 #include <trace/hooks/swapfile.h>
+#include <trace/hooks/rcu.h>
+#include <trace/hooks/sound.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -766,3 +768,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_swap_slot_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_swap_pages_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_has_unmovable_pages_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_skip_lru);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_get_play_cap);
