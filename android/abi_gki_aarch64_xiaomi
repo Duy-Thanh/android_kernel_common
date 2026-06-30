@@ -704,3 +704,7 @@ seq_put_decimal_ull
 percpu_counter_destroy
 __percpu_counter_sum
 __percpu_counter_init
+
+# coredump check
+__tracepoint_android_vh_signal_coredump_check
+__traceiter_android_vh_signal_coredump_check
