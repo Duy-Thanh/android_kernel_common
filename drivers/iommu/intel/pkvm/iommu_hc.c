@@ -248,7 +248,11 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct pasid_table table = { 0 };
+	struct dmar_domain *domain;
 	u64 fsptptr;
+	bool fl5lp = false;
+	int flags = 0;
+	int level;
 	int ret;
 
 	if (!iommu)
@@ -274,6 +278,35 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 		return ret;
 
 	fsptptr = pkvm_host_gpa_to_phys(data->fsptptr_gpa);
+
+	domain = pkvm_get_iommu_domain(__pkvm_va(fsptptr));
+	if (!domain) {
+		pkvm_err("%s: Failed to locate domain with pgd: %p\n",
+			 __func__, __pkvm_va(fsptptr));
+		return -EINVAL;
+	}
+
+	ret = -EINVAL;
+	if (!domain->use_first_level) {
+		pkvm_err("%s: Domain did %d does not use first-level translation\n",
+			 __func__, data->did);
+		goto put_domain;
+	}
+
+	level = agaw_to_level(domain->agaw);
+	if (level != 4 && level != 5) {
+		pkvm_err("%s: Domain has invalid level %d\n",
+			 __func__, level);
+		goto put_domain;
+	}
+
+	fl5lp = (level == 5);
+
+	if (fl5lp)
+		flags |= PASID_FLAG_FL5LP;
+	if (data->force_snoop)
+		flags |= PASID_FLAG_PAGE_SNOOP;
+
 	info.bus = data->bus;
 	info.devfn = data->devfn;
 	info.ats_qdep = data->ats_qdep;
@@ -284,18 +317,23 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 
 	ret = accept_page_donation(iommu, &data->donation_page_gpa);
 	if (ret)
-		return ret;
+		goto put_domain;
 
 	pkvm_dbg("%s: dev[%x:%x], pasid: %x, fsptptr_gpa: %llx, did: %d, old_did: %d\n", __func__,
 		 data->bus, data->devfn, data->pasid, data->fsptptr_gpa, data->did, data->old_did);
 	if (!data->old_did) {
-		return intel_pasid_setup_first_level(iommu, &dev, fsptptr,
-						     data->pasid, data->did,
-						     data->flags);
+		ret = intel_pasid_setup_first_level(iommu, &dev, fsptptr,
+						    data->pasid, data->did,
+						    flags);
+	} else {
+		ret = intel_pasid_replace_first_level(iommu, &dev, fsptptr,
+						      data->pasid, data->did,
+						      data->old_did, flags);
 	}
-	return intel_pasid_replace_first_level(iommu, &dev, fsptptr,
-					       data->pasid, data->did,
-					       data->old_did, data->flags);
+
+put_domain:
+	pkvm_put_iommu_domain(domain);
+	return ret;
 }
 
 int pkvm_iommu_pasid_setup_fl(struct pasid_setup_fl_data *in, struct pasid_setup_fl_data *out)
