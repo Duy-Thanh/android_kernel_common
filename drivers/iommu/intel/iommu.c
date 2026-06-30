@@ -2060,8 +2060,12 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 	spin_unlock(&iommu->lock);
 	intel_context_flush_no_pasid(info, context, did);
-	context_clear_entry(context);
-	__iommu_flush_cache(iommu, context, sizeof(*context));
+	spin_lock(&iommu->lock);
+	if (!context_present(context)) {
+		context_clear_entry(context);
+		__iommu_flush_cache(iommu, context, sizeof(*context));
+	}
+	spin_unlock(&iommu->lock);
 
 #ifdef __PKVM_HYP__
 	if (pasid_dir)
