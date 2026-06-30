@@ -16,6 +16,24 @@
       "message": "Is this just a cleanup or do you need this for the next patch?",
       "revId": "1b07e7f6a5dcdeffb3eca21e74964613b3ccd0f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcc3c0e_d1110544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-30T12:19:52Z",
+      "side": 1,
+      "message": "It is just a cleanup, but it makes it clearer for the next patch that the coalescing is disabled **only** for guest_share_host",
+      "parentUuid": "5f786dd0_5f50cddb",
+      "revId": "1b07e7f6a5dcdeffb3eca21e74964613b3ccd0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
