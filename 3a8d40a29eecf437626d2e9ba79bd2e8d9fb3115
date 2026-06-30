@@ -69,6 +69,24 @@
       "parentUuid": "05098a91_caf9e35f",
       "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101e1071_3f506fc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-06-30T13:15:14Z",
+      "side": 1,
+      "message": "Sadly, I don\u0027t think `-kminext` works with the timelines we need to accommodate here. We\u0027ve been asked to land this change this week :(",
+      "parentUuid": "66528c7e_9f473701",
+      "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
