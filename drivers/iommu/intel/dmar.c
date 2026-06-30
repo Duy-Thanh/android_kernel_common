@@ -1718,6 +1718,9 @@ void dmar_disable_qi(struct intel_iommu *iommu)
 	u32 sts;
 	cycles_t start_time = get_cycles();
 
+	if (pkvm_enabled())
+		return;
+
 	if (!ecap_qis(iommu->ecap))
 		return;
 
