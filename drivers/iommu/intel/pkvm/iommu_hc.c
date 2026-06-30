@@ -102,6 +102,9 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -173,6 +176,9 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -225,8 +231,13 @@ int pkvm_iommu_set_sm_ce(struct set_sm_ce_data *in, struct set_sm_ce_data *out)
 
 static int __get_pasid_table(struct intel_iommu *iommu, u8 bus, u8 devfn, struct pasid_table *table)
 {
-	struct context_entry *context = iommu_context_addr(iommu, bus, devfn, false);
+	struct context_entry *context;
 	u32 pds;
+
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
+	context = iommu_context_addr(iommu, bus, devfn, false);
 
 	if (!context || !context_present(context)) {
 		pkvm_err("%s: pasid directory table not found: device[%x:%x]\n",
@@ -256,6 +267,9 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	int ret;
 
 	if (!iommu)
+		return -EINVAL;
+
+	if (!sm_supported(iommu))
 		return -EINVAL;
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
@@ -357,6 +371,9 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -427,6 +444,9 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)
 	int ret;
 
 	if (!iommu)
+		return -EINVAL;
+
+	if (!sm_supported(iommu))
 		return -EINVAL;
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
