@@ -33,6 +33,24 @@
       "message": "Do you want to target -kminext instead?",
       "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05098a91_caf9e35f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-06-30T12:20:26Z",
+      "side": 1,
+      "message": "Does that mean I can just break KMI and add the correct kminext hashtag?",
+      "parentUuid": "fc142dff_afa41fd3",
+      "revId": "3a8d40a29eecf437626d2e9ba79bd2e8d9fb3115",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
