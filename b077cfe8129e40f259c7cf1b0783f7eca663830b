@@ -16,6 +16,23 @@
       "message": "Hi,could someone review this commit?",
       "revId": "b077cfe8129e40f259c7cf1b0783f7eca663830b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9975f55e_5218b427",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4831549
+      },
+      "writtenOn": "2026-06-30T12:54:03Z",
+      "side": 1,
+      "message": "Hi, this CL is already on the mainline branch. Could someone help review it?",
+      "revId": "b077cfe8129e40f259c7cf1b0783f7eca663830b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
