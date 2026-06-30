@@ -102,6 +102,9 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -173,6 +176,9 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)
 	if (!iommu)
 		return -EINVAL;
 
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
@@ -225,8 +231,13 @@ int pkvm_iommu_set_sm_ce(struct set_sm_ce_data *in, struct set_sm_ce_data *out)
 
 static int __get_pasid_table(struct intel_iommu *iommu, u8 bus, u8 devfn, struct pasid_table *table)
 {
-	struct context_entry *context = iommu_context_addr(iommu, bus, devfn, false);
+	struct context_entry *context;
 	u32 pds;
+
+	if (!sm_supported(iommu))
+		return -EINVAL;
+
+	context = iommu_context_addr(iommu, bus, devfn, false);
 
 	if (!context || !context_present(context)) {
 		pkvm_err("%s: pasid directory table not found: device[%x:%x]\n",
@@ -248,9 +259,11 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct pasid_table table = { 0 };
+	struct dmar_domain *domain;
 	u64 fsptptr;
 	bool fl5lp = false;
 	int flags = 0;
+	int level;
 	int ret;
 
 	if (!iommu)
@@ -272,17 +285,20 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 
 	fsptptr = pkvm_host_gpa_to_phys(data->fsptptr_gpa);
 
-	if (data->did != FLPT_DEFAULT_DID) {
-		struct dmar_domain *domain = pkvm_get_iommu_domain(__pkvm_va(fsptptr));
-		int level;
+	if (data->did == FLPT_DEFAULT_DID) {
+		pkvm_err("%s: First-level setup not allowed for default domain\n", __func__);
+		return -EOPNOTSUPP;
+	}
 
-		if (!domain) {
-			pkvm_err("%s: Failed to locate domain with pgd: %p\n",
-				 __func__, __pkvm_va(fsptptr));
-			return -EINVAL;
-		}
+	domain = pkvm_get_iommu_domain(__pkvm_va(fsptptr));
 
-		if (!domain->use_first_level) {
+	if (!domain) {
+		pkvm_err("%s: Failed to locate domain with pgd: %p\n",
+			 __func__, __pkvm_va(fsptptr));
+		return -EINVAL;
+	}
+
+	if (!domain->use_first_level) {
 			pkvm_err("%s: Domain did %d does not use first-level translation\n",
 				 __func__, data->did);
 			pkvm_put_iommu_domain(domain);
@@ -299,9 +315,6 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 
 		fl5lp = (level == 5);
 		pkvm_put_iommu_domain(domain);
-	} else {
-		fl5lp = cpu_feature_enabled(X86_FEATURE_LA57);
-	}
 
 	if (fl5lp)
 		flags |= PASID_FLAG_FL5LP;
