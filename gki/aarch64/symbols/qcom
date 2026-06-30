@@ -4140,6 +4140,8 @@
   xdp_rxq_info_unreg_mem_model
   xdp_warn
   xfrm_lookup
+  xt_register_targets
+  xt_unregister_targets
   xhci_create_secondary_interrupter
   xhci_get_endpoint_index
   xhci_handle_event_trb
