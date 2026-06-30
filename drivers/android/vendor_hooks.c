@@ -85,6 +85,7 @@
 #include <trace/events/android_vendor_lmk.h>
 #include <trace/hooks/swapfile.h>
 #include <trace/hooks/rcu.h>
+#include <trace/hooks/sound.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -786,3 +787,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_try_split_folio_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sound_soc_get_playback_capture);
