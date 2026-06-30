@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e0e01b_104506ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2048517
+      },
+      "writtenOn": "2026-06-30T11:16:42Z",
+      "side": 1,
+      "message": "This was missed on mainline so the vts_kernel_net_tests are still failing.\nwith these patches and also aosp/4150855 it starts passing again.\nTest: https://android-build.corp.google.com/test_investigate/invocation/I35000010580342975/test/TR04930279742296451/",
+      "revId": "0b8100b0158d299b39516e4b42e2f1bc0310e2c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
