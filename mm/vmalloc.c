@@ -4166,6 +4166,7 @@ void *vrealloc_noprof(const void *p, size_t size, gfp_t flags)
 
 	return n;
 }
+EXPORT_SYMBOL(vrealloc_noprof);
 
 #if defined(CONFIG_64BIT) && defined(CONFIG_ZONE_DMA32)
 #define GFP_VMALLOC32 (GFP_DMA32 | GFP_KERNEL)
