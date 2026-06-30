@@ -216,12 +216,9 @@ retry:
 /*
  * Interfaces for PASID table entry manipulation:
  */
-static void
 #ifndef __PKVM_HYP__
+static void
 intel_pasid_clear_entry(struct device *dev, u32 pasid, bool fault_ignore)
-#else
-intel_pasid_clear_entry(struct pkvm_device *dev, u32 pasid, bool fault_ignore)
-#endif
 {
 	struct pasid_entry *pe;
 
@@ -234,6 +231,43 @@ intel_pasid_clear_entry(struct pkvm_device *dev, u32 pasid, bool fault_ignore)
 	else
 		pasid_clear_entry(pe);
 }
+#else
+/*
+ * Safely clear the remaining fields of a non-present PASID table entry under
+ * iommu->lock after cache/TLB invalidations. Ensures that the context entry is
+ * still present and that the PASID table entry address matches the active table
+ * to prevent Write-After-Free (WAF) or race conditions with clear_ce/setup.
+ */
+static void intel_pasid_clear_entry_safe(struct pkvm_device *dev, u32 pasid,
+					 struct pasid_entry *pte)
+{
+	struct device_domain_info *info = dev_iommu_priv_get(dev);
+	struct intel_iommu *iommu = info->iommu;
+	struct pasid_entry *entries, *curr_pte;
+	struct pasid_table *pasid_table;
+	struct pasid_dir_entry *dir;
+
+	spin_lock(&iommu->lock);
+	pasid_table = intel_pasid_get_table(dev);
+	if (!pasid_table || pasid >= pasid_table->max_pasid)
+		goto unlock;
+
+	dir = pasid_table->table;
+	entries = get_pasid_table_from_pde(&dir[pasid >> PASID_PDE_SHIFT]);
+	if (!entries)
+		goto unlock;
+
+	curr_pte = &entries[pasid & PASID_PTE_MASK];
+	if (curr_pte == pte && !pasid_pte_is_present(curr_pte)) {
+		pasid_clear_entry(curr_pte);
+		if (!ecap_coherent(iommu->ecap))
+			clflush_cache_range(curr_pte, sizeof(*curr_pte));
+	}
+
+unlock:
+	spin_unlock(&iommu->lock);
+}
+#endif
 
 static void
 pasid_cache_invalidation_with_pasid(struct intel_iommu *iommu,
@@ -380,9 +414,13 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 		iommu->flush.flush_iotlb(iommu, did, 0, 0, DMA_TLB_DSI_FLUSH);
 
 	devtlb_invalidation_with_pasid(iommu, dev, pasid);
+#ifndef __PKVM_HYP__
 	intel_pasid_clear_entry(dev, pasid, fault_ignore);
 	if (!ecap_coherent(iommu->ecap))
 		clflush_cache_range(pte, sizeof(*pte));
+#else
+	intel_pasid_clear_entry_safe(dev, pasid, pte);
+#endif
 
 #ifndef __PKVM_HYP__
 	if (!fault_ignore)
