@@ -70,6 +70,13 @@ static unsigned int intercept_w_msrs[] = {
 	MSR_IA32_APICBASE,
 	X2APIC_MSR(APIC_ID),
 	MSR_IA32_XSS,
+	MSR_SYSCALL_MASK,
+	MSR_LSTAR,
+	MSR_CSTAR,
+	MSR_EFER,
+	MSR_TSC_AUX,
+	MSR_STAR,
+	MSR_IA32_TSX_CTRL,
 };
 
 u64 pkvm_total_reserve_pages(void)

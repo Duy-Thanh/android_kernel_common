@@ -197,6 +197,20 @@ static int handle_write_msr(struct kvm_vcpu *vcpu)
 			break;
 		}
 		break;
+	case MSR_SYSCALL_MASK:
+	case MSR_LSTAR:
+	case MSR_CSTAR:
+	case MSR_EFER:
+	case MSR_TSC_AUX:
+	case MSR_STAR:
+	case MSR_IA32_TSX_CTRL: {
+		int slot = kvm_find_user_return_msr(msr);
+
+		BUG_ON(slot < 0);
+		if (kvm_set_user_return_msr(slot, val, -1ull))
+			ret = X86EMUL_UNHANDLEABLE;
+		break;
+	}
 	case MSR_IA32_APICBASE:
 	case APIC_BASE_MSR ... APIC_BASE_MSR + 0xff:
 		if (pkvm_lapic_msr_write(msr, val))
