@@ -699,8 +699,10 @@ int kvm_set_user_return_msr(unsigned slot, u64 value, u64 mask)
 	int err;
 
 	value = (value & mask) | (msrs->values[slot].host & ~mask);
+#ifndef __PKVM_HYP__
 	if (value == msrs->values[slot].curr)
 		return 0;
+#endif
 	err = wrmsrq_safe(kvm_uret_msrs_list[slot], value);
 	if (err)
 		return 1;
