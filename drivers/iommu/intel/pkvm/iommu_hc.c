@@ -275,6 +275,8 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	struct pkvm_device dev = { .info = &info };
 	struct pasid_table table = { 0 };
 	struct dmar_domain *domain;
+	int flags = 0;
+	int level;
 	void *pgd;
 	int ret;
 
@@ -299,6 +301,33 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	ret = __get_pasid_table(iommu, data->bus, data->devfn, &table);
 	if (ret)
 		return ret;
+
+	pgd = pkvm_host_gpa_to_virt(data->fsptptr_gpa);
+	domain = pkvm_get_iommu_domain(pgd, data->did);
+	if (!domain) {
+		pkvm_err("%s: Failed to locate domain with pgd: %p\n",
+			 __func__, pgd);
+		return -EINVAL;
+	}
+
+	ret = -EINVAL;
+	if (!domain->use_first_level) {
+		pkvm_err("%s: Domain did %d does not use first-level translation\n",
+			 __func__, data->did);
+		goto put_domain;
+	}
+
+	level = agaw_to_level(domain->agaw);
+	if (level != 4 && level != 5) {
+		pkvm_err("%s: Domain has invalid level %d\n",
+			 __func__, level);
+		goto put_domain;
+	}
+
+	if (level == 5)
+		flags |= PASID_FLAG_FL5LP;
+	if (data->force_snoop)
+		flags |= PASID_FLAG_PAGE_SNOOP;
 
 	info.bus = data->bus;
 	info.devfn = data->devfn;
@@ -328,7 +357,7 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 		goto put_domain;
 
 	ret = intel_pasid_setup_first_level(iommu, &dev, __pkvm_pa(pgd),
-					    data->pasid, data->did, data->flags);
+					    data->pasid, data->did, flags);
 	if (!ret)
 		return 0;
 
