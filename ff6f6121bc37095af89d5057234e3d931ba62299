@@ -3,6 +3,57 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a87fd22a_4b60454f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-30T19:20:37Z",
+      "side": 1,
+      "message": "Again, not going to block this, but it would be nice to have a note appended to the commit message clarifying why the cherry-pick doesn\u0027t match the android17-6.18 change.\n\n\nWARNING reported by KernelCommit: Cherry pick is not clean. Checked against base branch android17-6.18.\nBase branc...\n\nCherry pick is not clean. Checked against base branch android17-6.18.\nBase branch change: [4144056](https://android-review.googlesource.com/c/4144056).\n\nDifference between automated attempted cherry-pick and current commit.\n\n```\ndiff --git a/arch/arm64/kvm/hyp/nvhe/ffa.c b/arch/arm64/kvm/hyp/nvhe/ffa.c\n--- a/arch/arm64/kvm/hyp/nvhe/ffa.c\n+++ b/arch/arm64/kvm/hyp/nvhe/ffa.c\n@@  @@ static void do_ffa_notif_bitmap(struct arm_smccc_1_2_regs *res,\n \t\t\t\tstruct kvm_cpu_context *ctxt,\n \t\t\t\tu64 vm_handle)\n {\n+\tDECLARE_REG(u32, func_id, ctxt, 0);\n \tDECLARE_REG(u32, vmid, ctxt, 1);\n \tstruct arm_smccc_1_2_regs *args;\n \n+\tif (ffa_check_unused_args_sbz(ctxt, func_id \u003d\u003d FFA_NOTIFICATION_BITMAP_CREATE ? 3 : 2)) {\n+\t\tffa_to_smccc_res(res, FFA_RET_INVALID_PARAMETERS);\n+\t\treturn;\n+\t}\n+\n \tif (vmid !\u003d vm_handle) {\n \t\tffa_to_smccc_res(res, FFA_RET_INVALID_PARAMETERS);\n \t\treturn;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ff6f6121bc37095af89d5057234e3d931ba62299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b499b8_a61dba2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-30T19:20:37Z",
+      "side": 1,
+      "message": "Note the lint checkers are complaining because the Link: line was changed from the android17-6.18 tree.   Sebastian has already +2\u0027ed this change, so I\u0027ll not stand in the way, but please take care when submitting patches to not introduce small errors like this.\n\n\nERROR reported by KernelCommit: Commit does not link to an upstream reference at lore.\nPlease add a line like \u0027L...\n\nCommit does not link to an upstream reference at lore.\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ff6f6121bc37095af89d5057234e3d931ba62299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb945574_f47b998c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-06-30T19:20:37Z",
+      "side": 1,
+      "message": "Similarly, please use best practices when cherry-picking changes to ensure the proper change was cherry-picked.  This is arleady +2\u0027ed so I\u0027ll not block it, but do take more care when submitting changes.\n\n\nWARNING reported by KernelCommit: Commit is missing a cherry pick line pointing to the original commit on the base...\n\nCommit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like `(cherry picked from commit 01a7844192d06f44b57bb1400c6f105494bcdc29)`.\n\nPlease cherry-pick using: `git cherry-pick -s -x 01a7844192d06f44b57bb1400c6f105494bcdc29`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ff6f6121bc37095af89d5057234e3d931ba62299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3f941d9e_375cae61",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
