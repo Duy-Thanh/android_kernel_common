@@ -8339,6 +8339,27 @@ void vmx_vcpu_free(struct kvm_vcpu *vcpu)
 #ifndef __PKVM_HYP__
 	free_page((unsigned long)vmx->ve_info);
 #endif
+#ifdef __PKVM_HYP__
+	if (vmx_can_use_ipiv(vcpu)) {
+		/*
+		 * Clear the PI descriptor table entry to prevent other vCPUs
+		 * from sending IPIs triggering writing to the vCPU's pi_desc
+		 * memory after it is already unshared back to the host and
+		 * thus may be donated.
+		 *
+		 * FIXME: in the case when vmx_vcpu_free() is called in the
+		 * failure path when vCPU creation failed due to an already
+		 * existing vCPU with the same vcpu_id, this clearing means
+		 * unexpected disabling of IPIv for that existing good vCPU.
+		 * See also [1]. So instead of clearing the pid_table entry,
+		 * we should rather prevent the host from loading (and thus
+		 * running) any vCPUs once at least one vCPU is freed.
+		 *
+		 * [1] https://lore.kernel.org/kvm/alpWONLi8h2T5WhZ@google.com/
+		 */
+		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id], 0);
+	}
+#endif
 }
 
 int vmx_vcpu_create(struct kvm_vcpu *vcpu)
