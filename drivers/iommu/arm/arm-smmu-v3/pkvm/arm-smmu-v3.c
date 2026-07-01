@@ -107,6 +107,9 @@ struct hyp_arm_smmu_v3_domain {
 	hyp_spinlock_t			pgt_lock;
 	struct io_pgtable		*pgtable;
 	bool				tainted;
+	unsigned long			min_iova;
+	unsigned long			max_iova;
+	size_t				lazy_pgsize;
 };
 
 static struct hyp_arm_smmu_v3_device *to_smmu(struct kvm_hyp_iommu *iommu)
@@ -969,12 +972,18 @@ static struct hyp_arm_smmu_v3_domain *lazy_domains[MAX_LAZY_DOMAINS];
 static int num_lazy_domains;
 static DEFINE_HYP_SPINLOCK(lazy_domains_lock);
 
-static bool add_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
+static bool add_lazy_domain(struct hyp_arm_smmu_v3_domain *domain,
+			    unsigned long iova, size_t size, size_t pgsize)
 {
 	bool added = false;
+	unsigned long end = iova + size - 1;
 
 	hyp_spin_lock(&lazy_domains_lock);
 	if (domain->tainted) {
+		domain->min_iova = min(domain->min_iova, iova);
+		domain->max_iova = max(domain->max_iova, end);
+		domain->lazy_pgsize = min(domain->lazy_pgsize, pgsize);
+
 		added = true;
 		goto out;
 	}
@@ -982,6 +991,9 @@ static bool add_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
 	if (num_lazy_domains < MAX_LAZY_DOMAINS) {
 		lazy_domains[num_lazy_domains++] = domain;
 		domain->tainted = true;
+		domain->min_iova = iova;
+		domain->max_iova = end;
+		domain->lazy_pgsize = pgsize;
 		added = true;
 	}
 out:
@@ -993,6 +1005,9 @@ static void remove_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
 {
 	int i;
 	bool was_tainted = false;
+	unsigned long min_iova = 0;
+	size_t size = 0;
+	size_t pgsize = 0;
 
 	hyp_spin_lock(&lazy_domains_lock);
 	for (i = 0; i < num_lazy_domains; i++) {
@@ -1005,11 +1020,14 @@ static void remove_lazy_domain(struct hyp_arm_smmu_v3_domain *domain)
 	if (domain->tainted) {
 		domain->tainted = false;
 		was_tainted = true;
+		min_iova = domain->min_iova;
+		size = domain->max_iova - domain->min_iova + 1;
+		pgsize = domain->lazy_pgsize;
 	}
 	hyp_spin_unlock(&lazy_domains_lock);
 
 	if (was_tainted)
-		smmu_tlb_flush_all(domain->domain);
+		smmu_tlb_inv_range(domain->domain, min_iova, size, pgsize, false);
 }
 
 static void force_clean_lazy_domains(void)
@@ -1640,8 +1658,9 @@ static size_t smmu_unmap_pages(struct kvm_hyp_iommu_domain *domain, unsigned lon
 		pgcount -= unmapped / pgsize;
 	}
 
-	if (gather && gather->queued)
-		lazy = add_lazy_domain(smmu_domain);
+	if (total_unmapped > 0 && gather && gather->queued)
+		lazy = add_lazy_domain(smmu_domain, orig_iova, total_unmapped,
+				       gather ? gather->pgsize : pgsize);
 
 	/*
 	 * Eagerly drain the gather list before the core code does to Keep
