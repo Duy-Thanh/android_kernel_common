@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de0ef54_d25e1901",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-01T18:04:16Z",
+      "side": 1,
+      "message": "this is not properly sorted... @gprocida@google.com, any clue what happened to the \"keep sorted\" check?",
+      "range": {
+        "startLine": 432,
+        "startChar": 29,
+        "endLine": 432,
+        "endChar": 59
+      },
+      "revId": "6716c91bc4a9ee8f791bf3f4978005562183a0aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
