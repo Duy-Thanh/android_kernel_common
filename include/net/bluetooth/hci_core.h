@@ -28,7 +28,12 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (c85054db46181ee85f10be997f41b347c85bd89b Merge 64ee49df839f ("s390/xor: Fix xor_xc_2() inline assembl)
 #include <linux/android_kabi.h>
+||||||| BASE   (64ee49df839fd77e7f7f5d2cec3c9435f52f099b s390/xor: Fix xor_xc_2() inline assembly constraints)
+=======
+#include <linux/srcu.h>
+>>>>>>> BRANCH (60458ecb0779fe8ee5dc5f61bbf14a2b46496fd3 tty: n_gsm: fix flow control handling in tx path)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sock.h>
@@ -309,6 +314,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	char		name[8];
