@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19e9ffa_8f5470b8",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-01T14:59:52Z",
+      "side": 1,
+      "message": "nit: while we\u0027re at it, strictly speaking, VMCS is not \"exposed\" at all: the host uses vendor-agnostic kvm_x86_ops-like PV interfaces, instead of dealing with VMCS fields in any form?\n\nMaybe we should just remove this comment (since we have long switched from VMX emulation to PV and thus there is no reason why we would want to enable shadow VMCS)?",
+      "fixSuggestions": [
+        {
+          "fixId": "d0c4a396_51b59d16",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 881,
+                "startChar": 0,
+                "endLine": 885,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1e9cf90e6eae535bc1e06c64cf4313127c65f869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
