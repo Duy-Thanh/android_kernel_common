@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d0a75cb_095569a0",
+        "filename": "include/linux/percpu-rwsem.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-01T17:10:43Z",
+      "side": 1,
+      "message": "_trace_android_vh_record_pcpu_rwsem_starttime_new() isn\u0027t a very clear name, as it doesn\u0027t provide any distinction to what is different from _trace_android_vh_record_pcpu_rwsem_starttime().  Can you name it such that it clarifies the need for it over the existing hook?",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 48
+      },
+      "revId": "48b126baab7222b48792b30a7b1e0c6569c37c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
