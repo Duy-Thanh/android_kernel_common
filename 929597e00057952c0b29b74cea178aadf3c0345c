@@ -68,6 +68,24 @@
       "message": "Oh, this is failing because the v29 alignment isn\u0027t in the android17-6.18-kminext branch yet. This will need to wait for those changes to get merged in and then be rebased.",
       "revId": "929597e00057952c0b29b74cea178aadf3c0345c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53cf0ad_2b64454c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-01T17:43:05Z",
+      "side": 1,
+      "message": "ok, let me do that now. I\u0027ll update the branch with a merge.",
+      "parentUuid": "780b3be3_0ce5bdf0",
+      "revId": "929597e00057952c0b29b74cea178aadf3c0345c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
