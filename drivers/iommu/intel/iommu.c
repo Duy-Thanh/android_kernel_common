@@ -2042,6 +2042,15 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn,
 
 #ifdef __PKVM_HYP__
 	if (context_present(context)) {
+		/*
+		 * Derive the device's ATS state from the live context entry so
+		 * the device-TLB flush below is driven by hardware state rather
+		 * than a host-supplied flag. Bit 2 is CE.DTE in scalable mode;
+		 * in legacy mode the only translation type that sets it is
+		 * CONTEXT_TT_DEV_IOTLB, so the same test is valid for both.
+		 */
+		info->ats_supported = !!(context->lo & BIT_ULL(2));
+		info->ats_enabled = info->ats_supported;
 		if (sm) {
 			pasid_dir = __pkvm_va(context->lo & VTD_PAGE_MASK);
 			pasid_dir_sz = get_pasid_dir_size(context);
