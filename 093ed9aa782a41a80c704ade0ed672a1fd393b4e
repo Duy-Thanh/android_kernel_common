@@ -39,6 +39,30 @@
       },
       "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22055b70_930f5737",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-01T13:07:09Z",
+      "side": 1,
+      "message": "Please can you link me to the respin in question? We have other partners interested in landing this patch and so we cannot delay them without good reason.",
+      "parentUuid": "b1d4ba4f_807da94c",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 34
+      },
+      "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
