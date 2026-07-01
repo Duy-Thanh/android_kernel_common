@@ -1,7 +1,17 @@
+<<<<<<< HEAD   (5f0eb26cb7246c8412f464078342992f756b7b74 ANDROID: GKI: add ANDROID_OEM_DATA in struct bio)
 BRANCH="android17-6.18"
 KMI_GENERATION=5
 CLANG_VERSION="r584948c"
 RUSTC_VERSION="1.91.1.p3"
+||||||| BASE   (169543f6c02619099b1b015d39b24e453611a1d8 ANDROID: bpf: protect against OOB write in general)
+BRANCH="android-mainline"
+CLANG_VERSION="r584948b"
+RUSTC_VERSION="1.95.0"
+=======
+BRANCH="android-mainline"
+CLANG_VERSION="r596125"
+RUSTC_VERSION="1.95.0"
+>>>>>>> CHANGE (e23573565c33a0f2450eb56112ce37c8cfbb5945 ANDROID: Update to clang r596125)
 AARCH64_NDK_TRIPLE="aarch64-linux-android31"
 X86_64_NDK_TRIPLE="x86_64-linux-android31"
 ARM_NDK_TRIPLE="armv7a-linux-androideabi31"
