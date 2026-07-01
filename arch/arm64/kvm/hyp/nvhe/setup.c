@@ -342,6 +342,9 @@ static int unmap_protected_regions(void)
 			ret = ___pkvm_host_donate_hyp_prot(
 				reg->start >> PAGE_SHIFT,
 				reg->size >> PAGE_SHIFT, true, PAGE_HYP_DEVICE);
+
+			if (reg->cb)
+				reg->cb = kern_hyp_va(reg->cb);
 			break;
 		default:
 			continue;
