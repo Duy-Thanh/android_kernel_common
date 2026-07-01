@@ -1584,8 +1584,19 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	end = pgofs + maxblocks;
 
 next_dnode:
+<<<<<<< HEAD   (7feef0e516055cc3c762a40b57b2da87a75bb188 Merge 64ee49df839f ("s390/xor: Fix xor_xc_2() inline assembl)
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, flag);
+||||||| BASE   (64ee49df839fd77e7f7f5d2cec3c9435f52f099b s390/xor: Fix xor_xc_2() inline assembly constraints)
+	if (map->m_may_create)
+		f2fs_do_map_lock(sbi, flag, true);
+=======
+	if (map->m_may_create) {
+		if (f2fs_lfs_mode(sbi))
+			f2fs_balance_fs(sbi, true);
+		f2fs_do_map_lock(sbi, flag, true);
+	}
+>>>>>>> BRANCH (60458ecb0779fe8ee5dc5f61bbf14a2b46496fd3 tty: n_gsm: fix flow control handling in tx path)
 
 	/* When reading holes, we need its node page */
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
@@ -2514,9 +2525,6 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
 
 	page = fio->compressed_page ? fio->compressed_page : fio->page;
 
-	/* wait for GCed page writeback via META_MAPPING */
-	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
-
 	if (fscrypt_inode_uses_inline_crypto(inode))
 		return 0;
 
@@ -2701,6 +2709,14 @@ got_it:
 		goto out_writepage;
 	}
 
+<<<<<<< HEAD   (7feef0e516055cc3c762a40b57b2da87a75bb188 Merge 64ee49df839f ("s390/xor: Fix xor_xc_2() inline assembl)
+||||||| BASE   (64ee49df839fd77e7f7f5d2cec3c9435f52f099b s390/xor: Fix xor_xc_2() inline assembly constraints)
+=======
+	/* wait for GCed page writeback via META_MAPPING */
+	if (fio->post_read)
+		f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
+
+>>>>>>> BRANCH (60458ecb0779fe8ee5dc5f61bbf14a2b46496fd3 tty: n_gsm: fix flow control handling in tx path)
 	/*
 	 * If current allocation needs SSR,
 	 * it had better in-place writes for updated data.
