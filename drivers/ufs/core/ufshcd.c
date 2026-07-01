@@ -7418,12 +7418,20 @@ static irqreturn_t ufshcd_intr(int irq, void *__hba)
 {
 	struct ufs_hba *hba = __hba;
 	u32 intr_status, enabled_intr_status;
+	bool use_threaded = true;
+
+	/*
+	 * Allow vendor to opt out of the threaded interrupt handler and
+	 * process the interrupt directly in the primary handler instead.
+	 */
+	trace_android_vh_ufs_use_threaded_intr(hba, &use_threaded);
 
 	/*
 	 * Handle interrupt in thread if MCQ or ESI is disabled,
 	 * and no active UIC command.
 	 */
-	if ((!hba->mcq_enabled || !hba->mcq_esi_enabled) &&
+	if (use_threaded &&
+	    (!hba->mcq_enabled || !hba->mcq_esi_enabled) &&
 	    !hba->active_uic_cmd)
 		return IRQ_WAKE_THREAD;
 
