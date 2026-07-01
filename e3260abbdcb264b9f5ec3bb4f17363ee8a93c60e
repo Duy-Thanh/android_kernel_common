@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7617ff_c0e34088",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-01T15:52:59Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027nik...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027niklas.neronin@linux.intel.com\nCherry pick author: \u0027hulianqin@vivo.com\n\nPlease cherry-pick using: `git cherry-pick -s -x 2a70e5dc0301ad961b198f086a39e2479f6b8933`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e3260abbdcb264b9f5ec3bb4f17363ee8a93c60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47db053c_fcc37e3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-01T15:52:59Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nOriginal author ...\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Thu Apr 2 16:13:29 2026 +0300\nCherry pick author date: Tue Jun 30 17:46:44 2026 +0800\n\nPlease cherry-pick using: `git cherry-pick -s -x 2a70e5dc0301ad961b198f086a39e2479f6b8933`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e3260abbdcb264b9f5ec3bb4f17363ee8a93c60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3fd6dfb_1bb73077",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-01T15:52:59Z",
+      "side": 1,
+      "message": "This is not a clean cherry-pick. Please change to BACKPORT and add an annotation explaining the change. (see https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md)",
+      "revId": "e3260abbdcb264b9f5ec3bb4f17363ee8a93c60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
