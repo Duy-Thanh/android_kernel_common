@@ -150,6 +150,22 @@ struct pasid_table *intel_pasid_get_table(struct pkvm_device *dev)
 
 	return info->pasid_table;
 }
+
+static void pkvm_populate_dev_info(struct pkvm_device *dev)
+{
+	struct device_domain_info *info = dev_iommu_priv_get(dev);
+	struct context_entry *context;
+
+	if (!info || !info->iommu)
+		return;
+
+	context = iommu_context_addr(info->iommu, info->bus, info->devfn, false);
+	if (!context || !context_present(context))
+		return;
+
+	info->ats_supported = !!(READ_ONCE(context->lo) & BIT_ULL(2));
+	info->ats_enabled = info->ats_supported;
+}
 #endif
 
 #ifndef __PKVM_HYP__
@@ -351,6 +367,9 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 #endif
 
 	spin_lock(&iommu->lock);
+#ifdef __PKVM_HYP__
+	pkvm_populate_dev_info(dev);
+#endif
 	pte = intel_pasid_get_entry(dev, pasid);
 	if (WARN_ON(IS_ERR(pte))) {
 		spin_unlock(&iommu->lock);
@@ -549,6 +568,9 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct pkvm_device 
 #endif
 
 	spin_lock(&iommu->lock);
+#ifdef __PKVM_HYP__
+	pkvm_populate_dev_info(dev);
+#endif
 	pte = intel_pasid_get_entry(dev, pasid);
 	if (IS_ERR(pte)) {
 		spin_unlock(&iommu->lock);
@@ -653,6 +675,9 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 #endif
 
 	spin_lock(&iommu->lock);
+#ifdef __PKVM_HYP__
+	pkvm_populate_dev_info(dev);
+#endif
 	pte = intel_pasid_get_entry(dev, pasid);
 	if (IS_ERR(pte)) {
 		spin_unlock(&iommu->lock);
