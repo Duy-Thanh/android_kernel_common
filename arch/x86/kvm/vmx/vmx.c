@@ -9804,8 +9804,8 @@ static void update_protected_vcpu_state(struct kvm_vcpu *vcpu,
 
 		if (vmx_get_exit_reason(vcpu).basic == EXIT_REASON_MSR_READ &&
 		    !to_pkvm_vcpu(vcpu)->host_emulated_msr_err) {
-			kvm_rax_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RAX]);
-			kvm_rdx_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RDX]);
+			kvm_rax_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RAX] & 0xffffffffULL);
+			kvm_rdx_write(vcpu, shared_vcpu->arch.regs[VCPU_REGS_RDX] & 0xffffffffULL);
 		}
 
 		WARN_ON_ONCE(kvm_complete_insn_gp(vcpu,
@@ -9943,11 +9943,11 @@ static void share_protected_vcpu_state(struct kvm_vcpu *vcpu,
 		break;
 	}
 	case EXIT_REASON_MSR_WRITE:
-		shared_vcpu->arch.regs[VCPU_REGS_RAX] = kvm_rax_read(vcpu);
-		shared_vcpu->arch.regs[VCPU_REGS_RDX] = kvm_rdx_read(vcpu);
+		shared_vcpu->arch.regs[VCPU_REGS_RAX] = kvm_rax_read(vcpu) & 0xffffffffULL;
+		shared_vcpu->arch.regs[VCPU_REGS_RDX] = kvm_rdx_read(vcpu) & 0xffffffffULL;
 		fallthrough;
 	case EXIT_REASON_MSR_READ:
-		shared_vcpu->arch.regs[VCPU_REGS_RCX] = kvm_rcx_read(vcpu);
+		shared_vcpu->arch.regs[VCPU_REGS_RCX] = kvm_rcx_read(vcpu) & 0xffffffffULL;
 		break;
 	case EXIT_REASON_EPT_VIOLATION:
 		to_vmx(shared_vcpu)->exit_gpa = vmcs_read64(GUEST_PHYSICAL_ADDRESS);
