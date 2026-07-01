@@ -294,6 +294,11 @@ static inline unsigned long pvm_supported_vcpu_features(void)
 	(kvm_has_feat(kvm, ID_AA64ISAR1_EL1, LS64, LS64) ? 0ULL : HCRX_nLS64) | \
 	0
 
+struct pkvm_moveable_reg;
+
+typedef void(pkvm_emulate_handler)(struct pkvm_moveable_reg *region, u64 offset,
+				   bool write, u64 *reg, u8 reg_size);
+
 enum pkvm_moveable_reg_type {
 	PKVM_MREG_MEMORY,
 	PKVM_MREG_PROTECTED_RANGE,
@@ -305,6 +310,7 @@ struct pkvm_moveable_reg {
 	phys_addr_t start;
 	u64 size;
 	enum pkvm_moveable_reg_type type;
+	pkvm_emulate_handler *cb;
 };
 
 #define PKVM_NR_MOVEABLE_REGS 512
