@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c76280e9_df10e97c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-01T12:50:43Z",
+      "side": 1,
+      "message": "Could you also update Documentation/admin-guide/kernel-parameters.txt?",
+      "revId": "a93ed7d0df601b8c359c691a2940b291ca31bab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6838cd9_8a7d3320",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3068,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-01T12:50:43Z",
+      "side": 1,
+      "message": "Perhaps \"force\" and \"FORCE\"?",
+      "revId": "a93ed7d0df601b8c359c691a2940b291ca31bab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
