@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f158a3_a0dc1162",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-01T22:30:56Z",
+      "side": 1,
+      "message": "nit: that comment about FILL_RETURN_BUFFER was added in a later commit d65b3c7f3981 (\"ANDROID: pKVM: x86: Prevent pKVM to run if CPU has unsupported bugs\"), not in d81f2213622e?",
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ccce07_fae6114f",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-01T22:30:56Z",
+      "side": 1,
+      "message": "1. Start the comment with saying that FILL_RETURN_BUFFER is not needed here, to make it immediately clear what this whole comment is about?\n\n2. IMHO no need to mention ADL/PTL and details like pkvm_relax_cpu_bugs, we can just say that pKVM requires eIBRS.\n\n3. The last sentence sounds a bit too verbose and not quite clear to me. \"it will execute the CALL instruction and let it retire before the first RET instruction\" - but this is true for the original code in vmx/vmenter.S as well, since it executes `call vmx_spec_ctrl_restore_host` before the unbalanced RET? And this CALL is not really enough to fix the issue for that original code, it needs at least CALL + INT3 (provided by X86_FEATURE_RSB_VMEXIT_LITE) for that? So this sentence seems misleading?\n\n4. Split into paragraphs for readability?\n\nMaybe just something like:\n\n```\n\t/* \n\t * Unlike in vmx/vmenter.S, no need for FILL_RETURN_BUFFER here.\n\t *\n\t * pKVM requires eIBRS which has its own protection against poisoned RSB,\n\t * so no need for RSB filling.\n\t *\n\t * If eIBRS is affected by PBRSB, still no need for RSB filling here,\n\t * since there is no unbalanced RET after host vmexit.\n\t */\n```\n\n?",
+      "fixSuggestions": [
+        {
+          "fixId": "3888f649_eb56786d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "\t * Unlike in vmx/vmenter.S, no need for FILL_RETURN_BUFFER here.\n\t *\n\t * pKVM requires eIBRS which has its own protection against poisoned RSB,\n\t * so no need for RSB filling.\n\t *\n\t * If eIBRS is affected by PBRSB, still no need for RSB filling here, since\n\t * since there is no unbalanced RET after host vmexit.\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
