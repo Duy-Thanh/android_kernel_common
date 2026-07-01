@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd0c1b2_602af54e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-01T12:54:23Z",
+      "side": 1,
+      "message": "It\u0027s probably impossible to trigger this path, so I am not sure it\u0027s worth backporting.\n\nWDYS?",
+      "revId": "da634b71522f2c3202b1b231f4ecaeb84234b6d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
