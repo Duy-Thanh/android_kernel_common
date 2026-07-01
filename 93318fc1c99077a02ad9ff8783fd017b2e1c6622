@@ -16,6 +16,24 @@
       "message": "CR+2 so we can refresh the ABI",
       "revId": "93318fc1c99077a02ad9ff8783fd017b2e1c6622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1646de69_65af8566",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3536361
+      },
+      "writtenOn": "2026-07-01T14:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2661957_247ecaca",
+      "revId": "93318fc1c99077a02ad9ff8783fd017b2e1c6622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
