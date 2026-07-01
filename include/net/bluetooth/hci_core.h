@@ -28,7 +28,12 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (c85054db46181ee85f10be997f41b347c85bd89b Merge 64ee49df839f ("s390/xor: Fix xor_xc_2() inline assembl)
 #include <linux/android_kabi.h>
+||||||| BASE   (64ee49df839fd77e7f7f5d2cec3c9435f52f099b s390/xor: Fix xor_xc_2() inline assembly constraints)
+=======
+#include <linux/srcu.h>
+>>>>>>> BRANCH (05968b6dd0ffc65d7386608b11a11fb4fdfc9f36 net: stmmac: fix TSO DMA API usage causing oops)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sock.h>
@@ -309,6 +314,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	char		name[8];
