@@ -50,6 +50,30 @@
       ],
       "revId": "0951af6559136683147ad315c6bf039ac27b1434",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804bd8d0_0c7757dd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-01T14:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa657c62_1dd43859",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 1
+      },
+      "revId": "0951af6559136683147ad315c6bf039ac27b1434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
