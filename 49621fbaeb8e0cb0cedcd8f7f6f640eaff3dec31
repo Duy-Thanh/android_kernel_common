@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f545aa_201ef390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-07-01T09:32:07Z",
+      "side": 1,
+      "message": "KST reports `arch_touch_nmi_watchdog` as the only new function. @tkjos@google.com could you please take a look? Thanks!",
+      "revId": "49621fbaeb8e0cb0cedcd8f7f6f640eaff3dec31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
