@@ -395,7 +395,8 @@ static int pkvm_vm_finalize(int vm_handle)
 	pvmfw_load_addr = READ_ONCE(shared_kvm->arch.pkvm.pvmfw_load_addr);
 	if (pvmfw_load_addr != INVALID_GPA) {
 		if (!pvmfw_present || pvmfw_load_addr + pvmfw_size < pvmfw_load_addr ||
-		    pvmfw_load_addr + pvmfw_size > pkvm_pgtable_max_size(&pkvm_vm->mmu)) {
+		    pvmfw_load_addr + pvmfw_size > pkvm_pgtable_max_size(&pkvm_vm->mmu) ||
+		    pvmfw_load_addr >> 32 != 0) {
 			ret = -EINVAL;
 			goto unlock;
 		}
