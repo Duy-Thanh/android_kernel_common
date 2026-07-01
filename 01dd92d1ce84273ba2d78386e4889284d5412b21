@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b096e55_83618743",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3318,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-01T23:51:50Z",
+      "side": 1,
+      "message": "So this vh is very narrowly scoped (only being called if !(ctx-\u003eflags \u0026 SCA_MIGRATE_ENABLE) \u0026\u0026 cpumask_equal(\u0026p-\u003ecpus_mask, ctx-\u003enew_mask)), so I wonder if it could be more clearly named?  Maybe trace_android_vh__set_cpus_allowed_ptr_locked_migrate_same() or something (though hopefully more terse than my suggestion)?\n\nOtherwise it seems like it should be generally called above the MIGRATE_ENABLE flag check (and you\u0027re vendor hook implementation could double check flags and cpumask before taking action).",
+      "revId": "01dd92d1ce84273ba2d78386e4889284d5412b21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
