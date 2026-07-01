@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9f2b1ea_dfeed0bb",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5216,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-01T14:15:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1037763f_984c6d15",
+      "range": {
+        "startLine": 5216,
+        "startChar": 2,
+        "endLine": 5216,
+        "endChar": 46
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6446c306_fd022b8f",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96eb64e3_ea27a759",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5228,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-01T14:15:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35d8ea03_93974845",
+      "range": {
+        "startLine": 5228,
+        "startChar": 45,
+        "endLine": 5228,
+        "endChar": 68
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ace9f413_1e63b46d",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Will fold the fix, thanks",
       "parentUuid": "ace9f413_1e63b46d",
+      "range": {
+        "startLine": 5290,
+        "startChar": 0,
+        "endLine": 5290,
+        "endChar": 48
+      },
+      "revId": "a61c55ff84b931a66233e89b655831e3c7bd3bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed781036_c883d700",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5290,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-01T14:15:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc962421_bd3571ea",
       "range": {
         "startLine": 5290,
         "startChar": 0,
