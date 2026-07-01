@@ -163,7 +163,8 @@ void handle_exception(struct pt_regs *regs, int vector, bool has_error_code)
 	if (vector >= X86_TRAP_IRET)
 		return;
 
-	if (pkvm_fixup_exception(regs))
+	if ((vector == X86_TRAP_GP || vector == X86_TRAP_UD) &&
+	    pkvm_fixup_exception(regs))
 		return;
 
 	handler = exception_handlers[vector];
