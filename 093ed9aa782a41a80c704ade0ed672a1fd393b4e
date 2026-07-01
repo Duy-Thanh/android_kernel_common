@@ -16,6 +16,29 @@
       "message": "Respin Bug: b/529663897",
       "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d4ba4f_807da94c",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 3802377
+      },
+      "writtenOn": "2026-07-01T07:12:49Z",
+      "side": 1,
+      "message": "I\u0027d like this patch to be merged only after the respin of https://android-review.googlesource.com/c/kernel/common/+/4127053 has been merged.\n\n\n\nPlease wait， thanks",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 34
+      },
+      "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
