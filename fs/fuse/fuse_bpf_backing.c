@@ -1543,6 +1543,7 @@ int fuse_mkdir_backing(
 					backing_path.dentry, mode);
 	if (IS_ERR(backing_path.dentry)) {
 		err = PTR_ERR(backing_path.dentry);
+		backing_path.dentry = NULL;  // Safe - vfs_mkdir already did dput!
 		goto out;
 	}
 	if (d_really_is_negative(backing_path.dentry) ||
@@ -1610,6 +1611,10 @@ int fuse_rmdir_backing(
 	struct dentry *backing_parent_dentry;
 	struct inode *backing_inode;
 
+	struct dentry *revalidated;
+	const char *name = fa->in_args[0].value;
+	struct qstr qname = QSTR_INIT(name, strlen(name));
+
 	/* TODO Actually deal with changing the backing entry in rmdir */
 	get_fuse_backing_path(entry, &backing_path);
 	if (!backing_path.dentry)
@@ -1620,7 +1625,22 @@ int fuse_rmdir_backing(
 	backing_inode = d_inode(backing_parent_dentry);
 
 	inode_lock_nested(backing_inode, I_MUTEX_PARENT);
+	/* Re-validate the backing entry under the parent lock to prevent races */
+	revalidated = lookup_one(&nop_mnt_idmap, &qname, backing_parent_dentry);
+	if (IS_ERR(revalidated)) {
+		err = PTR_ERR(revalidated);
+		goto out_unlock;
+	}
+	/* If the backing entry has changed or was already deleted, abort safely */
+	if (revalidated != backing_path.dentry) {
+		dput(revalidated);
+		err = -ENOENT;
+		goto out_unlock;
+	}
+	dput(revalidated);
+
 	err = vfs_rmdir(&nop_mnt_idmap, backing_inode, backing_path.dentry);
+out_unlock:
 	inode_unlock(backing_inode);
 
 	dput(backing_parent_dentry);
@@ -1832,6 +1852,10 @@ int fuse_unlink_backing(
 	struct dentry *backing_parent_dentry;
 	struct inode *backing_inode;
 
+	struct dentry *revalidated;
+	const char *name = fa->in_args[0].value;
+	struct qstr qname = QSTR_INIT(name, strlen(name));
+
 	/* TODO Actually deal with changing the backing entry in unlink */
 	get_fuse_backing_path(entry, &backing_path);
 	if (!backing_path.dentry)
@@ -1842,7 +1866,22 @@ int fuse_unlink_backing(
 	backing_inode = d_inode(backing_parent_dentry);
 
 	inode_lock_nested(backing_inode, I_MUTEX_PARENT);
+	/* Re-validate the backing entry under the parent lock to prevent races */
+	revalidated = lookup_one(&nop_mnt_idmap, &qname, backing_parent_dentry);
+	if (IS_ERR(revalidated)) {
+		err = PTR_ERR(revalidated);
+		goto out_unlock;
+	}
+	/* If the backing entry has changed or was already deleted, abort safely */
+	if (revalidated != backing_path.dentry) {
+		dput(revalidated);
+		err = -ENOENT;
+		goto out_unlock;
+	}
+	dput(revalidated);
+
 	err = vfs_unlink(&nop_mnt_idmap, backing_inode, backing_path.dentry, NULL);
+out_unlock:
 	inode_unlock(backing_inode);
 
 	dput(backing_parent_dentry);

@@ -237,6 +237,7 @@
   cdc_ncm_unbind
   cdc_parse_cdc_header
   cdev_add
+  cdev_alloc
   cdev_del
   cdev_device_add
   cdev_device_del
@@ -321,6 +322,7 @@
   config_item_set_name
   __const_udelay
   consume_skb
+  contig_page_data
   cont_write_begin
   _copy_from_iter
   _copy_from_user
@@ -331,12 +333,16 @@
   cppc_get_perf_caps
   cpu_bit_bitmap
   cpu_core_map
+  cpufreq_cpu_get
   cpufreq_cpu_get_raw
+  cpufreq_cpu_put
   cpufreq_generic_frequency_table_verify
   cpufreq_get_current_driver
   cpufreq_register_driver
+  cpufreq_register_notifier
   cpufreq_show_cpus
   cpufreq_unregister_driver
+  cpufreq_unregister_notifier
   __cpuhp_remove_state
   __cpuhp_setup_state
   cpu_info
@@ -348,6 +354,7 @@
   cpu_number
   __cpu_online_mask
   __cpu_possible_mask
+  __cpu_present_mask
   cpu_sibling_map
   cpus_read_lock
   cpus_read_unlock
@@ -845,6 +852,7 @@
   __drm_debug
   drm_debugfs_add_files
   drm_debugfs_create_files
+  __drm_debug_trace
   drm_default_rgb_quant_range
   __drm_dev_dbg
   drm_dev_enter
@@ -900,6 +908,7 @@
   drm_gem_object_release
   drm_gem_plane_helper_prepare_fb
   drm_gem_prime_export
+  drm_gem_prime_handle_to_fd
   drm_gem_prime_mmap
   drm_gem_private_object_init
   drm_gem_reset_shadow_plane
@@ -1022,6 +1031,7 @@
   __drm_printfn_info
   __drm_printfn_line
   __drm_printfn_seq_file
+  __drm_printfn_trace
   drm_print_hex_dump
   drm_print_memory_stats
   drm_privacy_screen_get
@@ -1088,6 +1098,7 @@
   efivars_register
   efivars_unregister
   emergency_restart
+  empty_zero_page
   enable_irq
   enable_work
   eth_commit_mac_addr_change
@@ -1131,6 +1142,7 @@
   _find_next_bit
   _find_next_or_bit
   _find_next_zero_bit
+  find_pid_ns
   find_vma_intersection
   finish_open
   finish_wait
@@ -1151,6 +1163,7 @@
   __folio_put
   folio_unlock
   folio_wait_stable
+  for_each_kernel_tracepoint
   for_each_thermal_trip
   __fortify_panic
   fput
@@ -1469,6 +1482,7 @@
   inet_csk_get_port
   init_iova_domain
   init_net
+  init_pid_ns
   __init_rwsem
   init_special_inode
   __init_swait_queue_head
@@ -1618,6 +1632,7 @@
   irq_set_chip_and_handler_name
   irq_set_chip_data
   irq_set_irq_wake
+  irq_stat
   irq_work_queue
   irq_work_sync
   is_acpi_data_node
@@ -1687,6 +1702,7 @@
   kstrtoul_from_user
   kstrtoull
   kstrtoull_from_user
+  kthread_complete_and_exit
   kthread_create_on_node
   kthread_create_worker_on_node
   kthread_destroy_worker
@@ -2234,6 +2250,7 @@
   __phy_write_mmd
   phy_write_mmd
   phy_write_paged
+  pid_task
   pinconf_generic_dt_free_map
   pinconf_generic_dt_node_to_map
   pinctrl_dev_get_drvdata
@@ -2351,8 +2368,10 @@
   ___ratelimit
   _raw_read_lock
   _raw_read_lock_bh
+  _raw_read_lock_irqsave
   _raw_read_unlock
   _raw_read_unlock_bh
+  _raw_read_unlock_irqrestore
   _raw_spin_lock
   _raw_spin_lock_bh
   _raw_spin_lock_irq
@@ -2697,6 +2716,7 @@
   skip_spaces
   sk_skb_reason_drop
   smp_call_function_any
+  smp_call_function_many
   smp_call_function_single
   smp_call_function_single_async
   snd_card_disconnect
@@ -3040,6 +3060,7 @@
   sysfs_update_group
   system_dfl_wq
   system_freezable_wq
+  system_highpri_wq
   system_long_wq
   system_percpu_wq
   system_power_efficient_wq

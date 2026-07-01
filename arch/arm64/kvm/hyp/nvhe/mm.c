@@ -303,7 +303,7 @@ int hyp_back_vmemmap(phys_addr_t back)
 }
 
 static void *__hyp_bp_vect_base;
-int pkvm_cpu_set_vector(enum arm64_hyp_spectre_vector slot)
+int __pkvm_cpu_set_vector(enum arm64_hyp_spectre_vector slot, int cpu)
 {
 	void *vector;
 
@@ -326,9 +326,14 @@ int pkvm_cpu_set_vector(enum arm64_hyp_spectre_vector slot)
 	}
 
 	vector = __kvm_vector_slot2addr(vector, slot);
-	*this_cpu_ptr(&kvm_hyp_vector) = (unsigned long)vector;
+	*per_cpu_ptr(&kvm_hyp_vector, cpu) = (unsigned long)vector;
 
 	return 0;
+}
+
+int pkvm_cpu_set_vector(enum arm64_hyp_spectre_vector slot)
+{
+	return __pkvm_cpu_set_vector(slot, hyp_smp_processor_id());
 }
 
 int hyp_map_vectors(void)
@@ -395,7 +400,7 @@ static void fixmap_clear_slot(struct hyp_fixmap_slot *slot)
 	 */
 	dsb(ishst);
 	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), level);
-	dsb(ish);
+	__tlbi_sync_s1ish_hyp();
 	isb();
 }
 
