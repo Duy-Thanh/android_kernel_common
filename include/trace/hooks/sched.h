@@ -430,6 +430,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_task_comm,
 DECLARE_HOOK(android_vh_move_entity,
 	TP_PROTO(int *move, unsigned int flags),
 	TP_ARGS(move, flags));
+
+DECLARE_HOOK(android_vh_sca_migrate_same,
+	TP_PROTO(struct task_struct *p, struct affinity_context *ctx),
+	TP_ARGS(p, ctx));
+
 DECLARE_HOOK(android_vh_scx_restore_flags,
 	TP_PROTO(const struct sched_class *prev_class,
 		 const struct sched_class *next_class,
