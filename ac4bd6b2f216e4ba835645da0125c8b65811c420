@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a77bb08_f297691e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2026-07-01T06:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b0daa20_1802fd50",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 62
+      },
+      "revId": "ac4bd6b2f216e4ba835645da0125c8b65811c420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cdddfd6_ecf868dc",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-06-25T16:51:25Z",
       "side": 1,
       "message": "I\u0027d like to avoid touching so much code given that this isn\u0027t for upstream. Some alternatives are:\n\n1. Probe the PSCI features directly from EL2, e.g. by calling a `psci_features_init()` function from `__pkvm_init_finalise()` which could query the features and stash the value somewhere in `psci-relay.c`\n\n2. Probe for `PSCI_MEM_PROTECT` at EL1 in `init_psci_relay()` and flip a static key which is used at EL2 in `psci_mem_protect)`\n\n3. Have a cmdline option along the lines of `kvm-arm.psci_mem_protect\u003don|off|auto` to either force it on, don\u0027t touch it or have the current toggling behaviour\n\n4. Add a hypervisor module callback for the mem_protect logic and only call PSCI if nothing has been registered by a module.\n\nWDYT?",
+      "range": {
+        "startLine": 2368,
+        "startChar": 0,
+        "endLine": 2371,
+        "endChar": 2
+      },
+      "revId": "ac4bd6b2f216e4ba835645da0125c8b65811c420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a9b1a2c_5fe6ae8a",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2371,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2026-07-01T06:31:05Z",
+      "side": 1,
+      "message": "Thanks for all suggestions.\n\n\u003e Have a cmdline option along the lines of kvm-arm.psci_mem_protect\u003don|off|auto to either force it on, don\u0027t touch it or have the current toggling behaviour\n\nSeems this fits the best to my needs, implemented in next version, PTAL.",
+      "parentUuid": "3cdddfd6_ecf868dc",
       "range": {
         "startLine": 2368,
         "startChar": 0,
