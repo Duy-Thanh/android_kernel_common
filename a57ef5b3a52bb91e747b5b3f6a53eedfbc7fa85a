@@ -16,6 +16,23 @@
       "message": "?",
       "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf3fcf0_896a5e9d",
+        "filename": "gki/aarch64/symbols/pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-01T19:11:04Z",
+      "side": 1,
+      "message": "the associated bug looks desktop related. Why is the pixel symbol list being changed? Shouldn\u0027t it be the desktop list?",
+      "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
