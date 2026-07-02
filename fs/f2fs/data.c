@@ -1584,8 +1584,19 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
 	end = pgofs + maxblocks;
 
 next_dnode:
+<<<<<<< HEAD   (9de427b86b5252ec47700e990bef45894e985633 Merge baed19c108ac ("vdpa: Add max vqp attr to vdpa_nl_polic)
 	if (map->m_may_create)
 		f2fs_map_lock(sbi, flag);
+||||||| BASE   (baed19c108ac8287425b93a44985bbe9a0b1af8d vdpa: Add max vqp attr to vdpa_nl_policy for nlattr length c)
+	if (map->m_may_create)
+		f2fs_do_map_lock(sbi, flag, true);
+=======
+	if (map->m_may_create) {
+		if (f2fs_lfs_mode(sbi))
+			f2fs_balance_fs(sbi, true);
+		f2fs_do_map_lock(sbi, flag, true);
+	}
+>>>>>>> BRANCH (c737047f4665232d1e26b3620bc62df334545451 f2fs: fix to trigger foreground gc during f2fs_map_blocks() )
 
 	/* When reading holes, we need its node page */
 	set_new_dnode(&dn, inode, NULL, NULL, 0);
