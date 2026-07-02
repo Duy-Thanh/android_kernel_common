@@ -151,6 +151,24 @@
       "parentUuid": "142ffaf5_26ac9a4a",
       "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0ffadf_69e60ea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2026-07-02T15:49:13Z",
+      "side": 1,
+      "message": "BACKPORT: usb: xhci: optimize resuming from S4 (suspend-to-disk)\n\n[hulianqin: Resolved backport conflicts due to older kernel API/struct differences:\n - xhci-\u003emax_ports and xhci-\u003emax_slots fields don\u0027t exist, use HCS_MAX_PORTS/HCS_MAX_SLOTS macros instead\n - xhci_resume() uses pm_message_t interface with hibernated flag instead of power_lost bool parameter\n - xhci_init() doesn\u0027t include interrupter initialization, keep xhci_disable_interrupter() block\n - xhci_init() returns int, keep retval check\n - xhci_rh_bw_cleanup() doesn\u0027t exist as standalone function, add full implementation\n - Use C89 loop variable declarations instead of C99 for-scope declarations]\n \n \n It has been modified, please review.",
+      "parentUuid": "933fceab_2cddf13d",
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
