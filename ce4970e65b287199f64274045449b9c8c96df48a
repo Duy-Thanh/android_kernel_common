@@ -22,6 +22,30 @@
       },
       "revId": "ce4970e65b287199f64274045449b9c8c96df48a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8d7362_8309140a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-02T15:05:24Z",
+      "side": 1,
+      "message": "it should be https://lore.kernel.org/all/20260702103848.1647249-7-sebastianene@google.com/",
+      "parentUuid": "dc36c8de_55a806d1",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "ce4970e65b287199f64274045449b9c8c96df48a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
