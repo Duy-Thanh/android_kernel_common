@@ -1422,6 +1422,8 @@ int qi_submit_sync(struct intel_iommu *iommu, struct qi_desc *desc,
 	s64 devtlb_start_ktime = 0;
 	s64 iotlb_start_ktime = 0;
 	s64 iec_start_ktime = 0;
+#else
+	int retries = 0;
 #endif
 	struct qi_desc wait_desc;
 	int wait_index, index;
@@ -1535,8 +1537,29 @@ restart:
 	reclaim_free_desc(qi);
 	raw_spin_unlock_irqrestore(&qi->q_lock, flags);
 
-	if (rc == -EAGAIN)
+	if (rc == -EAGAIN) {
+#ifdef __PKVM_HYP__
+		/*
+		 * qi_check_fault() can return -EAGAIN on an Invalidation Timeout
+		 * Error (ITE), which occurs when an ATS Device-TLB invalidation
+		 * request times out at the hardware level (~100ms+). Transient
+		 * delays (e.g. iGPU power state transitions or heavy workload
+		 * backpressure) may recover after a few retries.
+		 *
+		 * However, an ITE fault can also be intentionally induced by a
+		 * malicious host withdrawing the endpoint's completion ability
+		 * (e.g. via FLR, D3 power state transitions, or Secondary Bus Reset).
+		 *
+		 * To prevent a hung, non-responsive, or host-reset device from causing
+		 * an infinite retry loop and locking up hypervisor CPU cores
+		 * indefinitely, bound the retries to a maximum limit before
+		 * returning -ETIMEDOUT.
+		 */
+		if (++retries >= 3)
+			return -ETIMEDOUT;
+#endif
 		goto restart;
+	}
 
 #ifndef __PKVM_HYP__
 	if (iotlb_start_ktime)
