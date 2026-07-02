@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac28261_3e52e63f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-02T16:03:01Z",
+      "side": 1,
+      "message": "You cannot add extra symbols. Please check pick the original change. If other symbols are in other cherry-picks, stack that on top.",
+      "revId": "641079d33975e4d5645d921371d331c0d9374bd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
