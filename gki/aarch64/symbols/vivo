@@ -77,6 +77,7 @@
   schedule_timeout_killable
   __irq_regs
   _trace_android_vh_filemap_alloc_folio
+
   __traceiter_android_rvh_alloc_pages_reclaim_cycle_end
   __traceiter_android_rvh_alloc_pages_reclaim_start
   __traceiter_android_vh_mglru_aging_bypass
@@ -366,3 +367,4 @@
   unlock_buffer
   __wait_on_buffer
   wbc_account_cgroup_owner
+  cpuset_cpus_allowed
