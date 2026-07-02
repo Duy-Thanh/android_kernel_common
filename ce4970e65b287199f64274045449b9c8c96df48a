@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc36c8de_55a806d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-02T15:04:30Z",
+      "side": 1,
+      "message": "The link doesn\u0027t point to the correct patch",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "ce4970e65b287199f64274045449b9c8c96df48a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
