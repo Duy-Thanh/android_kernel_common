@@ -626,6 +626,13 @@ static int llcp_sock_release(struct socket *sock)
 		}
 	}
 
+	if (sock->type == SOCK_RAW)
+		nfc_llcp_sock_unlink(&local->raw_sockets, sk);
+	else if (sk->sk_state == LLCP_CONNECTING)
+		nfc_llcp_sock_unlink(&local->connecting_sockets, sk);
+	else
+		nfc_llcp_sock_unlink(&local->sockets, sk);
+
 	if (llcp_sock->reserved_ssap < LLCP_SAP_MAX)
 		nfc_llcp_put_ssap(llcp_sock->local, llcp_sock->ssap);
 
@@ -638,6 +645,7 @@ static int llcp_sock_release(struct socket *sock)
 	if (sk->sk_state == LLCP_DISCONNECTING)
 		return err;
 
+<<<<<<< HEAD   (4988fc0bc977e7644d061b02fe3ab961a8a64975 Revert "alarmtimer: Check RTC features instead of ops")
 	if (sock->type == SOCK_RAW)
 		nfc_llcp_sock_unlink(&local->raw_sockets, sk);
 	else if (sk->sk_state == LLCP_CONNECTING)
@@ -645,6 +653,14 @@ static int llcp_sock_release(struct socket *sock)
 	else
 		nfc_llcp_sock_unlink(&local->sockets, sk);
 
+||||||| BASE   (5dbd240ac9a06a52a2c7e70b69b6fd7d11aeb359 Linux 5.10.258)
+	if (sock->type == SOCK_RAW)
+		nfc_llcp_sock_unlink(&local->raw_sockets, sk);
+	else
+		nfc_llcp_sock_unlink(&local->sockets, sk);
+
+=======
+>>>>>>> BRANCH (884eb247b74d86db97e3a37f0d6fc8e1e83590dd net/iucv: fix locking in .getsockopt)
 out:
 	sock_orphan(sk);
 	sock_put(sk);
