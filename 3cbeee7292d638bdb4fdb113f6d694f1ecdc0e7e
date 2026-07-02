@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ba0e0e80_a06b1621",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2026-07-02T08:01:29Z",
+      "side": 1,
+      "message": "There was a conflict when merging a patch from the Linux master branch into kernel-6.12. The correct commit is to resolve the conflict.",
+      "parentUuid": "f335b45e_c7f2fa45",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "18a5dce5_ec4589fe",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
