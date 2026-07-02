@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3b1347_213ce242",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-07-02T15:58:51Z",
+      "side": 1,
+      "message": "Can we avoid calling this if max is 0?",
+      "range": {
+        "startLine": 137,
+        "startChar": 14,
+        "endLine": 137,
+        "endChar": 45
+      },
+      "revId": "813afe27df80d33333b108388b6f4c9349a185f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
