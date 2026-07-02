@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1281ce_f75ee178",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-02T16:46:08Z",
+      "side": 1,
+      "message": "Maybe we should just rename `pkvm_panic()` to `panic()`?",
+      "fixSuggestions": [
+        {
+          "fixId": "7291ed85_20fb9f3e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "void __noreturn panic(const char *fmt, ...)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3c02296352d555ed5c4980756735ec6676679f93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
