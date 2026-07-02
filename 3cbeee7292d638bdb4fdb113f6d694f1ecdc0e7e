@@ -73,6 +73,24 @@
       "message": "This looks pretty far from the original patch. Did you mean to submit this as a `BACKPORT: `?",
       "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e4fe07_2e117d42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2026-07-02T08:00:19Z",
+      "side": 1,
+      "message": "It has been changed to BACKPORT",
+      "parentUuid": "73fde69c_3052a83b",
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
