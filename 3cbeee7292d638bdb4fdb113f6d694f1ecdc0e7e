@@ -56,6 +56,23 @@
       "message": "After cherry-picking, resolve conflicts manually.",
       "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73fde69c_3052a83b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-02T03:53:47Z",
+      "side": 1,
+      "message": "This looks pretty far from the original patch. Did you mean to submit this as a `BACKPORT: `?",
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
