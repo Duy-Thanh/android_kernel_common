@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8a1a6a_f30818bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-07-02T09:56:27Z",
+      "side": 1,
+      "message": "This patch doesn\u0027t seem to have much relation to the list patch it is \"backported\" from any more? The commit message is just confusing, for example.",
+      "revId": "9ce635823bbafb6c4f2565e4158ad475c6206f88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
