@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d8a7b8_6b15e07f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-07-02T17:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7875c19_d5e5a0e6",
+      "revId": "96524cb4d0809a39a8c745909e661a18acfa2310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74d9eca3_ed4065e8",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-01T19:16:47Z",
       "side": 1,
       "message": "Add a patch on top of this one to add the new symbol to your symbol list",
+      "revId": "96524cb4d0809a39a8c745909e661a18acfa2310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddeddd2e_d72f1cc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-07-02T17:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d9eca3_ed4065e8",
       "revId": "96524cb4d0809a39a8c745909e661a18acfa2310",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
