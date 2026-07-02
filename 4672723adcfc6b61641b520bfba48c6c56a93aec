@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e335d8_b2bd3f51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-02T15:06:44Z",
+      "side": 1,
+      "message": "replace with https://lore.kernel.org/all/20260702103848.1647249-7-sebastianene@google.com/",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "4672723adcfc6b61641b520bfba48c6c56a93aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af956f5_a51b7871",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-02T15:06:44Z",
+      "side": 1,
+      "message": "backport wasn\u0027t applied correctly",
+      "range": {
+        "startLine": 279,
+        "startChar": 1,
+        "endLine": 279,
+        "endChar": 37
+      },
+      "revId": "4672723adcfc6b61641b520bfba48c6c56a93aec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
