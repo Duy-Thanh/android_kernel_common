@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ece2ade_69a88b0e",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-02T15:24:45Z",
+      "side": 1,
+      "message": "We will support more CPUs in the future, so instead of mentioning ADL/PTL, we can just say e.g. \"On Intel platforms with eIBRS (required by pKVM), ...\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "f8cb762e_432b9428",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "\t * On Intel platforms with eIBRS (required by pKVM), all three\n"
+            }
+          ]
+        }
+      ],
+      "revId": "67043c6f695a5a23462ca6ae0492ff00c1367a1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
