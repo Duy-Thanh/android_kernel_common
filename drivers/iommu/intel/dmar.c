@@ -1372,6 +1372,17 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
 		 *
 		 * 0 value of ite_sid means old VT-d device, no ite_sid value.
 		 * see Intel VT-d spec r4.1, section 11.4.9.9
+		 *
+		 * NOTE: with pKVM, ATS is only enabled for devices listed in
+		 * SATC (see is_dev_in_satc() gating in iommu_set_lm_ce()/
+		 * iommu_set_sm_ce()), and SATC devices are SoC-integrated and
+		 * not hot-removable, so the device-released/not-present
+		 * scenario handled here cannot occur for any device an ITE
+		 * could be reporting on in the hyp build.
+		 * Retrying below is therefore sufficient. A device failing
+		 * to report completion(either due to device malfunction or
+		 * triggered by a malicious host) does not introduce a security
+		 * gap, but just a DoS surface.
 		 */
 		if (ite_sid) {
 			dev = device_rbtree_find(iommu, ite_sid);
