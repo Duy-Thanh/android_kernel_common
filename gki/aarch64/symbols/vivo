@@ -366,3 +366,4 @@
   unlock_buffer
   __wait_on_buffer
   wbc_account_cgroup_owner
+  cpuset_cpus_allowed
