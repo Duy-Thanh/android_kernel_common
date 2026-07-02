@@ -22,6 +22,30 @@
       },
       "revId": "6716c91bc4a9ee8f791bf3f4978005562183a0aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa40142_3452c810",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-02T15:50:30Z",
+      "side": 1,
+      "message": "The checks ran for patchset 6 but not 7. This was an infrastructure failure of some kind.",
+      "parentUuid": "2de0ef54_d25e1901",
+      "range": {
+        "startLine": 432,
+        "startChar": 29,
+        "endLine": 432,
+        "endChar": 59
+      },
+      "revId": "6716c91bc4a9ee8f791bf3f4978005562183a0aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
