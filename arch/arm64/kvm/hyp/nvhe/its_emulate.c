@@ -445,8 +445,28 @@ static void cwriter_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read
 	*read = readq_relaxed(its->base + GITS_CWRITER);
 }
 
+static void ctlr_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
+{
+	struct its_priv_state *its = region->priv;
+	*read = readl_relaxed(its->base + GITS_CTLR);
+}
+
+static void ctlr_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
+{
+	struct its_priv_state *its = region->priv;
+	u32 ctlr = readl_relaxed(its->base + GITS_CTLR);
+	bool is_quiescent = !!(ctlr & GITS_CTLR_QUIESCENT);
+	bool is_enabled = !!(ctlr & GITS_CTLR_ENABLE);
+
+	if (!is_enabled && (value & GITS_CTLR_ENABLE) && !is_quiescent)
+		return;
+
+	writel_relaxed(value, its->base + GITS_CTLR);
+}
+
 static struct emu_handler its_handlers[] = {
 	EMU_HANDLER(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
+	EMU_HANDLER(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
 	{},
 };
 
