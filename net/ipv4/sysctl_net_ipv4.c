@@ -1363,11 +1363,17 @@ static __net_exit void ipv4_sysctl_exit_net(struct net *net)
 {
 	struct ctl_table *table;
 
+<<<<<<< HEAD   (0c2423f7562e258cf4aadcbd98d8bca683705618 Merge 884eb247b74d ("net/iucv: fix locking in .getsockopt") )
 	kfree(net->ipv4.sysctl_local_unbindable_ports);
 	kfree(net->ipv4.sysctl_local_reserved_ports);
+||||||| BASE   (884eb247b74d86db97e3a37f0d6fc8e1e83590dd net/iucv: fix locking in .getsockopt)
+	kfree(net->ipv4.sysctl_local_reserved_ports);
+=======
+>>>>>>> BRANCH (ecf45080a4d3f4526cacb8b14060fe3b49a6913b ipv4: free net->ipv4.sysctl_local_reserved_ports after unreg)
 	table = net->ipv4.ipv4_hdr->ctl_table_arg;
 	unregister_net_sysctl_table(net->ipv4.ipv4_hdr);
 	kfree(table);
+	kfree(net->ipv4.sysctl_local_reserved_ports);
 }
 
 static __net_initdata struct pernet_operations ipv4_sysctl_ops = {
