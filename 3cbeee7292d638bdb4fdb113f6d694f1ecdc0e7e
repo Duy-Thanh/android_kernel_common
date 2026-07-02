@@ -133,6 +133,24 @@
       "parentUuid": "f5e4fe07_2e117d42",
       "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "933fceab_2cddf13d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-02T14:55:18Z",
+      "side": 1,
+      "message": "Also, as Todd previously mentioned, you need to document what and why you changed from the original patch. Please have a look at other examples.",
+      "parentUuid": "142ffaf5_26ac9a4a",
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
