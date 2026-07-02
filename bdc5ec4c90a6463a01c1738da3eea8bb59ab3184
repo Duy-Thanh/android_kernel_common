@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc591c53_c8d61e33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-07-02T02:07:30Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nThe patch is required for arm64 devices to enable hard lockup detection.  Please take a look.",
+      "revId": "bdc5ec4c90a6463a01c1738da3eea8bb59ab3184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
