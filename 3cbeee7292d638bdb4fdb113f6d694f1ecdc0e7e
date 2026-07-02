@@ -115,6 +115,24 @@
       "parentUuid": "73fde69c_3052a83b",
       "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "142ffaf5_26ac9a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-02T14:54:12Z",
+      "side": 1,
+      "message": "Please have a look at our examples. You should substitute BACKPORT instead of UPSTREAM not have both.",
+      "parentUuid": "f5e4fe07_2e117d42",
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
