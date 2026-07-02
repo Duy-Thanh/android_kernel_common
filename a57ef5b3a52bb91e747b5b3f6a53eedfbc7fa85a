@@ -33,6 +33,24 @@
       "message": "the associated bug looks desktop related. Why is the pixel symbol list being changed? Shouldn\u0027t it be the desktop list?",
       "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36359932_2743d4af",
+        "filename": "gki/aarch64/symbols/pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-07-02T02:16:45Z",
+      "side": 1,
+      "message": "Without this patch, presubmit failed in https://r.android.com/4128114.\n\nAfter enabling hard lockup detection, the symbol arch_touch_nmi_watchdog() is supposed to be available.  Without this patch, it seems the symbol will be trimmed so that the vendor modules can\u0027t find it:\n\nERROR: modpost: \"arch_touch_nmi_watchdog\" [../../private/google-modules/soc/rdo/drivers/tty/serial/8250/google_8250_base.ko] undefined!...4ae1ecebbb2cc2fc13a373ed8dc8fd56/sandbox/linux-sandbox/1469/execroot/_main/common/ack/scripts/Makefile.modpost:220: ../../private/google-modules/soc/rdo/drivers/tty/serial/8250/Module.symvers] Error 1.../build-disk/src/partner-android/android16-gs-pixel-6.12/out/bazel/output_user_root/4ae1ecebbb2cc2fc13a373ed8dc8fd56/sandbox/linux-sandbox/1469/execroot/_main/common/ack/Makefile:1958: modpost] Error 2...uild-disk/src/partner-android/android16-gs-pixel-6.12/out/bazel/output_user_root/4ae1ecebbb2cc2fc13a373ed8dc8fd56/sandbox/linux-sandbox/1469/execroot/_main/common/ack/Makefile:242: __sub-make] Error 2make[1]: *** [Makefile:242: __sub-make] Error 2make: *** [Makefile:10: modules] Error 2INFO: Found 1 target...Target //private/devices/google/muzel:muzel/dist failed to build",
+      "parentUuid": "2bf3fcf0_896a5e9d",
+      "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
