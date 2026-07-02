@@ -16,6 +16,24 @@
       "message": "must include branch name. see https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "83c966daf23d2d2352d2a13ebb9b89f92078984a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c09597_d36aefd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-07-02T16:06:25Z",
+      "side": 1,
+      "message": "thanks Todd. I\u0027ve updated the change to UPSTREAM since the change is now present in linus\u0027s tree",
+      "parentUuid": "a34fa0e4_9f1640c1",
+      "revId": "83c966daf23d2d2352d2a13ebb9b89f92078984a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
