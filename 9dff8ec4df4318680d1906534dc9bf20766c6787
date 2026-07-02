@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993c4a00_8a3ec611",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-02T17:31:21Z",
+      "side": 1,
+      "message": "This was not added by this upstream commit right? Why not cherry-pick the commit that adds it?",
+      "range": {
+        "startLine": 1865,
+        "startChar": 0,
+        "endLine": 1890,
+        "endChar": 1
+      },
+      "revId": "9dff8ec4df4318680d1906534dc9bf20766c6787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
