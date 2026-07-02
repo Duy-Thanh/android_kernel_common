@@ -16,6 +16,24 @@
       "message": "Nit: This lore link seems to point to a review comment rather than the original patch!",
       "revId": "fdddc6c4fdc9ee14d8b5e6a44570d54f4c05941f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29453236_46c9a8fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-02T15:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70ed3c83_5b051b98",
+      "revId": "fdddc6c4fdc9ee14d8b5e6a44570d54f4c05941f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
