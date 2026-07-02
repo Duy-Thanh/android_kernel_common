@@ -63,6 +63,30 @@
       },
       "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0252ec9d_7b99e209",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 3802377
+      },
+      "writtenOn": "2026-07-02T00:53:53Z",
+      "side": 1,
+      "message": "The respin has not yet been approved by Google, so I\u0027m unable to share the link for now. That said, I\u0027ve updated the current patch, and you can proceed to land this version.",
+      "parentUuid": "22055b70_930f5737",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 34
+      },
+      "revId": "093ed9aa782a41a80c704ade0ed672a1fd393b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
