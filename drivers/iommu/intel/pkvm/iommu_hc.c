@@ -503,9 +503,16 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)
 static int __validate_domain_params(struct intel_iommu *iommu, struct alloc_domain_data *data)
 {
 	int iommu_superpage = iommu_superpage_capability(iommu, data->use_first_level);
-	int gaw = agaw_to_width(iommu->agaw);
+	int gaw;
 	int ret = -EINVAL;
 
+	/* Reject host-provided AGAWs beyond the software-supported range. */
+	if (data->agaw > width_to_agaw(MAX_AGAW_WIDTH)) {
+		pkvm_err("%s: invalid agaw(%u) from host!\n", __func__, data->agaw);
+		return ret;
+	}
+
+	gaw = agaw_to_width(data->agaw);
 	if (gaw > cap_mgaw(iommu->cap))
 		gaw = cap_mgaw(iommu->cap);
 
@@ -515,7 +522,7 @@ static int __validate_domain_params(struct intel_iommu *iommu, struct alloc_doma
 	} else if (data->iommu_coherency != iommu_paging_structure_coherency(iommu)) {
 		pkvm_err("%s: invalid iommu_coherency(%u) from host!\n",
 			 __func__, data->iommu_coherency);
-	} else if (data->agaw != iommu->agaw) {
+	} else if (!(cap_sagaw(iommu->cap) & BIT(data->agaw))) {
 		pkvm_err("%s: invalid agaw(%u) from host!\n", __func__, data->agaw);
 	} else if (data->gaw != gaw) {
 		pkvm_err("%s: invalid gaw(%u) from host!\n", __func__, data->gaw);
