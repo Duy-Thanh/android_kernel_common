@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f335b45e_c7f2fa45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-02T03:52:27Z",
+      "side": 1,
+      "message": "Something is off here. This is the same commit in the `(cherry picked from ...` line which doesn\u0027t make sense. Where did you cherry-pick this from? I don\u0027t see this commit in stable linux-6.12.y. Did you add this tag manually?",
+      "range": {
+        "startLine": 9,
+        "startChar": 18,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "3cbeee7292d638bdb4fdb113f6d694f1ecdc0e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18a5dce5_ec4589fe",
