@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea10a0b4_25dcedb1",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-07-02T09:14:05Z",
+      "side": 1,
+      "message": "Is not that hooked all the allocators combined?",
+      "range": {
+        "startLine": 129,
+        "startChar": 35,
+        "endLine": 129,
+        "endChar": 67
+      },
+      "revId": "c6ebe8f431014e67fa6dbd63ff8c0cf039abf28f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
