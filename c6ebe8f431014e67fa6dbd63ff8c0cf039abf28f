@@ -46,6 +46,30 @@
       },
       "revId": "c6ebe8f431014e67fa6dbd63ff8c0cf039abf28f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce8cfb5_28c00821",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-07-02T09:17:30Z",
+      "side": 1,
+      "message": "Yes, I was thinking we can just reclaim max and topup the keep.",
+      "parentUuid": "8cf969ca_4309b032",
+      "range": {
+        "startLine": 129,
+        "startChar": 35,
+        "endLine": 129,
+        "endChar": 67
+      },
+      "revId": "c6ebe8f431014e67fa6dbd63ff8c0cf039abf28f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
