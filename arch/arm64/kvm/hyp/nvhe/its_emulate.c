@@ -8,27 +8,35 @@
 struct emu_handler {
 	u64 offset;
 	u8 access_size;
+	u8 num_registers;
 	void (*write)(struct pkvm_moveable_reg *region, u64 offset, u64 value);
 	void (*read)(struct pkvm_moveable_reg *region, u64 offset, u64 *read);
 };
 
-#define EMU_HANDLER(off, sz, write_cb, read_cb)	\
+#define EMU_HANDLER(off, sz, num, write_cb, read_cb)	\
 {							\
 	.offset = (off),				\
 	.access_size = (sz),				\
+	.num_registers = (num),				\
 	.write = (write_cb),				\
 	.read = (read_cb),				\
 }
+
+#define EMU_REG(off, sz, write_cb, read_cb)	\
+	EMU_HANDLER(off, sz, 1, write_cb, read_cb)
 
 static void handle_emulation(struct pkvm_moveable_reg *region, u64 offset,
 			     bool write, u64 *reg, u8 reg_size,
 			     struct emu_handler *handlers, hyp_spinlock_t *lock)
 {
 	struct emu_handler *reg_handler;
+	u64 end;
 
 	for (reg_handler = handlers; reg_handler->access_size; reg_handler++) {
-		if (reg_handler->offset > offset ||
-		    reg_handler->offset + reg_handler->access_size <= offset)
+		end = reg_handler->offset +
+		      reg_handler->access_size * reg_handler->num_registers;
+
+		if (reg_handler->offset > offset || end <= offset)
 			continue;
 
 		if (reg_handler->access_size < reg_size)
@@ -494,10 +502,39 @@ static void cbaser_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
 	*read = readq_relaxed(its->base + GITS_CBASER);
 }
 
+static void baser_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
+{
+	struct its_priv_state *its = region->priv;
+	u32 ctlr = readl_relaxed(its->base + GITS_CTLR);
+	int baser_idx;
+	u64 baser;
+
+	if ((ctlr & GITS_CTLR_ENABLE) ||
+	    !(ctlr & GITS_CTLR_QUIESCENT))
+		return;
+
+	baser_idx = (offset - GITS_BASER) >> 3;
+	baser = its->shadow->tables[baser_idx].val;
+	if ((value & GITS_BASER_INDIRECT) != (baser & GITS_BASER_INDIRECT))
+		return;
+
+	value &= ~(GENMASK_ULL(47, 12) | GENMASK_ULL(9, 0));
+	value |= (baser & GENMASK_ULL(47, 12)) | (baser & GENMASK_ULL(9, 0));
+
+	writeq_relaxed(value, its->base + offset);
+}
+
+static void baser_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
+{
+	struct its_priv_state *its = region->priv;
+	*read = readq_relaxed(its->base + offset);
+}
+
 static struct emu_handler its_handlers[] = {
-	EMU_HANDLER(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
-	EMU_HANDLER(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
-	EMU_HANDLER(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
+	EMU_REG(GITS_CWRITER, sizeof(u64), cwriter_write, cwriter_read),
+	EMU_REG(GITS_CTLR, sizeof(u32), ctlr_write, ctlr_read),
+	EMU_REG(GITS_CBASER, sizeof(u64), cbaser_write, cbaser_read),
+	EMU_HANDLER(GITS_BASER, sizeof(u64), 8, baser_write, baser_read),
 	{},
 };
 
