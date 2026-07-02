@@ -2514,9 +2514,6 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
 
 	page = fio->compressed_page ? fio->compressed_page : fio->page;
 
-	/* wait for GCed page writeback via META_MAPPING */
-	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
-
 	if (fscrypt_inode_uses_inline_crypto(inode))
 		return 0;
 
@@ -2701,6 +2698,14 @@ got_it:
 		goto out_writepage;
 	}
 
+<<<<<<< HEAD   (8915b01aa82cf4e1972ff9e92065f5bad8ae38d1 Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
+||||||| BASE   (05968b6dd0ffc65d7386608b11a11fb4fdfc9f36 net: stmmac: fix TSO DMA API usage causing oops)
+=======
+	/* wait for GCed page writeback via META_MAPPING */
+	if (fio->post_read)
+		f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
+
+>>>>>>> BRANCH (baed19c108ac8287425b93a44985bbe9a0b1af8d vdpa: Add max vqp attr to vdpa_nl_policy for nlattr length c)
 	/*
 	 * If current allocation needs SSR,
 	 * it had better in-place writes for updated data.
