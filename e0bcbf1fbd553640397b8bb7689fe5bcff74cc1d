@@ -140,6 +140,30 @@
       },
       "revId": "e0bcbf1fbd553640397b8bb7689fe5bcff74cc1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e528afe_74aa32d7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-03T15:24:32Z",
+      "side": 1,
+      "message": "Reading the rest of the code around:\n\n```\n\tif (reg-\u003ecb)\n\t\treg-\u003ecb \u003d kern_hyp_va(reg-\u003ecb);\n```\n\nimplies that there is a case where you can have `PKVM_MREG_EMULATE_MMIO` and `reg-\u003ecb` can be NULL. I would rather add it to avoid the assumption that `PKVM_MREG_EMULATE_MMIO` is always setting it.",
+      "parentUuid": "b41ea65f_765670e0",
+      "range": {
+        "startLine": 899,
+        "startChar": 2,
+        "endLine": 899,
+        "endChar": 26
+      },
+      "revId": "e0bcbf1fbd553640397b8bb7689fe5bcff74cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
