@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e6e2ce9_ff8fb6b9",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-03T12:21:48Z",
+      "side": 1,
+      "message": "This looks a bit messy: `pkvm_setup_per_cpu()` has different semantics depending on debug vs non-debug mode (i.e. `base` is VA in debug mode but PA in non-debug more). Can\u0027t we pass `base` as VA in both modes?",
+      "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
