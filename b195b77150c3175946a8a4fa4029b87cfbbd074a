@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc0ac9f_6cde27d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-03T15:56:38Z",
+      "side": 1,
+      "message": "Just a question: am I correct that we are not affected by this issue when handling MSR_IA32_XFD write by the guest, since we handle guest vmexit while guest FPU is still loaded (we only put it after that, at the end of `pkvm_vcpu_enter_guest()`), but we are affected by this issue when userspace sets MSR_IA32_XFD via KVM_SET_MSRS ioctl (since we don\u0027t load guest FPU in this case)?",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82718a49_5e2f0957",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 12316,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-03T15:56:38Z",
+      "side": 1,
+      "message": "Ignorant question: could you remind me, is it ok that for a npVM, fpu_update_guest_xfd() is only called in pKVM, not in the host? I mean, fpu_update_guest_xfd() updates pKVM\u0027s values of `fpstate-\u003exfd`, `fpstate-\u003eregs.xsave.header.xfeatures` etc - so, which code is responsible for updating corresponding host\u0027s values?",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
