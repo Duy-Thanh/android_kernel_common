@@ -8248,7 +8248,9 @@ fastpath_t vmx_vcpu_run(struct kvm_vcpu *vcpu, u64 run_flags)
 	if (vcpu->guest_debug & KVM_GUESTDBG_SINGLESTEP)
 		vmx_set_interrupt_shadow(vcpu, 0);
 
+#ifndef __PKVM_HYP__
 	kvm_load_guest_xsave_state(vcpu);
+#endif
 
 	pt_guest_enter(vmx);
 
@@ -8307,7 +8309,9 @@ fastpath_t vmx_vcpu_run(struct kvm_vcpu *vcpu, u64 run_flags)
 
 	pt_guest_exit(vmx);
 
+#ifndef __PKVM_HYP__
 	kvm_load_host_xsave_state(vcpu);
+#endif
 
 	if (is_guest_mode(vcpu)) {
 		/*

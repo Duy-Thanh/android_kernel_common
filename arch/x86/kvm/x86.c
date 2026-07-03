@@ -1273,13 +1273,24 @@ void kvm_load_guest_xsave_state(struct kvm_vcpu *vcpu)
 		return;
 
 	if (kvm_is_cr4_bit_set(vcpu, X86_CR4_OSXSAVE)) {
+#ifdef __PKVM_HYP__
+		if (vcpu->arch.xcr0 != xgetbv(XCR_XFEATURE_ENABLED_MASK))
+			xsetbv(XCR_XFEATURE_ENABLED_MASK, vcpu->arch.xcr0);
 
+		if (guest_cpu_cap_has(vcpu, X86_FEATURE_XSAVES)) {
+			u64 xss;
+			rdmsrq(MSR_IA32_XSS, xss);
+			if (vcpu->arch.ia32_xss != xss)
+				wrmsrq(MSR_IA32_XSS, vcpu->arch.ia32_xss);
+		}
+#else
 		if (vcpu->arch.xcr0 != kvm_host.xcr0)
 			xsetbv(XCR_XFEATURE_ENABLED_MASK, vcpu->arch.xcr0);
 
 		if (guest_cpu_cap_has(vcpu, X86_FEATURE_XSAVES) &&
 		    vcpu->arch.ia32_xss != kvm_host.xss)
 			wrmsrq(MSR_IA32_XSS, vcpu->arch.ia32_xss);
+#endif
 	}
 
 	if (cpu_feature_enabled(X86_FEATURE_PKU) &&
@@ -1303,8 +1314,20 @@ void kvm_load_host_xsave_state(struct kvm_vcpu *vcpu)
 			wrpkru(vcpu->arch.host_pkru);
 	}
 
-	if (kvm_is_cr4_bit_set(vcpu, X86_CR4_OSXSAVE)) {
+#ifdef __PKVM_HYP__
+	if (cpu_feature_enabled(X86_FEATURE_XSAVE)) {
+		if (xgetbv(XCR_XFEATURE_ENABLED_MASK) != kvm_host.xcr0)
+			xsetbv(XCR_XFEATURE_ENABLED_MASK, kvm_host.xcr0);
 
+		if (cpu_feature_enabled(X86_FEATURE_XSAVES)) {
+			u64 xss;
+			rdmsrq(MSR_IA32_XSS, xss);
+			if (xss != kvm_host.xss)
+				wrmsrq(MSR_IA32_XSS, kvm_host.xss);
+		}
+	}
+#else
+	if (kvm_is_cr4_bit_set(vcpu, X86_CR4_OSXSAVE)) {
 		if (vcpu->arch.xcr0 != kvm_host.xcr0)
 			xsetbv(XCR_XFEATURE_ENABLED_MASK, kvm_host.xcr0);
 
@@ -1312,6 +1335,7 @@ void kvm_load_host_xsave_state(struct kvm_vcpu *vcpu)
 		    vcpu->arch.ia32_xss != kvm_host.xss)
 			wrmsrq(MSR_IA32_XSS, kvm_host.xss);
 	}
+#endif
 
 }
 EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_load_host_xsave_state);
@@ -15063,7 +15087,11 @@ int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 	/* Snapshot host PKRU on every entry to prevent host-tampering bypasses */
 	vcpu->arch.host_pkru = read_pkru();
 
+	kvm_load_host_xsave_state(vcpu);
+
 	kvm_load_guest_fpu(vcpu);
+
+	kvm_load_guest_xsave_state(vcpu);
 
 	/* Save the host debug registers */
 	get_debugreg(hvcpu->arch.dr7, 7);
@@ -15084,6 +15112,8 @@ int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 	set_debugreg(hvcpu->arch.dr7, 7);
 	for (i = 0; i < KVM_NR_DB_REGS; i++)
 		set_debugreg(hvcpu->arch.db[i], i);
+
+	kvm_load_host_xsave_state(vcpu);
 
 	kvm_put_guest_fpu(vcpu);
 
