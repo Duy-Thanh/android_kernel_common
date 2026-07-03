@@ -16,6 +16,24 @@
       "message": "Should be BACKPORT: FROMLIST: ?",
       "revId": "7c8acc6fc8b23674d9fc49f9f74a9d6207c6534b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa79f079_14ccff39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-03T10:05:49Z",
+      "side": 1,
+      "message": "Frankly speaking I am not sure when the patch no longer can be considered `BACKPORT: FROMLIST:`. This patch is a good example. \n\nOn the mailing list the emulation of the registers was tightly coupled with ITS registers. I wanted to take advantage of this emulation as well for redistributors. Redistributors hardening was not sent to the list. Originally there was a separate commit that meant for decoupling the logic (aosp/4141180). However it did not make sense to me to push a chain which includes refactors of the code introduced few commits before in the same chain.\n\nI can restore this commit closer to mailing list version if that\u0027s preferred. If you think this still qualifies as `BACKPORT: FROMLIST:` I can update the title as well. Please let me know WDYT.",
+      "parentUuid": "23208c8e_dd5e0cb4",
+      "revId": "7c8acc6fc8b23674d9fc49f9f74a9d6207c6534b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
