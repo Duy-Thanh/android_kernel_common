@@ -22,6 +22,30 @@
       },
       "revId": "9dff8ec4df4318680d1906534dc9bf20766c6787",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabf4a9a_c50961c1",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1890,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2026-07-03T07:48:54Z",
+      "side": 1,
+      "message": "From this upstream modification: commit: 0837c87f95295798bcb16981271fbb9adf766eb1\nLink: https://patch.msgid.link/20260402131342.2628648-7-mathias.nyman@linux.intel.com",
+      "parentUuid": "993c4a00_8a3ec611",
+      "range": {
+        "startLine": 1865,
+        "startChar": 0,
+        "endLine": 1890,
+        "endChar": 1
+      },
+      "revId": "9dff8ec4df4318680d1906534dc9bf20766c6787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
