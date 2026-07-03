@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531aa4ff_e4325e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-03T07:33:38Z",
+      "side": 1,
+      "message": "Once merged, could you forward port it to android17-6.18?",
+      "revId": "81f12a1aa55a349d17c3529333575f1031e1f19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
