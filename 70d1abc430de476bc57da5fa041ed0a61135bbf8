@@ -16,6 +16,24 @@
       "message": "Flake.",
       "revId": "70d1abc430de476bc57da5fa041ed0a61135bbf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f67536_59006cff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-03T07:16:29Z",
+      "side": 1,
+      "message": "Builds are now green.",
+      "parentUuid": "d650fb1b_30e565b2",
+      "revId": "70d1abc430de476bc57da5fa041ed0a61135bbf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
