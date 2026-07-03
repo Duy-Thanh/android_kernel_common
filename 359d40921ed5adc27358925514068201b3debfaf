@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9e7eab_b98ec61b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4245205
+      },
+      "writtenOn": "2026-07-03T12:04:34Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Original change on base branch \u0027android16-6.12\u0027: [4151076](https://android-revie...\n\nOriginal change on base branch \u0027android16-6.12\u0027: [4151076](https://android-review.googlesource.com/c/4151076)\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "359d40921ed5adc27358925514068201b3debfaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
