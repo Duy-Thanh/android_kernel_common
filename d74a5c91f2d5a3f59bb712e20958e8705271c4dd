@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee5052a_036a9ce1",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-03T15:32:22Z",
+      "side": 1,
+      "message": "On this error case we would probably want to jump to out_fail as it also deals with `of_node_put` which we are missing here.",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 210,
+        "endChar": 0
+      },
+      "revId": "d74a5c91f2d5a3f59bb712e20958e8705271c4dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
