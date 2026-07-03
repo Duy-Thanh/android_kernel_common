@@ -73,7 +73,7 @@ struct its_priv_state {
 	void *base;
 	void *cmd_hyp_base;
 	void *cmd_host_base;
-	void *cmd_host_cwriter;
+	u64 cmd_offset;
 	struct its_shadow_tables *shadow;
 	hyp_spinlock_t its_lock;
 	u16 empty_idx;
@@ -245,7 +245,8 @@ static int check_table_update(struct its_priv_state *its, u32 id, u64 type)
 	return 0;
 }
 
-static int process_its_mapd(struct its_priv_state *its, struct its_cmd_block *cmd)
+static int process_its_mapd(struct its_priv_state *its,
+			    struct its_cmd_block *cmd, bool rollback)
 {
 	phys_addr_t itt_addr = cmd->raw_cmd[2] & GENMASK(51, 8);
 	u8 size = cmd->raw_cmd[1] & GENMASK(4, 0);
@@ -253,6 +254,9 @@ static int process_its_mapd(struct its_priv_state *its, struct its_cmd_block *cm
 	u32 device_id = cmd->raw_cmd[0] >> 32;
 	int num_pages, ret;
 	u64 base_pfn;
+
+	if (rollback)
+		remove = !remove;
 
 	if (!PAGE_ALIGNED(itt_addr))
 		return -EINVAL;
@@ -267,7 +271,8 @@ static int process_its_mapd(struct its_priv_state *its, struct its_cmd_block *cm
 	return track_pfn(its, base_pfn, num_pages, remove);
 }
 
-static int process_its_vmapp(struct its_priv_state *its, struct its_cmd_block *cmd)
+static int process_its_vmapp(struct its_priv_state *its,
+			     struct its_cmd_block *cmd, bool rollback)
 {
 	bool remove = !(cmd->raw_cmd[2] & BIT(63));
 	phys_addr_t vpt_addr = cmd->raw_cmd[3] & GENMASK(51, 16);
@@ -276,6 +281,9 @@ static int process_its_vmapp(struct its_priv_state *its, struct its_cmd_block *c
 	int num_pages;
 	u64 base_pfn;
 	int ret;
+
+	if (rollback)
+		remove = !remove;
 
 	base_pfn = hyp_phys_to_pfn(vpt_addr);
 	num_pages = ALIGN(BIT((vpt_size + 1) >> 3), SZ_64K);
@@ -294,77 +302,137 @@ static int process_its_mapc(struct its_priv_state *its, struct its_cmd_block *cm
 	return check_table_update(its, icid, GITS_BASER_TYPE_COLLECTION);
 }
 
-static int parse_its_cmdq(struct its_priv_state *its, int offset, ssize_t len)
+#define GITS_CWRITER_RETRY	BIT_ULL(0)
+#define GITS_CWRITER_OFFSET	GENMASK_ULL(19, 5)
+
+#define GITS_CREADR_STALLED	BIT_ULL(0)
+#define GITS_CREADR_OFFSET	GENMASK_ULL(19, 5)
+
+static int process_cmd(struct its_priv_state *its,
+				struct its_cmd_block *cmd, bool rollback)
 {
-	struct its_cmd_block *cmd = its->cmd_hyp_base + offset;
-	u8 req_type;
-	int ret = 0;
+	u8 req_type = cmd->raw_cmd[0] & GENMASK_ULL(7, 0);
+	int ret;
 
-	while (len > 0 && !ret) {
-		req_type = cmd->raw_cmd[0] & GENMASK(7, 0);
+	/*
+	 * Block all VLPI related commands until proper sanitization
+	 * is shipped.
+	 */
+	if (req_type & 0x20)
+		return -EFAULT;
 
-		/*
-		 * Block all VLPI related commands until proper sanitization
-		 * is shipped.
-		 */
-		if (req_type & 0x20)
-			return -EFAULT;
-
-		switch (req_type) {
+	switch (req_type) {
 		case GITS_CMD_MAPD:
-			ret = process_its_mapd(its, cmd);
+			ret = process_its_mapd(its, cmd, rollback);
 			break;
 
 		case GITS_CMD_VMAPP:
-			ret = process_its_vmapp(its, cmd);
+			ret = process_its_vmapp(its, cmd, rollback);
 			break;
 
 		case GITS_CMD_MAPC:
 			ret = process_its_mapc(its, cmd);
 			break;
-		}
 
-		cmd++;
-		len -= sizeof(struct its_cmd_block);
+		case GITS_CMD_CLEAR:
+		case GITS_CMD_DISCARD:
+		case GITS_CMD_INT:
+		case GITS_CMD_INV:
+		case GITS_CMD_INVALL:
+		case GITS_CMD_MAPTI:
+		case GITS_CMD_MOVALL:
+		case GITS_CMD_MOVI:
+		case GITS_CMD_SYNC:
+			ret = 0;
+			break;
+
+		default:
+			WARN_ON(1);
+			ret = -EFAULT;
+			break;
 	}
 
 	return ret;
 }
 
+static int submit_single_cmd(struct its_priv_state *its, bool retry)
+{
+	size_t cmdq_sz = its->shadow->cmdq_len;
+	u64 timeout = 1000;
+	u64 offset, cwriter, creadr;
+
+	offset =
+		(its->cmd_offset + sizeof(struct its_cmd_block)) % cmdq_sz;
+
+	cwriter = offset & GITS_CWRITER_OFFSET;
+	cwriter |= FIELD_PREP(GITS_CWRITER_RETRY, retry);
+	writeq_relaxed(cwriter, its->base + GITS_CWRITER);
+
+	while (its->cmd_offset != offset) {
+		creadr = readq_relaxed(its->base + GITS_CREADR);
+
+		/* Command failed. */
+		if (FIELD_GET(GITS_CREADR_STALLED, creadr))
+			return -EIO;
+
+		its->cmd_offset = creadr & GITS_CREADR_OFFSET;
+		if (its->cmd_offset == offset)
+			return 0;
+
+		/*
+		 * If the command times out It does not mean it might not
+		 * finish some time in the future, by eg. clock enable. Also
+		 * it might not finish ever. If we knew when it's going to
+		 * finish or if ever we could commit or revert the changes to
+		 * page tables, but we don't. Regressing GITS_CWRITER_OFFSET
+		 * might lead into undefined behaviours and we cannot block
+		 * here forever, the most sensible thing is to crash...
+		 */
+		if (!timeout--) {
+			BUG();
+			return -EBUSY;
+		}
+
+		pkvm_udelay(100);
+	}
+
+	return 0;
+}
+
 static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
 	struct its_priv_state *its = region->priv;
-	u64 cwriter_offset = value & GENMASK(19, 5);
-	int cmd_len, cmd_offset;
-	void *new_cwriter;
-	size_t cmdq_sz = its->shadow->cmdq_len;
+	struct its_cmd_block cmd, *cmd_le;
+	u64 new_offset;
+	bool retry;
+	int i;
 
-	if (cwriter_offset > cmdq_sz)
+	new_offset = value & GITS_CWRITER_OFFSET;
+	if (new_offset >= its->shadow->cmdq_len)
 		return;
 
-	cmd_offset = its->cmd_host_cwriter - its->cmd_host_base;
-	cmd_len = cwriter_offset - cmd_offset;
-	if (cmd_len < 0)
-		cmd_len = cmdq_sz - cmd_offset;
+	retry = FIELD_GET(GITS_CWRITER_RETRY, value);
+	while (its->cmd_offset != new_offset) {
+		cmd_le = its->cmd_host_base + its->cmd_offset;
 
-	if (cmd_offset + cmd_len > cmdq_sz)
-		return;
+		for (i = 0; i < ARRAY_SIZE(cmd.raw_cmd); i++)
+			cmd.raw_cmd[i] = le64_to_cpu(cmd_le->raw_cmd_le[i]);
 
-	memcpy(its->cmd_hyp_base + cmd_offset, its->cmd_host_cwriter, cmd_len);
-	if (parse_its_cmdq(its, cmd_offset, cmd_len))
-		return;
-
-	new_cwriter = its->cmd_host_base + (cmd_offset + cmd_len) % cmdq_sz;
-	if (new_cwriter == its->cmd_host_base) {
-		memcpy(its->cmd_hyp_base, its->cmd_host_base, cwriter_offset);
-		if (parse_its_cmdq(its, 0, cwriter_offset))
+		if (process_cmd(its, &cmd, /* rollback */ false))
 			return;
 
-		new_cwriter = its->cmd_host_base + cwriter_offset;
-	}
+		memcpy(its->cmd_hyp_base + its->cmd_offset, cmd_le,
+		       sizeof(struct its_cmd_block));
 
-	its->cmd_host_cwriter = new_cwriter;
-	writeq_relaxed(value, its->base + GITS_CWRITER);
+		if (submit_single_cmd(its, retry)) {
+			/*
+			 * If failed to complete the command try to rollback
+			 * the changes. If rollback fails we in trouble...
+			 */
+			WARN_ON(process_cmd(its, &cmd, /* rollback */ true));
+			return;
+		}
+	}
 }
 
 static void cwriter_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
@@ -408,7 +476,6 @@ static void cbaser_write(struct pkvm_moveable_reg *region, u64 offset, u64 value
 	value |= (num_pages - 1) & GENMASK(7, 0);
 	value |= __hyp_pa(its->cmd_hyp_base) & GENMASK_ULL(51, 12);
 
-	its->cmd_host_cwriter = its->cmd_host_base;
 	writeq_relaxed(value, its->base + GITS_CBASER);
 }
 
@@ -714,9 +781,8 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state,
 
 	priv_state->cmd_hyp_base = kern_hyp_va(shadow->cmd_original);
 	priv_state->cmd_host_base = kern_hyp_va(shadow->cmd_shadow);
-	priv_state->cmd_host_cwriter =
-		priv_state->cmd_host_base +
-		(kern_hyp_va(shadow->cmd_write) - priv_state->cmd_hyp_base);
+	priv_state->cmd_offset = readq_relaxed(priv_state->base + GITS_CREADR) &
+				 GITS_CREADR_OFFSET;
 	priv_state->empty_idx = 0;
 
 	hyp_spin_unlock(&its_setup_lock);
