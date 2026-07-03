@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dfa6bbf_d7394d32",
+        "filename": "arch/arm64/include/asm/kvm_arm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-03T09:28:08Z",
+      "side": 1,
+      "message": "Remove this as there is already a definition on line 416",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 35
+      },
+      "revId": "e0bcbf1fbd553640397b8bb7689fe5bcff74cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341d15c5_778c3659",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-03T09:28:08Z",
+      "side": 1,
+      "message": "I was thinking of this: if the `addr \u003d end - 1` but the size of the access is 8 bytes, should we reject this here ? My suggestion would be:\n\nmove `reg_size \u003d BIT((esr \u0026 ESR_ELx_SAS) \u003e\u003e ESR_ELx_SAS_SHIFT);` before this check and make use of it in the comparison.",
+      "range": {
+        "startLine": 887,
+        "startChar": 0,
+        "endLine": 889,
+        "endChar": 12
+      },
+      "revId": "e0bcbf1fbd553640397b8bb7689fe5bcff74cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f043916c_ce1809a2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-03T09:28:08Z",
+      "side": 1,
+      "message": "Can we have a NULL cb here that will send us in weeds ?",
+      "range": {
+        "startLine": 899,
+        "startChar": 2,
+        "endLine": 899,
+        "endChar": 26
+      },
+      "revId": "e0bcbf1fbd553640397b8bb7689fe5bcff74cc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
