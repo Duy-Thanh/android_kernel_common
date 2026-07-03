@@ -16,6 +16,24 @@
       "message": "Once merged, could you forward port it to android17-6.18?",
       "revId": "81f12a1aa55a349d17c3529333575f1031e1f19a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c106c6_e0c47431",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2026-07-03T07:39:17Z",
+      "side": 1,
+      "message": "Sure, I will forward port.",
+      "parentUuid": "531aa4ff_e4325e28",
+      "revId": "81f12a1aa55a349d17c3529333575f1031e1f19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
