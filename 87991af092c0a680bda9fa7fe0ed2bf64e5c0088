@@ -16,6 +16,24 @@
       "message": "Please help. Thanks.",
       "revId": "87991af092c0a680bda9fa7fe0ed2bf64e5c0088",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a888e7b_08d14106",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-04T08:45:20Z",
+      "side": 1,
+      "message": "You need a respin bug.",
+      "parentUuid": "b1f98557_4d963349",
+      "revId": "87991af092c0a680bda9fa7fe0ed2bf64e5c0088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
