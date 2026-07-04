@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc64b92e_9294ca1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-04T18:41:26Z",
+      "side": 1,
+      "message": "This will need a respin bug once https://android-review.googlesource.com/c/kernel/common/+/4118333 gets merged.",
+      "revId": "78f806929a62bed454ee409da05efb53fe6fcda7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
