@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590cdc4c_abf77274",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-05T15:50:47Z",
+      "side": 1,
+      "message": "I\u0027m a bit hesitating whether it\u0027s a good idea to assign the `vcpu_run` hypercall value directly to `vmx-\u003efail`, given that this hypercall may return an error value like -EPERM, while `vmx-\u003efail` is only u8, and current upstream KVM code only sets it to either 0 or 1, not to other values.",
+      "fixSuggestions": [
+        {
+          "fixId": "fedc68ab_dfdc6a6f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_host.c",
+              "range": {
+                "startLine": 1325,
+                "startChar": 0,
+                "endLine": 1326,
+                "endChar": 0
+              },
+              "replacement": "\tvmx-\u003efail \u003d !!pkvm_hypercall_out(vcpu_run, out, force_immediate_exit);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "53a7f68d4747358a59089a73430dab42c4d1d0cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
