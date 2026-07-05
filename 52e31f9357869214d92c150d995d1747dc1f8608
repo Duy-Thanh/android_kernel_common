@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c30dd215_df733eb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-05T20:09:40Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:BAD_SIGN_OFF: Duplicate signature",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "52e31f9357869214d92c150d995d1747dc1f8608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9c080727_003f1b80",
@@ -82,6 +105,52 @@
       "writtenOn": "2026-07-04T02:44:54Z",
       "side": 1,
       "message": "Please help to merge. Thanks.",
+      "revId": "52e31f9357869214d92c150d995d1747dc1f8608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d5c949_12cddfb5",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-05T20:09:40Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_CONTINUATIONS: Avoid unnecessary line continuations",
+      "range": {
+        "startLine": 799,
+        "startChar": 0,
+        "endLine": 800,
+        "endChar": 0
+      },
+      "revId": "52e31f9357869214d92c150d995d1747dc1f8608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0330fa9a_56ff1b4a",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-05T20:09:40Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_SPACING: Missing a blank line after declarations",
+      "range": {
+        "startLine": 1366,
+        "startChar": 0,
+        "endLine": 1367,
+        "endChar": 0
+      },
       "revId": "52e31f9357869214d92c150d995d1747dc1f8608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
