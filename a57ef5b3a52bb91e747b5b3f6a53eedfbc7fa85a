@@ -51,6 +51,24 @@
       "parentUuid": "2bf3fcf0_896a5e9d",
       "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b280dceb_2cf63b44",
+        "filename": "gki/aarch64/symbols/pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-05T20:38:15Z",
+      "side": 1,
+      "message": "This patch needs to be after the the patch that introduced the new symbol. Is this fixing a Pixel issue (Pixel module failure to load)? If so, please explain in the commit message. If it is not fixing a pixel build or load issue, then you should not be modifying the pixel symbol list. Instead, you should be modifying the symbol list for desktop.",
+      "parentUuid": "36359932_2743d4af",
+      "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
