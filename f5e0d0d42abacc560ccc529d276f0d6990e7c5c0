@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab77af10_e4c8f1bd",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 9921,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-05T17:49:46Z",
+      "side": 1,
+      "message": "We are not using WRITE_ONCE in other cases when updating shared_vcpu fields in this and other functions. Any reason for using it specifically here?",
+      "fixSuggestions": [
+        {
+          "fixId": "6c336469_09a746b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 9921,
+                "startChar": 0,
+                "endLine": 9923,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tto_vmx(shared_vcpu)-\u003eerror_code \u003d\n\t\t\t\t\tvmcs_read32(IDT_VECTORING_ERROR_CODE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5e0d0d42abacc560ccc529d276f0d6990e7c5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
