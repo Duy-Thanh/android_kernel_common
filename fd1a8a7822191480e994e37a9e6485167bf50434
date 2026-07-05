@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70830eb_903858d7",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2232,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-05T21:57:49Z",
+      "side": 1,
+      "message": "nit: also we don\u0027t need to initialize `ret` here anymore?",
+      "fixSuggestions": [
+        {
+          "fixId": "a362b54c_d7f385b5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 2232,
+                "startChar": 0,
+                "endLine": 2233,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd1a8a7822191480e994e37a9e6485167bf50434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
