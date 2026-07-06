@@ -22,6 +22,30 @@
       },
       "revId": "48b126baab7222b48792b30a7b1e0c6569c37c40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a04d1a8_737b2ae2",
+        "filename": "include/linux/percpu-rwsem.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-06T18:40:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d0a75cb_095569a0",
+      "range": {
+        "startLine": 84,
+        "startChar": 47,
+        "endLine": 84,
+        "endChar": 48
+      },
+      "revId": "48b126baab7222b48792b30a7b1e0c6569c37c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
