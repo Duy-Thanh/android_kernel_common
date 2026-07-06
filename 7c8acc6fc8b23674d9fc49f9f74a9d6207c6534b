@@ -52,6 +52,24 @@
       "parentUuid": "fa79f079_14ccff39",
       "revId": "7c8acc6fc8b23674d9fc49f9f74a9d6207c6534b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b295fd70_9c183479",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-06T12:36:36Z",
+      "side": 1,
+      "message": "Got it. Though I am not so sure about other patches.",
+      "parentUuid": "4088bb48_ba968bb1",
+      "revId": "7c8acc6fc8b23674d9fc49f9f74a9d6207c6534b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
