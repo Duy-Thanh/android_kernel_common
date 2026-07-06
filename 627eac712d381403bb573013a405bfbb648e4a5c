@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee08b084_39841317",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-06T15:54:17Z",
+      "side": 1,
+      "message": "get rid of the extra \u0027_\u0027: \"android_vh_sca_migrate_same\"",
+      "revId": "627eac712d381403bb573013a405bfbb648e4a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
