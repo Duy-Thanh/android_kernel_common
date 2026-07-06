@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1b3f6a_4473ed70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T22:23:39Z",
+      "side": 1,
+      "message": "The fix in `vmx_cancel_injection()` fixes commit 1e96b640287a (\"ANDROID: pKVM: VMX: Implement cancel injection operation\"), not 7bc4cad9991f?\n\nMaybe split this patch into two: the one with the `vmx_cancel_injection()` fix (with Fixes: 1e96b640287a) and the one with the comments improvement (with Fixes: 7bc4cad9991f), just to make it easier to squash both into corresponding patches later during rebase?",
+      "revId": "5a080db55a2688618125cedb0d8469b470f6cd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8968d3_067dbd6e",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7937,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T22:23:39Z",
+      "side": 1,
+      "message": "It is not so obvious that this is for preventing double-call bypass by malicious host, so might be worth adding a short comment here?",
+      "revId": "5a080db55a2688618125cedb0d8469b470f6cd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
