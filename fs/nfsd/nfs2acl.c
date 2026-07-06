@@ -129,10 +129,7 @@ static __be32 nfsacld_proc_setacl(struct svc_rqst *rqstp)
 	resp->status = fh_getattr(fh, &resp->stat);
 
 out:
-	/* argp->acl_{access,default} may have been allocated in
-	   nfssvc_decode_setaclargs. */
-	posix_acl_release(argp->acl_access);
-	posix_acl_release(argp->acl_default);
+	/* argp->acl_{access,default} are released in nfsaclsvc_release_setacl. */
 	return rpc_success;
 
 out_drop_lock:
@@ -372,6 +369,16 @@ static void nfsaclsvc_release_access(struct svc_rqst *rqstp)
 
 struct nfsd3_voidargs { int dummy; };
 
+static void nfsaclsvc_release_setacl(struct svc_rqst *rqstp)
+{
+	struct nfsd3_setaclargs *argp = rqstp->rq_argp;
+	struct nfsd_attrstat *resp = rqstp->rq_resp;
+
+	fh_put(&resp->fh);
+	posix_acl_release(argp->acl_access);
+	posix_acl_release(argp->acl_default);
+}
+
 #define ST 1		/* status*/
 #define AT 21		/* attributes */
 #define pAT (1+AT)	/* post attributes - conditional */
@@ -400,8 +407,16 @@ static const struct svc_procedure nfsd_acl_procedures2[5] = {
 	[ACLPROC2_SETACL] = {
 		.pc_func = nfsacld_proc_setacl,
 		.pc_decode = nfsaclsvc_decode_setaclargs,
+<<<<<<< HEAD   (fee87ff161515574761893e0b27b4b25278b15ed Merge 5.10.259 into android12-5.10-lts)
 		.pc_encode = nfsaclsvc_encode_attrstatres,
 		.pc_release = nfsaclsvc_release_attrstat,
+||||||| BASE   (d9666dca97c01de1c7395ac53041634eb75120e2 Linux 5.10.259)
+		.pc_encode = nfssvc_encode_attrstatres,
+		.pc_release = nfssvc_release_attrstat,
+=======
+		.pc_encode = nfssvc_encode_attrstatres,
+		.pc_release = nfsaclsvc_release_setacl,
+>>>>>>> BRANCH (738ac465e4e900d4a391a27da4e20c090eaa1e75 Linux 5.10.260)
 		.pc_argsize = sizeof(struct nfsd3_setaclargs),
 		.pc_ressize = sizeof(struct nfsd_attrstat),
 		.pc_cachetype = RC_NOCACHE,

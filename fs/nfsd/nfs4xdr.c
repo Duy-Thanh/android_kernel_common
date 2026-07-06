@@ -1723,6 +1723,165 @@ nfsd4_decode_layoutreturn(struct nfsd4_compoundargs *argp,
 }
 #endif /* CONFIG_NFSD_PNFS */
 
+<<<<<<< HEAD   (fee87ff161515574761893e0b27b4b25278b15ed Merge 5.10.259 into android12-5.10-lts)
+||||||| BASE   (d9666dca97c01de1c7395ac53041634eb75120e2 Linux 5.10.259)
+static __be32 nfsd4_decode_secinfo_no_name(struct nfsd4_compoundargs *argp,
+					   union nfsd4_op_u *u)
+{
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+	if (xdr_stream_decode_u32(argp->xdr, &sin->sin_style) < 0)
+		return nfserr_bad_xdr;
+
+	sin->sin_exp = NULL;
+	return nfs_ok;
+}
+
+static __be32
+nfsd4_decode_sequence(struct nfsd4_compoundargs *argp,
+		      union nfsd4_op_u *u)
+{
+	struct nfsd4_sequence *seq = &u->sequence;
+	__be32 *p, status;
+
+	status = nfsd4_decode_sessionid4(argp, &seq->sessionid);
+	if (status)
+		return status;
+	p = xdr_inline_decode(argp->xdr, XDR_UNIT * 4);
+	if (!p)
+		return nfserr_bad_xdr;
+	seq->seqid = be32_to_cpup(p++);
+	seq->slotid = be32_to_cpup(p++);
+	seq->maxslots = be32_to_cpup(p++);
+	seq->cachethis = be32_to_cpup(p);
+
+	seq->status_flags = 0;
+	return nfs_ok;
+}
+
+static __be32
+nfsd4_decode_test_stateid(struct nfsd4_compoundargs *argp,
+			  union nfsd4_op_u *u)
+{
+	struct nfsd4_test_stateid *test_stateid = &u->test_stateid;
+	struct nfsd4_test_stateid_id *stateid;
+	__be32 status;
+	u32 i;
+
+	memset(test_stateid, 0, sizeof(*test_stateid));
+	if (xdr_stream_decode_u32(argp->xdr, &test_stateid->ts_num_ids) < 0)
+		return nfserr_bad_xdr;
+
+	INIT_LIST_HEAD(&test_stateid->ts_stateid_list);
+	for (i = 0; i < test_stateid->ts_num_ids; i++) {
+		stateid = svcxdr_tmpalloc(argp, sizeof(*stateid));
+		if (!stateid)
+			return nfserr_jukebox;
+		INIT_LIST_HEAD(&stateid->ts_id_list);
+		list_add_tail(&stateid->ts_id_list, &test_stateid->ts_stateid_list);
+		status = nfsd4_decode_stateid4(argp, &stateid->ts_id_stateid);
+		if (status)
+			return status;
+	}
+
+	return nfs_ok;
+}
+
+static __be32 nfsd4_decode_destroy_clientid(struct nfsd4_compoundargs *argp,
+					    union nfsd4_op_u *u)
+{
+	struct nfsd4_destroy_clientid *dc = &u->destroy_clientid;
+	return nfsd4_decode_clientid4(argp, &dc->clientid);
+}
+
+static __be32 nfsd4_decode_reclaim_complete(struct nfsd4_compoundargs *argp,
+					    union nfsd4_op_u *u)
+{
+	struct nfsd4_reclaim_complete *rc = &u->reclaim_complete;
+	if (xdr_stream_decode_bool(argp->xdr, &rc->rca_one_fs) < 0)
+		return nfserr_bad_xdr;
+	return nfs_ok;
+}
+
+=======
+static __be32 nfsd4_decode_secinfo_no_name(struct nfsd4_compoundargs *argp,
+					   union nfsd4_op_u *u)
+{
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+
+	sin->sin_exp = NULL;
+	if (xdr_stream_decode_u32(argp->xdr, &sin->sin_style) < 0)
+		return nfserr_bad_xdr;
+
+	return nfs_ok;
+}
+
+static __be32
+nfsd4_decode_sequence(struct nfsd4_compoundargs *argp,
+		      union nfsd4_op_u *u)
+{
+	struct nfsd4_sequence *seq = &u->sequence;
+	__be32 *p, status;
+
+	status = nfsd4_decode_sessionid4(argp, &seq->sessionid);
+	if (status)
+		return status;
+	p = xdr_inline_decode(argp->xdr, XDR_UNIT * 4);
+	if (!p)
+		return nfserr_bad_xdr;
+	seq->seqid = be32_to_cpup(p++);
+	seq->slotid = be32_to_cpup(p++);
+	seq->maxslots = be32_to_cpup(p++);
+	seq->cachethis = be32_to_cpup(p);
+
+	seq->status_flags = 0;
+	return nfs_ok;
+}
+
+static __be32
+nfsd4_decode_test_stateid(struct nfsd4_compoundargs *argp,
+			  union nfsd4_op_u *u)
+{
+	struct nfsd4_test_stateid *test_stateid = &u->test_stateid;
+	struct nfsd4_test_stateid_id *stateid;
+	__be32 status;
+	u32 i;
+
+	memset(test_stateid, 0, sizeof(*test_stateid));
+	if (xdr_stream_decode_u32(argp->xdr, &test_stateid->ts_num_ids) < 0)
+		return nfserr_bad_xdr;
+
+	INIT_LIST_HEAD(&test_stateid->ts_stateid_list);
+	for (i = 0; i < test_stateid->ts_num_ids; i++) {
+		stateid = svcxdr_tmpalloc(argp, sizeof(*stateid));
+		if (!stateid)
+			return nfserr_jukebox;
+		INIT_LIST_HEAD(&stateid->ts_id_list);
+		list_add_tail(&stateid->ts_id_list, &test_stateid->ts_stateid_list);
+		status = nfsd4_decode_stateid4(argp, &stateid->ts_id_stateid);
+		if (status)
+			return status;
+	}
+
+	return nfs_ok;
+}
+
+static __be32 nfsd4_decode_destroy_clientid(struct nfsd4_compoundargs *argp,
+					    union nfsd4_op_u *u)
+{
+	struct nfsd4_destroy_clientid *dc = &u->destroy_clientid;
+	return nfsd4_decode_clientid4(argp, &dc->clientid);
+}
+
+static __be32 nfsd4_decode_reclaim_complete(struct nfsd4_compoundargs *argp,
+					    union nfsd4_op_u *u)
+{
+	struct nfsd4_reclaim_complete *rc = &u->reclaim_complete;
+	if (xdr_stream_decode_bool(argp->xdr, &rc->rca_one_fs) < 0)
+		return nfserr_bad_xdr;
+	return nfs_ok;
+}
+
+>>>>>>> BRANCH (738ac465e4e900d4a391a27da4e20c090eaa1e75 Linux 5.10.260)
 static __be32
 nfsd4_decode_fallocate(struct nfsd4_compoundargs *argp,
 		       struct nfsd4_fallocate *fallocate)
