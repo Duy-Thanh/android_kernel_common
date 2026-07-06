@@ -201,7 +201,7 @@ define_common_kernels(target_configs = {
     },
     "kernel_x86_64": {
         "kmi_symbol_list_strict_mode": False,
-        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64"),
+        "module_implicit_outs": get_gki_modules_list("x86_64") + get_kunit_modules_list("x86_64") + ["drivers/misc/open-dice.ko"],
         "make_goals": _GKI_X86_64_MAKE_GOALS,
         "extra_dist": [
             ":test_mappings_zip",
