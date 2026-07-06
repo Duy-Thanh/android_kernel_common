@@ -265,6 +265,30 @@ static int process_its_mapd(struct its_priv_state *its,
 	return track_pfn(its, base_pfn, num_pages, remove);
 }
 
+static int process_its_vmapp(struct its_priv_state *its,
+			     struct its_cmd_block *cmd, bool rollback)
+{
+	bool remove = !(cmd->raw_cmd[2] & BIT(63));
+	phys_addr_t vpt_addr = cmd->raw_cmd[3] & GENMASK(51, 16);
+	u8 vpt_size = cmd->raw_cmd[3] & GENMASK(4, 0);
+	u32 vpe_id = (cmd->raw_cmd[1] & GENMASK(47, 32)) >> 32;
+	int num_pages;
+	u64 base_pfn;
+	int ret;
+
+	if (rollback)
+		remove = !remove;
+
+	base_pfn = hyp_phys_to_pfn(vpt_addr);
+	num_pages = ALIGN(BIT((vpt_size + 1) >> 3), SZ_64K);
+
+	ret = check_table_update(its, vpe_id, GITS_BASER_TYPE_VCPU, rollback);
+	if (ret)
+		return ret;
+
+	return track_pfn(its, base_pfn, num_pages, remove);
+}
+
 static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 		       bool rollback)
 {
@@ -274,6 +298,10 @@ static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 	switch (req_type) {
 	case GITS_CMD_MAPD:
 		ret = process_its_mapd(its, cmd, rollback);
+		break;
+
+	case GITS_CMD_VMAPP:
+		ret = process_its_vmapp(its, cmd, rollback);
 		break;
 
 	default:
