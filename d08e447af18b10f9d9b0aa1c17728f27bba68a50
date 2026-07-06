@@ -16,6 +16,24 @@
       "message": "Ignorant question: just to understand, does this issue already affect us somehow (given that we don\u0027t currently support printing hypervisor stack traces, IIUC)?",
       "revId": "d08e447af18b10f9d9b0aa1c17728f27bba68a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0495e4b0_df2bff31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T10:07:56Z",
+      "side": 1,
+      "message": "If we don\u0027t support printing hypervisor stack traces, I think this issue doesn\u0027t affect us as this issue only affects the ORC unwinder to get the stack trace, and doesn\u0027t affect the other code execution.",
+      "parentUuid": "445b0da5_ff570ebc",
+      "revId": "d08e447af18b10f9d9b0aa1c17728f27bba68a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
