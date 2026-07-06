@@ -33,6 +33,24 @@
       "message": "This function signature should be updated as well",
       "revId": "6dd5397a79162e19c9d670e6e11c8db49b824a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0dab8b_4b433470",
+        "filename": "arch/arm64/kvm/hyp/include/module/nvhe/trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-06T14:38:06Z",
+      "side": 1,
+      "message": "This is a release branch, so we can only cherry-pick from the base branch. If you want to fix the function signature, please do that on `android16-6.12`.",
+      "parentUuid": "ce3a1dc9_2ab8c53b",
+      "revId": "6dd5397a79162e19c9d670e6e11c8db49b824a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
