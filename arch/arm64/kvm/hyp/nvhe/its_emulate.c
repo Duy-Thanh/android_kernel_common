@@ -367,6 +367,13 @@ static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 	u8 req_type = cmd->raw_cmd[0] & GENMASK_ULL(7, 0);
 	int ret;
 
+	/*
+	 * Block all VLPI related commands until proper sanitization
+	 * is shipped.
+	 */
+	if (req_type & 0x20)
+		return -EFAULT;
+
 	switch (req_type) {
 	case GITS_CMD_MAPD:
 		ret = process_its_mapd(its, cmd, rollback);
