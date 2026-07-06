@@ -34,6 +34,24 @@
       "parentUuid": "445b0da5_ff570ebc",
       "revId": "d08e447af18b10f9d9b0aa1c17728f27bba68a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbcae4c_5ed67f73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T10:22:05Z",
+      "side": 1,
+      "message": "I see.\n\nI think this fix is good to apply anyway, so LGTM.",
+      "parentUuid": "0495e4b0_df2bff31",
+      "revId": "d08e447af18b10f9d9b0aa1c17728f27bba68a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
