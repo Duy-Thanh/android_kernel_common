@@ -34,6 +34,24 @@
       ],
       "revId": "67043c6f695a5a23462ca6ae0492ff00c1367a1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e94a4a6_b4db404e",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T09:48:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2ece2ade_69a88b0e",
+      "revId": "67043c6f695a5a23462ca6ae0492ff00c1367a1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
