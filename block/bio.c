@@ -1105,12 +1105,30 @@ int bio_add_page(struct bio *bio, struct page *page,
 	if (bio->bi_iter.bi_size > UINT_MAX - len)
 		return 0;
 
+<<<<<<< HEAD   (06387570f8f6b1edf378f324f8b26008b252dcc2 Merge 01eea4d12fb6 ("spi: cadence: fix unclocked access on u)
 	trace_android_vh_bio_add_page_merge_bypass(bio, &skip_merge);
 	if (!skip_merge && bio->bi_vcnt > 0 &&
 	    bvec_try_merge_page(&bio->bi_io_vec[bio->bi_vcnt - 1],
 				page, len, offset, &same_page)) {
 		bio->bi_iter.bi_size += len;
 		return len;
+||||||| BASE   (01eea4d12fb6367b36ab3d6c01d5fa6f3541f51b spi: cadence: fix unclocked access on unbind)
+	if (bio->bi_vcnt > 0 &&
+	    bvec_try_merge_page(&bio->bi_io_vec[bio->bi_vcnt - 1],
+				page, len, offset, &same_page)) {
+		bio->bi_iter.bi_size += len;
+		return len;
+=======
+	if (bio->bi_vcnt > 0) {
+		struct bio_vec *bv = &bio->bi_io_vec[bio->bi_vcnt - 1];
+
+		if (!zone_device_pages_compatible(bv->bv_page, page))
+			return 0;
+		if (bvec_try_merge_page(bv, page, len, offset, &same_page)) {
+			bio->bi_iter.bi_size += len;
+			return len;
+		}
+>>>>>>> BRANCH (ede9eca9701d25abe84876cd27edf85c47641444 block: relax pgmap check in bio_add_page for compatible zone)
 	}
 
 	if (bio->bi_vcnt >= bio->bi_max_vecs)

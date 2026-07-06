@@ -353,7 +353,15 @@ static void f2fs_write_end_io(struct bio *bio)
 		}
 
 		f2fs_bug_on(sbi, page->mapping == NODE_MAPPING(sbi) &&
+<<<<<<< HEAD   (06387570f8f6b1edf378f324f8b26008b252dcc2 Merge 01eea4d12fb6 ("spi: cadence: fix unclocked access on u)
 				page_folio(page)->index != nid_of_node(page));
+||||||| BASE   (01eea4d12fb6367b36ab3d6c01d5fa6f3541f51b spi: cadence: fix unclocked access on unbind)
+					page->index != nid_of_node(page));
+=======
+					page->index != nid_of_node(page));
+		if (f2fs_in_warm_node_list(sbi, page))
+			f2fs_del_fsync_node_entry(sbi, page);
+>>>>>>> BRANCH (ede9eca9701d25abe84876cd27edf85c47641444 block: relax pgmap check in bio_add_page for compatible zone)
 
 		dec_page_count(sbi, type);
 
@@ -365,8 +373,6 @@ static void f2fs_write_end_io(struct bio *bio)
 				wq_has_sleeper(&sbi->cp_wait))
 			wake_up(&sbi->cp_wait);
 
-		if (f2fs_in_warm_node_list(sbi, page))
-			f2fs_del_fsync_node_entry(sbi, page);
 		clear_page_private_gcing(page);
 		end_page_writeback(page);
 	}
