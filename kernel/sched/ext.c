@@ -1641,6 +1641,7 @@ static bool task_can_run_on_remote_rq(struct scx_sched *sch,
 				      bool enforce)
 {
 	int cpu = cpu_of(rq);
+	bool disallow = false;
 
 	WARN_ON_ONCE(task_cpu(p) == cpu);
 
@@ -1689,6 +1690,10 @@ static bool task_can_run_on_remote_rq(struct scx_sched *sch,
 			__scx_add_event(sch, SCX_EV_DISPATCH_LOCAL_DSQ_OFFLINE, 1);
 		return false;
 	}
+
+	trace_android_vh_scx_task_can_run_on(&disallow, p, rq);
+	if (disallow)
+		return false;
 
 	return true;
 }
