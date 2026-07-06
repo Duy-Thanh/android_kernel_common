@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80251ee3_923c3246",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-06T15:52:17Z",
+      "side": 1,
+      "message": "Hi @keirf@google.com and @sebastianene@google.com!\n\nThis change is significantly different from what was sent to LKML. As per my offline discussion with @sebastianene@google.com The LKML version unfortunately had issues with atomicity of page table changes and lack of resilience for cmdq errors. This is my attempt to address this. The VMAPP (I think we can drop this patch) and  MAPC were updated accordingly. PTAL 😊",
+      "revId": "2dc9f3e06d00ce09d3115531f23a878f5aa41c19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

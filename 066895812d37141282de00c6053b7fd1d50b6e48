@@ -86,6 +86,30 @@
       },
       "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95fd351_47c9bade",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-06T15:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e98e5d_c8afa292",
+      "range": {
+        "startLine": 264,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 62
+      },
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
