@@ -376,6 +376,18 @@ static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 		ret = process_its_mapc(its, cmd, rollback);
 		break;
 
+	case GITS_CMD_CLEAR:
+	case GITS_CMD_DISCARD:
+	case GITS_CMD_INT:
+	case GITS_CMD_INV:
+	case GITS_CMD_INVALL:
+	case GITS_CMD_MAPTI:
+	case GITS_CMD_MOVALL:
+	case GITS_CMD_MOVI:
+	case GITS_CMD_SYNC:
+		ret = 0;
+		break;
+
 	default:
 		ret = 0;
 		break;
