@@ -16,6 +16,24 @@
       "message": "This looks a bit messy: `pkvm_setup_per_cpu()` has different semantics depending on debug vs non-debug mode (i.e. `base` is VA in debug mode but PA in non-debug more). Can\u0027t we pass `base` as VA in both modes?",
       "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b03b001_2d2476f5",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T10:19:30Z",
+      "side": 1,
+      "message": "The reason of not passing `base` as VA for non-debug mode, is to use pKVM\u0027s wrapper `__pkvm_va` to convert a physical address to its own virtual address. Currently passing `base` as VA is fine as `__pkvm_va` is following the same direct mapping virtual address as linux kernel. In future if pKVM has its own implementation, then this won\u0027t work. In this case, pKVM can still use the linux\u0027s direct mapping for the debug mode.",
+      "parentUuid": "2e6e2ce9_ff8fb6b9",
+      "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
