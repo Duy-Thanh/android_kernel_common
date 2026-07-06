@@ -50,6 +50,11 @@ static const char *const zone_cond_name[] = {
 /*
  * Per-zone write plug.
  * @node: hlist_node structure for managing the plug using a hash table.
+ * @bio_list: The list of BIOs that are currently plugged.
+ * @bio_work: Work struct to handle issuing of plugged BIOs
+ * @rcu_head: RCU head to free zone write plugs with an RCU grace period.
+ * @disk: The gendisk the plug belongs to.
+ * @lock: Spinlock to atomically manipulate the plug.
  * @ref: Zone write plug reference counter. A zone write plug reference is
  *       always at least 1 when the plug is hashed in the disk plug hash table.
  *       The reference is incremented whenever a new BIO needing plugging is
@@ -59,30 +64,51 @@ static const char *const zone_cond_name[] = {
  *       reference is dropped whenever the zone of the zone write plug is reset,
  *       finished and when the zone becomes full (last write BIO to the zone
  *       completes).
- * @lock: Spinlock to atomically manipulate the plug.
  * @flags: Flags indicating the plug state.
  * @zone_no: The number of the zone the plug is managing.
  * @wp_offset: The zone write pointer location relative to the start of the zone
  *             as a number of 512B sectors.
+<<<<<<< HEAD   (83386f2a33dc96661d11804f8b756adceb81f67a Merge 3c4693c77b9a ("block: cleanup blkdev_report_zones()") )
  * @from_cpu: Software queue to submit writes from for drivers that preserve
  *	the write order.
  * @bio_list: The list of BIOs that are currently plugged.
  * @bio_work: Work struct to handle issuing of plugged BIOs
  * @rcu_head: RCU head to free zone write plugs with an RCU grace period.
  * @disk: The gendisk the plug belongs to.
+||||||| BASE   (3c4693c77b9addee5ec0f0e7feb5881ba56234ad block: cleanup blkdev_report_zones())
+ * @bio_list: The list of BIOs that are currently plugged.
+ * @bio_work: Work struct to handle issuing of plugged BIOs
+ * @rcu_head: RCU head to free zone write plugs with an RCU grace period.
+ * @disk: The gendisk the plug belongs to.
+=======
+>>>>>>> BRANCH (d765bba11fcebd4609bb1ce50ae0a8b34dbdadd9 block: reorganize struct blk_zone_wplug)
  */
 struct blk_zone_wplug {
 	struct hlist_node	node;
+<<<<<<< HEAD   (83386f2a33dc96661d11804f8b756adceb81f67a Merge 3c4693c77b9a ("block: cleanup blkdev_report_zones()") )
 	refcount_t		ref;
 	spinlock_t		lock;
 	unsigned int		flags;
 	unsigned int		zone_no;
 	unsigned int		wp_offset;
 	int			from_cpu;
+||||||| BASE   (3c4693c77b9addee5ec0f0e7feb5881ba56234ad block: cleanup blkdev_report_zones())
+	refcount_t		ref;
+	spinlock_t		lock;
+	unsigned int		flags;
+	unsigned int		zone_no;
+	unsigned int		wp_offset;
+=======
+>>>>>>> BRANCH (d765bba11fcebd4609bb1ce50ae0a8b34dbdadd9 block: reorganize struct blk_zone_wplug)
 	struct bio_list		bio_list;
 	struct work_struct	bio_work;
 	struct rcu_head		rcu_head;
 	struct gendisk		*disk;
+	spinlock_t		lock;
+	refcount_t		ref;
+	unsigned int		flags;
+	unsigned int		zone_no;
+	unsigned int		wp_offset;
 };
 
 /*
