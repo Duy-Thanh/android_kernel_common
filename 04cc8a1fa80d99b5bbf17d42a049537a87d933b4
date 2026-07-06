@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8906f94f_5db7aebc",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 4967449
+      },
+      "writtenOn": "2026-07-06T09:46:37Z",
+      "side": 1,
+      "message": "Hi John Stultz,\n\nThis series reuses android_vh_scx_task_can_run_on at three new callsites (update_builtin_idle, balance_one, task_can_run_on_remote_rq), on top of the existing one in\nconsume_dispatch_q(). On the consume path this makes the hook fire twice for a remote task -- once in consume_dispatch_q() and once in task_can_run_on_remote_rq() -- so the commits require vendor callbacks to be idempotent and cheap.\n\nAlternatively, I could add a dedicated hook (e.g. android_vh_scx_cpu_allowed(disallow, p, rq), p may be NULL) at the three new callsites and have WALT register only that one instead of android_vh_scx_task_can_run_on. The halt check would then live in a single hook, fire once per task, and the name would fit the cpu-only callsites better (they pass p \u003d\u003d NULL).\n\nDo you prefer keeping the shared hook as-is, or the dedicated hook? Happy to respin either way.",
+      "revId": "04cc8a1fa80d99b5bbf17d42a049537a87d933b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
