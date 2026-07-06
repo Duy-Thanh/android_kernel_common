@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c0145b0_7aa432c8",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e4e536_919190f9",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d625a31_bfce71d9",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-09T23:00:11Z",
       "side": 1,
       "message": "Should this maybe be a method on `DmaBufAttachment` rather than an associated method here?",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "634ceccf_f908ff56",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d625a31_bfce71d9",
       "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccced1e_c578095c",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e80547f2_057575ea",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52c6c35e_534fc888",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-06-09T23:00:11Z",
       "side": 1,
       "message": "This means we must never give callers any way to hold the dma-buf reservation lock in the future.",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480e3c2d_f09c66e9",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Not quite. If the dma-resv lock is held, this is just a deadlock, which is safe.",
+      "parentUuid": "52c6c35e_534fc888",
       "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7424d424_85a331c6",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e74723ee_b3140a9b",
+      "range": {
+        "startLine": 251,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 29
+      },
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1cbbd07_0de472ac",
@@ -109,6 +205,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7999a5ca_c11ae809",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Not quite. If the dma-resv lock is held, this is just a deadlock, which is safe.",
+      "parentUuid": "f1cbbd07_0de472ac",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c27e94f_7ad796e2",
@@ -122,6 +236,24 @@
       "writtenOn": "2026-06-09T23:00:11Z",
       "side": 1,
       "message": "Should we at least log any errors? Should we consider just having an exploding drop instead to encourage users to explicitly `.end()?`?",
+      "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28afab50_d8dea275",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-06T11:32:43Z",
+      "side": 1,
+      "message": "Fixed by moving to closure where error cannot be skipped.",
+      "parentUuid": "7c27e94f_7ad796e2",
       "revId": "6c508418af5a4ed8aa63ea4df272c3b70c381735",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
