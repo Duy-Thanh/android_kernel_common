@@ -28,7 +28,12 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (17261f2db20d552975815fc9a431e8f27eaa7f90 Merge b10f79bde343 ("ASoC: qcom: q6asm-dai: fix error handli)
 #include <linux/android_kabi.h>
+||||||| BASE   (b10f79bde3438e2b8edcddcd6cd0b05d73fcf461 ASoC: qcom: q6asm-dai: fix error handling in prepare and set)
+=======
+#include <linux/srcu.h>
+>>>>>>> BRANCH (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sock.h>
@@ -286,6 +291,7 @@ struct amp_assoc {
 
 struct hci_dev {
 	struct list_head list;
+	struct srcu_struct srcu;
 	struct mutex	lock;
 
 	char		name[8];
