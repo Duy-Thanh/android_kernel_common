@@ -338,7 +338,13 @@ static void ah6_output_done(struct crypto_async_request *base, int err)
 	ah6_restore_hdrs(top_iph, iph_ext, extlen);
 
 	kfree(AH_SKB_CB(skb)->tmp);
+<<<<<<< HEAD   (17261f2db20d552975815fc9a431e8f27eaa7f90 Merge b10f79bde343 ("ASoC: qcom: q6asm-dai: fix error handli)
 	xfrm_output_resume(skb, err);
+||||||| BASE   (b10f79bde3438e2b8edcddcd6cd0b05d73fcf461 ASoC: qcom: q6asm-dai: fix error handling in prepare and set)
+	xfrm_output_resume(skb->sk, skb, err);
+=======
+	xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+>>>>>>> BRANCH (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
 }
 
 static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)
