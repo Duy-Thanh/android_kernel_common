@@ -1269,8 +1269,10 @@ EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_lmsw);
 
 void kvm_load_guest_xsave_state(struct kvm_vcpu *vcpu)
 {
+#ifndef __PKVM_HYP__
 	if (vcpu->arch.guest_state_protected)
 		return;
+#endif
 
 	if (kvm_is_cr4_bit_set(vcpu, X86_CR4_OSXSAVE)) {
 
@@ -1292,8 +1294,10 @@ EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_load_guest_xsave_state);
 
 void kvm_load_host_xsave_state(struct kvm_vcpu *vcpu)
 {
+#ifndef __PKVM_HYP__
 	if (vcpu->arch.guest_state_protected)
 		return;
+#endif
 
 	if (cpu_feature_enabled(X86_FEATURE_PKU) &&
 	    ((vcpu->arch.xcr0 & XFEATURE_MASK_PKRU) ||
