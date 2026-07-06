@@ -1477,8 +1477,29 @@ static __net_init int nfsd_init_net(struct net *net)
 	retval = nfsd_idmap_init(net);
 	if (retval)
 		goto out_idmap_error;
+<<<<<<< HEAD   (20d45f9a43f058d9f5dd83eef8dea3cf921f5d5a Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+=======
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+	if (!nfsd_proc_stat_init(net)) {
+		retval = -ENOMEM;
+		goto out_proc_error;
+	}
+
+>>>>>>> BRANCH (26fe549b5192536b6c1c68a2dfdc8c0dcf9fa4a9 tun: free page on build_skb failure in tun_xdp_one())
 	nn->nfsd_versions = NULL;
 	nn->nfsd4_minorversions = NULL;
+<<<<<<< HEAD   (20d45f9a43f058d9f5dd83eef8dea3cf921f5d5a Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
 	retval = nfsd_reply_cache_init(nn);
 	if (retval)
 		goto out_drc_error;
@@ -1494,10 +1515,28 @@ static __net_init int nfsd_init_net(struct net *net)
 	atomic_set(&nn->ntf_refcnt, 0);
 	init_waitqueue_head(&nn->ntf_wq);
 	seqlock_init(&nn->boot_lock);
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+	nfsd_proc_stat_init(net);
+=======
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+>>>>>>> BRANCH (26fe549b5192536b6c1c68a2dfdc8c0dcf9fa4a9 tun: free page on build_skb failure in tun_xdp_one())
 
 	return 0;
 
+<<<<<<< HEAD   (20d45f9a43f058d9f5dd83eef8dea3cf921f5d5a Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
 out_drc_error:
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+out_repcache_error:
+=======
+out_proc_error:
+	nfsd_stat_counters_destroy(nn);
+out_repcache_error:
+>>>>>>> BRANCH (26fe549b5192536b6c1c68a2dfdc8c0dcf9fa4a9 tun: free page on build_skb failure in tun_xdp_one())
 	nfsd_idmap_shutdown(net);
 out_idmap_error:
 	nfsd_export_shutdown(net);

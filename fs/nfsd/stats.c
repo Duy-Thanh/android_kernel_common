@@ -100,5 +100,61 @@ nfsd_stat_init(void)
 void
 nfsd_stat_shutdown(void)
 {
+<<<<<<< HEAD   (20d45f9a43f058d9f5dd83eef8dea3cf921f5d5a Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
 	svc_proc_unregister(&init_net, "nfsd");
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+	int i;
+
+	for (i = 0; i < num; i++)
+		percpu_counter_destroy(&counters[i]);
+}
+
+int nfsd_stat_counters_init(struct nfsd_net *nn)
+{
+	return nfsd_percpu_counters_init(nn->counter, NFSD_STATS_COUNTERS_NUM);
+}
+
+void nfsd_stat_counters_destroy(struct nfsd_net *nn)
+{
+	nfsd_percpu_counters_destroy(nn->counter, NFSD_STATS_COUNTERS_NUM);
+}
+
+void nfsd_proc_stat_init(struct net *net)
+{
+	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
+
+	svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+}
+
+void nfsd_proc_stat_shutdown(struct net *net)
+{
+	svc_proc_unregister(net, "nfsd");
+=======
+	int i;
+
+	for (i = 0; i < num; i++)
+		percpu_counter_destroy(&counters[i]);
+}
+
+int nfsd_stat_counters_init(struct nfsd_net *nn)
+{
+	return nfsd_percpu_counters_init(nn->counter, NFSD_STATS_COUNTERS_NUM);
+}
+
+void nfsd_stat_counters_destroy(struct nfsd_net *nn)
+{
+	nfsd_percpu_counters_destroy(nn->counter, NFSD_STATS_COUNTERS_NUM);
+}
+
+struct proc_dir_entry *nfsd_proc_stat_init(struct net *net)
+{
+	struct nfsd_net *nn = net_generic(net, nfsd_net_id);
+
+	return svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+}
+
+void nfsd_proc_stat_shutdown(struct net *net)
+{
+	svc_proc_unregister(net, "nfsd");
+>>>>>>> BRANCH (26fe549b5192536b6c1c68a2dfdc8c0dcf9fa4a9 tun: free page on build_skb failure in tun_xdp_one())
 }
