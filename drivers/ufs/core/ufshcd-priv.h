@@ -8,6 +8,7 @@
 
 struct ufs_hba_priv {
 	struct ufs_hba hba;
+	bool zwor_sup;
 };
 
 static inline struct ufs_hba_priv *to_hba_priv(struct ufs_hba *hba)
