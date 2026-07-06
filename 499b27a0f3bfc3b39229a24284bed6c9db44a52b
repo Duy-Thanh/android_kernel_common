@@ -33,6 +33,24 @@
       "message": "File a respin bug please",
       "revId": "499b27a0f3bfc3b39229a24284bed6c9db44a52b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e887b33_c719ddf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-06T11:24:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97b0c82c_4da0fcc1",
+      "revId": "499b27a0f3bfc3b39229a24284bed6c9db44a52b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
