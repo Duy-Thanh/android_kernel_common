@@ -34,6 +34,24 @@
       "parentUuid": "2e6e2ce9_ff8fb6b9",
       "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294059f7_8e1ea7ca",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T11:07:03Z",
+      "side": 1,
+      "message": "Ok, makes sense.\n\nBut this seems a bit non-obvious, so maybe let\u0027s add a comment here like \"In debug mode, base is a virtual address used by the host kernel (which may be either direct map or vmalloc), not a physical address.\" ?",
+      "parentUuid": "2b03b001_2d2476f5",
+      "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
