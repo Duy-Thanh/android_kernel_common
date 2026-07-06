@@ -97,6 +97,24 @@
       "parentUuid": "89ccce07_fae6114f",
       "revId": "3878eb54661375f2fc41582d142141c123d76639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fe2979_c94ad16d",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T10:17:51Z",
+      "side": 1,
+      "message": "\u003e Maybe saying it as \"it will execute the CALL instruction and let it retire before the balanced RET instruction\" is more clear.\n\nIMHO this is still not very clear, because I\u0027m not sure there is a convention which of the two RETs is called the unbalanced one - the one returning from `vmx_spec_ctrl_restore_host` or the one returning from `__vmx_vcpu_run`, since that is probably not so important. (And I\u0027d actually expect that only the latter should be called \"unbalanced\", while the former should be \"balanced\" since it pairs with a prior CALL _after_ the vmexit?)",
+      "parentUuid": "70dcd6c8_fedcb099",
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
