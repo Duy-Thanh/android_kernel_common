@@ -1477,8 +1477,29 @@ static __net_init int nfsd_init_net(struct net *net)
 	retval = nfsd_idmap_init(net);
 	if (retval)
 		goto out_idmap_error;
+<<<<<<< HEAD   (fcc0b186bb86829d3c9ff713b613f23109fb23c4 Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+=======
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+	if (!nfsd_proc_stat_init(net)) {
+		retval = -ENOMEM;
+		goto out_proc_error;
+	}
+
+>>>>>>> BRANCH (3602bdb5607e07a29786a56fd77450b62b60fb41 rds: mark snapshot pages dirty in rds_info_getsockopt())
 	nn->nfsd_versions = NULL;
 	nn->nfsd4_minorversions = NULL;
+<<<<<<< HEAD   (fcc0b186bb86829d3c9ff713b613f23109fb23c4 Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
 	retval = nfsd_reply_cache_init(nn);
 	if (retval)
 		goto out_drc_error;
@@ -1494,10 +1515,28 @@ static __net_init int nfsd_init_net(struct net *net)
 	atomic_set(&nn->ntf_refcnt, 0);
 	init_waitqueue_head(&nn->ntf_wq);
 	seqlock_init(&nn->boot_lock);
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+	nfsd_proc_stat_init(net);
+=======
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+>>>>>>> BRANCH (3602bdb5607e07a29786a56fd77450b62b60fb41 rds: mark snapshot pages dirty in rds_info_getsockopt())
 
 	return 0;
 
+<<<<<<< HEAD   (fcc0b186bb86829d3c9ff713b613f23109fb23c4 Revert "Bluetooth: hci_core: Fix use-after-free in vhci_flus)
 out_drc_error:
+||||||| BASE   (a207ca90e87581dc57e401db8ffbeff6a7c537a3 HID: core: Add printk_ratelimited variants to hid_warn() etc)
+out_repcache_error:
+=======
+out_proc_error:
+	nfsd_stat_counters_destroy(nn);
+out_repcache_error:
+>>>>>>> BRANCH (3602bdb5607e07a29786a56fd77450b62b60fb41 rds: mark snapshot pages dirty in rds_info_getsockopt())
 	nfsd_idmap_shutdown(net);
 out_idmap_error:
 	nfsd_export_shutdown(net);
