@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5300c0_bd152d8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T09:44:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80f158a3_a0dc1162",
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89ccce07_fae6114f",
@@ -59,6 +77,24 @@
           ]
         }
       ],
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70dcd6c8_fedcb099",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T09:44:47Z",
+      "side": 1,
+      "message": "\u003eThe last sentence sounds a bit too verbose and not quite clear to me. \"it will execute the CALL instruction and let it retire before the first RET instruction\" - but this is true for the original code in vmx/vmenter.S as well, since it executes call vmx_spec_ctrl_restore_host before the unbalanced RET? And this CALL is not really enough to fix the issue for that original code, it needs at least CALL + INT3 (provided by X86_FEATURE_RSB_VMEXIT_LITE) for that? So this sentence seems misleading?\n\nMaybe saying it as \"it will execute the CALL instruction and let it retire before the balanced RET instruction\" is more clear. The vmx/vmenter.S executes `call vmx_spec_ctrl_restore_host` but the RET instruction in `vmx_spec_ctrl_restore_host` is unbalanced ret, thus it is not able to retire CALL instruction before the balanced RET instruction. Anyway, if this sentence misleading the reader, I am fine we just simplify it.",
+      "parentUuid": "89ccce07_fae6114f",
       "revId": "3878eb54661375f2fc41582d142141c123d76639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
