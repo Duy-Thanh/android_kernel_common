@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/501305519",
       "revId": "6dd5397a79162e19c9d670e6e11c8db49b824a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3a1dc9_2ab8c53b",
+        "filename": "arch/arm64/kvm/hyp/include/module/nvhe/trace.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-06T14:21:34Z",
+      "side": 1,
+      "message": "This function signature should be updated as well",
+      "revId": "6dd5397a79162e19c9d670e6e11c8db49b824a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
