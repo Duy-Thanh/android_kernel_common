@@ -2124,6 +2124,7 @@ static int balance_one(struct rq *rq, struct task_struct *prev)
 	bool prev_on_scx = prev->sched_class == &ext_sched_class;
 	bool prev_on_rq = prev->scx.flags & SCX_TASK_QUEUED;
 	int nr_loops = SCX_DSP_MAX_LOOPS;
+	bool disallow = false;
 
 	lockdep_assert_rq_held(rq);
 	rq->scx.flags |= SCX_RQ_IN_BALANCE;
@@ -2169,8 +2170,10 @@ static int balance_one(struct rq *rq, struct task_struct *prev)
 	if (consume_global_dsq(sch, rq))
 		goto has_tasks;
 
+	trace_android_vh_scx_task_can_run_on(&disallow, NULL, rq);
+
 	if (unlikely(!SCX_HAS_OP(sch, dispatch)) ||
-	    scx_rq_bypassing(rq) || !scx_rq_online(rq))
+	    scx_rq_bypassing(rq) || !scx_rq_online(rq) || disallow)
 		goto no_tasks;
 
 	dspc->rq = rq;
