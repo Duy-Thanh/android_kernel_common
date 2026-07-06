@@ -74,6 +74,134 @@
       },
       "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc15c597_e1129d49",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T16:01:10Z",
+      "side": 1,
+      "message": "Also, \"is \u003e\u003d1 (at least one reference)\" and \"is guaranteed to be not dropped\" mean the same thing?\n\nMoreover, actually this function checks `atomic_read(\u0026domain-\u003erefcount) \u003c 2`, not `atomic_read(\u0026domain-\u003erefcount) \u003c 1` (and I assume that\u0027s intended?), so this comment is inaccurate?",
+      "parentUuid": "dcf0b8ac_21aea8c0",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc7aba6_8b1a5e36",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T16:01:10Z",
+      "side": 1,
+      "message": "Since this is only an internal function now, maybe rename it to `__pkvm_get_iommu_domain_noref()` (consistently with `__pkvm_get_iommu_domain_locked()`) and move its implementation above `pkvm_get_iommu_domain()`, after `__pkvm_get_iommu_domain_locked()`?",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "460d6a7d_8186f370",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T16:01:10Z",
+      "side": 1,
+      "message": "1. nit: maybe \"\u003c\u003d 1\" (seems more conventional)?\n2. Maybe add WARN_ON_ONCE around the atomic_read check (since, for example, according to the above comment, the caller is supposed to make sure that the counter is not dropped)?",
+      "fixSuggestions": [
+        {
+          "fixId": "2311f2f0_03893de9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "\tif (domain \u0026\u0026 WARN_ON_ONCE(atomic_read(\u0026domain-\u003erefcount) \u003c\u003d 1))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a572fe0c_f61d8ec1",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T16:01:10Z",
+      "side": 1,
+      "message": "nit: maybe e.g. \"Remove the domain from the hash list while still holding the lock, to prevent someone else from getting this domain while freeing it.\" - to make it clear what this comment is about? Otherwise this comment seems confusing, since it sounds like it is about why we do hash_del() at all, not why we do it before releasing the lock.",
+      "fixSuggestions": [
+        {
+          "fixId": "9e16f4ae_46945323",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": "\t * Remove the domain from the hash list while still holding the lock,\n\t * to prevent someone else from getting this domain while freeing it.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644659a6_9d88b96c",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-06T16:01:10Z",
+      "side": 1,
+      "message": "Do we have any reason to still do this after free_domain_memcache, pkvm_hyp_donate_host etc, not before? Can we do this before that, within the first lock/unlock section, instead of locking/unlocking iommu_domain_lock once again afterwards? i.e.:\n\n```\n--- a/drivers/iommu/intel/pkvm/domain.c\n+++ b/drivers/iommu/intel/pkvm/domain.c\n@@ -190,6 +190,9 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)\n \t\treturn -EBUSY;\n \t}\n \n+\t__clear_bit(domain-\u003eindex, iommu_domains_bitmap);\n+\tmemset(domain, 0, sizeof(struct dmar_domain));\n+\n \t/*\n \t * To prevent someone else from getting this domain from the hash list\n \t * while freeing it.\n@@ -212,11 +215,6 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)\n \tpkvm_dbg(\"%s: freeing domain[pgd: %p], freed pages: %lu\\n\",\n \t\t __func__, domain-\u003epgd, teardown_mc-\u003ecount);\n \n-\tpkvm_spin_lock(\u0026iommu_domain_lock);\n-\t__clear_bit(domain-\u003eindex, iommu_domains_bitmap);\n-\tmemset(domain, 0, sizeof(struct dmar_domain));\n-\tpkvm_spin_unlock(\u0026iommu_domain_lock);\n-\n \treturn 0;\n }\n \n```",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
