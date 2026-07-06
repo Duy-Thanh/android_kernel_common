@@ -69,6 +69,24 @@
       "parentUuid": "36359932_2743d4af",
       "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6cb8ae_6b4f1bb2",
+        "filename": "gki/aarch64/symbols/pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-07-06T03:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b280dceb_2cf63b44",
+      "revId": "a57ef5b3a52bb91e747b5b3f6a53eedfbc7fa85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
