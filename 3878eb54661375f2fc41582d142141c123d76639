@@ -115,6 +115,24 @@
       "parentUuid": "70dcd6c8_fedcb099",
       "revId": "3878eb54661375f2fc41582d142141c123d76639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a485fcc1_875404d5",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-06T10:33:26Z",
+      "side": 1,
+      "message": "I see. Let\u0027s just use the simplified version as you suggested, which is more clear.",
+      "parentUuid": "03fe2979_c94ad16d",
+      "revId": "3878eb54661375f2fc41582d142141c123d76639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
