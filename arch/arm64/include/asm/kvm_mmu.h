@@ -217,10 +217,28 @@ static inline void __invalidate_icache_guest_page(void *va, size_t size)
 {
 	if (icache_is_aliasing()) {
 		/* any kind of VIPT cache */
+<<<<<<< HEAD   (ea00e5c347c7ad4ce5762a079b3154d42e9e1548 Merge 26fe549b5192 ("tun: free page on build_skb failure in )
 		icache_inval_all_pou();
 	} else if (is_kernel_in_hyp_mode() || !icache_is_vpipt()) {
 		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
 		icache_inval_pou((unsigned long)va, (unsigned long)va + size);
+||||||| BASE   (26fe549b5192536b6c1c68a2dfdc8c0dcf9fa4a9 tun: free page on build_skb failure in tun_xdp_one())
+		__flush_icache_all();
+	} else if (is_kernel_in_hyp_mode() || !icache_is_vpipt()) {
+		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+		void *va = page_address(pfn_to_page(pfn));
+
+		invalidate_icache_range((unsigned long)va,
+					(unsigned long)va + size);
+=======
+		__flush_icache_all();
+	} else {
+		/* PIPT */
+		void *va = page_address(pfn_to_page(pfn));
+
+		invalidate_icache_range((unsigned long)va,
+					(unsigned long)va + size);
+>>>>>>> BRANCH (fb49f32eb0d6c096a7a2512b407b6dbd269866c8 KVM: arm64: Remove VPIPT I-cache handling)
 	}
 }
 
