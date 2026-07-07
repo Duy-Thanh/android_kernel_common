@@ -523,7 +523,7 @@ impl BinderObject {
         // SAFETY: The entire object is initialized, so accessing this field is safe.
         let type_ = unsafe { obj.assume_init_ref().hdr.type_ };
         if Self::type_to_size(type_).is_none() {
-            // The value of `obj.hdr_type_` was invalid.
+            pr_warn!("BinderObject: invalid type 0x{:x}", type_);
             return Err(EINVAL);
         }
 
