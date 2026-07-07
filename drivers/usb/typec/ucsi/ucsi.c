@@ -669,8 +669,14 @@ static void ucsi_handle_connector_change(struct work_struct *work)
 	struct ucsi *ucsi = con->ucsi;
 	struct ucsi_connector_status pre_ack_status;
 	struct ucsi_connector_status post_ack_status;
+<<<<<<< HEAD   (e7cdd7d65ada3641d486afee1c9bb0f279473fe0 Merge fd30ac679c5e ("batman-adv: tp_meter: fix tp_num leak o)
 	enum typec_role role;
 	enum usb_role u_role = USB_ROLE_NONE;
+||||||| BASE   (fd30ac679c5eee11281279391c5b32f0a00617da batman-adv: tp_meter: fix tp_num leak on kmalloc failure)
+	enum typec_role role;
+=======
+	enum typec_role role, prev_role;
+>>>>>>> BRANCH (d9666dca97c01de1c7395ac53041634eb75120e2 Linux 5.10.259)
 	u16 inferred_changes;
 	u16 changed_flags;
 	u64 command;
@@ -705,6 +711,8 @@ static void ucsi_handle_connector_change(struct work_struct *work)
 	 * We may end up seeing a change twice, but we can only miss extremely
 	 * short transitional changes.
 	 */
+
+	prev_role = !!(con->status.flags & UCSI_CONSTAT_PWR_DIR);
 
 	/* 1. First UCSI_GET_CONNECTOR_STATUS */
 	command = UCSI_GET_CONNECTOR_STATUS | UCSI_CONNECTOR_NUMBER(con->num);
@@ -783,8 +791,15 @@ static void ucsi_handle_connector_change(struct work_struct *work)
 		ucsi_port_psy_changed(con);
 	}
 
-	if (con->status.change & UCSI_CONSTAT_POWER_DIR_CHANGE) {
+	if ((con->status.change & UCSI_CONSTAT_POWER_DIR_CHANGE) &&
+	    role != prev_role) {
 		typec_set_pwr_role(con->port, role);
+
+		/* Some power_supply properties vary depending on the power direction when
+		 * connected
+		 */
+		if (con->status.flags & UCSI_CONSTAT_CONNECTED)
+			ucsi_port_psy_changed(con);
 
 		/* Complete pending power role swap */
 		if (!completion_done(&con->complete))
