@@ -34,6 +34,24 @@
       "parentUuid": "d450d6ef_816dc24f",
       "revId": "a09b6b88968b9485798c736d44432d1aeb4eb0d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2361dce6_60222d06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-07-07T17:23:24Z",
+      "side": 1,
+      "message": "Per the contribution guidelines here, please add a tag after the cherry picked line describing the modifications required in this change compared to the updstream version. https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-backports-from-mainline-linux",
+      "parentUuid": "431bede6_4c37620f",
+      "revId": "a09b6b88968b9485798c736d44432d1aeb4eb0d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
