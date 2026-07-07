@@ -1122,18 +1122,26 @@ impl Thread {
         };
 
         let data_size = info.data_size;
-        let aligned_data_size = ptr_align(data_size).ok_or(EINVAL)?;
+        let aligned_data_size = ptr_align(data_size).ok_or_else(|| {
+            pr_warn!("copy_transaction_data: data_size align failed");
+            EINVAL
+        })?;
         let offsets_size = info.offsets_size;
         let buffers_size = info.buffers_size;
         let aligned_secctx_size = match secctx.as_ref() {
-            Some((_offset, ctx)) => ptr_align(ctx.len()).ok_or(EINVAL)?,
+            Some((_offset, ctx)) => ptr_align(ctx.len()).ok_or_else(|| {
+                pr_warn!("copy_transaction_data: secctx align failed");
+                EINVAL
+            })?,
             None => 0,
         };
 
         if !is_aligned(offsets_size, size_of::<u64>()) {
+            pr_warn!("copy_transaction_data: offsets_size not aligned: {}", offsets_size);
             return Err(EINVAL.into());
         }
         if !is_aligned(buffers_size, size_of::<u64>()) {
+            pr_warn!("copy_transaction_data: buffers_size not aligned: {}", buffers_size);
             return Err(EINVAL.into());
         }
 
@@ -1190,7 +1198,10 @@ impl Thread {
             {
                 let offset = offsets_reader.read::<u64>()?;
                 view.alloc.write(index_offset, &offset)?;
-                let offset: usize = offset.try_into().map_err(|_| EINVAL)?;
+                let offset: usize = offset.try_into().map_err(|_| {
+                    pr_warn!("copy_transaction_data: offset try_into failed");
+                    EINVAL
+                })?;
 
                 if offset < end_of_previous_object || !is_aligned(offset, size_of::<u32>()) {
                     pr_warn!("Got transaction with invalid offset.");
@@ -1206,7 +1217,38 @@ impl Thread {
                     )?;
                 }
 
-                let mut object = BinderObject::read_from(&mut buffer_reader)?;
+                let mut object = match BinderObject::read_from(&mut buffer_reader) {
+                    Ok(obj) => obj,
+                    Err(err) => {
+                        pr_warn!(
+                            "copy_transaction_data: failed to read object at index {}, offset {}, err: {:?}, data_size: {}, reader_len: {}",
+                            index,
+                            offset,
+                            err,
+                            data_size,
+                            buffer_reader.len()
+                        );
+                        // Dump transaction data
+                        let mut dump_reader = UserSlice::new(info.data_ptr, data_size).reader();
+                        let mut dump_offset = 0;
+                        while dump_reader.len() > 0 {
+                            let chunk_len = usize::min(16, dump_reader.len());
+                            let mut buf = [0u8; 16];
+                            if dump_reader.read_slice(&mut buf[..chunk_len]).is_ok() {
+                                pr_warn!(
+                                    "  data +0x{:04x}: {:02x?}",
+                                    dump_offset,
+                                    &buf[..chunk_len]
+                                );
+                            } else {
+                                pr_warn!("  data +0x{:04x}: failed to read", dump_offset);
+                                break;
+                            }
+                            dump_offset += chunk_len;
+                        }
+                        return Err(err.into());
+                    }
+                };
 
                 match self.translate_object(
                     index,
@@ -1424,10 +1466,16 @@ impl Thread {
                 }
 
                 pr_warn!(
-                    "{}:{} transaction to {} failed: {err:?}",
+                    "{}:{} transaction to {} failed: {err:?}, code: 0x{:x}, flags: 0x{:x}, data_ptr: 0x{:x}, data_size: {}, offsets_ptr: 0x{:x}, offsets_size: {}",
                     info.from_pid,
                     info.from_tid,
-                    info.to_pid
+                    info.to_pid,
+                    info.code,
+                    info.flags,
+                    info.data_ptr,
+                    info.data_size,
+                    info.offsets_ptr,
+                    info.offsets_size
                 );
             }
         }
@@ -1507,10 +1555,16 @@ impl Thread {
             // the sender know that the transaction has completed (with an error in this case).
 
             pr_warn!(
-                "{}:{} reply to {} failed: {err:?}",
+                "{}:{} reply to {} failed: {err:?}, code: 0x{:x}, flags: 0x{:x}, data_ptr: 0x{:x}, data_size: {}, offsets_ptr: 0x{:x}, offsets_size: {}",
                 info.from_pid,
                 info.from_tid,
-                info.to_pid
+                info.to_pid,
+                info.code,
+                info.flags,
+                info.data_ptr,
+                info.data_size,
+                info.offsets_ptr,
+                info.offsets_size
             );
             let param = err.source.as_ref().map_or(0, |e| e.to_errno());
             let ee = ExtendedError::new(info.debug_id as u32, err.reply, param);
