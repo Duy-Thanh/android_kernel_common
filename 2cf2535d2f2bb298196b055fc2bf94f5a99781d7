@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e5073a_0a1dfa86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T16:21:22Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be FROMLIST since it is currently being discussed upstream? The reviewer upstream has some concerns that must be resolved before we take it here. Please continue to work with upstream - once a maintainer accepts it into their tree, we can take it as FROMGIT.",
+      "revId": "2cf2535d2f2bb298196b055fc2bf94f5a99781d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
