@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/531958432",
       "revId": "ffed2552872a824e2dac11e16bc8fc3fa376f84a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a011eec3_e23ad1a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-07-07T13:20:38Z",
+      "side": 1,
+      "message": "This branch is not eligible for respin requests.",
+      "revId": "ffed2552872a824e2dac11e16bc8fc3fa376f84a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
