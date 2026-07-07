@@ -16,6 +16,24 @@
       "message": "Is the behavior with this config exactly the same as before for partners? We can\u0027t take this if partners need to make changes to restore the behavior they expect.",
       "revId": "ca1ffa949724d10d19ef89581cce06b33037175f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e6d543_7de51622",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-07-07T01:37:54Z",
+      "side": 1,
+      "message": "Same as https://r.android.com/4079872:\n\nAfter applying the CL, in addition to the original soft lockup detector, it is expected to run one more hard lockup detector at [1].\n\nIf a hard lockup is detected, it prints some more logs at [2].\n\n[1] https://elixir.bootlin.com/linux/v6.18/source/kernel/watchdog.c#L877\n[2] https://elixir.bootlin.com/linux/v6.18/source/kernel/watchdog.c#L221",
+      "parentUuid": "fa365b9a_ecea4e33",
+      "revId": "ca1ffa949724d10d19ef89581cce06b33037175f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
