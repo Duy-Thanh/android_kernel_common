@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf943e54_e377061e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-07T17:21:21Z",
+      "side": 1,
+      "message": "Does this sentence mean that currently there is no scenario allowing the host to exploit this bug, or that there is already such a scenario?\n\nIt seems currently there is no such scenario, since the host page state will be set to its default value, i.e. zeroed, i.e. PKVM_PAGE_NONE/PKVM_ID_HOST, so it will not pass any check_host_mem_pgstate(PKVM_PAGE_OWNED, PKVM_ID_HOST) check?",
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3936b0b9_7e6ddc14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-07T17:21:21Z",
+      "side": 1,
+      "message": "Good catch. My bad that I hadn\u0027t realized I needed to update fix_host_mmu_pgstate_walker() in ed4a5fc728df.",
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eacdf0bb_9375f2e4",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-07T17:21:21Z",
+      "side": 1,
+      "message": "`pvmfw_base` and `pvmfw_size` are already guaranteed to be page-aligned (we validate that in `pkvm_firmware_rmem_init()`). \n\nI think we can simplify this function as follows (thus keep it similar to `is_pvmfw()` above):\n\n```\nstatic inline bool is_pvmfw_range(unsigned long phys, unsigned long size)\n{\n\treturn pvmfw_present \u0026\u0026 (phys \u003e\u003d pvmfw_base) \u0026\u0026\n\t\t\t\t(phys + size \u003c\u003d pvmfw_base + pvmfw_size);\n}\n```",
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db74743_bc9acc87",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-07T17:21:21Z",
+      "side": 1,
+      "message": "nit: I think \"Otherwise it is a code bug\" is redundant, BUG_ON is self-explaining.\n\nAlso micro-nit: s/the pvmfw range/a pvmfw range/ (there is just one pvmfw region, but there are multiple possible ranges within this region)?",
+      "fixSuggestions": [
+        {
+          "fixId": "4ab843dd_59a2ab92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 359,
+                "startChar": 0,
+                "endLine": 361,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t * A non-present PTE is neither MMIO nor memory, then it must be\n\t\t\t * a pvmfw range.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
