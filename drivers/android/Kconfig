@@ -115,4 +115,6 @@ config ANDROID_WRAPFD
 	  file supporting ioctl API for file ownership that controls ability to
 	  map the file.
 
+source "drivers/android/wrapfd/Kconfig"
+
 endmenu
