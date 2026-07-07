@@ -608,6 +608,8 @@ impl Thread {
     // mangled symbol names.
     #[export_name = "rust_binder_wait"]
     fn get_work(self: &Arc<Self>, wait: bool) -> Result<Option<DLArc<dyn DeliverToRead>>> {
+        self.restore_priority(&self.process.default_priority);
+
         // Try to get work from the thread's work queue, using only a local lock.
         {
             let mut inner = self.inner.lock();
@@ -639,8 +641,6 @@ impl Thread {
             if let Some(work) = inner.pop_work() {
                 return Ok(Some(work));
             }
-
-            self.restore_priority(&self.process.default_priority);
 
             inner.looper_flags |= LOOPER_WAITING | LOOPER_WAITING_PROC;
             let signal_pending = self.work_condvar.wait_interruptible_freezable(&mut inner);
