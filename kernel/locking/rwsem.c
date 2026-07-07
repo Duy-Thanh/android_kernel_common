@@ -504,9 +504,11 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 			 * waiter isn't blocked_on, but this function only sets
 			 * PROXY_WAKING if it is.
 			 */
-			__set_task_blocked_on_waking(waiter->task, sem);
-			if (waiter->task == current->blocked_donor)
-				current->blocked_donor = NULL;
+			if (__get_task_blocked_on(waiter->task) == sem) {
+				__set_task_blocked_on_waking(waiter->task, sem);
+				if (waiter->task == current->blocked_donor)
+					current->blocked_donor = NULL;
+			}
 			raw_spin_unlock(&waiter->task->blocked_lock);
 			wake_q_add(wake_q, waiter->task);
 			lockevent_inc(rwsem_wake_writer);
@@ -646,9 +648,11 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 		 * waiter isn't blocked_on, but this function only sets
 		 * PROXY_WAKING if we are.
 		 */
-		__set_task_blocked_on_waking(tsk, sem);
-		if (tsk == current->blocked_donor)
-			current->blocked_donor = NULL;
+		if (__get_task_blocked_on(tsk) == sem) {
+			__set_task_blocked_on_waking(tsk, sem);
+			if (tsk == current->blocked_donor)
+				current->blocked_donor = NULL;
+		}
 		raw_spin_unlock(&tsk->blocked_lock);
 	}
 }
