@@ -2143,7 +2143,7 @@ endif # CONFIG_MODULES
 
 PHONY += modpost
 modpost: $(if $(single-build),, $(if $(KBUILD_EXTMOD),, \
-	 $(if $(KBUILD_MIXED_TREE), vmlinux.symvers, \
+	 $(if $(KBUILD_MIXED_TREE), $(mixed-build-prefix)vmlinux.symvers, \
 	 $(if $(KBUILD_BUILTIN), vmlinux.o)))) \
 	 $(if $(KBUILD_MODULES), modules_check)
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
