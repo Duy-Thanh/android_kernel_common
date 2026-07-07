@@ -2125,6 +2125,19 @@ static void blk_mq_commit_rqs(struct blk_mq_hw_ctx *hctx, int queued,
 	}
 }
 
+static void blk_mq_reinsert_list(struct list_head *list)
+{
+	struct request *rq;
+
+	while (!list_empty(list)) {
+		rq = list_last_entry(list, struct request, queuelist);
+		list_del_init(&rq->queuelist);
+		blk_mq_insert_request(rq, blk_mq_preserve_order(rq) ?
+				      BLK_MQ_INSERT_ORDERED :
+				      BLK_MQ_INSERT_AT_HEAD);
+	}
+}
+
 /*
  * Returns true if we did some work AND can potentially do more.
  */
@@ -2202,9 +2215,7 @@ out:
 		if (nr_budgets)
 			blk_mq_release_budgets(q, list);
 
-		spin_lock(&hctx->lock);
-		list_splice_tail_init(list, &hctx->dispatch);
-		spin_unlock(&hctx->lock);
+		blk_mq_reinsert_list(list);
 
 		/*
 		 * Order adding requests to hctx->dispatch and checking
@@ -3833,9 +3844,7 @@ static int blk_mq_hctx_notify_dead(unsigned int cpu, struct hlist_node *node)
 	if (list_empty(&tmp))
 		return 0;
 
-	spin_lock(&hctx->lock);
-	list_splice_tail_init(&tmp, &hctx->dispatch);
-	spin_unlock(&hctx->lock);
+	blk_mq_reinsert_list(&tmp);
 
 	blk_mq_run_hw_queue(hctx, true);
 	return 0;
