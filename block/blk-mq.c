@@ -1392,7 +1392,8 @@ static void blk_add_rq_to_plug(struct blk_plug *plug, struct request *rq)
 		trace_block_plug(rq->q);
 	}
 
-	if (!plug->multiple_queues && last && last->q != rq->q)
+	if (!plug->multiple_queues && ((last && last->q != rq->q) ||
+				       blk_pipeline_zwr(rq->q)))
 		plug->multiple_queues = true;
 	/*
 	 * Any request allocated from sched tags can't be issued to
