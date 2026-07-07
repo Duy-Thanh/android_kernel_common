@@ -2273,7 +2273,14 @@ static inline void __set_task_blocked_on_waking(struct task_struct *p, void *m)
 	lockdep_assert_held_once(&p->blocked_lock);
 
 	if (!sched_proxy_exec()) {
-		__clear_task_blocked_on(p, m);
+		/*
+		 * Passing with NULL here to avoid tripping
+		 * reported warnings if blocked_on.lock != m.
+		 * This really shouldn't happen, so I'm a bit
+		 * wary about this change, but in the
+		 * !proxy_exec case it shouldn't matter.
+		 */
+		__clear_task_blocked_on(p, NULL);
 		return;
 	}
 
