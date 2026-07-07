@@ -33,6 +33,24 @@
       "message": "create a patch on top of this one to add the new symbols to your symbols list.",
       "revId": "e82362ec4c05ca44ea72b389b4178356cfff6b65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52c4eab_2b28ccda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T03:29:25Z",
+      "side": 1,
+      "message": "Oh, I found it. In the future, please submit the symbol change as part of the same series as the vendor hook patch",
+      "parentUuid": "cd909c1f_3e629b72",
+      "revId": "e82362ec4c05ca44ea72b389b4178356cfff6b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
