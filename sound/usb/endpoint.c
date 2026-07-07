@@ -1310,9 +1310,6 @@ int snd_usb_endpoint_set_params(struct snd_usb_audio *chip,
 		return -EINVAL;
 	}
 
-	ep->packsize[0] = min(ep->packsize[0], ep->maxframesize);
-	ep->packsize[1] = min(ep->packsize[1], ep->maxframesize);
-
 	/* calculate the frequency in 16.16 format */
 	ep->freqm = ep->freqn;
 	ep->freqshift = INT_MIN;
@@ -1339,6 +1336,81 @@ int snd_usb_endpoint_set_params(struct snd_usb_audio *chip,
 	ep->maxframesize = ep->maxpacksize / ep->cur_frame_bytes;
 	ep->curframesize = ep->curpacksize / ep->cur_frame_bytes;
 
+<<<<<<< HEAD   (6b042cc670554000418f57be6f24183ae758dc53 Revert "ALSA: usb-audio: Kill timer properly at removal")
+||||||| BASE   (60458ecb0779fe8ee5dc5f61bbf14a2b46496fd3 tty: n_gsm: fix flow control handling in tx path)
+	err = update_clock_ref_rate(chip, ep);
+	if (err >= 0) {
+		ep->need_setup = false;
+		err = 0;
+	}
+
+ unlock:
+	mutex_unlock(&chip->mutex);
+	return err;
+}
+
+static int init_sample_rate(struct snd_usb_audio *chip,
+			    struct snd_usb_endpoint *ep)
+{
+	struct snd_usb_clock_ref *clock = ep->clock_ref;
+	int rate, err;
+
+	rate = update_clock_ref_rate(chip, ep);
+	if (rate < 0)
+		return rate;
+	if (clock && !clock->need_setup)
+		return 0;
+
+	if (!ep->fixed_rate) {
+		err = snd_usb_init_sample_rate(chip, ep->cur_audiofmt, rate);
+		if (err < 0) {
+			if (clock)
+				clock->rate = 0; /* reset rate */
+			return err;
+		}
+	}
+
+	if (clock)
+		clock->need_setup = false;
+=======
+	ep->packsize[0] = min(ep->packsize[0], ep->maxframesize);
+	ep->packsize[1] = min(ep->packsize[1], ep->maxframesize);
+
+	err = update_clock_ref_rate(chip, ep);
+	if (err >= 0) {
+		ep->need_setup = false;
+		err = 0;
+	}
+
+ unlock:
+	mutex_unlock(&chip->mutex);
+	return err;
+}
+
+static int init_sample_rate(struct snd_usb_audio *chip,
+			    struct snd_usb_endpoint *ep)
+{
+	struct snd_usb_clock_ref *clock = ep->clock_ref;
+	int rate, err;
+
+	rate = update_clock_ref_rate(chip, ep);
+	if (rate < 0)
+		return rate;
+	if (clock && !clock->need_setup)
+		return 0;
+
+	if (!ep->fixed_rate) {
+		err = snd_usb_init_sample_rate(chip, ep->cur_audiofmt, rate);
+		if (err < 0) {
+			if (clock)
+				clock->rate = 0; /* reset rate */
+			return err;
+		}
+	}
+
+	if (clock)
+		clock->need_setup = false;
+>>>>>>> BRANCH (bb610b6fc1c4e02bec4349447ca4ec9f3e30814a firmware: google: framebuffer: Do not mark framebuffer as bu)
 	return 0;
 }
 
