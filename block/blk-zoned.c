@@ -1077,7 +1077,9 @@ static bool blk_zone_wplug_handle_write(struct bio *bio, unsigned int nr_segs,
 			from_cpu = zwplug->from_cpu;
 		else
 			from_cpu = smp_processor_id();
-		if (from_cpu != rq_cpu && !blk_use_zwor(disk->queue)) {
+		if ((from_cpu != rq_cpu && !blk_use_zwor(disk->queue)) ||
+		    !bio_list_empty(&zwplug->bio_list) ||
+		    work_busy(&zwplug->bio_work)) {
 			zwplug->from_cpu = from_cpu;
 			goto add_to_bio_list;
 		}
