@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cfec86_6940169f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T16:15:23Z",
+      "side": 1,
+      "message": "what custom usecases?",
+      "revId": "94994caa16519aa605e583eb09af29aedd96fd7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb5da26_fdf45773",
+        "filename": "sound/core/pcm_native.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3491,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T16:15:23Z",
+      "side": 1,
+      "message": "what are these custom features? Why can\u0027t they be sent upstream?",
+      "revId": "94994caa16519aa605e583eb09af29aedd96fd7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd855e87_d52cfc09",
+        "filename": "sound/core/pcm_native.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3502,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T16:15:23Z",
+      "side": 1,
+      "message": "why \u0027U\u0027? Please provide more context in the commit message.",
+      "revId": "94994caa16519aa605e583eb09af29aedd96fd7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
