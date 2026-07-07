@@ -2241,6 +2241,9 @@ static inline void __set_task_blocked_on(struct task_struct *p, void *m,
 	 * with a different mutex. Note, setting it to the same
 	 * lock repeatedly is ok.
 	 */
+	trace_printk("JDB: %s: %s %d  cur lock: %p new lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
+	if (p->blocked_on.lock && p->blocked_on.lock != m)
+		trace_printk("JDB: %s: ERRRR  %s %d  cur lock: %p new lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
 	WARN_ON_ONCE(p->blocked_on.lock && p->blocked_on.lock != m);
 	p->blocked_on.lock = m;
 	p->blocked_on.type = type;
@@ -2250,11 +2253,17 @@ static inline void __clear_task_blocked_on(struct task_struct *p, void *m)
 {
 	/* Currently we serialize blocked_on under the task::blocked_lock */
 	lockdep_assert_held_once(&p->blocked_lock);
+
+	trace_printk("JDB: %s: %s %d act lock: %p assumed lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
 	/*
 	 * There may be cases where we re-clear already cleared
 	 * blocked_on relationships, but make sure we are not
 	 * clearing the relationship with a different lock.
 	 */
+	if (m && p->blocked_on.lock &&
+		     p->blocked_on.lock != m && p->blocked_on.lock != PROXY_WAKING)
+		trace_printk("JDB: %s: ERRRR %s %d act lock: %p assumed lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
+
 	WARN_ON_ONCE(m && p->blocked_on.lock &&
 		     p->blocked_on.lock != m && p->blocked_on.lock != PROXY_WAKING);
 	p->blocked_on.lock = NULL;
@@ -2277,6 +2286,8 @@ static inline void __set_task_blocked_on_waking(struct task_struct *p, void *m)
 		return;
 	}
 
+	trace_printk("JDB: %s: %s %d act lock: %p assumed lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
+
 	/* Don't set PROXY_WAKING if blocked_on was already cleared */
 	if (!p->blocked_on.lock)
 		return;
@@ -2285,6 +2296,9 @@ static inline void __set_task_blocked_on_waking(struct task_struct *p, void *m)
 	 * already set to waking, but make sure we are not changing
 	 * the relationship with a different lock.
 	 */
+	if (m && p->blocked_on.lock != m && p->blocked_on.lock != PROXY_WAKING)
+		trace_printk("JDB: %s: ERRR %s %d act lock: %p assumed lock: %p\n", __func__, p->comm, p->pid, p->blocked_on.lock, m);
+
 	WARN_ON_ONCE(m && p->blocked_on.lock != m && p->blocked_on.lock != PROXY_WAKING);
 	p->blocked_on.lock = PROXY_WAKING;
 }

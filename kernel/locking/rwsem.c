@@ -504,6 +504,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 			 * waiter isn't blocked_on, but this function only sets
 			 * PROXY_WAKING if it is.
 			 */
+			trace_printk("JDB: %s(WAITING_FOR_WRITE)calling __set_task_blocked_on_waking on %s %d w/ sem: %p\n", __func__, waiter->task->comm, waiter->task->pid, sem);
 			__set_task_blocked_on_waking(waiter->task, sem);
 			if (waiter->task == current->blocked_donor)
 				current->blocked_donor = NULL;
@@ -646,6 +647,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 		 * waiter isn't blocked_on, but this function only sets
 		 * PROXY_WAKING if we are.
 		 */
+		trace_printk("JDB: %s(2nd pass) calling __set_task_blocked_on_waking on %s %d w/ sem: %p\n", __func__, tsk->comm, tsk->pid, sem);
 		__set_task_blocked_on_waking(tsk, sem);
 		if (tsk == current->blocked_donor)
 			current->blocked_donor = NULL;
@@ -1213,6 +1215,7 @@ queue:
 		}
 		if (atomic_long_read(&sem->count) & RWSEM_WRITER_MASK) {
 			raw_spin_lock_irq(&current->blocked_lock);
+			trace_printk("JDB: %s calling __set_task_blocked_on on %s %d w/ sem: %p\n", __func__, current->comm, current->pid, sem);
 			__set_task_blocked_on(current, sem, BO_T_RWSEM);
 			raw_spin_unlock_irq(&current->blocked_lock);
 			blocked_on_set = true;
@@ -1337,6 +1340,7 @@ rwsem_down_write_slowpath(struct rw_semaphore *sem, int state)
 
 		if (atomic_long_read(&sem->count) & RWSEM_WRITER_MASK) {
 			raw_spin_lock_irq(&current->blocked_lock);
+			trace_printk("JDB: %s calling __set_task_blocked_on on %s %d w/ sem: %p\n", __func__, current->comm, current->pid, sem);
 			__set_task_blocked_on(current, sem, BO_T_RWSEM);
 			blocked_on_set = true;
 			raw_spin_unlock_irq(&current->blocked_lock);

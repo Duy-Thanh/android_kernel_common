@@ -143,7 +143,7 @@ cpumask_var_t __read_mostly	tracing_buffer_mask;
  * by commas.
  */
 /* Set to string format zero to disable by default */
-static char ftrace_dump_on_oops[MAX_TRACER_SIZE] = "0";
+static char ftrace_dump_on_oops[MAX_TRACER_SIZE] = "1";
 
 /* When set, tracing will stop when a WARN*() is hit */
 static int __disable_trace_on_warning;
@@ -943,7 +943,7 @@ int tracing_is_enabled(void)
  * to not have to wait for all that output. Anyway this can be
  * boot time and run time configurable.
  */
-#define TRACE_BUF_SIZE_DEFAULT	1441792UL /* 16384 * 88 (sizeof(entry)) */
+#define TRACE_BUF_SIZE_DEFAULT	BIT(13) /* 16384 * 88 (sizeof(entry)) */
 
 static unsigned long		trace_buf_size = TRACE_BUF_SIZE_DEFAULT;
 
@@ -1606,6 +1606,9 @@ EXPORT_SYMBOL_GPL(tracing_snapshot_cond_disable);
 
 void tracer_tracing_off(struct trace_array *tr)
 {
+	printk("JDB: Sorry, not disabling tracing!\n");
+	return;
+
 	if (tr->array_buffer.buffer)
 		ring_buffer_record_off(tr->array_buffer.buffer);
 	/*
