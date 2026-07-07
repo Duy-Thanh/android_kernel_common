@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/531878280",
       "revId": "e82362ec4c05ca44ea72b389b4178356cfff6b65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd909c1f_3e629b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-07T03:24:49Z",
+      "side": 1,
+      "message": "create a patch on top of this one to add the new symbols to your symbols list.",
+      "revId": "e82362ec4c05ca44ea72b389b4178356cfff6b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
