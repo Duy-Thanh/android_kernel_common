@@ -3705,6 +3705,13 @@ int sdhci_resume_host(struct sdhci_host *host)
 		sdhci_init(host, 0);
 		host->pwr = 0;
 		host->clock = 0;
+<<<<<<< HEAD   (02fc37f4a852b8611ff266d68ecf75c7b9699e65 Revert "HID: pass the buffer size to hid_report_raw_event")
+||||||| BASE   (3602bdb5607e07a29786a56fd77450b62b60fb41 rds: mark snapshot pages dirty in rds_info_getsockopt())
+		host->reinit_uhs = true;
+=======
+		host->reinit_uhs = true;
+		mmc->ops->start_signal_voltage_switch(mmc, &mmc->ios);
+>>>>>>> BRANCH (fd30ac679c5eee11281279391c5b32f0a00617da batman-adv: tp_meter: fix tp_num leak on kmalloc failure)
 		mmc->ops->set_ios(mmc, &mmc->ios);
 	} else {
 		sdhci_init(host, (host->mmc->pm_flags & MMC_PM_KEEP_POWER));
