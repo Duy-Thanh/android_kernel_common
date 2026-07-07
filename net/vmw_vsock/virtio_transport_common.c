@@ -141,12 +141,20 @@ static struct sk_buff *virtio_transport_build_skb(void *opaque)
 	struct sk_buff *skb;
 	size_t payload_len;
 
-	/* A packet could be split to fit the RX buffer, so we can retrieve
-	 * the payload length from the header and the buffer pointer taking
-	 * care of the offset in the original packet.
+	/* A packet could be split to fit the RX buffer, so we use
+	 * the payload length from the header, which has been updated
+	 * by the sender to reflect the fragment size.
 	 */
 	pkt_hdr = virtio_vsock_hdr(pkt);
+<<<<<<< HEAD   (0a1d1eca9ab187c6f9f0e46c08b499daa367674f Merge 65c484726e74 ("vsock/virtio: fix accept queue count le)
 	payload_len = pkt->len;
+||||||| BASE   (65c484726e74013a2ec7ba67a34d87760ae8f390 vsock/virtio: fix accept queue count leak on transport misma)
+	payload_len = pkt->len;
+	payload_buf = pkt->data;
+=======
+	payload_len = le32_to_cpu(pkt_hdr->len);
+	payload_buf = pkt->data;
+>>>>>>> BRANCH (9b2c795bb2c62598f7af7bc3f075fe555c0d3865 vsock/virtio: fix length and offset in tap skb for split pac)
 
 	skb = alloc_skb(sizeof(*hdr) + sizeof(*pkt_hdr) + payload_len,
 			GFP_ATOMIC);
