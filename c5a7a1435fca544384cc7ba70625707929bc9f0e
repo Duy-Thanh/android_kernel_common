@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6490f11d_b6c5ca26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-07-07T02:48:05Z",
+      "side": 1,
+      "message": "From the bug:\n\n\u003e Concurrent bow_write → set_type can kfree ranges mid-walk. Read-only primitive (list walk, type compare), likely just a crash.",
+      "revId": "c5a7a1435fca544384cc7ba70625707929bc9f0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
