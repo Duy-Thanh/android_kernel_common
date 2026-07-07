@@ -1308,9 +1308,6 @@ static int snd_usb_endpoint_set_params(struct snd_usb_audio *chip,
 		return -EINVAL;
 	}
 
-	ep->packsize[0] = min(ep->packsize[0], ep->maxframesize);
-	ep->packsize[1] = min(ep->packsize[1], ep->maxframesize);
-
 	/* calculate the frequency in 16.16 format */
 	ep->freqm = ep->freqn;
 	ep->freqshift = INT_MIN;
@@ -1337,6 +1334,81 @@ static int snd_usb_endpoint_set_params(struct snd_usb_audio *chip,
 	ep->maxframesize = ep->maxpacksize / ep->cur_frame_bytes;
 	ep->curframesize = ep->curpacksize / ep->cur_frame_bytes;
 
+<<<<<<< HEAD   (31048cf24788d77cd90ff73c18e1262ca6f5b4a8 Merge 1d93dae6cfde ("usb: xhci: Make usb_host_endpoint.hcpri)
+||||||| BASE   (1d93dae6cfdef997180b7a53ffd0fe95e56a254f usb: xhci: Make usb_host_endpoint.hcpriv survive endpoint_di)
+	err = update_clock_ref_rate(chip, ep);
+	if (err >= 0) {
+		ep->need_setup = false;
+		err = 0;
+	}
+
+ unlock:
+	mutex_unlock(&chip->mutex);
+	return err;
+}
+
+static int init_sample_rate(struct snd_usb_audio *chip,
+			    struct snd_usb_endpoint *ep)
+{
+	struct snd_usb_clock_ref *clock = ep->clock_ref;
+	int rate, err;
+
+	rate = update_clock_ref_rate(chip, ep);
+	if (rate < 0)
+		return rate;
+	if (clock && !clock->need_setup)
+		return 0;
+
+	if (!ep->fixed_rate) {
+		err = snd_usb_init_sample_rate(chip, ep->cur_audiofmt, rate);
+		if (err < 0) {
+			if (clock)
+				clock->rate = 0; /* reset rate */
+			return err;
+		}
+	}
+
+	if (clock)
+		clock->need_setup = false;
+=======
+	ep->packsize[0] = min(ep->packsize[0], ep->maxframesize);
+	ep->packsize[1] = min(ep->packsize[1], ep->maxframesize);
+
+	err = update_clock_ref_rate(chip, ep);
+	if (err >= 0) {
+		ep->need_setup = false;
+		err = 0;
+	}
+
+ unlock:
+	mutex_unlock(&chip->mutex);
+	return err;
+}
+
+static int init_sample_rate(struct snd_usb_audio *chip,
+			    struct snd_usb_endpoint *ep)
+{
+	struct snd_usb_clock_ref *clock = ep->clock_ref;
+	int rate, err;
+
+	rate = update_clock_ref_rate(chip, ep);
+	if (rate < 0)
+		return rate;
+	if (clock && !clock->need_setup)
+		return 0;
+
+	if (!ep->fixed_rate) {
+		err = snd_usb_init_sample_rate(chip, ep->cur_audiofmt, rate);
+		if (err < 0) {
+			if (clock)
+				clock->rate = 0; /* reset rate */
+			return err;
+		}
+	}
+
+	if (clock)
+		clock->need_setup = false;
+>>>>>>> BRANCH (8001e0760fd0b99a99b09b5c7271c7032dc9aaf3 ALSA: usb-audio: Evaluate packsize caps at the right place)
 	return 0;
 }
 
