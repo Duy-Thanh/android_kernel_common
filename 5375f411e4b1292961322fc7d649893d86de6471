@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322ca26c_1f1a8714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-08T07:43:33Z",
+      "side": 1,
+      "message": "This should probably include:\n\n```\nFixes: a1fc1fba460b (\"ANDROID: sched: add restrict vendor hook to modify task placement policy in EAS\")\n```\n\nAnd go to `android-mainline` as well.",
+      "revId": "5375f411e4b1292961322fc7d649893d86de6471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
