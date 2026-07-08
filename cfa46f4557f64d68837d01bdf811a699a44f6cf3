@@ -16,6 +16,24 @@
       "message": "I don\u0027t think we use \"BACKPORT\" as this is an Android patch. \n\nHowever you\u0027d need to add a \"(cherry-picked from ....)\"",
       "revId": "cfa46f4557f64d68837d01bdf811a699a44f6cf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c9bbfc2_be7bce91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-08T15:35:52Z",
+      "side": 1,
+      "message": "Yes. I removed the BACKPORT: tags as its applicable only for UPSTREAM patches and cherry-picked from will refer to upstream commit. I have retained the same Change-Id which refers to the android17-6.18 patch.",
+      "parentUuid": "69b2d174_4e40372f",
+      "revId": "cfa46f4557f64d68837d01bdf811a699a44f6cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
