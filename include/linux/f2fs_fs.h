@@ -82,7 +82,12 @@ enum stop_cp_reason {
 	STOP_CP_REASON_CORRUPTED_SUMMARY,
 	STOP_CP_REASON_UPDATE_INODE,
 	STOP_CP_REASON_FLUSH_FAIL,
+<<<<<<< HEAD   (7d997d7a782b7e93d6630be9c6dea5b4a750758f Merge 2eb63502ebe0 ("driver core: Don't let a device probe u)
 	STOP_CP_REASON_NO_SEGMENT,
+||||||| BASE   (2eb63502ebe0b58a1f2dc2dbe5392d42cbc4ff4b driver core: Don't let a device probe until it's ready)
+=======
+	STOP_CP_REASON_CORRUPTED_NID,
+>>>>>>> BRANCH (bce0d2f57f967b856ee52cdef342f50bf66bd2f6 userfaultfd: allow registration of ranges below mmap_min_add)
 	STOP_CP_REASON_MAX,
 };
 

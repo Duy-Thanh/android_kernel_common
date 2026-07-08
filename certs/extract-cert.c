@@ -40,6 +40,7 @@ void format(void)
 	exit(2);
 }
 
+<<<<<<< HEAD   (7d997d7a782b7e93d6630be9c6dea5b4a750758f Merge 2eb63502ebe0 ("driver core: Don't let a device probe u)
 static void display_openssl_errors(int l)
 {
 	const char *file;
@@ -77,7 +78,12 @@ static void drain_openssl_errors(void)
 		}					\
 	} while(0)
 
+||||||| BASE   (2eb63502ebe0b58a1f2dc2dbe5392d42cbc4ff4b driver core: Don't let a device probe until it's ready)
+=======
+#ifdef USE_PKCS11_ENGINE
+>>>>>>> BRANCH (bce0d2f57f967b856ee52cdef342f50bf66bd2f6 userfaultfd: allow registration of ranges below mmap_min_add)
 static const char *key_pass;
+#endif
 static BIO *wb;
 static char *cert_dst;
 static int kbuild_verbose;
@@ -106,7 +112,9 @@ int main(int argc, char **argv)
 
 	kbuild_verbose = atoi(getenv("KBUILD_VERBOSE")?:"0");
 
-        key_pass = getenv("KBUILD_SIGN_PIN");
+#ifdef USE_PKCS11_ENGINE
+	key_pass = getenv("KBUILD_SIGN_PIN");
+#endif
 
 	if (argc != 3)
 		format();
