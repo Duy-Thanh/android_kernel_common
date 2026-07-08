@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/531768401",
       "revId": "55cc78e380345b75409ab42d232400f9fcfc5c9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5518116d_bba2165c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-08T11:53:04Z",
+      "side": 1,
+      "message": "This is 4040793c74c7dba01e6b4f4c4b55b0cfd0cd39b5 on the base branch, which came in via LTS.",
+      "revId": "55cc78e380345b75409ab42d232400f9fcfc5c9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
