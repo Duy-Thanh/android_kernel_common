@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8517e3d7_48942572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T21:42:03Z",
+      "side": 1,
+      "message": "Overriding Lint as the author/sob line email inconsistency is in the upstream commit.",
+      "revId": "7d735b3f6ac986e4baebc74942dbc650cc7d56f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
