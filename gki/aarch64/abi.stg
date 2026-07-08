@@ -405980,6 +405980,13 @@ function {
   parameter_id: 0x38bd0c1d
 }
 function {
+  id: 0x75e9897f
+  return_type_id: 0x774358c9
+  parameter_id: 0x11e6864c
+  parameter_id: 0x67293002
+  parameter_id: 0x178c0a08
+}
+function {
   id: 0x75ec6a7d
   return_type_id: 0x774358c9
   parameter_id: 0x11e6864c
@@ -506280,6 +506287,15 @@ elf_symbol {
   full_name: "pci_bus_claim_resources"
 }
 elf_symbol {
+  id: 0x146d9a25
+  name: "pci_bus_error_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8cd1ca95
+  type_id: 0x99f942bc
+  full_name: "pci_bus_error_reset"
+}
+elf_symbol {
   id: 0xbec826c0
   name: "pci_bus_read_config_dword"
   is_defined: true
@@ -506827,6 +506843,15 @@ elf_symbol {
   crc: 0xe4f7a3fe
   type_id: 0x924d155a
   full_name: "pci_host_common_probe"
+}
+elf_symbol {
+  id: 0xd6583075
+  name: "pci_host_handle_link_down"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xceb912a8
+  type_id: 0x14e1f000
+  full_name: "pci_host_handle_link_down"
 }
 elf_symbol {
   id: 0xbe6406c3
@@ -507503,6 +507528,15 @@ elf_symbol {
   crc: 0x3acb7118
   type_id: 0x9841929f
   full_name: "pcie_capability_write_word"
+}
+elf_symbol {
+  id: 0x5f2df052
+  name: "pcie_do_recovery"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb24203dd
+  type_id: 0x75e9897f
+  full_name: "pcie_do_recovery"
 }
 elf_symbol {
   id: 0x9c45e831
@@ -544375,6 +544409,7 @@ interface {
   symbol_id: 0x082c11eb
   symbol_id: 0x375c1ee2
   symbol_id: 0x2ad69fc2
+  symbol_id: 0x146d9a25
   symbol_id: 0xbec826c0
   symbol_id: 0x45091f48
   symbol_id: 0x22e85b74
@@ -544436,6 +544471,7 @@ interface {
   symbol_id: 0x9ac8ef20
   symbol_id: 0x35c96922
   symbol_id: 0x73a57836
+  symbol_id: 0xd6583075
   symbol_id: 0xbe6406c3
   symbol_id: 0xec0d5441
   symbol_id: 0x9c6c58ea
@@ -544511,6 +544547,7 @@ interface {
   symbol_id: 0xf1513a2c
   symbol_id: 0x4a25ef35
   symbol_id: 0x1070f731
+  symbol_id: 0x5f2df052
   symbol_id: 0x9c45e831
   symbol_id: 0xb7c9d0b8
   symbol_id: 0x912653cc
