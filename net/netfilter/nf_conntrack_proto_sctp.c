@@ -482,8 +482,28 @@ int nf_conntrack_sctp_packet(struct nf_conn *ct,
 						sizeof(_inithdr), &_inithdr);
 			if (ih == NULL)
 				goto out_unlock;
+<<<<<<< HEAD   (a0c43f37cc3a817e2757b605ef7ec5cbb21ab61e Merge 1f9dd6f665ec ("ASoC: codecs: ab8500: Fix casting of pr)
 			pr_debug("Setting vtag %x for dir %d\n",
 				 ih->init_tag, !dir);
+||||||| BASE   (1f9dd6f665ece0ba211e6267f6e2cf483b2ac796 ASoC: codecs: ab8500: Fix casting of private data)
+
+			if (ct->proto.sctp.init[dir] && ct->proto.sctp.init[!dir])
+				ct->proto.sctp.init[!dir] = 0;
+			ct->proto.sctp.init[dir] = 1;
+
+			pr_debug("Setting vtag %x for dir %d\n", ih->init_tag, !dir);
+=======
+
+			/* Do not record INIT matching peer vtag (stale or retransmitted INIT). */
+			if (old_state == SCTP_CONNTRACK_NONE ||
+			    ct->proto.sctp.vtag[!dir] != ih->init_tag) {
+				if (ct->proto.sctp.init[dir] && ct->proto.sctp.init[!dir])
+					ct->proto.sctp.init[!dir] = 0;
+				ct->proto.sctp.init[dir] = 1;
+			}
+
+			pr_debug("Setting vtag %x for dir %d\n", ih->init_tag, !dir);
+>>>>>>> BRANCH (3d538dad34859a6c900a0a6285819925d6d5270e netfilter: skip recording stale or retransmitted INIT)
 			ct->proto.sctp.vtag[!dir] = ih->init_tag;
 
 			/* don't renew timeout on init retransmit so
