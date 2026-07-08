@@ -52,6 +52,24 @@
       "parentUuid": "af6525e0_5d15eacc",
       "revId": "04cc8a1fa80d99b5bbf17d42a049537a87d933b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a54912_ca0b5c1b",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T19:18:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d1663bdc_65adf469",
+      "revId": "04cc8a1fa80d99b5bbf17d42a049537a87d933b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
