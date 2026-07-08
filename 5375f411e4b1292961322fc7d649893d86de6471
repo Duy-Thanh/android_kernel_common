@@ -16,6 +16,23 @@
       "message": "This should probably include:\n\n```\nFixes: a1fc1fba460b (\"ANDROID: sched: add restrict vendor hook to modify task placement policy in EAS\")\n```\n\nAnd go to `android-mainline` as well.",
       "revId": "5375f411e4b1292961322fc7d649893d86de6471",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af90a8f1_4e745f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-08T07:44:34Z",
+      "side": 1,
+      "message": "The commit message has whitespace issues:\n\nTwo spaces after `ANDROID:`.\n\nA blank line after `Bug:`.",
+      "revId": "5375f411e4b1292961322fc7d649893d86de6471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
