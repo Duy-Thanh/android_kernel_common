@@ -34,6 +34,24 @@
       "parentUuid": "dd64134c_2213851a",
       "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f8815aa_cd989ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-08T19:17:03Z",
+      "side": 1,
+      "message": "\u003e\u003e for ranges that span both the lower and the upper halves of the canonical address range\n\n\u003e Such ranges don\u0027t exist? (Which is precisely the problem described here: canonical addressing doesn\u0027t allow address ranges spanning arbitrary continuous areas of the address space, while normalized addressing does allow that.)\n\nwhat I was saying is - a valid normalized range can span canonical and non-canonical address(but has a valid canonical upper half counterpart). The example is this whole normalized address range [0-2^48):\n`[0x0000000000000000, 0x00007fffffffffff]` \u003d\u003e valid normalized range and canonical range\n`[0x0000800000000000, 0x0000ffffffffffff]` \u003d\u003e valid normalized range, not a valid canonical range(but has a valid range in upper canonical half `[0xffff800000000000, 0xffffffffffffffff]`)\n\nThat was what I meant when I said ranges(normalized ranges) that span both lower and upper canonical ranges.\n \nSo as you explained in the commit message, if pkvm_pgtable_walk supports only valid canonical range, it will not be able to support the above. If I understand correctly, the end goal of this cl and the next(cl/aosp/4151700) is essentially doing that - make pkvm_pgtable_walk support only normalized range(aosp/4151700) and fix the only caller which calls it with canonical address(this patch).\n\nBut my confusion was about mentioning \"it would not work for ranges[1] that span both the lower and the upper halves of the address space[2]\". If I understand correctly, here [1] is referring to normalized range and [2] is referring to the canonical address range right? Thought of suggesting to make it a bit more clear.",
+      "parentUuid": "c45714ff_7ffddbab",
+      "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
