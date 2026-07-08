@@ -88,6 +88,24 @@
       "parentUuid": "a1d400ab_ff6e504d",
       "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f2d4fb_50a936da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-08T21:23:55Z",
+      "side": 1,
+      "message": "\u003e How about: \"so if pkvm_pgtable_walk() required the range to be canonical, it would not allow ranges that span both the lower and the upper halves of the address space (while we have a use case for that in fix_hyp_mmu_page_refcnt() where we use pkvm_pgtable_walk() to walk the entire address space).\"?\n\nThanks this is clearer.",
+      "parentUuid": "b3f2164d_6272a61c",
+      "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
