@@ -16,6 +16,24 @@
       "message": "Nice and simple fix :-)\n\n\u003e However, at least one problem with that is that\npkvm_pgtable_walk() takes a [vaddr, vaddr + size) range rather than just\nthe address, so if pkvm_pgtable_walk() required the entire range to\nconsist of canonical addresses, it would not work for ranges that span\nboth the lower and the upper halves of the address space (like in\nfix_hyp_mmu_page_refcnt(), where we use pkvm_pgtable_walk() to walk the\nentire address space).\n\nvery minor nit: I felt this a bit confusing as we deal with 2 address ranges(normalized and canonical). And pkvm_pgtable_walk() until next commit supports both. So would it be better to explictly differentiate that in the last line - something like this:\n\"so if pkvm_pgtable_walk() required the entire range to\nconsist of canonical addresses, it would not work for ranges that span\nboth the lower and the upper halves of the canonical address range (like in\nfix_hyp_mmu_page_refcnt(), where we use pkvm_pgtable_walk() to walk the\nentire normalized address range).\"",
       "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45714ff_7ffddbab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-08T17:51:39Z",
+      "side": 1,
+      "message": "I\u0027m using the term \"address space\" here in a bit abstract sense, i.e. the set of all unique addresses, independently of a particular representation of those addresses (normalized vs canonical). For example, \"we want to walk the entire address space in fix_hyp_mmu_page_refcnt()\" - that is our goal, regardless of which representation we choose.\n\n\u003e for ranges that span both the lower and the upper halves of the canonical address range\n\nSuch ranges don\u0027t exist? (Which is precisely the problem described here: canonical addressing doesn\u0027t allow address ranges spanning arbitrary continuous areas of the address space, while normalized addressing does allow that.)",
+      "parentUuid": "dd64134c_2213851a",
+      "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
