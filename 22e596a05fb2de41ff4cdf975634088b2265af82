@@ -34,6 +34,24 @@
       "parentUuid": "f4975953_6abb90e6",
       "revId": "22e596a05fb2de41ff4cdf975634088b2265af82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85e562d4_36a1640d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-08T03:13:39Z",
+      "side": 1,
+      "message": "These configs are already enabled on android17-6.18. So, we are good.",
+      "parentUuid": "66e3e0d7_e05314f3",
+      "revId": "22e596a05fb2de41ff4cdf975634088b2265af82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
