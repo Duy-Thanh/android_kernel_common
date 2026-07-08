@@ -448,8 +448,11 @@ static int rpm_callback(int (*cb)(struct device *), struct device *dev)
 		retval = __rpm_callback(cb, dev);
 	}
 
-	dev->power.runtime_error = retval;
-	return retval != -EACCES ? retval : -EIO;
+	if (retval == -EACCES)
+		retval = -EAGAIN;
+
+	return retval;
+
 }
 
 /**
