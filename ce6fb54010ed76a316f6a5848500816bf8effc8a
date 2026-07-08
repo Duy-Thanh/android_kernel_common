@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42202f48_ae1f86ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-08T16:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4edbe399_d7d06599",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4930337f_b45f9298",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-08T02:33:25Z",
       "side": 1,
       "message": "Also add a empty line between the subject and the commit body",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a2372a_b2950232",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-08T16:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4930337f_b45f9298",
       "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +119,24 @@
       "writtenOn": "2026-07-08T02:37:05Z",
       "side": 1,
       "message": "It looks like this is intended to cherry pick 63c1a12bc0e09af7dee919c4fb4a300a719d5125\n\nPlease use `git cherry-pick -xs 63c1a12bc0e09af7dee919c4fb4a300a719d5125` then amend the commit to add the UPSTREAM: prefix tag.",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec7eafd_18c9c49d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-08T16:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f617ca6_50d7fa1f",
       "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
