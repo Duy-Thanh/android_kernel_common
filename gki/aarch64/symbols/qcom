@@ -2283,6 +2283,7 @@
   pcie_capability_clear_and_set_word_unlocked
   pcie_capability_read_word
   pcie_capability_write_word
+  pcie_do_recovery
   pci_enable_device
   pci_find_ext_capability
   pci_find_vsec_capability
