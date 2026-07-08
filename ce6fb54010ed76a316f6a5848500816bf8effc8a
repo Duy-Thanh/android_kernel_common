@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edbe399_d7d06599",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T02:33:25Z",
+      "side": 1,
+      "message": "Please include a proper prefix tag (ANDROID/UPSTREAM/BACKPORT) on subjects.",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4930337f_b45f9298",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T02:33:25Z",
+      "side": 1,
+      "message": "Also add a empty line between the subject and the commit body",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0662bc6c_cf6a3bce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T02:33:25Z",
+      "side": 1,
+      "message": "This looks like it is a fix that should go upstream first?",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
