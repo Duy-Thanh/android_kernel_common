@@ -142,11 +142,9 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
 {
 	struct pci_dynid *dynid;
 	const struct pci_device_id *found_id = NULL, *ids;
-	int ret;
 
 	/* When driver_override is set, only bind to the matching driver */
-	ret = device_match_driver_override(&dev->dev, &drv->driver);
-	if (ret == 0)
+	if (dev->driver_override && strcmp(dev->driver_override, drv->name))
 		return NULL;
 
 	/* Look at the dynamic ids first, before the static ones */
@@ -170,7 +168,7 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
 		 * matching.
 		 */
 		if (found_id->override_only) {
-			if (ret > 0)
+			if (dev->driver_override)
 				return found_id;
 		} else {
 			return found_id;
@@ -178,7 +176,7 @@ static const struct pci_device_id *pci_match_device(struct pci_driver *drv,
 	}
 
 	/* driver_override will always match, send a dummy id */
-	if (ret > 0)
+	if (dev->driver_override)
 		return &pci_device_id_any;
 	return NULL;
 }
@@ -429,7 +427,7 @@ static int __pci_device_probe(struct pci_driver *drv, struct pci_dev *pci_dev)
 static inline bool pci_device_can_probe(struct pci_dev *pdev)
 {
 	return (!pdev->is_virtfn || pdev->physfn->sriov->drivers_autoprobe ||
-		device_has_driver_override(&pdev->dev));
+		pdev->driver_override);
 }
 #else
 static inline bool pci_device_can_probe(struct pci_dev *pdev)
@@ -1694,7 +1692,6 @@ static void pci_dma_cleanup(struct device *dev)
 
 const struct bus_type pci_bus_type = {
 	.name		= "pci",
-	.driver_override = true,
 	.match		= pci_bus_match,
 	.uevent		= pci_uevent,
 	.probe		= pci_device_probe,
