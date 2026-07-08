@@ -33,6 +33,24 @@
       "message": "This branch is not eligible for respin requests.",
       "revId": "ffed2552872a824e2dac11e16bc8fc3fa376f84a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88da8cf3_d843c370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-07-08T12:36:15Z",
+      "side": 1,
+      "message": "Exception granted",
+      "parentUuid": "a011eec3_e23ad1a7",
+      "revId": "ffed2552872a824e2dac11e16bc8fc3fa376f84a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
