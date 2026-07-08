@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd64134c_2213851a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-08T14:39:40Z",
+      "side": 1,
+      "message": "Nice and simple fix :-)\n\n\u003e However, at least one problem with that is that\npkvm_pgtable_walk() takes a [vaddr, vaddr + size) range rather than just\nthe address, so if pkvm_pgtable_walk() required the entire range to\nconsist of canonical addresses, it would not work for ranges that span\nboth the lower and the upper halves of the address space (like in\nfix_hyp_mmu_page_refcnt(), where we use pkvm_pgtable_walk() to walk the\nentire address space).\n\nvery minor nit: I felt this a bit confusing as we deal with 2 address ranges(normalized and canonical). And pkvm_pgtable_walk() until next commit supports both. So would it be better to explictly differentiate that in the last line - something like this:\n\"so if pkvm_pgtable_walk() required the entire range to\nconsist of canonical addresses, it would not work for ranges that span\nboth the lower and the upper halves of the canonical address range (like in\nfix_hyp_mmu_page_refcnt(), where we use pkvm_pgtable_walk() to walk the\nentire normalized address range).\"",
+      "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
