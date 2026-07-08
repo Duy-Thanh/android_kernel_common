@@ -2703,8 +2703,6 @@ static void blk_mq_insert_request(struct request *rq, blk_insert_t flags)
 	} else if (q->elevator) {
 		LIST_HEAD(list);
 
-		WARN_ON_ONCE(rq->tag != BLK_MQ_NO_TAG);
-
 		list_add(&rq->queuelist, &list);
 		q->elevator->type->ops.insert_requests(hctx, &list, flags);
 	} else {
