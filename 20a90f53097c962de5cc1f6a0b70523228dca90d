@@ -52,6 +52,24 @@
       "parentUuid": "c45714ff_7ffddbab",
       "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1d400ab_ff6e504d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-08T19:23:34Z",
+      "side": 1,
+      "message": "\u003e If I understand correctly, the end goal of this cl and the next(cl/aosp/4151700) is essentially doing that - make pkvm_pgtable_walk support only normalized range(aosp/4151700) and fix the only caller which calls it with canonical address(this patch).\n\nSorry the above is not accurate about the end gaol. I understand end goal is to fix the bound check issue and my understanding is - making pkvm_pgtable_walk() support only normalized range makes it easier and that approach is taken. So we need to fix the only caller that calls with canonical range(this cl).",
+      "parentUuid": "8f8815aa_cd989ed5",
+      "revId": "20a90f53097c962de5cc1f6a0b70523228dca90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
