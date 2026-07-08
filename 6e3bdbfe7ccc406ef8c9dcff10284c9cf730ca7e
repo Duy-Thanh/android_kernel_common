@@ -40,6 +40,30 @@
       ],
       "revId": "6e3bdbfe7ccc406ef8c9dcff10284c9cf730ca7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d176fe3_53b15338",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-08T11:39:24Z",
+      "side": 1,
+      "message": "Without READ_ONCE the compiler is allowed to implement this as reading from memory multiple times, right?",
+      "parentUuid": "d97f812c_f221e2da",
+      "range": {
+        "startLine": 1306,
+        "startChar": 12,
+        "endLine": 1306,
+        "endChar": 21
+      },
+      "revId": "6e3bdbfe7ccc406ef8c9dcff10284c9cf730ca7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
