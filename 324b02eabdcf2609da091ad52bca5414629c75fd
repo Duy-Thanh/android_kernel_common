@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57cc64c_a2bed619",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-08T15:58:26Z",
+      "side": 1,
+      "message": "Need a space after \"ANDROID:\" and after \"sched:\"",
+      "revId": "324b02eabdcf2609da091ad52bca5414629c75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe265db_38899720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-08T15:58:26Z",
+      "side": 1,
+      "message": "Needed in android17-6.18 too?",
+      "revId": "324b02eabdcf2609da091ad52bca5414629c75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
