@@ -50,6 +50,24 @@
       "message": "This looks like it is a fix that should go upstream first?",
       "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f617ca6_50d7fa1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-08T02:34:05Z",
+      "side": 1,
+      "message": "And if it is already upstream it needs to be properly cherry-picked.",
+      "parentUuid": "0662bc6c_cf6a3bce",
+      "revId": "ce6fb54010ed76a316f6a5848500816bf8effc8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
