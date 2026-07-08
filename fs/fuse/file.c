@@ -365,8 +365,20 @@ void fuse_release_common(struct file *file, bool isdir)
 	 * aio and closes the fd before the aio completes.  Since aio takes its
 	 * own ref to the file, the IO completion has to drop the ref, which is
 	 * how the fuse server can end up closing its clients' files.
+	 *
+	 * Exception is virtio-fs, which is not affected by the above (server is
+	 * on host, cannot close open files in guest).  Virtio-fs needs sync
+	 * release, because the num_waiting mechanism to wait for all requests
+	 * before commencing with fs shutdown doesn't work if submounts are
+	 * used.
 	 */
+<<<<<<< HEAD   (04063414c7d208654459368408315f96a3c0a801 Revert "netfilter: nf_queue: hold bridge skb->dev while queu)
 	fuse_file_put(ra->inode, ff, false, isdir);
+||||||| BASE   (d9666dca97c01de1c7395ac53041634eb75120e2 Linux 5.10.259)
+	fuse_file_put(ff, false, isdir);
+=======
+	fuse_file_put(ff, ff->fm->fc->auto_submounts, isdir);
+>>>>>>> BRANCH (738ac465e4e900d4a391a27da4e20c090eaa1e75 Linux 5.10.260)
 }
 
 static int fuse_open(struct inode *inode, struct file *file)
