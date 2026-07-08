@@ -16,6 +16,24 @@
       "message": "I believe it has been added to kvm_mmu.h",
       "revId": "a2d145ddc069ff6ad8f7e7ce12a670a0fe8022f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894025d8_b7255e0b",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-08T10:32:55Z",
+      "side": 1,
+      "message": "This comment looks like it still applies?",
+      "parentUuid": "f7c10f35_fdf38d72",
+      "revId": "a2d145ddc069ff6ad8f7e7ce12a670a0fe8022f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
