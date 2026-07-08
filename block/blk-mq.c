@@ -3011,7 +3011,8 @@ static void blk_mq_try_issue_list_directly(struct blk_mq_hw_ctx *hctx,
 		case BLK_STS_DEV_RESOURCE:
 			blk_mq_request_bypass_insert(rq, 0);
 			if (list_empty(list))
-				blk_mq_run_hw_queue(hctx, false);
+				blk_mq_run_hw_queue(hctx,
+					blk_mq_zwp_mutex(hctx) != NULL);
 			goto out;
 		default:
 			blk_mq_end_request(rq, ret);
