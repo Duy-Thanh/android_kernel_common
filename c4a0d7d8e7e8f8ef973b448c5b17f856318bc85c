@@ -16,6 +16,24 @@
       "message": "why are you changing the QCOM symbol list instead of the OPPO list? Please answer in the commit message.",
       "revId": "c4a0d7d8e7e8f8ef973b448c5b17f856318bc85c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8766227e_d01a1719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3965561
+      },
+      "writtenOn": "2026-07-08T02:21:42Z",
+      "side": 1,
+      "message": "The OPLUS list is for oplus cellphones. This change is for watch projects and watch projects follow qcom baseline.",
+      "parentUuid": "88af6ff4_c2d2a0f6",
+      "revId": "c4a0d7d8e7e8f8ef973b448c5b17f856318bc85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
