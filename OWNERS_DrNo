@@ -27,6 +27,10 @@ szuweilin@google.com #{LAST_RESORT_SUGGESTION}
 kiyoungkim@google.com #{LAST_RESORT_SUGGESTION}
 sspatil@google.com #{LAST_RESORT_SUGGESTION}
 
+# Extended Android Kernel team (pKVM on x86)
+dmaluka@google.com #{LAST_RESORT_SUGGESTION}
+jaszczyk@google.com #{LAST_RESORT_SUGGESTION}
+
 # Give DrNo Exceptions to TEST_MAPPING or test xml configs
 per-file */TEST_MAPPING = *
 per-file */*.xml = *
