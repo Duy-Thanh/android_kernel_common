@@ -25,6 +25,7 @@
 #include <trace/hooks/preemptirq.h>
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/ufshcd.h>
+#include <trace/hooks/mmc.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
@@ -748,6 +749,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+<<<<<<< HEAD   (242e1a07f8782987c579929a20a74c0b26e88608 UPSTREAM: eventpoll: fix ep_remove struct eventpoll / struct)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+||||||| BASE   (0afba8617d63b1cab037632039ed1e09370482e5 ANDROID: enable IOCB_DONTCACHE on FUSE file system)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (d561c2cb7c661c55089769e732cde21c8b6f1757 ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
