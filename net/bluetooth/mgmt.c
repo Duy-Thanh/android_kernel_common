@@ -1931,8 +1931,15 @@ static void set_ssp_complete(struct hci_dev *hdev, void *data, int err)
 			new_settings(hdev, NULL);
 		}
 
+<<<<<<< HEAD   (38ac2d3a84281ea865014a39dd7c0fc7982594a9 Merge f7c14993dc2f ("mtd: spi-nor: sst: Fix SST write failur)
 		mgmt_pending_foreach(MGMT_OP_SET_SSP, hdev, cmd_status_rsp,
 				     &mgmt_err);
+||||||| BASE   (f7c14993dc2f1eca661975c0ff90a6e2098ecd41 mtd: spi-nor: sst: Fix SST write failure)
+		mgmt_cmd_status(cmd->sk, cmd->hdev->id, cmd->opcode, mgmt_err);
+=======
+		mgmt_cmd_status(cmd->sk, cmd->hdev->id, cmd->opcode, mgmt_err);
+		mgmt_pending_free(cmd);
+>>>>>>> BRANCH (eac8889a3a1c81d7113cc4656b9420e84c379cf5 Linux 6.6.140)
 		return;
 	}
 
@@ -1951,6 +1958,7 @@ static void set_ssp_complete(struct hci_dev *hdev, void *data, int err)
 		sock_put(match.sk);
 
 	hci_update_eir_sync(hdev);
+	mgmt_pending_free(cmd);
 }
 
 static int set_ssp_sync(struct hci_dev *hdev, void *data)
@@ -5260,7 +5268,33 @@ static void mgmt_add_adv_patterns_monitor_complete(struct hci_dev *hdev,
 {
 	struct mgmt_rp_add_adv_patterns_monitor rp;
 	struct mgmt_pending_cmd *cmd = data;
+<<<<<<< HEAD   (38ac2d3a84281ea865014a39dd7c0fc7982594a9 Merge f7c14993dc2f ("mtd: spi-nor: sst: Fix SST write failur)
 	struct adv_monitor *monitor = cmd->user_data;
+||||||| BASE   (f7c14993dc2f1eca661975c0ff90a6e2098ecd41 mtd: spi-nor: sst: Fix SST write failure)
+	struct adv_monitor *monitor;
+
+	/* This is likely the result of hdev being closed and mgmt_index_removed
+	 * is attempting to clean up any pending command so
+	 * hci_adv_monitors_clear is about to be called which will take care of
+	 * freeing the adv_monitor instances.
+	 */
+	if (status == -ECANCELED && !mgmt_pending_valid(hdev, cmd))
+		return;
+
+	monitor = cmd->user_data;
+=======
+	struct adv_monitor *monitor;
+
+	/* This is likely the result of hdev being closed and mgmt_index_removed
+	 * is attempting to clean up any pending command so
+	 * hci_adv_monitors_clear is about to be called which will take care of
+	 * freeing the adv_monitor instances.
+	 */
+	if (status == -ECANCELED || !mgmt_pending_valid(hdev, cmd))
+		return;
+
+	monitor = cmd->user_data;
+>>>>>>> BRANCH (eac8889a3a1c81d7113cc4656b9420e84c379cf5 Linux 6.6.140)
 
 	hci_dev_lock(hdev);
 
@@ -6361,8 +6395,15 @@ static void set_advertising_complete(struct hci_dev *hdev, void *data, int err)
 	else
 		hci_dev_clear_flag(hdev, HCI_ADVERTISING);
 
+<<<<<<< HEAD   (38ac2d3a84281ea865014a39dd7c0fc7982594a9 Merge f7c14993dc2f ("mtd: spi-nor: sst: Fix SST write failur)
 	mgmt_pending_foreach(MGMT_OP_SET_ADVERTISING, hdev, settings_rsp,
 			     &match);
+||||||| BASE   (f7c14993dc2f1eca661975c0ff90a6e2098ecd41 mtd: spi-nor: sst: Fix SST write failure)
+	settings_rsp(cmd, &match);
+=======
+	settings_rsp(cmd, &match);
+	mgmt_pending_free(cmd);
+>>>>>>> BRANCH (eac8889a3a1c81d7113cc4656b9420e84c379cf5 Linux 6.6.140)
 
 	new_settings(hdev, match.sk);
 
