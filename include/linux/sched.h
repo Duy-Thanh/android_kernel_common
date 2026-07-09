@@ -807,6 +807,17 @@ struct kmap_ctrl {
 #endif
 };
 
+#if defined(CONFIG_SMP) && defined(CONFIG_PREEMPTION)
+struct task_ipi_mask {
+	union {
+		cpumask_t		*ipi_mask_ptr;
+		unsigned long		ipi_mask_val;
+	};
+};
+#else
+struct task_ipi_mask { };
+#endif
+
 enum blocked_on_state {
 	BO_RUNNABLE,
 	BO_BLOCKED,
@@ -1351,6 +1362,7 @@ struct task_struct {
 	struct mutex			perf_event_mutex;
 	struct list_head		perf_event_list;
 #endif
+	struct task_ipi_mask		__private ipi_mask;
 #ifdef CONFIG_DEBUG_PREEMPT
 	unsigned long			preempt_disable_ip;
 #endif
