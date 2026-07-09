@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb45f41_4626c358",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:36:39Z",
+      "side": 1,
+      "message": "Done: comment improvement moved to aosp/4165946",
+      "parentUuid": "ad1b3f6a_4473ed70",
+      "revId": "5a080db55a2688618125cedb0d8469b470f6cd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b8968d3_067dbd6e",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-06T22:23:39Z",
       "side": 1,
       "message": "It is not so obvious that this is for preventing double-call bypass by malicious host, so might be worth adding a short comment here?",
+      "revId": "5a080db55a2688618125cedb0d8469b470f6cd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec1bd0f_0e69c42e",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7937,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b8968d3_067dbd6e",
       "revId": "5a080db55a2688618125cedb0d8469b470f6cd6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
