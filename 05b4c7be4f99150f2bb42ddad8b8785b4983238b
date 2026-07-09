@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fd06d20_481a5753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-09T14:44:04Z",
+      "side": 1,
+      "message": "All the new type definitions in the ABI were also present in `android16-6.12`.\n\nThe new symbols seem OK as well.\n\nHowever, it seems odd to be using `put_netmem` without `get_netmem`.",
+      "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
