@@ -450,9 +450,9 @@ struct snd_soc_dai {
 	struct snd_soc_dai_stream stream[SNDRV_PCM_STREAM_LAST + 1];
 
 	/* Symmetry data - only valid if symmetry is being enforced */
-	unsigned int symmetric_rate;
-	unsigned int symmetric_channels;
-	unsigned int symmetric_sample_bits;
+	unsigned int rate;
+	unsigned int channels;
+	unsigned int sample_bits;
 
 	/* parent platform/codec */
 	struct snd_soc_component *component;
