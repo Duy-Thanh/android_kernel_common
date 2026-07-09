@@ -25,6 +25,7 @@
 #include <trace/hooks/preemptirq.h>
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/ufshcd.h>
+#include <trace/hooks/mmc.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
@@ -737,3 +738,25 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_swap_entry_range_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_swap_slot_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_alloc_swap_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
+<<<<<<< HEAD   (921ffc45a309b3b476101d896d8aca3eca758ed9 UPSTREAM: arm64: cputype: Add C1-Premium definitions)
+||||||| BASE   (0afba8617d63b1cab037632039ed1e09370482e5 ANDROID: enable IOCB_DONTCACHE on FUSE file system)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (d561c2cb7c661c55089769e732cde21c8b6f1757 ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
