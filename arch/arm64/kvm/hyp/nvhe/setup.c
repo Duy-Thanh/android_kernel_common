@@ -431,6 +431,7 @@ void __noreturn __pkvm_init_finalise(void)
 	if (ret)
 		goto out;
 
+<<<<<<< HEAD   (a2e3f2a520f6c0bb1f48ad44db05a1464a87d115 Merge 6.18.29 into android17-6.18-lts)
 	hyp_ftrace_setup_core();
 
 	ret = pkvm_timer_init();
@@ -452,6 +453,10 @@ void __noreturn __pkvm_init_finalise(void)
 		goto out;
 
 	ret = kvm_iommu_init(iommu_base, hyp_kvm_iommu_pages);
+||||||| BASE   (d31a849ff5011dad5c271b53819a0b279e367d68 Linux 6.18.29)
+=======
+	ret = fix_host_ownership();
+>>>>>>> BRANCH (52dc660c85dbab60c07c8f1a716d68a4b7d4fc7e Linux 6.18.30)
 	if (ret)
 		goto out;
 

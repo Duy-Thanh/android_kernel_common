@@ -338,11 +338,18 @@ struct pkvm_hyp_vcpu *pkvm_load_hyp_vcpu(pkvm_handle_t handle,
 	if (!hyp_vm || hyp_vm->is_dying || hyp_vm->kvm.created_vcpus <= vcpu_idx)
 		goto unlock;
 
+<<<<<<< HEAD   (a2e3f2a520f6c0bb1f48ad44db05a1464a87d115 Merge 6.18.29 into android17-6.18-lts)
 	/*
 	 * Synchronise with concurrent vCPU initialisation by relying on
 	 * dependency ordering from the vCPU pointer.
 	 */
 	hyp_vcpu = READ_ONCE(hyp_vm->vcpus[vcpu_idx]);
+||||||| BASE   (d31a849ff5011dad5c271b53819a0b279e367d68 Linux 6.18.29)
+	hyp_vcpu = hyp_vm->vcpus[vcpu_idx];
+=======
+	/* Pairs with smp_store_release() in register_hyp_vcpu(). */
+	hyp_vcpu = smp_load_acquire(&hyp_vm->vcpus[vcpu_idx]);
+>>>>>>> BRANCH (52dc660c85dbab60c07c8f1a716d68a4b7d4fc7e Linux 6.18.30)
 	if (!hyp_vcpu)
 		goto unlock;
 
@@ -1087,7 +1094,34 @@ static int register_hyp_vcpu(struct pkvm_hyp_vm *hyp_vm,
  *
  * Return 0 on success, negative error code on failure.
  */
+<<<<<<< HEAD   (a2e3f2a520f6c0bb1f48ad44db05a1464a87d115 Merge 6.18.29 into android17-6.18-lts)
 int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu)
+||||||| BASE   (d31a849ff5011dad5c271b53819a0b279e367d68 Linux 6.18.29)
+int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu,
+		     unsigned long vcpu_hva)
+=======
+static int register_hyp_vcpu(struct pkvm_hyp_vm *hyp_vm,
+			      struct pkvm_hyp_vcpu *hyp_vcpu)
+{
+	unsigned int idx = hyp_vcpu->vcpu.vcpu_idx;
+
+	if (idx >= hyp_vm->kvm.created_vcpus)
+		return -EINVAL;
+
+	if (hyp_vm->vcpus[idx])
+		return -EINVAL;
+
+	/*
+	 * Ensure the hyp_vcpu is initialised before publishing it to
+	 * the vCPU-load path via 'hyp_vm->vcpus[]'.
+	 */
+	smp_store_release(&hyp_vm->vcpus[idx], hyp_vcpu);
+	return 0;
+}
+
+int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu,
+		     unsigned long vcpu_hva)
+>>>>>>> BRANCH (52dc660c85dbab60c07c8f1a716d68a4b7d4fc7e Linux 6.18.30)
 {
 	struct pkvm_hyp_vcpu *hyp_vcpu;
 	struct pkvm_hyp_vm *hyp_vm;
@@ -1113,10 +1147,33 @@ int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu)
 		goto unlock_vcpus;
 
 	ret = register_hyp_vcpu(hyp_vm, hyp_vcpu);
+<<<<<<< HEAD   (a2e3f2a520f6c0bb1f48ad44db05a1464a87d115 Merge 6.18.29 into android17-6.18-lts)
 	if (ret)
 		teardown_hyp_vcpu_init(hyp_vcpu);
 unlock_vcpus:
 	hyp_spin_unlock(&hyp_vm->vcpus_lock);
+||||||| BASE   (d31a849ff5011dad5c271b53819a0b279e367d68 Linux 6.18.29)
+	if (idx >= hyp_vm->kvm.created_vcpus) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	if (hyp_vm->vcpus[idx]) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	hyp_vm->vcpus[idx] = hyp_vcpu;
+unlock:
+	hyp_spin_unlock(&vm_table_lock);
+=======
+	if (ret) {
+		unpin_host_vcpu(host_vcpu);
+		unpin_host_sve_state(hyp_vcpu);
+	}
+unlock:
+	hyp_spin_unlock(&vm_table_lock);
+>>>>>>> BRANCH (52dc660c85dbab60c07c8f1a716d68a4b7d4fc7e Linux 6.18.30)
 
 	if (ret)
 		hyp_free_account(hyp_vcpu, hyp_vm->host_kvm);
