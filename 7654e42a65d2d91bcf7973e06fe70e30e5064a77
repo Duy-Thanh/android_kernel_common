@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28db0fa_3dceac9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4993354
+      },
+      "writtenOn": "2026-07-09T17:01:23Z",
+      "side": 1,
+      "message": "WhatsApp",
+      "revId": "7654e42a65d2d91bcf7973e06fe70e30e5064a77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
