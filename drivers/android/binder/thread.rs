@@ -1497,8 +1497,14 @@ impl Thread {
             let process = orig.from.process.clone();
             let allow_fds = orig.flags & TF_ACCEPT_FDS != 0;
             let reply = Transaction::new_reply(self, process, info, allow_fds)?;
-            // Not notifying: Reply to current thread.
-            let _ = self.inner.lock().push_work(completion);
+            {
+                let mut inner = self.inner.lock();
+                if info.flags & TF_DEFER_COMPLETE != 0 {
+                    inner.push_work_deferred(completion);
+                } else {
+                    let _ = inner.push_work(completion);
+                }
+            }
             orig.from.deliver_reply(Ok(reply), &orig, None);
             Ok(())
         })()
@@ -1785,8 +1791,13 @@ impl Thread {
         self.unwind_transaction_stack();
 
         // Cancel all pending work items.
-        while let Ok(Some(work)) = self.get_work_local(false) {
-            work.into_arc().cancel();
+        loop {
+            let work = self.inner.lock().work_list.pop_front();
+            if let Some(work) = work {
+                work.into_arc().cancel();
+            } else {
+                break;
+            }
         }
     }
 }
