@@ -403,15 +403,11 @@ impl Transaction {
             crate::trace::trace_transaction(false, &self, Some(&thread.task));
             match thread.push_work(self) {
                 PushWorkRes::Ok => Ok(()),
-                PushWorkRes::OkNotifyPoll => {
-                    process.notify_poll(true);
-                    Ok(())
-                }
                 PushWorkRes::FailedDead(me) => Err((BinderError::new_dead(), me)),
             }
         } else {
             crate::trace::trace_transaction(false, &self, None);
-            process_inner.push_work(&process, self)
+            process_inner.push_work(self)
         };
         drop(process_inner);
 
