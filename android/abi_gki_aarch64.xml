@@ -706,6 +706,8 @@
       <elf-symbol name='__traceiter_android_vh_handle_tlb_conf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1554e1e6'/>
       <elf-symbol name='__traceiter_android_vh_init_adjust_zone_wmark' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x59fd50de'/>
       <elf-symbol name='__traceiter_android_vh_init_aes_encrypt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f55d223'/>
+      <elf-symbol name='__traceiter_android_vh_inode_lru_isolate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4df2103e'/>
+      <elf-symbol name='__traceiter_android_vh_invalidate_mapping_pagevec' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x10d6be4e'/>
       <elf-symbol name='__traceiter_android_vh_io_statistics' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26e6241f'/>
       <elf-symbol name='__traceiter_android_vh_iommu_iovad_alloc_iova' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf9999f3f'/>
       <elf-symbol name='__traceiter_android_vh_iommu_iovad_free_iova' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x32f5c996'/>
@@ -5355,6 +5357,7 @@
       <elf-symbol name='proc_get_parent_data' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeaf2d79b'/>
       <elf-symbol name='proc_mkdir' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa04709b'/>
       <elf-symbol name='proc_mkdir_data' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xccecf37c'/>
+      <elf-symbol name='proc_mkdir_mode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf7fcb171'/>
       <elf-symbol name='proc_remove' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe5aaaab6'/>
       <elf-symbol name='proc_set_size' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ca19932'/>
       <elf-symbol name='proc_set_user' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5abfccc'/>
@@ -5970,9 +5973,12 @@
       <elf-symbol name='seq_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7529d847'/>
       <elf-symbol name='seq_open_private' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xad71f639'/>
       <elf-symbol name='seq_printf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1e42c653'/>
+      <elf-symbol name='seq_put_decimal_ll' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfda72b66'/>
+      <elf-symbol name='seq_put_decimal_ull' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd2e53a0'/>
       <elf-symbol name='seq_putc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x326aea6'/>
       <elf-symbol name='seq_puts' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf53068cd'/>
       <elf-symbol name='seq_read' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8d452a34'/>
+      <elf-symbol name='seq_read_iter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5b73d26f'/>
       <elf-symbol name='seq_release' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xde2fd419'/>
       <elf-symbol name='seq_release_private' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x274ebba1'/>
       <elf-symbol name='seq_vprintf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb1d88668'/>
@@ -8069,6 +8075,8 @@
       <elf-symbol name='__tracepoint_android_vh_handle_tlb_conf' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2e7dc9bc'/>
       <elf-symbol name='__tracepoint_android_vh_init_adjust_zone_wmark' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc9dffda2'/>
       <elf-symbol name='__tracepoint_android_vh_init_aes_encrypt' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf9217b'/>
+      <elf-symbol name='__tracepoint_android_vh_inode_lru_isolate' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x821c021d'/>
+      <elf-symbol name='__tracepoint_android_vh_invalidate_mapping_pagevec' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3dc7c7d2'/>
       <elf-symbol name='__tracepoint_android_vh_io_statistics' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa74ba06e'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_iovad_alloc_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7a1fcb87'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_iovad_free_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c2a9494'/>
@@ -135983,6 +135991,18 @@
         <parameter type-id='eaa32e2f' name='unused' filepath='include/trace/hooks/bl_hib.h' line='30' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_inode_lru_isolate' mangled-name='__traceiter_android_vh_inode_lru_isolate' filepath='include/trace/hooks/vmscan.h' line='77' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_inode_lru_isolate'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/vmscan.h' line='77' column='1'/>
+        <parameter type-id='7e666abe' name='inode' filepath='include/trace/hooks/vmscan.h' line='77' column='1'/>
+        <parameter type-id='d8e6b335' name='skip' filepath='include/trace/hooks/vmscan.h' line='77' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='__traceiter_android_vh_invalidate_mapping_pagevec' mangled-name='__traceiter_android_vh_invalidate_mapping_pagevec' filepath='include/trace/hooks/vmscan.h' line='80' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_invalidate_mapping_pagevec'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/vmscan.h' line='80' column='1'/>
+        <parameter type-id='f57039f0' name='mapping' filepath='include/trace/hooks/vmscan.h' line='80' column='1'/>
+        <parameter type-id='d8e6b335' name='skip' filepath='include/trace/hooks/vmscan.h' line='80' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_io_statistics' mangled-name='__traceiter_android_vh_io_statistics' filepath='include/trace/hooks/mm.h' line='385' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_io_statistics'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/mm.h' line='385' column='1'/>
         <parameter type-id='f57039f0' name='mapping' filepath='include/trace/hooks/mm.h' line='385' column='1'/>
@@ -138277,6 +138297,8 @@
       <var-decl name='__tracepoint_android_vh_handle_tlb_conf' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_handle_tlb_conf' visibility='default' filepath='include/trace/hooks/fault.h' line='33' column='1' elf-symbol-id='__tracepoint_android_vh_handle_tlb_conf'/>
       <var-decl name='__tracepoint_android_vh_init_adjust_zone_wmark' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_init_adjust_zone_wmark' visibility='default' filepath='include/trace/hooks/mm.h' line='413' column='1' elf-symbol-id='__tracepoint_android_vh_init_adjust_zone_wmark'/>
       <var-decl name='__tracepoint_android_vh_init_aes_encrypt' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_init_aes_encrypt' visibility='default' filepath='include/trace/hooks/bl_hib.h' line='30' column='1' elf-symbol-id='__tracepoint_android_vh_init_aes_encrypt'/>
+      <var-decl name='__tracepoint_android_vh_inode_lru_isolate' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_inode_lru_isolate' visibility='default' filepath='include/trace/hooks/vmscan.h' line='77' column='1' elf-symbol-id='__tracepoint_android_vh_inode_lru_isolate'/>
+      <var-decl name='__tracepoint_android_vh_invalidate_mapping_pagevec' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_invalidate_mapping_pagevec' visibility='default' filepath='include/trace/hooks/vmscan.h' line='80' column='1' elf-symbol-id='__tracepoint_android_vh_invalidate_mapping_pagevec'/>
       <var-decl name='__tracepoint_android_vh_io_statistics' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_io_statistics' visibility='default' filepath='include/trace/hooks/mm.h' line='385' column='1' elf-symbol-id='__tracepoint_android_vh_io_statistics'/>
       <var-decl name='__tracepoint_android_vh_iommu_iovad_alloc_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_iovad_alloc_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='24' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_iovad_alloc_iova'/>
       <var-decl name='__tracepoint_android_vh_iommu_iovad_free_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_iovad_free_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='28' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_iovad_free_iova'/>
@@ -155024,75 +155046,75 @@
         <parameter type-id='13103032' name='sock' filepath='net/bluetooth/l2cap_sock.c' line='50' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
-      <function-decl name='l2tp_session_create' mangled-name='l2tp_session_create' filepath='net/l2tp/l2tp_core.c' line='1594' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_create'>
-        <parameter type-id='95e97e5e' name='priv_size' filepath='net/l2tp/l2tp_core.c' line='1594' column='1'/>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1594' column='1'/>
-        <parameter type-id='19c2251e' name='session_id' filepath='net/l2tp/l2tp_core.c' line='1594' column='1'/>
-        <parameter type-id='19c2251e' name='peer_session_id' filepath='net/l2tp/l2tp_core.c' line='1595' column='1'/>
-        <parameter type-id='0357a19d' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1595' column='1'/>
+      <function-decl name='l2tp_session_create' mangled-name='l2tp_session_create' filepath='net/l2tp/l2tp_core.c' line='1606' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_create'>
+        <parameter type-id='95e97e5e' name='priv_size' filepath='net/l2tp/l2tp_core.c' line='1606' column='1'/>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1606' column='1'/>
+        <parameter type-id='19c2251e' name='session_id' filepath='net/l2tp/l2tp_core.c' line='1606' column='1'/>
+        <parameter type-id='19c2251e' name='peer_session_id' filepath='net/l2tp/l2tp_core.c' line='1607' column='1'/>
+        <parameter type-id='0357a19d' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1607' column='1'/>
         <return type-id='d35aee0a'/>
       </function-decl>
-      <function-decl name='l2tp_session_delete' mangled-name='l2tp_session_delete' filepath='net/l2tp/l2tp_core.c' line='1561' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_delete'>
-        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1561' column='1'/>
+      <function-decl name='l2tp_session_delete' mangled-name='l2tp_session_delete' filepath='net/l2tp/l2tp_core.c' line='1573' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_delete'>
+        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1573' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='l2tp_session_get_nth' mangled-name='l2tp_session_get_nth' filepath='net/l2tp/l2tp_core.c' line='291' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_get_nth'>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='291' column='1'/>
-        <parameter type-id='95e97e5e' name='nth' filepath='net/l2tp/l2tp_core.c' line='291' column='1'/>
+      <function-decl name='l2tp_session_get_nth' mangled-name='l2tp_session_get_nth' filepath='net/l2tp/l2tp_core.c' line='303' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_get_nth'>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='303' column='1'/>
+        <parameter type-id='95e97e5e' name='nth' filepath='net/l2tp/l2tp_core.c' line='303' column='1'/>
         <return type-id='d35aee0a'/>
       </function-decl>
-      <function-decl name='l2tp_session_register' mangled-name='l2tp_session_register' filepath='net/l2tp/l2tp_core.c' line='342' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_register'>
-        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='342' column='1'/>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='343' column='1'/>
+      <function-decl name='l2tp_session_register' mangled-name='l2tp_session_register' filepath='net/l2tp/l2tp_core.c' line='354' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_register'>
+        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='354' column='1'/>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='355' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='l2tp_session_set_header_len' mangled-name='l2tp_session_set_header_len' filepath='net/l2tp/l2tp_core.c' line='1579' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_set_header_len'>
-        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1579' column='1'/>
-        <parameter type-id='95e97e5e' name='version' filepath='net/l2tp/l2tp_core.c' line='1579' column='1'/>
+      <function-decl name='l2tp_session_set_header_len' mangled-name='l2tp_session_set_header_len' filepath='net/l2tp/l2tp_core.c' line='1591' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_session_set_header_len'>
+        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1591' column='1'/>
+        <parameter type-id='95e97e5e' name='version' filepath='net/l2tp/l2tp_core.c' line='1591' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_create' mangled-name='l2tp_tunnel_create' filepath='net/l2tp/l2tp_core.c' line='1401' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_create'>
-        <parameter type-id='95e97e5e' name='fd' filepath='net/l2tp/l2tp_core.c' line='1401' column='1'/>
-        <parameter type-id='95e97e5e' name='version' filepath='net/l2tp/l2tp_core.c' line='1401' column='1'/>
-        <parameter type-id='19c2251e' name='tunnel_id' filepath='net/l2tp/l2tp_core.c' line='1401' column='1'/>
-        <parameter type-id='19c2251e' name='peer_tunnel_id' filepath='net/l2tp/l2tp_core.c' line='1401' column='1'/>
-        <parameter type-id='88850643' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1402' column='1'/>
-        <parameter type-id='383758d6' name='tunnelp' filepath='net/l2tp/l2tp_core.c' line='1402' column='1'/>
+      <function-decl name='l2tp_tunnel_create' mangled-name='l2tp_tunnel_create' filepath='net/l2tp/l2tp_core.c' line='1413' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_create'>
+        <parameter type-id='95e97e5e' name='fd' filepath='net/l2tp/l2tp_core.c' line='1413' column='1'/>
+        <parameter type-id='95e97e5e' name='version' filepath='net/l2tp/l2tp_core.c' line='1413' column='1'/>
+        <parameter type-id='19c2251e' name='tunnel_id' filepath='net/l2tp/l2tp_core.c' line='1413' column='1'/>
+        <parameter type-id='19c2251e' name='peer_tunnel_id' filepath='net/l2tp/l2tp_core.c' line='1413' column='1'/>
+        <parameter type-id='88850643' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1414' column='1'/>
+        <parameter type-id='383758d6' name='tunnelp' filepath='net/l2tp/l2tp_core.c' line='1414' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_delete' mangled-name='l2tp_tunnel_delete' filepath='net/l2tp/l2tp_core.c' line='1551' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_delete'>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1551' column='1'/>
+      <function-decl name='l2tp_tunnel_delete' mangled-name='l2tp_tunnel_delete' filepath='net/l2tp/l2tp_core.c' line='1563' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_delete'>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1563' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_get' mangled-name='l2tp_tunnel_get' filepath='net/l2tp/l2tp_core.c' line='210' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get'>
-        <parameter type-id='f91cf277' name='net' filepath='net/l2tp/l2tp_core.c' line='210' column='1'/>
-        <parameter type-id='19c2251e' name='tunnel_id' filepath='net/l2tp/l2tp_core.c' line='210' column='1'/>
+      <function-decl name='l2tp_tunnel_get' mangled-name='l2tp_tunnel_get' filepath='net/l2tp/l2tp_core.c' line='222' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get'>
+        <parameter type-id='f91cf277' name='net' filepath='net/l2tp/l2tp_core.c' line='222' column='1'/>
+        <parameter type-id='19c2251e' name='tunnel_id' filepath='net/l2tp/l2tp_core.c' line='222' column='1'/>
         <return type-id='2d83a1b8'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_get_nth' mangled-name='l2tp_tunnel_get_nth' filepath='net/l2tp/l2tp_core.c' line='227' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get_nth'>
-        <parameter type-id='f91cf277' name='net' filepath='net/l2tp/l2tp_core.c' line='227' column='1'/>
-        <parameter type-id='95e97e5e' name='nth' filepath='net/l2tp/l2tp_core.c' line='227' column='1'/>
+      <function-decl name='l2tp_tunnel_get_nth' mangled-name='l2tp_tunnel_get_nth' filepath='net/l2tp/l2tp_core.c' line='239' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get_nth'>
+        <parameter type-id='f91cf277' name='net' filepath='net/l2tp/l2tp_core.c' line='239' column='1'/>
+        <parameter type-id='95e97e5e' name='nth' filepath='net/l2tp/l2tp_core.c' line='239' column='1'/>
         <return type-id='2d83a1b8'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_get_session' mangled-name='l2tp_tunnel_get_session' filepath='net/l2tp/l2tp_core.c' line='248' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get_session'>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='248' column='1'/>
-        <parameter type-id='19c2251e' name='session_id' filepath='net/l2tp/l2tp_core.c' line='249' column='1'/>
+      <function-decl name='l2tp_tunnel_get_session' mangled-name='l2tp_tunnel_get_session' filepath='net/l2tp/l2tp_core.c' line='260' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_get_session'>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='260' column='1'/>
+        <parameter type-id='19c2251e' name='session_id' filepath='net/l2tp/l2tp_core.c' line='261' column='1'/>
         <return type-id='d35aee0a'/>
       </function-decl>
-      <function-decl name='l2tp_tunnel_register' mangled-name='l2tp_tunnel_register' filepath='net/l2tp/l2tp_core.c' line='1467' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_register'>
-        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1467' column='1'/>
-        <parameter type-id='a2bff676' name='net' filepath='net/l2tp/l2tp_core.c' line='1467' column='1'/>
-        <parameter type-id='88850643' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1468' column='1'/>
+      <function-decl name='l2tp_tunnel_register' mangled-name='l2tp_tunnel_register' filepath='net/l2tp/l2tp_core.c' line='1479' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_tunnel_register'>
+        <parameter type-id='2d83a1b8' name='tunnel' filepath='net/l2tp/l2tp_core.c' line='1479' column='1'/>
+        <parameter type-id='a2bff676' name='net' filepath='net/l2tp/l2tp_core.c' line='1479' column='1'/>
+        <parameter type-id='88850643' name='cfg' filepath='net/l2tp/l2tp_core.c' line='1480' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='l2tp_udp_encap_recv' mangled-name='l2tp_udp_encap_recv' filepath='net/l2tp/l2tp_core.c' line='901' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_udp_encap_recv'>
-        <parameter type-id='f772df6d' name='sk' filepath='net/l2tp/l2tp_core.c' line='901' column='1'/>
-        <parameter type-id='0fbf3cfd' name='skb' filepath='net/l2tp/l2tp_core.c' line='901' column='1'/>
+      <function-decl name='l2tp_udp_encap_recv' mangled-name='l2tp_udp_encap_recv' filepath='net/l2tp/l2tp_core.c' line='913' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_udp_encap_recv'>
+        <parameter type-id='f772df6d' name='sk' filepath='net/l2tp/l2tp_core.c' line='913' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/l2tp/l2tp_core.c' line='913' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='l2tp_xmit_skb' mangled-name='l2tp_xmit_skb' filepath='net/l2tp/l2tp_core.c' line='1115' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_xmit_skb'>
-        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1115' column='1'/>
-        <parameter type-id='0fbf3cfd' name='skb' filepath='net/l2tp/l2tp_core.c' line='1115' column='1'/>
+      <function-decl name='l2tp_xmit_skb' mangled-name='l2tp_xmit_skb' filepath='net/l2tp/l2tp_core.c' line='1127' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='l2tp_xmit_skb'>
+        <parameter type-id='d35aee0a' name='session' filepath='net/l2tp/l2tp_core.c' line='1127' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/l2tp/l2tp_core.c' line='1127' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <var-decl name='laptop_mode' type-id='95e97e5e' mangled-name='laptop_mode' visibility='default' filepath='mm/page-writeback.c' line='114' column='1' elf-symbol-id='laptop_mode'/>
@@ -161248,6 +161270,12 @@
         <parameter type-id='eaa32e2f' name='data' filepath='fs/proc/generic.c' line='505' column='1'/>
         <return type-id='d077e928'/>
       </function-decl>
+      <function-decl name='proc_mkdir_mode' mangled-name='proc_mkdir_mode' filepath='fs/proc/generic.c' line='511' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_mkdir_mode'>
+        <parameter type-id='80f4b756' name='name' filepath='fs/proc/generic.c' line='511' column='1'/>
+        <parameter type-id='2594b00f' name='mode' filepath='fs/proc/generic.c' line='511' column='1'/>
+        <parameter type-id='d077e928' name='parent' filepath='fs/proc/generic.c' line='512' column='1'/>
+        <return type-id='d077e928'/>
+      </function-decl>
       <function-decl name='proc_remove' mangled-name='proc_remove' filepath='fs/proc/generic.c' line='804' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='proc_remove'>
         <parameter type-id='d077e928' name='de' filepath='fs/proc/generic.c' line='804' column='1'/>
         <return type-id='48b5725f'/>
@@ -164337,6 +164365,18 @@
         <parameter is-variadic='yes'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='seq_put_decimal_ll' mangled-name='seq_put_decimal_ll' filepath='fs/seq_file.c' line='799' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='seq_put_decimal_ll'>
+        <parameter type-id='f8dc9def' name='m' filepath='fs/seq_file.c' line='799' column='1'/>
+        <parameter type-id='80f4b756' name='delimiter' filepath='fs/seq_file.c' line='799' column='1'/>
+        <parameter type-id='1eb56b1e' name='num' filepath='fs/seq_file.c' line='799' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='seq_put_decimal_ull' mangled-name='seq_put_decimal_ull' filepath='fs/seq_file.c' line='746' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='seq_put_decimal_ull'>
+        <parameter type-id='f8dc9def' name='m' filepath='fs/seq_file.c' line='746' column='1'/>
+        <parameter type-id='80f4b756' name='delimiter' filepath='fs/seq_file.c' line='746' column='1'/>
+        <parameter type-id='0d77e947' name='num' filepath='fs/seq_file.c' line='747' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='seq_putc' mangled-name='seq_putc' filepath='fs/seq_file.c' line='679' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='seq_putc'>
         <parameter type-id='f8dc9def' name='m' filepath='fs/seq_file.c' line='679' column='1'/>
         <parameter type-id='a84c031d' name='c' filepath='fs/seq_file.c' line='679' column='1'/>
@@ -164352,6 +164392,11 @@
         <parameter type-id='26a90f95' name='buf' filepath='fs/seq_file.c' line='151' column='1'/>
         <parameter type-id='b59d7dce' name='size' filepath='fs/seq_file.c' line='151' column='1'/>
         <parameter type-id='b53e8dbb' name='ppos' filepath='fs/seq_file.c' line='151' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='seq_read_iter' mangled-name='seq_read_iter' filepath='fs/seq_file.c' line='171' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='seq_read_iter'>
+        <parameter type-id='80f25feb' name='iocb' filepath='fs/seq_file.c' line='171' column='1'/>
+        <parameter type-id='4fa10f9e' name='iter' filepath='fs/seq_file.c' line='171' column='1'/>
         <return type-id='79a0948f'/>
       </function-decl>
       <function-decl name='seq_release' mangled-name='seq_release' filepath='fs/seq_file.c' line='352' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='seq_release'>
@@ -173650,6 +173695,7 @@
     </abi-instr>
   </abi-corpus>
 </abi-corpus-group>
+
 <!--
      libabigail: abidw: 2.1.0SOONG BUILD NUMBER PLACEHOLDER
 -->
