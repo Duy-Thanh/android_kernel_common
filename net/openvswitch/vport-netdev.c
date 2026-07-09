@@ -188,12 +188,24 @@ void ovs_netdev_tunnel_destroy(struct vport *vport)
 	 * if it's not already shutting down.
 	 */
 	if (vport->dev->reg_state == NETREG_REGISTERED)
+<<<<<<< HEAD   (0b2cfb55d4ec9d24dd473dbab1eb94540bd123b2 Merge a1f1ce60ac69 ("driver core: Add kernel-doc for DEV_FLA)
 		rtnl_delete_link(vport->dev);
 	netdev_put(vport->dev, &vport->dev_tracker);
 	vport->dev = NULL;
 	rtnl_unlock();
+||||||| BASE   (a1f1ce60ac69d6ec5b446116ca01a7e4562a1d31 driver core: Add kernel-doc for DEV_FLAG_COUNT enum value)
+		rtnl_delete_link(vport->dev, 0, NULL);
+	rtnl_unlock();
+=======
+		rtnl_delete_link(vport->dev, 0, NULL);
+>>>>>>> BRANCH (43588f5fc7b36a72f91b40ad14efa02516443d70 irqchip/irq-pic32-evic: Address warning related to wrong pri)
 
+	/* We can't put the device reference yet, since it can still be in
+	 * use, but rtnl_unlock()->netdev_run_todo() will block until all
+	 * the references are released, so the RCU call must be before it.
+	 */
 	call_rcu(&vport->rcu, vport_netdev_free);
+	rtnl_unlock();
 }
 EXPORT_SYMBOL_GPL(ovs_netdev_tunnel_destroy);
 
