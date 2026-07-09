@@ -631,6 +631,7 @@ kernel_build(
     base_kernel = ":kernel_aarch64",
     collect_unstripped_modules = True,
     kmi_symbol_list = "gki/aarch64/symbols/wonder",
+    kmi_symbol_list_add_only = True,
     make_goals = ["modules"],
     makefile = ":Makefile",
     module_outs = [
