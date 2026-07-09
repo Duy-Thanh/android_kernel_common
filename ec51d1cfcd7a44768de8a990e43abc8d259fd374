@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33acf205_1342f80b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T16:49:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this commit message provide more context for upstream maintainers? Eg. explain why the x86 world should care about open-dice.",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d6f4b26_4253b702",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -14,6 +31,23 @@
       "writtenOn": "2026-07-09T16:40:29Z",
       "side": 1,
       "message": "are you planning to send the changes to driver/misc/open-dice.c upstream?",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d2ff96_5ff36c71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T16:49:42Z",
+      "side": 1,
+      "message": "This should be split into 2 patches:\n1) the change to open-dice.c to enable open-dice with ACPI (to be sent upstream)\n2) the gki_defconfig and BUILD.bazel changes that are Android-specific",
       "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
