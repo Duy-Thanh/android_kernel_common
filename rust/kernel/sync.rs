@@ -12,7 +12,6 @@ mod condvar;
 pub mod lock;
 mod locked_by;
 pub mod poll;
-mod set_once;
 
 pub use arc::{Arc, ArcBorrow, UniqueArc};
 pub use condvar::{new_condvar, CondVar, CondVarTimeoutResult};
@@ -20,7 +19,6 @@ pub use lock::global::{global_lock, GlobalGuard, GlobalLock, GlobalLockBackend, 
 pub use lock::mutex::{new_mutex, Mutex};
 pub use lock::spinlock::{new_spinlock, SpinLock};
 pub use locked_by::LockedBy;
-pub use set_once::SetOnce;
 
 /// Represents a lockdep class. It's a wrapper around C's `lock_class_key`.
 #[repr(transparent)]
