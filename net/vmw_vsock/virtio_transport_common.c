@@ -1236,8 +1236,6 @@ virtio_transport_recv_listen(struct sock *sk, struct virtio_vsock_pkt *pkt,
 		return -ENOMEM;
 	}
 
-	sk_acceptq_added(sk);
-
 	lock_sock_nested(child, SINGLE_DEPTH_NESTING);
 
 	child->sk_state = TCP_ESTABLISHED;
@@ -1259,7 +1257,14 @@ virtio_transport_recv_listen(struct sock *sk, struct virtio_vsock_pkt *pkt,
 		return ret;
 	}
 
+<<<<<<< HEAD   (94268f9841524872e9c8d9967cebbd47937400c6 Merge a1f1ce60ac69 ("driver core: Add kernel-doc for DEV_FLA)
 	if (virtio_transport_space_update(child, pkt))
+||||||| BASE   (a1f1ce60ac69d6ec5b446116ca01a7e4562a1d31 driver core: Add kernel-doc for DEV_FLAG_COUNT enum value)
+	if (virtio_transport_space_update(child, skb))
+=======
+	sk_acceptq_added(sk);
+	if (virtio_transport_space_update(child, skb))
+>>>>>>> BRANCH (43588f5fc7b36a72f91b40ad14efa02516443d70 irqchip/irq-pic32-evic: Address warning related to wrong pri)
 		child->sk_write_space(child);
 
 	vsock_insert_connected(vchild);
