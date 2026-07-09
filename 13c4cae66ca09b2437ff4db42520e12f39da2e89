@@ -34,6 +34,24 @@
       "parentUuid": "a973250c_3fcbd17c",
       "revId": "13c4cae66ca09b2437ff4db42520e12f39da2e89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c8dff2e_64052370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T21:00:31Z",
+      "side": 1,
+      "message": "Yes. Cherry-pick this patch to `android16-6.12-kminext` and then tabandon this patch.",
+      "parentUuid": "a7175f40_3a5e613f",
+      "revId": "13c4cae66ca09b2437ff4db42520e12f39da2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
