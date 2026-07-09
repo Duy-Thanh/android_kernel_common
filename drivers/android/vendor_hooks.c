@@ -762,3 +762,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_device_swapon);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_device_swapoff);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_swap_slot_cache);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_swap_pages_bypass);
+<<<<<<< HEAD   (9d79c9197b5db63f5c987c308bc92c5a5c9d3775 ANDROID: Fix ABI issues related to changed hid_report_raw_ev)
+||||||| BASE   (9da97c17821c09bdd4a16ff584086a8e960843df NDROID: mmc: Add vendor hooks for sdcard failure diagnostics)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_get_play_cap);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_get_play_cap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (19ded11d8ca200eb41881dbf217fb5a42660b397 ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
