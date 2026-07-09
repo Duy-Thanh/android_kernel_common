@@ -16,6 +16,24 @@
       "message": "Breaks KMI. Please refactor to avoid breaking KMI or wait until KMI thaw window that starts in June.\n```\ntype \u0027struct thermal_zone_device\u0027 changed\n  byte size changed from 1440 to 1448\n  member \u0027struct thermal_debugfs* debugfs\u0027 was added\n  2 members (\u0027struct list_head user_thresholds\u0027 .. \u0027struct thermal_trip_desc trips[0]\u0027) changed\n    offset changed by 64\n\ntype \u0027struct thermal_cooling_device\u0027 changed\n  byte size changed from 1064 to 1072\n  member \u0027struct thermal_debugfs* debugfs\u0027 was added\n  member \u0027u64 __kabi_reserved1\u0027 changed\n    offset changed by 64\n```",
       "revId": "13c4cae66ca09b2437ff4db42520e12f39da2e89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7175f40_3a5e613f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1587335
+      },
+      "writtenOn": "2026-07-09T08:33:07Z",
+      "side": 1,
+      "message": "Hi Todd, now that we\u0027re in the thaw window, I\u0027ve rebased the changes and verified they\u0027re working as intended.\n\nAre these changes appropriate for the thaw window?",
+      "parentUuid": "a973250c_3fcbd17c",
+      "revId": "13c4cae66ca09b2437ff4db42520e12f39da2e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
