@@ -33,6 +33,24 @@
       "message": "re-running presubmit",
       "revId": "6440eedf195318f69f8fadb8591d10a3345e79e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d848d04_daad6104",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2026-07-09T06:35:06Z",
+      "side": 1,
+      "message": "It fails with:\n```\nSymbols missing from the ksymtab:\n  hid_safe_input_report\nERROR: Build did NOT complete successfully\n```\nwhich is one of the symbols I added to the list, am I missing something?",
+      "parentUuid": "a074e659_63877061",
+      "revId": "6440eedf195318f69f8fadb8591d10a3345e79e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
