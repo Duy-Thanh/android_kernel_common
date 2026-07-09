@@ -482,8 +482,28 @@ int nf_conntrack_sctp_packet(struct nf_conn *ct,
 						sizeof(_inithdr), &_inithdr);
 			if (ih == NULL)
 				goto out_unlock;
+<<<<<<< HEAD   (5d0fcff90b47af2e9c0d4c173c88f77364d645de Revert "mmc: block: use single block write in retry")
 			pr_debug("Setting vtag %x for dir %d\n",
 				 ih->init_tag, !dir);
+||||||| BASE   (e1f4825d2fb5b7bed34ba23c7b82da0c4eb7aa9f driver core: Add kernel-doc for DEV_FLAG_COUNT enum value)
+
+			if (ct->proto.sctp.init[dir] && ct->proto.sctp.init[!dir])
+				ct->proto.sctp.init[!dir] = 0;
+			ct->proto.sctp.init[dir] = 1;
+
+			pr_debug("Setting vtag %x for dir %d\n", ih->init_tag, !dir);
+=======
+
+			/* Do not record INIT matching peer vtag (stale or retransmitted INIT). */
+			if (old_state == SCTP_CONNTRACK_NONE ||
+			    ct->proto.sctp.vtag[!dir] != ih->init_tag) {
+				if (ct->proto.sctp.init[dir] && ct->proto.sctp.init[!dir])
+					ct->proto.sctp.init[!dir] = 0;
+				ct->proto.sctp.init[dir] = 1;
+			}
+
+			pr_debug("Setting vtag %x for dir %d\n", ih->init_tag, !dir);
+>>>>>>> BRANCH (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
 			ct->proto.sctp.vtag[!dir] = ih->init_tag;
 
 			/* don't renew timeout on init retransmit so
