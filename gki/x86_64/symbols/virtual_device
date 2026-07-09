@@ -111,6 +111,7 @@
   drm_read
   drm_release
   drm_set_preferred_mode
+  dst_release
   ether_setup
   eth_mac_addr
   ethtool_op_get_link
@@ -256,6 +257,8 @@
   page_pool_alloc_frag
   page_pool_destroy
   page_pool_put_unrefed_netmem
+  page_shift_compat
+  page_shift_compat_enabled
   param_array_ops
   param_ops_bool
   param_ops_charp
@@ -311,6 +314,7 @@
   release_firmware
   remap_pfn_range
   request_firmware
+  request_firmware_direct
   rhashtable_insert_slow
   __rht_bucket_nested
   rht_bucket_nested
@@ -483,7 +487,6 @@
   is_acpi_device_node
   out_of_line_wait_on_bit_timeout
   __regmap_init
-  request_firmware_direct
   wake_up_bit
 
 # required by btrtl.ko
@@ -545,6 +548,7 @@
   device_initialize
   device_rename
   dev_set_name
+  firmware_request_nowait_nowarn
   flush_delayed_work
   gcd
   genlmsg_multicast_allns
@@ -566,7 +570,6 @@
   __put_net
   rb_erase
   rb_insert_color
-  request_firmware_nowait
   rfkill_alloc
   rfkill_blocked
   rfkill_destroy
@@ -744,7 +747,6 @@
   device_create
   device_release_driver
   device_unregister
-  dst_release
   genl_notify
   kstrndup
   net_namespace_list
@@ -1045,8 +1047,6 @@
   iomem_resource
   is_virtio_device
   memdup_user
-  page_shift_compat
-  page_shift_compat_enabled
   pci_dev_put
   pci_get_device
   __SCK__tp_func_dma_fence_emit
@@ -1339,3 +1339,6 @@
   xa_erase
   xa_find
   xa_find_after
+
+# preserved by --additions-only
+  request_firmware_nowait

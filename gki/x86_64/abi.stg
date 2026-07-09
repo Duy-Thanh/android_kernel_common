@@ -300864,6 +300864,16 @@ function {
   parameter_id: 0x00c72527
 }
 function {
+  id: 0x9fb20057
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0b27dc43
+  parameter_id: 0x3e10b518
+  parameter_id: 0x0258f96e
+  parameter_id: 0xf1a6dfed
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0d9e81b2
+}
+function {
   id: 0x9fb27590
   return_type_id: 0x6720d32f
   parameter_id: 0x043ecddb
@@ -318375,6 +318385,15 @@ elf_symbol {
   crc: 0x4a8ebcc6
   type_id: 0x23f09c34
   full_name: "firmware_kobj"
+}
+elf_symbol {
+  id: 0x5f722ba4
+  name: "firmware_request_nowait_nowarn"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8e9ed4fa
+  type_id: 0x9fb20057
+  full_name: "firmware_request_nowait_nowarn"
 }
 elf_symbol {
   id: 0x24954a6b
@@ -342391,6 +342410,7 @@ interface {
   symbol_id: 0x557a4fc7
   symbol_id: 0xf882020f
   symbol_id: 0x2e62a121
+  symbol_id: 0x5f722ba4
   symbol_id: 0x24954a6b
   symbol_id: 0xbbba9aad
   symbol_id: 0xd211b195
