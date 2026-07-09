@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d6f4b26_4253b702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T16:40:29Z",
+      "side": 1,
+      "message": "are you planning to send the changes to driver/misc/open-dice.c upstream?",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33de425e_a6238197",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T16:40:29Z",
+      "side": 1,
+      "message": "why does open-dice.ko need this special handling? Why isn\u0027t it returned along with the other modules by get_gki_modules_list()?",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
