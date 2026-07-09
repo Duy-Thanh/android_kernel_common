@@ -33,6 +33,24 @@
       "message": "Needed in android17-6.18 too?",
       "revId": "324b02eabdcf2609da091ad52bca5414629c75fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c65027_3ec7b75c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-09T12:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfe265db_38899720",
+      "revId": "324b02eabdcf2609da091ad52bca5414629c75fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
