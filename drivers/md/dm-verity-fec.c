@@ -672,7 +672,14 @@ int verity_fec_ctr(struct dm_verity *v)
 
 	dm_bufio_set_sector_offset(f->bufio, f->start << (v->data_dev_block_bits - SECTOR_SHIFT));
 
+<<<<<<< HEAD   (e203457f2d47e038ae2d9a6455160934b7e9d149 Merge 6.18.29 into android17-6.18-lts)
 	if (dm_bufio_get_device_size(f->bufio) < f->region_blocks * f->roots) {
+||||||| BASE   (d31a849ff5011dad5c271b53819a0b279e367d68 Linux 6.18.29)
+	fec_blocks = div64_u64(f->rounds * f->roots, v->fec->roots << SECTOR_SHIFT);
+	if (dm_bufio_get_device_size(f->bufio) < fec_blocks) {
+=======
+	if (dm_bufio_get_device_size(f->bufio) < f->rounds * f->roots) {
+>>>>>>> BRANCH (52dc660c85dbab60c07c8f1a716d68a4b7d4fc7e Linux 6.18.30)
 		ti->error = "FEC device is too small";
 		return -E2BIG;
 	}
