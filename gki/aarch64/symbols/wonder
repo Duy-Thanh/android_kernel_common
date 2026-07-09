@@ -139,6 +139,7 @@
   faux_device_create
   faux_device_destroy
   finish_wait
+  firmware_request_nowait_nowarn
   flush_delayed_work
   flush_work
   gcd
@@ -185,7 +186,7 @@
   register_pernet_device
   release_firmware
   request_firmware
-  request_firmware_nowait
+  request_firmware_direct
   rfkill_alloc
   rfkill_blocked
   rfkill_destroy
@@ -352,4 +353,5 @@
 # preserved by --additions-only
   kstrtobool_from_user
   noop_llseek
+  request_firmware_nowait
   simple_open
