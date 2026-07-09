@@ -25,6 +25,7 @@
 #include <trace/hooks/preemptirq.h>
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/ufshcd.h>
+#include <trace/hooks/mmc.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
@@ -775,3 +776,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
