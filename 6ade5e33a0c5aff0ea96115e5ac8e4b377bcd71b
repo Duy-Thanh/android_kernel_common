@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e746f5_1b3f5434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4993354
+      },
+      "writtenOn": "2026-07-09T16:40:29Z",
+      "side": 1,
+      "message": "GKI: preserve the kernel API for struct task_struct\n\nIn commit 2a93a4fac7b6 (\"ptrace: slightly saner \u0027get_dumpable()\u0027\nlogic\"), a new variable is added to struct task_struct, which makes the\nABI checker a bit grumpy.  Fix this up by putting the new bit down in\nthe reserved space for this kind of expansion as that is exactly what\nthe extra padding in this structure was reserved for.\n\nFixes: 2a93a4fac7b6 (\"ptrace: slightly saner \u0027get_dumpable()\u0027 logic\")\nChange-Id: I80e6c1a33139989c40d1fb7fb5374b6914478ed4\nSigned-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e",
+      "revId": "6ade5e33a0c5aff0ea96115e5ac8e4b377bcd71b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
