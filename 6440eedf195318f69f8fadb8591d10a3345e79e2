@@ -51,6 +51,24 @@
       "parentUuid": "a074e659_63877061",
       "revId": "6440eedf195318f69f8fadb8591d10a3345e79e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8847e6_7534ad61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-09T11:58:43Z",
+      "side": 1,
+      "message": "The reference build used was 2 commits behind the one that added the symbol export.\n\nSadly, it\u0027s just a case of waiting and trying again.\n\nYou can check current post-submit builds here: ab/aosp_kernel-common-android16-6.12-2026-06",
+      "parentUuid": "0d848d04_daad6104",
+      "revId": "6440eedf195318f69f8fadb8591d10a3345e79e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
