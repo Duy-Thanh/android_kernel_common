@@ -13,7 +13,52 @@
 #include <trace/hooks/vendor_hooks.h>
 #include <linux/tracepoint.h>
 
+<<<<<<< HEAD   (a6a568839fc520eb569a2655666abd53e9e5fdfa ANDROID: rust: device: make Device::as_raw() public)
 /* keep-sorted start */
+||||||| BASE   (0afba8617d63b1cab037632039ed1e09370482e5 ANDROID: enable IOCB_DONTCACHE on FUSE file system)
+#include <trace/hooks/binder.h>
+#include <trace/hooks/cpuidle.h>
+#include <trace/hooks/mpam.h>
+#include <trace/hooks/wqlockup.h>
+#include <trace/hooks/debug.h>
+#include <trace/hooks/sysrqcrash.h>
+#include <trace/hooks/printk.h>
+#include <trace/hooks/epoch.h>
+#include <trace/hooks/cpufreq.h>
+#include <trace/hooks/preemptirq.h>
+#include <trace/hooks/fips140.h>
+#include <trace/hooks/ufshcd.h>
+#include <trace/hooks/cgroup.h>
+#include <trace/hooks/sys.h>
+#include <trace/hooks/iommu.h>
+#include <trace/hooks/fs.h>
+#include <trace/hooks/net.h>
+#include <trace/hooks/cpuidle_psci.h>
+#include <trace/hooks/vmscan.h>
+#include <trace/hooks/health_report.h>
+=======
+#include <trace/hooks/binder.h>
+#include <trace/hooks/cpuidle.h>
+#include <trace/hooks/mpam.h>
+#include <trace/hooks/wqlockup.h>
+#include <trace/hooks/debug.h>
+#include <trace/hooks/sysrqcrash.h>
+#include <trace/hooks/printk.h>
+#include <trace/hooks/epoch.h>
+#include <trace/hooks/cpufreq.h>
+#include <trace/hooks/preemptirq.h>
+#include <trace/hooks/fips140.h>
+#include <trace/hooks/ufshcd.h>
+#include <trace/hooks/mmc.h>
+#include <trace/hooks/cgroup.h>
+#include <trace/hooks/sys.h>
+#include <trace/hooks/iommu.h>
+#include <trace/hooks/fs.h>
+#include <trace/hooks/net.h>
+#include <trace/hooks/cpuidle_psci.h>
+#include <trace/hooks/vmscan.h>
+#include <trace/hooks/health_report.h>
+>>>>>>> CHANGE (d561c2cb7c661c55089769e732cde21c8b6f1757 ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
 #include <trace/hooks/avc.h>
 #include <trace/hooks/binder.h>
 #include <trace/hooks/bl_hib.h>
@@ -548,6 +593,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
+<<<<<<< HEAD   (a6a568839fc520eb569a2655666abd53e9e5fdfa ANDROID: rust: device: make Device::as_raw() public)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_choose_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_get_power_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_platform_pci_power_manageable);
@@ -752,3 +798,24 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
 /* keep-sorted end */
+||||||| BASE   (0afba8617d63b1cab037632039ed1e09370482e5 ANDROID: enable IOCB_DONTCACHE on FUSE file system)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (d561c2cb7c661c55089769e732cde21c8b6f1757 ANDROID: mmc: Add vendor hooks for sdcard failure diagnostic)
