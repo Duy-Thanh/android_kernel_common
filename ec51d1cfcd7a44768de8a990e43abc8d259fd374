@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e89f006e_29af5d64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2041852
+      },
+      "writtenOn": "2026-07-09T21:04:02Z",
+      "side": 1,
+      "message": "I added one line above, explaining the opendice is used by Android\u0027s protected VM.",
+      "parentUuid": "33acf205_1342f80b",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d6f4b26_4253b702",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "882b7e7d_6a409647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041852
+      },
+      "writtenOn": "2026-07-09T21:04:02Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "2d6f4b26_4253b702",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33de425e_a6238197",
         "filename": "BUILD.bazel",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2026-07-09T16:40:29Z",
       "side": 1,
       "message": "why does open-dice.ko need this special handling? Why isn\u0027t it returned along with the other modules by get_gki_modules_list()?",
+      "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0b1a96_8daab440",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 2041852
+      },
+      "writtenOn": "2026-07-09T21:04:02Z",
+      "side": 1,
+      "message": "I understand this should not be the correct change for adding open-dice.ko to the module list.\n\nThe changes to this file is only for local testing and prototyping. I just updated the most convenient location without deeper research.\n\nAfter the upstream change is submitted, I will create separate CL for this file. For now, please just ignore this file.",
+      "parentUuid": "33de425e_a6238197",
       "revId": "ec51d1cfcd7a44768de8a990e43abc8d259fd374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
