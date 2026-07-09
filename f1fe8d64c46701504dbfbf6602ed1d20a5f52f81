@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed5b65b_e35de4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-09T17:55:45Z",
+      "side": 1,
+      "message": "Breaks KMI. Please refactor to avoid changing the KMI stable structures:\n```\nfunction symbol \u0027void wireless_send_event(struct net_device*, unsigned int, union iwreq_data*, const char*)\u0027 changed\n  CRC changed from 0x845324f5 to 0xa6152d7f\n\ntype \u0027struct wireless_dev\u0027 changed\n  byte size changed from 1632 to 1624\n  member changed from \u0027struct work_struct pmsr_free_wk\u0027 to \u0027struct wiphy_work pmsr_free_wk\u0027\n    type changed from \u0027struct work_struct\u0027 to \u0027struct wiphy_work\u0027\n  7 members (\u0027unsigned long unprot_beacon_reported\u0027 .. \u0027u64 __kabi_reserved2\u0027) changed\n    offset changed by -64\n```",
+      "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
