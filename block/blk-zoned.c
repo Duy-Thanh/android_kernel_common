@@ -809,20 +809,42 @@ static void disk_zone_wplug_schedule_bio_work(struct gendisk *disk,
 	lockdep_assert_held(&zwplug->lock);
 
 	/*
+<<<<<<< HEAD   (1d90a3d44780cab43a81b545d698de3ccf503537 Merge ad0126ffcba8 ("rbd: fix null-ptr-deref when device_add)
 	 * Schedule a blk_zone_wplug_bio_work() call and increase the zone write
 	 * plug reference count. blk_zone_wplug_bio_work() will release the
 	 * reference we take here. Increasing the zone write plug reference
 	 * count after the queue_work_on() call is safe because all callers hold
 	 * the zone write plug lock and blk_zone_wplug_bio_work() obtains the
 	 * same lock before decrementing the reference count.
+||||||| BASE   (ad0126ffcba8777109852979eaaa6dca6703abdb rbd: fix null-ptr-deref when device_add_disk() fails)
+	 * Take a reference on the zone write plug and schedule the submission
+	 * of the next plugged BIO. blk_zone_wplug_bio_work() will release the
+	 * reference we take here.
+=======
+	 * Schedule the submission of the next plugged BIO. Taking a reference
+	 * to the zone write plug is required as the bio_work belongs to the
+	 * plug, and thus we must ensure that the write plug does not go away
+	 * while the work is being scheduled but has not run yet.
+	 * blk_zone_wplug_bio_work() will release the reference we take here,
+	 * and we also drop this reference if the work is already scheduled.
+>>>>>>> BRANCH (81880f84cb3611914014f90147766a0a435d2144 block: fix zone write plugs refcount handling in disk_zone_w)
 	 */
 	WARN_ON_ONCE(!(zwplug->flags & BLK_ZONE_WPLUG_PLUGGED));
+<<<<<<< HEAD   (1d90a3d44780cab43a81b545d698de3ccf503537 Merge ad0126ffcba8 ("rbd: fix null-ptr-deref when device_add)
 	if (zwplug->from_cpu >= 0)
 		cpu = zwplug->from_cpu;
 	else
 		cpu = WORK_CPU_UNBOUND;
 	if (queue_work_on(cpu, disk->zone_wplugs_wq, &zwplug->bio_work))
 		refcount_inc(&zwplug->ref);
+||||||| BASE   (ad0126ffcba8777109852979eaaa6dca6703abdb rbd: fix null-ptr-deref when device_add_disk() fails)
+	refcount_inc(&zwplug->ref);
+	queue_work(disk->zone_wplugs_wq, &zwplug->bio_work);
+=======
+	refcount_inc(&zwplug->ref);
+	if (!queue_work(disk->zone_wplugs_wq, &zwplug->bio_work))
+		disk_put_zone_wplug(zwplug);
+>>>>>>> BRANCH (81880f84cb3611914014f90147766a0a435d2144 block: fix zone write plugs refcount handling in disk_zone_w)
 }
 
 static inline void disk_zone_wplug_add_bio(struct gendisk *disk,
