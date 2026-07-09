@@ -1465,7 +1465,16 @@ static void __sched remove_waiter(struct rt_mutex_base *lock,
 
 	lockdep_assert_held(&lock->wait_lock);
 
+<<<<<<< HEAD   (6d3383e17d180cd10ec8ae211ae9001aab01da1e UPSTREAM: arm64: errata: Mitigate TLBI errata on Microsoft A)
 	raw_spin_lock(&current->pi_lock);
+||||||| BASE   (0ad63108520d7f5d615ae221050dcd6432718974 UPSTREAM: rtmutex: Use waiter::task instead of current in re)
+	raw_spin_lock(&waiter_task->pi_lock);
+=======
+	if (!waiter_task) /* never enqueued */
+		return;
+
+	raw_spin_lock(&waiter_task->pi_lock);
+>>>>>>> CHANGE (fc391130b20175333113c0e1cdffb367e8d6bbc0 UPSTREAM: locking/rtmutex: Skip remove_waiter() when waiter )
 	rt_mutex_dequeue(lock, waiter);
 	current->pi_blocked_on = NULL;
 	raw_spin_unlock(&current->pi_lock);
