@@ -16,6 +16,24 @@
       "message": "Please fix the build-break (looks like USB_XHCI_PCI is not needed and can be removed):\n```\n--- common/arch/arm64/configs/gki_defconfig\t2026-07-01 15:57:51.835934727 +0000\n+++ /tmp/bazel-working-directory/_main/out/android15-6.6/common/defconfig\t2026-07-01 15:58:23.291913040 +0000\n@@ -533,7 +533,6 @@\n CONFIG_USB_OTG\u003dy\n CONFIG_USB_MON\u003dm\n CONFIG_USB_XHCI_HCD\u003dy\n-CONFIG_USB_XHCI_PCI\u003dm\n CONFIG_USB_XHCI_PCI_RENESAS\u003dm\n CONFIG_USB_EHCI_HCD\u003dy\n CONFIG_USB_EHCI_ROOT_HUB_TT\u003dy\nERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\nERROR: Build did NOT complete successfully\nmore detailed logs are available at: https://android-b\n```",
       "revId": "2d0e78cc51d60ee2b4481d7ea39bb6a51b39bdfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aef0aaa_f2727e68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990372
+      },
+      "writtenOn": "2026-07-09T07:45:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "004e7300_1b449036",
+      "revId": "2d0e78cc51d60ee2b4481d7ea39bb6a51b39bdfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
