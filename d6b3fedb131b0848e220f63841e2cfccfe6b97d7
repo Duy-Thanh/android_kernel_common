@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defda751_d7e0c6ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-09T15:32:02Z",
+      "side": 1,
+      "message": "Note: there are some opportunities here to change how the recipient is woken up in a way that improves the hints we give to the scheduler",
+      "revId": "d6b3fedb131b0848e220f63841e2cfccfe6b97d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
