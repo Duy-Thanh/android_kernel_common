@@ -958,6 +958,7 @@ kernel_build(
     defconfig = "arch/arm64/configs/gki_defconfig",
     generate_out_targets = False,
     kmi_symbol_list = "gki/aarch64/symbols/db845c",
+    kmi_symbol_list_add_only = True,
     make_goals = [
         "modules",
         "qcom/qrb5165-rb5.dtb",
