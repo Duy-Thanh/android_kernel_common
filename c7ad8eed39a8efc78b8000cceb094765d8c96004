@@ -16,6 +16,24 @@
       "message": "So normally these sorts of vendorhook additions are done in two parts:\n1) Add the hook definition *and* its users\n2) A separate patch to add the symbol and abi update (since these collide and are difficult to cherry pick forward to the next LTS release if needed).\n\nCould you restructure the series this way? I\u0027m not sure having the three users of the hook be in three separate patches helps with making the change easier to review.",
       "revId": "c7ad8eed39a8efc78b8000cceb094765d8c96004",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2519ebdf_8dfdb81a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4967449
+      },
+      "writtenOn": "2026-07-09T12:04:55Z",
+      "side": 1,
+      "message": "Done — v3 splits the series into two patches: (1) hook definition and its users, (2) symbol list and ABI update.",
+      "parentUuid": "f86a17f0_723c8b66",
+      "revId": "c7ad8eed39a8efc78b8000cceb094765d8c96004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
