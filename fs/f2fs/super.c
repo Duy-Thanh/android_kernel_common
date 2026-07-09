@@ -1738,6 +1738,15 @@ static void f2fs_put_super(struct super_block *sb)
 #if IS_ENABLED(CONFIG_UNICODE)
 	utf8_unload(sb->s_encoding);
 #endif
+<<<<<<< HEAD   (480e68409c85f0858c7f2a4ed87bc8c351e438fb Merge 6.6.140 into android15-6.6-lts)
+||||||| BASE   (eac8889a3a1c81d7113cc4656b9420e84c379cf5 Linux 6.6.140)
+	kfree(sbi);
+=======
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
+	kfree(sbi);
+>>>>>>> BRANCH (0a40c6fbd105802fbbcaadca249e0948fbf8095a Linux 6.6.141)
 }
 
 int f2fs_sync_fs(struct super_block *sb, int sync)
@@ -4579,9 +4588,24 @@ try_onemore:
 	/* initialize locks within allocated memory */
 	init_f2fs_rwsem_trace(&sbi->gc_lock, sbi, LOCK_NAME_GC_LOCK);
 	mutex_init(&sbi->writepages);
+<<<<<<< HEAD   (480e68409c85f0858c7f2a4ed87bc8c351e438fb Merge 6.6.140 into android15-6.6-lts)
 	init_f2fs_rwsem_trace(&sbi->cp_global_sem, sbi, LOCK_NAME_CP_GLOBAL);
 	init_f2fs_rwsem_trace(&sbi->node_write, sbi, LOCK_NAME_NODE_WRITE);
 	init_f2fs_rwsem_trace(&sbi->node_change, sbi, LOCK_NAME_NODE_CHANGE);
+||||||| BASE   (eac8889a3a1c81d7113cc4656b9420e84c379cf5 Linux 6.6.140)
+	init_f2fs_rwsem(&sbi->cp_global_sem);
+	init_f2fs_rwsem(&sbi->node_write);
+	init_f2fs_rwsem(&sbi->node_change);
+=======
+	init_f2fs_rwsem(&sbi->cp_global_sem);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_register_key(&sbi->cp_global_sem_key);
+	lockdep_set_class(&sbi->cp_global_sem.internal_rwsem,
+					&sbi->cp_global_sem_key);
+#endif
+	init_f2fs_rwsem(&sbi->node_write);
+	init_f2fs_rwsem(&sbi->node_change);
+>>>>>>> BRANCH (0a40c6fbd105802fbbcaadca249e0948fbf8095a Linux 6.6.141)
 	spin_lock_init(&sbi->stat_lock);
 	init_f2fs_rwsem_trace(&sbi->cp_rwsem, sbi, LOCK_NAME_CP_RWSEM);
 	init_f2fs_rwsem(&sbi->quota_sem);
@@ -5055,6 +5079,9 @@ free_sb_buf:
 free_sbi:
 	if (sbi->s_chksum_driver)
 		crypto_free_shash(sbi->s_chksum_driver);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
 	kfree(sbi);
 	sb->s_fs_info = NULL;
 
