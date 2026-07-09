@@ -804,14 +804,17 @@ static void smp_call_function_many_cond(const struct cpumask *mask,
 					unsigned int scf_flags,
 					smp_cond_func_t cond_func)
 {
-	int cpu, last_cpu, this_cpu = smp_processor_id();
+	int cpu, last_cpu, this_cpu;
 	struct call_function_data *cfd;
+	cpumask_t mask_storage;
+	struct cpumask *cpumask = &mask_storage;
 	bool wait = scf_flags & SCF_WAIT;
 	int nr_cpus = 0;
 	bool run_remote = false;
 	bool run_local = false;
 
-	lockdep_assert_preemption_disabled();
+	this_cpu = get_cpu();
+	cfd = this_cpu_ptr(&cfd_data);
 
 	/*
 	 * Can deadlock when called with interrupts disabled.
@@ -843,16 +846,15 @@ static void smp_call_function_many_cond(const struct cpumask *mask,
 		run_remote = true;
 
 	if (run_remote) {
-		cfd = this_cpu_ptr(&cfd_data);
-		cpumask_and(cfd->cpumask, mask, cpu_online_mask);
-		__cpumask_clear_cpu(this_cpu, cfd->cpumask);
+		cpumask_and(cpumask, mask, cpu_online_mask);
+		__cpumask_clear_cpu(this_cpu, cpumask);
 
 		cpumask_clear(cfd->cpumask_ipi);
-		for_each_cpu(cpu, cfd->cpumask) {
+		for_each_cpu(cpu, cpumask) {
 			call_single_data_t *csd = per_cpu_ptr(cfd->csd, cpu);
 
 			if (cond_func && !cond_func(cpu, info)) {
-				__cpumask_clear_cpu(cpu, cfd->cpumask);
+				__cpumask_clear_cpu(cpu, cpumask);
 				continue;
 			}
 
@@ -893,8 +895,15 @@ static void smp_call_function_many_cond(const struct cpumask *mask,
 		local_irq_restore(flags);
 	}
 
+	/*
+	 * The IPI work has been queued and dispatched. Preemption can now be
+	 * re-enabled before waiting for completion. The wait mask is local
+	 * to this stack frame, so it cannot be overwritten by another task.
+	 */
+	put_cpu();
+
 	if (run_remote && wait) {
-		for_each_cpu(cpu, cfd->cpumask) {
+		for_each_cpu(cpu, cpumask) {
 			call_single_data_t *csd;
 
 			csd = per_cpu_ptr(cfd->csd, cpu);
@@ -904,16 +913,15 @@ static void smp_call_function_many_cond(const struct cpumask *mask,
 }
 
 /**
- * smp_call_function_many(): Run a function on a set of CPUs.
- * @mask: The set of cpus to run on (only runs on online subset).
- * @func: The function to run. This must be fast and non-blocking.
- * @info: An arbitrary pointer to pass to the function.
- * @wait: If true, wait (atomically) until function has completed
- *        on other CPUs.
+ * smp_call_function_many() - Run a function on a set of CPUs.
+ * @mask:	The set of cpus to run on (only runs on online subset).
+ * @func:	The function to run. This must be fast and non-blocking.
+ * @info:	An arbitrary pointer to pass to the function.
+ * @wait:	If true, wait (atomically) until function has completed
+ *		on other CPUs.
  *
  * You must not call this function with disabled interrupts or from a
- * hardware interrupt handler or from a bottom half handler. Preemption
- * must be disabled when calling this function.
+ * hardware interrupt handler or from a bottom half handler.
  *
  * @func is not called on the local CPU even if @mask contains it.  Consider
  * using on_each_cpu_cond_mask() instead if this is not desirable.
