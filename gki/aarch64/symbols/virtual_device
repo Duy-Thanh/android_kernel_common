@@ -365,6 +365,7 @@
   release_firmware
   remap_pfn_range
   request_firmware
+  request_firmware_direct
   request_threaded_irq
   rhashtable_insert_slow
   __rht_bucket_nested
@@ -605,7 +606,6 @@
   efi
   hci_cmd_sync
   out_of_line_wait_on_bit_timeout
-  request_firmware_direct
   wake_up_bit
 
 # required by btrtl.ko
@@ -661,6 +661,7 @@
   device_initialize
   device_rename
   dev_set_name
+  firmware_request_nowait_nowarn
   flush_delayed_work
   gcd
   genlmsg_multicast_allns
@@ -682,7 +683,6 @@
   __put_net
   rb_erase
   rb_insert_color
-  request_firmware_nowait
   rfkill_alloc
   rfkill_blocked
   rfkill_destroy
@@ -1531,3 +1531,4 @@
 # preserved by --additions-only
   __drm_debug_trace
   __drm_printfn_trace
+  request_firmware_nowait
