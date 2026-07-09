@@ -479,6 +479,41 @@ struct device_physical_location {
 };
 
 /**
+<<<<<<< HEAD   (7820f5b6f1ac958b2f11a103730f6902871fcb14 Merge 81880f84cb36 ("block: fix zone write plugs refcount ha)
+||||||| BASE   (81880f84cb3611914014f90147766a0a435d2144 block: fix zone write plugs refcount handling in disk_zone_w)
+ * enum struct_device_flags - Flags in struct device
+ *
+ * Each flag should have a set of accessor functions created via
+ * __create_dev_flag_accessors() for each access.
+ *
+ * @DEV_FLAG_READY_TO_PROBE: If set then device_add() has finished enough
+ *		initialization that probe could be called.
+ */
+enum struct_device_flags {
+	DEV_FLAG_READY_TO_PROBE = 0,
+
+	DEV_FLAG_COUNT
+};
+
+/**
+=======
+ * enum struct_device_flags - Flags in struct device
+ *
+ * Each flag should have a set of accessor functions created via
+ * __create_dev_flag_accessors() for each access.
+ *
+ * @DEV_FLAG_READY_TO_PROBE: If set then device_add() has finished enough
+ *		initialization that probe could be called.
+ * @DEV_FLAG_COUNT: Number of defined struct_device_flags.
+ */
+enum struct_device_flags {
+	DEV_FLAG_READY_TO_PROBE = 0,
+
+	DEV_FLAG_COUNT
+};
+
+/**
+>>>>>>> BRANCH (ce685b6a03dc0270f78bc7aaf2c9ada9cbd45a86 Linux 6.18.27)
  * struct device - The basic device structure
  * @parent:	The device's "parent" device, the device to which it is attached.
  * 		In most cases, a parent device is some sort of bus or host
