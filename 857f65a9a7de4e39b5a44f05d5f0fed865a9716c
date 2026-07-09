@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f177039_2d567257",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c0026f_1dd910d9",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b49c08b1_dfabf4bb",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-05-27T18:35:03Z",
       "side": 1,
       "message": "nit: s/servers/serves",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5898c038_194649fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b49c08b1_dfabf4bb",
       "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -100,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01022fd8_691fb9dc",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc15c597_e1129d49",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc7aba6_8b1a5e36",
@@ -113,6 +173,24 @@
       "writtenOn": "2026-07-06T16:01:10Z",
       "side": 1,
       "message": "Since this is only an internal function now, maybe rename it to `__pkvm_get_iommu_domain_noref()` (consistently with `__pkvm_get_iommu_domain_locked()`) and move its implementation above `pkvm_get_iommu_domain()`, after `__pkvm_get_iommu_domain_locked()`?",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a3aba04_78bc5054",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bc7aba6_8b1a5e36",
       "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -152,6 +230,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d05c00a_4c6888f4",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "460d6a7d_8186f370",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a572fe0c_f61d8ec1",
@@ -187,6 +283,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5afd31_e0cddf2b",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a572fe0c_f61d8ec1",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "644659a6_9d88b96c",
@@ -200,6 +314,24 @@
       "writtenOn": "2026-07-06T16:01:10Z",
       "side": 1,
       "message": "Do we have any reason to still do this after free_domain_memcache, pkvm_hyp_donate_host etc, not before? Can we do this before that, within the first lock/unlock section, instead of locking/unlocking iommu_domain_lock once again afterwards? i.e.:\n\n```\n--- a/drivers/iommu/intel/pkvm/domain.c\n+++ b/drivers/iommu/intel/pkvm/domain.c\n@@ -190,6 +190,9 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)\n \t\treturn -EBUSY;\n \t}\n \n+\t__clear_bit(domain-\u003eindex, iommu_domains_bitmap);\n+\tmemset(domain, 0, sizeof(struct dmar_domain));\n+\n \t/*\n \t * To prevent someone else from getting this domain from the hash list\n \t * while freeing it.\n@@ -212,11 +215,6 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)\n \tpkvm_dbg(\"%s: freeing domain[pgd: %p], freed pages: %lu\\n\",\n \t\t __func__, domain-\u003epgd, teardown_mc-\u003ecount);\n \n-\tpkvm_spin_lock(\u0026iommu_domain_lock);\n-\t__clear_bit(domain-\u003eindex, iommu_domains_bitmap);\n-\tmemset(domain, 0, sizeof(struct dmar_domain));\n-\tpkvm_spin_unlock(\u0026iommu_domain_lock);\n-\n \treturn 0;\n }\n \n```",
+      "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beac4e33_29ce5168",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-09T16:34:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644659a6_9d88b96c",
       "revId": "857f65a9a7de4e39b5a44f05d5f0fed865a9716c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
