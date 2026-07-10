@@ -229,6 +229,7 @@ static inline void task_unlock(struct task_struct *p)
 	spin_unlock(&p->alloc_lock);
 }
 
+<<<<<<< HEAD   (99d38ebf029ada341bba3a0dc35d162ac21e9167 ANDROID: GKI: fix CRC break in ppp_defs.h)
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
 static inline void *android_task_vendor_data(struct task_struct *p)
 {
@@ -247,5 +248,9 @@ static inline void android_init_dynamic_vendor_data(struct task_struct *p)
 #else /* !CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE */
 static inline void android_init_dynamic_vendor_data(struct task_struct *p) {}
 #endif /* CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE */
+||||||| BASE   (0a40c6fbd105802fbbcaadca249e0948fbf8095a Linux 6.6.141)
+=======
+DEFINE_GUARD(task_lock, struct task_struct *, task_lock(_T), task_unlock(_T))
+>>>>>>> BRANCH (924b4a879cbb75aef37c160b955b92f6894b11a4 Linux 6.6.142)
 
 #endif /* _LINUX_SCHED_TASK_H */
