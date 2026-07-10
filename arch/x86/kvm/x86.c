@@ -10735,8 +10735,9 @@ static int kvm_pkvm_hypercall(struct kvm_vcpu *vcpu)
 		break;
 	}
 	case PKVM_GHC_SHARE_MEM:
+	case PKVM_GHC_UNSHARE_MEM:
 		/*
-		 * The only case when pKVM forwards this hypercall to the host
+		 * The only case when pKVM forwards these hypercalls to the host
 		 * is when it asks the host to refill the memcache with the
 		 * needed amount of pages.
 		 */
@@ -15102,6 +15103,7 @@ int pkvm_emulate_hypercall(struct kvm_vcpu *vcpu)
 
 	switch (nr) {
 	case PKVM_GHC_SHARE_MEM:
+	case PKVM_GHC_UNSHARE_MEM:
 		pkvm_guest_mmu_refill_memcache(pkvm_vcpu);
 
 		/*
@@ -15121,10 +15123,10 @@ int pkvm_emulate_hypercall(struct kvm_vcpu *vcpu)
 			return 0;
 		}
 
-		ret = pkvm_guest_share_host(vcpu, a0, a1);
-		break;
-	case PKVM_GHC_UNSHARE_MEM:
-		ret = pkvm_guest_unshare_host(vcpu, a0, a1);
+		if (nr == PKVM_GHC_SHARE_MEM)
+			ret = pkvm_guest_share_host(vcpu, a0, a1);
+		else
+			ret = pkvm_guest_unshare_host(vcpu, a0, a1);
 		break;
 	case PKVM_GHC_IOREAD:
 	case PKVM_GHC_IOWRITE:
