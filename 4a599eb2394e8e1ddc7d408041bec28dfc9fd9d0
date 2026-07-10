@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/532941792",
       "revId": "4a599eb2394e8e1ddc7d408041bec28dfc9fd9d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c09dcd3_7ee68588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-10T15:29:04Z",
+      "side": 1,
+      "message": "There are multiple issues with this cherry-pick. Please see the KernelCommit messages in the Checks tab.",
+      "revId": "4a599eb2394e8e1ddc7d408041bec28dfc9fd9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
