@@ -87,6 +87,24 @@
       "parentUuid": "edfe1a24_68746e2a",
       "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7760df71_ce376a80",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-10T17:57:59Z",
+      "side": 1,
+      "message": "Mostly I\u0027m just noting the earlier change to drop CONFIG_GKI_NET_XFRM_HACKS had passed tests, before this issue was found, so I wanted to make sure the specific problematic test was clarified. It\u0027s nice to have that in the commit as not everyone who might be reviewing the kernel changes has access to the bugs.",
+      "parentUuid": "85941443_89f6f2d8",
+      "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
