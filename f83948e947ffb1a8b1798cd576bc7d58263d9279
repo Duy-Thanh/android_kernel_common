@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d521f62_8fcbc962",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-10T12:20:54Z",
+      "side": 0,
+      "message": "It\u0027s hard to convince myself that this CL doesn\u0027t have a functional change when symbols appear to be removed. Does it mean we\u0027re relying on some default value instead?\n\nI wonder if it would be better to leave it as-is and use `scripts/config -d` to disable the DMABUF_SYSFS_STATS option?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 19
+      },
+      "revId": "f83948e947ffb1a8b1798cd576bc7d58263d9279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
