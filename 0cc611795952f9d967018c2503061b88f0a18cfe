@@ -44,6 +44,24 @@
       ],
       "revId": "0cc611795952f9d967018c2503061b88f0a18cfe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeca209b_31736492",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-10T11:01:39Z",
+      "side": 1,
+      "message": "Makes sense. (Although that might make it a bit less obvious that the 1st check is an overflow check, but that\u0027s probably ok.)",
+      "parentUuid": "f83297d5_7d6cb1f8",
+      "revId": "0cc611795952f9d967018c2503061b88f0a18cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
