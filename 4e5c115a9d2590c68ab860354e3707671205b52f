@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/533175158",
       "revId": "4e5c115a9d2590c68ab860354e3707671205b52f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f00025_11052573",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-10T04:48:33Z",
+      "side": 1,
+      "message": "This needs a follow on patch to add the symbols and update the kmi",
+      "revId": "4e5c115a9d2590c68ab860354e3707671205b52f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
