@@ -7176,6 +7176,10 @@ static int selinux_bpf(int cmd, union bpf_attr *attr,
 		ret = avc_has_perm(sid, sid, SECCLASS_BPF, BPF__PROG_LOAD,
 				   NULL);
 		break;
+	case BPF_LOADER_LOAD_FD:
+		ret = avc_has_perm(sid, sid, SECCLASS_BPF, BPF__LOADER_LOAD_FD,
+				   NULL);
+		break;
 	default:
 		ret = 0;
 		break;
