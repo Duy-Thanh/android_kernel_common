@@ -117,6 +117,24 @@
       },
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9279e72_20e2c663",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-10T11:16:50Z",
+      "side": 1,
+      "message": "Ahh ok, I thought the whole pvmfw has to be in the 4G space. yeah then it doesn\u0027t make sense to do an extra check",
+      "parentUuid": "1c0e0add_2e771422",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
