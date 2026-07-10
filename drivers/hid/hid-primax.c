@@ -44,7 +44,13 @@ static int px_raw_event(struct hid_device *hid, struct hid_report *report,
 			data[0] |= (1 << (data[idx] - 0xE0));
 			data[idx] = 0;
 		}
+<<<<<<< HEAD   (0a85a2bd13c2b1bf366ff86053fb6300e1aae48e Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 		__hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, 0);
+=======
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		return 1;
 
 	default:	/* unknown report */
