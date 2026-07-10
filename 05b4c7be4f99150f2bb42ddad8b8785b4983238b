@@ -16,6 +16,41 @@
       "message": "All the new type definitions in the ABI were also present in `android16-6.12`.\n\nThe new symbols seem OK as well.\n\nHowever, it seems odd to be using `put_netmem` without `get_netmem`.",
       "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "726d1d82_2cf70ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3615901
+      },
+      "writtenOn": "2026-07-10T00:44:35Z",
+      "side": 1,
+      "message": "Here\u0027s the explanation:\nThe Xiaomi driver receives a netmem from __skb_frag_ref() or similar kernel APIs that already hold a reference. It only needs put_netmem to release the reference when done — it never acquires a raw netmem that requires an explicit get_netmem. The reference is obtained implicitly through existing exported GKI functions (__skb_frag_ref, skb_frag_netmem, etc.), so only the release side (put_netmem) needs to be added to the symbol list.",
+      "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c935c708_11dc9bca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3615901
+      },
+      "writtenOn": "2026-07-10T00:44:35Z",
+      "side": 1,
+      "message": "Here\u0027s the explanation:  \n     The Xiaomi driver receives a netmem from __skb_frag_ref() or similar kernel APIs that already hold a reference. It only needs put_netmem to release the reference when done — it    never acquires a raw netmem that requires an explicit get_netmem. The reference is obtained implicitly through existing exported GKI functions (__skb_frag_ref, skb_frag_netmem,  etc.), so only the release side (put_netmem) needs to be added to the symbol list.",
+      "parentUuid": "4fd06d20_481a5753",
+      "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
