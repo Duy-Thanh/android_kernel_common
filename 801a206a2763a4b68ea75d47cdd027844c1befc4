@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b8c282_dcdd4e8f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-10T17:29:46Z",
+      "side": 1,
+      "message": "Can both file_offs and buf_offs be page unaligned while (file_offs !\u003d buf_offs)? I thought that\u0027s the case we can\u0027t handle without moving the data after read because either file offset we read or buffer offset we write will have to be page-unaligned.\n\nAlso I think there is a case when start_bounce_len would be more than PAGE_SIZE. Say buf_offs\u003d3K and file_offs\u003d1K, then direct_read_start_offs \u003d PAGE_ALIGN(3K + 4K - 1K) \u003d 8K, so direct_read_start_offs is 5K ahead of buf_offs, which is more than one page.",
+      "range": {
+        "startLine": 175,
+        "startChar": 19,
+        "endLine": 175,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dcdad0e1_e384d51d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 174,
+                "endChar": 0
+              },
+              "replacement": "\t * A starting bounce buffer is needed if the alignment of file_offs\n\t * and buf_offs within their respective pages do not match.\n\t * This means the data from file_offs cannot be directly written\n\t * starting at buf_offs without requiring a shift or overwriting\n\t * data before buf_offs within the same page.\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "\tif ((file_offs \u0026 (PAGE_SIZE - 1)) !\u003d (buf_offs \u0026 (PAGE_SIZE - 1))) {\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 181,
+                "endChar": 0
+              },
+              "replacement": "\t\t * The first PAGE_SIZE of data read from the file (starting at\n\t\t * PAGE_ALIGN_DOWN(file_offs)) must go into a bounce buffer.\n\t\t * The direct I/O to the destination buffer will start at the\n\t\t * first page boundary *after* the portion that would be covered\n\t\t * by the data copied from the bounce buffer.\n\t\t * The data copied from the bounce buffer covers up to:\n\t\t * buf_offs + (PAGE_SIZE - offset_in_page(file_offs))\n\t\t * The direct read into the destination buffer can start at the\n\t\t * next page boundary.\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 185,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": "\t} else\n\t\tdirect_read_start_offs \u003d buf_offs;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f40c93_5b982aa9",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-10T17:29:46Z",
+      "side": 1,
+      "message": "Isn\u0027t this simply `if (direct_read_start_offs \u003c buf_end - PAGE_SIZE))` ?",
+      "range": {
+        "startLine": 192,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 93
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "263888cd_48864c04",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "\tif (buf_end - direct_read_start_offs \u003e\u003d PAGE_SIZE)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
