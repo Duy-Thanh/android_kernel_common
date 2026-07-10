@@ -51,6 +51,41 @@
       "parentUuid": "4fd06d20_481a5753",
       "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "870e83d4_2b490b22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3615901
+      },
+      "writtenOn": "2026-07-10T00:45:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c935c708_11dc9bca",
+      "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c3f8f2b_26af5f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3615901
+      },
+      "writtenOn": "2026-07-10T00:45:21Z",
+      "side": 1,
+      "message": "Here\u0027s the explanation:\nThe Xiaomi driver receives a netmem from __skb_frag_ref() or similar kernel APIs that already hold a reference. It only needs put_netmem to release the reference when done — it never acquires a raw netmem that requires an explicit get_netmem. The reference is obtained implicitly through existing exported GKI functions (__skb_frag_ref, skb_frag_netmem, etc.), so only the release side (put_netmem) needs to be added to the symbol list.",
+      "revId": "05b4c7be4f99150f2bb42ddad8b8785b4983238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
