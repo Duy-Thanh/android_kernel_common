@@ -34,6 +34,18 @@
 
 #define __TLBI_1(op, arg) asm (ARM64_ASM_PREAMBLE			       \
 			       "tlbi " #op ", %x0\n"			       \
+<<<<<<< HEAD   (080c4764425f47e97a1ac10e5bc2c7ac97930977 Revert "Bluetooth: fix memory leak in error path of hci_allo)
+||||||| BASE   (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
+		   ALTERNATIVE("nop\n			nop",		       \
+			       "dsb ish\n		tlbi " #op ", %0",     \
+			       ARM64_WORKAROUND_REPEAT_TLBI,		       \
+			       CONFIG_ARM64_WORKAROUND_REPEAT_TLBI)	       \
+=======
+		   ALTERNATIVE("nop\n			nop",		       \
+			       "dsb ish\n		tlbi " #op ", %x0",    \
+			       ARM64_WORKAROUND_REPEAT_TLBI,		       \
+			       CONFIG_ARM64_WORKAROUND_REPEAT_TLBI)	       \
+>>>>>>> BRANCH (e4e7fdfb85cfb6d196279794fe8b862c51fcd08a arm64: tlb: Allow XZR argument to TLBI ops)
 			    : : "rZ" (arg))
 
 #define __TLBI_N(op, arg, n, ...) __TLBI_##n(op, arg)
