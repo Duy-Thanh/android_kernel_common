@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0b83297_8b69629e",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-10T17:07:47Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:SPACING: space required before the open brace \u0027{\u0027",
+      "range": {
+        "startLine": 1046,
+        "startChar": 0,
+        "endLine": 1047,
+        "endChar": 0
+      },
+      "revId": "6d5e3346ddee652467936f64597c1dc223274d12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
