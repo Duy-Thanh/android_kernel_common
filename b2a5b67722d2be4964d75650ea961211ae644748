@@ -16,6 +16,24 @@
       "message": "This is not a clean cherry-pick, so it should be relabeled as \"BACKPORT:\". Add an annotation about what changed (see example in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md)",
       "revId": "b2a5b67722d2be4964d75650ea961211ae644748",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c639790_dc1043b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1976920
+      },
+      "writtenOn": "2026-07-10T03:57:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273912cc_15fe3a68",
+      "revId": "b2a5b67722d2be4964d75650ea961211ae644748",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
