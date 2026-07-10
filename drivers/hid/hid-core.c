@@ -1769,8 +1769,16 @@ out:
 }
 EXPORT_SYMBOL_GPL(__hid_request);
 
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt)
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+int hid_report_raw_event(struct hid_device *hid, int type, u8 *data, u32 size,
+		int interrupt)
+=======
+int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt)
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 {
 	struct hid_report_enum *report_enum = hid->report_enum + type;
 	struct hid_report *report;
@@ -1912,7 +1920,13 @@ int hid_input_report(struct hid_device *hid, int type, u8 *data, u32 size, int i
 			goto unlock;
 	}
 
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 	ret = __hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	ret = hid_report_raw_event(hid, type, data, size, interrupt);
+=======
+	ret = hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 
 unlock:
 	up(&hid->driver_input_lock);

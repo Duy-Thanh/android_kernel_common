@@ -3439,8 +3439,16 @@ static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
 	consumer_report[0] = 0x03;
 	memcpy(&consumer_report[1], &data[3], 4);
 	/* We are called from atomic context */
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 	__hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
 			       consumer_report, sizeof(consumer_report), 5, 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+=======
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, sizeof(consumer_report), 5, 1);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 
 	return 1;
 }

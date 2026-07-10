@@ -65,16 +65,32 @@ static int gfrm_raw_event(struct hid_device *hdev, struct hid_report *report,
 	 */
 	switch (data[1]) {
 	case GFRM100_SEARCH_KEY_DOWN:
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
 					     sizeof(search_key_dn), sizeof(search_key_dn), 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), sizeof(search_key_dn), 1);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	case GFRM100_SEARCH_KEY_AUDIO_DATA:
 		break;
 
 	case GFRM100_SEARCH_KEY_UP:
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
 					     sizeof(search_key_up), sizeof(search_key_up), 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), sizeof(search_key_up), 1);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	default:

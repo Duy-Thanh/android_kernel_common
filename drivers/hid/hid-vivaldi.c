@@ -125,8 +125,16 @@ static void vivaldi_feature_mapping(struct hid_device *hdev,
 		report_len--;
 	}
 
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 	ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
 				     report_len, report_len, 0);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, 0);
+=======
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, report_len, 0);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 	if (ret) {
 		dev_warn(&hdev->dev, "failed to report feature %d\n",
 			 field->report->id);

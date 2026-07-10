@@ -1203,9 +1203,15 @@ static inline u32 hid_report_len(struct hid_report *report)
 }
 
 int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 			 u32 size, int interrupt);
 int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		int interrupt);
+=======
+			 size_t bufsize, u32 size, int interrupt);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 
 /* HID quirks API */
 unsigned long hid_lookup_quirk(const struct hid_device *hdev);

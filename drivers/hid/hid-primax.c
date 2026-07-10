@@ -44,7 +44,13 @@ static int px_raw_event(struct hid_device *hid, struct hid_report *report,
 			data[0] |= (1 << (data[idx] - 0xE0));
 			data[idx] = 0;
 		}
+<<<<<<< HEAD   (06b7b3a8d324c3a708319548981dccfdb3d60263 Revert "batman-adv: tp_meter: directly shut down timer on cl)
 		__hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, 0);
+=======
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+>>>>>>> BRANCH (8c15ac42db0c0afe723602ef483cf7109a4af0ac HID: core: Fix size_t specifier in hid_report_raw_event())
 		return 1;
 
 	default:	/* unknown report */
