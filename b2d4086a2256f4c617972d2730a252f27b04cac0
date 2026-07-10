@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "368eee9a_9b9ee514",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-07-10T17:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "544806ba_d1abaaea",
+      "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c46a6cec_a9401d62",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Judging from the linked bug, it\u0027s basically all the vts kernel_net_test ipsec/xfrm tests.",
       "parentUuid": "c46a6cec_a9401d62",
+      "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85941443_89f6f2d8",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-07-10T17:22:18Z",
+      "side": 1,
+      "message": "Done, but note that the set of tests doesn\u0027t really matter.\n\nThe key question is whether we still support 32-bit userspace.\nWe already don\u0027t on Pixel 8+ due to lack of cpu support, and on Pixel 7 due to lack of implementation.  So only Pixel 6 is left, which is near EOL, and AFAIK it\u0027s not going past 6.1.",
+      "parentUuid": "edfe1a24_68746e2a",
       "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
