@@ -33,6 +33,24 @@
       "message": "Can you provide more details on which test, so someone can easily re-confirm if this is needed some years from now in the future?",
       "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edfe1a24_68746e2a",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-07-10T17:16:09Z",
+      "side": 1,
+      "message": "Judging from the linked bug, it\u0027s basically all the vts kernel_net_test ipsec/xfrm tests.",
+      "parentUuid": "c46a6cec_a9401d62",
+      "revId": "b2d4086a2256f4c617972d2730a252f27b04cac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
