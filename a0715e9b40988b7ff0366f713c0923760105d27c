@@ -1,0 +1,80 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4631e7_f4812bd3",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-10T11:00:07Z",
+      "side": 1,
+      "message": "minor: Since we are checking pvmfw_load_addr, would it make sense to verify that pvmfw end(pvmfw_load_addr + pvmfw_size) also falls under 4G?",
+      "fixSuggestions": [
+        {
+          "fixId": "c3a32f49_e89bc6ed",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "\t\t    pvmfw_load_addr \u003e\u003e 32 !\u003d 0 ||\n\t\t    (pvmfw_load_addr + pvmfw_size) \u003e\u003e 32 !\u003d 0) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7de09f1b_7ced2024",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-10T11:00:07Z",
+      "side": 1,
+      "message": "super minor nit: Would it be better to check SZ_4G?",
+      "range": {
+        "startLine": 399,
+        "startChar": 6,
+        "endLine": 399,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2478ecea_a00282f2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "\t\t    pvmfw_load_addr \u003e\u003d SZ_4G) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
