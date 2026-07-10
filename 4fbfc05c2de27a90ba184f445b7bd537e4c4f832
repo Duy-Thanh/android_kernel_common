@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bf2822_79b9e440",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-10T17:39:30Z",
+      "side": 1,
+      "message": "nit: you can limit the scope of the `ret` variable by declaring it here.",
+      "range": {
+        "startLine": 134,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9fb8660a_0312b79c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "\t\tint ret \u003d file-\u003ef_op-\u003eiopoll(\u0026io_ctx-\u003ekiocb, NULL, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4fbfc05c2de27a90ba184f445b7bd537e4c4f832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b15b04_1d26cb02",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-10T17:39:30Z",
+      "side": 1,
+      "message": "nit: you can limit the scope of the ret variable by declaring it here.",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 7
+      },
+      "revId": "4fbfc05c2de27a90ba184f445b7bd537e4c4f832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
