@@ -22,6 +22,30 @@
       },
       "revId": "f83948e947ffb1a8b1798cd576bc7d58263d9279",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a771f2a8_30aedf76",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-07-10T13:17:38Z",
+      "side": 0,
+      "message": "Done in https://android-review.git.corp.google.com/c/kernel/common/+/4163127. Will abandon this patch",
+      "parentUuid": "1d521f62_8fcbc962",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 19
+      },
+      "revId": "f83948e947ffb1a8b1798cd576bc7d58263d9279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
