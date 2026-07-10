@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efda1776_31e84dfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-10T16:53:45Z",
+      "side": 1,
+      "message": "FROMGIT patches should have a line like:\n\n`(cherry picked from commit e624fb83ccb44e202e1d6d4dc74681bec4f8a597 https://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-pinctrl.git master)`",
+      "revId": "b593608bde79db4165c7acf110da97066e7f1ec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
