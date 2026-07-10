@@ -33,6 +33,24 @@
       "message": "This needs a follow on patch to add the symbols and update the kmi",
       "revId": "4e5c115a9d2590c68ab860354e3707671205b52f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78bd08a1_27821884",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-10T04:50:36Z",
+      "side": 1,
+      "message": "Nevermind, I found it and rebased it for you. Please submit vendorhook additions and KMI updates in a series going forward, rather then just two independent changes.",
+      "parentUuid": "c8f00025_11052573",
+      "revId": "4e5c115a9d2590c68ab860354e3707671205b52f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
