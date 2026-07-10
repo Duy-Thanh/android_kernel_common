@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daff19e1_e9490f9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-10T15:33:33Z",
+      "side": 1,
+      "message": "Please comply with the ACK contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nIn the bug you claim that this is already submitted upstream, so it should be labeled as FROMLIST, FROMGIT, or UPSTREAM (see link above).",
+      "revId": "8d55b5706619f70406359d58e55a11b914190a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a0b3d6d_050a2bbb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
