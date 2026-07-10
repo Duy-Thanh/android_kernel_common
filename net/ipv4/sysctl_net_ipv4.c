@@ -1428,11 +1428,17 @@ static __net_exit void ipv4_sysctl_exit_net(struct net *net)
 {
 	struct ctl_table *table;
 
+<<<<<<< HEAD   (7e958e2b7c4176afbf853861b91923ef7e0c70e5 Merge android13-5.15 into android13-5.15-lts)
 	kfree(net->ipv4.sysctl_local_unbindable_ports);
 	kfree(net->ipv4.sysctl_local_reserved_ports);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+	kfree(net->ipv4.sysctl_local_reserved_ports);
+=======
+>>>>>>> BRANCH (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
 	table = net->ipv4.ipv4_hdr->ctl_table_arg;
 	unregister_net_sysctl_table(net->ipv4.ipv4_hdr);
 	kfree(table);
+	kfree(net->ipv4.sysctl_local_reserved_ports);
 }
 
 static __net_initdata struct pernet_operations ipv4_sysctl_ops = {

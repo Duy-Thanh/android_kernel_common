@@ -141,7 +141,13 @@ static void ah_output_done(struct crypto_async_request *base, int err)
 	}
 
 	kfree(AH_SKB_CB(skb)->tmp);
+<<<<<<< HEAD   (7e958e2b7c4176afbf853861b91923ef7e0c70e5 Merge android13-5.15 into android13-5.15-lts)
 	xfrm_output_resume(skb, err);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+	xfrm_output_resume(skb->sk, skb, err);
+=======
+	xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+>>>>>>> BRANCH (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
 }
 
 static int ah_output(struct xfrm_state *x, struct sk_buff *skb)
