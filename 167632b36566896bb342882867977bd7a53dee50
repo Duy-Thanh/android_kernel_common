@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5e652b_a89992f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-10T15:13:40Z",
+      "side": 1,
+      "message": "this should be a short title. Add a description below the title.",
+      "revId": "167632b36566896bb342882867977bd7a53dee50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0ba3de_fb6d31c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-10T15:13:40Z",
+      "side": 1,
+      "message": "Need a space after the \u0027:\u0027",
+      "revId": "167632b36566896bb342882867977bd7a53dee50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3df9d7c_06da7fa3",
+        "filename": "kernel/power/process.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-10T15:13:40Z",
+      "side": 1,
+      "message": "Please explain in the commit message why this can\u0027t all be done inside a vendor hook handler. We are not going to take this out-of-tree change, so you\u0027re alternatives are to submit the logic change upstream, or implement all of this in a vendor hook handler (you can add a new hook if necessary)",
+      "revId": "167632b36566896bb342882867977bd7a53dee50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
