@@ -22,6 +22,7 @@
 
 #include <trace/hooks/power.h>
 
+#define ABORTED_FREEZE_TIME	5000
 /*
  * Timeout for stopping processes
  */
@@ -91,6 +92,22 @@ static int try_to_freeze_tasks(bool user_only)
 	if (wakeup) {
 		pr_err("Freezing %s aborted after %d.%03d seconds\n", what,
 		       elapsed_msecs / 1000, elapsed_msecs % 1000);
+
+		if (ABORTED_FREEZE_TIME <= elapsed_msecs && 0 < todo) {
+			trace_android_vh_try_to_freeze_todo_logging(&todo_logging_on);
+			if (pm_debug_messages_on || todo_logging_on) {
+				read_lock(&tasklist_lock);
+				for_each_process_thread(g, p) {
+					if (p != current && freezing(p) && !frozen(p)) {
+						sched_show_task(p);
+						trace_android_vh_try_to_freeze_todo_unfrozen(p);
+					}
+				}
+				read_unlock(&tasklist_lock);
+			}
+
+			trace_android_vh_try_to_freeze_todo(todo, elapsed_msecs, wq_busy);
+		}
 	} else if (todo) {
 		pr_err("Freezing %s failed after %d.%03d seconds "
 		       "(%d tasks refusing to freeze, wq_busy=%d):\n", what,
