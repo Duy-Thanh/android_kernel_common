@@ -4409,7 +4409,7 @@ static int selinux_kernel_read_file(struct file *file,
 {
 	int rc = 0;
 
-	BUILD_BUG_ON_MSG(READING_MAX_ID > 8,
+	BUILD_BUG_ON_MSG(READING_MAX_ID > 9,
 			 "New kernel_read_file_id introduced; update SELinux!");
 
 	switch (id) {
@@ -4435,6 +4435,10 @@ static int selinux_kernel_read_file(struct file *file,
 		rc = selinux_kernel_load_from_file(file,
 						SYSTEM__X509_CERTIFICATE_LOAD);
 		break;
+	case READING_BPF_LOADER:
+		rc = selinux_kernel_load_from_file(file,
+						SYSTEM__BPF_LOADER_LOAD);
+		break;
 	default:
 		break;
 	}
@@ -4446,7 +4450,7 @@ static int selinux_kernel_load_data(enum kernel_load_data_id id, bool contents)
 {
 	int rc = 0;
 
-	BUILD_BUG_ON_MSG(LOADING_MAX_ID > 8,
+	BUILD_BUG_ON_MSG(LOADING_MAX_ID > 9,
 			 "New kernel_load_data_id introduced; update SELinux!");
 
 	switch (id) {
@@ -4471,6 +4475,10 @@ static int selinux_kernel_load_data(enum kernel_load_data_id id, bool contents)
 	case LOADING_X509_CERTIFICATE:
 		rc = selinux_kernel_load_from_file(NULL,
 						SYSTEM__X509_CERTIFICATE_LOAD);
+		break;
+	case LOADING_BPF_LOADER:
+		rc = selinux_kernel_load_from_file(NULL,
+						SYSTEM__BPF_LOADER_LOAD);
 		break;
 	default:
 		break;
