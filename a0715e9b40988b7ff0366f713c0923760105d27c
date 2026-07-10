@@ -75,6 +75,48 @@
       ],
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0e0add_2e771422",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-10T11:08:36Z",
+      "side": 1,
+      "message": "pvmfw only starts in 32-bit mode, after that it quickly switches to 64-bit mode. So it is still legitimate for the entire pvmfw image to reach beyond the 32-bit space? (Even though it\u0027s very unlikely there will be use case for that.)",
+      "parentUuid": "fe4631e7_f4812bd3",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f967700_5878a0b4",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-10T11:08:36Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "7de09f1b_7ced2024",
+      "range": {
+        "startLine": 399,
+        "startChar": 6,
+        "endLine": 399,
+        "endChar": 21
+      },
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
