@@ -1207,9 +1207,15 @@ static inline u32 hid_report_len(struct hid_report *report)
 }
 
 int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 			 u32 size, int interrupt);
 int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+		int interrupt);
+=======
+			 size_t bufsize, u32 size, int interrupt);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 /* HID quirks API */
 unsigned long hid_lookup_quirk(const struct hid_device *hdev);

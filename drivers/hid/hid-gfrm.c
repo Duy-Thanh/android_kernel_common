@@ -65,16 +65,32 @@ static int gfrm_raw_event(struct hid_device *hdev, struct hid_report *report,
 	 */
 	switch (data[1]) {
 	case GFRM100_SEARCH_KEY_DOWN:
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
 					     sizeof(search_key_dn), sizeof(search_key_dn), 1);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), sizeof(search_key_dn), 1);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		break;
 
 	case GFRM100_SEARCH_KEY_AUDIO_DATA:
 		break;
 
 	case GFRM100_SEARCH_KEY_UP:
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
 					     sizeof(search_key_up), sizeof(search_key_up), 1);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), sizeof(search_key_up), 1);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		break;
 
 	default:

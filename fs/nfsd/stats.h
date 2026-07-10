@@ -10,6 +10,24 @@
 #include <uapi/linux/nfsd/stats.h>
 #include <linux/percpu_counter.h>
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+int nfsd_percpu_counters_init(struct percpu_counter *counters, int num);
+void nfsd_percpu_counters_reset(struct percpu_counter *counters, int num);
+void nfsd_percpu_counters_destroy(struct percpu_counter *counters, int num);
+int nfsd_stat_counters_init(struct nfsd_net *nn);
+void nfsd_stat_counters_destroy(struct nfsd_net *nn);
+void nfsd_proc_stat_init(struct net *net);
+void nfsd_proc_stat_shutdown(struct net *net);
+=======
+int nfsd_percpu_counters_init(struct percpu_counter *counters, int num);
+void nfsd_percpu_counters_reset(struct percpu_counter *counters, int num);
+void nfsd_percpu_counters_destroy(struct percpu_counter *counters, int num);
+int nfsd_stat_counters_init(struct nfsd_net *nn);
+void nfsd_stat_counters_destroy(struct nfsd_net *nn);
+struct proc_dir_entry *nfsd_proc_stat_init(struct net *net);
+void nfsd_proc_stat_shutdown(struct net *net);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 enum {
 	NFSD_STATS_RC_HITS,		/* repcache hits */

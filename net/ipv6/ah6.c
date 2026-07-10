@@ -338,7 +338,13 @@ static void ah6_output_done(struct crypto_async_request *base, int err)
 	ah6_restore_hdrs(top_iph, iph_ext, extlen);
 
 	kfree(AH_SKB_CB(skb)->tmp);
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 	xfrm_output_resume(skb, err);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+	xfrm_output_resume(skb->sk, skb, err);
+=======
+	xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 }
 
 static int ah6_output(struct xfrm_state *x, struct sk_buff *skb)

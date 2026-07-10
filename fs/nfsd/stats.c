@@ -126,10 +126,17 @@ static void nfsd_stat_counters_destroy(void)
 	nfsd_percpu_counters_destroy(nfsdstats.counter, NFSD_STATS_COUNTERS_NUM);
 }
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 int nfsd_stat_init(void)
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+void nfsd_proc_stat_init(struct net *net)
+=======
+struct proc_dir_entry *nfsd_proc_stat_init(struct net *net)
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 {
 	int err;
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 	err = nfsd_stat_counters_init();
 	if (err)
 		return err;
@@ -137,6 +144,11 @@ int nfsd_stat_init(void)
 	svc_proc_register(&init_net, &nfsd_svcstats, &nfsd_proc_ops);
 
 	return 0;
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+	svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+=======
+	return svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 }
 
 void nfsd_stat_shutdown(void)

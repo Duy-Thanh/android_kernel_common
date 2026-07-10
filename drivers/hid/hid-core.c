@@ -1768,8 +1768,16 @@ out:
 }
 EXPORT_SYMBOL_GPL(__hid_request);
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt)
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+int hid_report_raw_event(struct hid_device *hid, int type, u8 *data, u32 size,
+		int interrupt)
+=======
+int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt)
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 {
 	struct hid_report_enum *report_enum = hid->report_enum + type;
 	struct hid_report *report;
@@ -1911,7 +1919,13 @@ int hid_input_report(struct hid_device *hid, int type, u8 *data, u32 size, int i
 			goto unlock;
 	}
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 	ret = __hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+	ret = hid_report_raw_event(hid, type, data, size, interrupt);
+=======
+	ret = hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 unlock:
 	up(&hid->driver_input_lock);

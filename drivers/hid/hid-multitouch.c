@@ -478,8 +478,16 @@ static void mt_get_feature(struct hid_device *hdev, struct hid_report *report)
 			goto free;
 		}
 
+<<<<<<< HEAD   (03430462998ca989fb5d94d1f07fc06942f70e21 Merge android14-5.15 into android14-5.15-lts)
 		ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
 					     size, size, 0);
+||||||| BASE   (dc027a595035729e290c0adffae363a653acde7c Linux 5.15.209)
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, 0);
+=======
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, size, 0);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		if (ret)
 			dev_warn(&hdev->dev, "failed to report feature\n");
 	}
