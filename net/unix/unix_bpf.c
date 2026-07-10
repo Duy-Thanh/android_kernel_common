@@ -168,6 +168,41 @@ int unix_stream_bpf_update_proto(struct sock *sk, struct sk_psock *psock, bool r
 		return 0;
 	}
 
+<<<<<<< HEAD   (de332b0bdc3fc6d01d7c5f4a9d3b5444dba5ab85 Merge 43127ac6bc0a ("hrtimer: Reduce trace noise in hrtimer_)
+||||||| BASE   (43127ac6bc0a6e1f3d0e04cc79ac5f3915beacef hrtimer: Reduce trace noise in hrtimer_start())
+	/* psock_update_sk_prot can be called multiple times if psock is
+	 * added to multiple maps and/or slots in the same map. There is
+	 * also an edge case where replacing a psock with itself can trigger
+	 * an extra psock_update_sk_prot during the insert process. So it
+	 * must be safe to do multiple calls. Here we need to ensure we don't
+	 * increment the refcnt through sock_hold many times. There will only
+	 * be a single matching destroy operation.
+	 */
+	if (!psock->sk_pair) {
+		sk_pair = unix_peer(sk);
+		sock_hold(sk_pair);
+		psock->sk_pair = sk_pair;
+	}
+
+=======
+	/* psock_update_sk_prot can be called multiple times if psock is
+	 * added to multiple maps and/or slots in the same map. There is
+	 * also an edge case where replacing a psock with itself can trigger
+	 * an extra psock_update_sk_prot during the insert process. So it
+	 * must be safe to do multiple calls. Here we need to ensure we don't
+	 * increment the refcnt through sock_hold many times. There will only
+	 * be a single matching destroy operation.
+	 */
+	if (!psock->sk_pair) {
+		sk_pair = unix_peer(sk);
+		if (unlikely(!sk_pair))
+			return -EINVAL;
+
+		sock_hold(sk_pair);
+		psock->sk_pair = sk_pair;
+	}
+
+>>>>>>> BRANCH (1f9dd6f665ece0ba211e6267f6e2cf483b2ac796 ASoC: codecs: ab8500: Fix casting of private data)
 	unix_stream_bpf_check_needs_rebuild(psock->sk_proto);
 	sock_replace_proto(sk, &unix_stream_bpf_prot);
 	return 0;
