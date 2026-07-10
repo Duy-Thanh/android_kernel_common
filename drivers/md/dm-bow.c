@@ -1202,28 +1202,28 @@ static void dm_bow_tablestatus(struct dm_target *ti, char *result,
 		return;
 	result[0] = 0;
 
-	mutex_lock(&bc->ranges_lock);
 	list_for_each_entry(br, &bc->trimmed_list, trimmed_list)
 		if (br->type == TRIMMED) {
 			++trimmed_list_length;
 		} else {
 			scnprintf(result, end - result,
 				  "ERROR: non-trimmed entry in trimmed_list");
-			goto unlock;
+			return;
 		}
 
 	if (!rb_first(&bc->ranges)) {
 		scnprintf(result, end - result, "ERROR: Empty ranges");
-		goto unlock;
+		return;
 	}
 
 	if (container_of(rb_first(&bc->ranges), struct bow_range, node)
 	    ->sector) {
 		scnprintf(result, end - result,
 			 "ERROR: First range does not start at sector 0");
-		goto unlock;
+		return;
 	}
 
+	mutex_lock(&bc->ranges_lock);
 	for (i = rb_first(&bc->ranges); i; i = rb_next(i)) {
 		struct bow_range *br = container_of(i, struct bow_range, node);
 
