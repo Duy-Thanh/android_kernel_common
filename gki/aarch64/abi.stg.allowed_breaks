@@ -267,3 +267,9 @@ type 'union bindings::bindings_raw::task_struct__bindgen_ty_2' changed
   member 'struct bindings::bindings_raw::cpumask cpumask_sme_dvmsync[1]' was removed
   member 'u64 __donotuse_b448672457' was added
 
+function symbol 'int walk_page_range(struct mm_struct*, unsigned long, unsigned long, const struct mm_walk_ops*, void*)' changed
+  CRC changed from 0xe331e5b8 to 0xd0e6bbfd
+
+type 'enum page_walk_lock' changed
+  enumerator 'PGWALK_VMA_RDLOCK_VERIFY' (3) was added
+
