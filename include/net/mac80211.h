@@ -2030,6 +2030,7 @@ struct ieee80211_nan_sched_cfg {
 	u16 avail_blob_len;
 	bool deferred;
 };
+/**
  * struct ieee80211_vif_cfg - interface configuration
  * @assoc: association status
  * @ibss_joined: indicates whether this station is part of an IBSS or not
