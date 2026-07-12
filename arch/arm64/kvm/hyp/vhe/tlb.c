@@ -146,5 +146,24 @@ void __kvm_flush_vm_context(void)
 {
 	dsb(ishst);
 	__tlbi(alle1is);
+<<<<<<< HEAD   (de542da96357bdeec35b65885dc20aece5e5d3e1 Revert "net/sched: act_api: use RCU with deferred freeing fo)
 	__tlbi_sync_s1ish_hyp();
+||||||| BASE   (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
+
+	/*
+	 * VIPT and PIPT caches are not affected by VMID, so no maintenance
+	 * is necessary across a VMID rollover.
+	 *
+	 * VPIPT caches constrain lookup and maintenance to the active VMID,
+	 * so we need to invalidate lines with a stale VMID to avoid an ABA
+	 * race after multiple rollovers.
+	 *
+	 */
+	if (icache_is_vpipt())
+		asm volatile("ic ialluis");
+
+	dsb(ish);
+=======
+	dsb(ish);
+>>>>>>> BRANCH (e4e7fdfb85cfb6d196279794fe8b862c51fcd08a arm64: tlb: Allow XZR argument to TLBI ops)
 }
