@@ -34,6 +34,18 @@
 
 #define __TLBI_1(op, arg) asm (ARM64_ASM_PREAMBLE			       \
 			       "tlbi " #op ", %x0\n"			       \
+<<<<<<< HEAD   (6fd8fea8fd6ec02169383e16715eb1351d216e72 Revert "net/sched: act_api: use RCU with deferred freeing fo)
+||||||| BASE   (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
+		   ALTERNATIVE("nop\n			nop",		       \
+			       "dsb ish\n		tlbi " #op ", %0",     \
+			       ARM64_WORKAROUND_REPEAT_TLBI,		       \
+			       CONFIG_ARM64_WORKAROUND_REPEAT_TLBI)	       \
+=======
+		   ALTERNATIVE("nop\n			nop",		       \
+			       "dsb ish\n		tlbi " #op ", %x0",    \
+			       ARM64_WORKAROUND_REPEAT_TLBI,		       \
+			       CONFIG_ARM64_WORKAROUND_REPEAT_TLBI)	       \
+>>>>>>> BRANCH (e4e7fdfb85cfb6d196279794fe8b862c51fcd08a arm64: tlb: Allow XZR argument to TLBI ops)
 			    : : "rZ" (arg))
 
 #define __TLBI_N(op, arg, n, ...) __TLBI_##n(op, arg)
