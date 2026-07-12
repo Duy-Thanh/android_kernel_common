@@ -22,6 +22,30 @@
       },
       "revId": "4821554271d629b6d2974963e916b070b076b4e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df869d8_eb1d2cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1587335
+      },
+      "writtenOn": "2026-07-12T10:59:25Z",
+      "side": 1,
+      "message": "I\u0027ve split the file, however a lot of those structs are expected by reset handlers, based on existing handlers. My current handler is a no-op and I don\u0027t expect it to ever need any of these struts, but our case is pretty unusual.\n\nI believe the general case of registering a reset handlers will still need access to at least `vfio_platform_device` and `vfio_platform_region`",
+      "parentUuid": "98c43904_8f82b141",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 53
+      },
+      "revId": "4821554271d629b6d2974963e916b070b076b4e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
