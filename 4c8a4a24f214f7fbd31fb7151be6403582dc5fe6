@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2e1ecb_9f29a845",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-12T09:01:03Z",
+      "side": 1,
+      "message": "Return without releasing the hyp spinlock. ditto for the line 209 and line 213.",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 17
+      },
+      "revId": "4c8a4a24f214f7fbd31fb7151be6403582dc5fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbbfa68_51267e4c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-12T09:01:03Z",
+      "side": 1,
+      "message": "Should we WARN_ON(!__pkvm_hyp_donate_host(..)); ? the same with the line 241;",
+      "range": {
+        "startLine": 239,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 52
+      },
+      "revId": "4c8a4a24f214f7fbd31fb7151be6403582dc5fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
