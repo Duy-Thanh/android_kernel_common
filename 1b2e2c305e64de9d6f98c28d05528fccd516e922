@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0982af00_2a605679",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5283,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-12T08:42:21Z",
+      "side": 1,
+      "message": "SUPERNIT: we can drop the brackets for one liners",
+      "range": {
+        "startLine": 5283,
+        "startChar": 1,
+        "endLine": 5283,
+        "endChar": 2
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29e93434_a95e7cdf",
         "filename": "drivers/irqchip/irq-gic-v3-its.c",
         "patchSetId": 7
