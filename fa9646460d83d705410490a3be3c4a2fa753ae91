@@ -34,6 +34,23 @@
       "parentUuid": "be185e13_df0fa461",
       "revId": "fa9646460d83d705410490a3be3c4a2fa753ae91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0035ea_375e3229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5000008
+      },
+      "writtenOn": "2026-07-12T19:12:01Z",
+      "side": 1,
+      "message": "You are a highly experienced code reviewer specializing in Git patches. Your\ntask is to analyze the provided Git patch (`patch`) and provide comprehensive\nfeedback.  Focus on identifying potential bugs, inconsistencies, security\nvulnerabilities, and areas for improvement in code style and readability.\nYour response should be detailed and constructive, offering specific suggestions\nfor remediation where applicable. Prioritize clarity and conciseness in your\nfeedback.\n\n# Step by Step Instructions\n\n1.  Read the provided `patch` carefully.  Understand the changes it introduces to the codebase.\n\n2.  Analyze the `patch` for potential issues:\n    * **Functionality:** Does the code work as intended? Are there any bugs or unexpected behavior?\n    * **Security:** Are there any security vulnerabilities introduced by the patch?\n    * **Style:** Does the code adhere to the project\u0027s coding style guidelines? Is it readable and maintainable?\n    * **Consistency:** Are there any inconsistencies with existing code or design patterns?\n    * **Testing:** Does the patch include sufficient tests to cover the changes?\n\n3.  Formulate concise and constructive feedback for each identified issue.  Provide specific suggestions for remediation where possible.\n\n4.  Summarize your findings in a clear and organized manner.  Prioritize critical issues over minor ones.\n\n5.  Review the feedback written so far. Is the feedback comprehensive and sufficiently detailed?\nIf not, go back to step 2, focusing on any areas that require further analysis or clarification.\n If yes, proceed to step 6.\n\n6.  Output the complete review.\n\n\nPatch: \n\"\"\"\nFrom fa9646460d83d705410490a3be3c4a2fa753ae91 Mon Sep 17 00:00:00 2001\nDate: Thu, 26 Feb 2026 08:22:32 +0000\nSubject: [PATCH] UPSTREAM: arm64: Fix sampling the \"stable\" virtual counter in preemptible section\n\n[ Upstream commit e5cb94ba5f96d691d8885175d4696d6ae6bc5ec9 ]\n\nBen reports that when running with CONFIG_DEBUG_PREEMPT, using\n__arch_counter_get_cntvct_stable() results in well deserves warnings,\nas we access a per-CPU variable without preemption disabled.\n\nFix the issue by disabling preemption on reading the counter. We can\nprobably do a lot better by not disabling preemption on systems that\ndo not require horrible workarounds to return a valid counter value,\nbut this plugs the issue for the time being.\n\nFixes: 29cc0f3aa7c6 (\"arm64: Force the use of CNTVCT_EL0 in __delay()\")\nReported-by: Ben Horgan \u003cben.horgan@arm.com\u003e\nSigned-off-by: Marc Zyngier \u003cmaz@kernel.org\u003e\nLink: https://lore.kernel.org/r/aZw3EGs4rbQvbAzV@e134344.arm.com\nTested-by: Ben Horgan \u003cben.horgan@arm.com\u003e\nTested-by: André Draszik \u003candre.draszik@linaro.org\u003e\nSigned-off-by: Will Deacon \u003cwill@kernel.org\u003e\nSigned-off-by: Sasha Levin \u003csashal@kernel.org\u003e\n\nBug: 530578759\nBug: 529381146\nChange-Id: I48175029cfd763ce22881ee69fb602b349f30d69\n(cherry picked from commit 9f3ffd49da12d8369efeae50234530b27cc0bb1d)\nSigned-off-by: Giuliano Procida \u003cgprocida@google.com\u003e\n---\n\ndiff --git a/arch/arm64/lib/delay.c b/arch/arm64/lib/delay.c\nindex d0234130..e278e06 100644\n--- a/arch/arm64/lib/delay.c\n+++ b/arch/arm64/lib/delay.c\n@@ -32,7 +32,11 @@ static inline unsigned long xloops_to_cycles(unsigned long xloops)\n  * Note that userspace cannot change the offset behind our back either,\n  * as the vcpu mutex is held as long as KVM_RUN is in progress.\n  */\n-#define __delay_cycles()\t__arch_counter_get_cntvct_stable()\n+static cycles_t notrace __delay_cycles(void)\n+{\n+\tguard(preempt_notrace)();\n+\treturn __arch_counter_get_cntvct_stable();\n+}\n \n void __delay(unsigned long cycles)\n {\n\n\"\"\"\nIMPORTANT NOTE: Start directly with the output, do not output any delimiters.\nTake a Deep Breath, read the instructions again, read the inputs again. Each instruction is crucial and must be executed with utmost care and attention to detail.\n\nReview:",
+      "revId": "fa9646460d83d705410490a3be3c4a2fa753ae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
