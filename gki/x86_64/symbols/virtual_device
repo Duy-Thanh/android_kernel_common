@@ -1339,3 +1339,14 @@
   xa_erase
   xa_find
   xa_find_after
+  kvm_para_available
+  cc_platform_has
+  set_memory_decrypted
+  slow_virt_to_phys
+  pvclock_get_pvti_cpu0_va
+  pkvm_guest_detected
+  set_memory_encrypted
+  hv_clock_per_cpu
+  get_device_system_crosststamp
+  ptp_clock_register
+  ptp_clock_unregister
