@@ -16,6 +16,24 @@
       "message": "4168907: UPSTREAM: arm64: Fix sampling the \"stable\" virtual counter in preemptible section | https://android-review.googlesource.com/c/kernel/common/+/4168907",
       "revId": "fa9646460d83d705410490a3be3c4a2fa753ae91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d83534d_fb5eac32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5000008
+      },
+      "writtenOn": "2026-07-12T18:42:00Z",
+      "side": 1,
+      "message": "\u003e 4168907: UPSTREAM: arm64: Fix sampling the \"stable\" virtual counter in preemptible section | https://android-review.googlesource.com/c/kernel/common/+/4168907",
+      "parentUuid": "be185e13_df0fa461",
+      "revId": "fa9646460d83d705410490a3be3c4a2fa753ae91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
