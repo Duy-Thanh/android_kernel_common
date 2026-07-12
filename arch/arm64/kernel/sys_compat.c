@@ -32,6 +32,28 @@ __do_compat_cache_op(unsigned long start, unsigned long end)
 		if (fatal_signal_pending(current))
 			return 0;
 
+<<<<<<< HEAD   (e193e88d68f2aaeaa92485bacbe5b474af228dc1 Merge e4e7fdfb85cf ("arm64: tlb: Allow XZR argument to TLBI )
+||||||| BASE   (e4e7fdfb85cfb6d196279794fe8b862c51fcd08a arm64: tlb: Allow XZR argument to TLBI ops)
+		if (cpus_have_const_cap(ARM64_WORKAROUND_1542419)) {
+			/*
+			 * The workaround requires an inner-shareable tlbi.
+			 * We pick the reserved-ASID to minimise the impact.
+			 */
+			__tlbi(aside1is, __TLBI_VADDR(0, 0));
+			dsb(ish);
+		}
+
+=======
+		if (cpus_have_const_cap(ARM64_WORKAROUND_1542419)) {
+			/*
+			 * The workaround requires an inner-shareable tlbi.
+			 * We pick the reserved-ASID to minimise the impact.
+			 */
+			__tlbi(aside1is, __TLBI_VADDR(0, 0));
+			__tlbi_sync_s1ish();
+		}
+
+>>>>>>> BRANCH (dbf672e0dec26a9755444fddee54aa7862b4de10 arm64: tlb: Optimize ARM64_WORKAROUND_REPEAT_TLBI)
 		ret = caches_clean_inval_user_pou(start, start + chunk);
 		if (ret)
 			return ret;
