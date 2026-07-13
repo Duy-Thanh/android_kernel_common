@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e54bf296_4ca2fb73",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:05:37Z",
+      "side": 1,
+      "message": "`value \u0026\u003d ~GENMASK(7, 0) | ~GENMASK_ULL(51, 12)` parses as `value \u0026\u003d ~(GENMASK(7,0) \u0026 GENMASK(51,12))`, and those ranges are disjoint, so the mask is all-ones and clears nothing. Neither the Size field [7:0] nor the queue Physical_Address [51:12] is cleared before the hyp values are OR\u0027d in, so host address bits survive into the physical GITS_CBASER and can steer the command queue away from the sanitized shadow. Should be `value \u0026\u003d ~(GENMASK(7, 0) | GENMASK_ULL(51, 12));`",
+      "revId": "b276a8681a390cf6e5097efc877f7f833dba771c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
