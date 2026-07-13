@@ -62,6 +62,24 @@
       "parentUuid": "6b1281ce_f75ee178",
       "revId": "3c02296352d555ed5c4980756735ec6676679f93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a7e5bc_98380398",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T10:05:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd4d8289_7a39940d",
+      "revId": "3c02296352d555ed5c4980756735ec6676679f93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

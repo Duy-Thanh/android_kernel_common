@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b221120_6c2ea970",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T10:05:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bd5abf96_3aeead7d",
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a1306f_25b4354e",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557d9c8a_8431b645",
+        "filename": "arch/x86/kvm/pkvm/panic.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T10:05:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c2a1306f_25b4354e",
       "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
