@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ab054ae_e2eaec4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T13:45:45Z",
+      "side": 1,
+      "message": "\"In a direct layout configuration, donate the table...\" but `pkvm_setup_its_shadow_baser()` donates the hardware table unconditionally on every iteration, independent of `GITS_BASER_INDIRECT`, so the message and the code disagree (I raised this on RFC v1). Please make the log match the code, and add the missing \"why\": the threat is a host with write access to the ITS tables, the mechanism is unconditional donation of the hardware tables to EL2 plus, for indirect Device/vPE tables, sharing an L1 shadow while donating the L2 pages. And one line on why Collection tables are left host-accessible.",
+      "revId": "6029c4dae3db8cb36a7297871683050773de76c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
