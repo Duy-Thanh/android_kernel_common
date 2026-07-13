@@ -1270,11 +1270,20 @@ retry:
 
 	if (folio_test_large(folio)) {
 		pgoff_t folio_index = mapping_align_index(mapping, index);
+		unsigned long nr_pages = folio_nr_pages(folio);
 
 		f2fs_folio_put(folio, true);
 		invalidate_inode_pages2_range(mapping, folio_index,
+<<<<<<< HEAD   (b0c0afbbc28a4df141161de7e48890a2c4b04758 ANDROID: do not account memcg limiting as global PSI stall)
 				folio_index + folio_nr_pages(folio) - 1);
 		f2fs_io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+||||||| BASE   (2a019038e8dc33fffa828653cd8ed59287b180e7 ANDROID: fuse: give wakeup hints to the scheduler without br)
+				folio_index + folio_nr_pages(folio) - 1);
+		f2fs_schedule_timeout(DEFAULT_SCHEDULE_TIMEOUT);
+=======
+				folio_index + nr_pages - 1);
+		f2fs_schedule_timeout(DEFAULT_SCHEDULE_TIMEOUT);
+>>>>>>> CHANGE (5acc164ef3e9858f0ed6fdc8dc85acbcd786021d BACKPORT: FROMGIT: f2fs: fix folio_nr_pages() race after put)
 		goto retry;
 	}
 
