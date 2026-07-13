@@ -969,8 +969,7 @@ int kvm_vgic_vcpu_pending_irq(struct kvm_vcpu *vcpu)
 	list_for_each_entry(irq, &vgic_cpu->ap_list_head, ap_list) {
 		raw_spin_lock(&irq->irq_lock);
 		pending = irq_is_pending(irq) && irq->enabled &&
-			  !irq->active &&
-			  irq->priority < vmcr.pmr;
+			  !irq->active;
 		raw_spin_unlock(&irq->irq_lock);
 
 		if (pending)
