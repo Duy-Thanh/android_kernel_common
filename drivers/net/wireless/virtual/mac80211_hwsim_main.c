@@ -4,7 +4,7 @@
  * Copyright (c) 2008, Jouni Malinen <j@w1.fi>
  * Copyright (c) 2011, Javier Lopez <jlopex@gmail.com>
  * Copyright (c) 2016 - 2017 Intel Deutschland GmbH
- * Copyright (C) 2018 - 2023 Intel Corporation
+ * Copyright (C) 2018 - 2026 Intel Corporation
  */
 
 /*
@@ -36,7 +36,10 @@
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
+#include <linux/uaccess.h>
+#include <linux/string.h>
 #include "mac80211_hwsim.h"
+#include "mac80211_hwsim_i.h"
 
 #define WARN_QUEUE 100
 #define MAX_QUEUE 200
@@ -69,17 +72,12 @@ static bool mlo;
 module_param(mlo, bool, 0444);
 MODULE_PARM_DESC(mlo, "Support MLO");
 
+static bool multi_radio;
+module_param(multi_radio, bool, 0444);
+MODULE_PARM_DESC(multi_radio, "Support Multiple Radios per wiphy");
+
 /**
  * enum hwsim_regtest - the type of regulatory tests we offer
- *
- * These are the different values you can use for the regtest
- * module parameter. This is useful to help test world roaming
- * and the driver regulatory_hint() call and combinations of these.
- * If you want to do specific alpha2 regulatory domain tests simply
- * use the userspace regulatory request as that will be respected as
- * well without the need of this module parameter. This is designed
- * only for testing the driver regulatory request, world roaming
- * and all possible combinations.
  *
  * @HWSIM_REGTEST_DISABLED: No regulatory tests are performed,
  * 	this is the default value.
@@ -125,6 +123,15 @@ MODULE_PARM_DESC(mlo, "Support MLO");
  * 	    domain request
  * 	6 and on - should follow the intersection of the 3rd, 4rth and 5th radio
  * 	           regulatory requests.
+ *
+ * These are the different values you can use for the regtest
+ * module parameter. This is useful to help test world roaming
+ * and the driver regulatory_hint() call and combinations of these.
+ * If you want to do specific alpha2 regulatory domain tests simply
+ * use the userspace regulatory request as that will be respected as
+ * well without the need of this module parameter. This is designed
+ * only for testing the driver regulatory request, world roaming
+ * and all possible combinations.
  */
 enum hwsim_regtest {
 	HWSIM_REGTEST_DISABLED = 0,
@@ -190,14 +197,33 @@ static const struct ieee80211_regdomain hwsim_world_regdom_custom_03 = {
 	}
 };
 
+static const struct ieee80211_regdomain hwsim_world_regdom_custom_04 = {
+	.n_reg_rules = 6,
+	.alpha2 =  "99",
+	.reg_rules = {
+		REG_RULE(2412 - 10, 2462 + 10, 40, 0, 20, 0),
+		REG_RULE(2484 - 10, 2484 + 10, 40, 0, 20, 0),
+		REG_RULE(5150 - 10, 5240 + 10, 80, 0, 30, NL80211_RRF_AUTO_BW),
+		REG_RULE(5260 - 10, 5320 + 10, 80, 0, 30,
+			 NL80211_RRF_DFS_CONCURRENT | NL80211_RRF_DFS |
+			 NL80211_RRF_AUTO_BW),
+		REG_RULE(5500 - 10, 5720 + 10, 160, 0, 30,
+			 NL80211_RRF_DFS_CONCURRENT | NL80211_RRF_DFS),
+		REG_RULE(5745 - 10, 5825 + 10, 80, 0, 30, 0),
+		REG_RULE(5855 - 10, 5925 + 10, 80, 0, 33, 0),
+	}
+};
+
 static const struct ieee80211_regdomain *hwsim_world_regdom_custom[] = {
 	&hwsim_world_regdom_custom_01,
 	&hwsim_world_regdom_custom_02,
 	&hwsim_world_regdom_custom_03,
+	&hwsim_world_regdom_custom_04,
 };
 
 struct hwsim_vif_priv {
 	u32 magic;
+	u32 skip_beacons[IEEE80211_MLD_MAX_NUM_LINKS];
 	u8 bssid[ETH_ALEN];
 	bool assoc;
 	bool bcn_en;
@@ -225,14 +251,6 @@ static inline void hwsim_clear_magic(struct ieee80211_vif *vif)
 	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
 	vp->magic = 0;
 }
-
-struct hwsim_sta_priv {
-	u32 magic;
-	unsigned int last_link;
-	u16 active_links_rx;
-};
-
-#define HWSIM_STA_MAGIC	0x6d537749
 
 static inline void hwsim_check_sta_magic(struct ieee80211_sta *sta)
 {
@@ -314,7 +332,9 @@ static inline void hwsim_net_set_wmediumd(struct net *net, u32 portid)
 	hwsim_net->wmediumd = portid;
 }
 
-static struct class *hwsim_class;
+static const struct class hwsim_class = {
+	.name	= "mac80211_hwsim"
+};
 
 static struct net_device *hwsim_mon; /* global monitor netdev */
 
@@ -336,6 +356,14 @@ static struct net_device *hwsim_mon; /* global monitor netdev */
 	.hw_value = (_freq), \
 }
 
+#define CHANS1G(_freq, _offset, _flags) { \
+	.band = NL80211_BAND_S1GHZ, \
+	.center_freq = (_freq), \
+	.freq_offset = (_offset), \
+	.hw_value = (_freq), \
+	.flags = (_flags), \
+}
+
 static const struct ieee80211_channel hwsim_channels_2ghz[] = {
 	CHAN2G(2412), /* Channel 1 */
 	CHAN2G(2417), /* Channel 2 */
@@ -352,6 +380,8 @@ static const struct ieee80211_channel hwsim_channels_2ghz[] = {
 	CHAN2G(2472), /* Channel 13 */
 	CHAN2G(2484), /* Channel 14 */
 };
+static_assert(HWSIM_NUM_CHANNELS_2GHZ == ARRAY_SIZE(hwsim_channels_2ghz),
+	      "Inconsistent 2 GHz channel count");
 
 static const struct ieee80211_channel hwsim_channels_5ghz[] = {
 	CHAN5G(5180), /* Channel 36 */
@@ -401,6 +431,8 @@ static const struct ieee80211_channel hwsim_channels_5ghz[] = {
 	CHAN5G(5920), /* Channel 184 */
 	CHAN5G(5925), /* Channel 185 */
 };
+static_assert(HWSIM_NUM_CHANNELS_5GHZ == ARRAY_SIZE(hwsim_channels_5ghz),
+	      "Inconsistent 5 GHz channel count");
 
 static const struct ieee80211_channel hwsim_channels_6ghz[] = {
 	CHAN6G(5955), /* Channel 1 */
@@ -463,9 +495,41 @@ static const struct ieee80211_channel hwsim_channels_6ghz[] = {
 	CHAN6G(7095), /* Channel 229 */
 	CHAN6G(7115), /* Channel 233 */
 };
+static_assert(HWSIM_NUM_CHANNELS_6GHZ == ARRAY_SIZE(hwsim_channels_6ghz),
+	      "Inconsistent 6 GHz channel count");
 
-#define NUM_S1G_CHANS_US 51
-static struct ieee80211_channel hwsim_channels_s1g[NUM_S1G_CHANS_US];
+/*
+ * US 2024 channels (op class 1). Additionally to emulate real world
+ * US operation, the edgeband 1MHz channels (1, 51) are marked as NO_PRIMARY.
+ */
+static const struct ieee80211_channel hwsim_channels_s1g[] = {
+	CHANS1G(902, 500, IEEE80211_CHAN_NO_IR), /* Channel 1 */
+	CHANS1G(903, 500, 0), /* Channel 3 */
+	CHANS1G(904, 500, 0), /* Channel 5 */
+	CHANS1G(905, 500, 0), /* Channel 7 */
+	CHANS1G(906, 500, 0), /* Channel 9 */
+	CHANS1G(907, 500, 0), /* Channel 11 */
+	CHANS1G(908, 500, 0), /* Channel 13 */
+	CHANS1G(909, 500, 0), /* Channel 15 */
+	CHANS1G(910, 500, 0), /* Channel 17 */
+	CHANS1G(911, 500, 0), /* Channel 19 */
+	CHANS1G(912, 500, 0), /* Channel 21 */
+	CHANS1G(913, 500, 0), /* Channel 23 */
+	CHANS1G(914, 500, 0), /* Channel 25 */
+	CHANS1G(915, 500, 0), /* Channel 27 */
+	CHANS1G(916, 500, 0), /* Channel 29 */
+	CHANS1G(917, 500, 0), /* Channel 31 */
+	CHANS1G(918, 500, 0), /* Channel 33 */
+	CHANS1G(919, 500, 0), /* Channel 35 */
+	CHANS1G(920, 500, 0), /* Channel 37 */
+	CHANS1G(921, 500, 0), /* Channel 39 */
+	CHANS1G(922, 500, 0), /* Channel 41 */
+	CHANS1G(923, 500, 0), /* Channel 43 */
+	CHANS1G(924, 500, 0), /* Channel 45 */
+	CHANS1G(925, 500, 0), /* Channel 47 */
+	CHANS1G(926, 500, 0), /* Channel 49 */
+	CHANS1G(927, 500, IEEE80211_CHAN_NO_IR), /* Channel 51 */
+};
 
 static const struct ieee80211_sta_s1g_cap hwsim_s1g_cap = {
 	.s1g = true,
@@ -494,19 +558,6 @@ static const struct ieee80211_sta_s1g_cap hwsim_s1g_cap = {
 		     0 },
 };
 
-static void hwsim_init_s1g_channels(struct ieee80211_channel *chans)
-{
-	int ch, freq;
-
-	for (ch = 0; ch < NUM_S1G_CHANS_US; ch++) {
-		freq = 902000 + (ch + 1) * 500;
-		chans[ch].band = NL80211_BAND_S1GHZ;
-		chans[ch].center_freq = KHZ_TO_MHZ(freq);
-		chans[ch].freq_offset = freq % 1000;
-		chans[ch].hw_value = ch + 1;
-	}
-}
-
 static const struct ieee80211_rate hwsim_rates[] = {
 	{ .bitrate = 10 },
 	{ .bitrate = 20, .flags = IEEE80211_RATE_SHORT_PREAMBLE },
@@ -521,6 +572,8 @@ static const struct ieee80211_rate hwsim_rates[] = {
 	{ .bitrate = 480 },
 	{ .bitrate = 540 }
 };
+static_assert(HWSIM_NUM_RATES == ARRAY_SIZE(hwsim_rates),
+	      "Inconsistent rates count");
 
 #define DEFAULT_RX_RSSI -50
 
@@ -537,6 +590,8 @@ static const u32 hwsim_ciphers[] = {
 	WLAN_CIPHER_SUITE_BIP_GMAC_128,
 	WLAN_CIPHER_SUITE_BIP_GMAC_256,
 };
+static_assert(HWSIM_NUM_CIPHERS == ARRAY_SIZE(hwsim_ciphers),
+	      "Inconsistent cipher count");
 
 #define OUI_QCA 0x001374
 #define QCA_NL80211_SUBCMD_TEST 1
@@ -617,8 +672,8 @@ static const struct nl80211_vendor_cmd_info mac80211_hwsim_vendor_events[] = {
 	{ .vendor_id = OUI_QCA, .subcmd = 1 },
 };
 
-static DEFINE_SPINLOCK(hwsim_radio_lock);
-static LIST_HEAD(hwsim_radios);
+DEFINE_SPINLOCK(hwsim_radio_lock);
+LIST_HEAD(hwsim_radios);
 static struct rhashtable hwsim_radios_rht;
 static int hwsim_radio_idx;
 static int hwsim_radios_generation = 1;
@@ -629,109 +684,11 @@ static struct platform_driver mac80211_hwsim_driver = {
 	},
 };
 
-struct mac80211_hwsim_link_data {
-	u32 link_id;
-	u64 beacon_int	/* beacon interval in us */;
-	struct hrtimer beacon_timer;
-};
-
-struct mac80211_hwsim_data {
-	struct list_head list;
-	struct rhash_head rht;
-	struct ieee80211_hw *hw;
-	struct device *dev;
-	struct ieee80211_supported_band bands[NUM_NL80211_BANDS];
-	struct ieee80211_channel channels_2ghz[ARRAY_SIZE(hwsim_channels_2ghz)];
-	struct ieee80211_channel channels_5ghz[ARRAY_SIZE(hwsim_channels_5ghz)];
-	struct ieee80211_channel channels_6ghz[ARRAY_SIZE(hwsim_channels_6ghz)];
-	struct ieee80211_channel channels_s1g[ARRAY_SIZE(hwsim_channels_s1g)];
-	struct ieee80211_rate rates[ARRAY_SIZE(hwsim_rates)];
-	struct ieee80211_iface_combination if_combination;
-	struct ieee80211_iface_limit if_limits[3];
-	int n_if_limits;
-
-	u32 ciphers[ARRAY_SIZE(hwsim_ciphers)];
-
-	struct mac_address addresses[2];
-	int channels, idx;
-	bool use_chanctx;
-	bool destroy_on_close;
-	u32 portid;
-	char alpha2[2];
-	const struct ieee80211_regdomain *regd;
-
-	struct ieee80211_channel *tmp_chan;
-	struct ieee80211_channel *roc_chan;
-	u32 roc_duration;
-	struct delayed_work roc_start;
-	struct delayed_work roc_done;
-	struct delayed_work hw_scan;
-	struct cfg80211_scan_request *hw_scan_request;
-	struct ieee80211_vif *hw_scan_vif;
-	int scan_chan_idx;
-	u8 scan_addr[ETH_ALEN];
-	struct {
-		struct ieee80211_channel *channel;
-		unsigned long next_start, start, end;
-	} survey_data[ARRAY_SIZE(hwsim_channels_2ghz) +
-		      ARRAY_SIZE(hwsim_channels_5ghz) +
-		      ARRAY_SIZE(hwsim_channels_6ghz)];
-
-	struct ieee80211_channel *channel;
-	enum nl80211_chan_width bw;
-	unsigned int rx_filter;
-	bool started, idle, scanning;
-	struct mutex mutex;
-	enum ps_mode {
-		PS_DISABLED, PS_ENABLED, PS_AUTO_POLL, PS_MANUAL_POLL
-	} ps;
-	bool ps_poll_pending;
-	struct dentry *debugfs;
-
-	atomic_t pending_cookie;
-	struct sk_buff_head pending;	/* packets pending */
-	/*
-	 * Only radios in the same group can communicate together (the
-	 * channel has to match too). Each bit represents a group. A
-	 * radio can be in more than one group.
-	 */
-	u64 group;
-
-	/* group shared by radios created in the same netns */
-	int netgroup;
-	/* wmediumd portid responsible for netgroup of this radio */
-	u32 wmediumd;
-
-	/* difference between this hw's clock and the real clock, in usecs */
-	s64 tsf_offset;
-	s64 bcn_delta;
-	/* absolute beacon transmission time. Used to cover up "tx" delay. */
-	u64 abs_bcn_ts;
-
-	/* Stats */
-	u64 tx_pkts;
-	u64 rx_pkts;
-	u64 tx_bytes;
-	u64 rx_bytes;
-	u64 tx_dropped;
-	u64 tx_failed;
-
-	/* RSSI in rx status of the receiver */
-	int rx_rssi;
-
-	/* only used when pmsr capability is supplied */
-	struct cfg80211_pmsr_capabilities pmsr_capa;
-	struct cfg80211_pmsr_request *pmsr_request;
-	struct wireless_dev *pmsr_request_wdev;
-
-	struct mac80211_hwsim_link_data link_data[IEEE80211_MLD_MAX_NUM_LINKS];
-};
-
 static const struct rhashtable_params hwsim_rht_params = {
 	.nelem_hint = 2,
 	.automatic_shrinking = true,
 	.key_len = ETH_ALEN,
-	.key_offset = offsetof(struct mac80211_hwsim_data, addresses[1]),
+	.key_offset = offsetof(struct mac80211_hwsim_data, addresses) + ETH_ALEN,
 	.head_offset = offsetof(struct mac80211_hwsim_data, rht),
 };
 
@@ -807,6 +764,19 @@ hwsim_ftm_result_policy[NL80211_PMSR_FTM_RESP_ATTR_MAX + 1] = {
 	[NL80211_PMSR_FTM_RESP_ATTR_DIST_SPREAD] = { .type = NLA_U64 },
 	[NL80211_PMSR_FTM_RESP_ATTR_LCI] = { .type = NLA_STRING },
 	[NL80211_PMSR_FTM_RESP_ATTR_CIVICLOC] = { .type = NLA_STRING },
+#if 0
+	[NL80211_PMSR_FTM_RESP_ATTR_TX_LTF_REPETITION_COUNT] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_RX_LTF_REPETITION_COUNT] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_MAX_TIME_BETWEEN_MEASUREMENTS] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_MIN_TIME_BETWEEN_MEASUREMENTS] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_NUM_TX_SPATIAL_STREAMS] = { .type = NLA_U8 },
+	[NL80211_PMSR_FTM_RESP_ATTR_NUM_RX_SPATIAL_STREAMS] = { .type = NLA_U8 },
+	[NL80211_PMSR_FTM_RESP_ATTR_NOMINAL_TIME] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_AVAILABILITY_WINDOW] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_CHANNEL_WIDTH] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_PREAMBLE] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_RESP_ATTR_IS_DELAYED_LMR] = { .type = NLA_FLAG },
+#endif
 };
 
 static const struct nla_policy
@@ -840,6 +810,21 @@ hwsim_pmsr_peers_result_policy[NL80211_PMSR_ATTR_MAX + 1] = {
 	[NL80211_PMSR_ATTR_PEERS] = NLA_POLICY_NESTED_ARRAY(hwsim_pmsr_peer_result_policy),
 };
 
+#if 0
+static const struct nla_policy
+hwsim_ftm_role_capa_policy[NL80211_PMSR_FTM_CAPA_ATTR_MAX + 1] = {
+	[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_NTB] = { .type = NLA_FLAG },
+	[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_TB] = { .type = NLA_FLAG },
+	[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_EDCA] = { .type = NLA_FLAG },
+};
+
+static const struct nla_policy
+hwsim_ftm_type_capa_policy[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_MAX + 1] = {
+	[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_INFRA_SUPPORT] = { .type = NLA_FLAG },
+	[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_PD_SUPPORT] = { .type = NLA_FLAG },
+};
+#endif
+
 static const struct nla_policy
 hwsim_ftm_capa_policy[NL80211_PMSR_FTM_CAPA_ATTR_MAX + 1] = {
 	[NL80211_PMSR_FTM_CAPA_ATTR_ASAP] = { .type = NLA_FLAG },
@@ -852,6 +837,21 @@ hwsim_ftm_capa_policy[NL80211_PMSR_FTM_CAPA_ATTR_MAX + 1] = {
 	[NL80211_PMSR_FTM_CAPA_ATTR_MAX_FTMS_PER_BURST] = NLA_POLICY_MAX(NLA_U8, 31),
 	[NL80211_PMSR_FTM_CAPA_ATTR_TRIGGER_BASED] = { .type = NLA_FLAG },
 	[NL80211_PMSR_FTM_CAPA_ATTR_NON_TRIGGER_BASED] = { .type = NLA_FLAG },
+#if 0
+	[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_TX_ANTENNAS] = { .type = NLA_U8 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_RX_ANTENNAS] = { .type = NLA_U8 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_EDCA] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_NTB] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_PD_PREAMBLES] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_PD_BANDWIDTHS] = { .type = NLA_U32 },
+	[NL80211_PMSR_FTM_CAPA_ATTR_ISTA_CAPS] =
+		NLA_POLICY_NESTED(hwsim_ftm_role_capa_policy),
+	[NL80211_PMSR_FTM_CAPA_ATTR_RSTA_CAPS] =
+		NLA_POLICY_NESTED(hwsim_ftm_role_capa_policy),
+	[NL80211_PMSR_FTM_CAPA_ATTR_TYPE_CAPS] =
+		NLA_POLICY_NESTED(hwsim_ftm_type_capa_policy),
+	[NL80211_PMSR_FTM_CAPA_ATTR_CONCURRENT_ISTA_RSTA_SUPPORT] = { .type = NLA_FLAG },
+#endif
 };
 
 static const struct nla_policy
@@ -898,6 +898,9 @@ static const struct nla_policy hwsim_genl_policy[HWSIM_ATTR_MAX + 1] = {
 	[HWSIM_ATTR_MLO_SUPPORT] = { .type = NLA_FLAG },
 	[HWSIM_ATTR_PMSR_SUPPORT] = NLA_POLICY_NESTED(hwsim_pmsr_capa_policy),
 	[HWSIM_ATTR_PMSR_RESULT] = NLA_POLICY_NESTED(hwsim_pmsr_peers_result_policy),
+	[HWSIM_ATTR_MULTI_RADIO] = { .type = NLA_FLAG },
+	[HWSIM_ATTR_SUPPORT_NAN_DEVICE] = { .type = NLA_FLAG },
+	[HWSIM_ATTR_SUPPORT_BACKGROUND_RADAR] = { .type = NLA_FLAG },
 };
 
 #if IS_REACHABLE(CONFIG_VIRTIO)
@@ -977,10 +980,6 @@ static int hwsim_get_chanwidth(enum nl80211_chan_width bw)
 
 	return INT_MAX;
 }
-
-static void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
-				    struct sk_buff *skb,
-				    struct ieee80211_channel *chan);
 
 /* sysfs attributes */
 static void hwsim_send_ps_poll(void *dat, u8 *mac, struct ieee80211_vif *vif)
@@ -1126,6 +1125,102 @@ static int hwsim_write_simulate_radar(void *dat, u64 val)
 DEFINE_DEBUGFS_ATTRIBUTE(hwsim_simulate_radar, NULL,
 			 hwsim_write_simulate_radar, "%llu\n");
 
+static ssize_t hwsim_background_cac_write(struct file *file,
+					  const char __user *user_buf,
+					  size_t count, loff_t *ppos)
+{
+	struct mac80211_hwsim_data *data = file->private_data;
+	char buf[8] = {};
+
+	if (count >= sizeof(buf))
+		return -EINVAL;
+
+	if (copy_from_user(buf, user_buf, count))
+		return -EFAULT;
+
+	/* Check if background radar channel is configured */
+	if (!data->radar_background_chandef.chan)
+		return -ENOENT;
+
+	if (sysfs_streq(buf, "radar"))
+		cfg80211_background_radar_event(data->hw->wiphy,
+						&data->radar_background_chandef,
+						GFP_KERNEL);
+	else if (sysfs_streq(buf, "cancel"))
+		cfg80211_background_cac_abort(data->hw->wiphy);
+	else
+		return -EINVAL;
+
+	return count;
+}
+
+static const struct file_operations hwsim_background_cac_ops = {
+	.write = hwsim_background_cac_write,
+	.open = simple_open,
+	.llseek = default_llseek,
+};
+
+struct hwsim_chanctx_iter_arg {
+	struct ieee80211_chanctx_conf *conf;
+	u32 freq_mhz;
+};
+
+static void hwsim_6ghz_chanctx_iter(struct ieee80211_hw *hw,
+				    struct ieee80211_chanctx_conf *conf,
+				    void *data)
+{
+	struct hwsim_chanctx_iter_arg *arg = data;
+
+	if (conf->def.chan &&
+	    conf->def.chan->band == NL80211_BAND_6GHZ &&
+	    conf->def.chan->center_freq == arg->freq_mhz)
+		arg->conf = conf;
+}
+
+static ssize_t hwsim_simulate_incumbent_signal_write(struct file *file,
+						     const char __user *ubuf,
+						     size_t len, loff_t *ppos)
+{
+	struct mac80211_hwsim_data *data = file->private_data;
+	struct hwsim_chanctx_iter_arg arg = {};
+	u32 bitmap;
+	char buf[64];
+
+	if (!len || len > sizeof(buf) - 1)
+		return -EINVAL;
+
+	if (copy_from_user(buf, ubuf, len))
+		return -EFAULT;
+	buf[len] = '\0';
+
+	if (sscanf(buf, "%u %i", &arg.freq_mhz, &bitmap) != 2)
+		return -EINVAL;
+
+	if (!arg.freq_mhz)
+		return -EINVAL;
+
+	ieee80211_iter_chan_contexts_atomic(data->hw,
+					    hwsim_6ghz_chanctx_iter,
+					    &arg);
+
+	if (!arg.conf)
+		return -EINVAL;
+
+#if 0
+	cfg80211_incumbent_signal_notify(data->hw->wiphy,
+					 &arg.conf->def,
+					 bitmap,
+					 GFP_KERNEL);
+#endif
+
+	return len;
+}
+
+static const struct file_operations hwsim_simulate_incumbent_signal_fops = {
+	.open	= simple_open,
+	.write	= hwsim_simulate_incumbent_signal_write,
+};
+
 static int hwsim_fops_group_read(void *dat, u64 *val)
 {
 	struct mac80211_hwsim_data *data = dat;
@@ -1175,22 +1270,45 @@ static netdev_tx_t hwsim_mon_xmit(struct sk_buff *skb,
 	return NETDEV_TX_OK;
 }
 
-static inline u64 mac80211_hwsim_get_tsf_raw(void)
+static inline u64 mac80211_hwsim_get_sim_tsf(void)
 {
-	return ktime_to_us(ktime_get_real());
+	return ktime_to_us(ktime_get_boottime());
+}
+
+ktime_t mac80211_hwsim_tsf_to_boottime(struct mac80211_hwsim_data *data,
+				       u64 tsf)
+{
+	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
+		return ns_to_ktime((tsf - data->tsf_offset) * 1000);
+	}
+}
+
+u64 mac80211_hwsim_boottime_to_tsf(struct mac80211_hwsim_data *data,
+				   ktime_t ts)
+{
+	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
+		return ktime_to_us(ts) + data->tsf_offset;
+	}
+}
+
+u64 mac80211_hwsim_get_tsf(struct ieee80211_hw *hw,
+			   struct ieee80211_vif *vif)
+{
+	struct mac80211_hwsim_data *data = hw->priv;
+	u64 sim_time = mac80211_hwsim_get_sim_tsf();
+
+	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
+		return sim_time + data->tsf_offset;
+	}
 }
 
 static __le64 __mac80211_hwsim_get_tsf(struct mac80211_hwsim_data *data)
 {
-	u64 now = mac80211_hwsim_get_tsf_raw();
-	return cpu_to_le64(now + data->tsf_offset);
-}
+	u64 sim_time = mac80211_hwsim_get_sim_tsf();
 
-static u64 mac80211_hwsim_get_tsf(struct ieee80211_hw *hw,
-				  struct ieee80211_vif *vif)
-{
-	struct mac80211_hwsim_data *data = hw->priv;
-	return le64_to_cpu(__mac80211_hwsim_get_tsf(data));
+	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
+		return cpu_to_le64(sim_time + data->tsf_offset);
+	}
 }
 
 static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
@@ -1198,8 +1316,6 @@ static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
 {
 	struct mac80211_hwsim_data *data = hw->priv;
 	u64 now = mac80211_hwsim_get_tsf(hw, vif);
-	/* MLD not supported here */
-	u32 bcn_int = data->link_data[0].beacon_int;
 	u64 delta = abs(tsf - now);
 	struct ieee80211_bss_conf *conf;
 
@@ -1207,13 +1323,12 @@ static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
 	if (conf && !conf->enable_beacon)
 		return;
 
-	/* adjust after beaconing with new timestamp at old TBTT */
-	if (tsf > now) {
-		data->tsf_offset += delta;
-		data->bcn_delta = do_div(delta, bcn_int);
-	} else {
-		data->tsf_offset -= delta;
-		data->bcn_delta = -(s64)do_div(delta, bcn_int);
+	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
+		/* adjust after beaconing with new timestamp at old TBTT */
+		if (tsf > now)
+			data->tsf_offset += delta;
+		else
+			data->tsf_offset -= delta;
 	}
 }
 
@@ -1484,6 +1599,47 @@ static inline u16 trans_tx_rate_flags_ieee2hwsim(struct ieee80211_tx_rate *rate)
 	return result;
 }
 
+static void mac80211_hwsim_write_tsf(struct mac80211_hwsim_data *data,
+				     struct sk_buff *skb, u64 sim_time)
+{
+	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *)skb->data;
+	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
+	struct ieee80211_mgmt *mgmt = (struct ieee80211_mgmt *)skb->data;
+	struct ieee80211_rate *txrate;
+	/* TODO: get MCS */
+	int bitrate = 100;
+
+	spin_lock_bh(&data->tsf_offset_lock);
+
+	txrate = ieee80211_get_tx_rate(data->hw, info);
+	if (txrate)
+		bitrate = txrate->bitrate;
+
+	if (skb->len >= offsetofend(typeof(*mgmt), u.probe_resp.timestamp) &&
+	    ieee80211_is_probe_resp(hdr->frame_control)) {
+		mgmt->u.probe_resp.timestamp =
+			cpu_to_le64(sim_time + data->tsf_offset +
+				    24 * 8 * 10 / bitrate);
+	} else if (skb->len >= offsetofend(typeof(*mgmt), u.beacon.timestamp) &&
+		   ieee80211_is_beacon(mgmt->frame_control)) {
+		mgmt->u.beacon.timestamp = cpu_to_le64(sim_time +
+						       data->tsf_offset +
+						       24 * 8 * 10 /
+						       bitrate);
+	} else if (skb->len >= offsetofend(struct ieee80211_ext,
+					   u.s1g_beacon.timestamp) &&
+		   ieee80211_is_s1g_beacon(mgmt->frame_control)) {
+		struct ieee80211_ext *ext = (void *)mgmt;
+
+		ext->u.s1g_beacon.timestamp = cpu_to_le32(sim_time +
+							  data->tsf_offset +
+							  10 * 8 * 10 /
+							  bitrate);
+	}
+
+	spin_unlock_bh(&data->tsf_offset_lock);
+}
+
 static void mac80211_hwsim_tx_frame_nl(struct ieee80211_hw *hw,
 				       struct sk_buff *my_skb,
 				       int dst_portid,
@@ -1499,6 +1655,7 @@ static void mac80211_hwsim_tx_frame_nl(struct ieee80211_hw *hw,
 	struct hwsim_tx_rate tx_attempts[IEEE80211_TX_MAX_RATES];
 	struct hwsim_tx_rate_flag tx_attempts_flags[IEEE80211_TX_MAX_RATES];
 	uintptr_t cookie;
+	u64 sim_tsf;
 
 	if (data->ps != PS_DISABLED)
 		hdr->frame_control |= cpu_to_le16(IEEE80211_FCTL_PM);
@@ -1510,6 +1667,9 @@ static void mac80211_hwsim_tx_frame_nl(struct ieee80211_hw *hw,
 			data->tx_dropped++;
 		}
 	}
+
+	sim_tsf = mac80211_hwsim_get_sim_tsf();
+	mac80211_hwsim_write_tsf(data, my_skb, sim_tsf);
 
 	skb = genlmsg_new(GENLMSG_DEFAULT_SIZE, GFP_ATOMIC);
 	if (skb == NULL)
@@ -1607,6 +1767,8 @@ static bool hwsim_chans_compat(struct ieee80211_channel *c1,
 
 struct tx_iter_data {
 	struct ieee80211_channel *channel;
+	struct ieee80211_rx_status *rx_status;
+	struct ieee80211_hw *hw;
 	bool receive;
 };
 
@@ -1615,6 +1777,14 @@ static void mac80211_hwsim_tx_iter(void *_data, u8 *addr,
 {
 	struct tx_iter_data *data = _data;
 	int i;
+
+	if (vif->type == NL80211_IFTYPE_NAN ||
+	    vif->type == NL80211_IFTYPE_NAN) {
+		data->receive = mac80211_hwsim_nan_receive(data->hw,
+							   data->channel,
+							   data->rx_status);
+		return;
+	}
 
 	for (i = 0; i < ARRAY_SIZE(vif->link_conf); i++) {
 		struct ieee80211_bss_conf *conf;
@@ -1707,6 +1877,9 @@ static void mac80211_hwsim_rx(struct mac80211_hwsim_data *data,
 				sp->active_links_rx &= ~BIT(link_id);
 			else
 				sp->active_links_rx |= BIT(link_id);
+
+			rx_status->link_valid = true;
+			rx_status->link_id = link_id;
 		}
 		rcu_read_unlock();
 	}
@@ -1714,6 +1887,9 @@ static void mac80211_hwsim_rx(struct mac80211_hwsim_data *data,
 	memcpy(IEEE80211_SKB_RXCB(skb), rx_status, sizeof(*rx_status));
 
 	mac80211_hwsim_add_vendor_rtap(skb);
+
+	if (data->nan.device_vif)
+		mac80211_hwsim_nan_rx(data->hw, skb);
 
 	data->rx_pkts++;
 	data->rx_bytes += skb->len;
@@ -1729,7 +1905,11 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
 	struct ieee80211_rx_status rx_status;
-	u64 now;
+	u64 sim_tsf = mac80211_hwsim_get_sim_tsf();
+
+	mac80211_hwsim_write_tsf(data, skb, sim_tsf);
+
+	mac80211_hwsim_monitor_rx(hw, skb, chan);
 
 	memset(&rx_status, 0, sizeof(rx_status));
 	rx_status.flag |= RX_FLAG_MACTIME_START;
@@ -1772,20 +1952,9 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 	skb_ext_reset(skb);
 	nf_reset_ct(skb);
 
-	/*
-	 * Get absolute mactime here so all HWs RX at the "same time", and
-	 * absolute TX time for beacon mactime so the timestamp matches.
-	 * Giving beacons a different mactime than non-beacons looks messy, but
-	 * it helps the Toffset be exact and a ~10us mactime discrepancy
-	 * probably doesn't really matter.
-	 */
 	if (ieee80211_is_beacon(hdr->frame_control) ||
-	    ieee80211_is_probe_resp(hdr->frame_control)) {
+	    ieee80211_is_probe_resp(hdr->frame_control))
 		rx_status.boottime_ns = ktime_get_boottime_ns();
-		now = data->abs_bcn_ts;
-	} else {
-		now = mac80211_hwsim_get_tsf_raw();
-	}
 
 	/* Copy skb to all enabled radios that are on the current frequency */
 	spin_lock(&hwsim_radio_lock);
@@ -1793,7 +1962,9 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 		struct sk_buff *nskb;
 		struct tx_iter_data tx_iter_data = {
 			.receive = false,
+			.hw = data2->hw,
 			.channel = chan,
+			.rx_status = &rx_status,
 		};
 
 		if (data == data2)
@@ -1808,6 +1979,12 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 
 		if (data->netgroup != data2->netgroup)
 			continue;
+
+		/*
+		 * Set mactime early since NAN RX filtering relies on it
+		 * for slot calculation
+		 */
+		rx_status.mactime = sim_tsf + data2->tsf_offset;
 
 		if (!hwsim_chans_compat(chan, data2->tmp_chan) &&
 		    !hwsim_chans_compat(chan, data2->channel)) {
@@ -1844,8 +2021,6 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 
 		if (mac80211_hwsim_addr_match(data2, hdr->addr1))
 			ack = true;
-
-		rx_status.mactime = now + data2->tsf_offset;
 
 		mac80211_hwsim_rx(data2, &rx_status, nskb);
 	}
@@ -1904,6 +2079,25 @@ mac80211_hwsim_select_tx_link(struct mac80211_hwsim_data *data,
 	return NULL;
 }
 
+static int mac80211_hwsim_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
+				  struct ieee80211_vif *vif,
+				  struct ieee80211_sta *sta,
+				  struct ieee80211_key_conf *key)
+{
+	switch (key->cipher) {
+	case WLAN_CIPHER_SUITE_CCMP:
+	case WLAN_CIPHER_SUITE_CCMP_256:
+	case WLAN_CIPHER_SUITE_GCMP:
+	case WLAN_CIPHER_SUITE_GCMP_256:
+		break;
+	default:
+		return 1;
+	}
+
+	key->flags |= IEEE80211_KEY_FLAG_RESERVE_TAILROOM;
+	return 0;
+}
+
 static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 			      struct ieee80211_tx_control *control,
 			      struct sk_buff *skb)
@@ -1913,7 +2107,8 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 	struct ieee80211_hdr *hdr = (void *)skb->data;
 	struct ieee80211_chanctx_conf *chanctx_conf;
 	struct ieee80211_channel *channel;
-	bool ack;
+	struct ieee80211_vif *vif = txi->control.vif;
+	bool ack, unicast_data;
 	enum nl80211_chan_width confbw = NL80211_CHAN_WIDTH_20_NOHT;
 	u32 _portid, i;
 
@@ -1923,7 +2118,32 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		return;
 	}
 
-	if (!data->use_chanctx) {
+	unicast_data = is_unicast_ether_addr(hdr->addr1) &&
+		       ieee80211_is_data(hdr->frame_control);
+
+#if 0
+	if (unicast_data && ieee80211_encrypt_tx_skb(skb) < 0) {
+		ieee80211_free_txskb(hw, skb);
+		return;
+	}
+#endif
+	/* re-assign hdr since skb data may have shifted after encryption */
+	hdr = (void *)skb->data;
+
+	if (vif && !data->tmp_chan &&
+	    (vif->type == NL80211_IFTYPE_NAN ||
+	     vif->type == NL80211_IFTYPE_NAN)) {
+		struct cfg80211_chan_def chandef;
+
+		mac80211_hwsim_nan_get_tx_chandef(hw, &chandef);
+		if (WARN_ON(!chandef.chan)) {
+			/* No valid channel in current slot, drop frame */
+			ieee80211_free_txskb(hw, skb);
+			return;
+		}
+		channel = chandef.chan;
+		confbw = chandef.width;
+	} else if (!data->use_chanctx) {
 		channel = data->channel;
 		confbw = data->bw;
 	} else if (txi->hw_queue == 4) {
@@ -1931,13 +2151,18 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 	} else {
 		u8 link = u32_get_bits(IEEE80211_SKB_CB(skb)->control.flags,
 				       IEEE80211_TX_CTRL_MLO_LINK);
-		struct ieee80211_vif *vif = txi->control.vif;
 		struct ieee80211_link_sta *link_sta = NULL;
 		struct ieee80211_sta *sta = control->sta;
 		struct ieee80211_bss_conf *bss_conf;
 
+		/* This can happen in case of monitor injection */
+		if (!vif) {
+			ieee80211_free_txskb(hw, skb);
+			return;
+		}
+
 		if (link != IEEE80211_LINK_UNSPECIFIED) {
-			bss_conf = rcu_dereference(txi->control.vif->link_conf[link]);
+			bss_conf = rcu_dereference(vif->link_conf[link]);
 			if (sta)
 				link_sta = rcu_dereference(sta->link[link]);
 		} else {
@@ -1957,11 +2182,13 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 			return;
 		}
 
-		if (sta && sta->mlo) {
-			if (WARN_ON(!link_sta)) {
-				ieee80211_free_txskb(hw, skb);
-				return;
-			}
+		/* Do address translations only between shared links. It is
+		 * possible that while an non-AP MLD station and an AP MLD
+		 * station have shared links, the frame is intended to be sent
+		 * on a link which is not shared (for example when sending a
+		 * probe response).
+		 */
+		if (sta && sta->mlo && link_sta) {
 			/* address translation to link addresses on TX */
 			ether_addr_copy(hdr->addr1, link_sta->addr);
 			ether_addr_copy(hdr->addr2, bss_conf->addr);
@@ -1985,6 +2212,15 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		}
 	}
 
+#if 0
+	if (!unicast_data && ieee80211_encrypt_tx_skb(skb) < 0) {
+		ieee80211_free_txskb(hw, skb);
+		return;
+	}
+#endif
+	/* re-assign hdr since skb data may have shifted after encryption */
+	hdr = (void *)skb->data;
+
 	if (WARN(!channel, "TX w/o channel - queue = %d\n", txi->hw_queue)) {
 		ieee80211_free_txskb(hw, skb);
 		return;
@@ -1996,13 +2232,13 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		return;
 	}
 
-	if (txi->control.vif)
-		hwsim_check_magic(txi->control.vif);
+	if (vif)
+		hwsim_check_magic(vif);
 	if (control->sta)
 		hwsim_check_sta_magic(control->sta);
 
 	if (ieee80211_hw_check(hw, SUPPORTS_RC_TABLE))
-		ieee80211_get_tx_rates(txi->control.vif, control->sta, skb,
+		ieee80211_get_tx_rates(vif, control->sta, skb,
 				       txi->control.rates,
 				       ARRAY_SIZE(txi->control.rates));
 
@@ -2024,27 +2260,6 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		if (WARN_ON(hwsim_get_chanwidth(bw) > hwsim_get_chanwidth(confbw)))
 			return;
 	}
-
-	if (skb->len >= 24 + 8 &&
-	    ieee80211_is_probe_resp(hdr->frame_control)) {
-		/* fake header transmission time */
-		struct ieee80211_mgmt *mgmt;
-		struct ieee80211_rate *txrate;
-		/* TODO: get MCS */
-		int bitrate = 100;
-		u64 ts;
-
-		mgmt = (struct ieee80211_mgmt *)skb->data;
-		txrate = ieee80211_get_tx_rate(hw, txi);
-		if (txrate)
-			bitrate = txrate->bitrate;
-		ts = mac80211_hwsim_get_tsf_raw();
-		mgmt->u.probe_resp.timestamp =
-			cpu_to_le64(ts + data->tsf_offset +
-				    24 * 8 * 10 / bitrate);
-	}
-
-	mac80211_hwsim_monitor_rx(hw, skb, channel);
 
 	/* wmediumd mode check */
 	_portid = READ_ONCE(data->wmediumd);
@@ -2071,6 +2286,22 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 	ieee80211_tx_status_irqsafe(hw, skb);
 }
 
+void ieee80211_hwsim_wake_tx_queue(struct ieee80211_hw *hw,
+				   struct ieee80211_txq *txq)
+{
+	struct ieee80211_tx_control control = {
+		.sta = txq->sta,
+	};
+	struct sk_buff *skb;
+
+	if ((txq->vif->type == NL80211_IFTYPE_NAN ||
+	     txq->vif->type == NL80211_IFTYPE_NAN) &&
+	    !mac80211_hwsim_nan_txq_transmitting(hw, txq))
+		return;
+
+	while ((skb = ieee80211_tx_dequeue(hw, txq)))
+		mac80211_hwsim_tx(hw, &control, skb);
+}
 
 static int mac80211_hwsim_start(struct ieee80211_hw *hw)
 {
@@ -2101,7 +2332,7 @@ static void mac80211_hwsim_stop(struct ieee80211_hw *hw)
 static int mac80211_hwsim_add_interface(struct ieee80211_hw *hw,
 					struct ieee80211_vif *vif)
 {
-	wiphy_dbg(hw->wiphy, "%s (type=%d mac_addr=%pM)\n",
+	pr_info("JETSKI: %s (type=%d mac_addr=%pM)\n",
 		  __func__, ieee80211_vif_type_p2p(vif),
 		  vif->addr);
 	hwsim_set_magic(vif);
@@ -2118,17 +2349,29 @@ static int mac80211_hwsim_add_interface(struct ieee80211_hw *hw,
 	return 0;
 }
 
+#ifdef CONFIG_MAC80211_DEBUGFS
+static void
+mac80211_hwsim_link_add_debugfs(struct ieee80211_hw *hw,
+				struct ieee80211_vif *vif,
+				struct ieee80211_bss_conf *link_conf,
+				struct dentry *dir)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	debugfs_create_u32("skip_beacons", 0600, dir,
+			   &vp->skip_beacons[link_conf->link_id]);
+}
+#endif
 
 static int mac80211_hwsim_change_interface(struct ieee80211_hw *hw,
 					   struct ieee80211_vif *vif,
 					   enum nl80211_iftype newtype,
 					   bool newp2p)
 {
+	enum nl80211_iftype oldtype = ieee80211_vif_type_p2p(vif);
 	newtype = ieee80211_iftype_p2p(newtype, newp2p);
-	wiphy_dbg(hw->wiphy,
-		  "%s (old type=%d, new type=%d, mac_addr=%pM)\n",
-		  __func__, ieee80211_vif_type_p2p(vif),
-		    newtype, vif->addr);
+	pr_info("JETSKI: %s (old type=%d, new type=%d, mac_addr=%pM)\n",
+		  __func__, oldtype, newtype, vif->addr);
 	hwsim_check_magic(vif);
 
 	/*
@@ -2143,7 +2386,7 @@ static int mac80211_hwsim_change_interface(struct ieee80211_hw *hw,
 static void mac80211_hwsim_remove_interface(
 	struct ieee80211_hw *hw, struct ieee80211_vif *vif)
 {
-	wiphy_dbg(hw->wiphy, "%s (type=%d mac_addr=%pM)\n",
+	pr_info("JETSKI: %s (type=%d mac_addr=%pM)\n",
 		  __func__, ieee80211_vif_type_p2p(vif),
 		  vif->addr);
 	hwsim_check_magic(vif);
@@ -2152,9 +2395,9 @@ static void mac80211_hwsim_remove_interface(
 		mac80211_hwsim_config_mac_nl(hw, vif->addr, false);
 }
 
-static void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
-				    struct sk_buff *skb,
-				    struct ieee80211_channel *chan)
+void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
+			     struct sk_buff *skb,
+			     struct ieee80211_channel *chan)
 {
 	struct mac80211_hwsim_data *data = hw->priv;
 	u32 _portid = READ_ONCE(data->wmediumd);
@@ -2165,8 +2408,6 @@ static void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
 				       txi->control.rates,
 				       ARRAY_SIZE(txi->control.rates));
 	}
-
-	mac80211_hwsim_monitor_rx(hw, skb, chan);
 
 	if (_portid || hwsim_virtio_enabled)
 		return mac80211_hwsim_tx_frame_nl(hw, skb, _portid, chan);
@@ -2183,38 +2424,20 @@ static void __mac80211_hwsim_beacon_tx(struct ieee80211_bss_conf *link_conf,
 				       struct ieee80211_vif *vif,
 				       struct sk_buff *skb)
 {
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
 	struct ieee80211_tx_info *info;
-	struct ieee80211_rate *txrate;
-	struct ieee80211_mgmt *mgmt;
-	/* TODO: get MCS */
-	int bitrate = 100;
+
+	if (vp->skip_beacons[link_conf->link_id]) {
+		vp->skip_beacons[link_conf->link_id]--;
+		dev_kfree_skb(skb);
+		return;
+	}
 
 	info = IEEE80211_SKB_CB(skb);
 	if (ieee80211_hw_check(hw, SUPPORTS_RC_TABLE))
 		ieee80211_get_tx_rates(vif, NULL, skb,
 				       info->control.rates,
 				       ARRAY_SIZE(info->control.rates));
-
-	txrate = ieee80211_get_tx_rate(hw, info);
-	if (txrate)
-		bitrate = txrate->bitrate;
-
-	mgmt = (struct ieee80211_mgmt *) skb->data;
-	/* fake header transmission time */
-	data->abs_bcn_ts = mac80211_hwsim_get_tsf_raw();
-	if (ieee80211_is_s1g_beacon(mgmt->frame_control)) {
-		struct ieee80211_ext *ext = (void *) mgmt;
-
-		ext->u.s1g_beacon.timestamp = cpu_to_le32(data->abs_bcn_ts +
-							  data->tsf_offset +
-							  10 * 8 * 10 /
-							  bitrate);
-	} else {
-		mgmt->u.beacon.timestamp = cpu_to_le64(data->abs_bcn_ts +
-						       data->tsf_offset +
-						       24 * 8 * 10 /
-						       bitrate);
-	}
 
 	mac80211_hwsim_tx_frame(hw, skb,
 			rcu_dereference(link_conf->chanctx_conf)->def.chan);
@@ -2225,7 +2448,11 @@ static void mac80211_hwsim_beacon_tx(void *arg, u8 *mac,
 {
 	struct mac80211_hwsim_link_data *link_data = arg;
 	u32 link_id = link_data->link_id;
+#if 0
+	struct ieee80211_bss_conf *link_conf, *tx_bss_conf;
+#else
 	struct ieee80211_bss_conf *link_conf;
+#endif
 	struct mac80211_hwsim_data *data =
 		container_of(link_data, struct mac80211_hwsim_data,
 			     link_data[link_id]);
@@ -2244,10 +2471,13 @@ static void mac80211_hwsim_beacon_tx(void *arg, u8 *mac,
 	    vif->type != NL80211_IFTYPE_OCB)
 		return;
 
-	if (vif->mbssid_tx_vif && vif->mbssid_tx_vif != vif)
+#if 0
+	tx_bss_conf = rcu_access_pointer(link_conf->tx_bss_conf);
+	if (tx_bss_conf && tx_bss_conf != link_conf)
 		return;
+#endif
 
-	if (vif->bss_conf.ema_ap) {
+	if (link_conf->ema_ap) {
 		struct ieee80211_ema_beacons *ema;
 		u8 i = 0;
 
@@ -2276,6 +2506,10 @@ static void mac80211_hwsim_beacon_tx(void *arg, u8 *mac,
 
 	if (link_conf->csa_active && ieee80211_beacon_cntdwn_is_complete(vif))
 		ieee80211_csa_finish(vif);
+
+	if (link_conf->color_change_active &&
+	    ieee80211_beacon_cntdwn_is_complete(vif))
+		ieee80211_color_change_finish(vif);
 }
 
 static enum hrtimer_restart
@@ -2287,7 +2521,9 @@ mac80211_hwsim_beacon(struct hrtimer *timer)
 		container_of(link_data, struct mac80211_hwsim_data,
 			     link_data[link_data->link_id]);
 	struct ieee80211_hw *hw = data->hw;
-	u64 bcn_int = link_data->beacon_int;
+	u32 remainder;
+	u64 tsf_now;
+	u64 tbtt;
 
 	if (!data->started)
 		return HRTIMER_NORESTART;
@@ -2296,13 +2532,19 @@ mac80211_hwsim_beacon(struct hrtimer *timer)
 		hw, IEEE80211_IFACE_ITER_NORMAL,
 		mac80211_hwsim_beacon_tx, link_data);
 
-	/* beacon at new TBTT + beacon interval */
-	if (data->bcn_delta) {
-		bcn_int -= data->bcn_delta;
-		data->bcn_delta = 0;
-	}
-	hrtimer_forward_now(&link_data->beacon_timer,
-			    ns_to_ktime(bcn_int * NSEC_PER_USEC));
+	/* TSF is the same for all VIFs, parameter is unused */
+	tsf_now = mac80211_hwsim_get_tsf(hw, NULL);
+
+	/* Wrap value to be after the next TBTT */
+	tbtt = tsf_now + link_data->beacon_int;
+
+	/* Round TBTT down to the correct time */
+	div_u64_rem(tbtt, link_data->beacon_int, &remainder);
+	tbtt = tbtt - remainder;
+
+	hrtimer_set_expires(&link_data->beacon_timer,
+			    mac80211_hwsim_tsf_to_boottime(data, tbtt));
+
 	return HRTIMER_RESTART;
 }
 
@@ -2320,9 +2562,11 @@ static const char * const hwsim_chanwidths[] = {
 	[NL80211_CHAN_WIDTH_4] = "4MHz",
 	[NL80211_CHAN_WIDTH_8] = "8MHz",
 	[NL80211_CHAN_WIDTH_16] = "16MHz",
+	[NL80211_CHAN_WIDTH_320] = "eht320",
 };
 
-static int mac80211_hwsim_config(struct ieee80211_hw *hw, u32 changed)
+static int mac80211_hwsim_config(struct ieee80211_hw *hw,
+				 u32 changed)
 {
 	struct mac80211_hwsim_data *data = hw->priv;
 	struct ieee80211_conf *conf = &hw->conf;
@@ -2391,7 +2635,7 @@ static int mac80211_hwsim_config(struct ieee80211_hw *hw, u32 changed)
 
 		if (!data->started || !link_data->beacon_int) {
 			hrtimer_cancel(&link_data->beacon_timer);
-		} else if (!hrtimer_is_queued(&link_data->beacon_timer)) {
+		} else if (!hrtimer_active(&link_data->beacon_timer)) {
 			u64 tsf = mac80211_hwsim_get_tsf(hw, NULL);
 			u32 bcn_int = link_data->beacon_int;
 			u64 until_tbtt = bcn_int - do_div(tsf, bcn_int);
@@ -2450,6 +2694,21 @@ static void mac80211_hwsim_vif_info_changed(struct ieee80211_hw *hw,
 		vp->assoc = vif->cfg.assoc;
 		vp->aid = vif->cfg.aid;
 	}
+
+#if 0
+	if (changed & BSS_CHANGED_NAN_LOCAL_SCHED)
+		mac80211_hwsim_nan_local_sched_changed(hw, vif);
+#endif
+
+#if 0
+	if (vif->type == NL80211_IFTYPE_STATION &&
+	    changed & (BSS_CHANGED_MLD_VALID_LINKS | BSS_CHANGED_MLD_TTLM)) {
+		u16 usable_links = ieee80211_vif_usable_links(vif);
+
+		if (vif->active_links != usable_links)
+			ieee80211_set_active_links_async(vif, usable_links);
+	}
+#endif
 }
 
 static void mac80211_hwsim_link_info_changed(struct ieee80211_hw *hw,
@@ -2478,7 +2737,7 @@ static void mac80211_hwsim_link_info_changed(struct ieee80211_hw *hw,
 			  info->enable_beacon, info->beacon_int);
 		vp->bcn_en = info->enable_beacon;
 		if (data->started &&
-		    !hrtimer_is_queued(&link_data->beacon_timer) &&
+		    !hrtimer_active(&link_data->beacon_timer) &&
 		    info->enable_beacon) {
 			u64 tsf, until_tbtt;
 			u32 bcn_int;
@@ -2535,12 +2794,17 @@ static void mac80211_hwsim_link_info_changed(struct ieee80211_hw *hw,
 static void
 mac80211_hwsim_sta_rc_update(struct ieee80211_hw *hw,
 			     struct ieee80211_vif *vif,
-			     struct ieee80211_sta *sta,
+			     struct ieee80211_link_sta *link_sta,
 			     u32 changed)
 {
 	struct mac80211_hwsim_data *data = hw->priv;
+	struct ieee80211_sta *sta = link_sta->sta;
 	u32 bw = U32_MAX;
 	int link_id;
+
+	if (vif->type == NL80211_IFTYPE_NAN ||
+	    vif->type == NL80211_IFTYPE_NAN)
+		return;
 
 	rcu_read_lock();
 	for (link_id = 0;
@@ -2548,7 +2812,6 @@ mac80211_hwsim_sta_rc_update(struct ieee80211_hw *hw,
 	     link_id++) {
 		enum nl80211_chan_width confbw = NL80211_CHAN_WIDTH_20_NOHT;
 		struct ieee80211_bss_conf *vif_conf;
-		struct ieee80211_link_sta *link_sta;
 
 		link_sta = rcu_dereference(sta->link[link_id]);
 
@@ -2600,7 +2863,10 @@ static int mac80211_hwsim_sta_add(struct ieee80211_hw *hw,
 
 	hwsim_check_magic(vif);
 	hwsim_set_sta_magic(sta);
-	mac80211_hwsim_sta_rc_update(hw, vif, sta, 0);
+
+	/* For now, don't run RC update on STAs on an S1G interface */
+	if (!vif->cfg.s1g)
+		mac80211_hwsim_sta_rc_update(hw, vif, &sta->deflink, 0);
 
 	if (sta->valid_links) {
 		WARN(hweight16(sta->valid_links) > 1,
@@ -2608,6 +2874,8 @@ static int mac80211_hwsim_sta_add(struct ieee80211_hw *hw,
 		     sta->valid_links);
 		sp->active_links_rx = sta->valid_links;
 	}
+
+	spin_lock_init(&sp->nan_sched.lock);
 
 	return 0;
 }
@@ -2635,10 +2903,11 @@ static int mac80211_hwsim_sta_state(struct ieee80211_hw *hw,
 		return mac80211_hwsim_sta_add(hw, vif, sta);
 
 	/*
-	 * when client is authorized (AP station marked as such),
-	 * enable all links
+	 * in an MLO connection, when client is authorized
+	 * (AP station marked as such), enable all links
 	 */
-	if (vif->type == NL80211_IFTYPE_STATION &&
+	if (ieee80211_vif_is_mld(vif) &&
+	    vif->type == NL80211_IFTYPE_STATION &&
 	    new_state == IEEE80211_STA_AUTHORIZED && !sta->tdls)
 		ieee80211_set_active_links_async(vif,
 						 ieee80211_vif_usable_links(vif));
@@ -2720,6 +2989,26 @@ static int mac80211_hwsim_get_survey(struct ieee80211_hw *hw, int idx,
 	return 0;
 }
 
+#if 0
+static enum ieee80211_neg_ttlm_res
+mac80211_hwsim_can_neg_ttlm(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			    struct ieee80211_neg_ttlm *neg_ttlm)
+{
+	u32 i;
+
+	/* For testing purposes, accept if all TIDs are mapped to the same links
+	 * set, otherwise reject.
+	 */
+	for (i = 0; i < IEEE80211_TTLM_NUM_TIDS; i++) {
+		if (neg_ttlm->downlink[i] != neg_ttlm->uplink[i] ||
+		    neg_ttlm->downlink[i] != neg_ttlm->downlink[0])
+			return NEG_TTLM_RES_REJECT;
+	}
+
+	return NEG_TTLM_RES_ACCEPT;
+}
+#endif
+
 #ifdef CONFIG_NL80211_TESTMODE
 /*
  * This section contains example code for using netlink
@@ -2781,11 +3070,7 @@ static int mac80211_hwsim_testmode_cmd(struct ieee80211_hw *hw,
 			goto nla_put_failure;
 		return cfg80211_testmode_reply(skb);
 	case HWSIM_TM_CMD_STOP_QUEUES:
-		ieee80211_stop_queues(hw);
-		return 0;
 	case HWSIM_TM_CMD_WAKE_QUEUES:
-		ieee80211_wake_queues(hw);
-		return 0;
 	default:
 		return -EOPNOTSUPP;
 	}
@@ -3075,7 +3360,7 @@ static int mac80211_hwsim_croc(struct ieee80211_hw *hw,
 	return 0;
 }
 
-static int mac80211_hwsim_add_chanctx(struct ieee80211_hw *hw,
+static int __maybe_unused mac80211_hwsim_add_chanctx(struct ieee80211_hw *hw,
 				      struct ieee80211_chanctx_conf *ctx)
 {
 	hwsim_set_chanctx_magic(ctx);
@@ -3086,7 +3371,7 @@ static int mac80211_hwsim_add_chanctx(struct ieee80211_hw *hw,
 	return 0;
 }
 
-static void mac80211_hwsim_remove_chanctx(struct ieee80211_hw *hw,
+static void __maybe_unused mac80211_hwsim_remove_chanctx(struct ieee80211_hw *hw,
 					  struct ieee80211_chanctx_conf *ctx)
 {
 	wiphy_dbg(hw->wiphy,
@@ -3097,7 +3382,7 @@ static void mac80211_hwsim_remove_chanctx(struct ieee80211_hw *hw,
 	hwsim_clear_chanctx_magic(ctx);
 }
 
-static void mac80211_hwsim_change_chanctx(struct ieee80211_hw *hw,
+static void __maybe_unused mac80211_hwsim_change_chanctx(struct ieee80211_hw *hw,
 					  struct ieee80211_chanctx_conf *ctx,
 					  u32 changed)
 {
@@ -3107,6 +3392,8 @@ static void mac80211_hwsim_change_chanctx(struct ieee80211_hw *hw,
 		  ctx->def.chan->center_freq, ctx->def.width,
 		  ctx->def.center_freq1, ctx->def.center_freq2);
 }
+
+
 
 static int mac80211_hwsim_assign_vif_chanctx(struct ieee80211_hw *hw,
 					     struct ieee80211_vif *vif,
@@ -3154,6 +3441,47 @@ static void mac80211_hwsim_unassign_vif_chanctx(struct ieee80211_hw *hw,
 			local_bh_enable();
 		}
 	}
+}
+
+static int __maybe_unused mac80211_hwsim_switch_vif_chanctx(struct ieee80211_hw *hw,
+					     struct ieee80211_vif_chanctx_switch *vifs,
+					     int n_vifs,
+					     enum ieee80211_chanctx_switch_mode mode)
+{
+	int i;
+
+	if (n_vifs <= 0)
+		return -EINVAL;
+
+	wiphy_dbg(hw->wiphy,
+		  "switch vif channel context mode: %u\n", mode);
+
+	for (i = 0; i < n_vifs; i++) {
+		hwsim_check_chanctx_magic(vifs[i].old_ctx);
+		wiphy_dbg(hw->wiphy,
+			  "switch vif channel context: %d MHz/width: %d/cfreqs:%d/%d MHz -> %d MHz/width: %d/cfreqs:%d/%d MHz\n",
+			  vifs[i].old_ctx->def.chan->center_freq,
+			  vifs[i].old_ctx->def.width,
+			  vifs[i].old_ctx->def.center_freq1,
+			  vifs[i].old_ctx->def.center_freq2,
+			  vifs[i].new_ctx->def.chan->center_freq,
+			  vifs[i].new_ctx->def.width,
+			  vifs[i].new_ctx->def.center_freq1,
+			  vifs[i].new_ctx->def.center_freq2);
+
+		switch (mode) {
+		case CHANCTX_SWMODE_REASSIGN_VIF:
+			hwsim_check_chanctx_magic(vifs[i].new_ctx);
+			break;
+		case CHANCTX_SWMODE_SWAP_CONTEXTS:
+			hwsim_set_chanctx_magic(vifs[i].new_ctx);
+			hwsim_clear_chanctx_magic(vifs[i].old_ctx);
+			break;
+		default:
+			WARN(1, "Invalid mode %d\n", mode);
+		}
+	}
+	return 0;
 }
 
 static const char mac80211_hwsim_gstrings_stats[][ETH_GSTRING_LEN] = {
@@ -3210,9 +3538,11 @@ static int mac80211_hwsim_tx_last_beacon(struct ieee80211_hw *hw)
 	return 1;
 }
 
-static int mac80211_hwsim_set_rts_threshold(struct ieee80211_hw *hw, u32 value)
+static int mac80211_hwsim_set_rts_threshold(struct ieee80211_hw *hw,
+					    u32 value)
 {
-	return -EOPNOTSUPP;
+	/* hwsim ignores the use_rts instruction from mac80211 anyway */
+	return 0;
 }
 
 static int mac80211_hwsim_change_vif_links(struct ieee80211_hw *hw,
@@ -3229,8 +3559,13 @@ static int mac80211_hwsim_change_vif_links(struct ieee80211_hw *hw,
 	if (!new_links)
 		add |= BIT(0);
 
-	for_each_set_bit(i, &rem, IEEE80211_MLD_MAX_NUM_LINKS)
+	wiphy_dbg(hw->wiphy, "%s:\n", __func__);
+
+	for_each_set_bit(i, &rem, IEEE80211_MLD_MAX_NUM_LINKS) {
 		mac80211_hwsim_config_mac_nl(hw, old[i]->addr, false);
+		wiphy_dbg(hw->wiphy,
+			  "  link [%d/%pM] removed\n", i, old[i]->addr);
+	}
 
 	for_each_set_bit(i, &add, IEEE80211_MLD_MAX_NUM_LINKS) {
 		struct ieee80211_bss_conf *link_conf;
@@ -3240,6 +3575,8 @@ static int mac80211_hwsim_change_vif_links(struct ieee80211_hw *hw,
 			continue;
 
 		mac80211_hwsim_config_mac_nl(hw, link_conf->addr, true);
+		wiphy_dbg(hw->wiphy,
+			  "  link [%d/%pM] added\n", i, link_conf->addr);
 	}
 
 	return 0;
@@ -3315,6 +3652,53 @@ static int mac80211_hwsim_send_pmsr_ftm_request_peer(struct sk_buff *msg,
 
 	if (nla_put_u8(msg, NL80211_PMSR_FTM_REQ_ATTR_BSS_COLOR, request->bss_color))
 		return -ENOBUFS;
+
+#if 0
+	if (request->min_time_between_measurements &&
+	    nla_put_u32(msg, NL80211_PMSR_FTM_REQ_ATTR_MIN_TIME_BETWEEN_MEASUREMENTS,
+			request->min_time_between_measurements))
+		return -ENOBUFS;
+
+	if (request->max_time_between_measurements &&
+	    nla_put_u32(msg, NL80211_PMSR_FTM_REQ_ATTR_MAX_TIME_BETWEEN_MEASUREMENTS,
+			request->max_time_between_measurements))
+		return -ENOBUFS;
+#endif
+
+#if 0
+	if (request->availability_window &&
+	    nla_put_u8(msg, NL80211_PMSR_FTM_REQ_ATTR_AW_DURATION,
+		       request->availability_window))
+		return -ENOBUFS;
+#endif
+
+#if 0
+	if (request->nominal_time &&
+	    nla_put_u32(msg, NL80211_PMSR_FTM_REQ_ATTR_NOMINAL_TIME,
+			request->nominal_time))
+		return -ENOBUFS;
+
+	if (request->num_measurements &&
+	    nla_put_u32(msg, NL80211_PMSR_FTM_REQ_ATTR_NUM_MEASUREMENTS,
+			request->num_measurements))
+		return -ENOBUFS;
+
+	if (request->ingress_distance &&
+	    nla_put_u64_64bit(msg, NL80211_PMSR_FTM_REQ_ATTR_INGRESS,
+			      request->ingress_distance,
+			      NL80211_PMSR_FTM_REQ_ATTR_PAD))
+		return -ENOBUFS;
+
+	if (request->egress_distance &&
+	    nla_put_u64_64bit(msg, NL80211_PMSR_FTM_REQ_ATTR_EGRESS,
+			      request->egress_distance,
+			      NL80211_PMSR_FTM_REQ_ATTR_PAD))
+		return -ENOBUFS;
+
+	if (request->pd_suppress_range_results &&
+	    nla_put_flag(msg, NL80211_PMSR_FTM_REQ_ATTR_PD_SUPPRESS_RESULTS))
+		return -ENOBUFS;
+#endif
 
 	nla_nest_end(msg, ftm);
 
@@ -3685,6 +4069,81 @@ static int mac80211_hwsim_parse_ftm_result(struct nlattr *ftm,
 		result->civicloc_len = nla_len(tb[NL80211_PMSR_FTM_RESP_ATTR_CIVICLOC]);
 	}
 
+#if 0
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_TX_LTF_REPETITION_COUNT]) {
+		result->tx_ltf_repetition_count_valid = 1;
+		result->tx_ltf_repetition_count =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_TX_LTF_REPETITION_COUNT]);
+	}
+
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_RX_LTF_REPETITION_COUNT]) {
+		result->rx_ltf_repetition_count_valid = 1;
+		result->rx_ltf_repetition_count =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_RX_LTF_REPETITION_COUNT]);
+	}
+
+#if 0
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_MAX_TIME_BETWEEN_MEASUREMENTS]) {
+		result->max_time_between_measurements_valid = 1;
+		result->max_time_between_measurements =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_MAX_TIME_BETWEEN_MEASUREMENTS]);
+	}
+#endif
+
+#if 0
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_MIN_TIME_BETWEEN_MEASUREMENTS]) {
+		result->min_time_between_measurements_valid = 1;
+		result->min_time_between_measurements =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_MIN_TIME_BETWEEN_MEASUREMENTS]);
+	}
+#endif
+
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_NUM_TX_SPATIAL_STREAMS]) {
+		result->num_tx_spatial_streams_valid = 1;
+		result->num_tx_spatial_streams =
+			nla_get_u8(tb[NL80211_PMSR_FTM_RESP_ATTR_NUM_TX_SPATIAL_STREAMS]);
+	}
+
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_NUM_RX_SPATIAL_STREAMS]) {
+		result->num_rx_spatial_streams_valid = 1;
+		result->num_rx_spatial_streams =
+			nla_get_u8(tb[NL80211_PMSR_FTM_RESP_ATTR_NUM_RX_SPATIAL_STREAMS]);
+	}
+
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_NOMINAL_TIME]) {
+		result->nominal_time_valid = 1;
+		result->nominal_time =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_NOMINAL_TIME]);
+	}
+#endif
+
+#if 0
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_AVAILABILITY_WINDOW]) {
+		result->availability_window_valid = 1;
+		result->availability_window =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_AVAILABILITY_WINDOW]);
+	}
+#endif
+
+#if 0
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_CHANNEL_WIDTH]) {
+		result->chan_width_valid = 1;
+		result->chan_width =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_CHANNEL_WIDTH]);
+	}
+
+	if (tb[NL80211_PMSR_FTM_RESP_ATTR_PREAMBLE]) {
+		result->preamble_valid = 1;
+		result->preamble =
+			nla_get_u32(tb[NL80211_PMSR_FTM_RESP_ATTR_PREAMBLE]);
+	}
+#endif
+
+#if 0
+	result->is_delayed_lmr =
+		nla_get_flag(tb[NL80211_PMSR_FTM_RESP_ATTR_IS_DELAYED_LMR]);
+#endif
+
 	return 0;
 }
 
@@ -3820,9 +4279,42 @@ out:
 	return err;
 }
 
+static int mac80211_hwsim_set_radar_background(struct ieee80211_hw *hw,
+					       struct cfg80211_chan_def *chan)
+{
+	struct mac80211_hwsim_data *data = hw->priv;
+
+	if (!wiphy_ext_feature_isset(hw->wiphy,
+				     NL80211_EXT_FEATURE_RADAR_BACKGROUND))
+		return -EOPNOTSUPP;
+
+	if (chan)
+		data->radar_background_chandef = *chan;
+	else
+		memset(&data->radar_background_chandef, 0,
+		       sizeof(data->radar_background_chandef));
+
+	return 0;
+}
+
+#ifdef CONFIG_MAC80211_DEBUGFS
+#define HWSIM_DEBUGFS_OPS					\
+	.link_add_debugfs = mac80211_hwsim_link_add_debugfs,
+#else
+#define HWSIM_DEBUGFS_OPS
+#endif
+
+static void mac80211_hwsim_sta_rc_update_wrapper(struct ieee80211_hw *hw,
+			     struct ieee80211_vif *vif,
+			     struct ieee80211_sta *sta,
+			     u32 changed)
+{
+	mac80211_hwsim_sta_rc_update(hw, vif, &sta->deflink, changed);
+}
+
 #define HWSIM_COMMON_OPS					\
 	.tx = mac80211_hwsim_tx,				\
-	.wake_tx_queue = ieee80211_handle_wake_tx_queue,	\
+	.wake_tx_queue = ieee80211_hwsim_wake_tx_queue,		\
 	.start = mac80211_hwsim_start,				\
 	.stop = mac80211_hwsim_stop,				\
 	.add_interface = mac80211_hwsim_add_interface,		\
@@ -3834,7 +4326,7 @@ out:
 	.link_info_changed = mac80211_hwsim_link_info_changed,  \
 	.tx_last_beacon = mac80211_hwsim_tx_last_beacon,	\
 	.sta_notify = mac80211_hwsim_sta_notify,		\
-	.sta_rc_update = mac80211_hwsim_sta_rc_update,		\
+	.sta_rc_update = mac80211_hwsim_sta_rc_update_wrapper,	\
 	.conf_tx = mac80211_hwsim_conf_tx,			\
 	.get_survey = mac80211_hwsim_get_survey,		\
 	CFG80211_TESTMODE_CMD(mac80211_hwsim_testmode_cmd)	\
@@ -3844,7 +4336,14 @@ out:
 	.get_et_stats = mac80211_hwsim_get_et_stats,		\
 	.get_et_strings = mac80211_hwsim_get_et_strings,	\
 	.start_pmsr = mac80211_hwsim_start_pmsr,		\
-	.abort_pmsr = mac80211_hwsim_abort_pmsr,
+	.abort_pmsr = mac80211_hwsim_abort_pmsr,		\
+	.set_radar_background = mac80211_hwsim_set_radar_background, \
+	.set_key = mac80211_hwsim_set_key,			\
+	.set_rts_threshold = mac80211_hwsim_set_rts_threshold,	\
+	.start_nan = mac80211_hwsim_nan_start,			\
+	.stop_nan = mac80211_hwsim_nan_stop,			\
+	.nan_change_conf = mac80211_hwsim_nan_change_config,	\
+	HWSIM_DEBUGFS_OPS
 
 #define HWSIM_NON_MLO_OPS					\
 	.sta_add = mac80211_hwsim_sta_add,			\
@@ -3880,10 +4379,12 @@ static const struct ieee80211_ops mac80211_hwsim_mchan_ops = {
 static const struct ieee80211_ops mac80211_hwsim_mlo_ops = {
 	HWSIM_COMMON_OPS
 	HWSIM_CHANCTX_OPS
-	.set_rts_threshold = mac80211_hwsim_set_rts_threshold,
 	.change_vif_links = mac80211_hwsim_change_vif_links,
 	.change_sta_links = mac80211_hwsim_change_sta_links,
 	.sta_state = mac80211_hwsim_sta_state,
+#if 0
+	.can_neg_ttlm = mac80211_hwsim_can_neg_ttlm,
+#endif
 };
 
 struct hwsim_new_radio_params {
@@ -3893,6 +4394,7 @@ struct hwsim_new_radio_params {
 	bool reg_strict;
 	bool p2p_device;
 	bool use_chanctx;
+	bool multi_radio;
 	bool destroy_on_close;
 	const char *hwname;
 	bool no_vif;
@@ -3902,6 +4404,8 @@ struct hwsim_new_radio_params {
 	u8 n_ciphers;
 	bool mlo;
 	const struct cfg80211_pmsr_capabilities *pmsr_capa;
+	bool nan_device;
+	bool background_radar;
 };
 
 static void hwsim_mcast_config_msg(struct sk_buff *mcast_skb,
@@ -3969,6 +4473,12 @@ static int append_radio_msg(struct sk_buff *skb, int id,
 			return ret;
 	}
 
+	if (param->multi_radio) {
+		ret = nla_put_flag(skb, HWSIM_ATTR_MULTI_RADIO);
+		if (ret < 0)
+			return ret;
+	}
+
 	if (param->hwname) {
 		ret = nla_put(skb, HWSIM_ATTR_RADIO_NAME,
 			      strlen(param->hwname), param->hwname);
@@ -3976,6 +4486,17 @@ static int append_radio_msg(struct sk_buff *skb, int id,
 			return ret;
 	}
 
+	if (param->nan_device) {
+		ret = nla_put_flag(skb, HWSIM_ATTR_SUPPORT_NAN_DEVICE);
+		if (ret < 0)
+			return ret;
+	}
+
+	if (param->background_radar) {
+		ret = nla_put_flag(skb, HWSIM_ATTR_SUPPORT_BACKGROUND_RADAR);
+		if (ret < 0)
+			return ret;
+	}
 	return 0;
 }
 
@@ -4008,7 +4529,8 @@ out_err:
 
 static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 	{
-		.types_mask = BIT(NL80211_IFTYPE_STATION),
+		.types_mask = BIT(NL80211_IFTYPE_STATION) |
+			      BIT(NL80211_IFTYPE_P2P_CLIENT),
 		.he_cap = {
 			.has_he = true,
 			.he_cap_elem = {
@@ -4025,6 +4547,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 					IEEE80211_HE_MAC_CAP3_OMI_CONTROL |
 					IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,
 				.mac_cap_info[4] = IEEE80211_HE_MAC_CAP4_AMSDU_IN_AMPDU,
+				.phy_cap_info[0] =
+					IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_IN_2G,
 				.phy_cap_info[1] =
 					IEEE80211_HE_PHY_CAP1_PREAMBLE_PUNC_RX_MASK |
 					IEEE80211_HE_PHY_CAP1_DEVICE_CLASS_A |
@@ -4113,7 +4637,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 		},
 	},
 	{
-		.types_mask = BIT(NL80211_IFTYPE_AP),
+		.types_mask = BIT(NL80211_IFTYPE_AP) |
+			      BIT(NL80211_IFTYPE_P2P_GO),
 		.he_cap = {
 			.has_he = true,
 			.he_cap_elem = {
@@ -4130,6 +4655,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 					IEEE80211_HE_MAC_CAP3_OMI_CONTROL |
 					IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,
 				.mac_cap_info[4] = IEEE80211_HE_MAC_CAP4_AMSDU_IN_AMPDU,
+				.phy_cap_info[0] =
+					IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_IN_2G,
 				.phy_cap_info[1] =
 					IEEE80211_HE_PHY_CAP1_PREAMBLE_PUNC_RX_MASK |
 					IEEE80211_HE_PHY_CAP1_DEVICE_CLASS_A |
@@ -4233,6 +4760,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 					IEEE80211_HE_MAC_CAP3_OMI_CONTROL |
 					IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,
 				.mac_cap_info[4] = IEEE80211_HE_MAC_CAP4_AMSDU_IN_AMPDU,
+				.phy_cap_info[0] =
+					IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_IN_2G,
 				.phy_cap_info[1] =
 					IEEE80211_HE_PHY_CAP1_PREAMBLE_PUNC_RX_MASK |
 					IEEE80211_HE_PHY_CAP1_DEVICE_CLASS_A |
@@ -4260,8 +4789,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_2ghz[] = {
 
 static const struct ieee80211_sband_iftype_data sband_capa_5ghz[] = {
 	{
-		/* TODO: should we support other types, e.g., P2P? */
-		.types_mask = BIT(NL80211_IFTYPE_STATION),
+		.types_mask = BIT(NL80211_IFTYPE_STATION) |
+			      BIT(NL80211_IFTYPE_P2P_CLIENT),
 		.he_cap = {
 			.has_he = true,
 			.he_cap_elem = {
@@ -4385,7 +4914,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_5ghz[] = {
 		},
 	},
 	{
-		.types_mask = BIT(NL80211_IFTYPE_AP),
+		.types_mask = BIT(NL80211_IFTYPE_AP) |
+			      BIT(NL80211_IFTYPE_P2P_GO),
 		.he_cap = {
 			.has_he = true,
 			.he_cap_elem = {
@@ -4556,8 +5086,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_5ghz[] = {
 
 static const struct ieee80211_sband_iftype_data sband_capa_6ghz[] = {
 	{
-		/* TODO: should we support other types, e.g., P2P? */
-		.types_mask = BIT(NL80211_IFTYPE_STATION),
+		.types_mask = BIT(NL80211_IFTYPE_STATION) |
+			      BIT(NL80211_IFTYPE_P2P_CLIENT),
 		.he_6ghz_capa = {
 			.capa = cpu_to_le16(IEEE80211_HE_6GHZ_CAP_MIN_MPDU_START |
 					    IEEE80211_HE_6GHZ_CAP_MAX_AMPDU_LEN_EXP |
@@ -4702,7 +5232,8 @@ static const struct ieee80211_sband_iftype_data sband_capa_6ghz[] = {
 		},
 	},
 	{
-		.types_mask = BIT(NL80211_IFTYPE_AP),
+		.types_mask = BIT(NL80211_IFTYPE_AP) |
+			      BIT(NL80211_IFTYPE_P2P_GO),
 		.he_6ghz_capa = {
 			.capa = cpu_to_le16(IEEE80211_HE_6GHZ_CAP_MIN_MPDU_START |
 					    IEEE80211_HE_6GHZ_CAP_MAX_AMPDU_LEN_EXP |
@@ -4897,31 +5428,159 @@ static const struct ieee80211_sband_iftype_data sband_capa_6ghz[] = {
 				.tx_mcs_80p80 = cpu_to_le16(0xfffa),
 			},
 		},
+		.eht_cap = {
+			.has_eht = true,
+			.eht_cap_elem = {
+				.mac_cap_info[0] = IEEE80211_EHT_MAC_CAP0_OM_CONTROL |
+						   IEEE80211_EHT_MAC_CAP0_TRIG_TXOP_SHARING_MODE1,
+				.phy_cap_info[0] = IEEE80211_EHT_PHY_CAP0_320MHZ_IN_6GHZ,
+				/* Leave all the other PHY capability bytes
+				 * unset, as DCM, beam forming, RU and PPE
+				 * threshold information are not supported
+				 */
+			},
+			/* For all MCS and bandwidth, set 8 NSS for both Tx and
+			 * Rx
+			 */
+			.eht_mcs_nss_supp = {
+				/* As B1 and B2 are set in the supported
+				 * channel width set field in the HE PHY
+				 * capabilities information field and 320MHz in
+				 * 6GHz is supported include all the following
+				 * MCS/NSS.
+				 */
+				.bw._80 = {
+					.rx_tx_mcs9_max_nss = 0x88,
+					.rx_tx_mcs11_max_nss = 0x88,
+					.rx_tx_mcs13_max_nss = 0x88,
+				},
+				.bw._160 = {
+					.rx_tx_mcs9_max_nss = 0x88,
+					.rx_tx_mcs11_max_nss = 0x88,
+					.rx_tx_mcs13_max_nss = 0x88,
+				},
+				.bw._320 = {
+					.rx_tx_mcs9_max_nss = 0x88,
+					.rx_tx_mcs11_max_nss = 0x88,
+					.rx_tx_mcs13_max_nss = 0x88,
+				},
+			},
+			/* PPE threshold information is not supported */
+		},
 	},
 #endif
 };
 
+#define HWSIM_VHT_MCS_MAP				\
+	(IEEE80211_VHT_MCS_SUPPORT_0_9 << 0 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 2 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 4 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 6 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 8 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 10 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 12 |		\
+	 IEEE80211_VHT_MCS_SUPPORT_0_9 << 14)
+
+static const struct ieee80211_sta_ht_cap hwsim_nan_ht_cap = {
+	.ht_supported = true,
+	.cap = IEEE80211_HT_CAP_SUP_WIDTH_20_40 |
+	       IEEE80211_HT_CAP_GRN_FLD |
+	       IEEE80211_HT_CAP_SGI_20 |
+	       IEEE80211_HT_CAP_SGI_40 |
+	       IEEE80211_HT_CAP_DSSSCCK40,
+	.ampdu_factor = 0x3,
+	.ampdu_density = 0x6,
+	.mcs = {
+		.rx_mask = { 0xff, 0xff },
+		.tx_params = IEEE80211_HT_MCS_TX_DEFINED,
+	},
+};
+
+static const struct ieee80211_sta_vht_cap hwsim_nan_vht_cap = {
+	.vht_supported = true,
+	.cap = IEEE80211_VHT_CAP_MAX_MPDU_LENGTH_11454 |
+	       IEEE80211_VHT_CAP_SUPP_CHAN_WIDTH_160_80PLUS80MHZ |
+	       IEEE80211_VHT_CAP_RXLDPC |
+	       IEEE80211_VHT_CAP_SHORT_GI_80 |
+	       IEEE80211_VHT_CAP_SHORT_GI_160 |
+	       IEEE80211_VHT_CAP_TXSTBC |
+	       IEEE80211_VHT_CAP_RXSTBC_4 |
+	       IEEE80211_VHT_CAP_MAX_A_MPDU_LENGTH_EXPONENT_MASK,
+	.vht_mcs = {
+		.rx_mcs_map = cpu_to_le16(HWSIM_VHT_MCS_MAP),
+		.tx_mcs_map = cpu_to_le16(HWSIM_VHT_MCS_MAP),
+	},
+};
+
+static const struct ieee80211_sta_he_cap hwsim_nan_he_cap = {
+	.has_he = true,
+	.he_cap_elem = {
+		.mac_cap_info[0] =
+			IEEE80211_HE_MAC_CAP0_HTC_HE,
+		.mac_cap_info[1] =
+			IEEE80211_HE_MAC_CAP1_TF_MAC_PAD_DUR_16US |
+			IEEE80211_HE_MAC_CAP1_MULTI_TID_AGG_RX_QOS_8,
+		.mac_cap_info[2] =
+			IEEE80211_HE_MAC_CAP2_BSR |
+			IEEE80211_HE_MAC_CAP2_MU_CASCADING |
+			IEEE80211_HE_MAC_CAP2_ACK_EN,
+		.mac_cap_info[3] =
+			IEEE80211_HE_MAC_CAP3_OMI_CONTROL |
+			IEEE80211_HE_MAC_CAP3_MAX_AMPDU_LEN_EXP_EXT_3,
+		.mac_cap_info[4] = IEEE80211_HE_MAC_CAP4_AMSDU_IN_AMPDU,
+		.phy_cap_info[0] =
+			IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_40MHZ_80MHZ_IN_5G |
+			IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_160MHZ_IN_5G |
+			IEEE80211_HE_PHY_CAP0_CHANNEL_WIDTH_SET_80PLUS80_MHZ_IN_5G,
+		.phy_cap_info[1] =
+			IEEE80211_HE_PHY_CAP1_PREAMBLE_PUNC_RX_MASK |
+			IEEE80211_HE_PHY_CAP1_DEVICE_CLASS_A |
+			IEEE80211_HE_PHY_CAP1_LDPC_CODING_IN_PAYLOAD |
+			IEEE80211_HE_PHY_CAP1_MIDAMBLE_RX_TX_MAX_NSTS,
+		.phy_cap_info[2] =
+			IEEE80211_HE_PHY_CAP2_NDP_4x_LTF_AND_3_2US |
+			IEEE80211_HE_PHY_CAP2_STBC_TX_UNDER_80MHZ |
+			IEEE80211_HE_PHY_CAP2_STBC_RX_UNDER_80MHZ |
+			IEEE80211_HE_PHY_CAP2_UL_MU_FULL_MU_MIMO |
+			IEEE80211_HE_PHY_CAP2_UL_MU_PARTIAL_MU_MIMO,
+
+		/*
+		 * Leave all the other PHY capability bytes
+		 * unset, as DCM, beam forming, RU and PPE
+		 * threshold information are not supported
+		 */
+	},
+	.he_mcs_nss_supp = {
+		.rx_mcs_80 = cpu_to_le16(0xfffa),
+		.tx_mcs_80 = cpu_to_le16(0xfffa),
+		.rx_mcs_160 = cpu_to_le16(0xfffa),
+		.tx_mcs_160 = cpu_to_le16(0xfffa),
+		.rx_mcs_80p80 = cpu_to_le16(0xfffa),
+		.tx_mcs_80p80 = cpu_to_le16(0xfffa),
+	},
+};
+
 static void mac80211_hwsim_sband_capab(struct ieee80211_supported_band *sband)
 {
-	u16 n_iftype_data;
-
-	if (sband->band == NL80211_BAND_2GHZ) {
-		n_iftype_data = ARRAY_SIZE(sband_capa_2ghz);
-		sband->iftype_data =
-			(struct ieee80211_sband_iftype_data *)sband_capa_2ghz;
-	} else if (sband->band == NL80211_BAND_5GHZ) {
-		n_iftype_data = ARRAY_SIZE(sband_capa_5ghz);
-		sband->iftype_data =
-			(struct ieee80211_sband_iftype_data *)sband_capa_5ghz;
-	} else if (sband->band == NL80211_BAND_6GHZ) {
-		n_iftype_data = ARRAY_SIZE(sband_capa_6ghz);
-		sband->iftype_data =
-			(struct ieee80211_sband_iftype_data *)sband_capa_6ghz;
-	} else {
-		return;
+	switch (sband->band) {
+	case NL80211_BAND_2GHZ:
+#if 0
+		ieee80211_set_sband_iftype_data(sband, sband_capa_2ghz);
+#endif
+		break;
+	case NL80211_BAND_5GHZ:
+#if 0
+		ieee80211_set_sband_iftype_data(sband, sband_capa_5ghz);
+#endif
+		break;
+	case NL80211_BAND_6GHZ:
+#if 0
+		ieee80211_set_sband_iftype_data(sband, sband_capa_6ghz);
+#endif
+		break;
+	default:
+		break;
 	}
-
-	sband->n_iftype_data = n_iftype_data;
 }
 
 #ifdef CONFIG_MAC80211_MESH
@@ -4946,9 +5605,41 @@ static void mac80211_hwsim_sband_capab(struct ieee80211_supported_band *sband)
 	 BIT(NL80211_IFTYPE_MESH_POINT) | \
 	 BIT(NL80211_IFTYPE_OCB))
 
+static const u8 iftypes_ext_capa_ap[] = {
+	 [0] = WLAN_EXT_CAPA1_EXT_CHANNEL_SWITCHING,
+	 [2] = WLAN_EXT_CAPA3_MULTI_BSSID_SUPPORT,
+	 [7] = WLAN_EXT_CAPA8_OPMODE_NOTIF |
+	       WLAN_EXT_CAPA8_MAX_MSDU_IN_AMSDU_LSB,
+	 [8] = WLAN_EXT_CAPA9_MAX_MSDU_IN_AMSDU_MSB,
+	 [9] = WLAN_EXT_CAPA10_TWT_RESPONDER_SUPPORT,
+};
+
+#if 0
+#define MAC80211_HWSIM_MLD_CAPA_OPS				\
+	FIELD_PREP_CONST(IEEE80211_MLD_CAP_OP_TID_TO_LINK_MAP_NEG_SUPP, \
+			 IEEE80211_MLD_CAP_OP_TID_TO_LINK_MAP_NEG_SUPP_SAME) | \
+	FIELD_PREP_CONST(IEEE80211_MLD_CAP_OP_MAX_SIMUL_LINKS, \
+			 IEEE80211_MLD_MAX_NUM_LINKS - 1)
+#endif
+
+static const struct wiphy_iftype_ext_capab mac80211_hwsim_iftypes_ext_capa[] = {
+	{
+		.iftype = NL80211_IFTYPE_AP,
+		.extended_capabilities = iftypes_ext_capa_ap,
+		.extended_capabilities_mask = iftypes_ext_capa_ap,
+		.extended_capabilities_len = sizeof(iftypes_ext_capa_ap),
+		.eml_capabilities = IEEE80211_EML_CAP_EMLSR_SUPP |
+				    IEEE80211_EML_CAP_EMLMR_SUPPORT,
+#if 0
+		.mld_capa_and_ops = MAC80211_HWSIM_MLD_CAPA_OPS,
+#endif
+	},
+};
+
 static int mac80211_hwsim_new_radio(struct genl_info *info,
 				    struct hwsim_new_radio_params *param)
 {
+	pr_info("JETSKI: mac80211_hwsim_new_radio: param->nan_device=%d, param->iftypes=0x%x\n", param->nan_device, param->iftypes);
 	int err;
 	u8 addr[ETH_ALEN];
 	struct mac80211_hwsim_data *data;
@@ -4958,6 +5649,7 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	struct net *net;
 	int idx, i;
 	int n_limits = 0;
+	int n_bands __maybe_unused = 0;
 
 	if (WARN_ON(param->channels > 1 && !param->use_chanctx))
 		return -EINVAL;
@@ -4989,7 +5681,7 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	data = hw->priv;
 	data->hw = hw;
 
-	data->dev = device_create(hwsim_class, NULL, 0, hw, "hwsim%d", idx);
+	data->dev = device_create(&hwsim_class, NULL, 0, hw, "hwsim%d", idx);
 	if (IS_ERR(data->dev)) {
 		printk(KERN_DEBUG
 		       "mac80211_hwsim: device_create failed (%ld)\n",
@@ -5017,14 +5709,18 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		/* Why need here second address ? */
 		memcpy(data->addresses[1].addr, addr, ETH_ALEN);
 		data->addresses[1].addr[0] |= 0x40;
-		hw->wiphy->n_addresses = 2;
+		memcpy(data->addresses[2].addr, addr, ETH_ALEN);
+		data->addresses[2].addr[0] |= 0x50;
+
+		hw->wiphy->n_addresses = 3;
 		hw->wiphy->addresses = data->addresses;
 		/* possible address clash is checked at hash table insertion */
 	} else {
 		memcpy(data->addresses[0].addr, param->perm_addr, ETH_ALEN);
 		/* compatibility with automatically generated mac addr */
 		memcpy(data->addresses[1].addr, param->perm_addr, ETH_ALEN);
-		hw->wiphy->n_addresses = 2;
+		memcpy(data->addresses[2].addr, param->perm_addr, ETH_ALEN);
+		hw->wiphy->n_addresses = 3;
 		hw->wiphy->addresses = data->addresses;
 	}
 
@@ -5061,22 +5757,61 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		n_limits++;
 	}
 
+	if (param->iftypes & BIT(NL80211_IFTYPE_NAN)) {
+		data->if_limits[n_limits].max = 1;
+		data->if_limits[n_limits].types = BIT(NL80211_IFTYPE_NAN);
+		n_limits++;
+
+		hw->wiphy->nan_supported_bands = BIT(NL80211_BAND_2GHZ) |
+						 BIT(NL80211_BAND_5GHZ);
+
+#if 0
+		hw->wiphy->nan_capa.flags = WIPHY_NAN_FLAGS_CONFIGURABLE_SYNC |
+					    WIPHY_NAN_FLAGS_USERSPACE_DE;
+		hw->wiphy->nan_capa.op_mode = NAN_OP_MODE_PHY_MODE_MASK |
+					      NAN_OP_MODE_80P80MHZ |
+					      NAN_OP_MODE_160MHZ;
+
+		hw->wiphy->nan_capa.n_antennas = 0x22;
+		hw->wiphy->nan_capa.max_channel_switch_time = 0;
+#endif
+
+		wiphy_ext_feature_set(hw->wiphy,
+				      NL80211_EXT_FEATURE_SECURE_NAN);
+
+		hrtimer_init(&data->nan.slot_timer, CLOCK_BOOTTIME, HRTIMER_MODE_ABS_SOFT);
+		data->nan.slot_timer.function = mac80211_hwsim_nan_slot_timer;
+
+		hrtimer_init(&data->nan.resume_txqs_timer, CLOCK_BOOTTIME, HRTIMER_MODE_ABS_SOFT);
+		data->nan.resume_txqs_timer.function = mac80211_hwsim_nan_resume_txqs_timer;
+
+		hrtimer_init(&data->nan.discovery_beacon_timer, CLOCK_BOOTTIME, HRTIMER_MODE_ABS_SOFT);
+		data->nan.discovery_beacon_timer.function = mac80211_hwsim_nan_discovery_beacon_timer;
+
+		spin_lock_init(&data->nan.state_lock);
+		/*
+		 * NAN switches between bands/channels per its schedule,
+		 * so mac80211 rate control can't work here.
+		 */
+		ieee80211_hw_set(hw, HAS_RATE_CONTROL);
+	}
+
+	data->if_combination.radar_detect_widths =
+				BIT(NL80211_CHAN_WIDTH_5) |
+				BIT(NL80211_CHAN_WIDTH_10) |
+				BIT(NL80211_CHAN_WIDTH_20_NOHT) |
+				BIT(NL80211_CHAN_WIDTH_20) |
+				BIT(NL80211_CHAN_WIDTH_40) |
+				BIT(NL80211_CHAN_WIDTH_80) |
+				BIT(NL80211_CHAN_WIDTH_160);
+
 	if (data->use_chanctx) {
 		hw->wiphy->max_scan_ssids = 255;
 		hw->wiphy->max_scan_ie_len = IEEE80211_MAX_DATA_LEN;
 		hw->wiphy->max_remain_on_channel_duration = 1000;
-		data->if_combination.radar_detect_widths = 0;
 		data->if_combination.num_different_channels = data->channels;
 	} else {
 		data->if_combination.num_different_channels = 1;
-		data->if_combination.radar_detect_widths =
-					BIT(NL80211_CHAN_WIDTH_5) |
-					BIT(NL80211_CHAN_WIDTH_10) |
-					BIT(NL80211_CHAN_WIDTH_20_NOHT) |
-					BIT(NL80211_CHAN_WIDTH_20) |
-					BIT(NL80211_CHAN_WIDTH_40) |
-					BIT(NL80211_CHAN_WIDTH_80) |
-					BIT(NL80211_CHAN_WIDTH_160);
 	}
 
 	if (!n_limits) {
@@ -5112,6 +5847,8 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	hw->wiphy->mbssid_max_interfaces = 8;
 	hw->wiphy->ema_max_profile_periodicity = 3;
 
+	spin_lock_init(&data->tsf_offset_lock);
+
 	data->rx_rssi = DEFAULT_RX_RSSI;
 
 	INIT_DELAYED_WORK(&data->roc_start, hw_roc_start);
@@ -5133,6 +5870,11 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	ieee80211_hw_set(hw, REPORTS_TX_ACK_STATUS);
 	ieee80211_hw_set(hw, TDLS_WIDER_BW);
 	ieee80211_hw_set(hw, SUPPORTS_MULTI_BSSID);
+#if 0
+	ieee80211_hw_set(hw, STRICT);
+#endif
+	ieee80211_hw_set(hw, BUFF_MMPDU_TXQ);
+	ieee80211_hw_set(hw, STA_MMPDU_TXQ);
 
 	if (param->mlo) {
 		hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_MLO;
@@ -5140,6 +5882,10 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		ieee80211_hw_set(hw, SUPPORTS_DYNAMIC_PS);
 		ieee80211_hw_set(hw, CONNECTION_MONITOR);
 		ieee80211_hw_set(hw, AP_LINK_PS);
+
+		hw->wiphy->iftype_ext_capab = mac80211_hwsim_iftypes_ext_capa;
+		hw->wiphy->num_iftype_ext_capab =
+			ARRAY_SIZE(mac80211_hwsim_iftypes_ext_capa);
 	} else {
 		ieee80211_hw_set(hw, HOST_BROADCAST_PS_BUFFERING);
 		ieee80211_hw_set(hw, PS_NULLFUNC_STACK);
@@ -5151,13 +5897,14 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS |
 			    WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL |
 			    WIPHY_FLAG_AP_UAPSD |
-			    WIPHY_FLAG_SUPPORTS_5_10_MHZ |
 			    WIPHY_FLAG_HAS_CHANNEL_SWITCH;
+	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 	hw->wiphy->features |= NL80211_FEATURE_ACTIVE_MONITOR |
 			       NL80211_FEATURE_AP_MODE_CHAN_WIDTH_CHANGE |
 			       NL80211_FEATURE_STATIC_SMPS |
 			       NL80211_FEATURE_DYNAMIC_SMPS |
-			       NL80211_FEATURE_SCAN_RANDOM_MAC_ADDR;
+			       NL80211_FEATURE_SCAN_RANDOM_MAC_ADDR |
+			       NL80211_FEATURE_AP_SCAN;
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_VHT_IBSS);
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_BEACON_PROTECTION);
 	wiphy_ext_feature_set(hw->wiphy,
@@ -5168,6 +5915,20 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 
 	wiphy_ext_feature_set(hw->wiphy,
 			      NL80211_EXT_FEATURE_SCAN_MIN_PREQ_CONTENT);
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_BSS_COLOR);
+#if 0
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_SPP_AMSDU_SUPPORT);
+#endif
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_CAN_REPLACE_PTK0);
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_EXT_KEY_ID);
+#if 0
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_ASSOC_FRAME_ENCRYPTION);
+#endif
 
 	hw->wiphy->interface_modes = param->iftypes;
 
@@ -5175,6 +5936,7 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	hw->vif_data_size = sizeof(struct hwsim_vif_priv);
 	hw->sta_data_size = sizeof(struct hwsim_sta_priv);
 	hw->chanctx_data_size = sizeof(struct hwsim_chanctx_priv);
+	hw->txq_data_size = 0;
 
 	memcpy(data->channels_2ghz, hwsim_channels_2ghz,
 		sizeof(hwsim_channels_2ghz));
@@ -5188,6 +5950,11 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 
 	for (band = NL80211_BAND_2GHZ; band < NUM_NL80211_BANDS; band++) {
 		struct ieee80211_supported_band *sband = &data->bands[band];
+#if 0
+		struct wiphy_radio_freq_range *radio_range;
+		const struct ieee80211_channel *c;
+		struct wiphy_radio *radio;
+#endif
 
 		sband->band = band;
 
@@ -5215,23 +5982,11 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 				IEEE80211_VHT_CAP_RXSTBC_4 |
 				IEEE80211_VHT_CAP_MAX_A_MPDU_LENGTH_EXPONENT_MASK;
 			sband->vht_cap.vht_mcs.rx_mcs_map =
-				cpu_to_le16(IEEE80211_VHT_MCS_SUPPORT_0_9 << 0 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 2 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 4 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 6 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 8 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 10 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 12 |
-					    IEEE80211_VHT_MCS_SUPPORT_0_9 << 14);
+				cpu_to_le16(HWSIM_VHT_MCS_MAP);
 			sband->vht_cap.vht_mcs.tx_mcs_map =
 				sband->vht_cap.vht_mcs.rx_mcs_map;
 			break;
-		case NL80211_BAND_6GHZ:
-			sband->channels = data->channels_6ghz;
-			sband->n_channels = ARRAY_SIZE(hwsim_channels_6ghz);
-			sband->bitrates = data->rates + 4;
-			sband->n_bitrates = ARRAY_SIZE(hwsim_rates) - 4;
-			break;
+		/* case NL80211_BAND_6GHZ disabled to prevent kernel panic */
 		case NL80211_BAND_S1GHZ:
 			memcpy(&sband->s1g_cap, &hwsim_s1g_cap,
 			       sizeof(sband->s1g_cap));
@@ -5248,7 +6003,9 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 					    IEEE80211_HT_CAP_GRN_FLD |
 					    IEEE80211_HT_CAP_SGI_20 |
 					    IEEE80211_HT_CAP_SGI_40 |
-					    IEEE80211_HT_CAP_DSSSCCK40;
+					    IEEE80211_HT_CAP_DSSSCCK40 |
+					    IEEE80211_HT_CAP_TX_STBC |
+					    IEEE80211_HT_CAP_RX_STBC;
 			sband->ht_cap.ampdu_factor = 0x3;
 			sband->ht_cap.ampdu_density = 0x6;
 			memset(&sband->ht_cap.mcs, 0,
@@ -5261,7 +6018,39 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		mac80211_hwsim_sband_capab(sband);
 
 		hw->wiphy->bands[band] = sband;
+
+		if (!param->multi_radio)
+			continue;
+
+#if 0
+		c = sband->channels;
+		radio_range = &data->radio_range[n_bands];
+		radio_range->start_freq = ieee80211_channel_to_khz(c) - 10000;
+
+		c += sband->n_channels - 1;
+		radio_range->end_freq = ieee80211_channel_to_khz(c) + 10000;
+
+		radio = &data->radio[n_bands++];
+		radio->freq_range = radio_range;
+		radio->n_freq_range = 1;
+		radio->iface_combinations = &data->if_combination_radio;
+		radio->n_iface_combinations = 1;
+#endif
 	}
+
+#if 0
+	if (param->multi_radio) {
+		hw->wiphy->radio = data->radio;
+		hw->wiphy->n_radio = n_bands;
+
+		memcpy(&data->if_combination_radio, &data->if_combination,
+		       sizeof(data->if_combination));
+		data->if_combination.num_different_channels *= n_bands;
+	}
+#endif
+
+	if (data->use_chanctx)
+		data->if_combination.radar_detect_widths = 0;
 
 	/* By default all radios belong to the first group */
 	data->group = 1;
@@ -5290,18 +6079,25 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		schedule_timeout_interruptible(1);
 	}
 
+	wiphy_ext_feature_set(hw->wiphy,
+			      NL80211_EXT_FEATURE_DFS_CONCURRENT);
+	if (param->background_radar)
+		wiphy_ext_feature_set(hw->wiphy,
+				      NL80211_EXT_FEATURE_RADAR_BACKGROUND);
+
 	if (param->no_vif)
 		ieee80211_hw_set(hw, NO_AUTO_VIF);
 
 	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_CQM_RSSI_LIST);
+	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_PUNCT);
 
 	for (i = 0; i < ARRAY_SIZE(data->link_data); i++) {
-		hrtimer_init(&data->link_data[i].beacon_timer, CLOCK_MONOTONIC,
-			     HRTIMER_MODE_ABS_SOFT);
-		data->link_data[i].beacon_timer.function =
-			mac80211_hwsim_beacon;
+		hrtimer_init(&data->link_data[i].beacon_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_SOFT);
+		data->link_data[i].beacon_timer.function = mac80211_hwsim_beacon;
 		data->link_data[i].link_id = i;
 	}
+
+	pr_info("JETSKI: mac80211_hwsim_new_radio: registering hw with interface_modes=0x%x\n", hw->wiphy->interface_modes);
 
 	err = ieee80211_register_hw(hw);
 	if (err < 0) {
@@ -5328,6 +6124,13 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		debugfs_create_file("dfs_simulate_radar", 0222,
 				    data->debugfs,
 				    data, &hwsim_simulate_radar);
+	if (param->background_radar)
+		debugfs_create_file("dfs_background_cac", 0200,
+				    data->debugfs,
+				    data, &hwsim_background_cac_ops);
+	debugfs_create_file("simulate_incumbent_signal_interference", 0200,
+			    data->debugfs,
+			    data, &hwsim_simulate_incumbent_signal_fops);
 
 	if (param->pmsr_capa) {
 		data->pmsr_capa = *param->pmsr_capa;
@@ -5439,11 +6242,16 @@ static int mac80211_hwsim_get_radio(struct sk_buff *skb,
 					REGULATORY_STRICT_REG);
 	param.p2p_device = !!(data->hw->wiphy->interface_modes &
 					BIT(NL80211_IFTYPE_P2P_DEVICE));
+	param.nan_device = !!(data->hw->wiphy->interface_modes &
+					BIT(NL80211_IFTYPE_NAN));
 	param.use_chanctx = data->use_chanctx;
 	param.regd = data->regd;
 	param.channels = data->channels;
 	param.hwname = wiphy_name(data->hw->wiphy);
 	param.pmsr_capa = &data->pmsr_capa;
+	param.background_radar =
+		wiphy_ext_feature_isset(data->hw->wiphy,
+					NL80211_EXT_FEATURE_RADAR_BACKGROUND);
 
 	res = append_radio_msg(skb, data->idx, &param);
 	if (res < 0)
@@ -5472,7 +6280,7 @@ static void mac80211_hwsim_free(void)
 		spin_lock_bh(&hwsim_radio_lock);
 	}
 	spin_unlock_bh(&hwsim_radio_lock);
-	class_destroy(hwsim_class);
+	class_unregister(&hwsim_class);
 }
 
 static const struct net_device_ops hwsim_netdev_ops = {
@@ -5568,6 +6376,8 @@ static int hwsim_tx_info_frame_received_nl(struct sk_buff *skb_2,
 	/* not found */
 	if (!found)
 		goto out;
+
+	mac80211_hwsim_monitor_rx(data2->hw, skb, data2->channel);
 
 	/* Tx info received because the frame was broadcasted on user space,
 	 so we get all the necessary info: tx attempts and skb control buff */
@@ -5669,7 +6479,10 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	/* A frame is received from user space */
 	memset(&rx_status, 0, sizeof(rx_status));
 	if (info->attrs[HWSIM_ATTR_FREQ]) {
-		struct tx_iter_data iter_data = {};
+		struct tx_iter_data iter_data = {
+			.hw = data2->hw,
+			.rx_status = &rx_status,
+		};
 
 		/* throw away off-channel packets, but allow both the temporary
 		 * ("hw" scan/remain-on-channel), regular channels and links,
@@ -5807,6 +6620,84 @@ static int parse_ftm_capa(const struct nlattr *ftm_capa, struct cfg80211_pmsr_ca
 	out->ftm.trigger_based = !!tb[NL80211_PMSR_FTM_CAPA_ATTR_TRIGGER_BASED];
 	out->ftm.non_trigger_based = !!tb[NL80211_PMSR_FTM_CAPA_ATTR_NON_TRIGGER_BASED];
 
+#if 0
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_TX_ANTENNAS])
+		out->ftm.max_no_of_tx_antennas =
+			nla_get_u8(tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_TX_ANTENNAS]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_RX_ANTENNAS])
+		out->ftm.max_no_of_rx_antennas =
+			nla_get_u8(tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX_NUM_RX_ANTENNAS]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_EDCA])
+		out->ftm.min_allowed_ranging_interval_edca =
+			nla_get_u32(tb[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_EDCA]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_NTB])
+		out->ftm.min_allowed_ranging_interval_ntb =
+			nla_get_u32(tb[NL80211_PMSR_FTM_CAPA_ATTR_MIN_INTERVAL_NTB]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_PD_PREAMBLES])
+		out->ftm.pd_preambles =
+			nla_get_u32(tb[NL80211_PMSR_FTM_CAPA_ATTR_PD_PREAMBLES]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_PD_BANDWIDTHS])
+		out->ftm.pd_bandwidths =
+			nla_get_u32(tb[NL80211_PMSR_FTM_CAPA_ATTR_PD_BANDWIDTHS]);
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_ISTA_CAPS]) {
+		struct nlattr *ista_tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX + 1];
+
+		if (!nla_parse_nested(ista_tb, NL80211_PMSR_FTM_CAPA_ATTR_MAX,
+				      tb[NL80211_PMSR_FTM_CAPA_ATTR_ISTA_CAPS],
+				      hwsim_ftm_role_capa_policy, NULL)) {
+			out->ftm.ista.support_ntb =
+				!!ista_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_NTB];
+			out->ftm.ista.support_tb =
+				!!ista_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_TB];
+			out->ftm.ista.support_edca =
+				!!ista_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_EDCA];
+			if (ista_tb[NL80211_PMSR_ATTR_MAX_PEER_ISTA_ROLE])
+				out->ftm.ista.max_peers =
+					nla_get_u32(ista_tb[NL80211_PMSR_ATTR_MAX_PEER_ISTA_ROLE]);
+		}
+	}
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_RSTA_CAPS]) {
+		struct nlattr *rsta_tb[NL80211_PMSR_FTM_CAPA_ATTR_MAX + 1];
+
+		if (!nla_parse_nested(rsta_tb, NL80211_PMSR_FTM_CAPA_ATTR_MAX,
+				      tb[NL80211_PMSR_FTM_CAPA_ATTR_RSTA_CAPS],
+				      hwsim_ftm_role_capa_policy, NULL)) {
+			out->ftm.rsta.support_ntb =
+				!!rsta_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_NTB];
+			out->ftm.rsta.support_tb =
+				!!rsta_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_TB];
+			out->ftm.rsta.support_edca =
+				!!rsta_tb[NL80211_PMSR_FTM_CAPA_ATTR_SUPPORT_EDCA];
+			if (rsta_tb[NL80211_PMSR_ATTR_MAX_PEER_RSTA_ROLE])
+				out->ftm.rsta.max_peers =
+					nla_get_u32(rsta_tb[NL80211_PMSR_ATTR_MAX_PEER_RSTA_ROLE]);
+		}
+	}
+
+	if (tb[NL80211_PMSR_FTM_CAPA_ATTR_TYPE_CAPS]) {
+		struct nlattr *type_tb[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_MAX + 1];
+
+		if (!nla_parse_nested(type_tb, NL80211_PMSR_FTM_TYPE_CAPA_ATTR_MAX,
+				      tb[NL80211_PMSR_FTM_CAPA_ATTR_TYPE_CAPS],
+				      hwsim_ftm_type_capa_policy, NULL)) {
+			out->ftm.type.infra_support =
+				!!type_tb[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_INFRA_SUPPORT];
+			out->ftm.type.pd_support =
+				!!type_tb[NL80211_PMSR_FTM_TYPE_CAPA_ATTR_PD_SUPPORT];
+		}
+	}
+
+	out->ftm.concurrent_ista_rsta_support =
+		!!tb[NL80211_PMSR_FTM_CAPA_ATTR_CONCURRENT_ISTA_RSTA_SUPPORT];
+#endif
+
 	return 0;
 }
 
@@ -5817,6 +6708,10 @@ static int parse_pmsr_capa(const struct nlattr *pmsr_capa, struct cfg80211_pmsr_
 	struct nlattr *nla;
 	int size;
 	int ret;
+
+
+	pr_info("JETSKI: parse_pmsr_capa: pmsr_capa type=%d, len=%d\n", nla_type(pmsr_capa), nla_len(pmsr_capa));
+	print_hex_dump(KERN_INFO, "JETSKI: pmsr_capa payload: ", DUMP_PREFIX_OFFSET, 16, 1, nla_data(pmsr_capa), nla_len(pmsr_capa), false);
 
 	ret = nla_parse_nested(tb, NL80211_PMSR_ATTR_MAX, pmsr_capa, hwsim_pmsr_capa_policy, NULL);
 	if (ret) {
@@ -5857,6 +6752,7 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 
 	param.reg_strict = info->attrs[HWSIM_ATTR_REG_STRICT_REG];
 	param.p2p_device = info->attrs[HWSIM_ATTR_SUPPORT_P2P_DEVICE];
+	param.nan_device = info->attrs[HWSIM_ATTR_SUPPORT_NAN_DEVICE];
 	param.channels = channels;
 	param.destroy_on_close =
 		info->attrs[HWSIM_ATTR_DESTROY_RADIO_ON_CLOSE];
@@ -5876,6 +6772,12 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 		param.use_chanctx = true;
 	else
 		param.use_chanctx = (param.channels > 1);
+
+	if (info->attrs[HWSIM_ATTR_MULTI_RADIO])
+		param.multi_radio = true;
+
+	if (info->attrs[HWSIM_ATTR_SUPPORT_BACKGROUND_RADAR])
+		param.background_radar = true;
 
 	if (info->attrs[HWSIM_ATTR_REG_HINT_ALPHA2])
 		param.reg_alpha2 =
@@ -5925,6 +6827,18 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 		param.p2p_device = true;
 	}
 
+	if (param.nan_device) {
+		if (param.multi_radio) {
+			NL_SET_ERR_MSG(info->extack,
+				       "NAN is not supported on multi-radio wiphys");
+			return -EINVAL;
+		}
+		param.iftypes |= BIT(NL80211_IFTYPE_NAN) |
+				 BIT(NL80211_IFTYPE_NAN);
+	}
+
+	pr_info("JETSKI: hwsim_new_radio_nl: p2p_device=%d, nan_device=%d, iftypes=0x%x\n", param.p2p_device, param.nan_device, param.iftypes);
+
 	if (info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]) {
 		u32 len = nla_len(info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]);
 
@@ -5957,7 +6871,7 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 
 	param.mlo = info->attrs[HWSIM_ATTR_MLO_SUPPORT];
 
-	if (param.mlo)
+	if (param.mlo || param.multi_radio)
 		param.use_chanctx = true;
 
 	if (info->attrs[HWSIM_ATTR_RADIO_NAME]) {
@@ -5972,23 +6886,31 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 	if (info->attrs[HWSIM_ATTR_PMSR_SUPPORT]) {
 		struct cfg80211_pmsr_capabilities *pmsr_capa;
 
-		pmsr_capa = kmalloc(sizeof(*pmsr_capa), GFP_KERNEL);
+		pmsr_capa = kzalloc(sizeof(*pmsr_capa), GFP_KERNEL);
 		if (!pmsr_capa) {
 			ret = -ENOMEM;
 			goto out_free;
 		}
 		param.pmsr_capa = pmsr_capa;
 
+		pr_info("JETSKI: hwsim_new_radio_nl: parsing PMSR capa\n");
 		ret = parse_pmsr_capa(info->attrs[HWSIM_ATTR_PMSR_SUPPORT], pmsr_capa, info);
-		if (ret)
+		if (ret) {
+			pr_info("JETSKI: hwsim_new_radio_nl: parse_pmsr_capa failed with %d\n", ret);
 			goto out_free;
+		}
 	}
 
+	pr_info("JETSKI: hwsim_new_radio_nl: calling mac80211_hwsim_new_radio, virtio_enabled=%d\n", hwsim_virtio_enabled);
 	ret = mac80211_hwsim_new_radio(info, &param);
+	pr_info("JETSKI: hwsim_new_radio_nl: mac80211_hwsim_new_radio returned %d\n", ret);
+	if (ret >= 0)
+		ret = 0;
 
 out_free:
 	kfree(hwname);
 	kfree(param.pmsr_capa);
+	pr_info("JETSKI: hwsim_new_radio_nl: returning %d\n", ret);
 	return ret;
 }
 
@@ -6420,8 +7342,7 @@ static int init_vqs(struct virtio_device *vdev)
 		[HWSIM_VQ_RX] = "rx",
 	};
 
-	return virtio_find_vqs(vdev, HWSIM_NUM_VQS,
-			       hwsim_vqs, callbacks, names, NULL);
+	return virtio_find_vqs(vdev, HWSIM_NUM_VQS, hwsim_vqs, callbacks, names, NULL);
 }
 
 static int fill_vq(struct virtqueue *vq)
@@ -6515,7 +7436,6 @@ MODULE_DEVICE_TABLE(virtio, id_table);
 
 static struct virtio_driver virtio_hwsim = {
 	.driver.name = KBUILD_MODNAME,
-	.driver.owner = THIS_MODULE,
 	.id_table = id_table,
 	.probe = hwsim_virtio_probe,
 	.remove = hwsim_virtio_remove,
@@ -6571,13 +7491,9 @@ static int __init init_mac80211_hwsim(void)
 	if (err)
 		goto out_exit_netlink;
 
-	hwsim_class = class_create("mac80211_hwsim");
-	if (IS_ERR(hwsim_class)) {
-		err = PTR_ERR(hwsim_class);
+	err = class_register(&hwsim_class);
+	if (err)
 		goto out_exit_virtio;
-	}
-
-	hwsim_init_s1g_channels(hwsim_channels_s1g);
 
 	for (i = 0; i < radios; i++) {
 		struct hwsim_new_radio_params param = { 0 };
@@ -6604,11 +7520,11 @@ static int __init init_mac80211_hwsim(void)
 				param.regd = &hwsim_world_regdom_custom_01;
 			break;
 		case HWSIM_REGTEST_CUSTOM_WORLD:
-			param.regd = &hwsim_world_regdom_custom_01;
+			param.regd = &hwsim_world_regdom_custom_03;
 			break;
 		case HWSIM_REGTEST_CUSTOM_WORLD_2:
 			if (i == 0)
-				param.regd = &hwsim_world_regdom_custom_01;
+				param.regd = &hwsim_world_regdom_custom_03;
 			else if (i == 1)
 				param.regd = &hwsim_world_regdom_custom_02;
 			break;
@@ -6652,7 +7568,9 @@ static int __init init_mac80211_hwsim(void)
 
 		param.p2p_device = support_p2p_device;
 		param.mlo = mlo;
-		param.use_chanctx = channels > 1 || mlo;
+		param.multi_radio = multi_radio;
+		param.background_radar = true;
+		param.use_chanctx = channels > 1 || mlo || multi_radio;
 		param.iftypes = HWSIM_IFTYPE_SUPPORT_MASK;
 		if (param.p2p_device)
 			param.iftypes |= BIT(NL80211_IFTYPE_P2P_DEVICE);

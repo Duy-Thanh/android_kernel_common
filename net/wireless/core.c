@@ -634,8 +634,10 @@ static int wiphy_verify_combinations(struct wiphy *wiphy)
 			u16 types = c->limits[j].types;
 
 			/* interface types shouldn't overlap */
-			if (WARN_ON(types & all_iftypes))
+			if (WARN_ON(types & all_iftypes)) {
+				pr_info("wiphy_verify_combinations: overlap detected (types=%x, all=%x)\n", types, all_iftypes);
 				return -EINVAL;
+			}
 			all_iftypes |= types;
 
 			if (WARN_ON(!c->limits[j].max))
@@ -652,8 +654,10 @@ static int wiphy_verify_combinations(struct wiphy *wiphy)
 
 			/* Only a single NAN can be allowed */
 			if (WARN_ON(types & BIT(NL80211_IFTYPE_NAN) &&
-				    c->limits[j].max > 1))
+				    c->limits[j].max > 1)) {
+				pr_info("wiphy_verify_combinations: NAN max > 1 (max=%d)\n", c->limits[j].max);
 				return -EINVAL;
+			}
 
 			/*
 			 * This isn't well-defined right now. If you have an
@@ -675,8 +679,10 @@ static int wiphy_verify_combinations(struct wiphy *wiphy)
 			 * Don't advertise an unsupported type
 			 * in a combination.
 			 */
-			if (WARN_ON((wiphy->interface_modes & types) != types))
+			if (WARN_ON((wiphy->interface_modes & types) != types)) {
+				pr_info("wiphy_verify_combinations: unsupported types (modes=%x, types=%x)\n", wiphy->interface_modes, types);
 				return -EINVAL;
+			}
 		}
 
 		if (WARN_ON(all_iftypes & BIT(NL80211_IFTYPE_WDS)))
@@ -718,8 +724,13 @@ int wiphy_register(struct wiphy *wiphy)
 	if (WARN_ON((wiphy->interface_modes & BIT(NL80211_IFTYPE_NAN)) &&
 		    (!rdev->ops->start_nan || !rdev->ops->stop_nan ||
 		     !rdev->ops->add_nan_func || !rdev->ops->del_nan_func ||
-		     !(wiphy->nan_supported_bands & BIT(NL80211_BAND_2GHZ)))))
+		     !(wiphy->nan_supported_bands & BIT(NL80211_BAND_2GHZ))))) {
+		pr_info("wiphy_register: NAN check failed (start=%p, stop=%p, add=%p, del=%p, bands=%x)\n",
+			rdev->ops->start_nan, rdev->ops->stop_nan,
+			rdev->ops->add_nan_func, rdev->ops->del_nan_func,
+			wiphy->nan_supported_bands);
 		return -EINVAL;
+	}
 
 	if (WARN_ON(wiphy->interface_modes & BIT(NL80211_IFTYPE_WDS)))
 		return -EINVAL;
