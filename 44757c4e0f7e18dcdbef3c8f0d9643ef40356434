@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0c316d_f4cbef68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-13T11:16:06Z",
+      "side": 1,
+      "message": "@tabba@google.com pointed out that we might need a `dsb(ishst))` after the memcpy to make sure that the hardware sees an update before we poke the CWRITER doorbell.",
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
