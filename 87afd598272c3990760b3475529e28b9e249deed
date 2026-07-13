@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fd0050_a3b8db38",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-13T13:34:36Z",
+      "side": 1,
+      "message": "If unshare fails at this stage we should probably WARN_ON as there is no way to nicely recover this. Otherwise we are left with a host shared hyp page with refcount 0, that will probably be reused by someone else.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
