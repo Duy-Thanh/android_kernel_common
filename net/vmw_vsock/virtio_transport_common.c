@@ -1052,7 +1052,7 @@ destroy:
 	return err;
 }
 
-static void
+static bool
 virtio_transport_recv_enqueue(struct vsock_sock *vsk,
 			      struct virtio_vsock_pkt *pkt)
 {
@@ -1064,11 +1064,19 @@ virtio_transport_recv_enqueue(struct vsock_sock *vsk,
 
 	spin_lock_bh(&vvs->rx_lock);
 
+<<<<<<< HEAD   (83ef08444671601feea66e61a3da50f9dc149fcd Merge ecda37f8faab ("vsock/vmci: fix UAF when peer resets co)
 	can_enqueue = virtio_transport_inc_rx_pkt(vvs, pkt);
 	if (!can_enqueue) {
 		free_pkt = true;
+||||||| BASE   (ecda37f8faab3220da199335e42564cb7a9ad145 vsock/vmci: fix UAF when peer resets connection during hands)
+	can_enqueue = virtio_transport_inc_rx_pkt(vvs, len);
+	if (!can_enqueue) {
+		free_pkt = true;
+=======
+	can_enqueue = virtio_transport_inc_rx_pkt(vvs, len);
+	if (!can_enqueue)
+>>>>>>> BRANCH (b8abc2ca8c0f20ef418d0d20c04e27f93c16a7a2 vsock/virtio: reset connection on receiving queue overflow)
 		goto out;
-	}
 
 	if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM)
 		vvs->msg_count++;
@@ -1105,7 +1113,15 @@ virtio_transport_recv_enqueue(struct vsock_sock *vsk,
 out:
 	spin_unlock_bh(&vvs->rx_lock);
 	if (free_pkt)
+<<<<<<< HEAD   (83ef08444671601feea66e61a3da50f9dc149fcd Merge ecda37f8faab ("vsock/vmci: fix UAF when peer resets co)
 		virtio_transport_free_pkt(pkt);
+||||||| BASE   (ecda37f8faab3220da199335e42564cb7a9ad145 vsock/vmci: fix UAF when peer resets connection during hands)
+		kfree_skb(skb);
+=======
+		kfree_skb(skb);
+
+	return can_enqueue;
+>>>>>>> BRANCH (b8abc2ca8c0f20ef418d0d20c04e27f93c16a7a2 vsock/virtio: reset connection on receiving queue overflow)
 }
 
 static int
@@ -1117,7 +1133,23 @@ virtio_transport_recv_connected(struct sock *sk,
 
 	switch (le16_to_cpu(pkt->hdr.op)) {
 	case VIRTIO_VSOCK_OP_RW:
+<<<<<<< HEAD   (83ef08444671601feea66e61a3da50f9dc149fcd Merge ecda37f8faab ("vsock/vmci: fix UAF when peer resets co)
 		virtio_transport_recv_enqueue(vsk, pkt);
+||||||| BASE   (ecda37f8faab3220da199335e42564cb7a9ad145 vsock/vmci: fix UAF when peer resets connection during hands)
+		virtio_transport_recv_enqueue(vsk, skb);
+=======
+		if (!virtio_transport_recv_enqueue(vsk, skb)) {
+			/* There is no more space to queue the packet, so let's
+			 * close the connection; otherwise, we'll lose data.
+			 */
+			(void)virtio_transport_reset(vsk, skb);
+			virtio_transport_do_close(vsk, true);
+			sk->sk_err = ENOBUFS;
+			sk_error_report(sk);
+			vsock_remove_sock(vsk);
+			break;
+		}
+>>>>>>> BRANCH (b8abc2ca8c0f20ef418d0d20c04e27f93c16a7a2 vsock/virtio: reset connection on receiving queue overflow)
 		vsock_data_ready(sk);
 		return err;
 	case VIRTIO_VSOCK_OP_CREDIT_REQUEST:
