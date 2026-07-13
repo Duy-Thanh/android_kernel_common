@@ -34,6 +34,24 @@
       "parentUuid": "037c02f5_b8a91895",
       "revId": "8d315794b4edd3244b8e328edd5207f7721f0b29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81bc2a5c_38e8b008",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T08:56:10Z",
+      "side": 1,
+      "message": "I though maybe `phys + size - 1 \u003c pvmfw_base + pvmfw_size;` is clear to read, as the pvmfw range is exclusive. But your explanation makes sense to me.",
+      "parentUuid": "04d4a372_f7bcfd3e",
+      "revId": "8d315794b4edd3244b8e328edd5207f7721f0b29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
