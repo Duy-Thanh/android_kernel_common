@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2897a81_6aa65216",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:17:22Z",
+      "side": 1,
+      "message": "`aff \u0026 ~(GENMASK_ULL(32, 8) \u003e\u003e (lpi_aff \u003c\u003c 3))` uses a 25-bit `GENMASK(32,8)` where the Aff granularity boundaries are byte-aligned; for CommonLPIAff\u003d\u003d1 it yields Aff bits [31:25] rather than [31:24], dropping the low bit of each affinity level. Per the spec, the group key should be the full Aff3 / Aff3.Aff2 / Aff3.Aff2.Aff1 prefix. This mis-scopes the \"same property table\" grouping in `handle_lpi_enable`/`disable` and can wrongly reject a legal PROPBASER. Could you re-derive the mask against the CommonLPIAff encoding?",
+      "revId": "a2f19e5ade1e986f52b382d7889c595599054e18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
