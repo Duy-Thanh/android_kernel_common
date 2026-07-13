@@ -16,6 +16,23 @@
       "message": "Provider",
       "revId": "5792c0a89275a47b7394c71274c4f7e829d14ba9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ca4442_ad7c939f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4990284
+      },
+      "writtenOn": "2026-07-13T09:39:22Z",
+      "side": 1,
+      "message": "Unblock network lock",
+      "revId": "5792c0a89275a47b7394c71274c4f7e829d14ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
