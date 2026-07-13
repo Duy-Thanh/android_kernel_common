@@ -33,6 +33,24 @@
       "message": "Why was the missing tag `UPSTREAM:` ignored here?",
       "revId": "80ac5bfd28f72d64f9d31848bb159a1706a1dfd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e0eb99a_18ee137e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-13T07:22:59Z",
+      "side": 1,
+      "message": "Curious, but do KernelCommit failures not result in a Lint -1 vote? I wasn\u0027t expecting Autosubmit to work if there were actionable issues found.",
+      "parentUuid": "f3fe0536_f7ae53bd",
+      "revId": "80ac5bfd28f72d64f9d31848bb159a1706a1dfd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
