@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6efaecb3_0786e3bd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T13:38:04Z",
+      "side": 1,
+      "message": "Not sure about that to be honest...\n\nPer my understanding of [the following 6.18 code](https://elixir.bootlin.com/linux/v6.18/source/drivers/irqchip/irq-gic-v3-its.c#L255).\n```\nstatic struct gen_pool *itt_pool;\n\nstatic void *itt_alloc_pool(int node, int size)\n{\n\tunsigned long addr;\n\tstruct page *page;\n\n\tif (size \u003e\u003d PAGE_SIZE) {\n\t\tpage \u003d its_alloc_pages_node(node, GFP_KERNEL | __GFP_ZERO, get_order(size));\n\n\t\treturn page ? page_address(page) : NULL;\n\t}\n\n\tdo {\n\t\taddr \u003d gen_pool_alloc(itt_pool, size);\n\t\tif (addr)\n\t\t\tbreak;\n\n\t\tpage \u003d its_alloc_pages_node(node, GFP_KERNEL | __GFP_ZERO, 0);\n\t\tif (!page)\n\t\t\tbreak;\n\n\t\tgen_pool_add(itt_pool, (unsigned long)page_address(page), PAGE_SIZE, node);\n\t} while (!addr);\n\n\treturn (void *)addr;\n}\n```\n\nFor allocations smaller then a page, the first allocation will be aligned. However next allocation will try to exhaust the same page using `itt_pool`.",
+      "parentUuid": "7ece27a9_d37107c4",
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b86aca67_90844da0",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 1
