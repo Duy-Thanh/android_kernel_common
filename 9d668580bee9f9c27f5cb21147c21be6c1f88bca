@@ -16,6 +16,23 @@
       "message": "@adelva@google.com: I believe this CL is ready to go once it has your sign-off",
       "revId": "9d668580bee9f9c27f5cb21147c21be6c1f88bca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e24ae71_ac454aab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-13T16:37:12Z",
+      "side": 1,
+      "message": "Friendly ping to review so we can get this landed to match 6.18",
+      "revId": "9d668580bee9f9c27f5cb21147c21be6c1f88bca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
