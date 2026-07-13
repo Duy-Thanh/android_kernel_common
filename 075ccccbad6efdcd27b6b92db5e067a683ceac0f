@@ -16,6 +16,24 @@
       "message": "Unlike set_cr0/set_cr4, the set_efer callback in kvm_x86_ops has a return value (since https://lore.kernel.org/all/20201001112954.6258-4-mlevitsk@redhat.com/) and KVM assumes that set_efer may legitimately return an error (and returns this error to userspace) in some cases.\n\nAlthough I see that in the VMX case, vmx_set_efer() should always return success with a well-behaving host [*]. But that might change in the future (although unlikely)? Also, even though currently the entire `vmx/pkvm_host.c` is VMX-specific, perhaps some parts of it could be moved to a vendor-agnostic code in the future, to support non-VMX pKVM implementations, so maybe it\u0027s better to avoid adding such VMX-specific assumptions unless really needed? WDYT?\n\n[*] In fact, it looks like this hypercall here always returns success even with a misbehaving host, since vmx_set_efer() may only return an error if CONFIG_X86_64\u003dn which is not supported by pKVM.",
       "revId": "075ccccbad6efdcd27b6b92db5e067a683ceac0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f96e8d_f7c6e445",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T01:02:58Z",
+      "side": 1,
+      "message": "Agree. Let\u0027s return the return code from pkvm_hypercall.",
+      "parentUuid": "e465cbbd_8cac426e",
+      "revId": "075ccccbad6efdcd27b6b92db5e067a683ceac0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
