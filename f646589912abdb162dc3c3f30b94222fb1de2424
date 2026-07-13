@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb77bc77_43a912b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-13T18:02:41Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Guanyou.Che...\n\nCommit is not signed off by the author!\n\nMissing tag: Signed-off-by: Guanyou.Chen \u003cchenguanyou9338@gmail.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 0
+      },
+      "revId": "f646589912abdb162dc3c3f30b94222fb1de2424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
