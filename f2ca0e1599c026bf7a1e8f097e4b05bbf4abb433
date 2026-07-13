@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5abf96_3aeead7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T09:44:47Z",
+      "side": 1,
+      "message": "nit: maybe also add `Fixes: 9e3cd98939c8 (\"ANDROID: pKVM: x86: Add hypervisor panic and reset infrastructure\")`, just to not forget to squash the pkvm_panic -\u003e panic rename into Greg\u0027s original patch during rebase?\n\nOTOH, maybe that would be a bit misleading, since Greg\u0027s patch did not introduce any bug... So I\u0027m fine either way.",
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a1306f_25b4354e",
+        "filename": "arch/x86/kvm/pkvm/panic.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T09:44:47Z",
+      "side": 1,
+      "message": "Maybe it\u0027s better to remove this declaration and rely on the original one from `include/linux/panic.h` instead (just to avoid duplicating that declaration, since the idea is that the signature of our `panic()` must match the original signature anyway)?\n\nI\u0027ve just tried compiling with this declaration removed, it compiles without problems (so probably `linux/panic.h` is already implicitly included in our pKVM files, so we don\u0027t need to include it explicitly).",
+      "fixSuggestions": [
+        {
+          "fixId": "f351f2dd_948b2805",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.h",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
