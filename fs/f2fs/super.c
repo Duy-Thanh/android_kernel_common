@@ -1661,8 +1661,20 @@ static void f2fs_put_super(struct super_block *sb)
 	}
 
 	/* be sure to wait for any on-going discard commands */
+<<<<<<< HEAD   (4288381e9dcfded47d5c6283594cde46352aed09 Merge 1abd50fc3cfa ("lib/crypto: mpi: Fix integer underflow )
 	done = f2fs_issue_discard_timeout(sbi);
 	if (f2fs_realtime_discard_enable(sbi) && !sbi->discard_blks && done) {
+||||||| BASE   (1abd50fc3cfa16fc2074a3c8c2729c50fd9d7043 lib/crypto: mpi: Fix integer underflow in mpi_read_raw_from_)
+	dropped = f2fs_issue_discard_timeout(sbi);
+
+	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
+					!sbi->discard_blks && !dropped) {
+=======
+	dropped = f2fs_issue_discard_timeout(sbi, true);
+
+	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
+					!sbi->discard_blks && !dropped) {
+>>>>>>> BRANCH (3fec4b1f36ac38776137e738a364450e3feb86c7 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 		struct cp_control cpc = {
 			.reason = CP_UMOUNT | CP_TRIMMED,
 		};
@@ -2502,7 +2514,20 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
 			need_stop_discard = true;
 		} else {
 			f2fs_stop_discard_thread(sbi);
+<<<<<<< HEAD   (4288381e9dcfded47d5c6283594cde46352aed09 Merge 1abd50fc3cfa ("lib/crypto: mpi: Fix integer underflow )
 			f2fs_issue_discard_timeout(sbi);
+||||||| BASE   (1abd50fc3cfa16fc2074a3c8c2729c50fd9d7043 lib/crypto: mpi: Fix integer underflow in mpi_read_raw_from_)
+			if (atomic_read(&dcc->discard_cmd_cnt))
+				f2fs_issue_discard_timeout(sbi);
+=======
+			/*
+			 * f2fs_ioc_fitrim() won't race w/ "remount ro"
+			 * so it's safe to check discard_cmd_cnt in
+			 * f2fs_issue_discard_timeout().
+			 */
+			if (atomic_read(&dcc->discard_cmd_cnt))
+				f2fs_issue_discard_timeout(sbi, *flags & SB_RDONLY);
+>>>>>>> BRANCH (3fec4b1f36ac38776137e738a364450e3feb86c7 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 			need_restart_discard = true;
 		}
 	}

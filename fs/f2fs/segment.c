@@ -1678,6 +1678,7 @@ void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi)
 	}
 }
 
+<<<<<<< HEAD   (4288381e9dcfded47d5c6283594cde46352aed09 Merge 1abd50fc3cfa ("lib/crypto: mpi: Fix integer underflow )
 /**
  * f2fs_issue_discard_timeout() - Issue all discard cmd within UMOUNT_DISCARD_TIMEOUT
  * @sbi: the f2fs_sb_info data for discard cmd to issue
@@ -1687,6 +1688,13 @@ void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi)
  * Return true if issued all discard cmd or no discard cmd need issue, otherwise return false.
  */
 bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi)
+||||||| BASE   (1abd50fc3cfa16fc2074a3c8c2729c50fd9d7043 lib/crypto: mpi: Fix integer underflow in mpi_read_raw_from_)
+/* This comes from f2fs_put_super */
+bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi)
+=======
+/* This comes from f2fs_put_super */
+bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi, bool need_check)
+>>>>>>> BRANCH (3fec4b1f36ac38776137e738a364450e3feb86c7 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 {
 	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
 	struct discard_policy dpolicy;
@@ -1703,8 +1711,16 @@ bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi)
 	/* just to make sure there is no pending discard commands */
 	__wait_all_discard_cmd(sbi, NULL);
 
+<<<<<<< HEAD   (4288381e9dcfded47d5c6283594cde46352aed09 Merge 1abd50fc3cfa ("lib/crypto: mpi: Fix integer underflow )
 	f2fs_bug_on(sbi, atomic_read(&dcc->discard_cmd_cnt));
 	return !dropped;
+||||||| BASE   (1abd50fc3cfa16fc2074a3c8c2729c50fd9d7043 lib/crypto: mpi: Fix integer underflow in mpi_read_raw_from_)
+	f2fs_bug_on(sbi, atomic_read(&dcc->discard_cmd_cnt));
+	return dropped;
+=======
+	f2fs_bug_on(sbi, need_check && atomic_read(&dcc->discard_cmd_cnt));
+	return dropped;
+>>>>>>> BRANCH (3fec4b1f36ac38776137e738a364450e3feb86c7 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 }
 
 static int issue_discard_thread(void *data)
@@ -2148,7 +2164,15 @@ static void destroy_discard_cmd_control(struct f2fs_sb_info *sbi)
 	 * Recovery can cache discard commands, so in error path of
 	 * fill_super(), it needs to give a chance to handle them.
 	 */
+<<<<<<< HEAD   (4288381e9dcfded47d5c6283594cde46352aed09 Merge 1abd50fc3cfa ("lib/crypto: mpi: Fix integer underflow )
 	f2fs_issue_discard_timeout(sbi);
+||||||| BASE   (1abd50fc3cfa16fc2074a3c8c2729c50fd9d7043 lib/crypto: mpi: Fix integer underflow in mpi_read_raw_from_)
+	if (unlikely(atomic_read(&dcc->discard_cmd_cnt)))
+		f2fs_issue_discard_timeout(sbi);
+=======
+	if (unlikely(atomic_read(&dcc->discard_cmd_cnt)))
+		f2fs_issue_discard_timeout(sbi, true);
+>>>>>>> BRANCH (3fec4b1f36ac38776137e738a364450e3feb86c7 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 
 	kfree(dcc);
 	SM_I(sbi)->dcc_info = NULL;
