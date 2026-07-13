@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1d48a6_8201cf39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T06:40:54Z",
+      "side": 1,
+      "message": "I will remove this patch from this serial and upstream it first.",
+      "parentUuid": "98259c1c_35aec84e",
+      "revId": "6dbf2a09601dbc92d3c1f2d0eeb495836c86e3a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4a8e5db7_30b8fdde",
