@@ -12,7 +12,7 @@
 #include "internal.h"
 
 #define INCFS_MAX_MTREE_LEVELS 8
-#define INCFS_MAX_HASH_AREA_SIZE (1280 * 1024 * 1024)
+#define INCFS_MAX_HASH_AREA_SIZE (1792 * 1024 * 1024)
 
 struct incfs_hash_alg {
 	const char *name;
