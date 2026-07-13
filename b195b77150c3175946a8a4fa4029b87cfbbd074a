@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fecab9d_4f9bbfe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T05:15:28Z",
+      "side": 1,
+      "message": "Yes for pVM.",
+      "parentUuid": "2bc0ac9f_6cde27d2",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82718a49_5e2f0957",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-03T15:56:38Z",
       "side": 1,
       "message": "Ignorant question: could you remind me, is it ok that for a npVM, fpu_update_guest_xfd() is only called in pKVM, not in the host? I mean, fpu_update_guest_xfd() updates pKVM\u0027s values of `fpstate-\u003exfd`, `fpstate-\u003eregs.xsave.header.xfeatures` etc - so, which code is responsible for updating corresponding host\u0027s values?",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9146da_2b707067",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 12316,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T05:15:28Z",
+      "side": 1,
+      "message": "In the code path of handling npVM\u0027s XFD WRMSR vmexit, the XFD MSR is finally determined by the pKVM by calling fpu_swap_kvm_fpstate() before entering the npVM. So the host\u0027s xfd is not useful. It is always 0 (so the host always set the XFD MSR with value 0, but later the XFD MSR will be updated by the pKVM to the correct value). The host\u0027s xfeatures are updated by host executing xsave after exits to the host.\n\nIn the code path of handling npVM\u0027s XFD writing from the host user space, the host\u0027s xfd and xfeatures are not updated. When the host xrestores, the XFD MSR is still 0, so the host can restore the FPU state with the stale xfeatures. Later, the pKVM will update the XFD MSR with the right xfd value. Although the xrestore instruction from the host loads additional FPU components according to the stale xfeatures, the XFD MSR limits the components for the npVM. \n\nSo I think it doesn\u0027t have issue in these two cases for the npVM. Or any point I missed? Maybe a clear implementation for the npVM is to update the host\u0027s xfd/xfeatures as well.",
+      "parentUuid": "82718a49_5e2f0957",
       "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
