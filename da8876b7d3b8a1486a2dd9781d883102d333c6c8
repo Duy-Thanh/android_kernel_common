@@ -16,6 +16,24 @@
       "message": "This is a separate fix, for a different commit 28a2766b4a8e (\"ANDROID: pKVM: x86: trace: Support printing the guest VM trace\"), so it\u0027s better to do it in a separate patch with the corresponding `Fixes:` tag (so that we can we easily squash both fixes during future rebase)?",
       "revId": "da8876b7d3b8a1486a2dd9781d883102d333c6c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850ca8ca_f6765a22",
+        "filename": "arch/x86/kvm/pkvm_debugfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T06:18:37Z",
+      "side": 1,
+      "message": "This change is an optimization and no issue is fixed. The alloc_page_exact() below can take zero size and return NULL, and the perf is already checked. I will split it out.",
+      "parentUuid": "43b80b5b_ef3f9ef3",
+      "revId": "da8876b7d3b8a1486a2dd9781d883102d333c6c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
