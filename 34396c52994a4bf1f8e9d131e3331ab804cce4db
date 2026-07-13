@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed63b3af_7891a837",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:18:35Z",
+      "side": 1,
+      "message": "This function stores the raw host value and `enable_lpi()` later writes it to the physical register verbatim. The address is validated via share/pin, but for consistency with the ITS-side sanitization please mask RES0 before forwarding.",
+      "revId": "34396c52994a4bf1f8e9d131e3331ab804cce4db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
