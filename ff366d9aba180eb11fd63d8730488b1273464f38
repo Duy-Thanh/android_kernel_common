@@ -34,6 +34,24 @@
       "parentUuid": "c2c6f553_52d8d763",
       "revId": "ff366d9aba180eb11fd63d8730488b1273464f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdc09d8_7b5a5954",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T13:46:35Z",
+      "side": 1,
+      "message": "Added description of this issue to the commit message.",
+      "parentUuid": "9a92b879_ea4e43ac",
+      "revId": "ff366d9aba180eb11fd63d8730488b1273464f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
