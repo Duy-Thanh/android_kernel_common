@@ -1472,8 +1472,29 @@ static __net_init int nfsd_init_net(struct net *net)
 	retval = nfsd_idmap_init(net);
 	if (retval)
 		goto out_idmap_error;
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+=======
+	retval = nfsd_stat_counters_init(nn);
+	if (retval)
+		goto out_repcache_error;
+
+	memset(&nn->nfsd_svcstats, 0, sizeof(nn->nfsd_svcstats));
+	nn->nfsd_svcstats.program = &nfsd_program;
+	if (!nfsd_proc_stat_init(net)) {
+		retval = -ENOMEM;
+		goto out_proc_error;
+	}
+
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 	nn->nfsd_versions = NULL;
 	nn->nfsd4_minorversions = NULL;
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 	retval = nfsd_reply_cache_init(nn);
 	if (retval)
 		goto out_drc_error;
@@ -1489,10 +1510,28 @@ static __net_init int nfsd_init_net(struct net *net)
 	atomic_set(&nn->ntf_refcnt, 0);
 	init_waitqueue_head(&nn->ntf_wq);
 	seqlock_init(&nn->boot_lock);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+	nfsd_proc_stat_init(net);
+=======
+	nfsd4_init_leases_net(nn);
+	get_random_bytes(&nn->siphash_key, sizeof(nn->siphash_key));
+	seqlock_init(&nn->writeverf_lock);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 	return 0;
 
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 out_drc_error:
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+out_repcache_error:
+=======
+out_proc_error:
+	nfsd_stat_counters_destroy(nn);
+out_repcache_error:
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 	nfsd_idmap_shutdown(net);
 out_idmap_error:
 	nfsd_export_shutdown(net);

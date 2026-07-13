@@ -3439,8 +3439,16 @@ static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
 	consumer_report[0] = 0x03;
 	memcpy(&consumer_report[1], &data[3], 4);
 	/* We are called from atomic context */
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 	__hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
 			       consumer_report, sizeof(consumer_report), 5, 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+=======
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, sizeof(consumer_report), 5, 1);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 	return 1;
 }

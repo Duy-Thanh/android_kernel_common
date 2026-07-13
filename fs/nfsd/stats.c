@@ -126,10 +126,17 @@ static void nfsd_stat_counters_destroy(void)
 	nfsd_percpu_counters_destroy(nfsdstats.counter, NFSD_STATS_COUNTERS_NUM);
 }
 
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 int nfsd_stat_init(void)
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+void nfsd_proc_stat_init(struct net *net)
+=======
+struct proc_dir_entry *nfsd_proc_stat_init(struct net *net)
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 {
 	int err;
 
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 	err = nfsd_stat_counters_init();
 	if (err)
 		return err;
@@ -137,6 +144,11 @@ int nfsd_stat_init(void)
 	svc_proc_register(&init_net, &nfsd_svcstats, &nfsd_proc_ops);
 
 	return 0;
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+	svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+=======
+	return svc_proc_register(net, &nn->nfsd_svcstats, &nfsd_proc_ops);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 }
 
 void nfsd_stat_shutdown(void)

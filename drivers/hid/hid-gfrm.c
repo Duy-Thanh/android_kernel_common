@@ -65,16 +65,32 @@ static int gfrm_raw_event(struct hid_device *hdev, struct hid_report *report,
 	 */
 	switch (data[1]) {
 	case GFRM100_SEARCH_KEY_DOWN:
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
 					     sizeof(search_key_dn), sizeof(search_key_dn), 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), sizeof(search_key_dn), 1);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		break;
 
 	case GFRM100_SEARCH_KEY_AUDIO_DATA:
 		break;
 
 	case GFRM100_SEARCH_KEY_UP:
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
 					     sizeof(search_key_up), sizeof(search_key_up), 1);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), sizeof(search_key_up), 1);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 		break;
 
 	default:

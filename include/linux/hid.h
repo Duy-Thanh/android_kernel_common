@@ -1207,9 +1207,15 @@ static inline u32 hid_report_len(struct hid_report *report)
 }
 
 int hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
+<<<<<<< HEAD   (da27e9fc09a27bc1451f078bdd3a2727a8a38d94 Revert "usbip: vudc: Fix use after free bug in vudc_remove d)
 			 u32 size, int interrupt);
 int __hid_report_raw_event(struct hid_device *hid, int type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt);
+||||||| BASE   (ad3d1628a46134276546d7a12fedf04be9979158 USB: serial: cypress_m8: fix memory corruption with small en)
+		int interrupt);
+=======
+			 size_t bufsize, u32 size, int interrupt);
+>>>>>>> BRANCH (793385c154771603b8671dd8338927221e9d8d78 tun: free page on build_skb failure in tun_xdp_one())
 
 /* HID quirks API */
 unsigned long hid_lookup_quirk(const struct hid_device *hdev);
