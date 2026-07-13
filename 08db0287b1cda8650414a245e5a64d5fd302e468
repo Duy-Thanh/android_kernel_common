@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91893c7_46f6f4c6",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T13:42:42Z",
+      "side": 1,
+      "message": "**HVC under a raw spinlock with IRQs off.** `its_end_deprivilege()` calls `its_switch_to_shadow_locked()`, which calls `init_emulate_cb()` (the EL2 setup HVC that does the slow stage-2 donation) while holding `its_lock` plus every `its-\u003elock` with local IRQs disabled. `GFP_ATOMIC` fixed the sleeping allocation, but the HVC itself still runs in that critical section. As discussed on the RFC v1 thread (Option A), I\u0027d move to per-ITS granular locking (lock one ITS, swap plus HVC, unlock) so the section is bounded to a single node. My preference is to land this in the upstream v2 rather than block the A16 backport on it; noting it here so it\u0027s tracked. The GICR side (`gic_end_deprivilege`) has the identical problem.",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
