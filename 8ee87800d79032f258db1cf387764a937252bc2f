@@ -82,6 +82,24 @@
       "parentUuid": "f1416aa0_118b0bde",
       "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d34e6c_c1dc0f42",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T17:08:55Z",
+      "side": 1,
+      "message": "\u003e Based on my limited understanding, I feel that this also makes the unconditional assignments unsafe. For example, a malicious host could set bus_lock_detection_enabled for one vCPU and a second invocation can reset it. I think this can have different vCPUs seeing different values for the global fields. Not sure if its a problem.\n\nI think this is indeed a problem, at least because in the following patches aosp/4151703 + aosp/4151704 I add bounds-checking `vcpu-\u003evcpu_id` against `kvm-\u003earch.max_vcpu_ids`. So if the host is able to change the `kvm-\u003earch.max_vcpu_ids` value via triggering `postponed_per_vm_setup()` second time for another vCPU, it can decrease this value, making the bounds check of `vcpu-\u003evcpu_id` done for the first vCPU ineffective (i.e. still allowing the out-of-bounds access addressed by aosp/4151704).",
+      "parentUuid": "ac06a9aa_9e663356",
+      "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
