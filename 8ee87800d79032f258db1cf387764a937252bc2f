@@ -100,6 +100,24 @@
       "parentUuid": "ac06a9aa_9e663356",
       "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4720a9f7_461afaf6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T18:20:26Z",
+      "side": 1,
+      "message": "Done, PTAL.",
+      "parentUuid": "03d34e6c_c1dc0f42",
+      "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
