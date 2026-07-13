@@ -16,6 +16,24 @@
       "message": "Is the pvmfw range `[pvmfw_base, pvmfw_base + pvmfw_size)`? It seems the check expects the pvmfw range is `[pvmfw_base, pvmfw_base + pvmfw_size]`?",
       "revId": "8d315794b4edd3244b8e328edd5207f7721f0b29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d4a372_f7bcfd3e",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T08:19:48Z",
+      "side": 1,
+      "message": "It is `[pvmfw_base, pvmfw_base + pvmfw_size)` but the input range is `[phys, phys + size)` i.e. non-inclusive too. So we should use `\u003c\u003d`, right?",
+      "parentUuid": "037c02f5_b8a91895",
+      "revId": "8d315794b4edd3244b8e328edd5207f7721f0b29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
