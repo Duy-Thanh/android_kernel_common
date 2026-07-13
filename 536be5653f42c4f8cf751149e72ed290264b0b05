@@ -50,6 +50,23 @@
       "message": "Hi Todd, this is a FIXUP for a previous CL https://r.android.com/4079872.\n\nAnd it has been squashed and landed in android16-6.12 https://r.android.com/4128114.\n\nAnd it has been squashed in android-mainline https://r.android.com/4133354.\n\nTo be consistent, I guess we\u0027d like to submit this CL for android17-6.18 as well.",
       "revId": "536be5653f42c4f8cf751149e72ed290264b0b05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faebb386_bc2c9bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-07-13T04:44:48Z",
+      "side": 1,
+      "message": "Hi Todd, this is the missing CL that needs to be in android17-6.18 as well.",
+      "revId": "536be5653f42c4f8cf751149e72ed290264b0b05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
