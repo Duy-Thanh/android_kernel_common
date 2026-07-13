@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3afdd21_aa58e263",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5272,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bcd1120_b240e68a",
+      "range": {
+        "startLine": 5272,
+        "startChar": 5,
+        "endLine": 5272,
+        "endChar": 27
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e0507c5_7472ae96",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-07-10T09:00:24Z",
       "side": 1,
       "message": "Q: Why not use `raw_spin_lock_irqsave` if we want to keep this construct ? Otherwise WDYTH, is it better to move the `flags` saving in the caller and keep doing only `raw_spin_lock(\u0026its_lock);` in this function ? This is because depending on the caller you don\u0027t always need to disable interrupts. In this way we will avoid passing a pointer \u0026 validating it in the callee and we make it clear that the code can be preempted by an interrupt\n\nditto for the unlock part",
+      "range": {
+        "startLine": 5278,
+        "startChar": 0,
+        "endLine": 5280,
+        "endChar": 26
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dbd645_93bac29e",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5280,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e0507c5_7472ae96",
       "range": {
         "startLine": 5278,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56674bd6_3c457263",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5283,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0982af00_2a605679",
+      "range": {
+        "startLine": 5283,
+        "startChar": 1,
+        "endLine": 5283,
+        "endChar": 2
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29e93434_a95e7cdf",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-07-10T09:00:24Z",
       "side": 1,
       "message": "This comment is nor really accurate, here we are replacing the first level on the indirect ITS driver tables with the shadow tables so that the driver makes use of the shadow while the ITS emulation makes use of the original tables programmed in hardware that are unmapped from the host stage-2",
+      "range": {
+        "startLine": 5309,
+        "startChar": 1,
+        "endLine": 5309,
+        "endChar": 52
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9fa04c_921fce5d",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5309,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Hopefully now it\u0027s better.",
+      "parentUuid": "29e93434_a95e7cdf",
       "range": {
         "startLine": 5309,
         "startChar": 1,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f950e4_586f5644",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5311,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7e1652_e7a8b5f0",
+      "range": {
+        "startLine": 5311,
+        "startChar": 2,
+        "endLine": 5311,
+        "endChar": 31
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eb5ff33_251594e8",
@@ -129,6 +249,30 @@
       "writtenOn": "2026-07-10T09:00:24Z",
       "side": 1,
       "message": "NIT: %s/its_end_deprivilege",
+      "range": {
+        "startLine": 5328,
+        "startChar": 4,
+        "endLine": 5328,
+        "endChar": 24
+      },
+      "revId": "1b2e2c305e64de9d6f98c28d05528fccd516e922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6af4d2_0b713214",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5328,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T10:43:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb5ff33_251594e8",
       "range": {
         "startLine": 5328,
         "startChar": 4,
