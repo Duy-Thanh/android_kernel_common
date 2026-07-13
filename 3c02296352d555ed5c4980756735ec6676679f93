@@ -44,6 +44,24 @@
       ],
       "revId": "3c02296352d555ed5c4980756735ec6676679f93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4d8289_7a39940d",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T06:32:37Z",
+      "side": 1,
+      "message": "Then we will need to change some more places. But renaming seems more clean than adding a new panic function. Will rename.",
+      "parentUuid": "6b1281ce_f75ee178",
+      "revId": "3c02296352d555ed5c4980756735ec6676679f93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
