@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a1f0e91_27036dee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-13T18:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5e652b_a89992f1",
+      "revId": "167632b36566896bb342882867977bd7a53dee50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c0ba3de_fb6d31c3",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-10T15:13:40Z",
       "side": 1,
       "message": "Need a space after the \u0027:\u0027",
+      "revId": "167632b36566896bb342882867977bd7a53dee50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956847e9_2d02a563",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-13T18:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c0ba3de_fb6d31c3",
       "revId": "167632b36566896bb342882867977bd7a53dee50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
