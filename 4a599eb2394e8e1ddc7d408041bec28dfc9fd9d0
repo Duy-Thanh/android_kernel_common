@@ -33,6 +33,24 @@
       "message": "There are multiple issues with this cherry-pick. Please see the KernelCommit messages in the Checks tab.",
       "revId": "4a599eb2394e8e1ddc7d408041bec28dfc9fd9d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e25a7d_0b692479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4874519
+      },
+      "writtenOn": "2026-07-13T12:39:10Z",
+      "side": 1,
+      "message": "Uploaded patch set 7: Commit message was updated.",
+      "parentUuid": "1c09dcd3_7ee68588",
+      "revId": "4a599eb2394e8e1ddc7d408041bec28dfc9fd9d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
