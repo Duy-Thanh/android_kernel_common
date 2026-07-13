@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b038ba4_b3b7a74c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-13T11:50:41Z",
+      "side": 1,
+      "message": "This can probably go away, we check it in the caller as well.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 9
+      },
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f003bead_c609c4ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-13T11:50:41Z",
+      "side": 1,
+      "message": "Q: Would there be a case where we pass a NULL lock ?",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 41,
+        "endChar": 12
+      },
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc0c316d_f4cbef68",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 8
