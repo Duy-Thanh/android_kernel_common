@@ -34,6 +34,24 @@
       ],
       "revId": "53a7f68d4747358a59089a73430dab42c4d1d0cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5deae878_83cc6654",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T05:20:40Z",
+      "side": 1,
+      "message": "Yeah, I missed the truth that vcpu_run may return negative value as well. Let\u0027s use !! to convert.",
+      "parentUuid": "590cdc4c_abf77274",
+      "revId": "53a7f68d4747358a59089a73430dab42c4d1d0cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
