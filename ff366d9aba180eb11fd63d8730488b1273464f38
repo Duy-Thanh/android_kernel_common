@@ -16,6 +16,24 @@
       "message": "That was because the address is canonical VA. As the pkvm_pgtable_walk() will drop the bits exceeding the max virtual address bit. Just wondering if there is any real security issue without this check?",
       "revId": "ff366d9aba180eb11fd63d8730488b1273464f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a92b879_ea4e43ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T10:17:09Z",
+      "side": 1,
+      "message": "\u003e That was because the address is canonical VA.\n\nWhich is why I also prepared the previous patch aosp/4151699.\n\nIf we just validate the size of the range, this check is only partially useful, right? The caller can easily bypass it, by passing a range which is small enough but which crosses the upper boundary of the address space.\n\n\u003e Just wondering if there is any real security issue without this check?\n\nYep, the AI found a security issue: while `pkvm_pgtable_walk()` drops the upper bits, `gpa_range_overlaps_pvmfw()` doesn\u0027t drop them. So if a GPA has upper bits set, while, for example, its lower bits match `pvmfw_load_addr`, then `gpa_range_overlaps_pvmfw()` compares this GPA against `pvmfw_load_addr` and returns false, and then `pkvm_host_donate_guest()` maps this GPA in the guest MMU (which means mapping `pvmfw_load_addr` in the guest MMU, since `pkvm_pgtable_walk()` drops the upper bits) without copying pvmfw into the guest page. Which means that the host substitutes the pvmfw image with its own one.",
+      "parentUuid": "c2c6f553_52d8d763",
+      "revId": "ff366d9aba180eb11fd63d8730488b1273464f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
