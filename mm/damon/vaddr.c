@@ -367,6 +367,154 @@ static void damon_va_update(struct damon_ctx *ctx)
 	}
 }
 
+<<<<<<< HEAD   (725927f0e160a338faf628eb9ec74f51da8c2b2e Merge 897d6a724773 ("fs/fcntl: fix SOFTIRQ-unsafe lock order)
+||||||| BASE   (897d6a7247739fb1528f98c575df4f2e5de7f994 fs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling)
+/*
+ * Get an online page for a pfn if it's in the LRU list.  Otherwise, returns
+ * NULL.
+ *
+ * The body of this function is stolen from the 'page_idle_get_page()'.  We
+ * steal rather than reuse it because the code is quite simple.
+ */
+static struct page *damon_get_page(unsigned long pfn)
+{
+	struct page *page = pfn_to_online_page(pfn);
+
+	if (!page || !PageLRU(page) || !get_page_unless_zero(page))
+		return NULL;
+
+	if (unlikely(!PageLRU(page))) {
+		put_page(page);
+		page = NULL;
+	}
+	return page;
+}
+
+static void damon_ptep_mkold(pte_t *pte, struct vm_area_struct *vma,
+			     unsigned long addr)
+{
+	bool referenced = false;
+	struct page *page = damon_get_page(pte_pfn(*pte));
+
+	if (!page)
+		return;
+
+	if (ptep_test_and_clear_young(vma, addr, pte))
+		referenced = true;
+
+#ifdef CONFIG_MMU_NOTIFIER
+	if (mmu_notifier_clear_young(vma->vm_mm, addr, addr + PAGE_SIZE))
+		referenced = true;
+#endif /* CONFIG_MMU_NOTIFIER */
+
+	if (referenced)
+		set_page_young(page);
+
+	set_page_idle(page);
+	put_page(page);
+}
+
+static void damon_pmdp_mkold(pmd_t *pmd, struct vm_area_struct *vma,
+			     unsigned long addr)
+{
+#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+	bool referenced = false;
+	struct page *page = damon_get_page(pmd_pfn(*pmd));
+
+	if (!page)
+		return;
+
+	if (pmdp_test_and_clear_young(vma, addr, pmd))
+		referenced = true;
+
+#ifdef CONFIG_MMU_NOTIFIER
+	if (mmu_notifier_clear_young(vma->vm_mm, addr,
+				addr + ((1UL) << HPAGE_PMD_SHIFT)))
+		referenced = true;
+#endif /* CONFIG_MMU_NOTIFIER */
+
+	if (referenced)
+		set_page_young(page);
+
+	set_page_idle(page);
+	put_page(page);
+#endif /* CONFIG_TRANSPARENT_HUGEPAGE */
+}
+
+=======
+/*
+ * Get an online page for a pfn if it's in the LRU list.  Otherwise, returns
+ * NULL.
+ *
+ * The body of this function is stolen from the 'page_idle_get_page()'.  We
+ * steal rather than reuse it because the code is quite simple.
+ */
+static struct page *damon_get_page(unsigned long pfn)
+{
+	struct page *page = pfn_to_online_page(pfn);
+
+	if (!page || !get_page_unless_zero(page))
+		return NULL;
+
+	if (!PageLRU(page)) {
+		put_page(page);
+		page = NULL;
+	}
+	return page;
+}
+
+static void damon_ptep_mkold(pte_t *pte, struct vm_area_struct *vma,
+			     unsigned long addr)
+{
+	bool referenced = false;
+	struct page *page = damon_get_page(pte_pfn(*pte));
+
+	if (!page)
+		return;
+
+	if (ptep_test_and_clear_young(vma, addr, pte))
+		referenced = true;
+
+#ifdef CONFIG_MMU_NOTIFIER
+	if (mmu_notifier_clear_young(vma->vm_mm, addr, addr + PAGE_SIZE))
+		referenced = true;
+#endif /* CONFIG_MMU_NOTIFIER */
+
+	if (referenced)
+		set_page_young(page);
+
+	set_page_idle(page);
+	put_page(page);
+}
+
+static void damon_pmdp_mkold(pmd_t *pmd, struct vm_area_struct *vma,
+			     unsigned long addr)
+{
+#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+	bool referenced = false;
+	struct page *page = damon_get_page(pmd_pfn(*pmd));
+
+	if (!page)
+		return;
+
+	if (pmdp_test_and_clear_young(vma, addr, pmd))
+		referenced = true;
+
+#ifdef CONFIG_MMU_NOTIFIER
+	if (mmu_notifier_clear_young(vma->vm_mm, addr,
+				addr + ((1UL) << HPAGE_PMD_SHIFT)))
+		referenced = true;
+#endif /* CONFIG_MMU_NOTIFIER */
+
+	if (referenced)
+		set_page_young(page);
+
+	set_page_idle(page);
+	put_page(page);
+#endif /* CONFIG_TRANSPARENT_HUGEPAGE */
+}
+
+>>>>>>> BRANCH (21a9b19ce2e81e26844c3ba9304b64da1be29b86 mm/damon/ops-common: call folio_test_lru() after folio_get())
 static int damon_mkold_pmd_entry(pmd_t *pmd, unsigned long addr,
 		unsigned long next, struct mm_walk *walk)
 {
