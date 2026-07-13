@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c3a6e1_e4ff27a4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T12:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b038ba4_b3b7a74c",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 9
+      },
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f003bead_c609c4ae",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de210644_1b55a3c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T12:29:21Z",
+      "side": 1,
+      "message": "No, actually not. Removed.",
+      "parentUuid": "f003bead_c609c4ae",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 41,
+        "endChar": 12
+      },
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc0c316d_f4cbef68",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-07-13T11:16:06Z",
       "side": 1,
       "message": "@tabba@google.com pointed out that we might need a `dsb(ishst))` after the memcpy to make sure that the hardware sees an update before we poke the CWRITER doorbell.",
+      "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04495b58_2683dff8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-13T12:29:21Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right. This is going to hurt in aosp/4113407... ;/",
+      "parentUuid": "bc0c316d_f4cbef68",
       "revId": "44757c4e0f7e18dcdbef3c8f0d9643ef40356434",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
