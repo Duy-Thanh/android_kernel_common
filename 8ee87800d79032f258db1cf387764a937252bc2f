@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1416aa0_118b0bde",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-13T13:18:32Z",
+      "side": 1,
+      "message": "I think the created_vcpus check does not guarantee that postponed_per_vm_setup() runs only once. Host KVM releases kvm-\u003elock before kvm_arch_vcpu_create(), so if vCPU creation hypercalls can run concurrently, those calls may observe the created_vcpus \u003d\u003d 0, execute the setup, and then successfully attach as separate vCPUs. \n\nBased on my limited understanding, I feel that this also makes the unconditional assignments unsafe. For example, a malicious host could set bus_lock_detection_enabled for one vCPU and a second invocation can reset it. I think this can have different vCPUs seeing different values for the global fields. Not sure if its a problem.\n\nCould we add a hypervisor specific boolean indicating that the per-VM setup has been completed, and test/set it while holding pkvm_vm-\u003elock in postponed_per_vm_setup? This state is distinct from created_vcpus: setup is latched before vCPU initialization, whereas created_vcpus counts successfully attached  vCPUs.",
+      "fixSuggestions": [
+        {
+          "fixId": "4948fbba_25cc755a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tpkvm_vm-\u003eper_vm_setup_done \u003d false;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (pkvm_vm-\u003eper_vm_setup_done)\n\t\tgoto unlock;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\tpkvm_vm-\u003eper_vm_setup_done \u003d true;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 544,
+                "startChar": 0,
+                "endLine": 546,
+                "endChar": 0
+              },
+              "replacement": "\tpostponed_per_vm_setup(kvm);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
