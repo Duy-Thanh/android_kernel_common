@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "89410e39_9261fab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T07:01:08Z",
+      "side": 1,
+      "message": "No we don\u0027t have. The PKVM_PAGE_NONE/PKVM_ID_HOST is not a state to check when donate memory back to the host. Just a potential issue if such combined state is treated as a host owned page. Please feel free to remove this sentence if it is unclear and confuse.",
+      "parentUuid": "bf943e54_e377061e",
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3936b0b9_7e6ddc14",
