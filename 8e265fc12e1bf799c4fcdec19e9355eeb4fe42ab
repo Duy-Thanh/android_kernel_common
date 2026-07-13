@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90441d1_bfd5a685",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2537,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:13:10Z",
+      "side": 1,
+      "message": "Issues its per-redistributor HVC while holding every `rd_lock` with IRQs off. Same recommendation as the earlier case: fold into the per-node granular-locking rework (Option A from RFC) upstream, covering both halves so they don\u0027t diverge.",
+      "revId": "8e265fc12e1bf799c4fcdec19e9355eeb4fe42ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
