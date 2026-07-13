@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6075b006_fe9dbe1a",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-13T22:15:50Z",
+      "side": 1,
+      "message": "Why don\u0027t we just move this unlock step a bit down further (after `intel_pasid_clear_entry(dev, pasid, fault_ignore);`). Since it isn\u0027t a hot path anyways.",
+      "revId": "e3fbb4ccad3eb3bf67dd98a305ba85a16a8b22bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
