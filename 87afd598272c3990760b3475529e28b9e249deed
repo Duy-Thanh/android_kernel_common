@@ -22,6 +22,23 @@
       },
       "revId": "87afd598272c3990760b3475529e28b9e249deed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1585865_2e4aa514",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T13:50:00Z",
+      "side": 1,
+      "message": "`lvl1_sz \u003d (1 \u003c\u003c order) \u003c\u003c PAGE_SHIFT` is the L1 table size in **bytes**, but `lvl1_idx` is an **entry** index, and a two-level table\u0027s L1 entry is architecturally fixed at 8 bytes. So `lvl1_idx \u003e\u003d lvl1_sz` permits an index up to ~8x the valid count, and `host_table[lvl1_idx]` / `hyp_table[lvl1_idx] \u003d ...` then read/write out of bounds of the L1 table in EL2. `id` here is the host-supplied Device ID from MAPD. How about `if (lvl1_idx \u003e\u003d lvl1_sz / sizeof(u64))`?",
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
