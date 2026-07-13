@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc3bac4_79b938c6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:07:41Z",
+      "side": 1,
+      "message": "`value \u0026\u003d ~GENMASK(47, 12) | ~GENMASK(9, 0)` is all-ones, so the host\u0027s Physical_Address [47:12] and Page_Size/Size [9:0] bits aren\u0027t cleared before the shadow BASER value is OR\u0027d in, letting a host partially redirect an ITS table base. Should be `value \u0026\u003d ~(GENMASK(47, 12) | GENMASK(9, 0));`. One caveat: that mask clears the PA correctly for 4KB/16KB tables, but for 64KB pages register bits [15:12] also carry PA[51:48], so if the shadow BASER can use 64KB pages the mask must widen to match. So this depends on the the page size this path programs, worth checking/",
+      "revId": "b1080a4cb6ad0394eed781185a39f1a38bdf41a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
