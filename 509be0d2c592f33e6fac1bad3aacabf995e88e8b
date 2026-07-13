@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e5bce1d_2ac335c1",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:11:02Z",
+      "side": 1,
+      "message": "Dead store.",
+      "revId": "509be0d2c592f33e6fac1bad3aacabf995e88e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
