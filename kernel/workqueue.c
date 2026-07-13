@@ -5590,8 +5590,16 @@ static int alloc_and_link_pwqs(struct workqueue_struct *wq)
 		ret = apply_workqueue_attrs_locked(wq, unbound_std_wq_attrs[highpri]);
 	}
 
+<<<<<<< HEAD   (369357e2961bf20aba206c31d30f787cfdd4b284 Merge 8c9d5557c8e6 ("PCI: tegra194: Disable PERST# IRQ only )
 oem_skip:
 	return ret;
+||||||| BASE   (8c9d5557c8e64992024b8242050928e9ab0fa271 PCI: tegra194: Disable PERST# IRQ only in Endpoint mode)
+	return ret;
+=======
+	if (ret)
+		goto enomem;
+	return 0;
+>>>>>>> BRANCH (76b0a23c66dd1f34f8b80bf1a76aeb46cbed8550 mptcp: fix rx timestamp corruption on fastopen)
 
 enomem:
 	if (wq->cpu_pwq) {
