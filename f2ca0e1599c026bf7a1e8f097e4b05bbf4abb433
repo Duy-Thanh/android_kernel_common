@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1db613dc_7937e140",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T16:37:11Z",
+      "side": 1,
+      "message": "BTW maybe, again, it\u0027s better to split this patch into two: the one renaming pkvm_panic() (to be squashed into 9e3cd98939c8) and then the one fixing IOMMU_WAIT_OP (to be squashed into 3afef6db295f)? (Again, just to make it easier to squash it later.)",
+      "parentUuid": "8b221120_6c2ea970",
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a1306f_25b4354e",
