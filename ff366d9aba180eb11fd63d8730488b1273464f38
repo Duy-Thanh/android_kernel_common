@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c6f553_52d8d763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-07-13T09:36:22Z",
+      "side": 1,
+      "message": "That was because the address is canonical VA. As the pkvm_pgtable_walk() will drop the bits exceeding the max virtual address bit. Just wondering if there is any real security issue without this check?",
+      "revId": "ff366d9aba180eb11fd63d8730488b1273464f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
