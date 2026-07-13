@@ -756,10 +756,27 @@ static int pkvm_init_its_emulation(phys_addr_t dev_addr, struct its_shadow_table
 	return ret;
 }
 
+static int pkvm_init_redist_emulation(phys_addr_t dev_addr)
+{
+	void *redist_state;
+	int ret;
+
+	redist_state = (void *)__get_free_page(GFP_ATOMIC | __GFP_ZERO);
+	if (!redist_state)
+		return -ENOMEM;
+
+	ret = kvm_call_hyp_nvhe(__pkvm_init_redist_emulation, dev_addr,
+				redist_state);
+	if (ret)
+		free_page((unsigned long)redist_state);
+
+	return ret;
+}
+
 static int __init pkvm_drop_host_privileges(void)
 {
 	int ret = 0;
-	unsigned long its_flags;
+	unsigned long its_flags, gic_flags;
 
 	/*
 	 * Flip the static key upfront as that may no longer be possible
@@ -768,7 +785,9 @@ static int __init pkvm_drop_host_privileges(void)
 	static_branch_enable(&kvm_protected_mode_initialized);
 
 	its_start_deprivilege(&its_flags);
+	gic_start_deprivilege(&gic_flags);
 	on_each_cpu(_kvm_host_prot_finalize, &ret, 1);
+	gic_end_deprivilege(&gic_flags, &pkvm_init_redist_emulation);
 	its_end_deprivilege(ret, &its_flags, &pkvm_init_its_emulation);
 
 	return ret;
