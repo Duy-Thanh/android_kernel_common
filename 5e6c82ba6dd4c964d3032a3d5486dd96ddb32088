@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c2d75c2_27ee7c28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T13:44:36Z",
+      "side": 1,
+      "message": "**Missing barrier before the CWRITER doorbell.** Between the `memcpy()` of the command bytes into the hyp command queue and the `writeq_relaxed()` to `GITS_CWRITER` that rings the doorbell, there\u0027s no `dsb(ishst)`. The ITS may observe the doorbell before the command bytes are visible in memory. Please add `dsb(ishst)` after the memcpy and before the doorbell write. \n\nSeparately: the command queue\u0027s cacheability comes from GITS_CBASER InnerCache/OuterCache, so if it\u0027s programmed non-cacheable this needs cache maintenance, not only a barrier. Worth confirming which side owns that.",
+      "revId": "5e6c82ba6dd4c964d3032a3d5486dd96ddb32088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
