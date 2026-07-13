@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553eb245_93894282",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:19:15Z",
+      "side": 1,
+      "message": "Same as comment in previous CL.",
+      "revId": "b183ac83f0a2e151ad16d1da8d86669e48dc2b21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
