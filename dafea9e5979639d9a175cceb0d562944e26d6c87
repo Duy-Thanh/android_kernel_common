@@ -16,6 +16,24 @@
       "message": "Just to understand: in what cases may it be relocated? Looks like _currently_ it may not be relocated, since `__do_cpuid_func()` hardcodes KVM_CPUID_SIGNATURE (0x40000000) (and even if the VMM changes that, pKVM enforces the default value in `pkvm_enforce_cpuid()` anyway). Am I correct?",
       "revId": "dafea9e5979639d9a175cceb0d562944e26d6c87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ae16f4_813585a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-13T05:39:51Z",
+      "side": 1,
+      "message": "The user space VMM can still relocate the KVM signature to another CPUID if it wants. But I missed the truth of pkvm_enforce_cpuid() enforcing this to make sure the KVM signature always in KVM_CPUID_FEATURES. So we don\u0027t need this patch and I can remove it.",
+      "parentUuid": "71c32e62_7b1fa4bd",
+      "revId": "dafea9e5979639d9a175cceb0d562944e26d6c87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
