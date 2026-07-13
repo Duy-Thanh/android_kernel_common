@@ -69,6 +69,11 @@ static int donate_and_clear_host_page(void *addr, size_t num_pages)
 	return 0;
 }
 
+struct dte_entry {
+	u32 device_id;
+	u64 itt_pfn;
+};
+
 struct its_priv_state {
 	void *base;
 	void *cmd_hyp_base;
@@ -77,6 +82,9 @@ struct its_priv_state {
 	struct its_shadow_tables *shadow;
 	hyp_spinlock_t its_lock;
 	bool needs_flush;
+	u16 empty_idx;
+	u16 num_tracked_pfns;
+	struct dte_entry tracked_pfns[];
 };
 
 DEFINE_HYP_SPINLOCK(its_setup_lock);
@@ -86,6 +94,225 @@ DEFINE_HYP_SPINLOCK(its_setup_lock);
 
 #define GITS_CREADR_STALLED	BIT_ULL(0)
 #define GITS_CREADR_OFFSET	GENMASK_ULL(19, 5)
+
+static int track_pfn_add(struct its_priv_state *its, u32 device_id, u64 pfn)
+{
+	int ret, i;
+	void *virt = hyp_phys_to_virt(hyp_pfn_to_phys(pfn));
+	bool pfn_shared = false;
+
+	/*
+	 * If we already track this pfn pin it again to increase page refcount.
+	 * We can have a different deviceId that wants to map to the same ITT table.
+	 */
+	for (i = 0; i < its->num_tracked_pfns; i++) {
+		if (its->tracked_pfns[i].itt_pfn != pfn)
+			continue;
+
+		if (its->tracked_pfns[i].device_id != device_id) {
+			pfn_shared = true;
+			break;
+		} else {
+			return hyp_pin_shared_mem(virt, virt + PAGE_SIZE);
+		}
+	}
+
+	if (its->empty_idx >= its->num_tracked_pfns)
+		return -ENOSPC;
+
+	if (!pfn_shared) {
+		ret = __pkvm_host_share_hyp(pfn);
+		if (ret)
+			return ret;
+	}
+
+	/*
+	 * Pin the memory to increase page refcount and make
+	 * sure host cannot reclaim it.
+	 */
+	ret = hyp_pin_shared_mem(virt, virt + PAGE_SIZE);
+	if (ret) {
+		__pkvm_host_unshare_hyp(pfn);
+		return ret;
+	}
+
+	its->tracked_pfns[its->empty_idx].itt_pfn = pfn;
+	its->tracked_pfns[its->empty_idx].device_id = device_id;
+
+	for (i = 0; i < its->num_tracked_pfns; i++) {
+		if (!its->tracked_pfns[i].itt_pfn && !its->tracked_pfns[i].device_id)
+			break;
+	}
+
+	its->empty_idx = i;
+	return 0;
+}
+
+static int track_pfn_remove(struct its_priv_state *its, u32 device_id, u64 pfn)
+{
+	int i, ret;
+	void *virt = hyp_phys_to_virt(hyp_pfn_to_phys(pfn));
+
+	for (i = 0; i < its->num_tracked_pfns; i++) {
+		if (its->tracked_pfns[i].itt_pfn != pfn ||
+		    its->tracked_pfns[i].device_id != device_id)
+			continue;
+
+		/*
+		 * First try to unshare to see if we have an elevated refcount.
+		 * If it returns -EBUSY we have an elevated refcount and we need
+		 * to decrement it.
+		 * Then see if this was the last reference of the
+		 * page if unshare succeeds.
+		 */
+		ret = __pkvm_host_unshare_hyp(pfn);
+		if (ret == -EBUSY) {
+			hyp_unpin_shared_mem(virt, virt + PAGE_SIZE);
+			ret = __pkvm_host_unshare_hyp(pfn);
+			if (ret == -EBUSY)
+				return 0;
+
+			WARN_ON(ret != 0);
+		}
+
+		memset(&its->tracked_pfns[i], 0, sizeof(struct dte_entry));
+		its->empty_idx = i;
+		return 0;
+	}
+
+	return -EINVAL;
+}
+
+static int get_num_itt_pages(struct its_priv_state *its, u8 num_bits)
+{
+	u64 size, gits_typer = readq_relaxed(its->base + GITS_TYPER);
+	u64 nr_ites;
+
+	if (num_bits > FIELD_GET(GITS_TYPER_IDBITS, gits_typer))
+		return -EINVAL;
+
+	nr_ites = BIT_ULL(num_bits + 1);
+	size = nr_ites * (FIELD_GET(GITS_TYPER_ITT_ENTRY_SIZE, gits_typer) + 1);
+	size = max(size, ITS_ITT_ALIGN) + ITS_ITT_ALIGN - 1;
+
+	return PAGE_ALIGN(size) >> PAGE_SHIFT;
+}
+
+static int track_pfn(struct its_priv_state *its, u32 device_id, u64 start_pfn, int num_pages,
+		     bool remove)
+{
+	int i, ret;
+
+	for (i = 0; i < num_pages; i++) {
+		if (remove)
+			ret = track_pfn_remove(its, device_id, start_pfn + i);
+		else
+			ret = track_pfn_add(its, device_id, start_pfn + i);
+
+		if (ret)
+			goto err_track;
+	}
+
+	return 0;
+err_track:
+	for (i = i - 1; i >= 0; i--) {
+		if (remove)
+			track_pfn_add(its, device_id, start_pfn + i);
+		else
+			track_pfn_remove(its, device_id, start_pfn + i);
+	}
+
+	return ret;
+}
+
+static struct its_baser *get_table(struct its_priv_state *its, u64 type)
+{
+	int i;
+	struct its_shadow_tables *shadow = its->shadow;
+
+	for (i = 0; i < GITS_BASER_NR_REGS; i++) {
+		if (GITS_BASER_TYPE(shadow->tables[i].val) == type)
+			return &shadow->tables[i];
+	}
+
+	return NULL;
+}
+
+static int check_table_update(struct its_priv_state *its, u32 id, u64 type,
+			      bool rollback)
+{
+	u32 lvl1_idx;
+	u64 esz, *host_table, *hyp_table, new_entry, update, lvl1_sz;
+	struct its_baser *table = get_table(its, type);
+	int ret;
+	phys_addr_t new_lvl2_table, lvl2_table;
+
+	if (!table)
+		return -EINVAL;
+
+	if (!(table->val & GITS_BASER_INDIRECT))
+		return 0;
+
+	esz = GITS_BASER_ENTRY_SIZE(table->val);
+	lvl1_sz = (1 << table->order) << PAGE_SHIFT;
+	lvl1_idx = id / (table->psz / esz);
+	if (lvl1_idx >= lvl1_sz / sizeof(u64))
+		return -ENOSPC;
+
+	host_table = kern_hyp_va(table->shadow);
+	hyp_table = kern_hyp_va(table->base);
+
+	new_entry = host_table[lvl1_idx];
+
+	update = new_entry ^ hyp_table[lvl1_idx];
+	if (!(update & GITS_BASER_VALID))
+		return 0;
+
+	/* If roll backing, flip to restore previous state */
+	if (rollback)
+		new_entry = new_entry ^ GITS_BASER_VALID;
+
+	new_lvl2_table = hyp_phys_to_pfn(new_entry & PHYS_MASK);
+	lvl2_table = hyp_phys_to_pfn(hyp_table[lvl1_idx] & PHYS_MASK);
+	if (new_entry & GITS_BASER_VALID)
+		ret = __pkvm_host_donate_hyp(new_lvl2_table, table->psz >> PAGE_SHIFT);
+	else
+		ret = __pkvm_hyp_donate_host(lvl2_table, table->psz >> PAGE_SHIFT);
+	if (ret)
+		return ret;
+
+	hyp_table[lvl1_idx] = new_entry;
+	return 0;
+}
+
+static int process_its_mapd(struct its_priv_state *its,
+			    struct its_cmd_block *cmd, bool rollback)
+{
+	phys_addr_t itt_addr = cmd->raw_cmd[2] & GENMASK(51, 8);
+	u8 size = cmd->raw_cmd[1] & GENMASK(4, 0);
+	bool remove = !(cmd->raw_cmd[2] & BIT(63));
+	u32 device_id = cmd->raw_cmd[0] >> 32;
+	int num_pages, ret;
+	u64 base_pfn;
+
+	if (rollback)
+		remove = !remove;
+
+	if (!PAGE_ALIGNED(itt_addr))
+		return -EINVAL;
+
+	base_pfn = hyp_phys_to_pfn(itt_addr);
+	num_pages = get_num_itt_pages(its, size);
+	if (num_pages < 0)
+		return num_pages;
+
+	ret = check_table_update(its, device_id, GITS_BASER_TYPE_DEVICE,
+				 rollback);
+	if (ret)
+		return ret;
+
+	return track_pfn(its, device_id, base_pfn, num_pages, remove);
+}
 
 static int submit_single_cmd(struct its_priv_state *its, bool retry)
 {
@@ -128,8 +355,20 @@ static int submit_single_cmd(struct its_priv_state *its, bool retry)
 static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 		       bool rollback)
 {
-	/* Passthrough everything for now */
-	return 0;
+	u8 req_type = cmd->raw_cmd[0] & GENMASK_ULL(7, 0);
+	int ret;
+
+	switch (req_type) {
+	case GITS_CMD_MAPD:
+		ret = process_its_mapd(its, cmd, rollback);
+		break;
+
+	default:
+		ret = 0;
+		break;
+	}
+
+	return ret;
 }
 
 static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
@@ -468,6 +707,9 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state, siz
 	priv_state->needs_flush =
 		(readq_relaxed(priv_state->base + GITS_CBASER) & GITS_CBASER_SHAREABILITY_MASK) !=
 		GITS_CBASER_InnerShareable;
+	priv_state->empty_idx = 0;
+	priv_state->num_tracked_pfns = ((priv_num_pages << PAGE_SHIFT) -
+		offsetof(struct its_priv_state, tracked_pfns)) / sizeof(struct dte_entry);
 
 	its_reg->priv = priv_state;
 
