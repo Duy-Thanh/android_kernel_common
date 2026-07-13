@@ -64,6 +64,24 @@
       ],
       "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac06a9aa_9e663356",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T14:58:14Z",
+      "side": 1,
+      "message": "Good catch, thanks. (BTW besides that, this patch introduces a small regression: it moves the `kvm-\u003ecreated_vcpus` check for bsp_vcpu_id before taking the `pkvm_vm-\u003elock`, so it makes this even more racy.)\n\nI was thinking it would be nice to rely on checking `kvm-\u003ecreated_vcpus` instead of introducing an extra flag, similarly to how the host KVM relies on checking `kvm-\u003ecreated_vcpus` in several places in `kvm_arch_vm_ioctl()` and `kvm_vm_ioctl_enable_cap()`. But yeah, it is not that simple, since pKVM\u0027s `created_vcpus` has slightly different semantics than the host\u0027s one: pKVM uses it rather similarly to how the host KVM uses `online_vcpus`, not `created_vcpus`.\n\nSo yeah, I think I\u0027ll add a flag e.g. `pkvm_vm-\u003epostponed_setup_done`. And then, BTW, if later we will refactor the code like I suggested in aosp/4151707 (i.e. consolidate `pkvm_vm_finalize()` and `postponed_per_vm_setup()` into one thing), we might rename that flag to `pkvm_vm-\u003efinalized`.\n\nBTW I guess alternatively we could repurpose `created_vcpus` to increment it here at the beginning of vCPU creation, not at the end, and let `attach_pkvm_vcpu_to_vm()` etc use `online_vcpus` instead of `created_vcpus`, thus make the semantics closer to the host KVM. But it seems there wouldn\u0027t be much benefit in doing that.",
+      "parentUuid": "f1416aa0_118b0bde",
+      "revId": "8ee87800d79032f258db1cf387764a937252bc2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
