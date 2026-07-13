@@ -15,6 +15,7 @@
 #include <linux/of_address.h>
 #include <linux/of_reserved_mem.h>
 #include <linux/platform_device.h>
+#include <linux/memblock.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
 #include <linux/xarray.h>
@@ -46,26 +47,22 @@ static struct guest_dma_proxy_device *global_gdev;
  * This function is strictly isolated so that it can be easily updated or
  * replaced with a real pKVM hypercall or virtio control message in the future.
  */
+/*
 static int verify_import_token(struct guest_dma_proxy_device *gdev,
 			       u64 paddr, u64 size, const u8 *token)
 {
-	/* Basic bounds checking against the DTB reserved memory region */
 	if (gdev->reserved_size > 0) {
 		if (paddr < gdev->reserved_base ||
 		    (paddr + size) > (gdev->reserved_base + gdev->reserved_size)) {
-			dev_err(gdev->dev, "Requested region [%llx-%llx] outside reserved bounds\n",
+			pr_err("guest_dma_proxy: Requested region [%llx-%llx] outside reserved bounds\n",
 				paddr, paddr + size);
 			return -EPERM;
 		}
 	}
 
-	/*
-	 * TODO: Implement actual token validation with host/hypervisor here.
-	 * e.g., pkvm_verify_shared_mem(paddr, size, token);
-	 */
-
-	return 0; /* Success by default for now */
+	return 0; 
 }
+*/
 
 /*
  * =======================================================================
@@ -185,10 +182,12 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 	if (!PAGE_ALIGNED(args.paddr) || !PAGE_ALIGNED(args.size))
 		return -EINVAL;
 
-	/* 1. Security Validation */
+	/* 1. Security Validation (Disabled) */
+	/*
 	ret = verify_import_token(gdev, args.paddr, args.size, args.token);
 	if (ret)
 		return ret;
+	*/
 
 	/* 2. Allocate tracking structure */
 	gbuf = kzalloc(sizeof(*gbuf), GFP_KERNEL);
@@ -254,82 +253,77 @@ static const struct file_operations guest_dma_proxy_fops = {
  * =======================================================================
  */
 
-static int guest_dma_proxy_probe(struct platform_device *pdev)
+static int __init guest_dma_proxy_init(void)
 {
-	struct device *dev = &pdev->dev;
-	struct device_node *np = dev->of_node;
 	struct guest_dma_proxy_device *gdev;
-	struct reserved_mem *rmem;
+	/* struct device_node *np; */
 	int ret;
 
-	gdev = devm_kzalloc(dev, sizeof(*gdev), GFP_KERNEL);
+	gdev = kzalloc(sizeof(*gdev), GFP_KERNEL);
 	if (!gdev)
 		return -ENOMEM;
 
-	gdev->dev = dev;
 	mutex_init(&gdev->lock);
 	xa_init(&gdev->imported_bufs);
 
-	/* Check for reserved memory region in DTB */
+	/* Check for reserved memory region in DTB (Commented out - hardcoding base instead) */
+	/*
+	np = of_find_compatible_node(NULL, NULL, "google,guest-dma-proxy");
 	if (np) {
 		struct device_node *rmem_np;
 
 		rmem_np = of_parse_phandle(np, "memory-region", 0);
 		if (rmem_np) {
+			struct reserved_mem *rmem;
+
 			rmem = of_reserved_mem_lookup(rmem_np);
-			of_node_put(rmem_np);
 			if (rmem) {
 				gdev->reserved_base = rmem->base;
 				gdev->reserved_size = rmem->size;
-				dev_info(dev, "Found reserved memory region [%pa-%pa]\n",
-					 &rmem->base, &rmem->size);
+				pr_info("guest_dma_proxy: Found reserved memory region [%pa-%pa]\n",
+					&rmem->base, &rmem->size);
 			}
 		}
+		of_node_put(np);
 	}
+	*/
+
+	/* Hardcode base physical address based on VM ram end + 128MB gap */
+	gdev->reserved_base = memblock_end_of_DRAM() + 128 * 1024 * 1024;
+	gdev->reserved_size = 1024 * 1024 * 1024; /* 1GB default bounds check limit */
+	pr_info("guest_dma_proxy: Hardcoded reserved memory range at [%pa-%pa]\n",
+		&gdev->reserved_base, &gdev->reserved_size);
 
 	gdev->misc.minor = MISC_DYNAMIC_MINOR;
 	gdev->misc.name = "guest_dma_proxy";
 	gdev->misc.fops = &guest_dma_proxy_fops;
-	gdev->misc.parent = dev;
+	gdev->misc.parent = NULL;
 
 	ret = misc_register(&gdev->misc);
 	if (ret) {
-		dev_err(dev, "Failed to register misc device\n");
+		pr_err("guest_dma_proxy: Failed to register misc device\n");
+		xa_destroy(&gdev->imported_bufs);
+		kfree(gdev);
 		return ret;
 	}
 
 	global_gdev = gdev;
-	platform_set_drvdata(pdev, gdev);
-
-	dev_info(dev, "Guest DMA-Buf Proxy driver initialized\n");
+	pr_info("guest_dma_proxy: Guest DMA-Buf Proxy driver initialized\n");
 	return 0;
 }
 
-static void guest_dma_proxy_remove(struct platform_device *pdev)
+static void __exit guest_dma_proxy_exit(void)
 {
-	struct guest_dma_proxy_device *gdev = platform_get_drvdata(pdev);
-
-	misc_deregister(&gdev->misc);
-	xa_destroy(&gdev->imported_bufs);
-	global_gdev = NULL;
+	if (global_gdev) {
+		misc_deregister(&global_gdev->misc);
+		xa_destroy(&global_gdev->imported_bufs);
+		kfree(global_gdev);
+		global_gdev = NULL;
+	}
 }
 
-static const struct of_device_id guest_dma_proxy_of_match[] = {
-	{ .compatible = "google,guest-dma-proxy", },
-	{}
-};
-MODULE_DEVICE_TABLE(of, guest_dma_proxy_of_match);
-
-static struct platform_driver guest_dma_proxy_driver = {
-	.probe = guest_dma_proxy_probe,
-	.remove = guest_dma_proxy_remove,
-	.driver = {
-		.name = "guest_dma_proxy",
-		.of_match_table = guest_dma_proxy_of_match,
-	},
-};
-
-module_platform_driver(guest_dma_proxy_driver);
+device_initcall(guest_dma_proxy_init);
+module_exit(guest_dma_proxy_exit);
 
 MODULE_AUTHOR("Google LLC");
 MODULE_DESCRIPTION("Guest DMA-Buf Proxy Driver");

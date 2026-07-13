@@ -117,7 +117,7 @@ config ANDROID_WRAPFD
 
 config GUEST_DMA_PROXY
 	tristate "Guest DMA-Buf Proxy Driver"
-	depends on DMA_SHARED_BUFFER
+	select DMA_SHARED_BUFFER
 	help
 	  This driver provides an ioctl interface for guest userspace to convert
 	  hypervisor-injected physical address ranges (e.g., from host shared memory)
