@@ -34,6 +34,24 @@
       "parentUuid": "71c32e62_7b1fa4bd",
       "revId": "dafea9e5979639d9a175cceb0d562944e26d6c87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8baa6a_80b9d243",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T09:15:50Z",
+      "side": 1,
+      "message": "Actually this patch looks good to me anyway. It doesn\u0027t cost us anything, and it makes this logic in kvm_apply_cpuid_pv_features_quirk() independent of the assumption that pkvm_enforce_cpuid() enforces the KVM signature.",
+      "parentUuid": "43ae16f4_813585a8",
+      "revId": "dafea9e5979639d9a175cceb0d562944e26d6c87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
