@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a24dd18_bad04b99",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:03:57Z",
+      "side": 1,
+      "message": "This path is currently dead, and has a latent size bug for when it isn\u0027t. `GITS_CMD_VMAPP` has bit 5 set, so `process_cmd()`\u0027s VLPI block rejects it before the `switch`, and `process_its_vmapp()` is unreachable while VLPIs are blocked. This \"trap \u0026 emulate VMAPP\" doesn\u0027t run until VLPI sanitization lands. And two bugs to fix when it does. First, `BIT((vpt_size+1)\u003e\u003e3)` puts the shift inside the `BIT()` exponent, computing `2^((vpt_size+1)/8)` rather than the pending-table size (compare `handle_lpi_enable`\u0027s `BIT_ULL(id_bits+1)/8`). Second, even corrected it\u0027s a **byte** count passed to `track_pfn()` where MAPD passes a **page** count (`\u003e\u003e PAGE_SHIFT`). Either fix or drop until the VLPI work.",
+      "revId": "d341299a16970c0d0d279580ee623a0f277d312e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
