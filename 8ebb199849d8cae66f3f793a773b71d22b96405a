@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "998cfb53_145beca7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-13T13:48:12Z",
+      "side": 1,
+      "message": "Thanks for confirming. I\u0027ve refined this sentence to clarify this.",
+      "parentUuid": "89410e39_9261fab8",
+      "revId": "8ebb199849d8cae66f3f793a773b71d22b96405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3936b0b9_7e6ddc14",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
