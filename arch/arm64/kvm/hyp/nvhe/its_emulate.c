@@ -58,43 +58,316 @@ struct its_priv_state {
 	void *base;
 	void *cmd_hyp_base;
 	void *cmd_host_base;
-	void *cmd_host_cwriter;
+	u64 cmd_offset;
 	struct its_shadow_tables *shadow;
 	hyp_spinlock_t its_lock;
+	u16 empty_idx;
+	u64 tracked_pfns[];
 };
 
+#define MAX_TRACKED_PFNS	((PAGE_SIZE - offsetof(struct its_priv_state, \
+				  tracked_pfns)) / sizeof(u64))
+
 DEFINE_HYP_SPINLOCK(its_setup_lock);
+
+static int track_pfn_add(struct its_priv_state *its, u64 pfn)
+{
+	int ret, i;
+	void *virt = hyp_phys_to_virt(hyp_pfn_to_phys(pfn));
+
+	/*
+	 * If we already track this pfn.
+	 * Pin it again to increase page refcount.
+	 */
+	for (i = 0; i < MAX_TRACKED_PFNS; i++) {
+		if (its->tracked_pfns[i] == pfn)
+			return hyp_pin_shared_mem(virt, virt + PAGE_SIZE);
+	}
+
+	if (its->empty_idx + 1 >= MAX_TRACKED_PFNS)
+		return -ENOSPC;
+
+	ret = __pkvm_host_share_hyp(pfn);
+	if (ret)
+		return ret;
+
+	/*
+	 * Pin the memory to increase page refcount and make
+	 * sure host cannot reclaim it.
+	 */
+	ret = hyp_pin_shared_mem(virt, virt + PAGE_SIZE);
+	if (ret) {
+		__pkvm_host_unshare_hyp(pfn);
+		return ret;
+	}
+
+	its->tracked_pfns[its->empty_idx] = pfn;
+	for (i = 0; i < MAX_TRACKED_PFNS; i++) {
+		if (!its->tracked_pfns[i])
+			break;
+	}
+
+	its->empty_idx = i;
+	return 0;
+}
+
+static int track_pfn_remove(struct its_priv_state *its, u64 pfn)
+{
+	int i, ret;
+	void *virt = hyp_phys_to_virt(hyp_pfn_to_phys(pfn));
+
+	for (i = 0; i < MAX_TRACKED_PFNS; i++) {
+		if (its->tracked_pfns[i] != pfn)
+			continue;
+
+		/*
+		 * First unpin the page to decrease page refcount.
+		 * Then see if this was last reference of this page
+		 * and only then unshare it.
+		 */
+		hyp_unpin_shared_mem(virt, virt + PAGE_SIZE);
+		if (hyp_page_count(virt) != 0)
+			return 0;
+
+		ret = __pkvm_host_unshare_hyp(pfn);
+		if (ret)
+			return ret;
+
+		its->tracked_pfns[i] = 0;
+		its->empty_idx = i;
+		return 0;
+	}
+
+	return 0;
+}
+
+static int get_num_itt_pages(struct its_priv_state *its, u8 num_bits)
+{
+	int nr_ites = 1 << (num_bits + 1);
+	u64 size, gits_typer = readq_relaxed(its->base + GITS_TYPER);
+
+	size = nr_ites * (FIELD_GET(GITS_TYPER_ITT_ENTRY_SIZE, gits_typer) + 1);
+	size = max(size, ITS_ITT_ALIGN) + ITS_ITT_ALIGN - 1;
+
+	return PAGE_ALIGN(size) >> PAGE_SHIFT;
+}
+
+static int track_pfn(struct its_priv_state *its, u64 start_pfn, int num_pages, bool remove)
+{
+	int i, ret;
+
+	for (i = 0; i < num_pages; i++) {
+		if (remove)
+			ret = track_pfn_remove(its, start_pfn + i);
+		else
+			ret = track_pfn_add(its, start_pfn + i);
+
+		if (ret)
+			goto err_track;
+	}
+
+	return 0;
+err_track:
+	for (i = i - 1; i >= 0; i--) {
+		if (remove)
+			track_pfn_add(its, start_pfn + i);
+		else
+			track_pfn_remove(its, start_pfn + i);
+	}
+
+	return ret;
+}
+
+static struct its_baser *get_table(struct its_priv_state *its, u64 type)
+{
+	int i;
+	struct its_shadow_tables *shadow = its->shadow;
+
+	for (i = 0; i < GITS_BASER_NR_REGS; i++) {
+		if (GITS_BASER_TYPE(shadow->tables[i].val) == type)
+			return &shadow->tables[i];
+	}
+
+	return NULL;
+}
+
+static int check_table_update(struct its_priv_state *its, u32 id, u64 type,
+			      bool rollback)
+{
+	u32 lvl1_idx;
+	u64 esz, *host_table, *hyp_table, new_entry, update, lvl1_sz;
+	struct its_baser *table = get_table(its, type);
+	int ret;
+	phys_addr_t new_lvl2_table, lvl2_table;
+
+	if (!table)
+		return -EINVAL;
+
+	if (!(table->val & GITS_BASER_INDIRECT))
+		return 0;
+
+	esz = GITS_BASER_ENTRY_SIZE(table->val);
+	lvl1_sz = (1 << table->order) << PAGE_SHIFT;
+	lvl1_idx = id / (table->psz / esz);
+	if (lvl1_idx >= lvl1_sz)
+		return -ENOSPC;
+
+	host_table = kern_hyp_va(table->shadow);
+	hyp_table = kern_hyp_va(table->base);
+
+	new_entry = host_table[lvl1_idx];
+
+	/* If roll backing, flip to restore previous state */
+	if (rollback)
+		new_entry = new_entry ^ GITS_BASER_VALID;
+
+	update = new_entry ^ hyp_table[lvl1_idx];
+	if (!(update & GITS_BASER_VALID))
+		return 0;
+
+	new_lvl2_table = hyp_phys_to_pfn(new_entry & PHYS_MASK);
+	lvl2_table = hyp_phys_to_pfn(hyp_table[lvl1_idx] & PHYS_MASK);
+	if (new_entry & GITS_BASER_VALID)
+		ret = __pkvm_host_donate_hyp(new_lvl2_table, table->psz >> PAGE_SHIFT);
+	else
+		ret = __pkvm_hyp_donate_host(lvl2_table, table->psz >> PAGE_SHIFT);
+	if (ret)
+		return ret;
+
+	hyp_table[lvl1_idx] = new_entry;
+	return 0;
+}
+
+static int process_its_mapd(struct its_priv_state *its,
+			    struct its_cmd_block *cmd, bool rollback)
+{
+	phys_addr_t itt_addr = cmd->raw_cmd[2] & GENMASK(51, 8);
+	u8 size = cmd->raw_cmd[1] & GENMASK(4, 0);
+	bool remove = !(cmd->raw_cmd[2] & BIT(63));
+	u32 device_id = cmd->raw_cmd[0] >> 32;
+	int num_pages, ret;
+	u64 base_pfn;
+
+	if (rollback)
+		remove = !remove;
+
+	if (!PAGE_ALIGNED(itt_addr))
+		return -EINVAL;
+
+	base_pfn = hyp_phys_to_pfn(itt_addr);
+	num_pages = get_num_itt_pages(its, size);
+
+	ret = check_table_update(its, device_id, GITS_BASER_TYPE_DEVICE,
+				 rollback);
+	if (ret)
+		return ret;
+
+	return track_pfn(its, base_pfn, num_pages, remove);
+}
+
+static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
+		       bool rollback)
+{
+	u8 req_type = cmd->raw_cmd[0] & GENMASK_ULL(7, 0);
+	int ret;
+
+	switch (req_type) {
+	case GITS_CMD_MAPD:
+		ret = process_its_mapd(its, cmd, rollback);
+		break;
+
+	default:
+		ret = 0;
+		break;
+	}
+
+	return ret;
+}
+
+#define GITS_CWRITER_RETRY BIT_ULL(0)
+#define GITS_CWRITER_OFFSET GENMASK_ULL(19, 5)
+
+#define GITS_CREADR_STALLED BIT_ULL(0)
+#define GITS_CREADR_OFFSET GENMASK_ULL(19, 5)
+
+static int submit_single_cmd(struct its_priv_state *its, bool retry)
+{
+	size_t cmdq_sz = its->shadow->cmdq_len;
+	u64 timeout = 1000;
+	u64 offset, cwriter, creadr;
+
+	offset = (its->cmd_offset + sizeof(struct its_cmd_block)) % cmdq_sz;
+
+	cwriter = offset & GITS_CWRITER_OFFSET;
+	cwriter |= FIELD_PREP(GITS_CWRITER_RETRY, retry);
+	writeq_relaxed(cwriter, its->base + GITS_CWRITER);
+
+	while (its->cmd_offset != offset) {
+		creadr = readq_relaxed(its->base + GITS_CREADR);
+
+		/* Command failed. */
+		if (FIELD_GET(GITS_CREADR_STALLED, creadr))
+			return -EIO;
+
+		its->cmd_offset = creadr & GITS_CREADR_OFFSET;
+		if (its->cmd_offset == offset)
+			return 0;
+
+		/*
+		 * If the command times out It does not mean it might not
+		 * finish some time in the future, by eg. clock enable. Also
+		 * it might not finish ever. If we knew when it's going to
+		 * finish or if ever we could commit or revert the changes to
+		 * page tables, but we don't. Regressing GITS_CWRITER_OFFSET
+		 * might lead into undefined behaviours and we cannot block
+		 * here forever, the most sensible thing is to crash...
+		 */
+		if (!timeout--) {
+			BUG();
+			return -EBUSY;
+		}
+
+		pkvm_udelay(100);
+	}
+
+	return 0;
+}
 
 static void cwriter_write(struct pkvm_moveable_reg *region, u64 offset, u64 value)
 {
 	struct its_priv_state *its = region->priv;
-	u64 cwriter_offset = value & GENMASK(19, 5);
-	int cmd_len, cmd_offset;
-	size_t cmdq_sz = its->shadow->cmdq_len;
+	struct its_cmd_block cmd, *cmd_le;
+	u64 new_offset;
+	bool retry;
+	int i;
 
-	if (cwriter_offset > cmdq_sz)
+	new_offset = value & GITS_CWRITER_OFFSET;
+	if (new_offset >= its->shadow->cmdq_len)
 		return;
 
-	cmd_offset = its->cmd_host_cwriter - its->cmd_host_base;
-	cmd_len = cwriter_offset - cmd_offset;
-	if (cmd_len < 0)
-		cmd_len = cmdq_sz - cmd_offset;
+	retry = FIELD_GET(GITS_CWRITER_RETRY, value);
+	while (its->cmd_offset != new_offset) {
+		cmd_le = its->cmd_host_base + its->cmd_offset;
 
-	if (cmd_offset + cmd_len > cmdq_sz)
-		return;
+		for (i = 0; i < ARRAY_SIZE(cmd.raw_cmd); i++)
+			cmd.raw_cmd[i] = le64_to_cpu(cmd_le->raw_cmd_le[i]);
 
-	memcpy(its->cmd_hyp_base + cmd_offset, its->cmd_host_cwriter, cmd_len);
+		if (process_cmd(its, &cmd, /* rollback */ false))
+			return;
 
-	its->cmd_host_cwriter = its->cmd_host_base +
-		(cmd_offset + cmd_len) % cmdq_sz;
-	if (its->cmd_host_cwriter == its->cmd_host_base) {
-		memcpy(its->cmd_hyp_base, its->cmd_host_base, cwriter_offset);
+		memcpy(its->cmd_hyp_base + its->cmd_offset, cmd_le,
+		       sizeof(struct its_cmd_block));
+		dsb(ishst);
 
-		its->cmd_host_cwriter = its->cmd_host_base + cwriter_offset;
+		if (submit_single_cmd(its, retry)) {
+			/*
+			 * If failed to complete the command try to rollback
+			 * the changes. If rollback fails we in trouble...
+			 */
+			WARN_ON(process_cmd(its, &cmd, /* rollback */ true));
+			return;
+		}
 	}
-
-	dsb(ishst);
-	writeq_relaxed(value, its->base + GITS_CWRITER);
 }
 
 static void cwriter_read(struct pkvm_moveable_reg *region, u64 offset, u64 *read)
@@ -372,9 +645,9 @@ int pkvm_init_gic_its_emulation(phys_addr_t dev_addr, void *host_priv_state,
 
 	priv_state->cmd_hyp_base = kern_hyp_va(shadow->cmd_original);
 	priv_state->cmd_host_base = kern_hyp_va(shadow->cmd_shadow);
-	priv_state->cmd_host_cwriter =
-		priv_state->cmd_host_base +
-		(kern_hyp_va(shadow->cmd_write) - priv_state->cmd_hyp_base);
+	priv_state->cmd_offset = readq_relaxed(priv_state->base + GITS_CREADR) &
+				 GITS_CREADR_OFFSET;
+	priv_state->empty_idx = 0;
 
 	hyp_spin_unlock(&its_setup_lock);
 
