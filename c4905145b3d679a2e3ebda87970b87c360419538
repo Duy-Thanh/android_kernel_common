@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a07e42b_0a78557c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T14:15:14Z",
+      "side": 1,
+      "message": "`pkvm_init_redist_emulation` reserves a second `redist_priv_state` in the donated page and locates `vlpi_reg`, but never sets `vlpi_reg-\u003epriv`; the \"one page for both RG_Base and VLPI_Base\" comment is misleading and the second half is unused. Harmless while the VLPI handler is a no-op, but please either wire it up or drop the reserve and the comment until the VLPI work needs it.",
+      "revId": "c4905145b3d679a2e3ebda87970b87c360419538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
