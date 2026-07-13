@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42fef703_dcbcd2ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-13T08:03:22Z",
+      "side": 1,
+      "message": "Do we need something similar in `__do_ffa_mem_xfer()`? The code looks quite similar:\n\n```\n        reg \u003d (void *)buf + offset;                                             \n        nr_ranges \u003d ((void *)buf + fraglen) - (void *)reg-\u003econstituents;        \n        if (nr_ranges % sizeof(reg-\u003econstituents[0])) {                         \n                ffa_to_smccc_error(res, FFA_RET_INVALID_PARAMETERS);            \n                goto out_unlock;                                                \n        }                                                                       \n\n```",
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bae68be_d061f07e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-13T08:03:22Z",
+      "side": 1,
+      "message": "Does this leak the handle if `unmap_on_lend` is set? If the offset is bad and we goto `out_unlock` here, we will already have cleared `entry-\u003ehandle` so a subsequent attempt to reclaim the memory (with a correct offset) will always fail.\n\nIn fact, we\u0027ve _already_ called `ffa_mem_reclaim()` successfully at this point, so I think this check probably needs to moved earlier, like it is for upstream.",
+      "range": {
+        "startLine": 1313,
+        "startChar": 8,
+        "endLine": 1313,
+        "endChar": 18
+      },
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e145d9_658b4ee3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-13T08:03:22Z",
+      "side": 1,
+      "message": "Is there a good reason to move the `ffa_host_unshare_ranges()` call after the `kvm_ffA_unmap_ln_lend` check?",
+      "range": {
+        "startLine": 1316,
+        "startChar": 0,
+        "endLine": 1317,
+        "endChar": 37
+      },
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
