@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5387ea9_a3f3e60c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-13T13:59:50Z",
+      "side": 1,
+      "message": "`track_pfn_add`/`track_pfn_remove` still linear-scan `tracked_pfns[]` under `its_lock`; please move to a bitmap as discussed. And `its-\u003eempty_idx + 1 \u003e\u003d MAX_TRACKED_PFNS` wastes the final slot; it should be `its-\u003eempty_idx \u003e\u003d MAX_TRACKED_PFNS`",
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67fd0050_a3b8db38",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 12
