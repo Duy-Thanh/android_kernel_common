@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34f8bf0b_00df7d99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-14T16:48:20Z",
+      "side": 1,
+      "message": "Needs a \"Bug: \" tag citing a respin bug. See https://source.android.com/docs/core/architecture/kernel/gki-respin",
+      "revId": "652f89852a5b647b716079fbf0b58efe11802118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
