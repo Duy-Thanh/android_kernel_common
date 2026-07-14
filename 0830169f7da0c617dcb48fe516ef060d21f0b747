@@ -70,6 +70,24 @@
       "parentUuid": "3d2a9537_e0336a2e",
       "revId": "0830169f7da0c617dcb48fe516ef060d21f0b747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfcc5aac_d85e447e",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-14T18:47:18Z",
+      "side": 1,
+      "message": "Done in aosp/4170052 + aosp/4170053",
+      "parentUuid": "0a54b5ef_db1b52a6",
+      "revId": "0830169f7da0c617dcb48fe516ef060d21f0b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
