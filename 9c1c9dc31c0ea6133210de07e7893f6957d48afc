@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4fbe25_764a36aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T09:55:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this buys us too much here;",
+      "parentUuid": "42fef703_dcbcd2ff",
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bae68be_d061f07e",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "776f0296_837297b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T09:55:07Z",
+      "side": 1,
+      "message": "\u003e Does this leak the handle if unmap_on_lend is set? If the offset is bad and we goto out_unlock here, we will already have cleared entry-\u003ehandle so a subsequent attempt to reclaim the memory (with a correct offset) will always fail.\n\nIt doesn\u0027t leak the handle but it leaves the pages FF-A annotated which is still bad. Because we called `ffa_mem_reclaim()` successfully at this point, the handle has no meaning for TZ so a retry with the same handle wouldn\u0027t work regardless of what we do on `ffa_host_clear_handle`.\nWe should probably move the check earlier, before mem reclaim.",
+      "parentUuid": "2bae68be_d061f07e",
+      "range": {
+        "startLine": 1313,
+        "startChar": 8,
+        "endLine": 1313,
+        "endChar": 18
+      },
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9e145d9_658b4ee3",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-07-13T08:03:22Z",
       "side": 1,
       "message": "Is there a good reason to move the `ffa_host_unshare_ranges()` call after the `kvm_ffA_unmap_ln_lend` check?",
+      "range": {
+        "startLine": 1316,
+        "startChar": 0,
+        "endLine": 1317,
+        "endChar": 37
+      },
+      "revId": "9c1c9dc31c0ea6133210de07e7893f6957d48afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7c733d_9334234b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T09:55:07Z",
+      "side": 1,
+      "message": "I dropped this change, initially I wanted to keep the pages FF-A annotated in the un-eventful case where Trustzone messes up the region.",
+      "parentUuid": "b9e145d9_658b4ee3",
       "range": {
         "startLine": 1316,
         "startChar": 0,
