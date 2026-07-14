@@ -16,6 +16,24 @@
       "message": "Hi Reviewers, Patchset 2 is uploaded to fix the build errors caused by the previous incorrect backport base. Please help review this updated version. Thanks!",
       "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cedeb621_3624e4a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-14T16:54:28Z",
+      "side": 1,
+      "message": "Have a look at https://lore.kernel.org/all/20260709145949.3640783-1-sidkumar1@gmail.com/. These were just backported to upstream stable 5.15. Please wait until they land so you can cleanly cherry-pick from there.",
+      "parentUuid": "f2ce6ff0_dc3df9be",
+      "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
