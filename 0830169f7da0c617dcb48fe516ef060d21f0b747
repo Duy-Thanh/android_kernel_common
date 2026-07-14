@@ -52,6 +52,24 @@
       "parentUuid": "3dfa6799_b0f83d46",
       "revId": "0830169f7da0c617dcb48fe516ef060d21f0b747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a54b5ef_db1b52a6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-14T15:36:14Z",
+      "side": 1,
+      "message": "\u003e BTW it looks like the original KVM\u0027s kvm_vm_ioctl_create_vcpu() has a similar issue (it allows userspace to corrupt pid_table[id] of an existing vCPU as a side effect of trying-and-failing to create another vCPU with the same vcpu_id), and even worse: without pKVM, vmx_vcpu_free() doesn\u0027t clear pid_table[id], so it remains overwritten by the no longer existing vCPU\u0027s pi_desc. So, IPI delivery to the first vCPU will not work at all, and even worse: it will cause hardware to write to freed memory (since this stale pi_desc will be freed as a part of kmem_cache_free(kvm_vcpu_cache, vcpu) of the failed-to-create vCPU at the end of kvm_vm_ioctl_create_vcpu()).\n\nAhh yes, nice find! I quickly checked 7.1 and I think the issue is still there",
+      "parentUuid": "3d2a9537_e0336a2e",
+      "revId": "0830169f7da0c617dcb48fe516ef060d21f0b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
