@@ -16,6 +16,24 @@
       "message": "**HVC under a raw spinlock with IRQs off.** `its_end_deprivilege()` calls `its_switch_to_shadow_locked()`, which calls `init_emulate_cb()` (the EL2 setup HVC that does the slow stage-2 donation) while holding `its_lock` plus every `its-\u003elock` with local IRQs disabled. `GFP_ATOMIC` fixed the sleeping allocation, but the HVC itself still runs in that critical section. As discussed on the RFC v1 thread (Option A), I\u0027d move to per-ITS granular locking (lock one ITS, swap plus HVC, unlock) so the section is bounded to a single node. My preference is to land this in the upstream v2 rather than block the A16 backport on it; noting it here so it\u0027s tracked. The GICR side (`gic_end_deprivilege`) has the identical problem.",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc8b515_585f895f",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-14T11:15:25Z",
+      "side": 1,
+      "message": "Let me identify the problem here. Once `_kvm_host_prot_finalize` is done, we start trapping on the ITS/GICR registers.\n\nWe cannot initialize the ITS/GICR emulation structures before `_kvm_host_prot_finalize` because there is a time window when structures could disconnect from hw state (host making last second changes after structures were made). For this reason we currently lock in `(its|gic)_start_deprivilage`. \n\nIf we would try to initialize the structures after `_kvm_host_prot_finalize`. We would create a time window when the ITS/GICR are trapped, but the structures to handle an emulation are not there yet. Also there would be a short moment when trapping could happen during initialization of said structures.\n\nSo I suggest the following:\n\n* Get rid of `(its|gic)_start_deprivilage` (merge it with `(its|gic)_end_deprivilage`, rename it etc)\n* after `_kvm_host_prot_finalize` the `reg-\u003epriv` would be still `NULL` so basically we would forward all access through `pkvm_handle_forward_req` until all are initialized.\n* We go over each ITS/GICR one by one and initialize them (lock, hvc, `reg-\u003epriv \u003d ...`, unlock)\n* Once everything is initialized we no longer allow forwarding if `reg-\u003epriv` is `NULL`\n\nThere could be a problem if host would change the HW state without holding the lock when the emulation structure would be initialized. However this should not happen.\n\nThat said I am not sure what is to gain apart from more granular locking (which is indeed a good argument on it\u0027s own). And I agree it would be more suited for upstream. \n\nHowever in Android case I don\u0027t expect any devices to be configured around the `_kvm_host_prot_finalize` call. All drivers of the devices issuing MSIs should be deferred until IOMMU protected driver is loaded, which happens at a later stage.\n\nPlease let me know WDYT about above proposal. (Btw thanks for the review!)",
+      "parentUuid": "f91893c7_46f6f4c6",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
