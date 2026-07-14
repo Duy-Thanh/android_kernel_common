@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcbe50b2_95507821",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T11:40:14Z",
+      "side": 1,
+      "message": "Yes, I see what you mean. This is a problem for sub-sequent allocation of size smaller than a page however with the current code that we have in the emulation it plays it well with the new introduced `itt_alloc_pool` from 6.18 without the need of aosp/4141176.\n\nThis is because sub-sequent ITT tables will fall in a page that is already `track_pfn`ed.",
+      "parentUuid": "6efaecb3_0786e3bd",
+      "revId": "066895812d37141282de00c6053b7fd1d50b6e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b86aca67_90844da0",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 1
