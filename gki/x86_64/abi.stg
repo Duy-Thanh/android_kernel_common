@@ -297578,6 +297578,16 @@ function {
   parameter_id: 0x38d23361
 }
 function {
+  id: 0x9d137c9f
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0de4c6b1
+  parameter_id: 0xfa5f37bb
+  parameter_id: 0x00c72527
+  parameter_id: 0xf435685e
+  parameter_id: 0xc9082b19
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9d13a27c
   return_type_id: 0x6720d32f
   parameter_id: 0x0de4c6b1
@@ -305932,6 +305942,15 @@ elf_symbol {
   crc: 0xaaf0aca9
   type_id: 0x9d760cc4
   full_name: "__hid_register_driver"
+}
+elf_symbol {
+  id: 0xb5d6f365
+  name: "__hid_report_raw_event"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4bb2f1bd
+  type_id: 0x9d137c9f
+  full_name: "__hid_report_raw_event"
 }
 elf_symbol {
   id: 0xd672e937
@@ -320313,6 +320332,15 @@ elf_symbol {
   full_name: "hid_report_raw_event"
 }
 elf_symbol {
+  id: 0x798abfaf
+  name: "hid_safe_input_report"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4bb2f1bd
+  type_id: 0x9d137c9f
+  full_name: "hid_safe_input_report"
+}
+elf_symbol {
   id: 0x6e37f09d
   name: "hid_unregister_driver"
   is_defined: true
@@ -332730,6 +332758,24 @@ elf_symbol {
   full_name: "snd_soc_acpi_intel_mtl_sdw_machines"
 }
 elf_symbol {
+  id: 0x65c19d4a
+  name: "snd_soc_acpi_intel_nvl_machines"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x48ad0d55
+  type_id: 0xa5cad54c
+  full_name: "snd_soc_acpi_intel_nvl_machines"
+}
+elf_symbol {
+  id: 0x8822a6c3
+  name: "snd_soc_acpi_intel_nvl_sdw_machines"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x120b5b23
+  type_id: 0x9c4e20dc
+  full_name: "snd_soc_acpi_intel_nvl_sdw_machines"
+}
+elf_symbol {
   id: 0xfe324fe0
   name: "snd_soc_acpi_intel_ptl_machines"
   is_defined: true
@@ -340952,6 +340998,7 @@ interface {
   symbol_id: 0xa3a6c885
   symbol_id: 0x7efd1cdd
   symbol_id: 0xb3d97fa3
+  symbol_id: 0xb5d6f365
   symbol_id: 0xd672e937
   symbol_id: 0xa5f1f300
   symbol_id: 0x58de7795
@@ -342549,6 +342596,7 @@ interface {
   symbol_id: 0xde968f51
   symbol_id: 0x6ca4d0ed
   symbol_id: 0x741d5af7
+  symbol_id: 0x798abfaf
   symbol_id: 0x6e37f09d
   symbol_id: 0x4c0fc3cf
   symbol_id: 0x86e16775
@@ -343926,6 +343974,8 @@ interface {
   symbol_id: 0x49d64be3
   symbol_id: 0x9293bfb8
   symbol_id: 0x5ca8639b
+  symbol_id: 0x65c19d4a
+  symbol_id: 0x8822a6c3
   symbol_id: 0xfe324fe0
   symbol_id: 0x352dcfcd
   symbol_id: 0xe3bfdae8
