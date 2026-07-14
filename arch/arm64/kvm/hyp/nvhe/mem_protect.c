@@ -1788,10 +1788,15 @@ int __pkvm_host_donate_sglist_hyp(struct pkvm_sglist_page *sglist, size_t nr_pag
 
 		prot = pkvm_mkstate(PAGE_HYP, PKVM_PAGE_OWNED);
 		ret = pkvm_create_mappings_locked(__hyp_va(phys), __hyp_va(phys) + size, prot);
-		if (ret == -ENOMEM)
+		if (ret) {
+			WARN_ON(ret != -ENOMEM);
+			/*
+			 * pkvm_create_mappings_locked() might have failed
+			 * halfway through, remove the partial mappings.
+			 */
+			pkvm_remove_mappings_locked(__hyp_va(phys), __hyp_va(phys) + size);
 			goto err_page_state;
-
-		WARN_ON(ret);
+		}
 
 		ret = __host_stage2_set_owner_locked(phys, size, PKVM_ID_HYP, 0,
 						     HOST_SET_NO_COMPLETE);
