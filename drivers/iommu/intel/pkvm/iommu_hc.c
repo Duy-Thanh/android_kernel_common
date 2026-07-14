@@ -229,6 +229,10 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)
 	if (ret)
 		pkvm_hyp_donate_host(pkvm_host_gpa_to_phys(data->pasid_table_gpa),
 				     pasid_dir_size(data->max_pasid), false);
+
+	if (ret == -EEXIST)
+		ret = 0;
+
 	return ret;
 }
 
