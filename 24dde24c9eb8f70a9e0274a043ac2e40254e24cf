@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c03152_d799664f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-07-14T23:06:57Z",
+      "side": 1,
+      "message": "The linter is failing for this Merged-In. \n\nLet\u0027s remove it in the patch-set.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "24dde24c9eb8f70a9e0274a043ac2e40254e24cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
