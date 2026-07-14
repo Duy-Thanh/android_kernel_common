@@ -171,6 +171,11 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 				 __func__, pgd);
 			return -EINVAL;
 		}
+		if (domain_ptr->use_first_level) {
+			pkvm_err("%s: Domain has use_first_level set, expected SL\n", __func__);
+			pkvm_put_iommu_domain(domain_ptr);
+			return -EINVAL;
+		}
 	}
 
 	cache_domain = data->did == FLPT_DEFAULT_DID ? &pt_domain : domain_ptr;
@@ -430,6 +435,11 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 		if (!domain_ptr) {
 			pkvm_err("%s: Failed to locate domain with pgd: %p\n",
 				 __func__, pgd);
+			return -EINVAL;
+		}
+		if (domain_ptr->use_first_level) {
+			pkvm_err("%s: Domain has use_first_level set, expected SL\n", __func__);
+			pkvm_put_iommu_domain(domain_ptr);
 			return -EINVAL;
 		}
 	}
