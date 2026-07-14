@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ce6ff0_dc3df9be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2000377
+      },
+      "writtenOn": "2026-07-14T11:41:40Z",
+      "side": 1,
+      "message": "Hi Reviewers, Patchset 2 is uploaded to fix the build errors caused by the previous incorrect backport base. Please help review this updated version. Thanks!",
+      "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
