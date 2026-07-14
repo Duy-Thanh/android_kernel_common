@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10883113_02f47691",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-14T16:45:21Z",
+      "side": 1,
+      "message": "Should this be `\u003e\u003d`? I can see same check(`\u003e`) in `KVM_SET_BOOT_CPU_ID` ioctl in generic kvm, but I think `max_vcpu_ids` is one more than the maximum valid vcpu id.",
+      "revId": "19b2e59640c2e1f7880055724415c3aa5f4f856d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
