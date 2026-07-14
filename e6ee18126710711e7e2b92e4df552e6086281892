@@ -22,6 +22,30 @@
       },
       "revId": "e6ee18126710711e7e2b92e4df552e6086281892",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "008ccdaa_4d8fa433",
+        "filename": "kernel/dma/coherent.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-07-14T21:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53dc3a50_5976953a",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 118
+      },
+      "revId": "e6ee18126710711e7e2b92e4df552e6086281892",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
