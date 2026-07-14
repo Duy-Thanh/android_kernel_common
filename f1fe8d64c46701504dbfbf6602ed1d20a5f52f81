@@ -34,6 +34,24 @@
       "parentUuid": "aed5b65b_e35de4f6",
       "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1a3e09_eff018d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-14T17:11:40Z",
+      "side": 1,
+      "message": "Can we be sure that no vendor modules ever read/write the old version of the modified fields? You have to assume that vendor modules might have been built before this change. If this really is safe, and wireless_dev is managed carefully (eg, allocated in place and not embedded in other structs), perhaps you could do something like:\n```\nstruct wireless_dev_ext {\n  struct wireless_dev wireless_dev;\n  struct wiphy_work wiphy work;\n}\n```\nand access wiphy_work by using `container_of()` on the given wireless_dev. I haven\u0027t looked to see if this could actually work in your case. I\u0027ll try a little harder after you convince me that it is safe to assume that it is safe to assume that drivers never use wdev-\u003epmsr_free_wk.",
+      "parentUuid": "02ae14b9_802689e0",
+      "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
