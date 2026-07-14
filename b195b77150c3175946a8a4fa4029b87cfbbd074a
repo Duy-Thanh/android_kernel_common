@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07d41a02_2612969b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-14T08:29:10Z",
+      "side": 1,
+      "message": "sorry, a typo, it is npVM as pVM\u0027s XFD MSR is not allowed to set by the host.\n\nBTW, I plan to rework this patch, to make the logic more clear and obvious, but doesn\u0027t have a concrete idea yet. Since this is not a security issue and xfd is not supported on the targeted platform, would like to separate this patch from this series. Does this make sense?",
+      "parentUuid": "a65c2588_0baa4167",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82718a49_5e2f0957",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 3
