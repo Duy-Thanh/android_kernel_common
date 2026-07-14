@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "417c99f9_ae3a2d38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2000377
+      },
+      "writtenOn": "2026-07-14T06:15:39Z",
+      "side": 1,
+      "message": "Hi Code Owners,\nThis CL is backported to fix the critical privilege escalation vulnerability CVE-2026-43499 (GhostLock).\nWe urgently need this merged into the main branch so that Google EngOps can proceed with our GKI respin requests for historical release branches. Could you please help review and approve? Thank you!",
+      "revId": "30e30d86fcd6ef083062be433600064dc0093266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
