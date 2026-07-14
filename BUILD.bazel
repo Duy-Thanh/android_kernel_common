@@ -413,6 +413,7 @@ kernel_build(
         "Image",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
 )
 
 pkg_files(
@@ -448,6 +449,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     page_size = "16k",
+    pahole = ":pahole",
 )
 
 pkg_files(
@@ -477,6 +479,7 @@ kernel_build(
         "bzImage",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
 )
 
 pkg_files(
@@ -506,6 +509,7 @@ kernel_build(
         "Image",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
 )
 
 pkg_files(
@@ -533,6 +537,7 @@ kernel_build(
         "bzImage",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
 )
 
 pkg_files(
@@ -844,6 +849,7 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _DB845C_WATCHDOG_MODULE_OUTS,
     }),
+    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/db845c_gki.fragment"],
     strip_modules = select({
         "//build/kernel/kleaf:debug_is_true": False,
@@ -972,6 +978,7 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _ROCKPI4_WATCHDOG_MODULE_OUTS,
     }),
+    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/rockpi4_gki.fragment"],
     trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
@@ -1160,6 +1167,7 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _AMLOGIC_WATCHDOG_MODULE_OUTS,
     }),
+    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1214,6 +1222,7 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
     post_defconfig_fragments = ["arch/arm64/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1232,6 +1241,7 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
     post_defconfig_fragments = ["arch/x86/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1260,6 +1270,7 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
+    pahole = ":pahole",
     post_defconfig_fragments = ["arch/arm/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
