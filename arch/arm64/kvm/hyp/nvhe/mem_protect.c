@@ -1753,6 +1753,9 @@ int __pkvm_host_donate_sglist_hyp(struct pkvm_sglist_page *sglist, size_t nr_pag
 	int p, ret;
 	u64 phys;
 
+	if (!nr_pages)
+		return 0;
+
 	host_lock_component();
 	hyp_lock_component();
 
