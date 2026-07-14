@@ -561,7 +561,8 @@ static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate 
 		       PKVM_VCPU_BASE_SIZE +
 		       kvm_vcpu_sz;
 	int cpu = raw_smp_processor_id();
-	int ret;
+	struct kvm_vcpu *existing_vcpu;
+	int ret, i;
 
 	ret = postponed_per_vm_setup(kvm);
 	if (ret)
@@ -578,6 +579,15 @@ static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate 
 	vcpu->vcpu_id = READ_ONCE(pkvm_vcpu->shared_vcpu->vcpu_id);
 	if (vcpu->vcpu_id < 0 || vcpu->vcpu_id >= kvm->arch.max_vcpu_ids)
 		return -EINVAL;
+
+	pkvm_spin_lock(&pkvm_vm->lock);
+	for_each_pkvm_guest_vcpu(i, existing_vcpu, pkvm_vm) {
+		if (existing_vcpu->vcpu_id == vcpu->vcpu_id) {
+			pkvm_spin_unlock(&pkvm_vm->lock);
+			return -EEXIST;
+		}
+	}
+	pkvm_spin_unlock(&pkvm_vm->lock);
 
 	vcpu->arch.last_vmentry_cpu = -1;
 	vcpu->arch.regs_avail = ~0;
