@@ -16,6 +16,24 @@
       "message": "I think we can drop this change...",
       "revId": "5f91e91eee16022f6450a340f785b4ecfd418891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a04792_63c70872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T12:21:07Z",
+      "side": 1,
+      "message": "Yes, le me drop this.",
+      "parentUuid": "84fc4709_1cf4e5bc",
+      "revId": "5f91e91eee16022f6450a340f785b4ecfd418891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
