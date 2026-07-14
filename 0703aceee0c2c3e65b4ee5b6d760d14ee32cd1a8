@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b22facf_8ef5ce90",
+        "filename": "kernel/dma/coherent.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-07-14T21:22:23Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by AI Conflict Resolution: AI suggestion:\nThe downstream code has undergone a significant refactoring of th...\n\nAI suggestion:\nThe downstream code has undergone a significant refactoring of the error handling logic. It removes the `out_unmap_membase` label, adds a null check for `mem_base` before unmapping, and returns a variable `ret` instead of a hardcoded error. The upstream change is a minor modification to an error message that has been entirely removed in the downstream version. Given the substantial refactoring in downstream, which makes the upstream change obsolete, the downstream code is preserved as the resolution.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "0703aceee0c2c3e65b4ee5b6d760d14ee32cd1a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
