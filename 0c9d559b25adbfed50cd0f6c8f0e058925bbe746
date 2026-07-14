@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5158786_22239bad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T20:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92016e05_b7f37703",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1af305e_4ccce03a",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-07-14T19:18:55Z",
       "side": 1,
       "message": "let\u0027s also put scalable mode check here as well?\n```\nif (!sm_supported(iommu))\n    return -EINVAL;\n```",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2f743ef_9b674114",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T20:36:33Z",
+      "side": 1,
+      "message": "Ah I see, that it eventually calls intel_pasid_get_entry and it has a check for scalable mode inside `intel_pasid_get_table`, so we are good.",
+      "parentUuid": "f1af305e_4ccce03a",
       "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -70,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "228bbcd5_07b4668f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T20:36:33Z",
+      "side": 1,
+      "message": "It eventually calls `intel_pasid_get_entry` and it has a check for scalable mode inside `intel_pasid_get_table`, so we are good.",
+      "parentUuid": "4e159b40_beef1429",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0923bbdf_708e31a2",
@@ -83,6 +137,24 @@
       "writtenOn": "2026-07-14T19:18:55Z",
       "side": 1,
       "message": "let\u0027s also put scalable mode check here as well?\n```\nif (!sm_supported(iommu))\n    return -EINVAL;\n```",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88bdb98c_1e3f3fa7",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T20:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0923bbdf_708e31a2",
       "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
