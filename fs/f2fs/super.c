@@ -1721,6 +1721,9 @@ static void f2fs_put_super(struct super_block *sb)
 #ifdef CONFIG_UNICODE
 	utf8_unload(sb->s_encoding);
 #endif
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
 	kfree(sbi);
 }
 
@@ -4377,6 +4380,25 @@ try_onemore:
 
 	/* init f2fs-specific super block info */
 	sbi->valid_super_block = valid_super_block;
+<<<<<<< HEAD   (deea6209fa51bd3d7a707da77d00f981f02d708c Revert "randomize_kstack: Maintain kstack_offset per task")
+||||||| BASE   (90bffa1e45147c23496c1ec00fbd1c1913999069 spi: sun4i: fix controller deregistration)
+	init_rwsem(&sbi->gc_lock);
+	mutex_init(&sbi->writepages);
+	init_rwsem(&sbi->cp_global_sem);
+	init_rwsem(&sbi->node_write);
+	init_rwsem(&sbi->node_change);
+=======
+	init_rwsem(&sbi->gc_lock);
+	mutex_init(&sbi->writepages);
+	init_rwsem(&sbi->cp_global_sem);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_register_key(&sbi->cp_global_sem_key);
+	lockdep_set_class(&sbi->cp_global_sem,
+					&sbi->cp_global_sem_key);
+#endif
+	init_rwsem(&sbi->node_write);
+	init_rwsem(&sbi->node_change);
+>>>>>>> BRANCH (ee125bbff75699838fe9e8a303a0c3549bba3f1d spi: lantiq-ssc: fix controller deregistration)
 
 	/* disallow all the data/node/meta page writes */
 	set_sbi_flag(sbi, SBI_POR_DOING);
@@ -4753,6 +4775,9 @@ free_sb_buf:
 free_sbi:
 	if (sbi->s_chksum_driver)
 		crypto_free_shash(sbi->s_chksum_driver);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
 	kfree(sbi);
 
 	/* give only one another chance */
