@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bcbdc7a_f4615c7c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-14T12:28:52Z",
+      "side": 1,
+      "message": "I am a bit nervous for killing the entire machine when an unknown ITS command is received.",
+      "range": {
+        "startLine": 333,
+        "startChar": 2,
+        "endLine": 333,
+        "endChar": 9
+      },
+      "revId": "dc267b9f1c1e96e1418efa9a4059568bd4ef2048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
