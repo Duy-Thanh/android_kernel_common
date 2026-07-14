@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44da3919_c199d58d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T19:18:55Z",
+      "side": 1,
+      "message": "Please include this bug as well :-)\nBug: 517579282",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1af305e_4ccce03a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T19:18:55Z",
+      "side": 1,
+      "message": "let\u0027s also put scalable mode check here as well?\n```\nif (!sm_supported(iommu))\n    return -EINVAL;\n```",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e159b40_beef1429",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T19:18:55Z",
+      "side": 1,
+      "message": "let\u0027s also put scalable mode check here as well?\n```\nif (!sm_supported(iommu))\n    return -EINVAL;\n```",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0923bbdf_708e31a2",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-14T19:18:55Z",
+      "side": 1,
+      "message": "let\u0027s also put scalable mode check here as well?\n```\nif (!sm_supported(iommu))\n    return -EINVAL;\n```",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
