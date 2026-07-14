@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aff02d8_8ae78d05",
+        "filename": "mm/memory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4612,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-14T16:25:52Z",
+      "side": 1,
+      "message": "move this down to line 4733 since it is only needed in that scope.",
+      "revId": "d908ae753a2c37ec29ab25cc7c3fa82ec2ab0f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

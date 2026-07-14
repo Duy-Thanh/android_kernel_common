@@ -16,6 +16,24 @@
       "message": "split this into 2 patches:\n1) the addition of the vendor hook\n2) the symbol list and ABI update",
       "revId": "80a46db6de880a80b732d3f99d45286c3309cf4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27f24d3_ef76cf0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-14T16:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53566da9_d7d5144b",
+      "revId": "80a46db6de880a80b732d3f99d45286c3309cf4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
