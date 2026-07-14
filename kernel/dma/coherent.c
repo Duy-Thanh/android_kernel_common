@@ -79,9 +79,23 @@ static int dma_init_coherent_memory(phys_addr_t phys_addr,
 
 out:
 	kfree(dma_mem);
+<<<<<<< HEAD   (bf430f0bd02bfb2f7904bd652d7423f4f6b50d9c BACKPORT: locking/rtmutex: Skip remove_waiter() when waiter )
 	if (mem_base)
 		memunmap(mem_base);
 	return ret;
+||||||| BASE   (0f519bdb08cece1f13b4328d68d5877da56d0c01 Reapply "ANDROID: enable CONFIG_USB_XHCI_PCI_RENESAS in gki_)
+out_unmap_membase:
+	memunmap(mem_base);
+	pr_err("Reserved memory: failed to init DMA memory pool at %pa, size %zd MiB\n",
+		&phys_addr, size / SZ_1M);
+	return ERR_PTR(-ENOMEM);
+=======
+out_unmap_membase:
+	memunmap(mem_base);
+	pr_err("Reserved memory: failed to init DMA memory pool at %pa, size %zu KiB\n",
+		&phys_addr, size / SZ_1K);
+	return ERR_PTR(-ENOMEM);
+>>>>>>> CHANGE (764db2ca39bfd451c7a0ff20f21b9113ca6e10cb BACKPORT: FROMGIT: dma-coherent: use KiB in DMA allocation l)
 }
 
 static void _dma_release_coherent_memory(struct dma_coherent_mem *mem)
@@ -378,8 +392,8 @@ static int __init rmem_dma_setup(struct reserved_mem *rmem)
 #endif
 
 	rmem->ops = &rmem_dma_ops;
-	pr_info("Reserved memory: created DMA memory pool at %pa, size %ld MiB\n",
-		&rmem->base, (unsigned long)rmem->size / SZ_1M);
+	pr_info("Reserved memory: created DMA memory pool at %pa, size %llu KiB\n",
+		&rmem->base, (unsigned long long)(rmem->size / SZ_1K));
 	return 0;
 }
 
