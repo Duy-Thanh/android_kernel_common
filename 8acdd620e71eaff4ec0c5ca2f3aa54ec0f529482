@@ -102,6 +102,24 @@
       "parentUuid": "10b73bf5_4ecb8cb8",
       "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf690c60_0e9180cc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-14T10:40:38Z",
+      "side": 1,
+      "message": "`postponed_per_vm_setup()` is called unconditionally for every vcpu and we return from `postponed_per_vm_setup()` after taking the lock and checking if `pkvm_vm-\u003epostponed_setup_done`. But the snapshoting of `irqchip_mode` and `max_vcpu_ids` happens before that. So a malicious host can have the first `__vcpu_create` succeed and call it again for subsequent cpus with invalid `irqchip_mode` or `max_vcpu_ids`. This will call `postponed_per_vm_setup()` unconditionally and fail before checking `pkvm_vm-\u003epostponed_setup_done`. That was the case I was talking about as a host can intentionally fail the vcpu creation even though we have snapshotted valid values for `irqchip_mode` and `max_vcpu_ids` during first vcpu creation. A malicious host can create a VM with failed vcpus and let the VM run with the initially created vcpu alone. With my limited understanding, this cannot cause any security issues, just a DoS. Was referring to this.",
+      "parentUuid": "ea925711_fcc1dcca",
+      "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
