@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10b73bf5_4ecb8cb8",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-14T10:09:25Z",
+      "side": 1,
+      "message": "Just a thought: A malicious host can pass in bad values for irqchip_mode and max_vcpu_ids after the first vCPU is created successfully and fail the subsequent vcpu creations. We could probably avoid this by moving it inside the lock. Not a security issue though, just a DoS like attack. And if a malicious host wants to fail the VM creation there are lot other ways as well, so not really too concerned about it.",
+      "fixSuggestions": [
+        {
+          "fixId": "830b4fb9_52b6c3f1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 494,
+                "startChar": 0,
+                "endLine": 495,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 496,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "\tint ret \u003d 0;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 513,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto unlock;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 525,
+                "startChar": 0,
+                "endLine": 527,
+                "endChar": 0
+              },
+              "replacement": "\tkvm-\u003earch.irqchip_mode \u003d READ_ONCE(shared_kvm-\u003earch.irqchip_mode);\n\tif (kvm-\u003earch.irqchip_mode !\u003d KVM_IRQCHIP_NONE \u0026\u0026\n\t    kvm-\u003earch.irqchip_mode !\u003d KVM_IRQCHIP_KERNEL \u0026\u0026\n\t    kvm-\u003earch.irqchip_mode !\u003d KVM_IRQCHIP_SPLIT) {\n\t\tret \u003d -EINVAL;\n\t\tgoto unlock;\n\t}\n\n\tkvm-\u003earch.max_vcpu_ids \u003d READ_ONCE(shared_kvm-\u003earch.max_vcpu_ids);\n\tif (!kvm-\u003earch.max_vcpu_ids || kvm-\u003earch.max_vcpu_ids \u003e KVM_MAX_VCPU_IDS) {\n\t\tret \u003d -EINVAL;\n\t\tgoto unlock;\n\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 547,
+                "startChar": 0,
+                "endLine": 548,
+                "endChar": 0
+              },
+              "replacement": "unlock:\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 549,
+                "startChar": 0,
+                "endLine": 550,
+                "endChar": 0
+              },
+              "replacement": "\treturn ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
