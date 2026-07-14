@@ -93,9 +93,9 @@ struct pkvm_vm {
  * Iterates over all vCPUs in the VM, automatically skipping if vCPU pointer is
  * NULL.
  */
-#define for_each_pkvm_guest_vcpu(i, vcpu, vm)							\
+#define for_each_pkvm_guest_vcpu(i, _vcpu, vm)							\
 	for ((i) = 0; (i) < (vm)->kvm.created_vcpus &&						\
-		      ({ (vcpu) = (vm)->vcpus[(i)] ?						\
+		      ({ (_vcpu) = (vm)->vcpus[(i)] ?						\
 				  &(vm)->vcpus[(i)]->vcpu : NULL; true; }); (i)++)		\
 		if (!(vcpu))									\
 			continue;								\
