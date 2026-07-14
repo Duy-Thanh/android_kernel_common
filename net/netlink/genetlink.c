@@ -1376,9 +1376,19 @@ static int genl_bind(struct net *net, int group)
 			continue;
 
 		grp = &family->mcgrps[i];
-		if ((grp->flags & GENL_UNS_ADMIN_PERM) &&
+		if ((grp->flags & GENL_MCAST_CAP_NET_ADMIN) &&
 		    !ns_capable(net->user_ns, CAP_NET_ADMIN))
 			ret = -EPERM;
+<<<<<<< HEAD   (35731b422d00ac1076659df64baf477b4dcf61f3 Merge ee125bbff756 ("spi: lantiq-ssc: fix controller deregis)
+||||||| BASE   (ee125bbff75699838fe9e8a303a0c3549bba3f1d spi: lantiq-ssc: fix controller deregistration)
+		if (grp->cap_sys_admin &&
+		    !ns_capable(net->user_ns, CAP_SYS_ADMIN))
+			ret = -EPERM;
+=======
+		if ((grp->flags & GENL_MCAST_CAP_SYS_ADMIN) &&
+		    !ns_capable(net->user_ns, CAP_SYS_ADMIN))
+			ret = -EPERM;
+>>>>>>> BRANCH (9cf7eb8919344932f909b2fac76296f7656fda8d smb: client: require net admin for CIFS SWN netlink)
 
 		break;
 	}
