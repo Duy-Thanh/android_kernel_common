@@ -84,6 +84,24 @@
       ],
       "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea925711_fcc1dcca",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-14T10:15:02Z",
+      "side": 1,
+      "message": "If the vCPU has been already created successfully, it means `postponed_per_vm_setup()` already succeeded during the first vCPU creation (with valid values of irqchip_mode and max_vcpu_ids), so during creation of subsequent vCPUs, pKVM will not call `postponed_per_vm_setup()` anymore, i.e. it will not even try to use those new possibly invalid values of irqchip_mode and max_vcpu_ids, it will use the same (valid) values as for the first vCPU, right?",
+      "parentUuid": "10b73bf5_4ecb8cb8",
+      "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
