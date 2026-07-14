@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fecdb2f_d3a41f4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-14T16:56:33Z",
+      "side": 1,
+      "message": "Add a reference to the upstream patch. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "3e4ba307d63839b98455b4df64a0717fefe01281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
