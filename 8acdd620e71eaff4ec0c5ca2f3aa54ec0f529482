@@ -138,6 +138,24 @@
       "parentUuid": "cf690c60_0e9180cc",
       "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66152c9_3f94f6d3",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-14T18:46:17Z",
+      "side": 1,
+      "message": "\u003e Maybe it makes sense to move them after the pkvm_vm-\u003epostponed_setup_done check, at least because there is no point in checking these values if we are not gonna use them...\n\nDone.",
+      "parentUuid": "2c76faff_8c8a1111",
+      "revId": "8acdd620e71eaff4ec0c5ca2f3aa54ec0f529482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
