@@ -186,6 +186,7 @@ static int hvm_vm_ioctl_create_device(struct hvm *hvm, void __user *argp)
 {
 	struct hvm_create_device *hvm_dev;
 	void *dev_data = NULL;
+	size_t attr_size = 0;
 	int ret;
 
 	hvm_dev = alloc_pages_exact(PAGE_SIZE, GFP_KERNEL);
@@ -198,8 +199,9 @@ static int hvm_vm_ioctl_create_device(struct hvm *hvm, void __user *argp)
 	}
 
 	if (hvm_dev->attr_addr != 0 && hvm_dev->attr_size != 0) {
-		size_t attr_size = hvm_dev->attr_size;
 		void __user *attr_addr = u64_to_user_ptr(hvm_dev->attr_addr);
+
+		attr_size = hvm_dev->attr_size;
 
 		/* Size of device specific data should not be over a page. */
 		if (attr_size > PAGE_SIZE) {
@@ -224,9 +226,9 @@ static int hvm_vm_ioctl_create_device(struct hvm *hvm, void __user *argp)
 			hvm->vm_id, virt_to_phys(hvm_dev), 0, 0);
 err_free_dev_data:
 	if (dev_data)
-		free_pages_exact(dev_data, 0);
+		free_pages_exact(dev_data, attr_size);
 err_free_dev:
-	free_pages_exact(hvm_dev, 0);
+	free_pages_exact(hvm_dev, PAGE_SIZE);
 	return ret;
 }
 
@@ -371,9 +373,67 @@ static void hvm_destroy_all_ppage(struct hvm *hvm)
 	}
 }
 
+static void hvm_drain_ioevents(struct hvm *hvm)
+{
+	struct hvm_ioevent *p, *tmp;
+
+	mutex_lock(&hvm->ioevent_lock);
+	list_for_each_entry_safe(p, tmp, &hvm->ioevents, list) {
+		eventfd_ctx_put(p->evt_ctx);
+		list_del(&p->list);
+		kfree(p);
+	}
+	mutex_unlock(&hvm->ioevent_lock);
+}
+
+/**
+ * __hvm_vm_release() - Final teardown when the last reference is dropped.
+ * @kref: kref embedded in struct hvm.
+ *
+ * Runs only after the VM fd and every vcpu fd have been closed, so no
+ * further hvc entries are possible against this VM.  Tears down the
+ * remaining hypervisor-side state, drains the ioevents list (whose
+ * nodes were leaked at VM teardown previously), drops the mm
+ * reference taken at create_vm time, and frees struct hvm.
+ */
+static void __hvm_vm_release(struct kref *kref)
+{
+	struct hvm *hvm = container_of(kref, struct hvm, kref);
+
+	exynos_hvc(HVC_FID_HVM_DESTROY_VM,
+		   hvm->vm_id, 0, 0, 0);
+
+	hvm_destroy_vm_debugfs(hvm);
+
+	hvm_drain_ioevents(hvm);
+
+	mmdrop(hvm->mm);
+	kfree(hvm);
+}
+
+void hvm_vm_get(struct hvm *hvm)
+{
+	kref_get(&hvm->kref);
+}
+
+void hvm_vm_put(struct hvm *hvm)
+{
+	kref_put(&hvm->kref, __hvm_vm_release);
+}
+
+/**
+ * hvm_destroy_vm() - VM fd release path.
+ *
+ * Tears down everything that owns guest memory or hypervisor S2
+ * resources, detaches the live vcpus from the hypervisor, removes
+ * the VM from hvm_list, then drops the VM fd's kref.  The struct
+ * hvm itself stays alive as long as any vcpu fd still holds a
+ * reference, so a vcpu ioctl racing with VM fd close stays on
+ * valid memory until the vcpu fd is also closed.
+ */
 static void hvm_destroy_vm(struct hvm *hvm)
 {
-	unsigned long ret = 0;
+	unsigned long ret;
 
 	mutex_lock(&hvm->lock);
 
@@ -385,11 +445,6 @@ static void hvm_destroy_vm(struct hvm *hvm)
 	hvm_reclaim_guest_stage2_pgtable(hvm);
 
 	hvm_destroy_vcpus(hvm);
-
-	exynos_hvc(HVC_FID_HVM_DESTROY_VM,
-		   hvm->vm_id, 0, 0, 0);
-
-	hvm_destroy_vm_debugfs(hvm);
 
 	mutex_lock(&hvm_list_lock);
 	list_del(&hvm->vm_list);
@@ -409,22 +464,20 @@ static void hvm_destroy_vm(struct hvm *hvm)
 		hvm_destroy_all_ppage(hvm);
 	}
 
-	kfree(hvm);
+	hvm_vm_put(hvm);
 }
 
 void hvm_destroy_all_vms(void)
 {
 	struct hvm *hvm, *tmp;
+	LIST_HEAD(vms_to_destroy);
 
 	mutex_lock(&hvm_list_lock);
-	if (list_empty(&hvm_list))
-		goto out;
-
-	list_for_each_entry_safe(hvm, tmp, &hvm_list, vm_list)
-		hvm_destroy_vm(hvm);
-
-out:
+	list_splice_init(&hvm_list, &vms_to_destroy);
 	mutex_unlock(&hvm_list_lock);
+
+	list_for_each_entry_safe(hvm, tmp, &vms_to_destroy, vm_list)
+		hvm_destroy_vm(hvm);
 }
 
 int hvm_check_extension(struct hvm *hvm, u64 cap, void __user *argp)
@@ -592,37 +645,44 @@ int hvm_dev_ioctl_create_vm(unsigned long vm_type)
 	}
 
 	hvm->vm_id = ret;
+	mmgrab(current->mm);
 	hvm->mm = current->mm;
+	kref_init(&hvm->kref);
 	mutex_init(&hvm->lock);
 	mutex_init(&hvm->mem_lock);
 	hvm->pinned_pages = RB_ROOT;
 
 	ret = hvm_vm_irqfd_init(hvm);
 	if (ret) {
+		mmdrop(hvm->mm);
 		kfree(hvm);
 		return ret;
 	}
 
 	ret = hvm_init_ioeventfd(hvm);
 	if (ret) {
+		mmdrop(hvm->mm);
 		kfree(hvm);
 		return ret;
 	}
 
 	ret = hvm_init_vm_stage2_mmu(hvm);
 	if (ret) {
+		mmdrop(hvm->mm);
 		kfree(hvm);
 		return ret;
 	}
 
 	ret = hvm_create_vm_debugfs(hvm);
 	if (ret) {
+		mmdrop(hvm->mm);
 		kfree(hvm);
 		return ret;
 	}
 
 	ret = hvm_arch_drv_init(hvm);
 	if (ret) {
+		mmdrop(hvm->mm);
 		kfree(hvm);
 		return ret;
 	}

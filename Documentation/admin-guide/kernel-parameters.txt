@@ -2802,6 +2802,14 @@
 			[KVM,ARM] Minimum order for each protected VM fault.
 			This range from 0 (default) to 9.
 
+	kvm-arm.psci_mem_protect=
+			[KVM,ARM,EARLY] Control usage of PSCI MEM_PROTECT.
+
+			force: Enforce PSCI MEM_PROTECT handling regardless of
+			advertised PSCI version.
+
+			off: Skip PSCI MEM_PROTECT handling.
+
 	kvm-arm.vgic_v3_group0_trap=
 			[KVM,ARM,EARLY] Trap guest accesses to GICv3 group-0
 			system registers
@@ -7334,6 +7342,9 @@
 				p = USB_QUIRK_SHORT_SET_ADDRESS_REQ_TIMEOUT
 					(Reduce timeout of the SET_ADDRESS
 					request from 5000 ms to 500 ms);
+				q = USB_QUIRK_FORCE_ONE_CONFIG (Device
+					claims zero configurations,
+					forcing to 1);
 			Example: quirks=0781:5580:bk,0a5c:5834:gij
 
 	usbhid.mousepoll=

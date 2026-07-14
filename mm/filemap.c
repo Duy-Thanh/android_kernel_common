@@ -1717,6 +1717,8 @@ void folio_end_writeback(struct folio *folio)
 	folio_get(folio);
 	if (__folio_end_writeback(folio))
 		folio_wake_bit(folio, PG_writeback);
+	else
+		trace_android_vh_folio_end_writeback(folio);
 
 	filemap_end_dropbehind_write(folio);
 	acct_reclaim_writeback(folio);
@@ -3363,8 +3365,10 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 		unsigned long start = vma->vm_pgoff;
 		unsigned long end = start + vma_pages(vma);
 		unsigned long ra_end;
+		unsigned int order = exec_folio_order();
 
-		ra_mmap_miss->order = exec_folio_order();
+		trace_android_vh_override_exec_folio_order(vma, &order);
+		ra_mmap_miss->order = order;
 		ra->start = round_down(vmf->pgoff, 1UL << ra_mmap_miss->order);
 		ra->start = max(ra->start, start);
 		ra_end = round_up(ra->start + ra->ra_pages,
@@ -3868,15 +3872,20 @@ vm_fault_t filemap_map_pages(struct vm_fault *vmf,
 	pgoff_t orig_start_pgoff = start_pgoff;
 	bool can_map_large;
 
+	/*
+	 * Recalculate end_pgoff based on file_end before calling
+	 * next_uptodate_folio() to avoid races with concurrent
+	 * truncation.
+	 */
+	file_end = DIV_ROUND_UP(i_size_read(mapping->host), PAGE_SIZE) - 1;
+	end_pgoff = min(end_pgoff, file_end);
+
 	rcu_read_lock();
 	folio = next_uptodate_folio(&xas, mapping, end_pgoff);
 	if (!folio)
 		goto out;
 	first_pgoff = xas.xa_index;
 	orig_start_pgoff = xas.xa_index;
-
-	file_end = DIV_ROUND_UP(i_size_read(mapping->host), PAGE_SIZE) - 1;
-	end_pgoff = min(end_pgoff, file_end);
 
 	/*
 	 * Do not allow to map with PTEs beyond i_size and with PMD

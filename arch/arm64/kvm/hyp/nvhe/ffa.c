@@ -649,7 +649,7 @@ out_unlock:
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 	return ret;
 out_err_with_tx:
-	WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, tx));
+	WARN_ON(__pkvm_guest_unshare_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx));
 out_err:
 	ret = __handle_mem_protect_err(hyp_vcpu, tx, ret);
 	ret = __handle_mem_protect_err(hyp_vcpu, rx, ret);
@@ -686,8 +686,10 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 
 		ffa_unmap_hyp_buffers();
 	} else {
-		WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, ffa_buf->tx_ipa));
-		WARN_ON(__pkvm_guest_unshare_hyp_page(hyp_vcpu, ffa_buf->rx_ipa));
+		struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
+
+		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
+		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
 	}
 
 	ffa_buf->rx = NULL;
@@ -773,10 +775,11 @@ static int ffa_store_translation(struct ffa_mem_transfer *transfer, u64 ipa, phy
 static void ffa_guest_unshare_ranges(struct pkvm_hyp_vcpu *vcpu,
 				     struct ffa_mem_transfer *transfer)
 {
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	struct ffa_translation *translation, *tmp;
 
 	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
-		WARN_ON(__pkvm_guest_unshare_ffa_page(vcpu, translation->ipa));
+		WARN_ON(__pkvm_guest_unshare_ffa_page(vm, translation->ipa));
 		list_del(&translation->node);
 		hyp_free(translation);
 	}
@@ -788,6 +791,7 @@ static int ffa_guest_share_ranges(struct ffa_mem_region_addr_range *ranges,
 				  size_t reg_len,
 				  struct ffa_mem_transfer *transfer)
 {
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	struct ffa_mem_region_addr_range *range;
 	struct ffa_mem_region_addr_range *buf = out_region->constituents;
 	int i, j, ret;
@@ -815,7 +819,7 @@ static int ffa_guest_share_ranges(struct ffa_mem_region_addr_range *ranges,
 
 			ret = ffa_store_translation(transfer, ipa, pa);
 			if (ret) {
-				WARN_ON(__pkvm_guest_unshare_ffa_page(vcpu, ipa));
+				WARN_ON(__pkvm_guest_unshare_ffa_page(vm, ipa));
 				goto unshare;
 			}
 
@@ -972,7 +976,7 @@ static int __do_ffa_mem_xfer(const u64 func_id,
 	struct ffa_composite_mem_region *reg, *temp_reg;
 	struct ffa_mem_region *buf;
 	struct kvm_ffa_buffers *ffa_buf;
-	u32 offset, nr_ranges, checked_offset;
+	u32 offset, nr_ranges, checked_offset, em_mem_access_off;
 	int ret = 0;
 	struct ffa_mem_transfer *transfer = NULL;
 	u64 ffa_handle;
@@ -1020,8 +1024,14 @@ static int __do_ffa_mem_xfer(const u64 func_id,
 	buf = hyp_buffers.tx;
 	memcpy(buf, ffa_buf->tx, fraglen);
 
-	ep_mem_access = (void *)buf +
-			ffa_mem_desc_offset(buf, 0, hyp_ffa_version);
+	em_mem_access_off = ffa_mem_desc_offset(buf, 0, hyp_ffa_version);
+	if (em_mem_access_off >
+	    KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE - sizeof(struct ffa_mem_region_attributes)) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto out_unlock;
+	}
+
+	ep_mem_access = (void *)buf + em_mem_access_off;
 	offset = ep_mem_access->composite_off;
 	if (!offset || buf->ep_count != 1 || buf->sender_id != hyp_vcpu_to_ffa_handle(hyp_vcpu)) {
 		ffa_to_smccc_error(res, FFA_RET_INVALID_PARAMETERS);
@@ -1155,7 +1165,7 @@ static void do_ffa_mem_reclaim(struct arm_smccc_1_2_regs *res,
 	DECLARE_REG(u32, flags, ctxt, 3);
 	struct ffa_mem_region_attributes *ep_mem_access;
 	struct ffa_composite_mem_region *reg;
-	u32 offset, len, fraglen, fragoff;
+	u32 offset, len, fraglen, fragoff, em_mem_access_off;
 	struct ffa_mem_region *buf;
 	int ret = 0;
 	u64 handle;
@@ -1206,8 +1216,14 @@ static void do_ffa_mem_reclaim(struct arm_smccc_1_2_regs *res,
 	len = res->a1;
 	fraglen = res->a2;
 
-	ep_mem_access = (void *)buf +
-			ffa_mem_desc_offset(buf, 0, hyp_ffa_version);
+	em_mem_access_off = ffa_mem_desc_offset(buf, 0, hyp_ffa_version);
+	if (em_mem_access_off >
+	    KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE - sizeof(struct ffa_mem_region_attributes)) {
+		ret = FFA_RET_INVALID_PARAMETERS;
+		goto out_unlock;
+	}
+
+	ep_mem_access = (void *)buf + em_mem_access_off;
 	offset = ep_mem_access->composite_off;
 	/*
 	 * We can trust the SPMD to get this right, but let's at least
@@ -1833,7 +1849,7 @@ static void kvm_guest_try_reclaim_transfer(struct ffa_mem_transfer *transfer,
 		return;
 
 	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
-		WARN_ON(__pkvm_guest_unshare_ffa_page(vm->vcpus[0], translation->ipa));
+		WARN_ON(__pkvm_guest_unshare_ffa_page(vm, translation->ipa));
 		list_del(&translation->node);
 		hyp_free(translation);
 	}
@@ -1858,11 +1874,11 @@ int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 	if (list_empty(&ffa_buf->xfer_list)) {
 		/* XXX - needs an explicit rxtx unmap call ? */
 		if (ffa_buf->tx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm->vcpus[0], ffa_buf->tx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
 			ffa_buf->tx = NULL;
 		}
 		if (ffa_buf->rx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm->vcpus[0], ffa_buf->rx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
 			ffa_buf->rx = NULL;
 		}
 		goto unlock;
@@ -1904,6 +1920,7 @@ u32 ffa_get_hypervisor_version(void)
 
 int hyp_ffa_init(void *pages)
 {
+	unsigned long num_pages = hyp_ffa_proxy_pages();
 	struct arm_smccc_1_2_regs res;
 	void *tx, *rx;
 
@@ -1938,12 +1955,20 @@ int hyp_ffa_init(void *pages)
 	else
 		hyp_ffa_version = FFA_VERSION_1_2;
 
+	if (num_pages < 2 * KVM_FFA_MBOX_NR_PAGES)
+		return -ENOMEM;
+
+	num_pages -= 2 * KVM_FFA_MBOX_NR_PAGES;
 	tx = pages;
 	pages += KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE;
 	rx = pages;
 	pages += KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE;
 
 	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend)) {
+		if (num_pages < KVM_FFA_SPM_HANDLE_NR_PAGES)
+			return -ENOMEM;
+
+		num_pages -= KVM_FFA_SPM_HANDLE_NR_PAGES;
 		spm_handles = pages;
 		pages += KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE;
 		num_spm_handles = KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE /
@@ -1951,10 +1976,12 @@ int hyp_ffa_init(void *pages)
 		memset(spm_handles, -1, KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE);
 	}
 
+	if (!num_pages)
+		return -ENOMEM;
+
 	ffa_desc_buf = (struct kvm_ffa_descriptor_buffer) {
 		.buf	= pages,
-		.len	= PAGE_SIZE *
-			  (hyp_ffa_proxy_pages() - (2 * KVM_FFA_MBOX_NR_PAGES)),
+		.len	= PAGE_SIZE * num_pages,
 	};
 
 	hyp_buffers = (struct kvm_ffa_buffers) {
