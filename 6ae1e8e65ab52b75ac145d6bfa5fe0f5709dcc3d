@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae76f36_f0afe480",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2026-07-14T22:51:12Z",
+      "side": 1,
+      "message": "It might be worth having a comment here explaining why this needs to be before the smp_store_release().",
+      "fixSuggestions": [
+        {
+          "fixId": "5c60bd1c_68dfac4d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/locking/rwsem.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t *\n\t\t * This must be done before clearing waiter-\u003etask, because\n\t\t * once waiter-\u003etask is cleared, the waiting task in\n\t\t * rwsem_down_read_slowpath() can wake up and potentially\n\t\t * exit, making \u0027tsk\u0027 an invalid pointer. By doing this\n\t\t * under blocked_lock, we ensure \u0027tsk\u0027 is still valid.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6ae1e8e65ab52b75ac145d6bfa5fe0f5709dcc3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
