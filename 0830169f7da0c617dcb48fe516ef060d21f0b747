@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dfa6799_b0f83d46",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-14T10:57:17Z",
+      "side": 1,
+      "message": "Should we also validate if the vcpu_id is duplicate of a previously created vcpu?\n\nGeneric KVM checks for a duplicate ID only after kvm_arch_vcpu_create() has completed. Therefore, if a duplicate KVM_CREATE_VCPU request reaches pKVM, it creates and attaches a hyp vCPU, and overwrites the existing PID-table entry. When generic KVM subsequently returns -EEXIST, its rollback destroys the duplicate vCPU\n\nThis produces the following sequence:\n\n  A created:           pid_table[id] \u003d A\n  B duplicate created: pid_table[id] \u003d B\n  B rejected/freed:    pid_table[id] \u003d 0\n  A remains alive:     pid_table[id] should still point to A\n\nThis probably leaves incorrect IPIv state I guess.",
+      "fixSuggestions": [
+        {
+          "fixId": "82cdb0b1_e0d0862e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Check for duplicate vcpu_id. Generic KVM checks for duplicate IDs\n\t * only after kvm_arch_vcpu_create() has completed. To avoid potential\n\t * inconsistencies in generic KVM\u0027s internal state (e.g., IPIv state)\n\t * when a duplicate ID is rejected, perform the check here before\n\t * calling kvm_x86_call(vcpu_create).\n\t */\n\tpkvm_spin_lock(\u0026pkvm_vm-\u003elock);\n\tfor (i \u003d 0; i \u003c kvm-\u003ecreated_vcpus; i++) {\n\t\tstruct pkvm_vcpu *existing_vcpu \u003d pkvm_vm-\u003evcpus[i];\n\t\tif (existing_vcpu \u0026\u0026 existing_vcpu-\u003evcpu.vcpu_id \u003d\u003d vcpu-\u003evcpu_id) {\n\t\t\tpkvm_spin_unlock(\u0026pkvm_vm-\u003elock);\n\t\t\treturn -EEXIST;\n\t\t}\n\t}\n\tpkvm_spin_unlock(\u0026pkvm_vm-\u003elock);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0830169f7da0c617dcb48fe516ef060d21f0b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
