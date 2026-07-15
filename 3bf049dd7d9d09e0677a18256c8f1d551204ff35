@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d6de56_4852c2a7",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T10:39:08Z",
+      "side": 1,
+      "message": "I think this might not fix it completely as the check and set are separated by code that is not under the lock. Here we check and release the lock and set it only later in vmx_vcpu_create.\n\nInitially I was thinking about setting it here and unset it in the failure code path. But that set would be too early as it could be seen by other threads after we release the lock.\n\nWe could probably use a private internal BITMAP to snapshot it here:\n\n```\nDECLARE_BITMAP(vcpu_ids, KVM_MAX_VCPU_IDS);\n```\n\nAnd the check:\n```\n  pkvm_spin_lock(\u0026pkvm_vm-\u003elock);\n  if (test_and_set_bit(vcpu-\u003evcpu_id, pkvm_vm-\u003evcpu_ids))\n     ret \u003d -EEXIST;\n  pkvm_spin_unlock(\u0026pkvm_vm-\u003elock);\n```\n\nAnd unset it on all failures?\n\nWDYT?",
+      "fixSuggestions": [
+        {
+          "fixId": "724c2894_fffa65d9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tstruct kvm_vcpu *vcpu \u003d \u0026pkvm_vcpu-\u003evcpu;\n\tstruct kvm_vcpu *existing_vcpu;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tint i;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n\tfor_each_pkvm_guest_vcpu(i, existing_vcpu, pkvm_vm) {\n\t\tif (existing_vcpu-\u003evcpu_id \u003d\u003d vcpu-\u003evcpu_id) {\n\t\t\tpkvm_spin_unlock(\u0026pkvm_vm-\u003elock);\n\t\t\treturn -EEXIST;\n\t\t}\n\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 564,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 591,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
