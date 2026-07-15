@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e698860_2cc181fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-15T16:13:48Z",
+      "side": 1,
+      "message": "Please adjust these to be \"FROMGIT\". Also, please confirm whether the SHAs will be stable between their current values and eventually upstream master.",
+      "revId": "667b13fa633b6e7bd549aa1c85a88be6837080fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
