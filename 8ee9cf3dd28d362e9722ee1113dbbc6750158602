@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/534957761",
       "revId": "8ee9cf3dd28d362e9722ee1113dbbc6750158602",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85b3263_051cf5da",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-15T04:34:37Z",
+      "side": 1,
+      "message": "You define:\n android_vh_mmc_blk_reset\n android_vh_mmc_attach_sd\n android_vh_sdhci_get_cd\n android_vh_mmc_gpio_cd_irqt\n \n But are exporting way more here. This looks like a bad merge conflict resolution?\n \nPlease drop the exports for the undefined trace points.",
+      "revId": "8ee9cf3dd28d362e9722ee1113dbbc6750158602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
