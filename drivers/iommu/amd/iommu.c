@@ -2291,6 +2291,8 @@ static int attach_device(struct device *dev,
 {
 	struct iommu_dev_data *dev_data = dev_iommu_priv_get(dev);
 	struct amd_iommu *iommu = get_amd_iommu_from_dev_data(dev_data);
+	struct pci_dev *pdev;
+	unsigned long flags;
 	int ret = 0;
 
 	mutex_lock(&dev_data->mutex);
@@ -2299,10 +2301,6 @@ static int attach_device(struct device *dev,
 		ret = -EBUSY;
 		goto out;
 	}
-
-	/* Update data structures */
-	dev_data->domain = domain;
-	list_add(&dev_data->list, &domain->dev_list);
 
 	/* Do reference counting */
 	ret = pdom_attach_iommu(iommu, domain);
@@ -2318,6 +2316,30 @@ static int attach_device(struct device *dev,
 		}
 	}
 
+	pdev = dev_is_pci(dev_data->dev) ? to_pci_dev(dev_data->dev) : NULL;
+	if (pdev && pdom_is_sva_capable(domain)) {
+		pdev_enable_caps(pdev);
+
+		/*
+		 * Device can continue to function even if IOPF
+		 * enablement failed. Hence in error path just
+		 * disable device PRI support.
+		 */
+		if (amd_iommu_iopf_add_device(iommu, dev_data))
+			pdev_disable_cap_pri(pdev);
+	} else if (pdev) {
+		pdev_enable_cap_ats(pdev);
+	}
+
+	/* Update data structures */
+	dev_data->domain = domain;
+	spin_lock_irqsave(&domain->lock, flags);
+	list_add(&dev_data->list, &domain->dev_list);
+	spin_unlock_irqrestore(&domain->lock, flags);
+
+	/* Update device table */
+	dev_update_dte(dev_data, true);
+
 out:
 	mutex_unlock(&dev_data->mutex);
 
@@ -2332,7 +2354,6 @@ static void detach_device(struct device *dev)
 	struct iommu_dev_data *dev_data = dev_iommu_priv_get(dev);
 	struct amd_iommu *iommu = get_amd_iommu_from_dev_data(dev_data);
 	struct protection_domain *domain = dev_data->domain;
-	bool ppr = dev_data->ppr;
 	unsigned long flags;
 
 	mutex_lock(&dev_data->mutex);
@@ -2346,12 +2367,14 @@ static void detach_device(struct device *dev)
 	if (WARN_ON(!dev_data->domain))
 		goto out;
 
-	if (ppr) {
+	/* Remove IOPF handler */
+	if (dev_data->ppr) {
 		iopf_queue_flush_dev(dev);
-
-		/* Updated here so that it gets reflected in DTE */
-		dev_data->ppr = false;
+		amd_iommu_iopf_remove_device(iommu, dev_data);
 	}
+
+	if (dev_is_pci(dev))
+		pdev_disable_caps(to_pci_dev(dev));
 
 	/* Clear DTE and flush the entry */
 	dev_update_dte(dev_data, false);
@@ -2359,6 +2382,7 @@ static void detach_device(struct device *dev)
 	/* Flush IOTLB and wait for the flushes to finish */
 	spin_lock_irqsave(&domain->lock, flags);
 	amd_iommu_domain_flush_all(domain);
+	list_del(&dev_data->list);
 	spin_unlock_irqrestore(&domain->lock, flags);
 
 	/* Clear GCR3 table */
@@ -2367,21 +2391,12 @@ static void detach_device(struct device *dev)
 
 	/* Update data structures */
 	dev_data->domain = NULL;
-	list_del(&dev_data->list);
 
 	/* decrease reference counters - needs to happen after the flushes */
 	pdom_detach_iommu(iommu, domain);
 
 out:
 	mutex_unlock(&dev_data->mutex);
-
-	/* Remove IOPF handler */
-	if (ppr)
-		amd_iommu_iopf_remove_device(iommu, dev_data);
-
-	if (dev_is_pci(dev))
-		pdev_disable_caps(to_pci_dev(dev));
-
 }
 
 static struct iommu_device *amd_iommu_probe_device(struct device *dev)
@@ -2670,7 +2685,6 @@ static int amd_iommu_attach_device(struct iommu_domain *dom,
 	struct iommu_dev_data *dev_data = dev_iommu_priv_get(dev);
 	struct protection_domain *domain = to_pdomain(dom);
 	struct amd_iommu *iommu = get_amd_iommu_from_dev(dev);
-	struct pci_dev *pdev;
 	int ret;
 
 	/*
@@ -2702,24 +2716,6 @@ static int amd_iommu_attach_device(struct iommu_domain *dom,
 			dev_data->use_vapic = 0;
 	}
 #endif
-
-	pdev = dev_is_pci(dev_data->dev) ? to_pci_dev(dev_data->dev) : NULL;
-	if (pdev && pdom_is_sva_capable(domain)) {
-		pdev_enable_caps(pdev);
-
-		/*
-		 * Device can continue to function even if IOPF
-		 * enablement failed. Hence in error path just
-		 * disable device PRI support.
-		 */
-		if (amd_iommu_iopf_add_device(iommu, dev_data))
-			pdev_disable_cap_pri(pdev);
-	} else if (pdev) {
-		pdev_enable_cap_ats(pdev);
-	}
-
-	/* Update device table */
-	dev_update_dte(dev_data, true);
 
 	return ret;
 }
