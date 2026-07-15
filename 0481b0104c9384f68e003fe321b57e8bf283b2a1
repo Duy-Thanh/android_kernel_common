@@ -82,6 +82,24 @@
       "parentUuid": "9e84e35f_5916971b",
       "revId": "0481b0104c9384f68e003fe321b57e8bf283b2a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df5226b_de78dd88",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T15:51:26Z",
+      "side": 1,
+      "message": "\u003e and the only reason we are validating it here is to prevent division by zero.\n\nAhh ok, thanks for the clarification.\n\n\u003e So there is no particular reason for pKVM to care about that and duplicate the overflow check already done by the host?\n\nI was concerned about malicious host sending bad values. But your above clarification makes my point moot.\n\n\u003e BTW that solution for exposing TSC frequency I implemented in aosp/3956675 is not perfect, we might replace it with something else in the future, and then we might not use apic_bus_cycle_ns in pKVM at all (and if so, won\u0027t need to validate it at all).\n\nMakes sense.",
+      "parentUuid": "32fc3de8_767562f4",
+      "revId": "0481b0104c9384f68e003fe321b57e8bf283b2a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
