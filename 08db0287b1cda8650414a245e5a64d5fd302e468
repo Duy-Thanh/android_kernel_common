@@ -34,6 +34,24 @@
       "parentUuid": "f91893c7_46f6f4c6",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c7adcb_9cc63b90",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-15T12:01:10Z",
+      "side": 1,
+      "message": "Agreed on the direction, and the gain is exactly the granular locking: today the raw spinlock is held with IRQs off across every per-node setup HVC, so the section grows with node count and is effectively unbounded, which is what upstream and RT will object to. This is upstream material, not an A16 blocker.\n\nThe one piece I would not carry over is forwarding through pkvm_handle_forward_req while reg-\u003epriv is NULL, and the main reason is your own invariant. forward_req is a raw passthrough to the physical register, so forwarding a host write to GITS_CBASER or GITS_BASER during the init window lands on the real ITS. That is exactly the \"structures disconnect from HW state\" case you want to avoid: the host mutates the hardware while or after we snapshot it into the shadow. Dropping instead (what pkvm_handle_gic_emulation  and pkvm_handle_rdist_emulation already do when priv is NULL) keeps HW frozen across the snapshot, so the invariant holds.\n\nThe threat model agrees: after finalize the host is untrusted, and CBASER/BASER repoint the command queue and tables at arbitrary memory, so raw-forwarding is fail-open. \"No device is configured around finalize\" is a host-behaviour assumption we cannot lean on. Deny fails safe.\n\nAnd under your own premise the two are functionally identical, so there is no cost to the safe one: if nothing touches the ITS/GICR during init, deny drops nothing. So take the restructure as-is (merge, per-node lock, priv as the gate) but keep the priv\u003d\u003dNULL path as the existing drop rather than forward_req. Same for the GICR side.",
+      "parentUuid": "afc8b515_585f895f",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
