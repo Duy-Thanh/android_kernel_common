@@ -16,6 +16,24 @@
       "message": "Needs a \"Bug: \" tag referring to a respin bug. See https://source.android.com/docs/core/architecture/kernel/gki-respin\n\nAlso, create a patch on top of this one to add the symbols to your symbol list.",
       "revId": "886f347b0448e1fd614586b4b0f93ba8c7e9e596",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ffcc499_3c3bbaa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4989578
+      },
+      "writtenOn": "2026-07-15T02:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e09e7a3_5a0b69a0",
+      "revId": "886f347b0448e1fd614586b4b0f93ba8c7e9e596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
