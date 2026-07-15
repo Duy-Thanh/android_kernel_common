@@ -660,7 +660,7 @@ static const struct rhashtable_params hwsim_rht_params = {
 	.nelem_hint = 2,
 	.automatic_shrinking = true,
 	.key_len = ETH_ALEN,
-	.key_offset = offsetof(struct mac80211_hwsim_data, addresses[1]),
+	.key_offset = offsetof(struct mac80211_hwsim_data, addresses) + ETH_ALEN,
 	.head_offset = offsetof(struct mac80211_hwsim_data, rht),
 };
 
@@ -2519,8 +2519,10 @@ static void mac80211_hwsim_vif_info_changed(struct ieee80211_hw *hw,
 		vp->aid = vif->cfg.aid;
 	}
 
+#if 0
 	if (changed & BSS_CHANGED_NAN_LOCAL_SCHED)
 		mac80211_hwsim_nan_local_sched_changed(hw, vif);
+#endif
 
 	if (vif->type == NL80211_IFTYPE_STATION &&
 	    changed & (BSS_CHANGED_MLD_VALID_LINKS | BSS_CHANGED_MLD_TTLM)) {
@@ -4115,7 +4117,7 @@ out:
 	.start_nan = mac80211_hwsim_nan_start,			\
 	.stop_nan = mac80211_hwsim_nan_stop,			\
 	.nan_change_conf = mac80211_hwsim_nan_change_config,	\
-	.nan_peer_sched_changed = mac80211_hwsim_nan_peer_sched_changed, \
+	/* .nan_peer_sched_changed = mac80211_hwsim_nan_peer_sched_changed, */ \
 	HWSIM_DEBUGFS_OPS
 
 #define HWSIM_NON_MLO_OPS					\

@@ -7,6 +7,10 @@
 #include <net/cfg80211.h>
 #include "mac80211_hwsim_i.h"
 
+#ifndef WLAN_OUI_TYPE_WFA_NAN
+#define WLAN_OUI_TYPE_WFA_NAN 0x13
+#endif
+
 /* Defined as the lower 23 bits being zero */
 #define DW0_TSF_MASK		GENMASK(22, 0)
 
@@ -602,10 +606,9 @@ void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 
 	spin_unlock_bh(&data->nan.state_lock);
 
-	if (joined_cluster)
-		ieee80211_nan_cluster_joined(data->nan.device_vif,
-					     data->nan.cluster_id, false,
-					     GFP_ATOMIC);
+	if (joined_cluster) {
+		/* ieee80211_nan_cluster_joined is unsupported in 6.18 */
+	}
 }
 
 static void
@@ -685,10 +688,9 @@ mac80211_hwsim_nan_exec_state_transitions(struct mac80211_hwsim_data *data)
 
 	spin_unlock(&data->nan.state_lock);
 
-	if (notify_join)
-		ieee80211_nan_cluster_joined(data->nan.device_vif,
-					     data->nan.cluster_id, true,
-					     GFP_ATOMIC);
+	if (notify_join) {
+		/* ieee80211_nan_cluster_joined is unsupported in 6.18 */
+	}
 }
 
 static void
@@ -1040,10 +1042,12 @@ static void mac80211_hwsim_nan_resume_txqs(struct mac80211_hwsim_data *data)
 
 	guard(rcu)();
 
+#if 0
 	/* Check if management queue can transmit */
 	if (mac80211_hwsim_nan_txq_transmitting(data->hw,
 						data->nan.device_vif->txq_mgmt))
 		goto resume_txqs_timer;
+#endif
 
 	/* Check if any STA queue can transmit */
 	ieee80211_iterate_stations_atomic(data->hw,
@@ -1053,7 +1057,7 @@ static void mac80211_hwsim_nan_resume_txqs(struct mac80211_hwsim_data *data)
 	if (!ctx.can_tx)
 		return;
 
-resume_txqs_timer:
+/* resume_txqs_timer: */
 	/*
 	 * Wait a bit and also randomize things so that not everyone is TXing
 	 * at the same time. Each slot is 16 TU long, this waits between 100 us
@@ -1096,11 +1100,13 @@ mac80211_hwsim_nan_resume_txqs_timer(struct hrtimer *timer)
 
 	guard(rcu)();
 
+#if 0
 	/* Wake TX queue for management frames on the NAN device interface */
 	if (mac80211_hwsim_nan_txq_transmitting(data->hw,
 						data->nan.device_vif->txq_mgmt))
 		ieee80211_hwsim_wake_tx_queue(data->hw,
 					      data->nan.device_vif->txq_mgmt);
+#endif
 
 	/* Wake TX queues for all stations */
 	ieee80211_iterate_stations_atomic(data->hw,
@@ -1180,7 +1186,7 @@ bool mac80211_hwsim_nan_txq_transmitting(struct ieee80211_hw *hw,
 	}
 
 	/* STA TXQ: need peer schedule for availability check */
-	nmi_sta = rcu_dereference(txq->sta->nmi) ?: txq->sta;
+	nmi_sta = txq->sta;
 	sp = (void *)nmi_sta->drv_priv;
 
 	/* DW slot: NDI can TX only mgmt but not worth checking,
@@ -1268,6 +1274,7 @@ bool mac80211_hwsim_nan_receive(struct ieee80211_hw *hw,
 void mac80211_hwsim_nan_local_sched_changed(struct ieee80211_hw *hw,
 					    struct ieee80211_vif *vif)
 {
+#if 0
 	struct mac80211_hwsim_data *data = hw->priv;
 	struct ieee80211_nan_channel **slots = vif->cfg.nan_sched.schedule;
 
@@ -1296,11 +1303,13 @@ void mac80211_hwsim_nan_local_sched_changed(struct ieee80211_hw *hw,
 	}
 
 	spin_unlock_bh(&data->nan.state_lock);
+#endif
 }
 
 int mac80211_hwsim_nan_peer_sched_changed(struct ieee80211_hw *hw,
 					  struct ieee80211_sta *sta)
 {
+#if 0
 	struct hwsim_sta_priv *sp = (void *)sta->drv_priv;
 	struct ieee80211_nan_peer_sched *sched = sta->nan_sched;
 
@@ -1342,5 +1351,6 @@ int mac80211_hwsim_nan_peer_sched_changed(struct ieee80211_hw *hw,
 
 out:
 	spin_unlock_bh(&sp->nan_sched.lock);
+#endif
 	return 0;
 }
