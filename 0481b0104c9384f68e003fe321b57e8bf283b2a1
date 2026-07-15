@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e84e35f_5916971b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T11:16:40Z",
+      "side": 1,
+      "message": "I was looking at `KVM_CAP_X86_APIC_BUS_CYCLES_NS` in generic kvm and they have this validation:\n\n```\n»       »       /*\n»       »        * Guard against overflow in tmict_to_ns(). 128 is the highest\n»       »        * divide value that can be programmed in APIC_TDCR.\n»       »        */\n»       »       r \u003d -EINVAL;\n»       »       if (!bus_cycle_ns ||\n»       »           check_mul_overflow((u64)U32_MAX * 128, bus_cycle_ns, \u0026unused))\n»       »       »       break;\n```\n\nsince we are validating 0 to to be invalid, I think it would be worth to have this check in pKVM as well. WDYT?",
+      "fixSuggestions": [
+        {
+          "fixId": "a8a398dd_66ec842e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tu64 unused;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 503,
+                "startChar": 0,
+                "endLine": 504,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The following setup is per VM, not per vCPU, however it cannot be\n\t * done during VM creation, since these values are set by the host VMM\n\t * via an ioctl after a VM is already created. At the same time, the\n\t * host KVM relies on these values being already set when setting up a\n\t * vCPU, thus implicitly assuming that the VMM should set them before\n\t * creating vCPUs. So it is ok to assume these host\u0027s values here are\n\t * up-to-date.\n\t */\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 525,
+                "startChar": 0,
+                "endLine": 526,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Guard against overflow in tmict_to_ns(). 128 is the highest\n\t * divide value that can be programmed in APIC_TDCR.\n\t */\n\tif (!apic_bus_cycle_ns ||\n\t    check_mul_overflow((u64)U32_MAX * 128, apic_bus_cycle_ns, \u0026unused)) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 529,
+                "startChar": 0,
+                "endLine": 539,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0481b0104c9384f68e003fe321b57e8bf283b2a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
