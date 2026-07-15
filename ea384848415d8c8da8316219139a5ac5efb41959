@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba76fb6_3c8426fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-07-15T22:50:52Z",
+      "side": 1,
+      "message": "This should be just ANDROID as it was dropped FROMGIT? So remove UPSTREAM tag else linter expects upstream cherry-picked sha.",
+      "revId": "ea384848415d8c8da8316219139a5ac5efb41959",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
