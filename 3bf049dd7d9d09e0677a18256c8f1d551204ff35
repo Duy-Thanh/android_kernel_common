@@ -74,6 +74,24 @@
       ],
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33dc242f_26431a00",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-15T14:49:02Z",
+      "side": 1,
+      "message": "\u003e and set it only later in vmx_vcpu_create.\n\nYou mean in attach_pkvm_vcpu_to_vm()?\n\nIndeed, this looks like a problem: the host may successfully create 2 new vCPUs with the same vcpu_id in parallel (since none has been attached to the VM yet, so this validation succeeds for both), and then successfully attach them both in attach_pkvm_vcpu_to_vm().\n\nI think a cleaner way to fix this is to do what I mentioned, among other things, in aosp/4151702: repurpose `created_vcpus` to increment it here at the beginning of vCPU creation, not at the end, and let `attach_pkvm_vcpu_to_vm()` etc use `online_vcpus` instead of `created_vcpus`, thus make the semantics closer to the host KVM (and also, for instance, avoid wasting memory on this `vcpu_ids` bitmap).\n\nAlthough, after more thinking, maybe a simpler and cleaner way is to move this validation of duplicated vcpu_id into attach_pkvm_vcpu_to_vm(), i.e. after vCPU creation. That would make pKVM\u0027s flow even closer to the upstream flow in `kvm_vm_ioctl_create_vcpu()`. Although that would make it affected by the upstream issue we found yesterday (i.e. corrupting pid_table entry of another vCPU with the same vcpu_id). But I have an idea how to fix it: move pid_table entry setup from `.vcpu_create()` to a new `.vcpu_postcreate()` callback invoked at the very end of successful vCPU creation (in particular, in our pKVM case, after successful attach_pkvm_vcpu_to_vm()).",
+      "parentUuid": "73d6de56_4852c2a7",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
