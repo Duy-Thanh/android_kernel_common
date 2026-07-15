@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a245613_777748ac",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T01:31:13Z",
+      "side": 1,
+      "message": "You meant `__get_pasid_table` ? Yeah all the locations you mentioned check it in `__get_pasid_table`, but I think your idea of calling it at the start of every hypercall makes sense and I have added it. Didn\u0027t want to remove it from `__get_pasid_table` as well :-)",
+      "parentUuid": "d2f743ef_9b674114",
+      "revId": "0c9d559b25adbfed50cd0f6c8f0e058925bbe746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e159b40_beef1429",
