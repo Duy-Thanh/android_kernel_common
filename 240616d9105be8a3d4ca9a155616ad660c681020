@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7f804ea_a825db8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-15T17:01:43Z",
+      "side": 1,
+      "message": "FROMGIT? Please comply with the contribution guidelines. https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "240616d9105be8a3d4ca9a155616ad660c681020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0917a9bd_dde9fb73",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
