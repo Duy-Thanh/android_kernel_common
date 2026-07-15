@@ -1721,6 +1721,9 @@ static void f2fs_put_super(struct super_block *sb)
 #ifdef CONFIG_UNICODE
 	utf8_unload(sb->s_encoding);
 #endif
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
 	kfree(sbi);
 }
 
@@ -4377,6 +4380,25 @@ try_onemore:
 
 	/* init f2fs-specific super block info */
 	sbi->valid_super_block = valid_super_block;
+<<<<<<< HEAD   (961f48066fe2781c1ec9acd1e26b04f1b0970f5d Revert "spi: topcliff-pch: Convert to platform remove callba)
+||||||| BASE   (f4e1a88c18a96241f35f348067b604b0ba04c5b4 f2fs: fix incorrect file address mapping when inline inode i)
+	init_rwsem(&sbi->gc_lock);
+	mutex_init(&sbi->writepages);
+	init_rwsem(&sbi->cp_global_sem);
+	init_rwsem(&sbi->node_write);
+	init_rwsem(&sbi->node_change);
+=======
+	init_rwsem(&sbi->gc_lock);
+	mutex_init(&sbi->writepages);
+	init_rwsem(&sbi->cp_global_sem);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_register_key(&sbi->cp_global_sem_key);
+	lockdep_set_class(&sbi->cp_global_sem,
+					&sbi->cp_global_sem_key);
+#endif
+	init_rwsem(&sbi->node_write);
+	init_rwsem(&sbi->node_change);
+>>>>>>> BRANCH (ee125bbff75699838fe9e8a303a0c3549bba3f1d spi: lantiq-ssc: fix controller deregistration)
 
 	/* disallow all the data/node/meta page writes */
 	set_sbi_flag(sbi, SBI_POR_DOING);
@@ -4753,6 +4775,9 @@ free_sb_buf:
 free_sbi:
 	if (sbi->s_chksum_driver)
 		crypto_free_shash(sbi->s_chksum_driver);
+#ifdef CONFIG_DEBUG_LOCK_ALLOC
+	lockdep_unregister_key(&sbi->cp_global_sem_key);
+#endif
 	kfree(sbi);
 
 	/* give only one another chance */
