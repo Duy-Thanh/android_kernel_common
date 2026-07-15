@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86074dc_82ea1243",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4019,
+      "author": {
+        "id": 1876836
+      },
+      "writtenOn": "2026-07-15T09:57:28Z",
+      "side": 1,
+      "message": "as much as possible to reduce the chance to acquire the rq lock, it is more likely the p is not in such situation.",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
