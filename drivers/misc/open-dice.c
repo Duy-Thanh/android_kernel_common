@@ -107,8 +107,8 @@ static int open_dice_mmap(struct file *filp, struct vm_area_struct *vma)
 ||||||| BASE   (06035018d40d1ad6a69dff6f25363bd864945683 FROMGIT: misc: open-dice: do not assume dev->of_node is vali)
 	desc->page_prot = pgprot_writecombine(desc->page_prot);
 	vma_desc_set_flags(desc, VMA_DONTCOPY_BIT, VMA_DONTDUMP_BIT);
-	mmap_action_simple_ioremap(desc, drvdata->rmem->base,
-				   drvdata->rmem->size);
+	mmap_action_simple_ioremap(desc, drvdata->mem_base,
+				   drvdata->mem_size);
 	return 0;
 =======
 	desc->page_prot = pgprot_writecombine(desc->page_prot);
@@ -130,8 +130,13 @@ static int __init open_dice_probe(struct platform_device *pdev)
 {
 	static unsigned int dev_idx;
 	struct device *dev = &pdev->dev;
+<<<<<<< HEAD   (ac3a9a914928b59f1756bcc6b8a40feabc7d0202 FROMGIT: misc: open-dice: save mem_base and mem_size in drvd)
 <<<<<<< HEAD   (1a1844064b8d46a059cab1a9ed9d95416423798f UPSTREAM: mm: shmem: fix potential livelock issue for shmem )
 	struct reserved_mem *rmem;
+||||||| BASE   (06035018d40d1ad6a69dff6f25363bd864945683 FROMGIT: misc: open-dice: do not assume dev->of_node is vali)
+	struct reserved_mem *rmem = NULL;
+=======
+>>>>>>> CHANGE (bf5c2e42c2298301e979b1331fcd48097b48bc8d FROMGIT: misc: open-dice: save mem_base and mem_size in drvd)
 ||||||| BASE   (06035018d40d1ad6a69dff6f25363bd864945683 FROMGIT: misc: open-dice: do not assume dev->of_node is vali)
 	struct reserved_mem *rmem = NULL;
 =======
@@ -147,11 +152,14 @@ static int __init open_dice_probe(struct platform_device *pdev)
 		dev_err(dev, "failed to lookup reserved memory\n");
 ||||||| BASE   (06035018d40d1ad6a69dff6f25363bd864945683 FROMGIT: misc: open-dice: do not assume dev->of_node is vali)
 	if (dev->of_node) {
-		rmem = of_reserved_mem_lookup(dev->of_node);
+		struct reserved_mem *rmem = of_reserved_mem_lookup(dev->of_node);
+
 		if (!rmem) {
 			dev_err(dev, "failed to lookup reserved memory\n");
 			return -EINVAL;
 		}
+		mem_base = rmem->base;
+		mem_size = rmem->size;
 	} else {
 		dev_err(dev, "device not supported (no DT node)\n");
 =======
