@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153bdc1c_bcadac1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-07-15T22:41:25Z",
+      "side": 1,
+      "message": "Thanks for catching this, can you change the patch to `ANDROID`? that could fix the lint.",
+      "revId": "91d7e6e2223d68b754abdedbaecb6d61567691ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
