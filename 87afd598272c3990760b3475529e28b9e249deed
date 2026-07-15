@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec48811d_efdf59bb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T15:01:35Z",
+      "side": 1,
+      "message": "Thanks for pointing out the the final slot issue, I fixed this. I am not so sure about changing the data structure in this CL with a bitmap (since we have to keep track of pfns) but I am happy for suggestions. We don\u0027t do MAPD(V\u003d0) MAPD(V\u003d1) very often so I won\u0027t be too concerned of performance here.",
+      "parentUuid": "f5387ea9_a3f3e60c",
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c43dd07b_9b08afc5",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33ca507f_fa20c5f1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T15:01:35Z",
+      "side": 1,
+      "message": "I replaced the check with __pkvm_host_unshare_hyp as this checks the refcount correctly under the host lock.",
+      "parentUuid": "c43dd07b_9b08afc5",
+      "range": {
+        "startLine": 129,
+        "startChar": 2,
+        "endLine": 129,
+        "endChar": 32
+      },
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67fd0050_a3b8db38",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-07-13T13:34:36Z",
       "side": 1,
       "message": "If unshare fails at this stage we should probably WARN_ON as there is no way to nicely recover this. Otherwise we are left with a host shared hyp page with refcount 0, that will probably be reused by someone else.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8788259_0e0b6fa1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T15:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67fd0050_a3b8db38",
       "range": {
         "startLine": 132,
         "startChar": 0,
@@ -99,6 +165,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ee4749_72b93e3d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T15:01:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "949cf96b_a26fedd1",
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5af125e5_3fcb16fb",
@@ -112,6 +196,24 @@
       "writtenOn": "2026-07-13T14:01:26Z",
       "side": 1,
       "message": "This only fires on a genuine hardware stall today (command *errors* go through the STALLED bit to `-EIO`), but please spell out in the commit message why a crash is the chosen response and why a host cannot engineer a perpetual timeout. Otherwise it reads as a host-reachable panic.",
+      "revId": "87afd598272c3990760b3475529e28b9e249deed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad5e9e89_7fae327d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T15:01:35Z",
+      "side": 1,
+      "message": "I updated the commit message, yes this is quite unfortunate and it should not happen in practice but harware has its own ways.",
+      "parentUuid": "5af125e5_3fcb16fb",
       "revId": "87afd598272c3990760b3475529e28b9e249deed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
