@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9f02aa_a6316c99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-15T17:15:07Z",
+      "side": 1,
+      "message": "This is not an upstream patch but rather a FROMGIT patch:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/commit/?h\u003dlinux-next\u0026id\u003deef1d74bf88f120f4f63a83a5201fcda67bf3b52\n\nPlease update accordingly based on the guidelines:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 67
+      },
+      "revId": "989daff7aadd61195541becd07a3ccce211a73d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
