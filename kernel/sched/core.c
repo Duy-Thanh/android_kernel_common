@@ -4009,19 +4009,28 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 			 */
 			return;
 		}
-		proxy_set_task_cpu(p, target_cpu);
-		rq_lock_irqsave(target_rq, &rf);
 		/*
 		 * proxy_enqueue_on_owner() called block_task() which
-		 * increments nr_uninterruptible/nr_iowait, so we need
-		 * to reverse that when we activate the blocked waiter
+		 * increments nr_uninterruptible/nr_iowait on the old rq.
+		 * Decrement before proxy_set_task_cpu() while task_rq(p)
+		 * still points to the old rq.  We must hold the old rq lock
+		 * to safely modify nr_uninterruptible.
 		 */
-		if (p->sched_contributes_to_load)
-			target_rq->nr_uninterruptible--;
-		if (p->in_iowait) {
-			delayacct_blkio_end(p);
-			atomic_dec(&task_rq(p)->nr_iowait);
+		if (p->sched_contributes_to_load || p->in_iowait) {
+			struct rq *old_rq = task_rq(p);
+			struct rq_flags old_rf;
+
+			rq_lock_irqsave(old_rq, &old_rf);
+			if (p->sched_contributes_to_load)
+				old_rq->nr_uninterruptible--;
+			if (p->in_iowait) {
+				delayacct_blkio_end(p);
+				atomic_dec(&old_rq->nr_iowait);
+			}
+			rq_unlock_irqrestore(old_rq, &old_rf);
 		}
+		proxy_set_task_cpu(p, target_cpu);
+		rq_lock_irqsave(target_rq, &rf);
 		update_rq_clock(target_rq);
 		activate_task(target_rq, p, en_flags);
 		resched_curr(target_rq);
@@ -7324,6 +7333,8 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	__must_hold(__rq_lockp(rq))
 {
 	struct rq *target_rq = cpu_rq(target_cpu);
+	unsigned long nr_uninterruptible = 0;
+	int nr_iowait = 0;
 	LIST_HEAD(migrate_list);
 
 	lockdep_assert_rq_held(rq);
@@ -7342,6 +7353,21 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	for (; p; p = p->blocked_donor) {
 		WARN_ON(p == rq->curr);
 		deactivate_task(rq, p, DEQUEUE_NOCLOCK);
+		/*
+		 * block_task() incremented nr_uninterruptible/nr_iowait on
+		 * the old rq. Transfer the counts to the destination rq now
+		 * that we are moving the task.  Decrement from the old rq
+		 * before proxy_set_task_cpu() so task_rq(p) still points here,
+		 * and accumulate the delta to apply to the new rq afterwards.
+		 */
+		if (p->sched_contributes_to_load) {
+			rq->nr_uninterruptible--;
+			nr_uninterruptible++;
+		}
+		if (p->in_iowait) {
+			atomic_dec(&rq->nr_iowait);
+			nr_iowait++;
+		}
 		proxy_set_task_cpu(p, target_cpu);
 		/*
 		 * We can re-use se.group_node to migrate the thing,
@@ -7353,6 +7379,14 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	proxy_release_rq_lock(rq, rf);
 
 	__attach_tasks(target_rq, &migrate_list);
+
+	/* Apply the accumulated load counts to the destination rq. */
+	if (nr_uninterruptible || nr_iowait) {
+		scoped_guard(rq_lock, target_rq) {
+			target_rq->nr_uninterruptible += nr_uninterruptible;
+			atomic_add(nr_iowait, &target_rq->nr_iowait);
+		}
+	}
 
 	proxy_reacquire_rq_lock(rq, rf);
 }
