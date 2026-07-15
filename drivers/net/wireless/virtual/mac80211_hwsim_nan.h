@@ -19,6 +19,50 @@ enum mac80211_hwsim_nan_role {
 	MAC80211_HWSIM_NAN_ROLE_NON_SYNC,
 };
 
+#define NAN_ATTR_MASTER_INDICATION		0x00
+#define NAN_ATTR_CLUSTER_INFO			0x01
+
+#define for_each_nan_attr(_attr, _data, _datalen)			\
+	for (_attr = (const struct ieee80211_nan_attr *)(_data);	\
+	     (const u8 *)(_data) + (_datalen) - (const u8 *)_attr >=	\
+		(int)sizeof(*_attr) &&					\
+	     (const u8 *)(_data) + (_datalen) - (const u8 *)_attr >=	\
+		(int)sizeof(*_attr) + le16_to_cpu(_attr->length);	\
+	     _attr = (const struct ieee80211_nan_attr *)		\
+		(_attr->data + le16_to_cpu(_attr->length)))
+
+struct ieee80211_hw;
+struct ieee80211_rx_status;
+
+u64 ieee80211_calculate_rx_timestamp(struct ieee80211_hw *hw,
+				     struct ieee80211_rx_status *status,
+				     unsigned int mpdu_len,
+				     unsigned int mpdu_offset);
+
+struct ieee80211_nan_attr {
+	u8 attr;
+	__le16 length;
+	u8 data[];
+} __packed;
+
+struct ieee80211_nan_master_indication {
+	u8 master_pref;
+	u8 random_factor;
+} __packed;
+
+struct ieee80211_nan_anchor_master_info {
+	union {
+		__le64 master_rank;
+		struct {
+			u8 master_addr[ETH_ALEN];
+			u8 random_factor;
+			u8 master_pref;
+		} __packed;
+	} __packed;
+	u8 hop_count;
+	__le32 ambtt;
+} __packed;
+
 struct mac80211_hwsim_nan_data {
 	struct ieee80211_vif *device_vif;
 	u8 bands;
