@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f7d12f_23455f7c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-15T11:38:20Z",
+      "side": 1,
+      "message": "dsb(ishst) only orders this for an inner-shareable, cacheable command queue. On a non-coherent ITS the command must be cleaned to PoC instead, as the driver does in its_flush_cmd() (NEEDS_FLUSHING -\u003e gic_flush_dcache_to_poc, else dsb). And it\u0027s reachable: cbaser_write() forwards the host\u0027s Shareability/cacheability bits unmasked, so the hyp doesn\u0027t pin the shadow queue\u0027s attributes. Suggest forcing inner-shareable + cacheable on the shadow GITS_CBASER, then flushing when the ITS reports non-shareable.",
+      "revId": "9d2b8eb35842c0a6314565f5962bdd1b1fda3138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
