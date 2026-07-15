@@ -22,6 +22,30 @@
       },
       "revId": "4281cc29ba136966951f63d5dd3b003755946a36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba531ad0_80d5b2e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-15T00:01:21Z",
+      "side": 1,
+      "message": "madvise would require more prerequisites. Ideally PGWALK_VMA_RDLOCK_VERIFY support should have been added as a separate patch upstream but it was not done, so now we have this issue. If we even decide to backport that feature, we can revert this one and reapply all patches in their original form.",
+      "parentUuid": "bc29bbac_e11be4a3",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 66
+      },
+      "revId": "4281cc29ba136966951f63d5dd3b003755946a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
