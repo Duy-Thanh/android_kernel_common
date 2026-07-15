@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba340ffd_1c4c560c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T10:24:18Z",
+      "side": 1,
+      "message": "minor nit: s/@vcpu/@_vcpu/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "e792daac_aefdf3a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.h",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": " * @vcpu: struct kvm_vcpu pointer, assigned by macro. NULL vCPUs are skipped.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1be234d1a911b4b48ee51cfb17a4344b9384adc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36d6825_5eff286a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T10:24:18Z",
+      "side": 1,
+      "message": "s/vcpu/_vcpu/ ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 14
+      },
+      "revId": "1be234d1a911b4b48ee51cfb17a4344b9384adc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
