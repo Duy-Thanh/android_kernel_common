@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "416dff19_97bbddf8",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-07-15T00:16:03Z",
+      "side": 1,
+      "message": "\u003e Can both file_offs and buf_offs be page unaligned while (file_offs !\u003d buf_offs)? I thought that\u0027s the case we can\u0027t handle without moving the data after read because either file offset we read or buffer offset we write will have to be page-unaligned.\n\nYes, that is a possibility. In that scenario, we have to move the data after doing a direct read for the reasons you mentioned. The way I implemented it is that we\u0027ll attempt to read the content into the dmabuf at the next page after where the end of the initial content that would get bounced. So with this implementation, you would end up shifting the data backwards after reading it into the dmabuf directly. I do that after copying the initial content from the bounce buffer into dmabuf + buf_offs.\n\n\u003e Also I think there is a case when start_bounce_len would be more than PAGE_SIZE. Say buf_offs\u003d3K and file_offs\u003d1K, then direct_read_start_offs \u003d PAGE_ALIGN(3K + 4K - 1K) \u003d 8K, so direct_read_start_offs is 5K ahead of buf_offs, which is more than one page.\n\nRight, but depending on the length of the read, that can be read directly into the dmabuf and/or captured by the end bounce pages.",
+      "parentUuid": "e0b8c282_dcdd4e8f",
+      "range": {
+        "startLine": 175,
+        "startChar": 19,
+        "endLine": 175,
+        "endChar": 39
+      },
+      "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2f40c93_5b982aa9",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 24
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d1c337_46ecfed6",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-07-15T00:16:03Z",
+      "side": 1,
+      "message": "Hmm...actually I think this can be simplified to `if (direct_read_start_offs \u003c\u003d buf_end - PAGE_SIZE)`",
+      "parentUuid": "c2f40c93_5b982aa9",
+      "range": {
+        "startLine": 192,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 93
+      },
       "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
