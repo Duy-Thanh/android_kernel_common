@@ -744,10 +744,17 @@ static int selinux_set_mnt_opts(struct super_block *sb,
 	    !strcmp(sb->s_type->name, "tracefs") ||
 	    !strcmp(sb->s_type->name, "binder") ||
 	    !strcmp(sb->s_type->name, "bpf") ||
+<<<<<<< HEAD   (34541d89f20de7070154e2aa433b9bd348277ed6 Merge 54add3b7d3c1 ("ipvs: skip ipv6 extension headers for c)
             !strcmp(sb->s_type->name, "pstore") ||
             // Android: remove functionfs policycap check due to
             // ABI breakage with policycap array.
             !strcmp(sb->s_type->name, "functionfs"))
+||||||| BASE   (54add3b7d3c154ca89ef5bac2582b0ed1a3a15d5 ipvs: skip ipv6 extension headers for csum checks)
+	    !strcmp(sb->s_type->name, "pstore"))
+=======
+	    !strcmp(sb->s_type->name, "pstore") ||
+	    !strcmp(sb->s_type->name, "securityfs"))
+>>>>>>> BRANCH (74331684c50a4bd74a7a6e1e897bfecdd0a235a5 selinux: enable genfscon labeling for securityfs)
 		sbsec->flags |= SE_SBGENFS;
 
 	if (!strcmp(sb->s_type->name, "sysfs") ||
