@@ -3518,6 +3518,7 @@ u64 ieee80211_calculate_rx_timestamp(struct ieee80211_local *local,
 
 	return ts;
 }
+EXPORT_SYMBOL(ieee80211_calculate_rx_timestamp);
 
 /* Cancel CAC for the interfaces under the specified @local. If @ctx is
  * also provided, only the interfaces using that ctx will be canceled.
