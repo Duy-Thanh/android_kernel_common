@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72113b7_6cfed9ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-15T17:17:33Z",
+      "side": 1,
+      "message": "This is not the correct git sha1. Should be 72263869656d09a5f9727504bb1f3cb7b010f0e5.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?h\u003dv7.2-rc3\u0026id\u003d72263869656d09a5f9727504bb1f3cb7b010f0e5",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 67
+      },
+      "revId": "e416ae869b6e4e7c0044962fa8f76df320b0f8cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
