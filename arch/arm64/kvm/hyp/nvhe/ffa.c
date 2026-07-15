@@ -1694,15 +1694,9 @@ static void do_ffa_notif_bitmap(struct arm_smccc_1_2_regs *res,
 				u64 vm_handle)
 {
 	DECLARE_REG(u32, func_id, ctxt, 0);
-	DECLARE_REG(u32, vmid, ctxt, 1);
 	struct arm_smccc_1_2_regs *args;
 
 	if (ffa_check_unused_args_sbz(ctxt, func_id == FFA_NOTIFICATION_BITMAP_CREATE ? 3 : 2)) {
-		ffa_to_smccc_res(res, FFA_RET_INVALID_PARAMETERS);
-		return;
-	}
-
-	if (vmid != vm_handle) {
 		ffa_to_smccc_res(res, FFA_RET_INVALID_PARAMETERS);
 		return;
 	}
