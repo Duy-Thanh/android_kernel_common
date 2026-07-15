@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8b3393_369901e1",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3474,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-15T11:38:52Z",
+      "side": 1,
+      "message": "We should probably rephrase the commit message because this change is quite different",
+      "range": {
+        "startLine": 3474,
+        "startChar": 0,
+        "endLine": 3474,
+        "endChar": 21
+      },
+      "revId": "54811298009e8c00dcd8028638d52cd55c3072c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
