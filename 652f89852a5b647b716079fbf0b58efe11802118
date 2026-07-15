@@ -16,6 +16,24 @@
       "message": "Needs a \"Bug: \" tag citing a respin bug. See https://source.android.com/docs/core/architecture/kernel/gki-respin",
       "revId": "652f89852a5b647b716079fbf0b58efe11802118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27d9972_c0816b08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4989578
+      },
+      "writtenOn": "2026-07-15T02:53:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f8bf0b_00df7d99",
+      "revId": "652f89852a5b647b716079fbf0b58efe11802118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
