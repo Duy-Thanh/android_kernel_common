@@ -184,7 +184,13 @@ out:
 }
 
 static const struct genl_multicast_group dropmon_mcgrps[] = {
+<<<<<<< HEAD   (31c263582f4e2d320dc8c8cfceb8674226afbadd Revert "spi: topcliff-pch: Convert to platform remove callba)
 	{ .name = "events", },
+||||||| BASE   (ee125bbff75699838fe9e8a303a0c3549bba3f1d spi: lantiq-ssc: fix controller deregistration)
+	{ .name = "events", .cap_sys_admin = 1 },
+=======
+	{ .name = "events", .flags = GENL_MCAST_CAP_SYS_ADMIN, },
+>>>>>>> BRANCH (9cf7eb8919344932f909b2fac76296f7656fda8d smb: client: require net admin for CIFS SWN netlink)
 };
 
 static void send_dm_alert(struct work_struct *work)
