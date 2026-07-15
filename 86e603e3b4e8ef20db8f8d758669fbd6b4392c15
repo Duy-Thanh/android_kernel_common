@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d0a8305_1ff62d00",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-15T16:46:11Z",
+      "side": 1,
+      "message": "We use `domain` for operations (hash_del, domain_unmap, memcache and donation operations etc) after this. So zeroing it out as the last step like it used to be is correct? `hash_del` needs to be moved up here before releasing the lock, but rest(__clear_bit and memset) should be done as last step I guess.",
+      "range": {
+        "startLine": 177,
+        "startChar": 1,
+        "endLine": 177,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7803eac8_4337686f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/* Zero out the domain structure after all operations are complete. */\n\tmemset(domain, 0, sizeof(struct dmar_domain));\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "86e603e3b4e8ef20db8f8d758669fbd6b4392c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
