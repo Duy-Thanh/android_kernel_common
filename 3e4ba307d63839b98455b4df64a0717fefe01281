@@ -16,6 +16,24 @@
       "message": "Add a reference to the upstream patch. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "3e4ba307d63839b98455b4df64a0717fefe01281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bccf0241_056c3749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-07-15T10:20:15Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "7fecdb2f_d3a41f4d",
+      "revId": "3e4ba307d63839b98455b4df64a0717fefe01281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
