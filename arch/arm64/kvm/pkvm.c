@@ -192,7 +192,7 @@ static int pkvm_register_gic_redist_cb(phys_addr_t phys, u64 size)
 	moveable_regs[idx].start = phys;
 	moveable_regs[idx].size = SZ_64K;
 	moveable_regs[idx].type = PKVM_MREG_EMULATE_MMIO;
-	moveable_regs[idx].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_forward_req));
+	moveable_regs[idx].cb = lm_alias(&kvm_nvhe_sym(pkvm_handle_rdist_emulation));
 	idx++;
 
 	/* Skip SGI_Base to avoid bottlenecking vgic with emulation */
@@ -776,6 +776,23 @@ static int pkvm_init_its_emulation(phys_addr_t dev_addr, struct its_shadow_table
 	return ret;
 }
 
+static int pkvm_init_redist_emulation(phys_addr_t dev_addr)
+{
+	void *redist_state;
+	int ret;
+
+	redist_state = (void *)__get_free_page(GFP_ATOMIC);
+	if (!redist_state)
+		return -ENOMEM;
+
+	ret = kvm_call_hyp_nvhe(__pkvm_init_redist_emulation, dev_addr,
+				redist_state);
+	if (ret)
+		free_page((unsigned long)redist_state);
+
+	return ret;
+}
+
 static int __init pkvm_drop_host_privileges(void)
 {
 	int ret = 0;
@@ -792,8 +809,10 @@ static int __init pkvm_drop_host_privileges(void)
 
 	on_each_cpu(_kvm_host_prot_finalize, &ret, 1);
 
-	if (static_branch_unlikely(&kvm_its_hardening))
+	if (static_branch_unlikely(&kvm_its_hardening)) {
 		its_end_deprivilege(ret, &its_flags, &pkvm_init_its_emulation);
+		gic_redist_deprivilege(&pkvm_init_redist_emulation);
+	}
 	return ret;
 }
 
