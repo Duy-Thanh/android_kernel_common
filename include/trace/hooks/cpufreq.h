@@ -15,10 +15,6 @@ DECLARE_RESTRICTED_HOOK(android_rvh_show_max_freq,
 	TP_PROTO(struct cpufreq_policy *policy, unsigned int *max_freq),
 	TP_ARGS(policy, max_freq), 1);
 
-DECLARE_HOOK(android_vh_cpufreq_online,
-	TP_PROTO(struct cpufreq_policy *policy),
-	TP_ARGS(policy));
-
 #endif /* _TRACE_HOOK_CPUFREQ_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
