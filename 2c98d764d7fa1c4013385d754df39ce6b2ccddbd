@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd8c019_8454a860",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-16T16:14:42Z",
+      "side": 1,
+      "message": "the stg file appears to be stale or corrupt. You can just drop it in this patch and generate an up-to-date STG for the child patch (top patch in the series)",
+      "revId": "2c98d764d7fa1c4013385d754df39ce6b2ccddbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
