@@ -34,6 +34,24 @@
       ],
       "revId": "db81b035b7ae9ca81873da68db7c5d28c369d063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1c657b_719bb8ae",
+        "filename": "arch/x86/include/asm/pkvm_redef.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-16T14:18:27Z",
+      "side": 1,
+      "message": "Or maybe just move `#ifdef __PKVM_HYP__` into this header itself?",
+      "parentUuid": "d5a6e5d0_e8288a6a",
+      "revId": "db81b035b7ae9ca81873da68db7c5d28c369d063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
