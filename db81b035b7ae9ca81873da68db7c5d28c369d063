@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a6e5d0_e8288a6a",
+        "filename": "arch/x86/include/asm/pkvm_redef.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T14:11:41Z",
+      "side": 1,
+      "message": "minor: As of now we have only one consumer of this header. But since it is in asm and including it accidentally can be a bit behaviour changing, would it make sense to do a build time check or wrap it in `__PKVM_HYP__` ?. Something like:\n\n```\n#ifndef __PKVM_HYP__\n#error \"pkvm_redef.h must only be included in pKVM hypervisor code\"\n#endif\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "d1624c65_3f28f1e1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/pkvm_redef.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#ifndef __PKVM_HYP__\n#error \"pkvm_redef.h must only be included in pKVM hypervisor code\"\n#endif\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db81b035b7ae9ca81873da68db7c5d28c369d063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
