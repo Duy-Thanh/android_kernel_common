@@ -8451,15 +8451,6 @@ int vmx_vcpu_create(struct kvm_vcpu *vcpu)
 	}
 #endif
 
-	if (vmx_can_use_ipiv(vcpu))
-#ifndef __PKVM_HYP__
-		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id],
-			   __pa(&vmx->vt.pi_desc) | PID_TABLE_ENTRY_VALID);
-#else
-		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id],
-			   __pa(&shared_vmx->vt.pi_desc) | PID_TABLE_ENTRY_VALID);
-#endif
-
 	return 0;
 
 #ifndef __PKVM_HYP__
@@ -8471,6 +8462,19 @@ free_pml:
 free_vpid:
 	free_vpid(vmx->vpid);
 	return err;
+}
+
+void vmx_vcpu_postcreate(struct kvm_vcpu *vcpu)
+{
+	if (vmx_can_use_ipiv(vcpu))
+#ifndef __PKVM_HYP__
+		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id],
+			   __pa(&to_vmx(vcpu)->vt.pi_desc) | PID_TABLE_ENTRY_VALID);
+#else
+		WRITE_ONCE(to_kvm_vmx(vcpu->kvm)->pid_table[vcpu->vcpu_id],
+			   __pa(&to_vmx(to_pkvm_vcpu(vcpu)->shared_vcpu)->vt.pi_desc) |
+			   PID_TABLE_ENTRY_VALID);
+#endif
 }
 
 #define L1TF_MSG_SMT "L1TF CPU bug present and SMT on, data leak possible. See CVE-2018-3646 and https://www.kernel.org/doc/html/latest/admin-guide/hw-vuln/l1tf.html for details.\n"
