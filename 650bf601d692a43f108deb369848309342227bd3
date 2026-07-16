@@ -34,6 +34,24 @@
       "parentUuid": "ff7624a4_6db2dc09",
       "revId": "650bf601d692a43f108deb369848309342227bd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da7a913a_19fab474",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2026-07-16T22:03:40Z",
+      "side": 1,
+      "message": "Hi Neill, It looks like this may be the cause of another issue discussed here - https://lore.kernel.org/all/CAMMMRMdZciCCmfOv0_PhX_VfPtXdMEwNe-CXOLWRSmFYBAEL7Q@mail.gmail.com/\nI am just wondering if this patch should be fixed or if it requires v2. It\u0027s fine for 6.18, but uncertain if it stays in the kernel long-term",
+      "parentUuid": "4d413a85_919a5706",
+      "revId": "650bf601d692a43f108deb369848309342227bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
