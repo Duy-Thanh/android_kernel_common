@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d3d026_ef66fad6",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T13:48:08Z",
+      "side": 1,
+      "message": "minor: would it make sense to squash it with next patch as this is simple enough and logically fits with the logic of enabling memcache for unshare?",
+      "fixSuggestions": [
+        {
+          "fixId": "cdb42db7_6c0f784f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 708,
+                "startChar": 0,
+                "endLine": 710,
+                "endChar": 0
+              },
+              "replacement": "\treturn pkvm_pgtable_map(\u0026pkvm_vm-\u003emmu, gpa, hpa, size,\n\t\t\t\tpkvm_pte_set_pgstate(prot, \u0026pkvm_vm-\u003emmu, PKVM_PAGE_OWNED),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "945e674991be9c421af030cc72d9109186d2eb77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
