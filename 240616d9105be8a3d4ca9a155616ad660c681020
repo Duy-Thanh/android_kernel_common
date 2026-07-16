@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "801d2194_698b2223",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-16T16:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f804ea_a825db8d",
+      "revId": "240616d9105be8a3d4ca9a155616ad660c681020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0917a9bd_dde9fb73",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-15T10:49:32Z",
       "side": 1,
       "message": "Commit SHA is not matching with actual upstream commit of this change",
+      "revId": "240616d9105be8a3d4ca9a155616ad660c681020",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bac046c_5bb6c8cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-16T16:39:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0917a9bd_dde9fb73",
       "revId": "240616d9105be8a3d4ca9a155616ad660c681020",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
