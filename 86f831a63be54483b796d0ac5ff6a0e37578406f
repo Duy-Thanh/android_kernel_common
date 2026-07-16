@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bdc545_22c37eac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-16T16:57:12Z",
+      "side": 1,
+      "message": "False-positive missing SoB due to different email alias.",
+      "revId": "86f831a63be54483b796d0ac5ff6a0e37578406f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
