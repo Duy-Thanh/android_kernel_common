@@ -52,6 +52,24 @@
       "parentUuid": "4d413a85_919a5706",
       "revId": "650bf601d692a43f108deb369848309342227bd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd41554e_9b8fc629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764342
+      },
+      "writtenOn": "2026-07-16T22:59:35Z",
+      "side": 1,
+      "message": "ah i see. problem is that the fix is to modify the lockdep changes (to address the regression) which is missing on 6.18.  we can\u0027t easily port that (lockdeps) as it would break the ABI. considering those changes aren\u0027t in this backport, do you think it would cause the issue being reported?\n\nmaybe we can wait a bit longer to see how this unfolds and go from there.",
+      "parentUuid": "da7a913a_19fab474",
+      "revId": "650bf601d692a43f108deb369848309342227bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
