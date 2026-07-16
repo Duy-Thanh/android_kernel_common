@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac9e14f_8bffa11a",
+        "filename": "drivers/dma-buf/dma-fence-unwrap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-07-16T16:21:54Z",
+      "side": 1,
+      "message": "We remove this file in aosp/4170391, and we are adding back here. Do we still need aosp/4170391?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3a829ca5_449a2068",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-fence-unwrap.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "36d3b7e3507a33db702e6a5ef54b8ccbc6f92684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
