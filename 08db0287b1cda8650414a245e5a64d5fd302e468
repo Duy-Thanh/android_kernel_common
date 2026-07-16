@@ -52,6 +52,24 @@
       "parentUuid": "afc8b515_585f895f",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1ab6c6_f49546b7",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-16T12:13:32Z",
+      "side": 1,
+      "message": "I don\u0027t think we can expect the driver to modify `GITS_CBASER/BASER` registers around the time when deprivilige is happening (If it were I guess it would asking for trouble anyway...).\n\nI was more concerned about cmdQ submissions. However looking at the code it appears the driver is holding the lock during preparation and submission of the command. Before polling for completion the lock is released. So I agree that silently dropping the access might be fine here...\n\nThat said for GICR I did not have much concerns and went ahead with implementation. PTAL.",
+      "parentUuid": "b2c7adcb_9cc63b90",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
