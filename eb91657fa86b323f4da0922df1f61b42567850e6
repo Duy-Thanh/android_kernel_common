@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bfb512_48d61f30",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-16T13:36:11Z",
+      "side": 1,
+      "message": "used_device_id_mask is read into a local but never updated, so the mask stays zero: every add writes device_id[0], and track_device_id_remove() always returns -EINVAL since it never finds a set bit. process_its_mapd() feeds that error to cwriter_write(), which stops processing on the first failing command, so I think every MAPD with V\u003d0 will stall the emulated queue and the driver will hit its completion timeout. The remove path also doesn\u0027t clear the slot on a match, so the table never drains once adds are fixed. Could you take a look? It might also be worth initializing used_device_id_mask (and tracked_pfns) explicitly in pkvm_init_gic_its_emulation() rather than trusting the contents of the host-written page at donation time.",
+      "revId": "eb91657fa86b323f4da0922df1f61b42567850e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
