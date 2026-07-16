@@ -32,6 +32,8 @@ mod allocation;
 mod context;
 mod deferred_close;
 mod defs;
+#[macro_use]
+mod debug;
 mod error;
 mod netlink;
 mod node;
