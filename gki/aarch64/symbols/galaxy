@@ -39,6 +39,7 @@
   pstore_register
   pstore_unregister
   register_gcma_area
+  smpboot_unregister_percpu_thread
   scsi_device_quiesce
   scsi_device_resume
   snd_ctl_remove_id
