@@ -731,16 +731,8 @@ static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
 	pkvm_vcpu_init_traps(hyp_vcpu);
 	kvm_reset_pvm_sys_regs(&hyp_vcpu->vcpu);
 done:
-	if (ret) {
-		/*
-		 * Only runs pre-publish; the slot can only hold NULL or this
-		 * vCPU. Caller holds vm_table_lock so this serialises against
-		 * other init paths on the same VM.
-		 */
-		if (READ_ONCE(hyp_vm->primary_vcpu) == hyp_vcpu)
-			WRITE_ONCE(hyp_vm->primary_vcpu, NULL);
+	if (ret)
 		unpin_host_vcpu(hyp_vcpu);
-	}
 	return ret;
 }
 
