@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76435e36_4b91665e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-16T13:38:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this form is right yet, though the previous one wasn\u0027t either. After FIELD_GET, Aff3 is aff[31:24] and Aff0 is aff[7:0], and GICR_TYPER.CommonLPIAff groups by the high fields: 0b01 means same Aff3, 0b10 same Aff3.Aff2, 0b11 same Aff3.Aff2.Aff1 (IHI 0069H.b, 12.11.37). This expression keeps the low fields instead, so for 0b01 the key is Aff0, and so on. Since lpi_aff gates the propbaser-equality check in handle_lpi_enable, the effect is that redists which must share a configuration table (same Aff3, different Aff0) are not checked against each other, so the host can give them different PROPBASERs. The spec calls that UNPREDICTABLE and leaves it IMPLEMENTATION DEFINED which copy the GIC reads (12.11.33), so the table we pinned may not be the one in use. Conversely, unrelated redists with matching low bits get grouped and a valid per-group configuration would be rejected. I think the mask should clear the low bits: aff \u0026 ~GENMASK_ULL(31 - (lpi_aff \u003c\u003c 3), 0), which also yields the same key for everyone when CommonLPIAff is 0.",
+      "revId": "89b77d89f183b522c2957c27396f05db250efce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
