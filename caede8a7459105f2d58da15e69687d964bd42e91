@@ -33,6 +33,24 @@
       "message": "what happened to https://patchwork.kernel.org/project/netdevbpf/patch/20260531075600.4058207-2-yuyanghuang@google.com/ ???",
       "revId": "caede8a7459105f2d58da15e69687d964bd42e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "790f2951_a9282b82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2048517
+      },
+      "writtenOn": "2026-07-16T11:53:13Z",
+      "side": 1,
+      "message": "I had a chat with him and the patch has been upstreamed so we can pick it from upstream or wait for it to be merged. \nEither way we can abandon this patch.",
+      "parentUuid": "50e7477a_8efcb7ae",
+      "revId": "caede8a7459105f2d58da15e69687d964bd42e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
