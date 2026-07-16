@@ -1422,11 +1422,22 @@ impl Thread {
                             ExtendedError::new(info.debug_id as u32, err.reply, source.to_errno());
                     }
 
-                    pr_warn!(
-                        "{}:{} transaction to {} failed: {err:?}",
-                        info.from_pid,
-                        info.from_tid,
-                        info.to_pid
+                    binder_debug!(
+                        FailedTransaction,
+                        "transaction {} to {}:{} failed {:?}, code {} size {}-{}",
+                        if info.is_reply {
+                            "reply"
+                        } else if info.is_oneway() {
+                            "async"
+                        } else {
+                            "call"
+                        },
+                        info.to_pid,
+                        info.to_tid,
+                        err,
+                        info.code,
+                        info.data_size,
+                        info.offsets_size
                     );
                 }
             }
