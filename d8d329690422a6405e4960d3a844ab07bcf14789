@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99e915a_93006ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-16T18:13:27Z",
+      "side": 1,
+      "message": "Please post a follow-up patch to add these newly exported functions into your symbols list and update ABI definition file.",
+      "revId": "d8d329690422a6405e4960d3a844ab07bcf14789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
