@@ -128,6 +128,24 @@
       "parentUuid": "ad5030a4_62767d04",
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bc2153_2694e8a3",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T13:16:29Z",
+      "side": 1,
+      "message": "\u003e Good point... So it seems like instead of zeroing pid_table when freeing vCPU (aosp/4151696), we should forbid freeing vCPUs earlier than when destroying the VM? (Thus, again, keep it more aligned with the host KVM.)\n\nYes, true. From the pKVM perspective, pKVM should probably get an indication that host initated VM destroy so that it can allow vcpu_free requests from host. I guess currently the vcpus are destroyed first before invoking the vm destroy hypercall.\n\n\n\u003e In the pKVM case, I see two options (neither seems quite elegant):\n\n\u003e   1. Call vcpu_postcreate inside attach_pkvm_vcpu_to_vm(), before setting the vcpu refcount to 1.\n\nThis option sounds better to me, but agree might not be as elegant as we want.\n\nI think we can solve both the above complications with an pkvm internally maintained BITMAP to reserve the vcpu_id. But it take 512 bytes - not sure if it might be too much a waste in this regard",
+      "parentUuid": "f22d5b09_219b3cf9",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
