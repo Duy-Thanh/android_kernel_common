@@ -314,6 +314,15 @@ static int process_its_mapd(struct its_priv_state *its,
 	return track_pfn(its, device_id, base_pfn, num_pages, remove);
 }
 
+static int process_its_mapc(struct its_priv_state *its,
+			    struct its_cmd_block *cmd, bool rollback)
+{
+	u32 icid = cmd->raw_cmd[2] & GENMASK(15, 0);
+
+	return check_table_update(its, icid, GITS_BASER_TYPE_COLLECTION,
+				  rollback);
+}
+
 static int submit_single_cmd(struct its_priv_state *its, bool retry)
 {
 	size_t cmdq_sz = its->shadow->cmdq_len;
@@ -361,6 +370,10 @@ static int process_cmd(struct its_priv_state *its, struct its_cmd_block *cmd,
 	switch (req_type) {
 	case GITS_CMD_MAPD:
 		ret = process_its_mapd(its, cmd, rollback);
+		break;
+
+	case GITS_CMD_MAPC:
+		ret = process_its_mapc(its, cmd, rollback);
 		break;
 
 	default:
