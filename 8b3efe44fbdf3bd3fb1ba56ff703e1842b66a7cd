@@ -34,6 +34,24 @@
       ],
       "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc323836_f6da121c",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15127,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-16T14:15:59Z",
+      "side": 1,
+      "message": "Good point... OTOH, `is_valid_addr_range()` is not the only case which may fail in pkvm_guest_share_host/pkvm_guest_unshare_host due to a misbehaving pVM?",
+      "parentUuid": "9ceadb4f_44a8161f",
+      "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
