@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5beeea9c_fc552c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-16T22:23:28Z",
+      "side": 1,
+      "message": "I have a bit more abbreviated version of this fix here: https://r.android.com/4179535\n\nLet me know if I\u0027m missing anything, or misunderstanding your change here.",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d86074dc_82ea1243",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -14,6 +31,40 @@
       "writtenOn": "2026-07-15T09:57:28Z",
       "side": 1,
       "message": "as much as possible to reduce the chance to acquire the rq lock, it is more likely the p is not in such situation.",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "562d167c_804a4cce",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4033,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-16T22:23:28Z",
+      "side": 1,
+      "message": "So the core of what this is doing is good, but I think it can be simpler and avoid the lock juggling. \n\n(Specifically, you are doing a more correct thing by accounting against the old_rq nr_uninterruptible, but the nr_uninterruptible accounting is sort of unbalanced anyway, since its usually dec\u0027ed against the rq it is joining, not the one it was removed from (where it was inc\u0027ed - so I\u0027m not sure that\u0027s needed). \n\nSee my take here: https://r.android.com/4179535",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffcb388_d1d116b3",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7370,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-16T22:23:28Z",
+      "side": 1,
+      "message": "So this looks reasonable on its face, but nr_iowait and nr_uninterruptible track tasks that are not on the runqueue. With proxy_migrate() we are migrating tasks from one rq to another, so they should not have any bearing on the nr_iowait or nr_uninterruptible values.  So I don\u0027t believe this is necessary.",
       "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
