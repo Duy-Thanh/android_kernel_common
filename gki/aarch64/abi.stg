@@ -584,6 +584,11 @@ pointer_reference {
   pointee_type_id: 0x2d64ae3e
 }
 pointer_reference {
+  id: 0x01cd5e52
+  kind: POINTER
+  pointee_type_id: 0x2d759fd7
+}
+pointer_reference {
   id: 0x01cecb1b
   kind: POINTER
   pointee_type_id: 0x2d7bcaf0
@@ -9124,6 +9129,11 @@ pointer_reference {
   pointee_type_id: 0x6a68b125
 }
 pointer_reference {
+  id: 0x100e07a7
+  kind: POINTER
+  pointee_type_id: 0x6a78f803
+}
+pointer_reference {
   id: 0x10134e31
   kind: POINTER
   pointee_type_id: 0x6a0dde59
@@ -14177,6 +14187,11 @@ pointer_reference {
   id: 0x244b9b37
   kind: POINTER
   pointee_type_id: 0xbb6e8a40
+}
+pointer_reference {
+  id: 0x244f89ba
+  kind: POINTER
+  pointee_type_id: 0xbb7ec076
 }
 pointer_reference {
   id: 0x245d6a13
@@ -53466,6 +53481,13 @@ member {
   name: "activated"
   type_id: 0x6d7f5ff6
   offset: 2816
+}
+member {
+  id: 0x1acef825
+  name: "active"
+  type_id: 0x4585663f
+  offset: 32
+  bitsize: 1
 }
 member {
   id: 0x1acef9da
@@ -120723,6 +120745,11 @@ member {
   name: "index"
   type_id: 0x92233392
   offset: 64
+}
+member {
+  id: 0xadbf749f
+  name: "index"
+  type_id: 0x867c20ee
 }
 member {
   id: 0xadbf788d
@@ -219905,6 +219932,11 @@ member {
   offset: 7424
 }
 member {
+  id: 0x5c05591f
+  name: "type"
+  type_id: 0x538c6171
+}
+member {
   id: 0x5c057878
   name: "type"
   type_id: 0x53aa71be
@@ -295000,6 +295032,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xbb7ec076
+  kind: STRUCT
+  name: "typec_cable_desc"
+  definition {
+    bytesize: 24
+    member_id: 0x5c05591f
+    member_id: 0x1acef825
+    member_id: 0x0b8fafa1
+    member_id: 0x148dd054
+  }
+}
+struct_union {
   id: 0x08eeeb17
   kind: STRUCT
   name: "typec_cable_ops"
@@ -295162,6 +295206,15 @@ struct_union {
     member_id: 0x21928d6a
     member_id: 0xf2fde14c
     member_id: 0x415b02b9
+  }
+}
+struct_union {
+  id: 0x6a78f803
+  kind: STRUCT
+  name: "typec_plug_desc"
+  definition {
+    bytesize: 4
+    member_id: 0xadbf749f
   }
 }
 struct_union {
@@ -327463,6 +327516,13 @@ function {
   parameter_id: 0x0092c032
 }
 function {
+  id: 0x10c00390
+  return_type_id: 0x48b5725f
+  parameter_id: 0x072e5f93
+  parameter_id: 0x6720d32f
+  parameter_id: 0x3d1aac7e
+}
+function {
   id: 0x10c02563
   return_type_id: 0x48b5725f
   parameter_id: 0x030b9acf
@@ -330547,6 +330607,11 @@ function {
   parameter_id: 0x101b9aaa
 }
 function {
+  id: 0x14a04a21
+  return_type_id: 0x48b5725f
+  parameter_id: 0x10e06ecb
+}
+function {
   id: 0x14a07690
   return_type_id: 0x48b5725f
   parameter_id: 0x11b32828
@@ -331721,6 +331786,12 @@ function {
   parameter_id: 0x295c7202
 }
 function {
+  id: 0x1612eb26
+  return_type_id: 0x48b5725f
+  parameter_id: 0x10e06ecb
+  parameter_id: 0xaca841ec
+}
+function {
   id: 0x1613bf5e
   return_type_id: 0xd5cc9c9a
   parameter_id: 0x0af69844
@@ -332861,6 +332932,11 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x1977e57b
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x175e1321
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1f190ac8
 }
 function {
   id: 0x1761bc62
@@ -342235,6 +342311,12 @@ function {
   parameter_id: 0x32a623d7
 }
 function {
+  id: 0x495fb091
+  return_type_id: 0x10e06ecb
+  parameter_id: 0x3760766d
+  parameter_id: 0x244f89ba
+}
+function {
   id: 0x49868a85
   return_type_id: 0xc9082b19
   parameter_id: 0x31fa879c
@@ -344230,6 +344312,11 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x304cc3d6
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x60b1aa8d
+  return_type_id: 0x19680155
+  parameter_id: 0x0490bb4a
 }
 function {
   id: 0x60d5c61d
@@ -359220,6 +359307,11 @@ function {
   parameter_id: 0x2e7053ed
 }
 function {
+  id: 0x99b8f89d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x10e06ecb
+}
+function {
   id: 0x99b9a6b1
   return_type_id: 0x6720d32f
   parameter_id: 0x116785ed
@@ -366322,6 +366414,12 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9bda22d1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1f190ac8
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9bda37a0
   return_type_id: 0x6720d32f
   parameter_id: 0x18ea6ae3
@@ -370555,6 +370653,13 @@ function {
   parameter_id: 0x0130219f
 }
 function {
+  id: 0x9dccf51d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x347303b4
+  parameter_id: 0x2f919e03
+}
+function {
   id: 0x9dcd39d1
   return_type_id: 0x6720d32f
   parameter_id: 0x01c5a749
@@ -370848,6 +370953,12 @@ function {
   parameter_id: 0x0102f0d8
   parameter_id: 0x016ae2d2
   parameter_id: 0x914dbfdc
+}
+function {
+  id: 0x9de1f656
+  return_type_id: 0x6720d32f
+  parameter_id: 0x01cd5e52
+  parameter_id: 0x0490bb4a
 }
 function {
   id: 0x9de31a69
@@ -376834,6 +376945,12 @@ function {
   parameter_id: 0x2035145b
 }
 function {
+  id: 0xd5382f7a
+  return_type_id: 0x36f998d3
+  parameter_id: 0x1f190ac8
+  parameter_id: 0x300fdc99
+}
+function {
   id: 0xd587d547
   return_type_id: 0x03064599
   parameter_id: 0x322c8c4b
@@ -379575,6 +379692,12 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x0258f96e
   parameter_id: 0xe5b69de1
+}
+function {
+  id: 0xfdcd0d43
+  return_type_id: 0x1f190ac8
+  parameter_id: 0x10e06ecb
+  parameter_id: 0x100e07a7
 }
 function {
   id: 0xfdd651d2
@@ -419161,6 +419284,15 @@ elf_symbol {
   full_name: "fwnode_typec_switch_get"
 }
 elf_symbol {
+  id: 0x8005396c
+  name: "fwnode_usb_role_switch_get"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbdd45db8
+  type_id: 0x60b1aa8d
+  full_name: "fwnode_usb_role_switch_get"
+}
+elf_symbol {
   id: 0x4e154d27
   name: "gcd"
   is_defined: true
@@ -434601,6 +434733,15 @@ elf_symbol {
   crc: 0xa60e3091
   type_id: 0x9100a08e
   full_name: "of_hwspin_lock_get_id"
+}
+elf_symbol {
+  id: 0xf1e7ee30
+  name: "of_i2c_get_board_info"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x265b1940
+  type_id: 0x9dccf51d
+  full_name: "of_i2c_get_board_info"
 }
 elf_symbol {
   id: 0x453bec03
@@ -454242,6 +454383,42 @@ elf_symbol {
   full_name: "typec_altmode_vdm"
 }
 elf_symbol {
+  id: 0xbc617cb9
+  name: "typec_cable_altmode_vdm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x05aeba8b
+  type_id: 0x9215ea49
+  full_name: "typec_cable_altmode_vdm"
+}
+elf_symbol {
+  id: 0xd73b87cf
+  name: "typec_cable_is_active"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4fd86c99
+  type_id: 0x99b8f89d
+  full_name: "typec_cable_is_active"
+}
+elf_symbol {
+  id: 0x811bc858
+  name: "typec_cable_set_identity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4fd86c99
+  type_id: 0x99b8f89d
+  full_name: "typec_cable_set_identity"
+}
+elf_symbol {
+  id: 0x03699bb1
+  name: "typec_cable_set_svdm_version"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfff2cce3
+  type_id: 0x1612eb26
+  full_name: "typec_cable_set_svdm_version"
+}
+elf_symbol {
   id: 0x0d23e13a
   name: "typec_find_port_data_role"
   is_defined: true
@@ -454269,6 +454446,24 @@ elf_symbol {
   full_name: "typec_find_power_role"
 }
 elf_symbol {
+  id: 0xdbb88789
+  name: "typec_find_pwr_opmode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x591cb0f8
+  type_id: 0x9204ce69
+  full_name: "typec_find_pwr_opmode"
+}
+elf_symbol {
+  id: 0x68ec8111
+  name: "typec_get_cable_svdm_version"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaac3146a
+  type_id: 0x9058feb4
+  full_name: "typec_get_cable_svdm_version"
+}
+elf_symbol {
   id: 0x84b20708
   name: "typec_get_drvdata"
   is_defined: true
@@ -454276,6 +454471,15 @@ elf_symbol {
   crc: 0x68050382
   type_id: 0x5b4eac6a
   full_name: "typec_get_drvdata"
+}
+elf_symbol {
+  id: 0x67739fde
+  name: "typec_get_fw_cap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x675481b2
+  type_id: 0x9de1f656
+  full_name: "typec_get_fw_cap"
 }
 elf_symbol {
   id: 0xab1410be
@@ -454386,6 +454590,24 @@ elf_symbol {
   full_name: "typec_partner_set_usb_power_delivery"
 }
 elf_symbol {
+  id: 0x0836fa97
+  name: "typec_plug_register_altmode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc1e4eae9
+  type_id: 0xd5382f7a
+  full_name: "typec_plug_register_altmode"
+}
+elf_symbol {
+  id: 0x06953e23
+  name: "typec_plug_set_num_altmodes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x66118e5c
+  type_id: 0x9bda22d1
+  full_name: "typec_plug_set_num_altmodes"
+}
+elf_symbol {
   id: 0x4fe4e1e0
   name: "typec_port_register_altmode"
   is_defined: true
@@ -454404,6 +454626,33 @@ elf_symbol {
   full_name: "typec_port_register_altmodes"
 }
 elf_symbol {
+  id: 0x16bb7838
+  name: "typec_port_register_cable_ops"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x194a4441
+  type_id: 0x10c00390
+  full_name: "typec_port_register_cable_ops"
+}
+elf_symbol {
+  id: 0xb4fe8b27
+  name: "typec_port_set_usb_power_delivery"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x23612323
+  type_id: 0x9085adec
+  full_name: "typec_port_set_usb_power_delivery"
+}
+elf_symbol {
+  id: 0xe08eb54f
+  name: "typec_register_cable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d749953
+  type_id: 0x495fb091
+  full_name: "typec_register_cable"
+}
+elf_symbol {
   id: 0x22d09ebb
   name: "typec_register_partner"
   is_defined: true
@@ -454411,6 +454660,15 @@ elf_symbol {
   crc: 0xb9cd2fcc
   type_id: 0x2eae2692
   full_name: "typec_register_partner"
+}
+elf_symbol {
+  id: 0xebe2c484
+  name: "typec_register_plug"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x998f1363
+  type_id: 0xfdcd0d43
+  full_name: "typec_register_plug"
 }
 elf_symbol {
   id: 0xad69345e
@@ -454575,6 +454833,15 @@ elf_symbol {
   full_name: "typec_unregister_altmode"
 }
 elf_symbol {
+  id: 0x8944736e
+  name: "typec_unregister_cable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa9c5bf18
+  type_id: 0x14a04a21
+  full_name: "typec_unregister_cable"
+}
+elf_symbol {
   id: 0x098b2c4d
   name: "typec_unregister_partner"
   is_defined: true
@@ -454582,6 +454849,15 @@ elf_symbol {
   crc: 0x987bb910
   type_id: 0x148f719a
   full_name: "typec_unregister_partner"
+}
+elf_symbol {
+  id: 0xf3894058
+  name: "typec_unregister_plug"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3283d2e6
+  type_id: 0x175e1321
+  full_name: "typec_unregister_plug"
 }
 elf_symbol {
   id: 0x008276ec
@@ -467120,6 +467396,7 @@ interface {
   symbol_id: 0xd314e8e2
   symbol_id: 0x369384f3
   symbol_id: 0xd274bd53
+  symbol_id: 0x8005396c
   symbol_id: 0x4e154d27
   symbol_id: 0xc3be8e53
   symbol_id: 0xc0d67a7b
@@ -468832,6 +469109,7 @@ interface {
   symbol_id: 0xe63f0c53
   symbol_id: 0x8be0e5f9
   symbol_id: 0xb3d357f8
+  symbol_id: 0xf1e7ee30
   symbol_id: 0x453bec03
   symbol_id: 0xbd1c7f26
   symbol_id: 0x21b8efef
@@ -471013,10 +471291,17 @@ interface {
   symbol_id: 0x0d2420a7
   symbol_id: 0xe7fb597f
   symbol_id: 0xe6cbb47e
+  symbol_id: 0xbc617cb9
+  symbol_id: 0xd73b87cf
+  symbol_id: 0x811bc858
+  symbol_id: 0x03699bb1
   symbol_id: 0x0d23e13a
   symbol_id: 0xd02d0c21
   symbol_id: 0xe9d634b5
+  symbol_id: 0xdbb88789
+  symbol_id: 0x68ec8111
   symbol_id: 0x84b20708
+  symbol_id: 0x67739fde
   symbol_id: 0xab1410be
   symbol_id: 0xb8c4fc82
   symbol_id: 0x8fafe0a6
@@ -471029,9 +471314,15 @@ interface {
   symbol_id: 0x0df14bce
   symbol_id: 0xd6fc8732
   symbol_id: 0xec186578
+  symbol_id: 0x0836fa97
+  symbol_id: 0x06953e23
   symbol_id: 0x4fe4e1e0
   symbol_id: 0xfe0397d1
+  symbol_id: 0x16bb7838
+  symbol_id: 0xb4fe8b27
+  symbol_id: 0xe08eb54f
   symbol_id: 0x22d09ebb
+  symbol_id: 0xebe2c484
   symbol_id: 0xad69345e
   symbol_id: 0xf5ccbc9f
   symbol_id: 0xe0d38e55
@@ -471050,7 +471341,9 @@ interface {
   symbol_id: 0x058df036
   symbol_id: 0xae69b1ad
   symbol_id: 0xcbaf28c3
+  symbol_id: 0x8944736e
   symbol_id: 0x098b2c4d
+  symbol_id: 0xf3894058
   symbol_id: 0x008276ec
   symbol_id: 0xe9c62c61
   symbol_id: 0xad19779c
