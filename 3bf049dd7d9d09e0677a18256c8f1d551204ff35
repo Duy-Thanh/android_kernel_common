@@ -146,6 +146,24 @@
       "parentUuid": "f22d5b09_219b3cf9",
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c03e8574_bde04d45",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-16T13:58:21Z",
+      "side": 1,
+      "message": "\u003e Yes, true. From the pKVM perspective, pKVM should probably get an indication that host initated VM destroy so that it can allow vcpu_free requests from host. I guess currently the vcpus are destroyed first before invoking the vm destroy hypercall.\n\nActually this is quite tricky. The host\u0027s `kvm_arch_vcpu_destroy()` (called when destroying a vCPU) doesn\u0027t free the kvm_vcpu struct (its freeing is postponed until VM destroy) but it does free apic, cpuid_entries etc. So we need to unshare apic, cpuid_entries etc when the host destroys the vCPU, not later. So we could split vCPU freeing in pKVM into the part done in vcpu_free and the part postponed to vm_destroy... but another difficulty is that the host\u0027s `kvm_arch_destroy_vm()` frees vCPUs in `kvm_destroy_vcpus()` _before_ issuing the `vm_destroy` hypercall to pKVM in `kvm_x86_call(vm_destroy)(kvm)`, not after.\n\nI\u0027m thinking about doing the following:\n1. Validate duplicate vcpu_id and increment `created_vcpus` here at the beginning of vCPU creation, not in `attach_pkvm_vcpu_to_vm()`.\n2. In `for_each_pkvm_guest_vcpu()` and other such places check if the vCPU refcount is non-zero, to avoid touching vCPUs that haven\u0027t been attached yet.\n3. Keep aosp/4151696 as is, just add a comment explaining that with pKVM this clearing of pid_table entry is required and correct, while without pKVM it is not required and incorrect.",
+      "parentUuid": "09bc2153_2694e8a3",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
