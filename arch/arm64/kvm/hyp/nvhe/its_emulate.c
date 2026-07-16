@@ -850,3 +850,73 @@ err_unlock:
 	hyp_spin_unlock(&its_setup_lock);
 	return ret;
 }
+
+static DEFINE_HYP_SPINLOCK(redist_lock);
+static LIST_HEAD(redist_states);
+
+struct redist_priv_state {
+	void *base;
+	struct list_head entry;
+};
+
+static int init_redist_priv_state(struct pkvm_moveable_reg *reg,
+				  struct redist_priv_state *redist)
+{
+	reg->priv = redist;
+
+	redist->base = __hyp_va(reg->start);
+
+	return 0;
+}
+
+int pkvm_init_redist_emulation(phys_addr_t redist_base, void *host_priv_states)
+{
+	int ret = 0;
+	struct redist_priv_state *redist = kern_hyp_va(host_priv_states);
+	struct pkvm_moveable_reg *rd_reg, *vlpi_reg = NULL;
+	u64 typer;
+
+	hyp_spin_lock(&redist_lock);
+	/* Find the region with redistributor */
+	rd_reg = get_region(redist_base);
+	if (!rd_reg) {
+		ret = -ENODEV;
+		goto unlock;
+	}
+
+	/* Check if it supports VLPI and if so find its separate region */
+	typer = readq_relaxed(__hyp_va(rd_reg->start) + GICR_TYPER);
+	if (FIELD_GET(GICR_TYPER_VLPIS, typer)) {
+		vlpi_reg = get_region(redist_base + SZ_128K);
+		if (!vlpi_reg) {
+			ret = -ENODEV;
+			goto unlock;
+		}
+	}
+
+	/* If either of these were initialized, something is seriously wrong */
+	if (rd_reg->priv || (vlpi_reg && vlpi_reg->priv)) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	/* Use one page donated by host for RG_Base state */
+	BUILD_BUG_ON(sizeof(struct redist_priv_state) > PAGE_SIZE);
+	ret = donate_and_clear_host_page(redist, 1);
+	if (ret)
+		goto unlock;
+
+	/* Initialize RD_Base state */
+	ret = init_redist_priv_state(rd_reg, &redist[0]);
+	if (ret)
+		goto err;
+
+	list_add_tail(&redist[0].entry, &redist_states);
+err:
+	if (ret)
+		__pkvm_hyp_donate_host(hyp_virt_to_pfn(redist), 1);
+
+unlock:
+	hyp_spin_unlock(&redist_lock);
+	return ret;
+}
