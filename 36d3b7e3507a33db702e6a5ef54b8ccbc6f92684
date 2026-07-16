@@ -40,6 +40,30 @@
       ],
       "revId": "36d3b7e3507a33db702e6a5ef54b8ccbc6f92684",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba4adce_36e313ac",
+        "filename": "drivers/dma-buf/dma-fence-unwrap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-16T17:12:28Z",
+      "side": 1,
+      "message": "The reason is that `4e82b9c11d3c (\"dma-buf: add dma_fence_timestamp helper\")` added this file to 5.15 by mistake because it wasn\u0027t being built. However, this patch is backporting the original upstream commit that actual _uses_ the file. So yes, we delete it and then re-add it and it is correct.",
+      "parentUuid": "2ac9e14f_8bffa11a",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 40
+      },
+      "revId": "36d3b7e3507a33db702e6a5ef54b8ccbc6f92684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
