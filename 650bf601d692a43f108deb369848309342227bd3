@@ -16,6 +16,24 @@
       "message": "Can we get this change re-instated? We ran into this exact race condition on our platforms, and i verified that this change addresses the problem.",
       "revId": "650bf601d692a43f108deb369848309342227bd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d413a85_919a5706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-07-16T19:34:29Z",
+      "side": 1,
+      "message": "Do you have a bug number? @akuchynski@google.com, can you provide more details on why you abandoned this change?",
+      "parentUuid": "ff7624a4_6db2dc09",
+      "revId": "650bf601d692a43f108deb369848309342227bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
