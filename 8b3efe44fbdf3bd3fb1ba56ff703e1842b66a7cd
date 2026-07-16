@@ -52,6 +52,24 @@
       "parentUuid": "9ceadb4f_44a8161f",
       "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703e9c9c_7bd66658",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15127,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T14:43:09Z",
+      "side": 1,
+      "message": "Yeah true. I mentioned this because, an arbitrary big and invalid size from a misbehaving pVM can cause the host to donate lots of memory which would not be needed. Rest of the failure cases are about permissions, races and such where a huge chunk of un-necessary memory donation may not happen.",
+      "parentUuid": "fc323836_f6da121c",
+      "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
