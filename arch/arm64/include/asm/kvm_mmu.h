@@ -219,7 +219,7 @@ static inline void __invalidate_icache_guest_page(void *va, size_t size)
 		/* any kind of VIPT cache */
 		icache_inval_all_pou();
 	} else {
-		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+		/* PIPT */
 		icache_inval_pou((unsigned long)va, (unsigned long)va + size);
 	}
 }
