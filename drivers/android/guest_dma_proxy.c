@@ -20,6 +20,10 @@
 #include <linux/uaccess.h>
 #include <linux/xarray.h>
 #include <linux/file.h>
+#include <linux/ktime.h>
+#ifdef CONFIG_ARM64
+#include <linux/arm-smccc.h>
+#endif
 #include <uapi/linux/guest_dma_proxy.h>
 
 struct guest_dma_proxy_device {
@@ -138,6 +142,34 @@ static void guest_dma_proxy_release(struct dma_buf *dmabuf)
 {
 	struct guest_dma_proxy_buf *gbuf = dmabuf->priv;
 	struct guest_dma_proxy_device *gdev = gbuf->gdev;
+
+#ifdef CONFIG_ARM64
+	/* Relinquish pages back to the Host without poisoning */
+	if (gbuf->size > 0) {
+		phys_addr_t paddr = gbuf->paddr;
+		phys_addr_t end = paddr + gbuf->size;
+		struct arm_smccc_res res;
+		u64 count = 0;
+		ktime_t start, delta;
+
+		pr_info("guest_dma_proxy: Relinquishing range [%pa - %pa] (no-poison)\n", &paddr, &end);
+		start = ktime_get();
+		while (paddr < end) {
+			arm_smccc_1_1_invoke(ARM_SMCCC_VENDOR_HYP_KVM_MEM_RELINQUISH_FUNC_ID,
+					     paddr, 0, KVM_FUNC_MEM_RELINQUISH_NO_POISON, &res);
+			if (res.a0 != 0) {
+				pr_err("guest_dma_proxy: Relinquish HVC failed for paddr %pa: %ld\n",
+				       &paddr, (long)res.a0);
+			} else {
+				count++;
+			}
+			paddr += PAGE_SIZE;
+		}
+		delta = ktime_sub(ktime_get(), start);
+		pr_info("guest_dma_proxy: Relinquished %llu pages in %lld us\n",
+			count, ktime_to_us(delta));
+	}
+#endif
 
 	mutex_lock(&gdev->lock);
 	/* Remove from tracking (using paddr as an example key/index) */
