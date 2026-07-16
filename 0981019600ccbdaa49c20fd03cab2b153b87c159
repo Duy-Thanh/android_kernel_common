@@ -22,6 +22,30 @@
       },
       "revId": "0981019600ccbdaa49c20fd03cab2b153b87c159",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f532098_4e471190",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-07-16T17:23:08Z",
+      "side": 1,
+      "message": "Thanks Carlos, I changed it to `Reapply` and added a better description.",
+      "parentUuid": "b2c1cfc0_c4b4a673",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "0981019600ccbdaa49c20fd03cab2b153b87c159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
