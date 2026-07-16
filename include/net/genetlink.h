@@ -9,10 +9,22 @@
 
 #define GENLMSG_DEFAULT_SIZE (NLMSG_DEFAULT_SIZE - GENL_HDRLEN)
 
+/* Binding to multicast group requires %CAP_NET_ADMIN */
+#define GENL_MCAST_CAP_NET_ADMIN	BIT(0)
+/* Binding to multicast group requires %CAP_SYS_ADMIN */
+#define GENL_MCAST_CAP_SYS_ADMIN	BIT(1)
+
 /**
  * struct genl_multicast_group - generic netlink multicast group
  * @name: name of the multicast group, names are per-family
+<<<<<<< HEAD   (31c263582f4e2d320dc8c8cfceb8674226afbadd Revert "spi: topcliff-pch: Convert to platform remove callba)
  * @flags: GENL_* flags (%GENL_ADMIN_PERM or %GENL_UNS_ADMIN_PERM)
+||||||| BASE   (ee125bbff75699838fe9e8a303a0c3549bba3f1d spi: lantiq-ssc: fix controller deregistration)
+ * @flags: GENL_* flags (%GENL_ADMIN_PERM or %GENL_UNS_ADMIN_PERM)
+ * @cap_sys_admin: whether %CAP_SYS_ADMIN is required for binding
+=======
+ * @flags: GENL_MCAST_* flags
+>>>>>>> BRANCH (9cf7eb8919344932f909b2fac76296f7656fda8d smb: client: require net admin for CIFS SWN netlink)
  */
 struct genl_multicast_group {
 	char			name[GENL_NAMSIZ];
