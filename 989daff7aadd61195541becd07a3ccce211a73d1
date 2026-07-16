@@ -46,6 +46,30 @@
       },
       "revId": "989daff7aadd61195541becd07a3ccce211a73d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a35c14_04d108fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-16T15:52:40Z",
+      "side": 1,
+      "message": "linux-next is not upstream, but it is a staging ground for the next merge window for upstream.  Changes intended for the next release are staged there, but often linux-next testing will find issues with those patches and they will be modified before being properly merged upstream during the next merge window.\n\nFor patches queued by a maintainer (which is what linux-next pulls together), we use the FROMGIT (ie: \"FROM a maintainers GIT tree\") tag.\n\n\nSimilarly for patches sent to the list, but not yet queued we use FROMLIST.\n\nThis allows the tag to give a sense of confidence that we have in the patch actually going upstream:  FROMLIST(low confidence) -\u003e FROMGIT(higher confidence) -\u003e UPSTREAM (already upstream)",
+      "parentUuid": "139658ad_499bf310",
+      "range": {
+        "startLine": 31,
+        "startChar": 27,
+        "endLine": 31,
+        "endChar": 67
+      },
+      "revId": "989daff7aadd61195541becd07a3ccce211a73d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
