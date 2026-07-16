@@ -70,6 +70,24 @@
       "parentUuid": "b2c7adcb_9cc63b90",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bcf9a7_d3a5fde7",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-16T12:29:30Z",
+      "side": 1,
+      "message": "I am not sure I follow the suggestion but dropping registers access as mentioned in \n```\nDropping instead (what pkvm_handle_gic_emulation and pkvm_handle_rdist_emulation already do when priv is NULL) keeps HW frozen across the snapshot, so the invariant holds.\n```\nis a bad ideea. \n\nThe only thing that we should care here is avoiding a watchdog that can fire while we stay for too long at EL2 and this is why doing it per/node granular locking is beneficial. Since in most of the cases we only have max two ITS nodes I won\u0027t be too worried about that.",
+      "parentUuid": "fb1ab6c6_f49546b7",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
