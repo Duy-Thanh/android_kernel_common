@@ -16,6 +16,24 @@
       "message": "super minor comment about commit message:\n\u003e This does not fix any known\nissues but it helps to reduce the amount of pKVM-specific stuff in the\ngeneric kvm_host.h header.\n\nWe have fixes tag, but commit message says not fixing any known issues. Could we rephrase it to convey that this is a fix towards the direction of minimizing pkvm definitions. Above message does convey that, but \"does not fix any known issues\" is projecting out and may sound a bit confusing. I am perfectly fine with existing wording, but thought of thinking aloud",
       "revId": "dd1a153aa098af7444378d910d80ff68be87f145",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f7d7d5_d13850a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-16T14:22:12Z",
+      "side": 1,
+      "message": "Actually the Fixes tag is just to make it easier to squash it into corresponding patches during future rebase... I can clarify that in the commit message.",
+      "parentUuid": "7a113bc7_684fe3eb",
+      "revId": "dd1a153aa098af7444378d910d80ff68be87f145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
