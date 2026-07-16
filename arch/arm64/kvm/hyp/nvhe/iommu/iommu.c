@@ -354,8 +354,7 @@ void kvm_iommu_reclaim_pages(void *p, u8 order)
 		}
 	}
 
-	hyp_spin_lock(&__block_pools_lock);
-
+	hyp_spin_unlock(&__block_pools_lock);
 	WARN_ON(1);
 }
 
