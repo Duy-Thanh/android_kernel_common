@@ -88,6 +88,24 @@
       "parentUuid": "fb1ab6c6_f49546b7",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b55e10_29c53dd5",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-16T13:31:46Z",
+      "side": 1,
+      "message": "To clarify what \"dropping\" refers to here: it\u0027s not a proposed change, it\u0027s what this patchset already does. pkvm_handle_gic_emulation and pkvm_handle_rdist_emulation return when region-\u003epriv is NULL, and the trap handler zero-initialises the value, so accesses in the window between prot finalize and the init HVC are RAZ/WI today, PS14 included. The question was only whether the restructure should replace that with pkvm_handle_forward_req, and for the restricted registers I don\u0027t think it can: after finalize the host is untrusted, and a raw write to GITS_CBASER/GITS_BASER or GICR_PROPBASER/PENDBASER during the window repoints the queue and tables at host-chosen memory while we snapshot them, which is exactly the \"structures disconnect from HW state\" case Bart raised at the start. A well-behaved host never observes the deny: every runtime access the driver makes to these registers is serialized by its_lock/rd_lock, and the init path holds that lock.\n\nThe deny window is also narrower than it sounds. The SGI frame is not trapped at all (pkvm_register_gic_redist_cb skips it deliberately), so PPI/SGI handling cannot be affected. What can hit the window is RD_base accesses taken outside rd_lock, which I think is mostly GICR_WAKER on the hotplug/PM path. If we want the window to be transparent for registers we don\u0027t restrict, the fix is to narrow the deny rather than widen the forward: when priv is NULL, forward offsets that have no emu_handler (the same fallthrough as after init) and RAZ/WI only the handled ones. The window then behaves identically to post-init, except the restricted registers stay closed. A ratelimited WARN on denied accesses would also make any violation visible instead of silent.\n\nOn the watchdog: agreed it matters, but it\u0027s orthogonal. Lock granularity bounds how long EL1 sits with IRQs off across the HVCs. It does not shorten any single HVC, whose EL2 residency is the donation walk and scales with the table sizes, so if that ever becomes a problem the fix is chunking the work at EL2, not locking. And two ITS nodes bounds the ITS loop, but the GICR loop scales with the number of redistributors, which is why the granular form is worth having regardless.\n\nBart: gic_redist_deprivilege in PS14 looks structurally right to me, per-redist lock, HVC, unlock. Since it moves the GICR init after finalize, the window semantics above are now an A16 question rather than an upstream v2 one, so I\u0027d like us to settle them before this merges. I\u0027ll leave separate comments on the rest of the new PS14 code.",
+      "parentUuid": "f3bcf9a7_d3a5fde7",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
