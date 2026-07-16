@@ -16,6 +16,24 @@
       "message": "This breaks the KMI due to CRC changes. These were fixed in the androdi16-6.12 version so update this to be a clean cherry-pick of that patch.",
       "revId": "5fe9b1aaaeaa820586599c330d9ac8eefed4885f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85458526_316a4c26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4989578
+      },
+      "writtenOn": "2026-07-16T02:56:41Z",
+      "side": 1,
+      "message": "Thank you for the feedback. I’ve made the corresponding modifications.",
+      "parentUuid": "000a0e66_16f99571",
+      "revId": "5fe9b1aaaeaa820586599c330d9ac8eefed4885f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
