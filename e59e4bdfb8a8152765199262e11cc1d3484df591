@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f67c28_10e3c0ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-16T16:55:01Z",
+      "side": 1,
+      "message": "I don\u0027t follow this resolution comment but it looks to my like a trivial conflict resolution? Anyway LGTM.",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "e59e4bdfb8a8152765199262e11cc1d3484df591",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
