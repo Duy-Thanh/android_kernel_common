@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ceadb4f_44a8161f",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15127,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T13:49:06Z",
+      "side": 1,
+      "message": "minor: Not related to this patch. Just wondering if we should do a check for `is_valid_addr_range` before requesting pages from host? If its not in range, we can avoid memory donation just to fail later in `pkvm_guest_share_host/pkvm_guest_unshare_host`",
+      "fixSuggestions": [
+        {
+          "fixId": "d492131d_690fdc0e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!is_valid_addr_range(a0, a1)) {\n\t\t\tret \u003d -KVM_EINVAL;\n\t\t\tbreak;\n\t\t}\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
