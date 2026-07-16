@@ -70,6 +70,24 @@
       "parentUuid": "fc323836_f6da121c",
       "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee82a30_39c7bd2c",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15127,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-16T18:16:21Z",
+      "side": 1,
+      "message": "Actually, specifically `is_valid_addr_range()` will not help with that. It checks if the size is not too big to cause an overflow, but the guest may still pass a huge range e.g. [0, 2^63) and it will pass the check.\n\nAnd even if we add checking e.g. `size \u003c pkvm_pgtable_max_size(\u0026pkvm_vm-\u003emmu)`, a range like [0, 2^47) will still pass this check (and then the `min_pages` value will be still pretty huge too - it is only ~512 times smaller than the number of pages in the requested range).\n\nI\u0027m thinking we should instead move this `guest_mmu_memcache.count` check into `pkvm_guest_share_host/pkvm_guest_unshare_host`, _after_ the `check_guest_host_state()` security check. If the `check_guest_host_state()` check succeeded, it means all these pages are actually owned by the guest, i.e. were donated to it by the host before, so their number is not unreasonably big (i.e. the host will only need to allocate at most ~512 times less memory than it already allocated for this pVM before). WDYT?",
+      "parentUuid": "703e9c9c_7bd66658",
+      "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
