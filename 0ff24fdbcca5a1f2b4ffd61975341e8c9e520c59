@@ -34,6 +34,24 @@
       "parentUuid": "72d1825d_355ca1f9",
       "revId": "0ff24fdbcca5a1f2b4ffd61975341e8c9e520c59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b612225b_d1d4f2c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-16T19:32:36Z",
+      "side": 1,
+      "message": "No, please keep the symbols list and ABI update as a separate patch, posted together with this one. As an example see:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/4143433 which adds hooks and https://android-review.googlesource.com/c/kernel/common/+/4143533 on top of it updating symbols list and ABI definition.",
+      "parentUuid": "ce0760bd_27a1ed7e",
+      "revId": "0ff24fdbcca5a1f2b4ffd61975341e8c9e520c59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
