@@ -520,7 +520,7 @@ static int pkvm_vcpu_init_ptrauth(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return ret;
 }
 
-static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
+static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu, u32 mp_state)
 {
 	struct vcpu_reset_state *reset_state = &hyp_vcpu->vcpu.arch.reset_state;
 	struct pkvm_hyp_vm *hyp_vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
@@ -534,7 +534,7 @@ static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 		return 0;
 	}
 
-	if (hyp_vcpu->vcpu.arch.mp_state.mp_state == KVM_MP_STATE_STOPPED) {
+	if (mp_state == KVM_MP_STATE_STOPPED) {
 		reset_state->reset = false;
 		hyp_vcpu->power_state = PSCI_0_2_AFFINITY_LEVEL_OFF;
 	} else if (pkvm_hyp_vm_has_pvmfw(hyp_vm)) {
@@ -727,7 +727,7 @@ static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
 			goto done;
 	}
 
-	WARN_ON(pkvm_vcpu_init_psci(hyp_vcpu));
+	WARN_ON(pkvm_vcpu_init_psci(hyp_vcpu, mp_state));
 	pkvm_vcpu_init_traps(hyp_vcpu);
 	kvm_reset_pvm_sys_regs(&hyp_vcpu->vcpu);
 done:
@@ -1371,7 +1371,6 @@ static bool pvm_psci_vcpu_off(struct pkvm_hyp_vcpu *hyp_vcpu)
 	 * on OFF (CPU_ON) or ON_PENDING (rollback).
 	 */
 	WARN_ON(READ_ONCE(hyp_vcpu->power_state) != PSCI_0_2_AFFINITY_LEVEL_ON);
-
 	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_OFF);
 
 	/* Return to the host so that it can finish powering off the vcpu. */
