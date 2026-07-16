@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f988cfff_c5656003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-16T10:39:01Z",
+      "side": 1,
+      "message": "just a minor suggestion, moving this cl before the previous cl(aosp/4076371) would set stage to better understand the previous cl for those who are new to the code(like me :-)) - I mean the reason we should not be calling the cancellation logic twice because it clears the pkvm hypervisor private queue of events. The commit message of aosp/4076371 states that, but since I didn\u0027t have a mental picture of how pKVM handled events, it took me a little while to read the code and understand the flow.",
+      "revId": "0d32a052a9340e655e6ec5e20693f0871d639e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
