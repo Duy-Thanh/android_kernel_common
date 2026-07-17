@@ -173,6 +173,10 @@
   free_uid
   find_user
 
+#required by dynamic_readahead.ko
+  __traceiter_android_vh_page_cache_ra_order_bypass
+  __tracepoint_android_vh_page_cache_ra_order_bypass
+
 #required by mi_freqwdg.ko
   __traceiter_android_vh_freq_qos_remove_request
   __traceiter_android_vh_freq_qos_update_request
@@ -374,6 +378,10 @@
   __alloc_pages_bulk
   __xa_cmpxchg
   lookup_user_key
+  __traceiter_android_vh_handle_folio_writeback
+  __tracepoint_android_vh_handle_folio_writeback
+  __traceiter_android_vh_reclaim_before_kswapd
+  __tracepoint_android_vh_reclaim_before_kswapd
 
 # required by mi_ext_lru.ko
   mem_cgroup_iter
@@ -582,6 +590,16 @@ read_swap_cache_async
 unuse_swap_pte
 vfs_fadvise
 
+# required by mi_kernel_monitor.ko
+__tracepoint_android_vh_swapin_start
+__traceiter_android_vh_swapin_start
+__tracepoint_android_vh_swapin_end
+__traceiter_android_vh_swapin_end
+__tracepoint_android_vh_swap_writepage_start
+__traceiter_android_vh_swap_writepage_start
+__tracepoint_android_vh_swap_writepage_end
+__traceiter_android_vh_swap_writepage_end
+
 # required by launch_boost driver
 __traceiter_android_vh_filemap_read
 __tracepoint_android_vh_filemap_read
@@ -600,6 +618,9 @@ __traceiter_android_vh_nr_pcp_alloc
 __tracepoint_android_vh_nr_pcp_alloc
 __traceiter_android_vh_pcp_alloc_factor_adjust
 __tracepoint_android_vh_pcp_alloc_factor_adjust
+
+# required by mi cma pool
+cma_mutex
 
 #required by os-cpu
 __tracepoint_android_vh_futex_wait_queue_start
@@ -677,3 +698,23 @@ __tracepoint_android_vh_alloc_pages_slowpath_end
 __filemap_remove_folio
 inode_add_lru
 prep_new_page
+
+# required by capacity normalization
+seq_put_decimal_ull
+percpu_counter_destroy
+__percpu_counter_sum
+__percpu_counter_init
+
+# required by custom network policy
+nf_sk_lookup_slow_v4
+xt_register_matches
+xt_unregister_matches
+xt_register_targets
+xt_unregister_targets
+
+# coredump check
+__tracepoint_android_vh_signal_coredump_check
+__traceiter_android_vh_signal_coredump_check
+
+# required by xiaomi new symbols
+memory_cgrp_subsys_on_dfl_key
