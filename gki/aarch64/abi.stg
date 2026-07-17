@@ -411274,6 +411274,12 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x91bcff36
+  return_type_id: 0x6720d32f
+  parameter_id: 0x32a623d7
+  parameter_id: 0x25653b02
+}
+function {
   id: 0x91bdfab7
   return_type_id: 0x6720d32f
   parameter_id: 0x30f46662
@@ -489323,6 +489329,15 @@ elf_symbol {
   full_name: "getboottime64"
 }
 elf_symbol {
+  id: 0x95093427
+  name: "gether_attach_gadget"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x84ec99f1
+  type_id: 0x91bcff36
+  full_name: "gether_attach_gadget"
+}
+elf_symbol {
   id: 0xa7339c42
   name: "gether_cleanup"
   is_defined: true
@@ -489339,6 +489354,15 @@ elf_symbol {
   crc: 0x2b51f97a
   type_id: 0xf2708109
   full_name: "gether_connect"
+}
+elf_symbol {
+  id: 0x06e0564d
+  name: "gether_detach_gadget"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc1398d39
+  type_id: 0x1c31d966
+  full_name: "gether_detach_gadget"
 }
 elf_symbol {
   id: 0x46e18dbd
@@ -542460,8 +542484,10 @@ interface {
   symbol_id: 0x4ba4e06f
   symbol_id: 0x828a6c7c
   symbol_id: 0xa8319a8c
+  symbol_id: 0x95093427
   symbol_id: 0xa7339c42
   symbol_id: 0x23fbc3f8
+  symbol_id: 0x06e0564d
   symbol_id: 0x46e18dbd
   symbol_id: 0xf5970852
   symbol_id: 0x0a3cdb4a
