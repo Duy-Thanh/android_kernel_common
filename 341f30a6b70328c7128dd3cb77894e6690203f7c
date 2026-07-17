@@ -16,6 +16,24 @@
       "message": "This is quite sub-optimal.\n\nWe do have a walker for that already: __guest_request_page_transition()\n\nIt bails on first discontiguous physical memory and handle also block.",
       "revId": "341f30a6b70328c7128dd3cb77894e6690203f7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d94d66_e0049e8e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-17T15:56:00Z",
+      "side": 1,
+      "message": "Sure. I just wanted to do a quick prototype to see the lower bound of the unmap call if we pass the range. I am not familar with this code path though.\n\nOn local testing for ~158MB dma-buf, i do see the unmap takes ~45ms as agianst ~180ms per 4k. However, I understand this isn\u0027t guaranteed given if the physical mapping is not contiguous, we may still end up walking per 4k page.\n\nAnyways, I will leave it up to you given you are expert in this area. If you a prototype patch, i am happy to give it a try.",
+      "parentUuid": "27750131_9c935652",
+      "revId": "341f30a6b70328c7128dd3cb77894e6690203f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
