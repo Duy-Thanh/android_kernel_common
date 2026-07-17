@@ -70,6 +70,24 @@
       "parentUuid": "bd1a3e09_eff018d6",
       "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5750e3df_8a78f4bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T16:08:45Z",
+      "side": 1,
+      "message": "when you fix the syntax errors in that, it might work.\n\nMy preferred alternative would be to submit this to the android17-6.18-kminext branch (KMI thaw). Then you can use the upstream version of the patch. For KMI thaw patches, we guarantee source compatibility, so we would have the benefit of confirming that no partners touch the changed field. The changes to -kminext would ship in the 2026-12 release.",
+      "parentUuid": "cc232e20_fe54b37c",
+      "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
