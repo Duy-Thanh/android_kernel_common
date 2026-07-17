@@ -215,7 +215,12 @@ static void *__kvm_iommu_alloc_pages(u8 order, struct hyp_pool **pool)
 			i = 0;
 	} while (i != last_block_pool);
 
-	WRITE_ONCE(__block_pools_available, 0);
+	/*
+	 * iommu_block_pools[] are only full when they can't handle the smallest
+	 * allocation possible.
+	 */
+	if (!order)
+		WRITE_ONCE(__block_pools_available, 0);
 
 	hyp_spin_unlock(&__block_pools_lock);
 
@@ -310,6 +315,7 @@ void kvm_iommu_reclaim_pages(void *p, u8 order)
 
 		if (phys >= pool->range_start && phys < pool->range_end) {
 			__kvm_iommu_reclaim_pages(pool, p, order);
+			WRITE_ONCE(__block_pools_available, 1);
 			hyp_spin_unlock(&__block_pools_lock);
 			return;
 		}
