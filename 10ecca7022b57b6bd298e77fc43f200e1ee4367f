@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2336512_43723c85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T15:51:20Z",
+      "side": 1,
+      "message": "\"Bug: 535889206\"",
+      "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c6ee34_f88f9efc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T15:51:20Z",
+      "side": 1,
+      "message": "Needs an annotation describing what changes were needed as part of the backport. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
