@@ -16,6 +16,24 @@
       "message": "the stg file appears to be stale or corrupt. You can just drop it in this patch and generate an up-to-date STG for the child patch (top patch in the series)",
       "revId": "2c98d764d7fa1c4013385d754df39ce6b2ccddbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6053c6c1_76c10474",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4999186
+      },
+      "writtenOn": "2026-07-17T03:29:01Z",
+      "side": 1,
+      "message": "Done. I have dropped the stale STG file from this patch and regenerated an up-to-date STG file in the top patch of the series. Please take another look.",
+      "parentUuid": "4dd8c019_8454a860",
+      "revId": "2c98d764d7fa1c4013385d754df39ce6b2ccddbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
