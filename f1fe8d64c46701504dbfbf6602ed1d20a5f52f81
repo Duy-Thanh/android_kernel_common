@@ -52,6 +52,24 @@
       "parentUuid": "02ae14b9_802689e0",
       "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc232e20_fe54b37c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4750075
+      },
+      "writtenOn": "2026-07-17T12:29:05Z",
+      "side": 1,
+      "message": "Hi,\n\nBy definition, `pmsr_free_wk` is a private member:\n\n    include/net/cfg80211.h:\n    * @pmsr_free_wk: (private) peer measurements cleanup work\n\nIt is only used internally to manage the PMSR work that needs to be freed, so drivers should not be accessing this member in the first place.\n\nGiven that, do we need any additional refactoring here?\n\nIf the KMI breakage is solely due to the size mismatch between `struct work_struct` and `struct wiphy_work`, would something like the following help preserve the layout while allowing the conversion?\n\n    -       struct work_struct pmsr_free_wk;\n    +       ANDROID_KABI_REPLACE(struct work_struct, pmsr_free_wk,\n    +               struct {\n    +                       struct wiphy_work pmsr_free_wk;  /* 24 bytes */\n    +                       u64 __pmsr_kabi_pad;             /* pad to sizeof(work_struct) \u003d 32 */\n    +               });",
+      "parentUuid": "bd1a3e09_eff018d6",
+      "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
