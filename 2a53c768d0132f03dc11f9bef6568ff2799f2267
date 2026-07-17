@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf6918d_f1dcaa37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T16:58:19Z",
+      "side": 1,
+      "message": "Lint+2 since KernelCommit is refusing to confirm that the patch has landed in android17-6.18 (it has).",
+      "revId": "2a53c768d0132f03dc11f9bef6568ff2799f2267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
