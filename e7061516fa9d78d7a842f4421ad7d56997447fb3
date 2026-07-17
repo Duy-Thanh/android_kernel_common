@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f4c110_0a610f01",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-17T16:43:50Z",
+      "side": 1,
+      "message": "This like is different from upstrem (introduced in https://android-review.git.corp.google.com/c/kernel/common/+/3979622/4/fs/proc/task_mmu.c#1368) and that creates problems because walk_page_range() expects mmap_lock to be locked while walk_page_vma() does not. Need to check with Kalesh why this was changed.",
+      "range": {
+        "startLine": 1437,
+        "startChar": 2,
+        "endLine": 1437,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "471de417_a6d3c48e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/task_mmu.c",
+              "range": {
+                "startLine": 1436,
+                "startChar": 0,
+                "endLine": 1440,
+                "endChar": 0
+              },
+              "replacement": "\twalk_page_range(vma-\u003evm_mm, start ? start : vma-\u003evm_start, end, ops,\n\t\t\tmss);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e7061516fa9d78d7a842f4421ad7d56997447fb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
