@@ -745,10 +745,15 @@ static int selinux_set_mnt_opts(struct super_block *sb,
 	    !strcmp(sb->s_type->name, "binder") ||
 	    !strcmp(sb->s_type->name, "bpf") ||
 	    !strcmp(sb->s_type->name, "pstore") ||
+<<<<<<< HEAD   (1c1eeba5bfcd1801eb546211426c81d8a94cc363 Merge da6cc648c1f5 ("blk-cgroup: Fix NULL deref caused by bl)
 	    !strcmp(sb->s_type->name, "securityfs") ||
 	    // Android: remove functionfs policycap check due to
 	    // ABI breakage with policycap array.
 	    !strcmp(sb->s_type->name, "functionfs"))
+||||||| BASE   (da6cc648c1f570290af1ddbe6b7ca3d91b1d6db9 blk-cgroup: Fix NULL deref caused by blkg_policy_data being )
+=======
+	    !strcmp(sb->s_type->name, "securityfs"))
+>>>>>>> BRANCH (74331684c50a4bd74a7a6e1e897bfecdd0a235a5 selinux: enable genfscon labeling for securityfs)
 		sbsec->flags |= SE_SBGENFS;
 
 	if (!strcmp(sb->s_type->name, "sysfs") ||
