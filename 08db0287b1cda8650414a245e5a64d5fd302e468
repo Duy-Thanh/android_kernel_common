@@ -106,6 +106,24 @@
       "parentUuid": "f3bcf9a7_d3a5fde7",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55130470_f99b4e14",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-17T14:20:31Z",
+      "side": 1,
+      "message": "\u003e  pkvm_handle_gic_emulation and pkvm_handle_rdist_emulation return when region-\u003epriv is NULL, ... the init HVC are RAZ/WI today, PS14 included. \n\nOkay. Just to clarify. I currently do not expect any of the `region-\u003epriv` to be `NULL`. If it were `NULL` it would indicate a problem in initialization path. I get why it would seem that `region-\u003epriv \u003d\u003d NULL` is allowed and I am quite eager to make it `WARN_ON(region-\u003epriv \u003d\u003d NULL)`, however it would become fatal for the boot.\n\n\u003e GITS_CBASER/GITS_BASER or GICR_PROPBASER/PENDBASER during the window repoints the queue and tables at host-chosen memory while we snapshot them,\n\nWith this chain, writes to `GITS_CBASER`/`GITS_BASER` will no longer be able change the base address of those structures.\n\nRegarding `GICR_PROPBASER`/`GICR_PENDBASER` I am not concerned because the GICR are currently locked with global `redist_lock` spin lock. This is by design because verifying property table base addresses with granular could lead to dead locks when multiple CPUs would try enable/disable their LPIs. Any register read/write in the window to a given redistributor will only be handled only before or after the redist is initialized.\n\nIf needed we could optimize only `GICR_INVLPIR` and `GICR_INVALLR` to not take lock during access. However given the timeline and how often those registers are used, I think we can do that in follow up if needed.\n\n\u003e Bart: gic_redist_deprivilege in PS14 looks structurally right to me, per-redist lock, HVC, unlock. Since it moves the GICR init after finalize, the window semantics above are now an A16 question rather than an upstream v2 one, so I\u0027d like us to settle them before this merges. I\u0027ll leave separate comments on the rest of the new PS14 code.\n\nAs said above I am not concerned with either approaches, so I can restore previous solution if needed. However that said, I am increasingly worried with @sebastianene@google.com\u0027s concern about dropping register accesses in the window. Yet I do not expect any per my first responde in the thread.",
+      "parentUuid": "66b55e10_29c53dd5",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
