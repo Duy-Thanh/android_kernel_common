@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b3e53f_93aaef14",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-17T07:12:47Z",
+      "side": 1,
+      "message": "Would this work with a folio? I believe this is the modern way of doing that.",
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
