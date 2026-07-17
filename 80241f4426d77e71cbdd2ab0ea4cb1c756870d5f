@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5a7d30a_3d02d3d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T17:01:30Z",
+      "side": 1,
+      "message": "This whole series should have been just 1 bug. In the future, just create 1 bug per feature/patchset.\n\nThis needs to be \"Bug: 535907501\"",
+      "revId": "80241f4426d77e71cbdd2ab0ea4cb1c756870d5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6baae390_60d4fa73",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
