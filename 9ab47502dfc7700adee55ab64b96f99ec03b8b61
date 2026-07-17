@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c226c0_6f032dea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T15:54:17Z",
+      "side": 1,
+      "message": "\"Bug: 535907493\"",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8365808_a8a010f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-17T15:54:17Z",
+      "side": 1,
+      "message": "This should wait until a maintainer accepts it. Then the accepted version can be merged here as FROMGIT.",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
