@@ -610,3 +610,8 @@ wakeup_sources_walk_next
 wakeup_sources_walk_start
 __wake_up_sync_key
 woken_wake_function
+console_verbose
+pm_suspend
+spi_split_transfers_maxsize
+spi_split_transfers_maxwords
+test_taint
