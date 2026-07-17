@@ -156,6 +156,7 @@ void kvm_iommu_reclaim(struct kvm_hyp_memcache *host_mc, int target)
 {
 	unsigned long prev_nr_pages = host_mc->nr_pages;
 	unsigned long block_pages = 1 << pmd_order;
+	bool avail = false;
 	int p = 0;
 
 	if (!kvm_iommu_ops)
@@ -165,20 +166,27 @@ void kvm_iommu_reclaim(struct kvm_hyp_memcache *host_mc, int target)
 
 	target -= host_mc->nr_pages - prev_nr_pages;
 
-	while (target > block_pages && p < MAX_BLOCK_POOLS) {
+	hyp_spin_lock(&__block_pools_lock);
+
+	for (p = 0; p < MAX_BLOCK_POOLS; p++) {
 		struct hyp_pool *pool = &iommu_block_pools[p];
 
-		hyp_spin_lock(&__block_pools_lock);
+		if (!pool->max_order)
+			continue;
 
-		if (hyp_pool_free_pages(pool) == block_pages) {
+		if (target > block_pages && hyp_pool_free_pages(pool) == block_pages) {
 			reclaim_hyp_pool(pool, host_mc, block_pages);
 			hyp_pool_init_empty(pool, 1);
 			target -= block_pages;
+		} else if (hyp_pool_free_pages(pool)) {
+			avail = true;
 		}
-
-		hyp_spin_unlock(&__block_pools_lock);
-		p++;
 	}
+
+	if (!avail)
+		WRITE_ONCE(__block_pools_available, 0);
+
+	hyp_spin_unlock(&__block_pools_lock);
 }
 
 int kvm_iommu_reclaimable(void)
@@ -254,7 +262,12 @@ static void *__kvm_iommu_alloc_pages(u8 order, struct hyp_pool **pool)
 			i = 0;
 	} while (i != last_block_pool);
 
-	WRITE_ONCE(__block_pools_available, 0);
+	/*
+	 * iommu_block_pools[] are only full when they can't handle the smallest
+	 * allocation possible.
+	 */
+	if (!order)
+		WRITE_ONCE(__block_pools_available, 0);
 
 	hyp_spin_unlock(&__block_pools_lock);
 
@@ -349,6 +362,7 @@ void kvm_iommu_reclaim_pages(void *p, u8 order)
 
 		if (phys >= pool->range_start && phys < pool->range_end) {
 			__kvm_iommu_reclaim_pages(pool, p, order);
+			WRITE_ONCE(__block_pools_available, 1);
 			hyp_spin_unlock(&__block_pools_lock);
 			return;
 		}
