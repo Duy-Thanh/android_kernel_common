@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43ba78c_c3cd2556",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-17T09:29:10Z",
+      "side": 1,
+      "message": "My understanding is that, the fix is to restore the hw xcr0/xss before switch the FPU in the pKVM, so we call this function earlier, right?\n\nFor the hw xcr0/xss restoring, we don\u0027t need to restore with guest xcr0/xss before switching FPU, we just need to restore them with the trusted value. The kvm_host.xcr0 and kvm_host.xss are saved during deprivilege, which represents the maximum FPU components, and never be changed by the host. They are good and trusted value which can be used to restore xcr0/xss.\n\nThe reason of no need to restore with guest xcr0/xss before switching FPU is that, we only need to make sure xcr0/xss have the maximum components enabled, so that the XSAVES/XRSTORS instruction won\u0027t miss any component.\n\nThen to know if we need to restore xcr0/xss, a faster way than xgetbv/rsmsrq is to monitor them.\n\nThe xcr0 is already monitored by the pKVM for the host, via the handle_xsetbv() in host_vmx.c. If host changes its xcr0 via xsetbv, it will trap to pKVM, and emulates by handle_xsetbv(). We can save the new xcr0 in the host\u0027s vcpu-\u003earch.xcr0. Then we only need to check the host\u0027s vcpu-\u003earch.xcr0 v.s. kvm_host.xcr0. If they are different, restore xcr0.\n\nWe can do similar for MSR_IA32_XSS, make it write-intercepted by the pKVM, and save the new xss in host\u0027s vcpu-\u003earch.xss in handle_write_msr() in host_vmx.c. Then we only need to check the host\u0027s vcpu-\u003earch.xss v.s. kvm_host.xss. If they are different, restore xss.\n\nWith these, we can even restore them back with the host\u0027s xcr0/xss before enter the host.\n\nWe can do such restore in another function, then we can keep the current position of calling kvm_load_guest_xsave_state, which can minimal the code difference with KVM.",
+      "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
