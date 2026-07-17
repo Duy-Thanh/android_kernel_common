@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdd4b60d_a1fdb619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-07-17T17:28:19Z",
+      "side": 1,
+      "message": "Resolving for now. There have been attempts upstream but they haven\u0027t gone anywhere at the moment: https://lore.kernel.org/dri-devel/20250516092148.12778-1-tao.wangtao@honor.com/\n\nEven that doesn\u0027t support unaligned file/buffer offsets though.",
+      "parentUuid": "277a11a9_db85f091",
+      "revId": "b9925114f7991109c52d0b324c82a68a47827dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30131ac9_73b6aac0",
