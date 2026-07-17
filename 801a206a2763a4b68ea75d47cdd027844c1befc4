@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0260bac3_ddacb004",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-17T17:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "416dff19_97bbddf8",
+      "range": {
+        "startLine": 175,
+        "startChar": 19,
+        "endLine": 175,
+        "endChar": 39
+      },
+      "revId": "801a206a2763a4b68ea75d47cdd027844c1befc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2f40c93_5b982aa9",

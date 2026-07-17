@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692e76f5_414f1126",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-07-17T17:03:03Z",
+      "side": 1,
+      "message": "nit: `MAX_NR_BOUNCE_BUFS + 1` would be more descriptive",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "235067230f3b932f2ace99509d6b82f84b5e2fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
