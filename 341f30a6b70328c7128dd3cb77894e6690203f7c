@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27750131_9c935652",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-17T07:08:41Z",
+      "side": 1,
+      "message": "This is quite sub-optimal.\n\nWe do have a walker for that already: __guest_request_page_transition()\n\nIt bails on first discontiguous physical memory and handle also block.",
+      "revId": "341f30a6b70328c7128dd3cb77894e6690203f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
