@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72820514_2ff092c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-17T05:42:55Z",
+      "side": 1,
+      "message": "Per the SDM \"The instruction executing when an NMI interrupt is received is completed before the NMI is generated\", so it looks like the RIP saved in pt_regs is not pointing the wrmsrq instruction but the next one so the search_table cannot find a match entry for this RIP?\n\nI think what this patch does is still good, as unconditionally calling exception fixup for all exceptions is a weak implementation, and this patch can improve it.",
+      "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
