@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ce4ccd_de2b2442",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-17T11:22:46Z",
+      "side": 1,
+      "message": "@sebastianene@google.com why do we leave out the collection table? AFAIU it should also be only modified using `MAPC`",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "revId": "4c9e166d04c60507a25950a5ff404a53c14cc3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
