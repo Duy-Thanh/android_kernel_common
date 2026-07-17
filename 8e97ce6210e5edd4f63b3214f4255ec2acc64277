@@ -16,6 +16,24 @@
       "message": "This branch needs a CTS update.\n\nI thought we turned these tests down?",
       "revId": "8e97ce6210e5edd4f63b3214f4255ec2acc64277",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd46653c_4be098ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2026-07-17T08:06:28Z",
+      "side": 1,
+      "message": "For the record: cl/949403860 is disabling the test, it just landed ~1 hour ago. I\u0027m retriggering the presubmit test (the previous run was executed just before the change landed).\n\nThanks Lee for taking care of the CTS disablement for this branch.",
+      "parentUuid": "4874ac06_a6a6f0aa",
+      "revId": "8e97ce6210e5edd4f63b3214f4255ec2acc64277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
