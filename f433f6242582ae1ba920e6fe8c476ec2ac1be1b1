@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6801c53_a9859464",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-17T10:22:35Z",
+      "side": 1,
+      "message": "That has disappeared completely.\n\nHowever at some point there were kvm_pfn_to_refcounted_page(). Perhaps that\u0027s something to backport?",
+      "parentUuid": "0228dbb9_5630622d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
