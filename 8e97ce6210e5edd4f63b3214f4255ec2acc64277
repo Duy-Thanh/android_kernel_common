@@ -34,6 +34,24 @@
       "parentUuid": "4874ac06_a6a6f0aa",
       "revId": "8e97ce6210e5edd4f63b3214f4255ec2acc64277",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35808b67_5ab55053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-17T09:22:54Z",
+      "side": 1,
+      "message": "The CTS turn-down takes a bit of time to percolate through.\n\nWe\u0027ll keep kicking it until it does.",
+      "parentUuid": "fd46653c_4be098ce",
+      "revId": "8e97ce6210e5edd4f63b3214f4255ec2acc64277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
