@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b37059_df660c4d",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15065,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-17T06:05:50Z",
+      "side": 1,
+      "message": "nit: maybe can be simplified by using pkru wrapper `read_pkru()` in `asm/pkru.h`: `vcpu-\u003earch.host_pkru \u003d read_pkru();`, which can check the X86_FEATURE_PKU.",
+      "revId": "fb39c9dc49c5cd6663639f6540c80e2e958382d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
