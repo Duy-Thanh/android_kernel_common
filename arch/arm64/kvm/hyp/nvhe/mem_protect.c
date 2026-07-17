@@ -429,14 +429,16 @@ static enum pkvm_page_state guest_get_page_state(kvm_pte_t pte, u64 addr)
 }
 
 int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
-				    u64 ipa, u64 flags, u64 *ppa)
+				    u64 ipa, u64 nr_pages, u64 flags, u64 *ppa)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	enum pkvm_page_state state;
-	u64 phys = 0, addr;
+	u64 phys = 0, first_phys = 0;
 	kvm_pte_t pte;
 	s8 level;
-	int ret;
+	int ret = 0;
+	u64 i;
+	bool unmapped_any = false;
 
 	if (!pkvm_hyp_vcpu_is_protected(vcpu))
 		return 0;
@@ -447,52 +449,76 @@ int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
 	host_lock_component();
 	guest_lock_component(vm);
 
-	ret = kvm_pgtable_get_leaf(&vm->pgt, ipa, &pte, &level);
-	if (ret || !kvm_pte_valid(pte))
-		goto end;
+	for (i = 0; i < nr_pages; i++) {
+		u64 page_ipa = ipa + i * PAGE_SIZE;
+		ret = kvm_pgtable_get_leaf(&vm->pgt, page_ipa, &pte, &level);
+		if (ret || !kvm_pte_valid(pte)) {
+			ret = -EFAULT;
+			*ppa = i;
+			goto end;
+		}
 
-	/* We don't support splitting non-leaf mappings */
-	if (level != KVM_PGTABLE_LAST_LEVEL) {
-		ret = -E2BIG;
-		goto end;
+		if (level != KVM_PGTABLE_LAST_LEVEL) {
+			ret = -E2BIG;
+			*ppa = i;
+			goto end;
+		}
+
+		state = guest_get_page_state(pte, page_ipa);
+		if (state != PKVM_PAGE_OWNED) {
+			ret = -EPERM;
+			*ppa = i;
+			goto end;
+		}
+
+		phys = kvm_pte_to_phys(pte);
+		if (hyp_page_count(hyp_phys_to_virt(phys))) {
+			ret = -EBUSY;
+			*ppa = i;
+			goto end;
+		}
+
+		if (i == 0) {
+			first_phys = phys;
+		} else {
+			if (phys != first_phys + i * PAGE_SIZE) {
+				ret = -ENOTUNIQ;
+				*ppa = i;
+				goto end;
+			}
+		}
 	}
 
-	state = guest_get_page_state(pte, ipa);
-	if (state != PKVM_PAGE_OWNED) {
-		ret = -EPERM;
-		goto end;
-	}
-
-	addr = ALIGN_DOWN(ipa, kvm_granule_size(level));
-	phys = kvm_pte_to_phys(pte);
-	phys += ipa - addr;
-	/* page might be used for DMA! */
-	if (hyp_page_count(hyp_phys_to_virt(phys))) {
-		ret = -EBUSY;
-		goto end;
-	}
-
-	/* Zap the guest stage2 pte and return ownership to the host */
-	ret = kvm_pgtable_stage2_unmap(&vm->pgt, ipa, PAGE_SIZE);
-	if (ret)
-		goto end;
+	WARN_ON(host_stage2_set_owner_locked(first_phys, nr_pages * PAGE_SIZE, PKVM_ID_HOST));
 
 	if (!(flags & KVM_FUNC_MEM_RELINQUISH_NO_POISON))
-		hyp_poison_page(phys, PAGE_SIZE);
+		hyp_poison_page(first_phys, nr_pages * PAGE_SIZE);
 	else
-		hyp_flush_page(phys, PAGE_SIZE);
-	psci_mem_protect_dec(1);
+		hyp_flush_page(first_phys, nr_pages * PAGE_SIZE);
 
-	WARN_ON(host_stage2_set_owner_locked(phys, PAGE_SIZE, PKVM_ID_HOST));
+	psci_mem_protect_dec(nr_pages);
 
-	if (pkvm_ipa_range_has_pvmfw(vm, ipa, ipa + PAGE_SIZE))
-		vm->kvm.arch.pkvm.pvmfw_load_addr = PVMFW_INVALID_LOAD_ADDR;
+	ret = kvm_pgtable_stage2_unmap(&vm->pgt, ipa, nr_pages * PAGE_SIZE);
+	if (ret) {
+		*ppa = 0;
+		goto end;
+	}
+
+	for (i = 0; i < nr_pages; i++) {
+		u64 page_ipa = ipa + i * PAGE_SIZE;
+		if (pkvm_ipa_range_has_pvmfw(vm, page_ipa, page_ipa + PAGE_SIZE))
+			vm->kvm.arch.pkvm.pvmfw_load_addr = PVMFW_INVALID_LOAD_ADDR;
+	}
+
+	unmapped_any = true;
 
 end:
 	guest_unlock_component(vm);
 	host_unlock_component();
 
-	*ppa = phys;
+	if (!ret) {
+		*ppa = unmapped_any ? first_phys : 0;
+	}
 
 	return ret;
 }
@@ -3276,7 +3302,7 @@ void pkvm_ownership_selftest(void *base)
 
 	selftest_state.host = PKVM_PAGE_OWNED;
 	selftest_state.guest[0] = PKVM_NOPAGE;
-	assert_transition_res(0,	__pkvm_guest_relinquish_to_host, vcpu, gfn * PAGE_SIZE, 0, &pa);
+	assert_transition_res(0,	__pkvm_guest_relinquish_to_host, vcpu, gfn * PAGE_SIZE, 1, 0, &pa);
 	WARN_ON(pa != phys);
 
 	selftest_state.host = PKVM_NOPAGE;

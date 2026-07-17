@@ -1831,28 +1831,38 @@ out_guest_err:
 	return true;
 }
 
+#define PKVM_RELINQUISH_MAX_BATCH 512
+
 static bool pkvm_memrelinquish_call(struct pkvm_hyp_vcpu *hyp_vcpu,
 				    u64 *exit_code)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
 	u64 ipa = smccc_get_arg1(vcpu);
-	/* TODO: use arg2 as nr_pages */
-	u64 arg2 = smccc_get_arg2(vcpu);
+	u64 nr_pages = smccc_get_arg2(vcpu);
 	u64 flags = smccc_get_arg3(vcpu);
 	u64 pa = 0;
 	int ret;
 
-	if (arg2 || (flags != 0 && flags != KVM_FUNC_MEM_RELINQUISH_NO_POISON))
+	if (!nr_pages || nr_pages > PKVM_RELINQUISH_MAX_BATCH ||
+	    (flags != 0 && flags != KVM_FUNC_MEM_RELINQUISH_NO_POISON))
 		goto out_guest_err;
 
-	ret = __pkvm_guest_relinquish_to_host(hyp_vcpu, ipa, flags, &pa);
+	u64 start_cycles = read_sysreg(cntvct_el0);
+	ret = __pkvm_guest_relinquish_to_host(hyp_vcpu, ipa, nr_pages, flags, &pa);
+	u64 delta_cycles = read_sysreg(cntvct_el0) - start_cycles;
+
+	vcpu_set_reg(&hyp_vcpu->vcpu, 3, delta_cycles);
+
 	if (ret == -E2BIG) {
-		if (pkvm_request_split(hyp_vcpu, PAGE_ALIGN_DOWN(ipa), 1, exit_code))
+		if (nr_pages == 1 && pkvm_request_split(hyp_vcpu, PAGE_ALIGN_DOWN(ipa), 1, exit_code))
+			goto out_guest_err;
+		else
 			goto out_guest_err;
 
 		return false;
 	} else if (ret) {
-		goto out_guest_err;
+		smccc_set_retval(vcpu, ret, 0, 0, 0);
+		return true;
 	}
 
 	if (pa != 0) {

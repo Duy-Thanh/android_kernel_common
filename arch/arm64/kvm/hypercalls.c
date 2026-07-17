@@ -372,10 +372,15 @@ int kvm_smccc_call_handler(struct kvm_vcpu *vcpu)
 	case ARM_SMCCC_VENDOR_HYP_KVM_PTP_FUNC_ID:
 		kvm_ptp_get_time(vcpu, val);
 		break;
-	case ARM_SMCCC_VENDOR_HYP_KVM_MEM_RELINQUISH_FUNC_ID:
-		pkvm_host_reclaim_page(vcpu->kvm, smccc_get_arg1(vcpu));
+	case ARM_SMCCC_VENDOR_HYP_KVM_MEM_RELINQUISH_FUNC_ID: {
+		u64 gpa = smccc_get_arg1(vcpu);
+		u64 nr_pages = smccc_get_arg2(vcpu);
+
+		pkvm_host_reclaim_range(vcpu->kvm, gpa, nr_pages);
+
 		val[0] = SMCCC_RET_SUCCESS;
 		break;
+	}
 	case ARM_SMCCC_TRNG_VERSION:
 	case ARM_SMCCC_TRNG_FEATURES:
 	case ARM_SMCCC_TRNG_GET_UUID:

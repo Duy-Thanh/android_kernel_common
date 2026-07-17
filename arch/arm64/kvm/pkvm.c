@@ -764,6 +764,47 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 	kfree(ppage);
 }
 
+void pkvm_host_reclaim_range(struct kvm *host_kvm, phys_addr_t ipa, u32 nr_pages)
+{
+	struct mm_struct *mm = current->mm;
+	struct kvm_pinned_page *ppage, *next;
+	struct list_head reclaim_list;
+	unsigned long pages_reclaimed = 0;
+	u64 end_ipa = ipa + (u64)nr_pages * PAGE_SIZE;
+
+	INIT_LIST_HEAD(&reclaim_list);
+
+	write_lock(&host_kvm->mmu_lock);
+	ppage = kvm_pinned_pages_iter_first(&host_kvm->arch.pkvm.pinned_pages,
+					   ipa, end_ipa - 1);
+	while (ppage) {
+		next = kvm_pinned_pages_iter_next(ppage, ipa, end_ipa - 1);
+
+		if (WARN_ON(ppage->order)) {
+			ppage = next;
+			continue;
+		}
+
+		kvm_pinned_pages_remove(ppage, &host_kvm->arch.pkvm.pinned_pages);
+		ppage->slot->arch.pkvm_pf_count--;
+
+		list_add_tail(&ppage->list_node, &reclaim_list);
+		pages_reclaimed++;
+
+		ppage = next;
+	}
+	write_unlock(&host_kvm->mmu_lock);
+
+	list_for_each_entry_safe(ppage, next, &reclaim_list, list_node) {
+		pkvm_release_ppage(ppage, true);
+		list_del(&ppage->list_node);
+		kfree(ppage);
+	}
+
+	if (pages_reclaimed)
+		account_locked_vm(mm, pages_reclaimed, false);
+}
+
 int pkvm_enable_smc_forwarding(struct file *kvm_file)
 {
 	struct kvm *host_kvm;
