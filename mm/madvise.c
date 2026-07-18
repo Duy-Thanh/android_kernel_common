@@ -329,8 +329,7 @@ static long madvise_willneed(struct madvise_behavior *madv_behavior)
 	 */
 	mark_mmap_lock_dropped(madv_behavior);
 	get_file(file);
-	offset = (loff_t)(start - vma->vm_start)
-			+ ((loff_t)vma->vm_pgoff << PAGE_SHIFT);
+	offset = (loff_t)(start - vma->vm_start) + vma_file_offset(vma);
 	mmap_read_unlock(mm);
 	vfs_fadvise(file, offset, end - start, POSIX_FADV_WILLNEED);
 	fput(file);

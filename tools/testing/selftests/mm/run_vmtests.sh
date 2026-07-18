@@ -310,6 +310,7 @@ fi
 
 CATEGORY="mmap" run_test ./map_fixed_noreplace
 CATEGORY="mmap" run_test ./anon_vma_name_ppps
+CATEGORY="mmap" run_test ./madvise_remove_ppps
 
 if $RUN_ALL; then
     run_gup_matrix
