@@ -309,6 +309,7 @@ if test_selected "hugetlb"; then
 fi
 
 CATEGORY="mmap" run_test ./map_fixed_noreplace
+CATEGORY="mmap" run_test ./anon_vma_name_ppps
 
 if $RUN_ALL; then
     run_gup_matrix

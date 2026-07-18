@@ -72,6 +72,7 @@ TEST_GEN_FILES += madv_populate
 TEST_GEN_FILES += map_fixed_noreplace
 TEST_GEN_FILES += map_hugetlb
 TEST_GEN_FILES += map_populate
+TEST_GEN_FILES += anon_vma_name_ppps
 ifneq (,$(filter $(ARCH),arm64 riscv riscv64 x86 x86_64))
 TEST_GEN_FILES += memfd_secret
 endif
@@ -159,6 +160,9 @@ TEST_FILES += test_page_frag.sh
 TEST_FILES += write_hugetlb_memory.sh
 
 include ../lib.mk
+
+$(OUTPUT)/anon_vma_name_ppps: CFLAGS += -I..
+$(OUTPUT)/anon_vma_name_ppps: ../kselftest_ppps.h
 
 $(TEST_GEN_PROGS): vm_util.c thp_settings.c
 $(TEST_GEN_FILES): vm_util.c thp_settings.c
