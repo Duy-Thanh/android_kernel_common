@@ -42,6 +42,7 @@
 
 #include "internal.h"
 #include "swap.h"
+#include <linux/p3s/mm.h>
 #include <linux/p3s_user_pages.h>
 
 #define __MADV_SET_ANON_VMA_NAME (-1)
@@ -2232,9 +2233,9 @@ static int madvise_set_anon_name(struct mm_struct *mm, unsigned long start,
 		.anon_name = anon_name,
 	};
 
-	if (start & ~__PAGE_MASK)
+	if (start & ~mm_pte_mask(mm))
 		return -EINVAL;
-	len = (len_in + ~__PAGE_MASK) & __PAGE_MASK;
+	len = (len_in + ~mm_pte_mask(mm)) & mm_pte_mask(mm);
 
 	/* Check to see whether len was rounded up from small -ve to zero */
 	if (len_in && !len)
