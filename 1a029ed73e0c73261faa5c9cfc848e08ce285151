@@ -16,6 +16,23 @@
       "message": "https://android-review.googlesource.com/q/I0f3e08038b54a1a33e60e281197d7bb6d225c15d",
       "revId": "1a029ed73e0c73261faa5c9cfc848e08ce285151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "003cb056_09e59231",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5018110
+      },
+      "writtenOn": "2026-07-19T17:09:50Z",
+      "side": 1,
+      "message": "4016128: ANDROID: Initialize android15-6.6-2026-04 | https://android-review.googlesource.com/c/kernel/common/+/4016128",
+      "revId": "1a029ed73e0c73261faa5c9cfc848e08ce285151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
