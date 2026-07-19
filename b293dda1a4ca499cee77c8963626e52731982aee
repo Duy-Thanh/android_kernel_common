@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f693fb08_2ebb88cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5018063
+      },
+      "writtenOn": "2026-07-19T07:32:56Z",
+      "side": 1,
+      "message": "UBSAN: array-index-out-of-bounds in common/net/wireless/nl80211.c\nindex 0 is out of range for type \u0027struct ieee80211_channel *[] __counted_by(n_channels)\u0027 (aka \u0027struct ieee80211_channel *[]\u0027)",
+      "revId": "b293dda1a4ca499cee77c8963626e52731982aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
