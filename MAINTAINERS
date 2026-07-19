@@ -1818,6 +1818,7 @@ S:	Supported
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/staging.git
 F:	Documentation/netlink/specs/binder.yaml
 F:	drivers/android/
+F:	tools/testing/selftests/filesystems/binderfs/
 
 ANDROID GOLDFISH PIC DRIVER
 M:	Miodrag Dinic <miodrag.dinic@mips.com>
