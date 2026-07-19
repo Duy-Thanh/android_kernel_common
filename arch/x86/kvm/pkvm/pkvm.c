@@ -252,9 +252,9 @@ static void pkvm_vm_destroy(int vm_handle, struct pkvm_memcache *mc)
 
 static int attach_pkvm_vcpu_to_vm(struct pkvm_vm *pkvm_vm, struct pkvm_vcpu *pkvm_vcpu)
 {
-	struct kvm_vcpu *vcpu = &pkvm_vcpu->vcpu;
+	struct kvm_vcpu *vcpu = &pkvm_vcpu->vcpu, *existing_vcpu;
 	struct kvm *kvm = &pkvm_vm->kvm;
-	int vcpu_handle;
+	int vcpu_handle, i;
 
 	pkvm_spin_lock(&pkvm_vm->lock);
 
@@ -262,6 +262,14 @@ static int attach_pkvm_vcpu_to_vm(struct pkvm_vm *pkvm_vm, struct pkvm_vcpu *pkv
 		pkvm_spin_unlock(&pkvm_vm->lock);
 		return -EINVAL;
 	}
+
+	for_each_pkvm_guest_vcpu(i, existing_vcpu, pkvm_vm) {
+		if (existing_vcpu->vcpu_id == vcpu->vcpu_id) {
+			pkvm_spin_unlock(&pkvm_vm->lock);
+			return -EEXIST;
+		}
+	}
+
 	vcpu_handle = kvm->created_vcpus++;
 	vcpu->arch.pkvm.handle = vcpu_handle;
 	pkvm_vcpu->pkvm_vm = pkvm_vm;
