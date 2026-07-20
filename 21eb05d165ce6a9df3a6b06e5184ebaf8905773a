@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3b01aec_d3c121b8",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T18:56:47Z",
+      "side": 1,
+      "message": "\u003e My suggestion applies to the legacy and setup_sl paths as well (IMHO quite obviously)?\n\nYes it does, I understand that. I was merely referring to the fact that while your comment mentioned only pasid related places, there are other places which needs to be changed.\n\n\u003e If we rely on \"overlapping get/put lifetimes\" as you are suggesting (and as you are already doing in aosp/4155532, as I\u0027ve just noticed), we should at least add a comment in the code (in all 3 places: setup_fl, setup_sl and legacy) explaining why we must put the domain at the end of the function and not earlier. Otherwise we will forget about it. And that fact that we need a comment in the code suggests that this is not the best design.\n\nI already had the changes along the rest of the changes and pushed it together. Working on your suggestion and push the changes soon",
+      "parentUuid": "b8cf4d09_3d5627b2",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
