@@ -1314,9 +1314,10 @@ static void smap_gather_stats(struct vm_area_struct *vma,
 {
 	const struct mm_walk_ops *ops = &smaps_walk_ops;
 	unsigned long end = VMA_PAD_START(vma);
+	unsigned long walk_start = start ? start : vma->vm_start;
 
 	/* Invalid start */
-	if (start >= end)
+	if (walk_start >= end)
 		return;
 
 	if (vma->vm_file && shmem_mapping(vma->vm_file->f_mapping)) {
@@ -1349,10 +1350,7 @@ static void smap_gather_stats(struct vm_area_struct *vma,
 	}
 
 	/* mmap_lock is held in m_start */
-	if (!start)
-		walk_page_range(vma->vm_mm, vma->vm_start, end, ops, mss);
-	else
-		walk_page_range(vma->vm_mm, start, end, ops, mss);
+	walk_page_range_vma(vma, walk_start, end, ops, mss);
 }
 
 #define SEQ_PUT_DEC(str, val) \
