@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa2f9b0_febdcc74",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T14:17:34Z",
+      "side": 1,
+      "message": "nit: could be changed to 1 bit and moved to the end of the struct, to save space?",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f86ef13_958fb647",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T14:17:34Z",
+      "side": 1,
+      "message": "We should actually keep the domain\u0027s refcount elevated as long as the PASID entry exists?\n\nI know we get the domain again in `intel_pasid_setup_first_level()` but this is a TOCTOU? It seems we should get it here instead of `intel_pasid_setup_first_level()` (and in `intel_pasid_setup_first_level()` we should just assign the cache tag)?",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e3ea53_aa4b31b0",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T14:17:34Z",
+      "side": 1,
+      "message": "Are we actually allowing FLPT_DEFAULT_DID for first level?",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
