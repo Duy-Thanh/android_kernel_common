@@ -74,6 +74,30 @@
       },
       "revId": "86e603e3b4e8ef20db8f8d758669fbd6b4392c15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa73968c_14305010",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T11:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14d08900_3037fc12",
+      "range": {
+        "startLine": 177,
+        "startChar": 1,
+        "endLine": 177,
+        "endChar": 47
+      },
+      "revId": "86e603e3b4e8ef20db8f8d758669fbd6b4392c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
