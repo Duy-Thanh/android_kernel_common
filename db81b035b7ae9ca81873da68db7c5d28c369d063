@@ -70,6 +70,24 @@
       "parentUuid": "1a1c657b_719bb8ae",
       "revId": "db81b035b7ae9ca81873da68db7c5d28c369d063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f75d8c_7b989f1a",
+        "filename": "arch/x86/include/asm/pkvm_redef.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T11:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db645b3b_60a2ac30",
+      "revId": "db81b035b7ae9ca81873da68db7c5d28c369d063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
