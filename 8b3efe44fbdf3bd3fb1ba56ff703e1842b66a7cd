@@ -88,6 +88,24 @@
       "parentUuid": "703e9c9c_7bd66658",
       "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85bacdc_b8ddd0ae",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 15127,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T11:53:52Z",
+      "side": 1,
+      "message": "Done - PTAL at aosp/4180758",
+      "parentUuid": "5ee82a30_39c7bd2c",
+      "revId": "8b3efe44fbdf3bd3fb1ba56ff703e1842b66a7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
