@@ -15049,6 +15049,40 @@ static int __pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e
 	return 1;
 }
 
+#ifdef __PKVM_HYP__
+/*
+ * We assume that a well-behaving host kernel does not dynamically modify XCR0
+ * or MSR_IA32_XSS after boot. Thus, hvcpu->arch.xcr0 and ia32_xss are expected
+ * to match the trusted kvm_host.xcr0/xss defaults.
+ *
+ * This assumption aligns with generic KVM, where kvm_load_host_xsave_state()
+ * always restores the hardware to the fixed kvm_host.xcr0/xss values upon
+ * returning to the host.
+ *
+ * If a compromised host maliciously changes HW XCR0/MSR_IA32_XSS, pKVM
+ * detects the mismatch and securely forces the hardware back to the safe
+ * kvm_host defaults. In the future, if the host legitimately needs to
+ * toggle these registers dynamically, this logic will need to be updated
+ * to securely swap the host's custom values rather than enforcing
+ * the baseline.
+ */
+static void pkvm_restore_host_xsave_state(struct kvm_vcpu *hvcpu)
+{
+	if (cpu_feature_enabled(X86_FEATURE_XSAVE)) {
+		if (hvcpu->arch.xcr0 != kvm_host.xcr0) {
+			xsetbv(XCR_XFEATURE_ENABLED_MASK, kvm_host.xcr0);
+			hvcpu->arch.xcr0 = kvm_host.xcr0;
+		}
+
+		if (cpu_feature_enabled(X86_FEATURE_XSAVES) &&
+		    hvcpu->arch.ia32_xss != kvm_host.xss) {
+			wrmsrq(MSR_IA32_XSS, kvm_host.xss);
+			hvcpu->arch.ia32_xss = kvm_host.xss;
+		}
+	}
+}
+#endif
+
 int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 			  unsigned long *reqs_to_host)
 {
@@ -15062,6 +15096,8 @@ int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 
 	/* Snapshot host PKRU on every entry to prevent host-tampering bypasses */
 	vcpu->arch.host_pkru = read_pkru();
+
+	pkvm_restore_host_xsave_state(hvcpu);
 
 	kvm_load_guest_fpu(vcpu);
 

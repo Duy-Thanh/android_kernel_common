@@ -11,6 +11,7 @@
 #include "mmu.h"
 #include "pkvm.h"
 #include "trace.h"
+#include "x86.h"
 
 /*
  * Set by the host before deprivilege and used through the initialization
@@ -262,6 +263,7 @@ int pkvm_init(struct pkvm_mem_info infos[], int nr_infos)
 							       NULL;
 	host_mmu_finalize_fn_t host_mmu_finalize_fn = init_ops ? init_ops->host_mmu_finalize :
 								 NULL;
+	struct kvm_vcpu *hvcpu = this_cpu_read(host_vcpu);
 	static bool global_initialized;
 	int ret;
 
@@ -299,7 +301,10 @@ int pkvm_init(struct pkvm_mem_info infos[], int nr_infos)
 	if (ret)
 		return ret;
 
-	pkvm_vcpu_perf_init(this_cpu_read(host_vcpu));
+	pkvm_vcpu_perf_init(hvcpu);
+
+	hvcpu->arch.xcr0 = kvm_host.xcr0;
+	hvcpu->arch.ia32_xss = kvm_host.xss;
 
 	this_cpu_write(cpu_initialized, true);
 	return 0;
