@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d65f43_d14dcec7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-20T23:49:31Z",
+      "side": 1,
+      "message": "This patch set probably need a KABI update patch on top of the series?",
+      "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
