@@ -1003,7 +1003,7 @@ static bool blk_zone_wplug_prepare_bio(struct blk_zone_wplug *zwplug,
 		 * so that we can restore its operation code on completion.
 		 */
 		bio_set_flag(bio, BIO_EMULATES_ZONE_APPEND);
-	} else if (!(disk->queue->limits.features & BLK_FEAT_ZWOR)) {
+	} else {
 		/*
 		 * Check for non-sequential writes early as we know that BIOs
 		 * with a start sector not unaligned to the zone write pointer
