@@ -240,7 +240,9 @@ void tcp_init_congestion_control(struct sock *sk)
 	tcp_sk(sk)->prior_ssthresh = 0;
 	if (icsk->icsk_ca_ops->init)
 		icsk->icsk_ca_ops->init(sk);
-	if (tcp_ca_needs_ecn(sk))
+	if (tcp_ca_needs_accecn(sk))
+		INET_ECN_xmit_ect_1_establish(sk);
+	else if (tcp_ca_needs_ecn(sk))
 		INET_ECN_xmit(sk);
 	else
 		INET_ECN_dontxmit(sk);
