@@ -50,6 +50,60 @@
       "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5331677...\n\nPlease **reinstate the following bug references** in the commit message: 533167747.\nThese IDs were found in the original change with number [4165187](https://android-review.googlesource.com/c/4165187) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fab8550_d501c8f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df1c4263_a71cc99a",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d262bc_95e7c6cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7717349_619292dc",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9827d44c_1c679eef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eb0af40_87a39a71",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
