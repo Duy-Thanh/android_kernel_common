@@ -763,11 +763,44 @@ static void smmu_update_ste_shadow(struct hyp_arm_smmu_v3_nested_device *nested_
 		WARN_ON(smmu_unshare_pages(strtab_host_base(nested_smmu), strtab_size));
 }
 
+static int smmu_flush_all_tlb(struct hyp_arm_smmu_v3_nested_device *nested_smmu)
+{
+	struct hyp_arm_smmu_v3_device *smmu = &nested_smmu->common;
+	int ret;
+	u32 cr0;
+	struct arm_smmu_cmdq_ent cmd = {
+		.opcode = CMDQ_OP_TLBI_NSNH_ALL,
+	};
+
+	kvm_smmu_hw_lock(nested_smmu);
+	/*
+	 * This must be called when the SMMU is getting enabled.
+	 * First enable the cmdq and then invalidate the TLB.
+	 */
+	cr0 = readl_relaxed(smmu->base + ARM_SMMU_CR0);
+	if (!(cr0 & CR0_CMDQEN)) {
+		cr0 |= CR0_CMDQEN;
+		writel_relaxed(cr0, smmu->base + ARM_SMMU_CR0);
+		ret = smmu_wait(false,
+				readl_relaxed(smmu->base + ARM_SMMU_CR0ACK) == cr0);
+		if (ret) {
+			kvm_smmu_hw_unlock(nested_smmu);
+			return ret;
+		}
+	}
+
+	ret = smmu_send_cmd(smmu, &cmd);
+	kvm_smmu_hw_unlock(nested_smmu);
+	return ret;
+}
+
 static void smmu_emulate_enable(struct hyp_arm_smmu_v3_nested_device *nested_smmu)
 {
 	/* Enabling SMMU without CMDQ, means TLB invalidation won't work. */
 	WARN_ON(!is_cmdq_enabled(nested_smmu));
 	smmu_update_ste_shadow(nested_smmu, true);
+	/* Clean the TLBs each time the SMMU is enabled. */
+	WARN_ON(smmu_flush_all_tlb(nested_smmu));
 }
 
 static void smmu_emulate_disable(struct hyp_arm_smmu_v3_nested_device *nested_smmu)
