@@ -164,6 +164,24 @@
       "parentUuid": "09bc2153_2694e8a3",
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2284ab6a_415de074",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-20T10:08:47Z",
+      "side": 1,
+      "message": "\u003eValidate duplicate vcpu_id and increment created_vcpus here at the beginning of vCPU creation, not in attach_pkvm_vcpu_to_vm().\n\nAs I understand, `pkvm_vm-\u003evcpus[vcpu_handle] \u003d pkvm_vcpu;` needs to be done for validating duplicate vcpu_id, right?\n\nIf so, do we still need to decrease `created_vcpus` if vcpu creation is failed in the middle? If we do that, it may cause duplicated `vcpu_handle` for the later created vcpu. If we don\u0027t, the actually allowed vcpu number will be smaller than KVM_MAX_VCPUS, but this seems an acceptable limitation? Or we don\u0027t use `created_vcpus` as `vcpu_handle` but use the index in `pkvm_vm-\u003evcpus[]`, which can allow us freely decrease `created_vcpus`?\n\n\nAnother thing is we also need to clear `pkvm_vm-\u003evcpus[vcpu_handle]` as NULL if vcpu creation is failed. Then the `pkvm_vm-\u003evcpus[]` array may have holes (empty slot) between the non-empty slots, which may also cause trouble for `for_each_pkvm_guest_vcpu()` as it assumes the `pkvm_vm-\u003evcpus[]` doesn\u0027t have holes. A simple way to resolve this may be to check i against the maximum `vcpu_handle`, which is the last index in `pkvm_vm-\u003evcpus[]` containing `pkvm_vcpu` rather than `created_vcpu`?",
+      "parentUuid": "c03e8574_bde04d45",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
