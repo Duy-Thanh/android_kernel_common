@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3ab3e1_83decd8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T18:54:42Z",
+      "side": 1,
+      "message": ":) Although this upstream fix came in later and thus technically it\u0027s this upstream fix that introduced this race (by fixing another race), we know that the root cause is not in the upstream fix but in our naive way of reusing host driver\u0027s code without providing serialization guarantees expected by that code from an upper layer (which are provided by `iommu_group-\u003emutex` in the host driver\u0027s case).\n\nSo I\u0027d rather specify the original commit 3cf82cef8d7f (\"ANDROID: iommu/vt-d: pKVM: Legacy mode context update hypercalls\") (in particular, so that we know to squash it into that commit when rebasing to a newer kernel).",
+      "revId": "3edc8028dd475e48c3b7930ade89b7e0d6047ae8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a63932_fe225f78",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2063,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T18:54:42Z",
+      "side": 1,
+      "message": "Worth adding a comment explaining that we only need to do this with pKVM, and why we need to do this with pKVM? In particular, since we\u0027re gonna squash this patch when rebasing to newer kernels, so the info in the commit message will be lost. (And, well, at the moment the commit message doesn\u0027t even mention that without pKVM this is not needed. :))\n\nBTW maybe also even do this?\n\n```\n#ifndef __PKVM_HYP__\n\tcontext_clear_entry(context);\n\t__iommu_flush_cache(iommu, context, sizeof(*context));\n#else\n\tspin_lock(\u0026iommu-\u003elock);\n\tif (!context_present(context)) {\n\t\tcontext_clear_entry(context);\n\t\t__iommu_flush_cache(iommu, context, sizeof(*context));\n\t}\n\tspin_unlock(\u0026iommu-\u003elock);\n#endif\n```\n\n...In the future we should think how to address this properly, via some counterpart of `iommu_group-\u003emutex` in pKVM. (If we will ever support device assignment, I suppose we will need a notion of IOMMU group in pKVM anyway.)",
+      "revId": "3edc8028dd475e48c3b7930ade89b7e0d6047ae8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
