@@ -34,6 +34,23 @@
       "parentUuid": "f2ce6ff0_dc3df9be",
       "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a10e729_fb710007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-20T12:03:28Z",
+      "side": 1,
+      "message": "This commit is not in Stable yet and contains a bug.",
+      "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
