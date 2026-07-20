@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27a7e42f_acc9f356",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T15:57:10Z",
+      "side": 1,
+      "message": "Makes sense, will do.",
+      "parentUuid": "6fa2f9b0_febdcc74",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f86ef13_958fb647",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58efe2b5_8db0814c",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T15:57:10Z",
+      "side": 1,
+      "message": "Nice catch!\n\nThe refcount we acquire in `intel_pasid_setup_first_level` (`pkvm_get_domain_cache_tag_assign`) stays until the entry is torn down(`pkvm_put_domain_cache_tag_unassign`). So probably keeping the refcount through this function would solve this issue you mentioned? Having the domain refcount elevated through the life time of PASID entry will be taken care of by pkvm_{get,put}_domain_cache_tag_{un}assign? Putting the domain refcount on this function exit would avoid the TOCTOU race. WDYT?",
+      "parentUuid": "5f86ef13_958fb647",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-20T14:17:34Z",
       "side": 1,
       "message": "Are we actually allowing FLPT_DEFAULT_DID for first level?",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd56d40_7470ee21",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T15:57:10Z",
+      "side": 1,
+      "message": "Yeah true, I remove this in a later cl (aosp/4155528). Not remembering why I did it this way. Will move that change over to here.",
+      "parentUuid": "63e3ea53_aa4b31b0",
       "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
