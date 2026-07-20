@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb718303_6d3cdd5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4027726
+      },
+      "writtenOn": "2026-07-20T13:07:51Z",
+      "side": 1,
+      "message": "Added cherry-picked from line.",
+      "parentUuid": "6d6028f5_f5cefeab",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2336512_43723c85",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4b80ec_e1646e30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4027726
+      },
+      "writtenOn": "2026-07-20T13:07:51Z",
+      "side": 1,
+      "message": "Acknowledged.",
+      "parentUuid": "c2336512_43723c85",
+      "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05c6ee34_f88f9efc",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-07-17T15:51:20Z",
       "side": 1,
       "message": "Needs an annotation describing what changes were needed as part of the backport. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35af4abf_bf22b2ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4027726
+      },
+      "writtenOn": "2026-07-20T13:07:51Z",
+      "side": 1,
+      "message": "Thanks for the documentation.\nThis patch is a cherry-pick from Linux mainline with no changes at all, so used UPSTREAM instead of BACKPORT.",
+      "parentUuid": "05c6ee34_f88f9efc",
       "revId": "10ecca7022b57b6bd298e77fc43f200e1ee4367f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
