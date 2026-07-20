@@ -34,6 +34,24 @@
       "parentUuid": "51b37059_df660c4d",
       "revId": "fb39c9dc49c5cd6663639f6540c80e2e958382d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32990365_eb1d29d3",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15065,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T13:06:51Z",
+      "side": 1,
+      "message": "\u003e then rdpkru() may cause #GP if disabled via nopkru\n\nSorry its #UD and not #GP as per intel documentation when CR4.PKE\u003d0",
+      "parentUuid": "12b011ff_d3100ad0",
+      "revId": "fb39c9dc49c5cd6663639f6540c80e2e958382d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
