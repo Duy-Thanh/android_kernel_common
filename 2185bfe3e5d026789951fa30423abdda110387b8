@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7717349_619292dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:50:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5331677...\n\nPlease **reinstate the following bug references** in the commit message: 533167747.\nThese IDs were found in the original change with number [4165187](https://android-review.googlesource.com/c/4165187) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb0af40_87a39a71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:50:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: As of 2026-07-01, this release branch is only eligible for respin requests for c...\n\nAs of 2026-07-01, this release branch is only eligible for respin requests for critical bug fixes. It will be deprecated from 2027-04-01.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df1c4263_a71cc99a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-20T15:50:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5331677...\n\nPlease **reinstate the following bug references** in the commit message: 533167747.\nThese IDs were found in the original change with number [4165187](https://android-review.googlesource.com/c/4165187) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "2185bfe3e5d026789951fa30423abdda110387b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
