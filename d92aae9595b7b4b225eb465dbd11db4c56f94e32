@@ -52,6 +52,24 @@
       "parentUuid": "8d0f0065_0425f2e3",
       "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7144c7f_2c444c00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-20T14:32:18Z",
+      "side": 1,
+      "message": "Yeah - that\u0027s how I understand it too - when instruction before wrmsrq completes, RIP is switched to wrmsrq already but the wrmsrq instruction itself hasn\u0027t executed yet. If a NMI arrives at that moment, pt_regs RIP points to wrmsrq which is why its extable entry gets found and applied, skipping the wrmsr before it ever runs.\n\nI\u0027ve updated the commit log a bit differently. Please let me know if it is better now.",
+      "parentUuid": "8d0f0065_0425f2e3",
+      "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
