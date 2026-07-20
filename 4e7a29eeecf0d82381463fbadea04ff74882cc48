@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d03f1b5f_e36da5ae",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4033,
+      "author": {
+        "id": 1876836
+      },
+      "writtenOn": "2026-07-20T13:13:57Z",
+      "side": 1,
+      "message": "It is trying to do reverse thing when proxy_enqueue_on_owner called block_task. The nr_uninterruptible and nr_iowait is updating together.\n\nSimilar discussion I had with Tengfei offline, that do only do atomic dec for nr_iowait. But the conclusion is still trying to make it in pair here.\nI need to check the nr_uninterruptible side effects. We can follow up on the other change: https://r.android.com/4179535",
+      "parentUuid": "562d167c_804a4cce",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cffcb388_d1d116b3",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2026-07-16T22:23:28Z",
       "side": 1,
       "message": "So this looks reasonable on its face, but nr_iowait and nr_uninterruptible track tasks that are not on the runqueue. With proxy_migrate() we are migrating tasks from one rq to another, so they should not have any bearing on the nr_iowait or nr_uninterruptible values.  So I don\u0027t believe this is necessary.",
+      "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b221744c_b790014e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7370,
+      "author": {
+        "id": 1876836
+      },
+      "writtenOn": "2026-07-20T13:13:57Z",
+      "side": 1,
+      "message": "what about when the donor task have sched_delayed?\nWhile the task still in runqueue, while also have _block_task called.",
+      "parentUuid": "cffcb388_d1d116b3",
       "revId": "4e7a29eeecf0d82381463fbadea04ff74882cc48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
