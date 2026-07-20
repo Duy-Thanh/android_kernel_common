@@ -193,7 +193,7 @@ static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
 			},
 		};
 
-		kvm_smmu_lock(&nested_smmu->common);
+		kvm_smmu_hw_lock(nested_smmu);
 		/*
 		 * Don't bother if SMMU is disabled, this would be useful for the case
 		 * when RPM is supported to avoid thouching the SMMU MMIO when disabled.
@@ -201,11 +201,11 @@ static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
 		 * enabled. As otherwise the host can prevent the hypervisor from doing
 		 * TLB invalidations.
 		 */
-		if (is_smmu_enabled(nested_smmu)) {
+		if (nested_smmu->active) {
 			WARN_ON(smmu_tlb_inv_range_smmu(&nested_smmu->common, &cmd, iova, size, granule));
 			WARN_ON(smmu_send_cmd(&nested_smmu->common, &cmd_s1));
 		}
-		kvm_smmu_unlock(&nested_smmu->common);
+		kvm_smmu_hw_unlock(nested_smmu);
 	}
 }
 
@@ -466,11 +466,14 @@ static int smmu_reshadow_ste(struct hyp_arm_smmu_v3_nested_device *nested_smmu, 
 	 * There is no need for last CFGI as it's done next.
 	 */
 	smmu_attach_stage_2(&target);
+
+	kvm_smmu_hw_lock(nested_smmu);
 	for (i = 1; i < STRTAB_STE_DWORDS; i++)
 		WRITE_ONCE(hyp_ste_ptr->data[i], target.data[i]);
 
 	WARN_ON(smmu_send_cmd(smmu, &cfgi_cmd));
 	WRITE_ONCE(hyp_ste_ptr->data[0], target.data[0]);
+	kvm_smmu_hw_unlock(nested_smmu);
 	return 0;
 }
 
@@ -543,6 +546,7 @@ static int smmu_init_device(struct hyp_arm_smmu_v3_nested_device *nested_smmu)
 	if (ret)
 		goto out_ret;
 	kvm_smmu_lock_init(smmu);
+	kvm_smmu_hw_lock_init(nested_smmu);
 
 	ret = smmu_init_cmdq(smmu);
 	if (ret)
@@ -628,8 +632,9 @@ out_reclaim_smmu:
 	return ret;
 }
 
-static bool smmu_filter_command(struct hyp_arm_smmu_v3_nested_device *smmu, u64 *command)
+static bool smmu_filter_command(struct hyp_arm_smmu_v3_nested_device *nested_smmu, u64 *command)
 {
+	struct hyp_arm_smmu_v3_device *smmu = &nested_smmu->common;
 	u64 type = FIELD_GET(CMDQ_0_OP, command[0]);
 
 	switch (type) {
@@ -637,8 +642,19 @@ static bool smmu_filter_command(struct hyp_arm_smmu_v3_nested_device *smmu, u64 
 	{
 		u32 sid = FIELD_GET(CMDQ_CFGI_0_SID, command[0]);
 		u32 leaf = FIELD_GET(CMDQ_CFGI_1_LEAF, command[1]);
+		bool ret;
 
-		WARN_ON(smmu_reshadow_ste(smmu, sid, leaf));
+		/*
+		 * If STE update is required flush the CMDQ and drop the lock as that
+		 * might require to update the host page table and aquire its lock.
+		 */
+		writel(smmu->cmdq.llq.prod, smmu->cmdq.prod_reg);
+		kvm_smmu_hw_unlock(nested_smmu);
+		ret = smmu_reshadow_ste(nested_smmu, sid, leaf);
+		kvm_smmu_hw_lock(nested_smmu);
+		if (WARN_ON(ret))
+			return true;
+
 		break;
 	}
 	case CMDQ_OP_CFGI_ALL:
@@ -698,6 +714,7 @@ static void smmu_emulate_cmdq_insert(struct hyp_arm_smmu_v3_nested_device *neste
 		return;
 
 	space = (1 << (nested_smmu->cmdq_host.llq.max_n_shift)) - queue_space(&nested_smmu->cmdq_host.llq);
+	kvm_smmu_hw_lock(nested_smmu);
 	/* Wait for the command queue to have some space. */
 	WARN_ON(smmu_wait(use_wfe, smmu_cmdq_has_space(&smmu->cmdq, space)));
 
@@ -716,6 +733,7 @@ static void smmu_emulate_cmdq_insert(struct hyp_arm_smmu_v3_nested_device *neste
 	writel(smmu->cmdq.llq.prod, smmu->cmdq.prod_reg);
 
 	WARN_ON(smmu_wait(use_wfe, smmu_cmdq_empty(&smmu->cmdq)));
+	kvm_smmu_hw_unlock(nested_smmu);
 }
 
 static void smmu_update_ste_shadow(struct hyp_arm_smmu_v3_nested_device *nested_smmu, bool enabled)
@@ -986,11 +1004,26 @@ static bool smmu_dabt_device(struct hyp_arm_smmu_v3_nested_device *nested_smmu,
 	if (WARN_ON(!mask))
 		goto out_ret;
 
+	kvm_smmu_hw_lock(nested_smmu);
 	if (is_write) {
 		if (len == sizeof(u64))
 			writeq_relaxed(val & mask, smmu->base + off);
 		else
 			writel_relaxed(val & mask, smmu->base + off);
+
+		/*
+		 * Make sure writes to CR0 are immediately observed, that is important
+		 * when synchronizing with TLB invalidation as reading CR0 is enough
+		 * to deduce the SMMU state, and we have to enforce the ack with the
+		 * hw_lock aquired.
+		 */
+		if (off == ARM_SMMU_CR0) {
+			WARN_ON(smmu_wait(false,
+			        readl_relaxed(smmu->base + ARM_SMMU_CR0ACK) == (val & mask)));
+			nested_smmu->active = !!(val & CR0_CMDQEN);
+		}
+
+		kvm_smmu_hw_unlock(nested_smmu);
 		return true;
 	} else {
 		if (len == sizeof(u64))
@@ -998,6 +1031,8 @@ static bool smmu_dabt_device(struct hyp_arm_smmu_v3_nested_device *nested_smmu,
 		else
 			val = readl_relaxed(smmu->base + off) & mask;
 	}
+
+	kvm_smmu_hw_unlock(nested_smmu);
 
 out_update_regs:
 	/*
