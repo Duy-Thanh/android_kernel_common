@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adcbc16b_c27cad9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-20T06:23:36Z",
+      "side": 1,
+      "message": "I looked at both 6.18 and upstream code; It looks like this function was completely removed by the commit:\n\n8b15c3764c05 (\u0027KVM: Don\u0027t grab reference on VM_MIXEDMAP pfns that have a \"struct page\"\u0027)\n\nBased on my understanding, on 6.18+ KVM no longer grabs a reference (get_page) or pins remapped pages during stage-2 fault. The fault map path on 6.18+\n \n1. __pkvm_mem_abort_dmabuf handles the Stage-2 fault.\n2. It calls __kvm_faultin_pfn() → kvm_follow_pfn() → hva_to_pfn_remapped().\n3. hva_to_pfn_remapped() calls kvm_resolve_pfn(), which:\n  a. Maps the PFN but returns refcounted_page as NULL.\n  b. Does not call get_page_unless_zero() or do any refcount any pages.\n4. KVM maps the PFN using kvm_pgtable_stage2_map().\n5. KVM calls kvm_release_faultin_page(..., page, ...). Since page is NULL, it does nothing (no pin was made).\n\nIf the Host process closes the dma-buf or the host kernel reclaims the memory backing the VM, the Host MM subsystem calls KVM\u0027s registered notifier: kvm_mmu_notifier_invalidate_range_start() \n\nIn 6.12 (after we backported dma-buf mappings to back pVMs: https://r.android.com/4136376), KVM resolves remapped page faults via hva_to_pfn_remapped() and explicitly pins the resolved page using kvm_try_get_pfn() -\u003e get_page_unless_zero().\n  \n  \n\u003e However at some point there were kvm_pfn_to_refcounted_page(). Perhaps that\u0027s something to backport?\n\nkvm_pfn_to_refcounted_page() is already present in 6.12 kernel and called inside kvm_try_get_pfn(). It returns the exact struct page for the PFN. If the PFN points to a tail page, it returns that tail page, which has a refcount of 0.",
+      "parentUuid": "f6801c53_a9859464",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
@@ -61,6 +85,24 @@
       "writtenOn": "2026-07-17T07:12:47Z",
       "side": 1,
       "message": "Would this work with a folio? I believe this is the modern way of doing that.",
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147955f8_c70891dc",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2896,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-20T06:23:36Z",
+      "side": 1,
+      "message": "Ack. Changed to folio.",
+      "parentUuid": "72b3e53f_93aaef14",
       "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
