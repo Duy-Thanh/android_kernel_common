@@ -4259,6 +4259,8 @@ static void its_vpe_4_1_deschedule(struct its_vpe *vpe,
 				    GICR_VPENDBASER_4_1_DB);
 	vpe->pending_last = !!(val & GICR_VPENDBASER_PendingLast);
 	raw_spin_unlock_irqrestore(&vpe->vpe_lock, flags);
+
+	its_send_invdb(find_4_1_its(), vpe);
 }
 
 static void its_vpe_4_1_invall(struct its_vpe *vpe)
