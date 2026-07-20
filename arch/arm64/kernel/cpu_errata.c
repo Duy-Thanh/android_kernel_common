@@ -238,6 +238,13 @@ static const struct arm64_cpu_capabilities arm64_repeat_tlbi_list[] = {
 			{}
 		})),
 	},
+<<<<<<< HEAD   (110340dd7b17615a71258846d4b5fcfbaa7fc470 Merge 521008bee0c5 ("arm64: cputype: Add C1-Premium definiti)
+||||||| BASE   (521008bee0c5c6a1d7db31bc77f2b488b859958e arm64: cputype: Add C1-Premium definitions)
+=======
+#endif
+	{}
+};
+>>>>>>> BRANCH (6a26fd2e6b6fccb15f1aeb2056a84f46cba08e52 arm64: errata: Mitigate TLBI errata on Microsoft Azure Cobal)
 #endif
 	{}
 };
