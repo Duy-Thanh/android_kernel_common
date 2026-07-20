@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92c4e952_87d398b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T15:40:30Z",
+      "side": 1,
+      "message": "d5ee5957ce06 is only about TE, while this patch addresses QI as well?",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2238bf32_87ab9f17",
         "filename": "drivers/iommu/intel/irq_remapping.c",
         "patchSetId": 9
