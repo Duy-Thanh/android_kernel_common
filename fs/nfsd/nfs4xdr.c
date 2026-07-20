@@ -1773,8 +1773,23 @@ nfsd4_decode_layoutreturn(struct nfsd4_compoundargs *argp,
 static __be32 nfsd4_decode_secinfo_no_name(struct nfsd4_compoundargs *argp,
 					   struct nfsd4_secinfo_no_name *sin)
 {
+<<<<<<< HEAD   (fb8f83c552392d7fefddbe0ca7135cb48cd31885 Merge d842d74ec960 ("ring-buffer: Remove ring_buffer_read_pr)
+||||||| BASE   (d842d74ec960fe9b829102b81503bbf4071de855 ring-buffer: Remove ring_buffer_read_prepare_sync())
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+=======
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+
+	sin->sin_exp = NULL;
+>>>>>>> BRANCH (c86c4726e7f044ab73b493c6f00527aafef640cd Linux 5.15.211)
 	if (xdr_stream_decode_u32(argp->xdr, &sin->sin_style) < 0)
 		return nfserr_bad_xdr;
+<<<<<<< HEAD   (fb8f83c552392d7fefddbe0ca7135cb48cd31885 Merge d842d74ec960 ("ring-buffer: Remove ring_buffer_read_pr)
+||||||| BASE   (d842d74ec960fe9b829102b81503bbf4071de855 ring-buffer: Remove ring_buffer_read_prepare_sync())
+
+	sin->sin_exp = NULL;
+=======
+
+>>>>>>> BRANCH (c86c4726e7f044ab73b493c6f00527aafef640cd Linux 5.15.211)
 	return nfs_ok;
 }
 
