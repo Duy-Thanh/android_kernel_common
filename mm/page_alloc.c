@@ -1576,7 +1576,12 @@ static __always_inline bool free_pages_prepare(struct page *page,
 
 	page_cpupid_reset_last(page);
 	page->flags &= ~PAGE_FLAGS_CHECK_AT_PREP;
+<<<<<<< HEAD   (cfdd341cc7ccbbe6d0895e06761e00c3ecfea532 ANDROID: GKI: add ww_mutex_lock to virtual_device target sym)
 	trace_android_vh_mm_free_page(page);
+||||||| BASE   (228da13e907e2b46b7222cfc35290fbfad920bef Linux 6.1.175)
+=======
+	page->private = 0;
+>>>>>>> BRANCH (e7790ab165713b79b1617ce659742ceb3a859d05 mm/page_alloc: clear page->private in free_pages_prepare())
 	reset_page_owner(page, order);
 	free_page_pinner(page, order);
 	page_table_check_free(page, order);
