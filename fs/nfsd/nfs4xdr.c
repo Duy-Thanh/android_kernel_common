@@ -1773,8 +1773,23 @@ nfsd4_decode_layoutreturn(struct nfsd4_compoundargs *argp,
 static __be32 nfsd4_decode_secinfo_no_name(struct nfsd4_compoundargs *argp,
 					   struct nfsd4_secinfo_no_name *sin)
 {
+<<<<<<< HEAD   (bee4c245d94ad2a52b4a9eb3cc7206f1c11203e3 Merge 5.15.210 into android13-5.15-lts)
+||||||| BASE   (eceeec79dbc646d6dace49ed1ba2f656683d5537 Linux 5.15.210)
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+=======
+	struct nfsd4_secinfo_no_name *sin = &u->secinfo_no_name;
+
+	sin->sin_exp = NULL;
+>>>>>>> BRANCH (c86c4726e7f044ab73b493c6f00527aafef640cd Linux 5.15.211)
 	if (xdr_stream_decode_u32(argp->xdr, &sin->sin_style) < 0)
 		return nfserr_bad_xdr;
+<<<<<<< HEAD   (bee4c245d94ad2a52b4a9eb3cc7206f1c11203e3 Merge 5.15.210 into android13-5.15-lts)
+||||||| BASE   (eceeec79dbc646d6dace49ed1ba2f656683d5537 Linux 5.15.210)
+
+	sin->sin_exp = NULL;
+=======
+
+>>>>>>> BRANCH (c86c4726e7f044ab73b493c6f00527aafef640cd Linux 5.15.211)
 	return nfs_ok;
 }
 
