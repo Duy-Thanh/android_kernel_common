@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f40ba9c_50d6285c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-20T00:56:36Z",
+      "side": 1,
+      "message": "Just wondering if we have any plan to set `guest_state_protected` in the pKVM, and the potential usage in the pKVM? Now pKVM uses `is_guest_vcpu_accessible()` to check if a hypercall is allowed or not, and some hypercalls will not be allowed once the vcpu starts running by checking `kvm_vcpu_has_run(vcpu)`. So seems this behavior in the pKVM is similar to `guest_state_protected`, which is set after return from the first vcpu_run hypercall.",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
