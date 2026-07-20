@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0db7d8_395496bf",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T18:31:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27a7e42f_acc9f356",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f86ef13_958fb647",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Yeah true, I remove this in a later cl (aosp/4155528). Not remembering why I did it this way. Will move that change over to here.",
       "parentUuid": "63e3ea53_aa4b31b0",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13179c1b_ac60dcc9",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T18:31:16Z",
+      "side": 1,
+      "message": "Moved the check to a separate cl (aosp/4184415) - fixes b/517578873",
+      "parentUuid": "6cd56d40_7470ee21",
       "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
