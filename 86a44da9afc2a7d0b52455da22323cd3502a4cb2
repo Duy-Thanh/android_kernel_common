@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2dbc34a_e4becf46",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5052,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T12:00:12Z",
+      "side": 0,
+      "message": "So I also realized that we can move this `pkvm_vm-\u003elock` locking from here to `__vcpu_create()` thus simplify the code both here and in `__vcpu_create()`, as well as make it better aligned with the host KVM code (which also locks `kvm-\u003elock` before calling `.vcpu_precreate()`, not inside it). PTAL.",
+      "revId": "86a44da9afc2a7d0b52455da22323cd3502a4cb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
