@@ -16,6 +16,23 @@
       "message": "can we get a CR+2 from one of the drivers/platform/chrome maintainers (or even better, have them accept it uptream and resubmit here as FROMGIT)?",
       "revId": "a91dead5c5e8587f1d691b48f619a93326e81fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c2bf3a_20611b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-20T18:42:00Z",
+      "side": 1,
+      "message": "Is there some extra context for the urgency of taking this as FROMLIST and not waiting for it to be queued and added as FROMGIT?",
+      "revId": "a91dead5c5e8587f1d691b48f619a93326e81fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
