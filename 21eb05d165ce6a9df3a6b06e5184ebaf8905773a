@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8cf4d09_3d5627b2",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T18:45:41Z",
+      "side": 1,
+      "message": "My suggestion applies to the legacy and setup_sl paths as well (IMHO quite obviously)?\n\n\u003e to minimize code churn.\n\nIt is _our_ code, isn\u0027t it? It\u0027s not like it\u0027s not us who will have to maintain it long-term.\n\nIf we rely on \"overlapping get/put lifetimes\" as you are suggesting (and as you are already doing in aosp/4155532, as I\u0027ve just noticed), we should at least add a comment in the code (in all 3 places: setup_fl, setup_sl and legacy) explaining why we must put the domain at the end of the function and not earlier. Otherwise we will forget about it. And that fact that we need a comment in the code suggests that this is not the best design.\n\nIMHO this is obviously an ugly hack.",
+      "parentUuid": "fe3ae80d_45ebafc6",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
