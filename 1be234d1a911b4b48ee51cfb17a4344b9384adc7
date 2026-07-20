@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c57e3a6_1c873c63",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T11:51:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba340ffd_1c4c560c",
+      "revId": "1be234d1a911b4b48ee51cfb17a4344b9384adc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d36d6825_5eff286a",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "Indeed, thx.",
       "parentUuid": "d36d6825_5eff286a",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 14
+      },
+      "revId": "1be234d1a911b4b48ee51cfb17a4344b9384adc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48725e75_b113ea1c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T11:51:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5afa4cd_9d9f66d6",
       "range": {
         "startLine": 100,
         "startChar": 2,
