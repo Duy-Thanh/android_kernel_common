@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe3ae80d_45ebafc6",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T18:21:33Z",
+      "side": 1,
+      "message": "yeah we could definitely do that. One of my goals was to minimize code churn. `pkvm_{get,put}domain_cache_tag{un}assign` is used in couple other places(in legacy mode) as well and thought of not touching those. This was straightforward and confined to setup_fl. Will have a look and see how best to do it",
+      "parentUuid": "d89c6557_53255e94",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
