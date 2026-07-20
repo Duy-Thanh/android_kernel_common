@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2238bf32_87ab9f17",
+        "filename": "drivers/iommu/intel/irq_remapping.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T15:38:02Z",
+      "side": 1,
+      "message": "Why only here, not in `disable_irq_remapping()`?\n\nOk, I see why: `disable_irq_remapping()` doesn\u0027t disable QI.\n\nBut actually, from the code it looks like `disable_irq_remapping()` and `reenable_irq_remapping()` are only called in S3 suspend/resume which is not supported by pKVM? So makes sense to add WARN_ON in both, like in `iommu_suspend()`/`iommu_resume()`?",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9aea524_fabfbea8",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T15:38:02Z",
+      "side": 1,
+      "message": "Do we still need to synchronize `iommu-\u003evgsts` with `gcmd` here? It seems they should always be in sync now?\n\nIt seems we don\u0027t even need to read `gcmd` from HW here anymore? Or if we still want to do that for extra safety, we might add a BUG_ON if they don\u0027t match? (BTW similarly to the WARN_ON in `handle_gcmd_srtp()`.)",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
