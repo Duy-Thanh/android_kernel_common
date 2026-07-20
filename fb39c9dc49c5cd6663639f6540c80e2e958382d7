@@ -16,6 +16,24 @@
       "message": "nit: maybe can be simplified by using pkru wrapper `read_pkru()` in `asm/pkru.h`: `vcpu-\u003earch.host_pkru \u003d read_pkru();`, which can check the X86_FEATURE_PKU.",
       "revId": "fb39c9dc49c5cd6663639f6540c80e2e958382d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b011ff_d3100ad0",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15065,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T11:30:41Z",
+      "side": 1,
+      "message": "I agree. read_pkru() currently checks for `X86_FEATURE_OSPKE` and I think thats the right check. Even if cpu has the feature, host can disable it with `nopku` commad line I guess and then rdpkru() may cause #GP if disabled via nopkru. We could snapshot  it directly with the read_pkru() wrapper which correctly checks for `X86_FEATURE_OSPKE`",
+      "parentUuid": "51b37059_df660c4d",
+      "revId": "fb39c9dc49c5cd6663639f6540c80e2e958382d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
