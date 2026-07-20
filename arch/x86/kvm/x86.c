@@ -1290,6 +1290,26 @@ void kvm_load_guest_xsave_state(struct kvm_vcpu *vcpu)
 }
 EXPORT_SYMBOL_FOR_KVM_INTERNAL(kvm_load_guest_xsave_state);
 
+#ifdef __PKVM_HYP__
+static void pkvm_restore_host_xsave_state(void)
+{
+	if (cpu_feature_enabled(X86_FEATURE_XSAVE)) {
+		struct kvm_vcpu *hvcpu = this_cpu_read(host_vcpu);
+
+		if (hvcpu->arch.xcr0 != kvm_host.xcr0) {
+			xsetbv(XCR_XFEATURE_ENABLED_MASK, kvm_host.xcr0);
+			hvcpu->arch.xcr0 = kvm_host.xcr0;
+		}
+
+		if (cpu_feature_enabled(X86_FEATURE_XSAVES) &&
+		    hvcpu->arch.ia32_xss != kvm_host.xss) {
+			wrmsrq(MSR_IA32_XSS, kvm_host.xss);
+			hvcpu->arch.ia32_xss = kvm_host.xss;
+		}
+	}
+}
+#endif
+
 void kvm_load_host_xsave_state(struct kvm_vcpu *vcpu)
 {
 	if (vcpu->arch.guest_state_protected)
@@ -15062,6 +15082,8 @@ int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 
 	/* Snapshot host PKRU on every entry to prevent host-tampering bypasses */
 	vcpu->arch.host_pkru = read_pkru();
+
+	pkvm_restore_host_xsave_state();
 
 	kvm_load_guest_fpu(vcpu);
 
