@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 #include <linux/kvm_types.h>
 #include <linux/memblock.h>
+#include <asm/fpu/xcr.h>
 #include <kvm_emulate.h>
 #include <vmx/x86_ops.h>
 #include "debug.h"
@@ -184,6 +185,13 @@ static int handle_write_msr(struct kvm_vcpu *vcpu)
 		}
 		break;
 	}
+	case MSR_IA32_XSS:
+		if (wrmsr_safe(msr, low, high)) {
+			ret = X86EMUL_UNHANDLEABLE;
+			break;
+		}
+		vcpu->arch.ia32_xss = val;
+		break;
 	case MSR_IA32_APICBASE:
 	case APIC_BASE_MSR ... APIC_BASE_MSR + 0xff:
 		if (pkvm_lapic_msr_write(msr, val))
@@ -223,6 +231,9 @@ static int handle_xsetbv(struct kvm_vcpu *vcpu)
 	asm goto("1: xsetbv\n\t"
 		 _ASM_EXTABLE(1b, %l[fault])
 		 : : "a" (eax), "d" (edx), "c" (ecx) : : fault);
+
+	if (ecx == XCR_XFEATURE_ENABLED_MASK)
+		vcpu->arch.xcr0 = (u64)eax | ((u64)edx << 32);
 
 	return X86EMUL_CONTINUE;
 

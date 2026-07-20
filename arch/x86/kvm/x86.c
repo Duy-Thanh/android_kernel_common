@@ -15049,6 +15049,24 @@ static int __pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e
 	return 1;
 }
 
+#ifdef __PKVM_HYP__
+static void pkvm_restore_host_xsave_state(struct kvm_vcpu *hvcpu)
+{
+	if (cpu_feature_enabled(X86_FEATURE_XSAVE)) {
+		if (hvcpu->arch.xcr0 != kvm_host.xcr0) {
+			xsetbv(XCR_XFEATURE_ENABLED_MASK, kvm_host.xcr0);
+			hvcpu->arch.xcr0 = kvm_host.xcr0;
+		}
+
+		if (cpu_feature_enabled(X86_FEATURE_XSAVES) &&
+		    hvcpu->arch.ia32_xss != kvm_host.xss) {
+			wrmsrq(MSR_IA32_XSS, kvm_host.xss);
+			hvcpu->arch.ia32_xss = kvm_host.xss;
+		}
+	}
+}
+#endif
+
 int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 			  unsigned long *reqs_to_host)
 {
@@ -15062,6 +15080,8 @@ int pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 
 	/* Snapshot host PKRU on every entry to prevent host-tampering bypasses */
 	vcpu->arch.host_pkru = read_pkru();
+
+	pkvm_restore_host_xsave_state(hvcpu);
 
 	kvm_load_guest_fpu(vcpu);
 
