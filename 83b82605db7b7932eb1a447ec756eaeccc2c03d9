@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa722808_e4db44f7",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9937,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-20T14:30:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "52a08962_0be2b1ab",
+      "revId": "83b82605db7b7932eb1a447ec756eaeccc2c03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a21c8fa_776f7192",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-17T05:05:50Z",
       "side": 1,
       "message": "Any reason we want to set RAX in shared_vcpu as 0? Just wondering if we can leave this RAX untouched.",
+      "revId": "83b82605db7b7932eb1a447ec756eaeccc2c03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4fd4a9_981377eb",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 9941,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-20T14:30:20Z",
+      "side": 1,
+      "message": "I will drop it, as it is unnecessary write: since any stale RAX data was already exposed to the host on previous exit handling, there is no risk of leaking any new guest data.",
+      "parentUuid": "1a21c8fa_776f7192",
       "revId": "83b82605db7b7932eb1a447ec756eaeccc2c03d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
