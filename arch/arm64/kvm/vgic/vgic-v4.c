@@ -381,6 +381,8 @@ int vgic_v4_load(struct kvm_vcpu *vcpu)
 	 */
 	if (!kvm_vgic_global_state.has_gicv4_1)
 		err = irq_set_irqchip_state(vpe->irq, IRQCHIP_STATE_PENDING, false);
+	else
+		vpe->pending_last = false;
 
 	return err;
 }

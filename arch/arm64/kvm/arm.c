@@ -523,12 +523,18 @@ void kvm_arch_vcpu_destroy(struct kvm_vcpu *vcpu)
 
 void kvm_arch_vcpu_blocking(struct kvm_vcpu *vcpu)
 {
-
+	preempt_disable();
+	vcpu_set_flag(vcpu, IN_WFI);
+	kvm_vgic_put(vcpu);
+	preempt_enable();
 }
 
 void kvm_arch_vcpu_unblocking(struct kvm_vcpu *vcpu)
 {
-
+	preempt_disable();
+	vcpu_clear_flag(vcpu, IN_WFI);
+	kvm_vgic_load(vcpu);
+	preempt_enable();
 }
 
 static void vcpu_set_pauth_traps(struct kvm_vcpu *vcpu)
@@ -975,18 +981,8 @@ void kvm_vcpu_wfi(struct kvm_vcpu *vcpu)
 	 * For the same reason, we want to tell GICv4 that we need
 	 * doorbells to be signalled, should an interrupt become pending.
 	 */
-	preempt_disable();
-	vcpu_set_flag(vcpu, IN_WFI);
-	kvm_vgic_put(vcpu);
-	preempt_enable();
-
 	kvm_vcpu_halt(vcpu);
 	vcpu_clear_flag(vcpu, IN_WFIT);
-
-	preempt_disable();
-	vcpu_clear_flag(vcpu, IN_WFI);
-	kvm_vgic_load(vcpu);
-	preempt_enable();
 }
 
 static int kvm_vcpu_suspend(struct kvm_vcpu *vcpu)
