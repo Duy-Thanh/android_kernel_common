@@ -1287,7 +1287,7 @@ static void smap_gather_stats(struct vm_area_struct *vma,
 
 	/* mmap_lock is held in m_start */
 	if (!start)
-		walk_page_range(vma->vm_mm, vma->vm_start, end, ops, mss);
+		walk_page_range_vma(vma, vma->vm_start, end, ops, mss);
 	else
 		walk_page_range(vma->vm_mm, start, end, ops, mss);
 }
