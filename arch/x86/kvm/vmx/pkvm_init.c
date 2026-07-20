@@ -69,6 +69,7 @@ static unsigned int intercept_w_msrs[] = {
 	MSR_CORE_PERF_GLOBAL_CTRL,
 	MSR_IA32_APICBASE,
 	X2APIC_MSR(APIC_ID),
+	MSR_IA32_XSS,
 };
 
 u64 pkvm_total_reserve_pages(void)
@@ -419,6 +420,8 @@ static __init int pkvm_setup_host_vcpu(struct kvm *kvm, int cpu)
 	vmx->vcpu.cpu = cpu;
 	vmx->vcpu.vcpu_id = kvm->created_vcpus;
 	vmx->vcpu.kvm = kvm;
+	vmx->vcpu.arch.xcr0 = kvm_host.xcr0;
+	vmx->vcpu.arch.ia32_xss = kvm_host.xss;
 	kvm->created_vcpus++;
 
 	per_cpu(host_vcpu, cpu) = &vmx->vcpu;
