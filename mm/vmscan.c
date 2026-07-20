@@ -1269,6 +1269,12 @@ enum page_references {
 	PAGEREF_ACTIVATE,
 };
 
+static inline bool is_exec_file_page(struct page *page,
+		vm_flags_t vm_flags)
+{
+	return (vm_flags & VM_EXEC) && page_is_file_lru(page);
+}
+
 static enum page_references page_check_references(struct page *page,
 						  struct scan_control *sc)
 {
@@ -1326,7 +1332,7 @@ static enum page_references page_check_references(struct page *page,
 		/*
 		 * Activate file-backed executable pages after first usage.
 		 */
-		if ((vm_flags & VM_EXEC) && !PageSwapBacked(page))
+		if (is_exec_file_page(page, vm_flags)) {
 			return PAGEREF_ACTIVATE;
 
 		return PAGEREF_KEEP;
@@ -2473,7 +2479,7 @@ static void shrink_active_list(unsigned long nr_to_scan,
 			 * IO, plus JVM can create lots of anon VM_EXEC pages,
 			 * so we ignore them here.
 			 */
-			if ((vm_flags & VM_EXEC) && page_is_file_lru(page)) {
+			if (is_exec_file_page(page, vm_flags)) {
 				trace_android_vh_page_trylock_clear(page);
 				nr_rotated += thp_nr_pages(page);
 				list_add(&page->lru, &l_active);
