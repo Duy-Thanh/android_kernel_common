@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abae8a25_41975e76",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-20T14:55:36Z",
+      "side": 1,
+      "message": "\u003e For the hw xcr0/xss restoring, we don\u0027t need to restore with guest xcr0/xss before switching FPU, we just need to restore them with the trusted value. The kvm_host.xcr0 and kvm_host.xss are saved during deprivilege, which represents the maximum FPU components, and never be changed by the host. They are good and trusted value which can be used to restore xcr0/xss.\n\nyes and this is what actually this patch does in `kvm_load_host_xsave_state` prior to  `kvm_load_guest_fpu()` executing  XRSTORS.\n\n\u003e Then to know if we need to restore xcr0/xss, a faster way than xgetbv/rsmsrq is to monitor them.\n\n\u003e The xcr0 is already monitored by the pKVM for the host, via the handle_xsetbv() in host_vmx.c. If host changes its xcr0 via xsetbv, it will trap to pKVM, and emulates by handle_xsetbv(). We can save the new xcr0 in the host\u0027s vcpu-\u003earch.xcr0. Then we only need to check the host\u0027s vcpu-\u003earch.xcr0 v.s. kvm_host.xcr0. If they are different, restore xcr0.\n\nYes, but AFAIU xgetbv(), which is internal CPU register read, should be quite quick and it is reliable check. If we want to change `handle_xsetbv()` to save updated value in `vcpu-\u003earch.xcr0.` then we will have to modify `kvm_load_host_xsave_state` anyway to not only check against `vcpu-\u003earch.xcr0 !\u003d kvm_host.xcr0` but also against `hvcpu-\u003earch.xcr0 !\u003d kvm_host.xcr0`. This will work but complicate things and will not give almost any (or any AFAIU) performance benefits.\n\n\u003e We can do similar for MSR_IA32_XSS, make it write-intercepted by the pKVM, and save the new xss in host\u0027s vcpu-\u003earch.xss in handle_write_msr() in host_vmx.c. Then we only need to check the host\u0027s vcpu-\u003earch.xss v.s. kvm_host.xss. If they are different, restore xss.\n\nContrary to xgetbv, rdmsrq is heavier so I think it makes a lot of sense especially that well behaving host by itself, AFAIU shouldn\u0027t change MSR_IA32_XSS often on runtime (only on boot time) it should be more performant than what I initially did. I will try that.\n\n\n\u003e We can do such restore in another function, then we can keep the current position of calling kvm_load_guest_xsave_state, which can minimal the code difference with KVM.\n\nYeah, good idea. I will add some helper function and call it before `kvm_load_guest_fpu` instead which indeed should minimize the code difference in KVM.\n\nI will prepare a new version of this patch according to this suggestion - thanks for comments.",
+      "parentUuid": "d43ba78c_c3cd2556",
+      "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f2654a4_3d073cd5",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-20T14:26:42Z",
       "side": 1,
       "message": "I think we have a problem here. This function does two things(it used to be called on guest VMEXIT):\n1. Save guest PKRU and restore host PKRU\n2. Restore host XCR0 and IA32_XSS\n\nWhen we call it here before VMENTRY and hence hardware has host PKRU. So saving guest PKRU is actually copying host PKRU to guest snapshot:\n```\nvcpu-\u003earch.pkru \u003d rdpkru();\n```\n\nI think we overwrite the guest PKRU and actual guest PKRU is lost.\n\n@chuanxiao.dong@intel.corp-partner.google.com\u0027s proposal would make this point irrelevant though",
+      "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc38aac_f3612c9c",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15091,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-20T14:55:36Z",
+      "side": 1,
+      "message": "Indeed PKRU overwrite is a problem and incorrect here. Regarding XCR0 it is actually desired to prevent #GP  faults during  XRSTORS (please note that XCR0 will be restored back to guest values in `kvm_load_guest_xsave_state` called after `kvm_load_guest_fpu`.\n\nI am going to implement dedicated function which will handle only host XCR0/XSS hardware restoration so this will leave PKRU intact. Thanks",
+      "parentUuid": "6f2654a4_3d073cd5",
       "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
