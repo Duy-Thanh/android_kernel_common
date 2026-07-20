@@ -34,6 +34,24 @@
       "parentUuid": "72820514_2ff092c0",
       "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02da6c4c_33e69451",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-20T11:24:14Z",
+      "side": 1,
+      "message": "\u003e Maybe the scenario is when the hypervisor executes the instruction right before wrmsrq, NMI is fired on this CPU. Then the RIP saved in pt_regs points to the wrmsrq instruction, which results in the fixup to skip the wrmsrq instruction.\n\nYes, thats also my understanding. Probably reword it like:\n```\nIf an NMI is delivered at the instruction boundary immediately before the\nextable-protected wrmsrq, the saved RIP points to wrmsrq. The unconditional\nextable lookup then mistakes the NMI for a WRMSR fault and skips the instruction.\n```",
+      "parentUuid": "8d0f0065_0425f2e3",
+      "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
