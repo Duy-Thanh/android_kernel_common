@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d89c6557_53255e94",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-20T17:25:59Z",
+      "side": 1,
+      "message": "\u003e So probably keeping the refcount through this function would solve this issue you mentioned?\n\nUgh... Instead of relying on \"overlapping get/put lifetimes\" in a non-obvious hacky way in order to work around our poorly designed hypercall API (wherein the PASID teardown hypercall doesn\u0027t know which domain to get until it finds the PASID entry and parses the `pgd` from it), can\u0027t we just pass the `pgd` value in the PASID teardown hypercall instead? It seems we can: the host\u0027s `pkvm_pasid_teardown()` could easily use `info-\u003edomain-\u003epgd`?\n\nAnd then pKVM could cleanly get the domain _once_ in the PASID setup hypercall and put it _once_ in the PASID teardown hypercall? And `intel_pasid_tear_down_entry()` in pKVM could just assert if the pgd in the PASID entry doesn\u0027t match the passed one?",
+      "parentUuid": "58efe2b5_8db0814c",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
