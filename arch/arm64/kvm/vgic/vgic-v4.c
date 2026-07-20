@@ -8,6 +8,7 @@
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
 #include <linux/kvm_host.h>
+#include <linux/smp.h>
 #include <linux/irqchip/arm-gic-v3.h>
 
 #include "vgic.h"
@@ -101,6 +102,8 @@ static irqreturn_t vgic_v4_doorbell_handler(int irq, void *info)
 
 	kvm_make_request(KVM_REQ_IRQ_PENDING, vcpu);
 	kvm_vcpu_kick(vcpu);
+
+	arch_smp_send_reschedule(READ_ONCE(vcpu->cpu));
 
 	return IRQ_HANDLED;
 }
@@ -378,6 +381,8 @@ int vgic_v4_load(struct kvm_vcpu *vcpu)
 	 */
 	if (!kvm_vgic_global_state.has_gicv4_1)
 		err = irq_set_irqchip_state(vpe->irq, IRQCHIP_STATE_PENDING, false);
+	else
+		vpe->pending_last = false;
 
 	return err;
 }
