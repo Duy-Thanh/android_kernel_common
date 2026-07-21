@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752ea662_6c40544e",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:07:35Z",
+      "side": 1,
+      "message": "nit: maybe name it `_pasid_table`, similarly to `_qi` in pKVM\u0027s `struct intel_iommu`?",
+      "revId": "0a4113dfa78a304cd8fdd79928917f89a3aa3ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd2ee95_3d231858",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:07:35Z",
+      "side": 1,
+      "message": "Just a note: so this assumes that `intel_pasid_get_dev_max_id()` is called _after_ `intel_pasid_get_table()`.\n\nWell, it seems at least we are safe thanks to the above `if (!info || !info-\u003epasid_table)` check.\n\nIMHO this is yet another proof that our implementation is way too hacky. In the future we should probably properly track _devices_ in some data structure on pKVM side (like we properly track domains).",
+      "revId": "0a4113dfa78a304cd8fdd79928917f89a3aa3ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
