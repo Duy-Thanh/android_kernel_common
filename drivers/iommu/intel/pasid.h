@@ -350,7 +350,7 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu,
 #else
 void intel_pasid_tear_down_entry(struct intel_iommu *iommu,
 				 struct pkvm_device *dev, u32 pasid,
-				 bool fault_ignore);
+				 bool fault_ignore, void **pgd, u16 *did);
 #endif
 void intel_pasid_setup_page_snoop_control(struct intel_iommu *iommu,
 					  struct device *dev, u32 pasid);

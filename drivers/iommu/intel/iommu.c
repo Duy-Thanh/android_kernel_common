@@ -1683,7 +1683,11 @@ int domain_context_mapping_one(struct dmar_domain *domain,
 	if (!context)
 		goto out_unlock;
 
+#ifndef __PKVM_HYP__
 	ret = 0;
+#else
+	ret = -EEXIST;
+#endif
 	if (context_present(context) && !context_copied(iommu, bus, devfn))
 		goto out_unlock;
 
@@ -1691,15 +1695,6 @@ int domain_context_mapping_one(struct dmar_domain *domain,
 	copied_context_tear_down(iommu, context, bus, devfn);
 #endif
 
-#ifdef __PKVM_HYP__
-	ret = pkvm_get_domain_cache_tag_assign(pgd, did,
-					       IOMMU_NO_PASID, info);
-	if (ret) {
-		pr_err("iommu%d: failed to get the domain for pgd: %p\n",
-		       iommu->seq_id, pgd);
-		goto out_unlock;
-	}
-#endif
 	context_clear_entry(context);
 	context_set_domain_id(context, did);
 
@@ -2005,17 +2000,24 @@ static void pasid_free_table(struct pasid_dir_entry *dir, int max_pde)
 }
 #endif /* __PKVM_HYP__ */
 
+#ifndef __PKVM_HYP__
 void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
+#else
+void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn,
+			      void **pgd, u16 *did)
+#endif
 {
 	struct intel_iommu *iommu = info->iommu;
 	struct context_entry *context;
+	u16 ctx_did;
 #ifdef __PKVM_HYP__
 	struct pasid_dir_entry *pasid_dir = NULL;
 	bool sm = sm_supported(iommu);
 	u64 pasid_dir_sz;
-	void *pgd = NULL;
+	void *ctx_pgd = NULL;
+
+	*pgd = NULL;
 #endif
-	u16 did;
 
 #ifndef __PKVM_HYP__
 	if (pkvm_enabled()) {
@@ -2045,27 +2047,27 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 				return;
 			}
 		} else {
-			pgd = __pkvm_va(context->lo & VTD_PAGE_MASK);
+			ctx_pgd = __pkvm_va(context->lo & VTD_PAGE_MASK);
 		}
 	} else {
 		WARN_ON(context->lo & VTD_PAGE_MASK);
 	}
 #endif
 
-	did = context_domain_id(context);
+	ctx_did = context_domain_id(context);
 	context_clear_present(context);
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 	spin_unlock(&iommu->lock);
-	intel_context_flush_no_pasid(info, context, did);
+	intel_context_flush_no_pasid(info, context, ctx_did);
 	context_clear_entry(context);
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 
 #ifdef __PKVM_HYP__
 	if (pasid_dir)
 		pasid_free_table(pasid_dir, pasid_dir_sz);
-	else if (pgd)
-		pkvm_put_domain_cache_tag_unassign(pgd, did,
-						   IOMMU_NO_PASID, info);
+
+	*pgd = ctx_pgd;
+	*did = ctx_did;
 #endif
 }
 
