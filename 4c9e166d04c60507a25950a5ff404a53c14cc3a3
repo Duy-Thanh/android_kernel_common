@@ -46,6 +46,30 @@
       },
       "revId": "4c9e166d04c60507a25950a5ff404a53c14cc3a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25fee23_f3ac6e96",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-21T14:45:15Z",
+      "side": 1,
+      "message": "Per offline discussion: while spec seems to allow it so technically some exotic HW could support this, it just simply does not make much sense to allocate this many ICIDs and kernel does not do it. Considering that it would require additional logic  like device table does, I think we can leave it as is. If ever anyone hits this limit, this can be addressed in the future.",
+      "parentUuid": "69090ff8_1d410411",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "revId": "4c9e166d04c60507a25950a5ff404a53c14cc3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
