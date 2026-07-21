@@ -52,6 +52,24 @@
       "parentUuid": "46bf6a73_a0813ea0",
       "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a400a60b_4079b19a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-21T00:54:03Z",
+      "side": 1,
+      "message": "If there is no KABI impact, there\u0027s probably not a good reason to delay this and add it through the -kminext branch.  Maybe just rebase and resubmit on android17-6.18?",
+      "parentUuid": "b0da1fcf_34519464",
+      "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
