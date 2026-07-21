@@ -22,6 +22,30 @@
       },
       "revId": "4c9e166d04c60507a25950a5ff404a53c14cc3a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69090ff8_1d410411",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-21T11:10:37Z",
+      "side": 1,
+      "message": "I haven\u0027t seen any Collection table configuration that supports indirect table. I wonder if this is architecturally possible. We can also have a check just to make sure: if GITS_BASER indicates the type 0b100(for collection) and has the indirect bit set then we can assert ?",
+      "parentUuid": "90ce4ccd_de2b2442",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "revId": "4c9e166d04c60507a25950a5ff404a53c14cc3a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
