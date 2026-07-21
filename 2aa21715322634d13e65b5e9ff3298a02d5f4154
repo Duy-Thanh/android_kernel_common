@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d852a2e_44ca3c71",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-21T08:17:48Z",
+      "side": 1,
+      "message": "Although the implementation in vcpu_postcreate doesn\u0027t need to load vcpu, semantically seems we need to load guest vcpu first, and after vcpu_postcreate is done, we load host vcpu? And from the KVM side, the vcpu_postcreate is added to the place after the vcpu load.",
+      "revId": "2aa21715322634d13e65b5e9ff3298a02d5f4154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
