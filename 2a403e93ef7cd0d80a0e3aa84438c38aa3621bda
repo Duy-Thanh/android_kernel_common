@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f45218_1d295ed8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-21T05:25:07Z",
+      "side": 1,
+      "message": "Sorry, this isn\u0027t the right format. It should be git-URL branch, not a gitweb URL.\n\nI\u0027m still worried that while the change is in the git tree somewhere, it doesn\u0027t appear to be on a public branch, which it needs to be for FROMGIT",
+      "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406534c5_8d2d4fec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-21T05:25:07Z",
+      "side": 1,
+      "message": "Please don\u0027t unnecessarily duplicate signed-off-by lines. There should be one from the commit in the tree, and just one other here for your cherry-picking to the android branch.",
+      "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
