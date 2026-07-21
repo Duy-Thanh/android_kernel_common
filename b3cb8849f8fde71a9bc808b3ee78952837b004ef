@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a803e54_cae337a8",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T23:03:02Z",
+      "side": 1,
+      "message": "nit: maybe to reduce number of lines and to follow reverse xmas tree style:\n```\nint flags \u003d 0, level, ret;\nu64 fsptptr;\n```\n?",
+      "revId": "b3cb8849f8fde71a9bc808b3ee78952837b004ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896678f2_5e579c30",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T23:03:02Z",
+      "side": 1,
+      "message": "nit: this `fl5lp` variable seems not very useful?",
+      "fixSuggestions": [
+        {
+          "fixId": "854a860c_4b301378",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 304,
+                "startChar": 0,
+                "endLine": 305,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 357,
+                "endChar": 0
+              },
+              "replacement": "\tif (level \u003d\u003d 5)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b3cb8849f8fde71a9bc808b3ee78952837b004ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
