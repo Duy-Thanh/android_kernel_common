@@ -1527,3 +1527,8 @@
   xa_erase
   xa_find
   xa_find_after
+
+# required by pkvm_iommu_temp.ko
+  __pkvm_load_el2_module
+  kvm_iommu_register_driver
+  kvm_iommu_register_hyp_ops
