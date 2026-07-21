@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ae1f13_0be1d1de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-21T19:57:05Z",
+      "side": 1,
+      "message": "Ah, ok it being upstream makes sense as to why it wasn\u0027t on a public branch.",
+      "parentUuid": "3e3e5a6e_4daf477b",
+      "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "406534c5_8d2d4fec",
