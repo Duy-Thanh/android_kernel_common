@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baae8891_e9f8c808",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d3ab3e1_83decd8e",
+      "revId": "3edc8028dd475e48c3b7930ade89b7e0d6047ae8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a63932_fe225f78",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-20T18:54:42Z",
       "side": 1,
       "message": "Worth adding a comment explaining that we only need to do this with pKVM, and why we need to do this with pKVM? In particular, since we\u0027re gonna squash this patch when rebasing to newer kernels, so the info in the commit message will be lost. (And, well, at the moment the commit message doesn\u0027t even mention that without pKVM this is not needed. :))\n\nBTW maybe also even do this?\n\n```\n#ifndef __PKVM_HYP__\n\tcontext_clear_entry(context);\n\t__iommu_flush_cache(iommu, context, sizeof(*context));\n#else\n\tspin_lock(\u0026iommu-\u003elock);\n\tif (!context_present(context)) {\n\t\tcontext_clear_entry(context);\n\t\t__iommu_flush_cache(iommu, context, sizeof(*context));\n\t}\n\tspin_unlock(\u0026iommu-\u003elock);\n#endif\n```\n\n...In the future we should think how to address this properly, via some counterpart of `iommu_group-\u003emutex` in pKVM. (If we will ever support device assignment, I suppose we will need a notion of IOMMU group in pKVM anyway.)",
+      "revId": "3edc8028dd475e48c3b7930ade89b7e0d6047ae8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "204217b5_9c24bb20",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2063,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:28:44Z",
+      "side": 1,
+      "message": "Makes sense, done",
+      "parentUuid": "c6a63932_fe225f78",
       "revId": "3edc8028dd475e48c3b7930ade89b7e0d6047ae8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
