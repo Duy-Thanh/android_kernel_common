@@ -70,6 +70,24 @@
       "parentUuid": "b0da1fcf_34519464",
       "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db8fee5_d02a0a18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-07-21T01:01:46Z",
+      "side": 1,
+      "message": "Makes sense. Thanks. I will abandon these and upload with a new base (android17-6.18).",
+      "parentUuid": "a400a60b_4079b19a",
+      "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
