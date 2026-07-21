@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2682b11a_20fcae41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-21T15:49:33Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5273155...\n\nPlease **reinstate the following bug references** in the commit message: 527315590.\nThese IDs were found in the original change with number [4139594](https://android-review.googlesource.com/c/4139594) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "29cdffa507fbe16769e146c40c79b4538e9c12b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d3c66ebb_5527439b",
