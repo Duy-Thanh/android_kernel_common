@@ -16,6 +16,24 @@
       "message": "It used to follow this patch, now it is before this patch? I assume that\u0027s unintentional?",
       "revId": "cea74144233af543b7d6e55e92d1e47aeaa77823",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a6ad4b_bde64142",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T20:06:58Z",
+      "side": 1,
+      "message": "Sorry about this, when I moved aosp/4155530, I forgot to move this along. Fixed the order now.",
+      "parentUuid": "237aab72_cef9e7dd",
+      "revId": "cea74144233af543b7d6e55e92d1e47aeaa77823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
