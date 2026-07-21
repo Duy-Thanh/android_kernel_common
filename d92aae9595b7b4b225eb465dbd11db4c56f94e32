@@ -70,6 +70,24 @@
       "parentUuid": "8d0f0065_0425f2e3",
       "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26b07c9_f9dacd5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-21T06:11:44Z",
+      "side": 1,
+      "message": "Yeah, it sounds good to me. Thanks!",
+      "parentUuid": "e7144c7f_2c444c00",
+      "revId": "d92aae9595b7b4b225eb465dbd11db4c56f94e32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
