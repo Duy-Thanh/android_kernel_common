@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efbcc725_90ad70b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-07-21T09:35:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a503e7b3_14efab3e",
+      "revId": "276bd7097680a90e2af6e04f538ec2c3a869f108",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88ec5688_bbd190b3",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-17T18:07:40Z",
       "side": 1,
       "message": "You need to add a URL to the maintainer\u0027s git tree where you cherry-picked this from.",
+      "revId": "276bd7097680a90e2af6e04f538ec2c3a869f108",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb96a9f8_54b48a1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-07-21T09:35:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88ec5688_bbd190b3",
       "revId": "276bd7097680a90e2af6e04f538ec2c3a869f108",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
