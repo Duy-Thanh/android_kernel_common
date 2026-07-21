@@ -33,6 +33,7 @@ SYM_FUNC_START(__guest_enter)
 
 	// Save hyp's sp_el0
 	save_sp_el0	x1, x2
+	save_tpidrro_el0 x1, x2
 
 	// Now the hyp state is stored if we have a pending RAS SError it must
 	// affect the host or hyp. If any asynchronous exception is pending we
@@ -69,6 +70,7 @@ alternative_else_nop_endif
 
 	// Restore the guest's sp_el0
 	restore_sp_el0 x29, x0
+	restore_tpidrro_el0 x29, x0
 
 	// Restore guest regs x0-x17
 	ldp	x0, x1,   [x29, #CPU_XREG_OFFSET(0)]
@@ -149,6 +151,7 @@ SYM_INNER_LABEL(__guest_exit, SYM_L_GLOBAL)
 
 	// Store the guest's sp_el0
 	save_sp_el0	x1, x2
+	save_tpidrro_el0 x1, x2
 
 	adr_this_cpu x2, kvm_hyp_ctxt, x3
 
@@ -164,6 +167,7 @@ SYM_INNER_LABEL(__guest_exit, SYM_L_GLOBAL)
 
 	// Restore hyp's sp_el0
 	restore_sp_el0 x2, x3
+	restore_tpidrro_el0 x2, x3
 
 	// Now restore the hyp regs
 	restore_callee_saved_regs x2
