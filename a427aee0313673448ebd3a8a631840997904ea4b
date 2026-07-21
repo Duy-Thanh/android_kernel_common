@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f624178d_2289d01d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T16:01:45Z",
+      "side": 1,
+      "message": "So still, why still keep these `iommu-\u003evgsts |\u003d gcmd_bit` and `iommu-\u003evgsts \u0026\u003d ~gcmd_bit`?",
+      "revId": "a427aee0313673448ebd3a8a631840997904ea4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
