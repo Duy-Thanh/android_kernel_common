@@ -218,6 +218,24 @@
       "parentUuid": "e7737206_111f468a",
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c28e87_9b48b0cc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-21T07:50:54Z",
+      "side": 1,
+      "message": "The new implementation looks good to me. I think we are fine to pay for the vcpu_free restriction.\n\nJust a note, Sean prefers to check the duplicated vcpu_id earlier according to https://lore.kernel.org/kvm/al6eg7C-2sDBEAFD@google.com/, by xarray or bitmap. If it is bitmap, then maybe we can just reuse it for the pKVM.",
+      "parentUuid": "1b3c0130_1dc98b6e",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
