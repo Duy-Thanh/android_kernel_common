@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bfa9fe4_3d3405dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:28:18Z",
+      "side": 1,
+      "message": "Added Fixes for QI",
+      "parentUuid": "92c4e952_87d398b5",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2238bf32_87ab9f17",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b42c2717_14c3b374",
+        "filename": "drivers/iommu/intel/irq_remapping.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2238bf32_87ab9f17",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9aea524_fabfbea8",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-20T15:38:02Z",
       "side": 1,
       "message": "Do we still need to synchronize `iommu-\u003evgsts` with `gcmd` here? It seems they should always be in sync now?\n\nIt seems we don\u0027t even need to read `gcmd` from HW here anymore? Or if we still want to do that for extra safety, we might add a BUG_ON if they don\u0027t match? (BTW similarly to the WARN_ON in `handle_gcmd_srtp()`.)",
+      "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f848b71d_01e69481",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:28:18Z",
+      "side": 1,
+      "message": "Added BUG_ON",
+      "parentUuid": "c9aea524_fabfbea8",
       "revId": "fa70d61e350573f8e39355198e68bde0cf735e41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
