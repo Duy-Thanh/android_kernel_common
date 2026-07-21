@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32b02604_fcc70f1a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T13:06:59Z",
+      "side": 1,
+      "message": "Implemented your suggestion as a separate cl: aosp/4187056\n\n\u003e  It seems we can: the host\u0027s pkvm_pasid_teardown() could easily use info-\u003edomain-\u003epgd?\n\nI did not implement this part and kept the teardown path derive the pgd from PASID. info-\u003edomain-\u003epgd is the default domain for the device and might not be the same for individual PAISDs(in the case of non-zeor PASIDs) for that device. So we need to derive the pgd from PASID entry in host as well to pass it to pkvm. We don\u0027t use non-zero PASIDS now and reject requests for non-zero PASIDS, but I feel keeping it as it is now would be better.\n\nSince the goal was to remove domain life management from cache-tag helper function, I focussed on that and we have the domain active through the life time of an active entry.\n\nPlease let me know if this is fine with you.",
+      "parentUuid": "a3b01aec_d3c121b8",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
