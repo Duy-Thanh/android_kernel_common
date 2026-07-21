@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc1b5001_6d4372f5",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T15:21:57Z",
+      "side": 1,
+      "message": "The idea (i.e. keep deriving pgd from PASID entry) is ok to me, but speaking of the implementation details in the code, it still seems to me we should try and implement that in a way that simplifies the code and reduces hackery in the upstream code, rather than increases it. I\u0027ve added a comment in aosp/4187056 about that.",
+      "parentUuid": "32b02604_fcc70f1a",
+      "revId": "21eb05d165ce6a9df3a6b06e5184ebaf8905773a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63e3ea53_aa4b31b0",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 7
