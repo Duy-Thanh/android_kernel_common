@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1982a6df_7b295a48",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 977,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T20:07:22Z",
+      "side": 1,
+      "message": "makes sense, done",
+      "parentUuid": "752ea662_6c40544e",
+      "revId": "0a4113dfa78a304cd8fdd79928917f89a3aa3ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8dd2ee95_3d231858",
         "filename": "drivers/iommu/intel/pasid.c",
         "patchSetId": 13
