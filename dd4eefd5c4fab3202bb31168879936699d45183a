@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04570a38_65ccee7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T12:28:16Z",
+      "side": 1,
+      "message": "optional nit: \"a compromised host can, for example, ...\" (since IIUC, this host EPT is just an example, i.e. the host could make it point to any other arbitrary memory, with no less harmful consequences)?",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98519426_4ef08ee5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T12:28:16Z",
+      "side": 1,
+      "message": "Why specifically SVA?",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f96021_d54d52cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T12:28:16Z",
+      "side": 1,
+      "message": "And the other commits as well?\n\n```\nFixes: 12c1f7f2f18f (\"ANDROID: iommu/vt-d: pKVM: Scalable mode context update hypercalls\")\nFixes: 3dbd753022e4 (\"ANDROID: iommu/vt-d: pKVM: Pasid table hypercall for first level translation\")\nFixes: e0b5603a1d24 (\"ANDROID: iommu/vt-d: pKVM: Pasid table hypercall for second level translation\")\nFixes: 0d618d5eddcb (\"ANDROID: iommu/vt-d: pKVM: Pasid table entry teardown hypercall\")\n```",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd888cf_367605e2",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T12:28:16Z",
+      "side": 1,
+      "message": "Should be already gated by the callers of `__get_pasid_table()`?\n\nIf we still want this for extra safety, add a WARN_ON?",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
