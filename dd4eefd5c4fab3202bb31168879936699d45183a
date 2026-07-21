@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c73087_ddfc353f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04570a38_65ccee7a",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98519426_4ef08ee5",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T12:28:16Z",
       "side": 1,
       "message": "Why specifically SVA?",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0e29ef_f35f7a9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:30:20Z",
+      "side": 1,
+      "message": "yeah not SVA specific, removed it",
+      "parentUuid": "98519426_4ef08ee5",
       "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e7f924e_a399b5f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:30:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02f96021_d54d52cc",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdd888cf_367605e2",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-21T12:28:16Z",
       "side": 1,
       "message": "Should be already gated by the callers of `__get_pasid_table()`?\n\nIf we still want this for extra safety, add a WARN_ON?",
+      "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e053aac_19b5bc47",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T15:30:20Z",
+      "side": 1,
+      "message": "`__get_pasid_table()` was getting removed in patch aosp/4155530. Moved it before this commit and this change goes away",
+      "parentUuid": "fdd888cf_367605e2",
       "revId": "dd4eefd5c4fab3202bb31168879936699d45183a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
