@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3151aa7b_a1da5749",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-21T15:48:51Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5273155...\n\nPlease **reinstate the following bug references** in the commit message: 527315590.\nThese IDs were found in the original change with number [4133693](https://android-review.googlesource.com/c/4133693) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "df2ed1788b5e6782737a75846985e03c2709c655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3fa921ce_41e0c528",
@@ -14,6 +31,29 @@
       "writtenOn": "2026-07-21T02:30:54Z",
       "side": 1,
       "message": "Respin Bug: b/537062728",
+      "revId": "df2ed1788b5e6782737a75846985e03c2709c655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea12f2c_4496b952",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-21T15:48:51Z",
+      "side": 1,
+      "message": "This list must be in alphabetical order. Please fix.",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 56
+      },
       "revId": "df2ed1788b5e6782737a75846985e03c2709c655",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
