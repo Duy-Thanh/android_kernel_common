@@ -44,6 +44,7 @@
   runqueues
   scsi_device_quiesce
   scsi_device_resume
+  smpboot_unregister_percpu_thread
   stack_trace_save_regs
   stack_trace_save_tsk
   swap_cache_del_folio
