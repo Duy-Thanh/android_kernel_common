@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7536c72c_710b44ea",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 5014158
+      },
+      "writtenOn": "2026-07-21T13:10:54Z",
+      "side": 1,
+      "message": "I think this unlock should be before line 1889.",
+      "range": {
+        "startLine": 1091,
+        "startChar": 1,
+        "endLine": 1091,
+        "endChar": 7
+      },
+      "revId": "7f8a9f357a599b95fb10d2628a2d78bb0040f7ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
