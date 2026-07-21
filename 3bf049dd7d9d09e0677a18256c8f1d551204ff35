@@ -254,6 +254,24 @@
       "parentUuid": "25c28e87_9b48b0cc",
       "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bb2d81_c0f5ea9f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T12:52:15Z",
+      "side": 1,
+      "message": "Done - added TODO in aosp4151704 + updated comment in aosp/4151696",
+      "parentUuid": "85a7d333_ebbd6dd6",
+      "revId": "3bf049dd7d9d09e0677a18256c8f1d551204ff35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
