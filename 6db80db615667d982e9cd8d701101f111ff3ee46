@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3df3d235_0a0bd1a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4992129
+      },
+      "writtenOn": "2026-07-21T09:23:50Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against cherry pick source.\nSource commit: [go...\n\nCherry pick is not clean. Checked against cherry pick source.\nSource commit: [googlesource](https://android.googlesource.com/kernel/common/+/a4447c0693830d5ecadd6e755cb7fdc55d86aacc).\n\nDifference between automated attempted cherry-pick and current commit.\n\n```\ndiff --git a/drivers/firmware/arm_scmi/notify.c b/drivers/firmware/arm_scmi/notify.c\nindex 9bf7f43ab..4d6b066af 100644\n--- a/drivers/firmware/arm_scmi/notify.c\n+++ b/drivers/firmware/arm_scmi/notify.c\n@@ -601,8 +601,8 @@ int scmi_notify(const struct scmi_handle *handle, u8 proto_id, u8 evt_id,\n \t}\n \tif (kfifo_avail(\u0026r_evt-\u003eproto-\u003eequeue.kfifo) \u003c sizeof(eh) + len) {\n \t\tdev_warn_ratelimited(handle-\u003edev,\n-\t\t\t\t     \"queue full, dropping proto_id:%d  evt_id:%d  ts:%lld\\n\",\n-\t\t\t\t     proto_id, evt_id, ktime_to_ns(ts));\n+\t\t\t \"queue full, dropping proto_id:%d  evt_id:%d  ts:%lld\\n\",\n+\t\t\t proto_id, evt_id, ktime_to_ns(ts));\n \t\treturn -ENOMEM;\n \t}\n \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "6db80db615667d982e9cd8d701101f111ff3ee46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fc08989f_6b9b35da",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
