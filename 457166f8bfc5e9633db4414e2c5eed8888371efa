@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477c1b4e_e2f6ae7e",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T22:40:07Z",
+      "side": 0,
+      "message": "micro-nit: any reason for removing this line?",
+      "revId": "457166f8bfc5e9633db4414e2c5eed8888371efa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

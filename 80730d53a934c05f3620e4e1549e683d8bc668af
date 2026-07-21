@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64db21ab_0a9d3315",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T22:40:07Z",
+      "side": 1,
+      "message": "Maybe also worth capturing that this is a preparation for the following fixes aosp/4155523 and aosp/4171426 (rather than just a cosmetic refactoring)?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e453515_3558531a",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1689,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T22:40:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this is for. AFAICS `iommu_set_lm_ce()` converts it to 0 anyway?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e59a68_9af053c6",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T22:40:07Z",
+      "side": 1,
+      "message": "Maybe the other way around, rename the pKVM-specific arguments to `ctx_pgd` and `ctx_did`, to avoid unnecessary changes to the upstream code?\n\nBTW, maybe better `ce_pgd` and `ce_did`?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51254ec6_c28b674d",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T22:40:07Z",
+      "side": 1,
+      "message": "Can\u0027t we just properly set `pgd` and `agaw` for `pt_domain` itself in the first place (i.e. in `init_pt_domain()`)? So that we can use `\u0026pt_domain` the same way as \"normal\" domains returned by `pkvm_get_iommu_domain()` (and thus avoid these confusing `domain_ptr` and `cache_domain` variables referring to the same thing, and so on).\n\nIt seems we can even go further and pass both `pgd` and `did` to `pkvm_get_iommu_domain()`, to let `pkvm_get_iommu_domain()` itself return `\u0026pt_domain` instead of a \"normal\" domain if needed (and let `pkvm_put_iommu_domain()` do nothing for `\u0026pt_domain`), and thus avoid all this boilerplate on the caller side (and thus also avoid the need for that `release_entry_domain()` helper for hiding this boilerplate)?\n\nMore precisely, we can, for example, rename the existing `pkvm_get_iommu_domain()` and `pkvm_put_iommu_domain()` (which don\u0027t take `did`) to `__pkvm_get_iommu_domain()` and `__pkvm_put_iommu_domain()` and make them static, to use them only inside `pkvm/domain.c` (in pkvm_iommu_domain_map()/pkvm_iommu_domain_unmap()/pkvm_free_iommu_domain()). And then provide public functions like:\n\n```\nstruct dmar_domain *pkvm_get_iommu_domain(void *pgd, u16 did)\n{\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\treturn __pkvm_get_iommu_domain(pgd);\n}\n\nstruct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd, u16 did)\n{\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\treturn __pkvm_get_iommu_domain_noref(pgd);\n}\n\nvoid pkvm_put_iommu_domain(struct dmar_domain *domain)\n{\n\tif (domain \u003d\u003d \u0026pt_domain)\n\t\treturn;\n\t\t\n\t__pkvm_put_iommu_domain(pgd);\n}\n```\n\n?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
