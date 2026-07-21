@@ -22,6 +22,30 @@
       },
       "revId": "7f8a9f357a599b95fb10d2628a2d78bb0040f7ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "874f00ca_11a7b1f8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-07-21T13:15:15Z",
+      "side": 1,
+      "message": "Why? we do not want to set `hyp_vm-\u003eis_dying \u003d PROTECTED_VM_DEAD` as hyp_vm is not valid?",
+      "parentUuid": "7536c72c_710b44ea",
+      "range": {
+        "startLine": 1091,
+        "startChar": 1,
+        "endLine": 1091,
+        "endChar": 7
+      },
+      "revId": "7f8a9f357a599b95fb10d2628a2d78bb0040f7ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
