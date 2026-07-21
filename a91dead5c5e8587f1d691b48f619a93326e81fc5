@@ -33,6 +33,42 @@
       "message": "Is there some extra context for the urgency of taking this as FROMLIST and not waiting for it to be queued and added as FROMGIT?",
       "revId": "a91dead5c5e8587f1d691b48f619a93326e81fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0309796b_e170cc71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4779166
+      },
+      "writtenOn": "2026-07-21T06:47:15Z",
+      "side": 1,
+      "message": "Yes, we need to land these changes in FAU images for moonstone.",
+      "parentUuid": "c5c2bf3a_20611b31",
+      "revId": "a91dead5c5e8587f1d691b48f619a93326e81fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ba548a7_40db17c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4779166
+      },
+      "writtenOn": "2026-07-21T06:47:15Z",
+      "side": 1,
+      "message": "Approving and moving to FROMGIT could take a while. We need to land these changes for FAU images, hence the urgency of picking from FROMLIST.",
+      "parentUuid": "4413694c_114fbfc2",
+      "revId": "a91dead5c5e8587f1d691b48f619a93326e81fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
