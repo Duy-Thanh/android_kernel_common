@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4891b042_d73519e6",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T15:04:00Z",
+      "side": 1,
+      "message": "Can\u0027t we just return `pgd` to the caller, to let `pkvm_iommu_pasid_teardown()`/`pkvm_iommu_clear_ce()` itself noref-get the domain, unassign the cache tag and put the domain?\n\nAnd then similarly in the setup path, we can assign the cache tag in the callers `iommu_pasid_setup_fl()`/`iommu_pasid_setup_sl()`/`iommu_set_lm_ce()`, instead of doing it here in upstream code? It looks like there is no reason why we need to do that here in upstream code? (Especially since we don\u0027t need to care about `intel_pasid_replace_first_level()` and `intel_pasid_replace_second_level()`, as we are happily throwing them away in aosp/4166686 anyway.)\n\nThereby, we can both avoid the asymmetry (as both get_domain and put_domain are cleanly done in the pkvm/iommu_hc.c layer, not here in upstream code) and reduce (rather than increase) changes to the upstream code?",
+      "revId": "e2e32b43292df6b63ebe27b588e6ee6b1dc6e7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
