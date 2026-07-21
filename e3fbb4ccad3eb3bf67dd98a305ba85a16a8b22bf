@@ -16,6 +16,24 @@
       "message": "Why don\u0027t we just move this unlock step a bit down further (after `intel_pasid_clear_entry(dev, pasid, fault_ignore);`). Since it isn\u0027t a hot path anyways.",
       "revId": "e3fbb4ccad3eb3bf67dd98a305ba85a16a8b22bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7d5b44_f28354a7",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:29:25Z",
+      "side": 1,
+      "message": "+1. It seems not worth all this extra code.\n\nAnd maybe in aosp/4155527 we\u0027d better also just move the unlock. That `if (!context_present(context))` trick there is very simple (unlike in this patch) and _probably_ correct and safe, but still that is not a hot path either?",
+      "parentUuid": "6075b006_fe9dbe1a",
+      "revId": "e3fbb4ccad3eb3bf67dd98a305ba85a16a8b22bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4144e28_0cfadfea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:29:25Z",
+      "side": 1,
+      "message": "Why this commit, not ae2b248e0b4e (\"ANDROID: iommu/vt-d: pKVM: Port pasid table update helpers to pKVM.\")?",
+      "revId": "b8a552f699b9a586039cc05d8228e0c6a8a842a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d8d705_0bc8f653",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:29:25Z",
+      "side": 1,
+      "message": "Is this (2 bugs in one line instead of 2 separate `Bug:` lines) a supported format?",
+      "revId": "b8a552f699b9a586039cc05d8228e0c6a8a842a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
