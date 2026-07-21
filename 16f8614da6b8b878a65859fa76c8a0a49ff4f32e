@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/537101514",
       "revId": "16f8614da6b8b878a65859fa76c8a0a49ff4f32e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14b564e3_48e3cd1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-21T16:45:08Z",
+      "side": 1,
+      "message": "Note, I verified the ABI fidelity differences reported by the linter. I found the definition of the struct union `mem_cgroup_reclaim_cookie` matches the base android14-6.1 branch",
+      "revId": "16f8614da6b8b878a65859fa76c8a0a49ff4f32e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
