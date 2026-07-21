@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3e5a6e_4daf477b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4992129
+      },
+      "writtenOn": "2026-07-21T08:39:03Z",
+      "side": 1,
+      "message": "Updated the commit massage with commit id",
+      "parentUuid": "f8f45218_1d295ed8",
+      "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "406534c5_8d2d4fec",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T05:25:07Z",
       "side": 1,
       "message": "Please don\u0027t unnecessarily duplicate signed-off-by lines. There should be one from the commit in the tree, and just one other here for your cherry-picking to the android branch.",
+      "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65ec192_2be5a548",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4992129
+      },
+      "writtenOn": "2026-07-21T08:39:03Z",
+      "side": 1,
+      "message": "Removed the unnecessary.",
+      "parentUuid": "406534c5_8d2d4fec",
       "revId": "2a403e93ef7cd0d80a0e3aa84438c38aa3621bda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
