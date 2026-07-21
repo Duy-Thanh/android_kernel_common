@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c47433c2_989183a2",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-21T20:08:43Z",
+      "side": 1,
+      "message": "@chuanxiao.dong@intel.corp-partner.google.com I\u0027ve implemented what we discussed above. Could you please take a look?",
+      "parentUuid": "abae8a25_41975e76",
+      "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f2654a4_3d073cd5",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Indeed PKRU overwrite is a problem and incorrect here. Regarding XCR0 it is actually desired to prevent #GP  faults during  XRSTORS (please note that XCR0 will be restored back to guest values in `kvm_load_guest_xsave_state` called after `kvm_load_guest_fpu`.\n\nI am going to implement dedicated function which will handle only host XCR0/XSS hardware restoration so this will leave PKRU intact. Thanks",
       "parentUuid": "6f2654a4_3d073cd5",
+      "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6401026d_ed82ca7f",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15091,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-21T20:08:43Z",
+      "side": 1,
+      "message": "In the current version (patch-set 5) above shouldn\u0027t be an issue anymore. Marking as resolved.",
+      "parentUuid": "dbc38aac_f3612c9c",
       "revId": "5cc6d169fb94c0361f07451108bbddb3e540a3d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
