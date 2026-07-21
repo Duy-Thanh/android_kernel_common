@@ -16,6 +16,24 @@
       "message": "This pkvm_get_iommu_domain/pkvm_put_iommu_domain should probably be added by aosp/4187056 (which should go before this patch), not by this patch?",
       "revId": "1c526806021fafd631f0ea4255f104188f608788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e45cce8_43ae985b",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T20:05:14Z",
+      "side": 1,
+      "message": "Indeed, moved it now",
+      "parentUuid": "54e3fdfb_3934af58",
+      "revId": "1c526806021fafd631f0ea4255f104188f608788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
