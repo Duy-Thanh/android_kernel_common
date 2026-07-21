@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237aab72_cef9e7dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:13:25Z",
+      "side": 1,
+      "message": "It used to follow this patch, now it is before this patch? I assume that\u0027s unintentional?",
+      "revId": "cea74144233af543b7d6e55e92d1e47aeaa77823",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
