@@ -124,6 +124,24 @@
       "parentUuid": "66b55e10_29c53dd5",
       "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9738dc0a_3e23922f",
+        "filename": "drivers/irqchip/irq-gic-v3-its.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5325,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-21T13:59:21Z",
+      "side": 1,
+      "message": "Let me try and have a crack at this suggestion upstream (for granular locking) but for this base version let\u0027s keep it in this way.",
+      "parentUuid": "55130470_f99b4e14",
+      "revId": "08db0287b1cda8650414a245e5a64d5fd302e468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
