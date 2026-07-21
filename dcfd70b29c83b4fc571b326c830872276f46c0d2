@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f40e00f5_5bb63566",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-21T17:43:31Z",
+      "side": 1,
+      "message": "Looks like the host doesn\u0027t actually use `old_did` anymore, so we don\u0027t need to support it (i.e. we can just remove it from `pasid_setup_fl_data` and `pasid_setup_sl_data`)?",
+      "revId": "dcfd70b29c83b4fc571b326c830872276f46c0d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
