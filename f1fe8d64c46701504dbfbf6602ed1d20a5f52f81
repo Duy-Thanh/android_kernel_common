@@ -88,6 +88,24 @@
       "parentUuid": "cc232e20_fe54b37c",
       "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fe0b4b_c235deb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4750075
+      },
+      "writtenOn": "2026-07-21T11:38:24Z",
+      "side": 1,
+      "message": "Hi,\n\nWe need this in android17-6.18 itself. So, I have fixed the syntax errors on top of the changes suggested from my earlier comment and updated the patch set; could you please review it. For the android17-6.18-kminext branch I will raise a new change if needed.",
+      "parentUuid": "5750e3df_8a78f4bc",
+      "revId": "f1fe8d64c46701504dbfbf6602ed1d20a5f52f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
