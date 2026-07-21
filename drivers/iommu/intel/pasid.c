@@ -282,15 +282,20 @@ devtlb_invalidation_with_pasid(struct intel_iommu *iommu,
 
 #ifndef __PKVM_HYP__
 void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct device *dev,
-#else
-void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *dev,
-#endif
 				 u32 pasid, bool fault_ignore)
+#else
+void intel_pasid_tear_down_entry(struct intel_iommu *iommu,
+				 struct pkvm_device *dev, u32 pasid,
+				 bool fault_ignore, void **pe_pgd,
+				 u16 *pe_did)
+#endif
 {
 	struct pasid_entry *pte;
 	u16 did, pgtt;
 #ifdef __PKVM_HYP__
 	void *pgd = NULL;
+
+	*pe_pgd = NULL;
 #endif
 
 #ifndef __PKVM_HYP__
@@ -387,8 +392,8 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu, struct pkvm_device *
 #endif
 
 #ifdef __PKVM_HYP__
-	pkvm_put_domain_cache_tag_unassign(pgd, did, pasid,
-					   dev_iommu_priv_get(dev));
+	*pe_pgd = pgd;
+	*pe_did = did;
 #endif
 }
 
@@ -482,13 +487,13 @@ static void pasid_pte_config_first_level(struct intel_iommu *iommu,
 #ifndef __PKVM_HYP__
 int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct device *dev,
 #else
-int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct pkvm_device *dev,
+int intel_pasid_setup_first_level(struct intel_iommu *iommu,
+				  struct pkvm_device *dev,
 #endif
 				  phys_addr_t fsptptr, u32 pasid, u16 did,
 				  int flags)
 {
 	struct pasid_entry *pte;
-	int ret;
 
 	if (!ecap_flts(iommu->ecap)) {
 		pr_err("No first level translation support on iommu%d\n",
@@ -505,6 +510,7 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct pkvm_device 
 #ifndef __PKVM_HYP__
 	if (pkvm_enabled()) {
 		struct device_domain_info *info = dev_iommu_priv_get(dev);
+		int ret;
 
 		if (!info || !info->pasid_table)
 			return -ENODEV;
@@ -530,16 +536,6 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu, struct pkvm_device 
 		return -EBUSY;
 	}
 
-#ifdef __PKVM_HYP__
-	ret = pkvm_get_domain_cache_tag_assign(__pkvm_va(fsptptr), did,
-					       pasid, dev_iommu_priv_get(dev));
-	if (ret) {
-		pr_err("iommu%d: failed to get the domain for did: %d, fsptptr: %llx\n",
-		       iommu->seq_id, did, fsptptr);
-		spin_unlock(&iommu->lock);
-		return ret;
-	}
-#endif
 	pasid_pte_config_first_level(iommu, pte, fsptptr, did, flags);
 
 	spin_unlock(&iommu->lock);
@@ -588,7 +584,6 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 #ifndef __PKVM_HYP__
 	u16 did;
 #endif
-	int ret;
 
 	/*
 	 * If hardware advertises no support for second level
@@ -609,6 +604,7 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 #ifndef __PKVM_HYP__
 	if (pkvm_enabled()) {
 		struct device_domain_info *info = dev_iommu_priv_get(dev);
+		int ret;
 
 		if (!info || !info->pasid_table)
 			return -ENODEV;
@@ -634,14 +630,6 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,
 		return -EBUSY;
 	}
 
-#ifdef __PKVM_HYP__
-	ret = pkvm_get_domain_cache_tag_assign(domain->pgd, did, pasid,
-					       dev_iommu_priv_get(dev));
-	if (ret) {
-		spin_unlock(&iommu->lock);
-		return ret;
-	}
-#endif
 	pasid_pte_config_second_level(iommu, pte, pgd_val, domain->agaw,
 				      did, domain->dirty_tracking);
 	spin_unlock(&iommu->lock);
