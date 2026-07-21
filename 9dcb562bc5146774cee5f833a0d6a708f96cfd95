@@ -34,6 +34,24 @@
       "parentUuid": "69d65f43_d14dcec7",
       "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0da1fcf_34519464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-07-21T00:48:26Z",
+      "side": 1,
+      "message": "I was expecting a symbol difference. But for whatever reason, when I run\n\n```\ntools/bazel run //common:kernel_aarch64_abi_dist -- --destdir\u003dout/dist\n```\n\nI don\u0027t see any message saying symbol difference has been detected.\n\nOutput:\n\n```\nINFO: Analyzed target //common:kernel_aarch64_abi_dist (9 packages loaded, 1368 targets configured).\nINFO: Found 1 target...\nTarget //common:kernel_aarch64_abi_dist up-to-date:\n  bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Elapsed time: 105.142s, Critical Path: 102.64s\nINFO: 371 processes: 7 action cache hit, 101 internal, 270 linux-sandbox.\nINFO: Build completed successfully, 371 total actions\nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_dist \u003cargs omitted\u003e\nINFO: Installing to /usr/local/google/home/amitsd/android-kernel/out/dist\n```\n\nI tried this for this patchset based on both android17-6.18 \u0026 android17-6.18-kminext branches.\n\nSo I think the tool is happy on the ABI stability and no further action is needed.",
+      "parentUuid": "46bf6a73_a0813ea0",
+      "revId": "9dcb562bc5146774cee5f833a0d6a708f96cfd95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
