@@ -4,3 +4,6 @@ type 'enum attr_idn' changed
   enumerator 'QUERY_ATTR_IDN_TX_EQ_GN_SETTINGS' (71) was added
   ... 1 other enumerator(s) added
 
+type 'struct ufshcd_tx_eq_params' changed
+  member 'union { bool from_dt; unsigned char __kabi_ignored1; }' was added
+

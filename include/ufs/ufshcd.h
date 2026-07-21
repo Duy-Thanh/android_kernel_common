@@ -375,7 +375,7 @@ struct ufshcd_tx_eq_params {
 	struct ufshcd_tx_eqtr_record *eqtr_record;
 	bool is_valid;
 	bool is_applied;
-	bool from_dt;
+	ANDROID_KABI_IGNORE(1, bool from_dt);
 };
 
 /**
