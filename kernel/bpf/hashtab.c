@@ -251,6 +251,11 @@ static struct htab_elem *get_htab_elem(struct bpf_htab *htab, int i)
 	return (struct htab_elem *) (htab->elems + i * (u64)htab->elem_size);
 }
 
+static inline bool htab_has_hash(const struct bpf_htab *htab)
+{
+	return htab_is_lru(htab) || htab->map.key_size > 8;
+}
+
 static inline u32 htab_elem_hash(struct bpf_htab *htab, struct htab_elem *l)
 {
 	if (htab_is_lru(htab))
@@ -263,6 +268,8 @@ static inline u32 htab_elem_hash(struct bpf_htab *htab, struct htab_elem *l)
 
 static inline void htab_elem_set_hash(struct bpf_htab *htab, struct htab_elem *l, u32 hash)
 {
+	if (!htab_has_hash(htab))
+		return;
 	if (htab_is_lru(htab))
 		((struct htab_elem_lru *)l)->hash = hash;
 	else if (htab_is_percpu(htab) && !htab_is_prealloc(htab))
@@ -598,9 +605,9 @@ static struct bpf_map *htab_map_alloc(union bpf_attr *attr)
 	if (htab_is_lru(htab))
 		htab->key_offset = sizeof(struct htab_elem_lru);
 	else if (percpu && !prealloc)
-		htab->key_offset = sizeof(struct htab_elem_pcpu);
+		htab->key_offset = htab_has_hash(htab) ? sizeof(struct htab_elem_pcpu) : offsetof(struct htab_elem_pcpu, hash);
 	else
-		htab->key_offset = sizeof(struct htab_elem);
+		htab->key_offset = htab_has_hash(htab) ? sizeof(struct htab_elem) : offsetof(struct htab_elem, hash);
 
 	htab->elem_size = htab->key_offset + round_up(htab->map.key_size, 8);
 	if (percpu)
@@ -718,7 +725,7 @@ static struct htab_elem *lookup_elem_raw(struct bpf_htab *htab,
 	struct htab_elem *l;
 
 	hlist_nulls_for_each_entry_rcu(l, n, head, hash_node)
-		if (htab_elem_hash(htab, l) == hash &&
+		if ((!htab_has_hash(htab) || htab_elem_hash(htab, l) == hash) &&
 		    !memcmp(htab_elem_key(htab, l), key, key_size))
 			return l;
 
@@ -739,7 +746,7 @@ static struct htab_elem *lookup_nulls_elem_raw(struct bpf_htab *htab,
 
 again:
 	hlist_nulls_for_each_entry_rcu(l, n, head, hash_node)
-		if (htab_elem_hash(htab, l) == hash &&
+		if ((!htab_has_hash(htab) || htab_elem_hash(htab, l) == hash) &&
 		    !memcmp(htab_elem_key(htab, l), key, key_size))
 			return l;
 
