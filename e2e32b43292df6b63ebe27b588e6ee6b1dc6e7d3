@@ -34,6 +34,24 @@
       "parentUuid": "4891b042_d73519e6",
       "revId": "e2e32b43292df6b63ebe27b588e6ee6b1dc6e7d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4468696f_9bb51ca0",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-21T20:03:02Z",
+      "side": 1,
+      "message": "\u003e Thereby, we can both avoid the asymmetry (as both get_domain and put_domain are cleanly done in the pkvm/iommu_hc.c layer, not here in upstream code) and reduce (rather than increase) changes to the upstream code?\n\nMakes sense. done\n\n\u003e BTW just a note: since Chuanxiao\u0027s aosp/4076366 make pkvm_get_iommu_domain_noref() a private function while here we need it again, you might want to move aosp/4076366 from my series to yours and adjust it, to avoid troubles with conflicts?\n\nI was about to ask about making it non-static in that cl :-). Sure, will pull it",
+      "parentUuid": "d19e524b_05222035",
+      "revId": "e2e32b43292df6b63ebe27b588e6ee6b1dc6e7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
