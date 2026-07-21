@@ -16,6 +16,24 @@
       "message": "I can\u0027t find a for-next/scmi branch at that git URL. \n\nOddly I can find the commit in the tree, but it doesn\u0027t seem to be on a published branch: https://git.kernel.org/pub/scm/linux/kernel/git/sudeep.holla/linux.git/log/?id\u003da4447c0693830d5ecadd6e755cb7fdc55d86aacc\n\nCan you fix this branch reference or let me know if I\u0027m just missing it?",
       "revId": "8e642cb3c5f80b9a5da9d1927cc671c4ac75340a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abbf302_29b9404d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4992129
+      },
+      "writtenOn": "2026-07-21T08:37:48Z",
+      "side": 1,
+      "message": "This is the branch refrence\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/sudeep.holla/linux.git/commit/?id\u003da4447c0693830d5ecadd6e755cb7fdc55d86aacc",
+      "parentUuid": "f7613352_7c8edaba",
+      "revId": "8e642cb3c5f80b9a5da9d1927cc671c4ac75340a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
