@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2002ddc6_b9f1c61c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-22T17:33:37Z",
+      "side": 1,
+      "message": "Should this be UPSTREAM? Gemini said this patch is identical to upstream. If there are changes made, you should mention them like this in the commit message:\n\n```\n(cherry picked from commit f1875091a01dd634ff5f8b6fc57ab874f755c415)\n[willmcvicker: some message about backport changes]\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "ba4da8a958114b9ee7b18b8f6e8d29454f7c931f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
