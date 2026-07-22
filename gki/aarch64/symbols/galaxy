@@ -89,6 +89,7 @@
   __traceiter_android_vh_mutex_wait_finish
   __traceiter_android_vh_mutex_wait_start
   __traceiter_android_vh_oom_killer_disable
+  __traceiter_android_vh_page_cache_read
   __traceiter_android_vh_process_madvise_return_error
   __traceiter_android_vh_rebalance_anon_lru_bypass
   __traceiter_android_vh_rtmutex_wait_finish
@@ -164,6 +165,7 @@
   __tracepoint_android_vh_mutex_wait_finish
   __tracepoint_android_vh_mutex_wait_start
   __tracepoint_android_vh_oom_killer_disable
+  __tracepoint_android_vh_page_cache_read
   __tracepoint_android_vh_process_madvise_return_error
   __tracepoint_android_vh_rebalance_anon_lru_bypass
   __tracepoint_android_vh_rtmutex_wait_finish
