@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7f72db_934444d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-22T17:38:05Z",
+      "side": 1,
+      "message": "I believe this is the patch that introduces the issue. It looks to me like the fix from the reported bug is supposed to be https://git.kernel.org/torvalds/c/bc7304f3ae20.",
+      "revId": "dd3a1ce2497395ef1e4b57eb8a64f0d1a7c4c2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
