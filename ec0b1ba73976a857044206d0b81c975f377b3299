@@ -16,6 +16,24 @@
       "message": "Just wondering if we have any plan to set `guest_state_protected` in the pKVM, and the potential usage in the pKVM? Now pKVM uses `is_guest_vcpu_accessible()` to check if a hypercall is allowed or not, and some hypercalls will not be allowed once the vcpu starts running by checking `kvm_vcpu_has_run(vcpu)`. So seems this behavior in the pKVM is similar to `guest_state_protected`, which is set after return from the first vcpu_run hypercall.",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626fa747_e9db9f4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-22T20:21:31Z",
+      "side": 1,
+      "message": "\u003e Just wondering if we have any plan to set guest_state_protected in the pKVM, and the potential usage in the pKVM? \n\nNot really - I just thought that if for some reason it will ever change and `guest_state_protected` will be synced with host, the FPU/XSAVE swap will be wrongly bypassed. Because we re-use arch/x86/kvm/x86.c with `__PKVM_HYP__` ifdefs, pKVM-low relies on executing this code \"manually\" since we do not have hw doing the swap for us (and I believe this is the case for e.g. TDX and that\u0027s why the guest_state_protected check is there).\n\n\n\u003e  Now pKVM uses is_guest_vcpu_accessible() to check if a hypercall is allowed or not, and some hypercalls will not be allowed once the vcpu starts running by checking kvm_vcpu_has_run(vcpu). So seems this behavior in the pKVM is similar to guest_state_protected, which is set after return from the first vcpu_run hypercall.\n\nDo I understand correctly that you are considering using guest_state_protected instead of is_guest_vcpu_accessible()? If so, as I wrote above, currently due to the fact how we reuse arch/x86/kvm/x86.c for pKVM-low, we can\u0027t do that. Actually syncing that flag down to the pKVM would require evaluating and patching x86.c even more (to make sure which things could be skipped, and which are currently skipped due to TDX/SEV maintaining something in HW while pKVM would have to do it in a software-way).",
+      "parentUuid": "2f40ba9c_50d6285c",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
