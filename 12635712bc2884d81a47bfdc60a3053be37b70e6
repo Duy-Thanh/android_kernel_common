@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae9c553_3b6c0d7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-22T17:18:37Z",
+      "side": 1,
+      "message": "We usually try to avoid taking FROMLIST changes, and prefer to wait until they are merged in a maintainer tree as FROMGIT.\n\nCan you add a note here at the bottom of the commit message or if its sensitive in the bug clarifying the urgency that is requiring this to be included before we\u0027re confident it is on its way to being merged upstream?",
+      "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
