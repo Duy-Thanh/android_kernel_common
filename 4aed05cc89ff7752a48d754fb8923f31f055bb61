@@ -34,6 +34,24 @@
       "parentUuid": "e871478c_8d68af9d",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7b0db3_ccc5f259",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-22T10:52:48Z",
+      "side": 1,
+      "message": "\u003eSo AFAIU it, well behaving host shouldn\u0027t change the hw xcr0 and xss in the first place: if for some reason it changes it we need to detect it and overwrite it back to default safe kvm_host.xcr0/xss values before switching to guest and not necessarily restore them back to those untrusted values before switching to the host. With that being said, perhaps we should not allow the host to change the hw xcr0 and xss at runtime (guard it in handle_write_msr and handle_xsetbv or print some warn)?\n\nThe KVM code may change xcr0 and MSR_IA32_XSS with the guest value via calling `kvm_load_guest_xsave_state()`, but with pKVM enabled, the KVM code will not call this function, so I think it is as you pointed a well behaving host shouldn\u0027t change the hw xcr0 and xss in the first place. So your suggestion makes sense to me. Besides print warning, do we want to inject #GP to the host to notify the host about its setting doesn\u0027t work, although this exception is un-expected according to the SDM?",
+      "parentUuid": "420c9946_aa6cae76",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
