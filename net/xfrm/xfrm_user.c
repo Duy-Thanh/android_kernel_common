@@ -572,10 +572,11 @@ static int verify_newsa_info(struct xfrm_usersa_info *p,
 	if (attrs[XFRMA_SA_EXTRA_FLAGS]) {
 		u32 xflags = nla_get_u32(attrs[XFRMA_SA_EXTRA_FLAGS]);
 
-		if (xflags & XFRM_SA_XFLAG_DADDR_WILDRECV) {
+		if (xflags & (XFRM_SA_XFLAG_DADDR_WILDRECV |
+			      XFRM_SA_XFLAG_ENCAP_WILDRECV)) {
 			if (sa_dir != XFRM_SA_DIR_IN && sa_dir != 0) {
 				NL_SET_ERR_MSG(extack,
-					       "Invalid direction for DADDR_WILDRECV");
+					       "Invalid direction for wildcard receive flag");
 				err = -EINVAL;
 				goto out;
 			}

@@ -671,7 +671,8 @@ process:
 			goto drop_unlock;
 		}
 
-		if ((x->encap ? x->encap->encap_type : 0) != encap_type) {
+		if (!(x->props.extra_flags & XFRM_SA_XFLAG_ENCAP_WILDRECV) &&
+		    (x->encap ? x->encap->encap_type : 0) != encap_type) {
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINSTATEMISMATCH);
 			goto drop_unlock;
 		}
