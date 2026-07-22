@@ -340,8 +340,6 @@ static int __init early_hyp_lm_size_mb_cfg(char *arg)
 }
 early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
-DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
-
 static int __init early_ffa_max_nr_constituents(char *arg)
 {
 	return kstrtoul(arg, 10, &kvm_nvhe_sym(ffa_max_nr_constituents));
@@ -2063,7 +2061,7 @@ int __pkvm_handle_smccc_req(struct arm_smccc_res *res, void *arg)
 
 static int early_ffa_unmap_on_lend_cfg(char *arg)
 {
-	static_branch_enable(&kvm_ffa_unmap_on_lend);
+	kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = 1;
 	return 0;
 }
 early_param("kvm-arm.ffa-unmap-on-lend", early_ffa_unmap_on_lend_cfg);
