@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccc27b0_f738be18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-22T00:34:24Z",
+      "side": 1,
+      "message": "@jstultz@google.com: this patchset still has KMI breaks that we are working with the uploader to rework.\n\nIn parallel, I\u0027m wondering if you could do a quick pre-review to let us know if there are any other hurdles to clear based on the content of the changes (e.g. okay to make changes to `mm/vmscan` at this stage in the GKI schedule, etc)\n\nThis is to address TTMs contribution to memory fragmentation on Intel Android devices using the TTM-based Xe GPU driver.",
+      "revId": "0c9fa9a0d19966def5baeccf1d8f552a1471b1c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
