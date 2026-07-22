@@ -1,0 +1,38 @@
+{
+  "imports": [
+    {
+      "path": "bionic"
+    },
+    {
+      "path": "cts/tests/tests/usb"
+    },
+    {
+      "path": "device/google/cuttlefish"
+    },
+    {
+      "path": "device/google/cuttlefish_prebuilts"
+    },
+    {
+      "path": "frameworks/base"
+    },
+    {
+      "path": "packages/modules"
+    },
+    {
+      "path": "system/core"
+    },
+    {
+      "path": "test/cts-root/tests/bluetooth"
+    }
+  ],
+  "kernel-presubmit": [
+    {
+      "name": "CtsWifiBroadcastsHostTestCases"
+    }
+  ],
+  "presubmit": [
+    {
+      "name": "snapuserd_test"
+    }
+  ]
+}
