@@ -422,6 +422,12 @@ static inline unsigned long pkvm_selftest_pages(void) { return 0; }
  */
 #define KVM_FFA_MAX_NR_CONSTITUENTS	4096
 
+enum pkvm_ffa_unmap_on_lend_mode {
+	PKVM_FFA_UNMAP_ON_LEND_OFF = 0,
+	PKVM_FFA_UNMAP_ON_LEND_ON,
+	PKVM_FFA_UNMAP_ON_LEND_FULL,
+};
+
 extern int kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend);
 static inline bool pkvm_ffa_unmap_on_lend(void)
 {
