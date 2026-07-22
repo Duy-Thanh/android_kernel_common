@@ -16,6 +16,24 @@
       "message": "It seems we\u0027d better just add this directly into the regular `pkvm_get_iommu_domain()`, instead of introducing `pkvm_get_validate_iommu_domain()`? (Looks like there are no users of the regular `pkvm_get_iommu_domain()` left anymore after this patch?)",
       "revId": "68e9938ece7bc09fa452377d7c746b1592cc7e96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52de57a1_027178e7",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T23:49:53Z",
+      "side": 1,
+      "message": "Ahh yes, with the previous implementation (without did) I had two other places in map and unmap domain which passed NULL for iommu. With introduction of did it went away. Will converge it  back to pkvm_get_iommu_domain",
+      "parentUuid": "f621888c_77112ceb",
+      "revId": "68e9938ece7bc09fa452377d7c746b1592cc7e96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
