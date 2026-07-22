@@ -70,6 +70,24 @@
       "parentUuid": "cab95f7c_d2b4a6e1",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bfc600d_963b69af",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T17:24:01Z",
+      "side": 0,
+      "message": "A domain could be legitimately attached to different DMARs I think and hence we would need to have a list of iommu\u0027s for the domain. I was thinking to have the check for (host_domain_agaw \u003c\u003d iommu-\u003eagaw) during context entry/pasid entry install (host should pass host_domain_agaw in the hypercall). This will make sure that the page table pointed to by pgd will be safe as it will be accessed only IOMMU\u0027s whose agaw is matched against the domains agaw. Host has a check with this function: paging_domain_compatible. We could mimic similar to that in pKVM as well. What do you think",
+      "parentUuid": "f2d14963_0fce395e",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
