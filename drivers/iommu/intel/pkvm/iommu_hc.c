@@ -129,7 +129,7 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 		domain.pgd = __pkvm_va(pkvm_host_ept_root());
 		domain.agaw = level_to_agaw(pkvm_host_ept_level());
 	} else {
-		domain.pgd = pkvm_host_gpa_to_virt(data->pgd_gpa);
+		domain.pgd = host_gpa_to_pgd_safe(data->pgd_gpa);
 		domain.agaw = iommu->agaw;
 	}
 
@@ -248,7 +248,7 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct pasid_table table = { 0 };
-	u64 fsptptr;
+	void *pgd;
 	int ret;
 
 	if (!iommu)
@@ -273,7 +273,14 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	if (ret)
 		return ret;
 
-	fsptptr = pkvm_host_gpa_to_phys(data->fsptptr_gpa);
+	pgd = host_gpa_to_pgd_safe(data->fsptptr_gpa);
+	/*
+	 * Validate for NULL as we are passing __pkvm_pa(pgd)
+	 * to intel_pasid_setup_first_level()
+	 */
+	if (!pgd)
+		return -EINVAL;
+
 	info.bus = data->bus;
 	info.devfn = data->devfn;
 	info.ats_qdep = data->ats_qdep;
@@ -289,7 +296,7 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 	pkvm_dbg("%s: dev[%x:%x], pasid: %x, fsptptr_gpa: %llx, did: %d\n", __func__,
 		 data->bus, data->devfn, data->pasid, data->fsptptr_gpa, data->did);
 
-	return intel_pasid_setup_first_level(iommu, &dev, fsptptr,
+	return intel_pasid_setup_first_level(iommu, &dev, __pkvm_pa(pgd),
 					     data->pasid, data->did, data->flags);
 }
 
@@ -347,7 +354,7 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 		domain.pgd = __pkvm_va(pkvm_host_ept_root());
 		domain.agaw = level_to_agaw(pkvm_host_ept_level());
 	} else {
-		domain.pgd = pkvm_host_gpa_to_virt(data->ssptptr_gpa);
+		domain.pgd = host_gpa_to_pgd_safe(data->ssptptr_gpa);
 		domain.agaw = iommu->agaw;
 	}
 
@@ -455,7 +462,7 @@ int pkvm_iommu_alloc_domain(struct alloc_domain_data *data)
 	if (ret)
 		return ret;
 
-	pgd = pkvm_host_gpa_to_virt(data->pgd_gpa);
+	pgd = host_gpa_to_pgd_safe(data->pgd_gpa);
 	pkvm_dbg("%s: write protecting pgd: %p\n", __func__, pgd);
 	ret = pkvm_host_donate_hyp_share_ro(__pkvm_pa(pgd), VTD_PAGE_SIZE, true);
 	if (ret) {

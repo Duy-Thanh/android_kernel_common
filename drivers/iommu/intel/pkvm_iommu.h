@@ -178,6 +178,7 @@ static inline bool is_iommu_mmio(unsigned long phys)
 
 extern struct dmar_domain pt_domain;
 void init_pt_domain(void);
+void *host_gpa_to_pgd_safe(u64 pgd_gpa);
 
 bool overlaps_iommu_mmio(unsigned long phys, unsigned long size);
 bool is_dev_in_satc(u16 bdf);

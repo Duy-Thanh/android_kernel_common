@@ -7,6 +7,7 @@
 #include "pkvm.h"
 #include "pkvm/debug.h"
 #include "pkvm/memory.h"
+#include "pkvm/vmx/ept.h"
 #include "../iommu.h"
 
 /*
@@ -24,11 +25,28 @@ void init_pt_domain(void)
 	INIT_LIST_HEAD(&pt_domain.cache_tags);
 	pkvm_spin_lock_init(&pt_domain.cache_lock);
 	pt_domain.qi_batch = &pt_domain._qi_batch;
+	pt_domain.pgd = __pkvm_va(pkvm_host_ept_root());
+	pt_domain.agaw = level_to_agaw(pkvm_host_ept_level());
+}
+
+static bool is_pt_domain_pgd(void *pgd)
+{
+	return pgd == pt_domain.pgd;
+}
+
+void *host_gpa_to_pgd_safe(u64 pgd_gpa)
+{
+	if (pgd_gpa == pkvm_host_ept_root())
+		return NULL;
+	return pkvm_host_gpa_to_virt(pgd_gpa);
 }
 
 static struct dmar_domain *__pkvm_get_iommu_domain_locked(void *pgd, bool inc_ref)
 {
 	struct dmar_domain *domain;
+
+	if (is_pt_domain_pgd(pgd))
+		return NULL;
 
 	hash_for_each_possible(iommu_domain_hasht, domain, hnode, (u64)pgd) {
 		if (domain->pgd != pgd)
@@ -52,6 +70,9 @@ struct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd)
 {
 	struct dmar_domain *domain;
 
+	if (is_pt_domain_pgd(pgd))
+		return &pt_domain;
+
 	pkvm_spin_lock(&iommu_domain_lock);
 	domain = __pkvm_get_iommu_domain_locked(pgd, false);
 	if (domain && WARN_ON_ONCE(atomic_read(&domain->refcount) <= 1))
@@ -65,6 +86,9 @@ struct dmar_domain *pkvm_get_iommu_domain(void *pgd)
 {
 	struct dmar_domain *domain;
 
+	if (is_pt_domain_pgd(pgd))
+		return &pt_domain;
+
 	pkvm_spin_lock(&iommu_domain_lock);
 	domain = __pkvm_get_iommu_domain_locked(pgd, true);
 	pkvm_spin_unlock(&iommu_domain_lock);
@@ -74,6 +98,9 @@ struct dmar_domain *pkvm_get_iommu_domain(void *pgd)
 
 void pkvm_put_iommu_domain(struct dmar_domain *domain)
 {
+	if (domain == &pt_domain)
+		return;
+
 	WARN_ON_ONCE(atomic_dec_if_positive(&domain->refcount) <= 0);
 }
 
@@ -206,9 +233,12 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 struct dmar_domain *pkvm_alloc_iommu_domain(struct alloc_domain_data *data,
 					    bool need_iotlb_sync_map)
 {
-	void *pgd = pkvm_host_gpa_to_virt(data->pgd_gpa);
+	void *pgd = host_gpa_to_pgd_safe(data->pgd_gpa);
 	struct dmar_domain *domain;
 	unsigned long index;
+
+	if (!pgd)
+		return ERR_PTR(-EINVAL);
 
 	pkvm_spin_lock(&iommu_domain_lock);
 	domain = __pkvm_get_iommu_domain_locked(pgd, false);
@@ -263,7 +293,7 @@ static int iommu_domain_map(struct domain_map_data *data)
 	if (check_add_overflow(phys, size, &end))
 		return -EINVAL;
 
-	domain = pkvm_get_iommu_domain(pkvm_host_gpa_to_virt(data->pgd_gpa));
+	domain = pkvm_get_iommu_domain(host_gpa_to_pgd_safe(data->pgd_gpa));
 	if (!domain) {
 		pkvm_err("%s: failed to get the domain [pgd:%llx]\n",
 			 __func__, data->pgd_gpa);
@@ -306,7 +336,7 @@ int pkvm_iommu_domain_unmap(u64 pgd_gpa, u64 start_pfn, u64 last_pfn)
 {
 	struct dmar_domain *domain;
 
-	domain = pkvm_get_iommu_domain(pkvm_host_gpa_to_virt(pgd_gpa));
+	domain = pkvm_get_iommu_domain(host_gpa_to_pgd_safe(pgd_gpa));
 	if (!domain) {
 		pkvm_err("%s, failed to get the domain [pgd:%llx]\n",
 			 __func__, pgd_gpa);
