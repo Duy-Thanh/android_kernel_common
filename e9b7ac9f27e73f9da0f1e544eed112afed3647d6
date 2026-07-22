@@ -52,6 +52,24 @@
       "parentUuid": "cab95f7c_d2b4a6e1",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d14963_0fce395e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-22T16:53:20Z",
+      "side": 0,
+      "message": "\u003e but using exactly the same `iommu` pointer as before this patch\n\nOr, more importantly, this patch doesn\u0027t change anything because it only changes code in the domain _allocation_ path; it doesn\u0027t change anything in how the allocated domain is used by other hypercalls.\n\n...So, we should instead do something like:\n\n1. Remember which IOMMU the domain was allocated for, e.g. add an `iommu` field to pKVM\u0027s version of `struct dmar_domain`.\n2. Whenever a hypercall gets a domain via `pkvm_get_iommu_domain[_noref]()`, validate if the domain\u0027s `iommu` matches the iommu passed to the hypercall. Maybe the easiest way is to extend my proposal from aosp/4187056:\n\n```\nstruct dmar_domain *pkvm_get_iommu_domain(void *pgd, struct intel_iommu *iommu, u16 did)\n{\n\tstruct dmar_domain *domain;\n\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\tdomain \u003d __pkvm_get_iommu_domain(pgd);\n\tif (domain \u0026\u0026 domain-\u003eiommu !\u003d iommu) {\n\t\t__pkvm_put_iommu_domain(domain);\n\t\treturn NULL;\n\t}\n\t\n\treturn domain;\n}\n\nstruct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd, u16 did)\n{\n\tstruct dmar_domain *domain;\n\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\tdomain \u003d __pkvm_get_iommu_domain_noref(pgd);\n\tif (domain \u0026\u0026 domain-\u003eiommu !\u003d iommu)\n\t\treturn NULL;\n\t\n\treturn domain;\n}\n```",
+      "parentUuid": "cab95f7c_d2b4a6e1",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
