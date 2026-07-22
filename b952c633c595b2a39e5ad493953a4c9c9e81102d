@@ -39,6 +39,72 @@
       },
       "revId": "b952c633c595b2a39e5ad493953a4c9c9e81102d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d007dad5_3a38860f",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-07-22T22:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76bbafe3_68cfce17",
+      "range": {
+        "startLine": 230,
+        "startChar": 66,
+        "endLine": 230,
+        "endChar": 67
+      },
+      "revId": "b952c633c595b2a39e5ad493953a4c9c9e81102d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf3f11c_c35b2ef6",
+        "filename": "mm/pgsize_migration.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-07-22T22:21:07Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "76bbafe3_68cfce17",
+      "range": {
+        "startLine": 230,
+        "startChar": 66,
+        "endLine": 230,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dc00add7_e7279205",
+          "description": "GET_AI_FIX_FOR_COMMENT prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/pgsize_migration.c",
+              "range": {
+                "startLine": 230,
+                "startChar": 0,
+                "endLine": 231,
+                "endChar": 0
+              },
+              "replacement": "\t * deadlocks against a concurrent vma_start_write() on the target\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b952c633c595b2a39e5ad493953a4c9c9e81102d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
