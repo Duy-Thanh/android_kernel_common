@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a88d0a_d05eb557",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1570,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-22T11:06:14Z",
+      "side": 1,
+      "message": "I think there are two cases where the counter was not already incremented:\n\n* If `requested_thread_count` was zero when `BC_REGISTER_LOOPER` was called.\n* If the same thread calls `BC_EXIT_LOOPER` twice.",
+      "revId": "496415e5c7b784417dc8896d575c86b01092d042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
