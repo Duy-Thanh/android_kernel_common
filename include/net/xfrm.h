@@ -242,7 +242,9 @@ struct xfrm_state {
 
 	/* mapping change rate limiting */
 	xfrm_address_t new_mapping_saddr;
+	xfrm_address_t new_mapping_daddr;
 	__be16 new_mapping_sport;
+	u16 new_mapping_encap_type;
 	u32 new_mapping;	/* seconds */
 	u32 mapping_maxage;	/* seconds for input SA */
 

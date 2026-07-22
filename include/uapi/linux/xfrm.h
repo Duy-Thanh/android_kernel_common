@@ -410,6 +410,7 @@ struct xfrm_usersa_info {
 
 #define XFRM_SA_XFLAG_DONT_ENCAP_DSCP	1
 #define XFRM_SA_XFLAG_OSEQ_MAY_WRAP	2
+#define XFRM_SA_XFLAG_DADDR_WILDRECV	4
 
 struct xfrm_usersa_id {
 	xfrm_address_t			daddr;

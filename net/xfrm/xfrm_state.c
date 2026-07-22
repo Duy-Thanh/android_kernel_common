@@ -81,9 +81,12 @@ static inline unsigned int xfrm_src_hash(struct net *net,
 
 static inline unsigned int
 xfrm_spi_hash(struct net *net, const xfrm_address_t *daddr,
-	      __be32 spi, u8 proto, unsigned short family)
+	      __be32 spi, u8 proto, unsigned short family, u32 extra_flags)
 {
 	lockdep_assert_held(&net->xfrm.xfrm_state_lock);
+
+	if (extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV)
+		return __xfrm_spi_wild_hash(spi, proto, net->xfrm.state_hmask);
 
 	return __xfrm_spi_hash(daddr, spi, proto, family, net->xfrm.state_hmask);
 }
@@ -138,9 +141,12 @@ static void xfrm_hash_transfer(struct hlist_head *list,
 		XFRM_STATE_INSERT(bysrc, &x->bysrc, nsrctable + h, x->xso.type);
 
 		if (x->id.spi) {
-			h = __xfrm_spi_hash(&x->id.daddr, x->id.spi,
-					    x->id.proto, x->props.family,
-					    nhashmask);
+			if (x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV)
+				h = __xfrm_spi_wild_hash(x->id.spi, x->id.proto, nhashmask);
+			else
+				h = __xfrm_spi_hash(&x->id.daddr, x->id.spi,
+						    x->id.proto, x->props.family,
+						    nhashmask);
 			XFRM_STATE_INSERT(byspi, &x->byspi, nspitable + h,
 					  x->xso.type);
 		}
@@ -1169,6 +1175,31 @@ static struct xfrm_state *__xfrm_state_lookup_all(const struct xfrm_hash_state_p
 		return x;
 	}
 
+	h = __xfrm_spi_wild_hash(spi, proto, state_ptrs->hmask);
+	hlist_for_each_entry_rcu(x, state_ptrs->byspi + h, byspi) {
+#ifdef CONFIG_XFRM_OFFLOAD
+		if (xdo->type == XFRM_DEV_OFFLOAD_PACKET) {
+			if (x->xso.type != XFRM_DEV_OFFLOAD_PACKET)
+				break;
+			if (xdo->dev != x->xso.dev)
+				continue;
+		} else if (x->xso.type == XFRM_DEV_OFFLOAD_PACKET) {
+			continue;
+		}
+#endif
+		if (x->id.spi != spi || x->id.proto != proto)
+			continue;
+
+		if (!(x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		return x;
+	}
+
 	return NULL;
 }
 
@@ -1195,6 +1226,21 @@ static struct xfrm_state *__xfrm_state_lookup(const struct xfrm_hash_state_ptrs 
 		return x;
 	}
 
+	h = __xfrm_spi_wild_hash(spi, proto, state_ptrs->hmask);
+	hlist_for_each_entry_rcu(x, state_ptrs->byspi + h, byspi) {
+		if (x->id.spi != spi || x->id.proto != proto)
+			continue;
+
+		if (!(x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV))
+			continue;
+
+		if ((mark & x->mark.m) != x->mark.v)
+			continue;
+		if (!xfrm_state_hold_rcu(x))
+			continue;
+		return x;
+	}
+
 	return NULL;
 }
 
@@ -1211,11 +1257,14 @@ struct xfrm_state *xfrm_input_state_lookup(struct net *net, u32 mark,
 
 	rcu_read_lock();
 	hlist_for_each_entry_rcu(x, state_cache_input, state_cache_input) {
-		if (x->props.family != family ||
-		    x->id.spi       != spi ||
-		    x->id.proto     != proto ||
-		    !xfrm_addr_equal(&x->id.daddr, daddr, family))
+		if (x->id.spi != spi || x->id.proto != proto)
 			continue;
+
+		if (!(x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV)) {
+			if (x->props.family != family ||
+			    !xfrm_addr_equal(&x->id.daddr, daddr, family))
+				continue;
+		}
 
 		if ((mark & x->mark.m) != x->mark.v)
 			continue;
@@ -1571,7 +1620,9 @@ found:
 					  x->xso.type);
 			INIT_HLIST_NODE(&x->state_cache);
 			if (x->id.spi) {
-				h = xfrm_spi_hash(net, &x->id.daddr, x->id.spi, x->id.proto, encap_family);
+				h = xfrm_spi_hash(net, &x->id.daddr, x->id.spi,
+						  x->id.proto, encap_family,
+						  x->props.extra_flags);
 				XFRM_STATE_INSERT(byspi, &x->byspi,
 						  xfrm_state_deref_prot(net->xfrm.state_byspi, net) + h,
 						  x->xso.type);
@@ -1735,7 +1786,7 @@ static void __xfrm_state_insert(struct xfrm_state *x)
 
 	if (x->id.spi) {
 		h = xfrm_spi_hash(net, &x->id.daddr, x->id.spi, x->id.proto,
-				  x->props.family);
+				  x->props.family, x->props.extra_flags);
 
 		XFRM_STATE_INSERT(byspi, &x->byspi,
 				  xfrm_state_deref_prot(net->xfrm.state_byspi, net) + h,
@@ -2602,7 +2653,8 @@ int xfrm_alloc_spi(struct xfrm_state *x, u32 low, u32 high,
 		x0 = xfrm_state_lookup_spi_proto(net, newspi, x->id.proto);
 		if (!x0) {
 			x->id.spi = newspi;
-			h = xfrm_spi_hash(net, &x->id.daddr, newspi, x->id.proto, x->props.family);
+			h = xfrm_spi_hash(net, &x->id.daddr, newspi, x->id.proto,
+					  x->props.family, x->props.extra_flags);
 			XFRM_STATE_INSERT(byspi, &x->byspi,
 					  xfrm_state_deref_prot(net->xfrm.state_byspi, net) + h,
 					  x->xso.type);

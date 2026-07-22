@@ -569,6 +569,19 @@ static int verify_newsa_info(struct xfrm_usersa_info *p,
 		}
 	}
 
+	if (attrs[XFRMA_SA_EXTRA_FLAGS]) {
+		u32 xflags = nla_get_u32(attrs[XFRMA_SA_EXTRA_FLAGS]);
+
+		if (xflags & XFRM_SA_XFLAG_DADDR_WILDRECV) {
+			if (sa_dir != XFRM_SA_DIR_IN && sa_dir != 0) {
+				NL_SET_ERR_MSG(extack,
+					       "Invalid direction for DADDR_WILDRECV");
+				err = -EINVAL;
+				goto out;
+			}
+		}
+	}
+
 	if (!sa_dir && attrs[XFRMA_SA_PCPU]) {
 		NL_SET_ERR_MSG(extack, "SA_PCPU only supported with SA_DIR");
 		err = -EINVAL;
@@ -4158,7 +4171,9 @@ static int xfrm_send_report(struct net *net, u8 proto,
 
 static inline unsigned int xfrm_mapping_msgsize(void)
 {
-	return NLMSG_ALIGN(sizeof(struct xfrm_user_mapping));
+	return NLMSG_ALIGN(sizeof(struct xfrm_user_mapping))
+		+ nla_total_size(sizeof(xfrm_address_t)) /* XFRMA_COADDR */
+		+ nla_total_size(sizeof(__u32)); /* XFRMA_SA_EXTRA_FLAGS */
 }
 
 static int build_mapping(struct sk_buff *skb, struct xfrm_state *x,
@@ -4183,6 +4198,12 @@ static int build_mapping(struct sk_buff *skb, struct xfrm_state *x,
 	um->new_sport = new_sport;
 	um->old_sport = x->encap ? x->encap->encap_sport : 0;
 	um->reqid = x->props.reqid;
+
+	if (x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV)
+		nla_put(skb, XFRMA_COADDR, sizeof(x->new_mapping_daddr), &x->new_mapping_daddr);
+
+	if (x->props.extra_flags)
+		nla_put_u32(skb, XFRMA_SA_EXTRA_FLAGS, x->props.extra_flags);
 
 	nlmsg_end(skb, nlh);
 	return 0;

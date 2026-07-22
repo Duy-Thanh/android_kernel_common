@@ -433,16 +433,17 @@ static int xfrm6_transport_input(struct xfrm_state *x, struct sk_buff *skb)
 }
 
 static int xfrm_inner_mode_input(struct xfrm_state *x,
-				 struct sk_buff *skb)
+				 struct sk_buff *skb,
+				 unsigned int family)
 {
 	switch (x->props.mode) {
 	case XFRM_MODE_BEET:
 	case XFRM_MODE_TUNNEL:
 		return xfrm_prepare_input(x, skb);
 	case XFRM_MODE_TRANSPORT:
-		if (x->props.family == AF_INET)
+		if (family == AF_INET)
 			return xfrm4_transport_input(x, skb);
-		if (x->props.family == AF_INET6)
+		if (family == AF_INET6)
 			return xfrm6_transport_input(x, skb);
 		break;
 	case XFRM_MODE_ROUTEOPTIMIZATION:
@@ -457,6 +458,43 @@ static int xfrm_inner_mode_input(struct xfrm_state *x,
 	}
 
 	return -EOPNOTSUPP;
+}
+
+static void xfrm_check_wild_mapping(struct xfrm_state *x, struct sk_buff *skb,
+				    int encap_type)
+{
+	unsigned int family = XFRM_SPI_SKB_CB(skb)->family;
+	xfrm_address_t saddr, *daddr;
+	__be16 sport = 0;
+	bool notify = false;
+
+	if (!(x->props.extra_flags & XFRM_SA_XFLAG_DADDR_WILDRECV))
+		return;
+
+	daddr = (xfrm_address_t *)(skb_network_header(skb) +
+				   XFRM_SPI_SKB_CB(skb)->daddroff);
+
+	if (family == AF_INET) {
+		saddr.a4 = ip_hdr(skb)->saddr;
+	} else {
+#if IS_ENABLED(CONFIG_IPV6)
+		memcpy(&saddr.a6, &ipv6_hdr(skb)->saddr, sizeof(saddr.a6));
+#endif
+	}
+
+	if (encap_type > 0) {
+		int ihl = (family == AF_INET) ? ip_hdr(skb)->ihl * 4 : sizeof(struct ipv6hdr);
+		struct udphdr *uh = (void *)(skb_network_header(skb) + ihl);
+		sport = uh->source;
+	}
+
+	if (!xfrm_addr_equal(daddr, &x->new_mapping_daddr, x->props.family)) {
+		x->new_mapping_daddr = *daddr;
+		notify = true;
+	}
+
+	if (notify)
+		km_new_mapping(x, &saddr, sport);
 }
 
 /* NOTE: encap_type - In addition to the normal (non-negative) values for
@@ -638,6 +676,8 @@ process:
 			goto drop_unlock;
 		}
 
+		xfrm_check_wild_mapping(x, skb, encap_type);
+
 		if (xfrm_replay_check(x, skb, seq)) {
 			XFRM_INC_STATS(net, LINUX_MIB_XFRMINSTATESEQERROR);
 			goto drop_unlock;
@@ -696,7 +736,7 @@ resume:
 
 		XFRM_MODE_SKB_CB(skb)->protocol = nexthdr;
 
-		err = xfrm_inner_mode_input(x, skb);
+		err = xfrm_inner_mode_input(x, skb, family);
 		if (err == -EINPROGRESS) {
 			if (async)
 				dev_put(skb->dev);
@@ -749,7 +789,7 @@ resume_decapped:
 
 		err = -EAFNOSUPPORT;
 		rcu_read_lock();
-		afinfo = xfrm_state_afinfo_get_rcu(x->props.family);
+		afinfo = xfrm_state_afinfo_get_rcu(family);
 		if (likely(afinfo))
 			err = afinfo->transport_finish(skb, xfrm_gro || async);
 		rcu_read_unlock();

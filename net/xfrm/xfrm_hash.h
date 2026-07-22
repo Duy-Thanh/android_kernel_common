@@ -132,6 +132,14 @@ __xfrm_spi_hash(const xfrm_address_t *daddr, __be32 spi, u8 proto,
 }
 
 static inline unsigned int
+__xfrm_spi_wild_hash(__be32 spi, u8 proto, unsigned int hmask)
+{
+	unsigned int h = (__force u32)spi ^ proto;
+
+	return (h ^ (h >> 10) ^ (h >> 20)) & hmask;
+}
+
+static inline unsigned int
 __xfrm_seq_hash(u32 seq, unsigned int hmask)
 {
 	unsigned int h = seq;
