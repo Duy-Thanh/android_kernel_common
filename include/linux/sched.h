@@ -725,7 +725,12 @@ struct sched_dl_entity {
 	 * runnable task.
 	 */
 	struct rq			*rq;
+<<<<<<< HEAD   (998a535740242cda49c22f0c80fc444126561f88 Merge 22f9a5e226cf ("Revert "x86/vdso: Fix output operand si)
 	dl_server_has_tasks_f		server_has_tasks; //UNUSED, but preserved for KMI
+||||||| BASE   (22f9a5e226cf6d9cb32dbfc0cf596e6661e11a2d Revert "x86/vdso: Fix output operand size of RDPID")
+	dl_server_has_tasks_f		server_has_tasks;
+=======
+>>>>>>> BRANCH (d7fd56ed5e07e053a5eea6112d61fcaded653b87 sched/deadline: Stop dl_server before CPU goes offline)
 	dl_server_pick_f		server_pick_task;
 
 #ifdef CONFIG_RT_MUTEXES

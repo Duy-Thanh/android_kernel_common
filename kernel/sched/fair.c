@@ -6161,7 +6161,15 @@ static bool throttle_cfs_rq(struct cfs_rq *cfs_rq)
 
 	/* At this point se is NULL and we are at root level*/
 	sub_nr_running(rq, queued_delta);
+<<<<<<< HEAD   (998a535740242cda49c22f0c80fc444126561f88 Merge 22f9a5e226cf ("Revert "x86/vdso: Fix output operand si)
 
+||||||| BASE   (22f9a5e226cf6d9cb32dbfc0cf596e6661e11a2d Revert "x86/vdso: Fix output operand size of RDPID")
+
+	/* Stop the fair server if throttling resulted in no runnable tasks */
+	if (rq_h_nr_queued && !rq->cfs.h_nr_queued)
+		dl_server_stop(&rq->fair_server);
+=======
+>>>>>>> BRANCH (d7fd56ed5e07e053a5eea6112d61fcaded653b87 sched/deadline: Stop dl_server before CPU goes offline)
 done:
 	/*
 	 * Note: distribution will already see us throttled via the
