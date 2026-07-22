@@ -34,6 +34,24 @@
       "parentUuid": "ab7f72db_934444d1",
       "revId": "dd3a1ce2497395ef1e4b57eb8a64f0d1a7c4c2ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0b3128_8121ff71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-22T19:46:30Z",
+      "side": 1,
+      "message": "Thanks. Not sure why I missed that. I\u0027ll abandon. It looks like you took the bug to finish up.",
+      "parentUuid": "fc1c392e_e2494708",
+      "revId": "dd3a1ce2497395ef1e4b57eb8a64f0d1a7c4c2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
