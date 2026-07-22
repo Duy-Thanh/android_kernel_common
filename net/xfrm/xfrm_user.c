@@ -4181,7 +4181,7 @@ static int build_mapping(struct sk_buff *skb, struct xfrm_state *x,
 	memcpy(&um->new_saddr, new_saddr, sizeof(um->new_saddr));
 	memcpy(&um->old_saddr, &x->props.saddr, sizeof(um->old_saddr));
 	um->new_sport = new_sport;
-	um->old_sport = x->encap->encap_sport;
+	um->old_sport = x->encap ? x->encap->encap_sport : 0;
 	um->reqid = x->props.reqid;
 
 	nlmsg_end(skb, nlh);
@@ -4196,9 +4196,6 @@ static int xfrm_send_mapping(struct xfrm_state *x, xfrm_address_t *ipaddr,
 	int err;
 
 	if (x->id.proto != IPPROTO_ESP)
-		return -EINVAL;
-
-	if (!x->encap)
 		return -EINVAL;
 
 	skb = nlmsg_new(xfrm_mapping_msgsize(), GFP_ATOMIC);

@@ -823,6 +823,15 @@ int esp6_input_done2(struct sk_buff *skb, int err)
 		 */
 		if (x->props.mode == XFRM_MODE_TRANSPORT)
 			skb->ip_summed = CHECKSUM_UNNECESSARY;
+	} else {
+		const struct ipv6hdr *ip6h = ipv6_hdr(skb);
+
+		if (!ipv6_addr_equal(&ip6h->saddr, &x->props.saddr.in6)) {
+			xfrm_address_t ipaddr;
+
+			memcpy(&ipaddr.a6, &ip6h->saddr.s6_addr, sizeof(ipaddr.a6));
+			km_new_mapping(x, &ipaddr, 0);
+		}
 	}
 
 	skb_postpull_rcsum(skb, skb_network_header(skb),

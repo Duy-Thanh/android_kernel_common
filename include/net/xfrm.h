@@ -241,6 +241,7 @@ struct xfrm_state {
 	const char		*geniv;
 
 	/* mapping change rate limiting */
+	xfrm_address_t new_mapping_saddr;
 	__be16 new_mapping_sport;
 	u32 new_mapping;	/* seconds */
 	u32 mapping_maxage;	/* seconds for input SA */

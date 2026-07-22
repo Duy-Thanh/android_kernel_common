@@ -2810,8 +2810,10 @@ int km_new_mapping(struct xfrm_state *x, xfrm_address_t *ipaddr, __be16 sport)
 
 	if (x->mapping_maxage) {
 		if ((jiffies / HZ - x->new_mapping) > x->mapping_maxage ||
-		    x->new_mapping_sport != sport) {
+		    x->new_mapping_sport != sport ||
+		    !xfrm_addr_equal(ipaddr, &x->new_mapping_saddr, x->props.family)) {
 			x->new_mapping_sport = sport;
+			x->new_mapping_saddr = *ipaddr;
 			x->new_mapping = jiffies / HZ;
 			ret = __km_new_mapping(x, ipaddr, sport);
 		}

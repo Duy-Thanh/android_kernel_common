@@ -782,6 +782,13 @@ int esp_input_done2(struct sk_buff *skb, int err)
 		 */
 		if (x->props.mode == XFRM_MODE_TRANSPORT)
 			skb->ip_summed = CHECKSUM_UNNECESSARY;
+	} else {
+		if (iph->saddr != x->props.saddr.a4) {
+			xfrm_address_t ipaddr;
+
+			ipaddr.a4 = iph->saddr;
+			km_new_mapping(x, &ipaddr, 0);
+		}
 	}
 
 	skb_pull_rcsum(skb, hlen);
