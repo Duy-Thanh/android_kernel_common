@@ -16,6 +16,24 @@
       "message": "Please fix this WARNING reported by TEST_MAPPING Structure: Invalid JSON data in TEST_MAPPING file. Failed to parse JSON data: invalid chara...\n\nInvalid JSON data in TEST_MAPPING file. Failed to parse JSON data: invalid character \u0027{\u0027 after array element",
       "revId": "a6047decf9cd64241fbc6c441c00e2d734bbe943",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caaf6bf8_d68e8b3c",
+        "filename": "kernel/dma/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2026-07-22T19:16:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2a1ebf7_f92ddd01",
+      "revId": "a6047decf9cd64241fbc6c441c00e2d734bbe943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
