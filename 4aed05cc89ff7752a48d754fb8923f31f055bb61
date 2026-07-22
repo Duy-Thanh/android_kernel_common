@@ -52,6 +52,24 @@
       "parentUuid": "420c9946_aa6cae76",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e41b825_ee095003",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-22T14:42:46Z",
+      "side": 1,
+      "message": "\u003e The KVM code may change xcr0 and MSR_IA32_XSS with the guest value via calling kvm_load_guest_xsave_state(), but with pKVM enabled, the KVM code will not call this function, so I think it is as you pointed a well behaving host shouldn\u0027t change the hw xcr0 and xss in the first place. So your suggestion makes sense to me.\n\nExactly, and in pKVM, `kvm_load_guest_xsave_state()` will be triggered by pKVM itself, not the untrusted HostVM.\n\n\u003e Besides print warning, do we want to inject #GP to the host to notify the host about its setting doesn\u0027t work, although this exception is un-expected according to the SDM?\n\nI thought about injecting #GP, but as you mentioned, it may not be the best suited solution here and would be unexpected. Perhaps keeping this patch as is (which preserves security) + adding a warning in `handle_write_msr` and `handle_xsetbv` would be enough? (also note that those warns will be seen only on DEBUG builds).\n\nAnother argument for keeping it as-is (and not injecting #GP) is how generic KVM handles it. In generic KVM, `kvm_load_host_xsave_state()` unconditionally restores XCR0/XSS back to the safe `kvm_host.xcr0/xss` baseline. This shows that KVM also assumes a well-behaved host kernel will not modify hardware XCR0/XSS to values other than kvm_host (aside from temporary guest state during vCPU entry/exit).\n\nWDYT?",
+      "parentUuid": "6d7b0db3_ccc5f259",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
