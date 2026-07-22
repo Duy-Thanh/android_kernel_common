@@ -300,6 +300,12 @@ impl ProcessInner {
         true
     }
 
+    fn deregister_thread(&mut self) {
+        if self.started_thread_count > 0 {
+            self.started_thread_count -= 1;
+        }
+    }
+
     /// Finds a delivered death notification with the given cookie, removes it from the thread's
     /// delivered list, and returns it.
     fn pull_delivered_death(&mut self, cookie: u64) -> Option<DArc<NodeDeath>> {
@@ -1174,6 +1180,10 @@ impl Process {
 
     pub(crate) fn register_thread(&self) -> bool {
         self.inner.lock().register_thread()
+    }
+
+    pub(crate) fn deregister_thread(&self) {
+        self.inner.lock().deregister_thread()
     }
 
     fn remove_thread(&self, thread: Arc<Thread>) {
