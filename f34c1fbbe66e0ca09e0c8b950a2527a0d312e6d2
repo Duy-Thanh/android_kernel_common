@@ -34,6 +34,24 @@
       "parentUuid": "bd9fc4f7_8554a962",
       "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff10ce0_a41a2b67",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-22T19:34:56Z",
+      "side": 1,
+      "message": "\u003e and missing that will atleast be caught in review. \n\n:) As if we (authors/reviewers) didn\u0027t already have enough other pitfalls to remember about? :)\n\nWell, actually it seems it will be caught before review, in testing: if we accidentally use the identity domain while the host expects a non-identity one (i.e. for strict/lazy mode), DMA won\u0027t work. (Then we\u0027d waste some time on debugging it...)\n\nAnyway, don\u0027t you think is just ugly and doesn\u0027t make the API any more convenient and intuitive, quite the opposite? A user of the API is, like: \"Ok, I may need to pass the address in the \"safe\" way. What does \"safe\" mean here? Ok, apparently it means: safely works around the danger of accidentally using the identity domain. Ok, so \"safe\" is just an obscure term for \"non-identity\"...\" Ok, I\u0027ll shut up.",
+      "parentUuid": "95679714_e4ed6cf8",
+      "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
