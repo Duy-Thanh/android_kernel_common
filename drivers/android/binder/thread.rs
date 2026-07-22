@@ -399,8 +399,10 @@ impl InnerThread {
         }
     }
 
-    fn looper_exit(&mut self) {
+    fn looper_exit(&mut self) -> bool {
+        let was_registered = self.looper_flags & LOOPER_REGISTERED != 0;
         self.looper_flags |= LOOPER_EXITED;
+        was_registered
     }
 
     /// Determines whether the thread is part of a pool, i.e., if it is a looper.
@@ -1563,7 +1565,10 @@ impl Thread {
             }
             BC_EXIT_LOOPER => {
                 inner = self.inner.lock();
-                inner.looper_exit();
+                let was_registered = inner.looper_exit();
+                if was_registered {
+                    self.process.deregister_thread();
+                }
             }
             _ => unreachable!(),
         }
