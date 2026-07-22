@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da113a00_15d3c83d",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6463,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-07-22T01:41:08Z",
+      "side": 1,
+      "message": "TODO: https://lwn.net/ml/all/CAADnVQ+C2KNR1ryRtBGOZTNk961pF+30FnU9n3dt3QjaQu_N6Q@mail.gmail.com/ (point 3)\n\nSet a reasonable size here.",
+      "revId": "178db9086ac76b648b877f1a5c7535f8ec83ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
