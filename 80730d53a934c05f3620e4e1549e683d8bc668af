@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7f4907_8f5b4e55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T17:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64db21ab_0a9d3315",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e453515_3558531a",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T22:40:07Z",
       "side": 1,
       "message": "I\u0027m not sure what this is for. AFAICS `iommu_set_lm_ce()` converts it to 0 anyway?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e858aedb_866f5369",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T17:27:23Z",
+      "side": 1,
+      "message": "We need to unassign cachetag and drop domain reference and mimic host to return success if it already exist. Sorry forgot to add a comment. Added it",
+      "parentUuid": "3e453515_3558531a",
       "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81641a9a_7a54c049",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T17:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62e59a68_9af053c6",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51254ec6_c28b674d",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-21T22:40:07Z",
       "side": 1,
       "message": "Can\u0027t we just properly set `pgd` and `agaw` for `pt_domain` itself in the first place (i.e. in `init_pt_domain()`)? So that we can use `\u0026pt_domain` the same way as \"normal\" domains returned by `pkvm_get_iommu_domain()` (and thus avoid these confusing `domain_ptr` and `cache_domain` variables referring to the same thing, and so on).\n\nIt seems we can even go further and pass both `pgd` and `did` to `pkvm_get_iommu_domain()`, to let `pkvm_get_iommu_domain()` itself return `\u0026pt_domain` instead of a \"normal\" domain if needed (and let `pkvm_put_iommu_domain()` do nothing for `\u0026pt_domain`), and thus avoid all this boilerplate on the caller side (and thus also avoid the need for that `release_entry_domain()` helper for hiding this boilerplate)?\n\nMore precisely, we can, for example, rename the existing `pkvm_get_iommu_domain()` and `pkvm_put_iommu_domain()` (which don\u0027t take `did`) to `__pkvm_get_iommu_domain()` and `__pkvm_put_iommu_domain()` and make them static, to use them only inside `pkvm/domain.c` (in pkvm_iommu_domain_map()/pkvm_iommu_domain_unmap()/pkvm_free_iommu_domain()). And then provide public functions like:\n\n```\nstruct dmar_domain *pkvm_get_iommu_domain(void *pgd, u16 did)\n{\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\treturn __pkvm_get_iommu_domain(pgd);\n}\n\nstruct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd, u16 did)\n{\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\treturn \u0026pt_domain;\n\t\t\n\treturn __pkvm_get_iommu_domain_noref(pgd);\n}\n\nvoid pkvm_put_iommu_domain(struct dmar_domain *domain)\n{\n\tif (domain \u003d\u003d \u0026pt_domain)\n\t\treturn;\n\t\t\n\t__pkvm_put_iommu_domain(pgd);\n}\n```\n\n?",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1071e5d3_9ba03a33",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T17:27:23Z",
+      "side": 1,
+      "message": "Makes sense. I implemented slightly differently and avoided passing did to get_domain. Implemented as a separate cl before this: aosp/4190795. PTAL",
+      "parentUuid": "51254ec6_c28b674d",
       "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
