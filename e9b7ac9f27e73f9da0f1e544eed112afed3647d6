@@ -88,6 +88,24 @@
       "parentUuid": "f2d14963_0fce395e",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "962af846_bb62a176",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T18:16:11Z",
+      "side": 0,
+      "message": "One correction about previous comment: We need not pass the domain-\u003eagaw from host as our dmar_domain struct already has that. We just need to verify if the agaw of the domain that is to be attached to the IOMMU is supported by the IOMMU.\n\nI have prototyped a helper function that checks the relevant details(mimicing paging_domain_compatible):\n```\n+/*\n+ * Check the domain properties that affect how an IOMMU walks and caches the\n+ * domain page tables. A domain may be shared by multiple IOMMUs, but only if\n+ * each IOMMU is compatible with the properties selected at allocation time.\n+ */\n+static bool iommu_domain_compatible(struct intel_iommu *iommu,\n+                                   struct dmar_domain *domain)\n+{\n+       int addr_width;\n+\n+       if (domain-\u003euse_first_level) {\n+               if (!sm_supported(iommu) || !ecap_flts(iommu-\u003eecap))\n+                       return false;\n+       } else {\n+               if (sm_supported(iommu) \u0026\u0026 !ecap_slts(iommu-\u003eecap))\n+                       return false;\n+\n+               if (cap_caching_mode(iommu-\u003ecap) \u0026\u0026 !domain-\u003eiotlb_sync_map)\n+                       return false;\n+       }\n+\n+       if (domain-\u003eiommu_superpage \u003e\n+           iommu_superpage_capability(iommu, domain-\u003euse_first_level))\n+               return false;\n+\n+       if (domain-\u003eiommu_coherency !\u003d\n+           iommu_paging_structure_coherency(iommu))\n+               return false;\n+\n+       addr_width \u003d agaw_to_width(iommu-\u003eagaw);\n+       if (addr_width \u003e cap_mgaw(iommu-\u003ecap))\n+               addr_width \u003d cap_mgaw(iommu-\u003ecap);\n+       if (domain-\u003egaw \u003e addr_width || domain-\u003eagaw \u003e iommu-\u003eagaw)\n+               return false;\n+\n+       return true;\n+}\n+\n /*\n  * Retrieve the domain without incrementing refcount.\n  * This is useful when there is a refcount on the domain which is guaranteed\n@@ -82,7 +120,7 @@ struct dmar_domain *pkvm_get_iommu_domain_noref(void *pgd)\n        return domain;\n }\n \n-struct dmar_domain *pkvm_get_iommu_domain(void *pgd)\n+struct dmar_domain *pkvm_get_iommu_domain(void *pgd, struct intel_iommu *iommu)\n {\n        struct dmar_domain *domain;\n \n@@ -91,6 +129,12 @@ struct dmar_domain *pkvm_get_iommu_domain(void *pgd)\n \n        pkvm_spin_lock(\u0026iommu_domain_lock);\n        domain \u003d __pkvm_get_iommu_domain_locked(pgd, true);\n+       if (domain \u0026\u0026 iommu \u0026\u0026 !iommu_domain_compatible(iommu, domain)) {\n+               pkvm_err(\"%s: domain[pgd:%p] is incompatible with iommu%d\\n\",\n+                        __func__, pgd, iommu-\u003eseq_id);\n+               atomic_dec(\u0026domain-\u003erefcount);\n+               domain \u003d NULL;\n+       }\n        pkvm_spin_unlock(\u0026iommu_domain_lock);\n \n        return domain;\n```",
+      "parentUuid": "7bfc600d_963b69af",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
