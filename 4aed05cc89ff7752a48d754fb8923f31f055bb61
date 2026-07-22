@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e871478c_8d68af9d",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-22T02:26:09Z",
+      "side": 1,
+      "message": "Now the pkvm will update the hvcpu-\u003earch.xcr0 and hvcpu-\u003earch.ia32_xss if host changes them. And my understanding about the purpose of pkvm_restore_host_xsave_state is to restore the xcr0 and MSR_IA32_XSS to the trusted fixed value other than re-using the value set by the host, e.g, not to reuse the value saved in hvcpu-\u003earch.xcr0 and hvcpu-\u003earch.ia32_xss.\n\nThen seems we don\u0027t need to overwrite hvcpu-\u003earch.xcr0 and hvcpu-\u003earch.ia32_xss with kvm_host\u0027s value, instead we need to restore xcr0 and MSR_IA32_XSS with the hvcpu-\u003earch.xcr0 and hvcpu-\u003earch.ia32_xss before switch back to the host, to make the host see consistent values it sets? Or maybe I misunderstood something?",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
