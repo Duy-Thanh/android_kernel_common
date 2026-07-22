@@ -16,6 +16,24 @@
       "message": "Why require every caller to remember to use `host_gpa_to_pgd_safe()`?\n\nI think this doesn\u0027t make it simpler or \"safer\", quite the opposite. Before this patch, it is already safe: the checks in pkvm_iommu_alloc_domain() -\u003e pkvm_host_donate_hyp_share_ro() prevent creating a \"normal\" domain with pgd set to the host EPT root. Whereas this patch introduces differentiation between pt_domain and \"normal\" domains based on the pgd value (even though pt_domain is still not a part of the hashtable hashed by pgd, so this differentiation is not exactly necessary), thus creates a danger of a caller accidentally using the pt_domain instead of a \"normal\" domain.\n\nWhat was wrong with my proposal?\n\nIf you really don\u0027t like passing `did` to the domain API, I\u0027d suggest to just do it the old way, i.e. directly use `\u0026pt_domain` on the caller side instead of using `pkvm_get_iommu_domain()` if did \u003d\u003d FLPT_DEFAULT_DID (i.e. in this patch just add `pt_domain.pgd` and `pt_domain.agaw` setup and nothing more).",
       "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95679714_e4ed6cf8",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T18:52:43Z",
+      "side": 1,
+      "message": "\u003e Why require every caller to remember to use host_gpa_to_pgd_safe()?\n\nEvery caller has to convert it to pkvm va and I think this is not changing that. Are you meaning that a new code receiving pgd_gpa will miss to call this instead of pkvm_host_gpa_to_virt? Honestly I don\u0027t think it can happen - this is kind of sanitization we do in other places as well and missing that will atleast be caught in review. For eg: for a new code which passes did, we are required to check FLPT_DEFAULT_DID and deny/adjust based on the scenario.\n\n\u003e I think this doesn\u0027t make it simpler or \"safer\", quite the opposite. Before this patch, it is already safe: the checks in pkvm_iommu_alloc_domain() -\u003e pkvm_host_donate_hyp_share_ro() prevent creating a \"normal\" domain with pgd set to the host EPT root. Whereas this patch introduces differentiation between pt_domain and \"normal\" domains based on the pgd value (even though pt_domain is still not a part of the hashtable hashed by pgd, so this differentiation is not exactly necessary), thus creates a danger of a caller accidentally using the pt_domain instead of a \"normal\" domain.\n\nWith this patch, it is still safe, the flow you mentioned will error out when the pgd is ept root. I am not sure accidental creation can happen. The probability of accidental creation would be same as passing FLPT_DEFAULT_DID(not the value, but a runtime variable holding this value) accidentally to get_domain() if we introduced the did argument in get_domain().\n\n\u003e What was wrong with my proposal?\n\nNothing wrong, IMHO both are very similar. I felt this is a bit more natural as we don\u0027t need to pass did to a function which does not really require it for any of its logic and we can make use of pgd which we pass already.\n\n\u003e If you really don\u0027t like passing did to the domain API, I\u0027d suggest to just do it the old way, i.e. directly use \u0026pt_domain on the caller side instead of using pkvm_get_iommu_domain() if did \u003d\u003d FLPT_DEFAULT_DID (i.e. in this patch just add pt_domain.pgd and pt_domain.agaw setup and nothing more).\n\nNot a problem, I can switch to your idea",
+      "parentUuid": "bd9fc4f7_8554a962",
+      "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
