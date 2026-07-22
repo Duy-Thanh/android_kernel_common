@@ -34,6 +34,24 @@
       "parentUuid": "524d2a3c_e3a5a248",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520ad753_5557ce91",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T16:52:09Z",
+      "side": 0,
+      "message": "My bad, I was trusting only iommu-\u003ecap and confused myself that iommu-\u003eagaw could also be trusted as it was generated before deprivilege - hence removed the check with iommu-agaw. You\u0027re right, this is a noop patch. Will rework it and resend.",
+      "parentUuid": "cab95f7c_d2b4a6e1",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
