@@ -52,6 +52,24 @@
       "parentUuid": "95679714_e4ed6cf8",
       "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34facf2_2538003c",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T19:39:31Z",
+      "side": 1,
+      "message": "I am implementing and testing your suggestion :-)",
+      "parentUuid": "cff10ce0_a41a2b67",
+      "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
