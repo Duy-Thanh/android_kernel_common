@@ -70,6 +70,24 @@
       "parentUuid": "cff10ce0_a41a2b67",
       "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbae23a_37f09572",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-22T21:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f34facf2_2538003c",
+      "revId": "f34c1fbbe66e0ca09e0c8b950a2527a0d312e6d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
