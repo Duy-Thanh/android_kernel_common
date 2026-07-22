@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ea6aa7_a3e47b69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-22T06:06:56Z",
+      "side": 1,
+      "message": "Change:\n\nMove the \"from_dt\" field in \"struct ufshcd_tx_eq_params\" into a KABI\nhole to preserve the structure size and maintain binary compatibility.\n\nto:\n\nHide the new \"from_dt\" field in \"struct ufshcd_tx_eq_params\" from\nsymtypes with KABI_IGNORE in order to preserve symbol CRCs. Note that\nthe field landed in an existing hole and so does not affect structure\nsize or binary compatibility.",
+      "revId": "75eb5a11ac2015e3d1132fdcc47f80f956eb3fbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
