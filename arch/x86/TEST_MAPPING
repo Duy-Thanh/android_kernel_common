@@ -1,0 +1,47 @@
+{
+  "imports": [
+    {
+      "path": "bionic"
+    },
+    {
+      "path": "cts/hostsidetests/statsdatom"
+    },
+    {
+      "path": "cts/tests/tests/usb"
+    },
+    {
+      "path": "device/google/cuttlefish"
+    },
+    {
+      "path": "device/google/cuttlefish_prebuilts"
+    },
+    {
+      "path": "frameworks/base"
+    },
+    {
+      "path": "packages/modules"
+    },
+    {
+      "path": "packages/services/Telecomm"
+    },
+    {
+      "path": "system/core"
+    },
+    {
+      "path": "system/netd"
+    },
+    {
+      "path": "test/cts-root/tests/bluetooth"
+    }
+  ],
+  "kernel-presubmit": [
+    {
+      "name": "CtsWifiBroadcastsHostTestCases"
+    }
+  ],
+  "presubmit": [
+    {
+      "name": "snapuserd_test"
+    }
+  ]
+}
