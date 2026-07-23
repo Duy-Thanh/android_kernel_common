@@ -22,6 +22,30 @@
       },
       "revId": "5f502d0b2a3e453e927f9ba077d7f40955d06341",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e86693a_fac824f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2024662
+      },
+      "writtenOn": "2026-07-23T02:04:14Z",
+      "side": 1,
+      "message": "I didn\u0027t make any change, I will fix it, thanks for pointing this out",
+      "parentUuid": "a4331ca6_7f93fe73",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "5f502d0b2a3e453e927f9ba077d7f40955d06341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
