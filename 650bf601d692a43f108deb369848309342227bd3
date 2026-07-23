@@ -70,6 +70,24 @@
       "parentUuid": "da7a913a_19fab474",
       "revId": "650bf601d692a43f108deb369848309342227bd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdff52da_d0203e97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702837
+      },
+      "writtenOn": "2026-07-23T07:29:54Z",
+      "side": 1,
+      "message": "I think we can continue with the current patch. A fix has been found, and it\u0027s not related to 6.18.",
+      "parentUuid": "dd41554e_9b8fc629",
+      "revId": "650bf601d692a43f108deb369848309342227bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
