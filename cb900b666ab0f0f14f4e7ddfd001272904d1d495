@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf5f80d_0dc2ae57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T16:23:33Z",
+      "side": 1,
+      "message": "Ahh, I had oneliner in there and asked AI to reword if needed. Didn\u0027t notify me of any changes before pushing and I didn\u0027t notice it. Reverted back to my one liner. Sorry about this",
+      "parentUuid": "8b6450e5_c8ba809c",
+      "revId": "cb900b666ab0f0f14f4e7ddfd001272904d1d495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc48ccc7_020436fe",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "536d6534_2ff4687f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T16:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc48ccc7_020436fe",
+      "revId": "cb900b666ab0f0f14f4e7ddfd001272904d1d495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94016722_d40f305b",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-23T16:01:25Z",
       "side": 1,
       "message": "What level checks?",
+      "revId": "cb900b666ab0f0f14f4e7ddfd001272904d1d495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c6a95e_0e833b27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T16:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94016722_d40f305b",
       "revId": "cb900b666ab0f0f14f4e7ddfd001272904d1d495",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
