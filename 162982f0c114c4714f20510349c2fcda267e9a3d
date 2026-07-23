@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b453e2b_cb6a6fd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T18:30:21Z",
+      "side": 1,
+      "message": "The separate intel_pasid_clear_entry_safe() helper which never existed?\n\nImagine you read this commit message a year from now and wonder what this is about and which commit in the git history removed (or even added) this intel_pasid_clear_entry_safe() helper?",
+      "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51e7839a_688369ba",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T18:30:21Z",
+      "side": 1,
+      "message": "Still, this is not a hot path anyway, so why not _just_ move the spin_unlock like in aosp/4155527? `intel_pasid_clear_entry()` itself doesn\u0027t take iommu-\u003elock, so no problem?",
+      "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
