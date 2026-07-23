@@ -63,6 +63,29 @@
       "message": "There are places we assume the SA encap type is the same as the packet encap type and will cause issue. For example, in the following case, if the SA is UDP_ENCAP_ESPINUDP and ENCAP_WILDRECV, and the received packet is raw ESP. \n\n```\n/* net/ipv4/esp4.c:L735-L766 in ~/android/kernel-mainline/common */\nif (x-\u003eencap) {\n    struct xfrm_encap_tmpl *encap \u003d x-\u003eencap;\n    struct tcphdr *th \u003d (void *)(skb_network_header(skb) + ihl);\n    struct udphdr *uh \u003d (void *)(skb_network_header(skb) + ihl);\n    __be16 source;\n    switch (x-\u003eencap-\u003eencap_type) {\n    case TCP_ENCAP_ESPINTCP:\n        source \u003d th-\u003esource;\n        break;\n    case UDP_ENCAP_ESPINUDP:\n        source \u003d uh-\u003esource; --\u003e the UDP header is invalid if packet is non encap\n        break;\n```\n\nI believe there are other places that we have this wrong assumption and will break now",
       "revId": "a2428b27ba2dd6a3cd60878b65881b3d343346f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c85ea6_f6fba8f0",
+        "filename": "net/xfrm/xfrm_user.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-23T09:32:53Z",
+      "side": 1,
+      "message": "UDP encap is only applicable to ESP. Should we validate `x-\u003eid.proto \u003d\u003d IPPROTO_ESP`?",
+      "range": {
+        "startLine": 576,
+        "startChar": 9,
+        "endLine": 576,
+        "endChar": 37
+      },
+      "revId": "a2428b27ba2dd6a3cd60878b65881b3d343346f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
