@@ -105,6 +105,24 @@
       "parentUuid": "448502c6_f18713d3",
       "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c752f0_7acfd1c0",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T21:13:15Z",
+      "side": 1,
+      "message": "\u003e In hypervisor code, with intel_pasid_clear_entry, it would always chose the else block because pasid_pte_is_present(pe) will be false.\n\nAh, ok.",
+      "parentUuid": "592468b2_e0b055fc",
+      "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
