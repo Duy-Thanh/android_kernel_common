@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12e712e8_0438dd4f",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T13:30:19Z",
+      "side": 1,
+      "message": "\u003e It should rather explain why we return success in case of -EEXIST? E.g. simply \"If entry already exists, the host expects the hypercall to succeed. We still need to rollback the cache-tag assign and drop the domain refcount though.\"?\n\nMake sense, will do.\n\n\u003e BTW this seems to be a separate issue, so maybe do this in a separate small patch, like aosp/4172676?\n\nI was thinking, not returning -EEXIST was not an issue before this patch and it became an issue only because we need to do cleanup here. And if we separate -EEXIST to another patch after this patch, we will have a transient regression in this patch as we are not cleaning up. If we move the -EEXIST in `domain_context_mapping_one` as a separate patch before this, then that will have a transient behaviour mismatch in that patch, as we are returning error on duplicate entry. Thats the reason I thought I will have it as a single patch. WDYT?",
+      "parentUuid": "72ce13dd_89dfc8b4",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "718f1fd1_77f92aa9",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 6
