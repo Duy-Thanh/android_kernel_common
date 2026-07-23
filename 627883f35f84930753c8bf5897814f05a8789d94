@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7779684f_5e4fa828",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T13:15:31Z",
+      "side": 1,
+      "message": "\u003e I think this happens only with racing userland actions (eg: multiple pt-\u003edma switch racing etc).\n\nShouldn\u0027t that be done under iommu_group-\u003emutex?\n\nAnyway, ok, this is what Gemini is telling me:\n\n\u003e Yes, there are two primary technical reasons why the Intel VT-d (IOMMU) driver returns 0 (success) when a context entry is already present and not copied:\n\u003e \n\u003e 1. Idempotency \u0026 Re-entrant Domain Attachments\n\u003e In the Linux kernel IOMMU subsystem, attaching a device to an IOMMU domain is designed to be idempotent.\n\u003e \n\u003e If a device is re-attached to the same domain (or if domain_context_mapping_one() / device_pasid_table_setup() is invoked multiple times during setup routines), the context entry in hardware memory is already configured and active for that specific device.\n\u003e \n\u003e Returning an error (e.g., -EEXIST or -EBUSY) would break caller workflows that assume attaching an already-configured device is a no-op success.\n\u003e \n\u003e Returning 0 allows the kernel to safely exit the setup function early, avoiding unnecessary hardware flushes (IOTLB/Context cache invalidations) and lock contention.\n\u003e \n\u003e 2. Multi-Function PCI Devices \u0026 Alias Requester IDs\n\u003e In PCIe architectures, multiple PCI functions on the same physical device or behind legacy PCI/PCI-X bridges often share the same Requester ID (RID) or context table slot.\n\u003e \n\u003e When function 0 configures the context entry for that RID, subsequent functions on the same device or bridge hit domain_context_mapping_one(). Because the entry was already established by the previous function for the same hardware target, returning 0 allows these alias functions to seamlessly share the already-installed context table entry without throwing spurious errors.\n\nI haven\u0027t verified this. Let\u0027s assume this is correct. :) \n\nI hope what we are doing here is safe, in particular `cache_tag_unassign_domain()` will not unexpectedly disable cache flushing, it will only decrement `tag-\u003eusers`...\n\n..Then just a nit about the comment: it says we need to rollback the cache-tag assign and drop the domain refcount, but we need to do that in case of any error, not just -EEXIST? It should rather explain why we return success in case of -EEXIST? E.g. simply \"If entry already exists, the host expects the hypercall to succeed. We still need to rollback the cache-tag assign and drop the domain refcount though.\"?",
+      "parentUuid": "4993fd6c_51d7e2f4",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "718f1fd1_77f92aa9",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 6
