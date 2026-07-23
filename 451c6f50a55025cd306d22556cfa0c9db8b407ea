@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0861966b_04b3a392",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T01:04:09Z",
+      "side": 1,
+      "message": "Better `__pkvm_get_iommu_domain()`?",
+      "revId": "451c6f50a55025cd306d22556cfa0c9db8b407ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
