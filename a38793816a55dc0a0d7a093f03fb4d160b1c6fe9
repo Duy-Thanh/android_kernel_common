@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825b49bb_cc1faa4f",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T13:19:07Z",
+      "side": 1,
+      "message": "Coming here from https://android-review.googlesource.com/c/kernel/common/+/4187056/comment/bcca4718_f9f408e6/\n\nShouldn\u0027t we also convert -EEXIST back to zero before returning it to the host, like in aosp/4187056 ?",
+      "revId": "a38793816a55dc0a0d7a093f03fb4d160b1c6fe9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
