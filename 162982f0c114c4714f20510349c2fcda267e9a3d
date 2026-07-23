@@ -69,6 +69,24 @@
       "parentUuid": "51e7839a_688369ba",
       "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "448502c6_f18713d3",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T19:03:11Z",
+      "side": 1,
+      "message": "Ok, but you also end up duplicating the next 2 lines (cache flush). Could you avoid duplicating them?\n\nAlso, don\u0027t know, `BUG_ON(fault_ignore)` or something (if you insist on not using `intel_pasid_clear_entry()`)?",
+      "parentUuid": "dbd129f7_fd62c9d3",
+      "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
