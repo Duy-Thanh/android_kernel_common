@@ -33,6 +33,24 @@
       "message": "This should wait until a maintainer accepts it. Then the accepted version can be merged here as FROMGIT.",
       "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345d6f34_8afe712d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4027726
+      },
+      "writtenOn": "2026-07-23T05:47:46Z",
+      "side": 1,
+      "message": "Thanks Todd for the review.\nThis change has already received a Reviewed-by from the maintainer and is expected to be merged into the upstream Linux tree soon.\nSo I was hoping to take it here with the FROMLIST tag rather than waiting for the upstream merge.\n\nPlease let me know your thoughts on this approach.",
+      "parentUuid": "e8365808_a8a010f2",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
