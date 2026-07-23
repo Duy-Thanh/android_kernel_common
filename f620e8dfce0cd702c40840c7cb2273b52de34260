@@ -40,6 +40,30 @@
       ],
       "revId": "f620e8dfce0cd702c40840c7cb2273b52de34260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ffe747_f4965f8d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:44:03Z",
+      "side": 1,
+      "message": "I recall it was you who pointed out that we don\u0027t need to require page alignment for `pvmfw_load_addr`. :) \n\n\u003e a non-page-aligned pvmfw_load_addr causes extra page allocation overhead\n\nNot a pKVM\u0027s problem? (Not even a host kernel\u0027s one, I suppose?)\n\n\u003e and an unaligned guest entry point\n\nNot an issue?",
+      "parentUuid": "3495d06f_42d240d8",
+      "range": {
+        "startLine": 397,
+        "startChar": 20,
+        "endLine": 397,
+        "endChar": 35
+      },
+      "revId": "f620e8dfce0cd702c40840c7cb2273b52de34260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
