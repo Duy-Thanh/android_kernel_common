@@ -22,6 +22,30 @@
       },
       "revId": "a2428b27ba2dd6a3cd60878b65881b3d343346f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a70f9303_5914c94b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-23T08:20:59Z",
+      "side": 1,
+      "message": "Oh it is implemented in aosp/4187940",
+      "parentUuid": "794e473e_a1f2baae",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 71
+      },
+      "revId": "a2428b27ba2dd6a3cd60878b65881b3d343346f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
