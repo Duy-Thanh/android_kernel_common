@@ -142,6 +142,24 @@
       "parentUuid": "ae39d08e_cdb6386c",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40773b09_324c5e76",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-23T08:24:04Z",
+      "side": 1,
+      "message": "Yeah, sounds good to me. Thanks!",
+      "parentUuid": "6f3f9ce9_07fe9c99",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
