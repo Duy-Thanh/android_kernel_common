@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da4fcfd_6b730795",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T21:51:39Z",
+      "side": 1,
+      "message": "Quick question: in what exact case may we encounter this case? When the host incorrectly requests mapping an IOVA range that overlaps with an already mapped IOVA range?\n\nIf so, could you mention that in the commit message?",
+      "revId": "311ea7e17658c6b26bee858151b48a9ea83ed7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
