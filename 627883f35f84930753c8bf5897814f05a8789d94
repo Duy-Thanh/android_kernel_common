@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72ce13dd_89dfc8b4",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T13:20:40Z",
+      "side": 1,
+      "message": "BTW this seems to be a separate issue, so maybe do this in a separate small patch, like aosp/4172676?",
+      "parentUuid": "7779684f_5e4fa828",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "718f1fd1_77f92aa9",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 6
