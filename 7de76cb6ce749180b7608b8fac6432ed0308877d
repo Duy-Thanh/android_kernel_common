@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41fc1fe5_9c701f08",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-23T13:10:36Z",
+      "side": 1,
+      "message": "Q: Where does `gzvm_create_vm` call `gzvm_vm_get` so that it would require this call ?",
+      "range": {
+        "startLine": 672,
+        "startChar": 2,
+        "endLine": 672,
+        "endChar": 20
+      },
+      "revId": "7de76cb6ce749180b7608b8fac6432ed0308877d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
