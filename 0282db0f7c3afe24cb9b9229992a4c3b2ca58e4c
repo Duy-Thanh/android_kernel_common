@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc24c86_1c1c6c4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-23T08:34:25Z",
+      "side": 1,
+      "message": "Should we add the umbrella ticket for A17 ? Bug: 458241298",
+      "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a4202f_be583af3",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-23T08:34:25Z",
+      "side": 1,
+      "message": "NIT: can we drop the \"__\" to match the other symbol definition format ?",
+      "range": {
+        "startLine": 265,
+        "startChar": 24,
+        "endLine": 265,
+        "endChar": 48
+      },
+      "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
