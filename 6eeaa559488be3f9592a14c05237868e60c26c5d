@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9ff161e_7eb2d4f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:23:40Z",
+      "side": 1,
+      "message": "\u003e security-relevant subset\n\nWhy are we assuming `cap_fl1gp_support()` and `cap_super_page_val()` are not security-relevant? If a page table contains huge mappings and we attach it to an IOMMU that doesn\u0027t huge pages, what exactly happens?",
+      "revId": "6eeaa559488be3f9592a14c05237868e60c26c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f391f810_7f7cfd91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:23:40Z",
+      "side": 1,
+      "message": "Related thought: wondering if we validate",
+      "revId": "6eeaa559488be3f9592a14c05237868e60c26c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413ee9eb_18c50192",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:23:40Z",
+      "side": 1,
+      "message": "Related thought: do we validate everything we need to validate for `pt_domain` support?\n\nFor example, it seems we should fail pKVM initialization if there is at least one IOMMU with `sm_supported(iommu) \u0026\u0026 !ecap_slts(iommu-\u003eecap)` (since we don\u0027t support passthrough mode in this case)?\n\nOr, for example, it seems we should not allow `cap_caching_mode(iommu-\u003ecap)` for any IOMMU either, for the same reason (otherwise we\u0027d need to flush IOTLB in passthrough mode when mapping in host EPT, not just when unmapping)? Thus, in particular, we don\u0027t really need to bother supporting this `domain-\u003eiotlb_sync_map` mode? :)",
+      "revId": "6eeaa559488be3f9592a14c05237868e60c26c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
