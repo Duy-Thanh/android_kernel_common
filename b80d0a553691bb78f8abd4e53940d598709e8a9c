@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9b5d7f_d526dc53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-23T23:46:17Z",
+      "side": 1,
+      "message": "Please update the commit message to reflect this change -- updating the kernel ABI based on the patch series.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "b80d0a553691bb78f8abd4e53940d598709e8a9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
