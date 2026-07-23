@@ -13,6 +13,7 @@
 #include <linux/fdtable.h>
 #include <linux/file.h>
 #include <linux/fs.h>
+#include <linux/iosys-map.h>
 #include <linux/miscdevice.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
@@ -459,16 +460,42 @@ static int dmabuf_content_mmap(struct wrap_content *content,
 	return 0;
 }
 
-static void dmabuf_content_free(struct wrap_content *content)
-{
-	struct wrap_content_dmabuf *dmabuf_content;
+static int clear_dmabuf_content(struct dma_buf *dmabuf, struct device *dev) {
+	struct dma_buf_attachment *attach;
+	struct sg_table *sgt;
+	struct iosys_map map;
+	int ret;
+	attach = dma_buf_attach(dmabuf, dev);
+	if (IS_ERR(attach))
+		return PTR_ERR(attach);
 
-	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
-				      content);
-	if (dmabuf_content->dmabuf)
-		dma_buf_put(dmabuf_content->dmabuf);
-	kfree(dmabuf_content);
+	sgt = dma_buf_map_attachment(attach, DMA_BIDIRECTIONAL);
+	if (IS_ERR(sgt)) {
+		ret = PTR_ERR(sgt);
+		goto err_detach;
+	}
+
+	ret = dma_buf_begin_cpu_access(dmabuf, DMA_TO_DEVICE);
+	if (ret)
+		goto err_unmap_attach;
+
+	ret = dma_buf_vmap(dmabuf, &map);
+	if (ret)
+		goto err_end_cpu;
+
+	iosys_map_memset(&map, 0, 0, dmabuf->size);
+
+	dma_buf_vunmap(dmabuf, &map);
+err_end_cpu:
+	dma_buf_end_cpu_access(dmabuf, DMA_TO_DEVICE);
+err_unmap_attach:
+	dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
+err_detach:
+	dma_buf_detach(dmabuf, attach);
+	return ret;
 }
+
+static void dmabuf_content_free(struct wrap_content *content);
 
 static void dmabuf_content_show_fdinfo(struct wrap_content *content,
 				       struct seq_file *m)
@@ -1526,6 +1553,19 @@ static struct miscdevice wrapfd_misc = {
 	.fops = &wrapfd_dev_fops,
 };
 
+static void dmabuf_content_free(struct wrap_content *content)
+{
+	struct wrap_content_dmabuf *dmabuf_content;
+
+	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
+				      content);
+	if (dmabuf_content->dmabuf) {
+		clear_dmabuf_content(dmabuf_content->dmabuf, wrapfd_misc.this_device);
+		dma_buf_put(dmabuf_content->dmabuf);
+	}
+	kfree(dmabuf_content);
+}
+
 static int __init wrapfd_init(void)
 {
 	int ret;
@@ -1535,6 +1575,9 @@ static int __init wrapfd_init(void)
 		pr_err("failed to register misc device!\n");
 		return ret;
 	}
+	dma_coerce_mask_and_coherent(wrapfd_misc.this_device,
+				     DMA_BIT_MASK(64));
+	wrapfd_misc.this_device->bus_dma_limit = DMA_BIT_MASK(64);
 
 	return 0;
 }
