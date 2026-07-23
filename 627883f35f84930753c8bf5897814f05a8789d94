@@ -178,6 +178,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943f6fa4_17f4707e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:19:31Z",
+      "side": 1,
+      "message": "\u003e\u003e It should rather explain why we return success in case of -EEXIST? E.g. simply \"If entry already exists, the host expects the hypercall to succeed. We still need to rollback the cache-tag assign and drop the domain refcount though.\"?\n\n\u003e Make sense, will do.\n\nUpdated the comment",
+      "parentUuid": "1a65ce3b_79fbec3e",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "718f1fd1_77f92aa9",
