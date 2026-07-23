@@ -2211,7 +2211,91 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 {
 	int ret;
+	int i, j;
+	u32 max_access;
+	struct fuse_bpf_args fba_bounce;
+	void *bounce_in[FUSE_MAX_IN_ARGS] = {NULL};
+	void *bounce_out[FUSE_MAX_OUT_ARGS] = {NULL};
+	bool bounced = false;
 
+	if (!prog->aux)
+		goto run_direct;
+
+	max_access = prog->aux->max_rdwr_access;
+	if (prog->aux->max_rdonly_access > max_access)
+		max_access = prog->aux->max_rdonly_access;
+
+	if (max_access == 0)
+		goto run_direct;
+
+	fba_bounce = *fba;
+
+	for (i = 0; i < fba->in_numargs; i++) {
+		if (fba->in_args[i].value && fba->in_args[i].size < max_access) {
+			bounce_in[i] = kzalloc(max_access, GFP_NOFS);
+			if (!bounce_in[i]) {
+				ret = -ENOMEM;
+				goto cleanup;
+			}
+			memcpy(bounce_in[i], fba->in_args[i].value, fba->in_args[i].size);
+			fba_bounce.in_args[i].value = bounce_in[i];
+			bounced = true;
+		}
+	}
+	for (i = 0; i < fba->out_numargs; i++) {
+		if (fba->out_args[i].value && fba->out_args[i].size < max_access) {
+			bool aliased = false;
+			for (j = 0; j < fba->in_numargs; j++) {
+				if (fba->out_args[i].value == fba->in_args[j].value) {
+					if (bounce_in[j]) {
+						bounce_out[i] = bounce_in[j];
+						fba_bounce.out_args[i].value = bounce_in[j];
+						aliased = true;
+					}
+					break;
+				}
+			}
+			if (aliased)
+				continue;
+
+			bounce_out[i] = kzalloc(max_access, GFP_NOFS);
+			if (!bounce_out[i]) {
+				ret = -ENOMEM;
+				goto cleanup;
+			}
+			memcpy(bounce_out[i], fba->out_args[i].value, fba->out_args[i].size);
+			fba_bounce.out_args[i].value = bounce_out[i];
+			bounced = true;
+		}
+	}
+
+	migrate_disable();
+	ret = bpf_prog_run(prog, bounced ? &fba_bounce : fba);
+	migrate_enable();
+
+cleanup:
+	if (bounced) {
+		for (i = 0; i < fba->out_numargs; i++) {
+			if (bounce_out[i] && ret != -ENOMEM)
+				memcpy((void *)fba->out_args[i].value, bounce_out[i], fba->out_args[i].size);
+		}
+		for (i = 0; i < fba->out_numargs; i++) {
+			bool aliased = false;
+			for (j = 0; j < fba->in_numargs; j++) {
+				if (bounce_out[i] == bounce_in[j] && bounce_out[i] != NULL) {
+					aliased = true;
+					break;
+				}
+			}
+			if (!aliased)
+				kfree(bounce_out[i]);
+		}
+		for (i = 0; i < fba->in_numargs; i++)
+			kfree(bounce_in[i]);
+	}
+	return ret;
+
+run_direct:
 	migrate_disable();
 	ret = bpf_prog_run(prog, fba);
 	migrate_enable();
