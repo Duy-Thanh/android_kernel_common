@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6a3e7c1b_b301c20f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:27:53Z",
+      "side": 1,
+      "message": "Ah sorry, haven\u0027t realized we check that via `iommu_superpage_capability()`.",
+      "parentUuid": "d9ff161e_7eb2d4f9",
+      "revId": "6eeaa559488be3f9592a14c05237868e60c26c5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f391f810_7f7cfd91",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 21
