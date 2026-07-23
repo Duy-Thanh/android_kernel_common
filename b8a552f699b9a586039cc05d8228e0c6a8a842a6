@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66688d24_c1c04b3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T17:54:54Z",
+      "side": 1,
+      "message": "You\u0027re right, fixed.",
+      "parentUuid": "f4144e28_0cfadfea",
+      "revId": "b8a552f699b9a586039cc05d8228e0c6a8a842a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15d8d705_0bc8f653",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-21T17:29:25Z",
       "side": 1,
       "message": "Is this (2 bugs in one line instead of 2 separate `Bug:` lines) a supported format?",
+      "revId": "b8a552f699b9a586039cc05d8228e0c6a8a842a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f92a1a0_4e3e4e59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T17:54:54Z",
+      "side": 1,
+      "message": "I have seen it in some commits and did not see a lint error. Moved to separate Bug for consistency",
+      "parentUuid": "15d8d705_0bc8f653",
       "revId": "b8a552f699b9a586039cc05d8228e0c6a8a842a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
