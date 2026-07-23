@@ -34,6 +34,24 @@
       "parentUuid": "2f40ba9c_50d6285c",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798ec819_ad8f1395",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-23T08:33:57Z",
+      "side": 1,
+      "message": "\u003eDo I understand correctly that you are considering using guest_state_protected instead of is_guest_vcpu_accessible()?\n\nNo, I though the consideration of this patch is to use guest_state_protected to replace is_guest_vcpu_accessible() in the future. Just want to see if we are going to sync `guest_state_protected` field to pKVM and what is the reason. The KVM source code use `guest_state_protected` as the guest state is protected by HW, not by KVM itself. If we sync `guest_state_protected` to pKVM, e.g., set this field for pVM, re-using the KVM\u0027s code would mean that some code will be skipped for pVM as the pVM\u0027s state is protected by HW and cannot be accessed by the pKVM. So we should never set `guest_state_protected` in pKVM for pVM if we reuse KVM\u0027s code.\n\nAnyway, it seems we don\u0027t have plan to sync this field. 😊\n\nMark this as resolved. Thanks.",
+      "parentUuid": "626fa747_e9db9f4a",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
