@@ -213,6 +213,24 @@
       "parentUuid": "97c6e481_f5116a19",
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22bbf4c8_b2ae40ad",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T15:41:32Z",
+      "side": 1,
+      "message": "This patch prevents pKVM itself from setting a definitely incorrect value in the VMCS. [*] It doesn\u0027t try to impose any limitations on behavior of pvmfw itself, on the size of pvmfw image etc. (Quite the opposite, I think we try to keep the number of pKVM\u0027s requirements to a pvmfw implementation at an absolute minimum. For now, AFAICT, we have only two following requirements: 1. entry point is at the beginning of pvmfw image. 2. pvmfw starts in 32-bit mode with paging disabled, with flat 4G segments, and doesn\u0027t reload segment registers before it sets up its own GDT.)\n\nFor example, the pvmfw entry point may be at 4G-4 but its first instruction may be a jump to an earlier instruction, so it will work fine. :) Who we are to forbid a pvmfw implementation to do such strange things?\n\n[*] That said, HW guarantees that this incorrect value will result in a VM-entry failure. So I think this patch is basically optional. I can remove it if it causes confusion.",
+      "parentUuid": "74ca6d6b_69680d2a",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
