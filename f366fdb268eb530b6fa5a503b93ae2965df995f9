@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70fbb489_ec4e4669",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T09:54:08Z",
+      "side": 1,
+      "message": "Split into 2 commits",
+      "parentUuid": "35176819_487320d7",
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76536a65_79257e25",
@@ -63,6 +81,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7751bb70_60c1810f",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T09:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76536a65_79257e25",
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4196f798_3f0a6a7f",
@@ -76,6 +112,24 @@
       "writtenOn": "2026-07-23T00:24:34Z",
       "side": 1,
       "message": "nit: flip the order of `pkvm_get_iommu_domain()` and `pkvm_get_iommu_domain_noref()` for consistency?",
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01da74cb_8d500043",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T09:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4196f798_3f0a6a7f",
       "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
