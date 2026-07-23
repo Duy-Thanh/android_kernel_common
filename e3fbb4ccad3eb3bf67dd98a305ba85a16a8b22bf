@@ -34,6 +34,24 @@
       "parentUuid": "6075b006_fe9dbe1a",
       "revId": "e3fbb4ccad3eb3bf67dd98a305ba85a16a8b22bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97647cf_de181133",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T16:36:33Z",
+      "side": 1,
+      "message": "Thought of keeping the host logic for pkvm as well, but makes sense - not worth the overhead. Will move it down and same for aosp/4155527",
+      "parentUuid": "1b7d5b44_f28354a7",
+      "revId": "e3fbb4ccad3eb3bf67dd98a305ba85a16a8b22bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
