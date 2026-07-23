@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a65ce3b_79fbec3e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T13:32:34Z",
+      "side": 1,
+      "message": "\u003e I was thinking, not returning -EEXIST was not an issue before this patch and it became an issue only because we need to do cleanup here. \n\nAh ok, indeed.",
+      "parentUuid": "12e712e8_0438dd4f",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "718f1fd1_77f92aa9",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 6
