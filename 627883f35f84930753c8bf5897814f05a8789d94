@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d8d50f_a0e66658",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "6a15d33c_dd55866d",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "415889cf_becfa5d9",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-23T00:58:53Z",
       "side": 1,
       "message": "micro-nit: maybe flip these 2 lines, to follow the reverse xmas style? (Ditto in pkvm_iommu_pasid_teardown())",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a3f083d_166e9274",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "415889cf_becfa5d9",
       "revId": "627883f35f84930753c8bf5897814f05a8789d94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4993fd6c_51d7e2f4",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "I think this happens only with racing userland actions (eg: multiple pt-\u003edma switch racing etc). Host driver doesn\u0027t consider this eror, so thought of keeping the same behaviour",
+      "parentUuid": "bcca4718_f9f408e6",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "718f1fd1_77f92aa9",
         "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
         "patchSetId": 6
@@ -65,6 +119,24 @@
       "writtenOn": "2026-07-23T00:58:53Z",
       "side": 1,
       "message": "nit: maybe add an empty line after this line, for readability?\n\nOr, maybe move this line before line 337, where `fsptptr` is used?",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5d1295_91a0817e",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "Removed fsptptr and used __pkvm_pa(pgd)",
+      "parentUuid": "718f1fd1_77f92aa9",
       "revId": "627883f35f84930753c8bf5897814f05a8789d94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -82,6 +154,24 @@
       "writtenOn": "2026-07-23T00:58:53Z",
       "side": 1,
       "message": "Why not get the domain after calling `accept_page_donation()`, like in other functions?",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a691630e_b0c621f5",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d9fcda0_bf69dcec",
       "revId": "627883f35f84930753c8bf5897814f05a8789d94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

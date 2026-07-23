@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832e5efd_3920ef43",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1689,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T11:40:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e858aedb_866f5369",
+      "revId": "80730d53a934c05f3620e4e1549e683d8bc668af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62e59a68_9af053c6",
