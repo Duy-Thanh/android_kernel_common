@@ -51,6 +51,42 @@
       "message": "This commit is not in Stable yet and contains a bug.",
       "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce1a70d0_aa674d2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-23T10:37:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4a10e729_fb710007",
+      "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d93ec77_35d935a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-23T10:37:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cedeb621_3624e4a8",
+      "revId": "0fc461f7220cdfcf4e2c4291f259478ce6c69733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
