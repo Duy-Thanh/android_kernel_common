@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf906299_9b974e09",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T14:10:41Z",
+      "side": 1,
+      "message": "Just realized: the VT-d spec says this about PGSNP field in a PASID entry: \"This field is treated as Reserved(0) for implementations not supporting Snoop Control (SC\u003d0 in the Extended Capability Register).\" - so we should validate `ecap_sc_support(iommu-\u003eecap)` similarly to the host\u0027s `paging_domain_compatible()` before allowing to enable page snoop (otherwise the behavior is undefined)?",
+      "revId": "4851e1201914c1fc821a500ccaecf5719142d8b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
