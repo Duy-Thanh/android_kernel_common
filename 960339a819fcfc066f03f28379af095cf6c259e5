@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "435486e3_33bf7e8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T22:41:09Z",
+      "side": 1,
+      "message": "Ok thx, this answers my question.",
+      "parentUuid": "471291b8_24d43b41",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc8aecb9_f287394d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 24
@@ -49,6 +67,23 @@
       "writtenOn": "2026-07-23T22:13:44Z",
       "side": 1,
       "message": "Those are WARN_ON checks, i.e. they already assume that the caller must guarantee that unless there is a bug (so they are just to help detecting such bugs)? What exactly is the advantage of removing those checks, and how exactly is this removing related to the rest of the patch (i.e. to the optimization)?",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44cb2e2_ba269ac1",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T22:41:09Z",
+      "side": 1,
+      "message": "Just a note: looks like we still don\u0027t avoid unneeded page table walks inside `dma_pte_free_pagetable()`?",
       "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
