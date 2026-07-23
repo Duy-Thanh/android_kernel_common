@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d15c9959_9a4528d6",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T17:33:10Z",
+      "side": 1,
+      "message": "nit: maybe use `goto put_domain` since we have it anyway?",
+      "fixSuggestions": [
+        {
+          "fixId": "bee8a2d1_284f86fd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d -EINVAL;\n\t\tgoto put_domain;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 371,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d -EINVAL;\n\t\tgoto put_domain;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f110b442801f3e1e1bcffe464fd2aa0d2bfb4206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
