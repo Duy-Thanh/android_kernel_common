@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a15d33c_dd55866d",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:58:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure it is very useful to do this in a helper (rather than open-code it in both callers). It seems to actually make the code a bit _less_ readable: the reader has to go and look what exactly this \"release\" does, instead of clearly seeing that immediately.",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415889cf_becfa5d9",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:58:53Z",
+      "side": 1,
+      "message": "micro-nit: maybe flip these 2 lines, to follow the reverse xmas style? (Ditto in pkvm_iommu_pasid_teardown())",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcca4718_f9f408e6",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:58:53Z",
+      "side": 1,
+      "message": "In what cases does the host legitimately call set_lm_ce for an already existing entry?",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "718f1fd1_77f92aa9",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:58:53Z",
+      "side": 1,
+      "message": "nit: maybe add an empty line after this line, for readability?\n\nOr, maybe move this line before line 337, where `fsptptr` is used?",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9fcda0_bf69dcec",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:58:53Z",
+      "side": 1,
+      "message": "Why not get the domain after calling `accept_page_donation()`, like in other functions?",
+      "revId": "627883f35f84930753c8bf5897814f05a8789d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
