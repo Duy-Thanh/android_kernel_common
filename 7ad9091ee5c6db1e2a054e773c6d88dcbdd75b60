@@ -16,6 +16,24 @@
       "message": "nit: avoid empty line between tags?\n\nMaybe also move `Fixes:` tags after `Bug:` (for consistency with other patches)?",
       "revId": "7ad9091ee5c6db1e2a054e773c6d88dcbdd75b60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff7de9e_f13f6f63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T16:21:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7695ebde_836e4805",
+      "revId": "7ad9091ee5c6db1e2a054e773c6d88dcbdd75b60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
