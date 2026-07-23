@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee08dc1_591c73b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-23T15:42:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c226c0_6f032dea",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8365808_a8a010f2",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Thanks Todd for the review.\nThis change has already received a Reviewed-by from the maintainer and is expected to be merged into the upstream Linux tree soon.\nSo I was hoping to take it here with the FROMLIST tag rather than waiting for the upstream merge.\n\nPlease let me know your thoughts on this approach.",
       "parentUuid": "e8365808_a8a010f2",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4a361d_205f779a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-23T15:42:54Z",
+      "side": 1,
+      "message": "If the maintainer has added it to their tree, then we can take it as FROMGIT. If not, then there isn\u0027t evidence that it will be \"merged into the upstream Linux tree soon\" so it needs to wait.",
+      "parentUuid": "345d6f34_8afe712d",
       "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
