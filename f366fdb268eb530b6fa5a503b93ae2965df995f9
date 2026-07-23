@@ -1,0 +1,83 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35176819_487320d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:24:34Z",
+      "side": 1,
+      "message": "There is no such thing as \"default domain lifetime tracking\"? The default domain is always alive?\n\n...And TBH the commit message as a whole, as often, unfortunately, seems to be written with an assumption that the reader already knows everything about this patch.\n\nIn fact this patch implements two related but different things, for two related but different purposes: 1. adds pgd and agaw to the pt_domain (so that context/PASID hypercall handlers can directly use the pt_domain structure instead of constructing their own ad-hoc dmar_domain struct for passing it around). 2. enhance the domain get/put API so that context/PASID hypercall handlers can conveniently use it for both default and non-default domains.\n\nSo, if we don\u0027t want to split this patch into two accordingly, maybe let\u0027s at least organize the commit message accordingly, e.g.: the 1st paragraph clearly describing the 1st thing, the 2nd paragraph clearly describing the 2nd thing? :)",
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76536a65_79257e25",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:24:34Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure this comment belongs here. It\u0027s not just these pkvm_get_iommu_domain()/pkvm_get_iommu_domain_noref() functions that are involved in modeling passthrough mode.\n\nMaybe let\u0027s put it, for example, before the `pt_domain` definition at line 21. Also maybe let\u0027s add some context to make it clearer, e.g.: \"Passthrough domain for implementing passthrough (identity) mode for the host, signified by the default DID (FLPT_DEFAULT_DID). A real passthrough mode (no translation) would allow devices to access all physical memory. So model passthrough mode as a second-stage domain backed by the host EPT instead.\"",
+      "fixSuggestions": [
+        {
+          "fixId": "98284a71_3f74c9a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n/*\n * Passthrough domain for implementing passthrough (identity) mode for the host,\n * signified by the default DID (FLPT_DEFAULT_DID). A real passthrough mode\n * (no translation) would allow devices to access all physical memory. So model\n * passthrough mode as a second-stage domain backed by the host EPT instead.\n */\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4196f798_3f0a6a7f",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T00:24:34Z",
+      "side": 1,
+      "message": "nit: flip the order of `pkvm_get_iommu_domain()` and `pkvm_get_iommu_domain_noref()` for consistency?",
+      "revId": "f366fdb268eb530b6fa5a503b93ae2965df995f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
