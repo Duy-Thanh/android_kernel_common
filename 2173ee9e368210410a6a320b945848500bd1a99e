@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce2def4_2f4ca3c8",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T12:34:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we forbid non-canonical addresses here? WARN_ON will do nothing on non-debug kernel and actually allow to proceed with mapping (even though it proceeds to mask the upper bits first and then map, it seems wrong anyway)?",
+      "range": {
+        "startLine": 787,
+        "startChar": 1,
+        "endLine": 787,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c54b45a_c8acc57d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 787,
+                "startChar": 0,
+                "endLine": 788,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON(!__is_canonical_address(vaddr, boot_cpu_data.x86_virt_bits)))\n\t\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2173ee9e368210410a6a320b945848500bd1a99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
