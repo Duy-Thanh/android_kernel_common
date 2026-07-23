@@ -40,6 +40,30 @@
       ],
       "revId": "2173ee9e368210410a6a320b945848500bd1a99e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169e95cc_73421ea1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T12:53:26Z",
+      "side": 1,
+      "message": "Yeah, makes sense.",
+      "parentUuid": "cce2def4_2f4ca3c8",
+      "range": {
+        "startLine": 787,
+        "startChar": 1,
+        "endLine": 787,
+        "endChar": 70
+      },
+      "revId": "2173ee9e368210410a6a320b945848500bd1a99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
