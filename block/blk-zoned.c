@@ -1001,12 +1001,18 @@ static bool blk_zone_wplug_prepare_bio(struct blk_zone_wplug *zwplug,
 	return true;
 }
 
+static bool blk_zone_use_pipelining(struct request_queue *q)
+{
+	return blk_pipeline_zwr(q) &&
+	       !test_bit(QUEUE_FLAG_ZWR_SERIALIZED, &q->queue_flags);
+}
+
 static bool blk_zone_wplug_handle_write(struct bio *bio, unsigned int nr_segs,
 					int rq_cpu)
 {
 	struct gendisk *disk = bio->bi_bdev->bd_disk;
 	const bool pipeline_zwr = bio_op(bio) != REQ_OP_ZONE_APPEND &&
-				 blk_pipeline_zwr(disk->queue);
+				  blk_zone_use_pipelining(disk->queue);
 	sector_t sector = bio->bi_iter.bi_sector;
 	bool schedule_bio_work = false;
 	struct blk_zone_wplug *zwplug;
@@ -1352,7 +1358,7 @@ static void blk_zone_wplug_bio_work(struct work_struct *work)
 {
 	struct blk_zone_wplug *zwplug =
 		container_of(work, struct blk_zone_wplug, bio_work);
-	bool pipeline_zwr = blk_pipeline_zwr(zwplug->disk->queue);
+	bool pipeline_zwr = blk_zone_use_pipelining(zwplug->disk->queue);
 	struct block_device *bdev;
 	unsigned long flags;
 	struct bio *bio;

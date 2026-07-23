@@ -1574,6 +1574,8 @@ static void blk_mq_requeue_work(struct work_struct *work)
 	LIST_HEAD(flush_list);
 	struct request *rq;
 
+	blk_queue_flag_set(QUEUE_FLAG_ZWR_SERIALIZED, q);
+
 	spin_lock_irq(&q->requeue_lock);
 	list_splice_init(&q->requeue_list, &rq_list);
 	list_splice_init(&q->flush_list, &flush_list);
@@ -1603,6 +1605,8 @@ static void blk_mq_requeue_work(struct work_struct *work)
 	}
 
 	blk_mq_run_hw_queues(q, false);
+
+	blk_queue_flag_clear(QUEUE_FLAG_ZWR_SERIALIZED, q);
 }
 
 void blk_mq_kick_requeue_list(struct request_queue *q)
