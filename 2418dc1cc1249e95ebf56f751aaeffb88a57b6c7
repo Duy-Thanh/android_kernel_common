@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b222537e_c7861d8e",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T17:10:55Z",
+      "side": 1,
+      "message": "I don\u0027t think we are concerned by a malicious host causing this. DoS by a host is out of scope, a host can easily hang up the system anyway, without pKVM\u0027s help.\n\nWhat we may be concerned about is the original case addressed by https://lore.kernel.org/all/20240301080727.3529832-4-haifeng.zhao@linux.intel.com/ i.e. a system hang caused by a device abruptly unplugged e.g. physically by the end user. We want to prevent that with pKVM just like we want to prevent that without pKVM.\n\nBut, luckily with pKVM we don\u0027t allow ATS for hotpluggable devices anyway? We only allow it for devices in SATC which, by definition, are supposed to be SoC-integrated devices? So we already prevent the issue?\n\nSo seems like we don\u0027t need to fix anything? (We might just add a comment for that `#ifndef __PKVM_HYP__` in qi_check_fault() to document why it\u0027s ok?)",
+      "revId": "2418dc1cc1249e95ebf56f751aaeffb88a57b6c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a12fb3_094220e7",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1559,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T17:10:55Z",
+      "side": 1,
+      "message": "Does this mean that we continue running as if nothing happened (`qi_submit_sync()` return value is ignored) without making sure that Device TLB was actually flushed? Isn\u0027t this a security issue?",
+      "revId": "2418dc1cc1249e95ebf56f751aaeffb88a57b6c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
