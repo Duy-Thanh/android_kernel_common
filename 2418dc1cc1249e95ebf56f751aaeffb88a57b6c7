@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c4a3734_7f45bd44",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T18:02:15Z",
+      "side": 1,
+      "message": "Good point, will rework to just add comment",
+      "parentUuid": "b222537e_c7861d8e",
+      "revId": "2418dc1cc1249e95ebf56f751aaeffb88a57b6c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49a12fb3_094220e7",
         "filename": "drivers/iommu/intel/dmar.c",
         "patchSetId": 23
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-23T17:10:55Z",
       "side": 1,
       "message": "Does this mean that we continue running as if nothing happened (`qi_submit_sync()` return value is ignored) without making sure that Device TLB was actually flushed? Isn\u0027t this a security issue?",
+      "revId": "2418dc1cc1249e95ebf56f751aaeffb88a57b6c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd09d71_90412abe",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1559,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T18:02:15Z",
+      "side": 1,
+      "message": "Yeah true. But a malicious host inducing this condition is basically achieving it by resetting the device I guess. Not sure if there is a way for the host to induce this by keeping the device active. More over the device that needs a DTLB flush in our case is trusted (in SATC).\n\nAnyways, this code is going away as we are not fixing this since its considered a DoS issue.",
+      "parentUuid": "49a12fb3_094220e7",
       "revId": "2418dc1cc1249e95ebf56f751aaeffb88a57b6c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
