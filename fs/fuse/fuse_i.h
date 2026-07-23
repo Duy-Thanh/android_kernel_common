@@ -2211,7 +2211,60 @@ ssize_t fuse_bpf_simple_request(struct fuse_mount *fm, struct fuse_bpf_args *arg
 static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 {
 	int ret;
+	int i;
+	u32 max_access;
+	struct fuse_bpf_args fba_bounce;
+	void *bounce[FUSE_MAX_IN_ARGS + FUSE_MAX_OUT_ARGS] = {NULL};
+	bool bounced = false;
 
+	if (!prog->aux)
+		goto run_direct;
+
+	max_access = prog->aux->max_rdwr_access;
+	if (prog->aux->max_rdonly_access > max_access)
+		max_access = prog->aux->max_rdonly_access;
+
+	if (max_access == 0)
+		goto run_direct;
+
+	fba_bounce = *fba;
+
+	for (i = 0; i < fba->in_numargs; i++) {
+		if (fba->in_args[i].value && fba->in_args[i].size < max_access) {
+			bounce[i] = kzalloc(max_access, GFP_NOFS);
+			if (bounce[i]) {
+				memcpy(bounce[i], fba->in_args[i].value, fba->in_args[i].size);
+				fba_bounce.in_args[i].value = bounce[i];
+				bounced = true;
+			}
+		}
+	}
+	for (i = 0; i < fba->out_numargs; i++) {
+		if (fba->out_args[i].value && fba->out_args[i].size < max_access) {
+			bounce[FUSE_MAX_IN_ARGS + i] = kzalloc(max_access, GFP_NOFS);
+			if (bounce[FUSE_MAX_IN_ARGS + i]) {
+				memcpy(bounce[FUSE_MAX_IN_ARGS + i], fba->out_args[i].value, fba->out_args[i].size);
+				fba_bounce.out_args[i].value = bounce[FUSE_MAX_IN_ARGS + i];
+				bounced = true;
+			}
+		}
+	}
+
+	migrate_disable();
+	ret = bpf_prog_run(prog, bounced ? &fba_bounce : fba);
+	migrate_enable();
+
+	if (bounced) {
+		for (i = 0; i < fba->out_numargs; i++) {
+			if (bounce[FUSE_MAX_IN_ARGS + i])
+				memcpy((void *)fba->out_args[i].value, bounce[FUSE_MAX_IN_ARGS + i], fba->out_args[i].size);
+		}
+		for (i = 0; i < FUSE_MAX_IN_ARGS + FUSE_MAX_OUT_ARGS; i++)
+			kfree(bounce[i]);
+	}
+	return ret;
+
+run_direct:
 	migrate_disable();
 	ret = bpf_prog_run(prog, fba);
 	migrate_enable();

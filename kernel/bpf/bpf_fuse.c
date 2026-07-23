@@ -97,7 +97,9 @@ struct bpf_prog *fuse_get_bpf_prog(struct file *file)
 		goto out;
 
 	bpf_prog = file->private_data;
-	if (bpf_prog->type == BPF_PROG_TYPE_FUSE)
+	if (bpf_prog->type == BPF_PROG_TYPE_FUSE &&
+	    bpf_prog->aux->max_rdwr_access <= PAGE_SIZE &&
+	    bpf_prog->aux->max_rdonly_access <= PAGE_SIZE)
 		bpf_prog_inc(bpf_prog);
 	else
 		bpf_prog = ERR_PTR(-EINVAL);
