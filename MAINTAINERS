@@ -6677,6 +6677,7 @@ P:	Documentation/process/maintainer-tip.rst
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git smp/core
 F:	include/linux/cpu.h
 F:	include/linux/cpuhotplug.h
+F:	include/linux/cpuhplock.h
 F:	include/linux/smpboot.h
 F:	kernel/cpu.c
 F:	kernel/smpboot.*
@@ -25606,11 +25607,11 @@ F:	Documentation/devicetree/bindings/phy/starfive,jh7110-usb-phy.yaml
 F:	drivers/phy/starfive/phy-jh7110-pcie.c
 F:	drivers/phy/starfive/phy-jh7110-usb.c
 
-STARFIVE JH8100 EXTERNAL INTERRUPT CONTROLLER DRIVER
+STARFIVE JHB100 EXTERNAL INTERRUPT CONTROLLER DRIVER
 M:	Changhuang Liang <changhuang.liang@starfivetech.com>
 S:	Supported
-F:	Documentation/devicetree/bindings/interrupt-controller/starfive,jh8100-intc.yaml
-F:	drivers/irqchip/irq-starfive-jh8100-intc.c
+F:	Documentation/devicetree/bindings/interrupt-controller/starfive,jhb100-intc.yaml
+F:	drivers/irqchip/irq-starfive-jhb100-intc.c
 
 STATIC BRANCH/CALL
 M:	Peter Zijlstra <peterz@infradead.org>
