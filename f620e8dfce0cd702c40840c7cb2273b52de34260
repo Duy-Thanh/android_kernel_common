@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3495d06f_42d240d8",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T14:33:16Z",
+      "side": 1,
+      "message": "nit: while we are at it, perhaps it\u0027s worth adding a !PAGE_ALIGNED(pvmfw_load_addr) check here as well?\n\nJust to be clear: there is no security issue without it, as `gpa_range_overlaps_pvmfw()` and `pkvm_host_donate_guest()` correctly handle unaligned offsets, and `pkvm_vcpu_pvmfw_entry_init()` sets RIP to `pvmfw_load_addr` correctly.\n\nHowever, a non-page-aligned pvmfw_load_addr causes extra page allocation overhead and an unaligned guest entry point, so enforcing PAGE_ALIGNED(pvmfw_load_addr) would be cleaner API validation. WDYT?\n\n(BTW, I recalled discussing this a while ago and re-checked to confirm if unaligned addresses posed any security issue or not again :) )",
+      "range": {
+        "startLine": 397,
+        "startChar": 20,
+        "endLine": 397,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0f472abf_3c1f339a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!pvmfw_present || !PAGE_ALIGNED(pvmfw_load_addr) ||\n\t\t    pvmfw_end \u003c pvmfw_load_addr ||\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f620e8dfce0cd702c40840c7cb2273b52de34260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
