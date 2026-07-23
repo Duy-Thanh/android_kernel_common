@@ -13,6 +13,7 @@
 #include <linux/fdtable.h>
 #include <linux/file.h>
 #include <linux/fs.h>
+#include <linux/iosys-map.h>
 #include <linux/miscdevice.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
@@ -35,8 +36,15 @@ struct wrap_ctx;
 struct wrap_content;
 static const struct file_operations wrap_fops;
 
+struct content_attribs {
+	bool writable;
+	loff_t size;
+};
+
 struct wrap_content_operations {
-	int (*create_wrap)(struct wrap_content *content, struct wrap_ctx *ctx);
+	void (*get_content_attribs)(struct wrap_content *content,
+				    struct content_attribs *attrs);
+	int (*clear)(struct wrap_content *content);
 	int (*load)(struct wrap_content *content, struct file *file,
 		    loff_t file_offs, loff_t buf_offs, loff_t len);
 	loff_t (*llseek)(struct wrap_content *content, loff_t offs, int whence);
@@ -130,36 +138,45 @@ module_param_cb(max_nr_load_reqs, &nonzero_param_ops, &max_nr_load_reqs, 0644);
 static unsigned long min_bytes_per_req = SZ_1M;
 module_param_cb(min_bytes_per_req, &nonzero_param_ops, &min_bytes_per_req, 0644);
 
-static int dmabuf_content_create_wrap(struct wrap_content *content,
-				      struct wrap_ctx *ctx)
+static void dmabuf_get_content_attribs(struct wrap_content *content,
+				       struct content_attribs *attrs)
 {
 	struct wrap_content_dmabuf *dmabuf_content;
-	struct file *file;
-	int fd;
 
 	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
 				      content);
+	attrs->writable = dmabuf_content->writable;
+	attrs->size = dmabuf_content->dmabuf->size;
+}
 
-	fd = get_unused_fd_flags(0);
-	if (fd < 0)
-		return fd;
+static int dmabuf_content_clear(struct wrap_content *content)
+{
+	struct wrap_content_dmabuf *dmabuf_content;
+	struct iosys_map map;
+	struct dma_buf *dmabuf;
+	int ret;
 
-	file = anon_inode_create_getfile("[wrapfd]", &wrap_fops, ctx,
-					 dmabuf_content->writable ? O_RDWR : O_RDONLY, NULL);
-	if (IS_ERR(file)) {
-		put_unused_fd(fd);
-		return PTR_ERR(file);
-	}
+	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
+				      content);
+	dmabuf = dmabuf_content->dmabuf;
+	ret = dma_buf_begin_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+	if (ret)
+		return ret;
 
-	/*
-	 * Anonymous inodes are created with size == 0. To ensure that calls
-	 * like fstat() work as expected, copy the size from the buffer we are
-	 * wrapping.
-	 */
-	i_size_write(file_inode(file), dmabuf_content->dmabuf->size);
-	fd_install(fd, file);
+	ret = dma_buf_vmap_unlocked(dmabuf, &map);
+	if (ret)
+		goto err_end_cpu;
 
-	return fd;
+	if (!map.is_iomem)
+		iosys_map_memset(&map, 0, 0, dmabuf->size);
+	else
+		ret = -EINVAL;
+
+	dma_buf_vunmap_unlocked(dmabuf, &map);
+err_end_cpu:
+	dma_buf_end_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+
+	return ret;
 }
 
 static size_t dio_aligned_len(loff_t file_offs, size_t len)
@@ -722,7 +739,8 @@ static int dmabuf_content_ioctl(struct wrap_content *content,
 }
 
 static struct wrap_content_operations dmabuf_content_ops = {
-	.create_wrap		= dmabuf_content_create_wrap,
+	.get_content_attribs	= dmabuf_get_content_attribs,
+	.clear			= dmabuf_content_clear,
 	.load			= dmabuf_content_load,
 	.llseek			= dmabuf_content_llseek,
 	.mmap			= dmabuf_content_mmap,
@@ -830,17 +848,49 @@ static inline bool is_owner_dev(struct wrap_ctx *ctx,
 }
 
 static inline int publish_wrap(struct wrap_ctx *ctx,
+			       struct wrap_content *old_content,
 			       struct wrap_content *content)
 {
-	int ret;
+	struct content_attribs attrs;
+	struct file *file;
+	int err;
+	int fd;
 
+	content->ops->get_content_attribs(content, &attrs);
+	fd = get_unused_fd_flags(0);
+	if (fd < 0)
+		return fd;
+
+	file = anon_inode_create_getfile("[wrapfd]", &wrap_fops, ctx,
+					 attrs.writable ? O_RDWR : O_RDONLY, NULL);
+	if (IS_ERR(file)) {
+		err = PTR_ERR(file);
+		goto put_fd;
+	}
+
+	if (old_content == content) {
+		err = old_content->ops->clear(old_content);
+		if (err)
+			goto put_file;
+	}
+
+	/*
+	 * Anonymous inodes are created with size == 0. To ensure that calls
+	 * like fstat() work as expected, copy the size from the buffer we are
+	 * wrapping.
+	 */
+	i_size_write(file_inode(file), attrs.size);
 	ctx->content = content;
-	ret = content->ops->create_wrap(content, ctx);
+	fd_install(fd, file);
 	/* Set FD_CLOEXEC flag for wrapfd the same as its content */
-	if (ret >= 0)
-		set_close_on_exec(ret, content->close_on_exec ? 1 : 0);
+	set_close_on_exec(fd, content->close_on_exec ? 1 : 0);
 
-	return ret;
+	return fd;
+put_file:
+	fput(file);
+put_fd:
+	put_unused_fd(fd);
+	return err;
 }
 
 static bool context_use(struct wrap_ctx *ctx)
@@ -1332,7 +1382,7 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 		goto free_new_content;
 	}
 
-	ret = publish_wrap(new_ctx, new_content);
+	ret = publish_wrap(new_ctx, content, new_content);
 	if (ret < 0)
 		goto free_new_ctx;
 
@@ -1678,7 +1728,7 @@ static int wrap_file(struct wrap_ctx *ctx,
 		return PTR_ERR(content);
 
 	content->close_on_exec = get_close_on_exec(wrapfd_wrap.fd);
-	wrapfd = publish_wrap(ctx, content);
+	wrapfd = publish_wrap(ctx, NULL, content);
 	if (wrapfd < 0) {
 		ctx->content = NULL;
 		content->ops->free(content);
