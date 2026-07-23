@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b20e59_5f360c47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T18:02:31Z",
+      "side": 1,
+      "message": "This bug seems to be yet another proof that we\u0027d better properly track _devices_ in some data structure on pKVM side (possibly just reusing `struct device_domain_info`), like we already properly track domains. I.e. build our context/PASID hypercalls API around such a _device_ abstraction, instead of expecting the host to pass all these isolated values of `bus`, `devfn`, `iommu`, `ats_qdep` etc every time and manually coupling them together and validating them for consistency in every place in error-prone ways, or manually parsing `pasid_table` or `ats_supported` from context tables every time, and so on and so forth.",
+      "revId": "159ee8f797fc3e16406f9e38905439d59c45ec62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ef1bbc5_eeeed8eb",
+        "filename": "drivers/iommu/intel/cache.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T18:02:31Z",
+      "side": 1,
+      "message": "micro-nit: adjust spaces so that `tag-\u003eiommu` is under `info-\u003ebus` (in line with the conventional style)?",
+      "fixSuggestions": [
+        {
+          "fixId": "0b500d26_b1d3ca50",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/cache.c",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "\t\t       tag-\u003eiommu \u003d\u003d iommu;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "159ee8f797fc3e16406f9e38905439d59c45ec62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
