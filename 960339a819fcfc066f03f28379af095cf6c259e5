@@ -16,6 +16,78 @@
       "message": "What is the exact motivation for this optimization? Does the next patch aosp/4170667 somehow depend on it?",
       "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc8aecb9_f287394d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T22:13:44Z",
+      "side": 1,
+      "message": "Those are WARN_ON checks, i.e. they already assume that the caller must guarantee that unless there is a bug (so they are just to help detecting such bugs)? What exactly is the advantage of removing those checks, and how exactly is this removing related to the rest of the patch (i.e. to the optimization)?",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaea13a1_175224dc",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1804,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T22:13:44Z",
+      "side": 1,
+      "message": "nit: maybe s/flushed/flush/ (since we are only about to flush, we\u0027ve not done that yet)?",
+      "fixSuggestions": [
+        {
+          "fixId": "543be8bd_ee2a173d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1797,
+                "startChar": 0,
+                "endLine": 1798,
+                "endChar": 0
+              },
+              "replacement": "\tbool flush \u003d false;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1804,
+                "startChar": 0,
+                "endLine": 1805,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tflush \u003d true;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 1811,
+                "startChar": 0,
+                "endLine": 1812,
+                "endChar": 0
+              },
+              "replacement": "\tif (flush)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
