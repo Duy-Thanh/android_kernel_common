@@ -70,6 +70,24 @@
       "parentUuid": "6d7b0db3_ccc5f259",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0272ed24_a45aaf95",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-23T01:34:13Z",
+      "side": 1,
+      "message": "\u003eAnother argument for keeping it as-is (and not injecting #GP) is how generic KVM handles it. In generic KVM, kvm_load_host_xsave_state() unconditionally restores XCR0/XSS back to the safe kvm_host.xcr0/xss baseline. This shows that KVM also assumes a well-behaved host kernel will not modify hardware XCR0/XSS to values other than kvm_host (aside from temporary guest state during vCPU entry/exit).\n\nIndeed. KVM doesn\u0027t care what the current HW xcr0 and MSR_IA32_XSS are and unconditionally restore them to kvm_host.xcr0/xss, which is similar to what this patch does. Thanks for pointing this out!\n\nThen in this case, maybe we should also initialize the hvcpu-\u003earch.xcr0/hvcpu-\u003earch.ia32_xss rather than leaving them as 0? The hvcpu-\u003earch.xcr0 should equal to kvm_host.xcr0, hvcpu-\u003earch.ia32_xss should equal to kvm_host.xss, right? So `pkvm_restore_host_xsave_state` ideally doesn\u0027t need to restore XCR0/MSR_IA32_XSS at all. And as you suggested, we can add a warning in `handle_write_msr` and `handle_xsetbv`, but only print this warning if host is going to change XCR0/MSR_IA32_XSS with a different value?\n\nIf the host writes XCR0/MSR_IA32_XSS with the same value, we don\u0027t need to print the warnings. And if this warning message is printed in the future with an upstream linux kernel, it means the kernel is changed to modify XCR0/MSR_IA32_XSS with a different value, and then we will need to adjust this code accordingly, e.g., switch the HW XCR0/MSR_IA32_XSS between the host and pKVM. Maybe also worth a comment in `pkvm_restore_host_xsave_state`? something like: \n\"\nThere is an assumption that the host kernel will not modify the XCR0/MSR_IA32_XSS, thus the hvcpu-\u003earch.xcr0/ia32_xss should be the same with the kvm_host.xcr0/xss. In case the host kernel maliciously changed HW XCR0/MSR_IA32_XSS, the pKVM unconditionally restores them to a safe pKVM baseline value kvm_host.xcr0/xss. In the future, if the assumption is changed, e.g., the host kernel will modify the XCR0/MSR_IA32_XSS for some reason, then the pKVM should not unconditionally restore them but do a switch between the host value and the pKVM baseline.\n\"",
+      "parentUuid": "2e41b825_ee095003",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
