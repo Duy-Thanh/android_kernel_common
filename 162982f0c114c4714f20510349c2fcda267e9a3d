@@ -87,6 +87,24 @@
       "parentUuid": "dbd129f7_fd62c9d3",
       "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "592468b2_e0b055fc",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T19:45:31Z",
+      "side": 1,
+      "message": "\u003e Ok, but you also end up duplicating the next 2 lines (cache flush). Could you avoid duplicating them?\n\nAhh yes true. Moved it out.\n\n\u003e Also, don\u0027t know, BUG_ON(fault_ignore) or something (if you insist on not using intel_pasid_clear_entry())?\n\nIn hypervisor code, with `intel_pasid_clear_entry`, it would always chose the else block because `pasid_pte_is_present(pe)` will be false. Hence we need not worry about `pasid_clear_entry_with_fpd(pe);` I guess. So BUG_ON() might not be needed?",
+      "parentUuid": "448502c6_f18713d3",
+      "revId": "162982f0c114c4714f20510349c2fcda267e9a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
