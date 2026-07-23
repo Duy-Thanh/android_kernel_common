@@ -265,6 +265,29 @@ static void clear_content(struct __test_metadata *_metadata,
 	ASSERT_EQ(munmap(ptr, self->size), 0);
 }
 
+static bool is_content_clear(struct __test_metadata *_metadata,
+		       FIXTURE_DATA(wrapfd_tests) *self, int wrapfd,
+		       unsigned long buf_offs, unsigned long len)
+{
+	/* mmap() operates on page aligned offsets and lengths, so handle that here. */
+	unsigned long aligned_buf_offs = ALIGN_DOWN(buf_offs, self->page_size);
+	unsigned long buf_pg_offs = offset_in_page(buf_offs, self->page_size);
+	unsigned long aligned_len = ALIGN(buf_offs + len, self->page_size) - aligned_buf_offs;
+	unsigned long i = 0;
+	char *ptr;
+	int ret;
+
+	ptr = mmap(NULL, aligned_len, PROT_READ, MAP_SHARED, wrapfd, aligned_buf_offs);
+	ASSERT_NE(ptr, MAP_FAILED);
+	ASSERT_EQ(dmabuf_sync_start(wrapfd, DMA_BUF_SYNC_READ), 0);
+	while (i < len && ptr[buf_pg_offs + i] == 0)
+		i++;
+	ASSERT_EQ(dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_READ), 0);
+	ASSERT_EQ(munmap(ptr, aligned_len), 0);
+
+	return i == len;
+}
+
 static void test_wrap(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -787,8 +810,12 @@ static void test_rewrap(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
 		    state == WRAPFD_CONTENT_EMPTY);
 
-	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, 0, 0, self->size), 0);
+	/*
+	 * Check rewrapped content which should be cleared
+	 * by the wrapfd driver
+	 */
+	ASSERT_EQ(is_content_clear(_metadata, self, wrapfd2,
+				   0, self->size), true);
 
 	/* Take ownership of the rewrapped buffer */
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd2), 0);
@@ -806,8 +833,12 @@ static void test_rewrap(struct __test_metadata *_metadata,
 		   wrapfd3, 0);
 	ASSERT_TRUE(ptr == MAP_FAILED && errno == EACCES);
 
-	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd3, 0, 0, self->size), 0);
+	/*
+	 * Check rewrapped content which should be cleared
+	 * by the wrapfd driver
+	 */
+	ASSERT_EQ(is_content_clear(_metadata, self, wrapfd3,
+				   0, self->size), true);
 
 	/* Try mapping the original empty wrap file */
 	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED,
