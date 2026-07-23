@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "471291b8_24d43b41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-23T22:17:39Z",
+      "side": 1,
+      "message": "The next patch modifies the signature of `pfn_to_dma_pte` and `switch_to_super_page` calls it. The error scenario won\u0027t be invoked in case of `switch_to_super_page`. So to make it easier to understand and review the code (answering why the pfn_to_dma_pte won\u0027t error out here?) I removed this function\u0027s dependence on pfn_to_dma_pte. \nAlso there is a reasonable optimization here. I can push it as a separate patch too, but since it\u0027s a small change, I piggy-backed it here.",
+      "parentUuid": "70ebb1ce_1f31f537",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc8aecb9_f287394d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 24
