@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78270aad_e93cd30d",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6451,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2026-07-23T23:15:53Z",
+      "side": 1,
+      "message": "This would break bpf loading on Android, right? bpfloader doesn\u0027t have CAP_SYS_ADMIN because we allow unprivileged bpf loading, prefering to restrict it with selinux instead.",
+      "range": {
+        "startLine": 6450,
+        "startChar": 0,
+        "endLine": 6451,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c341a81_44a3e5f8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/bpf/syscall.c",
+              "range": {
+                "startLine": 6450,
+                "startChar": 0,
+                "endLine": 6453,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "178db9086ac76b648b877f1a5c7535f8ec83ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da113a00_15d3c83d",
         "filename": "kernel/bpf/syscall.c",
         "patchSetId": 2
