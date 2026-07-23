@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f2bc0e4_eddc2733",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:21:58Z",
+      "side": 1,
+      "message": "function is removed",
+      "parentUuid": "063dcaf6_e2806674",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf23c786_7466ecde",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3790b1e3_e78e1d63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:21:58Z",
+      "side": 1,
+      "message": "Sorry about this. Added",
+      "parentUuid": "bf23c786_7466ecde",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07e72a83_4d0d7cdd",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-22T13:24:35Z",
       "side": 1,
       "message": "We\u0027re gonna do this once again immediately after this, in `intel_pasid_get_entry()` -\u003e `intel_pasid_get_table()`?\n\nAlthough this is not a hot path, but still, this feels like a band-aid approach: we are adding another independent bunch of new code for every next bugfix, ignoring the bigger picture.\n\nSo can\u0027t we piggy-back on `intel_pasid_get_table()` instead, i.e. populate these entries inside (our pKVM version of) `intel_pasid_get_table()`?\n\nE.g. maybe something like:\n\n```\ndiff --git a/drivers/iommu/intel/iommu.c b/drivers/iommu/intel/iommu.c\nindex 3c3b3ca08b38..52c17a8cba8e 100644\n--- a/drivers/iommu/intel/iommu.c\n+++ b/drivers/iommu/intel/iommu.c\n@@ -2039,15 +2039,7 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn,\n \n #ifdef __PKVM_HYP__\n \tif (context_present(context)) {\n-\t\t/*\n-\t\t * Derive the device\u0027s ATS state from the live context entry so\n-\t\t * the device-TLB flush below is driven by hardware state rather\n-\t\t * than a host-supplied flag. Bit 2 is CE.DTE in scalable mode;\n-\t\t * in legacy mode the only translation type that sets it is\n-\t\t * CONTEXT_TT_DEV_IOTLB, so the same test is valid for both.\n-\t\t */\n-\t\tinfo-\u003eats_supported \u003d !!(context-\u003elo \u0026 BIT_ULL(2));\n-\t\tinfo-\u003eats_enabled \u003d info-\u003eats_supported;\n+\t\tpkvm_populate_dev_info_from_ce(info, context);\n \t\tif (sm) {\n \t\t\tpasid_dir \u003d __pkvm_va(context-\u003elo \u0026 VTD_PAGE_MASK);\n \t\t\tpasid_dir_sz \u003d get_pasid_dir_size(context);\ndiff --git a/drivers/iommu/intel/iommu.h b/drivers/iommu/intel/iommu.h\nindex 808cfedd298b..4b9a95edcc68 100644\n--- a/drivers/iommu/intel/iommu.h\n+++ b/drivers/iommu/intel/iommu.h\n@@ -1761,4 +1761,20 @@ static inline const char *decode_prq_descriptor(char *str, size_t size,\n }\n #endif /* !__PKVM_HYP__ */\n \n+#ifdef __PKVM_HYP__\n+static inline void pkvm_populate_dev_info_from_ce(struct device_domain_info *info,\n+\t\t\t\t\t\t  struct context_entry *context)\n+{\n+\t/*\n+\t * Derive the device\u0027s ATS state from the live context entry so\n+\t * the device-TLB flush below is driven by hardware state rather\n+\t * than a host-supplied flag. Bit 2 is CE.DTE in scalable mode;\n+\t * in legacy mode the only translation type that sets it is\n+\t * CONTEXT_TT_DEV_IOTLB, so the same test is valid for both.\n+\t */\n+\tinfo-\u003eats_supported \u003d !!(context-\u003elo \u0026 BIT_ULL(2));\n+\tinfo-\u003eats_enabled \u003d info-\u003eats_supported;\n+}\n+#endif /* !__PKVM_HYP__ */\n+\n #endif\ndiff --git a/drivers/iommu/intel/pasid.c b/drivers/iommu/intel/pasid.c\nindex 04f437371b9a..e6abaa088e89 100644\n--- a/drivers/iommu/intel/pasid.c\n+++ b/drivers/iommu/intel/pasid.c\n@@ -148,24 +148,10 @@ struct pasid_table *intel_pasid_get_table(struct pkvm_device *dev)\n \tinfo-\u003e_pasid_table.max_pasid \u003d pds \u003c\u003c PASID_PDE_SHIFT;\n \tinfo-\u003epasid_table \u003d \u0026info-\u003e_pasid_table;\n \n+\tpkvm_populate_dev_info_from_ce(info, context);\n+\n \treturn info-\u003epasid_table;\n }\n-\n-static void pkvm_populate_dev_info(struct pkvm_device *dev)\n-{\n-\tstruct device_domain_info *info \u003d dev_iommu_priv_get(dev);\n-\tstruct context_entry *context;\n-\n-\tif (!info || !info-\u003eiommu)\n-\t\treturn;\n-\n-\tcontext \u003d iommu_context_addr(info-\u003eiommu, info-\u003ebus, info-\u003edevfn, false);\n-\tif (!context || !context_present(context))\n-\t\treturn;\n-\n-\tinfo-\u003eats_supported \u003d !!(READ_ONCE(context-\u003elo) \u0026 BIT_ULL(2));\n-\tinfo-\u003eats_enabled \u003d info-\u003eats_supported;\n-}\n #endif\n \n #ifndef __PKVM_HYP__\n@@ -372,9 +358,6 @@ void intel_pasid_tear_down_entry(struct intel_iommu *iommu,\n #endif\n \n \tspin_lock(\u0026iommu-\u003elock);\n-#ifdef __PKVM_HYP__\n-\tpkvm_populate_dev_info(dev);\n-#endif\n \tpte \u003d intel_pasid_get_entry(dev, pasid);\n \tif (WARN_ON(IS_ERR(pte))) {\n \t\tspin_unlock(\u0026iommu-\u003elock);\n@@ -573,9 +556,6 @@ int intel_pasid_setup_first_level(struct intel_iommu *iommu,\n #endif\n \n \tspin_lock(\u0026iommu-\u003elock);\n-#ifdef __PKVM_HYP__\n-\tpkvm_populate_dev_info(dev);\n-#endif\n \tpte \u003d intel_pasid_get_entry(dev, pasid);\n \tif (IS_ERR(pte)) {\n \t\tspin_unlock(\u0026iommu-\u003elock);\n@@ -670,9 +650,6 @@ int intel_pasid_setup_second_level(struct intel_iommu *iommu,\n #endif\n \n \tspin_lock(\u0026iommu-\u003elock);\n-#ifdef __PKVM_HYP__\n-\tpkvm_populate_dev_info(dev);\n-#endif\n \tpte \u003d intel_pasid_get_entry(dev, pasid);\n \tif (IS_ERR(pte)) {\n \t\tspin_unlock(\u0026iommu-\u003elock);\n```\n?",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2935869_cfaae892",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:21:58Z",
+      "side": 1,
+      "message": "Makes sense, done",
+      "parentUuid": "07e72a83_4d0d7cdd",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -87,6 +141,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "981062a1_fb75b0d7",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:21:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414b273f_64c659ce",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "778f296c_3d914955",
@@ -100,6 +172,24 @@
       "writtenOn": "2026-07-22T13:24:35Z",
       "side": 1,
       "message": "We can just remove `ats_supported` from the parameters of these hypercalls (clear_ce, pasid_setup_fl, pasid_setup_sl, pasid_teardown)? The host only needs to pass it in set_lm_ce and set_sm_ce?\n\nAnd then also regarding the above `info.pfsid` setup - in those cases when we populate `ats_supported` in pkvm_populate_dev_info(), we can also populate `pfsid` in pkvm_populate_dev_info() instead of doing it here?\n\nSo, e.g. on top of my suggestion from my other comment:\n\n```\ndiff --git a/arch/x86/include/asm/kvm_pkvm.h b/arch/x86/include/asm/kvm_pkvm.h\nindex 866528dfc26d..df2da3406354 100644\n--- a/arch/x86/include/asm/kvm_pkvm.h\n+++ b/arch/x86/include/asm/kvm_pkvm.h\n@@ -64,7 +64,6 @@ struct clear_ce_data {\n \tu8 bus;\n \tu8 devfn;\n \tu8 ats_qdep;\n-\tu8 ats_supported: 1;\n };\n \n struct set_lm_ce_data {\n@@ -100,7 +99,6 @@ struct pasid_setup_fl_data {\n \tu8 bus;\n \tu8 devfn;\n \tu8 ats_qdep;\n-\tu8 ats_supported: 1;\n \tu8 force_snoop: 1;\n };\n \n@@ -113,7 +111,6 @@ struct pasid_setup_sl_data {\n \tu8 bus;\n \tu8 devfn;\n \tu8 ats_qdep;\n-\tu8 ats_supported: 1;\n };\n \n struct pasid_teardown_data {\n@@ -122,7 +119,6 @@ struct pasid_teardown_data {\n \tu8 bus;\n \tu8 devfn;\n \tu8 ats_qdep;\n-\tu8 ats_supported: 1;\n };\n \n struct alloc_domain_data {\ndiff --git a/drivers/iommu/intel/iommu.h b/drivers/iommu/intel/iommu.h\nindex 31e40ad9c60e..1eb6c30f3144 100644\n--- a/drivers/iommu/intel/iommu.h\n+++ b/drivers/iommu/intel/iommu.h\n@@ -1762,6 +1762,21 @@ static inline const char *decode_prq_descriptor(char *str, size_t size,\n #endif /* !__PKVM_HYP__ */\n \n #ifdef __PKVM_HYP__\n+static inline void pkvm_populate_pfsid(struct device_domain_info *info)\n+{\n+\tif (info-\u003eats_supported \u0026\u0026 ecap_dit(info-\u003eiommu-\u003eecap)) {\n+\t\t/*\n+\t\t * Device is in SATC and optimistically assuming that a well crafted SATC\n+\t\t * would contain only physical functions, its safe to set pfsid \u003d bdf.\n+\t\t * TODO: We should probably be verifying SATC for existence of only\n+\t\t * physical functions during pkvm initialization.\n+\t\t */\n+\t\tinfo-\u003epfsid \u003d PCI_DEVID(info-\u003ebus, info-\u003edevfn);\n+\t} else {\n+\t\tinfo-\u003epfsid \u003d 0;\n+\t}\n+}\n+\n static inline void pkvm_populate_dev_info_from_ce(struct device_domain_info *info,\n \t\t\t\t\t\t  struct context_entry *context)\n {\n@@ -1774,6 +1789,8 @@ static inline void pkvm_populate_dev_info_from_ce(struct device_domain_info *inf\n \t */\n \tinfo-\u003eats_supported \u003d !!(context-\u003elo \u0026 BIT_ULL(2));\n \tinfo-\u003eats_enabled \u003d info-\u003eats_supported;\n+\n+\tpkvm_populate_pfsid(info);\n }\n #endif /* !__PKVM_HYP__ */\n \ndiff --git a/drivers/iommu/intel/pkvm/iommu_hc.c b/drivers/iommu/intel/pkvm/iommu_hc.c\nindex a137f9d987cf..c32fa7d6efdc 100644\n--- a/drivers/iommu/intel/pkvm/iommu_hc.c\n+++ b/drivers/iommu/intel/pkvm/iommu_hc.c\n@@ -63,19 +63,6 @@ int pkvm_iommu_clear_ce(struct clear_ce_data *data)\n \tif (data-\u003eats_qdep \u003e PCI_ATS_MAX_QDEP)\n \t\treturn -EINVAL;\n \n-\tif (is_dev_in_satc(bdf)) {\n-\t\t/*\n-\t\t * Device is in SATC and optimistically assuming that a well crafted SATC\n-\t\t * would contain only physical functions, its safe to set pfsid \u003d bdf.\n-\t\t * TODO: We should probably be verifying SATC for existence of only\n-\t\t * physical functions during pkvm initialization.\n-\t\t */\n-\t\tif (ecap_dit(iommu-\u003eecap))\n-\t\t\tinfo.pfsid \u003d bdf;\n-\t} else if (data-\u003eats_supported) {\n-\t\treturn -EPERM;\n-\t}\n-\n \tinfo.iommu \u003d iommu;\n \tinfo.bus \u003d data-\u003ebus;\n \tinfo.devfn \u003d data-\u003edevfn;\n@@ -133,12 +120,8 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)\n \tif (data-\u003eats_qdep \u003e PCI_ATS_MAX_QDEP)\n \t\treturn -EINVAL;\n \n-\tif (is_dev_in_satc(bdf)) {\n-\t\tif (ecap_dit(iommu-\u003eecap))\n-\t\t\tinfo.pfsid \u003d bdf;\n-\t} else if (data-\u003eats_supported) {\n+\tif (data-\u003eats_supported \u0026\u0026 !is_dev_in_satc(bdf))\n \t\treturn -EPERM;\n-\t}\n \n \tinfo.bus \u003d data-\u003ebus;\n \tinfo.devfn \u003d data-\u003edevfn;\n@@ -146,6 +129,7 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)\n \tinfo.ats_qdep \u003d data-\u003eats_qdep;\n \tinfo.ats_supported \u003d data-\u003eats_supported;\n \tinfo.ats_enabled \u003d info.ats_supported;\n+\tpkvm_populate_pfsid(\u0026info);\n \n \tret \u003d accept_page_donation(iommu, \u0026data-\u003edonation_page_gpa);\n \tif (ret)\n@@ -241,15 +225,16 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)\n \n \tinfo.bus \u003d data-\u003ebus;\n \tinfo.devfn \u003d data-\u003edevfn;\n+\tinfo.iommu \u003d iommu;\n \tinfo.ats_qdep \u003d data-\u003eats_qdep;\n \tinfo.ats_supported \u003d data-\u003eats_supported;\n \tinfo.ats_enabled \u003d info.ats_supported;\n \tinfo.pasid_supported \u003d data-\u003epasid_supported;\n \tinfo.pasid_enabled \u003d data-\u003epasid_enabled;\n+\tpkvm_populate_pfsid(\u0026info);\n \ttable.table \u003d pkvm_host_gpa_to_virt(data-\u003epasid_table_gpa);\n \ttable.max_pasid \u003d data-\u003emax_pasid;\n \tinfo.pasid_table \u003d \u0026table;\n-\tinfo.iommu \u003d iommu;\n \n \tret \u003d accept_page_donation(iommu, \u0026data-\u003edonation_page_gpa);\n \tif (ret)\n@@ -305,13 +290,6 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)\n \tif (data-\u003eats_qdep \u003e PCI_ATS_MAX_QDEP)\n \t\treturn -EINVAL;\n \n-\tif (is_dev_in_satc(bdf)) {\n-\t\tif (ecap_dit(iommu-\u003eecap))\n-\t\t\tinfo.pfsid \u003d bdf;\n-\t} else if (data-\u003eats_supported) {\n-\t\treturn -EPERM;\n-\t}\n-\n \tif (data-\u003edid \u003d\u003d FLPT_DEFAULT_DID) {\n \t\tpkvm_err(\"%s: First-level setup not allowed for default domain\\n\", __func__);\n \t\treturn -EPERM;\n@@ -401,13 +379,6 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)\n \tif (data-\u003eats_qdep \u003e PCI_ATS_MAX_QDEP)\n \t\treturn -EINVAL;\n \n-\tif (is_dev_in_satc(bdf)) {\n-\t\tif (ecap_dit(iommu-\u003eecap))\n-\t\t\tinfo.pfsid \u003d bdf;\n-\t} else if (data-\u003eats_supported) {\n-\t\treturn -EPERM;\n-\t}\n-\n \tinfo.bus \u003d data-\u003ebus;\n \tinfo.devfn \u003d data-\u003edevfn;\n \tinfo.iommu \u003d iommu;\n@@ -490,13 +461,6 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)\n \tif (data-\u003eats_qdep \u003e PCI_ATS_MAX_QDEP)\n \t\treturn -EINVAL;\n \n-\tif (is_dev_in_satc(bdf)) {\n-\t\tif (ecap_dit(iommu-\u003eecap))\n-\t\t\tinfo.pfsid \u003d bdf;\n-\t} else if (data-\u003eats_supported) {\n-\t\treturn -EPERM;\n-\t}\n-\n \tinfo.bus \u003d data-\u003ebus;\n \tinfo.devfn \u003d data-\u003edevfn;\n \tinfo.ats_qdep \u003d data-\u003eats_qdep;\ndiff --git a/drivers/iommu/intel/pkvm_iommu.c b/drivers/iommu/intel/pkvm_iommu.c\nindex 935f7ec810c7..80e82e5a63fb 100644\n--- a/drivers/iommu/intel/pkvm_iommu.c\n+++ b/drivers/iommu/intel/pkvm_iommu.c\n@@ -139,7 +139,6 @@ int pkvm_context_clear(u64 phys, u8 bus, u8 devfn, struct device_domain_info *in\n \tdata-\u003ebus \u003d bus;\n \tdata-\u003edevfn \u003d devfn;\n \tdata-\u003eats_qdep \u003d info-\u003eats_qdep;\n-\tdata-\u003eats_supported \u003d info-\u003eats_supported;\n \n \treturn pkvm_hypercall_in(iommu_clear_ce, \u0026d);\n }\n@@ -239,7 +238,6 @@ int pkvm_pasid_setup_fl(struct device_domain_info *info, phys_addr_t fsptptr,\n \tdata-\u003ebus \u003d info-\u003ebus;\n \tdata-\u003edevfn \u003d info-\u003edevfn;\n \tdata-\u003eats_qdep \u003d info-\u003eats_qdep;\n-\tdata-\u003eats_supported \u003d info-\u003eats_supported;\n \n \tspin_lock(\u0026iommu-\u003elock);\n \tret \u003d pkvm_hypercall_inout(iommu_pasid_setup_fl, \u0026d, \u0026d);\n@@ -277,7 +275,6 @@ int pkvm_pasid_setup_sl(struct device_domain_info *info, phys_addr_t ssptptr,\n \tdata-\u003ebus \u003d info-\u003ebus;\n \tdata-\u003edevfn \u003d info-\u003edevfn;\n \tdata-\u003eats_qdep \u003d info-\u003eats_qdep;\n-\tdata-\u003eats_supported \u003d info-\u003eats_supported;\n \n \tspin_lock(\u0026iommu-\u003elock);\n \tret \u003d pkvm_hypercall_inout(iommu_pasid_setup_sl, \u0026d, \u0026d);\n@@ -311,7 +308,6 @@ int pkvm_pasid_teardown(struct device_domain_info *info, u32 pasid)\n \tdata-\u003ebus \u003d info-\u003ebus;\n \tdata-\u003edevfn \u003d info-\u003edevfn;\n \tdata-\u003eats_qdep \u003d info-\u003eats_qdep;\n-\tdata-\u003eats_supported \u003d info-\u003eats_supported;\n \n \treturn pkvm_hypercall_in(iommu_pasid_teardown, \u0026d);\n }\n```\n?",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38430957_8db39c90",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-23T15:21:58Z",
+      "side": 1,
+      "message": "Nice cleanup, thanks for the suggestion. I have added it as a separate patch: aosp/4192215",
+      "parentUuid": "778f296c_3d914955",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
