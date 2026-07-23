@@ -195,6 +195,24 @@
       "parentUuid": "f0d380d7_5543ffdd",
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ca6d6b_69680d2a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T15:21:45Z",
+      "side": 1,
+      "message": "Yeah, I think so. But it is similar to what this patch tries to prevent `...(even if that would\nonly result in a VM-entry failure, not in a security issue)`, so perhaps extending it about this check is reasonable?",
+      "parentUuid": "97c6e481_f5116a19",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
