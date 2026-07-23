@@ -201,7 +201,13 @@ static void gb_hid_init_report(struct gb_hid *ghid, struct hid_report *report)
 	 * we just need to setup the input fields, so using
 	 * __hid_report_raw_event is safe.
 	 */
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 	__hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, size, 1);
+=======
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 }
 
 static void gb_hid_init_reports(struct gb_hid *ghid)

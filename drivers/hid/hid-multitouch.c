@@ -478,8 +478,16 @@ static void mt_get_feature(struct hid_device *hdev, struct hid_report *report)
 			goto free;
 		}
 
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 		ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
 					     size, size, 0);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, 0);
+=======
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, size, 0);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (ret)
 			dev_warn(&hdev->dev, "failed to report feature\n");
 	}

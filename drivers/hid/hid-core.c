@@ -1983,8 +1983,16 @@ out:
 }
 EXPORT_SYMBOL_GPL(__hid_request);
 
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 int __hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt)
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data, u32 size,
+			 int interrupt)
+=======
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt)
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 {
 	struct hid_report_enum *report_enum = hid->report_enum + type;
 	struct hid_report *report;
@@ -2125,7 +2133,13 @@ int hid_input_report(struct hid_device *hid, enum hid_report_type type, u8 *data
 			goto unlock;
 	}
 
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 	ret = __hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+	ret = hid_report_raw_event(hid, type, data, size, interrupt);
+=======
+	ret = hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 unlock:
 	up(&hid->driver_input_lock);

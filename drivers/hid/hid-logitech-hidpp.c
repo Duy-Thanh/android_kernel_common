@@ -3450,8 +3450,16 @@ static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
 	consumer_report[0] = 0x03;
 	memcpy(&consumer_report[1], &data[3], 4);
 	/* We are called from atomic context */
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 	__hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
 			       consumer_report, sizeof(consumer_report), 5, 1);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+=======
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, sizeof(consumer_report), 5, 1);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 	return 1;
 }

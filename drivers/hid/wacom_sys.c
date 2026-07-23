@@ -74,7 +74,13 @@ static void wacom_wac_queue_flush(struct hid_device *hdev,
 		int err;
 
 		size = kfifo_out(fifo, buf, sizeof(buf));
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 		err = __hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, false);
+=======
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (err) {
 			hid_warn(hdev, "%s: unable to flush event due to error %d\n",
 				 __func__, err);
@@ -318,7 +324,13 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 			ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					       data, n, WAC_CMD_RETRIES);
 			if (ret == n && features->type == HID_GENERIC) {
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 				ret = __hid_report_raw_event(hdev,
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+				ret = hid_report_raw_event(hdev,
+=======
+				ret = hid_report_raw_event(hdev,
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 					HID_FEATURE_REPORT, data, n, n, 0);
 			} else if (ret == 2 && features->type != HID_GENERIC) {
 				features->touch_max = data[1];
@@ -380,8 +392,16 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 		ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					data, n, WAC_CMD_RETRIES);
 		if (ret == n) {
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 			ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT,
 						     data, n, n, 0);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, 0);
+=======
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, n, 0);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 		} else {
 			hid_warn(hdev, "%s: could not retrieve sensor offsets\n",
 				 __func__);

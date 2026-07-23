@@ -44,7 +44,13 @@ static int px_raw_event(struct hid_device *hid, struct hid_report *report,
 			data[0] |= (1 << (data[idx] - 0xE0));
 			data[idx] = 0;
 		}
+<<<<<<< HEAD   (6a06ec3009f1cb5c7dfbd5d3f8f95d1fb12fae9c Merge android14-6.1 into android14-6.1-lts)
 		__hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+||||||| BASE   (db21020efee3319f9854f2645c7ee318455f4351 serial: zs: Switch to using channel reset)
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, 0);
+=======
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+>>>>>>> BRANCH (d63e45af4bac6194394a5f2801741116b00937c7 HID: core: Fix size_t specifier in hid_report_raw_event())
 		return 1;
 
 	default:	/* unknown report */
