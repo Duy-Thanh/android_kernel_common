@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28cfbdc4_2167c4da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-23T20:51:30Z",
+      "side": 1,
+      "message": "Ack.\nWe did have one data structure for tracking devices in pkvm in the earliest shadow table implementation, but it came up with a lot of un-needed code like tracking device life times and all (get/put/alloc/free etc.) which made the code unnecessarily complicated and hard to understand, so we got rid of it but will have to bring it for the device passthrough.",
+      "parentUuid": "77b20e59_5f360c47",
+      "revId": "159ee8f797fc3e16406f9e38905439d59c45ec62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ef1bbc5_eeeed8eb",
