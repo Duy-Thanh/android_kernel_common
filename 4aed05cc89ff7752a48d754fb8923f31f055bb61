@@ -88,6 +88,24 @@
       "parentUuid": "2e41b825_ee095003",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98fcae2_a81ca79b",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T07:02:01Z",
+      "side": 1,
+      "message": "Yeah, we can go step further: we can maybe get rid of `pkvm_restore_host_xsave_state()` and just not allow the host to change the xcr0/xss in the first place: in `handle_write_msr` and `handle_xsetbv` warn if host tries to modify HW registers to different values than kvm_host.xcr0/xss and not allow to change those values, so we later on do not have to restore them in pkvm_vcpu_enter_guest(). WDYT?",
+      "parentUuid": "0272ed24_a45aaf95",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
