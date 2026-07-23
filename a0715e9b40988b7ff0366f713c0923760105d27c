@@ -159,6 +159,24 @@
       },
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d380d7_5543ffdd",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T14:55:10Z",
+      "side": 1,
+      "message": "But I think it is a problem (or I do not understand something well): if the `pvmfw_load_addr` is set to 4GB-4bytes: it will pass a validation and set the RIP to that address. Next the role of pvmfw is to switch to 64-bit mode, but as it wants to do that it fetches the second instruction which byte past 4GB in 32-bit mode and crashes?",
+      "parentUuid": "f9279e72_20e2c663",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
