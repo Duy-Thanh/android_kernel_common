@@ -13,6 +13,7 @@
 #include <linux/fdtable.h>
 #include <linux/file.h>
 #include <linux/fs.h>
+#include <linux/iosys-map.h>
 #include <linux/miscdevice.h>
 #include <linux/mm.h>
 #include <linux/mman.h>
@@ -605,10 +606,36 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 	return ret;
 }
 
+static int clear_dmabuf_content(struct dma_buf *dmabuf)
+{
+	struct iosys_map map;
+	int ret;
+
+	ret = dma_buf_begin_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+	if (ret)
+		return ret;
+
+	ret = dma_buf_vmap_unlocked(dmabuf, &map);
+	if (ret)
+		goto err_end_cpu;
+
+	if (!map.is_iomem)
+		iosys_map_memset(&map, 0, 0, dmabuf->size);
+	else
+		ret = -EINVAL;
+
+	dma_buf_vunmap_unlocked(dmabuf, &map);
+err_end_cpu:
+	dma_buf_end_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+
+	return ret;
+}
+
 static struct wrap_content *
 dmabuf_content_make_writable(struct wrap_content *content, bool writable)
 {
 	struct wrap_content_dmabuf *dmabuf_content;
+	int ret;
 
 	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
 				      content);
@@ -616,6 +643,10 @@ dmabuf_content_make_writable(struct wrap_content *content, bool writable)
 		return ERR_PTR(-EACCES);
 
 	dmabuf_content->writable = writable;
+	/* Clear the content we are reusing */
+	ret = clear_dmabuf_content(dmabuf_content->dmabuf);
+	if (ret)
+		return ERR_PTR(ret);
 
 	return content;
 }
