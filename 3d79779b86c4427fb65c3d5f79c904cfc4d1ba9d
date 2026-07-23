@@ -34,6 +34,24 @@
       "parentUuid": "b0198bb4_628ac14f",
       "revId": "3d79779b86c4427fb65c3d5f79c904cfc4d1ba9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf02d42_89d71f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-23T01:37:49Z",
+      "side": 1,
+      "message": "This landed in stable already and was released in v6.12.91. We can wait for it to land via LTS merge or we can cherry-pick `e3dd56fb5683 (\"af_unix: Give up GC if MSG_PEEK intervened.\")` directly instead.",
+      "parentUuid": "6ca78fb0_66b53458",
+      "revId": "3d79779b86c4427fb65c3d5f79c904cfc4d1ba9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
