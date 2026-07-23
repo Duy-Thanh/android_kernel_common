@@ -64,6 +64,30 @@
       },
       "revId": "f620e8dfce0cd702c40840c7cb2273b52de34260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52033500_80d921eb",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-23T14:50:13Z",
+      "side": 1,
+      "message": "Maybe that was me :). Anyway, I am fine with keeping it as is. It is not a security issue (or any kind of pKVM issue), just thought that we may want to optimize it at the occasion and force page-aligned address.",
+      "parentUuid": "d1ffe747_f4965f8d",
+      "range": {
+        "startLine": 397,
+        "startChar": 20,
+        "endLine": 397,
+        "endChar": 35
+      },
+      "revId": "f620e8dfce0cd702c40840c7cb2273b52de34260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
