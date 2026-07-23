@@ -38,8 +38,6 @@ __modpost:
 include $(objtree)/include/config/auto.conf
 include $(srctree)/scripts/Kbuild.include
 
-mixed-build-prefix = $(if $(KBUILD_MIXED_TREE),$(KBUILD_MIXED_TREE)/)
-
 MODPOST = $(objtree)/scripts/mod/modpost
 
 modpost-args =										\
