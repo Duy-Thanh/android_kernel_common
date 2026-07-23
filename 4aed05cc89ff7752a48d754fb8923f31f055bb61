@@ -106,6 +106,24 @@
       "parentUuid": "0272ed24_a45aaf95",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae39d08e_cdb6386c",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-23T07:25:29Z",
+      "side": 1,
+      "message": "This will be a bit different with the generic kerne/kvm which allows the host to modify the HW state and KVM unconditionally restore. Silently (although we print warn logs but still silently to the host) drop the setting is also a bit violate with the SDM, similar to injecting #GP. If we go this direction, I prefer we inject #GP so that the host will know its setting doesn\u0027t work, rather than silently success to the host.",
+      "parentUuid": "f98fcae2_a81ca79b",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
