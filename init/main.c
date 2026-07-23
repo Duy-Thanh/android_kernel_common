@@ -1049,6 +1049,7 @@ void start_kernel(void)
 	boot_cpu_init();
 	page_address_init();
 	pr_notice("%s", linux_banner);
+	panic("Intentional kernel panic during boot for testing log capturing\n");
 #ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
 	setup_arch_task_struct_size();
 #endif
