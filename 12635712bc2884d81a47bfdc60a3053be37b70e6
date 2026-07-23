@@ -34,6 +34,24 @@
       "parentUuid": "bae9c553_3b6c0d7f",
       "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7db6523_d59dbcbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-23T19:07:38Z",
+      "side": 1,
+      "message": "Again, can you please add a note here at the bottom of the commit message or if its sensitive in the bug clarifying the urgency (just stating a regression was observed isn\u0027t informative, provide some details about the regression and its impact, so we can better judge the risk to benefit).",
+      "parentUuid": "2c6c719e_37d7e0e0",
+      "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
