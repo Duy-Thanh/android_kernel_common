@@ -177,6 +177,24 @@
       "parentUuid": "f9279e72_20e2c663",
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c6e481_f5116a19",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-23T15:07:53Z",
+      "side": 1,
+      "message": "Yes, it will crash (with #GP if I recall correctly). We set up an invalid IDT in `pkvm_vcpu_pvmfw_entry_init()`, so we guarantee it is just a DoS?",
+      "parentUuid": "f0d380d7_5543ffdd",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
