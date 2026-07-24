@@ -70,6 +70,24 @@
       "parentUuid": "b7db6523_d59dbcbf",
       "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9f6090_371cac4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-07-24T10:06:38Z",
+      "side": 1,
+      "message": "John,\nI can see this change is present in \nhttps://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/commit/drivers/base/power/runtime.c?h\u003dlinux-next\u0026id\u003deef1d74bf88f120f4f63a83a5201fcda67bf3b52\n\nIsn\u0027t a proper maintainer tree\n\nCan\u0027t I use FROMGIT with \n(cherry picked from commit eef1d74bf88f120f4f63a83a5201fcda67bf3b52 https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/ linux-next)",
+      "parentUuid": "b7db6523_d59dbcbf",
+      "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
