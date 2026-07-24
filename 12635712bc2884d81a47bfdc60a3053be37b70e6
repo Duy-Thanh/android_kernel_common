@@ -88,6 +88,24 @@
       "parentUuid": "b7db6523_d59dbcbf",
       "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56203f2b_fb616136",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-24T21:03:02Z",
+      "side": 1,
+      "message": "\u003e I can see this change is present in \n\u003e https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/commit/drivers/base/power/runtime.c?h\u003dlinux-next\u0026id\u003deef1d74bf88f120f4f63a83a5201fcda67bf3b52\n\u003e \n\u003e Isn\u0027t a proper maintainer tree\n\u003e \n\u003e Can\u0027t I use FROMGIT with \n\u003e (cherry picked from commit eef1d74bf88f120f4f63a83a5201fcda67bf3b52 https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/ linux-next)\n\nSo no, the maintainer\u0027s linux-next branch isn\u0027t assured to have stable shas (they may rebase something).\n\nMostly I was just hoping you\u0027d provide some clarity as to the urgency of taking this now instead of just waiting for it to show up in a maintainer branch that has stable shas.\n\nThat said, it\u0027s pretty clear Rafael intends to merge this, so I\u0027m not opposed to taking it FROMLIST in this case.\n\nIn the future, please do add context to help us understand the impact so we can better weigh the risk/benefit of taking a patch sooner instead of waiting",
+      "parentUuid": "aa9f6090_371cac4a",
+      "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
