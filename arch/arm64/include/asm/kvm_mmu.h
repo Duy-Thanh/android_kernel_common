@@ -208,7 +208,13 @@ static inline void __invalidate_icache_guest_page(kvm_pfn_t pfn,
 		/* any kind of VIPT cache */
 		__flush_icache_all();
 	} else {
+<<<<<<< HEAD   (d5be58b56294fc3ea9e8938829c6164503c048eb BACKPORT: rcu: Move expedited grace period (GP) work to RT k)
 		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+||||||| BASE   (126d21d1b1e0160a655820a7720d149aed3bf647 Merge tag 'android12-5.10.257_r00' into android12-5.10)
+		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+=======
+		/* PIPT */
+>>>>>>> BRANCH (af99d873fab6c6ebc7c9d6905501ea17e1caa0fc Merge 5.10.260 into android12-5.10-lts)
 		void *va = page_address(pfn_to_page(pfn));
 
 		invalidate_icache_range((unsigned long)va,
