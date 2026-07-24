@@ -79,6 +79,7 @@
 #include <linux/property.h>
 #include <linux/random.h>
 #include <linux/refcount.h>
+#include <linux/reset.h>
 #include <linux/regulator/consumer.h>
 #include <linux/sched.h>
 #include <linux/security.h>
