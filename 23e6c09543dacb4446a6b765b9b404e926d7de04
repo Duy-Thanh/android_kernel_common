@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea8c92a_637557bc",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T12:35:06Z",
+      "side": 1,
+      "message": "Hmm, late thought: so if we assume that a malicious host may still trigger this issue even for a non-hotpluggable device (in particular, for a device in SATC), e.g. by abruptly resetting or powering-down the device, it means it can also be triggered by userspace, via sysfs? So userspace \n\nHopefully this is not a big problem: looks like files like `/sys/bus/pci/devices/*/reset`, `/sys/bus/pci/devices/*/config` etc are only writable by root.\n\nHmm, OTOH `/sys/bus/pci/devices/*/remove` is writable also by users in the `root` group.\n\nI\u0027ve just tried \"removing\" the GPU via this `remove` file. It succeeded - the device got removed (even though obviously it is not hotpluggable, and it is in SATC). It immediately triggered a kernel panic in the GPU driver, unrelated to pKVM. But I suppose theoretically it could trigger the hard lockup addressed here as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "9a2cf42d_2a1534d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/dmar.c",
+              "range": {
+                "startLine": 1384,
+                "startChar": 0,
+                "endLine": 1385,
+                "endChar": 0
+              },
+              "replacement": "\t\t * triggered by a malicious host or userspace) does not introduce a security\n"
+            }
+          ]
+        }
+      ],
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
