@@ -238,6 +238,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c286c508_02de96d0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-24T13:33:35Z",
+      "side": 1,
+      "message": "pKVM\u0027s memory is allocated during early boot. It tries to allocate 2M aligned and if not successful, then fallback to 4K. With 2M aligned allocation, it should not be possible to hit this BUG_ON.\n\nIf fallback to 4K, then it will depends on where the pvmfw locates, and whether there are contigous enough memory around the pvmfw. Do we know if pvmfw\u0027s location is fixed or not? If it is fixed, and e820 is most likely also fixed, then we can calculate to see if it is possible for them in the same 2M range?",
+      "parentUuid": "41ed9073_f6ebed5d",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
