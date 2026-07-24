@@ -65,9 +65,12 @@ enum guest_commands {
 #define GPA_SIZE (GPA_PAGES * PAGE_SIZE)
 #define MMIO_UNMAPPED_ADDR (GVA_BASE + PAGE_SIZE * (GPA_PAGES + 1) + 13)
 
-extern unsigned char brk_pc, mmio_pc;
+extern unsigned char brk_pc, mmio_pc, hw_bp, ss_start;
 static volatile uint64_t guest_ex_pc;
 static volatile uint64_t guest_ex_addr;
+static volatile uint64_t ss_addr[4];
+static volatile char write_data;
+static volatile int ss_idx;
 
 /*
  * Returns the amount of memory locked by the current process.
@@ -288,12 +291,6 @@ static void test_relinquish(void)
 	GUEST_ASSERT(*val == 1);
 }
 
-#define ID_AA64DFR0_EL1_NONZERO_NI					\
-(									\
-	SYS_FIELD_PREP_ENUM(ID_AA64DFR0_EL1, DoubleLock, NI)	|	\
-	SYS_FIELD_PREP_ENUM(ID_AA64DFR0_EL1, MTPMU, NI)			\
-)
-
 /*
  * Tests that feature registers have the values expected for protected guests.
  * This isn't extensive, and could be made more so by knowing that the host
@@ -301,7 +298,37 @@ static void test_relinquish(void)
  */
 static void test_feature_id_regs(void)
 {
-	GUEST_ASSERT_EQ(read_sysreg_s(SYS_ID_AA64DFR0_EL1), ID_AA64DFR0_EL1_NONZERO_NI);
+	u64 dfr0 = read_sysreg_s(SYS_ID_AA64DFR0_EL1);
+
+	/*
+	 * Debug is exposed to protected guests: DebugVer reports the Armv8 debug
+	 * architecture (capped at V8P8, not a fixed value since it is min(hw,
+	 * V8P8)) and the breakpoint/watchpoint counts pass through from hardware
+	 * (at least the architectural minimum of 2 each, with CTX_CMPs <= BRPs).
+	 * The remaining fields stay hidden; DoubleLock and MTPMU read their
+	 * non-zero Not-Implemented encoding.
+	 */
+	GUEST_ASSERT(FIELD_GET(ID_AA64DFR0_EL1_DebugVer, dfr0) >=
+		     ID_AA64DFR0_EL1_DebugVer_IMP);
+	GUEST_ASSERT(FIELD_GET(ID_AA64DFR0_EL1_DebugVer, dfr0) <=
+		     ID_AA64DFR0_EL1_DebugVer_V8P8);
+	GUEST_ASSERT(FIELD_GET(ID_AA64DFR0_EL1_BRPs, dfr0) + 1 >= 2);
+	GUEST_ASSERT(FIELD_GET(ID_AA64DFR0_EL1_WRPs, dfr0) + 1 >= 2);
+	GUEST_ASSERT(FIELD_GET(ID_AA64DFR0_EL1_CTX_CMPs, dfr0) <=
+		     FIELD_GET(ID_AA64DFR0_EL1_BRPs, dfr0));
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_DoubleLock, dfr0),
+			ID_AA64DFR0_EL1_DoubleLock_NI);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_MTPMU, dfr0),
+			ID_AA64DFR0_EL1_MTPMU_NI);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_PMUVer, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_TraceVer, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_PMSVer, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_PMSS, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_SEBEP, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_TraceFilt, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_TraceBuffer, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_BRBE, dfr0), 0);
+	GUEST_ASSERT_EQ(FIELD_GET(ID_AA64DFR0_EL1_HPMN0, dfr0), 0);
 	GUEST_ASSERT_REG_RAZ(SYS_ID_AA64DFR1_EL1);
 	GUEST_ASSERT_REG_RAZ(SYS_ID_AA64AFR0_EL1);
 	GUEST_ASSERT_REG_RAZ(SYS_ID_AA64AFR1_EL1);
@@ -407,36 +434,133 @@ static void guest_dirty_memslot(void)
 	memset((void *)GVA_BASE, 0x0badf00d, GPA_PAGES * PAGE_SIZE);
 }
 
-static void test_restricted_debug(void)
+/* Debug register programming bits, mirroring debug-exceptions.c. */
+#define MDSCR_KDE	(1 << 13)
+#define MDSCR_MDE	(1 << 15)
+#define MDSCR_SS	(1 << 0)
+
+#define DBGBCR_LEN8	(0xff << 5)
+#define DBGBCR_EXEC	(0x0 << 3)
+#define DBGBCR_EL1	(0x1 << 1)
+#define DBGBCR_E	(0x1 << 0)
+
+#define DBGWCR_LEN8	(0xff << 5)
+#define DBGWCR_RD	(0x1 << 3)
+#define DBGWCR_WR	(0x2 << 3)
+#define DBGWCR_EL1	(0x1 << 1)
+#define DBGWCR_E	(0x1 << 0)
+
+#define SPSR_D		(1 << 9)
+#define SPSR_SS		(1 << 21)
+
+/* Records the breakpointed PC; masks debug so the instruction runs on return. */
+static void hw_bp_handler(struct ex_regs *regs)
 {
-	u64 dfr0 = read_sysreg(id_aa64dfr0_el1);
-	u64 brps = FIELD_GET(ID_AA64DFR0_EL1_BRPs_MASK, dfr0);
-	u64 wrps = FIELD_GET(ID_AA64DFR0_EL1_WRPs_MASK, dfr0);
+	guest_ex_pc = regs->pc;
+	guest_ex_addr = 0;
+	regs->pstate |= SPSR_D;
+}
 
-	GUEST_ASSERT(brps == 0);
-	GUEST_ASSERT(wrps == 0);
+/* Records FAR (the watched address); masks debug so the access completes. */
+static void wp_handler(struct ex_regs *regs)
+{
+	guest_ex_pc = regs->pc;
+	guest_ex_addr = read_sysreg(far_el1);
+	regs->pstate |= SPSR_D;
+}
 
+/* Records the stepped PC and re-arms the step for the next instruction. */
+static void ss_handler(struct ex_regs *regs)
+{
+	__GUEST_ASSERT(ss_idx < 4, "Expected index < 4, got '%d'", ss_idx);
+	ss_addr[ss_idx++] = regs->pc;
+	regs->pstate |= SPSR_SS;
+}
+
+static void reset_debug_state(void)
+{
+	asm volatile("msr daifset, #8");
+
+	/* Clear the OS lock and double lock so debug exceptions are permitted. */
+	write_sysreg(0, osdlr_el1);
+	write_sysreg(0, oslar_el1);
+	isb();
+
+	write_sysreg(0, mdscr_el1);
+	write_sysreg(0, dbgbcr0_el1);
+	write_sysreg(0, dbgbvr0_el1);
+	write_sysreg(0, dbgwcr0_el1);
+	write_sysreg(0, dbgwvr0_el1);
+	isb();
+}
+
+static void enable_monitor_debug(void)
+{
+	u64 mdscr;
+
+	asm volatile("msr daifclr, #8");
+
+	mdscr = read_sysreg(mdscr_el1) | MDSCR_KDE | MDSCR_MDE;
+	write_sysreg(mdscr, mdscr_el1);
+	isb();
+}
+
+/*
+ * Protected guests now have self-hosted debug (F2 exposes DebugVer + the bp/wp
+ * counts and emulates the debug registers at EL2). Exercise it in-guest: a
+ * software and a hardware breakpoint, a watchpoint and a single step, each
+ * caught by an installed handler. A broken EL2 emulation leaves a handler
+ * unfired and fails an assert.
+ */
+static void test_self_hosted_debug(void)
+{
+	/* Software breakpoint (BRK is always enabled). */
 	reset_handler_globals();
 	asm volatile("brk_pc: brk #0");
 	assert_handler_globals(PC(brk_pc), 0);
 
-	write_sysreg(~0ULL, dbgbcr0_el1);
-	write_sysreg(~0ULL, dbgbvr0_el1);
-	write_sysreg(~0ULL, dbgwcr0_el1);
-	write_sysreg(~0ULL, dbgwvr0_el1);
-	write_sysreg(~0ULL, mdscr_el1);
-	write_sysreg(~0ULL, oslar_el1);
-	write_sysreg(~0ULL, osdlr_el1);
-
+	/* Hardware breakpoint: fires before the target instruction executes. */
+	reset_debug_state();
+	reset_handler_globals();
+	write_sysreg(DBGBCR_LEN8 | DBGBCR_EXEC | DBGBCR_EL1 | DBGBCR_E, dbgbcr0_el1);
+	write_sysreg(PC(hw_bp), dbgbvr0_el1);
 	isb();
+	enable_monitor_debug();
+	asm volatile("hw_bp: nop");
+	assert_handler_globals(PC(hw_bp), 0);
 
-	GUEST_ASSERT(read_sysreg(dbgbcr0_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(dbgbvr0_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(dbgwcr0_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(dbgwcr0_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(mdscr_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(oslsr_el1) == 0x0);
-	GUEST_ASSERT(read_sysreg(osdlr_el1) == 0x0);
+	/* Hardware watchpoint: fires on the access; FAR holds the address. */
+	reset_debug_state();
+	reset_handler_globals();
+	write_sysreg(DBGWCR_LEN8 | DBGWCR_RD | DBGWCR_WR | DBGWCR_EL1 | DBGWCR_E,
+		     dbgwcr0_el1);
+	/*
+	 * BAS = 0xff (LEN8) requires a doubleword-aligned DBGWVR; FAR still
+	 * reports the exact accessed byte.
+	 */
+	write_sysreg(PC(write_data) & ~7UL, dbgwvr0_el1);
+	isb();
+	enable_monitor_debug();
+	write_data = 'x';
+	GUEST_ASSERT_EQ(write_data, 'x');
+	GUEST_ASSERT_EQ(guest_ex_addr, PC(write_data));
+
+	/* Single step three instructions and check each recorded PC. */
+	reset_debug_state();
+	asm volatile("msr daifclr, #8");
+	write_sysreg(read_sysreg(mdscr_el1) | MDSCR_KDE | MDSCR_SS, mdscr_el1);
+	isb();
+	ss_idx = 0;
+	asm volatile("ss_start:\n"
+		     "mrs x0, esr_el1\n"
+		     "add x0, x0, #1\n"
+		     "msr daifset, #8\n"
+		     : : : "x0");
+	GUEST_ASSERT_EQ(ss_addr[0], PC(ss_start));
+	GUEST_ASSERT_EQ(ss_addr[1], PC(ss_start) + 4);
+	GUEST_ASSERT_EQ(ss_addr[2], PC(ss_start) + 8);
+
+	reset_debug_state();
 
 	GUEST_SYNC(CMD_HEARTBEAT);
 }
@@ -538,7 +662,7 @@ static void guest_code(vm_paddr_t ucall_pool_phys, size_t ucall_pool_size,
 
 	test_feature_id_regs();
 
-	test_restricted_debug();
+	test_self_hosted_debug();
 
 	test_s1pie_s1poe();
 
@@ -754,6 +878,12 @@ static void test_run(enum vm_mem_backing_src_type src_type)
 				ESR_ELx_EC_DABT_CUR, dabt_handler);
 	vm_install_sync_handler(vm, VECTOR_SYNC_CURRENT,
 				ESR_ELx_EC_BRK64, brk_handler);
+	vm_install_sync_handler(vm, VECTOR_SYNC_CURRENT,
+				ESR_ELx_EC_BREAKPT_CUR, hw_bp_handler);
+	vm_install_sync_handler(vm, VECTOR_SYNC_CURRENT,
+				ESR_ELx_EC_WATCHPT_CUR, wp_handler);
+	vm_install_sync_handler(vm, VECTOR_SYNC_CURRENT,
+				ESR_ELx_EC_SOFTSTP_CUR, ss_handler);
 	vcpu_set_pvm_boot_args(vcpu);
 
 	while (!guest_done) {
