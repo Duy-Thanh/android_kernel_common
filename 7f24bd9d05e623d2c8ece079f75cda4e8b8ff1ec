@@ -94,6 +94,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e373fff_eb3abb66",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T11:52:47Z",
+      "side": 1,
+      "message": "I suppose we could do that like pKVM-ARM does that (as I noted above), i.e. avoid unmapping anything from the host MMU before `fix_host_mmu_pgstate()`, unmap only via the memory protection API after `fix_host_mmu_pgstate()`?\n\n\u003e it is not easy to identify this case\n\nThis `BUG_ON(!is_pvmfw_range(phys, size))` here already identifies it?\n\nSo, if doing this like pKVM-ARM does it not easy to implement right now, we may keep this BUG_ON for now (maybe just change it to an error return) and just add a FIXME, like I suggested?",
+      "parentUuid": "8812bd49_cefe5356",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
