@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d06ff79_adba5fb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-07-24T16:31:53Z",
+      "side": 1,
+      "message": "Will / Vincent: Quick follow up here - Please let me know if you have any questions.",
+      "parentUuid": "adcbc16b_c27cad9a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
