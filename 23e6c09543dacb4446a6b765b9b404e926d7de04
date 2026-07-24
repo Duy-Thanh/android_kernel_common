@@ -142,6 +142,24 @@
       "parentUuid": "1a702830_eaba3d6c",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36641a6d_686854e9",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T14:31:25Z",
+      "side": 1,
+      "message": "\u003e As per Intel, these devices in SATC can be trusted(If I understand correctly only DFU will be able to use the device TLB caches and is isolated from device and firmware) and hence no part of host would be able to use this\n\nIt\u0027s the host that tells the device to do DMA at the given address, and it\u0027s pKVM that is responsible for preventing the device from doing DMA at a protected address by unmapping that address in the IOMMU page tables and by asking the device to flush its Device-TLB when needed (and getting an ack from the device that it flushed it). If pKVM fails to do that, the fact that the device is trusted doesn\u0027t help?",
+      "parentUuid": "470f7608_4e2e10b9",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
