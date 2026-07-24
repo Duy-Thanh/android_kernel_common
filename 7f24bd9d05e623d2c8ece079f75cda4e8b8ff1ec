@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0a09d1_a2ed8ce0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-24T09:45:44Z",
+      "side": 1,
+      "message": "Please correct me if I am wrong but AFAIU theoretically this code could crash the system even if it shouldn\u0027t: Lets say that we have 2MB block containing 1MB pKVM RAM and 1MB of pvmfw. pKVM memory gets unamppped and pvmfw gets unmapped as well in `pkvm_host_mmu_init()`. So all 256 PTEs pKVM mem + 256 PTEs pvmfw will get free and 2MB page table is empty and forms single 2MB non-present PTE huge page. Next `fix_host_mmu_pgstate_walker` visits this non-present PTE and ends up here. Now this PTE have mixed of pvmfw and memory. But `is_memory_range` and `is_pvmfw_range` will return false and we reach `BUG_ON(!is_pvmfw_range)` crashing the system.",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
