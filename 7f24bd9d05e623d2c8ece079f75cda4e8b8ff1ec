@@ -70,6 +70,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8812bd49_cefe5356",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-24T11:18:50Z",
+      "side": 1,
+      "message": "It seems possible if pvmfw and pKVM\u0027s memory are located in the same 2M block. My first impression is that, it is not easy to identify this case, and we will need to split this range by checking the overlap part with memory and pvmfw range, @dmaluka@google.com what do you think?",
+      "parentUuid": "87fa793d_557ffdc7",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
