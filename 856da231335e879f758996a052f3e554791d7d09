@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad09aa67_c66f4cd7",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9809,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T23:30:53Z",
+      "side": 1,
+      "message": "nit: maybe better `GENMASK(31, 0)` (like, for example, in `kvm_reg_mode_mask()` in newer kernels since https://lore.kernel.org/all/20260529222223.870923-9-seanjc@google.com/)?\n\nAlso, regs are declared as `unsigned long`, not `unsigned long long`, so better `UL` than `ULL`?\n\nSide note: in newer kernels we shall use `kvm_eax_write()`, `kvm_edx_write()`, `kvm_eax_read()`, `kvm_edx_read()` for this (per the mentioned patch).",
+      "fixSuggestions": [
+        {
+          "fixId": "9d1d245c_71e09cd8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 9808,
+                "startChar": 0,
+                "endLine": 9810,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tkvm_rax_write(vcpu, shared_vcpu-\u003earch.regs[VCPU_REGS_RAX] \u0026 GENMASK(31, 0));\n\t\t\tkvm_rdx_write(vcpu, shared_vcpu-\u003earch.regs[VCPU_REGS_RDX] \u0026 GENMASK(31, 0));\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 9947,
+                "startChar": 0,
+                "endLine": 9949,
+                "endChar": 0
+              },
+              "replacement": "\t\tshared_vcpu-\u003earch.regs[VCPU_REGS_RAX] \u003d kvm_rax_read(vcpu) \u0026 GENMASK(31, 0);\n\t\tshared_vcpu-\u003earch.regs[VCPU_REGS_RDX] \u003d kvm_rdx_read(vcpu) \u0026 GENMASK(31, 0);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 9951,
+                "startChar": 0,
+                "endLine": 9952,
+                "endChar": 0
+              },
+              "replacement": "\t\tshared_vcpu-\u003earch.regs[VCPU_REGS_RCX] \u003d kvm_rcx_read(vcpu) \u0026 GENMASK(31, 0);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "856da231335e879f758996a052f3e554791d7d09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
