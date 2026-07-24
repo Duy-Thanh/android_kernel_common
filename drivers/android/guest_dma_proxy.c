@@ -330,6 +330,7 @@ static int __init guest_dma_proxy_init(void)
 	gdev->misc.name = "guest_dma_proxy";
 	gdev->misc.fops = &guest_dma_proxy_fops;
 	gdev->misc.parent = NULL;
+	gdev->misc.mode = 0666;
 
 	ret = misc_register(&gdev->misc);
 	if (ret) {
