@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6754561b_d05864b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-24T18:44:50Z",
+      "side": 1,
+      "message": "Although I don\u0027t think it is very important as as WARN_ON_ONCE will do nothing on non-debug builds.",
+      "revId": "d63983f566e992339cf260b6acbbab9fd8f5cb53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
