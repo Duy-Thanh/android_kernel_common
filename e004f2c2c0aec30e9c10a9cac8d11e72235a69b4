@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500360e7_0644cf88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4937661
+      },
+      "writtenOn": "2026-07-24T03:07:33Z",
+      "side": 1,
+      "message": "Done in the patchset 3. The comment now clarifies that gzvm_create_vm() initializes the VM\u0027s kref to one. On success, gzvm_vm_release() drops this initial reference when the VM file is released; on failure, the release callback will not run, so the reference must be dropped here. Thanks for the suggestion.",
+      "revId": "e004f2c2c0aec30e9c10a9cac8d11e72235a69b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

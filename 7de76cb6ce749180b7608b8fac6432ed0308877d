@@ -46,6 +46,30 @@
       },
       "revId": "7de76cb6ce749180b7608b8fac6432ed0308877d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289eb9fc_8b6b95f9",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 4937661
+      },
+      "writtenOn": "2026-07-24T03:07:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3a62e28_46574d6a",
+      "range": {
+        "startLine": 672,
+        "startChar": 2,
+        "endLine": 672,
+        "endChar": 20
+      },
+      "revId": "7de76cb6ce749180b7608b8fac6432ed0308877d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
