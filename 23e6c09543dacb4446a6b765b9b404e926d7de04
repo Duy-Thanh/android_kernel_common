@@ -178,6 +178,24 @@
       "parentUuid": "36641a6d_686854e9",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca30b368_a4501d51",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T17:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc00247_197a3488",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
