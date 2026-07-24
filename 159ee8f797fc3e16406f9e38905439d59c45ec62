@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a28cac9_fa0592c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T18:49:17Z",
+      "side": 1,
+      "message": "Similarly (that\u0027s a simpler example, but still), in aosp/4190795 + aosp/4191935 + aosp/4187056 in this series we got rid of populating ephemeral dmar_domain structs on stack (and bugs caused by that), taking advantage of pKVM\u0027s existing well-defined \"domain\" abstraction that we already have anyway.\n\n\u003e Whereas we could, instead, populate these pkvm_device structs (or whatever we name them) just when setting corresponding context table entries, and remember those populated structs (e.g. in a hashtable hashed by BDFs, or whatever)\n\nAlternatively, instead of a hashtable, we could do that in a bit more abstract way, similarly to pKVM\u0027s hypercalls for creating VMs and vCPUs (`vm_init` and `vcpu_create`): when creating a pkvm_device, pKVM could return its \"handle\" to the host; the value of this handle could be just the index to the pKVM\u0027s array of pkvm_devices. And then the host could just pass this handle in subsequent hypercalls for this device (instead of passing BDF etc).",
+      "parentUuid": "bfd20dc2_a359e669",
+      "revId": "159ee8f797fc3e16406f9e38905439d59c45ec62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ef1bbc5_eeeed8eb",
