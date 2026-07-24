@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "939bff25_693e35fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T23:42:01Z",
+      "side": 1,
+      "message": "And also cda98b84556a (\"ANDROID: pKVM: VMX: Share vCPU state for EXIT_REASON_IO_INSTRUCTION\") ?",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5d85fa6c_bf6bff7a",
@@ -31,6 +48,41 @@
       "writtenOn": "2026-07-24T22:58:01Z",
       "side": 1,
       "message": "Note for the future: we should not forget to change these to `kvm_rax_read_raw()` and `kvm_rax_write_raw()` when rebasing to newer kernel, per https://lore.kernel.org/all/20260529222223.870923-9-seanjc@google.com/ which in particular changed it in `complete_fast_pio_in()` and `complete_fast_pio_out()`. (Probably this is not the only place we will need to update...)",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baaf89f1_1559d4c2",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9789,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T23:42:01Z",
+      "side": 1,
+      "message": "nit: s/u64/unsigned long/ since that it the type of regs?",
+      "fixSuggestions": [
+        {
+          "fixId": "de7008eb_86e57391",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/vmx.c",
+              "range": {
+                "startLine": 9789,
+                "startChar": 0,
+                "endLine": 9791,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tunsigned long val \u003d (size \u003c 4) ? kvm_rax_read(vcpu) : 0;\n\t\t\tunsigned long host_rax \u003d shared_vcpu-\u003earch.regs[VCPU_REGS_RAX];\n"
+            }
+          ]
+        }
+      ],
       "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +118,23 @@
           ]
         }
       ],
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadcfaa2_22c87b4c",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9942,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T23:42:01Z",
+      "side": 1,
+      "message": "nit: s/GENMASK_ULL/GENMASK/ since regs are `unsigned long`?",
       "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
