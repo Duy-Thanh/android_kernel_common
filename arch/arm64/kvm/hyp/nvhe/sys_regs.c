@@ -31,6 +31,7 @@ u64 id_aa64mmfr1_el1_sys_val;
 u64 id_aa64mmfr2_el1_sys_val;
 u64 id_aa64mmfr3_el1_sys_val;
 u64 id_aa64smfr0_el1_sys_val;
+u64 id_aa64dfr0_el1_sys_val;
 
 struct pvm_ftr_bits {
 	bool		sign;
@@ -57,6 +58,16 @@ struct pvm_ftr_bits {
 
 #define MAX_FEAT_ENUM(id, fld, max)						\
 	__MAX_FEAT_FUNC(id, fld, max, NULL, false)
+
+/* Pass the sanitised host value through unchanged, capped at the field max. */
+#define MAX_FEAT_PASSTHRU(id, fld)						\
+	{									\
+		.sign = false,							\
+		.shift = id##_##fld##_SHIFT,					\
+		.width = id##_##fld##_WIDTH,					\
+		.max_val = GENMASK(id##_##fld##_WIDTH - 1, 0),			\
+		.vm_supported = NULL,						\
+	}
 
 #define FEAT_END {	.width = 0,	}
 
@@ -202,16 +213,27 @@ static const struct pvm_ftr_bits pvmid_aa64zfr0[] = {
 };
 
 /*
- * None of the features in ID_AA64DFR0_EL1 nor ID_AA64MMFR4_EL1 are supported.
- * However, both have Not-Implemented values that are non-zero. Define them
- * so they can be used when getting the value of these registers.
+ * Expose the debug registers to protected guests: the debug architecture
+ * version (capped as normal KVM caps it, sanitise_id_aa64dfr0_el1()) and the
+ * breakpoint/watchpoint counts. Everything else stays hidden. DoubleLock and
+ * MTPMU have a non-zero Not-Implemented encoding, so carry them explicitly - a
+ * field absent from the table reads 0, which for these two means implemented.
  */
-#define ID_AA64DFR0_EL1_NONZERO_NI					\
-(									\
-	SYS_FIELD_PREP_ENUM(ID_AA64DFR0_EL1, DoubleLock, NI)	|	\
-	SYS_FIELD_PREP_ENUM(ID_AA64DFR0_EL1, MTPMU, NI)			\
-)
+static const struct pvm_ftr_bits pvmid_aa64dfr0[] = {
+	MAX_FEAT(ID_AA64DFR0_EL1, DebugVer, V8P8),
+	MAX_FEAT_PASSTHRU(ID_AA64DFR0_EL1, BRPs),
+	MAX_FEAT_PASSTHRU(ID_AA64DFR0_EL1, WRPs),
+	MAX_FEAT_PASSTHRU(ID_AA64DFR0_EL1, CTX_CMPs),
+	MAX_FEAT(ID_AA64DFR0_EL1, DoubleLock, NI),
+	MAX_FEAT(ID_AA64DFR0_EL1, MTPMU, NI),
+	FEAT_END
+};
 
+/*
+ * None of the features in ID_AA64MMFR4_EL1 are supported, but it has a
+ * Not-Implemented value that is non-zero. Define it so it can be used when
+ * getting the value of the register.
+ */
 #define ID_AA64MMFR4_EL1_NONZERO_NI					\
 	SYS_FIELD_PREP_ENUM(ID_AA64MMFR4_EL1, E2H0, NI)
 
@@ -275,7 +297,7 @@ static u64 pvm_calc_id_reg(const struct kvm_vcpu *vcpu, u32 id)
 	case SYS_ID_AA64ZFR0_EL1:
 		return get_restricted_features(vcpu, id_aa64zfr0_el1_sys_val, pvmid_aa64zfr0);
 	case SYS_ID_AA64DFR0_EL1:
-		return ID_AA64DFR0_EL1_NONZERO_NI;
+		return get_restricted_features(vcpu, id_aa64dfr0_el1_sys_val, pvmid_aa64dfr0);
 	case SYS_ID_AA64MMFR4_EL1:
 		return ID_AA64MMFR4_EL1_NONZERO_NI;
 	default:
@@ -584,6 +606,33 @@ static bool pvm_trap_mdscr(struct kvm_vcpu *vcpu, struct sys_reg_params *p,
 	return true;
 }
 
+/*
+ * On FEAT_FGT hardware MDCR_EL2.TDCC keeps trapping MDCCINT_EL1 after TDA is
+ * dropped (pvm_init_traps_mdcr sets TDCC because a pVM never sees FGT), unlike
+ * the breakpoint registers. Emulate where the switched debug state lives: on
+ * the CPU while in use, in the ctxt copy otherwise.
+ */
+static bool pvm_trap_mdccint(struct kvm_vcpu *vcpu, struct sys_reg_params *p,
+			     const struct sys_reg_desc *r)
+{
+	if (pvm_debug_hidden(vcpu))
+		return pvm_access_raz_wi(vcpu, p, r);
+
+	if (kvm_debug_regs_in_use(vcpu)) {
+		if (p->is_write)
+			write_sysreg(p->regval, mdccint_el1);
+		else
+			p->regval = read_sysreg(mdccint_el1);
+	} else if (p->is_write) {
+		__vcpu_assign_sys_reg(vcpu, MDCCINT_EL1, p->regval);
+	} else {
+		p->regval = __vcpu_sys_reg(vcpu, MDCCINT_EL1);
+	}
+
+	pkvm_debug_set_guest_ownership(vcpu);
+	return true;
+}
+
 /* OS Lock: emulate OSLAR_EL1.OSLK, then re-evaluate ownership. */
 static bool pvm_trap_oslar(struct kvm_vcpu *vcpu, struct sys_reg_params *p,
 			   const struct sys_reg_desc *r)
@@ -630,6 +679,20 @@ static bool pvm_trap_oslsr(struct kvm_vcpu *vcpu, struct sys_reg_params *p,
 
 	p->regval = OSLSR_EL1_OSLM_IMPLEMENTED |
 		    (__vcpu_sys_reg(vcpu, OSLSR_EL1) & OSLSR_EL1_OSLK);
+	return true;
+}
+
+/*
+ * DBGAUTHSTATUS_EL1 is read-only: report the live authentication state on read
+ * and ignore writes, as the host's trap_dbgauthstatus_el1() does.
+ */
+static bool pvm_trap_dbgauthstatus(struct kvm_vcpu *vcpu, struct sys_reg_params *p,
+				   const struct sys_reg_desc *r)
+{
+	if (p->is_write)
+		return true;
+
+	p->regval = read_sysreg(dbgauthstatus_el1);
 	return true;
 }
 
@@ -687,10 +750,38 @@ static const struct sys_reg_desc pvm_sys_reg_descs[] = {
 	 * fall back to RAZ/WI while ID_AA64DFR0_EL1 hides DebugVer.
 	 */
 	DBG_WB(0),
+	DBG_WB(1),
+	{ SYS_DESC(SYS_MDCCINT_EL1), .access = pvm_trap_mdccint },
 	{ SYS_DESC(SYS_MDSCR_EL1), .access = pvm_trap_mdscr },
+	DBG_WB(2),
+	DBG_WB(3),
+	DBG_WB(4),
+	DBG_WB(5),
+	DBG_WB(6),
+	DBG_WB(7),
+	DBG_WB(8),
+	DBG_WB(9),
+	DBG_WB(10),
+	DBG_WB(11),
+	DBG_WB(12),
+	DBG_WB(13),
+	DBG_WB(14),
+	DBG_WB(15),
+	RAZ_WI(SYS_MDRAR_EL1),
 	{ SYS_DESC(SYS_OSLAR_EL1), .access = pvm_trap_oslar },
 	{ SYS_DESC(SYS_OSLSR_EL1), .access = pvm_trap_oslsr },
 	RAZ_WI(SYS_OSDLR_EL1),
+	/*
+	 * Auxiliary debug registers trapped by MDCR_EL2.{TDA,TDCC,TDOSA}, RAZ/WI
+	 * as the host does; DBGAUTHSTATUS_EL1 reports the live auth state.
+	 */
+	RAZ_WI(SYS_DBGPRCR_EL1),
+	RAZ_WI(SYS_DBGCLAIMSET_EL1),
+	RAZ_WI(SYS_DBGCLAIMCLR_EL1),
+	{ SYS_DESC(SYS_DBGAUTHSTATUS_EL1), .access = pvm_trap_dbgauthstatus },
+	RAZ_WI(SYS_MDCCSR_EL0),
+	RAZ_WI(SYS_DBGDTR_EL0),
+	RAZ_WI(SYS_DBGDTRTX_EL0),
 
 	/* Group 1 ID registers */
 	HOST_HANDLED(SYS_REVIDR_EL1),
