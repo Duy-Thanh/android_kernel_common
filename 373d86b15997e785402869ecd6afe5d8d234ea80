@@ -16,6 +16,24 @@
       "message": "Should this be submitted upstream or at least go in via -stable?",
       "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d0f5b1_2bb685bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-07-24T19:20:54Z",
+      "side": 1,
+      "message": "It seems like this has already been fixed in the upstream kernel. From commit 9f239df55546 (\"sched/deadline: Initialize dl_servers after SMP\"):\n```\n@@ -1612,7 +1598,7 @@ void dl_server_start(struct sched_dl_entity *dl_se)\n \n void dl_server_stop(struct sched_dl_entity *dl_se)\n {\n-       if (!dl_se-\u003edl_runtime)\n+       if (!dl_server(dl_se) || !dl_server_active(dl_se))\n                return;\n \n        dequeue_dl_entity(dl_se, DEQUEUE_SLEEP);\n```",
+      "parentUuid": "48eb57b1_e0a42874",
+      "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
