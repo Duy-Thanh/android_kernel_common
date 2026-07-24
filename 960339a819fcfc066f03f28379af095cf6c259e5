@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab7c723_707f47e3",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T15:19:33Z",
+      "side": 1,
+      "message": "I didn\u0027t look deeply into this, just noticed that `dma_pte_free_pagetable()` still  walks the page table, again, starting from `domain-\u003epgd`, so I thought we could similarly just pass the `pte` pointer to it instead.\n\nAnyway, I\u0027m not suggesting to change anything (especially since all this is a legacy code removed in upstream since v6.19).",
+      "parentUuid": "e6b33d14_14a648b0",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaea13a1_175224dc",
