@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "294d841b_1568e88a",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T13:43:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a803e54_cae337a8",
+      "revId": "b3cb8849f8fde71a9bc808b3ee78952837b004ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "896678f2_5e579c30",
