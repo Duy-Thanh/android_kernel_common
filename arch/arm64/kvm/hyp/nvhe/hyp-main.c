@@ -872,6 +872,14 @@ static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		host_vcpu->arch.fault = hyp_vcpu->vcpu.arch.fault;
 		host_vcpu->arch.iflags = hyp_vcpu->vcpu.arch.iflags;
 
+		/*
+		 * PC feeds trace_kvm_exit() and PSTATE.SS is consumed by the
+		 * host software-step state machine, both of which run before the
+		 * next on-demand ctxt sync, so keep them eagerly current.
+		 */
+		host_vcpu->arch.ctxt.regs.pc = hyp_vcpu->vcpu.arch.ctxt.regs.pc;
+		host_vcpu->arch.ctxt.regs.pstate = hyp_vcpu->vcpu.arch.ctxt.regs.pstate;
+
 		host_vcpu->arch.hcr_el2 &= ~HCR_VSE;
 		host_vcpu->arch.hcr_el2 |= hyp_vcpu->vcpu.arch.hcr_el2 & HCR_VSE;
 	}
