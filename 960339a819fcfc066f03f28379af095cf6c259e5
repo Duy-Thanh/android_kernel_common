@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "70baf17e_daa99a52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 24
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-24T05:49:38Z",
+      "side": 1,
+      "message": "Ah I see! I thought that these checks were superfluous as this function is only called by domain_map. But seeing the original commit, `dce043c07ca1: iommu/vt-d: Fix __domain_mapping()\u0027s usage of switch_to_super_page()`, I see it was added the same time the strict alignment code was added to domain_map as a defense for future modifications to domain_map. Let me add these WARN_ONs back.",
+      "parentUuid": "fc8aecb9_f287394d",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d44cb2e2_ba269ac1",
@@ -84,6 +102,24 @@
       "writtenOn": "2026-07-23T22:41:09Z",
       "side": 1,
       "message": "Just a note: looks like we still don\u0027t avoid unneeded page table walks inside `dma_pte_free_pagetable()`?",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b33d14_14a648b0",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-24T05:49:38Z",
+      "side": 1,
+      "message": "Do you mean `dma_pte_clear_range` called in `dma_pte_free_pagetable`? I didn\u0027t look into it before. `dma_pte_free_pagetable` was called from other places before which required to clear leaf page entries but now since it\u0027s solely called by switch_to_superpage, we can skip the clearing part (`dma_pte_clear_range`). \nIdeally these entries shouldn\u0027t exist. Even if they exist we aren\u0027t properly clearing them the pkvm way (.ie decreasing their refcount the same way we do for unmap). WDYT? Maybe create another CL for it?",
+      "parentUuid": "d44cb2e2_ba269ac1",
       "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
