@@ -166,6 +166,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204e8cf4_a705f63e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T12:52:38Z",
+      "side": 1,
+      "message": "Why? It\u0027s better to fix inconsistent page state of hypervisor\u0027s memory pages, even if _for now_ it _luckily_ doesn\u0027t cause any security checks to mistakenly pass? Plus, we\u0027d better add a FIXME to document the issue you\u0027ve found, to not forget about it?\n\n\u003e BUG_ON or return error code which will mean running without pKVM.\n\nOnly if we actually encounter this case (pKVM memory and pvmfw in the same huge page) in practice. Which is very unlikely, and if it still happens, we will immediately notice it, since it will happen on every boot (since the pvmfw region address is the same on every boot, and the pKVM\u0027s reserved memory region is also rather deterministic in practice)?",
+      "parentUuid": "9454ef77_33d6a41c",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
