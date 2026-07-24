@@ -451,26 +451,6 @@ static void handle_vm_entry_generic(struct pkvm_hyp_vcpu *hyp_vcpu)
 	vcpu_copy_flag(&hyp_vcpu->vcpu, hyp_vcpu->host_vcpu, PC_UPDATE_REQ);
 }
 
-static void handle_vm_exit_generic(struct pkvm_hyp_vcpu *hyp_vcpu)
-{
-	WRITE_ONCE(hyp_vcpu->host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
-}
-
-static void handle_vm_exit_abt(struct pkvm_hyp_vcpu *hyp_vcpu)
-{
-	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
-
-	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
-		   hyp_vcpu->vcpu.arch.fault.esr_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.far_el2,
-		   hyp_vcpu->vcpu.arch.fault.far_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.hpfar_el2,
-		   hyp_vcpu->vcpu.arch.fault.hpfar_el2);
-	WRITE_ONCE(host_vcpu->arch.fault.disr_el1,
-		   hyp_vcpu->vcpu.arch.fault.disr_el1);
-}
-
 static const hyp_entry_exit_handler_fn entry_hyp_pvm_handlers[] = {
 	[0 ... ESR_ELx_EC_MAX]		= NULL,
 	[ESR_ELx_EC_WFx]		= handle_pvm_entry_wfx,
@@ -491,12 +471,6 @@ static const hyp_entry_exit_handler_fn exit_hyp_pvm_handlers[] = {
 
 static const hyp_entry_exit_handler_fn entry_hyp_vm_handlers[] = {
 	[0 ... ESR_ELx_EC_MAX]		= handle_vm_entry_generic,
-};
-
-static const hyp_entry_exit_handler_fn exit_hyp_vm_handlers[] = {
-	[0 ... ESR_ELx_EC_MAX]		= handle_vm_exit_generic,
-	[ESR_ELx_EC_IABT_LOW]		= handle_vm_exit_abt,
-	[ESR_ELx_EC_DABT_LOW]		= handle_vm_exit_abt,
 };
 
 static void __hyp_sve_save_guest(struct kvm_vcpu *vcpu)
@@ -864,22 +838,25 @@ static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	case ARM_EXCEPTION_HYP_REQ:
 		break;
 	case ARM_EXCEPTION_TRAP:
-		esr_ec = ESR_ELx_EC(kvm_vcpu_get_esr(&hyp_vcpu->vcpu));
-
-		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
+		/*
+		 * A protected guest's context is not copied to the host, so
+		 * each EC syncs only the fault fields the host needs. A
+		 * non-protected guest is trusted and gets its full fault
+		 * struct below, so it needs no per-EC handler.
+		 */
+		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu)) {
+			esr_ec = ESR_ELx_EC(kvm_vcpu_get_esr(&hyp_vcpu->vcpu));
 			ec_handler = exit_hyp_pvm_handlers[esr_ec];
-		else
-			ec_handler = exit_hyp_vm_handlers[esr_ec];
-
-		if (ec_handler) {
-			ec_handler(hyp_vcpu);
-		} else {
-			/*
-			 * If we have no handler we should not be punting this
-			 * trap to Host, as it will have no sync'ed context to
-			 * handle (for example: ESR_EL2).
-			 */
-			vcpu_illegal_trap(&hyp_vcpu->vcpu, exit_code);
+			if (ec_handler) {
+				ec_handler(hyp_vcpu);
+			} else {
+				/*
+				 * If we have no handler we should not be punting
+				 * this trap to Host, as it will have no sync'ed
+				 * context to handle (for example: ESR_EL2).
+				 */
+				vcpu_illegal_trap(&hyp_vcpu->vcpu, exit_code);
+			}
 		}
 		break;
 	case ARM_EXCEPTION_EL1_SERROR:
@@ -892,6 +869,7 @@ static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	if (pkvm_hyp_vcpu_is_protected(hyp_vcpu)) {
 		vcpu_clear_flag(host_vcpu, PC_UPDATE_REQ);
 	} else {
+		host_vcpu->arch.fault = hyp_vcpu->vcpu.arch.fault;
 		host_vcpu->arch.iflags = hyp_vcpu->vcpu.arch.iflags;
 
 		host_vcpu->arch.hcr_el2 &= ~HCR_VSE;
