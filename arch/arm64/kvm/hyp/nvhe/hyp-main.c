@@ -751,8 +751,12 @@ static void flush_debug_state(struct pkvm_hyp_vcpu *hyp_vcpu)
 	} else if (kvm_host_owns_debug_regs(vcpu)) {
 		vcpu->arch.external_debug_state = host_vcpu->arch.external_debug_state;
 
-		/* Propagate any special handling for single step from host. */
-		__vcpu_assign_sys_reg(vcpu, MDSCR_EL1, __vcpu_sys_reg(host_vcpu, MDSCR_EL1));
+		/*
+		 * The debug switch loads MDSCR_EL1 from external_mdscr_el1 while
+		 * the host owns the debug registers (ctxt_mdscr_el1()), so that
+		 * is where the host's KDE/MDE/SS live.
+		 */
+		vcpu->arch.external_mdscr_el1 = host_vcpu->arch.external_mdscr_el1;
 		*vcpu_cpsr(vcpu) = *vcpu_cpsr(host_vcpu);
 	}
 }
