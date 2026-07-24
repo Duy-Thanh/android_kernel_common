@@ -160,6 +160,24 @@
       "parentUuid": "470f7608_4e2e10b9",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc00247_197a3488",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T15:00:23Z",
+      "side": 1,
+      "message": "\u003e If pKVM fails to do that, the fact that the device is trusted doesn\u0027t help?\n\nWhat I was pointing to is the scenario described may not cause information leak if the device is deemed trusted. For a trusted hardware to stop reporting completion, it must either be a hardware bug or kernel explicitly disabling the reporting by resetting the device(as per vt-d and pcie documentation). If the device is reset and detached from kernel, information cannot flow from device to kernel. And if the device is buggy, all bets are off.\n\nBut I get what you are pointing to - all my above reasoning are just hypothesis and not concrete :-). \n\nI have updated the comment as per your suggestion",
+      "parentUuid": "36641a6d_686854e9",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
