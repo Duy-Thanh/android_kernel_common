@@ -10873,6 +10873,7 @@ L:	linux-kernel@vger.kernel.org
 S:	Maintained
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git timers/vdso
 F:	include/asm-generic/vdso/vsyscall.h
+F:	include/linux/vdso_datastore.h
 F:	include/vdso/
 F:	kernel/time/namespace_vdso.c
 F:	kernel/time/vsyscall.c
@@ -23488,6 +23489,20 @@ L:	rust-for-linux@vger.kernel.org
 S:	Maintained
 T:	git https://github.com/Rust-for-Linux/linux.git rust-analyzer-next
 F:	scripts/generate_rust_analyzer.py
+
+RUST [SYNC]
+M:	Boqun Feng <boqun@kernel.org>
+M:	Gary Guo <gary@garyguo.net>
+M:	Alice Ryhl <aliceryhl@google.com>
+R:	Lyude Paul <lyude@redhat.com>
+R:	Daniel Almeida <daniel.almeida@collabora.com>
+R:	"Onur Özkan" <work@onurozkan.dev>
+L:	linux-kernel@vger.kernel.org
+L:	rust-for-linux@vger.kernel.org
+S:	Maintained
+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/boqun/linux.git rust-sync
+F:	rust/kernel/sync.rs
+F:	rust/kernel/sync/
 
 RXRPC SOCKETS (AF_RXRPC)
 M:	David Howells <dhowells@redhat.com>
