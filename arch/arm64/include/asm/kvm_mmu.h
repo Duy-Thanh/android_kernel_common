@@ -219,7 +219,13 @@ static inline void __invalidate_icache_guest_page(void *va, size_t size)
 		/* any kind of VIPT cache */
 		icache_inval_all_pou();
 	} else {
+<<<<<<< HEAD   (71db3cbb411245448c61749014179295d8f1e168 UPSTREAM: locking/rtmutex: Skip remove_waiter() when waiter )
 		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+||||||| BASE   (fa5e2ea5212203e0e7b4d8f17583b7f932db654e Merge tag 'android13-5.10.257_r00' into android13-5.10)
+		/* PIPT or VPIPT at EL2 (see comment in __kvm_tlb_flush_vmid_ipa) */
+=======
+		/* PIPT */
+>>>>>>> BRANCH (50b3a256e550e98ff6a49d32e77fb67998707961 Merge 5.10.260 into android13-5.10-lts)
 		icache_inval_pou((unsigned long)va, (unsigned long)va + size);
 	}
 }
