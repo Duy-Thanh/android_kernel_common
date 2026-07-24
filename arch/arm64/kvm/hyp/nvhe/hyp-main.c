@@ -1254,7 +1254,14 @@ static void handle___kvm_adjust_pc(struct kvm_cpu_context *host_ctxt)
 		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
 			return;
 
+		/*
+		 * The PC adjustment is recorded on the host vCPU, but the
+		 * guest PC lives in the hyp vCPU. Carry it over, apply it,
+		 * and reflect the cleared flags back.
+		 */
+		vcpu_copy_flag(&hyp_vcpu->vcpu, host_vcpu, PC_UPDATE_REQ);
 		__kvm_adjust_pc(&hyp_vcpu->vcpu);
+		vcpu_copy_flag(host_vcpu, &hyp_vcpu->vcpu, PC_UPDATE_REQ);
 	} else {
 		__kvm_adjust_pc(host_vcpu);
 	}
