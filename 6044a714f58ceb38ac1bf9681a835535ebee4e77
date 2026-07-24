@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc49b3a1_982fe8b1",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T14:24:38Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure this comment is very much needed altogether, but if we have it anyway, I don\u0027t think details like \"Mirror the host\u0027s paging_domain_compatible() check\" are useful. We need to do this regardless of the existence of paging_domain_compatible(). So just \"Avoid setting a ...\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "f2e52654_2032182a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 343,
+                "startChar": 0,
+                "endLine": 345,
+                "endChar": 0
+              },
+              "replacement": "\t\t * doesn\u0027t support Snoop Control (SC). Avoid setting a\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6044a714f58ceb38ac1bf9681a835535ebee4e77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
