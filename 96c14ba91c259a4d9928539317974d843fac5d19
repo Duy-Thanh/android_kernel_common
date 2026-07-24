@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda40d43_a21ce4f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2000377
+      },
+      "writtenOn": "2026-07-24T09:05:34Z",
+      "side": 1,
+      "message": "Hi Lee, since the base CLs are now merged in the main branch, I have updated this cherry-pick to Patchset 4 using the newly merged commit. Could you please take a look and help remove the previous -1? Thank you!",
+      "revId": "96c14ba91c259a4d9928539317974d843fac5d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
