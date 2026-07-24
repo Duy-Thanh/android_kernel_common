@@ -118,6 +118,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023bc16a_89722c6a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-24T12:28:47Z",
+      "side": 1,
+      "message": "\u003eSo, if doing this like pKVM-ARM does it not easy to implement right now, we may keep this BUG_ON for now (maybe just change it to an error return) and just add a FIXME, like I suggested?\n\nTo avoid crash the system, but let it continue running without pKVM, seems return an error code is better. Anyway, yeah, adding a FIXME sounds good to me, and we can refactor this later.",
+      "parentUuid": "9e373fff_eb3abb66",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
