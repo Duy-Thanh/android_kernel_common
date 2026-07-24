@@ -46,6 +46,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e407ebaf_3223f81c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T11:05:27Z",
+      "side": 1,
+      "message": "Hmm, indeed.\n\nFor now we may just add a FIXME for this, plus maybe change the BUG_ON to returning -E2BIG or whatever?\n\nBriefly looking at pKVM-ARM, looks like it fixes host MMU page states in `fix_host_ownership()` _before_ unmapping anything from the host MMU in `unmap_protected_regions()` (so `fix_host_ownership()` doesn\u0027t need to deal with non-present entries), and then `unmap_protected_regions()` uses the memory protection API to unmap regions from the host MMU.",
+      "parentUuid": "87fa793d_557ffdc7",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
