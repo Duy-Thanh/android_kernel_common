@@ -88,6 +88,24 @@
       "parentUuid": "46c482b7_bf53ab93",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc1bc01_d91cdbf6",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T13:55:23Z",
+      "side": 1,
+      "message": "I was thinking it this way - if fixing such an attack can compromise pKVM security, we should probably not fix it.\n\nBut in this case, I think the bounded approach was safe(as mentioned in the other comment in this cl), but I might be missing some cases which might deem it unsafe. I shall bring the old fix back if you also feel its safe to return after bounded tries(as the device in question should go offline to cause this issue and it will not be able to access stale entries any more). WDYT?",
+      "parentUuid": "f89249e2_e10ac7f2",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
