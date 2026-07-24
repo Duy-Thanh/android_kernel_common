@@ -124,6 +124,24 @@
       "parentUuid": "f89249e2_e10ac7f2",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470f7608_4e2e10b9",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T14:20:10Z",
+      "side": 1,
+      "message": "\u003e I\u0027m rather suggesting to document it, something like:\n\nOk, will do.\n\n\u003e I don\u0027t feel it\u0027s safe. What really guarantees that the device went offline and its stale Device-TLB entries cannot be effectively used by the host anymore?\n\nAs per Intel, these devices in SATC can be trusted(If I understand correctly only DFU will be able to use the device TLB caches and is isolated from device and firmware) and hence no part of host would be able to use this - this was my main argument to consider that its safe.\n\nBut its a very restricted assumption - not sure if we should go by this.",
+      "parentUuid": "1a702830_eaba3d6c",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
