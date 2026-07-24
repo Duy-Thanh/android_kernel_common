@@ -142,6 +142,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9454ef77_33d6a41c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-24T12:41:55Z",
+      "side": 1,
+      "message": "Maybe simple just drop this patch for now. As stated in commitlog \"Without proper tracking, donated memory pages never get their host_state\nset to PKVM_PAGE_NONE/PKVM_ID_HYP in the pkvm_page metadata. So their\nstate remains zero-initialized, i.e. set to PKVM_PAGE_NONE/PKVM_ID_HOST.\nAlthough currently that is not causing any known security issues (since\nPKVM_PAGE_NONE/PKVM_ID_HOST will still not pass any existing security\nchecks), it is still incorrect, and may potentially cause issues in the\nfuture if such a combined state is treated as a host owned page.\"\n\nI think it is better to leave without this patch for a while than BUG_ON or return error code which will mean running without pKVM. WDYT?",
+      "parentUuid": "023bc16a_89722c6a",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
