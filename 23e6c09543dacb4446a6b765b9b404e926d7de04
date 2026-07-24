@@ -52,6 +52,24 @@
       "parentUuid": "0ea8c92a_637557bc",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c482b7_bf53ab93",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-24T13:42:24Z",
+      "side": 1,
+      "message": "\u003e It immediately triggered a kernel panic in the GPU driver, unrelated to pKVM. But I suppose theoretically it could trigger the hard lockup addressed here as well?\n\nTrue, but its again a DoS attack surface I believe which is outside pKVM scope?\n\n\u003e And this at least contradicts the above \"cannot occur for any device an ITE could be reporting on in the hyp build\"?\n\nWhat I meant was - it cannot happen in normal circumstances. Reworded it to be more clear. Please if the rewording is okay",
+      "parentUuid": "4e910874_9dc5804e",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
