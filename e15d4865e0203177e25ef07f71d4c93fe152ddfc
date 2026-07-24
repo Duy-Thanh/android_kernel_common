@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff36dd5_6d526ae4",
+        "filename": "net/ipv4/esp4.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-24T09:47:23Z",
+      "side": 1,
+      "message": "I think here we should check the encap type of the packet instead of the SA anymore",
+      "range": {
+        "startLine": 735,
+        "startChar": 1,
+        "endLine": 735,
+        "endChar": 16
+      },
+      "revId": "e15d4865e0203177e25ef07f71d4c93fe152ddfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd5b03a_1660980d",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2061,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-24T09:47:23Z",
+      "side": 1,
+      "message": "Should we also reset new_mapping_saddr?",
+      "revId": "e15d4865e0203177e25ef07f71d4c93fe152ddfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9057ecf4_d7777b79",
+        "filename": "net/xfrm/xfrm_user.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4184,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-24T09:47:23Z",
+      "side": 1,
+      "message": "Again I think here we should look at the encap type of the packet instead of the xfrm_state because the xfrm_state might be ENCAP_WILDRECV",
+      "range": {
+        "startLine": 4184,
+        "startChar": 1,
+        "endLine": 4184,
+        "endChar": 54
+      },
+      "revId": "e15d4865e0203177e25ef07f71d4c93fe152ddfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
