@@ -106,6 +106,24 @@
       "parentUuid": "f89249e2_e10ac7f2",
       "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a702830_eaba3d6c",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T14:09:09Z",
+      "side": 1,
+      "message": "\u003e I was thinking it this way - if fixing such an attack can compromise pKVM security, we should probably not fix it.\n\nYes, and I\u0027m not suggesting we _should_ fix it (not until we figure out how to fix it securely).\n\nI\u0027m rather suggesting to document it, something like:\n\n```\n\t\t * NOTE: with pKVM, ATS is only enabled for devices listed in\n\t\t * SATC (see is_dev_in_satc() gating in iommu_set_lm_ce()/\n\t\t * iommu_set_sm_ce()), and SATC devices are SoC-integrated and\n\t\t * not hot-removable, so the device-released/not-present\n\t\t * scenario handled here cannot occur as a result of device\n\t\t * unplug by the user. It may still occur if the device is\n\t\t * malfunctioning or if an abrupt device removal is triggered\n\t\t * by host kernel or (importantly!) by privileged host userspace\n\t\t * via sysfs. Thus it may still cause a hard lockup of the\n\t\t * system due to an infinite ATS invalidate retry loop in these\n\t\t * cases.\n```\n\n\u003e I think the bounded approach was safe(as mentioned in the other comment in this cl), but I might be missing some cases which might deem it unsafe. I shall bring the old fix back if you also feel its safe to return after bounded tries(as the device in question should go offline to cause this issue and it will not be able to access stale entries any more).\n\nI don\u0027t feel it\u0027s safe. What really _guarantees_ that the device went offline and its stale Device-TLB entries cannot be effectively used by the host anymore?",
+      "parentUuid": "f89249e2_e10ac7f2",
+      "revId": "23e6c09543dacb4446a6b765b9b404e926d7de04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
