@@ -424,21 +424,6 @@ static int handle_trap_exceptions(struct kvm_vcpu *vcpu)
 	int handled;
 
 	/*
-	 * If we run a non-protected VM when protection is enabled
-	 * system-wide, resync the state from the hypervisor and mark
-	 * it as dirty on the host side if it wasn't dirty already
-	 * (which could happen if preemption has taken place).
-	 */
-	if (is_protected_kvm_enabled() && !kvm_vm_is_protected(vcpu->kvm)) {
-		preempt_disable();
-		if (!(vcpu_get_flag(vcpu, PKVM_HOST_STATE_DIRTY))) {
-			kvm_call_hyp_nvhe(__pkvm_vcpu_sync_state);
-			vcpu_set_flag(vcpu, PKVM_HOST_STATE_DIRTY);
-		}
-		preempt_enable();
-	}
-
-	/*
 	 * See ARM ARM B1.14.1: "Hyp traps on instructions
 	 * that fail their condition code check"
 	 */
@@ -587,15 +572,33 @@ int handle_exit(struct kvm_vcpu *vcpu, int exception_index)
 	}
 }
 
+static void handle_exit_pkvm_state(struct kvm_vcpu *vcpu, int exception_index)
+{
+	int exception_code = ARM_EXCEPTION_CODE(exception_index);
+
+	if (!is_protected_kvm_enabled() || kvm_vm_is_protected(vcpu->kvm))
+		return;
+
+	/*
+	 * Resync the state from the hypervisor and keep it dirty when the host
+	 * will read it (a trap) or write it (SError injection); otherwise the
+	 * hypervisor's copy is authoritative. Preempt-off here, so the loaded
+	 * hyp vCPU is stable.
+	 */
+	if (exception_code == ARM_EXCEPTION_TRAP ||
+	    exception_code == ARM_EXCEPTION_EL1_SERROR ||
+	    ARM_SERROR_PENDING(exception_index)) {
+		kvm_call_hyp_nvhe(__pkvm_vcpu_sync_state);
+		vcpu_set_flag(vcpu, PKVM_HOST_STATE_DIRTY);
+	} else {
+		vcpu_clear_flag(vcpu, PKVM_HOST_STATE_DIRTY);
+	}
+}
+
 /* For exit types that need handling before we can be preempted */
 void handle_exit_early(struct kvm_vcpu *vcpu, int exception_index)
 {
-	/*
-	 * We just exited, so the state is clean from a hypervisor
-	 * perspective.
-	 */
-	if (is_protected_kvm_enabled())
-		vcpu_clear_flag(vcpu, PKVM_HOST_STATE_DIRTY);
+	handle_exit_pkvm_state(vcpu, exception_index);
 
 	if (ARM_SERROR_PENDING(exception_index)) {
 		if (this_cpu_has_cap(ARM64_HAS_RAS_EXTN)) {
