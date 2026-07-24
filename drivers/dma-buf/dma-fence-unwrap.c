@@ -66,31 +66,17 @@ struct dma_fence *__dma_fence_unwrap_merge(unsigned int num_fences,
 {
 	struct dma_fence_array *result;
 	struct dma_fence *tmp, **array;
-	ktime_t timestamp;
 	unsigned int i;
 	size_t count;
 
 	count = 0;
-	timestamp = ns_to_ktime(0);
 	for (i = 0; i < num_fences; ++i) {
-		dma_fence_unwrap_for_each(tmp, &iter[i], fences[i]) {
-			if (!dma_fence_is_signaled(tmp)) {
-				++count;
-			} else {
-				ktime_t t = dma_fence_timestamp(tmp);
-
-				if (ktime_after(t, timestamp))
-					timestamp = t;
-			}
-		}
+		dma_fence_unwrap_for_each(tmp, &iter[i], fences[i])
+			++count;
 	}
 
-	/*
-	 * If we couldn't find a pending fence just return a private signaled
-	 * fence with the timestamp of the last signaled one.
-	 */
 	if (count == 0)
-		return dma_fence_allocate_private_stub(timestamp);
+		return dma_fence_get_stub();
 
 	array = kmalloc_array(count, sizeof(*array), GFP_KERNEL);
 	if (!array)
@@ -151,7 +137,7 @@ restart:
 	} while (tmp);
 
 	if (count == 0) {
-		tmp = dma_fence_allocate_private_stub(ktime_get());
+		tmp = dma_fence_get_stub();
 		goto return_tmp;
 	}
 
@@ -164,6 +150,8 @@ restart:
 					dma_fence_context_alloc(1),
 					1, false);
 	if (!result) {
+		for (i = 0; i < count; i++)
+			dma_fence_put(array[i]);
 		tmp = NULL;
 		goto return_tmp;
 	}
