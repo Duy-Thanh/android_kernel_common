@@ -190,6 +190,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8400c977_2d0c9e9b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-24T13:03:34Z",
+      "side": 1,
+      "message": "But are we sure it will not happen in practice? Are we sure that on some boot pKVM will not allocate memory which is in the same huge page as pvmfw? Maybe KASLR could trigger that on some boot? I am not proposing to drop this patch forever but just to drop it for this patchseries so we could potentially merge it soon and improve this patch as next step.",
+      "parentUuid": "204e8cf4_a705f63e",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
