@@ -231,6 +231,24 @@
       "parentUuid": "74ca6d6b_69680d2a",
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1928dbec_9de5835f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-24T14:52:11Z",
+      "side": 1,
+      "message": "I personally prefer to check a bit more than too less but I get your point. I would vote to add this check to guarantee that pvmfw is useful and will extend it to 3 requirements:\n- entry point is at the beginning of pvmfw image\n- pvmfw starts in 32-bit mode with paging disabled\n- taking into account above this means that first instruction must enable 64-bit to function properly and as we are quite sure that code enabling 64-bit mode will not fit in first 4B we are quite sure that such pvmfw will not be functional, right?\n\nBut I will not insist on that - if your really think it is better to leave it as is lets close this comment.",
+      "parentUuid": "22bbf4c8_b2ae40ad",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
