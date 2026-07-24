@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd20dc2_a359e669",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T18:30:35Z",
+      "side": 1,
+      "message": "That old shadow implementation was very different anyway...\n\nMaybe we don\u0027t need to track lifetimes of \"devices\", since the host never frees a context table once it allocated it.\n\nBut what I\u0027m talking about is: we actually already have `struct pkvm_device` in the current implementation; yet we are not really taking advantage of it, we are only using it to hackily work around the need to pass a `struct device *` to the IOMMU driver\u0027s functions we reuse. I.e. we are creating ephemeral pkvm_device structs on stack every time in all those hypercalls, to populate them with params received from the host every time, to pass those params to those IOMMU driver\u0027s functions. So these pkvm_device structs don\u0027t represent a meaningful state of a device or whatever, they only contain an unstructured bunch of values.\n\nIt seems like a lot of the security bugs fixed by this series are a direct consequence of this \"design choice\".\n\nWhereas we could, instead, populate these pkvm_device structs (or whatever we name them) just when setting corresponding context table entries, and remember those populated structs (e.g. in a hashtable hashed by BDFs, or whatever) to use them afterwards (whenever doing anything with the corresponding context entry or PASID entries referenced by it), instead of requiring the host to needlessly pass various params like ats_qdep in every hypercall and/or manually deriving params like ats_supported from context tables every time (and hacking upstream code for that)?\n\nBTW also it seems we could add a spinlock to this struct, and hold this spinlock whenever doing anything with the corresponding context entry or any PASID tables referenced by it (mimicking the host\u0027s iommu_group mutex), thus avoid races like those addressed by aosp/4155527 and aosp/4155524 without the need to hack upstream code?\n\nAlso, for example, this struct could contain a counter of active PASID entries referenced by the corresponding context entry; so in the patch \"ANDROID: iommu/vt-d: pKVM: Prevent clearing context entry with active PASIDs\" we could just check this counter instead of walking PASID tables (and as a bonus, again, avoid changing upstream code)?\n\n...And for example returning to this specific patch, we could keep that upstream check `tag-\u003edev \u003d\u003d dev`, since those pkvm_device struct pointers would actually be equal (since they would be persistent structures per context entry, not ephemeral structures created ad-hoc on stack every time)?\n\n...IOW, if we want to use the host IOMMU driver\u0027s code in pKVM, we\u0027d better provide this code with abstractions that map well onto the corresponding host IOMMU driver\u0027s abstractions that this code expects.",
+      "parentUuid": "28cfbdc4_2167c4da",
+      "revId": "159ee8f797fc3e16406f9e38905439d59c45ec62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ef1bbc5_eeeed8eb",
