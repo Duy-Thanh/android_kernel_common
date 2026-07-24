@@ -249,6 +249,24 @@
       "parentUuid": "22bbf4c8_b2ae40ad",
       "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fedffe9_ead26244",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-24T17:35:05Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve changed it to check if the entire pvmfw image fits in 32-bit space as you suggested.\n\nThis entire patch still seems optional, but if we have it anyway - I\u0027ve realized that, for instance, if we want to guarantee that any exception in a pVM can only be caused by a pVM itself, not by the host, then it makes sense to prevent this 4G-4 scenario caused by an inadequate pvmfw_load_addr value set by the host (although, again, in this particular pvmfw case we enforce invalid initial IDT and thus should prevent such unexpected early exceptions in pvmfw from compromising its security).\n\n\u003e For example, the pvmfw entry point may be at 4G-4 but its first instruction may be a jump to an earlier instruction, so it will work fine. :)\n\nOk, I forgot there is no earlier instruction, since the entry point is at the beginning of the pvmfw image. :)",
+      "parentUuid": "1928dbec_9de5835f",
+      "revId": "a0715e9b40988b7ff0366f713c0923760105d27c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
