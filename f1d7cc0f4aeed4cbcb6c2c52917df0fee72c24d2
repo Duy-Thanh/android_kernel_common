@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81dbb705_47db9b05",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-24T00:47:31Z",
+      "side": 1,
+      "message": "Seems at this point kvm_host.xcr0/xss are still not initialized by the KVM. kvm_host.xcr0/xss is initialized in kvm_x86_vendor_init() which is called after vmx_pkvm_init(). So at this moment, kvm_host.xcr0/xss are still 0. We probably need to read from the HW, or do this in the pKVM side during pkvm_init.",
+      "revId": "f1d7cc0f4aeed4cbcb6c2c52917df0fee72c24d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
