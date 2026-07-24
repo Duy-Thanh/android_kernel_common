@@ -931,6 +931,9 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 		/* Propagate WFx trapping flags */
 		hyp_vcpu->vcpu.arch.hcr_el2 &= ~(HCR_TWE | HCR_TWI);
 		hyp_vcpu->vcpu.arch.hcr_el2 |= hcr_el2 & (HCR_TWE | HCR_TWI);
+
+		/* Re-evaluate EL2-owned debug ownership for this load. */
+		pkvm_vcpu_load_debug(&hyp_vcpu->vcpu);
 	} else if (cpus_have_final_cap(ARM64_HAS_FGT)) {
 		struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
 

@@ -131,8 +131,12 @@ static void pvm_init_traps_mdcr(struct kvm_vcpu *vcpu)
 		val &= ~(MDCR_EL2_HPME | MDCR_EL2_MTPME | MDCR_EL2_HPMN_MASK);
 	}
 
-	if (!kvm_has_feat(kvm, ID_AA64DFR0_EL1, DebugVer, IMP))
-		val |= MDCR_EL2_TDRA | MDCR_EL2_TDA;
+	/*
+	 * TDRA traps the debug ROM (never exposed to a pVM). TDA arms the debug
+	 * register trap, dropped lazily on guest ownership; TDE is never set (the
+	 * host cannot debug a pVM).
+	 */
+	val |= MDCR_EL2_TDRA | MDCR_EL2_TDA;
 
 	if (!kvm_has_feat(kvm, ID_AA64DFR0_EL1, DoubleLock, IMP))
 		val |= MDCR_EL2_TDOSA;
