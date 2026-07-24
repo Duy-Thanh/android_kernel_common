@@ -52,6 +52,24 @@
       "parentUuid": "2c6c719e_37d7e0e0",
       "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2854efd8_cb452b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-07-24T08:31:13Z",
+      "side": 1,
+      "message": "This was applied to Rafael\u0027s tree on the 9th July as:\n\neef1d74bf88f (\"PM: runtime: Only set runtime_error on suspend callback failures\")\n\nPlease reupload that commit as FROMGIT with the link to where it was cherry-picked from i.e. Rafael\u0027s tree.",
+      "parentUuid": "b7db6523_d59dbcbf",
+      "revId": "12635712bc2884d81a47bfdc60a3053be37b70e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
