@@ -33,6 +33,24 @@
       "message": "Just a question: are there already any cases when we fix up #UD, not just #GP?",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3001ba4_2fa7ca30",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T11:41:23Z",
+      "side": 1,
+      "message": "IIRC we added exception fixup support specifically to support rdmsr_safe/wrmsr_safe for virtualizating host accesses to those MSR that are outside the range configured via MSR_BITMAP and thus can\u0027t be passed-through to the host. Before we discovered that issue, we didn\u0027t need exception fixup. So I suppose there are no cases when we need to fix up #UD?",
+      "parentUuid": "1344f7a6_71374e79",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
