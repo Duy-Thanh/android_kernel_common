@@ -844,45 +844,10 @@ static struct dma_pte *dma_pfn_level_pte(struct dmar_domain *domain,
 	return NULL;
 }
 
-/* clear last level pte, a tlb flush should be followed */
-static void dma_pte_clear_range(struct dmar_domain *domain,
-				unsigned long start_pfn,
-				unsigned long last_pfn)
-{
-	unsigned int large_page;
-	struct dma_pte *first_pte, *pte;
-
-	if (WARN_ON(!domain_pfn_supported(domain, last_pfn)) ||
-	    WARN_ON(start_pfn > last_pfn))
-		return;
-
-	/* we don't need lock here; nobody else touches the iova range */
-	do {
-		large_page = 1;
-		first_pte = pte = dma_pfn_level_pte(domain, start_pfn, 1, &large_page);
-		if (!pte) {
-			start_pfn = align_to_level(start_pfn + 1, large_page + 1);
-			continue;
-		}
-		do {
-#ifdef __PKVM_HYP__
-			WARN_ON_ONCE(dma_pte_present(pte));
-#endif
-			dma_clear_pte(pte);
-			start_pfn += lvl_to_nr_pages(large_page);
-			pte++;
-		} while (start_pfn <= last_pfn && !first_pte_in_page(pte));
-
-		domain_flush_cache(domain, first_pte,
-				   (void *)pte - (void *)first_pte);
-
-	} while (start_pfn && start_pfn <= last_pfn);
-}
-
 static void dma_pte_free_level(struct dmar_domain *domain, int level,
 			       int retain_level, struct dma_pte *pte,
 			       unsigned long pfn, unsigned long start_pfn,
-			       unsigned long last_pfn)
+			       unsigned long last_pfn, bool *need_flush)
 {
 	pfn = max(start_pfn, pfn);
 	pte = &pte[pfn_level_offset(pfn, level)];
@@ -900,7 +865,7 @@ static void dma_pte_free_level(struct dmar_domain *domain, int level,
 		if (level > 2) {
 			dma_pte_free_level(domain, level - 1, retain_level,
 					   level_pte, level_pfn, start_pfn,
-					   last_pfn);
+					   last_pfn, need_flush);
 		}
 
 		/*
@@ -917,26 +882,11 @@ static void dma_pte_free_level(struct dmar_domain *domain, int level,
 			push_pkvm_memcache_page(&domain->mc, (phys_addr_t *)level_pte,
 						pkvm_virt_to_phys);
 #endif
+			*need_flush = true;
 		}
 next:
 		pfn += level_size(level);
 	} while (!first_pte_in_page(++pte) && pfn <= last_pfn);
-}
-
-/*
- * clear last level (leaf) ptes and free page table pages below the
- * level we wish to keep intact.
- */
-static void dma_pte_free_pagetable(struct dmar_domain *domain,
-				   unsigned long start_pfn,
-				   unsigned long last_pfn,
-				   int retain_level)
-{
-	dma_pte_clear_range(domain, start_pfn, last_pfn);
-
-	/* We don't need lock here; nobody else touches the iova range */
-	dma_pte_free_level(domain, agaw_to_level(domain->agaw), retain_level,
-			   domain->pgd, 0, start_pfn, last_pfn);
 }
 
 #ifndef __PKVM_HYP__
@@ -1794,31 +1744,18 @@ static void switch_to_super_page(struct dmar_domain *domain,
 				 unsigned long end_pfn, int level)
 {
 	unsigned long lvl_pages = lvl_to_nr_pages(level);
-	struct dma_pte *pte = NULL;
+	bool need_flush = false;
 
 	if (WARN_ON(!IS_ALIGNED(start_pfn, lvl_pages) ||
 		    !IS_ALIGNED(end_pfn + 1, lvl_pages)))
 		return;
 
-	while (start_pfn <= end_pfn) {
-		if (!pte)
-			pte = pfn_to_dma_pte(domain, start_pfn, &level,
-					     GFP_ATOMIC);
+	dma_pte_free_level(domain, agaw_to_level(domain->agaw), level + 1,
+			   domain->pgd, 0, start_pfn, end_pfn, &need_flush);
 
-		if (dma_pte_present(pte)) {
-			dma_pte_free_pagetable(domain, start_pfn,
-					       start_pfn + lvl_pages - 1,
-					       level + 1);
-
-			cache_tag_flush_range(domain, start_pfn << VTD_PAGE_SHIFT,
-					      end_pfn << VTD_PAGE_SHIFT, 0);
-		}
-
-		pte++;
-		start_pfn += lvl_pages;
-		if (first_pte_in_page(pte))
-			pte = NULL;
-	}
+	if (need_flush)
+		cache_tag_flush_range(domain, start_pfn << VTD_PAGE_SHIFT,
+				      end_pfn << VTD_PAGE_SHIFT, 0);
 }
 
 int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
