@@ -69,6 +69,24 @@
       "parentUuid": "e3001ba4_2fa7ca30",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7c6cc6_bdd429bd",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T18:53:36Z",
+      "side": 1,
+      "message": "Just noticed there is one more case: executing XSETBV instruction in `handle_xsetbv()` (for handling trapped XSETBV instruction executed by the host). But the comment in `handle_xsetbv()` explains that, again, in pKVM it should only generate #GP, not #UD?\n\nAlthough that comment also says that it was not confirmed on older CPUs that don\u0027t have XSAVE. But we probably don\u0027t support such CPUs anyway?",
+      "parentUuid": "083f02d7_43464597",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
