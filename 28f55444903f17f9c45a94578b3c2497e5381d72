@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43c8896_47e574d2",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T22:49:11Z",
+      "side": 1,
+      "message": "Is the host even expected to call `enable_virtualization_cpu` more than once for the same CPU? It doesn\u0027t seem so: looks like that only happens if kvm-intel.ko is unloaded and loaded again (while pKVM doesn\u0027t support building KVM as a module) or during S3 resume (which is not supported by pKVM either).\n\nSo we should rather add a more generic per-cpu variable e.g. `virtualization_enabled` (BTW like the one in virt/kvm/kvm_main.c) and immediately return from `pkvm_enable_virtualization_cpu()` (with e.g. -EBUSY) if it is called more than once for the same CPU? In particular, to prevent similar security issues if we add more logic to `pkvm_enable_virtualization_cpu()` in the future.",
+      "fixSuggestions": [
+        {
+          "fixId": "afa6bd0d_6df0826b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "static DEFINE_PER_CPU(bool, virtualization_enabled);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "\tif (this_cpu_read(virtualization_enabled))\n\t\treturn -EBUSY;\n\n\tkvm_user_return_msr_cpu_online();\n\tthis_cpu_write(virtualization_enabled, true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a01657_3f276e12",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T22:49:11Z",
+      "side": 1,
+      "message": "This is a hot path, right?\n\nWhereas uret MSRs, by design, are expected to never be changed by the host kernel after early boot, except for guest/host switches done by KVM (so in the pKVM case, they should never be changed by the host kernel after early boot at all)? Otherwise it would not be correct to restore them only before returning to userspace, not earlier?\n\nSo we should rather intercept host writes to these MSRs, to prevent the host from ever changing them?\n\nOtherwise, we do these expensive WRMSRs every time when entering the guest, which are almost always useless (since the host should never change these MSRs, and the guest also only rarely changes them)?\n\nI\u0027ve looked though occurrences of writes to all these MSRs (MSR_SYSCALL_MASK, MSR_LSTAR, MSR_CSTAR, MSR_EFER, MSR_TSC_AUX, MSR_STAR, MSR_IA32_TSX_CTRL) in the kernel code, and it looks like indeed they are only written during early boot before deprivileging (plus in cases like S3 resume, kexec and CPU hotplug, none of which are supported by pKVM).",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
