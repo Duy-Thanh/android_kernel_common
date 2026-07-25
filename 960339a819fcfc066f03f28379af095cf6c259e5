@@ -160,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b3ced5a_2f06d83e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-07-25T21:36:15Z",
+      "side": 1,
+      "message": "I see, thanks. I made this change with further optimizations in aosp/4194495 just for your reference. WDYT should I include these changes in this CL? I don\u0027t think this is super hot path, so optimizing would have any tangible benefits.",
+      "parentUuid": "1ab7c723_707f47e3",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaea13a1_175224dc",
