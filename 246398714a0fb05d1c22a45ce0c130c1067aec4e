@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0561d3f1_95538413",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T11:33:28Z",
+      "side": 1,
+      "message": "Just a thought: would it be better to panic in the non-safe case here (instead of continuing running as if nothing happened and just printing an error which is not printed in non-debug mode anyway)? That, for instance, would mitigate that MSR_KERNEL_GS_BASE attack scenario?\n\nUnlike the host kernel, pKVM is only supposed to non-safely access a known limited set of MSRs, I suppose?",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1344f7a6_71374e79",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T11:33:28Z",
+      "side": 1,
+      "message": "Just a question: are there already any cases when we fix up #UD, not just #GP?",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
