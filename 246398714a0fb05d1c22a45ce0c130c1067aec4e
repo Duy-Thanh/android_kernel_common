@@ -51,6 +51,24 @@
       "parentUuid": "1344f7a6_71374e79",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "083f02d7_43464597",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T13:40:54Z",
+      "side": 1,
+      "message": "Ok, I recall we also leverage exception fixup in a couple more cases when KVM code reused by pKVM relies on it, e.g.: 1. rdmsrq_safe/wrmsrq_safe for probing uret MSRs, e.g. in kvm_probe_user_return_msr(). 2. handling spurious failures of VMX instructions in vmx_asm1() etc (that actually always causes pKVM to BUG_ON anyway).\n\nBut in both these cases it is still #GP, not #UD? (VMX instructions only trigger #UD if VMX is disabled, which must never happen in pKVM?)",
+      "parentUuid": "e3001ba4_2fa7ca30",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
