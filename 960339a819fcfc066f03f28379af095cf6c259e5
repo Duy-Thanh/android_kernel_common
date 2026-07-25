@@ -178,6 +178,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d836b2_f1beed84",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-25T23:04:33Z",
+      "side": 1,
+      "message": "I feel we should rather not fix what ain\u0027t broken, given that this, again, is a legacy code (BTW otherwise we would want to do this in upstream first).\n\nSo maybe just keep this CL as is (just as a kind of preparation for the next patch aosp/4170667, i.e. just with minimal changes related to the change of `pfn_to_dma_pte()`)?",
+      "parentUuid": "6b3ced5a_2f06d83e",
+      "revId": "960339a819fcfc066f03f28379af095cf6c259e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaea13a1_175224dc",
