@@ -178,6 +178,24 @@
       "parentUuid": "40773b09_324c5e76",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea32e242_ea56a1d9",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-26T00:29:14Z",
+      "side": 1,
+      "message": "\u003e This will be a bit different with the generic kerne/kvm which allows the host to modify the HW state and KVM unconditionally restore.\n\nI\u0027m not sure what you mean by \"allows\". Allows whom? Itself?\n\nThe fact that KVM unconditionally restores `kvm_host.xcr0/xss` means precisely that KVM assumes that the host will *not* change xcr0/xss, right? Otherwise, if the host relied on changing xcr0/xss, KVM would break that?\n\nSo, this patch in its current form looks pretty strange to me. We intercept both XCR0 and XSS writes and we do assume that changing XCR0/XSS by the host is incorrect (which is why we print a warning), yet we do change them anyway (just because the host wants to), and then work around that by changing them back to `kvm_host.xcr0/xss` later.\n\nI think we should get rid of `pkvm_restore_host_xsave_state()` and just not allow the host to change the xcr0/xss in the first place.\n\n\u003e If we go this direction, I prefer we inject #GP so that the host will know its setting doesn\u0027t work, rather than silently success to the host.\n\nI would also prefer to inject #GP.\n\nAs for the fact that it is not architectural - we inject #PF or #GP on host EPT violation, that is not architectural either. Host kernel is not an arbitrary kernel, it is a part of the same kernel image as pKVM, it is aware that it is running under pKVM and so on. So, such non-architectural hacks are ok, as long as they don\u0027t break any kernel functionality. (Although it would be nice to somehow let the host kernel distinguish such non-architectual pKVM-injected exceptions from architectural ones, at least to let it print this information in the call trace. pKVM-ARM does that.)",
+      "parentUuid": "531ac86b_be7ad0b0",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
