@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5db12c_4c30cbbe",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-26T08:42:28Z",
+      "side": 1,
+      "message": "The `arg` argument contains the same information as the `data: UserSlice` argument. Please avoid this duplication. Instead of reading `new_data`, you should be able to access it as a field of `req_timeout`.",
+      "range": {
+        "startLine": 1681,
+        "startChar": 0,
+        "endLine": 1682,
+        "endChar": 19
+      },
+      "revId": "16fa6a6d03c8217b8cb2daafb6eb8fba93bcf34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a62d86_d8ab8e80",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-26T08:42:28Z",
+      "side": 1,
+      "message": "This logic should be in userspace, not in the kernel. If userspace wants a timeout for the last thread, then that is userspace\u0027s choice.\n\nChanging the kernel is much harder than changing userspace, so hard-coding this kind of logic in the kernel makes it much harder to change this logic.",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "042b118f_ecc0dac4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder/thread.rs",
+              "range": {
+                "startLine": 621,
+                "startChar": 0,
+                "endLine": 622,
+                "endChar": 0
+              },
+              "replacement": "        timeout: Option\u003ccore::time::Duration\u003e,\n"
+            },
+            {
+              "path": "drivers/android/binder/thread.rs",
+              "range": {
+                "startLine": 623,
+                "startChar": 0,
+                "endLine": 628,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "16fa6a6d03c8217b8cb2daafb6eb8fba93bcf34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8fa718_816eda51",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-26T08:42:28Z",
+      "side": 1,
+      "message": "The previous code used `wait_interruptible_freezable`, which sets `TASK_FREEZABLE` internally. This flag is important.\n\nIf there is no timeout method called `wait_interruptible_freezable_timeout`, you will hvae to add it.",
+      "fixSuggestions": [
+        {
+          "fixId": "23ec6509_4ebbfece",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/binder/thread.rs",
+              "range": {
+                "startLine": 669,
+                "startChar": 0,
+                "endLine": 670,
+                "endChar": 0
+              },
+              "replacement": "                    .wait_interruptible_freezable_timeout(\u0026mut inner, jiffies)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "16fa6a6d03c8217b8cb2daafb6eb8fba93bcf34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c58f88_229f4311",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-26T08:42:28Z",
+      "side": 1,
+      "message": "```suggestion\n                        return Err(ETIMEDOUT);\n```",
+      "revId": "16fa6a6d03c8217b8cb2daafb6eb8fba93bcf34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df625fd2_95b39e8a",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-07-26T08:42:28Z",
+      "side": 1,
+      "message": "This has a potential bug: If the timeout triggers in the same instant as another thread adds a work item, then this returns an error instead of returning the item, leaving the item on the thread-local todo list. You need to refactor this code to use the same logic as the `if signal_pending || inner.looper_need_return` block below. Probably you should even just call into that block with a new `None if timeout \u003d\u003e Err(ETIMEDOUT)` case.",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 85
+      },
+      "revId": "16fa6a6d03c8217b8cb2daafb6eb8fba93bcf34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
