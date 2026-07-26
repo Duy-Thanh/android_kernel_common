@@ -56,15 +56,41 @@
 	sub	sp, sp, #PT_REGS_SIZE
 
 	/*
-	 * Test whether the SP has overflowed, without corrupting a GPR.
-	 * Task and IRQ stacks are aligned so that SP & (1 << THREAD_SHIFT)
-	 * should always be zero.
+	 * Test whether the SP has overflowed, using the overflow stack
+	 * to save scratch registers.
+	 * As we do not know if the CPU was in process or irq context, first
+	 * check against the task stack if that failed it means it might have
+	 * been an interrupt, so check against an interrupt stack, if both
+	 * failed it means that at least one of the stacks overflowed.
 	 */
-	add	sp, sp, x0			// sp' = sp + x0
-	sub	x0, sp, x0			// x0' = sp' - x0 = (sp + x0) - x0 = sp
-	tbnz	x0, #THREAD_SHIFT, __bad_stack
-	sub	x0, sp, x0			// x0'' = sp' - x0' = (sp + x0) - sp = x0
-	sub	sp, sp, x0			// sp'' = sp' - x0 = (sp + x0) - x0 = sp
+	msr	spsel, #0
+	sub	sp, sp, #16
+	stp	x0, x1, [sp]
+
+	mrs     x0, tpidrro_el0
+	ldr	x0, [x0, #TSK_STACK]
+	msr	spsel, #1
+	mov	x1, sp
+	msr	spsel, #0
+	sub	x1, x1, x0
+
+	lsr	x1, x1, #THREAD_SHIFT
+	cbz	x1, .Lstack_ok\@
+
+	/*
+	 * We overflowed the task stack!
+	 * Check out-of-line whether we are on the IRQ, SDEI or EFI stacks.
+	 * Keep x0 and x1 on the overflow stack, and stash x2, x30.
+	 */
+	stp	x2, x30, [sp, #-16]!
+	bl	__check_ext_stacks
+	ldp	x2, x30, [sp], #16
+
+.Lstack_ok\@:
+	ldp	x0, x1, [sp]
+	add	sp, sp, #16
+	msr	spsel, #1
+
 	b	el1h_\regsize\()_\label
 	.endm
 
@@ -536,16 +562,63 @@ SYM_CODE_START(vectors)
 	kernel_ventry	0, t, 32, error		// Error 32-bit EL0
 SYM_CODE_END(vectors)
 
+
+	.macro check_stack_overflow type, ptr, size
+	.ifc \type, percpu
+	ldr_this_cpu x1, \ptr, x0
+	.else
+	adr_l	x1, \ptr
+	ldr	x1, [x1]
+	.endif
+	cbz	x1, 1f
+	msr	spsel, #1
+	mov	x0, sp
+	msr	spsel, #0
+	.ifc \type, top
+	sub	x0, x1, x0
+	.else
+	sub	x0, x0, x1
+	.endif
+	cmp	x0, #\size
+	b.ls	2f
+1:
+	.endm
+
+SYM_CODE_START_LOCAL(__check_ext_stacks)
+	/* IRQ stack check */
+	check_stack_overflow percpu, irq_stack_ptr, IRQ_STACK_SIZE
+#ifdef CONFIG_ARM_SDE_INTERFACE
+	/* SDEI normal stack check */
+	check_stack_overflow percpu, sdei_stack_normal_ptr, IRQ_STACK_SIZE
+	/* SDEI critical stack check */
+	check_stack_overflow percpu, sdei_stack_critical_ptr, IRQ_STACK_SIZE
+#endif
+
+#ifdef CONFIG_EFI
+	/* EFI runtime stack check */
+	check_stack_overflow top, efi_rt_stack_top, THREAD_SIZE
+#endif
+
+	/* All checks failed => it's a real overflow */
+	ldp	x2, x30, [sp], #16
+	b	__bad_stack
+
+2:
+	/* A check succeeded => return to kernel_ventry */
+	ret
+SYM_CODE_END(__check_ext_stacks)
+
 SYM_CODE_START_LOCAL(__bad_stack)
 	/*
 	 * We detected an overflow in kernel_ventry.
-	 * Restore SP and X0.
+	 * Restore X0 and X1, and pop the overflow stack.
 	 */
-	sub	x0, sp, x0
-	sub	sp, sp, x0
-	add	sp, sp, #PT_REGS_SIZE
+	ldp	x0, x1, [sp]
+	add	sp, sp, #16
 
-	/* Switch to the overflow stack */
+	/* Restore SP_EL1 */
+	msr	spsel, #1
+	add	sp, sp, #PT_REGS_SIZE
 	msr	spsel, #0
 
 	/* Stash the exception regs */
