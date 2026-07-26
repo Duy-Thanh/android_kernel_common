@@ -1665,6 +1665,17 @@ impl Process {
         let blocking = (file.flags() & file::flags::O_NONBLOCK) == 0;
         match cmd {
             uapi::BINDER_WRITE_READ => thread.write_read(data, blocking)?,
+            uapi::BINDER_WRITE_READ_TIMEOUT => {
+                let (mut reader, writer) = data.reader_writer();
+                let mut req_timeout = reader.read::<BinderWriteReadTimeout>()?;
+                let timeout_ns = req_timeout.timeout_ns;
+                let timeout = if timeout_ns >= 0 {
+                    Some(core::time::Duration::from_nanos(timeout_ns as u64))
+                } else {
+                    None
+                };
+                thread.write_read_timeout(writer, &mut req_timeout, blocking, timeout)?
+            }
             uapi::BINDER_GET_NODE_DEBUG_INFO => this.get_node_debug_info(data)?,
             uapi::BINDER_GET_NODE_INFO_FOR_REF => this.get_node_info_from_ref(data)?,
             uapi::BINDER_VERSION => this.version(data)?,
