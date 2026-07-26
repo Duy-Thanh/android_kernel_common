@@ -52,6 +52,24 @@
       "parentUuid": "626fa747_e9db9f4a",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82fb3002_31012131",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-26T01:01:42Z",
+      "side": 1,
+      "message": "\u003e Do I understand correctly that you are considering using guest_state_protected instead of is_guest_vcpu_accessible()? If so, as I wrote above, currently due to the fact how we reuse arch/x86/kvm/x86.c for pKVM-low, we can\u0027t do that. Actually syncing that flag down to the pKVM would require evaluating and patching x86.c even more\n\nCould you elaborate what other functions in x86.c (or any other KVM file) besides `kvm_load_guest_xsave_state()`/`kvm_load_host_xsave_state()` that are reused by pKVM use `guest_state_protected`? I haven\u0027t found any.\n\n...Anyway, I\u0027m not sure we need this patch. If we ever decide to set `guest_state_protected` to true in the hypervisor, I assume we will not do that thoughtlessly, we will examine all places that use it and update them accordingly? And in the meantime, as we are not using `guest_state_protected` that way, this patch only seems to make the code more confusing (\"what are these 2 #ifdefs for? where do we set `guest_state_protected` in the hypervisor?\").\n\nAnd yeah, I\u0027m not sure it would be a good idea to set `guest_state_protected` to true in the hypervisor in the first place. As Chuanxiao already noted, the existing meaning of `guest_state_protected` in KVM is \"protected from us\". If we set it to true in pKVM as well, its semantics in pKVM will be different, it will be \"protected _by_ us\". So I suppose it will only make it more difficult and error-prone to reuse KVM code in pKVM. (And these 2 #ifdefs added by this patch already demonstrate that.)",
+      "parentUuid": "798ec819_ad8f1395",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
