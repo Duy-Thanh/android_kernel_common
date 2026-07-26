@@ -9,16 +9,17 @@
 
 use kernel::{
     bindings,
+    error::code::ETIMEDOUT,
     fs::LocalFile,
     list::{AtomicTracker, List, ListArc, ListLinks, TryNewListArc},
     prelude::*,
     security,
     seq_file::SeqFile,
     seq_print,
-    sync::{Arc, CondVar, SpinLock},
+    sync::{Arc, CondVar, CondVarTimeoutResult, SpinLock},
     task::Task,
     types::{ARef, Either},
-    uaccess::{UserSlice, UserSliceReader},
+    uaccess::{UserSlice, UserSliceReader, UserSliceWriter},
     uapi,
 };
 
@@ -570,7 +571,11 @@ impl Thread {
     // #[export_name] is a temporary workaround so that ps output does not become unreadable from
     // mangled symbol names.
     #[export_name = "rust_binder_waitlcl"]
-    fn get_work_local(self: &Arc<Self>, wait: bool) -> Result<Option<DLArc<dyn DeliverToRead>>> {
+    fn get_work_local(
+        self: &Arc<Self>,
+        wait: bool,
+        _timeout: Option<core::time::Duration>,
+    ) -> Result<Option<DLArc<dyn DeliverToRead>>> {
         {
             let mut inner = self.inner.lock();
             if inner.looper_need_return {
@@ -611,7 +616,11 @@ impl Thread {
     // #[export_name] is a temporary workaround so that ps output does not become unreadable from
     // mangled symbol names.
     #[export_name = "rust_binder_wait"]
-    fn get_work(self: &Arc<Self>, wait: bool) -> Result<Option<DLArc<dyn DeliverToRead>>> {
+    fn get_work(
+        self: &Arc<Self>,
+        wait: bool,
+        timeout: Option<core::time::Duration>,
+    ) -> Result<Option<DLArc<dyn DeliverToRead>>> {
         // Try to get work from the thread's work queue, using only a local lock.
         {
             let mut inner = self.inner.lock();
@@ -647,10 +656,33 @@ impl Thread {
             self.restore_priority(&self.process.default_priority);
 
             inner.looper_flags |= LOOPER_WAITING | LOOPER_WAITING_PROC;
-            let signal_pending = self.work_condvar.wait_interruptible_freezable(&mut inner);
+
+            let signal_pending;
+            let mut timed_out = false;
+            if let Some(to) = timeout {
+                let jiffies = kernel::time::msecs_to_jiffies(to.as_millis() as u32);
+                match self
+                    .work_condvar
+                    .wait_interruptible_freezable_timeout(&mut inner, jiffies)
+                {
+                    CondVarTimeoutResult::Signal { .. } => {
+                        signal_pending = true;
+                    }
+                    CondVarTimeoutResult::Woken { .. } => {
+                        signal_pending = false;
+                    }
+                    CondVarTimeoutResult::Timeout => {
+                        signal_pending = false;
+                        timed_out = true;
+                    }
+                }
+            } else {
+                signal_pending = self.work_condvar.wait_interruptible_freezable(&mut inner);
+            }
+
             inner.looper_flags &= !(LOOPER_WAITING | LOOPER_WAITING_PROC);
 
-            if signal_pending || inner.looper_need_return {
+            if signal_pending || timed_out || inner.looper_need_return {
                 // We need to return now. We need to pull the thread off the list of ready threads
                 // (by dropping `reg`), then check the state again after it's off the list to
                 // ensure that something was not queued in the meantime. If something has been
@@ -661,6 +693,7 @@ impl Thread {
                 let res = match self.inner.lock().pop_work() {
                     Some(work) => Ok(Some(work)),
                     None if signal_pending => Err(EINTR),
+                    None if timed_out => Err(ETIMEDOUT),
                     None => Ok(None),
                 };
                 return res;
@@ -1645,7 +1678,12 @@ impl Thread {
         Ok(())
     }
 
-    fn read(self: &Arc<Self>, req: &mut BinderWriteRead, wait: bool) -> Result {
+    fn read(
+        self: &Arc<Self>,
+        req: &mut BinderWriteRead,
+        wait: bool,
+        timeout: Option<core::time::Duration>,
+    ) -> Result {
         let read_start = req.read_buffer.wrapping_add(req.read_consumed);
         let read_len = req.read_size.saturating_sub(req.read_consumed);
         let mut writer = BinderReturnWriter::new(
@@ -1684,7 +1722,7 @@ impl Thread {
         // Loop doing work while there is room in the buffer.
         let initial_len = writer.len();
         while writer.len() >= size_of::<uapi::binder_transaction_data_secctx>() + 4 {
-            match getter(self, wait && initial_len == writer.len()) {
+            match getter(self, wait && initial_len == writer.len(), timeout) {
                 Ok(Some(work)) => match work.into_arc().do_work(self, &mut writer) {
                     Ok(true) => {}
                     Ok(false) => break,
@@ -1696,6 +1734,12 @@ impl Thread {
                     break;
                 }
                 Err(err) => {
+                    if err == ETIMEDOUT {
+                        if let Err(write_err) = writer.write_code(BR_FINISHED) {
+                            return Err(write_err);
+                        }
+                        break;
+                    }
                     // Propagate the error if we haven't written anything else.
                     if err != EINTR && err != EAGAIN {
                         pr_warn!("Failure in work getter: {:?}", err);
@@ -1719,14 +1763,15 @@ impl Thread {
         Ok(())
     }
 
-    pub(crate) fn write_read(self: &Arc<Self>, data: UserSlice, wait: bool) -> Result {
-        let (mut reader, mut writer) = data.reader_writer();
-        let mut req = reader.read::<BinderWriteRead>()?;
-
-        // Go through the write buffer.
+    fn write_read_helper(
+        self: &Arc<Self>,
+        req: &mut BinderWriteRead,
+        wait: bool,
+        timeout: Option<core::time::Duration>,
+    ) -> Result {
         let mut ret = Ok(());
         if req.write_size > 0 {
-            ret = self.write(&mut req);
+            ret = self.write(req);
             crate::trace::trace_write_done(ret);
             if let Err(err) = ret {
                 pr_warn!(
@@ -1735,15 +1780,13 @@ impl Thread {
                     self.process.pid_in_current_ns()
                 );
                 req.read_consumed = 0;
-                writer.write(&req)?;
-                self.inner.lock().looper_need_return = false;
                 return ret;
             }
         }
 
         // Go through the work queue.
         if req.read_size > 0 {
-            ret = self.read(&mut req, wait);
+            ret = self.read(req, wait, timeout);
             crate::trace::trace_read_done(ret);
             if ret.is_err() && ret != Err(EINTR) {
                 pr_warn!(
@@ -1753,12 +1796,31 @@ impl Thread {
                 );
             }
         }
+        ret
+    }
 
-        // Write the request back so that the consumed fields are visible to the caller.
+    pub(crate) fn write_read(self: &Arc<Self>, data: UserSlice, wait: bool) -> Result {
+        let (mut reader, mut writer) = data.reader_writer();
+        let mut req = reader.read::<BinderWriteRead>()?;
+        let ret = self.write_read_helper(&mut req, wait, None);
         writer.write(&req)?;
-
         self.inner.lock().looper_need_return = false;
+        ret
+    }
 
+    pub(crate) fn write_read_timeout(
+        self: &Arc<Self>,
+        mut writer: UserSliceWriter,
+        req_timeout: &mut BinderWriteReadTimeout,
+        wait: bool,
+        timeout: Option<core::time::Duration>,
+    ) -> Result {
+        let bwr_mut_ref = unsafe {
+            &mut *(&mut req_timeout.bwr as *mut uapi::binder_write_read as *mut BinderWriteRead)
+        };
+        let ret = self.write_read_helper(bwr_mut_ref, wait, timeout);
+        writer.write(req_timeout)?;
+        self.inner.lock().looper_need_return = false;
         ret
     }
 
@@ -1792,7 +1854,7 @@ impl Thread {
         self.unwind_transaction_stack();
 
         // Cancel all pending work items.
-        while let Ok(Some(work)) = self.get_work_local(false) {
+        while let Ok(Some(work)) = self.get_work_local(false, None) {
             work.into_arc().cancel();
         }
     }
