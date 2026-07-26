@@ -130,12 +130,7 @@
 
 #define THREAD_SIZE		(UL(1) << THREAD_SHIFT)
 
-/*
- * By aligning VMAP'd stacks to 2 * THREAD_SIZE, we can detect overflow by
- * checking sp & (1 << THREAD_SHIFT), which we can do cheaply in the entry
- * assembly.
- */
-#define THREAD_ALIGN		(2 * THREAD_SIZE)
+#define THREAD_ALIGN		THREAD_SIZE
 
 #define IRQ_STACK_SIZE		THREAD_SIZE
 
