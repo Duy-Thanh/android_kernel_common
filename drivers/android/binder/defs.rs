@@ -25,6 +25,7 @@ pub_no_prefix!(
     BR_FROZEN_REPLY,
     BR_NOOP,
     BR_SPAWN_LOOPER,
+    BR_FINISHED,
     BR_TRANSACTION_COMPLETE,
     BR_TRANSACTION_PENDING_FROZEN,
     BR_ONEWAY_SPAM_SUSPECT,
@@ -143,6 +144,7 @@ decl_wrapper!(
 );
 decl_wrapper!(BinderTransactionDataSg, uapi::binder_transaction_data_sg);
 decl_wrapper!(BinderWriteRead, uapi::binder_write_read);
+decl_wrapper!(BinderWriteReadTimeout, uapi::binder_write_read_timeout);
 decl_wrapper!(BinderVersion, uapi::binder_version);
 decl_wrapper!(BinderFrozenStatusInfo, uapi::binder_frozen_status_info);
 decl_wrapper!(BinderFreezeInfo, uapi::binder_freeze_info);

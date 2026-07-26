@@ -230,6 +230,11 @@ struct binder_write_read {
 	binder_uintptr_t	read_buffer;
 };
 
+struct binder_write_read_timeout {
+	struct binder_write_read bwr;
+	__s64 timeout_ns;
+};
+
 /* Use with BINDER_VERSION, driver fills in fields. */
 struct binder_version {
 	/* driver protocol version -- increment with incompatible change */
@@ -313,6 +318,7 @@ enum {
 	BINDER_SET_CONTEXT_MGR		= _IOW('b', 7, __s32),
 	BINDER_THREAD_EXIT		= _IOW('b', 8, __s32),
 	BINDER_VERSION			= _IOWR('b', 9, struct binder_version),
+	BINDER_WRITE_READ_TIMEOUT	= _IOWR('b', 10, struct binder_write_read_timeout),
 	BINDER_GET_NODE_DEBUG_INFO	= _IOWR('b', 11, struct binder_node_debug_info),
 	BINDER_GET_NODE_INFO_FOR_REF	= _IOWR('b', 12, struct binder_node_info_for_ref),
 	BINDER_SET_CONTEXT_MGR_EXT	= _IOW('b', 13, struct flat_binder_object),

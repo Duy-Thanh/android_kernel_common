@@ -121,6 +121,8 @@ pub(crate) struct ProcessInner {
     max_threads: u32,
     /// The number of threads the started and registered with the thread pool.
     started_thread_count: u32,
+    /// The number of active looper threads (both main and helpers).
+    active_looper_count: u32,
 
     /// Bitmap of deferred work to do.
     defer_work: u8,
@@ -153,6 +155,7 @@ impl ProcessInner {
             requested_thread_count: 0,
             max_threads: 0,
             started_thread_count: 0,
+            active_looper_count: 0,
             defer_work: 0,
             outstanding_txns: 0,
             is_frozen: IsFrozen::No,
@@ -297,12 +300,20 @@ impl ProcessInner {
 
         self.requested_thread_count -= 1;
         self.started_thread_count += 1;
+        self.active_looper_count += 1;
         true
+    }
+
+    fn enter_looper(&mut self) {
+        self.active_looper_count += 1;
     }
 
     fn deregister_thread(&mut self) {
         if self.started_thread_count > 0 {
             self.started_thread_count -= 1;
+        }
+        if self.active_looper_count > 0 {
+            self.active_looper_count -= 1;
         }
     }
 
@@ -1182,8 +1193,16 @@ impl Process {
         self.inner.lock().register_thread()
     }
 
+    pub(crate) fn enter_looper(&self) {
+        self.inner.lock().enter_looper()
+    }
+
     pub(crate) fn deregister_thread(&self) {
         self.inner.lock().deregister_thread()
+    }
+
+    pub(crate) fn active_looper_count(&self) -> u32 {
+        self.inner.lock().active_looper_count
     }
 
     fn remove_thread(&self, thread: Arc<Thread>) {
@@ -1660,11 +1679,24 @@ impl Process {
         file: &File,
         cmd: u32,
         data: UserSlice,
+        arg: usize,
     ) -> Result {
         let thread = this.get_current_thread()?;
         let blocking = (file.flags() & file::flags::O_NONBLOCK) == 0;
         match cmd {
             uapi::BINDER_WRITE_READ => thread.write_read(data, blocking)?,
+            uapi::BINDER_WRITE_READ_TIMEOUT => {
+                let req_timeout = data.reader().read::<BinderWriteReadTimeout>()?;
+                let timeout_ns = req_timeout.timeout_ns;
+                let timeout = if timeout_ns >= 0 {
+                    Some(core::time::Duration::from_nanos(timeout_ns as u64))
+                } else {
+                    None
+                };
+                use kernel::ioctl::_IOC_SIZE;
+                let new_data = UserSlice::new(arg, _IOC_SIZE(cmd));
+                thread.write_read_timeout(new_data, blocking, timeout)?
+            }
             uapi::BINDER_GET_NODE_DEBUG_INFO => this.get_node_debug_info(data)?,
             uapi::BINDER_GET_NODE_INFO_FOR_REF => this.get_node_info_from_ref(data)?,
             uapi::BINDER_VERSION => this.version(data)?,
@@ -1729,7 +1761,7 @@ impl Process {
 
         let res = match _IOC_DIR(cmd) {
             _IOC_WRITE => Self::ioctl_write_only(this, file, cmd, &mut user_slice.reader()),
-            _IOC_READ_WRITE => Self::ioctl_write_read(this, file, cmd, user_slice),
+            _IOC_READ_WRITE => Self::ioctl_write_read(this, file, cmd, user_slice, arg),
             _ => Err(EINVAL),
         };
 
