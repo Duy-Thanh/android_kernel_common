@@ -311,6 +311,27 @@ static void ieee80211_stop_p2p_device(struct wiphy *wiphy,
 	ieee80211_sdata_stop(IEEE80211_WDEV_TO_SUB_IF(wdev));
 }
 
+static int ieee80211_start_pd(struct wiphy *wiphy,
+			      struct wireless_dev *wdev)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_WDEV_TO_SUB_IF(wdev);
+	int ret;
+
+	lockdep_assert_wiphy(sdata->local->hw.wiphy);
+
+	ret = ieee80211_check_combinations(sdata, NULL, 0, 0, -1);
+	if (ret < 0)
+		return ret;
+
+	return ieee80211_do_open(wdev, true);
+}
+
+static void ieee80211_stop_pd(struct wiphy *wiphy,
+			     struct wireless_dev *wdev)
+{
+	ieee80211_sdata_stop(IEEE80211_WDEV_TO_SUB_IF(wdev));
+}
+
 static void ieee80211_nan_conf_free(struct cfg80211_nan_conf *conf)
 {
 	kfree(conf->extra_nan_attrs);
@@ -412,6 +433,7 @@ static int ieee80211_start_nan(struct wiphy *wiphy,
 	ret = ieee80211_do_open(wdev, true);
 	if (ret)
 		return ret;
+
 
 	ret = drv_start_nan(sdata->local, sdata, conf);
 	if (ret) {
@@ -5767,4 +5789,6 @@ const struct cfg80211_ops mac80211_config_ops = {
 	.set_epcs = ieee80211_set_epcs,
 	.nan_set_local_sched = ieee80211_set_local_nan_sched,
 	.nan_set_peer_sched = ieee80211_set_peer_nan_sched,
+	.start_pd = ieee80211_start_pd,
+	.stop_pd = ieee80211_stop_pd,
 };
