@@ -686,6 +686,81 @@ static struct mac80211_hwsim_data *get_hwsim_data_ref_from_addr(const u8 *addr)
 	return rhashtable_lookup_fast(&hwsim_radios_rht, addr, hwsim_rht_params);
 }
 
+struct hwsim_match_addr_data {
+	const u8 *addr;
+	bool found;
+	struct mac80211_hwsim_data *data;
+};
+
+static void hwsim_match_addr_iter(void *_data, u8 *addr,
+				   struct ieee80211_vif *vif)
+{
+	struct hwsim_match_addr_data *mdata = _data;
+
+	if (ether_addr_equal(addr, mdata->addr))
+		mdata->found = true;
+}
+
+static struct mac80211_hwsim_data *get_hwsim_data_ref_from_vif_addr(const u8 *addr)
+{
+	struct mac80211_hwsim_data *data;
+	struct hwsim_match_addr_data mdata = {
+		.addr = addr,
+		.found = false,
+	};
+
+	spin_lock_bh(&hwsim_radio_lock);
+	list_for_each_entry(data, &hwsim_radios, list) {
+		mdata.data = data;
+		ieee80211_iterate_active_interfaces_atomic(
+			data->hw, IEEE80211_IFACE_ITER_NORMAL,
+			hwsim_match_addr_iter, &mdata);
+		if (mdata.found) {
+			spin_unlock_bh(&hwsim_radio_lock);
+			return data;
+		}
+	}
+	spin_unlock_bh(&hwsim_radio_lock);
+
+	return NULL;
+}
+
+static struct mac80211_hwsim_data *
+get_hwsim_data_from_nan_cluster_id(const u8 *cluster_id)
+{
+	struct mac80211_hwsim_data *data;
+	struct mac80211_hwsim_data *res = NULL;
+
+	spin_lock_bh(&hwsim_radio_lock);
+	list_for_each_entry(data, &hwsim_radios, list) {
+		if (data->nan.device_vif &&
+		    ether_addr_equal(data->nan.cluster_id, cluster_id)) {
+			res = data;
+			break;
+		}
+	}
+	spin_unlock_bh(&hwsim_radio_lock);
+	return res;
+}
+
+static struct mac80211_hwsim_data *
+get_hwsim_data_from_nan_random_mac(const u8 *random_mac)
+{
+	struct mac80211_hwsim_data *data;
+	struct mac80211_hwsim_data *res = NULL;
+
+	spin_lock_bh(&hwsim_radio_lock);
+	list_for_each_entry(data, &hwsim_radios, list) {
+		if (data->nan.device_vif &&
+		    ether_addr_equal(data->nan.random_mac, random_mac)) {
+			res = data;
+			break;
+		}
+	}
+	spin_unlock_bh(&hwsim_radio_lock);
+	return res;
+}
+
 /* MAC80211_HWSIM netlink family */
 static struct genl_family hwsim_genl_family;
 
@@ -1429,10 +1504,13 @@ static void mac80211_hwsim_config_mac_nl(struct ieee80211_hw *hw,
 
 	genlmsg_end(skb, msg_head);
 
-	if (hwsim_virtio_enabled)
-		hwsim_tx_virtio(data, skb);
-	else
+	if (hwsim_virtio_enabled) {
+		int err = hwsim_tx_virtio(data, skb);
+		if (err)
+			pr_err("%s: hwsim_tx_virtio failed: %d\n", __func__, err);
+	} else {
 		hwsim_unicast_netgroup(data, skb, _portid);
+	}
 	return;
 nla_put_failure:
 	nlmsg_free(skb);
@@ -1638,6 +1716,7 @@ struct tx_iter_data {
 	struct ieee80211_channel *channel;
 	struct ieee80211_rx_status *rx_status;
 	struct ieee80211_hw *hw;
+	struct sk_buff *skb;
 	bool receive;
 };
 
@@ -1651,7 +1730,8 @@ static void mac80211_hwsim_tx_iter(void *_data, u8 *addr,
 	    vif->type == NL80211_IFTYPE_NAN_DATA) {
 		data->receive = mac80211_hwsim_nan_receive(data->hw,
 							   data->channel,
-							   data->rx_status);
+							   data->rx_status,
+							   data->skb);
 		return;
 	}
 
@@ -1834,6 +1914,7 @@ static bool mac80211_hwsim_tx_frame_no_nl(struct ieee80211_hw *hw,
 			.hw = data2->hw,
 			.channel = chan,
 			.rx_status = &rx_status,
+			.skb = skb,
 		};
 
 		if (data == data2)
@@ -1968,10 +2049,14 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		return;
 	}
 
-	if (vif && !data->tmp_chan &&
+	if (vif &&
 	    (vif->type == NL80211_IFTYPE_NAN ||
 	     vif->type == NL80211_IFTYPE_NAN_DATA)) {
 		struct cfg80211_chan_def chandef;
+
+		if (skb->len >= 16 && !ether_addr_equal(data->nan.random_mac, hdr->addr2)) {
+			ether_addr_copy(data->nan.random_mac, hdr->addr2);
+		}
 
 		mac80211_hwsim_nan_get_tx_chandef(hw, &chandef);
 		if (WARN_ON(!chandef.chan)) {
@@ -1981,6 +2066,12 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		}
 		channel = chandef.chan;
 		confbw = chandef.width;
+
+		if (data->tmp_chan && !hwsim_chans_compat(channel, data->tmp_chan)) {
+			/* Off-channel on different channel, drop silently */
+			ieee80211_free_txskb(hw, skb);
+			return;
+		}
 	} else if (!data->use_chanctx) {
 		channel = data->channel;
 		confbw = data->bw;
@@ -5366,7 +5457,8 @@ static void mac80211_hwsim_sband_capab(struct ieee80211_supported_band *sband)
 	 BIT(NL80211_IFTYPE_P2P_GO) | \
 	 BIT(NL80211_IFTYPE_ADHOC) | \
 	 BIT(NL80211_IFTYPE_MESH_POINT) | \
-	 BIT(NL80211_IFTYPE_OCB))
+	 BIT(NL80211_IFTYPE_OCB) | \
+	 BIT(NL80211_IFTYPE_PD))
 
 static const u8 iftypes_ext_capa_ap[] = {
 	 [0] = WLAN_EXT_CAPA1_EXT_CHANNEL_SWITCHING,
@@ -5435,6 +5527,8 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 	else
 		net = &init_net;
 	wiphy_net_set(hw->wiphy, net);
+
+	wiphy_ext_feature_set(hw->wiphy, NL80211_EXT_FEATURE_SECURE_RTT);
 
 	data = hw->priv;
 	data->hw = hw;
@@ -5562,6 +5656,12 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 		 * so mac80211 rate control can't work here.
 		 */
 		ieee80211_hw_set(hw, HAS_RATE_CONTROL);
+	}
+
+	if (param->iftypes & BIT(NL80211_IFTYPE_PD)) {
+		data->if_limits[n_limits].max = 1;
+		data->if_limits[n_limits].types = BIT(NL80211_IFTYPE_PD);
+		n_limits++;
 	}
 
 	data->if_combination.radar_detect_widths =
@@ -6189,6 +6289,17 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	skb_put_data(skb, frame_data, frame_data_len);
 
 	data2 = get_hwsim_data_ref_from_addr(dst);
+	if (!data2) {
+		data2 = get_hwsim_data_ref_from_vif_addr(dst);
+	}
+	if (!data2) {
+		if (ieee80211_is_public_action((struct ieee80211_hdr *)frame_data, frame_data_len)) {
+			data2 = get_hwsim_data_from_nan_cluster_id(((struct ieee80211_hdr *)frame_data)->addr3);
+		}
+	}
+	if (!data2) {
+		data2 = get_hwsim_data_from_nan_random_mac(dst);
+	}
 	if (!data2)
 		goto out;
 
@@ -6219,6 +6330,7 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 		struct tx_iter_data iter_data = {
 			.hw = data2->hw,
 			.rx_status = &rx_status,
+			.skb = skb,
 		};
 
 		/* throw away off-channel packets, but allow both the temporary
@@ -6432,6 +6544,23 @@ static int parse_ftm_capa(const struct nlattr *ftm_capa, struct cfg80211_pmsr_ca
 
 	out->ftm.concurrent_ista_rsta_support =
 		!!tb[NL80211_PMSR_FTM_CAPA_ATTR_CONCURRENT_ISTA_RSTA_SUPPORT];
+
+	out->ftm.type.pd_support = true;
+	out->ftm.type.infra_support = true;
+	out->ftm.pd_bandwidths = 0xffffffff;
+	out->ftm.bandwidths = 0xffffffff;
+	out->ftm.pd_preambles = 0xffffffff;
+	out->ftm.preambles = 0xffffffff;
+
+	out->ftm.ista.support_ntb = true;
+	out->ftm.ista.support_tb = true;
+	out->ftm.ista.support_edca = true;
+	out->ftm.ista.max_peers = 10;
+	out->ftm.rsta.support_ntb = true;
+	out->ftm.rsta.support_tb = true;
+	out->ftm.rsta.support_edca = true;
+	out->ftm.rsta.max_peers = 10;
+	out->ftm.concurrent_ista_rsta_support = true;
 
 	return 0;
 }
@@ -7293,7 +7422,7 @@ static int __init init_mac80211_hwsim(void)
 		param.iftypes = HWSIM_IFTYPE_SUPPORT_MASK;
 		if (param.p2p_device)
 			param.iftypes |= BIT(NL80211_IFTYPE_P2P_DEVICE);
-		param.iftypes |= BIT(NL80211_IFTYPE_NAN);
+		param.iftypes |= BIT(NL80211_IFTYPE_NAN) | BIT(NL80211_IFTYPE_NAN_DATA);
 
 		err = mac80211_hwsim_new_radio(NULL, &param);
 		if (err < 0)
