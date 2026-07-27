@@ -4082,6 +4082,8 @@
   vsnprintf
   vsprintf
   vunmap
+  vunmap_range_noflush
+  __vunmap_range_noflush
   vzalloc_noprof
   wait_for_completion
   wait_for_completion_interruptible
