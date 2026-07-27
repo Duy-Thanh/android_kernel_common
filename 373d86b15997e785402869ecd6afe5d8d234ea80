@@ -52,6 +52,24 @@
       "parentUuid": "57d0f5b1_2bb685bf",
       "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6779f406_a7a8e66f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2026-07-27T14:08:58Z",
+      "side": 1,
+      "message": "Yeah seems this is on 6.17+ LTS, but not on 6.12.",
+      "parentUuid": "b1868840_daa43c41",
+      "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
