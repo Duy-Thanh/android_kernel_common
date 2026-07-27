@@ -34,6 +34,24 @@
       "parentUuid": "c52f072e_116070ea",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c454fa7f_49fcb111",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T17:14:55Z",
+      "side": 0,
+      "message": "\u003e How about simply calling cache_tag_assign_domain() after intel_pasid_setup_first_level()? It seems the order makes no difference otherwise (and for example the host\u0027s dmar_domain_attach_device() also calls it after, not before)?\n\nI was thinking about it, but I think it might have security implications for pkvm. A racing teardown operation between `intel_pasid_setup_first_level` and `cache_tag_assign_domain` can cause the `cache_tag_unassign_domain` to not flush DEVTLB there by device retaining the stale entries in its devtlb.\n\nWe can probably bring back the ats_supported argument back for setup_fl/setup_sl and have `pkvm_populate_dev_info_from_ce` validate if the host provided values match the values derived from CE. That way, we need not move the cache tag logic to iommu.c/pasid.c\n\n\u003e (...And this looks like yet another proof that, as I already noted for example in aosp/4172647, we\u0027d better properly track \"devices\"/contexts in a special data structure on pKVM side, to remember parameters like ats_supported in it, instead of deriving them from tables every time and hacking upstream code for that.)\n\nAgreed, a very valid point. I have noted this as an action item for our uprev.",
+      "parentUuid": "cb223344_439ed74b",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
