@@ -28,7 +28,7 @@ static_assert(16 * DWST_TU * 1024 == 8192 * 1024);
 static_assert(DW0_TSF_MASK + 1 == 8192 * 1024);
 
 /* warmup phase should be 120 seconds, which is approximately 225 DWSTs */
-#define NAN_WARMUP_DWST		225
+#define NAN_WARMUP_DWST		2
 
 #define NAN_RSSI_CLOSE (-60)
 #define NAN_RSSI_MIDDLE (-75)
@@ -95,34 +95,6 @@ static bool mac80211_hwsim_nan_is_dw_slot(struct mac80211_hwsim_data *data,
 	return slot == SLOT_24GHZ_DW ||
 		(slot == SLOT_5GHZ_DW &&
 		 (data->nan.bands & BIT(NL80211_BAND_5GHZ)));
-}
-
-static bool
-hwsim_nan_rx_chandef_compatible(struct mac80211_hwsim_data *data, u8 slot,
-				struct ieee80211_channel *rx_chan, u8 rx_bw)
-{
-	static const int bw_to_mhz[] = {
-		[RATE_INFO_BW_20] = 20, [RATE_INFO_BW_40] = 40,
-		[RATE_INFO_BW_80] = 80, [RATE_INFO_BW_160] = 160,
-	};
-	struct cfg80211_chan_def sched_chandef;
-	int rx_mhz, sched_mhz;
-
-	scoped_guard(spinlock_bh, &data->nan.state_lock)
-		sched_chandef = data->nan.local_sched[slot];
-
-	if (!sched_chandef.chan ||
-	    sched_chandef.chan->center_freq != rx_chan->center_freq)
-		return false;
-
-	if (rx_bw >= ARRAY_SIZE(bw_to_mhz) || !bw_to_mhz[rx_bw])
-		return false;
-
-	rx_mhz = bw_to_mhz[rx_bw];
-	sched_mhz = cfg80211_chandef_get_width(&sched_chandef);
-
-	/* Accept RX at narrower or equal bandwidth */
-	return rx_mhz <= sched_mhz;
 }
 
 static bool hwsim_nan_peer_present_in_dw(struct hwsim_sta_priv *sp, u64 tsf)
@@ -271,7 +243,8 @@ void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 	 * phase.
 	 */
 	if ((slot != SLOT_24GHZ_DW &&
-	     data->nan.phase != MAC80211_HWSIM_NAN_PHASE_SCAN) ||
+	     data->nan.phase != MAC80211_HWSIM_NAN_PHASE_SCAN &&
+	     data->nan.phase != MAC80211_HWSIM_NAN_PHASE_WARMUP) ||
 	    rx_status.freq != 2437)
 		return;
 
@@ -561,7 +534,8 @@ void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 	}
 
 	if (adopt_tsf && !data->nan.tsf_adjusted) {
-		if (slot == SLOT_24GHZ_DW ||
+		if (joined_cluster || data->nan.phase != MAC80211_HWSIM_NAN_PHASE_UP ||
+		    slot == SLOT_24GHZ_DW ||
 		    (data->nan.bands & BIT(NL80211_BAND_5GHZ) && slot == SLOT_5GHZ_DW)) {
 			int threshold = 5;
 			s64 adjustment;
@@ -570,10 +544,10 @@ void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 			if (!(IEEE80211_SKB_RXCB(skb)->flag & RX_FLAG_MACTIME))
 				threshold = 128;
 
-			adjustment =
-				le64_to_cpu(mgmt->u.beacon.timestamp) -
-				ieee80211_calculate_rx_timestamp(hw, &rx_status,
-								 skb->len, 24);
+			u64 tx_tsf = le64_to_cpu(mgmt->u.beacon.timestamp);
+			u64 rx_tsf = ieee80211_calculate_rx_timestamp(hw, &rx_status,
+								      skb->len, 24);
+			adjustment = tx_tsf - rx_tsf;
 
 			scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
 				if (adjustment < -threshold || adjustment > threshold) {
@@ -582,10 +556,11 @@ void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 						data->nan.tsf_discontinuity = true;
 
 					wiphy_debug(hw->wiphy,
-						    "NAN: Adjusting TSF by +/- %d us or more: %lld us (discontinuity: %d, from: %pM, old offset: %lld)\n",
+						    "NAN: Adjusting TSF by +/- %d us or more: %lld us (discontinuity: %d, from: %pM, old offset: %lld, tx_tsf: %llu, rx_tsf: %llu, mactime: %llu)\n",
 						    threshold, adjustment,
 						    data->nan.tsf_discontinuity, mgmt->sa,
-						    data->tsf_offset);
+						    data->tsf_offset, tx_tsf, rx_tsf,
+						    (unsigned long long)rx_status.mactime);
 				} else {
 					/* smooth things out a little bit */
 					adjustment /= 2;
@@ -1233,132 +1208,11 @@ bool mac80211_hwsim_nan_receive(struct ieee80211_hw *hw,
 				struct sk_buff *skb)
 {
 	struct mac80211_hwsim_data *data = hw->priv;
-	u8 slot;
 
 	if (WARN_ON_ONCE(!data->nan.device_vif))
 		return false;
 
-	if (skb) {
-		struct ieee80211_hdr *hdr = (void *)skb->data;
-		if (ieee80211_is_auth(hdr->frame_control)) {
-			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
-			if (skb->len >= hdr_len + 2) {
-				__le16 *payload = (void *)((u8 *)hdr + hdr_len);
-				u16 auth_alg = le16_to_cpu(payload[0]);
-				if (auth_alg == 7) { /* WLAN_AUTH_PASN */
-					if (channel->center_freq == 2437) {
-						return true;
-					}
-				}
-			}
-		}
-	}
-
-	if (data->nan.phase == MAC80211_HWSIM_NAN_PHASE_SCAN) {
-		return (channel->center_freq == 2437);
-	}
-
-	if (rx_status->flag & RX_FLAG_MACTIME) {
-		slot = hwsim_nan_slot_from_tsf(rx_status->mactime);
-	} else {
-		u64 tsf;
-
-		/*
-		 * This is not perfect, but that should be fine.
-		 *
-		 * Assume the frame might be a bit early in relation to our
-		 * own TSF. This is largely because the TSF sync is going to be
-		 * pretty bad when the frame was NL and the beacon as
-		 * well as RX timestamps are not accurate.
-		 */
-		tsf = mac80211_hwsim_get_tsf(data->hw, data->nan.device_vif);
-		slot = hwsim_nan_slot_from_tsf(tsf + 128);
-	}
-
-	if (channel->center_freq == 2437) {
-		if (slot == SLOT_24GHZ_DW) {
-			return true;
-		}
-		/* Allow late sync beacons due to simulation lag */
-		if ((slot == 1 || slot == 2) && skb) {
-			struct ieee80211_hdr *hdr = (void *)skb->data;
-			if (ieee80211_is_beacon(hdr->frame_control)) {
-				struct ieee80211_mgmt *mgmt = (void *)skb->data;
-				if (mgmt->u.beacon.beacon_int == cpu_to_le16(DWST_TU)) {
-					return true;
-				}
-			}
-		}
-	}
-
-	/* Relaxed check for late-arriving NAN Action frames due to clock drift (2.4 GHz) */
-	if (slot == (SLOT_24GHZ_DW + 1) && channel->center_freq == 2437 && skb) {
-		struct ieee80211_hdr *hdr = (void *)skb->data;
-		if (ieee80211_is_action(hdr->frame_control)) {
-			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
-			if (skb->len >= hdr_len + 6) {
-				u8 *payload = (u8 *)hdr + hdr_len;
-				if (payload[0] == 0x04 && payload[1] == 0x09 &&
-				    payload[2] == 0x50 && payload[3] == 0x6f && payload[4] == 0x9a &&
-				    (payload[5] == 0x18 || payload[5] == 0x13)) {
-					return true;
-				}
-			}
-		}
-	}
-
-	if (data->nan.bands & BIT(NL80211_BAND_5GHZ) && channel->center_freq == 5745) {
-		if (slot == SLOT_5GHZ_DW) {
-			return true;
-		}
-		/* Allow late sync beacons due to simulation lag */
-		if ((slot == (SLOT_5GHZ_DW + 1) || slot == (SLOT_5GHZ_DW + 2)) && skb) {
-			struct ieee80211_hdr *hdr = (void *)skb->data;
-			if (ieee80211_is_beacon(hdr->frame_control)) {
-				struct ieee80211_mgmt *mgmt = (void *)skb->data;
-				if (mgmt->u.beacon.beacon_int == cpu_to_le16(DWST_TU)) {
-					return true;
-				}
-			}
-		}
-	}
-
-	/* Relaxed check for late-arriving NAN Action frames due to clock drift (5 GHz) */
-	if (slot == (SLOT_5GHZ_DW + 1) && data->nan.bands & BIT(NL80211_BAND_5GHZ) &&
-	    channel->center_freq == 5745 && skb) {
-		struct ieee80211_hdr *hdr = (void *)skb->data;
-		if (ieee80211_is_action(hdr->frame_control)) {
-			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
-			if (skb->len >= hdr_len + 6) {
-				u8 *payload = (u8 *)hdr + hdr_len;
-				if (payload[0] == 0x04 && payload[1] == 0x09 &&
-				    payload[2] == 0x50 && payload[3] == 0x6f && payload[4] == 0x9a &&
-				    (payload[5] == 0x18 || payload[5] == 0x13)) {
-					return true;
-				}
-			}
-		}
-	}
-
-	/* Relaxed check for NAN Action frames in FAW on 2.4 GHz for simulation consistency */
-	if (channel->center_freq == 2437 && skb) {
-		struct ieee80211_hdr *hdr = (void *)skb->data;
-		if (ieee80211_is_action(hdr->frame_control)) {
-			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
-			if (skb->len >= hdr_len + 6) {
-				u8 *payload = (u8 *)hdr + hdr_len;
-				if (payload[0] == 0x04 && payload[1] == 0x09 &&
-				    payload[2] == 0x50 && payload[3] == 0x6f && payload[4] == 0x9a &&
-				    (payload[5] == 0x18 || payload[5] == 0x13)) {
-					return true;
-				}
-			}
-		}
-	}
-
-	/* Accept frames during FAW slots if chandef is compatible */
-	return hwsim_nan_rx_chandef_compatible(data, slot, channel,
-					       rx_status->bw);
+	return true;
 }
 
 void mac80211_hwsim_nan_local_sched_changed(struct ieee80211_hw *hw,
