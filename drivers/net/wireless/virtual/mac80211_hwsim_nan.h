@@ -41,6 +41,7 @@ struct mac80211_hwsim_nan_data {
 	enum mac80211_hwsim_nan_role role;
 
 	u8 cluster_id[ETH_ALEN];
+	u8 random_mac[ETH_ALEN];
 
 	struct ieee80211_nan_anchor_master_info current_ami;
 	struct ieee80211_nan_anchor_master_info last_ami;
@@ -91,7 +92,8 @@ void mac80211_hwsim_nan_get_tx_chandef(struct ieee80211_hw *hw,
 
 bool mac80211_hwsim_nan_receive(struct ieee80211_hw *hw,
 				struct ieee80211_channel *channel,
-				struct ieee80211_rx_status *rx_status);
+				struct ieee80211_rx_status *rx_status,
+				struct sk_buff *skb);
 
 void mac80211_hwsim_nan_rx(struct ieee80211_hw *hw,
 			   struct sk_buff *skb);
