@@ -16,6 +16,24 @@
       "message": "nit: this commit only added the domain alloc/free hypercalls, which are rather orthogonal to this fix?\n\nRather:\n```\nFixes: 3cf82cef8d7f (\"ANDROID: iommu/vt-d: pKVM: Legacy mode context update hypercalls\")\nFixes: 3dbd753022e4 (\"ANDROID: iommu/vt-d: pKVM: Pasid table hypercall for first level translation\")\nFixes: e0b5603a1d24 (\"ANDROID: iommu/vt-d: pKVM: Pasid table hypercall for second level translation\")\n```\n?",
       "revId": "dcd20fc0fe081e028e9a5f017a9dcde1ddddb960",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3e28db_26ce9f39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T16:41:55Z",
+      "side": 1,
+      "message": "Youre right, fixed",
+      "parentUuid": "11c6bd63_8e53df81",
+      "revId": "dcd20fc0fe081e028e9a5f017a9dcde1ddddb960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
