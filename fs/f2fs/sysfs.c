@@ -13,6 +13,8 @@
 #include <linux/unicode.h>
 #include <linux/ioprio.h>
 #include <linux/sysfs.h>
+#include <linux/nls.h>
+#include <linux/buffer_head.h>
 
 #include "f2fs.h"
 #include "segment.h"
@@ -52,6 +54,16 @@ static const char *gc_mode_names[MAX_GC_MODE] = {
 	"GC_URGENT_MID"
 };
 
+const char *sec_ddp_stat_type_names[NR_DDP_STAT_TYPE] = {
+	"SUPER_BFREE",
+	"SHRINK_NBLK",
+	"SHRINK_TIME",
+	"SHRINK_ERRNO",
+	"GROW_TIME",
+	"DYNDATA_NBLK",
+	"MIGRATE_NSEG",
+	"MIGRATE_TTIME",
+};
 struct f2fs_attr {
 	struct attribute attr;
 	ssize_t (*show)(struct f2fs_attr *a, struct f2fs_sb_info *sbi, char *buf);
@@ -375,6 +387,30 @@ static ssize_t __sbi_show_value(struct f2fs_attr *a,
 	}
 }
 
+#define SEC_MAX_VOLUME_NAME	16
+static bool __volume_is_userdata(struct f2fs_sb_info *sbi)
+{
+	char volume_name[SEC_MAX_VOLUME_NAME] = {0, };
+
+	utf16s_to_utf8s(sbi->raw_super->volume_name, SEC_MAX_VOLUME_NAME,
+			UTF16_LITTLE_ENDIAN, volume_name, SEC_MAX_VOLUME_NAME);
+	volume_name[SEC_MAX_VOLUME_NAME - 1] = '\0';
+
+	if (!strcmp(volume_name, "data"))
+		return true;
+
+	return false;
+}
+
+static void __sec_bigdata_init_value(struct f2fs_sb_info *sbi,
+		const char *attr_name)
+{
+	if (!strcmp(attr_name, "sec_ddp_stat")) {
+		sbi->sec_ddp_stat.ddp_stats[DDP_MIGRATED_SEG_COUNT] = 0;
+		sbi->sec_ddp_stat.ddp_stats[DDP_MIGRATED_TTIME] = 0;
+	}
+}
+
 static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
 			struct f2fs_sb_info *sbi, char *buf)
 {
@@ -402,6 +438,21 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
 			len += sysfs_emit_at(buf, len, "%s\n", extlist[i]);
 		f2fs_up_read(&sbi->sb_lock);
 
+		return len;
+	}
+
+	if (!strcmp(a->attr.name, "sec_ddp_stat")) {
+		int len = 0;
+
+		for (int i = 0; i < NR_DDP_STAT_TYPE - 1; i++) {
+			len += snprintf(buf + len, PAGE_SIZE - len, "\"%s\":\"%u\",",
+				sec_ddp_stat_type_names[i], sbi->sec_ddp_stat.ddp_stats[i]);
+		}
+		len += snprintf(buf + len, PAGE_SIZE - len, "\"%s\":\"%u\"\n",
+					sec_ddp_stat_type_names[NR_DDP_STAT_TYPE - 1],
+					sbi->sec_ddp_stat.ddp_stats[NR_DDP_STAT_TYPE - 1]);
+
+		__sec_bigdata_init_value(sbi, a->attr.name);
 		return len;
 	}
 
@@ -487,6 +538,43 @@ static void __sbi_store_value(struct f2fs_attr *a,
 	}
 }
 
+
+void f2fs_write_ddp_stats(struct f2fs_sb_info *sbi)
+{
+	struct f2fs_super_block *fsb = sbi->raw_super;
+	unsigned long long extra_flag_blk_no = le32_to_cpu(fsb->cp_blkaddr) - 1;
+
+	struct buffer_head *bh;
+	struct f2fs_sb_extra_flag_blk *extra_blk;
+	int type;
+
+	if (extra_flag_blk_no < 2) {
+		f2fs_warn(sbi, "[DDP] extra_flag: No free blks for extra flags");
+		return;
+	}
+
+	bh = sb_bread(sbi->sb, (sector_t)extra_flag_blk_no);
+	if (!bh) {
+		f2fs_warn(sbi, "[DDP] extra_flag: Fail to allocate buffer_head");
+		return;
+	}
+
+	lock_buffer(bh);
+	extra_blk = (struct f2fs_sb_extra_flag_blk *)bh->b_data;
+
+	for (type = 0; type < NR_DDP_STAT_TYPE; type++)
+		extra_blk->ddp_stats[type] = cpu_to_le32(sbi->sec_ddp_stat.ddp_stats[type]);
+
+	set_buffer_uptodate(bh);
+	set_buffer_dirty(bh);
+	unlock_buffer(bh);
+
+	if (__sync_dirty_buffer(bh, REQ_SYNC | REQ_FUA))
+		f2fs_warn(sbi, "extra_flag: EIO");
+
+	brelse(bh);
+}
+
 static ssize_t __sbi_store(struct f2fs_attr *a,
 			struct f2fs_sb_info *sbi,
 			const char *buf, size_t count)
@@ -566,6 +654,51 @@ out:
 
 		return count;
 	}
+
+	if (!strcmp(a->attr.name, "sec_ddp_stat")) {
+		const char *name = strim((char *)buf);
+		struct f2fs_sec_ddp_info *ddp_stat = &sbi->sec_ddp_stat;
+		int type;
+
+		if (!__volume_is_userdata(sbi))
+			return -EINVAL;
+
+		/* expected "DDP:<ddp_stat_type_name>:<uint_value> */
+		if (strncmp(name, "DDP:", 4))
+			return -EINVAL;
+		name += 4;
+
+		for (type = 0; type < NR_DDP_STAT_TYPE; type++) {
+			if (!strncmp(name, sec_ddp_stat_type_names[type],
+					strlen(sec_ddp_stat_type_names[type]))) {
+				name += strlen(sec_ddp_stat_type_names[type]);
+				if (*name != ':')
+					return -EINVAL;
+				name++;
+
+				ret = kstrtoul(name, 0, &t);
+				if (ret < 0)
+					return ret;
+				if (t >= UINT_MAX)
+					return -EINVAL;
+
+				ddp_stat->ddp_stats[type] = t;
+
+				if (type == DDP_GROW_ELAPSED_TIME) {
+					ddp_stat->ddp_stats[DDP_SHRINK_BLOCKS] = 0;
+					ddp_stat->ddp_stats[DDP_SHRINK_ELAPSED_TIME] = 0;
+					ddp_stat->ddp_stats[DDP_SHRINK_ERRNO] = 0;
+				}
+
+				f2fs_write_ddp_stats(sbi);
+
+				return count;
+			}
+		}
+
+		return -EINVAL;
+	}
+
 
 	ui = (unsigned int *)(ptr + a->offset);
 
@@ -1338,6 +1471,7 @@ F2FS_SBI_GENERAL_RW_ATTR(max_lock_elapsed_time);
 F2FS_SBI_GENERAL_RW_ATTR(lock_duration_priority);
 F2FS_SBI_GENERAL_RW_ATTR(adjust_lock_priority);
 F2FS_SBI_GENERAL_RW_ATTR(critical_task_priority);
+F2FS_SBI_GENERAL_RW_ATTR(sec_ddp_stat);
 
 /* STAT_INFO ATTR */
 #ifdef CONFIG_F2FS_STAT_FS
@@ -1487,6 +1621,7 @@ static struct attribute *f2fs_attrs[] = {
 #endif
 	ATTR_LIST(data_io_flag),
 	ATTR_LIST(node_io_flag),
+	ATTR_LIST(sec_ddp_stat),
 	ATTR_LIST(gc_remaining_trials),
 	ATTR_LIST(ckpt_thread_ioprio),
 	ATTR_LIST(dirty_segments),

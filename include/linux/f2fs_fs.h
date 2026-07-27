@@ -625,4 +625,17 @@ struct f2fs_dentry_block {
 
 #define	F2FS_DEF_PROJID		0	/* default project ID */
 
+#define	F2FS_SEC_EXTRA_FSCK_MAGIC	0xF5CE45EC
+struct f2fs_sb_extra_flag_blk {
+	__le32 need_fsck;
+	__le32 spo_counter;
+	__le64 fsck_read_bytes;
+	__le64 fsck_written_bytes;
+	__le64 fsck_elapsed_time;
+	__le32 fsck_exit_code;
+	__le32 valid_node_count;
+	__le32 valid_inode_count;
+	__le32 ddp_stats[8];
+	__u8   rsvd[4020];
+} __packed;
 #endif  /* _LINUX_F2FS_FS_H */

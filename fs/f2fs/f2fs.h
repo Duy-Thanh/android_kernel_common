@@ -1742,6 +1742,21 @@ struct decompress_io_ctx {
 #define MAX_COMPRESS_LOG_SIZE		8
 #define MAX_COMPRESS_WINDOW_SIZE(log_size)	((PAGE_SIZE) << (log_size))
 
+enum sec_ddp_stat_type {
+	DDP_SUPER_FREE_BLOCKS,		/* # of free blocks in super (close to 262144(1GB)) */
+	DDP_SHRINK_BLOCKS,			/* # of shrunk blocks of last f2fs_resize_fs */
+	DDP_SHRINK_ELAPSED_TIME,	/* elapsed time of last f2fs_resize_fs */
+	DDP_SHRINK_ERRNO,			/* errno of last resize */
+	DDP_GROW_ELAPSED_TIME,		/* elapsed time of last resize.f2fs to grow dyndata */
+	DDP_DYNDATA_RANGE,			/* # of blocks in dyndata */
+	DDP_MIGRATED_SEG_COUNT,		/* # of segments migrated to allocate pin file */
+	DDP_MIGRATED_TTIME,			/* daily accumulated time to migrate segments*/
+	NR_DDP_STAT_TYPE
+};
+
+struct f2fs_sec_ddp_info {
+	u32 ddp_stats[NR_DDP_STAT_TYPE];
+};
 struct f2fs_sb_info {
 	struct super_block *sb;			/* pointer to VFS super block */
 	struct proc_dir_entry *s_proc;		/* proc entry */
@@ -1897,6 +1912,7 @@ struct f2fs_sb_info {
 	/* threshold for gc trials on pinned files */
 	unsigned short gc_pin_file_threshold;
 	struct f2fs_rwsem pin_sem;
+	block_t pin_guaranteed_blkaddr;
 
 	/* maximum # of trials to find a victim segment for SSR and GC */
 	unsigned int max_victim_search;
@@ -2052,6 +2068,8 @@ struct f2fs_sb_info {
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lock_class_key cp_global_sem_key;
 #endif
+
+	struct f2fs_sec_ddp_info sec_ddp_stat;
 };
 
 /* Definitions to access f2fs_sb_info */
@@ -4591,6 +4609,9 @@ int __init f2fs_init_sysfs(void);
 void f2fs_exit_sysfs(void);
 int f2fs_register_sysfs(struct f2fs_sb_info *sbi);
 void f2fs_unregister_sysfs(struct f2fs_sb_info *sbi);
+void f2fs_write_ddp_stats(struct f2fs_sb_info *sbi);
+void f2fs_set_sb_extra_flag(struct f2fs_sb_info *sbi, int flag);
+void f2fs_get_fsck_stat(struct f2fs_sb_info *sbi);
 
 /* verity.c */
 extern const struct fsverity_operations f2fs_verityops;
