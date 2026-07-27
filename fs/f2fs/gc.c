@@ -322,6 +322,8 @@ static void select_policy(struct f2fs_sb_info *sbi, int gc_type,
 		SIT_I(sbi)->last_victim[p->gc_mode] = p->offset;
 	} else if (type == CURSEG_HOT_DATA || IS_NODESEG(type))
 		p->offset = 0;
+	else if (type == CURSEG_COLD_DATA_PINNED && sbi->pin_guaranteed_blkaddr)
+		p->offset = 0;
 	else
 		p->offset = SIT_I(sbi)->last_victim[p->gc_mode];
 }
@@ -756,11 +758,26 @@ static void f2fs_unpin_all_sections(struct f2fs_sb_info *sbi, bool enable)
 static int f2fs_gc_pinned_control(struct inode *inode, int gc_type,
 							unsigned int segno)
 {
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+
 	if (!f2fs_is_pinned_file(inode))
 		return 0;
 	if (gc_type != FG_GC)
 		return -EBUSY;
-	if (!f2fs_pin_section(F2FS_I_SB(inode), segno))
+
+	if (sbi->pin_guaranteed_blkaddr) {
+		if (segno > GET_SEGNO(sbi, sbi->pin_guaranteed_blkaddr - 1)) {
+			struct f2fs_inode_info *fi = F2FS_I(inode);
+
+			f2fs_warn(sbi, "[DDP] %s: Force enable GC = ino %lx after %x GC trials, segno: %u, pin_segno: %u",
+					__func__, inode->i_ino, fi->i_gc_failures, segno,
+					(unsigned int) GET_SEGNO(sbi, sbi->pin_guaranteed_blkaddr));
+			clear_inode_flag(inode, FI_PIN_FILE);
+			return 0;
+		}
+	}
+
+	if (!f2fs_pin_section(sbi, segno))
 		f2fs_pin_file_control(inode, true);
 	return -EAGAIN;
 }
@@ -786,9 +803,15 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
 	unsigned int valid_thresh_ratio = 100;
 	bool is_atgc;
 	int ret = 0;
+	bool is_gc_for_pinfile = (type == CURSEG_COLD_DATA_PINNED)
+					&& sbi->pin_guaranteed_blkaddr;
 
 	mutex_lock(&dirty_i->seglist_lock);
-	last_segment = MAIN_SECS(sbi) * SEGS_PER_SEC(sbi);
+
+	if (is_gc_for_pinfile)
+		last_segment = GET_SEGNO(sbi, sbi->pin_guaranteed_blkaddr);
+	else
+		last_segment = MAIN_SECS(sbi) * SEGS_PER_SEC(sbi);
 
 	p.alloc_mode = alloc_mode;
 	p.age = age;
@@ -831,7 +854,8 @@ retry:
 	if (p.max_search == 0)
 		goto out;
 
-	if (__is_large_section(sbi) && p.alloc_mode == LFS) {
+	if (__is_large_section(sbi) && p.alloc_mode == LFS &&
+			!is_gc_for_pinfile) {
 		if (sbi->next_victim_seg[BG_GC] != NULL_SEGNO) {
 			p.min_segno = sbi->next_victim_seg[BG_GC];
 			*result = p.min_segno;
@@ -848,7 +872,8 @@ retry:
 	}
 
 	last_victim = sm->last_victim[p.gc_mode];
-	if (p.alloc_mode == LFS && gc_type == FG_GC) {
+	if (p.alloc_mode == LFS && gc_type == FG_GC &&
+			!is_gc_for_pinfile) {
 		p.min_segno = check_bg_victims(sbi);
 		if (p.min_segno != NULL_SEGNO)
 			goto got_it;
@@ -865,8 +890,9 @@ retry:
 		segno = unit_no * p.ofs_unit;
 		if (segno >= last_segment) {
 			if (sm->last_victim[p.gc_mode]) {
-				last_segment =
-					sm->last_victim[p.gc_mode];
+				if (!is_gc_for_pinfile)
+					last_segment =
+						sm->last_victim[p.gc_mode];
 				sm->last_victim[p.gc_mode] = 0;
 				p.offset = 0;
 				continue;
@@ -2423,4 +2449,73 @@ out_err:
 	f2fs_up_write_trace(&sbi->gc_lock, &glc);
 	thaw_super(sbi->sb, FREEZE_HOLDER_KERNEL, NULL);
 	return err;
+}
+
+int f2fs_gc_for_pinned_type(struct f2fs_sb_info *sbi)
+{
+	unsigned int segno, secno, seg_freed;
+	struct cp_control cpc = { CP_RESIZE, 0, 0, 0 };
+	struct gc_inode_list gc_list = {
+		.ilist = LIST_HEAD_INIT(gc_list.ilist),
+		.iroot = RADIX_TREE_INIT(gc_list.iroot, GFP_NOFS),
+	};
+	int ret = 0;
+	unsigned long long gc_start_time = 0, gc_end_time = 0;
+
+	f2fs_down_write(&sbi->gc_lock);
+
+	f2fs_unpin_all_sections(sbi, true);
+	f2fs_down_write(&sbi->cp_global_sem);
+	gc_start_time = local_clock();
+gc_more:
+	segno = NULL_SEGNO;
+
+	/* Get victim section in a limited space */
+	down_write(&SIT_I(sbi)->sentry_lock);
+	ret = f2fs_get_victim(sbi, &segno, FG_GC,
+				CURSEG_COLD_DATA_PINNED, LFS, 0);
+	if (ret == -ENODATA) {
+		unsigned int nr_secs = GET_SECNO(sbi, sbi->pin_guaranteed_blkaddr);
+
+		for (secno = 0; secno < nr_secs; secno++) {
+			segno = GET_SEG_FROM_SEC(sbi, secno);
+			if (sec_usage_check(sbi, secno))
+				continue;
+			if (f2fs_section_is_pinned(DIRTY_I(sbi), secno))
+				continue;
+			break;
+		}
+
+		if (secno < nr_secs)
+			ret = 0;
+	}
+	up_write(&SIT_I(sbi)->sentry_lock);
+
+	if (ret)
+		goto out;
+
+	/* do GC to move out valid blocks */
+	seg_freed = do_garbage_collect(sbi, segno, &gc_list, FG_GC, true);
+
+	if (seg_freed != sbi->segs_per_sec)
+		goto gc_more;
+
+	sbi->cur_victim_sec = NULL_SEGNO;
+
+	secno = GET_SEC_FROM_SEG(sbi, segno);
+	sbi->pin_reserved_sec = secno;
+
+	/* Checkpoint */
+	ret = f2fs_write_checkpoint(sbi, &cpc);
+out:
+	put_gc_inode(&gc_list);
+	gc_end_time = local_clock();
+
+	sbi->sec_stat.gc_count[FG_GC]++;
+	f2fs_update_gc_total_time(sbi, gc_start_time, gc_end_time, FG_GC);
+
+	f2fs_up_write(&sbi->cp_global_sem);
+	f2fs_up_write(&sbi->gc_lock);
+
+	return ret;
 }

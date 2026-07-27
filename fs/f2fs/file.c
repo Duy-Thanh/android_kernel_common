@@ -1953,10 +1953,11 @@ next_alloc:
 							MAIN_SECS(sbi), 0);
 			if (secno > last_secno) {
 				spin_unlock(&FREE_I(sbi)->segmap_lock);
-				// TODO: need to implement GC for pinned type
-				err = -ENOSPC;
-				f2fs_up_write(&sbi->pin_sem);
-				goto out_err;
+				err = f2fs_gc_for_pinned_type(sbi);
+				if (err) {
+					f2fs_up_write(&sbi->pin_sem);
+					goto out_err;
+				}
 			} else {
 				sbi->pin_reserved_sec = secno;
 				spin_unlock(&FREE_I(sbi)->segmap_lock);
