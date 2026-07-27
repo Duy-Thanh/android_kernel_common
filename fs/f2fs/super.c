@@ -4341,6 +4341,7 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
 	sbi->gc_mode = GC_NORMAL;
 	sbi->next_victim_seg[BG_GC] = NULL_SEGNO;
 	sbi->next_victim_seg[FG_GC] = NULL_SEGNO;
+	sbi->pin_reserved_sec = NULL_SEGNO;
 	sbi->max_victim_search = DEF_MAX_VICTIM_SEARCH;
 	sbi->migration_granularity = SEGS_PER_SEC(sbi);
 	sbi->migration_window_granularity = f2fs_sb_has_blkzoned(sbi) ?

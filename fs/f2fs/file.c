@@ -1943,6 +1943,26 @@ next_alloc:
 			}
 		}
 
+		if (sbi->pin_guaranteed_blkaddr) {
+			unsigned int secno, last_secno;
+
+			last_secno = GET_SECNO(sbi, sbi->pin_guaranteed_blkaddr - 1);
+
+			spin_lock(&FREE_I(sbi)->segmap_lock);
+			secno = find_next_zero_bit(FREE_I(sbi)->free_secmap,
+							MAIN_SECS(sbi), 0);
+			if (secno > last_secno) {
+				spin_unlock(&FREE_I(sbi)->segmap_lock);
+				// TODO: need to implement GC for pinned type
+				err = -ENOSPC;
+				f2fs_up_write(&sbi->pin_sem);
+				goto out_err;
+			} else {
+				sbi->pin_reserved_sec = secno;
+				spin_unlock(&FREE_I(sbi)->segmap_lock);
+			}
+		}
+
 		err = f2fs_allocate_pinning_section(sbi);
 		if (err) {
 			f2fs_up_write(&sbi->pin_sem);
