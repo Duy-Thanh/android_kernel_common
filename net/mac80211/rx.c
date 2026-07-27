@@ -4521,7 +4521,8 @@ static bool ieee80211_accept_frame(struct ieee80211_rx_data *rx)
 		 *  - authentication frames to the local address, and
 		 *  - robust management frames except disassoc.
 		 */
-		if (!ether_addr_equal(sdata->u.nan.conf.cluster_id, hdr->addr3))
+		if (!ether_addr_equal(sdata->u.nan.conf.cluster_id, hdr->addr3) &&
+		    !ether_addr_equal(nan_network_id, hdr->addr3))
 			return false;
 		if (ieee80211_is_public_action(hdr, skb->len))
 			return true;

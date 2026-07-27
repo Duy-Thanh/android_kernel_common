@@ -939,6 +939,7 @@ static const struct nla_policy hwsim_genl_policy[HWSIM_ATTR_MAX + 1] = {
 	[HWSIM_ATTR_MLO_SUPPORT] = { .type = NLA_FLAG },
 	[HWSIM_ATTR_PMSR_SUPPORT] = NLA_POLICY_NESTED(hwsim_pmsr_capa_policy),
 	[HWSIM_ATTR_PMSR_RESULT] = NLA_POLICY_NESTED(hwsim_pmsr_peers_result_policy),
+	[HWSIM_ATTR_TIMESTAMP] = { .type = NLA_U64 },
 	[HWSIM_ATTR_MULTI_RADIO] = { .type = NLA_FLAG },
 	[HWSIM_ATTR_SUPPORT_NAN_DEVICE] = { .type = NLA_FLAG },
 };
@@ -1681,26 +1682,51 @@ static void mac80211_hwsim_tx_frame_nl(struct ieee80211_hw *hw,
 
 	genlmsg_end(skb, msg_head);
 
-	if (hwsim_virtio_enabled) {
-		if (hwsim_tx_virtio(data, skb))
-			goto err_free_txskb;
-	} else {
-		if (hwsim_unicast_netgroup(data, skb, dst_portid))
-			goto err_free_txskb;
-	}
-
-	/* Enqueue the packet */
+	/* Enqueue the packet first to avoid race with TX status */
 	skb_queue_tail(&data->pending, my_skb);
 	data->tx_pkts++;
 	data->tx_bytes += my_skb->len;
+
+	if (hwsim_virtio_enabled) {
+		if (hwsim_tx_virtio(data, skb)) {
+			goto err_dequeue_and_free;
+		}
+	} else {
+		if (hwsim_unicast_netgroup(data, skb, dst_portid)) {
+			goto err_dequeue_and_free;
+		}
+	}
+
 	return;
 
 nla_put_failure:
 	nlmsg_free(skb);
-err_free_txskb:
-	pr_debug("mac80211_hwsim: error occurred in %s\n", __func__);
+	pr_debug("mac80211_hwsim: problem with msg_head\n");
 	ieee80211_free_txskb(hw, my_skb);
 	data->tx_failed++;
+	return;
+
+err_dequeue_and_free:
+	{
+		unsigned long flags;
+		bool found_in_queue = false;
+		struct sk_buff *queued_skb, *tmp;
+
+		spin_lock_irqsave(&data->pending.lock, flags);
+		skb_queue_walk_safe(&data->pending, queued_skb, tmp) {
+			if (queued_skb == my_skb) {
+				__skb_unlink(my_skb, &data->pending);
+				found_in_queue = true;
+				break;
+			}
+		}
+		spin_unlock_irqrestore(&data->pending.lock, flags);
+
+		if (found_in_queue) {
+			ieee80211_free_txskb(hw, my_skb);
+		}
+		data->tx_failed++;
+	}
 }
 
 static bool hwsim_chans_compat(struct ieee80211_channel *c1,
@@ -2146,7 +2172,7 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		return;
 	}
 
-	if (data->idle && !data->tmp_chan) {
+	if (!data->use_chanctx && data->idle && !data->tmp_chan) {
 		wiphy_dbg(hw->wiphy, "Trying to TX when idle - reject\n");
 		ieee80211_free_txskb(hw, skb);
 		return;
@@ -2184,8 +2210,9 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 	/* wmediumd mode check */
 	_portid = READ_ONCE(data->wmediumd);
 
-	if (_portid || hwsim_virtio_enabled)
+	if (_portid || hwsim_virtio_enabled) {
 		return mac80211_hwsim_tx_frame_nl(hw, skb, _portid, channel);
+	}
 
 	/* NO wmediumd detected, perfect medium simulation */
 	data->tx_pkts++;
@@ -3693,24 +3720,30 @@ static int mac80211_hwsim_start_pmsr(struct ieee80211_hw *hw,
 	void *msg_head;
 	u32 _portid;
 	int err = 0;
+	struct hwsim_pmsr_request *pmsr_req;
 
 	data = hw->priv;
 	_portid = READ_ONCE(data->wmediumd);
-	if (!_portid && !hwsim_virtio_enabled)
+	if (!_portid && !hwsim_virtio_enabled) {
 		return -EOPNOTSUPP;
+	}
 
 	mutex_lock(&data->mutex);
 
-	if (data->pmsr_request) {
-		err = -EBUSY;
+	pmsr_req = kzalloc(sizeof(*pmsr_req), GFP_KERNEL);
+	if (!pmsr_req) {
+		err = -ENOMEM;
 		goto out_free;
 	}
+	pmsr_req->request = request;
+	pmsr_req->wdev = ieee80211_vif_to_wdev(vif);
+	pmsr_req->cookie = request->cookie;
 
 	skb = genlmsg_new(GENLMSG_DEFAULT_SIZE, GFP_KERNEL);
 
 	if (!skb) {
 		err = -ENOMEM;
-		goto out_free;
+		goto out_free_req;
 	}
 
 	msg_head = genlmsg_put(skb, 0, 0, &hwsim_genl_family, 0, HWSIM_CMD_START_PMSR);
@@ -3718,30 +3751,44 @@ static int mac80211_hwsim_start_pmsr(struct ieee80211_hw *hw,
 	if (nla_put(skb, HWSIM_ATTR_ADDR_TRANSMITTER,
 		    ETH_ALEN, data->addresses[1].addr)) {
 		err = -ENOMEM;
-		goto out_free;
+		goto out_free_req;
+	}
+
+	if (nla_put_u64_64bit(skb, HWSIM_ATTR_COOKIE, request->cookie, HWSIM_ATTR_PAD)) {
+		err = -ENOMEM;
+		goto out_free_req;
 	}
 
 	pmsr = nla_nest_start(skb, HWSIM_ATTR_PMSR_REQUEST);
 	if (!pmsr) {
 		err = -ENOMEM;
-		goto out_free;
+		goto out_free_req;
 	}
 
 	err = mac80211_hwsim_send_pmsr_request(skb, request);
-	if (err)
-		goto out_free;
+	if (err) {
+		goto out_free_req;
+	}
 
 	nla_nest_end(skb, pmsr);
 
 	genlmsg_end(skb, msg_head);
-	if (hwsim_virtio_enabled)
-		hwsim_tx_virtio(data, skb);
-	else
+	if (hwsim_virtio_enabled) {
+		int tx_err;
+		tx_err = hwsim_tx_virtio(data, skb);
+		if (tx_err)
+			pr_err("mac80211_hwsim_start_pmsr: hwsim_tx_virtio failed: %d\n", tx_err);
+	} else {
 		hwsim_unicast_netgroup(data, skb, _portid);
+	}
 
-	data->pmsr_request = request;
-	data->pmsr_request_wdev = ieee80211_vif_to_wdev(vif);
+	list_add_tail(&pmsr_req->list, &data->pmsr_requests);
 
+	mutex_unlock(&data->mutex);
+	return 0;
+
+out_free_req:
+	kfree(pmsr_req);
 out_free:
 	if (err && skb)
 		nlmsg_free(skb);
@@ -3760,18 +3807,30 @@ static void mac80211_hwsim_abort_pmsr(struct ieee80211_hw *hw,
 	void *msg_head;
 	u32 _portid;
 	int err = 0;
+	struct hwsim_pmsr_request *pmsr_req = NULL, *tmp;
 
 	data = hw->priv;
-	_portid = READ_ONCE(data->wmediumd);
-	if (!_portid && !hwsim_virtio_enabled)
-		return;
 
 	mutex_lock(&data->mutex);
 
-	if (data->pmsr_request != request) {
+	list_for_each_entry(tmp, &data->pmsr_requests, list) {
+		if (tmp->request == request) {
+			pmsr_req = tmp;
+			break;
+		}
+	}
+
+	if (!pmsr_req) {
 		err = -EINVAL;
 		goto out;
 	}
+
+	list_del(&pmsr_req->list);
+	kfree(pmsr_req);
+
+	_portid = READ_ONCE(data->wmediumd);
+	if (!_portid && !hwsim_virtio_enabled)
+		goto out;
 
 	skb = genlmsg_new(GENLMSG_DEFAULT_SIZE, GFP_KERNEL);
 	if (!skb) {
@@ -3782,6 +3841,9 @@ static void mac80211_hwsim_abort_pmsr(struct ieee80211_hw *hw,
 	msg_head = genlmsg_put(skb, 0, 0, &hwsim_genl_family, 0, HWSIM_CMD_ABORT_PMSR);
 
 	if (nla_put(skb, HWSIM_ATTR_ADDR_TRANSMITTER, ETH_ALEN, data->addresses[1].addr))
+		goto out;
+
+	if (nla_put_u64_64bit(skb, HWSIM_ATTR_COOKIE, request->cookie, HWSIM_ATTR_PAD))
 		goto out;
 
 	pmsr = nla_nest_start(skb, HWSIM_ATTR_PMSR_REQUEST);
@@ -3799,10 +3861,13 @@ static void mac80211_hwsim_abort_pmsr(struct ieee80211_hw *hw,
 		goto out;
 
 	genlmsg_end(skb, msg_head);
-	if (hwsim_virtio_enabled)
-		hwsim_tx_virtio(data, skb);
-	else
+	if (hwsim_virtio_enabled) {
+		int tx_err = hwsim_tx_virtio(data, skb);
+		if (tx_err)
+			pr_err("mac80211_hwsim_abort_pmsr: hwsim_tx_virtio failed: %d\n", tx_err);
+	} else {
 		hwsim_unicast_netgroup(data, skb, _portid);
+	}
 
 out:
 	if (err && skb)
@@ -4128,43 +4193,65 @@ static int hwsim_pmsr_report_nl(struct sk_buff *msg, struct genl_info *info)
 	if (!data)
 		return -EINVAL;
 
-	mutex_lock(&data->mutex);
-	if (!data->pmsr_request) {
-		err = -EINVAL;
-		goto out;
+	if (!info->attrs[HWSIM_ATTR_COOKIE]) {
+		return -EINVAL;
 	}
+	{
+		u64 cookie = nla_get_u64(info->attrs[HWSIM_ATTR_COOKIE]);
+		struct hwsim_pmsr_request *pmsr_req = NULL, *tmp;
+		bool completed = false;
 
-	reqattr = info->attrs[HWSIM_ATTR_PMSR_RESULT];
-	if (!reqattr) {
-		err = -EINVAL;
-		goto out;
-	}
+		mutex_lock(&data->mutex);
+		list_for_each_entry(tmp, &data->pmsr_requests, list) {
+			if (tmp->cookie == cookie) {
+				pmsr_req = tmp;
+				break;
+			}
+		}
 
-	peers = nla_find_nested(reqattr, NL80211_PMSR_ATTR_PEERS);
-	if (!peers) {
-		err = -EINVAL;
-		goto out;
-	}
-
-	nla_for_each_nested(peer, peers, rem) {
-		struct cfg80211_pmsr_result result = {};
-
-		err = mac80211_hwsim_parse_pmsr_result(peer, &result, info);
-		if (err)
+		if (!pmsr_req) {
+			err = -EINVAL;
 			goto out;
+		}
 
-		cfg80211_pmsr_report(data->pmsr_request_wdev,
-				     data->pmsr_request, &result, GFP_KERNEL);
+		reqattr = info->attrs[HWSIM_ATTR_PMSR_RESULT];
+		if (!reqattr) {
+			err = -EINVAL;
+			goto out;
+		}
+
+		peers = nla_find_nested(reqattr, NL80211_PMSR_ATTR_PEERS);
+		if (!peers) {
+			err = -EINVAL;
+			goto out;
+		}
+
+		nla_for_each_nested(peer, peers, rem) {
+			struct cfg80211_pmsr_result result = {};
+
+			err = mac80211_hwsim_parse_pmsr_result(peer, &result, info);
+			if (err)
+				goto out;
+
+			cfg80211_pmsr_report(pmsr_req->wdev,
+					     pmsr_req->request, &result, GFP_KERNEL);
+			if (result.final)
+				completed = true;
+		}
+
+		if (completed)
+			cfg80211_pmsr_complete(pmsr_req->wdev, pmsr_req->request, GFP_KERNEL);
+
+		err = 0;
+	out:
+		if (err || completed) {
+			if (pmsr_req) {
+				list_del(&pmsr_req->list);
+				kfree(pmsr_req);
+			}
+		}
+		mutex_unlock(&data->mutex);
 	}
-
-	cfg80211_pmsr_complete(data->pmsr_request_wdev, data->pmsr_request, GFP_KERNEL);
-
-	err = 0;
-out:
-	data->pmsr_request = NULL;
-	data->pmsr_request_wdev = NULL;
-
-	mutex_unlock(&data->mutex);
 	return err;
 }
 
@@ -5532,6 +5619,7 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 
 	data = hw->priv;
 	data->hw = hw;
+	INIT_LIST_HEAD(&data->pmsr_requests);
 
 	data->dev = device_create(hwsim_class, NULL, 0, hw, "hwsim%d", idx);
 	if (IS_ERR(data->dev)) {
@@ -6050,6 +6138,13 @@ static void mac80211_hwsim_del_radio(struct mac80211_hwsim_data *data,
 				     const char *hwname,
 				     struct genl_info *info)
 {
+	struct hwsim_pmsr_request *pmsr_req, *tmp;
+
+	list_for_each_entry_safe(pmsr_req, tmp, &data->pmsr_requests, list) {
+		list_del(&pmsr_req->list);
+		kfree(pmsr_req);
+	}
+
 	hwsim_mcast_del_radio(data->idx, hwname, info);
 	debugfs_remove_recursive(data->debugfs);
 	ieee80211_unregister_hw(data->hw);
@@ -6211,8 +6306,9 @@ static int hwsim_tx_info_frame_received_nl(struct sk_buff *skb_2,
 	spin_unlock_irqrestore(&data2->pending.lock, flags);
 
 	/* not found */
-	if (!found)
+	if (!found) {
 		goto out;
+	}
 
 	mac80211_hwsim_monitor_rx(data2->hw, skb, data2->channel);
 
@@ -6276,6 +6372,8 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	frame_data_len = nla_len(info->attrs[HWSIM_ATTR_FRAME]);
 	frame_data = (void *)nla_data(info->attrs[HWSIM_ATTR_FRAME]);
 
+	hdr = frame_data;
+
 	if (frame_data_len < sizeof(struct ieee80211_hdr_3addr) ||
 	    frame_data_len > IEEE80211_MAX_DATA_LEN)
 		goto err;
@@ -6300,8 +6398,9 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	if (!data2) {
 		data2 = get_hwsim_data_from_nan_random_mac(dst);
 	}
-	if (!data2)
+	if (!data2) {
 		goto out;
+	}
 
 	if (data2->use_chanctx) {
 		if (data2->tmp_chan)
@@ -6321,11 +6420,18 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 
 	/* check if radio is configured properly */
 
-	if ((data2->idle && !data2->tmp_chan) || !data2->started)
+	if (((!data2->use_chanctx && data2->idle && !data2->tmp_chan)) || !data2->started) {
 		goto out;
+	}
 
 	/* A frame is received from user space */
 	memset(&rx_status, 0, sizeof(rx_status));
+	if (info->attrs[HWSIM_ATTR_TIMESTAMP]) {
+		u64 timestamp = nla_get_u64(info->attrs[HWSIM_ATTR_TIMESTAMP]);
+		scoped_guard(spinlock_bh, &data2->tsf_offset_lock)
+			rx_status.mactime = timestamp + data2->tsf_offset;
+		rx_status.flag |= RX_FLAG_MACTIME_START;
+	}
 	if (info->attrs[HWSIM_ATTR_FREQ]) {
 		struct tx_iter_data iter_data = {
 			.hw = data2->hw,
@@ -6341,8 +6447,9 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 
 		iter_data.channel = ieee80211_get_channel(data2->hw->wiphy,
 							  rx_status.freq);
-		if (!iter_data.channel)
+		if (!iter_data.channel) {
 			goto out;
+		}
 		rx_status.band = iter_data.channel->band;
 
 		mutex_lock(&data2->mutex);
@@ -6364,8 +6471,9 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	}
 
 	rx_status.rate_idx = nla_get_u32(info->attrs[HWSIM_ATTR_RX_RATE]);
-	if (rx_status.rate_idx >= data2->hw->wiphy->bands[rx_status.band]->n_bitrates)
+	if (rx_status.rate_idx >= data2->hw->wiphy->bands[rx_status.band]->n_bitrates) {
 		goto out;
+	}
 	rx_status.signal = nla_get_u32(info->attrs[HWSIM_ATTR_SIGNAL]);
 
 	hdr = (void *)skb->data;
@@ -6754,6 +6862,8 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 	}
 
 	ret = mac80211_hwsim_new_radio(info, &param);
+	if (ret >= 0)
+		ret = 0;
 
 out_free:
 	kfree(hwname);
