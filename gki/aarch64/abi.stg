@@ -368972,6 +368972,428 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x1d8ab011
+  name: "ethtool_link_mode_bit_indices"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT_Half_BIT"
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT_Full_BIT"
+      value: 1
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100baseT_Half_BIT"
+      value: 2
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100baseT_Full_BIT"
+      value: 3
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_1000baseT_Half_BIT"
+      value: 4
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_1000baseT_Full_BIT"
+      value: 5
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_Autoneg_BIT"
+      value: 6
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_TP_BIT"
+      value: 7
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_AUI_BIT"
+      value: 8
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_MII_BIT"
+      value: 9
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_FIBRE_BIT"
+      value: 10
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_BNC_BIT"
+      value: 11
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseT_Full_BIT"
+      value: 12
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_Pause_BIT"
+      value: 13
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_Asym_Pause_BIT"
+      value: 14
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_2500baseX_Full_BIT"
+      value: 15
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_Backplane_BIT"
+      value: 16
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_1000baseKX_Full_BIT"
+      value: 17
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseKX4_Full_BIT"
+      value: 18
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseKR_Full_BIT"
+      value: 19
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseR_FEC_BIT"
+      value: 20
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_20000baseMLD2_Full_BIT"
+      value: 21
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_20000baseKR2_Full_BIT"
+      value: 22
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_40000baseKR4_Full_BIT"
+      value: 23
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_40000baseCR4_Full_BIT"
+      value: 24
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_40000baseSR4_Full_BIT"
+      value: 25
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_40000baseLR4_Full_BIT"
+      value: 26
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_56000baseKR4_Full_BIT"
+      value: 27
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_56000baseCR4_Full_BIT"
+      value: 28
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_56000baseSR4_Full_BIT"
+      value: 29
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_56000baseLR4_Full_BIT"
+      value: 30
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_25000baseCR_Full_BIT"
+      value: 31
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_25000baseKR_Full_BIT"
+      value: 32
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_25000baseSR_Full_BIT"
+      value: 33
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseCR2_Full_BIT"
+      value: 34
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseKR2_Full_BIT"
+      value: 35
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseKR4_Full_BIT"
+      value: 36
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseSR4_Full_BIT"
+      value: 37
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseCR4_Full_BIT"
+      value: 38
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseLR4_ER4_Full_BIT"
+      value: 39
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseSR2_Full_BIT"
+      value: 40
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_1000baseX_Full_BIT"
+      value: 41
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseCR_Full_BIT"
+      value: 42
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseSR_Full_BIT"
+      value: 43
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseLR_Full_BIT"
+      value: 44
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseLRM_Full_BIT"
+      value: 45
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10000baseER_Full_BIT"
+      value: 46
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_2500baseT_Full_BIT"
+      value: 47
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_5000baseT_Full_BIT"
+      value: 48
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_FEC_NONE_BIT"
+      value: 49
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_FEC_RS_BIT"
+      value: 50
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_FEC_BASER_BIT"
+      value: 51
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseKR_Full_BIT"
+      value: 52
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseSR_Full_BIT"
+      value: 53
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseCR_Full_BIT"
+      value: 54
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseLR_ER_FR_Full_BIT"
+      value: 55
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_50000baseDR_Full_BIT"
+      value: 56
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseKR2_Full_BIT"
+      value: 57
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseSR2_Full_BIT"
+      value: 58
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseCR2_Full_BIT"
+      value: 59
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseLR2_ER2_FR2_Full_BIT"
+      value: 60
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseDR2_Full_BIT"
+      value: 61
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseKR4_Full_BIT"
+      value: 62
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseSR4_Full_BIT"
+      value: 63
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseLR4_ER4_FR4_Full_BIT"
+      value: 64
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseDR4_Full_BIT"
+      value: 65
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseCR4_Full_BIT"
+      value: 66
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100baseT1_Full_BIT"
+      value: 67
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_1000baseT1_Full_BIT"
+      value: 68
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseKR8_Full_BIT"
+      value: 69
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseSR8_Full_BIT"
+      value: 70
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseLR8_ER8_FR8_Full_BIT"
+      value: 71
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseDR8_Full_BIT"
+      value: 72
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseCR8_Full_BIT"
+      value: 73
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_FEC_LLRS_BIT"
+      value: 74
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseKR_Full_BIT"
+      value: 75
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseSR_Full_BIT"
+      value: 76
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseLR_ER_FR_Full_BIT"
+      value: 77
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseCR_Full_BIT"
+      value: 78
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100000baseDR_Full_BIT"
+      value: 79
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseKR2_Full_BIT"
+      value: 80
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseSR2_Full_BIT"
+      value: 81
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseLR2_ER2_FR2_Full_BIT"
+      value: 82
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseDR2_Full_BIT"
+      value: 83
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_200000baseCR2_Full_BIT"
+      value: 84
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseKR4_Full_BIT"
+      value: 85
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseSR4_Full_BIT"
+      value: 86
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseLR4_ER4_FR4_Full_BIT"
+      value: 87
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseDR4_Full_BIT"
+      value: 88
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_400000baseCR4_Full_BIT"
+      value: 89
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100baseFX_Half_BIT"
+      value: 90
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_100baseFX_Full_BIT"
+      value: 91
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT1L_Full_BIT"
+      value: 92
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseCR8_Full_BIT"
+      value: 93
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseKR8_Full_BIT"
+      value: 94
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseDR8_Full_BIT"
+      value: 95
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseDR8_2_Full_BIT"
+      value: 96
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseSR8_Full_BIT"
+      value: 97
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_800000baseVR8_Full_BIT"
+      value: 98
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT1S_Full_BIT"
+      value: 99
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT1S_Half_BIT"
+      value: 100
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT1S_P2MP_Half_BIT"
+      value: 101
+    }
+    enumerator {
+      name: "ETHTOOL_LINK_MODE_10baseT1BRR_Full_BIT"
+      value: 102
+    }
+    enumerator {
+      name: "__ETHTOOL_LINK_MODE_MASK_NBITS"
+      value: 103
+    }
+  }
+}
+enumeration {
   id: 0x49c229c2
   name: "ethtool_mac_stats_src"
   definition {
@@ -392331,6 +392753,12 @@ function {
   parameter_id: 0x18ea2d6b
 }
 function {
+  id: 0x16a32795
+  return_type_id: 0x48b5725f
+  parameter_id: 0x19357319
+  parameter_id: 0x1d8ab011
+}
+function {
   id: 0x16a452bb
   return_type_id: 0x48b5725f
   parameter_id: 0x1e820193
@@ -396445,6 +396873,14 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x32a623d7
   parameter_id: 0x00c72527
+}
+function {
+  id: 0x1c33c003
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32caaf24
+  parameter_id: 0x064d6086
+  parameter_id: 0x064d6086
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x1c3589e3
@@ -486562,6 +486998,15 @@ elf_symbol {
   full_name: "ethtool_op_get_ts_info"
 }
 elf_symbol {
+  id: 0xe7366fe7
+  name: "ethtool_params_from_link_mode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3ef4dfe1
+  type_id: 0x16a32795
+  full_name: "ethtool_params_from_link_mode"
+}
+elf_symbol {
   id: 0x24bd0757
   name: "ethtool_puts"
   is_defined: true
@@ -499274,6 +499719,15 @@ elf_symbol {
   full_name: "l2tp_xmit_skb"
 }
 elf_symbol {
+  id: 0x17e9fb87
+  name: "led_blink_set_oneshot"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfb752b29
+  type_id: 0x1c33c003
+  full_name: "led_blink_set_oneshot"
+}
+elf_symbol {
   id: 0x709f7fc8
   name: "led_classdev_flash_register_ext"
   is_defined: true
@@ -499398,6 +499852,15 @@ elf_symbol {
   crc: 0x58a81427
   type_id: 0x91a53d53
   full_name: "led_set_flash_timeout"
+}
+elf_symbol {
+  id: 0xe0c4a1c1
+  name: "led_stop_software_blink"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa199df08
+  type_id: 0x1c2afa5a
+  full_name: "led_stop_software_blink"
 }
 elf_symbol {
   id: 0x1874c9e3
@@ -542905,6 +543368,7 @@ interface {
   symbol_id: 0x9824b1a7
   symbol_id: 0xd3082d07
   symbol_id: 0x091eb2ba
+  symbol_id: 0xe7366fe7
   symbol_id: 0x24bd0757
   symbol_id: 0x80d8d153
   symbol_id: 0x18d23e80
@@ -544316,6 +544780,7 @@ interface {
   symbol_id: 0x8066cf3a
   symbol_id: 0x8f6761e2
   symbol_id: 0x20069858
+  symbol_id: 0x17e9fb87
   symbol_id: 0x709f7fc8
   symbol_id: 0xa58e6f5d
   symbol_id: 0xfe24eb71
@@ -544330,6 +544795,7 @@ interface {
   symbol_id: 0x2e74d698
   symbol_id: 0x7bbb8d5f
   symbol_id: 0xa18d331b
+  symbol_id: 0xe0c4a1c1
   symbol_id: 0x1874c9e3
   symbol_id: 0xef448c0c
   symbol_id: 0xd10c895a
