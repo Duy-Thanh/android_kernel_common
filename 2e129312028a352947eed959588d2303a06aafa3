@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7327bb85_4bbca10f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-27T12:54:56Z",
+      "side": 1,
+      "message": "This fixes the missing update. I think the shift width is off though: 1 is int, so for a first_unused of 31 this evaluates to INT_MIN and sign-extends on the |\u003d into the u64, setting bits 31 through 63 in one go. used_device_id_mask then reads as U64_MAX, so the next add returns -EINVAL and, as in the earlier round, cwriter_write stops on that command and the driver hits its completion timeout. Above 31 the shift is undefined as well. BIT_ULL(first_unused) would keep it to the one bit, and would match track_device_id_remove just below, which already uses BIT().",
+      "revId": "2e129312028a352947eed959588d2303a06aafa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461f8b6d_6c0d2bd3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-27T12:54:56Z",
+      "side": 1,
+      "message": "I think there may be a problem with which bytes end up in the queue. cmd is filled from cmd_le at line 410 and process_cmd validates that copy, but the memcpy here re-reads cmd_le, and cmd_host_base is the shadow queue the host driver writes into. A host CPU that rewrites the entry between the two reads has its command validated in one form and submitted in another, so the device-id tracking and ITT pinning that process_cmd performed need not describe what the GIC is actually programmed with. Could we fetch once into a local and use that for both, something like:\n\n```\n      struct its_cmd_block raw \u003d *cmd_le;\n\n      for (i \u003d 0; i \u003c ARRAY_SIZE(cmd.raw_cmd); i++)\n              cmd.raw_cmd[i] \u003d le64_to_cpu(raw.raw_cmd_le[i]);\n      ...\n      memcpy(its-\u003ecmd_hyp_base + its-\u003ecmd_offset, \u0026raw, sizeof(raw));\n```",
+      "revId": "2e129312028a352947eed959588d2303a06aafa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d9172e_4630e7ac",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-27T12:54:56Z",
+      "side": 1,
+      "message": "Relatedto the above, I think the flush is on the wrong address. cmd is the local snapshot, while the entry the GIC reads is the one just written at its-\u003ecmd_hyp_base + its-\u003ecmd_offset, so on the needs_flush path the queue entry itself is never cleaned to PoC. With the single fetch above it would want the destination, gic_flush_dcache_to_poc(its-\u003ecmd_hyp_base + its-\u003ecmd_offset, sizeof(raw)).",
+      "revId": "2e129312028a352947eed959588d2303a06aafa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f5fee8_103ada28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-27T12:54:56Z",
+      "side": 1,
+      "message": "needs_flush is derived here once, but I don\u0027t think the CBASER shareability it reflects is fixed for the lifetime of the ITS. cbaser_write only replaces the size and address fields, so the shareability and cacheability bits stay host-writable, and ctlr_write only refuses the transition to enabled while not quiescent, so a host can disable the ITS, rewrite GITS_CBASER shareability, and enable it again. After that needs_flush no longer matches the live CBASER and the command queue is maintained under the wrong policy. Could we either recompute needs_flush in cbaser_write, or hold the shareability bits at the value snapshotted here, the same way the address is held?",
+      "revId": "2e129312028a352947eed959588d2303a06aafa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
