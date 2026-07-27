@@ -157,6 +157,7 @@ enum hwsim_commands {
  *	to provide details about peer measurement request (nl80211_peer_measurement_attrs)
  * @HWSIM_ATTR_PMSR_RESULT: nested attributed used with %HWSIM_CMD_REPORT_PMSR
  *	to provide peer measurement result (nl80211_peer_measurement_attrs)
+ * @HWSIM_ATTR_TIMESTAMP: u64 attribute to provide simulated arrival time (us)
  * @HWSIM_ATTR_MULTI_RADIO: Register multiple wiphy radios (flag).
  *	Adds one radio for each band. Number of supported channels will be set for
  *	each radio instead of for the wiphy.
@@ -195,6 +196,7 @@ enum hwsim_attrs {
 	HWSIM_ATTR_PMSR_RESULT,
 	HWSIM_ATTR_MULTI_RADIO,
 	HWSIM_ATTR_SUPPORT_NAN_DEVICE,
+	HWSIM_ATTR_TIMESTAMP,
 	__HWSIM_ATTR_MAX,
 };
 #define HWSIM_ATTR_MAX (__HWSIM_ATTR_MAX - 1)

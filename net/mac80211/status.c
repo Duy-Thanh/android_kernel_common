@@ -589,6 +589,7 @@ ieee80211_sdata_from_skb(struct ieee80211_local *local, struct sk_buff *skb)
 	list_for_each_entry_rcu(sdata, &local->interfaces, list) {
 		switch (sdata->vif.type) {
 		case NL80211_IFTYPE_P2P_DEVICE:
+		case NL80211_IFTYPE_PD:
 			break;
 		case NL80211_IFTYPE_NAN:
 			if (sdata->u.nan.started)
