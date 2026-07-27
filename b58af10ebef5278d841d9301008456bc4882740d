@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edaa1c2c_eef7e3c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T12:38:46Z",
+      "side": 1,
+      "message": "LGTM, modulo my minor remarks in https://android-review.googlesource.com/c/kernel/common/+/4076366/20/drivers/iommu/intel/pkvm/domain.c which imply some adjustments to this patch as well.",
+      "revId": "b58af10ebef5278d841d9301008456bc4882740d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
