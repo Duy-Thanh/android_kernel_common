@@ -196,6 +196,24 @@
       "parentUuid": "531ac86b_be7ad0b0",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a89272_a42568d4",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:39:02Z",
+      "side": 1,
+      "message": "The reason I originally chose to restore `kvm_host.xcr0/xss` rather than injecting #GP was defensiveness/pragmatic: since a well behaved host never modifies xcr0/xss after boot, only a malicious/compromised host would attempt to do so. With the current approach, we log a warning and protect pVM execution by restoring the safe default without immediately crashing the host with an unexpected #GP.\n\nBut the other option with injecting #GP instead seems fine to me too and to be honest I wasn\u0027t really sure which one is better (I agree that allowing the write only to silently overwrite it later is a bit strange). If you and @chuanxiao.dong@intel.corp-partner.google.com both prefer injecting #GP instead I will re-implement it that way.",
+      "parentUuid": "ea32e242_ea56a1d9",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
