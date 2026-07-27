@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9182b0_641adb11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-07-27T09:40:49Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Open respin request bug found: [539304319](https://issuetracker.google.com/issue...\n\nOpen respin request bug found: [539304319](https://issuetracker.google.com/issues/539304319).\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ef6db12acc296c8ebb5b679cecad7317dcf2776b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4c2704bb_835824d9",
