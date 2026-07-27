@@ -70,6 +70,24 @@
       "parentUuid": "c454fa7f_49fcb111",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8cee8bf_7d3ab5ed",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T18:43:09Z",
+      "side": 0,
+      "message": "\u003e Argh, indeed... So, so long as we don\u0027t have an equivalent of iommu_group-\u003emutex, it seems we indeed have no better option than move cache_tag_assign_domain()/cache_tag_unassign_domain() back to those host driver\u0027s functions (in order to rely on iommu-\u003elock for things it was not meant for).\n\nI will code this and test it. For the uprev, will re-design with a persistent pkvm_device approach so that we can perform cache tag operations from device snapshotted values before calling the host function.\n\n\u003e So it would be \"validate\", not \"populate\"?.. This doesn\u0027t sound better to me, only more intricate.\n\nyeah right, function name would change. The check was meant to be one layer of extra defence. Host specifying a wrong value would not be a security issue I think. A wrong value of ats_supported\u003d0  would just disable ATS for the device and a wrong value of ats_supported\u003d1 would probably cause invalidation errors (DoS I guess)",
+      "parentUuid": "e41027f2_59bed3f3",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
