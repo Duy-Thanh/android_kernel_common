@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152124c7_d26db80b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-27T13:02:29Z",
+      "side": 1,
+      "message": "Following up the thread on the shadow-structures patch, where I raised accesses landing between prot finalize and the init HVC. I had understood the global redist_lock to close that, but I don\u0027t think it does: the lock is taken to read region-\u003epriv and released again before the NULL test, so it serialises the read without deferring the access. A trapped access arriving before this redistributor\u0027s pkvm_init_redist_emulation has run still returns here, and the trap handler zeroes the value, so it is RAZ/WI.\n\nIn pkvm_drop_host_privileges the window also looks wider than a redistributor\u0027s own setup: it opens when on_each_cpu(_kvm_host_prot_finalize) completes and closes per redistributor inside gic_redist_deprivilege(), which runs after its_end_deprivilege(), so the ITS donation walk and the serial loop over every redistributor are both inside it. All CPUs are online throughout.\n\nWhat concerns me is that RAZ/WI is not a visible failure for RD_base, because zero is the benign value for everything the driver polls there: GICR_WAKER.ChildrenAsleep reads as awake, GICR_CTLR.RWP as no write pending, GICR_SYNCR as not busy. A dropped GICR_WAKER write on a CPU_PM transition, or a dropped GICR_INVLPIR, would be followed by a poll that succeeds immediately, so the driver would carry on with its model of the redistributor out of step with the hardware rather than hang. That would also explain why this does not show up in a boot test.\n\nI don\u0027t want to reopen the locking question, which I understand is settled for A16. Could we narrow the deny instead, so that with priv NULL we forward the offsets that have no emu_handler and RAZ/WI only the handled ones? That leaves the restricted registers closed and makes the window behave as post-init for everything else. A rate-limited WARN on a denied access would at least make it visible if it does happen.",
+      "revId": "06cf6c1b480d4036d3478e8ce7d783f998797f8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
