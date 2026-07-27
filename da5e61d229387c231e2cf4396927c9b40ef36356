@@ -106,6 +106,24 @@
       "parentUuid": "f8cee8bf_7d3ab5ed",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b5af25_90f5e020",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T23:34:56Z",
+      "side": 0,
+      "message": "My bad, after the long conversion, for some reason, I confused with CE.DTE bit which we set from host input. Sorry about that",
+      "parentUuid": "92e84432_68df1b61",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
