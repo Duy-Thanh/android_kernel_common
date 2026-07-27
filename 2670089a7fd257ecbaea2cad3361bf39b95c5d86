@@ -97,6 +97,24 @@
       "parentUuid": "e6f19717_0d5945dc",
       "revId": "2670089a7fd257ecbaea2cad3361bf39b95c5d86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec3150a_21b21125",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T14:32:26Z",
+      "side": 1,
+      "message": "Indeed, actually it was me who moved it in patchset 5. But there was a reason for that: since Chuanxiao\u0027s original version made `pkvm_get_iommu_domain_noref()` a private function, I renamed it to `__pkvm_get_iommu_domain_noref()` and moved it between `__pkvm_get_iommu_domain_locked()` and `pkvm_get_iommu_domain()`, so that both private functions (\"locked\" and \"noref\") are kept close together, before the public functions.\n\nNow that \"noref\" is public again, there is no reason to move it anymore.",
+      "parentUuid": "f591eff6_5d6392d6",
+      "revId": "2670089a7fd257ecbaea2cad3361bf39b95c5d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
