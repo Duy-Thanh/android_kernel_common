@@ -79,6 +79,24 @@
       "parentUuid": "75a01657_3f276e12",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be294b9c_5c8fd441",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T23:26:28Z",
+      "side": 1,
+      "message": "\u003e its actually called twice before depriviligeing and after due to `vmx_hardware_setup()`/`kvm_probe_user_return_msr` called twice as its need to initialize things for both pKVM-low and pKVM-high\n\nHmm, indeed, interesting.\n\nI suppose you won\u0027t see that if you apply the below hack. :) \n\n```\n--- a/arch/x86/kvm/vmx/vmx.c\n+++ b/arch/x86/kvm/vmx/vmx.c\n@@ -9678,10 +9678,9 @@ static void __init do_vmx_pkvm_init(void)\n \tr \u003d vmx_pkvm_init();\n \tif (r) {\n \t\tpr_warn(\"pKVM init failed with error %d. Continue KVM init\\n\", r);\n+\t\tx86_ops \u003d \u0026vt_x86_ops;\n+\t\tx86_init_ops \u003d \u0026vt_init_ops;\n \t} else if (enable_pkvm) {\n-\t\tx86_ops \u003d \u0026pkvm_host_vt_x86_ops;\n-\t\tx86_init_ops \u003d \u0026pkvm_host_vt_init_ops;\n-\n \t\t/*\n \t\t * Disable below features to keep align with the pKVM. See the\n \t\t * code in pkvm_vmx_init().\n@@ -9728,10 +9727,6 @@ int __init vmx_init(void)\n \t */\n \thv_init_evmcs();\n \n-#ifdef CONFIG_PKVM_INTEL\n-\tdo_vmx_pkvm_init();\n-#endif\n-\n \t/*\n \t * Parse the VMCS config and VMX capabilities before anything else, so\n \t * that the information is available to all setup flows.\n@@ -9739,10 +9734,19 @@ int __init vmx_init(void)\n \tif (setup_vmcs_config(\u0026vmcs_config, \u0026vmx_capability) \u003c 0)\n \t\treturn -EIO;\n \n+\tif (enable_pkvm) {\n+\t\tx86_ops \u003d \u0026pkvm_host_vt_x86_ops;\n+\t\tx86_init_ops \u003d \u0026pkvm_host_vt_init_ops;\n+\t}\n+\n \tr \u003d kvm_x86_vendor_init(x86_init_ops);\n \tif (r)\n \t\treturn r;\n \n+#ifdef CONFIG_PKVM_INTEL\n+\tdo_vmx_pkvm_init();\n+#endif\n+\n \t/*\n \t * Must be called after common x86 init so enable_ept is properly set\n \t * up. Hand the parameter mitigation value in which was stored in\n```\n\n\u003e So I will rework this patch to actually handle msr in `handle_write_msr` by allowing the physical write but `updating msrs-\u003evalues[slot].curr \u003d val;`\n\nYeah, sounds like a plan.\n\nOr alternatively, allow only such writes that don\u0027t change values of those MSRs (since `kvm_probe_user_return_msr()` writes the same value it has just read)?",
+      "parentUuid": "c9ec9aec_74ad5888",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
