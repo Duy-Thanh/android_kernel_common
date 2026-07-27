@@ -132,6 +132,8 @@ struct mac80211_hwsim_data {
 	/* difference between this hw's clock and the real clock, in usecs */
 	spinlock_t tsf_offset_lock;
 	s64 tsf_offset;
+	s64 host_guest_offset;
+	bool host_guest_offset_calculated;
 
 	/* Stats */
 	u64 tx_pkts;
