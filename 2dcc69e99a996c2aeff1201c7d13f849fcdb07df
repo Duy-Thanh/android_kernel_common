@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "332a84ac_81245688",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:02:11Z",
+      "side": 1,
+      "message": "Indeed.",
+      "parentUuid": "f3904bda_200eb6e5",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "939bff25_693e35fc",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-24T23:42:01Z",
       "side": 1,
       "message": "And also cda98b84556a (\"ANDROID: pKVM: VMX: Share vCPU state for EXIT_REASON_IO_INSTRUCTION\") ?",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f663abea_40b1b44b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:02:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "939bff25_693e35fc",
       "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -87,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1374b696_2861be13",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9789,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:02:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "baaf89f1_1559d4c2",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44648f9e_76f66dc4",
@@ -122,6 +176,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "246ac277_6fb44d30",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9938,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:02:11Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "44648f9e_76f66dc4",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cadcfaa2_22c87b4c",
@@ -135,6 +207,24 @@
       "writtenOn": "2026-07-24T23:42:01Z",
       "side": 1,
       "message": "nit: s/GENMASK_ULL/GENMASK/ since regs are `unsigned long`?",
+      "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9ad8218_182c5dc7",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9942,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:02:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cadcfaa2_22c87b4c",
       "revId": "2dcc69e99a996c2aeff1201c7d13f849fcdb07df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
