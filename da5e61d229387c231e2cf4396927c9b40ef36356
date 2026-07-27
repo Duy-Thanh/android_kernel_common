@@ -88,6 +88,24 @@
       "parentUuid": "e41027f2_59bed3f3",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e84432_68df1b61",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T22:18:12Z",
+      "side": 0,
+      "message": "\u003e The check was meant to be one layer of extra defence. Host specifying a wrong value would not be a security issue I think. A wrong value of ats_supported\u003d0 would just disable ATS for the device\n\nFWIW I\u0027m not sure what you are talking about here. As your commit message clearly explains, a wrong value of ats_supported\u003d0 in a PASID setup hypercall would cause a security issue (Dev-TLB not flushed while ATS is actually enabled)?",
+      "parentUuid": "f8cee8bf_7d3ab5ed",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
