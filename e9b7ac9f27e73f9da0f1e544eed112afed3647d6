@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6925f9_24d98446",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T13:39:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2935869_cfaae892",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "414b273f_64c659ce",
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "Nice cleanup, thanks for the suggestion. I have added it as a separate patch: aosp/4192215",
       "parentUuid": "778f296c_3d914955",
+      "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a0a7df_f5022b04",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T13:39:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38430957_8db39c90",
       "revId": "e9b7ac9f27e73f9da0f1e544eed112afed3647d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
