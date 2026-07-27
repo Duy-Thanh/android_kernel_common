@@ -48,6 +48,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d2b14f5_00a0c45b",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T14:25:34Z",
+      "side": 1,
+      "message": "Good idea, its only called internally with the value derived from context/pasid entry. Will do.",
+      "parentUuid": "3662002b_fc1494de",
+      "revId": "2670089a7fd257ecbaea2cad3361bf39b95c5d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6f19717_0d5945dc",
         "filename": "drivers/iommu/intel/pkvm/domain.c",
         "patchSetId": 14
@@ -59,6 +77,24 @@
       "writtenOn": "2026-07-23T11:15:55Z",
       "side": 1,
       "message": "nit: what\u0027s the reason for moving `pkvm_get_iommu_domain()` after `pkvm_get_iommu_domain_noref()`?",
+      "revId": "2670089a7fd257ecbaea2cad3361bf39b95c5d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f591eff6_5d6392d6",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T14:25:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure. I think this was introduced in patchset 5 which is the version you pulled in to your series. I shall revert it to the previous order if needed(A later patch re-orders it anyways). Please let me know.",
+      "parentUuid": "e6f19717_0d5945dc",
       "revId": "2670089a7fd257ecbaea2cad3361bf39b95c5d86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
