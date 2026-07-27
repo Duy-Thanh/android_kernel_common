@@ -41,6 +41,13 @@ struct mac80211_hwsim_link_data {
 	struct hrtimer beacon_timer;
 };
 
+struct hwsim_pmsr_request {
+	struct list_head list;
+	struct cfg80211_pmsr_request *request;
+	struct wireless_dev *wdev;
+	u64 cookie;
+};
+
 #define HWSIM_NUM_CHANNELS_2GHZ		14
 #define HWSIM_NUM_CHANNELS_5GHZ		40
 #define HWSIM_NUM_CHANNELS_6GHZ		59
@@ -139,8 +146,7 @@ struct mac80211_hwsim_data {
 
 	/* only used when pmsr capability is supplied */
 	struct cfg80211_pmsr_capabilities pmsr_capa;
-	struct cfg80211_pmsr_request *pmsr_request;
-	struct wireless_dev *pmsr_request_wdev;
+	struct list_head pmsr_requests;
 
 	struct mac80211_hwsim_link_data link_data[IEEE80211_MLD_MAX_NUM_LINKS];
 
