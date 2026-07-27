@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52f072e_116070ea",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-27T16:36:31Z",
+      "side": 0,
+      "message": "I think removing this and calling cache_tag_assign_domain() down will cause assigning DEVTLB tags to be missed. We might need to move the cache tag assign to intel_pasid_setup_first_level() under iommu-\u003elock after deriving the ats_supported/ats_enabled from context entry. Same for setup_sl. legacy is not affected as setup_lm_ce passes ats_supported in the hypercall argument. But we should probably move that also to domain_context_mapping_one for parity with this calls.\n\nSo domain refcount remains here in iommu_hc.c, while cache tag handling goes back to iommu.c/pasid.c. On the teardown path that would mean calling `pkvm_get_iommu_domain_noref()` in `domain_context_clear_one`, and `intel_pasid_tear_down_entry` and passing the `domain` back to `pkvm_iommu_pasid_teardown`. Or keep the tear down path as it is, but it will be a slight logical mismatch.\n\nWDYT?",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
