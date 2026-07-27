@@ -2175,8 +2175,10 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 		do_garbage_collect(sbi, segno, &gc_list, FG_GC, true, false);
 		put_gc_inode(&gc_list);
 
-		if (!dry_run && get_valid_blocks(sbi, segno, true))
+		if (!dry_run && get_valid_blocks(sbi, segno, true)) {
+			f2fs_err(sbi, "do garbage collect but valid block exists %u", segno);
 			return -EAGAIN;
+		}
 		if (dry_run && dry_run_sections &&
 		    !get_valid_blocks(sbi, segno, true) && --gc_secs == 0)
 			break;
@@ -2191,9 +2193,10 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 static int free_segment_range(struct f2fs_sb_info *sbi,
 				unsigned int secs, bool dry_run)
 {
-	unsigned int next_inuse, start, end;
+	unsigned int segno, next_inuse, start, end, end_secno;
 	struct cp_control cpc = { CP_RESIZE, 0, 0, 0 };
 	int gc_mode, gc_type;
+	unsigned int freed_secs = 0;
 	int err = 0;
 	int type;
 
@@ -2201,6 +2204,7 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
 	MAIN_SECS(sbi) -= secs;
 	start = MAIN_SECS(sbi) * SEGS_PER_SEC(sbi);
 	end = MAIN_SEGS(sbi) - 1;
+	end_secno = GET_SEC_FROM_SEG(sbi, end);
 
 	mutex_lock(&DIRTY_I(sbi)->seglist_lock);
 	for (gc_mode = 0; gc_mode < MAX_GC_POLICY; gc_mode++)
@@ -2210,10 +2214,19 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
 	for (gc_type = BG_GC; gc_type <= FG_GC; gc_type++)
 		if (sbi->next_victim_seg[gc_type] >= start)
 			sbi->next_victim_seg[gc_type] = NULL_SEGNO;
+
+	spin_lock(&FREE_I(sbi)->segmap_lock);
+	for (segno = MAIN_SECS(sbi); segno <= end_secno; segno++) {
+		if (!test_bit(segno, FREE_I(sbi)->free_secmap))
+			freed_secs++;
+	}
+	FREE_I(sbi)->free_sections -= freed_secs;
+	spin_unlock(&FREE_I(sbi)->segmap_lock);
+
 	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
 
 	/* Move out cursegs from the target range */
-	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++) {
+	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_TYPE; type++) {
 		err = f2fs_allocate_segment_for_resize(sbi, type, start, end);
 		if (err)
 			goto out;
@@ -2236,6 +2249,7 @@ static int free_segment_range(struct f2fs_sb_info *sbi,
 		f2fs_bug_on(sbi, 1);
 	}
 out:
+	FREE_I(sbi)->free_sections += freed_secs;
 	MAIN_SECS(sbi) += secs;
 	return err;
 }
@@ -2349,18 +2363,26 @@ int f2fs_resize_fs(struct file *filp, __u64 block_count)
 		return -EINVAL;
 	}
 
-	err = mnt_want_write_file(filp);
-	if (err)
-		return err;
-
 	shrunk_blocks = old_block_count - block_count;
 	secs = div_u64(shrunk_blocks, BLKS_PER_SEC(sbi));
+
+	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
 
 	/* stop other GC */
 	if (!f2fs_down_write_trylock_trace(&sbi->gc_lock, &glc)) {
 		err = -EAGAIN;
 		goto out_drop_write;
 	}
+
+	if (f2fs_readonly(sbi->sb)) {
+		clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
+		err = thaw_super(sbi->sb, FREEZE_HOLDER_USERSPACE);
+		if (err)
+			return err;
+		return -EROFS;
+	}
+
+	f2fs_down_write(&sbi->gc_lock);
 
 	/* stop CP to protect MAIN_SEC in free_segment_range */
 	f2fs_lock_op(sbi, &lc);
@@ -2377,7 +2399,6 @@ int f2fs_resize_fs(struct file *filp, __u64 block_count)
 
 	err = free_segment_range(sbi, secs, true);
 
-out_unlock:
 	f2fs_unlock_op(sbi, &lc);
 	f2fs_up_write_trace(&sbi->gc_lock, &glc);
 out_drop_write:
@@ -2402,24 +2423,28 @@ out_drop_write:
 	spin_lock(&sbi->stat_lock);
 	if (shrunk_blocks + valid_user_blocks(sbi) +
 		sbi->current_reserved_blocks + sbi->unusable_block_count +
-		F2FS_OPTION(sbi).root_reserved_blocks > sbi->user_block_count)
+		F2FS_OPTION(sbi).root_reserved_blocks > sbi->user_block_count) {
+		clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
 		err = -ENOSPC;
-	else
+	} else {
 		sbi->user_block_count -= shrunk_blocks;
+	}
 	spin_unlock(&sbi->stat_lock);
 	if (err)
 		goto out_err;
 
-	set_sbi_flag(sbi, SBI_IS_RESIZEFS);
 	err = free_segment_range(sbi, secs, false);
-	if (err)
+	if (err) {
+		f2fs_err(sbi, "free segment range failed %d", err);
 		goto recover_out;
+	}
 
 	update_sb_metadata(sbi, -secs);
 
 	err = f2fs_commit_super(sbi, false);
 	if (err) {
 		update_sb_metadata(sbi, secs);
+		f2fs_err(sbi, "f2fs commit super failed %d", err);
 		goto recover_out;
 	}
 
@@ -2433,12 +2458,15 @@ out_drop_write:
 		update_fs_metadata(sbi, secs);
 		update_sb_metadata(sbi, secs);
 		f2fs_commit_super(sbi, false);
+		f2fs_err(sbi, "f2fs write checkpoint failed %d", err);
 	}
 recover_out:
 	clear_sbi_flag(sbi, SBI_IS_RESIZEFS);
 	if (err) {
-		set_sbi_flag(sbi, SBI_NEED_FSCK);
-		f2fs_err(sbi, "resize_fs failed, should run fsck to repair!");
+		if (err != -EAGAIN) {
+			set_sbi_flag(sbi, SBI_NEED_FSCK);
+			f2fs_err(sbi, "resize_fs failed, should run fsck to repair!");
+		}
 
 		spin_lock(&sbi->stat_lock);
 		sbi->user_block_count += shrunk_blocks;

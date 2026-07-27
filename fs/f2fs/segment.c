@@ -2387,6 +2387,12 @@ static bool __mark_sit_entry_dirty(struct f2fs_sb_info *sbi, unsigned int segno)
 {
 	struct sit_info *sit_i = SIT_I(sbi);
 
+	if (segno >= MAIN_SEGS(sbi)) {
+		f2fs_err_ratelimited(sbi, "[DDP] %s segno: %u >= MAIN_SEGS: %u\n",
+			__func__, segno, (unsigned int)MAIN_SEGS(sbi));
+		f2fs_bug_on(sbi, 1);
+	}
+
 	if (!__test_and_set_bit(segno, sit_i->dirty_sentries_bitmap)) {
 		sit_i->dirty_sentries++;
 		return false;
@@ -4756,16 +4762,18 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 	struct list_head *head = &SM_I(sbi)->sit_entry_set;
 	bool to_journal = !is_sbi_flag_set(sbi, SBI_IS_RESIZEFS);
 	struct seg_entry *se;
+	unsigned int main_segs;
 
 	down_write(&sit_i->sentry_lock);
 
-	if (!sit_i->dirty_sentries)
+	if (!sit_i->dirty_sentries && to_journal)
 		goto out;
 
 	/*
 	 * add and account sit entries of dirty bitmap in sit entry
 	 * set temporarily
 	 */
+	main_segs = (unsigned int)MAIN_SEGS(sbi);
 	add_sits_in_set(sbi);
 
 	/*
@@ -4789,6 +4797,12 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 		unsigned int end = min(start_segno + SIT_ENTRY_PER_BLOCK,
 						(unsigned long)MAIN_SEGS(sbi));
 		unsigned int segno = start_segno;
+
+		if (main_segs != (unsigned int)MAIN_SEGS(sbi)) {
+			f2fs_err_ratelimited(sbi, "[DDP] main_segs: %u != MAIN_SEGS: %u\n",
+					main_segs, (unsigned int)MAIN_SEGS(sbi));
+			f2fs_bug_on(sbi, 1);
+		}
 
 		if (to_journal &&
 			!__has_cursum_space(sbi, journal, ses->entry_cnt,
@@ -4823,6 +4837,11 @@ void f2fs_flush_sit_entries(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 				offset = f2fs_lookup_journal_in_cursum(sbi, journal,
 							SIT_JOURNAL, segno, 1);
 				f2fs_bug_on(sbi, offset < 0);
+				if (segno >= MAIN_SEGS(sbi)) {
+					f2fs_err_ratelimited(sbi, "[DDP] segno: %u >= MAIN_SEGS: %u\n",
+							segno, (unsigned int)MAIN_SEGS(sbi));
+					f2fs_bug_on(sbi, 1);
+				}
 				segno_in_journal(journal, offset) =
 							cpu_to_le32(segno);
 				seg_info_to_raw_sit(se,
