@@ -315,6 +315,7 @@ config DM_CRYPT
 
 	  If unsure, say N.
 
+<<<<<<< HEAD   (40589f2181c3dae20e7b1cef3f8c4f00dd362ca5 Merge ba9c792c824f ("Merge tag 'for-7.2/block-20260615' of g)
 config DM_DEFAULT_KEY
 	tristate "Default-key target support"
 	depends on BLK_DEV_DM
@@ -335,6 +336,19 @@ config DM_DEFAULT_KEY
 	  configuration is tightly controlled, like it is in Android,
 	  such that all fscrypt keys are at least as hard to compromise
 	  as the default key.
+||||||| BASE   (ba9c792c824fff732df85119011d399d9b6d9155 Merge tag 'for-7.2/block-20260615' of git://git.kernel.org/p)
+=======
+config DM_INLINECRYPT
+	tristate "Inline encryption target support"
+	depends on BLK_DEV_DM
+	depends on (KEYS || KEYS=n)
+	depends on BLK_INLINE_ENCRYPTION
+	help
+	  This device-mapper target is similar to dm-crypt, but it uses the
+	  blk-crypto API instead of the regular crypto API. This allows it to
+	  take advantage of inline encryption hardware such as that commonly
+	  built into UFS host controllers.
+>>>>>>> BRANCH (b1cbabe84ca1381a004fb91ee1791a1a53bce44e Merge tag 'for-7.2/dm-changes' of git://git.kernel.org/pub/s)
 
 config DM_SNAPSHOT
        tristate "Snapshot target"

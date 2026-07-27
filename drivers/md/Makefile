@@ -55,7 +55,12 @@ obj-$(CONFIG_DM_UNSTRIPED)	+= dm-unstripe.o
 obj-$(CONFIG_DM_BUFIO)		+= dm-bufio.o
 obj-$(CONFIG_DM_BIO_PRISON)	+= dm-bio-prison.o
 obj-$(CONFIG_DM_CRYPT)		+= dm-crypt.o
+<<<<<<< HEAD   (40589f2181c3dae20e7b1cef3f8c4f00dd362ca5 Merge ba9c792c824f ("Merge tag 'for-7.2/block-20260615' of g)
 obj-$(CONFIG_DM_DEFAULT_KEY)	+= dm-default-key.o
+||||||| BASE   (ba9c792c824fff732df85119011d399d9b6d9155 Merge tag 'for-7.2/block-20260615' of git://git.kernel.org/p)
+=======
+obj-$(CONFIG_DM_INLINECRYPT)	+= dm-inlinecrypt.o
+>>>>>>> BRANCH (b1cbabe84ca1381a004fb91ee1791a1a53bce44e Merge tag 'for-7.2/dm-changes' of git://git.kernel.org/pub/s)
 obj-$(CONFIG_DM_DELAY)		+= dm-delay.o
 obj-$(CONFIG_DM_DUST)		+= dm-dust.o
 obj-$(CONFIG_DM_FLAKEY)		+= dm-flakey.o
