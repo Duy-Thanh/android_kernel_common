@@ -21,8 +21,11 @@
 #include <asm/cputype.h>
 #include <asm/daifflags.h>
 #include <asm/debug-monitors.h>
+#include <asm/kgdb.h>
+#include <asm/kprobes.h>
 #include <asm/system_misc.h>
 #include <asm/traps.h>
+#include <asm/uprobes.h>
 
 /* Determine debug architecture. */
 u8 debug_monitors_arch(void)
@@ -303,22 +306,48 @@ EXPORT_SYMBOL_GPL(unregister_kernel_break_hook);
 
 static int call_break_hook(struct pt_regs *regs, unsigned long esr)
 {
-	struct break_hook *hook;
-	struct list_head *list;
-	int (*fn)(struct pt_regs *regs, unsigned long esr) = NULL;
-
-	list = user_mode(regs) ? &user_break_hook : &kernel_break_hook;
-
-	/*
-	 * Since brk exception disables interrupt, this function is
-	 * entirely not preemptible, and we can use rcu list safely here.
-	 */
-	list_for_each_entry_rcu(hook, list, node) {
-		if ((esr_brk_comment(esr) & ~hook->mask) == hook->imm)
-			fn = hook->fn;
+	if (user_mode(regs)) {
+		if (IS_ENABLED(CONFIG_UPROBES) &&
+			esr_brk_comment(esr) == UPROBES_BRK_IMM)
+			return uprobe_brk_handler(regs, esr);
+		return DBG_HOOK_ERROR;
 	}
 
-	return fn ? fn(regs, esr) : DBG_HOOK_ERROR;
+	if (esr_brk_comment(esr) == BUG_BRK_IMM)
+		return bug_brk_handler(regs, esr);
+
+	if (IS_ENABLED(CONFIG_CFI_CLANG) && esr_is_cfi_brk(esr))
+		return cfi_brk_handler(regs, esr);
+
+	if (esr_brk_comment(esr) == FAULT_BRK_IMM)
+		return reserved_fault_brk_handler(regs, esr);
+
+	if (IS_ENABLED(CONFIG_KASAN_SW_TAGS) &&
+		(esr_brk_comment(esr) & ~KASAN_BRK_MASK) == KASAN_BRK_IMM)
+		return kasan_brk_handler(regs, esr);
+
+	if (IS_ENABLED(CONFIG_UBSAN_TRAP) && esr_is_ubsan_brk(esr))
+		return ubsan_brk_handler(regs, esr);
+
+	if (IS_ENABLED(CONFIG_KGDB)) {
+		if (esr_brk_comment(esr) == KGDB_DYN_DBG_BRK_IMM)
+			return kgdb_brk_handler(regs, esr);
+		if (esr_brk_comment(esr) == KGDB_COMPILED_DBG_BRK_IMM)
+			return kgdb_compiled_brk_handler(regs, esr);
+	}
+
+	if (IS_ENABLED(CONFIG_KPROBES)) {
+		if (esr_brk_comment(esr) == KPROBES_BRK_IMM)
+			return kprobe_brk_handler(regs, esr);
+		if (esr_brk_comment(esr) == KPROBES_BRK_SS_IMM)
+			return kprobe_ss_brk_handler(regs, esr);
+	}
+
+	if (IS_ENABLED(CONFIG_KRETPROBES) &&
+		esr_brk_comment(esr) == KRETPROBES_BRK_IMM)
+		return kretprobe_brk_handler(regs, esr);
+
+	return DBG_HOOK_ERROR;
 }
 NOKPROBE_SYMBOL(call_break_hook);
 
@@ -339,7 +368,7 @@ static int brk_handler(unsigned long unused, unsigned long esr,
 }
 NOKPROBE_SYMBOL(brk_handler);
 
-int aarch32_break_handler(struct pt_regs *regs)
+bool try_handle_aarch32_break(struct pt_regs *regs)
 {
 	u32 arm_instr;
 	u16 thumb_instr;
@@ -347,7 +376,7 @@ int aarch32_break_handler(struct pt_regs *regs)
 	void __user *pc = (void __user *)instruction_pointer(regs);
 
 	if (!compat_user_mode(regs))
-		return -EFAULT;
+		return false;
 
 	if (compat_thumb_mode(regs)) {
 		/* get 16-bit Thumb instruction */
@@ -371,12 +400,12 @@ int aarch32_break_handler(struct pt_regs *regs)
 	}
 
 	if (!bp)
-		return -EFAULT;
+		return false;
 
 	send_user_sigtrap(TRAP_BRKPT);
-	return 0;
+	return true;
 }
-NOKPROBE_SYMBOL(aarch32_break_handler);
+NOKPROBE_SYMBOL(try_handle_aarch32_break);
 
 void __init debug_traps_init(void)
 {
