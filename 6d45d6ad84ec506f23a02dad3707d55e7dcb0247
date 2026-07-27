@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d517cdd_687ba2da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-27T12:20:31Z",
+      "side": 1,
+      "message": "Breaks KMI without a cherry-pick of aosp/4073961",
+      "revId": "6d45d6ad84ec506f23a02dad3707d55e7dcb0247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
