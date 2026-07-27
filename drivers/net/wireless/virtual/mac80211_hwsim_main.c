@@ -226,6 +226,7 @@ struct hwsim_vif_priv {
 	bool assoc;
 	bool bcn_en;
 	u16 aid;
+	u8 addr[ETH_ALEN];
 };
 
 #define HWSIM_VIF_MAGIC	0x69537748
@@ -1265,7 +1266,7 @@ static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
 	struct ieee80211_bss_conf *conf;
 
 	conf = link_conf_dereference_protected(vif, data->link_data[0].link_id);
-	if (conf && !conf->enable_beacon)
+	if (vif->type != NL80211_IFTYPE_NAN && conf && !conf->enable_beacon)
 		return;
 
 	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
@@ -2084,14 +2085,19 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 			ether_addr_copy(data->nan.random_mac, hdr->addr2);
 		}
 
-		mac80211_hwsim_nan_get_tx_chandef(hw, &chandef);
-		if (WARN_ON(!chandef.chan)) {
-			/* No valid channel in current slot, drop frame */
-			ieee80211_free_txskb(hw, skb);
-			return;
+		if (data->tmp_chan) {
+			channel = data->tmp_chan;
+			confbw = NL80211_CHAN_WIDTH_20_NOHT;
+		} else {
+			mac80211_hwsim_nan_get_tx_chandef(hw, &chandef);
+			if (WARN_ON(!chandef.chan)) {
+				/* No valid channel in current slot, drop frame */
+				ieee80211_free_txskb(hw, skb);
+				return;
+			}
+			channel = chandef.chan;
+			confbw = chandef.width;
 		}
-		channel = chandef.chan;
-		confbw = chandef.width;
 
 		if (data->tmp_chan && !hwsim_chans_compat(channel, data->tmp_chan)) {
 			/* Off-channel on different channel, drop silently */
@@ -2279,10 +2285,12 @@ static void mac80211_hwsim_stop(struct ieee80211_hw *hw, bool suspend)
 static int mac80211_hwsim_add_interface(struct ieee80211_hw *hw,
 					struct ieee80211_vif *vif)
 {
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
 	wiphy_dbg(hw->wiphy, "%s (type=%d mac_addr=%pM)\n",
 		  __func__, ieee80211_vif_type_p2p(vif),
 		  vif->addr);
 	hwsim_set_magic(vif);
+	ether_addr_copy(vp->addr, vif->addr);
 
 	if (vif->type != NL80211_IFTYPE_MONITOR)
 		mac80211_hwsim_config_mac_nl(hw, vif->addr, true);
@@ -6428,8 +6436,14 @@ static int hwsim_cloned_frame_received_nl(struct sk_buff *skb_2,
 	memset(&rx_status, 0, sizeof(rx_status));
 	if (info->attrs[HWSIM_ATTR_TIMESTAMP]) {
 		u64 timestamp = nla_get_u64(info->attrs[HWSIM_ATTR_TIMESTAMP]);
-		scoped_guard(spinlock_bh, &data2->tsf_offset_lock)
-			rx_status.mactime = timestamp + data2->tsf_offset;
+		scoped_guard(spinlock_bh, &data2->tsf_offset_lock) {
+			if (!data2->host_guest_offset_calculated) {
+				u64 guest_now = ktime_to_us(ktime_get_boottime());
+				data2->host_guest_offset = timestamp - guest_now;
+				data2->host_guest_offset_calculated = true;
+			}
+			rx_status.mactime = timestamp - data2->host_guest_offset + data2->tsf_offset;
+		}
 		rx_status.flag |= RX_FLAG_MACTIME_START;
 	}
 	if (info->attrs[HWSIM_ATTR_FREQ]) {
@@ -7415,6 +7429,65 @@ static inline void hwsim_unregister_virtio_driver(void)
 }
 #endif
 
+static int hwsim_netdev_event(struct notifier_block *nb,
+			      unsigned long event, void *ptr)
+{
+	struct net_device *dev = netdev_notifier_info_to_dev(ptr);
+	struct wireless_dev *wdev;
+	struct ieee80211_vif *vif;
+	struct hwsim_vif_priv *vp;
+	struct ieee80211_hw *hw;
+	struct mac80211_hwsim_data *data;
+	bool is_hwsim = false;
+
+	if (event != NETDEV_CHANGEADDR)
+		return NOTIFY_DONE;
+
+	wdev = dev->ieee80211_ptr;
+	if (!wdev || !wdev->wiphy)
+		return NOTIFY_DONE;
+
+	spin_lock_bh(&hwsim_radio_lock);
+	list_for_each_entry(data, &hwsim_radios, list) {
+		if (data->hw->wiphy == wdev->wiphy) {
+			is_hwsim = true;
+			break;
+		}
+	}
+	spin_unlock_bh(&hwsim_radio_lock);
+
+	if (!is_hwsim)
+		return NOTIFY_DONE;
+
+	hw = data->hw;
+	vif = wdev_to_ieee80211_vif(wdev);
+	if (!vif)
+		return NOTIFY_DONE;
+	vp = (struct hwsim_vif_priv *)vif->drv_priv;
+
+	if (WARN_ON(vp->magic != HWSIM_VIF_MAGIC))
+		return NOTIFY_DONE;
+
+	if (vif->type == NL80211_IFTYPE_MONITOR)
+		return NOTIFY_DONE;
+
+	if (!ether_addr_equal(vp->addr, dev->dev_addr)) {
+		pr_debug("mac80211_hwsim: MAC address changed for %s: %pM -> %pM\n",
+			 dev->name, vp->addr, dev->dev_addr);
+		if (is_valid_ether_addr(vp->addr))
+			mac80211_hwsim_config_mac_nl(hw, vp->addr, false);
+		if (is_valid_ether_addr(dev->dev_addr))
+			mac80211_hwsim_config_mac_nl(hw, dev->dev_addr, true);
+		ether_addr_copy(vp->addr, dev->dev_addr);
+	}
+
+	return NOTIFY_OK;
+}
+
+static struct notifier_block hwsim_netdev_notifier = {
+	.notifier_call = hwsim_netdev_event,
+};
+
 static int __init init_mac80211_hwsim(void)
 {
 	int i, err;
@@ -7560,8 +7633,14 @@ static int __init init_mac80211_hwsim(void)
 	}
 	rtnl_unlock();
 
+	err = register_netdevice_notifier(&hwsim_netdev_notifier);
+	if (err)
+		goto out_unregister_mon;
+
 	return 0;
 
+out_unregister_mon:
+	unregister_netdev(hwsim_mon);
 out_free_mon:
 	free_netdev(hwsim_mon);
 out_free_radios:
@@ -7583,6 +7662,8 @@ module_init(init_mac80211_hwsim);
 static void __exit exit_mac80211_hwsim(void)
 {
 	pr_debug("mac80211_hwsim: unregister radios\n");
+
+	unregister_netdevice_notifier(&hwsim_netdev_notifier);
 
 	hwsim_unregister_virtio_driver();
 	hwsim_exit_netlink();
