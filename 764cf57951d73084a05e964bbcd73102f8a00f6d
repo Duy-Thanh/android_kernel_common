@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0369277c_c0ab92fc",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T13:30:31Z",
+      "side": 1,
+      "message": "nit: maybe better check this at the beginning together with the other basic sanity checks (i.e. `if (data-\u003eforce_snoop \u0026\u0026 !ecap_sc_support(iommu-\u003eecap)) return -EINVAL;`), since this check doesn\u0027t require the domain?",
+      "fixSuggestions": [
+        {
+          "fixId": "2b22b54c_b832b41e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (data-\u003eforce_snoop \u0026\u0026 !ecap_sc_support(iommu-\u003eecap)) {\n\t\tpkvm_err(\"%s: iommu%d does not support snoop control\\n\",\n\t\t\t __func__, iommu-\u003eseq_id);\n\t\treturn -EINVAL;\n\t}\n\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 340,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "\tif (data-\u003eforce_snoop)\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu_hc.c",
+              "range": {
+                "startLine": 347,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "764cf57951d73084a05e964bbcd73102f8a00f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
