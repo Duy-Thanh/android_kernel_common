@@ -61,6 +61,24 @@
       "message": "This is a hot path, right?\n\nWhereas uret MSRs, by design, are expected to never be changed by the host kernel after early boot, except for guest/host switches done by KVM (so in the pKVM case, they should never be changed by the host kernel after early boot at all)? Otherwise it would not be correct to restore them only before returning to userspace, not earlier?\n\nSo we should rather intercept host writes to these MSRs, to prevent the host from ever changing them?\n\nOtherwise, we do these expensive WRMSRs every time when entering the guest, which are almost always useless (since the host should never change these MSRs, and the guest also only rarely changes them)?\n\nI\u0027ve looked though occurrences of writes to all these MSRs (MSR_SYSCALL_MASK, MSR_LSTAR, MSR_CSTAR, MSR_EFER, MSR_TSC_AUX, MSR_STAR, MSR_IA32_TSX_CTRL) in the kernel code, and it looks like indeed they are only written during early boot before deprivileging (plus in cases like S3 resume, kexec and CPU hotplug, none of which are supported by pKVM).",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ec9aec_74ad5888",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T18:59:23Z",
+      "side": 1,
+      "message": "\u003e This is a hot path, right? ...\n\nYeah - good point, it is better to not do quite expensive wrmsrq every time since the value doesn\u0027t change to often (or at all after boot).\n\n\u003e I\u0027ve looked though occurrences of writes to all these MSRs (MSR_SYSCALL_MASK, MSR_LSTAR, MSR_CSTAR, MSR_EFER, MSR_TSC_AUX, MSR_STAR, MSR_IA32_TSX_CTRL) in the kernel code, and it looks like indeed they are only written during early boot before deprivileging (plus in cases like S3 resume, kexec and CPU hotplug, none of which are supported by pKVM).\n\nLocally I\u0027ve reworked it to intercept those MSRS and I see that they actually are written at early boot stage but after the deprivileging due to `kvm_probe_user_return_msr` (its actually called twice before depriviligeing and after due to `vmx_hardware_setup()`/`kvm_probe_user_return_msr` called twice as its need to initialize things for both pKVM-low and pKVM-high). So I will rework this patch to actually handle msr in `handle_write_msr` by allowing the physical write but updating `msrs-\u003evalues[slot].curr \u003d val;`",
+      "parentUuid": "75a01657_3f276e12",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
