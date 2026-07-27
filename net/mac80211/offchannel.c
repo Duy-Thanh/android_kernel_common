@@ -920,6 +920,8 @@ int ieee80211_mgmt_tx(struct wiphy *wiphy, struct wireless_dev *wdev,
 	} else if (sdata->vif.type == NL80211_IFTYPE_NAN ||
 		   sdata->vif.type == NL80211_IFTYPE_NAN_DATA) {
 		/* Frames can be sent during NAN schedule */
+		if (params->wait && local->ops->remain_on_channel)
+			need_offchan = true;
 	} else if (!need_offchan) {
 		struct ieee80211_chanctx_conf *chanctx_conf = NULL;
 		int i;
