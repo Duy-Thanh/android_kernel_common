@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b7ee70_4fb75176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T13:17:28Z",
+      "side": 1,
+      "message": "LGTM, modulo my minor remarks in https://android-review.googlesource.com/c/kernel/common/+/4076366/20/drivers/iommu/intel/pkvm/domain.c which imply some adjustments to this patch as well (i.e. if we decide to BUG_ON inside `pkvm_get_iommu_domain_noref()` on failure instead of expecting the caller to check it).",
+      "revId": "4ac0ffdfec4413699f0612a6e49769311e9a57f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
