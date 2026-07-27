@@ -16,6 +16,24 @@
       "message": "Breaks KMI without a cherry-pick of aosp/4073961",
       "revId": "6d45d6ad84ec506f23a02dad3707d55e7dcb0247",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167bdbba_0c923965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-27T15:08:01Z",
+      "side": 1,
+      "message": "We can\u0027t respin on this branch anymore because it is deprecated. I think this entire series has to be cancelled.",
+      "parentUuid": "6d517cdd_687ba2da",
+      "revId": "6d45d6ad84ec506f23a02dad3707d55e7dcb0247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
