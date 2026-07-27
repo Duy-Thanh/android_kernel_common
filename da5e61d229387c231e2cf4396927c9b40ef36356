@@ -52,6 +52,24 @@
       "parentUuid": "cb223344_439ed74b",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41027f2_59bed3f3",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T17:46:51Z",
+      "side": 0,
+      "message": "\u003e A racing teardown operation between intel_pasid_setup_first_level and cache_tag_assign_domain can cause the cache_tag_unassign_domain to not flush DEVTLB there by device retaining the stale entries in its devtlb.\n\nArgh, indeed... So, so long as we don\u0027t have an equivalent of iommu_group-\u003emutex, it seems we indeed have no better option than move cache_tag_assign_domain()/cache_tag_unassign_domain() back to those host driver\u0027s functions (in order to rely on iommu-\u003elock for things it was not meant for).\n\n\u003e We can probably bring back the ats_supported argument back for setup_fl/setup_sl and have pkvm_populate_dev_info_from_ce validate if the host provided values match the values derived from CE. That way, we need not move the cache tag logic to iommu.c/pasid.c\n\nSo it would be \"validate\", not \"populate\"?.. This doesn\u0027t sound better to me, only more intricate.",
+      "parentUuid": "c454fa7f_49fcb111",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
