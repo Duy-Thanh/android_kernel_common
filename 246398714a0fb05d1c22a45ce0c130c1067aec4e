@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4b17f7c_a6dcdfc1",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T14:19:04Z",
+      "side": 1,
+      "message": "Unresolving this comment just to make it visible. Please feel free to resolve (since this is not exactly about this patch).",
+      "parentUuid": "0561d3f1_95538413",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1344f7a6_71374e79",
         "filename": "arch/x86/kvm/pkvm/idt.c",
         "patchSetId": 3
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "I think you are right: currently we have no #UD extable use-cases in pKVM today. But keeping it as is seems safe for future use and has no risk of causing the spurious asynchronous fixup bug (NMI/vector 2) that this patch fixes.\n\nSo I think keeping it as is is ok, or you recommend to remove it for some other reason?",
       "parentUuid": "ce7c6cc6_bdd429bd",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43823fc2_6d329fae",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-27T14:19:04Z",
+      "side": 1,
+      "message": "I was thinking it might be worth removing it as a defense-in-depth, for cases when the hypervisor unexpectedly executes an undefined/unsupported instruction due to a bug in pKVM (so that we\u0027d better immediately panic in this case), and a malicious host exploits this bug and somehow manipulates the hypervisor so that it ends up doing this \"fixup\"...",
+      "parentUuid": "cb7faf97_311763e9",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
