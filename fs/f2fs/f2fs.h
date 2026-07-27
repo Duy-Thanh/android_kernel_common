@@ -1849,6 +1849,7 @@ struct f2fs_sb_info {
 	block_t last_valid_block_count;		/* for recovery */
 	block_t reserved_blocks;		/* configurable reserved blocks */
 	block_t current_reserved_blocks;	/* current reserved blocks */
+	block_t sec_reserved_blocks;		/* reserved blocks for sec */
 
 	/* Additional tracking for no checkpoint mode */
 	block_t unusable_block_count;		/* # of blocks saved by last cp */
@@ -2712,6 +2713,7 @@ static inline void dec_valid_block_count(struct f2fs_sb_info *sbi,
 						block_t count)
 {
 	blkcnt_t sectors = count << F2FS_LOG_SECTORS_PER_BLOCK;
+	block_t total_reserved_blocks;
 
 	spin_lock(&sbi->stat_lock);
 	if (unlikely(sbi->total_valid_block_count < count)) {
@@ -2722,9 +2724,10 @@ static inline void dec_valid_block_count(struct f2fs_sb_info *sbi,
 	} else {
 		sbi->total_valid_block_count -= count;
 	}
-	if (sbi->reserved_blocks &&
-		sbi->current_reserved_blocks < sbi->reserved_blocks)
-		sbi->current_reserved_blocks = min(sbi->reserved_blocks,
+	total_reserved_blocks = sbi->reserved_blocks + sbi->sec_reserved_blocks;
+	if (total_reserved_blocks &&
+		sbi->current_reserved_blocks < total_reserved_blocks)
+		sbi->current_reserved_blocks = min(total_reserved_blocks,
 					sbi->current_reserved_blocks + count);
 	spin_unlock(&sbi->stat_lock);
 	if (unlikely(inode->i_blocks < sectors)) {
@@ -2979,6 +2982,7 @@ enospc:
 static inline void dec_valid_node_count(struct f2fs_sb_info *sbi,
 					struct inode *inode, bool is_inode)
 {
+	block_t total_reserved_blocks;
 	spin_lock(&sbi->stat_lock);
 
 	if (unlikely(!sbi->total_valid_block_count ||
@@ -2992,8 +2996,9 @@ static inline void dec_valid_node_count(struct f2fs_sb_info *sbi,
 		sbi->total_valid_node_count--;
 	}
 
-	if (sbi->reserved_blocks &&
-		sbi->current_reserved_blocks < sbi->reserved_blocks)
+	total_reserved_blocks = sbi->reserved_blocks + sbi->sec_reserved_blocks;
+	if (total_reserved_blocks &&
+		sbi->current_reserved_blocks < total_reserved_blocks)
 		sbi->current_reserved_blocks++;
 
 	spin_unlock(&sbi->stat_lock);

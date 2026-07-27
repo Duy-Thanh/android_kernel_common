@@ -157,7 +157,8 @@ struct f2fs_super_block {
 	__le16  s_encoding_flags;	/* Filename charset encoding flags */
 	__u8 s_stop_reason[MAX_STOP_REASON];	/* stop checkpoint reason */
 	__u8 s_errors[MAX_F2FS_ERRORS];		/* reason of image corrupts */
-	__u8 reserved[258];		/* valid reserved region */
+	__u8 reserved[254];		/* valid reserved region */
+	__le32 sec_reserved_blocks;		/* save sec reserved block in sb */
 	__le32 crc;			/* checksum of superblock */
 } __packed;
 

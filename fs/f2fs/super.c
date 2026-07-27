@@ -505,7 +505,7 @@ static void f2fs_destroy_casefold_cache(void) { }
 static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
 {
 	block_t block_limit = min((sbi->user_block_count >> 3),
-			sbi->user_block_count - sbi->reserved_blocks);
+			sbi->user_block_count - sbi->reserved_blocks - sbi->sec_reserved_blocks);
 	block_t node_limit = sbi->total_node_count >> 3;
 
 	/* limit is 12.5% */
@@ -5149,6 +5149,10 @@ try_onemore:
 	sbi->current_reserved_blocks = 0;
 	limit_reserve_root(sbi);
 	adjust_unusable_cap_perc(sbi);
+
+	sbi->sec_reserved_blocks = le32_to_cpu(sbi->raw_super->sec_reserved_blocks);
+	sbi->current_reserved_blocks = min(sbi->reserved_blocks + sbi->sec_reserved_blocks,
+			sbi->user_block_count - valid_user_blocks(sbi));
 
 	f2fs_init_extent_cache_info(sbi);
 
