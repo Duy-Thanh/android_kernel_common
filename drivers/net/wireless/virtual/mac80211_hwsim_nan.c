@@ -1225,7 +1225,8 @@ void mac80211_hwsim_nan_get_tx_chandef(struct ieee80211_hw *hw,
 
 bool mac80211_hwsim_nan_receive(struct ieee80211_hw *hw,
 				struct ieee80211_channel *channel,
-				struct ieee80211_rx_status *rx_status)
+				struct ieee80211_rx_status *rx_status,
+				struct sk_buff *skb)
 {
 	struct mac80211_hwsim_data *data = hw->priv;
 	u8 slot;
@@ -1256,9 +1257,42 @@ bool mac80211_hwsim_nan_receive(struct ieee80211_hw *hw,
 	if (slot == SLOT_24GHZ_DW && channel->center_freq == 2437)
 		return true;
 
+	/* Relaxed check for late-arriving NAN Action frames due to clock drift (2.4 GHz) */
+	if (slot == (SLOT_24GHZ_DW + 1) && channel->center_freq == 2437 && skb) {
+		struct ieee80211_hdr *hdr = (void *)skb->data;
+		if (ieee80211_is_action(hdr->frame_control)) {
+			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
+			if (skb->len >= hdr_len + 6) {
+				u8 *payload = (u8 *)hdr + hdr_len;
+				if (payload[0] == 0x04 && payload[1] == 0x09 &&
+				    payload[2] == 0x50 && payload[3] == 0x6f && payload[4] == 0x9a &&
+				    (payload[5] == 0x18 || payload[5] == 0x13)) {
+					return true;
+				}
+			}
+		}
+	}
+
 	if (slot == SLOT_5GHZ_DW && data->nan.bands & BIT(NL80211_BAND_5GHZ) &&
 	    channel->center_freq == 5745)
 		return true;
+
+	/* Relaxed check for late-arriving NAN Action frames due to clock drift (5 GHz) */
+	if (slot == (SLOT_5GHZ_DW + 1) && data->nan.bands & BIT(NL80211_BAND_5GHZ) &&
+	    channel->center_freq == 5745 && skb) {
+		struct ieee80211_hdr *hdr = (void *)skb->data;
+		if (ieee80211_is_action(hdr->frame_control)) {
+			int hdr_len = ieee80211_hdrlen(hdr->frame_control);
+			if (skb->len >= hdr_len + 6) {
+				u8 *payload = (u8 *)hdr + hdr_len;
+				if (payload[0] == 0x04 && payload[1] == 0x09 &&
+				    payload[2] == 0x50 && payload[3] == 0x6f && payload[4] == 0x9a &&
+				    (payload[5] == 0x18 || payload[5] == 0x13)) {
+					return true;
+				}
+			}
+		}
+	}
 
 	/* Accept frames during FAW slots if chandef is compatible */
 	return hwsim_nan_rx_chandef_compatible(data, slot, channel,
