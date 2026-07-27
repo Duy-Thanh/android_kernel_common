@@ -87,6 +87,24 @@
       "parentUuid": "083f02d7_43464597",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7faf97_311763e9",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-27T14:04:11Z",
+      "side": 1,
+      "message": "I think you are right: currently we have no #UD extable use-cases in pKVM today. But keeping it as is seems safe for future use and has no risk of causing the spurious asynchronous fixup bug (NMI/vector 2) that this patch fixes.\n\nSo I think keeping it as is is ok, or you recommend to remove it for some other reason?",
+      "parentUuid": "ce7c6cc6_bdd429bd",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
