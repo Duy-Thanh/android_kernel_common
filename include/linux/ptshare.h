@@ -94,6 +94,37 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 
 	return &vma->__vm_ptshare_refcount;
 }
+
+/**
+ * ptdesc_get - Increment reference count on a page table descriptor
+ * @pt: The page table descriptor.
+ */
+static inline void ptdesc_get(struct ptdesc *pt)
+{
+	ptdesc_pmd_pts_inc(pt);
+}
+
+/**
+ * ptdesc_put - Decrement reference count on a page table descriptor
+ * @pt: The page table descriptor.
+ *
+ * Note: This only decrements the sharing count and does not free the page
+ * table page. The lifecycle of the page table page is managed by the
+ * ptshare infrastructure (which frees it when the shared mappings are torn down).
+ */
+static inline void ptdesc_put(struct ptdesc *pt)
+{
+	ptdesc_pmd_pts_dec(pt);
+}
+
+/**
+ * ptdesc_refcount - Return the reference count on a page table descriptor
+ * @pt: The page table descriptor.
+ */
+static inline int ptdesc_refcount(struct ptdesc *pt)
+{
+	return ptdesc_pmd_pts_count(pt);
+}
 #else /* !CONFIG_PTSHARE */
 static inline bool vma_is_ptshare_client(const struct vm_area_struct *vma)
 {
@@ -133,6 +164,19 @@ static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
 static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_struct *vma)
 {
 	return NULL;
+}
+
+static inline void ptdesc_get(struct ptdesc *pt)
+{
+}
+
+static inline void ptdesc_put(struct ptdesc *pt)
+{
+}
+
+static inline int ptdesc_refcount(struct ptdesc *pt)
+{
+	return 0;
 }
 #endif /* CONFIG_PTSHARE */
 
