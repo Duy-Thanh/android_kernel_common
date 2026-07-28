@@ -78,6 +78,41 @@
       "message": "If there is (unexpectedly) no slot, it is not a host\u0027s problem, it is rather a pKVM\u0027s problem?\n\nUnless, per my above comment, this vmexit unexpectedly happens while pKVM hasn\u0027t set up uret msrs yet (but then it would be still a serious problem in pKVM, not just in the host, since, per my above comment, it would be a race)?",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bcae5aa_8996d3a7",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-28T20:00:21Z",
+      "side": 1,
+      "message": "Do we need to add MSR_EFER here? Based on my limited understanding we enable `VM_ENTRY_LOAD_IA32_EFER`, `VM_EXIT_SAVE_IA32_EFER` and `VM_EXIT_LOAD_IA32_EFER` so pkvm saves host EFER  and loads hyp EFER on VEMXIT and loads the saved host EFER back on VMENTRY. So host cannot change the EFER as an attack surace?\n\nAlso intercepting this would mean that host doesn\u0027t see the write as VMENTRY reverts back to `GUEST_IA32_EFER` for host?",
+      "fixSuggestions": [
+        {
+          "fixId": "78eb9e93_8cb04d12",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
