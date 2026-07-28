@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2912fb4a_9f6435ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-28T20:26:04Z",
+      "side": 1,
+      "message": "why is this needed in android-mainline? Won\u0027t we pick this up via a merge?",
+      "revId": "d2168aca5d00a23532c63920285b5357b8bbd054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
