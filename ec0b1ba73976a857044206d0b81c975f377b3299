@@ -88,6 +88,24 @@
       "parentUuid": "82fb3002_31012131",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd91c88_c8a9de0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T08:52:13Z",
+      "side": 1,
+      "message": "Yeah, indeed. So this is yet another proof that this patch is not a good idea.",
+      "parentUuid": "93aed342_55c7a2d8",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
