@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8365a3c_dc3775da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-07-28T00:12:28Z",
+      "side": 1,
+      "message": "LGTM.  At some point we should consider reimplementing the default-key target within the dm-inlinecrypt.c file (which would allow a lot of code to be shared, reducing the diff from upstream), but we\u0027d need to be careful not to introduce any regressions.",
+      "revId": "34245e342431e3ff018a67417c9e472615294d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
