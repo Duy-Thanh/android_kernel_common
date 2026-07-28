@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2411a987_6220e5e7",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T16:05:12Z",
+      "side": 1,
+      "message": "With the new version of this patch it is not needed anymore so marking this comment as resolved.",
+      "parentUuid": "c43c8896_47e574d2",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75a01657_3f276e12",
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "Yeah, I agree. Greg\u0027s plan doesn\u0027t seem more problematic or more complex.",
       "parentUuid": "56b55fe8_0546dc2a",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eefca029_8f06d642",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T16:05:12Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch. PTAL",
+      "parentUuid": "c10f2ddb_2dd5a9d0",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
