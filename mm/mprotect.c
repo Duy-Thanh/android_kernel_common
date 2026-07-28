@@ -27,6 +27,7 @@
 #include <linux/migrate.h>
 #include <linux/perf_event.h>
 #include <linux/pkeys.h>
+#include <linux/ptshare.h>
 #include <linux/ksm.h>
 #include <linux/uaccess.h>
 #include <linux/mm_inline.h>
@@ -771,6 +772,21 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
 	if (newflags == oldflags) {
 		*pprev = vma;
 		return 0;
+	}
+
+	if (unlikely(vma_shares_pagetables(vma))) {
+		vma_start_write(vma);
+		error = ptshare_unshare_vma_locked(vma);
+		if (error)
+			return error;
+		/*
+		 * ptshare_unshare_vma_locked() transitions the VMA to private
+		 * and clears VM_PT_SHARED in vma->vm_flags.
+		 *
+		 * We must also clear it from newflags locally to prevent
+		 * restoring it later in this function.
+		 */
+		newflags &= ~VM_PT_SHARED;
 	}
 
 	/*
