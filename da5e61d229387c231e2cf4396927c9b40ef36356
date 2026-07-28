@@ -142,6 +142,24 @@
       "parentUuid": "97b5af25_90f5e020",
       "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4aae78f_ea359a46",
+        "filename": "drivers/iommu/intel/pkvm/iommu_hc.c",
+        "patchSetId": 28
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T11:35:43Z",
+      "side": 0,
+      "message": "LGTM.",
+      "parentUuid": "7eb34e27_a8141750",
+      "revId": "da5e61d229387c231e2cf4396927c9b40ef36356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
