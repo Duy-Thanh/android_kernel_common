@@ -66,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "034fc0b0_4384deb0",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T17:45:12Z",
+      "side": 1,
+      "message": "Don\u0027t we still want to prevent the host from unexpectedly triggering `kvm_user_return_msr_cpu_online()` at any moment at runtime?\n\nIt still seems worth fixing (maybe in a separate patch)?",
+      "parentUuid": "2411a987_6220e5e7",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75a01657_3f276e12",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 7
