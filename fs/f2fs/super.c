@@ -8,6 +8,7 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/fs.h>
+#include <linux/buffer_head.h>
 #include <linux/fs_context.h>
 #include <linux/sched/mm.h>
 #include <linux/statfs.h>
@@ -502,6 +503,86 @@ static int __init f2fs_create_casefold_cache(void) { return 0; }
 static void f2fs_destroy_casefold_cache(void) { }
 #endif
 
+void f2fs_set_sb_extra_flag(struct f2fs_sb_info *sbi, int flag)
+{
+	struct f2fs_super_block *fsb = sbi->raw_super;
+	unsigned long long extra_flag_blk_no = le32_to_cpu(fsb->cp_blkaddr) - 1;
+
+	struct buffer_head *bh;
+	struct f2fs_sb_extra_flag_blk *extra_blk;
+
+	if (extra_flag_blk_no < 2) {
+		// 0 -> SB 0, 1 -> SB 1,
+		// 2 or more : RSVD
+		f2fs_warn(sbi, "extra_flag: No free blks for extra flags");
+		return;
+	}
+
+	bh = sb_bread(sbi->sb, (sector_t)extra_flag_blk_no);
+	if (!bh) {
+		f2fs_warn(sbi, "extra_flag: Fail to allocate buffer_head");
+		return;
+	}
+
+	lock_buffer(bh);
+	extra_blk = (struct f2fs_sb_extra_flag_blk *)bh->b_data;
+
+	switch (flag) {
+	case F2FS_SEC_EXTRA_FSCK_MAGIC:
+		if (extra_blk->need_fsck ==
+				cpu_to_le32(F2FS_SEC_EXTRA_FSCK_MAGIC))
+			goto out_unlock;
+
+		extra_blk->need_fsck = cpu_to_le32(F2FS_SEC_EXTRA_FSCK_MAGIC);
+		break;
+	default:
+		f2fs_warn(sbi, "extra_flag: Undefined flag - %x", flag);
+		goto out_unlock;
+	}
+
+	set_buffer_uptodate(bh);
+	set_buffer_dirty(bh);
+	unlock_buffer(bh);
+
+	if (__sync_dirty_buffer(bh, REQ_SYNC | REQ_FUA))
+		f2fs_warn(sbi, "extra_flag: EIO");
+
+	brelse(bh);
+
+	return;
+
+out_unlock:
+	unlock_buffer(bh);
+	brelse(bh);
+}
+
+void f2fs_get_fsck_stat(struct f2fs_sb_info *sbi)
+{
+	struct f2fs_super_block *fsb = sbi->raw_super;
+	unsigned long long extra_flag_blk_no = le32_to_cpu(fsb->cp_blkaddr) - 1;
+
+	struct buffer_head *bh;
+	struct f2fs_sb_extra_flag_blk *extra_blk;
+	int type;
+
+	if (extra_flag_blk_no < 2) {
+		f2fs_warn(sbi, "extra_flag: No free blks for extra flags");
+		return;
+	}
+
+	bh = sb_bread(sbi->sb, (sector_t)extra_flag_blk_no);
+	if (!bh) {
+		f2fs_warn(sbi, "extra_flag: Fail to allocate buffer_head");
+		return;
+	}
+
+	extra_blk = (struct f2fs_sb_extra_flag_blk *)bh->b_data;
+
+	for (type = 0; type < NR_DDP_STAT_TYPE; type++)
+		sbi->sec_ddp_stat.ddp_stats[type] = le32_to_cpu(extra_blk->ddp_stats[type]);
+
+	brelse(bh);
+}
 static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
 {
 	block_t block_limit = min((sbi->user_block_count >> 3),
