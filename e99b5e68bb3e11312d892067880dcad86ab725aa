@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac91f2ba_e740aa41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2026-07-28T09:04:46Z",
+      "side": 1,
+      "message": "I haveI saw there was a KernelCommit, and after cherry-picking it again, the error disappeared. Please help re-approve and merge it",
+      "revId": "e99b5e68bb3e11312d892067880dcad86ab725aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
