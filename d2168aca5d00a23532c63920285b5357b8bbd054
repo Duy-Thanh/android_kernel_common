@@ -16,6 +16,24 @@
       "message": "why is this needed in android-mainline? Won\u0027t we pick this up via a merge?",
       "revId": "d2168aca5d00a23532c63920285b5357b8bbd054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6051829_3e2e9f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-28T20:45:52Z",
+      "side": 1,
+      "message": "Because without it we crash during the builds. e.g.:\n```\nRROR: [...]/common/BUILD.bazel:200:14: Building kernel //common:kernel_aarch64 failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nSegmentation fault (core dumped)\nFailed to generate BTF for vmlinux\n```",
+      "parentUuid": "2912fb4a_9f6435ba",
+      "revId": "d2168aca5d00a23532c63920285b5357b8bbd054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
