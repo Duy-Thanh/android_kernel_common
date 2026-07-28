@@ -100,7 +100,14 @@ _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
     "drivers/char/hw_random/cctrng.ko",
+<<<<<<< HEAD   (a23f12ec43a4f223c5674440647081b50483dcb9 FROMGIT: misc: open-dice: add ACPI device discovery support)
     "drivers/perf/dwc_pcie_pmu.ko",
+||||||| BASE   (0010c9c3e516e3c192e8ba6109f4ddeaf2edf3df FROMGIT: misc: open-dice: add ACPI device discovery support)
+    "drivers/misc/open-dice.ko",
+    "drivers/ptp/ptp_kvm.ko",
+=======
+    "drivers/ptp/ptp_kvm.ko",
+>>>>>>> CHANGE (c41d88fe4351d8b9318cef6856ca445956866d6a ANDROID: enable open-dice for x86_64 GKI)
 ]
 
 _X86_GKI_MODULES_LIST = [
