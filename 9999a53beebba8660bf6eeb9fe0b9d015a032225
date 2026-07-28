@@ -16,6 +16,24 @@
       "message": "Hello, \nHow we can check lint failure?",
       "revId": "9999a53beebba8660bf6eeb9fe0b9d015a032225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e18e2d05_79d9fd53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1972137
+      },
+      "writtenOn": "2026-07-28T05:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a65b832_73440363",
+      "revId": "9999a53beebba8660bf6eeb9fe0b9d015a032225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
