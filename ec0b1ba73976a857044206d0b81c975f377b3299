@@ -106,6 +106,24 @@
       "parentUuid": "93aed342_55c7a2d8",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "013c1cb8_c4b3852c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T16:06:37Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve dropped this one",
+      "parentUuid": "2cd91c88_c8a9de0f",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
