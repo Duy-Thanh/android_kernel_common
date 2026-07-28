@@ -450,6 +450,12 @@ void __init smp_cpus_done(unsigned int max_cpus)
 	mark_linear_text_alias_ro();
 }
 
+static void __init set_boot_cpu_offset(void)
+{
+	asm volatile("msr tpidr_el1, %0"
+			:: "r" (per_cpu_offset(0)) : "memory");
+}
+
 void __init smp_prepare_boot_cpu(void)
 {
 	/*
@@ -457,7 +463,7 @@ void __init smp_prepare_boot_cpu(void)
 	 * setup_per_cpu_areas(), and CPU0's boot time per-cpu area will be
 	 * freed shortly, so we must move over to the runtime per-cpu area.
 	 */
-	set_my_cpu_offset(per_cpu_offset(smp_processor_id()));
+	set_boot_cpu_offset();
 
 	cpuinfo_store_boot_cpu();
 	setup_boot_cpu_features();
