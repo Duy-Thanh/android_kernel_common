@@ -18,6 +18,7 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/bluetooth/hci_uart.ko",
     "drivers/char/virtio_console.ko",
     "drivers/gnss/gnss.ko",
+    "drivers/misc/open-dice.ko",
     "drivers/misc/vcpu_stall_detector.ko",
     "drivers/net/can/dev/can-dev.ko",
     "drivers/net/can/slcan/slcan.ko",
@@ -104,7 +105,6 @@ _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/android/wonder/wonder.ko",
     "drivers/char/hw_random/cctrng.ko",
-    "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
 ]
 
