@@ -22,6 +22,7 @@
 #include <linux/security.h>
 #include <linux/syscalls.h>
 #include <linux/mmu_notifier.h>
+#include <linux/ptshare.h>
 #include <linux/uaccess.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/mempolicy.h>
@@ -1721,8 +1722,13 @@ static int check_prep_vma(struct vma_remap_struct *vrm)
 	if (old_len > vma->vm_end - addr)
 		return -EFAULT;
 
+	/*
+	 * If the size is not changing, we don't need to perform any of the
+	 * expansion checks. However, we still need to unshare shared page
+	 * tables if this is a move-only mremap.
+	 */
 	if (new_len == old_len)
-		return 0;
+		goto out_unshare;
 
 	/* We are expanding and the VMA is mlock()'d so we need to populate. */
 	if (vma->vm_flags & VM_LOCKED)
@@ -1742,6 +1748,15 @@ static int check_prep_vma(struct vma_remap_struct *vrm)
 
 	if (!may_expand_vm(mm, vma->vm_flags, vrm->delta >> PAGE_SHIFT))
 		return -ENOMEM;
+
+out_unshare:
+	if (unlikely(vma_shares_pagetables(vma))) {
+		vma_start_write(vma);
+		int err = ptshare_unshare_vma_locked(vma);
+
+		if (err)
+			return err;
+	}
 
 	return 0;
 }
