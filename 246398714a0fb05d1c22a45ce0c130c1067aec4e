@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc3666b2_79501d3f",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T18:50:08Z",
+      "side": 1,
+      "message": "Ah, I recalled: in this attack scenario, there is no actual #GP at all, there is NMI generated exactly at the moment when pKVM accesses MSR_KERNEL_GS_BASE, - and since we still have an extable entry for it, pKVM is tricked that an exception was triggered by an MSR access and needs to be fixed up.\n\nSo, my point was: if we didn\u0027t fix up non-safe MSR accesses, this particular attack would be mitigated in the sense that it would only cause an immediate panic (a DoS), since pKVM accesses MSR_KERNEL_GS_BASE non-safely.\n\n\u003e To cause panic, we can just remove the fixup support for EX_TYPE_WRMSR/EX_TYPE_RDMSR.\n\nGood point, it seems we could do that instead of an explicit panic on safe\u003dfalse here.",
+      "parentUuid": "9d5e0ec6_de742414",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1344f7a6_71374e79",
         "filename": "arch/x86/kvm/pkvm/idt.c",
         "patchSetId": 3
