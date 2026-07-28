@@ -70,6 +70,24 @@
       "parentUuid": "798ec819_ad8f1395",
       "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93aed342_55c7a2d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T07:51:04Z",
+      "side": 1,
+      "message": "\u003eCould you elaborate what other functions in x86.c (or any other KVM file) besides kvm_load_guest_xsave_state()/kvm_load_host_xsave_state() that are reused by pKVM use guest_state_protected? I haven\u0027t found any.\n\nFound that an inline function is_64_bit_mode() is used by pKVM, so it is not so obvious. Maybe we will re-use more KVM\u0027s code in the future.",
+      "parentUuid": "82fb3002_31012131",
+      "revId": "ec0b1ba73976a857044206d0b81c975f377b3299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
