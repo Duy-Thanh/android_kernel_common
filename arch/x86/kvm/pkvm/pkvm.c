@@ -77,9 +77,15 @@ static struct pkvm_x86_ops pkvm_x86_ops __read_mostly;
 static int __pkvm_vcpu_free(struct pkvm_vm *pkvm_vm, int vcpu_handle,
 			    struct pkvm_memcache *mc);
 
+static DEFINE_PER_CPU(bool, virtualization_enabled);
+
 static int pkvm_enable_virtualization_cpu(void)
 {
+	if (this_cpu_read(virtualization_enabled))
+		return -EBUSY;
+
 	kvm_user_return_msr_cpu_online();
+	this_cpu_write(virtualization_enabled, true);
 
 	return kvm_x86_call(enable_virtualization_cpu)();
 }
