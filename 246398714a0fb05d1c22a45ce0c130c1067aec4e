@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d5e0ec6_de742414",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T18:21:59Z",
+      "side": 1,
+      "message": "\u003e Regarding the attack scenario you mentioned, had some impression but not fully clear. It looks like this attack is caused by pKVM handling the non-safe MSR accessing MSR_KERNEL_GS_BASE, while this MSR is actually not supported by the platform?\n\nIt is about the scenario described in Greg\u0027s commit message (reported by the AI).\n\n\u003e while this MSR is actually not supported by the platform?\n\nHmm, good point, so this particular MSR_KERNEL_GS_BASE attack scenario seems not very realistic. :) \n\nSo, reformulating my point: panic instead of fixup on non-safe MSR access would help to catch possible bugs when pKVM should use safe variants (since the MSR may not be supported on some platforms) but uses non-safe ones.",
+      "parentUuid": "f748db97_4bb9ef55",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1344f7a6_71374e79",
         "filename": "arch/x86/kvm/pkvm/idt.c",
         "patchSetId": 3
