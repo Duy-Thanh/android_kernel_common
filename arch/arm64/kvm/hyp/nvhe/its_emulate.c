@@ -1231,11 +1231,25 @@ static void invlpir_write(struct pkvm_moveable_reg *region, u64 offset,
 	writeq_relaxed(value, addr);
 }
 
+static void invallr_write(struct pkvm_moveable_reg *region, u64 offset,
+			  u64 value)
+{
+	void __iomem *addr = __hyp_va(region->start + GICR_INVALLR);
+
+	/* VLPIs are currently not allowed */
+	if (FIELD_GET(GICR_INVALLR_V, value))
+		return;
+
+	/* Don't use the priv_state for pre init  */
+	writeq_relaxed(value, addr);
+}
+
 static struct emu_handler redist_handlers[] = {
 	EMU_REG(GICR_CTLR, sizeof(u32), redist_ctlr_write, redist_ctlr_read),
 	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
 	EMU_REG(GICR_PENDBASER, sizeof(u64), pendbaser_write, pendbaser_read),
 	EMU_REG(GICR_INVLPIR, sizeof(u64), invlpir_write, read_as_zero),
+	EMU_REG(GICR_INVALLR, sizeof(u64), invallr_write, read_as_zero),
 	{},
 };
 
@@ -1249,6 +1263,7 @@ static struct emu_handler redist_handlers_pre_init[] = {
 	EMU_REG_RAZ_WI(GICR_PROPBASER, sizeof(u64)),
 	EMU_REG_RAZ_WI(GICR_PENDBASER, sizeof(u64)),
 	EMU_REG(GICR_INVLPIR, sizeof(u64), invlpir_write, read_as_zero),
+	EMU_REG(GICR_INVALLR, sizeof(u64), invallr_write, read_as_zero),
 	{},
 };
 
