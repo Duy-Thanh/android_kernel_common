@@ -34,6 +34,24 @@
       "parentUuid": "182a9036_c6d9393c",
       "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4c9a0c_a4c85db9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-28T20:29:54Z",
+      "side": 1,
+      "message": "No strong suggestions, as I\u0027ve not looked in detail.\n\nPossibly for the function definitions, you could do something like\n```\n- void funcname(int arg1)\n+ void __funcname(int arg1, bool sync)\n...\n+ void funcname(int arg1)\n+ {\n+     __funcname(arg1, false);\n+ }\n```\nTo preserve the function signature\n\nThen you only need to change the ones that are always true to use the new `__funcname(arg1, true)` call. \n\nI\u0027m a little confused around the `fuse_iqueue_ops` changes as well as the virtio_fs() changes as it adds the sync argument but then doesn\u0027t do anything with it. So maybe you can avoid making those changes?  But again I\u0027m not sure I fully understand the change.",
+      "parentUuid": "750d882d_73736bc8",
+      "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
