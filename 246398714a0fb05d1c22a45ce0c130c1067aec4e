@@ -195,6 +195,24 @@
       "parentUuid": "20b64c46_9bcb2c13",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d133e981_93bcca43",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T10:19:43Z",
+      "side": 1,
+      "message": "\u003e I was assuming that VMX root mode itself requires 64-bit mode. Am I wrong?\n\nNo, you are right. Just got what you mean. 😊\n\n\u003eMaybe this is too paranoid thinking. So if you think it\u0027s still better to keep supporting #UD fixup, I\u0027m ok with that.\n\nI am not against removing #UD if it is not used currently, just want to explain that the code will not blindly handle #UD, only the instruction sits in exception table will be handled. Actually I agree that, if there is no user for #UD, maybe removing it for now is better from the patch clean point of view, and add it when it is needed in the future.",
+      "parentUuid": "96afc921_8cd30ead",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
