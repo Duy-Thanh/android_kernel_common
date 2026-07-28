@@ -32,6 +32,7 @@ struct unlink_vma_file_batch {
  * vma munmap operation
  */
 struct vma_munmap_struct {
+	struct mm_struct *mm;
 	struct vma_iterator *vmi;
 	struct vm_area_struct *vma;     /* The first vma to munmap */
 	struct vm_area_struct *prev;    /* vma before the munmap area */
