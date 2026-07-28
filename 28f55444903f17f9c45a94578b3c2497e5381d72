@@ -115,6 +115,24 @@
       "parentUuid": "be294b9c_5c8fd441",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10f2ddb_2dd5a9d0",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T10:28:20Z",
+      "side": 1,
+      "message": "Yeah, I agree. Greg\u0027s plan doesn\u0027t seem more problematic or more complex.",
+      "parentUuid": "56b55fe8_0546dc2a",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
