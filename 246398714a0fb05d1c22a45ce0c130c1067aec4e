@@ -177,6 +177,24 @@
       "parentUuid": "43823fc2_6d329fae",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96afc921_8cd30ead",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T09:18:30Z",
+      "side": 1,
+      "message": "\u003e Per SDM, the VMX instruction can trigger #UD even in VMX is enabled. E.g.,\nIF (register operand) or (not in VMX operation) or (CR0.PE \u003d 0) or (RFLAGS.VM \u003d 1) or (IA32_EFER.LMA \u003d 1 and CS.L \u003d 0)\nTHEN #UD;\n\n\nI was assuming that VMX root mode itself requires 64-bit mode. Am I wrong?\n\n\u003e Fixup doesn\u0027t fix unconditionally. It will check if there is a fixup entry in the exception table.\n\nYes, but I was thinking that maybe the host could _somehow_ manipulate pKVM to execute it anyway (using, again, a bug in pKVM).\n\nMaybe this is too paranoid thinking. So if you think it\u0027s still better to keep supporting #UD fixup, I\u0027m ok with that.",
+      "parentUuid": "20b64c46_9bcb2c13",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
