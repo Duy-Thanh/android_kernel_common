@@ -17,6 +17,7 @@
 #include <linux/kvm_host.h>
 
 #include <asm/cpufeature.h>
+#include <asm/cpuid/api.h>
 #include <asm/debugreg.h>
 #include <asm/hardirq.h>
 #include <asm/intel-family.h>
@@ -3417,12 +3418,12 @@ static void intel_pmu_config_acr(int idx, u64 mask, u32 reload)
 	}
 
 	if (cpuc->acr_cfg_b[idx] != mask) {
-		wrmsrl(msr_b + msr_offset, mask);
+		wrmsrq(msr_b + msr_offset, mask);
 		cpuc->acr_cfg_b[idx] = mask;
 	}
 	/* Only update CFG_C reload when ACR is actively enabled (mask != 0) */
 	if (mask && ((cpuc->cfg_c_val[idx] & ARCH_PEBS_RELOAD) != reload)) {
-		wrmsrl(msr_c + msr_offset, reload);
+		wrmsrq(msr_c + msr_offset, reload);
 		cpuc->cfg_c_val[idx] = reload;
 	}
 }

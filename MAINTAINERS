@@ -1122,10 +1122,9 @@ S:	Orphan
 F:	drivers/usb/gadget/udc/amd5536udc.*
 
 AMD GEODE PROCESSOR/CHIPSET SUPPORT
-M:	Andres Salomon <dilinger@queued.net>
 L:	linux-geode@lists.infradead.org (moderated for non-subscribers)
-S:	Supported
-W:	http://www.amd.com/us-en/ConnectivitySolutions/TechnicalResources/0,,50_2334_2452_11363,00.html
+S:	Orphaned
+F:	arch/x86/platform/geode/
 F:	arch/x86/include/asm/geode.h
 F:	drivers/char/hw_random/geode-rng.c
 F:	drivers/crypto/geode*
@@ -10117,12 +10116,6 @@ F:	Documentation/fpga/
 F:	drivers/fpga/
 F:	include/linux/fpga/
 
-FPU EMULATOR
-M:	Bill Metzenthen <billm@melbpc.org.au>
-S:	Maintained
-W:	https://floatingpoint.billm.au/
-F:	arch/x86/math-emu/
-
 FRAMEBUFFER CONSOLE
 M:	Helge Deller <deller@gmx.de>
 M:	Thomas Zimmermann <tzimmermann@suse.de>
@@ -11643,7 +11636,7 @@ F:	Documentation/devicetree/bindings/net/hisilicon*.txt
 F:	drivers/net/ethernet/hisilicon/
 
 HISILICON PMU DRIVER
-M:	Jonathan Cameron <jonathan.cameron@huawei.com>
+M:	Yushan Wang <wangyushan12@huawei.com>
 S:	Supported
 W:	http://www.hisilicon.com
 F:	Documentation/admin-guide/perf/hisi-pcie-pmu.rst
@@ -28907,6 +28900,7 @@ R:	Ahmed S. Darwish <darwi@linutronix.de>
 L:	x86-cpuid@lists.linux.dev
 S:	Maintained
 W:	https://x86-cpuid.org
+F:	arch/x86/include/asm/cpuid/leaf_types.h
 F:	tools/arch/x86/kcpuid/
 
 X86 ENTRY CODE
@@ -28926,6 +28920,7 @@ S:	Maintained
 F:	Documentation/admin-guide/hw-vuln/
 F:	arch/x86/include/asm/nospec-branch.h
 F:	arch/x86/kernel/cpu/bugs.c
+F:	scripts/update-intel-ucode-defs.py
 
 X86 MCE INFRASTRUCTURE
 M:	Tony Luck <tony.luck@intel.com>
