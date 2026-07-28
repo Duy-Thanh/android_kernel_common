@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dc092e_5033cc51",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-28T22:44:56Z",
+      "side": 1,
+      "message": "Is it safe to ignore `vmx-\u003eguest_uret_msrs[i].load_into_hardware` and `vmx-\u003eguest_uret_msrs[i].mask` values when doing this?",
+      "revId": "123e81b45f3d3f55ee9e14d912b4ebcfbcb6d71e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
