@@ -213,6 +213,24 @@
       "parentUuid": "96afc921_8cd30ead",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "460b0a7e_b52aad1e",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T15:25:34Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve removed #UD. Marking as resolved.",
+      "parentUuid": "d133e981_93bcca43",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
