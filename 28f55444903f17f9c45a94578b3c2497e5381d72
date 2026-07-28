@@ -97,6 +97,24 @@
       "parentUuid": "c9ec9aec_74ad5888",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b55fe8_0546dc2a",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T09:58:32Z",
+      "side": 1,
+      "message": "\u003eOr alternatively, allow only such writes that don\u0027t change values of those MSRs (since kvm_probe_user_return_msr() writes the same value it has just read)?\n\nThis sounds like we don\u0027t allow the host to modify these MSRs， and if the host wants to change these MSRs, the changing won\u0027t take effect as the MSRs are still the old values and the host doesn\u0027t know about this unless we inject #GP? If so, Greg\u0027s plan looks more robust.",
+      "parentUuid": "be294b9c_5c8fd441",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
