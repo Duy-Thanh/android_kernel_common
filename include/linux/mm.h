@@ -3193,6 +3193,7 @@ static inline bool pagetable_pte_ctor(struct mm_struct *mm,
 {
 	if (mm != &init_mm && !ptlock_init(ptdesc))
 		return false;
+	ptdesc_pmd_pts_init(ptdesc);
 	__pagetable_ctor(ptdesc);
 	return true;
 }

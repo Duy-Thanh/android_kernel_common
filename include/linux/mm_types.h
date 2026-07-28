@@ -563,8 +563,14 @@ struct ptdesc {
 	union {
 		pgoff_t pt_index;
 		struct mm_struct *pt_mm;
+		/*
+		 * pt_frag_refcount and pt_share_count share the same union slot
+		 * because they are mutually exclusive: architectures that use
+		 * page table fragments (e.g. powerpc, s390) do not support
+		 * page table sharing (HugeTLB sharing or ptshare).
+		 */
 		atomic_t pt_frag_refcount;
-#ifdef CONFIG_HUGETLB_PMD_PAGE_TABLE_SHARING
+#if defined(CONFIG_HUGETLB_PMD_PAGE_TABLE_SHARING) || defined(CONFIG_PTSHARE)
 		atomic_t pt_share_count;
 #endif
 	};
@@ -612,7 +618,7 @@ static_assert(sizeof(struct ptdesc) <= sizeof(struct page));
 	const struct page *:		(const struct ptdesc *)(p),	\
 	struct page *:			(struct ptdesc *)(p)))
 
-#ifdef CONFIG_HUGETLB_PMD_PAGE_TABLE_SHARING
+#if defined(CONFIG_HUGETLB_PMD_PAGE_TABLE_SHARING) || defined(CONFIG_PTSHARE)
 static inline void ptdesc_pmd_pts_init(struct ptdesc *ptdesc)
 {
 	atomic_set(&ptdesc->pt_share_count, 0);
