@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf0a22c_bb2750d7",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T22:27:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58b4ceb9_f2770b9d",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88f835dc_e09dee53",
@@ -65,6 +83,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0abf70f7_54e15960",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T22:27:45Z",
+      "side": 1,
+      "message": "1) Regarding the race: yeah, as you mentioned, I think it can\u0027t happen\n\n2) Regarding the suggested code change, do you rather mean:\n```\n--- a/arch/x86/kvm/vmx/vmx.c\n+++ b/arch/x86/kvm/vmx/vmx.c\n@@ -9358,7 +9358,10 @@ __init int vmx_hardware_setup(void)\n        store_idt(\u0026dt);\n        host_idt_base \u003d dt.address;\n \n-       vmx_setup_user_return_msrs();\n+#ifndef __PKVM_HYP__\n+       if (!enable_pkvm)\n+#endif\n+               vmx_setup_user_return_msrs();\n \n \n        if (boot_cpu_has(X86_FEATURE_NX))\n```\n?\n\nIf so then it will never register `kvm_uret_msrs_list` for the host KVM (it will be registered only for pKVM-low). And then it will e.g. trigger this warning:\n```\n[    0.857554] ------------[ cut here ]------------\n[    0.858382] WARNING: CPU: 0 PID: 1 at arch/x86/kvm/cpuid.c:1324 kvm_set_cpu_caps+0x1019/0x10a0\n\n```\nsince `kvm_set_cpu_caps()` explicitly verifies `!kvm_is_supported_user_return_msr(MSR_TSC_AUX)`",
+      "parentUuid": "88f835dc_e09dee53",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81045cf0_ba96eed0",
         "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
         "patchSetId": 9
@@ -76,6 +112,24 @@
       "writtenOn": "2026-07-28T17:45:12Z",
       "side": 1,
       "message": "If there is (unexpectedly) no slot, it is not a host\u0027s problem, it is rather a pKVM\u0027s problem?\n\nUnless, per my above comment, this vmexit unexpectedly happens while pKVM hasn\u0027t set up uret msrs yet (but then it would be still a serious problem in pKVM, not just in the host, since, per my above comment, it would be a race)?",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1467ca_ba226a16",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T22:27:45Z",
+      "side": 1,
+      "message": "Yeah I think you are right it will be rather a pKVM\u0027s internal issue I\u0027ve added `BUG_ON(slot \u003c 0);` on current version.",
+      "parentUuid": "81045cf0_ba96eed0",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

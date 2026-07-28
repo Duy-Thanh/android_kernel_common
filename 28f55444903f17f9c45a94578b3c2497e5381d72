@@ -82,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ff46cec_382d1b42",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T22:27:45Z",
+      "side": 1,
+      "message": "Ok, this make sense especially if we indeed add more logic to `pkvm_enable_virtualization_cpu()` in the future. I\u0027ve added on top as separate patch.",
+      "parentUuid": "034fc0b0_4384deb0",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75a01657_3f276e12",
