@@ -110,6 +110,7 @@
 #include <linux/printk.h>
 #include <linux/swapops.h>
 #include <linux/gcd.h>
+#include <linux/ptshare.h>
 
 #include <asm/tlbflush.h>
 #include <asm/tlb.h>
@@ -823,6 +824,15 @@ unsigned long change_prot_numa(struct vm_area_struct *vma,
 {
 	struct mmu_gather tlb;
 	long nr_updated;
+
+	/*
+	 * A ptshare client maps PTE tables owned by the domain's shadow mm.
+	 * Hinting PTEs written through it would be seen by every member while
+	 * only this mm is flushed and notified. Unsharing is not an option
+	 * either, as the NUMA scanner only holds the mmap_lock for read.
+	 */
+	if (vma_shares_pagetables(vma))
+		return 0;
 
 	tlb_gather_mmu(&tlb, vma->vm_mm);
 
