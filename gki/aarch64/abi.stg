@@ -33414,11 +33414,6 @@ pointer_reference {
   pointee_type_id: 0xf7874bee
 }
 pointer_reference {
-  id: 0x37751967
-  kind: POINTER
-  pointee_type_id: 0xf7948302
-}
-pointer_reference {
   id: 0x377637b8
   kind: POINTER
   pointee_type_id: 0xf798387e
@@ -35052,11 +35047,6 @@ pointer_reference {
   id: 0x3a59fc29
   kind: POINTER
   pointee_type_id: 0xc3271639
-}
-pointer_reference {
-  id: 0x3a5ffcd5
-  kind: POINTER
-  pointee_type_id: 0xc33f15c9
 }
 pointer_reference {
   id: 0x3a6574c9
@@ -41299,11 +41289,6 @@ qualified {
   qualified_type_id: 0x7ccce612
 }
 qualified {
-  id: 0xc33f15c9
-  qualifier: CONST
-  qualified_type_id: 0x7cbbe1af
-}
-qualified {
   id: 0xc3431795
   qualifier: CONST
   qualified_type_id: 0x7d4be8dc
@@ -44767,11 +44752,6 @@ qualified {
   id: 0xf7874bee
   qualifier: CONST
   qualified_type_id: 0xae5a9933
-}
-qualified {
-  id: 0xf7948302
-  qualifier: CONST
-  qualified_type_id: 0xae15ba82
 }
 qualified {
   id: 0xf79c44fd
@@ -105940,13 +105920,6 @@ member {
   offset: 256
 }
 member {
-  id: 0x5b670503
-  name: "drv_bank"
-  type_id: 0xc9082b19
-  offset: 326
-  bitsize: 2
-}
-member {
   id: 0x8fa864d8
   name: "drv_data"
   type_id: 0x18bd6530
@@ -106001,12 +105974,6 @@ member {
   offset: 576
 }
 member {
-  id: 0x4a9c46bd
-  name: "drv_reg"
-  type_id: 0xd41e888f
-  offset: 288
-}
-member {
   id: 0xe18252ff
   name: "drv_type"
   type_id: 0x5d8155a5
@@ -106037,20 +106004,6 @@ member {
   offset: 128
 }
 member {
-  id: 0x80db97c6
-  name: "drvdn_bit"
-  type_id: 0xd41e888f
-  offset: 402
-  bitsize: 6
-}
-member {
-  id: 0x89417a44
-  name: "drvdn_width"
-  type_id: 0xd41e888f
-  offset: 440
-  bitsize: 6
-}
-member {
   id: 0xbf6a1685
   name: "drvflags"
   type_id: 0x6720d32f
@@ -106061,33 +106014,6 @@ member {
   name: "drvpriv"
   type_id: 0x18bd6530
   offset: 64
-}
-member {
-  id: 0x26d741de
-  name: "drvtype_bit"
-  type_id: 0xd41e888f
-  offset: 434
-  bitsize: 6
-}
-member {
-  id: 0x7c9654e1
-  name: "drvtype_in_mux"
-  type_id: 0x6d7f5ff6
-  offset: 496
-}
-member {
-  id: 0x86fe7785
-  name: "drvup_bit"
-  type_id: 0xd41e888f
-  offset: 408
-  bitsize: 6
-}
-member {
-  id: 0x1480cb38
-  name: "drvup_width"
-  type_id: 0xd41e888f
-  offset: 448
-  bitsize: 6
 }
 member {
   id: 0xb5b01443
@@ -108296,13 +108222,6 @@ member {
   name: "ei"
   type_id: 0x2503085c
   offset: 256
-}
-member {
-  id: 0xdbc2bb55
-  name: "einput_bit"
-  type_id: 0xd41e888f
-  offset: 346
-  bitsize: 6
 }
 member {
   id: 0xe65c708c
@@ -124747,12 +124666,6 @@ member {
   offset: 576
 }
 member {
-  id: 0x36a60222
-  name: "funcs"
-  type_id: 0x861a0f9a
-  offset: 136
-}
-member {
   id: 0xab14cf3d
   name: "function"
   type_id: 0x7f455195
@@ -124844,12 +124757,6 @@ member {
   id: 0x7daa945a
   name: "functionality"
   type_id: 0x19a7a6e2
-  offset: 256
-}
-member {
-  id: 0x562a3c5d
-  name: "functions"
-  type_id: 0x3e75499e
   offset: 256
 }
 member {
@@ -128533,12 +128440,6 @@ member {
   offset: 9280
 }
 member {
-  id: 0xaa2a996f
-  name: "gpio_compatible"
-  type_id: 0x3e10b518
-  offset: 64
-}
-member {
   id: 0x13043101
   name: "gpio_disable_free"
   type_id: 0x0f032feb
@@ -129208,12 +129109,6 @@ member {
   name: "groups"
   type_id: 0x09410072
   offset: 6400
-}
-member {
-  id: 0x9330242d
-  name: "groups"
-  type_id: 0x37751967
-  offset: 384
 }
 member {
   id: 0x93302fc5
@@ -133560,19 +133455,6 @@ member {
   name: "hskew"
   type_id: 0xe8034002
   offset: 96
-}
-member {
-  id: 0xdabce99a
-  name: "hsm_bit"
-  type_id: 0xd41e888f
-  offset: 376
-  bitsize: 6
-}
-member {
-  id: 0xbc69c844
-  name: "hsm_in_mux"
-  type_id: 0x6d7f5ff6
-  offset: 480
 }
 member {
   id: 0x066aa2a8
@@ -143989,13 +143871,6 @@ member {
   name: "iorequest_cnt"
   type_id: 0x74d29cf1
   offset: 3552
-}
-member {
-  id: 0x565db246
-  name: "ioreset_bit"
-  type_id: 0xd41e888f
-  offset: 364
-  bitsize: 6
 }
 member {
   id: 0x13233d1b
@@ -155870,13 +155745,6 @@ member {
   offset: 576
 }
 member {
-  id: 0x534ee370
-  name: "lock_bit"
-  type_id: 0xd41e888f
-  offset: 358
-  bitsize: 6
-}
-member {
   id: 0x811f1f57
   name: "lock_bus"
   type_id: 0x0cba3d38
@@ -157063,13 +156931,6 @@ member {
   offset: 7808
 }
 member {
-  id: 0x37d9d27a
-  name: "lpdr_bit"
-  type_id: 0xd41e888f
-  offset: 428
-  bitsize: 6
-}
-member {
   id: 0xeb74212a
   name: "lpfn"
   type_id: 0x4585663f
@@ -157108,13 +156969,6 @@ member {
   type_id: 0x4585663f
   offset: 256
   bitsize: 1
-}
-member {
-  id: 0xcc9c683b
-  name: "lpmd_bit"
-  type_id: 0xd41e888f
-  offset: 396
-  bitsize: 6
 }
 member {
   id: 0xa884151a
@@ -170394,30 +170248,10 @@ member {
   offset: 8640
 }
 member {
-  id: 0x4bf25677
-  name: "mux_bank"
-  type_id: 0xc9082b19
-  offset: 320
-  bitsize: 2
-}
-member {
-  id: 0x11a17e5a
-  name: "mux_bit"
-  type_id: 0xd41e888f
-  offset: 328
-  bitsize: 6
-}
-member {
   id: 0xdf96f122
   name: "mux_lock"
   type_id: 0xf7998f6d
   offset: 576
-}
-member {
-  id: 0x78b87ca5
-  name: "mux_reg"
-  type_id: 0xd41e888f
-  offset: 192
 }
 member {
   id: 0xa21d307d
@@ -175076,12 +174910,6 @@ member {
   offset: 360
 }
 member {
-  id: 0x4a96e277
-  name: "nfunctions"
-  type_id: 0x4585663f
-  offset: 320
-}
-member {
   id: 0xe49ba3c7
   name: "ngpio"
   type_id: 0x914dbfdc
@@ -175092,11 +174920,6 @@ member {
   name: "ngpio"
   type_id: 0x914dbfdc
   offset: 8928
-}
-member {
-  id: 0x7ecdc1ea
-  name: "ngpios"
-  type_id: 0x4585663f
 }
 member {
   id: 0x2b4cb668
@@ -175115,12 +174938,6 @@ member {
   name: "ngroups"
   type_id: 0x6720d32f
   offset: 32
-}
-member {
-  id: 0x2bec086a
-  name: "ngroups"
-  type_id: 0x4585663f
-  offset: 448
 }
 member {
   id: 0x71302403
@@ -177613,22 +177430,10 @@ member {
   offset: 128
 }
 member {
-  id: 0xcaacc27d
-  name: "npins"
-  type_id: 0x295c7202
-  offset: 128
-}
-member {
   id: 0xcac01672
   name: "npins"
   type_id: 0x4585663f
   offset: 288
-}
-member {
-  id: 0xcac01a62
-  name: "npins"
-  type_id: 0x4585663f
-  offset: 192
 }
 member {
   id: 0xcac01b69
@@ -182299,13 +182104,6 @@ member {
   name: "odp_caps"
   type_id: 0x87a6569b
   offset: 1600
-}
-member {
-  id: 0x455c3624
-  name: "odrain_bit"
-  type_id: 0xd41e888f
-  offset: 352
-  bitsize: 6
 }
 member {
   id: 0x4f7607b0
@@ -189317,12 +189115,6 @@ member {
   offset: 32
 }
 member {
-  id: 0x94b4d7ea
-  name: "parked_bitmask"
-  type_id: 0xc9082b19
-  offset: 480
-}
-member {
   id: 0x4af10ff0
   name: "parm"
   type_id: 0x76aedb9e
@@ -193658,12 +193450,6 @@ member {
   name: "pins"
   type_id: 0x32b309a8
   offset: 64
-}
-member {
-  id: 0x1678eee7
-  name: "pins"
-  type_id: 0x32b309a8
-  offset: 128
 }
 member {
   id: 0x16999735
@@ -202566,26 +202352,6 @@ member {
   offset: 240
 }
 member {
-  id: 0xa6af9b7a
-  name: "pupd_bank"
-  type_id: 0xc9082b19
-  offset: 322
-  bitsize: 2
-}
-member {
-  id: 0xd23851f1
-  name: "pupd_bit"
-  type_id: 0xd41e888f
-  offset: 334
-  bitsize: 6
-}
-member {
-  id: 0x01277b95
-  name: "pupd_reg"
-  type_id: 0xd41e888f
-  offset: 224
-}
-member {
   id: 0x8c475ce0
   name: "purpose"
   type_id: 0x362692fd
@@ -206717,13 +206483,6 @@ member {
   name: "rcv_rtt_last_tsecr"
   type_id: 0xc9082b19
   offset: 15072
-}
-member {
-  id: 0x905cb8c6
-  name: "rcv_sel_bit"
-  type_id: 0xd41e888f
-  offset: 370
-  bitsize: 6
 }
 member {
   id: 0x8a51426a
@@ -222343,19 +222102,6 @@ member {
   offset: 1664
 }
 member {
-  id: 0x2cafd22c
-  name: "schmitt_bit"
-  type_id: 0xd41e888f
-  offset: 390
-  bitsize: 6
-}
-member {
-  id: 0xe939d9b2
-  name: "schmitt_in_mux"
-  type_id: 0x6d7f5ff6
-  offset: 488
-}
-member {
   id: 0xc9c3700c
   name: "sci"
   type_id: 0xcdc0f9fc
@@ -227370,19 +227116,6 @@ member {
   bitsize: 1
 }
 member {
-  id: 0x0c10a6c1
-  name: "sfsel_bit"
-  type_id: 0xd41e888f
-  offset: 384
-  bitsize: 6
-}
-member {
-  id: 0xcdcf881e
-  name: "sfsel_in_mux"
-  type_id: 0x6d7f5ff6
-  offset: 504
-}
-member {
   id: 0x9d8652e2
   name: "sg"
   type_id: 0x11cffa09
@@ -231635,34 +231368,6 @@ member {
   name: "sls_o_uncompressed"
   type_id: 0x7e8f5c14
   offset: 256
-}
-member {
-  id: 0x8b668d63
-  name: "slwf_bit"
-  type_id: 0xd41e888f
-  offset: 422
-  bitsize: 6
-}
-member {
-  id: 0xced1aa72
-  name: "slwf_width"
-  type_id: 0xd41e888f
-  offset: 460
-  bitsize: 6
-}
-member {
-  id: 0xf318cc2b
-  name: "slwr_bit"
-  type_id: 0xd41e888f
-  offset: 416
-  bitsize: 6
-}
-member {
-  id: 0x56068aeb
-  name: "slwr_width"
-  type_id: 0xd41e888f
-  offset: 454
-  bitsize: 6
 }
 member {
   id: 0x690a2c82
@@ -249908,26 +249613,6 @@ member {
   name: "trees"
   type_id: 0x22ee8bee
   offset: 6656
-}
-member {
-  id: 0x6a3c79ab
-  name: "tri_bank"
-  type_id: 0xc9082b19
-  offset: 324
-  bitsize: 2
-}
-member {
-  id: 0x683a5108
-  name: "tri_bit"
-  type_id: 0xd41e888f
-  offset: 340
-  bitsize: 6
-}
-member {
-  id: 0xa104e9d3
-  name: "tri_reg"
-  type_id: 0xd41e888f
-  offset: 256
 }
 member {
   id: 0xd1709568
@@ -350062,69 +349747,6 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x7cbbe1af
-  kind: STRUCT
-  name: "tegra_pinctrl_soc_data"
-  definition {
-    bytesize: 64
-    member_id: 0x7ecdc1ea
-    member_id: 0xaa2a996f
-    member_id: 0x1678eee7
-    member_id: 0xcac01a62
-    member_id: 0x562a3c5d
-    member_id: 0x4a96e277
-    member_id: 0x9330242d
-    member_id: 0x2bec086a
-    member_id: 0xbc69c844
-    member_id: 0xe939d9b2
-    member_id: 0x7c9654e1
-    member_id: 0xcdcf881e
-  }
-}
-struct_union {
-  id: 0xae15ba82
-  kind: STRUCT
-  name: "tegra_pingroup"
-  definition {
-    bytesize: 64
-    member_id: 0x0de57ce8
-    member_id: 0x16739cd9
-    member_id: 0xcaacc27d
-    member_id: 0x36a60222
-    member_id: 0x78b87ca5
-    member_id: 0x01277b95
-    member_id: 0xa104e9d3
-    member_id: 0x4a9c46bd
-    member_id: 0x4bf25677
-    member_id: 0xa6af9b7a
-    member_id: 0x6a3c79ab
-    member_id: 0x5b670503
-    member_id: 0x11a17e5a
-    member_id: 0xd23851f1
-    member_id: 0x683a5108
-    member_id: 0xdbc2bb55
-    member_id: 0x455c3624
-    member_id: 0x534ee370
-    member_id: 0x565db246
-    member_id: 0x905cb8c6
-    member_id: 0xdabce99a
-    member_id: 0x0c10a6c1
-    member_id: 0x2cafd22c
-    member_id: 0xcc9c683b
-    member_id: 0x80db97c6
-    member_id: 0x86fe7785
-    member_id: 0xf318cc2b
-    member_id: 0x8b668d63
-    member_id: 0x37d9d27a
-    member_id: 0x26d741de
-    member_id: 0x89417a44
-    member_id: 0x1480cb38
-    member_id: 0x56068aeb
-    member_id: 0xced1aa72
-    member_id: 0x94b4d7ea
-  }
-}
-struct_union {
   id: 0x539be05c
   kind: STRUCT
   name: "tegra_sku_info"
@@ -413820,12 +413442,6 @@ function {
   parameter_id: 0x79c50b39
   parameter_id: 0x18bd6530
   parameter_id: 0x3e10b518
-}
-function {
-  id: 0x92a46aa9
-  return_type_id: 0x6720d32f
-  parameter_id: 0x3f37d9d5
-  parameter_id: 0x3a5ffcd5
 }
 function {
   id: 0x92a49dbe
@@ -525915,15 +525531,6 @@ elf_symbol {
   full_name: "tegra_mc_probe_device"
 }
 elf_symbol {
-  id: 0x16dd9bc4
-  name: "tegra_pinctrl_probe"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0x23e5e3e7
-  type_id: 0x92a46aa9
-  full_name: "tegra_pinctrl_probe"
-}
-elf_symbol {
   id: 0x1d3215de
   name: "tegra_powergate_power_off"
   is_defined: true
@@ -547047,7 +546654,6 @@ interface {
   symbol_id: 0x175273e3
   symbol_id: 0xcafa05ea
   symbol_id: 0xa8f0fe44
-  symbol_id: 0x16dd9bc4
   symbol_id: 0x1d3215de
   symbol_id: 0xcfccceca
   symbol_id: 0xcb1a674c
