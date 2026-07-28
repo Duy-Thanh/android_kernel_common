@@ -232,6 +232,24 @@
       "parentUuid": "54a89272_a42568d4",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84203d9d_2c299425",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T15:29:08Z",
+      "side": 1,
+      "message": "I\u0027ve updated the patch according to above discussion: PTAL",
+      "parentUuid": "640c7766_003ec603",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

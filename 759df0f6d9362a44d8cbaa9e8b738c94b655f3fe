@@ -44,6 +44,24 @@
       ],
       "revId": "759df0f6d9362a44d8cbaa9e8b738c94b655f3fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7827decb_b8b8bdb8",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 15052,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-28T15:29:08Z",
+      "side": 1,
+      "message": "Indeed, originally I have it implemented earlier in this file where it was needed and later moved with those #ifdef. But never-mind in the new version of this patch it is gone.",
+      "parentUuid": "8a90613f_ca2fb8c0",
+      "revId": "759df0f6d9362a44d8cbaa9e8b738c94b655f3fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
