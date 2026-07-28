@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b59b0fa_7b678f82",
+        "filename": "net/xfrm/xfrm_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-28T04:48:08Z",
+      "side": 1,
+      "message": "I think we should first check the rate limit and then update the new_mapping_daddr. Otherwise when a followup packet sent with the new daddr, we might miss the notification.",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 35
+      },
+      "revId": "adbe94190a18528c472c19e704625d5f15e2df8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17dec38b_4529c457",
+        "filename": "net/xfrm/xfrm_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-28T04:48:08Z",
+      "side": 1,
+      "message": "Would there be a concern if a forged packet with the right SPI but fake destination is sent and then pollute the map? The existing map notification is done in esp4_input() and esp6_input(), should we also move this call there?",
+      "revId": "adbe94190a18528c472c19e704625d5f15e2df8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb77cb2d_bce30be6",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-28T04:48:08Z",
+      "side": 1,
+      "message": "nit: we probably want to create a shared method",
+      "range": {
+        "startLine": 1181,
+        "startChar": 0,
+        "endLine": 1200,
+        "endChar": 11
+      },
+      "revId": "adbe94190a18528c472c19e704625d5f15e2df8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2849f8e0_c33b4026",
+        "filename": "net/xfrm/xfrm_user.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4203,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2026-07-28T04:48:08Z",
+      "side": 1,
+      "message": "I\u0027m little concerned of reusing it because the name clearly represents of care of address",
+      "range": {
+        "startLine": 4203,
+        "startChar": 15,
+        "endLine": 4203,
+        "endChar": 27
+      },
+      "revId": "adbe94190a18528c472c19e704625d5f15e2df8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
