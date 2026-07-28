@@ -2862,8 +2862,7 @@ pkg_filegroup(
         ":kselftest_mm_hugepage_shm_x86_64",
         ":kselftest_mm_map_hugetlb_x86_64",
         ":kselftest_mm_mlock2_tests_x86_64",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_mm_mlock_random_test_x86_64",
+        ":kselftest_mm_mlock_random_test_x86_64",
         ":kselftest_mm_mremap_dontunmap_x86_64",
         ":kselftest_mm_mremap_test_x86_64",
         ":kselftest_mm_on_fault_limit_x86_64",
@@ -2875,8 +2874,7 @@ pkg_filegroup(
         ":kselftest_net_socket_x86_64",
         ":kselftest_ptrace_peeksiginfo_x86_64",
         ":kselftest_rtc_rtctest_x86_64",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_seccomp_seccomp_bpf_x86_64",
+        ":kselftest_seccomp_seccomp_bpf_x86_64",
         ":kselftest_size_test_get_size_x86_64",
         ":kselftest_timers_adjtick_x86_64",
         ":kselftest_timers_alarmtimer_suspend_x86_64",
@@ -2980,8 +2978,7 @@ pkg_filegroup(
         ":kselftest_mm_hugepage_shm_x86",
         ":kselftest_mm_map_hugetlb_x86",
         ":kselftest_mm_mlock2_tests_x86",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_mm_mlock_random_test_x86",
+        ":kselftest_mm_mlock_random_test_x86",
         ":kselftest_mm_mremap_dontunmap_x86",
         ":kselftest_mm_mremap_test_x86",
         ":kselftest_mm_on_fault_limit_x86",
@@ -2993,8 +2990,7 @@ pkg_filegroup(
         ":kselftest_net_socket_x86",
         ":kselftest_ptrace_peeksiginfo_x86",
         ":kselftest_rtc_rtctest_x86",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_seccomp_seccomp_bpf_x86",
+        ":kselftest_seccomp_seccomp_bpf_x86",
         ":kselftest_size_test_get_size_x86",
         ":kselftest_timers_adjtick_x86",
         ":kselftest_timers_alarmtimer_suspend_x86",
@@ -3203,8 +3199,7 @@ pkg_filegroup(
         ":kselftest_mm_hugepage_shm_arm64",
         ":kselftest_mm_map_hugetlb_arm64",
         ":kselftest_mm_mlock2_tests_arm64",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_mm_mlock_random_test_arm64",
+        ":kselftest_mm_mlock_random_test_arm64",
         ":kselftest_mm_mremap_dontunmap_arm64",
         ":kselftest_mm_mremap_test_arm64",
         ":kselftest_mm_on_fault_limit_arm64",
@@ -3216,8 +3211,7 @@ pkg_filegroup(
         ":kselftest_net_socket_arm64",
         ":kselftest_ptrace_peeksiginfo_arm64",
         ":kselftest_rtc_rtctest_arm64",
-        # b/536813037 - Revert when test is fixed
-        # ":kselftest_seccomp_seccomp_bpf_arm64",
+        ":kselftest_seccomp_seccomp_bpf_arm64",
         ":kselftest_size_test_get_size_arm64",
         ":kselftest_timers_adjtick_arm64",
         ":kselftest_timers_alarmtimer_suspend_arm64",
