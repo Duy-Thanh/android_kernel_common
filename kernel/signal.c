@@ -2863,8 +2863,6 @@ relock:
 		current->flags |= PF_SIGNALED;
 
 		if (sig_kernel_coredump(signr)) {
-			bool skip_coredump = false;
-
 			if (print_fatal_signals)
 				print_fatal_signal(ksig->info.si_signo);
 			proc_coredump_connector(current);
@@ -2876,9 +2874,7 @@ relock:
 			 * first and our do_group_exit call below will use
 			 * that value and ignore the one we pass it.
 			 */
-			trace_android_vh_signal_coredump_check(current, ksig, &skip_coredump);
-			if (!skip_coredump)
-				do_coredump(&ksig->info);
+			do_coredump(&ksig->info);
 		}
 
 		/*
