@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f748db97_4bb9ef55",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T09:03:57Z",
+      "side": 1,
+      "message": "Maybe due to code reusing, some non-safe variants are still used, but I agree it is better for the pKVM to use safe variants as much as possible.\n\nMaybe need to have a try to see if any non-safe variants are used to cause #GP. To cause panic, we can just remove the fixup support for EX_TYPE_WRMSR/EX_TYPE_RDMSR.\n\nRegarding the attack scenario you mentioned, had some impression but not fully clear. It looks like this attack is caused by pKVM handling the non-safe MSR accessing MSR_KERNEL_GS_BASE, while this MSR is actually not supported by the platform?",
+      "parentUuid": "e4b17f7c_a6dcdfc1",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1344f7a6_71374e79",
         "filename": "arch/x86/kvm/pkvm/idt.c",
         "patchSetId": 3
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "I was thinking it might be worth removing it as a defense-in-depth, for cases when the hypervisor unexpectedly executes an undefined/unsupported instruction due to a bug in pKVM (so that we\u0027d better immediately panic in this case), and a malicious host exploits this bug and somehow manipulates the hypervisor so that it ends up doing this \"fixup\"...",
       "parentUuid": "cb7faf97_311763e9",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b64c46_9bcb2c13",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T09:03:57Z",
+      "side": 1,
+      "message": "\u003eBut in both these cases it is still #GP, not #UD? (VMX instructions only trigger #UD if VMX is disabled, which must never happen in pKVM?)\n\nPer SDM, the VMX instruction can trigger #UD even in VMX is enabled. E.g.,\nIF (register operand) or (not in VMX operation) or (CR0.PE \u003d 0) or (RFLAGS.VM \u003d 1) or (IA32_EFER.LMA \u003d 1 and CS.L \u003d 0)\nTHEN #UD;\nAlthough pKVM also doesn\u0027t change these registers.\n\n\u003eI was thinking it might be worth removing it as a defense-in-depth, for cases when the hypervisor unexpectedly executes an undefined/unsupported instruction due to a bug in pKVM (so that we\u0027d better immediately panic in this case), and a malicious host exploits this bug and somehow manipulates the hypervisor so that it ends up doing this \"fixup\"...\n\nFixup doesn\u0027t fix unconditionally. It will check if there is a fixup entry in the exception table. If pKVM executes an instruction that defines a fixup entry in the exception table, most likely it means the #UD caused by this instruction is wanted to be handled. If pKVM executes such an instruction which doesn\u0027t have a fixup entry in the exception table, the fixup will do nothing and pKVM\u0027s #UD handler will run to panic.",
+      "parentUuid": "43823fc2_6d329fae",
       "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
