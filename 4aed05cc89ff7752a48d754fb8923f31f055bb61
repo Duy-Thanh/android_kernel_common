@@ -214,6 +214,24 @@
       "parentUuid": "ea32e242_ea56a1d9",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640c7766_003ec603",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-28T09:22:00Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure what you mean by \"allows\". Allows whom? Itself?\n\nI mean the kernel doesn\u0027t prevent itself to modify HW xcr0/xss state in the non-pKVM case. If the kernel has any software wants to modify xcr0/xss, it will done it successfully. It is actually the HW allows the kernel to modify xcr0/xss as long as the value is legal.\n\nThis conversation is in the context of letting pKVM to prevent the kernel to modify HW xcr0/xss. In this case, from the host kernel point of view, the HW is preventing it to modify xcr0/xss even the value is legal.\n\n\u003e If you and \nChuanxiao Dong\n both prefer injecting #GP instead I will re-implement it that way.\n \nInjecting #GP sounds good to me, and then we don\u0027t need `pkvm_restore_host_xsave_state`.",
+      "parentUuid": "54a89272_a42568d4",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
