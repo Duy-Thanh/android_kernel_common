@@ -89,6 +89,8 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
 	(((secno) == -1) ? -1 : (secno) / (sbi)->secs_per_zone)
 #define GET_ZONE_FROM_SEG(sbi, segno)				\
 	GET_ZONE_FROM_SEC(sbi, GET_SEC_FROM_SEG(sbi, segno))
+#define GET_SECNO(sbi, blk_addr)				\
+	GET_SEC_FROM_SEG(sbi, GET_SEGNO(sbi, blk_addr))
 
 #define GET_SUM_BLOCK(sbi, segno)	\
 	(SM_I(sbi)->ssa_blkaddr + (segno / (sbi)->sums_per_block))

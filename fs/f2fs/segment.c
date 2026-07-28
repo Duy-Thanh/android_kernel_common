@@ -2786,13 +2786,15 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
 			unsigned int *newseg, bool new_sec, bool pinning)
 {
 	struct free_segmap_info *free_i = FREE_I(sbi);
-	unsigned int segno, secno, zoneno;
+	unsigned int segno, secno, zoneno, total_secs;
 	unsigned int total_zones = MAIN_SECS(sbi) / sbi->secs_per_zone;
 	unsigned int hint = GET_SEC_FROM_SEG(sbi, *newseg);
 	unsigned int old_zoneno = GET_ZONE_FROM_SEG(sbi, *newseg);
 	unsigned int alloc_policy = sbi->allocate_section_policy;
 	unsigned int alloc_hint = sbi->allocate_section_hint;
 	bool init = true;
+	bool retry = false;
+	bool sec_alloc_pin = pinning && sbi->pin_guaranteed_blkaddr;
 	int i;
 	int ret = 0;
 
@@ -2801,6 +2803,24 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
 	if (time_to_inject(sbi, FAULT_NO_SEGMENT)) {
 		ret = -ENOSPC;
 		goto out_unlock;
+	}
+
+	if (sec_alloc_pin) {
+		if (sbi->pin_reserved_sec != NULL_SECNO) {
+			secno = sbi->pin_reserved_sec;
+			sbi->pin_reserved_sec = NULL_SECNO;
+			if (!test_bit(secno, free_i->free_secmap)) {
+				segno = GET_SEG_FROM_SEC(sbi, secno);
+				goto got_it;
+			}
+		}
+
+		total_secs = GET_SECNO(sbi, sbi->pin_guaranteed_blkaddr);
+		total_zones = total_secs / sbi->secs_per_zone;
+		if (hint >= total_secs)
+			hint = 0;
+	} else {
+		total_secs = MAIN_SECS(sbi);
 	}
 
 	if (!new_sec && ((*newseg + 1) % SEGS_PER_SEC(sbi))) {
@@ -2841,18 +2861,18 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
 		hint = 0;
 
 find_other_zone:
-	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+	secno = find_next_zero_bit(free_i->free_secmap, total_secs, hint);
 
 #ifdef CONFIG_BLK_DEV_ZONED
-	if (secno >= MAIN_SECS(sbi) && f2fs_sb_has_blkzoned(sbi)) {
+	if (secno >= total_secs && f2fs_sb_has_blkzoned(sbi)) {
 		/* Write only to sequential zones */
 		if (sbi->blkzone_alloc_policy == BLKZONE_ALLOC_ONLY_SEQ) {
 			hint = GET_SEC_FROM_SEG(sbi, sbi->first_seq_zone_segno);
-			secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+			secno = find_next_zero_bit(free_i->free_secmap, total_secs, hint);
 		} else
 			secno = find_first_zero_bit(free_i->free_secmap,
-								MAIN_SECS(sbi));
-		if (secno >= MAIN_SECS(sbi)) {
+								total_secs);
+		if (secno >= total_secs) {
 			ret = -ENOSPC;
 			f2fs_bug_on(sbi, 1);
 			goto out_unlock;
@@ -2860,17 +2880,46 @@ find_other_zone:
 	}
 #endif
 
-	if (secno >= MAIN_SECS(sbi)) {
+	if (secno >= total_secs) {
 		secno = find_first_zero_bit(free_i->free_secmap,
-							MAIN_SECS(sbi));
-		if (secno >= MAIN_SECS(sbi)) {
-			ret = -ENOSPC;
-			f2fs_bug_on(sbi, !pinning);
-			goto out_unlock;
+							total_secs);
+		if (unlikely(secno >= total_secs)) {
+			if (sec_alloc_pin) {
+				static bool sec_ddp_log_nofree;
+
+				total_secs = MAIN_SECS(sbi);
+				total_zones = MAIN_SECS(sbi) / sbi->secs_per_zone;
+				secno = find_first_zero_bit(free_i->free_secmap,
+							total_secs);
+				if (!sec_ddp_log_nofree) {
+					ST_LOG("[DDP] no free space in the non-shrinkable area, secno: %u",
+							secno);
+					sec_ddp_log_nofree = true;
+				}
+				if (unlikely(secno >= MAIN_SECS(sbi))) {
+					ret = -ENOSPC;
+					f2fs_bug_on(sbi, !pinning);
+					goto out_unlock;
+				}
+			} else {
+				ret = -ENOSPC;
+				f2fs_bug_on(sbi, !pinning);
+				goto out_unlock;
+			}
 		}
 	}
 	segno = GET_SEG_FROM_SEC(sbi, secno);
 	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
+
+	if (!sec_alloc_pin && secno == sbi->pin_reserved_sec) {
+		f2fs_bug_on(sbi, retry);
+		if (secno + 1 >= total_secs)
+			hint = 0;
+		else
+			hint = secno + 1;
+		retry = true;
+		goto find_other_zone;
+	}
 
 	/* give up on finding another zone */
 	if (!init)
@@ -2950,6 +2999,10 @@ static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
 	unsigned short seg_type = curseg->seg_type;
 
 	sanity_check_seg_type(sbi, seg_type);
+
+	if (type == CURSEG_COLD_DATA_PINNED && sbi->pin_guaranteed_blkaddr)
+		return 0;
+
 	if (__is_large_section(sbi)) {
 		if (f2fs_need_rand_seg(sbi)) {
 			unsigned int hint = GET_SEC_FROM_SEG(sbi, curseg->segno);
@@ -3332,10 +3385,16 @@ static int __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
 		goto allocate;
 
 	if (!force && curseg->inited &&
-	    !curseg->next_blkoff &&
-	    !get_valid_blocks(sbi, curseg->segno, new_sec) &&
-	    !get_ckpt_valid_blocks(sbi, curseg->segno, new_sec))
+		!curseg->next_blkoff &&
+		!get_valid_blocks(sbi, curseg->segno, new_sec) &&
+		!get_ckpt_valid_blocks(sbi, curseg->segno, new_sec)) {
+		if (type == CURSEG_COLD_DATA_PINNED && sbi->pin_guaranteed_blkaddr) {
+			if (curseg->segno >= GET_SEGNO(sbi, sbi->pin_guaranteed_blkaddr))
+				goto allocate;
+			sbi->pin_reserved_sec = NULL_SECNO;
+		}
 		return 0;
+	}
 
 allocate:
 	old_segno = curseg->segno;
