@@ -591,17 +591,40 @@ out:
 	}
 #endif
 	if (a->struct_type == RESERVED_BLOCKS) {
+		bool is_sec_reserved = !strcmp(a->attr.name, "sec_reserved_blocks");
+		unsigned long new_total_reserved_blocks = t;
+
 		spin_lock(&sbi->stat_lock);
-		if (t > (unsigned long)(sbi->user_block_count -
+		if (is_sec_reserved) {
+			new_total_reserved_blocks += sbi->reserved_blocks;
+			if (new_total_reserved_blocks +
+					F2FS_OPTION(sbi).root_reserved_blocks >
+					sbi->user_block_count - valid_user_blocks(sbi)) {
+				spin_unlock(&sbi->stat_lock);
+				return -ENOSPC;
+			}
+		} else {
+			new_total_reserved_blocks += sbi->sec_reserved_blocks;
+		}
+		if (new_total_reserved_blocks > (unsigned long)(sbi->user_block_count -
 				F2FS_OPTION(sbi).root_reserved_blocks)) {
 			spin_unlock(&sbi->stat_lock);
 			return -EINVAL;
 		}
 		*ui = t;
-		sbi->current_reserved_blocks = min(sbi->reserved_blocks,
+		sbi->current_reserved_blocks = min(sbi->reserved_blocks + sbi->sec_reserved_blocks,
 				sbi->user_block_count - valid_user_blocks(sbi));
 		spin_unlock(&sbi->stat_lock);
-		return count;
+
+		if (is_sec_reserved) {
+			f2fs_down_write(&sbi->sb_lock);
+			if (sbi->raw_super->sec_reserved_blocks != cpu_to_le32(t)) {
+				sbi->raw_super->sec_reserved_blocks = cpu_to_le32(t);
+				ret = f2fs_commit_super(sbi, false);
+			}
+			f2fs_up_write(&sbi->sb_lock);
+		}
+		return ret ? ret : count;
 	}
 
 	if (!strcmp(a->attr.name, "discard_io_aware_gran")) {
@@ -1333,6 +1356,7 @@ FAULT_INFO_GENERAL_RW_ATTR(FAULT_INFO_TIMEOUT, inject_lock_timeout);
 
 /* RESERVED_BLOCKS ATTR */
 RESERVED_BLOCKS_GENERAL_RW_ATTR(reserved_blocks);
+RESERVED_BLOCKS_GENERAL_RW_ATTR(sec_reserved_blocks);
 
 /* CPRC_INFO ATTR */
 CPRC_INFO_GENERAL_RW_ATTR(ckpt_thread_ioprio);
@@ -1473,6 +1497,7 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(features),
 	ATTR_LIST(reserved_blocks),
 	ATTR_LIST(current_reserved_blocks),
+	ATTR_LIST(sec_reserved_blocks),
 	ATTR_LIST(encoding),
 	ATTR_LIST(encoding_flags),
 	ATTR_LIST(effective_lookup_mode),
