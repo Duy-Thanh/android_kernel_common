@@ -34,6 +34,24 @@
       "parentUuid": "a6d533cc_a6a8e129",
       "revId": "26e0c029d2b5fb90c506053acaf4cdbb39b96012",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc049db_939c5ece",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T10:11:36Z",
+      "side": 1,
+      "message": "The BUG_ON can indicate that, this should be a pKVM\u0027s bug if the host modify xcr0/xss before the pKVM initialization is done, this seems reasonable as the host code should still be part of pkvm initialization code. So sounds good to me.",
+      "parentUuid": "16110461_94c8f51b",
+      "revId": "26e0c029d2b5fb90c506053acaf4cdbb39b96012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
