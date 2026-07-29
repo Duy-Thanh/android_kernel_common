@@ -375898,6 +375898,10 @@ enumeration {
       name: "PGWALK_WRLOCK_VERIFY"
       value: 2
     }
+    enumerator {
+      name: "PGWALK_VMA_RDLOCK_VERIFY"
+      value: 3
+    }
   }
 }
 enumeration {
@@ -454756,7 +454760,7 @@ elf_symbol {
   name: "__traceiter_android_vh_page_cache_read"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xd47a7e1c
+  crc: 0x7d43e9db
   type_id: 0x9bcdbcad
   full_name: "__traceiter_android_vh_page_cache_read"
 }
@@ -457447,7 +457451,7 @@ elf_symbol {
   name: "__traceiter_page_cache_async_ra"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x83b4ae7c
+  crc: 0x0f44684d
   type_id: 0x9bcd3749
   full_name: "__traceiter_page_cache_async_ra"
 }
@@ -457456,7 +457460,7 @@ elf_symbol {
   name: "__traceiter_page_cache_sync_ra"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x83b4ae7c
+  crc: 0x0f44684d
   type_id: 0x9bcd3749
   full_name: "__traceiter_page_cache_sync_ra"
 }
@@ -499842,7 +499846,7 @@ elf_symbol {
   name: "led_blink_set_oneshot"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfb752b29
+  crc: 0x38d54d4a
   type_id: 0x1c33c003
   full_name: "led_blink_set_oneshot"
 }
@@ -499977,7 +499981,7 @@ elf_symbol {
   name: "led_stop_software_blink"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa199df08
+  crc: 0x00c0d4e6
   type_id: 0x1c2afa5a
   full_name: "led_stop_software_blink"
 }
@@ -537326,7 +537330,7 @@ elf_symbol {
   name: "walk_page_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xec586658
+  crc: 0xd35088a2
   type_id: 0x9b8c84e7
   full_name: "walk_page_range"
 }
