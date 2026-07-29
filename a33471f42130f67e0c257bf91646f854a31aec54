@@ -226,6 +226,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59b6d526_741d7217",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T10:50:17Z",
+      "side": 1,
+      "message": "Ah, I forgot that these MSRs themselves are per-CPU (unlike the XSS in aosp/4175819, for instance).\n\n\u003e To guarantee the host should call enable_virtualization_cpu, maybe the pkvm can fail the vm creation if the enable_virtualization_cpu is not called, by detecting the new per cpu variable we added by https://android-review.googlesource.com/c/kernel/common/+/4198684/1\n\nLet me think more about this...",
+      "parentUuid": "bf59ef70_74b9400d",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
