@@ -509,6 +509,24 @@
       "parentUuid": "a2e1963f_4fc2f72a",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528ca9fc_43e96a6b",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T15:58:18Z",
+      "side": 1,
+      "message": "\u003e GUEST_IA32_EFER is not updated and is the old value A\n\nI think GUEST_IA32_EFER is updated even earlier, by HW during vmexit, due to VM_EXIT_SAVE_IA32_EFER.\n\n\u003e I think linux doesn\u0027t update MSR_EFER after deprivilege, so should not be an issue.\n\nPer above, it seems it should not be an issue either way.\n\nBut as I wrote in other comments, I think we don\u0027t need to allow the host to modify _any_ user-return MSRs, anyway.\n\n...BTW this makes me wonder: would it be possible to not enable VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER (thus make host vmexits cheaper) and instead rely on intercepting host writes to EFER for preventing the host from modifying it? @chuanxiao.dong@intel.corp-partner.google.com what do you think?",
+      "parentUuid": "deabc989_41020937",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
