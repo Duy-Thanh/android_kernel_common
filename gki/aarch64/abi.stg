@@ -6849,11 +6849,6 @@ pointer_reference {
   pointee_type_id: 0x1362a71c
 }
 pointer_reference {
-  id: 0x0e48afa9
-  kind: POINTER
-  pointee_type_id: 0x13625838
-}
-pointer_reference {
   id: 0x0e490832
   kind: POINTER
   pointee_type_id: 0x1364c655
@@ -6894,6 +6889,11 @@ pointer_reference {
   pointee_type_id: 0x13797fb7
 }
 pointer_reference {
+  id: 0x0e4e785c
+  kind: POINTER
+  pointee_type_id: 0x137907ef
+}
+pointer_reference {
   id: 0x0e4e7ccb
   kind: POINTER
   pointee_type_id: 0x137915b0
@@ -6914,6 +6914,11 @@ pointer_reference {
   pointee_type_id: 0x13015378
 }
 pointer_reference {
+  id: 0x0e50c165
+  kind: POINTER
+  pointee_type_id: 0x1303e30a
+}
+pointer_reference {
   id: 0x0e534115
   kind: POINTER
   pointee_type_id: 0x130de2cb
@@ -6922,11 +6927,6 @@ pointer_reference {
   id: 0x0e5445cf
   kind: POINTER
   pointee_type_id: 0x1311f1a3
-}
-pointer_reference {
-  id: 0x0e561690
-  kind: POINTER
-  pointee_type_id: 0x1318bcdd
 }
 pointer_reference {
   id: 0x0e56cd62
@@ -194534,14 +194534,14 @@ member {
   offset: 256
 }
 member {
-  id: 0x135ae8b7
+  id: 0x135aee60
   name: "send_forget"
-  type_id: 0x0e561690
+  type_id: 0x0e50c165
 }
 member {
-  id: 0x7c7b26e7
+  id: 0x7c7b2030
   name: "send_interrupt"
-  type_id: 0x0e48afa9
+  type_id: 0x0e4e785c
   offset: 64
 }
 member {
@@ -194556,9 +194556,9 @@ member {
   type_id: 0x2d3c60b9
 }
 member {
-  id: 0x8e979b8e
+  id: 0x8e979d59
   name: "send_req"
-  type_id: 0x0e48afa9
+  type_id: 0x0e4e785c
   offset: 128
 }
 member {
@@ -260429,9 +260429,9 @@ struct_union {
   name: "fuse_iqueue_ops"
   definition {
     bytesize: 32
-    member_id: 0x135ae8b7
-    member_id: 0x7c7b26e7
-    member_id: 0x8e979b8e
+    member_id: 0x135aee60
+    member_id: 0x7c7b2030
+    member_id: 0x8e979d59
     member_id: 0xae96a150
   }
 }
@@ -329748,6 +329748,13 @@ function {
   parameter_id: 0x0e6ba6f7
 }
 function {
+  id: 0x1303e30a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0ed2f9f6
+  parameter_id: 0x0d14cce7
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x130705ac
   return_type_id: 0x48b5725f
   parameter_id: 0x0e7d50ff
@@ -329781,12 +329788,6 @@ function {
   parameter_id: 0x0ed82db2
   parameter_id: 0x082be49e
   parameter_id: 0x6d7f5ff6
-}
-function {
-  id: 0x1318bcdd
-  return_type_id: 0x48b5725f
-  parameter_id: 0x0ed2f9f6
-  parameter_id: 0x0d14cce7
 }
 function {
   id: 0x1327a0fb
@@ -330013,12 +330014,6 @@ function {
   parameter_id: 0x0fe9f911
 }
 function {
-  id: 0x13625838
-  return_type_id: 0x48b5725f
-  parameter_id: 0x0ed2f9f6
-  parameter_id: 0x13adf5a0
-}
-function {
   id: 0x1362a71c
   return_type_id: 0x48b5725f
   parameter_id: 0x0c467c34
@@ -330108,6 +330103,13 @@ function {
   parameter_id: 0x0e6c7d79
   parameter_id: 0x18bd6530
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x137907ef
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0ed2f9f6
+  parameter_id: 0x13adf5a0
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x137915b0
