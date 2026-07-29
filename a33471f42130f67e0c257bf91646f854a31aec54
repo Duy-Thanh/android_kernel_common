@@ -581,6 +581,24 @@
       "parentUuid": "528ca9fc_43e96a6b",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d271c70_ac946117",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T22:04:24Z",
+      "side": 1,
+      "message": "\u003e But if we decide to do that I think we can handle it as a separate commit.\n\nYeah, sure.",
+      "parentUuid": "ff48b52a_79ebbe46",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
