@@ -311,6 +311,24 @@
       "parentUuid": "f19c6b26_411d20a5",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b552aae_7091d36a",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T10:24:34Z",
+      "side": 1,
+      "message": "Ok, looking again on the code I think we can indeed drop `MSR_EFER` from here. I see that host VM (independently of this patch) writes to it only when `kvm_probe_user_return_msr` (via `vmx_setup_user_return_msrs` just to probe this MSR as it is hardcoded in `vmx_uret_msrs_list`) but then it does not update the .curr value anyway. So I think we can drop it from this list and keep MSR_EFER pass-through. But AFAIU keeping it will not be harmful anyway.",
+      "parentUuid": "23cebcfa_bb6e1ed1",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
