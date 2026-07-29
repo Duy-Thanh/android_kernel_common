@@ -264,7 +264,7 @@ static int binder_page_insert(struct binder_alloc *alloc,
 	vma = lock_vma_under_rcu(mm, addr);
 	if (vma) {
 		if (binder_alloc_is_mapped(alloc))
-			ret = vm_insert_page(vma, addr, page);
+			ret = vm_insert_page_native(vma, addr, page);
 		vma_end_read(vma);
 		return ret;
 	}
@@ -273,7 +273,7 @@ static int binder_page_insert(struct binder_alloc *alloc,
 	mmap_read_lock(mm);
 	vma = vma_lookup(mm, addr);
 	if (vma && binder_alloc_is_mapped(alloc))
-		ret = vm_insert_page(vma, addr, page);
+		ret = vm_insert_page_native(vma, addr, page);
 	mmap_read_unlock(mm);
 
 	return ret;
