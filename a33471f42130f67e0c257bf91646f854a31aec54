@@ -190,6 +190,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79a53211_af478b05",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T09:40:14Z",
+      "side": 1,
+      "message": "\u003e Or maybe just check pkvm_cpu_initialized? If not initialized yet, then we just directly write the value to these MSRs?\n\nSounds like a good idea, but: if the current CPU is not initialized yet, it doesn\u0027t mean that the \"first\" CPU (which does \"global initialize\" of pKVM) is not initialized yet. So if the first CPU has already global-initialized pKVM, it has already set up the `kvm_uret_msrs_list`, so we _must_ do `kvm_set_user_return_msr` here rather than just directly write these values?\n\nMaybe export a function like `pkvm_global_initialized()` to check it here?\n\n...Or if we don\u0027t have a goal to make this truly robust (i.e. to allow the host to write these MSRs at any moment, even in parallel with pKVM initialization), - then maybe just add `BUG_ON(!pkvm_cpu_initialized())` here, for extra safety?\n\n\u003e BTW, as this can happen before sending enable_virtualization_cpu hypercall, the per_cpu user_return_msrs is not initialized yet, with all 0 values. But it should be fine for us to use kvm_set_user_return_msr here to write these MSRs.\n\nHmm yeah, another good point to think about...",
+      "parentUuid": "e0156d38_545e9b9c",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
@@ -237,6 +255,24 @@
       "side": 1,
       "message": "That is interesting observation. Nevertheless I think it is still ok.\n\n\u003e Do we need to add MSR_EFER here? \n\nIf we remove MSR_EFER here, we will not intercept it and allow the host to overwrite MSR_EFER behind pKVM\u0027s back without updating the .curr as this patch cares about.\n\n\u003e Based on my limited understanding we enable VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER so pkvm saves host EFER and loads hyp EFER on VEMXIT and loads the saved host EFER back on VMENTRY.\n\nYou are right but AFAIK:\n- `vmx_setup_user_return_msrs` calls `kvm_add_user_return_msr` for MSR_EFER unconditionally and therefore `kvm_probe_user_return_msr` (which triggers an unconditional wrmsrq, not dependent on `VM_ENTRY_LOAD_IA32_EFER`, `VM_EXIT_SAVE_IA32_EFER` and `VM_EXIT_LOAD_IA32_EFER` wrmsrq). Also  `kvm_add_user_return_msr` adds it to `kvm_uret_msrs_list`. So this write seem legit.\n- Because hardware handles the switch automatically (instructed by `VM_ENTRY_LOAD_IA32_EFER`, `VM_EXIT_SAVE_IA32_EFER` and `VM_EXIT_LOAD_IA32_EFER`), `vmx_prepare_switch_to_guest` checks `!vmx-\u003eguest_uret_msrs[i].load_into_hardware` and skips `kvm_set_user_return_msr` and therefore skips manual switch.",
       "parentUuid": "7bcae5aa_8996d3a7",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26fe9bca_9180eb93",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T09:40:14Z",
+      "side": 1,
+      "message": "\u003e If we remove MSR_EFER here, we will not intercept it and allow the host to overwrite MSR_EFER behind pKVM\u0027s back without updating the .curr as this patch cares about.\n\nBut VM_EXIT_LOAD_IA32_EFER ensures that the EFER value seen by the hypervisor (and, in particular, used by the hypervisor when deciding whether need to write guest\u0027s EFER value) is the EFER value captured during deprivileging (and programmed in the host VMCS via `vmcs_write64(HOST_IA32_EFER, msrq)`), unaffected the host\u0027s writes to EFER (as those writes only affect the value represented by GUEST_IA32_EFER in the host VMCS)?\n\n...That said, I\u0027m not sure I clearly understand yet what exactly happens to EFER across all these host/hyp and hyp/guest switches and why exactly the original KVM code does what it does with EFER. (I think we\u0027d better clearly understand that before merging this.)",
+      "parentUuid": "f19c6b26_411d20a5",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

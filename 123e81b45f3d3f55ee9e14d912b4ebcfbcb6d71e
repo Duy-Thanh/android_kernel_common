@@ -69,6 +69,24 @@
       "parentUuid": "19c24f85_562ec4c5",
       "revId": "123e81b45f3d3f55ee9e14d912b4ebcfbcb6d71e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fd5a74_df4a953d",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T09:40:14Z",
+      "side": 1,
+      "message": "Nevermind, now I see that `load_into_hardware` and `mask` are for a different thing - they are for pKVM to decide whether to write _guest_ MSR values (and which bits) to hardware, before entering the guest.",
+      "parentUuid": "19c24f85_562ec4c5",
+      "revId": "123e81b45f3d3f55ee9e14d912b4ebcfbcb6d71e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
