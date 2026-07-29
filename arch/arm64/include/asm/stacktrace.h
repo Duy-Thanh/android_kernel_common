@@ -41,8 +41,8 @@ static inline bool on_irq_stack(unsigned long sp, unsigned long size)
 
 static inline struct stack_info stackinfo_get_task(const struct task_struct *tsk)
 {
-	unsigned long low = (unsigned long)task_stack_page(tsk);
-	unsigned long high = low + THREAD_SIZE;
+	unsigned long low = (unsigned long)end_of_stack(tsk);
+	unsigned long high = (unsigned long)task_stack_page(tsk) + THREAD_SIZE;
 
 	return (struct stack_info) {
 		.low = low,

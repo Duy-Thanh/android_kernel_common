@@ -74,7 +74,23 @@
 	msr	spsel, #0
 	sub	x1, x1, x0
 
+#ifdef CONFIG_ARCH_HAS_VARIABLE_STACK_SIZE
+	add	x0, x0, #THREAD_SIZE
+	msr	spsel, #1
+	mov	x1, sp
+	msr	spsel, #0
+	sub	x1, x0, x1
+	sub	x1, x1, #1
+	adr_l	x0, kernel_thread_shift
+	ldr	w0, [x0]
+	lsr	x1, x1, x0
+#else
+	msr	spsel, #1
+	mov	x1, sp
+	msr	spsel, #0
+	sub	x1, x1, x0
 	lsr	x1, x1, #THREAD_SHIFT
+#endif
 	cbz	x1, .Lstack_ok\@
 
 	/*
