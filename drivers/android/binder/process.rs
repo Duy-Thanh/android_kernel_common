@@ -1157,7 +1157,7 @@ impl Process {
         let size = usize::min(vma.end() - vma.start(), bindings::SZ_4M as usize);
         let mapping = Mapping::new(vma.start(), size);
         let page_count = self.pages.register_with_vma(vma)?;
-        if page_count * PAGE_SIZE != size {
+        if page_count != (size + PAGE_SIZE - 1) / PAGE_SIZE {
             return Err(EINVAL);
         }
 

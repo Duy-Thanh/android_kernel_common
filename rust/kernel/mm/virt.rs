@@ -189,12 +189,17 @@ impl VmaMixedMap {
 
     /// Maps a single page at the given address within the virtual memory area.
     ///
+    /// The whole native page is mapped: in a process using a smaller page size it covers the
+    /// consecutive process pages starting at `address`.
+    ///
     /// This operation does not take ownership of the page.
     #[inline]
     pub fn vm_insert_page(&self, address: usize, page: &Page) -> Result {
         // SAFETY: By the type invariant of `Self` caller has read access and has verified that
         // `VM_MIXEDMAP` is set. By invariant on `Page` the page has order 0.
-        to_result(unsafe { bindings::vm_insert_page(self.as_ptr(), address, page.as_ptr()) })
+        to_result(unsafe {
+            bindings::vm_insert_page_native(self.as_ptr(), address, page.as_ptr())
+        })
     }
 }
 

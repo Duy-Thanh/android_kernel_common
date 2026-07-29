@@ -2515,6 +2515,38 @@ int vm_insert_page(struct vm_area_struct *vma, unsigned long addr,
 }
 EXPORT_SYMBOL(vm_insert_page);
 
+/**
+ * vm_insert_page_native - map one native page into a user VMA
+ * @vma: target user VMA
+ * @addr: target start address
+ * @page: native backing page
+ *
+ * Native VMAs receive one PTE.  A smaller-page P3S VMA receives every
+ * process-page slice covered by the native page, clamped at vm_end.
+ */
+int vm_insert_page_native(struct vm_area_struct *vma, unsigned long addr,
+			  struct page *page)
+{
+	unsigned int slice;
+	int ret;
+
+	if (!vma_is_p3s_4k(vma))
+		return vm_insert_page(vma, addr, page);
+
+	for (slice = 0; slice < P3S_SLICES_PER_PAGE; slice++) {
+		unsigned long slice_addr = addr + (slice << PAGE_SHIFT_4KB);
+
+		if (slice_addr >= vma->vm_end)
+			break;
+		ret = vm_insert_page_slice(vma, slice_addr, page, slice);
+		if (ret)
+			return ret;
+	}
+
+	return 0;
+}
+EXPORT_SYMBOL(vm_insert_page_native);
+
 int vm_insert_page_slice(struct vm_area_struct *vma, unsigned long addr,
 			 struct page *page, unsigned int slice_idx)
 {
