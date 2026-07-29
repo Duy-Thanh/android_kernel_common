@@ -28,10 +28,11 @@
  * @name:		used for debugging/device-node name
  * @ops:		ops struct for this heap
  * @priv:		private data for this heap
- * @heap_devt		heap device node
- * @list		list head connecting to list of heaps
- * @heap_cdev		heap char device
- * @heap_dev		heap device struct
+ * @heap_devt:		heap device node
+ * @list:		list head connecting to list of heaps
+ * @heap_cdev:		heap char device
+ * @refcount:		reference count for this heap
+ * @heap_dev:		heap device struct
  *
  * Represents a heap of memory from which buffers can be made.
  */
