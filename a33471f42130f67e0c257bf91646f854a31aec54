@@ -334,6 +334,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80178cdc_46378cd8",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T13:54:39Z",
+      "side": 1,
+      "message": "\u003eYeah, and actually it seems we can just remove the enable_virtualization_cpu PV interface then, i.e. we can just let the host-side pkvm_enable_virtualization_cpu() do nothing. (After all, it does not actually enable virtualization anyway, the actual enabling of virtualization is done by pKVM initialization much earlier.)\n\nYeah, without `kvm_user_return_msr_cpu_online()`, the enable_virtualization_cpu PV interface does nothing and we can just remove it.\n\n\u003eSounds interesting. OTOH, if that would require a bit more logic in the code, while the only reason for that is to support scenarios that shouldn\u0027t happen anyway...\n\nIndeed...",
+      "parentUuid": "b918c66f_087c9167",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
