@@ -16,6 +16,24 @@
       "message": "You\u0027ll need to follow this patch up with a separate patch, updating the KABI",
       "revId": "8617902a23e545dbbfe5fba6fdf4361272905ac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a15815_d5d8fe75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-07-29T04:38:33Z",
+      "side": 1,
+      "message": "okay, I would sent it later",
+      "parentUuid": "b14cd069_1755287c",
+      "revId": "8617902a23e545dbbfe5fba6fdf4361272905ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
