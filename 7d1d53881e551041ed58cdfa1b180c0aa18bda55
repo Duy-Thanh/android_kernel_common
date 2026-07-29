@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9001e5c9_378ae6ee",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T21:37:26Z",
+      "side": 1,
+      "message": "nit: maybe `#include \"../x86.h\"` for consistency with the above `#include \"../cpuid.h\"` (and put them close together)?",
+      "revId": "7d1d53881e551041ed58cdfa1b180c0aa18bda55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc904e89_4615df06",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T21:37:26Z",
+      "side": 1,
+      "message": "Comments in the code should rather explain why the code in its current state does what it does, not describe its history (for history we have git logs)?\n\nSomething like \"There is nothing to do here as virtualization was already enabled during pKVM initialization and is never disabled or re-enabled later.\" ?\n\n...BTW just a note: we also have a related comment in `vmx_enable_virtualization_cpu()`.",
+      "fixSuggestions": [
+        {
+          "fixId": "3b9a89cc_ee92a0e8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_host.c",
+              "range": {
+                "startLine": 609,
+                "startChar": 0,
+                "endLine": 611,
+                "endChar": 0
+              },
+              "replacement": "\t * There is nothing to do here as virtualization was already enabled\n\t * during pKVM initialization and is never disabled or re-enabled later.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7d1d53881e551041ed58cdfa1b180c0aa18bda55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
