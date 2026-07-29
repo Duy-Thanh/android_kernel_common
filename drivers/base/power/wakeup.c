@@ -960,9 +960,34 @@ void pm_wakeup_clear(unsigned int irq_number)
 		atomic_set(&pm_abort_suspend, 0);
 }
 
+static int pm_wakeup_irq_number;
+static char pm_wakeup_irq_name[64];
+
+void pm_print_wakeup_irq(void)
+{
+	unsigned long flags;
+	int irq;
+	char name[64];
+
+	raw_spin_lock_irqsave(&wakeup_irq_lock, flags);
+	irq = pm_wakeup_irq_number;
+	if (irq) {
+		strscpy(name, pm_wakeup_irq_name, sizeof(name));
+		pm_wakeup_irq_number = 0;
+	}
+	raw_spin_unlock_irqrestore(&wakeup_irq_lock, flags);
+
+	if (irq) {
+		pm_pr_dbg("Triggering wakeup from IRQ %d\n", irq);
+		pr_warn("pm_system_irq_wakeup: %d triggered %s\n", irq, name);
+	}
+}
+
 void pm_system_irq_wakeup(unsigned int irq_number)
 {
 	unsigned long flags;
+	struct irq_desc *desc;
+	const char *name = "null";
 
 	raw_spin_lock_irqsave(&wakeup_irq_lock, flags);
 
@@ -973,23 +998,21 @@ void pm_system_irq_wakeup(unsigned int irq_number)
 	else
 		irq_number = 0;
 
-	pm_pr_dbg("Triggering wakeup from IRQ %d\n", irq_number);
-
-	raw_spin_unlock_irqrestore(&wakeup_irq_lock, flags);
-
 	if (irq_number) {
-		struct irq_desc *desc;
-		const char *name = "null";
-
 		desc = irq_to_desc(irq_number);
 		if (desc == NULL)
 			name = "stray irq";
 		else if (desc->action && desc->action->name)
 			name = desc->action->name;
 
-		log_irq_wakeup_reason(irq_number);
-		pr_warn("%s: %d triggered %s\n", __func__, irq_number, name);
+		pm_wakeup_irq_number = irq_number;
+		strscpy(pm_wakeup_irq_name, name, sizeof(pm_wakeup_irq_name));
+	}
 
+	raw_spin_unlock_irqrestore(&wakeup_irq_lock, flags);
+
+	if (irq_number) {
+		log_irq_wakeup_reason(irq_number);
 		pm_system_wakeup();
 	}
 }
