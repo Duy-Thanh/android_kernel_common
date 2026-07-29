@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bdafe60_d1e042e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-29T23:32:39Z",
+      "side": 1,
+      "message": "Thanks for the pointer, but I believe d5e79eeba308 is a different fix. It corrected the dma_heap_get_name() docs and removed the duplicated copies from include/linux/dma-heap.h, and that work is present in android-mainline today -- the \"Returns:\" block above dma_heap_get_name() came from it.\n\nWhat it didn\u0027t touch is the struct dma_heap member list, which is what this change is about: @heap_devt, @list, @heap_cdev and @heap_dev are missing the colon kernel-doc needs to associate them with a member, and @refcount isn\u0027t documented at all. On android-mainline at a7350f99bf23, before this change:\n\n  $ scripts/kernel-doc -none drivers/dma-buf/dma-heap.c\n  Warning: drivers/dma-buf/dma-heap.c:46 struct member \u0027heap_devt\u0027 not described in \u0027dma_heap\u0027\n  Warning: drivers/dma-buf/dma-heap.c:46 struct member \u0027list\u0027 not described in \u0027dma_heap\u0027\n  Warning: drivers/dma-buf/dma-heap.c:46 struct member \u0027heap_cdev\u0027 not described in \u0027dma_heap\u0027\n  Warning: drivers/dma-buf/dma-heap.c:46 struct member \u0027refcount\u0027 not described in \u0027dma_heap\u0027\n  Warning: drivers/dma-buf/dma-heap.c:46 struct member \u0027heap_dev\u0027 not described in \u0027dma_heap\u0027\n\n(the current script prints each of these twice, so the raw output is 10 lines for the 5 distinct warnings.)\n\nSo this looks like something that was simply never noticed, rather than a missing backport.",
+      "parentUuid": "95c43944_9435cfb0",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee880d85_485e1740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-29T23:32:39Z",
+      "side": 1,
+      "message": "Understood -- I\u0027ll send this to dri-devel/linux-media so it lands in drm-misc-next first, and let it come back down through the normal merge instead of carrying it as an ANDROID: patch.\n\nFeel free to leave the -2 on this one. I\u0027ll comment here with a Link once the upstream posting is out, and abandon this change unless you\u0027d rather keep it open to track the merge-down.",
+      "parentUuid": "8192225b_7276f23f",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
