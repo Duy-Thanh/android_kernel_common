@@ -16,6 +16,24 @@
       "message": "Looking at the original code `handle_gcmd_direct`, it reconstruct the GCMD register value from the hardware GSTS register via `u32 gcmd \u003d readl(iommu-\u003ereg + DMAR_GSTS_REG) \u0026 DMAR_GSTS_EN_BITS;`, which should have TE/QIE bits enabled,so we are not using vgsts shadow? Or I misunderstood something?",
       "revId": "e29ac33c060c78da37b2070625ff0dd920872cce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942f591f_dfef3160",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 30
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-29T10:30:58Z",
+      "side": 1,
+      "message": "You\u0027re right. @dmaluka@google.com also pointed out in the bug that this is already fixed by aosp/4043301. This patch is meant to be extra hardening, but commit message was wrong. Thanks for noting this. I have rephrased the commit message to reflect this.",
+      "parentUuid": "0fad7f24_d60c7c8d",
+      "revId": "e29ac33c060c78da37b2070625ff0dd920872cce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
