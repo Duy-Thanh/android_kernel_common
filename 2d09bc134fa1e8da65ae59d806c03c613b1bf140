@@ -16,6 +16,24 @@
       "message": "This must be submitted to upstream Linux.",
       "revId": "2d09bc134fa1e8da65ae59d806c03c613b1bf140",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c43944_9435cfb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-07-29T16:29:40Z",
+      "side": 1,
+      "message": "It was fixed upstream here 2 years ago: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd5e79eeba3086a52593b295ac4bf6eddd64d4aad\n\nCurious it hasn\u0027t been merged into android-mainline.",
+      "parentUuid": "8192225b_7276f23f",
+      "revId": "2d09bc134fa1e8da65ae59d806c03c613b1bf140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
