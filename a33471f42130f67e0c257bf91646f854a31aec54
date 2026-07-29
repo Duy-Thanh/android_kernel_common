@@ -401,6 +401,24 @@
       "parentUuid": "23cebcfa_bb6e1ed1",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10235c7_7b5a3c87",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T12:27:41Z",
+      "side": 1,
+      "message": "\u003e But AFAIU keeping it will not be harmful anyway.\n\nHarmful but useless?\n\n...BTW while we\u0027re at it, maybe worth adding a comment like `/* User-return MSRs (except MSR_EFER which is isolated via VMCS): */` before line 73?\n\n(BTW in the future, e.g. for upstream, we might define this hardcoded list of user-return MSRs in a single place e.g. via a macro, instead of duplicating it in 3 places.)",
+      "parentUuid": "1b552aae_7091d36a",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
