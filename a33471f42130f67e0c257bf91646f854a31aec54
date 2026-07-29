@@ -262,6 +262,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a293f7e4_a097677f",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T11:33:31Z",
+      "side": 1,
+      "message": "\u003e This shouldn\u0027t happen AFAIU: pkvm_init which sets cpu_initialized happens after de-privileging. And before de-privileging any wrmsrq will not cause the trap and vm exit. Therefore handle_write_msr will not be triggered before pkvm_cpu_initialized is true so I do not see a reason for this BUG_ON.\n\nThere is a window between the CPU deprivileging (i.e. when the CPU starts running in VMX non-root) and setting `pkvm_cpu_initialized`. During this window, this may happen. (But this _should not_ happen if the still-trusted host behaves as we expect it to, hence the BUG_ON, not just an `if`.)\n\n\u003e For using kvm_set_user_return_msr vs direct write: why should we care and not perform kvm_set_user_return_msr unconditionally? [...]\n\nAt the moment I\u0027m actually thinking it would be good to avoid the need to perform `kvm_set_user_return_msr` at all (because there is no objective need to allow the host to _change_ the values of these MSRs, - because the very idea of user-return MSRs assumes that kernel never needs to change them).",
+      "parentUuid": "ec839fb2_e51768a2",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
