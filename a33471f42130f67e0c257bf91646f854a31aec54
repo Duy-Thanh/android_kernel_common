@@ -101,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b6779b6_7951a9a9",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T01:45:16Z",
+      "side": 1,
+      "message": "Maybe it is better to still keep the host KVM setting up the user return msrs for the host KVM to have a sense about this, in case some code still refers that, like the `arch/x86/kvm/cpuid.c:1324 kvm_set_cpu_caps+0x1019/0x10a0`",
+      "parentUuid": "0abf70f7_54e15960",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81045cf0_ba96eed0",
         "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
         "patchSetId": 9
@@ -130,6 +148,24 @@
       "side": 1,
       "message": "Yeah I think you are right it will be rather a pKVM\u0027s internal issue I\u0027ve added `BUG_ON(slot \u003c 0);` on current version.",
       "parentUuid": "81045cf0_ba96eed0",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0156d38_545e9b9c",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T01:45:16Z",
+      "side": 1,
+      "message": "Or maybe just check `pkvm_cpu_initialized`? If not initialized yet, then we just directly write the value to these MSRs?\n\nIf yes, means uret MSRs are registered in the pKVM and the slot should not be a negative value, and we can BUG_ON in this case.\n\nBTW, as this can happen before sending enable_virtualization_cpu hypercall, the per_cpu `user_return_msrs` is not initialized yet, with all 0 values. But it should be fine for us to use `kvm_set_user_return_msr` here to write these MSRs.",
+      "parentUuid": "de1467ca_ba226a16",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
