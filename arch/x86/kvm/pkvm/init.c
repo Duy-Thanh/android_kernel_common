@@ -11,6 +11,7 @@
 #include "mmu.h"
 #include "pkvm.h"
 #include "trace.h"
+#include "x86.h"
 
 /*
  * Set by the host before deprivilege and used through the initialization
@@ -300,6 +301,8 @@ int pkvm_init(struct pkvm_mem_info infos[], int nr_infos)
 		return ret;
 
 	pkvm_vcpu_perf_init(this_cpu_read(host_vcpu));
+
+	kvm_user_return_msr_cpu_online();
 
 	this_cpu_write(cpu_initialized, true);
 	return 0;
