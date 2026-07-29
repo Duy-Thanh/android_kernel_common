@@ -35,6 +35,24 @@
       "parentUuid": "8192225b_7276f23f",
       "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f25be6a7_e3441b54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-29T23:38:44Z",
+      "side": 1,
+      "message": "Correction to my previous comment: the dma-heap.c half of d5e79eeba308 is in android-mainline, and so is the header dedup for dma_heap_get_drvdata() and dma_heap_add(). But the dma_heap_get_name() block you removed from include/linux/dma-heap.h is back, with the original incorrect wording:\n\n  /**\n   * dma_heap_get_name() - get heap name\n   * @heap: DMA-Heap to retrieve private data for\n   *\n   * Returns:\n   * The char* for the heap name.\n   */\n  const char *dma_heap_get_name(struct dma_heap *heap);\n\ndma-heap.c has your corrected \"retrieve the name of\", so the two have drifted apart again -- which is the exact duplication problem your commit removed. It sits next to the ANDROID-only dma_heap_get_dev() declaration; I couldn\u0027t identify which change reintroduced it from my tree. Out of scope for this change, but probably worth a separate look.",
+      "parentUuid": "95c43944_9435cfb0",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
