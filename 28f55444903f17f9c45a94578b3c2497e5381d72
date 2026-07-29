@@ -205,6 +205,24 @@
       "parentUuid": "c10f2ddb_2dd5a9d0",
       "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99e00449_54656d47",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T18:36:05Z",
+      "side": 1,
+      "message": "I think I can resolve this comment as this patch was reworked and address above main issue. Other opens are tracked in different comments.",
+      "parentUuid": "eefca029_8f06d642",
+      "revId": "28f55444903f17f9c45a94578b3c2497e5381d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

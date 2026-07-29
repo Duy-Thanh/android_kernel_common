@@ -135,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d03183_2b0965ef",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T18:36:05Z",
+      "side": 1,
+      "message": "Marking as resolved.",
+      "parentUuid": "ad1ce8d9_46c8f1d2",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81045cf0_ba96eed0",
@@ -352,6 +370,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c29966a0_76adb997",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T18:36:05Z",
+      "side": 1,
+      "message": "Ok, so I\u0027ve introduce aosp/4201603 just before this patch to address last comments and modify it as suggested above. PTAL.",
+      "parentUuid": "80178cdc_46378cd8",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
@@ -525,6 +561,24 @@
       "side": 1,
       "message": "\u003e GUEST_IA32_EFER is not updated and is the old value A\n\nI think GUEST_IA32_EFER is updated even earlier, by HW during vmexit, due to VM_EXIT_SAVE_IA32_EFER.\n\n\u003e I think linux doesn\u0027t update MSR_EFER after deprivilege, so should not be an issue.\n\nPer above, it seems it should not be an issue either way.\n\nBut as I wrote in other comments, I think we don\u0027t need to allow the host to modify _any_ user-return MSRs, anyway.\n\n...BTW this makes me wonder: would it be possible to not enable VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER (thus make host vmexits cheaper) and instead rely on intercepting host writes to EFER for preventing the host from modifying it? @chuanxiao.dong@intel.corp-partner.google.com what do you think?",
       "parentUuid": "deabc989_41020937",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff48b52a_79ebbe46",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T18:36:05Z",
+      "side": 1,
+      "message": "Yeah I think what @dmaluka@google.com is proposing in the last comment make sense and would be a nice optimization. But if we decide to do that I think we can handle it as a separate commit.",
+      "parentUuid": "528ca9fc_43e96a6b",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
