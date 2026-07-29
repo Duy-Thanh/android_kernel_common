@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396e9591_c8f590df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-29T16:23:36Z",
+      "side": 1,
+      "message": "This patch must have the same Change-Id as aosp/4200205. Please abandon this patch and cherry-pick aosp/4200205 (or abandon that patch and cherry-pick this one).",
+      "revId": "20ba538cf29d302d8b06affdc83e0ca7d9ad29fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
