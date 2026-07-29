@@ -119,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad1ce8d9_46c8f1d2",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T07:02:36Z",
+      "side": 1,
+      "message": "Yeah, this is what I am suggesting to rather keep it as is and do not introduce:\n```\n-       vmx_setup_user_return_msrs();\n+#ifndef __PKVM_HYP__\n+       if (!enable_pkvm)\n+#endif\n+               vmx_setup_user_return_msrs();\n```\nas it will desync host KVM",
+      "parentUuid": "7b6779b6_7951a9a9",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81045cf0_ba96eed0",
         "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
         "patchSetId": 9
@@ -201,6 +219,24 @@
           ]
         }
       ],
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f19c6b26_411d20a5",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T07:02:36Z",
+      "side": 1,
+      "message": "That is interesting observation. Nevertheless I think it is still ok.\n\n\u003e Do we need to add MSR_EFER here? \n\nIf we remove MSR_EFER here, we will not intercept it and allow the host to overwrite MSR_EFER behind pKVM\u0027s back without updating the .curr as this patch cares about.\n\n\u003e Based on my limited understanding we enable VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER so pkvm saves host EFER and loads hyp EFER on VEMXIT and loads the saved host EFER back on VMENTRY.\n\nYou are right but AFAIK:\n- `vmx_setup_user_return_msrs` calls `kvm_add_user_return_msr` for MSR_EFER unconditionally and therefore `kvm_probe_user_return_msr` (which triggers an unconditional wrmsrq, not dependent on `VM_ENTRY_LOAD_IA32_EFER`, `VM_EXIT_SAVE_IA32_EFER` and `VM_EXIT_LOAD_IA32_EFER` wrmsrq). Also  `kvm_add_user_return_msr` adds it to `kvm_uret_msrs_list`. So this write seem legit.\n- Because hardware handles the switch automatically (instructed by `VM_ENTRY_LOAD_IA32_EFER`, `VM_EXIT_SAVE_IA32_EFER` and `VM_EXIT_LOAD_IA32_EFER`), `vmx_prepare_switch_to_guest` checks `!vmx-\u003eguest_uret_msrs[i].load_into_hardware` and skips `kvm_set_user_return_msr` and therefore skips manual switch.",
+      "parentUuid": "7bcae5aa_8996d3a7",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
