@@ -164,7 +164,7 @@ fi
 # found by `bindgen`. This step may already fail if, for instance, `libclang`
 # is not found, thus inform the user in such a case.
 bindgen_libclang_output=$( \
-	LC_ALL=C "$BINDGEN" $(dirname $0)/rust_is_available_bindgen_libclang.h 2>&1 >/dev/null
+	LC_ALL=C "$BINDGEN" $(dirname $0)/rust_is_available_bindgen_libclang.h -- -nobuiltininc -nostdinc -D__KERNEL__ 2>&1 >/dev/null
 ) || bindgen_libclang_code=$?
 if [ -n "$bindgen_libclang_code" ]; then
 	echo >&2 "***"
