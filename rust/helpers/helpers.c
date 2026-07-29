@@ -47,6 +47,7 @@
 #include "build_bug.c"
 #include "compat.c"
 #include "cred.c"
+#include "dma-buf.c"
 #include "err.c"
 #include "fs.c"
 #include "jump_label.c"

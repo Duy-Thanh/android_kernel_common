@@ -13,6 +13,7 @@
 #include <linux/blkdev.h>
 #include <linux/compat.h>
 #include <linux/cred.h>
+#include <linux/dma-buf.h>
 #include <linux/errname.h>
 #include <linux/ethtool.h>
 #include <linux/fdtable.h>

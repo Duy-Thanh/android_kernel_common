@@ -38,6 +38,8 @@ pub mod block;
 mod build_assert;
 pub mod cred;
 pub mod device;
+pub mod dma;
+pub mod dma_buf;
 pub mod error;
 #[cfg(CONFIG_RUST_FW_LOADER_ABSTRACTIONS)]
 pub mod firmware;
