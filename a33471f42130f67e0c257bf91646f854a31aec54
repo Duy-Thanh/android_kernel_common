@@ -298,6 +298,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3c0f6b8_c0e74491",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T13:27:02Z",
+      "side": 1,
+      "message": "\u003eSo, now I\u0027m thinking: any actual reason we need to postpone kvm_user_return_msr_cpu_online() until the enable_virtualization_cpu hypercall? Can\u0027t we do it already in pkvm_init() (i.e. as a part of handling the __pkvm__init hypercall, on each CPU, before setting its cpu_initialized)?\n\nCall `kvm_user_return_msr_cpu_online()` until enable_virtualization_cpu hypercall is just following the KVM. I think we can do this earlier during handling __pkvm_init hypercall. Then we don\u0027t need https://android-review.googlesource.com/c/kernel/common/+/4198684/1?\n\nSeems even with this, there is still a window that, host modify these MSRs before sending the __pkvm_init hypercall? Since the normal host won\u0027t modify these MSRs in this window, I am fine we just add BUG_ON here to simplify the logic.\n\nBTW, this makes me thinking that, maybe in the future, we can refactor the code to setup the MSR bitmap during handling __pkvm_init as well, so that, the host is allowed to directly access the MSRs until pkvm initialized the CPU, which can close this window.",
+      "parentUuid": "35cd4564_3ae9e1c5",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
