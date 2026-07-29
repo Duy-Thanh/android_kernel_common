@@ -106,9 +106,9 @@ void __kasan_unpoison_range(const void *address, size_t size)
 /* Unpoison the entire stack for a task. */
 void kasan_unpoison_task_stack(struct task_struct *task)
 {
-	void *base = task_stack_page(task);
+	void *base = end_of_stack(task);
 
-	kasan_unpoison(base, THREAD_SIZE, false);
+	kasan_unpoison(base, (void *)task_stack_page(task) + THREAD_SIZE - base, false);
 }
 
 /* Unpoison the stack for the current task beyond a watermark sp value. */
@@ -120,6 +120,10 @@ asmlinkage void kasan_unpoison_task_stack_below(const void *watermark)
 	 * yet set up the percpu register (%gs).
 	 */
 	void *base = (void *)((unsigned long)watermark & ~(THREAD_SIZE - 1));
+
+#ifdef CONFIG_ARCH_HAS_VARIABLE_STACK_SIZE
+	base = (void *)end_of_stack(current);
+#endif
 
 	kasan_unpoison(base, watermark - base, false);
 }
