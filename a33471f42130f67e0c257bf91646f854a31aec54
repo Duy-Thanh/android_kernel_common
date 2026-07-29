@@ -275,6 +275,24 @@
       "parentUuid": "f19c6b26_411d20a5",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23cebcfa_bb6e1ed1",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T09:48:33Z",
+      "side": 1,
+      "message": "Because we have `VM_EXIT_LOAD_IA32_EFER`, when host vmexits to pKVM, the MSR_EFER is restored to pKVM\u0027s value automatically, which indicates the host is not able to modify the MSR_EFER seen by the pKVM. So the host is not able to change .cur via modifying its own EFER. Based on this, I also think we don\u0027t need to intercept MSR_EFER.",
+      "parentUuid": "f19c6b26_411d20a5",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
