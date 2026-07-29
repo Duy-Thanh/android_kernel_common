@@ -973,23 +973,10 @@ void pm_system_irq_wakeup(unsigned int irq_number)
 	else
 		irq_number = 0;
 
-	pm_pr_dbg("Triggering wakeup from IRQ %d\n", irq_number);
-
 	raw_spin_unlock_irqrestore(&wakeup_irq_lock, flags);
 
 	if (irq_number) {
-		struct irq_desc *desc;
-		const char *name = "null";
-
-		desc = irq_to_desc(irq_number);
-		if (desc == NULL)
-			name = "stray irq";
-		else if (desc->action && desc->action->name)
-			name = desc->action->name;
-
 		log_irq_wakeup_reason(irq_number);
-		pr_warn("%s: %d triggered %s\n", __func__, irq_number, name);
-
 		pm_system_wakeup();
 	}
 }
