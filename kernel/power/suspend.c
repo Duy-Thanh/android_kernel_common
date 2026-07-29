@@ -459,6 +459,7 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 
 	if (state == PM_SUSPEND_TO_IDLE) {
 		s2idle_loop();
+		pm_print_wakeup_irq();
 		goto Platform_wake;
 	}
 
@@ -493,6 +494,8 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 	arch_suspend_enable_irqs();
 	BUG_ON(irqs_disabled());
 
+	pm_print_wakeup_irq();
+
  Enable_cpus:
 	pm_sleep_enable_secondary_cpus();
 
@@ -508,6 +511,7 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 
  Platform_finish:
 	platform_resume_finish(state);
+	pm_print_wakeup_irq();
 	return error;
 }
 
