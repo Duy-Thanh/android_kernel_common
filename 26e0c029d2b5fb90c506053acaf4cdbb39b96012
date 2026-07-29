@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d533cc_a6a8e129",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T00:49:48Z",
+      "side": 1,
+      "message": "Just realized that, once the host is deprivileged, the host can cause vmexit to pKVM if it modifies the xcr0/xss. If this happens before the host send pkvm_init hypercall, the kvm_host is not initialized so kvm_host.xcr0/xss are 0, then this check will be true even the val is actually the same with the HW XSS, causing host receiving a #GP. But I think in practical, such case will not happen. So just add a note here.",
+      "revId": "26e0c029d2b5fb90c506053acaf4cdbb39b96012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
