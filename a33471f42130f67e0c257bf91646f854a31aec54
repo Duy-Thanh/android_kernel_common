@@ -491,6 +491,24 @@
       "parentUuid": "b10235c7_7b5a3c87",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deabc989_41020937",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-29T14:16:08Z",
+      "side": 1,
+      "message": "\u003e vmx_setup_user_return_msrs calls kvm_add_user_return_msr for MSR_EFER unconditionally and therefore kvm_probe_user_return_msr (which triggers an unconditional wrmsrq, not dependent on VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER wrmsrq). Also kvm_add_user_return_msr adds it to kvm_uret_msrs_list. So this write seem legit.\n\nWhat I meant is - even if wrmsrq writes the new value, the VMENTRY will overrite it with GUEST_IA32_EFER. So a genuine host request is discarded. \n\nConsider this sequence:\n```\nVMEXIT(intercept for MSR_EFER)\n  saves A into GUEST_IA32_EFER\n  loads pKVM EFER\n  runs Handler\n\nHandler:\n  wrmsrq writes B into physical pKVM EFER\n  sets cache.curr \u003d B\n  (GUEST_IA32_EFER is not updated and is the old value A)\n\nVMENTRY\n  reloads GUEST_IA32_EFER (which is still A)\n  host runs with A while it expects B\n```\n\nIs this possible? From reading code, I think the handler doesn\u0027t update `GUEST_IA32_EFER` but I might be wrong\n\nI think linux doesn\u0027t update  MSR_EFER after deprivilege, so should not be an issue. But still, it would be an expectation mismatch if ever host tries to update",
+      "parentUuid": "a2e1963f_4fc2f72a",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
