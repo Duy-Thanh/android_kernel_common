@@ -86,6 +86,23 @@
       "message": "Another thing that struck me this morning: While KMI breaking changes can be merged in -kminext, they are not supposed to be build-breaking changes. Since this changes function signatures and ops function-pointers, it seems possible this may cause build issues with vendor/oem driver implementations.\n\nAgain, I\u0027m not super familiar with fuse code, so I\u0027m not sure exactly how externally impacting this change would be. SandeepD would probably have a better insight.\n\nIf this change could be reworked in a fashion suggested here: https://android-review.git.corp.google.com/c/kernel/common/+/4194937/comments/182a9036_c6d9393c\n\nWhere we don\u0027t propagate passing the sync flag through so much stuff, it might be better overall.",
       "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69356d52_bc2167d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-07-29T18:56:34Z",
+      "side": 1,
+      "message": "I\u0027ll pull my CR+2 for now, until we get a better sense of how real these concerns might be.",
+      "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
