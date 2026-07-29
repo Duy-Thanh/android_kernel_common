@@ -60,6 +60,7 @@
   acpi_gpio_get_io_resource
   acpi_handle_printk
   acpi_has_method
+  acpi_has_watchdog
   acpi_install_address_space_handler
   acpi_install_notify_handler
   acpi_is_video_device
@@ -518,6 +519,7 @@
   devm_input_allocate_device
   devm_intel_scu_ipc_dev_get
   __devm_intel_scu_ipc_register
+  devm_ioport_map
   devm_ioremap
   devm_ioremap_resource
   devm_ioremap_uc
@@ -571,6 +573,7 @@
   devm_spi_mem_dirmap_create
   devm_spi_register_controller
   __devm_v4l2_sensor_clk_get
+  devm_watchdog_register_device
   _dev_notice
   dev_open
   dev_pm_clear_wake_irq
@@ -1569,6 +1572,7 @@
   iov_iter_kvec
   iov_iter_npages
   iov_iter_revert
+  iowrite16
   iowrite16_rep
   iowrite32
   iowrite32be
@@ -3252,6 +3256,7 @@
   typec_altmode_vdm
   typec_cable_altmode_enter
   typec_cable_altmode_exit
+  typec_cable_altmode_unsupported
   typec_cable_get
   typec_cable_is_active
   typec_cable_put
