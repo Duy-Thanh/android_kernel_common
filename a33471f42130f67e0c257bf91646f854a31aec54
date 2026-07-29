@@ -208,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf59ef70_74b9400d",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-07-29T10:01:29Z",
+      "side": 1,
+      "message": "\u003e Sounds like a good idea, but: if the current CPU is not initialized yet, it doesn\u0027t mean that the \"first\" CPU (which does \"global initialize\" of pKVM) is not initialized yet. So if the first CPU has already global-initialized pKVM, it has already set up the kvm_uret_msrs_list, so we must do kvm_set_user_return_msr here rather than just directly write these values?\n\nAny reason we must do `kvm_set_user_return_msr` in this case? If we directly write these value to HW MSR, the per_cpu user_return_msrs is left with 0, and the later enable_virtualization_cpu will initialize the per_cpu user_return_msrs with the current HW value. To guarantee the host should call enable_virtualization_cpu, maybe the pkvm can fail the vm creation if the enable_virtualization_cpu is not called, by detecting the new per cpu variable we added by https://android-review.googlesource.com/c/kernel/common/+/4198684/1",
+      "parentUuid": "79a53211_af478b05",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
