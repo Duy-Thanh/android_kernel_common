@@ -250,6 +250,24 @@
       "parentUuid": "640c7766_003ec603",
       "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba16881_d7156edc",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T18:29:11Z",
+      "side": 1,
+      "message": "Marking as resolved.",
+      "parentUuid": "84203d9d_2c299425",
+      "revId": "4aed05cc89ff7752a48d754fb8923f31f055bb61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
