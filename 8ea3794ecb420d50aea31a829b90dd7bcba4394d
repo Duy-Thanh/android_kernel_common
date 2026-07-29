@@ -34,6 +34,23 @@
       "parentUuid": "6071b4cd_c4f92ed3",
       "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146607ec_14e775ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-29T14:03:49Z",
+      "side": 1,
+      "message": "It took me a bit to track down but this patch was implicitly reverted in this merge: https://r.android.com/3092517. Maybe @joneslee@google.com remembers more about it?",
+      "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
