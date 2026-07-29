@@ -16,6 +16,24 @@
       "message": "This patch is from a _long_ time ago. Can we please update the `FROMLIST:` tag accordingly?",
       "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f95bd2_695b3bf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-29T13:43:26Z",
+      "side": 1,
+      "message": "A quick search in lore says any attempts to upstream this patch have been abandoned?",
+      "parentUuid": "6071b4cd_c4f92ed3",
+      "revId": "8ea3794ecb420d50aea31a829b90dd7bcba4394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
