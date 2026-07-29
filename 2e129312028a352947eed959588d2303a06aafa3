@@ -139,6 +139,24 @@
       "parentUuid": "12f5fee8_103ada28",
       "revId": "2e129312028a352947eed959588d2303a06aafa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00c2d6c_0df0a7e7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-29T11:18:51Z",
+      "side": 1,
+      "message": "I addressed this as part of that patch and updated the commit message as well",
+      "parentUuid": "1ac20363_1e1d57c5",
+      "revId": "2e129312028a352947eed959588d2303a06aafa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
