@@ -52,6 +52,24 @@
       "parentUuid": "750d882d_73736bc8",
       "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5b45fe_c5502810",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-07-29T01:44:41Z",
+      "side": 1,
+      "message": "\u003e No strong suggestions, as I\u0027ve not looked in detail.\n\u003e \n\u003e Possibly for the function definitions, you could do something like\n\u003e ```\n\u003e - void funcname(int arg1)\n\u003e + void __funcname(int arg1, bool sync)\n\u003e ...\n\u003e + void funcname(int arg1)\n\u003e + {\n\u003e +     __funcname(arg1, false);\n\u003e + }\n\u003e ```\n\u003e To preserve the function signature\n\u003e \n\u003e Then you only need to change the ones that are always true to use the new `__funcname(arg1, true)` call. \n\u003e \n\u003e I\u0027m a little confused around the `fuse_iqueue_ops` changes as well as the virtio_fs() changes as it adds the sync argument but then doesn\u0027t do anything with it. \n\nThat is because fs/fuse/dev.c use the sync, so the fuse_iqueue_ops add the sync, and to avoid compile error, the virtio_fs()\u0027s ops has to add it.\n\n\u003e So maybe you can avoid making those changes?  But again I\u0027m not sure I fully understand the change.\n\nThanks! we can try this.\nRegardless, we need to cherry-pick this commit to the kmi-next branch first.",
+      "parentUuid": "3d4c9a0c_a4c85db9",
+      "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
