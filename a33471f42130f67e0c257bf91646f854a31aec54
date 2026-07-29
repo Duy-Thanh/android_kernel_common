@@ -280,6 +280,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35cd4564_3ae9e1c5",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T12:04:02Z",
+      "side": 1,
+      "message": "So, now I\u0027m thinking: any actual reason we need to postpone `kvm_user_return_msr_cpu_online()` until the `enable_virtualization_cpu` hypercall? Can\u0027t we do it already in `pkvm_init()` (i.e. as a part of handling the `__pkvm__init` hypercall, on each CPU, before setting its `cpu_initialized`)?\n\nIf we can, then here we can just do this:\n```\n\t\tint slot;\n\t\tu64 cur;\n\t\t\n\t\tBUG_ON(!pkvm_cpu_initialized());\n\n\t\tslot \u003d kvm_find_user_return_msr(msr);\n\t\tBUG_ON(slot \u003c 0);\n\t\tcur \u003d kvm_get_user_return_msr(slot);\n\t\tif (val !\u003d cur) {\n\t\t\tpkvm_warn(\"Host attempt to modify user-return MSR 0x%lx: 0x%llx (expected 0x%llx)\\n\",\n\t\t\t\t  msr, val, cur);\n\t\t\tret \u003d X86EMUL_UNHANDLEABLE;\n\t\t\tbreak;\n\t\t}\n\t\tif (wrmsr_safe(msr, low, high)) {\t/* BTW do we really need this (here and in aosp/4175819)? */\n\t\t\tret \u003d X86EMUL_UNHANDLEABLE;\n\t\t\tbreak;\n\t\t}\n```\n?",
+      "parentUuid": "a293f7e4_a097677f",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
