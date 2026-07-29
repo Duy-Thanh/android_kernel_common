@@ -316,6 +316,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b918c66f_087c9167",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-29T13:42:33Z",
+      "side": 1,
+      "message": "\u003e Then we don\u0027t need https://android-review.googlesource.com/c/kernel/common/+/4198684/1?\n\nYeah, and actually it seems we can just remove the `enable_virtualization_cpu` PV interface then, i.e. we can just let the host-side `pkvm_enable_virtualization_cpu()` do nothing. (After all, it does not _actually_ enable virtualization anyway, the actual enabling of virtualization is done by pKVM initialization much earlier.)\n\n\u003e Seems even with this, there is still a window that, host modify these MSRs before sending the __pkvm_init hypercall? Since the normal host won\u0027t modify these MSRs in this window, I am fine we just add BUG_ON here to simplify the logic.\n\nYeah, that\u0027s exactly my reasoning too: we can just add a BUG_ON for this, just to be safe that if this unexpected scenario ever happens, it will not go unnoticed (and also just for \"documentation\" purpose).\n\n\u003e BTW, this makes me thinking that, maybe in the future, we can refactor the code to setup the MSR bitmap during handling __pkvm_init as well, so that, the host is allowed to directly access the MSRs until pkvm initialized the CPU, which can close this window.\n\nSounds interesting. OTOH, if that would require a bit more logic in the code, while the only reason for that is to support scenarios that shouldn\u0027t happen anyway...",
+      "parentUuid": "b3c0f6b8_c0e74491",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
