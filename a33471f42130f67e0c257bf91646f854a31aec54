@@ -244,6 +244,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec839fb2_e51768a2",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-29T11:16:45Z",
+      "side": 1,
+      "message": "Not sure I follow: I think what we currently have should be ok.\n\n\u003e ...  then maybe just add BUG_ON(!pkvm_cpu_initialized()) here, for extra safety?\n\nThis shouldn\u0027t happen AFAIU: `pkvm_init` which sets `cpu_initialized` happens after de-privileging. And before de-privileging any wrmsrq will not cause the trap and vm exit. Therefore `handle_write_msr` will not be triggered before `pkvm_cpu_initialized` is true so I do not see a reason for this BUG_ON.\n\nFor using `kvm_set_user_return_msr` vs direct write: why should we care and not perform `kvm_set_user_return_msr` unconditionally? I mean:\n- `kvm_uret_msrs_list[]` was already populated globally during hypervisor boot (vmx_hardware_setup()), so slot \u003e\u003d 0 is guaranteed.\n- `kvm_set_user_return_msr(slot, val, -1ull)` writes val to physical hardware and updates .curr \u003d val.\n\nSo keeping simply `BUG_ON(slot \u003c 0);` followed by `kvm_set_user_return_msr(slot, val, -1ull)` seems ok, right? Or I miss some point?",
+      "parentUuid": "bf59ef70_74b9400d",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bcae5aa_8996d3a7",
         "filename": "arch/x86/kvm/vmx/pkvm_init.c",
         "patchSetId": 9
