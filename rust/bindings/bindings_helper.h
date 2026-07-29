@@ -74,4 +74,19 @@ const size_t RUST_CONST_HELPER_ASHMEM_FULL_NAME_LEN = ASHMEM_FULL_NAME_LEN;
 #include "../../drivers/android/binder/page_range_helper.h"
 #endif
 
+#if IS_ENABLED(CONFIG_ANDROID_WRAPFD_RUST)
+#include <linux/dma-buf.h>
+#include <linux/dma-direction.h>
+#include <linux/iosys-map.h>
+#include <linux/mman.h>
+#include <linux/wrapfd.h>
+
+enum {
+	RUST_CONST_HELPER_FMODE_READ = FMODE_READ,
+	RUST_CONST_HELPER_FMODE_WRITE = FMODE_WRITE,
+	RUST_CONST_HELPER_FMODE_CAN_READ = FMODE_CAN_READ,
+	RUST_CONST_HELPER_FMODE_CAN_ODIRECT = FMODE_CAN_ODIRECT,
+};
+#endif
+
 const vm_flags_t RUST_CONST_HELPER_VM_MERGEABLE = VM_MERGEABLE;
