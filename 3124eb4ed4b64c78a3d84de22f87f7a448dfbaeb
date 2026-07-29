@@ -16,6 +16,24 @@
       "message": "Could we send this patch to upstream Linux? It doesn\u0027t look Android-specific.",
       "revId": "3124eb4ed4b64c78a3d84de22f87f7a448dfbaeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf187af6_ba726e1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-29T21:00:23Z",
+      "side": 1,
+      "message": "This didn\u0027t work for me. Setting the LIBCLANG_PATH did.",
+      "parentUuid": "df57a876_0cebe65e",
+      "revId": "3124eb4ed4b64c78a3d84de22f87f7a448dfbaeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
