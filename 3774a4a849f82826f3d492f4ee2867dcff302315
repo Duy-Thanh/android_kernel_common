@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9375d84b_01ef7617",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-30T14:57:03Z",
+      "side": 1,
+      "message": "This actually seems like a better pattern (req-\u003eflags) regardless of the KMI implications.",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce421986_36cc21ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-30T14:57:03Z",
+      "side": 1,
+      "message": "nit: please drop this random empty line in-between the tags.",
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38488c86_cc213600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-30T14:57:03Z",
+      "side": 1,
+      "message": "This LGTM, but it should be @dhavale@google.com that looks at this closely.",
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a77e46_71a00256",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-30T14:57:03Z",
+      "side": 1,
+      "message": "How about you rename this to `__fuse_dev_wake_and_unlock()` and leave current callers of `fuse_dev_wake_and_unlock(fiq)` as an implicit false:\n```\nstatic void fuse_dev_wake_and_unlock(struct fuse_iqueue *fiq)\n{\n\t__fuse_dev_wake_and_unlock(fiq, false);\n}\n```\n... just to make the ANDROID patch a bit less invasive.",
+      "range": {
+        "startLine": 332,
+        "startChar": 12,
+        "endLine": 332,
+        "endChar": 36
+      },
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adf46005_e29cb670",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-30T14:57:03Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar with fuse implementation but I wonder if !FR_ASYNC \u003d\u003d FR_SYNC? e.g. do all request with !FR_ASYNC block? If so, couldn\u0027t we reuse that?",
+      "range": {
+        "startLine": 495,
+        "startChar": 1,
+        "endLine": 495,
+        "endChar": 9
+      },
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
