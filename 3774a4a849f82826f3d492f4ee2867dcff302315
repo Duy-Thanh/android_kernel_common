@@ -58,6 +58,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "021c52f9_c3d2b6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-30T17:32:28Z",
+      "side": 1,
+      "message": "see comments on the android17-6.18 version of this patch: aosp/4194937. This needs to be sent upstream first since the FROMLIST patch this is derived from has not landed in over 4 years.",
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "61a77e46_71a00256",
