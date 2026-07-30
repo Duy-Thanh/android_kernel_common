@@ -16,6 +16,24 @@
       "message": "I think this leaves the region pointing at a page the host gets back. reg-\u003epriv is set before anything that can fail, and now that handle_lpi_enable is in the path the function can return an error, but the unwind in pkvm_init_redist_emulation only donates the page back and leaves rd_reg-\u003epriv pointing at it. The host side then frees it, so it goes back to the page allocator with the region still referencing it.\n\npkvm_handle_rdist_emulation only tests region-\u003epriv for NULL, so the next trapped access to that redistributor takes the post-init handlers and reads redist-\u003ebase out of host memory. redist_ctlr_write ends in writel_relaxed(value, redist-\u003ebase + GICR_CTLR) and redist_ctlr_read returns what it read to the host, so that is an EL2 write and an EL2 read with the address chosen by the host.\n\nIt looks reachable without much effort: with GICR_TYPER.CommonLPIAff 0, redist_lpi_aff returns 0 for every redistributor, so they are all in one group and handle_lpi_enable returns -EFAULT unless every redistributor with LPIs enabled has an identical GICR_PROPBASER. Pointing PROPBASER or PENDBASER somewhere that makes the share or the pin fail would do it too.\n\nCould we assign reg-\u003epriv last, the way pkvm_init_gic_its_emulation does it, or clear it on the error path? Separately, pkvm_drop_host_privileges discards the result of gic_redist_deprivilege, so none of this is visible when it happens. The ITS side threads its error out through its_end_deprivilege, and it would be good to match that.",
       "revId": "d9410f04658926ae6cd400f1541259c5539c0e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946d6ac1_5aea0bdf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-30T18:46:14Z",
+      "side": 1,
+      "message": "Yes, definitely. Good catch!",
+      "parentUuid": "5cbc2232_dbaaa7ac",
+      "revId": "d9410f04658926ae6cd400f1541259c5539c0e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
