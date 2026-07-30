@@ -22,6 +22,30 @@
       },
       "revId": "7a3084287d395812b98b0efd681a8eab51f94a53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c978ae_a4496a18",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-30T16:10:33Z",
+      "side": 1,
+      "message": "There are no modules (yet).",
+      "parentUuid": "141bc52b_ab1087ce",
+      "range": {
+        "startLine": 535,
+        "startChar": 29,
+        "endLine": 535,
+        "endChar": 30
+      },
+      "revId": "7a3084287d395812b98b0efd681a8eab51f94a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
