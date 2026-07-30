@@ -436,7 +436,9 @@ static int iterate_incfs_dir(struct file *file, struct dir_context *ctx)
 	}
 
 	ctx->pos -= PSEUDO_FILE_COUNT;
+	lockdep_set_subclass(&dir->backing_dir->f_inode->i_rwsem, I_MUTEX_PARENT);
 	error = iterate_dir(dir->backing_dir, ctx);
+	lockdep_set_subclass(&dir->backing_dir->f_inode->i_rwsem, 0);
 	ctx->pos += PSEUDO_FILE_COUNT;
 	file->f_pos = dir->backing_dir->f_pos;
 out:
@@ -1683,8 +1685,16 @@ static int incfs_setattr(struct user_namespace *ns, struct dentry *dentry,
 		ia->ia_mode |= 0222;
 	}
 
+<<<<<<< HEAD   (b10e5e5b5c5e01d49829aec34b65a0d717d6f2f5 UPSTREAM: binder: fix UAF in binder_free_transaction())
 	inode_lock(d_inode(backing_dentry));
 	error = notify_change(ns, backing_dentry, ia, NULL);
+||||||| BASE   (f9a1c0bebb3a88ff053df3b16a14138e145d54d9 ANDROID: gki_defconfig: Disable CFG80211_REQUIRE_SIGNED_REGD)
+	inode_lock(d_inode(backing_dentry));
+	error = notify_change(idmap, backing_dentry, ia, NULL);
+=======
+	inode_lock_nested(d_inode(backing_dentry), I_MUTEX_PARENT);
+	error = notify_change(idmap, backing_dentry, ia, NULL);
+>>>>>>> CHANGE (59b735704e0b2c1cc2cc58a223eec27fd2e4f7f5 ANDROID: incfs: vfs: Annotate stacked filesystem re-entry wi)
 	inode_unlock(d_inode(backing_dentry));
 
 	if (error)
