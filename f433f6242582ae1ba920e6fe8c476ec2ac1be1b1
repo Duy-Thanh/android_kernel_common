@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4917d91b_d3575769",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-30T19:53:44Z",
+      "side": 1,
+      "message": "Hum, but now looking closer, I don\u0027t think we can really identify we are VM_PFNMAP there... so it sort of act like it is VM_MIXEDMAP since the udma-buf is still backed by normal memory ... \n\nSo perhaps we don\u0027t really have a choice",
+      "parentUuid": "ded19dda_747d7d85",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
