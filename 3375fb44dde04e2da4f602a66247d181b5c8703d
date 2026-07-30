@@ -71,6 +71,24 @@
       "parentUuid": "95c43944_9435cfb0",
       "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca67aa3a_944ebb6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-07-30T00:09:04Z",
+      "side": 1,
+      "message": "You\u0027re right that the patch was added to `android-mainline` in [d5e79eeba3086a52593b295ac4bf6eddd64d4aad](https://cs.android.com/android/_/android/kernel/common/+/d5e79eeba3086a52593b295ac4bf6eddd64d4aad)\n\nBut a merge afterwards handled a conflict incorrectly, getting rid of the upstream changes.\n```\n$ git show --cc da0c10aefaf6 drivers/dma-buf/dma-heap.c\ncommit da0c10aefaf6089b483a9c679b7151dc316a36c7\nMerge: 1281c3ccca87 de848da12f75\nAuthor: Matthias Maennich \u003cmaennich@google.com\u003e\nDate:   Fri Sep 27 02:18:44 2024 +0000\n\n    Merge de848da12f75 (\"Merge tag \u0027drm-next-2024-09-19\u0027 of https://gitlab.freedesktop.org/drm/kernel\") into android-mainline\n    \n    Steps on the way to 6.12-rc1\n    \n    Bug: 367265496\n    Change-Id: I8208eaedc88c8d4b116383ce2b20692e8a0b8ca8\n    Signed-off-by: Matthias Maennich \u003cmaennich@google.com\u003e\n\ndiff --cc drivers/dma-buf/dma-heap.c\nindex cc8731a57c8e,3cbe87d4a464..a1c31c3bbdc3\n--- a/drivers/dma-buf/dma-heap.c\n+++ b/drivers/dma-buf/dma-heap.c\n@@@ -28,10 -26,10 +26,11 @@@\n   * struct dma_heap - represents a dmabuf heap in the system\n   * @name:             used for debugging/device-node name\n   * @ops:              ops struct for this heap\n+  * @priv:             private data for this heap\n - * @heap_devt:                heap device node\n - * @list:             list head connecting to list of heaps\n - * @heap_cdev:                heap char device\n + * @heap_devt         heap device node\n + * @list              list head connecting to list of heaps\n + * @heap_cdev         heap char device\n + * @heap_dev          heap device struct\n   *\n   * Represents a heap of memory from which buffers can be made.\n```\n\nSo I think the best way to fix mainline actually is an `ANDROID:` commit to bring back changes the merge should have introduced. @tkjos@google.com",
+      "parentUuid": "f25be6a7_e3441b54",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
