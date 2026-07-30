@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d29686f_ea56e922",
+        "filename": "arch/x86/kvm/pkvm/idt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T09:44:38Z",
+      "side": 1,
+      "message": "I think we can mark this comment as resolved to be able to merge this patchset since it is orthogonal to this patch.",
+      "parentUuid": "cc3666b2_79501d3f",
+      "revId": "246398714a0fb05d1c22a45ce0c130c1067aec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1344f7a6_71374e79",
