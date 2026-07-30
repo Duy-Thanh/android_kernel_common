@@ -33,6 +33,24 @@
       "message": "Two things missing on the state pages this takes from the host, and I am raising them here rather than on the HVC patch because this is the function that consumes them.\n\nits_state and shadow are never checked for page alignment. hyp_virt_to_pfn truncates to the containing page and the BUILD_BUG_ON only bounds the struct size, not the offset it starts at, so a pointer near the end of a page leaves the host owning the tail. For its_priv_state that includes base, which the register handlers use as the MMIO address.\n\nAnd neither page is zeroed at EL2. __pkvm_host_donate_hyp re-maps and flips the owner but leaves the contents, so used_device_id_mask, device_id[] and tracked_pfns[] are all whatever the host wrote. used_device_id_mask \u003d U64_MAX makes the first track_device_id_add return -EINVAL and stalls the emulated queue.\n\nThe redistributor side has both of the same problems, so it is probably one helper.",
       "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d638c151_8b4e4d5d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-30T13:58:50Z",
+      "side": 1,
+      "message": "I ran into the problem you are mentioning and it was solved another way. However I think we are running into a question when hypervisor no longer trusts host (I think at this time it still does). \n\nRegarding the `reg-\u003epriv` states on the other end of the hvc both ITS state and GICR state are allocated with `__get_free_page(GFP_ATOMIC | __GFP_ZERO);`. Of course we can introduce a helper function like \n\n```\nstatic int donate_and_clear_host_page(void *addr)\n{\n\tint ret;\n\n\tif (!PAGE_ALIGNED(addr))\n\t\treturn -EINVAL;\n\n\tret \u003d __pkvm_host_donate_hyp(hyp_virt_to_pfn(addr), 1);\n\tif (ret)\n\t\treturn ret;\n\n\tmemset(addr, 0, PAGE_SIZE);\n\treturn 0;\n}\n```\n\njust to make it more explicit. But with `__get_free_page(GFP_ATOMIC | __GFP_ZERO);` we have it for \"free`. However I leave the decision to you. \n\nWhereas when comes to `its_shadow_tables` it might make sense to check the alignment, because we are not GIC owners and a potential regression might easily go unnoticed.",
+      "parentUuid": "e9e31562_14f221c7",
+      "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
