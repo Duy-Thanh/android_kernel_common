@@ -26,6 +26,8 @@ enum guest_commands {
 	CMD_HEARTBEAT = 1,	/* Lets host know that guest is alive. */
 	CMD_INC,		/* Ask host to increment shared/relinquished page. */
 	CMD_INC_PRIVATE,	/* Ask host to increment private page. */
+	CMD_PEND_SERROR,	/* Ask host to inject a virtual SError. */
+	CMD_CHECK_SERROR,	/* Ask host to check the vSError was taken. */
 };
 
 #define  PC(v)  ((uint64_t)&(v))
@@ -70,6 +72,7 @@ static volatile uint64_t guest_ex_pc;
 static volatile uint64_t guest_ex_addr;
 static volatile uint64_t ss_addr[4];
 static volatile char write_data;
+static volatile bool serror_taken;
 static volatile int ss_idx;
 
 /*
@@ -626,6 +629,32 @@ static void test_fpmr(void)
 	write_sysreg_s(saved, SYS_FPMR);
 }
 
+static void serror_handler(struct ex_regs *regs)
+{
+	GUEST_ASSERT_EQ(ESR_ELx_EC(read_sysreg(esr_el1)), ESR_ELx_EC_SERROR);
+	serror_taken = true;
+}
+
+/*
+ * A host-injected SError must reach a protected guest as a virtual SError
+ * (HCR_EL2.VSE), the only form the guest can gate: the host cannot see this
+ * guest's PSTATE.A, so it must not decide masking on the guest's behalf.
+ */
+static void test_serror(void)
+{
+	serror_taken = false;
+
+	GUEST_SYNC(CMD_PEND_SERROR);
+	GUEST_ASSERT(read_sysreg(isr_el1) & ISR_EL1_A);
+
+	local_serror_enable();
+	isb();
+	local_serror_disable();
+
+	GUEST_ASSERT(serror_taken);
+	GUEST_SYNC(CMD_CHECK_SERROR);
+}
+
 /*
  * Main code to run by the guest vm.
  */
@@ -667,6 +696,8 @@ static void guest_code(vm_paddr_t ucall_pool_phys, size_t ucall_pool_size,
 	test_s1pie_s1poe();
 
 	test_fpmr();
+
+	test_serror();
 
 	/* Populate the donated memslot to facilitate testing poisoning after destruction. */
 	guest_dirty_memslot();
@@ -822,10 +853,32 @@ static void set_guest_mem(struct kvm_vm *vm, uint64_t npages)
 	memset(region->host_mem, 0xaa, PAGE_SIZE * npages);
 }
 
+static void cmd_pend_serror(struct kvm_vcpu *vcpu)
+{
+	struct kvm_vcpu_events events = {};
+
+	events.exception.serror_pending = true;
+	vcpu_events_set(vcpu, &events);
+
+	memset(&events, 0, sizeof(events));
+	vcpu_events_get(vcpu, &events);
+	TEST_ASSERT(events.exception.serror_pending,
+		    "Assert: vSError pending after injection.");
+}
+
+static void cmd_check_serror(struct kvm_vcpu *vcpu)
+{
+	struct kvm_vcpu_events events = {};
+
+	vcpu_events_get(vcpu, &events);
+	TEST_ASSERT(!events.exception.serror_pending,
+		    "Assert: vSError no longer pending once taken.");
+}
+
 /*
  * Processes commands issued by the guest to the host via the ucall interface.
  */
-static void handle_cmd(struct kvm_vm *vm, int cmd)
+static void handle_cmd(struct kvm_vm *vm, struct kvm_vcpu *vcpu, int cmd)
 {
 	switch (cmd) {
 	case CMD_HEARTBEAT:
@@ -836,6 +889,12 @@ static void handle_cmd(struct kvm_vm *vm, int cmd)
 		break;
 	case CMD_INC_PRIVATE:
 		cmd_inc_private(vm);
+		break;
+	case CMD_PEND_SERROR:
+		cmd_pend_serror(vcpu);
+		break;
+	case CMD_CHECK_SERROR:
+		cmd_check_serror(vcpu);
 		break;
 	default:
 		TEST_FAIL("Unexpected guest command: %d\n", cmd);
@@ -884,6 +943,7 @@ static void test_run(enum vm_mem_backing_src_type src_type)
 				ESR_ELx_EC_WATCHPT_CUR, wp_handler);
 	vm_install_sync_handler(vm, VECTOR_SYNC_CURRENT,
 				ESR_ELx_EC_SOFTSTP_CUR, ss_handler);
+	vm_install_exception_handler(vm, VECTOR_ERROR_CURRENT, serror_handler);
 	vcpu_set_pvm_boot_args(vcpu);
 
 	while (!guest_done) {
@@ -893,7 +953,7 @@ static void test_run(enum vm_mem_backing_src_type src_type)
 
 		switch (uc_num = get_ucall(vcpu, &uc)) {
 		case UCALL_SYNC:
-			handle_cmd(vm, uc.args[1]);
+			handle_cmd(vm, vcpu, uc.args[1]);
 			break;
 		case UCALL_DONE:
 			pr_info("Guest done\n");
