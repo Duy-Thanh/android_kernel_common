@@ -778,14 +778,21 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 			__flush_hyp_vcpu(hyp_vcpu);
 
 		hyp_vcpu->vcpu.arch.iflags = host_iflags;
-		hyp_vcpu->vcpu.arch.hcr_el2 &= ~(HCR_TWI | HCR_TWE | HCR_VSE);
+		hyp_vcpu->vcpu.arch.hcr_el2 &= ~(HCR_TWI | HCR_TWE);
 		hyp_vcpu->vcpu.arch.hcr_el2 |= READ_ONCE(host_vcpu->arch.hcr_el2) &
-							 (HCR_TWI | HCR_TWE | HCR_VSE);
+							 (HCR_TWI | HCR_TWE);
 
 		hyp_vcpu->vcpu.arch.mdcr_el2 = host_vcpu->arch.mdcr_el2;
-		hyp_vcpu->vcpu.arch.vsesr_el2 = host_vcpu->arch.vsesr_el2;
 		flush_debug_state(hyp_vcpu);
 	}
+
+	/*
+	 * A vSError is a pending bit the guest gates with its own PSTATE.A, so
+	 * it may be forwarded to any guest. sync_hyp_vcpu() reflects it back.
+	 */
+	hyp_vcpu->vcpu.arch.hcr_el2 &= ~HCR_VSE;
+	hyp_vcpu->vcpu.arch.hcr_el2 |= READ_ONCE(host_vcpu->arch.hcr_el2) & HCR_VSE;
+	hyp_vcpu->vcpu.arch.vsesr_el2 = host_vcpu->arch.vsesr_el2;
 
 	flush_hyp_vgic_state(hyp_vcpu);
 	flush_hyp_timer_state(hyp_vcpu);
@@ -879,10 +886,15 @@ static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		 */
 		host_vcpu->arch.ctxt.regs.pc = hyp_vcpu->vcpu.arch.ctxt.regs.pc;
 		host_vcpu->arch.ctxt.regs.pstate = hyp_vcpu->vcpu.arch.ctxt.regs.pstate;
-
-		host_vcpu->arch.hcr_el2 &= ~HCR_VSE;
-		host_vcpu->arch.hcr_el2 |= hyp_vcpu->vcpu.arch.hcr_el2 & HCR_VSE;
 	}
+
+	/*
+	 * Reflect the vSError pending state back for every guest, so the host
+	 * can re-pend one the guest has not taken yet and KVM_GET_VCPU_EVENTS
+	 * reports it.
+	 */
+	host_vcpu->arch.hcr_el2 &= ~HCR_VSE;
+	host_vcpu->arch.hcr_el2 |= hyp_vcpu->vcpu.arch.hcr_el2 & HCR_VSE;
 
 	hyp_vcpu->exit_code = *exit_code;
 }

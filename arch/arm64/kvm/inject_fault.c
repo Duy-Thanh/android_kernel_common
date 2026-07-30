@@ -348,8 +348,12 @@ int kvm_inject_serror_esr(struct kvm_vcpu *vcpu, u64 esr)
 	 *
 	 * As we're emulating the SError injection we need to explicitly populate
 	 * ESR_ELx.EC because hardware will not do it on our behalf.
+	 *
+	 * A protected guest's PSTATE is not exposed to the host, so its SError
+	 * masking cannot be evaluated here: leave the vSError to HCR_EL2.VSE
+	 * below, for the guest to gate with its own PSTATE.A.
 	 */
-	if (!serror_is_masked(vcpu)) {
+	if (!vcpu_is_protected(vcpu) && !serror_is_masked(vcpu)) {
 		pend_serror_exception(vcpu);
 		esr |= FIELD_PREP(ESR_ELx_EC_MASK, ESR_ELx_EC_SERROR);
 		vcpu_write_sys_reg(vcpu, esr, exception_esr_elx(vcpu));
