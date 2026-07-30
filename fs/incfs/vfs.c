@@ -430,7 +430,9 @@ static int iterate_incfs_dir(struct file *file, struct dir_context *ctx)
 	}
 
 	ctx->pos -= PSEUDO_FILE_COUNT;
+	lockdep_set_subclass(&dir->backing_dir->f_inode->i_rwsem, I_MUTEX_PARENT);
 	error = iterate_dir(dir->backing_dir, ctx);
+	lockdep_set_subclass(&dir->backing_dir->f_inode->i_rwsem, 0);
 	ctx->pos += PSEUDO_FILE_COUNT;
 	file->f_pos = dir->backing_dir->f_pos;
 out:
@@ -1660,8 +1662,16 @@ static int incfs_setattr(struct dentry *dentry, struct iattr *ia)
 		ia->ia_mode |= 0222;
 	}
 
+<<<<<<< HEAD   (0e7b22b8ec1e944e03b3ab937657aff77f67822e UPSTREAM: binder: fix UAF in binder_free_transaction())
 	inode_lock(d_inode(backing_dentry));
 	error = notify_change(backing_dentry, ia, NULL);
+||||||| BASE   (c9d3e2fd9c49f6a045c3faad2a09fc95a70eb47a ANDROID: vendor_hooks: Fix incorrect declaration of restrict)
+	inode_lock(d_inode(backing_dentry));
+	error = notify_change(ns, backing_dentry, ia, NULL);
+=======
+	inode_lock_nested(d_inode(backing_dentry), I_MUTEX_PARENT);
+	error = notify_change(ns, backing_dentry, ia, NULL);
+>>>>>>> CHANGE (6e7c51ae40f4d34dc3710ffa7f2da304096a5ef1 ANDROID: incfs: vfs: Annotate stacked filesystem re-entry wi)
 	inode_unlock(d_inode(backing_dentry));
 
 	if (error)
