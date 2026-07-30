@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe9a468b_70850be9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-30T18:46:09Z",
+      "side": 1,
+      "message": "Done. The register check needs to allow smaller accesses. `GITS_CWRITER` is accessed by host driver using `readl` despite being 64 bit.",
+      "parentUuid": "596aa169_b7ebe033",
+      "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9e31562_14f221c7",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I ran into the problem you are mentioning and it was solved another way. However I think we are running into a question when hypervisor no longer trusts host (I think at this time it still does). \n\nRegarding the `reg-\u003epriv` states on the other end of the hvc both ITS state and GICR state are allocated with `__get_free_page(GFP_ATOMIC | __GFP_ZERO);`. Of course we can introduce a helper function like \n\n```\nstatic int donate_and_clear_host_page(void *addr)\n{\n\tint ret;\n\n\tif (!PAGE_ALIGNED(addr))\n\t\treturn -EINVAL;\n\n\tret \u003d __pkvm_host_donate_hyp(hyp_virt_to_pfn(addr), 1);\n\tif (ret)\n\t\treturn ret;\n\n\tmemset(addr, 0, PAGE_SIZE);\n\treturn 0;\n}\n```\n\njust to make it more explicit. But with `__get_free_page(GFP_ATOMIC | __GFP_ZERO);` we have it for \"free`. However I leave the decision to you. \n\nWhereas when comes to `its_shadow_tables` it might make sense to check the alignment, because we are not GIC owners and a potential regression might easily go unnoticed.",
       "parentUuid": "e9e31562_14f221c7",
+      "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5703f10_eb51a3ef",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-30T18:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d638c151_8b4e4d5d",
       "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
