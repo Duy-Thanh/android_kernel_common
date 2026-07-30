@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62164bf4_3bd488fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-07-30T11:02:49Z",
+      "side": 1,
+      "message": "Commit message says cherry-picked from a commit which is actually an abandoned commit in Gerrit. Please sort out the development branch change first.\n\nThe upstream commit is `093ae7a033cfde536db997e7dc4e829ce65fb38a` and this needs to land on `android16-6.12`.",
+      "revId": "f965297a371c43fa7afd08eecbc48b6d251e8c5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
