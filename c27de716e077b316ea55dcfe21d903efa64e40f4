@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23060536_3bd034e8",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-07-30T10:33:45Z",
+      "side": 1,
+      "message": "I can see this list has optional MSRs, but not sure if pKVM mandates those(for eg: `MSR_IA32_TSX_CTRL`)? If not, I think this BUG_ON might fire on hardware which doesn\u0027t support it. I can see `vmx_setup_user_return_msrs` attempts to register each of the MSRs through `kvm_add_user_return_msr` -\u003e `kvm_probe_user_return_msr` but ignore the probe error and hence `kvm_uret_msrs_list` might not be populated with optional MSRs. A host could issue wrmsr for unavailable MSRs which would trigger this BUG_ON right?",
+      "fixSuggestions": [
+        {
+          "fixId": "74d4bceb_cde7440a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (slot \u003e\u003d 0) {\n\t\t\tcur \u003d kvm_get_user_return_msr(slot);\n\t\t\tif (val !\u003d cur) {\n\t\t\t\tpkvm_warn(\"Host attempt to modify user-return MSR 0x%lx: 0x%llx (expected 0x%llx)\\n\",\n\t\t\t\t\t  msr, val, cur);\n\t\t\t\tret \u003d X86EMUL_UNHANDLEABLE;\n\t\t\t\tbreak;\n\t\t\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c27de716e077b316ea55dcfe21d903efa64e40f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
