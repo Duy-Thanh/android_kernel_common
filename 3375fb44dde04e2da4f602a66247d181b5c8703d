@@ -125,6 +125,24 @@
       "parentUuid": "6b9cb82c_d48c798e",
       "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "660f6a98_255e40d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-07-30T20:15:34Z",
+      "side": 1,
+      "message": "I think we just need an updated commit message with the info from this comment thread.",
+      "parentUuid": "cffbad88_775d26d5",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
