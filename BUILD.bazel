@@ -531,6 +531,16 @@ kernel_build(
         "Image",
     ],
     makefile = ":Makefile",
+    kmi_symbol_list = "microdroid/aarch64/symbols/base",
+    trim_nonlisted_kmi = True,
+    collect_unstripped_modules = True,
+)
+
+kernel_abi(
+    name = "kernel_aarch64_microdroid_abi",
+    kernel_build = "kernel_aarch64_microdroid",
+    abi_definition_stg = "microdroid/aarch64/abi.stg",
+    define_abi_targets = True,
 )
 
 pkg_files(
