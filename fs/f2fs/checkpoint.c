@@ -697,8 +697,8 @@ const struct address_space_operations f2fs_meta_aops = {
 	.migrate_folio	= filemap_migrate_folio,
 };
 
-static void __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
-						unsigned int devidx, int type)
+static int __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
+						unsigned int devidx, int type, gfp_t gfp)
 {
 	struct inode_management *im = &sbi->im[type];
 	struct ino_entry *e = NULL, *new = NULL;
@@ -711,12 +711,19 @@ static void __add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino,
 	}
 
 retry:
-	if (!e)
+	if (!e) {
 		new = f2fs_kmem_cache_alloc(ino_entry_slab,
-						GFP_NOFS, true, NULL);
+						gfp, (gfp & __GFP_NOFAIL) ? true : false, NULL);
+		if (!new)
+			return -ENOMEM;
+	}
 
-	ret = radix_tree_preload(GFP_NOFS | __GFP_NOFAIL);
-	f2fs_bug_on(sbi, ret);
+	ret = radix_tree_preload(gfp);
+	if (ret) {
+		if (new)
+			kmem_cache_free(ino_entry_slab, new);
+		return ret;
+	}
 
 	spin_lock(&im->ino_lock);
 	e = radix_tree_lookup(&im->ino_root, ino);
@@ -746,6 +753,8 @@ retry:
 
 	if (new && e != new)
 		kmem_cache_free(ino_entry_slab, new);
+
+	return 0;
 }
 
 static void __remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
@@ -766,10 +775,10 @@ static void __remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
 	spin_unlock(&im->ino_lock);
 }
 
-void f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
+int f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type, gfp_t gfp)
 {
 	/* add new dirty ino entry into list */
-	__add_ino_entry(sbi, ino, 0, type);
+	return __add_ino_entry(sbi, ino, 0, type, gfp);
 }
 
 void f2fs_remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
@@ -1819,6 +1828,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 
 	clear_sbi_flag(sbi, SBI_IS_DIRTY);
 	clear_sbi_flag(sbi, SBI_NEED_CP);
+	clear_sbi_flag(sbi, SBI_FSYNC_FLUSH_NODE);
 	clear_sbi_flag(sbi, SBI_QUOTA_SKIP_FLUSH);
 
 	spin_lock(&sbi->stat_lock);

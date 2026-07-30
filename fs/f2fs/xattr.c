@@ -785,7 +785,7 @@ retry:
 	if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
 		set_sbi_flag(sbi, SBI_NEED_CP);
 	else
-		f2fs_add_ino_entry(sbi, inode->i_ino, XATTR_DIR_INO);
+		f2fs_add_ino_entry(sbi, inode->i_ino, XATTR_DIR_INO, GFP_NOFS | __GFP_NOFAIL);
 same:
 	if (is_inode_flag_set(inode, FI_ACL_MODE)) {
 		inode->i_mode = F2FS_I(inode)->i_acl_mode;
