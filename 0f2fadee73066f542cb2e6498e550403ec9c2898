@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395c6b55_722034a4",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-30T16:58:58Z",
+      "side": 1,
+      "message": "Please also make this same change in the config file `arch/x86/configs/gki_defconfig`",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b3fe2456_ed603add",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/configs/gki_defconfig",
+              "range": {
+                "startLine": 306,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "# CONFIG_CFG80211_REQUIRE_SIGNED_REGDB is not set\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f2fadee73066f542cb2e6498e550403ec9c2898",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
