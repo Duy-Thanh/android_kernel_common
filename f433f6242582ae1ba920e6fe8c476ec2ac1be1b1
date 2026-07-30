@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ded19dda_747d7d85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-30T19:52:35Z",
+      "side": 1,
+      "message": "And actually the comment for that function is interesting:\n\n```\n ...\n   Note, the list of refcounted PG_reserved page types\n * is likely incomplete, it has been compiled purely through people wanting to\n * back guest with a certain type of memory and encountering issues.\n */\n ```",
+      "parentUuid": "3b7c5044_41ab7dc9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
