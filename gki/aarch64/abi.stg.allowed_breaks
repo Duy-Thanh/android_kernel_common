@@ -19,3 +19,14 @@ type 'struct task_struct' changed
   member 'u64 __kabi_reserved1' was removed
   member 'union { struct { unsigned int user_dumpable:1; }; struct { u64 __kabi_reserved1; }; union { }; }' was added
 
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x4948f00a to 0xdc46a45f
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0xb3a29158 to 0xc2748fc
+
+function symbol 'int __amba_driver_register(struct amba_driver*, struct module*)' changed
+  CRC changed from 0x95f4244a to 0x310fe1de
+
+... 5184 omitted; 5187 symbols have only CRC changes
+
