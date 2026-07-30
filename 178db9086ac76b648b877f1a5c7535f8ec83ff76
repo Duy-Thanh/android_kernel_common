@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51620bce_077af065",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6451,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-07-30T03:44:32Z",
+      "side": 1,
+      "message": "Ack, replaced with `CAP_BPF` instead. Although, this wouldn\u0027t break anything right now as `bpfloader` does have `CAP_SYS_ADMIN`. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/sepolicy/private/bpfloader.te;l\u003d33;drc\u003d575e8e3b31bcceb75863334b610fce4db9ef82f2\n\nAnd yes, that\u0027s only for the default Linux behaviour, we would mainly rely on SELinux policy for the fine-grain part.",
+      "parentUuid": "78270aad_e93cd30d",
+      "range": {
+        "startLine": 6450,
+        "startChar": 0,
+        "endLine": 6451,
+        "endChar": 16
+      },
+      "revId": "178db9086ac76b648b877f1a5c7535f8ec83ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da113a00_15d3c83d",
         "filename": "kernel/bpf/syscall.c",
         "patchSetId": 2
@@ -55,6 +79,24 @@
       "writtenOn": "2026-07-22T01:41:08Z",
       "side": 1,
       "message": "TODO: https://lwn.net/ml/all/CAADnVQ+C2KNR1ryRtBGOZTNk961pF+30FnU9n3dt3QjaQu_N6Q@mail.gmail.com/ (point 3)\n\nSet a reasonable size here.",
+      "revId": "178db9086ac76b648b877f1a5c7535f8ec83ff76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3762a0b0_3f6e361c",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6463,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-07-30T03:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da113a00_15d3c83d",
       "revId": "178db9086ac76b648b877f1a5c7535f8ec83ff76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
