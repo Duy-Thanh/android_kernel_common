@@ -62,6 +62,24 @@
       "parentUuid": "23060536_3bd034e8",
       "revId": "c27de716e077b316ea55dcfe21d903efa64e40f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b22a8b2_52058190",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T11:53:42Z",
+      "side": 1,
+      "message": "Indeed, good catch. I didn\u0027t notice that since on our hw and qemu all are supported and furthermore in my precious version there was no BUG_ON here. I\u0027ve improved it.",
+      "parentUuid": "b8f4f33a_e8d2f305",
+      "revId": "c27de716e077b316ea55dcfe21d903efa64e40f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
