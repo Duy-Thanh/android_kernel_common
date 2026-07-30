@@ -386,6 +386,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d7934e_745d761e",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T09:35:27Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "c29966a0_76adb997",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bcae5aa_8996d3a7",
@@ -615,6 +633,24 @@
       "side": 1,
       "message": "\u003e...BTW this makes me wonder: would it be possible to not enable VM_ENTRY_LOAD_IA32_EFER, VM_EXIT_SAVE_IA32_EFER and VM_EXIT_LOAD_IA32_EFER (thus make host vmexits cheaper) and instead rely on intercepting host writes to EFER for preventing the host from modifying it? \nChuanxiao Dong\n what do you think?\n \nAfter disable these control bits, the host and pKVM will share the same HW EFER MSR. In practical, they have the same EFER value, then pKVM should intercept EFER writing and preventing the host from modifying it. So I think this is doable, to make host vmexits cheaper. As this is an optimization but not a security fix, I agree with Greg that we can handle it as a separate commit",
       "parentUuid": "9d271c70_ac946117",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e87c4b2_2293d5fe",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T09:35:27Z",
+      "side": 1,
+      "message": "I will resolve this comment for now so we can merge this patchset. We can introduce patch with this optimization later on top.",
+      "parentUuid": "f0100354_53e7d3e1",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
