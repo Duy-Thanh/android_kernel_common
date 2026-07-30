@@ -1807,6 +1807,9 @@ new_ioend:
 	if (!bio_add_folio(&wpc->ioend->io_bio, folio, len, poff))
 		goto new_ioend;
 
+	if (folio_test_dropbehind(folio))
+		bio_set_flag(&wpc->ioend->io_bio, BIO_COMPLETE_IN_TASK);
+
 	if (ifs)
 		atomic_add(len, &ifs->write_bytes_pending);
 
