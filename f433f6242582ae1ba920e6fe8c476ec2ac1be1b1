@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b7c5044_41ab7dc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-30T19:47:47Z",
+      "side": 1,
+      "message": "Sorry for the time it took me to have a look at it.\n\nThere\u0027s something I still do not grasp. IIRC, the whole dma-buf support is in fact using udma-buf. This heap sets VM_PFNMAP, not VM_MIXMEDMAP. So kvm_pfn_to_refcounted_page() should return NULL really as this isn\u0027t backed by a struct page?",
+      "parentUuid": "7d06ff79_adba5fb1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
