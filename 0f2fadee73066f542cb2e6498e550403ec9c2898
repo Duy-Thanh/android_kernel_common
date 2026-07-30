@@ -40,6 +40,30 @@
       ],
       "revId": "0f2fadee73066f542cb2e6498e550403ec9c2898",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6e172d_bff21faa",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-07-30T16:59:41Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "395c6b55_722034a4",
+      "range": {
+        "startLine": 308,
+        "startChar": 2,
+        "endLine": 308,
+        "endChar": 38
+      },
+      "revId": "0f2fadee73066f542cb2e6498e550403ec9c2898",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
