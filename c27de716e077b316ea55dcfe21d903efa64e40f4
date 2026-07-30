@@ -44,6 +44,24 @@
       ],
       "revId": "c27de716e077b316ea55dcfe21d903efa64e40f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f4f33a_e8d2f305",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-30T11:07:44Z",
+      "side": 1,
+      "message": "Indeed...\n\nMy first thought was that it would be cleaner to enable interception of these MSRs dynamically later, during pkvm_init, after we initialized `kvm_uret_msrs_list`, so that we can enable it precisely for those and only those MSRs that are in `kvm_uret_msrs_list`.\n\nBut since the host should not normally be using unsupported MSRs anyway, it seems ok to unconditionally intercept them all and just silently proceed to `wrmsr_safe()` here if `slot \u003c 0`.",
+      "parentUuid": "23060536_3bd034e8",
+      "revId": "c27de716e077b316ea55dcfe21d903efa64e40f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
