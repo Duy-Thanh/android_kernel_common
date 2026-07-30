@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99688a4_b08e6182",
+        "filename": "arch/x86/kvm/pkvm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T06:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9001e5c9_378ae6ee",
+      "revId": "7d1d53881e551041ed58cdfa1b180c0aa18bda55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc904e89_4615df06",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "7d1d53881e551041ed58cdfa1b180c0aa18bda55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9047d10e_b585f4a4",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T06:41:08Z",
+      "side": 1,
+      "message": "Yeah agree, I wrote it quickly when reworking this patch and then forgot to reword it later on.",
+      "parentUuid": "dc904e89_4615df06",
       "revId": "7d1d53881e551041ed58cdfa1b180c0aa18bda55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
