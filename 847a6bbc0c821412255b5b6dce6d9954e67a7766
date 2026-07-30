@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5121c6c6_0b0c1b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2026-07-30T17:40:02Z",
+      "side": 1,
+      "message": "I think we can make a workqueue to call __add_ino_entry() out of f2fs_evict_inode() context. Then, f2fs_iget() needs to wait for workqueue job.",
+      "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
