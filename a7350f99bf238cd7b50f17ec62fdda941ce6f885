@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3951ed20_64f5ac92",
+        "filename": "drivers/base/power/wakeup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2026-07-30T23:23:35Z",
+      "side": 0,
+      "message": "I understand that this creates a potential deadlock situation and needs to be changed.  And eliminating most of the delta here will make the ongoing patch maintenance for new LTS kernels simpler as well, which is a nice additional benefit.\n\nBut historically, this logging has _not_ been redundant.  It has proved beneficial on multiple occasions over the last several years when either wakeup reason capture failed or something went wrong in the middle of resume flow (since this gets logged _long_ before the captured wakeup reason).\n\nIf you go searching in Buganizer, there are a huge number of bugs - including some from partners - where the `pm_system_irq_wakeup` log line is referenced as part of the investigation, including examples where the system crashed before resume was completed.\n\nSo I guess I would say: if there is some way to break the potential deadlock cycle while preserving not only the `log_irq_wakeup_reason()` call (which is critical functionality) but also the `pr_warn()` log from old line 991 - with _roughly the same even if not identical_ timing in resume flow - that would be a very, very helpful thing.",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 991,
+        "endChar": 63
+      },
+      "revId": "a7350f99bf238cd7b50f17ec62fdda941ce6f885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
