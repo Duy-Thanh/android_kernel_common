@@ -234,6 +234,8 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
 		cp_reason = CP_HARDLINK;
 	else if (is_sbi_flag_set(sbi, SBI_NEED_CP))
 		cp_reason = CP_SB_NEED_CP;
+	else if (is_sbi_flag_set(sbi, SBI_FSYNC_FLUSH_NODE))
+		cp_reason = CP_FSYNC_FLUSH_NODE;
 	else if (file_wrong_pino(inode))
 		cp_reason = CP_WRONG_PINO;
 	else if (!f2fs_space_for_roll_forward(sbi))

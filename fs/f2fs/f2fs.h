@@ -1293,6 +1293,7 @@ enum cp_reason_type {
 	CP_SPEC_LOG_NUM,
 	CP_RECOVER_DIR,
 	CP_XATTR_DIR,
+	CP_FSYNC_FLUSH_NODE,
 };
 
 enum iostat_type {
@@ -1483,6 +1484,7 @@ enum {
 	SBI_IS_FREEZING,			/* freezefs is in process */
 	SBI_IS_WRITABLE,			/* remove ro mountoption transiently */
 	SBI_ENABLE_CHECKPOINT,			/* indicate it's during f2fs_enable_checkpoint() */
+	SBI_FSYNC_FLUSH_NODE,			/* need to flush all nodes during fsync */
 	MAX_SBI_FLAG,
 };
 
@@ -4106,6 +4108,7 @@ void f2fs_ra_meta_pages_cond(struct f2fs_sb_info *sbi, pgoff_t index,
 long f2fs_sync_meta_pages(struct f2fs_sb_info *sbi, long nr_to_write,
 			enum iostat_type io_type);
 void f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type);
+int __f2fs_add_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type, gfp_t gfp);
 void f2fs_remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type);
 void f2fs_release_ino_entry(struct f2fs_sb_info *sbi, bool all);
 bool f2fs_exist_written_data(struct f2fs_sb_info *sbi, nid_t ino, int mode);

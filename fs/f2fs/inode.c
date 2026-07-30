@@ -989,10 +989,14 @@ no_delete:
 	if (xnid)
 		invalidate_mapping_pages(NODE_MAPPING(sbi), xnid, xnid);
 	if (inode->i_nlink) {
-		if (is_inode_flag_set(inode, FI_APPEND_WRITE))
-			f2fs_add_ino_entry(sbi, inode->i_ino, APPEND_INO);
-		if (is_inode_flag_set(inode, FI_UPDATE_WRITE))
-			f2fs_add_ino_entry(sbi, inode->i_ino, UPDATE_INO);
+		if (is_inode_flag_set(inode, FI_APPEND_WRITE)) {
+			if (__f2fs_add_ino_entry(sbi, inode->i_ino, APPEND_INO, GFP_NOFS))
+				set_sbi_flag(sbi, SBI_FSYNC_FLUSH_NODE);
+		}
+		if (is_inode_flag_set(inode, FI_UPDATE_WRITE)) {
+			if (__f2fs_add_ino_entry(sbi, inode->i_ino, UPDATE_INO, GFP_NOFS))
+				set_sbi_flag(sbi, SBI_FSYNC_FLUSH_NODE);
+		}
 	}
 	if (is_inode_flag_set(inode, FI_FREE_NID)) {
 		f2fs_alloc_nid_failed(sbi, inode->i_ino);
