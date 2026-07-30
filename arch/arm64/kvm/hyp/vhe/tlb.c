@@ -146,5 +146,24 @@ void __kvm_flush_vm_context(void)
 {
 	dsb(ishst);
 	__tlbi(alle1is);
+<<<<<<< HEAD   (820acd5e2bcee15c89da900c8086b813df3037a9 Revert "Bluetooth: fix memory leak in error path of hci_allo)
 	__tlbi_sync_s1ish_hyp();
+||||||| BASE   (3f52a86a482a69294c50a5a2a097bd6f4104990a tap: free page on error paths in tap_get_user_xdp())
+
+	/*
+	 * VIPT and PIPT caches are not affected by VMID, so no maintenance
+	 * is necessary across a VMID rollover.
+	 *
+	 * VPIPT caches constrain lookup and maintenance to the active VMID,
+	 * so we need to invalidate lines with a stale VMID to avoid an ABA
+	 * race after multiple rollovers.
+	 *
+	 */
+	if (icache_is_vpipt())
+		asm volatile("ic ialluis");
+
+	dsb(ish);
+=======
+	dsb(ish);
+>>>>>>> BRANCH (86e68cc983a1e421bfb661a91c2d6a6208a070df KVM: arm64: Remove VPIPT I-cache handling)
 }
