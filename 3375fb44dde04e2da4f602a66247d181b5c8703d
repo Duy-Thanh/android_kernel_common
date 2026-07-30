@@ -89,6 +89,24 @@
       "parentUuid": "f25be6a7_e3441b54",
       "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9cb82c_d48c798e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-30T00:29:01Z",
+      "side": 1,
+      "message": "Thanks for confirming -- that matches what I found, and your --cc output is clearer than my per-commit comparison. Happy to respin the commit message along those lines whenever the -2 is sorted out.",
+      "parentUuid": "ca67aa3a_944ebb6d",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
