@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141bc52b_ab1087ce",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-07-30T14:55:42Z",
+      "side": 1,
+      "message": "you\u0027ll need `collect_unstripped_modules \u003d True,` as well.",
+      "range": {
+        "startLine": 535,
+        "startChar": 29,
+        "endLine": 535,
+        "endChar": 30
+      },
+      "revId": "7a3084287d395812b98b0efd681a8eab51f94a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
