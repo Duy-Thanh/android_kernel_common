@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "596aa169_b7ebe033",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-30T10:05:59Z",
+      "side": 1,
+      "message": "I am not sure this test does what it is meant to. reg_size is BIT(ESR_ELx_SAS) from the faulting instruction, so the host picks it from 1, 2, 4 and 8, and the test asks whether access_size is a multiple of reg_size rather than whether they match.\n\nFor an 8-byte access to a 4-byte register, 4 \u0026 7 is non-zero, so the handler is skipped and the loop falls through to pkvm_handle_forward_req and the access reaches the hardware unmediated. For GICR_CTLR that is the one register this series exists to mediate. Going the other way, 1- and 2-byte accesses pass the test for every register, because access_size \u0026 0 and access_size \u0026 1 are both 0, so a single byte write is handled as a full width write of that value: a 1-byte write of 0 at offset 0 takes the handle_lpi_disable path. There is no alignment check on offset either, so a 4-byte write at GICR_PROPBASER + 4 is handled as a write of that value to the whole 64-bit register.\n\nCould the test be reg_size \u003d\u003d access_size with offset aligned to access_size, and deny rather than forward when the offset is covered by a handler but the access does not match? The same table walk serves its_handlers, and in the GITS_BASER handler the mismatch turns into an unaligned 64-bit access to Device memory from EL2, which I have commented on separately there.",
+      "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e31562_14f221c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-30T10:05:59Z",
+      "side": 1,
+      "message": "Two things missing on the state pages this takes from the host, and I am raising them here rather than on the HVC patch because this is the function that consumes them.\n\nits_state and shadow are never checked for page alignment. hyp_virt_to_pfn truncates to the containing page and the BUILD_BUG_ON only bounds the struct size, not the offset it starts at, so a pointer near the end of a page leaves the host owning the tail. For its_priv_state that includes base, which the register handlers use as the MMIO address.\n\nAnd neither page is zeroed at EL2. __pkvm_host_donate_hyp re-maps and flips the owner but leaves the contents, so used_device_id_mask, device_id[] and tracked_pfns[] are all whatever the host wrote. used_device_id_mask \u003d U64_MAX makes the first track_device_id_add return -EINVAL and stalls the emulated queue.\n\nThe redistributor side has both of the same problems, so it is probably one helper.",
+      "revId": "8d9ca225dc214be92a6887c0e63a59cddc47e42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
