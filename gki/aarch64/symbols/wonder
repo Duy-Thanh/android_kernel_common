@@ -93,6 +93,7 @@
   sk_skb_reason_drop
   snprintf
   __stack_chk_fail
+  __stack_chk_guard
   strcmp
   strlen
   strnlen
