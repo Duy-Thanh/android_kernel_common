@@ -70,6 +70,24 @@
       "parentUuid": "3d4c9a0c_a4c85db9",
       "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202a08de_3a4583e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-30T17:30:26Z",
+      "side": 1,
+      "message": "Since this never landed upstream after 4.5 years, we can no longer take this as FROMLIST. Maybe the kminext version is better since it is simpler, but even that should be submitted upstream first before we take it here.\n\nPlease revive the upstream conversation on this patch, or submit other before we take them into ACK.",
+      "parentUuid": "eb5b45fe_c5502810",
+      "revId": "6b3698cfcb0aa82603637f2df31229b473d75497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
