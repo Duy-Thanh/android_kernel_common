@@ -653,6 +653,24 @@
       "parentUuid": "f0100354_53e7d3e1",
       "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3cce38_dcce9501",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-07-30T09:55:33Z",
+      "side": 1,
+      "message": "While we\u0027re at it, wondering what would be the easiest to _measure_ the actual improvement of vmexit latencies with such optimizations. (Last time I tried measuring vmexit latencies in SW via RDTSC, the results were too noisy. Though I didn\u0027t try to do that directly in the entry/exit assembly code to make it as close to the actual entry/exit points as possible.)",
+      "parentUuid": "0e87c4b2_2293d5fe",
+      "revId": "a33471f42130f67e0c257bf91646f854a31aec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
