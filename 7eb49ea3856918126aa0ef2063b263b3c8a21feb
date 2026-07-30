@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44aa558d_744e3681",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4778095
+      },
+      "writtenOn": "2026-07-30T06:55:46Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: As of 2026-07-01, this release branch is only eligible for respin requests for c...\n\nAs of 2026-07-01, this release branch is only eligible for respin requests for critical bug fixes. It will be deprecated from 2027-04-01.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "7eb49ea3856918126aa0ef2063b263b3c8a21feb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
