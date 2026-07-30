@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d26426_7c1f333f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-30T12:19:19Z",
+      "side": 1,
+      "message": "I think this overflows on a Size the host controls. num_bits comes from the MAPD Size field, which process_its_mapd takes as cmd-\u003eraw_cmd[1] \u0026 GENMASK(4, 0) without bounding it against GITS_TYPER.ID_bits, so it can be anything up to 31. nr_ites is an int, so Size 31 shifts by 32, which on arm64 assembles to a shift by 0 and gives nr_ites of 1, and Size 30 shifts into the sign bit and converts to a very large u64 on the multiply below.\n\nThe part that worries me is what happens downstream rather than the shift itself. If num_pages comes out at or below zero, track_pfn iterates zero times, process_its_mapd returns 0, and cwriter_write goes on to submit the MAPD to the real ITS with the host\u0027s itt_addr and nothing pinned, so the ITS writes ITEs into memory we have neither shared nor pinned. Size 31 giving a single page has the same effect for everything past the first page.\n\nCould we bound the Size field against FIELD_GET(GITS_TYPER_IDBITS, gits_typer) before using it, and do the arithmetic in 64 bits, something like: `u64 nr_ites \u003d BIT_ULL(num_bits + 1);`",
+      "revId": "d7808e3b5adf0c21af21f22effcae3db4f98cc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229b0772_d2f300bc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-30T12:19:19Z",
+      "side": 1,
+      "message": "I think the host can trigger this BUG(). ctlr_write only refuses the transition into enabled while the ITS is not quiescent, so clearing GITS_CTLR.Enabled goes straight through to the hardware. A disabled ITS does not process commands, so GITS_CREADR never advances, and it is not stalled either, so the GITS_CREADR_STALLED check above does not catch it. That leaves disable followed by a GITS_CWRITER write as two MMIO accesses that spin EL2 for 1000 * 100us and then panic the hypervisor.\n\nThe comment reasons about a command that never completes for hardware reasons, which I agree we cannot do much about, but this case is the host picking that state on purpose rather than hardware misbehaving. A hyp panic takes every protected VM down with it, so I do not think it falls under the host being allowed to DoS itself.\n\nCould we refuse to process GITS_CWRITER while GITS_CTLR.Enabled is 0, and return -EBUSY here instead of BUG()? cwriter_write already has the rollback path for a failed submit, so the timeout could just take it.",
+      "revId": "d7808e3b5adf0c21af21f22effcae3db4f98cc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2c08557_9e9c856b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-30T12:19:19Z",
+      "side": 1,
+      "message": "Coming back to the command fetch, as a new comment rather than reopening the resolved thread. The single fetch is right and the race is gone, thanks. The simplification does bring something else back though, and I think it is worth more than a style point: cmd holds the raw_cmd[] member, which we filled with le64_to_cpu, and the memcpy writes that into the queue the ITS reads little-endian, with no conversion on the way out. The driver\u0027s its_fixup_cmd does the cpu_to_le64 before a command reaches the queue for exactly this reason.\n\nOn little-endian both conversions are the identity, so nothing changes on anything we ship, and no test on the shipping config would ever catch it. On CONFIG_CPU_BIG_ENDIAN it is a validation bypass rather than a cosmetic bug: we validate the little-endian reading of the host\u0027s 32 bytes and write the byte-reversed form into the queue. The opcode we check is byte 0 of the first word, the opcode the ITS executes becomes byte 7, so the host picks a pair where the first reads as something we wave through (SYNC) and the second is a MAPD with an ITT address of its choosing. Every check in the series is bypassed at once.\n\narm64 does support big-endian even though Android does not build it, and the ITS half is heading upstream, so I would rather not leave it resting on le64_to_cpu happening to be an involution.\n\nI checked that process_cmd and everything under it only ever read cmd (the whole set is the six field extractions at :323-326, :354 and :363, and process_its_mapd\u0027s remove \u003d !remove is a local), so writing the decoded copy back is incidental rather than load-bearing. That means the raw snapshot form costs the same and makes \"the ITS executes the bytes we validated\" true by construction:\n\n```\n\tstruct its_cmd_block raw, cmd;\n\t...\n\t\tmemcpy(\u0026raw, its-\u003ecmd_host_base + its-\u003ecmd_offset, sizeof(raw));\n\n\t\tfor (i \u003d 0; i \u003c ARRAY_SIZE(cmd.raw_cmd); i++)\n\t\t\tcmd.raw_cmd[i] \u003d le64_to_cpu(raw.raw_cmd_le[i]);\n\n\t\tif (process_cmd(its, \u0026cmd, /* rollback */ false))\n\t\t\treturn;\n\n\t\tmemcpy(its-\u003ecmd_hyp_base + its-\u003ecmd_offset, \u0026raw, sizeof(raw));\n```\n\nOne thing that would flip this: if you ever want process_cmd to rewrite a field before submission, clamping the MAPD Size against GITS_TYPER.ID_bits being the obvious candidate, then the snapshot would silently drop the sanitisation and you want cpu_to_le64 on the way out instead. If that is where this is going, probably worth doing it that way now.",
+      "revId": "d7808e3b5adf0c21af21f22effcae3db4f98cc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
