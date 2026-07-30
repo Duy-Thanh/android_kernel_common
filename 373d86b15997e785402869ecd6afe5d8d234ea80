@@ -70,6 +70,24 @@
       "parentUuid": "b1868840_daa43c41",
       "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb314e6_e60d151c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-07-30T20:50:12Z",
+      "side": 1,
+      "message": "Qais, do you want 9f239df55546 to be backported to the 6.12 kernel or do you want to proceed with this CL? In the former case: commit 9f239df55546 is large. I don\u0027t think that I\u0027m the right person to backport that commit since I\u0027m not familiar with the kernel process scheduler.",
+      "parentUuid": "6779f406_a7a8e66f",
+      "revId": "373d86b15997e785402869ecd6afe5d8d234ea80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
