@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67d32e05_f53faec1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-07-30T20:00:34Z",
+      "side": 1,
+      "message": "Ha, and we don\u0027t need to do anything in kvm_release_page_clean() because put_page() correctly use the folio!\n\nI don\u0027t think that this solution is an issue: this isn\u0027t upstream because no one had the problem before and nowadays, no reference count is necessary for VM_IO | VM_PFNMAP that are actually backed by struct page.\n\n@willdeacon we need your owner+1.",
+      "parentUuid": "4917d91b_d3575769",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 38
+      },
+      "revId": "f433f6242582ae1ba920e6fe8c476ec2ac1be1b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72b3e53f_93aaef14",
         "filename": "virt/kvm/kvm_main.c",
         "patchSetId": 2
