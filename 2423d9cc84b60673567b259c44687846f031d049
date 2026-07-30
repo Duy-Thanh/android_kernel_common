@@ -16,6 +16,24 @@
       "message": "Optional nit: I didn\u0027t realize `pkvm_cpu_initialized()` was for the given CPU, not for the current CPU... So, now this looks like a bit unneeded/unclean extra indirection: we pass `vcpu-\u003ecpu` just because we have no API returning `cpu_initialized` for the current CPU.\n\nBut I\u0027m not suggesting to add `pkvm_this_cpu_initialized()` or whatever, because actually what we are interested here is not whether _this_ CPU is already initialized but only whether the \"first\" CPU has already done the \"global\" initialization of pKVM in `initialize_global()` (so in particular, `kvm_host.xss`, uret-MSR caches etc are initialized). So, if we are thinking about this anyway, perhaps it makes sense to introduce e.g. `pkvm_global_initialized()` for that? (using WRITE_ONCE/READ_ONCE or smp_store_release/smp_load_acquire for setting/getting `global_initialized` so that it is safe?)",
       "revId": "2423d9cc84b60673567b259c44687846f031d049",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba93f902_9130ad7b",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-07-30T06:51:43Z",
+      "side": 1,
+      "message": "I got your point but I\u0027m not sure introducing yet another API solely for this purpose is worthwhile. Using `pkvm_cpu_initialized` asserts this specific physical CPU has completed its own per-CPU hypervisor initialization including globals (kvm_host.xss/xcr0). \n\nI will mark it as resolved but if you insist to change it please reopen.",
+      "parentUuid": "a0ce1b36_2541d85d",
+      "revId": "2423d9cc84b60673567b259c44687846f031d049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
