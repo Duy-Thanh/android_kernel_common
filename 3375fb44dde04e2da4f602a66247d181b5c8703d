@@ -53,6 +53,24 @@
       "parentUuid": "95c43944_9435cfb0",
       "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e978e28_f82a3bc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-30T00:05:12Z",
+      "side": 1,
+      "message": "You were right and I was wrong -- d5e79eeba308 is exactly this fix, and its dma-heap.c hunk is the colon change I was proposing. I should have read that hunk before replying.\n\nI did find where it got lost, though. The drm-next merge da0c10aefaf6 (\"Merge de848da12f75 ... into android-mainline\", 2024-09-27) resolved this block by taking your new @priv: line from mainline, but keeping the android side\u0027s colonless @heap_devt / @list / @heap_cdev along with the ANDROID-only @heap_dev:\n\n  parent 1281c3ccca87 (android)   @heap_devt: no    @priv: no    @heap_dev: yes\n  parent de848da12f75 (mainline)  @heap_devt: yes   @priv: yes   @heap_dev: no\n  result da0c10aefaf6             @heap_devt: no    @priv: yes   @heap_dev: yes\n\nwhich is what the block still looks like today: @priv has its colon, the other three don\u0027t.\n\ndrm-misc-next (4d49f1adf) is clean -- no kernel-doc warnings in drivers/dma-buf/dma-heap.c or include/linux/dma-heap.h -- so there is nothing to submit upstream for this one.\n\nTodd: on that basis, would you reconsider the -2? I\u0027ll respin the commit message to describe this as restoring d5e79eeba308\u0027s hunk after that merge, rather than as a new fix.",
+      "parentUuid": "95c43944_9435cfb0",
+      "revId": "3375fb44dde04e2da4f602a66247d181b5c8703d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
