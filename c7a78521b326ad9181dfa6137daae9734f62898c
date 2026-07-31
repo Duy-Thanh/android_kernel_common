@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "accb28e9_b7f0734f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:40:55Z",
+      "side": 1,
+      "message": "Following the loop bound here: it runs to PKVM_NR_MOVEABLE_REGS rather than pkvm_moveable_regs_nr, and the unused entries are zeroed, so get_region(0) matches the first free slot and returns it instead of NULL.\n\ndev_addr comes straight from a host register in handle___pkvm_init_its_emulation, and that hcall stays callable after deprivilege, so the !its_reg guard in pkvm_init_gic_its_emulation does not hold. With dev_addr 0 we donate the two host pages, set base to __hyp_va(0), and then readq_relaxed(base + GITS_CREADR) is an EL2 access on an address that is not a GIC region at all.\n\nCould the loop be bounded by pkvm_moveable_regs_nr, and the region\u0027s type checked before it is used?",
+      "revId": "c7a78521b326ad9181dfa6137daae9734f62898c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c202686f_5b1c726d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:40:55Z",
+      "side": 1,
+      "message": "The type field is the other half of this. get_region matches on start alone, so during the deprivilege window, before each redistributor\u0027s own init has run, __pkvm_init_its_emulation with a redistributor\u0027s base returns that region and installs an its_priv_state in it. Its cb was set at registration and stays pkvm_handle_rdist_emulation, so the redist handlers would then read lpi_enabled, propbaser and pendbaser out of an its_priv_state.\n\nCould get_region take the expected type, or the callers check it?",
+      "revId": "c7a78521b326ad9181dfa6137daae9734f62898c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
