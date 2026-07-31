@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8f32e0_a67e5368",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-31T11:31:54Z",
+      "side": 1,
+      "message": "Set the bounds to pkvm_moveable_regs_nr and verified the type of the region.",
+      "parentUuid": "accb28e9_b7f0734f",
+      "revId": "c7a78521b326ad9181dfa6137daae9734f62898c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c202686f_5b1c726d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-31T08:40:55Z",
       "side": 1,
       "message": "The type field is the other half of this. get_region matches on start alone, so during the deprivilege window, before each redistributor\u0027s own init has run, __pkvm_init_its_emulation with a redistributor\u0027s base returns that region and installs an its_priv_state in it. Its cb was set at registration and stays pkvm_handle_rdist_emulation, so the redist handlers would then read lpi_enabled, propbaser and pendbaser out of an its_priv_state.\n\nCould get_region take the expected type, or the callers check it?",
+      "revId": "c7a78521b326ad9181dfa6137daae9734f62898c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27db6794_68a4a67f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-31T11:31:54Z",
+      "side": 1,
+      "message": "I would like to keep the type field verified in the caller.",
+      "parentUuid": "c202686f_5b1c726d",
       "revId": "c7a78521b326ad9181dfa6137daae9734f62898c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
