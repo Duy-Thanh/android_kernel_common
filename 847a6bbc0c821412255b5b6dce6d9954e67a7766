@@ -16,6 +16,24 @@
       "message": "I think we can make a workqueue to call __add_ino_entry() out of f2fs_evict_inode() context. Then, f2fs_iget() needs to wait for workqueue job.",
       "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89899f7_2d135607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-07-31T07:15:40Z",
+      "side": 1,
+      "message": "Hi Jaegeuk, \n\nThanks for the great architectural suggestion! Using a workqueue to decouple the reclaim context and preserve __GFP_NOFAIL is indeed a classic and robust kernel pattern.\n  \nHowever, we are a bit concerned that this might introduce substantial overhead and complexity for Android/Mobile workloads in several aspects:\n  \n1. Adding a work_struct to f2fs_inode_info would increase the Slab size of every single inode. For Android devices with hundreds of thousands of cached inodes, this introduces a non-negligible permanent memory penalty. If we dynamically allocating the work items at eviction time would just move the memory allocation failure/deadlock to the workqueue itself, defeating the purpose of the workqueue.\n  \n2. Making f2fs_iget() wait for the workqueue could introduce synchronization bottlenecks or latency spikes right in the most critical fast-path, especially under heavy memory pressure when the workqueue gets backed up.\n  \n3. Implementing the workqueue, handling pending queues, and adding wait logic to f2fs_iget() requires 100+ lines of intrusive changes and introduces new race windows.\n  \nIn contrast, our current approach (which incorporates Chao Yu\u0027s suggestions) is extremely lightweight (~35 insertions). It leverages the existing F2FS checkpoint state machine (SBI_FSYNC_FLUSH_NODE) with absolutely zero memory overhead and zero locking overhead on f2fs_iget(). Allocation failures during direct reclaim are gracefully handled, which aligns perfectly with other fail-graceful paths in F2FS.\n\nGiven the strict memory and latency constraints of Android devices, we feel the Fail-Graceful approach is much more concise and optimal. What do you think?",
+      "parentUuid": "5121c6c6_0b0c1b1b",
+      "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
