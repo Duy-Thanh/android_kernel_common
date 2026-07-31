@@ -1227,25 +1227,30 @@ static void pkvm_inject_exception(struct kvm_vcpu *vcpu)
 	kvm_x86_call(inject_exception)(vcpu);
 }
 
-static void pkvm_cancel_injection(struct kvm_vcpu *vcpu)
+static void pkvm_share_injection_with_host(struct kvm_vcpu *vcpu)
 {
-	struct pkvm_vcpu *pkvm_vcpu = to_pkvm_vcpu(vcpu);
-	struct kvm_vcpu *shared_vcpu;
+	struct kvm_vcpu *shared_vcpu = to_pkvm_vcpu(vcpu)->shared_vcpu;
 
-	kvm_x86_call(cancel_injection)(vcpu);
-
-	shared_vcpu = pkvm_vcpu->shared_vcpu;
-	if (vcpu->arch.nmi_injected) {
+	if (!pkvm_is_protected_vcpu(vcpu) && vcpu->arch.exception.injected) {
+		/*
+		 * For the pVM, the exception can only be injected by the pKVM
+		 * thus the pending exception should not be handed over to the
+		 * host.
+		 * For the npVM, the exception can be injected by both sides.
+		 */
+		shared_vcpu->arch.exception = vcpu->arch.exception;
+		kvm_clear_exception_queue(vcpu);
+	} else if (vcpu->arch.nmi_injected) {
 		shared_vcpu->arch.nmi_injected = true;
 		vcpu->arch.nmi_injected = false;
 	} else if (vcpu->arch.interrupt.injected) {
 		/*
 		 * The npVM's injected software and external interrupts can be
-		 * canceled as the host is allowed to inject both. But the host
+		 * pending as the host is allowed to inject both. But the host
 		 * is not allowed to inject the pVM's software interrupt, and
 		 * the pending pVM's software interrupt (exits during delivering
 		 * a software interrupt) should be injected by the pKVM, thus
-		 * the canceled software interrupt should not be handed over to
+		 * the pending software interrupt should not be handed over to
 		 * the host.
 		 */
 		if (!pkvm_is_protected_vcpu(vcpu) || !vcpu->arch.interrupt.soft) {
@@ -1253,16 +1258,14 @@ static void pkvm_cancel_injection(struct kvm_vcpu *vcpu)
 					    vcpu->arch.interrupt.soft);
 			kvm_clear_interrupt_queue(vcpu);
 		}
-	} else if (!pkvm_is_protected_vcpu(vcpu) && vcpu->arch.exception.injected) {
-		/*
-		 * For the pVM, the exception can only be injected by the pKVM
-		 * thus the canceled exception should not be handed over to the
-		 * host.
-		 * For the npVM, the exception can be injected by both sides.
-		 */
-		shared_vcpu->arch.exception = vcpu->arch.exception;
-		kvm_clear_exception_queue(vcpu);
 	}
+}
+
+static void pkvm_cancel_injection(struct kvm_vcpu *vcpu)
+{
+	kvm_x86_call(cancel_injection)(vcpu);
+
+	pkvm_share_injection_with_host(vcpu);
 }
 
 static int pkvm_refresh_apicv_exec_ctrl(struct kvm_vcpu *vcpu, bool apicv_active)
@@ -1688,7 +1691,7 @@ static void share_vcpu_state_with_host(struct kvm_vcpu *vcpu)
 		shared_vcpu->arch.efer = vcpu->arch.efer;
 
 		/* Share the exception information to the host if there is any */
-		if (vcpu->arch.exception.pending || vcpu->arch.exception.injected) {
+		if (vcpu->arch.exception.pending) {
 			shared_vcpu->arch.exception = vcpu->arch.exception;
 			kvm_clear_exception_queue(vcpu);
 		}
@@ -1702,6 +1705,8 @@ static void share_vcpu_state_with_host(struct kvm_vcpu *vcpu)
 		shared_vcpu->arch.dr7 = vcpu->arch.dr7;
 		shared_vcpu->arch.xcr0 = vcpu->arch.xcr0;
 	}
+
+	pkvm_share_injection_with_host(vcpu);
 
 	pkvm_x86_call(share_vcpu_state_with_host)(vcpu);
 }
