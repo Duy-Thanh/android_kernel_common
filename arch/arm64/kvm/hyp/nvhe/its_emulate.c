@@ -1312,6 +1312,8 @@ static void invallr_write(struct pkvm_moveable_reg *region, u64 offset,
 
 static struct emu_handler redist_handlers[] = {
 	EMU_REG(GICR_CTLR, sizeof(u32), redist_ctlr_write, redist_ctlr_read),
+	EMU_REG_RAZ_WI(GICR_SETLPIR, sizeof(u64)),
+	EMU_REG_RAZ_WI(GICR_CLRLPIR, sizeof(u64)),
 	EMU_REG(GICR_PROPBASER, sizeof(u64), propbaser_write, propbaser_read),
 	EMU_REG(GICR_PENDBASER, sizeof(u64), pendbaser_write, pendbaser_read),
 	EMU_REG(GICR_INVLPIR, sizeof(u64), invlpir_write, read_as_zero),
@@ -1326,6 +1328,8 @@ static struct emu_handler redist_handlers[] = {
  */
 static struct emu_handler redist_handlers_pre_init[] = {
 	EMU_REG(GICR_CTLR, sizeof(u32), write_ignore, redist_ctlr_pre_init),
+	EMU_REG_RAZ_WI(GICR_SETLPIR, sizeof(u64)),
+	EMU_REG_RAZ_WI(GICR_CLRLPIR, sizeof(u64)),
 	EMU_REG_RAZ_WI(GICR_PROPBASER, sizeof(u64)),
 	EMU_REG_RAZ_WI(GICR_PENDBASER, sizeof(u64)),
 	EMU_REG(GICR_INVLPIR, sizeof(u64), invlpir_write, read_as_zero),
