@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9e9ad4_733f9731",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T13:24:05Z",
+      "side": 1,
+      "message": "Reraising this from the first round, I do not think it landed on the change. Neither handler table covers GICR_SETLPIR (0x40) or GICR_CLRLPIR (0x48), so an access to either falls through handle_emulation to pkvm_handle_forward_req and reaches the physical register. Forcing has_direct_lpi off in the driver does not bind a host that is not cooperating.\n\nPhysical LPIs target the host rather than a protected VM, so this is the host injecting into itself, which is why I did not push before. It is a two line fix next to INVLPIR and INVALLR, could we trap and reject them the same way?\n\nMore generally, the fall-through forwards anything not in the table, and RD_base has IMPLEMENTATION DEFINED regions. Should the default be deny?",
+      "revId": "ca49ae888974384d4a3f57af31b24bcd1f102638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
