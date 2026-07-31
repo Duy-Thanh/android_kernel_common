@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "556c8b92_844eb388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-07-31T00:36:16Z",
+      "side": 1,
+      "message": "The upstream question is settled: drm-misc-next is already clean, so this stays as an ANDROID: change, and the commit message now carries the explanation. Marking this thread resolved.",
+      "parentUuid": "660f6a98_255e40d7",
+      "revId": "f02cd96dcb6efe13cba47bfa917522e3208802da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
