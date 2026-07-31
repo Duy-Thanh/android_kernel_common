@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cf5bb36_7e5316df",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2440,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:18:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33ec2c4_26de89b7",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11b80f4c_3d02fde7",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55cfc0aa_04914b97",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2462,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:18:31Z",
+      "side": 1,
+      "message": "My intent is to generally raise the error so it does not go unnoticed.",
+      "parentUuid": "11b80f4c_3d02fde7",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ef6ed87_0f56d6be",
         "filename": "drivers/irqchip/irq-gic-v3.c",
         "patchSetId": 22
@@ -48,6 +84,24 @@
       "writtenOn": "2026-07-31T08:08:07Z",
       "side": 1,
       "message": "What is the rd_lock meant to be keeping out here? Its only three users in the tree are __direct_lpi_inv, its_vpe_4_1_invall_locked and its_vpe_get_vsgi_state, none of which touch GICR_CTLR, GICR_PROPBASER or GICR_PENDBASER, and all three are already unreachable under pKVM because the GICv4 patch clears has_direct_lpi, has_vlpis and has_rvpeid.\n\nSo as far as I can tell we hold IRQs off across the whole deprivilege loop and get nothing back. Worth settling, because if the driver\u0027s own locks are not what closes the pre-init window then the pre-init handler table is carrying it alone.",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6482d7_b8068c2a",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2541,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:18:31Z",
+      "side": 1,
+      "message": "Good point. `rd_lock` doesn\u0027t protect GICR MMIO/registers and its only callers are GICv4 paths that are disabled under pKVM anyway. I will drop `rd_lock` acquisition and the per-CPU lookup loop from `gic_redist_deprivilege()`.",
+      "parentUuid": "4ef6ed87_0f56d6be",
       "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
