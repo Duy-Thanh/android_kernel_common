@@ -51,6 +51,24 @@
       "message": "The first two CLs in this series are included to provide this line and one a few lines above unchanged from upstream.\n\nHowever, the additional parameter `__free_pages_gpu_account(..., /*reclaim\u003d*/false)` has no meaning/effect.\n\nI suggest dropping the first two CLs, and switching this line to:\n\n```suggestion\n\t\t__free_pages(page, order);\n```\n\nThen mark this CL as `BACKPORT: FROMGIT: `, including a line near your signed-off-by tag that says:\n```\n[fnu.vishwanatha: use __free_pages instead of __free_pages_gpu_account]\n```",
       "revId": "09f60cddddaea4d8eeb36cccf71ad27b0552b2bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51aa7f4_3831cf37",
+        "filename": "drivers/gpu/drm/ttm/ttm_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T22:56:31Z",
+      "side": 1,
+      "message": "Nevermind. If @tjmercier@google.com is okay with the current state, then so am I.",
+      "parentUuid": "31444867_88329e80",
+      "revId": "09f60cddddaea4d8eeb36cccf71ad27b0552b2bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
