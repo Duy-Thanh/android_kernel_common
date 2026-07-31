@@ -16,6 +16,23 @@
       "message": "FYI, this is a trimmed version of https://android-review.git.corp.google.com/c/kernel/common/+/4188736 meant to ease the late-stage addition by removing any need for symbol/abi changes.\n\nPTAL at your earliest convenience as we are eager to see these changes land.",
       "revId": "09f60cddddaea4d8eeb36cccf71ad27b0552b2bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31444867_88329e80",
+        "filename": "drivers/gpu/drm/ttm/ttm_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T22:44:35Z",
+      "side": 1,
+      "message": "The first two CLs in this series are included to provide this line and one a few lines above unchanged from upstream.\n\nHowever, the additional parameter `__free_pages_gpu_account(..., /*reclaim\u003d*/false)` has no meaning/effect.\n\nI suggest dropping the first two CLs, and switching this line to:\n\n```suggestion\n\t\t__free_pages(page, order);\n```\n\nThen mark this CL as `BACKPORT: FROMGIT: `, including a line near your signed-off-by tag that says:\n```\n[fnu.vishwanatha: use __free_pages instead of __free_pages_gpu_account]\n```",
+      "revId": "09f60cddddaea4d8eeb36cccf71ad27b0552b2bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
