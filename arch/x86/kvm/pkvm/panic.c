@@ -135,7 +135,7 @@ static void __noreturn pkvm_emergency_reset(void)
 
 atomic_t pkvm_panic_in_progress = ATOMIC_INIT(0);
 
-void __noreturn pkvm_panic(const char *fmt, ...)
+void __noreturn panic(const char *fmt, ...)
 {
 	static char panic_msg[1024];
 	va_list args;
