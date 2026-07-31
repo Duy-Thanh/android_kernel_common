@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3f3525_ef2acdcb",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:14:40Z",
+      "side": 1,
+      "message": "The size here is the stride captured from the first redistributor probed, and then applied to all of them. If one redistributor reported GICR_TYPER.VLPIS and another did not, the stride would be right for the first and wrong for the rest, and a redistributor whose VLPI frame we did not register would keep raw host access to exactly the frame this series is trying to block.\n\nI do not think that happens on any real part, but since this is where the decision is made, would it be worth deriving the frame count per redistributor from its own TYPER?",
+      "revId": "1b93413c6a7d69416648000845508765a2fc19a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
