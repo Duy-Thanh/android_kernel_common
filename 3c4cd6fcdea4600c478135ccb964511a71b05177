@@ -16,6 +16,24 @@
       "message": "id_bits comes from redist-\u003epropbaser, and propbaser_write keeps GICR_PROPBASER_IDBITS_MASK among the writable fields, so the host picks it and nothing bounds it here. At 31, prop_sz is 4 GiB and hyp_share_pin_mem walks a million pages of __pkvm_host_share_hyp inside one EL2 call.\n\nCould we clamp id_bits against GICD_TYPER.IDbits before deriving the sizes?",
       "revId": "3c4cd6fcdea4600c478135ccb964511a71b05177",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5781a0b9_149620c4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:17:37Z",
+      "side": 1,
+      "message": "We would have to get the value of `GICD_TYPER.IDbits`. Without knowing where the GICD base address is not possible.",
+      "parentUuid": "5b2836a8_72940037",
+      "revId": "3c4cd6fcdea4600c478135ccb964511a71b05177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
