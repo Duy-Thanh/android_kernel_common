@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33ec2c4_26de89b7",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2440,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:08:07Z",
+      "side": 1,
+      "message": "gic_probe_pkvm_redist keeps walking after gic_pkvm_early_redists is full, so on a system with more redistributors than NR_CPUS the extras are dropped with no warning, and never get registered for emulation or deprivileged.\n\nCould that be a WARN and an error return rather than a silent skip?",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b80f4c_3d02fde7",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2462,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:08:07Z",
+      "side": 1,
+      "message": "This only looks for the \"arm,gic-v3\" DT node, so on ACPI it returns -ENODEV and the whole GICR hardening is skipped. Not an issue for the platforms we care about today, but for a hardening series I would rather it failed loudly than came up without the protection.\n\nIs ACPI something you want to handle here, or should it refuse to boot protected?",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef6ed87_0f56d6be",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2541,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:08:07Z",
+      "side": 1,
+      "message": "What is the rd_lock meant to be keeping out here? Its only three users in the tree are __direct_lpi_inv, its_vpe_4_1_invall_locked and its_vpe_get_vsgi_state, none of which touch GICR_CTLR, GICR_PROPBASER or GICR_PENDBASER, and all three are already unreachable under pKVM because the GICv4 patch clears has_direct_lpi, has_vlpis and has_rvpeid.\n\nSo as far as I can tell we hold IRQs off across the whole deprivilege loop and get nothing back. Worth settling, because if the driver\u0027s own locks are not what closes the pre-init window then the pre-init handler table is carrying it alone.",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
