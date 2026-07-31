@@ -52,6 +52,24 @@
       "parentUuid": "cdfa64dc_b7c11263",
       "revId": "06cf6c1b480d4036d3478e8ce7d783f998797f8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dffbd7f0_b6b7eab7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T07:34:48Z",
+      "side": 1,
+      "message": "Thanks, the split is what I was after, and forwarding the offsets with no handler is the part that matters.\n\nOn RWP\u003d1, I think it is the right call. gic_do_wait_for_rwp polls for a second and then prints \"RWP timeout, gone fishing\" and carries on, so a CPU that polls inside the window gets a stall and a log line rather than a wrong answer. RAZ is what would be worse: the driver reads no write pending, carries on, and its model of the redistributor quietly stops matching the hardware.\n\nAgreed the global lock is not an A16 problem.",
+      "parentUuid": "dad0c279_0193cb94",
+      "revId": "06cf6c1b480d4036d3478e8ce7d783f998797f8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
