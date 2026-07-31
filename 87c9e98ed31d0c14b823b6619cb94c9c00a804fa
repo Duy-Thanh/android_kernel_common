@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "192ff8e2_06c0b616",
+        "filename": "drivers/gpu/drm/ttm/ttm_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T19:44:00Z",
+      "side": 1,
+      "message": "nit: remove this empty line.",
+      "fixSuggestions": [
+        {
+          "fixId": "d3d499a6_c1936c78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/ttm/ttm_pool.c",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "87c9e98ed31d0c14b823b6619cb94c9c00a804fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
