@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84105aa1_6dfabed9",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-07-31T08:04:32Z",
+      "side": 1,
+      "message": "`smmu_emulate_enable()` already has `WARN_ON(!is_cmdq_enabled())`?",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 778,
+        "endChar": 54
+      },
+      "revId": "5e2e73f82a44fb35c7db60ad8acd8e4e27270efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
