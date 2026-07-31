@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb392046_1724a4ec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T13:18:25Z",
+      "side": 1,
+      "message": "id_bits is whatever the host last wrote to GICR_PROPBASER, so at 0 or 1 the division gives 0 and pend_sz is 0. hyp_share_pin_mem then has num_pages 0, shares nothing and pins an empty range, and enable_lpi goes on to write the host\u0027s GICR_PENDBASER to the hardware and enable LPIs.\n\nThat leaves the redistributor enabled against a pending table we have neither shared nor pinned, at an address the host chose and is free to donate to a guest afterwards. The id_bits clamp from the property table patch would close this too, if the lower end is bounded and not just the upper.",
+      "revId": "ac138c1e3f9574dacd5d374f73c58c1d163fd536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
