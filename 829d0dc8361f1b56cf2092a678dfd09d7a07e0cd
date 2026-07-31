@@ -34,6 +34,24 @@
       "parentUuid": "0e4dd015_4dcd161d",
       "revId": "829d0dc8361f1b56cf2092a678dfd09d7a07e0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dcbbccb_2a67a77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-07-31T17:24:06Z",
+      "side": 1,
+      "message": "Done. Switched to `FROMGIT:` tag as it now has been picked up by Paul.",
+      "parentUuid": "556e2247_117a4fa4",
+      "revId": "829d0dc8361f1b56cf2092a678dfd09d7a07e0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
