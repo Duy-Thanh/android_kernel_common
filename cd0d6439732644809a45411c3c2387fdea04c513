@@ -16,6 +16,24 @@
       "message": "Is it okay that this HVC is callable after host depriv? Naively would expect it to be in the pre-init set of HVCs. Is it an ordering-of-depriv concern that means it is not?",
       "revId": "cd0d6439732644809a45411c3c2387fdea04c513",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd7b56d_5232b01a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:17:33Z",
+      "side": 1,
+      "message": "Actually both `__pkvm_init_its_emulation` and `__pkvm_init_redist_emulation` happen right after  \n`__pkvm_prot_finalize`, so we cannot make it pre-init.",
+      "parentUuid": "197b763e_f20550f4",
+      "revId": "cd0d6439732644809a45411c3c2387fdea04c513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
