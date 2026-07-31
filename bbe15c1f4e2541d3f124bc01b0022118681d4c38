@@ -16,6 +16,24 @@
       "message": "Fair on the extra MMIO, let me drop that half of it. What is left is smaller: -EBUSY is already on the line below the BUG(), and cwriter_write already handles a failed submit by rolling back, which is the path the stalled case takes. So this is deleting a line rather than adding a mechanism.\n\nOn self-DoS, I think the invalid HVC address argues the other way. It returns an error and hyp carries on, and this is the one place where a host-controlled input panics EL2 instead of failing the operation.\n\nCould we drop the BUG() and let the -EBUSY return?",
       "revId": "bbe15c1f4e2541d3f124bc01b0022118681d4c38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1814afd_60f15830",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-31T08:37:18Z",
+      "side": 1,
+      "message": "dropped that and updated the comment",
+      "parentUuid": "5e224ecf_d7930e4c",
+      "revId": "bbe15c1f4e2541d3f124bc01b0022118681d4c38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
