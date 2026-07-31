@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0065e1e8_d565c56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5052950
+      },
+      "writtenOn": "2026-07-31T12:56:20Z",
+      "side": 1,
+      "message": "You are a highly experienced code reviewer specializing in Git patches. Your\ntask is to analyze the provided Git patch (`patch`) and provide comprehensive\nfeedback.  Focus on identifying potential bugs, inconsistencies, security\nvulnerabilities, and areas for improvement in code style and readability.\nYour response should be detailed and constructive, offering specific suggestions\nfor remediation where applicable. Prioritize clarity and conciseness in your\nfeedback.\n\n# Step by Step Instructions\n\n1.  Read the provided `patch` carefully.  Understand the changes it introduces to the codebase.\n\n2.  Analyze the `patch` for potential issues:\n    * **Functionality:** Does the code work as intended? Are there any bugs or unexpected behavior?\n    * **Security:** Are there any security vulnerabilities introduced by the patch?\n    * **Style:** Does the code adhere to the project\u0027s coding style guidelines? Is it readable and maintainable?\n    * **Consistency:** Are there any inconsistencies with existing code or design patterns?\n    * **Testing:** Does the patch include sufficient tests to cover the changes?\n\n3.  Formulate concise and constructive feedback for each identified issue.  Provide specific suggestions for remediation where possible.\n\n4.  Summarize your findings in a clear and organized manner.  Prioritize critical issues over minor ones.\n\n5.  Review the feedback written so far. Is the feedback comprehensive and sufficiently detailed?\nIf not, go back to step 2, focusing on any areas that require further analysis or clarification.\n If yes, proceed to step 6.\n\n6.  Output the complete review.\n\n\nPatch: \n\"\"\"\nFrom c139b94e30e0e3af713b99f187df93617b6192db Mon Sep 17 00:00:00 2001\nDate: Fri, 31 Jul 2026 07:42:32 +0100\nSubject: [PATCH] ANDROID: KVM: arm64: hyp-main: Inject CI failure on protected vCPU run\n\nCall hyp_panic() in handle___kvm_vcpu_run(), gated on\npkvm_hyp_vcpu_is_protected(), so running a protected vCPU panics the\nhypervisor. Non-protected guests and the host\u0027s own vCPUs are\nunaffected.\n\nUse hyp_panic() rather than BUG(): it reads unambiguously as a\ndeliberate crash to a reader unfamiliar with pKVM (where BUG()/WARN_ON()\nare both silently fatal at EL2), and it keeps checkpatch clean.\n\nThis is a deliberate fault for validating the CI pipeline: paired with\nthe tabba/ci-check-good branch, it must fail a protected-VM run while a\nnon-protected run still succeeds. Do not merge.\n\nBug: 538086469\nChange-Id: Id29b5d4ae1e43b6ff22c741db84bff3070267ef0\nSigned-off-by: Fuad Tabba \u003ctabba@google.com\u003e\n---\n\ndiff --git a/arch/arm64/kvm/hyp/nvhe/hyp-main.c b/arch/arm64/kvm/hyp/nvhe/hyp-main.c\nindex a552325..4314b62 100644\n--- a/arch/arm64/kvm/hyp/nvhe/hyp-main.c\n+++ b/arch/arm64/kvm/hyp/nvhe/hyp-main.c\n@@ -1038,6 +1038,15 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)\n \t\t\tgoto out;\n \t\t}\n \n+\t\t/*\n+\t\t * CI pipeline check (tabba/ci-check-bad): deliberately\n+\t\t * crash the hypervisor when running a protected vCPU, so a\n+\t\t * working CI MUST fail the protected-VM run. Non-protected\n+\t\t * guests and the host\u0027s own vCPUs are left untouched.\n+\t\t */\n+\t\tif (pkvm_hyp_vcpu_is_protected(hyp_vcpu))\n+\t\t\thyp_panic();\n+\n \t\tflush_hyp_vcpu(hyp_vcpu);\n \t\tret \u003d __kvm_vcpu_run(\u0026hyp_vcpu-\u003evcpu);\n \t\tsync_hyp_vcpu(hyp_vcpu, \u0026ret);\n\n\"\"\"\nIMPORTANT NOTE: Start directly with the output, do not output any delimiters.\nTake a Deep Breath, read the instructions again, read the inputs again. Each instruction is crucial and must be executed with utmost care and attention to detail.\n\nReview:",
+      "revId": "c139b94e30e0e3af713b99f187df93617b6192db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
