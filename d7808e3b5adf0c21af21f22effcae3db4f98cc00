@@ -104,6 +104,24 @@
       "parentUuid": "a2c08557_9e9c856b",
       "revId": "d7808e3b5adf0c21af21f22effcae3db4f98cc00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302d6899_bd0c1659",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T07:23:37Z",
+      "side": 1,
+      "message": "One consequence of the snapshot worth noting: process_cmd can now validate a command but not rewrite one. The write-back copies the host\u0027s bytes, so anything it changes in cmd is discarded and the ITS executes the original. Nothing rewrites a field today so this is correct, but bounding the MAPD Size against GITS_TYPER.ID_bits is the obvious next candidate, and it would have to reject the command rather than clamp the field. Maybe worth a comment here so the next one does not get it wrong.",
+      "parentUuid": "859a2acc_0783e70e",
+      "revId": "d7808e3b5adf0c21af21f22effcae3db4f98cc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
