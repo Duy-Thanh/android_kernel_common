@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d46296c_8bfa0432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T21:23:32Z",
+      "side": 1,
+      "message": "FYI, this is a trimmed version of https://android-review.git.corp.google.com/c/kernel/common/+/4188736 meant to ease the late-stage addition by removing any need for symbol/abi changes.\n\nPTAL at your earliest convenience as we are eager to see these changes land.",
+      "revId": "09f60cddddaea4d8eeb36cccf71ad27b0552b2bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
