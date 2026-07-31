@@ -119,6 +119,30 @@
       },
       "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c00199_673f4d0f",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-07-31T05:14:00Z",
+      "side": 1,
+      "message": "FR_SYNC is only used for asynchronous IO tagging, and there are relatively few effective request types. FR_SYNC_WAKE is used to guide the wake-up action and needs to take effect on all requests except forget and interrupt, so they cannot be replaced.",
+      "parentUuid": "adf46005_e29cb670",
+      "range": {
+        "startLine": 495,
+        "startChar": 1,
+        "endLine": 495,
+        "endChar": 9
+      },
+      "revId": "3774a4a849f82826f3d492f4ee2867dcff302315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
