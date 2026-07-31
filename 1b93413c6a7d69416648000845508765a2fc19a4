@@ -16,6 +16,24 @@
       "message": "The size here is the stride captured from the first redistributor probed, and then applied to all of them. If one redistributor reported GICR_TYPER.VLPIS and another did not, the stride would be right for the first and wrong for the rest, and a redistributor whose VLPI frame we did not register would keep raw host access to exactly the frame this series is trying to block.\n\nI do not think that happens on any real part, but since this is where the decision is made, would it be worth deriving the frame count per redistributor from its own TYPER?",
       "revId": "1b93413c6a7d69416648000845508765a2fc19a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcaaa684_b1e67dd7",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:17:29Z",
+      "side": 1,
+      "message": "Yeah, I fixed it in the aosp/4141185. There\u0027s no point in adding too much GIC specific logic here. I still think we should rely on the stride size to unmap `VLPI_base`. `gic_probe_pkvm_redist` will provide the stride based on `GICR_TYPER_VLPI` (unless DT specifies otherwise). Adding `GICR_TYPER` here I think would pollute this file with GIC logic...",
+      "parentUuid": "1a3f3525_ef2acdcb",
+      "revId": "1b93413c6a7d69416648000845508765a2fc19a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
