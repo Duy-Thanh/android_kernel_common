@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14787ebf_a057d9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-07-31T06:32:31Z",
+      "side": 1,
+      "message": "Hmm, not sure if it\u0027s expected but somehow the KernelCommit check wasn\u0027t run for this CL.",
+      "revId": "903e93281f954c268a5699f818f475fba8fa14d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
