@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77397a7_51f77bca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T08:46:52Z",
+      "side": 1,
+      "message": "This reads GICR_TYPER but uses FIELD_GET(GITS_TYPER_VLPIS, ...). Same bit so it works, and GICR_TYPER_VLPIS is defined in the same header.",
+      "revId": "0b00eaca2b0e23b28362a2acaeadc8e06b3e1f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
