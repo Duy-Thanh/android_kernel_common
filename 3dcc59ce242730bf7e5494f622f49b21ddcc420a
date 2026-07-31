@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d463902_f5aaa4f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T22:45:54Z",
+      "side": 1,
+      "message": "This CL seems unnecessary. See https://android-review.git.corp.google.com/c/kernel/common/+/4207689/comment/31444867_88329e80/\n\nI suggest dropping it from the series.",
+      "revId": "3dcc59ce242730bf7e5494f622f49b21ddcc420a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
