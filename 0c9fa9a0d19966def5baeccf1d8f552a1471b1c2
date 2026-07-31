@@ -33,6 +33,24 @@
       "message": "Pulling in Suren and TJ as they may have better sense of the potential risk/impact of the mm changes.",
       "revId": "0c9fa9a0d19966def5baeccf1d8f552a1471b1c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b437877a_91db0bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-07-31T21:24:55Z",
+      "side": 1,
+      "message": "FYI, Vishwanatha has greatly simplified and re-uploaded this series as https://android-review.git.corp.google.com/c/kernel/common/+/4207689/1\n\nI\u0027ll abandon this series and add relevant reviewers on that new one.",
+      "parentUuid": "dcd6bb3e_d9009346",
+      "revId": "0c9fa9a0d19966def5baeccf1d8f552a1471b1c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
