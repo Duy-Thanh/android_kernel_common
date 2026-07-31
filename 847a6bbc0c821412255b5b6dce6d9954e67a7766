@@ -34,6 +34,24 @@
       "parentUuid": "5121c6c6_0b0c1b1b",
       "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b72182_6c051793",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2026-07-31T15:48:21Z",
+      "side": 1,
+      "message": "1. It\u0027s wrong. We need to add single workqueue in f2fs_sb_info.\n2. I don\u0027t think it\u0027ll add huge latencies, since the work, __add_ino_entry(), should be done super quickly. Can we quantify the concern?\n3. What do you mean 100+ lines to implement the wait logic? I think flush_workqueue() is enough.\n\nYour approach that fsync() runs a full checkpoint gives a sporadic huge latency during fsync() as well. Once we have a workqueue, we may be able to migrate more jobs in f2fs_evict_inode() that doesn\u0027t require inode, resulting in speeding up the reclaim path.",
+      "parentUuid": "b89899f7_2d135607",
+      "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
