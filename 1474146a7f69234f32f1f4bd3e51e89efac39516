@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/541024197",
       "revId": "1474146a7f69234f32f1f4bd3e51e89efac39516",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d09c4d5a_f7b88700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-07-31T20:58:05Z",
+      "side": 1,
+      "message": "Please abandon this patch and cherry-pick the version in android16-6.12 so the Change-Id is preserved",
+      "revId": "1474146a7f69234f32f1f4bd3e51e89efac39516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
