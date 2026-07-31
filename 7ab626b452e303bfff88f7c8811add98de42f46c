@@ -16,6 +16,24 @@
       "message": "We should probably default this to off in android16-6.12, as it\u0027s a pretty risky thing to enable unconditionally for SoCs that advertise ITS nodes in the DT.\n\nCan we gate this on a cmdline for android16-6.12, please?",
       "revId": "7ab626b452e303bfff88f7c8811add98de42f46c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "405fac8b_02dccef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-07-31T16:33:05Z",
+      "side": 1,
+      "message": "Agreed, I introduced a kernel cmdline option to gate it behind \"kvm-arm.kvm_its_hardening\". This static key will later guard the hooking of the shadow state in patch : \"KVM: arm64: Implement HVC interface for ITS emulation setup\"",
+      "parentUuid": "cd9d7226_33378bc5",
+      "revId": "7ab626b452e303bfff88f7c8811add98de42f46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
