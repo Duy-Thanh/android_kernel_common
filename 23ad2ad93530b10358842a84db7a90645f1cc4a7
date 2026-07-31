@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62517449_dcad683b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2026-07-31T23:22:08Z",
+      "side": 1,
+      "message": "nit: Remove whitespace",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 83,
+        "endChar": 7
+      },
+      "revId": "23ad2ad93530b10358842a84db7a90645f1cc4a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
