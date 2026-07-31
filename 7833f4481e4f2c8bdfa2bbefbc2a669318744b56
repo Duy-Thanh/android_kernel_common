@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba71408_c87f9bcc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:17:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "85aa0f3d_5a2dbe78",
+      "revId": "7833f4481e4f2c8bdfa2bbefbc2a669318744b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77b1203e_45bda324",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-31T15:31:08Z",
       "side": 1,
       "message": "I think returning the shadow costs the driver its attribute negotiation. The write handler stores the host\u0027s value and hardware is only written later in enable_lpi, so a write followed by a read-back always returns what was written. its_cpu_init_lpis uses that read-back to see whether the redistributor honoured the Shareability it asked for, and sets RDIST_FLAGS_PROPBASE_NEEDS_FLUSHING when it did not. With the shadow the flag can never be set, so on a redistributor with a fixed Shareability the driver keeps writing property bytes with only a dsb(ishst).\n\nThe ITS half does keep it working: cbaser_read returns hardware and cbaser_write recomputes needs_flush from it. Could it report the hardware\u0027s attribute bits while keeping the address and IDbits from the shadow?",
+      "revId": "7833f4481e4f2c8bdfa2bbefbc2a669318744b56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b546e4_9b57c77d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-07-31T18:17:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77b1203e_45bda324",
       "revId": "7833f4481e4f2c8bdfa2bbefbc2a669318744b56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
