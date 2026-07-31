@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197b763e_f20550f4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-07-31T10:59:09Z",
+      "side": 1,
+      "message": "Is it okay that this HVC is callable after host depriv? Naively would expect it to be in the pre-init set of HVCs. Is it an ordering-of-depriv concern that means it is not?",
+      "revId": "cd0d6439732644809a45411c3c2387fdea04c513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
