@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc009aeb_83b3fa71",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T07:16:53Z",
+      "side": 1,
+      "message": "The smaller-access point is right, the driver does write GITS_CWRITER with writel. I think the new test goes the other way though: access_size is the register\u0027s own width from the table, so access_size \u003c\u003d reg_size skips the handler whenever the access matches the register rather than being wider than it, and the loop falls through to pkvm_handle_forward_req.\n\nThat is what the driver does everywhere else. GITS_CTLR and GICR_CTLR via writel, GITS_CBASER, GITS_BASER, GICR_PROPBASER and GICR_PENDBASER via writeq. All of those now reach the hardware unmediated, and only the CWRITER doorbell is still emulated.\n\nCould this be \u003c rather than \u003c\u003d?",
+      "revId": "89c694e00daac85bca6b9839fde566f4948acbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d688d9_83fa884e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-07-31T07:16:53Z",
+      "side": 1,
+      "message": "The smaller-access point is right, the driver does write GITS_CWRITER with writel. I do not think the new test does what it is meant to though. access_size is the register\u0027s width from the table, so access_size \u003c\u003d reg_size skips the handler whenever the access matches the register, and the loop falls through to pkvm_handle_forward_req. GITS_CTLR and GICR_CTLR via writel, and the BASER and PROPBASER registers via writeq, all now reach the hardware unmediated.\n\nA wider access still falls through as well, which was the first case last round. Could a size mismatch return here rather than fall through, something like:\n\n      if (reg_size \u003e reg_handler-\u003eaccess_size || !IS_ALIGNED(offset, reg_size))\n              return;\n\nComing back to the other case from last round, the value and the offset are still taken whole. handle_host_mmio_trap passes the source register with no mask to reg_size, so a 1-byte store at GICR_CTLR arrives here as all 64 bits and reaches handle_lpi_disable. redist_ctlr_write and propbaser_write also ignore offset, so a 4-byte write at GICR_PROPBASER + 4 is handled as a write of that value to the whole register.\n\nCould a narrower access be masked to reg_size and required to name the start of the register, so that it cannot stand in for a full-width write?",
+      "revId": "89c694e00daac85bca6b9839fde566f4948acbf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
