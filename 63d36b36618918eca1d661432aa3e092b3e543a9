@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a3eecd_b07ca9f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-07-31T06:38:04Z",
+      "side": 1,
+      "message": "Again not sure if it\u0027s expected but the KernelCommit check didn\u0027t show the diff for the backport. (Maybe it ignores the Documentation/ changes?)",
+      "revId": "63d36b36618918eca1d661432aa3e092b3e543a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
