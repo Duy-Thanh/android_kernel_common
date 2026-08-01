@@ -826,6 +826,9 @@ DECLARE_HOOK(android_vh_folio_alloc_swap_finish,
 DECLARE_RESTRICTED_HOOK(android_rvh_read_swap_cache_async_timeout,
 	TP_PROTO(size_t *count, bool *skip),
 	TP_ARGS(count, skip), 2);
+DECLARE_HOOK(android_vh_unlock_mmap_bypass,
+	TP_PROTO(struct vm_fault *vmf, struct file *fpin, bool *bypass),
+	TP_ARGS(vmf, fpin, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
