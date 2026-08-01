@@ -859,6 +859,9 @@ DECLARE_HOOK(android_vh_folio_start_writeback,
 DECLARE_HOOK(android_vh_override_exec_folio_order,
 	TP_PROTO(struct vm_area_struct *vma, unsigned int *order),
 	TP_ARGS(vma, order));
+DECLARE_HOOK(android_vh_unlock_mmap_bypass,
+	TP_PROTO(struct vm_fault *vmf, struct file *fpin, bool *bypass),
+	TP_ARGS(vmf, fpin, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
