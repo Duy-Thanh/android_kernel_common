@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef55e7e8_c0c90d15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac9746ed_c850cf33",
+      "revId": "37188714ff264582b789f376ebf1d83c8da0975d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fefcae2e_8bac4e34",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-13T16:23:58Z",
       "side": 1,
       "message": "Do we want to set `vcpu-\u003earch.efer` if the hypercall failed?\n\nWe should probably do something like:\n\n```\n\tif (!vcpu-\u003earch.guest_state_protected) {\n\t\tint ret \u003d pkvm_hypercall(set_efer, efer);\n\t\t\n\t\tif (ret)\n\t\t\treturn ret;\n\t}\n\t\n\tvcpu-\u003earch.efer \u003d efer;\n\treturn 0;\n```\n\n?",
+      "revId": "37188714ff264582b789f376ebf1d83c8da0975d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9928cf5_22b29c80",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fefcae2e_8bac4e34",
       "revId": "37188714ff264582b789f376ebf1d83c8da0975d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
