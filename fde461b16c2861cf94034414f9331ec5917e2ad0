@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2722a9_7da5add0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-01T13:53:47Z",
+      "side": 1,
+      "message": "Same as propbaser_read on the previous patch: this returns the shadow, so the driver\u0027s write-then-read-back never shows it a difference. Same suggestion, keep the address under our control but let the hardware\u0027s Shareability and Cacheability bits be observable.",
+      "revId": "fde461b16c2861cf94034414f9331ec5917e2ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
