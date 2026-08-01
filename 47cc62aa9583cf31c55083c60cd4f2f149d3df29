@@ -52,6 +52,24 @@
       "parentUuid": "2b03b001_2d2476f5",
       "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1193ae85_089d2e44",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:42:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "294059f7_8e1ea7ca",
+      "revId": "47cc62aa9583cf31c55083c60cd4f2f149d3df29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
