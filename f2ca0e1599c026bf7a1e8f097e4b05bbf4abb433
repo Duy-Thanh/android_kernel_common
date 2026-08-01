@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e23e48f_5aab48a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:37:42Z",
+      "side": 1,
+      "message": "Sure, uploaded a separate patch https://android-review.googlesource.com/c/kernel/common/+/4207710/1 to rename pkvm_panic",
+      "parentUuid": "1db613dc_7937e140",
+      "revId": "f2ca0e1599c026bf7a1e8f097e4b05bbf4abb433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a1306f_25b4354e",
