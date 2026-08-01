@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe943e97_cbe15b14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:49:03Z",
+      "side": 1,
+      "message": "OK. I keep it, meanwhile added another patch https://android-review.googlesource.com/c/kernel/common/+/4207709/1 to share the xfd to the host.",
+      "parentUuid": "0d7bb0f9_1be5acb1",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82718a49_5e2f0957",
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "Thanks for the explanation. I wasn\u0027t pointing out any particular issues, just trying to recall how this works.\n\n\u003e So the host\u0027s xfd is not useful. It is always 0 (so the host always set the XFD MSR with value 0, but later the XFD MSR will be updated by the pKVM to the correct value).\n\nI see. Just thinking: so seems like the only \"issue\" we have is that we redundantly write this 0 value to the XFD MSR in the host before entering the guest, so we could slightly optimize that, e.g.:\n\n```\n--- a/arch/x86/kernel/fpu/core.c\n+++ b/arch/x86/kernel/fpu/core.c\n@@ -439,8 +439,12 @@ int fpu_swap_kvm_fpstate(struct fpu_guest *guest_fpu, bool enter_guest)\n \t\t * XSTATE is restored by firmware from encrypted\n \t\t * memory. Make sure XFD state is correct while\n \t\t * running with guest fpstate\n+\t\t *\n+\t\t * With pKVM enabled, XFD for the guest is updated by pKVM,\n+\t\t * not by the host (even for npVM).\n \t\t */\n-\t\txfd_update_state(cur_fps);\n+\t\tif (!pkvm_enabled() || !enter_guest)\n+\t\t\txfd_update_state(cur_fps);\n \t}\n \n \tfpregs_mark_activate();\n```\n\n?\n\nI\u0027m just thinking aloud, I\u0027m not saying it\u0027s important to implement this optimization. Also I\u0027m not fully sure if my diff is correct (since I\u0027m not very familiar with this FPU stuff).\n\nAlso I see this diff would only optimize it for npVM, not for pVM. IIUC for pVM we\u0027d need to patch `restore_fpregs_from_fpstate()`, which is a bit tricky since `restore_fpregs_from_fpstate()` is used for non-KVM FPU context switches as well.\n\n\u003e The host\u0027s xfeatures are updated by host executing xsave after exits to the host.\n\nJust in case, I assume you mean the following code path in the host: kvm_arch_vcpu_ioctl_run() -\u003e kvm_put_guest_fpu() -\u003e fpu_swap_kvm_fpstate() -\u003e save_fpregs_to_fpstate() -\u003e os_xsave() ?",
       "parentUuid": "6b9146da_2b707067",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a47fcec_14c39992",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 12316,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:49:03Z",
+      "side": 1,
+      "message": "I prefer to share the xfd with the host for npVM, and make pKVM not to switch XFD for the npVM as this can be done by the host with the up-to-date guest xfd. This is implemented by https://android-review.googlesource.com/c/kernel/common/+/4207709/1",
+      "parentUuid": "67e7580a_29a84ee7",
       "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
