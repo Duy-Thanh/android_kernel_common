@@ -114,8 +114,7 @@ static DEFINE_IDA(port_ida);
 struct qcom_geni_device_data {
 	bool console;
 	enum geni_se_xfer_mode mode;
-	struct dev_pm_domain_attach_data pd_data;
-	int (*resources_init)(struct uart_port *uport);
+	int (*resources_init)(struct geni_se *se);
 	int (*set_rate)(struct uart_port *uport, unsigned int baud);
 	int (*power_state)(struct uart_port *uport, bool state);
 };
@@ -157,7 +156,6 @@ struct qcom_geni_serial_port {
 
 	struct qcom_geni_private_data private_data;
 	const struct qcom_geni_device_data *dev_data;
-	struct dev_pm_domain_list *pd_list;
 	struct notifier_block panic_nb;
 };
 
@@ -1355,7 +1353,7 @@ static int geni_serial_set_rate(struct uart_port *uport, unsigned int baud)
 static int geni_serial_set_level(struct uart_port *uport, unsigned int baud)
 {
 	struct qcom_geni_serial_port *port = to_dev_port(uport);
-	struct device *perf_dev = port->pd_list->pd_devs[DOMAIN_IDX_PERF];
+	struct device *perf_dev = port->se.pd_list->pd_devs[DOMAIN_IDX_PERF];
 
 	/*
 	 * The performance protocol sets UART communication
@@ -1712,57 +1710,6 @@ static int geni_serial_resource_state(struct uart_port *uport, bool power_on)
 	return power_on ? geni_serial_resources_on(uport) : geni_serial_resources_off(uport);
 }
 
-static int geni_serial_pwr_init(struct uart_port *uport)
-{
-	struct qcom_geni_serial_port *port = to_dev_port(uport);
-	int ret;
-
-	ret = dev_pm_domain_attach_list(port->se.dev,
-					&port->dev_data->pd_data, &port->pd_list);
-	if (ret <= 0)
-		return -EINVAL;
-
-	return 0;
-}
-
-static int geni_serial_resource_init(struct uart_port *uport)
-{
-	struct qcom_geni_serial_port *port = to_dev_port(uport);
-	int ret;
-
-	port->se.clk = devm_clk_get(port->se.dev, "se");
-	if (IS_ERR(port->se.clk)) {
-		ret = PTR_ERR(port->se.clk);
-		dev_err(port->se.dev, "Err getting SE Core clk %d\n", ret);
-		return ret;
-	}
-
-	ret = geni_icc_get(&port->se, NULL);
-	if (ret)
-		return ret;
-
-	port->se.icc_paths[GENI_TO_CORE].avg_bw = GENI_DEFAULT_BW;
-	port->se.icc_paths[CPU_TO_GENI].avg_bw = GENI_DEFAULT_BW;
-
-	/* Set BW for register access */
-	ret = geni_icc_set_bw(&port->se);
-	if (ret)
-		return ret;
-
-	ret = devm_pm_opp_set_clkname(port->se.dev, "se");
-	if (ret)
-		return ret;
-
-	/* OPP table is optional */
-	ret = devm_pm_opp_of_add_table(port->se.dev);
-	if (ret && ret != -ENODEV) {
-		dev_err(port->se.dev, "invalid OPP table in device tree\n");
-		return ret;
-	}
-
-	return 0;
-}
-
 /**
  * qcom_geni_rs485_config - Configure RS485 settings for the UART port
  * @uport: Pointer to the UART port structure
@@ -1877,7 +1824,7 @@ static int qcom_geni_serial_probe(struct platform_device *pdev)
 	port->se.dev = &pdev->dev;
 	port->se.wrapper = dev_get_drvdata(pdev->dev.parent);
 
-	ret = port->dev_data->resources_init(uport);
+	ret = port->dev_data->resources_init(&port->se);
 	if (ret)
 		return ret;
 
@@ -1989,7 +1936,7 @@ error:
 				 DMA_RX_BUF_SIZE, DMA_FROM_DEVICE);
 		port->rx_dma_addr = 0;
 	}
-	dev_pm_domain_detach_list(port->pd_list);
+	dev_pm_domain_detach_list(port->se.pd_list);
 	return ret;
 }
 
@@ -2012,7 +1959,7 @@ static void qcom_geni_serial_remove(struct platform_device *pdev)
 		port->rx_dma_addr = 0;
 	}
 
-	dev_pm_domain_detach_list(port->pd_list);
+	dev_pm_domain_detach_list(port->se.pd_list);
 }
 
 static int __maybe_unused qcom_geni_serial_runtime_suspend(struct device *dev)
@@ -2095,7 +2042,7 @@ static int qcom_geni_serial_resume(struct device *dev)
 static const struct qcom_geni_device_data qcom_geni_console_data = {
 	.console = true,
 	.mode = GENI_SE_FIFO,
-	.resources_init = geni_serial_resource_init,
+	.resources_init = geni_se_resources_init,
 	.set_rate = geni_serial_set_rate,
 	.power_state = geni_serial_resource_state,
 };
@@ -2103,12 +2050,7 @@ static const struct qcom_geni_device_data qcom_geni_console_data = {
 static const struct qcom_geni_device_data sa8255p_qcom_geni_console_data = {
 	.console = true,
 	.mode = GENI_SE_FIFO,
-	.pd_data = {
-		.pd_flags = PD_FLAG_DEV_LINK_ON,
-		.pd_names = (const char*[]) { "power", "perf" },
-		.num_pd_names = 2,
-	},
-	.resources_init = geni_serial_pwr_init,
+	.resources_init = geni_se_domain_attach,
 	.set_rate = geni_serial_set_level,
 };
 #endif
@@ -2116,7 +2058,7 @@ static const struct qcom_geni_device_data sa8255p_qcom_geni_console_data = {
 static const struct qcom_geni_device_data qcom_geni_uart_data = {
 	.console = false,
 	.mode = GENI_SE_DMA,
-	.resources_init = geni_serial_resource_init,
+	.resources_init = geni_se_resources_init,
 	.set_rate = geni_serial_set_rate,
 	.power_state = geni_serial_resource_state,
 };
@@ -2124,12 +2066,7 @@ static const struct qcom_geni_device_data qcom_geni_uart_data = {
 static const struct qcom_geni_device_data sa8255p_qcom_geni_uart_data = {
 	.console = false,
 	.mode = GENI_SE_DMA,
-	.pd_data = {
-		.pd_flags = PD_FLAG_DEV_LINK_ON,
-		.pd_names = (const char*[]) { "power", "perf" },
-		.num_pd_names = 2,
-	},
-	.resources_init = geni_serial_pwr_init,
+	.resources_init = geni_se_domain_attach,
 	.set_rate = geni_serial_set_level,
 };
 
