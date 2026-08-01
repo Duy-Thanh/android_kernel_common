@@ -52,6 +52,24 @@
       "parentUuid": "ab77af10_e4c8f1bd",
       "revId": "f5e0d0d42abacc560ccc529d276f0d6990e7c5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ba9163_e7779455",
+        "filename": "arch/x86/kvm/vmx/vmx.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 9921,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-01T13:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca9979b_712c9c8a",
+      "revId": "f5e0d0d42abacc560ccc529d276f0d6990e7c5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
