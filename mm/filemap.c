@@ -63,6 +63,17 @@
 #include <trace/hooks/mm.h>
 
 /*
+ * trace_android_vh_unlock_mmap_bypass is called in mm/internal.h
+ * by including trace/hooks/mm.h directly, which will result in build-err.
+ * So we create func: _trace_android_vh_unlock_mmap_bypass.
+ */
+void _trace_android_vh_unlock_mmap_bypass(struct vm_fault *vmf,
+		struct file *fpin, bool *bypass)
+{
+	trace_android_vh_unlock_mmap_bypass(vmf, fpin, bypass);
+}
+
+/*
  * FIXME: remove all knowledge of the buffer layer from the core VM
  */
 #include <linux/buffer_head.h> /* for try_to_free_buffers */

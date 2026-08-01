@@ -820,6 +820,9 @@ DECLARE_HOOK(android_vh_check_swap_entries_free,
 DECLARE_HOOK(android_vh_folio_alloc_swap_finish,
 	TP_PROTO(struct folio *folio, swp_entry_t *entry, bool bypass_fast),
 	TP_ARGS(folio, entry, bypass_fast));
+DECLARE_HOOK(android_vh_unlock_mmap_bypass,
+	TP_PROTO(struct vm_fault *vmf, struct file *fpin, bool *bypass),
+	TP_ARGS(vmf, fpin, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
