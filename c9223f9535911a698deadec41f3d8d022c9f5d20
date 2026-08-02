@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21bb2b46_da641d94",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 2462,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-02T15:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55cfc0aa_04914b97",
+      "revId": "c9223f9535911a698deadec41f3d8d022c9f5d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ef6ed87_0f56d6be",
