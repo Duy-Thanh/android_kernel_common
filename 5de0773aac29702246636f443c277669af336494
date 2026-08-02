@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622f0e42_b603b3e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-02T10:06:56Z",
+      "side": 1,
+      "message": "Could you please elaborate on where exactly in the code pKVM does that (queues the irq or nmi after vmexit)?",
+      "revId": "5de0773aac29702246636f443c277669af336494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
