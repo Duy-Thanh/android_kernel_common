@@ -108,14 +108,14 @@ static void handle_cr(struct kvm_vcpu *vcpu)
 	}
 }
 
-static bool is_msr_in_bitmap_range(unsigned long msr)
+static bool is_msr_in_bitmap_range(u32 msr)
 {
 	return msr <= 0x1FFF || (msr >= 0xC0000000 && msr <= 0xC0001FFF);
 }
 
 static int handle_read_msr(struct kvm_vcpu *vcpu)
 {
-	unsigned long msr = vcpu->arch.regs[VCPU_REGS_RCX];
+	u32 msr = vcpu->arch.regs[VCPU_REGS_RCX];
 	u32 low, high;
 
 	/*
@@ -138,7 +138,7 @@ static int handle_read_msr(struct kvm_vcpu *vcpu)
 
 static int handle_write_msr(struct kvm_vcpu *vcpu)
 {
-	unsigned long msr = vcpu->arch.regs[VCPU_REGS_RCX];
+	u32 msr = vcpu->arch.regs[VCPU_REGS_RCX];
 	int ret = X86EMUL_CONTINUE;
 	u32 low, high;
 	u64 val;
@@ -214,7 +214,7 @@ static int handle_write_msr(struct kvm_vcpu *vcpu)
 		if (slot >= 0) {
 			cur = kvm_get_user_return_msr(slot);
 			if (val != cur) {
-				pkvm_warn("Host attempt to modify user-return MSR 0x%lx: 0x%llx (expected 0x%llx)\n",
+				pkvm_warn("Host attempt to modify user-return MSR 0x%x: 0x%llx (expected 0x%llx)\n",
 					  msr, val, cur);
 				ret = X86EMUL_UNHANDLEABLE;
 				break;
