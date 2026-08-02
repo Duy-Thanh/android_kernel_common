@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e06a3d_6cd8bddc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-02T14:55:00Z",
+      "side": 1,
+      "message": "I think the teardown ordering is inverted. handle_lpi_disable unshares and unpins the property and pending tables before GICR_CTLR is written, so even in the good case there is a window where the pages are host owned again while the redistributor is still enabled against them. enable_lpi has it the right way round, tables first and then the register.\n\nCould the write and the release swap places here?",
+      "revId": "42d180553ab2046c57dbf28cf8c789e21a7b061b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
