@@ -1370,6 +1370,8 @@ static int tcpm_ams_start(struct tcpm_port *port, enum tcpm_ams ams)
 	int ret = 0;
 
 	tcpm_log(port, "AMS %s start", tcpm_ams_str[ams]);
+	tcpm_log(port, "DP_DBG: ams_start ams=%d negotiated_rev=%d cc1=%d cc2=%d",
+		 ams, port->negotiated_rev, port->cc1, port->cc2);
 
 	if (!tcpm_ams_interruptible(port) &&
 	    !(ams == HARD_RESET || ams == SOFT_RESET_AMS)) {
@@ -1497,12 +1499,14 @@ static void tcpm_queue_vdm_unlocked(struct tcpm_port *port, const u32 header,
 	mutex_unlock(&port->lock);
 }
 
+static void tcpm_unregister_altmodes(struct tcpm_port *port);
+
 static void svdm_consume_identity(struct tcpm_port *port, const u32 *p, int cnt)
 {
 	u32 vdo = p[VDO_INDEX_IDH];
 	u32 product = p[VDO_INDEX_PRODUCT];
 
-	memset(&port->mode_data, 0, sizeof(port->mode_data));
+	tcpm_unregister_altmodes(port);
 
 	port->partner_ident.id_header = vdo;
 	port->partner_ident.cert_stat = p[VDO_INDEX_CSTAT];
@@ -1601,6 +1605,8 @@ static void tcpm_register_partner_altmodes(struct tcpm_port *port)
 		return;
 
 	for (i = 0; i < modep->altmodes; i++) {
+		if (port->partner_altmode[i])
+			continue;
 		altmode = typec_partner_register_altmode(port->partner,
 						&modep->altmode_desc[i]);
 		if (IS_ERR(altmode)) {
@@ -5701,6 +5707,8 @@ static void tcpm_send_discover_work(struct kthread_work *work)
 	struct tcpm_port *port = container_of(work, struct tcpm_port, send_discover_work);
 
 	mutex_lock(&port->lock);
+	tcpm_log(port, "DP_DBG: send_discover_work send_discover=%d state=%d vdm_sm_running=%d",
+		 port->send_discover, port->state, port->vdm_sm_running);
 	/* No need to send DISCOVER_IDENTITY anymore */
 	if (!port->send_discover)
 		goto unlock;
@@ -6887,6 +6895,7 @@ struct tcpm_port *tcpm_register_port(struct device *dev, struct tcpc_dev *tcpc)
 	port->typec_caps.driver_data = port;
 	port->typec_caps.ops = &tcpm_ops;
 	port->typec_caps.orientation_aware = 1;
+	port->typec_caps.fwnode = tcpc->fwnode;
 
 	port->partner_desc.identity = &port->partner_ident;
 

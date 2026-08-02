@@ -102,6 +102,9 @@ static int dp_altmode_configure(struct dp_altmode *dp, u8 con)
 		conf |= DP_CONF_UFP_U_AS_UFP_D;
 		pin_assign = DP_CAP_PIN_ASSIGN_UFP_D(dp->alt->vdo) &
 				 DP_CAP_PIN_ASSIGN_DFP_D(dp->port->vdo);
+		if (!pin_assign)
+			pin_assign = DP_CAP_UFP_D_PIN_ASSIGN(dp->alt->vdo) &
+				     DP_CAP_DFP_D_PIN_ASSIGN(dp->port->vdo);
 		break;
 	default:
 		break;
@@ -128,6 +131,9 @@ static int dp_altmode_configure(struct dp_altmode *dp, u8 con)
 
 	dp->data.conf = conf;
 
+	dev_info(&dp->alt->dev, "DP_ALTMODE: configure con=%d pin_assign=0x%x conf=0x%x\n",
+		 con, pin_assign, conf);
+
 	return 0;
 }
 
@@ -137,6 +143,9 @@ static int dp_altmode_status_update(struct dp_altmode *dp)
 	bool hpd = !!(dp->data.status & DP_STATUS_HPD_STATE);
 	u8 con = DP_STATUS_CONNECTION(dp->data.status);
 	int ret = 0;
+
+	dev_info(&dp->alt->dev, "DP_ALTMODE: status_update status=0x%x con=%d hpd=%d configured=%d\n",
+		 dp->data.status, con, hpd, configured);
 
 	if (configured && (dp->data.status & DP_STATUS_SWITCH_TO_USB)) {
 		dp->data.conf = 0;
@@ -215,26 +224,33 @@ static void dp_altmode_work(struct work_struct *work)
 
 	mutex_lock(&dp->lock);
 
+	dev_info(&dp->alt->dev, "DP_ALTMODE: work state=%d\n", dp->state);
+
 	switch (dp->state) {
 	case DP_STATE_ENTER:
 		ret = typec_altmode_enter(dp->alt, NULL);
+		dev_info(&dp->alt->dev, "DP_ALTMODE: enter mode ret=%d\n", ret);
 		if (ret && ret != -EBUSY)
 			dev_err(&dp->alt->dev, "failed to enter mode\n");
 		break;
 	case DP_STATE_UPDATE:
 		svdm_version = typec_altmode_get_svdm_version(dp->alt);
+		dev_info(&dp->alt->dev, "DP_ALTMODE: update svdm_version=%d\n", svdm_version);
 		if (svdm_version < 0)
 			break;
 		header = DP_HEADER(dp, svdm_version, DP_CMD_STATUS_UPDATE);
 		vdo = 1;
 		ret = typec_altmode_vdm(dp->alt, header, &vdo, 2);
+		dev_info(&dp->alt->dev, "DP_ALTMODE: update send vdm ret=%d\n", ret);
 		if (ret)
 			dev_err(&dp->alt->dev,
 				"unable to send Status Update command (%d)\n",
 				ret);
 		break;
 	case DP_STATE_CONFIGURE:
+		dev_info(&dp->alt->dev, "DP_ALTMODE: configure state conf=0x%x\n", dp->data.conf);
 		ret = dp_altmode_configure_vdm(dp, dp->data.conf);
+		dev_info(&dp->alt->dev, "DP_ALTMODE: configure send vdm ret=%d\n", ret);
 		if (ret)
 			dev_err(&dp->alt->dev,
 				"unable to send Configure command (%d)\n", ret);
@@ -287,6 +303,9 @@ static int dp_altmode_vdm(struct typec_altmode *alt,
 	int ret = 0;
 
 	mutex_lock(&dp->lock);
+
+	dev_info(&dp->alt->dev, "DP_ALTMODE: vdm cmd_type=%d cmd=%d state=%d\n",
+		 cmd_type, cmd, dp->state);
 
 	if (dp->state != DP_STATE_IDLE) {
 		ret = -EBUSY;
@@ -453,8 +472,10 @@ static u8 get_current_pin_assignments(struct dp_altmode *dp)
 {
 	if (DP_CONF_CURRENTLY(dp->data.conf) == DP_CONF_DFP_D)
 		return DP_CAP_PIN_ASSIGN_DFP_D(dp->alt->vdo);
-	else
-		return DP_CAP_PIN_ASSIGN_UFP_D(dp->alt->vdo);
+	else {
+		u8 assign = DP_CAP_PIN_ASSIGN_UFP_D(dp->alt->vdo);
+		return assign ? assign : DP_CAP_DFP_D_PIN_ASSIGN(dp->alt->vdo);
+	}
 }
 
 static ssize_t
@@ -577,11 +598,21 @@ int dp_altmode_probe(struct typec_altmode *alt)
 
 	/* FIXME: Port can only be DFP_U. */
 
+	dev_info(&alt->dev, "DP_ALTMODE: probe port_vdo=0x%x alt_vdo=0x%x\n",
+		 port->vdo, alt->vdo);
+
 	/* Make sure we have compatiple pin configurations */
 	if (!(DP_CAP_PIN_ASSIGN_DFP_D(port->vdo) &
 	      DP_CAP_PIN_ASSIGN_UFP_D(alt->vdo)) &&
 	    !(DP_CAP_PIN_ASSIGN_UFP_D(port->vdo) &
-	      DP_CAP_PIN_ASSIGN_DFP_D(alt->vdo)))
+	      DP_CAP_PIN_ASSIGN_DFP_D(alt->vdo)) &&
+	    !(DP_CAP_PIN_ASSIGN_DFP_D(port->vdo) &
+	      DP_CAP_DFP_D_PIN_ASSIGN(alt->vdo)) &&
+	    /* Fallback: compare raw advertised pin fields directly if receptacle bit is wrong */
+	    !(DP_CAP_DFP_D_PIN_ASSIGN(port->vdo) &
+	      DP_CAP_UFP_D_PIN_ASSIGN(alt->vdo)) &&
+	    !(DP_CAP_UFP_D_PIN_ASSIGN(port->vdo) &
+	      DP_CAP_DFP_D_PIN_ASSIGN(alt->vdo)))
 		return -ENODEV;
 
 	dp = devm_kzalloc(&alt->dev, sizeof(*dp), GFP_KERNEL);
