@@ -33,6 +33,23 @@
       "message": "conflict resolved",
       "revId": "59f127a5531b00edf03db33b246b10ed9dc3079b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce77f919_a3ba17d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:56:25Z",
+      "side": 1,
+      "message": "create a patch on top of this to add the new symbols to your symbol list",
+      "revId": "59f127a5531b00edf03db33b246b10ed9dc3079b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
