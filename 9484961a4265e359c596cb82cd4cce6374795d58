@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c484ab26_942c36f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:04:27Z",
+      "side": 1,
+      "message": "This should not be merged into android-mainline. It will be merged automatically when it lands upstream. If you need it urgently, then please provide the rationale for why it cannot wait.",
+      "revId": "9484961a4265e359c596cb82cd4cce6374795d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
