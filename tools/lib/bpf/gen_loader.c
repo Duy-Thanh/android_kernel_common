@@ -19,6 +19,7 @@
 #define MAX_USED_PROGS	32
 #define MAX_KFUNC_DESCS 256
 #define MAX_FD_ARRAY_SZ (MAX_USED_MAPS + MAX_KFUNC_DESCS)
+#define STRUCT_OPS_VALUE_PREFIX "bpf_struct_ops_"
 
 /* The following structure describes the stack layout of the loader program.
  * In addition R6 contains the pointer to context.
@@ -111,6 +112,7 @@ static void emit2(struct bpf_gen *gen, struct bpf_insn insn1, struct bpf_insn in
 
 static int add_data(struct bpf_gen *gen, const void *data, __u32 size);
 static void emit_sys_close_blob(struct bpf_gen *gen, int blob_off);
+static void emit_bpf_find_by_name_kind(struct bpf_gen *gen, struct ksym_relo_desc *relo);
 
 void bpf_gen__init(struct bpf_gen *gen, int log_level, int nr_progs, int nr_maps)
 {
@@ -482,6 +484,277 @@ void bpf_gen__load_btf(struct bpf_gen *gen, const void *btf_raw_data,
 	emit_check_err(gen);
 	/* remember btf_fd in the stack, if successful */
 	emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_10, BPF_REG_7, stack_off(btf_fd)));
+}
+
+struct bpf_gen_struct_ops_child {
+	int child_insns_off;
+	int args_off;
+	int load_attr_off;
+	int test_run_attr_off;
+	int child_prog_fd_reg;
+};
+
+static int emit_struct_ops_member_info_child_prog(struct bpf_gen *gen, const char *stname,
+						  struct bpf_gen_struct_ops_child *child)
+{
+	struct ksym_relo_desc kfunc_relo, struct_relo;
+	struct bpf_insn child_insns[] = {
+		BPF_MOV64_REG(BPF_REG_6, BPF_REG_1),
+		BPF_LDX_MEM(BPF_DW, BPF_REG_2, BPF_REG_6, 8),
+		BPF_LDX_MEM(BPF_DW, BPF_REG_3, BPF_REG_6, 16),
+		BPF_LDX_MEM(BPF_DW, BPF_REG_1, BPF_REG_6, 0),
+		BPF_RAW_INSN(BPF_JMP | BPF_CALL, 0, BPF_PSEUDO_KFUNC_CALL, 0, 0),
+		BPF_STX_MEM(BPF_DW, BPF_REG_6, BPF_REG_0, 24),
+		BPF_EXIT_INSN()
+	};
+	__u64 args[4] = {0};
+	const char license[] = "GPL";
+	union bpf_attr load_attr, test_run_attr;
+	int license_off, i, kern_vdata_type_id_off;
+
+	child->child_prog_fd_reg = BPF_REG_8;
+
+	/* Find kfunc ID for bpf_struct_ops_get_member_info() */
+	kfunc_relo.name = "bpf_struct_ops_get_member_info";
+	kfunc_relo.kind = BTF_KIND_FUNC;
+	emit_bpf_find_by_name_kind(gen, &kfunc_relo);
+	emit_check_err(gen);
+
+	child->args_off = add_data(gen, args, sizeof(args));
+	license_off = add_data(gen, license, sizeof(license));
+	child->child_insns_off = add_data(gen, child_insns, sizeof(child_insns));
+
+	if (gen->swapped_endian && !gen->error) {
+		struct bpf_insn *insn = gen->data_start + child->child_insns_off;
+		for (i = 0; i < (sizeof(child_insns) / sizeof(struct bpf_insn)); i++, insn++)
+			bpf_insn_bswap(insn);
+	}
+
+	/* Patch kfunc BTF ID into child program insn */
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, child->child_insns_off));
+	emit(gen, BPF_ALU64_IMM(BPF_LSH, BPF_REG_7, 32));
+	emit(gen, BPF_ALU64_IMM(BPF_RSH, BPF_REG_7, 32));
+	emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_0, BPF_REG_7,
+			      4 * sizeof(struct bpf_insn) + offsetof(struct bpf_insn, imm)));
+
+	/* Look up target struct BTF ID on target kernel and store into args[0] */
+	struct_relo.name = stname;
+	struct_relo.kind = BTF_KIND_STRUCT;
+	emit_bpf_find_by_name_kind(gen, &struct_relo);
+	emit_check_err(gen);
+
+	/* Store full 64-bit btf_find_by_name_kind result (btf_id & btf_obj_fd) into kern_vdata_type_id_off slot */
+	kern_vdata_type_id_off = add_data(gen, NULL, 8);
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, kern_vdata_type_id_off));
+	emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_0, BPF_REG_7, 0));
+
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, child->args_off));
+	emit(gen, BPF_ALU64_IMM(BPF_LSH, BPF_REG_7, 32));
+	emit(gen, BPF_ALU64_IMM(BPF_RSH, BPF_REG_7, 32));
+	emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_0, BPF_REG_7, 0));
+
+	/* Load child program */
+	memset(&load_attr, 0, sizeof(load_attr));
+	load_attr.prog_type = tgt_endian(BPF_PROG_TYPE_SYSCALL);
+	load_attr.prog_flags = tgt_endian(BPF_F_SLEEPABLE);
+	load_attr.insn_cnt = tgt_endian((__u32)(sizeof(child_insns) / sizeof(struct bpf_insn)));
+	child->load_attr_off = add_data(gen, &load_attr, offsetofend(union bpf_attr, core_relo_rec_size));
+	emit_rel_store(gen, attr_field(child->load_attr_off, license), license_off);
+	emit_rel_store(gen, attr_field(child->load_attr_off, insns), child->child_insns_off);
+	emit_sys_bpf(gen, BPF_PROG_LOAD, child->load_attr_off, offsetofend(union bpf_attr, core_relo_rec_size));
+	emit_check_err(gen);
+	emit(gen, BPF_MOV64_REG(child->child_prog_fd_reg, BPF_REG_7));
+
+	/* Prepare BPF_PROG_TEST_RUN attr */
+	memset(&test_run_attr, 0, sizeof(test_run_attr));
+	test_run_attr.test.ctx_size_in = tgt_endian((__u32)sizeof(args));
+	child->test_run_attr_off = add_data(gen, &test_run_attr, offsetofend(union bpf_attr, test));
+	emit_rel_store(gen, attr_field(child->test_run_attr_off, test.ctx_in), child->args_off);
+
+	return kern_vdata_type_id_off;
+}
+
+int bpf_gen__init_kern_struct_ops(struct bpf_gen *gen, struct btf *btf, struct bpf_struct_ops *st_ops)
+{
+	const struct btf_type *type;
+	const struct btf_member *member;
+	const char *tname;
+	char stname[256];
+	int i, kern_vdata_off, kern_vdata_type_id_off;
+	struct bpf_gen_struct_ops_child child;
+
+	type = btf__type_by_id(btf, st_ops->type_id);
+	tname = btf__name_by_offset(btf, type->name_off);
+	snprintf(stname, sizeof(stname), "%s%s", STRUCT_OPS_VALUE_PREFIX, tname);
+
+	/* 1. Setup child program for member info resolution */
+	kern_vdata_type_id_off = emit_struct_ops_member_info_child_prog(gen, stname, &child);
+
+	/* 1b. Resolve interface struct BTF ID (tname: e.g. bpf_dummy_ops) for program attach_btf_id */
+	{
+		struct ksym_relo_desc attach_relo = {};
+
+		attach_relo.name = tname;
+		attach_relo.kind = BTF_KIND_STRUCT;
+		emit_bpf_find_by_name_kind(gen, &attach_relo);
+		emit_check_err(gen);
+
+		st_ops->attach_type_id_off = add_data(gen, NULL, 8);
+		emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+						 0, 0, 0, st_ops->attach_type_id_off));
+		emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_0, BPF_REG_7, 0));
+	}
+
+	/* 1b. Call bpf_struct_ops_get_member_info(btf_id, NULL, 0) to resolve kern_vdata size dynamically */
+	st_ops->kern_val_sz_off = add_data(gen, NULL, 4);
+
+	/* Set args[1] = 0 (NULL) */
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, child.args_off));
+	emit(gen, BPF_ST_MEM(BPF_DW, BPF_REG_0, 8, 0));
+
+	/* Set args[2] = 0 */
+	emit(gen, BPF_ST_MEM(BPF_DW, BPF_REG_0, 16, 0));
+
+	/* Set test_run prog_fd */
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, child.test_run_attr_off));
+	emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_1, child.child_prog_fd_reg,
+			      offsetof(union bpf_attr, test.prog_fd)));
+
+	/* Execute child program via BPF_PROG_TEST_RUN */
+	emit_sys_bpf(gen, BPF_PROG_TEST_RUN, child.test_run_attr_off, offsetofend(union bpf_attr, test));
+	emit_check_err(gen);
+
+	/* Extract resolved kern_vdata size (lower 32 bits of args[3]) -> store in st_ops->kern_val_sz_off */
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, child.args_off));
+	emit(gen, BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1, 24)); /* lower 32 bits of args[3] */
+
+	emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+					 0, 0, 0, st_ops->kern_val_sz_off));
+	emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_1, BPF_REG_2, 0));
+
+	/* 2. Find the size of kern_vdata and alloc space using add_data() */
+	/* Allocating 4KB temporary capacity in loader data buffer */
+	kern_vdata_off = add_data(gen, NULL, 4096);
+	st_ops->kern_vdata = (void *)(uintptr_t)kern_vdata_off;
+
+	/* 3. Iterate over members of st_ops->data */
+	member = btf_members(type);
+	for (i = 0; i < btf_vlen(type); i++, member++) {
+		const char *mname = btf__name_by_offset(btf, member->name_off);
+		const struct btf_type *mtype;
+		__u32 moff;
+		__s64 msize;
+		void *mdata;
+		int mname_off;
+
+		/* a. Find member offset in kern_vdata using bpf_struct_ops_get_member_info() */
+		mname_off = add_data(gen, mname, strlen(mname) + 1);
+
+		/* Set args[1] = mname_ptr */
+		emit_rel_store(gen, child.args_off + 8, mname_off);
+
+		/* Set args[2] = mname_sz */
+		emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_0, BPF_PSEUDO_MAP_IDX_VALUE,
+						 0, 0, 0, child.args_off));
+		emit(gen, BPF_MOV64_IMM(BPF_REG_1, strlen(mname) + 1));
+		emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_0, BPF_REG_1, 16));
+
+		/* Set test_run prog_fd */
+		emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+						 0, 0, 0, child.test_run_attr_off));
+		emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_1, child.child_prog_fd_reg,
+				      offsetof(union bpf_attr, test.prog_fd)));
+
+		/* Execute child program via BPF_PROG_TEST_RUN */
+		emit_sys_bpf(gen, BPF_PROG_TEST_RUN, child.test_run_attr_off, offsetofend(union bpf_attr, test));
+		emit_check_err(gen);
+
+		/* b. If member is a prog, record offset/index; else copy value to kern_vdata blob */
+		mtype = skip_mods_and_typedefs(btf, member->type, NULL);
+		moff = member->offset / 8;
+		msize = btf__resolve_size(btf, member->type);
+		mdata = st_ops->data + moff;
+
+		if (btf_is_ptr(mtype)) {
+			struct bpf_program *prog = *(struct bpf_program **)mdata;
+			int attach_type_off;
+
+			if (st_ops->progs[i] && st_ops->progs[i] != prog)
+				bpf_program__set_autoload(st_ops->progs[i], false);
+			st_ops->progs[i] = prog;
+
+			if (!prog)
+				continue;
+
+			/* Set attach_btf_id to satisfy host-side libbpf program validation
+			 * (marks SEC("struct_ops") program as referenced so skeleton generation succeeds).
+			 */
+			bpf_program__set_attach_btf_id(prog, st_ops->attach_type_id_off);
+
+			st_ops->kern_func_off[i] = add_data(gen, NULL, 4);
+			attach_type_off = add_data(gen, NULL, 4);
+			bpf_program__set_expected_attach_type(prog, (enum bpf_attach_type)(uintptr_t)attach_type_off);
+
+			/* 1. Extract offset (lower 32 bits of args[3]) -> store in st_ops->kern_func_off[i] */
+			emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+							 0, 0, 0, child.args_off));
+			emit(gen, BPF_LDX_MEM(BPF_DW, BPF_REG_0, BPF_REG_1, 24)); /* args[3] = res */
+
+			emit(gen, BPF_MOV64_REG(BPF_REG_2, BPF_REG_0));
+			emit(gen, BPF_ALU64_IMM(BPF_LSH, BPF_REG_2, 32));
+			emit(gen, BPF_ALU64_IMM(BPF_RSH, BPF_REG_2, 32)); /* R2 = offset */
+
+			emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+							 0, 0, 0, st_ops->kern_func_off[i]));
+			emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_1, BPF_REG_2, 0));
+
+			/* 2. Extract index (upper 32 bits of args[3]) -> store in prog->expected_attach_type */
+			emit(gen, BPF_MOV64_REG(BPF_REG_3, BPF_REG_0));
+			emit(gen, BPF_ALU64_IMM(BPF_RSH, BPF_REG_3, 32)); /* R3 = index */
+
+			emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+							 0, 0, 0, bpf_program__expected_attach_type(prog)));
+			emit(gen, BPF_STX_MEM(BPF_W, BPF_REG_1, BPF_REG_3, 0));
+		} else {
+			/* Scalar data field: copy msize bytes from st_ops->data (+moff) to kern_vdata_off (+offset) */
+			/* R2 = target offset in kern_vdata (lower 32 bits of args[3]) */
+			emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+							 0, 0, 0, child.args_off));
+			emit(gen, BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1, 24)); /* lower 32 bits of args[3] */
+			emit(gen, BPF_ALU64_IMM(BPF_AND, BPF_REG_2, 4095));
+
+			/* R1 = base address of kern_vdata_off */
+			emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+							 0, 0, 0, kern_vdata_off));
+			emit(gen, BPF_ALU64_REG(BPF_ADD, BPF_REG_1, BPF_REG_2)); /* R1 = kern_vdata + offset */
+
+			if (msize == 1) {
+				emit(gen, BPF_ST_MEM(BPF_B, BPF_REG_1, 0, *(__u8 *)mdata));
+			} else if (msize == 2) {
+				emit(gen, BPF_ST_MEM(BPF_H, BPF_REG_1, 0, *(__u16 *)mdata));
+			} else if (msize == 4) {
+				emit(gen, BPF_ST_MEM(BPF_W, BPF_REG_1, 0, *(__u32 *)mdata));
+			} else if (msize == 8) {
+				int val_off = add_data(gen, mdata, 8);
+				emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_3, BPF_PSEUDO_MAP_IDX_VALUE,
+								 0, 0, 0, val_off));
+				emit(gen, BPF_LDX_MEM(BPF_DW, BPF_REG_3, BPF_REG_3, 0));
+				emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_1, BPF_REG_3, 0));
+			}
+		}
+	}
+
+	/* Close helper program */
+	emit(gen, BPF_MOV64_REG(BPF_REG_1, child.child_prog_fd_reg));
+	emit(gen, BPF_EMIT_CALL(BPF_FUNC_sys_close));
+
+	return kern_vdata_type_id_off;
 }
 
 void bpf_gen__map_create(struct bpf_gen *gen,
