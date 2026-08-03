@@ -34,6 +34,79 @@
       "parentUuid": "622f0e42_b603b3e1",
       "revId": "5de0773aac29702246636f443c277669af336494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a447a6b_5ea7f319",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-03T13:44:59Z",
+      "side": 1,
+      "message": "Got it, thx.",
+      "parentUuid": "5da78c1c_16351063",
+      "revId": "5de0773aac29702246636f443c277669af336494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d59da0_eb1f9255",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-03T13:44:59Z",
+      "side": 1,
+      "message": "nit: now this is used not just by cancel_injection but also after vmexit, while the comments here and below still use the word \"canceled\".\n\nThe AI here is suggesting to replace \"canceled\" with \"pending\", though I\u0027m not sure that\u0027s the best term either (since e.g. we also have `vcpu-\u003earch.exception.pending` which means a different thing)...",
+      "fixSuggestions": [
+        {
+          "fixId": "abb03299_7c1957b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1237,
+                "startChar": 0,
+                "endLine": 1238,
+                "endChar": 0
+              },
+              "replacement": "\t\t * thus the pending exception should not be handed over to the\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1249,
+                "startChar": 0,
+                "endLine": 1250,
+                "endChar": 0
+              },
+              "replacement": "\t\t * pending as the host is allowed to inject both. But the host\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1253,
+                "startChar": 0,
+                "endLine": 1254,
+                "endChar": 0
+              },
+              "replacement": "\t\t * the pending software interrupt should not be handed over to\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5de0773aac29702246636f443c277669af336494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
