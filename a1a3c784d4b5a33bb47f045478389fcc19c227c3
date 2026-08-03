@@ -16,6 +16,24 @@
       "message": "What does this comment mean? There\u0027s no reference to pre-init state specifically in this function? This function is the callback both pre- and post-init.",
       "revId": "a1a3c784d4b5a33bb47f045478389fcc19c227c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb75cf7_c6cb2f51",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-08-03T12:29:02Z",
+      "side": 1,
+      "message": "Hopefully now its better.",
+      "parentUuid": "324f7638_c3ac9aa7",
+      "revId": "a1a3c784d4b5a33bb47f045478389fcc19c227c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
