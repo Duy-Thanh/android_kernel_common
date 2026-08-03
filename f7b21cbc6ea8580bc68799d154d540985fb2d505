@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5641dd_d78dbe97",
+        "filename": "arch/arm64/mm/contpte.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-08-03T14:55:01Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense to me. The hunk is already available in the pte_dirty(pte) clause above. Are you trying to cherry-pick a patch that has already been applied?",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 3
+      },
+      "revId": "f7b21cbc6ea8580bc68799d154d540985fb2d505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
