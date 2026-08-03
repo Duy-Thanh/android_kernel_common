@@ -16,6 +16,24 @@
       "message": "The message talks about GICv4 and VLPIs, but this branch also clears has_direct_lpi, which is a GICv3 feature, and I think that one deserves a sentence of its own because it is not free.\n\nClearing it removes the only writers of GICR_INVLPIR and GICR_INVALLR in the tree, so every enable_irq and irq_set_affinity on an LPI goes through the emulated ITS command queue instead of one MMIO write and a GICR_SYNCR poll. On a DirectLPI SoC that is a real cost coming out of a commit whose stated purpose is turning off GICv4. It also means the two INV patches are hardening against a malicious host only, which is not how their commit messages read.\n\nIs clearing the third flag deliberate?",
       "revId": "c7911e39e2ce567b08667be726f2cd9040cdd7ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc7db68_5197a0e5",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-08-03T12:29:13Z",
+      "side": 1,
+      "message": "Done. I miss read how `has_direct_lpi` is computed.",
+      "parentUuid": "12c41a9b_e978f4df",
+      "revId": "c7911e39e2ce567b08667be726f2cd9040cdd7ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
