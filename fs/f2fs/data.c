@@ -413,6 +413,43 @@ static void f2fs_write_end_io(struct bio *bio)
 	bio_put(bio);
 }
 
+<<<<<<< HEAD   (83c3fb93a26e49d8d75998f56aa06ea72ce678a6 ANDROID: ABI: update symbol list for galaxy)
+||||||| BASE   (dae54701fcc8cb998b19bf07f972b2622b789851 BACKPORT: f2fs: reject invalid recovered filename lengths)
+static void f2fs_write_end_io(struct bio *bio)
+{
+	iostat_update_and_unbind_ctx(bio);
+
+	f2fs_write_end_bio(bio);
+}
+
+=======
+static void f2fs_write_end_io_work(struct work_struct *work)
+{
+	struct bio *bio = &container_of(work, struct f2fs_bio, work)->bio;
+
+	f2fs_write_end_bio(bio);
+}
+
+static void f2fs_write_end_io(struct bio *bio)
+{
+	struct f2fs_sb_info *sbi;
+
+	iostat_update_and_unbind_ctx(bio);
+
+	sbi = bio->bi_private;
+
+	if (in_atomic() && bio->bi_iter.bi_size > sbi->max_atc_write_bio_size) {
+		struct work_struct *w;
+
+		w = &container_of(bio, struct f2fs_bio, bio)->work;
+		INIT_WORK(w, f2fs_write_end_io_work);
+		queue_work(sbi->wq, w);
+	} else {
+		f2fs_write_end_bio(bio);
+	}
+}
+
+>>>>>>> CHANGE (9a756155dce88be3f3f64e42cf2078522f710803 UPSTREAM: f2fs: Run f2fs_write_end_io() asynchronously)
 #ifdef CONFIG_BLK_DEV_ZONED
 static void f2fs_zone_write_end_io(struct bio *bio)
 {
