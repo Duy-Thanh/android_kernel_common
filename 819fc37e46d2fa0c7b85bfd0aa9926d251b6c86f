@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff4da352_9efa6430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T17:04:51Z",
+      "side": 1,
+      "message": "This should wait until the parent patch merges into android-mainline from upstream (unless there is no issues with separating this patch from its ancestors)",
+      "revId": "819fc37e46d2fa0c7b85bfd0aa9926d251b6c86f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
