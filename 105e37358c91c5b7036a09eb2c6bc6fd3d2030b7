@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88ac93b2_84021ad4",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-03T15:30:14Z",
+      "side": 1,
+      "message": "Just a note: I see that pKVM allows boot without eIBRS if `pkvm_relax_cpu_bugs \u003d true` and is the default. As mentioned in the commit message, ADL/PTL should be safe as it has eIBRS and I assume `pkvm_relax_cpu_bugs` is only for dev/testing but seeing the default\u003dtrue, but just thought of checking. Was wondering if we should set `pkvm_relax_cpu_bugs \u003d false` as default to support the claim in this comment?",
+      "fixSuggestions": [
+        {
+          "fixId": "4a301461_9b643f8f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "\t * pKVM expects eIBRS which has its own protection against poisoned RSB\n"
+            }
+          ]
+        }
+      ],
+      "revId": "105e37358c91c5b7036a09eb2c6bc6fd3d2030b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
