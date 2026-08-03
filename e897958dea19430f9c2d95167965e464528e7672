@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec07e3a0_c8c21ddf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:59:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: As of 2026-07-01, this release branch is only eligible for respin requests for c...\n\nAs of 2026-07-01, this release branch is only eligible for respin requests for critical bug fixes. It will be deprecated from 2027-04-01.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f4f5dd_b29400c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:59:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against base branch android16-6.12.\nBase branc...\n\nCherry pick is not clean. Checked against base branch android16-6.12.\nBase branch change: [4045913](https://android-review.googlesource.com/c/4045913).\n\nDifference between automated attempted cherry-pick and current commit.\n\n```\ndiff --git a/arch/arm64/mm/contpte.c b/arch/arm64/mm/contpte.c\nindex 0eec7a549..73e695130 100644\n--- a/arch/arm64/mm/contpte.c\n+++ b/arch/arm64/mm/contpte.c\n@@ -267,6 +267,18 @@ pte_t contpte_ptep_get_lockless(pte_t *orig_ptep)\n \t\t\tbreak;\n \t\t}\n \n+\n+\t\t\t\tif (!contpte_is_consistent(pte, pfn, orig_prot))\n+\t\t\t\t\tgoto retry;\n+\n+\t\t\t\tif (pte_young(pte)) {\n+\t\t\t\t\torig_pte \u003d pte_mkyoung(orig_pte);\n+\t\t\t\t\tbreak;\n+\t\t\t\t}\n+\t\t\t}\n+\t\t\tbreak;\n+\t\t}\n+\n \t\tif (pte_young(pte)) {\n \t\t\torig_pte \u003d pte_mkyoung(orig_pte);\n \t\t\ti++;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af2e430_4a64e003",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:59:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Please **reinstate the following bug references** in the commit message: 5080821...\n\nPlease **reinstate the following bug references** in the commit message: 508082130.\nThese IDs were found in the original change with number [4045913](https://android-review.googlesource.com/c/4045913) but not in this cherry pick.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750a3cf9_f1482035",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:59:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: The cherry pick line does not point to the correct original commit on the base b...\n\nThe cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: 27fa56a032d97187798f6bf2b14087cc126afeec\nFound commit: 82a0f56b0cb430dec34f3cb289cfdc4b6984f5e5\n\nPlease cherry-pick using: `git cherry-pick -s -x 27fa56a032d97187798f6bf2b14087cc126afeec`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
