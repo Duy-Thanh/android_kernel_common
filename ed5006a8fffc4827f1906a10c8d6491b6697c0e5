@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdad0d0_38fdfa2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T16:57:11Z",
+      "side": 1,
+      "message": "must be rebased on top of the patch that adds the new symbols to the kernel",
+      "revId": "ed5006a8fffc4827f1906a10c8d6491b6697c0e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
