@@ -34,6 +34,24 @@
       ],
       "revId": "105e37358c91c5b7036a09eb2c6bc6fd3d2030b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2da2b0_e6c06762",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-03T15:45:29Z",
+      "side": 1,
+      "message": "\u003e Was wondering if we should set pkvm_relax_cpu_bugs \u003d false as default to support the claim in this comment?\n\nIf we do that right now, we would break some of our dev DUTs, which don\u0027t have an up-to-date microcode so they boot with \"unmitigated cpu bug old_microcode\" :)",
+      "parentUuid": "88ac93b2_84021ad4",
+      "revId": "105e37358c91c5b7036a09eb2c6bc6fd3d2030b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
