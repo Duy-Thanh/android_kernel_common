@@ -521,25 +521,6 @@ struct bpf_program {
 	__u32 subprog_cnt;
 };
 
-struct bpf_struct_ops {
-	struct bpf_program **progs;
-	__u32 *kern_func_off;
-	/* e.g. struct tcp_congestion_ops in bpf_prog's btf format */
-	void *data;
-	/* e.g. struct bpf_struct_ops_tcp_congestion_ops in
-	 *      btf_vmlinux's format.
-	 * struct bpf_struct_ops_tcp_congestion_ops {
-	 *	[... some other kernel fields ...]
-	 *	struct tcp_congestion_ops data;
-	 * }
-	 * kern_vdata-size == sizeof(struct bpf_struct_ops_tcp_congestion_ops)
-	 * bpf_map__init_kern_struct_ops() will populate the "kern_vdata"
-	 * from "data".
-	 */
-	void *kern_vdata;
-	__u32 type_id;
-};
-
 #define DATA_SEC ".data"
 #define PERCPU_SEC ".percpu"
 #define BSS_SEC ".bss"
@@ -1384,9 +1365,17 @@ static int bpf_object__init_kern_struct_ops_maps(struct bpf_object *obj)
 		if (!map->autocreate)
 			continue;
 
-		err = bpf_map__init_kern_struct_ops(map);
-		if (err)
-			return err;
+		if (obj->gen_loader) {
+			/* Set map->btf_vmlinux_value_type_id to .data offset for kernel type id */
+			map->btf_vmlinux_value_type_id = bpf_gen__init_kern_struct_ops(obj->gen_loader, obj->btf, map->st_ops);
+
+			/* Set map->mod_btf_fd < 0 so that attr.value_type_btf_obj_fd is not set during map creation */
+			map->mod_btf_fd = -1;
+		} else {
+			err = bpf_map__init_kern_struct_ops(map);
+			if (err)
+				return err;
+		}
 	}
 
 	return 0;
@@ -9914,6 +9903,15 @@ int bpf_program__set_expected_attach_type(struct bpf_program *prog,
 		return libbpf_err(-EBUSY);
 
 	prog->expected_attach_type = type;
+	return 0;
+}
+
+int bpf_program__set_attach_btf_id(struct bpf_program *prog, __u32 btf_id)
+{
+	if (prog->obj->state >= OBJ_LOADED)
+		return libbpf_err(-EBUSY);
+
+	prog->attach_btf_id = btf_id;
 	return 0;
 }
 

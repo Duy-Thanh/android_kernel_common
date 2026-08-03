@@ -196,6 +196,25 @@ struct bpf_link {
 	bool disconnected;
 };
 
+struct bpf_struct_ops {
+	struct bpf_program **progs;
+	__u32 *kern_func_off;
+	/* e.g. struct tcp_congestion_ops in bpf_prog's btf format */
+	void *data;
+	/* e.g. struct bpf_struct_ops_tcp_congestion_ops in
+	 *      btf_vmlinux's format.
+	 * struct bpf_struct_ops_tcp_congestion_ops {
+	 *	[... some other kernel fields ...]
+	 *	struct tcp_congestion_ops data;
+	 * }
+	 * kern_vdata-size == sizeof(struct bpf_struct_ops_tcp_congestion_ops)
+	 * bpf_map__init_kern_struct_ops() will populate the "kern_vdata"
+	 * from "data".
+	 */
+	void *kern_vdata;
+	__u32 type_id;
+};
+
 /*
  * Re-implement glibc's reallocarray() for libbpf internal-only use.
  * reallocarray(), unfortunately, is not available in all versions of glibc,

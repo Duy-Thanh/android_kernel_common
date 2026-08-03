@@ -57,6 +57,7 @@ void bpf_gen__init(struct bpf_gen *gen, int log_level, int nr_progs, int nr_maps
 int bpf_gen__finish(struct bpf_gen *gen, int nr_progs, int nr_maps);
 void bpf_gen__free(struct bpf_gen *gen);
 void bpf_gen__load_btf(struct bpf_gen *gen, const void *raw_data, __u32 raw_size);
+int bpf_gen__init_kern_struct_ops(struct bpf_gen *gen, struct btf *btf, struct bpf_struct_ops *st_ops);
 void bpf_gen__map_create(struct bpf_gen *gen,
 			 enum bpf_map_type map_type, const char *map_name,
 			 __u32 key_size, __u32 value_size, __u32 max_entries,
