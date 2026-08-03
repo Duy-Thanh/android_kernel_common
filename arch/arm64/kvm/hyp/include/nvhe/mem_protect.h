@@ -105,6 +105,7 @@ int host_stage2_get_leaf(phys_addr_t phys, kvm_pte_t *ptep, s8 *level);
 int refill_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
 		    struct kvm_hyp_memcache *host_mc);
 
+<<<<<<< HEAD   (7b10fdf41f2bb0df0fd897e463ab48b31c4b94fb UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 int refill_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc);
 int reclaim_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc,
 		     int nr_pages);
@@ -113,6 +114,14 @@ void destroy_hyp_vm_pgt(struct pkvm_hyp_vm *vm);
 void drain_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *mc);
 
 int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot, u64 nr_pages, bool update_iommu);
+||||||| BASE   (001875c9d2193f3513742f4082a1c0653edb10b7 BACKPORT: FROMLIST: KVM: arm64: Validate the SVE vector leng)
+int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot,
+				 u64 nr_pages, bool update_iommu);
+=======
+int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot,
+				 u64 nr_pages, bool update_iommu);
+int module_set_host_page_owned(u64 pfn, u64 nr_pages, bool owned);
+>>>>>>> CHANGE (beed589f871fd9ae0d877f4c96b132cd38ee446d ANDROID: KVM: arm64: pKVM module ops host_stage2_set_owned)
 
 void psci_mem_protect_inc(u64 n);
 void psci_mem_protect_dec(u64 n);

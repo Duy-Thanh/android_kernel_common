@@ -271,6 +271,7 @@ type 'struct fscrypt_operations' changed
   member 'u64 __kabi_reserved1' was removed
   member 'union { unsigned int(* get_devices_new)(struct super_block*, struct block_device**); struct { u64 __kabi_reserved1; }; union { }; }' was added
 
+<<<<<<< HEAD   (7b10fdf41f2bb0df0fd897e463ab48b31c4b94fb UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 type 'struct fscrypt_master_key' changed
   byte size changed from 872 to 360
   member 'struct fscrypt_prepared_key mk_direct_keys[11]' was removed
@@ -342,4 +343,10 @@ type 'struct fscrypt_master_key' changed
   member 'struct list_head mk_mode_keys' was added
   3 members ('siphash_key_t mk_ino_hash_key' .. 'bool mk_present') changed
     offset changed by -4032
+||||||| BASE   (001875c9d2193f3513742f4082a1c0653edb10b7 BACKPORT: FROMLIST: KVM: arm64: Validate the SVE vector leng)
+=======
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved1' was removed
+  member 'union { int(* host_stage2_set_owned)(u64, u64, bool); struct { u64 __kabi_reserved1; }; union { }; }' was added
+>>>>>>> CHANGE (beed589f871fd9ae0d877f4c96b132cd38ee446d ANDROID: KVM: arm64: pKVM module ops host_stage2_set_owned)
 

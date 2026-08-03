@@ -241,6 +241,17 @@ struct pkvm_module_trng_ops {
  *				for pVMs. The @ops.trng_uuid is used to advertise the
  *				identity of TRNG implementation. @ops.trng_rnd64 is used
  *				to generate entropy bits to guest.
+<<<<<<< HEAD   (7b10fdf41f2bb0df0fd897e463ab48b31c4b94fb UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
+||||||| BASE   (001875c9d2193f3513742f4082a1c0653edb10b7 BACKPORT: FROMLIST: KVM: arm64: Validate the SVE vector leng)
+ * @arm_smccc_1_2_smc:		Make an SMCCC v1.2 call to EL3, including processing
+ *				hypervisor exit and entry actions.
+ * @request_hyp_alloc:		Request an alloc request based on current IOMMU context.
+=======
+ * @arm_smccc_1_2_smc:		Make an SMCCC v1.2 call to EL3, including processing
+ *				hypervisor exit and entry actions.
+ * @request_hyp_alloc:		Request an alloc request based on current IOMMU context.
+ * @host_stage2_set_owned:	Set the host page ownership state for a range of pages.
+>>>>>>> CHANGE (beed589f871fd9ae0d877f4c96b132cd38ee446d ANDROID: KVM: arm64: pKVM module ops host_stage2_set_owned)
  */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
@@ -309,6 +320,7 @@ struct pkvm_module_ops {
 	typeof(__list_add_valid_or_report) *list_add_valid_or_report;
 	typeof(__list_del_entry_valid_or_report) *list_del_entry_valid_or_report;
 #endif
+<<<<<<< HEAD   (7b10fdf41f2bb0df0fd897e463ab48b31c4b94fb UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 	int (*iommu_snapshot_host_stage2)(struct kvm_hyp_iommu_domain *domain);
 	void * (*iommu_donate_pages_atomic)(u8 order);
 	void (*iommu_reclaim_pages_atomic)(void *p, u8 order);
@@ -323,6 +335,55 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(4, int (*request_hyp_alloc)(void));
 	ANDROID_KABI_USE(5, int (*device_register_power_lock)(u64 phys, void *cookie,
 					     int(*cb)(void *cookie, bool lock)));
+||||||| BASE   (001875c9d2193f3513742f4082a1c0653edb10b7 BACKPORT: FROMLIST: KVM: arm64: Validate the SVE vector leng)
+	void *(*hyp_alloc)(size_t size);
+	void (*hyp_free)(void *addr);
+	void (*iommu_iotlb_gather_add_page)(struct kvm_hyp_iommu_domain *domain,
+					    struct iommu_iotlb_gather *gather,
+					    unsigned long iova,
+					    size_t size);
+	int (*pkvm_use_dma)(phys_addr_t phys_addr, size_t size);
+	int (*pkvm_unuse_dma)(phys_addr_t phys_addr, size_t size);
+	int (*init_hvc_pd)(struct kvm_power_domain *pd, const struct kvm_power_domain_ops *ops);
+	int (*device_register_ops)(u64 phys, struct pkvm_device_ops *ops, void *cookie);
+	int (*iommu_register_pviommu_drv)(pkvm_handle_t drv_id);
+	int (*register_guest_trng_ops)(const struct pkvm_module_trng_ops *ops);
+	int (*guest_accept_module_prot_page)(u64 ipa, u64 nr_pages);
+	int (*register_guest_accept_module_owned_handler)(int (*cb)(u64 phys, u64 ipa, u64 size,
+								   pkvm_handle_t handle));
+	void (*arm_smccc_1_2_smc)(struct arm_smccc_1_2_regs *args,
+				  struct arm_smccc_1_2_regs *regs);
+	int (*request_hyp_alloc)(void);
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+=======
+	void *(*hyp_alloc)(size_t size);
+	void (*hyp_free)(void *addr);
+	void (*iommu_iotlb_gather_add_page)(struct kvm_hyp_iommu_domain *domain,
+					    struct iommu_iotlb_gather *gather,
+					    unsigned long iova,
+					    size_t size);
+	int (*pkvm_use_dma)(phys_addr_t phys_addr, size_t size);
+	int (*pkvm_unuse_dma)(phys_addr_t phys_addr, size_t size);
+	int (*init_hvc_pd)(struct kvm_power_domain *pd, const struct kvm_power_domain_ops *ops);
+	int (*device_register_ops)(u64 phys, struct pkvm_device_ops *ops, void *cookie);
+	int (*iommu_register_pviommu_drv)(pkvm_handle_t drv_id);
+	int (*register_guest_trng_ops)(const struct pkvm_module_trng_ops *ops);
+	int (*guest_accept_module_prot_page)(u64 ipa, u64 nr_pages);
+	int (*register_guest_accept_module_owned_handler)(int (*cb)(u64 phys, u64 ipa, u64 size,
+								   pkvm_handle_t handle));
+	void (*arm_smccc_1_2_smc)(struct arm_smccc_1_2_regs *args,
+				  struct arm_smccc_1_2_regs *regs);
+	int (*request_hyp_alloc)(void);
+	ANDROID_KABI_USE(1, int (*host_stage2_set_owned)(u64 pfn, u64 nr_pages, bool owned));
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+>>>>>>> CHANGE (beed589f871fd9ae0d877f4c96b132cd38ee446d ANDROID: KVM: arm64: pKVM module ops host_stage2_set_owned)
 	ANDROID_KABI_RESERVE(6);
 	ANDROID_KABI_RESERVE(7);
 	ANDROID_KABI_RESERVE(8);

@@ -1951,6 +1951,38 @@ unlock:
 	return ret;
 }
 
+int module_set_host_page_owned(u64 pfn, u64 nr_pages, bool owned)
+{
+	u64 size, phys;
+	int ret;
+
+	if (!pfn_range_is_valid(pfn, nr_pages))
+		return -EINVAL;
+
+	phys = hyp_pfn_to_phys(pfn);
+	size = nr_pages * PAGE_SIZE;
+
+	host_lock_component();
+
+	ret = ___host_check_page_state_range(phys, size,
+					     owned ? PKVM_PAGE_OWNED : PKVM_MODULE_OWNED_PAGE,
+					     HOST_CHECK_IS_MEMORY | HOST_CHECK_NULL_REFCNT);
+	if (ret)
+		goto unlock;
+
+	if (owned) {
+		for_each_hyp_page(page, phys, size)
+			set_host_state(page, PKVM_MODULE_OWNED_PAGE);
+	} else {
+		for_each_hyp_page(page, phys, size)
+			set_host_state(page, PKVM_PAGE_OWNED);
+	}
+
+unlock:
+	host_unlock_component();
+	return ret;
+}
+
 int hyp_pin_shared_mem(void *from, void *to)
 {
 	u64 cur, start = ALIGN_DOWN((u64)from, PAGE_SIZE);
@@ -2434,7 +2466,176 @@ static void __guest_set_owner_host(struct pkvm_hyp_vcpu *vcpu, u64 phys, u64 ipa
 	psci_mem_protect_dec(nr_pages);
 }
 
+<<<<<<< HEAD   (7b10fdf41f2bb0df0fd897e463ab48b31c4b94fb UPSTREAM: Bluetooth: RFCOMM: serialize security confirmation)
 int __pkvm_host_donate_guest(u64 pfn, u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 nr_pages)
+||||||| BASE   (001875c9d2193f3513742f4082a1c0653edb10b7 BACKPORT: FROMLIST: KVM: arm64: Validate the SVE vector leng)
+int __pkvm_guest_unshare_host(u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 nr_pages, u64 *nr_unshared)
+{
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	u64 ipa = hyp_pfn_to_phys(gfn);
+	kvm_pte_t pte;
+	size_t size;
+	u64 phys;
+	int ret;
+
+	host_lock_component();
+	guest_lock_component(vm);
+	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_SHARED_OWNED);
+	if (ret)
+		goto unlock;
+
+	phys = kvm_pte_to_phys(pte);
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size)) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	ret = __host_check_page_state_range(phys, size, PKVM_PAGE_SHARED_BORROWED);
+	if (ret)
+		goto unlock;
+
+	ret = __host_stage2_set_owner_locked(phys, size, PKVM_ID_GUEST, 0,
+					     HOST_SET_PSCI_MEM_PROTECT);
+	if (ret)
+		goto unlock;
+
+	WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys,
+				       pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED),
+				       &vcpu->vcpu.arch.stage2_mc, 0));
+	*nr_unshared = nr_pages;
+unlock:
+	guest_unlock_component(vm);
+	host_unlock_component();
+
+	return ret;
+}
+
+static int ___pkvm_check_module_share_guest(struct pkvm_hyp_vm *vm, u64 phys, u64 ipa, u64 size)
+{
+	int ret;
+
+	ret = ___host_check_page_state_range(phys, size,
+					     PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE,
+					     HOST_CHECK_IS_MEMORY);
+	if (ret)
+		return ret;
+
+	ret = __guest_check_page_state_range(vm, ipa, size,
+					     PKVM_NOPAGE | PKVM_ACCEPT_MODULE_OWNED);
+	if (ret)
+		return ret;
+
+	return module_guest_accept_module_owned_share(phys, ipa, size, vm);
+}
+
+static int ___pkvm_module_share_guest(u64 pfn, u64 gfn, u64 nr_pages, struct pkvm_hyp_vcpu *vcpu)
+{
+	enum kvm_pgtable_prot prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_SHARED_BORROWED);
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	u64 size = nr_pages * PAGE_SIZE;
+	u64 phys = hyp_pfn_to_phys(pfn);
+	u64 ipa = hyp_pfn_to_phys(gfn);
+	int ret;
+
+	ret = ___pkvm_check_module_share_guest(vm, phys, ipa, size);
+	if (!ret) {
+		__host_update_page_state(phys, size, PKVM_MODULE_SHARED_OWNED_PAGE);
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
+					       &vcpu->vcpu.arch.stage2_mc, 0));
+	}
+
+	return ret;
+}
+
+int __pkvm_host_donate_guest(u64 pfn, u64 gfn, u64 nr_pages, struct pkvm_hyp_vcpu *vcpu)
+=======
+int __pkvm_guest_unshare_host(u64 gfn, struct pkvm_hyp_vcpu *vcpu, u64 nr_pages, u64 *nr_unshared)
+{
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	u64 ipa = hyp_pfn_to_phys(gfn);
+	kvm_pte_t pte;
+	size_t size;
+	u64 phys;
+	int ret;
+
+	host_lock_component();
+	guest_lock_component(vm);
+	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_SHARED_OWNED);
+	if (ret)
+		goto unlock;
+
+	phys = kvm_pte_to_phys(pte);
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size)) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	ret = __host_check_page_state_range(phys, size, PKVM_PAGE_SHARED_BORROWED);
+	if (ret)
+		goto unlock;
+
+	ret = __host_stage2_set_owner_locked(phys, size, PKVM_ID_GUEST, 0,
+					     HOST_SET_PSCI_MEM_PROTECT);
+	if (ret)
+		goto unlock;
+
+	WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys,
+				       pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED),
+				       &vcpu->vcpu.arch.stage2_mc, 0));
+	*nr_unshared = nr_pages;
+unlock:
+	guest_unlock_component(vm);
+	host_unlock_component();
+
+	return ret;
+}
+
+static int ___pkvm_check_module_share_guest(struct pkvm_hyp_vm *vm, u64 phys, u64 ipa, u64 size)
+{
+	int ret;
+
+	ret = ___host_check_page_state_range(phys, size,
+					     PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE,
+					     HOST_CHECK_IS_MEMORY);
+	/*
+	 * module_set_host_page_owned() sets PKVM_MODULE_OWNED_PAGE without
+	 * PKVM_NOPAGE.
+	 */
+	if (ret == -EPERM)
+		ret = ___host_check_page_state_range(phys, size, PKVM_MODULE_OWNED_PAGE,
+						     HOST_CHECK_IS_MEMORY);
+	if (ret)
+		return ret;
+
+	ret = __guest_check_page_state_range(vm, ipa, size,
+					     PKVM_NOPAGE | PKVM_ACCEPT_MODULE_OWNED);
+	if (ret)
+		return ret;
+
+	return module_guest_accept_module_owned_share(phys, ipa, size, vm);
+}
+
+static int ___pkvm_module_share_guest(u64 pfn, u64 gfn, u64 nr_pages, struct pkvm_hyp_vcpu *vcpu)
+{
+	enum kvm_pgtable_prot prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_SHARED_BORROWED);
+	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
+	u64 size = nr_pages * PAGE_SIZE;
+	u64 phys = hyp_pfn_to_phys(pfn);
+	u64 ipa = hyp_pfn_to_phys(gfn);
+	int ret;
+
+	ret = ___pkvm_check_module_share_guest(vm, phys, ipa, size);
+	if (!ret) {
+		__host_update_page_state(phys, size, PKVM_MODULE_SHARED_OWNED_PAGE);
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys, prot,
+					       &vcpu->vcpu.arch.stage2_mc, 0));
+	}
+
+	return ret;
+}
+
+int __pkvm_host_donate_guest(u64 pfn, u64 gfn, u64 nr_pages, struct pkvm_hyp_vcpu *vcpu)
+>>>>>>> CHANGE (beed589f871fd9ae0d877f4c96b132cd38ee446d ANDROID: KVM: arm64: pKVM module ops host_stage2_set_owned)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	u64 phys = hyp_pfn_to_phys(pfn);
