@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b03930e6_3a48d516",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T17:11:21Z",
+      "side": 1,
+      "message": "What is the default behavior of this feature? By default it should behave exactly as it did before (off). It should be enabled only for those who want this behavioral change.",
+      "revId": "877e26611d3f5db1e2847c4267f9356843b1b016",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
