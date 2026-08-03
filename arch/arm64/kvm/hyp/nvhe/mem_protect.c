@@ -2045,6 +2045,38 @@ unlock:
 	return ret;
 }
 
+int module_set_host_page_owned(u64 pfn, u64 nr_pages, bool owned)
+{
+	u64 size, phys;
+	int ret;
+
+	if (!pfn_range_is_valid(pfn, nr_pages))
+		return -EINVAL;
+
+	phys = hyp_pfn_to_phys(pfn);
+	size = nr_pages * PAGE_SIZE;
+
+	host_lock_component();
+
+	ret = ___host_check_page_state_range(phys, size,
+					     owned ? PKVM_PAGE_OWNED : PKVM_MODULE_OWNED_PAGE,
+					     HOST_CHECK_IS_MEMORY | HOST_CHECK_NULL_REFCNT);
+	if (ret)
+		goto unlock;
+
+	if (owned) {
+		for_each_hyp_page(page, phys, size)
+			set_host_state(page, PKVM_MODULE_OWNED_PAGE);
+	} else {
+		for_each_hyp_page(page, phys, size)
+			set_host_state(page, PKVM_PAGE_OWNED);
+	}
+
+unlock:
+	host_unlock_component();
+	return ret;
+}
+
 int hyp_pin_shared_mem(void *from, void *to)
 {
 	u64 cur, start = ALIGN_DOWN((u64)from, PAGE_SIZE);
@@ -2427,6 +2459,13 @@ static int ___pkvm_check_module_share_guest(struct pkvm_hyp_vm *vm, u64 phys, u6
 	ret = ___host_check_page_state_range(phys, size,
 					     PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE,
 					     HOST_CHECK_IS_MEMORY);
+	/*
+	 * module_set_host_page_owned() sets PKVM_MODULE_OWNED_PAGE without
+	 * PKVM_NOPAGE.
+	 */
+	if (ret == -EPERM)
+		ret = ___host_check_page_state_range(phys, size, PKVM_MODULE_OWNED_PAGE,
+						     HOST_CHECK_IS_MEMORY);
 	if (ret)
 		return ret;
 
