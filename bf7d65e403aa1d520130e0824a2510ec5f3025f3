@@ -16,6 +16,24 @@
       "message": "I think a MAPD with V\u003d0 can unpin another device\u0027s ITT, because the hardware and the emulation disagree about which device is being unmapped. MAPD writes one DTE, at the DeviceID in the command, and ITT_addr is only ever stored into it. Here device_id and itt_addr are taken as independent fields, and track_device_id() and track_pfn() keep two unrelated sets, so a V\u003d0 MAPD for one DeviceID carrying a different device\u0027s ITT address removes that device\u0027s pages while its DTE stays valid. A later MAPTI re-reads ITT_base from that DTE and writes an ITE into memory the host has back.\n\nCould we record the ITT with the DeviceID at MAPD V\u003d1 and use that on the remove path, rather than the address in the command?",
       "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8807b1_313d272e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-03T13:23:10Z",
+      "side": 1,
+      "message": "My understanding of the problem is the following:\nWe have two commands : (pre-condition):\nMAPD(deviceId \u003d 1, ITTaddr1, V\u003d 1)\nMAPD(deviceId \u003d 2, ITTaddr2, V\u003d 1)\n\nTrigger: malicious host issues:\nMAPD(deviceId \u003d 2, ITTaddr1, V\u003d 0)\n\n-\u003e this makes the DTE 2 invalid while DTE 1 is still valid but lost track of the `host_share_hyp`.\n\u003d\u003e This means that the memory can be re-purposed to another VM. (condition #1) -\u003e An attacker can the use MAPTI on the deviceId \u003d 1 to write over the ITTaddr1\n\nTo fix this I need to keep track of the deviceId and the address somehow",
+      "parentUuid": "e825b63a_1da054e0",
+      "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
