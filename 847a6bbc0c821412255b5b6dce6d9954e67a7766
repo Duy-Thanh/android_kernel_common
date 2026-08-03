@@ -52,6 +52,24 @@
       "parentUuid": "b89899f7_2d135607",
       "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8083c4b2_06d06958",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-08-03T03:46:46Z",
+      "side": 1,
+      "message": "Hi Jaegeuk,\n\nThanks for the great architectural feedback! Migrating evict jobs to a workqueue is indeed a brilliant long-term optimization for Upstream. \n  \nAs the Release Team, our primary objective is to deliver a robust fix that can be safely backported to all 7 LTS branches (from 5.10 to 6.18) with the absolute minimal scope—both in lines of code and in runtime behavioral changes. Adding a new workqueue fundamentally alters the runtime concurrency and execution model of the eviction and iget paths, which diverges from our strict LTS mandate to avoid introducing any new regressions into stable kernels.     \n  \nFurthermore, we need to consider the memory usage constraints.Adding a list_head to f2fs_inode_info to track pending evictions introduces 16 bytes per inode (on 64-bit). Heavy Android workloads often reach ~1 million cached inodes, translating to a ~16MB permanent, unreclaimable Slab memory penalty. While our Memory Optimization team makes the final call, preserving every megabyte is a top priority for Android devices, making this baseline overhead difficult to justify.\n  \nFortunately, this fail-graceful patch does not conflict with your future Workqueue feature. We simply parameterized the gfp_t allocation flags in the internal helper. When the Upstream Workqueue is implemented later, it can simply call this helper with __GFP_NOFAIL, making the fail-graceful logic redundant and safely removable without any architectural conflicts.\n\nGiven our LTS backporting mandates and Android\u0027s strict memory constraints, we believe the Fail-Graceful approach is the safest solution. Hope this makes sense!",
+      "parentUuid": "e1b72182_6c051793",
+      "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
