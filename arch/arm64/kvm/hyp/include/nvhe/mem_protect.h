@@ -113,6 +113,7 @@ int refill_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
 
 int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot,
 				 u64 nr_pages, bool update_iommu);
+int module_set_host_page_owned(u64 pfn, u64 nr_pages, bool owned);
 
 void psci_mem_protect_inc(u64 n);
 void psci_mem_protect_dec(u64 n);
