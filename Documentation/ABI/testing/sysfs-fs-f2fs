@@ -938,6 +938,19 @@ Description:	It can be used to tune priority of f2fs critical task, e.g. f2fs_ck
 		- it requires user has CAP_SYS_NICE capability.
 <<<<<<< PATCH SET (9534fd2d9346cd1946e18981ba0bf2b2a2059ce0 UPSTREAM: f2fs: doc: fix the wrong description for critical_)
 		- the range is [100, 139], by default the value is 120.
+<<<<<<< PATCH SET (6eeb8c629b6a2d42d98e54925ab9b7740cfeca29 UPSTREAM: f2fs: Run f2fs_write_end_io() asynchronously)
+
+What:		/sys/fs/f2fs/<disk>/max_atc_write_bio_size
+Date:		June 2026
+Contact:	Bart Van Assche <bvanassche@acm.org>
+Description:	Every time a write operation completes f2fs_write_end_io() is
+		called. This function may be called from an atomic context,
+		e.g. from inside an interrupt handler. This attribute controls
+		the maximum size of a write bio that is completed in atomic
+		(atc) context. The default value for this attribute is UINT_MAX
+		which means that this functionality is disabled by default.
+||||||| BASE      (9534fd2d9346cd1946e18981ba0bf2b2a2059ce0 UPSTREAM: f2fs: doc: fix the wrong description for critical_)
+=======
 ||||||| BASE      (2b5e96d68fe911755b8ae2865228f6f2debcd57a UPSTREAM: f2fs: Split f2fs_write_end_io())
 		- the range is [100, 139], by default the value is 100.
 =======
@@ -950,3 +963,4 @@ Description:	This is a read-only entry to show the upper bound section number
 		for pinned files. Pinned files will only be allocated within
 		sections 0 to pinned_area_max_secno - 1.
 >>>>>>> BASE      (8415b277a60cbaf120110ef6718efd25f8dd47d5 UPSTREAM: f2fs: Split f2fs_write_end_io())
+>>>>>>> BASE      (2cd5bdbac43dc696eb125107c976b8e9ad69ef62 UPSTREAM: f2fs: doc: fix the wrong description for critical_)
