@@ -16,6 +16,24 @@
       "message": "As previous patch, comment is confusing (to me).",
       "revId": "fd46840e8b86ac0f4338e89506e49dfcc2312da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "148609ff_9a6188d8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-08-03T12:30:34Z",
+      "side": 1,
+      "message": "Hopefully now its better.",
+      "parentUuid": "c1da3ca2_dffdd58b",
+      "revId": "fd46840e8b86ac0f4338e89506e49dfcc2312da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
