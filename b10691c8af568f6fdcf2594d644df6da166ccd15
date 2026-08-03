@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ce337c_95a4579f",
+        "filename": "arch/x86/kernel/paravirt.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-03T14:30:26Z",
+      "side": 1,
+      "message": "Wondering is this should be `EXPORT_SYMBOL(pv_mmio)`? `pv_ops` is exported without GPL restriction and hence this may break out of tree modules using this?",
+      "fixSuggestions": [
+        {
+          "fixId": "6d11e9df_a77d326d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kernel/paravirt.c",
+              "range": {
+                "startLine": 283,
+                "startChar": 0,
+                "endLine": 284,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_SYMBOL(pv_mmio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b10691c8af568f6fdcf2594d644df6da166ccd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
