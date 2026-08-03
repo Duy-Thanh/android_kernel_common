@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a88acc_57ee12f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2026-08-03T07:11:57Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [sourc...\n\nCherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/c499b641319a164ba65949500e41cf40739aee8e).\n\nDifference between automated attempted cherry-pick and current commit.\n\n```\ndiff --git a/drivers/android/vendor_hooks.c b/drivers/android/vendor_hooks.c\nindex 7ff88c026..2aebec192 100644\n--- a/drivers/android/vendor_hooks.c\n+++ b/drivers/android/vendor_hooks.c\n@@ -558,6 +558,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ra_tuning_max_page);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_end);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_start);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_readahead_add_folio);\n+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reasm_timer_adjust);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebalance_anon_lru_bypass);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_receive_sock);\n EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reclaim_before_kswapd);\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "59f127a5531b00edf03db33b246b10ed9dc3079b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9d3c34_1d2c64e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1728636
+      },
+      "writtenOn": "2026-08-03T07:11:57Z",
+      "side": 1,
+      "message": "conflict resolved",
+      "revId": "59f127a5531b00edf03db33b246b10ed9dc3079b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
