@@ -7,3 +7,7 @@ type 'enum attr_idn' changed
 type 'struct ufshcd_tx_eq_params' changed
   member 'union { bool from_dt; unsigned char __kabi_ignored1; }' was added
 
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved1' was removed
+  member 'union { int(* host_stage2_set_owned)(u64, u64, bool); struct { u64 __kabi_reserved1; }; union { }; }' was added
+
