@@ -16,6 +16,24 @@
       "message": "Could you please elaborate on where exactly in the code pKVM does that (queues the irq or nmi after vmexit)?",
       "revId": "5de0773aac29702246636f443c277669af336494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da78c1c_16351063",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-03T00:48:30Z",
+      "side": 1,
+      "message": "When vmexit from guest with interrupt not injected, `__vmx_complete_interrupts` will set `KVM_REQ_EVENT` and queue interrupt via `kvm_queue_interrupt`. Then in `__pkvm_vcpu_enter_guest`, the `KVM_REQ_EVENT` is handled by `kvm_check_and_inject_events` which will inject the interrupt again by this code:\n```\n          else if (vcpu-\u003earch.interrupt.injected)\n                  kvm_x86_call(inject_irq)(vcpu, true);\n```",
+      "parentUuid": "622f0e42_b603b3e1",
+      "revId": "5de0773aac29702246636f443c277669af336494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
