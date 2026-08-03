@@ -52,6 +52,24 @@
       "parentUuid": "88ac93b2_84021ad4",
       "revId": "105e37358c91c5b7036a09eb2c6bc6fd3d2030b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3aa0ad6_c95c52e5",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmentry.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-03T16:23:07Z",
+      "side": 1,
+      "message": "Ahh ok, I didn\u0027t know that we still had DUTs with old microcode. makes sense, not worth breaking existing workflows",
+      "parentUuid": "cd2da2b0_e6c06762",
+      "revId": "105e37358c91c5b7036a09eb2c6bc6fd3d2030b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
