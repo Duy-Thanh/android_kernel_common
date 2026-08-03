@@ -1174,8 +1174,8 @@ static int pkvm_inject_irq(struct kvm_vcpu *vcpu)
 	bool soft = READ_ONCE(shared_vcpu->arch.interrupt.soft);
 	u8 irq = READ_ONCE(shared_vcpu->arch.interrupt.nr);
 
-	if (WARN_ON_ONCE(kvm_x86_call(interrupt_allowed)(vcpu, true) <= 0 ||
-			 !pkvm_event_injection_allowed(vcpu)))
+	if (kvm_x86_call(interrupt_allowed)(vcpu, true) <= 0 ||
+	    !pkvm_event_injection_allowed(vcpu))
 		return -EBUSY;
 
 	/*
@@ -1200,8 +1200,8 @@ static int pkvm_inject_irq(struct kvm_vcpu *vcpu)
 
 static int pkvm_inject_nmi(struct kvm_vcpu *vcpu)
 {
-	if (WARN_ON_ONCE(kvm_x86_call(nmi_allowed)(vcpu, true) <= 0 ||
-			 !pkvm_event_injection_allowed(vcpu)))
+	if (kvm_x86_call(nmi_allowed)(vcpu, true) <= 0 ||
+	    !pkvm_event_injection_allowed(vcpu))
 		return -EBUSY;
 
 	vcpu->arch.nmi_injected = true;
