@@ -94,6 +94,9 @@ static int hugetlb_acct_memory(struct hstate *h, long delta);
 static void hugetlb_vma_lock_free(struct vm_area_struct *vma);
 static void hugetlb_vma_lock_alloc(struct vm_area_struct *vma);
 static void __hugetlb_vma_unlock_write_free(struct vm_area_struct *vma);
+static int __huge_pmd_unshare(struct mmu_gather *tlb,
+		struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
+		bool check_locks);
 static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
 		unsigned long start, unsigned long end, bool take_locks);
 static struct resv_map *vma_resv_map(struct vm_area_struct *vma);
@@ -7143,8 +7146,49 @@ out:
 	return pte;
 }
 
+<<<<<<< HEAD   (f7f29733fe28b154ac2a1da284d3ce65dadf758d Merge android14-6.1 into android14-6.1-lts)
 /*
  * unmap huge page backed by shared pte.
+||||||| BASE   (32dbd5ce4be3a3ed7e00f8af18795cc84fc50a33 fs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling)
+/**
+ * huge_pmd_unshare - Unmap a pmd table if it is shared by multiple users
+ * @tlb: the current mmu_gather.
+ * @vma: the vma covering the pmd table.
+ * @addr: the address we are trying to unshare.
+ * @ptep: pointer into the (pmd) page table.
+=======
+static int __huge_pmd_unshare(struct mmu_gather *tlb,
+		struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
+		bool check_locks)
+{
+	unsigned long sz = huge_page_size(hstate_vma(vma));
+	struct mm_struct *mm = vma->vm_mm;
+	pgd_t *pgd = pgd_offset(mm, addr);
+	p4d_t *p4d = p4d_offset(pgd, addr);
+	pud_t *pud = pud_offset(p4d, addr);
+
+	if (sz != PMD_SIZE)
+		return 0;
+	if (!atomic_read(&virt_to_page(ptep)->pt_share_count))
+		return 0;
+	i_mmap_assert_write_locked(vma->vm_file->f_mapping);
+	if (check_locks)
+		hugetlb_vma_assert_locked(vma);
+	pud_clear(pud);
+
+	tlb_unshare_pmd_ptdesc(tlb, virt_to_page(ptep), addr);
+
+	mm_dec_nr_pmds(mm);
+	return 1;
+}
+
+/**
+ * huge_pmd_unshare - Unmap a pmd table if it is shared by multiple users
+ * @tlb: the current mmu_gather.
+ * @vma: the vma covering the pmd table.
+ * @addr: the address we are trying to unshare.
+ * @ptep: pointer into the (pmd) page table.
+>>>>>>> BRANCH (3e1b69f02e71f73ad47e1c2dcaca02234a512c93 mm/hugetlb: avoid false positive lockdep assertion)
  *
  * Hugetlb pte page is ref counted at the time of mapping.  If pte is shared
  * indicated by page_count > 1, unmap is achieved by clearing pud and
@@ -7158,6 +7202,7 @@ out:
 int huge_pmd_unshare(struct mm_struct *mm, struct vm_area_struct *vma,
 					unsigned long addr, pte_t *ptep)
 {
+<<<<<<< HEAD   (f7f29733fe28b154ac2a1da284d3ce65dadf758d Merge android14-6.1 into android14-6.1-lts)
 	pgd_t *pgd = pgd_offset(mm, addr);
 	p4d_t *p4d = p4d_offset(pgd, addr);
 	pud_t *pud = pud_offset(p4d, addr);
@@ -7172,6 +7217,28 @@ int huge_pmd_unshare(struct mm_struct *mm, struct vm_area_struct *vma,
 	put_page(virt_to_page(ptep));
 	mm_dec_nr_pmds(mm);
 	return 1;
+||||||| BASE   (32dbd5ce4be3a3ed7e00f8af18795cc84fc50a33 fs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling)
+	unsigned long sz = huge_page_size(hstate_vma(vma));
+	struct mm_struct *mm = vma->vm_mm;
+	pgd_t *pgd = pgd_offset(mm, addr);
+	p4d_t *p4d = p4d_offset(pgd, addr);
+	pud_t *pud = pud_offset(p4d, addr);
+
+	i_mmap_assert_write_locked(vma->vm_file->f_mapping);
+	hugetlb_vma_assert_locked(vma);
+	if (sz != PMD_SIZE)
+		return 0;
+	if (!atomic_read(&virt_to_page(ptep)->pt_share_count))
+		return 0;
+
+	pud_clear(pud);
+	tlb_unshare_pmd_ptdesc(tlb, virt_to_page(ptep), addr);
+
+	mm_dec_nr_pmds(mm);
+	return 1;
+=======
+	return __huge_pmd_unshare(tlb, vma, addr, ptep, /*check_locks=*/true);
+>>>>>>> BRANCH (3e1b69f02e71f73ad47e1c2dcaca02234a512c93 mm/hugetlb: avoid false positive lockdep assertion)
 }
 
 #else /* !CONFIG_ARCH_WANT_HUGE_PMD_SHARE */
@@ -7182,8 +7249,23 @@ pte_t *huge_pmd_share(struct mm_struct *mm, struct vm_area_struct *vma,
 	return NULL;
 }
 
+<<<<<<< HEAD   (f7f29733fe28b154ac2a1da284d3ce65dadf758d Merge android14-6.1 into android14-6.1-lts)
 int huge_pmd_unshare(struct mm_struct *mm, struct vm_area_struct *vma,
 				unsigned long addr, pte_t *ptep)
+||||||| BASE   (32dbd5ce4be3a3ed7e00f8af18795cc84fc50a33 fs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling)
+int huge_pmd_unshare(struct mmu_gather *tlb, struct vm_area_struct *vma,
+		unsigned long addr, pte_t *ptep)
+=======
+static int __huge_pmd_unshare(struct mmu_gather *tlb,
+		struct vm_area_struct *vma, unsigned long addr, pte_t *ptep,
+		bool check_locks)
+{
+	return 0;
+}
+
+int huge_pmd_unshare(struct mmu_gather *tlb, struct vm_area_struct *vma,
+		unsigned long addr, pte_t *ptep)
+>>>>>>> BRANCH (3e1b69f02e71f73ad47e1c2dcaca02234a512c93 mm/hugetlb: avoid false positive lockdep assertion)
 {
 	return 0;
 }
@@ -7558,7 +7640,13 @@ static void hugetlb_unshare_pmds(struct vm_area_struct *vma,
 		if (!ptep)
 			continue;
 		ptl = huge_pte_lock(h, mm, ptep);
+<<<<<<< HEAD   (f7f29733fe28b154ac2a1da284d3ce65dadf758d Merge android14-6.1 into android14-6.1-lts)
 		huge_pmd_unshare(mm, vma, address, ptep);
+||||||| BASE   (32dbd5ce4be3a3ed7e00f8af18795cc84fc50a33 fs/fcntl: fix SOFTIRQ-unsafe lock order in fasync signaling)
+		huge_pmd_unshare(&tlb, vma, address, ptep);
+=======
+		__huge_pmd_unshare(&tlb, vma, address, ptep, take_locks);
+>>>>>>> BRANCH (3e1b69f02e71f73ad47e1c2dcaca02234a512c93 mm/hugetlb: avoid false positive lockdep assertion)
 		spin_unlock(ptl);
 	}
 	flush_hugetlb_tlb_range(vma, start, end);
