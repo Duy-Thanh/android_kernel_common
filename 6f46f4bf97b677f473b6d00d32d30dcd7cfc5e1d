@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d686aa_23e5f1d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-03T14:51:48Z",
+      "side": 1,
+      "message": "minor nit:\n\n\u003e Replace all \"m\" input constraints with \"+m\" read-write constraints to\naccurately reflect that lock-\u003ehead and lock-\u003etail are both read and\nmodified.\n\n`Replace all \"m\" input` seems a bit confusing as we are only replacing those that are modified by xaddl and incl(lock-\u003etail is only read and kept \"m\"). Probably something like:\n```\nReplace the constraints for the memory operands modified by\nxaddl and incl with \"+m\" read-write constraints.\n```",
+      "revId": "6f46f4bf97b677f473b6d00d32d30dcd7cfc5e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
