@@ -34,6 +34,24 @@
       "parentUuid": "f4e06a3d_6cd8bddc",
       "revId": "42d180553ab2046c57dbf28cf8c789e21a7b061b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde81fdb_c7b86400",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-03T14:28:24Z",
+      "side": 1,
+      "message": "The polling is what I was after, thanks. I think the timeout leg goes the wrong way though: if update_ctlr gives up with RWP still set, disable_lpi falls past the early return into handle_lpi_disable(), so the tables go back to the host in exactly the case where the redistributor may still be writing the pending table.\n\nCould we release only once both bits read clear, something like:\n```\n      if (FIELD_GET(GICR_CTLR_RWP, ctlr) ||\n          FIELD_GET(GICR_CTLR_ENABLE_LPIS, ctlr))\n              return;\n\n      handle_lpi_disable(redist);\n```",
+      "parentUuid": "040ba101_8e554a5b",
+      "revId": "42d180553ab2046c57dbf28cf8c789e21a7b061b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
