@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780c659c_bf880e2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-03T17:03:25Z",
+      "side": 1,
+      "message": "If this is FROMGIT, then it will land in android-mainline soon. No need the cherry-pick it. If needed urgently, then please explain why.",
+      "revId": "54166f48c724fb69619d0e9adb8034934d9dd64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
