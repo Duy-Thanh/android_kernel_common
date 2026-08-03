@@ -16,6 +16,24 @@
       "message": "This should not be merged into android-mainline. It will be merged automatically when it lands upstream. If you need it urgently, then please provide the rationale for why it cannot wait.",
       "revId": "9484961a4265e359c596cb82cd4cce6374795d58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4811800_3946e12c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-08-03T16:17:04Z",
+      "side": 1,
+      "message": "In addition to what Todd wrote, if you want to proceed with this patch, `FROMLIST` should be changed into `FROMGIT`. The SCSI maintainer accepted this patch about three weeks ago as one can see here: https://lore.kernel.org/linux-scsi/178529373864.132455.16028860310368534434.b4-ty@oracle.com/.",
+      "parentUuid": "c484ab26_942c36f4",
+      "revId": "9484961a4265e359c596cb82cd4cce6374795d58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
