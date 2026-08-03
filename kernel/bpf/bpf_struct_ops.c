@@ -1567,3 +1567,76 @@ void bpf_map_struct_ops_info_fill(struct bpf_map_info *info, struct bpf_map *map
 
 	info->btf_vmlinux_id = btf_obj_id(st_map->btf);
 }
+
+BTF_KFUNCS_START(bpf_struct_ops_kfunc_ids)
+BTF_ID_FLAGS(func, bpf_struct_ops_get_member_info, 0)
+BTF_KFUNCS_END(bpf_struct_ops_kfunc_ids)
+
+/**
+ * bpf_struct_ops_get_member_info - Gets target kernel offset and index of a struct member
+ * @btf_id: The BTF ID of the struct_ops target struct (e.g. tcp_congestion_ops)
+ * @name__ign: Null-terminated string belonging to the target member field
+ * @name_sz: The bounds mapped size of the string
+ *
+ * Description:
+ *  Resolves the true byte offset and member index of a target field dynamically.
+ *  Returns ((u64)member_index << 32) | (u64)byte_offset.
+ */
+__bpf_kfunc u64 bpf_struct_ops_get_member_info(u32 btf_id, const char *name__ign, u32 name_sz)
+{
+        const struct bpf_struct_ops_desc *st_ops_desc;
+        const struct btf_member *member;
+        const struct btf_type *t;
+        struct btf *btf_vmlinux;
+        const char *mname;
+        u32 i, moff;
+
+        pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_get_member_info: btf_id=%u name='%s' sz=%u\n",
+                btf_id, name__ign ? name__ign : "null", name_sz);
+        btf_vmlinux = bpf_get_btf_vmlinux();
+        st_ops_desc = bpf_struct_ops_find_value(btf_vmlinux, btf_id);
+        if (!st_ops_desc)
+                return (u64)-EOPNOTSUPP;
+
+        if (!name__ign || name_sz == 0) {
+                pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_get_member_info(btf_id=%u, NULL) -> kern_val_sz=%u\n",
+                        btf_id, (u32)st_ops_desc->value_type->size);
+                return (u64)st_ops_desc->value_type->size;
+        }
+
+        /* Get the hardware struct */
+        t = st_ops_desc->type;
+
+        /* March through every hardware field sequentially */
+        for_each_member(i, t, member) {
+                mname = btf_name_by_offset(btf_vmlinux, member->name_off);
+                if (!mname)
+                        continue;
+
+                /* Target secured */
+                if (!strncmp(mname, name__ign, name_sz)) {
+                        /* Calculate the structural offset */
+                        moff = __btf_member_bit_offset(t, member) / 8;
+                        u32 offset = offsetof(struct bpf_struct_ops_value, data) + moff;
+                        u32 index = i;
+
+                        pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_get_member_info('%s', btf_id=%u) -> index=%u offset=%u\n",
+                                name__ign, btf_id, index, offset);
+                        return ((u64)index << 32) | (u64)offset;
+                }
+        }
+
+        pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_get_member_info('%s', btf_id=%u) -> ENOENT\n", name__ign, btf_id);
+        return (u64)-ENOENT;
+}
+
+static const struct btf_kfunc_id_set bpf_struct_ops_kfunc_set = {
+        .owner = THIS_MODULE,
+        .set   = &bpf_struct_ops_kfunc_ids,
+};
+
+static int __init bpf_struct_ops_kfuncs_init(void)
+{
+        return register_btf_kfunc_id_set(BPF_PROG_TYPE_SYSCALL, &bpf_struct_ops_kfunc_set);
+}
+late_initcall(bpf_struct_ops_kfuncs_init);
