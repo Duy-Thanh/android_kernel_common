@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7f85a6_2be2b74a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-03T20:40:51Z",
+      "side": 1,
+      "message": "Please indicate that this is from linux-stable:\n\n(cherry picked from commit b7b2d2ccdbc4dce33a882d9c00484a3a2dc10866 git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git linux-6.18.y)",
+      "range": {
+        "startLine": 42,
+        "startChar": 27,
+        "endLine": 42,
+        "endChar": 67
+      },
+      "revId": "6b3f356890f2e216cf5d1abe7dac5b7860f7e130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
