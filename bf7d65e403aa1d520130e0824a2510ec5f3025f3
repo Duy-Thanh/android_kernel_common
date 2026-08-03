@@ -34,6 +34,24 @@
       "parentUuid": "e825b63a_1da054e0",
       "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d75d8a_7e771ba8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-03T14:27:02Z",
+      "side": 1,
+      "message": "Yes, that is the case. MAPD with V\u003d0 is applied to the DeviceID in the command, so recording the ITT against the DeviceID at V\u003d1 and using that on the remove path should cover it.",
+      "parentUuid": "0f8807b1_313d272e",
+      "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
