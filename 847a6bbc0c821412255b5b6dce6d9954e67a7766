@@ -70,6 +70,24 @@
       "parentUuid": "e1b72182_6c051793",
       "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2193ee_13c50d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2026-08-03T15:38:07Z",
+      "side": 1,
+      "message": "Hi,\n\nI stopped reading your AI-generated reply, when you described f2fs_inode_info which is wrong as I mentioned earlier. Let us write a patch for this, and will handle LTS from upstream.\n\nThanks,",
+      "parentUuid": "8083c4b2_06d06958",
+      "revId": "847a6bbc0c821412255b5b6dce6d9954e67a7766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
