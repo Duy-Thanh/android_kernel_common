@@ -480,7 +480,7 @@ bool fscrypt_dio_supported(struct inode *inode)
 		 */
 		return false;
 	}
-	return fscrypt_inode_uses_inline_crypto(inode);
+	return false;
 }
 EXPORT_SYMBOL_GPL(fscrypt_dio_supported);
 
