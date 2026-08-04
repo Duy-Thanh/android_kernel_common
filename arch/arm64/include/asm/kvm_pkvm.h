@@ -414,7 +414,12 @@ static inline unsigned long pkvm_selftest_pages(void) { return 0; }
 #endif
 
 #define KVM_FFA_MBOX_NR_PAGES		1
-#define KVM_FFA_SPM_HANDLE_NR_PAGES	2
+
+/* struct ffa_handle is a single 64-bit bitfield, see hyp/nvhe/ffa.c */
+#define KVM_FFA_SPM_HANDLE_SIZE		sizeof(u64)
+#define KVM_FFA_SPM_NR_HANDLES_DEFAULT	1024
+
+extern u64 kvm_nvhe_sym(kvm_ffa_spm_nr_handles);
 
 /*
  * Maximum number of consitutents allowed in a descriptor. This number is
@@ -462,8 +467,11 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 	/* Plus a page each for the hypervisor's RX and TX mailboxes. */
 	num_pages = (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
 
-	if (pkvm_ffa_unmap_on_lend())
-		num_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
+	if (pkvm_ffa_unmap_on_lend()) {
+		u64 nr_handles = kvm_nvhe_sym(kvm_ffa_spm_nr_handles);
+
+		num_pages += DIV_ROUND_UP(nr_handles * KVM_FFA_SPM_HANDLE_SIZE, PAGE_SIZE);
+	}
 
 	return num_pages;
 }

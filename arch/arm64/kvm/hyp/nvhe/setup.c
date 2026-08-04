@@ -31,6 +31,7 @@ phys_addr_t pvmfw_size;
 			 (unsigned long)__per_cpu_start)
 
 u64 hyp_lm_size_mb;
+u64 kvm_ffa_spm_nr_handles = KVM_FFA_SPM_NR_HANDLES_DEFAULT;
 
 static void *vmemmap_base;
 static void *vm_table_base;
