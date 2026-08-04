@@ -5474,8 +5474,13 @@ static int bpf_object__create_map(struct bpf_object *obj, struct bpf_map *map, b
 	}
 
 	if (obj->gen_loader) {
+		__u32 value_size = def->value_size;
+
+		if (bpf_map__is_struct_ops(map) && map->st_ops)
+			value_size = map->st_ops->kern_val_sz_off;
+
 		bpf_gen__map_create(obj->gen_loader, def->type, map_name,
-				    def->key_size, def->value_size, def->max_entries,
+				    def->key_size, value_size, def->max_entries,
 				    &create_attr, is_inner ? -1 : map - obj->maps);
 		/* We keep pretenting we have valid FD to pass various fd >= 0
 		 * checks by just keeping original placeholder FDs in place.
