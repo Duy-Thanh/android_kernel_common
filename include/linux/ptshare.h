@@ -125,6 +125,8 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 {
 	return ptdesc_pmd_pts_count(pt);
 }
+
+int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
 #else /* !CONFIG_PTSHARE */
 static inline bool vma_is_ptshare_client(const struct vm_area_struct *vma)
 {
@@ -175,6 +177,11 @@ static inline void ptdesc_put(struct ptdesc *pt)
 }
 
 static inline int ptdesc_refcount(struct ptdesc *pt)
+{
+	return 0;
+}
+
+static inline int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
 	return 0;
 }
