@@ -1435,9 +1435,19 @@ static int genl_bind(struct net *net, int group)
 			continue;
 
 		grp = &family->mcgrps[i];
-		if ((grp->flags & GENL_UNS_ADMIN_PERM) &&
+		if ((grp->flags & GENL_MCAST_CAP_NET_ADMIN) &&
 		    !ns_capable(net->user_ns, CAP_NET_ADMIN))
 			ret = -EPERM;
+<<<<<<< HEAD   (455388a3fca254af07c5121070a47e052a6a15b2 Merge f8a8358832f3 ("cgroup/cpuset: Reset DL migration state)
+||||||| BASE   (f8a8358832f3b812264560361a5ca1b6725da03a cgroup/cpuset: Reset DL migration state on can_attach() fail)
+		if (grp->cap_sys_admin &&
+		    !ns_capable(net->user_ns, CAP_SYS_ADMIN))
+			ret = -EPERM;
+=======
+		if ((grp->flags & GENL_MCAST_CAP_SYS_ADMIN) &&
+		    !ns_capable(net->user_ns, CAP_SYS_ADMIN))
+			ret = -EPERM;
+>>>>>>> BRANCH (07bfd1acafa6abbe1f094f8933ca89c02da3dea9 genetlink: Use internal flags for multicast groups)
 
 		break;
 	}

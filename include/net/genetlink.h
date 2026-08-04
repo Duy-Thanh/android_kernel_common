@@ -9,10 +9,22 @@
 
 #define GENLMSG_DEFAULT_SIZE (NLMSG_DEFAULT_SIZE - GENL_HDRLEN)
 
+/* Binding to multicast group requires %CAP_NET_ADMIN */
+#define GENL_MCAST_CAP_NET_ADMIN	BIT(0)
+/* Binding to multicast group requires %CAP_SYS_ADMIN */
+#define GENL_MCAST_CAP_SYS_ADMIN	BIT(1)
+
 /**
  * struct genl_multicast_group - generic netlink multicast group
  * @name: name of the multicast group, names are per-family
+<<<<<<< HEAD   (455388a3fca254af07c5121070a47e052a6a15b2 Merge f8a8358832f3 ("cgroup/cpuset: Reset DL migration state)
  * @flags: GENL_* flags (%GENL_ADMIN_PERM or %GENL_UNS_ADMIN_PERM)
+||||||| BASE   (f8a8358832f3b812264560361a5ca1b6725da03a cgroup/cpuset: Reset DL migration state on can_attach() fail)
+ * @flags: GENL_* flags (%GENL_ADMIN_PERM or %GENL_UNS_ADMIN_PERM)
+ * @cap_sys_admin: whether %CAP_SYS_ADMIN is required for binding
+=======
+ * @flags: GENL_MCAST_* flags
+>>>>>>> BRANCH (07bfd1acafa6abbe1f094f8933ca89c02da3dea9 genetlink: Use internal flags for multicast groups)
  */
 struct genl_multicast_group {
 	char			name[GENL_NAMSIZ];

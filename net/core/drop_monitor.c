@@ -181,7 +181,13 @@ out:
 }
 
 static const struct genl_multicast_group dropmon_mcgrps[] = {
+<<<<<<< HEAD   (455388a3fca254af07c5121070a47e052a6a15b2 Merge f8a8358832f3 ("cgroup/cpuset: Reset DL migration state)
 	{ .name = "events", },
+||||||| BASE   (f8a8358832f3b812264560361a5ca1b6725da03a cgroup/cpuset: Reset DL migration state on can_attach() fail)
+	{ .name = "events", .cap_sys_admin = 1 },
+=======
+	{ .name = "events", .flags = GENL_MCAST_CAP_SYS_ADMIN, },
+>>>>>>> BRANCH (07bfd1acafa6abbe1f094f8933ca89c02da3dea9 genetlink: Use internal flags for multicast groups)
 };
 
 static void send_dm_alert(struct work_struct *work)
