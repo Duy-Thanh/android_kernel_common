@@ -16,6 +16,24 @@
       "message": "What is the default behavior of this feature? By default it should behave exactly as it did before (off). It should be enabled only for those who want this behavioral change.",
       "revId": "32cb6eb079a8169a1e2429a7390845727c6baac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d21d13_40f287d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-08-04T01:20:22Z",
+      "side": 1,
+      "message": "The default behavior is the same as before (off) as you can see \"CONFIG_DPM_WATCHDOG_ENABLED is not set\".  Desktop device will turn it on via kernel cmdline (pm.dpm_watchdog_enabled\u003d1).",
+      "parentUuid": "2f35e87e_ba2383b0",
+      "revId": "32cb6eb079a8169a1e2429a7390845727c6baac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
