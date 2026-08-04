@@ -1675,8 +1675,20 @@ static void f2fs_put_super(struct super_block *sb)
 	}
 
 	/* be sure to wait for any on-going discard commands */
+<<<<<<< HEAD   (14d4771f40d562e70391f35cd4b8a1d264888448 Merge f56f25da0029 ("f2fs: use kfree() instead of kvfree() t)
 	done = f2fs_issue_discard_timeout(sbi);
 	if (f2fs_realtime_discard_enable(sbi) && !sbi->discard_blks && done) {
+||||||| BASE   (f56f25da0029fa987a566626e6a8a128c8dfe959 f2fs: use kfree() instead of kvfree() to free some memory)
+	dropped = f2fs_issue_discard_timeout(sbi);
+
+	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
+					!sbi->discard_blks && !dropped) {
+=======
+	dropped = f2fs_issue_discard_timeout(sbi, true);
+
+	if ((f2fs_hw_support_discard(sbi) || f2fs_hw_should_discard(sbi)) &&
+					!sbi->discard_blks && !dropped) {
+>>>>>>> BRANCH (299eb6381d61c3284f28f4c23729811deb06ffe9 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 		struct cp_control cpc = {
 			.reason = CP_UMOUNT | CP_TRIMMED,
 		};
@@ -2586,7 +2598,21 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
 			need_stop_discard = true;
 		} else {
 			f2fs_stop_discard_thread(sbi);
+<<<<<<< HEAD   (14d4771f40d562e70391f35cd4b8a1d264888448 Merge f56f25da0029 ("f2fs: use kfree() instead of kvfree() t)
 			f2fs_issue_discard_timeout(sbi);
+||||||| BASE   (f56f25da0029fa987a566626e6a8a128c8dfe959 f2fs: use kfree() instead of kvfree() to free some memory)
+			if (atomic_read(&dcc->discard_cmd_cnt))
+				f2fs_issue_discard_timeout(sbi);
+=======
+			/*
+			 * f2fs_ioc_fitrim() won't race w/ "remount ro"
+			 * so it's safe to check discard_cmd_cnt in
+			 * f2fs_issue_discard_timeout().
+			 */
+			if (atomic_read(&dcc->discard_cmd_cnt))
+				f2fs_issue_discard_timeout(sbi,
+						*flags & SB_RDONLY);
+>>>>>>> BRANCH (299eb6381d61c3284f28f4c23729811deb06ffe9 f2fs: fix to do sanity check on dcc->discard_cmd_cnt conditi)
 			need_restart_discard = true;
 		}
 	}
