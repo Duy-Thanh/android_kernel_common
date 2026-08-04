@@ -34,6 +34,24 @@
       ],
       "revId": "b10691c8af568f6fdcf2594d644df6da166ccd15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85bc0552_51c56899",
+        "filename": "arch/x86/kernel/paravirt.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-04T10:47:44Z",
+      "side": 1,
+      "message": "Seems like a good point. Not that I\u0027m a fan of non-GPL out-of-tree modules, but since they are supported anyway, it looks like this will prevent them from accessing MMIO via these standard accessors readb, writeb etc (which is a pretty basic functionality)?",
+      "parentUuid": "67ce337c_95a4579f",
+      "revId": "b10691c8af568f6fdcf2594d644df6da166ccd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
