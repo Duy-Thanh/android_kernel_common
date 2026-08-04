@@ -4503,12 +4503,16 @@ static bool ieee80211_accept_frame(struct ieee80211_rx_data *rx)
 
 		return true;
 	case NL80211_IFTYPE_P2P_DEVICE:
-		return ieee80211_is_public_action(hdr, skb->len) ||
-		       ieee80211_is_probe_req(hdr->frame_control) ||
-		       ieee80211_is_probe_resp(hdr->frame_control) ||
-		       ieee80211_is_beacon(hdr->frame_control) ||
-		       (ieee80211_is_auth(hdr->frame_control) &&
-			ether_addr_equal(sdata->vif.addr, hdr->addr1));
+		if (is_multicast_ether_addr(hdr->addr1))
+			return ieee80211_is_public_action(hdr, skb->len) ||
+			       ieee80211_is_probe_req(hdr->frame_control) ||
+			       ieee80211_is_probe_resp(hdr->frame_control) ||
+			       ieee80211_is_beacon(hdr->frame_control);
+		else
+			return ether_addr_equal(sdata->vif.addr, hdr->addr1) &&
+			       (ieee80211_is_public_action(hdr, skb->len) ||
+				ieee80211_is_probe_resp(hdr->frame_control) ||
+				ieee80211_is_auth(hdr->frame_control));
 	case NL80211_IFTYPE_NAN:
 		if (ieee80211_has_tods(hdr->frame_control) ||
 		    ieee80211_has_fromds(hdr->frame_control))
