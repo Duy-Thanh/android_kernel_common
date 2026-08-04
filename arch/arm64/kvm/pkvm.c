@@ -230,6 +230,21 @@ early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
 DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
 
+static int __init early_kvm_ffa_spm_handle_nr_pages_cfg(char *arg)
+{
+	u64 val;
+	int ret = kstrtoull(arg, 10, &val);
+
+	if (ret)
+		return ret;
+	if (!val)
+		return -EINVAL;
+
+	kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages) = val;
+	return 0;
+}
+early_param("kvm-arm.ffa_spm_handle_nr_pages", early_kvm_ffa_spm_handle_nr_pages_cfg);
+
 void __init kvm_hyp_reserve(void)
 {
 	u64 hyp_mem_pages = 0;
