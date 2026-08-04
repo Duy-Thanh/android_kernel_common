@@ -16,6 +16,24 @@
       "message": "If this is FROMGIT, then it will land in android-mainline soon. No need the cherry-pick it. If needed urgently, then please explain why.",
       "revId": "54166f48c724fb69619d0e9adb8034934d9dd64b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef19c1d_ef1cc6c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-08-04T01:23:26Z",
+      "side": 1,
+      "message": "Ah, I see; I misunderstood picking to android-mainline is a requirement.\n\nAck, this can wait.",
+      "parentUuid": "780c659c_bf880e2a",
+      "revId": "54166f48c724fb69619d0e9adb8034934d9dd64b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
