@@ -416,6 +416,8 @@ static inline unsigned long pkvm_selftest_pages(void) { return 0; }
 #define KVM_FFA_MBOX_NR_PAGES		1
 #define KVM_FFA_SPM_HANDLE_NR_PAGES	2
 
+extern u64 kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages);
+
 /*
  * Maximum number of consitutents allowed in a descriptor. This number is
  * arbitrary, see comment below on SG_MAX_SEGMENTS in hyp_ffa_proxy_pages().
@@ -453,7 +455,7 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 	num_pages = (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
 
 	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend))
-		num_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
+		num_pages += kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages);
 
 	return num_pages;
 }
