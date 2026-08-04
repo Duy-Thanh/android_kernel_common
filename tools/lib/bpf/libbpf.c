@@ -9038,7 +9038,11 @@ static int bpf_object_prepare_struct_ops(struct bpf_object *obj)
 		if (!map->autocreate)
 			continue;
 
-		bpf_map_prepare_vdata(map);
+		if (obj->gen_loader)
+			bpf_gen__struct_ops_update_elem(obj->gen_loader, map - obj->maps,
+							obj->btf, map->st_ops);
+		else
+			bpf_map_prepare_vdata(map);
 	}
 
 	return 0;
@@ -9918,6 +9922,11 @@ int bpf_program__set_attach_btf_id(struct bpf_program *prog, __u32 btf_id)
 
 	prog->attach_btf_id = btf_id;
 	return 0;
+}
+
+int bpf_program__idx(const struct bpf_program *prog)
+{
+	return prog - prog->obj->programs;
 }
 
 __u32 bpf_program__flags(const struct bpf_program *prog)

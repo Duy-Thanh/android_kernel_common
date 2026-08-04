@@ -1504,6 +1504,70 @@ void bpf_gen__map_update_elem(struct bpf_gen *gen, int map_idx, void *pvalue,
 	emit_check_err(gen);
 }
 
+void bpf_gen__struct_ops_update_elem(struct bpf_gen *gen, int map_idx, struct btf *btf,
+				     struct bpf_struct_ops *st_ops)
+{
+	const struct btf_type *type;
+	const struct btf_member *member;
+	int i, map_update_attr, key, zero = 0;
+	int attr_size = offsetofend(union bpf_attr, flags);
+	int kern_vdata_off = (uintptr_t)st_ops->kern_vdata;
+	union bpf_attr attr;
+
+	type = btf__type_by_id(btf, st_ops->type_id);
+	member = btf_members(type);
+
+	/* 1. Populate prog_fd into kern_vdata for all callback members */
+	for (i = 0; i < btf_vlen(type); i++, member++) {
+		const struct btf_type *mtype;
+		struct bpf_program *prog;
+		int prog_idx, off_slot;
+
+		mtype = skip_mods_and_typedefs(btf, member->type, NULL);
+
+		if (!btf_is_ptr(mtype))
+			continue;
+
+		prog = st_ops->progs[i];
+		if (!prog)
+			continue;
+
+		prog_idx = bpf_program__idx(prog);
+		off_slot = st_ops->kern_func_off[i];
+
+		/* R2 = dynamic kernel member offset from off_slot */
+		emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+						 0, 0, 0, off_slot));
+		emit(gen, BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1, 0));
+		emit(gen, BPF_ALU64_IMM(BPF_AND, BPF_REG_2, 4095));
+
+		/* R1 = kern_vdata_off + offset */
+		emit2(gen, BPF_LD_IMM64_RAW_FULL(BPF_REG_1, BPF_PSEUDO_MAP_IDX_VALUE,
+						 0, 0, 0, kern_vdata_off));
+		emit(gen, BPF_ALU64_REG(BPF_ADD, BPF_REG_1, BPF_REG_2));
+
+		/* R0 = prog_fd from stack (stack_off(prog_fd[prog_idx])) */
+		emit(gen, BPF_LDX_MEM(BPF_W, BPF_REG_0, BPF_REG_10, stack_off(prog_fd[prog_idx])));
+
+		/* Store prog_fd (R0) into kern_vdata + offset (R1) */
+		emit(gen, BPF_STX_MEM(BPF_DW, BPF_REG_1, BPF_REG_0, 0));
+	}
+
+	/* 2. Emit BPF_MAP_UPDATE_ELEM command for struct_ops map */
+	memset(&attr, 0, attr_size);
+	key = add_data(gen, &zero, sizeof(zero));
+	map_update_attr = add_data(gen, &attr, attr_size);
+
+	move_blob2blob(gen, attr_field(map_update_attr, map_fd), 4,
+		       blob_fd_array_off(gen, map_idx));
+	emit_rel_store(gen, attr_field(map_update_attr, key), key);
+	emit_rel_store(gen, attr_field(map_update_attr, value), kern_vdata_off);
+
+	emit_sys_bpf(gen, BPF_MAP_UPDATE_ELEM, map_update_attr, attr_size);
+	debug_ret(gen, "update_struct_ops_elem idx %d", map_idx);
+	emit_check_err(gen);
+}
+
 void bpf_gen__populate_outer_map(struct bpf_gen *gen, int outer_map_idx, int slot,
 				 int inner_map_idx)
 {

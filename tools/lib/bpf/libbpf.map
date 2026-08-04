@@ -461,6 +461,7 @@ LIBBPF_1.8.0 {
 		bpf_program__attach_tracing_multi;
 		bpf_program__clone;
 		btf__find_by_name_kind_own;
+		bpf_program__idx;
 		bpf_program__set_attach_btf_id;
 		btf__new_empty_opts;
 } LIBBPF_1.7.0;

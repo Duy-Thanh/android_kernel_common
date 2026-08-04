@@ -68,6 +68,8 @@ void bpf_gen__prog_load(struct bpf_gen *gen,
 			struct bpf_prog_load_opts *load_attr, int prog_idx);
 void bpf_gen__map_update_elem(struct bpf_gen *gen, int map_idx, void *value, __u32 value_size,
 			      __u64 flags);
+void bpf_gen__struct_ops_update_elem(struct bpf_gen *gen, int map_idx, struct btf *btf,
+				     struct bpf_struct_ops *st_ops);
 void bpf_gen__map_freeze(struct bpf_gen *gen, int map_idx);
 void bpf_gen__record_attach_target(struct bpf_gen *gen, const char *name, enum bpf_attach_type type);
 void bpf_gen__record_extern(struct bpf_gen *gen, const char *name, bool is_weak,
