@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48996ec_805ac291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2041852
+      },
+      "writtenOn": "2026-08-04T08:15:39Z",
+      "side": 1,
+      "message": "Note: Seems android17-6.18 is already building open-dice for x86, so skip this change for cherry picking.",
+      "revId": "c3f6269109a8de104887de60e7e0bfd5d0d66b99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
