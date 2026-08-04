@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af605fa6_9e773623",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3543229
+      },
+      "writtenOn": "2026-08-04T05:57:09Z",
+      "side": 1,
+      "message": "Please cherry-pick that fix first, and then cherry-pick \"https://android-review.googlesource.com/c/kernel/common/+/4211126\".",
+      "revId": "397569b6d95dc39ca3023c5730977b512855214d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
