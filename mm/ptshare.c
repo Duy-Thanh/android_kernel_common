@@ -13,4 +13,12 @@
  */
 #include <linux/ptshare.h>
 #include <linux/mm_types.h>
+#include <linux/mmap_lock.h>
 
+int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
+{
+	mmap_assert_write_locked(vma->vm_mm);
+	if (vma_shares_pagetables(vma))
+		return -EINVAL;
+	return 0;
+}
