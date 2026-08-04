@@ -495,7 +495,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_f2fs_down_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_improve_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_restore_priority);
+<<<<<<< HEAD   (1f977b26d2615d83bc93c0b5500c7010d68ffcf4 UPSTREAM: binder: fix UAF in binder_free_transaction())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ioc_set_pin_file);
+||||||| BASE   (0fc7e9f7c83098da16ccee137b89b8ff97525028 FROMLIST: KVM: arm64: Zero out the stack initialized data in)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_erofs_iostat_submit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_erofs_iostat_update);
+>>>>>>> CHANGE (9f54cbcaa0443ad95e2243e629851a56f0c1e2e2 ANDROID: add vendor hooks for erofs iostat monitoring)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uplink_send_msg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sock_create);

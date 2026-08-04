@@ -44,9 +44,20 @@ DECLARE_HOOK(android_vh_timerfd_create,
 	TP_PROTO(char *name, int len),
 	TP_ARGS(name, len));
 
+<<<<<<< HEAD   (1f977b26d2615d83bc93c0b5500c7010d68ffcf4 UPSTREAM: binder: fix UAF in binder_free_transaction())
 DECLARE_HOOK(android_vh_f2fs_set_bio_flag,
 	TP_PROTO(struct folio *folio, struct bio *bio),
 	TP_ARGS(folio, bio));
+||||||| BASE   (0fc7e9f7c83098da16ccee137b89b8ff97525028 FROMLIST: KVM: arm64: Zero out the stack initialized data in)
+=======
+DECLARE_HOOK(android_vh_erofs_iostat_submit,
+	TP_PROTO(struct super_block *sb, struct bio *bio),
+	TP_ARGS(sb, bio));
+
+DECLARE_HOOK(android_vh_erofs_iostat_update,
+	TP_PROTO(struct super_block *sb, struct bio *bio),
+	TP_ARGS(sb, bio));
+>>>>>>> CHANGE (9f54cbcaa0443ad95e2243e629851a56f0c1e2e2 ANDROID: add vendor hooks for erofs iostat monitoring)
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */
