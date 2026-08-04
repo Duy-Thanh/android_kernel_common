@@ -1118,12 +1118,16 @@ static struct bpf_map *bpf_struct_ops_map_alloc(union bpf_attr *attr)
 	}
 
 	st_ops_desc = bpf_struct_ops_find_value(btf, attr->btf_vmlinux_value_type_id);
+	pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_map_alloc: find_value for type_id=%u -> desc=%p\n",
+		attr->btf_vmlinux_value_type_id, st_ops_desc);
 	if (!st_ops_desc) {
 		ret = -ENOTSUPP;
 		goto errout;
 	}
 
 	vt = st_ops_desc->value_type;
+	pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_map_alloc: val_sz check attr=%u, vt=%u\n",
+		attr->value_size, (u32)vt->size);
 	if (attr->value_size != vt->size) {
 		ret = -EINVAL;
 		goto errout;
