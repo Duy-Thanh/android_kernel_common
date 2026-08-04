@@ -8606,7 +8606,7 @@ static int bpf_object_unload(struct bpf_object *obj)
 
 	for (i = 0; i < obj->nr_maps; i++) {
 		zclose(obj->maps[i].fd);
-		if (obj->maps[i].st_ops)
+		if (obj->maps[i].st_ops && !obj->gen_loader)
 			zfree(&obj->maps[i].st_ops->kern_vdata);
 	}
 
