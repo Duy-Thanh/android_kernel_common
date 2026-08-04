@@ -1970,15 +1970,21 @@ int hyp_ffa_init(void *pages)
 	pages += KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE;
 
 	if (pkvm_ffa_unmap_on_lend()) {
-		if (num_pages < KVM_FFA_SPM_HANDLE_NR_PAGES)
+		u32 spm_handle_nr_pages;
+
+		BUILD_BUG_ON(sizeof(struct ffa_handle) != KVM_FFA_SPM_HANDLE_SIZE);
+
+		spm_handle_nr_pages = DIV_ROUND_UP(kvm_ffa_spm_nr_handles *
+						   sizeof(struct ffa_handle), PAGE_SIZE);
+
+		if (num_pages < spm_handle_nr_pages)
 			return -ENOMEM;
 
-		num_pages -= KVM_FFA_SPM_HANDLE_NR_PAGES;
+		num_pages -= spm_handle_nr_pages;
 		spm_handles = pages;
-		pages += KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE;
-		num_spm_handles = KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE /
-			sizeof(struct ffa_handle);
-		memset(spm_handles, -1, KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE);
+		pages += spm_handle_nr_pages * PAGE_SIZE;
+		num_spm_handles = kvm_ffa_spm_nr_handles;
+		memset(spm_handles, -1, spm_handle_nr_pages * PAGE_SIZE);
 	}
 
 	if (!num_pages)
