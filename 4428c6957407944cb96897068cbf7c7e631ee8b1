@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cb8ead_78410b6b",
+        "filename": "arch/x86/kvm/pkvm/panic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-04T12:00:48Z",
+      "side": 1,
+      "message": "Wondering if we need this declaration here, given that we can just use the original one from `linux/panic.h` (which we probably always include anyway)? Especially since the idea is that our implementation of `panic()` _must_ have the same signature as the original one (so this declaration here just duplicates the original one anyway).",
+      "revId": "4428c6957407944cb96897068cbf7c7e631ee8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
