@@ -6497,9 +6497,18 @@ static bool syscall_prog_is_valid_access(int off, int size,
 	return true;
 }
 
+/* To shut up -Wmissing-prototypes.
+ * This function is used by the kernel light skeleton
+ * to load bpf programs when modules are loaded or during kernel boot.
+ * See tools/lib/bpf/skel_internal.h
+ */
+int kern_sys_bpf(int cmd, union bpf_attr *attr, unsigned int size);
+
 BPF_CALL_3(bpf_sys_bpf, int, cmd, union bpf_attr *, attr, u32, attr_size)
 {
 	switch (cmd) {
+	case BPF_PROG_TEST_RUN:
+		return kern_sys_bpf(cmd, attr, attr_size);
 	case BPF_MAP_CREATE:
 	case BPF_MAP_DELETE_ELEM:
 	case BPF_MAP_UPDATE_ELEM:
@@ -6515,13 +6524,6 @@ BPF_CALL_3(bpf_sys_bpf, int, cmd, union bpf_attr *, attr, u32, attr_size)
 	}
 	return __sys_bpf(cmd, KERNEL_BPFPTR(attr), attr_size, KERNEL_BPFPTR(NULL), 0);
 }
-
-/* To shut up -Wmissing-prototypes.
- * This function is used by the kernel light skeleton
- * to load bpf programs when modules are loaded or during kernel boot.
- * See tools/lib/bpf/skel_internal.h
- */
-int kern_sys_bpf(int cmd, union bpf_attr *attr, unsigned int size);
 
 int kern_sys_bpf(int cmd, union bpf_attr *attr, unsigned int size)
 {
