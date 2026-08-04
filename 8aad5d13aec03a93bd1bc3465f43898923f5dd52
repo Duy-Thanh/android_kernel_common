@@ -33,6 +33,23 @@
       "message": "Respin Bug: b/542420450",
       "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260bd06b_26bd4440",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-04T16:11:37Z",
+      "side": 1,
+      "message": "This patch is not what was submitted to android17-6.18 since it doesn\u0027t remove the symbol from the exynos symbol list. Please rebased this on top of aosp/4208809 and reinstate the symbol removal from the exynos symbol list.",
+      "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
