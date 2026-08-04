@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846384a8_5dd70748",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-04T12:06:22Z",
+      "side": 1,
+      "message": "Just a note: we are also leveraging aosp/4045933 here.",
+      "revId": "5702c84dbc1c64a6b7a1a1cebbc48c6b438644a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
