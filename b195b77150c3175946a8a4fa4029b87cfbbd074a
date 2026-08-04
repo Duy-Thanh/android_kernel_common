@@ -177,6 +177,24 @@
       "parentUuid": "67e7580a_29a84ee7",
       "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e09e08f_bdf6d41d",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 12316,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-04T16:20:03Z",
+      "side": 1,
+      "message": "Yeah, that also makes sense to me.",
+      "parentUuid": "4a47fcec_14c39992",
+      "revId": "b195b77150c3175946a8a4fa4029b87cfbbd074a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
