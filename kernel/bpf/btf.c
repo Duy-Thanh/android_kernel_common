@@ -8717,10 +8717,12 @@ BPF_CALL_4(bpf_btf_find_by_name_kind, char *, name, int, name_sz, u32, kind, int
 			btf_put(btf);
 			return btf_obj_fd;
 		}
-		return ret | (((u64)btf_obj_fd) << 32);
-	}
-	if (ret > 0)
+		ret = ret | (((u64)btf_obj_fd) << 32);
+	} else if (ret > 0) {
 		btf_put(btf);
+	}
+	pr_info("[STRUCT_OPS_TRACE] bpf_btf_find_by_name_kind(name='%s', kind=%u, flags=%d) -> ret=0x%lx (btf_id=%u, btf_obj_fd=%d)\n",
+		name, kind, flags, ret, (u32)ret, btf_obj_fd);
 	return ret;
 }
 
@@ -9958,6 +9960,9 @@ bpf_struct_ops_find(struct btf *btf, u32 type_id)
 	unsigned int i;
 	u32 cnt;
 
+	pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_find: btf=%p type_id=%u tab=%p\n",
+		btf, type_id, btf ? btf->struct_ops_tab : NULL);
+
 	if (!type_id)
 		return NULL;
 	if (!btf->struct_ops_tab)
@@ -9966,10 +9971,13 @@ bpf_struct_ops_find(struct btf *btf, u32 type_id)
 	cnt = btf->struct_ops_tab->cnt;
 	st_ops_list = btf->struct_ops_tab->ops;
 	for (i = 0; i < cnt; i++) {
+		pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_find(type_id=%u): entry[%u] type_id=%u value_id=%u\n",
+			type_id, i, st_ops_list[i].type_id, st_ops_list[i].value_id);
 		if (st_ops_list[i].type_id == type_id)
 			return &st_ops_list[i];
 	}
 
+	pr_info("[STRUCT_OPS_TRACE] bpf_struct_ops_find(type_id=%u): not found in %u entries\n", type_id, cnt);
 	return NULL;
 }
 

@@ -1402,6 +1402,10 @@ static int map_create_alloc(union bpf_attr *attr, bpfptr_t uattr, struct bpf_ver
 	token_flag = attr->map_flags & BPF_F_TOKEN_FD;
 	attr->map_flags &= ~BPF_F_TOKEN_FD;
 
+	pr_info("[STRUCT_OPS_TRACE] map_create_alloc: map_type=%u key_sz=%u val_sz=%u max_ent=%u btf_vmlinux_id=%u key_id=%u val_id=%u map_flags=0x%x\n",
+		attr->map_type, attr->key_size, attr->value_size, attr->max_entries,
+		attr->btf_vmlinux_value_type_id, attr->btf_key_type_id, attr->btf_value_type_id, attr->map_flags);
+
 	if (attr->btf_vmlinux_value_type_id) {
 		if (attr->map_type != BPF_MAP_TYPE_STRUCT_OPS) {
 			bpf_log(log, "btf_vmlinux_value_type_id can only be used with struct_ops maps.\n");
@@ -1566,6 +1570,8 @@ static int map_create_alloc(union bpf_attr *attr, bpfptr_t uattr, struct bpf_ver
 		struct btf *btf;
 
 		btf = btf_get_by_fd(attr->btf_fd);
+		pr_info("[STRUCT_OPS_TRACE] map_create_alloc: btf_get_by_fd(btf_fd=%u) -> btf=%p (err=%ld)\n",
+			attr->btf_fd, btf, IS_ERR(btf) ? PTR_ERR(btf) : 0);
 		if (IS_ERR(btf)) {
 			bpf_log(log, "Invalid btf_fd.\n");
 			err = PTR_ERR(btf);
@@ -2927,6 +2933,9 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 
 	if (CHECK_ATTR(BPF_PROG_LOAD))
 		return -EINVAL;
+
+	pr_info("[STRUCT_OPS_TRACE] bpf_prog_load: type=%u attach_btf_id=%u attach_btf_obj_fd=%d expected_attach_type=%u\n",
+		attr->prog_type, attr->attach_btf_id, attr->attach_btf_obj_fd, attr->expected_attach_type);
 
 	if (attr->prog_flags & ~(BPF_F_STRICT_ALIGNMENT |
 				 BPF_F_ANY_ALIGNMENT |
