@@ -2353,8 +2353,12 @@ static void dwc3_gadget_enable_linksts_evts(struct dwc3 *dwc, bool set)
 static int dwc3_gadget_get_frame(struct usb_gadget *g)
 {
 	struct dwc3		*dwc = gadget_to_dwc(g);
+	int frame = __dwc3_gadget_get_frame(dwc);
 
-	return __dwc3_gadget_get_frame(dwc);
+	if (dwc->gadget->speed >= USB_SPEED_HIGH)
+		return frame >> 3;
+
+	return frame;
 }
 
 static int __dwc3_gadget_wakeup(struct dwc3 *dwc)
