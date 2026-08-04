@@ -1976,10 +1976,10 @@ int hyp_ffa_init(void *pages)
 
 		num_pages -= KVM_FFA_SPM_HANDLE_NR_PAGES;
 		spm_handles = pages;
-		pages += KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE;
-		num_spm_handles = KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE /
+		pages += kvm_ffa_spm_handle_nr_pages * PAGE_SIZE;
+		num_spm_handles = kvm_ffa_spm_handle_nr_pages * PAGE_SIZE /
 			sizeof(struct ffa_handle);
-		memset(spm_handles, -1, KVM_FFA_SPM_HANDLE_NR_PAGES * PAGE_SIZE);
+		memset(spm_handles, -1, kvm_ffa_spm_handle_nr_pages * PAGE_SIZE);
 	}
 
 	if (!num_pages)

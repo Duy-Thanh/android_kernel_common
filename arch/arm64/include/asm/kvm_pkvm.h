@@ -416,6 +416,8 @@ static inline unsigned long pkvm_selftest_pages(void) { return 0; }
 #define KVM_FFA_MBOX_NR_PAGES		1
 #define KVM_FFA_SPM_HANDLE_NR_PAGES	2
 
+extern u64 kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages);
+
 /*
  * Maximum number of constituents allowed in a descriptor. This number is
  * arbitrary, and can be overridden via command line kvm-arm.ffa_max_nr_constituents.
@@ -464,8 +466,10 @@ static inline unsigned long hyp_ffa_proxy_pages(void)
 	/* Plus a page each for the hypervisor's RX and TX mailboxes. */
 	num_pages = (2 * KVM_FFA_MBOX_NR_PAGES) + DIV_ROUND_UP(desc_max, PAGE_SIZE);
 
-	if (pkvm_ffa_unmap_on_lend())
-		num_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
+	if (pkvm_ffa_unmap_on_lend()) {
+                num_pages += kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages);
+                kvm_err("kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages): %llu\n", kvm_nvhe_sym(kvm_ffa_spm_handle_nr_pages));
+	}
 
 	return num_pages;
 }
