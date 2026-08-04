@@ -16,6 +16,23 @@
       "message": "Please cherry-pick \"https://android-review.googlesource.com/c/kernel/common/+/4208809\" first, and then cherry-pick this fix.",
       "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12bfc32f_cba766fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2026-08-04T06:06:09Z",
+      "side": 1,
+      "message": "Respin Bug: b/542420450",
+      "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
