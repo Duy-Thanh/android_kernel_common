@@ -33,6 +33,7 @@
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/sysrqcrash.h>
 #include <trace/hooks/timer.h>
+#include <trace/hooks/topology.h>
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/vmscan.h>
 /* keep-sorted end */
@@ -91,4 +92,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
 /* keep-sorted end */

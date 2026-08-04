@@ -25,6 +25,8 @@
 #include <asm/cputype.h>
 #include <asm/topology.h>
 
+#include <trace/hooks/topology.h>
+
 #ifdef CONFIG_ARM64_AMU_EXTN
 #define read_corecnt()	read_sysreg_s(SYS_AMEVCNTR0_CORE_EL0)
 #define read_constcnt()	read_sysreg_s(SYS_AMEVCNTR0_CONST_EL0)
@@ -119,6 +121,11 @@ static void amu_scale_freq_tick(void)
 	struct amu_cntr_sample *amu_sample = this_cpu_ptr(&cpu_amu_samples);
 	u64 prev_core_cnt, prev_const_cnt;
 	u64 core_cnt, const_cnt, scale;
+	bool use_amu_fie = true;
+
+	trace_android_vh_use_amu_fie(&use_amu_fie);
+	if(!use_amu_fie)
+		return;
 
 	prev_const_cnt = amu_sample->arch_const_cycles_prev;
 	prev_core_cnt = amu_sample->arch_core_cycles_prev;
