@@ -48,7 +48,14 @@
 #define TX_STOP_BIT_LEN_2		2
 
 /* SE_UART_RX_TRANS_CFG */
+<<<<<<< HEAD   (ecabcb178148adef16c434ec85610201f1443ad4 Merge 07bfd1acafa6 ("genetlink: Use internal flags for multi)
 #define UART_RX_PAR_EN			BIT(3)
+||||||| BASE   (07bfd1acafa6abbe1f094f8933ca89c02da3dea9 genetlink: Use internal flags for multicast groups)
+#define UART_RX_INS_STATUS_BIT	BIT(2)
+#define UART_RX_PAR_EN		BIT(3)
+=======
+#define UART_RX_PAR_EN			BIT(4)
+>>>>>>> BRANCH (768f665f3685b455ed686370ed7ccb852a125a3b ipvs: skip ipv6 extension headers for csum checks)
 
 /* SE_UART_RX_WORD_LEN */
 #define RX_WORD_LEN_MASK		GENMASK(9, 0)
@@ -71,8 +78,13 @@
 #define UART_START_TX			0x1
 /* UART S_CMD OP codes */
 #define UART_START_READ			0x1
+<<<<<<< HEAD   (ecabcb178148adef16c434ec85610201f1443ad4 Merge 07bfd1acafa6 ("genetlink: Use internal flags for multi)
 #define UART_PARAM			0x1
 #define UART_PARAM_RFR_OPEN		BIT(7)
+||||||| BASE   (07bfd1acafa6abbe1f094f8933ca89c02da3dea9 genetlink: Use internal flags for multicast groups)
+#define UART_PARAM		0x1
+=======
+>>>>>>> BRANCH (768f665f3685b455ed686370ed7ccb852a125a3b ipvs: skip ipv6 extension headers for csum checks)
 
 #define UART_OVERSAMPLING		32
 #define STALE_TIMEOUT			16
