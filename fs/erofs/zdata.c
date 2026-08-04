@@ -8,6 +8,7 @@
 #include <linux/psi.h>
 #include <linux/cpuhotplug.h>
 #include <trace/events/erofs.h>
+#include <trace/hooks/fs.h>
 
 #define Z_EROFS_PCLUSTER_MAX_PAGES	(Z_EROFS_PCLUSTER_MAX_SIZE / PAGE_SIZE)
 #define Z_EROFS_INLINE_BVECS		2
@@ -1656,9 +1657,10 @@ static void z_erofs_endio(struct bio *bio)
 	blk_status_t err = bio->bi_status;
 	struct folio_iter fi;
 
+	trace_android_vh_erofs_iostat_update(q->sb, bio);
+
 	bio_for_each_folio_all(fi, bio) {
 		struct folio *folio = fi.folio;
-
 		DBG_BUGON(folio_test_uptodate(folio));
 		DBG_BUGON(z_erofs_page_is_invalidated(&folio->page));
 		if (!erofs_folio_is_managed(EROFS_SB(q->sb), folio))
@@ -1732,9 +1734,10 @@ drain_io:
 					erofs_fileio_submit_bio(bio);
 				else if (erofs_is_fscache_mode(sb))
 					erofs_fscache_submit_bio(bio);
-				else
+				else {
+					trace_android_vh_erofs_iostat_submit(sb, bio);
 					submit_bio(bio);
-
+				}
 				if (memstall) {
 					psi_memstall_leave(&pflags);
 					memstall = 0;
@@ -1792,8 +1795,10 @@ drain_io:
 			erofs_fileio_submit_bio(bio);
 		else if (erofs_is_fscache_mode(sb))
 			erofs_fscache_submit_bio(bio);
-		else
+		else {
+			trace_android_vh_erofs_iostat_submit(sb, bio);
 			submit_bio(bio);
+		}
 	}
 	if (memstall)
 		psi_memstall_leave(&pflags);
