@@ -1732,6 +1732,7 @@
   __traceiter_android_vh_dump_throttled_rt_tasks
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_update_topology_flags_workfn
+  __traceiter_android_vh_use_amu_fie
   __traceiter_binder_transaction_received
   __traceiter_cpu_frequency
   __traceiter_cpu_frequency_limits
@@ -1772,6 +1773,7 @@
   __tracepoint_android_vh_dump_throttled_rt_tasks
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_update_topology_flags_workfn
+  __tracepoint_android_vh_use_amu_fie
   __tracepoint_binder_transaction_received
   __tracepoint_cpu_frequency
   __tracepoint_cpu_frequency_limits
