@@ -527,6 +527,15 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	WARN_ON(vma->vm_start >= addr);
 	WARN_ON(vma->vm_end <= addr);
 
+	if (unlikely(vma_shares_pagetables(vma))) {
+		/*
+		 * Validate alignment early before vma_prepare() so we can
+		 * return an error safely if unsharing would fail.
+		 */
+		if (!IS_ALIGNED(vma->vm_start, PMD_SIZE) ||
+		    !IS_ALIGNED(vma->vm_end, PMD_SIZE))
+			return -EINVAL;
+	}
 	if (vma->vm_ops && vma->vm_ops->may_split) {
 		err = vma->vm_ops->may_split(vma, addr);
 		if (err)
@@ -577,6 +586,13 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	init_vma_prep(&vp, vma);
 	vp.insert = new;
 	vma_prepare(&vp);
+
+	if (unlikely(vma_shares_pagetables(vma))) {
+		err = ptshare_unshare_vma_locked(vma);
+		/* If unshare failed, we can't easily recover here. */
+		WARN_ON_ONCE(err);
+		vm_flags_clear(new, VM_PT_SHARED);
+	}
 
 	/*
 	 * Get rid of huge pages and shared page tables straddling the split
