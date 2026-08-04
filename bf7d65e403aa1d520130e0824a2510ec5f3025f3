@@ -52,6 +52,24 @@
       "parentUuid": "0f8807b1_313d272e",
       "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c5806b_9ac2d3d6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-04T11:30:50Z",
+      "side": 1,
+      "message": "Right, I pushed a change so that we now keep track of the deviceId and the pfn of the ITT in the same set. I thought a bit more on it and I don\u0027t think we need to keep the size. I did the following changes:\n\n1. I dropped the mask that I introduced previously for tracking the deviceIds\n2. I moved the deviceId in the array where we track the pfns\n3. This will require more memory so I made the `pkvm_init_gic_its_emulation` get the number of pages for the its_priv_state memory. I updated patch (\"Add infra in ITS emulation setup\")\n4. I updated this patch to calculate the number of entries that we can accommodate in `pkvm_init_gic_its_emulation`.\n5. Now that the `donate_and_clear_host_page` expects the number of pages, I had to update patch `Add infrastructure for GICR emulation setup` to fix a minor build issue and pass the number of pages (1) used by the GICR priv state.",
+      "parentUuid": "10d75d8a_7e771ba8",
+      "revId": "bf7d65e403aa1d520130e0824a2510ec5f3025f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
