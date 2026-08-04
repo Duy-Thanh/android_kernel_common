@@ -22,6 +22,30 @@
       },
       "revId": "3f8dd1561e7c12dea947fcac33763deac9dddee4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f78d991_cd934bbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-08-04T01:59:13Z",
+      "side": 1,
+      "message": "Ack. Updated the commit message.",
+      "parentUuid": "947a837c_7775bb21",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "3f8dd1561e7c12dea947fcac33763deac9dddee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
