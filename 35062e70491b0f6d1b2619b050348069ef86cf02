@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089880c7_6986c787",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-04T18:12:13Z",
+      "side": 1,
+      "message": "Sizing the state from a page count makes sense now the tracker is bigger. I think the count needs a bound though, since the HVC takes it from the host and it reaches `__pkvm_host_donate_hyp()` unchecked. Zero survives the whole path: `range_is_memory(start, start)` tests `start - 1`, `___host_check_page_state_range()` loops zero times, and `pkvm_create_mappings_locked(virt, virt)` maps nothing, so `donate_and_clear_host_page()` returns 0 having donated and cleared nothing. `its_reg-\u003epriv` then points at a page the host still owns and can rewrite, which makes `its-\u003ebase` and the queue pointers host-chosen for the `readq`/`writeq` and `memcpy` in `cwriter_write()`. Could we reject a zero count here?",
+      "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a14b6d0_3720d38d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-08-04T18:12:13Z",
+      "side": 1,
+      "message": "`donate_and_clear_host_page()` now takes `priv_num_pages`, but the unwind still gives back one page:\n\n```\n      err_with_state:\n              WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(priv_state), 1));\n```\n\nso on a failure below it the rest stay hyp-owned while the caller frees the whole allocation, and the next host user of those pages takes a stage-2 abort. Should this be `priv_num_pages`?",
+      "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
