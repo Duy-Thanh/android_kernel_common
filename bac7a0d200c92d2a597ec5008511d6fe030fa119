@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4ce292_49da4b49",
+        "filename": "arch/x86/kernel/fpu/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-04T16:56:19Z",
+      "side": 1,
+      "message": "Just to understand: so, am I correct that here we still have a redundant WRMSR on the host side before entering a pVM (as we\u0027re gonna write the actual XFD on the pKVM side, at line 459 below), so we could potentially optimize that? (I\u0027m not suggesting to do that now, since I\u0027m not entirely sure how to do that correctly.)\n\nOr perhaps `__this_cpu_read(xfd_state) !\u003d xfd` in `xfd_update_state()` is almost never true here (on the host side), so there is nothing to optimize?\n\nWhat exactly is the value of XFD that we are writing here (on the host side) before entering a pVM?",
+      "revId": "bac7a0d200c92d2a597ec5008511d6fe030fa119",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
