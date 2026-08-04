@@ -527,6 +527,23 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	WARN_ON(vma->vm_start >= addr);
 	WARN_ON(vma->vm_end <= addr);
 
+	if (unlikely(vma_shares_pagetables(vma))) {
+		if (!IS_ALIGNED(vma->vm_start, PMD_SIZE) ||
+		    !IS_ALIGNED(vma->vm_end, PMD_SIZE))
+			return -EINVAL;
+		/*
+		 * Unshare before vma_prepare() takes the file rmap lock.
+		 * Unsharing takes the shadow mm's mmap_lock, and installing a
+		 * shared VMA takes i_mmap_rwsem under it (insert_vm_struct()),
+		 * so unsharing with i_mmap_rwsem held inverts that order.
+		 * Doing it here also lets a failure be returned before
+		 * anything has been modified, and @new is then duplicated
+		 * from an already private VMA.
+		 */
+		err = ptshare_unshare_vma_locked(vma);
+		if (err)
+			return err;
+	}
 	if (vma->vm_ops && vma->vm_ops->may_split) {
 		err = vma->vm_ops->may_split(vma, addr);
 		if (err)
@@ -577,6 +594,9 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	init_vma_prep(&vp, vma);
 	vp.insert = new;
 	vma_prepare(&vp);
+
+	/* Shared VMAs were unshared above, before any rmap lock was taken. */
+	VM_WARN_ON_ONCE(vma_shares_pagetables(vma) || vma_shares_pagetables(new));
 
 	/*
 	 * Get rid of huge pages and shared page tables straddling the split
