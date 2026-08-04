@@ -266,11 +266,16 @@ static int cros_ec_sensorhub_resume(struct device *dev)
 		 * massively historically delayed due to the lost silent overflows.
 		 *
 		 * We mathematically calculate exactly how many 71.5 minute epochs were
-		 * swallowed during sleep by dividing the AP's recorded sleep duration
-		 * against the overflow period. By forcefully injecting these missed
-		 * wraps directly into the running EC offset tracker, the EC timeline
-		 * snaps forward instantly and achieves active parity with the AP boottime,
-		 * completely avoiding fatal negative delta time-skew calculations.
+		 * swallowed during sleep by checking how many overflow boundaries
+		 * were crossed between the last pre-suspend EC timestamp and the
+		 * expected post-resume timestamp (last + sleep_duration). This ensures
+		 * that wraps occurring during suspends shorter than 71.5 minutes are
+		 * correctly accounted for.
+		 *
+		 * By forcefully injecting these missed wraps directly into the running
+		 * EC offset tracker, the EC timeline snaps forward instantly and
+		 * achieves active parity with the AP boottime, completely avoiding
+		 * fatal negative delta time-skew calculations.
 		 *
 		 * Lastly, massive suspend gaps (>500ms) inherently trigger the
 		 * TS_HISTORY_BORED_US fallback during the first post-resume sensor
@@ -281,11 +286,17 @@ static int cros_ec_sensorhub_resume(struct device *dev)
 		 */
 		u64 sleep_duration = ktime_to_us(ktime_sub(
 					ktime_get_boottime(), sensorhub->suspend_time));
+		u64 missed_overflows_a =
+			div64_u64(sensorhub->overflow_a.last + sleep_duration,
+				  1ULL << 32) -
+			div64_u64(sensorhub->overflow_a.last, 1ULL << 32);
+		u64 missed_overflows_b =
+			div64_u64(sensorhub->overflow_b.last + sleep_duration,
+				  1ULL << 32) -
+			div64_u64(sensorhub->overflow_b.last, 1ULL << 32);
 
-		u64 missed_overflows = div64_u64(sleep_duration, 1ULL << 32);
-
-		sensorhub->overflow_a.offset += (missed_overflows * (1ULL << 32));
-		sensorhub->overflow_b.offset += (missed_overflows * (1ULL << 32));
+		sensorhub->overflow_a.offset += missed_overflows_a * (1ULL << 32);
+		sensorhub->overflow_b.offset += missed_overflows_b * (1ULL << 32);
 
 		return cros_ec_sensorhub_ring_fifo_enable(sensorhub, true);
 	}
