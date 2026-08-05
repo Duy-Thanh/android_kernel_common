@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8917f2_ee208e96",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:06:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure this cmpxchg is not an overkill. We know this is only called during pKVM initialization, when we don\u0027t donate any pages to pVMs yet?\n\nSimilarly, in `pkvm_guest_mmu_setup()`, for example, we have just plain assignments.\n\nTo put it another way, if we are bothering with cmpxchg for setting `iommu_tlb_flush_fn`, why aren\u0027t we bothering with it for setting `pt_domain.qi_batch` (which is checked in `pkvm_intel_iommu_tlb_flush()` every time)?",
+      "revId": "08688a975bffad4217a7a3b510af9fb1e33da4a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7598ce77_62246778",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:06:19Z",
+      "side": 1,
+      "message": "nit: why add these functions here, before any other functions? Are they more important than anything else?\n\nIn this `mmu.c` file we tend to: 1. put all static function definitions before all non-static ones. 2. when adding a new static or non-static function, add it at the end after all other static or non-static functions (unless there is a particular reason to put it elsewhere). So, put `iommu_tlb_flush()` after `need_memcache_topup()`, and `(pkvm_)register_iommu_tlb_flush()` after `pkvm_host_unuse_dma()`?",
+      "revId": "08688a975bffad4217a7a3b510af9fb1e33da4a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
