@@ -41,6 +41,7 @@
 
 #include <linux/kernel_stat.h>
 #include <linux/mm.h>
+#include <linux/ptshare.h>
 #include <linux/mm_inline.h>
 #include <linux/sched/mm.h>
 #include <linux/sched/numa_balancing.h>
@@ -5371,6 +5372,14 @@ vm_fault_t do_set_pmd(struct vm_fault *vmf, struct folio *folio, struct page *pa
 	 */
 	if (thp_disabled_by_hw() || vma_thp_disabled(vma, vma->vm_flags,
 						     /* forced_collapse=*/ true))
+		return ret;
+
+	/*
+	 * Page table sharing requires sharing at the PTE level. Prevent
+	 * installing huge PMD mappings for shared VMAs or the shadow MM's
+	 * VMAs to preserve this invariant, falling back to PTE mappings instead.
+	 */
+	if (vma_shares_pagetables(vma) || mm_is_ptshare_shadow(vma->vm_mm))
 		return ret;
 
 	if (!thp_vma_suitable_order(vma, haddr, PMD_ORDER))

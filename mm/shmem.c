@@ -43,6 +43,7 @@
 #include <linux/unicode.h>
 #include <linux/mm_inline.h>
 #include <linux/page_size_compat.h>
+#include <linux/ptshare.h>
 #include "swap.h"
 
 #undef CREATE_TRACE_POINTS
@@ -1826,9 +1827,13 @@ unsigned long shmem_allowable_huge_orders(struct inode *inode,
 
 	global_orders = shmem_huge_global_enabled(inode, index, write_end,
 						  shmem_huge_force, vma, vm_flags);
+
 	/* Tmpfs huge pages allocation */
-	if (!vma || !vma_is_anon_shmem(vma))
+	if (!vma || !vma_is_anon_shmem(vma)) {
+		if (vma && (vma_shares_pagetables(vma) || mm_is_ptshare_shadow(vma->vm_mm)))
+			global_orders &= ~BIT(PMD_ORDER);
 		return global_orders;
+	}
 
 	/*
 	 * Following the 'deny' semantics of the top level, force the huge
@@ -1852,6 +1857,9 @@ unsigned long shmem_allowable_huge_orders(struct inode *inode,
 
 	if (global_orders > 0)
 		mask |= READ_ONCE(huge_shmem_orders_inherit);
+
+	if (vma && (vma_shares_pagetables(vma) || mm_is_ptshare_shadow(vma->vm_mm)))
+		mask &= ~BIT(PMD_ORDER);
 
 	return THP_ORDERS_ALL_FILE_DEFAULT & mask;
 }
