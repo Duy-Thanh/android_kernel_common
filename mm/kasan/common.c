@@ -106,9 +106,7 @@ void __kasan_unpoison_range(const void *address, size_t size)
 /* Unpoison the entire stack for a task. */
 void kasan_unpoison_task_stack(struct task_struct *task)
 {
-	void *base = task_stack_page(task);
-
-	kasan_unpoison(base, THREAD_SIZE, false);
+	kasan_unpoison(task_stack_base(task), task_stack_size(task), false);
 }
 
 /* Unpoison the stack for the current task beyond a watermark sp value. */
