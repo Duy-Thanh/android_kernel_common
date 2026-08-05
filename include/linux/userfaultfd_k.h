@@ -19,6 +19,7 @@
 #include <linux/swapops.h>
 #include <asm-generic/pgtable_uffd.h>
 #include <linux/hugetlb_inline.h>
+#include <linux/ptshare.h>
 
 /* The set of all possible UFFD-related VM flags. */
 #define __VM_UFFD_FLAGS (VM_UFFD_MISSING | VM_UFFD_WP | VM_UFFD_MINOR)
@@ -212,6 +213,9 @@ static inline bool vma_can_userfault(struct vm_area_struct *vma,
 				     vm_flags_t vm_flags,
 				     bool wp_async)
 {
+	if (vma_shares_pagetables(vma))
+		return false;
+
 	vm_flags &= __VM_UFFD_FLAGS;
 
 	if (vma->vm_flags & VM_DROPPABLE)
