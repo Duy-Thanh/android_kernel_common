@@ -29,7 +29,6 @@
 
 #include <trace/hooks/traps.h>
 #include <trace/hooks/gic.h>
-#include <trace/hooks/dtask.h>
 /*
  * Handle IRQ/context state management when entering from kernel mode.
  * Before this function is called it is not safe to call regular kernel code,
@@ -132,13 +131,11 @@ static __always_inline void __exit_to_user_mode(void)
 static __always_inline void exit_to_user_mode_prepare(struct pt_regs *regs)
 {
 	unsigned long flags;
-	int thread_lazy_resched_flag = 0;
 
 	local_daif_mask();
 
 	flags = read_thread_flags();
-	trace_android_vh_restore_curr_resched(&flags, &thread_lazy_resched_flag);
-	if (unlikely(flags & _TIF_WORK_MASK) || thread_lazy_resched_flag)
+	if (unlikely(flags & _TIF_WORK_MASK))
 		do_notify_resume(regs, flags);
 
 	lockdep_sys_exit();

@@ -1053,11 +1053,6 @@ static void update_deadline(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	 * The task has consumed its request, reschedule.
 	 */
 	if (cfs_rq->nr_running > 1) {
-		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
-
-		if (skip_preempt)
-			return;
-
 		resched_curr(rq_of(cfs_rq));
 		clear_buddies(cfs_rq, se);
 	}
@@ -5534,7 +5529,6 @@ static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
 static void
 entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 {
-	bool skip_preempt = false;
 	/*
 	 * Update run-time statistics of the 'current'.
 	 */
@@ -5552,11 +5546,6 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 	 * validating it and just reschedule.
 	 */
 	if (queued) {
-		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
-
-		if (skip_preempt)
-			return;
-
 		resched_curr(rq_of(cfs_rq));
 		return;
 	}
@@ -8439,11 +8428,6 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
 	return;
 
 preempt:
-	trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &ignore);
-
-	if (ignore)
-		return;
-
 	resched_curr(rq);
 }
 
