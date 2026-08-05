@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b496d21_4ad32415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-05T07:44:31Z",
+      "side": 1,
+      "message": "Yeah, with this issue being fixed https://android-review.googlesource.com/c/kernel/common/+/4208206, it is not pKVM\u0027s fault. 😊",
+      "revId": "9bdaf837fe8aea3680af526af033850c8d862bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
