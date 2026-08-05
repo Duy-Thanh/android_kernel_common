@@ -72,6 +72,11 @@ static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
 	return mm_flags_test(MMF_PTSHARE_SHADOW, mm);
 }
 
+void ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
+void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
+
+unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
+				  unsigned long len, unsigned long vm_flags);
 /**
  * ptdesc_get - Increment reference count on a page table descriptor
  * @pt: The page table descriptor.
@@ -141,6 +146,24 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
 {
 	return false;
+}
+
+static inline void ptshare_get_vma(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+}
+
+static inline void ptshare_put_vma(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+}
+
+static inline unsigned long ptshare_install_vma(struct mm_struct *mm,
+						unsigned long addr,
+						unsigned long len,
+						unsigned long vm_flags)
+{
+	return addr;
 }
 
 static inline void ptdesc_get(struct ptdesc *pt)

@@ -13,7 +13,9 @@
  */
 #include <linux/ptshare.h>
 #include <linux/mm_types.h>
+#include <linux/file.h>
 #include <linux/mmap_lock.h>
+#include <linux/mempolicy.h>
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
@@ -21,4 +23,180 @@ int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 	if (vma_shares_pagetables(vma))
 		return -EINVAL;
 	return 0;
+}
+
+/*
+ * ptshare_dup_vma - Create a new shadow VMA for the ptshare_mm.
+ *
+ * Since we are cloning a client VMA, we must ensure it is isolated
+ * from the client's locking structures, and process-specific metadata.
+ */
+static inline struct vm_area_struct *ptshare_dup_vma(struct vm_area_struct *vma,
+						 struct mm_struct *ptshare_mm)
+{
+	struct vm_area_struct *ptshare_vma = vm_area_dup(vma);
+
+	if (!ptshare_vma)
+		return NULL;
+
+	if (vma_dup_policy(vma, ptshare_vma)) {
+		vm_area_free(ptshare_vma);
+		return NULL;
+	}
+
+	/* Set the shared mm for the ptshare shadow VMA */
+	ptshare_vma->vm_mm = ptshare_mm;
+
+	/*
+	 * Clear the shared page table flag, this will be used by
+	 * rmap walks to determine that ptshare_mm VMAs are candidate
+	 * for rmap lookups.
+	 *
+	 * Also clear VM_ACCOUNT to prevent double accounting and
+	 * committed memory underflow during teardown.
+	 *
+	 * Use lockless vm_flags_init() to avoid corrupting VMA lock state
+	 * of the newly duplicated VMA.
+	 */
+	vm_flags_init(ptshare_vma, vma->vm_flags &
+			~(VM_PT_SHARED | VM_ACCOUNT | VM_LOCKED | VM_LOCKONFAULT));
+
+	/* Initialize the refcount for this shared VMA */
+	refcount_set(vma_ptshare_refcount(ptshare_vma), 1);
+
+	return ptshare_vma;
+}
+
+static inline int __ptshare_install_vma(struct vm_area_struct *vma)
+{
+	unsigned long len = vma->vm_end - vma->vm_start;
+	unsigned long addr = vma->vm_start;
+	struct vm_area_struct *ptshare_vma;
+	struct ptshare_desc *desc = vma_ptshare_desc(vma);
+	struct mm_struct *ptshare_mm;
+	int ret = 0;
+
+	if (unlikely(!desc))
+		return -EINVAL;
+
+	ptshare_mm = desc->ptshare_mm;
+
+	mmap_assert_write_locked(vma->vm_mm);
+	mmap_write_lock(ptshare_mm);
+
+	/* Re-check for overlap while holding the write lock */
+	ptshare_vma = find_vma_intersection(ptshare_mm, addr, addr + len);
+	if (ptshare_vma) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	ptshare_vma = ptshare_dup_vma(vma, ptshare_mm);
+	if (!ptshare_vma) {
+		ret = -ENOMEM;
+		goto unlock;
+	}
+
+	/*
+	 * Increment the file reference count and notify any device-specific
+	 * VMA open hooks to ensure the shared VMA is properly tracked.
+	 */
+	if (ptshare_vma->vm_file)
+		get_file(ptshare_vma->vm_file);
+
+	if (ptshare_vma->vm_ops && ptshare_vma->vm_ops->open)
+		ptshare_vma->vm_ops->open(ptshare_vma);
+
+	ret = insert_vm_struct(ptshare_mm, ptshare_vma);
+	if (ret)
+		goto put_file;
+
+	vm_stat_account(ptshare_mm, ptshare_vma->vm_flags, vma_pages(ptshare_vma));
+	goto unlock;
+
+put_file:
+	if (ptshare_vma->vm_ops && ptshare_vma->vm_ops->close)
+		ptshare_vma->vm_ops->close(ptshare_vma);
+
+	if (ptshare_vma->vm_file)
+		fput(ptshare_vma->vm_file);
+
+	mpol_put(vma_policy(ptshare_vma));
+
+	vm_area_free(ptshare_vma);
+
+unlock:
+	mmap_write_unlock(ptshare_mm);
+
+	return ret;
+}
+
+unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
+				 unsigned long len, unsigned long vm_flags)
+{
+	int install_err, unmap_err;
+	struct vm_area_struct *vma;
+	struct ptshare_desc *desc;
+	int err = -EINVAL;
+
+	mmap_assert_write_locked(mm);
+
+	if (!(vm_flags & VM_PT_SHARED))
+		return addr;
+
+	if (IS_ERR_VALUE(addr))
+		return addr;
+
+	vma = vma_lookup(mm, addr);
+
+	/* This VMA was just installed by do_mmap() and the write lock is still held */
+	if (WARN_ON_ONCE(!vma))
+		return -EINVAL;
+
+	/* Enforce remaining invariants on the installed VMA */
+	if (!vma->vm_file || vma_is_anonymous(vma) ||
+	    (vma->vm_flags & (VM_PFNMAP | VM_MIXEDMAP | VM_DONTCOPY)))
+		goto out_unmap;
+
+	desc = mm->ptshare_desc;
+	if (WARN_ON_ONCE(!desc))
+		goto out_unmap;
+
+	/* mm must refer to the private client MM */
+	if (WARN_ON_ONCE(mm == desc->ptshare_mm))
+		goto out_unmap;
+
+	/* Initialize VMA's descriptor pointer */
+	vma_set_ptshare_desc(vma, desc);
+
+	install_err = __ptshare_install_vma(vma);
+	if (!install_err)
+		return addr;
+
+	err = install_err;
+
+out_unmap:
+	vm_flags_clear(vma, VM_PT_SHARED);
+	unmap_err = do_munmap(mm, addr, len, NULL);
+	if (WARN_ON_ONCE(unmap_err)) {
+		/*
+		 * Rollback failed. We are in a bad state: the VMA is still
+		 * mapped in the client MM but its VM_PT_SHARED flag has been
+		 * cleared, meaning it is now a private mapping. Since we
+		 * return the installation error to userspace, userspace will
+		 * assume the mmap failed, leading to a resource leak and
+		 * address space inconsistency.
+		 *
+		 * This is extremely unlikely to happen because:
+		 * 1. The mmap write lock is held throughout the operation.
+		 * 2. Merging of shared VMAs is disabled, so this VMA matches
+		 *    the unmap range exactly. No splitting is required,
+		 *    ruling out ENOMEM during do_munmap().
+		 *
+		 * We still return the original error (err) to propagate the
+		 * root cause of the failure.
+		 */
+	}
+
+	return err;
 }
