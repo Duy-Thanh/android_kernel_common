@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0240ddd1_8484b2ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-05T17:59:07Z",
+      "side": 1,
+      "message": "Overriding Lint as the BUG() cases means things went pretty wrong, and keeps it consistent with android17-6.18",
+      "revId": "a57ff2fe057975de1ece138a7a55dc15958505d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
