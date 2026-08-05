@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095c69f8_6e35f67c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-05T07:48:47Z",
+      "side": 1,
+      "message": "This isn\u0027t merged on android17 yet.\n\nIf you have tested the original patch, please +1 it so we can proceed.",
+      "revId": "ae90e3e4f12c864dc40f48434d34bff6039f894e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
