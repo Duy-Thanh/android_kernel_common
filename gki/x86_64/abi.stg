@@ -332969,8 +332969,8 @@ elf_symbol {
   name: "snd_soc_acpi_intel_ptl_sdw_machines"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x2c1bc36b
-  type_id: 0x94fd264d
+  crc: 0x2d434923
+  type_id: 0x0e3dbb55
   full_name: "snd_soc_acpi_intel_ptl_sdw_machines"
 }
 elf_symbol {
@@ -334493,6 +334493,15 @@ elf_symbol {
   crc: 0xae11e5d6
   type_id: 0x3026afc1
   full_name: "strchr"
+}
+elf_symbol {
+  id: 0x9dd5c94f
+  name: "strchrnul"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xae11e5d6
+  type_id: 0x3026afc1
+  full_name: "strchrnul"
 }
 elf_symbol {
   id: 0xe1ae099f
@@ -344354,6 +344363,7 @@ interface {
   symbol_id: 0xa11350be
   symbol_id: 0x1737916a
   symbol_id: 0xfcf064a9
+  symbol_id: 0x9dd5c94f
   symbol_id: 0xe1ae099f
   symbol_id: 0x54bdcaa9
   symbol_id: 0x81366fa1
