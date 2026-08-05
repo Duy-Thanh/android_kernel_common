@@ -422,6 +422,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9aaa0d_e4c83ad2",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:10:30Z",
+      "side": 1,
+      "message": "I guess we can resolve this comment, since, in particular, since Chuanxiao\u0027s fix aosp/4076366 pkvm_free_iommu_domain() holds iommu_domain_lock while dropping the refcount and removing the domain from the hashtable.",
+      "parentUuid": "5c4cb863_c081e54e",
+      "revId": "f61cd346baefda5f6e40c03dde01678520eaf417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8d480db_45642ebb",

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662217cc_9f8089b2",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:10:30Z",
+      "side": 1,
+      "message": "The host driver has `cache_tag_flush_all()` helper doing exactly this, we could use it?",
+      "fixSuggestions": [
+        {
+          "fixId": "95e7d8be_77cb10ae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/domain.c",
+              "range": {
+                "startLine": 322,
+                "startChar": 0,
+                "endLine": 324,
+                "endChar": 0
+              },
+              "replacement": "\tcache_tag_flush_all(domain);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6be48bfe04141798b50001a66a4496fc14dbb083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ae4b6b_d2d4b783",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:10:30Z",
+      "side": 1,
+      "message": "What\u0027s the reason for introducing this variable (and removing it in the next patch)?",
+      "revId": "6be48bfe04141798b50001a66a4496fc14dbb083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6ca4b1_27949e14",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:10:30Z",
+      "side": 1,
+      "message": "Is the host actually using this hypercall for page-selective flushes in any cases?\n\nIIUC it is only used for lazy flushes which always flush the whole domain?\n\nIf so, maybe we should remove `start`, `last` and `ih` parameters from the hypercall, thus simplify its interface and the logic here?",
+      "revId": "6be48bfe04141798b50001a66a4496fc14dbb083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
