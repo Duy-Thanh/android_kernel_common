@@ -212,6 +212,8 @@ struct bpf_struct_ops {
 	 * from "data".
 	 */
 	void *kern_vdata;
+	int kern_val_sz_off;
+	int attach_type_id_off;
 	__u32 type_id;
 };
 
