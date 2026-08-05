@@ -37,6 +37,7 @@
 #include <linux/perf_event.h>
 #include <linux/audit.h>
 #include <linux/khugepaged.h>
+#include <linux/ptshare.h>
 #include <linux/uprobes.h>
 #include <linux/notifier.h>
 #include <linux/memory.h>
@@ -565,6 +566,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	pgoff = __bpf_pgoff_fixup(file, pgoff);
 
 	addr = mmap_region(file, addr, len, vm_flags, pgoff, uf);
+	addr = ptshare_install_vma(mm, addr, len, vm_flags);
 	if (!IS_ERR_VALUE(addr) &&
 	    ((vm_flags & VM_LOCKED) ||
 	     (flags & (MAP_POPULATE | MAP_NONBLOCK)) == MAP_POPULATE))

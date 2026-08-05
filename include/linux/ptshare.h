@@ -74,6 +74,26 @@ static inline void vma_set_ptshare_desc(struct vm_area_struct *vma,
 	vma->__vm_ptshare_desc = desc;
 }
 
+/**
+ * ptshare_attach_desc - Attach the domain descriptor to a new client VMA.
+ * @vma: The new VMA, not yet visible in the VMA tree or the file's i_mmap.
+ *
+ * Called from mmap before the VMA is published, so that no page table
+ * walker or fault can observe VM_PT_SHARED without a descriptor.
+ * ptshare_install_vma() creates the shadow VMA afterwards, or rolls the
+ * mapping back if installation fails.
+ */
+static inline void ptshare_attach_desc(struct vm_area_struct *vma)
+{
+	struct mm_struct *mm = vma->vm_mm;
+
+	if (!(vma->vm_flags & VM_PT_SHARED))
+		return;
+
+	vma_set_ptshare_desc(vma, rcu_dereference_protected(mm->ptshare_desc,
+				lockdep_is_held(&mm->mmap_lock)));
+}
+
 static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
 {
 	/* Shadow VMAs are in a ptshare_mm and do NOT have VM_PT_SHARED set */
@@ -96,6 +116,11 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return &vma->__vm_ptshare_refcount;
 }
 
+void ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
+void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
+
+unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
+				  unsigned long len, unsigned long vm_flags);
 /**
  * ptdesc_get - Increment reference count on a page table descriptor
  * @pt: The page table descriptor.
@@ -172,6 +197,10 @@ static inline void vma_set_ptshare_desc(struct vm_area_struct *vma,
 {
 }
 
+static inline void ptshare_attach_desc(struct vm_area_struct *vma)
+{
+}
+
 static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
 {
 	return NULL;
@@ -180,6 +209,24 @@ static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
 static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_struct *vma)
 {
 	return NULL;
+}
+
+static inline void ptshare_get_vma(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+}
+
+static inline void ptshare_put_vma(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+}
+
+static inline unsigned long ptshare_install_vma(struct mm_struct *mm,
+						unsigned long addr,
+						unsigned long len,
+						unsigned long vm_flags)
+{
+	return addr;
 }
 
 static inline void ptdesc_get(struct ptdesc *pt)
