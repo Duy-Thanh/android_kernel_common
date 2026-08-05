@@ -18,6 +18,7 @@
 #include <linux/mempolicy.h>
 #include <linux/slab.h>
 #include <linux/sched/mm.h>
+#include <linux/mmu_notifier.h>
 
 struct ptshare_desc *ptshare_alloc_desc(void)
 {
@@ -94,9 +95,123 @@ void ptshare_free_desc_rcu(struct ptshare_desc *desc)
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
-	mmap_assert_write_locked(vma->vm_mm);
-	if (vma_shares_pagetables(vma))
+	struct mm_struct *mm = vma->vm_mm;
+	unsigned long addr;
+	struct mmu_notifier_range range;
+
+	mmap_assert_write_locked(mm);
+
+	if (!vma_shares_pagetables(vma))
+		return 0;
+
+	if (WARN_ON_ONCE(!IS_ALIGNED(vma->vm_start, PMD_SIZE)) ||
+	    WARN_ON_ONCE(!IS_ALIGNED(vma->vm_end, PMD_SIZE)))
 		return -EINVAL;
+
+	vma_start_write(vma);
+
+	/*
+	 * Notify secondary MMUs (like KVM or IOMMUs) that we are clearing these
+	 * page table entries. This ensures they invalidate their shadow mappings
+	 * and don't continue to access the shared page tables stale.
+	 */
+	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm,
+				vma->vm_start, vma->vm_end);
+	mmu_notifier_invalidate_range_start(&range);
+
+	addr = vma->vm_start;
+	while (addr < vma->vm_end) {
+		pgd_t *pgd;
+		p4d_t *p4d;
+		pud_t *pud;
+		pmd_t *pmd;
+
+		pgd = pgd_offset(mm, addr);
+		if (pgd_none(*pgd) || unlikely(pgd_bad(*pgd))) {
+			addr = pgd_addr_end(addr, vma->vm_end);
+			continue;
+		}
+		p4d = p4d_offset(pgd, addr);
+		if (p4d_none(*p4d) || unlikely(p4d_bad(*p4d))) {
+			addr = p4d_addr_end(addr, vma->vm_end);
+			continue;
+		}
+		pud = pud_offset(p4d, addr);
+		if (pud_none(*pud) || unlikely(pud_bad(*pud))) {
+			addr = pud_addr_end(addr, vma->vm_end);
+			continue;
+		}
+		pmd = pmd_offset(pud, addr);
+		if (pmd_none(*pmd)) {
+			addr += PMD_SIZE;
+			continue;
+		}
+
+		{
+			spinlock_t *ptl;
+			pte_t *pte;
+
+			/*
+			 * We hold mmap_lock write lock, which serializes us with other
+			 * structural page table writers (e.g. munmap, mprotect) in this MM.
+			 *
+			 * However, we must still serialize with concurrent readers/walkers
+			 * (like rmap walkers or page faults) who only hold the mmap_lock
+			 * for reading and could be actively walking the PTEs.
+			 *
+			 * Locking the PTL (PTE page lock) ensures that any active walker
+			 * on this range either finishes before we clear the PMD, or
+			 * detects the cleared PMD and aborts after we release the lock.
+			 */
+			pte = pte_offset_map_lock(mm, pmd, addr, &ptl);
+			if (pte) {
+				pmd_t pmdval = *pmd;
+				struct ptdesc *ptdesc;
+
+				if (WARN_ON_ONCE(pmd_trans_huge(pmdval))) {
+					pte_unmap_unlock(pte, ptl);
+					addr += PMD_SIZE;
+					continue;
+				}
+
+				ptdesc = page_ptdesc(pmd_page(pmdval));
+				pmd_clear(pmd);
+				mm_dec_nr_ptes(mm);
+				pte_unmap_unlock(pte, ptl);
+
+				ptdesc_put(ptdesc);
+			}
+		}
+		addr += PMD_SIZE;
+	}
+
+	/*
+	 * We cleared the PMDs but we don't free the page table pages here
+	 * (they are owned by shadow MM). So we don't need mmu_gather.
+	 *
+	 * We must flush the TLB of the client MM before releasing the VMA
+	 * reference to ensure no CPUs hold stale TLB entries.
+	 *
+	 * GUP-fast (lockless page table walkers) are safe because:
+	 * 1. GUP-fast disables interrupts (acting as RCU read lock).
+	 * 2. The page table page is eventually freed by shadow MM using
+	 *    mmu_gather with RCU-delayed free (call_rcu).
+	 * So the page table page won't be freed until GUP-fast finishes.
+	 *
+	 * Furthermore, GUP-fast will not get wrong/corrupted pages:
+	 * Since we only detach the page table page without modifying its
+	 * PTEs, any in-flight GUP-fast walker that read the PMD before it
+	 * was cleared will still resolve to the correct, unmodified
+	 * read-only file pages. GUP-fast with write intent will naturally
+	 * fail on the read-only PTEs and fallback to the slow path.
+	 */
+	flush_tlb_range(vma, vma->vm_start, vma->vm_end);
+
+	mmu_notifier_invalidate_range_end(&range);
+
+	ptshare_put_vma(vma, vma_ptshare_desc(vma));
+	vm_flags_clear(vma, VM_PT_SHARED);
+
 	return 0;
 }
 
