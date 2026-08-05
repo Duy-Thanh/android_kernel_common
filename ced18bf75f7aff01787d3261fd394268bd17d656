@@ -16,6 +16,24 @@
       "message": "nit: maybe make it more clear in the commit title that this is about vmexit trace? e.g. maybe \u0027pKVM: x86: trace:`?\n\n(BTW if so, maybe use the same `pKVM: x86: trace:` prefix in the previous patch as well?)",
       "revId": "ced18bf75f7aff01787d3261fd394268bd17d656",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71dbc466_5a125f6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-05T08:20:06Z",
+      "side": 1,
+      "message": "Sure, will update.",
+      "parentUuid": "267ae785_070180d4",
+      "revId": "ced18bf75f7aff01787d3261fd394268bd17d656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
