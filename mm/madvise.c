@@ -16,6 +16,7 @@
 #include <linux/page_idle.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/hugetlb.h>
+#include <linux/ptshare.h>
 #include <linux/falloc.h>
 #include <linux/fadvise.h>
 #include <linux/sched.h>
@@ -1642,6 +1643,15 @@ static bool try_vma_read_lock(struct madvise_behavior *madv_behavior)
 	if (!vma)
 		goto take_mmap_read_lock;
 	/*
+	 * Fall back to mmap read lock if we need to unshare. We will
+	 * upgrade to write lock dynamically in the walk loop.
+	 */
+	if (vma_shares_pagetables(vma) && ptshare_behavior_needs_unshare(madv_behavior->behavior)) {
+		vma_end_read(vma);
+		goto take_mmap_read_lock;
+	}
+
+	/*
 	 * Must span only a single VMA; uffd and remote processes are
 	 * unsupported.
 	 */
@@ -1658,6 +1668,8 @@ take_mmap_read_lock:
 	madv_behavior->lock_mode = MADVISE_MMAP_READ_LOCK;
 	return false;
 }
+
+static enum madvise_lock_mode get_lock_mode(struct madvise_behavior *madv_behavior);
 
 /*
  * Walk the vmas in range [start,end), and call the madvise_vma_behavior
@@ -1698,6 +1710,60 @@ int madvise_walk_vmas(struct madvise_behavior *madv_behavior)
 		/* Still start < end. */
 		if (!vma)
 			return -ENOMEM;
+
+		if (vma->vm_start < last_end &&
+		    vma_shares_pagetables(vma) &&
+		    ptshare_behavior_needs_unshare(madv_behavior->behavior)) {
+			/*
+			 * Since unsharing requires holding the mmap_lock for writing,
+			 * upgrade the lock if we currently only hold it for reading.
+			 * We must drop the read lock before acquiring the write lock,
+			 * which requires re-looking up the VMA to handle concurrent
+			 * layout changes, and restarting the loop iteration.
+			 *
+			 * Note: for MADV_DONTNEED and MADV_DONTNEED_LOCKED the
+			 * mmu_gather set up by madvise_init_tlb() spans the whole
+			 * walk, so entries zapped from earlier VMAs may still be
+			 * queued. Dropping the lock is still safe: queued pages stay
+			 * referenced until tlb_finish_mmu(), and tlb_gather_mmu()
+			 * raised mm->tlb_flush_pending, so concurrent flushers see
+			 * mm_tlb_flush_nested() and flush the whole mm. The per-VMA
+			 * lock and userfaultfd_remove() paths rely on the same rule.
+			 */
+			if (madv_behavior->lock_mode != MADVISE_MMAP_WRITE_LOCK) {
+				mmap_read_unlock(mm);
+				if (mmap_write_lock_killable(mm)) {
+					/*
+					 * No lock is held now; keep madvise_unlock()
+					 * from releasing one.
+					 */
+					madv_behavior->lock_mode = MADVISE_NO_LOCK;
+					return -EINTR;
+				}
+				madv_behavior->lock_mode = MADVISE_MMAP_WRITE_LOCK;
+				vma = find_vma_prev(mm, range->start, &prev);
+				if (vma && range->start > vma->vm_start)
+					prev = vma;
+				continue;
+			}
+			error = ptshare_unshare_vma_locked(vma);
+			if (error)
+				return error;
+
+			/* Downgrade back to read lock for the rest of the path */
+			mmap_write_downgrade(mm);
+			madv_behavior->lock_mode = MADVISE_MMAP_READ_LOCK;
+		} else if (madv_behavior->lock_mode == MADVISE_MMAP_WRITE_LOCK &&
+			   get_lock_mode(madv_behavior) != MADVISE_MMAP_WRITE_LOCK) {
+			/*
+			 * We hold the write lock (from a previous upgrade) but
+			 * the VMA is no longer shared (due to a race) and the
+			 * behavior itself doesn't need it. Downgrade back to
+			 * read lock.
+			 */
+			mmap_write_downgrade(mm);
+			madv_behavior->lock_mode = MADVISE_MMAP_READ_LOCK;
+		}
 
 		/* Here start < (last_end|vma->vm_end). */
 		if (range->start < vma->vm_start) {
@@ -1806,9 +1872,11 @@ static void madvise_unlock(struct madvise_behavior *madv_behavior)
 	case  MADVISE_NO_LOCK:
 		return;
 	case MADVISE_MMAP_WRITE_LOCK:
+		mmap_assert_write_locked(mm);
 		mmap_write_unlock(mm);
 		break;
 	case MADVISE_MMAP_READ_LOCK:
+		mmap_assert_locked(mm);
 		mmap_read_unlock(mm);
 		break;
 	case MADVISE_VMA_READ_LOCK:
