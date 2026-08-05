@@ -334495,6 +334495,15 @@ elf_symbol {
   full_name: "strchr"
 }
 elf_symbol {
+  id: 0x9dd5c94f
+  name: "strchrnul"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xae11e5d6
+  type_id: 0x3026afc1
+  full_name: "strchrnul"
+}
+elf_symbol {
   id: 0xe1ae099f
   name: "strcmp"
   is_defined: true
@@ -344354,6 +344363,7 @@ interface {
   symbol_id: 0xa11350be
   symbol_id: 0x1737916a
   symbol_id: 0xfcf064a9
+  symbol_id: 0x9dd5c94f
   symbol_id: 0xe1ae099f
   symbol_id: 0x54bdcaa9
   symbol_id: 0x81366fa1
