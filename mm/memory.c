@@ -4069,6 +4069,16 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 	struct folio *folio = NULL;
 	pte_t pte;
 
+	/*
+	 * Shared page table VMAs are unshared prior to write modifications
+	 * (e.g. mprotect, mremap, GUP write). Assert as a safety guard
+	 * to prevent CoW operations on shared page tables.
+	 */
+	if (WARN_ON_ONCE(vma_shares_pagetables(vma))) {
+		pte_unmap_unlock(vmf->pte, vmf->ptl);
+		return VM_FAULT_SIGSEGV;
+	}
+
 	if (likely(!unshare)) {
 		if (userfaultfd_pte_wp(vma, ptep_get(vmf->pte))) {
 			if (!userfaultfd_wp_async(vma)) {
@@ -5800,6 +5810,14 @@ static vm_fault_t do_cow_fault(struct vm_fault *vmf)
 	struct vm_area_struct *vma = vmf->vma;
 	struct folio *folio;
 	vm_fault_t ret;
+
+	/*
+	 * Shared page table VMAs are unshared prior to write modifications
+	 * (e.g. mprotect, mremap, GUP write). Assert as a safety guard
+	 * to prevent CoW operations on shared page tables.
+	 */
+	if (WARN_ON_ONCE(vma_shares_pagetables(vma)))
+		return VM_FAULT_SIGSEGV;
 
 	ret = vmf_can_call_fault(vmf);
 	if (!ret)
