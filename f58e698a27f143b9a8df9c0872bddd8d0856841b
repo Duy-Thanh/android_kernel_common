@@ -68,6 +68,24 @@
       "message": "Just posted the change to android14-5.15 as well, thanks!",
       "revId": "f58e698a27f143b9a8df9c0872bddd8d0856841b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f01d471_fd7a4b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-05T22:48:27Z",
+      "side": 1,
+      "message": "The way to prevent your patch from being lost in the sea of open patches is to file a bug via the issuetracker/buganizer and add a \"Bug: XXXXX\" tag to the commit message. This also gives you a way to express priority and communicate privately with Google.",
+      "parentUuid": "dd7c288e_71417131",
+      "revId": "f58e698a27f143b9a8df9c0872bddd8d0856841b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
