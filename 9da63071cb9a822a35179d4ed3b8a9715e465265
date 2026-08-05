@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c5b0ba_832a9823",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-05T16:21:39Z",
+      "side": 1,
+      "message": "Not related to this cl, but should we be using `exit_reason.basic`? I am not sure if any of the other bits in full would clobber the basic reasons we are checking here\n\n```\n\t\tu32\tbus_lock_detected\t: 1;\n\t\tu32\tenclave_mode\t\t: 1;\n\t\tu32\tsmi_pending_mtf\t\t: 1;\n\t\tu32\tsmi_from_vmx_root\t: 1;\n\t\tu32\treserved30\t\t: 1;\n\t\tu32\tfailed_vmentry\t\t: 1;\n```\n\nI guess we don\u0027t need to worry about any of the above fields being set with current pKVM implementation, but would be correct to use exit_reason.basic for future proofing",
+      "fixSuggestions": [
+        {
+          "fixId": "6e97621c_7b3bdd2d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": "\tswitch (vt-\u003eexit_reason.basic) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
