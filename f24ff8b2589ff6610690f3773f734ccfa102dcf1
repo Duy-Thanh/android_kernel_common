@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd7df64_00d335e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-05T15:37:44Z",
+      "side": 1,
+      "message": "Symbol list changes must be in a separate patch on top of this one (and should be to the Xiaomi symbol list, not pixel)",
+      "revId": "f24ff8b2589ff6610690f3773f734ccfa102dcf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb67266_b6182b64",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 1
+      },
+      "lineNbr": 2804,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-05T15:37:44Z",
+      "side": 1,
+      "message": "Why are you updating the pixel symbol list? You should only be adding new symbols to your own symbol list.",
+      "revId": "f24ff8b2589ff6610690f3773f734ccfa102dcf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
