@@ -1786,7 +1786,7 @@ static void kmemleak_scan(void)
 		for_each_process_thread(g, p) {
 			void *stack = try_get_task_stack(p);
 			if (stack) {
-				scan_block(stack, stack + THREAD_SIZE, NULL);
+				scan_block(task_stack_base(p), task_stack_end(p), NULL);
 				put_task_stack(p);
 			}
 		}
