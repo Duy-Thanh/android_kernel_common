@@ -2,6 +2,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/mm.h>
+#include <linux/ptshare.h>
 #include <linux/sched.h>
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
@@ -1729,6 +1730,9 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 		spinlock_t *ptl;
 		bool success = false;
 
+		if (vma_is_ptshare_client(vma) || mm_is_ptshare_shadow(vma->vm_mm))
+			continue;
+
 		/*
 		 * Check vma->anon_vma to exclude MAP_PRIVATE mappings that
 		 * got written to. These VMAs are likely not worth removing
@@ -1789,8 +1793,14 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 		 * to have inserted ptes or markers.  Now that we hold ptlock,
 		 * repeating the anon_vma check protects from one category,
 		 * and repeating the userfaultfd_wp() check from another.
+		 *
+		 * The ptshare check above also ran without the mmap_lock.
+		 * Repeat it, and never retract a table that is shared with
+		 * other mms: the shadow MM owns it.
 		 */
-		if (likely(!vma->anon_vma && !userfaultfd_wp(vma))) {
+		if (likely(!vma->anon_vma && !userfaultfd_wp(vma)) &&
+		    !vma_is_ptshare_client(vma) &&
+		    !WARN_ON_ONCE(ptdesc_refcount(page_ptdesc(pmd_page(*pmd))))) {
 			pgt_pmd = pmdp_collapse_flush(vma, addr, pmd);
 			pmdp_get_lockless_sync();
 			success = true;
