@@ -478,8 +478,16 @@ static void mt_get_feature(struct hid_device *hdev, struct hid_report *report)
 			goto free;
 		}
 
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 		ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
 					     size, size, 0);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, 0);
+=======
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, size, 0);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (ret)
 			dev_warn(&hdev->dev, "failed to report feature\n");
 	}

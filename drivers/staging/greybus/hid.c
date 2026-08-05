@@ -201,7 +201,13 @@ static void gb_hid_init_report(struct gb_hid *ghid, struct hid_report *report)
 	 * we just need to setup the input fields, so using
 	 * __hid_report_raw_event is safe.
 	 */
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 	__hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, size, 1);
+=======
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 }
 
 static void gb_hid_init_reports(struct gb_hid *ghid)

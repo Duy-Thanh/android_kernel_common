@@ -84,8 +84,16 @@ void vivaldi_feature_mapping(struct hid_device *hdev,
 		report_len--;
 	}
 
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 	ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
 				     report_len, report_len, 0);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, 0);
+=======
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, report_len, 0);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 	if (ret) {
 		dev_warn(&hdev->dev, "failed to report feature %d\n",
 			 field->report->id);

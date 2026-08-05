@@ -1219,10 +1219,18 @@ static inline u32 hid_report_len(struct hid_report *report)
 	return DIV_ROUND_UP(report->size, 8) + (report->id > 0);
 }
 
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data, u32 size,
 			 int interrupt);
 int __hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data, u32 size,
+			 int interrupt);
+=======
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 /* HID quirks API */
 unsigned long hid_lookup_quirk(const struct hid_device *hdev);

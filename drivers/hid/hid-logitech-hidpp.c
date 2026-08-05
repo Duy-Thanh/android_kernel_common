@@ -3691,8 +3691,16 @@ static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
 	consumer_report[0] = 0x03;
 	memcpy(&consumer_report[1], &data[3], 4);
 	/* We are called from atomic context */
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 	__hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
 			       consumer_report, sizeof(consumer_report), 5, 1);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+=======
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, sizeof(consumer_report), 5, 1);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 	return 1;
 }

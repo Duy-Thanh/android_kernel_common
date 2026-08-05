@@ -65,16 +65,32 @@ static int gfrm_raw_event(struct hid_device *hdev, struct hid_report *report,
 	 */
 	switch (data[1]) {
 	case GFRM100_SEARCH_KEY_DOWN:
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
 					     sizeof(search_key_dn), sizeof(search_key_dn), 1);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), sizeof(search_key_dn), 1);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	case GFRM100_SEARCH_KEY_AUDIO_DATA:
 		break;
 
 	case GFRM100_SEARCH_KEY_UP:
+<<<<<<< HEAD   (8560345da26d4964ba1cd09ee152bdf365cd1b55 Merge bb2040484f90 ("serial: zs: Convert to use a platform d)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
 					     sizeof(search_key_up), sizeof(search_key_up), 1);
+||||||| BASE   (bb2040484f90f91b717060e1a66026cc4287bcf0 serial: zs: Convert to use a platform device)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), sizeof(search_key_up), 1);
+>>>>>>> BRANCH (ff3c2b623bfa5faf0acc6ff53b37e61f599cc7b9 HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	default:
