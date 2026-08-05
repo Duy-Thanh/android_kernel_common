@@ -2592,6 +2592,9 @@ static int __mmap_new_vma(struct mmap_state *map, struct vm_area_struct **vmap)
 	WARN_ON_ONCE(!arch_validate_flags(map->vm_flags));
 #endif
 
+	/* Attach the ptshare descriptor before the VMA becomes visible. */
+	ptshare_attach_desc(vma);
+
 	/* Lock the VMA since it is modified after insertion into VMA tree */
 	vma_start_write(vma);
 	vma_iter_store_new(vmi, vma);
