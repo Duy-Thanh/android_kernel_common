@@ -16,6 +16,24 @@
       "message": "Just a note: we are also leveraging aosp/4045933 here.",
       "revId": "5702c84dbc1c64a6b7a1a1cebbc48c6b438644a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d8fcf1_cec67b2f",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-05T08:14:15Z",
+      "side": 1,
+      "message": "Yes, we will need to swap some patches order when rebase.",
+      "parentUuid": "846384a8_5dd70748",
+      "revId": "5702c84dbc1c64a6b7a1a1cebbc48c6b438644a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
