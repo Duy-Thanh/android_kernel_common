@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "951becb8_296e0814",
+        "filename": "arch/x86/kernel/paravirt.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T16:16:41Z",
+      "side": 1,
+      "message": "Just noting: adding this `pv_mmio` symbol requires extending the KMI - I\u0027ve uploaded aosp/4213467 for that.",
+      "revId": "7bec8ee64267d73d0dcdd1ecbf9f9684a26b5de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
