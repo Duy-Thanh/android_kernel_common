@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f31f73_a2713bc1",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-05T17:11:05Z",
+      "side": 1,
+      "message": "I might be wrong but thought of checking: In debug mode base is actually an offset and not a VA right? I was reading the code in pkvm_init.c:pkvm_setup_percpu()\n```\n#ifndef CONFIG_PKVM_X86_DEBUG\n        nr_pages \u003d pkvm_sym(pkvm_per_cpu_nr_pages)();\n        if (!nr_pages)\n                return 0;\n\n        per_cpu_base \u003d pkvm_sym(pkvm_early_alloc_contig)(nr_pages);\n        if (!per_cpu_base || pkvm_sym(pkvm_setup_per_cpu)(cpu, __pa(per_cpu_base),\n                                      __pa(pcpu), __pa(vcpu))) {\n                pr_err(\"no percpu page for CPU%d\\n\", cpu);\n                return -ENOMEM;\n        }\n#else\n        /*\n         * Overwrite the pkvm\u0027s percpu setup symbols with the host percpu value\n         * as the same percpu base will be used by the pKVM and the host in the\n         * debug build.\n         */\n        if (pkvm_sym(pkvm_setup_per_cpu)(cpu, __per_cpu_offset[cpu],\n                                         __pa(pcpu), __pa(vcpu))) {\n                pr_err(\"no percpu page for CPU%d\\n\", cpu);\n                return -ENOMEM;\n        }\n#endif\n```\n\nIn debug mode, the second argument is `__per_cpu_offset[cpu]` which the offset in host I guess. That might be the reason we are assigning it directly to pkvm\u0027s `__per_cpu_offset[cpu]`. \n\nIf thats the case, a slight rewording of the comment would make it clea, probablys omething like:\n```\n  /*\n   * In debug mode, pKVM shares the host\u0027s per-CPU areas.\n   * Pass the host\u0027s per-CPU offset directly.\n   */\n``",
+      "fixSuggestions": [
+        {
+          "fixId": "fabbef3a_d1b5b96b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/cpu.c",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "\t * In debug mode, pKVM shares the host\u0027s static per-CPU areas.\n\t * Pass the host\u0027s per-CPU offset directly.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9943c800817a16eb792e88a87b38a6ccdee7f815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
