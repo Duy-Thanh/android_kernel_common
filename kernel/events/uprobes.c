@@ -30,6 +30,7 @@
 #include <linux/srcu.h>
 #include <linux/oom.h>          /* check_stable_address_space */
 #include <linux/pagewalk.h>
+#include <linux/ptshare.h>
 
 #include <linux/uprobes.h>
 
@@ -141,6 +142,15 @@ static bool valid_vma(struct vm_area_struct *vma, bool is_register)
 
 	if (is_register)
 		flags |= VM_WRITE;
+
+	/*
+	 * A ptshare shadow VMA is never executed: its page tables are spliced
+	 * into the client mms, so a breakpoint written through it would be
+	 * seen by the whole domain. Clients are probed after unsharing, see
+	 * uprobe_write().
+	 */
+	if (vma_is_ptshare_shadow(vma))
+		return false;
 
 	return vma->vm_file && (vma->vm_flags & flags) == VM_MAYEXEC;
 }
@@ -411,6 +421,10 @@ static int __uprobe_write(struct vm_area_struct *vma,
 	const unsigned long vaddr = insn_vaddr & PAGE_MASK;
 	bool pmd_mappable;
 
+	/* uprobe_write() unshares clients, and shadows never get here. */
+	VM_WARN_ON_ONCE_VMA(vma_shares_pagetables(vma) ||
+			    vma_is_ptshare_shadow(vma), vma);
+
 	/* For now, we'll only handle PTE-mapped folios. */
 	if (fw->level != FW_LEVEL_PTE)
 		return -EFAULT;
@@ -517,6 +531,22 @@ int uprobe_write(struct arch_uprobe *auprobe, struct vm_area_struct *vma,
 
 	if (WARN_ON_ONCE(!is_cow_mapping(vma->vm_flags)))
 		return -EINVAL;
+
+	/* Shadow VMAs are rejected by valid_vma(). */
+	if (WARN_ON_ONCE(vma_is_ptshare_shadow(vma)))
+		return -EINVAL;
+
+	/*
+	 * Never touch PTEs in page tables that ptshare shares with other mms.
+	 * GUP does not unshare for the read access used when unregistering,
+	 * and cannot unshare for a write as we hold the mmap_lock. Unshare the
+	 * client here instead; the caller holds the mmap_lock for write.
+	 */
+	if (vma_shares_pagetables(vma)) {
+		ret = ptshare_unshare_vma_locked(vma);
+		if (ret)
+			return ret;
+	}
 
 	/*
 	 * When registering, we have to break COW to get an exclusive anonymous
@@ -1613,6 +1643,16 @@ int uprobe_mmap(struct vm_area_struct *vma)
 		delayed_ref_ctr_inc(vma);
 
 	if (!valid_vma(vma, true))
+		return 0;
+
+	/*
+	 * A new ptshare mapping is not part of its domain yet: it is installed
+	 * after mmap_region() returns, and populating its page tables now
+	 * would leave private PTEs where the shared table gets spliced. Test
+	 * the flag, as the descriptor may not be set yet. Such a mapping is
+	 * not probed.
+	 */
+	if (vma->vm_flags & VM_PT_SHARED)
 		return 0;
 
 	inode = file_inode(vma->vm_file);
