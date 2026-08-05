@@ -117,6 +117,60 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 }
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
+int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
+			       int *locked, bool unlockable);
+
+static inline struct page *ptshare_get_user_page_vma_remote(struct mm_struct *mm,
+						    unsigned long addr,
+						    int gup_flags,
+						    struct vm_area_struct **vmap)
+{
+	struct page *page;
+	struct vm_area_struct *vma;
+	unsigned long old_start, old_end, old_pgoff;
+	struct file *old_file;
+	int got;
+	int locked;
+
+	if (WARN_ON_ONCE(unlikely(gup_flags & FOLL_NOWAIT)))
+		return ERR_PTR(-EINVAL);
+
+retry:
+	locked = 1;
+	vma = vma_lookup(mm, addr);
+	if (!vma)
+		return ERR_PTR(-EFAULT);
+
+	old_start = vma->vm_start;
+	old_end = vma->vm_end;
+	old_file = vma->vm_file;
+	old_pgoff = vma->vm_pgoff;
+
+	got = get_user_pages_remote(mm, addr, 1, gup_flags, &page, &locked);
+
+	if (got < 0) {
+		if (!locked)
+			mmap_read_lock(mm);
+		return ERR_PTR(got);
+	}
+
+	if (!locked) {
+		mmap_read_lock(mm);
+		vma = vma_lookup(mm, addr);
+		if (!vma ||
+		    vma->vm_start != old_start ||
+		    vma->vm_end != old_end ||
+		    vma->vm_file != old_file ||
+		    vma->vm_pgoff != old_pgoff) {
+			/* VMA changed while lock was dropped. Retry. */
+			put_page(page);
+			goto retry;
+		}
+	}
+
+	*vmap = vma;
+	return page;
+}
 
 static inline bool ptshare_behavior_needs_unshare(int behavior)
 {
@@ -217,6 +271,20 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 static inline int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
 	return 0;
+}
+
+static inline int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
+					     int *locked, bool unlockable)
+{
+	return 0;
+}
+
+static inline struct page *ptshare_get_user_page_vma_remote(struct mm_struct *mm,
+						    unsigned long addr,
+						    int gup_flags,
+						    struct vm_area_struct **vmap)
+{
+	return get_user_page_vma_remote(mm, addr, gup_flags, vmap);
 }
 
 static inline bool ptshare_behavior_needs_unshare(int behavior)

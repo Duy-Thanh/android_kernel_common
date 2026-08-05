@@ -6949,7 +6949,7 @@ static int __access_remote_vm(struct mm_struct *mm, unsigned long addr,
 		void *maddr;
 		struct folio *folio;
 		struct vm_area_struct *vma = NULL;
-		struct page *page = get_user_page_vma_remote(mm, addr,
+		struct page *page = ptshare_get_user_page_vma_remote(mm, addr,
 							     gup_flags, &vma);
 
 		if (IS_ERR(page)) {

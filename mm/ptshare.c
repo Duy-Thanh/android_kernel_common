@@ -516,3 +516,49 @@ int ptshare_fork_vma(struct mm_struct *mm, struct vm_area_struct *vma)
 	}
 	return 0;
 }
+
+int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
+			       int *locked, bool unlockable)
+{
+	struct vm_area_struct *vma;
+	int ret;
+
+	mmap_assert_locked(mm);
+
+	/*
+	 * If the caller does not allow us to drop the lock (e.g. they hold the
+	 * write lock, or require read lock atomicity), we cannot safely acquire
+	 * the write lock to perform unsharing. Fail the operation in this case.
+	 */
+	if (!unlockable)
+		return -EFAULT;
+
+	/* Drop the read lock and notify caller */
+	mmap_read_unlock(mm);
+	*locked = 0;
+
+	/* Acquire write lock */
+	ret = mmap_write_lock_killable(mm);
+	if (ret) {
+		mmap_read_lock(mm);
+		*locked = 1;
+		return ret;
+	}
+
+	/* Re-lookup VMA under write lock */
+	vma = vma_lookup(mm, addr);
+	if (vma && vma_shares_pagetables(vma)) {
+		ret = ptshare_unshare_vma_locked(vma);
+		if (ret) {
+			mmap_write_unlock(mm);
+			mmap_read_lock(mm);
+			*locked = 1;
+			return ret;
+		}
+	}
+
+	/* Release write lock. We return with NO locks held. */
+	mmap_write_unlock(mm);
+
+	return 0;
+}

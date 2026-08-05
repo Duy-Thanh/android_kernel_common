@@ -21,6 +21,7 @@
 #include <linux/pagevec.h>
 #include <linux/sched/mm.h>
 #include <linux/shmem_fs.h>
+#include <linux/ptshare.h>
 
 #include <asm/mmu_context.h>
 #include <asm/tlbflush.h>
@@ -1424,6 +1425,29 @@ static long __get_user_pages(struct mm_struct *mm,
 			ret = check_vma_flags(vma, gup_flags);
 			if (ret)
 				goto out;
+
+			if (unlikely(vma_shares_pagetables(vma)) &&
+			    (gup_flags & FOLL_WRITE) &&
+			    !(vma->vm_flags & VM_SHARED)) {
+				/*
+				 * Unsharing requires acquiring the mmap_lock write lock.
+				 * Fail non-blocking requests (FOLL_NOWAIT) with -EBUSY.
+				 * Although ptshare is not expected to be used with KVM or
+				 * io_uring, this ensures non-blocking guarantees are kept.
+				 */
+				if (gup_flags & FOLL_NOWAIT) {
+					ret = -EBUSY;
+					goto out;
+				}
+
+				ret = ptshare_unshare_vma_on_gup(mm, start, locked,
+								 !!(gup_flags & FOLL_UNLOCKABLE));
+				if (ret)
+					goto out;
+				/* Lock was dropped, abort and let caller retry */
+				ret = 0;
+				goto out;
+			}
 		}
 retry:
 		/*
