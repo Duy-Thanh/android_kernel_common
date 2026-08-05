@@ -262,6 +262,14 @@ stable kernels.
 | NVIDIA         | Carmel Core     | N/A             | NVIDIA_CARMEL_CNP_ERRATUM   |
 +----------------+-----------------+-----------------+-----------------------------+
 | NVIDIA         | Olympus core    | T410-OLY-1029   | ARM64_ERRATUM_4118414       |
+<<<<<<< HEAD   (30b66ac85ce7d9ae7333d9335fea76493f5bfecc Merge 69d268fbddef ("arm64: cputype: Add C1-Premium definiti)
+||||||| BASE   (69d268fbddef53c4a7b16d8adc3a131940fabbb5 arm64: cputype: Add C1-Premium definitions)
++----------------+-----------------+-----------------+-----------------------------+
+=======
++----------------+-----------------+-----------------+-----------------------------+
+| NVIDIA         | T241 GICv3/4.x  | T241-FABRIC-4   | N/A                         |
++----------------+-----------------+-----------------+-----------------------------+
+>>>>>>> BRANCH (0d1f1a388b680e66e272f7b593eade015431cacc arm64: errata: Mitigate TLBI errata on Microsoft Azure Cobal)
 +----------------+-----------------+-----------------+-----------------------------+
 | Freescale/NXP  | LS2080A/LS1043A | A-008585        | FSL_ERRATUM_A008585         |
 +----------------+-----------------+-----------------+-----------------------------+
