@@ -51,6 +51,23 @@
       "parentUuid": "d458e78c_c843200d",
       "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626c3cd8_fd41cfbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-05T15:50:51Z",
+      "side": 1,
+      "message": "Restored since requested by another partner (see aosp/4211586).",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
