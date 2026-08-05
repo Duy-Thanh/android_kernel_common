@@ -52,6 +52,24 @@
       "parentUuid": "67ce337c_95a4579f",
       "revId": "b10691c8af568f6fdcf2594d644df6da166ccd15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e49b05_394c2d78",
+        "filename": "arch/x86/kernel/paravirt.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-05T09:13:29Z",
+      "side": 1,
+      "message": "seems even cannot compiling the non-GPL out-of-tree modules. Let me update to use `EXPORT_SYMBOL` to satisfy this.",
+      "parentUuid": "85bc0552_51c56899",
+      "revId": "b10691c8af568f6fdcf2594d644df6da166ccd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
