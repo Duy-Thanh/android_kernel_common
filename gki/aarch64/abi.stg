@@ -360306,6 +360306,14 @@ function {
   parameter_id: 0x34a05394
 }
 function {
+  id: 0x9a234e63
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9a235f02
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -386006,6 +386014,24 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_vmalloc_node_bypass"
 }
 elf_symbol {
+  id: 0x915194c4
+  name: "__traceiter_android_rvh_vmscan_kswapd_done"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3784e9b
+  type_id: 0x9a235f02
+  full_name: "__traceiter_android_rvh_vmscan_kswapd_done"
+}
+elf_symbol {
+  id: 0xdb6d278a
+  name: "__traceiter_android_rvh_vmscan_kswapd_wake"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf5f1ec8c
+  type_id: 0x9a234e63
+  full_name: "__traceiter_android_rvh_vmscan_kswapd_wake"
+}
+elf_symbol {
   id: 0xebcd0234
   name: "__traceiter_android_rvh_wake_up_new_task"
   is_defined: true
@@ -393492,6 +393518,24 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_vmalloc_node_bypass"
+}
+elf_symbol {
+  id: 0xd1be5d26
+  name: "__tracepoint_android_rvh_vmscan_kswapd_done"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_vmscan_kswapd_done"
+}
+elf_symbol {
+  id: 0xe1b78c30
+  name: "__tracepoint_android_rvh_vmscan_kswapd_wake"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_vmscan_kswapd_wake"
 }
 elf_symbol {
   id: 0xdcf22716
@@ -464739,6 +464783,8 @@ interface {
   symbol_id: 0x13c17b96
   symbol_id: 0x1a961a8d
   symbol_id: 0x4286264c
+  symbol_id: 0x915194c4
+  symbol_id: 0xdb6d278a
   symbol_id: 0xebcd0234
   symbol_id: 0xfd00ed2d
   symbol_id: 0x86527a4e
@@ -465571,6 +465617,8 @@ interface {
   symbol_id: 0xa68c0f10
   symbol_id: 0x81b8b0f3
   symbol_id: 0xa76016a2
+  symbol_id: 0xd1be5d26
+  symbol_id: 0xe1b78c30
   symbol_id: 0xdcf22716
   symbol_id: 0xb59c7c3f
   symbol_id: 0xe1489e0c
