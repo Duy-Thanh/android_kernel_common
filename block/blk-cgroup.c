@@ -1400,7 +1400,7 @@ int blkcg_activate_policy(struct request_queue *q,
 retry:
 	spin_lock_irq(&q->queue_lock);
 
-	/* blkg_list is pushed at the head, reverse walk to allocate parents first */
+	/* blkg_list is pushed at the head, reverse walk to initialize parents first */
 	list_for_each_entry_reverse(blkg, &q->blkg_list, q_node) {
 		struct blkg_policy_data *pd;
 
@@ -1438,19 +1438,40 @@ retry:
 				goto enomem;
 		}
 
-		blkg->pd[pol->plid] = pd;
+		spin_lock(&blkg->blkcg->lock);
+
 		pd->blkg = blkg;
 		pd->plid = pol->plid;
+<<<<<<< HEAD   (5601b265236c5fdc0b48cd1ae7323ef37711be21 Revert "smb: client: require net admin for CIFS SWN netlink")
 	}
+||||||| BASE   (768f665f3685b455ed686370ed7ccb852a125a3b ipvs: skip ipv6 extension headers for csum checks)
+		pd->online = false;
+	}
+=======
+		blkg->pd[pol->plid] = pd;
+>>>>>>> BRANCH (33f0370bb7ce15a59d72a4d8a05421d334a04add blk-cgroup: Fix NULL deref caused by blkg_policy_data being )
 
-	/* all allocated, init in the same order */
-	if (pol->pd_init_fn)
-		list_for_each_entry_reverse(blkg, &q->blkg_list, q_node)
-			pol->pd_init_fn(blkg->pd[pol->plid]);
+		if (pol->pd_init_fn)
+			pol->pd_init_fn(pd);
 
+<<<<<<< HEAD   (5601b265236c5fdc0b48cd1ae7323ef37711be21 Revert "smb: client: require net admin for CIFS SWN netlink")
 	if (pol->pd_online_fn)
 		list_for_each_entry_reverse(blkg, &q->blkg_list, q_node)
 			pol->pd_online_fn(blkg->pd[pol->plid]);
+||||||| BASE   (768f665f3685b455ed686370ed7ccb852a125a3b ipvs: skip ipv6 extension headers for csum checks)
+	list_for_each_entry_reverse(blkg, &q->blkg_list, q_node) {
+		if (pol->pd_online_fn)
+			pol->pd_online_fn(blkg->pd[pol->plid]);
+		blkg->pd[pol->plid]->online = true;
+	}
+=======
+		if (pol->pd_online_fn)
+			pol->pd_online_fn(pd);
+		pd->online = true;
+
+		spin_unlock(&blkg->blkcg->lock);
+	}
+>>>>>>> BRANCH (33f0370bb7ce15a59d72a4d8a05421d334a04add blk-cgroup: Fix NULL deref caused by blkg_policy_data being )
 
 	__set_bit(pol->plid, q->blkcg_pols);
 	ret = 0;
@@ -1466,14 +1487,19 @@ out:
 	return ret;
 
 enomem:
-	/* alloc failed, nothing's initialized yet, free everything */
+	/* alloc failed, take down everything */
 	spin_lock_irq(&q->queue_lock);
 	list_for_each_entry(blkg, &q->blkg_list, q_node) {
 		struct blkcg *blkcg = blkg->blkcg;
+		struct blkg_policy_data *pd;
 
 		spin_lock(&blkcg->lock);
-		if (blkg->pd[pol->plid]) {
-			pol->pd_free_fn(blkg->pd[pol->plid]);
+		pd = blkg->pd[pol->plid];
+		if (pd) {
+			if (pd->online && pol->pd_offline_fn)
+				pol->pd_offline_fn(pd);
+			pd->online = false;
+			pol->pd_free_fn(pd);
 			blkg->pd[pol->plid] = NULL;
 		}
 		spin_unlock(&blkcg->lock);
