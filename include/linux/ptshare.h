@@ -7,12 +7,15 @@
 #include <linux/mm.h>
 #include <uapi/asm-generic/mman-common.h>
 #include <linux/refcount.h>
+#include <linux/memcontrol.h>
 
 struct mm_struct;
+struct mem_cgroup;
 
 struct ptshare_desc {
 	/* The headless shadow MM for this domain */
 	struct mm_struct *ptshare_mm;
+	struct mem_cgroup *memcg;
 	refcount_t refcount;
 	struct rcu_head rcu;
 };
@@ -167,6 +170,71 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 	return ptdesc_pmd_pts_count(pt);
 }
 
+#ifdef CONFIG_MEMCG
+struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm);
+
+/*
+ * Page table allocations use alloc_pages(__GFP_ACCOUNT), which charges
+ * current->active_memcg instead of passing the mm_struct. To ensure page
+ * tables allocated for the shadow MM are charged to the creator's memcg
+ * rather than the faulting client task, shadow MM allocation paths use
+ * ptshare_bind_active_memcg() to set the active remote memcg.
+ *
+ * ptshare_bind_active_memcg() returns the memcg it made active (NULL if
+ * @mm is not a shadow MM) and saves the previous one in @old_memcg; pass
+ * both to ptshare_unbind_active_memcg() to end the scope. As required by
+ * set_active_memcg(), the bound memcg stays referenced for the whole scope
+ * and the previous value is always restored, even if it is NULL (the
+ * usual case when faulting from userspace). Otherwise the task would keep
+ * charging an unreferenced memcg after the fault.
+ */
+static inline struct mem_cgroup *
+ptshare_bind_active_memcg(struct mm_struct *mm, struct mem_cgroup **old_memcg)
+{
+	/* Takes a reference, dropped by ptshare_unbind_active_memcg() */
+	struct mem_cgroup *memcg = ptshare_shadow_memcg(mm);
+
+	if (memcg)
+		*old_memcg = set_active_memcg(memcg);
+	return memcg;
+}
+
+static inline void
+ptshare_unbind_active_memcg(struct mem_cgroup *memcg,
+			    struct mem_cgroup *old_memcg)
+{
+	struct mem_cgroup *cur;
+
+	if (!memcg)
+		return;
+
+	/*
+	 * Always restore, NULL included, and do it before dropping the
+	 * reference that pins @memcg. Finding another memcg active here
+	 * means a nested scope was not closed.
+	 */
+	cur = set_active_memcg(old_memcg);
+	VM_WARN_ON_ONCE(cur != memcg);
+	mem_cgroup_put(memcg);
+}
+#else
+static inline struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
+{
+	return NULL;
+}
+
+static inline struct mem_cgroup *
+ptshare_bind_active_memcg(struct mm_struct *mm, struct mem_cgroup **old_memcg)
+{
+	return NULL;
+}
+
+static inline void
+ptshare_unbind_active_memcg(struct mem_cgroup *memcg,
+			    struct mem_cgroup *old_memcg)
+{
+}
+#endif
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
 int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
 			       int *locked, bool unlockable);
@@ -340,6 +408,23 @@ static inline void ptdesc_put(struct ptdesc *pt)
 static inline int ptdesc_refcount(struct ptdesc *pt)
 {
 	return 0;
+}
+
+static inline struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
+{
+	return NULL;
+}
+
+static inline struct mem_cgroup *
+ptshare_bind_active_memcg(struct mm_struct *mm, struct mem_cgroup **old_memcg)
+{
+	return NULL;
+}
+
+static inline void
+ptshare_unbind_active_memcg(struct mem_cgroup *memcg,
+			    struct mem_cgroup *old_memcg)
+{
 }
 
 static inline int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
