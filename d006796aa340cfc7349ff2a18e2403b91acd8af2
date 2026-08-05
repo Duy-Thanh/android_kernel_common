@@ -16,6 +16,23 @@
       "message": "Please don\u0027t create redundant patches. Instead, restore aosp/4211586 and resolve the comments on that patch.",
       "revId": "d006796aa340cfc7349ff2a18e2403b91acd8af2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "525568e9_2a563065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-05T16:00:03Z",
+      "side": 1,
+      "message": "why is this needed in android-mainline?",
+      "revId": "d006796aa340cfc7349ff2a18e2403b91acd8af2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
