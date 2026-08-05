@@ -19,7 +19,10 @@
 #include <linux/slab.h>
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
+#include <linux/shmem_fs.h>
 #include <linux/hugetlb.h>
+#include <linux/page_size_compat_defs.h>
+#include <uapi/asm-generic/mman.h>
 
 static inline void mmap_lock_set_ptshare_class(struct mm_struct *mm)
 {
@@ -101,6 +104,116 @@ static void ptshare_desc_rcu_free(struct rcu_head *head)
 void ptshare_free_desc_rcu(struct ptshare_desc *desc)
 {
 	call_rcu(&desc->rcu, ptshare_desc_rcu_free);
+}
+
+int ptshare_validate_mmap(struct file *file, unsigned long addr,
+			  unsigned long len, unsigned long prot,
+			  unsigned long flags, vm_flags_t *vm_flags,
+			  unsigned long pgoff)
+{
+	struct vm_area_struct *vma;
+	struct ptshare_desc *desc;
+
+	if (!(*vm_flags & VM_PT_SHARED))
+		return 0;
+
+	/* Only support file-backed mappings */
+	if (!file)
+		return -EINVAL;
+
+	/* Shmem/tmpfs mappings are not allowed */
+	if (shmem_file(file))
+		return -EINVAL;
+
+	/*
+	 * Only regular files are allowed: no char/block devices, anon inodes,
+	 * etc. Re-checked on the final vm_file in ptshare_install_vma().
+	 */
+	if (unlikely(!S_ISREG(file_inode(file)->i_mode)))
+		return -EINVAL;
+
+	/* Writable mappings are not allowed */
+	if (unlikely(prot & PROT_WRITE))
+		return -EINVAL;
+
+	/* Non-duplicable mappings (VM_DONTCOPY) are not allowed */
+	if (unlikely(*vm_flags & VM_DONTCOPY))
+		return -EINVAL;
+
+	/* mlocked mappings (MAP_LOCKED) are not allowed */
+	if (unlikely((flags & MAP_LOCKED) ||
+		     (*vm_flags & (VM_LOCKED | VM_LOCKONFAULT))))
+		return -EINVAL;
+
+	/*
+	 * Precise address control is required to guarantee the
+	 * mapping covers the entire PMD range.
+	 */
+	if (unlikely(!(flags & MAP_FIXED)))
+		return -EINVAL;
+
+	/* Require PMD alignment of both base and size */
+	if (unlikely(!IS_ALIGNED(addr, PMD_SIZE) ||
+		     !IS_ALIGNED(len, PMD_SIZE)))
+		return -EINVAL;
+
+	/*
+	 * With page size emulation (x86_64 page_shift=), a read fault between
+	 * the PAGE_SIZE and the __PAGE_SIZE rounded EOF maps the zero page
+	 * (VM_FAULT_NEED_ANONPAGE), and nothing zaps that PTE when the file
+	 * grows. In a shared page table it would be seen by every member of
+	 * the domain. Don't share page tables in this mode: the request was
+	 * validated above, fall back to a regular private mapping.
+	 */
+	if (__PAGE_SIZE != PAGE_SIZE) {
+		*vm_flags &= ~VM_PT_SHARED;
+		return 0;
+	}
+
+	desc = rcu_dereference_protected(current->mm->ptshare_desc,
+					 lockdep_is_held(&current->mm->mmap_lock));
+	if (desc) {
+		/*
+		 * Child processes that inherited the VMAs but not the creator
+		 * status are not allowed to map new VMAs into the domain.
+		 */
+		if (!mm_flags_test(MMF_PTSHARE_CREATOR, current->mm))
+			return -EPERM;
+	} else {
+		/*
+		 * If the caller doesn't have a ptshare_desc, allocate it now.
+		 */
+		desc = ptshare_alloc_desc();
+		if (!desc)
+			return -ENOMEM;
+
+		rcu_assign_pointer(current->mm->ptshare_desc, desc);
+		mm_flags_test_and_set(MMF_PTSHARE_CREATOR, current->mm);
+
+		/*
+		 * Since we were not previously part of any shared page table
+		 * domain, we can allow the mapping without further checks.
+		 */
+		return 0;
+	}
+
+	/* The shared MM should never be the caller of this syscall */
+	if (WARN_ON_ONCE(current->mm == desc->ptshare_mm))
+		return -EINVAL;
+
+	/*
+	 * Check for virtual address space collisions in the shared manager.
+	 * Overlapping shared mappings are not allowed. MAP_FIXED is not allowed
+	 * to overwrite an existing shared VMA in the domain, to prevent
+	 * cross-process address space corruption and simplify lifecycle tracking.
+	 */
+	mmap_read_lock(desc->ptshare_mm);
+	vma = find_vma_intersection(desc->ptshare_mm, addr, addr + len);
+	mmap_read_unlock(desc->ptshare_mm);
+	if (vma)
+		return -EINVAL;
+
+	return 0;
 }
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
@@ -389,15 +502,30 @@ unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
 	if (IS_ERR_VALUE(addr))
 		return addr;
 
+	/*
+	 * Early invariants (MAP_FIXED, alignment, file-backed, writability)
+	 * are checked in ptshare_validate_mmap()
+	 */
 	vma = vma_lookup(mm, addr);
 
 	/* This VMA was just installed by do_mmap() and the write lock is still held */
 	if (WARN_ON_ONCE(!vma))
 		return -EINVAL;
 
-	/* Enforce remaining invariants on the installed VMA */
+	/*
+	 * Enforce remaining invariants on the installed VMA
+	 * (driver-controlled flags, file-backed, regular file, non-shmem,
+	 * writability).
+	 * ptshare_validate_mmap() only checked the file passed to mmap(), but
+	 * ->mmap() may replace vm_file (e.g. overlayfs, FUSE passthrough and
+	 * fuse-bpf install their backing file), so re-check the final vm_file.
+	 * VM_SPECIAL also rejects driver mmap handlers on regular-file
+	 * pseudo-files (e.g. relay), whose vm_ops must not reach the shadow MM.
+	 */
 	if (!vma->vm_file || vma_is_anonymous(vma) ||
-	    (vma->vm_flags & (VM_PFNMAP | VM_MIXEDMAP | VM_DONTCOPY)))
+	    !S_ISREG(file_inode(vma->vm_file)->i_mode) ||
+	    shmem_file(vma->vm_file) ||
+	    (vma->vm_flags & (VM_SPECIAL | VM_DONTCOPY | VM_WRITE)))
 		goto out_unmap;
 
 	desc = mm->ptshare_desc;
