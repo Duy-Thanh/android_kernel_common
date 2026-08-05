@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab54cd9_12e92458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-05T07:52:06Z",
+      "side": 1,
+      "message": "This isn\u0027t the right solution.\n\nThe Vulkan dEQP test is actually taking into account that protected memory is limited. see the comment\n\n```\n// Some implementations might have limitations on protected heap, and these limitations\n// don\u0027t show up in Vulkan queries. Use a hard coded threshold after which out of memory\n// is allowed.\n```\n\nThe fix you need is aosp/4175205",
+      "revId": "65c6337cca16b132c0ad0510760cecbeab5c273b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
