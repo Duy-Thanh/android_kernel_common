@@ -20,6 +20,13 @@
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
 
+static inline void mmap_lock_set_ptshare_class(struct mm_struct *mm)
+{
+	static struct lock_class_key ptshare_mmap_lock_key;
+
+	lockdep_set_class(&mm->mmap_lock, &ptshare_mmap_lock_key);
+}
+
 struct ptshare_desc *ptshare_alloc_desc(void)
 {
 	struct ptshare_desc *desc;
@@ -43,6 +50,8 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 
 	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
 	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
+
+	mmap_lock_set_ptshare_class(desc->ptshare_mm);
 
 	refcount_set(&desc->refcount, 1);
 
