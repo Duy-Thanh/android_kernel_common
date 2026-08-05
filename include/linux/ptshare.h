@@ -18,7 +18,8 @@ struct ptshare_desc {
 #ifdef CONFIG_PTSHARE
 static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 {
-	return vma->vm_flags & VM_PT_SHARED;
+	return (vma->vm_flags & VM_PT_SHARED) &&
+		READ_ONCE(vma->__vm_ptshare_desc) != NULL;
 }
 
 static inline struct ptshare_desc *vma_ptshare_desc(const struct vm_area_struct *vma)
@@ -32,18 +33,24 @@ static inline struct ptshare_desc *vma_ptshare_desc(const struct vm_area_struct 
 	if (unlikely(!vma_shares_pagetables(vma)))
 		return NULL;
 
-	return vma->__vm_ptshare_desc;
+	return READ_ONCE(vma->__vm_ptshare_desc);
 }
 
 static inline void vma_set_ptshare_desc(struct vm_area_struct *vma,
 					struct ptshare_desc *desc)
 {
-	VM_BUG_ON_VMA(!vma_shares_pagetables(vma), vma);
+	VM_BUG_ON_VMA(!(vma->vm_flags & VM_PT_SHARED), vma);
 
-	if (unlikely(!vma_shares_pagetables(vma)))
+	/*
+	 * Do not use vma_shares_pagetables() here because it checks if the
+	 * descriptor is non-NULL. During initial installation, the descriptor
+	 * starts as NULL, so vma_shares_pagetables() would return false and
+	 * prevent us from ever setting it.
+	 */
+	if (unlikely(!(vma->vm_flags & VM_PT_SHARED)))
 		return;
 
-	vma->__vm_ptshare_desc = desc;
+	WRITE_ONCE(vma->__vm_ptshare_desc, desc);
 }
 
 static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
@@ -119,6 +126,10 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
 int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
 			       int *locked, bool unlockable);
+int ptshare_validate_mmap(struct file *file, unsigned long addr,
+			  unsigned long len, unsigned long prot,
+			  unsigned long flags, vm_flags_t vm_flags,
+			  unsigned long pgoff);
 
 static inline struct page *ptshare_get_user_page_vma_remote(struct mm_struct *mm,
 						    unsigned long addr,
@@ -285,6 +296,14 @@ static inline struct page *ptshare_get_user_page_vma_remote(struct mm_struct *mm
 						    struct vm_area_struct **vmap)
 {
 	return get_user_page_vma_remote(mm, addr, gup_flags, vmap);
+}
+
+static inline int ptshare_validate_mmap(struct file *file, unsigned long addr,
+					unsigned long len, unsigned long prot,
+					unsigned long flags, vm_flags_t vm_flags,
+					unsigned long pgoff)
+{
+	return 0;
 }
 
 static inline bool ptshare_behavior_needs_unshare(int behavior)
