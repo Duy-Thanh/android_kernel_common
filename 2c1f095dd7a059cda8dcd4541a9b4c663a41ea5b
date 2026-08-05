@@ -105,6 +105,24 @@
       "parentUuid": "2321aaed_5e973b75",
       "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e145b587_4b8f8a90",
+        "filename": "drivers/iommu/intel/pkvm/domain.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:12:53Z",
+      "side": 1,
+      "message": "IMHO it looks weird to set `domain-\u003edma_fq` (which is supposed to be a kind of persistent property of the domain?) in the _unmap_ hypercall _every time_ when unmapping pages.\n\nAnd it looks like the only purpose of this `domain-\u003edma_fq` is to set `domain-\u003eflush_pending` inside `domain_unmap()`.\n\nSo it seems cleaner to just pass `dma_fq` to `domain_unmap()` as an argument? (That would mean yet another hacky #ifdef, but OTOH `domain_unmap()` is a legacy removed since v6.19 anyway?)",
+      "parentUuid": "36cb7ddf_929609e2",
+      "revId": "2c1f095dd7a059cda8dcd4541a9b4c663a41ea5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

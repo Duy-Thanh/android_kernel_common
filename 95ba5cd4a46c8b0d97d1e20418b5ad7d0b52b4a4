@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ea4846_670395d4",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1431,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:12:53Z",
+      "side": 1,
+      "message": "Do we need this `if (domain-\u003etype \u0026 __IOMMU_DOMAIN_DMA_FQ)` check?",
+      "revId": "95ba5cd4a46c8b0d97d1e20418b5ad7d0b52b4a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac91b71_179ddda2",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-05T18:12:53Z",
+      "side": 1,
+      "message": "nit: use `!!`?",
+      "fixSuggestions": [
+        {
+          "fixId": "206c3507_4a5373d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm_iommu.c",
+              "range": {
+                "startLine": 430,
+                "startChar": 0,
+                "endLine": 431,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t start_pfn, last_pfn, !!(domain-\u003edomain.type \u0026 __IOMMU_DOMAIN_DMA_FQ));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95ba5cd4a46c8b0d97d1e20418b5ad7d0b52b4a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
