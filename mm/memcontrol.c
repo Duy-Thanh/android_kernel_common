@@ -31,6 +31,7 @@
 #include <linux/cgroup.h>
 #include <linux/cpuset.h>
 #include <linux/sched/mm.h>
+#include <linux/ptshare.h>
 #include <linux/shmem_fs.h>
 #include <linux/hugetlb.h>
 #include <linux/pagemap.h>
@@ -922,6 +923,10 @@ struct mem_cgroup *get_mem_cgroup_from_mm(struct mm_struct *mm)
 
 	if (mem_cgroup_disabled())
 		return NULL;
+
+	memcg = ptshare_shadow_memcg(mm);
+	if (memcg)
+		return memcg;
 
 	/*
 	 * Page cache insertions can happen without an
