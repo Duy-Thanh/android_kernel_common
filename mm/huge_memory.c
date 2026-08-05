@@ -6,6 +6,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/mm.h>
+#include <linux/ptshare.h>
 #include <linux/sched.h>
 #include <linux/sched/mm.h>
 #include <linux/sched/numa_balancing.h>
@@ -131,6 +132,9 @@ unsigned long __thp_vma_allowable_orders(struct vm_area_struct *vma,
 
 	if (thp_disabled_by_hw() || vma_thp_disabled(vma, vm_flags, forced_collapse))
 		return 0;
+
+	if (vma_shares_pagetables(vma) || mm_is_ptshare_shadow(vma->vm_mm))
+		orders &= ~BIT(PMD_ORDER);
 
 	/* khugepaged doesn't collapse DAX vma, but page fault is fine. */
 	if (vma_is_dax(vma))
