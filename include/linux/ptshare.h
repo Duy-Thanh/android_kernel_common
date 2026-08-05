@@ -3,6 +3,7 @@
 #define _LINUX_PTSHARE_H
 
 #include <linux/mm.h>
+#include <uapi/asm-generic/mman-common.h>
 #include <linux/refcount.h>
 
 struct mm_struct;
@@ -103,6 +104,14 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 }
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
+
+static inline bool ptshare_behavior_needs_unshare(int behavior)
+{
+	return behavior == MADV_DONTNEED ||
+	       behavior == MADV_DONTNEED_LOCKED ||
+	       behavior == MADV_FREE;
+}
+
 #else /* !CONFIG_PTSHARE */
 static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 {
@@ -151,6 +160,12 @@ static inline int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
 	return 0;
 }
+
+static inline bool ptshare_behavior_needs_unshare(int behavior)
+{
+	return false;
+}
+
 #endif /* CONFIG_PTSHARE */
 
 #endif /* _LINUX_PTSHARE_H */
