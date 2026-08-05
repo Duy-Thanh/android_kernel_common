@@ -34,6 +34,24 @@
       "parentUuid": "bd4ce292_49da4b49",
       "revId": "bac7a0d200c92d2a597ec5008511d6fe030fa119",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83a7b06_e19d47a3",
+        "filename": "arch/x86/kernel/fpu/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-05T08:09:35Z",
+      "side": 1,
+      "message": "\u003eJust to understand: so, am I correct that here we still have a redundant WRMSR on the host side before entering a pVM (as we\u0027re gonna write the actual XFD on the pKVM side, at line 459 below)\n\nYes, this is a redundant WRMSR for the pVM.\n\n\u003eOr perhaps __this_cpu_read(xfd_state) !\u003d xfd in xfd_update_state() is almost never true here (on the host side), so there is nothing to optimize?\n\nThe `xfd` in cur_fps is for pVM from the host side, so it is always 0. `__this_cpu_read(xfd_state)` is the host current\u0027s XFD so whether it is 0 or not depending on the host usage. Most likely this is also 0 as current is the vCPU thread.\n\n\u003eWhat exactly is the value of XFD that we are writing here (on the host side) before entering a pVM?\n\nSo it is 0, because the `xfd` in `cur_fps` from the host side is not modified, as either user space setting guest xfd or guest setting its own xfd is handled by pKVM, and only npVM\u0027s `xfd` field is synced to the host side.",
+      "parentUuid": "4faafc83_31623d58",
+      "revId": "bac7a0d200c92d2a597ec5008511d6fe030fa119",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
