@@ -5,12 +5,15 @@
 #include <linux/mm.h>
 #include <uapi/asm-generic/mman-common.h>
 #include <linux/refcount.h>
+#include <linux/memcontrol.h>
 
 struct mm_struct;
+struct mem_cgroup;
 
 struct ptshare_desc {
 	/* The headless shadow MM for this domain */
 	struct mm_struct *ptshare_mm;
+	struct mem_cgroup *memcg;
 	refcount_t refcount;
 	struct rcu_head rcu;
 };
@@ -123,6 +126,42 @@ static inline int ptdesc_refcount(struct ptdesc *pt)
 	return ptdesc_pmd_pts_count(pt);
 }
 
+#ifdef CONFIG_MEMCG
+struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm);
+
+/*
+ * Page table allocations use alloc_pages(__GFP_ACCOUNT), which charges
+ * current->active_memcg instead of passing the mm_struct. To ensure page
+ * tables allocated for the shadow MM are charged to the creator's memcg
+ * rather than the faulting client task, shadow MM allocation paths use
+ * ptshare_bind_active_memcg() to set the active remote memcg.
+ */
+static inline struct mem_cgroup *
+ptshare_bind_active_memcg(struct mm_struct *mm)
+{
+	struct mem_cgroup *memcg = ptshare_shadow_memcg(mm);
+	struct mem_cgroup *old_memcg;
+
+	if (!memcg)
+		return NULL;
+
+	old_memcg = set_active_memcg(memcg);
+	mem_cgroup_put(memcg);
+	return old_memcg;
+}
+
+static inline void
+ptshare_unbind_active_memcg(struct mem_cgroup *old_memcg)
+{
+	if (old_memcg)
+		set_active_memcg(old_memcg);
+}
+#else
+static inline struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
+{
+	return NULL;
+}
+#endif
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma);
 int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
 			       int *locked, bool unlockable);
@@ -277,6 +316,22 @@ static inline void ptdesc_put(struct ptdesc *pt)
 static inline int ptdesc_refcount(struct ptdesc *pt)
 {
 	return 0;
+}
+
+static inline struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
+{
+	return NULL;
+}
+
+static inline struct mem_cgroup *
+ptshare_bind_active_memcg(struct mm_struct *mm)
+{
+	return NULL;
+}
+
+static inline void
+ptshare_unbind_active_memcg(struct mem_cgroup *old_memcg)
+{
 }
 
 static inline int ptshare_unshare_vma_locked(struct vm_area_struct *vma)

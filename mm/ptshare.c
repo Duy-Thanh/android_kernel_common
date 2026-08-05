@@ -20,6 +20,33 @@
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
 #include <linux/shmem_fs.h>
+#include <linux/memcontrol.h>
+#include <uapi/asm-generic/mman.h>
+
+#ifdef CONFIG_MEMCG
+struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
+{
+	struct ptshare_desc *desc;
+	struct mem_cgroup *memcg = NULL;
+
+	if (!mm)
+		return NULL;
+
+	rcu_read_lock();
+	desc = rcu_dereference(mm->ptshare_desc);
+	if (desc && desc->ptshare_mm == mm) {
+		memcg = desc->memcg;
+		if (!memcg)
+			memcg = root_mem_cgroup;
+
+		/* The caller of get_mem_cgroup_from_mm expects a reference */
+		css_get(&memcg->css);
+	}
+	rcu_read_unlock();
+
+	return memcg;
+}
+#endif
 
 static inline void mmap_lock_set_ptshare_class(struct mm_struct *mm)
 {
@@ -32,7 +59,7 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 {
 	struct ptshare_desc *desc;
 
-	desc = kzalloc_obj(*desc, GFP_KERNEL);
+	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
 	if (!desc)
 		return NULL;
 
@@ -47,6 +74,9 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 #ifdef CONFIG_MEMCG
 	/* Headless shadow MM does not have an owner task */
 	RCU_INIT_POINTER(desc->ptshare_mm->owner, NULL);
+
+	/* Store the creator's memcg and take a reference */
+	desc->memcg = get_mem_cgroup_from_mm(current->mm);
 #endif
 
 	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
@@ -94,6 +124,10 @@ static void ptshare_desc_rcu_free(struct rcu_head *head)
 	struct ptshare_desc *desc = container_of(head, struct ptshare_desc, rcu);
 	struct mm_struct *mm = desc->ptshare_mm;
 
+#ifdef CONFIG_MEMCG
+	if (desc->memcg)
+		mem_cgroup_put(desc->memcg);
+#endif
 	kfree(desc);
 	mmdrop_async(mm);
 }
