@@ -1096,6 +1096,13 @@ static bool is_valid_guard_vma(struct vm_area_struct *vma, bool allow_locked)
 	vm_flags_t disallowed = VM_SPECIAL | VM_HUGETLB;
 
 	/*
+	 * Shared Page Table VMAs are not allowed to have guard pages,
+	 * as zapping PTEs/installing markers in one process would
+	 * incorrectly affect all other sharing processes.
+	 */
+	disallowed |= VM_PT_SHARED;
+
+	/*
 	 * A user could lock after setting a guard range but that's fine, as
 	 * they'd not be able to fault in. The issue arises when we try to zap
 	 * existing locked VMAs. We don't want to do that.
