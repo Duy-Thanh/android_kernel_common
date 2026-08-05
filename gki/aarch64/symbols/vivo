@@ -124,6 +124,8 @@
   __traceiter_android_rvh_udpv6_recvmsg
   __traceiter_android_rvh_udpv6_sendmsg
   __traceiter_android_rvh_percpu_rwsem_wait_complete
+  __traceiter_android_rvh_vmscan_kswapd_done
+  __traceiter_android_rvh_vmscan_kswapd_wake
   __traceiter_android_vh_alter_mutex_list_add
   __traceiter_android_vh_alter_rwsem_list_add
   __traceiter_android_vh_bd_link_disk_holder
@@ -276,6 +278,8 @@
   __tracepoint_android_rvh_udpv6_recvmsg
   __tracepoint_android_rvh_udpv6_sendmsg
   __tracepoint_android_rvh_percpu_rwsem_wait_complete
+  __tracepoint_android_rvh_vmscan_kswapd_done
+  __tracepoint_android_rvh_vmscan_kswapd_wake
   __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_alter_rwsem_list_add
   __tracepoint_android_vh_bd_link_disk_holder
