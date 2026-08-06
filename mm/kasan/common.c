@@ -119,6 +119,14 @@ asmlinkage void kasan_unpoison_task_stack_below(const void *watermark)
 	 */
 	void *base = (void *)((unsigned long)watermark & ~(THREAD_SIZE - 1));
 
+#ifdef CONFIG_ARCH_HAS_VARIABLE_STACK_SIZE
+	/*
+	 * FIXME: x86 does not support variable stacks at the moment, need to
+	 * revisit that it is ok to access current in that case.
+	 */
+	base += THREAD_SIZE - task_stack_size(current);
+#endif
+
 	kasan_unpoison(base, watermark - base, false);
 }
 #endif /* CONFIG_KASAN_STACK */
