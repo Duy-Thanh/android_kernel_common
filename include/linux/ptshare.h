@@ -25,6 +25,16 @@ static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 		READ_ONCE(vma->__vm_ptshare_desc) != NULL;
 }
 
+static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+{
+	return mm_flags_test(MMF_PTSHARE_SHADOW, mm);
+}
+
+static inline bool vma_is_ptshare_shadow(const struct vm_area_struct *vma)
+{
+	return vma->vm_mm && mm_is_ptshare_shadow(vma->vm_mm);
+}
+
 static inline struct ptshare_desc *vma_ptshare_desc(const struct vm_area_struct *vma)
 {
 	/*
@@ -78,9 +88,11 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return &vma->__vm_ptshare_refcount;
 }
 
-static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+
+
+static inline bool mm_shares_pagetables(struct mm_struct *mm)
 {
-	return mm_flags_test(MMF_PTSHARE_SHADOW, mm);
+	return rcu_access_pointer(mm->ptshare_desc) != NULL;
 }
 
 int ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
@@ -222,6 +234,16 @@ retry:
 	return page;
 }
 
+struct zap_details;
+
+vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf);
+
+bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
+				    struct zap_details *details);
+
+bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
+			   unsigned long addr);
+
 static inline bool ptshare_behavior_needs_unshare(int behavior)
 {
 	return behavior == MADV_DONTNEED ||
@@ -231,6 +253,16 @@ static inline bool ptshare_behavior_needs_unshare(int behavior)
 
 #else /* !CONFIG_PTSHARE */
 static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
+{
+	return false;
+}
+
+static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+{
+	return false;
+}
+
+static inline bool vma_is_ptshare_shadow(const struct vm_area_struct *vma)
 {
 	return false;
 }
@@ -255,7 +287,9 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return NULL;
 }
 
-static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+
+
+static inline bool mm_shares_pagetables(struct mm_struct *mm)
 {
 	return false;
 }
@@ -359,6 +393,23 @@ static inline int ptshare_validate_mmap(struct file *file, unsigned long addr,
 					unsigned long pgoff)
 {
 	return 0;
+}
+
+static inline vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf)
+{
+	return VM_FAULT_SIGBUS;
+}
+
+static inline bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
+						  struct zap_details *details)
+{
+	return false;
+}
+
+static inline bool ptshare_free_pte_range(struct mmu_gather *tlb,
+					  pgtable_t ptdesc, unsigned long addr)
+{
+	return false;
 }
 
 static inline bool ptshare_behavior_needs_unshare(int behavior)

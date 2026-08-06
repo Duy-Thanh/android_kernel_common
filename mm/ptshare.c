@@ -22,6 +22,10 @@
 #include <linux/shmem_fs.h>
 #include <linux/memcontrol.h>
 #include <uapi/asm-generic/mman.h>
+#include <asm/tlb.h>
+#include <asm/tlbflush.h>
+#include <asm-generic/tlb.h>
+#include "internal.h"
 
 #ifdef CONFIG_MEMCG
 struct mem_cgroup *ptshare_shadow_memcg(const struct mm_struct *mm)
@@ -710,4 +714,223 @@ int ptshare_unshare_vma_on_gup(struct mm_struct *mm, unsigned long addr,
 	mmap_write_unlock(mm);
 
 	return 0;
+}
+
+vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf)
+{
+	struct ptshare_desc *desc = vma_ptshare_desc(vmf->vma);
+	struct mm_struct *ptshare_mm = desc->ptshare_mm;
+	unsigned int flags = vmf->flags	& ~FAULT_FLAG_VMA_LOCK;
+	struct vm_fault ptshare_vmf = *vmf;
+	struct vm_area_struct *ptshare_vma;
+	struct mem_cgroup *old_memcg = NULL;
+	struct ptdesc *ptdesc;
+	vm_fault_t ret;
+	pgd_t *pgd;
+	p4d_t *p4d;
+
+	assert_fault_locked(vmf);
+
+	/*
+	 * Optimistic Per-VMA Lock
+	 *
+	 * Attempt to acquire the VMA lock for the shared manager address space.
+	 * This is the fast path that avoids the global mmap_lock.
+	 */
+	ptshare_vma = lock_vma_under_rcu(ptshare_mm, vmf->address);
+	if (!ptshare_vma) {
+		if (vmf->flags & FAULT_FLAG_VMA_LOCK) {
+			release_fault_lock(vmf);
+			return VM_FAULT_RETRY;
+		}
+
+		/*
+		 * Fallback to mmap_lock
+		 *
+		 * Use the nested helper to safely look up and lock the shared VMA
+		 * while already holding the faulting process's lock.
+		 */
+		ptshare_vma = lock_mm_and_find_vma(ptshare_mm, vmf->address,
+							NULL);
+		if (!ptshare_vma)
+			return VM_FAULT_SIGSEGV;
+	} else {
+		flags |= FAULT_FLAG_VMA_LOCK;
+	}
+
+	ptshare_vmf.flags = flags;
+	ptshare_vmf.vma = ptshare_vma;
+	ptshare_vmf.prealloc_pte = NULL;
+	ptshare_vmf.real_address = vmf->real_address;
+
+	assert_fault_locked(&ptshare_vmf);
+
+	/*
+	 * Bind active memcg to domain creator's memcg for page table
+	 * allocations.
+	 */
+	old_memcg = ptshare_bind_active_memcg(ptshare_mm);
+
+	pgd = pgd_offset(ptshare_mm, vmf->address);
+	p4d = p4d_alloc(ptshare_mm, pgd, vmf->address);
+	if (!p4d) {
+		ret = VM_FAULT_OOM;
+		goto out;
+	}
+
+	ptshare_vmf.pud = pud_alloc(ptshare_mm, p4d, vmf->address);
+	if (!ptshare_vmf.pud) {
+		ret = VM_FAULT_OOM;
+		goto out;
+	}
+
+	ptshare_vmf.pmd = pmd_alloc(ptshare_mm, ptshare_vmf.pud, vmf->address);
+	if (!ptshare_vmf.pmd) {
+		ret = VM_FAULT_OOM;
+		goto out;
+	}
+
+	ret = handle_pte_fault(&ptshare_vmf);
+
+	/*
+	 * PMD Splicing:
+	 * The ptshare_mm now has a populated PTE page table.
+	 * We "splice" this shared PTE page table directly into the
+	 * faulting process's PMD.
+	 *
+	 * Safety Analysis:
+	 * 1. Structural Integrity: It is safe to access vmf->pmd here because
+	 *    the caller (arch fault handler) holds the guest MM's read-side
+	 *    lock (either per-VMA or mmap_lock). Any operation that would
+	 *    free the PMD page (munmap, exit_mmap) requires the mmap_write_lock.
+	 *    Even if a writer acquires the mmap_write_lock, they are blocked
+	 *    from actually modifying or detaching this VMA (via vma_start_write)
+	 *    until all per-VMA readers have finished.
+	 * 2. Atomic Population: We acquire the guest's PMD spinlock only for
+	 *    the actual splice. This avoids holding the spinlock while
+	 *    performing potentially sleeping operations in the manager MM.
+	 * 3. Race Prevention: The double-check (pmd_none) inside the lock
+	 *    ensures that if multiple threads fault on the same PMD, only
+	 *    one performs the splicing and refcount increment.
+	 */
+	if (!(ret & (VM_FAULT_ERROR | VM_FAULT_RETRY | VM_FAULT_COMPLETED))) {
+		spinlock_t *ptl_manager;
+		pmd_t pmdval;
+
+		ptl_manager = pmd_lock(ptshare_mm, ptshare_vmf.pmd);
+		pmdval = *ptshare_vmf.pmd;
+		if (pmd_present(pmdval)) {
+			if (unlikely(pmd_trans_huge(pmdval))) {
+				/* We don't support THP for shared page tables */
+				spin_unlock(ptl_manager);
+				VM_WARN_ON_ONCE(1);
+				ret = VM_FAULT_SIGBUS;
+				goto out;
+			}
+			ptdesc = page_ptdesc(pmd_page(pmdval));
+			ptdesc_get(ptdesc);
+		}
+		spin_unlock(ptl_manager);
+
+		if (pmd_present(pmdval)) {
+			spinlock_t *ptl_guest = pmd_lock(vmf->vma->vm_mm, vmf->pmd);
+
+			if (pmd_none(*vmf->pmd)) {
+				set_pmd_at(vmf->vma->vm_mm, vmf->address & PMD_MASK, vmf->pmd, pmdval);
+				mm_inc_nr_ptes(vmf->vma->vm_mm);
+			} else {
+				/* Lost race, or already spliced */
+				if (!pmd_present(*vmf->pmd) ||
+				    pmd_page(*vmf->pmd) != pmd_page(pmdval)) {
+					/* Collision! Different page tables. */
+					VM_WARN_ON_ONCE(1);
+					ret = VM_FAULT_SIGBUS;
+				}
+				ptdesc_put(ptdesc);
+			}
+			spin_unlock(ptl_guest);
+		}
+	}
+
+out:
+	ptshare_unbind_active_memcg(old_memcg);
+	/*
+	 * If handle_pte_fault() returned RETRY or COMPLETED, it already
+	 * dropped the manager lock; we must also drop the guest lock to
+	 * follow the fault handler contract.
+	 *
+	 * Otherwise, we release the manager lock we acquired and let the
+	 * caller release the guest lock.
+	 */
+	if ((ret & (VM_FAULT_RETRY | VM_FAULT_COMPLETED)) &&
+	    !((vmf->flags & FAULT_FLAG_ALLOW_RETRY) &&
+	      (vmf->flags & FAULT_FLAG_RETRY_NOWAIT))) {
+		release_fault_lock(vmf);
+	} else {
+		release_fault_lock(&ptshare_vmf);
+	}
+
+	return ret;
+}
+
+/**
+ * ptshare_vma_skip_zap_pte_range - Check if zapping should be skipped.
+ * @vma: The VMA being zapped.
+ *
+ * If this VMA shares page tables, we must NOT call zap_pte_range().
+ * zap_pte_range() would unmap all 512 PTEs and drop the page
+ * mapcounts, which would maliciously affect all other processes
+ * sharing these same page tables.
+ *
+ * Instead, we skip the PTE-level walk entirely. The PMD entry
+ * itself will be cleared later by free_pgtables(), detaching
+ * this process from the shared page table without destroying
+ * the shared mappings for others.
+ */
+bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
+				    struct zap_details *details)
+{
+	return vma_shares_pagetables(vma);
+}
+
+/**
+ * ptshare_free_pte_range - Safely reclaim shared page tables.
+ * @tlb: The mmu_gather for the MM being torn down.
+ * @ptdesc: Descriptor for the page table page being freed.
+ * @addr: Start address of the PMD range.
+ *
+ * During unmapping or process teardown, we must ensure that shared
+ * page tables are not accidentally reclaimed while still in use by
+ * other processes.
+ *
+ * If the page table is shared (refcount > 1), we decrement its reference
+ * count and return true to indicate that the caller (guest MM) should NOT
+ * free the physical page. The last participant (often the manager MM) will
+ * handle the actual reclamation.
+ *
+ * Since we skip zapping of shared VMAs, we must also ensure that the TLB
+ * is invalidated for the guest process detaching from the shared table.
+ */
+bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
+			   unsigned long addr)
+{
+	struct ptdesc *pt = page_ptdesc(ptdesc);
+	bool skip = false;
+
+	if (!mm_shares_pagetables(tlb->mm))
+		return false;
+
+	if (mm_is_ptshare_shadow(tlb->mm))
+		return false;
+
+	if (atomic_dec_if_positive(&pt->pt_share_count) >= 0)
+		skip = true;
+
+	if (skip) {
+		tlb_flush_pmd_range(tlb, addr, PMD_SIZE);
+		mm_dec_nr_ptes(tlb->mm);
+		return true;
+	}
+
+	return false;
 }
