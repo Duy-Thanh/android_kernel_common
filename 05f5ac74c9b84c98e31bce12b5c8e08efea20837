@@ -33,6 +33,23 @@
       "message": "Removing existing vendorhooks will break the KABI and any shipping devices utilizing these hooks. \n\nPlease open a bug to better describe what you are trying to do with this.",
       "revId": "05f5ac74c9b84c98e31bce12b5c8e08efea20837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dcfd792_5b1c6b48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4229298
+      },
+      "writtenOn": "2026-08-06T07:31:30Z",
+      "side": 1,
+      "message": "Sorry, this is for testing only",
+      "revId": "05f5ac74c9b84c98e31bce12b5c8e08efea20837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
