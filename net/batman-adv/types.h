@@ -1396,11 +1396,25 @@ struct batadv_tp_vars {
 	/** @role: receiver/sender modi */
 	enum batadv_tp_meter_role role;
 
-	/** @sending: sending binary semaphore: 1 if sending, 0 is not */
-	atomic_t sending;
+	/**
+	 * @send_result: 0 when sending is ongoing and otherwise
+	 * enum batadv_tp_meter_reason
+	 */
+	atomic_t send_result;
+
+<<<<<<< HEAD   (f2ed52e82fa40e72b5f26817279e2cb152be655c Merge f6324b4240cf ("ksmbd: OOB read regression in smb_check)
+	/** @reason: reason for a stopped session */
+	enum batadv_tp_meter_reason reason;
+||||||| BASE   (f6324b4240cf0b26a84c33f68a1222d727ff4af2 ksmbd: OOB read regression in smb_check_perm_dacl() ACE-walk)
+	/** @receiving: receiving binary semaphore: 1 if receiving, 0 is not */
+	atomic_t receiving;
 
 	/** @reason: reason for a stopped session */
 	enum batadv_tp_meter_reason reason;
+=======
+	/** @receiving: receiving binary semaphore: 1 if receiving, 0 is not */
+	atomic_t receiving;
+>>>>>>> BRANCH (7c7c17abf8ebedc80d53b8fa9fc4d09df89e33fe batman-adv: tp_meter: fix race condition in send error repor)
 
 	/** @finish_work: work item for the finishing procedure */
 	struct delayed_work finish_work;
