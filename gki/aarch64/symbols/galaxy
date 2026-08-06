@@ -235,3 +235,6 @@
   locks_init_lock
   vfs_lock_file
   locks_alloc_lock
+  sha256
+  vfs_iter_read
+  vfs_iter_write
