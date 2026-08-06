@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8e1ebe_cc384a02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4605888
+      },
+      "writtenOn": "2026-08-06T18:47:25Z",
+      "side": 1,
+      "message": "Hi Vincent, Sebastian,\nThis fix needs to be merged ASAP as it\u0027s being tracked by P0 bug https://partnerissuetracker.corp.google.com/issues/540139036 , and marked as a blocker.",
+      "revId": "a67c001b76fe790542374f86b4f1cf3156d4971a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
