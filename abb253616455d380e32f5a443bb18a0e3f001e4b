@@ -33,6 +33,24 @@
       "message": "Looks like the kabi needs to be re-generated in this change.",
       "revId": "abb253616455d380e32f5a443bb18a0e3f001e4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7131fb48_376c2af7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-08-06T06:56:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c08de53_a17a3687",
+      "revId": "abb253616455d380e32f5a443bb18a0e3f001e4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
