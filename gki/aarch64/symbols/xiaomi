@@ -105,6 +105,12 @@
   blkcg_activate_policy
   blkcg_deactivate_policy
 
+#required by iostat.ko
+  __traceiter_android_vh_erofs_iostat_submit
+  __traceiter_android_vh_erofs_iostat_update
+  __tracepoint_android_vh_erofs_iostat_submit
+  __tracepoint_android_vh_erofs_iostat_update
+
 #required by zram.ko module
   __traceiter_android_vh_handle_folio_writeback
   __tracepoint_android_vh_handle_folio_writeback
