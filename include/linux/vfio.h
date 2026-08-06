@@ -71,15 +71,19 @@ struct vfio_device {
 	u8 iommufd_attached:1;
 #endif
 	u8 cdev_opened:1;
-#ifdef CONFIG_DEBUG_FS
 	/*
 	 * debug_root is a static property of the vfio_device
 	 * which must be set prior to registering the vfio_device.
 	 */
 	struct dentry *debug_root;
+<<<<<<< HEAD   (f770f0c80fcba0d23436318b6cca40adf1361c65 Revert "padata: Put CPU offline callback in ONLINE section t)
 #endif
 	/* protected by more privileged entity(hypervisor). */
 	bool				protected;
+||||||| BASE   (fdd424d7c35633ac577fd87d1b043d1b8a6cd350 quota: Fix race of dquot_scan_active() with quota deactivati)
+#endif
+=======
+>>>>>>> BRANCH (3f90bfd31f163b2ed6088afe087e45c6338a3737 vfio: unhide vdev->debug_root)
 };
 
 /**
