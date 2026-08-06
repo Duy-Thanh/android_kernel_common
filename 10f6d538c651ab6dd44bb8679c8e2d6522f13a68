@@ -16,6 +16,24 @@
       "message": "@elsk@google.com I see that for `android-mainline` before this a couple of changes were needed (http://b/524750479#comment5 and onwards), for I feel like they were more related / needed for uboot, do we need to cherry-pick them to `main-kernel-2026`?",
       "revId": "10f6d538c651ab6dd44bb8679c8e2d6522f13a68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646abe31_af9537b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-06T11:56:25Z",
+      "side": 1,
+      "message": "@ramm",
+      "parentUuid": "0711e327_458d04a2",
+      "revId": "10f6d538c651ab6dd44bb8679c8e2d6522f13a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
