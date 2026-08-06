@@ -376,6 +376,7 @@ int test__join_cgroup(const char *path);
 	___ok;								\
 })
 
+<<<<<<< HEAD   (2cee2416baae662580c7ce03bbe53d1c8f23d203 Merge 6.1.176 into android14-6.1-lts)
 #define ASSERT_OK_FD(fd, name) ({					\
 	static int duration = 0;					\
 	int ___fd = (fd);						\
@@ -384,6 +385,23 @@ int test__join_cgroup(const char *path);
 	      ___fd, errno);						\
 	___ok;								\
 })
+||||||| BASE   (fdb6fcb41cc741ad5eaa7995f278dfcb94fdf795 Linux 6.1.176)
+=======
+#define SYS(goto_label, fmt, ...)					\
+	({								\
+		char cmd[1024];						\
+		snprintf(cmd, sizeof(cmd), fmt, ##__VA_ARGS__);		\
+		if (!ASSERT_OK(system(cmd), cmd))			\
+			goto goto_label;				\
+	})
+
+#define SYS_NOFAIL(fmt, ...)						\
+	({								\
+		char cmd[1024];						\
+		snprintf(cmd, sizeof(cmd), fmt, ##__VA_ARGS__);		\
+		system(cmd);						\
+	})
+>>>>>>> BRANCH (25fcaef7948912652905e96922f36583a84fffed netfilter: nf_tables: unconditionally bump set->nelems befor)
 
 static inline __u64 ptr_to_u64(const void *ptr)
 {
