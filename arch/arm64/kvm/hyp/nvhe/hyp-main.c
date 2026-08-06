@@ -1637,7 +1637,7 @@ static void handle___pkvm_sync_ftrace(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(unsigned long, host_func_pg, host_ctxt, 1);
 
-	cpu_reg(host_ctxt, 1) = __pkvm_sync_ftrace(host_func_pg);
+	errno_to_smccc(__pkvm_sync_ftrace(host_func_pg), host_ctxt);
 }
 
 static void handle___pkvm_disable_ftrace(struct kvm_cpu_context *host_ctxt)
