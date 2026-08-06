@@ -22,6 +22,30 @@
       },
       "revId": "5e2e73f82a44fb35c7db60ad8acd8e4e27270efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41767c59_78312d2f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-08-06T14:48:42Z",
+      "side": 1,
+      "message": "`smmu_emulate_enable()` is called when the host write `CR0` to enable the SMMU and it will handle any emulation (as stream table shadowing) before updating the HW.\n`is_cmdq_enabled()` checks the new version which is not in HW yet, so if the host enables the smmu and the command queue at once, the command queue will be disabled in HW.",
+      "parentUuid": "84105aa1_6dfabed9",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 778,
+        "endChar": 54
+      },
+      "revId": "5e2e73f82a44fb35c7db60ad8acd8e4e27270efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
