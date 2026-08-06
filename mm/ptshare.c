@@ -83,19 +83,55 @@ static void ptshare_x86_flush_tlb_range_ipi(void *data)
 }
 #endif
 
+#ifdef CONFIG_ARM64
+static void ptshare_arm64_flush_tlb_range(unsigned long start, unsigned long end)
+{
+	unsigned long stride = PAGE_SIZE;
+	unsigned long pages;
+
+	/* Check for ULONG_MAX overflow */
+	if (end == ULONG_MAX) {
+		flush_tlb_all();
+		return;
+	}
+
+	start = round_down(start, stride);
+	end = round_up(end, stride);
+	pages = (end - start) >> PAGE_SHIFT;
+
+	if (__flush_tlb_range_limit_excess(start, end, pages, stride)) {
+		flush_tlb_all();
+		return;
+	}
+
+	dsb(ishst);
+	__flush_tlb_range_op(vaae1is, start, pages, stride, 0,
+			     TLBI_TTL_UNKNOWN, false, lpa2_is_enabled());
+	dsb(ish);
+	__repeat_tlbi_sync(vaae1is, 0);
+	isb();
+}
+#else
+static void ptshare_arm64_flush_tlb_range(unsigned long start, unsigned long end)
+{
+}
+#endif
+
 static void ptshare_arch_invalidate_secondary_tlbs(struct mmu_notifier *mn,
 						  struct mm_struct *mm,
 						  unsigned long start,
 						  unsigned long end)
 {
 	/*
-	 * Global TLB Broadcast (IPI):
+	 * Global TLB Broadcast:
 	 *
 	 * Since ptshare_mm is a "headless" address space, we must broadcast
 	 * invalidations to all CPUs to reach client processes.
 	 */
 	if (IS_ENABLED(CONFIG_X86))
 		on_each_cpu(ptshare_x86_flush_tlb_range_ipi, NULL, 1);
+	else if (IS_ENABLED(CONFIG_ARM64))
+		ptshare_arm64_flush_tlb_range(start, end);
 }
 
 static const struct mmu_notifier_ops ptshare_mmu_notifier_ops = {
