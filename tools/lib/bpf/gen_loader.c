@@ -1417,9 +1417,17 @@ void bpf_gen__prog_load(struct bpf_gen *gen,
 	/* For SEC("struct_ops") programs, expected_attach_type contains the .data offset
 	 * where Phase 1 saved the dynamic kernel attach index. Copy it into prog_load_attr.
 	 */
-	if (prog_type == BPF_PROG_TYPE_STRUCT_OPS && load_attr->expected_attach_type)
-		move_blob2blob(gen, attr_field(prog_load_attr, expected_attach_type), 4,
-			       load_attr->expected_attach_type);
+	if (prog_type == BPF_PROG_TYPE_STRUCT_OPS) {
+		if (load_attr->expected_attach_type)
+			move_blob2blob(gen, attr_field(prog_load_attr, expected_attach_type), 4,
+				       load_attr->expected_attach_type);
+		if (load_attr->attach_btf_id) {
+			move_blob2blob(gen, attr_field(prog_load_attr, attach_btf_id), 4,
+				       load_attr->attach_btf_id);
+			move_blob2blob(gen, attr_field(prog_load_attr, attach_btf_obj_fd), 4,
+				       load_attr->attach_btf_id + 4);
+		}
+	}
 
 	/* emit PROG_LOAD command */
 	emit_sys_bpf(gen, BPF_PROG_LOAD, prog_load_attr, attr_size);
