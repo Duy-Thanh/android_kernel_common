@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2884044d_add5b78b",
+        "filename": "android/abi_gki_protected_exports_aarch64",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-06T19:44:08Z",
+      "side": 1,
+      "message": "Wait, why are these additions needed? Its unclear from the commit message if this was just accidentally added or intentional",
+      "revId": "46e5bfc70dc3ee4b56d5913a7550195ae989ae3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
