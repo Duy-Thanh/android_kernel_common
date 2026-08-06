@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a94d04e_3be0338e",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-06T18:03:01Z",
+      "side": 1,
+      "message": "Looks like we have a bug here: unlike in 6.12 (aosp/3671376) and older kernels, we have no `sort_memblock_regions()` here (it was removed in https://lore.kernel.org/all/20250311043718.91004-1-gshan@redhat.com/), so we append pvmfw to the end of the list, leaving it unsorted, while `find_mem_range()` still relies on it being sorted?",
+      "revId": "f7de0c50598c4d74381e8fa60ec2381975019b79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
