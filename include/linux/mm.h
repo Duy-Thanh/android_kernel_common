@@ -2724,15 +2724,25 @@ static inline bool get_user_page_fast_only(unsigned long addr,
 /*
  * per-process(per-mm_struct) statistics.
  */
-static inline unsigned long get_mm_counter(struct mm_struct *mm, int member)
+static inline unsigned long __get_mm_counter(struct mm_struct *mm, int member)
 {
 	return percpu_counter_read_positive(&mm->rss_stat[member]);
 }
 
-static inline unsigned long get_mm_counter_sum(struct mm_struct *mm, int member)
+static inline unsigned long __get_mm_counter_sum(struct mm_struct *mm, int member)
 {
 	return percpu_counter_sum_positive(&mm->rss_stat[member]);
 }
+
+#ifdef CONFIG_PTSHARE
+unsigned long ptshare_get_mm_counter(struct mm_struct *mm, int member);
+unsigned long ptshare_get_mm_counter_sum(struct mm_struct *mm, int member);
+#define get_mm_counter(mm, member) ptshare_get_mm_counter(mm, member)
+#define get_mm_counter_sum(mm, member) ptshare_get_mm_counter_sum(mm, member)
+#else
+#define get_mm_counter(mm, member) __get_mm_counter(mm, member)
+#define get_mm_counter_sum(mm, member) __get_mm_counter_sum(mm, member)
+#endif
 
 void mm_trace_rss_stat(struct mm_struct *mm, int member);
 
@@ -2777,6 +2787,18 @@ static inline unsigned long get_mm_rss(struct mm_struct *mm)
 	return get_mm_counter(mm, MM_FILEPAGES) +
 		get_mm_counter(mm, MM_ANONPAGES) +
 		get_mm_counter(mm, MM_SHMEMPAGES);
+}
+
+/*
+ * RSS of @mm's own page tables only. With CONFIG_PTSHARE, get_mm_rss() also
+ * counts pages mapped through page tables shared with other processes,
+ * which killing @mm would not free; the OOM killer uses this instead.
+ */
+static inline unsigned long __get_mm_rss(struct mm_struct *mm)
+{
+	return __get_mm_counter(mm, MM_FILEPAGES) +
+		__get_mm_counter(mm, MM_ANONPAGES) +
+		__get_mm_counter(mm, MM_SHMEMPAGES);
 }
 
 static inline unsigned long get_mm_hiwater_rss(struct mm_struct *mm)

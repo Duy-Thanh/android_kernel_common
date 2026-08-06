@@ -184,6 +184,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(rss_stat);
 
 void mm_trace_rss_stat(struct mm_struct *mm, int member)
 {
+	/*
+	 * A ptshare shadow mm has no task. Its counters are reported as part
+	 * of every member's counters (get_mm_counter_sum() in the tracepoint),
+	 * not under an mm_id that no process owns.
+	 */
+	if (mm_is_ptshare_shadow(mm))
+		return;
 	trace_rss_stat(mm, member);
 }
 EXPORT_SYMBOL_GPL(mm_trace_rss_stat);
