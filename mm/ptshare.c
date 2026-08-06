@@ -61,19 +61,73 @@ static inline void mmap_lock_set_ptshare_class(struct mm_struct *mm)
 	lockdep_set_class(&mm->mmap_lock, &ptshare_mmap_lock_key);
 }
 
+#ifdef CONFIG_X86
+static void ptshare_x86_flush_tlb_range_ipi(void *data)
+{
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+
+	/*
+	 * If INVPCID is available, use it to flush all non-global
+	 * mappings across all PCIDs. This avoids unnecessary
+	 * flushing of kernel (global) mappings.
+	 */
+	if (static_cpu_has(X86_FEATURE_INVPCID)) {
+		invpcid_flush_all_nonglobals();
+	} else {
+		/* Fallback to flushing everything if INVPCID is not supported */
+		__flush_tlb_all();
+	}
+}
+#else
+static void ptshare_x86_flush_tlb_range_ipi(void *data)
+{
+}
+#endif
+
+static void ptshare_arch_invalidate_secondary_tlbs(struct mmu_notifier *mn,
+						  struct mm_struct *mm,
+						  unsigned long start,
+						  unsigned long end)
+{
+	/*
+	 * Global TLB Broadcast (IPI):
+	 *
+	 * Since ptshare_mm is a "headless" address space, we must broadcast
+	 * invalidations to all CPUs to reach client processes.
+	 */
+	if (IS_ENABLED(CONFIG_X86))
+		on_each_cpu(ptshare_x86_flush_tlb_range_ipi, NULL, 1);
+}
+
+/*
+ * exit_mmap() of the shadow MM calls this before it frees any page tables
+ * that are still left in the shadow MM, and unlinks the notifier right after.
+ * Those frees are therefore not covered by arch_invalidate_secondary_tlbs().
+ * The shadow MM only exits once every client has detached, so a single
+ * global flush here is enough to make the later frees safe.
+ */
+static void ptshare_mmu_notifier_release(struct mmu_notifier *mn,
+					 struct mm_struct *mm)
+{
+	ptshare_arch_invalidate_secondary_tlbs(mn, mm, 0, ULONG_MAX);
+}
+
+static const struct mmu_notifier_ops ptshare_mmu_notifier_ops = {
+	.release = ptshare_mmu_notifier_release,
+	.arch_invalidate_secondary_tlbs = ptshare_arch_invalidate_secondary_tlbs,
+};
+
 struct ptshare_desc *ptshare_alloc_desc(void)
 {
 	struct ptshare_desc *desc;
 
 	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
 	if (!desc)
-		return NULL;
+		goto out_err;
 
 	desc->ptshare_mm = mm_alloc();
-	if (!desc->ptshare_mm) {
-		kfree(desc);
-		return NULL;
-	}
+	if (!desc->ptshare_mm)
+		goto free_desc;
 	mmgrab(desc->ptshare_mm);
 	mm_flags_test_and_set(MMF_PTSHARE_SHADOW, desc->ptshare_mm);
 
@@ -85,14 +139,31 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 	desc->memcg = get_mem_cgroup_from_mm(current->mm);
 #endif
 
-	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
-	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
-
 	mmap_lock_set_ptshare_class(desc->ptshare_mm);
 
 	refcount_set(&desc->refcount, 1);
 
+	/* Initialize mmu_notifier */
+	desc->mmu_notifier.ops = &ptshare_mmu_notifier_ops;
+	if (mmu_notifier_register(&desc->mmu_notifier, desc->ptshare_mm))
+		goto free_mm;
+
+	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
+	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
+
 	return desc;
+
+free_mm:
+#ifdef CONFIG_MEMCG
+	if (desc->memcg)
+		mem_cgroup_put(desc->memcg);
+#endif
+	mmput(desc->ptshare_mm);
+	mmdrop(desc->ptshare_mm);
+free_desc:
+	kfree(desc);
+out_err:
+	return NULL;
 }
 
 /*
@@ -206,6 +277,19 @@ int ptshare_validate_mmap(struct file *file, unsigned long addr,
 		*vm_flags &= ~VM_PT_SHARED;
 		return 0;
 	}
+
+	/*
+	 * Shared PTEs are only cleared through the shadow MM (rmap walks and
+	 * zaps skip client VMAs), so secondary MMUs subscribed to a client mm
+	 * (KVM, IOMMU SVA, HMM mirrors) would never be invalidated. Refuse
+	 * sharing on mms with mmu notifiers; __mmu_notifier_register() refuses
+	 * the converse. Test for mm->notifier_subscriptions rather than for
+	 * live subscribers: it is only allocated under the mmap write lock
+	 * (held here) and is not freed before the mm, whereas interval
+	 * notifiers can be added to it later without mmap_lock.
+	 */
+	if (mm_has_notifiers(current->mm))
+		return -EBUSY;
 
 	desc = rcu_dereference_protected(current->mm->ptshare_desc,
 					 lockdep_is_held(&current->mm->mmap_lock));
@@ -639,6 +723,10 @@ static inline void ptshare_remove_vma(struct ptshare_desc *desc,
 	 * range against the TASK_SIZE of current, which can be smaller than
 	 * the shadow address (e.g. compat tasks). The shadow VMA is never
 	 * split or merged, so it covers [start, end) exactly.
+	 *
+	 * If removal still fails, the shadow VMA and its page tables stay
+	 * until the shadow MM exits; ptshare_mmu_notifier_release() issues
+	 * the global TLB flush before they are freed there.
 	 */
 	mmap_write_lock(ptshare_mm);
 	vma = vma_find(&vmi, end);
@@ -736,10 +824,12 @@ void ptshare_exit(struct mm_struct *mm)
 
 	if (desc) {
 		RCU_INIT_POINTER(mm->ptshare_desc, NULL);
-		if (mm_is_ptshare_shadow(mm))
+		if (mm_is_ptshare_shadow(mm)) {
+			mmu_notifier_unregister(&desc->mmu_notifier, mm);
 			ptshare_free_desc_rcu(desc);
-		else
+		} else {
 			ptshare_put_desc(desc);
+		}
 	}
 }
 

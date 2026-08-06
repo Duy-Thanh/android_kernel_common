@@ -11,6 +11,7 @@
 #include <linux/mmu_notifier.h>
 #include <linux/export.h>
 #include <linux/mm.h>
+#include <linux/ptshare.h>
 #include <linux/err.h>
 #include <linux/interval_tree.h>
 #include <linux/srcu.h>
@@ -614,6 +615,18 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 			 (subscription->ops->invalidate_range_start ||
 			  subscription->ops->invalidate_range_end))))
 		return -EINVAL;
+
+	/*
+	 * ptshare: shared PTEs are only cleared through the shadow MM, so a
+	 * subscriber on a client mm would not be told about reclaim,
+	 * migration or truncation of shared pages. A client mm never has
+	 * notifier_subscriptions (ptshare_validate_mmap() refuses sharing
+	 * once it exists and fork() starts without), so every registration
+	 * on it, interval notifiers included, gets here first. The shadow
+	 * MM is exempt: it carries the domain's TLB broadcast notifier.
+	 */
+	if (mm_shares_pagetables(mm) && !mm_is_ptshare_shadow(mm))
+		return -EBUSY;
 
 	if (!mm->notifier_subscriptions) {
 		/*
