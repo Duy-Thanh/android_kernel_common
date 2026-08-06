@@ -262,6 +262,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0692c8e7_4b1dcd2a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-06T21:29:35Z",
+      "side": 1,
+      "message": "An idea how to fix this correctly (and as a bonus, clean up some other existing mess):\n\n1. Implement the idea I described long ago in the comment in `pkvm_host_use_dma()`: initialize MMIO page states not with (PKVM_PAGE_NONE, PKVM_ID_HYP) but with (PKVM_PAGE_NONE, PKVM_ID_HOST) (which means simply leaving PTEs zeroed, i.e. do nothing), denoting that the given MMIO page is already owned by the host, not by the hypervisor, just hasn\u0027t been lazily mapped for the host yet. (That will also align it with pKVM-ARM which has the same assumption, for instance, in its lazy MMIO mapping in `host_stage2_fault()` -\u003e `host_stage2_adjust_range` -\u003e `if (pte) return -EPERM`.)\n\n2. After that, fix the issue simply by using `pkvm_pgtable_set_owner()` instead of plain `pkvm_pgtable_unmap()` for unmapping pKVM and pvmfw memory from host MMU.\n\nWith that, `fix_host_mmu_pgstate_walker()` won\u0027t need to fix any non-present PTEs, neither memory nor MMIO nor pvmfw.\n\nI\u0027m gonna try to implement that.",
+      "parentUuid": "c286c508_02de96d0",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
