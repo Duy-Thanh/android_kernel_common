@@ -134,7 +134,7 @@ struct platform_device_info {
 
 		const struct property_entry *properties;
 
-		ANDROID_KABI_RESERVE(1);
+		u8 unused;
 };
 extern struct platform_device *platform_device_register_full(
 		const struct platform_device_info *pdevinfo);
