@@ -1176,6 +1176,7 @@ struct mm_struct {
 #endif
 #ifdef CONFIG_PTSHARE
 		struct ptshare_desc __rcu *ptshare_desc;
+		atomic_t ptshare_vmas;
 #endif
 #if defined(CONFIG_TRANSPARENT_HUGEPAGE) && !defined(CONFIG_SPLIT_PMD_PTLOCKS)
 		pgtable_t pmd_huge_pte; /* protected by page_table_lock */
