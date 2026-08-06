@@ -113,6 +113,13 @@
 #define DIRECT_MAP_PHYSMEM_END	__pa(PAGE_END - 1)
 
 #define MIN_THREAD_SHIFT	(14 + KASAN_THREAD_SHIFT)
+#define MIN_VARIABLE_THREAD_SHIFT	(13 + KASAN_THREAD_SHIFT)
+
+#if (MIN_VARIABLE_THREAD_SHIFT < PAGE_SHIFT)
+#define MIN_RUNTIME_THREAD_SHIFT	PAGE_SHIFT
+#else
+#define MIN_RUNTIME_THREAD_SHIFT	MIN_VARIABLE_THREAD_SHIFT
+#endif
 
 /*
  * VMAP'd stacks are allocated at page granularity, so we must ensure that such
@@ -129,6 +136,11 @@
 #endif
 
 #define THREAD_SIZE		(UL(1) << THREAD_SHIFT)
+
+#ifndef __ASSEMBLY__
+extern int kernel_thread_shift;
+#define vm_stack_pages()	(1UL << (kernel_thread_shift - PAGE_SHIFT))
+#endif
 
 #define THREAD_ALIGN		THREAD_SIZE
 
