@@ -12,6 +12,7 @@
  * Author: Kalesh Singh <kaleshsingh@google.com>
  */
 #include <linux/ptshare.h>
+#include <linux/export.h>
 #include <linux/mm_types.h>
 #include <linux/file.h>
 #include <linux/mmap_lock.h>
@@ -356,6 +357,8 @@ int ptshare_validate_mmap(struct file *file, unsigned long addr,
 
 		rcu_assign_pointer(current->mm->ptshare_desc, desc);
 		mm_flags_test_and_set(MMF_PTSHARE_CREATOR, current->mm);
+		/* Joining a domain adds the shadow's RSS to ours. */
+		mm_trace_rss_stat(current->mm, MM_FILEPAGES);
 
 		/*
 		 * Since we were not previously part of any shared page table
@@ -720,8 +723,10 @@ unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
 		goto out_unmap;
 
 	install_err = __ptshare_install_vma(vma);
-	if (!install_err)
+	if (!install_err) {
+		atomic_inc(&mm->ptshare_vmas);
 		return addr;
+	}
 
 	err = install_err;
 
@@ -830,6 +835,7 @@ void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc)
 	struct vm_area_struct *shadow_vma;
 	bool should_remove = false;
 	unsigned long start, end;
+	struct mm_struct *mm = vma->vm_mm;
 
 	if (!desc)
 		return;
@@ -851,6 +857,15 @@ void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc)
 
 	if (should_remove)
 		ptshare_remove_vma(desc, start, end);
+
+	if (mm) {
+		if (atomic_dec_and_test(&mm->ptshare_vmas)) {
+			rcu_assign_pointer(mm->ptshare_desc, NULL);
+			ptshare_put_desc(desc);
+			/* Leaving the domain drops the shadow's RSS from ours. */
+			mm_trace_rss_stat(mm, MM_FILEPAGES);
+		}
+	}
 }
 
 /**
@@ -890,9 +905,12 @@ int ptshare_fork_vma(struct mm_struct *mm, struct vm_area_struct *vma)
 			vm_flags_clear(vma, VM_PT_SHARED);
 			return retval;
 		}
+		atomic_inc(&mm->ptshare_vmas);
 		if (!rcu_access_pointer(mm->ptshare_desc)) {
 			rcu_assign_pointer(mm->ptshare_desc, desc);
 			ptshare_get_desc(desc);
+			/* Joining a domain adds the shadow's RSS to ours. */
+			mm_trace_rss_stat(mm, MM_FILEPAGES);
 		}
 	}
 	return 0;
@@ -1106,6 +1124,12 @@ vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf)
 out:
 	ptshare_unbind_active_memcg(memcg, old_memcg);
 	/*
+	 * The fault may have added pages to the shadow mm, whose rss_stat
+	 * events are not emitted. Report the member's summed file RSS from
+	 * its own context instead, so tracing can attribute it.
+	 */
+	mm_trace_rss_stat(vmf->vma->vm_mm, MM_FILEPAGES);
+	/*
 	 * If handle_pte_fault() returned RETRY or COMPLETED, it already
 	 * dropped the manager lock; we must also drop the guest lock to
 	 * follow the fault handler contract.
@@ -1195,3 +1219,32 @@ bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
 
 	return false;
 }
+unsigned long ptshare_get_mm_counter(struct mm_struct *mm, int member)
+{
+	unsigned long sum = __get_mm_counter(mm, member);
+	struct ptshare_desc *desc;
+
+	rcu_read_lock();
+	desc = rcu_dereference(mm->ptshare_desc);
+	if (desc && desc->ptshare_mm != mm)
+		sum += __get_mm_counter(desc->ptshare_mm, member);
+	rcu_read_unlock();
+
+	return sum;
+}
+EXPORT_SYMBOL(ptshare_get_mm_counter);
+
+unsigned long ptshare_get_mm_counter_sum(struct mm_struct *mm, int member)
+{
+	unsigned long sum = __get_mm_counter_sum(mm, member);
+	struct ptshare_desc *desc;
+
+	rcu_read_lock();
+	desc = rcu_dereference(mm->ptshare_desc);
+	if (desc && desc->ptshare_mm != mm)
+		sum += __get_mm_counter_sum(desc->ptshare_mm, member);
+	rcu_read_unlock();
+
+	return sum;
+}
+EXPORT_SYMBOL(ptshare_get_mm_counter_sum);
