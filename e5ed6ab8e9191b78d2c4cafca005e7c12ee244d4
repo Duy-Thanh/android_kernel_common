@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ee72bdc_4f423a16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-06T08:37:34Z",
+      "side": 1,
+      "message": "AI shows a call stack about when the apic driver is installed and when interrupt is enabled:\n  start_kernel()                                    [init/main.c:910]\n  │\n  ├── setup_arch()                                  [init/main.c:932] ← INTERRUPTS DISABLED\n  │   │\n  │   ├── check_x2apic()                           [setup.c:1052]\n  │   │   └── x2apic_mode \u003d 1                      (BIOS enabled x2apic)\n  │   │\n  │   └── acpi_boot_init()                          [setup.c:1233]\n  │       └── acpi_process_madt()                   [boot.c:1659]\n  │           └── acpi_table_parse(ACPI_SIG_MADT, acpi_parse_madt)\n  │               └── acpi_parse_madt()             [boot.c:148]\n  │                   └── default_acpi_madt_oem_check()  [probe_64.c:31]\n  │                       └── for each driver:\n  │                           └── x2apic_acpi_madt_oem_check()\n  │                               └── x2apic_enabled() → true  ← X2APIC DRIVER INSTALLED HERE\n  │                               └── apic_install_driver(\u0026apic_x2apic_cluster or \u0026apic_x2apic_phys)\n  │\n  ├── init_IRQ()                                    [init/main.c:1016] ← INTERRUPTS DISABLED\n  │                                                   (uses the x2apic driver already installed)\n  │\n  ├── time_init()                                   [init/main.c:1024] ← INTERRUPTS DISABLED\n  │\n  ├── local_irq_enable()                            [init/main.c:1039] ← INTERRUPTS ENABLED\n  │                                                   (x2apic driver already active) \n\n\nI also tried with adding a dump_stack() in default_acpi_madt_oem_check, the pVM booting shows the cluster x2apic driver is installed even earlier from `early_acpi_boot_init`. Later in `acpi_boot_init`, the cluster x2apic driver will be installed again.\n```\n[    0.000973] Call Trace:\n[    0.000975]  \u003cTASK\u003e\n[    0.000977]  dump_stack_lvl+0x2f/0xa0\n[    0.000980]  dump_stack+0x10/0x19\n[    0.000981]  default_acpi_madt_oem_check+0x70/0xa0\n[    0.000984]  acpi_parse_madt+0x6b/0xb0\n[    0.000986]  ? __pfx_acpi_parse_madt+0x10/0x10\n[    0.000988]  acpi_table_parse+0xbb/0xd0\n[    0.000990]  early_acpi_process_madt+0x1c/0x80\n[    0.000992]  early_acpi_boot_init+0x64/0xb0\n[    0.000993]  setup_arch+0x35a/0x4f0\n[    0.000996]  start_kernel+0x5f/0x410\n[    0.000998]  x86_64_start_reservations+0x24/0x30\n[    0.000999]  x86_64_start_kernel+0xf5/0x170\n[    0.001001]  common_startup_64+0x13e/0x140\n[    0.001003]  \u003c/TASK\u003e\n[    0.001003] default_acpi_madt_oem_check: drv (____ptrval____) cluster x2apic\n[    0.001033] APIC: Switched APIC routing to: cluster x2apic\n```\n\n And if we want to use physical x2apic driver, we need to add `x2apic_phys` in the kernel command line.\n \nSo it looks like before the interrupt is enabled, the x2apic driver is already instead with cluster x2apic driver unless it is not compiled in the kernel image? If it is this case, maybe we can try adding `x2apic_phys` in the kernel command line to make it install physical x2apic driver as this driver should be in the kernel.",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f9e8ab0_33491010",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
