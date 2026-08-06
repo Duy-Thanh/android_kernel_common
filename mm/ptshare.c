@@ -15,6 +15,7 @@
 #include <linux/mm_types.h>
 #include <linux/file.h>
 #include <linux/mmap_lock.h>
+#include <linux/mmu_notifier.h>
 #include <linux/mempolicy.h>
 #include <linux/slab.h>
 #include <linux/sched/mm.h>
@@ -59,19 +60,59 @@ static inline void mmap_lock_set_ptshare_class(struct mm_struct *mm)
 	lockdep_set_class(&mm->mmap_lock, &ptshare_mmap_lock_key);
 }
 
+#ifdef CONFIG_X86
+static void ptshare_x86_flush_tlb_range_ipi(void *data)
+{
+	count_vm_tlb_event(NR_TLB_LOCAL_FLUSH_ALL);
+
+	/*
+	 * If INVPCID is available, use it to flush all non-global
+	 * mappings across all PCIDs. This avoids unnecessary
+	 * flushing of kernel (global) mappings.
+	 */
+	if (static_cpu_has(X86_FEATURE_INVPCID)) {
+		invpcid_flush_all_nonglobals();
+	} else {
+		/* Fallback to flushing everything if INVPCID is not supported */
+		__flush_tlb_all();
+	}
+}
+#else
+static void ptshare_x86_flush_tlb_range_ipi(void *data)
+{
+}
+#endif
+
+static void ptshare_arch_invalidate_secondary_tlbs(struct mmu_notifier *mn,
+						  struct mm_struct *mm,
+						  unsigned long start,
+						  unsigned long end)
+{
+	/*
+	 * Global TLB Broadcast (IPI):
+	 *
+	 * Since ptshare_mm is a "headless" address space, we must broadcast
+	 * invalidations to all CPUs to reach client processes.
+	 */
+	if (IS_ENABLED(CONFIG_X86))
+		on_each_cpu(ptshare_x86_flush_tlb_range_ipi, NULL, 1);
+}
+
+static const struct mmu_notifier_ops ptshare_mmu_notifier_ops = {
+	.arch_invalidate_secondary_tlbs = ptshare_arch_invalidate_secondary_tlbs,
+};
+
 struct ptshare_desc *ptshare_alloc_desc(void)
 {
 	struct ptshare_desc *desc;
 
 	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
 	if (!desc)
-		return NULL;
+		goto out_err;
 
 	desc->ptshare_mm = mm_alloc();
-	if (!desc->ptshare_mm) {
-		kfree(desc);
-		return NULL;
-	}
+	if (!desc->ptshare_mm)
+		goto free_desc;
 	mmgrab(desc->ptshare_mm);
 	mm_flags_test_and_set(MMF_PTSHARE_SHADOW, desc->ptshare_mm);
 
@@ -83,14 +124,31 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 	desc->memcg = get_mem_cgroup_from_mm(current->mm);
 #endif
 
-	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
-	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
-
 	mmap_lock_set_ptshare_class(desc->ptshare_mm);
 
 	refcount_set(&desc->refcount, 1);
 
+	/* Initialize mmu_notifier */
+	desc->mmu_notifier.ops = &ptshare_mmu_notifier_ops;
+	if (mmu_notifier_register(&desc->mmu_notifier, desc->ptshare_mm))
+		goto free_mm;
+
+	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
+	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
+
 	return desc;
+
+free_mm:
+#ifdef CONFIG_MEMCG
+	if (desc->memcg)
+		mem_cgroup_put(desc->memcg);
+#endif
+	mmput(desc->ptshare_mm);
+	mmdrop(desc->ptshare_mm);
+free_desc:
+	kfree(desc);
+out_err:
+	return NULL;
 }
 
 /*
@@ -644,10 +702,12 @@ void ptshare_exit(struct mm_struct *mm)
 
 	if (desc) {
 		RCU_INIT_POINTER(mm->ptshare_desc, NULL);
-		if (mm_is_ptshare_shadow(mm))
+		if (mm_is_ptshare_shadow(mm)) {
+			mmu_notifier_unregister(&desc->mmu_notifier, mm);
 			ptshare_free_desc_rcu(desc);
-		else
+		} else {
 			ptshare_put_desc(desc);
+		}
 	}
 }
 
@@ -934,3 +994,4 @@ bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
 
 	return false;
 }
+

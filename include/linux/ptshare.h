@@ -6,6 +6,7 @@
 #include <uapi/asm-generic/mman-common.h>
 #include <linux/refcount.h>
 #include <linux/memcontrol.h>
+#include <linux/mmu_notifier.h>
 
 struct mm_struct;
 struct mem_cgroup;
@@ -13,6 +14,7 @@ struct mem_cgroup;
 struct ptshare_desc {
 	/* The headless shadow MM for this domain */
 	struct mm_struct *ptshare_mm;
+	struct mmu_notifier mmu_notifier;
 	struct mem_cgroup *memcg;
 	refcount_t refcount;
 	struct rcu_head rcu;
