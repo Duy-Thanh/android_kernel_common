@@ -1507,7 +1507,7 @@ void exec_mm_release(struct task_struct *tsk, struct mm_struct *mm)
  * Allocates a new mm structure and duplicates the provided @oldmm structure
  * content into it.
  *
- * Return: the duplicated mm or NULL on failure.
+ * Return: the duplicated mm or ERR_PTR on failure.
  */
 static struct mm_struct *dup_mm(struct task_struct *tsk,
 				struct mm_struct *oldmm)
@@ -1527,15 +1527,18 @@ static struct mm_struct *dup_mm(struct task_struct *tsk,
 
 	uprobe_start_dup_mmap();
 	err = dup_mmap(mm, oldmm);
+	uprobe_end_dup_mmap();
+
 	if (err)
 		goto free_pt;
-	uprobe_end_dup_mmap();
 
 	mm->hiwater_rss = get_mm_rss(mm);
 	mm->hiwater_vm = mm->total_vm;
 
-	if (mm->binfmt && !try_module_get(mm->binfmt->module))
+	if (mm->binfmt && !try_module_get(mm->binfmt->module)) {
+		err = -EINVAL;
 		goto free_pt;
+	}
 
 	return mm;
 
@@ -1544,11 +1547,10 @@ free_pt:
 	mm->binfmt = NULL;
 	mm_init_owner(mm, NULL);
 	mmput(mm);
-	if (err)
-		uprobe_end_dup_mmap();
+	return ERR_PTR(err);
 
 fail_nomem:
-	return NULL;
+	return ERR_PTR(-ENOMEM);
 }
 
 static int copy_mm(u64 clone_flags, struct task_struct *tsk)
@@ -1579,8 +1581,8 @@ static int copy_mm(u64 clone_flags, struct task_struct *tsk)
 		mm = oldmm;
 	} else {
 		mm = dup_mm(tsk, current->mm);
-		if (!mm)
-			return -ENOMEM;
+		if (IS_ERR(mm))
+			return PTR_ERR(mm);
 	}
 
 	tsk->mm = mm;
