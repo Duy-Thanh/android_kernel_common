@@ -68,12 +68,16 @@ static inline unsigned long *end_of_stack(const struct task_struct *p)
 
 static __always_inline unsigned long task_stack_size(const struct task_struct *task)
 {
+#ifdef CONFIG_ARCH_HAS_VARIABLE_STACK_SIZE
+	if (task->stack_vm_area)
+		return vm_stack_pages() * PAGE_SIZE;
+#endif
 	return THREAD_SIZE;
 }
 
 static __always_inline void *task_stack_base(const struct task_struct *task)
 {
-#if defined(CONFIG_STACK_GROWSUP)
+#if defined(CONFIG_STACK_GROWSUP) || !defined(CONFIG_ARCH_HAS_VARIABLE_STACK_SIZE)
 	return task_stack_page(task);
 #else
 	return task_stack_page(task) + THREAD_SIZE - task_stack_size(task);
