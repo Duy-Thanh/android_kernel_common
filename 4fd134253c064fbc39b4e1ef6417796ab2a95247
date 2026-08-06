@@ -33,6 +33,24 @@
       "message": "This patch has unresolved collision markers. Please be sure to test your patches before submitting them.",
       "revId": "4fd134253c064fbc39b4e1ef6417796ab2a95247",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15bd1fe9_fe9f7a21",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7142,
+      "author": {
+        "id": 4400136
+      },
+      "writtenOn": "2026-08-06T23:50:57Z",
+      "side": 1,
+      "message": "Sorry, android16-6.12-2026-03 doesn\u0027t require to cherry pick this CL",
+      "parentUuid": "7b1189aa_05b162d6",
+      "revId": "4fd134253c064fbc39b4e1ef6417796ab2a95247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
