@@ -67,6 +67,78 @@
       "message": "Please fix this WARNING reported by KernelCommit: The cherry pick line does not point to the correct original commit on the base b...\n\nThe cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: 27fa56a032d97187798f6bf2b14087cc126afeec\nFound commit: 82a0f56b0cb430dec34f3cb289cfdc4b6984f5e5\n\nPlease cherry-pick using: `git cherry-pick -s -x 27fa56a032d97187798f6bf2b14087cc126afeec`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "e897958dea19430f9c2d95167965e464528e7672",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126627de_41274f08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-06T13:31:23Z",
+      "side": 1,
+      "message": "I don\u0027t see this.",
+      "parentUuid": "ec07e3a0_c8c21ddf",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55fdb7c8_83df0449",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-06T13:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "750a3cf9_f1482035",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a006de52_e9d2d588",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-06T13:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6f4f5dd_b29400c1",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e468dbe_5a4cf3ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-06T13:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2af2e430_4a64e003",
+      "revId": "e897958dea19430f9c2d95167965e464528e7672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
