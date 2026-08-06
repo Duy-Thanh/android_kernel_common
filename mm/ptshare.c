@@ -84,19 +84,65 @@ static void ptshare_x86_flush_tlb_range_ipi(void *data)
 }
 #endif
 
+#ifdef CONFIG_ARM64
+/*
+ * The broadcast must complete itself instead of relying on the caller's
+ * sync: flush_tlb_mm() calls the notifier after its own __tlbi_sync_s1ish(),
+ * and the caller's sme_dvmsync() targets the shadow MM's cpumask, which is
+ * always empty since the shadow MM never runs. So every leg ends with the
+ * repeated TLBI (ARM64_WORKAROUND_REPEAT_TLBI) and, after the DSB, the SME
+ * DVMSync IPI to all SME-active CPUs (ARM64_WORKAROUND_4193714). Like the
+ * x86 IPI broadcast, this needs IRQs enabled, which holds for all callers.
+ */
+static void ptshare_arm64_flush_tlb_range(unsigned long start, unsigned long end)
+{
+	unsigned long stride = PAGE_SIZE;
+	unsigned long pages;
+
+	/* Check for ULONG_MAX overflow */
+	if (end == ULONG_MAX) {
+		flush_tlb_all();
+		sme_dvmsync_batch();
+		return;
+	}
+
+	start = round_down(start, stride);
+	end = round_up(end, stride);
+	pages = (end - start) >> PAGE_SHIFT;
+
+	if (__flush_tlb_range_limit_excess(start, end, pages, stride)) {
+		flush_tlb_all();
+		sme_dvmsync_batch();
+		return;
+	}
+
+	dsb(ishst);
+	__flush_tlb_range_op(vaae1is, start, pages, stride, 0,
+			     TLBI_TTL_UNKNOWN, false, lpa2_is_enabled());
+	__tlbi_sync_s1ish_batch();
+	isb();
+}
+#else
+static void ptshare_arm64_flush_tlb_range(unsigned long start, unsigned long end)
+{
+}
+#endif
+
 static void ptshare_arch_invalidate_secondary_tlbs(struct mmu_notifier *mn,
 						  struct mm_struct *mm,
 						  unsigned long start,
 						  unsigned long end)
 {
 	/*
-	 * Global TLB Broadcast (IPI):
+	 * Global TLB Broadcast:
 	 *
 	 * Since ptshare_mm is a "headless" address space, we must broadcast
 	 * invalidations to all CPUs to reach client processes.
 	 */
 	if (IS_ENABLED(CONFIG_X86))
 		on_each_cpu(ptshare_x86_flush_tlb_range_ipi, NULL, 1);
+	else if (IS_ENABLED(CONFIG_ARM64))
+		ptshare_arm64_flush_tlb_range(start, end);
 }
 
 /*
