@@ -87,6 +87,24 @@
       "parentUuid": "345d6f34_8afe712d",
       "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7530e6_b908d487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4027726
+      },
+      "writtenOn": "2026-08-06T10:52:09Z",
+      "side": 1,
+      "message": "Updated this patch with FROMGIT tag as this is added in PCI maintainer tree.",
+      "parentUuid": "4b4a361d_205f779a",
+      "revId": "9ab47502dfc7700adee55ab64b96f99ec03b8b61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
