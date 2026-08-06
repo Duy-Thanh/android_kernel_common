@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42b8e6e_43855b6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-06T16:32:55Z",
+      "side": 1,
+      "message": "I am in support of this if the Android team is willing. The whole reason the symbol was exported in ANDROID to start with was specifically for watchdog drivers to call. Without something like this then watchdog drivers could deadlock/die, which seems less than ideal.",
+      "revId": "bd779e05e55c64284e4935f8fc9d5222397b2a9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd138ec_7a7d2746",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-06T16:32:55Z",
+      "side": 1,
+      "message": "Do we actually need this check? I think I traced through `touch_softlockup_watchdog()` and I don\u0027t see the reason why it can\u0027t be called during NMI. Unless there\u0027s a specific reason why we can\u0027t call this, it seems better to reduce diffs against upstream...",
+      "range": {
+        "startLine": 445,
+        "startChar": 3,
+        "endLine": 446,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e8262a63_b8ce3a88",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 445,
+                "startChar": 0,
+                "endLine": 446,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tif ((++i \u0026 1023) \u003d\u003d 0)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd779e05e55c64284e4935f8fc9d5222397b2a9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
