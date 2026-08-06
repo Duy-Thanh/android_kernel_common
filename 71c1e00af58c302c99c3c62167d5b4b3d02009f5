@@ -16,6 +16,24 @@
       "message": "Please fix this linter message:\n\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "71c1e00af58c302c99c3c62167d5b4b3d02009f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2fe417_f1f77443",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-08-06T03:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9292cc2e_a443c00c",
+      "revId": "71c1e00af58c302c99c3c62167d5b4b3d02009f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
