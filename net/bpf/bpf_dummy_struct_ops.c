@@ -270,12 +270,13 @@ static int bpf_dummy_init_member(const struct btf_type *t,
 				 const struct btf_member *member,
 				 void *kdata, const void *udata)
 {
-	return -EOPNOTSUPP;
+	return 0;
 }
 
 static int bpf_dummy_reg(void *kdata, struct bpf_link *link)
 {
-	return -EOPNOTSUPP;
+	pr_info("[STRUCT_OPS_TRACE] bpf_dummy_reg: successfully registered struct_ops map!\n");
+	return 0;
 }
 
 static void bpf_dummy_unreg(void *kdata, struct bpf_link *link)
