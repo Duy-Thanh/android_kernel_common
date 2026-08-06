@@ -2104,7 +2104,7 @@ static int pkvm_mem_abort_device(struct kvm_vcpu *vcpu, struct kvm_memory_slot *
 
 		device = !pfn_is_map_memory(pfn);
 		if (device) {
-			int ret = kvm_call_hyp_nvhe(__pkvm_host_map_guest_mmio, pfn, gfn);
+			int ret = kvm_call_refill_hyp_nvhe(__pkvm_host_map_guest_mmio, pfn, gfn);
 			/* Ignore EEXIST as we might have raced with another vCPU. */
 			if (ret && (ret != -EEXIST)) {
 				return ret;

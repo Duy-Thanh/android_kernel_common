@@ -2001,7 +2001,7 @@ static void handle___pkvm_host_map_guest_mmio(struct kvm_cpu_context *host_ctxt)
 	ret = pkvm_host_map_guest_mmio(hyp_vcpu, pfn, gfn);
 
 out:
-	cpu_reg(host_ctxt, 1) = ret;
+	errno_to_smccc(ret, host_ctxt);
 }
 
 static void handle___pkvm_pviommu_attach(struct kvm_cpu_context *host_ctxt)
