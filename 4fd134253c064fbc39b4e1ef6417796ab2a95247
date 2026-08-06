@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/543157152",
       "revId": "4fd134253c064fbc39b4e1ef6417796ab2a95247",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b1189aa_05b162d6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7142,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-06T21:07:52Z",
+      "side": 1,
+      "message": "This patch has unresolved collision markers. Please be sure to test your patches before submitting them.",
+      "revId": "4fd134253c064fbc39b4e1ef6417796ab2a95247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
