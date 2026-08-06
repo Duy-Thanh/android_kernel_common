@@ -1509,7 +1509,7 @@ void exec_mm_release(struct task_struct *tsk, struct mm_struct *mm)
  * Allocates a new mm structure and duplicates the provided @oldmm structure
  * content into it.
  *
- * Return: the duplicated mm or NULL on failure.
+ * Return: the duplicated mm or ERR_PTR on failure.
  */
 static struct mm_struct *dup_mm(struct task_struct *tsk,
 				struct mm_struct *oldmm)
@@ -1548,9 +1548,10 @@ free_pt:
 	mmput(mm);
 	if (err)
 		uprobe_end_dup_mmap();
+	return ERR_PTR(err ?: -ENOMEM);
 
 fail_nomem:
-	return NULL;
+	return ERR_PTR(-ENOMEM);
 }
 
 static int copy_mm(u64 clone_flags, struct task_struct *tsk)
@@ -1581,8 +1582,8 @@ static int copy_mm(u64 clone_flags, struct task_struct *tsk)
 		mm = oldmm;
 	} else {
 		mm = dup_mm(tsk, current->mm);
-		if (!mm)
-			return -ENOMEM;
+		if (IS_ERR(mm))
+			return PTR_ERR(mm);
 	}
 
 	tsk->mm = mm;
