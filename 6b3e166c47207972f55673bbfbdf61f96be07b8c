@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231b77d5_c68b35f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3010084
+      },
+      "writtenOn": "2026-08-06T06:20:05Z",
+      "side": 1,
+      "message": "Hi @jstultz, I found that the presubmit fails with the error \"ERROR: modpost: \"hrtimer_try_to_cancel\" [sound/drivers/snd-aloop.ko] undefined!\" so I updated those symbols manually. Not sure whether it\u0027s the correct process. Could you please take a look? thanks.",
+      "revId": "6b3e166c47207972f55673bbfbdf61f96be07b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
