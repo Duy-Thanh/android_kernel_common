@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c85b348a_592357bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-06T15:23:57Z",
+      "side": 1,
+      "message": "\u003e This holds true for strict mode as well because flushing is guaranteed to happen before donation (either after unmap operation or in the page donation api).\n\nThis doesn\u0027t make it clear why it is guaranteed.\n\nFrom the code it looks like it is guaranteed by holding domain-\u003eflush_lock all the time while unmapping pages? So, I think it should be clearly mentioned in the commit message. (IOW, moving domain-\u003eflush_lock is quite a crucial part of what this patch does, while the commit message doesn\u0027t mention it at all).\n\n...Besides that, big pucture: so, this patch is not required for lazy mode support per se, it is just an optional optimization? And at the same time, this patch (specifically, moving domain-\u003eflush_lock) is the only reason for the tricky changes in the donation API in aosp/4090071?\n\nDo we already have any reliable numbers of an actual perf improvement with this optimization?\n\nI\u0027m thinking maybe we should restrain from adding this optimization, and thus avoid the need for aosp/4090071.\n\nFor comparison, pKVM-ARM\u0027s pvIOMMU implementation (drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c) seems to manage to safely unpin pages after flush _without_ walking page tables second time, and at the same time doesn\u0027t need to hack the donation API for that. Instead it uses a per-cpu `kvm_smmu_deferred_unuse` queue to remember the physical pages to be unpinned (which is populated during the page table walk while unmapping PTEs, and is drained after the TLB flush).",
+      "revId": "3635126133ee7f0b4f041c1cac5d50458bab02ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
