@@ -85,6 +85,24 @@
       "message": "Dear ChungKai, there is another patch 39b19974982e03bd7b950f33bc0855385845c9fb, which uses amu in func arch_cpu_idle_enter. Could you please rebase this patch? I don\u0027t have the permission to rebase your patch.",
       "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed981e5e_e18e2dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2026-08-06T06:16:18Z",
+      "side": 1,
+      "message": "I think this is arm64\u0027s bug, we should fix it instead of use vh, just like the following:\ndiff --git a/arch/arm64/kernel/topology.c b/arch/arm64/kernel/topology.c\nindex 5d07ee85bdae4..1f676a7474fd7 100644\n--- a/arch/arm64/kernel/topology.c\n+++ b/arch/arm64/kernel/topology.c\n@@ -274,6 +274,9 @@ void arch_cpu_idle_enter(void)\n        if (!amu_fie_cpu_supported(cpu))\n                return;\n\n+       if (!topology_scale_freq_source_cpu(cpu, SCALE_FREQ_SOURCE_ARCH))\n+               return;\n+\n        /* Kick in AMU update but only if one has not happened already */\n        if (housekeeping_cpu(cpu, HK_TYPE_TICK) \u0026\u0026\n            time_is_before_jiffies(per_cpu(cpu_amu_samples.last_scale_update, cpu)))\ndiff --git a/drivers/base/arch_topology.c b/drivers/base/arch_topology.c\nindex 170fca6abfad9..e558a2e15b83b 100644\n--- a/drivers/base/arch_topology.c\n+++ b/drivers/base/arch_topology.c\n@@ -124,6 +124,20 @@ void topology_clear_scale_freq_source(enum scale_freq_source source,\n }\n EXPORT_SYMBOL_GPL(topology_clear_scale_freq_source);\n\n+bool topology_scale_freq_source_cpu(int cpu, enum scale_freq_source source)\n+{\n+       struct scale_freq_data *sfd;\n+       bool ret \u003d false;\n+\n+       rcu_read_lock_sched();\n+       sfd \u003d rcu_dereference_sched(*per_cpu_ptr(\u0026sft_data, cpu));\n+       ret \u003d sfd \u0026\u0026 sfd-\u003esource \u003d\u003d source;\n+       rcu_read_unlock_sched();\n+\n+       return ret;\n+}\n+EXPORT_SYMBOL_GPL(topology_scale_freq_source_cpu);\n+\n void topology_scale_freq_tick(void)\n {\n        struct scale_freq_data *sfd \u003d rcu_dereference_sched(*this_cpu_ptr(\u0026sft_data));\ndiff --git a/include/linux/arch_topology.h b/include/linux/arch_topology.h\nindex fd2796d8debf1..e99446ffc0985 100644\n--- a/include/linux/arch_topology.h\n+++ b/include/linux/arch_topology.h\n@@ -48,6 +48,7 @@ struct scale_freq_data {\n void topology_scale_freq_tick(void);\n void topology_set_scale_freq_source(struct scale_freq_data *data, const struct cpumask *cpus);\n void topology_clear_scale_freq_source(enum scale_freq_source source, const struct cpumask *cpus);\n+bool topology_scale_freq_source_cpu(int cpu, enum scale_freq_source source);\n\n DECLARE_PER_CPU(unsigned long, hw_pressure);",
+      "parentUuid": "a8833a48_e09bb453",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
