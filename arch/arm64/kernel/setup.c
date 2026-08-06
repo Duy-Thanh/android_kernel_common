@@ -279,6 +279,30 @@ u64 cpu_logical_map(unsigned int cpu)
 }
 EXPORT_SYMBOL_GPL(cpu_logical_map);
 
+int kernel_thread_shift __ro_after_init = THREAD_SHIFT;
+EXPORT_SYMBOL_GPL(kernel_thread_shift);
+
+static int __init setup_kernel_thread_shift(char *str)
+{
+	unsigned long val;
+	int ret;
+
+	if (!str)
+		return -EINVAL;
+
+	ret = kstrtoul(str, 10, &val);
+	if (ret || val < MIN_RUNTIME_THREAD_SHIFT || val > THREAD_SHIFT) {
+		pr_err("Invalid kernel_thread_shift=%s, should be between %d and %d\n",
+		       str, MIN_RUNTIME_THREAD_SHIFT, THREAD_SHIFT);
+	} else {
+		kernel_thread_shift = val;
+		pr_info("Overridden kernel stack to %lu KB\n", (1UL << kernel_thread_shift) / 1024);
+	}
+
+	return 0;
+}
+early_param("kernel_thread_shift", setup_kernel_thread_shift);
+
 void __init __no_sanitize_address setup_arch(char **cmdline_p)
 {
 	setup_initial_init_mm(_text, _etext, _edata, _end);
