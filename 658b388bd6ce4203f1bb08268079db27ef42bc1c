@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6595506_41fe5655",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-06T16:04:30Z",
+      "side": 1,
+      "message": "BUG: Here we don\u0027t revert the previous shadow cmdq setup",
+      "range": {
+        "startLine": 442,
+        "startChar": 7,
+        "endLine": 442,
+        "endChar": 22
+      },
+      "revId": "658b388bd6ce4203f1bb08268079db27ef42bc1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
