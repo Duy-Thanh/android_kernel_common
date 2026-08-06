@@ -127,6 +127,11 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return &vma->__vm_ptshare_refcount;
 }
 
+static inline bool mm_shares_pagetables(struct mm_struct *mm)
+{
+	return rcu_access_pointer(mm->ptshare_desc) != NULL;
+}
+
 int ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
 void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
 
@@ -295,6 +300,16 @@ retry:
 	return page;
 }
 
+struct zap_details;
+
+vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf);
+
+bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
+				    struct zap_details *details);
+
+bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
+			   unsigned long addr);
+
 /*
  * madvise() behaviors that zap the PTEs of a range and must therefore
  * unshare a client VMA first. MADV_FREE is not listed: it only supports
@@ -350,6 +365,11 @@ static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
 static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_struct *vma)
 {
 	return NULL;
+}
+
+static inline bool mm_shares_pagetables(struct mm_struct *mm)
+{
+	return false;
 }
 
 static inline int ptshare_get_vma(struct vm_area_struct *vma,
@@ -452,6 +472,23 @@ static inline int ptshare_validate_mmap(struct file *file, unsigned long addr,
 					unsigned long pgoff)
 {
 	return 0;
+}
+
+static inline vm_fault_t ptshare_handle_mm_fault(struct vm_fault *vmf)
+{
+	return VM_FAULT_SIGBUS;
+}
+
+static inline bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
+						  struct zap_details *details)
+{
+	return false;
+}
+
+static inline bool ptshare_free_pte_range(struct mmu_gather *tlb,
+					  pgtable_t ptdesc, unsigned long addr)
+{
+	return false;
 }
 
 static inline bool ptshare_behavior_needs_unshare(int behavior)
