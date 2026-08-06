@@ -1255,7 +1255,7 @@ static void handle___pkvm_host_split_guest(struct kvm_cpu_context *host_ctxt)
 	ret = __pkvm_host_split_guest(gfn, size, hyp_vcpu);
 
 out:
-	cpu_reg(host_ctxt, 1) = ret;
+	errno_to_smccc(ret, host_ctxt);
 }
 
 static void handle___kvm_adjust_pc(struct kvm_cpu_context *host_ctxt)
