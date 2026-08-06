@@ -50,6 +50,24 @@
       "message": "This patch is not what was submitted to android17-6.18 since it doesn\u0027t remove the symbol from the exynos symbol list. Please rebased this on top of aosp/4208809 and reinstate the symbol removal from the exynos symbol list.",
       "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "784f8172_05bfc8a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-06T22:01:17Z",
+      "side": 1,
+      "message": "This looks to be done.",
+      "parentUuid": "260bd06b_26bd4440",
+      "revId": "8aad5d13aec03a93bd1bc3465f43898923f5dd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
