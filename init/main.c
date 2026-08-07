@@ -453,11 +453,15 @@ static void __init setup_boot_config(void)
 
 	ret = xbc_init(data, size, &msg, &pos);
 	if (ret < 0) {
-		if (pos < 0)
+		if (pos < 0) {
 			pr_err("Failed to init bootconfig: %s.\n", msg);
-		else
+		} else {
 			pr_err("Failed to parse bootconfig: %s at %d.\n",
 				msg, pos);
+			/* Print bootconfig string starting around the error offset */
+			pr_err("Bootconfig error snippet:\n>>> %.100s <<<\n",
+				data + (pos > 20 ? pos - 20 : 0));
+		}
 	} else {
 		xbc_get_info(&ret, NULL);
 		pr_info("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
