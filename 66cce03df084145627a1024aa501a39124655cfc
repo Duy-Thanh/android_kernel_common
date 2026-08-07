@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7cfa60_29c1da9f",
+        "filename": "block/blk-mq-sched.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-07T22:47:41Z",
+      "side": 1,
+      "message": "Should this also be enforced through `queue_requests_store()` or `blk_mq_update_nr_requests()` so any init script cannot accidentally set it when ZWOR is in use?",
+      "revId": "66cce03df084145627a1024aa501a39124655cfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
