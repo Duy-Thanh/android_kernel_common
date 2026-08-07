@@ -22,6 +22,30 @@
       },
       "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e811a8b8_e69fd734",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-07T11:11:40Z",
+      "side": 1,
+      "message": "(correction) : in the previous example at step 4 the table remains given to the host but it is still an invalid mapping so it shouldn\u0027t do any harm.\n\nHowever the problem arrises from a different source:\n1. Host (has entry valid)       Hyp(has entry valid)\n2. MAPD is issued from the host and a rollback is triggered\n3. new_entry will `incorrectly have the valid bit cleared on rollback` even though there was no state update because ( Host (has entry valid)       Hyp(has entry valid)).",
+      "parentUuid": "d79b8aad_cb79d3b4",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
