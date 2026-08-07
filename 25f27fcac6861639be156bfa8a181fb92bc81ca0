@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8872a5_e60bd3da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-07T09:53:33Z",
+      "side": 1,
+      "message": "I\u0027m letting the remove of `__trace_puts` pass as it in two other symbol lists.",
+      "revId": "25f27fcac6861639be156bfa8a181fb92bc81ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
