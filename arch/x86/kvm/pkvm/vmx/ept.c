@@ -479,7 +479,7 @@ void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 
 	pkvm_host_mmu_lock();
 
-	pkvm_pgtable_lookup(host_ept, gpa, &hpa, NULL, &level);
+	pkvm_pgtable_lookup(host_ept, gpa, &hpa, NULL, &level, NULL);
 	if (VALID_PAGE(hpa)) {
 		/*
 		 * Some other CPU has just mapped in the host EPT. Vmenter
