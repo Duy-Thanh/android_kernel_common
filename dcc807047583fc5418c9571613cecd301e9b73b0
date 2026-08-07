@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd540fa7_ce777011",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-07T15:24:42Z",
+      "side": 1,
+      "message": "We can have two deviceIds that want to map to the same ITT. In this case we won\u0027t increment the refcount but we will fail the share later on, on line 116.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 2
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3442e9d7_9d26f12a",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 29
