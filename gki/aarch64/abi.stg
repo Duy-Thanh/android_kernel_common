@@ -360615,6 +360615,16 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9a3d5c8e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+  parameter_id: 0x38264f07
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x9a3e0766
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -362318,6 +362328,15 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x2360e10b
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9b273c8b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x2170d06d
+  parameter_id: 0x33756485
+  parameter_id: 0x6720d32f
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9b2837bd
@@ -388967,6 +388986,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_page_cache_readahead_start"
 }
 elf_symbol {
+  id: 0x3246acbb
+  name: "__traceiter_android_vh_page_referenced_check_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x22e8142b
+  type_id: 0x9b273c8b
+  full_name: "__traceiter_android_vh_page_referenced_check_bypass"
+}
+elf_symbol {
   id: 0xb4d5ffdc
   name: "__traceiter_android_vh_page_should_be_protected"
   is_defined: true
@@ -391683,6 +391711,15 @@ elf_symbol {
   crc: 0xaf658a4b
   type_id: 0x9b51e812
   full_name: "__traceiter_scsi_dispatch_cmd_start"
+}
+elf_symbol {
+  id: 0x4bc6a64f
+  name: "__traceiter_signal_generate"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfec026cf
+  type_id: 0x9a3d5c8e
+  full_name: "__traceiter_signal_generate"
 }
 elf_symbol {
   id: 0x8ce8e50d
@@ -396455,6 +396492,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_page_cache_readahead_start"
 }
 elf_symbol {
+  id: 0x4a5e6e41
+  name: "__tracepoint_android_vh_page_referenced_check_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_page_referenced_check_bypass"
+}
+elf_symbol {
   id: 0x352038ba
   name: "__tracepoint_android_vh_page_should_be_protected"
   is_defined: true
@@ -399171,6 +399217,15 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_scsi_dispatch_cmd_start"
+}
+elf_symbol {
+  id: 0x61888c85
+  name: "__tracepoint_signal_generate"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_signal_generate"
 }
 elf_symbol {
   id: 0xf68d6127
@@ -465068,6 +465123,7 @@ interface {
   symbol_id: 0xdb184282
   symbol_id: 0xd0065122
   symbol_id: 0xed7b87e3
+  symbol_id: 0x3246acbb
   symbol_id: 0xb4d5ffdc
   symbol_id: 0x3c5e668a
   symbol_id: 0xa8af12cd
@@ -465370,6 +465426,7 @@ interface {
   symbol_id: 0x20097074
   symbol_id: 0x23bf3397
   symbol_id: 0x36d71264
+  symbol_id: 0x4bc6a64f
   symbol_id: 0x8ce8e50d
   symbol_id: 0x62a42e92
   symbol_id: 0xa7ccbbf5
@@ -465900,6 +465957,7 @@ interface {
   symbol_id: 0xb2b29d38
   symbol_id: 0xa5409038
   symbol_id: 0xeeab2985
+  symbol_id: 0x4a5e6e41
   symbol_id: 0x352038ba
   symbol_id: 0x2f61d5a4
   symbol_id: 0x94fbe99f
@@ -466202,6 +466260,7 @@ interface {
   symbol_id: 0xa70e8cd2
   symbol_id: 0x82a9a35d
   symbol_id: 0x6069ba16
+  symbol_id: 0x61888c85
   symbol_id: 0xf68d6127
   symbol_id: 0x9a65f074
   symbol_id: 0x158cc323
