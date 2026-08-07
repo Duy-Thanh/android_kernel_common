@@ -16,6 +16,24 @@
       "message": "I am pretty sure this isn\u0027t necessary: host_split_guest doesn\u0027t touch the host s2. actually you can check __pkvm_host_split_guest, we only take the guest stage2 lock",
       "revId": "a4920d58802f06b278ead19a7d6a85f9a166a773",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac11d31_1880e129",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-07T07:54:54Z",
+      "side": 1,
+      "message": "Haaa nooo, but... the guest stage-2 might need topup ... which might split host s2. damn\u0027",
+      "parentUuid": "9eeb5abe_9feb83bd",
+      "revId": "a4920d58802f06b278ead19a7d6a85f9a166a773",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
