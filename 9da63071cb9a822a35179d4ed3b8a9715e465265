@@ -34,6 +34,24 @@
       ],
       "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294d0bd1_d0bf7c42",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-07T08:36:12Z",
+      "side": 1,
+      "message": "yeah, we don\u0027t need to worry about these bits. And checking full in switch case is just to simply catch the case having higher 16 bits being set via the default case. We can refactor this to check basic only while explicitly check for the higher 16bits for the next rebase.",
+      "parentUuid": "d7c5b0ba_832a9823",
+      "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
