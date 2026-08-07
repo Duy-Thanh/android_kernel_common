@@ -432,6 +432,7 @@ struct pgt_lookup_data {
 	unsigned long phys;
 	u64 prot;
 	int level;
+	void *ptep;
 };
 
 static int lookup_walker(struct pkvm_pgtable_visit_ctx *ctx, unsigned long walk_flags,
@@ -443,6 +444,7 @@ static int lookup_walker(struct pkvm_pgtable_visit_ctx *ctx, unsigned long walk_
 	int level = ctx->level;
 
 	data->level = level;
+	data->ptep = ctx->ptep;
 
 	if (pgt_ops->pte_present(&pte)) {
 		unsigned long offset = data->vaddr & ~pgt_ops->level_to_mask(level);
@@ -830,24 +832,28 @@ int pkvm_pgtable_set_owner(struct pkvm_pgtable *pgt, unsigned long vaddr,
  * @phys:	To return the physical address bits in the present leaf entry.
  * @prot:	To return the property bits in the present leaf entry.
  * @level:	To return page table level of the leaf entry.
+ * @ptep:	To return pointer to the leaf entry.
  *
  * @vaddr is aligned down to the PAGE_SIZE, and the lookup size is PAGE_SIZE.
  *
  * The page table is walked based on @vaddr to look up for the leaf entry. If
  * the leaf entry is present, will return physical address + the offset within
- * a page via @phys, property bits via @prot and the present leaf entry level
- * via @level. If the leaf entry is non-present, will return INVALID_PAGE via
- * @phys, 0 via @prot and the non-present leaf entry level via @level. So @level
- * always contains a valid number, regardless the leaf entry is present or not.
+ * a page via @phys and property bits via @prot. If the leaf entry is
+ * non-present, will return INVALID_PAGE via @phys and 0 via @prot. In both
+ * cases (i.e. regardless of the leaf entry being present or not) will also
+ * return the leaf entry level via @level and the pointer to the leaf entry
+ * via @ptep.
  */
 void pkvm_pgtable_lookup(struct pkvm_pgtable *pgt, unsigned long vaddr,
-			 unsigned long *phys, u64 *prot, int *level)
+			 unsigned long *phys, u64 *prot, int *level,
+			 void **ptep)
 {
 	struct pgt_lookup_data data = {
 		.vaddr = vaddr,
 		.phys = INVALID_PAGE,
 		.prot = 0,
 		.level = pgt->cap.level,
+		.ptep = NULL,
 	};
 	struct pkvm_pgtable_walker walker = {
 		.cb = lookup_walker,
@@ -865,6 +871,8 @@ void pkvm_pgtable_lookup(struct pkvm_pgtable *pgt, unsigned long vaddr,
 		*prot = data.prot;
 	if (level)
 		*level = data.level;
+	if (ptep)
+		*ptep = data.ptep;
 }
 
 /*
