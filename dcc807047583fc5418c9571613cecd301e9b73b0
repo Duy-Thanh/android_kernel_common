@@ -46,6 +46,30 @@
       },
       "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8cc989f_b0f07afe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-07T11:16:43Z",
+      "side": 1,
+      "message": "we should move the rollback after the `if (!(update \u0026 GITS_BASER_VALID))` check and if the host tries to play tricks on us with read-modify-write during rollback, we still have the source of truth from the original table and we are not giving back any other page to host.",
+      "parentUuid": "e811a8b8_e69fd734",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
