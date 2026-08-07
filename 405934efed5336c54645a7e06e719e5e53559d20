@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf0b11e_733596ed",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-07T22:35:28Z",
+      "side": 1,
+      "message": "Hi Bart,\n\n Question regarding the `BLK_MQ_INSERT_AT_HEAD` path in `blk_mq_reinsert_list()`:\n\n For non-zoned requests (`blk_mq_preserve_order(rq)` is false), popping items from the head of `list` (`list_first_entry`) and inserting each one with `BLK_MQ_INSERT_AT_HEAD` appears to inve\nrt the relative order of the requeued requests.\n\n For example, if `list` has failed dispatch requests `[ReqA, ReqB, ReqC]` in that order:\n 1. `ReqA` is popped and inserted at HEAD -\u003e `[ReqA]`\n 2. `ReqB` is popped and inserted at HEAD -\u003e `[ReqB, ReqA]`\n 3. `ReqC` is popped and inserted at HEAD -\u003e `[ReqC, ReqB, ReqA]`\n\n The resulting queue order becomes `[ReqC, ReqB, ReqA]`.\n\n Was this inversion intended, or should `blk_mq_reinsert_list()` pop from `list_last_entry()` instead so that `[ReqA, ReqB, ReqC]` are placed at the head of the dispatch queue while preserving their original relative order?\n\n ```diff\n  static void blk_mq_reinsert_list(struct list_head *list)\n  {\n    struct request *rq;\n\n    while (!list_empty(list)) {\n -      rq \u003d list_first_entry(list, struct request, queuelist);\n +      rq \u003d list_last_entry(list, struct request, queuelist);\n        list_del_init(\u0026rq-\u003equeuelist);\n        blk_mq_insert_request(rq, blk_mq_preserve_order(rq) ?\n                      BLK_MQ_INSERT_ORDERED :\n                      BLK_MQ_INSERT_AT_HEAD);\n    }\n  }",
+      "fixSuggestions": [
+        {
+          "fixId": "4ed3c593_23a0cbd4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "block/blk-mq.c",
+              "range": {
+                "startLine": 2133,
+                "startChar": 0,
+                "endLine": 2134,
+                "endChar": 0
+              },
+              "replacement": "\t\trq \u003d list_last_entry(list, struct request, queuelist);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "405934efed5336c54645a7e06e719e5e53559d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
