@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817181ad_6e22647b",
+        "filename": "drivers/scsi/scsi_error.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-07T22:53:48Z",
+      "side": 1,
+      "message": "Assisted review caught one problem here, it should be `m.count \u003d strscpy(rq_info, \"(debugfs is disabled)\");` so the sdev_printk() can actually print the message.",
+      "revId": "32d692916cdcf550f3fb25e5be58a73272bd0f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
