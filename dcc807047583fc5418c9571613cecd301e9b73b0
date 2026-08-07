@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3442e9d7_9d26f12a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-07T11:42:58Z",
+      "side": 1,
+      "message": "I think we should return an error here if we can\u0027t find it.",
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d79b8aad_cb79d3b4",
         "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
         "patchSetId": 29
