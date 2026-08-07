@@ -46,6 +46,30 @@
       },
       "revId": "5e2e73f82a44fb35c7db60ad8acd8e4e27270efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35dd24ed_94d9d3ea",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-08-07T10:26:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "41767c59_78312d2f",
+      "range": {
+        "startLine": 778,
+        "startChar": 0,
+        "endLine": 778,
+        "endChar": 54
+      },
+      "revId": "5e2e73f82a44fb35c7db60ad8acd8e4e27270efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
