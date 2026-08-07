@@ -34,6 +34,24 @@
       ],
       "revId": "9943c800817a16eb792e88a87b38a6ccdee7f815",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "496ec525_dfc27d78",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-07T09:10:48Z",
+      "side": 1,
+      "message": "I see. The comment here is majorly to emphasize the parameter we pass to pKVM is not a physical address, comparing with the non-debug mode, as it is derived from host virtual address, either direct map or vmalloc, so to continue emphasize this, maybe we can say?\n \n```suggestion\n\t * In debug mode, base is a virtual address offset used by the host kernel\n```",
+      "parentUuid": "90f31f73_a2713bc1",
+      "revId": "9943c800817a16eb792e88a87b38a6ccdee7f815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
