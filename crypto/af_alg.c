@@ -972,15 +972,15 @@ EXPORT_SYMBOL_GPL(af_alg_sendmsg);
 ssize_t af_alg_sendpage(struct socket *sock, struct page *page,
 			int offset, size_t size, int flags)
 {
-	struct sock *sk = sock->sk;
-	struct alg_sock *ask = alg_sk(sk);
-	struct af_alg_ctx *ctx = ask->private;
-	struct af_alg_tsgl *sgl;
-	int err = -EINVAL;
+	struct bio_vec bvec;
+	struct msghdr msg = {
+		.msg_flags = flags,
+	};
 
 	if (flags & MSG_SENDPAGE_NOTLAST)
-		flags |= MSG_MORE;
+		msg.msg_flags |= MSG_MORE;
 
+<<<<<<< HEAD   (5e48d6d84db6ff66ed7eba0b2325c6482d1bfaeb Revert "virtio-mmio: fix device release warning on module un)
 	lock_sock(sk);
 	if (!ctx->more && ctx->used)
 		goto unlock;
@@ -1019,6 +1019,52 @@ unlock:
 	release_sock(sk);
 
 	return err ?: size;
+||||||| BASE   (699da5e25e5a637b4ca721d217ed1d8cde34b3ae tools/mm/slabinfo: fix total_objects attribute name)
+	lock_sock(sk);
+	if (!ctx->more && ctx->used)
+		goto unlock;
+
+	if (!size)
+		goto done;
+
+	if (!af_alg_writable(sk)) {
+		err = af_alg_wait_for_wmem(sk, flags);
+		if (err)
+			goto unlock;
+	}
+
+	err = af_alg_alloc_tsgl(sk);
+	if (err)
+		goto unlock;
+
+	ctx->merge = 0;
+	sgl = list_entry(ctx->tsgl_list.prev, struct af_alg_tsgl, list);
+
+	if (sgl->cur)
+		sg_unmark_end(sgl->sg + sgl->cur - 1);
+
+	sg_mark_end(sgl->sg + sgl->cur);
+
+	get_page(page);
+	sg_set_page(sgl->sg + sgl->cur, page, size, offset);
+	sgl->cur++;
+	ctx->used += size;
+
+done:
+	ctx->more = flags & MSG_MORE;
+
+unlock:
+	af_alg_data_wakeup(sk);
+	release_sock(sk);
+
+	return err ?: size;
+=======
+	bvec.bv_page = page;
+	bvec.bv_len = size;
+	bvec.bv_offset = offset;
+	iov_iter_bvec(&msg.msg_iter, ITER_SOURCE, &bvec, 1, size);
+	return sock_sendmsg(sock, &msg);
+>>>>>>> BRANCH (39ca700c8ac01b704a8908766bd538cefd8c9999 crypto: af_alg - Remove zero-copy support from skcipher and )
 }
 EXPORT_SYMBOL_GPL(af_alg_sendpage);
 
