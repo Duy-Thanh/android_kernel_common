@@ -34,6 +34,24 @@
       "parentUuid": "0711e327_458d04a2",
       "revId": "10f6d538c651ab6dd44bb8679c8e2d6522f13a68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5b5563_a1016a86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-07T09:06:45Z",
+      "side": 1,
+      "message": "Resolved offline, this won\u0027t affect uboot, as they control their version separately.",
+      "parentUuid": "646abe31_af9537b7",
+      "revId": "10f6d538c651ab6dd44bb8679c8e2d6522f13a68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
