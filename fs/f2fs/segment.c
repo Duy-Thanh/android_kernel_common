@@ -516,6 +516,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	 * dir/node pages without enough free segments.
 	 */
 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+<<<<<<< HEAD   (9fe41ae8657d937618959b178f332fddf4009e67 Merge 3c8d6b4093ae ("f2fs: bound i_inline_xattr_size for non)
 		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 					sbi->gc_thread->f2fs_gc_task) {
 			DEFINE_WAIT(wait);
@@ -529,6 +530,20 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			f2fs_down_write(&sbi->gc_lock);
 			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
 		}
+||||||| BASE   (3c8d6b4093aea40a20596f452289e7c22d84e6d5 f2fs: bound i_inline_xattr_size for non-inline-xattr inodes)
+		down_write(&sbi->gc_lock);
+		f2fs_gc(sbi, false, false, false, NULL_SEGNO);
+=======
+		/*
+		 * Submit all cached OPU/IPU DATA bios before triggering
+		 * foreground GC to avoid potential deadlocks.
+		 */
+		f2fs_submit_merged_write(sbi, DATA);
+		f2fs_submit_all_merged_ipu_writes(sbi);
+
+		down_write(&sbi->gc_lock);
+		f2fs_gc(sbi, false, false, false, NULL_SEGNO);
+>>>>>>> BRANCH (162d57d8eb8440ad2d90469bf2c116abb04a9d33 f2fs: fix potential deadlock in f2fs_balance_fs())
 	}
 }
 
