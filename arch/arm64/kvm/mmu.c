@@ -2235,8 +2235,8 @@ int pkvm_mem_abort_range(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t si
 }
 
 /*
- * Splitting is only expected on the back of a relinquish guest HVC in the pKVM case, while
- * pkvm_pgtable_stage2_split() can be called with dirty logging.
+ * Splitting is expected on the back of a share or a relinquish guest HVC in the pKVM
+ * case, while pkvm_pgtable_stage2_split() can be called with dirty logging.
  */
 int __pkvm_pgtable_stage2_split(struct kvm_vcpu *vcpu, phys_addr_t ipa, size_t size)
 {
