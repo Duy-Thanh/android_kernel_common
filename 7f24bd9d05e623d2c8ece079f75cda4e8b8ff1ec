@@ -310,6 +310,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9560264_292a6a78",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-07T09:26:15Z",
+      "side": 1,
+      "message": "\u003e For pKVM\u0027s memory, it has struct pkvm_page, and its state and owner are stored in struct pkvm_page rather than PTEs, so we can still use pkvm_pgtable_unmap() to unmap and then use set_host_mem_pgstate to fix the state/owner?\n\nYeah, good point.",
+      "parentUuid": "62fded5d_995b16e9",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
