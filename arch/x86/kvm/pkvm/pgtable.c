@@ -847,7 +847,6 @@ void pkvm_pgtable_lookup(struct pkvm_pgtable *pgt, unsigned long vaddr,
 		.vaddr = vaddr,
 		.phys = INVALID_PAGE,
 		.prot = 0,
-		.level = pgt->cap.level,
 	};
 	struct pkvm_pgtable_walker walker = {
 		.cb = lookup_walker,
@@ -855,7 +854,7 @@ void pkvm_pgtable_lookup(struct pkvm_pgtable *pgt, unsigned long vaddr,
 		.walk_flags = PKVM_PGTABLE_WALK_LEAF,
 	};
 
-	pkvm_pgtable_walk(pgt, vaddr, PAGE_SIZE, &walker);
+	BUG_ON(pkvm_pgtable_walk(pgt, vaddr, PAGE_SIZE, &walker) != PGTABLE_WALK_DONE);
 
 	if (phys)
 		*phys = data.phys;
@@ -904,9 +903,12 @@ void pkvm_pgtable_lookup_range(struct pkvm_pgtable *pgt,
 		.arg = &data,
 		.walk_flags = PKVM_PGTABLE_WALK_LEAF,
 	};
+	int ret;
 
 	BUG_ON(!VALID_PAGE(vaddr));
-	pkvm_pgtable_walk(pgt, vaddr, size, &walker);
+
+	ret = pkvm_pgtable_walk(pgt, vaddr, size, &walker);
+	BUG_ON(ret && ret != PGTABLE_WALK_DONE);
 
 	if (range_vaddr)
 		*range_vaddr = data.start;
