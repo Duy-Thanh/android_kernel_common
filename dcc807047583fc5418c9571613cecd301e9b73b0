@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d79b8aad_cb79d3b4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-07T10:42:57Z",
+      "side": 1,
+      "message": "I am worried about this logic here because it is susceptible to read-modify-write. If an attacker can trigger the rollback it can then modify the content of the entry so that it will later control the donation path.\n\nExample: \n1. let\u0027s say host has an invalid entry and hyp has a valid one. Host issues a MAPD command\n2. the change in the valid bit is detected and __pkvm_hyp_donate_host is triggered\n3. the attacker triggers the rollback logic and patches the entry in the host table to make it valid again\n4. the lvl2_table remains given to the host -\u003e game over",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
