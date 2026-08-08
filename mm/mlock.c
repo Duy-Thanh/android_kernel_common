@@ -24,6 +24,7 @@
 #include <linux/mmzone.h>
 #include <linux/hugetlb.h>
 #include <linux/memcontrol.h>
+#include <linux/ptshare.h>
 #include <linux/mm_inline.h>
 #include <linux/secretmem.h>
 #include <linux/page_size_compat.h>
