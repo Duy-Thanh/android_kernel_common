@@ -13,6 +13,7 @@
 #include <linux/mm_inline.h>
 #include <linux/pagemap.h>
 #include <linux/pagewalk.h>
+#include <linux/ptshare.h>
 #include <linux/rmap.h>
 #include <linux/swap.h>
 #include <linux/swapops.h>

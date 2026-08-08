@@ -24,6 +24,7 @@
 #include <linux/mmzone.h>
 #include <linux/hugetlb.h>
 #include <linux/memcontrol.h>
+#include <linux/ptshare.h>
 #include <linux/mm_inline.h>
 #include <linux/secretmem.h>
 #include <linux/page_size_compat.h>
@@ -474,7 +475,7 @@ static int mlock_fixup(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	int ret = 0;
 	vm_flags_t oldflags = vma->vm_flags;
 
-	if (newflags == oldflags || (oldflags & VM_SPECIAL) ||
+	if (newflags == oldflags || (oldflags & (VM_SPECIAL | VM_PT_SHARED)) ||
 	    is_vm_hugetlb_page(vma) || vma == get_gate_vma(current->mm) ||
 	    vma_is_dax(vma) || vma_is_secretmem(vma) || (oldflags & VM_DROPPABLE))
 		/* don't set VM_LOCKED or VM_LOCKONFAULT and don't count */
