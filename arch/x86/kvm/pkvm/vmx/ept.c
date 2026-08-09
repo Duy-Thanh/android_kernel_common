@@ -462,6 +462,7 @@ void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 	struct range range, cur;
 	int level, ret = -EPERM;
 	unsigned long hpa, gpa;
+	u64 pte;
 
 	BUG_ON(!host_ept);
 
@@ -471,15 +472,14 @@ void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 	 * EPT when initialize, except for the MMIO in the high-end address.
 	 * Handle the MMIO only.
 	 */
-	if (pkvm_find_addr_range(gpa, &range) || is_pvmfw(gpa) ||
-	    is_iommu_mmio(gpa)) {
+	if (pkvm_find_addr_range(gpa, &range) || is_pvmfw(gpa)) {
 		pkvm_err_ratelimited("Host access to protected memory at 0x%lx\n", gpa);
 		goto failed;
 	}
 
 	pkvm_host_mmu_lock();
 
-	pkvm_pgtable_lookup(host_ept, gpa, &hpa, NULL, &level, NULL);
+	pkvm_pgtable_lookup(host_ept, gpa, &hpa, NULL, &level, &pte);
 	if (VALID_PAGE(hpa)) {
 		/*
 		 * Some other CPU has just mapped in the host EPT. Vmenter
@@ -487,6 +487,12 @@ void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 		 */
 		pkvm_host_mmu_unlock();
 		return;
+	}
+
+	if (ept_pte_annotated(&pte)) {
+		pkvm_err_ratelimited("Host access to protected MMIO at 0x%lx\n", gpa);
+		pkvm_host_mmu_unlock();
+		goto failed;
 	}
 
 	BUG_ON(level > host_ept->cap.level);
@@ -505,15 +511,18 @@ void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 		cur.start = ALIGN_DOWN(gpa, size);
 		cur.end = cur.start + size - 1;
 
-		if (range_contains(&range, &cur) && !overlaps_pvmfw(cur.start, size) &&
-		    !overlaps_iommu_mmio(cur.start, size)) {
+		if (range_contains(&range, &cur)) {
+			u64 prot = ept_calc_pte_perm(true, true, true) |
+				   ept_calc_pte_memtype(true);
+
 			/*
 			 * TODO: In case the host mmu free pages are not
 			 * enough, -ENOMEM will be returned. This could be
 			 * handled by unmaping some other MMIO mapped for the
 			 * host VM to reclaim some mmu pages and try again.
 			 */
-			ret = pkvm_hyp_donate_host_mmio_locked(cur.start, size);
+			ret = pkvm_pgtable_map(host_ept, cur.start, cur.start,
+					       size, prot, NULL);
 			break;
 		}
 	}
