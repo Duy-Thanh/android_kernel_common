@@ -72,6 +72,24 @@
       "parentUuid": "9dbe8124_b7e971d2",
       "revId": "a8980311a89af6caa8d2296f3c7877348a163418",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e17e7fa_c132d913",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-09T13:45:52Z",
+      "side": 1,
+      "message": "Tried to upload new patch sets to this serial but seems encounter below failure:\n```\nTo https://android-review.googlesource.com/kernel/common\n ! [remote rejected]           pkvm-v6.18-fixes3 -\u003e refs/for/android17-6.18%topic\u003dpkvm-v6.18-fixes3 (cannot add patch set to 4213466.)\nerror: failed to push some refs to \u0027https://android-review.googlesource.com/kernel/common\u0027\n```\n\nIt seems I cannot add new patch set to aosp/4213466? Can I upload new patch set for the other patches except for aosp/4213466 and aosp/4213467?",
+      "parentUuid": "900834f4_45ab590d",
+      "revId": "a8980311a89af6caa8d2296f3c7877348a163418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
