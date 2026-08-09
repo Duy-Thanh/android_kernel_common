@@ -88,6 +88,24 @@
       "parentUuid": "294d0bd1_d0bf7c42",
       "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecab12a1_c19105b1",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-09T13:07:54Z",
+      "side": 1,
+      "message": "Just thought this is a code improvement as any 16 higher bit being set will still be able to captured by the switch default case, thus we won\u0027t miss them. With using vt-\u003eexit_reason.base, we will need a dedicated check to handle them. If we want to have it for 6.18 as well, I can submit a separate patch for it.",
+      "parentUuid": "4727f7f9_cc68cb0b",
+      "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
