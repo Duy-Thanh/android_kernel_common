@@ -1852,6 +1852,11 @@ __latent_entropy int dup_mmap(struct mm_struct *mm, struct mm_struct *oldmm)
 			i_mmap_unlock_write(mapping);
 		}
 
+		retval = ptshare_fork_vma(mm, tmp);
+		if (retval) {
+			mpnt = vma_next(&vmi);
+			goto loop_out;
+		}
 		if (!(tmp->vm_flags & VM_WIPEONFORK))
 			retval = copy_page_range(tmp, mpnt);
 

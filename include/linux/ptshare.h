@@ -14,6 +14,7 @@ struct ptshare_desc {
 	/* The headless shadow MM for this domain */
 	struct mm_struct *ptshare_mm;
 	refcount_t refcount;
+	struct rcu_head rcu;
 };
 
 #ifdef CONFIG_PTSHARE
@@ -116,11 +117,18 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return &vma->__vm_ptshare_refcount;
 }
 
-void ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
+int ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
 void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc);
 
 unsigned long ptshare_install_vma(struct mm_struct *mm, unsigned long addr,
 				  unsigned long len, unsigned long vm_flags);
+
+struct ptshare_desc *ptshare_alloc_desc(void);
+void ptshare_put_desc(struct ptshare_desc *desc);
+void ptshare_get_desc(struct ptshare_desc *desc);
+void ptshare_free_desc_rcu(struct ptshare_desc *desc);
+void ptshare_exit(struct mm_struct *mm);
+int ptshare_fork_vma(struct mm_struct *mm, struct vm_area_struct *vma);
 /**
  * ptdesc_get - Increment reference count on a page table descriptor
  * @pt: The page table descriptor.
@@ -211,9 +219,10 @@ static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_
 	return NULL;
 }
 
-static inline void ptshare_get_vma(struct vm_area_struct *vma,
+static inline int ptshare_get_vma(struct vm_area_struct *vma,
 					struct ptshare_desc *desc)
 {
+	return 0;
 }
 
 static inline void ptshare_put_vma(struct vm_area_struct *vma,
@@ -227,6 +236,32 @@ static inline unsigned long ptshare_install_vma(struct mm_struct *mm,
 						unsigned long vm_flags)
 {
 	return addr;
+}
+
+static inline struct ptshare_desc *ptshare_alloc_desc(void)
+{
+	return NULL;
+}
+
+static inline void ptshare_put_desc(struct ptshare_desc *desc)
+{
+}
+
+static inline void ptshare_get_desc(struct ptshare_desc *desc)
+{
+}
+
+static inline void ptshare_free_desc_rcu(struct ptshare_desc *desc)
+{
+}
+
+static inline void ptshare_exit(struct mm_struct *mm)
+{
+}
+
+static inline int ptshare_fork_vma(struct mm_struct *mm, struct vm_area_struct *vma)
+{
+	return 0;
 }
 
 static inline void ptdesc_get(struct ptdesc *pt)
