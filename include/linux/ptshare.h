@@ -2,6 +2,8 @@
 #ifndef _LINUX_PTSHARE_H
 #define _LINUX_PTSHARE_H
 
+#ifndef __ASSEMBLY__
+
 #include <linux/mm.h>
 #include <uapi/asm-generic/mman-common.h>
 #include <linux/refcount.h>
@@ -425,5 +427,7 @@ static inline bool ptshare_behavior_needs_unshare(int behavior)
 }
 
 #endif /* CONFIG_PTSHARE */
+
+#endif /* !__ASSEMBLY__ */
 
 #endif /* _LINUX_PTSHARE_H */
