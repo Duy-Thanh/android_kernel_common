@@ -22,6 +22,11 @@ struct ptshare_desc {
 	struct rcu_head rcu;
 };
 
+static inline bool has_map_hugetlb_flag(unsigned long flags)
+{
+	return (flags & MAP_HUGETLB) && !IS_ENABLED(CONFIG_PTSHARE);
+}
+
 #ifdef CONFIG_PTSHARE
 /*
  * Three predicates classify VMAs for page table sharing:
