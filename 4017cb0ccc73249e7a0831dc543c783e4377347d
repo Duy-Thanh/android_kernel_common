@@ -16,6 +16,24 @@
       "message": "abandon this patch and use aosp/3899617 (restored). Rebased it into this series.",
       "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2ea009_121cc614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-10T03:29:35Z",
+      "side": 1,
+      "message": "The owner of aosp/3899617, chungkai@google.com, dosen\u0027t reply to my comment or my email. And I don\u0027t have the permission to rebase this patch. Do you know how to resolve this problem?",
+      "parentUuid": "f174ce85_cb2d0e07",
+      "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
