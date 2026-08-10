@@ -64,6 +64,7 @@
 #include <linux/ptrace.h>
 #include <linux/mount.h>
 #include <linux/audit.h>
+#include <linux/ptshare.h>
 #include <linux/memcontrol.h>
 #include <linux/ftrace.h>
 #include <linux/proc_fs.h>
@@ -714,7 +715,7 @@ static void mmdrop_async_fn(struct work_struct *work)
 	__mmdrop(mm);
 }
 
-static void mmdrop_async(struct mm_struct *mm)
+void mmdrop_async(struct mm_struct *mm)
 {
 	if (unlikely(atomic_dec_and_test(&mm->mm_count))) {
 		INIT_WORK(&mm->async_put_work, mmdrop_async_fn);
@@ -1155,7 +1156,16 @@ static inline void __mmput(struct mm_struct *mm)
 	exit_aio(mm);
 	ksm_exit(mm);
 	khugepaged_exit(mm); /* must run before exit_mmap */
+	/*
+	 * exit_mmap() will safely skip zapping and freeing of shared
+	 * page tables (detaching instead) using the page table share count
+	 * (pt_share_count). The actual reclamation of the shared page
+	 * tables is deferred to the shadow MM teardown, which is triggered
+	 * when the shadow VMA refcount reaches zero (invoked via
+	 * remove_vma() during exit_mmap() -> tear_down_vmas()).
+	 */
 	exit_mmap(mm);
+	ptshare_exit(mm);
 	mm_put_huge_zero_folio(mm);
 	set_mm_exe_file(mm, NULL);
 	put_dmabuf_info(mm->dmabuf_info);

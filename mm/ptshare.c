@@ -16,6 +16,81 @@
 #include <linux/file.h>
 #include <linux/mmap_lock.h>
 #include <linux/mempolicy.h>
+#include <linux/slab.h>
+#include <linux/sched/mm.h>
+
+struct ptshare_desc *ptshare_alloc_desc(void)
+{
+	struct ptshare_desc *desc;
+
+	desc = kzalloc_obj(*desc, GFP_KERNEL);
+	if (!desc)
+		return NULL;
+
+	desc->ptshare_mm = mm_alloc();
+	if (!desc->ptshare_mm) {
+		kfree(desc);
+		return NULL;
+	}
+	mmgrab(desc->ptshare_mm);
+	mm_flags_test_and_set(MMF_PTSHARE_SHADOW, desc->ptshare_mm);
+
+#ifdef CONFIG_MEMCG
+	/* Headless shadow MM does not have an owner task */
+	RCU_INIT_POINTER(desc->ptshare_mm->owner, NULL);
+#endif
+
+	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
+	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
+
+	refcount_set(&desc->refcount, 1);
+
+	return desc;
+}
+
+/*
+ * Once the descriptor's refcount reaches zero, the current thread
+ * has exclusive ownership. This occurs when the last process (mm_struct)
+ * participating in the sharing domain has exited and released its reference.
+ *
+ * Since new processes can only join the domain by inheriting it across
+ * fork() (which requires an active mm_struct reference), no new references
+ * can be created once the count reaches zero.
+ *
+ * Therefore, no further synchronization is needed while we tear down
+ * the internal state.
+ *
+ * Use mmput_async() to avoid synchronous lockdep issues when called
+ * from mmap_lock held contexts.
+ */
+void ptshare_put_desc(struct ptshare_desc *desc)
+{
+	if (!desc)
+		return;
+
+	if (refcount_dec_and_test(&desc->refcount))
+		mmput_async(desc->ptshare_mm);
+}
+
+void ptshare_get_desc(struct ptshare_desc *desc)
+{
+	if (desc)
+		refcount_inc(&desc->refcount);
+}
+
+static void ptshare_desc_rcu_free(struct rcu_head *head)
+{
+	struct ptshare_desc *desc = container_of(head, struct ptshare_desc, rcu);
+	struct mm_struct *mm = desc->ptshare_mm;
+
+	kfree(desc);
+	mmdrop_async(mm);
+}
+
+void ptshare_free_desc_rcu(struct ptshare_desc *desc)
+{
+	call_rcu(&desc->rcu, ptshare_desc_rcu_free);
+}
 
 int ptshare_unshare_vma_locked(struct vm_area_struct *vma)
 {
@@ -214,22 +289,24 @@ static inline void ptshare_remove_vma(struct ptshare_desc *desc,
 	mmap_write_unlock(ptshare_mm);
 }
 
-void ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc)
+int ptshare_get_vma(struct vm_area_struct *vma, struct ptshare_desc *desc)
 {
 	unsigned long addr = vma->vm_start;
 	struct vm_area_struct *shadow_vma;
 
 	if (WARN_ON_ONCE(!desc))
-		return;
+		return -EINVAL;
 
 	mmap_read_lock(desc->ptshare_mm);
 	shadow_vma = vma_lookup(desc->ptshare_mm, addr);
 	if (WARN_ON_ONCE(!shadow_vma)) {
 		mmap_read_unlock(desc->ptshare_mm);
-		return;
+		return -EINVAL;
 	}
 	refcount_inc(vma_ptshare_refcount(shadow_vma));
 	mmap_read_unlock(desc->ptshare_mm);
+
+	return 0;
 }
 
 /**
@@ -280,4 +357,47 @@ void ptshare_put_vma(struct vm_area_struct *vma, struct ptshare_desc *desc)
 
 	if (should_remove)
 		ptshare_remove_vma(desc, start, end);
+}
+
+/**
+ * ptshare_exit - Clean up page table sharing state for an exiting mm.
+ * @mm: The mm_struct being torn down.
+ *
+ * This function releases the process's reference to its sharing domain
+ * descriptor (ptshare_desc). If this is a client MM, it decrements the
+ * descriptor's reference count. If this is the shadow MM itself, it
+ * triggers RCU-delayed freeing of the descriptor.
+ *
+ * This is called during __mmput() after exit_mmap() has detached the VMAs.
+ */
+void ptshare_exit(struct mm_struct *mm)
+{
+	struct ptshare_desc *desc = rcu_dereference_raw(mm->ptshare_desc);
+
+	if (desc) {
+		RCU_INIT_POINTER(mm->ptshare_desc, NULL);
+		if (mm_is_ptshare_shadow(mm))
+			ptshare_free_desc_rcu(desc);
+		else
+			ptshare_put_desc(desc);
+	}
+}
+
+int ptshare_fork_vma(struct mm_struct *mm, struct vm_area_struct *vma)
+{
+	if (vma_shares_pagetables(vma)) {
+		struct ptshare_desc *desc = vma_ptshare_desc(vma);
+		int retval;
+
+		retval = ptshare_get_vma(vma, desc);
+		if (retval) {
+			vm_flags_clear(vma, VM_PT_SHARED);
+			return retval;
+		}
+		if (!rcu_access_pointer(mm->ptshare_desc)) {
+			rcu_assign_pointer(mm->ptshare_desc, desc);
+			ptshare_get_desc(desc);
+		}
+	}
+	return 0;
 }
