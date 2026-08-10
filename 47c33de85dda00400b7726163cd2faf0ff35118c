@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bfe08c_6080b87f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-10T09:16:51Z",
+      "side": 1,
+      "message": "nit: maybe in this case this would be a bit more readable:\n\n```\n--- a/arch/x86/kvm/pkvm/pkvm.c\n+++ b/arch/x86/kvm/pkvm/pkvm.c\n@@ -104,11 +104,11 @@ static int allocate_pkvm_vm_handle(struct pkvm_vm *pkvm_vm)\n static struct pkvm_vm *free_pkvm_vm_handle(int handle)\n {\n \tstruct pkvm_vm_ref *pkvm_vm_ref;\n-\tstruct pkvm_vm *pkvm_vm \u003d NULL;\n+\tstruct pkvm_vm *pkvm_vm;\n \tint idx \u003d handle;\n \n \tif (idx \u003c 0 || idx \u003e\u003d MAX_PKVM_VMS)\n-\t\treturn NULL;\n+\t\treturn ERR_PTR(-EINVAL);\n \n \tpkvm_spin_lock(\u0026pkvm_vms_lock);\n \n@@ -117,14 +117,15 @@ static struct pkvm_vm *free_pkvm_vm_handle(int handle)\n \tif (atomic_cmpxchg(\u0026pkvm_vm_ref-\u003erefcount, 1, 0) !\u003d 1) {\n \t\tpkvm_err(\"VM%d is busy, refcount %d\\n\", handle,\n \t\t\t atomic_read(\u0026pkvm_vm_ref-\u003erefcount));\n-\t\tgoto out;\n+\t\tpkvm_spin_unlock(\u0026pkvm_vms_lock);\n+\t\treturn ERR_PTR(-EBUSY);\n \t}\n \n \tpkvm_vm \u003d pkvm_vm_ref-\u003epkvm_vm;\n \tpkvm_vm_ref-\u003epkvm_vm \u003d NULL;\n \n \t__clear_bit(idx, pkvm_vms_bitmap);\n-out:\n+\n \tpkvm_spin_unlock(\u0026pkvm_vms_lock);\n \treturn pkvm_vm;\n }\n```\n?",
+      "revId": "47c33de85dda00400b7726163cd2faf0ff35118c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b41dac5c_745f54ac",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-10T09:16:51Z",
+      "side": 1,
+      "message": "nit: I think there is no need to say \"Otherwise it should be a pKVM code bug\" in this and any other cases (that\u0027s the whole point of BUG_ON, no need to extra explain that, right?)\n\nMoreover, in this case this whole comment seems not very necessary. The reader can easily figure out why `pkvm_vm_ref-\u003epkvm_vm` must be non-NULL here. (BTW it is guaranteed not just by the refcount mechanism but also by holding the `pkvm_vms_lock`?)",
+      "revId": "47c33de85dda00400b7726163cd2faf0ff35118c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
