@@ -70,6 +70,24 @@
       "parentUuid": "46c94976_5f2a474a",
       "revId": "65c6337cca16b132c0ad0510760cecbeab5c273b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea621c5_b61b11fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4605888
+      },
+      "writtenOn": "2026-08-10T04:51:36Z",
+      "side": 1,
+      "message": "This is the bug that was filed for this issue. Added to commit message also. https://partnerissuetracker.corp.google.com/issues/540139036\n\nThis bug was not filed at the time when I raised this CL. So, I used an older bug where similar scenario was being discussed.",
+      "parentUuid": "67d6349b_c5cce615",
+      "revId": "65c6337cca16b132c0ad0510760cecbeab5c273b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
