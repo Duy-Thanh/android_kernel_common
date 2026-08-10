@@ -16,6 +16,24 @@
       "message": "Hold off until Sebastian has had a chance to review.",
       "revId": "d0d058e27d116745638599f9293560148b23369f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fda7d08_9401c63b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-08-10T14:32:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5ad90fd5_619e2020",
+      "revId": "d0d058e27d116745638599f9293560148b23369f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
