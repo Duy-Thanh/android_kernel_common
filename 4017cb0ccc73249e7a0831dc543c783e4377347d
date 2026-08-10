@@ -34,6 +34,24 @@
       "parentUuid": "f174ce85_cb2d0e07",
       "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4bfedd5_3d0c8f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-10T18:25:33Z",
+      "side": 1,
+      "message": "The conflict needs to be resolved on  aosp/3899617. You can do that by downloading the patch, rebasing, and uploading again. You will need to resolve all of the outstanding comments on that patch.",
+      "parentUuid": "ec2ea009_121cc614",
+      "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
