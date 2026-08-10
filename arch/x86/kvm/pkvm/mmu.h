@@ -7,8 +7,6 @@
 #include "pgtable.h"
 #include "pkvm.h"
 
-extern pkvm_spinlock_t host_mmu_lock;
-
 int pkvm_hyp_mmu_init(void *pool_base, unsigned long pool_pages);
 int pkvm_hyp_mmu_switch_to_buddy(void *pool_base, unsigned long pool_pages);
 void pkvm_hyp_mmu_load(void);
@@ -23,16 +21,6 @@ int pkvm_host_mmu_init(void *pool_base, unsigned long pool_pages,
 		       const struct pkvm_mem_info infos[], int nr_infos,
 		       host_mmu_init_fn_t fn);
 int pkvm_host_mmu_finalize(host_mmu_finalize_fn_t fn);
-
-static inline void pkvm_host_mmu_lock(void)
-{
-	pkvm_spin_lock(&host_mmu_lock);
-}
-
-static inline void pkvm_host_mmu_unlock(void)
-{
-	pkvm_spin_unlock(&host_mmu_lock);
-}
 
 void pkvm_guest_mmu_setup(const struct pkvm_pgtable_ops *pgt_ops,
 			  struct pkvm_pgtable_cap pgt_cap);
