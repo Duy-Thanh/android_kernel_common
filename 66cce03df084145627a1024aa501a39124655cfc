@@ -16,6 +16,24 @@
       "message": "Should this also be enforced through `queue_requests_store()` or `blk_mq_update_nr_requests()` so any init script cannot accidentally set it when ZWOR is in use?",
       "revId": "66cce03df084145627a1024aa501a39124655cfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d60587e_a2f25d0c",
+        "filename": "block/blk-mq-sched.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-08-10T18:08:33Z",
+      "side": 1,
+      "message": "Good catch. blk_mq_tag_update_depth() has been updated. blk_mq_tag_update_depth() is called by the sysfs code that modifies nr_requests.",
+      "parentUuid": "bc7cfa60_29c1da9f",
+      "revId": "66cce03df084145627a1024aa501a39124655cfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
