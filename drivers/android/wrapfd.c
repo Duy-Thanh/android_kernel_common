@@ -31,6 +31,9 @@
 /* 1 per bounce page (3), and 1 for content read directly into the buffer. */
 #define MAX_NR_KVECS (MAX_NR_BOUNCE_BUFS + 1)
 
+#define MAX_NR_LOAD_REQS 32
+#define MIN_BYTES_PER_REQ SZ_1M
+
 struct wrap_ctx;
 struct wrap_content;
 static const struct file_operations wrap_fops;
@@ -69,6 +72,40 @@ struct wrap_content_dmabuf {
 	bool writable;
 };
 
+struct wrap_io_ctx {
+	u8 *bounce_bufs[MAX_NR_BOUNCE_BUFS];
+	u8 *dst_buf;
+	size_t start_bounce_len;
+	size_t end_bounce_len;
+	loff_t file_offs;
+	loff_t buf_offs;
+	size_t len;
+	loff_t direct_read_buf_offs;
+	size_t direct_read_len;
+	size_t bytes_read;
+	size_t file_read_len;
+	loff_t file_read_offs;
+	loff_t direct_read_file_offs;
+	loff_t end_bounce_file_offs;
+};
+
+struct wrap_io_req {
+	struct work_struct work;
+	struct file *file;
+	struct kiocb kiocb;
+	struct iov_iter iter;
+	struct kvec iov[MAX_NR_KVECS];
+	size_t file_read_len;
+	size_t bytes_read;
+	ssize_t ret;
+};
+
+struct dmabuf_load_param {
+	struct dma_buf *dmabuf;
+	struct iosys_map map;
+	struct wrap_io_ctx io_ctx;
+};
+
 static int dmabuf_content_create_wrap(struct wrap_content *content,
 				      struct wrap_ctx *ctx)
 {
@@ -101,61 +138,85 @@ static int dmabuf_content_create_wrap(struct wrap_content *content,
 	return fd;
 }
 
-struct wrap_io_ctx {
-	u8 *bounce_bufs[MAX_NR_BOUNCE_BUFS];
-	u8 *dst_buf;
-	size_t start_bounce_len;
-	size_t end_bounce_len;
-	loff_t file_offs;
-	loff_t buf_offs;
-	size_t len;
-	loff_t direct_read_buf_offs;
-	size_t direct_read_len;
-	size_t bytes_read;
-	size_t file_read_len;
-	struct kiocb kiocb;
-	struct iov_iter iter;
-	struct kvec iov[MAX_NR_KVECS];
-};
-
-struct dmabuf_load_param {
-	struct dma_buf *dmabuf;
-	struct iosys_map map;
-	struct wrap_io_ctx io_ctx;
-};
-
-static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file)
+static void prepare_read_req(struct wrap_io_req *req, struct file *file,
+			     struct wrap_io_ctx *io_ctx, loff_t file_offs, size_t req_len)
 {
 	unsigned int nr_segs = 0;
-	unsigned int cur_bounce_page = 0;
-	struct kiocb *kiocb = &io_ctx->kiocb;
-	int i;
 
-	if (io_ctx->start_bounce_len) {
-		io_ctx->iov[nr_segs].iov_base = io_ctx->bounce_bufs[cur_bounce_page];
-		io_ctx->iov[nr_segs].iov_len = io_ctx->start_bounce_len;
+	req->file = file;
+	req->file_read_len = req_len;
+	req->bytes_read = 0;
+	req->ret = 0;
+
+	init_sync_kiocb(&req->kiocb, file);
+	req->kiocb.ki_pos = file_offs;
+	req->kiocb.ki_flags |= IOCB_DIRECT;
+
+	/*
+	 * If there's a start bounce buffer, it's always for the first page in the overall read
+	 * request.
+	 */
+	if ((file_offs == io_ctx->file_read_offs) && io_ctx->start_bounce_len) {
+		req->iov[nr_segs].iov_base = io_ctx->bounce_bufs[0];
+		req->iov[nr_segs].iov_len = io_ctx->start_bounce_len;
+		req_len -= io_ctx->start_bounce_len;
+		file_offs += io_ctx->start_bounce_len;
 		nr_segs++;
-		cur_bounce_page++;
 	}
 
-	if (io_ctx->direct_read_len) {
-		io_ctx->iov[nr_segs].iov_base = io_ctx->dst_buf + io_ctx->direct_read_buf_offs;
-		io_ctx->iov[nr_segs].iov_len = io_ctx->direct_read_len;
+	if (req_len && io_ctx->direct_read_len && io_ctx->direct_read_file_offs <= file_offs) {
+		size_t direct_read_len;
+
+		/*
+		 * The offset into the buffer for this request should be the base of where we start
+		 * reading directly into it, plus how much we've already read into the region in
+		 * previous requests.
+		 */
+		req->iov[nr_segs].iov_base = io_ctx->dst_buf + io_ctx->direct_read_buf_offs +
+					     (file_offs - io_ctx->direct_read_file_offs);
+		/*
+		 * The amount of data to read is the smaller of the two terms:
+		 *
+		 * 1. How much data is left for this request.
+		 * 2. How much data there is left in the file region that gets loaded directly
+		 * into the buffer, which is taken as the difference between the current position
+		 * in the file and the end of that region.
+		 */
+		direct_read_len = min(req_len,
+				      io_ctx->direct_read_file_offs + io_ctx->direct_read_len -
+				      file_offs);
+		req->iov[nr_segs].iov_len = direct_read_len;
+		req_len -= direct_read_len;
+		file_offs += direct_read_len;
 		nr_segs++;
 	}
 
-	for (i = 0; i < io_ctx->end_bounce_len / PAGE_SIZE; i++) {
-		io_ctx->iov[nr_segs].iov_base = io_ctx->bounce_bufs[cur_bounce_page];
-		io_ctx->iov[nr_segs].iov_len = PAGE_SIZE;
-		nr_segs++;
-		cur_bounce_page++;
+	if (req_len && io_ctx->end_bounce_len) {
+		/*
+		 * The last two pages in the overall read request can be bounce pages, so we
+		 * calculate which pages to use here. If there's a bounce page at the beginning,
+		 * then start at index 1.
+		 *
+		 * Since we know the file offset that corresponds to the start of the file data
+		 * that will be copied into the end pages and the length, we use that and our
+		 * current position to track which one of the end pages to use.
+		 */
+		int start_bounce_idx = (io_ctx->start_bounce_len ? 1 : 0) +
+				       ((file_offs - io_ctx->end_bounce_file_offs) / PAGE_SIZE);
+
+		WARN_ON(req_len > PAGE_SIZE * 2);
+
+		while (req_len) {
+			req->iov[nr_segs].iov_base = io_ctx->bounce_bufs[start_bounce_idx];
+			req->iov[nr_segs].iov_len = PAGE_SIZE;
+			req_len -= PAGE_SIZE;
+			nr_segs++;
+		}
 	}
 
-	init_sync_kiocb(kiocb, file);
-	/* File offset must be page aligned for direct I/O requests. */
-	kiocb->ki_pos = PAGE_ALIGN_DOWN(io_ctx->file_offs);
-	kiocb->ki_flags |= IOCB_DIRECT;
-	iov_iter_kvec(&io_ctx->iter, ITER_DEST, io_ctx->iov, nr_segs, io_ctx->file_read_len);
+	WARN_ON(req_len);
+
+	iov_iter_kvec(&req->iter, ITER_DEST, req->iov, nr_segs, req->file_read_len);
 }
 
 /*
@@ -183,6 +244,7 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	size_t end_bounce_len;
 	size_t nr_bounce_pages;
 	size_t file_read_len;
+	loff_t file_read_offs = PAGE_ALIGN_DOWN(file_offs);
 	loff_t buf_end = buf_offs + len;
 	int i, ret = 0;
 
@@ -191,7 +253,7 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	 * the start and end of the read to figure out how much we'll actually be reading from the
 	 * file.
 	 */
-	file_read_len = PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
+	file_read_len = PAGE_ALIGN(file_offs + len) - file_read_offs;
 
 	/*
 	 * If either the file or buffer offset are unaligned, then using direct I/O into the first
@@ -253,7 +315,9 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	io_ctx->direct_read_len = direct_read_len;
 	io_ctx->len = len;
 	io_ctx->file_read_len = file_read_len;
-	prepare_iocb_request(io_ctx, file);
+	io_ctx->file_read_offs = file_read_offs;
+	io_ctx->direct_read_file_offs = file_read_offs + start_bounce_len;
+	io_ctx->end_bounce_file_offs = file_read_offs + file_read_len - end_bounce_len;
 	return 0;
 
 err_free_bounce_pages:
@@ -264,22 +328,88 @@ err_free_bounce_pages:
 
 }
 
-static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
+static void process_read_req(struct wrap_io_req *req)
 {
 	ssize_t bytes_read;
 
-	while (io_ctx->bytes_read < io_ctx->file_read_len) {
-		io_ctx->iter.count = min_t(size_t, MAX_RW_COUNT,
-					   PAGE_ALIGN(io_ctx->file_read_len - io_ctx->bytes_read));
+	while (req->bytes_read < req->file_read_len) {
+		req->iter.count = min_t(size_t, MAX_RW_COUNT,
+					PAGE_ALIGN(req->file_read_len - req->bytes_read));
 
-		bytes_read = vfs_iocb_iter_read(file, &io_ctx->kiocb, &io_ctx->iter);
-		if (bytes_read <= 0)
-			return bytes_read;
+		bytes_read = vfs_iocb_iter_read(req->file, &req->kiocb, &req->iter);
+		if (bytes_read <= 0) {
+			req->ret = bytes_read;
+			return;
+		}
 
-		io_ctx->bytes_read += bytes_read;
+		req->bytes_read += bytes_read;
 	}
 
-	/* File was too short / early EOF. */
+	req->ret = 0;
+}
+
+static void wrap_io_read_req_work(struct work_struct *work)
+{
+	process_read_req(container_of(work, struct wrap_io_req, work));
+}
+
+static int wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
+{
+	size_t total_pages = io_ctx->file_read_len / PAGE_SIZE;
+	int i, nr_reqs, pages_per_req, rem_pages;
+	struct wrap_io_req *reqs;
+	loff_t cur_file_offs = io_ctx->file_read_offs;
+	ssize_t first_err = 0;
+
+	nr_reqs = min_t(size_t, DIV_ROUND_UP(io_ctx->file_read_len, MIN_BYTES_PER_REQ),
+			MAX_NR_LOAD_REQS);
+
+	/*
+	 * Synchronous single-request path for small reads to avoid workqueue scheduling overhead.
+	 */
+	if (nr_reqs == 1) {
+		struct wrap_io_req req;
+
+		prepare_read_req(&req, file, io_ctx, io_ctx->file_read_offs, io_ctx->file_read_len);
+		process_read_req(&req);
+		io_ctx->bytes_read = req.bytes_read;
+		if (req.ret < 0)
+			return req.ret;
+
+		return io_ctx->bytes_read < offset_in_page(io_ctx->file_offs) + io_ctx->len ?
+			-EINVAL : 0;
+	}
+
+	reqs = kcalloc(nr_reqs, sizeof(*reqs), GFP_KERNEL);
+	if (!reqs)
+		return -ENOMEM;
+
+	pages_per_req = total_pages / nr_reqs;
+	rem_pages = total_pages % nr_reqs;
+
+	for (i = 0; i < nr_reqs; i++) {
+		size_t req_pages = pages_per_req + (i < rem_pages ? 1 : 0);
+		size_t req_len = req_pages * PAGE_SIZE;
+
+		INIT_WORK(&reqs[i].work, wrap_io_read_req_work);
+		prepare_read_req(&reqs[i], file, io_ctx, cur_file_offs, req_len);
+		cur_file_offs += req_len;
+
+		queue_work(system_unbound_wq, &reqs[i].work);
+	}
+
+	for (i = 0; i < nr_reqs; i++) {
+		flush_work(&reqs[i].work);
+		if (reqs[i].ret < 0 && !first_err)
+			first_err = reqs[i].ret;
+		io_ctx->bytes_read += reqs[i].bytes_read;
+	}
+
+	kfree(reqs);
+
+	if (first_err < 0)
+		return first_err;
+
 	return io_ctx->bytes_read < offset_in_page(io_ctx->file_offs) + io_ctx->len ? -EINVAL : 0;
 }
 
