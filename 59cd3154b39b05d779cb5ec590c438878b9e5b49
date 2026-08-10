@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a9edfd_df3f1d8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T14:38:33Z",
+      "side": 1,
+      "message": "The change itself looks good to me but we have to identify if we are leaking SPM handles before tweaking this in the kernel cmdline.",
+      "revId": "59cd3154b39b05d779cb5ec590c438878b9e5b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
