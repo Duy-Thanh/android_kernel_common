@@ -17,6 +17,7 @@
 #include <linux/shm.h>
 #include <linux/mman.h>
 #include <linux/pagemap.h>
+#include <linux/ptshare.h>
 #include <linux/swap.h>
 #include <linux/syscalls.h>
 #include <linux/capability.h>
@@ -593,11 +594,11 @@ unsigned long ksys_mmap_pgoff(unsigned long addr, unsigned long len,
 			return -EBADF;
 		if (is_file_hugepages(file)) {
 			len = ALIGN(len, huge_page_size(hstate_file(file)));
-		} else if (unlikely(flags & MAP_HUGETLB)) {
+		} else if (unlikely(has_map_hugetlb_flag(flags))) {
 			retval = -EINVAL;
 			goto out_fput;
 		}
-	} else if (flags & MAP_HUGETLB) {
+	} else if (has_map_hugetlb_flag(flags)) {
 		struct hstate *hs;
 
 		hs = hstate_sizelog((flags >> MAP_HUGE_SHIFT) & MAP_HUGE_MASK);

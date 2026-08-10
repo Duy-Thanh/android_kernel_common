@@ -7,6 +7,7 @@
 #include <linux/pgsize_migration.h>
 
 #include "vma_internal.h"
+#include <linux/ptshare.h>
 
 #include <linux/dma-buf.h>
 #include <linux/page_size_compat.h>

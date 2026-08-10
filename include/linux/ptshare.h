@@ -20,6 +20,11 @@ struct ptshare_desc {
 	struct rcu_head rcu;
 };
 
+static inline bool has_map_hugetlb_flag(unsigned long flags)
+{
+	return (flags & MAP_HUGETLB) && !IS_ENABLED(CONFIG_PTSHARE);
+}
+
 #ifdef CONFIG_PTSHARE
 static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 {

@@ -108,7 +108,6 @@ static void ptshare_arm64_flush_tlb_range(unsigned long start, unsigned long end
 	__flush_tlb_range_op(vaae1is, start, pages, stride, 0,
 			     TLBI_TTL_UNKNOWN, false, lpa2_is_enabled());
 	dsb(ish);
-	__repeat_tlbi_sync(vaae1is, 0);
 	isb();
 }
 #else
