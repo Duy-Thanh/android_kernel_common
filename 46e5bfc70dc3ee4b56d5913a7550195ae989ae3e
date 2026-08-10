@@ -34,6 +34,24 @@
       "parentUuid": "2884044d_add5b78b",
       "revId": "46e5bfc70dc3ee4b56d5913a7550195ae989ae3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b927c0_c83c1ddd",
+        "filename": "android/abi_gki_protected_exports_aarch64",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-10T18:47:07Z",
+      "side": 1,
+      "message": "Just cherry-pick the correct fix: https://r.android.com/4113113 along with this patchset.",
+      "parentUuid": "515f557d_6bf60e33",
+      "revId": "46e5bfc70dc3ee4b56d5913a7550195ae989ae3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
