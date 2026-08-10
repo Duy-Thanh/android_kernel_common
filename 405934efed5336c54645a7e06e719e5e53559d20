@@ -34,6 +34,24 @@
       ],
       "revId": "405934efed5336c54645a7e06e719e5e53559d20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1072108_1f2b3e6e",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-08-10T18:10:02Z",
+      "side": 1,
+      "message": "The block layer does not guarantee anything about the request order except for pipelined zoned writes. Anyway, I have changed list_first_entry() into list_last_entry().",
+      "parentUuid": "bbf0b11e_733596ed",
+      "revId": "405934efed5336c54645a7e06e719e5e53559d20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
