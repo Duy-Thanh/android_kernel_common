@@ -22,6 +22,7 @@
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
 #include <linux/shmem_fs.h>
+#include <linux/hugetlb.h>
 #include <linux/memcontrol.h>
 #include <uapi/asm-generic/mman.h>
 #include <asm/tlb.h>
