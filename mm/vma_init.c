@@ -77,8 +77,10 @@ static void vm_area_init_from(const struct vm_area_struct *src,
 #endif
 #ifdef CONFIG_PTSHARE
 	if (vma_shares_pagetables(src)) {
-		vma_set_ptshare_desc(dest, vma_ptshare_desc(src));
-	} else if (mm_is_ptshare_shadow(src->vm_mm)) {
+		struct ptshare_desc *desc = vma_ptshare_desc(src);
+
+		vma_set_ptshare_desc(dest, desc);
+	} else if (src->vm_mm && mm_is_ptshare_shadow(src->vm_mm)) {
 		refcount_set(vma_ptshare_refcount(dest),
 			     refcount_read(vma_ptshare_refcount_const(src)));
 	} else {

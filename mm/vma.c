@@ -486,6 +486,12 @@ void remove_vma(struct vm_area_struct *vma)
 		fput(vma->vm_file);
 	}
 	mpol_put(vma_policy(vma));
+	if (vma_shares_pagetables(vma)) {
+		struct ptshare_desc *desc = vma_ptshare_desc(vma);
+
+		if (!WARN_ON_ONCE(!desc))
+			ptshare_put_vma(vma, desc);
+	}
 	vm_area_free(vma);
 }
 
