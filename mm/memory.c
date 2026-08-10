@@ -78,6 +78,7 @@
 #include <linux/ptrace.h>
 #include <linux/vmalloc.h>
 #include <linux/sched/sysctl.h>
+#include <linux/ptshare.h>
 
 #include <trace/events/kmem.h>
 #include <trace/hooks/mm.h>
@@ -1470,6 +1471,14 @@ copy_p4d_range(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma,
 static bool
 vma_needs_copy(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma)
 {
+	/*
+	 * Shared page table VMAs share PMD-level page tables owned by the
+	 * shadow MM. Skip copy_page_range() to avoid allocating private
+	 * PTE pages for dst_vma; PMDs are spliced on demand.
+	 */
+	if (vma_shares_pagetables(src_vma))
+		return false;
+
 	/*
 	 * Always copy pgtables when dst_vma has uffd-wp enabled even if it's
 	 * file-backed (e.g. shmem). Because when uffd-wp is enabled, pgtable
