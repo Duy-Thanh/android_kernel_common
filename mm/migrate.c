@@ -362,6 +362,9 @@ static bool remove_migration_pte(struct folio *folio,
 	if (bypass)
 		return true;
 
+	if (vma_is_ptshare_client(vma))
+		return true;
+
 	while (page_vma_mapped_walk(&pvmw)) {
 		rmap_t rmap_flags = RMAP_NONE;
 		pte_t old_pte;
