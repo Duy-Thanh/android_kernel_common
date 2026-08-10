@@ -31,6 +31,10 @@
 #ifndef MAP_SYNC
 #define MAP_SYNC 0
 #endif
+#ifndef MAP_PT_SHARED
+#define MAP_PT_SHARED MAP_HUGETLB
+#endif
+
 
 /*
  * The historical set of flags that all mmap implementations implicitly
@@ -155,6 +159,7 @@ calc_vm_flag_bits(struct file *file, unsigned long flags)
 	return _calc_vm_trans(flags, MAP_GROWSDOWN,  VM_GROWSDOWN ) |
 	       _calc_vm_trans(flags, MAP_LOCKED,     VM_LOCKED    ) |
 	       _calc_vm_trans(flags, MAP_SYNC,	     VM_SYNC      ) |
+	       _calc_vm_trans(flags, MAP_PT_SHARED,  VM_PT_SHARED) |
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	       _calc_vm_trans(flags, MAP_STACK,	     VM_NOHUGEPAGE) |
 #endif
