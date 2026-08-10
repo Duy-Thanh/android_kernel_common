@@ -168,12 +168,21 @@ static const struct dentry_operations tid_fd_dentry_operations = {
 	.d_delete	= pid_delete_dentry,
 };
 
-static int proc_fd_link(struct dentry *dentry, struct path *path)
+static int proc_fd_link(struct dentry *dentry, struct path *path,
+			struct task_struct *task)
 {
+<<<<<<< HEAD   (d9efd5f3138766970f2e24b8458e0a85b2158a4b Merge 11219b699a00 ("proc: rename proc_setattr to proc_nochm)
 	struct files_struct *files = NULL;
 	struct task_struct *task;
+||||||| BASE   (11219b699a009601d2e9e5b9fad8c27acf54eed4 proc: rename proc_setattr to proc_nochmod_setattr)
+	struct task_struct *task;
+=======
+>>>>>>> BRANCH (6253dfee5afba536bb54fc6fe6c091c3758fafe1 proc: protect ptrace_may_access() with exec_update_lock (FD )
 	int ret = -ENOENT;
+	unsigned int fd = proc_fd(d_inode(dentry));
+	struct file *fd_file;
 
+<<<<<<< HEAD   (d9efd5f3138766970f2e24b8458e0a85b2158a4b Merge 11219b699a00 ("proc: rename proc_setattr to proc_nochm)
 	task = get_proc_task(d_inode(dentry));
 	if (task) {
 		files = get_files_struct(task);
@@ -193,6 +202,28 @@ static int proc_fd_link(struct dentry *dentry, struct path *path)
 		}
 		spin_unlock(&files->file_lock);
 		put_files_struct(files);
+||||||| BASE   (11219b699a009601d2e9e5b9fad8c27acf54eed4 proc: rename proc_setattr to proc_nochmod_setattr)
+	task = get_proc_task(d_inode(dentry));
+	if (task) {
+		unsigned int fd = proc_fd(d_inode(dentry));
+		struct file *fd_file;
+
+		fd_file = fget_task(task, fd);
+		if (fd_file) {
+			*path = fd_file->f_path;
+			path_get(&fd_file->f_path);
+			ret = 0;
+			fput(fd_file);
+		}
+		put_task_struct(task);
+=======
+	fd_file = fget_task(task, fd);
+	if (fd_file) {
+		*path = fd_file->f_path;
+		path_get(&fd_file->f_path);
+		ret = 0;
+		fput(fd_file);
+>>>>>>> BRANCH (6253dfee5afba536bb54fc6fe6c091c3758fafe1 proc: protect ptrace_may_access() with exec_update_lock (FD )
 	}
 
 	return ret;
