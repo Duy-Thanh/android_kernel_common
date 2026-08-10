@@ -16,6 +16,23 @@
       "message": "Code-Review +1",
       "revId": "27d152cfbae1d66010c6ef36709aabc685317c2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2e9099_5ff259e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-10T15:16:59Z",
+      "side": 1,
+      "message": "resolve comment on aosp/4217208",
+      "revId": "27d152cfbae1d66010c6ef36709aabc685317c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
