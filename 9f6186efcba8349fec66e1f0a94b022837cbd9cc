@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0fb82f_f1247b1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-10T15:13:29Z",
+      "side": 1,
+      "message": "why does this need to be built-in? Can\u0027t it be a GKI module (\u003dm) or a vendor module?",
+      "revId": "9f6186efcba8349fec66e1f0a94b022837cbd9cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
