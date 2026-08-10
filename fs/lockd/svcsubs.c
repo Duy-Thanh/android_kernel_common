@@ -96,7 +96,21 @@ nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
 	mutex_lock(&nlm_file_mutex);
 
 	hlist_for_each_entry(file, &nlm_files[hash], f_list)
+<<<<<<< HEAD   (a31c42e859e3b10e8108e8225ae07346d3cb5056 Merge 03bfb8abc5c7 ("sparc: led: avoid trimming a newline fr)
 		if (!nfs_compare_fh(&file->f_handle, f))
+||||||| BASE   (03bfb8abc5c7553cdc1d61d7fa9599c9f1e8d207 sparc: led: avoid trimming a newline from empty writes)
+		if (!nfs_compare_fh(&file->f_handle, &lock->fh)) {
+			mutex_lock(&file->f_mutex);
+			nfserr = nlm_do_fopen(rqstp, file, mode);
+			mutex_unlock(&file->f_mutex);
+=======
+		if (!nfs_compare_fh(&file->f_handle, &lock->fh)) {
+			mutex_lock(&file->f_mutex);
+			nfserr = nlm_do_fopen(rqstp, file, mode);
+			mutex_unlock(&file->f_mutex);
+			if (nfserr)
+				goto out_unlock;
+>>>>>>> BRANCH (52dc40ef0cfee6ae89b7524967e73f0ba37906d7 xen/gntdev: fix error handling in ioctl)
 			goto found;
 
 	nlm_debug_print_fh("creating file for", f);
@@ -111,6 +125,7 @@ nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
 	INIT_HLIST_NODE(&file->f_list);
 	INIT_LIST_HEAD(&file->f_blocks);
 
+<<<<<<< HEAD   (a31c42e859e3b10e8108e8225ae07346d3cb5056 Merge 03bfb8abc5c7 ("sparc: led: avoid trimming a newline fr)
 	/* Open the file. Note that this must not sleep for too long, else
 	 * we would lock up lockd:-) So no NFS re-exports, folks.
 	 *
@@ -121,6 +136,15 @@ nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
 		dprintk("lockd: open failed (error %d)\n", nfserr);
 		goto out_free;
 	}
+||||||| BASE   (03bfb8abc5c7553cdc1d61d7fa9599c9f1e8d207 sparc: led: avoid trimming a newline from empty writes)
+	nfserr = nlm_do_fopen(rqstp, file, mode);
+	if (nfserr)
+		goto out_unlock;
+=======
+	nfserr = nlm_do_fopen(rqstp, file, mode);
+	if (nfserr)
+		goto out_free;
+>>>>>>> BRANCH (52dc40ef0cfee6ae89b7524967e73f0ba37906d7 xen/gntdev: fix error handling in ioctl)
 
 	hlist_add_head(&file->f_list, &nlm_files[hash]);
 
