@@ -918,6 +918,13 @@ struct vm_area_struct {
 #ifdef __HAVE_PFNMAP_TRACKING
 	struct pfnmap_track_ctx *pfnmap_track_ctx;
 #endif
+#ifdef CONFIG_PTSHARE
+	union {
+		/* For client VMAs: pointer to domain */
+		struct ptshare_desc *__vm_ptshare_desc;
+		refcount_t __vm_ptshare_refcount;  /* For shadow VMAs: number of clients */
+	};
+#endif
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
@@ -1858,6 +1865,8 @@ enum {
 #ifdef CONFIG_PTSHARE
 #define MMF_PTSHARE_CREATOR	32
 #define MMF_PTSHARE_CREATOR_MASK BIT(MMF_PTSHARE_CREATOR)
+#define MMF_PTSHARE_SHADOW	33
+#define MMF_PTSHARE_SHADOW_MASK BIT(MMF_PTSHARE_SHADOW)
 #endif
 
 #define MMF_INIT_LEGACY_MASK	(MMF_DUMPABLE_MASK | MMF_DUMP_FILTER_MASK |\

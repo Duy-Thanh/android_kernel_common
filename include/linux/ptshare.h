@@ -18,11 +18,88 @@ static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 {
 	return vma->vm_flags & VM_PT_SHARED;
 }
-#else
+
+static inline struct ptshare_desc *vma_ptshare_desc(const struct vm_area_struct *vma)
+{
+	/*
+	 * Shadow VMAs belong to a ptshare_mm, and do NOT have VM_PT_SHARED set.
+	 * Client VMAs are those that have VM_PT_SHARED set.
+	 */
+	VM_BUG_ON_VMA(!vma_shares_pagetables(vma), vma);
+
+	if (unlikely(!vma_shares_pagetables(vma)))
+		return NULL;
+
+	return vma->__vm_ptshare_desc;
+}
+
+static inline void vma_set_ptshare_desc(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+	VM_BUG_ON_VMA(!vma_shares_pagetables(vma), vma);
+
+	if (unlikely(!vma_shares_pagetables(vma)))
+		return;
+
+	vma->__vm_ptshare_desc = desc;
+}
+
+static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
+{
+	/* Shadow VMAs are in a ptshare_mm and do NOT have VM_PT_SHARED set */
+	VM_BUG_ON_VMA(vma_shares_pagetables(vma), vma);
+
+	if (unlikely(vma_shares_pagetables(vma)))
+		return NULL;
+
+	return &vma->__vm_ptshare_refcount;
+}
+
+static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_struct *vma)
+{
+	/* Shadow VMAs are in a ptshare_mm and do NOT have VM_PT_SHARED set */
+	VM_BUG_ON_VMA(vma_shares_pagetables(vma), vma);
+
+	if (unlikely(vma_shares_pagetables(vma)))
+		return NULL;
+
+	return &vma->__vm_ptshare_refcount;
+}
+
+static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+{
+	return mm_flags_test(MMF_PTSHARE_SHADOW, mm);
+}
+#else /* !CONFIG_PTSHARE */
 static inline bool vma_shares_pagetables(const struct vm_area_struct *vma)
 {
 	return false;
 }
-#endif
+
+static inline struct ptshare_desc *vma_ptshare_desc(const struct vm_area_struct *vma)
+{
+	return NULL;
+}
+
+static inline void vma_set_ptshare_desc(struct vm_area_struct *vma,
+					struct ptshare_desc *desc)
+{
+}
+
+static inline refcount_t *vma_ptshare_refcount(struct vm_area_struct *vma)
+{
+	return NULL;
+}
+
+static inline const refcount_t *vma_ptshare_refcount_const(const struct vm_area_struct *vma)
+{
+	return NULL;
+}
+
+static inline bool mm_is_ptshare_shadow(const struct mm_struct *mm)
+{
+	return false;
+}
+#endif /* CONFIG_PTSHARE */
 
 #endif /* _LINUX_PTSHARE_H */
