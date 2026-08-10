@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ca367c9_7ee24f91",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T15:21:18Z",
+      "side": 1,
+      "message": "Applied the same fix as the way I did in the upstream posting: https://lore.kernel.org/all/20260807164322.2970811-10-sebastianene@google.com/",
+      "parentUuid": "fd540fa7_ce777011",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 2
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3442e9d7_9d26f12a",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-08-07T11:42:58Z",
       "side": 1,
       "message": "I think we should return an error here if we can\u0027t find it.",
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d142a6_2d27b5df",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T15:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3442e9d7_9d26f12a",
       "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -102,6 +144,30 @@
       "side": 1,
       "message": "we should move the rollback after the `if (!(update \u0026 GITS_BASER_VALID))` check and if the host tries to play tricks on us with read-modify-write during rollback, we still have the source of truth from the original table and we are not giving back any other page to host.",
       "parentUuid": "e811a8b8_e69fd734",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 43
+      },
+      "revId": "dcc807047583fc5418c9571613cecd301e9b73b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5393ea57_0808d903",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T15:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8cc989f_b0f07afe",
       "range": {
         "startLine": 259,
         "startChar": 0,
