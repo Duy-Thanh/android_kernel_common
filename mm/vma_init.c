@@ -75,6 +75,17 @@ static void vm_area_init_from(const struct vm_area_struct *src,
 #ifdef __HAVE_PFNMAP_TRACKING
 	dest->pfnmap_track_ctx = NULL;
 #endif
+#ifdef CONFIG_PTSHARE
+	if (vma_shares_pagetables(src)) {
+		vma_set_ptshare_desc(dest, vma_ptshare_desc(src));
+	} else if (mm_is_ptshare_shadow(src->vm_mm)) {
+		refcount_set(vma_ptshare_refcount(dest),
+			     refcount_read(vma_ptshare_refcount_const(src)));
+	} else {
+		/* Initialize union for non-ptshare VMAs to avoid garbage */
+		dest->__vm_ptshare_desc = NULL;
+	}
+#endif
 }
 
 #ifdef __HAVE_PFNMAP_TRACKING

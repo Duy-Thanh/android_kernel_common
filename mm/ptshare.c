@@ -12,3 +12,4 @@
  * Author: Kalesh Singh <kaleshsingh@google.com>
  */
 #include <linux/ptshare.h>
+#include <linux/mm_types.h>
