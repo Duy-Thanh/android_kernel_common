@@ -22,6 +22,30 @@
       },
       "revId": "b022e669f4865ded952b9c5e55a0f5d64c6fd789",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9278baae_44959ee0",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-10T19:09:10Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ba89531d_dfb3c5a0",
+      "range": {
+        "startLine": 247,
+        "startChar": 3,
+        "endLine": 247,
+        "endChar": 17
+      },
+      "revId": "b022e669f4865ded952b9c5e55a0f5d64c6fd789",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
