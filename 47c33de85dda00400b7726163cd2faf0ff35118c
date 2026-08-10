@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2530419_4465344c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-10T10:33:37Z",
+      "side": 1,
+      "message": "Yeah, makes sense. Let me update the code.",
+      "parentUuid": "37bfe08c_6080b87f",
+      "revId": "47c33de85dda00400b7726163cd2faf0ff35118c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b41dac5c_745f54ac",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-10T09:16:51Z",
       "side": 1,
       "message": "nit: I think there is no need to say \"Otherwise it should be a pKVM code bug\" in this and any other cases (that\u0027s the whole point of BUG_ON, no need to extra explain that, right?)\n\nMoreover, in this case this whole comment seems not very necessary. The reader can easily figure out why `pkvm_vm_ref-\u003epkvm_vm` must be non-NULL here. (BTW it is guaranteed not just by the refcount mechanism but also by holding the `pkvm_vms_lock`?)",
+      "revId": "47c33de85dda00400b7726163cd2faf0ff35118c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "088e812a_2ae4e6e6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-10T10:33:37Z",
+      "side": 1,
+      "message": "Then let me remove the comment here, and only keep the BUG_ON check.",
+      "parentUuid": "b41dac5c_745f54ac",
       "revId": "47c33de85dda00400b7726163cd2faf0ff35118c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
