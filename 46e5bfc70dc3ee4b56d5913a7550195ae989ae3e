@@ -16,6 +16,24 @@
       "message": "Wait, why are these additions needed? Its unclear from the commit message if this was just accidentally added or intentional",
       "revId": "46e5bfc70dc3ee4b56d5913a7550195ae989ae3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515f557d_6bf60e33",
+        "filename": "android/abi_gki_protected_exports_aarch64",
+        "patchSetId": 8
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 4184930
+      },
+      "writtenOn": "2026-08-10T07:14:29Z",
+      "side": 1,
+      "message": "This is the issue I encountered while re-generating the KABI symbols. Based on the prompt, I generated these symbols first, but when I ran the following two Bazel commands, I got an error::\n\n```\ntools/bazel run //common:kernel_aarch64_abi_update_symbol_list \u0026\u0026\ntools/bazel run //common:kernel_aarch64_abi_update\n```\n\nThe error message indicates that I need to run the following command first:\n\n`tools/bazel run @@//common:kernel_aarch64_abi_update_protected_exports`",
+      "parentUuid": "2884044d_add5b78b",
+      "revId": "46e5bfc70dc3ee4b56d5913a7550195ae989ae3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
