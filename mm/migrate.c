@@ -22,6 +22,7 @@
 #include <linux/mm_inline.h>
 #include <linux/ksm.h>
 #include <linux/rmap.h>
+#include <linux/ptshare.h>
 #include <linux/topology.h>
 #include <linux/cpu.h>
 #include <linux/cpuset.h>
@@ -359,6 +360,9 @@ static bool remove_migration_pte(struct folio *folio,
 	trace_android_vh_mm_remove_migration_pte_bypass(folio, vma, addr,
 							rmap_walk_arg->folio, &bypass);
 	if (bypass)
+		return true;
+
+	if (vma_shares_pagetables(vma))
 		return true;
 
 	while (page_vma_mapped_walk(&pvmw)) {

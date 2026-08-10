@@ -1029,4 +1029,3 @@ bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
 
 	return false;
 }
-

@@ -56,6 +56,7 @@
 #include <linux/sched/mm.h>
 #include <linux/sched/task.h>
 #include <linux/pagemap.h>
+#include <linux/ptshare.h>
 #include <linux/swap.h>
 #include <linux/swapops.h>
 #include <linux/slab.h>
@@ -832,6 +833,9 @@ static bool folio_referenced_one(struct folio *folio,
 	struct folio_referenced_arg *pra = arg;
 	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, address, 0);
 	int ptes = 0, referenced = 0;
+
+	if (vma_shares_pagetables(vma))
+		return true;
 
 	while (page_vma_mapped_walk(&pvmw)) {
 		address = pvmw.address;
@@ -1872,6 +1876,9 @@ static bool try_to_unmap_one(struct folio *folio, struct vm_area_struct *vma,
 	unsigned long hsz = 0;
 	int ptes = 0;
 
+	if (vma_shares_pagetables(vma))
+		return true;
+
 	/*
 	 * When racing against e.g. zap_pte_range() on another cpu,
 	 * in between its ptep_get_and_clear_full() and folio_remove_rmap_*(),
@@ -2297,6 +2304,9 @@ static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,
 	enum ttu_flags flags = (enum ttu_flags)(long)arg;
 	unsigned long pfn;
 	unsigned long hsz = 0;
+
+	if (vma_shares_pagetables(vma))
+		return true;
 
 	/*
 	 * When racing against e.g. zap_pte_range() on another cpu,
