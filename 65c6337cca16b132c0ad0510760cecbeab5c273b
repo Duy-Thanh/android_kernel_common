@@ -88,6 +88,24 @@
       "parentUuid": "67d6349b_c5cce615",
       "revId": "65c6337cca16b132c0ad0510760cecbeab5c273b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4db0af7_6008f652",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4605888
+      },
+      "writtenOn": "2026-08-10T05:34:02Z",
+      "side": 1,
+      "message": "I have added comment on bug https://partnerissuetracker.corp.google.com/issues/540139036 , with the logs. pls check.",
+      "parentUuid": "6ea621c5_b61b11fb",
+      "revId": "65c6337cca16b132c0ad0510760cecbeab5c273b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
