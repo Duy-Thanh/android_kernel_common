@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "874793c0_4cd32988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T14:43:56Z",
+      "side": 1,
+      "message": "Fixed Fuad\u0027s comments",
+      "parentUuid": "11d110fe_f63e9b5f",
+      "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "089880c7_6986c787",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4954b857_2c1ce239",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T14:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "089880c7_6986c787",
+      "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a14b6d0_3720d38d",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-04T18:12:13Z",
       "side": 1,
       "message": "`donate_and_clear_host_page()` now takes `priv_num_pages`, but the unwind still gives back one page:\n\n```\n      err_with_state:\n              WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(priv_state), 1));\n```\n\nso on a failure below it the rest stay hyp-owned while the caller frees the whole allocation, and the next host user of those pages takes a stage-2 abort. Should this be `priv_num_pages`?",
+      "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d26c96_8f0506d2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/its_emulate.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-10T14:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a14b6d0_3720d38d",
       "revId": "35062e70491b0f6d1b2619b050348069ef86cf02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
