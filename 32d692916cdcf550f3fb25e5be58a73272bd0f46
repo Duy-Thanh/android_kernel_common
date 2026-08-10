@@ -16,6 +16,24 @@
       "message": "Assisted review caught one problem here, it should be `m.count \u003d strscpy(rq_info, \"(debugfs is disabled)\");` so the sdev_printk() can actually print the message.",
       "revId": "32d692916cdcf550f3fb25e5be58a73272bd0f46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2468a99_57252b66",
+        "filename": "drivers/scsi/scsi_error.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-08-10T18:05:21Z",
+      "side": 1,
+      "message": "Thanks for the feedback.\n\nInstead of adding an assignment, I have changed strscpy() into seq_puts().",
+      "parentUuid": "817181ad_6e22647b",
+      "revId": "32d692916cdcf550f3fb25e5be58a73272bd0f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
