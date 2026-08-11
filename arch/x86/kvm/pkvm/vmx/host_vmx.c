@@ -348,6 +348,18 @@ static void handle_pending_events(struct kvm_vcpu *vcpu, bool *req_immediate_exi
 			vmx_inject_exception(vcpu);
 			vcpu->arch.exception.pending = false;
 			vcpu->arch.exception.injected = true;
+
+			if (vmcs_readl(GUEST_CR4) & X86_CR4_FRED) {
+				/*
+				 * KVM doesn't implement FRED virtualization yet, so
+				 * cannot rely on vmx_inject_exception() to deliver
+				 * the fault address on #PF injection if FRED is
+				 * enabled in the host. Do that manually here instead.
+				 */
+				vmcs_write64(INJECTED_EVENT_DATA,
+					     vcpu->arch.exception.vector == PF_VECTOR ?
+					     vcpu->arch.cr2 : 0);
+			}
 		}
 
 		if (vcpu->arch.nmi_pending) {
