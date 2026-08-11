@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebd9b00_641c6c44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-11T17:01:19Z",
+      "side": 1,
+      "message": "\u003e Fix this by manually ensuring updating the FRED event data in the host\nVMCS in addition to kvm_inject_page_fault().\n\nI see that we don\u0027t expose FRED to guests and the fix in `handle_host_ept_violation_failure` (instead of `vmx_inject_exception`) seems appropriate. Just wondering if it would make sense to have a oneliner here or in the code comment about that to state it explicitly?",
+      "revId": "73003edd24e2c037572409fc08bd908f1c368af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
