@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044a4a35_a2655855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-11T23:43:02Z",
+      "side": 1,
+      "message": "mtk-sd is a vendor module, not part of GKI builds. Why is this patch needed in here?",
+      "revId": "a03dc140e509421659bd8ceea1c50a51cc863629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
