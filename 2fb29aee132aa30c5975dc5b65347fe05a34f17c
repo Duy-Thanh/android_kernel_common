@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/544907170",
       "revId": "2fb29aee132aa30c5975dc5b65347fe05a34f17c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e4e46c_77598c8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-08-11T10:23:13Z",
+      "side": 1,
+      "message": "Bypass Lint as original patch has the same problem (cherry pick line referencing linux-next)",
+      "revId": "2fb29aee132aa30c5975dc5b65347fe05a34f17c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
