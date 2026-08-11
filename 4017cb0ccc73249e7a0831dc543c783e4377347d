@@ -70,6 +70,24 @@
       "parentUuid": "c4bfedd5_3d0c8f77",
       "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b2554c_5919267c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-11T23:35:17Z",
+      "side": 1,
+      "message": "No because this patch has been cherry-picked several times so any new versions of it should have the same Change-Id as the already merged ones. Please upload the newest version of the patch against aosp/3899617 (you can do this by copying the Change-Id from aosp/3899617 before uploading). Abandon any other versions of the patch.",
+      "parentUuid": "23126722_83551dd9",
+      "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
