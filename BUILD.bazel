@@ -167,7 +167,8 @@ filegroup(
             "ncscope.*",
 
             # ABI and symbol list files
-            "gki/**",
+            "gki/aarch64/**",
+            "gki/x86_64/**",
         ],
     ),
     visibility = ["//visibility:public"],
