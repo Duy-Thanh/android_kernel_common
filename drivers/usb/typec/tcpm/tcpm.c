@@ -2231,11 +2231,17 @@ static int tcpm_altmode_enter(struct typec_altmode *altmode, u32 *vdo)
 	int svdm_version;
 	u32 header;
 
+<<<<<<< HEAD   (8a751114d72c5d63cd15e709acbe075cb12ba909 Merge 6253dfee5afb ("proc: protect ptrace_may_access() with )
 	svdm_version = typec_get_negotiated_svdm_version(port->typec_port);
 	if (svdm_version < 0)
 		return svdm_version;
 
 	header = VDO(altmode->svid, vdo ? 2 : 1, svdm_version, CMD_ENTER_MODE);
+||||||| BASE   (6253dfee5afba536bb54fc6fe6c091c3758fafe1 proc: protect ptrace_may_access() with exec_update_lock (FD )
+	header = VDO(altmode->svid, vdo ? 2 : 1, CMD_ENTER_MODE);
+=======
+	header = VDO(altmode->svid, 1, CMD_ENTER_MODE);
+>>>>>>> BRANCH (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
 	header |= VDO_OPOS(altmode->mode);
 
 	tcpm_queue_vdm_unlocked(port, header, vdo, vdo ? 1 : 0);
