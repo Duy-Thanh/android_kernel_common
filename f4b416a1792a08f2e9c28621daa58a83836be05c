@@ -22,6 +22,30 @@
       },
       "revId": "f4b416a1792a08f2e9c28621daa58a83836be05c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a70126c_459aa9c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-08-11T23:18:26Z",
+      "side": 1,
+      "message": "Apologies, the signoff tag applies automatically in my git workspace for the kernel tree.",
+      "parentUuid": "e98c4024_ff6f8732",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 54
+      },
+      "revId": "f4b416a1792a08f2e9c28621daa58a83836be05c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
