@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9f1a89_f5c14f40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4276001
+      },
+      "writtenOn": "2026-08-11T08:44:34Z",
+      "side": 1,
+      "message": "As I checked the NAN CL status, the presubmit verify is +1 for https://android-review.git.corp.google.com/q/topic:%22cf-wifi-aware-ranging%22 which shows that kernel618 can build pass on top of these CLs, do we still need this commit? tks!",
+      "revId": "d30479b83b8d3788ac334d0e227fe3283acd4c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
