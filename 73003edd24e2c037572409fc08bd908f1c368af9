@@ -33,6 +33,24 @@
       "message": "It seems better to update INJECTED_EVENT_DATA when injecting any exception to the host, not just a #PF, to prevent stale event data remaining in the VMCS after a #PF injection that may get incorrectly delivered later on a non-#PF injection.\n\nI\u0027ll test that and maybe push an updated version in a moment.",
       "revId": "73003edd24e2c037572409fc08bd908f1c368af9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8949804_71f73125",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-11T18:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d635733_7b18afa9",
+      "revId": "73003edd24e2c037572409fc08bd908f1c368af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
