@@ -103,6 +103,24 @@
       "parentUuid": "a8833a48_e09bb453",
       "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5e91dd_b2efd0a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-11T03:25:57Z",
+      "side": 1,
+      "message": "Yes, I agree with you. I have sent a patch to Linux upstream.\nHowever, since the time required is uncertain and our project has a deadline, \nI think it would be better to add this vendor hook to a17-6.18.",
+      "parentUuid": "ed981e5e_e18e2dd7",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
