@@ -18,6 +18,7 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/bluetooth/hci_uart.ko",
     "drivers/char/virtio_console.ko",
     "drivers/gnss/gnss.ko",
+    "drivers/misc/ntsync.ko",
     "drivers/misc/open-dice.ko",
     "drivers/misc/vcpu_stall_detector.ko",
     "drivers/net/can/dev/can-dev.ko",
