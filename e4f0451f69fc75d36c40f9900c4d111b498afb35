@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9504c4_243d93e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-11T19:44:06Z",
+      "side": 1,
+      "message": "nit: s/vmx_inject_injection/vmx_inject_exception ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "e4f0451f69fc75d36c40f9900c4d111b498afb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
