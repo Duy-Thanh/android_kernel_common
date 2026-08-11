@@ -52,6 +52,24 @@
       "parentUuid": "ec2ea009_121cc614",
       "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23126722_83551dd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-11T03:30:46Z",
+      "side": 1,
+      "message": "Would this patch https://android-review.googlesource.com/c/kernel/common/+/4208508 be OK? And I have resolved all of the outstanding comments on that patch.",
+      "parentUuid": "c4bfedd5_3d0c8f77",
+      "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
