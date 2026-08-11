@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7067bdc4_30cec1ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-11T23:27:32Z",
+      "side": 1,
+      "message": "This driver is a QCOM vendor module and is not built into GKI. Why is this change needed?",
+      "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
