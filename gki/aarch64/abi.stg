@@ -363438,6 +363438,12 @@ function {
   parameter_id: 0x1253769c
 }
 function {
+  id: 0x9b2efcfe
+  return_type_id: 0x6720d32f
+  parameter_id: 0x19e66c71
+  parameter_id: 0x35e13364
+}
+function {
   id: 0x9b2f1182
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -409694,6 +409700,15 @@ elf_symbol {
   crc: 0xc06d3cdc
   type_id: 0x9df535bf
   full_name: "dev_pm_opp_get_sharing_cpus"
+}
+elf_symbol {
+  id: 0xe1beb7e3
+  name: "dev_pm_opp_get_supplies"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3dad1d08
+  type_id: 0x9b2efcfe
+  full_name: "dev_pm_opp_get_supplies"
 }
 elf_symbol {
   id: 0x0d97ed87
@@ -469346,6 +469361,7 @@ interface {
   symbol_id: 0xf233a4f2
   symbol_id: 0x5f8e5002
   symbol_id: 0x4bb20cbc
+  symbol_id: 0xe1beb7e3
   symbol_id: 0x0d97ed87
   symbol_id: 0x0aa80467
   symbol_id: 0x92dcd9e0
