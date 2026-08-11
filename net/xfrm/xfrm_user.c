@@ -2725,10 +2725,18 @@ static int xfrm_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	if (!netlink_net_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
 
+<<<<<<< HEAD   (aef99e7f180baa5b1eb223b79be38f509e41fc1e Revert "mld: convert from timer to delayed work")
 	/* Use the 64-bit / untranslated format on Android, even for compat */
 	if (!IS_ENABLED(CONFIG_ANDROID) || IS_ENABLED(CONFIG_XFRM_USER_COMPAT)) {
 		if (in_compat_syscall()) {
 			struct xfrm_translator *xtr = xfrm_get_translator();
+||||||| BASE   (52dc40ef0cfee6ae89b7524967e73f0ba37906d7 xen/gntdev: fix error handling in ioctl)
+	if (in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+=======
+	if (IS_ENABLED(CONFIG_COMPAT_FOR_U64_ALIGNMENT) && in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+>>>>>>> BRANCH (04c1aa57d08471b1953bf27c84ac9b3d78d71831 xfrm: xfrm_interface: require CAP_NET_ADMIN in the device ne)
 
 			if (!xtr)
 				return -EOPNOTSUPP;
