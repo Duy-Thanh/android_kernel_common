@@ -533,6 +533,7 @@ kernel_build(
     ],
     makefile = ":Makefile",
     module_outs = [
+        "drivers/dma-buf/heaps/system_heap.ko",
         "drivers/iommu/pkvm-pviommu.ko",
     ],
 )
