@@ -119,6 +119,7 @@ config ANDROID_VENDOR_OEM_DATA
 
 	  If even slightly unsure, say Y.
 
+source "drivers/android/bpf/Kconfig"
 source "drivers/android/wonder/Kconfig"
 
 endmenu
