@@ -455,6 +455,14 @@ static void handle_host_ept_violation_failure(struct kvm_vcpu *vcpu)
 	fault.exit_qualification = exit_qualification;
 
 	kvm_inject_page_fault(vcpu, &fault);
+
+	/*
+	 * KVM doesn't implement FRED virtualization yet, so cannot rely on
+	 * kvm_inject_page_fault() to deliver the fault address if FRED is
+	 * enabled in the host. Do that manually here instead.
+	 */
+	if (vmcs_readl(GUEST_CR4) & X86_CR4_FRED)
+		vmcs_write64(INJECTED_EVENT_DATA, fault.address);
 }
 
 void pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
