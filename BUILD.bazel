@@ -526,6 +526,7 @@ kernel_build(
         "vmlinux.symvers",
     ],
     module_outs = [
+        "drivers/dma-buf/heaps/system_heap.ko",
         "drivers/iommu/pkvm-pviommu.ko",
     ],
     arch = "arm64",
