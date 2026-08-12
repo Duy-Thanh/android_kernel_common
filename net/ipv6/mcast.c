@@ -109,9 +109,36 @@ static int __ipv6_dev_mc_inc(struct net_device *dev,
 int sysctl_mld_max_msf __read_mostly = IPV6_MLD_MAX_MSF;
 int sysctl_mld_qrv __read_mostly = MLD_QRV_DEFAULT;
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 /*
  *	socket join on multicast group
  */
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+#define mc_assert_locked(idev)			\
+	lockdep_assert_held(&(idev)->mc_lock)
+
+#define mc_dereference(e, idev) \
+	rcu_dereference_protected(e, lockdep_is_held(&(idev)->mc_lock))
+
+#define for_each_pmc_rtnl(np, pmc)				\
+	for (pmc = rtnl_dereference((np)->ipv6_mc_list);	\
+	     pmc;						\
+	     pmc = rtnl_dereference(pmc->next))
+=======
+#define mc_assert_locked(idev)			\
+	lockdep_assert_held(&(idev)->mc_lock)
+
+#define mc_dereference(e, idev) \
+	rcu_dereference_protected(e, lockdep_is_held(&(idev)->mc_lock))
+
+#define sock_dereference(e, sk) \
+	rcu_dereference_protected(e, lockdep_sock_is_held(sk))
+
+#define for_each_pmc_socklock(np, sk, pmc)			\
+	for (pmc = sock_dereference((np)->ipv6_mc_list, sk);	\
+	     pmc;						\
+	     pmc = sock_dereference(pmc->next, sk))
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 
 #define for_each_pmc_rcu(np, pmc)				\
 	for (pmc = rcu_dereference(np->ipv6_mc_list);		\
@@ -144,8 +171,14 @@ static int __ipv6_sock_mc_join(struct sock *sk, int ifindex,
 	if (!ipv6_addr_is_multicast(addr))
 		return -EINVAL;
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	rcu_read_lock();
 	for_each_pmc_rcu(np, mc_lst) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	for_each_pmc_rtnl(np, mc_lst) {
+=======
+	for_each_pmc_socklock(np, sk, mc_lst) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 		if ((ifindex == 0 || mc_lst->ifindex == ifindex) &&
 		    ipv6_addr_equal(&mc_lst->addr, addr)) {
 			rcu_read_unlock();
@@ -227,7 +260,7 @@ int ipv6_sock_mc_drop(struct sock *sk, int ifindex, const struct in6_addr *addr)
 		return -EINVAL;
 
 	for (lnk = &np->ipv6_mc_list;
-	     (mc_lst = rtnl_dereference(*lnk)) != NULL;
+	     (mc_lst = sock_dereference(*lnk, sk)) != NULL;
 	      lnk = &mc_lst->next) {
 		if ((ifindex == 0 || mc_lst->ifindex == ifindex) &&
 		    ipv6_addr_equal(&mc_lst->addr, addr)) {
@@ -294,7 +327,7 @@ void __ipv6_sock_mc_close(struct sock *sk)
 
 	ASSERT_RTNL();
 
-	while ((mc_lst = rtnl_dereference(np->ipv6_mc_list)) != NULL) {
+	while ((mc_lst = sock_dereference(np->ipv6_mc_list, sk)) != NULL) {
 		struct net_device *dev;
 
 		np->ipv6_mc_list = mc_lst->next;
@@ -320,8 +353,11 @@ void ipv6_sock_mc_close(struct sock *sk)
 
 	if (!rcu_access_pointer(np->ipv6_mc_list))
 		return;
+
 	rtnl_lock();
+	lock_sock(sk);
 	__ipv6_sock_mc_close(sk);
+	release_sock(sk);
 	rtnl_unlock();
 }
 
@@ -354,7 +390,15 @@ int ip6_mc_source(int add, int omode, struct sock *sk,
 
 	err = -EADDRNOTAVAIL;
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	for_each_pmc_rcu(inet6, pmc) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	mutex_lock(&idev->mc_lock);
+	for_each_pmc_rtnl(inet6, pmc) {
+=======
+	mutex_lock(&idev->mc_lock);
+	for_each_pmc_socklock(inet6, sk, pmc) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 		if (pgsr->gsr_interface && pmc->ifindex != pgsr->gsr_interface)
 			continue;
 		if (ipv6_addr_equal(&pmc->addr, group))
@@ -377,10 +421,16 @@ int ip6_mc_source(int add, int omode, struct sock *sk,
 		pmc->sfmode = omode;
 	}
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	write_lock(&pmc->sflock);
 	pmclocked = 1;
 
 	psl = pmc->sflist;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	psl = rtnl_dereference(pmc->sflist);
+=======
+	psl = sock_dereference(pmc->sflist, sk);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	if (!add) {
 		if (!psl)
 			goto done;	/* err = -EADDRNOTAVAIL */
@@ -492,7 +542,13 @@ int ip6_mc_msfilter(struct sock *sk, struct group_filter *gsf,
 		goto done;
 	}
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	for_each_pmc_rcu(inet6, pmc) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	for_each_pmc_rtnl(inet6, pmc) {
+=======
+	for_each_pmc_socklock(inet6, sk, pmc) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 		if (pmc->ifindex != gsf->gf_interface)
 			continue;
 		if (ipv6_addr_equal(&pmc->addr, group))
@@ -527,8 +583,16 @@ int ip6_mc_msfilter(struct sock *sk, struct group_filter *gsf,
 		(void) ip6_mc_add_src(idev, group, gsf->gf_fmode, 0, NULL, 0);
 	}
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	write_lock(&pmc->sflock);
 	psl = pmc->sflist;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	mutex_lock(&idev->mc_lock);
+	psl = rtnl_dereference(pmc->sflist);
+=======
+	mutex_lock(&idev->mc_lock);
+	psl = sock_dereference(pmc->sflist, sk);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	if (psl) {
 		(void) ip6_mc_del_src(idev, group, pmc->sfmode,
 			psl->sl_count, psl->sl_addr, 0);
@@ -550,19 +614,18 @@ done:
 int ip6_mc_msfget(struct sock *sk, struct group_filter *gsf,
 	struct sockaddr_storage *p)
 {
-	int err, i, count, copycount;
+	struct ipv6_pinfo *inet6 = inet6_sk(sk);
 	const struct in6_addr *group;
 	struct ipv6_mc_socklist *pmc;
-	struct inet6_dev *idev;
-	struct ipv6_pinfo *inet6 = inet6_sk(sk);
 	struct ip6_sf_socklist *psl;
-	struct net *net = sock_net(sk);
+	int i, count, copycount;
 
 	group = &((struct sockaddr_in6 *)&gsf->gf_group)->sin6_addr;
 
 	if (!ipv6_addr_is_multicast(group))
 		return -EINVAL;
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	rcu_read_lock();
 	idev = ip6_mc_find_dev_rcu(net, group, gsf->gf_interface);
 
@@ -572,21 +635,48 @@ int ip6_mc_msfget(struct sock *sk, struct group_filter *gsf,
 	}
 
 	err = -EADDRNOTAVAIL;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	idev = ip6_mc_find_dev_rtnl(net, group, gsf->gf_interface);
+	if (!idev)
+		return -ENODEV;
+
+	err = -EADDRNOTAVAIL;
+=======
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	/* changes to the ipv6_mc_list require the socket lock and
-	 * rtnl lock. We have the socket lock and rcu read lock,
-	 * so reading the list is safe.
+	 * rtnl lock. We have the socket lock, so reading the list is safe.
 	 */
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	for_each_pmc_rcu(inet6, pmc) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	for_each_pmc_rtnl(inet6, pmc) {
+=======
+	for_each_pmc_socklock(inet6, sk, pmc) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 		if (pmc->ifindex != gsf->gf_interface)
 			continue;
 		if (ipv6_addr_equal(group, &pmc->addr))
 			break;
 	}
 	if (!pmc)		/* must have a prior join */
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 		goto done;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+		return err;
+
+=======
+		return -EADDRNOTAVAIL;
+
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	gsf->gf_fmode = pmc->sfmode;
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	psl = pmc->sflist;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	psl = rtnl_dereference(pmc->sflist);
+=======
+	psl = sock_dereference(pmc->sflist, sk);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	count = psl ? psl->sl_count : 0;
 	read_unlock_bh(&idev->lock);
 	rcu_read_unlock();
@@ -791,9 +881,15 @@ static void mld_del_delrec(struct inet6_dev *idev, struct ifmcaddr6 *im)
 		} else {
 			im->mca_crcount = idev->mc_qrv;
 		}
-		in6_dev_put(pmc->idev);
 		ip6_mc_clear_src(pmc);
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 		kfree(pmc);
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+		kfree_rcu(pmc, rcu);
+=======
+		in6_dev_put(pmc->idev);
+		kfree_rcu(pmc, rcu);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 	}
 	spin_unlock_bh(&im->mca_lock);
 }
@@ -1446,7 +1542,86 @@ int igmp6_event_query(struct sk_buff *skb)
 	}
 	read_unlock_bh(&idev->lock);
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	return 0;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+out:
+	in6_dev_put(idev);
+kfree_skb:
+	consume_skb(skb);
+}
+
+static void mld_query_work(struct work_struct *work)
+{
+	struct inet6_dev *idev = container_of(to_delayed_work(work),
+					      struct inet6_dev,
+					      mc_query_work);
+	struct sk_buff_head q;
+	struct sk_buff *skb;
+	bool rework = false;
+	int cnt = 0;
+
+	skb_queue_head_init(&q);
+
+	spin_lock_bh(&idev->mc_query_lock);
+	while ((skb = __skb_dequeue(&idev->mc_query_queue))) {
+		__skb_queue_tail(&q, skb);
+
+		if (++cnt >= MLD_MAX_QUEUE) {
+			rework = true;
+			schedule_delayed_work(&idev->mc_query_work, 0);
+			break;
+		}
+	}
+	spin_unlock_bh(&idev->mc_query_lock);
+
+	mutex_lock(&idev->mc_lock);
+	while ((skb = __skb_dequeue(&q)))
+		__mld_query_work(skb);
+	mutex_unlock(&idev->mc_lock);
+
+	if (!rework)
+		in6_dev_put(idev);
+=======
+out:
+	in6_dev_put(idev);
+kfree_skb:
+	consume_skb(skb);
+}
+
+static void mld_query_work(struct work_struct *work)
+{
+	struct inet6_dev *idev = container_of(to_delayed_work(work),
+					      struct inet6_dev,
+					      mc_query_work);
+	struct sk_buff_head q;
+	struct sk_buff *skb;
+	bool rework = false;
+	int cnt = 0;
+
+	skb_queue_head_init(&q);
+
+	spin_lock_bh(&idev->mc_query_lock);
+	while ((skb = __skb_dequeue(&idev->mc_query_queue))) {
+		__skb_queue_tail(&q, skb);
+
+		if (++cnt >= MLD_MAX_QUEUE) {
+			rework = true;
+			break;
+		}
+	}
+	spin_unlock_bh(&idev->mc_query_lock);
+
+	mutex_lock(&idev->mc_lock);
+	while ((skb = __skb_dequeue(&q)))
+		__mld_query_work(skb);
+	mutex_unlock(&idev->mc_lock);
+
+	if (rework && queue_delayed_work(mld_wq, &idev->mc_query_work, 0))
+		return;
+
+	in6_dev_put(idev);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 }
 
 /* called with rcu_read_lock() */
@@ -1496,8 +1671,85 @@ int igmp6_event_report(struct sk_buff *skb)
 			break;
 		}
 	}
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	read_unlock_bh(&idev->lock);
 	return 0;
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+
+	in6_dev_put(idev);
+kfree_skb:
+	consume_skb(skb);
+}
+
+static void mld_report_work(struct work_struct *work)
+{
+	struct inet6_dev *idev = container_of(to_delayed_work(work),
+					      struct inet6_dev,
+					      mc_report_work);
+	struct sk_buff_head q;
+	struct sk_buff *skb;
+	bool rework = false;
+	int cnt = 0;
+
+	skb_queue_head_init(&q);
+	spin_lock_bh(&idev->mc_report_lock);
+	while ((skb = __skb_dequeue(&idev->mc_report_queue))) {
+		__skb_queue_tail(&q, skb);
+
+		if (++cnt >= MLD_MAX_QUEUE) {
+			rework = true;
+			schedule_delayed_work(&idev->mc_report_work, 0);
+			break;
+		}
+	}
+	spin_unlock_bh(&idev->mc_report_lock);
+
+	mutex_lock(&idev->mc_lock);
+	while ((skb = __skb_dequeue(&q)))
+		__mld_report_work(skb);
+	mutex_unlock(&idev->mc_lock);
+
+	if (!rework)
+		in6_dev_put(idev);
+=======
+
+	in6_dev_put(idev);
+kfree_skb:
+	consume_skb(skb);
+}
+
+static void mld_report_work(struct work_struct *work)
+{
+	struct inet6_dev *idev = container_of(to_delayed_work(work),
+					      struct inet6_dev,
+					      mc_report_work);
+	struct sk_buff_head q;
+	struct sk_buff *skb;
+	bool rework = false;
+	int cnt = 0;
+
+	skb_queue_head_init(&q);
+	spin_lock_bh(&idev->mc_report_lock);
+	while ((skb = __skb_dequeue(&idev->mc_report_queue))) {
+		__skb_queue_tail(&q, skb);
+
+		if (++cnt >= MLD_MAX_QUEUE) {
+			rework = true;
+			break;
+		}
+	}
+	spin_unlock_bh(&idev->mc_report_lock);
+
+	mutex_lock(&idev->mc_lock);
+	while ((skb = __skb_dequeue(&q)))
+		__mld_report_work(skb);
+	mutex_unlock(&idev->mc_lock);
+
+	if (rework && queue_delayed_work(mld_wq, &idev->mc_report_work, 0))
+		return;
+
+	in6_dev_put(idev);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 }
 
 static bool is_in(struct ifmcaddr6 *pmc, struct ip6_sf_list *psf, int type,
@@ -2429,8 +2681,24 @@ static int ip6_mc_leave_src(struct sock *sk, struct ipv6_mc_socklist *iml,
 {
 	int err;
 
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	write_lock_bh(&iml->sflock);
 	if (!iml->sflist) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	psl = rtnl_dereference(iml->sflist);
+
+	if (idev)
+		mutex_lock(&idev->mc_lock);
+
+	if (!psl) {
+=======
+	psl = sock_dereference(iml->sflist, sk);
+
+	if (idev)
+		mutex_lock(&idev->mc_lock);
+
+	if (!psl) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 		/* any-source empty exclude case */
 		err = ip6_mc_del_src(idev, &iml->addr, iml->sfmode, 0, NULL, 0);
 	} else {
@@ -2537,10 +2805,29 @@ void ipv6_mc_down(struct inet6_dev *idev)
 	/* Should stop timer after group drop. or we will
 	 * start timer again in mld_ifc_event()
 	 */
+<<<<<<< HEAD   (c1986770b896d0864ffeb3740d50e546ad817a50 UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 	mld_ifc_stop_timer(idev);
 	mld_gq_stop_timer(idev);
 	mld_dad_stop_timer(idev);
 	read_unlock_bh(&idev->lock);
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+	synchronize_net();
+	mld_query_stop_work(idev);
+	mld_report_stop_work(idev);
+	mld_ifc_stop_work(idev);
+	mld_gq_stop_work(idev);
+	mld_dad_stop_work(idev);
+=======
+	mld_query_stop_work(idev);
+	mld_report_stop_work(idev);
+
+	mutex_lock(&idev->mc_lock);
+	mld_ifc_stop_work(idev);
+	mld_gq_stop_work(idev);
+	mutex_unlock(&idev->mc_lock);
+
+	mld_dad_stop_work(idev);
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 }
 
 static void ipv6_mc_reset(struct inet6_dev *idev)
