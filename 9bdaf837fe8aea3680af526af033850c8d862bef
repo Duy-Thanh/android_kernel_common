@@ -16,6 +16,23 @@
       "message": "Yeah, with this issue being fixed https://android-review.googlesource.com/c/kernel/common/+/4208206, it is not pKVM\u0027s fault. 😊",
       "revId": "9bdaf837fe8aea3680af526af033850c8d862bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7519854_1193c6a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-12T19:09:08Z",
+      "side": 1,
+      "message": "Just as a note: it was not an issue for !CONFIG_PKVM_X86_DEBUG case (default one)",
+      "revId": "9bdaf837fe8aea3680af526af033850c8d862bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
