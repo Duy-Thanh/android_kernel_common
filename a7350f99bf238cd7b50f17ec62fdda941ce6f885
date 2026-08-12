@@ -46,6 +46,30 @@
       },
       "revId": "a7350f99bf238cd7b50f17ec62fdda941ce6f885",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f61d5d7b_7f66e580",
+        "filename": "drivers/base/power/wakeup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 991,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-08-12T09:41:50Z",
+      "side": 0,
+      "message": "Marked as resolved.",
+      "parentUuid": "1873ee23_ca5bb841",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 991,
+        "endChar": 63
+      },
+      "revId": "a7350f99bf238cd7b50f17ec62fdda941ce6f885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
