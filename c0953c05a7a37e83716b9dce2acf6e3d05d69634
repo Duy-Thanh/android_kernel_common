@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443001d8_7cae97bb",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-08-12T14:25:50Z",
+      "side": 1,
+      "message": "Can\u0027t that be built-in instead?",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 19
+      },
+      "revId": "c0953c05a7a37e83716b9dce2acf6e3d05d69634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
