@@ -3357,10 +3357,20 @@ retry:
 	f2fs_unlock_op(sbi, &lc);
 
 	if (f2fs_sb_has_blkzoned(sbi) && err == -EAGAIN && gc_required) {
+<<<<<<< HEAD   (47fe55abe6c7ee584d6f8ef662477b106eb72326 UPSTREAM: f2fs: fix to reclaim space in f2fs_allocate_pinnin)
 		f2fs_down_write_trace(&sbi->gc_lock, &lc);
 		err = f2fs_gc_range(sbi, 0, sbi->first_zoned_segno - 1,
 				true, ZONED_PIN_SEC_REQUIRED_COUNT);
 		f2fs_up_write_trace(&sbi->gc_lock, &lc);
+||||||| BASE   (db610c24f45d43299a8eb85d0355d0786a35bb0e UPSTREAM: f2fs: fix to reclaim space in f2fs_allocate_pinnin)
+		f2fs_down_write_trace(&sbi->gc_lock, &lc);
+		err = f2fs_gc_range(sbi, 0, sbi->first_seq_zone_segno - 1,
+				true, ZONED_PIN_SEC_REQUIRED_COUNT);
+		f2fs_up_write_trace(&sbi->gc_lock, &lc);
+=======
+		err = f2fs_gc_range(sbi, 0, sbi->first_seq_zone_segno - 1,
+				true, ZONED_PIN_SEC_REQUIRED_COUNT, true);
+>>>>>>> CHANGE (c7ad8c94d6193bff72b385b1cf3fb753de09f780 BACKPORT: f2fs: fix to shrink gc_lock coverage in f2fs_gc_ra)
 		if (err)
 			return err;
 		err = f2fs_sync_fs(sbi->sb, 1);
