@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df765f29_4b205156",
+        "filename": "block/blk-sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-12T20:05:30Z",
+      "side": 1,
+      "message": "Hi Bart,\nOn boot `blk_mq_alloc_sched_res()` in `block/blk-mq-sched.c` calls `blk_mq_default_nr_requests(set)` (in `block/blk-mq.h`), which still returns `2 * queue_depth`.\n This means `q-\u003enr_requests` will default to `2 * queue_depth` at startup before any sysfs write occurs, leaving the ZWOR deadlock open on boot. Should `blk_mq_alloc_sched_res()` (or `blk_mq_default_nr_requests()`) also check `blk_use_zwor(q)` so that initial scheduler tags are capped at `1 * queue_depth` on boot?",
+      "revId": "ef5a41edd25ac0ccf3297b9957d5073fe61049a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
