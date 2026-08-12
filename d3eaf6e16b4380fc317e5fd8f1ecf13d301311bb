@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4202ffad_654ad49c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-12T22:28:09Z",
+      "side": 1,
+      "message": "Without the export, the only caller should be the OOM code. I\u0027m 99% certain that can\u0027t be called at NMI time.",
+      "parentUuid": "a8bfb59d_b7541a1d",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdb14677_bbdb7318",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-12T22:17:22Z",
       "side": 1,
       "message": "How does this patch cause this issue? Are you saying that none of the NMI cases exist without this export?",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25e1ecfc_6e9faf3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-12T22:28:09Z",
+      "side": 1,
+      "message": "Right.",
+      "parentUuid": "bdb14677_bbdb7318",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2026-08-12T22:17:22Z",
       "side": 1,
       "message": "isn\u0027t there a race here where once CPU might have entered when !in_nmi (acquires task_lock) and another enters in_nmi (acquires alloc lock) so there is no serialization?",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc94e369_b9ed596a",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-12T22:28:09Z",
+      "side": 1,
+      "message": "I don\u0027t think so? Essentially a task that\u0027s in NMI won\u0027t get the lock and won\u0027t look at this thread\u0027s \"-\u003emm\". If we don\u0027t find any \"-\u003emm\" then we\u0027ll return NULL and we\u0027ll skip dumping this particular task. That\u0027s OK.\n\nEssentially:\n* If we return a task with a MM, the lock for that task is held.\n* If we return NULL, no lock is held and the calling function will just return.\n\nDoes that make sense?",
+      "parentUuid": "9d3f2726_fea8083d",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
