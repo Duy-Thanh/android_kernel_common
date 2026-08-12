@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3591406d_24915075",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T16:39:16Z",
+      "side": 1,
+      "message": "this landed in mainline and LTS, it should be a `UPSTREAM:` from the corresponding LTS branch linux-6.18.y",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2370074d_fca9c106",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T16:39:16Z",
+      "side": 1,
+      "message": "where is the bug number?",
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f42b2f1_270ffbe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T16:39:16Z",
+      "side": 1,
+      "message": "Why do you need this? This patch looks like it is not source-compatible.",
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
