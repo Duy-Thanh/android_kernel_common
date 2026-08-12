@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9e8db2_8463eea8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T20:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3591406d_24915075",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2370074d_fca9c106",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c129587_ed760564",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T20:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2370074d_fca9c106",
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f42b2f1_270ffbe3",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-08-12T16:39:16Z",
       "side": 1,
       "message": "Why do you need this? This patch looks like it is not source-compatible.",
+      "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e579f9ae_ed96465c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T20:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f42b2f1_270ffbe3",
       "revId": "1350ca747734fdfa6aef0812d6e18ee03b6ca0e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
