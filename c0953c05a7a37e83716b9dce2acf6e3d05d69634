@@ -22,6 +22,30 @@
       },
       "revId": "c0953c05a7a37e83716b9dce2acf6e3d05d69634",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b22e2f3_f186560b",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-12T14:35:11Z",
+      "side": 1,
+      "message": "We don\u0027t really need it for all microdroid VM, so I went with the module option. Having said that, I don\u0027t have strong opinions here",
+      "parentUuid": "443001d8_7cae97bb",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 19
+      },
+      "revId": "c0953c05a7a37e83716b9dce2acf6e3d05d69634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
