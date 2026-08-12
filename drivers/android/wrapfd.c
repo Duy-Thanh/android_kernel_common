@@ -97,7 +97,9 @@ struct wrap_io_req {
 	struct kvec iov[MAX_NR_KVECS];
 	size_t file_read_len;
 	size_t bytes_read;
-	ssize_t ret;
+	long ret;
+	loff_t file_offs;
+	u8 async_io_done;
 };
 
 struct dmabuf_load_param {
@@ -147,6 +149,7 @@ static void prepare_read_req(struct wrap_io_req *req, struct file *file,
 	req->file_read_len = req_len;
 	req->bytes_read = 0;
 	req->ret = 0;
+	req->file_offs = file_offs;
 
 	init_sync_kiocb(&req->kiocb, file);
 	req->kiocb.ki_pos = file_offs;
@@ -353,13 +356,90 @@ static void wrap_io_read_req_work(struct work_struct *work)
 	process_read_req(container_of(work, struct wrap_io_req, work));
 }
 
+static long wrap_io_read_parallel(struct wrap_io_ctx *io_ctx, struct wrap_io_req *reqs,
+				  unsigned int nr_reqs)
+{
+	long ret = 0;
+	int i;
+
+	for (i = 0; i < nr_reqs; i++) {
+		INIT_WORK(&reqs[i].work, wrap_io_read_req_work);
+		queue_work(system_unbound_wq, &reqs[i].work);
+	}
+
+	for (i = 0; i < nr_reqs; i++) {
+		flush_work(&reqs[i].work);
+		if (reqs[i].ret < 0 && !ret)
+			ret = reqs[i].ret;
+		io_ctx->bytes_read += reqs[i].bytes_read;
+	}
+
+	return ret;
+}
+
+static void async_io_complete(struct kiocb *kiocb, long ret)
+{
+	struct wrap_io_req *req = container_of(kiocb, struct wrap_io_req, kiocb);
+
+	if (ret < 0)
+		req->ret = ret;
+	else
+		req->bytes_read = ret;
+
+	smp_store_release(&req->async_io_done, 1);
+}
+
+static long wrap_io_read_async(struct wrap_io_ctx *io_ctx, struct wrap_io_req *reqs,
+			       unsigned int nr_reqs, struct file *file)
+{
+	long ret;
+	int i;
+
+	if (!file->f_op->iopoll)
+		return -EOPNOTSUPP;
+
+	for (i = 0; i < nr_reqs; i++) {
+		reqs[i].kiocb.ki_flags |= IOCB_HIPRI;
+		reqs[i].kiocb.ki_complete = async_io_complete;
+
+		ret = vfs_iocb_iter_read(file, &reqs[i].kiocb, &reqs[i].iter);
+		if (ret == -EOPNOTSUPP) {
+			prepare_read_req(&reqs[i], file, io_ctx, reqs[i].file_offs,
+					 reqs[i].file_read_len);
+			return ret;
+		} else if (ret < 0 && ret != -EIOCBQUEUED) {
+			return ret;
+		}
+	}
+
+	ret = 0;
+	i = 0;
+
+	while (i < nr_reqs) {
+		while (!smp_load_acquire(&reqs[i].async_io_done)) {
+			int nr_complete = file->f_op->iopoll(&reqs[i].kiocb, NULL, 0);
+
+			if (nr_complete < 0)
+				return nr_complete;
+		}
+
+		if (!ret && reqs[i].ret)
+			ret = reqs[i].ret;
+
+		io_ctx->bytes_read += reqs[i].bytes_read;
+		i++;
+	}
+
+	return ret;
+}
+
 static int wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 {
 	size_t total_pages = io_ctx->file_read_len / PAGE_SIZE;
 	int i, nr_reqs, pages_per_req, rem_pages;
 	struct wrap_io_req *reqs;
 	loff_t cur_file_offs = io_ctx->file_read_offs;
-	ssize_t first_err = 0;
+	int ret;
 
 	nr_reqs = min_t(size_t, DIV_ROUND_UP(io_ctx->file_read_len, MIN_BYTES_PER_REQ),
 			MAX_NR_LOAD_REQS);
@@ -391,24 +471,18 @@ static int wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 		size_t req_pages = pages_per_req + (i < rem_pages ? 1 : 0);
 		size_t req_len = req_pages * PAGE_SIZE;
 
-		INIT_WORK(&reqs[i].work, wrap_io_read_req_work);
 		prepare_read_req(&reqs[i], file, io_ctx, cur_file_offs, req_len);
 		cur_file_offs += req_len;
-
-		queue_work(system_unbound_wq, &reqs[i].work);
 	}
 
-	for (i = 0; i < nr_reqs; i++) {
-		flush_work(&reqs[i].work);
-		if (reqs[i].ret < 0 && !first_err)
-			first_err = reqs[i].ret;
-		io_ctx->bytes_read += reqs[i].bytes_read;
-	}
+	ret = wrap_io_read_async(io_ctx, reqs, nr_reqs, file);
+	if (ret == -EOPNOTSUPP)
+		ret = wrap_io_read_parallel(io_ctx, reqs, nr_reqs);
 
 	kfree(reqs);
 
-	if (first_err < 0)
-		return first_err;
+	if (ret < 0)
+		return ret;
 
 	return io_ctx->bytes_read < offset_in_page(io_ctx->file_offs) + io_ctx->len ? -EINVAL : 0;
 }
