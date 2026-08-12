@@ -40,6 +40,30 @@
       ],
       "revId": "83fa40dd1cabd42f4fc6782aa0b5b93dbdc65adb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496bde58_7880d0e2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-08-12T12:12:40Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t realise we had precedent for out of tree GKI modules. I have moved this in `drivers/android`.\n\nTIL!",
+      "parentUuid": "d172e362_7bb0e8f8",
+      "range": {
+        "startLine": 170,
+        "startChar": 12,
+        "endLine": 171,
+        "endChar": 27
+      },
+      "revId": "83fa40dd1cabd42f4fc6782aa0b5b93dbdc65adb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
