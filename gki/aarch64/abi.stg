@@ -407417,6 +407417,12 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x84850276
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x33756485
+}
+function {
   id: 0x848c1d93
   return_type_id: 0x6720d32f
   parameter_id: 0x6720d32f
@@ -407670,6 +407676,15 @@ function {
   return_type_id: 0x3a583251
   parameter_id: 0x056cf603
   parameter_id: 0x14b9453b
+}
+function {
+  id: 0x862439d9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0x92233392
+  parameter_id: 0x3e10b518
+  parameter_id: 0x49f541d1
 }
 function {
   id: 0x8624d3e6
@@ -466240,6 +466255,15 @@ elf_symbol {
   full_name: "add_memory"
 }
 elf_symbol {
+  id: 0x9930424f
+  name: "add_memory_driver_managed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb1ad5939
+  type_id: 0x862439d9
+  full_name: "add_memory_driver_managed"
+}
+elf_symbol {
   id: 0x9d3925bd
   name: "add_memory_subsection"
   is_defined: true
@@ -488419,6 +488443,15 @@ elf_symbol {
   full_name: "generic_mii_ioctl"
 }
 elf_symbol {
+  id: 0xbf8494e5
+  name: "generic_online_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd942df7c
+  type_id: 0x102e93ac
+  full_name: "generic_online_page"
+}
+elf_symbol {
   id: 0x7f639ef1
   name: "generic_perform_write"
   is_defined: true
@@ -500279,6 +500312,15 @@ elf_symbol {
   crc: 0x64afdea6
   type_id: 0xd2755d5f
   full_name: "memory_cgrp_subsys_on_dfl_key"
+}
+elf_symbol {
+  id: 0x291392a1
+  name: "memory_group_register_dynamic"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x010117d8
+  type_id: 0x84850276
+  full_name: "memory_group_register_dynamic"
 }
 elf_symbol {
   id: 0x59907795
@@ -540091,6 +540133,7 @@ interface {
   symbol_id: 0xf09e1ca4
   symbol_id: 0x4c40d07d
   symbol_id: 0xcef4ad72
+  symbol_id: 0x9930424f
   symbol_id: 0x9d3925bd
   symbol_id: 0x7951d828
   symbol_id: 0xa5dcf915
@@ -542553,6 +542596,7 @@ interface {
   symbol_id: 0x600f1fb4
   symbol_id: 0xf85d118d
   symbol_id: 0x95a840b8
+  symbol_id: 0xbf8494e5
   symbol_id: 0x7f639ef1
   symbol_id: 0x6bd69c06
   symbol_id: 0x4c4073c3
@@ -543870,6 +543914,7 @@ interface {
   symbol_id: 0xcd17d380
   symbol_id: 0x4a3fbd55
   symbol_id: 0xe8a0a1cd
+  symbol_id: 0x291392a1
   symbol_id: 0x59907795
   symbol_id: 0x433c572b
   symbol_id: 0xdf190787
