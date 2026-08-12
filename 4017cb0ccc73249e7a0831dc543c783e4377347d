@@ -88,6 +88,24 @@
       "parentUuid": "23126722_83551dd9",
       "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b14aee0e_6c2fc3d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-12T02:50:28Z",
+      "side": 1,
+      "message": "If I upload the newest version of the patch against aosp/3899617, and copy the Change-Id from aosp/3899617 before uploading, I will get this error:\n\nEnumerating objects: 29, done.\nCounting objects: 100% (29/29), done.\nDelta compression using up to 128 threads\nCompressing objects: 100% (15/15), done.\nWriting objects: 100% (15/15), 1.61 KiB | 40.00 KiB/s, done.\nTotal 15 (delta 14), reused 0 (delta 0)\nremote: Resolving deltas: 100% (14/14)\nremote: Waiting for private key checker: 4/4 objects left\nremote: Processing changes: refs: 1, done    \nTo https://android.googlesource.com/kernel/common\n ! [remote rejected]           HEAD -\u003e refs/for/android17-6.18 (cannot add patch set to 3899617.)\nerror: failed to push some refs to \u0027https://android.googlesource.com/kernel/common\u0027\n\nOnly if I use a new Change-ID can I upload this patch. Is there any permission problem? I also don\u0027t have the \"rebase\" button on aosp/3899617.",
+      "parentUuid": "82b2554c_5919267c",
+      "revId": "4017cb0ccc73249e7a0831dc543c783e4377347d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
