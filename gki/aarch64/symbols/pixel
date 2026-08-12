@@ -1868,6 +1868,7 @@
   shrinker_alloc
   shrinker_free
   shrinker_register
+  si_meminfo
   simple_attr_open
   simple_attr_read
   simple_attr_release
@@ -2127,6 +2128,7 @@
   trace_handle_return
   __traceiter_android_rvh_gup_longterm_locked
   __traceiter_android_rvh_hw_protection_shutdown
+  __traceiter_android_rvh_meminfo_proc_show
   __traceiter_android_rvh_task_fits_cpu
   __traceiter_android_rvh_ufs_reprogram_all_keys
   __traceiter_android_rvh_update_load_sum
@@ -2184,6 +2186,7 @@
   trace_output_call
   __tracepoint_android_rvh_gup_longterm_locked
   __tracepoint_android_rvh_hw_protection_shutdown
+  __tracepoint_android_rvh_meminfo_proc_show
   __tracepoint_android_rvh_task_fits_cpu
   __tracepoint_android_rvh_ufs_reprogram_all_keys
   __tracepoint_android_rvh_update_load_sum
