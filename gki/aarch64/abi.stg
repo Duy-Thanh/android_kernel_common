@@ -426811,6 +426811,14 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
+  id: 0x9b6444b9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x3360dff4
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9b64aa6c
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -456763,6 +456771,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_ufs_wait_for_uic_cmd"
 }
 elf_symbol {
+  id: 0x683bafeb
+  name: "__traceiter_android_vh_unlock_mmap_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x31f23da8
+  type_id: 0x9b6444b9
+  full_name: "__traceiter_android_vh_unlock_mmap_bypass"
+}
+elf_symbol {
   id: 0x46e1dbde
   name: "__traceiter_android_vh_unreserve_highatomic_bypass"
   is_defined: true
@@ -465185,6 +465202,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ufs_wait_for_uic_cmd"
+}
+elf_symbol {
+  id: 0xe3108c85
+  name: "__tracepoint_android_vh_unlock_mmap_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_unlock_mmap_bypass"
 }
 elf_symbol {
   id: 0xd309f564
@@ -540218,6 +540244,7 @@ interface {
   symbol_id: 0x810f6abf
   symbol_id: 0xcc8dcd0c
   symbol_id: 0xda2652c8
+  symbol_id: 0x683bafeb
   symbol_id: 0x46e1dbde
   symbol_id: 0xd956f644
   symbol_id: 0x6a8145ff
@@ -541154,6 +541181,7 @@ interface {
   symbol_id: 0xb7ba0c6d
   symbol_id: 0xaf7a4dba
   symbol_id: 0x4aab77a6
+  symbol_id: 0xe3108c85
   symbol_id: 0xd309f564
   symbol_id: 0x931553ae
   symbol_id: 0xc09d36c9
