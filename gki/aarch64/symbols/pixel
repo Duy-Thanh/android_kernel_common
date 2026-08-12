@@ -14,7 +14,6 @@
   alarm_cancel
   alarm_init
   alarm_start_relative
-  arch_touch_nmi_watchdog
   alarmtimer_get_rtcdev
   alarm_try_to_cancel
   alloc_chrdev_region
