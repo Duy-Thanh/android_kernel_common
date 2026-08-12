@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/544308094",
       "revId": "dde6a767a0ef114b3d10412df7f36fb9acab5449",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3880c7c_7ba6d737",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-12T18:29:53Z",
+      "side": 1,
+      "message": "Please also cherry-pick the fix https://r.android.com/4227738",
+      "revId": "dde6a767a0ef114b3d10412df7f36fb9acab5449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
