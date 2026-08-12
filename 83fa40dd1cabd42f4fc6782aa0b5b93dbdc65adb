@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d172e362_7bb0e8f8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-12T11:17:21Z",
+      "side": 1,
+      "message": "this will exclude other archs like `riscv64`. Why not put the new GKI module in `drivers/android/` with the rest?",
+      "range": {
+        "startLine": 170,
+        "startChar": 12,
+        "endLine": 171,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f469178d_91f3feb9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 170,
+                "startChar": 0,
+                "endLine": 172,
+                "endChar": 0
+              },
+              "replacement": "            \"gki/**\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "83fa40dd1cabd42f4fc6782aa0b5b93dbdc65adb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
