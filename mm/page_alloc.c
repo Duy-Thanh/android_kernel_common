@@ -1438,10 +1438,18 @@ void __pgalloc_tag_add(struct page *page, struct task_struct *task,
 	union pgtag_ref_handle handle;
 	union codetag_ref ref;
 
-	if (get_page_tag_ref(page, &ref, &handle)) {
+	if (likely(get_page_tag_ref(page, &ref, &handle))) {
 		alloc_tag_add(&ref, task->alloc_tag, PAGE_SIZE * nr);
 		update_page_tag_ref(handle, &ref);
 		put_page_tag_ref(handle);
+	} else {
+		/*
+		 * page_ext is not available yet, record the pfn so we can
+		 * clear the tag ref later when page_ext is initialized.
+		 */
+		alloc_tag_add_early_pfn(page_to_pfn(page));
+		if (task->alloc_tag)
+			alloc_tag_set_inaccurate(task->alloc_tag);
 	}
 }
 
@@ -7329,8 +7337,8 @@ static int __alloc_contig_verify_gfp_mask(gfp_t gfp_mask, gfp_t *gfp_cc_mask)
 	const gfp_t reclaim_mask = __GFP_IO | __GFP_FS | __GFP_RECLAIM;
 	const gfp_t action_mask = __GFP_COMP | __GFP_RETRY_MAYFAIL | __GFP_NOWARN |
 				  __GFP_ZERO | __GFP_ZEROTAGS | __GFP_SKIP_ZERO |
-				  __GFP_SKIP_KASAN;
-	const gfp_t cc_action_mask = __GFP_RETRY_MAYFAIL | __GFP_NOWARN;
+				  __GFP_SKIP_KASAN | __GFP_NORETRY;
+	const gfp_t cc_action_mask = __GFP_RETRY_MAYFAIL | __GFP_NOWARN | __GFP_NORETRY;
 
 	/*
 	 * We are given the range to allocate; node, mobility and placement
@@ -7353,9 +7361,13 @@ static int __alloc_contig_verify_gfp_mask(gfp_t gfp_mask, gfp_t *gfp_cc_mask)
 	 *
 	 * Traditionally we always had __GFP_RETRY_MAYFAIL set, keep doing that
 	 * to not degrade callers.
+	 * If the caller explicitly requested __GFP_NORETRY, respect it and
+	 * do not force __GFP_RETRY_MAYFAIL.
 	 */
 	*gfp_cc_mask = (gfp_mask & (reclaim_mask | cc_action_mask)) |
-			__GFP_MOVABLE | __GFP_RETRY_MAYFAIL;
+			__GFP_MOVABLE;
+	if (!(gfp_mask & __GFP_NORETRY))
+		*gfp_cc_mask |= __GFP_RETRY_MAYFAIL;
 	return 0;
 }
 
@@ -8104,6 +8116,11 @@ struct page *alloc_frozen_pages_nolock_noprof(gfp_t gfp_flags, int nid, unsigned
 	 */
 	if (IS_ENABLED(CONFIG_PREEMPT_RT) && (in_nmi() || in_hardirq()))
 		return NULL;
+
+	/* On UP, spin_trylock() always succeeds even when it is locked */
+	if (!IS_ENABLED(CONFIG_SMP) && in_nmi())
+		return NULL;
+
 	if (!pcp_allowed_order(order))
 		return NULL;
 
