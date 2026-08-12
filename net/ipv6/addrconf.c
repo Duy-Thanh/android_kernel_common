@@ -5212,8 +5212,18 @@ next:
 		fillargs->event = RTM_GETMULTICAST;
 
 		/* multicast address */
+<<<<<<< HEAD   (31091ad0d59224a672f3ffec546a714b757a663f UPSTREAM: mld: fix suspicious RCU usage in __ipv6_dev_mc_dec)
 		for (ifmca = idev->mc_list; ifmca;
 		     ifmca = ifmca->next, ip_idx++) {
+||||||| BASE   (49238549bbf18e9dbfbd4d846215e32a7eb4a74e iio: imu: inv_icm42600: fix timestamp clock period by using )
+		for (ifmca = rcu_dereference(idev->mc_list);
+		     ifmca;
+		     ifmca = rcu_dereference(ifmca->next), ip_idx++) {
+=======
+		for (ifmca = rtnl_dereference(idev->mc_list);
+		     ifmca;
+		     ifmca = rtnl_dereference(ifmca->next), ip_idx++) {
+>>>>>>> BRANCH (b58363bf680a389501a20a551038d47b464f819b mld: fix suspicious RCU usage in __ipv6_dev_mc_dec())
 			if (ip_idx < s_ip_idx)
 				continue;
 			err = inet6_fill_ifmcaddr(skb, ifmca, fillargs);
