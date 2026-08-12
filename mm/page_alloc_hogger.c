@@ -7,7 +7,7 @@
  * and order using the DebugFS filesystem.
  *
  * When this module is installed and the debugfs is mounted, the "mm" directory
- " will be created in <debugfs mount point>/mm" directory. Under this directory,
+ * will be created in <debugfs mount point>/mm" directory. Under this directory,
  * there will be subdirs to select the nodes, zones, orders and migrate type.
  *
  * For example:
@@ -84,14 +84,12 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/atomic.h>
-#include <linux/bug.h>
-#include <linux/cma.h>
 #include <linux/errno.h>
 #include <linux/debugfs.h>
 #include <linux/gfp.h>
 #include <linux/gfp_types.h>
-#include <linux/highmem.h>
 #include <linux/kernel.h>
+#include <linux/mm.h>
 #include <linux/mmzone.h>
 #include <linux/module.h>
 #include <linux/nodemask.h>
@@ -99,13 +97,13 @@
 #include <linux/slab.h>
 #include <linux/xarray.h>
 
-struct dentry *mmdir;
+static struct dentry *mmdir;
 
 /**
  * atomic_long_t allocs_file_seq - Represents the naming sequence used for
  * allocation files.
  */
-atomic_long_t allocs_file_seq = ATOMIC_INIT(0);
+static atomic_long_t allocs_file_seq = ATOMIC_INIT(0);
 
 /**
  * allocs_xa - Represent the xarray that contains the actual allocations perform
@@ -129,7 +127,7 @@ struct req_alloc {
 	struct dentry *parentdir;
 };
 
-/*
+/**
  * struct page_alloc - Represents the page allocation.
  * @page: The pointer to the page(s) allocated.
  * @req_alloc: The details of the allocation.
@@ -141,10 +139,10 @@ struct page_alloc {
 	struct dentry *alloc_dentry;
 };
 
-struct kmem_cache *req_alloc_cache;
-struct kmem_cache *page_alloc_cache;
+static struct kmem_cache *req_alloc_cache;
+static struct kmem_cache *page_alloc_cache;
 
-inline void set_zone_to_alloc_from(int zone_idx, gfp_t *flags_ptr)
+static inline void set_zone_to_alloc_from(int zone_idx, gfp_t *flags_ptr)
 {
 	switch (zone_idx) {
 #ifdef CONFIG_ZONE_DMA
@@ -172,7 +170,7 @@ inline void set_zone_to_alloc_from(int zone_idx, gfp_t *flags_ptr)
 	}
 }
 
-inline void set_migrate_type_to_alloc_from(int migrate_type, gfp_t *flags_ptr)
+static inline void set_migrate_type_to_alloc_from(int migrate_type, gfp_t *flags_ptr)
 {
 	switch (migrate_type) {
 	case MIGRATE_UNMOVABLE:
@@ -208,9 +206,10 @@ static int make_alloc(struct req_alloc *req,
 {
 	struct page_alloc *pa;
 	struct page *page;
-	char new_alloc_name[12];
+	char new_alloc_name[20];
 	struct dentry *new_alloc_dentry;
 	int ret;
+	unsigned long pfn;
 
 	page = alloc_pages_node_noprof(req->node_idx, flags, req->order);
 	if (page) {
@@ -221,38 +220,40 @@ static int make_alloc(struct req_alloc *req,
 		}
 
 		*alloc_id = atomic_long_inc_return(&allocs_file_seq);
-		ret = xa_insert(&allocs_xa, *alloc_id, pa, GFP_KERNEL);
-		if (ret)
-			goto free_page_alloc;
-
 		snprintf(new_alloc_name, sizeof(new_alloc_name), "%lu",
 			 *alloc_id);
 
 		new_alloc_dentry = debugfs_create_file(
-			new_alloc_name, 0644, req->parentdir,
+			new_alloc_name, 0400, req->parentdir,
 			pa, &page_alloc_fops);
 		if (IS_ERR(new_alloc_dentry)) {
 			ret = PTR_ERR(new_alloc_dentry);
-			goto erase_xa_entry;
+			goto free_page_alloc;
 		}
 
 		pa->req_alloc = req;
 		pa->page = page;
 		pa->alloc_dentry = new_alloc_dentry;
+
+		ret = xa_insert(&allocs_xa, *alloc_id, pa, GFP_KERNEL);
+		pfn = page_to_pfn(page);
+		pr_info("alloc_id = %lu, pfn = %lu", *alloc_id, pfn);
+		if (ret)
+			goto remove_alloc_dentry;
 	} else {
 		return -ENOMEM;
 	}
 
 	return 0;
 
-erase_xa_entry:
-	xa_erase(&allocs_xa, *alloc_id);
+remove_alloc_dentry:
+	debugfs_remove(new_alloc_dentry);
 
 free_page_alloc:
 	kmem_cache_free(page_alloc_cache, pa);
 
 free_pages:
-	__free_pages(page, pa->req_alloc->order);
+	__free_pages(page, req->order);
 
 	return ret;
 }
@@ -315,7 +316,7 @@ static ssize_t req_page_alloc_write(struct file *file, const char __user *ubuf,
 	return cnt;
 
 free_allocs:
-	/* Free all the pages previously allocated. */
+	/* Free all the pages and resources previously allocated. */
 	for (int j = 0; j < i; j++) {
 		int ret2 = free_alloc_helper(allocs_ids[j]);
 
@@ -374,7 +375,7 @@ static const struct file_operations free_page_alloc_fops = {
  * each allocation will be created in @migratedir.
  */
 static inline int create_nr_pages_allocs_file(struct dentry *migratedir,
-					      int node_idx, int zone_idx,
+					      int nid, int zone_idx,
 					      int order, int mtype)
 {
 	struct req_alloc *req;
@@ -386,16 +387,18 @@ static inline int create_nr_pages_allocs_file(struct dentry *migratedir,
 		return -ENOMEM;
 	}
 
-	req->node_idx = node_idx;
+	req->node_idx = nid;
 	req->zone_idx = zone_idx;
 	req->order = order;
 	req->migrate_type = mtype;
 	req->parentdir = migratedir;
 
-	nr_pages = debugfs_create_file("nr_pages_allocs", 0644, migratedir, req,
+	nr_pages = debugfs_create_file("nr_pages_allocs", 0200, migratedir, req,
 				       &req_page_alloc_fops);
-	if (IS_ERR(nr_pages))
+	if (IS_ERR(nr_pages)) {
+		kmem_cache_free(req_alloc_cache, req);
 		return PTR_ERR(nr_pages);
+	}
 
 	return 0;
 }
@@ -403,11 +406,10 @@ static inline int create_nr_pages_allocs_file(struct dentry *migratedir,
 /**
  * create_migrate_type_subdirs() - Creates a directory for each migrate type
  * inside the order directory. Once the migrate type directory is created, it
- * creates the "nr_allocs" file and the "free" file.
+ * creates the "nr_pages_allocs" file.
  */
-static inline int create_migrate_type_subdirs(struct dentry *orderdir,
-					      int node_idx, int zone_idx,
-					      int order)
+static inline int create_migrate_type_subdirs(struct dentry *orderdir, int nid,
+					int zone_idx, int order)
 {
 	struct dentry *migratedir;
 	char dirname[24];
@@ -422,14 +424,17 @@ static inline int create_migrate_type_subdirs(struct dentry *orderdir,
 		if (mtype == MIGRATE_ISOLATE) /* can't allocate from here */
 			continue;
 #endif
+		if (zone_idx == ZONE_MOVABLE && mtype != MIGRATE_MOVABLE)
+			continue;
+
 		snprintf(dirname, sizeof(dirname), "migrate-%s",
 			 migratetype_names[mtype]);
 		migratedir = debugfs_create_dir(dirname, orderdir);
 		if (IS_ERR(migratedir))
 			return PTR_ERR(migratedir);
 
-		ret = create_nr_pages_allocs_file(migratedir, node_idx,
-						  zone_idx, order, mtype);
+		ret = create_nr_pages_allocs_file(migratedir, nid, zone_idx,
+						order, mtype);
 		if (ret)
 			return ret;
 	}
@@ -442,9 +447,8 @@ static inline int create_migrate_type_subdirs(struct dentry *orderdir,
  * the zone directory. Once that the page order directory is created, it creates
  * a directory for each migrate type.
  */
-static inline int create_page_orders_subdirs(struct dentry *zonedir,
-					     int node_idx, int zone_idx,
-					     struct zone *zone)
+static inline int create_page_orders_subdirs(struct dentry *zonedir, int nid,
+					int zone_idx)
 {
 	struct dentry *orderdir;
 	char dirname[12];
@@ -456,8 +460,8 @@ static inline int create_page_orders_subdirs(struct dentry *zonedir,
 		if (IS_ERR(orderdir))
 			return PTR_ERR(orderdir);
 
-		ret = create_migrate_type_subdirs(orderdir, node_idx, zone_idx,
-						  order);
+		ret = create_migrate_type_subdirs(orderdir, nid, zone_idx,
+						order);
 		if (ret)
 			return ret;
 	}
@@ -473,8 +477,8 @@ static inline int create_page_orders_subdirs(struct dentry *zonedir,
  * Note: ZONE_DEVICE pages won't be allocated using this driver. The main reason
  * is because they are not managed by the Buddy Allocator or CMA allocator.
  */
-static inline int create_zones_subdirs(struct dentry *nodedir, int node_idx,
-				       struct pglist_data *pgdata)
+static inline int create_zones_subdirs(struct dentry *nodedir,
+					struct pglist_data *pgdata, int nid)
 {
 	struct dentry *zonedir;
 	struct zone *zone;
@@ -484,7 +488,7 @@ static inline int create_zones_subdirs(struct dentry *nodedir, int node_idx,
 	int ret;
 
 	for (zone = node_zones, zone_idx = 0; zone - node_zones < MAX_NR_ZONES;
-	     ++zone, ++zone_idx) {
+			++zone, ++zone_idx) {
 		if (!populated_zone(zone))
 			continue;
 
@@ -497,8 +501,7 @@ static inline int create_zones_subdirs(struct dentry *nodedir, int node_idx,
 		if (IS_ERR(zonedir))
 			return PTR_ERR(zonedir);
 
-		ret = create_page_orders_subdirs(zonedir, node_idx, zone_idx,
-						 zone);
+		ret = create_page_orders_subdirs(zonedir, nid, zone_idx);
 		if (ret)
 			return ret;
 	}
@@ -507,53 +510,43 @@ static inline int create_zones_subdirs(struct dentry *nodedir, int node_idx,
 }
 
 /**
- * create_nodes_subdirs() - Creates a directory for each online node in the
- * system. Once that the node directory is created, it creates a directory for
+ * create_nodes_subdirs() - Creates a directory for each node that contains
+ * memory. Once that the node directory is created, it creates a directory for
  * each zone in the node.
- *
- * This function also creates the "free" dir that is used to released the
- * page allocations made by the page alloc hogger.
  */
 static inline int create_nodes_subdirs(struct dentry *mmdir)
 {
 	struct dentry *nodedir;
-	struct dentry *free_file;
-	int node_idx;
 	char dirname[12];
+	int nid;
 	int ret;
 
-	for_each_online_node(node_idx) {
-		struct pglist_data *pgdata = NODE_DATA(node_idx);
+	for_each_node_state(nid, N_MEMORY) {
+		struct pglist_data *pgdata = NODE_DATA(nid);
 
-		snprintf(dirname, sizeof(dirname), "node-%d", node_idx);
+		snprintf(dirname, sizeof(dirname), "node-%d", nid);
 		nodedir = debugfs_create_dir(dirname, mmdir);
 		if (IS_ERR(nodedir))
 			return PTR_ERR(nodedir);
 
-		ret = create_zones_subdirs(nodedir, node_idx, pgdata);
-
+		ret = create_zones_subdirs(nodedir, pgdata, nid);
 		if (ret)
 			return ret;
 	}
-
-	free_file = debugfs_create_file("free", 0644, mmdir, NULL,
-					&free_page_alloc_fops);
-	if (IS_ERR(free_file))
-		return PTR_ERR(free_file);
 
 	return 0;
 }
 
 static int __init page_alloc_hogger_debugfs_init(void)
 {
+	struct dentry *free_file;
 	int ret;
 
-	req_alloc_cache =
-		kmem_cache_create("req_alloc_cache",
-				  sizeof(struct req_alloc), 0,
-				  SLAB_HWCACHE_ALIGN, NULL);
+	req_alloc_cache = kmem_cache_create(
+		"req_alloc_cache", sizeof(struct req_alloc), 0,
+		SLAB_HWCACHE_ALIGN, NULL);
 	if (!req_alloc_cache) {
-		pr_err("The req_alloc_cache couldn't be created");
+		pr_err("The req_alloc_cache couldn't be created\n");
 		ret = -ENOMEM;
 		goto error_exit;
 	}
@@ -562,14 +555,14 @@ static int __init page_alloc_hogger_debugfs_init(void)
 		"page_alloc_cache", sizeof(struct page_alloc), 0,
 		SLAB_HWCACHE_ALIGN, NULL);
 	if (!page_alloc_cache) {
-		pr_err("The page_alloc_cache couldn't be created");
+		pr_err("The page_alloc_cache couldn't be created\n");
 		ret = -ENOMEM;
 		goto clean_req_alloc_cache;
 	}
 
 	mmdir = debugfs_create_dir("mm", NULL);
 	if (IS_ERR(mmdir)) {
-		pr_err("Unable to create mm directory");
+		pr_err("Unable to create mm directory\n");
 		ret = PTR_ERR(mmdir);
 		goto clean_page_alloc_cache;
 	}
@@ -577,6 +570,13 @@ static int __init page_alloc_hogger_debugfs_init(void)
 	ret = create_nodes_subdirs(mmdir);
 	if (ret)
 		goto clean_dir;
+
+	free_file = debugfs_create_file("free", 0200, mmdir, NULL,
+					&free_page_alloc_fops);
+	if (IS_ERR(free_file)) {
+		ret = PTR_ERR(free_file);
+		goto clean_dir;
+	}
 
 	return 0;
 
@@ -590,7 +590,6 @@ clean_req_alloc_cache:
 	kmem_cache_destroy(req_alloc_cache);
 
 error_exit:
-
 	return ret;
 }
 
@@ -599,10 +598,8 @@ static void __exit page_alloc_hogger_debugfs_exit(void)
 	struct page_alloc *pa;
 	unsigned long idx;
 
-	xa_for_each(&allocs_xa, idx, pa) {
-		__free_pages(pa->page, pa->req_alloc->order);
-		xa_erase(&allocs_xa, idx);
-	}
+	xa_for_each(&allocs_xa, idx, pa)
+		free_alloc_helper(idx);
 
 	debugfs_remove_recursive(mmdir);
 	kmem_cache_destroy(req_alloc_cache);
