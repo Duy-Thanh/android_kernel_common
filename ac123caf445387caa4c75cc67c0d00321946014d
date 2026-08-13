@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca2cd17_daa923a3",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-13T08:58:36Z",
+      "side": 1,
+      "message": "Is that really necessary? We are allowing KMI breakage IIUC, so you can just not use any of that.",
+      "fixSuggestions": [
+        {
+          "fixId": "21ea53c9_abc8ff63",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_pkvm_module.h",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\tu64 phys, u64 ipa, u64 size, pkvm_handle_t handle)));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ac123caf445387caa4c75cc67c0d00321946014d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
