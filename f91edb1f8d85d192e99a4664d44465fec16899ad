@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689a0c60_e90135d7",
+        "filename": "drivers/scsi/scsi_logging.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-13T02:09:37Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LONG_LINE: line length of 114 exceeds 100 columns\n\n\nThis doesn\u0027t match the 6.18 version, where it seems like it was re-arranged.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "f91edb1f8d85d192e99a4664d44465fec16899ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
