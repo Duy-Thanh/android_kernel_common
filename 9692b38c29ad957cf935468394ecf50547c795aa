@@ -16,6 +16,24 @@
       "message": "Original patch also missing cherry pick line, so this is fine.",
       "revId": "9692b38c29ad957cf935468394ecf50547c795aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f2d595_69b893b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-08-13T15:36:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f693c94e_087664b1",
+      "revId": "9692b38c29ad957cf935468394ecf50547c795aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
