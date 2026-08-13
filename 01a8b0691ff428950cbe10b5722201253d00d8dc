@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04e0b7f1_3b35d4e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T17:03:40Z",
+      "side": 1,
+      "message": "should cite the bug that led to the reversion (in addition to this feature bug that led to the issue)",
+      "revId": "01a8b0691ff428950cbe10b5722201253d00d8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edeb9b4f_b32b2216",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
