@@ -113,6 +113,7 @@ void destroy_hyp_vm_pgt(struct pkvm_hyp_vm *vm);
 void drain_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *mc);
 
 int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot, u64 nr_pages, bool update_iommu);
+int module_set_host_page_owned(u64 pfn, u64 nr_pages, bool owned);
 
 int __pkvm_accept_module_prot_page(u64 ipa, u64 nr_pages);
 
