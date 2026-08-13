@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "065806e8_d1da4008",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-13T14:13:24Z",
+      "side": 1,
+      "message": "LGTM for `BUILD.bazel` change.",
+      "revId": "c0953c05a7a37e83716b9dce2acf6e3d05d69634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "443001d8_7cae97bb",
