@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+config VIDEO_GOOGLE_LWIS
+	tristate "Google LWIS Image Sensor Driver"
+	depends on V4L_PLATFORM_DRIVERS
+	depends on OF && I2C
+	help
+	  Say Y here to enable support for Google Lightweight Image Subsystem (LWIS)
+	  sensors including Sony IMX08B (ICHI).

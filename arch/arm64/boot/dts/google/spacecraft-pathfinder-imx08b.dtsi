@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Google Spacecraft Pathfinder IMX08B (ICHI) Camera Device Tree (CSI-A Port)
+ * Copyright (C) 2026 Google LLC.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/media/video-interfaces.h>
+
+#ifndef C_PHY
+#define C_PHY MEDIA_BUS_TYPE_CSI2_CPHY
+#endif
+
+/ {
+	fragment@camera_csia {
+		target = <&lsioe_i2c2>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+			clock-frequency = <1000000>; /* 1.0 MHz Fm+ */
+
+			camera_sensor_csia: sensor@1a {
+				compatible = "google,lwis-sensor-ichi", "google,lwis-sensor";
+				reg = <0x1a>; /* I2C Addr (TAASEL1/2=0) */
+
+				/* Master Reference Clock (MCLK2 for CSI-A slot) */
+				clocks = <&lsio_s_m2_clk>;
+				clock-names = "mclk";
+				clock-frequency = <25000000>; /* 25.0 MHz INCK */
+				pinctrl-names = "mclk_on", "mclk_off";
+				pinctrl-0 = <&ap2ruwcam_mclk_24mhz>;
+				pinctrl-1 = <&ap2ruwcam_mclk_24mhz_sleep>;
+
+				/* PMIC Power Regulators for CSI-A slot */
+				vana1-supply = <&sgm38122_avdd3_csib>; /* VANA1 (2.8V) */
+				vana2-supply = <&pmic_ldo_vana2_1v8>;  /* VANA2 (1.8V) */
+				vdig-supply  = <&sgm38122_dvdd_csia>;  /* VDIG (1.1V) */
+				vif-supply   = <&ldo_22s_reg>;         /* VIF (1.8V) */
+				vaf-supply   = <&sgm38122_avdd1_csia>; /* VAF (2.8V) */
+
+				/*
+				 * Power-on Delays (ms):
+				 * <T_v1_vd T_vd_v2 T_v2_vif T4 T5 T6>
+				 * T4 >= 0ms, T5 >= 2.1ms, T6 >= 10.3ms
+				 */
+				google,power-delays-ms = <1 1 1 2 3 11>;
+
+				/* Slew Rate Limit: Maximum 100 mV/us across all power rails */
+				google,max-slew-rate-mv-per-us = <100>;
+
+				/* GPIO Pin Control */
+				reset-gpios = <AP2RUWCAM_RST_L(GPIO_ACTIVE_HIGH)>; /* XCLR */
+				xvs-gpios   = <&gpio_subsys 43 GPIO_ACTIVE_HIGH>;  /* XVS */
+
+				/* MIPI C-PHY Receiver Endpoint Configuration */
+				port {
+					sensor_out_csia: endpoint {
+						remote-endpoint = <&csi_in_csia>;
+						bus-type = <C_PHY>; /* MIPI C-PHY v2.0 */
+						clock-lanes = <0>; /* Embedded clock */
+						data-trios = <1 2 3>; /* 3-Trio */
+						lane-polarities = <0 0 0>; /* Standard */
+						symbol-rate-msps = <1000>; /* 1000 Msps */
+						max-symbol-rate-msps = <2500>; /* 2500 Msps */
+					};
+				};
+			};
+		};
+	};
+};

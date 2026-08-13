@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Google Spacecraft Pathfinder Board Device Tree
+ * Copyright (C) 2026 Google LLC.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/media/video-interfaces.h>
+
+/ {
+	model = "Google Spacecraft Pathfinder Board";
+	compatible = "google,spacecraft-pathfinder", "google,spacecraft";
+
+	#address-cells = <2>;
+	#size-cells = <2>;
+};
+
+#include "spacecraft-pathfinder-imx08b.dtsi"
