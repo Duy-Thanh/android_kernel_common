@@ -106,6 +106,7 @@ _ARM64_GKI_MODULES_LIST = [
     "arch/arm64/geniezone/gzvm.ko",
     "drivers/android/binder/rust_binder.ko",
     "drivers/char/hw_random/cctrng.ko",
+    "drivers/dma-buf/heaps/example_heap/example_heap.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
     "drivers/virt/halla/exynos-hvm.ko",
