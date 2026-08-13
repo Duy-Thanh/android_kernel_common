@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4e47e47_0e330772",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:03:07Z",
+      "side": 1,
+      "message": "Ok, then can you provide some more info on why this needs to be called in NMI context?",
+      "parentUuid": "4202ffad_654ad49c",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdb14677_bbdb7318",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Right.",
       "parentUuid": "bdb14677_bbdb7318",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ec48dad_c318df47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:03:07Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "25e1ecfc_6e9faf3c",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -119,6 +155,41 @@
       "side": 1,
       "message": "I don\u0027t think so? Essentially a task that\u0027s in NMI won\u0027t get the lock and won\u0027t look at this thread\u0027s \"-\u003emm\". If we don\u0027t find any \"-\u003emm\" then we\u0027ll return NULL and we\u0027ll skip dumping this particular task. That\u0027s OK.\n\nEssentially:\n* If we return a task with a MM, the lock for that task is held.\n* If we return NULL, no lock is held and the calling function will just return.\n\nDoes that make sense?",
       "parentUuid": "9d3f2726_fea8083d",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68bda30d_1d09e8fb",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:03:07Z",
+      "side": 1,
+      "message": "If \"a task that\u0027s in NMI won\u0027t get the lock\", why do we bother to try? Should the code just be this?\n```\nif (in_nmi())\n   continue;\nelse\n   task_lock(t);\n```\nthen we know for sure that it won\u0027t look at this thread\u0027s \"-\u003emm\".",
+      "parentUuid": "bc94e369_b9ed596a",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2121bc66_575e2622",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:03:07Z",
+      "side": 1,
+      "message": "If spin_trylock() succeeds above and t-\u003emm \u003d\u003d NULL, then doesn\u0027t this need to be spin_unlock(\u0026t-\u003ealloc_lock) for the in_nmi case?\n\nIf this is impossible, then I think a comment is needed to explain why.",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
